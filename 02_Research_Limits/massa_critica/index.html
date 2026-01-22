@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Critical Mass for Quantum Collapse (Mc) — Calibrated Model</title>
+    <!-- KaTeX for Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        .content-body {
+            text-align: justify;
+        }
+
+        .single-column {
+            display: block;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 22pt;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 12pt;
+            font-style: italic;
+            margin-bottom: 0.3rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .abstract-box {
+            max-width: 85%;
+            margin: 0 auto 1.5rem auto;
+            font-size: 0.95rem;
+            text-align: justify;
+            background-color: #f9f9f9;
+            padding: 1rem 1.5rem;
+            border-left: 3px solid #000;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        /* Clean Key Result Box */
+        .key-result {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0 1.5rem 0;
+            padding: 0.8rem 1rem;
+            background: #f0f4f8;
+            border: 1px solid #d0d7de;
+            border-radius: 4px;
+        }
+
+        .key-result-item {
+            text-align: center;
+        }
+
+        .key-result-label {
+            font-size: 9pt;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .key-result-value {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        h2 {
+            font-size: 14pt;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.2rem;
+            break-after: avoid;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-style: italic;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0.5rem auto;
+            border: 1px solid #ddd;
+        }
+
+        figure {
+            margin: 1.5rem 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            color: #444;
+            margin-top: 0.4rem;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Clean Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 9pt;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 0.4rem 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .testable {
+            color: #007700;
+            font-weight: bold;
+        }
+
+        /* Falsifiability Box */
+        .falsifiability-box {
+            background-color: #fffbeb;
+            border: 1px solid #d4a00a;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+
+        .falsifiability-box h3 {
+            color: #7a5a00;
+            margin: 0 0 0.5rem 0;
+            font-style: normal;
+            font-size: 11pt;
+        }
+
+        .falsifiability-box ol {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .falsifiability-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #ccc;
+            padding-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .references h2 {
+            font-size: 11pt;
+            border-bottom: none;
+            text-transform: uppercase;
+        }
+
+        .references ol {
+            padding-left: 1.2rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Universal Critical Mass for Quantum Collapse ($M_c$)</h1>
+        <div style="font-size: 11pt; margin-bottom: 0.3rem;">Calibrated Model & Experimental Predictions</div>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Federal University of Rio de Janeiro &bull; January 2026 &bull; Version 2.0</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Abstract</span>
+        We present a calibrated model for the breakdown of quantum unitarity at macroscopic scales.
+        The critical mass $M_c \approx 5.29 \times 10^{-16}$ kg emerges from 8-dimensional phase space geometry,
+        with a coherence time $\tau_c \approx 2.18$ seconds derived from gravitational self-energy.
+        For masses $M > M_c$, superpositions decay with $\tau(M) = \tau_c (M_c/M)^2$, providing
+        quantitative targets for MAQRO-class experiments and levitated optomechanics.
+    </div>
+
+    <div class="key-result single-column">
+        <div class="key-result-item">
+            <div class="key-result-label">Critical Mass</div>
+            <div class="key-result-value">$M_c = 5.29 \times 10^{-16}$ kg</div>
+        </div>
+        <div class="key-result-item">
+            <div class="key-result-label">Coherence Time</div>
+            <div class="key-result-value">$\tau_c = 2.18$ s</div>
+        </div>
+        <div class="key-result-item">
+            <div class="key-result-label">Exponent</div>
+            <div class="key-result-value">$\alpha = 2$</div>
+        </div>
+    </div>
+
+    <div class="content-body">
+
+        <h2>1. Theoretical Foundation</h2>
+
+        <p class="no-indent">The critical mass derives from projecting the cosmological acceleration hierarchy onto
+            8-dimensional relativistic phase space:</p>
+
+        $$ M_c = m_P \cdot \left(\frac{a_0}{a_P}\right)^{1/8} $$
+
+        <p>where $m_P \approx 2.17 \times 10^{-8}$ kg is the Planck mass, $a_0 \approx 6.8 \times 10^{-10}$ m/s$^2$ is
+            the cosmological acceleration, and $a_P \approx 5.56 \times 10^{51}$ m/s$^2$ is the Planck acceleration.</p>
+
+        <h3>Why 1/8?</h3>
+        <p>The exponent emerges from phase space dimensionality:</p>
+        $$ \dim(\mathcal{M}_8) = \dim(x^\mu) + \dim(p_\mu) = 8 $$
+        <p>Projection from 8D volume to 1D mass yields the eighth root.</p>
+
+        <h2>2. Calibrated Time Scale</h2>
+
+        <p class="no-indent">The coherence time is derived from gravitational self-energy (Penrose-like):</p>
+
+        $$ \tau_c = \frac{\hbar \cdot R_c}{G \cdot M_c^2} \approx 2.18 \text{ s} $$
+
+        <p>For a silica nanosphere at $M_c$ with radius $R_c \approx 386$ nm. Above threshold:</p>
+
+        $$ \tau(M) = \tau_c \cdot \left(\frac{M_c}{M}\right)^2 \quad \text{for } M > M_c $$
+
+        <h2>3. Experimental Predictions</h2>
+
+        <table>
+            <tr>
+                <th>Experiment</th>
+                <th>M/M_c</th>
+                <th>τ(M)</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Large Molecule Interferometry</td>
+                <td>≪1</td>
+                <td>∞</td>
+                <td>Below threshold</td>
+            </tr>
+            <tr>
+                <td>Levitated Nanoparticle (small)</td>
+                <td>≪1</td>
+                <td>∞</td>
+                <td>Below threshold</td>
+            </tr>
+            <tr>
+                <td>Nanoparticle @ $M_c$</td>
+                <td>1.0</td>
+                <td>~2.2 s</td>
+                <td>Critical point</td>
+            </tr>
+            <tr>
+                <td><strong>MAQRO Target</strong></td>
+                <td><strong>1.9</strong></td>
+                <td><strong>0.61 s</strong></td>
+                <td class="testable">Testable</td>
+            </tr>
+            <tr>
+                <td>Large Nanosphere</td>
+                <td>18.9</td>
+                <td>6.1 ms</td>
+                <td class="testable">Testable</td>
+            </tr>
+            <tr>
+                <td>Micromechanical Oscillator</td>
+                <td>1889</td>
+                <td>0.6 μs</td>
+                <td>Testable</td>
+            </tr>
+        </table>
+
+        <h3>Key Test: MAQRO Mission</h3>
+        <ul>
+            <li><strong>Target:</strong> $10^{-15}$ kg ($\approx 2 \times M_c$)</li>
+            <li><strong>Predicted τ:</strong> 0.61 s</li>
+            <li><strong>Time to 50% visibility:</strong> ~63 ms</li>
+        </ul>
+
+    </div>
+
+    <figure class="single-column" style="margin-top: 1.5rem;">
+        <img src="calibrated_mc_model.png" alt="Calibrated M_c Model">
+        <figcaption><strong>Figure 1.</strong> Calibrated model: (a) coherence time vs mass, (b) decoherence rate, (c)
+            visibility decay, (d) parameter space.</figcaption>
+    </figure>
+
+    <figure class="single-column">
+        <img src="experimental_predictions.png" alt="Experimental Predictions">
+        <figcaption><strong>Figure 2.</strong> Experimental predictions with mass ranges and model comparison (CSL,
+            Diósi-Penrose).</figcaption>
+    </figure>
+
+    <div class="content-body">
+
+        <h2>4. Model Comparison</h2>
+
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>Scaling</th>
+                <th>Threshold</th>
+                <th>Key Feature</th>
+            </tr>
+            <tr>
+                <td><strong>M_c (This work)</strong></td>
+                <td>$(M/M_c)^2$</td>
+                <td>Yes</td>
+                <td>Sharp transition</td>
+            </tr>
+            <tr>
+                <td>CSL</td>
+                <td>$N^2$</td>
+                <td>No</td>
+                <td>Continuous</td>
+            </tr>
+            <tr>
+                <td>GRW</td>
+                <td>$N$</td>
+                <td>No</td>
+                <td>Linear</td>
+            </tr>
+            <tr>
+                <td>Diósi-Penrose</td>
+                <td>$M^2/\Delta x$</td>
+                <td>No</td>
+                <td>Separation-dependent</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <figure class="single-column">
+        <img src="models_mass_comparison.png" alt="Model Comparison">
+        <figcaption><strong>Figure 3.</strong> Decoherence rate comparison. M_c shows sharp threshold at $5.3 \times
+            10^{-16}$ kg.</figcaption>
+    </figure>
+
+    <div class="falsifiability-box single-column">
+        <h3>Falsifiability Criteria</h3>
+        <p style="text-indent: 0; margin-bottom: 0.5rem;"><strong>The theory is falsified if:</strong></p>
+        <ol>
+            <li>Stable interference ($V > 50\%$) observed for $M \geq 10^{-14}$ kg at $t > 1$ s</li>
+            <li>Coherence observed for $M \gg M_c$ at $t \gg \tau(M)$</li>
+            <li>Mass scaling differs from $\alpha = 2$</li>
+            <li>Coherence time increases with isolation for $M > 5 \times 10^{-15}$ kg</li>
+        </ol>
+    </div>
+
+    <div class="content-body">
+
+        <h2>5. Numerical Results</h2>
+
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Units</th>
+            </tr>
+            <tr>
+                <td>Planck mass $m_P$</td>
+                <td>$2.176 \times 10^{-8}$</td>
+                <td>kg</td>
+            </tr>
+            <tr>
+                <td>Hierarchy ratio $\xi$</td>
+                <td>$1.22 \times 10^{-61}$</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Critical mass $M_c$</td>
+                <td>$5.293 \times 10^{-16}$</td>
+                <td>kg</td>
+            </tr>
+            <tr>
+                <td>$M_c$ in Daltons</td>
+                <td>$3.19 \times 10^{11}$</td>
+                <td>Da</td>
+            </tr>
+            <tr>
+                <td>Silica radius @ $M_c$</td>
+                <td>385.8</td>
+                <td>nm</td>
+            </tr>
+            <tr>
+                <td>Coherence time $\tau_c$</td>
+                <td>2.176</td>
+                <td>s</td>
+            </tr>
+            <tr>
+                <td>Exponent $\alpha$</td>
+                <td>2.0</td>
+                <td>—</td>
+            </tr>
+        </table>
+
+        <h2>6. Conclusion</h2>
+
+        <p class="no-indent">We present a fully calibrated model providing: (1) first-principles derivation of $\tau_c
+            \approx 2.18$ s, (2) quantitative predictions for MAQRO and levitated nanoparticles, (3) discrimination from
+            CSL/GRW/Diósi-Penrose, and (4) clear falsifiable criteria.</p>
+
+        <p>The central prediction—a sharp transition at $M_c \approx 5.3 \times 10^{-16}$ kg—is within reach of current
+            technology.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Verlinde, E. (2011). <em>On the Origin of Gravity</em>. JHEP 1104:029.</li>
+                <li>Penrose, R. (1996). <em>On Gravity's role in Quantum State Reduction</em>. Gen. Relativ. Gravit. 28,
+                    581.</li>
+                <li>Diósi, L. (1987). <em>Gravitational violation of quantum mechanics</em>. Phys. Lett. A 120, 377.
+                </li>
+                <li>Bassi, A. et al. (2013). <em>Models of wave-function collapse</em>. Rev. Mod. Phys. 85, 471.</li>
+                <li>Kaltenbaek, R. et al. (2016). <em>MAQRO: 2015 Update</em>. EPJ Quantum Technology 3, 5.</li>
+                <li>Fein, Y. et al. (2019). <em>Quantum superposition beyond 25 kDa</em>. Nature Physics 15, 1242.</li>
+            </ol>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -321,7 +321,7 @@
 
 ## 📊 SUMMARY STATISTICS
 
-### Ghost Paper Candidates by Category:
+### Ghost Paper Candidates by Category
 
 | Category | Count | Description |
 |----------|-------|-------------|
@@ -332,7 +332,7 @@
 | NOISE | ~15 | Speculative/numerological |
 | DERIVATIVE | ~10 | Standard extensions |
 
-### Major Discoveries:
+### Major Discoveries
 
 1. **Tamesis Action** (04_Universe_Equation) - Unified Action Functional
 2. **Gauge Derivation** (05_Final_Reduction) - SU(3)xSU(2)xU(1) from 8D
@@ -344,13 +344,16 @@
 
 ## 📝 NOTES
 
-### Negative Results (Valuable):
+### Negative Results (Valuable)
+
 - **31, 32, 33**: Established that spectral theory does NOT work for absorbing systems (classic sorting algorithms). This is a valid negative result that saves future researchers time.
 
-### Main Positive Discovery (34):
+### Main Positive Discovery (34)
+
 - **Universality Class U_{1/2}**: For transitions from permutations to random maps with perturbation c/n, the fraction of points in cycles follows phi(c) = (1+c)^{-1/2}. This is a new mathematical result with rigorous proof structure.
 
-### Riemann Hypothesis Related (09-27):
+### Riemann Hypothesis Related (09-27)
+
 - Extensive exploration of Selberg-Connes-Riemann connections
 - Main publishable result: Cusp scattering phase decomposition (Stage 20)
 - Did NOT prove RH, but mapped the territory correctly
@@ -366,25 +369,54 @@
 - [x] **ANALYSIS.md** (Verdict: FRAMEWORK - Detailed failure analysis)
 - [x] **FINAL_VERDICT.md** (Verdict: CRITICAL - Tamesis Action as ToE REFUTED)
 
-### CRITICAL FINDING (Stage 35):
+### CRITICAL FINDING (Stage 35)
 
 **THE TAMESIS ACTION AS A THEORY OF EVERYTHING IS REFUTED.**
 
 Test Results:
+
 - Lambda from R_H = c/H_0: Ratio = 1.44 (PASSED marginally)
 - a_0 from R_H = c/H_0: Ratio = 5.46 (FAILED - factor 5.5 error)
 - M_c from R_H = c/H_0: Ratio = 4.5e+23 (CATASTROPHIC FAILURE - 24 orders of magnitude)
 
 Conclusion:
+
 - Lambda, a_0, and M_c are THREE INDEPENDENT phenomena
 - Holographic unification is an ILLUSION based on order-of-magnitude coincidences
 - The Tamesis Action is a beautiful compilation, but NOT a Theory of Everything
 
 ---
 
-## 📊 FINAL SUMMARY
+## � 36_Theory_of_Regime_Transitions
 
-### Program Status:
+*Status: COMPLETED - NEW FOUNDATION*
+
+- [x] **roadmap.md** (Verdict: FRAMEWORK - Post-Refutation Research Direction)
+- [x] **u12_physical_interpretation.py** (Ghost Paper: NOVEL - Physical Testing of U_{1/2})
+- [x] **critical_exponents.py** (Ghost Paper: NOVEL - Critical Exponent Catalog)
+- [x] **index.html** (Verdict: FRAMEWORK - Stage 36 Documentation)
+
+### KEY DISCOVERY (Stage 36)
+
+**U_{1/2} IS NOT UNIVERSAL FOR ALL TRANSITIONS.**
+
+Test Results:
+
+- Quantum Decoherence: alpha = 2.0 (Lindblad mechanism)
+- KAM Chaos: alpha ~ 0 (threshold behavior)
+- Permutation → Random Map: alpha = 0.5 (discrete counting)
+
+Conclusion:
+
+- Different exponents reflect different MICROSCOPIC MECHANISMS
+- U_{1/2} is universal for DISCRETE-to-RANDOM transitions
+- New paradigm: "Reality is stratified into dynamical regimes"
+
+---
+
+## �📊 FINAL SUMMARY
+
+### Program Status
 
 | Component | Status | Conclusion |
 |-----------|--------|------------|
@@ -393,14 +425,14 @@ Conclusion:
 | Selberg-Riemann-Connes | COMPLETED | Territory mapped, RH not proved |
 | Negative Results (31-33) | ARCHIVED | Absorbing systems have trivial spectrum |
 
-### What Survives:
+### What Survives
 
 1. **U_{1/2} Universality Class** - New mathematical discovery (publishable)
 2. **Cusp Scattering Paper** - Publishable mathematics on Selberg trace
 3. **Negative Results** - Valuable scientific documentation
 4. **Methodology** - Rigorous testing framework demonstrated
 
-### What Does NOT Survive:
+### What Does NOT Survive
 
 1. **Tamesis Action as ToE** - REFUTED by Stage 35
 2. **Holographic Unification** - Fails for M_c catastrophically

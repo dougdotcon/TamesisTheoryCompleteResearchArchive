@@ -67,9 +67,9 @@ Este é o espaço onde:
 
 | Status | Tarefa | Entregável |
 |:-------|:-------|:-----------|
-| 🔲 | Definir $\mathbb{H}$ e grupo modular | `10_Hyperbolic_Space/modular_space.py` |
-| 🔲 | Visualizar domínio fundamental | `10_Hyperbolic_Space/fundamental_domain.png` |
-| 🔲 | Implementar métrica hiperbólica | `10_Hyperbolic_Space/hyperbolic_metric.py` |
+| ✅ | Definir $\mathbb{H}$ e grupo modular | `10_Hyperbolic_Space/modular_group.py` |
+| ✅ | Visualizar domínio fundamental | `10_Hyperbolic_Space/fundamental_domain.png` |
+| ✅ | Implementar métrica hiperbólica | `10_Hyperbolic_Space/hyperbolic_metric.py` |
 
 ---
 
@@ -95,10 +95,10 @@ $$\boxed{\Delta_{\mathbb{H}} = -y^2 \left( \frac{\partial^2}{\partial x^2} + \fr
 
 | Status | Tarefa | Entregável |
 |:-------|:-------|:-----------|
-| 🔲 | Implementar $\Delta_{\mathbb{H}}$ | `11_Hyperbolic_Laplacian/laplacian.py` |
-| 🔲 | Discretizar no domínio fundamental | `11_Hyperbolic_Laplacian/discretization.py` |
-| 🔲 | Calcular primeiros autovalores | `11_Hyperbolic_Laplacian/eigenvalues.py` |
-| 🔲 | Comparar com zeta de Selberg | `11_Hyperbolic_Laplacian/selberg_comparison.py` |
+| ✅ | Implementar $\Delta_{\mathbb{H}}$ | `11_Hyperbolic_Laplacian/hyperbolic_laplacian.py` |
+| ✅ | Discretizar no domínio fundamental | `11_Hyperbolic_Laplacian/hyperbolic_laplacian.py` |
+| ✅ | Calcular primeiros autovalores | `11_Hyperbolic_Laplacian/hyperbolic_laplacian.py` |
+| ✅ | Comparar com zeta de Selberg | `11_Hyperbolic_Laplacian/index.html` |
 
 ---
 
@@ -126,9 +126,9 @@ Onde:
 
 | Status | Tarefa | Entregável |
 |:-------|:-------|:-----------|
-| 🔲 | Escrever paper: "Por que Hilbert-Pólya deve ser hiperbólico" | `12_Selberg_Connes/hilbert_polya_hyperbolic.html` |
-| 🔲 | Implementar fórmula de Selberg numericamente | `12_Selberg_Connes/selberg_formula.py` |
-| 🔲 | Conectar órbitas a primos | `12_Selberg_Connes/primes_as_orbits.py` |
+| ✅ | Escrever paper: "Por que Hilbert-Pólya deve ser hiperbólico" | `12_Selberg_Connes/index.html` |
+| ✅ | Implementar fórmula de Selberg numericamente | `12_Selberg_Connes/selberg_trace_formula.py` |
+| ✅ | Conectar órbitas a primos | `12_Selberg_Connes/primes_as_orbits.py` |
 
 ---
 

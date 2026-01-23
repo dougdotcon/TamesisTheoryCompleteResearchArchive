@@ -226,8 +226,8 @@ def main():
     
     z = complex(0, 1)  # i
     print(f"   z = i")
-    print(f"   T · i = i + 1 = {M.action(M.T, z)}")
-    print(f"   S · i = -1/i = {M.action(M.S, z)}")
+    print(f"   T . i = i + 1 = {M.action(M.T, z)}")
+    print(f"   S . i = -1/i = {M.action(M.S, z)}")
     
     # 3. Fundamental domain check
     print("\n3. FUNDAMENTAL DOMAIN")
@@ -258,9 +258,9 @@ def main():
     # 5. Area
     print("\n5. FUNDAMENTAL DOMAIN PROPERTIES")
     print("-" * 50)
-    print(f"   Area = π/3 = {M.fundamental_domain_area():.6f}")
+    print(f"   Area = pi/3 = {M.fundamental_domain_area():.6f}")
     print(f"   Cusp at infinity")
-    print(f"   2 elliptic points: i (order 2) and ρ (order 3)")
+    print(f"   2 elliptic points: i (order 2) and rho (order 3)")
     
     print("\n" + "=" * 70)
     print("END OF MODULAR GROUP DEMONSTRATION")

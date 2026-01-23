@@ -171,7 +171,7 @@ def main():
     print(f"   Curvature K = {H.curvature()} (constant)")
     
     z = complex(0, 1)  # i
-    print(f"   Metric at z = i: g = {H.metric_tensor(z)[0,0]:.4f} * I₂")
+    print(f"   Metric at z = i: g = {H.metric_tensor(z)[0,0]:.4f} * I_2")
     print(f"   Area element at z = i: dA = {H.area_element(z):.4f} dx dy")
     
     # 2. Distances
@@ -201,9 +201,9 @@ def main():
     # 4. Verification
     print("\n4. VERIFICATION")
     print("-" * 50)
-    print(f"   ✓ Curvature K = -1 (hyperbolic)")
-    print(f"   ✓ Metric is conformally Euclidean")
-    print(f"   ✓ Geodesics are vertical lines or semicircles")
+    print(f"   [OK] Curvature K = -1 (hyperbolic)")
+    print(f"   [OK] Metric is conformally Euclidean")
+    print(f"   [OK] Geodesics are vertical lines or semicircles")
     
     print("\n" + "=" * 70)
     print("END OF HYPERBOLIC PLANE DEMONSTRATION")

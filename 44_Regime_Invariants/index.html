@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 44: Regime Invariants | TRI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card: #12121a;
+            --accent: #ff6b35;
+            --text: #e0e0e0;
+            --dim: #888;
+            --success: #00ff88;
+            --warning: #ffaa00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--success);
+            margin: 2rem 0 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .meta {
+            color: var(--dim);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .theorem-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .theorem-box h3 {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background: #1a1a2e;
+            color: var(--accent);
+        }
+
+        tr:hover {
+            background: #1a1a2e;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        code {
+            background: #1a1a2e;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Stage 44: Regime Invariants</h1>
+        <p class="meta">Theory of Regime Incompatibility (TRI) | 2026-01-23</p>
+
+        <h2>1. The Five Fundamental Invariants</h2>
+        <div class="card">
+            <p>Each regime has structural invariants that do NOT change:</p>
+            <table>
+                <tr>
+                    <th>Invariant</th>
+                    <th>Type</th>
+                    <th>Values</th>
+                </tr>
+                <tr>
+                    <td><strong>Discreteness</strong></td>
+                    <td>Structural</td>
+                    <td>Discrete / Continuous</td>
+                </tr>
+                <tr>
+                    <td><strong>Quantumness</strong></td>
+                    <td>Structural</td>
+                    <td>Quantum / Classical</td>
+                </tr>
+                <tr>
+                    <td><strong>Commutativity</strong></td>
+                    <td>Algebraic</td>
+                    <td>Commutative / Non-commutative</td>
+                </tr>
+                <tr>
+                    <td><strong>Measure Type</strong></td>
+                    <td>Observational</td>
+                    <td>Counting / Spectral / Threshold</td>
+                </tr>
+                <tr>
+                    <td><strong>Locality</strong></td>
+                    <td>Geometric</td>
+                    <td>Local / Global</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>2. Invariant Signatures by Class</h2>
+        <table>
+            <tr>
+                <th>Class</th>
+                <th>Discrete</th>
+                <th>Quantum</th>
+                <th>Measure</th>
+                <th>Local</th>
+                <th>&alpha;</th>
+            </tr>
+            <tr>
+                <td>U<sub>1/2</sub></td>
+                <td>True</td>
+                <td>False</td>
+                <td>counting</td>
+                <td>True</td>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>U<sub>2</sub></td>
+                <td>False</td>
+                <td>True</td>
+                <td>spectral</td>
+                <td>True</td>
+                <td>2.0</td>
+            </tr>
+            <tr>
+                <td>U<sub>0</sub></td>
+                <td>False</td>
+                <td>False</td>
+                <td>threshold</td>
+                <td>False</td>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <td>U<sub>Ising</sub></td>
+                <td>True</td>
+                <td>False</td>
+                <td>threshold</td>
+                <td>False</td>
+                <td>0.125</td>
+            </tr>
+            <tr>
+                <td>U<sub>exp</sub></td>
+                <td>False</td>
+                <td>False</td>
+                <td>threshold</td>
+                <td>True</td>
+                <td>exp</td>
+            </tr>
+        </table>
+        <p style="margin-top: 1rem; color: var(--dim);">Each class has a UNIQUE invariant signature.</p>
+
+        <h2>3. The Key Theorem</h2>
+        <div class="theorem-box">
+            <h3>Theorem (Invariant Determination)</h3>
+            <p>For regimes $R_1$, $R_2$ with invariant signatures $I_1$, $I_2$:</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0; color: var(--warning);">
+                $$I_1 \neq I_2 \Rightarrow \alpha(R_1) \neq \alpha(R_2)$$
+            </p>
+            <p>The invariant signature <strong>determines</strong> the critical exponent.</p>
+        </div>
+
+        <h2>4. Corollary: Why Unification Fails</h2>
+        <div class="card">
+            <p><strong>Corollary</strong>: To unify two regimes, they must share ALL invariants.</p>
+            <p style="margin-top: 1rem;">If ANY invariant differs, unification is <strong>impossible</strong>.</p>
+            <p style="margin-top: 1rem; color: var(--dim);">This is why ToE attempts fail: they try to unify regimes
+                with incompatible invariant signatures.</p>
+        </div>
+
+        <h2>5. Empirical Evidence</h2>
+        <table>
+            <tr>
+                <th>Regime 1</th>
+                <th>Regime 2</th>
+                <th>Invariant Diffs</th>
+                <th>&alpha; Change</th>
+            </tr>
+            <tr>
+                <td>U<sub>1/2</sub></td>
+                <td>U<sub>2</sub></td>
+                <td>4 (discrete, quantum, measure, commutative)</td>
+                <td>0.5 &rarr; 2.0</td>
+            </tr>
+            <tr>
+                <td>U<sub>1/2</sub></td>
+                <td>U<sub>0</sub></td>
+                <td>3 (discrete, measure, locality)</td>
+                <td>0.5 &rarr; 0.0</td>
+            </tr>
+            <tr>
+                <td>U<sub>2</sub></td>
+                <td>U<sub>0</sub></td>
+                <td>4 (quantum, commutative, measure, locality)</td>
+                <td>2.0 &rarr; 0.0</td>
+            </tr>
+        </table>
+
+        <h2>6. Key Insight</h2>
+        <div class="insight-box">
+            <p style="color: var(--accent);">Invariants are the "DNA" of universality classes.</p>
+            <p style="margin-top: 1rem;">Different DNA &rArr; Different species (exponents).</p>
+            <p style="margin-top: 1rem; font-size: 1rem; color: var(--dim);">
+                This is the foundation for Stage 46-47's no-go theorems.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>

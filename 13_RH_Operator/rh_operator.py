@@ -281,7 +281,7 @@ def demonstrate_rh_operator():
     print("\n1. OPERATOR CONSTRUCTION")
     print("-" * 50)
     
-    H = RiemannHypothesisOperator(nx=50, ny=100, y_min=0.1, y_max=6.0)
+    H = RiemannHypothesisOperator(nx=30, ny=60, y_min=0.1, y_max=4.0)
     print(f"   Grid: {H.nx} x {H.ny} = {H.nx * H.ny} points")
     print(f"   Domain: x in [{H.x_min}, {H.x_max}], y in [{H.y_min}, {H.y_max}]")
     print(f"   Operator: H = -y^2(d^2/dx^2 + d^2/dy^2) + 1/4")

@@ -152,10 +152,10 @@ No espaço $SL(2,\mathbb{Z}) \backslash \mathbb{H}$.
 
 | Status | Tarefa | Entregável |
 |:-------|:-------|:-----------|
-| 🔲 | Implementar operador $H = \Delta + 1/4$ | `13_RH_Operator/rh_operator.py` |
-| 🔲 | Calcular espectro numérico | `13_RH_Operator/spectrum.py` |
-| 🔲 | Comparar com zeros de Riemann | `13_RH_Operator/comparison.py` |
-| 🔲 | Documentar resultados | `13_RH_Operator/results.md` |
+| ✅ | Implementar operador $H = \Delta + 1/4$ | `13_RH_Operator/rh_operator.py` |
+| ✅ | Calcular espectro numérico | `13_RH_Operator/spectrum.py` |
+| ✅ | Comparar com zeros de Riemann | `13_RH_Operator/comparison.py` |
+| ✅ | Documentar resultados | `13_RH_Operator/index.html` |
 
 ---
 
@@ -183,9 +183,9 @@ $$\boxed{\text{Geometria Hiperbólica} + \text{Operador Espectral} + \text{Não-
 
 | Status | Tarefa | Entregável |
 |:-------|:-------|:-----------|
-| 🔲 | Conectar entropia a primos | `14_ToE_Physics/entropy_primes.py` |
-| 🔲 | Derivar flecha do tempo de órbitas | `14_ToE_Physics/time_arrow.md` |
-| 🔲 | Escrever paper final: "A Geometria da ToE" | `14_ToE_Physics/geometry_of_toe.html` |
+| ✅ | Conectar entropia a primos | `14_ToE_Physics/entropy_primes.py` |
+| ✅ | Derivar flecha do tempo de órbitas | `14_ToE_Physics/time_arrow.md` |
+| ✅ | Escrever paper final: "A Geometria da ToE" | `14_ToE_Physics/index.html` |
 
 ---
 

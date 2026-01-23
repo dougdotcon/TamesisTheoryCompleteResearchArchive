@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 10: Hyperbolic Space | Tamesis Theory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #000;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 12pt;
+            font-style: italic;
+            color: #444;
+        }
+
+        .authors {
+            font-size: 12pt;
+            margin-bottom: 0.25rem;
+        }
+
+        .abstract-box {
+            margin: 2rem 0;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 1.5rem;
+            border: 1px solid #000;
+            background-color: #f5f5f5;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-indent: 1.5em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border-left: 4px solid #2e7d32;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid #000;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        a {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Stage 10: The Hyperbolic Space</h1>
+        <div class="subtitle">Defining SL(2,ℤ)\ℍ — Where Riemann Zeros Live</div>
+        <div class="authors">Tamesis Theory Research Archive</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Summary</span>
+        We define and implement the hyperbolic upper half-plane $\mathbb{H}$ with the Poincaré metric,
+        the modular group $SL(2,\mathbb{Z})$, and the modular surface $\mathcal{M} = SL(2,\mathbb{Z}) \backslash
+        \mathbb{H}$.
+        This is the geometric space where the Hilbert-Pólya operator must live.
+    </div>
+
+    <section>
+        <h2>1. The Hyperbolic Upper Half-Plane</h2>
+
+        <div class="equation-box">
+            $$\mathbb{H} = \{ z = x + iy \in \mathbb{C} : y > 0 \}$$
+        </div>
+
+        <p>With the Poincaré metric:</p>
+
+        <div class="equation-box">
+            $$ds^2 = \frac{dx^2 + dy^2}{y^2}$$
+        </div>
+
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Curvature $K$</td>
+                <td>$-1$ (constant)</td>
+            </tr>
+            <tr>
+                <td>Geodesics</td>
+                <td>Vertical lines and semicircles ⊥ to ℝ</td>
+            </tr>
+            <tr>
+                <td>Area element</td>
+                <td>$dA = dx\,dy / y^2$</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>2. The Modular Group</h2>
+
+        <div class="equation-box">
+            $$SL(2,\mathbb{Z}) = \left\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} : a,b,c,d \in \mathbb{Z}, \; ad -
+            bc = 1 \right\}$$
+        </div>
+
+        <p class="no-indent">Acts on $\mathbb{H}$ by Möbius transformations: $\gamma \cdot z = \frac{az + b}{cz + d}$
+        </p>
+
+        <p class="no-indent"><strong>Generators:</strong></p>
+        <ul>
+            <li>$T = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$: $z \mapsto z + 1$ (translation)</li>
+            <li>$S = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$: $z \mapsto -1/z$ (inversion)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. The Fundamental Domain</h2>
+
+        <div class="equation-box">
+            $$\mathcal{F} = \{ z \in \mathbb{H} : |z| \geq 1, \; |\text{Re}(z)| \leq \tfrac{1}{2} \}$$
+        </div>
+
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Area</td>
+                <td>$\pi/3$</td>
+            </tr>
+            <tr>
+                <td>Cusps</td>
+                <td>1 (at $\infty$)</td>
+            </tr>
+            <tr>
+                <td>Elliptic points</td>
+                <td>$i$ (order 2), $\rho = e^{2\pi i/3}$ (order 3)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>4. Why This Space?</h2>
+
+        <p>Our no-go theorem (Stages 7-9) proved that Euclidean operators have spectral density $N(E) \sim E$.</p>
+
+        <p>But Riemann zeros have $N(T) \sim T \log T$.</p>
+
+        <p>The ONLY known geometric origin of $E \log E$ density is:</p>
+
+        <ul>
+            <li>Hyperbolic surfaces with cusps</li>
+            <li>Geodesic length spectra on $\Gamma \backslash \mathbb{H}$</li>
+        </ul>
+
+        <p>Therefore, the Hilbert-Pólya operator <strong>must</strong> live on $SL(2,\mathbb{Z}) \backslash \mathbb{H}$.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Files</h2>
+        <ul>
+            <li><code>hyperbolic_metric.py</code> — Poincaré metric, distances, geodesics</li>
+            <li><code>modular_group.py</code> — SL(2,Z) action, fundamental domain</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../roadmap.md">← Roadmap</a> •
+        Stage 10 Complete • Next: Stage 11 (Hyperbolic Laplacian)
+    </div>
+
+</body>
+
+</html>

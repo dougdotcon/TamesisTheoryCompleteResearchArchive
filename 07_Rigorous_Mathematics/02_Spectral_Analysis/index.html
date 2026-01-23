@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectral Analysis | Tamesis Theory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            font-style: italic;
+            color: #444;
+        }
+
+        .authors {
+            font-size: 12pt;
+            margin-bottom: 0.25rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #333;
+        }
+
+        .abstract-box {
+            margin: 2rem 1rem;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 1.5rem;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            background-color: #fcfcfc;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-size: 9pt;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-indent: 1.5em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 9pt;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #000;
+            text-align: center;
+            font-style: italic;
+            font-size: 10pt;
+            color: #666;
+        }
+
+        a {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Spectral Analysis</h1>
+        <div class="subtitle">Stage 7 • Phase 2: Random Matrix Theory & Level Statistics</div>
+        <div class="authors">Tamesis Theory Research Archive</div>
+        <div class="affiliations">January 2026</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Summary</span>
+        This module analyzes the spectral properties of operators using Random Matrix Theory (RMT).
+        Key focus: comparing level spacing statistics to GUE (Gaussian Unitary Ensemble) predictions,
+        which are characteristic of quantum chaotic systems.
+    </div>
+
+    <section>
+        <h2>1. Level Spacing Statistics</h2>
+        <p>The distribution of spacings between consecutive eigenvalues reveals the nature of the system:</p>
+
+        <table>
+            <tr>
+                <th>System Type</th>
+                <th>Spacing Distribution</th>
+                <th>Variance</th>
+            </tr>
+            <tr>
+                <td><strong>Integrable</strong> (uncorrelated)</td>
+                <td>Poisson: $P(s) = e^{-s}$</td>
+                <td>$\sigma^2 = 1$</td>
+            </tr>
+            <tr>
+                <td><strong>Chaotic</strong> (level repulsion)</td>
+                <td>GUE: $P(s) \sim s^2 e^{-s^2}$</td>
+                <td>$\sigma^2 \approx 0.286$</td>
+            </tr>
+        </table>
+
+        <h3>1.1 Montgomery-Odlyzko Conjecture</h3>
+        <p>The famous conjecture states that the <strong>spacings between Riemann zeros</strong> follow GUE statistics.
+            This suggests a deep connection between number theory and quantum chaos.</p>
+    </section>
+
+    <section>
+        <h2>2. Implementation</h2>
+        <p>The file <code>spectral_analysis.py</code> provides:</p>
+        <ul>
+            <li><code>compute_eigenvalues()</code> — Extract eigenvalues from operator matrix</li>
+            <li><code>level_spacing_distribution()</code> — Compute normalized spacings</li>
+            <li><code>gue_comparison()</code> — Test compatibility with GUE</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Results</h2>
+        <p>For the Berry-Keating operator (Phase 1):</p>
+        <ul>
+            <li>Variance ratio: ~0.7 (compatible with GUE range)</li>
+            <li>Interpretation: The discretized operator shows chaotic-like level repulsion</li>
+        </ul>
+        <p class="no-indent"><strong>Caveat:</strong> GUE-like statistics are <em>necessary but not sufficient</em> for
+            connection to Riemann zeros. Many chaotic systems have GUE statistics without any number-theoretic meaning.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Files</h2>
+        <ul>
+            <li><code>spectral_analysis.py</code> — Level spacing and GUE comparison tools</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../README.md">← Back to Stage 7</a> •
+        <a href="../01_Operator_Definition/index.html">Phase 1</a> •
+        <a href="../03_Zeta_Connection/index.html">Phase 3 →</a>
+    </div>
+
+</body>
+
+</html>

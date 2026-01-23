@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum-Classical Transition Simulation</title>
+
+    <!-- KaTeX for Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .authors {
+            font-size: 12pt;
+            margin-bottom: 0.25rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #333;
+        }
+
+        .abstract-box {
+            margin: 2rem 1rem;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 1.5rem;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            background-color: #fcfcfc;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-size: 9pt;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-indent: 1.5em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 9pt;
+        }
+
+        figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        figcaption {
+            font-size: 10pt;
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #000;
+            text-align: center;
+            font-style: italic;
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .prediction-box {
+            background: #fff5f5;
+            border: 1px solid #e57373;
+            border-left: 4px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Quantum-Classical Transition Simulation</h1>
+        <div class="subtitle">Testing the Tamesis Step Function vs CSL/GRW Smooth Decay</div>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">TARDIS Program • Stage 4: The Universe Equation • January 2026</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Abstract</span>
+        We simulate the quantum-to-classical transition predicted by the Tamesis Action and compare it
+        with mainstream models (CSL, GRW). The key difference: Tamesis predicts a <strong>step function</strong>
+        at the critical mass $M_c = 2.2 \times 10^{-14}$ kg, while CSL/GRW predict smooth exponential decay.
+        This distinction is experimentally testable with current technology.
+    </div>
+
+    <section>
+        <h2>1. The Central Prediction</h2>
+
+        <p>The Tamesis collapse term contains a Heaviside step function:</p>
+
+        <div class="equation-box">
+            $$\mathcal{L}_{M_c} = -\lambda \, \Theta(S_{\text{req}} - S_{\text{max}}) \cdot (S_{\text{req}} -
+            S_{\text{max}})^2$$
+        </div>
+
+        <p>This produces a discontinuous transition at $M = M_c$.</p>
+
+        <div class="prediction-box">
+            <strong>KILLER PREDICTION:</strong><br>
+            Interference visibility drops as a <strong>step</strong> at $M_c$, not a smooth exponential.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Visibility Comparison</h2>
+
+        <figure>
+            <img src="visibility_comparison.png" alt="Visibility Comparison">
+            <figcaption>Figure 1: Interference visibility vs mass. Tamesis (red): step at $M_c$.
+                CSL/GRW (blue, green): smooth decay.</figcaption>
+        </figure>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Transition</th>
+                    <th>Testable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tamesis</td>
+                    <td>Step at $M_c = 22$ fg</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>CSL</td>
+                    <td>Smooth, $\propto e^{-\lambda N^2}$</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>GRW</td>
+                    <td>Smooth, $\propto e^{-\lambda N}$</td>
+                    <td>Yes</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>3. Coherence Time</h2>
+
+        <figure>
+            <img src="coherence_time.png" alt="Coherence Time">
+            <figcaption>Figure 2: Coherence time vs mass. Below $M_c$: stable quantum. Above: instant collapse.
+            </figcaption>
+        </figure>
+    </section>
+
+    <section>
+        <h2>4. Phase Diagram</h2>
+
+        <figure>
+            <img src="phase_diagram.png" alt="Phase Diagram">
+            <figcaption>Figure 3: Sharp boundary between quantum (blue) and classical (red) regimes at $M_c$.
+            </figcaption>
+        </figure>
+    </section>
+
+    <section>
+        <h2>5. Experimental Roadmap</h2>
+
+        <figure>
+            <img src="experimental_roadmap.png" alt="Experimental Roadmap">
+            <figcaption>Figure 4: Current status and path to testing $M_c$. Green: confirmed quantum.
+                Yellow: frontier. Red: predicted classical.</figcaption>
+        </figure>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Experiment</th>
+                    <th>Mass Range</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>C₆₀ interferometry</td>
+                    <td>$10^{-24}$ kg</td>
+                    <td>DONE</td>
+                </tr>
+                <tr>
+                    <td>OTIMA</td>
+                    <td>$10^{-18}$ kg</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>MAQRO (ESA)</td>
+                    <td>$10^{-16}$ kg</td>
+                    <td>Proposed</td>
+                </tr>
+                <tr>
+                    <td>TEQ</td>
+                    <td>$10^{-13}$ kg</td>
+                    <td>Proposed</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. Conclusion</h2>
+
+        <p>The Tamesis Action makes a unique, falsifiable prediction: interference visibility
+            drops abruptly at $M_c = 2.2 \times 10^{-14}$ kg. Current experiments are approaching
+            this mass scale. Detection of a step transition would confirm Tamesis; observation of
+            smooth decay would falsify it.</p>
+
+        <p class="no-indent" style="text-align: center; margin-top: 2rem;">
+            <a href="../index.html">← Back to Stage 4 Overview</a>
+        </p>
+    </section>
+
+    <div class="footer">
+        Tamesis Theory — Stage 4: The Universe Equation<br>
+        "Where exactly will this fail?"
+    </div>
+
+</body>
+
+</html>

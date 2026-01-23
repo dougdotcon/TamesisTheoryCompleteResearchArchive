@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berry-Keating Operator Definition | Tamesis Theory</title>
+
+    <!-- KaTeX for Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            font-style: italic;
+            color: #444;
+        }
+
+        .authors {
+            font-size: 12pt;
+            margin-bottom: 0.25rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #333;
+        }
+
+        .abstract-box {
+            margin: 2rem 1rem;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 1.5rem;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            background-color: #fcfcfc;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-size: 9pt;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-indent: 1.5em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #000;
+            text-align: center;
+            font-style: italic;
+            font-size: 10pt;
+            color: #666;
+        }
+
+        a {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Berry-Keating Operator Definition</h1>
+        <div class="subtitle">Stage 7 • Phase 1: Rigorous Mathematical Foundations</div>
+        <div class="authors">Tamesis Theory Research Archive</div>
+        <div class="affiliations">January 2026 • Computational Exploration (NOT Proof)</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Summary</span>
+        This document presents a discretized implementation of the Berry-Keating xp-Hamiltonian,
+        the canonical operator proposed for the Hilbert-Pólya approach to the Riemann Hypothesis.
+        <strong>Disclaimer:</strong> This is numerical exploration, not a mathematical proof.
+    </div>
+
+    <section>
+        <h2>1. Mathematical Background</h2>
+        <p>The <strong>Hilbert-Pólya Conjecture</strong> (1914) proposes that the Riemann Hypothesis
+            could be proven by finding a self-adjoint operator $H$ such that:</p>
+
+        <div class="equation-box">
+            $$\rho_n = \frac{1}{2} + i E_n$$
+        </div>
+
+        <p class="no-indent">where $E_n$ are the real eigenvalues of $H$ and $\rho_n$ are the
+            non-trivial zeros of $\zeta(s)$.</p>
+
+        <h3>1.1 The Berry-Keating Proposal</h3>
+        <p>Berry and Keating (1999) proposed the operator:</p>
+
+        <div class="equation-box">
+            $$H = \frac{1}{2}(xp + px) = -i\hbar\left(x\frac{d}{dx} + \frac{1}{2}\right)$$
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Critical Issue:</strong> This operator is NOT self-adjoint on $L^2(\mathbb{R})$
+            without proper regularization or boundary conditions. The naive discretization in this code
+            does NOT reproduce the Riemann zeros.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Implementation</h2>
+        <p>The file <code>berry_keating_operator.py</code> contains a Python class that:</p>
+        <ul>
+            <li>Discretizes the operator on a finite grid $[a, b]$</li>
+            <li>Verifies Hermiticity (self-adjointness for matrices)</li>
+            <li>Computes eigenvalues numerically</li>
+            <li>Reports GUE-like spacing statistics</li>
+        </ul>
+
+        <h3>2.1 Key Results</h3>
+        <p>Running the code produces:</p>
+        <pre>
+1. SELF-ADJOINTNESS TEST
+   Operator IS NOT Hermitian (error: 1.00e+00)
+   → Original Berry-Keating operator is NOT Hermitian.
+   → Using symmetrized version for eigenvalue computation.
+
+2. EIGENVALUE COMPUTATION
+   First 5 eigenvalues: [-189.64, -181.71, -175.31, ...]
+
+4. HONEST ASSESSMENT
+   ❌ This operator does NOT reproduce the Riemann zeros.
+   ❌ The naive discretization destroys essential properties.
+        </pre>
+    </section>
+
+    <section>
+        <h2>3. What This Means</h2>
+        <p>The Berry-Keating proposal is a <strong>direction of research</strong>, not a solved problem.
+            To actually prove RH via this approach, one would need to:</p>
+        <ul>
+            <li>Find the correct regularization or boundary conditions</li>
+            <li>Prove that the resulting operator is rigorously self-adjoint</li>
+            <li>Demonstrate that its eigenvalues exactly match all Riemann zeros</li>
+        </ul>
+        <p>None of these have been accomplished, either in this code or in the published literature.</p>
+    </section>
+
+    <section>
+        <h2>4. Files</h2>
+        <ul>
+            <li><code>berry_keating_operator.py</code> — Main operator implementation</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../README.md">← Back to Stage 7</a> •
+        "Mapear não é Provar" — FT-MATH-001
+    </div>
+
+</body>
+
+</html>

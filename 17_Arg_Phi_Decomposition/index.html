@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 17: Decomposition of arg(phi) | Tamesis Theory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #2e7d32;
+        }
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2e7d32;
+        }
+        .subtitle {
+            font-size: 12pt;
+            font-style: italic;
+            color: #444;
+        }
+        .layer-badge {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            color: #2e7d32;
+            border-bottom: 1px solid #2e7d32;
+            padding-bottom: 0.3rem;
+        }
+        p { margin-bottom: 1rem; text-align: justify; }
+        .equation-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border-left: 4px solid #2e7d32;
+        }
+        .result-box {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .key-result {
+            background: #e3f2fd;
+            border: 2px solid #1565c0;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        th { background: #e8f5e9; font-weight: bold; }
+        code {
+            background: #f5f5f5;
+            padding: 0.1em 0.3em;
+            font-family: monospace;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid #000;
+            font-size: 9pt;
+            color: #666;
+        }
+        ul { margin-left: 2em; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Stage 17: Decomposition of $\arg \phi(1/2 + iT)$</h1>
+        <div class="subtitle">Separating Gamma (Analytic) from Zeta (Arithmetic)</div>
+        <div class="layer-badge">LAYER 1 - MATHEMATICS</div>
+    </header>
+
+    <section>
+        <h2>1. The Goal</h2>
+        <p>Decompose the scattering phase $\Theta(T) = \frac{1}{\pi} \arg \phi(1/2 + iT)$ into:</p>
+        <ul>
+            <li><strong>Gamma contribution</strong> (analytic, bounded)</li>
+            <li><strong>Zeta contribution</strong> (arithmetic, $T \log T$ growth)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. The Decomposition Formula</h2>
+
+        <div class="equation-box">
+            $$\arg \phi = \underbrace{[\arg \Gamma(iT) - \arg \Gamma(1/2 + iT)]}_{\text{Gamma part}} + \underbrace{[\arg \zeta(2iT) - \arg \zeta(1 + 2iT)]}_{\text{Zeta part}}$$
+        </div>
+
+        <p>This separates the scattering phase into two fundamentally different parts.</p>
+    </section>
+
+    <section>
+        <h2>3. The Gamma Term (BOUNDED)</h2>
+
+        <div class="result-box">
+            <strong>Proposition:</strong> As $T \to \infty$:
+            $$\Theta_\Gamma(T) = \frac{1}{\pi}[\arg \Gamma(iT) - \arg \Gamma(1/2 + iT)] = -\frac{1}{4} + O\left(\frac{1}{T}\right)$$
+        </div>
+
+        <p><strong>Numerical verification:</strong></p>
+
+        <table>
+            <tr>
+                <th>$T$</th>
+                <th>$\Theta_\Gamma(T)$</th>
+                <th>Limit $-1/4$</th>
+                <th>Error</th>
+            </tr>
+            <tr><td>10</td><td>-0.2540</td><td>-0.2500</td><td>0.0040</td></tr>
+            <tr><td>100</td><td>-0.2504</td><td>-0.2500</td><td>0.0004</td></tr>
+            <tr><td>1000</td><td>-0.2500</td><td>-0.2500</td><td>0.00004</td></tr>
+        </table>
+
+        <p><strong>Conclusion:</strong> The Gamma term is $O(1)$ - it does NOT contribute to $T \log T$.</p>
+    </section>
+
+    <section>
+        <h2>4. The Zeta Term ($T \log T$ Growth)</h2>
+
+        <div class="key-result">
+            <strong>Key Result:</strong> ALL the $T \log T$ growth comes from the zeta terms:
+            $$\Theta_\zeta(T) = \frac{T}{2\pi} \log\frac{T}{2\pi} - \frac{T}{2\pi} + S(T)$$
+            where $S(T) = O(\log T)$ is controlled by Riemann zeros.
+        </div>
+
+        <p><strong>Structure:</strong></p>
+        <ul>
+            <li>$\arg \zeta(1 + 2iT) = O(\log \log T)$ - bounded fluctuations</li>
+            <li>$\arg \zeta(2iT) \sim \pi N(2T)$ - counts zeros!</li>
+        </ul>
+
+        <p>The $T \log T$ term is <strong>arithmetic</strong> - it comes from the Riemann-von Mangoldt formula.</p>
+    </section>
+
+    <section>
+        <h2>5. The Complete Theorem</h2>
+
+        <div class="equation-box">
+            <strong>Theorem:</strong>
+            $$\Theta(T) = \frac{T}{2\pi} \log\frac{T}{2\pi} - \frac{T}{2\pi} + E(T)$$
+            where $E(T) = -\frac{1}{4} + O(\log T)$.
+        </div>
+
+        <p><strong>Decomposition of error:</strong></p>
+        <ul>
+            <li>Constant $-1/4$: from Gamma (analytic)</li>
+            <li>$O(\log T)$ fluctuations: from zeta zeros (arithmetic)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Corollaries</h2>
+
+        <div class="result-box">
+            <strong>Corollary 1:</strong> The $T \log T$ term comes ENTIRELY from zeta, not Gamma.
+        </div>
+
+        <div class="result-box">
+            <strong>Corollary 2:</strong> The Gamma contribution is bounded: $\Theta_\Gamma \to -1/4$.
+        </div>
+
+        <div class="result-box">
+            <strong>Corollary 3:</strong> The "excess" beyond Weyl is arithmetic (encodes prime distribution).
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Significance</h2>
+
+        <p>This decomposition:</p>
+        <ul>
+            <li><strong>Localizes the difficulty:</strong> Hard part is $\arg \zeta$, not $\arg \Gamma$</li>
+            <li><strong>Connects to RH:</strong> Fluctuations $S(T)$ controlled by zero distribution</li>
+            <li><strong>Publishable:</strong> Clean, verifiable statement about modular scattering</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>8. Files</h2>
+        <ul>
+            <li><code>arg_phi_decomposition.py</code> - Implementation and numerical verification</li>
+            <li><code>theorem_statement.md</code> - Formal theorem statement</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../15_Layer1_Selberg_Cusp/index.html">Stage 15</a> |
+        <a href="../16_Layer2_Conceptual_Architecture/index.html">Stage 16</a> |
+        Stage 17 |
+        <a href="../18_Publishable_Lemma/index.html">Stage 18</a>
+        <br><br>
+        <em>"The T log T is not analytic. It is arithmetic."</em>
+    </div>
+
+</body>
+
+</html>

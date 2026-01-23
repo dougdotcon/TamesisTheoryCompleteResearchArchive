@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 20: Final Paper | Tamesis Theory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #d32f2f;
+        }
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 1rem;
+        }
+        .abstract-box {
+            background: #f5f5f5;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #666;
+        }
+        .abstract-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            color: #000;
+        }
+        p { margin-bottom: 1rem; text-align: justify; }
+        .theorem-box {
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .theorem-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .equation-display {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        th { background: #f5f5f5; font-weight: bold; }
+        .references {
+            font-size: 10pt;
+            margin-top: 2rem;
+        }
+        .references li {
+            margin-bottom: 0.3rem;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid #000;
+            font-size: 9pt;
+            color: #666;
+            text-align: center;
+        }
+        ul { margin-left: 2em; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>The Cusp Scattering Phase of the Modular Surface<br>and the Logarithmic Term in Riemann-von Mangoldt</h1>
+        <div class="authors">Research Archive - Layer 1 Mathematics</div>
+    </header>
+
+    <div class="abstract-box">
+        <div class="abstract-title">Abstract</div>
+        <p>We establish a precise decomposition of the scattering phase $\Theta(T)$ for the modular surface $M = SL(2,\mathbb{Z}) \backslash \mathbb{H}$. The main result shows that the $T \log T$ term comes entirely from the zeta function ratio (arithmetic), while the Gamma contribution is bounded, converging to $-1/4$. This connects spectral theory to the Riemann-von Mangoldt formula.</p>
+        <p><strong>Keywords:</strong> Selberg trace formula, scattering matrix, Riemann zeta, modular surface</p>
+    </div>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>For the modular surface $M = SL(2,\mathbb{Z}) \backslash \mathbb{H}$, the scattering matrix is explicit:</p>
+        <div class="equation-display">
+            $$\phi(s) = \sqrt{\pi} \cdot \frac{\Gamma(s - 1/2) \cdot \zeta(2s - 1)}{\Gamma(s) \cdot \zeta(2s)}$$
+        </div>
+        <p>The scattering phase $\Theta(T) = \frac{1}{\pi} \arg \phi(1/2 + iT)$ contributes to spectral counting, revealing the interplay between geometry and arithmetic.</p>
+    </section>
+
+    <section>
+        <h2>2. Main Theorem</h2>
+        
+        <div class="theorem-box">
+            <div class="theorem-title">Theorem (Main Result)</div>
+            <p>For $M = SL(2,\mathbb{Z}) \backslash \mathbb{H}$:</p>
+            <div class="equation-display">
+                $$\Theta(T) = \frac{T}{2\pi} \log\frac{T}{2\pi} - \frac{T}{2\pi} + E(T)$$
+            </div>
+            <p>where $E(T) = E_\Gamma + E_\zeta$ with:</p>
+            <ul>
+                <li>$E_\Gamma = -\frac{1}{4} + O(1/T)$ (analytic, bounded)</li>
+                <li>$E_\zeta = O(\log T)$ (arithmetic, from zeros)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Numerical Verification</h2>
+        
+        <table>
+            <tr>
+                <th>$T$</th>
+                <th>$\Theta_\Gamma(T)$</th>
+                <th>Limit $-1/4$</th>
+                <th>Error</th>
+            </tr>
+            <tr><td>10</td><td>-0.2540</td><td>-0.2500</td><td>0.0040</td></tr>
+            <tr><td>100</td><td>-0.2504</td><td>-0.2500</td><td>0.0004</td></tr>
+            <tr><td>1000</td><td>-0.2500</td><td>-0.2500</td><td>0.00004</td></tr>
+            <tr><td>5000</td><td>-0.2500</td><td>-0.2500</td><td>0.000008</td></tr>
+        </table>
+        
+        <p><strong>Error decay rate:</strong> $-1.000$ (confirming $O(1/T)$)</p>
+    </section>
+
+    <section>
+        <h2>4. Corollaries</h2>
+        
+        <p><strong>Corollary 1:</strong> The $T \log T$ term comes ENTIRELY from the zeta ratio.</p>
+        <p><strong>Corollary 2:</strong> The Gamma contribution is bounded: $\Theta_\Gamma \to -1/4$.</p>
+        <p><strong>Corollary 3:</strong> The "excess" beyond Weyl is arithmetic (encodes prime distribution).</p>
+    </section>
+
+    <section>
+        <h2>5. Selberg-Weil Connection</h2>
+        
+        <table>
+            <tr>
+                <th>Selberg</th>
+                <th>Weil</th>
+            </tr>
+            <tr><td>Eigenvalue $\lambda_n$</td><td>Zero $\rho_n$</td></tr>
+            <tr><td>Geodesic length $\ell$</td><td>$\log p$</td></tr>
+            <tr><td>$\Theta(T)$</td><td>$S(T) = \frac{1}{\pi}\arg\zeta(1/2+iT)$</td></tr>
+        </table>
+        
+        <p>The oscillatory term $E_\zeta(T)$ is controlled by zeros near height $2T$.</p>
+    </section>
+
+    <section>
+        <h2>6. Conclusion</h2>
+        
+        <p>We have established that the $T \log T$ term in the modular scattering phase is <strong>purely arithmetic</strong>. The Gamma contribution is <strong>purely analytic</strong> and bounded. This provides an explicit mechanism connecting spectral theory to the distribution of Riemann zeros.</p>
+    </section>
+
+    <section class="references">
+        <h2>References</h2>
+        <ol>
+            <li>Hejhal, D. "The Selberg Trace Formula for PSL(2,R)" LNM 548, 1001</li>
+            <li>Iwaniec, H. "Spectral Methods of Automorphic Forms" AMS GSM 53</li>
+            <li>Titchmarsh, E.C. "The Theory of the Riemann Zeta-Function"</li>
+            <li>Selberg, A. "Harmonic analysis and discontinuous groups" (1956)</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Files</h2>
+        <ul>
+            <li><code>paper.md</code> - Full paper in Markdown format</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../19_Selberg_Weil_Interface/index.html">Stage 19</a> |
+        Stage 20 (Final Paper)
+        <br><br>
+        <em>"The $T \log T$ is not analytic. It is arithmetic."</em>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 19: Selberg-Weil Interface | Tamesis Theory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #6a1b9a;
+        }
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #6a1b9a;
+        }
+        .subtitle {
+            font-size: 12pt;
+            font-style: italic;
+            color: #444;
+        }
+        .layer-badge {
+            display: inline-block;
+            background: #6a1b9a;
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            color: #6a1b9a;
+            border-bottom: 1px solid #6a1b9a;
+            padding-bottom: 0.3rem;
+        }
+        p { margin-bottom: 1rem; text-align: justify; }
+        .dictionary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+        .dictionary-table th, .dictionary-table td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        .dictionary-table th {
+            background: #6a1b9a;
+            color: white;
+            font-weight: bold;
+        }
+        .equation-box {
+            background: #f3e5f5;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border-left: 4px solid #6a1b9a;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border: 2px solid #2e7d32;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 0.1em 0.3em;
+            font-family: monospace;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid #000;
+            font-size: 9pt;
+            color: #666;
+        }
+        ul { margin-left: 2em; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Stage 19: Selberg-Weil Interface</h1>
+        <div class="subtitle">Connecting Scattering Phase to Riemann Zeros</div>
+        <div class="layer-badge">LAYER 1 - MATHEMATICS</div>
+    </header>
+
+    <section>
+        <h2>1. The Dictionary</h2>
+
+        <table class="dictionary-table">
+            <tr>
+                <th>Selberg (Geometry)</th>
+                <th>Weil (Arithmetic)</th>
+            </tr>
+            <tr>
+                <td>Surface $M = \Gamma \backslash \mathbb{H}$</td>
+                <td>Integers $\mathbb{Z}$</td>
+            </tr>
+            <tr>
+                <td>Eigenvalue $\lambda_n = 1/4 + r_n^2$</td>
+                <td>Zero $\rho_n = 1/2 + i\gamma_n$</td>
+            </tr>
+            <tr>
+                <td>Primitive geodesic $\gamma$</td>
+                <td>Prime $p$</td>
+            </tr>
+            <tr>
+                <td>Length $\ell(\gamma)$</td>
+                <td>$\log p$</td>
+            </tr>
+            <tr>
+                <td>Selberg trace formula</td>
+                <td>Weil explicit formula</td>
+            </tr>
+            <tr>
+                <td>Scattering phase $\Theta(T)$</td>
+                <td>$S(T) = \frac{1}{\pi} \arg \zeta(1/2 + iT)$</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>2. The Parallel Formulas</h2>
+
+        <div class="equation-box">
+            <strong>Selberg Trace Formula:</strong>
+            $$\sum_n h(r_n) = \frac{\mu}{4\pi} \int h(r) r \tanh(\pi r) dr + \sum_\gamma \frac{\ell_\gamma}{2\sinh(k\ell_\gamma/2)} g(k\ell_\gamma) + \text{cusp}$$
+        </div>
+
+        <div class="equation-box">
+            <strong>Weil Explicit Formula:</strong>
+            $$\sum_\rho h(\gamma_\rho) = h(0) + h(1) - \sum_p \sum_k \frac{\log p}{p^{k/2}} \hat{h}(k \log p) + \Gamma\text{-terms}$$
+        </div>
+
+        <p><strong>Key parallel:</strong> Eigenvalues $\leftrightarrow$ Zeros, Geodesics $\leftrightarrow$ Primes</p>
+    </section>
+
+    <section>
+        <h2>3. Zero Proximity and Fluctuations</h2>
+
+        <p>The oscillatory term $E_\zeta(T)$ in our scattering phase decomposition is controlled by Riemann zeros near height $2T$:</p>
+
+        <div class="result-box">
+            $$E_\zeta(T) \sim \frac{1}{\pi} \sum_{|\gamma - 2T| < \delta} f(\gamma - 2T)$$
+            <p>Zeros near height $2T$ cause fluctuations in $\Theta(T)$.</p>
+        </div>
+
+        <p><strong>Example:</strong> For $T = 20$, height $2T = 40$, the nearby zeros are $\gamma \approx 30.4, 32.9, 37.6, 40.9, 43.3, ...$</p>
+    </section>
+
+    <section>
+        <h2>4. Main Result</h2>
+
+        <div class="result-box">
+            <strong>Theorem (Selberg-Weil Connection):</strong>
+            <p>The scattering phase $\Theta(T)$ for $M = SL(2,\mathbb{Z}) \backslash \mathbb{H}$ connects to Riemann zeros via:</p>
+            <ul>
+                <li>$E_\Gamma = -1/4 + O(1/T)$ - analytic, bounded</li>
+                <li>$E_\zeta = O(\log T)$ - arithmetic, from zeros near height $2T$</li>
+            </ul>
+            <p>This parallels how $S(T)$ in Riemann-von Mangoldt fluctuates due to nearby zeros.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Files</h2>
+        <ul>
+            <li><code>explicit_formula_connection.py</code> - Selberg-Weil dictionary and analysis</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <a href="../18_Publishable_Lemma/index.html">Stage 18</a> |
+        Stage 19 |
+        <a href="../20_Final_Paper/index.html">Stage 20</a>
+        <br><br>
+        <em>"The dictionary becomes a tool."</em>
+    </div>
+
+</body>
+
+</html>

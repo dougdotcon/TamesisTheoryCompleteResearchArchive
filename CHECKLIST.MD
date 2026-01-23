@@ -135,4 +135,20 @@
 
 ---
 
-*PROGRAM CLOSED - See PROGRAM_COMPLETE.md for full details*
+## TRI PROGRAM (Stages 43-52)
+
+**Status: ACTIVE**
+
+### Stage 43: Formal Definition of Regime
+
+*Status: COMPLETED*
+
+- [x] **regime_formalism.py** - R = (S, P, O) triple definition
+- [x] **regime_catalog.py** - 12 regimes mapped
+- [x] **index.html** - Complete documentation
+- **Result: 47 incompatible regime pairs found**
+
+---
+
+*Tamesis Program CLOSED - See PROGRAM_COMPLETE.md*  
+*TRI Program ACTIVE - See TRI_ROADMAP.md*

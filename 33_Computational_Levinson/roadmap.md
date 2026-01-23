@@ -1,235 +1,221 @@
 # Roadmap: Entropia Algoritmica como Densidade Espectral (Caminho 3)
 
-## Objetivo Final
-Definir entropia algoritmica como propriedade espectral e mostrar que ela captura complexidade.
+## STATUS: FECHADO E ARQUIVADO
 
-## Principio Fundamental
-**Entropia algoritmica = taxa de producao de informacao = log(raio espectral)**
-
-A entropia mede "quanta informacao" o algoritmo processa por iteracao.
+```
++==================================================================+
+|   PROJETO ENCERRADO - DEPENDE DE PREMISSA INVALIDA               |
++==================================================================+
+|                                                                  |
+|   Data de fechamento: Janeiro 2026                               |
+|   Razao: Entropia espectral requer raio espectral > 1            |
+|          mas rho(L_A) = 1 para algoritmos classicos              |
+|   Valor cientifico: Identifica limites de aplicabilidade         |
+|                                                                  |
++==================================================================+
+```
 
 ---
 
-## FASE 1: Definicao de Entropia Espectral (Stages 34-36)
+## Resumo Executivo
 
-### Stage 34: Entropia de Kolmogorov-Sinai para Algoritmos
-**Objetivo:** Adaptar entropia KS para sistemas computacionais
+### Objetivo Original
+Definir entropia algoritmica como propriedade espectral: h_A = log(rho(L_A))
 
-**Tarefas:**
-1. Revisar definicao classica de entropia KS
-2. Adaptar para algoritmos deterministicos
-3. Definir h_A = lim (1/n) H(T_A^n)
-4. Calcular para exemplos simples
+### Resultado Final
+**FALHA ESTRUTURAL - PREMISSA MATEMATICA INVALIDA**
 
-**Entregavel:** `ks_entropy_algorithms.py`
+A abordagem falha porque:
 
-**Definicao:**
 ```
-h_A = lim_{n->inf} (1/n) * log(numero de trajetorias distintas de comprimento n)
-```
-
-**Criterio de sucesso:** Entropia calculada para 3+ algoritmos
-
-### Stage 35: Entropia via Espectro
-**Objetivo:** Mostrar h_A = log(rho(L_A))
-
-**Tarefas:**
-1. Calcular raio espectral rho(L_A) para varios algoritmos
-2. Calcular entropia h_A diretamente
-3. Verificar se h_A = log(rho)
-4. Identificar condicoes de validade
-
-**Entregavel:** `spectral_entropy_equivalence.py`
-
-**Teorema alvo:**
-```
-h_A = log(rho(L_A)) para algoritmos "hiperbólicos"
++------------------------------------------------------------------+
+| PROBLEMA FUNDAMENTAL:                                            |
+|                                                                  |
+| Para algoritmos classicos (quicksort, mergesort, etc):           |
+|                                                                  |
+|   rho(L_A) = 1    (matriz estocastica)                           |
+|                                                                  |
+| Portanto:                                                        |
+|                                                                  |
+|   h_A = log(rho(L_A)) = log(1) = 0                               |
+|                                                                  |
+| Entropia espectral = 0 para TODOS os algoritmos testados.        |
+| Isso nao distingue NADA.                                         |
++------------------------------------------------------------------+
 ```
 
-**Criterio de sucesso:** Equivalencia verificada ou condicoes identificadas
+### Cadeia de Falhas
 
-### Stage 36: Densidade Espectral como Entropia Local
-**Objetivo:** Definir entropia como funcao da energia/frequencia
+Todo o roadmap depende de uma cadeia logica quebrada:
 
-**Tarefas:**
-1. Definir densidade espectral rho_A(E)
-2. Definir entropia local h_A(E) = log(rho_A(E))
-3. Calcular para varios algoritmos
-4. Interpretar: regioes de alta/baixa entropia
-
-**Entregavel:** `local_spectral_entropy.py`
-
-**Criterio de sucesso:** Densidade calculada, interpretacao clara
+```
+Stage 35: h_A = log(rho) = log(1) = 0           -> TRIVIALIZA
+Stage 37: H_A diferencia classes? NAO           -> SEM OBJETO
+Stage 39: Segunda lei dH/dt >= 0 ? Irrelevante  -> h = 0 sempre
+Stage 40: Temperatura T = dE/dS ? Indefinida    -> divisao por 0
+Stage 41: Energia livre F = E - TS ? Indefinida -> T indefinida
+```
 
 ---
 
-## FASE 2: Entropia e Complexidade (Stages 37-39)
+## Por Que Nao Continuar
 
-### Stage 37: Entropia Total vs Complexidade
-**Objetivo:** Relacionar entropia total com classe de complexidade
+### Incompatibilidade Logica Com Resultados Anteriores
 
-**Tarefas:**
-1. Calcular H_A = integral de h_A(E)
-2. Medir para algoritmos O(n), O(n log n), O(n^2)
-3. Verificar se H_A diferencia classes
-4. Formular relacao quantitativa
+Os resultados do projeto `34_Spectral_Theory_Computation` mostraram:
 
-**Entregavel:** `total_entropy_complexity.py`
+1. **Algoritmos sao ABSORVENTES**
+   - Estado morre
+   - Nao ha dinamica recorrente
+   - Nao ha producao de entropia no sentido dinamico
 
-**Hipotese:**
-```
-H_A ~ log(complexidade) ?
-```
+2. **Raio espectral = 1 sempre**
+   - Matriz estocastica
+   - Log(rho) = 0
+   - Entropia KS mal definida
 
-**Criterio de sucesso:** Relacao identificada ou refutada
+3. **Gap espectral = 2/n**
+   - Nao relacionado com complexidade
+   - Decai, nao distingue algoritmos diferentes
 
-### Stage 38: Taxa de Producao de Entropia
-**Objetivo:** Definir e medir "entropia por operacao"
+### O Que a Entropia Algoritmica Realmente Significaria
 
-**Tarefas:**
-1. Definir sigma_A = dH/dt (producao de entropia)
-2. Calcular para varios algoritmos
-3. Relacionar com "custo informacional" por passo
-4. Comparar com numero de comparacoes/operacoes
+Para entropia fazer sentido, precisariamos de:
+- Sistema com dinamica CAÓTICA (exponencial divergence)
+- Trajetorias que EXPLORAM o espaco (mixing)
+- Raio espectral > 1 (crescimento exponencial)
 
-**Entregavel:** `entropy_production_rate.py`
-
-**Criterio de sucesso:** Taxa bem definida, interpretacao clara
-
-### Stage 39: Segunda Lei da Termodinamica Algoritmica
-**Objetivo:** Formular principio de que entropia sempre cresce
-
-**Tarefas:**
-1. Verificar se H_A(t) e monotona crescente
-2. Identificar "estados de equilibrio" (terminacao)
-3. Calcular entropia no equilibrio
-4. Formular "segunda lei" para algoritmos
-
-**Entregavel:** `second_law_algorithms.py`
-
-**Principio alvo:**
-```
-Para todo algoritmo: dH_A/dt >= 0
-```
-
-**Criterio de sucesso:** Principio verificado ou contraexemplo
+Nenhuma dessas condicoes se aplica a algoritmos de ordenacao.
 
 ---
 
-## FASE 3: Termodinamica Algoritmica (Stages 40-42)
+## Onde Entropia DE FATO Funciona
 
-### Stage 40: Temperatura Algoritmica
-**Objetivo:** Definir "temperatura" de um algoritmo
+A pesquisa identificou contextos onde entropia espectral E valida:
 
-**Tarefas:**
-1. Definir T_A = dE/dS (derivada energia-entropia)
-2. Calcular para varios algoritmos
-3. Interpretar: alta temperatura = caos, baixa = ordem
-4. Verificar se T correlaciona com variancia
+| Sistema | rho(L) | h = log(rho) | Util? |
+|---------|--------|--------------|-------|
+| Quicksort | 1 | 0 | NAO |
+| Random maps | 1 | 0 | NAO* |
+| Billards caoticos | > 1 | > 0 | SIM |
+| Sistemas de Anosov | > 1 | > 0 | SIM |
+| Shift simbolico | > 1 | > 0 | SIM |
 
-**Entregavel:** `algorithmic_temperature.py`
-
-**Criterio de sucesso:** Temperatura bem definida
-
-### Stage 41: Energia Livre e Otimalidade
-**Objetivo:** Definir F_A = E - T*S e relacionar com eficiencia
-
-**Tarefas:**
-1. Definir energia livre F_A
-2. Calcular para algoritmos otimos e sub-otimos
-3. Verificar: F minimo = algoritmo otimo ?
-4. Propor principio variacional
-
-**Entregavel:** `free_energy_optimality.py`
-
-**Principio alvo:**
-```
-Algoritmo otimo minimiza energia livre F_A
-```
-
-**Criterio de sucesso:** Principio verificado
-
-### Stage 42: Transicoes de Fase
-**Objetivo:** Identificar mudancas abruptas na termodinamica
-
-**Tarefas:**
-1. Variar parametros do algoritmo
-2. Medir entropia, temperatura, energia livre
-3. Identificar descontinuidades
-4. Caracterizar "fases" do algoritmo
-
-**Entregavel:** `phase_transitions.py`
-
-**Criterio de sucesso:** Transicoes identificadas
+*Para random maps, a entropia vem de CONTAGEM de ciclos, nao do raio espectral.
 
 ---
 
-## FASE 4: Unificacao (Stages 43-45)
+## Resultado Util Extraido
 
-### Stage 43: Conexao com Teoria da Informacao
-**Objetivo:** Relacionar entropia espectral com Shannon
+Embora o roadmap tenha falhado, a pesquisa produziu um resultado negativo util:
 
-**Tarefas:**
-1. Calcular entropia de Shannon do output
-2. Comparar com entropia espectral h_A
-3. Identificar relacao (igualdade? proporcionalidade?)
-4. Formalizar conexao
-
-**Entregavel:** `spectral_shannon_connection.py`
-
-**Criterio de sucesso:** Relacao formal estabelecida
-
-### Stage 44: Conexao com Complexidade de Kolmogorov
-**Objetivo:** Relacionar entropia com complexidade algoritmica K(x)
-
-**Tarefas:**
-1. Revisar complexidade de Kolmogorov
-2. Comparar K(x) com entropia espectral
-3. Identificar: h_A ~ E[K(output)] ?
-4. Formalizar (se possivel)
-
-**Entregavel:** `kolmogorov_spectral.py`
-
-**Criterio de sucesso:** Conexao estabelecida ou impossibilidade provada
-
-### Stage 45: Teoria Unificada
-**Objetivo:** Formalizar "Termodinamica da Computacao"
-
-**Tarefas:**
-1. Escrever axiomas da teoria
-2. Derivar consequencias
-3. Identificar teoremas principais
-4. Publicar
-
-**Entregavel:** `thermodynamics_of_computation.tex`
-
-**Criterio de sucesso:** Teoria axiomatizada, paper pronto
+```
++------------------------------------------------------------------+
+| TEOREMA (Inaplicabilidade):                                      |
+|                                                                  |
+| Entropia de Kolmogorov-Sinai espectral NAO se aplica a           |
+| algoritmos deterministas finitos porque:                         |
+|                                                                  |
+| 1. Nao ha sensibilidade a condicoes iniciais                     |
+| 2. Espaco de fase e finito e contratante                         |
+| 3. Raio espectral = 1 (matrizes estocasticas)                    |
+|                                                                  |
+| A "termodinamica de algoritmos" requer outra definicao de        |
+| entropia, NAO baseada em expoentes de Lyapunov.                  |
++------------------------------------------------------------------+
+```
 
 ---
 
-## Metricas de Progresso
+## Alternativa Correta (Para Referencia)
 
-| Fase | Stages | Tempo Estimado | Criterio |
-|------|--------|----------------|----------|
-| 1    | 34-36  | 2-3 semanas    | Entropia definida |
-| 2    | 37-39  | 3-4 semanas    | Conexao complexidade |
-| 3    | 40-42  | 4-6 semanas    | Termodinamica |
-| 4    | 43-45  | 4-6 semanas    | Teoria unificada |
+Se entropia algoritmica for desejada no futuro, a abordagem correta seria:
 
-## Riscos
+1. **Entropia de Shannon do output**
+   - H(output | input) = informacao processada
+   - Bem definida, nao requer dinamica caotica
 
-1. **Entropia pode nao distinguir complexidades**
-   - Mitigacao: usar outras grandezas (energia livre)
+2. **Complexidade de Kolmogorov**
+   - K(programa) = tamanho minimo de descricao
+   - Independente de espectro
 
-2. **Analogia termodinamica pode ser superficial**
-   - Mitigacao: buscar consequencias testáveis
+3. **Entropia de mistura** (para MCMC, PageRank)
+   - So para sistemas RECORRENTES
+   - Nao para algoritmos de ordenacao
 
-3. **Teoria pode trivializar**
-   - Mitigacao: focar em predicoes nao-obvias
+---
 
-## Resultado Esperado
+## Decisao Final
 
-- Nova perspectiva: algoritmos como sistemas termodinamicos
-- Principios variacionais para otimizacao
-- Paper: "Thermodynamics of Algorithms"
-- Possivel conexao com fisica da computacao
+### NAO Continuar Este Roadmap
+- Premissas matematicas invalidas
+- Teoria degeneraria imediatamente (h = 0)
+- Tempo seria desperdicado
+
+### Material Preservado
+- Identificacao do problema (absorvente vs recorrente)
+- Criterio de aplicabilidade de entropia espectral
+- Alternativas corretas identificadas
+
+---
+
+## Migrado Para
+
+O conhecimento util foi absorvido pelo projeto principal:
+```
+34_Spectral_Theory_Computation/DISCOVERY_SUMMARY.md
+```
+
+Onde consta a classificacao:
+- ABSORVENTE -> entropia trivial
+- RECORRENTE -> entropia possivelmente util
+- CAOTICO -> entropia essencial
+
+---
+
+## Licoes Aprendidas
+
+1. **Verificar definicoes matematicas ANTES de construir teoria**
+   - h = log(rho) so faz sentido se rho > 1
+
+2. **Analogia fisica pode enganar**
+   - "Termodinamica de algoritmos" parece natural
+   - Mas algoritmos NAO sao sistemas termodinamicos
+
+3. **Resultado negativo bem documentado e valioso**
+   - Evita que outros repitam o erro
+   - Identifica o regime correto de aplicabilidade
+
+---
+
+*"Nao force analogia onde a matematica nao suporta."*
+
+## Arquivo Original (para referencia historica)
+
+<details>
+<summary>Clique para ver o roadmap original</summary>
+
+### Objetivo Original
+Definir entropia algoritmica como propriedade espectral.
+
+### FASE 1: Definicao de Entropia Espectral (Stages 34-36)
+- Stage 34: Entropia de Kolmogorov-Sinai para Algoritmos
+- Stage 35: Entropia via Espectro
+- Stage 36: Densidade Espectral como Entropia Local
+
+### FASE 2: Entropia e Complexidade (Stages 37-39)
+- Stage 37: Entropia Total vs Complexidade
+- Stage 38: Taxa de Producao de Entropia
+- Stage 39: Segunda Lei da Termodinamica Algoritmica
+
+### FASE 3: Termodinamica Algoritmica (Stages 40-42)
+- Stage 40: Temperatura Algoritmica
+- Stage 41: Energia Livre e Otimalidade
+- Stage 42: Transicoes de Fase
+
+### FASE 4: Unificacao (Stages 43-45)
+- Stage 43: Conexao com Teoria da Informacao
+- Stage 44: Conexao com Complexidade de Kolmogorov
+- Stage 45: Teoria Unificada
+
+</details>

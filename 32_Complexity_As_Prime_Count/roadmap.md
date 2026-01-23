@@ -1,235 +1,195 @@
 # Roadmap: Primos Computacionais no Espaco de Inputs (Caminho 2)
 
-## Objetivo Final
+## STATUS: FECHADO E ARQUIVADO
+
+```
++==================================================================+
+|   PROJETO ENCERRADO - PREMISSA INVALIDA DEMONSTRADA              |
++==================================================================+
+|                                                                  |
+|   Data de fechamento: Janeiro 2026                               |
+|   Razao: Algoritmos classicos NAO tem ciclos (absorventes)       |
+|   Valor cientifico: Resultado negativo informa a teoria          |
+|                                                                  |
++==================================================================+
+```
+
+---
+
+## Resumo Executivo
+
+### Objetivo Original
 Redefinir "primos computacionais" como ciclos no espaco de inputs e mostrar que sua contagem determina complexidade.
 
-## Principio Fundamental
-**Primos computacionais = ciclos irredutiveis na transformacao de inputs**
+### Resultado Final
+**FALHA ESTRUTURAL - PREMISSA INVALIDA**
 
-Nao sao ciclos no espaco de estados, mas ciclos na relacao entrada -> saida.
+A abordagem falha por uma razao fundamental:
+
+```
++------------------------------------------------------------------+
+| TEOREMA (Impossibilidade):                                       |
+|                                                                  |
+| Algoritmos de ordenacao (quicksort, mergesort, heapsort)         |
+| sao sistemas ABSORVENTES.                                        |
+|                                                                  |
+| Em sistemas absorventes:                                         |
+| - O estado "morre" a cada iteracao                               |
+| - NAO existem ciclos                                             |
+| - Contagem de primos = 0 ou degenerada                           |
+|                                                                  |
+| Portanto: pi_A(n) = 0 para algoritmos classicos.                 |
++------------------------------------------------------------------+
+```
+
+### Por Que Isso Invalida o Roadmap
+
+Todo o roadmap depende de:
+```
+pi_A(n) = numero de ciclos primitivos de comprimento <= n
+```
+
+Mas para sistemas absorventes:
+```
+pi_A(n) = 0   (nao existem ciclos)
+```
+
+Logo:
+- Stage 35 (contagem) -> trivialmente vazio
+- Stage 36 (lei de crescimento) -> inexistente
+- Stage 37-42 (PNT, RH computacional) -> sem objeto
+- Stage 43-45 (aplicacoes) -> nada a aplicar
 
 ---
 
-## FASE 1: Redefinicao de Primos (Stages 34-36)
+## O Que Foi Descoberto (Positivo)
 
-### Stage 34: Definicao Formal de Primo Computacional
-**Objetivo:** Definir matematicamente o que e um "primo" de um algoritmo
+Embora este roadmap tenha falhado para algoritmos classicos, a pesquisa
+revelou onde primos computacionais DE FATO existem:
 
-**Tarefas:**
-1. Dado algoritmo A, definir grafo G_A no espaco de inputs
-2. Aresta (x, y) existe se T_A(x) "gera" y em um passo
-3. Definir ciclo: sequencia x_1 -> x_2 -> ... -> x_1
-4. Definir ciclo primitivo: nao e potencia de ciclo menor
+### Sistemas Onde Primos Computacionais EXISTEM:
 
-**Entregavel:** `prime_definition.py`
+| Sistema | Tipo | Primos existem? | Resultado |
+|---------|------|-----------------|-----------|
+| Quicksort | Absorvente | NAO | pi_A = 0 |
+| Mergesort | Absorvente | NAO | pi_A = 0 |
+| Random Maps | Recorrente | SIM | pi ~ n/(2 log n) |
+| PageRank | Recorrente | SIM | ciclos = estrutura web |
+| MCMC | Recorrente | SIM | ciclos = mixing |
 
-**Formalizacao:**
+### Teoria Real Desenvolvida
+
+A pesquisa foi REDIRECIONADA com sucesso para:
 ```
-Primo de A = ciclo primitivo em G_A
-pi_A(n) = numero de primos de comprimento <= n
+34_Spectral_Theory_Computation/emergent_primes/
 ```
 
-**Criterio de sucesso:** Definicao precisa e implementavel
-
-### Stage 35: Contagem de Primos para Algoritmos Classicos
-**Objetivo:** Calcular pi_A(n) para quicksort, mergesort, Euclides
-
-**Tarefas:**
-1. Implementar busca de ciclos em G_quicksort
-2. Implementar busca de ciclos em G_mergesort
-3. Implementar busca de ciclos em G_euclides (mapa de Gauss)
-4. Tabular pi_A(n) para n = 1, 2, ..., 20
-
-**Entregavel:** `prime_counting.py`
-
-**Criterio de sucesso:** Tabelas de pi_A(n) para 3+ algoritmos
-
-### Stage 36: Lei de Crescimento de pi_A(n)
-**Objetivo:** Determinar como pi_A(n) cresce com n
-
-**Tarefas:**
-1. Ajustar pi_A(n) ~ n^alpha para cada algoritmo
-2. Ajustar pi_A(n) ~ n / log(n) (analogo PNT)
-3. Comparar expoentes entre algoritmos
-4. Formular hipotese: alpha determina complexidade
-
-**Entregavel:** `prime_growth.py`
-
-**Criterio de sucesso:** Expoentes calculados, hipotese formulada
+Onde descobrimos:
+1. **Classe de universalidade U_{1/2}** para transicoes ordem-caos
+2. **Formula de Ruelle verificada** para operadores de transferencia
+3. **Lei universal phi(c) = (1+c)^{-1/2}** derivada e provada
 
 ---
 
-## FASE 2: Conexao Primos-Complexidade (Stages 37-39)
+## Razao do Fechamento
 
-### Stage 37: Conjectura Principal
-**Objetivo:** Formular e testar: "pi_A(n) ~ f(n) => complexidade O(g(n))"
+### Criterio de Falha Satisfeito
 
-**Tarefas:**
-1. Para algoritmos O(n): medir pi_A(n)
-2. Para algoritmos O(n log n): medir pi_A(n)
-3. Para algoritmos O(n^2): medir pi_A(n)
-4. Identificar relacao f -> g
-
-**Entregavel:** `prime_complexity_conjecture.py`
-
-**Hipotese a testar:**
+O roadmap original definia:
 ```
-pi_A(n) ~ n^alpha  =>  complexidade ~ O(n^{1/alpha}) ?
+"Correlacao primos-complexidade pode ser fraca" -> pivotar
 ```
 
-**Criterio de sucesso:** Correlacao observada ou refutada
-
-### Stage 38: Formula Explicita Computacional
-**Objetivo:** Derivar formula tipo Weil para algoritmos
-
-**Tarefas:**
-1. Definir "zeros" = autovalores do operador L_A
-2. Definir "primos" = ciclos primitivos
-3. Escrever: sum_zeros f(gamma) = sum_primos g(p)
-4. Verificar numericamente
-
-**Entregavel:** `computational_explicit_formula.py`
-
-**Formula alvo:**
+O resultado foi ainda mais forte:
 ```
-sum_gamma h(gamma) = sum_p log(l_p) * h_hat(l_p) + termos suaves
+Correlacao = INDEFINIDA (primos nao existem)
 ```
 
-**Criterio de sucesso:** Formula verificada para 1+ algoritmo
+### Decisao Correta
 
-### Stage 39: Densidade de Primos e Complexidade Media
-**Objetivo:** Relacionar densidade de primos com tempo medio
+NAO continuar tentando "forcar" primos em algoritmos classicos.
 
-**Tarefas:**
-1. Definir densidade: d_A(n) = pi_A(n) / n
-2. Calcular para varios algoritmos
-3. Comparar com complexidade media empirica
-4. Derivar relacao teorica (se possivel)
-
-**Entregavel:** `prime_density_complexity.py`
-
-**Criterio de sucesso:** Relacao quantitativa estabelecida
+A teoria de primos computacionais SO faz sentido para:
+- Sistemas recorrentes
+- Dinamica caotica
+- Random maps e funcoes aleatorias
 
 ---
 
-## FASE 3: Teoria dos Numeros Computacional (Stages 40-42)
+## Valor Cientifico do Fechamento
 
-### Stage 40: Teorema dos Numeros Primos Computacional
-**Objetivo:** Provar (ou conjecturar) pi_A(n) ~ n / log(n) para alguma classe
+1. **Identificou regime correto de aplicabilidade**
+   - Primos computacionais: SIM em sistemas recorrentes
+   - Primos computacionais: NAO em sistemas absorventes
 
-**Tarefas:**
-1. Identificar algoritmos onde pi_A(n) ~ n / log(n)
-2. Caracterizar essa classe
-3. Formular teorema analogo ao PNT
-4. Esbocar prova ou evidencia numerica
+2. **Redirecionou esforco para onde funciona**
+   - Random maps -> teoria completa desenvolvida
+   - Classes de universalidade -> teorema provado
 
-**Entregavel:** `computational_pnt.py`
-
-**Teorema alvo:**
-```
-Para algoritmos "genericos": pi_A(n) ~ n / log(n)
-```
-
-**Criterio de sucesso:** Teorema enunciado com evidencia
-
-### Stage 41: Hipotese de Riemann Computacional
-**Objetivo:** Formular analogo de RH para algoritmos
-
-**Tarefas:**
-1. Definir zeta_A(s) = prod_p (1 - p^{-s})^{-1}
-2. Identificar zeros de zeta_A
-3. Verificar se zeros tem parte real especial
-4. Formular "RH computacional"
-
-**Entregavel:** `computational_rh.py`
-
-**Hipotese alvo:**
-```
-Todos os zeros nao-triviais de zeta_A tem Re(s) = 1/2 ?
-```
-
-**Criterio de sucesso:** Hipotese formulada, testada numericamente
-
-### Stage 42: Funcoes L Computacionais
-**Objetivo:** Generalizar para "caracteres" de algoritmos
-
-**Tarefas:**
-1. Definir caracteres chi: G_A -> C
-2. Definir L_A(s, chi) = prod_p (1 - chi(p) p^{-s})^{-1}
-3. Estudar propriedades
-4. Conectar com invariantes do algoritmo
-
-**Entregavel:** `computational_l_functions.py`
-
-**Criterio de sucesso:** L-functions definidas e calculadas
+3. **Evitou anos de trabalho infrutifero**
+   - Tentar derivar PNT para pi_A = 0 seria absurdo
 
 ---
 
-## FASE 4: Aplicacoes (Stages 43-45)
+## Migrado Para
 
-### Stage 43: Otimizacao via Primos
-**Objetivo:** Usar contagem de primos para otimizar algoritmos
+O conhecimento util foi migrado para:
+```
+34_Spectral_Theory_Computation/emergent_primes/
+```
 
-**Tarefas:**
-1. Identificar: menos primos = mais eficiente ?
-2. Testar variantes de quicksort
-3. Medir correlacao primos <-> tempo
-4. Propor criterio de otimizacao
+Onde a teoria de "primos" (ciclos primitivos) foi desenvolvida com sucesso
+para RANDOM MAPS, nao para algoritmos classicos.
 
-**Entregavel:** `prime_optimization.py`
-
-**Criterio de sucesso:** Criterio util identificado
-
-### Stage 44: Classificacao de Algoritmos
-**Objetivo:** Classificar algoritmos pela estrutura de primos
-
-**Tarefas:**
-1. Calcular "assinatura de primos" para cada algoritmo
-2. Definir distancia entre assinaturas
-3. Clusterizar algoritmos
-4. Ver se clusters correspondem a complexidade
-
-**Entregavel:** `algorithm_classification.py`
-
-**Criterio de sucesso:** Classificacao coerente
-
-### Stage 45: Paper e Formalizacao
-**Objetivo:** Publicar teoria
-
-**Tarefas:**
-1. Escrever paper: "Prime Numbers of Algorithms"
-2. Definicoes rigorosas
-3. Teoremas principais
-4. Conjecturas abertas
-
-**Entregavel:** `paper_draft.tex`
-
-**Criterio de sucesso:** Paper submetido
+Resultados principais la:
+- Formula de Ruelle: det(I - zL) = prod_gamma (1 - z^|gamma|)
+- Contagem de ciclos: ~ n / (2 log n)
+- Lei universal: phi(c) = (1+c)^{-1/2}
 
 ---
 
-## Metricas de Progresso
+## Licoes Aprendidas
 
-| Fase | Stages | Tempo Estimado | Criterio |
-|------|--------|----------------|----------|
-| 1    | 34-36  | 2-3 semanas    | pi_A(n) calculado |
-| 2    | 37-39  | 3-4 semanas    | Conexao estabelecida |
-| 3    | 40-42  | 4-6 semanas    | Teoria formulada |
-| 4    | 43-45  | 4-6 semanas    | Paper pronto |
+1. **Verificar premissas ANTES de construir teoria**
+   - "Existem ciclos?" deveria ter sido Stage 0
 
-## Riscos
+2. **Absorvente vs Recorrente e a distincao fundamental**
+   - Nao "algoritmo vs sistema matematico"
+   - Mas "estado morre vs estado persiste"
 
-1. **Definicao de "primo" pode ser arbitraria**
-   - Mitigacao: testar varias definicoes
+3. **Pivotar cedo e o movimento correto**
+   - Resultado negativo honesto > exploracao interminavel
 
-2. **Correlacao primos-complexidade pode ser fraca**
-   - Mitigacao: pivotar para outro invariante
+---
 
-3. **Calculos explodem para n grande**
-   - Mitigacao: usar amostragem, heuristicas
+*"Nao tente contar o que nao existe. Encontre onde existe primeiro."*
 
-## Resultado Esperado
+## Arquivo Original (para referencia historica)
 
-- Nova "teoria dos numeros" para algoritmos
-- Invariantes novos para classificar algoritmos
-- Paper publicavel: "Computational Prime Number Theory"
+<details>
+<summary>Clique para ver o roadmap original</summary>
+
+### Objetivo Original
+Redefinir "primos computacionais" como ciclos no espaco de inputs.
+
+### FASE 1: Redefinicao de Primos (Stages 34-36)
+- Stage 34: Definicao Formal de Primo Computacional
+- Stage 35: Contagem de Primos para Algoritmos Classicos
+- Stage 36: Lei de Crescimento de pi_A(n)
+
+### FASE 2: Conexao Primos-Complexidade (Stages 37-39)
+- Stage 37: Conjectura Principal
+- Stage 38: Formula Explicita Computacional
+- Stage 39: Densidade de Primos e Complexidade Media
+
+### FASE 3: Teoria dos Numeros Computacional (Stages 40-42)
+- Stage 40: Teorema dos Numeros Primos Computacional
+- Stage 41: Hipotese de Riemann Computacional
+- Stage 42: Funcoes L Computacionais
+
+### FASE 4: Aplicacoes (Stages 43-45)
+- Stage 43: Otimizacao via Primos
+- Stage 44: Classificacao de Algoritmos
+- Stage 45: Paper e Formalizacao
+
+</details>

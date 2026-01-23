@@ -150,5 +150,44 @@
 
 ---
 
-*Tamesis Program CLOSED - See PROGRAM_COMPLETE.md*  
-*TRI Program ACTIVE - See TRI_ROADMAP.md*
+## TDTR PROGRAM (Stages 53-78)
+
+**Status: COMPLETE**
+
+### Phase I: Formalization (53-56)
+
+- [x] Defined Transition E_ij
+- [x] Transition Space T != V x V
+- [x] Structural Irreversibility Theorem
+
+### Phase II: Interface Invariants (57-61)
+
+- [x] Interface quantities & Monotones
+- [x] TDTR Axioms A1-A4
+
+### Phase III: Irreversible Dynamics (62-66)
+
+- [x] Dissipative transitions
+- [x] No-reversal theorem
+
+### Phase IV: Quantum -> Geometry (67-71)
+
+- [x] Gravity as interface
+- [x] Metric emergence
+
+### Phase V: Classification (72-75)
+
+- [x] Transition Atlas
+- [x] Universality mapping
+
+### Phase VI: Consolidation (76-78)
+
+- [x] Founding Paper (HTML)
+- [x] Limits & Closure
+
+---
+
+*Tamesis Program CLOSED*
+*TRI Program CLOSED*
+*TDTR Program CLOSED*
+*Research Archive COMPLETE*

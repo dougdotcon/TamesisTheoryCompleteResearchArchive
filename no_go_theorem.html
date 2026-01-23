@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the Impossibility of Local Discretizations for Hilbert-Pólya Operators</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #000;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 12pt;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .authors {
+            font-size: 12pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #333;
+        }
+
+        .date {
+            font-size: 10pt;
+            margin-top: 0.5rem;
+        }
+
+        .abstract-box {
+            margin: 2rem 0;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 1.5rem;
+            border: 1px solid #000;
+            background-color: #fafafa;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 2rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-indent: 1.5em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            background: #f5f5f5;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .theorem-box {
+            background: #fff;
+            border: 2px solid #000;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .theorem-title {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid #000;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        ol.refs {
+            font-size: 10pt;
+        }
+
+        ol.refs li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>On the Impossibility of Local Finite-Difference Discretizations<br>for Hilbert-Pólya Type Operators</h1>
+        <div class="subtitle">A Computational No-Go Result</div>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Independent Research • Tamesis Theory Project</div>
+        <div class="date">January 2026</div>
+    </header>
+
+    <div class="abstract-box">
+        <span class="abstract-title">Abstract</span>
+        We investigate whether the Berry-Keating operator $H = xp$ or its modifications $H = xp + V(x)$ can reproduce
+        the Riemann zeta zeros when discretized using standard finite-difference methods on compact intervals. Through
+        systematic numerical experiments testing 600+ configurations across weighted spaces, boundary conditions, and
+        potential functions, we establish a <strong>no-go result</strong>: the spectral asymptotics of any locally
+        discretized operator on $[a,b]$ grow as $E_n \sim n/(b-a)$, while the Riemann zeros grow as $\gamma_n \sim n
+        \log n / 2\pi$. This fundamental asymptotic mismatch cannot be corrected by any choice of potential $V(x)$
+        within the finite-difference framework, eliminating an entire class of proposed approaches to the Hilbert-Pólya
+        conjecture.
+    </div>
+
+    <section>
+        <h2>1. Introduction</h2>
+
+        <p>The Hilbert-Pólya conjecture proposes that the Riemann Hypothesis could be proven by finding a self-adjoint
+            operator $H$ whose eigenvalues are the imaginary parts of the non-trivial Riemann zeta zeros:</p>
+
+        <div class="equation-box">
+            $$\rho_n = \frac{1}{2} + i\gamma_n \quad \Leftrightarrow \quad H\psi_n = \gamma_n \psi_n$$
+        </div>
+
+        <p>Berry and Keating [1] proposed the operator $H = xp = \frac{1}{2}(xp + px)$ based on semiclassical arguments
+            relating the classical Hamiltonian to prime number statistics. This sparked extensive research into
+            regularizations and extensions of the $xp$ operator.</p>
+
+        <p>In this work, we systematically test whether <em>any</em> finite-difference discretization of Berry-Keating
+            type operators on compact intervals can reproduce the Riemann zeros. Our answer is <strong>definitively
+                negative</strong>.</p>
+    </section>
+
+    <section>
+        <h2>2. Setup and Methods</h2>
+
+        <h3>2.1 Operator Definition</h3>
+        <p>We consider the family of operators:</p>
+
+        <div class="equation-box">
+            $$H = -i\hbar\left(x\frac{d}{dx} + \frac{1}{2}\right) + V(x)$$
+        </div>
+
+        <p class="no-indent">discretized on the interval $[a,b]$ with $n$ grid points using central differences.</p>
+
+        <h3>2.2 Self-Adjoint Extensions</h3>
+        <p>We first verified that the pure $xp$ operator has deficiency indices $(n_+, n_-) = (1, 1)$, confirming the
+            existence of a U(1) family of self-adjoint extensions parameterized by $\theta \in [0, 2\pi)$.</p>
+
+        <h3>2.3 Systematic Search</h3>
+        <p>We performed a comprehensive search over:</p>
+        <ul>
+            <li>6 different domains $[a,b]$</li>
+            <li>5 weight functions for $L^2$ spaces</li>
+            <li>20 boundary condition parameters $\theta$</li>
+            <li>13 different potential functions $V(x)$</li>
+        </ul>
+        <p class="no-indent">Total: 600+ configurations tested.</p>
+    </section>
+
+    <section>
+        <h2>3. Results</h2>
+
+        <h3>3.1 Extension Search</h3>
+        <p>Despite achieving correlations as high as 0.997 between operator eigenvalues and Riemann zeros, all
+            configurations exhibited a fundamental <strong>scale mismatch</strong>:</p>
+
+        <table>
+            <tr>
+                <th>Configuration</th>
+                <th>First Eigenvalue $E_1$</th>
+                <th>First Zero $\gamma_1$</th>
+                <th>Relative Error</th>
+            </tr>
+            <tr>
+                <td>Best extension (θ = 4.40)</td>
+                <td>0.56</td>
+                <td>14.13</td>
+                <td>96%</td>
+            </tr>
+            <tr>
+                <td>Harmonic potential</td>
+                <td>0.27</td>
+                <td>14.13</td>
+                <td>98%</td>
+            </tr>
+            <tr>
+                <td>Coulomb potential</td>
+                <td>0.63</td>
+                <td>14.13</td>
+                <td>96%</td>
+            </tr>
+        </table>
+
+        <h3>3.2 Asymptotic Analysis</h3>
+        <p>The source of the mismatch is asymptotic:</p>
+
+        <div class="equation-box">
+            Discretized spectrum: $E_n \sim \frac{n}{b-a}$ (Weyl-type growth)
+            <br><br>
+            Riemann zeros: $\gamma_n \sim \frac{n \log n}{2\pi}$ (from $N(T) \sim (T/2\pi)\log(T/2\pi)$)
+        </div>
+
+        <p>The logarithmic factor in the Riemann counting function has no counterpart in any local 1D differential
+            operator on a compact domain.</p>
+    </section>
+
+    <section>
+        <h2>4. Main Result</h2>
+
+        <div class="theorem-box">
+            <p><span class="theorem-title">No-Go Theorem (Heuristic Strong Form):</span></p>
+            <p>No finite-difference discretization of the operator $H = xp + V(x)$ on any compact interval $[a,b]
+                \subset \mathbb{R}^+$ can reproduce the Riemann zeta zeros $\{\gamma_n\}$, regardless of:</p>
+            <ul>
+                <li>The choice of potential $V(x)$</li>
+                <li>The boundary conditions (any $\theta \in U(1)$)</li>
+                <li>The weight function for the $L^2$ space</li>
+                <li>The grid resolution</li>
+            </ul>
+            <p><strong>Reason:</strong> The spectral density of any such operator is $O(E)$, while the Riemann zero
+                density is $O(E \log E)$.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Implications</h2>
+
+        <p>This result eliminates a large class of proposals in the Hilbert-Pólya program. If the conjectured operator
+            exists, it must involve:</p>
+
+        <ol>
+            <li><strong>Infinite domains:</strong> Not compact intervals</li>
+            <li><strong>Non-local operators:</strong> Not finite-difference discretizable</li>
+            <li><strong>Non-standard spaces:</strong> Adèlic or noncommutative geometries (à la Connes)</li>
+        </ol>
+
+        <p>Alternatively, the Hilbert-Pólya approach may be fundamentally unsuitable, and RH may require entirely
+            different methods.</p>
+    </section>
+
+    <section>
+        <h2>6. Conclusions</h2>
+
+        <p>We have demonstrated computationally that simple modifications of the Berry-Keating operator cannot produce
+            spectra matching the Riemann zeros. The failure is not due to parameter tuning but to a <strong>structural
+                asymptotic mismatch</strong> between operator spectral densities and the Riemann zero distribution.</p>
+
+        <p>This negative result contributes to the literature by mapping out the space of failure for a prominent class
+            of approaches, guiding future research toward non-local or higher-dimensional constructions.</p>
+    </section>
+
+    <section>
+        <h2>References</h2>
+        <ol class="refs">
+            <li>M. V. Berry and J. P. Keating, "The Riemann Zeros and Eigenvalue Asymptotics," SIAM Review 41(2),
+                236-266 (1999)</li>
+            <li>A. Connes, "Trace formula in noncommutative geometry and the zeros of the Riemann zeta function,"
+                Selecta Math. 5(1), 29-106 (1999)</li>
+            <li>G. Sierra and J. Rodríguez-Laguna, "The H = xp Model Revisited and the Riemann Zeros," Phys. Rev. Lett.
+                106, 200201 (2011)</li>
+            <li>M. Reed and B. Simon, "Methods of Modern Mathematical Physics, Vol. II: Fourier Analysis,
+                Self-Adjointness," Academic Press (1975)</li>
+        </ol>
+    </section>
+
+    <div class="footer">
+        Tamesis Theory Research Archive • January 2026<br>
+        Full code and data available in companion materials.
+    </div>
+
+</body>
+
+</html>

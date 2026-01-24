@@ -4,187 +4,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamesis Theory Complete Research Archive - Dashboard</title>
+    <title>Tamesis Theory Complete Research Archive</title>
+    <!-- Ivy League Typography: Playfair Display (Serif) + Lato (Sans) -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Source+Code+Pro:wght@500&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0c10;
-            --card-bg: #1f2833;
-            --text-main: #c5c6c7;
-            --accent-cyan: #66fcf1;
-            --accent-dark: #45a29e;
-            --tri-color: #ff6b6b;
-            --tdtr-color: #4ecdc4;
-            --tamesis-color: #ffe66d;
+            /* Palette: Deep Navy, Cardinal Red, Warm Grey */
+            --primary-navy: #002147;
+            /* Classic Academic Blue */
+            --primary-crimson: #8C1515;
+            /* Stanford Red */
+            --accent-gold: #B3A369;
+            /* Prestige Gold */
+
+            --bg-color: #fdfdfd;
+            /* Paper White */
+            --bg-offset: #f4f4f4;
+            /* Light Grey */
+
+            --text-main: #222222;
+            --text-muted: #666666;
+
+            --border-color: #e0e0e0;
+            --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Lato', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            border-top: 5px solid var(--primary-crimson);
+            /* Top accent bar */
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
+        /* HEADER SECTION */
         header {
             text-align: center;
             margin-bottom: 4rem;
-            border-bottom: 2px solid var(--accent-dark);
             padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         h1 {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 2.5rem;
-            color: var(--accent-cyan);
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-navy);
             margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            color: var(--accent-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
         }
 
-        .badges {
-            margin-top: 1rem;
+        .metadata-row {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
-        .badge {
-            background: var(--card-bg);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: 1px solid var(--accent-dark);
+        .metadata-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* Animations Grid */
-        .visual-header {
+        .metadata-item span {
+            color: var(--primary-crimson);
+        }
+
+        /* VISUAL GALLERY */
+        .visual-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .figure-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .figure-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .figure-caption {
+            padding: 1rem 0.5rem 0.5rem 0.5rem;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .figure-caption strong {
+            display: block;
+            color: var(--primary-navy);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* PAPERS SECTION */
+        .program-section {
             margin-bottom: 4rem;
         }
 
-        .anim-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #333;
-            transition: transform 0.2s;
-        }
-
-        .anim-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-        }
-
-        .anim-card img {
-            width: 100%;
-            display: block;
-        }
-
-        .anim-label {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .anim-tri {
-            color: var(--tri-color);
-            border-top: 3px solid var(--tri-color);
-        }
-
-        .anim-tdtr {
-            color: var(--tdtr-color);
-            border-top: 3px solid var(--tdtr-color);
-        }
-
-        .anim-tamesis {
-            color: var(--tamesis-color);
-            border-top: 3px solid var(--tamesis-color);
-        }
-
-        /* Content Sections */
-        .section-title {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1.8rem;
-            color: white;
-            margin-top: 4rem;
-            margin-bottom: 1.5rem;
+        .section-header {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 1rem;
+            border-bottom: 2px solid var(--primary-navy);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
         }
 
-        .section-title span {
-            opacity: 0.5;
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--border-color);
+            /* Subtle number */
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        .section-desc {
             font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
         }
 
-        .paper-grid {
+        .paper-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
         }
 
-        .paper-link {
-            display: block;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 6px;
+        .paper-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
             text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .paper-item:hover {
+            border-color: var(--primary-navy);
+            box-shadow: 0 4px 12px rgba(0, 33, 71, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .paper-id {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            background: var(--bg-offset);
+            align-self: flex-start;
+            padding: 0.2rem 0.5rem;
+            border-radius: 2px;
+        }
+
+        .paper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
             color: var(--text-main);
-            border-left: 3px solid transparent;
-            transition: all 0.2s;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
-        .paper-link:hover {
-            background: #2a3642;
-            padding-left: 1.5rem;
-            border-left-color: var(--accent-cyan);
-            color: white;
-        }
-
-        .paper-code {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--accent-dark);
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
+        /* Variants */
         .breakthrough {
-            border: 1px solid var(--accent-cyan);
-            background: rgba(102, 252, 241, 0.05);
+            border-top: 3px solid var(--primary-crimson);
         }
 
-        .breakthrough .paper-code {
-            color: var(--accent-cyan);
+        .breakthrough .paper-id {
+            color: var(--primary-crimson);
+            background: rgba(140, 21, 21, 0.05);
             font-weight: bold;
         }
 
         footer {
-            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
             text-align: center;
-            font-size: 0.8rem;
-            color: #555;
-            padding-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-muted);
+        }
+
+        .university-seal {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -193,158 +242,203 @@
 
     <div class="container">
         <header>
-            <h1>Tamesis Theory Archive</h1>
-            <div class="subtitle">Complete Research Program (2024-2026)</div>
-            <div class="badges">
-                <div class="badge">STATUS: COMPLETE</div>
-                <div class="badge">FILES: 140+</div>
-                <div class="badge">LICENSE: MIT</div>
+            <h1>The Tamesis Theory Archive</h1>
+            <div class="subtitle">A Complete Record of the Quest for Unification (2024-2026)</div>
+
+            <div class="metadata-row">
+                <div class="metadata-item"><span>Status:</span> Closed</div>
+                <div class="metadata-item"><span>Artifacts:</span> 140</div>
+                <div class="metadata-item"><span>Principal Investigator:</span> Douglas H. M. Fulber</div>
             </div>
         </header>
 
-        <!-- Visual Header -->
-        <div class="visual-header">
-            <div class="anim-card anim-tri">
+        <!-- Visual Abstract -->
+        <div class="visual-gallery">
+            <div class="figure-card">
                 <img src="animations/TRI_Infinite_Loop.gif" alt="TRI Loop">
-                <div class="anim-label">TRI: Incompatibility</div>
+                <div class="figure-caption">
+                    <strong>Figure 1: Regime Incompatibility</strong>
+                    Reaction-diffusion dynamics simulating the non-mixing of distinct physical vacuum phases.
+                </div>
             </div>
-            <div class="anim-card anim-tdtr">
+            <div class="figure-card">
                 <img src="animations/TDTR_Infinite_Loop.gif" alt="TDTR Loop">
-                <div class="anim-label">TDTR: Time Flow</div>
+                <div class="figure-caption">
+                    <strong>Figure 2: Thermodynamic Time</strong>
+                    Visualizing the "Arrow of Time" as an irreversible entropic drift on the holographic screen.
+                </div>
             </div>
-            <div class="anim-card anim-tamesis">
+            <div class="figure-card">
                 <img src="animations/TAMESIS_Infinite_Loop.gif" alt="Tamesis Loop">
-                <div class="anim-label">TAMESIS: Structure</div>
+                <div class="figure-caption">
+                    <strong>Figure 3: Spectral Geometry</strong>
+                    The Tamesis System: Prime geodesics rotating on the Poincaré disk, representing invariant laws.
+                </div>
             </div>
         </div>
 
         <!-- PART 1 -->
-        <h2 class="section-title">01. TAMESIS CORE <span>(Foundation)</span></h2>
-        <div class="paper-grid">
-            <a href="TAMESIS/01_Foundation_ToE/unified_papers.html" class="paper-link breakthrough">
-                <span class="paper-code">FOUNDATION</span>
-                Unified Foundation Papers
-            </a>
-            <a href="TAMESIS/42_Closure_Paper/index.html" class="paper-link breakthrough">
-                <span class="paper-code">CLOSURE</span>
-                System Closure & Axioms
-            </a>
-            <a href="TAMESIS/34_Spectral_Theory_Computation/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 34</span>
-                Spectral Engine Computation
-            </a>
-            <a href="TAMESIS/28_Graph_Zeta_Primes/index.html" class="paper-link">
-                <span class="paper-code">STAGE 28</span>
-                Graph Zeta Primes
-            </a>
-            <a href="TAMESIS/29_Chaotic_Flow_Primes/index.html" class="paper-link">
-                <span class="paper-code">STAGE 29</span>
-                Chaotic Flow & Geodesics
-            </a>
-            <a href="TAMESIS/30_Computational_Primes/index.html" class="paper-link">
-                <span class="paper-code">STAGE 30</span>
-                Computational Primes
-            </a>
-            <a href="TAMESIS/31_Euclidean_Spectral_Operator/index.html" class="paper-link">
-                <span class="paper-code">STAGE 31</span>
-                Euclidean Operator
-            </a>
-            <a href="TAMESIS/32_Complexity_As_Prime_Count/index.html" class="paper-link">
-                <span class="paper-code">STAGE 32</span>
-                Complexity & Prime Count
-            </a>
-            <a href="TAMESIS/41_Universality_Atlas/index.html" class="paper-link">
-                <span class="paper-code">STAGE 41</span>
-                Universality Atlas
-            </a>
+        <div class="program-section">
+            <div class="section-header">
+                <div class="section-number">I.</div>
+                <div>
+                    <div class="section-title">Tamesis Core</div>
+                    <div class="section-desc">Foundations, Spectral Geometry, and Number Theory</div>
+                </div>
+            </div>
+            <div class="paper-list">
+                <a href="TAMESIS/01_Foundation_ToE/unified_papers.html" class="paper-item breakthrough">
+                    <div class="paper-id">FOUNDATION</div>
+                    <div class="paper-title">Unified Foundation Papers</div>
+                </a>
+                <a href="TAMESIS/42_Closure_Paper/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">CLOSURE</div>
+                    <div class="paper-title">System Closure & Final Axioms</div>
+                </a>
+                <a href="TAMESIS/34_Spectral_Theory_Computation/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 34</div>
+                    <div class="paper-title">Spectral Engine Computation</div>
+                </a>
+                <a href="TAMESIS/28_Graph_Zeta_Primes/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 28</div>
+                    <div class="paper-title">Graph Zeta Primes</div>
+                </a>
+                <a href="TAMESIS/29_Chaotic_Flow_Primes/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 29</div>
+                    <div class="paper-title">Chaotic Flow & Geodesics</div>
+                </a>
+                <a href="TAMESIS/30_Computational_Primes/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 30</div>
+                    <div class="paper-title">Computational Primes</div>
+                </a>
+                <a href="TAMESIS/31_Euclidean_Spectral_Operator/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 31</div>
+                    <div class="paper-title">The Euclidean Operator</div>
+                </a>
+                <a href="TAMESIS/32_Complexity_As_Prime_Count/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 32</div>
+                    <div class="paper-title">Complexity as Prime Count</div>
+                </a>
+                <a href="TAMESIS/41_Universality_Atlas/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 41</div>
+                    <div class="paper-title">The Universality Atlas</div>
+                </a>
+            </div>
         </div>
 
         <!-- PART 2 -->
-        <h2 class="section-title" style="color: var(--tri-color)">02. TRI PROGRAM <span>(Logic)</span></h2>
-        <div class="paper-grid">
-            <a href="TRI/51_TRI_Founding_Paper/paper.html" class="paper-link breakthrough">
-                <span class="paper-code">FOUNDING</span>
-                Theory of Regime Incompatibility
-            </a>
-            <a href="TRI/47_NoGo_Theorems/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 47</span>
-                No-Go Theorems
-            </a>
-            <a href="TRI/43_Regime_Definition/index.html" class="paper-link">
-                <span class="paper-code">STAGE 43</span>
-                Regime Definition
-            </a>
-            <a href="TRI/46_Compatibility_Criterion/index.html" class="paper-link">
-                <span class="paper-code">STAGE 46</span>
-                Compatibility Criterion
-            </a>
-            <a href="TRI/49_Transition_Theory/index.html" class="paper-link">
-                <span class="paper-code">STAGE 49</span>
-                Transition Theory
-            </a>
-            <a href="TRI/52_Closure_Open_Problems/index.html" class="paper-link">
-                <span class="paper-code">STAGE 52</span>
-                Closure & Open Problems
-            </a>
+        <div class="program-section">
+            <div class="section-header">
+                <div class="section-number">II.</div>
+                <div>
+                    <div class="section-title">The TRI Program</div>
+                    <div class="section-desc">Theory of Regime Incompatibility & No-Go Theorems</div>
+                </div>
+            </div>
+            <div class="paper-list">
+                <a href="TRI/51_TRI_Founding_Paper/paper.html" class="paper-item breakthrough">
+                    <div class="paper-id">FOUNDING PAPER</div>
+                    <div class="paper-title">Theory of Regime Incompatibility</div>
+                </a>
+                <a href="TRI/47_NoGo_Theorems/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 47</div>
+                    <div class="paper-title">The No-Go Theorems</div>
+                </a>
+                <a href="TRI/43_Regime_Definition/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 43</div>
+                    <div class="paper-title">Regime Definition Formalism</div>
+                </a>
+                <a href="TRI/46_Compatibility_Criterion/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 46</div>
+                    <div class="paper-title">Compatibility Criterion</div>
+                </a>
+                <a href="TRI/49_Transition_Theory/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 49</div>
+                    <div class="paper-title">Transition Mechanics</div>
+                </a>
+                <a href="TRI/52_Closure_Open_Problems/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 52</div>
+                    <div class="paper-title">Closure & Open Problems</div>
+                </a>
+            </div>
         </div>
 
         <!-- PART 3 -->
-        <h2 class="section-title" style="color: var(--tdtr-color)">03. TDTR PROGRAM <span>(Dynamics)</span></h2>
-        <div class="paper-grid">
-            <a href="TDTR/76_TDTR_Founding_Paper/tdtr_paper.html" class="paper-link breakthrough">
-                <span class="paper-code">FOUNDING</span>
-                Thermodynamic Time Reversal
-            </a>
-            <a href="TDTR/56_Fundamental_Directionality/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 56</span>
-                Irreversibility Proof
-            </a>
-            <a href="TDTR/67_QFT_to_GR/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 67</span>
-                QFT to GR Transition
-            </a>
-            <a href="TDTR/53_Transition_Definition/index.html" class="paper-link">
-                <span class="paper-code">STAGE 53</span>
-                Transition Operator
-            </a>
-            <a href="TDTR/63_Arrows_of_Time/index.html" class="paper-link">
-                <span class="paper-code">STAGE 63</span>
-                Arrows of Time Unified
-            </a>
-            <a href="TDTR/72_Transition_Atlas/index.html" class="paper-link">
-                <span class="paper-code">STAGE 72</span>
-                Transition Atlas
-            </a>
+        <div class="program-section">
+            <div class="section-header">
+                <div class="section-number">III.</div>
+                <div>
+                    <div class="section-title">The TDTR Program</div>
+                    <div class="section-desc">Thermodynamics, Time Reversal, and Dynamics</div>
+                </div>
+            </div>
+            <div class="paper-list">
+                <a href="TDTR/76_TDTR_Founding_Paper/tdtr_paper.html" class="paper-item breakthrough">
+                    <div class="paper-id">FOUNDING PAPER</div>
+                    <div class="paper-title">Thermodynamic Time Reversal</div>
+                </a>
+                <a href="TDTR/56_Fundamental_Directionality/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 56</div>
+                    <div class="paper-title">Proof of Irreversibility</div>
+                </a>
+                <a href="TDTR/67_QFT_to_GR/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 67</div>
+                    <div class="paper-title">The QFT to GR Transition</div>
+                </a>
+                <a href="TDTR/53_Transition_Definition/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 53</div>
+                    <div class="paper-title">The Transition Operator</div>
+                </a>
+                <a href="TDTR/63_Arrows_of_Time/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 63</div>
+                    <div class="paper-title">Unified Arrows of Time</div>
+                </a>
+                <a href="TDTR/72_Transition_Atlas/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 72</div>
+                    <div class="paper-title">Atlas of Physical Transitions</div>
+                </a>
+            </div>
         </div>
 
         <!-- PART 4 -->
-        <h2 class="section-title">04. VALIDATION <span>(Simulations)</span></h2>
-        <div class="paper-grid">
-            <a href="TDTR/79_Entropic_Galaxy_Sim/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 79</span>
-                Galaxy Rotation Curves
-            </a>
-            <a href="TDTR/86_Final_Archive/index.html" class="paper-link breakthrough">
-                <span class="paper-code">STAGE 86</span>
-                Grand Finale Archive
-            </a>
-            <a href="TDTR/81_Validation/index.html" class="paper-link">
-                <span class="paper-code">STAGE 81</span>
-                Validation Limits
-            </a>
-            <a href="TDTR/82_Emergent_Newton/index.html" class="paper-link">
-                <span class="paper-code">STAGE 82</span>
-                Emergent Newton
-            </a>
-            <a href="TDTR/83_Emergent_Cosmology/index.html" class="paper-link">
-                <span class="paper-code">STAGE 83</span>
-                Emergent Cosmology
-            </a>
+        <div class="program-section">
+            <div class="section-header">
+                <div class="section-number">IV.</div>
+                <div>
+                    <div class="section-title">Validation & Simulations</div>
+                    <div class="section-desc">Numerical Proofs and Experimental Matches</div>
+                </div>
+            </div>
+            <div class="paper-list">
+                <a href="TDTR/79_Entropic_Galaxy_Sim/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 79</div>
+                    <div class="paper-title">Galaxy Rotation Curves</div>
+                </a>
+                <a href="TDTR/86_Final_Archive/index.html" class="paper-item breakthrough">
+                    <div class="paper-id">STAGE 86</div>
+                    <div class="paper-title">The Grand Finale Archive</div>
+                </a>
+                <a href="TDTR/81_Validation/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 81</div>
+                    <div class="paper-title">Validation Limits</div>
+                </a>
+                <a href="TDTR/82_Emergent_Newton/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 82</div>
+                    <div class="paper-title">Emergent Newton</div>
+                </a>
+                <a href="TDTR/83_Emergent_Cosmology/index.html" class="paper-item">
+                    <div class="paper-id">STAGE 83</div>
+                    <div class="paper-title">Emergent Cosmology</div>
+                </a>
+            </div>
         </div>
 
         <footer>
-            <p>Tamesis Theory Archive • Douglas H. M. Fulber • 2026</p>
-            <p><a href="TAMESIS_THEORY_MASTER_CATALOG.md" style="color: #666">View Full Catalog File</a></p>
+            <div class="university-seal">Federal University of Rio de Janeiro</div>
+            <p>&copy; 2026 Tamesis Theory Research Group. All rights reserved.</p>
+            <p><a href="TAMESIS_THEORY_MASTER_CATALOG.md"
+                    style="color: var(--primary-crimson); text-decoration: none; font-weight: bold;">View Master
+                    Catalog</a></p>
         </footer>
     </div>
 

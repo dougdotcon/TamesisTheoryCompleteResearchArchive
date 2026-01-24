@@ -94,8 +94,13 @@
 
         .equation {
             text-align: center;
-            margin: 0.8rem 0;
+            margin: 1.5rem 0;
             font-size: 10pt;
+            column-span: all;
+            /* Spans both columns */
+            break-inside: avoid;
+            background: #fff;
+            /* Ensure background covers text behind if any */
         }
 
         .code-block {
@@ -124,7 +129,8 @@
         .references li {
             margin-bottom: 0.2rem;
         }
-    
+
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -139,82 +145,202 @@
             z-index: 1000;
         }
 
+        /* Algorithm Box Style */
+        .algorithm-box {
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 0.5rem 0;
+            margin: 1.5rem 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 9pt;
+            break-inside: avoid;
+        }
+
+        .algorithm-caption {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .algorithm-body {
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+        }
+
+        .algorithm-body ol {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .algorithm-body ul {
+            margin: 0;
+            padding-left: 1.0rem;
+        }
+
+        .kw {
+            font-weight: bold;
+        }
+
+        /* Keywords */
     </style>
+
 </head>
 
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
     <header>
         <h1>Spectral Reconstruction of Spacetime: Algorithm and Computation</h1>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro,
+            Rio de Janeiro,
+            Brazil</div>
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
+    <div class="abstract">We detail the computational algorithm used to reconstruct the geometry of spacetime from its
+        spectral data. By inverting the Selberg Trace Formula,
+        we demonstrate how the distribution of prime geodesics (topological cycles) uniquely determines the manifold's
+        shape. We present the "Tamesis Spectral Engine," a numerical framework that
+        calculates the first 10,
+        000 eigenvalues of the Laplacian on the modular surface $SL(2, \mathbb {
+        Z
 
-    <div class="abstract">
-        We detail the computational algorithm used to reconstruct the geometry of spacetime from its spectral data. By
-        inverting the Selberg Trace Formula, we demonstrate how the distribution of prime geodesics (topological cycles)
-        uniquely determines the manifold's shape. We present the "Tamesis Spectral Engine," a numerical framework that
-        calculates the first 10,000 eigenvalues of the Laplacian on the modular surface $SL(2,\mathbb{Z}) \backslash
-        \mathbb{H}$
-        and extracts the corresponding physical constants with high precision.
-    </div>
+        }) \backslash \mathbb {
+        H
+        }
 
+        $ and extracts the corresponding physical constants with high precision. </div>
     <div class="content-wrapper">
         <p class="no-indent">The central claim of the Tamesis Theory is that physics is the spectral geometry of a
-            specific
-            hyperbolic manifold. This paper provides the rigorous computational evidence for this claim.</p>
-
+            specific hyperbolic manifold. This paper provides the rigorous computational evidence for this claim.</p>
         <h2>The Inverse Spectral Problem</h2>
-
         <p class="no-indent">Kac's famous question "Can one hear the shape of a drum?" asks if the spectrum determines
-            the
-            geometry. For hyperbolic surfaces, the answer is given by the Selberg Trace Formula:</p>
+            the geometry. For hyperbolic surfaces,
+            the answer is given by the Selberg Trace Formula:</p>
+        <div class="equation">$$ \sum_ {
+            n
+            }
 
-        <div class="equation">
-            $$ \sum_{n} h(r_n) = \frac{\text{Vol}(\mathcal{M})}{4\pi} \int_{-\infty}^\infty r h(r) \tanh(\pi r) dr +
-            \sum_{\{P\}} \dots $$
-        </div>
+            h(r_n)=\frac {
+            \text {
+            Vol
+            }
 
+            (\mathcal {
+            M
+            })
+            }
+
+            {
+            4\pi
+            }
+
+            \int_ {
+            -\infty
+            }
+
+            ^\infty r h(r) \tanh(\pi r) dr+\sum_ {
+            \{P\}
+            }
+
+            \dots $$ </div>
         <p>The LHS is the quantum spectrum (Energy levels). The RHS is the geometric length spectrum (Closed Geodesics).
-            The "primes" $\{P\}$ of the geometry correspond to the fundamental forces.</p>
-
+            The "primes"$\{P\}$ of the geometry correspond to the fundamental forces.</p>
         <h2>The Algorithm</h2>
-
         <p class="no-indent">Our computational approach involves three steps:</p>
-        <p>1. <strong>Eigenvalue Generation:</strong> We use the Hejhal-Maass algorithm to compute the zeroes of the
+        <p>1. <strong>Eigenvalue Generation:</strong>We use the Hejhal-Maass algorithm to compute the zeroes of the
             Selberg Zeta function $Z(s)$.</p>
-        <p>2. <strong>Trace Regularization:</strong> We apply spectral smoothing to remove high-frequency noise and
+        <p>2. <strong>Trace Regularization:</strong>We apply spectral smoothing to remove high-frequency noise and
             isolate the "low-lying" topology (the Standard Model sector).</p>
-        <p>3. <strong>Constant Extraction:</strong> We match the spectral gaps $\Delta \lambda_n$ to the physical
-            coupling
-            constants ($\alpha, G_F, \alpha_s$).</p>
+        <p>3. <strong>Constant Extraction:</strong>We match the spectral gaps $\Delta \lambda_n$ to the physical
+            coupling constants ($\alpha, G_F, \alpha_s$).</p>
+        <div class="algorithm-box">
+            <div class="algorithm-caption"><strong>Algorithm 1:</strong>Tamesis Spectral Reconstruction</div>
+            <div class="algorithm-body">
+                <div><strong>Input:</strong>Momentum limit $\Lambda_ {
+                    \text {
+                    cut
+                    }
+                    }
 
-        <div class="code-block">
-            # Tamesis Core Spectral Kernel (Pseudocode)
-            def compute_spectrum(limit=10000):
-            zeros = find_zeta_zeros(limit)
-            geometry = inverse_trace(zeros)
-            couplings = extract_gaps(geometry)
-            return couplings
+                    $</div>
+                <div><strong>Output:</strong>Set of physical couplings $\{\alpha_i\}$</div>
+                <ol>
+                    <li>Compute non-trivial zeros $\rho_n =\frac {
+                        1
+                        }
+
+                        {
+                        2
+                        }
+
+                        +i r_n$ of $\zeta(s)$ up to $\Lambda_ {
+                        \text {
+                        cut
+                        }
+                        }
+
+                        $ using Hejhal-Maass method.</li>
+                    <li>Construct the spectral counting function $N(r)=\#\{n : r_n \le r\}$.</li>
+                    <li>Invert the Selberg Trace to find geometric length spectrum: $$ \Gamma_ {
+                        \text {
+                        geom
+                        }
+                        }
+
+                        =\mathcal {
+                        F
+                        }
+
+                        ^ {
+                        -1
+                        }
+
+                        [ N(r) - N_ {
+                        \text {
+                        Weyl
+                        }
+                        }
+
+                        (r)] $$ </li>
+                    <li>Extract prime geodesic lengths $\{ l_p \} \subset \Gamma_ {
+                        \text {
+                        geom
+                        }
+                        }
+
+                        $.</li>
+                    <li><span class="kw">for each</span>significant spectral gap $\delta_k$ <span class="kw">do</span>
+                        <ul>
+                            <li>Identify corresponding topological cycle $C_k$ in $\{l_p\}$.</li>
+                            <li>Compute coupling $\alpha_k \sim \exp(-\text {
+                                Length
+                                }
+
+                                (C_k))$.</li>
+                        </ul>
+                    </li>
+                    <li><span class="kw">return</span>$\{\alpha_i\}$</li>
+                </ol>
+            </div>
         </div>
-
         <h2>Results: The Standard Model from Noise</h2>
-
         <p class="no-indent">Running the simulation yields a discrete spectrum of mass ratios matching the lepton and
             quark generations. The "noise" in the Riemann Zeta zeros effectively encodes the mass distribution of the
             universe.</p>
-
         <p>This confirms the key Tamesis hypothesis: <strong>Elementary particles are the resonances of the
-                number-theoretic
-                structure of the void.</strong></p>
-
+                number-theoretic structure of the void.</strong></p>
         <div class="references">
             <h2>References</h2>
             <ol>
-                <li>D. H. M. Fulber, <em>The Tamesis Theory</em> (2026).</li>
-                <li>D. Hejhal, <em>The Selberg Trace Formula for PSL(2,R)</em> (Springer, 1976).</li>
-                <li>A. Odlyzko, <em>On the distribution of spacings between zeros of the zeta function</em> (1987).</li>
+                <li>D. H. M. Fulber,
+                    <em>The Tamesis Theory</em>(2026).
+                </li>
+                <li>D. Hejhal,
+                    <em>The Selberg Trace Formula for PSL(2, R)</em>(Springer, 1976).
+                </li>
+                <li>A. Odlyzko,
+                    <em>On the distribution of spacings between zeros of the zeta function</em>(1987).
+                </li>
             </ol>
         </div>
     </div>

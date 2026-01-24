@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,14 @@
             padding: 1.5cm;
             background-color: #fff;
         }
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,17 +40,40 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
-        .abstract {
-            font-weight: bold;
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
             font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
         }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +83,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +91,66 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
-        /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 10pt;
+            column-span: all;
+            background: #fff;
+        }
+
+        /* Verdict Box */
+        .verdict-box {
+            border: 2px solid #d32f2f;
+            background-color: #ffebee;
+            color: #b71c1c;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+            break-inside: avoid;
+            column-span: all;
+            /* Important for visibility */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+            break-inside: avoid;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
+        caption {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-size: 9pt;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,9 +158,16 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
-    
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -104,11 +181,13 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
+
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
         <h1>Stage 35: Unified Constants Derivation - REFUTATION</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -116,17 +195,13 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We report the failure of the "Tamesis Action" to provide a unified derivation of the cosmological constant
+    <div class="abstract-container">
+        <strong>Abstract.</strong> We report the failure of the "Tamesis Action" to provide a unified derivation of the
+        cosmological constant
         $\Lambda$, the MOND acceleration $a_0$, and the critical collapse mass $M_c$ from a single holographic radius
         $R_H$. While $\Lambda$ is consistent with the de Sitter horizon by definition, and $a_0$ shows an
-        order-of-magnitude
-        coincidence, the derived value for $M_c$ diverges from observation by 24 orders of magnitude ($10^9$ kg vs
+        order-of-magnitude coincidence, the derived value for $M_c$ diverges from observation by 24 orders of magnitude
+        ($10^9$ kg vs
         $10^{-14}$ kg). This catastrophic failure refutes the central hypothesis of the Tamesis Action as a Theory of
         Everything, demonstrating that quantum wavefunction collapse is a local phenomenon independent of cosmological
         scales.
@@ -158,30 +233,34 @@
 
         <table>
             <caption>TABLE I. Comparison of Theory vs Observation</caption>
-            <tr>
-                <th>Parameter</th>
-                <th>Derived ($R_H$)</th>
-                <th>Observed</th>
-                <th>Status</th>
-            </tr>
-            <tr>
-                <td>$\Lambda$</td>
-                <td>$1.6 \times 10^{-52}$ m$^{-2}$</td>
-                <td>$1.1 \times 10^{-52}$ m$^{-2}$</td>
-                <td>Passed</td>
-            </tr>
-            <tr>
-                <td>$a_0$</td>
-                <td>$6.6 \times 10^{-10}$ m/s$^2$</td>
-                <td>$1.2 \times 10^{-10}$ m/s$^2$</td>
-                <td>Failed (5x)</td>
-            </tr>
-            <tr>
-                <td>$M_c$</td>
-                <td>$10^{9}$ kg</td>
-                <td>$10^{-14}$ kg</td>
-                <td><strong>Refuted</strong> ($10^{23}$x)</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Derived ($R_H$)</th>
+                    <th>Observed</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$\Lambda$</td>
+                    <td>$1.6 \times 10^{-52}$ m$^{-2}$</td>
+                    <td>$1.1 \times 10^{-52}$ m$^{-2}$</td>
+                    <td>Passed</td>
+                </tr>
+                <tr>
+                    <td>$a_0$</td>
+                    <td>$6.6 \times 10^{-10}$ m/s$^2$</td>
+                    <td>$1.2 \times 10^{-10}$ m/s$^2$</td>
+                    <td>Failed (5x)</td>
+                </tr>
+                <tr>
+                    <td>$M_c$</td>
+                    <td>$10^{9}$ kg</td>
+                    <td>$10^{-14}$ kg</td>
+                    <td><strong>Refuted</strong> ($10^{23}$x)</td>
+                </tr>
+            </tbody>
         </table>
 
         <h2>Analysis of the Failure</h2>
@@ -198,12 +277,16 @@
             geometry, but $M_c$ is an independent local scale. Unification of these three requires a theory that
             accommodates
             independent regimes [3], not a single holographic formula.</p>
-<div class="references"><h2>References</h2>
+
+        <div class="references">
+            <h2>References</h2>
             <ol>
                 <li>D. H. M. Fulber, <em>Tamesis Action Postulate</em> (Preprint, 2026).</li>
                 <li>L. Diosi, Phys. Rev. A <strong>40</strong>, 1165 (1989).</li>
                 <li>D. H. M. Fulber, <em>Theory of Regime Incompatibility</em> (2026).</li>
-            </ol></div>
+            </ol>
+        </div>
     </div>
 </body>
+
 </html>

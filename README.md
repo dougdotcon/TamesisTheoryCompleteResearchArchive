@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-Final_Release_1.0-grey?style=for-the-badge)
 ![Papers](https://img.shields.io/badge/Artifacts-140+-orange?style=for-the-badge)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18357364.svg)](https://doi.org/10.5281/zenodo.18357364)
 
 ## Abstract
 

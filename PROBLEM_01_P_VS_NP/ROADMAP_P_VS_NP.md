@@ -88,18 +88,24 @@ $$ \textbf{Efficient Computation} \subsetneq \textbf{Abstract Computation} $$
 
 ---
 
-## 📘 TRACK B — FORMALIZATION & PUBLICATION
+## 🧱 TRACK B — SYSTEM CLOSURE (THE TRINITY)
 
-### B1. New Fundamental Principle
+**Objective:** Formalize the result not as a "Proof of P!=NP", but as a "Thermodynamic Censorship Theorem".
 
-**Name**: **Complexity Censorship Principle (CCP)**
-> "The physical structure of the universe censors the efficient execution of algorithms requiring global entropy reduction beyond polynomial limits."
+### B1. Document Separation
 
-### B2. The Paper
+- [x] **Document A (Math)**: `PAPER_A_COMPLEXITY_CENSORSHIP.md`
+  - *Content*: Formal definition of "Physically Realizable Computation". The Censorship Theorem.
+  - *Axioms*: Causal Time, Finite Precision, Non-Zero Noise Cost.
+- [x] **Document B (Physics)**: `PAPER_B_THERMODYNAMIC_FRAMEWORK.md`
+  - *Content*: Landauer's Principle, The "Entropic Demon" argument, The adiabatic divergence.
+- [x] **Document C (Code)**: `PAPER_C_EXPERIMENTAL_EVIDENCE.md`
+  - *Content*: The K-SAT $\to$ Ising mapping. Simulation results (Scaling $\Delta \sim e^{-N}$, Noise Threshold).
 
-- [ ] **Structure**: Definitions $\to$ Theorems $\to$ Experiments.
-- [ ] **Tone**: Neutral, rigorous physical argument.
-- [ ] **Separation**: Math $\neq$ Physics. Existence $\neq$ Executability.
+### B2. The Formal Statement
+>
+> **Theorem (Thermodynamic Censorship):**
+> No physical system subject to finite thermal noise ($T > 0$) and causal time constraints can execute a solution to an **NP-Complete** problem with polynomial energy resources and bounded error, as $N \to \infty$.
 
 ---
 
@@ -107,4 +113,4 @@ $$ \textbf{Efficient Computation} \subsetneq \textbf{Abstract Computation} $$
 
 We do not say: "P != NP"
 We say:
-**"Even if P=NP is mathematically true, it creates no realizable computational power in any known physical universe."**
+**"Even if P=NP is mathematically true, it creates no realizable computational power in any known physical universe due to Thermodynamic Censorship."**

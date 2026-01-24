@@ -1,92 +1,98 @@
-# The Tamesis Theory Complete Research Archive
+# Program of Metatheoretical Research on Structural Solvability
 
-![Status](https://img.shields.io/badge/Status-Program_Complete-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-Final_Release_1.0-grey?style=for-the-badge)
-![Papers](https://img.shields.io/badge/Artifacts-140+-orange?style=for-the-badge)
+## (formerly The Tamesis Theory Archive)
+
+![Status](https://img.shields.io/badge/Status-Metatheoretical_Program-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-grey?style=for-the-badge)
+![Scope](https://img.shields.io/badge/Scope-Foundations_of_Mathematics-orange?style=for-the-badge)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18357364.svg)](https://doi.org/10.5281/zenodo.18357364)
 
-## Abstract
+---
 
-This repository constitutes the definitive archival record of the "Tamesis" research initiative (2024-2026). The project aimed to unify Quantum Mechanics and General Relativity through Spectral Geometry but concluded with a radical restructuring of physical foundations. The result is the **Theory of Regime Incompatibility (TRI)** and its dynamic extension, **Thermodynamic Time Reversal (TDTR)**.
+## 📜 The Manifesto: What This Repository Is
 
-This archive contains over 140 formal documents, derivations, and simulations proving that "Unification" is mathematically impossible, and that the universe is instead governed by irreversible transitions between incompatible vacuum regimes.
+This repository contains the artifacts of an interdisciplinary research program investigating the **Limits of Mathematical Solvability** under physical constraints.
+
+### ✅ What This Is
+
+* A **Meta-Theoretical Framework** classifying mathematical problems based on the topology of their solution spaces.
+* A formal distinction between **Class A (Rigid)** problems (solvable by geometric exclusion) and **Class B (Universal)** problems (resistant to exclusion, requiring thermodynamic selection).
+* A collection of **Barrier Theorems** suggesting why classical methods fail for problems like $P \text{ vs } NP$ and the Riemann Hypothesis.
+* A library of **Computational Evidence** simulating these structural barriers.
+
+### ❌ What This Is NOT
+
+* It is **NOT** a claim of having "solved" the Millennium Problems in the classical sense (ZFC derivation).
+* It is **NOT** a "Theory of Everything" unifying Gravity and Quantum Mechanics (though it discusses their incompatibility).
+* It is **NOT** a repository of "crank" proofs. All claims are conditional: *"If physically realizable, then stable."*
 
 ---
 
-## 1. Visual Synthesis of the Theory
+## 🏛️ The Architecture
 
-The following simulations visually summarize the three core pillars of the framework.
+The research is organized into three hierarchical layers:
 
-### I. Theory of Regime Incompatibility (TRI)
+### 1. The Core Theory: Thermodynamic Structuralism
 
-The universe is not a single continuous manifold. It is a quilt of distinct, incompatible physical regimes (phases). These regimes cannot interact directly; they are separated by domain walls where the laws of physics break down.
+* **Location:** [`THEORY_THERMODYNAMIC_STRUCTURALISM`](THEORY_THERMODYNAMIC_STRUCTURALISM/THEORY_FOUNDATIONS.md)
+* **Concept:** Matches Abstract Math to Physical Reality via the **Realizability Filter**.
+* **Key Result:** The "Landauer Wall" censorship.
 
-![TRI Simulation](animations/TRI_Infinite_Loop.gif)
+### 2. The Meta-Theory: Structural Solvability
 
-*Figure 1: Reaction-Diffusion simulation showing the eternal competition between incompatible vacuum phases. Note that boundaries fluctuate but phases never mix.*
+* **Location:** [`THEORY_STRUCTURAL_SOLVABILITY`](THEORY_STRUCTURAL_SOLVABILITY/ROADMAP_STRUCTURAL_SOLVABILITY.md)
+* **Concept:** Explains the "cisma" between Geometry and Complexity.
+* **Key Result:** The **Density Obstruction Meta-Theorem**.
 
-### II. Thermodynamic Time Reversal (TDTR)
+### 3. The Case Studies (Applications)
 
-Time is not a dimension; it is an irreversible flow of information. The "Arrow of Time" is the gradient of the universe's expansion into the holographic void. This expansion drives the emergence of gravity and the selection of laws.
-
-![TDTR Simulation](animations/TDTR_Infinite_Loop.gif)
-
-*Figure 2: Entropic Flow visualization. Particles (information bits) drift irreversibly outward, simulating the expansion of the holographic horizon and the emergence of the arrow of time.*
-
-### III. The Tamesis System
-
-Beneath the chaos of transitions lies a rigid number-theoretic skeleton. The Tamesis System describes the "Spectral Clockwork" — the prime number distribution that governs the stability of matter and the constants of nature.
-
-![TAMESIS Simulation](animations/TAMESIS_Infinite_Loop.gif)
-
-*Figure 3: Spectral Geometry in the Poincare Disk. The rotation of prime geodesics represents the invariant "Source Code" of the universe, robust against all regime transitions.*
+* **Problem 01:** [**P vs NP**](PROBLEM_01_P_VS_NP/ROADMAP_P_VS_NP.md) (Thermodynamic Censorship).
+* **Problem 02:** [**Riemann Hypothesis**](PROBLEM_02_RIEMANN/PAPER_RIEMANN_SPECTRAL_ORIGIN.html) (Spectral Stability).
+* **Legacy Tracks:** [**TRI & TDTR**](THEORY_SUMMARY.md) (Physical Implementations).
 
 ---
 
-## 2. Research Structure
+## 📦 The Packages (How to Consume)
 
-The archive is organized into three sequential research programs.
+### 📦 PACKAGE A: The Conceptual Anchor
 
-### Part I: Tamesis Core (Stages 01-42)
+* **For:** Philosophers, Mathematicians.
+* **Read:** [`THEORY_STRUCTURAL_SOLVABILITY/PAPER_01_STRUCTURAL_SOLVABILITY_FOUNDATIONS.md`](THEORY_STRUCTURAL_SOLVABILITY/PAPER_01_STRUCTURAL_SOLVABILITY_FOUNDATIONS.md)
+* **Content:** The definition of "Solvability" and the Class A vs Class B distinction.
 
-*The Mathematical Engine*
+### 📦 PACKAGE B: Theoretical Extensions
 
-- **Focus:** Spectral Geometry, Number Theory, and Computation.
-- **Key Result:** Discovery of the $U_{1/2}$ Universality Class.
-- **Outcome:** Provided the mathematical tools (Prime Spectral Operator) used in later stages.
+* **For:** Theoretical Physicists.
+* **Read:** [`THEORY_STRUCTURAL_SOLVABILITY/PAPER_03_THERMODYNAMIC_SELECTION.md`](THEORY_STRUCTURAL_SOLVABILITY/PAPER_03_THERMODYNAMIC_SELECTION.md)
+* **Content:** How Entropy acts as a selection principle in undecidable spaces.
 
-### Part II: TRI (Stages 43-52)
+### 📦 PACKAGE C: Computational Evidence
 
-*The Logic of Failure*
-
-- **Focus:** Meta-Physics and Model Theory.
-- **Key Result:** The "No-Go Theorems" proving that a static Theory of Everything is impossible.
-- **Outcome:** Established that different physical regimes (e.g., Quantum vs. Gravity) are topologically distinct and require a transition map, not a unification.
-
-### Part III: TDTR (Stages 53-86)
-
-*The Dynamic Solution*
-
-- **Focus:** Dynamics, Entropy, and Cosmology.
-- **Key Result:** The reformulation of Gravity as an Entropic Force and Time as Information Loss.
-- **Outcome:** Validated against Galaxy Rotation Curves without Dark Matter.
+* **For:** Computer Scientists, Experimentalists.
+* **Run:** [`THEORY_STRUCTURAL_SOLVABILITY/structural_classifier.py`](THEORY_STRUCTURAL_SOLVABILITY/structual_classifier.py)
+* **View:** [`THEORY_STRUCTURAL_SOLVABILITY/PAPER_C_COMPUTATIONAL_CLASSIFICATION.md`](THEORY_STRUCTURAL_SOLVABILITY/PAPER_C_COMPUTATIONAL_CLASSIFICATION.md)
+* **Content:** Empirical verification of difference between Rigid and Universal dynamics.
 
 ---
 
-## 3. Master Catalog
+## 🛡️ Rigor Protocol
 
-For a complete inventory of all papers, derivations, and code files, please refer to the Master Catalog:
+All documents in this archive are subject to the [**Scientific Rigor Checklist**](AJUSTE_FINO_RIGOR.md).
+We strictly separate:
 
-[**>> VIEW MASTER CATALOG (TAMESIS_THEORY_MASTER_CATALOG.md) <<**](TAMESIS_THEORY_MASTER_CATALOG.md)
+* **Mathematical Truth** (ZFC)
+* **Physical Realizability** (Thermodynamic Cost)
+* **Computational Evidence** (Simulation)
 
 ---
 
-## 4. Citation
+## 📚 Citation
 
-If using this research, please cite as:
+If referencing the Meta-Classification framework:
 
-> Fulber, D. H. M. (2026). *The Tamesis Theory Complete Research Archive*. Rio de Janeiro: Federal University of Rio de Janeiro. Artifacts 01-86.
+> Fulber, D. (2026). *Program of Metatheoretical Research on Structural Solvability*. Artifact Classification 01-03.
 
-**Contact:** Douglas H. M. Fulber
+---
+
+**Contact:** [Douglas H. M. Fulber]
 **Institution:** Universidade Federal do Rio de Janeiro

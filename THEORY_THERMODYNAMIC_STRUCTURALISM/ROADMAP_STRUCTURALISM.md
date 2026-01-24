@@ -8,45 +8,28 @@
 
 ---
 
-## 🏗️ THE LAYERS OF REALITY
+## 🧱 SYSTEM CLOSURE (THE TRINITY)
 
-### 🟦 LAYER 1 — MATHEMATICAL SPACE (Possible)
+**Objective:** Formalize Thermodynamic Structuralism not as philosophy, but as a rigorous mathematical framework for physics.
 
-- **Object:** Abstract Structures (Sets, Topologies, Infinites).
-- **Rule:** Logical Consistency (ZFC).
-- **Status:** Platonic. Non-constructive existence allowed.
+### 1. Document Separation
 
-### 🟨 LAYER 2 — REALIZATION SPACE (The New Theory)
+- [x] **Document A (Math)**: `PAPER_A_THEORY_OF_REALIZABILITY.md`
+  - *Content*: The Axioms of Realizability. Definition of Class $\mathcal{R}$ (Realizable) and Class $\mathcal{NR}$ (Non-Realizable). The Realizability Map $\phi$.
+  - *Strict Math*: No "universe talk". Quantifiers, Sets, Maps.
+- [x] **Document B (Physics)**: `PAPER_B_THE_REALITY_FILTER.md`
+  - *Content*: The physical interpretation. Why nature rejects $\mathcal{NR}$. The role of Entropy, Causality, and the "Critical Instant".
+- [x] **Document C (Method)**: `PAPER_C_THE_TSR_TEST.md`
+  - *Content*: The Operational Test. How to apply the axioms to classify new problems. Case studies: Chaitin's $\Omega$, Zeno's Paradox.
 
-- **Object:** Executable Structures (Algorithms, Entropic Graphs, Stable Spectra).
-- **Rule:** **Axioms of Realizability (R1-R5)**.
-- **Status:** Operational. The bridge where "Logic becomes Physics".
-
-### 🟥 LAYER 3 — PHYSICAL SPACE (Actual)
-
-- **Object:** Particles, Fields, Time, Energy.
-- **Rule:** Empirical Laws, Constants, Contingent History.
-- **Status:** Empirical.
+### 2. The Core Definition
+>
+> **Definition (Realizability):**
+> A mathematical structure $S$ is **Physically Realizable** iff there exists a morphism $\phi: S \to \mathcal{P}$ into the category of finite, causal, thermodynamic processes such that the cost function $\mathcal{C}(\phi)$ is polynomially bounded.
 
 ---
 
-## 📜 THE AXIOMS OF REALIZABILITY (Minimal)
-
-A mathematical structure $S$ is **Physically Realizable** iff it satisfies:
-
-### R1. Informational Finitude
-
-$K(S) < \infty$. The structure must admit a finite description. Prohibits non-constructive reals.
-
-### R2. Causal Executability
-
-The structure must admit a local, causal update rule. No global instantaneous propagation.
-
-### R3. Spectral Stability
-
-$\exists \Delta_{min} > 0$. The realization must be robust to perturbation (Gap check).
-
-### R4. Thermodynamic Cost
+## 🏗️ THE LAYERS OF REALITY (REFINED)
 
 Energy $E(S)$ and Time $\tau(S)$ must not diverge instantly. Execution respects Landauer Limit.
 

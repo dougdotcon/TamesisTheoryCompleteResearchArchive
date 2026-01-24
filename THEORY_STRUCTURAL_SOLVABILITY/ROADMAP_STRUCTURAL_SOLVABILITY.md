@@ -34,27 +34,27 @@ Esta linha de pesquisa investiga as **Meta-Propriedades de Resolubilidade** em s
 
 **Objetivo:** Definir "Fechabilidade" como uma propriedade matemática rigorosa.
 
-* [ ] **Definir Espaço de Soluções**: Formalizar quando um espaço é rígido vs universal.
-* [ ] **Definir Critérios de Rigidez**: Quando invariantes locais implicam unicidade global?
-* [ ] **Catálogo de Exemplos**: Classificar Poincarè (A) vs Riemann (B) sob esta ótica.
-* [ ] **Produto:** *Paper 1: "On the Structural Solvability of Mathematical Systems"* (Zero simulação).
+* [x] **Definir Espaço de Soluções**: Formalizar quando um espaço é rígido vs universal.
+* [x] **Definir Critérios de Rigidez**: Quando invariantes locais implicam unicidade global?
+* [x] **Catálogo de Exemplos**: Classificar Poincarè (A) vs Riemann (B) sob esta ótica.
+* [x] **Produto:** *Paper 1: "On the Structural Solvability of Mathematical Systems"* (Zero simulação).
 
 ### 🔹 FASE 2 — TEOREMAS DE BARREIRA (O Core Teórico)
 
 **Objetivo:** Demonstrar que métodos da Classe A falham na Classe B.
 
-* [ ] **Barreira de Exclusão Local**: Mostrar por que argumentos locais não "fecham" espaços universais.
-* [ ] **Limite da Estatística**: Provar que estatística induz universalidade, não unicidade (o "gap" da prova).
-* [ ] **Conexão com Complexidade**: Relacionar com *Natural Proofs* e *Relativization*.
-* [ ] **Produto:** *Paper 2: "Structural Barriers in Universal Classes"*
+* [x] **Barreira de Exclusão Local**: Mostrar por que argumentos locais não "fecham" espaços universais.
+* [x] **Limite da Estatística**: Provar que estatística induz universalidade, não unicidade (o "gap" da prova).
+* [x] **Conexão com Complexidade**: Relacionar com *Natural Proofs* e *Relativization*.
+* [x] **Produto:** *Paper 2: "Structural Barriers in Universal Classes"*
 
 ### 🔹 FASE 3 — SELEÇÃO ESTRUTURAL (A Conexão Física)
 
 **Objetivo:** Introduzir a "Seleção" (física/entropia) como o único mecanismo de fechamento para a Classe B.
 
-* [ ] **Entropia como Seletor**: Onde a matemática falha em fechar, a estabilidade física escolhe.
-* [ ] **TSR como Caso de Estudo**: Reinterpretar o trabalho de Riemann e P vs NP sob a ótica da seleção.
-* [ ] **Produto:** *Paper 3: "Thermodynamic Selection in Mathematical Undecidability"*
+* [x] **Entropia como Seletor**: Onde a matemática falha em fechar, a estabilidade física escolhe.
+* [x] **TSR como Caso de Estudo**: Reinterpretar o trabalho de Riemann e P vs NP sob a ótica da seleção.
+* [x] **Produto:** *Paper 3: "Thermodynamic Selection in Mathematical Undecidability"*
 
 ---
 

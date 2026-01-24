@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmological Voids: Too Big for ΛCDM</title>
+    <title>Cosmological Voids: Giant Structures Challenge ΛCDM</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -24,12 +24,6 @@
             margin: 0 auto;
             padding: 1.5cm;
             background-color: #fff;
-        }
-
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
         }
 
         header {
@@ -64,13 +58,20 @@
             color: #666;
         }
 
-        .abstract {
-            font-weight: bold;
-            font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
         }
 
         h2 {
@@ -83,14 +84,6 @@
             break-after: avoid;
         }
 
-        h3 {
-            font-size: 10pt;
-            font-weight: bold;
-            font-style: italic;
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
-        }
-
         p {
             margin-bottom: 0.8rem;
             text-indent: 1em;
@@ -100,41 +93,13 @@
             text-indent: 0;
         }
 
-        .equation {
-            text-align: center;
-            margin: 0.8rem 0;
-            font-size: 10pt;
-        }
-
-        /* Specialized Boxes compatibility */
-        .axiom-box {
-            border-left: 3px solid #000;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .prediction-box {
-            border: 1px solid #d32f2f;
-            padding: 1rem;
-            margin: 1rem 0;
-            background: #fff5f5;
-        }
-
-        .master-equation {
-            background: #f8f8f8;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
         .conclusion-box {
             background: #e8f5e9;
             padding: 1rem;
             margin: 1.5rem 0;
             border: 1px solid #4caf50;
             text-align: center;
+            break-inside: avoid;
         }
 
         figure {
@@ -155,25 +120,6 @@
             text-align: justify;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 8.5pt;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid #000;
-            padding: 0.4rem;
-            text-align: left;
-        }
-
-        th {
-            font-weight: bold;
-            border-top: 1px solid #000;
-        }
-
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -190,7 +136,7 @@
         .references li {
             margin-bottom: 0.2rem;
         }
-    
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -204,12 +150,13 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
 
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
         <h1>Cosmological Voids: Giant Structures Challenge ΛCDM</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -217,65 +164,50 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
+    <div class="abstract-container">
+        <strong>Abstract.</strong> The standard ΛCDM model predicts maximum structure sizes of approximately 400 Mpc.
+        However, recent observations reveal structures that significantly exceed this limit, such as the Hercules-Corona
+        Borealis Great Wall (~3000 Mpc) and the early, massive El Gordo cluster. These represent >3σ outliers in the
+        standard framework. We demonstrate that within the Entropic Gravity framework, faster structure formation is a
+        natural consequence of the additional entropic force, making these giant structures expected rather than
+        anomalous.
     </div>
 
     <div class="content-wrapper">
-        <div class="abstract">
-            Abstract not found.
+        <h2>1. Anomalous Structures</h2>
+        <p class="no-indent">Several observed large-scale structures defy the growth rate limits of ΛCDM:</p>
+        <ul>
+            <li><strong>Giant Void:</strong> 500 Mpc (associated with the CMB Cold Spot)</li>
+            <li><strong>Sloan Great Wall:</strong> 1400 Mpc</li>
+            <li><strong>Hercules-Corona Borealis Great Wall:</strong> 3000 Mpc (~10% of the observable universe)</li>
+            <li><strong>El Gordo (ACT-CL J0102-4915):</strong> A massive cluster collision at z=0.87, occurring too
+                early and with too much velocity (2500 km/s) for standard models.</li>
+        </ul>
+
+        <figure>
+            <img src="assets/void_comparison.png" alt="Void Comparison">
+            <figcaption><strong>Figure 1:</strong> Left: Structure sizes vs ΛCDM expected maximum. Right: El Gordo
+                collision velocity distribution—observed value is extreme for ΛCDM.</figcaption>
+        </figure>
+
+        <h2>2. Conclusion</h2>
+
+        <div class="conclusion-box">
+            <strong>🟢 Another TAMESIS Success</strong><br>
+            Giant structures are EXPECTED with faster entropic collapse.<br>
+            Prediction: Even larger structures will be discovered by future surveys (e.g., Euclid, LSST).
         </div>
 
-        <div class="content-wrapper">
-            <div class="abstract">
-                Abstract not found.
-            </div>
-
-            <div class="content-wrapper">
-                <div class="abstract">
-                    Abstract not found.
-                </div>
-
-                <div class="content-wrapper">
-                    <div class="abstract">
-                        ΛCDM predicts maximum structure sizes of ~400 Mpc. Observations show: Hercules-Corona Borealis
-                        Great Wall at
-                        3000 Mpc (~10% of observable universe) and El Gordo cluster colliding at 2500 km/s at z=0.87.
-                        These are 3σ+
-                        outliers in ΛCDM. In Entropic Gravity, <strong>faster structure formation makes these
-                            expected</strong>.
-                    </div>
-
-                    <div class="content-wrapper">
-                        <h2>1. Anomalous Structures</h2>
-                        <ul>
-                            <li><strong>Giant Void:</strong> 500 Mpc (CMB Cold Spot)</li>
-                            <li><strong>Sloan Great Wall:</strong> 1400 Mpc</li>
-                            <li><strong>Hercules-Corona:</strong> 3000 Mpc(!)</li>
-                            <li><strong>El Gordo:</strong> Too massive, too fast, too early</li>
-                        </ul>
-
-                        <figure>
-                            <img src="assets/void_comparison.png" alt="Void Comparison">
-                            <figcaption><strong>Figure 1:</strong> Left: Structure sizes vs ΛCDM expected maximum.
-                                Right: El Gordo collision
-                                velocity distribution—observed value is extreme for ΛCDM.</figcaption>
-                        </figure>
-
-                        <h2>2. Conclusion</h2>
-                        <div class="conclusion-box">
-                            <strong>🟢 Another TAMESIS Success</strong><br>
-                            Giant structures are EXPECTED with faster entropic collapse.<br>
-                            Prediction: Even larger structures will be discovered.
-                        </div>
-                        <div class="references">
-                            <h2>References</h2>
-                            <ol>
-                                <li>Horváth, I. et al. (2015). <em>Hercules-Corona Borealis</em>. A&A.</li>
-                                <li>Menanteau, F. et al. (2012). <em>El Gordo</em>. ApJ.</li>
-                            </ol>
-                        </div>
-                    </div>
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Horváth, I. et al. (2015). <em>New data support the existence of the Hercules-Corona Borealis Great
+                        Wall</em>. A&A.</li>
+                <li>Menanteau, F. et al. (2012). <em>The Atacama Cosmology Telescope: ACT-CL J0102-4915 "El Gordo"</em>.
+                    ApJ.</li>
+            </ol>
+        </div>
+    </div>
 </body>
 
 </html>

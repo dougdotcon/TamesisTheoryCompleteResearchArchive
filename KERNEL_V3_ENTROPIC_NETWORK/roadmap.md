@@ -49,6 +49,6 @@
 ---
 **Next Steps:**
 
-1. Define clear Interfaces (I/O) for each module.
-2. Code `entropic_node.py` (with Node Types).
-3. Implement the Dynamics Engine.
+1. [x] Define clear Interfaces (I/O) for each module.
+2. [x] Code `entropic_node.py` (with Node Types).
+3. [x] Implement the Dynamics Engine.

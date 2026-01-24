@@ -1,269 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Critical Mass for Quantum Collapse (Mc) — Calibrated Model</title>
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
             font-family: 'Times New Roman', Times, serif;
-            line-height: 1.6;
-            color: #1a1a1a;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
-        .content-body {
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
             text-align: justify;
         }
-
-        .single-column {
-            display: block;
-        }
-
         header {
             text-align: center;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid #ccc;
             padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 22pt;
+            font-size: 14pt;
+            font-weight: bold;
             margin-bottom: 0.5rem;
             line-height: 1.2;
+            text-transform: none;
         }
-
-        .authors {
-            font-size: 12pt;
-            font-style: italic;
-            margin-bottom: 0.3rem;
-        }
-
-        .affiliations {
-            font-size: 10pt;
-            color: #555;
-            margin-bottom: 0.5rem;
-        }
-
-        .abstract-box {
-            max-width: 85%;
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
             margin: 0 auto 1.5rem auto;
-            font-size: 0.95rem;
+            width: 85%;
             text-align: justify;
-            background-color: #f9f9f9;
-            padding: 1rem 1.5rem;
-            border-left: 3px solid #000;
+            font-style: italic;
         }
-
-        .abstract-title {
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-            display: block;
-            text-align: center;
-        }
-
-        /* Clean Key Result Box */
-        .key-result {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1rem 0 1.5rem 0;
-            padding: 0.8rem 1rem;
-            background: #f0f4f8;
-            border: 1px solid #d0d7de;
-            border-radius: 4px;
-        }
-
-        .key-result-item {
-            text-align: center;
-        }
-
-        .key-result-label {
-            font-size: 9pt;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .key-result-value {
-            font-size: 14pt;
-            font-weight: bold;
-            color: #1a1a1a;
-        }
-
         h2 {
-            font-size: 14pt;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-            border-bottom: 2px solid #000;
-            padding-bottom: 0.2rem;
-            break-after: avoid;
-        }
-
-        h3 {
-            font-size: 12pt;
-            font-style: italic;
-            margin-top: 1.2rem;
-            margin-bottom: 0.5rem;
-            break-after: avoid;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            text-indent: 1em;
-        }
-
-        p.no-indent {
-            text-indent: 0;
-        }
-
-        ul,
-        ol {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0.5rem auto;
-            border: 1px solid #ddd;
-        }
-
-        figure {
-            margin: 1.5rem 0;
-            break-inside: avoid;
-            page-break-inside: avoid;
-        }
-
-        figcaption {
-            font-size: 9pt;
-            color: #444;
-            margin-top: 0.4rem;
-            text-align: center;
-            font-style: italic;
-            line-height: 1.4;
-        }
-
-        /* Clean Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 9pt;
-        }
-
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 0.4rem 0.5rem;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #fafafa;
-        }
-
-        .testable {
-            color: #007700;
-            font-weight: bold;
-        }
-
-        /* Falsifiability Box */
-        .falsifiability-box {
-            background-color: #fffbeb;
-            border: 1px solid #d4a00a;
-            border-radius: 4px;
-            padding: 1rem;
-            margin: 1.5rem 0;
             font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
-
-        .falsifiability-box h3 {
-            color: #7a5a00;
-            margin: 0 0 0.5rem 0;
-            font-style: normal;
-            font-size: 11pt;
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
-
-        .falsifiability-box ol {
-            margin: 0;
-            padding-left: 1.2rem;
-        }
-
-        .falsifiability-box li {
-            margin-bottom: 0.3rem;
-        }
-
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
         .references {
             margin-top: 2rem;
-            border-top: 1px solid #ccc;
-            padding-top: 1rem;
-            font-size: 0.85rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
         }
-
-        .references h2 {
-            font-size: 11pt;
-            border-bottom: none;
-            text-transform: uppercase;
-        }
-
-        .references ol {
-            padding-left: 1.2rem;
-        }
-
-        .references li {
-            margin-bottom: 0.2rem;
-        }
-
-        @media print {
-            body {
-                padding: 0;
-                margin: 0;
-            }
-
-            @page {
-                size: A4;
-                margin: 2cm;
-            }
-
-            a {
-                text-decoration: none;
-                color: #000;
-            }
-        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>Universal Critical Mass for Quantum Collapse ($M_c$)</h1>
-        <div style="font-size: 11pt; margin-bottom: 0.3rem;">Calibrated Model & Experimental Predictions</div>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">Federal University of Rio de Janeiro &bull; January 2026 &bull; Version 2.0</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
+        Abstract not found.
+    </div>
+
+    <div class="content-wrapper">
+<div class="abstract">
         We present a calibrated model for the breakdown of quantum unitarity at macroscopic scales.
         The critical mass $M_c \approx 5.29 \times 10^{-16}$ kg emerges from 8-dimensional phase space geometry,
         with a coherence time $\tau_c \approx 2.18$ seconds derived from gravitational self-energy.
@@ -271,7 +113,8 @@
         quantitative targets for MAQRO-class experiments and levitated optomechanics.
     </div>
 
-    <div class="key-result single-column">
+    <div class="content-wrapper">
+<div class="key-result single-column">
         <div class="key-result-item">
             <div class="key-result-label">Critical Mass</div>
             <div class="key-result-value">$M_c = 5.29 \times 10^{-16}$ kg</div>
@@ -492,9 +335,7 @@
 
         <p>The central prediction—a sharp transition at $M_c \approx 5.3 \times 10^{-16}$ kg—is within reach of current
             technology.</p>
-
-        <div class="references">
-            <h2>References</h2>
+<div class="references"><h2>References</h2>
             <ol>
                 <li>Verlinde, E. (2011). <em>On the Origin of Gravity</em>. JHEP 1104:029.</li>
                 <li>Penrose, R. (1996). <em>On Gravity's role in Quantum State Reduction</em>. Gen. Relativ. Gravit. 28,
@@ -504,11 +345,7 @@
                 <li>Bassi, A. et al. (2013). <em>Models of wave-function collapse</em>. Rev. Mod. Phys. 85, 471.</li>
                 <li>Kaltenbaek, R. et al. (2016). <em>MAQRO: 2015 Update</em>. EPJ Quantum Technology 3, 5.</li>
                 <li>Fein, Y. et al. (2019). <em>Quantum superposition beyond 25 kDa</em>. Nature Physics 15, 1242.</li>
-            </ol>
-        </div>
-
+            </ol></div>
     </div>
-
 </body>
-
 </html>

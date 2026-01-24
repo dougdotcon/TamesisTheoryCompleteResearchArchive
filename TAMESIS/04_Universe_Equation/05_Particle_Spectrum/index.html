@@ -1,200 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topological Origin of the Particle Spectrum</title>
-
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        /* === ACADEMIC JOURNAL STYLING === */
-        * {
-            box-sizing: border-box;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 18pt;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
             font-size: 14pt;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #444;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
         }
-
-        .authors {
-            font-size: 12pt;
-            margin-bottom: 0.25rem;
-        }
-
-        .affiliations {
-            font-size: 10pt;
-            font-style: italic;
-            color: #333;
-        }
-
-        .abstract-box {
-            margin: 2rem 1rem;
-            font-size: 10pt;
-            text-align: justify;
-            padding: 1.5rem;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            background-color: #fcfcfc;
-        }
-
-        .abstract-title {
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
             font-weight: bold;
             font-size: 9pt;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.5rem;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
-
         h2 {
-            font-size: 13pt;
-            font-weight: bold;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.3rem;
-            text-transform: uppercase;
-        }
-
-        h3 {
-            font-size: 12pt;
-            font-weight: bold;
-            font-style: italic;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            text-align: justify;
-            text-indent: 1.5em;
-        }
-
-        p.no-indent {
-            text-indent: 0;
-        }
-
-        .equation-box {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-            border: 1px solid #eee;
-        }
-
-        .equation-label {
             font-size: 10pt;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            color: #444;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 10pt;
-        }
-
-        th,
-        td {
-            border-top: 1px solid #000;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
             border-bottom: 1px solid #000;
-            padding: 0.5rem;
-            text-align: left;
+            break-after: avoid;
         }
-
-        th {
-            background: #f5f5f5;
+        h3 {
+            font-size: 10pt;
             font-weight: bold;
-            text-transform: uppercase;
-            font-size: 9pt;
-        }
-
-        figure {
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        figure img {
-            max-width: 100%;
-            border: 1px solid #ddd;
-        }
-
-        figcaption {
-            font-size: 10pt;
             font-style: italic;
-            color: #666;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
-
-        .footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
             border-top: 1px solid #000;
-            text-align: center;
-            font-style: italic;
-            font-size: 10pt;
-            color: #666;
+            font-size: 8pt;
+            line-height: 1.1;
         }
-
-        .highlight-box {
-            background: #fffef5;
-            border: 1px solid #d4af37;
-            border-left: 4px solid #d4af37;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>Topological Origin of the Particle Spectrum</h1>
-        <div class="subtitle">Deriving Generations and Masses from Knot Theory</div>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">TARDIS Program • Stage 4: The Universe Equation • January 2026</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <!-- ABSTRACT -->
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
         We address the "Generation Problem" of the Standard Model by modeling elementary particles as
         topological solitons (knots) in the spacetime vacuum field. We demonstrate that the three
         generations of quarks correspond to the three simplest prime knots: Trefoil ($3_1$),
@@ -202,7 +108,8 @@
         knot's ideal rope length ($L/D$), providing a first-principles derivation of the mass hierarchy.
     </div>
 
-    <!-- 1. THE GEOMETRY OF MASS -->
+    <div class="content-wrapper">
+<!-- 1. THE GEOMETRY OF MASS -->
     <section>
         <h2>1. The Geometry of Mass</h2>
 
@@ -322,12 +229,6 @@
             <a href="../index.html">← Back to Stage 4 Overview</a>
         </p>
     </section>
-
-    <div class="footer">
-        Tamesis Theory — Stage 4: The Universe Equation<br>
-        "Matter is knotted light."
     </div>
-
 </body>
-
 </html>

@@ -1,122 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holographic Uniqueness: Deriving the MOND Interpolation Function</title>
-
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        /* === ACADEMIC JOURNAL STYLING === */
-        * {
-            box-sizing: border-box;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 18pt;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
             font-size: 14pt;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #444;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
         }
-
-        .abstract-box {
-            margin: 2rem 1rem;
-            font-size: 10pt;
-            text-align: justify;
-            padding: 1.5rem;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            background-color: #fcfcfc;
-        }
-
-        .abstract-title {
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
             font-weight: bold;
             font-size: 9pt;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 13pt;
-            font-weight: bold;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.3rem;
-            text-transform: uppercase;
-        }
-
-        .equation-box {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-            border: 1px solid #eee;
-        }
-
-        .highlight-box {
-            background: #f5fff5;
-            border-left: 4px solid #4CAF50;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #000;
-            text-align: center;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
             font-style: italic;
-            font-size: 10pt;
-            color: #666;
         }
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>Holographic Uniqueness</h1>
-        <div class="subtitle">Deriving the MOND Interpolation Function from First Principles</div>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">TARDIS Program • Stage 5: Final Axiomatic Reduction • January 2026</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
         Modified Newtonian Dynamics (MOND) has historically relied on empirical interpolation functions, such as the
         "Simple" or "Standard" $\mu(x)$, to fit galaxy rotation curves. In this paper, we demonstrate that these
         functions are not arbitrary choices but a rigorous necessity of the holographic principle. By solving the
@@ -125,7 +109,8 @@
         establishing MOND as an emergent geometric law rather than an empirical modification.
     </div>
 
-    <section>
+    <div class="content-wrapper">
+<section>
         <h2>1. The Problem of Arbitrariness</h2>
         <p>A primary criticism of MOND is the "interpolation function problem": there are many functions that connect
             the Newtonian regime ($g \gg a_0$) to the deep MOND regime ($g \ll a_0$), and the choice between them is
@@ -176,7 +161,6 @@
         Tamesis Theory Research Archive • Stage 5: Final Axiomatic Reduction<br>
         "Logic is the only law; information is the only witness."
     </footer>
-
+    </div>
 </body>
-
 </html>

@@ -1,168 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Topological Origin of Spin: Fermions as Genus-1 Geometrodynamic Defects | TARDIS Framework</title>
-
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 18pt;
+            font-size: 14pt;
             font-weight: bold;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-        }
-
-        .authors {
-            font-size: 12pt;
-            margin-bottom: 0.25rem;
-        }
-
-        .affiliations {
-            font-size: 10pt;
-            font-style: italic;
-            color: #333;
-        }
-
-        .abstract-box {
-            margin: 1.5rem 0;
-            font-size: 10pt;
-            text-align: justify;
-        }
-
-        .abstract-title {
-            font-weight: bold;
-            display: block;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
         }
-
-        h2 {
-            font-size: 12pt;
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
             font-weight: bold;
-            margin-top: 1.5rem;
-            text-transform: uppercase;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
-
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
         h3 {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             font-style: italic;
             margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
-
-        p {
-            margin-bottom: 0.75rem;
-            text-indent: 1.5em;
-            text-align: justify;
-        }
-
-        p.no-indent {
-            text-indent: 0;
-        }
-
-        .equation-box {
-            padding: 0.75rem 1rem;
-            margin: 0.75rem 0;
-            border-left: 2px solid #999;
-        }
-
-        .master-equation {
-            background: #f8f8f8;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
-        .result-highlight {
-            background: #f0f0f0;
-            font-weight: bold;
-        }
-
-        figure {
-            margin: 1rem 0;
-            text-align: center;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        figcaption {
-            font-size: 9pt;
-            margin-top: 0.5rem;
-            text-align: justify;
-        }
-
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
         .references {
-            margin-top: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 0.5rem;
             border-top: 1px solid #000;
-            padding-top: 0.75rem;
+            font-size: 8pt;
+            line-height: 1.1;
         }
-
-        .references h2 {
-            font-size: 11pt;
-        }
-
-        .references ol {
-            font-size: 9pt;
-            padding-left: 1.5rem;
-        }
-
-        @media print {
-            body {
-                padding: 0;
-                margin: 0;
-                font-size: 10pt;
-            }
-
-            @page {
-                size: A4;
-                margin: 2cm;
-            }
-        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
     <header>
         <h1>The Topological Origin of Spin:<br>Fermions as Genus-1 Geometrodynamic Defects</h1>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">Federal University of Rio de Janeiro &bull; January 2026 &bull; TARDIS Framework</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
+        Abstract not found.
+    </div>
+
+    <div class="content-wrapper">
+<div class="abstract">
         In the Standard Model, intrinsic spin is treated as an abstract quantum number without spatial extent.
         This presents a conceptual barrier to unification with General Relativity, which is fundamentally geometric.
         We propose that spin-1/2 statistics emerge naturally if elementary fermions are modeled not as point particles
@@ -174,8 +117,10 @@
 
         <div style="font-size: 9pt; margin-top: 0.75rem; font-style: italic;">
             <strong>Keywords:</strong> Topological Spin, Wormholes, Genus-1 Topology, Dirac Belt Trick, Geometrodynamics
-        </div>
     </div>
+
+    <div class="content-wrapper">
+</div>
 
     <h2>1. Introduction</h2>
 
@@ -250,9 +195,7 @@
 
     <p>This identification allows us to unify particle physics with General Relativity: <strong>Matter is simply knotted
             spacetime.</strong></p>
-
-    <div class="references">
-        <h2>References</h2>
+<div class="references"><h2>References</h2>
         <ol>
             <li>Wheeler, J. A. (1955). <em>Geons</em>. Physical Review 97, 511.</li>
             <li>Misner, C. W., & Wheeler, J. A. (1957). <em>Classical physics as geometry</em>. Annals of Physics 2,
@@ -260,8 +203,7 @@
             <li>Dirac, P. A. M. (1931). <em>Quantised singularities in the electromagnetic field</em>. Proc. R. Soc.
                 Lond. A 133, 60.</li>
             <li>Fulber, D. (2026). <em>TARDIS Framework: Topological Origins</em>. Zenodo.</li>
-        </ol>
+        </ol></div>
     </div>
 </body>
-
 </html>

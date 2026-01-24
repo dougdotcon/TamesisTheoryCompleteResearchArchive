@@ -1,178 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Tamesis Spectral Operator: Unified Dynamics from Topological Noise</title>
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid #000;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 24pt;
+            font-size: 14pt;
             font-weight: bold;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
-            text-transform: uppercase;
+            text-transform: none;
         }
-
-        .subtitle {
-            font-size: 14pt;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .authors {
-            font-size: 12pt;
-            margin-bottom: 0.25rem;
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
             font-weight: bold;
-        }
-
-        .affiliations {
-            font-size: 10pt;
-            font-style: italic;
-            color: #333;
-        }
-
-        .abstract-box {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background-color: #f9f9f9;
-            border-left: 4px solid #000;
-            font-size: 10pt;
-            text-align: justify;
-        }
-
-        .abstract-title {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
             font-size: 9pt;
-            color: #555;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
-
         h2 {
-            font-size: 14pt;
-            font-weight: bold;
-            margin-top: 2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        h3 {
-            font-size: 12pt;
-            font-weight: bold;
-            margin-top: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            text-indent: 0;
-            text-align: justify;
-        }
-
-        ul {
-            list-style-type: square;
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        .axiom-box {
-            background: #fff;
-            border: 1px solid #000;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: 4px 4px 0px #eee;
-        }
-
-        .axiom-title {
+            font-size: 10pt;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
-
-        .equation {
-            font-family: 'Times New Roman', serif;
-            font-size: 12pt;
-            text-align: center;
-            padding: 1rem;
-            background: #fff;
-        }
-
-        .references {
-            margin-top: 3rem;
-            border-top: 1px solid #000;
-            padding-top: 1rem;
-            font-size: 9pt;
-        }
-
-        .visual-box {
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .visual-box img {
-            max-width: 100%;
-            border: 1px solid #000;
-            box-shadow: 4px 4px 0px #eee;
-        }
-
-        .caption {
-            font-style: italic;
+        h3 {
             font-size: 10pt;
-            margin-top: 0.5rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
     <header>
         <h1>The Tamesis Spectral Operator</h1>
-        <div class="subtitle">System Closure Project 02</div>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">Federal University of Rio de Janeiro &bull; January 2026</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
         We propose that the unified laws of physics are not governed by a Lagrangian, but by the spectrum of a single
         operator $\mathcal{O}$ acting on the topological state space. We demonstrate that the Vacuum is a Unitary
         Quantum Chaotic system, characterized by GUE (Gaussian Unitary Ensemble) statistics.
     </div>
 
-    <h2>1. The Fundamental Operator</h2>
+    <div class="content-wrapper">
+<h2>1. The Fundamental Operator</h2>
     <p>We replace the Standard Model Lagrangian $\mathcal{L}_{SM}$ with a single spectral object:</p>
 
     <div class="axiom-box">
@@ -204,12 +139,8 @@
     <p>The simulation output (Figure 1) shows a perfect convergence to GUE, distinct from Poisson (regular system) or
         GOE. This implies the Tamesis vacuum inherently breaks time-reversal symmetry at the topological level (Time's
         Arrow is geometric).</p>
-
-    <div class="references">
-        <p><strong>Date:</strong> January 22, 2026</p>
-        <p><strong>Status:</strong> SPECTRALLY VERIFIED</p>
+<div class="references"><p><strong>Date:</strong> January 22, 2026</p>
+        <p><strong>Status:</strong> SPECTRALLY VERIFIED</p></div>
     </div>
-
 </body>
-
 </html>

@@ -1,164 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage 13: The RH Operator | Tamesis Theory</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.6;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
-
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid #000;
+            border-bottom: 1px solid #ccc;
         }
-
         h1 {
-            font-size: 16pt;
+            font-size: 14pt;
             font-weight: bold;
-            margin-bottom: 0.75rem;
-        }
-
-        .subtitle {
-            font-size: 12pt;
-            font-style: italic;
-            color: #444;
-        }
-
-        .authors {
-            font-size: 12pt;
-            margin-bottom: 0.25rem;
-        }
-
-        .abstract-box {
-            margin: 2rem 0;
-            font-size: 10pt;
-            text-align: justify;
-            padding: 1.5rem;
-            border: 1px solid #000;
-            background-color: #f5f5f5;
-        }
-
-        .abstract-title {
-            font-weight: bold;
-            text-transform: uppercase;
-            display: block;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
         }
-
-        h2 {
-            font-size: 12pt;
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
             font-weight: bold;
-            margin-top: 2rem;
-            text-transform: uppercase;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            text-align: justify;
-            text-indent: 1.5em;
-        }
-
-        p.no-indent {
-            text-indent: 0;
-        }
-
-        .equation-box {
-            background: #e8f5e9;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            text-align: center;
-            border-left: 4px solid #2e7d32;
-        }
-
-        .warning-box {
-            background: #fff3e0;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #ff9800;
-        }
-
-        .success-box {
-            background: #e3f2fd;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #1976d2;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 10pt;
-        }
-
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
-        }
-
-        th {
-            background: #f0f0f0;
-            font-weight: bold;
-        }
-
-        .footer {
-            margin-top: 4rem;
-            padding-top: 1rem;
-            border-top: 1px solid #000;
             font-size: 9pt;
-            color: #666;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
-
-        a {
-            color: #000;
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
-
-        ul {
-            margin-left: 2em;
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
-
-        code {
-            background: #f5f5f5;
-            padding: 0.1em 0.3em;
-            font-family: monospace;
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
         }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>Stage 13: The Riemann Hypothesis Operator</h1>
-        <div class="subtitle">H = Delta_H + 1/4: Spectral Analysis and Honest Assessment</div>
-        <div class="authors">Tamesis Theory Research Archive</div>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract-box">
-        <span class="abstract-title">Summary</span>
+    <div class="abstract">
         We construct and analyze the candidate Hilbert-Polya operator $H = \Delta_{\mathbb{H}} + 1/4$ on the modular
         surface $SL(2,\mathbb{Z}) \backslash \mathbb{H}$. We compare its eigenvalues (Maass cusp forms) with the Riemann
         zeros and provide an honest assessment: the values are <strong>different</strong>, but the
@@ -166,7 +108,8 @@
         correct generalization.
     </div>
 
-    <section>
+    <div class="content-wrapper">
+<section>
         <h2>1. The Candidate Operator</h2>
 
         <div class="equation-box">
@@ -386,12 +329,6 @@
             <li><code>comparison.py</code> — Maass vs Riemann comparison</li>
         </ul>
     </section>
-
-    <div class="footer">
-        <a href="../roadmap.md">← Roadmap</a> •
-        Stage 13 Complete • Next: Stage 14 (ToE Physics Connection)
     </div>
-
 </body>
-
 </html>

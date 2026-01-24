@@ -3,7 +3,53 @@ import os
 import re
 from html.parser import HTMLParser
 
-ROOT_DIR = r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\01_Foundation_ToE\novos_papers"
+
+ROOT_DIRS = [
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\01_Foundation_ToE\novos_papers",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\01_Foundation_ToE\1_Motores_Cientificos",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\02_Research_Limits",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\03_System_Closure",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\04_Universe_Equation",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\05_Final_Reduction",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\06_Operational_Derivation",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\07_Rigorous_Mathematics",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\08_Modified_Operators",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\09_Hyperbolic_Connection",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\10_Hyperbolic_Space",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\11_Hyperbolic_Laplacian",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\12_Selberg_Connes",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\13_RH_Operator",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\14_ToE_Physics",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\15_Layer1_Selberg_Cusp",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\16_Layer2_Conceptual_Architecture",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\17_Arg_Phi_Decomposition",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\18_Publishable_Lemma",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\19_Selberg_Weil_Interface",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\20_Final_Paper",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\21_Connes_Dilation_Operator",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\22_Spectral_Reconstruction",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\23_Trace_Regularization",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\24_Theta_Derivative_Trace",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\25_Prime_Contribution_Trace",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\26_Complete_Spectral_Identity",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\27_RH_As_Spectral_Property",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\28_Graph_Zeta_Primes",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\29_Chaotic_Flow_Primes",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\30_Computational_Primes",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\31_Euclidean_Spectral_Operator",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\32_Complexity_As_Prime_Count",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\33_Computational_Levinson",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\34_Spectral_Theory_Computation",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\35_Unified_Constants_Derivation",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\36_Theory_of_Regime_Transitions",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\37_U12_Physical_Tests",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\38_U12_Applications",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\39_U2_Lindblad_Class",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\40_U0_Threshold_Class",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\41_Universality_Atlas",
+    r"d:\TamesisTheoryCompleteResearchArchive\TAMESIS\42_Closure_Paper"
+]
+
 
 # Template parts
 TEMPLATE_HEAD = """<!DOCTYPE html>
@@ -199,17 +245,18 @@ def process_file(file_path):
     print(f"Processed: {file_path}")
 
 def main():
-    print(f"Scanning {ROOT_DIR}...")
     count = 0
-    for root, dirs, files in os.walk(ROOT_DIR):
-        for file in files:
-            if file.endswith(".html"):
-                full_path = os.path.join(root, file)
-                try:
-                    process_file(full_path)
-                    count += 1
-                except Exception as e:
-                    print(f"Error processing {file}: {e}")
+    for root_dir in ROOT_DIRS:
+        print(f"Scanning {root_dir}...")
+        for root, dirs, files in os.walk(root_dir):
+            for file in files:
+                if file.endswith(".html"):
+                    full_path = os.path.join(root, file)
+                    try:
+                        process_file(full_path)
+                        count += 1
+                    except Exception as e:
+                        print(f"Error processing {file}: {e}")
     print(f"Finished. Processed {count} files.")
 
 if __name__ == "__main__":

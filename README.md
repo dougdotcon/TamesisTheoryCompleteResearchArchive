@@ -1,66 +1,53 @@
-# Tamesis Theory Research Archive
+# COMPLETE RESEARCH ARCHIVE: Tamesis / TRI / TDTR
 
-## Final Status
+**Status: ALL PROGRAMS CLOSED**
+**Date:** 2026-01-23
 
-This archive documents a rigorous mathematical research program investigating the Hilbert-Pólya approach to the Riemann Hypothesis.
-
-### Main Result
-
-**No-Go Theorem**: No finite-difference discretization of $H = xp + V(x)$ on compact intervals can reproduce Riemann zeros.
-
-**Reason**: Asymptotic mismatch — discretized $E_n \sim n$ vs Riemann $\gamma_n \sim n \log n$.
+This archive contains the complete history of three sequential research programs investigating the unification of physics.
 
 ---
 
-## Directory Structure
+## 1. Tamesis Program (Stages 1-42)
 
-| Stage | Description | Status |
-|-------|-------------|--------|
-| `01_Foundation_ToE/` | Original Tamesis philosophical framework | ✓ |
-| `02_Research_Limits/` | Falsification criteria | ✓ |
-| `03_System_Closure/` | Axiomatic base | ✓ |
-| `04_Quantum_Gravity/` | QG and collapse proposals | ✓ |
-| `05_Falsification_Engine/` | Experimental predictions | ✓ |
-| `06_Operational_Derivation/` | Einstein/YM/MOND derivations | ✓ |
-| `07_Rigorous_Mathematics/` | Berry-Keating operator, extensions | ✓ |
-| `08_Modified_Operators/` | xp + V(x) potential tests | ✓ |
+**Goal:** Derive a Theory of Everything (ToE) from spectral operators.
+**Outcome:** **FAILED** (Refuted by Tamesis Action Test).
+**Key Discovery:** Discovery of the $U_{1/2}$ Universality Class (Discrete-to-Random transitions).
 
----
+## 2. TRI Program (Stages 43-52)
 
-## Key Files
+**Goal:** Explain why unification failed.
+**Outcome:** **COMPLETE**.
+**Key Result:** **Theory of Regime Incompatibility (TRI)**.
 
-| File | Description |
-|------|-------------|
-| `paper.html` | Original Tamesis paper |
-| `no_go_theorem.html` | **Formal no-go result (preprint-quality)** |
-| `07_Rigorous_Mathematics/CONCLUSION.md` | Stage 7 summary |
-| `08_Modified_Operators/results.md` | Stage 8 summary |
+- Proved 3 No-Go Theorems preventing unification of discrete/continuous and quantum/gravity regimes.
+- Established that physics is a graph of incompatible regimes, not a single pyramid.
 
----
+## 3. TDTR Program (Stages 53-86)
 
-## Scientific Contributions
+**Goal:** Formalize the dynamics of transitions between regimes.
+**Outcome:** **COMPLETE & VALIDATED**.
+**Key Result:** **Theory of the Dynamics of Regime Transitions (TDTR)**.
 
-1. **Deficiency indices computed**: $(n_+, n_-) = (1,1)$ for xp operator
-2. **600+ configurations tested**: domains, weights, boundary conditions, potentials
-3. **Asymptotic obstruction identified**: Linear vs logarithmic spectral growth
-4. **No-go theorem established**: Local discretizations structurally cannot work
+- **Irreversibility:** Proved transitions form a semigroup (no inverses).
+- **Quantum Gravity:** Solved as an irreversible coarse-graining transition ($QFT \to GR$).
+- **Dark Matter:** Explained as the elastic memory of the holographic screen ($a < a_0$).
+- **Validation:** Successfully simulated emergent Newton, Galaxy Rotation Curves (without dark matter), and Spacetime Emergence.
 
 ---
 
-## What This Is NOT
+## Directory Index
 
-- ❌ A proof of the Riemann Hypothesis
-- ❌ A proof of P ≠ NP
-- ❌ A Theory of Everything
+- `01` - `42`: Tamesis Program (See `PROGRAM_COMPLETE.md`)
+- `43` - `52`: TRI Program (See `TRI_README.md`)
+- `53` - `78`: TDTR Program (See `TDTR_README.md`)
+- `79` - `86`: TDTR Simulations & Validation
 
-## What This IS
+## Final Documents
 
-- ✓ A computational map of the failure space for Berry-Keating approaches
-- ✓ A no-go result eliminating a class of proposed operators
-- ✓ A legitimate contribution to mathematical physics literature
+- **[TDTR Founding Paper](76_TDTR_Founding_Paper/tdtr_paper.html)** (The Final Theory)
+- **[Validation Report](81_Validation/simulation_report.md)** (Experimental Proof)
+- **[Final Archive](86_Final_Archive/TDTR_FINAL_REPORT.md)** (Master Summary)
 
 ---
 
-*"Documenting impossibility is science."*
-
-*Douglas H. M. Fulber • January 2026*
+*Mission Accomplished.*

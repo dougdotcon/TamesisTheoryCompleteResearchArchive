@@ -9,26 +9,24 @@
 
 ---
 
-## 📜 The Manifesto: What This Repository Is
+## The Manifesto: What This Repository Is
 
 This repository contains the artifacts of an interdisciplinary research program investigating the **Limits of Mathematical Solvability** under physical constraints.
 
-### ✅ What This Is
+### What This Is
 
 * A **Meta-Theoretical Framework** classifying mathematical problems based on the topology of their solution spaces.
 * A formal distinction between **Class A (Rigid)** problems (solvable by geometric exclusion) and **Class B (Universal)** problems (resistant to exclusion, requiring thermodynamic selection).
 * A collection of **Barrier Theorems** suggesting why classical methods fail for problems like $P \text{ vs } NP$ and the Riemann Hypothesis.
 * A library of **Computational Evidence** simulating these structural barriers.
 
-### ❌ What This Is NOT
+### What This Is NOT
 
 * It is **NOT** a claim of having "solved" the Millennium Problems in the classical sense (ZFC derivation).
 * It is **NOT** a "Theory of Everything" unifying Gravity and Quantum Mechanics (though it discusses their incompatibility).
 * It is **NOT** a repository of "crank" proofs. All claims are conditional: *"If physically realizable, then stable."*
 
----
-
-### ⚠️ How NOT to Read This Repository
+### How NOT to Read This Repository
 
 This is not a linear argument leading to a single theorem.
 Each layer is logically independent and conditionally linked.
@@ -36,7 +34,7 @@ Skipping the Core Theory will lead to misinterpretation.
 
 ---
 
-## 🏛️ The Architecture
+## The Architecture
 
 The research is organized into three hierarchical layers:
 
@@ -60,21 +58,21 @@ The research is organized into three hierarchical layers:
 
 ---
 
-## 📦 The Packages (How to Consume)
+## The Packages (How to Consume)
 
-### 📦 PACKAGE A: The Conceptual Anchor
+### PACKAGE A: The Conceptual Anchor
 
 * **For:** Philosophers, Mathematicians.
 * **Read:** [`THEORY_STRUCTURAL_SOLVABILITY/PAPER_01_STRUCTURAL_SOLVABILITY_FOUNDATIONS.md`](THEORY_STRUCTURAL_SOLVABILITY/PAPER_01_STRUCTURAL_SOLVABILITY_FOUNDATIONS.md)
 * **Content:** The definition of "Solvability" and the Class A vs Class B distinction.
 
-### 📦 PACKAGE B: Theoretical Extensions
+### PACKAGE B: Theoretical Extensions
 
 * **For:** Theoretical Physicists.
 * **Read:** [`THEORY_STRUCTURAL_SOLVABILITY/PAPER_03_THERMODYNAMIC_SELECTION.md`](THEORY_STRUCTURAL_SOLVABILITY/PAPER_03_THERMODYNAMIC_SELECTION.md)
 * **Content:** How Entropy acts as a selection principle in undecidable spaces.
 
-### 📦 PACKAGE C: Computational Evidence
+### PACKAGE C: Computational Evidence
 
 * **For:** Computer Scientists, Experimentalists.
 * **Run:** [`THEORY_STRUCTURAL_SOLVABILITY/structural_classifier.py`](THEORY_STRUCTURAL_SOLVABILITY/structual_classifier.py)
@@ -83,7 +81,7 @@ The research is organized into three hierarchical layers:
 
 ---
 
-## 🛡️ Rigor Protocol
+## Rigor Protocol
 
 All documents in this archive are subject to the [**Scientific Rigor Checklist**](AJUSTE_FINO_RIGOR.md).
 We strictly separate:
@@ -94,18 +92,18 @@ We strictly separate:
 
 ---
 
-## 📚 Registered Artifacts & Citation
+## Registered Artifacts & Citation
 
 This repository serves as a **Meta-Archive** containing multiple distinct research artifacts, each with its own Digital Object Identifier (DOI).
 
-### 🏷️ Primary DOIs
+### Primary DOIs
 
 | Artifact Scope | Content | DOI |
 | :--- | :--- | :--- |
 | **Program Root** | The Complete Tamesis Archive (TRI, TDTR, Solvability) | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18357364.svg)](https://doi.org/10.5281/zenodo.18357364) |
 | **Paper** | *The Spectral Origin of the Riemann Zeros* | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18363444.svg)](https://doi.org/10.5281/zenodo.18363444) |
 
-### 📝 How to Cite
+### How to Cite
 
 **For the General Program:**
 > Fulber, D. H. M. (2026). *Program of Metatheoretical Research on Structural Solvability*. Artifact Classification 01-86. DOI: 10.5281/zenodo.18357364.

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エントロピーバウンス：ホログラフィック飽和によるビッグバン特異点の解消</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman - Optimized for PDF/DOI */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+            /* Added Japanese fonts */
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18362039"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18362039</a></div>
+
+    <header>
+        <h1>エントロピーバウンス：ホログラフィック飽和によるビッグバン特異点の解消</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations"> Universidade Federal do Rio de Janeiro, リオデジャネイロ, ブラジル</div>
+        <div class="date">(日付：2026年1月24日)</div>
+    </header>
+
+    <div class="abstract">
+        <strong>Kernel v3
+            エントロピーネットワーク</strong>に基づく非特異的な宇宙論的枠組みを提示します。時空をベッケンシュタイン境界に従う離散テンソルネットワークとしてモデル化することで、宇宙のエネルギー密度が$t=0$で発散せず、ロジスティック飽和曲線に従う（有限の最大接続性を意味する）ことを実証します。これにより、一般相対性理論の一般的な特異点が解消されます。このモデルは、無秩序な量子フォーム（$t
+        < 0$）から幾何学的多様体（$t> 0$）への「ビッグバウンス」（大反調）相転移を予測し、$f \approx 7.47 \times 10^{34}$ Hzでの共鳴重力波シグネチャーによって特徴付けられます。
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">
+            標準的な$\Lambda$CDMモデルにおける初期特異点の存在は物理法則の破綻を表しており、無限の密度と曲率を意味します。私たちは、これが真空を有限の帯域幅を持つ離散情報プロセッサーではなく連続流体として扱うことによるアーティファクトであると提案します。
+        </p>
+
+        <h2>I. 無限の終わり：ホログラフィック飽和</h2>
+
+        <p>一般相対性理論では、フリードマン方程式はスケール因子$a \to 0$として$\rho \to
+            \infty$を意味します。しかし、<strong>エントロピーネットワーク</strong>の形式では、質量/エネルギーは因果グラフの接続度に対応します。</p>
+
+        <p>プランク時代（温度$T \to 5.0$）への宇宙の収縮をシミュレーションすることで、接続密度が発散しないことを観測しました。代わりに、ノードのホログラフィック容量制限（$C_{bits} \approx
+            199$）により飽和します。</p>
+
+        <p>エネルギー入力$E$の関数としての密度$\rho$の「新しいフリードマン方程式」は次のように導出されます：</p>
+
+        <div class="equation">
+            $$ \rho(E) = \rho_{\text{max}} \left( 1 - e^{-k E} \right) $$
+        </div>
+
+        <p><strong>結果：</strong> 事実上、宇宙はプランクスケールで情報の<em>非圧縮性流体</em>として振る舞います。特異点は最大複雑性のプラトーに置き換えられます。</p>
+
+        <figure>
+            <img src="big_bounce_proof.png" alt="飽和とバウンスの証拠">
+            <figcaption>図1. 左：特異点を防ぐ密度飽和曲線。右：ビッグバンを局所エントロピー極小（ボトルネック）として示す「エントロピーバウンス」。</figcaption>
+        </figure>
+
+        <h2>II. ビッグバウンス：相転移</h2>
+
+        <p>私たちのシミュレーションは、$t=0$が時間の始まりではなく、熱力学的相転移であることを明らかにしました。3つの異なる時代を特定しました：</p>
+
+        <ol>
+            <li><strong>崩壊（$t < 0$）：</strong> 無秩序なトポロジー（リッチ曲率$R \approx 0$）を特徴とする高エントロピーの「量子フォーム」レジーム。</li>
+            <li><strong>結晶（$t = 0$）：</strong> 密度飽和がネットワークを高度に秩序だった幾何学的配置に強制します。エントロピーは局所的に低下します（バウンス）。</li>
+            <li><strong>膨張（$t > 0$）：</strong> 宇宙はこの結晶化状態から膨張し、複雑さが増すにつれてエントロピーが増加します（$R > 0$）。</li>
+        </ol>
+
+        <p>これは「時間の矢」のパラドックスを解決します。時間は、結晶化のボトルネックから両方向に無秩序が増加する方向に流れます。</p>
+
+        <h2>III. 観測的署名：「亀裂」</h2>
+
+        <p>$t=0$での相転移は、以前の研究で導出された臨界質量スケール（$M_c \approx 5.51 \times 10^{-16}$ kg）と共鳴する基本振動を放出します。</p>
+
+        <p>この「宇宙の亀裂」の周波数は、プランクスケールの共鳴によって与えられます：</p>
+
+        <div class="equation">
+            $$ f_{\text{crack}} = \frac{M_c c^2}{h} \approx 7.47 \times 10^{34} \text{ Hz} $$
+        </div>
+
+        <p><strong>予測：</strong>
+            この周波数は超高周波ですが、その赤方偏移した残骸は、標準的なインフレーションによって予測される滑らかなスペクトルとは異なり、確率的重力波背景（SGWB）において非白色のスペクトルピークとして検出可能であるはずです。
+        </p>
+
+        <h2>IV. Kernel v3 メカニズム</h2>
+
+        <p>シミュレーションカーネルは、<strong>自由エネルギー最小化</strong>エンジン（$F = U -
+            TS$）を利用します。幾何学の出現は、システムがフラストレーション（$U$）を最小化しながらエントロピー的複雑性（$S$）を最大化するために発生します。</p>
+
+        <p>離散<strong>オリヴィエ・リッチ曲率</strong>をメトリックプロキシとして使用して、システムが冷却するにつれて（$T=2.0 \to
+            T=0.1$）、重力（正の曲率）がランダムノイズから自発的に出現することを証明しました。</p>
+
+        <h2>V. 結論</h2>
+
+        <p>ビッグバンが非特異的なバウンスである宇宙論を運用可能にしました。「Kernel v3」フレームワークは、宇宙を有限容量のエントロピーネットワークとして扱うことで、繰り込みや特異点の必要性を排除することを証明しています。
+        </p>
+
+        <div class="references">
+            <h2>参考文献</h2>
+            <ol>
+                <li>D. H. M. Fulber, <em>Kernel v3: The Autopsy of the Singularity</em> (Research Report, 2026).</li>
+                <li>D. H. M. Fulber, <em>Systematic Derivation of Mc, a0, and H0</em> (Path A Report, 2026).</li>
+                <li>J. D. Bekenstein, <em>Universal upper bound on the entropy-to-energy ratio for bounded systems</em>
+                    (PRD, 1981).</li>
+                <li>Y. Ollivier, <em>Ricci curvature of Markov chains on metric spaces</em> (J. Funct. Anal., 2009).
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>

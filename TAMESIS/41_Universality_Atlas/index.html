@@ -21,11 +21,6 @@
             padding: 1.5cm;
             background-color: #fff;
         }
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
         header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -42,14 +37,22 @@
         .authors { font-size: 10pt; margin-bottom: 0.2rem; }
         .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
         .date { font-size: 9pt; color: #666; }
-        .abstract {
-            font-weight: bold;
-            font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+        
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
         }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+        
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -68,19 +71,12 @@
         }
         p { margin-bottom: 0.8rem; text-indent: 1em; }
         p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
-        /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
         
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; break-inside: avoid;}
         th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
         th { font-weight: bold; border-top: 1px solid #000; }
+        caption { font-weight: bold; margin-bottom: 0.5rem; text-align: left; font-size: 9pt; }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -104,11 +100,11 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
 <body>
     <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    
     <header>
         <h1>An Atlas of Universality Classes in Regime Transitions</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -116,13 +112,8 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We present a complete classification (Atlas) of universality classes for regime transitions. By analyzing state
+    <div class="abstract-container">
+        <strong>Abstract.</strong> We present a complete classification (Atlas) of universality classes for regime transitions. By analyzing state
         space discreteness, perturbation type, and observable algebra, we identify five distinct classes: $U_{1/2}$
         (Computational), $U_2$ (Quantum), $U_0$ (Threshold), $U_{exp}$ (Thermodynamic), and $U_{Ising}$ (Lattice). We
         provide a decision tree for classifying any physical transition into one of these classes. This Atlas serves as
@@ -130,76 +121,74 @@
     </div>
 
     <div class="content-wrapper">
-        <p class="no-indent">Universality is the observation that macroscopic behavior naturally groups into discrete
-            classes
-            independent of microscopic details. Here we catalog these classes.</p>
+        <p class="no-indent">Universality is the observation that macroscopic behavior naturally groups into discrete classes independent of microscopic details. Here we catalog these classes.</p>
 
         <h2>Classification Table</h2>
 
         <table>
             <caption>TABLE I. The Five Universality Classes</caption>
-            <tr>
-                <th>Class</th>
-                <th>$\alpha$</th>
-                <th>State Space</th>
-                <th>Observable</th>
-            </tr>
-            <tr>
-                <td><strong>$U_{1/2}$</strong></td>
-                <td>0.500</td>
-                <td>Discrete</td>
-                <td>Cycle Fraction</td>
-            </tr>
-            <tr>
-                <td><strong>$U_2$</strong></td>
-                <td>2.000</td>
-                <td>Hilbert</td>
-                <td>Purity</td>
-            </tr>
-            <tr>
-                <td><strong>$U_0$</strong></td>
-                <td>0.000</td>
-                <td>Mixed</td>
-                <td>Percolation</td>
-            </tr>
-            <tr>
-                <td><strong>$U_{exp}$</strong></td>
-                <td>exp</td>
-                <td>Continuous</td>
-                <td>Survival Probability</td>
-            </tr>
-            <tr>
-                <td><strong>$U_{Ising}$</strong></td>
-                <td>0.125</td>
-                <td>Lattice</td>
-                <td>Magnetization</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>$\alpha$</th>
+                    <th>State Space</th>
+                    <th>Observable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>$U_{1/2}$</strong></td>
+                    <td>0.500</td>
+                    <td>Discrete</td>
+                    <td>Cycle Fraction</td>
+                </tr>
+                <tr>
+                    <td><strong>$U_2$</strong></td>
+                    <td>2.000</td>
+                    <td>Hilbert</td>
+                    <td>Purity</td>
+                </tr>
+                <tr>
+                    <td><strong>$U_0$</strong></td>
+                    <td>0.000</td>
+                    <td>Mixed</td>
+                    <td>Percolation</td>
+                </tr>
+                <tr>
+                    <td><strong>$U_{exp}$</strong></td>
+                    <td>exp</td>
+                    <td>Continuous</td>
+                    <td>Survival Probability</td>
+                </tr>
+                <tr>
+                    <td><strong>$U_{Ising}$</strong></td>
+                    <td>0.125</td>
+                    <td>Lattice</td>
+                    <td>Magnetization</td>
+                </tr>
+            </tbody>
         </table>
 
         <h2>The Origin of Classes</h2>
 
-        <p class="no-indent">The exponent $\alpha$ is not arbitrary. It encodes the <strong>mechanism</strong> of the
-            transition:</p>
-        <p>1. <strong>$U_{1/2}$:</strong> Arises from counting measures in discrete spaces. The square root comes from
-            random walk statistics on the symmetric group $S_n$.</p>
-        <p>2. <strong>$U_2$:</strong> Arises from the Jacobian of eigenvalues in random matrix theory (GUE). The
-            quadratic
-            repulsion is purely geometric.</p>
-        <p>3. <strong>$U_0$:</strong> Arises from sharp threshold phenomena where probability functions become step
-            functions in the thermodynamic limit.</p>
+        <p class="no-indent">The exponent $\alpha$ is not arbitrary. It encodes the <strong>mechanism</strong> of the transition:</p>
+        
+        <p>1. <strong>$U_{1/2}$:</strong> Arises from counting measures in discrete spaces. The square root comes from random walk statistics on the symmetric group $S_n$.</p>
+        
+        <p>2. <strong>$U_2$:</strong> Arises from the Jacobian of eigenvalues in random matrix theory (GUE). The quadratic repulsion is purely geometric.</p>
+        
+        <p>3. <strong>$U_0$:</strong> Arises from sharp threshold phenomena where probability functions become step functions in the thermodynamic limit.</p>
 
-        <p>This Atlas confirms that universality is about mechanisms, not systems. The same exponent appears in
-            seemingly
-            unrelated fields (e.g., $U_2$ in nuclear physics and number theory) because the underlying invariant
-            mechanism
-            (GUE statistics) is identical.</p>
-<div class="references"><h2>References</h2>
+        <p>This Atlas confirms that universality is about mechanisms, not systems. The same exponent appears in seemingly unrelated fields (e.g., $U_2$ in nuclear physics and number theory) because the underlying invariant mechanism (GUE statistics) is identical.</p>
+
+        <div class="references">
+            <h2>References</h2>
             <ol>
-                <li>H. E. Stanley, <em>Introduction to Phase Transitions and Critical Phenomena</em> (Oxford, 1971).
-                </li>
+                <li>H. E. Stanley, <em>Introduction to Phase Transitions and Critical Phenomena</em> (Oxford, 1971).</li>
                 <li>D. H. M. Fulber, <em>Stage 34: Spectral Theory</em> (2026).</li>
                 <li>M. Mehta, <em>Random Matrices</em> (Academic Press, 1991).</li>
-            </ol></div>
+            </ol>
+        </div>
     </div>
 </body>
 </html>

@@ -26,12 +26,6 @@
             background-color: #fff;
         }
 
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
-
         header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -64,13 +58,20 @@
             color: #666;
         }
 
-        .abstract {
-            font-weight: bold;
-            font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
         }
 
         h2 {
@@ -100,33 +101,15 @@
             text-indent: 0;
         }
 
-        .equation {
-            text-align: center;
-            margin: 0.8rem 0;
-            font-size: 10pt;
-        }
-
-        /* Specialized Boxes compatibility */
-        .axiom-box {
-            border-left: 3px solid #000;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .prediction-box {
-            border: 1px solid #d32f2f;
-            padding: 1rem;
-            margin: 1rem 0;
-            background: #fff5f5;
-        }
-
+        .equation-box,
         .master-equation {
             background: #f8f8f8;
             padding: 1rem;
             margin: 1rem 0;
             border: 1px solid #ccc;
             text-align: center;
+            font-size: 9pt;
+            break-inside: avoid;
         }
 
         .conclusion-box {
@@ -135,6 +118,7 @@
             margin: 1.5rem 0;
             border: 1px solid #4caf50;
             text-align: center;
+            break-inside: avoid;
         }
 
         figure {
@@ -160,6 +144,7 @@
             border-collapse: collapse;
             margin: 1rem 0;
             font-size: 8.5pt;
+            break-inside: avoid;
         }
 
         th,
@@ -172,6 +157,10 @@
         th {
             font-weight: bold;
             border-top: 1px solid #000;
+        }
+
+        .result-highlight {
+            background-color: #fff9c4;
         }
 
         .references {
@@ -190,7 +179,7 @@
         .references li {
             margin-bottom: 0.2rem;
         }
-    
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -204,12 +193,13 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
 
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
         <h1>Experimental Test of Entropic Quantum Mechanics: Temperature-Dependent Uncertainty</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -217,195 +207,160 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
+    <div class="abstract-container">
+        <strong>Abstract.</strong> If the Schrödinger equation emerges from holographic thermodynamics, quantum systems
+        should exhibit temperature-dependent corrections to standard predictions. We propose two experimental tests: (1)
+        measuring the Heisenberg uncertainty product $\Delta x \Delta p$ at different temperatures to detect entropic
+        corrections, and (2) testing whether decoherence rates show enhanced temperature dependence beyond standard
+        models. Using current ion trap technology (1 mK to 300 K range), we predict a measurable deviation of ~1% at
+        room temperature. Positive results would constitute <strong>the first direct evidence that Quantum Mechanics is
+            not fundamental but emergent from thermodynamics</strong>. We provide detailed experimental protocols
+        suitable for implementation in existing ion trap laboratories.
+        <br><br>
+        <strong>Keywords:</strong> Quantum Mechanics, Thermodynamic Emergence, Heisenberg Uncertainty, Decoherence, Ion
+        Traps, TAMESIS Framework
     </div>
 
     <div class="content-wrapper">
-        <div class="abstract">
-            Abstract not found.
+        <h2>1. Introduction</h2>
+        <p>The TAMESIS framework derives the Schrödinger equation from entropic principles:</p>
+        <div class="equation-box">
+            $$i\hbar \frac{\partial \psi}{\partial t} = \hat{H}\psi$$
+        </div>
+        <p>emerges from the continuity equation for probability density $\rho$ and the Hamilton-Jacobi equation for
+            action $S$, with an <em>entropic</em> quantum potential:</p>
+        <div class="equation-box">
+            $$Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 \sqrt{\rho}}{\sqrt{\rho}}$$
+        </div>
+        <p>If this is correct, there should be small but measurable <strong>temperature-dependent corrections</strong>
+            to quantum behavior.</p>
+
+        <h2>2. Theoretical Prediction</h2>
+        <h3>2.1 Modified Uncertainty Relation</h3>
+        <p>Standard QM predicts:</p>
+        <div class="equation-box">
+            $$\Delta x \cdot \Delta p \geq \frac{\hbar}{2}$$
+        </div>
+        <p>with the right-hand side being a constant. Entropic QM predicts:</p>
+        <div class="master-equation">
+            $$\boxed{\Delta x \cdot \Delta p \geq \frac{\hbar}{2} + \alpha \frac{k_B T}{E_{\text{system}}}}$$
+        </div>
+        <p>where $\alpha \sim 0.01$ is a dimensionless coupling constant.</p>
+
+        <h3>2.2 Enhanced Decoherence</h3>
+        <p>Decoherence rates should show additional entropy-driven enhancement:</p>
+        <div class="equation-box">
+            $$\Gamma_{\text{decoherence}} = \Gamma_{\text{standard}} \cdot \left(1 + \beta \ln\left(1 +
+            \frac{T}{T_0}\right)\right)$$
         </div>
 
-        <div class="content-wrapper">
-            <div class="abstract">
-                Abstract not found.
-            </div>
+        <figure>
+            <img src="assets/schrodinger_test.png" alt="Experimental Predictions">
+            <figcaption><strong>Figure 1:</strong> Left: Predicted temperature-dependent correction to the Heisenberg
+                uncertainty. The green shaded region shows experimentally accessible temperatures. Right: Enhanced
+                decoherence rate predicted by Entropic QM (red) vs. standard theory (blue).</figcaption>
+        </figure>
 
-            <div class="content-wrapper">
-                <div class="abstract">
-                    Abstract not found.
-                </div>
+        <h2>3. Experimental Protocol</h2>
+        <h3>3.1 Experiment 1: Uncertainty Measurement</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Requirement</th>
+                    <th>Current Technology</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Temperature range</td>
+                    <td>1 mK – 300 K</td>
+                    <td>✓ Ion traps</td>
+                </tr>
+                <tr>
+                    <td>Position resolution</td>
+                    <td>
+                        < 1 nm</td>
+                    <td>✓ Achieved</td>
+                </tr>
+                <tr>
+                    <td>Momentum resolution</td>
+                    <td>
+                        < 10⁻²⁷ kg·m/s</td>
+                    <td>✓ Doppler</td>
+                </tr>
+                <tr class="result-highlight">
+                    <td>Predicted deviation</td>
+                    <td>~1% at 300 K</td>
+                    <td>Measurable</td>
+                </tr>
+            </tbody>
+        </table>
 
-                <div class="content-wrapper">
-                    <div class="abstract">
-                        If the Schrödinger equation emerges from holographic thermodynamics, quantum systems should
-                        exhibit
-                        temperature-dependent corrections to standard predictions. We propose two experimental tests:
-                        (1) measuring the
-                        Heisenberg uncertainty product $\Delta x \Delta p$ at different temperatures to detect entropic
-                        corrections, and
-                        (2) testing whether decoherence rates show enhanced temperature dependence beyond standard
-                        models. Using current
-                        ion trap technology (1 mK to 300 K range), we predict a measurable deviation of ~1% at room
-                        temperature.
-                        Positive results would constitute <strong>the first direct evidence that Quantum Mechanics is
-                            not fundamental
-                            but emergent from thermodynamics</strong>. We provide detailed experimental protocols
-                        suitable for
-                        implementation in existing ion trap laboratories.
-                        <div class="keywords"><strong>Keywords:</strong> Quantum Mechanics, Thermodynamic Emergence,
-                            Heisenberg
-                            Uncertainty, Decoherence, Ion Traps, TAMESIS Framework
-                        </div>
+        <h3>3.2 Experiment 2: Collapse Timing</h3>
+        <p>Test whether "observer complexity" (Integrated Information $\Phi$) affects collapse rates:</p>
+        <ul>
+            <li><strong>Low $\Phi$:</strong> Simple thermostat as "observer"</li>
+            <li><strong>Medium $\Phi$:</strong> Basic computer monitoring system</li>
+            <li><strong>High $\Phi$:</strong> Recording camera + AI processing</li>
+        </ul>
+        <p>Entropic QM predicts faster collapse with higher $\Phi$.</p>
 
-                        <div class="content-wrapper">
-                        </div>
+        <h2>4. Sensitivity Analysis</h2>
+        <p>At T = 1 K, E = 1 meV (typical trapped ion):</p>
+        <div class="equation-box">
+            $$\delta(\Delta x \Delta p) \sim 0.01 \times \frac{1.38 \times 10^{-23} \text{ J/K} \times 1 \text{ K}}{1.6
+            \times 10^{-22} \text{ J}} \times \frac{\hbar}{2}$$
+            $$\approx 4 \times 10^{-37} \text{ J·s}$$
+        </div>
+        <p>This is ~0.08% of $\hbar/2$. At 300 K, the deviation reaches ~1%.</p>
 
-                        <div class="content-body">
-                            <h2>1. Introduction</h2>
-                            <p>The TAMESIS framework derives the Schrödinger equation from entropic principles:</p>
-                            <div class="equation-box">
-                                $$i\hbar \frac{\partial \psi}{\partial t} = \hat{H}\psi$$
-                            </div>
-                            <p>emerges from the continuity equation for probability density $\rho$ and the
-                                Hamilton-Jacobi equation for
-                                action $S$, with an <em>entropic</em> quantum potential:</p>
-                            <div class="equation-box">
-                                $$Q = -\frac{\hbar^2}{2m} \frac{\nabla^2 \sqrt{\rho}}{\sqrt{\rho}}$$
-                            </div>
-                            <p>If this is correct, there should be small but measurable <strong>temperature-dependent
-                                    corrections</strong>
-                                to quantum behavior.</p>
+        <h2>5. Expected Outcomes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Result</th>
+                    <th>Interpretation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>No T-dependence detected</td>
+                    <td>Standard QM confirmed; Entropic derivation approximate</td>
+                </tr>
+                <tr class="result-highlight">
+                    <td>T-dependent correction found</td>
+                    <td><strong>Revolution: QM is emergent!</strong></td>
+                </tr>
+                <tr>
+                    <td>$\Phi$-dependent collapse rates</td>
+                    <td>Consciousness has physical role</td>
+                </tr>
+            </tbody>
+        </table>
 
-                            <h2>2. Theoretical Prediction</h2>
-                            <h3>2.1 Modified Uncertainty Relation</h3>
-                            <p>Standard QM predicts:</p>
-                            <div class="equation-box">
-                                $$\Delta x \cdot \Delta p \geq \frac{\hbar}{2}$$
-                            </div>
-                            <p>with the right-hand side being a constant. Entropic QM predicts:</p>
-                            <div class="master-equation">
-                                $$\boxed{\Delta x \cdot \Delta p \geq \frac{\hbar}{2} + \alpha \frac{k_B
-                                T}{E_{\text{system}}}}$$
-                            </div>
-                            <p>where $\alpha \sim 0.01$ is a dimensionless coupling constant.</p>
+        <h2>6. Conclusion</h2>
+        <div class="conclusion-box">
+            <h3 style="margin:0;">A Testable Prediction</h3>
+            <p style="margin:0.5rem 0 0 0;">
+                If Quantum Mechanics emerges from thermodynamics,<br>
+                <strong>the Heisenberg uncertainty should increase with temperature by ~1% at 300K</strong>.<br>
+                This experiment is feasible with existing ion trap technology.
+            </p>
+        </div>
 
-                            <h3>2.2 Enhanced Decoherence</h3>
-                            <p>Decoherence rates should show additional entropy-driven enhancement:</p>
-                            <div class="equation-box">
-                                $$\Gamma_{\text{decoherence}} = \Gamma_{\text{standard}} \cdot \left(1 + \beta
-                                \ln\left(1 +
-                                \frac{T}{T_0}\right)\right)$$
-                            </div>
-
-                            <figure>
-                                <img src="assets/schrodinger_test.png" alt="Experimental Predictions">
-                                <figcaption><strong>Figure 1:</strong> Left: Predicted temperature-dependent correction
-                                    to the Heisenberg
-                                    uncertainty. The green shaded region shows experimentally accessible temperatures.
-                                    Right: Enhanced
-                                    decoherence rate predicted by Entropic QM (red) vs. standard theory (blue).
-                                </figcaption>
-                            </figure>
-
-                            <h2>3. Experimental Protocol</h2>
-                            <h3>3.1 Experiment 1: Uncertainty Measurement</h3>
-                            <table>
-                                <tr>
-                                    <th>Parameter</th>
-                                    <th>Requirement</th>
-                                    <th>Current Technology</th>
-                                </tr>
-                                <tr>
-                                    <td>Temperature range</td>
-                                    <td>1 mK – 300 K</td>
-                                    <td>✓ Ion traps</td>
-                                </tr>
-                                <tr>
-                                    <td>Position resolution</td>
-                                    <td>
-                                        < 1 nm</td>
-                                    <td>✓ Achieved</td>
-                                </tr>
-                                <tr>
-                                    <td>Momentum resolution</td>
-                                    <td>
-                                        < 10⁻²⁷ kg·m/s</td>
-                                    <td>✓ Doppler</td>
-                                </tr>
-                                <tr class="result-highlight">
-                                    <td>Predicted deviation</td>
-                                    <td>~1% at 300 K</td>
-                                    <td>Measurable</td>
-                                </tr>
-                            </table>
-
-                            <h3>3.2 Experiment 2: Collapse Timing</h3>
-                            <p>Test whether "observer complexity" (Integrated Information $\Phi$) affects collapse
-                                rates:</p>
-                            <ul>
-                                <li><strong>Low Φ:</strong> Simple thermostat as "observer"</li>
-                                <li><strong>Medium Φ:</strong> Basic computer monitoring system</li>
-                                <li><strong>High Φ:</strong> Recording camera + AI processing</li>
-                            </ul>
-                            <p>Entropic QM predicts faster collapse with higher $\Phi$.</p>
-
-                            <h2>4. Sensitivity Analysis</h2>
-                            <p>At T = 1 K, E = 1 meV (typical trapped ion):</p>
-                            <div class="equation-box">
-                                $$\delta(\Delta x \Delta p) \sim 0.01 \times \frac{1.38 \times 10^{-23} \text{ J/K}
-                                \times 1 \text{ K}}{1.6
-                                \times 10^{-22} \text{ J}} \times \frac{\hbar}{2}$$
-                                $$\approx 4 \times 10^{-37} \text{ J·s}$$
-                            </div>
-                            <p>This is ~0.08% of $\hbar/2$. At 300 K, the deviation reaches ~1%.</p>
-
-                            <h2>5. Expected Outcomes</h2>
-                            <table>
-                                <tr>
-                                    <th>Result</th>
-                                    <th>Interpretation</th>
-                                </tr>
-                                <tr>
-                                    <td>No T-dependence detected</td>
-                                    <td>Standard QM confirmed; Entropic derivation approximate</td>
-                                </tr>
-                                <tr class="result-highlight">
-                                    <td>T-dependent correction found</td>
-                                    <td><strong>Revolution: QM is emergent!</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>Φ-dependent collapse rates</td>
-                                    <td>Consciousness has physical role</td>
-                                </tr>
-                            </table>
-
-                            <h2>6. Conclusion</h2>
-                            <div class="conclusion-box">
-                                <h3 style="margin:0;">A Testable Prediction</h3>
-                                <p style="margin:0.5rem 0 0 0;">
-                                    If Quantum Mechanics emerges from thermodynamics,<br>
-                                    <strong>the Heisenberg uncertainty should increase with temperature by ~1% at
-                                        300K</strong>.<br>
-                                    This experiment is feasible with existing ion trap technology.
-                                </p>
-                            </div>
-                            <div class="references">
-                                <h2>References</h2>
-                                <ol>
-                                    <li>Ozawa, M. (2003). <em>Universally valid reformulation of the Heisenberg
-                                            uncertainty principle</em>.
-                                        Phys. Rev. A 67, 042105.</li>
-                                    <li>Blatt, R. et al. (2012). <em>Quantum simulations with trapped ions</em>. Nat.
-                                        Phys. 8, 277.</li>
-                                    <li>Nelson, E. (1966). <em>Derivation of the Schrödinger Equation from Newtonian
-                                            Mechanics</em>. Phys.
-                                        Rev. 150, 1079.</li>
-                                    <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>.
-                                        ToE Project.</li>
-                                </ol>
-                            </div>
-                        </div>
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Ozawa, M. (2003). <em>Universally valid reformulation of the Heisenberg uncertainty principle</em>.
+                    Phys. Rev. A 67, 042105.</li>
+                <li>Blatt, R. et al. (2012). <em>Quantum simulations with trapped ions</em>. Nat. Phys. 8, 277.</li>
+                <li>Nelson, E. (1966). <em>Derivation of the Schrödinger Equation from Newtonian Mechanics</em>. Phys.
+                    Rev. 150, 1079.</li>
+                <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. ToE Project.</li>
+            </ol>
+        </div>
+    </div>
 </body>
 
 </html>

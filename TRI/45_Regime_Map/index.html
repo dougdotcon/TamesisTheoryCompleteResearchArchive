@@ -5,231 +5,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage 45: The Regime Map | TRI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --card: #12121a;
-            --accent: #9b59b6;
-            --text: #e0e0e0;
-            --success: #00ff88;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: var(--accent);
+            font-size: 14pt;
+            font-weight: bold;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--success);
-            margin: 2rem 0 1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
 
-        .meta {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            font-size: 0.85rem;
+            font-size: 8.5pt;
         }
 
         th,
         td {
-            padding: 0.6rem;
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
             text-align: left;
-            border-bottom: 1px solid #333;
         }
 
         th {
-            background: #1a1a2e;
-            color: var(--accent);
+            font-weight: bold;
+            border-top: 1px solid #000;
         }
 
-        .insight-box {
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
         }
 
-        .no-center {
-            color: #ff4466;
-            font-size: 1.3rem;
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Stage 45: The Regime Map</h1>
-        <p class="meta">Theory of Regime Incompatibility (TRI) | 2026-01-23</p>
+    <header>
+        <h1>Stage 45: The Regime Map and the Absence of a Center</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
 
-        <h2>The "World Map" of Physics</h2>
+    <div class="abstract">
+        We present a comprehensive map of 14 distinct physical regimes cataloged by their $(S, P, O)$ signatures.
+        Topological analysis of this map reveals a "hole" in the center: there is no single regime that shares
+        invariants
+        with all others. This finding constitutes an empirical proof that physics is structurally decentralized. Instead
+        of a pyramid with a unified Theory of Everything at the apex, physics is a graph of locally valid regimes
+        connected by phase transitions. We identify the specific invariant conflicts that prevent the unification of
+        String Theory, Loop Quantum Gravity, and Holographic dualities with the full range of observed phenomena.
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">The history of physics is often presented as a path toward unification: from Newton to
+            Maxwell,
+            to Einstein, and finally to the Standard Model. This narrative implies a convergence toward a single point—a
+            "Theory
+            of Everything" (ToE). TRI challenges this narrative by analyzing the structural compatibility of accepted
+            theories.</p>
+
+        <p>In this Letter, we construct the "Regime Map", a topological representation of the space of physical
+            theories.
+            Each node is a regime; each edge is a feasible transition. The connectivity of this graph reveals
+            fundamental
+            obstructions to global unification.</p>
+
+        <h2>The World Map of Physics</h2>
+
+        <p class="no-indent">Table I lists a subset of the 14 identified regimes. Each entry is characterized by its
+            State Space ($S$),
+            Perturbation Type ($P$), Observable Algebra ($O$), and Universality Class ($\mathcal{U}$).</p>
+
         <table>
+            <caption>TABLE I. The Regime Map</caption>
             <tr>
                 <th>Regime</th>
-                <th>S (State)</th>
-                <th>P (Perturbation)</th>
-                <th>O (Observable)</th>
+                <th>S</th>
+                <th>O</th>
                 <th>Class</th>
             </tr>
             <tr>
                 <td>Classical Mechanics</td>
                 <td>Phase Space</td>
-                <td>Gaussian</td>
                 <td>Geodesic</td>
                 <td>-</td>
             </tr>
             <tr>
-                <td>Classical Chaos (KAM)</td>
+                <td>KAM Chaos</td>
                 <td>Phase Space</td>
-                <td>Threshold</td>
                 <td>Lyapunov</td>
-                <td>U<sub>0</sub></td>
+                <td>$U_0$</td>
             </tr>
             <tr>
                 <td>Thermodynamics</td>
                 <td>Phase Space</td>
-                <td>Gaussian</td>
                 <td>Ensemble</td>
-                <td>U<sub>exp</sub></td>
+                <td>$U_{exp}$</td>
             </tr>
             <tr>
                 <td>General Relativity</td>
                 <td>Riemannian</td>
-                <td>Metric</td>
                 <td>Curvature</td>
                 <td>-</td>
             </tr>
             <tr>
-                <td>MOND</td>
-                <td>Phase Space</td>
-                <td>Threshold</td>
-                <td>Geodesic</td>
-                <td>U<sub>0</sub></td>
-            </tr>
-            <tr>
-                <td>Quantum Mechanics</td>
-                <td>Hilbert</td>
-                <td>Gaussian</td>
-                <td>Spectral</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>Quantum Decoherence</td>
-                <td>Density Matrix</td>
-                <td>Lindblad</td>
-                <td>Spectral</td>
-                <td>U<sub>2</sub></td>
-            </tr>
-            <tr>
                 <td>Quantum Field Theory</td>
                 <td>Fock</td>
-                <td>Field</td>
                 <td>Correlation</td>
-                <td>U<sub>2</sub></td>
+                <td>$U_2$</td>
             </tr>
             <tr>
-                <td>Quantum Gravity</td>
-                <td>Hybrid</td>
-                <td>Metric</td>
-                <td>Spectral</td>
-                <td>UNSOLVED</td>
-            </tr>
-            <tr>
-                <td>U<sub>1/2</sub> (Computation)</td>
+                <td>Computational</td>
                 <td>Permutation</td>
-                <td>Bernoulli</td>
                 <td>Counting</td>
-                <td>U<sub>1/2</sub></td>
+                <td>$U_{1/2}$</td>
             </tr>
             <tr>
                 <td>Ising Model</td>
                 <td>Lattice</td>
-                <td>Threshold</td>
                 <td>Binary</td>
-                <td>U<sub>Ising</sub></td>
-            </tr>
-            <tr>
-                <td>Percolation</td>
-                <td>Lattice</td>
-                <td>Bernoulli</td>
-                <td>Topological</td>
-                <td>U<sub>perc</sub></td>
+                <td>$U_{Ising}$</td>
             </tr>
         </table>
 
-        <h2>Proof: No Common Center</h2>
-        <div class="insight-box">
-            <p class="no-center">14 regimes. 14 unique signatures.</p>
-            <p style="margin-top: 1rem;">There is NO single (S, P, O) triple that contains all of physics.</p>
-            <p style="margin-top: 1rem; color: #888;">This is a STRUCTURAL FACT, not a failure of current physics.</p>
-        </div>
+        <h2>Proof of Decentralization</h2>
+
+        <p class="no-indent">A Unified Theory $T^*$ must contain all other regimes as limiting cases. This implies that
+            the invariants
+            of $T^*$ must be compatible with the invariants of all sub-regimes. However, we observe mutually exclusive
+            invariants:</p>
+        <p>1. <strong>QFT</strong> requires Non-commutative local fields.</p>
+        <p>2. <strong>GR</strong> requires Commutative local curvature.</p>
+        <p>3. <strong>Computational</strong> dynamics require Discrete counting.</p>
+
+        <p>There exists no mathematical structure that is simultaneously Discrete and Continuous, Commutative and
+            Non-commutative.
+            Thus, $T^*$ cannot exist.</p>
 
         <h2>Why ToE Attempts Fail</h2>
-        <table>
-            <tr>
-                <th>Theory</th>
-                <th>Targets</th>
-                <th>Fatal Incompatibility</th>
-            </tr>
-            <tr>
-                <td>String Theory</td>
-                <td>QFT + GR</td>
-                <td>Continuous state space, ignores discrete regimes</td>
-            </tr>
-            <tr>
-                <td>Loop Quantum Gravity</td>
-                <td>QFT + GR</td>
-                <td>Discretizes spacetime, breaks continuous invariants</td>
-            </tr>
-            <tr>
-                <td>Holographic (AdS/CFT)</td>
-                <td>QFT + GR</td>
-                <td>Boundary/bulk, not universal</td>
-            </tr>
-            <tr>
-                <td>Tamesis Action</td>
-                <td>Cosmological + MOND + Quantum</td>
-                <td>REFUTED: Stage 35</td>
-            </tr>
-        </table>
 
-        <h2>Key Insight</h2>
-        <div class="insight-box">
-            <p style="color: var(--accent); font-size: 1.2rem;">Physics is not a pyramid with one theory at the top.</p>
-            <p style="margin-top: 1rem;">Physics is a <strong>GRAPH</strong> of regimes with transitions between them.
-            </p>
+        <p class="no-indent">We can categorize failed ToEs by which invariants they violate:</p>
+        <p>- <strong>String Theory:</strong> Assumes a continuous background (violates discrete regimes like
+            Ising/Computation).</p>
+        <p>- <strong>Loop Quantum Gravity:</strong> Discretizes spacetime (violates continuous invariants of standard
+            GR/QFT).</p>
+        <p>- <strong>Holographic (AdS/CFT):</strong> Relies on boundary/bulk duality which is not universal to all
+            geometries (e.g., dS space).</p>
+
+        <p>The failure is not one of precision, but of category. You cannot construct a sphere from only flat tiles
+            without gaps.</p>
+
+        <h2>Conclusion</h2>
+
+        <p class="no-indent">Physics is a graph, not a pyramid. The fundamental objects of study should shift from the
+            nodes (state laws) to the edges (transition laws). This perspective resolves the conflict between QFT and GR
+            by treating them as distinct nodes connected by an irreversible transition [1], rather than forcing them
+            into a
+            single incompatible framework.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>D. H. M. Fulber, <em>Stage 76: The Dynamics of Regime Transitions</em> (2026).</li>
+                <li>J. Butterfield and C. Isham, <em>Physics meets Philosophy at the Planck Scale</em> (Cambridge,
+                    2001).</li>
+                <li>C. Rovelli, <em>Quantum Gravity</em> (Cambridge University Press, 2004).</li>
+            </ol>
         </div>
-
     </div>
 </body>
 

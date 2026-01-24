@@ -5,420 +5,307 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Tamesis Theory: Structural Unity and Falsification</title>
-
-    <!-- KaTeX for Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-
     <style>
-        /* === ACADEMIC JOURNAL STYLING === */
-        /* Inspired by Physical Review, Nature, and IEEE standards */
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
         * {
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
 
-        /* === HEADER === */
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid #ccc;
         }
 
         h1 {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 18pt;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-            color: #000;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
             font-size: 14pt;
-            font-weight: normal;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #444;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
         }
 
         .authors {
-            font-size: 12pt;
-            font-weight: normal;
-            color: #000;
-            margin-bottom: 0.25rem;
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
         }
 
         .affiliations {
-            font-size: 10pt;
+            font-size: 9pt;
             font-style: italic;
-            color: #333;
-            margin-bottom: 0.5rem;
+            color: #444;
+            margin-bottom: 1rem;
         }
 
-        /* === ABSTRACT === */
-        .abstract-box {
-            margin: 2rem 1rem;
-            font-size: 10pt;
-            text-align: justify;
-            padding: 1.5rem;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            background-color: #fcfcfc;
+        .date {
+            font-size: 9pt;
+            color: #666;
         }
 
-        .abstract-title {
+        .abstract {
             font-weight: bold;
             font-size: 9pt;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
 
-        /* === TYPOGRAPHY === */
         h2 {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 13pt;
+            font-size: 10pt;
             font-weight: bold;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: #000;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.3rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
 
         h3 {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
+            font-size: 10pt;
             font-weight: bold;
             font-style: italic;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #222;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
         }
 
         p {
-            margin-bottom: 1rem;
-            text-align: justify;
-            text-indent: 1.5em;
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
         }
 
         p.no-indent {
             text-indent: 0;
-            margin-bottom: 0.5rem;
         }
 
-        /* === BOXES & LISTS === */
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
+        /* Specialized Boxes for this paper */
         .axiom-box {
-            background: #fff;
-            border-left: 4px solid #000;
-            padding: 0.8rem 1.2rem;
+            border-left: 3px solid #000;
+            padding-left: 0.8rem;
             margin: 1rem 0;
             font-style: italic;
+            font-size: 9pt;
         }
 
         .axiom-title {
             font-style: normal;
             font-weight: bold;
             display: block;
-            margin-bottom: 0.3rem;
-            font-size: 10pt;
-            text-transform: uppercase;
+            margin-bottom: 0.2rem;
         }
 
         .prediction-box {
-            background-color: #fff5f5;
-            border: 1px solid #e57373;
-            border-left: 4px solid #d32f2f;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .death-criteria-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .death-criteria-list li {
+            border: 1px solid #d32f2f;
             padding: 1rem;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 2.5rem;
+            margin: 1rem 0;
+            background: #fff5f5;
         }
 
-        .death-criteria-list li::before {
-            content: "✕";
-            color: #d32f2f;
-            font-weight: bold;
-            font-size: 1.2em;
-            position: absolute;
-            left: 0.5rem;
-            top: 1rem;
-        }
-
-        .death-criteria-list strong {
-            color: #d32f2f;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            margin-right: 0.5rem;
-        }
-
-        /* === EQUATIONS === */
-        .equation-box {
-            background: #f9f9f9;
-            padding: 1rem;
-            margin: 1.5rem 0;
+        /* Figures */
+        figure {
+            margin: 1rem 0;
             text-align: center;
+        }
+
+        figure img {
+            width: 100%;
             border: 1px solid #eee;
         }
 
-        /* === TABLES === */
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 10pt;
+            margin: 1rem 0;
+            font-size: 8.5pt;
         }
 
         th,
         td {
-            border-top: 1px solid #000;
             border-bottom: 1px solid #000;
-            padding: 0.5rem;
+            padding: 0.4rem;
             text-align: left;
         }
 
         th {
-            background: #f5f5f5;
             font-weight: bold;
-            text-transform: uppercase;
-            font-size: 9pt;
+            border-top: 1px solid #000;
         }
 
-        .directory-link {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-            border-bottom: 1px dotted #000;
-        }
-
-        .directory-link:hover {
-            border-bottom: 1px solid #000;
-        }
-
-        /* === FOOTER === */
         .footer {
             margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid #000;
             text-align: center;
             font-style: italic;
-            font-size: 10pt;
+            font-size: 9pt;
             color: #666;
         }
     </style>
 </head>
 
 <body>
-
     <header>
-        <h1>The Tamesis Theory</h1>
-        <div class="subtitle">Structural Unity through Spectral Topology & Falsifiable Limits</div>
+        <h1>The Tamesis Theory: Structural Unity and Falsification</h1>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">UNIVERSIDADE FEDERAL DO RIO DE JANEIRO • TARDIS Program • January 2026</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <!-- 1. ABSTRACT -->
-    <div class="abstract-box">
-        <span class="abstract-title">Abstract</span>
+    <div class="abstract">
         We predict a Discontinuous Loss of Interference at a fixed Critical Mass ($M_c \approx 2.2 \times 10^{-14}$ kg),
         incompatible with any standard environmental decoherence or Continuous Spontaneous Localization (CSL) model.
         This "Topological Phase Step" is the unique signature of discrete spacetime saturation and acts as the singular
         falsification criterion for the entire unified framework.
     </div>
 
-    <!-- 2. ONE-PAGE CORE -->
-    <section>
-        <h2>1. The Irreducible Core</h2>
-        <p>The Tamesis Theory is not a model of particles, but a model of <strong>spacetime topology</strong> from which
-            particles and forces emerge. It is structurally closed and defined by exactly 5 irreducible axioms.</p>
+    <div class="content-wrapper">
+        <section>
+            <h2>1. The Irreducible Core</h2>
+            <p class="no-indent">The Tamesis Theory is not a model of particles, but a model of <strong>spacetime
+                    topology</strong> from which
+                particles and forces emerge. It is structurally closed and defined by exactly 5 irreducible axioms.</p>
 
-        <h3>The 5 Strong Axioms</h3>
+            <h3>The 5 Strong Axioms</h3>
 
-        <div class="axiom-box">
-            <span class="axiom-title">Axiom I: Topological Manifold</span>
-            Physical spacetime is a dynamic 4-manifold where "particles" are topological defects (knots/wormholes) in
-            the vacuum structure, not independent entities.
-        </div>
+            <div class="axiom-box">
+                <span class="axiom-title">Axiom I: Topological Manifold</span>
+                Physical spacetime is a dynamic 4-manifold where "particles" are topological defects (knots/wormholes)
+                in
+                the vacuum structure, not independent entities.
+            </div>
 
-        <div class="axiom-box">
-            <span class="axiom-title">Axiom II: Holographic Limit</span>
-            Information density is strictly bounded by surface area ($\le 1$ bit per Planck area). Gravity is the
-            entropic force arising from this saturation.
-        </div>
+            <div class="axiom-box">
+                <span class="axiom-title">Axiom II: Holographic Limit</span>
+                Information density is strictly bounded by surface area ($\le 1$ bit per Planck area). Gravity is the
+                entropic force arising from this saturation.
+            </div>
 
-        <div class="axiom-box">
-            <span class="axiom-title">Axiom III: Spectral Dynamics</span>
-            The dynamics of the system are governed by the eigenvalues of a single Spectral Operator acting on the
-            vacuum topology.
-        </div>
+            <div class="axiom-box">
+                <span class="axiom-title">Axiom III: Spectral Dynamics</span>
+                The dynamics of the system are governed by the eigenvalues of a single Spectral Operator acting on the
+                vacuum topology.
+            </div>
 
-        <div class="axiom-box">
-            <span class="axiom-title">Axiom IV: Critical Scale ($M_c$)</span>
-            There exists a fundamental scale $M_c$ where the system undergoes a topological phase transition (Unitary
-            $\to$ Classic), appearing as objective wavefunction collapse. <strong>Origin:</strong> Saturating the
-            holographic bound on a genus-1 topology.
-        </div>
+            <div class="axiom-box">
+                <span class="axiom-title">Axiom IV: Critical Scale ($M_c$)</span>
+                There exists a fundamental scale $M_c$ where the system undergoes a topological phase transition
+                (Unitary
+                $\to$ Classic), appearing as objective wavefunction collapse. <strong>Origin:</strong> Saturating the
+                holographic bound on a genus-1 topology.
+            </div>
 
-        <div class="axiom-box">
-            <span class="axiom-title">Axiom V: Effective Unitary Scrambling</span>
-            Local violations of linearity (collapse) preserve global information through unitary scrambling (horizon
-            dynamics), ensuring no information loss.
-        </div>
+            <div class="axiom-box">
+                <span class="axiom-title">Axiom V: Effective Unitary Scrambling</span>
+                Local violations of linearity (collapse) preserve global information through unitary scrambling (horizon
+                dynamics), ensuring no information loss.
+            </div>
 
-        <h3>The Spectral Operator</h3>
-        <p>The entire phenomenology is generated by the canonical operator:</p>
-        <div class="equation-box">
-            $$\mathcal{O} = \text{Spec}\big( \Delta_{\text{top}} + \lambda \mathcal{S}_{\partial} \big)$$
-        </div>
-        <p class="no-indent">Where:</p>
-        <ul>
-            <li>$\Delta_{\text{top}}$: Laplacian describing topological connectivity (Spin/Charges).</li>
-            <li>$\mathcal{S}_{\partial}$: Boundary Entropy Term (Gravity/Forces).</li>
-            <li>$\lambda$: Coupling constant derived from geometry (Fine Structure).</li>
-        </ul>
-    </section>
+            <h3>The Spectral Operator</h3>
+            <p>The entire phenomenology is generated by the canonical operator:</p>
+            <div class="equation">
+                $$\mathcal{O} = \text{Spec}\big( \Delta_{\text{top}} + \lambda \mathcal{S}_{\partial} \big)$$
+            </div>
+        </section>
 
-    <!-- 3. KILLER PREDICTION -->
-    <section>
-        <h2>2. The Fatal Prediction</h2>
-        <p>The Standard Model and standard CSL models predict a <strong>smooth</strong> transition from quantum to
-            classical behavior. Tamesis predicts a <strong>Topological Step</strong>.</p>
+        <section>
+            <h2>2. The Fatal Prediction</h2>
+            <p>The Standard Model and standard CSL models predict a <strong>smooth</strong> transition from quantum to
+                classical behavior. Tamesis predicts a <strong>Topological Step</strong>.</p>
 
-        <div class="prediction-box">
-            <span class="axiom-title" style="color:#d32f2f;">The Tamesis Cliff</span>
-            <p class="no-indent">Interference Visibility ($V$) vs Mass ($M$):</p>
+            <div class="prediction-box">
+                <strong>The Tamesis Cliff:</strong> Interference Visibility ($V$) vs Mass ($M$):
+                <ul>
+                    <li><strong>$M < M_c$:</strong> $V \approx 1$ (Quantum)</li>
+                    <li><strong>$M = M_c$:</strong> $V \to 0$ <strong>instantly</strong> (within $\Delta M < 1\%$).</li>
+                    <li><strong>$M > M_c$:</strong> $V = 0$ (Classical)</li>
+                </ul>
+                <p><em>Result: An abrupt "step" function, not a decaying exponential. Unlike CSL or GRW, this
+                        transition is non-stochastic and spectrally gapped.</em></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Proposed Experiment</h2>
+            <p>We propose a <strong>Levitated Nanoparticle Interferometry</strong> setup to verify this step. The
+                experiment
+                does not require high-energy colliders, only precise mass control in the mesoscopic range.</p>
+
+            <figure>
+                <img src="tamesis_lab_sim.gif" alt="Simulation of Tamesis Lab Experiment">
+                <figcaption>FIG 1: Simulation of Tamesis Lab Experiment. The theory predicts an abrupt loss of fringes
+                    at $M_c$.</figcaption>
+            </figure>
+
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>Talbot-Lau Interferometry</td>
+                </tr>
+                <tr>
+                    <td>Target Mass Sweep</td>
+                    <td>$10^{-15}$ kg to $10^{-13}$ kg</td>
+                </tr>
+                <tr>
+                    <td>Observation Target</td>
+                    <td>Step in visibility contrast</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>4. Falsification Criteria</h2>
+            <p>The theory must be declared <strong>FALSE</strong> if:</p>
             <ul>
-                <li><strong>$M < M_c$:</strong> $V \approx 1$ (Quantum)</li>
-                <li><strong>$M = M_c$:</strong> $V \to 0$ <strong>instantly</strong> (within $\Delta M < 1\%$).</li>
-                <li><strong>$M > M_c$:</strong> $V = 0$ (Classical)</li>
+                <li><strong>Smooth Decay:</strong> Visibility decays smoothly ($e^{-t/\tau}$) instead of a step.</li>
+                <li><strong>Superluminal Signaling:</strong> Collapse allows FTL communication.</li>
+                <li><strong>Null Gap:</strong> No critical mass $M_c$ is found up to Planck mass.</li>
             </ul>
-            <p><em>Result: An abrupt "step" function, not a decaying exponential. <strong>Unlike CSL or GRW, this
-                        transition is non-stochastic and spectrally gapped.</strong></em></p>
+        </section>
+
+        <div class="footer">
+            "Where exactly will this fail?" — The beginning of Real Physics.
         </div>
-    </section>
-
-    <!-- 4. TABLETOP EXPERIMENT -->
-    <section>
-        <h2>3. Proposed Experiment</h2>
-        <p>We propose a <strong>Levitated Nanoparticle Interferometry</strong> setup to verify this step. The experiment
-            does not require high-energy colliders, only precise mass control in the mesoscopic range. Crucially, it
-            does not require continuous resolution of the decay curve; only the detection of the <strong>sudden
-                absence</strong> of fringes.</p>
-
-        <div style="text-align: center; margin: 2rem 0;">
-            <img src="tamesis_lab_sim.gif" alt="Simulation of Tamesis Lab Experiment"
-                style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Figure 1: Simulation of Tamesis Lab
-                Experiment</div>
-        </div>
-
-        <table style="width:100%; max-width:600px; margin: 1rem auto;">
-            <tr>
-                <th>Parameter</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td><strong>Method</strong></td>
-                <td>Talbot-Lau Interferometry with Silicon nanospheres</td>
-            </tr>
-            <tr>
-                <td><strong>Target Mass Sweep</strong></td>
-                <td>$10^{-15}$ kg to $10^{-13}$ kg</td>
-            </tr>
-            <tr>
-                <td><strong>Critical Value ($M_c$)</strong></td>
-                <td>$\approx 2.2 \times 10^{-14}$ kg</td>
-            </tr>
-            <tr>
-                <td><strong>Observation Target</strong></td>
-                <td>Detect "Step" in visibility contrast</td>
-            </tr>
-        </table>
-    </section>
-
-    <!-- 5. DEATH CRITERIA -->
-    <section>
-        <h2>4. Death Criteria (Falsification)</h2>
-        <p>The theory is rigid. It cannot be adjusted. It must be declared <strong>FALSE</strong> if any of the
-            following are observed:</p>
-
-        <ul class="death-criteria-list">
-            <li><strong>Smooth Decay:</strong> If the interference visibility decays smoothly ($e^{-t/\tau}$) instead of
-                a step function, the topological phase argument is invalid.</li>
-            <li><strong>Superluminal Signaling:</strong> If the collapse allows FTL communication (violation of
-                No-Signaling), the holographic screening is flawed.</li>
-            <li><strong>Null Gap:</strong> If no critical mass $M_c$ is found up to Planck mass, the axiom of finite
-                information is false.</li>
-        </ul>
-    </section>
-
-    <!-- 6. DATA & RESOURCES -->
-    <section>
-        <h2>5. Project Data Structure (Zenodo Archive)</h2>
-        <p>This document accompanies the full research archive, organized into three stages:</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%">Stage</th>
-                    <th style="width: 55%">Contents</th>
-                    <th style="width: 20%">Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>01_Foundation_ToE</strong></td>
-                    <td>The Holographic Framework and Scientific Engines.</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><strong>02_Research_Limits</strong></td>
-                    <td>M_c derivation and Limits.</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><strong>03_System_Closure</strong></td>
-                    <td>Axiomatic Reduction, Spectral Operator, and Death Criteria.</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <div class="footer">
-        "Where exactly will this fail?" — The beginning of Real Physics.
     </div>
-
 </body>
 
 </html>

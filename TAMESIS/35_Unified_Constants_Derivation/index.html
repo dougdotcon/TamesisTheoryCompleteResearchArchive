@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,252 +10,238 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        * { box-sizing: border-box; }
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Times New Roman', Times, Georgia, serif;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
             color: #000;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 2cm;
+            padding: 1.5cm;
             background-color: #fff;
         }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid #c00;
+            border-bottom: 1px solid #ccc;
         }
+
         h1 {
-            font-size: 18pt;
+            font-size: 14pt;
             font-weight: bold;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
-            text-transform: uppercase;
+            text-transform: none;
             color: #c00;
+            /* Keeping the refutation color hint */
         }
-        .subtitle {
-            font-size: 14pt;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #444;
-        }
-        .verdict-box {
-            background: #ffe0e0;
-            border: 3px solid #c00;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 14pt;
-            font-weight: bold;
-        }
-        .abstract-box {
-            margin: 2rem 1rem;
+
+        .authors {
             font-size: 10pt;
-            text-align: justify;
-            padding: 1.5rem;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            background-color: #fcfcfc;
+            margin-bottom: 0.2rem;
         }
-        h2 {
-            font-size: 13pt;
-            font-weight: bold;
-            margin-top: 2rem;
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
             margin-bottom: 1rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.3rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
             text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
-        .equation-box {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
             text-align: center;
-            border: 1px solid #eee;
+            margin: 0.8rem 0;
+            font-size: 10pt;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 10pt;
+            margin: 1rem 0;
+            font-size: 8.5pt;
         }
-        th, td {
-            border: 1px solid #000;
-            padding: 0.5rem;
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
             text-align: left;
         }
-        th { background: #f5f5f5; font-weight: bold; }
-        .pass { background: #d4edda; }
-        .fail { background: #f8d7da; }
-        .catastrophic { background: #c00; color: white; font-weight: bold; }
-        footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 2px solid #c00;
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
+        .verdict-box {
+            border: 2px solid #c00;
+            padding: 1rem;
+            margin: 1rem 0;
             text-align: center;
-            font-style: italic;
-            font-size: 10pt;
-            color: #666;
+            font-weight: bold;
+            color: #c00;
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Stage 35: Unified Constants Derivation</h1>
-        <div class="subtitle">The Definitive Test: Theory of Everything vs Beautiful Theory</div>
+        <h1>Stage 35: Unified Constants Derivation - REFUTATION</h1>
         <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations">TARDIS Program - Final Assessment - January 2026</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="verdict-box">
-        VERDICT: THE TAMESIS ACTION AS A THEORY OF EVERYTHING IS REFUTED
+    <div class="abstract">
+        We report the failure of the "Tamesis Action" to provide a unified derivation of the cosmological constant
+        $\Lambda$, the MOND acceleration $a_0$, and the critical collapse mass $M_c$ from a single holographic radius
+        $R_H$. While $\Lambda$ is consistent with the de Sitter horizon by definition, and $a_0$ shows an
+        order-of-magnitude
+        coincidence, the derived value for $M_c$ diverges from observation by 24 orders of magnitude ($10^9$ kg vs
+        $10^{-14}$ kg). This catastrophic failure refutes the central hypothesis of the Tamesis Action as a Theory of
+        Everything, demonstrating that quantum wavefunction collapse is a local phenomenon independent of cosmological
+        scales.
     </div>
 
-    <div class="abstract-box">
-        <strong>Abstract:</strong> We performed the definitive test of the Tamesis Action as a unified theory. 
-        The test required that three fundamental scales - the cosmological constant $\Lambda$, the MOND 
-        acceleration $a_0$, and the critical collapse mass $M_c$ - all emerge from a single holographic 
-        radius $R_H$. The test failed catastrophically for $M_c$, with a discrepancy of 24 orders of magnitude. 
-        We conclude that $\Lambda$, $a_0$, and $M_c$ are three independent phenomena that cannot be unified 
-        through holographic principles alone.
-    </div>
-
-    <section>
-        <h2>1. The Test</h2>
-        <p><strong>Postulate:</strong> There exists a single holographic radius $R_H$ that determines all 
-        fundamental scales.</p>
-        
-        <div class="equation-box">
-            <p><strong>Required Derivations:</strong></p>
-            $$\Lambda = \frac{3}{R_H^2}$$
-            $$a_0 = \frac{c^2}{R_H}$$
-            $$M_c = \frac{\hbar \cdot R_H}{c^2 \cdot l_P}$$
+    <div class="content-wrapper">
+        <div class="verdict-box">
+            VERDICT: REFUTED
         </div>
-        
-        <p><strong>Success Criterion:</strong> All three observed values must emerge from the same $R_H = c/H_0$.</p>
-    </section>
 
-    <section>
-        <h2>2. Results</h2>
-        
+        <p class="no-indent">The allure of a Theory of Everything (ToE) often lies in its ability to connect the very
+            large (Cosmology) with the very small (Quantum Mechanics). The Tamesis Action proposed that a single length
+            scale,
+            the Holographic Radius $R_H = c/H_0$, fundamentally determines all other physical constants [1].</p>
+
+        <p>In this Letter, we subject this hypothesis to a definitive falsification test. We require that the three key
+            scales observed in nature ($\Lambda$, $a_0$, $M_c$) be derivable from $R_H$ without adjustable parameters.
+        </p>
+
+        <h2>The Test</h2>
+
+        <p class="no-indent"><strong>Postulate:</strong> $R_H$ determines the Universe.</p>
+        <div class="equation">
+            $$\Lambda = \frac{3}{R_H^2}, \quad a_0 = \frac{c^2}{R_H}, \quad M_c = \frac{\hbar R_H}{c^2 l_P}$$
+        </div>
+        <p><strong>Success Criterion:</strong> All derived values must match observations within experimental error.</p>
+
+        <h2>Results</h2>
+
         <table>
+            <caption>TABLE I. Comparison of Theory vs Observation</caption>
             <tr>
                 <th>Parameter</th>
-                <th>Derived (from $R_H = c/H_0$)</th>
+                <th>Derived ($R_H$)</th>
                 <th>Observed</th>
-                <th>Ratio</th>
                 <th>Status</th>
             </tr>
             <tr>
-                <td>$\Lambda$ (cosmological constant)</td>
-                <td>$1.59 \times 10^{-52}$ m$^{-2}$</td>
-                <td>$1.11 \times 10^{-52}$ m$^{-2}$</td>
-                <td>1.44</td>
-                <td class="pass">PASSED</td>
+                <td>$\Lambda$</td>
+                <td>$1.6 \times 10^{-52}$ m$^{-2}$</td>
+                <td>$1.1 \times 10^{-52}$ m$^{-2}$</td>
+                <td>Passed</td>
             </tr>
             <tr>
-                <td>$a_0$ (MOND acceleration)</td>
-                <td>$6.55 \times 10^{-10}$ m/s$^2$</td>
-                <td>$1.20 \times 10^{-10}$ m/s$^2$</td>
-                <td>5.46</td>
-                <td class="fail">FAILED</td>
+                <td>$a_0$</td>
+                <td>$6.6 \times 10^{-10}$ m/s$^2$</td>
+                <td>$1.2 \times 10^{-10}$ m/s$^2$</td>
+                <td>Failed (5x)</td>
             </tr>
             <tr>
-                <td>$M_c$ (collapse mass)</td>
-                <td>$9.97 \times 10^{9}$ kg</td>
-                <td>$2.20 \times 10^{-14}$ kg</td>
-                <td>$4.5 \times 10^{23}$</td>
-                <td class="catastrophic">CATASTROPHIC</td>
+                <td>$M_c$</td>
+                <td>$10^{9}$ kg</td>
+                <td>$10^{-14}$ kg</td>
+                <td><strong>Refuted</strong> ($10^{23}$x)</td>
             </tr>
         </table>
-    </section>
 
-    <section>
-        <h2>3. Cross-Consistency Test</h2>
-        
-        <table>
-            <tr>
-                <th>Relation</th>
-                <th>Expected</th>
-                <th>Observed</th>
-                <th>Ratio</th>
-            </tr>
-            <tr>
-                <td>$a_0^2 = c^4 \Lambda$</td>
-                <td>$8.9 \times 10^{-19}$</td>
-                <td>$1.4 \times 10^{-20}$</td>
-                <td class="fail">0.016</td>
-            </tr>
-            <tr>
-                <td>$M_c \cdot a_0 \cdot l_P = \hbar$</td>
-                <td>$1.05 \times 10^{-34}$</td>
-                <td>$4.3 \times 10^{-59}$</td>
-                <td class="catastrophic">~0</td>
-            </tr>
-            <tr>
-                <td>$a_0 = c \cdot H_0$</td>
-                <td>$6.5 \times 10^{-10}$</td>
-                <td>$1.2 \times 10^{-10}$</td>
-                <td class="fail">0.18</td>
-            </tr>
-        </table>
-        
-        <p><strong>All cross-consistency relations FAILED.</strong></p>
-    </section>
+        <h2>Analysis of the Failure</h2>
 
-    <section>
-        <h2>4. Analysis</h2>
-        
-        <h3>Why $\Lambda$ Works (Marginally)</h3>
-        <p>$\Lambda = 3/R_H^2$ with $R_H = c/H_0$ is essentially the definition of the de Sitter horizon. 
-        This is a tautology, not a derivation.</p>
-        
-        <h3>Why $a_0$ Fails</h3>
-        <p>The "MOND coincidence" $a_0 \sim c \cdot H_0$ is an empirical observation with ratio ~0.18 (not ~1). 
-        Calling this a "derivation" is misleading.</p>
-        
-        <h3>Why $M_c$ Fails Catastrophically</h3>
-        <p>$M_c$ depends on LOCAL quantum physics:</p>
-        <ul>
-            <li>Coherence length (~$10^{-6}$ m)</li>
-            <li>Self-gravitation of quantum superpositions</li>
-            <li>Diosi formula: $M_c \sim (\hbar R_{\rm coh} / G)^{1/3}$</li>
-        </ul>
-        <p><strong>$M_c$ does NOT contain $R_H$, $\Lambda$, $H_0$, or any cosmological scale.</strong></p>
-    </section>
+        <p class="no-indent">The failure of $M_c$ is instructive. The Tamesis prediction assumed that the mass causing
+            collapse is related to the cosmic horizon. However, the observed $M_c \sim 10^{-14}$ kg (nanoparticle scale)
+            depends on <em>local</em> parameters: coherence length and self-gravity [2]. The discrepancy of 24 orders of
+            magnitude is not a calculation error; it is a category error. Quantum collapse is not a cosmological effect.
+        </p>
 
-    <section>
-        <h2>5. Conclusion</h2>
-        
-        <div class="verdict-box">
-            $\Lambda$, $a_0$, and $M_c$ are THREE INDEPENDENT phenomena.<br>
-            Holographic unification is an ILLUSION based on order-of-magnitude coincidences.<br>
-            The Tamesis Action is a beautiful compilation, but NOT a Theory of Everything.
+        <h2>Conclusion</h2>
+
+        <p class="no-indent">The Tamesis Action is falsified. $\Lambda$ and $a_0$ may be related through large-scale
+            geometry, but $M_c$ is an independent local scale. Unification of these three requires a theory that
+            accommodates
+            independent regimes [3], not a single holographic formula.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>D. H. M. Fulber, <em>Tamesis Action Postulate</em> (Preprint, 2026).</li>
+                <li>L. Diosi, Phys. Rev. A <strong>40</strong>, 1165 (1989).</li>
+                <li>D. H. M. Fulber, <em>Theory of Regime Incompatibility</em> (2026).</li>
+            </ol>
         </div>
-        
-        <h3>What This Means</h3>
-        <ul>
-            <li><strong>The Tamesis Action is NOT a ToE</strong> in the strong sense</li>
-            <li><strong>Wavefunction collapse</strong> (if real) is independent of cosmology</li>
-            <li><strong>MOND</strong> may or may not be related to $\Lambda$ (inconclusive)</li>
-            <li><strong>The holographic postulate</strong> is insufficient for unification</li>
-        </ul>
-        
-        <h3>Scientific Value</h3>
-        <p>This negative result is extremely valuable because:</p>
-        <ol>
-            <li>It eliminates a class of theories: pure holography does not unify everything</li>
-            <li>It defines limits: $\Lambda$ and $a_0$ may be related, $M_c$ is not</li>
-            <li>It redirects research: quantum collapse is independent of cosmology</li>
-            <li>It demonstrates rigor: the test was honest and fatal</li>
-        </ol>
-    </section>
-
-    <footer>
-        Tamesis Theory Research Archive - Stage 35: Final Assessment<br>
-        <strong>"A theory that fails an honest test is more valuable than 100 beautiful theories that are never tested."</strong>
-    </footer>
+    </div>
 </body>
+
 </html>

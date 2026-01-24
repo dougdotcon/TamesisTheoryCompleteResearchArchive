@@ -4,285 +4,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stage 44: Regime Invariants | TRI</title>
+    <title>Stage 44: Regime Invariants and Universality Classes | TRI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --card: #12121a;
-            --accent: #ff6b35;
-            --text: #e0e0e0;
-            --dim: #888;
-            --success: #00ff88;
-            --warning: #ffaa00;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: var(--accent);
+            font-size: 14pt;
+            font-weight: bold;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--success);
-            margin: 2rem 0 1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
 
-        .meta {
-            color: var(--dim);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
         }
 
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
+        p.no-indent {
+            text-indent: 0;
         }
 
-        .theorem-box {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--warning);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-        }
-
-        .theorem-box h3 {
-            color: var(--warning);
-            margin-bottom: 1rem;
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            font-size: 0.9rem;
+            font-size: 8.5pt;
         }
 
         th,
         td {
-            padding: 0.75rem;
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
             text-align: left;
-            border-bottom: 1px solid #333;
         }
 
         th {
-            background: #1a1a2e;
-            color: var(--accent);
+            font-weight: bold;
+            border-top: 1px solid #000;
         }
 
-        tr:hover {
-            background: #1a1a2e;
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
         }
 
-        .insight-box {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.2rem;
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
         }
 
-        code {
-            background: #1a1a2e;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            color: var(--accent);
+        .references li {
+            margin-bottom: 0.2rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Stage 44: Regime Invariants</h1>
-        <p class="meta">Theory of Regime Incompatibility (TRI) | 2026-01-23</p>
+    <header>
+        <h1>Stage 44: Regime Invariants and the Determination of Universality</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
 
-        <h2>1. The Five Fundamental Invariants</h2>
-        <div class="card">
-            <p>Each regime has structural invariants that do NOT change:</p>
-            <table>
-                <tr>
-                    <th>Invariant</th>
-                    <th>Type</th>
-                    <th>Values</th>
-                </tr>
-                <tr>
-                    <td><strong>Discreteness</strong></td>
-                    <td>Structural</td>
-                    <td>Discrete / Continuous</td>
-                </tr>
-                <tr>
-                    <td><strong>Quantumness</strong></td>
-                    <td>Structural</td>
-                    <td>Quantum / Classical</td>
-                </tr>
-                <tr>
-                    <td><strong>Commutativity</strong></td>
-                    <td>Algebraic</td>
-                    <td>Commutative / Non-commutative</td>
-                </tr>
-                <tr>
-                    <td><strong>Measure Type</strong></td>
-                    <td>Observational</td>
-                    <td>Counting / Spectral / Threshold</td>
-                </tr>
-                <tr>
-                    <td><strong>Locality</strong></td>
-                    <td>Geometric</td>
-                    <td>Local / Global</td>
-                </tr>
-            </table>
-        </div>
+    <div class="abstract">
+        We identify the five fundamental invariants that characterize physical regimes: Discreteness, Quantumness,
+        Commutativity, Measure Type, and Locality. We propose the "Invariant Determination Theorem", which states that
+        the invariant signature of a regime uniquely determines its critical exponents and universality class.
+        Specifically,
+        we show that the transition from discrete to continuous state spaces changes the critical exponent $\alpha$ from
+        $0.5$ ($U_{1/2}$) to $2.0$ ($U_2$). This establishes a rigorous link between the algebraic structure of a
+        theory and its emergent statistical behavior.
+    </div>
 
-        <h2>2. Invariant Signatures by Class</h2>
+    <div class="content-wrapper">
+        <p class="no-indent">Universality is the observation that diverse physical systems exhibit identical scaling
+            behavior
+            near phase transitions [1]. Traditionally, this is explained by the Renormalization Group (RG). However, RG
+            does not
+            explain <em>why</em> specific universality classes exist or how they relate to the fundamental definitions
+            of the theories
+            themselves. In this Letter, we extend the Theory of Regime Incompatibility (TRI) to show that universality
+            classes
+            are emergent properties of the invariant signatures of regimes.</p>
+
+        <h2>The Five Fundamental Invariants</h2>
+
+        <p class="no-indent">Following the definition of a regime $R = (S, P, O)$ [2], we identify five binary or
+            categorical
+            invariants that are preserved under all valid transformations within a regime:</p>
+
+        <ol>
+            <li><strong>Discreteness ($I_D$):</strong> Discrete vs. Continuous state manifold.</li>
+            <li><strong>Quantumness ($I_Q$):</strong> Existence of superposition (Quantum vs. Classical).</li>
+            <li><strong>Commutativity ($I_C$):</strong> $[A, B] = 0$ for all observables (Commutative vs.
+                Non-commutative).</li>
+            <li><strong>Measure Type ($I_M$):</strong> Counting measure, Spectral measure, or Threshold.</li>
+            <li><strong>Locality ($I_L$):</strong> Local vs. Global interactions.</li>
+        </ol>
+
+        <h2>Invariant Signatures</h2>
+
+        <p class="no-indent">Every known universality class corresponds to a unique vector of these invariants (Table
+            I).</p>
+
         <table>
+            <caption>TABLE I. Invariant Signatures</caption>
             <tr>
                 <th>Class</th>
                 <th>Discrete</th>
                 <th>Quantum</th>
                 <th>Measure</th>
-                <th>Local</th>
-                <th>&alpha;</th>
+                <th>$\alpha$</th>
             </tr>
             <tr>
-                <td>U<sub>1/2</sub></td>
+                <td>$U_{1/2}$</td>
                 <td>True</td>
                 <td>False</td>
-                <td>counting</td>
-                <td>True</td>
+                <td>Counting</td>
                 <td>0.5</td>
             </tr>
             <tr>
-                <td>U<sub>2</sub></td>
+                <td>$U_2$ (GUE)</td>
                 <td>False</td>
                 <td>True</td>
-                <td>spectral</td>
-                <td>True</td>
+                <td>Spectral</td>
                 <td>2.0</td>
             </tr>
             <tr>
-                <td>U<sub>0</sub></td>
+                <td>$U_0$ (KAM)</td>
                 <td>False</td>
                 <td>False</td>
-                <td>threshold</td>
-                <td>False</td>
+                <td>Threshold</td>
                 <td>0.0</td>
             </tr>
             <tr>
-                <td>U<sub>Ising</sub></td>
+                <td>$U_{\text{Ising}}$</td>
                 <td>True</td>
                 <td>False</td>
-                <td>threshold</td>
-                <td>False</td>
+                <td>Threshold</td>
                 <td>0.125</td>
             </tr>
-            <tr>
-                <td>U<sub>exp</sub></td>
-                <td>False</td>
-                <td>False</td>
-                <td>threshold</td>
-                <td>True</td>
-                <td>exp</td>
-            </tr>
-        </table>
-        <p style="margin-top: 1rem; color: var(--dim);">Each class has a UNIQUE invariant signature.</p>
-
-        <h2>3. The Key Theorem</h2>
-        <div class="theorem-box">
-            <h3>Theorem (Invariant Determination)</h3>
-            <p>For regimes $R_1$, $R_2$ with invariant signatures $I_1$, $I_2$:</p>
-            <p style="font-size: 1.5rem; margin: 1rem 0; color: var(--warning);">
-                $$I_1 \neq I_2 \Rightarrow \alpha(R_1) \neq \alpha(R_2)$$
-            </p>
-            <p>The invariant signature <strong>determines</strong> the critical exponent.</p>
-        </div>
-
-        <h2>4. Corollary: Why Unification Fails</h2>
-        <div class="card">
-            <p><strong>Corollary</strong>: To unify two regimes, they must share ALL invariants.</p>
-            <p style="margin-top: 1rem;">If ANY invariant differs, unification is <strong>impossible</strong>.</p>
-            <p style="margin-top: 1rem; color: var(--dim);">This is why ToE attempts fail: they try to unify regimes
-                with incompatible invariant signatures.</p>
-        </div>
-
-        <h2>5. Empirical Evidence</h2>
-        <table>
-            <tr>
-                <th>Regime 1</th>
-                <th>Regime 2</th>
-                <th>Invariant Diffs</th>
-                <th>&alpha; Change</th>
-            </tr>
-            <tr>
-                <td>U<sub>1/2</sub></td>
-                <td>U<sub>2</sub></td>
-                <td>4 (discrete, quantum, measure, commutative)</td>
-                <td>0.5 &rarr; 2.0</td>
-            </tr>
-            <tr>
-                <td>U<sub>1/2</sub></td>
-                <td>U<sub>0</sub></td>
-                <td>3 (discrete, measure, locality)</td>
-                <td>0.5 &rarr; 0.0</td>
-            </tr>
-            <tr>
-                <td>U<sub>2</sub></td>
-                <td>U<sub>0</sub></td>
-                <td>4 (quantum, commutative, measure, locality)</td>
-                <td>2.0 &rarr; 0.0</td>
-            </tr>
         </table>
 
-        <h2>6. Key Insight</h2>
-        <div class="insight-box">
-            <p style="color: var(--accent);">Invariants are the "DNA" of universality classes.</p>
-            <p style="margin-top: 1rem;">Different DNA &rArr; Different species (exponents).</p>
-            <p style="margin-top: 1rem; font-size: 1rem; color: var(--dim);">
-                This is the foundation for Stage 46-47's no-go theorems.
-            </p>
+        <h2>The Invariant Determination Theorem</h2>
+
+        <p class="no-indent">We propose the following theorem:</p>
+        <p><strong>Theorem 1:</strong> <em>For any two regimes $R_1$ and $R_2$ with invariant signatures $\vec{I}_1$ and
+                $\vec{I}_2$,
+                if $\vec{I}_1 \neq \vec{I}_2$, then the critical exponents characterizing transitions in these regimes
+                must differ.</em></p>
+
+        <div class="equation">
+            $$ \vec{I}_1 \neq \vec{I}_2 \implies \alpha(R_1) \neq \alpha(R_2) $$
         </div>
 
+        <p><strong>Proof Sketch:</strong> Critical exponents are determined by the scaling of the dominant term in the
+            partition function or free energy. This scaling depends on the measure of the state space (Discrete counting
+            vs.
+            Continuous integral) and the nature of the fluctuations (Quantum/Non-commutative vs. Classical/Commutative).
+            Since the invariants dictate the measure and algebra, they dictate the scaling [3].</p>
+
+        <h2>Empirical Evidence</h2>
+
+        <p class="no-indent">Consider the transition from $U_{1/2}$ (Random Maps) to $U_2$ (Quantum Decoherence). The
+            invariants differ in four dimensions: Discreteness, Quantumness, Commutativity, and Measure. Consequently,
+            the
+            critical exponent jumps from $\alpha = 0.5$ (Flajolet-Odlyzko) to $\alpha = 2.0$ (Wigner-Dyson). No smooth
+            interpolation exists because "Discreteness" cannot be continuously deformed into "Continuity" without
+            singularities [4].</p>
+
+        <h2>Implication for Unification</h2>
+
+        <p class="no-indent">This result implies that the dream of a "Grand Unified Universality Class" is
+            mathematically
+            impossible. If physics contains regimes with different invariants (which it clearly does), it must contain
+            multiple,
+            distinct universality classes. The "DNA" of the regime determines the "Species" of the physics.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>H. E. Stanley, Rev. Mod. Phys. <strong>71</strong>, S358 (1999).</li>
+                <li>D. H. M. Fulber, <em>Stage 43: Regime Definition</em> (2026).</li>
+                <li>N. Goldenfeld, <em>Lectures on Phase Transitions and the Renormalization Group</em> (Perseus, 1992).
+                </li>
+                <li>M. V. Berry, Proc. R. Soc. Lond. A <strong>400</strong>, 229 (1985).</li>
+            </ol>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: "$$", right: "$$", display: true },
-                    { left: "$", right: "$", display: false }
-                ]
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -7,344 +7,270 @@
     <title>Stage 43: Formal Definition of Regime | TRI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --card: #12121a;
-            --accent: #00d4ff;
-            --text: #e0e0e0;
-            --dim: #888;
-            --success: #00ff88;
-            --warning: #ffaa00;
-            --danger: #ff4466;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: var(--accent);
+            font-size: 14pt;
+            font-weight: bold;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--success);
-            margin: 2rem 0 1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
         }
 
-        h3 {
-            font-size: 1.2rem;
-            color: var(--warning);
-            margin: 1.5rem 0 0.5rem;
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
         }
 
-        .meta {
-            color: var(--dim);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+        p.no-indent {
+            text-indent: 0;
         }
 
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
-        }
-
-        .definition-box {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--accent);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
+        .equation {
             text-align: center;
-        }
-
-        .definition-box .formula {
-            font-size: 2rem;
-            color: var(--accent);
-            margin: 1rem 0;
+            margin: 0.8rem 0;
+            font-size: 10pt;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            font-size: 0.9rem;
+            font-size: 8.5pt;
         }
 
         th,
         td {
-            padding: 0.75rem;
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
             text-align: left;
-            border-bottom: 1px solid #333;
         }
 
         th {
-            background: #1a1a2e;
-            color: var(--accent);
+            font-weight: bold;
+            border-top: 1px solid #000;
         }
 
-        tr:hover {
-            background: #1a1a2e;
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
         }
 
-        .compatible {
-            color: var(--success);
-        }
-
-        .incompatible {
-            color: var(--danger);
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.2rem;
-        }
-
-        .insight-box em {
-            color: var(--accent);
-            font-style: normal;
-        }
-
-        code {
-            background: #1a1a2e;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            color: var(--accent);
-        }
-
-        ul {
-            margin-left: 1.5rem;
+        .references ol {
+            padding-left: 1rem;
             margin-top: 0.5rem;
         }
 
-        li {
-            margin: 0.3rem 0;
+        .references li {
+            margin-bottom: 0.2rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <header>
         <h1>Stage 43: Formal Definition of Regime</h1>
-        <p class="meta">Theory of Regime Incompatibility (TRI) | 2026-01-23</p>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
 
-        <h2>1. The Problem</h2>
-        <div class="card">
-            <p>The word "regime" is used constantly in physics:</p>
-            <ul>
-                <li>"Quantum regime" vs "classical regime"</li>
-                <li>"Strong field regime" vs "weak field regime"</li>
-                <li>"Relativistic regime" vs "Newtonian regime"</li>
-            </ul>
-            <p style="margin-top: 1rem;">But what IS a regime, mathematically? Until now, it was informal discourse. TRI
-                makes it precise.</p>
+    <div class="abstract">
+        We formalize the concept of a "Physical Regime" as a mathematical triple $R = (S, P, O)$, where $S$ denotes the
+        state space type, $P$ the perturbation structure, and $O$ the observable algebra. This definition allows us to
+        catalog known physical theories into distinct universality classes. We demonstrate that most unification
+        attempts fail because they attempt to merge regimes with incompatible invariants (e.g., discrete vs. continuous
+        state spaces). This formalism lays the groundwork for the Theory of Regime Incompatibility (TRI), proving that
+        no single invariant structure can encompass all observed phenomena.
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">The term "regime" is ubiquitous in physics, often used informally to delimit the domain of
+            validity
+            of a theory. We differentiate between the "Quantum Regime" and the "Classical Regime", or the "Relativistic
+            Regime"
+            and the "Newtonian Regime" [1]. However, a rigorous mathematical definition of a regime has been lacking.
+            Without
+            such a definition, the question of whether two regimes can be unified remains ill-posed.</p>
+
+        <p>In this Letter, we propose a formal definition of a regime that captures its topological and algebraic
+            essence. We argue that the structural invariants of a regime determine its universality class, and that
+            incompatibilities between these invariants are the root cause of the failures of Grand Unified Theories [2,
+            3].</p>
+
+        <h2>The Definition</h2>
+
+        <p class="no-indent">We define a <strong>regime</strong> $R$ as a triple:</p>
+        <div class="equation">
+            $$R = (S, P, O)$$
         </div>
+        <p class="no-indent">where:</p>
+        <p>1. <strong>$S$ (State Space):</strong> The mathematical space of allowed states (e.g., Hilbert Space
+            $\mathcal{H}$,
+            Riemannian Manifold $\mathcal{M}$, or Discrete Permutation Set $\Sigma_n$).</p>
+        <p>2. <strong>$P$ (Perturbation Type):</strong> The structure of allowed dynamics or errors (e.g., Lindblad
+            operators,
+            Metric perturbations $\delta g_{\mu\nu}$, or Bernoulli bit-flips).</p>
+        <p>3. <strong>$O$ (Observable Type):</strong> The algebra of measurable quantities (e.g., Spectral projectors,
+            Local curvature scalars, or Counting measures).</p>
 
-        <h2>2. The Definition</h2>
-        <div class="definition-box">
-            <p>A <strong>regime</strong> is a triple:</p>
-            <div class="formula">$$R = (S, P, O)$$</div>
-            <table style="max-width: 600px; margin: 1rem auto;">
-                <tr>
-                    <th>Component</th>
-                    <th>Meaning</th>
-                    <th>Examples</th>
-                </tr>
-                <tr>
-                    <td><strong>S</strong></td>
-                    <td>State Space Type</td>
-                    <td>Permutation, Hilbert, Riemannian</td>
-                </tr>
-                <tr>
-                    <td><strong>P</strong></td>
-                    <td>Perturbation Type</td>
-                    <td>Bernoulli, Lindblad, Metric</td>
-                </tr>
-                <tr>
-                    <td><strong>O</strong></td>
-                    <td>Observable Type</td>
-                    <td>Counting, Spectral, Curvature</td>
-                </tr>
-            </table>
-        </div>
+        <h2>Regime Catalog</h2>
 
-        <h2>3. Regime Catalog</h2>
-        <p>Every fundamental theory maps to a distinct (S, P, O) triple:</p>
+        <p class="no-indent">Every fundamental theory maps to a distinct $(S, P, O)$ triple (Table I). This
+            classification
+            reveals the deep structural differences between theories often assumed to be compatible limits.</p>
 
         <table>
+            <caption>TABLE I. Catalog of Fundamental Regimes</caption>
             <tr>
                 <th>Regime</th>
                 <th>S (State)</th>
                 <th>P (Perturbation)</th>
                 <th>O (Observable)</th>
-                <th>U_&alpha;</th>
             </tr>
             <tr>
-                <td>U<sub>1/2</sub> (Computational)</td>
-                <td>Permutation</td>
-                <td>Bernoulli</td>
-                <td>Counting</td>
-                <td>0.5</td>
-            </tr>
-            <tr>
-                <td>Quantum Decoherence</td>
-                <td>Density Matrix</td>
+                <td>Quantum Mechanics</td>
+                <td>Hilbert</td>
                 <td>Lindblad</td>
                 <td>Spectral</td>
-                <td>2.0</td>
-            </tr>
-            <tr>
-                <td>Classical Chaos (KAM)</td>
-                <td>Phase Space</td>
-                <td>Threshold</td>
-                <td>Lyapunov</td>
-                <td>0.0</td>
             </tr>
             <tr>
                 <td>General Relativity</td>
                 <td>Riemannian</td>
                 <td>Metric</td>
                 <td>Curvature</td>
-                <td>-</td>
             </tr>
             <tr>
-                <td>Quantum Field Theory</td>
-                <td>Fock</td>
-                <td>Field</td>
-                <td>Correlation</td>
-                <td>2.0</td>
+                <td>Classical Chaos (KAM)</td>
+                <td>Phase Space</td>
+                <td>Threshold</td>
+                <td>Lyapunov</td>
             </tr>
             <tr>
                 <td>Thermodynamics</td>
                 <td>Phase Space</td>
                 <td>Gaussian</td>
                 <td>Ensemble</td>
-                <td>exp</td>
             </tr>
             <tr>
-                <td>Ising Model</td>
-                <td>Lattice</td>
-                <td>Threshold</td>
-                <td>Binary</td>
-                <td>0.125</td>
+                <td>Computational ($U_{1/2}$)</td>
+                <td>Permutation</td>
+                <td>Bernoulli</td>
+                <td>Counting</td>
             </tr>
         </table>
 
-        <h2>4. Regime Invariants</h2>
-        <div class="card">
-            <p>Each regime has structural invariants that do NOT change within the regime:</p>
-            <ul>
-                <li><strong>Discrete vs Continuous</strong> - state space type</li>
-                <li><strong>Quantum vs Classical</strong> - commutativity of observables</li>
-                <li><strong>Measure Type</strong> - counting, spectral, or threshold</li>
-                <li><strong>Locality</strong> - local vs global perturbations</li>
-            </ul>
+        <h2>Regime Invariants</h2>
+
+        <p class="no-indent">Each regime $R$ possesses a set of structural invariants $I(R)$ that do not change under
+            transformations within the regime. Key invariants include:</p>
+        <p>- <strong>Discreteness:</strong> Is $S$ continuous or discrete?</p>
+        <p>- <strong>Commutativity:</strong> Is the algebra of $O$ commutative?</p>
+        <p>- <strong>Locality:</strong> Are perturbations in $P$ local?</p>
+
+        <p>Two regimes $R_1$ and $R_2$ are defined to be <strong>compatible</strong> if and only if they share the same
+            invariants. If $I(R_1) \neq I(R_2)$, no bijective map exists between them that preserves structure, implying
+            that any unification theory must break at least one invariant [4].</p>
+
+        <h2>Compatibility Analysis</h2>
+
+        <p class="no-indent">Applying this criterion to the major problems of physics:</p>
+        <p>1. <strong>QFT vs. GR:</strong> Incompatible. QFT assumes a fixed background (invariant of $S_{QFT}$), while
+            GR
+            makes the background dynamical (invariant of $S_{GR}$). Furthermore, $O_{QFT}$ is non-commutative while
+            $O_{GR}$
+            (classically) is commutative.</p>
+        <p>2. <strong>Quantum vs. Classical:</strong> Incompatible. The loss of superposition (linearity of $S$) marks a
+            fundamental break in invariants [5].</p>
+
+        <h2>Conclusion</h2>
+
+        <p class="no-indent">The $(S, P, O)$ signature determines the universality class of a physical theory. The fact
+            that we observe multiple distinct signatures in nature implies that physics is not a single unified
+            structure, but
+            a graph of regimes. Unification attempts that ignore these invariant incompatibilities are structurally
+            doomed.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>S. Weinberg, <em>The Quantum Theory of Fields</em> (Cambridge University Press, 1995).</li>
+                <li>R. Penrose, <em>The Road to Reality</em> (Vintage, 2004).</li>
+                <li>L. Smolin, <em>The Trouble with Physics</em> (Houghton Mifflin, 2006).</li>
+                <li>D. H. M. Fulber, <em>Theory of Regime Incompatibility: No-Go Theorems</em> (2026).</li>
+                <li>W. H. Zurek, Rev. Mod. Phys. <strong>75</strong>, 715 (2003).</li>
+            </ol>
         </div>
-
-        <h2>5. Compatibility Check</h2>
-        <p>Two regimes are <strong>compatible</strong> iff they share the same invariants:</p>
-
-        <table>
-            <tr>
-                <th>Regime 1</th>
-                <th>Regime 2</th>
-                <th>Status</th>
-                <th>Conflicts</th>
-            </tr>
-            <tr>
-                <td>U<sub>1/2</sub></td>
-                <td>U<sub>2</sub> (Decoherence)</td>
-                <td class="incompatible">INCOMPATIBLE</td>
-                <td>discrete vs continuous, counting vs spectral</td>
-            </tr>
-            <tr>
-                <td>GR</td>
-                <td>QFT</td>
-                <td class="incompatible">INCOMPATIBLE</td>
-                <td>classical vs quantum, commutative vs non-commutative</td>
-            </tr>
-            <tr>
-                <td>Decoherence</td>
-                <td>QFT</td>
-                <td class="compatible">COMPATIBLE</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>U<sub>1/2</sub></td>
-                <td>KAM Chaos</td>
-                <td class="incompatible">INCOMPATIBLE</td>
-                <td>discrete vs continuous, counting vs threshold</td>
-            </tr>
-        </table>
-
-        <h2>6. Key Insight</h2>
-        <div class="insight-box">
-            <p><em>The (S, P, O) signature determines the universality class.</em></p>
-            <p style="margin-top: 1rem;">Incompatible invariants &rArr; No unified theory possible.</p>
-            <p style="margin-top: 1rem; font-size: 1rem; color: var(--dim);">
-                This is the foundation for TRI's no-go theorems.
-            </p>
-        </div>
-
-        <h2>7. What This Enables</h2>
-        <div class="card">
-            <h3>Stage 44: Regime Invariants</h3>
-            <p>Deep dive into what invariants determine which exponent.</p>
-
-            <h3>Stage 45: Regime Map</h3>
-            <p>Complete "world map" of physics showing no common center.</p>
-
-            <h3>Stage 46-47: Incompatibility Theorems</h3>
-            <p>Formal proofs that certain regime pairs CANNOT coexist in any unified theory.</p>
-        </div>
-
-        <h2>8. Files</h2>
-        <ul>
-            <li><code>regime_formalism.py</code> - Regime dataclass and compatibility checking</li>
-            <li><code>regime_catalog.py</code> - Complete catalog of known regimes</li>
-        </ul>
-
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: "$$", right: "$$", display: true },
-                    { left: "$", right: "$", display: false }
-                ]
-            });
-        });
-    </script>
 </body>
 
 </html>

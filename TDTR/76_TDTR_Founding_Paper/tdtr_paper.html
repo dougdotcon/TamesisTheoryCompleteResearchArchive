@@ -7,160 +7,181 @@
     <title>The Dynamics of Regime Transitions: Why Interfaces Are Fundamental</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --card: #12121a;
-            --accent: #3498db;
-            --text: #e0e0e0;
-            --success: #2ecc71;
-            --dim: #888;
-        }
-
+        /* PRL Style: Two-column layout, compact, Times New Roman */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-            padding: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
         }
 
         h1 {
-            font-size: 2rem;
-            color: var(--accent);
+            font-size: 14pt;
+            font-weight: bold;
             margin-bottom: 0.5rem;
-            text-align: center;
+            line-height: 1.2;
+            text-transform: none;
         }
 
-        h2 {
-            font-size: 1.4rem;
-            color: var(--success);
-            margin: 2.5rem 0 1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
         }
 
-        h3 {
-            font-size: 1.1rem;
-            color: #f1c40f;
-            margin: 1.5rem 0 0.5rem;
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
         }
 
-        .meta {
-            color: var(--dim);
-            text-align: center;
-            margin-bottom: 2rem;
+        .date {
+            font-size: 9pt;
+            color: #666;
         }
 
         .abstract {
-            background: var(--card);
-            border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .theorem {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #3498db;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .theorem-title {
-            color: var(--accent);
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
         }
 
-        .insight-box {
-            background: #1a1a2e;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
             text-align: center;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--success);
+            margin: 0.8rem 0;
+            font-size: 10pt;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            font-size: 0.9rem;
+            font-size: 8.5pt;
         }
 
         th,
         td {
-            padding: 0.6rem;
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
             text-align: left;
-            border-bottom: 1px solid #333;
         }
 
         th {
-            background: #1a1a2e;
-            color: var(--accent);
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <header>
         <h1>The Dynamics of Regime Transitions</h1>
-        <p style="text-align: center; font-size: 1.3rem; color: var(--dim);">Why Interfaces, Not Laws, Are Fundamental
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        We propose the Theory of the Dynamics of Regime Transitions (TDTR), shifting the focus of fundamental physics
+        from regimes (nodes) to transitions (edges). We define a transition map $E_{ij}: R_i \to R_j$ characterized by
+        controlled invariant breaking and the existence of a monotone. We prove that the space of transitions forms a
+        directed graph, implying fundamental structural irreversibility. This framework resolves the Quantum Gravity
+        problem by identifying the QFT $\to$ GR mapping as an irreversible coarse-graining process, explaining why
+        gravity cannot be quantized in the traditional sense.
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">The graph of physics established by TRI [1] consists of disparate regimes. If we cannot
+            unify the laws within the nodes, we must study the laws governing the edges. TDTR postulates that the
+            <strong>transition</strong> is the fundamental ontological object of physics.
         </p>
-        <p class="meta">TDTR Research Program (Stages 53-78) | 2026-01-23</p>
 
-        <div class="abstract">
-            <strong>Abstract.</strong> Following the Theory of Regime Incompatibility (TRI), which established that no
-            unified theory can describe all physical regimes, we propose the Theory of the Dynamics of Regime
-            Transitions (TDTR). We postulate that the fundamental objects of physics are not the regimes (nodes) but the
-            transitions (edges) between them. We define a transition formally as a map $E_{ij}: R_i \to R_j$
-            characterized by controlled invariant breaking. We prove that the space of transitions is a directed graph
-            (semigroup structure), implying fundamental structural irreversibility. We identify the transition from
-            Quantum Field Theory to General Relativity as an irreversible coarse-graining process, explaining the
-            emergence of geometry and the impossibility of "quantizing gravity" in the traditional sense.
-        </div>
+        <p>"Physics is not about states. Physics is about what happens BETWEEN states."</p>
 
-        <h2>1. From Nodes to Edges</h2>
-        <p>TRI proved that the graph of physics has no central node. TDTR shifts the focus to the
-            <strong>edges</strong>. If we cannot unify the laws of the nodes, we can study the laws of the transitions.
+        <h2>Formal Theory of Transitions</h2>
+
+        <p class="no-indent">A transition is defined as a discrete structural change $E_{ij}: R_i \to R_j$ satisfying:
         </p>
-        <div class="insight-box">
-            "Physics is not about states. Physics is about what happens BETWEEN states."
+        <p>1. <strong>Invariant Breaking:</strong> $I(R_i) \neq I(R_j)$.</p>
+        <p>2. <strong>Monotone Existence:</strong> $\exists M: M(E(x)) > M(x)$ (e.g., Entropy).</p>
+        <p>3. <strong>Irreversibility:</strong> No inverse map $E_{ji}$ exists because information is lost or structure
+            is broken.</p>
+
+        <div class="equation">
+            $$ E_{ij} \in \text{Hom}(R_i, R_j), \quad \nexists E_{ij}^{-1} $$
         </div>
 
-        <h2>2. Formal Theory of Transitions</h2>
-        <p>A transition is defined not as a continuous limit, but as a discrete structural change:</p>
-        <p style="text-align: center;">$$E_{ij}: R_i \to R_j$$</p>
-        <p>Key properties:</p>
-        <ul>
-            <li><strong>Invariant Breaking:</strong> $I(R_i) \neq I(R_j)$</li>
-            <li><strong>Monotone Existence:</strong> $\exists M: M(E(x)) > M(x)$</li>
-            <li><strong>Irreversibility:</strong> No inverse map exists.</li>
-        </ul>
+        <h2>The Atlas of Transitions</h2>
 
-        <div class="theorem">
-            <p class="theorem-title">Theorem (Structural Irreversibility)</p>
-            <p>For any fundamental transition $E_{ij}$, there exists no inverse transition $E_{ji}$. The transition
-                graph is strictly directed.</p>
-        </div>
+        <p class="no-indent">We catalog the fundamental transitions observed in nature (Table I). Each class represents
+            a distinct
+            mechanism of invariant breaking.</p>
 
-        <h2>3. The Atlas of Transitions</h2>
         <table>
+            <caption>TABLE I. Fundamental Transitions</caption>
             <tr>
                 <th>Transition</th>
                 <th>Source $\to$ Target</th>
@@ -170,71 +191,63 @@
             <tr>
                 <td>Decoherence</td>
                 <td>Quantum $\to$ Classical</td>
-                <td>von Neumann Entropy</td>
-                <td>D1</td>
+                <td>Entropy</td>
+                <td>$D1$</td>
             </tr>
             <tr>
                 <td>Randomization</td>
                 <td>Ordered $\to$ Random</td>
-                <td>Cycle Disorder</td>
-                <td>D2 ($U_{1/2}$)</td>
+                <td>Disorder</td>
+                <td>$D2$ ($U_{1/2}$)</td>
             </tr>
             <tr>
                 <td>Thermalization</td>
                 <td>Non-eq $\to$ Equilibrium</td>
                 <td>Thermo Entropy</td>
-                <td>D3 ($U_{\text{exp}}$)</td>
+                <td>$D3$ ($U_{exp}$)</td>
             </tr>
             <tr>
                 <td>Geometry Emergence</td>
                 <td>QFT $\to$ GR</td>
-                <td>Geometric Entropy</td>
-                <td>D4</td>
+                <td>Geo Entropy</td>
+                <td>$D4$</td>
             </tr>
             <tr>
                 <td>Symmetry Breaking</td>
                 <td>Symmetric $\to$ Broken</td>
-                <td>Order Parameter</td>
-                <td>D5 ($U_0$)</td>
+                <td>Order Param</td>
+                <td>$D5$ ($U_0$)</td>
             </tr>
         </table>
 
-        <h2>4. The Quantum-Geometry Interface</h2>
-        <p>TDTR resolves the problem of Quantum Gravity by reframing it. The mapping from Quantum Field Theory to
-            General Relativity is a <strong>fundamental transition</strong> involving information loss
-            (coarse-graining).</p>
+        <h2>The Quantum-Geometry Interface</h2>
+
+        <p class="no-indent">TDTR provides a novel resolution to the problem of Quantum Gravity. The mapping from
+            Quantum Field Theory ($R_{QFT}$) to General Relativity ($R_{GR}$) is identified as a fundamental transition
+            involving information loss (coarse-graining). It is not a bidirectional equality.</p>
+
         <p><strong>Consequences:</strong></p>
-        <ul>
-            <li>Gravity is emergent (entropic), not fundamental.</li>
-            <li>The metric $g_{\mu\nu}$ is an effective observable, valid only in $R_{GR}$.</li>
-            <li>"Quantizing the metric" is an attempt to reverse an irreversible transition ($E_{ji}$), which is
-                forbidden.</li>
-        </ul>
+        <p>- Gravity is emergent and entropic, not fundamental [2].</p>
+        <p>- The metric $g_{\mu\nu}$ is an effective observable valid only in the target regime.</p>
+        <p>- "Quantizing geometry" attempts to invert an irreversible map ($E_{ji}$), which is forbidden by the
+            structure of the transition graph.</p>
 
-        <h2>5. The Arrow of Time</h2>
-        <p>TDTR replaces the single "cosmic arrow of time" with a multitude of local transition arrows.</p>
-        <ul>
-            <li>Decoherence arrow (quantum context)</li>
-            <li>Thermodynamic arrow (thermal context)</li>
-            <li>Cosmological arrow (geometric context)</li>
-        </ul>
-        <p>Time flows in the direction of the transition being undergone by the system.</p>
+        <h2>The Arrow of Time</h2>
 
-        <h2>6. Conclusion</h2>
-        <p>We have moved from a search for a static Theory of Everything to a dynamic <strong>Theory of
-                Transitions</strong>. The unity of physics lies in the consistent mathematical structure of these
-            transitions: they all obey the axioms of controlled invariant breaking and monotonicity.</p>
-        <p>Physics is a directed graph. We live on the edges.</p>
+        <p class="no-indent">TDTR implies that the "Arrow of Time" is not a single global parameter but a collection of
+            local transition directions (Decoherence arrow, Thermodynamic arrow, Cosmological arrow). Time flows in the
+            direction of the transition currently being undergone by the local system.</p>
 
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>D. H. M. Fulber, <em>Theory of Regime Incompatibility</em> (2026).</li>
+                <li>E. Verlinde, JHEP <strong>2011</strong>, 29 (2011).</li>
+                <li>R. Penrose, <em>Cycles of Time</em> (Vintage, 2010).</li>
+                <li>I. Prigogine, <em>From Being to Becoming</em> (Freeman, 1980).</li>
+            </ol>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }]
-            });
-        });
-    </script>
 </body>
 
 </html>

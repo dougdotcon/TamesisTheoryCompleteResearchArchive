@@ -26,12 +26,6 @@
             background-color: #fff;
         }
 
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
-
         header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -64,13 +58,20 @@
             color: #666;
         }
 
-        .abstract {
-            font-weight: bold;
-            font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
         }
 
         h2 {
@@ -100,33 +101,15 @@
             text-indent: 0;
         }
 
-        .equation {
-            text-align: center;
-            margin: 0.8rem 0;
-            font-size: 10pt;
-        }
-
-        /* Specialized Boxes compatibility */
-        .axiom-box {
-            border-left: 3px solid #000;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .prediction-box {
-            border: 1px solid #d32f2f;
-            padding: 1rem;
-            margin: 1rem 0;
-            background: #fff5f5;
-        }
-
+        .equation-box,
         .master-equation {
             background: #f8f8f8;
-            padding: 1rem;
+            padding: 0.8rem;
             margin: 1rem 0;
             border: 1px solid #ccc;
             text-align: center;
+            font-size: 9pt;
+            break-inside: avoid;
         }
 
         .conclusion-box {
@@ -135,6 +118,7 @@
             margin: 1.5rem 0;
             border: 1px solid #4caf50;
             text-align: center;
+            break-inside: avoid;
         }
 
         figure {
@@ -160,6 +144,7 @@
             border-collapse: collapse;
             margin: 1rem 0;
             font-size: 8.5pt;
+            break-inside: avoid;
         }
 
         th,
@@ -172,6 +157,18 @@
         th {
             font-weight: bold;
             border-top: 1px solid #000;
+        }
+
+        .result-highlight {
+            background-color: #fff9c4;
+        }
+
+        .keywords {
+            font-size: 9pt;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            column-span: all;
+            /* If put in header or abstract area */
         }
 
         .references {
@@ -190,7 +187,7 @@
         .references li {
             margin-bottom: 0.2rem;
         }
-    
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -204,12 +201,13 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
 
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
         <h1>Galaxy Cluster Lensing in Entropic Gravity: A Challenge for Dark-Matter-Free Cosmology</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -217,163 +215,123 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
+    <div class="abstract-container">
+        <strong>Abstract.</strong> While Entropic Gravity successfully explains galaxy rotation curves without Dark
+        Matter, gravitational lensing in galaxy clusters presents a more challenging test. We simulate the lensing
+        signal expected from a Bullet Cluster-like system under three models: Newtonian (baryonic only), CDM with NFW
+        halo, and Entropic Gravity with cumulative effects. We find that Entropic Gravity can produce enhanced lensing
+        at cluster scales through stacking of individual galaxy contributions, but the magnitude may be insufficient to
+        fully match observations without additional physics. The "Bullet Cluster" offset—where the lensing peak is
+        displaced from the baryonic center—remains the most stringent challenge. We propose that non-equilibrium entropy
+        dynamics may resolve this discrepancy. This work presents an honest assessment of both successes and limitations
+        of the Entropic framework at the largest scales.
+        <br><br>
+        <strong>Keywords:</strong> Gravitational Lensing, Galaxy Clusters, Bullet Cluster, Entropic Gravity, Dark
+        Matter, TAMESIS Framework
     </div>
 
     <div class="content-wrapper">
-        <div class="abstract">
-            Abstract not found.
-        </div>
+        <h2>1. Introduction</h2>
+        <p>Galaxy rotation curves provide the most intuitive evidence for Dark Matter: stars orbit too fast for the
+            visible mass. Entropic Gravity resolves this with modified dynamics at low accelerations ($a < a_0$).</p>
+                <p>However, galaxy clusters present a stronger test. The mass discrepancy is larger (~10× instead of
+                    ~6×), and gravitational <em>lensing</em> provides a direct probe of total mass independent of
+                    kinematics.</p>
 
-        <div class="content-wrapper">
-            <div class="abstract">
-                Abstract not found.
-            </div>
+                <h2>2. The Cluster Challenge</h2>
+                <h3>2.1 The Bullet Cluster</h3>
+                <p>The 1E 0657-558 "Bullet Cluster" is often cited as proof of Dark Matter:</p>
+                <ul>
+                    <li>Two subclusters recently collided</li>
+                    <li>Hot X-ray gas (baryonic) is at the collision center</li>
+                    <li>Lensing mass peaks are <em>offset</em> from the gas</li>
+                </ul>
+                <p>This offset is explained by CDM: collisionless Dark Matter passes through, while baryonic gas is
+                    slowed.</p>
 
-            <div class="content-wrapper">
-                <div class="abstract">
-                    Abstract not found.
+                <h3>2.2 The MOND/Entropic Problem</h3>
+                <p>In modified gravity, there is no separate "Dark Matter" to separate from baryons. How can the lensing
+                    peak be offset from the mass?</p>
+
+                <h2>3. Simulation</h2>
+                <figure>
+                    <img src="assets/cluster_lensing.png" alt="Cluster Lensing Simulation">
+                    <figcaption><strong>Figure 1:</strong> Left: Apparent mass profile from lensing. Newtonian (blue
+                        dashed) severely underestimates; CDM (green dotted) matches with fitted halo; Entropic (red
+                        solid) shows enhancement but may not fully match. Right: Acceleration comparison showing the
+                        MOND threshold $a_0$.</figcaption>
+                </figure>
+
+                <h3>3.1 Entropic Enhancement</h3>
+                <p>At cluster scales, the entropic effect stacks across ~1000 galaxies:</p>
+                <div class="equation-box">
+                    $$a_{\text{eff}} = a_N \cdot \nu(a_N/a_0) \cdot f(N_{\text{galaxies}})$$
+                </div>
+                <p>where $f(N)$ accounts for cumulative entropy contributions.</p>
+
+                <h2>4. Results</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Mass Ratio (apparent/baryonic)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Newtonian</td>
+                            <td>1.0</td>
+                            <td>Fails</td>
+                        </tr>
+                        <tr>
+                            <td>CDM (NFW)</td>
+                            <td>7.0</td>
+                            <td>Matches</td>
+                        </tr>
+                        <tr class="result-highlight">
+                            <td>Entropic</td>
+                            <td>3-5</td>
+                            <td><strong>Partial</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>5. The Bullet Cluster Offset</h2>
+                <p>The offset remains problematic. However, we propose a resolution:</p>
+                <div class="master-equation">
+                    $$\boxed{\text{Non-equilibrium Entropy Dynamics}}$$
+                </div>
+                <p>During a cluster collision:</p>
+                <ol>
+                    <li>Galaxies (low entropy) pass through quickly</li>
+                    <li>Gas (high entropy) remains at collision center</li>
+                    <li>The entropy <em>gradient</em> peaks where galaxies are</li>
+                    <li>Entropic force → lensing signal follows galaxies, not gas</li>
+                </ol>
+
+                <h2>6. Conclusion</h2>
+                <div class="conclusion-box">
+                    <h3 style="margin:0;">Honest Assessment</h3>
+                    <p style="margin:0.5rem 0 0 0;">
+                        Entropic Gravity can <strong>partially</strong> explain cluster lensing through stacking
+                        effects.<br>
+                        The Bullet Cluster offset requires non-equilibrium entropy dynamics—a testable prediction.<br>
+                        <strong>Status: More work needed, but not falsified.</strong>
+                    </p>
                 </div>
 
-                <div class="content-wrapper">
-                    <div class="abstract">
-                        While Entropic Gravity successfully explains galaxy rotation curves without Dark Matter,
-                        gravitational lensing
-                        in galaxy clusters presents a more challenging test. We simulate the lensing signal expected
-                        from a Bullet
-                        Cluster-like system under three models: Newtonian (baryonic only), CDM with NFW halo, and
-                        Entropic Gravity with
-                        cumulative effects. We find that Entropic Gravity can produce enhanced lensing at cluster scales
-                        through
-                        stacking of individual galaxy contributions, but the magnitude may be insufficient to fully
-                        match observations
-                        without additional physics. The "Bullet Cluster" offset—where the lensing peak is displaced from
-                        the baryonic
-                        center—remains the most stringent challenge. We propose that non-equilibrium entropy dynamics
-                        may resolve this
-                        discrepancy. This work presents an <strong>honest assessment of both successes and
-                            limitations</strong> of the
-                        Entropic framework at the largest scales.
-                        <div class="keywords"><strong>Keywords:</strong> Gravitational Lensing, Galaxy Clusters, Bullet
-                            Cluster,
-                            Entropic Gravity, Dark Matter, TAMESIS Framework
-                        </div>
-
-                        <div class="content-wrapper">
-                        </div>
-
-                        <div class="content-body">
-                            <h2>1. Introduction</h2>
-                            <p>Galaxy rotation curves provide the most intuitive evidence for Dark Matter: stars orbit
-                                too fast for the
-                                visible mass. Entropic Gravity resolves this with modified dynamics at low accelerations
-                                ($a < a_0$).</p>
-                                    <p>However, galaxy clusters present a stronger test. The mass discrepancy is larger
-                                        (~10× instead of
-                                        ~6×), and gravitational <em>lensing</em> provides a direct probe of total mass
-                                        independent of
-                                        kinematics.</p>
-
-                                    <h2>2. The Cluster Challenge</h2>
-                                    <h3>2.1 The Bullet Cluster</h3>
-                                    <p>The 1E 0657-558 "Bullet Cluster" is often cited as proof of Dark Matter:</p>
-                                    <ul>
-                                        <li>Two subclusters recently collided</li>
-                                        <li>Hot X-ray gas (baryonic) is at the collision center</li>
-                                        <li>Lensing mass peaks are <em>offset</em> from the gas</li>
-                                    </ul>
-                                    <p>This offset is explained by CDM: collisionless Dark Matter passes through, while
-                                        baryonic gas is
-                                        slowed.</p>
-
-                                    <h3>2.2 The MOND/Entropic Problem</h3>
-                                    <p>In modified gravity, there is no separate "Dark Matter" to separate from baryons.
-                                        How can the lensing
-                                        peak be offset from the mass?</p>
-
-                                    <h2>3. Simulation</h2>
-                                    <figure>
-                                        <img src="assets/cluster_lensing.png" alt="Cluster Lensing Simulation">
-                                        <figcaption><strong>Figure 1:</strong> Left: Apparent mass profile from lensing.
-                                            Newtonian (blue
-                                            dashed) severely underestimates; CDM (green dotted) matches with fitted
-                                            halo; Entropic (red
-                                            solid) shows enhancement but may not fully match. Right: Acceleration
-                                            comparison showing the
-                                            MOND threshold $a_0$.</figcaption>
-                                    </figure>
-
-                                    <h3>3.1 Entropic Enhancement</h3>
-                                    <p>At cluster scales, the entropic effect stacks across ~1000 galaxies:</p>
-                                    <div class="equation-box">
-                                        $$a_{\text{eff}} = a_N \cdot \nu(a_N/a_0) \cdot f(N_{\text{galaxies}})$$
-                                    </div>
-                                    <p>where $f(N)$ accounts for cumulative entropy contributions.</p>
-
-                                    <h2>4. Results</h2>
-                                    <table>
-                                        <tr>
-                                            <th>Model</th>
-                                            <th>Mass Ratio (apparent/baryonic)</th>
-                                            <th>Status</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Newtonian</td>
-                                            <td>1.0</td>
-                                            <td>Fails</td>
-                                        </tr>
-                                        <tr>
-                                            <td>CDM (NFW)</td>
-                                            <td>7.0</td>
-                                            <td>Matches</td>
-                                        </tr>
-                                        <tr class="result-highlight">
-                                            <td>Entropic</td>
-                                            <td>3-5</td>
-                                            <td><strong>Partial</strong></td>
-                                        </tr>
-                                    </table>
-
-                                    <h2>5. The Bullet Cluster Offset</h2>
-                                    <p>The offset remains problematic. However, we propose a resolution:</p>
-                                    <div class="master-equation">
-                                        $$\boxed{\text{Non-equilibrium Entropy Dynamics}}$$
-                                    </div>
-                                    <p>During a cluster collision:</p>
-                                    <ol>
-                                        <li>Galaxies (low entropy) pass through quickly</li>
-                                        <li>Gas (high entropy) remains at collision center</li>
-                                        <li>The entropy <em>gradient</em> peaks where galaxies are</li>
-                                        <li>Entropic force → lensing signal follows galaxies, not gas</li>
-                                    </ol>
-
-                                    <h2>6. Conclusion</h2>
-                                    <div class="conclusion-box">
-                                        <h3 style="margin:0;">Honest Assessment</h3>
-                                        <p style="margin:0.5rem 0 0 0;">
-                                            Entropic Gravity can <strong>partially</strong> explain cluster lensing
-                                            through stacking
-                                            effects.<br>
-                                            The Bullet Cluster offset requires non-equilibrium entropy dynamics—a
-                                            testable prediction.<br>
-                                            <strong>Status: More work needed, but not falsified.</strong>
-                                        </p>
-                                    </div>
-                                    <div class="references">
-                                        <h2>References</h2>
-                                        <ol>
-                                            <li>Clowe, D. et al. (2006). <em>A Direct Empirical Proof of the Existence
-                                                    of Dark Matter</em>.
-                                                ApJ 648, L109.</li>
-                                            <li>Angus, G. W. et al. (2007). <em>On the Proof of Dark Matter</em>. MNRAS
-                                                383, 417.</li>
-                                            <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and
-                                                    Dynamics</em>. ToE
-                                                Project.</li>
-                                        </ol>
-                                    </div>
-                        </div>
+                <div class="references">
+                    <h2>References</h2>
+                    <ol>
+                        <li>Clowe, D. et al. (2006). <em>A Direct Empirical Proof of the Existence of Dark Matter</em>.
+                            ApJ 648, L109.</li>
+                        <li>Angus, G. W. et al. (2007). <em>On the Proof of Dark Matter</em>. MNRAS 383, 417.</li>
+                        <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. ToE
+                            Project.</li>
+                    </ol>
+                </div>
+    </div>
 </body>
 
 </html>

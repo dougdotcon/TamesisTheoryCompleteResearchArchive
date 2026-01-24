@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratory Bekenstein Test</title>
+    <title>Laboratory Bekenstein Test: Can We Measure I ∝ Area?</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,14 @@
             padding: 1.5cm;
             background-color: #fff;
         }
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,17 +40,40 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
-        .abstract {
-            font-weight: bold;
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
             font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
         }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,28 +83,53 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
-        h3 {
-            font-size: 10pt;
-            font-weight: bold;
-            font-style: italic;
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
-        /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 9pt;
+            break-inside: avoid;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,9 +137,16 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
-    
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -104,78 +160,68 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
+
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
-        <h1>Laboratory Bekenstein Test: Can We Measure I ∝ Area?</h1>
+        <h1>Laboratory Bekenstein Test: Can We Measure I $\propto$ Area?</h1>
         <div class="authors">Douglas H. M. Fulber</div>
         <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
+    <div class="abstract-container">
+        <strong>Abstract.</strong> The Bekenstein bound states that maximum information scales with surface area:
+        $I_{max} \leq A / (4 l_P^2)$. Current technology is ~10^50 below this limit. We analyze experimental approaches:
+        acoustic black holes, holographic storage, qubit density scaling, and gravitational wave entropy. While a direct
+        lab test is difficult, we argue it is not impossible and serves as a crucial falsifiability criterion for
+        holographic theories.
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <h2>1. The Bekenstein Bound</h2>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="master-equation">
+            $$I_{max} \leq \frac{A}{4 l_P^2} \quad \text{bits}$$
+        </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <p>For a 10cm × 10cm surface: $I_{max} \sim 10^{65}$ bits. A 1TB HDD stores $10^{13}$ bits → we are $10^{50}$
+            below the limit.</p>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        The Bekenstein bound states that maximum information scales with surface area: $I_{max} \leq A / (4 l_P^2)$.
-        Current technology is ~10^50 below this limit. We analyze experimental approaches: acoustic black holes,
-        holographic storage, qubit density scaling, and gravitational wave entropy. A direct lab test is difficult but
-        not impossible.
-    </div>
+        <figure>
+            <img src="assets/bekenstein_scales.png" alt="Bekenstein Scales">
+            <figcaption><strong>Figure 1:</strong> Bekenstein limit (blue line) vs actual storage (red X). Current
+                technology is ~10^50 below the fundamental limit.</figcaption>
+        </figure>
 
-    <div class="content-wrapper">
-<h2>1. The Bekenstein Bound</h2>
-    <div class="master-equation">
-        $$I_{max} \leq \frac{A}{4 l_P^2} \quad \text{bits}$$
-    </div>
-    <p>For a 10cm × 10cm surface: $I_{max} \sim 10^{65}$ bits. A 1TB HDD stores $10^{13}$ bits → we are $10^{50}$ below
-        the limit.</p>
+        <h2>2. Experimental Approaches</h2>
+        <ul>
+            <li><strong>Acoustic BH in BECs:</strong> Hawking radiation detected! Entropy scaling testable.</li>
+            <li><strong>Holographic storage:</strong> Does reconstruction fidelity scale with area?</li>
+            <li><strong>Qubit density:</strong> Approach limit with quantum computers?</li>
+            <li><strong>Future:</strong> LISA, Einstein Telescope (gravitational waves)</li>
+        </ul>
 
-    <figure>
-        <img src="assets/bekenstein_scales.png" alt="Bekenstein Scales">
-        <figcaption><strong>Figure 1:</strong> Bekenstein limit (blue line) vs actual storage (red X). Current
-            technology is ~10^50 below the fundamental limit.</figcaption>
-    </figure>
+        <h2>3. Conclusion</h2>
 
-    <h2>2. Experimental Approaches</h2>
-    <ul>
-        <li><strong>Acoustic BH in BECs:</strong> Hawking radiation detected! Entropy scaling testable.</li>
-        <li><strong>Holographic storage:</strong> Does reconstruction fidelity scale with area?</li>
-        <li><strong>Qubit density:</strong> Approach limit with quantum computers?</li>
-        <li><strong>Future:</strong> LISA, Einstein Telescope (gravitational waves)</li>
-    </ul>
+        <div class="conclusion-box">
+            <strong>🔴 Currently Theoretical</strong><br>
+            We are 10^50 below the limit. Direct test difficult but approaches exist.<br>
+            Acoustic black holes are the most promising near-term avenue.
+        </div>
 
-    <h2>3. Conclusion</h2>
-    <div class="conclusion-box">
-        <strong>🔴 Currently Theoretical</strong><br>
-        We are 10^50 below the limit. Direct test difficult but approaches exist.<br>
-        Acoustic black holes are the most promising near-term avenue.
-    </div>
-<div class="references"><h2>References</h2>
-        <ol>
-            <li>Bekenstein, J. D. (1973). <em>Black Holes and Entropy</em>. Phys. Rev. D.</li>
-            <li>Steinhauer, J. (2016). <em>Observation of Hawking Radiation</em>. Nature Physics.</li>
-        </ol></div>
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Bekenstein, J. D. (1973). <em>Black Holes and Entropy</em>. Phys. Rev. D.</li>
+                <li>Steinhauer, J. (2016). <em>Observation of Hawking Radiation</em>. Nature Physics.</li>
+            </ol>
+        </div>
     </div>
 </body>
+
 </html>

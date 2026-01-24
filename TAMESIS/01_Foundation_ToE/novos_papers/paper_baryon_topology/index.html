@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baryon Topology: Why 99% of Mass Is Binding</title>
+    <title>Baryon Topology: Protons as Braided Knots</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -24,12 +24,6 @@
             margin: 0 auto;
             padding: 1.5cm;
             background-color: #fff;
-        }
-
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
         }
 
         header {
@@ -64,13 +58,20 @@
             color: #666;
         }
 
-        .abstract {
-            font-weight: bold;
-            font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
+        /* Abstract spans both columns */
+        .abstract-container {
             width: 85%;
+            margin: 0 auto 2rem auto;
             text-align: justify;
             font-style: italic;
+            font-size: 9pt;
+            column-span: all;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
         }
 
         h2 {
@@ -83,14 +84,6 @@
             break-after: avoid;
         }
 
-        h3 {
-            font-size: 10pt;
-            font-weight: bold;
-            font-style: italic;
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
-        }
-
         p {
             margin-bottom: 0.8rem;
             text-indent: 1em;
@@ -100,33 +93,14 @@
             text-indent: 0;
         }
 
-        .equation {
-            text-align: center;
-            margin: 0.8rem 0;
-            font-size: 10pt;
-        }
-
-        /* Specialized Boxes compatibility */
-        .axiom-box {
-            border-left: 3px solid #000;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .prediction-box {
-            border: 1px solid #d32f2f;
-            padding: 1rem;
-            margin: 1rem 0;
-            background: #fff5f5;
-        }
-
         .master-equation {
             background: #f8f8f8;
             padding: 1rem;
             margin: 1rem 0;
             border: 1px solid #ccc;
             text-align: center;
+            break-inside: avoid;
+            font-size: 9pt;
         }
 
         .conclusion-box {
@@ -135,6 +109,7 @@
             margin: 1.5rem 0;
             border: 1px solid #4caf50;
             text-align: center;
+            break-inside: avoid;
         }
 
         figure {
@@ -155,25 +130,6 @@
             text-align: justify;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 8.5pt;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid #000;
-            padding: 0.4rem;
-            text-align: left;
-        }
-
-        th {
-            font-weight: bold;
-            border-top: 1px solid #000;
-        }
-
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -190,7 +146,7 @@
         .references li {
             margin-bottom: 0.2rem;
         }
-    
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -204,12 +160,13 @@
             border-radius: 3px;
             z-index: 1000;
         }
-
     </style>
 </head>
 
 <body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
     <header>
         <h1>Baryon Topology: Protons as Braided Knots</h1>
         <div class="authors">Douglas H. M. Fulber</div>
@@ -217,71 +174,53 @@
         <div class="date">(Dated: January 23, 2026)</div>
     </header>
 
-    <div class="abstract">
-        Abstract not found.
+    <div class="abstract-container">
+        <strong>Abstract.</strong> Protons contain three quarks (uud) with a total current mass of ~9 MeV, yet the
+        proton mass is 938 MeV. Where does 99% of the mass come from? The standard answer relies on QCD binding energy.
+        Here, we present the TAMESIS interpretation: baryons are braided knots. We propose that the extra mass arises
+        from the topological complexity (crossing number) of the gluonic braids connecting the quarks. This topological
+        model provides a geometric origin for confinement and mass generation.
     </div>
 
     <div class="content-wrapper">
-        <div class="abstract">
-            Abstract not found.
+        <h2>1. The Mass Puzzle</h2>
+
+        <p class="no-indent">The discrepancy between constituent quark masses and the total baryon mass is striking:</p>
+
+        <div class="master-equation">
+            $$m_{uud} = 2(2.2) + 4.7 = 9.1 \text{ MeV}$$
+            $$m_{proton} = 938.3 \text{ MeV}$$
+            $$\text{Binding} \approx 99\% \text{ of mass}$$
         </div>
 
-        <div class="content-wrapper">
-            <div class="abstract">
-                Abstract not found.
-            </div>
+        <h2>2. Braided Knots</h2>
 
-            <div class="content-wrapper">
-                <div class="abstract">
-                    Abstract not found.
-                </div>
+        <p class="no-indent">In the TAMESIS framework, quarks are modeled as trefoil knots (3 crossings each). A baryon
+            is not merely a collection of 3 separate knots, but a <strong>braided structure</strong> where gluons act as
+            the braiding strings. We postulate that these braids add approximately 100 effective crossings to the
+            system, which manifests as the 'binding energy' mass.</p>
 
-                <div class="content-wrapper">
-                    <div class="abstract">
-                        Protons contain three quarks (uud) with total mass ~9 MeV, yet the proton mass is 938 MeV. Where
-                        does 99% of the
-                        mass come from? Standard answer: QCD binding energy. TAMESIS interpretation: <strong>baryons are
-                            braided
-                            knots</strong>, and the braiding complexity provides the extra ~100 effective crossings that
-                        explain the
-                        mass.
-                    </div>
+        <figure>
+            <img src="assets/baryon_topology.png" alt="Baryon Topology">
+            <figcaption><strong>Figure 1:</strong> Left: Mass breakdown of proton (99% from binding). Right: Schematic
+                of braided knot structure (uud quarks connected by gluonic braids).</figcaption>
+        </figure>
 
-                    <div class="content-wrapper">
-                        <h2>1. The Mass Puzzle</h2>
-                        <div class="master-equation">
-                            $$m_{uud} = 2(2.2) + 4.7 = 9.1 \text{ MeV}$$
-                            $$m_{proton} = 938.3 \text{ MeV}$$
-                            $$\text{Binding = 99\% of mass!}$$
-                        </div>
+        <h2>3. Conclusion</h2>
 
-                        <h2>2. Braided Knots</h2>
-                        <p>In TAMESIS, quarks are trefoil knots (3 crossings each). A baryon is not just 3 separate
-                            knots but a
-                            <strong>braided structure</strong> where gluons act as the braiding strings, adding ~100
-                            effective crossings.
-                        </p>
+        <div class="conclusion-box">
+            <strong>Binding Energy = Braiding Complexity</strong><br>
+            QCD confinement is identified as a topological necessity in TAMESIS.
+        </div>
 
-                        <figure>
-                            <img src="assets/baryon_topology.png" alt="Baryon Topology">
-                            <figcaption><strong>Figure 1:</strong> Left: Mass breakdown of proton (99% from binding).
-                                Right: Schematic of
-                                braided knot structure (uud quarks connected by gluonic braids).</figcaption>
-                        </figure>
-
-                        <h2>3. Conclusion</h2>
-                        <div class="conclusion-box">
-                            <strong>Binding Energy = Braiding Complexity</strong><br>
-                            QCD confinement is topological necessity in TAMESIS.
-                        </div>
-                        <div class="references">
-                            <h2>References</h2>
-                            <ol>
-                                <li>Yang, Y. & Zou, B. S. (2020). <em>Origin of nucleon mass</em>. PRD.</li>
-                                <li>Fulber, D. H. M. (2025). <em>Topological Matter</em>. ToE Project.</li>
-                            </ol>
-                        </div>
-                    </div>
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Yang, Y. & Zou, B. S. (2020). <em>Origin of nucleon mass</em>. PRD.</li>
+                <li>Fulber, D. H. M. (2025). <em>Topological Matter</em>. ToE Project.</li>
+            </ol>
+        </div>
+    </div>
 </body>
 
 </html>

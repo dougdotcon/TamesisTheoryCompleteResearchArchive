@@ -28,6 +28,14 @@ This repository contains the artifacts of an interdisciplinary research program 
 
 ---
 
+### ⚠️ How NOT to Read This Repository
+
+This is not a linear argument leading to a single theorem.
+Each layer is logically independent and conditionally linked.
+Skipping the Core Theory will lead to misinterpretation.
+
+---
+
 ## 🏛️ The Architecture
 
 The research is organized into three hierarchical layers:
@@ -36,7 +44,7 @@ The research is organized into three hierarchical layers:
 
 * **Location:** [`THEORY_THERMODYNAMIC_STRUCTURALISM`](THEORY_THERMODYNAMIC_STRUCTURALISM/THEORY_FOUNDATIONS.md)
 * **Concept:** Matches Abstract Math to Physical Reality via the **Realizability Filter**.
-* **Key Result:** The "Landauer Wall" censorship.
+* **Key Result:** The Landauer Wall as a realizability constraint.
 
 ### 2. The Meta-Theory: Structural Solvability
 
@@ -46,7 +54,7 @@ The research is organized into three hierarchical layers:
 
 ### 3. The Case Studies (Applications)
 
-* **Problem 01:** [**P vs NP**](PROBLEM_01_P_VS_NP/ROADMAP_P_VS_NP.md) (Thermodynamic Censorship).
+* **Problem 01:** [**P vs NP**](PROBLEM_01_P_VS_NP/ROADMAP_P_VS_NP.md) (Thermodynamic Feasibility Barrier).
 * **Problem 02:** [**Riemann Hypothesis**](PROBLEM_02_RIEMANN/PAPER_RIEMANN_SPECTRAL_ORIGIN.html) (Spectral Stability).
 * **Legacy Tracks:** [**TRI & TDTR**](THEORY_SUMMARY.md) (Physical Implementations).
 
@@ -86,11 +94,24 @@ We strictly separate:
 
 ---
 
-## 📚 Citation
+## 📚 Registered Artifacts & Citation
 
-If referencing the Meta-Classification framework:
+This repository serves as a **Meta-Archive** containing multiple distinct research artifacts, each with its own Digital Object Identifier (DOI).
 
-> Fulber, D. (2026). *Program of Metatheoretical Research on Structural Solvability*. Artifact Classification 01-03.
+### 🏷️ Primary DOIs
+
+| Artifact Scope | Content | DOI |
+| :--- | :--- | :--- |
+| **Program Root** | The Complete Tamesis Archive (TRI, TDTR, Solvability) | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18357364.svg)](https://doi.org/10.5281/zenodo.18357364) |
+| **Paper** | *The Spectral Origin of the Riemann Zeros* | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18363444.svg)](https://doi.org/10.5281/zenodo.18363444) |
+
+### 📝 How to Cite
+
+**For the General Program:**
+> Fulber, D. H. M. (2026). *Program of Metatheoretical Research on Structural Solvability*. Artifact Classification 01-86. DOI: 10.5281/zenodo.18357364.
+
+**For Specific Papers:**
+> Fulber, D. H. M. (2026). *The Spectral Origin of the Riemann Zeros*. problem_02_riemann. DOI: 10.5281/zenodo.18363444.
 
 ---
 

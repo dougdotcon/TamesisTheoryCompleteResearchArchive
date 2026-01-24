@@ -27,6 +27,12 @@ Dividiremos o trabalho em **4 Lotes (Batches)** baseados na prioridade lógica e
 **Foco:** Completar as derivações matemáticas finais e os testes físicos da teoria principal.
 *Prioridade Alta - O "produto" principal.*
 
+- [x] **TAMESIS/28_Graph_Zeta_Primes**: Funções Zeta de Grafos.
+- [x] **TAMESIS/29_Chaotic_Flow_Primes**: Caos e Primos Geodésicos.
+- [x] **TAMESIS/30_Computational_Primes**: Cálculo numérico de constantes.
+- [x] **TAMESIS/31_Euclidean_Spectral_Operator**: O Hamiltoniano dos Primos.
+- [x] **TAMESIS/32_Complexity_As_Prime_Count**: Complexidade e Teoria dos Números.
+- [x] **TAMESIS/33_Computational_Levinson**: Teorema de Levinson em redes discretas.
 - [x] **TAMESIS/34_Spectral_Theory_Computation**: Detalhes do cálculo espectral.
 - [x] **TAMESIS/37_U12_Physical_Tests**: Testes específicos para a classe de universalidade $U_{1/2}$.
 - [x] **TAMESIS/38_U12_Applications**: Aplicações práticas (computação, criptografia?).
@@ -56,29 +62,29 @@ Dividiremos o trabalho em **4 Lotes (Batches)** baseados na prioridade lógica e
 
 **Teoria da Informação:**
 
-- [ ] **54_Transition_Space**
-- [ ] **55_Allowed_Transitions**
-- [ ] **56_Fundamental_Directionality**
-- [ ] **57_Interface_Survival**
-- [ ] **58_Information_Loss**
-- [ ] **59_Transition_Monotones**
-- [ ] **60_Conservation_Failures**
-- [ ] **62_Dissipative_Transitions**
-- [ ] **64_Information_Symmetry_Breaking**
-- [ ] **65_No_Reversible_Transitions**
-- [ ] **66_Transition_Dynamics_Classes**
+- [x] **54_Transition_Space**
+- [x] **55_Allowed_Transitions**
+- [x] **56_Fundamental_Directionality**
+- [x] **57_Interface_Survival**
+- [x] **58_Information_Loss**
+- [x] **59_Transition_Monotones**
+- [x] **60_Conservation_Failures**
+- [x] **62_Dissipative_Transitions**
+- [x] **64_Information_Symmetry_Breaking**
+- [x] **65_No_Reversible_Transitions**
+- [x] **66_Transition_Dynamics_Classes**
 
 **Simulações e Conclusão:**
 
-- [ ] **78_Program_Closure**
-- [ ] **79_Entropic_Galaxy_Sim**
-- [ ] **80_Elastic_Memory_Transition**
-- [ ] **81_Validation**
-- [ ] **82_Emergent_Newton**
-- [ ] **83_Emergent_Cosmology**
-- [ ] **84_Stress_Testing**
-- [ ] **85_Systematic_Comparison**
-- [ ] **86_Final_Archive**
+- [x] **78_Program_Closure**
+- [x] **79_Entropic_Galaxy_Sim**
+- [x] **80_Elastic_Memory_Transition**
+- [x] **81_Validation**
+- [x] **82_Emergent_Newton**
+- [x] **83_Emergent_Cosmology**
+- [x] **84_Stress_Testing**
+- [x] **85_Systematic_Comparison**
+- [x] **86_Final_Archive**
 
 ---
 

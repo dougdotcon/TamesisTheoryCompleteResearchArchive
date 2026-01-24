@@ -141,3 +141,90 @@ class FiniteCausalGraph:
         for i in range(self.num_nodes):
             self.nodes[i].state = 0.5 + 0.1 * h_vector[i] # Bias
 
+    def calculate_spectral_entropy(self) -> float:
+        """
+        Calculates the Von Neumann Entropy of the Graph Spectrum.
+        S = - sum(lambda_i * log(lambda_i))
+        normalized.
+        """
+        try:
+            L = self.get_laplacian_matrix()
+            # For efficiency on large graphs, we might approximate.
+            # ideally we want full S.
+            if self.num_nodes < 100:
+                evals = np.linalg.eigvalsh(L.toarray())
+            else:
+                # Use standard sparse solver for restricted k
+                evals = self.compute_spectrum(k=min(self.num_nodes-1, 50), operator_type='laplacian')
+            
+            # Normalize to probability distribution
+            total = np.sum(np.abs(evals))
+            if total == 0: return 0.0
+            probs = np.abs(evals) / total
+            
+            entropy = 0.0
+            for p in probs:
+                if p > 1e-9:
+                    entropy -= p * np.log(p)
+            return entropy
+        except:
+            return 0.0
+
+    def apply_entropic_pressure(self, steps: int = 100, beta: float = 1.0, check_interval: int = 20):
+        """
+        Evolves the graph under Entropic Pressure.
+        Monte Carlo simulation favoring high-entropy configurations.
+        
+        Args:
+            steps: Number of MC steps.
+            beta: Inverse temperature (1/T).
+            check_interval: How often to re-diagonalize matrix (expensive).
+        """
+        current_entropy = self.calculate_spectral_entropy()
+        
+        # Cache for optimization:
+        # We can accept *any* change blindly in between checks? 
+        # No, that's random walk. 
+        # We need a proxy for entropy? Or just accept the cost?
+        # A compromise: We assume small changes locally don't destroy entropy.
+        # But we need to drive it Up.
+        # Efficient Entropic Force:
+        # Using Degree centrality variance as a cheap proxy? 
+        # High entropy ~ Regular degrees? No, GUE is complex.
+        
+        # STRATEGY:
+        # We perform 'check_interval' mutations, then check if the batch improved entropy.
+        # If yes, keep batch. If no, revert batch.
+        
+        # Backup state
+        import copy
+        
+        for batch in range(0, steps, check_interval):
+             # Save current best state
+             backup_nodes = copy.deepcopy(self.nodes)
+             
+             # Perform blind mutations
+             for _ in range(check_interval):
+                u = np.random.randint(0, self.num_nodes)
+                v = np.random.randint(0, self.num_nodes)
+                if u == v: continue
+                
+                exists = v in self.nodes[u].neighbors
+                if exists:
+                    del self.nodes[u].neighbors[v]
+                    del self.nodes[v].neighbors[u]
+                else:
+                    self.nodes[u].neighbors[v] = 1.0
+                    self.nodes[v].neighbors[u] = 1.0
+             
+             # Check cost
+             new_entropy = self.calculate_spectral_entropy()
+             delta_S = new_entropy - current_entropy
+             
+             if delta_S > 0 or np.random.rand() < np.exp(beta * delta_S):
+                 current_entropy = new_entropy
+                 # Accept
+             else:
+                 # Revert
+                 self.nodes = backup_nodes
+

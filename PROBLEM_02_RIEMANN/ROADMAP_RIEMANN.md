@@ -1,71 +1,90 @@
-# ROADMAP: Riemann Hypothesis (The Spectral Attack)
+# ROADMAP: STRUCTURAL UNIVERSALITY AND THE CRITICAL LINE
 
-**Objective:** Use the Entropic Network (Kernel v3) to identify the "Critical Instant" operator whose spectrum matches the Riemann Zeta zeros.
+## (A Stability Criterion for Spectral Realizations of the Zeta Function)
 
-> "The true goal is to identify the physical candidate operator $H$. If the statistics match, we move from pure math to physical law."
+**Meta-Objective:**
+Transition from a "Physical Proof" framework to a mathematical "Structural Exclusion Principle".
 
----
-
-## LAYER 0 — COMMON INFRASTRUCTURE (Prerequisite)
-
-*Status: Shared with P vs NP Track*
-
-We require the same high-performance Entropic Engine.
-
-### 0.1 Minimal Formalization (2–4 weeks)
-
-- [ ] **Formal Object**: Finite Causal Graph $G(V, E)$.
-- [ ] **Update Rule**: Explicit Entropic Update rule.
-
-### 0.2 Numerical Engine (4–6 weeks)
-
-**Goal:** Compute eigenvalues of large adjacency/transition matrices.
-
-- [ ] **Linear Algebra**: Efficient diagonalization methods (Lanczos/Arnoldi).
-- [ ] **Spectral Export**: Automated extraction of eigenvalue spacing distributions.
+> "This work does not present a classical proof of the Riemann Hypothesis. Instead, it establishes a structural exclusion principle: any realizable spectral model exhibiting universality must concentrate on the critical line."
 
 ---
 
-## TRACK B — THE ATTACK (Riemann)
+## 🧱 PHASE 0 — CONCEPTUAL FREEZING (The Foundation)
 
-This is the big game. Requires extreme mathematical maturity.
+**Goal:** Stabilize vocabulary and separate mathematical definitions from physical intuitions.
 
-### B1. Construction of the "Critical Instant" (3 weeks)
+#### 0.1 Freeze Class $C_{crit}$
 
-**Action:** Define the graph state at the moment of the "Big Bounce". Integrate lessons from `TAMESIS/02_Research_Limits/riemann`.
+- [x] **Formal Definition**: Treat axioms as mathematical definitions, not physical laws.
+  - *Definition*: Let $C_{crit}$ be the class of operators $H$ such that... (Self-adjoint, Discrete, Log-Invariant, Trace-Class constraints).
+  - ❌ Remove all mentions of "Big Bounce", "Vacuum", "Universe" from the core definition.
 
-- [ ] **Legacy Review**: Examine `simulation/zeta_chaos_plot.png` data. Why did the previous "SOLVED" status fail to hold? (Likely lack of operator derivation).
-- [ ] **Regime Definition**: Maximum Information Density / Holographic Saturation.
-- [ ] **Operator Definition**: Define the matrix $A$ (Adjacency) or Hamiltonian $H$ that governs this specific state.
-- [ ] **Hypothesis**: The "Bounce" state is the maximally chaotic quantum system conjectured by Berry-Keating.
+#### 0.2 Document Separation (The Trinity)
 
-### B2. Spectrum Analysis (2–3 weeks)
-
-**Action:** Compute the spectrum of $H$.
-
-- [ ] **Equation**: $H\psi_n = \lambda_n \psi_n$
-- [ ] **Comparison Target**:
-  - **GUE (Gaussian Unitary Ensemble)**: Random Matrix Theory statistics.
-  - **Zeta Zeros**: The Odlyzko data set of Riemann zeros.
-- [ ] **Metric**: Nearest-Neighbor Spacing Distribution (NNSD). We look for correlations, not exact values.
-
-### B3. The Decisive Test
-
-**Action:** Evaluate the fit.
-
-- **❌ No Match**: Theory falsified. Honest stop.
-- **⚠️ Partial Match**: Paper on "Physical Model with Prime-like Statistics".
-- **✅ Strong Match**:
-  - You have identified the **Physical Operator**.
-  - This links Quantum Chaos, Gravity, and Number Theory.
-  - Publication: *Communications in Mathematical Physics* or *Annals of Physics*.
+- [x] **Document A (Mathematical)**: `PAPER_A_STRUCTURAL_EXCLUSION.md`
+  - Definitions, Lemmata, Exclusion Theorem. No Physics.
+- [x] **Document B (Interpretation)**: `PAPER_B_PHYSICAL_MOTIVATION.md`
+  - Entropy, Chaos, Tamesis context, "Why this matters".
+- [x] **Document C (Computational)**: `PAPER_C_NUMERICAL_EVIDENCE.md`
+  - Code, GUE Statistics, N=400 results, Graphs.
 
 ---
 
-## GOLDEN RULE
+## 🧩 PHASE 1 — THE FORMAL EXCLUSION THEOREM
 
-Never use the word **"Proof"**. Use:
+**Goal:** Reformulate "entropic instability" into "spectral spectral violation".
 
-- "Spectral Hypothesis"
-- "Trace Formula Analogues"
-- "Universality Class Identification"
+#### 1.1 Language Reformulation
+
+- Replace "Entropy breakdown" with **"Violation of Spectral Rigidity"**.
+- Replace "Force" with **"Variational Gradient"**.
+
+#### 1.2 The Key Logic (The Exclusion Lemma)
+
+- [x] **Draft Lemma**:
+  > **Lemma (Exclusion):** Let $H \in C_{crit}$. If the spectrum of $H$ contains a subset violating the symmetry $\sigma \mapsto 1-\sigma$ in the logarithmic variable, then the normalized spacing distribution does not converge to GUE.
+
+#### 1.3 The Exclusion Theorem
+
+- [x] **Formal Statement**:
+  > **Theorem:** No operator in Class $C_{crit}$ admits a spectrum with eigenvalues outside the Critical Line.
+  - *Note*: This theorem applies to the *Class*, not directly to Zeta yet.
+
+---
+
+## 🔗 PHASE 2 — THE CLEAN BRIDGE (Zeta $\to$ Class)
+
+**Goal:** Establish the Conditional Link with honesty.
+
+#### 2.1 The Berry-Keating Hypothesis (Weak Form)
+
+- [x] **Explicit Assumption**:
+  > **Hypothesis $H_{BK}$**: The spectral object associated with the Riemann Zeta function belongs to Class $C_{crit}$.
+
+#### 2.2 The Final Conditional Theorem
+
+- [x] **Statement**:
+  > **Theorem (Conditional):** If the Riemann zeta function admits a spectral realization belonging to Class $C_{crit}$, then all its non-trivial zeros lie on the critical line $\Re(s) = 1/2$.
+
+---
+
+## 🧪 PHASE 3 — REPOSITIONING
+
+**Goal:** Frame the result for acceptance.
+
+#### 3.1 Titles & Branding
+
+- ❌ Drop: "Proof of RH", "Origin of Primes".
+- ✅ Adopt: "**Structural Universality and the Critical Line**".
+
+#### 3.2 Scope Declaration
+
+- [x] **Abstract Update**: Explicitly state that this is a classification result about *stability*, offering a new lens on why the zeros *should* be where they are.
+
+---
+
+## STATUS TRACKER
+
+- [ ] **Phase 1**: Mathematical Formalization (Doc A)
+- [ ] **Phase 2**: The Conditional Bridge
+- [ ] **Phase 3**: Final Repositioning

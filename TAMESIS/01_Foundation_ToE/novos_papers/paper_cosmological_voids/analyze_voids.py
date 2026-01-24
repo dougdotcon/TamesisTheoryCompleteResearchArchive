@@ -1,6 +1,6 @@
 """
 Cosmological Voids: Are Large Structures Too Big for ΛCDM?
-Analyzes cosmic voids and giant structures in TARDIS.
+Analyzes cosmic voids and giant structures in TAMESIS.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_cosmological_voids():
     """
-    Analyze large cosmic structures in TARDIS framework.
+    Analyze large cosmic structures in TAMESIS framework.
     """
     print("🌌 Analyzing Cosmological Voids...\n")
     
@@ -53,7 +53,7 @@ def analyze_cosmological_voids():
     """)
     
     print("=" * 50)
-    print("TARDIS EXPLANATION")
+    print("TAMESIS EXPLANATION")
     print("=" * 50)
     print("""
     Entropic Gravity predicts FASTER structure formation:
@@ -176,5 +176,5 @@ if __name__ == "__main__":
     • Higher collision speeds → El Gordo is natural
     
     Prediction: Even larger structures and faster collisions
-    will be discovered, consistent with TARDIS.
+    will be discovered, consistent with TAMESIS.
     """)

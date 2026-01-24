@@ -1,5 +1,5 @@
 """
-CMB B-modes: Can We Distinguish TARDIS from Inflation?
+CMB B-modes: Can We Distinguish TAMESIS from Inflation?
 Analyzes polarization predictions for CMB observations.
 """
 import numpy as np
@@ -8,7 +8,7 @@ import os
 
 def analyze_cmb_bmodes():
     """
-    Analyze CMB B-mode predictions in TARDIS vs Inflation.
+    Analyze CMB B-mode predictions in TAMESIS vs Inflation.
     """
     print("🌌 Analyzing CMB B-modes...\n")
     
@@ -47,7 +47,7 @@ def analyze_cmb_bmodes():
     """)
     
     print("=" * 50)
-    print("TARDIS PREDICTION")
+    print("TAMESIS PREDICTION")
     print("=" * 50)
     print("""
     If inflation is NOT needed (BH interior = inflation-like):
@@ -64,7 +64,7 @@ def analyze_cmb_bmodes():
     3. PREDICTION
        - Future experiments (CMB-S4) will find r → 0
        - This would RULE OUT simple inflation
-       - CONFIRM TARDIS/BH cosmology
+       - CONFIRM TAMESIS/BH cosmology
     """)
     
     # Current and future sensitivities
@@ -75,7 +75,7 @@ def analyze_cmb_bmodes():
     
     print(f"\n  Current limit (BICEP/Keck): r < {r_current_limit}")
     print(f"  CMB-S4 target: r ~ {r_cmbs4_target}")
-    print(f"  TARDIS prediction: r ~ {r_tardis_prediction}")
+    print(f"  TAMESIS prediction: r ~ {r_tardis_prediction}")
     print(f"  Simple inflation predicts: r ~ {r_simple_inflation}")
     
     return {
@@ -94,14 +94,14 @@ def plot_bmode_predictions():
     # Left: r predictions comparison
     ax1 = axes[0]
     
-    models = ['Current\nLimit', 'CMB-S4\nTarget', 'Simple\nInflation', 'TARDIS\nPrediction']
+    models = ['Current\nLimit', 'CMB-S4\nTarget', 'Simple\nInflation', 'TAMESIS\nPrediction']
     r_values = [0.036, 0.001, 0.05, 0.0001]
     colors = ['gray', 'blue', 'orange', 'green']
     
     bars = ax1.bar(models, r_values, color=colors, edgecolor='black')
     ax1.set_yscale('log')
     ax1.set_ylabel('Tensor-to-Scalar Ratio (r)', fontsize=12)
-    ax1.set_title('B-mode Predictions: Inflation vs TARDIS', fontsize=12, fontweight='bold')
+    ax1.set_title('B-mode Predictions: Inflation vs TAMESIS', fontsize=12, fontweight='bold')
     ax1.axhline(0.036, color='red', linestyle='--', alpha=0.5, label='Current limit')
     ax1.grid(True, alpha=0.3, axis='y')
     ax1.legend()
@@ -124,7 +124,7 @@ def plot_bmode_predictions():
     # B-modes from inflation (if r=0.05)
     Cl_B_inflation = 1e-11 * (1 + (l/80)**2)**(-1)
     
-    # TARDIS: only lensing
+    # TAMESIS: only lensing
     Cl_B_tardis = Cl_B_lensing
     
     ax2.loglog(l, Cl_E, 'b-', linewidth=2, label='E-modes (measured)')
@@ -153,7 +153,7 @@ def plot_bmode_predictions():
 if __name__ == "__main__":
     print("=" * 60)
     print("🌌 CMB B-MODE ANALYSIS")
-    print("   Paper 27: Can We Distinguish TARDIS from Inflation?")
+    print("   Paper 27: Can We Distinguish TAMESIS from Inflation?")
     print("=" * 60 + "\n")
     
     results = analyze_cmb_bmodes()
@@ -166,12 +166,12 @@ if __name__ == "__main__":
     B-modes are the SMOKING GUN test:
     
     • Inflation predicts: r ~ 0.01-0.1
-    • TARDIS predicts: r ~ 0 (no primordial GWs)
+    • TAMESIS predicts: r ~ 0 (no primordial GWs)
     
     Current status: r < 0.036 (no detection)
     Future (CMB-S4): Will probe r ~ 0.001
     
-    If r → 0: TARDIS is confirmed, simple inflation is ruled out.
+    If r → 0: TAMESIS is confirmed, simple inflation is ruled out.
     
     This is a DECISIVE experimental test.
     """)

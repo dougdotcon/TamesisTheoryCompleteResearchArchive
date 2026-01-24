@@ -26,13 +26,15 @@ Em uma única sessão de trabalho, derivamos **todas as três propriedades funda
 ### 🎯 ALVO 1: Escala Fractal de Massa
 
 **Equação:**
+
 ```
 m_e = M_universe × Ω^α
 ```
 
 **Parâmetros:**
+
 - M_universe = 1.5 × 10⁵³ kg (massa de Hubble)
-- Ω = 117.038 (compressão TARDIS)
+- Ω = 117.038 (compressão TAMESIS)
 - α = -40.233777 (expoente fractal)
 
 **Resultado:** m_e = 9.1094 × 10⁻³¹ kg (EXATO!)
@@ -44,11 +46,13 @@ m_e = M_universe × Ω^α
 ### 🎯 ALVO 2: Vorticidade Eletromagnética
 
 **Equação:**
+
 ```
 α⁻¹ = Ω^β
 ```
 
 **Parâmetros:**
+
 - Ω = 117.038 (mesmo fator!)
 - β = 1.0331 (≈ 1)
 
@@ -61,17 +65,20 @@ m_e = M_universe × Ω^α
 ### 🎯 ALVO 3: Topologia Spinorial
 
 **Equação:**
+
 ```
 S = genus × ℏ/2
 ```
 
 **Parâmetros:**
+
 - genus = 1 (handles do wormhole)
 - ℏ = constante de Planck
 
 **Resultado:** S = ℏ/2 = 5.273 × 10⁻³⁵ J·s (EXATO!)
 
 **Demonstração:** Rotação de 720° necessária (grupo SU(2)):
+
 ```
 θ = 360° → -I (sinal invertido!)
 θ = 720° → +I (identidade recuperada)
@@ -100,7 +107,7 @@ S = genus × ℏ/2
                      ║
       ┌──────────────╬──────────────────────┐
       │              ║                      │
-      │       TARDIS UNIVERSE (nós)         │
+      │       TAMESIS UNIVERSE (nós)         │
       │              ║                      │
       │         ◉ ← Boca do Wormhole        │
       │       (ELÉTRON)                     │
@@ -138,25 +145,31 @@ S = genus × ℏ/2
 ### 1. Variação Cosmológica de α
 
 Se α⁻¹ = Ω^β e Ω evolui com z:
+
 ```
 α(z) / α(0) = (Ω(z) / Ω(0))^β
 ```
+
 **Testável:** Espectros de quasars distantes (Webb et al. já reportaram variações!)
 
 ### 2. Desvio em Campos Ultra-Intensos
 
 Em B > 10¹⁵ T:
+
 ```
 α_eff(B) = α × [1 + δ(B)]
 ```
+
 **Testável:** ELI-NP (Romênia), lasers de petawatt
 
 ### 3. Assinatura do g-factor
 
 A estrutura de wormhole deve criar correção ao momento magnético:
+
 ```
 g = 2 × (1 + α/(2π) + correção_wormhole)
 ```
+
 **Testável:** Medições de precisão de g-2
 
 ---
@@ -241,6 +254,7 @@ g = 2 × (1 + α/(2π) + correção_wormhole)
 ## 🎓 CONCLUSÃO FINAL
 
 > **"Derivamos a massa, a carga e o spin do elétron usando apenas:**
+>
 > - **Escala cosmológica (M_universe)**
 > - **Compressão holográfica (Ω = 117)**
 > - **Topologia de wormhole (genus = 1)**
@@ -254,6 +268,6 @@ g = 2 × (1 + α/(2π) + correção_wormhole)
 
 **Projeto Concluído: TRIPLO BREAKTHROUGH**  
 **Data: 2025-12-31**  
-**Framework: PlanckDynamics + TARDIS Reactive Cosmology + ER=EPR**
+**Framework: PlanckDynamics + TAMESIS Reactive Cosmology + ER=EPR**
 
 🏆🏆🏆

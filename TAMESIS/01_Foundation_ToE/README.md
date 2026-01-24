@@ -1,4 +1,4 @@
-# TARDIS: The Holographic Origin of Matter and Dynamics
+# TAMESIS: The Holographic Origin of Matter and Dynamics
 
 ## A Unified Geometric Framework for Fundamental Physics
 
@@ -12,7 +12,7 @@
 
 ## 📄 Executive Summary
 
-This repository contains the source code, derivations, and manuscripts for the **TARDIS (Topological Analysis of Recursive Dimensional Information Systems)** framework.
+This repository contains the source code, derivations, and manuscripts for the **TAMESIS (Topological Analysis of Recursive Dimensional Information Systems)** framework.
 
 This work proposes a phenomenological extension to the Standard Model of particle physics and Cosmology, based on a single **Postulate of Holographic Compression**. We explore the hypothesis that the values of fundamental constants (electron mass, $\alpha$, $G$) are not random, but coupled through a dimensionless structural parameter $\Omega \approx 117.038$.
 
@@ -25,13 +25,13 @@ This work proposes a phenomenological extension to the Standard Model of particl
 
 To ensure scientific clarity, we define exactly what this framework is and what it is not.
 
-**The TARDIS framework does NOT claim to:**
+**The TAMESIS framework does NOT claim to:**
 
 - Provide a UV-complete quantum gravity theory (like String Theory or Loop Quantum Gravity).
 - Replace Quantum Field Theory or General Relativity at currently tested scales.
 - Derive exact numerical values from pure mathematics without phenomenological calibration.
 
-**Instead, TARDIS is intended as:**
+**Instead, TAMESIS is intended as:**
 
 - A **phenomenological geometric framework** that unifies constants.
 - A method for **parameter reduction** via holographic scaling arguments.
@@ -54,16 +54,18 @@ $$ \boxed{\Omega \equiv \frac{\text{Information Capacity (Bulk)}}{\text{Informat
 
 ## 🧪 Falsifiability ("The Kill List")
 
-Unlike traditional "Everything Theories" that are untestable, the TARDIS framework makes specific, dangerous predictions.
+Unlike traditional "Everything Theories" that are untestable, the TAMESIS framework makes specific, dangerous predictions.
 
 ### Local Refutations (Invalidate Specific Sectors)
 
-* **Failure of $M_c$:** Observation of stable quantum interference for mass $M \gg 10^{-16}$ kg falsifies the holographic collapse hypothesis (but not necessarily the scaling laws).
+- **Failure of $M_c$:** Observation of stable quantum interference for mass $M \gg 10^{-16}$ kg falsifies the holographic collapse hypothesis (but not necessarily the scaling laws).
+
 - **Lepton Instability:** Discovery of a stable 4th generation lepton falsifies the topological resonance model.
 
 ### Global Refutations (Invalidate the Framework)
 
-* **Inconsistency of $\Omega$:** If $\Omega$ calculated from $\alpha$ drifts apart from $\Omega$ calculated from $m_e$ over cosmological time.
+- **Inconsistency of $\Omega$:** If $\Omega$ calculated from $\alpha$ drifts apart from $\Omega$ calculated from $m_e$ over cosmological time.
+
 - **Emergence of Free Parameters:** If fitting new data requires introducing arbitrary "fudge factors" not derived from $\Omega$.
 
 ---

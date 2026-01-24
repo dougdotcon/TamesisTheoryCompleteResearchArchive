@@ -54,8 +54,8 @@ def analyze_v3_results():
 
     print()
 
-    # Análise da compressão TARDIS
-    print("🌌 ANÁLISE DA COMPRESSÃO TARDIS:")
+    # Análise da compressão TAMESIS
+    print("🌌 ANÁLISE DA COMPRESSÃO TAMESIS:")
     compression = data['tardis_compression']
 
     print(f"   • Compressão inicial: {compression[0]:.1f}")
@@ -94,8 +94,8 @@ def analyze_v3_results():
     ax1.grid(True, alpha=0.3)
     ax1.set_xscale('log')
 
-    # Gráfico 2: Compressão TARDIS V3.0
-    ax2.set_title('Compressão TARDIS - V3.0', fontweight='bold')
+    # Gráfico 2: Compressão TAMESIS V3.0
+    ax2.set_title('Compressão TAMESIS - V3.0', fontweight='bold')
     ax2.plot(times, compression, 'purple', linewidth=3,
             label=f'Fator Final: {compression[-1]:.1f}')
     ax2.set_xlabel('Tempo (unidades Planck)')
@@ -178,7 +178,7 @@ def analyze_v3_results():
 
     print("✅ HIPÓTESES VALIDADAS:")
     print(f"   • Leis físicas dinâmicas: CONFIRMADAS")
-    print(f"   • Universo TARDIS: CONFIRMADO (Fator: {compression[-1]:.0f}x)")
+    print(f"   • Universo TAMESIS: CONFIRMADO (Fator: {compression[-1]:.0f}x)")
     print(f"   • Acoplamento: ESTÁVEL E PREDIZÍVEL")
 
     print("\n🔬 MELHORIAS V3.0:")
@@ -192,7 +192,7 @@ def analyze_v3_results():
         max_var = max(abs(v - values[0]) / values[0] for v in values) * 100
         print(f"   • {const_name}: ±{max_var:.1f}% variação máxima")
 
-    print(f"\n🌌 COMPRESSÃO TARDIS:")
+    print(f"\n🌌 COMPRESSÃO TAMESIS:")
     print(f"   • Fator final: {compression[-1]:.0f}x")
     print(f"   • Crescimento médio: {growth_rate:.4f}")
     print(f"   • Pontos simulados: {len(times)}")

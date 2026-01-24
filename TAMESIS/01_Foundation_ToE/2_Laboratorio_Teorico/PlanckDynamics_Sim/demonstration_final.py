@@ -201,7 +201,7 @@ def show_system_summary():
 
     print("\n🔬 CAPACIDADES CIENTÍFICAS:")
     print("  • Simulação de Leis Físicas Dinâmicas")
-    print("  • Modelagem do Universo TARDIS")
+    print("  • Modelagem do Universo TAMESIS")
     print("  • Análise de constantes fundamentais variáveis")
     print("  • Compressão quântica espaço-temporal")
     print("  • Validação multi-método e benchmarking")
@@ -214,7 +214,7 @@ def show_system_summary():
 
     print("\n🎯 HIPÓTESES VALIDADAS:")
     print("  ✅ Leis físicas dinâmicas (±16-26% variação)")
-    print("  ✅ Universo TARDIS (compressão até 117,038×)")
+    print("  ✅ Universo TAMESIS (compressão até 117,038×)")
     print("  ✅ Acoplamento entre constantes e geometria")
     print("  ✅ Consistência com leis de conservação")
 

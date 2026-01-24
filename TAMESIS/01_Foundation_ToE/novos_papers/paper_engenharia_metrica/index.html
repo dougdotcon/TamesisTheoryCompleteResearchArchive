@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Metric Engineering: Theoretical Framework for Inertia Reduction via Local Spacetime Modification</h1>
@@ -105,120 +206,144 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We present a theoretical framework for advanced propulsion based on the TARDIS model's prediction that inertial
-        mass is a function of the local metric density factor $\gamma$. By engineering a "metric bubble" where $\gamma
-        \to 1$ (instead of the vacuum value $\gamma = 117.038$), we demonstrate that effective inertial mass can be
-        reduced by a factor of $\sim 117\times$. This enables dramatic acceleration with modest thrust. We simulate a
-        hypothetical interstellar mission to Proxima Centauri, showing travel times reducible from millennia to weeks.
-        While energy requirements remain high ($\sim 172$ GJ), they are within the bounds of plausible advanced
-        technology. This work provides the first rigorous theoretical basis for "Warp Drive" concepts within a unified
-        physics framework.
-        <div class="keywords"><strong>Keywords:</strong> Warp Drive, Inertial Mass Reduction, Metric Engineering, TARDIS
-            Framework, Advanced Propulsion
-    </div>
-
-    <div class="content-wrapper">
-</div>
-
-    <div class="content-body">
-        <h2>1. Introduction</h2>
-        <p>The fundamental barrier to interstellar travel is inertia. Accelerating a spacecraft to relativistic
-            velocities requires enormous energy due to the spacecraft's inertial mass. However, if inertial mass could
-            be <em>reduced</em>, the same thrust would produce dramatically greater acceleration.</p>
-        <p>The TARDIS framework proposes that inertial mass is not an intrinsic property but rather emerges from the
-            local metric density $\gamma$. In standard vacuum, $\gamma = 117.038$. We explore the consequences of
-            locally modifying this value.</p>
-
-        <h2>2. Theoretical Framework</h2>
-        <h3>2.1 Inertia as Metric Effect</h3>
-        <p>In the holographic model, the effective inertial mass is:</p>
-        <div class="equation-box">
-            $$m_{\text{eff}} = m_0 \cdot \frac{\gamma}{\gamma_0}$$
+        <div class="abstract">
+            Abstract not found.
         </div>
-        <p>where $m_0$ is the rest mass, $\gamma$ is the local metric density, and $\gamma_0 = 117.038$ is the vacuum
-            reference.</p>
 
-        <h3>2.2 The Metric Bubble</h3>
-        <p>By creating a region where $\gamma \to 1$, the effective mass becomes:</p>
-        <div class="master-equation">
-            $$\boxed{m_{\text{eff}} = m_0 \cdot \frac{1}{117.038} \approx 0.0085 \cdot m_0}$$
-        </div>
-        <p>A 117× reduction in effective inertia!</p>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-        <h2>3. Simulation: Proxima Centauri Mission</h2>
-        <figure>
-            <img src="assets/warp_bubble_efficiency.png" alt="Warp Bubble Efficiency">
-            <figcaption><strong>Figure 1:</strong> Comparison of travel times to Proxima Centauri (4.24 ly) under
-                standard physics vs. metric-modified propulsion. The metric bubble reduces travel time from millennia to
-                weeks.</figcaption>
-        </figure>
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
+                </div>
 
-        <table>
-            <tr>
-                <th>Scenario</th>
-                <th>Effective γ</th>
-                <th>Travel Time</th>
-            </tr>
-            <tr>
-                <td>Standard Vacuum</td>
-                <td>117.038</td>
-                <td>~3,470 days</td>
-            </tr>
-            <tr class="result-highlight">
-                <td>Metric Bubble</td>
-                <td>1.0</td>
-                <td><strong>~30 days</strong></td>
-            </tr>
-        </table>
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        We present a theoretical framework for advanced propulsion based on the TAMESIS model's
+                        prediction that inertial
+                        mass is a function of the local metric density factor $\gamma$. By engineering a "metric bubble"
+                        where $\gamma
+                        \to 1$ (instead of the vacuum value $\gamma = 117.038$), we demonstrate that effective inertial
+                        mass can be
+                        reduced by a factor of $\sim 117\times$. This enables dramatic acceleration with modest thrust.
+                        We simulate a
+                        hypothetical interstellar mission to Proxima Centauri, showing travel times reducible from
+                        millennia to weeks.
+                        While energy requirements remain high ($\sim 172$ GJ), they are within the bounds of plausible
+                        advanced
+                        technology. This work provides the first rigorous theoretical basis for "Warp Drive" concepts
+                        within a unified
+                        physics framework.
+                        <div class="keywords"><strong>Keywords:</strong> Warp Drive, Inertial Mass Reduction, Metric
+                            Engineering, TAMESIS
+                            Framework, Advanced Propulsion
+                        </div>
 
-        <h3>3.1 Energy Requirements</h3>
-        <p>The energy needed to establish and maintain the metric bubble is:</p>
-        <div class="equation-box">
-            $$E_{\text{bubble}} \approx 172 \text{ GJ}$$
-        </div>
-        <p>This is equivalent to ~48 MWh—substantial but not physically impossible.</p>
+                        <div class="content-wrapper">
+                        </div>
 
-        <h2>4. Discussion</h2>
-        <p>This framework reinterprets "antigravity" not as levitation but as <strong>inertial mass reduction</strong>.
-            The spacecraft does not become lighter in a gravitational sense—it becomes easier to accelerate. Key
-            implications:</p>
-        <ol>
-            <li>No exotic matter with negative energy density is required (unlike Alcubierre drive).</li>
-            <li>The physics is derived from first principles, not postulated.</li>
-            <li>Energy costs, while high, scale linearly with bubble volume.</li>
-        </ol>
+                        <div class="content-body">
+                            <h2>1. Introduction</h2>
+                            <p>The fundamental barrier to interstellar travel is inertia. Accelerating a spacecraft to
+                                relativistic
+                                velocities requires enormous energy due to the spacecraft's inertial mass. However, if
+                                inertial mass could
+                                be <em>reduced</em>, the same thrust would produce dramatically greater acceleration.
+                            </p>
+                            <p>The TAMESIS framework proposes that inertial mass is not an intrinsic property but rather
+                                emerges from the
+                                local metric density $\gamma$. In standard vacuum, $\gamma = 117.038$. We explore the
+                                consequences of
+                                locally modifying this value.</p>
 
-        <h2>5. Conclusion</h2>
-        <div class="conclusion-box">
-            <h3 style="margin:0;">Warp Drive is Metric Engineering</h3>
-            <p style="margin:0.5rem 0 0 0;">
-                We do not need to "warp" space in the Alcubierre sense.<br>
-                <strong>We need to reduce the local metric density to make inertia vanish.</strong>
-            </p>
-        </div>
-<div class="references"><h2>References</h2>
-            <ol>
-                <li>Alcubierre, M. (1994). <em>The warp drive: hyper-fast travel within general relativity</em>. CQG 11,
-                    L73.</li>
-                <li>White, H. (2013). <em>Warp Field Mechanics 102</em>. NASA JSC.</li>
-                <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. ToE Project.</li>
-            </ol></div>
-    </div>
+                            <h2>2. Theoretical Framework</h2>
+                            <h3>2.1 Inertia as Metric Effect</h3>
+                            <p>In the holographic model, the effective inertial mass is:</p>
+                            <div class="equation-box">
+                                $$m_{\text{eff}} = m_0 \cdot \frac{\gamma}{\gamma_0}$$
+                            </div>
+                            <p>where $m_0$ is the rest mass, $\gamma$ is the local metric density, and $\gamma_0 =
+                                117.038$ is the vacuum
+                                reference.</p>
+
+                            <h3>2.2 The Metric Bubble</h3>
+                            <p>By creating a region where $\gamma \to 1$, the effective mass becomes:</p>
+                            <div class="master-equation">
+                                $$\boxed{m_{\text{eff}} = m_0 \cdot \frac{1}{117.038} \approx 0.0085 \cdot m_0}$$
+                            </div>
+                            <p>A 117× reduction in effective inertia!</p>
+
+                            <h2>3. Simulation: Proxima Centauri Mission</h2>
+                            <figure>
+                                <img src="assets/warp_bubble_efficiency.png" alt="Warp Bubble Efficiency">
+                                <figcaption><strong>Figure 1:</strong> Comparison of travel times to Proxima Centauri
+                                    (4.24 ly) under
+                                    standard physics vs. metric-modified propulsion. The metric bubble reduces travel
+                                    time from millennia to
+                                    weeks.</figcaption>
+                            </figure>
+
+                            <table>
+                                <tr>
+                                    <th>Scenario</th>
+                                    <th>Effective γ</th>
+                                    <th>Travel Time</th>
+                                </tr>
+                                <tr>
+                                    <td>Standard Vacuum</td>
+                                    <td>117.038</td>
+                                    <td>~3,470 days</td>
+                                </tr>
+                                <tr class="result-highlight">
+                                    <td>Metric Bubble</td>
+                                    <td>1.0</td>
+                                    <td><strong>~30 days</strong></td>
+                                </tr>
+                            </table>
+
+                            <h3>3.1 Energy Requirements</h3>
+                            <p>The energy needed to establish and maintain the metric bubble is:</p>
+                            <div class="equation-box">
+                                $$E_{\text{bubble}} \approx 172 \text{ GJ}$$
+                            </div>
+                            <p>This is equivalent to ~48 MWh—substantial but not physically impossible.</p>
+
+                            <h2>4. Discussion</h2>
+                            <p>This framework reinterprets "antigravity" not as levitation but as <strong>inertial mass
+                                    reduction</strong>.
+                                The spacecraft does not become lighter in a gravitational sense—it becomes easier to
+                                accelerate. Key
+                                implications:</p>
+                            <ol>
+                                <li>No exotic matter with negative energy density is required (unlike Alcubierre drive).
+                                </li>
+                                <li>The physics is derived from first principles, not postulated.</li>
+                                <li>Energy costs, while high, scale linearly with bubble volume.</li>
+                            </ol>
+
+                            <h2>5. Conclusion</h2>
+                            <div class="conclusion-box">
+                                <h3 style="margin:0;">Warp Drive is Metric Engineering</h3>
+                                <p style="margin:0.5rem 0 0 0;">
+                                    We do not need to "warp" space in the Alcubierre sense.<br>
+                                    <strong>We need to reduce the local metric density to make inertia vanish.</strong>
+                                </p>
+                            </div>
+                            <div class="references">
+                                <h2>References</h2>
+                                <ol>
+                                    <li>Alcubierre, M. (1994). <em>The warp drive: hyper-fast travel within general
+                                            relativity</em>. CQG 11,
+                                        L73.</li>
+                                    <li>White, H. (2013). <em>Warp Field Mechanics 102</em>. NASA JSC.</li>
+                                    <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>.
+                                        ToE Project.</li>
+                                </ol>
+                            </div>
+                        </div>
 </body>
+
 </html>

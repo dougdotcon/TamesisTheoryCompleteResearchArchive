@@ -1,5 +1,5 @@
 """
-Harmonic Decoder - The Sound of TARDIS
+Harmonic Decoder - The Sound of TAMESIS
 Generates the AAGOOCH chord keyed to the Universal Frequency Gamma (117.038 Hz).
 """
 import numpy as np

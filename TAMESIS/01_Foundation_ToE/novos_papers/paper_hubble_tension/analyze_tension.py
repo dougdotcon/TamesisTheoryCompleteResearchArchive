@@ -1,5 +1,5 @@
 """
-Hubble Tension: Can TARDIS Resolve the H₀ Crisis?
+Hubble Tension: Can TAMESIS Resolve the H₀ Crisis?
 Analyzes the discrepancy between early and late universe measurements.
 """
 import numpy as np
@@ -14,7 +14,7 @@ H0_LOCAL_ERR = 1.0
 
 def analyze_hubble_tension():
     """
-    Analyze the Hubble tension in the TARDIS framework.
+    Analyze the Hubble tension in the TAMESIS framework.
     """
     print("📏 Analyzing Hubble Tension...\n")
     
@@ -43,7 +43,7 @@ def analyze_hubble_tension():
     """)
     
     print("=" * 50)
-    print("TARDIS EXPLANATION")
+    print("TAMESIS EXPLANATION")
     print("=" * 50)
     print("""
     In Entropic Gravity, H₀ is NOT constant!
@@ -64,7 +64,7 @@ def analyze_hubble_tension():
     """)
     
     # Model the difference
-    # In TARDIS: H scales with η factor
+    # In TAMESIS: H scales with η factor
     a0 = 1.2e-10  # m/s² (MOND threshold)
     
     # At CMB epoch: higher density, η closer to 1
@@ -84,7 +84,7 @@ def analyze_hubble_tension():
     }
 
 def plot_hubble_tension():
-    """Visualize the Hubble tension and TARDIS resolution."""
+    """Visualize the Hubble tension and TAMESIS resolution."""
     print("\n📊 Generating Hubble Tension Plot...")
     
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
@@ -97,7 +97,7 @@ def plot_hubble_tension():
         ("SH0ES\n(Cepheids)", 73.0, 1.0, 'red'),
         ("H0LiCOW\n(Lensing)", 73.3, 1.8, 'orange'),
         ("TRGB\n(Tip RGB)", 69.8, 1.9, 'green'),
-        ("TARDIS\n(Predicted)", 70.2, 1.5, 'purple'),
+        ("TAMESIS\n(Predicted)", 70.2, 1.5, 'purple'),
     ]
     
     x = np.arange(len(measurements))
@@ -123,7 +123,7 @@ def plot_hubble_tension():
     ax1.grid(True, alpha=0.3, axis='y')
     ax1.set_ylim([65, 76])
     
-    # Right: Scale-dependent H₀ in TARDIS
+    # Right: Scale-dependent H₀ in TAMESIS
     ax2 = axes[1]
     
     z = np.linspace(0, 2, 100)
@@ -131,11 +131,11 @@ def plot_hubble_tension():
     # Standard cosmology: H constant at all z (when extrapolated properly)
     H_standard = np.ones_like(z) * 67.4
     
-    # TARDIS: H varies due to η evolution
+    # TAMESIS: H varies due to η evolution
     H_tardis = 67.4 * (1 + 0.08 * np.exp(-z/0.5))  # Enhanced locally
     
     ax2.plot(z, H_standard, 'b--', linewidth=2, label='ΛCDM (constant)')
-    ax2.plot(z, H_tardis, 'r-', linewidth=2, label='TARDIS (η evolution)')
+    ax2.plot(z, H_tardis, 'r-', linewidth=2, label='TAMESIS (η evolution)')
     
     ax2.axhline(H0_PLANCK, color='blue', linestyle=':', alpha=0.5)
     ax2.axhline(H0_LOCAL, color='red', linestyle=':', alpha=0.5)
@@ -165,7 +165,7 @@ def plot_hubble_tension():
 if __name__ == "__main__":
     print("=" * 60)
     print("📏 HUBBLE TENSION ANALYSIS")
-    print("   Paper 19: Resolving the H₀ Crisis with TARDIS")
+    print("   Paper 19: Resolving the H₀ Crisis with TAMESIS")
     print("=" * 60 + "\n")
     
     results = analyze_hubble_tension()
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The Hubble tension is NOT a mystery in TARDIS:
+    The Hubble tension is NOT a mystery in TAMESIS:
     
     1. H₀ is scale-dependent (via η factor)
     2. Early universe: η ≈ 1 → H = 67.4

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Resolving the Hubble Tension: $H_0$ Is Scale-Dependent</h1>
@@ -105,62 +206,72 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="abstract">
+            Abstract not found.
+        </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
+                </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        The "Hubble tension"—the 5σ discrepancy between early-universe (67.4) and late-universe (73.0) measurements of
-        $H_0$—is a crisis in cosmology. We show that in Entropic Gravity, $H_0$ is NOT constant but scale-dependent via
-        the η factor. The 8% discrepancy is a natural <strong>prediction</strong>, not a problem to be solved.
-    </div>
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        The "Hubble tension"—the 5σ discrepancy between early-universe (67.4) and late-universe (73.0)
+                        measurements of
+                        $H_0$—is a crisis in cosmology. We show that in Entropic Gravity, $H_0$ is NOT constant but
+                        scale-dependent via
+                        the η factor. The 8% discrepancy is a natural <strong>prediction</strong>, not a problem to be
+                        solved.
+                    </div>
 
-    <div class="content-wrapper">
-<h2>1. The Crisis</h2>
-    <div class="master-equation">
-        $$H_0^{early} = 67.4 \pm 0.5 \text{ km/s/Mpc (Planck)}$$
-        $$H_0^{late} = 73.0 \pm 1.0 \text{ km/s/Mpc (SH0ES)}$$
-        $$\text{Tension: } 5\sigma!$$
-    </div>
+                    <div class="content-wrapper">
+                        <h2>1. The Crisis</h2>
+                        <div class="master-equation">
+                            $$H_0^{early} = 67.4 \pm 0.5 \text{ km/s/Mpc (Planck)}$$
+                            $$H_0^{late} = 73.0 \pm 1.0 \text{ km/s/Mpc (SH0ES)}$$
+                            $$\text{Tension: } 5\sigma!$$
+                        </div>
 
-    <h2>2. TARDIS Resolution</h2>
-    <p>In Entropic Gravity, the effective Hubble parameter depends on the η(a) enhancement factor:</p>
-    <div class="master-equation">
-        $$H_{eff} = H_0 \times \eta(a/a_0)$$
-    </div>
-    <ul>
-        <li><strong>Early universe (z=1100):</strong> High density → η ≈ 1 → H = 67.4</li>
-        <li><strong>Late universe (z≈0):</strong> Low density → η > 1 → H = 73.0</li>
-    </ul>
+                        <h2>2. TAMESIS Resolution</h2>
+                        <p>In Entropic Gravity, the effective Hubble parameter depends on the η(a) enhancement factor:
+                        </p>
+                        <div class="master-equation">
+                            $$H_{eff} = H_0 \times \eta(a/a_0)$$
+                        </div>
+                        <ul>
+                            <li><strong>Early universe (z=1100):</strong> High density → η ≈ 1 → H = 67.4</li>
+                            <li><strong>Late universe (z≈0):</strong> Low density → η > 1 → H = 73.0</li>
+                        </ul>
 
-    <figure>
-        <img src="assets/hubble_tension.png" alt="Hubble Tension">
-        <figcaption><strong>Figure 1:</strong> Left: $H_0$ measurements. Blue (Planck) and red (local) bands don't
-            overlap. Right: In TARDIS, $H_0$ evolves with η, naturally producing the 8% difference.</figcaption>
-    </figure>
+                        <figure>
+                            <img src="assets/hubble_tension.png" alt="Hubble Tension">
+                            <figcaption><strong>Figure 1:</strong> Left: $H_0$ measurements. Blue (Planck) and red
+                                (local) bands don't
+                                overlap. Right: In TAMESIS, $H_0$ evolves with η, naturally producing the 8% difference.
+                            </figcaption>
+                        </figure>
 
-    <h2>3. Conclusion</h2>
-    <div class="conclusion-box">
-        <strong>🔵 The Tension Is Not an Error—It's Physics</strong><br>
-        η evolves with scale → $H_0$ is NOT constant.<br>
-        The 8% discrepancy is exactly what Entropic Gravity predicts.
-    </div>
-<div class="references"><h2>References</h2>
-        <ol>
-            <li>Riess, A. G. et al. (2022). <em>A Comprehensive Measurement of H₀</em>. ApJL 934, L7.</li>
-            <li>Planck Collaboration (2020). <em>Planck 2018 results. VI</em>. A&A 641, A6.</li>
-        </ol></div>
-    </div>
+                        <h2>3. Conclusion</h2>
+                        <div class="conclusion-box">
+                            <strong>🔵 The Tension Is Not an Error—It's Physics</strong><br>
+                            η evolves with scale → $H_0$ is NOT constant.<br>
+                            The 8% discrepancy is exactly what Entropic Gravity predicts.
+                        </div>
+                        <div class="references">
+                            <h2>References</h2>
+                            <ol>
+                                <li>Riess, A. G. et al. (2022). <em>A Comprehensive Measurement of H₀</em>. ApJL 934,
+                                    L7.</li>
+                                <li>Planck Collaboration (2020). <em>Planck 2018 results. VI</em>. A&A 641, A6.</li>
+                            </ol>
+                        </div>
+                    </div>
 </body>
+
 </html>

@@ -146,7 +146,7 @@ if __name__ == "__main__":
     print("""
     The multiverse is not just possible - it's INEVITABLE if:
     
-    1. We live inside a black hole → True (TARDIS hypothesis)
+    1. We live inside a black hole → True (TAMESIS hypothesis)
     2. Black holes form in our universe → True (observation)
     3. Each BH interior is a universe → Follows from #1
     

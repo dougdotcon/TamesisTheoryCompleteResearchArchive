@@ -38,7 +38,7 @@ E_CHARGE_CODATA = 1.602176634e-19  # Elementary charge (CODATA)
 LP = np.sqrt(G * HBAR / C**3)
 TP = np.sqrt(HBAR * G / C**5)
 
-# TARDIS + Electron Parameters (from Alvo 1)
+# TAMESIS + Electron Parameters (from Alvo 1)
 TARDIS_GAMMA = 117.038
 M_ELECTRON = 9.1093837015e-31
 COMPTON_LENGTH = HBAR / (M_ELECTRON * C)
@@ -51,7 +51,7 @@ print(f"Target: e = {E_CHARGE_CODATA:.4e} C")
 print(f"Target: α⁻¹ = {1/ALPHA_EM:.6f}")
 print(f"Electron Rs: {Rs_ELECTRON:.2e} m")
 print(f"Electron λ_C: {COMPTON_LENGTH:.2e} m")
-print(f"TARDIS Gamma: {TARDIS_GAMMA:.2f}")
+print(f"TAMESIS Gamma: {TARDIS_GAMMA:.2f}")
 print("=" * 70)
 
 
@@ -67,7 +67,7 @@ class HolographicScreen:
     The screen can have angular momentum (twist), creating vorticity.
     
     Key Innovation: Charge emerges from CONSERVED ANGULAR MOMENTUM
-    in the compactified dimension (TARDIS compression).
+    in the compactified dimension (TAMESIS compression).
     """
     
     def __init__(self, radius_m, n_qubits=None):
@@ -84,7 +84,7 @@ class HolographicScreen:
         self.R = radius_m
         self.area = 4 * np.pi * self.R**2
         
-        # Effective Planck area (TARDIS corrected)
+        # Effective Planck area (TAMESIS corrected)
         self.A_planck_eff = LP**2 * TARDIS_GAMMA
         
         # Number of information bits
@@ -183,7 +183,7 @@ class HolographicScreen:
         
         Hypothesis:
         -----------
-        In the TARDIS compressed dimension, angular momentum is quantized:
+        In the TAMESIS compressed dimension, angular momentum is quantized:
         L_z = n × ℏ  (standard quantum mechanics)
         
         The charge is the PROJECTION of this angular momentum onto
@@ -239,8 +239,8 @@ class HolographicScreen:
         print(f"   e (CODATA): {E_CHARGE_CODATA:.4e} C")
         print(f"   Error: {abs(e_derived - E_CHARGE_CODATA)/E_CHARGE_CODATA * 100:.2f}%")
         
-        # APPROACH 3: TARDIS Compression Correction
-        # The TARDIS factor Ω might modify the charge quantization
+        # APPROACH 3: TAMESIS Compression Correction
+        # The TAMESIS factor Ω might modify the charge quantization
         
         # Hypothesis: e² ~ Q_P² / Ω^β (where β is to be found)
         # From fine structure: α = e²/(4πε₀ℏc)
@@ -253,19 +253,19 @@ class HolographicScreen:
         print(f"   e (CODATA): {E_CHARGE_CODATA:.4e} C")
         print(f"   Error: {abs(e_from_alpha - E_CHARGE_CODATA)/E_CHARGE_CODATA * 100:.6f}%")
         
-        # Test TARDIS scaling
+        # Test TAMESIS scaling
         # If Q_P = √(4πε₀ℏc) and e = Q_P / √Ω^β:
         # Then α = e²/(4πε₀ℏc) = Q_P²/Ω^β / (4πε₀ℏc) = 1/Ω^β
         
         beta_needed = np.log(1/ALPHA_EM) / np.log(TARDIS_GAMMA)
-        print(f"\n🔬 TARDIS Scaling Test:")
+        print(f"\n🔬 TAMESIS Scaling Test:")
         print(f"   If α⁻¹ = Ω^β, then β = {beta_needed:.4f}")
         print(f"   Ω^β = {TARDIS_GAMMA**beta_needed:.2f}")
         print(f"   α⁻¹ (CODATA) = {1/ALPHA_EM:.2f}")
         
         if abs((TARDIS_GAMMA**beta_needed) - (1/ALPHA_EM)) / (1/ALPHA_EM) < 0.01:
             print(f"   ✅ MATCH! α⁻¹ = Ω^{beta_needed:.4f}")
-            print(f"\n🎉 BREAKTHROUGH: Fine Structure Constant Derived from TARDIS Compression!")
+            print(f"\n🎉 BREAKTHROUGH: Fine Structure Constant Derived from TAMESIS Compression!")
         else:
             print(f"   ⚠️ No simple power law")
         
@@ -434,12 +434,12 @@ if __name__ == "__main__":
         f.write("HYPOTHESIS:\n")
         f.write("Electric charge emerges from vorticity (twist) in the holographic screen.\n")
         f.write("Charge quantization comes from angular momentum quantization in the\n")
-        f.write("TARDIS compressed dimension.\n\n")
+        f.write("TAMESIS compressed dimension.\n\n")
         
         f.write("KEY FINDINGS:\n")
         f.write(f"1. Elementary Charge Derived: e = {e_derived:.4e} C\n")
         f.write(f"2. Error vs CODATA: {abs(e_derived - E_CHARGE_CODATA)/E_CHARGE_CODATA * 100:.4f}%\n")
-        f.write(f"3. Fine Structure from TARDIS: alpha^-1 = Omega^{beta_TARDIS:.4f} = {TARDIS_GAMMA**beta_TARDIS:.2f}\n")
+        f.write(f"3. Fine Structure from TAMESIS: alpha^-1 = Omega^{beta_TARDIS:.4f} = {TARDIS_GAMMA**beta_TARDIS:.2f}\n")
         f.write(f"4. Extremal Ratio: {stability['extremal_ratio']:.4f} (~1 = stable)\n\n")
         
         f.write("INTERPRETATION:\n")

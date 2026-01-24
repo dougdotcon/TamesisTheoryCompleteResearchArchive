@@ -119,12 +119,12 @@ efe/
 This provides strong support for:
 
 - MOND (Modified Newtonian Dynamics)
-- Entropic Gravity / TARDIS Framework
+- Entropic Gravity / TAMESIS Framework
 - Modified gravity over dark matter
 
 ---
 
 <p align="center">
-<strong>Part of the TARDIS Unified Physics Framework</strong><br>
+<strong>Part of the TAMESIS Unified Physics Framework</strong><br>
 Douglas H. M. Fulber | January 2026
 </p>

@@ -61,7 +61,7 @@ class GalaxySynthesizer:
             v_n = np.sqrt(acc_newton * r_m) / 1000.0 # km/s
             v_newton.append(v_n)
             
-            # 2. Entropic prediction (TARDIS)
+            # 2. Entropic prediction (TAMESIS)
             # ZERO free parameters (a0 is universal constants)
             v_e = self.gravity_engine.calculate_velocity(m_baryon, r_m)
             v_entropic.append(v_e)
@@ -95,7 +95,7 @@ def run_simulation():
     plt.plot(radii, v_cdm, 'b:', label='Standard Model (Dark Matter Halo)', linewidth=2)
     
     # 3. Entropic (The Prediction)
-    plt.plot(radii, v_e, 'g-', label='TARDIS/Entropic Gravity (No DM)', linewidth=3)
+    plt.plot(radii, v_e, 'g-', label='TAMESIS/Entropic Gravity (No DM)', linewidth=3)
     
     # Simulated Data Points (with error bars)
     # Let's say observations match Entropic perfectly (as known from SPARC matches)

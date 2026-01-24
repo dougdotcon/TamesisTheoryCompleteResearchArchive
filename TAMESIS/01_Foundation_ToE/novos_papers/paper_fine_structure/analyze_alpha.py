@@ -8,11 +8,11 @@ import os
 
 # Fundamental constants
 ALPHA = 1/137.035999  # Fine structure constant
-OMEGA = 117.038        # TARDIS compression factor
+OMEGA = 117.038        # TAMESIS compression factor
 
 def analyze_fine_structure():
     """
-    Analyze whether α can be derived in TARDIS framework.
+    Analyze whether α can be derived in TAMESIS framework.
     """
     print("🔬 Analyzing Fine Structure Constant...\n")
     
@@ -49,7 +49,7 @@ def analyze_fine_structure():
     """)
     
     print("=" * 50)
-    print("TARDIS APPROACH")
+    print("TAMESIS APPROACH")
     print("=" * 50)
     print("""
     In the holographic framework:

@@ -11,7 +11,7 @@ We hypothesize that the **Weinberg Angle** ($\sin^2 \theta_W$) is a geometric co
 
 ## 1. The Hypothesis
 
-In the TARDIS framework, fields are distortions of a Planck-scale lattice.
+In the TAMESIS framework, fields are distortions of a Planck-scale lattice.
 
 * **Curvature** = Gravity.
 * **Torsion** = Weak Force.

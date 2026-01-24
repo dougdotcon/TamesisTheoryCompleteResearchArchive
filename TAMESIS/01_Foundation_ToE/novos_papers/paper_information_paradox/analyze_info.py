@@ -8,7 +8,7 @@ import os
 
 def analyze_information_paradox():
     """
-    Analyze the black hole information paradox in TARDIS.
+    Analyze the black hole information paradox in TAMESIS.
     """
     print("🕳️ Analyzing Information Paradox...\n")
     
@@ -60,7 +60,7 @@ def analyze_information_paradox():
     """)
     
     print("=" * 50)
-    print("TARDIS RESOLUTION")
+    print("TAMESIS RESOLUTION")
     print("=" * 50)
     print("""
     In the holographic framework:
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The information paradox is RESOLVED in TARDIS:
+    The information paradox is RESOLVED in TAMESIS:
     
     1. Info was never "inside" — it's on the horizon
     2. Hawking radiation is entangled, not thermal

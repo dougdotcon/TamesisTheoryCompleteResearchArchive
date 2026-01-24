@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>The Parent Universe: Explaining CMB Anisotropy from Rotating Black Hole Cosmology</h1>
@@ -105,149 +206,187 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We present a novel cosmological model in which our observable universe is the interior of a rotating Kerr black
-        hole, born from a collapse event in a parent universe. This framework naturally explains the anomalous alignment
-        of the Cosmic Microwave Background (CMB) quadrupole and octopole modes—the so-called "Axis of Evil"—as a
-        geometric imprint of the progenitor's angular momentum. Using the TARDIS metric with compression factor $\Omega
-        = 117.038$, we simulate the expected CMB anisotropy pattern and demonstrate that the predicted alignment is
-        consistent with Planck observations. This work suggests that the "Axis of Evil" is not a statistical anomaly but
-        rather <strong>direct evidence of our universe's origin from a rotating parent structure</strong>.
-        <div class="keywords"><strong>Keywords:</strong> Black Hole Cosmology, CMB Anomalies, Axis of Evil, Kerr Metric,
-            Holographic Universe, TARDIS Framework
-    </div>
-
-    <div class="content-wrapper">
-</div>
-
-    <div class="content-body">
-        <h2>1. Introduction</h2>
-        <h3>1.1 The CMB Anomaly Problem</h3>
-        <p>The Cosmic Microwave Background (CMB) is the oldest light in the universe, providing a snapshot of conditions
-            at recombination ($z \approx 1100$). While the CMB is remarkably isotropic, detailed analysis by WMAP and
-            Planck satellites revealed unexpected large-scale alignments:</p>
-        <ul>
-            <li>The <strong>quadrupole (l=2)</strong> and <strong>octopole (l=3)</strong> modes are aligned with each
-                other.</li>
-            <li>Both are perpendicular to the ecliptic plane and aligned with the cosmic dipole direction.</li>
-            <li>This alignment has been dubbed the "Axis of Evil" due to its unexplained nature.</li>
-        </ul>
-        <p>Standard inflationary cosmology predicts statistically isotropic fluctuations, making this alignment a $\sim
-            1/1000$ coincidence. We propose an alternative explanation.</p>
-
-        <h3>1.2 The Black Hole Cosmology Hypothesis</h3>
-        <p class="no-indent">Our framework is based on three principles:</p>
-        <ol>
-            <li><strong>Holographic Origin:</strong> Our universe exists inside a black hole formed in a parent
-                universe.</li>
-            <li><strong>Kerr Geometry:</strong> The parent black hole is rotating, imparting angular momentum to our
-                cosmos.</li>
-            <li><strong>TARDIS Metric:</strong> The interior geometry is described by the compression factor $\Omega =
-                117.038$.</li>
-        </ol>
-
-        <h2>2. Theoretical Framework</h2>
-        <h3>2.1 The Rotating Universe Model</h3>
-        <p>If our universe is the interior of a Kerr black hole, the angular momentum $J$ of the progenitor determines
-            our cosmic rotation:</p>
-        <div class="equation-box">
-            $$J = a \cdot M \cdot c$$
+        <div class="abstract">
+            Abstract not found.
         </div>
-        <p>where $a$ is the dimensionless spin parameter and $M$ is the black hole mass (equivalent to our universe's
-            mass).</p>
 
-        <h3>2.2 CMB Imprint Mechanism</h3>
-        <p>The rotation induces a preferred direction in the metric, breaking isotropy at the largest scales. This
-            manifests as:</p>
-        <div class="equation-box">
-            $$\delta T / T \propto a \cdot Y_{l}^{m}(\theta, \phi)$$
-        </div>
-        <p>where low multipoles ($l = 2, 3$) are most affected, aligning along the rotation axis.</p>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-        <h2>3. Simulation Results</h2>
-        <p>We implemented the <code>RotatingUniverse</code> class in the ReactiveCosmoMapper engine to generate
-            predicted CMB maps:</p>
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
+                </div>
 
-        <figure>
-            <img src="assets/cmb_axis_of_evil.png" alt="CMB Axis of Evil Simulation">
-            <figcaption><strong>Figure 1:</strong> Simulated CMB anisotropy map showing the "Axis of Evil" alignment.
-                The quadrupole (l=2) and octopole (l=3) modes are clearly aligned along the equatorial plane, consistent
-                with Planck observations. The color scale represents temperature fluctuations in μK.</figcaption>
-        </figure>
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        We present a novel cosmological model in which our observable universe is the interior of a
+                        rotating Kerr black
+                        hole, born from a collapse event in a parent universe. This framework naturally explains the
+                        anomalous alignment
+                        of the Cosmic Microwave Background (CMB) quadrupole and octopole modes—the so-called "Axis of
+                        Evil"—as a
+                        geometric imprint of the progenitor's angular momentum. Using the TAMESIS metric with
+                        compression factor $\Omega
+                        = 117.038$, we simulate the expected CMB anisotropy pattern and demonstrate that the predicted
+                        alignment is
+                        consistent with Planck observations. This work suggests that the "Axis of Evil" is not a
+                        statistical anomaly but
+                        rather <strong>direct evidence of our universe's origin from a rotating parent
+                            structure</strong>.
+                        <div class="keywords"><strong>Keywords:</strong> Black Hole Cosmology, CMB Anomalies, Axis of
+                            Evil, Kerr Metric,
+                            Holographic Universe, TAMESIS Framework
+                        </div>
 
-        <h3>3.1 Quantitative Comparison</h3>
-        <table>
-            <tr>
-                <th>Observable</th>
-                <th>Planck Data</th>
-                <th>TARDIS Prediction</th>
-                <th>Agreement</th>
-            </tr>
-            <tr>
-                <td>Quadrupole-Octopole Alignment</td>
-                <td>$< 10°$</td>
-                <td>$\sim 5°$</td>
-                <td>✓</td>
-            </tr>
-            <tr>
-                <td>Ecliptic Correlation</td>
-                <td>High</td>
-                <td>Predicted</td>
-                <td>✓</td>
-            </tr>
-            <tr class="result-highlight">
-                <td>Statistical Significance</td>
-                <td>$p < 0.001$</td>
-                <td>Natural Consequence</td>
-                <td><strong>Explained</strong></td>
-            </tr>
-        </table>
+                        <div class="content-wrapper">
+                        </div>
 
-        <h2>4. Discussion</h2>
-        <p>The "Axis of Evil" has been considered anomalous because standard inflation predicts no preferred direction.
-            Our model resolves this by recognizing that:</p>
-        <ol>
-            <li>The universe <em>does</em> have a preferred direction—inherited from its parent's rotation.</li>
-            <li>This direction is aligned with the largest-scale modes because they probe the global geometry.</li>
-            <li>The alignment with the ecliptic may reflect our solar system's orientation within this cosmic geometry.
-            </li>
-        </ol>
+                        <div class="content-body">
+                            <h2>1. Introduction</h2>
+                            <h3>1.1 The CMB Anomaly Problem</h3>
+                            <p>The Cosmic Microwave Background (CMB) is the oldest light in the universe, providing a
+                                snapshot of conditions
+                                at recombination ($z \approx 1100$). While the CMB is remarkably isotropic, detailed
+                                analysis by WMAP and
+                                Planck satellites revealed unexpected large-scale alignments:</p>
+                            <ul>
+                                <li>The <strong>quadrupole (l=2)</strong> and <strong>octopole (l=3)</strong> modes are
+                                    aligned with each
+                                    other.</li>
+                                <li>Both are perpendicular to the ecliptic plane and aligned with the cosmic dipole
+                                    direction.</li>
+                                <li>This alignment has been dubbed the "Axis of Evil" due to its unexplained nature.
+                                </li>
+                            </ul>
+                            <p>Standard inflationary cosmology predicts statistically isotropic fluctuations, making
+                                this alignment a $\sim
+                                1/1000$ coincidence. We propose an alternative explanation.</p>
 
-        <h2>5. Conclusion</h2>
-        <div class="conclusion-box">
-            <h3 style="margin:0;">The "Axis of Evil" is Evidence of Our Origin</h3>
-            <p style="margin:0.5rem 0 0 0;">
-                The CMB anomaly is not a statistical fluke—it is the <strong>rotational signature of our parent
-                    universe</strong>.<br>
-                We are inside a spinning black hole, and the "Axis of Evil" points to where we came from.
-            </p>
-        </div>
-<div class="references"><h2>References</h2>
-            <ol>
-                <li>Planck Collaboration (2018). <em>Planck 2018 results. VII. Isotropy and Statistics of the CMB</em>.
-                    A&A 641, A7.</li>
-                <li>Land, K. & Magueijo, J. (2005). <em>Examination of Evidence for a Preferred Axis in the Cosmic
-                        Radiation Anisotropy</em>. Phys. Rev. Lett. 95, 071301.</li>
-                <li>Poplawski, N. J. (2010). <em>Cosmology with torsion: An alternative to cosmic inflation</em>. Phys.
-                    Lett. B 694, 181.</li>
-                <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. Theory of
-                    Everything Project v1.0.</li>
-            </ol></div>
-    </div>
+                            <h3>1.2 The Black Hole Cosmology Hypothesis</h3>
+                            <p class="no-indent">Our framework is based on three principles:</p>
+                            <ol>
+                                <li><strong>Holographic Origin:</strong> Our universe exists inside a black hole formed
+                                    in a parent
+                                    universe.</li>
+                                <li><strong>Kerr Geometry:</strong> The parent black hole is rotating, imparting angular
+                                    momentum to our
+                                    cosmos.</li>
+                                <li><strong>TAMESIS Metric:</strong> The interior geometry is described by the
+                                    compression factor $\Omega =
+                                    117.038$.</li>
+                            </ol>
+
+                            <h2>2. Theoretical Framework</h2>
+                            <h3>2.1 The Rotating Universe Model</h3>
+                            <p>If our universe is the interior of a Kerr black hole, the angular momentum $J$ of the
+                                progenitor determines
+                                our cosmic rotation:</p>
+                            <div class="equation-box">
+                                $$J = a \cdot M \cdot c$$
+                            </div>
+                            <p>where $a$ is the dimensionless spin parameter and $M$ is the black hole mass (equivalent
+                                to our universe's
+                                mass).</p>
+
+                            <h3>2.2 CMB Imprint Mechanism</h3>
+                            <p>The rotation induces a preferred direction in the metric, breaking isotropy at the
+                                largest scales. This
+                                manifests as:</p>
+                            <div class="equation-box">
+                                $$\delta T / T \propto a \cdot Y_{l}^{m}(\theta, \phi)$$
+                            </div>
+                            <p>where low multipoles ($l = 2, 3$) are most affected, aligning along the rotation axis.
+                            </p>
+
+                            <h2>3. Simulation Results</h2>
+                            <p>We implemented the <code>RotatingUniverse</code> class in the ReactiveCosmoMapper engine
+                                to generate
+                                predicted CMB maps:</p>
+
+                            <figure>
+                                <img src="assets/cmb_axis_of_evil.png" alt="CMB Axis of Evil Simulation">
+                                <figcaption><strong>Figure 1:</strong> Simulated CMB anisotropy map showing the "Axis of
+                                    Evil" alignment.
+                                    The quadrupole (l=2) and octopole (l=3) modes are clearly aligned along the
+                                    equatorial plane, consistent
+                                    with Planck observations. The color scale represents temperature fluctuations in μK.
+                                </figcaption>
+                            </figure>
+
+                            <h3>3.1 Quantitative Comparison</h3>
+                            <table>
+                                <tr>
+                                    <th>Observable</th>
+                                    <th>Planck Data</th>
+                                    <th>TAMESIS Prediction</th>
+                                    <th>Agreement</th>
+                                </tr>
+                                <tr>
+                                    <td>Quadrupole-Octopole Alignment</td>
+                                    <td>$< 10°$</td>
+                                    <td>$\sim 5°$</td>
+                                    <td>✓</td>
+                                </tr>
+                                <tr>
+                                    <td>Ecliptic Correlation</td>
+                                    <td>High</td>
+                                    <td>Predicted</td>
+                                    <td>✓</td>
+                                </tr>
+                                <tr class="result-highlight">
+                                    <td>Statistical Significance</td>
+                                    <td>$p < 0.001$</td>
+                                    <td>Natural Consequence</td>
+                                    <td><strong>Explained</strong></td>
+                                </tr>
+                            </table>
+
+                            <h2>4. Discussion</h2>
+                            <p>The "Axis of Evil" has been considered anomalous because standard inflation predicts no
+                                preferred direction.
+                                Our model resolves this by recognizing that:</p>
+                            <ol>
+                                <li>The universe <em>does</em> have a preferred direction—inherited from its parent's
+                                    rotation.</li>
+                                <li>This direction is aligned with the largest-scale modes because they probe the global
+                                    geometry.</li>
+                                <li>The alignment with the ecliptic may reflect our solar system's orientation within
+                                    this cosmic geometry.
+                                </li>
+                            </ol>
+
+                            <h2>5. Conclusion</h2>
+                            <div class="conclusion-box">
+                                <h3 style="margin:0;">The "Axis of Evil" is Evidence of Our Origin</h3>
+                                <p style="margin:0.5rem 0 0 0;">
+                                    The CMB anomaly is not a statistical fluke—it is the <strong>rotational signature of
+                                        our parent
+                                        universe</strong>.<br>
+                                    We are inside a spinning black hole, and the "Axis of Evil" points to where we came
+                                    from.
+                                </p>
+                            </div>
+                            <div class="references">
+                                <h2>References</h2>
+                                <ol>
+                                    <li>Planck Collaboration (2018). <em>Planck 2018 results. VII. Isotropy and
+                                            Statistics of the CMB</em>.
+                                        A&A 641, A7.</li>
+                                    <li>Land, K. & Magueijo, J. (2005). <em>Examination of Evidence for a Preferred Axis
+                                            in the Cosmic
+                                            Radiation Anisotropy</em>. Phys. Rev. Lett. 95, 071301.</li>
+                                    <li>Poplawski, N. J. (2010). <em>Cosmology with torsion: An alternative to cosmic
+                                            inflation</em>. Phys.
+                                        Lett. B 694, 181.</li>
+                                    <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>.
+                                        Theory of
+                                        Everything Project v1.0.</li>
+                                </ol>
+                            </div>
+                        </div>
 </body>
+
 </html>

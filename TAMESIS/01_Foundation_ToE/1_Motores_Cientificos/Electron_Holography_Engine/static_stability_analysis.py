@@ -3,7 +3,7 @@ APPENDIX: Static Stability Analysis - CORRECTED APPROACH
 ---------------------------------------------------------
 
 The time-dependent evaporation simulation diverges because it requires solving
-the full TARDIS metric backreaction equations. Instead, we use ENERGY MINIMIZATION
+the full TAMESIS metric backreaction equations. Instead, we use ENERGY MINIMIZATION
 to prove that m_e = M_universe × Ω^α is the unique stable remnant mass.
 
 This is appended to quantum_geometry_solver.py
@@ -88,7 +88,7 @@ def energy_landscape_analysis():
     Total energy has contributions from:
     1. Rest mass: M c²
     2. Quantum confinement: ~ ℏ²/(M Rs²)
-    3. TARDIS reactive pressure: ~ -Ω × (vacuum energy)
+    3. TAMESIS reactive pressure: ~ -Ω × (vacuum energy)
     4. Charge self-energy: ~ e²/(4πε₀ Rs)
     
     The minimum of E_total(M) gives the stable remnant mass.
@@ -105,7 +105,7 @@ def energy_landscape_analysis():
     Rs_array = 2 * G * masses / C**2
     E_quantum = HBAR**2 / (masses * Rs_array**2)
     
-    # TARDIS reactive pressure (phenomenological)
+    # TAMESIS reactive pressure (phenomenological)
     # This is the term that creates the minimum!
     # Form: ~ -Ω × ℏ c / Rs = -Ω × ℏ c³ / (2GM)
     E_TARDIS = -TARDIS_GAMMA * HBAR * C**3 / (2 * G * masses)
@@ -128,7 +128,7 @@ def energy_landscape_analysis():
     ax1 = axes[0]
     ax1.loglog(masses / M_ELECTRON, np.abs(E_rest), 'k-', label='Rest Mass Energy', lw=2)
     ax1.loglog(masses / M_ELECTRON, np.abs(E_quantum), 'b--', label='Quantum Confinement')
-    ax1.loglog(masses / M_ELECTRON, np.abs(E_TARDIS), 'r--', label='TARDIS Pressure')
+    ax1.loglog(masses / M_ELECTRON, np.abs(E_TARDIS), 'r--', label='TAMESIS Pressure')
     ax1.loglog(masses / M_ELECTRON, np.abs(E_charge), 'g--', label='Charge Self-Energy')
     ax1.axvline(x=1.0, color='purple', ls=':', lw=2, label='Electron Mass')
     ax1.axvline(x=M_stable/M_ELECTRON, color='orange', ls='-', lw=2, label=f'Stable Min (M={M_stable/M_ELECTRON:.2f} m_e)')
@@ -213,14 +213,14 @@ def comprehensive_validation():
     
     if stability_error < 50:
         print("✅ Energy minimum within 50% of electron mass!")
-        print("   (Deviation due to phenomenological TARDIS term)")
+        print("   (Deviation due to phenomenological TAMESIS term)")
     else:
         print("⚠️ Energy minimum deviates significantly")
-        print("   (Need refined TARDIS potential)")
+        print("   (Need refined TAMESIS potential)")
     
     # Final summary
     print(f"\n{'=' * 70}")
-    print("📋 SUMMARY: ELECTRON AS TARDIS REMNANT")
+    print("📋 SUMMARY: ELECTRON AS TAMESIS REMNANT")
     print("=" * 70)
     
     electron_analysis = results['Electron Mass']
@@ -234,11 +234,11 @@ def comprehensive_validation():
     
     print(f"\n🎯 INTERPRETATION:")
     print(f"   The electron is NOT a classical black hole (Rs ~ 10^-57 m << λ_C)")
-    print(f"   It is a QUANTUM REMNANT stabilized by TARDIS reactive pressure.")
+    print(f"   It is a QUANTUM REMNANT stabilized by TAMESIS reactive pressure.")
     print(f"   The fractal scaling arises from the compressed holographic entropy.")
     
     print(f"\n⚠️ LIMITATIONS:")
-    print(f"   • Time evolution not simulated (requires full TARDIS field equations)")
+    print(f"   • Time evolution not simulated (requires full TAMESIS field equations)")
     print(f"   • Charge origin still unexplained (ALVO 2: Vorticidade Entrópica)")
     print(f"   • Spin 1/2 topology not derived (ALVO 3: Fermion Topology)")
     

@@ -1,6 +1,6 @@
 """
 Macroscopic Wormholes: If Leptons Are Wormholes, Can We Make Big Ones?
-Explores the possibility of traversable wormholes in TARDIS.
+Explores the possibility of traversable wormholes in TAMESIS.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,7 +14,7 @@ l_P = 1.616e-35  # m (Planck length)
 
 def analyze_macroscopic_wormholes():
     """
-    Analyze the possibility of macroscopic wormholes in TARDIS.
+    Analyze the possibility of macroscopic wormholes in TAMESIS.
     """
     print("🕳️ Analyzing Macroscopic Wormholes...\n")
     
@@ -22,7 +22,7 @@ def analyze_macroscopic_wormholes():
     print("LEPTONS AS MICROSCOPIC WORMHOLES")
     print("=" * 50)
     print("""
-    In TARDIS, charged leptons (e, μ, τ) are:
+    In TAMESIS, charged leptons (e, μ, τ) are:
     - Genus-1 topological defects
     - Wormhole-like structures connecting boundary to interior
     - Size: ~Planck scale (~10^-35 m)
@@ -64,7 +64,7 @@ def analyze_macroscopic_wormholes():
     print(f"  = {M_equivalent/M_jupiter:.1f} Jupiter masses")
     
     print("\n" + "=" * 50)
-    print("TARDIS PERSPECTIVE")
+    print("TAMESIS PERSPECTIVE")
     print("=" * 50)
     print("""
     In the holographic framework:
@@ -78,7 +78,7 @@ def analyze_macroscopic_wormholes():
        - May require quantum coherence on macro scale
        
     3. POSSIBILITY
-       - NOT forbidden by TARDIS
+       - NOT forbidden by TAMESIS
        - Requires technology beyond current capability
        - Energy ~ planetary mass
     """)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    Macroscopic wormholes are NOT FORBIDDEN by TARDIS.
+    Macroscopic wormholes are NOT FORBIDDEN by TAMESIS.
     
     However:
     • Energy requirement: ~Jupiter mass (~10^44 J)

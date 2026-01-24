@@ -1,5 +1,5 @@
 """
-Modelo do Universo TARDIS - Hipótese de dimensão externa constante
+Modelo do Universo TAMESIS - Hipótese de dimensão externa constante
 com expansão interna aparente
 
 Baseado na ideia de que o universo mantém tamanho constante quando observado
@@ -27,7 +27,7 @@ class TARDISUniverse:
         self.planck_length = 1.616e-35  # metros
         self.planck_time = 5.391e-44    # segundos
         
-        # Parâmetros do modelo TARDIS
+        # Parâmetros do modelo TAMESIS
         self.quantum_compression_factor = 1.0
         self.internal_metric_tensor = np.eye(4)  # Métrica interna 4D
         
@@ -126,7 +126,7 @@ class TARDISUniverse:
     
     def cosmic_microwave_background_prediction(self, time: float) -> Dict:
         """
-        Predições para a radiação cósmica de fundo no modelo TARDIS
+        Predições para a radiação cósmica de fundo no modelo TAMESIS
         
         Args:
             time: Tempo atual
@@ -139,7 +139,7 @@ class TARDISUniverse:
         
         # Temperatura da CMB
         # No modelo padrão: T ∝ 1/a
-        # No modelo TARDIS: T ∝ 1/(a_interno)
+        # No modelo TAMESIS: T ∝ 1/(a_interno)
         T_cmb = 2.7 / scale_factor  # Kelvin
         
         # Anisotropias podem ser diferentes devido à compressão quântica
@@ -153,7 +153,7 @@ class TARDISUniverse:
     
     def observational_signatures(self, time_range: np.ndarray) -> Dict:
         """
-        Calcula assinaturas observacionais que distinguem o modelo TARDIS
+        Calcula assinaturas observacionais que distinguem o modelo TAMESIS
         do modelo padrão
         
         Args:
@@ -186,7 +186,7 @@ class TARDISUniverse:
     
     def plot_tardis_evolution(self, time_range: np.ndarray):
         """
-        Visualiza a evolução do universo TARDIS
+        Visualiza a evolução do universo TAMESIS
         
         Args:
             time_range: Range de tempo para plotar
@@ -251,27 +251,27 @@ class TARDISUniverse:
         
         fig.update_xaxes(type="log", title_text="Tempo (unidades de Planck)")
         fig.update_layout(
-            title_text="Modelo do Universo TARDIS - Evolução Temporal",
+            title_text="Modelo do Universo TAMESIS - Evolução Temporal",
             height=800
         )
         
         fig.show()
 
 if __name__ == "__main__":
-    # Teste do modelo TARDIS
-    tardis = TARDISUniverse(external_radius=1.0)
+    # Teste do modelo TAMESIS
+    TAMESIS = TARDISUniverse(external_radius=1.0)
     
     # Range de tempo da época de Planck até hoje
     time_range = np.logspace(-50, 18, 1000)  # 10^-50 a 10^18 unidades de Planck
     
     # Plotar evolução
-    tardis.plot_tardis_evolution(time_range)
+    TAMESIS.plot_tardis_evolution(time_range)
     
     # Calcular algumas predições específicas
     current_time = 4.35e17  # Idade atual do universo em unidades de Planck
-    cmb_prediction = tardis.cosmic_microwave_background_prediction(current_time)
+    cmb_prediction = TAMESIS.cosmic_microwave_background_prediction(current_time)
     
-    print("Predições do Modelo TARDIS para hoje:")
+    print("Predições do Modelo TAMESIS para hoje:")
     print(f"Temperatura CMB: {cmb_prediction['temperature']:.2f} K")
     print(f"Amplitude de anisotropia: {cmb_prediction['anisotropy_amplitude']:.2e}")
     print(f"Assinatura de compressão: {cmb_prediction['compression_signature']:.2e}")

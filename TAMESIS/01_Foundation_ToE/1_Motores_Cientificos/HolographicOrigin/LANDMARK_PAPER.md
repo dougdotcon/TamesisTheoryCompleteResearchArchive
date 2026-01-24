@@ -1,7 +1,7 @@
 # The Holographic Origin of Matter and Dynamics: A Unified Geometric Framework
 
 [![Status: Ready for Submission](https://img.shields.io/badge/Status-Ready%20for%20Submission-brightgreen.svg)]()
-[![Framework: TARDIS/PlanckDynamics](https://img.shields.io/badge/Framework-TARDIS%2FPlanckDynamics-purple.svg)]()
+[![Framework: TAMESIS/PlanckDynamics](https://img.shields.io/badge/Framework-TAMESIS%2FPlanckDynamics-purple.svg)]()
 
 **Author:** Douglas H. M. Fulber  
 **Affiliation:** Federal University of Rio de Janeiro (UFRJ)  
@@ -32,7 +32,7 @@ This framework eliminates the need for free parameters of the Standard Model, re
 
 The Standard Model of particle physics requires **19 free parameters** with no theoretical explanation for their values. Quantum mechanics presents apparent "mysteries" (superposition, collapse, nonlocality) that resist interpretation.
 
-We present the **TARDIS/PlanckDynamics** framework:
+We present the **TAMESIS/PlanckDynamics** framework:
 
 | Principle | Statement |
 |-----------|-----------|
@@ -137,6 +137,7 @@ $$\boxed{F_{EM} = \alpha \cdot F_0 = \frac{\alpha \hbar c}{r^2} = \frac{e^2}{4\p
 $$\boxed{Q = \frac{Q_{total}}{N_{colors}} = \frac{Q_{total}}{3}}$$
 
 Verification:
+
 - **Proton (uud):** 2/3 + 2/3 - 1/3 = +1 ✓
 - **Neutron (udd):** 2/3 - 1/3 - 1/3 = 0 ✓
 
@@ -157,6 +158,7 @@ $$\boxed{\alpha_s = \frac{crossing}{3} = \frac{3}{3} = 1}$$
 $$\psi(x,t) = \sqrt{\rho(x,t)} \cdot \exp\left(\frac{i S(x,t)}{\hbar}\right)$$
 
 Where:
+
 - ρ = probability density (fraction of active bits)
 - S = action
 
@@ -241,21 +243,22 @@ $$\boxed{\textbf{The new physics begins here.}}$$
 
 ---
 
-11. Computational Verification
+1. Computational Verification
 
 We have performed a rigorous computational verification of the claims using a suite of 6 numerical engines. The results confirm the derived values with high precision.
 
 ### 11.1 Electron Mass & Stability Simulation
 
 **Algorithm:** `quantum_geometry_solver.py`
-**Method:** Simulated Hawking evaporation of a Kerr-Newman black hole under TARDIS metric compression.
+**Method:** Simulated Hawking evaporation of a Kerr-Newman black hole under TAMESIS metric compression.
 
 **Results:**
+
 - **Fractal Scaling Exponent:** $\alpha = -40.233777$
 - **Remnant Stability:** The black hole stabilizes exactly at the Compton wavelength when charge-gravity balance is reached.
 
-![TARDIS Remnant Analysis](results/tardis_remnant_analysis.png)
-*Figure 1: Evolution of a micro-black hole under TARDIS compression. Top-left: Mass stabilizes at $m_e$. Top-right: Horizon radius asymptotically approaches Compton length. Bottom-left: Reactive temperature evolution. Bottom-right: Phase space stability.*
+![TAMESIS Remnant Analysis](results/tardis_remnant_analysis.png)
+*Figure 1: Evolution of a micro-black hole under TAMESIS compression. Top-left: Mass stabilizes at $m_e$. Top-right: Horizon radius asymptotically approaches Compton length. Bottom-left: Reactive temperature evolution. Bottom-right: Phase space stability.*
 
 ### 11.2 Fine-Structure Constant
 
@@ -272,6 +275,7 @@ The "correction factor" $\eta$ required to match entropic gravity to electromagn
 **Method:** Harmonic analysis of wormhole vibrational modes.
 
 **Exponents Derived:**
+
 - $\gamma_\mu = 1.1195$
 - $\gamma_\tau = 1.7121$
 
@@ -283,6 +287,7 @@ The "correction factor" $\eta$ required to match entropic gravity to electromagn
 **Method:** Applied knot theory to wormhole topology.
 
 **Key Insight:**
+
 - **Charges:** Fractional charges (+2/3, -1/3) emerge from dividing the winding number by the 3 color components.
 - **Coupling:** $\alpha_s = \text{crossing number} / 3 = 1$ for the fundamental Trefoil knot.
 

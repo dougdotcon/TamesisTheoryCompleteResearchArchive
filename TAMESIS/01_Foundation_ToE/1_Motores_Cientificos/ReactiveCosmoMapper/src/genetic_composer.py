@@ -55,11 +55,11 @@ GENOMES = {
 }
 
 # ═══════════════════════════════════════════════════════════════════
-# TARDIS CONSTANTS
+# TAMESIS CONSTANTS
 # ═══════════════════════════════════════════════════════════════════
 
 TARDIS_CONTEXT = """
-Additionally, all compositions must be anchored to the TARDIS Harmonic Theory:
+Additionally, all compositions must be anchored to the TAMESIS Harmonic Theory:
 - Base Frequency: 117 Hz (Gamma - The Universal Tension).
 - Preferred Key: A Minor (Am) or A Major.
 - Core Chord: AAGOOCH (Am9 no5) = A, G, C, B.
@@ -69,7 +69,7 @@ Additionally, all compositions must be anchored to the TARDIS Harmonic Theory:
 def display_banner():
     print("\n" + "═" * 60)
     print("🧬 GENETIC COMPOSER - The Ultimate Musician 🧬")
-    print("   Fusing Musical DNA with TARDIS Harmony")
+    print("   Fusing Musical DNA with TAMESIS Harmony")
     print("═" * 60)
 
 def display_menu():
@@ -134,7 +134,7 @@ Format your response EXACTLY like this:
             headers={
                 "Authorization": f"Bearer {API_KEY}",
                 "Content-Type": "application/json",
-                "HTTP-Referer": "https://tardis-project.com",
+                "HTTP-Referer": "https://TAMESIS-project.com",
                 "X-Title": "Genetic Composer"
             },
             data=json.dumps({
@@ -204,7 +204,7 @@ def generate_html(abc_code, guide, primary, secondary):
 </head>
 <body>
     <h1>🧬 Partitura Genética</h1>
-    <p class="subtitle">Uma fusão de {primary['name']} e {secondary['name']}, ancorada na Harmonia TARDIS (117 Hz)</p>
+    <p class="subtitle">Uma fusão de {primary['name']} e {secondary['name']}, ancorada na Harmonia TAMESIS (117 Hz)</p>
 
     <div class="dna">
         <span class="genome-tag primary">Primary: {primary['name']}</span>
@@ -222,7 +222,7 @@ def generate_html(abc_code, guide, primary, secondary):
         <h2>🧬 Análise Genética</h2>
         <p><strong>Genoma Primário ({primary['name']}):</strong> {primary['dna']}</p>
         <p><strong>Genoma Secundário ({secondary['name']}):</strong> {secondary['dna']}</p>
-        <p><strong>Âncora TARDIS:</strong> Frequência base 117 Hz. Tensão cósmica preservada via progressões Am9.</p>
+        <p><strong>Âncora TAMESIS:</strong> Frequência base 117 Hz. Tensão cósmica preservada via progressões Am9.</p>
     </div>
 
     <script type="text/javascript">

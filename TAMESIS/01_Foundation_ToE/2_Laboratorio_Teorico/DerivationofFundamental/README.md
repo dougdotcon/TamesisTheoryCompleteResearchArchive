@@ -1,4 +1,5 @@
 # Theory of Everything - Scientific Verification Project
+
 ![Project Status](https://img.shields.io/badge/status-VALIDATED-success)
 ![Precision](https://img.shields.io/badge/precision-0.000%25-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.8+-blue)
@@ -19,9 +20,10 @@ The algorithms in this repository have been executed to verify the theoretical c
 | **Electron Mass ($m_e$)** | `9.1093837015 × 10⁻³¹` kg | `9.1093837015 × 10⁻³¹` kg | **0.000%** | ✅ MATCH |
 | **Fine Structure ($\alpha^{-1}$)** | `137.035999206` | `137.035999084` | **~10⁻⁹%** | ✅ MATCH |
 | **Electron Spin ($S$)** | `0.5` (via 720° rotation) | `0.5` | **0.000%** | ✅ MATCH |
-| **TARDIS Compression ($\Omega$)** | `117.038` | N/A (Predicted) | N/A | 🔮 PREDICTION |
+| **TAMESIS Compression ($\Omega$)** | `117.038` | N/A (Predicted) | N/A | 🔮 PREDICTION |
 
 ### Key Findings
+
 1. **Fractal Mass Scaling**: The electron mass is an exact scaling of the Hubble mass by the holographic compression factor $\Omega$.
 2. **Topological Spin**: Spin-1/2 emerges naturally from the `genus-1` topology of an Einstein-Rosen bridge, requiring a 720° rotation ($\theta = 4\pi$) for wavefunction restoration.
 3. **Entropic Charge**: The fine structure constant $\alpha$ is geometrically linked to $\Omega$ via vorticity in the holographic screen.
@@ -31,11 +33,13 @@ The algorithms in this repository have been executed to verify the theoretical c
 ## 📊 Visual Proofs
 
 ### 1. Comparative Analysis
+
 *Visualizing the relationships between holographic scaling and standard model parameters.*
 
 ![Comparative Graph](assets/grafico_comparativo.png)
 
 ### 2. Wormhole Topology
+
 *Geometric representation of the electron's micro-wormhole structure validating the spin-1/2 topology.*
 
 ![Wormhole Topology](assets/wormhole_topology.png)
@@ -73,11 +77,13 @@ proof/
 To reproduce these results on your local machine:
 
 1. **Navigate to the source directory**:
+
    ```bash
    cd src
    ```
 
 2. **Run the verification scripts**:
+
    ```bash
    python ajuste_fino_massa_eletron.py
    python calibracao_fina_S.py

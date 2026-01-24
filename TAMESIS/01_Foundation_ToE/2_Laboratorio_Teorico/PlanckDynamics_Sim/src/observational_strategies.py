@@ -4,7 +4,7 @@ Métodos experimentais para validar as hipóteses de física fundamental
 
 Baseado nos resultados confirmados:
 - Variações de constantes: G(25.7%), c(23.6%), h(21.3%), α(16.5%)
-- Compressão TARDIS: 117,038× 
+- Compressão TAMESIS: 117,038× 
 - Predições específicas testáveis
 """
 
@@ -104,16 +104,16 @@ class ObservationalDetectionStrategies:
     
     def strategy_2_cmb_tardis_signatures(self) -> ObservationalStrategy:
         """
-        ESTRATÉGIA 2: ASSINATURAS TARDIS NA RADIAÇÃO CÓSMICA DE FUNDO
+        ESTRATÉGIA 2: ASSINATURAS TAMESIS NA RADIAÇÃO CÓSMICA DE FUNDO
         
         Buscar padrões específicos na CMB que indiquem compressão quântica
-        do tipo TARDIS.
+        do tipo TAMESIS.
         """
         return ObservationalStrategy(
-            name="Detecção de Assinaturas TARDIS na CMB",
+            name="Detecção de Assinaturas TAMESIS na CMB",
             method=DetectionMethod.SPACE_BASED,
             feasibility=FeasibilityLevel.NEAR_FUTURE,
-            target_hypothesis="Universo TARDIS",
+            target_hypothesis="Universo TAMESIS",
             expected_signature="Padrões de anisotropia correlacionados com compressão quântica",
             required_precision=1e-7,  # Anisotropias da ordem de 10^-7
             estimated_cost="$2-5B (missão espacial dedicada)",
@@ -139,14 +139,14 @@ class ObservationalDetectionStrategies:
         """
         ESTRATÉGIA 3: DETECÇÃO DE COMPRESSÃO EM ONDAS GRAVITACIONAIS
         
-        Procurar assinaturas de compressão quântica TARDIS em ondas
+        Procurar assinaturas de compressão quântica TAMESIS em ondas
         gravitacionais de eventos cosmológicos extremos.
         """
         return ObservationalStrategy(
             name="Assinaturas de Compressão em Ondas Gravitacionais",
             method=DetectionMethod.ASTRONOMICAL,
             feasibility=FeasibilityLevel.CURRENT,
-            target_hypothesis="Universo TARDIS + Leis Dinâmicas",
+            target_hypothesis="Universo TAMESIS + Leis Dinâmicas",
             expected_signature="Modulação de amplitude correlacionada com compressão quântica",
             required_precision=1e-23,  # Sensibilidade atual do LIGO
             estimated_cost="$500M-1B (upgrades dos detectores existentes)",
@@ -362,7 +362,7 @@ class ObservationalDetectionStrategies:
                 'recommended_priority_order': [
                     'Monitoramento de Precisão Extrema das Constantes Físicas',
                     'Mapeamento Astronômico de Variações de Constantes',
-                    'Detecção de Assinaturas TARDIS na CMB',
+                    'Detecção de Assinaturas TAMESIS na CMB',
                     'Assinaturas de Compressão em Ondas Gravitacionais'
                 ]
             },

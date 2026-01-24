@@ -2,7 +2,7 @@
 
 ## Goal
 
-To demonstrate that Spin-1/2 statistics ($\psi \xrightarrow{360^\circ} -\psi$, $\psi \xrightarrow{720^\circ} +\psi$) are a necessary consequence of a particle having a **Genus-1 (Toroidal) Topology**, supporting the TARDIS hypothesis that fermions are micro-wormholes.
+To demonstrate that Spin-1/2 statistics ($\psi \xrightarrow{360^\circ} -\psi$, $\psi \xrightarrow{720^\circ} +\psi$) are a necessary consequence of a particle having a **Genus-1 (Toroidal) Topology**, supporting the TAMESIS hypothesis that fermions are micro-wormholes.
 
 ## User Review Required
 >

@@ -1,7 +1,7 @@
 """
 LEPTON GENERATIONS ENGINE
 =========================
-Análise das gerações leptónicas usando scaling TARDIS
+Análise das gerações leptónicas usando scaling TAMESIS
 
 Objetivo: Derivar as razões de massa Múon/Elétron e Tau/Elétron
 a partir da escala fractal Ω = 117.038
@@ -44,7 +44,7 @@ class PhysicalConstants:
     m_muon_MeV: float = 105.6583755
     m_tau_MeV: float = 1776.86
     
-    # TARDIS Compression Factor
+    # TAMESIS Compression Factor
     OMEGA: float = 117.038
     
     # Massa do Universo observável (aproximada)
@@ -242,7 +242,7 @@ class HarmonicWormholeModel:
         
         Para uma corda clássica: E_n ∝ n²
         Para oscilador harmónico quântico: E_n ∝ (n + 1/2)
-        Para wormhole TARDIS: E_n ∝ ???
+        Para wormhole TAMESIS: E_n ∝ ???
         
         Args:
             n: Número do modo (1, 2, 3 para e, μ, τ)
@@ -398,7 +398,7 @@ def main():
     print("=" * 80)
     print("ANÁLISE DE GERAÇÕES LEPTÓNICAS - TEORIA DE TUDO")
     print("=" * 80)
-    print(f"\nParâmetro TARDIS: Ω = {CONST.OMEGA}")
+    print(f"\nParâmetro TAMESIS: Ω = {CONST.OMEGA}")
     print(f"ln(Ω) = {np.log(CONST.OMEGA):.6f}")
     
     # Razões de massa experimentais

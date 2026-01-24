@@ -14,7 +14,7 @@ setup(
     name="fisica-epoca-planck",
     version="2.0.0",
     author="Sistema de Simulação de Física Teórica",
-    description="Teste de hipóteses sobre leis físicas dinâmicas e universo TARDIS",
+    description="Teste de hipóteses sobre leis físicas dinâmicas e universo TAMESIS",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/usuario/fisica-epoca-planck",

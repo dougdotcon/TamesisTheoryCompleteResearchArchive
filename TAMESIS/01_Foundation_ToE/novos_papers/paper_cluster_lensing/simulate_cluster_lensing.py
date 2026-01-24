@@ -15,7 +15,7 @@ a0 = 1.2e-10  # MOND acceleration threshold (m/s²)
 def entropic_gravity_acceleration(a_newton, a0=a0):
     """
     Calculate effective acceleration in Entropic Gravity.
-    Uses the TARDIS interpolation function.
+    Uses the TAMESIS interpolation function.
     """
     x = a_newton / a0
     eta = 1 / (1 - np.exp(-np.sqrt(np.abs(x) + 1e-10)))

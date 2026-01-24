@@ -16,7 +16,7 @@ M_NEUTRON = 939.6
 
 def analyze_baryon_topology():
     """
-    Analyze baryon structure in TARDIS topological framework.
+    Analyze baryon structure in TAMESIS topological framework.
     """
     print("🔬 Analyzing Baryon Topology...\n")
     
@@ -50,7 +50,7 @@ def analyze_baryon_topology():
     print(f"  Binding is {binding_proton/M_PROTON*100:.1f}% of total mass!")
     
     print("\n" + "=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the topological framework:
@@ -187,5 +187,5 @@ if __name__ == "__main__":
     
     "Binding energy" = Topological complexity of braiding
     
-    QCD confinement is a TOPOLOGICAL necessity in TARDIS.
+    QCD confinement is a TOPOLOGICAL necessity in TAMESIS.
     """)

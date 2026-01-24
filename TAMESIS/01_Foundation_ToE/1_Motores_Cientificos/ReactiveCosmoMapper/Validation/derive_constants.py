@@ -11,7 +11,7 @@ def run_derivation():
     print("🔢 Running Fundamental Constant Derivation...")
     print("---------------------------------------------")
     print("Target: Fine Structure Constant (Alpha^-1) ~ 137.035999")
-    print("Base:   TARDIS Gamma Factor ~ 117.038")
+    print("Base:   TAMESIS Gamma Factor ~ 117.038")
     print("---------------------------------------------\n")
     
     engine = ConstantDerivator()

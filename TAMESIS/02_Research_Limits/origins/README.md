@@ -11,7 +11,7 @@ To derive the spin-1/2 angular momentum of fermions ($s = \hbar/2$) as an emerge
 ## 1. The Methodology: Geometry vs. Algebra
 
 In standard Quantum Mechanics, Spin is treated as an algebraic label ($SU(2)$).
-In TARDIS, we treat it as a **Geometric Constraint**.
+In TAMESIS, we treat it as a **Geometric Constraint**.
 
 We performed two simulations to visualize this:
 
@@ -27,7 +27,7 @@ Only a structure with a **hole** (Torus/Wormhole, Genus-1) creates the necessary
 
 ![Topology Comparison](simulation/topology_comparison.png)
 
-* **Result:** A TARDIS Fermion is literally a **Micro-Wormhole Mouth**.
+* **Result:** A TAMESIS Fermion is literally a **Micro-Wormhole Mouth**.
 * **Implication:** The "Charge" is the flux threading the hole. The "Spin" is the chirality wrapping the ring.
 
 ### Discovery 2: The 720-Degree Necessity
@@ -49,6 +49,7 @@ Our simulation of the phase evolution proves that "tethered" topologies accumula
 
 ## Files
 
-- `topology/`: Mathematical derivations.
+* `topology/`: Mathematical derivations.
+
 * `simulation/`: Visualization of spinor rotations.
 * `docs/`: Theory papers.

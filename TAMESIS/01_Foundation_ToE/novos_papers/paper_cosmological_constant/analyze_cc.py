@@ -1,6 +1,6 @@
 """
 Cosmological Constant Problem: The Worst Prediction in Physics
-Analyzes Λ in the TARDIS framework.
+Analyzes Λ in the TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_cosmological_constant():
     """
-    Analyze the cosmological constant problem in TARDIS.
+    Analyze the cosmological constant problem in TAMESIS.
     """
     print("🌌 Analyzing Cosmological Constant Problem...\n")
     
@@ -48,7 +48,7 @@ def analyze_cosmological_constant():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the holographic framework:
@@ -102,7 +102,7 @@ def plot_cc_problem():
     # Left: The discrepancy
     ax1 = axes[0]
     
-    predictions = ['QFT\nVacuum', 'Observed\nρ_Λ', 'Holographic\n(TARDIS)']
+    predictions = ['QFT\nVacuum', 'Observed\nρ_Λ', 'Holographic\n(TAMESIS)']
     log_rho = [93, -29, -29]  # log10(ρ in g/cm³)
     colors = ['red', 'green', 'blue']
     
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The cosmological constant problem is DISSOLVED in TARDIS:
+    The cosmological constant problem is DISSOLVED in TAMESIS:
     
     1. Λ is not vacuum energy (wrong framework)
     2. Λ ~ 1/r_H² (holographic scaling)

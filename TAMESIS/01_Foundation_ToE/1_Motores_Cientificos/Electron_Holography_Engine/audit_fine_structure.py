@@ -1,12 +1,12 @@
 """
 AUDIT SCRIPT: FINE STRUCTURE CONSTANT DERIVATION
 ================================================
-Objective: Verify the TARDIS relationship between Alpha and Omega.
+Objective: Verify the TAMESIS relationship between Alpha and Omega.
 
 Hypothesis: alpha^-1 = Omega^beta
 
 Parameters:
-- Omega = 117.038 (TARDIS Fundamental)
+- Omega = 117.038 (TAMESIS Fundamental)
 - Alpha^-1 (CODATA 2018) = 137.035999084
 
 We will calculate beta and check if it has geometric significance.
@@ -18,7 +18,7 @@ OMEGA = 117.038
 ALPHA_INV_REAL = 137.035999084
 
 def audit_alpha():
-    print(f"[-] TARDIS Parameter Omega: {OMEGA}")
+    print(f"[-] TAMESIS Parameter Omega: {OMEGA}")
     print(f"[-] Real 1/Alpha (CODATA): {ALPHA_INV_REAL}")
     
     # Calculate required beta

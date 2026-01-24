@@ -54,7 +54,7 @@ def calculate_holographic_lambda():
     print(f"Discrepancy:        10^{np.log10(rho_qft/rho_obs):.0f} orders of magnitude")
     print(f"")
     
-    # 3. Holographic Prediction (TARDIS/HDE)
+    # 3. Holographic Prediction (TAMESIS/HDE)
     # Hypothesis: The energy density is limited by the horizon area.
     # rho_hole = 3 c^2 / (8 pi G L^2)  ... equivalent to rho_crit if L = Hubble Radius
     # This roughly means the universe is a Black Hole.

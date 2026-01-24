@@ -10,7 +10,7 @@ Key Questions:
 3. What precision is needed to detect entropic corrections?
 
 Author: Douglas H. M. Fulber
-Project: Lab Gravity - TARDIS Framework
+Project: Lab Gravity - TAMESIS Framework
 """
 
 import numpy as np

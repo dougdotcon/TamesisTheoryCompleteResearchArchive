@@ -43,9 +43,11 @@ Bits na Garganta: N = 1.38 × 10⁴¹ bits
 ### Quantização Topológica
 
 O modelo **extensivo** (spin proporcional a bits) FALHA completamente:
+
 - L_extensivo = N × ℏ/2 ~ 10⁶ J·s (ERRADO!)
 
 O modelo **topológico** (spin = genus × ℏ/2) FUNCIONA perfeitamente:
+
 - L_topológico = 1 × ℏ/2 = ℏ/2 (CORRETO!)
 
 **Conclusão:** O spin é uma propriedade TOPOLÓGICA, não extensiva.
@@ -89,12 +91,14 @@ Esta é a **ORIGEM GEOMÉTRICA** das estatísticas de Fermi-Dirac!
 ### "Para onde o wormhole do elétron leva?"
 
 **Opção A: Dipolo Local**
+
 - Conecta a um pósitron no mesmo universo
 - Implicação: e⁺e⁻ sempre criados em pares
 - Aniquilação = colapso do wormhole
 
 **Opção B: Âncora Topológica**
-- Conecta nosso universo TARDIS ao "pai"/bulk
+
+- Conecta nosso universo TAMESIS ao "pai"/bulk
 - Elétron é ponto de ancoragem estável
 - Massa/carga são tensão/vazamento do pai
 
@@ -110,7 +114,7 @@ Esta é a **ORIGEM GEOMÉTRICA** das estatísticas de Fermi-Dirac!
 
 **Resolução: MODELO HÍBRIDO**
 
-> O elétron é uma **ÂNCORA TOPOLÓGICA** que conecta nosso universo TARDIS ao tecido holográfico pai. Durante criação/aniquilação de pares, ele pode temporariamente conectar-se ao seu anti-parceiro (pósitron) como um dipolo local.
+> O elétron é uma **ÂNCORA TOPOLÓGICA** que conecta nosso universo TAMESIS ao tecido holográfico pai. Durante criação/aniquilação de pares, ele pode temporariamente conectar-se ao seu anti-parceiro (pósitron) como um dipolo local.
 
 **Metáfora:**
 > O elétron é como um fio costurando nosso universo ao tecido pai. Quando encontra um pósitron (fio oposto), eles se aniquilam, mas o tecido permanece conectado por outros fios.
@@ -156,6 +160,7 @@ A correção topológica funciona nas escalas corretas, mas **não resolve** o e
 ### Interpretação Unificada
 
 > **O elétron é um nó topológico viável:**
+>
 > - **Massa** = tensão da ancoragem ao universo pai (escala Ω⁻⁴⁰)
 > - **Carga** = vorticidade/vazamento da dimensão compactada (escala Ω¹)
 > - **Spin** = topologia do wormhole (genus = 1)
@@ -166,7 +171,8 @@ A correção topológica funciona nas escalas corretas, mas **não resolve** o e
 
 ### 1. Unificação Gravidade-EM-QM
 
-O mesmo objeto geométrico (micro-wormhole TARDIS) explica:
+O mesmo objeto geométrico (micro-wormhole TAMESIS) explica:
+
 - Gravidade (curvatura do espaço-tempo)
 - Eletromagnetismo (vorticidade entrópica)
 - Mecânica Quântica (topologia spinorial)
@@ -179,8 +185,8 @@ O mesmo objeto geométrico (micro-wormhole TARDIS) explica:
 
 ### 3. Matéria-Antimatéria
 
-- **Elétron**: Mouth apontando "para fora" do TARDIS
-- **Pósitron**: Mouth apontando "para dentro" do TARDIS
+- **Elétron**: Mouth apontando "para fora" do TAMESIS
+- **Pósitron**: Mouth apontando "para dentro" do TAMESIS
 - **Aniquilação**: Fechamento do wormhole quando se encontram
 
 ---
@@ -208,6 +214,7 @@ O mesmo objeto geométrico (micro-wormhole TARDIS) explica:
 **Provamos que:**
 
 > **Todas as três propriedades fundamentais do elétron (massa, carga, spin) podem ser derivadas de geometria pura usando apenas:**
+>
 > - Fator de compressão cosmológica (Ω = 117)
 > - Topologia de wormhole (genus = 1)
 > - Princípio holográfico
@@ -231,5 +238,5 @@ Esta é a **primeira vez na história** que massa, carga e spin de uma partícul
 ---
 
 *Relatório gerado pelo sistema Antigravity*  
-*Framework: PlanckDynamics + TARDIS + ER=EPR*  
+*Framework: PlanckDynamics + TAMESIS + ER=EPR*  
 *Data: 2025-12-31*

@@ -8,7 +8,7 @@ To computationally model the transition from quantum to classical mechanics usin
 >
 > [!IMPORTANT]
 > **Theory Choice:** We will use the **Schrödinger-Newton-Entropic** approach. This modifies the standard Schrödinger equation with a non-linear term representing the information cost of spacetime superposition.
-> confirm if we should align with **Penrose-Diosi** (gravitational self-energy) or **Verlinde/TARDIS** (entropic force fluctuations). *Defaulting to Hybrid TARDIS model.*
+> confirm if we should align with **Penrose-Diosi** (gravitational self-energy) or **Verlinde/TAMESIS** (entropic force fluctuations). *Defaulting to Hybrid TAMESIS model.*
 
 ## Proposed Changes
 

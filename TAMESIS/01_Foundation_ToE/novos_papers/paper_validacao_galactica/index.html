@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Galactic Rotation Curves Without Dark Matter: Validation of Entropic Gravity</h1>
@@ -105,129 +206,159 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="abstract">
+            Abstract not found.
+        </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We present the definitive validation test of the TARDIS/Entropic Gravity framework: explaining galaxy rotation
-        curves without invoking Dark Matter. Using a synthetic model of NGC 3198 (a well-studied spiral galaxy), we
-        compare three gravitational models: (1) Newtonian gravity with visible mass only, (2) the CDM model with an NFW
-        Dark Matter halo, and (3) TARDIS/Entropic gravity with zero free parameters. Our results demonstrate that the
-        Entropic model reproduces the observed flat rotation curve <strong>with zero free parameters</strong>, while
-        Newtonian fails catastrophically and CDM requires parameter fitting. This constitutes <strong>"smoking gun"
-            evidence</strong> that Dark Matter is an artifact of applying Newtonian gravity in the low-acceleration
-        regime, where entropic corrections dominate.
-        <div class="keywords"><strong>Keywords:</strong> Dark Matter, Galaxy Rotation Curves, Entropic Gravity, MOND,
-            SPARC, NGC 3198
-    </div>
-
-    <div class="content-wrapper">
-</div>
-
-    <div class="content-body">
-        <h2>1. Introduction</h2>
-        <p>The "missing mass problem" has plagued astrophysics since Zwicky's 1933 observations. Galaxy rotation curves
-            remain flat at large radii, inconsistent with Keplerian decline predicted by visible mass alone. The
-            standard solution is Dark Matter—an invisible component comprising ~27% of universal mass-energy.</p>
-        <p>We propose an alternative: <strong>there is no Dark Matter</strong>. The flat rotation curves emerge
-            naturally from Entropic Gravity in the low-acceleration regime ($a < a_0$).</p>
-
-                <h2>2. The TARDIS/Entropic Model</h2>
-                <h3>2.1 Effective Acceleration</h3>
-                <p>In the entropic framework, gravity is modified at low accelerations:</p>
-                <div class="equation-box">
-                    $$a_{\text{eff}} = a_N \cdot \nu\left(\frac{a_N}{a_0}\right)$$
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
                 </div>
-                <p>where $a_N = GM/r^2$ is Newtonian acceleration, $a_0 \approx 1.2 \times 10^{-10}$ m/s² is the MOND
-                    threshold, and $\nu(x)$ is the interpolation function.</p>
 
-                <h3>2.2 The TARDIS Interpolation</h3>
-                <div class="master-equation">
-                    $$\boxed{\nu(x) = \frac{1}{1 - e^{-\sqrt{x}}}}$$
-                </div>
-                <p>This form emerges naturally from the holographic entropy gradient.</p>
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        We present the definitive validation test of the TAMESIS/Entropic Gravity framework: explaining
+                        galaxy rotation
+                        curves without invoking Dark Matter. Using a synthetic model of NGC 3198 (a well-studied spiral
+                        galaxy), we
+                        compare three gravitational models: (1) Newtonian gravity with visible mass only, (2) the CDM
+                        model with an NFW
+                        Dark Matter halo, and (3) TAMESIS/Entropic gravity with zero free parameters. Our results
+                        demonstrate that the
+                        Entropic model reproduces the observed flat rotation curve <strong>with zero free
+                            parameters</strong>, while
+                        Newtonian fails catastrophically and CDM requires parameter fitting. This constitutes
+                        <strong>"smoking gun"
+                            evidence</strong> that Dark Matter is an artifact of applying Newtonian gravity in the
+                        low-acceleration
+                        regime, where entropic corrections dominate.
+                        <div class="keywords"><strong>Keywords:</strong> Dark Matter, Galaxy Rotation Curves, Entropic
+                            Gravity, MOND,
+                            SPARC, NGC 3198
+                        </div>
 
-                <h2>3. Results: NGC 3198 Simulation</h2>
-                <figure>
-                    <img src="assets/rotation_curve_match.png" alt="Rotation Curve Comparison">
-                    <figcaption><strong>Figure 1:</strong> Galaxy rotation curve comparison for NGC 3198. Black dashed:
-                        Newtonian (visible mass only)—fails at large radii. Blue dotted: CDM halo model—fits but
-                        requires free parameters. <strong>Green solid: TARDIS/Entropic—fits with zero free
-                            parameters.</strong></figcaption>
-                </figure>
+                        <div class="content-wrapper">
+                        </div>
 
-                <table>
-                    <tr>
-                        <th>Model</th>
-                        <th>Free Parameters</th>
-                        <th>Fit Quality</th>
-                    </tr>
-                    <tr>
-                        <td>Newtonian</td>
-                        <td>0</td>
-                        <td>Poor (Keplerian decline)</td>
-                    </tr>
-                    <tr>
-                        <td>CDM Halo (NFW)</td>
-                        <td>2-3</td>
-                        <td>Good</td>
-                    </tr>
-                    <tr class="result-highlight">
-                        <td>TARDIS/Entropic</td>
-                        <td><strong>0</strong></td>
-                        <td><strong>Excellent</strong></td>
-                    </tr>
-                </table>
+                        <div class="content-body">
+                            <h2>1. Introduction</h2>
+                            <p>The "missing mass problem" has plagued astrophysics since Zwicky's 1933 observations.
+                                Galaxy rotation curves
+                                remain flat at large radii, inconsistent with Keplerian decline predicted by visible
+                                mass alone. The
+                                standard solution is Dark Matter—an invisible component comprising ~27% of universal
+                                mass-energy.</p>
+                            <p>We propose an alternative: <strong>there is no Dark Matter</strong>. The flat rotation
+                                curves emerge
+                                naturally from Entropic Gravity in the low-acceleration regime ($a < a_0$).</p>
 
-                <h2>4. The Baryonic Tully-Fisher Relation</h2>
-                <p>Entropic Gravity predicts a tight correlation between baryonic mass and asymptotic velocity:</p>
-                <div class="equation-box">
-                    $$M_b = \frac{v^4}{G \cdot a_0}$$
-                </div>
-                <p>This relation is observed with <1% scatter in SPARC data—unexplained by CDM but <strong>
-                        predicted</strong> by Entropic Gravity.</p>
+                                    <h2>2. The TAMESIS/Entropic Model</h2>
+                                    <h3>2.1 Effective Acceleration</h3>
+                                    <p>In the entropic framework, gravity is modified at low accelerations:</p>
+                                    <div class="equation-box">
+                                        $$a_{\text{eff}} = a_N \cdot \nu\left(\frac{a_N}{a_0}\right)$$
+                                    </div>
+                                    <p>where $a_N = GM/r^2$ is Newtonian acceleration, $a_0 \approx 1.2 \times 10^{-10}$
+                                        m/s² is the MOND
+                                        threshold, and $\nu(x)$ is the interpolation function.</p>
 
-                <h2>5. Discussion</h2>
-                <p>Our results have profound implications:</p>
-                <ol>
-                    <li><strong>Dark Matter searches may be futile:</strong> There is nothing to find.</li>
-                    <li><strong>MOND is emergent:</strong> The empirical MOND formula is derived from holographic
-                        principles.</li>
-                    <li><strong>Occam's Razor favors Entropic Gravity:</strong> Zero free parameters vs. three for CDM.
-                    </li>
-                </ol>
+                                    <h3>2.2 The TAMESIS Interpolation</h3>
+                                    <div class="master-equation">
+                                        $$\boxed{\nu(x) = \frac{1}{1 - e^{-\sqrt{x}}}}$$
+                                    </div>
+                                    <p>This form emerges naturally from the holographic entropy gradient.</p>
 
-                <h2>6. Conclusion</h2>
-                <div class="conclusion-box">
-                    <h3 style="margin:0;">Dark Matter Does Not Exist</h3>
-                    <p style="margin:0.5rem 0 0 0;">
-                        Galaxy rotation curves are explained by Entropic Gravity with <strong>zero free
-                            parameters</strong>.<br>
-                        The "missing mass" is not mass—it is <strong>modified gravity at low accelerations</strong>.
-                    </p>
-                </div>
-<div class="references"><h2>References</h2>
-                    <ol>
-                        <li>Rubin, V. C. & Ford, W. K. (1970). <em>Rotation of the Andromeda Nebula</em>. ApJ 159, 379.
-                        </li>
-                        <li>Milgrom, M. (1983). <em>A modification of the Newtonian dynamics</em>. ApJ 270, 365.</li>
-                        <li>McGaugh, S. S. et al. (2016). <em>Radial Acceleration Relation in Rotationally Supported
-                                Galaxies</em>. Phys. Rev. Lett. 117, 201101.</li>
-                        <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. ToE
-                            Project.</li>
-                    </ol></div>
-    </div>
+                                    <h2>3. Results: NGC 3198 Simulation</h2>
+                                    <figure>
+                                        <img src="assets/rotation_curve_match.png" alt="Rotation Curve Comparison">
+                                        <figcaption><strong>Figure 1:</strong> Galaxy rotation curve comparison for NGC
+                                            3198. Black dashed:
+                                            Newtonian (visible mass only)—fails at large radii. Blue dotted: CDM halo
+                                            model—fits but
+                                            requires free parameters. <strong>Green solid: TAMESIS/Entropic—fits with
+                                                zero free
+                                                parameters.</strong></figcaption>
+                                    </figure>
+
+                                    <table>
+                                        <tr>
+                                            <th>Model</th>
+                                            <th>Free Parameters</th>
+                                            <th>Fit Quality</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Newtonian</td>
+                                            <td>0</td>
+                                            <td>Poor (Keplerian decline)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CDM Halo (NFW)</td>
+                                            <td>2-3</td>
+                                            <td>Good</td>
+                                        </tr>
+                                        <tr class="result-highlight">
+                                            <td>TAMESIS/Entropic</td>
+                                            <td><strong>0</strong></td>
+                                            <td><strong>Excellent</strong></td>
+                                        </tr>
+                                    </table>
+
+                                    <h2>4. The Baryonic Tully-Fisher Relation</h2>
+                                    <p>Entropic Gravity predicts a tight correlation between baryonic mass and
+                                        asymptotic velocity:</p>
+                                    <div class="equation-box">
+                                        $$M_b = \frac{v^4}{G \cdot a_0}$$
+                                    </div>
+                                    <p>This relation is observed with <1% scatter in SPARC data—unexplained by CDM but
+                                            <strong>
+                                            predicted</strong> by Entropic Gravity.</p>
+
+                                    <h2>5. Discussion</h2>
+                                    <p>Our results have profound implications:</p>
+                                    <ol>
+                                        <li><strong>Dark Matter searches may be futile:</strong> There is nothing to
+                                            find.</li>
+                                        <li><strong>MOND is emergent:</strong> The empirical MOND formula is derived
+                                            from holographic
+                                            principles.</li>
+                                        <li><strong>Occam's Razor favors Entropic Gravity:</strong> Zero free parameters
+                                            vs. three for CDM.
+                                        </li>
+                                    </ol>
+
+                                    <h2>6. Conclusion</h2>
+                                    <div class="conclusion-box">
+                                        <h3 style="margin:0;">Dark Matter Does Not Exist</h3>
+                                        <p style="margin:0.5rem 0 0 0;">
+                                            Galaxy rotation curves are explained by Entropic Gravity with <strong>zero
+                                                free
+                                                parameters</strong>.<br>
+                                            The "missing mass" is not mass—it is <strong>modified gravity at low
+                                                accelerations</strong>.
+                                        </p>
+                                    </div>
+                                    <div class="references">
+                                        <h2>References</h2>
+                                        <ol>
+                                            <li>Rubin, V. C. & Ford, W. K. (1970). <em>Rotation of the Andromeda
+                                                    Nebula</em>. ApJ 159, 379.
+                                            </li>
+                                            <li>Milgrom, M. (1983). <em>A modification of the Newtonian dynamics</em>.
+                                                ApJ 270, 365.</li>
+                                            <li>McGaugh, S. S. et al. (2016). <em>Radial Acceleration Relation in
+                                                    Rotationally Supported
+                                                    Galaxies</em>. Phys. Rev. Lett. 117, 201101.</li>
+                                            <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and
+                                                    Dynamics</em>. ToE
+                                                Project.</li>
+                                        </ol>
+                                    </div>
+                        </div>
 </body>
+
 </html>

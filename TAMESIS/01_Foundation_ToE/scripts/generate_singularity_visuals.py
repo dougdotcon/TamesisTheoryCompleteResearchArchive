@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TARDIS Singularity Visualizations
+TAMESIS Singularity Visualizations
 Generates PNG images for SINGULARITY_TARDIS.md
 """
 
@@ -13,7 +13,7 @@ import os
 # Create assets directory
 os.makedirs('assets', exist_ok=True)
 
-# TARDIS Constants
+# TAMESIS Constants
 OMEGA = 117.038
 ALPHA = 0.47
 GAMMA = OMEGA
@@ -165,7 +165,7 @@ def plot_singularity_timeline():
         (1990, 'Internet', COLORS['primary']),
         (2010, 'Smartphones', COLORS['primary']),
         (2020, 'IA Generativa', COLORS['secondary']),
-        (2025, 'TARDIS\nFramework', COLORS['warning']),
+        (2025, 'TAMESIS\nFramework', COLORS['warning']),
         (2030, 'Fusão\nHumano-IA?', COLORS['success']),
         (2040, 'Pós-Humano?', COLORS['accent']),
     ]
@@ -255,7 +255,7 @@ def plot_omega_scaling():
 
 
 def plot_black_hole_tardis():
-    """Generate TARDIS Black Hole interpretation"""
+    """Generate TAMESIS Black Hole interpretation"""
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), facecolor=COLORS['bg'])
     
     for ax in axes:
@@ -285,7 +285,7 @@ def plot_black_hole_tardis():
     ax1.legend(loc='lower right', fontsize=10)
     ax1.axis('off')
     
-    # Right: TARDIS
+    # Right: TAMESIS
     ax2 = axes[1]
     
     # Computational horizon
@@ -309,12 +309,12 @@ def plot_black_hole_tardis():
     ax2.set_xlim(-1.5, 1.5)
     ax2.set_ylim(-1.5, 1.5)
     ax2.set_aspect('equal')
-    ax2.set_title('FÍSICA TARDIS\nHorizonte = Superfície de Processamento',
+    ax2.set_title('FÍSICA TAMESIS\nHorizonte = Superfície de Processamento',
                  fontsize=14, color='white')
     ax2.legend(loc='lower right', fontsize=10)
     ax2.axis('off')
     
-    plt.suptitle('Buraco Negro: Clássico vs TARDIS',
+    plt.suptitle('Buraco Negro: Clássico vs TAMESIS',
                 fontsize=18, color='white', y=1.02)
     plt.tight_layout()
     plt.savefig('assets/black_hole_comparison.png', dpi=150,
@@ -325,7 +325,7 @@ def plot_black_hole_tardis():
 
 def main():
     """Generate all visualizations"""
-    print("\n=== Gerando Visualizações TARDIS Singularity ===\n")
+    print("\n=== Gerando Visualizações TAMESIS Singularity ===\n")
     
     plot_omega_hierarchy()
     plot_phase_transition()

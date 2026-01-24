@@ -6,7 +6,7 @@
 
 ## Objective
 
-To synthesize the findings of the **TARDIS Framework** into a single, cohesive Theory of Everything.
+To synthesize the findings of the **TAMESIS Framework** into a single, cohesive Theory of Everything.
 Throughout this research program, we have systematically replaced abstract "forces" and "parameters" with geometric and topological principles.
 
 ## The 5 Axioms of Tamesis
@@ -47,5 +47,6 @@ We have removed the need for:
 
 ## Files
 
-- `index.html`: The Grand Unified Paper.
+* `index.html`: The Grand Unified Paper.
+
 * `docs/`: All subsidiary papers.

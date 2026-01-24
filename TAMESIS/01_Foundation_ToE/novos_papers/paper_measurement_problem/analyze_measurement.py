@@ -1,6 +1,6 @@
 """
 The Measurement Problem: Why Does Observation Cause Collapse?
-Explores the quantum measurement problem in TARDIS framework.
+Explores the quantum measurement problem in TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_measurement_problem():
     """
-    Analyze the quantum measurement problem in TARDIS.
+    Analyze the quantum measurement problem in TAMESIS.
     """
     print("🔬 Analyzing Measurement Problem...\n")
     
@@ -35,7 +35,7 @@ def analyze_measurement_problem():
     """)
     
     print("=" * 50)
-    print("TARDIS RESOLUTION")
+    print("TAMESIS RESOLUTION")
     print("=" * 50)
     print("""
     In the holographic/entropic framework:
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The measurement problem is RESOLVED in TARDIS:
+    The measurement problem is RESOLVED in TAMESIS:
     
     1. "Collapse" is not fundamental — it's decoherence
     2. Observer role: information integration (Φ > 0)

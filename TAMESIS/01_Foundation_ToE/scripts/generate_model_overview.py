@@ -1,5 +1,5 @@
 """
-TARDIS Model Overview - Academic Version
+TAMESIS Model Overview - Academic Version
 Clean hierarchical flowchart suitable for scientific publications
 """
 
@@ -50,7 +50,7 @@ def draw_arrow(ax, x1, y1, x2, y2, color=PRIMARY):
                 arrowprops=dict(arrowstyle='->', color=color, lw=1.2))
 
 # === TITLE ===
-ax.text(7, 15.3, 'TARDIS Framework: Unified Derivation Hierarchy', 
+ax.text(7, 15.3, 'TAMESIS Framework: Unified Derivation Hierarchy', 
         fontsize=16, fontweight='bold', color=PRIMARY, ha='center')
 ax.text(7, 14.8, 'Theory of Everything - Derivation Flow', 
         fontsize=11, color=SECONDARY, ha='center', style='italic')

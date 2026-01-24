@@ -1,5 +1,5 @@
 """
-Dark Matter Candidates in TARDIS: Gravitinos, Axions, or Nothing?
+Dark Matter Candidates in TAMESIS: Gravitinos, Axions, or Nothing?
 Analyzes whether any BSM particles are predicted/needed.
 """
 import numpy as np
@@ -8,7 +8,7 @@ import os
 
 def analyze_dark_candidates():
     """
-    Analyze dark matter candidates in TARDIS framework.
+    Analyze dark matter candidates in TAMESIS framework.
     """
     print("🌑 Analyzing Dark Matter Candidates...\n")
     
@@ -38,7 +38,7 @@ def analyze_dark_candidates():
     """)
     
     print("=" * 50)
-    print("TARDIS PERSPECTIVE")
+    print("TAMESIS PERSPECTIVE")
     print("=" * 50)
     print("""
     In Entropic Gravity:
@@ -50,7 +50,7 @@ def analyze_dark_candidates():
     2. AXIONS: MAYBE
        - Still solve strong CP problem
        - Not for dark matter, but for θ-parameter
-       - INDEPENDENT of TARDIS
+       - INDEPENDENT of TAMESIS
        
     3. GRAVITINOS: NO
        - Require SUSY, which is not needed
@@ -67,7 +67,7 @@ def analyze_dark_candidates():
     
     return {
         "wimp_needed": False,
-        "axion_status": "independent of TARDIS",
+        "axion_status": "independent of TAMESIS",
         "gravitino_status": "not needed (no SUSY)",
         "pbh_interpretation": "child universes",
         "conclusion": "No dark matter particle required"
@@ -87,12 +87,12 @@ def plot_dm_exclusion():
     width = 0.35
     
     bars1 = ax.bar(x - width/2, status_sm, width, label='Standard DM Need', color='gray', alpha=0.7)
-    bars2 = ax.bar(x + width/2, needed_in_tardis, width, label='TARDIS Need', color='green', alpha=0.7)
+    bars2 = ax.bar(x + width/2, needed_in_tardis, width, label='TAMESIS Need', color='green', alpha=0.7)
     
     ax.set_ylabel('Required/Predicted', fontsize=12)
     ax.set_xticks(x)
     ax.set_xticklabels(candidates, fontsize=11)
-    ax.set_title('Dark Matter Candidates: Standard vs TARDIS', fontsize=14, fontweight='bold')
+    ax.set_title('Dark Matter Candidates: Standard vs TAMESIS', fontsize=14, fontweight='bold')
     ax.legend()
     ax.set_ylim([0, 1.3])
     ax.grid(True, alpha=0.3, axis='y')
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    TARDIS does NOT require dark matter particles.
+    TAMESIS does NOT require dark matter particles.
     
     • WIMPs: Not needed, not found → CONSISTENT
     • Axions: Independent problem (strong CP), not DM

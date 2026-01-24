@@ -28,7 +28,7 @@ class QuickImprovedSimulator:
         return base_value * (1 + variation)
     
     def tardis_compression(self, time: float) -> float:
-        """Compressão TARDIS simplificada"""
+        """Compressão TAMESIS simplificada"""
         if time < 1.0:
             return 1.0 + time * 10  # Crescimento inicial
         else:
@@ -50,7 +50,7 @@ class QuickImprovedSimulator:
         # Parâmetro de Hubble limitado
         H = np.clip(a_dot / a, -1e3, 1e3)
         
-        # Compressão TARDIS
+        # Compressão TAMESIS
         compression = self.tardis_compression(t)
         
         # Equações simplificadas
@@ -102,7 +102,7 @@ class QuickImprovedSimulator:
             G_variation = (max(G_values) - min(G_values)) / G_values[0] * 100
             c_variation = (max(c_values) - min(c_values)) / c_values[0] * 100
             
-            # Compressão TARDIS
+            # Compressão TAMESIS
             compression_start = self.tardis_compression(times[0])
             compression_end = self.tardis_compression(times[-1])
             compression_growth = compression_end / compression_start
@@ -129,7 +129,7 @@ class QuickImprovedSimulator:
             print(f"Crescimento da compressão: {results['compression_growth']:.2f}")
             print(f"\nHIPÓTESES:")
             print(f"Leis Dinâmicas: {'✅ SUPORTADA' if results['dynamic_constants_supported'] else '❌ NÃO SUPORTADA'}")
-            print(f"Universo TARDIS: {'✅ SUPORTADA' if results['tardis_supported'] else '❌ NÃO SUPORTADA'}")
+            print(f"Universo TAMESIS: {'✅ SUPORTADA' if results['tardis_supported'] else '❌ NÃO SUPORTADA'}")
             
             return results
             

@@ -1,6 +1,6 @@
 """
 Black Hole Singularity: What's at the Center If We're INSIDE?
-Explores the nature of the singularity in TARDIS framework.
+Explores the nature of the singularity in TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_singularity():
     """
-    Analyze the black hole singularity in TARDIS framework.
+    Analyze the black hole singularity in TAMESIS framework.
     """
     print("🕳️ Analyzing Black Hole Singularity...\n")
     
@@ -33,7 +33,7 @@ def analyze_singularity():
     """)
     
     print("=" * 50)
-    print("THE PARADOX FOR TARDIS")
+    print("THE PARADOX FOR TAMESIS")
     print("=" * 50)
     print("""
     If our universe IS the interior of a black hole:
@@ -46,7 +46,7 @@ def analyze_singularity():
     """)
     
     print("=" * 50)
-    print("TARDIS RESOLUTION")
+    print("TAMESIS RESOLUTION")
     print("=" * 50)
     print("""
     The singularity is NOT in our observable universe:
@@ -150,7 +150,7 @@ def plot_singularity():
     ax2.grid(True, alpha=0.3)
     ax2.set_ylim([0.1, 1e4])
     
-    plt.suptitle('Black Hole Singularity: Resolved in TARDIS', fontsize=14, fontweight='bold')
+    plt.suptitle('Black Hole Singularity: Resolved in TAMESIS', fontsize=14, fontweight='bold')
     plt.tight_layout()
     
     output_dir = os.path.dirname(os.path.abspath(__file__))
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The singularity is RESOLVED in TARDIS:
+    The singularity is RESOLVED in TAMESIS:
     
     1. From inside: singularity = our Big Bang (PAST)
     2. We're moving AWAY, not toward it

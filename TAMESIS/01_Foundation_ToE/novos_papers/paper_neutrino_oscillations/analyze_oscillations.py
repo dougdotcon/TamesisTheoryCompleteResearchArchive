@@ -1,6 +1,6 @@
 """
 Neutrino Oscillations: Do They Follow from Unknot Topology?
-Explores neutrino mixing in the TARDIS framework.
+Explores neutrino mixing in the TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ DM32_SQ = 2.51e-3  # eV² (atmospheric)
 
 def analyze_neutrino_oscillations():
     """
-    Analyze neutrino oscillations in TARDIS framework.
+    Analyze neutrino oscillations in TAMESIS framework.
     """
     print("🔬 Analyzing Neutrino Oscillations...\n")
     
@@ -49,7 +49,7 @@ def analyze_neutrino_oscillations():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     Neutrinos are "unknots" (genus 0, trivial topology):
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    Neutrino oscillations in TARDIS:
+    Neutrino oscillations in TAMESIS:
     
     1. Neutrinos are unknots (trivial topology)
     2. Three mass states differ by tiny deformations

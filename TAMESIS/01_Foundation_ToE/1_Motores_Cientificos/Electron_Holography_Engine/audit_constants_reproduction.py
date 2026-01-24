@@ -1,7 +1,7 @@
 """
 AUDIT SCRIPT: ELECTRON MASS DERIVATION
 ======================================
-Objective: Verify if the TARDIS formula yields the correct electron mass.
+Objective: Verify if the TAMESIS formula yields the correct electron mass.
 
 Formula identified in analysis:
 m_e = M_universe * Omega^gamma_e
@@ -26,7 +26,7 @@ GAMMA_E = -40.233777
 M_ELECTRON_REAL = 9.10938356e-31
 
 def calculate_mass():
-    print(f"[-] TARDIS Parameter Omega: {OMEGA}")
+    print(f"[-] TAMESIS Parameter Omega: {OMEGA}")
     print(f"[-] Universe Mass: {M_UNIVERSE:.2e} kg")
     print(f"[-] Scaling Exponent: {GAMMA_E}")
     

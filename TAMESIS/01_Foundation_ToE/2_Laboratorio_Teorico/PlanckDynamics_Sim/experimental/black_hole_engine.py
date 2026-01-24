@@ -4,7 +4,7 @@ Black Hole Engine: The Reactive Horizon (Phase 3)
 Author: Antigravity (Elite Physicist System)
 
 Objective:
-Simulate Black Hole thermodynamics under "TARDIS" metric compression (Gamma ~ 117).
+Simulate Black Hole thermodynamics under "TAMESIS" metric compression (Gamma ~ 117).
 Test the hypothesis of a "Reactive Planck Area" to preserve the Bekenstein Bound.
 
 Physics:
@@ -34,7 +34,7 @@ MP_STD = np.sqrt(HBAR * C / G) # Planck Mass
 
 print(f"Standard Planck Length: {LP_STD:.2e} m")
 print(f"Standard Planck Mass: {MP_STD:.2e} kg")
-print(f"TARDIS Compression Factor: {TARDIS_GAMMA}")
+print(f"TAMESIS Compression Factor: {TARDIS_GAMMA}")
 
 # --- 2. THERMODYNAMIC KERNEL ---
 
@@ -110,7 +110,7 @@ def simulate_evaporation():
         # Evaporation is boosted by Gamma^4 !!! (Huge factor)
         # Tau_reac = Tau_std / Gamma^4
         
-        # This implies TARDIS holes explode instantly?
+        # This implies TAMESIS holes explode instantly?
         # UNLESS Area is also modified geometrically?
         # If Metric is compressed, Area_eff might be Area / Gamma^2?
         # Let's assume Area is physical (Horizon).
@@ -166,7 +166,7 @@ def simulate_evaporation():
     # Report Log
     with open("experimental/discovery_log_003_thermo.txt", "w") as f:
         f.write("# DISCOVERY LOG 003: BLACK HOLE THERMODYNAMICS\n")
-        f.write(f"TARDIS Gamma: {TARDIS_GAMMA}\n")
+        f.write(f"TAMESIS Gamma: {TARDIS_GAMMA}\n")
         f.write("Status: Reactive Holes are HOTTER and LESS ENTROPIC.\n")
         f.write("Interpretation: The 'Reactive Planck Area' dilutes the information density, preventing storage overflow in compressed space.\n")
         f.write("Consequence: Faster evaporation rate (Gamma^4 factor) unless Area is also renormalized.\n")

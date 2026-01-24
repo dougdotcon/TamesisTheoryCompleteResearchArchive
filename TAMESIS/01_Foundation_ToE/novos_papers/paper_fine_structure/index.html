@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Fine Structure Constant: Is α Derivable from Ω?</h1>
@@ -105,53 +206,61 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="abstract">
+            Abstract not found.
+        </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
+                </div>
 
-    <div class="content-wrapper">
-<div class="abstract">
-        The fine structure constant α = 1/137.036 controls electromagnetism and atomic structure. Feynman called it "a
-        mystery." We explore whether α relates to the TARDIS compression factor Ω = 117.038. Suggestive relation:
-        $1/\alpha \approx \Omega + \Omega/6 \approx 136.5$. This is <strong>close but not exact</strong>—deeper work
-        needed.
-    </div>
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        The fine structure constant α = 1/137.036 controls electromagnetism and atomic structure.
+                        Feynman called it "a
+                        mystery." We explore whether α relates to the TAMESIS compression factor Ω = 117.038. Suggestive
+                        relation:
+                        $1/\alpha \approx \Omega + \Omega/6 \approx 136.5$. This is <strong>close but not
+                            exact</strong>—deeper work
+                        needed.
+                    </div>
 
-    <div class="content-wrapper">
-<h2>1. The Relation</h2>
-    <div class="master-equation">
-        $$\frac{1}{\alpha} = 137.036 \quad \text{vs} \quad \Omega + \frac{\Omega}{6} = 136.54$$
-    </div>
-    <p>The difference $1/\alpha - \Omega = 20$ is intriguingly close to the number of amino acids (20), suggesting a
-        deeper connection to biological constants.</p>
+                    <div class="content-wrapper">
+                        <h2>1. The Relation</h2>
+                        <div class="master-equation">
+                            $$\frac{1}{\alpha} = 137.036 \quad \text{vs} \quad \Omega + \frac{\Omega}{6} = 136.54$$
+                        </div>
+                        <p>The difference $1/\alpha - \Omega = 20$ is intriguingly close to the number of amino acids
+                            (20), suggesting a
+                            deeper connection to biological constants.</p>
 
-    <figure>
-        <img src="assets/fine_structure.png" alt="Fine Structure">
-        <figcaption><strong>Figure 1:</strong> Left: Life-compatible range for α (anthropic selection). Right: Numerical
-            comparison of 1/α and Ω-related expressions.</figcaption>
-    </figure>
+                        <figure>
+                            <img src="assets/fine_structure.png" alt="Fine Structure">
+                            <figcaption><strong>Figure 1:</strong> Left: Life-compatible range for α (anthropic
+                                selection). Right: Numerical
+                                comparison of 1/α and Ω-related expressions.</figcaption>
+                        </figure>
 
-    <h2>2. Conclusion</h2>
-    <div class="conclusion-box">
-        <strong>🟡 Suggestive but Not Proven</strong><br>
-        1/α ≈ Ω + Ω/6 is tantalizingly close.<br>
-        Full derivation requires understanding how EM coupling emerges from topology.
-    </div>
-<div class="references"><h2>References</h2>
-        <ol>
-            <li>Feynman, R. P. (1985). <em>QED: The Strange Theory of Light and Matter</em>.</li>
-            <li>Fulber, D. H. M. (2025). <em>TARDIS Framework</em>. ToE Project.</li>
-        </ol></div>
-    </div>
+                        <h2>2. Conclusion</h2>
+                        <div class="conclusion-box">
+                            <strong>🟡 Suggestive but Not Proven</strong><br>
+                            1/α ≈ Ω + Ω/6 is tantalizingly close.<br>
+                            Full derivation requires understanding how EM coupling emerges from topology.
+                        </div>
+                        <div class="references">
+                            <h2>References</h2>
+                            <ol>
+                                <li>Feynman, R. P. (1985). <em>QED: The Strange Theory of Light and Matter</em>.</li>
+                                <li>Fulber, D. H. M. (2025). <em>TAMESIS Framework</em>. ToE Project.</li>
+                            </ol>
+                        </div>
+                    </div>
 </body>
+
 </html>

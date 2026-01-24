@@ -17,7 +17,7 @@ The electron IS the MOUTH of a micro-wormhole:
 - Stabilized by spin (to be derived here)
 - Connecting either:
   a) Two points in same universe (local dipole)
-  b) Our TARDIS universe to "parent" (topological anchor)
+  b) Our TAMESIS universe to "parent" (topological anchor)
 
 Key Prediction:
 ---------------
@@ -51,7 +51,7 @@ LP = np.sqrt(G * HBAR / C**3)
 TP = np.sqrt(HBAR * G / C**5)
 MP = np.sqrt(HBAR * C / G)
 
-# TARDIS + Electron Parameters
+# TAMESIS + Electron Parameters
 TARDIS_GAMMA = 117.038
 M_ELECTRON = 9.1093837015e-31
 COMPTON_LENGTH = HBAR / (M_ELECTRON * C)
@@ -467,7 +467,7 @@ def analyze_wormhole_destination():
     
     Option B: Topological Anchor
     ----------------------------
-    Connects our TARDIS universe to "parent" or bulk
+    Connects our TAMESIS universe to "parent" or bulk
     Implications:
     - Electron is stable (anchor to larger structure)
     - Charge is "leakage" of flux to parent
@@ -491,7 +491,7 @@ def analyze_wormhole_destination():
     print(f"   - Annihilation = wormhole collapse")
     
     print(f"\n Option B: TOPOLOGICAL ANCHOR")
-    print(f"   - Connects our TARDIS to parent/bulk universe")
+    print(f"   - Connects our TAMESIS to parent/bulk universe")
     print(f"   - Electron is stable anchor point")
     print(f"   - Mass/charge are tension/leakage from parent")
     
@@ -508,7 +508,7 @@ def analyze_wormhole_destination():
     print(f"   pair creation/annihilation processes.")
     print(f"   ")
     print(f"   Metaphor: The electron is like a thread sewing our")
-    print(f"   TARDIS universe to its parent fabric. When it meets")
+    print(f"   TAMESIS universe to its parent fabric. When it meets")
     print(f"   a positron (opposite thread), they annihilate, but")
     print(f"   the fabric remains connected through other threads.")
     
@@ -584,7 +584,7 @@ if __name__ == "__main__":
         f.write("HYPOTHESIS:\n")
         f.write("The electron is the mouth of a micro-wormhole (Einstein-Rosen bridge).\n")
         f.write("Spin 1/2 arises from spinorial (720 deg) topology.\n")
-        f.write("The wormhole connects our TARDIS universe to parent/bulk.\n\n")
+        f.write("The wormhole connects our TAMESIS universe to parent/bulk.\n\n")
         
         f.write("KEY FINDINGS:\n")
         f.write(f"1. Throat Radius: r_0 = {wormhole.r0:.4e} m (classical electron radius)\n")

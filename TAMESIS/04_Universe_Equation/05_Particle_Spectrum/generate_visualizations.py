@@ -28,7 +28,7 @@ def plot_mass_scaling():
     """
     fig, ax = plt.subplots(figsize=(7, 5), facecolor='white')
     
-    # Data from TARDIS knot theory model
+    # Data from TAMESIS knot theory model
     # (Generation, Knot, N, Ideal Length L/D, Observed Mass MeV)
     quarks = [
         {'name': 'Up', 'gen': 1, 'knot': '3_1', 'L_D': 16.37, 'mass': 2.2},

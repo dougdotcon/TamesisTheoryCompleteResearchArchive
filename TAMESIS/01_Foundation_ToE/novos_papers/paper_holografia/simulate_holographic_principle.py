@@ -34,7 +34,7 @@ def create_holographic_visualization():
     ax1.plot_surface(x, y, z, alpha=0.15, color='blue', edgecolor='none')
     
     # Add "information bits" on the boundary (random points)
-    np.random.seed(117)  # TARDIS seed
+    np.random.seed(117)  # TAMESIS seed
     n_bits = 200
     phi = np.random.uniform(0, 2 * np.pi, n_bits)
     theta = np.random.uniform(0, np.pi, n_bits)

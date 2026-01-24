@@ -4,7 +4,7 @@ Teorias derivadas dos resultados da simulação de física fundamental
 
 Baseado nos resultados que confirmaram:
 - Variações de constantes físicas (16-26%)
-- Compressão quântica TARDIS (117,038×)
+- Compressão quântica TAMESIS (117,038×)
 - Estabilidade numérica em 1156 pontos
 """
 
@@ -98,20 +98,20 @@ class ExtendedPhysicsHypotheses:
         """
         HIPÓTESE 2: DOBRAMENTO DA DIMENSÃO TEMPORAL
         
-        A compressão TARDIS pode indicar que o tempo também se "dobra",
+        A compressão TAMESIS pode indicar que o tempo também se "dobra",
         criando múltiplas camadas temporais simultâneas.
         
         Predição: Múltiplas linhas de tempo coexistentes
         """
         results = {
             'hypothesis_name': 'Dobramento da Dimensão Temporal',
-            'theoretical_basis': 'Compressão espacial TARDIS → compressão temporal equivalente',
+            'theoretical_basis': 'Compressão espacial TAMESIS → compressão temporal equivalente',
             'predictions': {},
             'observational_signatures': {},
             'experimental_tests': []
         }
         
-        # Número de camadas temporais baseado na compressão TARDIS
+        # Número de camadas temporais baseado na compressão TAMESIS
         temporal_layers = []
         folding_amplitude = []
         causality_violations = []
@@ -159,14 +159,14 @@ class ExtendedPhysicsHypotheses:
         """
         HIPÓTESE 3: ACOPLAMENTO COM CAMPO DE CONSCIÊNCIA
         
-        Se o universo tem estrutura TARDIS (maior por dentro), pode existir
+        Se o universo tem estrutura TAMESIS (maior por dentro), pode existir
         um campo fundamental que permite observação interna consciente.
         
         Predição: Campo quântico responsável pela consciência observadora
         """
         results = {
             'hypothesis_name': 'Acoplamento com Campo de Consciência',
-            'theoretical_basis': 'Observação interna TARDIS requer campo observador fundamental',
+            'theoretical_basis': 'Observação interna TAMESIS requer campo observador fundamental',
             'predictions': {},
             'observational_signatures': {},
             'experimental_tests': []
@@ -359,7 +359,7 @@ class ExtendedPhysicsHypotheses:
         executive_summary = {
             'total_hypotheses': len(hypotheses),
             'base_results_used': self.base_results,
-            'theoretical_framework': 'Extensões das hipóteses validadas de leis dinâmicas e universo TARDIS',
+            'theoretical_framework': 'Extensões das hipóteses validadas de leis dinâmicas e universo TAMESIS',
             'methodology': 'Derivação matemática baseada em resultados simulacionais confirmados',
             'confidence_level': 'Teórico-especulativo com base empírica',
             'next_steps': [

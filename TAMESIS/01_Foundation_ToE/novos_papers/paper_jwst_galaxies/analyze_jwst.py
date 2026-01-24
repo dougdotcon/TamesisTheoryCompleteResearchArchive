@@ -1,6 +1,6 @@
 """
 JWST Early Galaxies: Does Entropic Gravity Explain ΛCDM Failures?
-Analyzes whether massive early galaxies are consistent with TARDIS.
+Analyzes whether massive early galaxies are consistent with TAMESIS.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -40,7 +40,7 @@ def analyze_jwst_anomaly():
         print(f"  z = {zi:2d}: Age = {ai:.2f} Gyr")
     
     print("\n" + "=" * 50)
-    print("TARDIS/ENTROPIC GRAVITY SOLUTION")
+    print("TAMESIS/ENTROPIC GRAVITY SOLUTION")
     print("=" * 50)
     print("""
     In Entropic Gravity:
@@ -148,7 +148,7 @@ def plot_jwst_comparison():
 if __name__ == "__main__":
     print("=" * 60)
     print("🔭 JWST EARLY GALAXY ANALYSIS")
-    print("   Paper 18: Does ΛCDM Fail? TARDIS Predicts Early Galaxies!")
+    print("   Paper 18: Does ΛCDM Fail? TAMESIS Predicts Early Galaxies!")
     print("=" * 60 + "\n")
     
     results = analyze_jwst_anomaly()
@@ -167,5 +167,5 @@ if __name__ == "__main__":
     This is a PREDICTION, not retrofit:
     Entropic Gravity was published before JWST launched!
     
-    Status: STRONG VALIDATION of TARDIS framework.
+    Status: STRONG VALIDATION of TAMESIS framework.
     """)

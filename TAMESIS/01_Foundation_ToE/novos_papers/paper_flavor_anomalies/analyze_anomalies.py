@@ -1,5 +1,5 @@
 """
-Flavor Anomalies: Can TARDIS Explain g-2 and B-meson Deviations?
+Flavor Anomalies: Can TAMESIS Explain g-2 and B-meson Deviations?
 Analyzes whether topological effects create BSM-like signatures.
 """
 import numpy as np
@@ -13,7 +13,7 @@ G_MINUS_2_DIFF = (G_MINUS_2_EXP - G_MINUS_2_SM) * 1e9  # In 10^-9
 
 def analyze_flavor_anomalies():
     """
-    Analyze flavor physics anomalies in TARDIS framework.
+    Analyze flavor physics anomalies in TAMESIS framework.
     """
     print("🔬 Analyzing Flavor Anomalies...\n")
     
@@ -48,7 +48,7 @@ def analyze_flavor_anomalies():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the topological framework:

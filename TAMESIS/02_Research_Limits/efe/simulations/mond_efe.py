@@ -5,7 +5,7 @@ This module implements the Modified Newtonian Dynamics (MOND) framework
 with the External Field Effect for predicting galaxy rotation curves.
 
 Author: Douglas H. M. Fulber
-Project: EFE Validation (TARDIS Framework)
+Project: EFE Validation (TAMESIS Framework)
 """
 
 import numpy as np

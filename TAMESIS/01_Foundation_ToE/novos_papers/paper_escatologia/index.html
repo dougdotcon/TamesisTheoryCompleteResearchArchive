@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,10 @@
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Computational Eschatology: Hawking Evaporation as the Origin of Cosmic Acceleration</h1>
@@ -105,120 +206,144 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        Abstract not found.
-    </div>
-
-    <div class="content-wrapper">
-<div class="abstract">
-        We propose that the observed accelerated expansion of the universe—attributed to "Dark Energy"—is actually the
-        internal manifestation of Hawking radiation from the perspective of observers trapped inside a cosmological
-        black hole. Using the TARDIS framework with $\Omega = 117.038$, we model the universe as a massive black hole
-        undergoing slow evaporation. The shrinking of the event horizon appears, from the interior perspective, as an
-        accelerating expansion of space. Our calculations yield a remaining lifetime of $\sim 10^{135}$ years, placing
-        us in the early stable phase of cosmic evolution. This framework eliminates the need for an unknown "Dark
-        Energy" field, replacing it with well-understood Hawking thermodynamics.
-        <div class="keywords"><strong>Keywords:</strong> Hawking Radiation, Dark Energy, Black Hole Cosmology, Cosmic
-            Acceleration, TARDIS Framework
-    </div>
-
-    <div class="content-wrapper">
-</div>
-
-    <div class="content-body">
-        <h2>1. Introduction</h2>
-        <p>The discovery of cosmic acceleration in 1998 via Type Ia supernovae observations led to the introduction of
-            "Dark Energy"—a mysterious component comprising ~68% of the universe's energy budget. Despite two decades of
-            research, its physical nature remains unknown.</p>
-        <p>We propose an alternative: <strong>there is no Dark Energy</strong>. What we observe as acceleration is a
-            perspective effect arising from our position inside a slowly evaporating black hole.</p>
-
-        <h2>2. Theoretical Framework</h2>
-        <h3>2.1 The Universe as Black Hole</h3>
-        <p>In the TARDIS framework, the observable universe with mass $M_U \approx 1.5 \times 10^{53}$ kg is the
-            interior of a black hole. The Schwarzschild radius is:</p>
-        <div class="equation-box">
-            $$R_S = \frac{2 G M_U}{c^2} \approx 4.4 \times 10^{26} \text{ m}$$
-        </div>
-        <p>This is remarkably close to the observable universe's radius ($\sim 4.4 \times 10^{26}$ m), supporting the
-            hypothesis.</p>
-
-        <h3>2.2 Hawking Evaporation Rate</h3>
-        <p>Black holes emit Hawking radiation with power:</p>
-        <div class="equation-box">
-            $$P = \frac{\hbar c^6}{15360 \pi G^2 M^2}$$
-        </div>
-        <p>For our universe-mass black hole, this yields an evaporation timescale of:</p>
-        <div class="master-equation">
-            $$\boxed{t_{\text{evap}} \approx 9.01 \times 10^{135} \text{ years}}$$
+        <div class="abstract">
+            Abstract not found.
         </div>
 
-        <h2>3. Results</h2>
-        <figure>
-            <img src="assets/universe_lifetime_plot.png" alt="Universe Lifetime Plot">
-            <figcaption><strong>Figure 1:</strong> Mass evolution of the universe-black hole over cosmic time. The
-                current epoch (marked) shows we are in the early stable phase. Significant mass loss begins only after
-                $\sim 10^{100}$ years.</figcaption>
-        </figure>
+        <div class="content-wrapper">
+            <div class="abstract">
+                Abstract not found.
+            </div>
 
-        <h3>3.1 The Doomsday Clock</h3>
-        <table>
-            <tr>
-                <th>Parameter</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td>Current Mass</td>
-                <td>$1.5 \times 10^{53}$ kg</td>
-            </tr>
-            <tr>
-                <td>Current Age</td>
-                <td>$1.38 \times 10^{10}$ years</td>
-            </tr>
-            <tr class="result-highlight">
-                <td>Time Remaining</td>
-                <td>$9.01 \times 10^{135}$ years</td>
-            </tr>
-            <tr>
-                <td>Phase</td>
-                <td>Early Stable</td>
-            </tr>
-        </table>
-
-        <h2>4. Dark Energy Interpretation</h2>
-        <p>As the black hole evaporates, its event horizon contracts. From the interior perspective, this contraction
-            appears as an <em>expansion</em> of available space. The rate of this apparent expansion accelerates over
-            time, mimicking the effects attributed to Dark Energy.</p>
-        <div class="equation-box">
-            $$\ddot{a} > 0 \iff \dot{M} < 0$$ </div>
-                <p>The "Dark Energy density" $\rho_\Lambda$ is simply the inverse of the horizon area change rate.</p>
-
-                <h2>5. Conclusion</h2>
-                <div class="conclusion-box">
-                    <h3 style="margin:0;">Dark Energy is Hawking Evaporation</h3>
-                    <p style="margin:0.5rem 0 0 0;">
-                        The universe is not being pushed apart by mysterious energy.<br>
-                        <strong>The container is shrinking, and we perceive this as expansion.</strong>
-                    </p>
+            <div class="content-wrapper">
+                <div class="abstract">
+                    Abstract not found.
                 </div>
-<div class="references"><h2>References</h2>
-                    <ol>
-                        <li>Hawking, S. W. (1974). <em>Black hole explosions?</em> Nature 248, 30.</li>
-                        <li>Riess, A. G. et al. (1998). <em>Observational Evidence from Supernovae for an Accelerating
-                                Universe</em>. AJ 116, 1009.</li>
-                        <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and Dynamics</em>. ToE
-                            Project.</li>
-                    </ol></div>
-    </div>
+
+                <div class="content-wrapper">
+                    <div class="abstract">
+                        We propose that the observed accelerated expansion of the universe—attributed to "Dark
+                        Energy"—is actually the
+                        internal manifestation of Hawking radiation from the perspective of observers trapped inside a
+                        cosmological
+                        black hole. Using the TAMESIS framework with $\Omega = 117.038$, we model the universe as a
+                        massive black hole
+                        undergoing slow evaporation. The shrinking of the event horizon appears, from the interior
+                        perspective, as an
+                        accelerating expansion of space. Our calculations yield a remaining lifetime of $\sim 10^{135}$
+                        years, placing
+                        us in the early stable phase of cosmic evolution. This framework eliminates the need for an
+                        unknown "Dark
+                        Energy" field, replacing it with well-understood Hawking thermodynamics.
+                        <div class="keywords"><strong>Keywords:</strong> Hawking Radiation, Dark Energy, Black Hole
+                            Cosmology, Cosmic
+                            Acceleration, TAMESIS Framework
+                        </div>
+
+                        <div class="content-wrapper">
+                        </div>
+
+                        <div class="content-body">
+                            <h2>1. Introduction</h2>
+                            <p>The discovery of cosmic acceleration in 1998 via Type Ia supernovae observations led to
+                                the introduction of
+                                "Dark Energy"—a mysterious component comprising ~68% of the universe's energy budget.
+                                Despite two decades of
+                                research, its physical nature remains unknown.</p>
+                            <p>We propose an alternative: <strong>there is no Dark Energy</strong>. What we observe as
+                                acceleration is a
+                                perspective effect arising from our position inside a slowly evaporating black hole.</p>
+
+                            <h2>2. Theoretical Framework</h2>
+                            <h3>2.1 The Universe as Black Hole</h3>
+                            <p>In the TAMESIS framework, the observable universe with mass $M_U \approx 1.5 \times
+                                10^{53}$ kg is the
+                                interior of a black hole. The Schwarzschild radius is:</p>
+                            <div class="equation-box">
+                                $$R_S = \frac{2 G M_U}{c^2} \approx 4.4 \times 10^{26} \text{ m}$$
+                            </div>
+                            <p>This is remarkably close to the observable universe's radius ($\sim 4.4 \times 10^{26}$
+                                m), supporting the
+                                hypothesis.</p>
+
+                            <h3>2.2 Hawking Evaporation Rate</h3>
+                            <p>Black holes emit Hawking radiation with power:</p>
+                            <div class="equation-box">
+                                $$P = \frac{\hbar c^6}{15360 \pi G^2 M^2}$$
+                            </div>
+                            <p>For our universe-mass black hole, this yields an evaporation timescale of:</p>
+                            <div class="master-equation">
+                                $$\boxed{t_{\text{evap}} \approx 9.01 \times 10^{135} \text{ years}}$$
+                            </div>
+
+                            <h2>3. Results</h2>
+                            <figure>
+                                <img src="assets/universe_lifetime_plot.png" alt="Universe Lifetime Plot">
+                                <figcaption><strong>Figure 1:</strong> Mass evolution of the universe-black hole over
+                                    cosmic time. The
+                                    current epoch (marked) shows we are in the early stable phase. Significant mass loss
+                                    begins only after
+                                    $\sim 10^{100}$ years.</figcaption>
+                            </figure>
+
+                            <h3>3.1 The Doomsday Clock</h3>
+                            <table>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Value</th>
+                                </tr>
+                                <tr>
+                                    <td>Current Mass</td>
+                                    <td>$1.5 \times 10^{53}$ kg</td>
+                                </tr>
+                                <tr>
+                                    <td>Current Age</td>
+                                    <td>$1.38 \times 10^{10}$ years</td>
+                                </tr>
+                                <tr class="result-highlight">
+                                    <td>Time Remaining</td>
+                                    <td>$9.01 \times 10^{135}$ years</td>
+                                </tr>
+                                <tr>
+                                    <td>Phase</td>
+                                    <td>Early Stable</td>
+                                </tr>
+                            </table>
+
+                            <h2>4. Dark Energy Interpretation</h2>
+                            <p>As the black hole evaporates, its event horizon contracts. From the interior perspective,
+                                this contraction
+                                appears as an <em>expansion</em> of available space. The rate of this apparent expansion
+                                accelerates over
+                                time, mimicking the effects attributed to Dark Energy.</p>
+                            <div class="equation-box">
+                                $$\ddot{a} > 0 \iff \dot{M} < 0$$ </div>
+                                    <p>The "Dark Energy density" $\rho_\Lambda$ is simply the inverse of the horizon
+                                        area change rate.</p>
+
+                                    <h2>5. Conclusion</h2>
+                                    <div class="conclusion-box">
+                                        <h3 style="margin:0;">Dark Energy is Hawking Evaporation</h3>
+                                        <p style="margin:0.5rem 0 0 0;">
+                                            The universe is not being pushed apart by mysterious energy.<br>
+                                            <strong>The container is shrinking, and we perceive this as
+                                                expansion.</strong>
+                                        </p>
+                                    </div>
+                                    <div class="references">
+                                        <h2>References</h2>
+                                        <ol>
+                                            <li>Hawking, S. W. (1974). <em>Black hole explosions?</em> Nature 248, 30.
+                                            </li>
+                                            <li>Riess, A. G. et al. (1998). <em>Observational Evidence from Supernovae
+                                                    for an Accelerating
+                                                    Universe</em>. AJ 116, 1009.</li>
+                                            <li>Fulber, D. H. M. (2025). <em>The Holographic Origin of Matter and
+                                                    Dynamics</em>. ToE
+                                                Project.</li>
+                                        </ol>
+                                    </div>
+                            </div>
 </body>
+
 </html>

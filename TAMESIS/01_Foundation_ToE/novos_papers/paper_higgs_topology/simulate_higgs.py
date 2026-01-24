@@ -15,7 +15,7 @@ OMEGA = 117.038
 
 def analyze_higgs_topology():
     """
-    Analyze the Higgs in the TARDIS topological framework.
+    Analyze the Higgs in the TAMESIS topological framework.
     
     Hypothesis: The Higgs is NOT a knot like fermions, but a CONDENSATE
     that provides the "medium" in which knots can exist.
@@ -36,7 +36,7 @@ def analyze_higgs_topology():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the topological framework:
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    The Higgs in TARDIS is NOT a particle like fermions.
+    The Higgs in TAMESIS is NOT a particle like fermions.
     
     Instead:
     1. The Higgs VEV = the holographic compression medium

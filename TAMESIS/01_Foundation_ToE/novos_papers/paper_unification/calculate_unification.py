@@ -29,7 +29,7 @@ def running_coupling_strong(Q):
 def running_coupling_entropic(Q):
     """
     Entropic Gravity coupling running with energy.
-    In TARDIS, gravity becomes stronger at higher energies (unlike GR).
+    In TAMESIS, gravity becomes stronger at higher energies (unlike GR).
     """
     # At Planck scale, α_G → 1
     # The running is governed by Ω
@@ -110,7 +110,7 @@ def plot_running_couplings(results):
     
     # Add annotation
     ax.text(1e16, 1e-5, 
-            "In TARDIS:\nGravity grows with energy\n(unlike standard GR)",
+            "In TAMESIS:\nGravity grows with energy\n(unlike standard GR)",
             fontsize=10, 
             bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.8))
     
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     Key findings:
     
     1. EM and Strong forces cross at ~10^15-16 eV (standard GUT scale)
-    2. In TARDIS, gravity STRENGTHENS with energy (unlike GR)
+    2. In TAMESIS, gravity STRENGTHENS with energy (unlike GR)
     3. All three forces potentially unify near Planck scale
     
     The Ω factor governs the rate at which gravity grows,

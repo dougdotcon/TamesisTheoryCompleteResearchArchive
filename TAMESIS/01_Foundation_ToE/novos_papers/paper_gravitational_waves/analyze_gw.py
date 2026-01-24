@@ -1,6 +1,6 @@
 """
 Gravitational Waves: Can LIGO/Virgo Detect Entropic Signatures?
-Analyzes GW predictions in TARDIS framework.
+Analyzes GW predictions in TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_gw_predictions():
     """
-    Analyze gravitational wave predictions in TARDIS.
+    Analyze gravitational wave predictions in TAMESIS.
     """
     print("🌊 Analyzing Gravitational Wave Predictions...\n")
     
@@ -27,7 +27,7 @@ def analyze_gw_predictions():
     """)
     
     print("=" * 50)
-    print("TARDIS/ENTROPIC GRAVITY PREDICTIONS")
+    print("TAMESIS/ENTROPIC GRAVITY PREDICTIONS")
     print("=" * 50)
     print("""
     Differences at LOW ACCELERATION (a < a₀ ~ 10⁻¹⁰ m/s²):

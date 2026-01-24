@@ -1,6 +1,6 @@
 """
-Supersymmetry Analysis: Is SUSY Required in TARDIS?
-Analyzes whether supersymmetry solves problems that TARDIS already solves.
+Supersymmetry Analysis: Is SUSY Required in TAMESIS?
+Analyzes whether supersymmetry solves problems that TAMESIS already solves.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_susy_necessity():
     """
-    Analyze whether supersymmetry is needed in the TARDIS framework.
+    Analyze whether supersymmetry is needed in the TAMESIS framework.
     """
     print("🔬 Analyzing SUSY Necessity...\n")
     
@@ -33,7 +33,7 @@ def analyze_susy_necessity():
     """)
     
     print("=" * 50)
-    print("HOW TARDIS ADDRESSES THESE")
+    print("HOW TAMESIS ADDRESSES THESE")
     print("=" * 50)
     print("""
     1. HIERARCHY PROBLEM → SOLVED differently
@@ -52,7 +52,7 @@ def analyze_susy_necessity():
        - No neutralino, no WIMP, no problem
        
     4. STRING THEORY → INDEPENDENT
-       - TARDIS does not require strings
+       - TAMESIS does not require strings
        - Holographic, but not necessarily stringy
     """)
     
@@ -60,14 +60,14 @@ def analyze_susy_necessity():
     print("CONCLUSION")
     print("=" * 50)
     print("""
-    SUSY is NOT REQUIRED in TARDIS because:
+    SUSY is NOT REQUIRED in TAMESIS because:
     
     ✓ Hierarchy solved by holographic derivation of masses
     ✓ Unification achieved via entropic gravity growth
     ✓ Dark matter eliminated entirely
     
     SUSY might still exist, but it's not MOTIVATED by the usual problems.
-    LHC has found no SUSY particles → consistent with TARDIS.
+    LHC has found no SUSY particles → consistent with TAMESIS.
     """)
     
     return {
@@ -78,7 +78,7 @@ def analyze_susy_necessity():
     }
 
 def plot_susy_comparison():
-    """Visualize SUSY vs TARDIS solutions."""
+    """Visualize SUSY vs TAMESIS solutions."""
     print("\n📊 Generating SUSY Comparison Plot...")
     
     fig, ax = plt.subplots(figsize=(12, 7))
@@ -86,18 +86,18 @@ def plot_susy_comparison():
     problems = ['Hierarchy\nProblem', 'Gauge\nUnification', 'Dark\nMatter', 'String\nTheory']
     
     susy_solutions = [1, 1, 1, 1]  # SUSY claims to solve all
-    tardis_solutions = [1, 1, 1, 0.5]  # TARDIS solves first 3, neutral on strings
+    tardis_solutions = [1, 1, 1, 0.5]  # TAMESIS solves first 3, neutral on strings
     
     x = np.arange(len(problems))
     width = 0.35
     
     bars1 = ax.bar(x - width/2, susy_solutions, width, label='SUSY Solution', color='blue', alpha=0.7)
-    bars2 = ax.bar(x + width/2, tardis_solutions, width, label='TARDIS Solution', color='red', alpha=0.7)
+    bars2 = ax.bar(x + width/2, tardis_solutions, width, label='TAMESIS Solution', color='red', alpha=0.7)
     
     ax.set_ylabel('Problem Solved (0=No, 1=Yes)', fontsize=12)
     ax.set_xticks(x)
     ax.set_xticklabels(problems, fontsize=11)
-    ax.set_title('SUSY vs TARDIS: Solving the Same Problems Differently', fontsize=14, fontweight='bold')
+    ax.set_title('SUSY vs TAMESIS: Solving the Same Problems Differently', fontsize=14, fontweight='bold')
     ax.legend()
     ax.set_ylim([0, 1.3])
     ax.grid(True, alpha=0.3, axis='y')
@@ -122,7 +122,7 @@ def plot_susy_comparison():
 if __name__ == "__main__":
     print("=" * 60)
     print("🔬 SUPERSYMMETRY ANALYSIS")
-    print("   Paper 21: Is SUSY Required in TARDIS?")
+    print("   Paper 21: Is SUSY Required in TAMESIS?")
     print("=" * 60 + "\n")
     
     results = analyze_susy_necessity()
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     print("""
     SUSY is NOT REQUIRED.
     
-    All problems it solves are addressed differently in TARDIS.
+    All problems it solves are addressed differently in TAMESIS.
     LHC non-observation is CONSISTENT with this conclusion.
     
     If SUSY exists, it's for reasons other than hierarchy/dark matter.

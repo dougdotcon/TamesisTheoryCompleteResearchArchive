@@ -19,7 +19,7 @@
 
 ## 🏆 PROBLEMAS FUNDAMENTAIS RESOLVIDOS
 
-| # | Problema | Solução TARDIS | Paper |
+| # | Problema | Solução TAMESIS | Paper |
 |:-:|:---------|:---------------|:-----:|
 | 1 | **Cosmological Constant (10¹²⁰)** | Λ ~ 1/r_H² | 33 |
 | 2 | **Information Paradox** | Info na fronteira | 34 |
@@ -130,7 +130,7 @@ novos_papers/
 
 ## 🎉 FRAMEWORK COMPLETO
 
-O framework TARDIS agora cobre **TODOS os grandes problemas da física teórica**:
+O framework TAMESIS agora cobre **TODOS os grandes problemas da física teórica**:
 
 - ✅ Dark Matter/Energy
 - ✅ Hierarchy Problem

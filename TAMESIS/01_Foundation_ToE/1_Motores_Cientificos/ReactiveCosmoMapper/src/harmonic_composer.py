@@ -1,6 +1,6 @@
 """
 Harmonic Composer - Psycho-Acoustic Engine
-Generates specific emotional states using TARDIS Gamma Tuning (117 Hz).
+Generates specific emotional states using TAMESIS Gamma Tuning (117 Hz).
 """
 import numpy as np
 import scipy.io.wavfile as wav

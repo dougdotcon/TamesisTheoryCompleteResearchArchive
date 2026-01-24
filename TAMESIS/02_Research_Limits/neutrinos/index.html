@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neutrino Mass from Topological Defects: The Genus-Mass Relation | TARDIS Framework</title>
+    <title>Neutrino Mass from Topological Defects: The Genus-Mass Relation | TAMESIS Framework</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
         /* PRL Style: Two-column layout, compact, Times New Roman */
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
@@ -21,17 +25,20 @@
             padding: 1.5cm;
             background-color: #fff;
         }
+
         .content-wrapper {
             column-count: 2;
             column-gap: 0.8cm;
             text-align: justify;
         }
+
         header {
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #ccc;
         }
+
         h1 {
             font-size: 14pt;
             font-weight: bold;
@@ -39,9 +46,24 @@
             line-height: 1.2;
             text-transform: none;
         }
-        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
-        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
-        .date { font-size: 9pt; color: #666; }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
         .abstract {
             font-weight: bold;
             font-size: 9pt;
@@ -50,6 +72,7 @@
             text-align: justify;
             font-style: italic;
         }
+
         h2 {
             font-size: 10pt;
             font-weight: bold;
@@ -59,6 +82,7 @@
             border-bottom: 1px solid #000;
             break-after: avoid;
         }
+
         h3 {
             font-size: 10pt;
             font-weight: bold;
@@ -66,21 +90,90 @@
             margin-top: 1rem;
             margin-bottom: 0.4rem;
         }
-        p { margin-bottom: 0.8rem; text-indent: 1em; }
-        p.no-indent { text-indent: 0; }
-        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
         /* Specialized Boxes compatibility */
-        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
-        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
-        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
-        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
-        
-        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
-        figure img { width: 100%; border: 1px solid #eee; }
-        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
-        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
-        th { font-weight: bold; border-top: 1px solid #000; }
+        .axiom-box {
+            border-left: 3px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .prediction-box {
+            border: 1px solid #d32f2f;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff5f5;
+        }
+
+        .master-equation {
+            background: #f8f8f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .conclusion-box {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #4caf50;
+            text-align: center;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        figcaption {
+            font-size: 8.5pt;
+            color: #333;
+            margin-top: 0.4rem;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
         .references {
             margin-top: 2rem;
             padding-top: 0.5rem;
@@ -88,10 +181,18 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
-        .references li { margin-bottom: 0.2rem; }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Neutrino Mass from Topological Defects:<br>The Genus-Mass Relation</h1>
@@ -105,103 +206,120 @@
     </div>
 
     <div class="content-wrapper">
-<div class="abstract">
-        The tiny non-zero masses of neutrinos and the phenomenon of flavor oscillation remain explained only by ad-hoc
-        mechanisms
-        in the Standard Model (Seesaw Mechanism). The TARDIS framework proposes a purely topological origin: while
-        charged fermions
-        are Genus-1 wormholes (Tori), neutrinos correspond to higher-genus surfaces (Genus $g \ge 2$). We hypothesize
-        that
-        particle mass scales exponentially with the Euler Characteristic of the manifold ($\chi = 2 - 2g$).
-        Numerical analysis of the observed neutrino mass squared differences ($\Delta m^2$) confirms a scaling law of
-        $M \propto e^{1.76 g}$, suggesting that neutrino generations represent discrete steps in topological complexity.
+        <div class="abstract">
+            The tiny non-zero masses of neutrinos and the phenomenon of flavor oscillation remain explained only by
+            ad-hoc
+            mechanisms
+            in the Standard Model (Seesaw Mechanism). The TAMESIS framework proposes a purely topological origin: while
+            charged fermions
+            are Genus-1 wormholes (Tori), neutrinos correspond to higher-genus surfaces (Genus $g \ge 2$). We
+            hypothesize
+            that
+            particle mass scales exponentially with the Euler Characteristic of the manifold ($\chi = 2 - 2g$).
+            Numerical analysis of the observed neutrino mass squared differences ($\Delta m^2$) confirms a scaling law
+            of
+            $M \propto e^{1.76 g}$, suggesting that neutrino generations represent discrete steps in topological
+            complexity.
 
-        <div style="font-size: 9pt; margin-top: 0.75rem; font-style: italic;">
-            <strong>Keywords:</strong> Neutrino Mass, Topology Change, Genus, Euler Characteristic, Flavor Oscillation
-    </div>
+            <div style="font-size: 9pt; margin-top: 0.75rem; font-style: italic;">
+                <strong>Keywords:</strong> Neutrino Mass, Topology Change, Genus, Euler Characteristic, Flavor
+                Oscillation
+            </div>
 
-    <div class="content-wrapper">
-</div>
+            <div class="content-wrapper">
+            </div>
 
-    <h2>1. Introduction</h2>
+            <h2>1. Introduction</h2>
 
-    <p class="no-indent">Why are neutrinos $10^6$ times lighter than electrons? And what is "flavor"?
-        In geometric theories of matter (like Geometrodynamics), particle properties must arise from the shape of space.
-    </p>
+            <p class="no-indent">Why are neutrinos $10^6$ times lighter than electrons? And what is "flavor"?
+                In geometric theories of matter (like Geometrodynamics), particle properties must arise from the shape
+                of space.
+            </p>
 
-    <p>We propose that the lepton family is a hierarchy of topological handles:</p>
-    <ul>
-        <li><strong>Electron:</strong> Genus-1 (Single Handle). High Tension.</li>
-        <li><strong>Neutrinos:</strong> Genus-$g$ (Multiple Handles). Mass Dilution.</li>
-    </ul>
+            <p>We propose that the lepton family is a hierarchy of topological handles:</p>
+            <ul>
+                <li><strong>Electron:</strong> Genus-1 (Single Handle). High Tension.</li>
+                <li><strong>Neutrinos:</strong> Genus-$g$ (Multiple Handles). Mass Dilution.</li>
+            </ul>
 
-    <h2>2. The Genus Hypothesis</h2>
+            <h2>2. The Genus Hypothesis</h2>
 
-    <div class="master-equation">
-        $$ M_g \approx M_0 \exp\left( \alpha \cdot (2 - 2g) \right) $$
-        <p style="font-size: 10pt; margin: 0.5rem 0 0 0;">Mass depends on Euler Characteristic $\chi$</p>
-    </div>
+            <div class="master-equation">
+                $$ M_g \approx M_0 \exp\left( \alpha \cdot (2 - 2g) \right) $$
+                <p style="font-size: 10pt; margin: 0.5rem 0 0 0;">Mass depends on Euler Characteristic $\chi$</p>
+            </div>
 
-    <p>Adding handles to a compact surface changes its global rigidity. If neutrinos are closed vacuum surfaces (unlike
-        charged open wormholes),
-        increasing the genus might increase or decrease the effective mass depending on the energy functional.</p>
+            <p>Adding handles to a compact surface changes its global rigidity. If neutrinos are closed vacuum surfaces
+                (unlike
+                charged open wormholes),
+                increasing the genus might increase or decrease the effective mass depending on the energy functional.
+            </p>
 
-    <h2>3. Numerical Analysis</h2>
+            <h2>3. Numerical Analysis</h2>
 
-    <p class="no-indent">We assumed the normal mass ordering and assigned integer Genera to the mass eigenstates ($\nu_2
-        \to g=2, \nu_3 \to g=3$).</p>
+            <p class="no-indent">We assumed the normal mass ordering and assigned integer Genera to the mass eigenstates
+                ($\nu_2
+                \to g=2, \nu_3 \to g=3$).</p>
 
-    <figure>
-        <img src="analysis/genus_mass_fit.png" alt="Genus Mass Fit">
-        <figcaption><strong>Figure 1:</strong> Neutrino Mass vs Topological Genus.
-            The ratio between the third and second mass eigenstate fits an exponential curve $M \sim e^{\alpha g}$ with
-            slope $\alpha \approx 1.76$.
-            This is remarkably close to the topological step size of $|\Delta \chi| = 2$.</figcaption>
-    </figure>
+            <figure>
+                <img src="analysis/genus_mass_fit.png" alt="Genus Mass Fit">
+                <figcaption><strong>Figure 1:</strong> Neutrino Mass vs Topological Genus.
+                    The ratio between the third and second mass eigenstate fits an exponential curve $M \sim e^{\alpha
+                    g}$ with
+                    slope $\alpha \approx 1.76$.
+                    This is remarkably close to the topological step size of $|\Delta \chi| = 2$.</figcaption>
+            </figure>
 
-    <h3>3.1 Results</h3>
-    <table>
-        <tr>
-            <th>Eigenstate</th>
-            <th>Proposed Genus</th>
-            <th>Euler ($\chi$)</th>
-            <th>Mass (approx)</th>
-        </tr>
-        <tr>
-            <td>$\nu_2$ (Solar)</td>
-            <td>2</td>
-            <td>-2</td>
-            <td>$0.0086$ eV</td>
-        </tr>
-        <tr>
-            <td>$\nu_3$ (Atmos)</td>
-            <td>3</td>
-            <td>-4</td>
-            <td>$0.050$ eV</td>
-        </tr>
-    </table>
+            <h3>3.1 Results</h3>
+            <table>
+                <tr>
+                    <th>Eigenstate</th>
+                    <th>Proposed Genus</th>
+                    <th>Euler ($\chi$)</th>
+                    <th>Mass (approx)</th>
+                </tr>
+                <tr>
+                    <td>$\nu_2$ (Solar)</td>
+                    <td>2</td>
+                    <td>-2</td>
+                    <td>$0.0086$ eV</td>
+                </tr>
+                <tr>
+                    <td>$\nu_3$ (Atmos)</td>
+                    <td>3</td>
+                    <td>-4</td>
+                    <td>$0.050$ eV</td>
+                </tr>
+            </table>
 
-    <p>Observed Ratio: $5.8$. Predicted Ratio ($e^2$): $7.39$.
-        The proximity suggests the underlying mechanism is indeed related to the discrete counting of topological holes.
-    </p>
+            <p>Observed Ratio: $5.8$. Predicted Ratio ($e^2$): $7.39$.
+                The proximity suggests the underlying mechanism is indeed related to the discrete counting of
+                topological holes.
+            </p>
 
-    <h2>4. Conclusion</h2>
+            <h2>4. Conclusion</h2>
 
-    <p class="no-indent">Neutrino oscillations are not just mixing of "flavors"; they are real-time <strong>Topology
-            Change Events</strong>.</p>
+            <p class="no-indent">Neutrino oscillations are not just mixing of "flavors"; they are real-time
+                <strong>Topology
+                    Change Events</strong>.</p>
 
-    <ul>
-        <li>A neutrino propagating through space is a quantum superposition of geometries ($g=2$ and $g=3$).</li>
-        <li>The interaction with matter collapses this topology to a specific flavor state.</li>
-        <li>The lightness of neutrinos is due to their distinct topological class (Higher Genus / Closed Surface)
-            compared to charged matter.</li>
-    </ul>
-<div class="references"><h2>References</h2>
-        <ol>
-            <li>Bilson-Thompson, S. O. (2005). <em>A Topological Model of Composite Preons</em>.</li>
-            <li>Witten, E. (1988). <em>Topological Quantum Field Theory</em>.</li>
-            <li>Fulber, D. (2026). <em>TARDIS Framework: Neutrino Topology</em>. Zenodo.</li>
-        </ol></div>
-    </div>
+            <ul>
+                <li>A neutrino propagating through space is a quantum superposition of geometries ($g=2$ and $g=3$).
+                </li>
+                <li>The interaction with matter collapses this topology to a specific flavor state.</li>
+                <li>The lightness of neutrinos is due to their distinct topological class (Higher Genus / Closed
+                    Surface)
+                    compared to charged matter.</li>
+            </ul>
+            <div class="references">
+                <h2>References</h2>
+                <ol>
+                    <li>Bilson-Thompson, S. O. (2005). <em>A Topological Model of Composite Preons</em>.</li>
+                    <li>Witten, E. (1988). <em>Topological Quantum Field Theory</em>.</li>
+                    <li>Fulber, D. (2026). <em>TAMESIS Framework: Neutrino Topology</em>. Zenodo.</li>
+                </ol>
+            </div>
+        </div>
 </body>
+
 </html>

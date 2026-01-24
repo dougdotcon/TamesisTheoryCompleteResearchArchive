@@ -7,7 +7,7 @@ class ConstantDerivator:
     """
     
     def __init__(self):
-        self.gamma_tardis = 117.038 # As defined in TARDIS framework
+        self.gamma_tardis = 117.038 # As defined in TAMESIS framework
         self.pi = np.pi
         
     def derive_alpha_candidates(self):
@@ -75,7 +75,7 @@ class ConstantDerivator:
         val = gamma + 20 + (1/(4*self.pi))
         candidates.append(("Gamma + 20 + 1/4pi", val))
         
-        # The TARDIS Standard Relation:
+        # The TAMESIS Standard Relation:
         # Alpha^-1 = Gamma + Volume_S3(Approx) + Loop(Entropy)
         
         return candidates

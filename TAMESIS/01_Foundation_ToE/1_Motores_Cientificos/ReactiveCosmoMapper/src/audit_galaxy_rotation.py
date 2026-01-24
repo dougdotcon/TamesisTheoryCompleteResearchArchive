@@ -1,7 +1,7 @@
 """
 AUDIT SCRIPT: GALAXY ROTATION CURVE (DARK MATTER REPLACEMENT)
 =============================================================
-Objective: Verify if TARDIS/Entropic Gravity explains galaxy rotation 
+Objective: Verify if TAMESIS/Entropic Gravity explains galaxy rotation 
            curves without Dark Matter.
 
 Test Case: NGC 6503 (Spiral Galaxy)
@@ -12,7 +12,7 @@ Approximate Parameters for NGC 6503:
 - Test Radius: 20 kpc
 - Observed Velocity: ~116 km/s
 
-Newtonian Prediction vs TARDIS Prediction
+Newtonian Prediction vs TAMESIS Prediction
 """
 
 import numpy as np
@@ -52,13 +52,13 @@ def audit_rotation():
     error_newton = abs(v_newton_kms - V_OBSERVED_KMS) / V_OBSERVED_KMS * 100
     print(f"    Error: {error_newton:.2f}% (Too slow!)")
     
-    # 2. TARDIS Prediction (Entropic Gravity / MOND)
+    # 2. TAMESIS Prediction (Entropic Gravity / MOND)
     # Using the Engine
     engine = ReactiveGravity(a0=1.2e-10)
     v_tardis_kms = engine.calculate_velocity(mass_kg, radius_m)
     
     print("-" * 40)
-    print(f"[2] TARDIS/Entropic Prediction:")
+    print(f"[2] TAMESIS/Entropic Prediction:")
     print(f"    v = {v_tardis_kms:.2f} km/s")
     error_tardis = abs(v_tardis_kms - V_OBSERVED_KMS) / V_OBSERVED_KMS * 100
     print(f"    Error: {error_tardis:.2f}%")
@@ -67,10 +67,10 @@ def audit_rotation():
     
     # Conclusion
     if error_tardis < 10.0 and error_newton > 30.0:
-        print("\n[SUCCESS] TARDIS explains the rotation curve without Dark Matter.")
+        print("\n[SUCCESS] TAMESIS explains the rotation curve without Dark Matter.")
         print(f"          Improvement factor: {error_newton/error_tardis:.1f}x better than Newton.")
     else:
-        print("\n[FAILURE] TARDIS failed to match observation significantly better.")
+        print("\n[FAILURE] TAMESIS failed to match observation significantly better.")
 
 if __name__ == "__main__":
     audit_rotation()

@@ -36,10 +36,10 @@ def audit_origin():
         # Check geometric significance (should be close to integer/fraction)
         # We saw alpha ~ -40.23 in previous steps
         if abs(alpha + 40.23) < 0.1:
-            print("    [PASS] Fractal scaling consistent with TARDIS prediction.")
+            print("    [PASS] Fractal scaling consistent with TAMESIS prediction.")
             score1 = True
         else:
-            print("    [WARN] Scaling exponent deviates from TARDIS standard.")
+            print("    [WARN] Scaling exponent deviates from TAMESIS standard.")
             score1 = False
     except Exception as e:
         print(f"    [FAIL] Script crashed: {e}")

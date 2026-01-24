@@ -48,7 +48,7 @@ We validated our theoretical prediction against real-world experimental data fro
 
 ## The Theory
 
-In the TARDIS framework, spacetime is an emergent information structure. A quantum superposition of mass $M$ separated by distance $\Delta x$ creates an ambiguity in the spacetime metric. The predicted critical threshold is related to the Planck scale resolution of the horizon.
+In the TAMESIS framework, spacetime is an emergent information structure. A quantum superposition of mass $M$ separated by distance $\Delta x$ creates an ambiguity in the spacetime metric. The predicted critical threshold is related to the Planck scale resolution of the horizon.
 
 ## Files
 

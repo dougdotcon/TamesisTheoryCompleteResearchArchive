@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Physical Constants
-OMEGA = 117.038  # TARDIS compression factor
+OMEGA = 117.038  # TAMESIS compression factor
 M_ELECTRON = 9.10938e-31  # kg
 M_UNIVERSE = 1.5e53  # kg
 
@@ -235,7 +235,7 @@ def save_report(results):
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("NEUTRINO TOPOLOGY SIMULATION REPORT\n")
         f.write("=" * 40 + "\n\n")
-        f.write(f"TARDIS Framework - January 2026\n\n")
+        f.write(f"TAMESIS Framework - January 2026\n\n")
         f.write(f"Alpha Exponent (neutrino): {results['alpha_neutrino']:.4f}\n")
         f.write(f"Alpha Exponent (electron): {ALPHA_ELECTRON}\n\n")
         f.write("Predicted Masses (Normal Hierarchy):\n")

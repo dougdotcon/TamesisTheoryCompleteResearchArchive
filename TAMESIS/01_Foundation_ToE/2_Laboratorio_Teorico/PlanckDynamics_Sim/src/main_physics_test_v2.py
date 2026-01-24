@@ -324,7 +324,7 @@ class PhysicsTestSystemV3:
     
     def tardis_compression_model(self, time: float) -> float:
         """
-        Modelo de compressão quântica TARDIS - Versão Aprimorada
+        Modelo de compressão quântica TAMESIS - Versão Aprimorada
 
         Implementa o modelo de compressão espaço-temporal que permite ao universo
         ser maior por dentro que por fora, baseado em princípios de física quântica
@@ -412,7 +412,7 @@ class PhysicsTestSystemV3:
         # Parâmetro de Hubble regularizado
         H = np.clip(a_dot / a, -1e4, 1e4)
         
-        # Compressão TARDIS
+        # Compressão TAMESIS
         compression = self.tardis_compression_model(t)
         tardis_factor = 1.0 / np.sqrt(compression + self.config.epsilon)
         
@@ -426,7 +426,7 @@ class PhysicsTestSystemV3:
         acceleration = -4 * np.pi * G * a * rho_effective / (3 * c**2)
         acceleration = np.clip(acceleration, -1e4, 1e4)
         
-        # Aplicar correção TARDIS
+        # Aplicar correção TAMESIS
         d2a_dt2 = acceleration * tardis_factor
         
         # 3. drho/dt (conservação de energia)
@@ -812,8 +812,8 @@ class PhysicsTestSystemV3:
                     self.get_dynamic_constant(base_value, t, const_name) for t in times
                 ])
             
-            # Calcular compressão TARDIS
-            self.logger.info("Calculando compressão quântica TARDIS...")
+            # Calcular compressão TAMESIS
+            self.logger.info("Calculando compressão quântica TAMESIS...")
             tardis_compression = np.array([
                 self.tardis_compression_model(t) for t in times
             ])
@@ -919,7 +919,7 @@ class PhysicsTestSystemV3:
             max_variation = np.max(np.abs(values - base_value)) / base_value
             metrics[f"Δ{const_name}/Max"] = ".3f"
 
-        # Compressão TARDIS
+        # Compressão TAMESIS
         final_compression = results.tardis_compression[-1]
         metrics["Compressão Final"] = ".1f"
 
@@ -977,8 +977,8 @@ class PhysicsTestSystemV3:
             ax1.grid(True, alpha=0.3)
             ax1.set_xscale('log')
 
-            # Gráfico 2: Compressão TARDIS
-            ax2.set_title('Compressão Quântica TARDIS', fontweight='bold')
+            # Gráfico 2: Compressão TAMESIS
+            ax2.set_title('Compressão Quântica TAMESIS', fontweight='bold')
             ax2.plot(times, results.tardis_compression, 'purple', linewidth=3,
                     label=f'Fator Final: {results.tardis_compression[-1]:.1f}')
             ax2.set_xlabel('Tempo (unidades Planck)')
@@ -1062,8 +1062,8 @@ class PhysicsTestSystemV3:
             ax1.grid(True, alpha=0.3)
             ax1.set_xscale('log')
 
-            # Gráfico 2: Compressão TARDIS
-            ax2.set_title('Compressão Quântica TARDIS', fontweight='bold')
+            # Gráfico 2: Compressão TAMESIS
+            ax2.set_title('Compressão Quântica TAMESIS', fontweight='bold')
             ax2.plot(times, tardis_compression, 'purple', linewidth=3,
                     label=f'Fator Final: {tardis_compression[-1]:.1f}')
             ax2.set_xlabel('Tempo (unidades Planck)')
@@ -1292,7 +1292,7 @@ class PhysicsTestSystemV3:
 
             # Interpretação unificada
             analysis['unified_interpretation'] = {
-                'framework': 'Dynamic Physical Laws + TARDIS Universe',
+                'framework': 'Dynamic Physical Laws + TAMESIS Universe',
                 'key_insight': 'Constantes físicas variam em eventos supercosmicos',
                 'implications': [
                     'Nova compreensão da física fundamental',
@@ -1389,7 +1389,7 @@ class PhysicsTestSystemV3:
         dynamic_supported = any(r['max_variation_percent'] > 1.0 for r in dynamic_results.values())
         most_variable = max(dynamic_results.keys(), key=lambda k: dynamic_results[k]['max_variation_percent'])
         
-        # Hipótese 2: Universo TARDIS
+        # Hipótese 2: Universo TAMESIS
         compression_growth = compression_ratios[-1] / compression_ratios[0]
         scale_growth = scale_factors[-1] / scale_factors[0]
         tardis_supported = compression_growth > 5.0  # Critério relaxado
@@ -1425,8 +1425,8 @@ class PhysicsTestSystemV3:
         ax1.legend()
         ax1.grid(True, alpha=0.3)
         
-        # 2. Modelo TARDIS
-        ax2.set_title('Modelo TARDIS - Compressão vs Expansão', fontweight='bold')
+        # 2. Modelo TAMESIS
+        ax2.set_title('Modelo TAMESIS - Compressão vs Expansão', fontweight='bold')
         ax2.loglog(times, compression_ratios, 'r-', label='Compressão Quântica', linewidth=3)
         ax2.loglog(times, scale_factors / scale_factors[0], 'b--', label='Fator de Escala', linewidth=2)
         ax2.set_xlabel('Tempo (unidades de Planck)')
@@ -1450,7 +1450,7 @@ class PhysicsTestSystemV3:
         
         ax4.text(0.1, 0.8, f'Leis Dinâmicas: {dynamic_status}', fontsize=12, 
                 color='green' if hypothesis_results['dynamic_constants']['supported'] else 'red')
-        ax4.text(0.1, 0.7, f'Universo TARDIS: {tardis_status}', fontsize=12,
+        ax4.text(0.1, 0.7, f'Universo TAMESIS: {tardis_status}', fontsize=12,
                 color='green' if hypothesis_results['tardis_universe']['supported'] else 'red')
         
         # Mostrar variações
@@ -1486,7 +1486,7 @@ class PhysicsTestSystemV3:
         for const, data in hyp['dynamic_constants']['variations'].items():
             print(f"  • {const}: {data['max_variation_percent']:.1f}% de variação máxima")
             
-        print(f"\n🌌 HIPÓTESE 2: UNIVERSO TARDIS")
+        print(f"\n🌌 HIPÓTESE 2: UNIVERSO TAMESIS")
         print(f"Status: {'✅ SUPORTADA' if hyp['tardis_universe']['supported'] else '❌ NÃO SUPORTADA'}")
         print(f"Crescimento da compressão: {hyp['tardis_universe']['compression_growth']:.1f}x")
         print(f"Crescimento do fator de escala: {hyp['tardis_universe']['scale_growth']:.2e}")
@@ -1501,9 +1501,9 @@ class PhysicsTestSystemV3:
         if both_supported:
             print("🎉 AMBAS AS HIPÓTESES FORAM VALIDADAS NA SIMULAÇÃO V2.0!")
         elif hyp['dynamic_constants']['supported']:
-            print("⚡ Leis dinâmicas confirmadas, TARDIS requer mais investigação")
+            print("⚡ Leis dinâmicas confirmadas, TAMESIS requer mais investigação")
         elif hyp['tardis_universe']['supported']:
-            print("🌌 Universo TARDIS confirmado, leis dinâmicas requerem mais investigação")
+            print("🌌 Universo TAMESIS confirmado, leis dinâmicas requerem mais investigação")
         else:
             print("🔧 Ambas requerem refinamento adicional")
 

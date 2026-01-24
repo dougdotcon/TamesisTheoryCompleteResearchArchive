@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 def plot_wormhole_topology():
     """
     Visualizes the topological difference between a standard particle (Sphere/Genus-0)
-    and a TARDIS spinor particle (Torus/Genus-1 Wormhole).
+    and a TAMESIS spinor particle (Torus/Genus-1 Wormhole).
     """
     fig = plt.figure(figsize=(12, 6))
 
@@ -53,7 +53,7 @@ def plot_wormhole_topology():
     z2 = r * np.sin(np.pi/2) * np.ones_like(theta)
     ax2.plot(x2, y2, z2, 'g-', lw=3, label='Spin Loop (chirality)')
 
-    ax2.set_title("TARDIS Fermion\n(Wormhole: Genus-1)\nSpin-1/2", fontsize=12)
+    ax2.set_title("TAMESIS Fermion\n(Wormhole: Genus-1)\nSpin-1/2", fontsize=12)
     ax2.axis('off')
     ax2.legend()
     

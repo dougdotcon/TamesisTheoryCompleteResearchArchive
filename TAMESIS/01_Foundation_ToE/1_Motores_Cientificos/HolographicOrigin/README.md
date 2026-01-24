@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: Complete](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
-[![Framework: TARDIS/PlanckDynamics](https://img.shields.io/badge/Framework-TARDIS%2FPlanckDynamics-purple.svg)]()
+[![Framework: TAMESIS/PlanckDynamics](https://img.shields.io/badge/Framework-TAMESIS%2FPlanckDynamics-purple.svg)]()
 [![Python: 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)]()
 [![arXiv: Pending](https://img.shields.io/badge/arXiv-Pending-orange.svg)]()
 
@@ -34,7 +34,7 @@ This repository presents a complete unified theory of fundamental physics based 
 Omega = 117.038
 ```
 
-The TARDIS/PlanckDynamics framework demonstrates that all fundamental properties of matter (mass, charge, spin) and all fundamental forces (gravitational, electromagnetic, strong) emerge from holographic thermodynamics and topological constraints.
+The TAMESIS/PlanckDynamics framework demonstrates that all fundamental properties of matter (mass, charge, spin) and all fundamental forces (gravitational, electromagnetic, strong) emerge from holographic thermodynamics and topological constraints.
 
 Most significantly, the Schrodinger equation is derived from first principles as the hydrodynamic evolution of information density on the cosmological horizon, without assuming quantum mechanics a priori.
 
@@ -148,7 +148,7 @@ The Schrodinger equation emerges from holographic thermodynamics without assumin
 
 ## Theoretical Framework
 
-### The TARDIS Compression Factor
+### The TAMESIS Compression Factor
 
 The compression factor Omega emerges from the ratio of effective to standard Planck areas:
 
@@ -226,7 +226,7 @@ A TEORIA DE TUDO/
 
 | Engine | Lines | Purpose |
 |--------|-------|---------|
-| `lepton_generations.py` | ~450 | Analyzes lepton mass hierarchy using TARDIS scaling |
+| `lepton_generations.py` | ~450 | Analyzes lepton mass hierarchy using TAMESIS scaling |
 | `loop_correction_engine.py` | ~600 | Analyzes force amplitude and proves no 10^10 error |
 | `topological_knot_solver.py` | ~700 | Maps quarks to topological knots, derives alpha_s |
 | `holographic_time_solver.py` | ~700 | Derives Schrodinger equation from thermodynamics |
@@ -292,7 +292,7 @@ All computational proofs have been executed and verified.
 - **Detailed Logs:** See `results/*.txt`
 - **Visual Proofs:** See `results/tardis_remnant_analysis.png`
 
-![TARDIS Remnant Verification](results/tardis_remnant_analysis.png)
+![TAMESIS Remnant Verification](results/tardis_remnant_analysis.png)
 
 ### Viewing the Paper
 
@@ -400,7 +400,7 @@ If you use this work in your research, please cite:
   author={Fulber, Douglas H. M.},
   year={2025},
   institution={Federal University of Rio de Janeiro},
-  note={TARDIS: The Theory of Everything v1.0}
+  note={TAMESIS: The Theory of Everything v1.0}
 }
 ```
 

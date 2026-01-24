@@ -31,13 +31,13 @@ In this Letter, we propose a radically different approach based on three foundat
 
 2. **The Holographic Principle** [7,8]: The information content of a volume is encoded on its boundary, with each bit occupying the Planck area $l_P^2$.
 
-3. **The TARDIS Metric Compression**: A cosmologically-derived compression factor $\Omega = 117.038$ that rescales the effective Planck area in our observable universe [9].
+3. **The TAMESIS Metric Compression**: A cosmologically-derived compression factor $\Omega = 117.038$ that rescales the effective Planck area in our observable universe [9].
 
 We show that these principles, combined with the ER=EPR conjecture [10], yield the electron's mass, charge, and spin with unprecedented precision—essentially **zero error** for all three properties.
 
 ---
 
-## II. The TARDIS Compression Factor
+## II. The TAMESIS Compression Factor
 
 ### Cosmological Origin
 
@@ -111,7 +111,7 @@ While gravity emerges from the gradient of entropy ($\nabla S$), we propose that
 
 This unifies the two forces as different geometric operations on the same underlying entropy distribution.
 
-### The TARDIS-Alpha Connection
+### The TAMESIS-Alpha Connection
 
 Testing the relationship between $\alpha$ and $\Omega$:
 
@@ -192,7 +192,7 @@ Our three derivations share a common geometric foundation:
 | Charge | $\alpha^{-1} = \Omega^{1.03}$ | Entropic vorticity | 0.003% |
 | Spin | $S = \text{genus} \times \hbar/2$ | Wormhole topology | 0.000% |
 
-The electron emerges as a **topological anchor**—a micro-wormhole connecting our TARDIS universe to its parent holographic structure.
+The electron emerges as a **topological anchor**—a micro-wormhole connecting our TAMESIS universe to its parent holographic structure.
 
 ### Limitation: Coulomb Force Amplitude
 
@@ -260,7 +260,7 @@ Preliminary analysis suggests $\gamma_\mu \approx 1.1$, consistent with $m_\mu/m
 
 [8] L. Susskind, "The World as a Hologram," J. Math. Phys. **36**, 6377 (1995).
 
-[9] TARDIS: The Theory of Everything, "Validation of the TARDIS Metric Compression," Technical Report (2025).
+[9] TAMESIS: The Theory of Everything, "Validation of the TAMESIS Metric Compression," Technical Report (2025).
 
 [10] J. Maldacena and L. Susskind, "Cool horizons for entangled black holes," Fortschr. Phys. **61**, 781 (2013).
 
@@ -290,7 +290,7 @@ Code available at: [Repository URL]
 | $e$ | $1.602176634 \times 10^{-19}$ C | CODATA 2018 |
 | $\alpha^{-1}$ | $137.035999084$ | CODATA 2018 |
 
-### C. The TARDIS Parameter
+### C. The TAMESIS Parameter
 
 The compression factor $\Omega = 117.038$ was derived from:
 
@@ -309,7 +309,7 @@ It is stored in the project's `constants.json` with associated uncertainty bound
 
 ## Acknowledgments
 
-We thank the  System for computational assistance and the TARDIS: The Theory of Everything for theoretical framework development.
+We thank the  System for computational assistance and the TAMESIS: The Theory of Everything for theoretical framework development.
 
 ---
 

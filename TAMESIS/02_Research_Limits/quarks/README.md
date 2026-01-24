@@ -10,7 +10,7 @@ To derive the mysterious mass hierarchy of quarks (e.g., Why is Top quark so hea
 
 ## 1. The Hypothesis: Mass ~ Complexity
 
-In TARDIS, particles are stable topological solitons (knots) in the vacuum field.
+In TAMESIS, particles are stable topological solitons (knots) in the vacuum field.
 We hypothesize that the mass $M$ scales exponentially with the **Ideal Rope Length ($L/D$)** of the knot.
 $$ M \approx M_0 e^{\alpha (L/D)} $$
 

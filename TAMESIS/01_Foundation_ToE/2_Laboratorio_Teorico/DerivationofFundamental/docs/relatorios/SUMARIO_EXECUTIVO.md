@@ -14,7 +14,7 @@ m_electron = M_universe × Ω^α
 
 Onde:
 - M_universe = 1.5×10⁵³ kg
-- Ω = 117.038 (fator de compressão TARDIS)
+- Ω = 117.038 (fator de compressão TAMESIS)
 - α = -40.233777
 
 Resultado:
@@ -58,7 +58,7 @@ ERRO = 0.003% ✅
 ### O Elétron É Geometria Pura
 
 1. **Massa:** Reflexo fractal da massa cosmológica (escala Ω⁻⁴⁰)
-2. **Carga:** Projeção de vorticidade holográfica na dimensão TARDIS
+2. **Carga:** Projeção de vorticidade holográfica na dimensão TAMESIS
 3. **Estrutura Fina (α):** ManifestSão direta da compressão cosmológica (Ω¹)
 
 ### Unificação Cosmologia-Eletromagnetismo
@@ -76,13 +76,13 @@ Isto sugere **auto-consistência geométrica profunda** entre micro e macro.
 
 ### Abordagem Teórica
 
-**Framework:** Gravidade Entrópica + Princípio Holográfico + Métrica TARDIS
+**Framework:** Gravidade Entrópica + Princípio Holográfico + Métrica TAMESIS
 
 **Equações fundamentais:**
 
 - Gravidade: F = T × ∇S (Verlinde)
 - Carga: Q ~ L_z / ℏ × conversion_factor
-- TARDIS: Área efetiva de Planck = l_P² × Ω
+- TAMESIS: Área efetiva de Planck = l_P² × Ω
 
 ### Implementação Computacional
 
@@ -187,7 +187,7 @@ Isto sugere **auto-consistência geométrica profunda** entre micro e macro.
    - Alvo: Physical Review Letters
    - Status: Rascunho em preparação
 
-2. **"The Fine Structure Constant as TARDIS Compression: α⁻¹ = Ω^β"**
+2. **"The Fine Structure Constant as TAMESIS Compression: α⁻¹ = Ω^β"**
    - Alvo: Journal of High Energy Physics
    - Status: Resultados validados, redação pendente
 
@@ -203,7 +203,7 @@ Isto sugere **auto-consistência geométrica profunda** entre micro e macro.
 
 - Erik Verlinde (Gravidade Entrópica)
 - Gerard 't Hooft (Princípio Holográfico)
-- Douglas (Métrica TARDIS & Implementação Computacional)
+- Douglas (Métrica TAMESIS & Implementação Computacional)
 
 **Ferramentas:**
 

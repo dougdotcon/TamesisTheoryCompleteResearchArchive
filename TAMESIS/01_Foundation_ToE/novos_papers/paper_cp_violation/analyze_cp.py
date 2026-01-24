@@ -1,6 +1,6 @@
 """
 CP Violation: Does Matter-Antimatter Asymmetry Have Topological Origin?
-Explores the origin of CP violation in TARDIS framework.
+Explores the origin of CP violation in TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_cp_violation():
     """
-    Analyze CP violation in the TARDIS topological framework.
+    Analyze CP violation in the TAMESIS topological framework.
     """
     print("⚛️ Analyzing CP Violation...\n")
     
@@ -30,7 +30,7 @@ def analyze_cp_violation():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the topological framework:
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    CP violation in TARDIS:
+    CP violation in TAMESIS:
     
     1. Particles vs antiparticles = chiral knots
     2. Asymmetry inherited from parent BH (Kerr)

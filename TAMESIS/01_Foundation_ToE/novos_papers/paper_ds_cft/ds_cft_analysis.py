@@ -37,7 +37,7 @@ def analyze_ds_cft():
     """)
     
     print("=" * 50)
-    print("TARDIS IMPLICATIONS")
+    print("TAMESIS IMPLICATIONS")
     print("=" * 50)
     print("""
     If dS/CFT works:
@@ -46,7 +46,7 @@ def analyze_ds_cft():
     • The Big Bang = boundary condition at past infinity
     • Dark Energy = cosmic holographic temperature
     
-    The TARDIS framework ASSUMES dS/CFT works.
+    The TAMESIS framework ASSUMES dS/CFT works.
     This is speculative but internally consistent.
     """)
     
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     print("""
     Status: dS/CFT is CONJECTURED, not proven.
     
-    TARDIS assumes it works because:
+    TAMESIS assumes it works because:
     1. AdS/CFT is mathematically proven
     2. Our universe is approximately dS (Dark Energy)
     3. The internal consistency of the framework requires it

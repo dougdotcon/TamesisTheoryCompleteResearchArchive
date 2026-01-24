@@ -19,7 +19,7 @@
 | 3. Núcleo (Quarks/Força Forte) | ✅ **BREAKTHROUGH** | ALTO | Muito Alta |
 | 4. Tempo (Equação de Movimento) | ✅ **DERIVAÇÃO COMPLETA** | MÉDIO | Alta |
 
-### 🏆 4 de 4 PROBLEMAS RESOLVIDOS - TEORIA DE TUDO COMPLETA!
+### 🏆 4 de 4 PROBLEMAS RESOLVIDOS - TEORIA DE TUDO COMPLETA
 
 ---
 
@@ -54,6 +54,7 @@ Onde:
 ### Origem do "Erro" Anterior
 
 O "erro de 10^10" era provavelmente:
+
 1. Comparação com F_entrópica PURA (esquecendo o fator α)
 2. Confusão de unidades na garganta do wormhole
 
@@ -91,12 +92,14 @@ Diferença: 1.5%
 Para match exato: β = ln(137.036)/ln(117.038) = **1.0331** (já derivado!)
 
 ### ✅ Implementação
+
 - [x] `loop_correction_engine.py` (~600 linhas)
   - [x] `AmplitudeProblemAnalyzer`
   - [x] `EmergentElectromagneticForce`
   - [x] `TARDISLoopCorrections`
 
 ### ✅ Status
+
 | Critério | Resultado |
 |----------|-----------|
 | Erro de amplitude | ~~10^10~~ → **NENHUM** |
@@ -110,6 +113,7 @@ Para match exato: β = ln(137.036)/ln(117.038) = **1.0331** (já derivado!)
 > **Se m_e ∝ Ω^(-40), qual é a regra para o Múon?**
 
 ### Dados Experimentais (CODATA)
+
 | Partícula | Massa (kg) | Razão m/m_e |
 |-----------|------------|-------------|
 | Elétron | 9.109e-31 | 1 |
@@ -119,6 +123,7 @@ Para match exato: β = ln(137.036)/ln(117.038) = **1.0331** (já derivado!)
 ### ✅ RESULTADOS CALCULADOS (2025-12-31)
 
 **Expoentes Harmónicos Descobertos:**
+
 ```
 γ_μ = ln(206.77) / ln(117.038) = 1.119496
 γ_τ = ln(3477.23) / ln(117.038) = 1.712124
@@ -126,6 +131,7 @@ Razão γ_τ / γ_μ = 1.529371
 ```
 
 **Fórmula Unificada (Lei de Potência):**
+
 ```
 m_n / m_e = Ω^(γ_μ × (n-1)^d)
 
@@ -136,10 +142,12 @@ Onde:
 ```
 
 **Frações Simples Aproximadas:**
+
 - γ_μ ≈ 19/17 (erro: 0.0018)
 - γ_τ ≈ 12/7 (erro: 0.0022)
 
 ### ✅ Teoria Desenvolvida
+
 - [x] **Passo 1:** Calcular Expoentes Harmónicos
   - [x] γ_μ = **1.119496**
   - [x] γ_τ = **1.712124**
@@ -154,12 +162,14 @@ Onde:
   - [x] f(n) = Ω^(1.12 × (n-1)^0.61) - ERRO 0%
 
 ### ✅ Implementação Computacional
+
 - [x] `ajuste_fino/2_Motores_de_Fisica/lepton_generations.py` (~450 linhas)
   - [x] Classe `FractalScaleAnalyzer`
   - [x] Classe `HarmonicWormholeModel`
   - [x] Método `stability_analysis()`
 
 ### ✅ Critérios de Sucesso ALCANÇADOS
+
 | Critério | Status | Nota |
 |----------|--------|------|
 | Prever m_μ/m_e | ✅ | Por definição (expoente calculado do dado) |
@@ -167,6 +177,7 @@ Onde:
 | Explicar 3 gerações | ✅ | 4ª geração teria m > 4.5 TeV → decai instantaneamente |
 
 ### 🔑 DESCOBERTA CHAVE
+
 A razão γ_τ/γ_μ = **1.529371** está próxima de **3/2 = 1.5**, sugerindo uma estrutura quase-harmónica.
 O expoente d = 0.613 está próximo de **ln(3)/ln(4) ≈ 0.631**, sugerindo uma métrica fractal subjacente.
 
@@ -199,6 +210,7 @@ Down: -1 / 3 cores = -1/3  ✓
 ```
 
 **Verificação de Bárions:**
+
 ```
 Próton (uud):  2/3 + 2/3 - 1/3 = +1  ✓
 Nêutron (udd): 2/3 - 1/3 - 1/3 = 0   ✓
@@ -247,9 +259,10 @@ Derivado de primeiros princípios via Ω!
 ```
 
 ### ✅ Implementação
+
 - [x] `topological_knot_solver.py` (~700 linhas)
   - [x] `QuarkTopologyEngine`
-  - [x] `ProtonStructure` 
+  - [x] `ProtonStructure`
   - [x] `StrongForceEngine`
   - [x] Tabela de invariantes de nós
 
@@ -276,7 +289,7 @@ O número 3 emerge da TOPOLOGIA!
 
 ## 🎯 PROBLEMA 4: O TEMPO (Equação de Movimento) ✅ DERIVAÇÃO COMPLETA
 
-> **Como o wormhole se move pelo tecido TARDIS?**
+> **Como o wormhole se move pelo tecido TAMESIS?**
 
 ### ✅ RESULTADO SUPREMO (2025-12-31)
 
@@ -325,7 +338,7 @@ TEMPO = TEMPERATURA IMAGINÁRIA!
 QM em tempo real ↔ Termodinâmica em tempo imaginário
 ```
 
-### ✅ Conexão com TARDIS
+### ✅ Conexão com TAMESIS
 
 ```
 Tempo de Planck: t_P = √(ℏG/c⁵) = 5.39×10⁻⁴⁴ s
@@ -334,6 +347,7 @@ Evolução: ψ atualiza a cada tick de t_P
 ```
 
 ### ✅ Implementação
+
 - [x] `holographic_time_solver.py` (~700 linhas)
   - [x] `ActionEntropyEquivalence`
   - [x] `SchrodingerFromEntropy`
@@ -367,18 +381,22 @@ Evolução: ψ atualiza a cada tick de t_P
 ## 📅 CRONOGRAMA PROPOSTO
 
 ### Semana 1-2: Problema 2 (Gerações)
+
 - Razão: Mais acessível, extensão natural do trabalho existente
 - Entregável: `lepton_generations.py` + relatório
 
 ### Semana 3-4: Problema 1 (Amplitude)
+
 - Razão: Crítico para consistência, mas complexo
 - Entregável: `loop_correction_engine.py` + relatório
 
 ### Semana 5-8: Problema 3 (Quarks)
+
 - Razão: Novo território, requer pesquisa extensiva
 - Entregável: `topological_knot_engine.py` + `strong_force_kernel.py`
 
 ### Semana 9-12: Problema 4 (Movimento)
+
 - Razão: Capstone, une tudo
 - Entregável: `wave_propagation_engine.py` + paper final
 
@@ -403,6 +421,7 @@ AMPLITUDE:     F = F_naive × η(Ω, loops)      [TODO: derivar η]
 ## 📝 NOTAS E OBSERVAÇÕES
 
 ### 2025-12-31 - Início do Roadmap
+
 - Triple Breakthrough alcançado: massa, carga, spin
 - Limitação identificada: erro de 10^10 na amplitude de Coulomb
 - Próximos passos definidos: atacar 4 problemas restantes

@@ -101,7 +101,7 @@ Before finding wide binaries, we analyzed laboratory experiments:
 
 - MOND works at both galactic AND stellar scales
 - The scale a₀ = 1.2×10⁻¹⁰ m/s² appears fundamental
-- Entropic gravity (Verlinde, TARDIS) is supported
+- Entropic gravity (Verlinde, TAMESIS) is supported
 
 ---
 
@@ -153,4 +153,4 @@ python gaia_real_analysis.py
 
 ---
 
-**Part of the TARDIS Unified Physics Framework** | Douglas H. M. Fulber | January 2026
+**Part of the TAMESIS Unified Physics Framework** | Douglas H. M. Fulber | January 2026

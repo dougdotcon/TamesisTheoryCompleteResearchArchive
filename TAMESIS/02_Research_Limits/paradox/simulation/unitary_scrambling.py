@@ -81,7 +81,7 @@ def simulate_page_curve():
     
     # Plot Lines
     ax.plot(time_steps, hawking_curve, 'r--', label='Hawking Prediction (Info Loss)')
-    ax.plot(time_steps, entropy_radiation, 'g-o', linewidth=2, label='Page Curve (Unitary TARDIS)')
+    ax.plot(time_steps, entropy_radiation, 'g-o', linewidth=2, label='Page Curve (Unitary TAMESIS)')
     
     # Page Time Line
     page_time = N_qubits / 2

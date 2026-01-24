@@ -1,10 +1,10 @@
 """
 Sistema Avançado de Física Teórica V3.0
-Época de Planck com Leis Dinâmicas e Universo TARDIS
+Época de Planck com Leis Dinâmicas e Universo TAMESIS
 
 Este módulo contém as implementações avançadas para testar:
 1. Hipótese de Leis Físicas Dinâmicas (com métodos numéricos avançados)
-2. Hipótese do Universo TARDIS (com compressão quântica)
+2. Hipótese do Universo TAMESIS (com compressão quântica)
 3. Integração com bibliotecas especializadas (QuTiP, Astropy, PySCF)
 
 Características V3.0:

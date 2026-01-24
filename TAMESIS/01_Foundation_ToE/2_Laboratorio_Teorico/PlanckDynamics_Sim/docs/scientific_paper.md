@@ -36,7 +36,7 @@ $$ \Omega_{app}(z) = \Omega_b + \alpha \cdot \sqrt{\frac{H(z)}{H_0}} $$
 
 This implies that "Dark Matter" is literally the *shadow* of the Hubble Horizon cast upon the local metric.
 
-### 2.2 The TARDIS Compression
+### 2.2 The TAMESIS Compression
 
 To reconcile the information density of this reactive universe, we derived a metric compression factor:
 

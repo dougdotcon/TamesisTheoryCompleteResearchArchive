@@ -1,5 +1,5 @@
 """
-TOPOLOGICAL KNOT SOLVER - Quarks como Nós no Tecido TARDIS
+TOPOLOGICAL KNOT SOLVER - Quarks como Nós no Tecido TAMESIS
 ===========================================================
 Motor para derivar a estrutura dos quarks usando Teoria dos Nós
 
@@ -42,7 +42,7 @@ class PhysicsConstants:
     alpha_s_low: float = 1.0     # Forte (baixa energia, confinamento)
     alpha_s_high: float = 0.12   # Forte (alta energia, liberdade assintótica)
     
-    # TARDIS
+    # TAMESIS
     OMEGA: float = 117.038
     
     # Escala de confinamento
@@ -198,7 +198,7 @@ class QuarkTopologyEngine:
     Motor principal para análise topológica de quarks.
     
     O Modelo:
-    - Quarks são wormholes com nós no tecido TARDIS
+    - Quarks são wormholes com nós no tecido TAMESIS
     - A carga fracionária vem da topologia (winding number mod 3)
     - A cor (R, G, B) é a orientação no espaço interno
     - O confinamento é a impossibilidade de desatar sem cortar
@@ -519,7 +519,7 @@ class QuarkTopologyEngine:
             'interpretation': 'α_s decresce com energia (liberdade assintótica)'
         }
         
-        # Conexão com TARDIS
+        # Conexão com TAMESIS
         # Hipótese: α_s = Ω^(-β_s × log(Q/M_P))
         # Onde β_s é determinado pela topologia do nó
         
@@ -736,7 +736,7 @@ class StrongForceEngine:
         Tenta derivar a tensão da corda σ a partir de Ω.
         
         HIPÓTESE:
-        σ é determinado pela escala de Planck modificada pelo TARDIS.
+        σ é determinado pela escala de Planck modificada pelo TAMESIS.
         σ ~ (M_P / Ω^n)² / l_P × (ℏc)
         """
         
@@ -804,7 +804,7 @@ def run_quark_analysis():
     """Executa análise completa de quarks e força forte."""
     
     print("=" * 80)
-    print("TOPOLOGICAL KNOT SOLVER - Quarks como Nós TARDIS")
+    print("TOPOLOGICAL KNOT SOLVER - Quarks como Nós TAMESIS")
     print("=" * 80)
     
     # 1. Inicializar engine
@@ -876,7 +876,7 @@ def run_quark_analysis():
     for key, value in coupling['strong_from_crossing'].items():
         print(f"  {key}: {value}")
     
-    print("\nConexão TARDIS:")
+    print("\nConexão TAMESIS:")
     for key, value in coupling['tardis_connection'].items():
         print(f"  {key}: {value}")
     

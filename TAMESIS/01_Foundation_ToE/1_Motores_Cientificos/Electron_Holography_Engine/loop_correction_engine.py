@@ -1,7 +1,7 @@
 """
 LOOP CORRECTION ENGINE - Geometria Quântica Dinâmica
 =====================================================
-Correções de Loop para a Força de Coulomb no Framework TARDIS
+Correções de Loop para a Força de Coulomb no Framework TAMESIS
 
 PROBLEMA: Erro de 10^10 na amplitude da força elétrica
 - Frequência (α ≈ 1/137): CORRETA
@@ -69,7 +69,7 @@ class PhysicsConstants:
         """Carga de Planck."""
         return np.sqrt(4 * np.pi * self.epsilon_0 * self.hbar * self.c)
     
-    # TARDIS
+    # TAMESIS
     OMEGA: float = 117.038
 
 
@@ -168,7 +168,7 @@ class QuantumLoopCorrections:
     - Loop de elétron-pósitron "blinda" a carga (charge screening)
     - α(q²) aumenta com energia (running coupling)
     
-    No framework TARDIS:
+    No framework TAMESIS:
     - Flutuações do wormhole modificam a transmissão de força
     - A "espuma" ao redor da garganta pode AMPLIFICAR ao invés de blindar
     """
@@ -255,12 +255,12 @@ class QuantumLoopCorrections:
 
 
 # =============================================================================
-# CORREÇÕES TOPOLÓGICAS TARDIS
+# CORREÇÕES TOPOLÓGICAS TAMESIS
 # =============================================================================
 
 class TARDISLoopCorrections:
     """
-    Correções de loop específicas do framework TARDIS.
+    Correções de loop específicas do framework TAMESIS.
     
     O wormhole não está "nu" - está cercado por flutuações quânticas
     do espaço-tempo (espuma de Wheeler).
@@ -286,7 +286,7 @@ class TARDISLoopCorrections:
         Fator de amplificação da "espuma" quântica.
         
         Ao contrário da QED onde loops BLINDAM,
-        na geometria TARDIS os loops podem AMPLIFICAR
+        na geometria TAMESIS os loops podem AMPLIFICAR
         porque conectam diferentes escalas holográficas.
         
         Hipótese: Cada loop traz um fator Ω
@@ -295,7 +295,7 @@ class TARDISLoopCorrections:
     
     def effective_coupling_tardis(self, distance_ratio: float = 1.0) -> float:
         """
-        Acoplamento efetivo no framework TARDIS.
+        Acoplamento efetivo no framework TAMESIS.
         
         α_eff(r) = α_0 × η(r/l_P)
         
@@ -384,9 +384,9 @@ class TARDISLoopCorrections:
         Onde Z é a função de onda de renormalização.
         """
         # Na QED, Z = 1 - (α/3π)×log(Λ²/m²) → Z < 1 (blindagem)
-        # No TARDIS, podemos ter Z > 1 (amplificação)
+        # No TAMESIS, podemos ter Z > 1 (amplificação)
         
-        # O cutoff no TARDIS é l_P (não infinito)
+        # O cutoff no TAMESIS é l_P (não infinito)
         Lambda = CONST.c * CONST.hbar / CONST.l_P  # Energia de Planck
         m_e_energy = CONST.m_e * CONST.c**2
         
@@ -396,7 +396,7 @@ class TARDISLoopCorrections:
         alpha = CONST.alpha
         Z_qed = 1 - (alpha / (3 * np.pi)) * log_ratio
         
-        # Z TARDIS (hipótese: amplificação)
+        # Z TAMESIS (hipótese: amplificação)
         # Em vez de subtrair, somamos (topologia invertida)
         Z_tardis_v1 = 1 + (self.alpha_geometric / (3 * np.pi)) * log_ratio
         
@@ -519,12 +519,12 @@ class HolographicTransmissionFactor:
 
 class EmergentElectromagneticForce:
     """
-    Modelo completo da força eletromagnética emergente do framework TARDIS.
+    Modelo completo da força eletromagnética emergente do framework TAMESIS.
     
     A força de Coulomb real é:
     F = (e² / 4πε₀r²)
     
-    No framework TARDIS, isso deve emergir de:
+    No framework TAMESIS, isso deve emergir de:
     F = F_entropic × η(Ω, α, N_bits)
     
     Onde η é o "fator de amplificação topológica".
@@ -540,7 +540,7 @@ class EmergentElectromagneticForce:
         
     def decompose_coulomb_constant(self) -> Dict:
         """
-        Decompõe k_e = 1/(4πε₀) em termos de quantidades TARDIS.
+        Decompõe k_e = 1/(4πε₀) em termos de quantidades TAMESIS.
         
         k_e c⁴ / G = ? (Em unidades de Planck)
         """
@@ -869,9 +869,9 @@ def run_full_analysis():
         else:
             print(f"  {key}: {value}")
     
-    # 8. Correções de loop TARDIS
+    # 8. Correções de loop TAMESIS
     print("\n" + "=" * 40)
-    print("8. CORREÇÕES DE LOOP TARDIS")
+    print("8. CORREÇÕES DE LOOP TAMESIS")
     print("=" * 40)
     
     tardis_loops = TARDISLoopCorrections()

@@ -180,5 +180,5 @@ if __name__ == "__main__":
     
     Mass scales approximately as 10^(0.9 × crossings)
     
-    This suggests MASS = TOPOLOGICAL COMPLEXITY in the TARDIS framework.
+    This suggests MASS = TOPOLOGICAL COMPLEXITY in the TAMESIS framework.
     """)

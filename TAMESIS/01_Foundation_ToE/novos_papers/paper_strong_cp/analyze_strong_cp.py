@@ -8,7 +8,7 @@ import os
 
 def analyze_strong_cp():
     """
-    Analyze the Strong CP problem in TARDIS framework.
+    Analyze the Strong CP problem in TAMESIS framework.
     """
     print("🔬 Analyzing Strong CP Problem...\n")
     
@@ -50,7 +50,7 @@ def analyze_strong_cp():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In the topological framework:
@@ -79,7 +79,7 @@ def analyze_strong_cp():
     
     print(f"\n  If θ = 1: d_n ~ 10⁻¹⁶ e·cm (ruled out)")
     print(f"  If θ = 10⁻¹⁰: d_n ~ 10⁻²⁶ e·cm (marginal)")
-    print(f"  TARDIS predicts: θ = 0 exactly")
+    print(f"  TAMESIS predicts: θ = 0 exactly")
     
     return {
         "theta_upper_limit": 1e-10,
@@ -117,7 +117,7 @@ def plot_strong_cp():
     # Right: Solutions comparison
     ax2 = axes[1]
     
-    solutions = ['Axions', 'Massless\nu quark', 'Anthropic', 'TARDIS\n(Topology)']
+    solutions = ['Axions', 'Massless\nu quark', 'Anthropic', 'TAMESIS\n(Topology)']
     viability = [0.8, 0.3, 0.5, 0.9]  # Subjective scores
     colors = ['orange', 'gray', 'gray', 'green']
     
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    Strong CP in TARDIS:
+    Strong CP in TAMESIS:
     
     1. θ is constrained by braiding topology
     2. Consistent gluon winding requires θ = 0 or π

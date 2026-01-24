@@ -23,7 +23,7 @@ The system operates on two fundamental constants derived from Bayesian inference
 | Parameter | Symbol | Value | Physical Significance |
 |-----------|:------:|:-----:|-----------------------|
 | **Entropic Coupling** | $\alpha$ | **0.470** | Coupling strength between the Hubble Horizon and local bulk dynamics. |
-| **Metric Compression** | $\Gamma$ | **117.038** | The TARDIS factor; ratio of information density between conformal and physical frames. |
+| **Metric Compression** | $\Gamma$ | **117.038** | The TAMESIS factor; ratio of information density between conformal and physical frames. |
 
 ## Phase 1: Expansion Reconciliation (The H0 Solution)
 
@@ -66,17 +66,18 @@ The **PlanckDynamics** project validates that the "Dark Sector" is not a collect
 ### The Core Findings
 
 1. **Reactive Gravity ($\alpha \approx 0.47$):** Gravity is not static. It reacts to the expansion of the Hubble Horizon. This "elasticity" creates an apparent mass that mimics Dark Matter perfectly.
-2. **The TARDIS Effect ($\Gamma \approx 117$):** To maintain thermodynamic stability, the universe undergoes metric compression. It is "larger on the inside" (Informationally) than on the outside (Physically).
+2. **The TAMESIS Effect ($\Gamma \approx 117$):** To maintain thermodynamic stability, the universe undergoes metric compression. It is "larger on the inside" (Informationally) than on the outside (Physically).
 
 ### Why This Matters?
 
-* **Scientific Economy:** It ends the 40-year hunt for WIMPs and Axions. The anomaly is geometric, not particulate.
+- **Scientific Economy:** It ends the 40-year hunt for WIMPs and Axions. The anomaly is geometric, not particulate.
+
 - **The Holy Grail:** By recovering the **3rd Acoustic Peak**, we proved that Entropic Gravity works from the Big Bang ($z=1100$) to today.
 - **Engineering Potential:** If gravity is information (entropy), it is manipulable. This validates the theoretical pathway to **Metric Engineering** (warp drives, propellantless propulsion) via thermodynamic control of the vacuum.
 
-## 6. The TARDIS Mechanism: Nature's Safety Valve
+## 6. The TAMESIS Mechanism: Nature's Safety Valve
 
-The term **TARDIS Effect** refers to the specific mechanism that preserves the laws of physics under this new gravity.
+The term **TAMESIS Effect** refers to the specific mechanism that preserves the laws of physics under this new gravity.
 
 - **The Problem:** Compressing a universe usually violates the Bekenstein Bound (too much info in too little space).
 - **The Solution:** The universe enacts a **Reactive Planck Area**. The fundamental "pixel size" of reality scales with compression ($\Gamma$).
@@ -100,7 +101,7 @@ Manipulating the entropy gradient ($\nabla S$) is 117 times more efficient than 
 With the Codebase now in production, future research should focus on the endpoints of evaporation:
 
 1. **The Information Remnant:** Does the accelerated evaporation leave behind a stable Planck-scale condensate?
-2. **Gravitational Wave Spectroscopy:** Calculating the "Echo" signatures of the TARDIS metric in binary black hole mergers.
+2. **Gravitational Wave Spectroscopy:** Calculating the "Echo" signatures of the TAMESIS metric in binary black hole mergers.
 
 ## Author and Citation
 

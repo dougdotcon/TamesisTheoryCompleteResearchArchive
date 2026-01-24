@@ -7,18 +7,18 @@ G = 6.67430e-11       # m^3 / kg s^2
 C = 2.99792458e8      # m / s
 KB = 1.380649e-23     # J / K
 
-# TARDIS / Diósi-Penrose Parameters
+# TAMESIS / Diósi-Penrose Parameters
 # The critical length scale resolution of spacetime (Planck length approx)
 L_P = np.sqrt(HBAR * G / C**3) 
 
-def calculate_entropic_decoherence_time(mass_kg, separation_m, model='tardis'):
+def calculate_entropic_decoherence_time(mass_kg, separation_m, model='TAMESIS'):
     """
     Calculate the decoherence time for a quantum superposition of a mass M
     separated by distance dx.
     
     Models:
     - 'diosi-penrose': Gravitational self-energy difference
-    - 'tardis': Entropic information limit
+    - 'TAMESIS': Entropic information limit
     """
     
     if model == 'diosi-penrose':
@@ -34,14 +34,14 @@ def calculate_entropic_decoherence_time(mass_kg, separation_m, model='tardis'):
         tau = HBAR / E_grav_diff
         return tau
         
-    elif model == 'tardis':
-        # TARDIS: Spacetime has finite information density (1 bit per Planck area).
+    elif model == 'TAMESIS':
+        # TAMESIS: Spacetime has finite information density (1 bit per Planck area).
         # A superposition creates an ambiguity in the metric.
         # When information cost > 1 bit, it decays.
         
         # M_c estimate ~ 10^-11 kg (Planck mass is 2e-8 kg)
-        # Check standard DP result first, but TARDIS adds a temperature factor T_H?
-        # Actually TARDIS posits: tau ~ hbar / (N * k_B * T) doesn't fit well here.
+        # Check standard DP result first, but TAMESIS adds a temperature factor T_H?
+        # Actually TAMESIS posits: tau ~ hbar / (N * k_B * T) doesn't fit well here.
         
         # Let's stick to the fundamental "Critical Mass" derivation:
         # M_c = (hbar^2 / (G * sqrt(Lambda)))^(1/3)
@@ -64,7 +64,7 @@ def main():
     # 3. Calculate
     taus = []
     for m in masses:
-        t = calculate_entropic_decoherence_time(m, separation, model='tardis')
+        t = calculate_entropic_decoherence_time(m, separation, model='TAMESIS')
         taus.append(t)
         
     taus = np.array(taus)

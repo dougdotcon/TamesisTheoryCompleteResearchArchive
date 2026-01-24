@@ -428,7 +428,7 @@ def convert_to_pdf(html_path: Path):
 
 def main():
     print("=" * 60)
-    print("📄 Unified PDF Generator for TARDIS: The Theory of Everything")
+    print("📄 Unified PDF Generator for TAMESIS: The Theory of Everything")
     print("=" * 60)
     
     # Step 1: Create unified HTML

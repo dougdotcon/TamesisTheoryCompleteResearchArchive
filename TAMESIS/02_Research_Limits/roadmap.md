@@ -19,7 +19,7 @@
 
 ## Completed Research
 
-### 1. TARDIS Framework (Unified Physics)
+### 1. TAMESIS Framework (Unified Physics)
 
 [![Status](https://img.shields.io/badge/Status-Complete-00C853?style=flat-square)](.)
 [![Folder](https://img.shields.io/badge/Folder-research.html-blue?style=flat-square)](.)
@@ -101,7 +101,7 @@
 
 **Implication:** Strong observational support for MOND/Entropic Gravity over Lambda-CDM.
 
-**Projected Solutions:** Validates TARDIS framework; challenges dark matter paradigm
+**Projected Solutions:** Validates TAMESIS framework; challenges dark matter paradigm
 
 ---
 
@@ -190,7 +190,7 @@
 
 **DEFINITIVE RESULTS (Topology):**
 
-1. **Geometric Cause:** TARDIS Fermions are **Wormhole Mouths (Genus-1)**.
+1. **Geometric Cause:** TAMESIS Fermions are **Wormhole Mouths (Genus-1)**.
 2. **Behavioral Effect:** The non-contractible loops of the wormhole require a **$720^\circ$ rotation** to untangle flux lines (Spin-1/2 statistics).
 3. **Verdict:** Spin is a topological invariant of spacetime geometry.
 
@@ -275,7 +275,7 @@
 ```
 limits/
 ├── roadmap.md              # This file
-├── research.html           # TARDIS unified framework
+├── research.html           # TAMESIS unified framework
 ├── index.html              # M_c paper
 ├── simulations/            # M_c Python code
 │

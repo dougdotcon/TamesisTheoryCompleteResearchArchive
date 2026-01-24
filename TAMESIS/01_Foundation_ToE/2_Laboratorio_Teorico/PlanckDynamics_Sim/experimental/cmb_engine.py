@@ -28,7 +28,7 @@ Ocb0 = Om0      # CDM + Baryons (Standard LCDM reference)
 Or0 = 8e-5      # Radiation Density
 ALPHA = 0.470   # ENTROPIC COUPLING CONSTANT (From Phase 1 MCMC)
 
-# TARDIS Damping Factor (User Metric)
+# TAMESIS Damping Factor (User Metric)
 # Simulates "Quantum Compression" or additional silk damping effects
 TARDIS_FACTOR = 1.0 # Base factor, can be modified
 

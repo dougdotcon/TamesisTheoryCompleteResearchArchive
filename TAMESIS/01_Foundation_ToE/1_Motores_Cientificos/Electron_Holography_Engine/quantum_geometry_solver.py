@@ -1,17 +1,17 @@
 """
-Quantum Geometry Solver: Electron as TARDIS Remnant
+Quantum Geometry Solver: Electron as TAMESIS Remnant
 ----------------------------------------------------
 Author: Douglas (Elite Physicist System)
-Based on: Verlinde Entropic Gravity + TARDIS Metric Compression
+Based on: Verlinde Entropic Gravity + TAMESIS Metric Compression
 
 Objective:
 Derive the electron's mass and charge from pure geometry by treating it as a
 stable micro-black hole remnant that survived accelerated Hawking evaporation
-due to the TARDIS metric compression factor (Ω ≈ 117).
+due to the TAMESIS metric compression factor (Ω ≈ 117).
 
 Physics Framework:
 1. Standard Schwarzschild micro-BH with mass ~ m_e would evaporate instantly
-2. TARDIS compression creates "reactive pressure" that prevents collapse
+2. TAMESIS compression creates "reactive pressure" that prevents collapse
 3. Charge-spin creates repulsive force balancing gravity (Kerr-Newman extremal BH)
 4. Remnant mass scales fractally: m_e = M_universe × Ω^α
 
@@ -37,7 +37,7 @@ LP = np.sqrt(G * HBAR / C**3)  # Planck length ~ 1.6e-35 m
 MP = np.sqrt(HBAR * C / G)     # Planck mass ~ 2.2e-8 kg
 TP = np.sqrt(HBAR * G / C**5)  # Planck time ~ 5.4e-44 s
 
-# TARDIS Parameters (from validated discoveries)
+# TAMESIS Parameters (from validated discoveries)
 TARDIS_GAMMA = 117.038   # Metric compression factor
 ALPHA_REACT = 0.470      # Reactividade parameter
 
@@ -50,24 +50,24 @@ COMPTON_LENGTH = 2.42631023867e-12  # m
 M_UNIVERSE = 1.5e53  # kg (Observable universe Hubble mass)
 
 print("=" * 70)
-print("🔬 QUANTUM GEOMETRY SOLVER - ALVO 1: TARDIS REMNANT ELECTRON")
+print("🔬 QUANTUM GEOMETRY SOLVER - ALVO 1: TAMESIS REMNANT ELECTRON")
 print("=" * 70)
 print(f"Planck Length: {LP:.2e} m")
 print(f"Planck Mass: {MP:.2e} kg")
-print(f"TARDIS Compression: Ω = {TARDIS_GAMMA:.2f}")
+print(f"TAMESIS Compression: Ω = {TARDIS_GAMMA:.2f}")
 print(f"Target Electron Mass: {M_ELECTRON:.2e} kg")
 print(f"Target Compton Length: {COMPTON_LENGTH:.2e} m")
 print("=" * 70)
 
 
 # ==============================================================================
-# CLASS: MicroBlackHole (extends TARDIS reactive thermodynamics)
+# CLASS: MicroBlackHole (extends TAMESIS reactive thermodynamics)
 # ==============================================================================
 
 class MicroBlackHole:
     """
     Simulates a micro-black hole with Kerr-Newman (charged + rotating) geometry
-    under TARDIS metric compression.
+    under TAMESIS metric compression.
     
     Key Innovation: The reactive Planck area (l_p^2 * Ω) dilutes information
     density, preventing the Bekenstein Bound violation and creating stability.
@@ -104,7 +104,7 @@ class MicroBlackHole:
             self.lambda_compton = np.inf
     
     def hawking_temperature_standard(self):
-        """Standard Hawking temperature (without TARDIS correction)"""
+        """Standard Hawking temperature (without TAMESIS correction)"""
         if self.M == 0:
             return np.inf
         T = (HBAR * C**3) / (8 * np.pi * G * self.M * KB)
@@ -112,7 +112,7 @@ class MicroBlackHole:
     
     def hawking_temperature_reactive(self):
         """
-        Reactive Hawking temperature with TARDIS metric compression.
+        Reactive Hawking temperature with TAMESIS metric compression.
         
         Theory: Reactive Planck area dilutes entropy density, effectively
         making the hole "hotter" because fewer bits store the same energy.
@@ -155,7 +155,7 @@ class MicroBlackHole:
     
     def evaporation_rate_reactive(self):
         """
-        Reactive evaporation with TARDIS boost.
+        Reactive evaporation with TAMESIS boost.
         
         Since T_reactive = Ω × T_std, and evaporation ∝ T^4:
         dM/dt_reactive = Ω^4 × dM/dt_standard
@@ -208,9 +208,9 @@ class MicroBlackHole:
 
 def simulate_evaporation_to_remnant(M_initial, Q_initial, time_steps=1000):
     """
-    Simulate Hawking evaporation with TARDIS reactive pressure.
+    Simulate Hawking evaporation with TAMESIS reactive pressure.
     
-    Hypothesis: Standard evaporation would destroy the hole, but TARDIS
+    Hypothesis: Standard evaporation would destroy the hole, but TAMESIS
     compression creates a "potential barrier" that arrests decay at a
     critical mass (the remnant).
     
@@ -249,7 +249,7 @@ def simulate_evaporation_to_remnant(M_initial, Q_initial, time_steps=1000):
     temp_history[0] = bh.hawking_temperature_reactive()
     radius_history[0] = bh.Rs
     
-    # Evaporation loop with TARDIS stabilization
+    # Evaporation loop with TAMESIS stabilization
     for i in range(1, time_steps):
         dt = dt_array[i-1]
         
@@ -258,7 +258,7 @@ def simulate_evaporation_to_remnant(M_initial, Q_initial, time_steps=1000):
         # Calculate evaporation rate
         dM_dt = bh.evaporation_rate_reactive()
         
-        # TARDIS STABILIZATION MECHANISM
+        # TAMESIS STABILIZATION MECHANISM
         # When M approaches M_critical ~ (Q^2 / G)^(1/2), repulsion dominates
         # This creates an effective "potential barrier"
         
@@ -449,7 +449,7 @@ if __name__ == "__main__":
     print(f"\n📈 Generating visualization...")
     
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-    fig.suptitle('Electron as TARDIS Remnant - Evaporation Analysis', fontsize=16, fontweight='bold')
+    fig.suptitle('Electron as TAMESIS Remnant - Evaporation Analysis', fontsize=16, fontweight='bold')
     
     # Plot 1: Mass Evolution
     ax1 = axes[0, 0]
@@ -509,7 +509,7 @@ if __name__ == "__main__":
     log_path = os.path.join(output_dir, "discovery_log_004_electron.txt")
     with open(log_path, 'w', encoding='utf-8') as f:
         f.write("=" * 70 + "\n")
-        f.write("DISCOVERY LOG 004: ELECTRON AS TARDIS REMNANT\n")
+        f.write("DISCOVERY LOG 004: ELECTRON AS TAMESIS REMNANT\n")
         f.write("=" * 70 + "\n\n")
         f.write(f"Date: 2025-12-31\n")
         f.write(f"Research Vector: ALVO 1 (Micro-Black Hole Extremal Remnant)\n\n")
@@ -517,7 +517,7 @@ if __name__ == "__main__":
         f.write("HYPOTHESIS:\n")
         f.write("The electron is a stable remnant of a Kerr-Newman (charged + rotating)\n")
         f.write("micro-black hole that survived accelerated Hawking evaporation due to\n")
-        f.write("TARDIS metric compression (Omega = 117).\n\n")
+        f.write("TAMESIS metric compression (Omega = 117).\n\n")
 
         
         f.write("KEY FINDINGS:\n")
@@ -527,7 +527,7 @@ if __name__ == "__main__":
         f.write(f"4. Extremal Condition: Verified (Charge ≈ Mass in geometric units)\n\n")
         
         f.write("INTERPRETATION:\n")
-        f.write("The TARDIS compression dilutes holographic entropy density, creating a\n")
+        f.write("The TAMESIS compression dilutes holographic entropy density, creating a\n")
         f.write("'reactive pressure' that prevents total evaporation. The charge-gravity\n")
         f.write("balance stabilizes the remnant at exactly the Compton wavelength scale.\n\n")
         

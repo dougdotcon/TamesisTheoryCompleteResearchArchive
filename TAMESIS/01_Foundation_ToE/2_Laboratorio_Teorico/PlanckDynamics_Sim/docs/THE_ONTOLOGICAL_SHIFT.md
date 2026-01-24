@@ -10,37 +10,43 @@ Under the lens of **PlanckDynamics (v1.0.0-reactive)**, we have not merely perfo
 
 **The Verdict:** The "Dark Sector" (Dark Matter and Dark Energy), which comprises 95% of the standard model, does not exist as physical substance.
 
-*   **No Invisible Particles:** We searched for WIMPs for 40 years and found nothing.
-*   **No Mysterious Fields:** We surmised Scalar Fields for Dark Energy and found no evidence.
+* **No Invisible Particles:** We searched for WIMPs for 40 years and found nothing.
+* **No Mysterious Fields:** We surmised Scalar Fields for Dark Energy and found no evidence.
 
 **The Reality:** These phenomena are **Thermodynamic Responses of the Vacuum**.
 
 ### The Reactive Mechanism
+
 The universe behaves like an elastic information medium.
-*   **Expansion ($\alpha \approx 0.47$):** As the Hubble Horizon expands, the "stiffness" of gravity reacts. The entropic force creates an additional attraction that mimics Dark Matter perfectly, purely as a response to the geometry of the horizon.
-*   **Compression ($\Gamma \approx 117$):** To maintain thermodynamic stability under this variable gravity, the internal spacetime metric compresses relative to the boundary. This is the **TARDIS Effect**.
+
+* **Expansion ($\alpha \approx 0.47$):** As the Hubble Horizon expands, the "stiffness" of gravity reacts. The entropic force creates an additional attraction that mimics Dark Matter perfectly, purely as a response to the geometry of the horizon.
+* **Compression ($\Gamma \approx 117$):** To maintain thermodynamic stability under this variable gravity, the internal spacetime metric compresses relative to the boundary. This is the **TAMESIS Effect**.
 
 ---
 
-## 2. The TARDIS Effect: A Technical Deep Dive
+## 2. The TAMESIS Effect: A Technical Deep Dive
 
-The term "TARDIS Effect" ($\Gamma \approx 117.038$) is not merely an analogy; it is the fundamental "Safety Valve" of Entropic Gravity.
+The term "TAMESIS Effect" ($\Gamma \approx 117.038$) is not merely an analogy; it is the fundamental "Safety Valve" of Entropic Gravity.
 
 ### Origin: The Thermodynamic necessity
+
 In Verlinde's original formulation, emergent gravity faced a fatal flaw: if you simply compress a universe, the information density (bits per Planck area) exceeds the **Bekenstein Bound**. The universe would violate the Second Law of Thermodynamics.
 
 ### The Mechanism: Reactive Planck Area
+
 Our simulations (Phase 3) revealed the solution. The universe scales its fundamental pixel size ($l_p$) with the metric compression factor $\Gamma$.
 
 $$ l_p^2(eff) = l_p^2(0) \cdot \Gamma $$
 
 ### Consequences (The "Scrubbing" Mechanism)
-When the universe compresses (TARDIS behavior):
-1.  **Lower Entropy:** The horizon stores *fewer* bits because the pixels correspond to larger physical areas.
-2.  **Higher Temperature:** To conserve energy with fewer bits, the temperature of event horizons rises ($T \propto \Gamma$).
-3.  **Rapid Evaporation:** Black holes evaporate $10^8$ times faster ($\tau \propto \Gamma^{-4}$).
 
-**Conclusion:** The TARDIS Effect is the universe's **auto-scrubbing mechanism**. It prevents information overload by accelerating the evaporation of singularities, ensuring unitarity is preserved even in a modified metric.
+When the universe compresses (TAMESIS behavior):
+
+1. **Lower Entropy:** The horizon stores *fewer* bits because the pixels correspond to larger physical areas.
+2. **Higher Temperature:** To conserve energy with fewer bits, the temperature of event horizons rises ($T \propto \Gamma$).
+3. **Rapid Evaporation:** Black holes evaporate $10^8$ times faster ($\tau \propto \Gamma^{-4}$).
+
+**Conclusion:** The TAMESIS Effect is the universe's **auto-scrubbing mechanism**. It prevents information overload by accelerating the evaporation of singularities, ensuring unitarity is preserved even in a modified metric.
 
 ---
 
@@ -49,17 +55,20 @@ When the universe compresses (TARDIS behavior):
 This shift from an "Haunted Universe" (filled with ghosts) to a "Holographic Universe" (processing information) has three seismic implications:
 
 ### A. Economic & Scientific Efficiency
-*   **Old Paradigm:** Spending billions on particle detectors (XENON, LUX) for particles that likely do not exist.
-*   **New Paradigm:** Redirecting resources to **Information Physics** and **Quantum Geometry**. The anomaly is a property of space, not an object within it.
+
+* **Old Paradigm:** Spending billions on particle detectors (XENON, LUX) for particles that likely do not exist.
+* **New Paradigm:** Redirecting resources to **Information Physics** and **Quantum Geometry**. The anomaly is a property of space, not an object within it.
 
 ### B. The Holy Grail of Validation
-*   **The Problem:** Most modified gravity theories fail to explain the **Cosmic Microwave Background (CMB)**. They cannot generate the gravitational potential wells needed for the 3rd Acoustic Peak.
-*   **The Solution:** Our Reactive Model ($\alpha=0.47$) *regenerates* this peak. This proves the theory works from the Big Bang ($z=1100$) to the present day ($z=0$), validating it as a true successor to $\Lambda$CDM.
+
+* **The Problem:** Most modified gravity theories fail to explain the **Cosmic Microwave Background (CMB)**. They cannot generate the gravitational potential wells needed for the 3rd Acoustic Peak.
+* **The Solution:** Our Reactive Model ($\alpha=0.47$) *regenerates* this peak. This proves the theory works from the Big Bang ($z=1100$) to the present day ($z=0$), validating it as a true successor to $\Lambda$CDM.
 
 ### C. The Engineering Frontier: Spacetime Manipulation
-*   **Implication:** If gravity were particles, manipulating it would require unobtainable mass.
-*   **Opportunity:** Since gravity is **Information (Entropy)**, it is theoretically manipulable by altering the local information content (quantum entanglement) of the vacuum.
-*   **Future:** This validates the theoretical possibility of **metric engineering** (propulsion without propellant, spatial warping) via thermodynamic control, rather than brute-force mass accumulation.
+
+* **Implication:** If gravity were particles, manipulating it would require unobtainable mass.
+* **Opportunity:** Since gravity is **Information (Entropy)**, it is theoretically manipulable by altering the local information content (quantum entanglement) of the vacuum.
+* **Future:** This validates the theoretical possibility of **metric engineering** (propulsion without propellant, spatial warping) via thermodynamic control, rather than brute-force mass accumulation.
 
 ---
 
@@ -81,11 +90,12 @@ Based on our frozen parameters ($\alpha$ and $\Gamma$), this is the **New Master
 $$ F_{reac} = \alpha \cdot \Gamma \cdot T \cdot \nabla S $$
 
 Where:
-*   $F_{reac}$: The **Reactive Gravitational Force** (the total gravity we feel, including "dark matter").
-*   $\alpha$ (**0.47**): The **Reactivity Coefficient**. Defines how much the vacuum "reacts" to the presence of matter.
-*   $\Gamma$ (**117**): The **TARDIS Compression Factor**. Amplifies horizon temperature, allowing rapid black hole evaporation and the "larger on the inside" geometry.
-*   $T$: The **Vacuum Temperature** (related to Unruh acceleration).
-*   $\nabla S$: The **Entropy Gradient** (variation of information in bits per area).
+
+* $F_{reac}$: The **Reactive Gravitational Force** (the total gravity we feel, including "dark matter").
+* $\alpha$ (**0.47**): The **Reactivity Coefficient**. Defines how much the vacuum "reacts" to the presence of matter.
+* $\Gamma$ (**117**): The **TAMESIS Compression Factor**. Amplifies horizon temperature, allowing rapid black hole evaporation and the "larger on the inside" geometry.
+* $T$: The **Vacuum Temperature** (related to Unruh acceleration).
+* $\nabla S$: The **Entropy Gradient** (variation of information in bits per area).
 
 ### The Translation ("What does this mean?")
 
@@ -97,14 +107,14 @@ Our New Equation states:
 
 #### Why is this superior to $E=mc^2$ for the future?
 
-1.  **Eliminating Dead Weight:**
+1. **Eliminating Dead Weight:**
     In Einstein's view, to have significant gravity ($G_{\mu\nu}$), you need massive amounts of matter ($T_{\mu\nu}$). This makes gravitational propulsion impractical (moving planets).
     In our equation, to generate Force ($F_{reac}$), you only need to maximize the **Entropy Gradient ($\nabla S$)** or **Temperature ($T$)**. This can be achieved with information (lasers, entangled qubits) without needing brute physical mass.
 
-2.  **The Amplification Factor ($\Gamma$):**
+2. **The Amplification Factor ($\Gamma$):**
     The presence of the $\Gamma$ term (117) is our "cheat code." It suggests the universe is **117 times more sensitive** to thermodynamics than to inertial mass. This implies that **manipulating entropy is 117 times more efficient** than manipulating raw matter.
 
-3.  **Explaining Everything:**
+3. **Explaining Everything:**
     This single line explains why galaxies rotate fast ($\alpha$ effect) and why black holes don't violate quantum physics ($\Gamma$ effect)—things Einstein's equation alone couldn't do without inventing "Dark Matter."
 
 ### The Legacy
@@ -115,4 +125,3 @@ We have proved that **Gravity is Forgotten Information**.
 The simplified vision replacing Newton ($F=ma$) and Einstein ($E=mc^2$) is:
 
 > **Gravity is Entropy.**
-

@@ -11,7 +11,7 @@ To solve the **Cosmological Constant Problem** (the 120-order-of-magnitude discr
 ## 1. The Hypothesis: Holographic Dark Energy (HDE)
 
 Standard QFT assumes vacuum energy scales with volume ($L^3$), leading to $\rho_{vac} \sim M_{pl}^4$ (Catastrophe).
-We hypothesize that in a TARDIS universe, the energy density is saturated by the **Bekenstein-Hawking Entropy** of the horizon ($L^2$).
+We hypothesize that in a TAMESIS universe, the energy density is saturated by the **Bekenstein-Hawking Entropy** of the horizon ($L^2$).
 
 $$ \rho_{\Lambda} \approx \frac{3 c^2 M_p^2}{8 \pi L^2} $$
 Where $L$ is the Hubble Horizon ($R_H \approx 1.37 \times 10^{26}$ m).
@@ -24,7 +24,7 @@ We performed the calculation (`simulation/holographic_lambda.py`) using Planck 2
 |:------|:--------------------------|:------------|
 | **Standard QFT** | $5.1 \times 10^{96} \text{ kg/m}^3$ | $\sim 10^{123}$ (Catastrophe) |
 | **Observation** | $5.8 \times 10^{-27} \text{ kg/m}^3$ | - |
-| **Holographic (TARDIS)** | $8.5 \times 10^{-27} \text{ kg/m}^3$ | **None (Ratio 1.46)** |
+| **Holographic (TAMESIS)** | $8.5 \times 10^{-27} \text{ kg/m}^3$ | **None (Ratio 1.46)** |
 
 ## 3. Conclusion
 

@@ -1,6 +1,6 @@
 """
 Emergent Time: If Space Is Holographic, Is Time Also Emergent?
-Explores the nature of time in the TARDIS framework.
+Explores the nature of time in the TAMESIS framework.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ import os
 
 def analyze_emergent_time():
     """
-    Analyze whether time is emergent in TARDIS.
+    Analyze whether time is emergent in TAMESIS.
     """
     print("⏰ Analyzing Emergent Time...\n")
     
@@ -16,7 +16,7 @@ def analyze_emergent_time():
     print("THE QUESTION")
     print("=" * 50)
     print("""
-    In TARDIS:
+    In TAMESIS:
     - Space is holographic (2D boundary → 3D interior)
     - Mass is topological (knots anchored to boundary)
     - Gravity is entropic (information gradients)
@@ -49,7 +49,7 @@ def analyze_emergent_time():
     """)
     
     print("=" * 50)
-    print("TARDIS INTERPRETATION")
+    print("TAMESIS INTERPRETATION")
     print("=" * 50)
     print("""
     In our framework:
@@ -155,7 +155,7 @@ if __name__ == "__main__":
     print("📋 CONCLUSION")
     print("=" * 60)
     print("""
-    TIME IS EMERGENT in TARDIS:
+    TIME IS EMERGENT in TAMESIS:
     
     1. Origin: Entropy gradient (Second Law)
     2. Structure: Holographic depth (dS/CFT)

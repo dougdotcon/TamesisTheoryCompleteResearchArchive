@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 TESTE DE HIPÓTESES DE FÍSICA TEÓRICA
-Época de Planck com Leis Dinâmicas e Universo TARDIS
+Época de Planck com Leis Dinâmicas e Universo TAMESIS
 
 Arquivo principal para executar as simulações validadas.
 Utilize este arquivo como ponto de entrada principal do projeto.
@@ -26,7 +26,7 @@ def main():
     print()
     print("🔬 Hipóteses testadas:")
     print("1. Leis físicas dinâmicas durante eventos supercosmicos")
-    print("2. Universo TARDIS: compressão quântica espaço-temporal")
+    print("2. Universo TAMESIS: compressão quântica espaço-temporal")
     print()
     print("🚀 Executando simulação V3.0 com:")
     print("   • Múltiplos métodos numéricos (Runge-Kutta, diferenças finitas)")

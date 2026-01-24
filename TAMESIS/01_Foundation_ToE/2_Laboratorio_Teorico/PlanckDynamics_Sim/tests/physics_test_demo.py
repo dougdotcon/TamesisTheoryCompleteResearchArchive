@@ -68,7 +68,7 @@ class DemoPhysicsTest:
         return results
     
     def tardis_universe_demo(self, time_array):
-        """Demonstra o modelo do universo TARDIS"""
+        """Demonstra o modelo do universo TAMESIS"""
         
         external_radius = 1.0  # Raio externo fixo
         results = {
@@ -144,7 +144,7 @@ class DemoPhysicsTest:
             max_alpha_variation > 0.01
         ])
         
-        # Hipótese 2: Universo TARDIS
+        # Hipótese 2: Universo TAMESIS
         compression_growth = tardis_data['compression_ratios'][-1] / tardis_data['compression_ratios'][0]
         internal_growth = tardis_data['internal_scale_factors'][-1] / tardis_data['internal_scale_factors'][0]
         
@@ -188,8 +188,8 @@ class DemoPhysicsTest:
         ax1.legend()
         ax1.grid(True, alpha=0.3)
         
-        # Painel 2: Modelo TARDIS - Expansão Interna vs Externa
-        ax2.set_title('Modelo TARDIS: Expansão Interna vs Tamanho Externo', fontsize=14, fontweight='bold')
+        # Painel 2: Modelo TAMESIS - Expansão Interna vs Externa
+        ax2.set_title('Modelo TAMESIS: Expansão Interna vs Tamanho Externo', fontsize=14, fontweight='bold')
         ax2.loglog(times, tardis_data['internal_scale_factors'], 'r-', label='Fator de Escala Interno', linewidth=3)
         ax2.loglog(times, [1.0] * len(times), 'b--', label='Raio Externo (constante)', linewidth=3)
         ax2.set_xlabel('Tempo (segundos)')
@@ -274,7 +274,7 @@ class DemoPhysicsTest:
         print("\n1. Testando Hipótese das Leis Físicas Dinâmicas...")
         constants_data = self.dynamic_constants_demo(time_array)
         
-        print("2. Testando Hipótese do Universo TARDIS...")
+        print("2. Testando Hipótese do Universo TAMESIS...")
         tardis_data = self.tardis_universe_demo(time_array)
         
         print("3. Gerando Predições Observacionais...")
@@ -316,7 +316,7 @@ class DemoPhysicsTest:
         for const, var in analysis['dynamic_constants']['max_variations'].items():
             print(f"  • {const}: {var:.1f}%")
         
-        print(f"\nHIPÓTESE 2: UNIVERSO TARDIS")
+        print(f"\nHIPÓTESE 2: UNIVERSO TAMESIS")
         print(f"Status: {'SUPORTADA ✓' if analysis['tardis_universe']['supported'] else 'NÃO SUPORTADA ✗'}")
         print(f"Crescimento da compressão: {analysis['tardis_universe']['compression_growth']:.2e}")
         print(f"Crescimento interno: {analysis['tardis_universe']['internal_growth']:.2e}")

@@ -42,7 +42,7 @@ class PhysicsConstants:
     k_B: float = 1.380649e-23  # J/K
     G: float = 6.67430e-11  # m³/(kg·s²)
     
-    # TARDIS
+    # TAMESIS
     OMEGA: float = 117.038
     
     # Derivados
@@ -645,7 +645,7 @@ class FinalSynthesis:
     Síntese de todas as descobertas do projeto PROOF.
     
     O QUADRO COMPLETO:
-    1. Espaço-tempo = tecido holográfico (TARDIS)
+    1. Espaço-tempo = tecido holográfico (TAMESIS)
     2. Partículas = defeitos topológicos (wormholes, nós)
     3. Propriedades = invariantes geométricos
     4. Forças = gradientes de entropia
@@ -662,7 +662,7 @@ class FinalSynthesis:
         
         return {
             'fundamental_entities': {
-                'spacetime': 'Tela holográfica com métrica TARDIS (Ω = 117.038)',
+                'spacetime': 'Tela holográfica com métrica TAMESIS (Ω = 117.038)',
                 'bits': 'Unidades elementares de informação (1 bit = 4 l_P² ln 2)',
                 'time': 'Taxa de processamento de bits (1 tick = t_P)'
             },
@@ -846,7 +846,7 @@ Ela EMERGE da termodinâmica holográfica:
 
 O PROJETO ESTÁ COMPLETO. A TEORIA DE TUDO É:
 
-    INFORMAÇÃO HOLOGRÁFICA + TOPOLOGIA + ESCALA TARDIS (Ω)
+    INFORMAÇÃO HOLOGRÁFICA + TOPOLOGIA + ESCALA TAMESIS (Ω)
 
 Gravidade, Eletromagnetismo, Força Forte, Matéria, Mecânica Quântica...
 Tudo é a mesma coisa vista de ângulos diferentes.

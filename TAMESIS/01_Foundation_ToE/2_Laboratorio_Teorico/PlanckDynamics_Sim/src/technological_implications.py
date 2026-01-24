@@ -4,7 +4,7 @@ Aplicações práticas das descobertas de física fundamental
 
 Baseado nas hipóteses validadas:
 - Leis Físicas Dinâmicas: Variações controláveis de constantes
-- Universo TARDIS: Compressão quântica de espaço-tempo
+- Universo TAMESIS: Compressão quântica de espaço-tempo
 - Hipóteses Complementares: Cristalização quântica, dobramento temporal, etc.
 """
 
@@ -121,13 +121,13 @@ class TechnologicalImplicationsAnalyzer:
     
     def technology_2_tardis_compression_engines(self) -> TechnologicalApplication:
         """
-        TECNOLOGIA 2: MOTORES DE COMPRESSÃO TARDIS
+        TECNOLOGIA 2: MOTORES DE COMPRESSÃO TAMESIS
         
         Sistemas que utilizam compressão quântica para criar espaços
         internos maiores que suas dimensões externas.
         """
         return TechnologicalApplication(
-            name="Motores de Compressão Quântica TARDIS",
+            name="Motores de Compressão Quântica TAMESIS",
             description="Tecnologia para criar espaços internos comprimidos, maiores que dimensões externas",
             scientific_basis="Compressão quântica validada de 117,038× com estabilidade numérica",
             current_trl=TechnologyMaturityLevel.TRL_2,
@@ -159,7 +159,7 @@ class TechnologicalImplicationsAnalyzer:
             ethical_considerations=[
                 "Direitos de propriedade em espaços comprimidos",
                 "Jurisdição legal em dimensões não-padrão",
-                "Efeitos psicológicos de viver em espaços TARDIS",
+                "Efeitos psicológicos de viver em espaços TAMESIS",
                 "Impacto na arquitetura e planejamento urbano",
                 "Riscos de isolamento em espaços desconectados"
             ],
@@ -223,7 +223,7 @@ class TechnologicalImplicationsAnalyzer:
         return TechnologicalApplication(
             name="Sistemas de Comunicação por Dobramento Temporal",
             description="Comunicação instantânea utilizando múltiplas camadas temporais simultâneas",
-            scientific_basis="Hipótese de dobramento temporal derivada da compressão TARDIS",
+            scientific_basis="Hipótese de dobramento temporal derivada da compressão TAMESIS",
             current_trl=TechnologyMaturityLevel.TRL_1,
             target_trl=TechnologyMaturityLevel.TRL_4,
             development_timeline="60-100 anos",
@@ -270,7 +270,7 @@ class TechnologicalImplicationsAnalyzer:
         return TechnologicalApplication(
             name="Interfaces Diretas de Campo de Consciência",
             description="Tecnologia para interação direta com o campo quântico da consciência",
-            scientific_basis="Hipótese de acoplamento consciência-campo quântico derivada do universo TARDIS",
+            scientific_basis="Hipótese de acoplamento consciência-campo quântico derivada do universo TAMESIS",
             current_trl=TechnologyMaturityLevel.TRL_1,
             target_trl=TechnologyMaturityLevel.TRL_3,
             development_timeline="80-150 anos",
@@ -464,7 +464,7 @@ class TechnologicalImplicationsAnalyzer:
             ],
             'development_phases': {
                 'phase_1_2025_2055': {
-                    'focus': "Manipulação de Constantes e Compressão TARDIS",
+                    'focus': "Manipulação de Constantes e Compressão TAMESIS",
                     'investment': "$800B - $1.5T",
                     'key_milestones': [
                         "Primeira demonstração de variação controlada de constantes",
@@ -523,7 +523,7 @@ class TechnologicalImplicationsAnalyzer:
             },
             'scientific_foundation': {
                 'validated_discoveries': self.physics_discoveries,
-                'theoretical_framework': "Leis Físicas Dinâmicas + Universo TARDIS + Hipóteses Complementares",
+                'theoretical_framework': "Leis Físicas Dinâmicas + Universo TAMESIS + Hipóteses Complementares",
                 'confidence_level': "Alto (baseado em simulações numericamente estáveis)"
             },
             'investment_phases': {
@@ -541,7 +541,7 @@ class TechnologicalImplicationsAnalyzer:
                     'focus': "Desenvolvimento de protótipos e escalabilidade",
                     'deliverables': [
                         "Dispositivos funcionais de manipulação de constantes",
-                        "Sistemas de compressão TARDIS aplicáveis",
+                        "Sistemas de compressão TAMESIS aplicáveis",
                         "Primeiros produtos comerciais"
                     ]
                 },

@@ -10,7 +10,7 @@ class MetricEngineer:
     def __init__(self, gamma_base=117.038):
         """
         Initialize with standard spacetime properties.
-        Gamma = 117.038 is derived from the TARDIS framework (related to Alpha^-1).
+        Gamma = 117.038 is derived from the TAMESIS framework (related to Alpha^-1).
         """
         self.gamma_vacuum = gamma_base
         self.c = 2.998e8 # m/s
@@ -22,7 +22,7 @@ class MetricEngineer:
         
         If gamma_target -> 1 (perfect vacuum modification), Ratio -> 117.
         Wait, logic check:
-        In TARDIS, M_eff = M_0 * Gamma? Or M_eff = M_0 / Gamma?
+        In TAMESIS, M_eff = M_0 * Gamma? Or M_eff = M_0 / Gamma?
         
         Ref: ENGENHARIA_METRICA.MD
         "m_eff = m_0 * f(gamma)"

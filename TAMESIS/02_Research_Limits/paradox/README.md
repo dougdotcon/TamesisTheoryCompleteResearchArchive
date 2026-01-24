@@ -12,7 +12,7 @@ To resolve the **Black Hole Information Paradox** by demonstrating that the even
 
 Stephen Hawking (1976) calculated that radiation from a Black Hole is thermal (random), meaning it carries no information. If the BH evaporates completely, the information is lost forever (Violation of Unitarity).
 
-**The Soltuion:** Hawking's calculation assumed the vacuum near the horizon was unique. In TARDIS, the horizon is a **Topological Domain Wall** with surface degrees of freedom that scramble information.
+**The Soltuion:** Hawking's calculation assumed the vacuum near the horizon was unique. In TAMESIS, the horizon is a **Topological Domain Wall** with surface degrees of freedom that scramble information.
 
 ## 2. Simulation Results
 
@@ -23,7 +23,7 @@ We simulated the evaporation of a N-Qubit Black Hole evolving under random unita
 ### The Page Curve
 
 * **Red Line (Hawking):** Entropy keeps rising. Information is lost.
-* **Green Line (TARDIS):** Entropy rises until the "Page Time" (50% evaporation), then **decreases back to zero**.
+* **Green Line (TAMESIS):** Entropy rises until the "Page Time" (50% evaporation), then **decreases back to zero**.
 
 This proves that:
 

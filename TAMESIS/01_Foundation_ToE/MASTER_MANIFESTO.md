@@ -1,4 +1,4 @@
-# TARDIS Ecosystem: Master Manifesto
+# TAMESIS Ecosystem: Master Manifesto
 
 **The Complete Scientific Architecture of the Theory of Everything**
 
@@ -10,7 +10,7 @@
 
 ## 1. The Vision
 
-The **TARDIS (Topological Analysis of Recursive Dimensional Information Systems)** project represents humanity's first complete Theory of Everything—a unified framework where **Information is the fundamental substrate of reality**.
+The **TAMESIS (Topological Analysis of Recursive Dimensional Information Systems)** project represents humanity's first complete Theory of Everything—a unified framework where **Information is the fundamental substrate of reality**.
 
 By replacing the 19 arbitrary parameters of the Standard Model with a single geometric compression factor:
 
@@ -25,7 +25,7 @@ We derive a complete description of:
 
 ---
 
-## 2. The 5 Pillars of TARDIS Physics
+## 2. The 5 Pillars of TAMESIS Physics
 
 | Pillar | Principle | Implication |
 |:-------|:----------|:------------|
@@ -41,7 +41,7 @@ We derive a complete description of:
 
 ### 3.1 Particle Physics
 
-| Property | Traditional | TARDIS Derivation | Precision |
+| Property | Traditional | TAMESIS Derivation | Precision |
 |:---------|:------------|:------------------|:---------:|
 | Electron Mass | Free parameter | $m_e = M_U \cdot \Omega^{-40.23}$ | **0.000%** |
 | Fine Structure Constant | Free parameter | $\alpha^{-1} = \Omega^{1.03} \approx 137$ | **0.003%** |
@@ -53,7 +53,7 @@ We derive a complete description of:
 
 ### 3.2 Cosmology
 
-| Problem | Standard Model | TARDIS Solution | Status |
+| Problem | Standard Model | TAMESIS Solution | Status |
 |:--------|:---------------|:----------------|:------:|
 | Dark Matter | WIMP particles | Entropic gravity at $a < a_0$ | ✅ Solved |
 | Dark Energy | Cosmological constant | Hawking evaporation from inside | ✅ Solved |
@@ -64,7 +64,7 @@ We derive a complete description of:
 
 ### 3.3 Quantum Mechanics
 
-| Mystery | Copenhagen | TARDIS Interpretation |
+| Mystery | Copenhagen | TAMESIS Interpretation |
 |:--------|:-----------|:----------------------|
 | Wave Function | Probability amplitude | Bit density on holographic boundary |
 | Collapse | Magical projection | Decoherence + boundary information flow |
@@ -94,7 +94,7 @@ Hypothesis testing and simulation of "what-if" scenarios.
 | Lab | Function | Key Results |
 |:----|:---------|:------------|
 | **Bounce_Cosmology** | Black Hole Universe hypothesis | Rs/RH = 1.096, 61.7 e-folds |
-| **PlanckDynamics_Sim** | TARDIS Effect thermodynamics | α=0.47, Γ=117.038 |
+| **PlanckDynamics_Sim** | TAMESIS Effect thermodynamics | α=0.47, Γ=117.038 |
 | **FINETUNNING** | AI training corpus | 4 comprehensive documents |
 | **proof** | CODATA verification | 0.000% error confirmed |
 
@@ -130,7 +130,7 @@ $$\boxed{F_{reactive} = \alpha \cdot \Gamma \cdot T \cdot \nabla S}$$
 Where:
 
 - **α = 0.47** — Entropic coupling (vacuum reactivity)
-- **Γ = 117.038** — TARDIS compression factor (= Ω)
+- **Γ = 117.038** — TAMESIS compression factor (= Ω)
 - **T** — Unruh/Hawking temperature
 - **∇S** — Entropy gradient
 
@@ -193,7 +193,7 @@ All **42 Python scripts** in `novos_papers/` have been audited:
 
 | Prediction | Test | Implication if Wrong |
 |:-----------|:-----|:---------------------|
-| **r → 0** (no primordial GWs) | CMB-S4 | TARDIS inflation falsified |
+| **r → 0** (no primordial GWs) | CMB-S4 | TAMESIS inflation falsified |
 | **No 4th generation lepton** | LHC/FCC | Mass scaling falsified |
 | **No axion detection** | ADMX | Topological θ = 0 confirmed |
 | **Time-varying α** | Precision spectroscopy | Ω evolution detected |

@@ -5,28 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamesis Theory Complete Research Archive</title>
-    <!-- Ivy League Typography: Playfair Display (Serif) + Lato (Sans) -->
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Source+Code+Pro:wght@500&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            /* Palette: Deep Navy, Cardinal Red, Warm Grey */
             --primary-navy: #002147;
-            /* Classic Academic Blue */
             --primary-crimson: #8C1515;
-            /* Stanford Red */
             --accent-gold: #B3A369;
-            /* Prestige Gold */
-
             --bg-color: #fdfdfd;
-            /* Paper White */
             --bg-offset: #f9f9f9;
-            /* Light Grey */
-
             --text-main: #222222;
             --text-muted: #555555;
-
             --border-color: #e0e0e0;
             --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
@@ -47,7 +37,6 @@
             padding: 3rem 2rem;
         }
 
-        /* HEADER SECTION */
         header {
             text-align: center;
             margin-bottom: 5rem;
@@ -61,7 +50,6 @@
             font-weight: 700;
             color: var(--primary-navy);
             margin-bottom: 0.5rem;
-            line-height: 1.1;
         }
 
         .subtitle {
@@ -88,7 +76,6 @@
             margin-right: 0.3rem;
         }
 
-        /* VISUAL GALLERY */
         .visual-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -114,7 +101,6 @@
 
         .figure-caption {
             padding: 1.2rem;
-            font-family: 'Lato', sans-serif;
             font-size: 0.9rem;
             color: var(--text-muted);
             text-align: left;
@@ -130,9 +116,8 @@
             font-weight: 700;
         }
 
-        /* PROGRAM SECTIONS */
         .program-section {
-            margin-bottom: 6rem;
+            margin-bottom: 4rem;
         }
 
         .section-header {
@@ -148,7 +133,6 @@
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             color: var(--border-color);
-            line-height: 1;
             font-weight: 700;
             text-align: right;
         }
@@ -157,7 +141,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             color: var(--primary-navy);
-            margin: 0 0 0.5rem 0;
+            margin: 0;
         }
 
         .section-meta {
@@ -165,24 +149,15 @@
             color: var(--primary-crimson);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .section-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            margin-bottom: 2rem;
         }
 
         .theory-description {
-            font-size: 1rem;
-            color: var(--text-main);
-        }
-
-        .theory-description p {
-            margin-bottom: 1rem;
-            text-align: justify;
+            margin-bottom: 2rem;
         }
 
         .core-box {
@@ -201,54 +176,82 @@
             margin-bottom: 0.5rem;
         }
 
-        .paper-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        .full-paper-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
         }
 
         .paper-item {
             background: white;
             border: 1px solid var(--border-color);
-            padding: 1rem;
+            padding: 0.8rem 1rem;
             text-decoration: none;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 1rem;
+            font-size: 0.95rem;
         }
 
         .paper-item:hover {
             border-color: var(--primary-navy);
-            transform: translateX(5px);
             background: #fdfdff;
+            transform: translateX(3px);
         }
 
         .paper-id {
             font-family: 'Source Code Pro', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             background: var(--bg-offset);
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: 2px;
-            min-width: 80px;
-            text-align: center;
+            min-width: 120px;
+            text-align: right;
         }
 
-        .paper-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
+        .paper-name {
+            font-family: 'Lato', sans-serif;
             color: var(--text-main);
             font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .breakthrough .paper-id {
+        .breakthrough {
+            border-left: 4px solid var(--primary-crimson);
+        }
+
+        .novel {
+            border-left: 4px solid var(--primary-navy);
+        }
+
+        .archive-list {
+            column-count: 2;
+            column-gap: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .archive-item {
+            break-inside: avoid;
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .archive-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .archive-item a:hover {
             color: var(--primary-crimson);
-            background: rgba(140, 21, 21, 0.05);
-            font-weight: bold;
+            border-bottom: 1px solid var(--primary-crimson);
         }
 
-        /* FOOTER */
         footer {
             border-top: 1px solid var(--border-color);
             padding-top: 4rem;
@@ -280,187 +283,231 @@
     <div class="container">
         <header>
             <h1>The Tamesis Theory Archive</h1>
-            <div class="subtitle">A Definitive Record of the Quest for Unification (2024-2026)</div>
-
+            <div class="subtitle">Complete Record of the Quest for Unification (2024-2026)</div>
             <div class="metadata-row">
-                <div class="metadata-item"><span>Status:</span> Program Closed</div>
-                <div class="metadata-item"><span>Artifacts:</span> 140+ Documents</div>
+                <div class="metadata-item"><span>Artifacts:</span> 200+ Documents</div>
                 <div class="metadata-item"><span>Director:</span> Douglas H. M. Fulber</div>
+                <div class="metadata-item"><span>Status:</span> Final</div>
             </div>
         </header>
 
-        <!-- Visual Abstract -->
         <div class="visual-gallery">
-            <div class="figure-card">
-                <img src="animations/TRI_Infinite_Loop.gif" alt="TRI Loop">
-                <div class="figure-caption">
-                    <strong>Fig 1. Regime Incompatibility (TRI)</strong>
-                    Reaction-diffusion simulation showing the eternal competition between incompatible vacuum phases.
-                    The universe is a "patchwork" where domain walls prevent the mixing of physical laws (e.g., Quantum
-                    vs. Gravity).
-                </div>
+            <div class="figure-card"><img src="animations/TRI_Infinite_Loop.gif">
+                <div class="figure-caption"><strong>Fig 1. Regime Incompatibility (TRI)</strong> Reaction-diffusion
+                    dynamics of vacuum phases.</div>
             </div>
-            <div class="figure-card">
-                <img src="animations/TDTR_Infinite_Loop.gif" alt="TDTR Loop">
-                <div class="figure-caption">
-                    <strong>Fig 2. Thermodynamic Time (TDTR)</strong>
-                    Visualizing the "Arrow of Time" as an irreversible entropic drift. Particles (information) expand
-                    into the holographic horizon, generating what we perceive as the flow of macroscopic time.
-                </div>
+            <div class="figure-card"><img src="animations/TDTR_Infinite_Loop.gif">
+                <div class="figure-caption"><strong>Fig 2. Thermodynamic Time (TDTR)</strong> Entropic flow of the
+                    holographic horizon.</div>
             </div>
-            <div class="figure-card">
-                <img src="animations/TAMESIS_Infinite_Loop.gif" alt="Tamesis Loop">
-                <div class="figure-caption">
-                    <strong>Fig 3. Spectral Structure (TAMESIS)</strong>
-                    The "Source Code" of reality. Prime geodesics rotating on the Poincaré disk illustrate the invariant
-                    number-theoretic skeleton that remains stable across all regime transitions.
-                </div>
+            <div class="figure-card"><img src="animations/TAMESIS_Infinite_Loop.gif">
+                <div class="figure-caption"><strong>Fig 3. Spectral Structure</strong> Prime geodesics invariant under
+                    transitions.</div>
             </div>
         </div>
 
-        <!-- PART 1: TAMESIS -->
+        <!-- TAMESIS -->
         <div class="program-section">
             <div class="section-header">
                 <div class="section-number">I</div>
                 <div class="section-title">
-                    <div class="section-meta">The Mathematical Skeleton</div>
+                    <div class="section-meta">Mathematical Skeleton</div>
                     <h2>The Tamesis System</h2>
                 </div>
             </div>
             <div class="section-body">
-                <div class="theory-description">
-                    <p><strong>What is it?</strong> TAMESIS (Topological Axiomatic Model of Emergent Spacetime
-                        Information Systems) serves as the number-theoretic foundation of the universe. It treats
-                        physical laws not as arbitrary observations, but as inevitable consequences of spectral
-                        geometry.</p>
-
-                    <div class="core-box">
-                        <strong>Core Discovery: The $U_{1/2}$ Universality Class</strong>
-                        We discovered that the distribution of prime numbers (Riemann Zeta Zeros) and the energy levels
-                        of quantum chaos share the same statistical signature. This universality class governs any
-                        system that is "maximally random but structurally rigid."
-                    </div>
-
-                    <p><strong>Key Concepts:</strong> We derived a Hamiltonian whose eigenvalues match the prime numbers
-                        ($E_n = \log p_n$), implying spacetime is a "data structure" built to optimize information
-                        processing.</p>
+                <div class="theory-description">Foundational number theory and spectral geometry. Key Result: The
+                    $U_{1/2}$ Universality Class connecting Primes and Chaos.</div>
+                <div class="full-paper-list">
+                    <a href="TAMESIS/42_Closure_Paper/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">SYSTEM CLOSURE</span><span class="paper-name">System Closure
+                            Paper</span></a>
+                    <a href="TAMESIS/34_Spectral_Theory_Computation/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">BREAKTHROUGH</span><span class="paper-name">Spectral Engine
+                            Computation</span></a>
+                    <a href="TAMESIS/41_Universality_Atlas/index.html" class="paper-item novel"><span
+                            class="paper-id">ATLAS</span><span class="paper-name">The Universality Atlas</span></a>
+                    <a href="TAMESIS/01_Foundation_ToE/unified_papers.html" class="paper-item"><span
+                            class="paper-id">LEGACY</span><span class="paper-name">Unified Foundation Papers</span></a>
+                    <a href="TAMESIS/28_Graph_Zeta_Primes/index.html" class="paper-item"><span class="paper-id">GAP
+                            RECOVERY</span><span class="paper-name">Graph Zeta Primes</span></a>
+                    <a href="TAMESIS/29_Chaotic_Flow_Primes/index.html" class="paper-item"><span class="paper-id">GAP
+                            RECOVERY</span><span class="paper-name">Chaotic Flow Primes</span></a>
+                    <a href="TAMESIS/30_Computational_Primes/index.html" class="paper-item"><span class="paper-id">GAP
+                            RECOVERY</span><span class="paper-name">Computational Primes</span></a>
+                    <a href="TAMESIS/31_Euclidean_Spectral_Operator/index.html" class="paper-item"><span
+                            class="paper-id">GAP RECOVERY</span><span class="paper-name">Euclidean Operator</span></a>
+                    <a href="TAMESIS/32_Complexity_As_Prime_Count/index.html" class="paper-item"><span
+                            class="paper-id">GAP RECOVERY</span><span class="paper-name">Complexity as Prime
+                            Count</span></a>
+                    <a href="TAMESIS/33_Computational_Levinson/index.html" class="paper-item"><span class="paper-id">GAP
+                            RECOVERY</span><span class="paper-name">Levinson Theorem</span></a>
+                    <a href="TAMESIS/35_Unified_Constants_Derivation/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 35</span><span class="paper-name">Unified Constants</span></a>
+                    <a href="TAMESIS/36_Theory_of_Regime_Transitions/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 36</span><span class="paper-name">Transitions Intro</span></a>
+                    <a href="TAMESIS/37_U12_Physical_Tests/index.html" class="paper-item"><span class="paper-id">STAGE
+                            37</span><span class="paper-name">Experimental Tests</span></a>
+                    <a href="TAMESIS/38_U12_Applications/index.html" class="paper-item"><span class="paper-id">STAGE
+                            38</span><span class="paper-name">Applications</span></a>
+                    <a href="TAMESIS/39_U2_Lindblad_Class/index.html" class="paper-item"><span class="paper-id">STAGE
+                            39</span><span class="paper-name">Lindblad Class</span></a>
+                    <a href="TAMESIS/40_U0_Threshold_Class/index.html" class="paper-item"><span class="paper-id">STAGE
+                            40</span><span class="paper-name">Threshold Class</span></a>
                 </div>
-                <div class="paper-list">
-                    <a href="TAMESIS/42_Closure_Paper/index.html" class="paper-item breakthrough">
-                        <div class="paper-id">CLOSURE</div>
-                        <div class="paper-title">System Closure & Final Axioms</div>
-                    </a>
-                    <a href="TAMESIS/34_Spectral_Theory_Computation/index.html" class="paper-item breakthrough">
-                        <div class="paper-id">PAPER 34</div>
-                        <div class="paper-title">Spectral Engine Computation</div>
-                    </a>
-                    <a href="TAMESIS/41_Universality_Atlas/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 41</div>
-                        <div class="paper-title">The Universality Atlas</div>
-                    </a>
-                    <a href="TAMESIS/28_Graph_Zeta_Primes/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 28</div>
-                        <div class="paper-title">Graph Zeta Primes</div>
-                    </a>
-                    <a href="TAMESIS/01_Foundation_ToE/unified_papers.html" class="paper-item">
-                        <div class="paper-id">ARCHIVE</div>
-                        <div class="paper-title">Unified Foundation Papers</div>
-                    </a>
+
+                <h4 style="margin-top:2rem; border-bottom:1px solid #ddd;">Archive: Foundation Papers (Subfolder 01)
+                </h4>
+                <div class="archive-list">
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_baryon_topology">paper_baryon_topology</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_bekenstein_lab">paper_bekenstein_lab</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_cluster_lensing">paper_cluster_lensing</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_cosmological_voids">paper_cosmological_voids</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_hubble_tension">paper_hubble_tension</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_jwst_galaxies">paper_jwst_galaxies</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_schrodinger_test">paper_schrodinger_test</a>
+                    </div>
+                    <div class="archive-item"><a
+                            href="TAMESIS/01_Foundation_ToE/novos_papers/paper_validacao_galactica">paper_validacao_galactica</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- PART 2: TRI -->
+        <!-- TRI -->
         <div class="program-section">
             <div class="section-header">
                 <div class="section-number">II</div>
                 <div class="section-title">
-                    <div class="section-meta">The Map of Broken Symmetries</div>
-                    <h2>Theory of Regime Incompatibility (TRI)</h2>
+                    <div class="section-meta">Regime Incompatibility</div>
+                    <h2>The TRI Program</h2>
                 </div>
             </div>
             <div class="section-body">
-                <div class="theory-description">
-                    <p><strong>What is it?</strong> TRI explains why a "Theory of Everything" fails. It posits that the
-                        universe is comprised of distinct Physical Regimes (e.g., Quantum vs. Relativistic) that are
-                        topologically distinct. You cannot transform one into the other continuously.</p>
-
-                    <div class="core-box">
-                        <strong>Core Discovery: The No-Go Theorems</strong>
-                        We proved the **Incompatibility Theorem**: A vacuum state cannot simultaneously optimize for
-                        Locality (GR) and Unitarity (QM). One must always be sacrificed.
-                    </div>
-
-                    <p><strong>Implications:</strong> The universe is a "patchwork" of effective field theories sewn
-                        together by domain walls. "String Theory" and "Loop Quantum Gravity" are local descriptions of
-                        mutually exclusive regimes.</p>
-                </div>
-                <div class="paper-list">
-                    <a href="TRI/51_TRI_Founding_Paper/paper.html" class="paper-item breakthrough">
-                        <div class="paper-id">FOUNDING</div>
-                        <div class="paper-title">Theory of Regime Incompatibility</div>
-                    </a>
-                    <a href="TRI/47_NoGo_Theorems/index.html" class="paper-item breakthrough">
-                        <div class="paper-id">PAPER 47</div>
-                        <div class="paper-title">The No-Go Theorems</div>
-                    </a>
-                    <a href="TRI/49_Transition_Theory/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 49</div>
-                        <div class="paper-title">Transition Mechanics</div>
-                    </a>
-                    <a href="TRI/43_Regime_Definition/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 43</div>
-                        <div class="paper-title">Regime Definition Formalism</div>
-                    </a>
+                <div class="theory-description">The logic of failure. Proves that Unification is impossible due to
+                    topological incompatibility of vacuum regimes.</div>
+                <div class="full-paper-list">
+                    <a href="TRI/51_TRI_Founding_Paper/paper.html" class="paper-item breakthrough"><span
+                            class="paper-id">FOUNDING PAPER</span><span class="paper-name">Founding Paper</span></a>
+                    <a href="TRI/47_NoGo_Theorems/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">BREAKTHROUGH</span><span class="paper-name">No-Go Theorems</span></a>
+                    <a href="TRI/49_Transition_Theory/index.html" class="paper-item novel"><span
+                            class="paper-id">NOVEL</span><span class="paper-name">Transition Theory</span></a>
+                    <a href="TRI/43_Regime_Definition/index.html" class="paper-item"><span class="paper-id">STAGE
+                            43</span><span class="paper-name">Regime Definition</span></a>
+                    <a href="TRI/44_Regime_Invariants/index.html" class="paper-item"><span class="paper-id">STAGE
+                            44</span><span class="paper-name">Regime Invariants</span></a>
+                    <a href="TRI/45_Regime_Map/index.html" class="paper-item"><span class="paper-id">STAGE
+                            45</span><span class="paper-name">Regime Map</span></a>
+                    <a href="TRI/46_Compatibility_Criterion/index.html" class="paper-item"><span class="paper-id">STAGE
+                            46</span><span class="paper-name">Compatibility Criterion</span></a>
+                    <a href="TRI/48_ToE_Failure_Analysis/index.html" class="paper-item"><span class="paper-id">STAGE
+                            48</span><span class="paper-name">ToE Failure Analysis</span></a>
+                    <a href="TRI/50_Local_Universality/index.html" class="paper-item"><span class="paper-id">STAGE
+                            50</span><span class="paper-name">Local Universality</span></a>
+                    <a href="TRI/52_Closure_Open_Problems/index.html" class="paper-item"><span class="paper-id">STAGE
+                            52</span><span class="paper-name">Closure & Open Problems</span></a>
                 </div>
             </div>
         </div>
 
-        <!-- PART 3: TDTR -->
+        <!-- TDTR -->
         <div class="program-section">
             <div class="section-header">
                 <div class="section-number">III</div>
                 <div class="section-title">
-                    <div class="section-meta">The Engine of Time</div>
-                    <h2>Thermodynamic Time Reversal (TDTR)</h2>
+                    <div class="section-meta">Thermodynamic Time</div>
+                    <h2>The TDTR Program</h2>
                 </div>
             </div>
             <div class="section-body">
-                <div class="theory-description">
-                    <p><strong>What is it?</strong> TDTR describes the dynamics of transitions. It identifies TIME not
-                        as a coordinate, but as the irreversible process of information loss. Gravity is reformulated as
-                        the "elastic snap-back" of spacetime trying to maximize entropy.</p>
-
-                    <div class="core-box">
-                        <strong>Validation: Entropic Gravity</strong>
-                        We simulated 100 galaxies using TDTR equations. We reproduced **flat rotation curves** without
-                        Dark Matter, purely by accounting for the entropy of vacuum memory ($S_{mem}$).
-                    </div>
-
-                    <p><strong>Key Concept:</strong> Irreversibility. You can turn an omelet and back into an egg only
-                        if you pay the energy cost. The "Arrow of Time" is structural.</p>
+                <div class="theory-description">The Dynamic Solution. Reformulates Gravity as Entropic Force and Time as
+                    Irreversible Information Loss.</div>
+                <div class="full-paper-list">
+                    <a href="TDTR/76_TDTR_Founding_Paper/tdtr_paper.html" class="paper-item breakthrough"><span
+                            class="paper-id">FOUNDING PAPER</span><span class="paper-name">TDTR Founding
+                            Paper</span></a>
+                    <a href="TDTR/56_Fundamental_Directionality/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">BREAKTHROUGH</span><span class="paper-name">Irreversibility
+                            Proof</span></a>
+                    <a href="TDTR/67_QFT_to_GR/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">BREAKTHROUGH</span><span class="paper-name">QFT to GR Transition</span></a>
+                    <a href="TDTR/53_Transition_Definition/index.html" class="paper-item"><span class="paper-id">STAGE
+                            53</span><span class="paper-name">Transition Definition</span></a>
+                    <a href="TDTR/54_Transition_Space/index.html" class="paper-item"><span class="paper-id">STAGE
+                            54</span><span class="paper-name">Transition Space</span></a>
+                    <a href="TDTR/55_Allowed_Transitions/index.html" class="paper-item"><span class="paper-id">STAGE
+                            55</span><span class="paper-name">Allowed Transitions</span></a>
+                    <a href="TDTR/57_Interface_Survival/index.html" class="paper-item"><span class="paper-id">STAGE
+                            57</span><span class="paper-name">Interface Survival</span></a>
+                    <a href="TDTR/58_Information_Loss/index.html" class="paper-item"><span class="paper-id">STAGE
+                            58</span><span class="paper-name">Information Loss</span></a>
+                    <a href="TDTR/59_Transition_Monotones/index.html" class="paper-item"><span class="paper-id">STAGE
+                            59</span><span class="paper-name">Transition Monotones</span></a>
+                    <a href="TDTR/60_Conservation_Failures/index.html" class="paper-item"><span class="paper-id">STAGE
+                            60</span><span class="paper-name">Conservation Failures</span></a>
+                    <a href="TDTR/61_TDTR_Axioms/index.html" class="paper-item"><span class="paper-id">STAGE
+                            61</span><span class="paper-name">TDTR Axioms</span></a>
+                    <a href="TDTR/62_Dissipative_Transitions/index.html" class="paper-item"><span class="paper-id">STAGE
+                            62</span><span class="paper-name">Dissipative Transitions</span></a>
+                    <a href="TDTR/63_Arrows_of_Time/index.html" class="paper-item"><span class="paper-id">STAGE
+                            63</span><span class="paper-name">Arrows of Time</span></a>
+                    <a href="TDTR/64_Information_Symmetry_Breaking/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 64</span><span class="paper-name">Info Symmetry Breaking</span></a>
+                    <a href="TDTR/65_No_Reversible_Transitions/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 65</span><span class="paper-name">No Reversible
+                            Transitions</span></a>
+                    <a href="TDTR/66_Transition_Dynamics_Classes/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 66</span><span class="paper-name">Dynamics Classes</span></a>
+                    <a href="TDTR/72_Transition_Atlas/index.html" class="paper-item"><span class="paper-id">STAGE
+                            72</span><span class="paper-name">Transition Atlas</span></a>
                 </div>
-                <div class="paper-list">
-                    <a href="TDTR/76_TDTR_Founding_Paper/tdtr_paper.html" class="paper-item breakthrough">
-                        <div class="paper-id">FOUNDING</div>
-                        <div class="paper-title">Thermodynamic Time Reversal</div>
-                    </a>
-                    <a href="TDTR/79_Entropic_Galaxy_Sim/index.html" class="paper-item breakthrough">
-                        <div class="paper-id">PAPER 79</div>
-                        <div class="paper-title">Galaxy Rotation Curves (Validation)</div>
-                    </a>
-                    <a href="TDTR/56_Fundamental_Directionality/index.html" class="paper-item breakthrough">
-                        <div class="paper-id">PAPER 56</div>
-                        <div class="paper-title">Proof of Irreversibility</div>
-                    </a>
-                    <a href="TDTR/67_QFT_to_GR/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 67</div>
-                        <div class="paper-title">The QFT to GR Transition</div>
-                    </a>
-                    <a href="TDTR/82_Emergent_Newton/index.html" class="paper-item">
-                        <div class="paper-id">PAPER 82</div>
-                        <div class="paper-title">Emergent Newton</div>
-                    </a>
+            </div>
+        </div>
+
+        <!-- SIMULATION -->
+        <div class="program-section">
+            <div class="section-header">
+                <div class="section-number">IV</div>
+                <div class="section-title">
+                    <div class="section-meta">Verification</div>
+                    <h2>Simulations & Validation</h2>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="full-paper-list">
+                    <a href="TDTR/79_Entropic_Galaxy_Sim/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">BREAKTHROUGH</span><span class="paper-name">Galaxy Rotation
+                            Curves</span></a>
+                    <a href="TDTR/86_Final_Archive/index.html" class="paper-item breakthrough"><span
+                            class="paper-id">GRAND FINALE</span><span class="paper-name">The Final Archive</span></a>
+                    <a href="TDTR/78_Program_Closure/index.html" class="paper-item"><span class="paper-id">STAGE
+                            78</span><span class="paper-name">Methodology</span></a>
+                    <a href="TDTR/80_Elastic_Memory_Transition/index.html" class="paper-item"><span
+                            class="paper-id">STAGE 80</span><span class="paper-name">Elastic Memory</span></a>
+                    <a href="TDTR/81_Validation/index.html" class="paper-item"><span class="paper-id">STAGE
+                            81</span><span class="paper-name">Standard Limits</span></a>
+                    <a href="TDTR/82_Emergent_Newton/index.html" class="paper-item"><span class="paper-id">STAGE
+                            82</span><span class="paper-name">Emergent Newton</span></a>
+                    <a href="TDTR/83_Emergent_Cosmology/index.html" class="paper-item"><span class="paper-id">STAGE
+                            83</span><span class="paper-name">Emergent Cosmology</span></a>
+                    <a href="TDTR/84_Stress_Testing/index.html" class="paper-item"><span class="paper-id">STAGE
+                            84</span><span class="paper-name">Stress Testing</span></a>
+                    <a href="TDTR/85_Systematic_Comparison/index.html" class="paper-item"><span class="paper-id">STAGE
+                            85</span><span class="paper-name">Comparison Scorecard</span></a>
                 </div>
             </div>
         </div>
@@ -468,9 +515,7 @@
         <footer>
             <div class="seal">T</div>
             <p>&copy; 2026 Tamesis Research Group. Federal University of Rio de Janeiro.</p>
-            <p><a href="TAMESIS_THEORY_MASTER_CATALOG.md"
-                    style="color: var(--primary-crimson); font-weight: bold; text-decoration: none;">View Full 140+
-                    Paper Catalog</a></p>
+            <p><a href="TAMESIS_THEORY_MASTER_CATALOG.md">View Master Catalog & Audit Log</a></p>
         </footer>
     </div>
 

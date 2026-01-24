@@ -22,6 +22,7 @@ The following simulations visually summarize the three core pillars of the frame
 The universe is not a single continuous manifold. It is a quilt of distinct, incompatible physical regimes (phases). These regimes cannot interact directly; they are separated by domain walls where the laws of physics break down.
 
 ![TRI Simulation](animations/TRI_Infinite_Loop.gif)
+
 *Figure 1: Reaction-Diffusion simulation showing the eternal competition between incompatible vacuum phases. Note that boundaries fluctuate but phases never mix.*
 
 ### II. Thermodynamic Time Reversal (TDTR)
@@ -29,6 +30,7 @@ The universe is not a single continuous manifold. It is a quilt of distinct, inc
 Time is not a dimension; it is an irreversible flow of information. The "Arrow of Time" is the gradient of the universe's expansion into the holographic void. This expansion drives the emergence of gravity and the selection of laws.
 
 ![TDTR Simulation](animations/TDTR_Infinite_Loop.gif)
+
 *Figure 2: Entropic Flow visualization. Particles (information bits) drift irreversibly outward, simulating the expansion of the holographic horizon and the emergence of the arrow of time.*
 
 ### III. The Tamesis System
@@ -36,6 +38,7 @@ Time is not a dimension; it is an irreversible flow of information. The "Arrow o
 Beneath the chaos of transitions lies a rigid number-theoretic skeleton. The Tamesis System describes the "Spectral Clockwork" — the prime number distribution that governs the stability of matter and the constants of nature.
 
 ![TAMESIS Simulation](animations/TAMESIS_Infinite_Loop.gif)
+
 *Figure 3: Spectral Geometry in the Poincare Disk. The rotation of prime geodesics represents the invariant "Source Code" of the universe, robust against all regime transitions.*
 
 ---

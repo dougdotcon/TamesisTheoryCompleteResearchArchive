@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topological Theory of Cognitive States</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman - Optimized for PDF/DOI */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h1 {
+            font-size: 16pt;
+            /* Slightly larger for the Master Paper */
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        h3 {
+            font-size: 10pt;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
+        /* DOI Badge Simulation */
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 9pt;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18364853"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18364853</a></div>
+
+    <header>
+        <h1>Topological Theory of Cognitive States: Spectral Signatures of Information Processing Regimes</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 2026)</div>
+    </header>
+
+    <div class="abstract">
+        We propose a formal theoretical framework where cognitive states are defined not by their semantic content, but
+        by
+        the topological regime of the underlying dynamic network. Building on the <strong>Information Saturation
+            Postulate</strong>
+        ($I_{flow} \le C_{max}$), we demonstrate that phenomenology is a direct consequence of spectral topology. We
+        identify distinct
+        spectral signatures for healthy criticality, entropic trapping (anxiety), and modular fragmentation
+        (dissociation).
+        We further validate these regimes through coupled-oscillator simulations, confirming that specific topologies
+        strictly
+        constrain the possible phenomenological space.
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">The quantitative description of cognitive states remains an open problem in complex
+            systems science. While neuroscience has successfully mapped local functions to specific anatomical regions,
+            the global dynamical regimes that characterize the <em>quality</em> of processing (e.g., focused attention,
+            mind-wandering, hyper-vigilance) lack a unified mathematical definition.</p>
+
+        <p>Current approaches often rely on psychological descriptors ("anxious", "distracted") that are semantically
+            rich but mathematically opaque. In this work, we propose a shift from semantic description to
+            <strong>topological characterization</strong>. We hypothesize that what are perceived as macro-states of
+            cognition are, in reality, phase states of the information flow on a dynamic graph.
+        </p>
+
+        <h2>I. Formal Framework</h2>
+
+        <p>We define a cognitive system as a time-varying directed graph $G(t)$. The fundamental axiom governing its
+            dynamics is the <strong>Saturation Postulate</strong>:</p>
+
+        <div class="equation">
+            $$ I_{flow} \le C_{max} $$
+        </div>
+
+        <p>This constraint forces the system to adopt specific topologies to handle high information loads. The system
+            must implement a filtering mechanism (Attention) to prevent thermalization (Perceptual Collapse).</p>
+
+        <h2>II. Spectral Signatures</h2>
+
+        <p>We employ <strong>Spectral Graph Theory</strong> to analyze the system. The eigenvalues $\lambda$ of the
+            Laplacian matrix $L = D - A$ provide the "acoustic signature" of the network structure.</p>
+
+        <table>
+            <tr>
+                <th>Regime</th>
+                <th>$\lambda_2$ (Connectivity)</th>
+                <th>Spectral Profile</th>
+            </tr>
+            <tr>
+                <td><strong>Healthy</strong></td>
+                <td>High (~0.36)</td>
+                <td>Broad (Small-World)</td>
+            </tr>
+            <tr>
+                <td><strong>Trapped</strong></td>
+                <td>Low (~0.12)</td>
+                <td>Compressed (Red noise)</td>
+            </tr>
+            <tr>
+                <td><strong>Fragmented</strong></td>
+                <td>~0</td>
+                <td>Disconnected Peaks</td>
+            </tr>
+            <tr>
+                <td><strong>Mania</strong></td>
+                <td>Very High (>1.0)</td>
+                <td>White Noise</td>
+            </tr>
+        </table>
+
+        <h2>III. Simulation Results</h2>
+
+        <p>We implemented a computational toy model to generate these topologies and compute their spectra. The results
+            confirm distinct physical signatures for each proposed biotype.</p>
+
+        <h3>A. Canonical Regimes</h3>
+        <p>Our simulation confirms that the "Entropic Trap" (Anxiety) is physically distinct from "Fragmentation"
+            (Dissociation). Traps maintain global connectivity but trap energy in local loops, creating a "Red Shift" in
+            the spectrum.</p>
+
+        <img src="SIMULATIONS/TOPOLOGICAL_COGNITION/regimes_comparison.png" alt="Canonical Regimes">
+        <figcaption>Fig 1. Spectral density of Healthy vs. Trapped vs. Fragmented networks.</figcaption>
+
+        <h3>B. Advanced Dynamics</h3>
+        <p><strong>Mania (Hypersynchrony):</strong> Modeled as a random graph, it shows extremely high $\lambda_2$
+            (1.16), indicating a system where signal diffuses too fast to form structure (White Noise).</p>
+        <p><strong>Dementia (Decay):</strong> Modeled as random edge pruning. $\lambda_2$ collapses to 0, confirming
+            that cognitive decline is a topological phase transition.</p>
+
+        <img src="SIMULATIONS/TOPOLOGICAL_COGNITION/advanced_regimes.png" alt="Advanced Regimes">
+        <figcaption>Fig 2. Spectral signatures of Mania, Psychedelics, and Dementia.</figcaption>
+
+        <h2>IV. Conclusion</h2>
+
+        <p>The Topological Theory of Cognitive States provides a falsifiable, physics-based framework for psychiatry. It
+            suggests that treatment must target the <strong>geometry</strong> of the mind (Energy Injection for Traps,
+            Damping for Mania) rather than just its chemistry. We have moved from a descriptive taxonomy to a generative
+            theory of mind.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>D. H. M. Fulber, <em>The Foundations of Relational Cognition</em> (UFRJ, 2026).</li>
+                <li>D. H. M. Fulber, <em>Topological Theory of Cognitive States</em> (Paper A, 2026).</li>
+                <li>D. H. M. Fulber, <em>Spectral Signatures of Depressive Regimes</em> (Paper B, 2026).</li>
+                <li>G. Tononi, <em>An information integration theory of consciousness</em> (BMC Neuroscience, 2004).
+                </li>
+                <li>D. J. Watts & S. H. Strogatz, <em>Collective dynamics of 'small-world' networks</em> (Nature, 1998).
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -88,6 +88,3 @@
 
 **VERDICT:**
 The Tamesis Research Archive is complete. All theoretical gaps identified in `roadmap.md` have been filled with rigorous, standardized documentation.
-
-*Signed,*
-*Antigravity*

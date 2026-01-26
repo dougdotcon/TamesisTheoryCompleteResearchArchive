@@ -138,6 +138,17 @@ This document is the unified index of research, concatenating data from:
 
 ---
 
+### 🔹 08_Certified_Stability (New Module)
+
+- [x] **08_Certified_Stability/README.md** - *Framework Definition*
+- [x] **08_Certified_Stability/01_LEUE_FRAMEWORK_ANALYSIS/ANALYSIS.md** - *The Leue-Tamesis Rosetta Stone*
+- [x] **08_Certified_Stability/02_COGNITIVE_STABILITY_PROOF/BIOTYPE_PROOF.md** - *Proof of Biotypes*
+- [x] **08_Certified_Stability/03_BIG_BOUNCE_CERTIFICATION/SIMULATION_CERT.md** - *Big Bounce Certificate*
+- [x] **08_Certified_Stability/stability_solver.py** - *Verification Code (Python)*
+- [x] **08_Certified_Stability/certified_stability_paper.html** - *FINAL PAPER: Certified Stability in Regime-Incompatible Architectures*
+
+---
+
 ## 🚫 PART II: TRI (Theory of Regime Incompatibility)
 
 *The logic of why unification failed.*

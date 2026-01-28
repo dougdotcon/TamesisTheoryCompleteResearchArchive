@@ -18,10 +18,12 @@ Structure and tracking for the creation of `RESEARCH_CHRONOGRAM.md`.
 - [x] `01_ORIGINS_AND_LEGACY/PATH_A_SCIENTIFIC_TRUTH`
 - [x] `06_THE_DISCOVERY_TOE`
 - [x] `10_TOE`
+- [x] `01_ORIGINS_AND_LEGACY/UNIFIED_THEORY`
 
 ## Phase 4: Validation
 
 - [x] `07_MILLENNIUM_VALIDATION`
+- [x] `MOMENT_OF_TRUTH`
 
 ## Phase 5: Cognitive Topology & Extensions
 

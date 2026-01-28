@@ -1,104 +1,86 @@
-1️⃣ Onde pesquisar (mapa realista, não idealizado)
-🔹 1. arXiv — mas com filtros corretos
+# 🦅 RESEARCH PROTOCOL: Strategic Literature Search
 
-arXiv sozinho não serve se você pesquisar por palavras-chave óbvias.
+> **Objective**: Locate the "Structural Mechanisms" in existing literature, bypassing the "Narrative Noise".
 
-Como pesquisar do jeito certo
+---
 
-Em vez de:
+## 1. arXiv Strategy (The Signal Filter)
 
-“Riemann Hypothesis solution”
+![Source](https://img.shields.io/badge/Source-arXiv-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white) ![Filter](https://img.shields.io/badge/Filter-Mechanism_Only-green?style=for-the-badge)
 
-Use:
+arXiv alone is useless if you search for obvious keywords. We must search for *mechanisms*, not *conclusions*.
 
-"spectral interpretation of zeta zeros"
+### ❌ Wrong Approach
 
-"Hilbert-Polya operator"
+* "Riemann Hypothesis solution"
+* "P vs NP proof"
 
-"trace formula zeta"
+### ✅ Correct Approach (Structural Keywords)
 
-"random matrix theory L-functions rigidity"
+* **Riemann:** `"spectral interpretation of zeta zeros"`, `"Hilbert-Polya operator"`, `"trace formula zeta"`, `"random matrix theory L-functions rigidity"`
+* **Navier-Stokes:** `"entropy" + "Navier-Stokes" + "regularity"`
+* **Yang-Mills:** `"mass gap" + "stability" + "measure selection"`
 
-"entropy" + "Navier-Stokes" + "regularity"
+### 🧠 Advanced Technique: The Author Graph
 
-"mass gap" + "stability" + "measure selection"
+When you find a high-signal paper:
 
-👉 Regra:
-Pesquise mecanismos, não conclusões.
+1. Click on the **Author**.
+2. Read their entire publication history.
+3. Check **"Cited By"** to find who is continuing this specific line of thought.
+*This reveals intellectual lineages rather than isolated papers.*
 
-Técnica avançada
+---
 
-Quando achar um paper bom:
+## 2. MathSciNet / Zentralblatt (The Reality Check)
 
-clique no autor
+![Source](https://img.shields.io/badge/Source-MathSciNet-004488?style=for-the-badge) ![Focus](https://img.shields.io/badge/Focus-Failure_Analysis-red?style=for-the-badge)
 
-veja tudo que ele publicou
+These platforms are gold because they filter noise and provide **Critical Reviews**.
 
-veja quem cita esse paper
+### What to Look For
 
-Isso revela linhagens intelectuais, não papers isolados.
+Scan reviews for "polite rejections" that reveal structural barriers:
 
-🔹 2. MathSciNet / Zentralblatt (se tiver acesso)
+* *"Interesting idea, but..."*
+* *"Fails to generalize to..."*
+* *"The obstruction remains..."*
 
-Esses dois são ouro porque:
+> **Insight:** These phrases point exactly to where the mathematical wall is located. That is where we attack.
 
-filtram lixo
+---
 
-mostram classificação MSC
+## 3. Google Scholar (Reverse Engineering)
 
-mostram histórico de tentativas
+![Source](https://img.shields.io/badge/Source-Google_Scholar-4285F4?style=for-the-badge&logo=google-scholar&logoColor=white) ![Method](https://img.shields.io/badge/Method-Reverse_Chronology-blue?style=for-the-badge)
 
-O que você quer olhar:
+Use Scholar "backwards" to find the cutting edge.
 
-Reviews negativas
+### The Algorithm
 
-Frases como:
+1. Find a **Classic Paper** (e.g., Berry 1986).
+2. Click **"Cited By"**.
+3. Sort by **Date (Newest First)**.
+4. **Ignore** the top-cited famous papers.
+5. **Read** the obscure ones (5–30 citations).
 
-“interesting idea, but…”
+**Why?** These obscure papers often contain active researchers trying new, experimental modifications that haven't been "accepted" by the consensus yet. This is where innovation hides.
 
-“fails to generalize…”
+---
 
-“obstruction remains…”
+## 4. PhD Theses (The Deep Mine)
 
-👉 Essas frases apontam exatamente onde atacar.
+![Source](https://img.shields.io/badge/Source-PhD_Thesis-darkgreen?style=for-the-badge) ![Value](https://img.shields.io/badge/Value-Underrated_Gems-gold?style=for-the-badge)
 
-🔹 3. Google Scholar — mas de trás pra frente
+Theses are underestimated. They contain:
 
-Use o Scholar invertido:
+* Calculations that were "too messy" for a paper.
+* Negative results (what *didn't* work).
+* Deep philosophical intuitions that journals rejected.
 
-Ache um paper clássico
+### Search Query
 
-Clique em “Citado por”
+* `filetype:pdf "PhD thesis" + "Riemann Hypothesis" + "spectral"`
+* `site:.edu "PhD thesis" + "Navier-Stokes" + "blowup"`
 
-Ordene por mais recente
-
-Ignore os top-cited
-
-Leia os obscuros, 5–30 citações
-
-Esses são:
-
-pesquisadores ativos
-
-tentando coisas novas
-
-ainda sem narrativa consolidada
-
-🔹 4. Teses de doutorado (subestimadas e valiosas)
-
-Teses são onde aparecem:
-
-ideias que não viraram papers
-
-tentativas que falharam
-
-intuições que orientam áreas inteiras
-
-Onde buscar:
-
-repositórios universitários
-
-Google:
-"PhD thesis" + "Riemann Hypothesis" + "spectral"
-
-Se você entender uma tese inteira, você entende 10 anos de uma linha de pesquisa.
+> **Rule:** If you understand a single PhD thesis deeply, you digest 10 years of a research lineage in one go.

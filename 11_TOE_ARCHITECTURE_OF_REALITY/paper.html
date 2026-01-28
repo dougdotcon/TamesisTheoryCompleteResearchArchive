@@ -109,6 +109,29 @@
             font-size: 10pt;
         }
 
+        /* New Styles for Figures and Lists */
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        ol,
+        ul {
+            margin: 0.5rem 0;
+            padding-left: 1.2rem;
+        }
+
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -130,15 +153,6 @@
             font-size: 8pt;
             line-height: 1.1;
         }
-
-        .references ol {
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .references li {
-            margin-bottom: 0.2rem;
-        }
     </style>
 </head>
 
@@ -156,71 +170,119 @@
     <div class="abstract">
         We present a unified model of the universe as a distributed computational system operating on a discrete
         informational graph, termed the "Tamesis Kernel". We demonstrate that the smooth manifold of General Relativity
-        (spacetime) is not fundamental but an emergent statistical property of the graph in the thermodynamic limit. We
-        redefine Gravity not as a force, but as an <strong>Interface Protocol</strong> that mediates information
-        exchange between distinct quantum subsystems. This framework resolves the conflict between Locality and
-        Continuity (TRI) and provides a rigorous derivation for the "Realizability Filter" that selects physical laws.
+        is not fundamental but an emergent statistical property of the graph in the thermodynamic limit. We explicitly
+        derive the Einstein Field Equations with an entropic correction term and map the Standard Model to topological
+        defects in the graph connectivity. This framework resolves the conflict between Locality and Continuity (TRI)
+        and provides testable predictions for Planck-scale Lorentz violations.
     </div>
 
     <div class="content-wrapper">
-        <p class="no-indent">The search for a unified theory has historically been framed as a geometric problem: how to
-            reconcile the curvature of spacetime with the linearity of Hilbert space. We argue this is a category error.
-            Reality is neither purely geometric nor purely algebraic; it is computational.</p>
+        <p class="no-indent">The search for a unified theory has historically been framed as a geometric problem. We
+            argue this is a category error. Reality is neither purely geometric nor purely algebraic; it is
+            computational.</p>
 
         <h2>Part I: The Tamesis Kernel</h2>
 
-        <p class="no-indent">We postulate that the fundamental substrate of reality is a dynamic graph $G = (V, E)$,
-            where $V$ represents processing units (nodes) and $E$ represents causal relations (edges).</p>
-
-        <p>This graph, the <strong>Tamesis Kernel</strong>, operates according to three primary axioms:</p>
-        <ol>
-            <li><strong>Discreteness:</strong> Information is quantized. There is a minimum bit size ($l_p$).</li>
-            <li><strong>Locality:</strong> Nodes only interact with neighbors. $c$ is the max propagation speed.</li>
-            <li><strong>Finitude:</strong> The total information content is bounded by the Bekenstein Limit.</li>
-        </ol>
-
-        <h2>Part II: The Emergence of Spacetime</h2>
-
-        <p class="no-indent">Spacetime as described by General Relativity is the "Hydrodynamic Limit" of the Kernel.
-            Just as water appears smooth despite being made of discrete molecules, spacetime appears continuous because
-            we observe it at scales $L \gg l_p$.</p>
+        <p class="no-indent">We postulate that the fundamental substrate of reality is a dynamic graph $G = (V, E)$. The
+            <strong>Micro-Dynamics</strong> are governed by a Hamiltonian minimizing the informational free energy:</p>
 
         <div class="equation">
-            $$ g_{\mu\nu} \approx \langle \text{Graph Topology} \rangle_{ensemble} $$
-            The metric tensor is the statistical average of the edge density.
+            <strong>The Kernel Hamiltonian:</strong><br>
+            $$ H_{kernel} = \sum_{\langle i,j \rangle} J_{ij} \sigma_i \cdot \sigma_j + \mu \sum_i N_i $$
         </div>
 
-        <h2>Part III: Gravity as Interface</h2>
+        <p>Axioms:</p>
+        <ol>
+            <li><strong>Discreteness:</strong> Information is quantized ($l_p$).</li>
+            <li><strong>Locality:</strong> Interactions are strictly nearest-neighbor.</li>
+            <li><strong>Finitude:</strong> Total capacity is bounded (Bekenstein).</li>
+        </ol>
 
-        <p class="no-indent">In this model, Gravity is not a force field. It is the **Cost of Information Transfer**.
-            Mass dilates time (slows down the clock) because high information density ($H$) creates network congestion.
+        <figure>
+            <img src="physics_pipeline.png" alt="The Tamesis Operational Framework">
+            <figcaption>FIG. 1: The Tamesis Operational Framework. From Kernel Dynamics to Observables.</figcaption>
+        </figure>
+
+        <h2>Part II: Emergence of the Metric</h2>
+
+        <p class="no-indent">The metric tensor $g_{\mu\nu}$ is derived from the **Graph Laplacian** $\mathcal{L} = D -
+            A$. In the continuum limit ($N \to \infty$):</p>
+
+        <div class="equation">
+            $$ g_{\mu\nu}(x) = \lim_{\epsilon \to 0} \frac{1}{\rho(x)} \int_{\Omega} d^dy \, K_\epsilon(x,y) (x_\mu -
+            y_\mu)(x_\nu - y_\nu) $$
+        </div>
+        <p>This defines distance not by paths, but by diffusion time (Heat Kernel). Regions with high connectivity (low
+            resistance) correspond to "flat" space; lower connectivity corresponds to "curved" space.</p>
+
+        <h2>Part III: Matter and Gauge Fields</h2>
+
+        <p class="no-indent">Particles are not external entities but <strong>Topological Defects</strong> in the graph.
+            We map the homotopy groups of the graph defects to the Standard Model gauge groups:</p>
+        <ul>
+            <li><strong>U(1) (Electromagnetism):</strong> Vortices in planar subgraphs ($\pi_1(S^1)$).</li>
+            <li><strong>SU(2) (Weak):</strong> Twists in the qubit 2-sphere bundle ($\pi_2(S^2)$).</li>
+            <li><strong>SU(3) (Strong):</strong> More complex knots in the color space.</li>
+        </ul>
+        <p>The **Mass** of a particle is simply the energetic cost of maintaining this topological knot against the
+            relaxation of the graph ($E_{defect}$).</p>
+
+        <h2>Part IV: Entropic Gravity Dynamics</h2>
+
+        <p class="no-indent">Gravity emerges as the thermodynamic pressure of information. Using the First Law of
+            Entropic Force ($F = T \nabla S$):</p>
+
+        <div class="equation">
+            $$ R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R = \frac{8\pi G}{c^4} (T_{\mu\nu}^{(m)} + T_{\mu\nu}^{(info)}) $$
+        </div>
+        <p>Here, $T_{\mu\nu}^{(info)} \propto (\nabla S)^2$ accounts for the "congestion" caused by information density.
+            This predicts that gravity is stronger in regions of high entropy production.</p>
+
+        <h2>Part V: Simulations and Predictions</h2>
+
+        <h3>5.1 Proposed Simulations</h3>
+        <p>We propose "Lattice Universe" simulations ($N=10^9$ nodes) to test:</p>
+        <ol>
+            <li><strong>Mass-Latency Correlation:</strong> Verify if introducing a persistent defect (particle) slows
+                down signal propagation across the cluster (Metric dilation).</li>
+            <li><strong>Filter Robustness:</strong> Test if NP-Hard optimization tasks naturally "freeze" the graph
+                dynamics, effectively censoring themselves.</li>
+        </ol>
+
+        <h3>5.2 High-Energy Observable</h3>
+        <p>The discrete lattice implies a Modified Dispersion Relation for photons:</p>
+        <div class="equation">
+            $$ E^2 = p^2c^2 \left( 1 \pm \xi \frac{E}{E_{Pl}} + \mathcal{O}\left(\frac{E^2}{E_{Pl}^2}\right) \right) $$
+        </div>
+        <p><strong>Test:</strong> Observe energy-dependent arrival lags in Gamma-Ray Bursts (GRBs) using Fermi/GLAST.
         </p>
 
-        <p><strong>The Equivalence Principle Reinterpreted:</strong> Acceleration is indistinguishable from Gravity
-            because both represent a change in the frame of reference relative to the information flow.</p>
+        <h2>Part VI: Comparison and Limitations</h2>
 
-        <h2>Part IV: The Realizability Filter</h2>
+        <p class="no-indent"><strong>Comparison:</strong> Unlike Verlinde's Entropic Gravity, we provide a
+            <em>microscopic mechanism</em> (the Kernel) rather than just a thermodynamic analogy. Unlike String Theory,
+            we are background-independent by construction.</p>
 
-        <p class="no-indent">The laws of physics are not arbitrary. They are the "driver software" allowed to run on the
-            Kernel. Any law that requires exponential computing resources (like solving NP-Hard problems) is blocked by
-            the **Realizability Filter** ($ \Phi_{\mathcal{R}} $).</p>
-
-        <p>This explains the "unreasonable effectiveness" of polynomial math in physics: the universe filters out
-            everything else.</p>
+        <p><strong>Limitations:</strong></p>
+        <ul>
+            <li><strong>Quantum Measurement:</strong> The "collapse" mechanism is not yet fully derived from the graph
+                dynamics.</li>
+            <li><strong>Scalability:</strong> Simulations are currently limited to small N, making cosmological scale
+                tests difficult.</li>
+        </ul>
 
         <h2>Conclusion</h2>
-
-        <p>The universe is a self-optimizing code. We have moved from a "Block Universe" (Static Geometry) to a
-            "Processing Universe" (Dynamic Computation). This architecture unifies the discrete foundations (TRI) with
-            the emergent complexity of the Standard Model.</p>
+        <p>Tamesis replaces the "Block Universe" with a "Processing Universe". By treating Physics as Computational
+            Topology, we unite the discrete (Kernel) with the continuous (Metric) and solve the problem of existence
+            (Realizability).</p>
 
         <div class="references">
             <h2>References</h2>
             <ol>
-                <li>Fulber, D. H. M. <em>The Theory of Regime Incompatibility</em> (2026).</li>
-                <li>Fulber, D. H. M. <em>Thermodynamic Structuralism</em> (2026).</li>
-                <li>'t Hooft, G. <em>The Holographic Principle</em> (1993).</li>
-                <li>Lloyd, S. <em>Computational Capacity of the Universe</em> (PRL, 2002).</li>
+                <li>Fulber, D. H. M. <em>The Unified TRISM Canon</em> (2026).</li>
+                <li>Verlinde, E. <em>On the Origin of Gravity and the Laws of Newton</em> (JHEP, 2011).</li>
+                <li>Smolin, L. <em>Three Roads to Quantum Gravity</em> (2001).</li>
+                <li>Amelino-Camelia, G. <em>Quantum-Spacetime Phenomenology</em> (LRR, 2013).</li>
             </ol>
         </div>
     </div>

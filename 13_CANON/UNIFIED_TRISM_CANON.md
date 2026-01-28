@@ -49,15 +49,20 @@ $$ \mathcal{A}_{GR} \cup \mathcal{A}_{QM} \vdash \bot \quad (\text{Inconsistency
 2. **Continuity:** GR requires a globally smooth manifold ($\mathcal{M}$).
 3. **Conflict:** At the Planck scale ($l_p$), defining a discrete subsystem creates a Black Hole, violating the manifold smoothness.
 
-```mermaid
-graph LR
-    A[Quantum Regime] -- Probability Amplitudes --> I((Interface / Gravity))
-    B[Relativistic Regime] -- Metric Tensor --> I
-    I -- Statistical Emergence --> R[Observable Reality]
-    style I fill:#f9f,stroke:#333,stroke-width:2px
-```
-
 **Resolution:** Gravity is not a fundamental force, but an **Interface Protocol**. The "Smoothness" of spacetime is an emergent statistical property valid only in the thermodynamic limit.
+
+### 1.2 The Physics Operation Pipeline
+
+The following diagram illustrates how the abstract Micro-Dynamics of the Kernel result in observable reality:
+
+![The Physics Operation Pipeline](physics_pipeline.png)
+
+**Fluxo Lógico:**
+
+1. **Kernel ($H_{kernel}$):** A raiz computacional (Grafos de Ising).
+2. **Bifurcação:** O grafo gera Geometria (média) e Matéria (defeitos).
+3. **Filtragem:** Apenas leis de tempo polinomial passam pelo *Realizability Filter*.
+4. **Observáveis:** O que medimos ($c, G, h$) são os limites dessa computação.
 
 ---
 

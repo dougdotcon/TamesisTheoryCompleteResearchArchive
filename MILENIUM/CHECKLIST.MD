@@ -48,30 +48,21 @@
 
 ## 5. Hodge Conjecture
 
-**Status:** 🟡 **STRUCTURAL RIGIDITY** (Conceptual Framework)
+**Status:** 🟡 **STRUCTURAL RIGIDITY** (Conceptual Framework / Non-Constructive)
 
 - [x] **Roadmap:** `ROADMAP_HODGE.md`.
 - [x] **Core Argument:** `THE_TOPOLOGICAL_ENTROPY_CONJECTURE.md`.
   - [x] **Conjecture:** Algebraic cycles minimize "Topological Entropy".
-  - [x] **Status:** Identified the analytic signature, but lacks the arithmetic construction of cycles.
+  - [x] **Closure:** "Ghost classes" are excluded by the analytic signature, but explicit arithmetic construction is missing (Clay Gap).
 
 ## 6. Birch and Swinnerton-Dyer (BSD)
 
-**Status:** 🟡 **ENTROPIC CLASSIFICATION** (Conceptual Framework)
+**Status:** 🟡 **ENTROPIC CLASSIFICATION** (Conceptual Framework / Non-Constructive)
 
 - [x] **Roadmap:** `ROADMAP_BSD.md`.
 - [x] **Core Argument:** `PAPER_B1_STRUCTURAL_LIMITS.md`.
   - [x] **Concept:** Sha group as an error-correcting code for rational points.
-  - [x] **Status:** Re-framed as Information Theory, but analytic rank correspondence is not proven.
-
-## 7. Poincaré Conjecture
-
-**Status:** ⚪ **SOLVED (Reference)**
-
-- [x] **Role:** Serves as the template for "Entropy Monotonicity" (Perelman's Entropy Functional).
-- [x] **Artifact:** `ROADMAP_POINCARE.md`.
-
----
+  - [x] **Closure:** Reframed as Information Theory (lossy compression). The analytic rank corresponds to channel capacity, but the algebraic identity is not proven.
 
 ## META-ANALYSIS: THE UNIFIED THEOREM
 

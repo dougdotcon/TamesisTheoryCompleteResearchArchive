@@ -1,7 +1,18 @@
 # The Structural Resolution of the Yang-Mills Existence and Mass Gap Problem via Topological Spectral Coercivity
 
 **Author:** Tamesis Research Program (Kernel v3)  
-**Date:** January 28, 2026
+**Date:** January 29, 2026  
+**Status:** CONDITIONAL PROOF FRAMEWORK
+
+---
+
+## Executive Summary
+
+This document establishes a **conditional proof** of the Mass Gap:
+- **Given:** A well-defined 4D Yang-Mills measure $\mu_{YM}$ satisfying OS axioms
+- **Prove:** The spectrum has a gap $\Delta > 0$
+
+We do **not** claim to have proven existence of $\mu_{YM}$. That remains the hard open problem.
 
 ---
 

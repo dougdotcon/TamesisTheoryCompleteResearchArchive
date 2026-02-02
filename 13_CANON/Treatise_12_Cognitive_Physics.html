@@ -10,7 +10,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     <style>
-        /* PRL Style: Two-column layout, compact, Times New Roman - Optimized for PDF/DOI */
+        /* === ACADEMIC JOURNAL STYLING - TAMESIS STANDARDS === */
         * {
             box-sizing: border-box;
         }
@@ -26,89 +26,249 @@
             background-color: #fff;
         }
 
-        .content-wrapper {
-            column-count: 2;
-            column-gap: 0.8cm;
-            text-align: justify;
-        }
-
+        /* === HEADER === */
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #000;
         }
 
         h1 {
+            font-family: 'Times New Roman', Times, serif;
             font-size: 16pt;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
-            text-transform: none;
+            color: #000;
         }
 
         .authors {
             font-size: 11pt;
-            margin-bottom: 0.2rem;
-            font-weight: bold;
+            font-style: normal;
+            font-weight: normal;
+            color: #000;
+            margin-bottom: 0.25rem;
         }
 
         .affiliations {
             font-size: 10pt;
             font-style: italic;
-            color: #444;
-            margin-bottom: 1rem;
+            color: #333;
+            margin-bottom: 0.5rem;
         }
 
         .date {
             font-size: 9pt;
-            color: #666;
+            color: #333;
         }
 
+        /* === ABSTRACT === */
         .abstract {
-            font-weight: bold;
+            margin: 1.5rem 0;
             font-size: 9pt;
-            margin: 0 auto 1.5rem auto;
-            width: 85%;
             text-align: justify;
-            font-style: italic;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
             padding: 1rem 0;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
         }
 
-        h2 {
-            font-size: 10pt;
+        .abstract-title {
             font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 1.2rem;
-            margin-bottom: 0.6rem;
+            font-style: italic;
+            font-size: 9pt;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        /* === TYPOGRAPHY === */
+        h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #000;
             border-bottom: 1px solid #000;
-            break-after: avoid;
+            padding-bottom: 0.3rem;
+            text-transform: uppercase;
         }
 
         h3 {
+            font-family: 'Times New Roman', Times, serif;
             font-size: 10pt;
-            font-style: italic;
+            font-weight: bold;
+            font-style: normal;
             margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            color: #000;
+        }
+
+        h4 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            font-weight: normal;
+            font-style: italic;
+            margin-top: 0.8rem;
             margin-bottom: 0.3rem;
+            color: #000;
         }
 
         p {
             margin-bottom: 0.8rem;
             text-indent: 1em;
+            text-align: justify;
         }
 
         p.no-indent {
             text-indent: 0;
         }
 
-        .equation {
-            text-align: center;
+        /* === BOXES === */
+        .definition-box,
+        .theorem-box {
+            background: #fafafa;
+            padding: 0.8rem;
             margin: 0.8rem 0;
-            font-size: 10pt;
+            border: 2px solid #000;
+            break-inside: avoid;
         }
 
+        .derivation-box {
+            background: #fff;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 1px solid #000;
+            break-inside: avoid;
+        }
+
+        /* === EQUATIONS === */
+        .equation,
+        .equation-box {
+            background: #fff;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 2px solid #000;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        .master-equation {
+            background: #fafafa;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 2px solid #000;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8pt;
+            break-inside: avoid;
+        }
+
+        th, td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: none;
+            border-right: none;
+            padding: 3px 4px;
+            text-align: center;
+        }
+
+        th {
+            background: #f0f0f0;
+            color: #000;
+            font-weight: bold;
+            font-size: 8pt;
+            border-bottom: 2px solid #000;
+        }
+
+        tr:last-child td {
+            border-bottom: 2px solid #000;
+        }
+
+        /* === FIGURES === */
+        figure {
+            margin: 1rem 0;
+            break-inside: avoid;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            color: #000;
+            margin-top: 0.5rem;
+            text-align: justify;
+            text-indent: 0;
+            line-height: 1.3;
+        }
+
+        figcaption strong {
+            font-weight: bold;
+        }
+
+        /* === REFERENCES === */
+        .references {
+            margin-top: 1.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #000;
+        }
+
+        .references h2 {
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .references ol {
+            font-size: 9pt;
+            padding-left: 1.5rem;
+            color: #000;
+            line-height: 1.2;
+        }
+
+        .references li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* === CODE === */
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8pt;
+            background: #f5f5f5;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        /* === LISTS === */
+        ul, ol {
+            margin: 0.5rem 0;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* === LINKS === */
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* === DOI BADGE === */
         .doi-badge {
             font-family: 'Lato', sans-serif;
             font-size: 9px;
@@ -123,21 +283,27 @@
             z-index: 1000;
         }
 
-        .references {
-            margin-top: 2rem;
-            border-top: 1px solid #000;
-            padding-top: 0.5rem;
-            font-size: 8pt;
-            line-height: 1.1;
-        }
+        /* === PRINT === */
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                font-size: 10pt;
+            }
 
-        .references ol {
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-        }
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
 
-        .references li {
-            margin-bottom: 0.2rem;
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+
+            .doi-badge {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -153,7 +319,7 @@
         <div class="date">(Dated: January 28, 2026)</div>
     </header>
 
-    <div class="abstract">
+    <div class="abstract"><span class="abstract-title">Abstract</span>>
         We propose a physics-based framework where "cognitive states" are defined not by semantic content, but by the
         topological regime of the underlying dynamic network. Building on the <strong>Information Saturation
             Postulate</strong>,
@@ -163,7 +329,7 @@
         Fragmentation (Dissociation)—and map them to specific spectral signatures of the connectome Laplacian.
     </div>
 
-    <div class="content-wrapper">
+    
         <p class="no-indent">The quantitative description of cognitive states remains an open problem. We hypothesize
             that
             what are perceived as macro-states of mind are phase states of information flow on a dynamic graph.</p>
@@ -230,7 +396,6 @@
                 <li>Tononi, G. <em>An information integration theory of consciousness</em> (BMC Neurosci., 2004).</li>
             </ol>
         </div>
-    </div>
-</body>
+    </body>
 
 </html>

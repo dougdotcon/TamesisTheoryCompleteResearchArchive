@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+#!/usr/bin/env python3
+"""
+Aplica os padrões do PADROES_ESTILO_ARTIGO.md aos 12 treatises em 13_CANON
+"""
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thermodynamic Time Reversal: Physics as Transition Dynamics</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <style>
+import re
+from pathlib import Path
+
+CANON_DIR = Path(r"d:\TamesisTheoryCompleteResearchArchive\13_CANON")
+
+# Padrões CSS a serem aplicados conforme PADROES_ESTILO_ARTIGO.md
+CSS_STANDARDS = """
         /* === ACADEMIC JOURNAL STYLING - TAMESIS STANDARDS === */
         * {
             box-sizing: border-box;
@@ -305,79 +305,81 @@
                 display: none;
             }
         }
-    </style>
-</head>
+"""
 
-<body>
-    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
-            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
-
-    <header>
-        <h1>Thermodynamic Time Reversal: Physics as Transition Dynamics</h1>
-        <div class="authors">Douglas H. M. Fulber</div>
-        <div class="affiliations"> Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
-        <div class="date">(Dated: January 28, 2026)</div>
-    </header>
-
-    <div class="abstract"><span class="abstract-title">Abstract</span>>
-        The <strong>Theory of the Dynamics of Regime Transitions (TDTR)</strong> shifts the focus of physics from the
-        regimes themselves to the laws governing the transitions between them. We prove that these transitions form a
-        semigroup structure, implying fundamental structural irreversibility. We present the <strong>Transition
-            Atlas</strong>, which classifies connections such as the Quantum-to-Classical border, and demonstrate that
-        General Relativity arises as the effective description of the irreversible coarse-graining of Quantum Field
-        Theory.
-    </div>
-
+def update_treatise_styles(filepath):
+    """Atualiza os estilos de um treatise para seguir os padrões"""
+    print(f"Processando: {filepath.name}")
     
-        <p class="no-indent">If unification is impossible (as per TRI), then the fundamental laws of the universe must
-            be
-            the laws of the "Border Control". How does a system move from a quantum state to a classical state?</p>
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Encontrar e substituir a seção <style>
+    style_pattern = r'<style>.*?</style>'
+    new_style = f'<style>{CSS_STANDARDS}    </style>'
+    
+    content_updated = re.sub(style_pattern, new_style, content, flags=re.DOTALL)
+    
+    # Atualizar classes do abstract
+    content_updated = content_updated.replace('class="abstract"', 'class="abstract"><span class="abstract-title">Abstract</span>')
+    
+    # Remover .content-wrapper se existir (layout de duas colunas)
+    content_updated = content_updated.replace('<div class="content-wrapper">', '')
+    content_updated = content_updated.replace('</div>\n</body>', '</body>')
+    
+    # Salvar
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content_updated)
+    
+    print(f"  ✓ Atualizado: {filepath.name}")
+    return True
 
-        <h2>I. Structural Irreversibility</h2>
+def main():
+    print("=" * 80)
+    print("APLICANDO PADRÕES TAMESIS AOS 12 TREATISES CANÔNICOS")
+    print("=" * 80)
+    print()
+    
+    treatises = sorted(CANON_DIR.glob("Treatise_*.html"))
+    
+    if not treatises:
+        print("❌ Nenhum treatise encontrado!")
+        return
+    
+    print(f"Encontrados {len(treatises)} treatises:")
+    for t in treatises:
+        print(f"  - {t.name}")
+    print()
+    
+    print("Aplicando padrões...")
+    print()
+    
+    success_count = 0
+    for treatise in treatises:
+        try:
+            if update_treatise_styles(treatise):
+                success_count += 1
+        except Exception as e:
+            print(f"  ❌ Erro em {treatise.name}: {e}")
+    
+    print()
+    print("=" * 80)
+    print(f"CONCLUÍDO: {success_count}/{len(treatises)} treatises atualizados")
+    print("=" * 80)
+    print()
+    print("Padrões aplicados:")
+    print("  ✓ Fonte: Times New Roman 10pt")
+    print("  ✓ Line-height: 1.15")
+    print("  ✓ Margens: 1.5cm")
+    print("  ✓ H1: 16pt negrito")
+    print("  ✓ H2: 11pt maiúsculo com borda")
+    print("  ✓ H3: 10pt negrito")
+    print("  ✓ H4: 10pt itálico")
+    print("  ✓ Abstract: 9pt com bordas")
+    print("  ✓ Tabelas: 8pt com headers #f0f0f0")
+    print("  ✓ Equações: Bordas 2px")
+    print("  ✓ Referências: 9pt line-height 1.2")
+    print("  ✓ Layout: Coluna única (removido duas colunas)")
 
-        <p class="no-indent">We establish that the fundamental transitions (edges in the theory graph) form a
-            <strong>Semigroup</strong>,
-            not a Group. This means inverse operations are often mathematically undefined.</p>
-
-        <div class="equation">
-            $$ T_{Q \to C} \neq T_{C \to Q}^{-1} $$
-        </div>
-
-        <p>You can quantize a classical system ("Quantization"), but you cannot uniquely "classicize" a quantum system
-            without adding new information (decoherence/measurement). This asymmetry is the origin of the Arrow of Time.
-        </p>
-
-        <h2>II. The Transition Atlas</h2>
-
-        <p class="no-indent">We classify the fundamental "Edges" of reality:</p>
-
-        <h3>1. Quantum &#8594; Classical (Class D1)</h3>
-        <p>Governed by von Neumann Entropy maximization. The collapse of the wave function is a D1 transition.</p>
-
-        <h3>2. QFT &#8594; General Relativity (Class D4)</h3>
-        <p>Governed by Geometric Entropy. Gravity is the interface force that manages the information loss when a
-            high-dimensional quantum field is projected onto a low-dimensional manifold.</p>
-
-        <h2>III. Gravity as Interface</h2>
-
-        <p class="no-indent">TDTR solves the Quantum Gravity problem by declaring it a "category error". You don't
-            quantize
-            gravity because gravity is the <strong>shadow</strong> of quantization. The "force" of gravity is the
-            thermodynamic pressure of information erasure at the regime boundary.</p>
-
-        <h2>IV. Conclusion</h2>
-
-        <p>The architecture of physics is a Directed Graph. The "Theory of Everything" is simply the set of rules that
-            dictate how information flows across the edges of this graph. Unity is found not in a single substance, but
-            in the consistent rules of translation.</p>
-
-        <div class="references">
-            <h2>References</h2>
-            <ol>
-                <li>Fulber, D. H. M. <em>TDTR Program: Stages 53-78</em> (2026).</li>
-                <li>Fulber, D. H. M. <em>The Transition Atlas</em> (2026).</li>
-            </ol>
-        </div>
-    </body>
-
-</html>
+if __name__ == "__main__":
+    main()

@@ -84,7 +84,7 @@ Through rigorous mathematical analysis, we discovered that the very goal was fla
 - **Discovery:** The singularity ($t=0, \rho \to \infty$) does not occur
 - **Mechanism:** Holographic Saturation — information density hits Bekenstein Bound
 
-![Cosmological Analysis](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper/Validation/cosmology_analysis.png)
+![Cosmological Analysis](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/Validation/07_Cosmology/cosmology_analysis.png)
 
 ### Meta-Theory of Solvability
 

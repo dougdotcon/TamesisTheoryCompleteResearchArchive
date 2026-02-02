@@ -84,7 +84,7 @@ Através de análise matemática rigorosa, descobrimos que o próprio objetivo e
 - **Descoberta:** A singularidade ($t=0, \rho \to \infty$) não ocorre
 - **Mecanismo:** Saturação Holográfica — densidade de informação atinge o Limite de Bekenstein
 
-![Análise Cosmológica](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper/Validation/cosmology_analysis.png)
+![Análise Cosmológica](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/Validation/07_Cosmology/cosmology_analysis.png)
 
 ### Meta-Teoria da Solubilidade
 

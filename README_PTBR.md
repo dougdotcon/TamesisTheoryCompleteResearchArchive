@@ -197,6 +197,56 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 
 ---
 
+## 🔗 Links Importantes & Rotas
+
+### 📖 Leitura Essencial
+
+| Documento | Descrição |
+|:---|:---|
+| [REAL_DISCOVERIES.md](REAL_DISCOVERIES.md) | Auditoria honesta de todas as descobertas validadas |
+| [MILLENNIUM_RESOLUTIONS.md](MILLENNIUM_RESOLUTIONS.md) | Resolução unificada dos Problemas do Milênio Clay |
+| [KERNEL_V3_DOCUMENTACAO_PTBR.md](KERNEL_V3_DOCUMENTACAO_PTBR.md) | Documentação técnica completa do Kernel v3.2 |
+| [THEORY_SUMMARY.md](THEORY_SUMMARY.md) | Resumo conciso da Teoria Tamesis |
+| [A_HISTORIA_TAMESIS.md](A_HISTORIA_TAMESIS.md) | História narrativa do projeto |
+
+### 🗺️ Guias de Navegação
+
+| Guia | Descrição |
+|:---|:---|
+| [PROJECT_ARCHITECTURE.md](PROJECT_ARCHITECTURE.md) | Árvore completa de diretórios e descrições |
+| [GUIA_DO_REPOSITORIO.md](GUIA_DO_REPOSITORIO.md) | Como navegar neste repositório |
+| [COMO_USAR.md](COMO_USAR.md) | Guia de início rápido |
+| [HOW_TO_USE.md](HOW_TO_USE.md) | Getting started guide (English) |
+| [RESEARCH_CHRONOGRAM.md](RESEARCH_CHRONOGRAM.md) | Cronograma das fases de pesquisa |
+
+### 🔬 Validação Central
+
+| Caminho | Conteúdo |
+|:---|:---|
+| [14_VERIFICATION_TAMESIS_THEORY/VERIFICATION_SUMMARY.md](14_VERIFICATION_TAMESIS_THEORY/VERIFICATION_SUMMARY.md) | Resultados de verificação quantitativa |
+| [13_CANON/UNIFIED_TRISM_CANON.md](13_CANON/UNIFIED_TRISM_CANON.md) | Tratado definitivo TRI/TDTR |
+| [12_MOMENT_OF_TRUTH/FINAL_VALIDATION_REPORT.md](12_MOMENT_OF_TRUTH/FINAL_VALIDATION_REPORT.md) | Relatório final de validação |
+| [07_MILLENNIUM_VALIDATION/THE_TAMESIS_MANIFESTO.MD](07_MILLENNIUM_VALIDATION/THE_TAMESIS_MANIFESTO.MD) | O Manifesto Tamesis |
+
+### 🧪 Motores Científicos
+
+| Caminho | Conteúdo |
+|:---|:---|
+| [03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine) | Motor de simulação de Gravidade Entrópica |
+| [03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper) | Ferramentas de mapeamento cosmológico |
+| [03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/HolographicOrigin](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/HolographicOrigin) | Experimentos de origem holográfica |
+
+### 📚 Recursos em Inglês
+
+| Document | Description |
+|:---|:---|
+| [README.md](README.md) | README in English |
+| [KERNEL_V3_DOCUMENTATION.md](KERNEL_V3_DOCUMENTATION.md) | Complete Kernel v3.2 documentation |
+| [REPOSITORY_GUIDE.md](REPOSITORY_GUIDE.md) | Repository navigation guide |
+| [THE_TAMESIS_STORY.md](THE_TAMESIS_STORY.md) | The Tamesis project story |
+
+---
+
 ## 📜 Metadados e Citação
 
 **Pesquisador Principal:** Douglas H. M. Fulber

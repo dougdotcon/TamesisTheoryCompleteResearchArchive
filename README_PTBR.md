@@ -11,7 +11,7 @@ Este repositório contém o arquivo completo de pesquisa do **Kernel Tamesis**, 
 
 ---
 
-## 🌌 A Jornada Tamesis: Da Teoria ao TRI/TDTR
+## ![Jornada](https://img.shields.io/badge/📍-A_Jornada_Tamesis-6366f1?style=flat-square) Da Teoria ao TRI/TDTR
 
 ### Origens (2024-2026)
 
@@ -46,7 +46,7 @@ Através de análise matemática rigorosa, descobrimos que o próprio objetivo e
 
 ---
 
-## 🔬 Descobertas Validadas
+## ![Descobertas](https://img.shields.io/badge/🔬-Descobertas_Validadas-10b981?style=flat-square)
 
 ### Isolamentos Matemáticos (O Núcleo Duro)
 
@@ -107,7 +107,7 @@ Isso explica por que 100 anos de tentativas algébricas falharam em RH/P≠NP �
 
 ---
 
-## 🧠 Aplicações Estendidas
+## ![Aplicações](https://img.shields.io/badge/🧠-Aplicações_Estendidas-8b5cf6?style=flat-square)
 
 ### Estados Cognitivos (Clínico)
 
@@ -124,7 +124,7 @@ Isso explica por que 100 anos de tentativas algébricas falharam em RH/P≠NP �
 
 ---
 
-## ⚠️ Limitações Honestas
+## ![Limitações](https://img.shields.io/badge/⚠️-Limitações_Honestas-f59e0b?style=flat-square)
 
 O que permanece hipotético (integridade científica):
 
@@ -136,7 +136,7 @@ O que permanece hipotético (integridade científica):
 
 ---
 
-## 🎯 O Veredito
+## ![Veredito](https://img.shields.io/badge/🎯-O_Veredito-ef4444?style=flat-square)
 
 **Não criamos uma "Teoria de Tudo" no sentido tradicional.**
 **Descobrimos por que tal coisa não existe.**
@@ -150,7 +150,7 @@ O sistema operacional do cosmos é uma **Dinâmica de Regimes**, impulsionada pe
 
 ---
 
-## 🗺️ A Trindade de Tamesis
+## ![Trindade](https://img.shields.io/badge/🗺️-A_Trindade_de_Tamesis-3b82f6?style=flat-square)
 
 O Kernel v3.2 fornece uma resolução simultânea para os três pilares do conhecimento humano:
 
@@ -160,7 +160,7 @@ O Kernel v3.2 fornece uma resolução simultânea para os três pilares do conhe
 
 ---
 
-## 🔬 Verificação Quantitativa (Jan 2026)
+## ![Verificação](https://img.shields.io/badge/📊-Verificação_Quantitativa-22c55e?style=flat-square) (Jan 2026)
 
 | Conjunto de Dados | Benchmark | Resultado | Status |
 | :--- | :--- | :--- | :--- |
@@ -173,7 +173,7 @@ O Kernel v3.2 fornece uma resolução simultânea para os três pilares do conhe
 
 ---
 
-## 🏛️ Resolução dos Problemas do Milênio
+## ![Milênio](https://img.shields.io/badge/🏛️-Problemas_do_Milênio-a855f7?style=flat-square)
 
 O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificada para todos os sete Problemas do Prêmio Milênio do Instituto Clay de Matemática.
 
@@ -187,7 +187,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 
 ---
 
-## 📂 Estrutura de Pesquisa
+## ![Estrutura](https://img.shields.io/badge/📂-Estrutura_de_Pesquisa-64748b?style=flat-square)
 
 - **`07_MILLENNIUM_VALIDATION`:** Ataque estratégico em gargalos matemáticos.
 - **`11_TOE_ARCHITECTURE_OF_REALITY`:** Artigo principal e fonte universal.
@@ -197,9 +197,9 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 
 ---
 
-## 🔗 Links Importantes & Rotas
+## ![Links](https://img.shields.io/badge/🔗-Links_Importantes-0ea5e9?style=flat-square)
 
-### 📖 Leitura Essencial
+### ![Leitura](https://img.shields.io/badge/-Leitura_Essencial-blue?style=flat-square)
 
 | Documento | Descrição |
 |:---|:---|
@@ -209,7 +209,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 | [THEORY_SUMMARY.md](THEORY_SUMMARY.md) | Resumo conciso da Teoria Tamesis |
 | [A_HISTORIA_TAMESIS.md](A_HISTORIA_TAMESIS.md) | História narrativa do projeto |
 
-### 🗺️ Guias de Navegação
+### ![Navegação](https://img.shields.io/badge/-Guias_de_Navegação-purple?style=flat-square)
 
 | Guia | Descrição |
 |:---|:---|
@@ -219,7 +219,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 | [HOW_TO_USE.md](HOW_TO_USE.md) | Getting started guide (English) |
 | [RESEARCH_CHRONOGRAM.md](RESEARCH_CHRONOGRAM.md) | Cronograma das fases de pesquisa |
 
-### 🔬 Validação Central
+### ![Validação](https://img.shields.io/badge/-Validação_Central-green?style=flat-square)
 
 | Caminho | Conteúdo |
 |:---|:---|
@@ -228,7 +228,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 | [12_MOMENT_OF_TRUTH/FINAL_VALIDATION_REPORT.md](12_MOMENT_OF_TRUTH/FINAL_VALIDATION_REPORT.md) | Relatório final de validação |
 | [07_MILLENNIUM_VALIDATION/THE_TAMESIS_MANIFESTO.MD](07_MILLENNIUM_VALIDATION/THE_TAMESIS_MANIFESTO.MD) | O Manifesto Tamesis |
 
-### 🧪 Motores Científicos
+### ![Motores](https://img.shields.io/badge/-Motores_Científicos-orange?style=flat-square)
 
 | Caminho | Conteúdo |
 |:---|:---|
@@ -236,7 +236,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 | [03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/ReactiveCosmoMapper) | Ferramentas de mapeamento cosmológico |
 | [03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/HolographicOrigin](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/HolographicOrigin) | Experimentos de origem holográfica |
 
-### 📚 Recursos em Inglês
+### ![EN](https://img.shields.io/badge/-English_Resources-brightgreen?style=flat-square)
 
 | Document | Description |
 |:---|:---|
@@ -247,7 +247,7 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 
 ---
 
-## 📜 Metadados e Citação
+## ![Metadados](https://img.shields.io/badge/📜-Metadados_e_Citação-gray?style=flat-square)
 
 **Pesquisador Principal:** Douglas H. M. Fulber
 **DOI:** [10.5281/zenodo.18407193](https://doi.org/10.5281/zenodo.18407193)

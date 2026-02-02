@@ -250,7 +250,18 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 ## ![Metadados](https://img.shields.io/badge/📜-Metadados_e_Citação-gray?style=flat-square)
 
 **Pesquisador Principal:** Douglas H. M. Fulber
-**DOI:** [10.5281/zenodo.18407193](https://doi.org/10.5281/zenodo.18407193)
 **Licença:** MIT / Creative Commons BY-SA 4.0
 
+### DOIs Oficiais (Arquivo)
+
+- **The Ontological Censor (2026):** [10.5281/zenodo.18458180](https://doi.org/10.5281/zenodo.18458180)
+- **Tamesis Kernel v3.2:** [10.5281/zenodo.18407193](https://doi.org/10.5281/zenodo.18407193)
+- **Teoria Unificada / Tratados:** [10.5281/zenodo.18357364](https://doi.org/10.5281/zenodo.18357364)
+- **Caminho: Uma Verdade Científica:** [10.5281/zenodo.18361746](https://doi.org/10.5281/zenodo.18361746)
+- **Documentação do Kernel:** [10.5281/zenodo.18362039](https://doi.org/10.5281/zenodo.18362039)
+- **Física Cognitiva:** [10.5281/zenodo.18364790](https://doi.org/10.5281/zenodo.18364790)
+- **Release Inicial de Citação:** [10.5281/zenodo.18343477](https://doi.org/10.5281/zenodo.18343477)
+
 *O Kernel Tamesis: Porque a realidade é um processo open-source.*
+
+```

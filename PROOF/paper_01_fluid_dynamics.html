@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Dissipation as Effective Regularization in Finite-Bandwidth Fluids</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* Shared Treatise CSS */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 90%;
+            text-align: justify;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 1rem 0;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            border: 2px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            text-align: center;
+            background: #fafafa;
+            break-inside: avoid;
+        }
+
+        .derivation-box {
+            background-color: #fff;
+            border: 1px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            break-inside: avoid;
+        }
+
+        .derivation-box h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            max-width: 100%;
+            border: 1px solid #999;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            margin-top: 0.5rem;
+            text-align: justify;
+        }
+
+        .doi-badge {
+            font-family: sans-serif;
+            font-size: 8pt;
+            color: #666;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doi-badge">DOI: 10.5281/zenodo.18458180</div>
+
+    <header>
+        <h1>Adaptive Dissipation as an Effective Regularization<br>Mechanism in Finite-Bandwidth Fluids</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">UNIVERSIDADE FEDERAL DO RIO DE JANEIRO</div>
+        <div class="date">(Dated: February 2, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        <span class="abstract-title">Abstract.</span> We investigate the behavior of the Navier-Stokes equations under
+        the imposition of a finite information bandwidth constraint. By introducing an adaptive dissipation operator
+        $\mathcal{D}_\Phi$ that responds to local energy density, we demonstrate that singularities (blow-up events) are
+        suppressed in physically realizable fluids. This result does not resolve the Millennium Prize problem for the
+        classical equations but establishes an effective field theory for fluids in media with finite channel capacity.
+    </div>
+
+    <div class="content-wrapper">
+        <h2>I. Introduction: The Physicality of Singularities</h2>
+        <p class="no-indent">The classical Navier-Stokes equations assume a continuum with infinite capacity for energy,
+            velocity, and vorticity gradients. In mathematical terms, this allows the $L^\infty$ norm of the velocity
+            field to potentially diverge in finite time. However, physical fluids exist in discrete media bounded by the
+            speed of sound and mean free path.</p>
+
+        <p>We propose that "regularity" in the physical universe is not a property of the abstract differential
+            equation, but an emergent property of the substrate's finite bandwidth. We model this via an
+            <strong>Adaptive Dissipation Operator</strong>.
+        </p>
+
+        <h2>II. The Adaptive Dissipation Model</h2>
+        <div class="derivation-box">
+            <h4>The Modified Stress Tensor</h4>
+            <p>We modify the standard Navier-Stokes formulation to include a self-regulating viscosity term:</p>
+            <div class="equation-box">
+                $$ \partial_t u + (u \cdot \nabla) u = -\nabla p + \nabla \cdot (\nu_{eff}(u) \nabla u) $$
+            </div>
+            <p>The effective viscosity $\nu_{eff}$ is no longer constant but a functional of the local state:</p>
+            <div class="equation-box">
+                $$ \nu_{eff}(u) = \nu_0 + \lambda \cdot \sigma\left(\frac{|u|^2}{E_{crit}} - 1\right) $$
+            </div>
+            <p>where $\sigma$ is a sigmoid activation function and $E_{crit}$ represents the saturation energy of the
+                medium (e.g., cavitation limit or relativistic bound).</p>
+        </div>
+
+        <h2>III. Computational Evidence</h2>
+        <p>We performed high-resolution numerical simulations comparing the classical constant-viscosity model against
+            the Tamesis adaptive model. The initial conditions were designed to trigger a potential singularity
+            (colliding vortex rings).</p>
+
+        <figure>
+            <img src="./energia_maxima_vs_tempo.png" alt="Navier Stokes Stability">
+            <figcaption>FIG. 1. <strong>Energy Saturation vs. Divergence.</strong> The red curve shows the classical
+                model exhibiting characteristic pre-blow-up growth. The blue curve shows the Tamesis model engaging the
+                adaptive dissipation mechanism, forcing the system into a saturation plateau. This mimics the
+                "quenching" observed in high-energy turbulent flows.</figcaption>
+        </figure>
+
+        <h2>IV. Discussion: Effective Field Theory</h2>
+        <p>The suppression of the singularity in the Tamesis model suggests that <strong>observable fluids</strong> are
+            effectively regularized by their own physical limits. The "blow-up" is a mathematical artifact of assuming
+            $\nu = \text{const}$ even at infinite energy scales. In reality, as energy density increases, non-linear
+            interactions (e.g., pair production, cavitation, phase change) effectively increase dissipation, preventing
+            the singularity.</p>
+
+        <p>This formulation serves as a consistent <strong>Effective Field Theory (EFT)</strong> for fluid dynamics,
+            valid up to the cutoff scale $E_{crit}$.</p>
+    </div>
+</body>
+
+</html>

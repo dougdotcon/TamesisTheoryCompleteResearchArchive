@@ -1,9 +1,28 @@
 # 🗺️ ROADMAP: Yang-Mills & Mass Gap
 
-## The Structural Stability Selection
+## A Structural Stability Selection
 
-> **Status**: **`✅ COMPLETE — 100%`**
-> **Theorem**: Balaban (UV) + Tamesis (IR) = Mass Gap Proven
+> **Status**: **`⚠️ CONDICIONAL — 40%`**
+> **Gargalo**: Controle IR não-perturbativo no contínuo
+
+---
+
+## 🚨 AVALIAÇÃO HONESTA (03/02/2026)
+
+### O que Temos
+- ✅ UV Stability (Balaban 1984-89)
+- ✅ Framework teórico completo
+- ✅ Argumento físico correto (trace anomaly)
+
+### O que NÃO Temos
+- ❌ Controle IR não-perturbativo
+- ❌ Reflection Positivity no limite contínuo
+- ❌ Prova de não-trivialidade (teoria interagente)
+- ❌ Gap spectral rigoroso (apenas condicional)
+
+### O Verdadeiro Gargalo
+
+$$\boxed{\text{Falta: Controle IR independente de lattice}}$$
 
 ---
 
@@ -13,7 +32,7 @@
 
 **Mathematical Target**: Coercivity of the Hamiltonian Spectrum $\text{Spec}(H) > 0$.
 
-**Final Achievement**: UNCONDITIONAL PROOF via Balaban-Tamesis synthesis.
+**Current Status**: Argumento físico correto, prova matemática AUSENTE.
 
 ---
 

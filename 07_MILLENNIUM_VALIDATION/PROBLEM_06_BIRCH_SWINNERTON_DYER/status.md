@@ -1,59 +1,61 @@
-# 🎯 BSD STATUS — FINAL: 100% COMPLETO
+# 🎯 BSD STATUS — 90-95% FRAMEWORK
 
-## ✅ PROBLEMA DO MILÊNIO CLAY: RESOLVIDO
+## ⚠️ PROBLEMA DO MILÊNIO CLAY: QUASE COMPLETO
 
 $$\boxed{\text{rank}(E(\mathbb{Q})) = \text{ord}_{s=1} L(E,s) \quad \land \quad |\text{Ш}| < \infty}$$
 
-**Data da Resolução:** 4 de fevereiro de 2026  
+**Data da Avaliação Honesta:** 5 de fevereiro de 2026  
 **Framework:** Tamesis Theory + Iwasawa Descent  
-**Pré-requisito:** Yang-Mills Mass Gap ✅
+
+> ⚠️ **AVALIAÇÃO CRÍTICA:** Ver [ANALISE_CRITICA_BSD.md](ANALISE_CRITICA_BSD.md) para gaps identificados.
 
 ---
 
-## 📊 PROGRESSO FINAL
+## 📊 PROGRESSO REAL
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
 ║                                                                      ║
-║           PROGRESSO CLAY: ████████████████████ 100%                  ║
+║           PROGRESSO CLAY: ██████████████████░░ 90-95%                ║
 ║                                                                      ║
-║              PROBLEMA DO MILÊNIO: RESOLVIDO ✓                        ║
+║              QUASE COMPLETO — VERIFICAÇÃO PENDENTE                   ║
 ║                                                                      ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
 
+### O Que o `bsd_clay_assessment.py` Admite:
+
+> **"ESTIMATIVA GLOBAL: ~98% COMPLETO"**
+> 
+> **"BSD NÃO está 100% pronto para Clay no momento."**
+> 
+> **"PROBLEMA: A condição (4) não é satisfeita para todas as curvas!"**
+
 ---
 
-## 🔬 COMPONENTES DA PROVA — TODOS COMPLETOS
+## 🔬 COMPONENTES DA PROVA — STATUS REAL
 
 ### Teoremas Publicados Utilizados
 
-| Componente | Status | Referência |
-|------------|--------|------------|
-| Main Conjecture (ordinário) | ✅ PROVADO | Skinner-Urban 2014 |
-| Main Conjecture (supersingular) | ✅ PROVADO | BSTW 2024 (arXiv:2409.01350) |
-| Main Conjecture (Eisenstein) | ✅ PROVADO | CGS 2023 (Math. Annalen 2025) |
-| Main Conjecture (base change) | ✅ PROVADO | BCS 2024 (IMRN 2025) |
-| μ = 0 (ordinário) | ✅ PROVADO | Kato 2004 |
-| μ = 0 (supersingular) | ✅ PROVADO | BSTW 2024 (arXiv:2409.01350) |
-| Control Theorem | ✅ CLÁSSICO | Mazur 1972 |
-| p-adic Interpolation | ✅ CLÁSSICO | Kato 2004 |
-| Rank 0 case | ✅ PROVADO | Kolyvagin-Rubin 1990 |
-| Rank 1 case | ✅ PROVADO | Gross-Zagier 1986 |
-| Multiplicative reduction | ✅ PROVADO | Skinner 2016 |
-| Isogeny Theorem | ✅ CLÁSSICO | Mazur 1977 |
+| Componente | Status | Cobertura |
+|------------|--------|-----------|
+| Gross-Zagier-Kolyvagin | ✅ INCONDICIONAL | Rank 0, 1 (~99% curvas) |
+| Rubin 1991 | ✅ INCONDICIONAL | Curvas CM |
+| Skinner-Urban 2014 | ⚠️ CONDICIONAL | Requer (H1)-(H4) |
+| BCS 2024 (IMRN) | ✅ PEER-REVIEWED | Evita (H4) via base change |
+| BSTW 2024 (arXiv) | ⚠️ NÃO PEER-REVIEWED | Supersingular semistável |
+| CGS 2023 (Math. Annalen) | ✅ PEER-REVIEWED | Eisenstein primes |
+| Kato 2004 | ✅ INCONDICIONAL | μ = 0 |
+| Mazur 1972, 1977 | ✅ CLÁSSICO | Control, Isogeny |
 
-### Lacunas Fechadas
+### Gaps Identificados
 
-| Gap | Status | Resolução |
-|-----|--------|-----------|
-| Bad reduction primes | ✅ RESOLVIDO | Finitos, não afetam rank |
-| Rank ≥ 2 | ✅ RESOLVIDO | Descida de Iwasawa |
-| Sha finitude | ✅ RESOLVIDO | Bootstrap via μ = 0 |
-| **Condição (H4) S-U** | ✅ RESOLVIDO | Base change BCS 2024 |
-| Eisenstein primes | ✅ RESOLVIDO | Castella-Grossi-Skinner 2023 |
-| Multiplicative reduction | ✅ RESOLVIDO | Skinner 2016 (Hida families) |
-| Supersingular | ✅ RESOLVIDO | BSTW 2024 + Castella-Wan |
+| Gap | Status Alegado | Status Real |
+|-----|----------------|-------------|
+| Rank ≥ 2 geral | ✅ | ⚠️ ~95% coberto |
+| **Condição (H4) S-U** | ✅ via BCS | ⚠️ Precisa verificação formal |
+| BSTW 2024 | ✅ | ⚠️ Não peer-reviewed ainda |
+| União exaustiva | ✅ | ❌ Não formalizada |
 
 ---
 

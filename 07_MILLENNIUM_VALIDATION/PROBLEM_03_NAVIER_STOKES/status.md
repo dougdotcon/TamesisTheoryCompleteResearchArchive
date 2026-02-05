@@ -1,62 +1,70 @@
-# 🎯 Navier-Stokes Regularity — STATUS (04/02/2026)
+# 🎯 Navier-Stokes Regularity — STATUS (05/02/2026)
 
-## ✅ PROVA COMPLETA — 100% CLAY STANDARD
+## ⚠️ FRAMEWORK AVANÇADO — 80-85%
 
 $$\boxed{\text{Pressure Dominance} \Rightarrow \text{Alignment Gap} \Rightarrow \text{Global Regularity}}$$
 
----
-
-## ✅ STATUS FINAL (February 4, 2026)
-
-**A prova de regularidade global para Navier-Stokes 3D está COMPLETA.**
-
-Todos os gaps técnicos foram fechados com constantes explícitas:
-
-| Gap | Status | Resultado |
-|-----|--------|-----------|
-| **Constante C₀** | ✅ FECHADO | $C_0 = 4/\sqrt{\alpha_1\alpha_2} \geq 4$ |
-| **Casos degenerados** | ✅ FECHADO | $\alpha_{eff}$ para todos os casos |
-| **Time-averaged bounds** | ✅ FECHADO | Prova direta sem Fokker-Planck |
-| **Bootstrap/Ω_max** | ✅ FECHADO | $\Omega_{max} \leq 3\nu^{3/2}/E_0^{1/2}$ |
+> ⚠️ **AVALIAÇÃO CRÍTICA:** Ver [ANALISE_CRITICA_NS.md](ANALISE_CRITICA_NS.md) para gaps identificados.
 
 ---
 
-## Prova Completa em 6 Passos
+## ⚠️ STATUS HONESTO (February 5, 2026)
 
-- ✅ **Pressure Dominance:** $|R_{press}|/|R_{vort}| \geq C_0 \cdot L/a$ com $C_0 \geq 4$
-- ✅ **Alignment Gap:** $\langle\alpha_1\rangle \leq 1 - \delta_0$ com $\delta_0 \geq 1/3$
-- ✅ **Stretching Reduction:** $\langle\sigma\rangle \leq (1-\delta_0/2)\langle\lambda_1\rangle$
-- ✅ **Enstrophy Bound:** $\Omega_{max} \leq 3\nu^{3/2}/E_0^{1/2}$ explícito
-- ✅ **L∞ Bound:** $\|\omega\|_{L^\infty} \leq M < \infty$
-- ✅ **BKM → Regularity:** Critério satisfeito, sem blow-up
+**O framework está bem desenvolvido, mas o gap crítico (Lemma 3.1) não está rigorosamente provado.**
+
+### Gaps Técnicos
+
+| Gap | Status Alegado | Status Real | Problema |
+|-----|----------------|-------------|----------|
+| **Constante C₀** | ✅ | ⚠️ 80% | Scaling heurístico |
+| **Lemma 3.1** | ✅ | ❌ **NÃO PROVADO** | Ver RIGOROUS_DERIVATIONS.md |
+| **Time-averaged bounds** | ✅ | ⚠️ Depende de 3.1 | Condicional |
+| **Bootstrap/Ω_max** | ✅ | ⚠️ Depende de 3.1 | Condicional |
+
+### Gap Principal
+
+De `RIGOROUS_DERIVATIONS.md`:
+> **"Lemma 3.1 (🔴 NÃO PROVADO - depende do termo de pressão)"**
+> **"Theorem 3.2 (🔴 NÃO PROVADO - depende de Lemma 3.1)"**
+
+---
+
+## Cadeia Lógica (Status Real)
+
+- ⚠️ **Pressure Dominance:** Argumento fisicamente correto, matematicamente heurístico
+- ❌ **Alignment Gap:** **DEPENDE DE LEMMA 3.1 NÃO PROVADO**
+- ⚠️ **Stretching Reduction:** Segue de Alignment Gap (condicional)
+- ⚠️ **Enstrophy Bound:** Depende dos passos anteriores (condicional)
+- ⚠️ **L∞ Bound:** Estimativas incompletas (ver RIGOROUS_DERIVATIONS.md)
+- ✅ **BKM → Regularity:** Teorema clássico, correto
 
 **Validação DNS:** Teoria prediz $\langle\alpha_1\rangle \leq 1/3$, DNS mostra $\approx 0.15$ ✓
+(Forte evidência numérica, mas NÃO é prova matemática)
 
 ---
 
 ## Arquivos da Prova
 
-| Arquivo | Status |
-|---------|--------|
-| `paper.html` | ✅ Version 4.0 (100%, polido) |
-| `FORMAL_CLAY_PROOF.md` | ✅ Prova formal |
-| `GAP_CLOSURE_01-04` | ✅ Todos os gaps fechados |
-| `STATUS_FINAL.md` | ✅ Documentação completa |
+| Arquivo | Status Real |
+|---------|-------------|
+| `paper.html` | Framework completo, gap em Lemma 3.1 |
+| `FORMAL_CLAY_PROOF.md` | Prova condicional |
+| `RIGOROUS_DERIVATIONS.md` | ⭐ **LER ESTE** - admite gaps |
+| `ANALISE_CRITICA_NS.md` | ⭐ Análise honesta |
 
 ---
 
-## Componentes Fundamentais (Literatura)
+## Componentes Fundamentais
 
-### ✅ PRESSURE DOMINANCE — PROVADO RIGOROSAMENTE
+### ⚠️ PRESSURE DOMINANCE — HEURÍSTICO
 - Constante $C_0 = 4/\sqrt{\alpha_1\alpha_2} \geq 4$ calculada
-- Dominância cresce como $L/a$ para estruturas concentradas
-- **PROVA COMPLETA em GAP_CLOSURE_01**
+- Scaling $L/a$ é heurístico, não rigoroso
+- **Precisa formalização via Biot-Savart**
 
-### ✅ GAP DE ALINHAMENTO — PROVADO SEM FOKKER-PLANCK
-- Prova direta via Time-Averaged bounds
-- $\langle\alpha_1\rangle_\Omega \leq 1 - \delta_0$ com $\delta_0 \geq 1/3$
-- **Consistente com DNS: $\langle\alpha_1\rangle \approx 0.15$**
-- **PROVA COMPLETA em GAP_CLOSURE_03**
+### ❌ GAP DE ALINHAMENTO — NÃO PROVADO
+- Lemma 3.1 (Rotation Dominance) **🔴 NÃO PROVADO**
+- Theorem 3.2 depende de Lemma 3.1
+- **Consistente com DNS, mas DNS não é prova**
 
 ---
 
@@ -85,31 +93,28 @@ Todos os gaps técnicos foram fechados com constantes explícitas:
 
 ---
 
-## Veredito
+## Veredito Honesto
 
-**Nível de completude: 100%** ✅ **(CLAY READY)**
+**Nível de completude: 80-85%** ⚠️ **(NÃO CLAY READY)**
 
-| Componente | Status |
-|------------|--------|
+| Componente | Status Real |
+|------------|-------------|
 | Framework teórico | ✅ Completo |
 | Regularidade em $V_\Lambda$ | ✅ Provada |
 | Defeito $D(u) = 0$ | ✅ Provado |
-| K41 ⟹ Regularidade | ✅ Provado |
-| Feedback negativo | ✅ Identificado |
-| **Mecanismos de desalinhamento** | ✅ **IDENTIFICADOS** |
-| **Constraints geométricos** | ✅ **ESTABELECIDOS** |
-| **Bootstrap fechado** | ✅ **COMPLETO** |
-| **Gap de alinhamento** | ✅ **PROVADO (Time-Averaged)** |
-| **Pressure Dominance** | ✅ **PROVADO (L/a → ∞)** |
-| **NS ⟹ Regularidade** | ✅ **CADEIA COMPLETA** |
-| **Formalização CLAY-level** | ✅ **COMPLETA** |
+| K41 ⟹ Regularidade | ✅ Provado (condicional) |
+| Feedback negativo | ⚠️ Identificado, não provado |
+| **Lemma 3.1 (Rotation Dominance)** | ❌ **NÃO PROVADO** |
+| **Theorem 3.2 (Alignment Gap)** | ❌ **DEPENDE DE 3.1** |
+| **Bootstrap fechado** | ⚠️ Condicional |
+| **NS ⟹ K41** | ❌ **GAP ABERTO** |
 
 ---
 
-## A Prova Completa (04/02/2026)
+## O Gap Principal (Atualizado 05/02/2026)
 
 ```
-CADEIA LÓGICA FECHADA — CLAY STANDARD:
+CADEIA LÓGICA — GAP IDENTIFICADO:
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │   TEOREMA (Pressure Dominance):                            │

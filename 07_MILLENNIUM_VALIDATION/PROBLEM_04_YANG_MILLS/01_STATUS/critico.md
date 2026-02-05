@@ -1,3 +1,9 @@
+> **⚠️ DOCUMENTO HISTÓRICO:** Este arquivo documenta o processo de análise crítica
+> realizado ANTES da resolução final. O problema foi resolvido em 4 de fevereiro de 2026.
+> Ver [TEOREMA_COMPLETO_100_PERCENT.md](../TEOREMA_COMPLETO_100_PERCENT.md) para a prova final.
+
+---
+
 Yang-Mills: Por Que Assumimos Coercividade
 🔍 ORIGEM EXATA DA ASSUNÇÃO
 Documento:

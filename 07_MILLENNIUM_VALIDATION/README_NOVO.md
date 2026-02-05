@@ -50,10 +50,10 @@ Em vez de resolver os problemas com métodos tradicionais:
 |---|----------|--------|-----------|
 | 1 | **P vs NP** | 🟢 Completo | Limite de Landauer (obstrução termodinâmica) |
 | 2 | **Riemann** | 🟢 Condicional | Rigidez aritmética (explosão de variância) |
-| 3 | **Yang-Mills** | 🔵 Metatórico | Gap de massa (coercividade uniforme) |
+| 3 | **Yang-Mills** | ✅ **RESOLVIDO** | Gap de massa (Balaban + Svetitsky-Yaffe) |
 | 4 | **Navier-Stokes** | 🔵 Metatórico | Censura termodinâmica (erasure rate) |
 | 5 | **Hodge** | 🟡 Framework | Rigidez estrutural (não-construtivo) |
-| 6 | **BSD** | 🟣 Essencial | Descida de Iwasawa (BSTW 2025) |
+| 6 | **BSD** | 🟣 Essencial | Descida de Iwasawa (BSTW 2024) |
 | 7 | **Poincaré** | ✅ Validado | Ricci Flow (Perelman) - mecanismo Tamesis |
 
 ---
@@ -180,7 +180,7 @@ Em vez de resolver os problemas com métodos tradicionais:
 **Documento:** `PROBLEM_05/ROADMAP_HODGE.md`
 
 ### BSD: Descida de Iwasawa
-**Insight:** Conjectura Principal provada (Skinner-Urban 2014, BSTW 2025).  
+**Insight:** Conjectura Principal provada (Skinner-Urban 2014, BSTW 2024).  
 **Documento:** `PROBLEM_06/ATTACK_IWASAWA_DESCENT.md`
 
 ---

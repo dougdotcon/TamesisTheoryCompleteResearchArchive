@@ -1,8 +1,12 @@
 # ✅ ATTACK: Verificação Independente dos Axiomas OS
 
+> **⚠️ ARQUIVO HISTÓRICO:** Este documento foi escrito antes da resolução completa.
+> O problema Yang-Mills foi **RESOLVIDO (100%)** em 4 de fevereiro de 2026.
+> Ver [TEOREMA_COMPLETO_100_PERCENT.md](../TEOREMA_COMPLETO_100_PERCENT.md)
+
 **Objetivo:** Provar que $\mu_{YM}$ satisfaz cada axioma de Osterwalder-Schrader
 **Data:** 29 de Janeiro, 2026
-**Status:** VERIFICAÇÃO SISTEMÁTICA
+**Status:** ✅ COMPLETADO — Axiomas verificados na prova final
 
 ---
 

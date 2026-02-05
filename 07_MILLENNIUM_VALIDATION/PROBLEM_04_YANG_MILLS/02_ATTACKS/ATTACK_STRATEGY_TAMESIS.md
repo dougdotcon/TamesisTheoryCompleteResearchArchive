@@ -2,7 +2,18 @@
 
 **Data:** 3 de fevereiro de 2026  
 **Metodologia:** Perelman-style (Fluxo Ontológico)  
-**Base Filosófica:** classes_REORGANIZADO.md
+**Base Filosófica:** classes_REORGANIZADO.md  
+**Status:** ATUALIZADO com Wilson-Itô (nova Rota D)
+
+---
+
+## 📢 ATUALIZAÇÃO 3 FEV 2026
+
+### Nova Rota Identificada: Wilson-Itô Diffusions
+
+Ver: [ATTACK_HYBRID_WILSON_ITO.md](ATTACK_HYBRID_WILSON_ITO.md)
+
+**Ideia:** Usar Wilson-Itô (Bailleul-Chevyrev-Gubinelli 2023) para definir dinâmica de escala SEM construir path integral. Provar gap por exclusão de fase gapless via trace anomaly.
 
 ---
 

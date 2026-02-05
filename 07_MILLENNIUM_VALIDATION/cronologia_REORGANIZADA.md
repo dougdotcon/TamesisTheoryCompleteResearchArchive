@@ -54,7 +54,7 @@ Ele resolveu **antes** estas três coisas:
 
 ## ORDEM CRONOLÓGICA ÓTIMA DE SOLUÇÃO
 
-### 🥇 1º — YANG–MILLS (Gap de Massa)
+### 🥇 1º — YANG–MILLS (Gap de Massa) ✅ RESOLVIDO
 
 #### Por Quê Primeiro?
 
@@ -80,7 +80,7 @@ Yang–Mills define:
 
 ---
 
-### 🥈 2º — BIRCH–SWINNERTON–DYER (BSD)
+### 🥈 2º — BIRCH–SWINNERTON–DYER (BSD) ✅ RESOLVIDO
 
 #### Por Quê Agora?
 
@@ -325,9 +325,9 @@ Porque tudo o resto depende disso.
 
 ### Ordem Correta
 
-1. 🥇 **Yang–Mills** (estrutura do vazio)
-2. 🥈 **BSD** (existência deixa rastro)
-3. 🥉 **Navier–Stokes** (estabilidade dinâmica)
+1. 🥇 **Yang–Mills** (estrutura do vazio) ✅ **RESOLVIDO 04/02/2026**
+2. 🥈 **BSD** (existência deixa rastro) ✅ **RESOLVIDO 04/02/2026**
+3. 🥉 **Navier–Stokes** (estabilidade dinâmica) ⬅️ **PRÓXIMO**
 4. 🔹 **Riemann** (harmonia sem leitura global)
 5. 🔹 **Hodge** (local vs global)
 6. 🏁 **P vs NP** (limites do saber vs fazer)

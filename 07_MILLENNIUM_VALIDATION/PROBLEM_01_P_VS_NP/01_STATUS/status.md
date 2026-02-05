@@ -1,14 +1,18 @@
 # 🎯 P vs NP STATUS — January 29, 2026
 
-## ✅ PROOF COMPLETE — 100% (under Physical Axioms)
+## ⚠️ STATUS: ~75-80% CONDITIONAL (ZFC + PCA)
 
 $$\boxed{ZFC + PCA \vdash P \neq NP}$$
+
+> ⚠️ **NOTA HONESTA**: Esta resolução depende de axiomas físicos (PCA).
+> Em ZFC puro, o status permanece "Unknown - may be independent".
+> Ver: ANALISE_CRITICA_PNP.md
 
 ---
 
 ## Summary
 
-The P vs NP problem has been **RESOLVED** through three independent closures:
+The P vs NP problem has been approached through three closures (conditional on PCA):
 
 | Component | Status | Reference |
 |-----------|--------|-----------|

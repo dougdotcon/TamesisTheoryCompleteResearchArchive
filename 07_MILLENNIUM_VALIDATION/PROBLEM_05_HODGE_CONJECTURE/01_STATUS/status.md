@@ -1,13 +1,17 @@
 # STATUS: Hodge Conjecture
 
 **Last Updated:** January 29, 2026  
-**Status:** ✅ **100% COMPLETE** (Structural Resolution)
+**Status:** ⚠️ **~85-90%** (Gap de Construção Pendente)
+
+> ⚠️ **NOTA HONESTA**: O próprio ROADMAP admite "🚧 Construction Gap".
+> CDK + Transversality eliminam ghosts, mas não constroem ciclos explicitamente.
+> Ver: ANALISE_CRITICA_HODGE.md
 
 ---
 
 ## Summary
 
-The Hodge Conjecture is resolved via **Three Independent Closures**:
+The Hodge Conjecture has strong structural arguments via Three Closures:
 
 | Closure | Name | Status | Year |
 |:--------|:-----|:-------|:-----|

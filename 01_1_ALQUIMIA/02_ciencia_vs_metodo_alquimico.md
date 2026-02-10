@@ -1,46 +1,46 @@
-![Capitulo](https://img.shields.io/badge/Capitulo-02-blue)
-![Tema](https://img.shields.io/badge/Tema-Ciencia_vs_Alquimia-8B4513)
+![Capitulo](https://img.shields.io/badge/Capítulo-02-blue)
+![Tema](https://img.shields.io/badge/Tema-Ciência_vs_Alquimia-8B4513)
 ![Teoria](https://img.shields.io/badge/Teoria-Tamesis-blueviolet)
 ![Status](https://img.shields.io/badge/Status-Completo-green)
 
 ---
 
-# A Ciencia vs. O Metodo Alquimico
+# A Ciência vs. O Método Alquímico
 
 ---
 
-## O Cisma do Seculo XVII
+## O Cisma do Século XVII
 
-Ate Isaac Newton, ciencia e alquimia eram a mesma coisa. Newton escreveu mais sobre alquimia do que sobre fisica! Ele buscava a "Pedra Filosofal" nao por ganancia, mas porque acreditava que ela era o agente de correcao da natureza.
+Até Isaac Newton, ciência e alquimia eram a mesma coisa. Newton escreveu mais sobre alquimia do que sobre física! Ele buscava a "Pedra Filosofal" não por ganância, mas porque acreditava que ela era o agente de correção da natureza.
 
-### Onde a Ciencia Errou
+### Onde a Ciência Errou
 
-Com o Iluminismo, a ciencia decidiu estudar a materia **isolando o observador**.
+Com o Iluminismo, a ciência decidiu estudar a matéria **isolando o observador**.
 
-| Metodo | Abordagem |
+| Método | Abordagem |
 |--------|-----------|
-| **Metodo Cientifico** | "Eu observo a agua ferver, mas eu nao afeto a agua." |
-| **Metodo Alquimico** | "A agua ferve porque minha intencao interage com ela." |
+| **Método Científico** | "Eu observo a água ferver, mas eu não afeto a água." |
+| **Método Alquímico** | "A água ferve porque minha intenção interage com ela." |
 
 ### A Retomada
 
-A Mecanica Quantica (Efeito do Observador) esta redescobrindo o que os antigos sabiam: **a consciencia colapsa a funcao de onda**. Sem a "formula geometrica" mantida na mente do observador, a materia permanece em estado de caos (agua/ondas de probabilidade).
+A Mecânica Quântica (Efeito do Observador) está redescobrindo o que os antigos sabiam: **a consciência colapsa a função de onda**. Sem a "fórmula geométrica" mantida na mente do observador, a matéria permanece em estado de caos (água/ondas de probabilidade).
 
-![Fluxo de Processo - Ciencia e Alquimia](imagens/fluxo_de_processo.jpg)
+![Fluxo de Processo - Ciência e Alquimia](imagens/fluxo_de_processo.jpg)
 
 ---
 
-## A Aplicacao Pratica: Agua em Ouro
+## A Aplicação Prática: Água em Ouro
 
-Para ilustrar o exemplo da "Agua em Ouro": nao e apenas metafora. Na **Cimatica** (estudo do som visivel), se voce aplicar a frequencia (geometria sonora) correta na agua, ela assume formas cristalinas perfeitas.
+Para ilustrar o exemplo da "Água em Ouro": não é apenas metáfora. Na **Cimática** (estudo do som visível), se você aplicar a frequência (geometria sonora) correta na água, ela assume formas cristalinas perfeitas.
 
-| Simbolo | Representacao |
+| Símbolo | Representação |
 |---------|---------------|
-| **Agua** | A *Primeira Materia* (o Inconsciente, o caos, as possibilidades infinitas) |
-| **Ouro** | A *Materia Perfeita* (a Consciencia cristalizada, a ordem divina, o estado inalteravel) |
+| **Água** | A *Primeira Matéria* (o Inconsciente, o caos, as possibilidades infinitas) |
+| **Ouro** | A *Matéria Perfeita* (a Consciência cristalizada, a ordem divina, o estado inalterável) |
 
-**O Segredo:** A "Geometria" e a vibracao mental que forca o caos (agua) a se alinhar em ordem (ouro).
+**O Segredo:** A "Geometria" é a vibração mental que força o caos (água) a se alinhar em ordem (ouro).
 
 ---
 
-> **Navegacao:** [Anterior: O Que e Alquimia](01_o_que_e_alquimia.md) | [Indice](README.md) | [Proximo: Ouroboros e a Fisica da Queda](03_ouroboros_e_a_fisica_da_queda.md)
+> **Navegação:** [Anterior: O Que é Alquimia](01_o_que_e_alquimia.md) | [Índice](README.md) | [Próximo: Ouroboros e a Física da Queda](03_ouroboros_e_a_fisica_da_queda.md)

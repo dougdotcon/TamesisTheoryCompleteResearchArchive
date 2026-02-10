@@ -1,82 +1,82 @@
-![Capitulo](https://img.shields.io/badge/Capitulo-04-blue)
+![Capitulo](https://img.shields.io/badge/Capítulo-04-blue)
 ![Tema](https://img.shields.io/badge/Tema-Psique-8B4513)
 ![Teoria](https://img.shields.io/badge/Teoria-Tamesis-blueviolet)
 ![Status](https://img.shields.io/badge/Status-Completo-green)
 
 ---
 
-# O Cone de Compressao - A Psique
+# O Cone de Compressão - A Psique
 
-O Modelo Visual: Imagine uma estrutura em 4 camadas. O Ouroboros nao esta em uma camada; ele e o "elevador" que atravessa todas elas, conectando o topo a base.
+O Modelo Visual: Imagine uma estrutura em 4 camadas. O Ouroboros não está em uma camada; ele é o "elevador" que atravessa todas elas, conectando o topo à base.
 
-![A Psique - O Cone de Compressao](imagens/a_psique.jpg)
-
----
-
-## As 4 Camadas da Consciencia
-
-### Camada 1: O Material (Chumbo) -- "O Objeto Solido"
-
-| Aspecto | Descricao |
-|---------|-----------|
-| **Estado da Consciencia** | Sono / Automato |
-| **Densidade de Informacao** | Baixa (Alta compressao / Perda de dados) |
-| **A Visao** | A realidade e literal e "morta" |
-| **O Simbolo (A Cobra)** | E apenas um animal perigoso. Um reptil biologico. Se te morde, voce morre. |
-| **A "Dor" do Aprendizado** | Fisica (dor no corpo) |
-| **Significado** | "As coisas sao o que parecem ser." (Materialismo puro) |
+![A Psique - O Cone de Compressão](imagens/a_psique.jpg)
 
 ---
 
-### Camada 2: O Simbolico (Cobre) -- "A Emocao"
+## As 4 Camadas da Consciência
 
-| Aspecto | Descricao |
+### Camada 1: O Material (Chumbo) -- "O Objeto Sólido"
+
+| Aspecto | Descrição |
 |---------|-----------|
-| **Estado da Consciencia** | Sonho / Emocional / Religioso |
-| **Densidade de Informacao** | Media. Comecam a surgir links e hipertextos. |
-| **A Visao** | As coisas tem "significado oculto", mas ainda externo. |
-| **O Simbolo (A Cobra)** | Representa o Mal, o Demonio, ou a Cura (Esculapio). Ela evoca medo ou respeito. |
-| **A "Dor" do Aprendizado** | Culpa, Medo, Paixao (Psicologica) |
-| **Significado** | "As coisas representam algo maior." (Jung, Arquetipos) |
+| **Estado da Consciência** | Sono / Autômato |
+| **Densidade de Informação** | Baixa (Alta compressão / Perda de dados) |
+| **A Visão** | A realidade é literal e "morta" |
+| **O Símbolo (A Cobra)** | É apenas um animal perigoso. Um réptil biológico. Se te morde, você morre. |
+| **A "Dor" do Aprendizado** | Física (dor no corpo) |
+| **Significado** | "As coisas são o que parecem ser." (Materialismo puro) |
 
 ---
 
-### Camada 3: O Geometrico/Estrutural (Prata) -- "O Codigo"
+### Camada 2: O Simbólico (Cobre) -- "A Emoção"
 
-| Aspecto | Descricao |
+| Aspecto | Descrição |
 |---------|-----------|
-| **Estado da Consciencia** | Lucido / Mental Superior / Ocultista Cientifico |
-| **Densidade de Informacao** | Alta. Voce ve a "matriz" por tras da imagem. |
-| **A Visao** | O simbolo e uma instrucao matematica ou geometrica. |
-| **O Simbolo (A Cobra)** | E uma Onda Senoidal (frequencia). E a dupla helice do DNA. E o fluxo de corrente eletrica alternada. Voce entende como ela funciona, nao apenas o que ela representa. |
-| **A "Dor" do Aprendizado** | Quebra de Paradigma. O colapso da crenca antiga. |
-| **Significado** | "As coisas sao padroes de vibracao e geometria." (Alquimia Tecnica / Fisica Quantica) |
+| **Estado da Consciência** | Sonho / Emocional / Religioso |
+| **Densidade de Informação** | Média. Começam a surgir links e hipertextos. |
+| **A Visão** | As coisas têm "significado oculto", mas ainda externo. |
+| **O Símbolo (A Cobra)** | Representa o Mal, o Demônio, ou a Cura (Esculápio). Ela evoca medo ou respeito. |
+| **A "Dor" do Aprendizado** | Culpa, Medo, Paixão (Psicológica) |
+| **Significado** | "As coisas representam algo maior." (Jung, Arquétipos) |
 
 ---
 
-### Camada 4: O Holografico/Nao-Dual (Ouro) -- "A Fonte"
+### Camada 3: O Geométrico/Estrutural (Prata) -- "O Código"
 
-| Aspecto | Descricao |
+| Aspecto | Descrição |
 |---------|-----------|
-| **Estado da Consciencia** | Integrado / Iluminado / Kemet |
-| **Densidade de Informacao** | Infinita (Singularidade) |
-| **A Visao** | Nao ha separacao entre observador e objeto. |
-| **O Simbolo (A Cobra)** | E Ouroboros. E o proprio sistema se recriando. A cobra e voce, e a mordida e o ato de existir. Nao e "uma onda", e o oceano inteiro. |
-| **A "Dor" do Aprendizado** | A morte do "Eu" separado. O Silencio. |
+| **Estado da Consciência** | Lúcido / Mental Superior / Ocultista Científico |
+| **Densidade de Informação** | Alta. Você vê a "matriz" por trás da imagem. |
+| **A Visão** | O símbolo é uma instrução matemática ou geométrica. |
+| **O Símbolo (A Cobra)** | É uma Onda Senoidal (frequência). É a dupla hélice do DNA. É o fluxo de corrente elétrica alternada. Você entende como ela funciona, não apenas o que ela representa. |
+| **A "Dor" do Aprendizado** | Quebra de Paradigma. O colapso da crença antiga. |
+| **Significado** | "As coisas são padrões de vibração e geometria." (Alquimia Técnica / Física Quântica) |
+
+---
+
+### Camada 4: O Holográfico/Não-Dual (Ouro) -- "A Fonte"
+
+| Aspecto | Descrição |
+|---------|-----------|
+| **Estado da Consciência** | Integrado / Iluminado / Kemet |
+| **Densidade de Informação** | Infinita (Singularidade) |
+| **A Visão** | Não há separação entre observador e objeto. |
+| **O Símbolo (A Cobra)** | É Ouroboros. É o próprio sistema se recriando. A cobra é você, e a mordida é o ato de existir. Não é "uma onda", é o oceano inteiro. |
+| **A "Dor" do Aprendizado** | A morte do "Eu" separado. O Silêncio. |
 | **Significado** | "Eu sou a causa e o efeito." (A Pedra Filosofal) |
 
-![Bulk e Psique - Conexao entre Camadas](imagens/bulk_e_psique.jpg)
+![Bulk e Psique - Conexão entre Camadas](imagens/bulk_e_psique.jpg)
 
 ---
 
-## A Mecanica da Transmutacao
+## A Mecânica da Transmutação
 
-> *"A verdadeira Alquimia nao e transformar chumbo em ouro na tabela periodica. E a capacidade da sua consciencia de pegar um evento na Camada 1 (um problema, uma doenca, uma perda) e 'arrasta-lo' para a Camada 3.*
+> *"A verdadeira Alquimia não é transformar chumbo em ouro na tabela periódica. É a capacidade da sua consciência de pegar um evento na Camada 1 (um problema, uma doença, uma perda) e 'arrastá-lo' para a Camada 3.*
 >
-> *Na Camada 1, uma doenca e um azar. Na Camada 3, ela e um erro de geometria no seu campo. O Alquimista sobe a consciencia, corrige a geometria na Camada 3 (a Causa), e assiste o efeito descer em cascata ate a Camada 1 (a Cura).*
+> *Na Camada 1, uma doença é um azar. Na Camada 3, ela é um erro de geometria no seu campo. O Alquimista sobe a consciência, corrige a geometria na Camada 3 (a Causa), e assiste o efeito descer em cascata até a Camada 1 (a Cura).*
 >
-> *O 'Pecado Original' ou a 'Queda' foi quando esquecemos como subir o elevador. Ficamos presos na Camada 1, achando que as sombras na parede eram reais. O Ouroboros e o mapa de volta: ele nos ensina que o fim (a materia) esta conectado ao inicio (o espirito). Morder a cauda e fechar o circuito e recuperar o acesso total ao sistema."*
+> *O 'Pecado Original' ou a 'Queda' foi quando esquecemos como subir o elevador. Ficamos presos na Camada 1, achando que as sombras na parede eram reais. O Ouroboros é o mapa de volta: ele nos ensina que o fim (a matéria) está conectado ao início (o espírito). Morder a cauda é fechar o circuito e recuperar o acesso total ao sistema."*
 
 ---
 
-> **Navegacao:** [Anterior: Ouroboros e a Fisica da Queda](03_ouroboros_e_a_fisica_da_queda.md) | [Indice](README.md) | [Proximo: O Bulk - A Fisica Ancestral](05_o_bulk_a_fisica_ancestral.md)
+> **Navegação:** [Anterior: Ouroboros e a Física da Queda](03_ouroboros_e_a_fisica_da_queda.md) | [Índice](README.md) | [Próximo: O Bulk - A Física Ancestral](05_o_bulk_a_fisica_ancestral.md)

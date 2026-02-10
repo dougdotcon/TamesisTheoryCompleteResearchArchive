@@ -1,54 +1,54 @@
-![Capitulo](https://img.shields.io/badge/Capitulo-01-blue)
+![Capitulo](https://img.shields.io/badge/Capítulo-01-blue)
 ![Tema](https://img.shields.io/badge/Tema-Alquimia-8B4513)
 ![Teoria](https://img.shields.io/badge/Teoria-Tamesis-blueviolet)
 ![Status](https://img.shields.io/badge/Status-Completo-green)
 
 ---
 
-# O Que e Alquimia?
+# O Que é Alquimia?
 
-> *"O Alquimista nao transmuta metais; ele transmuta a si mesmo, e a materia ao redor apenas obedece a sua nova frequencia."*
+> *"O Alquimista não transmuta metais; ele transmuta a si mesmo, e a matéria ao redor apenas obedece à sua nova frequência."*
 
 ---
 
-## Definicao Real
+## Definição Real
 
-**"Alquimia e a arte de manipular a geometria do vacuo atraves da ressonancia da consciencia para alterar o estado da materia."**
+**"Alquimia é a arte de manipular a geometria do vácuo através da ressonância da consciência para alterar o estado da matéria."**
 
-A materia nao e solida; e energia vibrando em uma geometria especifica.
+A matéria não é sólida; é energia vibrando em uma geometria específica.
 
-A "Formula Geometrica": A diferenca entre um atomo de Mercurio (80 protons) e Ouro (79 protons) e apenas estrutura e informacao. O alquimista nao "cozinha" a materia; ele reorganiza a informacao dela.
+A "Fórmula Geométrica": A diferença entre um átomo de Mercúrio (80 prótons) e Ouro (79 prótons) é apenas estrutura e informação. O alquimista não "cozinha" a matéria; ele reorganiza a informação dela.
 
 ![Pecado Original - A Queda do Conhecimento](imagens/pecado_original.jpg)
 
 ---
 
-## O Processo Alquimico: As Tres Fases
+## O Processo Alquímico: As Três Fases
 
-| Fase | Nome | Descricao |
+| Fase | Nome | Descrição |
 |------|------|-----------|
-| 1 | **Nigredo** (O Caos/Inconsciente) | Quebra da forma atual (morte do ego/materia) |
-| 2 | **Albedo** (A Purificacao/Consciencia) | A mente visualiza a nova geometria perfeita |
-| 3 | **Rubedo** (A Materializacao) | A imposicao dessa nova geometria sobre a materia fisica |
+| 1 | **Nigredo** (O Caos/Inconsciente) | Quebra da forma atual (morte do ego/matéria) |
+| 2 | **Albedo** (A Purificação/Consciência) | A mente visualiza a nova geometria perfeita |
+| 3 | **Rubedo** (A Materialização) | A imposição dessa nova geometria sobre a matéria física |
 
 ---
 
-## A Linhagem Historica: De Onde Veio o "Codigo"?
+## A Linhagem Histórica: De Onde Veio o "Código"?
 
 ### Egito: Kemet (A Terra Negra)
 
-- **Etimologia:** A palavra "Alquimia" vem do arabe *Al-Kimiya*. O prefixo *Al* e "O/A". *Kimiya* vem do grego *Khemia*, que deriva do egipcio *Kemet*.
-- **Significado:** Kemet significa "Terra Negra", referindo-se ao lodo fertil do Nilo que dava vida ao deserto.
-- **Simbolismo:** Assim como a terra negra gesta a semente no escuro, o Inconsciente (Terra Negra) gesta a realidade antes dela se tornar luz/materia. Os egipcios nao faziam distincao entre ciencia, magia e religiao; tudo era **Heka** (manipulacao de energia).
+- **Etimologia:** A palavra "Alquimia" vem do árabe *Al-Kimiya*. O prefixo *Al* é "O/A". *Kimiya* vem do grego *Khemia*, que deriva do egípcio *Kemet*.
+- **Significado:** Kemet significa "Terra Negra", referindo-se ao lodo fértil do Nilo que dava vida ao deserto.
+- **Simbolismo:** Assim como a terra negra gesta a semente no escuro, o Inconsciente (Terra Negra) gesta a realidade antes dela se tornar luz/matéria. Os egípcios não faziam distinção entre ciência, magia e religião; tudo era **Heka** (manipulação de energia).
 
-### India Antiga: Rasayana (O Caminho da Essencia)
+### Índia Antiga: Rasayana (O Caminho da Essência)
 
-- **A Conexao Vedica:** Antes mesmo do Egito dinastico, os textos Vedicos e a tradicao indiana praticavam o *Rasayana* ("O Caminho do Mercurio" ou "Caminho da Essencia").
-- **Datacao:** Enquanto a alquimia egipcia floresceu por volta de 3000 a.C., as raizes do Rasayana e do Ayurveda se perdem na historia oral pre-vedica, apoiando a tese de um conhecimento de "+6000 anos".
-- **Diferenca Chave:** Enquanto o ocidente focou em "fazer ouro" (riqueza), o Rasayana focava em "fazer o corpo de diamante" (imortalidade e perfeicao celular). Eles entendiam que o corpo humano e o laboratorio final.
+- **A Conexão Védica:** Antes mesmo do Egito dinástico, os textos Védicos e a tradição indiana praticavam o *Rasayana* ("O Caminho do Mercúrio" ou "Caminho da Essência").
+- **Datação:** Enquanto a alquimia egípcia floresceu por volta de 3000 a.C., as raízes do Rasayana e do Ayurveda se perdem na história oral pré-védica, apoiando a tese de um conhecimento de "+6000 anos".
+- **Diferença Chave:** Enquanto o ocidente focou em "fazer ouro" (riqueza), o Rasayana focava em "fazer o corpo de diamante" (imortalidade e perfeição celular). Eles entendiam que o corpo humano é o laboratório final.
 
-![O Paraiso - Estado Inicial do Jardim](imagens/paraiso.jpg)
+![O Paraíso - Estado Inicial do Jardim](imagens/paraiso.jpg)
 
 ---
 
-> **Navegacao:** [Indice](README.md) | [Proximo: Ciencia vs Metodo Alquimico](02_ciencia_vs_metodo_alquimico.md)
+> **Navegação:** [Índice](README.md) | [Próximo: Ciência vs Método Alquímico](02_ciencia_vs_metodo_alquimico.md)

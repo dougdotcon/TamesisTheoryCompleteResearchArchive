@@ -20,20 +20,23 @@ Os **14 Shiva Sutras** não são um alfabeto; são uma **Tabela de Endereçament
   * `r lx K` (Sutra 2)
   * `e o G` (Sutra 3)
   * `ai au C` (Sutra 4)
+* **O Hack:** Marcadores mudos (*Anubandhas*) no final de cada grupo.
+* **A Lógica:** Permite selecionar grandes grupos de fonemas usando "Slicing" (como em Python).
+* **Exemplo:**
+  * `a i u N` (Sutra 1)
+  * `r lx K` (Sutra 2)
+  * `e o G` (Sutra 3)
+  * `ai au C` (Sutra 4)
   * Código **AC** = Do 'a' inicial até o marcador 'C'. Resultado: Todas as vogais.
 
 ---
 
 ## 2. O Algoritmo de Compressão: Pratyahara
 
-Pânini criou um algoritmo de compressão sem perdas de altíssima densidade.
+Pân![Eficiencia Compressao](../assets/panini_compression_efficiency.png)erdas de altíssima densidade.
 Regras fonéticas complexas que levariam parágrafos para explicar são reduzidas a 2 ou 3 sílabas.
 
-* **Regra Clássica:** "Se uma vogal simples for seguida por outra vogal similar, elas se fundem."
-* **Código Pânini:** `akaḥ savarṇe dīrghaḥ`.
-  * `ak` = Pratyahara para vogais simples.
-  * `savarṇe` = No caso de similaridade.
-  * `dīrghaḥ` = Torna-se longa.
+* `dīrghaḥ` = Torna-se longa.
 
 > **Validação Computacional:**
 > Executamos `panini_logic.py` e reproduzimos a função de descompressão.

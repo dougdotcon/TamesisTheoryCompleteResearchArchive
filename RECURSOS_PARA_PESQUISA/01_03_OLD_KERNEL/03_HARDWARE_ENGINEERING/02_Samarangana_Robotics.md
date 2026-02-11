@@ -55,7 +55,7 @@ Bhoja fornece a descrição mais sóbria e técnica do motor, validando nossa hi
 
 ## 4. Validação Computacional: Lógica de Autômatos
 
-Simulamos a lógica descrita por Bhoja em `ancient_robotics.py` para provar que componentes mecânicos simples podem executar algoritmos complexos.
+Simulamos a lógica descrita por Bhoja em ![Log FSM](../assets/robotics_fsm_log.png) `ancient_robotics.py` para provar que componentes mecânicos simples podem executar algoritmos complexos.
 
 **Cenário: O Porteiro Mecânico (Gatekeeper FSM)**
 

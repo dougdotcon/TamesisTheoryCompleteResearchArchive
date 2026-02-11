@@ -52,7 +52,8 @@ Para provar que **Som (Mantra) cria Geometria (Yantra)**, executamos a simulaç�
 Usamos equações de Chladni para modelar como frequências puras organizam a matéria em uma placa vibratória.
 
 **Resultado Visual:**
-![Mantra Cymatics](imagens/mantra_cymatics.png)
+![Mantra Cymatics](../assets/mantra_cymatics.png)
+![Gayatri Yantra](../assets/mantra_spectogram_yantra.png)
 
 1. **Modo (1,1) "OM":** Cria um domo central. Estado base.
 2. **Modo (2,2) "YAM":** Cria 4 quadrantes estáveis. Estabilização de voo.

@@ -68,7 +68,7 @@ Executamos uma simulação em Python (`guna_dynamics.py`) baseada nas equações
 * Entropia Natural degrada $Sattva$ de volta para $Tamas$.
 
 **Gráfico de Evolução:**
-![Guna Dynamics](imagens/samkhya_gunas.png)
+![Dinâmica da Gunas](../assets/samkhya_gunas_advanced.png)
 
 *O gráfico mostra a competição dinâmica. Sob a "Perturbação do Observador" (Purusha), o sistema sai do equilíbrio estático. Rajas (Vermelho) impulsiona a criação de Sattva (Ouro), reduzindo a dominância inicial de Tamas (Preto).*
 

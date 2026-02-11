@@ -46,7 +46,7 @@ Para provar que um vórtice de alta energia pode gerar levitação, criamos a si
 * **Efeito Laghima:** A energia converte a densidade local ($Tamas$) em espaço diluído ($Sattva$).
 
 **Resultado Visual:**
-![Mercury Vortex Simulation](imagens/mercury_vortex_mhd.png)
+![Perfil de Gravidade](../assets/mercury_vortex_profile.png)
 
 ### Análise dos Dados
 

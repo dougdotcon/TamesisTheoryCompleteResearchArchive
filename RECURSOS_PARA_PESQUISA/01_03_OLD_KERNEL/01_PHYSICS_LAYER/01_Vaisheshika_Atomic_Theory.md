@@ -70,8 +70,8 @@ Executamos `parmanu_simulation.py` para testar se essa agregação reduz a energ
 
 O Vaisheshika prevê que, ao fim do ciclo (*Kalpa*), os átomos se separam. Simulamos isso em `pralaya_simulation.py` introduzindo **Entropia (Ruído)** crescente no sistema para testar a resistência das conexões (*Samavaya*).
 
-**Gráfico de Colapso Topológico:**
-![Pralaya Simulation](imagens/vaisheshika_pralaya.png)
+**Gráf![Criação do Universo](../assets/vaisheshika_creation.png)
+![Pralaya - Dissolução](../assets/vaisheshika_pralaya.png)
 
 *O gráfico demonstra a **Transição de Fase**. O universo mantém sua integridade (linha reta inicial) até que o Ruído Entrópico cruza o limiar de Coesão (Samavaya), causando um colapso catastrófico para o estado de poeira.*
 

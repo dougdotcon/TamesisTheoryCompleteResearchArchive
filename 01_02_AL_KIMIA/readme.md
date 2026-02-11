@@ -17,6 +17,7 @@ Este módulo decodifica a sabedoria hermética antiga usando a linguagem da Fís
 
 | Capítulo | Título | Conceito Chave |
 |----------|--------|----------------|
+| [00](00_topologia_do_sistema_egipcio.md) | **Topologia do Sistema (Full Stack)** | Arquitetura completa: Kernel, Backend, Interface, Código e Hardware Humano. |
 | [01](01_maat_o_imperativo_negentropico.md) | **Ma'at: O Imperativo Negentrópico** | Verdade como Manutenção de Baixa Entropia Local. |
 | [02](02_julgamento_de_osiris.md) | **O Julgamento de Osíris** | Algoritmo de Compressão de Dados e Integridade Informacional (Pesar o Coração). |
 | [03](03_duat_e_o_bulk.md) | **O Duat e o Bulk Holográfico** | O mundo dos mortos como a Fronteira Holográfica/Bulk. |

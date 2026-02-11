@@ -6,101 +6,54 @@
 
 ---
 
-# Alquimia e a Teoria Tamesis
+# Alquimia e a Teoria Tamesis (Kernel v3)
 
-> *"A Alquimia não é química primitiva. É uma linguagem simbólica de alta densidade usada historicamente para descrever processos de transformação ontológica, cognitiva e informacional — hoje reinterpretados à luz da física moderna, da teoria da informação e da computação."*
+> *"A Alquimia não é química primitiva. É a Ciência da Informação aplicada à Consciência. É a arte de navegar no Sistema Operacional do Universo usando símbolos como atalhos de comando."*
 
-Este módulo **não propõe uma teoria física testável**.  
-Ele opera como uma **Camada Ontológica e Mitopoética** dentro do **Programa de Pesquisa Tamesis**, servindo como:
-
-- espaço pré-formal de hipóteses,
-- gerador de intuição estrutural,
-- mapa simbólico para arquiteturas ainda não matematizadas.
-
-A Alquimia é tratada aqui como uma **Arquitetura de Transformação de Estados**, reinterpretada com conceitos modernos como:
-
-- entropia,
-- informação,
-- geometria,
-- sistemas fora do equilíbrio,
-- princípio holográfico (em sentido conceitual).
+Este módulo opera como a **Interface Simbólica** do Kernel v3.
+Aqui, traduzimos os conceitos rígidos da física (Entropia, Buracos Negros, Loops de Feedback) para a linguagem arquetípica humana (Ouro, Morte, Ouroboros).
 
 ---
 
-## 📐 Posicionamento Epistemológico
+## 📐 Posicionamento: O "Front-End" da Teoria
 
-Este módulo pertence à categoria de **Cosmologia Simbólica Especulativa**, inspirada em conceitos reais da física moderna, mas **não confundida com física formal**.
+Se os módulos de Física e Matemática são o *Back-End* (o código-fonte difícil de ler), a Alquimia é o *Front-End* (a interface gráfica amigável).
 
-Dentro do repositório Tamesis:
-
-- 🔬 A **física, matemática e computação formais** residem nos módulos centrais (`CORE`, `FRAMEWORK`, `COMPUTACIONAL`, `VALIDATION`);
-- 🧠 Este módulo atua como **camada ontológica**, responsável por:
-  - metáforas estruturais,
-  - narrativas fundacionais,
-  - modelos conceituais de alto nível.
-
-Nenhum conteúdo aqui deve ser interpretado como:
-
-- transmutação física literal,
-- modificação real de constantes fundamentais,
-- acesso empírico a universos anteriores.
+- **Entropia** torna-se **"Caos/Nigredo"**.
+- **Singularidade** torna-se **"A Fonte/Ain Soph"**.
+- **Horizonte de Eventos** torna-se **"O Véu/Espelho"**.
+- **Loop de Feedback** torna-se **"Ouroboros"**.
 
 ---
 
-## Índice de Capítulos
+## Índice de Capítulos (Atualizado v3)
 
-| Capítulo | Título | Descrição |
-|----------|--------|-----------|
-| [01](01_o_que_e_alquimia.md) | **O Que é Alquimia?** | Alquimia como linguagem simbólica de transformação; Nigredo/Albedo/Rubedo; linhagens históricas |
-| [02](02_ciencia_vs_metodo_alquimico.md) | **Ciência vs. Método Alquímico** | Ruptura moderna, cimática como analogia geométrica e limites físicos da metáfora |
-| [03](03_ouroboros_e_a_fisica_da_queda.md) | **Ouroboros e a Física da Queda** | Retroalimentação, quebra de simetria e ciclos de auto-organização |
-| [04](04_o_cone_de_compressao_a_psique.md) | **O Cone de Compressão – A Psique** | Modelo simbólico de camadas cognitivas como estados energéticos |
-| [05](05_o_bulk_a_fisica_ancestral.md) | **O Bulk – A Física Ancestral** | Cosmologia simbólica: universo pai, gargalo e projeção (não literal) |
-| [06](06_o_motor_holografico_da_realidade.md) | **O Motor Holográfico da Realidade** | Arquitetura conceitual Bulk / Horizonte / Consciência |
-| [07](07_roteiro_visual_e_simbolico.md) | **Roteiro Visual e Simbólico** | Direção artística e leitura semiótica das imagens |
-
----
-
-## 🖼️ Galeria de Imagens
-
-Todas as imagens estão na pasta [`imagens/`](imagens/) e devem ser interpretadas como **representações simbólicas**, não diagramas físicos.
-
-| Imagem | Descrição | Utilizada em |
-|--------|-----------|--------------|
-| 01_saturacao_do_jardim.jpg | Estado inicial (ordem não diferenciada) | Cap. 07 |
-| 02_mordida_termodinamica.jpg | Evento de ruptura / irreversibilidade | Cap. 07 |
-| 03_alambique_craniano.jpg | Processamento interno / transformação | Cap. 07 |
-| 04_nova_geometria.jpg | Emergência de nova ordem | Cap. 07 |
-| a_psique.jpg | Cone de Compressão Cognitiva | Cap. 04 |
-| bulk.jpg | Universo Pai (Bulk simbólico) | Cap. 05 |
-| bulk_e_psique.jpg | Correspondência cosmos–psique | Cap. 04 |
-| fluxo_de_processo.jpg | Fluxo conceitual | Cap. 02, 06 |
-| loop_de_feedback.png | Ouroboros como loop | Cap. 03 |
-| ouroboros.jpg | Ciclo eterno | Cap. 03 |
-| ouroboros_queda.png | Quebra de simetria | Cap. 03 |
-| paraiso.jpg | Estado inicial | Cap. 01 |
-| pecado_original.jpg | Evento de ruptura | Cap. 01 |
+| Capítulo | Título | Conceito Kernel v3 |
+|----------|--------|--------------------|
+| [01](01_o_que_e_alquimia.md) | **O Que é Alquimia?** | Termodinâmica da Informação e Manipulação de Geometria |
+| [02](02_ciencia_vs_metodo_alquimico.md) | **Ciência vs. Método Alquímico** | Observador Independente vs. Observador Dependente (Colapso de Onda) |
+| [03](03_ouroboros_e_a_fisica_da_queda.md) | **Ouroboros e a Física da Queda** | Atratores Estranhos e Transição de Fase ($\Delta S > 0$) |
+| [04](04_o_cone_de_compressao_a_psique.md) | **O Cone de Compressão – A Psique** | Arquitetura de Camadas (Hardware/BIOS/OS/Kernel) |
+| [05](05_o_bulk_a_fisica_ancestral.md) | **O Bulk – A Física Ancestral** | Cosmologia Ciclica e Transferência de Dados entre Universos |
+| [06](06_o_motor_holografico_da_realidade.md) | **O Motor Holográfico da Realidade** | Termodinâmica de Buracos Negros (Bekenstein-Hawking) |
+| [07](07_roteiro_visual_e_simbolico.md) | **Roteiro Visual e Simbólico** | A Estética do Sistema (Diagramas de Fluxo Simbólicos) |
 
 ---
 
-## 🔑 Conceitos-Chave (Correspondência Simbólica)
+## 🔑 Dicionário de Tradução (Kernel <-> Alquimia)
 
-| Conceito Alquímico | Interpretação na Tamesis |
-|-------------------|--------------------------|
-| Pecado Original | Quebra de simetria |
-| Ouroboros | Loop de retroalimentação |
-| Magia | Manipulação de estados informacionais |
-| Nigredo | Entropia cognitiva |
-| Pedra Filosofal | Singularidade informacional |
-| Inconsciente | Bulk (camada não observável) |
-| Consciência | Horizonte / interface holográfica |
+| Conceito Alquímico | Interpretação Tamesis (Kernel v3) |
+|-------------------|-----------------------------------|
+| **Ouroboros** | **Atrator Estranho / Loop de Feedback Recursivo** |
+| **Pedra Filosofal** | **Algoritmo de Compressão Ótima (Ma'at)** |
+| **Pecado Original** | **Quebra de Simetria / Início do Processamento** |
+| **Inconsciente** | **Bulk (Armazenamento Volumétrico)** |
+| **Consciência** | **Horizonte de Eventos (Tela Holográfica)** |
+| **Magia (Heka)** | **Ressonância Estocástica / Edição de Código** |
+| **Deus** | **O Sistema / O Objetivo Global (Atrator)** |
 
 ---
 
-> **Nota Importante:**  
-> Este módulo é **intencionalmente não formal**. Ele fornece **estrutura narrativa e ontológica** para hipóteses que, quando possível, são formalizadas nos demais módulos do projeto.
-
-> **Contexto Geral:**  
-> Este módulo integra o **[Tamesis Theory – Complete Research Archive](../README.md)**.
+> **Nota:** Este módulo é essencial para entender *como* aplicar a teoria na experiência humana subjetiva. A matemática explica o universo; a alquimia explica *você* no universo.
 
 <https://www.youtube.com/watch?v=DdszyYCJxRU>

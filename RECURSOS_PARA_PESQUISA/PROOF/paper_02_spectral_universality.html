@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectral Universality Between Arithmetic and Random Matrix Ensembles</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* Shared Treatise CSS */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 90%;
+            text-align: justify;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 1rem 0;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation-box {
+            border: 2px solid #000;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            text-align: center;
+            background: #fafafa;
+            break-inside: avoid;
+        }
+
+        .theorem-box {
+            border: 2px solid #000;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fff;
+            break-inside: avoid;
+        }
+
+        .theorem-box .title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 0.5rem;
+        }
+
+        figure {
+            margin: 1rem 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        figure img {
+            max-width: 100%;
+            border: 1px solid #999;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            margin-top: 0.5rem;
+            text-align: justify;
+        }
+
+        .doi-badge {
+            font-family: sans-serif;
+            font-size: 8pt;
+            color: #666;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doi-badge">DOI: 10.5281/zenodo.18458180</div>
+
+    <header>
+        <h1>Spectral Universality Between Arithmetic and Random Matrix<br>Ensembles at Finite Resolution</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">UNIVERSIDADE FEDERAL DO RIO DE JANEIRO</div>
+        <div class="date">(Dated: February 2, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        <span class="abstract-title">Abstract.</span> We investigate the statistical correspondence between the zeros of
+        the Riemann Zeta function and the eigenvalues of Gaussian Unitary Ensemble (GUE) matrices. While the Langlands
+        program seeks precise algebraic bridges, we focus on <strong>statistical universality</strong>. We define a
+        resolution-dependent divergence metric, $D_T(\epsilon)$, and demonstrate that the correspondence is not exact at
+        $\epsilon \to 0$ but emerges as a statistical maximum at a finite thermodynamic scale, consistent with the
+        Montgomery-Odlyzko law.
+    </div>
+
+    <div class="content-wrapper">
+        <h2>I. Introduction: The Statistical Bridge</h2>
+        <p class="no-indent">The Montgomery-Odlyzko law conjectures that the local statistics of non-trivial zeros of
+            the Riemann Zeta function behave like the eigenvalues of large random matrices from the GUE. This connection
+            points to a deep, underlying spectral universality.</p>
+
+        <p>In this study, we quantify this universality not as an absolute algebraic identity, but as an emergent
+            statistical property that depends on the <strong>coarse-graining scale</strong> (resolution) of the
+            observation.</p>
+
+        <h2>II. The Tamesis Divergence Metric</h2>
+        <div class="theorem-box">
+            <div class="title">Definition: Resolution-Dependent Divergence</div>
+            <p style="text-indent: 0;">We measure the information distance between the spectral density of primes
+                ($\rho_{arith}$) and the spectral density of GUE matrices ($\rho_{geom}$) smoothed by a kernel
+                $\mathcal{K}_\epsilon$:</p>
+            <div class="equation-box">
+                $$ D_T(\epsilon) = D_{KL}( \mathcal{K}_\epsilon * \rho_{arith} || \mathcal{K}_\epsilon * \rho_{geom} )
+                $$
+            </div>
+            <p style="text-indent: 0;">where $D_{KL}$ is the Kullback-Leibler divergence and $\epsilon$ is the smoothing
+                width.</p>
+        </div>
+
+        <h2>III. Computational Results</h2>
+        <p>We computed the spectral statistics for the first $10^5$ zeros of the Zeta function and compared them to GUE
+            predictions.</p>
+
+        <figure>
+            <img src="./correlacao_vs_temperatura.png" alt="Spectral Universality">
+            <figcaption>FIG. 1. <strong>Emergence of Universality.</strong> The blue line shows spectral overlap, and
+                the orange line shows KL divergence. Note the distinct minimum in divergence at $\epsilon_{opt} > 0$. At
+                extremely fine resolutions ($\epsilon \to 0$), the unique "fingerprint" of the primes distinguishes them
+                from random matrices. The universality is an emergent macroscopic phenomenon.</figcaption>
+        </figure>
+
+        <h2>IV. Discussion</h2>
+        <p>Our results confirm that the "bridge" between arithmetic and geometry in this context is statistical. At the
+            finest scales, the prime numbers retain their arithmetic rigidity. However, under coarse-graining (finite
+            resolution), their statistical behavior washes out into the universal GUE attractor. This provides a
+            tangible, computational verification of the Montgomery-Odlyzko law as a <strong>scaling limit</strong>
+            rather than a rigid identity.</p>
+    </div>
+</body>
+
+</html>

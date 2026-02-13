@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAMESIS — Topologia de Mobius: Corte e Transicao de Regime</title>
+    <meta name="description"
+        content="Experimento de topologia de Mobius: corte central e fora do centro com insights TAMESIS (TRI, TDTR, Kernel v3)">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-glass: rgba(26, 26, 46, 0.7);
+            --text-primary: #e8e8f0;
+            --text-secondary: #a0a0b8;
+            --text-muted: #6a6a80;
+            --accent-tri: #FF6B6B;
+            --accent-tdtr: #4ECDC4;
+            --accent-kernel: #8B5CF6;
+            --accent-symmetry: #FFC107;
+            --accent-linking: #00BCD4;
+            --accent-gold: #FFD700;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow-tri: rgba(255, 107, 107, 0.3);
+            --glow-tdtr: rgba(78, 205, 196, 0.3);
+            --glow-kernel: rgba(139, 92, 246, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(78, 205, 196, 0.08) 0%, transparent 60%),
+                var(--bg-primary);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.3" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 30px 30px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-kernel);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-tdtr);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.3);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-kernel), var(--accent-tri));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero .subtitle em {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .hero-gif {
+            width: min(90%, 600px);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-kernel);
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            animation: bounce 2s infinite;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            color: var(--text-primary);
+            background: var(--bg-glass);
+        }
+
+        .nav-bar a.active {
+            color: var(--accent-kernel);
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        /* ========== SECTIONS ========== */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .tag-tri {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--accent-tri);
+        }
+
+        .tag-tdtr {
+            background: rgba(78, 205, 196, 0.15);
+            color: var(--accent-tdtr);
+        }
+
+        .tag-kernel {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-kernel);
+        }
+
+        .tag-sym {
+            background: rgba(255, 193, 7, 0.15);
+            color: var(--accent-symmetry);
+        }
+
+        .tag-link {
+            background: rgba(0, 188, 212, 0.15);
+            color: var(--accent-linking);
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-tri {
+            border-left: 3px solid var(--accent-tri);
+        }
+
+        .card-tdtr {
+            border-left: 3px solid var(--accent-tdtr);
+        }
+
+        .card-kernel {
+            border-left: 3px solid var(--accent-kernel);
+        }
+
+        .card-sym {
+            border-left: 3px solid var(--accent-symmetry);
+        }
+
+        .card-link {
+            border-left: 3px solid var(--accent-linking);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .card .formula {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: var(--accent-kernel);
+            text-align: center;
+        }
+
+        /* ========== GIF CONTAINERS ========== */
+        .gif-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .gif-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .gif-container img:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--glow-kernel);
+        }
+
+        .gif-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+
+        /* ========== TWO-COLUMN ========== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== TABLE ========== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-kernel);
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .data-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-yes {
+            background: rgba(78, 205, 196, 0.2);
+            color: var(--accent-tdtr);
+        }
+
+        .badge-no {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--accent-tri);
+        }
+
+        /* ========== PROTOCOL ========== */
+        .protocol-steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .protocol-steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 1rem 1rem 1rem 3.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .protocol-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 26px;
+            height: 26px;
+            background: var(--accent-kernel);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .protocol-steps li:hover {
+            border-color: var(--accent-kernel);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        /* ========== INSIGHT BLOCKS ========== */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .insight-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .insight-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .insight-block .icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .insight-block h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-block p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== QUOTE ========== */
+        .quote-block {
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer a {
+            color: var(--accent-kernel);
+            text-decoration: none;
+        }
+
+        /* ========== STATIC IMAGES ROW ========== */
+        .img-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .img-row img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        /* ========== DIVIDER ========== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="top">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            TAMESIS Research Program — Topological Validation
+        </div>
+        <h1>Topologia de Mobius</h1>
+        <p class="subtitle">
+            Quando voce corta uma Fita de Mobius, <em>a topologia te surpreende</em>.
+            O corte revela regimes aninhados, transicoes irreversiveis, e emaranhamento topologico
+            — os mesmos principios que governam o universo.
+        </p>
+        <img class="hero-gif" src="mobius_rotation.gif" alt="Fita de Mobius rotacionando" loading="lazy">
+        <div class="scroll-hint">&#8595; EXPLORE OS INSIGHTS</div>
+    </section>
+
+    <!-- ========== NAV ========== -->
+    <nav class="nav-bar">
+        <a href="#experiment">Experimento</a>
+        <a href="#center-cut">Corte Central</a>
+        <a href="#offcenter-cut">Corte 1/3</a>
+        <a href="#tri">TRI</a>
+        <a href="#tdtr">TDTR</a>
+        <a href="#symmetry">Simetria</a>
+        <a href="#entanglement">Emaranhamento</a>
+        <a href="#summary">Resumo</a>
+    </nav>
+
+    <!-- ========== EXPERIMENT PROTOCOL ========== -->
+    <section class="section" id="experiment">
+        <div class="section-header">
+            <div class="tag tag-kernel">PROTOCOLO EXPERIMENTAL</div>
+            <h2>Experimento com Papel</h2>
+            <p>Voce pode validar estes resultados com uma folha de papel, tesoura e fita adesiva. Os resultados sao
+                contra-intuitivos.</p>
+        </div>
+
+        <div class="two-col">
+            <div class="card card-kernel">
+                <h3>Material Necessario</h3>
+                <ul class="protocol-steps">
+                    <li>3 tiras de papel A4 (~30cm x 3cm)</li>
+                    <li>Tesoura fina para cortes precisos</li>
+                    <li>Fita adesiva para unir extremidades</li>
+                    <li>Caneta e regua para marcar linhas</li>
+                </ul>
+            </div>
+
+            <div class="card card-kernel">
+                <h3>Construcao da Fita</h3>
+                <ul class="protocol-steps">
+                    <li>Segure as duas extremidades da tira</li>
+                    <li>De <strong>meia torcao</strong> (180 graus) em uma ponta</li>
+                    <li>Cole as extremidades com fita adesiva</li>
+                    <li>Verifique: percorra com o dedo — cobre "ambos os lados"</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="gif-container">
+            <img src="mobius_rotation.gif" alt="Fita de Mobius com vetor tracador">
+            <div class="gif-caption">Simulacao: um vetor percorre a superficie da Mobius. Apos 360 graus, ele esta no
+                "lado oposto". Apos 720 graus, retorna ao estado original.</div>
+        </div>
+    </section>
+
+    <!-- ========== CENTER CUT ========== -->
+    <section class="section" id="center-cut">
+        <div class="section-header">
+            <div class="tag tag-kernel">EXPERIMENTO A</div>
+            <h2>Corte Central (1/2 da Largura)</h2>
+            <p>Corte a fita exatamente no meio. O resultado desafia a intuicao.</p>
+        </div>
+
+        <div class="gif-container">
+            <img src="mobius_center_cut.gif" alt="Animacao do corte central" style="max-width:650px">
+            <div class="gif-caption">Animacao do corte central: a tesoura percorre o centro da fita e... NAO separa!
+            </div>
+        </div>
+
+        <div class="card card-kernel">
+            <h3>Resultado: 1 Fita Unica Maior</h3>
+            <p>A fita de Mobius NAO se divide em duas pecas! Ela se torna uma unica fita com o <strong>dobro do
+                    comprimento</strong> e <strong>2 torcoes completas</strong> (4 meias-torcoes).</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Antes</th>
+                        <th>Depois</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pecas</td>
+                        <td>1</td>
+                        <td><strong>1</strong> (nao separa!)</td>
+                    </tr>
+                    <tr>
+                        <td>Comprimento</td>
+                        <td>L</td>
+                        <td><strong>2L</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Largura</td>
+                        <td>W</td>
+                        <td>W/2</td>
+                    </tr>
+                    <tr>
+                        <td>Meias-torcoes</td>
+                        <td>1</td>
+                        <td><strong>4</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Orientavel?</td>
+                        <td><span class="badge badge-no">NAO</span></td>
+                        <td><span class="badge badge-yes">SIM</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bordas</td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="formula">
+                M(1 meia-torcao) --[corte 1/2]--> S(4 meias-torcoes, 2L)
+            </div>
+
+            <p>Isso acontece porque a linha central percorre a fita <strong>DUAS VEZES</strong> antes de se fechar
+                (devido a meia-torcao). O resultado e uma unica fita orientavel.</p>
+        </div>
+
+        <div class="img-row">
+            <img src="mobius_original.png" alt="Original com linhas de corte">
+            <img src="mobius_center_cut.png" alt="Resultado do corte central">
+        </div>
+    </section>
+
+    <!-- ========== OFF-CENTER CUT ========== -->
+    <section class="section" id="offcenter-cut">
+        <div class="section-header">
+            <div class="tag tag-tri">EXPERIMENTO B</div>
+            <h2>Corte Fora do Centro (1/3 da Largura)</h2>
+            <p>Corte a 1/3 da borda. Aqui a topologia revela sua verdadeira natureza.</p>
+        </div>
+
+        <div class="gif-container">
+            <img src="mobius_offcenter_cut.gif" alt="Animacao do corte fora do centro" style="max-width:650px">
+            <div class="gif-caption">Animacao do corte 1/3: a tesoura percorre fora do centro e produz DUAS fitas
+                entrelacadas!</div>
+        </div>
+
+        <div class="card card-tri">
+            <h3>Resultado: 2 Fitas Entrelacadas</h3>
+            <p>O corte fora do centro produz <strong>duas fitas topologicamente ligadas</strong> — uma dentro da outra,
+                inseparaveis sem cortar!</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Fita Estreita</th>
+                        <th>Fita Larga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tipo</td>
+                        <td><strong>Fita de Mobius</strong></td>
+                        <td>Fita com 2 torcoes</td>
+                    </tr>
+                    <tr>
+                        <td>Largura</td>
+                        <td>W/3</td>
+                        <td>~2W/3</td>
+                    </tr>
+                    <tr>
+                        <td>Comprimento</td>
+                        <td>L</td>
+                        <td><strong>2L</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Orientavel?</td>
+                        <td><span class="badge badge-no">NAO</span></td>
+                        <td><span class="badge badge-yes">SIM</span></td>
+                    </tr>
+                    <tr>
+                        <td>Meias-torcoes</td>
+                        <td>1</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Linking Number</td>
+                        <td colspan="2" style="text-align:center"><strong>|Lk| = 1</strong> (inseparaveis!)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="formula">
+                M(1) --[corte 1/3]--> M(1) &#8746; S(4) &nbsp;&nbsp;com |Lk| = 1
+            </div>
+        </div>
+
+        <div class="img-row">
+            <img src="mobius_offcenter_cut.png" alt="Duas fitas entrelacadas">
+            <img src="mobius_topology_summary.png" alt="Resumo topologico">
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ========== INSIGHT 1: TRI ========== -->
+    <section class="section" id="tri">
+        <div class="section-header">
+            <div class="tag tag-tri">INSIGHT 1 — PILAR TRI</div>
+            <h2>Aninhamento de Regimes</h2>
+            <p>O corte fora do centro revela uma estrutura de regimes aninhados que espelha a Theory of Regime
+                Incompatibility.</p>
+        </div>
+
+        <div class="gif-container">
+            <img src="mobius_regime_nesting.gif" alt="Regime nesting animation" style="max-width:650px">
+            <div class="gif-caption">Regime Quantico (vermelho, nao-orientavel) aninhado dentro do Regime Classico
+                (verde-agua, orientavel). Inseparaveis.</div>
+        </div>
+
+        <div class="card card-tri">
+            <h3>Fita de Mobius = Regime Quantico</h3>
+            <p>A fita estreita resultante do corte e uma <strong>Fita de Mobius</strong> — nao-orientavel, sem "cima" ou
+                "baixo" definidos. Isso e exatamente a propriedade que define o regime quantico: estados sobrepostos,
+                sem direcao preferencial, spin 1/2.</p>
+        </div>
+
+        <div class="card card-tdtr">
+            <h3>Fita Orientavel = Regime Classico</h3>
+            <p>A fita larga e <strong>orientavel</strong> — tem lados definidos, direcao deterministica. Ela e classica:
+                trajetorias definidas, spin inteiro, a fisica do dia-a-dia.</p>
+        </div>
+
+        <div class="quote-block">
+            "Os regimes quantico e classico coexistem no universo como a Fita de Mobius e a fita orientavel — conectados
+            pela mesma fronteira, mas com propriedades topologicas mutuamente exclusivas. Voce nao pode 'alisar' a
+            Mobius em uma fita orientavel sem corta-la — assim como nao pode unificar QM e GR sem uma transicao de
+            regime."
+            <cite>— Interpretacao TRI</cite>
+        </div>
+    </section>
+
+    <!-- ========== INSIGHT 2: TDTR ========== -->
+    <section class="section" id="tdtr">
+        <div class="section-header">
+            <div class="tag tag-tdtr">INSIGHT 2 — PILAR TDTR</div>
+            <h2>Irreversibilidade Estrutural</h2>
+            <p>O corte e uma operacao de semigrupo: existe a operacao "cortar", mas NAO existe "descortar".</p>
+        </div>
+
+        <div class="card card-tdtr">
+            <h3>A Flecha do Tempo Topologica</h3>
+            <div class="formula">
+                Cortar: M --> S &nbsp;&nbsp;(EXISTE)<br>
+                Descortar: S --> M &nbsp;&nbsp;(NAO EXISTE)
+            </div>
+            <p>Isso e formalmente analogo ao <strong>Teorema da Irreversibilidade Estrutural</strong> de TDTR:
+                transicoes de regime formam um semigrupo, nao um grupo. Voce nao pode "dequantizar" um sistema classico
+                de volta ao regime quantico.</p>
+            <p>Antes do corte: 1 borda, 1 lado. Depois: 2 bordas, 2 lados. A informacao topologica
+                <strong>aumentou</strong> (mais estrutura), mas a nao-orientabilidade original foi destruida de forma
+                irreversivel. Isso espelha o <strong>aumento de entropia</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ========== INSIGHT 3: SYMMETRY ========== -->
+    <section class="section" id="symmetry">
+        <div class="section-header">
+            <div class="tag tag-sym">INSIGHT 3 — QUEBRA DE SIMETRIA</div>
+            <h2>Z&#8322; Preservada vs Quebrada</h2>
+            <p>O tipo de corte determina a preservacao ou quebra da simetria fundamental da fita.</p>
+        </div>
+
+        <div class="gif-container">
+            <img src="mobius_symmetry.gif" alt="Symmetry comparison" style="max-width:800px">
+            <div class="gif-caption">Esquerda: corte central preserva simetria Z&#8322; (1 peca simetrica). Direita:
+                corte 1/3 quebra a simetria (2 pecas assimetricas).</div>
+        </div>
+
+        <div class="two-col">
+            <div class="card card-kernel">
+                <h3>Corte Central: Simetria Preservada</h3>
+                <p>Ambos os "lados" do corte sao equivalentes. O resultado e uma unica fita <strong>simetrica</strong>.
+                    Isso preserva a simetria Z&#8322; da operacao de reflexao.</p>
+            </div>
+            <div class="card card-tri">
+                <h3>Corte 1/3: Simetria Quebrada</h3>
+                <p>Os dois lados do corte NAO sao equivalentes (1/3 vs 2/3). O resultado sao duas fitas com propriedades
+                    <strong>diferentes</strong>. A simetria Z&#8322; e quebrada, gerando <strong>mais
+                        estrutura</strong>.</p>
+            </div>
+        </div>
+
+        <div class="quote-block">
+            "A quebra de simetria gera mais estrutura. Isso e analogo a quebra espontanea de simetria eletrofraca:
+            quando SU(2) x U(1) e quebrada, surgem particulas com massas diferentes. O corte assimetrico da Mobius gera
+            dois objetos topologicamente distintos."
+            <cite>— Analogia com o Modelo Padrao</cite>
+        </div>
+    </section>
+
+    <!-- ========== INSIGHT 4: ENTANGLEMENT ========== -->
+    <section class="section" id="entanglement">
+        <div class="section-header">
+            <div class="tag tag-link">INSIGHT 4 — EMARANHAMENTO TOPOLOGICO</div>
+            <h2>Fitas Inseparaveis</h2>
+            <p>As duas fitas produzidas pelo corte 1/3 estao topologicamente entrelaçadas com Linking Number |Lk| = 1.
+            </p>
+        </div>
+
+        <div class="card card-link" style="border-left-color: var(--accent-linking);">
+            <h3>Analogia ao Emaranhamento Quantico</h3>
+            <p>Assim como dois qubits emaranhados sao inseparaveis no estado:</p>
+            <div class="formula">
+                |&Psi;> = (1/&#x221A;2)(|01> + |10>)
+            </div>
+            <p>As duas fitas compartilham <strong>informacao topologica nao-local</strong> que nao pode ser localizada
+                em nenhuma delas individualmente. O linking number e o <strong>invariante de emaranhamento
+                    topologico</strong>.</p>
+            <p>Consequencias:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li>Nao podem ser separadas sem cortar</li>
+                <li>Cada uma "sabe" da existencia da outra</li>
+                <li>A informacao sobre o vinculo e distribuda nao-localmente</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ========== INSIGHT 5: KERNEL v3 ========== -->
+    <section class="section" id="kernel">
+        <div class="section-header">
+            <div class="tag tag-kernel">INSIGHT 5 — KERNEL V3</div>
+            <h2>Transicao de Fase Topologica</h2>
+            <p>O corte e uma transicao de fase no grafo entropico — a informacao e reorganizada, nao destruida.</p>
+        </div>
+
+        <div class="card card-kernel">
+            <h3>Analogia ao Big Bounce</h3>
+            <p>O corte e como o instante t = 0. A transicao de fase NAO destroi a informacao — ela a
+                <strong>reorganiza</strong> em uma topologia diferente. A fita resultante "lembra" a torcao original
+                (carrega 2 torcoes como memoria da Mobius original).</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Propriedade</th>
+                        <th>Fase I (Antes)</th>
+                        <th>Fase II (Depois)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Topologia</td>
+                        <td>Nao-orientavel</td>
+                        <td>Orientavel</td>
+                    </tr>
+                    <tr>
+                        <td>Conectividade</td>
+                        <td>1 componente</td>
+                        <td>1 ou 2 componentes</td>
+                    </tr>
+                    <tr>
+                        <td>Simetria</td>
+                        <td>Alta (Z&#8322;)</td>
+                        <td>Quebrada</td>
+                    </tr>
+                    <tr>
+                        <td>Entropia</td>
+                        <td>Baixa (simples)</td>
+                        <td>Alta (complexa)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ========== SUMMARY ========== -->
+    <section class="section" id="summary">
+        <div class="section-header">
+            <h2>Resumo: 5 Insights TAMESIS</h2>
+            <p>O experimento da Fita de Mobius demonstra fisicamente os tres pilares da teoria.</p>
+        </div>
+
+        <div class="insight-grid">
+            <div class="insight-block" style="border-color: var(--accent-tri);">
+                <div class="icon" style="color: var(--accent-tri);">&#9673;</div>
+                <h4 style="color: var(--accent-tri);">1. TRI — Regimes Aninhados</h4>
+                <p>Regime nao-orientavel (quantico) encapsulado dentro de regime orientavel (classico). Conectados mas
+                    incompativeis.</p>
+            </div>
+            <div class="insight-block" style="border-color: var(--accent-tdtr);">
+                <div class="icon" style="color: var(--accent-tdtr);">&#8635;</div>
+                <h4 style="color: var(--accent-tdtr);">2. TDTR — Irreversibilidade</h4>
+                <p>O corte e uma operacao de semigrupo. Nao pode ser desfeita. Espelha as transicoes de regime
+                    termodinamicas.</p>
+            </div>
+            <div class="insight-block" style="border-color: var(--accent-kernel);">
+                <div class="icon" style="color: var(--accent-kernel);">&#9670;</div>
+                <h4 style="color: var(--accent-kernel);">3. Kernel v3 — Fase Topologica</h4>
+                <p>Transicao de fase que reorganiza informacao sem destrui-la. A topologia final "lembra" a original.
+                </p>
+            </div>
+            <div class="insight-block" style="border-color: var(--accent-symmetry);">
+                <div class="icon" style="color: var(--accent-symmetry);">&#9674;</div>
+                <h4 style="color: var(--accent-symmetry);">4. Quebra de Simetria</h4>
+                <p>Corte central preserva Z&#8322;. Corte 1/3 quebra a simetria, gerando mais estrutura — como a quebra
+                    eletrofraca.</p>
+            </div>
+            <div class="insight-block" style="border-color: var(--accent-linking);">
+                <div class="icon" style="color: var(--accent-linking);">&#8734;</div>
+                <h4 style="color: var(--accent-linking);">5. Emaranhamento Topologico</h4>
+                <p>Fitas entrelaçadas sao inseparaveis. Informacao compartilhada nao-localmente — analogo ao
+                    emaranhamento quantico.</p>
+            </div>
+        </div>
+
+        <div class="gif-container" style="margin-top: 3rem;">
+            <img src="mobius_combined.png" alt="Visao combinada" style="max-width:800px">
+        </div>
+    </section>
+
+    <!-- ========== PREDICTION ========== -->
+    <section class="section" id="prediction">
+        <div class="section-header">
+            <div class="tag tag-kernel">PREVISAO</div>
+            <h2>Fermions vs Bosons</h2>
+        </div>
+
+        <div class="card card-kernel">
+            <h3>Padrao Descoberto: Torcoes Impares vs Pares</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Meias-torcoes</th>
+                        <th>Corte Central</th>
+                        <th>Resultado</th>
+                        <th>Analogia Fisica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 (Mobius)</td>
+                        <td>Centro</td>
+                        <td>1 fita (NAO separa)</td>
+                        <td>Fermion (resistente)</td>
+                    </tr>
+                    <tr>
+                        <td>2 (cilindro)</td>
+                        <td>Centro</td>
+                        <td>2 fitas SEPARADAS</td>
+                        <td>Boson (fragmentavel)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Centro</td>
+                        <td>1 fita (NAO separa)</td>
+                        <td>Fermion</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Centro</td>
+                        <td>2 fitas SEPARADAS</td>
+                        <td>Boson</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Conclusao:</strong> Sistemas com topologia impar (fermions, spin 1/2) sao <strong>resistentes a
+                    fragmentacao</strong> — mantem-se conectados sob perturbacao. Sistemas com topologia par (bosons,
+                spin inteiro) <strong>se fragmentam</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <p><strong>Programa de Pesquisa Tamesis</strong> — Douglas H. M. Fulber (2026)</p>
+        <p style="margin-top: 0.5rem;">"O corte e a transicao. A topologia e memoria."</p>
+        <p style="margin-top: 1rem;">
+            <a href="#top">&#8593; Voltar ao topo</a>
+        </p>
+    </footer>
+
+</body>
+
+</html>

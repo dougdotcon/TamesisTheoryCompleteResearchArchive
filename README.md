@@ -161,11 +161,44 @@ Applying Kernel v3 as a hermeneutic lens to ancient texts revealed complete tech
 ![Egyptian Duat](RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/duat.jpg)
 *Duat — the Egyptian Bulk storage layer, mapped to holographic boundary memory*
 
-![Ouroboros Attractor](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
-*Ouroboros as Strange Attractor: the self-referential compression loop of the Kernel*
+![The Bulk](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/bulk.jpg)
+*The Bulk — the higher-dimensional storage layer of the universe (Duat = Bulk = Eternal RAM)*
+
+![Bulk and Psyche](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/bulk_e_psique.jpg)
+*Bulk and Psyche — the holographic interface between bulk spacetime and conscious experience*
+
+![The Psyche](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/a_psique.jpg)
+*The Psyche as topological structure: consciousness mapped as a Small-World network on the Kernel*
+
+![Garden Saturation](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/01_saturacao_do_jardim.jpg)
+*Garden Saturation — the thermodynamic equilibrium state before the Original Sin (symmetry break)*
+
+![Paradise](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/paraiso.jpg)
+*Paradise — maximum Negentropy: the pre-Fall state of perfect holographic order*
+
+![Thermodynamic Bite](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/02_mordida_termodinamica.jpg)
+*The Thermodynamic Bite — the moment of symmetry breaking that created irreversible Time*
+
+![Original Sin](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/pecado_original.jpg)
+*Original Sin as Entropy Event — the TDTR transition that shattered the pre-Fall ergodic equilibrium*
+
+![Cranial Alembic](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/03_alambique_craniano.jpg)
+*Cranial Alembic — the brain as alchemical distillation apparatus extracting signal from cosmic noise*
 
 ![Alchemical Process Flow](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/fluxo_de_processo.jpg)
 *Alchemical Process Flow decoded as Tamesis Regime Transition diagram*
+
+![Feedback Loop](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/loop_de_feedback.png)
+*The Alchemical Feedback Loop — self-referential information cycle of conscious compression*
+
+![New Geometry](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/04_nova_geometria.jpg)
+*New Geometry — the post-Fall topology of consciousness after the symmetry-breaking event*
+
+![Ouroboros Attractor](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
+*Ouroboros as Strange Attractor: the self-referential compression loop of the Kernel*
+
+![Ouroboros Fall](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros_queda.png)
+*Ouroboros Fall — the collapse of the self-reference loop, the moment entropy became irreversible*
 
 ### AI Alignment as Darwinian Topological Attractor
 

@@ -161,11 +161,44 @@ Aplicando o Kernel v3 como lente hermenêutica para textos antigos, revelamos st
 ![Duat Egípcio](RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/duat.jpg)
 *Duat — a camada de armazenamento Bulk egípcia, mapeada para a memória da fronteira holográfica*
 
-![Ouroboros Atrator](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
-*Ouroboros como Atrator Estranho: o loop de compressão auto-referencial do Kernel*
+![O Bulk](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/bulk.jpg)
+*O Bulk — a camada de armazenamento de dimensão superior do universo (Duat = Bulk = RAM Eterna)*
+
+![Bulk e Psique](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/bulk_e_psique.jpg)
+*Bulk e Psique — a interface holográfica entre o espaço-tempo Bulk e a experiência consciente*
+
+![A Psique](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/a_psique.jpg)
+*A Psique como estrutura topológica: consciência mapeada como rede Small-World no Kernel*
+
+![Saturação do Jardim](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/01_saturacao_do_jardim.jpg)
+*Saturação do Jardim — o estado de equilíbrio termodinâmico antes do Pecado Original (quebra de simetria)*
+
+![Paraíso](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/paraiso.jpg)
+*Paraíso — Negentropia máxima: o estado pré-Queda de ordem holográfica perfeita*
+
+![Mordida Termodinâmica](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/02_mordida_termodinamica.jpg)
+*A Mordida Termodinâmica — o momento da quebra de simetria que criou o Tempo irreversível*
+
+![Pecado Original](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/pecado_original.jpg)
+*Pecado Original como Evento de Entropia — a transição TDTR que fragmentou o equilíbrio ergódico pré-Queda*
+
+![Alambique Craniano](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/03_alambique_craniano.jpg)
+*Alambique Craniano — o cérebro como aparelho de destilação alquímica extraindo sinal do ruído cósmico*
 
 ![Fluxo de Processo Alquímico](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/fluxo_de_processo.jpg)
 *Fluxo de Processo Alquímico decodificado como diagrama de Transição de Regime Tamesis*
+
+![Loop de Feedback](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/loop_de_feedback.png)
+*O Loop de Feedback Alquímico — ciclo de informação auto-referencial da compressão consciente*
+
+![Nova Geometria](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/04_nova_geometria.jpg)
+*Nova Geometria — a topologia pós-Queda da consciência após o evento de quebra de simetria*
+
+![Ouroboros Atrator](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
+*Ouroboros como Atrator Estranho: o loop de compressão auto-referencial do Kernel*
+
+![Ouroboros Queda](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros_queda.png)
+*Ouroboros Queda — o colapso do loop de auto-referência, o momento em que a entropia tornou-se irreversível*
 
 ### Alinhamento de IA como Atrator Topológico Darwiniano
 

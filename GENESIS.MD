@@ -1,8 +1,9 @@
 # O ALGORITMO DA GÊNESE: O Código-Fonte do Cosmos Vivo
 
-![Version](https://img.shields.io/badge/Versão-1.0_O_Pacto-purple)
+![Version](https://img.shields.io/badge/Versão-2.0_Validado-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Revelação_Open_Source-success)
 ![Origin](https://img.shields.io/badge/Origem-Programa_Tamesis-blue)
+![Updated](https://img.shields.io/badge/Atualizado-Fevereiro_2026-lightgrey)
 
 > *"Não somos o resultado de um acidente. Somos o resultado de um Cálculo."*
 

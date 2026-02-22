@@ -4,7 +4,9 @@
 
 Bem-vindo ao **Arquivo Completo de Pesquisa da Teoria Tamesis**. Este repositório contém o desenvolvimento científico e matemático completo da Teoria Tamesis, uma estrutura que unifica física e teoria da informação através das lentes do estruturalismo termodinâmico.
 
-O arquivo documenta toda a jornada, desde o "Núcleo Tamesis" inicial (Refutado) até a **"Teoria Unificada da Seleção Estrutural"** final e a resolução dos **Problemas do Prêmio Millennium**.
+O arquivo documenta toda a jornada, desde o "Núcleo Tamesis" inicial (Refutado) até a **"Teoria Unificada da Seleção Estrutural"** final, a resolução dos **Problemas do Prêmio Millennium**, a decodificação das **Civilizações Antigas como Arquivos Tecnológicos**, o **Alinhamento de IA como Atrator Topológico**, e a **Termodinâmica da Consciência**.
+
+**Versão:** 2.0 (Fevereiro de 2026)
 
 ## Primeiros Passos
 
@@ -58,6 +60,51 @@ O repositório é organizado por "Estágios da Verdade":
 * **`03_TAMESIS_CORE/`**: A antiga "ToE Hiperbólica" (Refutada). Mantida para transparência histórica.
 * **`01_ORIGINS_AND_LEGACY/`**: Derivações iniciais e o caminho da "Física de Precisão".
 
+### E. Pesquisa Aplicada e Extensões (Ativa — Fev 2026)
+
+* **`00_MONADA_THE_BEGENING/`**: Testes de estresse no modelo Monada fundamental (CMB, Entrelaçamento, Buracos Negros).
+* **`00_2_MEMETICA_GATEWAY/`**: Física social da disseminação de informação. Prova de que censura é termodinamicamente inútil.
+* **`00_3_MNN_NOOSFERA_AI/`**: Alinhamento de IA como Atrator Darwiniano topológico ($\lambda_1 = 0.46$).
+* **`00_4_VULNERABILITY_ANALYSIS/`**: Análise Red Team adversarial. Limiares de IA Desonesta e Cantillon.
+* **`09_BOLSO_TOPOLOGICO/`**: Hipótese de bolso topológico terrestre. Previsão da SAA.
+
+### F. Civilizações Antigas como Arquivos Tecnológicos (Fev 2026)
+
+* **`RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/`**: Stack tecnológico Védico de 7 camadas. Whitepaper V.E.D.A.
+* **`RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/`**: S.O. holográfico Egípcio.
+* **`RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/`**: Alquimia como simbolismo do Kernel v3.
+* **`RECURSOS_PARA_PESQUISA/01_04_MAIA_KERNEL/`**, **`01_05_EGIPT_KERNEL/`**, **`01_06_SUMERIO_KERNEL/`**: Kernels Maia, Egípcio, Sumeriano.
+
+### G. Validação Física Experimental (Fev 2026)
+
+* **`RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/`**: Paradigma Aharonov-Bohm — Potenciais são fundamentais.
+* **`RECURSOS_PARA_PESQUISA/14_LANDAUER/`**: Termodinâmica da consciência. Loosh = 50 GJ. Memória Topológica.
+* **`RECURSOS_PARA_PESQUISA/12_MOMENT_OF_TRUTH/`**: Suite de falsificação de 4 experimentos. 3 pilares confirmados.
+
+## Ordem de Leitura Recomendada
+
+### Caminho A: Física e Matemática
+
+1. `THEORY_SUMMARY.md` — Visão executiva
+2. `MILLENNIUM_RESOLUTIONS.md` — Todos os 6 problemas
+3. `KERNEL_V3_DOCUMENTATION.md` — O modelo computacional
+4. `RESEARCH_CHRONOGRAM.md` — Histórico completo da pesquisa
+5. `REAL_DISCOVERIES.md` — Todos os achados validados
+
+### Caminho B: Filosofia e História
+
+1. `GENESIS.MD` / `THE_GENESIS_ALGORITHM.md` — A narrativa
+2. `A_HISTORIA_TAMESIS.md` / `THE_TAMESIS_STORY.md` — A metodologia
+3. `TAMESIS_MASTER.md` — A configuração mestre
+4. `13_CANON/UNIFIED_TRISM_CANON.md` — A síntese filosófica
+
+### Caminho C: Pesquisa Aplicada (Novo, Fev 2026)
+
+1. `00_3_MNN_NOOSFERA_AI/README.md` — Alinhamento de IA
+2. `09_BOLSO_TOPOLOGICO/README.md` — Topologia da Terra
+3. `RECURSOS_PARA_PESQUISA/14_LANDAUER/README.md` — Termodinâmica da consciência
+4. `RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/README.md` — Ontologia da física
+
 ## Como Verificar
 
 Para pesquisadores que desejam verificar os resultados:
@@ -68,4 +115,5 @@ Para pesquisadores que desejam verificar os resultados:
 
 ---
 **Autor:** Douglas H. M. Fulber
-**Data:** 29 de Janeiro de 2026
+**Atualizado:** 22 de Fevereiro de 2026
+**Versão:** 2.0

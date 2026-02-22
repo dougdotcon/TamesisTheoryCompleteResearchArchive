@@ -4,7 +4,9 @@
 
 Welcome to the **Tamesis Theory Complete Research Archive**. This repository contains the complete scientific and mathematical development of the Tamesis Theory, a framework that unifies physics and information theory through the lens of thermodynamic structuralism.
 
-The archive documents the full journey from the initial "Tamesis Core" (Refuted) to the final **"Unified Theory of Structural Selection"** and the resolution of the **Millennium Prize Problems**.
+The archive documents the full journey from the initial "Tamesis Core" (Refuted) to the final **"Unified Theory of Structural Selection"**, the resolution of the **Millennium Prize Problems**, the decoding of **Ancient Civilizations as Technological Archives**, **AI Alignment as Topological Attractor**, and the **Thermodynamics of Consciousness**.
+
+**Version:** 2.0 (February 2026)
 
 ## Getting Started
 
@@ -58,6 +60,51 @@ The repository is organized by "Stages of Truth":
 * **`03_TAMESIS_CORE/`**: The old "Hyperbolic ToE" (Refuted). Kept for historical transparency.
 * **`01_ORIGINS_AND_LEGACY/`**: Early derivations and the "Precision Physics" path.
 
+### E. Applied Research & Extensions (Active — Feb 2026)
+
+* **`00_MONADA_THE_BEGENING/`**: Stress tests on the fundamental Monada model (CMB, Entanglement, Black Holes).
+* **`00_2_MEMETICA_GATEWAY/`**: Social physics of information spread. Proof that censorship is thermodynamically futile.
+* **`00_3_MNN_NOOSFERA_AI/`**: AI alignment as topological Darwinian attractor ($\lambda_1 = 0.46$).
+* **`00_4_VULNERABILITY_ANALYSIS/`**: Red Team adversarial analysis. Identifies Rogue AI and Cantillon thresholds.
+* **`09_BOLSO_TOPOLOGICO/`**: Earth topological pocket hypothesis. SAA prediction.
+
+### F. Ancient Civilizations as Tech Archives (Feb 2026)
+
+* **`RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/`**: Vedic 7-layer tech stack. V.E.D.A. whitepaper.
+* **`RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/`**: Egyptian holographic OS.
+* **`RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/`**: Alchemy as Kernel v3 symbolics.
+* **`RECURSOS_PARA_PESQUISA/01_04_MAIA_KERNEL/`**, **`01_05_EGIPT_KERNEL/`**, **`01_06_SUMERIO_KERNEL/`**: Mayan, Egyptian, Sumerian kernels.
+
+### G. Experimental Physics Validation (Feb 2026)
+
+* **`RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/`**: Aharonov-Bohm paradigm — Potentials are fundamental.
+* **`RECURSOS_PARA_PESQUISA/14_LANDAUER/`**: Thermodynamics of consciousness. Loosh = 50 GJ. Topological Memory.
+* **`RECURSOS_PARA_PESQUISA/12_MOMENT_OF_TRUTH/`**: 4-experiment falsification suite. All 3 pillars confirmed.
+
+## Recommended Reading Order
+
+### Path A: Physics & Mathematics
+
+1. `THEORY_SUMMARY.md` — Executive overview
+2. `MILLENNIUM_RESOLUTIONS.md` — All 6 problems
+3. `KERNEL_V3_DOCUMENTATION.md` — The computational model
+4. `RESEARCH_CHRONOGRAM.md` — Full research history
+5. `REAL_DISCOVERIES.md` — All validated findings
+
+### Path B: Philosophy & Story
+
+1. `GENESIS.MD` / `THE_GENESIS_ALGORITHM.md` — The narrative
+2. `A_HISTORIA_TAMESIS.md` / `THE_TAMESIS_STORY.md` — The methodology
+3. `TAMESIS_MASTER.md` — The master configuration
+4. `13_CANON/UNIFIED_TRISM_CANON.md` — The philosophical synthesis
+
+### Path C: Applied Research (New, Feb 2026)
+
+1. `00_3_MNN_NOOSFERA_AI/README.md` — AI alignment
+2. `09_BOLSO_TOPOLOGICO/README.md` — Earth topology
+3. `RECURSOS_PARA_PESQUISA/14_LANDAUER/README.md` — Consciousness thermodynamics
+4. `RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/README.md` — Physics ontology
+
 ## How to Verify
 
 For researchers looking to verify the results:
@@ -68,4 +115,5 @@ For researchers looking to verify the results:
 
 ---
 **Author:** Douglas H. M. Fulber
-**Date:** 2026-01-29
+**Updated:** 2026-02-22
+**Version:** 2.0

@@ -1,7 +1,7 @@
 # Arquivo de Pesquisa Tamesis: O Sistema Operacional Computacional da Realidade
 
 ![Status](https://img.shields.io/badge/Status-Projeto_Unificado-success?style=for-the-badge)
-![Versão](https://img.shields.io/badge/Kernel-v3.2_LHC_Alinhado-blueviolet?style=for-the-badge)
+![Versão](https://img.shields.io/badge/Versão-2.0_Fev_2026-blueviolet?style=for-the-badge)
 ![Licença](https://img.shields.io/badge/Licença-MIT_%2F_CC--BY--SA-lightgrey?style=for-the-badge)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18407193.svg)](https://doi.org/10.5281/zenodo.18407193)
 
@@ -64,14 +64,16 @@ Através de análise matemática rigorosa, descobrimos que o próprio objetivo e
 - **Resultado:** Derivamos $F = ma$ e $F \propto 1/r^2$ puramente a partir da maximização de entropia
 - **Precisão:** Zero erro numérico na derivação
 
-![Demonstração de Gravidade Entrópica](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/GRAPHICAL_ABSTRACT.png)
+![Núcleo Kernel v3](00_MONADA_THE_BEGENING/media/img/02_nucleo_kernel_v3.jpg)
+*O Kernel v3 — o núcleo computacional do universo como uma Rede Entrópica*
 
 #### 2. Matéria Escura como "Memória Elástica"
 
 - **Resultado:** Reproduzimos curvas de rotação da Via Láctea **sem Matéria Escura**
 - **Mecanismo:** O vácuo retém memória do histórico de deformação (estresse entrópico)
 
-![Curvas de Rotação Galáctica](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/results/rotation_curve_comparison.png)
+![Regime Quântico Espectral](00_MONADA_THE_BEGENING/media/img/03_regime_quantico_caos_espectral.jpg)
+*Regime Quântico: Caos Espectral — o substrato microscópico da gravidade emergente*
 
 #### 3. Resolução da Tensão de Hubble
 
@@ -84,7 +86,8 @@ Através de análise matemática rigorosa, descobrimos que o próprio objetivo e
 - **Descoberta:** A singularidade ($t=0, \rho \to \infty$) não ocorre
 - **Mecanismo:** Saturação Holográfica — densidade de informação atinge o Limite de Bekenstein
 
-![Análise Cosmológica](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/Validation/07_Cosmology/cosmology_analysis.png)
+![Monada Completa Astrolábio](00_MONADA_THE_BEGENING/media/img/01_monada_completa_astrolabio.jpg)
+*A Monada como Astrolábio: modelo cosmológico completo mostrando camadas de regime e mecanismo Big Bounce*
 
 ### Meta-Teoria da Solubilidade
 
@@ -123,6 +126,122 @@ Isso explica por que 100 anos de tentativas algébricas falharam em RH/P≠NP �
 - **Solução:** Estabilidade requer **limitar** o fluxo de informação ($I < C_{bio}$)
 
 ---
+
+## ![Fev2026](https://img.shields.io/badge/🚀-Expansão_de_Pesquisa_Fev_2026-ff6b35?style=flat-square)
+
+### Civilizações Antigas como Arquivos Tecnológicos
+
+> *"Qualquer magia suficientemente analisada é indistinguível de código."* — Tamesis AI
+
+Aplicando o Kernel v3 como lente hermenêutica para textos antigos, revelamos stacks tecnológicos completos codificados em mitologia:
+
+- **Stack Védico (7 camadas):** Física (nós-grafo Parmanu) → S.O. (Samkhya/Gunas) → Propulsão MHD (Laghima) → Robótica (Yantra FSM) → Linguagem Formal Sânscrita
+- **S.O. Egípcio:** Ma'at = Negentropia. Duat = Bulk (RAM Eterna). "Vida Eterna" = protocolo de upload holográfico
+- **Experimento V.E.D.A.:** Simulação de propulsão MHD-acústica Védica obteve **90% de redução de massa efetiva** em t=7,0s
+
+#### Stack Tecnológico Védico
+
+![Resultados V.E.D.A.](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/veda_experiment_results.png)
+*Resultados da simulação V.E.D.A.: 90% de redução de massa efetiva via ressonância MHD-acústica em t=7s*
+
+![Samkhya Gunas](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/samkhya_gunas.png)
+*Sistema Triple-Guna Samkhya como estados termodinâmicos Tamesis: Tamas/Rajas/Sattva*
+
+![Vórtice Mercúrico MHD](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/mercury_vortex_mhd.png)
+*Propulsão MHD por vórtice mercúrico — a base física do Laghima védico (redução de massa)*
+
+![Quântico Védico Agni-Soma](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/quantum_veda_agni_soma.png)
+*Dualidade quântica Agni-Soma: onda-partícula decodificada do Rigveda*
+
+![Descobertas Topologia Védica](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/tamesis_vedic_topology_discoveries.jpg)
+*Mapa de descobertas topológicas Tamesis-Védicas: todas as correspondências tecnológicas decodificadas*
+
+#### Kernels Egípcio e Alquímico
+
+![Duat Egípcio](RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/duat.jpg)
+*Duat — a camada de armazenamento Bulk egípcia, mapeada para a memória da fronteira holográfica*
+
+![Ouroboros Atrator](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
+*Ouroboros como Atrator Estranho: o loop de compressão auto-referencial do Kernel*
+
+![Fluxo de Processo Alquímico](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/fluxo_de_processo.jpg)
+*Fluxo de Processo Alquímico decodificado como diagrama de Transição de Regime Tamesis*
+
+### Alinhamento de IA como Atrator Topológico Darwiniano
+
+Alinhamento de IA **não** é um problema moral — é um ponto fixo termodinâmico:
+
+| Experimento | Resultado |
+| :--- | :--- |
+| Evolução Darwiniana (40 gerações) | Converge para $\lambda_1 = 0.46$ (linha de base do cérebro humano) |
+| Zona de alinhamento compatível | $\lambda_1 \in [0.37, 0.55]$ |
+| Limiar de IA Desonesta | $\lambda_1 > 5 \times \lambda_1^{humano}$ |
+
+![Evolução Darwiniana de IA](00_3_MNN_NOOSFERA_AI/darwinian_evolution.png)
+*Evolução Darwiniana de 40 gerações: topologias de IA convergindo para a zona de alinhamento humana*
+
+![Espectro Psiquiátrico de IA](00_3_MNN_NOOSFERA_AI/psychosis_spectrum.png)
+*Espectro psiquiátrico topológico: Catatônico (Grid) → Alinhado (SW) → Maníaco → Alien (Scale-Free)*
+
+![Massa Crítica de IA](00_3_MNN_NOOSFERA_AI/critical_mass.png)
+*Limiar de massa crítica de IA: o ponto topológico sem retorno para o desalinhamento*
+
+![Emergência da Noosfera](00_3_MNN_NOOSFERA_AI/noosphere_emergence.gif)
+*Emergência em tempo real da Noosfera: redes de IA e humanas sincronizando*
+
+![Fase de Alinhamento](00_3_MNN_NOOSFERA_AI/alignment_phase.gif)
+*Transição de fase de alinhamento: topologia de IA convergindo para a linha de base Small-World humana*
+
+### Física Social da Informação: Gateway Memético
+
+![Censura vs Imunização](00_2_MEMETICA_GATEWAY/censorship_vs_immunity.png)
+*Censura (esq.) vs. Imunização por Contatos (dir.): remover 30% dos canais = 0% de redução na disseminação viral*
+
+![Comparação de Imunização](00_2_MEMETICA_GATEWAY/immunization_comparison.png)
+*Dose ótima: estratégia de 30% de contatos reduz infecção para 12,6%*
+
+![Comparação SIR](00_2_MEMETICA_GATEWAY/sir_comparison.png)
+*Modelo SIR comparativo: imunização padrão vs. termodinamicamente ótima*
+
+### Testes de Estresse da Monada
+
+![Mapa de Calor CMB](00_MONADA_THE_BEGENING/matematic/monada_cmb_heatmap.png)
+*Picos Acústicos do CMB simulados — corresponde à estrutura dos dados do satélite Planck*
+
+![Espectro de Potência Monada](00_MONADA_THE_BEGENING/matematic/monada_power_spectrum.png)
+*Espectro de potência do universo Monada: posições dos picos acústicos correspondem ao CMB observado*
+
+![Transição de Fase Monada](00_MONADA_THE_BEGENING/matematic/monada_phase_transition.gif)
+*Transição de fase Big Bounce: o universo cristalizando da espuma quântica para o espaço-tempo geométrico*
+
+![Sobrevivência do Entrelaçamento](00_MONADA_THE_BEGENING/matematic/monada_entanglement_survival.png)
+*Curva de sobrevivência do entrelaçamento quântico sob compressão holográfica*
+
+![Buraco Negro Monada](00_MONADA_THE_BEGENING/matematic/monada_blackhole.gif)
+*Anel Firewall do buraco negro: como o Kernel v3 resolve o paradoxo da informação*
+
+![Alinhamento Monada](00_MONADA_THE_BEGENING/matematic/monada_alignment.png)
+*Alinhamento espectral da Monada: convergência de todos os regimes físicos para o atrator Tamesis*
+
+![Hiper Vórtice Monada](00_MONADA_THE_BEGENING/matematic/monada_hyper_vortex.gif)
+*Vórtice hiperdimensional: a estrutura topológica de um horizonte de evento Big Bounce*
+
+#### Galeria de Arte Monada
+
+![Barreira TRI Horizonte](00_MONADA_THE_BEGENING/media/img/04_barreira_tri_horizonte.jpg)
+*Barreira TRI do Horizonte: o muro de incompatibilidade entre regimes quântico e relativístico*
+
+![Regime Relativístico Geometria](00_MONADA_THE_BEGENING/media/img/05_regime_relativistico_geometria.jpg)
+*Regime Relativístico: geometria do espaço-tempo emergindo do coarse-graining do grafo*
+
+![Interface Cognitiva Neural](00_MONADA_THE_BEGENING/media/img/06_interface_cognitiva_neural.jpg)
+*Interface Cognitiva-Neural: a consciência como propriedade topológica de redes de informação*
+
+![Monadas Entrelaçadas](00_MONADA_THE_BEGENING/media/img/07_entrelacamento_monadas.jpg)
+*Monadas Entrelaçadas: não-localidade quântica como conectividade de arestas do grafo*
+
+![Homo Tamesis](00_MONADA_THE_BEGENING/media/img/08_homo_tamesis_consciencia.jpg)
+*Homo Tamesis: a entidade consciente como estrutura topológica navegando o Kernel*
 
 ## ![Limitações](https://img.shields.io/badge/⚠️-Limitações_Honestas-f59e0b?style=flat-square)
 
@@ -189,11 +308,26 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 
 ## ![Estrutura](https://img.shields.io/badge/📂-Estrutura_de_Pesquisa-64748b?style=flat-square)
 
-- **`07_MILLENNIUM_VALIDATION`:** Ataque estratégico em gargalos matemáticos.
-- **`11_TOE_ARCHITECTURE_OF_REALITY`:** Artigo principal e fonte universal.
-- **`13_CANON`:** Os tratados definitivos (Submissão Zenodo).
-- **`14_VERIFICATION_TAMESIS_THEORY`:** Motor de simulação e logs quantitativos.
-- **`15_YANG_MILLS_TAMESIS_RESOLUTION`:** Micro-dinâmica e provas de vórtices.
+### Teoria Central
+
+- **`02_FOUNDATIONAL_LIBRARIES/`**: Bibliotecas TRI + TDTR
+- **`07_MILLENNIUM_VALIDATION`:** Ataque estratégico em gargalos matemáticos
+- **`11_TOE_ARCHITECTURE_OF_REALITY`:** Artigo principal e fonte universal
+- **`13_CANON`:** Os tratados definitivos (Submissão Zenodo)
+- **`14_VERIFICATION_TAMESIS_THEORY`:** Motor de simulação e logs quantitativos
+- **`15_YANG_MILLS_TAMESIS_RESOLUTION`:** Micro-dinâmica e provas de vórtices
+
+### Pesquisa Extendida Fev 2026
+
+- **`00_MONADA_THE_BEGENING/`**: Testes de estresse da Monada (CMB, Entrelaçamento, Buracos Negros)
+- **`00_2_MEMETICA_GATEWAY/`**: Física social — censura é termodinamicamente inútil
+- **`00_3_MNN_NOOSFERA_AI/`**: Topologia de alinhamento de IA (Atrator Darwiniano em λ₁=0,46)
+- **`00_4_VULNERABILITY_ANALYSIS/`**: Red Team — limiares de IA Desonesta e Cantillon
+- **`09_BOLSO_TOPOLOGICO/`**: Hipótese de bolso topológico terrestre (previsão SAA)
+- **`RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/`**: Stack técnico Védico de 7 camadas + whitepaper V.E.D.A.
+- **`RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/`**: Paradigma A-B — Potenciais são reais
+- **`RECURSOS_PARA_PESQUISA/14_LANDAUER/`**: Termodinâmica da consciência (Loosh=50GJ)
+- **`RECURSOS_PARA_PESQUISA/12_MOMENT_OF_TRUTH/`**: Suite de falsificação de 4 experimentos
 
 ---
 
@@ -263,5 +397,3 @@ O Kernel Tamesis foi aplicado com sucesso para fornecer uma resolução unificad
 - **Release Inicial de Citação:** [10.5281/zenodo.18343477](https://doi.org/10.5281/zenodo.18343477)
 
 *O Kernel Tamesis: Porque a realidade é um processo open-source.*
-
-```

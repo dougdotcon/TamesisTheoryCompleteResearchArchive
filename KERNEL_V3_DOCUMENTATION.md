@@ -411,13 +411,45 @@ Kernel v3 represents a paradigm shift in cosmology:
 
 ---
 
-## Future Directions
+## Future Directions (Updated Feb 2026)
+
+### Completed in Feb 2026
+
+| Extension | Result | Status |
+| :--- | :--- | :--- |
+| **Bolso Topológico** | SAA = topological pocket signature; bridge nodes 133.7T× spectral anomaly | ✅ Validated |
+| **Tonomura Paradigm** | Potentials ($A_\mu$) are physically real; universe runs on Potentials → Fields → Particles | ✅ Confirmed |
+| **Monada Stress Tests** | CMB peaks ✅, Entanglement survival ✅, Black Hole Firewall ring ✅ | ✅ 3/4 passed |
+| **AI Darwinian Attractor** | $\lambda_1 = 0.46$ topological fixed point; 40-gen evolution always converges | ✅ Validated |
+| **V.E.D.A. Simulation** | Vedic MHD propulsion: 90% effective mass reduction at t=7s | ✅ Reproduced |
+
+### Active Research Directions
 
 1. **Observational Validation:** Search for crack frequency signature in SGWB data
 2. **Quantum Extension:** Implement full tensor network states (MPS/PEPS) instead of simplified qubits
-3. **Cosmological Predictions:** Derive CMB power spectrum from first principles
+3. **Entropy-Consciousness Bridge:** Connect Landauer module (Loosh=50 GJ) to Kernel v3 node entropy
 4. **Black Hole Physics:** Apply saturation mechanism to event horizon singularities
-5. **Unification:** Connect to Standard Model particle physics via network topology
+5. **Topological Pocket Engineering:** Design instruments to detect SAA as Kernel anomaly
+
+---
+
+## References
+
+1. D. H. M. Fulber, *Kernel v3: The Autopsy of the Singularity* (Research Report, 2026)
+2. D. H. M. Fulber, *Systematic Derivation of Mc, a0, and H0* (Path A Report, 2026)
+3. J. D. Bekenstein, *Universal upper bound on the entropy-to-energy ratio for bounded systems* (PRD, 1981)
+4. Y. Ollivier, *Ricci curvature of Markov chains on metric spaces* (J. Funct. Anal., 2009)
+5. A. Tonomura et al., *Evidence for Aharonov-Bohm effect with magnetic field completely shielded from electron wave* (PRL, 1986)
+6. D. H. M. Fulber, *Bolso Topológico: Simulation and Spectral Analysis* (Research Report, 2026)
+
+---
+
+## Contact
+
+**Author:** Douglas H. M. Fulber
+**Affiliation:** Universidade Federal do Rio de Janeiro, Brazil
+**Updated:** February 22, 2026
+**DOI (v2):** 10.5281/zenodo.18357364
 
 ---
 

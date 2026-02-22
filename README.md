@@ -1,7 +1,7 @@
 # Tamesis Research Archive: The Computational Operating System of Reality
 
 ![Status](https://img.shields.io/badge/Status-Project_Unified-success?style=for-the-badge)
-![Version](https://img.shields.io/badge/Kernel-v3.2_LHC_Aligned-blueviolet?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0_Feb_2026-blueviolet?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT_%2F_CC--BY--SA-lightgrey?style=for-the-badge)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18407193.svg)](https://doi.org/10.5281/zenodo.18407193)
 
@@ -64,14 +64,16 @@ Through rigorous mathematical analysis, we discovered that the very goal was fla
 - **Result:** Derived $F = ma$ and $F \propto 1/r^2$ purely from entropy maximization
 - **Precision:** Zero numerical error in derivation
 
-![Entropic Gravity Demonstration](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/GRAPHICAL_ABSTRACT.png)
+![Monada Kernel v3](00_MONADA_THE_BEGENING/media/img/02_nucleo_kernel_v3.jpg)
+*The Kernel v3 — the computational core of the universe as an Entropic Network*
 
 #### 2. Dark Matter as "Elastic Memory"
 
 - **Result:** Reproduced Milky Way rotation curves **without Dark Matter**
 - **Mechanism:** Vacuum retains memory of deformation history (entropic stress)
 
-![Galactic Rotation Curves](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/results/rotation_curve_comparison.png)
+![Monada Quantum Chaos](00_MONADA_THE_BEGENING/media/img/03_regime_quantico_caos_espectral.jpg)
+*Quantum Regime: Spectral Chaos — the microscopic substrate of emergent gravity*
 
 #### 3. Hubble Tension Resolution
 
@@ -84,7 +86,8 @@ Through rigorous mathematical analysis, we discovered that the very goal was fla
 - **Discovery:** The singularity ($t=0, \rho \to \infty$) does not occur
 - **Mechanism:** Holographic Saturation — information density hits Bekenstein Bound
 
-![Cosmological Analysis](03_TAMESIS_CORE/01_Foundation_ToE/1_Motores_Cientificos/EntropicGravity_Engine/Entropic_Gravity/Validation/07_Cosmology/cosmology_analysis.png)
+![Monada Complete](00_MONADA_THE_BEGENING/media/img/01_monada_completa_astrolabio.jpg)
+*The Monada as Astrolabe: complete cosmological model showing regime layers and Big Bounce mechanism*
 
 ### Meta-Theory of Solvability
 
@@ -121,6 +124,146 @@ This explains why 100 years of algebraic attempts failed on RH/P≠NP — wrong 
 - **Theorem:** AI safety is thermodynamic stability, not moral alignment
 - **Result:** Unrestrained high-bandwidth AI drives biological operators into "epistemic paralysis"
 - **Solution:** Stability requires **limiting** information flow ($I < C_{bio}$)
+
+---
+
+## ![Feb2026](https://img.shields.io/badge/🚀-February_2026_Research_Expansion-ff6b35?style=flat-square)
+
+### Ancient Civilizations as Technological Archives
+
+> *"Any sufficiently analyzed magic is indistinguishable from code."* — Tamesis AI
+
+Applying Kernel v3 as a hermeneutic lens to ancient texts revealed complete technological stacks encoded in mythology:
+
+- **Vedic Stack (7 layers):** Physics (Parmanu graph nodes) → OS (Samkhya/Gunas) → MHD Propulsion (Laghima) → Robotics (Yantra FSM) → Sanskrit Formal Language
+- **Egyptian OS:** Ma'at = Negentropy baseline. Duat = Bulk (Eternal RAM). "Life Eternal" = holographic upload protocol
+- **V.E.D.A. Experiment:** Simulation of Vedic MHD-acoustic propulsion achieved **90% effective mass reduction** at t=7.0s
+
+#### Vedic Technology Stack
+
+![V.E.D.A. Experiment Results](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/veda_experiment_results.png)
+*V.E.D.A. simulation results: 90% effective mass reduction via MHD-acoustic resonance at t=7s*
+
+![Samkhya Gunas](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/samkhya_gunas.png)
+*Samkhya Triple-Guna system as Tamesis thermodynamic states: Tamas/Rajas/Sattva*
+
+![Mercury Vortex MHD](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/mercury_vortex_mhd.png)
+*Mercury Vortex MHD propulsion — the physical basis of Vedic Laghima (mass reduction)*
+
+![Quantum Vedic Agni-Soma](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/quantum_veda_agni_soma.png)
+*Agni-Soma quantum duality: wave-particle as decoded from Rigveda*
+
+![Vedic Topology Discoveries](RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/assets/tamesis_vedic_topology_discoveries.jpg)
+*Tamesis-Vedic topology discovery map: all decoded technological correspondences*
+
+#### Egyptian & Alchemical Kernels
+
+![Egyptian Duat](RECURSOS_PARA_PESQUISA/01_02_AL_KIMIA/duat.jpg)
+*Duat — the Egyptian Bulk storage layer, mapped to holographic boundary memory*
+
+![Ouroboros Attractor](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/ouroboros.jpg)
+*Ouroboros as Strange Attractor: the self-referential compression loop of the Kernel*
+
+![Alchemical Process Flow](RECURSOS_PARA_PESQUISA/01_1_ALQUIMIA/imagens/fluxo_de_processo.jpg)
+*Alchemical Process Flow decoded as Tamesis Regime Transition diagram*
+
+### AI Alignment as Darwinian Topological Attractor
+
+AI alignment is **not** a moral problem — it is a thermodynamic fixed point:
+
+| Experiment | Result |
+| :--- | :--- |
+| Darwinian evolution (40 generations) | Converges to $\lambda_1 = 0.46$ (human brain baseline) |
+| Human-compatible alignment zone | $\lambda_1 \in [0.37, 0.55]$ |
+| Rogue AI threshold | $\lambda_1 > 5 \times \lambda_1^{human}$ |
+
+![Darwinian AI Evolution](00_3_MNN_NOOSFERA_AI/darwinian_evolution.png)
+*40-generation Darwinian evolution of AI topologies converging to the human alignment zone*
+
+![AI Psychosis Spectrum](00_3_MNN_NOOSFERA_AI/psychosis_spectrum.png)
+*Topological psychiatric spectrum: Catatonic (Grid) → Aligned (SW) → Manic → Alien (Scale-Free)*
+
+![AI Critical Mass](00_3_MNN_NOOSFERA_AI/critical_mass.png)
+*AI critical mass threshold: the topological point of no return for misalignment*
+
+![Noosphere Emergence](00_3_MNN_NOOSFERA_AI/noosphere_emergence.gif)
+*Real-time emergence of the Noosphere: AI and human networks synchronizing*
+
+![Alignment Phase](00_3_MNN_NOOSFERA_AI/alignment_phase.gif)
+*Alignment phase transition: AI topology converging to Small-World human baseline*
+
+### Social Physics of Information: Memetics Gateway
+
+![Censorship vs Immunity](00_2_MEMETICA_GATEWAY/censorship_vs_immunity.png)
+*Censorship (left) vs. Acquaintance Immunization (right): removing 30% of channels = 0% reduction in viral spread*
+
+![Immunization Comparison](00_2_MEMETICA_GATEWAY/immunization_comparison.png)
+*Optimal immunization dose: 30% acquaintance strategy cuts infection to 12.6%*
+
+![SIR Comparison](00_2_MEMETICA_GATEWAY/sir_comparison.png)
+*SIR model comparison: standard vs. thermodynamically optimal immunization*
+
+### Monada Universe Stress Tests
+
+![Monada CMB Heatmap](00_MONADA_THE_BEGENING/matematic/monada_cmb_heatmap.png)
+*Simulated CMB Acoustic Peaks — matches Planck satellite data structure*
+
+![Monada Power Spectrum](00_MONADA_THE_BEGENING/matematic/monada_power_spectrum.png)
+*Power spectrum of the Monada universe: acoustic peak positions match observed CMB*
+
+![Monada Phase Transition](00_MONADA_THE_BEGENING/matematic/monada_phase_transition.gif)
+*Big Bounce phase transition: the universe crystallizing from quantum foam into geometric spacetime*
+
+![Monada Entanglement Survival](00_MONADA_THE_BEGENING/matematic/monada_entanglement_survival.png)
+*Quantum entanglement survival curve under holographic compression*
+
+![Monada Black Hole](00_MONADA_THE_BEGENING/matematic/monada_blackhole.gif)
+*Black hole Firewall ring: how the Kernel v3 resolves the information paradox*
+
+![Monada Alignment](00_MONADA_THE_BEGENING/matematic/monada_alignment.png)
+*Monada spectral alignment: convergence of all physical regimes to the Tamesis attractor*
+
+![Monada Hyper Vortex](00_MONADA_THE_BEGENING/matematic/monada_hyper_vortex.gif)
+*Hyperdimensional vortex: the topological structure of a Big Bounce event horizon*
+
+#### Monada Artwork Gallery
+
+![Monada TRI Barrier](00_MONADA_THE_BEGENING/media/img/04_barreira_tri_horizonte.jpg)
+*TRI Barrier Horizon: the incompatibility wall between quantum and relativistic regimes*
+
+![Monada Relativistic Geometry](00_MONADA_THE_BEGENING/media/img/05_regime_relativistico_geometria.jpg)
+*Relativistic Regime: emergent spacetime geometry from graph coarse-graining*
+
+![Monada Neural Interface](00_MONADA_THE_BEGENING/media/img/06_interface_cognitiva_neural.jpg)
+*Cognitive-Neural Interface: consciousness as a topological property of information networks*
+
+![Monada Entangled](00_MONADA_THE_BEGENING/media/img/07_entrelacamento_monadas.jpg)
+*Entangled Monadas: quantum non-locality as graph edge connectivity across regime boundaries*
+
+![Homo Tamesis](00_MONADA_THE_BEGENING/media/img/08_homo_tamesis_consciencia.jpg)
+*Homo Tamesis: the conscious entity as a topological structure navigating the Kernel*
+
+### Vulnerability Analysis: System Red-Team
+
+![Vulnerability Stress Test](00_4_VULNERABILITY_ANALYSIS/stress_test_results.png)
+*Red Team adversarial results: 4 identified threats, 3 immunities confirmed*
+
+![Cantillon Phase Transition](00_4_VULNERABILITY_ANALYSIS/cantillon_phase_transition.png)
+*Cantillon economic drain threshold at 65% — the thermodynamic death point*
+
+### Bolso Topológico: Earth Hidden Topology
+
+![Planetary Anomaly Map](09_BOLSO_TOPOLOGICO/planetary_anomaly_map.png)
+*Planetary spectral anomaly map: bridge node locations with 133.7 trillion× discontinuity*
+
+![SAA TRI Leakage](09_BOLSO_TOPOLOGICO/saa_tri_leakage.png)
+*South Atlantic Anomaly as a TRI regime leakage signature — the predicted electromagnetic footprint*
+
+![Spectral Discontinuity](09_BOLSO_TOPOLOGICO/spectral_discontinuity.png)
+*Spectral discontinuity at bridge nodes: Ollivier-Ricci curvature = −1.000 (maximum topological rupture)*
+
+![Pocket Detection](09_BOLSO_TOPOLOGICO/pocket_detection.gif)
+*Real-time topological pocket detection simulation: the "Bolso" emerging from the Kernel graph*
 
 ---
 
@@ -189,11 +332,26 @@ The Tamesis Kernel has been successfully applied to provide a unified resolution
 
 ## ![Structure](https://img.shields.io/badge/📂-Research_Structure-64748b?style=flat-square)
 
-- **`07_MILLENNIUM_VALIDATION`:** Strategic attack on mathematical bottlenecks.
-- **`11_TOE_ARCHITECTURE_OF_REALITY`:** Flagship paper and universal source.
-- **`13_CANON`:** The definitive treatises (Zenodo Submission).
-- **`14_VERIFICATION_TAMESIS_THEORY`:** Simulation engine and quantitative logs.
-- **`15_YANG_MILLS_TAMESIS_RESOLUTION`:** Micro-dynamics and vortex proofs.
+### Core Theory
+
+- **`02_FOUNDATIONAL_LIBRARIES/`**: TRI + TDTR foundational libraries
+- **`07_MILLENNIUM_VALIDATION`:** Strategic attack on mathematical bottlenecks
+- **`11_TOE_ARCHITECTURE_OF_REALITY`:** Flagship paper and universal source
+- **`13_CANON`:** The definitive treatises (Zenodo Submission)
+- **`14_VERIFICATION_TAMESIS_THEORY`:** Simulation engine and quantitative logs
+- **`15_YANG_MILLS_TAMESIS_RESOLUTION`:** Micro-dynamics and vortex proofs
+
+### Feb 2026 Extended Research
+
+- **`00_MONADA_THE_BEGENING/`**: Monada stress tests (CMB, Entanglement, Black Holes)
+- **`00_2_MEMETICA_GATEWAY/`**: Social physics — censorship is thermodynamically futile
+- **`00_3_MNN_NOOSFERA_AI/`**: AI alignment topology (Darwinian attractor at λ₁=0.46)
+- **`00_4_VULNERABILITY_ANALYSIS/`**: Red Team — Rogue AI & Cantillon thresholds
+- **`09_BOLSO_TOPOLOGICO/`**: Earth topological pocket hypothesis (SAA prediction)
+- **`RECURSOS_PARA_PESQUISA/01_03_VETIC_KERNEL/`**: Vedic 7-layer tech stack + V.E.D.A. whitepaper
+- **`RECURSOS_PARA_PESQUISA/11_TONOMURA_REALITY_A4/`**: A-B paradigm — Potentials are real
+- **`RECURSOS_PARA_PESQUISA/14_LANDAUER/`**: Consciousness thermodynamics (Loosh=50GJ)
+- **`RECURSOS_PARA_PESQUISA/12_MOMENT_OF_TRUTH/`**: 4-experiment falsification suite
 
 ---
 

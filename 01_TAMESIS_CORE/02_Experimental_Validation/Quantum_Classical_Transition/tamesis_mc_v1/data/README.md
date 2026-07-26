@@ -4,6 +4,8 @@ Generated numerical outputs for Tamesis M_c v1.
 
 Main files:
 
+- `artifact_manifest.json`
+- `literature_points_v2.csv` (schema audit / if present)
 - `literature_points.csv`
 - `model_summary.json`
 - `predictions.csv`

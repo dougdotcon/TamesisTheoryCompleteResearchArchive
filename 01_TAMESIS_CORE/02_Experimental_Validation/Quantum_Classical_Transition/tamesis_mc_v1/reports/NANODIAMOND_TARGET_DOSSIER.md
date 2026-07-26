@@ -44,7 +44,7 @@ The proposal's stated upper mass of `1e-15 kg` is about:
 At that point Tamesis predicts visible but substantial intrinsic loss over
 `0.1 s`, and strong loss over `1 s`.
 
-## Current target ranking
+## Current exploratory target ordering
 
 After adding planned targets to `literature_points.csv`, the highest
 decisiveness targets are:

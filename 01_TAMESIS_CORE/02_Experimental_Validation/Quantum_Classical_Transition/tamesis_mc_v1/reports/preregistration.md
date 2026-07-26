@@ -35,12 +35,12 @@ For each record:
 2. Use Bernoulli likelihood on the observed binary outcome.
 3. Sum log-likelihoods across records.
 4. Compare models with AIC and BIC.
-5. Report ranking and per-record predictions.
+5. Report exploratory ordering and per-record predictions.
 
 ## Sensitivity checks
 
 - Repeat the fit with and without each experiment family.
-- Report whether the ranking changes under reasonable nuisance-rate variation.
+- Report whether the exploratory ordering changes under reasonable nuisance-rate variation.
 - Keep the full record table and do not drop failures after seeing outcomes.
 
 ## Falsification language

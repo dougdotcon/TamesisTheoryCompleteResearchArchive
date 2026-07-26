@@ -197,7 +197,7 @@ def run_comparison(dataset_path: Optional[Path] = None, output_path: Optional[Pa
         "diagnostics": diagnostics,
         "records": per_record,
         "scores": [asdict(s) for s in scores],
-        "ranking": [s.name for s in ranking],
+        "legacy_exploratory_ranking": [s.name for s in ranking],
         "environment_rates_s-1": fitted_rates,
         "notes": [
             "This report is a pre-registered comparison scaffold, not a discovery claim.",
@@ -218,7 +218,7 @@ def main() -> None:
             {
                 "dataset": report["dataset"],
                 "n_observed_records": report["n_observed_records"],
-                "ranking": report["ranking"],
+                "legacy_exploratory_ranking": report["legacy_exploratory_ranking"],
                 "environment_rates_s-1": report["environment_rates_s-1"],
             },
             indent=2,

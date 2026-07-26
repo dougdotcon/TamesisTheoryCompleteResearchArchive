@@ -26,7 +26,8 @@ uma constante medida nem uma derivação concluída.
 ## Camada de comparacao adicionada
 
 - `compare_models.py` executa a comparacao com CSL, GRW, DP e um baseline
-  ambiental com taxa de nuisance por familia.
+  ambiental com taxa de nuisance por familia. O ranking resultante agora deve
+  ser tratado como `legacy_exploratory_ranking`.
 - `reports/preregistration.md` fixa o plano estatistico antes da inferencia.
 - `data/literature_points.csv` separa pontos observados de alvos planejados.
 - `reports/BOHR_LEVEL_GAP.md` registra a distancia entre a fronteira experimental atual

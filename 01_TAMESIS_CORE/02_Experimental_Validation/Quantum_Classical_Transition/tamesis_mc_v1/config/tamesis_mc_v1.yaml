@@ -1,0 +1,80 @@
+version: "1.0"
+name: "Tamesis M_c v1"
+status: "phenomenological_and_auditable"
+
+constants:
+  G:
+    value: 6.67430e-11
+    unit: "m^3 kg^-1 s^-2"
+    classification: fixed_convention
+  hbar:
+    value: 1.054571817e-34
+    unit: "J s"
+    classification: fixed_convention
+  c:
+    value: 299792458.0
+    unit: "m s^-1"
+    classification: fixed_convention
+  H0:
+    value: 70.0
+    unit: "km s^-1 Mpc^-1"
+    si_value: 2.268545502662652e-18
+    si_unit: "s^-1"
+    classification: measured_input
+  silica_density:
+    value: 2200.0
+    unit: "kg m^-3"
+    classification: modelling_assumption
+
+structural_parameters:
+  phase_space_root:
+    value: 8
+    classification: modelling_assumption
+    note: "Root-eighth is a v1.0 hypothesis, not a derived theorem."
+  exponent:
+    value: 2.0
+    classification: modelling_assumption
+    note: "Quadratic above-threshold growth is a v1.0 hypothesis."
+  sharp_threshold:
+    value: true
+    classification: modelling_assumption
+    note: "Gamma_T is exactly zero for M <= M_c in v1.0."
+  separation_dependence:
+    value: absent_in_v1_0
+    classification: fixed_convention
+
+derived_quantities:
+  Mc_kg:
+    value: 5.292674126388712e-16
+    unit: "kg"
+    classification: derived
+  Mc_amu:
+    value: 318732285969.37555
+    unit: "amu"
+    classification: derived
+  radius_m:
+    value: 3.858228590636517e-07
+    unit: "m"
+    classification: derived
+  tau_c_s:
+    value: 2.176246482178091
+    unit: "s"
+    classification: derived
+  threshold_rate_s-1:
+    value: 0.45950677379115273
+    unit: "s^-1"
+    classification: derived
+
+equations:
+  Mc: "m_P * (a0 / aP)^(1/8)"
+  a0: "c * H0"
+  aP: "c^2 / l_P"
+  tau_c: "hbar * R / (G * M_c^2)"
+  gamma_T: "0 for M <= M_c; tau_c^-1 * (M/M_c)^2 for M > M_c"
+  visibility: "exp(-(Gamma_T + Gamma_env) * t)"
+
+epistemology:
+  source_of_truth_note: "The YAML is the canonical audit configuration for v1.0; the Python implementation is the executable copy."
+  rank_status: "legacy_exploratory_ranking"
+  target_1e15_status: "hypothetical_ideal_target_until_platform_support_is_explicit"
+

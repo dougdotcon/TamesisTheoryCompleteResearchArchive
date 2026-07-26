@@ -1,0 +1,89 @@
+{
+  "target": {
+    "mass_kg": 1e-15,
+    "separation_m": 5e-05,
+    "observation_time_s": 0.1,
+    "source": "https://arxiv.org/abs/2408.11909",
+    "source_basis": "arXiv abstract: 1e-15 kg, 50 micrometers, 0.1 seconds."
+  },
+  "tamesis": {
+    "Mc_kg": 5.292674126388712e-16,
+    "M_over_Mc": 1.8894040632770233,
+    "intrinsic_rate_s-1": 1.6403692061364539,
+    "coherence_time_s": 0.6096188566934212,
+    "visibility_at_0p1s": 0.8487106863823988,
+    "visibility_at_1s": 0.19390843688831894
+  },
+  "comparison_models": {
+    "CSL": {
+      "visibility_at_0p1s": 1e-12,
+      "effective_rate_s-1": 276.3102111592855
+    },
+    "GRW": {
+      "visibility_at_0p1s": 0.9999940213804654,
+      "effective_rate_s-1": 5.9786374065693676e-05
+    },
+    "DP": {
+      "visibility_at_0p1s": 0.9987350168924434,
+      "effective_rate_s-1": 0.01265783874063134
+    }
+  },
+  "environment_scenarios": {
+    "space_cryogenic_1e-15Pa": {
+      "pressure_pa": 1e-15,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 0.00023357263338632026,
+      "total_environment_rate_s-1": 0.00023357263338632026,
+      "visibility_environment_only": 0.9999766430094401,
+      "visibility_tamesis_plus_environment": 0.8486908630549088
+    },
+    "extreme_uhv_1e-12Pa": {
+      "pressure_pa": 1e-12,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 0.23357263338632023,
+      "total_environment_rate_s-1": 0.23357263338632023,
+      "visibility_environment_only": 0.9769134060756492,
+      "visibility_tamesis_plus_environment": 0.8291168474066313
+    },
+    "uhv_1e-10Pa": {
+      "pressure_pa": 1e-10,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 23.357263338632027,
+      "total_environment_rate_s-1": 23.357263338632027,
+      "visibility_environment_only": 0.09674019132521837,
+      "visibility_tamesis_plus_environment": 0.08210443418039064
+    }
+  },
+  "pressure_requirements": {
+    "gas_pressure_for_environment_equal_tamesis_rate_pa": 7.0229512008940946e-12,
+    "gas_pressure_for_environment_10pct_tamesis_rate_pa": 7.022951200894094e-13
+  },
+  "thermal_gate": {
+    "blackbody_dominance_temperature_k": 4.0,
+    "low_risk_temperature_k": 1.0,
+    "source": "https://arxiv.org/pdf/2410.20910",
+    "source_basis": "Above ~4 K, blackbody radiation becomes a considerable decoherence channel for micrometer-size superpositions in diamond."
+  },
+  "interpretation": [
+    "At 1e-15 kg the target is above Tamesis M_c and should show a measurable intrinsic visibility loss.",
+    "Gas collisions must be kept below roughly 10 percent of the Tamesis rate for a clean first-pass test.",
+    "Blackbody/radiative decoherence should be kept below the 4 K gate, ideally near 1 K or colder.",
+    "The CSL number here is a naive canonical point-mass comparison; a publication-grade analysis needs extended-body CSL.",
+    "The dominant missing terms are magnetic/current noise and full blackbody decoherence from the actual chip geometry."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "target": {
+    "mass_kg": 1e-15,
+    "separation_m": 5e-05,
+    "observation_time_s": 0.1,
+    "source": "https://arxiv.org/abs/2408.11909",
+    "source_basis": "arXiv abstract: 1e-15 kg, 50 micrometers, 0.1 seconds."
+  },
+  "tamesis": {
+    "Mc_kg": 5.292674126388712e-16,
+    "M_over_Mc": 1.8894040632770233,
+    "intrinsic_rate_s-1": 1.6403692061364539,
+    "coherence_time_s": 0.6096188566934212,
+    "visibility_at_0p1s": 0.8487106863823988,
+    "visibility_at_1s": 0.19390843688831894
+  },
+  "channels": {
+    "magnetic_gradient": {
+      "name": "magnetic_gradient",
+      "tolerance": 1e-07,
+      "reference_visibility": 0.99,
+      "time_s": 0.1,
+      "scaling_exponent": 2.0,
+      "reference_rate_s-1": 0.1005033585350145
+    },
+    "initial_position": {
+      "name": "initial_position",
+      "tolerance": 1e-09,
+      "reference_visibility": 0.99,
+      "time_s": 0.1,
+      "scaling_exponent": 2.0,
+      "reference_rate_s-1": 0.1005033585350145
+    }
+  },
+  "scenarios": [
+    {
+      "label": "best_case",
+      "fraction_of_magnetic_tolerance": 0.1,
+      "fraction_of_position_tolerance": 0.1,
+      "magnetic_rate_s-1": 0.0010050335853501453,
+      "position_rate_s-1": 0.0010050335853501453,
+      "combined_noise_rate_s-1": 0.0020100671707002906,
+      "combined_visibility_at_target_time": 0.9997990134834266,
+      "combined_visibility_at_1s": 0.9979919516614258
+    },
+    {
+      "label": "at_tolerance",
+      "fraction_of_magnetic_tolerance": 1.0,
+      "fraction_of_position_tolerance": 1.0,
+      "magnetic_rate_s-1": 0.1005033585350145,
+      "position_rate_s-1": 0.1005033585350145,
+      "combined_noise_rate_s-1": 0.201006717070029,
+      "combined_visibility_at_target_time": 0.9801,
+      "combined_visibility_at_1s": 0.8179069375972308
+    },
+    {
+      "label": "ten_x_worse",
+      "fraction_of_magnetic_tolerance": 10.0,
+      "fraction_of_position_tolerance": 10.0,
+      "magnetic_rate_s-1": 10.050335853501451,
+      "position_rate_s-1": 10.050335853501451,
+      "combined_noise_rate_s-1": 20.100671707002903,
+      "combined_visibility_at_target_time": 0.1339796748579617,
+      "combined_visibility_at_1s": 1.863756602992229e-09
+    }
+  ],
+  "interpretation": [
+    "The reference visibility 0.99 at the extracted tolerance is a normalized budget anchor.",
+    "This does not replace a chip-specific simulation; it turns the paper's tolerances into a measurable first-pass nuisance scale.",
+    "If the real experiment operates around the tolerance boundary, the nuisance channels can easily compete with Tamesis at 0.1 s."
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "target": {
+    "mass_kg": 1e-15,
+    "separation_m": 5e-05,
+    "observation_time_s": 0.1,
+    "source": "https://arxiv.org/abs/2408.11909",
+    "source_basis": "arXiv abstract: 1e-15 kg, 50 micrometers, 0.1 seconds."
+  },
+  "tamesis": {
+    "Mc_kg": 5.292674126388712e-16,
+    "M_over_Mc": 1.8894040632770233,
+    "intrinsic_rate_s-1": 1.6403692061364539,
+    "coherence_time_s": 0.6096188566934212,
+    "visibility_at_0p1s": 0.8487106863823988,
+    "visibility_at_1s": 0.19390843688831894
+  },
+  "gas_environment": {
+    "space_cryogenic_1e-15Pa": {
+      "pressure_pa": 1e-15,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 0.00023357263338632026,
+      "total_environment_rate_s-1": 0.00023357263338632026,
+      "visibility_environment_only": 0.9999766430094401,
+      "visibility_tamesis_plus_environment": 0.8486908630549088
+    },
+    "extreme_uhv_1e-12Pa": {
+      "pressure_pa": 1e-12,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 0.23357263338632023,
+      "total_environment_rate_s-1": 0.23357263338632023,
+      "visibility_environment_only": 0.9769134060756492,
+      "visibility_tamesis_plus_environment": 0.8291168474066313
+    },
+    "uhv_1e-10Pa": {
+      "pressure_pa": 1e-10,
+      "gas_temperature_k": 20.0,
+      "gas_molecular_mass_kg": 4.64950938648e-26,
+      "material_density_kg_m3": 3500.0,
+      "magnetic_or_current_noise_rate_s": 0.0,
+      "blackbody_rate_s": 0.0,
+      "particle_radius_m": 4.0858377386269564e-07,
+      "gas_collision_rate_s-1": 23.357263338632027,
+      "total_environment_rate_s-1": 23.357263338632027,
+      "visibility_environment_only": 0.09674019132521837,
+      "visibility_tamesis_plus_environment": 0.08210443418039064
+    }
+  },
+  "normalized_noise_budget": {
+    "target": {
+      "mass_kg": 1e-15,
+      "separation_m": 5e-05,
+      "observation_time_s": 0.1,
+      "source": "https://arxiv.org/abs/2408.11909",
+      "source_basis": "arXiv abstract: 1e-15 kg, 50 micrometers, 0.1 seconds."
+    },
+    "tamesis": {
+      "Mc_kg": 5.292674126388712e-16,
+      "M_over_Mc": 1.8894040632770233,
+      "intrinsic_rate_s-1": 1.6403692061364539,
+      "coherence_time_s": 0.6096188566934212,
+      "visibility_at_0p1s": 0.8487106863823988,
+      "visibility_at_1s": 0.19390843688831894
+    },
+    "channels": {
+      "magnetic_gradient": {
+        "name": "magnetic_gradient",
+        "tolerance": 1e-07,
+        "reference_visibility": 0.99,
+        "time_s": 0.1,
+        "scaling_exponent": 2.0,
+        "reference_rate_s-1": 0.1005033585350145
+      },
+      "initial_position": {
+        "name": "initial_position",
+        "tolerance": 1e-09,
+        "reference_visibility": 0.99,
+        "time_s": 0.1,
+        "scaling_exponent": 2.0,
+        "reference_rate_s-1": 0.1005033585350145
+      }
+    },
+    "scenarios": [
+      {
+        "label": "best_case",
+        "fraction_of_magnetic_tolerance": 0.1,
+        "fraction_of_position_tolerance": 0.1,
+        "magnetic_rate_s-1": 0.0010050335853501453,
+        "position_rate_s-1": 0.0010050335853501453,
+        "combined_noise_rate_s-1": 0.0020100671707002906,
+        "combined_visibility_at_target_time": 0.9997990134834266,
+        "combined_visibility_at_1s": 0.9979919516614258
+      },
+      {
+        "label": "at_tolerance",
+        "fraction_of_magnetic_tolerance": 1.0,
+        "fraction_of_position_tolerance": 1.0,
+        "magnetic_rate_s-1": 0.1005033585350145,
+        "position_rate_s-1": 0.1005033585350145,
+        "combined_noise_rate_s-1": 0.201006717070029,
+        "combined_visibility_at_target_time": 0.9801,
+        "combined_visibility_at_1s": 0.8179069375972308
+      },
+      {
+        "label": "ten_x_worse",
+        "fraction_of_magnetic_tolerance": 10.0,
+        "fraction_of_position_tolerance": 10.0,
+        "magnetic_rate_s-1": 10.050335853501451,
+        "position_rate_s-1": 10.050335853501451,
+        "combined_noise_rate_s-1": 20.100671707002903,
+        "combined_visibility_at_target_time": 0.1339796748579617,
+        "combined_visibility_at_1s": 1.863756602992229e-09
+      }
+    ],
+    "interpretation": [
+      "The reference visibility 0.99 at the extracted tolerance is a normalized budget anchor.",
+      "This does not replace a chip-specific simulation; it turns the paper's tolerances into a measurable first-pass nuisance scale.",
+      "If the real experiment operates around the tolerance boundary, the nuisance channels can easily compete with Tamesis at 0.1 s."
+    ]
+  },
+  "decision_rows": [
+    {
+      "scenario": "best_case",
+      "tamesis_visibility_at_0p1s": 0.8487106863823988,
+      "normalized_noise_visibility_at_0p1s": 0.9997990134834266,
+      "combined_visibility_at_0p1s": 0.8485401069779642,
+      "combined_visibility_at_1s": 0.19351905937378985,
+      "dominant_condition": "Tamesis"
+    },
+    {
+      "scenario": "at_tolerance",
+      "tamesis_visibility_at_0p1s": 0.8487106863823988,
+      "normalized_noise_visibility_at_0p1s": 0.9801,
+      "combined_visibility_at_0p1s": 0.831821343723389,
+      "combined_visibility_at_1s": 0.15859905578959083,
+      "dominant_condition": "Tamesis"
+    },
+    {
+      "scenario": "ten_x_worse",
+      "tamesis_visibility_at_0p1s": 0.8487106863823988,
+      "normalized_noise_visibility_at_0p1s": 0.1339796748579617,
+      "combined_visibility_at_0p1s": 0.11370998180999126,
+      "combined_visibility_at_1s": 3.6139812962650583e-10,
+      "dominant_condition": "suppressed"
+    }
+  ],
+  "summary": [
+    "At 1e-15 kg, Tamesis predicts a measurable intrinsic loss at 0.1 s.",
+    "Best-case normalized chip noise does not erase the effect.",
+    "At-tolerance chip noise competes but still leaves a visible Tamesis signature.",
+    "10x worse chip noise suppresses the signature and would make the experiment non-decisive.",
+    "Gas pressure above roughly 7e-13 Pa is already too noisy for a clean first-pass test.",
+    "This target is therefore Bohr-level candidate territory, but only under very strong control of chip noise and vacuum."
+  ]
+}

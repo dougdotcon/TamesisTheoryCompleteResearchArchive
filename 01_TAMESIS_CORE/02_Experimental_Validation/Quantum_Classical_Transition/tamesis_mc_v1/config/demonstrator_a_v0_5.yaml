@@ -1,0 +1,28 @@
+spec_version: "0.5"
+name: "Tamesis Demonstrator A — A0/A1 Hardware Readiness and Locked Calibration Package"
+status: "hardware_package_not_hardware_availability"
+demonstrator_a_v0_4_protocol_id: "tamesis-demonstrator-a-v0.4:98c3dcb444c73521220ed5896ad1c0bca6b4b58494e24640f34d6ab25d98c02f"
+master_seed: 20260726
+scope_allowed: [spectral_quality, thermal_response, stability, repeatability, cross_sensitivities, self_heating, GeV_stationary_thermometry, blind_temperature_reconstruction]
+scope_forbidden: [Tamesis, Mc, mu_T, coherence_loss, interferometry, quantum_classical_identifiability]
+materials: [GeV_nanodiamond, NV_nanodiamond, alternative_color_center_candidate]
+roles: [hardware_operator, data_custodian, calibration_analyst, blind_validation_analyst]
+datasets: [instrument_calibration, model_development, model_selection, locked_validation]
+allowed_material_outcomes: [material_candidate_selected, material_candidate_not_selected, material_candidate_inconclusive, calibration_run_invalid]
+selection_outcomes: [selected_for_A2, selected_for_additional_A1, not_selected, inconclusive]
+independence:
+  primary_channel: {method: GeV_optical_thermometry, independence: independent_from_interferometric_visibility}
+  secondary_stationary_channel:
+    method: [controlled_heat_pulse_calorimetry, traceable_stage_equilibrium_reference]
+    independence: independent_indirect
+    independence_valid_for: [A1, A2]
+    independence_not_established_for: [A3, A4]
+gev_models: [temperature_only_baseline, temperature_plus_power, temperature_plus_power_plus_strain, full_preregistered_model]
+heating_acceptance:
+  relative_fraction_of_step_max: 0.10
+  absolute_limit_k: null
+  absolute_limit_status: "must be derived from real A1 instrument uncertainty budget before acquisition lock"
+blind_policy: "setpoints, material labels when required, prior quality labels and manual decisions hidden from blind analyst"
+exclusion_policy: "telemetry/protocol rules only; preserve every excluded record and reason"
+missing_data_policy: "never impute hidden setpoint; classify insufficient validation as inconclusive"
+fixture_policy: "fixtures may exercise plumbing but cannot select material"

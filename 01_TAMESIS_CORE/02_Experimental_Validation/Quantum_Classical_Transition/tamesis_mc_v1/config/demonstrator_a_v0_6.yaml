@@ -1,0 +1,20 @@
+spec_version: "0.6"
+name: "Tamesis Demonstrator A — Physical A0/A1 Execution and Blind Thermometry Validation"
+status: "pre_acquisition_hardware_execution_protocol"
+demonstrator_a_v0_5_protocol_id: "tamesis-demonstrator-a-v0.5:060282b726f5b5331fece4bf5726b5fb960aa398871098607832dadff8868cbd"
+campaign_state: HARDWARE_QUALIFICATION_NOT_STARTED
+data_origin: null
+allowed_data_origins: [real_hardware, synthetic_fixture, hardware_emulator]
+instruments: []
+calibration_ids: []
+particle_candidates: []
+allowed_campaign_states: [HARDWARE_QUALIFICATION_NOT_STARTED, HARDWARE_QUALIFICATION_FAILED, HARDWARE_QUALIFICATION_PASSED, A0_COMPLETED_A1_BLOCKED, A0_COMPLETED, A1_DATA_ACQUIRED_PENDING_ANALYSIS, A1_PREDICTIONS_LOCKED_PENDING_REVEAL, A1_BLIND_VALIDATION_COMPLETED, A1_BLIND_VALIDATION_FAILED]
+allowed_candidate_decisions: [material_candidate_selected, material_candidate_not_selected, material_candidate_inconclusive, calibration_run_invalid]
+progression_states: [selected_for_A2, selected_for_additional_A1, not_selected, inconclusive]
+q0_required_instruments: [cryostat, primary_reference_thermometer, secondary_stage_thermometer, thermal_controller, optical_source, power_meter, wavelength_reference, spectrometer, detector, timed_acquisition, field_sensors, raw_storage, synchronization, particle_identification]
+traceability_states: [traceable, internally_calibrated, uncalibrated, calibration_expired, unknown]
+scope_forbidden: [Tamesis, mu_T, Mc_test, interferometric_visibility, levitated_thermometry_claim, A3_authorization, A4_authorization]
+real_data_gate: "only data_origin real_hardware with schema-valid records can produce physical decisions"
+fixture_result: material_candidate_inconclusive
+reveal_policy: "fail closed unless model and all predictions are frozen, hashes validate, leakage audit passes and every blind sample has a prediction"
+invalid_run_policy: "preserve raw records and issue calibration_run_invalid; never delete"

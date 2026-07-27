@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "EpistemicStatus": {
+      "enum": [
+        "metaphorical",
+        "conjectured",
+        "mathematically_specified",
+        "computationally_reproduced",
+        "phenomenologically_constrained",
+        "preregistered_test",
+        "observational_anomaly",
+        "transition_detected",
+        "independently_replicated",
+        "established_regime_boundary",
+        "falsified",
+        "superseded"
+      ],
+      "title": "EpistemicStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "protocol_id": {
+      "title": "Protocol Id",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "source_module": {
+      "title": "Source Module",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/EpistemicStatus"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "protocol_id",
+    "name",
+    "version",
+    "source_module",
+    "status",
+    "provenance"
+  ],
+  "title": "Protocol",
+  "type": "object"
+}

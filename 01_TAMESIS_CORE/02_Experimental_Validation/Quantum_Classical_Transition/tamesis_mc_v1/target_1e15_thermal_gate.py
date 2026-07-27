@@ -7,10 +7,14 @@ considerable or dominant decoherence channel above roughly 4 K.
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import json
 from pathlib import Path
 
 from analyze_target_1e15 import analyze
+from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -26,6 +30,7 @@ def run(output_path: Path | None = None) -> dict:
     ensure_workspace_dirs()
     output_path = output_path or data_path("target_1e15_thermal_gate.json")
     analysis = analyze(data_path("target_1e15_analysis.json"))
+    contract = McModel().contract
 
     temperatures = [0.1, 1.0, 4.0, 10.0, 20.0]
     rows = []
@@ -38,6 +43,8 @@ def run(output_path: Path | None = None) -> dict:
         )
 
     gate = {
+        "protocol_id": analysis["protocol_id"],
+        "config_hash": analysis["config_hash"],
         "target": analysis["target"],
         "blackbody_rule": {
             "source": "https://arxiv.org/pdf/2410.20910",
@@ -53,10 +60,23 @@ def run(output_path: Path | None = None) -> dict:
     }
 
     output_path.write_text(json.dumps(gate, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=contract,
+            script="target_1e15_thermal_gate.py",
+            inputs=[str(data_path("target_1e15_analysis.json"))],
+            arguments={},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return gate
 
 
 def main() -> None:
+    reject_runtime_overrides()
     data = run()
     print(json.dumps(data["temperature_rows"], indent=2))
 

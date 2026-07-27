@@ -14,6 +14,7 @@ This folder contains the complete research archive of the TAMESIS Theory program
 │
 ├── 01_Foundation/               # Phase 1: Initial Framework
 ├── 02_Experimental_Validation/  # Phase 2: Experimental Tests
+├── 03_TRANSITION_ATLAS/         # Formal registry of regimes and testable transitions
 ├── 03_Axiomatic_Closure/        # Phase 3: Axiomatic Reduction
 ├── 04_Spectral_Mathematics/     # Phase 4: RH Spectral Approach
 ├── 05_Computational_Extensions/ # Phase 5: Computational Theory
@@ -69,6 +70,10 @@ The foundational framework of the TAMESIS Theory, establishing the holographic g
 **Original**: `02_Research_Limits/`
 
 Experimental tests and phenomenological validations of the TAMESIS predictions.
+
+### Transition Atlas (`03_TRANSITION_ATLAS/`)
+
+The Atlas is a parallel formal layer, not a replacement for the experimental module. It records regimes, typed transitions, evidence, protocols, epistemic promotions and provenance. The Tamesis M_c v1.0 edge is imported read-only from the canonical contract and remains a `preregistered_test`; Hubble is separated into an `observational_anomaly` and a conjectured mechanism; bounce remains a theoretical candidate.
 
 ### Contents
 

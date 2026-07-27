@@ -1,0 +1,20 @@
+regime_id: gravitational_singular
+name: Regime gravitacional singular
+version: "0.1"
+description: Domínio em que a descrição clássica produz singularidade ou perde validade.
+state_space: "spacetime metric and matter configuration space"
+observable_algebra: "model-dependent field observables"
+dynamics: "classical field equations only within their validity domain"
+invariants: [covariance_when_model_applies]
+symmetries: [model_dependent]
+composition_rule: "field_matter_coupling"
+validity_domain:
+  variables:
+    curvature: {unit: m^-2, interval: {min: 0, max: null}}
+  restrictions: ["loss of classical validity is not itself a new regime law"]
+control_parameters: [curvature, density, scale_factor]
+limiting_cases: [regular_classical_spacetime]
+relations_to_other_regimes: [bounce_candidate]
+epistemic_status: mathematically_specified
+references: [{id: general_relativity, type: primary, citation: "classical gravitational field equations"}]
+provenance: {source_type: hypothesis_registry, source: internal_atlas_v0_1}

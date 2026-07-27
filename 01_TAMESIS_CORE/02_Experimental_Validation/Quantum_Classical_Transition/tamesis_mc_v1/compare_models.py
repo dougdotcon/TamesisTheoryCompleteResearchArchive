@@ -16,10 +16,13 @@ from math import exp, log
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
+from config import reject_runtime_overrides
+
 try:
     from .mc_model import McModel
 except ImportError:
     from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -166,6 +169,7 @@ def run_comparison(dataset_path: Optional[Path] = None, output_path: Optional[Pa
 
     records = load_records(dataset_path)
     mc = McModel()
+    summary = mc.summary()
 
     fixed_models = ["Tamesis", "CSL", "GRW", "DP"]
     scores = [score_fixed_model(name, records, mc) for name in fixed_models]
@@ -177,6 +181,7 @@ def run_comparison(dataset_path: Optional[Path] = None, output_path: Optional[Pa
     per_record = []
     for rec in records:
         row = asdict(rec)
+        row["protocol_id"] = summary["protocol_id"]
         row["M_over_Mc"] = rec.mass_kg / mc.mc
         row["predictions"] = {name: predict_coherence_probability(name, rec, mc) for name in fixed_models}
         row["predictions"]["Environment"] = exp(-fitted_rates[rec.family] * rec.observation_time_s)
@@ -192,7 +197,9 @@ def run_comparison(dataset_path: Optional[Path] = None, output_path: Optional[Pa
     }
 
     report = {
-        "dataset": str(dataset_path),
+        "dataset": dataset_path.name,
+        "protocol_id": summary["protocol_id"],
+        "config_hash": summary["config_hash"],
         "n_observed_records": len(records),
         "diagnostics": diagnostics,
         "records": per_record,
@@ -208,10 +215,23 @@ def run_comparison(dataset_path: Optional[Path] = None, output_path: Optional[Pa
     }
 
     output_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=mc.contract,
+            script="compare_models.py",
+            inputs=[str(dataset_path)],
+            arguments={"fixed_models": fixed_models},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return report
 
 
 def main() -> None:
+    reject_runtime_overrides()
     report = run_comparison()
     print(
         json.dumps(

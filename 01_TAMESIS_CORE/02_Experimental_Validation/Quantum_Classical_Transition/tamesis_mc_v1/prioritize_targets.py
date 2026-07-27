@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import csv
 import json
 from pathlib import Path
@@ -11,6 +13,7 @@ try:
     from .mc_model import McModel
 except ImportError:
     from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -45,6 +48,7 @@ def prioritize(dataset_path: Path | None = None, output_path: Path | None = None
     dataset_path = dataset_path or data_path("literature_points.csv")
     output_path = output_path or data_path("target_priority_report.json")
     mc = McModel()
+    summary = mc.summary()
 
     rows = load_rows(dataset_path)
     enriched = []
@@ -66,7 +70,9 @@ def prioritize(dataset_path: Path | None = None, output_path: Path | None = None
     decisive_sorted = sorted(planned, key=lambda r: float(r["decisiveness_score"]), reverse=True)
 
     report = {
-        "dataset": str(dataset_path),
+        "dataset": dataset_path.name,
+        "protocol_id": summary["protocol_id"],
+        "config_hash": summary["config_hash"],
         "Mc_kg": mc.mc,
         "Mc_amu": mc.mc / 1.66053906660e-27,
         "top_threshold_targets": threshold_sorted[:10],
@@ -78,10 +84,23 @@ def prioritize(dataset_path: Path | None = None, output_path: Path | None = None
         ],
     }
     output_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=mc.contract,
+            script="prioritize_targets.py",
+            inputs=[str(dataset_path)],
+            arguments={},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return report
 
 
 def main() -> None:
+    reject_runtime_overrides()
     report = prioritize()
     print(json.dumps({
         "Mc_kg": report["Mc_kg"],

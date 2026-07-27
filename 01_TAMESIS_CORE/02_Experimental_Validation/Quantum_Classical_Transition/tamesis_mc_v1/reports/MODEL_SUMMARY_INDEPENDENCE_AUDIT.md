@@ -1,0 +1,3 @@
+# Model summary independence audit
+
+Comando: `python audit_model_summary_independence.py`. Variantes `absent`, `incorrect_Mc`, `incorrect_tau_c` e `malformed` obtiveram exit code 0 para `plot_literature`, `plot_target_1e15`, `plot_thermal_gate`, `plot_bohr_window_map` e `make_threshold_animation`; esses caminhos usam `CONTRACT`. O `plot_predictions` foi testado separadamente: com summary ausente, `require_current_artifact` rejeita `predictions.csv` por cadeia de input quebrada (exit 1), sem fallback estrutural. Portanto o resumo não é fonte estrutural, mas é input derivado obrigatório da tabela de predictions.

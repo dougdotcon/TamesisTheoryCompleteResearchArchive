@@ -8,6 +8,10 @@
 
 ## Executive Summary
 
+### Transition Atlas v0.1
+
+An auditable Transition Atlas was added as a parallel layer at `03_TRANSITION_ATLAS/`. It is a formal registry of regimes, typed transition hypotheses, evidence and protocols. It does not promote conjectures to discoveries. The Tamesis M_c edge imports the frozen protocol/hash read-only and remains a preregistered candidate; the Hubble anomaly and holographic-bounce hypothesis remain separately classified.
+
 | Phase | Projects | Success | Partial | Failed | Inconclusive |
 |:------|:--------:|:-------:|:-------:|:------:|:------------:|
 | 01_Foundation | 17 | **14** | 1 | 0 | 2 |

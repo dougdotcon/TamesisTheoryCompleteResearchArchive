@@ -11,12 +11,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
+from config import load_v1_contract, reject_runtime_overrides
+from provenance import provenance_record, require_current_artifact, write_sidecar
+
 
 BASE = Path(__file__).resolve().parent
 REPO_ROOT = BASE.parents[3]
 DATA = BASE / "data"
 REPORT_FIGURES = BASE / "reports" / "figures"
 ROOT_OUTPUTS = REPO_ROOT / "02_TAMESIS_MC_V1_OUTPUTS"
+CONTRACT = load_v1_contract()
 
 for folder in (REPORT_FIGURES, ROOT_OUTPUTS / "figures", ROOT_OUTPUTS / "animations"):
     folder.mkdir(parents=True, exist_ok=True)
@@ -25,18 +29,34 @@ sns.set_theme(style="whitegrid", context="talk")
 
 
 def load_json(name: str) -> dict:
-    return json.loads((DATA / name).read_text(encoding="utf-8"))
+    path = DATA / name
+    require_current_artifact(path, CONTRACT)
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def read_csv(name: str) -> list[dict]:
-    with (DATA / name).open("r", encoding="utf-8", newline="") as f:
+    path = DATA / name
+    if name != "literature_points.csv":
+        require_current_artifact(path, CONTRACT)
+    with path.open("r", encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
 
 
-def savefig(fig: plt.Figure, name: str) -> Path:
+def savefig(fig: plt.Figure, name: str, inputs: list[Path]) -> Path:
     out = REPORT_FIGURES / name
     fig.savefig(out, dpi=220, bbox_inches="tight")
     shutil.copy2(out, ROOT_OUTPUTS / "figures" / name)
+    prov = provenance_record(
+        output_path=out,
+        contract=CONTRACT,
+        script="generate_figures.py",
+        inputs=[str(path) for path in inputs],
+        arguments={"figure": name},
+        status="illustrative_only",
+        epistemic_status="illustrative_only",
+    )
+    write_sidecar(out, prov)
+    write_sidecar(ROOT_OUTPUTS / "figures" / name, prov)
     plt.close(fig)
     return out
 
@@ -46,7 +66,7 @@ def copy_animation(path: Path) -> None:
 
 
 def tamesis_rate(mass_ratio: np.ndarray, tau_c: float) -> np.ndarray:
-    return np.where(mass_ratio <= 1.0, 0.0, ((mass_ratio - 1.0) ** 2) / tau_c)
+    return np.where(mass_ratio <= 1.0, 0.0, (mass_ratio**CONTRACT.exponent) / tau_c)
 
 
 def plot_predictions() -> None:
@@ -72,12 +92,12 @@ def plot_predictions() -> None:
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax1.legend(lines + lines2, labels + labels2, loc="center right")
     fig.suptitle(r"Tamesis $M_c$ v1 — threshold prediction")
-    savefig(fig, "01_predictions.png")
+    savefig(fig, "01_predictions.png", [DATA / "predictions.csv"])
 
 
 def plot_literature() -> None:
     rows = read_csv("literature_points.csv")
-    mc = load_json("model_summary.json")["Mc_kg"]
+    mc = CONTRACT.mc_kg
 
     ratios = []
     coherences = []
@@ -111,7 +131,7 @@ def plot_literature() -> None:
     ax.set_ylabel("observed coherence")
     ax.set_title("Known and planned matter-wave points relative to M_c")
     ax.legend(loc="center right")
-    savefig(fig, "02_literature_points.png")
+    savefig(fig, "02_literature_points.png", [DATA / "literature_points.csv"])
 
 
 def plot_target_1e15() -> None:
@@ -135,7 +155,7 @@ def plot_target_1e15() -> None:
     ax.set_ylabel("visibility at 0.1 s")
     ax.set_title("1e-15 kg target — visibility budget")
     ax.legend()
-    savefig(fig, "03_target_1e15_visibility.png")
+    savefig(fig, "03_target_1e15_visibility.png", [DATA / "target_1e15_decision.json"])
 
 
 def plot_thermal_gate() -> None:
@@ -157,14 +177,13 @@ def plot_thermal_gate() -> None:
     ax.set_yticks([])
     ax.set_xlabel("temperature (K)")
     ax.set_title("Thermal gate for the 1e-15 kg candidate")
-    savefig(fig, "04_thermal_gate.png")
+    savefig(fig, "04_thermal_gate.png", [DATA / "target_1e15_thermal_gate.json"])
 
 
 def plot_bohr_window_map() -> None:
-    summary = load_json("model_summary.json")
     analysis = load_json("target_1e15_analysis.json")
-    mc = summary["Mc_kg"]
-    tau_c = summary["tau_c_s"]
+    mc = CONTRACT.mc_kg
+    tau_c = CONTRACT.tau_c_s
     gas_equal = analysis["pressure_requirements"]["gas_pressure_for_environment_equal_tamesis_rate_pa"]
 
     masses = np.logspace(-18, -14, 180)
@@ -187,13 +206,12 @@ def plot_bohr_window_map() -> None:
     ax.set_title("Bohr-window map: intrinsic visibility loss")
     fig.colorbar(im, ax=ax, label="1 - visibility")
     ax.legend(loc="upper left")
-    savefig(fig, "05_bohr_window_map.png")
+    savefig(fig, "05_bohr_window_map.png", [DATA / "target_1e15_analysis.json"])
 
 
 def make_threshold_animation() -> None:
-    summary = load_json("model_summary.json")
-    mc = summary["Mc_kg"]
-    tau_c = summary["tau_c_s"]
+    mc = CONTRACT.mc_kg
+    tau_c = CONTRACT.tau_c_s
     ratios = np.logspace(-1, 1.2, 500)
     rates = tamesis_rate(ratios, tau_c)
 
@@ -221,13 +239,23 @@ def make_threshold_animation() -> None:
     gif = REPORT_FIGURES / "threshold_activation_loop.gif"
     imageio.mimsave(gif, frames, duration=0.055, loop=0)
     copy_animation(gif)
+    prov = provenance_record(
+        output_path=gif,
+        contract=CONTRACT,
+        script="generate_figures.py",
+        inputs=[],
+        arguments={"animation": "threshold_activation_loop"},
+        status="illustrative_only",
+        epistemic_status="illustrative_only",
+    )
+    write_sidecar(gif, prov)
+    write_sidecar(ROOT_OUTPUTS / "animations" / gif.name, prov)
     (ROOT_OUTPUTS / "animations" / "_frame_threshold.png").unlink(missing_ok=True)
 
 
 def make_bohr_window_animation() -> None:
-    summary = load_json("model_summary.json")
-    mc = summary["Mc_kg"]
-    tau_c = summary["tau_c_s"]
+    mc = CONTRACT.mc_kg
+    tau_c = CONTRACT.tau_c_s
     masses = np.logspace(-18, -14, 140)
     times = np.logspace(-3, 1, 140)
     M, T = np.meshgrid(masses, times)
@@ -257,6 +285,17 @@ def make_bohr_window_animation() -> None:
     gif = REPORT_FIGURES / "bohr_window_loop.gif"
     imageio.mimsave(gif, frames, duration=0.07, loop=0)
     copy_animation(gif)
+    prov = provenance_record(
+        output_path=gif,
+        contract=CONTRACT,
+        script="generate_figures.py",
+        inputs=[],
+        arguments={"animation": "bohr_window_loop"},
+        status="illustrative_only",
+        epistemic_status="illustrative_only",
+    )
+    write_sidecar(gif, prov)
+    write_sidecar(ROOT_OUTPUTS / "animations" / gif.name, prov)
     (ROOT_OUTPUTS / "animations" / "_frame_window.png").unlink(missing_ok=True)
 
 
@@ -288,6 +327,7 @@ These files are mirrored here so the results are visible from the repository roo
 
 
 def main() -> None:
+    reject_runtime_overrides()
     plot_predictions()
     plot_literature()
     plot_target_1e15()

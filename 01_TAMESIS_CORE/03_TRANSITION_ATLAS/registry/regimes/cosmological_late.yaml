@@ -1,0 +1,20 @@
+regime_id: cosmological_late
+name: Cosmologia tardia
+version: "0.1"
+description: Domínio tardio de um modelo cosmológico especificado; não é automaticamente uma topologia física distinta.
+state_space: "model-dependent cosmological state space"
+observable_algebra: "model-dependent"
+dynamics: "must be supplied by a specified cosmological model"
+invariants: [model_dependent]
+symmetries: [homogeneity_isotropy_only_when_assumed]
+composition_rule: "field_or_fluid_composition_is_model_dependent"
+validity_domain:
+  variables:
+    time: {unit: s, interval: {min: 0, max: null}}
+  restrictions: ["H0 values are dataset/model dependent"]
+control_parameters: [scale_factor, energy_density, equation_of_state]
+limiting_cases: [unspecified]
+relations_to_other_regimes: [cosmological_initial]
+epistemic_status: conjectured
+references: [{id: hubble_anomaly_sources, type: observational, citation: "dataset-specific H0 inference"}]
+provenance: {source_type: hypothesis_registry, source: internal_atlas_v0_1}

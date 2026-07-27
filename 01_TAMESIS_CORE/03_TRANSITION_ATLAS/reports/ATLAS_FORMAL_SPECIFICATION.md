@@ -1,0 +1,3 @@
+# Atlas de Transições v0.1 — especificação formal
+
+`A=(R,T,E,P)` é um multigrafo direcionado, tipado e atributado. Regimes possuem espaço de estados, álgebra de observáveis, dinâmica, invariantes, domínio e composição. Transições possuem espaço de controle, superfície crítica, mapa, gerador, parâmetro de ordem, observáveis, falsificação e estado da evidência. O peso é um vetor com completude matemática, reprodutibilidade computacional, suporte observacional, discriminação experimental, viabilidade técnica, replicação independente e incerteza; não há escalar único. Schemas são derivados de `src/transition_atlas/models.py`; extras são proibidos e quantidades físicas exigem unidade.

@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import json
 from pathlib import Path
 
 from analyze_target_1e15 import analyze
+from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -13,8 +17,11 @@ def run(output_path: Path | None = None) -> dict:
     ensure_workspace_dirs()
     output_path = output_path or data_path("target_1e15_sensitivity.json")
     analysis = analyze(data_path("target_1e15_analysis.json"))
+    contract = McModel().contract
 
     sensitivity = {
+        "protocol_id": analysis["protocol_id"],
+        "config_hash": analysis["config_hash"],
         "target_mass_kg": analysis["target"]["mass_kg"],
         "target_superposition_m": analysis["target"]["separation_m"],
         "target_time_s": analysis["target"]["observation_time_s"],
@@ -41,10 +48,23 @@ def run(output_path: Path | None = None) -> dict:
     }
 
     output_path.write_text(json.dumps(sensitivity, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=contract,
+            script="target_1e15_sensitivity.py",
+            inputs=[str(data_path("target_1e15_analysis.json"))],
+            arguments={},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return sensitivity
 
 
 def main() -> None:
+    reject_runtime_overrides()
     data = run()
     print(json.dumps({
         "tamesis_visibility_0p1s": data["tamesis_visibility_0p1s"],

@@ -6,12 +6,16 @@ budget. This is a triage layer, not a final chip-specific decoherence theory.
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import json
 from dataclasses import dataclass, asdict
 from math import exp, log
 from pathlib import Path
 
 from analyze_target_1e15 import analyze
+from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -39,6 +43,7 @@ def run(output_path: Path | None = None) -> dict:
     ensure_workspace_dirs()
     output_path = output_path or data_path("target_1e15_noise_budget.json")
     analysis = analyze(data_path("target_1e15_analysis.json"))
+    contract = McModel().contract
 
     target_time = analysis["target"]["observation_time_s"]
 
@@ -78,6 +83,8 @@ def run(output_path: Path | None = None) -> dict:
         )
 
     budget = {
+        "protocol_id": analysis["protocol_id"],
+        "config_hash": analysis["config_hash"],
         "target": analysis["target"],
         "tamesis": analysis["tamesis"],
         "channels": {
@@ -93,10 +100,23 @@ def run(output_path: Path | None = None) -> dict:
     }
 
     output_path.write_text(json.dumps(budget, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=contract,
+            script="target_1e15_noise_budget.py",
+            inputs=[str(data_path("target_1e15_analysis.json"))],
+            arguments={},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return budget
 
 
 def main() -> None:
+    reject_runtime_overrides()
     data = run()
     print(json.dumps({
         "reference_rate_magnetic_s-1": data["channels"]["magnetic_gradient"]["reference_rate_s-1"],

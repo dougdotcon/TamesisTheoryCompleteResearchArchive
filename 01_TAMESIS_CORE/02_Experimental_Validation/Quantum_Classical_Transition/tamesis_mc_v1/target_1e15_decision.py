@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import json
 from math import exp
 from pathlib import Path
 
 from analyze_target_1e15 import analyze
 from target_1e15_noise_budget import run as run_noise_budget
+from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -17,6 +21,7 @@ def decide(output_path: Path | None = None) -> dict:
 
     analysis = analyze(data_path("target_1e15_analysis.json"))
     noise = run_noise_budget(data_path("target_1e15_noise_budget.json"))
+    contract = McModel().contract
 
     tamesis_visibility = analysis["tamesis"]["visibility_at_0p1s"]
     tamesis_rate = analysis["tamesis"]["intrinsic_rate_s-1"]
@@ -39,6 +44,8 @@ def decide(output_path: Path | None = None) -> dict:
         )
 
     verdict = {
+        "protocol_id": analysis["protocol_id"],
+        "config_hash": analysis["config_hash"],
         "target": analysis["target"],
         "tamesis": analysis["tamesis"],
         "gas_environment": gas_scenarios,
@@ -55,10 +62,23 @@ def decide(output_path: Path | None = None) -> dict:
     }
 
     output_path.write_text(json.dumps(verdict, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=contract,
+            script="target_1e15_decision.py",
+            inputs=[str(data_path("target_1e15_analysis.json")), str(data_path("target_1e15_noise_budget.json"))],
+            arguments={},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return verdict
 
 
 def main() -> None:
+    reject_runtime_overrides()
     data = decide()
     print(json.dumps(
         {

@@ -1,0 +1,48 @@
+{
+  "cases": [
+    {
+      "case": "configuration_missing",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe validate_contract.py",
+      "exit_code": 1,
+      "stderr": "ract.py\", line 25, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\missing\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 9, in main\n    contract = load_v1_contract()\n  File \"C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\missing\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config.py\", line 240, in load_v1_contract\n    raise ContractError(f\"missing configuration file: {path}\")\nconfig.ContractError: missing configuration file: C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\missing\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config\\tamesis_mc_v1.yaml\n",
+      "stdout": ""
+    },
+    {
+      "case": "configuration_invalid",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe validate_contract.py",
+      "exit_code": 1,
+      "stderr": "-aex3h76a\\invalid\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 9, in main\n    contract = load_v1_contract()\n  File \"C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\invalid\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config.py\", line 243, in load_v1_contract\n    _validate_contract(contract)\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\invalid\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config.py\", line 219, in _validate_contract\n    raise ContractError(\"configuration hash does not match lock file\")\nconfig.ContractError: configuration hash does not match lock file\n",
+      "stdout": ""
+    },
+    {
+      "case": "cli_override",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe validate_contract.py --M_c 1e-15",
+      "exit_code": 1,
+      "stderr": ":\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 25, in <module>\n    main()\n    ~~~~^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 8, in main\n    reject_runtime_overrides()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config.py\", line 164, in reject_runtime_overrides\n    raise ContractError(f\"v1.0 entry points accept no CLI arguments or overrides: {argv!r}\")\nconfig.ContractError: v1.0 entry points accept no CLI arguments or overrides: ['--M_c', '1e-15']\n",
+      "stdout": ""
+    },
+    {
+      "case": "environment_override",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe validate_contract.py",
+      "exit_code": 1,
+      "stderr": "ile \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 25, in <module>\n    main()\n    ~~~~^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\validate_contract.py\", line 8, in main\n    reject_runtime_overrides()\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\config.py\", line 167, in reject_runtime_overrides\n    raise ContractError(f\"v1.0 structural environment overrides are forbidden: {present}\")\nconfig.ContractError: v1.0 structural environment overrides are forbidden: ['TAMESIS_MC_KG']\n",
+      "stdout": ""
+    },
+    {
+      "case": "sidecar_missing",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe -c \"from pathlib import Path; from config import load_v1_contract; from provenance import require_current_artifact; require_current_artifact(Path(r'C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\sidecar\\artifact.json'), load_v1_contract())\"",
+      "exit_code": 1,
+      "stderr": "rtifact(Path(r'C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\sidecar\\artifact.json'), load_v1_contract())\n                                                                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\provenance.py\", line 107, in require_current_artifact\n    raise RuntimeError(f\"missing provenance sidecar for required input: {path}\")\nRuntimeError: missing provenance sidecar for required input: C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\sidecar\\artifact.json\n",
+      "stdout": ""
+    },
+    {
+      "case": "manifest_stale",
+      "command": "C:\\Users\\CLIENTE\\scoop\\apps\\python\\current\\python.exe -c \"from pathlib import Path; from verify_artifacts import verify_manifest; verify_manifest(Path(r'C:\\Users\\CLIENTE\\AppData\\Local\\Temp\\tamesis-fail-closed-aex3h76a\\stale_manifest.json'))\"",
+      "exit_code": 1,
+      "stderr": "                              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\TamesisTheoryCompleteResearchArchive\\01_TAMESIS_CORE\\02_Experimental_Validation\\Quantum_Classical_Transition\\tamesis_mc_v1\\verify_artifacts.py\", line 58, in verify_manifest\n    raise ArtifactVerificationError(\"artifact verification failed:\\n- \" + \"\\n- \".join(errors))\nverify_artifacts.ArtifactVerificationError: artifact verification failed:\n- manifest contract identity mismatch\n- unlisted artifact: audit_fail_closed.py\n- unlisted artifact: audit_model_summary_independence.py\n- unlisted artifact: clean_reproduce.py\n- unlisted artifact: data/clean_reproducibility_evidence.json\n- unlisted artifact: data/model_summary_independence_evidence.json\n",
+      "stdout": ""
+    }
+  ],
+  "config_hash": "d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e",
+  "protocol_id": "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+}

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from config import reject_runtime_overrides
+
 import json
 from pathlib import Path
 from math import exp
@@ -14,6 +16,7 @@ except ImportError:
     from compare_models import ExperimentRecord, predict_coherence_probability
     from environment_model import Environment, pressure_for_rate
     from mc_model import McModel
+from provenance import provenance_record, write_sidecar
 from workspace_paths import data_path, ensure_workspace_dirs
 
 
@@ -22,6 +25,7 @@ def analyze(output_path: Path | None = None) -> dict:
     output_path = output_path or data_path("target_1e15_analysis.json")
 
     mc = McModel()
+    summary = mc.summary()
     mass = 1e-15
     separation = 50e-6
     time_s = 0.1
@@ -55,6 +59,8 @@ def analyze(output_path: Path | None = None) -> dict:
             "source_basis": "arXiv abstract: 1e-15 kg, 50 micrometers, 0.1 seconds.",
         },
         "tamesis": {
+            "protocol_id": summary["protocol_id"],
+            "config_hash": summary["config_hash"],
             "Mc_kg": mc.mc,
             "M_over_Mc": mass / mc.mc,
             "intrinsic_rate_s-1": intrinsic_rate,
@@ -100,11 +106,26 @@ def analyze(output_path: Path | None = None) -> dict:
         "The dominant missing terms are magnetic/current noise and full blackbody decoherence from the actual chip geometry.",
     ]
 
+    result["protocol_id"] = summary["protocol_id"]
+    result["config_hash"] = summary["config_hash"]
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    write_sidecar(
+        output_path,
+        provenance_record(
+            output_path=output_path,
+            contract=mc.contract,
+            script="analyze_target_1e15.py",
+            inputs=[],
+            arguments={"mass": mass, "separation": separation, "time_s": time_s},
+            status="derived_result",
+            epistemic_status="derived_result",
+        ),
+    )
     return result
 
 
 def main() -> None:
+    reject_runtime_overrides()
     result = analyze()
     print(json.dumps({
         "M_over_Mc": result["tamesis"]["M_over_Mc"],

@@ -1,0 +1,20 @@
+regime_id: cosmological_initial
+name: Cosmologia inicial
+version: "0.1"
+description: Domínio inicial definido somente pelo modelo cosmológico declarado em cada análise.
+state_space: "model-dependent cosmological state space"
+observable_algebra: "model-dependent"
+dynamics: "must be supplied by a specified cosmological model"
+invariants: [model_dependent]
+symmetries: [homogeneity_isotropy_only_when_assumed]
+composition_rule: "field_or_fluid_composition_is_model_dependent"
+validity_domain:
+  variables:
+    time: {unit: s, interval: {min: 0, max: null}}
+  restrictions: ["no universal early-to-late transition asserted"]
+control_parameters: [scale_factor, energy_density, equation_of_state]
+limiting_cases: [unspecified]
+relations_to_other_regimes: [cosmological_late, gravitational_singular]
+epistemic_status: conjectured
+references: [{id: cosmology_model_required, type: methodological, citation: "model specification required"}]
+provenance: {source_type: hypothesis_registry, source: internal_atlas_v0_1}

@@ -1,0 +1,239 @@
+{
+  "$defs": {
+    "Constants": {
+      "additionalProperties": false,
+      "properties": {
+        "G": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "H0": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "c": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "hbar": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "silica_density": {
+          "$ref": "#/$defs/QuantitySpec"
+        }
+      },
+      "required": [
+        "G",
+        "hbar",
+        "c",
+        "H0",
+        "silica_density"
+      ],
+      "title": "Constants",
+      "type": "object"
+    },
+    "DerivedQuantities": {
+      "additionalProperties": false,
+      "properties": {
+        "Mc_amu": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "Mc_kg": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "radius_m": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "threshold_rate_s-1": {
+          "$ref": "#/$defs/QuantitySpec"
+        }
+      },
+      "required": [
+        "Mc_kg",
+        "Mc_amu",
+        "radius_m",
+        "threshold_rate_s-1"
+      ],
+      "title": "DerivedQuantities",
+      "type": "object"
+    },
+    "Epistemology": {
+      "additionalProperties": false,
+      "properties": {
+        "rank_status": {
+          "title": "Rank Status",
+          "type": "string"
+        },
+        "source_of_truth_note": {
+          "title": "Source Of Truth Note",
+          "type": "string"
+        },
+        "target_1e15_status": {
+          "title": "Target 1E15 Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_of_truth_note",
+        "rank_status",
+        "target_1e15_status"
+      ],
+      "title": "Epistemology",
+      "type": "object"
+    },
+    "QuantitySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "title": "Classification",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "si_unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Si Unit"
+        },
+        "si_value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Si Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "classification"
+      ],
+      "title": "QuantitySpec",
+      "type": "object"
+    },
+    "StructuralParameters": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "exponent": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "phase_space_root": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "separation_dependence": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "sharp_threshold": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "tau_c": {
+          "$ref": "#/$defs/QuantitySpec"
+        },
+        "transition_width": {
+          "$ref": "#/$defs/QuantitySpec"
+        }
+      },
+      "required": [
+        "phase_space_root",
+        "exponent",
+        "alpha",
+        "tau_c",
+        "transition_width",
+        "sharp_threshold",
+        "separation_dependence"
+      ],
+      "title": "StructuralParameters",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "constants": {
+      "$ref": "#/$defs/Constants"
+    },
+    "derived_quantities": {
+      "$ref": "#/$defs/DerivedQuantities"
+    },
+    "epistemology": {
+      "$ref": "#/$defs/Epistemology"
+    },
+    "equations": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Equations",
+      "type": "object"
+    },
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "protocol_namespace": {
+      "title": "Protocol Namespace",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "structural_parameters": {
+      "$ref": "#/$defs/StructuralParameters"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "name",
+    "status",
+    "frozen_at",
+    "protocol_namespace",
+    "constants",
+    "structural_parameters",
+    "derived_quantities",
+    "equations",
+    "epistemology"
+  ],
+  "title": "V1Contract",
+  "type": "object"
+}

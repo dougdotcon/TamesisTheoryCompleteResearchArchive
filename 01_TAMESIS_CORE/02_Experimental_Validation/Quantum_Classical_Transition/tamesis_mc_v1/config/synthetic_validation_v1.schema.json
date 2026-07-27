@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic_protocol_version", "tamesis_protocol_id", "tamesis_contract_hash", "master_seed", "replicas", "families", "experimental_grid", "nuisance_parameters", "metrics", "success_criteria", "failure_criteria", "models", "outputs", "reproducibility"],
+  "properties": {
+    "synthetic_protocol_version": {"const": "1.0"},
+    "tamesis_protocol_id": {"type": "string"},
+    "tamesis_contract_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "master_seed": {"type": "integer"},
+    "replicas": {"type": "object", "required": ["quick", "standard", "high_precision"]},
+    "families": {"type": "object"},
+    "experimental_grid": {"type": "object"},
+    "nuisance_parameters": {"type": "object"},
+    "metrics": {"type": "object"},
+    "success_criteria": {"type": "object"},
+    "failure_criteria": {"type": "array"},
+    "models": {"type": "object"},
+    "outputs": {"type": "object"},
+    "reproducibility": {"type": "object"}
+  }
+}

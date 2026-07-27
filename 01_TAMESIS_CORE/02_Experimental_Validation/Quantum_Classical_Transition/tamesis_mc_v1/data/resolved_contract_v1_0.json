@@ -1,0 +1,240 @@
+{
+  "config_hash": "d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e",
+  "declared_dependencies": {
+    "Mc": [
+      "G",
+      "hbar",
+      "c",
+      "H0",
+      "phase_space_root"
+    ],
+    "gamma_T": [
+      "Mc",
+      "tau_c",
+      "exponent",
+      "sharp_threshold"
+    ],
+    "tau_c": [
+      "G",
+      "hbar",
+      "silica_density",
+      "Mc"
+    ],
+    "visibility": [
+      "gamma_T",
+      "Gamma_env",
+      "time"
+    ]
+  },
+  "epistemic_classifications": {
+    "constants": {
+      "G": "fixed_convention",
+      "H0": "measured_input",
+      "c": "fixed_convention",
+      "hbar": "fixed_convention",
+      "silica_density": "modelling_assumption"
+    },
+    "derived_quantities": {
+      "Mc_amu": "derived",
+      "Mc_kg": "derived",
+      "radius_m": "derived",
+      "threshold_rate_s_1": "derived"
+    },
+    "project": {
+      "rank_status": "legacy_exploratory_ranking",
+      "source_of_truth_note": "The YAML is the canonical audit configuration for v1.0; the Python implementation is the executable copy.",
+      "target_1e15_status": "hypothetical_ideal_target_until_platform_support_is_explicit"
+    },
+    "structural_parameters": {
+      "alpha": "absent_in_v1_0",
+      "exponent": "modelling_assumption",
+      "phase_space_root": "modelling_assumption",
+      "separation_dependence": "fixed_convention",
+      "sharp_threshold": "modelling_assumption",
+      "tau_c": "derived",
+      "transition_width": "absent_in_v1_0"
+    }
+  },
+  "name": "Tamesis M_c v1",
+  "normalized_contract": {
+    "constants": {
+      "G": {
+        "classification": "fixed_convention",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "m^3 kg^-1 s^-2",
+        "value": 6.6743e-11
+      },
+      "H0": {
+        "classification": "measured_input",
+        "note": null,
+        "si_unit": "s^-1",
+        "si_value": 2.268545502662652e-18,
+        "unit": "km s^-1 Mpc^-1",
+        "value": 70.0
+      },
+      "c": {
+        "classification": "fixed_convention",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "m s^-1",
+        "value": 299792458.0
+      },
+      "hbar": {
+        "classification": "fixed_convention",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "J s",
+        "value": 1.054571817e-34
+      },
+      "silica_density": {
+        "classification": "modelling_assumption",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "kg m^-3",
+        "value": 2200.0
+      }
+    },
+    "derived_quantities": {
+      "Mc_amu": {
+        "classification": "derived",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "amu",
+        "value": 318732285969.37555
+      },
+      "Mc_kg": {
+        "classification": "derived",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "kg",
+        "value": 5.292674126388712e-16
+      },
+      "radius_m": {
+        "classification": "derived",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "m",
+        "value": 3.858228590636517e-07
+      },
+      "threshold_rate_s-1": {
+        "classification": "derived",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": "s^-1",
+        "value": 0.45950677379115273
+      }
+    },
+    "epistemology": {
+      "rank_status": "legacy_exploratory_ranking",
+      "source_of_truth_note": "The YAML is the canonical audit configuration for v1.0; the Python implementation is the executable copy.",
+      "target_1e15_status": "hypothetical_ideal_target_until_platform_support_is_explicit"
+    },
+    "equations": {
+      "Mc": "m_P * (a0 / aP)^(1/8)",
+      "a0": "c * H0",
+      "aP": "c^2 / l_P",
+      "gamma_T": "0 for M <= M_c; tau_c^-1 * (M/M_c)^2 for M > M_c",
+      "tau_c": "hbar * R / (G * M_c^2)",
+      "visibility": "exp(-(Gamma_T + Gamma_env) * t)"
+    },
+    "frozen_at": "2026-07-26",
+    "name": "Tamesis M_c v1",
+    "protocol_namespace": "tamesis-mc-v1.0",
+    "status": "phenomenological_and_auditable",
+    "structural_parameters": {
+      "alpha": {
+        "classification": "absent_in_v1_0",
+        "note": "Not defined in v1.0.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": null
+      },
+      "exponent": {
+        "classification": "modelling_assumption",
+        "note": "Quadratic above-threshold growth is a v1.0 hypothesis.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": 2.0
+      },
+      "phase_space_root": {
+        "classification": "modelling_assumption",
+        "note": "Root-eighth is a v1.0 hypothesis, not a derived theorem.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": 8
+      },
+      "separation_dependence": {
+        "classification": "fixed_convention",
+        "note": null,
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": "absent_in_v1_0"
+      },
+      "sharp_threshold": {
+        "classification": "modelling_assumption",
+        "note": "Gamma_T is exactly zero for M <= M_c in v1.0.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": true
+      },
+      "tau_c": {
+        "classification": "derived",
+        "note": "Frozen by the current v1.0 contract.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": "s",
+        "value": 2.176246482178091
+      },
+      "transition_width": {
+        "classification": "absent_in_v1_0",
+        "note": "Not defined in v1.0.",
+        "si_unit": null,
+        "si_value": null,
+        "unit": null,
+        "value": null
+      }
+    },
+    "version": "1.0"
+  },
+  "protocol_id": "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e",
+  "resolved_si": {
+    "H0_declared_s-1": 2.268545502662652e-18,
+    "H0_s-1": 2.2685455026110557e-18,
+    "Mc_kg": 5.292674126388712e-16,
+    "radius_m": 3.858228590636517e-07,
+    "tau_c_s": 2.176246482178091,
+    "threshold_rate_s-1": 0.45950677379115273
+  },
+  "status": "phenomenological_and_auditable",
+  "structural": {
+    "alpha": null,
+    "exponent": 2.0,
+    "functional_form": "0 for M <= M_c; tau_c^-1 * (M/M_c)^2 for M > M_c",
+    "phase_space_root": 8,
+    "transition_width": null
+  },
+  "validity_domain": {
+    "composition_rule": "not_defined_in_v1_0",
+    "environmental_rate_s-1": "finite and non-negative",
+    "geometry": "homogeneous silica sphere only for derived radius/tau_c",
+    "mass_kg": "finite and non-negative",
+    "multiparticle_rule": "not_defined_in_v1_0",
+    "separation_dependence": "absent_in_v1_0",
+    "time_s": "finite and non-negative"
+  },
+  "version": "1.0"
+}

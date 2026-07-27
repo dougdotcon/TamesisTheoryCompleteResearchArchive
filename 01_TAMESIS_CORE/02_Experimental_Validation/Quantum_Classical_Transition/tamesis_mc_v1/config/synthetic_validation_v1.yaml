@@ -1,0 +1,87 @@
+synthetic_protocol_version: "1.0"
+name: "Tamesis M_c v1 synthetic validation and identifiability"
+status: "preregistered_synthetic_capability_test"
+tamesis_protocol_id: "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+tamesis_contract_hash: "d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+master_seed: 20260726
+replicas:
+  quick: 25
+  standard: 1000
+  high_precision: 5000
+active_profile: standard
+families:
+  A_below_threshold: [0.2, 0.5, 0.8]
+  B_threshold_region: [0.95, 0.99, 1.0, 1.01, 1.05, 1.2]
+  C_above_threshold: [1.5, 2.0, 3.0, 5.0]
+  D_nominal_target:
+    - {id: source_supported_target, mass_kg: 1.0e-15, separation_m: null, separation_basis: "not specified by source; no unsupported value injected"}
+    - {id: hypothetical_50um_target, mass_kg: 1.0e-15, separation_m: 5.0e-5, separation_basis: "hypothetical scenario gate only"}
+  E_null_environment_only: [0.5, 0.99, 1.0, 1.01, 2.0, 1.8894040632770233]
+  F_tamesis_injected: [0.5, 0.99, 1.0, 1.01, 1.2, 2.0, 3.0, 5.0, 1.8894040632770233]
+experimental_grid:
+  observation_time_s: [0.01, 0.03, 0.1, 0.3, 1.0]
+  pressure_pa: [1.0e-15, 1.0e-12, 1.0e-10]
+  gas_temperature_k: [4.0, 20.0]
+  chamber_temperature_k: [1.0, 4.0, 20.0]
+  internal_temperature_k: [1.0, 4.0, 20.0]
+  shots: [200, 1000, 5000]
+  phase_count: [12, 24]
+nuisance_parameters:
+  pressure_real: {classification: measured_with_uncertainty, unit: Pa, distribution: lognormal, relative_sigma: 0.30}
+  pressure_calibration: {classification: calibrated, unit: dimensionless, distribution: normal, sigma: 0.10}
+  gas_temperature: {classification: measured_with_uncertainty, unit: K, distribution: normal, sigma: 0.5}
+  internal_temperature: {classification: measured_with_uncertainty, unit: K, distribution: normal, sigma: 0.5}
+  V0: {classification: latent, unit: dimensionless, distribution: normal, mean: 0.92, sigma: 0.03}
+  phase_offset: {classification: latent, unit: rad, distribution: uniform, low: -0.15, high: 0.15}
+  detection_efficiency: {classification: calibrated, unit: dimensionless, distribution: normal, mean: 0.90, sigma: 0.02}
+  background: {classification: measured_with_uncertainty, unit: count, distribution: poisson, mean: 2.0}
+  drift: {classification: latent, unit: dimensionless, distribution: normal, sigma: 0.01}
+  phase_noise: {classification: latent, unit: rad, distribution: normal, sigma: 0.02}
+  mass_error: {classification: measured_with_uncertainty, unit: kg, distribution: normal, relative_sigma: 0.02}
+  time_error: {classification: calibrated, unit: s, distribution: normal, relative_sigma: 0.01}
+  environmental_rate_uncertainty: {classification: bounded, unit: s^-1, distribution: lognormal, relative_sigma: 0.30}
+misspecification_scenarios:
+  - pressure_miscalibration
+  - wrong_gas_species
+  - internal_temperature_underestimated
+  - correlated_phase_noise
+  - temporal_drift
+  - non_gaussian_noise
+  - outliers
+  - mixed_population
+  - run_to_run_variation
+  - omitted_environment_channel
+  - nonlinear_environment
+  - mass_dependent_V0
+  - threshold_mimicking_systematic
+metrics:
+  primary: [false_positive_rate, power, coverage_95, calibration, confusion_matrix, identifiability]
+  secondary: [bias, rmse, likelihood_ratio, condition_number, fisher_rank, seed_sensitivity]
+success_criteria:
+  false_positive_rate_max: 0.05
+  coverage_95_min: 0.90
+  coverage_95_max: 0.98
+  strong_signal_power_min: 0.90
+  blind_informative_accuracy_min: 0.90
+  weak_signal_policy: inconclusive
+failure_criteria:
+  - false_positive_rate_excess
+  - inadequate_coverage
+  - environment_mimics_tamesis
+  - structural_non_identifiability
+  - seed_dependence
+  - nominal_target_underpowered
+models:
+  "null": "QM_plus_environment"
+  alternative: "Tamesis_Mc_v1_plus_environment"
+  rivals: exploratory_non_authoritative_comparison
+outputs:
+  data_dir: data/synthetic_validation
+  reports_dir: reports
+  figures_dir: reports/synthetic_figures
+  sidecar_suffix: .provenance.json
+parallelism: single_process_deterministic
+reproducibility:
+  seed_derivation: "SHA256(master_seed|scenario_id|replicate_id)"
+  volatile_metadata_excluded_from_scientific_hash: true
+  preserve_per_replica_results: true

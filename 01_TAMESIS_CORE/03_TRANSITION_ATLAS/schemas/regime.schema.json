@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "EpistemicStatus": {
+      "enum": [
+        "metaphorical",
+        "conjectured",
+        "mathematically_specified",
+        "computationally_reproduced",
+        "phenomenologically_constrained",
+        "preregistered_test",
+        "observational_anomaly",
+        "transition_detected",
+        "independently_replicated",
+        "established_regime_boundary",
+        "falsified",
+        "superseded"
+      ],
+      "title": "EpistemicStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "composition_rule": {
+      "title": "Composition Rule",
+      "type": "string"
+    },
+    "control_parameters": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Control Parameters",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "dynamics": {
+      "title": "Dynamics",
+      "type": "string"
+    },
+    "epistemic_status": {
+      "$ref": "#/$defs/EpistemicStatus"
+    },
+    "invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Invariants",
+      "type": "array"
+    },
+    "limiting_cases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limiting Cases",
+      "type": "array"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "observable_algebra": {
+      "title": "Observable Algebra",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "references": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "References",
+      "type": "array"
+    },
+    "regime_id": {
+      "title": "Regime Id",
+      "type": "string"
+    },
+    "relations_to_other_regimes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Relations To Other Regimes",
+      "type": "array"
+    },
+    "state_space": {
+      "title": "State Space",
+      "type": "string"
+    },
+    "symmetries": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Symmetries",
+      "type": "array"
+    },
+    "validity_domain": {
+      "additionalProperties": true,
+      "title": "Validity Domain",
+      "type": "object"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "regime_id",
+    "name",
+    "version",
+    "description",
+    "state_space",
+    "observable_algebra",
+    "dynamics",
+    "invariants",
+    "symmetries",
+    "composition_rule",
+    "validity_domain",
+    "control_parameters",
+    "limiting_cases",
+    "relations_to_other_regimes",
+    "epistemic_status",
+    "references",
+    "provenance"
+  ],
+  "title": "Regime",
+  "type": "object"
+}

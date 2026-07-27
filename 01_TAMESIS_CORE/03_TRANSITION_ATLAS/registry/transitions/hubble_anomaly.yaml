@@ -1,0 +1,32 @@
+transition_id: hubble_early_late_anomaly
+name: Hubble early/late inference anomaly
+source_regime: cosmological_initial
+target_regime: cosmological_late
+transition_type: unknown
+control_space:
+  variables:
+    H0: {unit: km s^-1 Mpc^-1, interval: {min: 0, max: null}}
+critical_surface:
+  equation: "dataset- and model-dependent discrepancy surface"
+  symbols: {H0: "inferred expansion parameter"}
+  status: observational_anomaly_only
+trigger: "persistent discrepancy across specified inference pipelines"
+transition_map: unspecified
+generator: unspecified
+order_parameters: [{name: H0_difference, unit: km s^-1 Mpc^-1, role: anomaly summary}]
+entropy_production: {value: null, unit: "dimensionless per s", interpretation: not applicable}
+reversibility_class: unknown
+observables: [{name: H0, unit: km s^-1 Mpc^-1}]
+predictions: []
+falsification_conditions: ["discrepancy disappears under a predeclared consistent analysis"]
+competing_explanations: [systematics, dataset_selection, cosmological_model_extension]
+nuisance_parameters: [calibration, distance_ladder, early_universe_model]
+experimental_protocols: [cosmology_joint_likelihood_pending]
+epistemic_status: observational_anomaly
+claim_classification: observational_anomaly
+evidence_weight: {}
+uncertainty: {status: dataset_dependent, unit: km s^-1 Mpc^-1, value: null}
+references:
+  - {id: planck_h0, type: primary, citation: "Planck Collaboration Lambda-CDM inference"}
+  - {id: shoes_h0, type: primary, citation: "SH0ES distance-ladder inference"}
+provenance: {source_type: literature_registry, source: "sources require dataset-specific audit"}

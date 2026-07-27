@@ -1,0 +1,290 @@
+{
+  "$defs": {
+    "EpistemicStatus": {
+      "enum": [
+        "metaphorical",
+        "conjectured",
+        "mathematically_specified",
+        "computationally_reproduced",
+        "phenomenologically_constrained",
+        "preregistered_test",
+        "observational_anomaly",
+        "transition_detected",
+        "independently_replicated",
+        "established_regime_boundary",
+        "falsified",
+        "superseded"
+      ],
+      "title": "EpistemicStatus",
+      "type": "string"
+    },
+    "ReversibilityClass": {
+      "enum": [
+        "reversible",
+        "effectively_irreversible",
+        "fundamentally_irreversible",
+        "non_markovian",
+        "unknown"
+      ],
+      "title": "ReversibilityClass",
+      "type": "string"
+    },
+    "TransitionType": {
+      "enum": [
+        "isomorphism",
+        "reduction",
+        "singular_limit",
+        "coarse_graining",
+        "phase_transition",
+        "symmetry_breaking",
+        "environmental_decoherence",
+        "intrinsic_collapse",
+        "emergence",
+        "duality",
+        "effective_description_change",
+        "unknown"
+      ],
+      "title": "TransitionType",
+      "type": "string"
+    },
+    "UnitValue": {
+      "additionalProperties": false,
+      "properties": {
+        "interpretation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Interpretation"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Interval"
+        },
+        "justification": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Justification"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "unit"
+      ],
+      "title": "UnitValue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "claim_classification": {
+      "title": "Claim Classification",
+      "type": "string"
+    },
+    "competing_explanations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Competing Explanations",
+      "type": "array"
+    },
+    "contract_integration": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contract Integration"
+    },
+    "control_space": {
+      "additionalProperties": true,
+      "title": "Control Space",
+      "type": "object"
+    },
+    "critical_surface": {
+      "additionalProperties": true,
+      "title": "Critical Surface",
+      "type": "object"
+    },
+    "entropy_production": {
+      "$ref": "#/$defs/UnitValue"
+    },
+    "epistemic_status": {
+      "$ref": "#/$defs/EpistemicStatus"
+    },
+    "evidence_weight": {
+      "additionalProperties": true,
+      "title": "Evidence Weight",
+      "type": "object"
+    },
+    "experimental_protocols": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Experimental Protocols",
+      "type": "array"
+    },
+    "falsification_conditions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Falsification Conditions",
+      "type": "array"
+    },
+    "generator": {
+      "title": "Generator",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "nuisance_parameters": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Nuisance Parameters",
+      "type": "array"
+    },
+    "observables": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Observables",
+      "type": "array"
+    },
+    "order_parameters": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Order Parameters",
+      "type": "array"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Predictions",
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "references": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "References",
+      "type": "array"
+    },
+    "reversibility_class": {
+      "$ref": "#/$defs/ReversibilityClass"
+    },
+    "source_regime": {
+      "title": "Source Regime",
+      "type": "string"
+    },
+    "target_regime": {
+      "title": "Target Regime",
+      "type": "string"
+    },
+    "transition_id": {
+      "title": "Transition Id",
+      "type": "string"
+    },
+    "transition_map": {
+      "title": "Transition Map",
+      "type": "string"
+    },
+    "transition_type": {
+      "$ref": "#/$defs/TransitionType"
+    },
+    "trigger": {
+      "title": "Trigger",
+      "type": "string"
+    },
+    "uncertainty": {
+      "$ref": "#/$defs/UnitValue"
+    }
+  },
+  "required": [
+    "transition_id",
+    "name",
+    "source_regime",
+    "target_regime",
+    "transition_type",
+    "control_space",
+    "critical_surface",
+    "trigger",
+    "transition_map",
+    "generator",
+    "order_parameters",
+    "entropy_production",
+    "reversibility_class",
+    "observables",
+    "predictions",
+    "falsification_conditions",
+    "competing_explanations",
+    "nuisance_parameters",
+    "experimental_protocols",
+    "epistemic_status",
+    "claim_classification",
+    "evidence_weight",
+    "uncertainty",
+    "references",
+    "provenance"
+  ],
+  "title": "Transition",
+  "type": "object"
+}

@@ -1,80 +1,69 @@
-"""Tamesis M_c v1.0: minimal, auditable critical-mass model.
-
-This module intentionally contains no fitted curve and no environmental model.
-Environmental decoherence must be measured or supplied as a nuisance rate.
-The 1/8 exponent and the sharp threshold are hypotheses of this version.
-"""
+"""Tamesis M_c v1.0 core model bound to the canonical contract."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from math import exp, log, pi, sqrt
 
+from config import V1Contract, load_v1_contract
 
-@dataclass(frozen=True)
-class Constants:
-    G: float = 6.67430e-11
-    hbar: float = 1.054571817e-34
-    c: float = 299_792_458.0
-    h0_km_s_mpc: float = 70.0
-    silica_density: float = 2200.0
 
-    @property
-    def h0_s(self) -> float:
-        return self.h0_km_s_mpc * 1000.0 / 3.0856775814913673e22
+def compute_mc_from_contract(contract: V1Contract) -> float:
+    c = float(contract.constants.c.value)
+    hbar = float(contract.constants.hbar.value)
+    G = float(contract.constants.G.value)
+    h0 = contract.h0_si
+    planck_length = sqrt(hbar * G / c**3)
+    planck_mass = sqrt(hbar * c / G)
+    planck_acceleration = c**2 / planck_length
+    a0 = c * h0
+    return planck_mass * (a0 / planck_acceleration) ** (1.0 / contract.phase_space_root)
 
-    @property
-    def planck_length(self) -> float:
-        return sqrt(self.hbar * self.G / self.c**3)
 
-    @property
-    def planck_mass(self) -> float:
-        return sqrt(self.hbar * self.c / self.G)
-
-    @property
-    def planck_acceleration(self) -> float:
-        return self.c**2 / self.planck_length
-
-    @property
-    def a0(self) -> float:
-        return self.c * self.h0_s
+def compute_tau_c_from_contract(contract: V1Contract, mc: float | None = None) -> float:
+    G = float(contract.constants.G.value)
+    hbar = float(contract.constants.hbar.value)
+    density = float(contract.constants.silica_density.value)
+    mc_value = contract.mc_kg if mc is None else mc
+    radius = (3.0 * mc_value / (4.0 * pi * density)) ** (1.0 / 3.0)
+    return hbar * radius / (G * mc_value**2)
 
 
 @dataclass(frozen=True)
 class McModel:
-    """Minimal Tamesis threshold model.
+    """Minimal threshold model that reads the frozen v1.0 contract."""
 
-    Status of quantities:
-      - h0_km_s_mpc and silica_density: experimental/model inputs;
-      - exponent: hypothesis (not derived in v1.0);
-      - mc, radius, tau_c: derived quantities;
-      - threshold and environmental independence: falsifiable hypotheses.
-    """
-
-    constants: Constants = Constants()
-    exponent: float = 2.0
-    phase_space_root: int = 8
+    contract: V1Contract | None = None
 
     def __post_init__(self) -> None:
-        if self.exponent <= 0:
-            raise ValueError("exponent must be positive")
-        if self.phase_space_root <= 0:
-            raise ValueError("phase_space_root must be positive")
+        if self.contract is None:
+            object.__setattr__(self, "contract", load_v1_contract())
+        # Fail closed if frozen values drift from the canonical equation.
+        mc_calc = compute_mc_from_contract(self.contract)
+        if abs(mc_calc - self.contract.mc_kg) > 1e-30:
+            raise ValueError(
+                f"contract Mc mismatch: calculated={mc_calc} frozen={self.contract.mc_kg} "
+                f"hash={self.contract.config_hash()}"
+            )
+        tau_calc = compute_tau_c_from_contract(self.contract, self.contract.mc_kg)
+        if abs(tau_calc - self.contract.tau_c_s) > 1e-15:
+            raise ValueError(
+                f"contract tau_c mismatch: calculated={tau_calc} frozen={self.contract.tau_c_s} "
+                f"hash={self.contract.config_hash()}"
+            )
 
     @property
     def mc(self) -> float:
-        c = self.constants
-        return c.planck_mass * (c.a0 / c.planck_acceleration) ** (1.0 / self.phase_space_root)
+        return self.contract.mc_kg
 
     @property
     def radius(self) -> float:
-        return (3.0 * self.mc / (4.0 * pi * self.constants.silica_density)) ** (1.0 / 3.0)
+        density = float(self.contract.constants.silica_density.value)
+        return (3.0 * self.mc / (4.0 * pi * density)) ** (1.0 / 3.0)
 
     @property
     def tau_c(self) -> float:
-        c = self.constants
-        # Convention used by the existing Tamesis proposal: E_g = G M^2 / R.
-        return c.hbar * self.radius / (c.G * self.mc**2)
+        return self.contract.tau_c_s
 
     @property
     def threshold_rate(self) -> float:
@@ -86,7 +75,7 @@ class McModel:
             raise ValueError("mass must be non-negative")
         if mass <= self.mc:
             return 0.0
-        return self.threshold_rate * (mass / self.mc) ** self.exponent
+        return self.threshold_rate * (mass / self.mc) ** self.contract.exponent
 
     def coherence_time(self, mass: float) -> float:
         rate = self.intrinsic_rate(mass)
@@ -101,16 +90,18 @@ class McModel:
         rate = self.intrinsic_rate(mass) + environmental_rate
         return float("inf") if rate == 0.0 else log(2.0) / rate
 
-    def summary(self) -> dict[str, float]:
-        c = self.constants
+    def summary(self) -> dict[str, float | str]:
         return {
-            "H0_km_s_Mpc": c.h0_km_s_mpc,
-            "a0_m_s2": c.a0,
-            "phase_space_root_hypothesis": float(self.phase_space_root),
-            "exponent_hypothesis": self.exponent,
+            "protocol_id": self.contract.protocol_id(),
+            "config_hash": self.contract.config_hash(),
+            "H0_km_s_Mpc": float(self.contract.constants.H0.value),
+            "a0_m_s2": self.contract.h0_si * float(self.contract.constants.c.value),
+            "phase_space_root_hypothesis": float(self.contract.phase_space_root),
+            "exponent_hypothesis": self.contract.exponent,
             "Mc_kg": self.mc,
             "Mc_amu": self.mc / 1.66053906660e-27,
             "silica_radius_m": self.radius,
             "tau_c_s": self.tau_c,
             "threshold_rate_s-1": self.threshold_rate,
         }
+

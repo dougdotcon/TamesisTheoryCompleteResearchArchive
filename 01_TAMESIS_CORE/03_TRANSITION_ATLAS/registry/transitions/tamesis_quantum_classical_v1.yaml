@@ -1,0 +1,46 @@
+transition_id: tamesis_quantum_classical_v1
+name: Tamesis quantum-to-classical candidate
+source_regime: quantum
+target_regime: classical
+transition_type: intrinsic_collapse
+control_space:
+  variables:
+    mass: {unit: kg, interval: {min: 0, max: null}}
+    separation: {unit: m, interval: {min: 0, max: null}}
+    time: {unit: s, interval: {min: 0, max: null}}
+    pressure: {unit: Pa, interval: {min: 0, max: null}}
+    temperature: {unit: K, interval: {min: 0, max: null}}
+  absent_from_v1_dynamics: [separation, geometry, composition]
+critical_surface:
+  equation: "candidate surface in (m/M_c, separation, t, geometry, environment)"
+  symbols: {M_c: "canonical contract mass scale", tau_c: "canonical contract time scale"}
+  status: candidate_not_derived
+trigger: "m/M_c crosses the canonical threshold region under a preregistered protocol"
+transition_map: "rho -> reduced observable state after marginalizing nuisance channels"
+generator: "Gamma_T=0 for m<=M_c; tau_c^-1*(m/M_c)^exponent for m>M_c; environmental term separate"
+order_parameters:
+  - {name: visibility, unit: dimensionless, role: primary observable}
+  - {name: intrinsic_rate, unit: s^-1, role: model parameterization}
+entropy_production:
+  value: unknown
+  unit: "dimensionless per s"
+  interpretation: "subsystem coherence loss does not establish global information destruction"
+reversibility_class: unknown
+observables:
+  - {name: visibility, unit: dimensionless}
+  - {name: coherence_time, unit: s}
+predictions:
+  - {name: residual_visibility_loss, expression: "V0*exp(-integral(Gamma_env+Gamma_T)dt)", unit: dimensionless}
+falsification_conditions:
+  - "no residual effect after environmental marginalization in the preregistered threshold region"
+  - "mass scaling inconsistent with the frozen exponent across multiple masses"
+  - "effect absorbed by a rival model with no Tamesis residual"
+competing_explanations: [environmental_decoherence, CSL, GRW, DP, technical_noise]
+nuisance_parameters: [pressure, temperature, magnetic_noise, position_noise, blackbody_rate]
+experimental_protocols: [tamesis_mc_v1_preregistered_protocol]
+epistemic_status: preregistered_test
+claim_classification: preregistered_transition_candidate
+evidence_weight: {}
+uncertainty: {status: unresolved, unit: dimensionless, value: null}
+references: [{id: tamesis_mc_repository, type: primary, citation: "internal Tamesis M_c v1.0 archive"}]
+provenance: {source_type: canonical_contract_bridge, source: "02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1"}

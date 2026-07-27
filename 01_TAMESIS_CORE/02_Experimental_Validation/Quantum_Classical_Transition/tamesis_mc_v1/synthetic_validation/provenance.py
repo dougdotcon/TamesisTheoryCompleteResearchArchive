@@ -22,6 +22,8 @@ def write_sidecar(output: Path, *, inputs: list[Path], scenario: str | None = No
         "artifact": output.relative_to(BASE).as_posix(),
         "artifact_sha256": file_hash(output),
         "artifact_classification": "synthetic_validation_artifact",
+        "protocol_id": contract.protocol_id(),
+        "config_hash": contract.config_hash(),
         "tamesis_protocol_id": contract.protocol_id(),
         "tamesis_contract_hash": contract.config_hash(),
         "synthetic_protocol_id": protocol_id(),

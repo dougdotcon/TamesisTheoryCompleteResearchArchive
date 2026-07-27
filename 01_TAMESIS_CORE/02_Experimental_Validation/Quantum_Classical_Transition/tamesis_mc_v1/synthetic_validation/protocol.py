@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 from typing import Any
+from functools import lru_cache
 
 import yaml
 
@@ -32,6 +33,7 @@ class Scenario:
     misspecification: str = "none"
 
 
+@lru_cache(maxsize=1)
 def config_payload() -> dict[str, Any]:
     data = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
@@ -44,10 +46,12 @@ def config_payload() -> dict[str, Any]:
     return data
 
 
+@lru_cache(maxsize=1)
 def config_hash() -> str:
     return hashlib.sha256(json.dumps(config_payload(), sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
 
 
+@lru_cache(maxsize=1)
 def protocol_id() -> str:
     return f"tamesis-synthetic-v1.0:{config_hash()}"
 
@@ -71,10 +75,12 @@ def scenario_grid(profile: str = "quick", *, truth_model: str | None = None) -> 
         if family == "D_nominal_target":
             for item in values:
                 ratio = float(item["mass_kg"]) / contract.mc_kg
-                scenarios.append(Scenario(item["id"], family, ratio, float(item["mass_kg"]), item["separation_m"], item["separation_basis"], truth_model or ("tamesis" if family.startswith("F") else "null"), time_s, pressure, 20.0, 1000, 24))
+                target_time = 0.1
+                scenarios.append(Scenario(item["id"], family, ratio, float(item["mass_kg"]), item["separation_m"], item["separation_basis"], truth_model or ("tamesis" if family.startswith("F") else "null"), target_time, pressure, 20.0, 1000, 24))
             continue
         for index, ratio_value in enumerate(values):
             ratio = float(ratio_value)
             scenario_id = f"{family}_{index:02d}_{ratio:g}"
-            scenarios.append(Scenario(scenario_id, family, ratio, ratio * contract.mc_kg, 1e-6, "synthetic_controlled_separation", truth_model or ("tamesis" if family.startswith("F") else "null"), time_s, pressure, 20.0, 1000, 24))
+            target_time = 1.0 if family in {"C_above_threshold", "F_tamesis_injected"} and ratio >= 1.5 else time_s
+            scenarios.append(Scenario(scenario_id, family, ratio, ratio * contract.mc_kg, 1e-6, "synthetic_controlled_separation", truth_model or ("tamesis" if family.startswith("F") else "null"), target_time, pressure, 20.0, 1000, 24))
     return scenarios

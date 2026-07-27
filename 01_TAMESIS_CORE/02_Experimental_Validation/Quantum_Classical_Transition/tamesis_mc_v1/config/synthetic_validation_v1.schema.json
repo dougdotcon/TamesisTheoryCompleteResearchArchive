@@ -5,10 +5,14 @@
   "required": ["synthetic_protocol_version", "tamesis_protocol_id", "tamesis_contract_hash", "master_seed", "replicas", "families", "experimental_grid", "nuisance_parameters", "metrics", "success_criteria", "failure_criteria", "models", "outputs", "reproducibility"],
   "properties": {
     "synthetic_protocol_version": {"const": "1.0"},
+    "name": {"type": "string"},
+    "status": {"type": "string"},
     "tamesis_protocol_id": {"type": "string"},
     "tamesis_contract_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
     "master_seed": {"type": "integer"},
     "replicas": {"type": "object", "required": ["quick", "standard", "high_precision"]},
+    "active_profile": {"enum": ["quick", "standard", "high_precision"]},
+    "decision_rules": {"type": "object", "required": ["likelihood_ratio_absolute_threshold", "minimum_total_counts", "maximum_visibility_sigma"]},
     "families": {"type": "object"},
     "experimental_grid": {"type": "object"},
     "nuisance_parameters": {"type": "object"},
@@ -18,5 +22,7 @@
     "models": {"type": "object"},
     "outputs": {"type": "object"},
     "reproducibility": {"type": "object"}
+    ,"misspecification_scenarios": {"type": "array", "minItems": 13}
+    ,"parallelism": {"type": "string"}
   }
 }

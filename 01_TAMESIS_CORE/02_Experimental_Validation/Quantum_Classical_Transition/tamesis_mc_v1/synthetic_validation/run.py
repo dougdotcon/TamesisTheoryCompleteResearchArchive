@@ -28,6 +28,8 @@ def run_profile(profile: str = "quick", *, misspecification: str = "none", max_s
     results_path = out / f"synthetic_results_{profile}{suffix}.csv"
     summary_path = out / f"synthetic_summary_{profile}{suffix}.json"
     rows: list[dict[str, Any]] = []
+    synthetic_protocol = protocol_id()
+    synthetic_hash = config_hash()
     with observations_path.open("w", encoding="utf-8") as obs_file:
         for scenario in scenarios:
             for replicate_id in range(n_replicas):
@@ -35,7 +37,7 @@ def run_profile(profile: str = "quick", *, misspecification: str = "none", max_s
                 inference = infer_observation(observation)
                 obs_file.write(json.dumps(observation, separators=(",", ":")) + "\n")
                 rows.append({
-                    "protocol_id": protocol_id(), "config_hash": config_hash(), "scenario_id": scenario.scenario_id, "family": scenario.family, "replicate_id": replicate_id, "seed": observation["seed"], "truth_model": observation["truth_model"], "truth_gamma_t_s-1": observation["truth_gamma_t_s-1"], "truth_environment_rate_s-1": observation["truth_environment_rate_s-1"], "mass_ratio": scenario.mass_ratio, "pressure_true_pa": observation["pressure_true_pa"], "pressure_recorded_pa": observation["pressure_recorded_pa"], "classification": inference["classification"], "identifiability": inference["identifiability"], "likelihood_ratio": inference["likelihood_ratio"], "informative": inference["informative"], "coverage_proxy": inference["coverage_proxy"], "environment_mimic_ratio": inference["environment_mimic_ratio"], "misspecification": misspecification,
+                    "protocol_id": synthetic_protocol, "config_hash": synthetic_hash, "scenario_id": scenario.scenario_id, "family": scenario.family, "replicate_id": replicate_id, "seed": observation["seed"], "truth_model": observation["truth_model"], "truth_gamma_t_s-1": observation["truth_gamma_t_s-1"], "truth_environment_rate_s-1": observation["truth_environment_rate_s-1"], "mass_ratio": scenario.mass_ratio, "pressure_true_pa": observation["pressure_true_pa"], "pressure_recorded_pa": observation["pressure_recorded_pa"], "classification": inference["classification"], "identifiability": inference["identifiability"], "likelihood_ratio": inference["likelihood_ratio"], "informative": inference["informative"], "coverage_proxy": inference["coverage_proxy"], "environment_mimic_ratio": inference["environment_mimic_ratio"], "misspecification": misspecification,
                 })
     with results_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
@@ -49,21 +51,21 @@ def run_profile(profile: str = "quick", *, misspecification: str = "none", max_s
 
 
 def summarize(rows: list[dict[str, Any]], profile: str, misspecification: str) -> dict[str, Any]:
-    def rate(predicate): return sum(bool(predicate(r)) for r in rows) / max(len(rows), 1)
     null_rows = [r for r in rows if r["truth_model"] == "null"]
     h1_rows = [r for r in rows if r["truth_model"] == "tamesis"]
     strong = [r for r in h1_rows if r["mass_ratio"] >= 1.5 and r["pressure_true_pa"] <= 1e-12]
     weak = [r for r in rows if 0.95 <= r["mass_ratio"] <= 1.2 or r["mass_ratio"] < 0.9]
+    def subset_rate(subset, predicate): return sum(bool(predicate(r)) for r in subset) / max(len(subset), 1)
     return {
-        "synthetic_protocol_id": protocol_id(), "synthetic_config_hash": config_hash(), "profile": profile, "misspecification": misspecification, "n_rows": len(rows), "n_scenarios": len({r["scenario_id"] for r in rows}), "replicas_per_scenario": len(rows) // max(len({r["scenario_id"] for r in rows}), 1),
-        "false_positive_rate": rate(lambda r: r in null_rows and r["classification"] == "tamesis_plus_environment"),
-        "null_recovery_rate": rate(lambda r: r in null_rows and r["classification"] == "environment_only"),
-        "h1_recovery_rate": rate(lambda r: r in h1_rows and r["classification"] == "tamesis_plus_environment"),
-        "strong_signal_power": rate(lambda r: r in strong and r["classification"] == "tamesis_plus_environment"),
-        "weak_inconclusive_rate": rate(lambda r: r in weak and r["classification"] == "inconclusive"),
-        "coverage_95_proxy": rate(lambda r: r["coverage_proxy"]),
+        "synthetic_protocol_id": protocol_id(), "synthetic_config_hash": config_hash(), "profile": profile, "misspecification": misspecification, "n_rows": len(rows), "n_scenarios": len({r["scenario_id"] for r in rows}), "replicas_per_scenario_including_both_truths": len(rows) // max(len({r["scenario_id"] for r in rows}), 1), "replicas_per_truth_scenario": len(rows) // max(len({(r["scenario_id"], r["truth_model"]) for r in rows}), 1),
+        "false_positive_rate": subset_rate(null_rows, lambda r: r["classification"] == "tamesis_plus_environment"),
+        "null_recovery_rate": subset_rate(null_rows, lambda r: r["classification"] == "environment_only"),
+        "h1_recovery_rate": subset_rate(h1_rows, lambda r: r["classification"] == "tamesis_plus_environment"),
+        "strong_signal_power": subset_rate(strong, lambda r: r["classification"] == "tamesis_plus_environment"),
+        "weak_inconclusive_rate": subset_rate(weak, lambda r: r["classification"] == "inconclusive"),
+        "coverage_95_proxy": subset_rate(rows, lambda r: r["coverage_proxy"]),
         "identifiability_counts": {key: sum(r["identifiability"] == key for r in rows) for key in sorted({r["identifiability"] for r in rows})},
-        "environment_mimic_rate": rate(lambda r: r["truth_model"] == "null" and r["classification"] == "tamesis_plus_environment"),
+        "environment_mimic_rate": subset_rate(null_rows, lambda r: r["classification"] == "tamesis_plus_environment"),
         "seed_set": sorted({r["seed"] for r in rows})[:20],
     }
 

@@ -1,0 +1,29 @@
+synthetic_protocol_version: "1.1"
+name: "Tamesis Synthetic v1.1 Joint Multi-Condition Identifiability Design"
+status: "preregistered_design_before_execution"
+tamesis_protocol_id: "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+tamesis_synthetic_v1_protocol_id: "tamesis-synthetic-v1.0:c11dce74f55d478ac5f14fb0ca98771094342fe020ee01ed4fd4a760ecd260c7"
+master_seed: 20260726
+replicas: {quick: 50, standard: 1000, outlier_minimum: 1000, blind: 1000}
+mass_ratios: [0.5, 0.8, 0.95, 1.0, 1.05, 1.2, 1.5, 1.8894040632770233, 2.0, 3.0]
+times_s: [0.001, 0.01, 0.03, 0.1, 0.3, 1.0]
+pressures_pa: [1.0e-15, 1.0e-13, 1.0e-11, 1.0e-9]
+controls: [baseline, internal_temperature_high, chamber_temperature_high, wrong_gas_species, paired_classical_reference]
+designs: [D0, D1, D2, D3, D4, D5]
+diagnostic_parameter:
+  name: mu_T
+  classification: synthetic_diagnostic_signal_strength
+  "null": 0.0
+  tamesis_v1: 1.0
+criteria:
+  false_positive_rate_max: 0.05
+  coverage_min: 0.90
+  coverage_max: 0.98
+  strong_power_min: 0.90
+  conditional_accuracy_min: 0.90
+  decision_yield_min: 0.80
+inconclusive_policy: "retain inconclusive when information is insufficient; never force a class"
+outlier_scenarios: [outliers, monotonic_drift, cyclic_drift, false_mass_threshold, omitted_pressure_independent]
+optimization: [D_optimality, E_optimality, minimum_singular_value, expected_information, H0_H1_discrimination, robustness, cost]
+primary_models: {H0: QM_plus_environment, H1: Tamesis_Mc_v1_plus_environment}
+rivals: exploratory_non_authoritative_comparison

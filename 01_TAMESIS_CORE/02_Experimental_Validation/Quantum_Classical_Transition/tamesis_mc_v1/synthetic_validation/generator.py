@@ -4,6 +4,7 @@ import json
 from math import exp, pi
 from pathlib import Path
 from typing import Any
+from functools import lru_cache
 
 import numpy as np
 
@@ -25,7 +26,7 @@ def _environment_rate(mass_kg: float, pressure_pa: float, gas_temperature_k: flo
 def generate_observation(scenario: Scenario, replicate_id: int, *, master_seed: int, misspecification: str = "none") -> dict[str, Any]:
     seed = derive_seed(master_seed, scenario.scenario_id + "|" + misspecification, replicate_id)
     rng = np.random.default_rng(seed)
-    model = McModel()
+    model = official_model()
     true_pressure = scenario.pressure_pa * float(rng.lognormal(mean=0.0, sigma=0.30))
     recorded_pressure = true_pressure * (1.5 if misspecification == "pressure_miscalibration" else float(rng.normal(1.0, 0.10)))
     true_temperature = max(0.2, scenario.gas_temperature_k + float(rng.normal(0.0, 0.5)))
@@ -37,6 +38,8 @@ def generate_observation(scenario: Scenario, replicate_id: int, *, master_seed: 
     if misspecification == "nonlinear_environment":
         env_rate *= 1.0 + 0.3 * min(scenario.mass_ratio, 3.0)
     gamma_t = model.intrinsic_rate(scenario.mass_kg) if scenario.truth_model == "tamesis" else 0.0
+    if misspecification == "mixed_population" and replicate_id % 2:
+        gamma_t = 0.0
     if misspecification == "threshold_mimicking_systematic":
         gamma_t += 0.35 / (1.0 + np.exp(-40.0 * (scenario.mass_ratio - 1.0)))
     v0 = float(np.clip(rng.normal(0.92, 0.03), 0.4, 0.999))
@@ -91,3 +94,6 @@ def generate_observation(scenario: Scenario, replicate_id: int, *, master_seed: 
         "visibility_truth": visibility,
         "misspecification": misspecification,
     }
+@lru_cache(maxsize=1)
+def official_model() -> McModel:
+    return McModel()

@@ -1,6 +1,11 @@
 # Tamesis M_c v1 Outputs
 
-Visible output folder for the active Tamesis M_c v1 research line.
+Visible output folder for the frozen computational phase of the Tamesis M_c v1
+research line.
+
+These are model visualizations and animations, not experimental observations.
+The campaign state remains `HARDWARE_QUALIFICATION_NOT_STARTED` and
+`physical_evidence: false`.
 
 Source module:
 

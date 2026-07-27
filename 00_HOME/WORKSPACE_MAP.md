@@ -2,11 +2,13 @@
 
 This repository is organized as a long research archive with several historical layers.
 
-Active line:
+Current frozen research nucleus:
 
 - `01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1`
+- `PROJECT_FREEZE.md`
+- `PROJECT_STATE.json`
 
-Core historical areas:
+Core historical areas (now under `90_LEGACY` where applicable):
 
 - `03_THEORETICAL_FRAMEWORK`
 - `04_THE_DISCOVERY_TOE_KERNEL_V3`
@@ -20,5 +22,6 @@ Reference and support material:
 - `08_COGNITIVE_TOPOLOGY`
 - `09_BOLSO_TOPOLOGICO`
 
-Legacy overview docs remain at the repository root for now.
-
+The root contains only the public façade, freeze record, citation metadata, and
+interactive views. Historical overview documents live under `00_HOME/legacy`
+and historical branches under `90_LEGACY`.

@@ -1,4 +1,11 @@
-O ATLAS DE TRANSIÇÕES
+# O Atlas de Transições
+
+> **Documento conceitual preservado para proveniência.**
+>
+> As transições abaixo formam um atlas de hipóteses testáveis, não um catálogo
+> de descobertas estabelecidas. Afirmações sobre `M_c`, tensão de Hubble,
+> singularidades ou mecanismos entrópicos não constituem evidência física. O
+> estado científico atual está em [PROJECT_FREEZE.md](PROJECT_FREEZE.md).
 
 Uma Cartografia Topológica e Dinâmica da Realidade Física
 

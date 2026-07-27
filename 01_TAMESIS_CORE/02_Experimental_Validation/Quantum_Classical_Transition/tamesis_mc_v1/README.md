@@ -16,6 +16,16 @@ Camada operacional da hipótese de massa crítica `M_c`.
 Esta é uma versão fenomenológica e auditável.
 Ela não prova a hipótese; ela a torna mensurável e falsificável.
 
+A fase exclusivamente computacional está congelada desde 2026-07-26:
+
+- `software_status: frozen_and_ready`
+- `campaign_state: HARDWARE_QUALIFICATION_NOT_STARTED`
+- `physical_evidence: false`
+- `operational_status: PAUSED_PENDING_HARDWARE_AND_METROLOGY`
+
+O próximo avanço exige metadados e calibrações de hardware reais. Não deve ser
+criada uma v0.7 puramente computacional.
+
 ## Hipóteses fixas da v1
 
 1. `M_c = m_P (a_0/a_P)^(1/8)` com `a_0 = cH_0`.
@@ -29,6 +39,7 @@ Ela não prova a hipótese; ela a torna mensurável e falsificável.
 - [Status](STATUS.md)
 - [Reports](reports/README.md)
 - [Data](data/README.md)
+- [Project freeze](../../../../PROJECT_FREEZE.md)
 
 ## Execução
 

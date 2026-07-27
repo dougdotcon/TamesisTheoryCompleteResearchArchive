@@ -1,5 +1,25 @@
 # Status de auditoria — Tamesis M_c v1.0
 
+## Congelamento computacional — 2026-07-26
+
+```text
+software_status: frozen_and_ready
+campaign_state: HARDWARE_QUALIFICATION_NOT_STARTED
+physical_evidence: false
+operational_status: PAUSED_PENDING_HARDWARE_AND_METROLOGY
+formal_conclusion: A0_A1_HARDWARE_PACKAGE_READY_WITH_LIMITATIONS
+```
+
+O pipeline computacional, as auditorias de identificabilidade, a especificação
+metrológica e o protocolo físico A0/A1 chegaram ao ponto terminal legítimo sem
+dados reais. Não deve ser criada uma v0.7 puramente computacional. A retomada
+exige metadados de hardware e calibração reais, espectros GeV, séries térmicas,
+registros A0 ou colaboração laboratorial documentada.
+
+O protocolo físico terminal é
+`tamesis-demonstrator-a-v0.6:277a26656c9a4b20ae8c24295e0594b6d0ebfb7686fb7c04add68ed4f08119cd`.
+Seu estado canônico está em `data/demonstrator_a_v0_6/campaign_state.json`.
+
 ## Referência numérica
 
 Esta versão fixa, para o protocolo v1.0:

@@ -2,7 +2,13 @@
 
 This is the front door of the repository.
 
-If you want the active line of work, start here:
+The computational phase is frozen and the physical campaign has not started.
+The authoritative status is recorded in:
+
+- [Project freeze](../PROJECT_FREEZE.md)
+- [Machine-readable state](../PROJECT_STATE.json)
+
+If you want the current research nucleus, start here:
 
 - [Tamesis M_c v1](../01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
 - [Visible outputs](../02_TAMESIS_MC_V1_OUTPUTS/README.md)
@@ -20,3 +26,6 @@ If you want the broader archive overview:
 
 Root-level historical files are being consolidated under `00_HOME/legacy/`.
 Root-level historical folders are being consolidated under `90_LEGACY/`.
+
+Historical material is preserved as provenance, not promoted as current
+experimental evidence.

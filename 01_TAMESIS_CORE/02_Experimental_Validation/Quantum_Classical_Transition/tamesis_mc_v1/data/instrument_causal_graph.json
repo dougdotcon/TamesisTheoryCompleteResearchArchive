@@ -1,0 +1,670 @@
+{
+  "nodes": {
+    "Gamma_T": {
+      "type": "candidate_physical",
+      "status": "latent"
+    },
+    "residual_gas": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "pressure_sensor+gas_composition",
+        "proxy": "pressure_effective_transfer_model",
+        "status": "observable_with_calibration"
+      }
+    },
+    "internal_temperature": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "currently_unobserved",
+        "proxy": "absorption+emission+thermal_response",
+        "status": "currently_unobserved_blocker"
+      }
+    },
+    "chamber_temperature": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "temperature_sensor",
+        "proxy": "support_temperature",
+        "status": "observable"
+      }
+    },
+    "thermal_emission": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "spectral_thermal_sensor",
+        "proxy": "internal_temperature",
+        "status": "proxy_only"
+      }
+    },
+    "thermal_absorption": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "power_absorption_calibration",
+        "proxy": "particle_survival",
+        "status": "proxy_only"
+      }
+    },
+    "thermal_scattering": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "optical_scattering_monitor",
+        "proxy": "visibility",
+        "status": "proxy_only"
+      }
+    },
+    "magnetic_noise": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "magnetometer",
+        "proxy": "phase_reference",
+        "status": "observable_with_transfer_function"
+      }
+    },
+    "current_noise": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "current_monitor",
+        "proxy": "controller_state",
+        "status": "observable"
+      }
+    },
+    "electric_fields": {
+      "type": "environment",
+      "telemetry": null
+    },
+    "patch_potentials": {
+      "type": "environment",
+      "telemetry": null
+    },
+    "mechanical_vibration": {
+      "type": "environment",
+      "telemetry": {
+        "direct": "accelerometer",
+        "proxy": "trajectory",
+        "status": "observable_with_transfer_function"
+      }
+    },
+    "gravitational_gradient": {
+      "type": "environment",
+      "telemetry": null
+    },
+    "phase_drift": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "independent_phase_reference",
+        "proxy": "observed_phase-commanded_phase",
+        "status": "observable"
+      }
+    },
+    "detector_efficiency": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "calibration_reference",
+        "proxy": "counts/background",
+        "status": "observable_with_calibration"
+      }
+    },
+    "detector_saturation": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "raw_adc_and_saturation_flag",
+        "proxy": "count_clipping",
+        "status": "observable"
+      }
+    },
+    "background": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "dark_count_reference",
+        "proxy": "off_window_counts",
+        "status": "observable"
+      }
+    },
+    "timing_error": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "common_clock_and_trigger",
+        "proxy": "timestamp_residual",
+        "status": "observable"
+      }
+    },
+    "mass_calibration_error": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "particle_mass_metrology",
+        "proxy": "trajectory/scattering",
+        "status": "observable_with_calibration"
+      }
+    },
+    "trajectory_error": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "position_resolved_tracking",
+        "proxy": "interference_phase",
+        "status": "observable"
+      }
+    },
+    "separation_error": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "trajectory_reconstruction",
+        "proxy": "geometry_reference",
+        "status": "observable_with_calibration"
+      }
+    },
+    "particle_selection_bias": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "population_metrology",
+        "proxy": "mass_distribution",
+        "status": "observable_with_sampling_model"
+      }
+    },
+    "preparation_failure": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "preparation_status_flag",
+        "proxy": "survival",
+        "status": "observable"
+      }
+    },
+    "readout_failure": {
+      "type": "instrument",
+      "telemetry": {
+        "direct": "readout_status_flag",
+        "proxy": "missing_counts",
+        "status": "observable"
+      }
+    },
+    "raw_counts": {
+      "type": "observable"
+    },
+    "interference_phase": {
+      "type": "observable"
+    },
+    "visibility": {
+      "type": "observable"
+    },
+    "particle_survival": {
+      "type": "observable"
+    },
+    "trajectory": {
+      "type": "observable"
+    },
+    "spin_state": {
+      "type": "observable"
+    }
+  },
+  "edges": [
+    {
+      "source": "residual_gas",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "residual_gas",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "internal_temperature",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "internal_temperature",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "chamber_temperature",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "chamber_temperature",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_emission",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_emission",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_absorption",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_absorption",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_scattering",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "thermal_scattering",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "magnetic_noise",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "magnetic_noise",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "current_noise",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "current_noise",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "electric_fields",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "electric_fields",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "patch_potentials",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "patch_potentials",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "mechanical_vibration",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "mechanical_vibration",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "gravitational_gradient",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "gravitational_gradient",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "Gamma_T mass scaling",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "phase_drift",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "phase_drift",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "detector_efficiency",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "detector_efficiency",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "detector_saturation",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "detector_saturation",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "background",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "background",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "timing_error",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "timing_error",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "mass_calibration_error",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "mass_calibration_error",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "trajectory_error",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "trajectory_error",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "separation_error",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "separation_error",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "particle_selection_bias",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "particle_selection_bias",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "preparation_failure",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "preparation_failure",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "readout_failure",
+      "target": "raw_counts",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    },
+    {
+      "source": "readout_failure",
+      "target": "visibility",
+      "direction": "causes",
+      "justification": "causal channel in specified measurement model",
+      "confounder": "mass-correlated instrument drift",
+      "intervention": "matched control or independent telemetry"
+    }
+  ],
+  "telemetry_mapping": {
+    "residual_gas": {
+      "direct": "pressure_sensor+gas_composition",
+      "proxy": "pressure_effective_transfer_model",
+      "status": "observable_with_calibration"
+    },
+    "internal_temperature": {
+      "direct": "currently_unobserved",
+      "proxy": "absorption+emission+thermal_response",
+      "status": "currently_unobserved_blocker"
+    },
+    "chamber_temperature": {
+      "direct": "temperature_sensor",
+      "proxy": "support_temperature",
+      "status": "observable"
+    },
+    "thermal_emission": {
+      "direct": "spectral_thermal_sensor",
+      "proxy": "internal_temperature",
+      "status": "proxy_only"
+    },
+    "thermal_absorption": {
+      "direct": "power_absorption_calibration",
+      "proxy": "particle_survival",
+      "status": "proxy_only"
+    },
+    "thermal_scattering": {
+      "direct": "optical_scattering_monitor",
+      "proxy": "visibility",
+      "status": "proxy_only"
+    },
+    "magnetic_noise": {
+      "direct": "magnetometer",
+      "proxy": "phase_reference",
+      "status": "observable_with_transfer_function"
+    },
+    "current_noise": {
+      "direct": "current_monitor",
+      "proxy": "controller_state",
+      "status": "observable"
+    },
+    "mechanical_vibration": {
+      "direct": "accelerometer",
+      "proxy": "trajectory",
+      "status": "observable_with_transfer_function"
+    },
+    "phase_drift": {
+      "direct": "independent_phase_reference",
+      "proxy": "observed_phase-commanded_phase",
+      "status": "observable"
+    },
+    "detector_efficiency": {
+      "direct": "calibration_reference",
+      "proxy": "counts/background",
+      "status": "observable_with_calibration"
+    },
+    "detector_saturation": {
+      "direct": "raw_adc_and_saturation_flag",
+      "proxy": "count_clipping",
+      "status": "observable"
+    },
+    "background": {
+      "direct": "dark_count_reference",
+      "proxy": "off_window_counts",
+      "status": "observable"
+    },
+    "timing_error": {
+      "direct": "common_clock_and_trigger",
+      "proxy": "timestamp_residual",
+      "status": "observable"
+    },
+    "mass_calibration_error": {
+      "direct": "particle_mass_metrology",
+      "proxy": "trajectory/scattering",
+      "status": "observable_with_calibration"
+    },
+    "trajectory_error": {
+      "direct": "position_resolved_tracking",
+      "proxy": "interference_phase",
+      "status": "observable"
+    },
+    "separation_error": {
+      "direct": "trajectory_reconstruction",
+      "proxy": "geometry_reference",
+      "status": "observable_with_calibration"
+    },
+    "particle_selection_bias": {
+      "direct": "population_metrology",
+      "proxy": "mass_distribution",
+      "status": "observable_with_sampling_model"
+    },
+    "preparation_failure": {
+      "direct": "preparation_status_flag",
+      "proxy": "survival",
+      "status": "observable"
+    },
+    "readout_failure": {
+      "direct": "readout_status_flag",
+      "proxy": "missing_counts",
+      "status": "observable"
+    }
+  }
+}

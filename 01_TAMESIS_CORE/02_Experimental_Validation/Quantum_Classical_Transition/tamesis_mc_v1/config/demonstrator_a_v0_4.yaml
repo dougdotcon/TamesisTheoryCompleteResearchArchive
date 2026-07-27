@@ -1,0 +1,29 @@
+spec_version: "0.4"
+name: "Tamesis Demonstrator A — Independent Internal Thermometry Proof Protocol"
+status: "protocol_only_no_hardware_claim"
+platform_feasibility_protocol_id: "tamesis-platform-feasibility-v0.3:138b1f462927ea03909dd88ff545b1b5887dcec1cc265d977fc8115e75e0ec86"
+sensor_models_protocol_id: "tamesis-sensor-models-v0.2:35d8056bc6438062b2cbf951e1ec2fc2a1b130dadcfa1ec5d3a9bc41cc050562"
+master_seed: 20260726
+analysis_prohibitions: [no_tamesis_inference, no_mu_T, no_H0_H1, no_visibility_thermometer]
+terminology: {P4: interferometer_independent_thermometry}
+materials: [NV_nanodiamond, GeV_nanodiamond, alternative_color_center_candidate]
+primary_candidate: GeV_optical_linewidth_and_position
+secondary_candidates: [controlled_heat_pulse_calorimetry, stage_equilibrium_reference, sacrificial_matched_particle, thermal_emission, NV_optical_or_spin]
+temperature_gates_k: {A1: [5, 10, 20], A3: [20, 50, 77], A4: [5, 10, 20]}
+gates: [A0_material, A1_stationary_equilibrium, A2_stationary_transient, A3_intermediate_suspension, A4_levitated_5_20K]
+thermal_models: [single_node_thermal, core_surface_two_node, multi_timescale_empirical]
+readout_modes: [continuous, pulsed, pre_post, interleaved, low_duty_cycle]
+triangulation:
+  agreement_metric: "absolute_difference divided by combined_standard_uncertainty"
+  agreement_threshold_sigma: 2.0
+  coverage_min: 0.90
+  coverage_max: 0.98
+  mass_bias_policy: "slope interval must include zero in locked validation"
+  power_bias_policy: "residual slope interval must include zero after modeled readout heating"
+go_no_go:
+  readout_heating_fraction_of_calibrated_step_max: 0.10
+  inverse_model_coverage_min: 0.90
+  inverse_model_coverage_max: 0.98
+  cross_validation_required: true
+  particle_specific_calibration_required: true
+real_data_policy: "hardware demonstration status forbidden until real raw data ingestion, calibration validation, provenance audit and locked reconstruction"

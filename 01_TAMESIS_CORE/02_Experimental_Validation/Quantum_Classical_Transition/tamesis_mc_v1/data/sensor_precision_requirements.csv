@@ -1,0 +1,11 @@
+channel,resolution,accuracy,stability,sampling_hz,justification
+pressure_effective,0.5%,1.0%,0.2%/h,10,"keep gas-rate uncertainty below threshold-rate contrast"
+internal_temperature,0.1 K proxy,0.5 K,0.1 K/h,10,"currently blocking pressure-independent thermal channel"
+phase_reference,1e-3 rad,3e-3 rad,1e-3 rad/h,10000,"prevent phase noise from imitating visibility loss"
+detector_efficiency,0.1%,0.5%,0.2%/block,10000,"detect mass-correlated response changes"
+saturation,1 count,flag every clipped sample,per shot,10000,"separate physical visibility from clipping"
+background,0.1 count,1%,0.5%/block,10000,"control bursts and dark counts"
+vibration,1e-9 m/s2,5% transfer function,1%/h,1000,"model phase coupling"
+mass,0.5% near Mc,1% systematic,per particle,1,"resolve 0.95,1.00,1.05 Mc"
+separation,1%,2%,per trajectory,1000,"reconstruct Delta x(t)"
+clock_sync,1 ns,10 ns,1 us/h,10000,"maximum shot association error 10 us"

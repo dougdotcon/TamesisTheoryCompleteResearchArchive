@@ -1,0 +1,18 @@
+failure,cause,observable_affected,telemetry,detectability,can_mimic_tamesis,mitigation
+pressure incorrect,sensor bias,visibility,pressure+composition,medium,yes,dual sensor and transfer calibration
+temperature incorrect,sensor bias,visibility,thermal telemetry,low,yes,independent internal proxy
+monotonic drift,thermal/controller,visibility,block telemetry,medium,yes,randomized paired blocks
+saturation,high count rate,raw_counts,ADC flag,high,yes,raw ADC and linearity control
+clipping,readout limit,raw_counts,clipping flag,high,yes,pre-registered quality flag
+phase slip,lock loss,phase,reference phase,high,yes,independent phase channel
+clock drift,oscillator,timestamps,common clock,medium,yes,clock cross-check
+sync loss,trigger failure,all,event log,high,yes,reject only by predeclared integrity
+calibration failure,bad reference,efficiency,calibration record,medium,yes,before/after block calibration
+population change,selection,mass,particle metrology,low,yes,population model
+mass error,metrology bias,Gamma_T,mass calibration,medium,yes,traceable mass reference
+separation error,trajectory,visibility,tracking,medium,yes,reconstruct Delta x
+magnetic noise,current transient,phase,magnetometer/current,medium,yes,transfer function
+vibration,mechanical,phase,accelerometer,medium,yes,isolation and model
+background burst,radiation/readout,counts,dark reference,high,yes,off-window monitor
+dropout,data path,counts,status flag,high,no,preserve excluded records
+particle loss,trap/preparation,survival,survival flag,high,no,model selection explicitly

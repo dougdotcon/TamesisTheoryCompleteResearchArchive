@@ -40,7 +40,9 @@ def rank_record(design: str):
     X = design_matrix(design); s = np.linalg.svd(X, compute_uv=False); rank = int(np.linalg.matrix_rank(X, tol=1e-10)); cond = float(s[0]/s[-1]) if s[-1] > 1e-12 else float("inf")
     expected = {"D0":1,"D1":2,"D2":2,"D3":3,"D4":4,"D5":5}[design]
     unidentified = {"D0":"V0 and total rate; environmental and Tamesis rates","D1":"environmental and Tamesis rates","D2":"V0 and pressure-independent intercept; environmental and Tamesis rates","D3":"pressure-independent environment and Tamesis","D4":"technical pressure-independent effects if unmodelled","D5":"none for declared linearized parameters"}[design]
-    return {"design":design,"parameter_count":5,"observation_count":int(X.shape[0]),"rank_expected":expected,"rank_observed":rank,"singular_values":s.tolist(),"minimum_singular_value":float(s[-1]),"condition_number":cond,"non_identifiable_combinations":unidentified}
+    min_sv = float(s[-1]) if rank == 5 else 0.0
+    cond = float(s[0]/min_sv) if min_sv > 1e-12 and rank == 5 else float("inf")
+    return {"design":design,"parameter_count":5,"observation_count":int(X.shape[0]),"rank_expected":expected,"rank_observed":rank,"singular_values":s.tolist(),"minimum_singular_value":min_sv,"condition_number":cond,"non_identifiable_combinations":unidentified}
 
 def profile_likelihood(design: str):
     X=design_matrix(design); beta=np.array([0.1,1.0,1.0,1.0,0.2]); y=X@beta; grid=np.linspace(0,2,401); sse=[]

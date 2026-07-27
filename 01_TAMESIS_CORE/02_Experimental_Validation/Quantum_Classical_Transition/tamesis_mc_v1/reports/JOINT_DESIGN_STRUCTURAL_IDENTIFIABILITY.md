@@ -2,9 +2,9 @@
 
 | Design | Rank | Condition | sigma_min | Non-identifiable |
 |---|---:|---:|---:|---|
-| D0 | 1/5 | 1 | 1.014 | V0 and total rate; environmental and Tamesis rates |
+| D0 | 1/5 | inf | 0 | V0 and total rate; environmental and Tamesis rates |
 | D1 | 2/5 | inf | 0 | environmental and Tamesis rates |
-| D2 | 2/5 | inf | 1.545e-18 | V0 and pressure-independent intercept; environmental and Tamesis rates |
+| D2 | 2/5 | inf | 0 | V0 and pressure-independent intercept; environmental and Tamesis rates |
 | D3 | 3/5 | inf | 0 | pressure-independent environment and Tamesis |
 | D4 | 4/5 | inf | 0 | technical pressure-independent effects if unmodelled |
 | D5 | 5/5 | 5.174e+05 | 0.1832 | none for declared linearized parameters |

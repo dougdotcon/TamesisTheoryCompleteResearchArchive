@@ -1,8 +1,8 @@
-JOINT_IDENTIFIABILITY_ESTABLISHED_WITH_LIMITATIONS
+JOINT_IDENTIFIABILITY_NOT_ESTABLISHED
 
 # Synthetic v1.1 execution report
 
-The D5 design is full-rank for the declared synthetic parameters and recovers strong injected Tamesis signals while controlling nominal false positives. D0-D3 either fail structurally or identify only rate combinations; D4 gains rank from mass dependence; D5 adds pressure-independent environmental controls. The result is not a physical discovery: it establishes a defensible synthetic design and names the external measurements still required.
+The D5 design is full-rank for the declared nominal synthetic parameters and recovers strong injected Tamesis signals while controlling nominal false positives. However, the 1,000-replica outlier adversary produces a 7.5% false-positive rate; robust/mixture inference and full drift/false-threshold challenges have not yet passed, so joint identifiability is not established as a scientific claim. D0-D3 either fail structurally or identify only rate combinations; D4 gains rank from mass dependence; D5 adds pressure-independent environmental controls. The result is not a physical discovery: it establishes a defensible synthetic design and names the external measurements still required.
 
 | Question | Result | Limitation |
 |---|---|---|

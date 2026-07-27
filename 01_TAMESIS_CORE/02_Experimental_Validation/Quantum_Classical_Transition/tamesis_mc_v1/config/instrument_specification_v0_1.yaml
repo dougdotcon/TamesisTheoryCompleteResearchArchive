@@ -1,0 +1,24 @@
+spec_version: "0.1"
+name: "Tamesis Experimental Instrument Specification — Telemetry-Constrained Identifiability"
+status: "scientific_specification_not_hardware_design"
+tamesis_protocol_id: "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+synthetic_v1_1_protocol_id: "tamesis-synthetic-v1.1:6bdfd06f317f503ffd2aa377bcafc58ba45150014304a3a42f889250388ed0d6"
+synthetic_v1_2_protocol_id: "tamesis-synthetic-v1.2:aceb5a8af5e98497411642dce828fd006b39e6529092fde20bc409f0081b6967"
+master_seed: 20260726
+randomization_seed: 20260727
+sampling:
+  shot_telemetry_hz: 10000
+  slow_telemetry_hz: 10
+  timestamp_resolution_s: 1.0e-9
+  maximum_association_error_s: 1.0e-5
+  clock_drift_max_s_per_hour: 1.0e-6
+  maximum_latency_s: 5.0e-6
+channels:
+  scientific: [raw_counts, commanded_phase, observed_phase, visibility, particle_survival, trajectory, spin_state]
+  fast_telemetry: [phase_reference, current, magnetic_field, vibration, timing, detector_efficiency, background, saturation, controller_state]
+  slow_telemetry: [pressure_sensor, gas_composition, gas_temperature, chamber_temperature, support_temperature, calibration_drift, cryogenic_state]
+  particle_metrology: [mass, mass_uncertainty, dimensions, material, charge, internal_temperature, absorption, emissivity, trajectory, separation]
+minimum_telemetry: [pressure_effective, gas_temperature, internal_temperature_proxy, phase_reference, detector_efficiency, saturation, background, vibration, current_noise, mass, separation, synchronization_clock]
+controls: [below_Mc, no_superposition, high_pressure, thermal_modulation, phase_noise_injection, efficiency_modulation, saturation_test, temporal_repetition, blind_instrument_fault]
+data_layers: [raw, calibrated, derived, analysis, reports]
+criteria: {false_positive_max: 0.05, power_min: 0.90, coverage_min: 0.90, coverage_max: 0.98, decision_yield_min: 0.80, synchronization_error_max_s: 1.0e-5}

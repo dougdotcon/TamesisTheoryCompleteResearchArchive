@@ -1,0 +1,20 @@
+synthetic_protocol_version: "1.2"
+name: "Tamesis Synthetic v1.2 Robust Adversarial Inference and False-Threshold Validation"
+status: "preregistered_before_locked_evaluation"
+tamesis_protocol_id: "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+synthetic_v1_protocol_id: "tamesis-synthetic-v1.0:c11dce74f55d478ac5f14fb0ca98771094342fe020ee01ed4fd4a760ecd260c7"
+synthetic_v1_1_protocol_id: "tamesis-synthetic-v1.1:6bdfd06f317f503ffd2aa377bcafc58ba45150014304a3a42f889250388ed0d6"
+master_seed: 20260726
+replicas: {development: 250, locked_standard: 1000, boundary_escalation: 5000, blind: 1000}
+likelihoods:
+  L0: {role: baseline, model: nominal_gaussian}
+  L1: {role: preregistered_primary, model: good_bad_fixed_mean_mixture, epsilon_bounds: [0.001, 0.20], kappa_bounds: [2.0, 20.0], starts: 7}
+  L2: {role: sensitivity, model: student_t, degrees_of_freedom: 4}
+  L3: {role: sensitivity, model: count_level_poisson_negative_binomial_mixture}
+decision_thresholds: {false_positive_rate_max: 0.05, coverage_min: 0.90, coverage_max: 0.98, power_min: 0.90, conditional_accuracy_min: 0.90, decision_yield_min: 0.80}
+contamination_families: [O1_isolated, O2_heavy_tail, O3_block, O4_time_correlated, O5_phase_slip, O6_detector_clipping, O7_background_burst, O8_dropout, O9_mass_dependent, O10_pressure_dependent, O11_time_dependent, O12_above_Mc_concentrated]
+false_threshold_families: [smooth_V0_mass, efficiency_step_Mc, internal_temperature_mass, capture_geometry, two_populations, mass_calibration, effective_pressure_size, phase_noise_mass, detector_saturation, mass_order_drift]
+locked_evaluation: true
+outlier_component_semantics: {good: nominal_component, bad: same_mean_inflated_dispersion, label_switching: forbidden}
+nonconvergence_policy: inconclusive
+primary_objectives: [model_discrimination, diagnostic_mu_estimation, nuisance_identification]

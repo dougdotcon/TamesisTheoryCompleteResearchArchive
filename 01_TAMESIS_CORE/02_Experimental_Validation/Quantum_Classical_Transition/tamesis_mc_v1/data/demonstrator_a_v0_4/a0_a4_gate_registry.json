@@ -1,0 +1,42 @@
+[
+  {
+    "gate": "A0",
+    "objective": "material characterization",
+    "entry": "raw candidate particles",
+    "success": "select at least one particle-specific candidate with separable signal and acceptable readout power",
+    "failure": "no candidate supports secondary validation",
+    "current_status": "ready_to_start_hardware"
+  },
+  {
+    "gate": "A1",
+    "objective": "stationary equilibrium calibration 5-20 K",
+    "entry": "A0 selected candidate",
+    "success": "locked up/down sweep, equilibrium verified, coverage 90-98%, agreement <=2 combined sigma",
+    "failure": "hysteresis/cross-sensitivity or gradient unresolved",
+    "current_status": "ready_to_start_after_A0"
+  },
+  {
+    "gate": "A2",
+    "objective": "stationary transient calibration",
+    "entry": "A1 passed",
+    "success": "tau_th, readout heating, R_th and C_eff recovered on locked pulses",
+    "failure": "inverse model fails or readout heating >10% calibrated step",
+    "current_status": "protocol_ready_hardware_pending"
+  },
+  {
+    "gate": "A3",
+    "objective": "20-77 K suspension/levitation integration",
+    "entry": "A0-A2 passed",
+    "success": "calibration transfer and low perturbation demonstrated",
+    "failure": "spectral response or thermal model does not transfer",
+    "current_status": "new_integration_required"
+  },
+  {
+    "gate": "A4",
+    "objective": "5-20 K levitated thermometry",
+    "entry": "A0-A3 passed",
+    "success": "two-channel triangulation, tau_th and total uncertainty demonstrated",
+    "failure": "no independent secondary channel or calibration transfer",
+    "current_status": "blocked_by_A3_and_hardware"
+  }
+]

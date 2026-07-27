@@ -1,0 +1,15 @@
+spec_version: "0.2"
+name: "Tamesis Sensor Transfer Models — Metrological Closure and Calibration Validation"
+status: "preregistered_metrological_validation"
+tamesis_protocol_id: "tamesis-mc-v1.0:d3d9b22cdb62a335a9cfe14d4a066d7f4ea314881892453e7594b3fa7a546d0e"
+instrument_specification_protocol_id: "tamesis-instrument-spec-v0.1:762e51afd387f9d012ddd7ca131e537512dacbf05fdafacd2cd790ca68dfda9e"
+synthetic_v1_2_protocol_id: "tamesis-synthetic-v1.2:aceb5a8af5e98497411642dce828fd006b39e6529092fde20bc409f0081b6967"
+master_seed: 20260726
+replicas: {development: 250, locked_standard: 1000, boundary_escalation: 5000}
+temperature_models: [T1_NV_ODMR, T2_NV_all_optical, T3_COM_proxy, T4_thermal_emission, T5_thermal_image]
+sensor_channels: [pressure_effective, gas_composition, phase_reference, detector_efficiency, saturation, mass, trajectory, separation, internal_temperature]
+calibration_sets: [calibration_training, calibration_validation, synthetic_science_development, locked_synthetic_science_evaluation]
+criteria: {false_positive_max: 0.05, power_min: 0.90, coverage_min: 0.90, coverage_max: 0.98, decision_yield_min: 0.80, condition_number_max: 10000}
+adversaries: [gain_error, offset, drift, saturation, hysteresis, delay, dropout, colored_noise, cross_sensitivity, population_calibration, regime_change, misplacement, desynchronization, cryogenic_extrapolation, thermal_false_threshold]
+thermal_regime: {target_min_k: 1.0, target_max_k: 4.0, demonstrated_NV_min_k: 77.0}
+selection_policy: "freeze transfer models on calibration data before locked science evaluation; nonconvergence is inconclusive"

@@ -1,0 +1,23 @@
+[
+  {
+    "model": "single_node_thermal",
+    "state": "T_int",
+    "forward": "C_eff(T)dT/dt=P_abs+P_readout+P_mw+P_technical-P_gas-P_rad-P_other",
+    "selection": "baseline only",
+    "risk": "misses internal gradients"
+  },
+  {
+    "model": "core_surface_two_node",
+    "state": "T_core,T_surface",
+    "forward": "coupled capacities and core-surface conductance",
+    "selection": "preferred if locked residuals show two scales",
+    "risk": "parameter correlation"
+  },
+  {
+    "model": "multi_timescale_empirical",
+    "state": "T_int plus empirical modes",
+    "forward": "sum of calibrated relaxation modes",
+    "selection": "sensitivity model, never selected only by fit score",
+    "risk": "poor physical extrapolation"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "A_thermometry",
+    "objective": "internal temperature in levitated cryogenic particle",
+    "go": "two independent channels agree and measured heating below budget",
+    "no_go": "no 1-4 K demonstration or correlated bias",
+    "depends_on": "none",
+    "priority": 1
+  },
+  {
+    "id": "B_local_pressure",
+    "objective": "gauge/damping/composition transfer",
+    "go": "local pressure uncertainty closes error budget",
+    "no_go": "gauge-local transfer unresolved",
+    "depends_on": "A",
+    "priority": 2
+  },
+  {
+    "id": "C_trajectory_phase",
+    "objective": "Delta x(t) and phase transfer",
+    "go": "cross-talk and drift bounded",
+    "no_go": "reference not representative",
+    "depends_on": "none",
+    "priority": 2
+  },
+  {
+    "id": "D_integrated_telemetry",
+    "objective": "simultaneous sensors and artificial faults",
+    "go": "O12 eliminated with preserved signal",
+    "no_go": "sensor perturbation or ambiguity",
+    "depends_on": "A,B,C",
+    "priority": 3
+  },
+  {
+    "id": "E_below_Mc",
+    "objective": "negative control",
+    "go": "no false signal below Mc",
+    "no_go": "FPR above 5%",
+    "depends_on": "D",
+    "priority": 4
+  },
+  {
+    "id": "F_threshold_scan",
+    "objective": "scan around Mc",
+    "go": "only after A-E pass",
+    "no_go": "any prerequisite fails",
+    "depends_on": "E",
+    "priority": 5
+  }
+]

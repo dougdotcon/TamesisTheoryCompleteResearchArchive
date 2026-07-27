@@ -31,6 +31,7 @@ de entrada.
 - [Tamesis M_c v1](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
 - [Estado de execução do Demonstrador A v0.6](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md)
 - [Figuras e animações visíveis](02_TAMESIS_MC_V1_OUTPUTS/README.md)
+- [Pacote para colaboração experimental](03_EXPERIMENTAL_COLLABORATION_PACKAGE/README.md)
 
 A hipótese fixa v1.0 usa
 `M_c = 5.292674126388712e-16 kg`. Esse é um valor do modelo, não uma constante

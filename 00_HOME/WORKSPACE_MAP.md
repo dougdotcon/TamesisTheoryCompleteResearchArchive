@@ -17,6 +17,7 @@ Core historical areas (now under `90_LEGACY` where applicable):
 
 Reference and support material:
 
+- `03_EXPERIMENTAL_COLLABORATION_PACKAGE` — collaboration, Q0, A0, A1, and data handoff
 - `RECURSOS_PARA_PESQUISA`
 - `07_CANON`
 - `08_COGNITIVE_TOPOLOGY`

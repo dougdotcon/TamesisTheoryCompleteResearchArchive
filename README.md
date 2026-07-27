@@ -30,6 +30,7 @@ campaign records. No v0.7 is planned without such input.
 - [Tamesis M_c v1](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
 - [Demonstrator A v0.6 execution state](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md)
 - [Visible figures and animations](02_TAMESIS_MC_V1_OUTPUTS/README.md)
+- [Experimental collaboration package](03_EXPERIMENTAL_COLLABORATION_PACKAGE/README.md)
 
 The fixed v1.0 hypothesis uses
 `M_c = 5.292674126388712e-16 kg`. This is a model value, not a measured

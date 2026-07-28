@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tamesis-session/1",
+  "type": "object",
+  "required": [
+    "session_id",
+    "started_at",
+    "agent",
+    "git_commit_before",
+    "active_work_item",
+    "authorized_action",
+    "result_status",
+    "files_created",
+    "files_modified",
+    "commands_executed",
+    "tests_executed",
+    "claims_changed",
+    "gaps_opened",
+    "gaps_closed",
+    "next_single_action"
+  ],
+  "properties": {
+    "session_id": {"type": "string", "minLength": 1},
+    "started_at": {"type": "string", "minLength": 10},
+    "ended_at": {"type": ["string", "null"]},
+    "agent": {"type": "string", "minLength": 1},
+    "git_commit_before": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "git_commit_after": {"type": ["string", "null"]},
+    "active_work_item": {"type": "string", "minLength": 1},
+    "authorized_action": {"type": "string", "minLength": 1},
+    "result_status": {"type": "string", "minLength": 1},
+    "files_created": {"type": "array", "items": {"type": "string"}},
+    "files_modified": {"type": "array", "items": {"type": "string"}},
+    "commands_executed": {"type": "array", "items": {"type": "string"}},
+    "tests_executed": {"type": "array", "items": {"type": "string"}},
+    "claims_changed": {"type": "array", "items": {"type": "string"}},
+    "gaps_opened": {"type": "array", "items": {"type": "string"}},
+    "gaps_closed": {"type": "array", "items": {"type": "string"}},
+    "next_single_action": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

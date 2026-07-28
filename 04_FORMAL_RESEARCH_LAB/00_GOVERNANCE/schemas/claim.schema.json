@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tamesis-claim/1",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "short_name",
+    "exact_statement",
+    "domain",
+    "source_artifacts",
+    "current_wording",
+    "work_status",
+    "evidence_level",
+    "dependencies",
+    "known_gaps",
+    "promotion_requirements",
+    "prohibited_claims"
+  ],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^[A-Z0-9_-]+$"},
+    "short_name": {"type": "string", "minLength": 1},
+    "exact_statement": {"type": "string", "minLength": 1},
+    "domain": {"type": "string", "minLength": 1},
+    "source_artifacts": {"type": "array", "items": {"type": "string"}},
+    "historical_wording": {"type": "string"},
+    "current_wording": {"type": "string", "minLength": 1},
+    "work_status": {"type": "string"},
+    "evidence_level": {"type": "string", "enum": ["H", "F", "C", "O", "P", "E", "I", "T", "N"]},
+    "dependencies": {"type": "array", "items": {"type": "string"}},
+    "known_gaps": {"type": "array", "items": {"type": "string"}},
+    "counterevidence": {"type": "array", "items": {"type": "string"}},
+    "canonical_owner": {"type": "string", "minLength": 1},
+    "last_reviewed": {"type": "string", "minLength": 10},
+    "promotion_requirements": {"type": "array", "items": {"type": "string"}},
+    "prohibited_claims": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

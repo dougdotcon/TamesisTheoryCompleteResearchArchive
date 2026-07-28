@@ -1,0 +1,210 @@
+schema: tamesis-research-queue/1
+queue:
+  - work_item_id: LAB-ARCH-001
+    title: "Arquitetura, governança e continuidade operacional"
+    track: governance
+    target_statement: "Existir uma camada canônica retomável sem modificar o legado."
+    expected_product: "LAB_STATE, precedência, ledgers, schemas e labctl."
+    dependencies: []
+    existing_assets:
+      - "RELATORIO_INTEGRAL_DO_PROGRAMA_TAMESIS_2026.md"
+      - "ROADMAP_CLAY_2026.md"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: "qualquer alteração fora da nova camada"
+    priority_class: P0
+    status: VERIFIED
+    authorized_next_gate: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+  - work_item_id: LAB-BENCH-001
+    title: "Lean e governança: benchmark de funcionamento"
+    track: formal_infrastructure
+    target_statement: "Definições e teoremas pequenos conhecidos compilam sem sorry/admit."
+    expected_product: "lake build PASS e contagem zero de sorry/admit."
+    dependencies:
+      - LAB-ARCH-001
+    existing_assets:
+      - "05_FORMAL/lean/"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "Lean/mathlib toolchain"
+    cross_track_value: high
+    stop_condition: "toolchain ausente ou primeiro teorema exigir axioma local"
+    priority_class: P0
+    status: BLOCKED
+    authorized_next_gate: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+    phase_status:
+      LEAN_ENVIRONMENT_DISCOVERY: PASS
+      LEAN_TOOLCHAIN_AVAILABILITY: PARTIAL
+      LEAN_SMOKE_BUILD: PASS
+      LAB_BENCHMARK_PREPARATION: PARTIAL
+      LAB_BENCHMARK_EXECUTION: NOT_STARTED
+      LAB_BENCHMARK_VERIFICATION: NOT_STARTED
+    blockers:
+      - LAB_LEAN_TOOLCHAIN_NOT_STABLE
+      - LAB_MATHLIB_REVISION_UNRESOLVED
+  - work_item_id: FOUND-SEMIGROUP-001
+    title: "Estruturas finitas de regimes e transições"
+    track: foundations
+    target_statement: "Definir composição e semigrupo de transições em exemplo finito."
+    expected_product: "teorema elementar de associatividade e fechamento."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "90_LEGACY/02_FOUNDATIONAL_LIBRARIES/TRI/"
+      - "90_LEGACY/02_FOUNDATIONAL_LIBRARIES/TDTR/"
+    formalization_cost: medium
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 2
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: "definições não distinguirem exemplo de teoria geral"
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUNDATIONS_EXECUTION_AUTHORIZED
+  - work_item_id: RH-NOGO-001
+    title: "No-go espectral rigorosamente delimitado"
+    track: millennium
+    target_statement: "Uma classe especificada de operadores não satisfaz simultaneamente propriedades necessárias."
+    expected_product: "teorema parcial ou contraexemplo, sem GUE circular."
+    dependencies:
+      - LAB-BENCH-001
+      - FOUND-SEMIGROUP-001
+    existing_assets:
+      - "01_TAMESIS_CORE/04_Spectral_Mathematics/"
+      - "PROBLEM_02_RIEMANN/01_STATUS/ANALISE_CRITICA_HONESTA.md"
+    formalization_cost: high
+    bibliographic_cost: high
+    counterexample_access: medium
+    dependency_depth: 3
+    external_dependency: "análise funcional e teoria espectral"
+    cross_track_value: high
+    stop_condition: "hipótese circular, trivialidade ou contraexemplo"
+    priority_class: P1
+    status: SCOPED
+    authorization_state: NOT_AUTHORIZED
+    execution_state: NO_EXECUTION
+    authorized_next_gate: RH_NOGO_PROOF_EXECUTION
+  - work_item_id: NS-PRESSURE-001
+    title: "Auditoria do lema de pressão–alinhamento"
+    track: millennium
+    target_statement: "Testar se a hipótese quantitativa sobre Hessiana de pressão é verdadeira e suficiente."
+    expected_product: "contraexemplo, correção ou teorema condicional."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "PROBLEM_03_NAVIER_STOKES/ANALISE_CRITICA_NS.md"
+    formalization_cost: high
+    bibliographic_cost: high
+    counterexample_access: medium
+    dependency_depth: 2
+    external_dependency: "análise de EDP e fluidos"
+    cross_track_value: medium
+    stop_condition: "hipótese equivalente à regularidade ou contraexemplo explícito"
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: NAVIER_STOKES_PROOF_EXECUTION
+  - work_item_id: PVSNP-PHYS-001
+    title: "Separação entre complexidade física e clássica"
+    track: millennium
+    target_statement: "Definir P_phys/NP_phys sem alegar P != NP."
+    expected_product: "paper de complexidade física com teoremas de simulação ou limites."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "PROBLEM_01_P_VS_NP/01_STATUS/ANALISE_CRITICA_PNP.md"
+    formalization_cost: medium
+    bibliographic_cost: high
+    counterexample_access: high
+    dependency_depth: 2
+    external_dependency: "complexidade computacional"
+    cross_track_value: medium
+    stop_condition: "ponte para Turing superpolinomial ou indefinição de codificação"
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: PVSNP_PHYS_EXECUTION
+  - work_item_id: YM-LIMIT-001
+    title: "Preservação ou perda do gap em limites"
+    track: millennium
+    target_statement: "Demonstrar quais hipóteses faltam para o gap sobreviver a limites."
+    expected_product: "teorema de insuficiência ou construção de contraexemplo abstrato."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "PROBLEM_04_YANG_MILLS/ANALISE_CRITICA_YM.md"
+    formalization_cost: very_high
+    bibliographic_cost: very_high
+    counterexample_access: medium
+    dependency_depth: 2
+    external_dependency: "constructive QFT"
+    cross_track_value: high
+    stop_condition: "confundir subsequência com teoria única"
+    priority_class: P3
+    status: SCOPED
+    authorized_next_gate: YM_LIMIT_EXECUTION
+  - work_item_id: HODGE-CDK-001
+    title: "Auditoria da inferência entre loci e ciclos"
+    track: millennium
+    target_statement: "Formalizar exatamente o que CDK prova e o que não prova."
+    expected_product: "nota crítica e caso especial verificável."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "PROBLEM_05_HODGE_CONJECTURE/01_STATUS/ANALISE_CRITICA_HODGE.md"
+    formalization_cost: high
+    bibliographic_cost: very_high
+    counterexample_access: medium
+    dependency_depth: 2
+    external_dependency: "geometria algébrica"
+    cross_track_value: medium
+    stop_condition: "transversalidade tratada como sobrejetividade"
+    priority_class: P3
+    status: SCOPED
+    authorized_next_gate: HODGE_CDK_EXECUTION
+  - work_item_id: BSD-HYP-MATRIX-001
+    title: "Matriz formal de hipóteses e casos cobertos"
+    track: millennium
+    target_statement: "Particionar a literatura BSD por hipóteses, curvas, posto e primos."
+    expected_product: "matriz auditada sem união indevida de teoremas."
+    dependencies:
+      - LAB-BENCH-001
+    existing_assets:
+      - "PROBLEM_06_BIRCH_SWINNERTON_DYER/ANALISE_CRITICA_BSD.md"
+    formalization_cost: high
+    bibliographic_cost: very_high
+    counterexample_access: medium
+    dependency_depth: 2
+    external_dependency: "aritmética de curvas elípticas/Iwasawa"
+    cross_track_value: medium
+    stop_condition: "produto de casos confundido com cobertura universal"
+    priority_class: P3
+    status: SCOPED
+    authorized_next_gate: BSD_HYPOTHESIS_AUDIT
+  - work_item_id: TOE-INTERFACE-001
+    title: "Teoria formal de interfaces entre regimes"
+    track: toe_synthesis
+    target_statement: "Definir objetos, morfismos, invariantes e obstruções sem equação mestre."
+    expected_product: "especificação formal de teoria de regimes/interfaces."
+    dependencies:
+      - FOUND-SEMIGROUP-001
+      - RH-NOGO-001
+      - NS-PRESSURE-001
+    existing_assets:
+      - "01_TAMESIS_CORE/03_TRANSITION_ATLAS/"
+      - "90_LEGACY/02_FOUNDATIONAL_LIBRARIES/"
+    formalization_cost: very_high
+    bibliographic_cost: high
+    counterexample_access: medium
+    dependency_depth: 4
+    external_dependency: "teoria de categorias e física matemática"
+    cross_track_value: high
+    stop_condition: "metáfora sem definições ou falha de recuperação"
+    priority_class: P4
+    status: SCOPED
+    authorized_next_gate: TOE_INTERFACE_EXECUTION

@@ -1,0 +1,28 @@
+schema: tamesis-benchmark-phase-status/1
+work_item_id: LAB-BENCH-001
+authorized_action: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+research_authorized: false
+phases:
+  LEAN_ENVIRONMENT_DISCOVERY:
+    status: PASS
+    evidence: "Elan, shims, diretório temporário, versões e manifesto foram localizados."
+  LEAN_TOOLCHAIN_AVAILABILITY:
+    status: PARTIAL
+    evidence: "Lean/Lake executam pelo diretório .tmp, mas elan which falha para o destino definitivo."
+  LEAN_SMOKE_BUILD:
+    status: PASS
+    evidence: "lake build concluiu 12 jobs usando Lean 4.32.2 pelo caminho temporário."
+  LAB_BENCHMARK_PREPARATION:
+    status: PARTIAL
+    evidence: "Especificação criada; toolchain definitivo e revisão Mathlib ainda não fixados."
+  LAB_BENCHMARK_EXECUTION:
+    status: NOT_STARTED
+    evidence: "Nenhum arquivo Benchmark/*.lean foi criado ou executado."
+  LAB_BENCHMARK_VERIFICATION:
+    status: NOT_STARTED
+    evidence: "Não existe ainda pacote de evidências do benchmark completo."
+blockers:
+  - LAB_LEAN_TOOLCHAIN_NOT_STABLE
+  - LAB_MATHLIB_REVISION_UNRESOLVED
+next_single_action: "Concluir a instalação definitiva do toolchain Lean declarado via Elan."
+

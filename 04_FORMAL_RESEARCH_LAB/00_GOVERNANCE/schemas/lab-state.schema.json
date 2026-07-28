@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tamesis-formal-lab-state/1",
+  "type": "object",
+  "required": [
+    "schema",
+    "updated_at",
+    "canonical_commit",
+    "repository_clean",
+    "active_track",
+    "active_work_item",
+    "work_status",
+    "evidence_level",
+    "next_single_action",
+    "authorized_action",
+    "prohibited_actions",
+    "resume_read_order"
+  ],
+  "properties": {
+    "schema": {"const": "tamesis-formal-lab-state/1"},
+    "updated_at": {"type": "string", "minLength": 10},
+    "canonical_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "repository_clean": {"type": "boolean"},
+    "active_track": {"type": "string", "minLength": 1},
+    "active_work_item": {"type": "string", "minLength": 1},
+    "work_status": {"type": "string"},
+    "evidence_level": {"type": "string", "enum": ["H", "F", "C", "O", "P", "E", "I", "T", "N"]},
+    "last_verified_artifact": {},
+    "current_blocker": {},
+    "next_single_action": {"type": "string", "minLength": 1},
+    "authorized_action": {"type": "string", "minLength": 1},
+    "prohibited_actions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "resume_read_order": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

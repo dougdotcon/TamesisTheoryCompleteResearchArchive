@@ -143,7 +143,7 @@ Essas negativas não diminuem o valor do programa. Elas delimitam o ponto em que
 
 ## 6. Todas as linhas de pesquisa do laboratório
 
-O inventário de 280 registros pode ser lido como as seguintes linhas, agrupadas por função. Os nomes entre parênteses correspondem às famílias do relatório de auditoria.
+O inventário de 280 registros pode ser lido como as seguintes linhas, agrupadas por função. As famílias abaixo correspondem aos blocos temáticos consolidados no relatório de auditoria.
 
 ### Linha A — Fundamentos, holografia e arquitetura da realidade
 

@@ -56,3 +56,8 @@
   definitivo e Mathlib está fixada no commit v4.32.2.
 - O smoke import Mathlib excedeu 600 segundos em compilação local e o gate
   terminou como `LAB_MATHLIB_SMOKE_BUILD_FAILED`.
+- LAB-0.7 confirmou checkout Mathlib compatível com o manifesto, mas o comando
+  oficial `cache get` falhou com recurso ausente; o smoke direto acusou
+  `MISSING_OLEAN` e o alvo isolado excedeu 600 segundos.
+- LAB-0.7 terminou como `LAB07_CACHE_UNAVAILABLE_FOR_REVISION`; nenhum benchmark
+  ou problema Clay foi executado.

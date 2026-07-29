@@ -1,16 +1,16 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-28T20:30:00-03:00
+updated_at: 2026-07-28T21:22:00-03:00
 canonical_commit: "363be8ad18083c8dc54c3b9d42c47cfd5bb954c8"
 repository_clean: false
 active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"
 evidence_level: "F"
-last_verified_artifact: "lab0.6-environment-result.json"
-current_blocker: "O toolchain está estável e Mathlib está fixada, mas o smoke import Mathlib excedeu 10 minutos sem concluir."
-next_single_action: "Concluir o smoke test Mathlib compilando localmente o alvo MathlibSmoke."
-authorized_action: "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED"
+last_verified_artifact: "lab0.7-mathlib-smoke-result.json"
+current_blocker: "O cache oficial da revisão Mathlib não foi recuperado; o alvo isolado excedeu 600 segundos."
+next_single_action: "Recuperar os artefatos de cache ausentes da revisão Mathlib fixada."
+authorized_action: "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED"
 prohibited_actions:
   - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
   - "Não executar a formalização completa do benchmark neste gate"

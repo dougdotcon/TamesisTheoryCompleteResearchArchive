@@ -16,7 +16,7 @@
 | Mathlib | commit 905b95818eb32af7874a58b427f50c1711a5e96c, tag v4.32.2 |
 | manifesto | 9 dependências transitivas com commits exatos |
 | SHA-256 do manifesto | 4BB811C39DA9FBFF3CE2D6BD9B947AF0A4266D865608EA83A66A5A9B97C453B9 |
-| cache Mathlib | indisponível |
+| cache Mathlib | `cache get` falhou com recurso ausente; indisponível para a revisão |
 | smoke import Mathlib | timeout após 600s; sem PASS reivindicado |
 
 ## Classificação
@@ -47,7 +47,8 @@ portanto a compilação local foi tentada.
 ## Estado do smoke
 
 O módulo TamesisLab/Tests/MathlibSmoke.lean importa Mathlib e verifica fatos
-triviais. A compilação local excedeu 600 segundos depois de gerar milhares de
-artefatos; o resultado é LAB_MATHLIB_SMOKE_BUILD_FAILED.
+triviais. A compilação direta acusou `MISSING_OLEAN`; o alvo isolado excedeu
+600 segundos após a tentativa de recuperação. O resultado do LAB-0.7 é
+`LAB07_CACHE_UNAVAILABLE_FOR_REVISION`.
 
 Nenhum teorema do benchmark foi criado ou executado.

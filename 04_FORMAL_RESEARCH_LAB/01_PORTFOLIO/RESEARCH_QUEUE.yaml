@@ -37,7 +37,7 @@ queue:
     stop_condition: "toolchain ausente ou primeiro teorema exigir axioma local"
     priority_class: P0
     status: BLOCKED
-    authorized_next_gate: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+    authorized_next_gate: LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED
     phase_status:
       LEAN_ENVIRONMENT_DISCOVERY: PASS
       LEAN_TOOLCHAIN_AVAILABILITY: PASS
@@ -46,7 +46,8 @@ queue:
       LAB_BENCHMARK_EXECUTION: NOT_STARTED
       LAB_BENCHMARK_VERIFICATION: NOT_STARTED
     blockers:
-      - LAB_MATHLIB_SMOKE_BUILD_FAILED
+      - LAB07_CACHE_UNAVAILABLE_FOR_REVISION
+      - LAB07_SMOKE_PROCESS_TIMEOUT
   - work_item_id: FOUND-SEMIGROUP-001
     title: "Estruturas finitas de regimes e transições"
     track: foundations

@@ -7,14 +7,14 @@ phases:
     status: PASS
     evidence: "Elan, shims, diretório temporário, versões e manifesto foram localizados."
   LEAN_TOOLCHAIN_AVAILABILITY:
-    status: PARTIAL
-    evidence: "Lean/Lake executam pelo diretório .tmp, mas elan which falha para o destino definitivo."
+    status: PASS
+    evidence: "elan show, elan which e toolchain list resolvem v4.32.2 sem .tmp."
   LEAN_SMOKE_BUILD:
     status: PASS
-    evidence: "lake build concluiu 12 jobs usando Lean 4.32.2 pelo caminho temporário."
+    evidence: "Smoke estrutural anterior concluiu; o smoke atual importando Mathlib permanece sem PASS apos timeout de 600 s."
   LAB_BENCHMARK_PREPARATION:
     status: PARTIAL
-    evidence: "Especificação criada; toolchain definitivo e revisão Mathlib ainda não fixados."
+    evidence: "Especificação, toolchain e revisão Mathlib estão fixados; smoke Mathlib ainda não concluiu."
   LAB_BENCHMARK_EXECUTION:
     status: NOT_STARTED
     evidence: "Nenhum arquivo Benchmark/*.lean foi criado ou executado."
@@ -22,7 +22,5 @@ phases:
     status: NOT_STARTED
     evidence: "Não existe ainda pacote de evidências do benchmark completo."
 blockers:
-  - LAB_LEAN_TOOLCHAIN_NOT_STABLE
-  - LAB_MATHLIB_REVISION_UNRESOLVED
-next_single_action: "Concluir a instalação definitiva do toolchain Lean declarado via Elan."
-
+  - LAB_MATHLIB_SMOKE_BUILD_FAILED
+next_single_action: "Concluir o smoke test Mathlib compilando localmente o alvo MathlibSmoke."

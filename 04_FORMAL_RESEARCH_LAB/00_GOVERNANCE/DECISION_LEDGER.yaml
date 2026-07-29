@@ -43,3 +43,22 @@ decisions:
     affected_paths:
       - "04_FORMAL_RESEARCH_LAB/"
     reversibility: reversible
+  - decision_id: DEC-006
+    date: 2026-07-28
+    decision: "Interromper LAB-0.6 após timeout da instalação oficial do toolchain definitivo."
+    rationale: "O ambiente continua dependente de .tmp; Mathlib não pode ser fixada nem testada honestamente."
+    authority: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "05_FORMAL/LEAN_ENVIRONMENT.md"
+      - "lab0.6-environment-result.json"
+    reversibility: reversible
+  - decision_id: DEC-007
+    date: 2026-07-28
+    decision: "Aceitar toolchain definitivo e lock da Mathlib, mas interromper antes do benchmark porque o smoke import Mathlib excedeu o timeout."
+    rationale: "A infraestrutura foi estabilizada; a importação completa exige compilação local extensa e não produziu PASS verificável neste gate."
+    authority: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "05_FORMAL/lean/lakefile.toml"
+      - "05_FORMAL/lean/lake-manifest.json"
+      - "05_FORMAL/lean/TamesisLab/Tests/MathlibSmoke.lean"
+    reversibility: reversible

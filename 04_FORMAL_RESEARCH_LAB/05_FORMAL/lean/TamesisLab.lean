@@ -6,6 +6,7 @@ import TamesisLab.YangMills
 import TamesisLab.Hodge
 import TamesisLab.BSD
 import TamesisLab.TOE
+import TamesisLab.Tests.MathlibSmoke
 
 namespace TamesisLab
 

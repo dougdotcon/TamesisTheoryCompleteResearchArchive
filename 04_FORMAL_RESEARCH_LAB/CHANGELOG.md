@@ -48,3 +48,11 @@
 - LAB-0.6 interrompido por `LAB06_RECONCILIATION_DIFF_UNRESOLVED`: o HEAD
   inicial não contém o laboratório e o resultado histórico do LAB-0 não pode
   ser recuperado por Git.
+- Um processo externo criou `363be8a`; ele contém a camada formal e o artefato
+  LAB-0.5, mas não é um commit exclusivo desta sessão.
+- LAB-0.6 interrompido por `LAB_LEAN_TOOLCHAIN_INSTALLATION_FAILED` após o
+  comando oficial do Elan expirar em 184 segundos.
+- A instalação foi posteriormente concluída pelo Elan; o toolchain agora é
+  definitivo e Mathlib está fixada no commit v4.32.2.
+- O smoke import Mathlib excedeu 600 segundos em compilação local e o gate
+  terminou como `LAB_MATHLIB_SMOKE_BUILD_FAILED`.

@@ -264,7 +264,11 @@ def validate() -> dict[str, Any]:
     if not all_changes_are_in_lab(status_lines):
         errors.append("changes detected outside 04_FORMAL_RESEARCH_LAB")
 
-    lean_files = list((LAB_ROOT / "05_FORMAL" / "lean").rglob("*.lean"))
+    lean_files = [
+        path
+        for path in (LAB_ROOT / "05_FORMAL" / "lean").rglob("*.lean")
+        if ".lake" not in path.parts
+    ]
     forbidden_pattern = re.compile(r"\b(sorry|admit|axiom|unsafe)\b")
     forbidden_lean = [
         str(path.relative_to(REPO_ROOT))

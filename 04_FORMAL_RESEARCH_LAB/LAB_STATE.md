@@ -1,15 +1,15 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-28T20:10:00-03:00
-canonical_commit: "4b314d7360404385a91366449087779cccf87d4d"
+updated_at: 2026-07-28T20:30:00-03:00
+canonical_commit: "363be8ad18083c8dc54c3b9d42c47cfd5bb954c8"
 repository_clean: false
 active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"
 evidence_level: "F"
-last_verified_artifact: "lab0.5-result.json"
-current_blocker: "O HEAD não contém 04_FORMAL_RESEARCH_LAB; o diff não pode ser atribuído exclusivamente à reconciliação LAB-0.5."
-next_single_action: "Resolver a ausência do commit-base do LAB-0 e reabrir o LAB-0.6."
+last_verified_artifact: "lab0.6-environment-result.json"
+current_blocker: "O toolchain está estável e Mathlib está fixada, mas o smoke import Mathlib excedeu 10 minutos sem concluir."
+next_single_action: "Concluir o smoke test Mathlib compilando localmente o alvo MathlibSmoke."
 authorized_action: "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED"
 prohibited_actions:
   - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
@@ -27,98 +27,69 @@ resume_read_order:
 
 # Estado atual
 
-## Onde paramos
-
-O LAB-0 técnico passou, mas a transição de fila foi promovida indevidamente
-quando o smoke build foi tratado como conclusão de `LAB-BENCH-001`.
-O gate LAB-0.5 restaurou a sequência:
-
-```text
-LAB-0
-→ LAB-BENCH-001
-→ somente posteriormente RH-NOGO-001
-```
+O LAB-0 técnico passou e o LAB-0.5 corrigiu a sequência para manter
+LAB-BENCH-001 antes de qualquer frente Clay.
 
 ## Estado do benchmark
 
 | Etapa | Estado |
 |---|---|
-| `LEAN_ENVIRONMENT_DISCOVERY` | `PASS` |
-| `LEAN_TOOLCHAIN_AVAILABILITY` | `PARTIAL` |
-| `LEAN_SMOKE_BUILD` | `PASS` |
-| `LAB_BENCHMARK_PREPARATION` | `PARTIAL` |
-| `LAB_BENCHMARK_EXECUTION` | `NOT_STARTED` |
-| `LAB_BENCHMARK_VERIFICATION` | `NOT_STARTED` |
+| LEAN_ENVIRONMENT_DISCOVERY | PASS |
+| LEAN_TOOLCHAIN_AVAILABILITY | PASS |
+| LEAN_SMOKE_BUILD | PASS para o smoke core anterior |
+| LAB_BENCHMARK_PREPARATION | PARTIAL |
+| LAB_BENCHMARK_EXECUTION | NOT_STARTED |
+| LAB_BENCHMARK_VERIFICATION | NOT_STARTED |
 
 A especificação canônica está em
-`05_FORMAL/specifications/LAB-BENCH-001.md`. Ela não autoriza a criação dos
-módulos Lean previstos nem a execução do benchmark completo.
+05_FORMAL/specifications/LAB-BENCH-001.md. A preparação permanece parcial
+porque o smoke de importação Mathlib ainda não terminou.
 
-## Ambiente Lean verificado
+## Ambiente Lean e Mathlib
 
-- Elan: `4.2.3`.
-- Lean no diretório temporário: `4.32.2`.
-- Lake no diretório temporário: `5.0.0-src+f3b06c7`.
-- Toolchain declarado: `leanprover/lean4:v4.32.2`.
-- `elan toolchain list`: `leanprover/lean4:v4.32.tmp`.
-- `elan which lean` e `elan which lake`: falham para o destino definitivo.
-- Shims `elan`, `lean` e `lake`: não estão no PATH desta sessão.
-- Mathlib: não configurado; revisão exata não resolvida.
-- `lake-manifest.json` SHA-256:
-  `F61F111EEE3C5856DD6187087B1574BDCB8A52B817F28EAD5254962EDC6C0D73`.
+- Elan: 4.2.3.
+- Lean: 4.32.2, commit f3b06c705e6c85f5314019d5d3baab0fec5b580c.
+- Lake: 5.0.0-src+f3b06c7.
+- Toolchain declarado e resolvido: leanprover/lean4:v4.32.2.
+- elan which lean/lake: caminhos definitivos, sem .tmp.
+- Mathlib: commit 905b95818eb32af7874a58b427f50c1711a5e96c, tag v4.32.2.
+- Manifesto SHA-256: 4BB811C39DA9FBFF3CE2D6BD9B947AF0A4266D865608EA83A66A5A9B97C453B9.
+- Cache remoto Mathlib: indisponível; compilação local tentada.
+- Smoke import Mathlib: timeout após 600 segundos; sem PASS reivindicado.
 
-O smoke build passou com 12 jobs pelo caminho `.tmp`, mas o ambiente ainda não
-é classificado como reprodutível.
+## Commit observado
 
-## Bloqueio LAB-0.6
-
-O commit `4b314d7360404385a91366449087779cccf87d4d` não contém
-`04_FORMAL_RESEARCH_LAB/`; o diretório inteiro aparece como não rastreado.
-Consequentemente, `git show HEAD:04_FORMAL_RESEARCH_LAB/lab0-result.json`
-falha e não existe uma versão histórica congelável desse artefato no Git.
-O protocolo exige parar antes de criar o commit da reconciliação.
+Um processo externo criou 363be8ad18083c8dc54c3b9d42c47cfd5bb954c8, que
+contém a camada formal e lab0.5-result.json. O commit não foi criado por esta
+sessão e o lab0-result.json nele contido já traz avisos posteriores; ele
+permanece congelado e não é tratado como snapshot histórico puro.
 
 ## Estado de RH-NOGO-001
 
-```text
 SCOPED
 NOT_AUTHORIZED
 NO_EXECUTION
-```
 
-Nenhuma sessão de Riemann foi aberta e nenhuma análise espectral foi iniciada.
+Nenhuma sessão de Riemann foi aberta.
 
 ## Próxima ação única
 
-Resolver a ausência do commit-base do LAB-0 e reabrir o LAB-0.6.
+Concluir o smoke test Mathlib compilando localmente o alvo MathlibSmoke.
 
 ## Ações proibidas
 
-- abrir ou executar `RH-NOGO-001`;
-- construir operadores ou pesquisar no-go theorems;
-- criar os módulos Lean do benchmark antes do gate de execução;
-- usar o diretório `.tmp` como localização canônica;
-- alterar qualquer arquivo fora de `04_FORMAL_RESEARCH_LAB/`;
-- usar `sorry`, `admit`, axioma local ou `unsafe`;
-- interpretar smoke build como verificação do benchmark;
+- abrir ou executar RH-NOGO-001;
+- criar teoremas do benchmark além do smoke de infraestrutura;
+- alterar qualquer arquivo fora de 04_FORMAL_RESEARCH_LAB/;
+- usar sorry, admit, axioma local ou unsafe;
+- interpretar smoke incompleto como verificação;
 - iniciar automaticamente a etapa seguinte.
-
-## Ordem de retomada
-
-1. `LAB_STATE.md`
-2. `AGENTS.md`
-3. `05_FORMAL/specifications/LAB-BENCH-001_STATUS.yaml`
-4. `05_FORMAL/specifications/LAB-BENCH-001.md`
-5. `01_PORTFOLIO/RESEARCH_QUEUE.yaml`
-6. último arquivo em `09_SESSIONS/`
 
 ## Histórico recente
 
-- `2026-07-28`: LAB-0 técnico passou.
-- `2026-07-28`: smoke build passou com Lean 4.32.2 pelo caminho `.tmp`.
-- `2026-07-28`: `LAB-BENCH-001` foi incorretamente marcado `VERIFIED`.
-- `2026-07-28`: LAB-0.5 corrigiu o gate para `LAB-BENCH-001 / BLOCKED`.
-- `2026-07-28`: nenhuma frente Clay foi iniciada.
-- `2026-07-28`: LAB-0.6 interrompido por `LAB06_RECONCILIATION_DIFF_UNRESOLVED`;
-  o HEAD não contém o laboratório e `lab0-result.json` não tem versão histórica
-  em `git show HEAD`.
+- 2026-07-28: LAB-0 técnico passou.
+- 2026-07-28: LAB-0.5 corrigiu o gate.
+- 2026-07-28: commit externo 363be8a congelou a camada formal.
+- 2026-07-28: toolchain definitivo e Mathlib foram resolvidos.
+- 2026-07-28: LAB-0.6 interrompido por LAB_MATHLIB_SMOKE_BUILD_FAILED.
+- 2026-07-28: nenhuma frente Clay foi iniciada.

@@ -47,3 +47,5 @@ A contagem principal é por arquivo editorial. O arquivo também contém versõe
 - Cada pasta contém uma cópia de [`paper-layout.css`](/D:/TamesisTheoryCompleteResearchArchive/paper-layout.css), portanto os links de estilo continuam funcionando dentro das cópias.
 
 Os arquivos-fonte Markdown permanecem no local original; as versões HTML convertidas foram criadas ao lado deles e incluídas na fila editorial.
+
+O inventário arquivo a arquivo está em [`ARTICLE_MANIFEST.csv`](/D:/TamesisTheoryCompleteResearchArchive/ARTICLE_MANIFEST.csv), com título, tipo de origem, status e caminho da cópia staged.

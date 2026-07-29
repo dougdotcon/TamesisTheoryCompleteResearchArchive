@@ -53,7 +53,21 @@ function Copy-StagedFile($source, $destinationRoot) {
 
 $publishedFiles = @()
 $toPublishFiles = @()
+$manifest = @()
 foreach ($file in $articleFiles) {
+    $relative = $file.FullName.Substring($root.Length).TrimStart('\')
+    $titleMatch = [regex]::Match([IO.File]::ReadAllText($file.FullName), '<title[^>]*>(.*?)</title>', [Text.RegularExpressions.RegexOptions]::Singleline)
+    $title = if ($titleMatch.Success) { [regex]::Replace($titleMatch.Groups[1].Value, '\s+', ' ').Trim() } else { $file.BaseName }
+    $isPublished = $publishedSet.ContainsKey($file.FullName.ToLowerInvariant())
+    $isConverted = Select-String -LiteralPath $file.FullName -Pattern 'Artigo convertido do arquivo Markdown Tamesis' -SimpleMatch -Quiet
+    $markdownSource = ''
+    if ($isConverted) {
+        $stem = [IO.Path]::GetFileNameWithoutExtension($file.Name) -replace '_from_md$', ''
+        $candidateSource = Join-Path $file.DirectoryName ($stem + '.md')
+        if (Test-Path -LiteralPath $candidateSource) {
+            $markdownSource = $candidateSource.Substring($root.Length).TrimStart('\')
+        }
+    }
     if ($publishedSet.ContainsKey($file.FullName.ToLowerInvariant())) {
         Copy-StagedFile $file $publishedRoot
         $publishedFiles += $file
@@ -61,6 +75,17 @@ foreach ($file in $articleFiles) {
         Copy-StagedFile $file $toPublishRoot
         $toPublishFiles += $file
     }
+    $manifest += [pscustomobject]@{
+        status = if ($isPublished) { 'published' } else { 'to_publish' }
+        kind = if ($isConverted) { 'markdown_converted' } else { 'html_existing' }
+        title = $title
+        source_path = $relative
+        markdown_source = $markdownSource
+        staged_path = if ($isPublished) { 'publicados/' + ($relative -replace '\\', '/') } else { 'publicar/' + ($relative -replace '\\', '/') }
+    }
 }
+
+$manifestText = (($manifest | Sort-Object status, source_path | ConvertTo-Csv -NoTypeInformation) -join [Environment]::NewLine)
+[IO.File]::WriteAllText((Join-Path $root 'ARTICLE_MANIFEST.csv'), $manifestText, (New-Object Text.UTF8Encoding($false)))
 
 "ARTICLE_HTML=$($articleFiles.Count) PUBLISHED=$($publishedFiles.Count) TO_PUBLISH=$($toPublishFiles.Count)"

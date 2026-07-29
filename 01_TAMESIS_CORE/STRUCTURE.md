@@ -255,6 +255,7 @@ Independent and speculative research papers that don't fit the main research arc
 | Folder | Paper | Theme |
 |:-------|:------|:------|
 | `Consciousness/` | paper_consciencia | Physics of consciousness |
+| `Cognitive_Ecosystems/` | 7-paper research program | Brain-body computation, complexity dividend, development, multidimensional consciousness, and epistemically separated cosmological extensions |
 | `Parent_Universe/` | paper_universo_pai | Parent universe cosmology |
 | `Eschatology/` | paper_escatologia | Universe final fate |
 | `Metric_Engineering/` | paper_engenharia_metrica | Warp drive engineering |

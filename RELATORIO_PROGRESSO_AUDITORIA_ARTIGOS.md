@@ -9,9 +9,9 @@
 | Indicador | Quantidade | Observacao |
 |---|---:|---|
 | Registros no manifesto | 280 | 7 publicados e 273 destinados a publicacao |
-| Registros auditados | 210 | Links abaixo identificam cada registro auditado |
-| Dossies de auditoria | 205 | Variantes linguisticas equivalentes podem compartilhar um dossie |
-| Registros restantes | 70 | A auditoria continua em lotes rastreaveis |
+| Registros auditados | 280 | Links abaixo identificam cada registro auditado |
+| Dossies de auditoria | 274 | Variantes linguisticas equivalentes podem compartilhar um dossie |
+| Registros restantes | 0 | Todos os registros do manifesto possuem auditoria registrada |
 
 ## Registros auditados
 
@@ -300,6 +300,112 @@
 - [Unified draft](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_UNIFIED_DRAFT.html)
 - [Unified draft - assets copy](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/assets/PAPER_UNIFIED_DRAFT.html)
 
+### Structural Solvability e Thermodynamic Structuralism (9)
+
+- [Structural Solvability - synthesis](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_STRUCTURAL_SOLVABILITY/paper.html)
+- [Structural Solvability - foundations](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_STRUCTURAL_SOLVABILITY/PAPER_01_STRUCTURAL_SOLVABILITY_FOUNDATIONS.html)
+- [Structural barriers](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_STRUCTURAL_SOLVABILITY/PAPER_02_STRUCTURAL_BARRIERS.html)
+- [Thermodynamic selection](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_STRUCTURAL_SOLVABILITY/PAPER_03_THERMODYNAMIC_SELECTION.html)
+- [Computational classification](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_STRUCTURAL_SOLVABILITY/PAPER_C_COMPUTATIONAL_CLASSIFICATION.html)
+- [Thermodynamic Structuralism - synthesis](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_THERMODYNAMIC_STRUCTURALISM/paper.html)
+- [Theory of realizability](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_THERMODYNAMIC_STRUCTURALISM/PAPER_A_THEORY_OF_REALIZABILITY.html)
+- [Reality filter](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_THERMODYNAMIC_STRUCTURALISM/PAPER_B_THE_REALITY_FILTER.html)
+- [TSR test](90_LEGACY/03_THEORETICAL_FRAMEWORK/THEORY_THERMODYNAMIC_STRUCTURALISM/PAPER_C_THE_TSR_TEST.html)
+
+### Millennium - Yang-Mills, Hodge e BSD (6)
+
+- [Yang-Mills structural solvability](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_04_YANG_MILLS/04_PAPERS/PAPER_A_STRUCTURAL_SOLVABILITY.html)
+- [Yang-Mills structural suppression](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_04_YANG_MILLS/04_PAPERS/PAPER_B_STRUCTURAL_SUPPRESSION.html)
+- [Hodge analytic signature](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_05_HODGE_CONJECTURE/04_PAPERS/PAPER_A_ANALYTIC_SIGNATURE.html)
+- [Hodge surjectivity map](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_05_HODGE_CONJECTURE/04_PAPERS/PAPER_B_SURJECTIVITY_MAP.html)
+- [BSD structural limits](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_06_BIRCH_SWINNERTON_DYER/04_PAPERS/PAPER_B1_STRUCTURAL_LIMITS.html)
+- [BSD non-equivalence](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_06_BIRCH_SWINNERTON_DYER/04_PAPERS/PAPER_B2_NON_EQUIVALENCE.html)
+
+### Millennium - Navier-Stokes (2)
+
+- [Regime incompatibility](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_03_NAVIER_STOKES/04_PAPERS/PAPER_A_REGIME_INCOMPATIBILITY.html)
+- [Structural no-go](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_03_NAVIER_STOKES/04_PAPERS/PAPER_B_STRUCTURAL_NOGO.html)
+
+### Cognitive Topology e Hybrid Cybernetics (9)
+
+- [Topological theory - synthesis](90_LEGACY/08_COGNITIVE_TOPOLOGY/paper.html)
+- [Relational cognition foundations](90_LEGACY/08_COGNITIVE_TOPOLOGY/THEORY_COGNITIVE_FOUNDATION/index.html)
+- [Topological cognitive states](90_LEGACY/08_COGNITIVE_TOPOLOGY/TOPOLOGICAL_THEORY_OF_COGNITIVE_STATES/paper.html)
+- [Anchor outline](90_LEGACY/08_COGNITIVE_TOPOLOGY/TOPOLOGICAL_THEORY_OF_COGNITIVE_STATES/PAPER_A_ANCHOR_OUTLINE.html)
+- [Spectral signatures](90_LEGACY/08_COGNITIVE_TOPOLOGY/TOPOLOGICAL_THEORY_OF_COGNITIVE_STATES/PAPER_B_SPECTRAL_SIGNATURES.html)
+- [Hybrid stability](RECURSOS_PARA_PESQUISA/08_APPLICATIONS/HYBRID_CYBERNETICS/05_PAPER/paper.html)
+- [Hybrid stability anchor](RECURSOS_PARA_PESQUISA/08_APPLICATIONS/HYBRID_CYBERNETICS/05_PAPER/paper_anchor.html)
+- [Human verification bandwidth](RECURSOS_PARA_PESQUISA/08_APPLICATIONS/HYBRID_CYBERNETICS/06_PAPER_C_BIO/paper.html)
+- [C_bio parametrization](RECURSOS_PARA_PESQUISA/08_APPLICATIONS/HYBRID_CYBERNETICS/06_PAPER_C_BIO/paper_c_bio.html)
+
+### Tamesis-Leue Horizon (5)
+
+- [Gravity theorem abstract](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/TAMESIS_LEUE_HORIZON/GRAVITY_THEOREM_ABSTRACT.html)
+- [Structural operator framework](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/TAMESIS_LEUE_HORIZON/paper_leue.html)
+- [Structural operator framework - Markdown conversion](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/TAMESIS_LEUE_HORIZON/paper_leue_from_md.html)
+- [Neural-LMC](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/TAMESIS_LEUE_HORIZON/STAGE_3_ENGINEERING/NEURAL_LMC_PAPER.html)
+- [Structural stability of spacetime](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/TAMESIS_LEUE_HORIZON/STRUCTURAL_STABILITY_PAPER/STRUCTURAL_STABILITY_PAPER.html)
+
+### Regime Transitions, Parent Universe e Certified Stability (6)
+
+- [Topological encryption and computing](01_TAMESIS_CORE/06_Universality_Discovery/Regime_Transitions/Applications/index.html)
+- [Experimental probes of U1/2](01_TAMESIS_CORE/06_Universality_Discovery/Regime_Transitions/Physical_Tests/index.html)
+- [Topological multiverse](01_TAMESIS_CORE/07_Speculative_Papers/Parent_Universe/paper_multiverse/index.html)
+- [Parent universe and CMB](01_TAMESIS_CORE/07_Speculative_Papers/Parent_Universe/paper_universo_pai/index.html)
+- [Certified stability](RECURSOS_PARA_PESQUISA/LEGACY%28CLOSED%29/CERTIFIED_STABILITY%20%28CLOSED%29/certified_stability_paper.html)
+- [Certified stability - Leue duplicate](RECURSOS_PARA_PESQUISA/LEGACY%28CLOSED%29/CERTIFIED_STABILITY%20%28CLOSED%29/paper_leue.html)
+
+### Holographic Bound on Macroscopic Quantum Superpositions (2)
+
+- [No-Scale theorem](01_TAMESIS_CORE/08_AHolographicBoundonMacroscopicQuantumSuperpositions/paper.html)
+- [PRL submission](01_TAMESIS_CORE/08_AHolographicBoundonMacroscopicQuantumSuperpositions/prl_submission.html)
+
+### Path A e Proof — teorias efetivas e recursos (6)
+
+- [Precision derivation of constants](RECURSOS_PARA_PESQUISA/PATH_A_SCIENTIFIC_TRUTH/index.html)
+- [Path A precision physics](RECURSOS_PARA_PESQUISA/PATH_A_SCIENTIFIC_TRUTH/paper.html)
+- [Ontological censor](RECURSOS_PARA_PESQUISA/PROOF/index.html)
+- [Adaptive dissipation](RECURSOS_PARA_PESQUISA/PROOF/paper_01_fluid_dynamics.html)
+- [Spectral universality](RECURSOS_PARA_PESQUISA/PROOF/paper_02_spectral_universality.html)
+- [Thermodynamic complexity](RECURSOS_PARA_PESQUISA/PROOF/paper_03_thermodynamic_complexity.html)
+
+### Foundation e Theoretical Labs (4)
+
+- [Final decree](01_TAMESIS_CORE/01_Foundation/paper_final.html)
+- [Informational architecture manuscript](01_TAMESIS_CORE/01_Foundation/The_Tamesis_Manuscript.html)
+- [Geometry of matter](01_TAMESIS_CORE/01_Foundation/Theoretical_Labs/DerivationofFundamental/docs/relatorios/PAPER_THE_GEOMETRY_OF_MATTER.html)
+- [PlanckDynamics simulation](01_TAMESIS_CORE/01_Foundation/Theoretical_Labs/PlanckDynamics_Sim/docs/scientific_paper.html)
+
+### Spectral Mathematics, Computational Extensions e Universality (8)
+
+- [Hyperbolic space](01_TAMESIS_CORE/04_Spectral_Mathematics/Hyperbolic_Geometry/Space/index.html)
+- [Local discretization no-go](01_TAMESIS_CORE/04_Spectral_Mathematics/no_go_theorem.html)
+- [Connes dilation](01_TAMESIS_CORE/05_Computational_Extensions/Connes_Dilation/index.html)
+- [RH spectral property](01_TAMESIS_CORE/05_Computational_Extensions/RH_Spectral_Property/index.html)
+- [Tamesis closure](01_TAMESIS_CORE/06_Universality_Discovery/Closure_Paper/index.html)
+- [Unified constants refutation](01_TAMESIS_CORE/06_Universality_Discovery/ToE_Refutation/index.html)
+- [U12 spectral reconstruction](01_TAMESIS_CORE/06_Universality_Discovery/U12_Discovery/index.html)
+- [Universality atlas](01_TAMESIS_CORE/06_Universality_Discovery/Universality_Atlas/index.html)
+
+### Experimental e especulativo (6)
+
+- [Spectral geometry e Riemann](01_TAMESIS_CORE/02_Experimental_Validation/riemann/index.html)
+- [Tamesis final synthesis](01_TAMESIS_CORE/02_Experimental_Validation/tamesis/index.html)
+- [Programa de ecossistemas cognitivos](01_TAMESIS_CORE/07_Speculative_Papers/Cognitive_Ecosystems/index.html)
+- [Consciousness as collapse mechanism](01_TAMESIS_CORE/07_Speculative_Papers/Consciousness/paper_consciencia/index.html)
+- [Computational eschatology](01_TAMESIS_CORE/07_Speculative_Papers/Eschatology/paper_escatologia/index.html)
+- [Metric engineering](01_TAMESIS_CORE/07_Speculative_Papers/Metric_Engineering/paper_engenharia_metrica/index.html)
+
+### Legados e unificados (7)
+
+- [Entropic Bounce — Kernel v3](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/index.html)
+- [Structural Selection / Thermodynamic Censor](90_LEGACY/05_TOE_SCTRUTURAL_SELECTION/paper.html)
+- [Computational Architecture of Reality v3](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/DOCS/Treatise_07_Computational_Architecture_v3_COMPLETE.html)
+- [Structural Operator Framework — Leue](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/CERTIFICACAO/paper_leue.html)
+- [Regime Incompatibility — PATH](RECURSOS_PARA_PESQUISA/LEGACY(CLOSED)/PATH/example-article%20copy.html)
+- [TRI–TDTR–Tamesis](RECURSOS_PARA_PESQUISA/TRI-TDTR-TAMESIS.html)
+- [Unified Theory — Thermodynamic Censor](RECURSOS_PARA_PESQUISA/UNIFIED_THEORY/paper.html)
+
 ## Protocolo aplicado
 
 - Separar resultado publicado, hipotese, inferencia e proposta experimental.
@@ -317,4 +423,4 @@
 
 ## Proxima fila
 
-Priorizar os 70 registros restantes em `02_Experimental_Validation`, `03_Axiomatic_Closure`, `04_Spectral_Mathematics`, `05_Computational_Extensions`, `07_Speculative_Papers`, `08_AHolographicBoundonMacroscopicQuantumSuperpositions` e `90_LEGACY`.
+Nenhum registro restante no manifesto. A próxima etapa é editorial: revisar citações, padronizar metadados/DOIs e preparar submissões conforme o status de cada artigo.

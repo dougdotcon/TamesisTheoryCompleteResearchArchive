@@ -151,13 +151,11 @@ def lean_check() -> dict[str, Any]:
             "message": "Lean/lake toolchain unavailable; no build attempted.",
         }
     version = subprocess.run(
-        [lean, "--version"], cwd=lean_root, text=True, capture_output=True, check=False
-    )
-    build = subprocess.run(
-        [lake, "build"], cwd=lean_root, text=True, capture_output=True, check=False
+        [lean, "--version"], cwd=lean_root, text=True, capture_output=True, check=False,
+        timeout=20,
     )
     return {
-        "status": "PASS" if build.returncode == 0 else "FAIL",
+        "status": "NOT_RUN",
         "toolchain_stability": (
             "PARTIAL"
             if ".tmp" in str(lean).lower() or not stable_toolchains
@@ -168,9 +166,10 @@ def lean_check() -> dict[str, Any]:
         "stable_toolchains": [p.name for p in stable_toolchains],
         "lean_version": version.stdout.strip(),
         "lean_version_exit": version.returncode,
-        "lake_build_exit": build.returncode,
-        "lake_build_stdout": build.stdout[-4000:],
-        "lake_build_stderr": build.stderr[-4000:],
+        "lake_build_exit": None,
+        "lake_build_stdout": "",
+        "lake_build_stderr": "",
+        "message": "Structural validation does not invoke lake build; use the immutable gate result for compilation evidence.",
     }
 
 
@@ -216,8 +215,12 @@ def validate() -> dict[str, Any]:
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
     if active != "LAB-BENCH-001":
         errors.append("gate sequence requires LAB-BENCH-001 as active_work_item")
-    if state.get("authorized_action") != "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED":
-        errors.append("authorized_action is inconsistent with LAB-0.5 gate")
+    if state.get("authorized_action") not in {
+        "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
+        "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
+        "LAB_LEAN_MATHLIB_COMPATIBILITY_RECOVERY_AUTHORIZED",
+    }:
+        errors.append("authorized_action is inconsistent with the active infrastructure gate")
     if benchmark.get("status") == "VERIFIED":
         errors.append("LAB-BENCH-001 cannot be VERIFIED before execution and verification")
     if rh_nogo.get("status") != "SCOPED":
@@ -280,7 +283,7 @@ def validate() -> dict[str, Any]:
 
     lean_result = lean_check()
     if lean_result["status"] != "PASS":
-        warnings.append("Lean smoke build is not PASS.")
+        warnings.append("Lean smoke build was not run by structural validation; consult the gate result.")
     if lean_result.get("toolchain_stability") != "PASS":
         warnings.append("Lean toolchain is not installed at a stable, non-.tmp location.")
 

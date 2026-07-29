@@ -61,3 +61,8 @@
   `MISSING_OLEAN` e o alvo isolado excedeu 600 segundos.
 - LAB-0.7 terminou como `LAB07_CACHE_UNAVAILABLE_FOR_REVISION`; nenhum benchmark
   ou problema Clay foi executado.
+- LAB-0.8 confirmou que `v4.32.2` é tag Mathlib oficial e compatível com o
+  toolchain declarado, mas o cache falha com exceção Windows de processo antes
+  de informar URL/HTTP. O probe isolado de `v4.32.1` reproduziu a falha.
+- LAB-0.8 terminou como `LAB08_NO_REPRODUCIBLE_PAIR_FOUND`; nenhuma migração
+  canônica foi executada.

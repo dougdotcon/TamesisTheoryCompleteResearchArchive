@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-28T21:22:00-03:00
+updated_at: 2026-07-28T22:38:00-03:00
 canonical_commit: "db75056028c34a9b5cd2093003dd77ed8d3704b4"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
@@ -8,10 +8,10 @@ active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"
 evidence_level: "F"
-last_verified_artifact: "lab0.7-mathlib-smoke-result.json"
-current_blocker: "O cache oficial da revisão Mathlib não foi recuperado; o alvo isolado excedeu 600 segundos."
-next_single_action: "Recuperar os artefatos de cache ausentes da revisão Mathlib fixada."
-authorized_action: "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED"
+last_verified_artifact: "lab0.8-lean-mathlib-compatibility-result.json"
+current_blocker: "Nenhum par Lean–Mathlib reproduzível passou cache e smoke integralmente."
+next_single_action: "Investigar a falha de processo do cache identificando o executável/recurso que retorna o erro Windows 2."
+authorized_action: "LAB_LEAN_MATHLIB_COMPATIBILITY_RECOVERY_AUTHORIZED"
 prohibited_actions:
   - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
   - "Não executar a formalização completa do benchmark neste gate"

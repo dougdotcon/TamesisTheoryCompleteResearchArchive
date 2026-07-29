@@ -9,9 +9,9 @@
 | Indicador | Quantidade | Observacao |
 |---|---:|---|
 | Registros no manifesto | 280 | 7 publicados e 273 destinados a publicacao |
-| Registros auditados | 194 | Links abaixo identificam cada registro auditado |
-| Dossies de auditoria | 189 | Variantes linguisticas equivalentes podem compartilhar um dossie |
-| Registros restantes | 86 | A auditoria continua em lotes rastreaveis |
+| Registros auditados | 210 | Links abaixo identificam cada registro auditado |
+| Dossies de auditoria | 205 | Variantes linguisticas equivalentes podem compartilhar um dossie |
+| Registros restantes | 70 | A auditoria continua em lotes rastreaveis |
 
 ## Registros auditados
 
@@ -278,6 +278,28 @@
 - [Critical instant](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/THEORY_CRITICAL_INSTANT.html)
 - [Structural inevitability](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/THEORY_STRUCTURAL_INEVITABILITY.html)
 
+### Kernel v3 - multilingual cosmology (8)
+
+- [Kernel v3 - Deutsch](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_de.html)
+- [Kernel v3 - Espanol](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_es.html)
+- [Kernel v3 - Francais](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_fr.html)
+- [Kernel v3 - Italiano](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_it.html)
+- [Kernel v3 - Japanese](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_ja.html)
+- [Kernel v3 - Portugues](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_pt.html)
+- [Kernel v3 - Russian](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_ru.html)
+- [Kernel v3 - Chinese](90_LEGACY/04_THE_DISCOVERY_TOE_KERNEL_V3/papers/index_zh.html)
+
+### P versus NP - Millennium Validation (8)
+
+- [Thermodynamic constraints](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/P_vs_NP_Paper/paper_p_vs_np.html)
+- [Restrições termodinâmicas - PT-BR](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/P_vs_NP_Paper/paper_p_vs_np_ptbr.html)
+- [Appendix A - Ising reduction](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_A_APPENDIX_PROOFS.html)
+- [Complexity censorship](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_A_COMPLEXITY_CENSORSHIP.html)
+- [Thermodynamic framework](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_B_THERMODYNAMIC_FRAMEWORK.html)
+- [Experimental evidence](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_C_EXPERIMENTAL_EVIDENCE.html)
+- [Unified draft](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/04_PAPERS/PAPER_UNIFIED_DRAFT.html)
+- [Unified draft - assets copy](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_01_P_VS_NP/assets/PAPER_UNIFIED_DRAFT.html)
+
 ## Protocolo aplicado
 
 - Separar resultado publicado, hipotese, inferencia e proposta experimental.
@@ -295,4 +317,4 @@
 
 ## Proxima fila
 
-Priorizar os 86 registros restantes em `02_Experimental_Validation`, `03_Axiomatic_Closure`, `04_Spectral_Mathematics`, `05_Computational_Extensions`, `07_Speculative_Papers`, `08_AHolographicBoundonMacroscopicQuantumSuperpositions` e `90_LEGACY`.
+Priorizar os 70 registros restantes em `02_Experimental_Validation`, `03_Axiomatic_Closure`, `04_Spectral_Mathematics`, `05_Computational_Extensions`, `07_Speculative_Papers`, `08_AHolographicBoundonMacroscopicQuantumSuperpositions` e `90_LEGACY`.

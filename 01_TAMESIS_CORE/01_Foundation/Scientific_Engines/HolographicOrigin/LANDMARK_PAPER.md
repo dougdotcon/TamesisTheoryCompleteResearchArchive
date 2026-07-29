@@ -12,6 +12,8 @@
 
 ## Abstract
 
+> **Editorial status:** This manuscript is a research programme. Its geometric equations and numerical matches are hypotheses or fits, not established derivations. Claims of eliminating Standard-Model parameters, deriving the Schrödinger equation, or excluding a fourth generation require an explicit action, uncertainty propagation, and out-of-sample tests.
+
 We propose a comprehensive unification of fundamental interactions and matter based on a single cosmological compression parameter (**Ω = 117.038**). We demonstrate that:
 
 1. The **electron mass, elementary charge, and spin** emerge as geometric properties of a micro-wormhole anchored in a holographic universe.

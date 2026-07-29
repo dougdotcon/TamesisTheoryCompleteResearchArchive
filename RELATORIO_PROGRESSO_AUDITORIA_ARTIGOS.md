@@ -9,9 +9,9 @@
 | Indicador | Quantidade | Observacao |
 |---|---:|---|
 | Registros no manifesto | 280 | 7 publicados e 273 destinados a publicacao |
-| Registros auditados | 186 | Links abaixo identificam cada registro auditado |
-| Dossies de auditoria | 181 | Variantes linguisticas equivalentes podem compartilhar um dossie |
-| Registros restantes | 94 | A auditoria continua em lotes rastreaveis |
+| Registros auditados | 194 | Links abaixo identificam cada registro auditado |
+| Dossies de auditoria | 189 | Variantes linguisticas equivalentes podem compartilhar um dossie |
+| Registros restantes | 86 | A auditoria continua em lotes rastreaveis |
 
 ## Registros auditados
 
@@ -267,6 +267,17 @@
 - [Closure and open problems](90_LEGACY/02_FOUNDATIONAL_LIBRARIES/TRI/52_Closure_Open_Problems/index.html)
 - [TRI synthesis](90_LEGACY/02_FOUNDATIONAL_LIBRARIES/TRI/paper.html)
 
+### Riemann - Millennium Validation (8)
+
+- [Arithmetic rigidity](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/ARITHMETIC_RIGIDITY.html)
+- [Appendix A - derivations](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/PAPER_A_APPENDIX_PROOFS.html)
+- [Document A - structural exclusion](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/PAPER_A_STRUCTURAL_EXCLUSION.html)
+- [Document B - physical motivation](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/PAPER_B_PHYSICAL_MOTIVATION.html)
+- [Document C - numerical evidence](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/PAPER_C_NUMERICAL_EVIDENCE.html)
+- [Spectral origin](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/PAPER_RIEMANN_SPECTRAL_ORIGIN.html)
+- [Critical instant](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/THEORY_CRITICAL_INSTANT.html)
+- [Structural inevitability](RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_02_RIEMANN/04_PAPERS/THEORY_STRUCTURAL_INEVITABILITY.html)
+
 ## Protocolo aplicado
 
 - Separar resultado publicado, hipotese, inferencia e proposta experimental.
@@ -284,4 +295,4 @@
 
 ## Proxima fila
 
-Priorizar os 229 registros restantes em `02_Experimental_Validation`, `03_Axiomatic_Closure`, `04_Spectral_Mathematics`, `05_Computational_Extensions`, `07_Speculative_Papers`, `08_AHolographicBoundonMacroscopicQuantumSuperpositions` e `90_LEGACY`.
+Priorizar os 86 registros restantes em `02_Experimental_Validation`, `03_Axiomatic_Closure`, `04_Spectral_Mathematics`, `05_Computational_Extensions`, `07_Speculative_Papers`, `08_AHolographicBoundonMacroscopicQuantumSuperpositions` e `90_LEGACY`.

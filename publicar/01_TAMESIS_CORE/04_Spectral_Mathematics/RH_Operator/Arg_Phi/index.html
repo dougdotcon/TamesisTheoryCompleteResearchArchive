@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 17: Decomposition of arg(phi) | Tamesis Theory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+        }
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
+    
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../../../paper-layout.css">
+</head>
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <header>
+        <h1>Stage 17: Decomposition of $\arg \phi(1/2 + iT)$</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        Abstract not found.
+    </div>
+
+    <div class="content-wrapper">
+<section>
+        <h2>1. The Goal</h2>
+        <p>Decompose the scattering phase $\Theta(T) = \frac{1}{\pi} \arg \phi(1/2 + iT)$ into:</p>
+        <ul>
+            <li><strong>Gamma contribution</strong> (analytic, bounded)</li>
+            <li><strong>Zeta contribution</strong> (arithmetic, $T \log T$ growth)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. The Decomposition Formula</h2>
+
+        <div class="equation-box">
+            $$\arg \phi = \underbrace{[\arg \Gamma(iT) - \arg \Gamma(1/2 + iT)]}_{\text{Gamma part}} + \underbrace{[\arg \zeta(2iT) - \arg \zeta(1 + 2iT)]}_{\text{Zeta part}}$$
+        </div>
+
+        <p>This separates the scattering phase into two fundamentally different parts.</p>
+    </section>
+
+    <section>
+        <h2>3. The Gamma Term (BOUNDED)</h2>
+
+        <div class="result-box">
+            <strong>Proposition:</strong> As $T \to \infty$:
+            $$\Theta_\Gamma(T) = \frac{1}{\pi}[\arg \Gamma(iT) - \arg \Gamma(1/2 + iT)] = -\frac{1}{4} + O\left(\frac{1}{T}\right)$$
+        </div>
+
+        <p><strong>Numerical verification:</strong></p>
+
+        <table>
+            <tr>
+                <th>$T$</th>
+                <th>$\Theta_\Gamma(T)$</th>
+                <th>Limit $-1/4$</th>
+                <th>Error</th>
+            </tr>
+            <tr><td>10</td><td>-0.2540</td><td>-0.2500</td><td>0.0040</td></tr>
+            <tr><td>100</td><td>-0.2504</td><td>-0.2500</td><td>0.0004</td></tr>
+            <tr><td>1000</td><td>-0.2500</td><td>-0.2500</td><td>0.00004</td></tr>
+        </table>
+
+        <p><strong>Conclusion:</strong> The Gamma term is $O(1)$ - it does NOT contribute to $T \log T$.</p>
+    </section>
+
+    <section>
+        <h2>4. The Zeta Term ($T \log T$ Growth)</h2>
+
+        <div class="key-result">
+            <strong>Key Result:</strong> ALL the $T \log T$ growth comes from the zeta terms:
+            $$\Theta_\zeta(T) = \frac{T}{2\pi} \log\frac{T}{2\pi} - \frac{T}{2\pi} + S(T)$$
+            where $S(T) = O(\log T)$ is controlled by Riemann zeros.
+        </div>
+
+        <p><strong>Structure:</strong></p>
+        <ul>
+            <li>$\arg \zeta(1 + 2iT) = O(\log \log T)$ - bounded fluctuations</li>
+            <li>$\arg \zeta(2iT) \sim \pi N(2T)$ - counts zeros!</li>
+        </ul>
+
+        <p>The $T \log T$ term is <strong>arithmetic</strong> - it comes from the Riemann-von Mangoldt formula.</p>
+    </section>
+
+    <section>
+        <h2>5. The Complete Theorem</h2>
+
+        <div class="equation-box">
+            <strong>Theorem:</strong>
+            $$\Theta(T) = \frac{T}{2\pi} \log\frac{T}{2\pi} - \frac{T}{2\pi} + E(T)$$
+            where $E(T) = -\frac{1}{4} + O(\log T)$.
+        </div>
+
+        <p><strong>Decomposition of error:</strong></p>
+        <ul>
+            <li>Constant $-1/4$: from Gamma (analytic)</li>
+            <li>$O(\log T)$ fluctuations: from zeta zeros (arithmetic)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Corollaries</h2>
+
+        <div class="result-box">
+            <strong>Corollary 1:</strong> The $T \log T$ term comes ENTIRELY from zeta, not Gamma.
+        </div>
+
+        <div class="result-box">
+            <strong>Corollary 2:</strong> The Gamma contribution is bounded: $\Theta_\Gamma \to -1/4$.
+        </div>
+
+        <div class="result-box">
+            <strong>Corollary 3:</strong> The "excess" beyond Weyl is arithmetic (encodes prime distribution).
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Significance</h2>
+
+        <p>This decomposition:</p>
+        <ul>
+            <li><strong>Localizes the difficulty:</strong> Hard part is $\arg \zeta$, not $\arg \Gamma$</li>
+            <li><strong>Connects to RH:</strong> Fluctuations $S(T)$ controlled by zero distribution</li>
+            <li><strong>Publishable:</strong> Clean, verifiable statement about modular scattering</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>8. Files</h2>
+        <ul>
+            <li><code>arg_phi_decomposition.py</code> - Implementation and numerical verification</li>
+            <li><code>theorem_statement.md</code> - Formal theorem statement</li>
+        </ul>
+    </section>
+    </div>
+</body>
+</html>

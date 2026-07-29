@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>APPENDIX A: RIGOROUS MATHEMATICAL DERIVATIONS</title>
+  <meta name="description" content="Artigo convertido do arquivo Markdown Tamesis: PAPER_A_APPENDIX_PROOFS.md">
+  <link rel="stylesheet" href="../../../../paper-layout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <header>
+    <h1>APPENDIX A: RIGOROUS MATHEMATICAL DERIVATIONS</h1>
+    <div class="authors">Tamesis Research Archive</div>
+    <div class="date">Automatic Markdown conversion - source file: PAPER_A_APPENDIX_PROOFS.md</div>
+  </header>
+  <main><article>
+<p><strong>Supplement to:</strong> <code>PAPER_A_COMPLEXITY_CENSORSHIP.md</code><br><strong>Objective:</strong> Provide the explicit physical-mathematical derivation of the &quot;Thermodynamic Censorship&quot; theorem ($NP \not\subseteq P_{phys}$).</p>
+<hr>
+<h2>1. Hamiltonian Formulation of the Problem</h2>
+<p>We map the generic NP-Complete problem (3-SAT) to the ground state search of an Ising Spin Glass.</p>
+<h3>1.1 The Energy Functional</h3>
+<p>Let $\sigma \in {-1, +1}^N$ be the configuration of $N$ spins.<br>The Hamiltonian encoding a 3-SAT instance with $M$ clauses is:<br>$$ H(\sigma) = \sum_{a=1}^M E_a(\sigma_{i_a}, \sigma_{j_a}, \sigma_{k_a}) $$<br>Where $E_a = 0$ if clause $a$ is satisfied, and $E_a = 1$ if violated.<br>Ideally, $E_0 = \min_\sigma H(\sigma) = 0$ (Satisfiable).</p>
+<h3>1.2 The Partition Function</h3>
+<p>The statistical mechanics of the system is governed by the Partition Function at inverse temperature $\beta = 1/k_B T$:<br>$$ Z(\beta) = \sum_{{\sigma}} e^{-\beta H(\sigma)} $$<br>Computing $Z(\beta)$ is #P-Complete (Valiant&#39;s Theorem).</p>
+<hr>
+<h2>2. Derivation of Lemma 3.1: Exponential Gap Closure</h2>
+<p><strong>Thesis:</strong> In the &quot;Hard Phase&quot; (ratio $\alpha = M/N &gt; \alpha_c \approx 4.2$), the spectral gap $\Delta$ between the ground state and the first excited state vanishes exponentially with $N$.</p>
+<h3>2.1 Replica Symmetry Breaking (RSB)</h3>
+<p>Following Parisi (1980) and Mézard et al. (1987), the free energy density $f = -\lim_{N\to\infty} \frac{1}{\beta N} \ln Z$ in the low-temperature phase exhibits <strong>Replica Symmetry Breaking</strong>.</p>
+<ol>
+<li><strong>Landscape Fragmentation:</strong> The space of solutions $\Sigma$ decomposes into disjoint clusters (&quot;pure states&quot;) $\alpha$.<br> $$ \langle \sigma_i \rangle_\alpha \neq \langle \sigma_i \rangle_\gamma \quad \text{for } \alpha \neq \gamma $$</li>
+<li><strong>Free Energy Barriers:</strong> To tunnel from a local minimum state $\alpha$ to the true ground state $GS$, the system must cross an energy barrier $V_{barrier}$.</li>
+<li><strong>Scaling:</strong> The barrier height scales as $V_{barrier} \sim N^\theta$ (where $\theta &gt; 0$).</li>
+</ol>
+<h3>2.2 Tunneling Time (Arrhenius Law)</h3>
+<p>The characteristic time $\tau$ to escape a wrong basin of attraction via thermal fluctuations is given by Kramers&#39; Rate:<br>$$ \tau \sim \tau_0 \exp\left( \frac{V_{barrier}}{k_B T} \right) $$<br>Substituting $V_{barrier} \propto N$:<br>$$ \tau \sim e^{\gamma N / T} $$<br>This implies the energy gap $\Delta \propto 1/\tau$ scales as:<br>$$ \Delta(N) \sim e^{-\gamma N} $$<br><strong>Q.E.D. (Lemma 3.1)</strong></p>
+<hr>
+<h2>3. Derivation of Lemma 3.2: The Measurement Cost</h2>
+<p><strong>Thesis:</strong> Distinguishing the ground state from excited states in an exponential spectrum requires exponential resources.</p>
+<h3>3.1 The Von Neumann Measurement Scheme</h3>
+<p>Consider a pointer variable $A$ interacting with the system $S$. The interaction Hamiltonian is:<br>$$ H_{int} = g(t) \hat{H}_S \otimes \hat{p}_A $$<br>Where $\hat{H}_S$ is the problem Hamiltonian (signals energy) and $\hat{p}_A$ is the pointer momentum.</p>
+<h3>3.2 Heisenberg Precision Limit</h3>
+<p>To distinguish the Ground State ($E_0$) from the First Excited State ($E_1 = E_0 + \Delta$), the energy uncertainty $\delta E$ of the measurement must be smaller than the gap $\Delta$.<br>$$ \delta E &lt; \Delta(N) $$<br>From the Energy-Time Uncertainty Principle $\delta E \cdot \delta t \ge \hbar/2$:<br>$$ \delta t \ge \frac{\hbar}{2 \Delta(N)} $$<br>Substituting the exponential closure $\Delta(N) \sim e^{-\alpha N}$:<br>$$ \delta t \ge \frac{\hbar}{2} e^{\alpha N} $$<br>Thus, the <strong>Time</strong> required for a faithful readout scales exponentially.</p>
+<h3>3.3 Thermal Noise Limit (Landauer)</h3>
+<p>If the measurement has finite duration $\tau_{poly}$, the energy resolution is coarse: $\delta E \gg \Delta$.<br>The probability of correct identification $P_{success}$ is dominated by the Boltzmann factor of the noise:<br>$$ P_{success} \sim 1 - e^{-\Delta / k_B T} $$<br>For small $\Delta \ll k_B T$:<br>$$ P_{success} \approx \frac{\Delta}{k_B T} \sim \frac{e^{-\alpha N}}{k_B T} $$<br>To boost this low fidelity to high confidence ($1-\epsilon$), one requires $K$ repetitions where $K \sim (SNR)^{-2}$:<br>$$ K \sim (e^{\alpha N})^2 = e^{2\alpha N} $$<br>Thus, the <strong>Energy</strong> (repetitions) required scales exponentially.<br><strong>Q.E.D. (Lemma 3.2)</strong></p>
+<hr>
+<h2>4. Final Proof of Thermodynamic Censorship</h2>
+<p><strong>Theorem:</strong> $P_{phys} \subsetneq NP_{phys}$.</p>
+<p><strong>Proof:</strong></p>
+<ol>
+<li>Let $L \in NP$. The solution can be verified efficiently (abstractly).</li>
+<li>To solve $L$ in $P_{phys}$, a physical machine must reach the ground state of $H_L$ and <strong>confirm</strong> it is the ground state with bounded error in polynomial time.</li>
+<li>By <strong>Lemma 3.1</strong>, the physical signal ($\Delta$) separating the solution from noise vanishes as $e^{-\alpha N}$.</li>
+<li>By <strong>Lemma 3.2</strong>, amplifying this signal to a distinguishable level requires time/energy $\propto e^{\alpha N}$.</li>
+<li>This contradicts the polynomial resource constraint of $P_{phys}$.</li>
+<li>Therefore, $L \notin P_{phys}$.</li>
+<li>Since $P_{phys}$ requires poly-resources and $NP$ problems require exp-resources, $P_{phys} \neq NP$.</li>
+</ol>
+<p><strong>Conclusion:</strong> The class of efficiently solvable physical problems is strictly smaller than the class of efficiently verifiable mathematical problems.</p>
+
+  </article></main>
+</body>
+</html>

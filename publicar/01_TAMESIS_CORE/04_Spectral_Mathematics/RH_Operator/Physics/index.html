@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 14: The Geometry of ToE | Tamesis Theory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+        }
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
+    
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../../../paper-layout.css">
+</head>
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <header>
+        <h1>The Geometry of the Theory of Everything</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        We present the culmination of the Tamesis research program (Stages 10-14): a unified framework
+        connecting hyperbolic geometry, spectral theory, number theory, and fundamental physics.
+        The central object is the modular surface $\mathcal{M} = SL(2,\mathbb{Z}) \backslash \mathbb{H}$
+        with its Laplacian $\Delta_{\mathbb{H}}$. We show how this single mathematical structure
+        encodes the Prime Number Theorem via entropy, suggests the Riemann Hypothesis via spectral theory,
+        and provides an arithmetic origin for the thermodynamic arrow of time.
+    </div>
+
+    <div class="content-wrapper">
+<section>
+        <h2>1. The Central Structure</h2>
+
+        <p class="no-indent">The entire theory is built on one mathematical object:</p>
+
+        <div class="main-equation">
+            $$\mathcal{M} = SL(2,\mathbb{Z}) \backslash \mathbb{H}$$
+            <p style="font-size: 10pt; margin-top: 0.5rem;">The Modular Surface</p>
+        </div>
+
+        <p>This is the quotient of the hyperbolic upper half-plane $\mathbb{H}$ by the modular group $SL(2,\mathbb{Z})$.
+        It has:</p>
+
+        <ul>
+            <li>Constant negative curvature $K = -1$</li>
+            <li>Finite area $\mu = \pi/3$</li>
+            <li>One cusp (at infinity)</li>
+            <li>Chaotic geodesic flow with entropy $h_{top} = 1$</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. The ToE Dictionary</h2>
+
+        <p class="no-indent">The following table translates between physical and mathematical concepts:</p>
+
+        <table class="dictionary-table">
+            <tr>
+                <th>Physics</th>
+                <th>Mathematics</th>
+                <th>Arithmetic</th>
+            </tr>
+            <tr>
+                <td>Spacetime</td>
+                <td>Hyperbolic plane $\mathbb{H}$</td>
+                <td>Complex upper half-plane</td>
+            </tr>
+            <tr>
+                <td>Symmetry group</td>
+                <td>$SL(2,\mathbb{Z})$</td>
+                <td>Modular group</td>
+            </tr>
+            <tr>
+                <td>Time evolution</td>
+                <td>Geodesic flow $\phi_t$</td>
+                <td>Flow on unit tangent bundle</td>
+            </tr>
+            <tr>
+                <td>Hamiltonian</td>
+                <td>$H = \Delta_{\mathbb{H}} + 1/4$</td>
+                <td>Hyperbolic Laplacian</td>
+            </tr>
+            <tr>
+                <td>Energy spectrum</td>
+                <td>Maass eigenvalues $\lambda_n$</td>
+                <td>$\lambda = 1/4 + r^2$</td>
+            </tr>
+            <tr>
+                <td>Fundamental particles</td>
+                <td>Primitive geodesics</td>
+                <td>Prime numbers</td>
+            </tr>
+            <tr>
+                <td>Partition function</td>
+                <td>Selberg zeta $Z(s)$</td>
+                <td>Riemann zeta $\zeta(s)$</td>
+            </tr>
+            <tr>
+                <td>Entropy</td>
+                <td>Topological entropy $h = 1$</td>
+                <td>$\log(\pi(x)!)$</td>
+            </tr>
+            <tr>
+                <td>Arrow of time</td>
+                <td>Irreversibility of flow</td>
+                <td>Monotonicity of $\pi(x)$</td>
+            </tr>
+            <tr>
+                <td>Phase transition</td>
+                <td>$\beta = 1$ critical point</td>
+                <td>Pole of $\zeta(s)$ at $s=1$</td>
+            </tr>
+            <tr>
+                <td>Quantum criticality</td>
+                <td>Critical line $\text{Re}(s) = 1/2$</td>
+                <td>Riemann zeros</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>3. The Four Pillars</h2>
+
+        <h3>3.1 Geometry: Hyperbolic Space</h3>
+        <p>The hyperbolic plane provides the natural arena. Its constant negative curvature generates
+        chaotic dynamics, which is essential for the connection to primes.</p>
+
+        <div class="equation-box">
+            $$ds^2 = \frac{dx^2 + dy^2}{y^2}$$
+        </div>
+
+        <h3>3.2 Spectrum: The Laplacian</h3>
+        <p>The hyperbolic Laplacian $\Delta_{\mathbb{H}}$ on $\mathcal{M}$ has discrete spectrum
+        (Maass cusp forms) related to Riemann zeros via trace formulas.</p>
+
+        <div class="equation-box">
+            $$\Delta_{\mathbb{H}} = -y^2 \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \right)$$
+        </div>
+
+        <h3>3.3 Entropy: The Prime Number Theorem</h3>
+        <p>The topological entropy $h_{top} = 1$ of the geodesic flow directly implies the Prime Number Theorem:</p>
+
+        <div class="equation-box">
+            $$h_{top} = 1 \quad \Rightarrow \quad N(L) \sim \frac{e^L}{L} \quad \Rightarrow \quad \pi(x) \sim \frac{x}{\log x}$$
+        </div>
+
+        <h3>3.4 Thermodynamics: Zeta as Partition Function</h3>
+        <p>The Riemann zeta function is the partition function of primes:</p>
+
+        <div class="equation-box">
+            $$Z(\beta) = \zeta(\beta) = \prod_p \frac{1}{1 - p^{-\beta}}$$
+        </div>
+    </section>
+
+    <section>
+        <h2>4. The Unification Equation</h2>
+
+        <p class="no-indent">All of these elements combine into a single formula:</p>
+
+        <div class="main-equation">
+            $$\sum_n h(r_n) = \frac{\mu}{4\pi} \int h(r) \, r \tanh(\pi r) \, dr + \sum_{\gamma} \frac{\ell_\gamma \, g(\ell_\gamma)}{2\sinh(\ell_\gamma/2)}$$
+            <p style="font-size: 10pt; margin-top: 0.5rem;">The Selberg Trace Formula</p>
+        </div>
+
+        <p>This formula connects:</p>
+        <ul>
+            <li><strong>Spectral side</strong> (left): Eigenvalues of $\Delta_{\mathbb{H}}$</li>
+            <li><strong>Geometric side</strong> (right): Closed geodesics (= primes)</li>
+        </ul>
+
+        <p>The Weil explicit formula for Riemann zeros has the <strong>same structure</strong>,
+        with $\log p$ replacing geodesic lengths. This structural isomorphism is the mathematical
+        content of the "arithmetic = geometry" principle.</p>
+    </section>
+
+    <section>
+        <h2>5. The Arrow of Time</h2>
+
+        <p>The thermodynamic arrow of time has an <strong>arithmetic origin</strong>:</p>
+
+        <ol>
+            <li>Prime counting function $\pi(x)$ is monotonically increasing</li>
+            <li>"Prime entropy" $S(x) = \log(\pi(x)!)$ grows without bound</li>
+            <li>This is a <strong>theorem of number theory</strong>, not a physical assumption</li>
+        </ol>
+
+        <div class="equation-box">
+            $$\text{Time flows forward because } \pi(x) \text{ increases}$$
+        </div>
+
+        <p>The second law of thermodynamics is thus revealed as a consequence of the Prime Number Theorem.
+        Irreversibility is not imposed on physics; it emerges from arithmetic.</p>
+    </section>
+
+    <section>
+        <h2>6. What This Theory Predicts</h2>
+
+        <h3>6.1 Mathematical Predictions</h3>
+        <ul>
+            <li>The Riemann Hypothesis should be provable via spectral methods on adelic spaces</li>
+            <li>There exists an operator whose spectrum equals the Riemann zeros exactly</li>
+            <li>This operator lives on the Connes space $\mathbb{Q}^* \backslash \mathbb{A}_{\mathbb{Q}}$</li>
+        </ul>
+
+        <h3>6.2 Physical Predictions</h3>
+        <ul>
+            <li>Quantum gravity should have hyperbolic / AdS characteristics</li>
+            <li>The entropy of black holes should relate to prime counting</li>
+            <li>Time's arrow is fundamental, not emergent from initial conditions</li>
+        </ul>
+
+        <h3>6.3 Philosophical Implications</h3>
+        <ul>
+            <li>Mathematics and physics are <strong>not separate</strong></li>
+            <li>Number theory is the deepest layer of physical law</li>
+            <li>The universe has the structure it has because primes exist</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>7. The Path Forward</h2>
+
+        <p>This research program has established:</p>
+
+        <ol>
+            <li><strong>Stage 10:</strong> The correct geometric arena (hyperbolic space)</li>
+            <li><strong>Stage 11:</strong> The correct operator (hyperbolic Laplacian)</li>
+            <li><strong>Stage 12:</strong> The correct language (Selberg-Connes trace formulas)</li>
+            <li><strong>Stage 13:</strong> The honest assessment (structural match, not numerical)</li>
+            <li><strong>Stage 14:</strong> The physical interpretation (thermodynamics from arithmetic)</li>
+        </ol>
+
+        <p>The next step is the Connes noncommutative geometry program, which promises to
+        construct the <strong>exact</strong> operator whose spectrum equals the Riemann zeros.</p>
+    </section>
+
+    <section>
+        <h2>8. Conclusion</h2>
+
+        <div class="conclusion-box">
+            <p class="no-indent"><strong>The Tamesis Theory of Everything:</strong></p>
+            <p class="no-indent" style="margin-top: 1rem;">
+                The universe is not a collection of particles moving through spacetime.
+                The universe is a <strong>spectral geometry</strong>: a space with an operator,
+                whose eigenvalues encode all physical law.
+            </p>
+            <p class="no-indent" style="margin-top: 1rem;">
+                The simplest such geometry is hyperbolic, the simplest such operator is the Laplacian,
+                and the deepest such spectrum encodes the prime numbers via the Riemann zeros.
+            </p>
+            <p class="no-indent" style="margin-top: 1rem;">
+                <strong>Physics is number theory. Number theory is physics.</strong>
+            </p>
+        </div>
+
+        <div class="main-equation">
+            $$\boxed{\text{Geometry} + \text{Spectrum} + \text{Entropy} + \text{Arithmetic} = \text{ToE}}$$
+        </div>
+    </section>
+
+    <section>
+        <h2>9. Files</h2>
+        <ul>
+            <li><code>entropy_primes.py</code> — Entropy-prime connection and thermodynamics</li>
+            <li><code>time_arrow.md</code> — Derivation of the arrow of time from arithmetic</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>10. Complete Research Archive</h2>
+        <p class="no-indent">Key files across all stages:</p>
+        <ul>
+            <li><code>09_Hyperbolic_Connection/forced_geometry_theorem.py</code> — The No-Go theorem formalized</li>
+            <li><code>10_Hyperbolic_Space/modular_group.py</code> — SL(2,Z) implementation</li>
+            <li><code>11_Hyperbolic_Laplacian/hyperbolic_laplacian.py</code> — Delta_H operator</li>
+            <li><code>12_Selberg_Connes/selberg_riemann_dictionary.py</code> — Explicit mappings</li>
+            <li><code>12_Selberg_Connes/connes_space.py</code> — Adele class space</li>
+            <li><code>13_RH_Operator/rh_operator.py</code> — The RH operator candidate</li>
+            <li><code>ROADMAP_COMPLETE.md</code> — Full roadmap with all results</li>
+        </ul>
+    </section>
+    </div>
+</body>
+</html>

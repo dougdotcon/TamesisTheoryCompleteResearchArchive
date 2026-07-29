@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Thermodynamic Constraints on Computational Complexity</title>
+  <meta name="description" content="Artigo convertido do arquivo Markdown Tamesis: PAPER_UNIFIED_DRAFT.md">
+  <link rel="stylesheet" href="../../../../paper-layout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <header>
+    <h1>Thermodynamic Constraints on Computational Complexity</h1>
+    <div class="authors">Tamesis Research Archive</div>
+    <div class="date">Automatic Markdown conversion - source file: PAPER_UNIFIED_DRAFT.md</div>
+  </header>
+  <main><article>
+<h2>A Physical Argument for the Separation of P and NP Classes</h2>
+<p><strong>Douglas H. M. Fulber</strong><br><em>Tamesis Research Group</em><br><em>Federal University of Rio de Janeiro</em></p>
+<hr>
+<h3>Abstract</h3>
+<p>We propose a reformulation of the <strong>P vs NP</strong> problem not as a question of algorithmic efficiency, but as a limit of <strong>thermodynamic reversibility</strong>. By mapping 3-SAT instances onto an isomorphic Entropic Causal Graph ($G_{entropic}$), we demonstrate that finding a solution (NP-Inverse) requires navigating a glassy energy landscape with exponentially closing spectral gaps, corresponding to a dissipative phase transition. In contrast, verification (P-Forward) is an adiabatic process with polynomial entropy production. This divergence suggests that $P \neq NP$ is protected by the Second Law of Thermodynamics.</p>
+<h3>1. Introduction</h3>
+<p>Traditional complexity theory treats computation as an abstract manipulation of symbols. However, Landauer&#39;s Principle dictates that information processing is physical. We introduce the <strong>Kernel v3 Entropic Engine</strong>, a discrete simulator that treats logical gates as entropic updates, allowing us to measure the energetic cost of computation directly.</p>
+<h3>2. Methodology</h3>
+<p>We establish a transformation $T: \mathcal{L} \to \mathcal{H}$, mapping logical clauses to physical Hamiltonians.</p>
+<ul>
+<li><strong>Problem</strong>: 3-SAT (Boolean Satisfiability).</li>
+<li><strong>Substrate</strong>: Finite Causal Graph $G(V, E)$ (Tamesis Vacuum).</li>
+<li><strong>Cost Function</strong>: Spectral Gap $\Delta = E_1 - E_0$ of the resulting Hamiltonian.</li>
+</ul>
+<p>The thermodynamic cost of finding the ground state (solution) is bounded by the Adiabatic Theorem:<br>$$ \tau_{find} \propto \frac{1}{\Delta_{min}^2} $$</p>
+<h3>3. Experimental Results</h3>
+<p>We simulated the &quot;Forward vs Inverse&quot; protocol for problem sizes $N=3$ to $N=11$.</p>
+<h4>3.1 Inverse Scaling (NP)</h4>
+<p>The minimal spectral gap $\Delta(N)$ was observed to close exponentially:<br>$$ \Delta(N) \approx \Delta_0 e^{-\alpha N} $$<br>Impyling a time cost:<br>$$ \tau_{NP}(N) \propto e^{2\alpha N} $$<br>This signature is characteristic of <strong>Find-Glass transitions</strong>, where the system gets trapped in local minima (metastable states), requiring thermal activation (dissipation) to escape.</p>
+<h4>3.2 Forward Scaling (P)</h4>
+<p>Verification operations mapped to a linear growth in entropy production, consistent with polynomial time:<br>$$ \tau_{P}(N) \propto N $$</p>
+<h3>4. Discussion: The Thermodynamic Barrier</h3>
+<p>The observed separation implies a fundamental asymmetry in time-reversal.</p>
+<ul>
+<li><strong>Verification</strong> is a &quot;downhill&quot; process (increasing entropy, easy).</li>
+<li><strong>Solving</strong> is an &quot;uphill&quot; process (decreasing local entropy to find order), equivalent to Maxwell&#39;s Demon.</li>
+</ul>
+<p>To solve an NP-complete problem in polynomial time would effectively require a <strong>Reversible Maxwell&#39;s Demon</strong>, which violates the Second Law constraints on information erasure.</p>
+<h3>5. Conclusion</h3>
+<p>We conclude that $P \neq NP$ because <strong>Computational Complexity scales with Thermodynamic Irreversibility</strong>. The class P represents the set of thermodynamically allowed trajectories, while NP represents trajectories that require exponential work to reverse.</p>
+<hr>
+<p><em>Data Availability: The source code (<code>entropic_engine.py</code>) and datasets (<code>results_scaling_a2.csv</code>) are available in the Tamesis Theory Archive.</em></p>
+
+  </article></main>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 21: The Connes Dilation Operator | ToE</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+        .authors { font-size: 10pt; margin-bottom: 0.2rem; }
+        .affiliations { font-size: 9pt; font-style: italic; color: #444; margin-bottom: 1rem; }
+        .date { font-size: 9pt; color: #666; }
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+        }
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+        h3 {
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        p { margin-bottom: 0.8rem; text-indent: 1em; }
+        p.no-indent { text-indent: 0; }
+        .equation { text-align: center; margin: 0.8rem 0; font-size: 10pt; }
+        /* Specialized Boxes compatibility */
+        .axiom-box { border-left: 3px solid #000; padding: 0.8rem; margin: 1rem 0; font-style: italic; }
+        .prediction-box { border: 1px solid #d32f2f; padding: 1rem; margin: 1rem 0; background: #fff5f5; }
+        .master-equation { background: #f8f8f8; padding: 1rem; margin: 1rem 0; border: 1px solid #ccc; text-align: center; }
+        .conclusion-box { background: #e8f5e9; padding: 1rem; margin: 1.5rem 0; border: 1px solid #4caf50; text-align: center; }
+        
+        figure { margin: 1rem 0; text-align: center; break-inside: avoid; }
+        figure img { width: 100%; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; color: #333; margin-top: 0.4rem; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 8.5pt; }
+        th, td { border-bottom: 1px solid #000; padding: 0.4rem; text-align: left; }
+        th { font-weight: bold; border-top: 1px solid #000; }
+        .references {
+            margin-top: 2rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #000;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        .references ol { padding-left: 1rem; margin-top: 0.5rem; }
+        .references li { margin-bottom: 0.2rem; }
+    
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../../paper-layout.css">
+</head>
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <header>
+        <h1>Stage 21: The Connes Dilation Operator</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        Abstract not found.
+    </div>
+
+    <div class="content-wrapper">
+<section>
+        <h2>1. The Central Object</h2>
+
+        <div class="operator-box">
+            $$D = -i \cdot x \cdot \frac{d}{dx}$$
+            <p style="margin-top: 1rem; font-size: 11pt;">Acting on $L^2(\mathbb{A}_\mathbb{Q} / \mathbb{Q}^*)$</p>
+        </div>
+
+        <p>This is the <strong>Connes dilation operator</strong>. It is the generator of the scaling flow $\lambda \mapsto \lambda^t$ on the adelic quotient.</p>
+
+        <p><strong>Key property:</strong> If $f$ is an eigenfunction with eigenvalue $\gamma$:</p>
+        $$D f = \gamma \cdot f \implies f(\lambda x) = \lambda^{i\gamma} f(x)$$
+    </section>
+
+    <section>
+        <h2>2. Connection to Riemann Zeros</h2>
+
+        <div class="result-box">
+            <strong>Connes' Program:</strong>
+            $$\text{Spec}(D) \longleftrightarrow \{\gamma_n : \zeta(1/2 + i\gamma_n) = 0\}$$
+            <p>The spectrum of $D$ encodes the Riemann zeros.</p>
+        </div>
+
+        <p>The eigenfunction $x^{i\gamma}$ has eigenvalue $\gamma$. Verification:</p>
+        $$D(x^{i\gamma}) = -i \cdot x \cdot (i\gamma) \cdot x^{i\gamma - 1} = \gamma \cdot x^{i\gamma}$$
+    </section>
+
+    <section>
+        <h2>3. Connection to Previous Stages</h2>
+
+        <p>In Stages 17-18, we computed:</p>
+        $$\Theta(T) = \frac{1}{\pi} \arg \phi(1/2 + iT)$$
+
+        <div class="result-box">
+            <strong>Stage 21 Interpretation:</strong>
+            <ul>
+                <li>$T$ is the <strong>time parameter</strong> of the flow $e^{iTD}$</li>
+                <li>$\Theta(T)$ is the <strong>spectral phase</strong> of $D$</li>
+                <li>The oscillations come from $D$-eigenvalues (zeros)</li>
+            </ul>
+        </div>
+
+        <p>We were already measuring $\text{Tr}(e^{iTD})$ without knowing it!</p>
+    </section>
+
+    <section>
+        <h2>4. The ToE Structure</h2>
+
+        <table class="connection-table">
+            <tr>
+                <th>Physical</th>
+                <th>Mathematical</th>
+                <th>Arithmetic</th>
+            </tr>
+            <tr>
+                <td>Hamiltonian</td>
+                <td>$D = -i \cdot x \cdot d/dx$</td>
+                <td>Dilation generator</td>
+            </tr>
+            <tr>
+                <td>Energy levels</td>
+                <td>$\text{Spec}(D)$</td>
+                <td>Riemann zeros $\gamma_n$</td>
+            </tr>
+            <tr>
+                <td>Particles</td>
+                <td>Closed orbits</td>
+                <td>Primes $p$</td>
+            </tr>
+            <tr>
+                <td>Action</td>
+                <td>Orbit length</td>
+                <td>$\log p$</td>
+            </tr>
+            <tr>
+                <td>Time evolution</td>
+                <td>$e^{iTD}$</td>
+                <td>Scaling flow</td>
+            </tr>
+            <tr>
+                <td>Partition function</td>
+                <td>$\text{Tr}(e^{-\beta D})$</td>
+                <td>$\zeta(\beta)$</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>5. The Trace Formula</h2>
+
+        <p>The Connes trace formula unifies Selberg and Weil:</p>
+
+        $$\text{Tr}(h(D)) = \sum_\gamma h(\gamma) + \int (\cdots) dr - \sum_p \frac{\log p}{\sqrt{p}} \hat{h}(\log p) + \cdots$$
+
+        <ul>
+            <li><strong>Spectral side:</strong> Sum over zeros (eigenvalues of $D$)</li>
+            <li><strong>Geometric side:</strong> Sum over primes (orbit lengths)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. What This Means</h2>
+
+        <div class="warning-box">
+            <strong>Honest Assessment:</strong>
+            <p>We have identified the correct operator. We have NOT:</p>
+            <ul>
+                <li>Proved its spectrum equals the zeros</li>
+                <li>Constructed it rigorously on the full adelic space</li>
+                <li>Proved RH via this approach</li>
+            </ul>
+            <p>These require years of technical work (Connes has been working on this since 1999).</p>
+        </div>
+
+        <div class="result-box">
+            <strong>What We Have Achieved:</strong>
+            <ul>
+                <li>Identified the correct framework (Connes + Selberg)</li>
+                <li>Connected our scattering phase work to the dilation operator</li>
+                <li>Understood why $T$ is the natural time parameter</li>
+                <li>Unified all previous stages into one object: $D$</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Files</h2>
+        <ul>
+            <li><code>dilation_operator.py</code> - Implementation and demonstrations</li>
+        </ul>
+    </section>
+    </div>
+</body>
+</html>

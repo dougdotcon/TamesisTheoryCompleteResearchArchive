@@ -1,0 +1,382 @@
+/*
+ * Tamesis Archive — canonical paper layout
+ *
+ * Visual contract derived from
+ * 90_LEGACY/06_TOE_ARCHITECTURE_OF_REALITY/01_Treatises/paper.html.
+ * This file is intentionally local so archived papers remain readable
+ * offline and retain one consistent typographic system.
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: #fff;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 10pt !important;
+  line-height: 1.15 !important;
+  color: #000 !important;
+  max-width: 210mm;
+  margin: 0 auto !important;
+  padding: 1.5cm !important;
+  background: #fff !important;
+  column-count: 2;
+  column-gap: 0.8cm;
+  text-align: justify;
+}
+
+/* The journal front matter and structural containers occupy the full page. */
+body > header,
+body > .hero,
+body > nav,
+body > .topbar,
+body > .shell,
+body > main,
+body > .content-wrapper,
+body > .abstract,
+body > footer,
+body > .doi-badge,
+body > script,
+body > style {
+  column-span: all;
+}
+
+body a {
+  color: #000;
+  text-decoration: underline;
+}
+
+body nav,
+body .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 0 1.5rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+  font: 9pt "Times New Roman", Times, serif;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+body nav a,
+body .topbar a {
+  color: #000;
+}
+
+body header,
+body .hero {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 2rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+body h1 {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 16pt !important;
+  font-weight: bold;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  margin: 0 0 0.5rem;
+}
+
+body .authors,
+body .author {
+  font-size: 11pt;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+body .affiliations,
+body .meta {
+  font-size: 10pt;
+  font-style: italic;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+body .date {
+  font-size: 9pt;
+  color: #666;
+}
+
+body .kicker,
+body .eyebrow {
+  font: 9pt "Times New Roman", Times, serif;
+  color: #444;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+body .dek,
+body .lead {
+  max-width: 85%;
+  margin: 0 auto 1rem;
+  color: #000;
+  font-size: 10pt;
+}
+
+body .abstract,
+body .claim,
+body .definition,
+body .definition-box,
+body .theorem-box,
+body .model,
+body .warning,
+body .equation,
+body blockquote {
+  break-inside: avoid;
+}
+
+body .abstract {
+  font-weight: bold;
+  font-size: 9pt;
+  margin: 0 auto 1.5rem;
+  width: 85%;
+  text-align: justify;
+  font-style: italic;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+body h2 {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 10pt !important;
+  font-weight: bold;
+  text-transform: uppercase !important;
+  margin: 1.2rem 0 0.6rem;
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.15rem;
+  break-after: avoid;
+}
+
+body h3 {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 10pt !important;
+  font-style: italic;
+  font-weight: normal;
+  margin: 1rem 0 0.3rem;
+  break-after: avoid;
+}
+
+body h4 {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 10pt !important;
+  font-style: italic;
+  font-weight: normal;
+}
+
+body p {
+  margin: 0 0 0.8rem;
+  text-indent: 1em;
+  text-align: justify;
+}
+
+body p.no-indent,
+body header p,
+body .hero p,
+body nav p,
+body footer p {
+  text-indent: 0;
+}
+
+body .content-wrapper,
+body > article {
+  column-count: 2;
+  column-gap: 0.8cm;
+  text-align: justify;
+}
+
+body main {
+  column-count: initial;
+  column-gap: normal;
+  text-align: justify;
+}
+
+body main > article {
+  column-count: 2;
+  column-gap: 0.8cm;
+}
+
+body aside {
+  display: none;
+}
+
+/* Convert dashboard-style panels into the same restrained paper vocabulary. */
+body .status,
+body .card,
+body .panel,
+body .button {
+  background: #fafafa !important;
+  color: #000 !important;
+  border: 1px solid #ccc !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body .status span,
+body .status code,
+body .card span,
+body .card a,
+body .panel a,
+body .button {
+  color: #000 !important;
+}
+
+body .content-wrapper > *,
+body main > article > *,
+body > article > * {
+  max-width: 100%;
+}
+
+body .equation {
+  text-align: center;
+  margin: 0.8rem 0;
+  font-size: 10pt;
+  white-space: pre-wrap;
+}
+
+body figure {
+  margin: 1rem 0;
+  text-align: center;
+  break-inside: avoid;
+}
+
+body figure img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+body figcaption {
+  font-size: 9pt;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+body ol,
+body ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+body li {
+  margin-bottom: 0.2rem;
+}
+
+body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 9pt;
+  break-inside: avoid;
+}
+
+body th,
+body td {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+body th {
+  border-bottom: 2px solid #000;
+}
+
+body code,
+body pre {
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+body pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  border: 1px solid #ddd;
+  padding: 0.6rem;
+  break-inside: avoid;
+}
+
+body .doi-badge {
+  font-family: Arial, sans-serif !important;
+  font-size: 9px;
+  color: #666;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: #fdfdfd;
+  padding: 2px 5px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  z-index: 1000;
+}
+
+body .references {
+  margin-top: 2rem;
+  border-top: 1px solid #000;
+  padding-top: 0.5rem;
+  font-size: 8pt;
+  line-height: 1.1;
+  column-span: all;
+}
+
+body footer {
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #000;
+  text-align: center;
+  font-size: 8pt;
+  color: #666;
+}
+
+@media (max-width: 760px) {
+  body {
+    max-width: none;
+    padding: 1rem !important;
+    column-count: 1;
+  }
+
+  body .content-wrapper,
+  body > article,
+  body main > article {
+    column-count: 1;
+  }
+
+  body main {
+    column-count: initial;
+  }
+
+  body .abstract,
+  body .dek,
+  body .lead {
+    width: 100%;
+    max-width: none;
+  }
+
+  body .doi-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media print {
+  body {
+    padding: 1.5cm !important;
+  }
+
+  body a {
+    color: #000;
+    text-decoration: none;
+  }
+}

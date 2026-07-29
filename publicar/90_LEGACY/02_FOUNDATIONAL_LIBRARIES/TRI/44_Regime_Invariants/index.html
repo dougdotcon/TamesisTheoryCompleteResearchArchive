@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 44: Regime Invariants and Universality Classes | TRI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* PRL Style: Two-column layout, compact, Times New Roman */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        .authors {
+            font-size: 10pt;
+            margin-bottom: 0.2rem;
+        }
+
+        .affiliations {
+            font-size: 9pt;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin: 0 auto 1.5rem auto;
+            width: 85%;
+            text-align: justify;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #000;
+            break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 10pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8.5pt;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            border-top: 1px solid #000;
+        }
+
+        .references {
+            margin-top: 2rem;
+            border-top: 1px solid #000;
+            padding-top: 0.5rem;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+
+        .references ol {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .references li {
+            margin-bottom: 0.2rem;
+        }
+    
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../../../../paper-layout.css">
+</head>
+
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364" style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+    <header>
+        <h1>Stage 44: Regime Invariants and the Determination of Universality</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 23, 2026)</div>
+    </header>
+
+    <div class="abstract">
+        We identify the five fundamental invariants that characterize physical regimes: Discreteness, Quantumness,
+        Commutativity, Measure Type, and Locality. We propose the "Invariant Determination Theorem", which states that
+        the invariant signature of a regime uniquely determines its critical exponents and universality class.
+        Specifically,
+        we show that the transition from discrete to continuous state spaces changes the critical exponent $\alpha$ from
+        $0.5$ ($U_{1/2}$) to $2.0$ ($U_2$). This establishes a rigorous link between the algebraic structure of a
+        theory and its emergent statistical behavior.
+    </div>
+
+    <div class="content-wrapper">
+        <p class="no-indent">Universality is the observation that diverse physical systems exhibit identical scaling
+            behavior
+            near phase transitions [1]. Traditionally, this is explained by the Renormalization Group (RG). However, RG
+            does not
+            explain <em>why</em> specific universality classes exist or how they relate to the fundamental definitions
+            of the theories
+            themselves. In this Letter, we extend the Theory of Regime Incompatibility (TRI) to show that universality
+            classes
+            are emergent properties of the invariant signatures of regimes.</p>
+
+        <h2>The Five Fundamental Invariants</h2>
+
+        <p class="no-indent">Following the definition of a regime $R = (S, P, O)$ [2], we identify five binary or
+            categorical
+            invariants that are preserved under all valid transformations within a regime:</p>
+
+        <ol>
+            <li><strong>Discreteness ($I_D$):</strong> Discrete vs. Continuous state manifold.</li>
+            <li><strong>Quantumness ($I_Q$):</strong> Existence of superposition (Quantum vs. Classical).</li>
+            <li><strong>Commutativity ($I_C$):</strong> $[A, B] = 0$ for all observables (Commutative vs.
+                Non-commutative).</li>
+            <li><strong>Measure Type ($I_M$):</strong> Counting measure, Spectral measure, or Threshold.</li>
+            <li><strong>Locality ($I_L$):</strong> Local vs. Global interactions.</li>
+        </ol>
+
+        <h2>Invariant Signatures</h2>
+
+        <p class="no-indent">Every known universality class corresponds to a unique vector of these invariants (Table
+            I).</p>
+
+        <table>
+            <caption>TABLE I. Invariant Signatures</caption>
+            <tr>
+                <th>Class</th>
+                <th>Discrete</th>
+                <th>Quantum</th>
+                <th>Measure</th>
+                <th>$\alpha$</th>
+            </tr>
+            <tr>
+                <td>$U_{1/2}$</td>
+                <td>True</td>
+                <td>False</td>
+                <td>Counting</td>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>$U_2$ (GUE)</td>
+                <td>False</td>
+                <td>True</td>
+                <td>Spectral</td>
+                <td>2.0</td>
+            </tr>
+            <tr>
+                <td>$U_0$ (KAM)</td>
+                <td>False</td>
+                <td>False</td>
+                <td>Threshold</td>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <td>$U_{\text{Ising}}$</td>
+                <td>True</td>
+                <td>False</td>
+                <td>Threshold</td>
+                <td>0.125</td>
+            </tr>
+        </table>
+
+        <h2>The Invariant Determination Theorem</h2>
+
+        <p class="no-indent">We propose the following theorem:</p>
+        <p><strong>Theorem 1:</strong> <em>For any two regimes $R_1$ and $R_2$ with invariant signatures $\vec{I}_1$ and
+                $\vec{I}_2$,
+                if $\vec{I}_1 \neq \vec{I}_2$, then the critical exponents characterizing transitions in these regimes
+                must differ.</em></p>
+
+        <div class="equation">
+            $$ \vec{I}_1 \neq \vec{I}_2 \implies \alpha(R_1) \neq \alpha(R_2) $$
+        </div>
+
+        <p><strong>Proof Sketch:</strong> Critical exponents are determined by the scaling of the dominant term in the
+            partition function or free energy. This scaling depends on the measure of the state space (Discrete counting
+            vs.
+            Continuous integral) and the nature of the fluctuations (Quantum/Non-commutative vs. Classical/Commutative).
+            Since the invariants dictate the measure and algebra, they dictate the scaling [3].</p>
+
+        <h2>Empirical Evidence</h2>
+
+        <p class="no-indent">Consider the transition from $U_{1/2}$ (Random Maps) to $U_2$ (Quantum Decoherence). The
+            invariants differ in four dimensions: Discreteness, Quantumness, Commutativity, and Measure. Consequently,
+            the
+            critical exponent jumps from $\alpha = 0.5$ (Flajolet-Odlyzko) to $\alpha = 2.0$ (Wigner-Dyson). No smooth
+            interpolation exists because "Discreteness" cannot be continuously deformed into "Continuity" without
+            singularities [4].</p>
+
+        <h2>Implication for Unification</h2>
+
+        <p class="no-indent">This result implies that the dream of a "Grand Unified Universality Class" is
+            mathematically
+            impossible. If physics contains regimes with different invariants (which it clearly does), it must contain
+            multiple,
+            distinct universality classes. The "DNA" of the regime determines the "Species" of the physics.</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>H. E. Stanley, Rev. Mod. Phys. <strong>71</strong>, S358 (1999).</li>
+                <li>D. H. M. Fulber, <em>Stage 43: Regime Definition</em> (2026).</li>
+                <li>N. Goldenfeld, <em>Lectures on Phase Transitions and the Renormalization Group</em> (Perseus, 1992).
+                </li>
+                <li>M. V. Berry, Proc. R. Soc. Lond. A <strong>400</strong>, 229 (1985).</li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PAPER C: COMPUTATIONAL CLASSIFICATION OF PROBLEM SPACES</title>
+  <meta name="description" content="Artigo convertido do arquivo Markdown Tamesis: PAPER_C_COMPUTATIONAL_CLASSIFICATION.md">
+  <link rel="stylesheet" href="../../../paper-layout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <header>
+    <h1>PAPER C: COMPUTATIONAL CLASSIFICATION OF PROBLEM SPACES</h1>
+    <div class="authors">Tamesis Research Archive</div>
+    <div class="date">Automatic Markdown conversion - source file: PAPER_C_COMPUTATIONAL_CLASSIFICATION.md</div>
+  </header>
+  <main><article>
+<h2>Empirical Verification of Structural Barriers</h2>
+<blockquote>
+<p><strong>Abstract:</strong> We provide computational evidence for the distinction between Class A (Rigid) and Class B (Universal) problems. Using a dynamical simulation <code>structural_classifier.py</code>, we show that Class A systems (Geometric Flow) converge to zero-variance unique states, while Class B systems (Spectral Chaos) stabilize at a non-zero variance characteristic of Random Matrix Theory. This confirms that &quot;Unsolvability&quot; in Class B is a robust feature of the solution space topology.</p>
+</blockquote>
+<hr>
+<h2>1. The Classification Experiment</h2>
+<p>We programmed a &quot;Classifier Engine&quot; to test the convergence properties of two distinct mathematical dynamics.</p>
+<h3>1.1 Methodology</h3>
+<ul>
+<li><strong>Class A Model:</strong> A geometric flow (Heat/Ricci-like) acting on a matrix. Represents problems solved by &quot;smoothing&quot; (e.g., Poincaré).</li>
+<li><strong>Class B Model:</strong> A Brownian motion on the unitary group (GUE). Represents problems dominated by complexity/chaos (e.g., Riemann, P vs NP).</li>
+<li><strong>Metric:</strong> The asymptotic variance $V_{\infty}$ of the system&#39;s state (or spectral spacings) over time.</li>
+</ul>
+<h2>2. Results</h2>
+<p>Running the simulation with $N=50$ and $T=200$ steps:</p>
+<p><img src="structural_classification.png" alt="Structural Classification Plot"></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Class A (Rigid)</th>
+<th>Class B (Universal)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Dynamics</strong></td>
+<td>Contractive</td>
+<td>Ergodic</td>
+</tr>
+<tr>
+<td><strong>Final Variance</strong></td>
+<td><strong>0.0003</strong> ($\to 0$)</td>
+<td><strong>0.2719</strong> ($\to Const$)</td>
+</tr>
+<tr>
+<td><strong>Interpretation</strong></td>
+<td>Solved (Unique State)</td>
+<td>Censored (Statistical Phase)</td>
+</tr>
+</tbody></table>
+<h3>2.1 The Meaning of &quot;Variance &gt; 0&quot;</h3>
+<p>The persistence of variance in Class B is not a failure of the algorithm. It is the <strong>Solution Signature</strong>.</p>
+<ul>
+<li>In Class B, the &quot;answer&quot; is not a single matrix configuration.</li>
+<li>The &quot;answer&quot; is the <strong>Probability Distribution</strong> (GUE).</li>
+<li>Attempts to force a single answer (Variance $\to$ 0) require infinite energy, consistent with <strong>Thermodynamic Censorship</strong>.</li>
+</ul>
+<h2>3. The &quot;Solvability Turing Test&quot;</h2>
+<p>We propose this script as a heuristic test for open conjectures.<br>To determine if a problem is &quot;Solvable&quot; (Class A) or &quot;Universal&quot; (Class B):</p>
+<ol>
+<li>Map the problem to a dynamical operator.</li>
+<li>Evolve the operator under its natural gradient flow.</li>
+<li><strong>If $V \to 0$:</strong> The problem admits a constructive geometric proof.</li>
+<li><strong>If $V \to C &gt; 0$:</strong> The problem is a statistical universal; it requires a Theory of Realizability.</li>
+</ol>
+<h2>4. Conclusion</h2>
+<p>We have addressed the question of empirical verification.<br>The distinction between Solvable and Universal is a <strong>computable property</strong> of the mathematical object. We have demonstrated this behavior using standard numerical models.</p>
+
+  </article></main>
+</body>
+</html>

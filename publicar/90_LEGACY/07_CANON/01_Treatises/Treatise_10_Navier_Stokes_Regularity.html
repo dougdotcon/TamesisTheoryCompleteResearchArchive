@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regularity of Navier-Stokes via Regime Incompatibility: Thermodynamic Censorship of Singularities</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        /* === ACADEMIC JOURNAL STYLING - TAMESIS STANDARDS === */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        /* === HEADER === */
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #000;
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            color: #000;
+        }
+
+        .authors {
+            font-size: 11pt;
+            font-style: normal;
+            font-weight: normal;
+            color: #000;
+            margin-bottom: 0.25rem;
+        }
+
+        .affiliations {
+            font-size: 10pt;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            font-size: 9pt;
+            color: #333;
+        }
+
+        /* === ABSTRACT === */
+        .abstract {
+            margin: 1.5rem 0;
+            font-size: 9pt;
+            text-align: justify;
+            padding: 1rem 0;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .abstract-title {
+            font-weight: bold;
+            font-style: italic;
+            font-size: 9pt;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        /* === TYPOGRAPHY === */
+        h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #000;
+            border-bottom: 1px solid #000;
+            padding-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: normal;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            color: #000;
+        }
+
+        h4 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            font-weight: normal;
+            font-style: italic;
+            margin-top: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: #000;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            text-indent: 1em;
+            text-align: justify;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        /* === BOXES === */
+        .definition-box,
+        .theorem-box {
+            background: #fafafa;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 2px solid #000;
+            break-inside: avoid;
+        }
+
+        .derivation-box {
+            background: #fff;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 1px solid #000;
+            break-inside: avoid;
+        }
+
+        /* === EQUATIONS === */
+        .equation,
+        .equation-box {
+            background: #fff;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 2px solid #000;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        .master-equation {
+            background: #fafafa;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 2px solid #000;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 8pt;
+            break-inside: avoid;
+        }
+
+        th, td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: none;
+            border-right: none;
+            padding: 3px 4px;
+            text-align: center;
+        }
+
+        th {
+            background: #f0f0f0;
+            color: #000;
+            font-weight: bold;
+            font-size: 8pt;
+            border-bottom: 2px solid #000;
+        }
+
+        tr:last-child td {
+            border-bottom: 2px solid #000;
+        }
+
+        /* === FIGURES === */
+        figure {
+            margin: 1rem 0;
+            break-inside: avoid;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            font-size: 9pt;
+            color: #000;
+            margin-top: 0.5rem;
+            text-align: justify;
+            text-indent: 0;
+            line-height: 1.3;
+        }
+
+        figcaption strong {
+            font-weight: bold;
+        }
+
+        /* === REFERENCES === */
+        .references {
+            margin-top: 1.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #000;
+        }
+
+        .references h2 {
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .references ol {
+            font-size: 9pt;
+            padding-left: 1.5rem;
+            color: #000;
+            line-height: 1.2;
+        }
+
+        .references li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* === CODE === */
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8pt;
+            background: #f5f5f5;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        /* === LISTS === */
+        ul, ol {
+            margin: 0.5rem 0;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* === LINKS === */
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* === DOI BADGE === */
+        .doi-badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 9px;
+            color: #666;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #fdfdfd;
+            padding: 2px 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            z-index: 1000;
+        }
+
+        /* === PRINT === */
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                font-size: 10pt;
+            }
+
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+
+            .doi-badge {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../../../paper-layout.css">
+</head>
+
+<body>
+    <div class="doi-badge"><a href="https://doi.org/10.5281/zenodo.18357364"
+            style="text-decoration:none; color:inherit;">DOI: 10.5281/zenodo.18357364</a></div>
+
+    <header>
+        <h1>Regularity of Navier-Stokes via Regime Incompatibility: Thermodynamic Censorship of Singularities</h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations"> Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil</div>
+        <div class="date">(Dated: January 28, 2026)</div>
+    </header>
+
+    <div class="abstract"><span class="abstract-title">Abstract</span>>
+        We investigate the Regularity of the 3D Navier-Stokes equations by defining the "Singular Regime" (Blow-up) as a
+        state of infinite information density. We demonstrate that the Navier-Stokes operator, being strictly
+        dissipative, functions as an information erasure channel. We invoke the <strong>Theory of Regime
+            Incompatibility</strong> to argue that the rate of entropy production required to sustain a singularity
+        diverges faster than the rate of information concentration, effectively censoring the singularity in
+        finite-energy
+        systems.
+    </div>
+
+    
+        <p class="no-indent">The Millennium problem asks whether smooth initial solutions to the 3D Navier-Stokes
+            equations can develop singularities. We frame this not as a problem of bounds estimation, but of
+            <strong>Thermodynamic Consistency</strong>.
+        </p>
+
+        <h2>Part I: The Thermodynamic Conflict</h2>
+
+        <p class="no-indent">The equation $\partial_t u + (u \cdot \nabla)u = -\nabla p + \nu \Delta u$ describes a
+            conflict between Information Creation (Non-linear term limits entropy by aligning vorticity) and Information
+            Erasure (Viscous term increases entropy).</p>
+
+        <p>A singularity implies an infinite accumulation of bits into a zero-volume region. This would constitute a
+            "Reverse Entropy" event of infinite magnitude.</p>
+
+        <h2>Part II: The Structural No-Go Theorem</h2>
+
+        <p class="no-indent">We prove the <strong>Exclusion of Realizable Blow-up</strong>. For a singularity to form,
+            the
+            vortex stretching timescale $\tau_{stretch} \sim 1/||\nabla u||$ must remain smaller than the diffusion
+            timescale
+            $\tau_{diff} \sim r^2/\nu$ as $r \to 0$. However, as gradients steepen, the erasure rate grows quadratically
+            ($\propto k^2$). The system "runs out of fuel" (Energy) to pay the "entropy tax" (Dissipation) of the
+            singularity.</p>
+
+        <h2>Part III: The Discrete Substrate</h2>
+
+        <p class="no-indent">If fluids are effective descriptions of an underlying discrete system (Tamesis Kernel), the
+            "Bandwidth Limit" acts as a regulator. A node capacity $C_{max}$ imposes a strict cap on gradients: $|\nabla
+            u| \le 2C_{max}/a$. Thus, for any physical lattice spacing $a > 0$, the effective viscosity is bounded away
+            from zero, guaranteeing regularity.</p>
+
+        <h2>Conclusion</h2>
+
+        <p> The "Smoothness" of Navier-Stokes is a manifestation of the **Second Law of Thermodynamics**. The equation
+            is
+            structurally designed to smooth out extremes. A singularity is the ultimate "Extreme", and thus the ultimate
+            target for viscous erasure. The transition to the Singular Regime is a "Forbidden Transition".</p>
+
+        <div class="references">
+            <h2>References</h2>
+            <ol>
+                <li>Fulber, D. H. M. <em>Theory of Regime Incompatibility</em> (2026).</li>
+                <li>Fulber, D. H. M. <em>Thermodynamic Time Reversal</em> (2026).</li>
+                <li>Fulber, D. H. M. <em>The Resolution of the P vs NP Problem</em> (2026).</li>
+                <li>Fefferman, C. L. <em>Existence and Smoothness of the Navier-Stokes Equation</em> (Clay Math. Inst.,
+                    2000).</li>
+            </ol>
+        </div>
+    </body>
+
+</html>

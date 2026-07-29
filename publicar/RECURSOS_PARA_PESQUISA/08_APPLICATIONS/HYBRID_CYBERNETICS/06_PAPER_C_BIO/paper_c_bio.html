@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Empirical and Neuroinformational Bounds on Human Verification Bandw...</title>
+  <meta name="description" content="Artigo convertido do arquivo Markdown Tamesis: paper_c_bio.md">
+  <link rel="stylesheet" href="../../../../paper-layout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <header>
+    <h1>Empirical and Neuroinformational Bounds on Human Verification Bandwidth: Defining $C{bio}$</h1>
+    <div class="authors">Tamesis Research Archive</div>
+    <div class="date">Automatic Markdown conversion - source file: paper_c_bio.md</div>
+  </header>
+  <main><article>
+<p><strong>A Foundational Parametrization for Hybrid Cybernetics</strong></p>
+<p><strong>Douglas H. M. Fulber</strong><br><em>Institute for Hybrid Cybernetics</em></p>
+<hr>
+<h2>Abstract</h2>
+<p>The <strong>Theory of Hybrid Stability</strong> relies on a critical parameter: the biological channel capacity for semantic verification, denoted as $C_{bio}$. While literature often cites reading speeds of 200-400 wpm (~50 bits/s), verification requires active error detection, which imposes a higher cognitive load. This paper synthesizes evidence from cognitive psychology (Miller, Sweller), information theory (Pierce, Shannon), and neurophysiology to derive a rigorous bound for $C_{bio}$. We distinguish between <strong>Passive Reception Flux</strong> ($ \Phi_{Rx} $) and <strong>Active Verification Flux</strong> ($ \Phi_{Ver} $), demonstrating that for high-entropy tasks (e.g., code review, hallucination detection), the effective capacity drops to the range $C_{bio} \in [10^1, 20]$ bits/s. This finding reinforces the necessity of &quot;Thermodynamic Throttling&quot; in Human-AI interfaces.</p>
+<hr>
+<h2>1. Introduction: The &quot;Human Bottleneck&quot;</h2>
+<p>In Hybrid Cybernetics, the stability of a coupled system $\mathcal{H} \circ \mathcal{M}$ is conditional on the Bandwidth Constraint:<br>$$ \mathcal{F}(\Phi_{out}) \le C_{bio} $$<br>If $C_{bio}$ is overestimated, the filter $\mathcal{F}$ will fail, leading to saturation and error divergence. Therefore, establishing a physically defensible value for $C_{bio}$ is not a detail, but a safety-critical requirement.</p>
+<h2>2. Theoretical Bounds</h2>
+<h3>2.1 The Shannon Limit of Language</h3>
+<p>Shannon (1951) estimated the entropy of English text $H_{eng}$ to be $\approx 1.5$ bits/letter.<br>For a reading speed of 250 words/minute ($\approx 20$ letters/s):<br>$$ R_{shannon} \approx 20 \times 1.5 = 30 \text{ bits/s} $$<br>This represents the <em>maximum reception rate</em> for native text.</p>
+<h3>2.2 The Psychometric Limit (Hick-Hyman Law)</h3>
+<p>Verification is a decision process. The time $T$ to verify a bit of information follows the Hick-Hyman Law:<br>$$ T = b \cdot \log_2(n+1) $$<br>For binary verification (True/False) per semantic unit, the processing cost is non-negligible.</p>
+<h2>3. Empirical Evidence</h2>
+<h3>3.1 Code Review Studies</h3>
+<p>Studies on software engineering (e.g., Cohen et al.) show that code review effectiveness drops precipitously after <strong>400 LOC/hour</strong>.<br>Assuming 1 line $\approx$ 50 bits of entropy:<br>$$ R_{review} = \frac{400 \times 50}{3600} \approx 5.5 \text{ bits/s} $$<br>This suggests active verification is an order of magnitude slower than passive reading.</p>
+<h3>3.2 The &quot;Invisible Gorilla&quot; Effect (Inattentional Blindness)</h3>
+<p>When flux increases ($\Phi \gg 10$ bits/s), the brain engages heuristic filters (System 1). In this mode, &quot;hallucinations&quot; (plausible but false statements) become invisible because they fit the heuristic pattern.<br><strong>Correction Cost:</strong> Detecting a semantic error requires switching to System 2 (Analytical), which has a metabolic cost and requires $T_{switch} \approx 200$ms.</p>
+<h2>4. Derived Bounds for $C_{bio}$</h2>
+<p>We propose a tri-level classification for $C_{bio}$:</p>
+<table>
+<thead>
+<tr>
+<th>Regime</th>
+<th>Flux ($\Phi$)</th>
+<th>Mechanism</th>
+<th>Reliability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Scanning</strong></td>
+<td>$\sim 50$ bits/s</td>
+<td>Pattern Matching</td>
+<td>Low ($\sigma^2_{high}$)</td>
+</tr>
+<tr>
+<td><strong>Reading</strong></td>
+<td>$\sim 30$ bits/s</td>
+<td>Semantic Reconstruction</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Verification</strong></td>
+<td>$\sim 5-10$ bits/s</td>
+<td>Logical Falsification</td>
+<td>High ($\sigma^2 \to 0$)</td>
+</tr>
+</tbody></table>
+<h2>5. Implications for AI Interface Design</h2>
+<p>The naive assumption that &quot;Humans can read AI output at 300 wpm&quot; is dangerous.<br>For <strong>Safety-Critical Tasks</strong>, the interface must throttle the AI output to the <strong>Verification Bandwidth</strong> (~10 bits/s), not the Reading Bandwidth.<br>This implies that <strong>High-Speed Chat Interfaces</strong> are structurally unsafe for debugging or fact-checking.</p>
+<h2>6. Conclusion</h2>
+<p>We define the operational parameter $C_{bio}$ for Hybrid Cybernetics as:<br>$$ C_{bio}^{safety} \approx 10 \text{ bits/s} $$<br>Any system pushing flux beyond this limit without algorithmic pre-filtering is thermodynamically unstable.</p>
+<h2>References</h2>
+<ol>
+<li>Shannon, C. E. (1951). <em>Prediction and Entropy of Printed English</em>.</li>
+<li>Miller, G. A. (1956). <em>The Magical Number Seven, Plus or Minus Two</em>.</li>
+<li>Sweller, J. (1988). <em>Cognitive Load During Problem Solving</em>.</li>
+<li>Kahneman, D. (2011). <em>Thinking, Fast and Slow</em>.</li>
+</ol>
+
+  </article></main>
+</body>
+</html>

@@ -1,8 +1,9 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-28T21:22:00-03:00
-canonical_commit: "363be8ad18083c8dc54c3b9d42c47cfd5bb954c8"
-repository_clean: false
+canonical_commit: "db75056028c34a9b5cd2093003dd77ed8d3704b4"
+canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
+repository_clean: true
 active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"

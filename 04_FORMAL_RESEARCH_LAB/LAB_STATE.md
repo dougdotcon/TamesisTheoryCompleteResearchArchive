@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-30T10:20:00-03:00
-canonical_commit: "2ee0c2d76e657f9663d911c2060f23a513af4489"
+canonical_commit: "5398715"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
 active_track: "formal_infrastructure"

@@ -1,13 +1,11 @@
 param(
+  [Parameter(Mandatory = $true, Position = 0)]
+  [string] $Program,
   [Parameter(ValueFromRemainingArguments = $true)]
-  [string[]] $Command
+  [string[]] $Arguments
 )
 
 $ErrorActionPreference = 'Stop'
-
-if (-not $Command -or $Command.Count -eq 0) {
-  throw 'Usage: lean-env.ps1 <lean|lake|elan> [arguments...]'
-}
 
 $gitMingw = if ($env:TAMESIS_GIT_MINGW_BIN) { $env:TAMESIS_GIT_MINGW_BIN } else { 'C:\Program Files\Git\mingw64\bin' }
 $gitUsr = if ($env:TAMESIS_GIT_USR_BIN) { $env:TAMESIS_GIT_USR_BIN } else { 'C:\Program Files\Git\usr\bin' }
@@ -45,14 +43,12 @@ Write-Host "lean: $(& (Join-Path $toolchainBin 'lean.exe') --version)"
 Write-Host "lake: $(& (Join-Path $toolchainBin 'lake.exe') --version)"
 Write-Host "cache curl: $cacheCurl"
 
-$program = $Command[0]
-$arguments = if ($Command.Count -gt 1) { $Command[1..($Command.Count - 1)] } else { @() }
-$executable = switch ($program.ToLowerInvariant()) {
+$executable = switch ($Program.ToLowerInvariant()) {
   'lean' { Join-Path $toolchainBin 'lean.exe' }
   'lake' { Join-Path $toolchainBin 'lake.exe' }
   'elan' { Join-Path $elanShim 'elan.exe' }
   default { $program }
 }
 
-& $executable @arguments
+& $executable @Arguments
 exit $LASTEXITCODE

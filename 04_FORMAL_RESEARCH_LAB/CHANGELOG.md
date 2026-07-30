@@ -66,3 +66,8 @@
   de informar URL/HTTP. O probe isolado de `v4.32.1` reproduziu a falha.
 - LAB-0.8 terminou como `LAB08_NO_REPRODUCIBLE_PAIR_FOUND`; nenhuma migração
   canônica foi executada.
+- LAB-0.9 identificou que o erro Windows 2 vinha da chamada interna a
+  `uname.exe`, ausente no PATH enquanto o cache avaliava curl 7.55.1.
+- A precedência temporária de `Git/usr/bin` removeu o erro de criação de
+  processo, mas os downloads curl permaneceram presos por 600 segundos; o gate
+  terminou como `LAB09_CAUSE_STILL_UNRESOLVED`.

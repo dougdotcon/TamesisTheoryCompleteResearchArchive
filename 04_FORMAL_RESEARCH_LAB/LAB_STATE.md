@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-28T22:38:00-03:00
+updated_at: 2026-07-30T09:25:00-03:00
 canonical_commit: "1547407d3957edb6d68b8a666a0d227dd8bc7b6b"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
@@ -8,10 +8,10 @@ active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"
 evidence_level: "F"
-last_verified_artifact: "lab0.8-lean-mathlib-compatibility-result.json"
-current_blocker: "Nenhum par Lean–Mathlib reproduzível passou cache e smoke integralmente."
-next_single_action: "Investigar a falha de processo do cache identificando o executável/recurso que retorna o erro Windows 2."
-authorized_action: "LAB_LEAN_MATHLIB_COMPATIBILITY_RECOVERY_AUTHORIZED"
+last_verified_artifact: "lab0.9-windows-cache-runtime-result.json"
+current_blocker: "A causa inicial uname.exe ausente foi identificada, mas o cache permanece preso em curl após a correção temporária."
+next_single_action: "Diagnosticar o bloqueio de rede/curl após disponibilizar uname.exe no PATH da sessão."
+authorized_action: "LAB_WINDOWS_CACHE_LAUNCH_RECOVERY_AUTHORIZED"
 prohibited_actions:
   - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
   - "Não executar a formalização completa do benchmark neste gate"

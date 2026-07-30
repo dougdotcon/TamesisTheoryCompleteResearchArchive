@@ -71,3 +71,9 @@
 - A precedência temporária de `Git/usr/bin` removeu o erro de criação de
   processo, mas os downloads curl permaneceram presos por 600 segundos; o gate
   terminou como `LAB09_CAUSE_STILL_UNRESOLVED`.
+- LAB-0.10 separou o cURL Windows 7.55.1 do cURL Git 8.21.0 e confirmou que
+  `Git/usr/bin` sozinho não altera a seleção do cURL.
+- A precedência interna do cache passou a usar o cURL Git verificado; 398
+  `.ltar` foram transferidos e a contagem `.olean` subiu para 1.173, mas 2.583
+  objetos permaneceram `.part`/404 e a transferência não concluiu.
+- LAB-0.10 terminou como `LAB010_CACHE_TRANSFER_STALLED`.

@@ -220,6 +220,7 @@ def validate() -> dict[str, Any]:
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
         "LAB_LEAN_MATHLIB_COMPATIBILITY_RECOVERY_AUTHORIZED",
         "LAB_WINDOWS_CACHE_LAUNCH_RECOVERY_AUTHORIZED",
+        "LAB_CACHE_NETWORK_RECOVERY_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     if benchmark.get("status") == "VERIFIED":

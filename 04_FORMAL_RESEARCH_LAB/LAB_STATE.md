@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-30T09:25:00-03:00
+updated_at: 2026-07-30T09:51:00-03:00
 canonical_commit: "0bce2ff08d8dd370279445ac878ddc2570588deb"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
@@ -8,10 +8,10 @@ active_track: "formal_infrastructure"
 active_work_item: "LAB-BENCH-001"
 work_status: "BLOCKED"
 evidence_level: "F"
-last_verified_artifact: "lab0.9-windows-cache-runtime-result.json"
-current_blocker: "A causa inicial uname.exe ausente foi identificada, mas o cache permanece preso em curl após a correção temporária."
-next_single_action: "Diagnosticar o bloqueio de rede/curl após disponibilizar uname.exe no PATH da sessão."
-authorized_action: "LAB_WINDOWS_CACHE_LAUNCH_RECOVERY_AUTHORIZED"
+last_verified_artifact: "lab0.10-cache-network-result.json"
+current_blocker: "O cURL moderno transfere parcialmente, mas 2.583 objetos legacy permanecem .part/404 e o processo paralelo não conclui."
+next_single_action: "Investigar o endpoint legacy que deixa 2.583 objetos em estado .part/404 e impede a conclusão do curl paralelo."
+authorized_action: "LAB_CACHE_NETWORK_RECOVERY_AUTHORIZED"
 prohibited_actions:
   - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
   - "Não executar a formalização completa do benchmark neste gate"

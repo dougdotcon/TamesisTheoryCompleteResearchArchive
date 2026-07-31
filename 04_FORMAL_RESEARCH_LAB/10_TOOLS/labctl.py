@@ -131,7 +131,12 @@ def lean_check() -> dict[str, Any]:
     lean_root = LAB_ROOT / "05_FORMAL" / "lean"
     lean = shutil.which("lean")
     lake = shutil.which("lake")
-    toolchain_root = Path(os.environ.get("USERPROFILE", "")) / ".elan" / "toolchains"
+    elan_home = os.environ.get("ELAN_HOME")
+    if elan_home:
+        toolchain_root = Path(elan_home) / "toolchains"
+    else:
+        home = os.environ.get("USERPROFILE") or os.environ.get("HOME")
+        toolchain_root = (Path(home) if home else Path.home()) / ".elan" / "toolchains"
     installed_toolchains = [
         p for p in toolchain_root.iterdir()
         if p.is_dir() and not p.name.endswith(".lock")
@@ -154,13 +159,10 @@ def lean_check() -> dict[str, Any]:
         [lean, "--version"], cwd=lean_root, text=True, capture_output=True, check=False,
         timeout=20,
     )
+    stable = bool(stable_toolchains) and ".tmp" not in str(lean).lower()
     return {
-        "status": "NOT_RUN",
-        "toolchain_stability": (
-            "PARTIAL"
-            if ".tmp" in str(lean).lower() or not stable_toolchains
-            else "PASS"
-        ),
+        "status": "PASS" if stable else "NOT_RUN",
+        "toolchain_stability": "PASS" if stable else "PARTIAL",
         "lean_path": lean,
         "lake_path": lake,
         "stable_toolchains": [p.name for p in stable_toolchains],
@@ -169,7 +171,10 @@ def lean_check() -> dict[str, Any]:
         "lake_build_exit": None,
         "lake_build_stdout": "",
         "lake_build_stderr": "",
-        "message": "Structural validation does not invoke lake build; use the immutable gate result for compilation evidence.",
+        "message": (
+            "Structural validation confirms a stable, non-.tmp Lean toolchain resolved from PATH; "
+            "it never invokes lake build. Compilation evidence comes from the immutable gate result."
+        ),
     }
 
 
@@ -221,6 +226,7 @@ def validate() -> dict[str, Any]:
         "LAB_LEAN_MATHLIB_COMPATIBILITY_RECOVERY_AUTHORIZED",
         "LAB_WINDOWS_CACHE_LAUNCH_RECOVERY_AUTHORIZED",
         "LAB_CACHE_NETWORK_RECOVERY_AUTHORIZED",
+        "LAB_BENCHMARK_EXECUTION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     if benchmark.get("status") == "VERIFIED":

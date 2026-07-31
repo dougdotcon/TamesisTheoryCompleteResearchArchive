@@ -1,8 +1,8 @@
 ---
 schema: tamesis-formal-benchmark-specification/1
 work_item_id: LAB-BENCH-001
-gate: LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED
-preparation_status: PARTIAL
+gate: LAB_BENCHMARK_EXECUTION_AUTHORIZED
+preparation_status: PASS
 execution_status: NOT_STARTED
 verification_status: NOT_STARTED
 research_authorized: false
@@ -60,15 +60,19 @@ do Programa Tamesis.
 
 | Dependência | Requisito canônico | Estado atual |
 |---|---|---|
-| Lean | `leanprover/lean4:v4.32.2` resolvido por `lean-toolchain` e Elan | `PARTIAL`: executa somente pelo diretório `.tmp` |
-| Lake | versão compatível resolvida pelo mesmo toolchain | `PARTIAL`: `5.0.0-src+f3b06c7` no `.tmp` |
-| Elan | shim estável no PATH e toolchain definitivo | `PARTIAL`: Elan 4.2.3 existe, mas shims não estão no PATH desta sessão |
-| Mathlib | revisão exata fixada no manifesto | `NOT_STARTED`: pacote ausente |
-| manifesto | `lake-manifest.json` versionado e com hashes resolvidos | `PARTIAL`: existe, mas `packages` está vazio |
+| Lean | `leanprover/lean4:v4.33.0-rc1` resolvido por `lean-toolchain` e Elan | `PASS`: toolchain definitivo em `~/.elan/toolchains/leanprover--lean4---v4.33.0-rc1` |
+| Lake | versão compatível resolvida pelo mesmo toolchain | `PASS`: `5.0.0-src+62eed1d` |
+| Elan | shim estável no PATH e toolchain definitivo | `PASS`: Elan 4.2.3, shims em `/home/linuxdev/.elan/bin` |
+| Mathlib | revisão exata fixada no manifesto | `PASS`: `79d0395a1825a6264ad5d269e35e60537518955e` (tag `v4.33.0-rc1`) |
+| manifesto | `lake-manifest.json` versionado e com hashes resolvidos | `PASS`: dependências transitivas resolvidas |
 
-O benchmark não pode ser executado enquanto a revisão exata de Mathlib não
-estiver fixada. Não é permitido usar `latest`, uma revisão flutuante ou um
-diretório `.tmp` como configuração reprodutível.
+A revisão exata de Mathlib está fixada e o cache oficial está disponível.
+Não é permitido usar `latest`, uma revisão flutuante ou um diretório `.tmp`
+como configuração reprodutível.
+
+O par canônico `v4.32.2` declarado nas versões anteriores desta especificação
+foi substituído por `v4.33.0-rc1` na migração para o runtime WSL2. Nenhuma
+formalização científica dependia do par antigo.
 
 ## Arquivos Lean previstos
 
@@ -147,7 +151,8 @@ Interromper imediatamente se:
 
 ## Estado do gate
 
-A especificação está registrada, mas a preparação operacional permanece
-`PARTIAL` devido ao toolchain temporário e à revisão Mathlib não fixada.
-Execução e verificação continuam `NOT_STARTED`.
+A especificação está registrada e a preparação operacional está `PASS`: o
+toolchain é definitivo, a revisão Mathlib está fixada, o cache oficial está
+disponível e os três smokes de importação compilaram. Execução e verificação
+continuam `NOT_STARTED`; nenhum arquivo `Benchmark/*.lean` foi criado.
 

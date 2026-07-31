@@ -1,5 +1,52 @@
 # Changelog do laboratório formal
 
+## LAB-WSL-MIGRATION — 2026-07-31
+
+### Changed
+
+- O runtime canônico do laboratório passou de Windows nativo para Ubuntu 24.04
+  no WSL2. Diretório canônico:
+  `/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive`.
+- O par Lean/Mathlib canônico passou de `v4.32.2` para `v4.33.0-rc1`. Mathlib
+  fixada em `79d0395a1825a6264ad5d269e35e60537518955e`. Nenhuma formalização
+  científica dependia do par anterior.
+- `05_FORMAL/lean/lean-toolchain` e `05_FORMAL/lean/lakefile.toml` foram
+  alinhados ao par validado; `lake update mathlib` regenerou o manifesto.
+- `LAB-BENCH-001` passou de `BLOCKED` para `READY`; a autorização passou a
+  `LAB_BENCHMARK_EXECUTION_AUTHORIZED`.
+
+### Corrected
+
+- `labctl.lean_check` usava `USERPROFILE`, variável exclusiva do Windows, e não
+  localizava o diretório de toolchains sob Linux. Passou a resolver
+  `ELAN_HOME`, depois `USERPROFILE`, depois `HOME`.
+- `labctl validate` não podia retornar `PASS` em nenhuma circunstância, porque
+  exigia `lean_check()["status"] == "PASS"` e essa função só retornava
+  `BLOCKED` ou `NOT_RUN`. O registro histórico `lab0-result.json` mostra
+  `LAB0_LEAN_ENVIRONMENT_FAILED` com `errors: []`. `lean_check` passa a
+  retornar `PASS` quando há toolchain estável não-`.tmp` resolvido no PATH,
+  sem jamais invocar build.
+- `LAB_STATE.canonical_commit` continha um SHA abreviado de 7 caracteres,
+  violando o padrão de 40 exigido por `lab-state.schema.json`.
+- O allowlist de `authorized_action` em `labctl` recebeu a entrada literal
+  `LAB_BENCHMARK_EXECUTION_AUTHORIZED`, sem wildcard nem relaxamento genérico.
+
+### Verified
+
+- `LEAN_ENVIRONMENT_DISCOVERY: PASS`.
+- `LEAN_TOOLCHAIN_AVAILABILITY: PASS` com toolchain definitivo.
+- `LEAN_SMOKE_BUILD: PASS`: os três smokes de Mathlib compilaram.
+- `LAB_BENCHMARK_PREPARATION: PASS`.
+- `lake build` concluiu 8.670 jobs.
+- Tokens proibidos nos fontes do laboratório: zero.
+
+### Blocked
+
+- `LAB_BENCHMARK_EXECUTION` e `LAB_BENCHMARK_VERIFICATION`: `NOT_STARTED`.
+- `RH-NOGO-001`: `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+- A rota nativa Windows fica `FROZEN / HISTORICAL / NOT_OPERATIONAL` na tag
+  `lab-native-windows-paused`.
+
 ## Unreleased
 
 ### Added

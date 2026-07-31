@@ -1,0 +1,151 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "LAB-WSL-MIGRATION",
+  "executed_at": "2026-07-31T01:54:32-03:00",
+  "source_repository": "/mnt/d/TamesisTheoryCompleteResearchArchive",
+  "canonical_repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+  "runtime": {
+    "os": "Ubuntu 24.04 (WSL2)",
+    "user": "linuxdev",
+    "hostname": "linux-dev",
+    "kernel": "5.10.16.3-microsoft-standard-WSL2"
+  },
+  "source_head": "634de1c3aa915fcb0ccc5f27d6fe6194368535a4",
+  "source_branch": "complete-archive-v1",
+  "freeze_tag": "lab-native-windows-paused",
+  "freeze_tag_commit": "634de1c3aa915fcb0ccc5f27d6fe6194368535a4",
+  "migration_branch": "lab/wsl-lean-migration",
+
+  "elan": "4.2.3 (b6cec7e10 2026-06-08)",
+  "lean": "v4.33.0-rc1",
+  "lean_commit": "62eed1db4d67327ec8120be05f1a1b0847d74561",
+  "lake": "5.0.0-src+62eed1d",
+  "mathlib": "v4.33.0-rc1",
+  "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e",
+
+  "cache": "PASS",
+  "minimal_smoke": "PASS",
+  "tactic_smoke": "PASS",
+  "mathlib_smoke": "PASS",
+  "lake_build": "PASS",
+  "python_tests": "PASS",
+  "labctl_validate": "PASS",
+  "forbidden_tokens": "PASS",
+
+  "legacy_files_modified": 0,
+  "claims_promoted": 0,
+  "new_mathematical_proofs": 0,
+  "RH-NOGO-001_execution": 0,
+
+  "evidence": {
+    "source_working_tree": {
+      "verdict": "CONTENT_CLEAN",
+      "note": "Sob git Linux em DrvFs, 2454 arquivos aparecem modificados com 2178795 inserções e 2178795 deleções — contagem idêntica, reescrita integral. 'git diff --ignore-cr-at-eol --stat' produziu saída vazia, provando diferença apenas de terminador de linha (CRLF na worktree Windows contra blobs LF). Nenhum arquivo staged. O clone lê o object database e nasceu com working tree limpo.",
+      "staged_diff_lines": 0,
+      "untracked_not_migrated": [".claude/", "AJUSTE_FINO/"]
+    },
+    "clone": {
+      "files_checked_out": 4063,
+      "duration_seconds": 24.875,
+      "working_tree_status_lines": 0
+    },
+    "lake_update_mathlib": {
+      "exit_code": 0,
+      "duration_seconds": 2137.189,
+      "note": "Inclui git clone completo do mathlib4 e o hook pós-update, que descomprimiu 8642 arquivos do cache em 223499 ms."
+    },
+    "cache_get": {
+      "exit_code": 0,
+      "duration_seconds": 6.581,
+      "decompressed_files": 8643,
+      "downloads": 0,
+      "note": "No-op confirmatório: o cache global ~/.cache/mathlib já continha os .ltar da mesma revisão."
+    },
+    "smokes": [
+      {"file": "TamesisLab/Tests/MathlibMinimalSmoke.lean", "import": "Mathlib.Data.Nat.Basic", "exit_code": 0, "duration_seconds": 3.975},
+      {"file": "TamesisLab/Tests/MathlibTacticSmoke.lean", "import": "Mathlib.Tactic", "exit_code": 0, "duration_seconds": 25.834},
+      {"file": "TamesisLab/Tests/MathlibSmoke.lean", "import": "Mathlib", "exit_code": 0, "duration_seconds": 16.957}
+    ],
+    "lake_build": {
+      "exit_code": 0,
+      "jobs": 8670,
+      "duration_seconds": 46.755
+    },
+    "python_tests": {
+      "exit_code": 0,
+      "passed": 2,
+      "invocation": "python3 -m pytest -q executado em 06_COMPUTATION/python",
+      "note": "A execução a partir de 04_FORMAL_RESEARCH_LAB falhava com ModuleNotFoundError: No module named 'tamesis_lab'. O pacote usa layout src/ e antes só era importável por um install editable não versionado na máquina Windows. Corrigido de forma reproduzível com pythonpath = [\"src\"] em 06_COMPUTATION/python/pyproject.toml."
+    },
+    "labctl_validate": {
+      "status": "PASS",
+      "exit_code": 0,
+      "errors": [],
+      "warnings": [],
+      "repository_changes": 12,
+      "all_changes_inside_lab": true,
+      "note": "labctl validate não invoca lake build; a evidência de compilação vem deste resultado de gate."
+    },
+    "forbidden_tokens": {
+      "sorry": 0,
+      "admit": 0,
+      "axiom": 0,
+      "unsafe": 0,
+      "scope": "*.lean sob 05_FORMAL/lean, excluindo .lake"
+    }
+  },
+
+  "tooling_defects_corrected": [
+    {
+      "id": "LABCTL-USERPROFILE",
+      "description": "labctl.lean_check resolvia o diretório de toolchains por USERPROFILE, variável exclusiva do Windows. Sob Linux produzia caminho relativo inexistente e reportava toolchain ausente.",
+      "fix": "Resolve ELAN_HOME, depois USERPROFILE, depois HOME."
+    },
+    {
+      "id": "LABCTL-UNREACHABLE-PASS",
+      "description": "labctl validate não podia retornar PASS em nenhuma circunstância: exigia lean_check()['status'] == 'PASS', mas lean_check só retornava 'BLOCKED' ou 'NOT_RUN'. Confirmado no histórico lab0-result.json, que traz LAB0_LEAN_ENVIRONMENT_FAILED com errors vazio.",
+      "fix": "lean_check retorna PASS quando há toolchain estável não-.tmp resolvido no PATH, sem jamais invocar build."
+    },
+    {
+      "id": "LABSTATE-SHORT-SHA",
+      "description": "LAB_STATE.canonical_commit continha SHA abreviado de 7 caracteres, violando o padrão ^[0-9a-f]{40}$ de lab-state.schema.json.",
+      "fix": "Substituído pelo SHA completo do commit congelado."
+    },
+    {
+      "id": "LABCTL-AUTH-ALLOWLIST",
+      "description": "O allowlist de authorized_action não continha LAB_BENCHMARK_EXECUTION_AUTHORIZED, tornando o estado final deste gate inválido para o validador.",
+      "fix": "Entrada literal acrescentada, sem wildcard nem relaxamento genérico. Alteração autorizada explicitamente pelo mantenedor."
+    },
+    {
+      "id": "PYTEST-SRC-LAYOUT",
+      "description": "O pacote tamesis_lab usa layout src/ e não era importável sem install editable não versionado.",
+      "fix": "pythonpath = [\"src\"] em 06_COMPUTATION/python/pyproject.toml."
+    }
+  ],
+
+  "windows_native_route": "FROZEN / HISTORICAL / NOT_OPERATIONAL",
+  "previous_pair_abandoned": "Lean v4.32.2 / Mathlib 905b95818eb32af7874a58b427f50c1711a5e96c",
+
+  "phases": {
+    "LEAN_ENVIRONMENT_DISCOVERY": "PASS",
+    "LEAN_TOOLCHAIN_AVAILABILITY": "PASS",
+    "LEAN_SMOKE_BUILD": "PASS",
+    "LAB_BENCHMARK_PREPARATION": "PASS",
+    "LAB_BENCHMARK_EXECUTION": "NOT_STARTED",
+    "LAB_BENCHMARK_VERIFICATION": "NOT_STARTED"
+  },
+
+  "active_work_item": "LAB-BENCH-001",
+  "work_status": "READY",
+  "current_blocker": null,
+  "authorized_action": "LAB_BENCHMARK_EXECUTION_AUTHORIZED",
+  "next_single_action": "Executar o benchmark formal LAB-BENCH-001 conforme sua especificação canônica.",
+
+  "rh_nogo_001": {
+    "work_status": "SCOPED",
+    "authorized": false,
+    "execution": "NO_EXECUTION"
+  },
+
+  "status": "LAB_WSL_REPOSITORY_MIGRATION_PASS"
+}

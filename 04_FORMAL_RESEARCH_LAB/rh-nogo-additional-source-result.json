@@ -1,0 +1,117 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL",
+  "work_item": "RH-NOGO-001",
+  "executed_at": "2026-07-31T07:13:16-03:00",
+  "commit_before": "16427b420aa6e5e89c39d169172ff1c2c3add142",
+  "runtime": {"os": "Ubuntu 24.04 (WSL2)", "branch": "lab/wsl-lean-migration"},
+  "skills_used": ["goal", "matematica-pura", "historia-digital", "linguistica-computacional", "engenharia-software"],
+
+  "sources_retrieved": [
+    {"source_id": "IVRII-2016", "title": "100 years of Weyl's law", "access": "arXiv, publico", "sha256": "9ca077375f21487c66c644ca6fa847360b63ffd051e24790181f4af2459bbf3f", "bytes": 1118152, "pages": 90, "reading_status": "PARTIALLY_AUDITED", "sections_read": ["1.1", "3.1.1"]},
+    {"source_id": "CORIASCO-DOLL-2020", "title": "Weyl Law on Asymptotically Euclidean Manifolds", "access": "arXiv, publico", "sha256": "501d9bae1f898f7d450373f7755016c22e06adab4b4570c11e19b596c8a7f51b", "bytes": 322894, "pages": 26, "reading_status": "PARTIALLY_AUDITED", "sections_read": ["Introducao", "Secao 3"]}
+  ],
+  "sources_retrieval_failed": [
+    {"source_id": "SAFAROV-VASSILIEV", "reason": "monografia comercial; so catalogo AMS acessivel", "note": "nenhuma tentativa de burlar acesso"},
+    {"source_id": "SHUBIN", "reason": "monografia comercial; so pagina Springer acessivel", "note": "idem"},
+    {"source_id": "IVRII-MONOGRAPH", "reason": "monografia; contem as provas citadas pelo survey", "note": "idem"}
+  ],
+
+  "hormander_1968_reclassified": false,
+  "hormander_1968_citation_rule": "citado pelo resultado LOCAL (eq. 5.3); NAO pela lei global",
+
+  "global_weyl_statements_found": [
+    {
+      "source": "CORIASCO-DOLL-2020, Introducao p.1",
+      "statement": "N(lambda) = gamma * lambda^(d/m) + O(lambda^((d-1)/m))",
+      "counting_function": "N(lambda) = #{j : lambda_j < lambda} (eq. 1)",
+      "hypotheses": "operador pseudodiferencial classico, positivo, eliptico, auto-adjunto, ordem m > 0, variedade compacta",
+      "status": "CITED_STANDARD_RESULT",
+      "cited_reference": "[15] = Hormander, Acta Math. 121 (1968), 193-218"
+    },
+    {
+      "source": "IVRII-2016, Example 3.1.1, (3.1.1)-(3.1.3)",
+      "statement": "N(0,lambda) = kappa_0 * lambda^(d/m) + O(lambda^((d-1)/m))",
+      "constant": "kappa_0 = (2pi)^(-d) * integral dupla de n(x,xi), n = numero de autovalores de A^0(x,xi) em (0,1)",
+      "hypotheses": "A auto-adjunto, problema de contorno (A,B) eliptico; sistemas cobertos",
+      "status": "CITED_STANDARD_RESULT",
+      "cited_reference": "[Ivr4] monografia, NAO obtida"
+    }
+  ],
+
+  "bibliographic_discrepancy_found": {
+    "description": "Coriasco-Doll atribuem a lei GLOBAL a Hormander 1968 [15]; o artigo, auditado no gate anterior, enuncia apenas a lei LOCAL (eq. 5.3) e nao contem N(lambda).",
+    "assessment": "matematicamente defensavel (integracao sobre variedade compacta), bibliograficamente imprecisa",
+    "resolution": "regra de citacao adotada; GAP-RH-013 RESOLVED_BY_CITATION_RULE"
+  },
+
+  "architecture": {
+    "W-POWER": {"defined": true, "file": "W_POWER_CLASS.md", "depends_on_PDE": false, "note": "ASYM-NOGO-001 aplica-se a esta classe; aplicacao NAO executada"},
+    "W-ELLIPTIC": {"defined": true, "version": 2, "file": "W_ELLIPTIC_CLASS.md", "source_of_formulation": "CORIASCO-DOLL-2020 p.1"},
+    "inclusion": "W-ELLIPTIC subconjunto de W-POWER — DOCUMENTADA, NAO formalizada, NAO provada"
+  },
+
+  "bridge_steps": {
+    "A_projetor_espectral": {"status": "DIRECTLY_PROVED", "source": "HORMANDER-1968 p.193"},
+    "B_kernel_e": {"status": "DIRECTLY_PROVED", "source": "HORMANDER-1968 p.193"},
+    "C_traco_N_igual_Tr_E": {"status": "CITED_STANDARD_RESULT", "source": "CORIASCO-DOLL-2020 Secao 3"},
+    "D_integral_da_diagonal": {"status": "CITED_STANDARD_RESULT", "source": "IVRII-2016 (3.1.11)"},
+    "E_assintota_local_uniforme": {"status": "DIRECTLY_PROVED", "source": "HORMANDER-1968 eq.(5.3) p.215"},
+    "F_integracao_termo_principal": {"status": "ELEMENTARY_COROLLARY"},
+    "G_integracao_uniforme_do_erro": {"status": "ELEMENTARY_COROLLARY", "note": "M compacta torna a uniformidade em compactos uma uniformidade global"}
+  },
+  "bridge_non_trivial_checks": {
+    "projetor_posto_finito": "CITED_STANDARD_RESULT",
+    "kernel_integravel_na_diagonal": "CITED_STANDARD_RESULT",
+    "estimativa_uniforme_em_x": "DIRECTLY_PROVED sob compacidade",
+    "fibrado_sistema_tratado": "UNRESOLVED",
+    "erro_integrado_preserva_ordem": "ELEMENTARY_COROLLARY"
+  },
+
+  "global_constant": {
+    "scalar_form": "(2pi)^(-d) * integral_M vol{xi : p(x,xi) < 1} dx  [ELEMENTARY_COROLLARY de Hormander (1.1)]",
+    "system_form": "(2pi)^(-d) * integral dupla de n(x,xi)  [IVRII-2016 (3.1.3)]",
+    "positivity_C_P": "ELEMENTARY_COROLLARY registrado, NAO citado nem demonstrado (GAP-RH-014)"
+  },
+
+  "decisions": {
+    "class": "REFORMULATE_AS_CLASSICAL_PSEUDODIFFERENTIAL",
+    "order": "PSEUDODIFFERENTIAL_POSITIVE_ORDER",
+    "self_adjointness": "positive_self_adjoint_operator (uma realizacao escolhida)",
+    "rejected": {
+      "PRESERVE_WITH_NEW_SOURCE": "manteria tres hipoteses sem fonte",
+      "NARROW_TO_SCALAR_DIFFERENTIAL": "estreita demais e mantem a paridade",
+      "SPLIT_INTO_MULTIPLE_CLASSES": "nao ha teoremas auditados distintos para fibrados",
+      "SOURCE_STILL_INSUFFICIENT": "excessivo: duas fontes revisadas enunciam a lei com hipoteses precisas"
+    }
+  },
+
+  "gaps_closed_by_reformulation": ["GAP-RH-010 (auto-adjuncao)", "GAP-RH-011 (paridade da ordem)"],
+  "gaps_updated": ["GAP-RH-012 -> PARTIALLY_SUPPORTED", "GAP-RH-013 RESOLVED_BY_CITATION_RULE"],
+  "gaps_opened": ["GAP-RH-013 (atribuicao bibliografica)", "GAP-RH-014 (positividade de C_P)"],
+  "gaps_still_open": ["GAP-RH-009 (fibrados/sistemas)", "GAP-RH-012 (discretude)", "GAP-RH-014 (C_P > 0)", "bordo AMBIGUOUS"],
+
+  "not_asserted": [
+    "A existencia de uma lei global de Weyl para W-ELLIPTIC nao exclui Hilbert-Polya em geral.",
+    "O resultado nao cobre operadores fora da classe.",
+    "O resultado nao cobre espectros de absorcao, ressonancias, geometrias nao compactas ou nao comutativas.",
+    "A lei global nao foi demonstrada apenas porque a assintota local se parece com sua densidade.",
+    "Nenhuma afirmacao foi feita sobre a verdade ou falsidade da Hipotese de Riemann."
+  ],
+
+  "lean_theorems_created": 0,
+  "asym_nogo_001_applied": false,
+  "operators_constructed": 0,
+  "scientific_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "RH-NOGO-001": {"work_status": "SCOPED", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION"},
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED",
+  "next_single_action": "Especificar a ponte formal entre W-ELLIPTIC, W-POWER e ASYM-NOGO-001 sem iniciar a prova completa do no-go espectral.",
+  "allowlist_additions": ["RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED"],
+  "allowlist_not_added": ["RH_NOGO_PROOF_EXECUTION", "RH_NOGO_OPERATOR_CLASS_PROOF_AUTHORIZED", "RH_PROOF_AUTHORIZED", "RIEMANN_PROOF_AUTHORIZED"],
+
+  "final_status": "RH_NOGO_LOCAL_TO_GLOBAL_BRIDGE_SUFFICIENT"
+}

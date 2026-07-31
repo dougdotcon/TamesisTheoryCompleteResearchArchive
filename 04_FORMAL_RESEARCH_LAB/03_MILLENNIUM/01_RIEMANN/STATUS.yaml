@@ -3,29 +3,34 @@ work_status: SCOPED
 evidence_level: F
 specification: SPECIFICATION_READY
 primary_source_audit: PARTIALLY_SUFFICIENT
+local_to_global_bridge: DOCUMENTED
+operator_class: W-ELLIPTIC-v2
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED
+next_gate: RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED
+architecture:
+  W-POWER: "classe assintotica abstrata; ASYM-NOGO-001 aplica-se a ela"
+  W-ELLIPTIC: "pseudodiferencial classico, positivo, auto-adjunto, ordem m > 0, variedade compacta"
+  inclusion: "W-ELLIPTIC subconjunto de W-POWER - DOCUMENTADA, NAO formalizada"
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
     lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/"
-    scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
-primary_sources:
-  pillar_A_zeros: SUPPORTED
-  pillar_A_source: "VONMANGOLDT-1905 p.19 (formula exata, erro efetivo O(log T), incondicional)"
-  pillar_B_spectral: PARTIALLY_SUPPORTED
-  pillar_B_source: "HORMANDER-1968 eq.(5.3) - lei de Weyl LOCAL da funcao espectral"
-  pillar_B_gap: "a contagem GLOBAL N_P(Lambda) ~ C_P Lambda^(d/m) NAO e enunciada no artigo"
-class_W_directly_supported: ["W4", "W6"]
-class_W_not_supported: ["W7", "W8"]
+class_decision: REFORMULATE_AS_CLASSICAL_PSEUDODIFFERENTIAL
+order_decision: PSEUDODIFFERENTIAL_POSITIVE_ORDER
+self_adjointness_decision: positive_self_adjoint_operator
+citation_rule: >
+  Hormander 1968 e citado pelo resultado LOCAL (eq. 5.3). A lei GLOBAL e
+  citada por Coriasco-Doll 2020 / Ivrii 2016, ou derivada pela ponte
+  documentada em HORMANDER_LOCAL_TO_GLOBAL_BRIDGE.md.
+open_gaps:
+  - "GAP-RH-009 fibrados/sistemas: W-ELLIPTIC v2 e escalar por omissao"
+  - "GAP-RH-012 discretude: sustentada por analogia, nao por fonte para variedades compactas"
+  - "positividade de C_P: corolario elementar registrado, nao citado"
+  - "bordo: nenhuma fonte diz literalmente 'closed manifold' para a forma pseudodiferencial"
 current_blocker: >
-  A lei de Weyl global (W8) e a discretude do espectro (W7) nao sao
-  sustentadas pela fonte primaria auditada. A cadeia da ponte esta quebrada
-  na etapa E de SOURCE_BRIDGE_REQUIREMENTS.md.
+  A ponte documental esta preparada, mas sua aplicacao formal ao no-go
+  espectral ainda nao foi autorizada.
 note: >
-  O no-go completo (Classe W) permanece NAO PROVADO e NAO AUTORIZADO.
-  Documentos: SOURCE_MANIFEST.yaml, VON_MANGOLDT_1905_AUDIT.md,
-  HORMANDER_1968_AUDIT.md, RIEMANN_1859_AUDIT.md, BOMBIERI_CLAY_AUDIT.md,
-  CLASS_W_SOURCE_MAPPING.md, SOURCE_BRIDGE_REQUIREMENTS.md,
-  UNRESOLVED_SOURCE_QUESTIONS.md.
+  O no-go completo permanece NAO PROVADO e NAO AUTORIZADO. ASYM-NOGO-001
+  nao foi aplicado. Nenhum operador foi construido ou excluido.

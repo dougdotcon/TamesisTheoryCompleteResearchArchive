@@ -88,8 +88,12 @@ gaps:
       extension"). Como o espectro depende da extensão, o enunciado precisa
       dizer qual.
     severity: medium
-    status: OPEN
+    status: CLOSED_BY_REFORMULATION
     blocking: false
+    closure_evidence: >
+      SELF_ADJOINT_REALIZATION_DECISION.md: a hipotese minima e
+      "realizacao auto-adjunta positiva", nao essencial auto-adjuncao.
+      Formulacao adotada em W_ELLIPTIC_CLASS.md (E4).
   - gap_id: GAP-RH-011
     description: >
       Paridade da ordem m (W3): elipticidade mais positividade com símbolo
@@ -97,16 +101,24 @@ gaps:
       m >= 1 qualquer, tornando a classe vazia para m ímpar. Defeito de
       formulação, não de resultado.
     severity: low
-    status: OPEN
+    status: CLOSED_BY_REFORMULATION
     blocking: false
+    closure_evidence: >
+      ORDER_PARITY_AUDIT.md: decisao PSEUDODIFFERENTIAL_POSITIVE_ORDER.
+      Ordem real m > 0 elimina a paridade. W-ELLIPTIC v2 (E6).
   - gap_id: GAP-RH-012
     description: >
       Discretude do espectro (W7): não provada nem enunciada em Hörmander
       1968. Consequência padrão de elipticidade mais compacidade, mas
       requer fonte.
     severity: high
-    status: OPEN
+    status: PARTIALLY_SUPPORTED
     blocking: false
+    audit_finding: >
+      Coriasco-Doll 2020, Secao 3, estabelece a cadeia resolvente compacto
+      -> base ortonormal de autofuncoes -> 0 < lambda_1 <= ... -> +infinito,
+      mas no contexto SG proprio deles. Para variedade compacta o analogo e
+      teoria eliptica padrao, NAO lida em fonte obtida.
   - gap_id: GAP-RH-008
     description: >
       Escopo das rotas de escape: mapa registrado em ESCAPE_ROUTES.md
@@ -119,3 +131,23 @@ legacy_gaps_superseded:
   - "RH-GAP-001 → GAP-RH-001 (classe agora especificada)"
   - "RH-GAP-002 (cancelamento não circular) → sem objeto nesta rota: não há fórmula de traço; princípio preservado em STOP_CONDITIONS.md itens 2–3"
   - "RH-GAP-003 → GAP-RH-007"
+  - gap_id: GAP-RH-013
+    description: >
+      Atribuição bibliográfica: a literatura moderna (Coriasco-Doll 2020,
+      p.1) atribui a lei de Weyl GLOBAL a Hörmander 1968 [15], artigo que
+      enuncia apenas a lei LOCAL. A atribuição é matematicamente
+      defensável mas bibliograficamente imprecisa. Regra adotada: citar
+      Hörmander pelo resultado local; a lei global por Coriasco-Doll/Ivrii
+      ou pela ponte explícita.
+    severity: informational
+    status: RESOLVED_BY_CITATION_RULE
+    blocking: false
+  - gap_id: GAP-RH-014
+    description: >
+      Positividade da constante global C_P > 0 não é afirmada por nenhuma
+      fonte obtida. Argumento elementar registrado em
+      GLOBAL_WEYL_CONSTANT.md, não citado nem demonstrado. Sem C_P > 0 a
+      pertinência a W-POWER falha.
+    severity: medium
+    status: OPEN
+    blocking: false

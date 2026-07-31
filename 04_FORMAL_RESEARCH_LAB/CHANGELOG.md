@@ -1,5 +1,71 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-001 — fonte global e reformulação da classe — 2026-07-31
+
+### Added
+
+- Separação arquitetural em duas classes: `W_POWER_CLASS.md` (assintótica
+  abstrata; nenhuma EDP) e `W_ELLIPTIC_CLASS.md` (v2: pseudodiferencial
+  clássico, positivo, auto-adjunto, ordem `m > 0`, variedade compacta).
+- `HORMANDER_LOCAL_TO_GLOBAL_BRIDGE.md`: as sete etapas A–G com estado e
+  fonte de cada uma, mais os cinco pontos que o gate proibiu chamar de
+  triviais.
+- `GLOBAL_WEYL_THEOREM_CANDIDATES.md`, `GLOBAL_WEYL_CONSTANT.md`,
+  `CLASS_W_V2_DECISION.md`, `SELF_ADJOINT_REALIZATION_DECISION.md`,
+  `ORDER_PARITY_AUDIT.md`, `ADDITIONAL_SOURCE_AUDIT.md`.
+- Fontes obtidas por acesso público (arXiv), com `sha256`: Ivrii 2016
+  (*100 years of Weyl's law*, 90 pp.) e Coriasco–Doll 2020 (*Weyl Law on
+  Asymptotically Euclidean Manifolds*, 26 pp.).
+
+### Verified
+
+- **A lei de Weyl global existe com hipóteses precisas.** Coriasco–Doll
+  p. 1: *"positive elliptic self-adjoint classical pseudodifferential
+  operator of order `m > 0` on a compact manifold"*,
+  `N(λ) = #{j : λ_j < λ}`, `N(λ) = γλ^{d/m} + O(λ^{(d−1)/m})`.
+- Ivrii (3.1.3) dá a constante correta para **sistemas**:
+  `κ₀ = (2π)^{−d}∬ n(x,ξ)dxdξ`, `n` = nº de autovalores do símbolo
+  principal em `(0,1)` — não um volume escalar.
+- Ivrii (3.1.11) escreve a identidade local→global
+  `N⁻(λ) = ∫ e(x,x,λ)dx`, que era a etapa ausente.
+- Ivrii 3.1.1(iv): a assintótica de **um termo** vale sem hipótese de não
+  degenerescência — suficiente para `W-POWER`.
+
+### Corrected
+
+- **Atribuição bibliográfica (GAP-RH-013).** Coriasco–Doll atribuem a lei
+  global a "Hörmander [15]" = Acta Math. 121 (1968), 193–218, artigo que
+  enuncia apenas a lei **local**. Regra adotada: citar Hörmander pelo
+  resultado local; a lei global por Coriasco–Doll/Ivrii ou pela ponte
+  explícita. Hörmander 1968 **não** foi reclassificado.
+- `GAP-RH-010` (auto-adjunção) e `GAP-RH-011` (paridade da ordem)
+  fechados **por reformulação**, não por prova. `OPERATOR_CLASS.md` (v1)
+  não foi editado: permanece como registro do que a auditoria refutou.
+
+### Changed
+
+- Decisões: classe `REFORMULATE_AS_CLASSICAL_PSEUDODIFFERENTIAL`; ordem
+  `PSEUDODIFFERENTIAL_POSITIVE_ORDER`; auto-adjunção
+  `positive_self_adjoint_operator` (uma realização).
+- `authorized_action`: `RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED` →
+  `RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED` (entrada literal única).
+
+### Blocked
+
+- `RETRIEVAL_FAILED`: Safarov–Vassiliev, Shubin e a monografia de Ivrii —
+  comerciais; nenhuma tentativa de burlar acesso. As **provas** da lei
+  global permanecem em textos não lidos.
+- Abertos: `GAP-RH-009` (fibrados/sistemas na etapa D — `UNRESOLVED`),
+  `GAP-RH-012` (discretude, `PARTIALLY_SUPPORTED`), `GAP-RH-014`
+  (positividade de `C_P`), bordo `AMBIGUOUS`.
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+  `ASYM-NOGO-001` **não** aplicado; nenhum teorema Lean criado; nenhuma
+  claim promovida.
+
+### Result
+
+- `RH_NOGO_LOCAL_TO_GLOBAL_BRIDGE_SUFFICIENT`.
+
 ## RH-NOGO-001 — auditoria de fontes primárias — 2026-07-31
 
 ### Added

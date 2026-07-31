@@ -1,0 +1,129 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "ASYM-NOGO-001",
+  "work_item": "RH-NOGO-001",
+  "subartifact": "ASYM-NOGO-001",
+  "executed_at": "2026-07-31T06:15:28-03:00",
+  "commit_before": "f2d50029db08608f04822f580c9e2d22c20be4b9",
+  "runtime": {
+    "os": "Ubuntu 24.04 (WSL2)",
+    "repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+    "branch": "lab/wsl-lean-migration",
+    "lean": "v4.33.0-rc1",
+    "lake": "5.0.0-src+62eed1d",
+    "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e"
+  },
+  "skills_used": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "epistemic_corrections": [
+    {
+      "id": "EPI-001",
+      "before": "todas as propostas espectrais vivas / atualmente estudadas na literatura",
+      "after": "todas as propostas espectrais incluidas na amostra bibliografica catalogada nesta sessao",
+      "files": ["03_MILLENNIUM/01_RIEMANN/DEFINITIONS.md", "03_MILLENNIUM/01_RIEMANN/EXCLUSIONS.md"],
+      "rationale": "um catalogo de oito registros nao sustenta afirmacao exaustiva sobre a literatura"
+    },
+    {
+      "id": "EPI-002",
+      "before": "oito fontes auditadas (chave sources_audited)",
+      "after": "oito registros bibliograficos classificados (chave bibliographic_records_classified)",
+      "files": ["rh-nogo-001-specification-result.json", "03_MILLENNIUM/01_RIEMANN/EPISTEMIC_CORRECTIONS.md"],
+      "rationale": "nenhuma obra teve texto integral obtido e lido; CONTENT_AUDITED esta vazio"
+    }
+  ],
+  "epistemic_axes": {
+    "source_retrieval_status": {
+      "CONTENT_AUDITED": [],
+      "LISTING_CONFIRMED": ["HEDENMALM-2026"],
+      "KNOWN_RECORD": ["RIEMANN-1859", "VONMANGOLDT-1905", "BOMBIERI-CLAY", "HORMANDER-1968", "BERRYKEATING-1999", "CONNES-1999", "BBM-2017"],
+      "TO_FETCH": ["RIEMANN-1859", "VONMANGOLDT-1905", "HORMANDER-1968", "BERRYKEATING-1999", "HEDENMALM-2026"]
+    },
+    "mathematical_claim_status": {
+      "ESTABLISHED": ["contagem de Riemann-von Mangoldt", "lei de Weyl na classe eliptica compacta", "comparacoes assintoticas log vs potencia", "RH sem solucao aceita"],
+      "CONDITIONAL": ["extensoes do no-go a bordo, pseudodiferenciais e operadores limitados inferiormente"],
+      "PROPOSED": ["RH-NOGO-001 (exclusao da Classe W)"],
+      "VERIFIED": ["ASYM-NOGO-001 (este gate)"],
+      "REJECTED": ["preprints de suposta prova da RH como autoridade", "claims historicas Tamesis sobre Riemann"]
+    },
+    "note": "O historico da sessao anterior nao foi reescrito; a errata esta em 03_MILLENNIUM/01_RIEMANN/EPISTEMIC_CORRECTIONS.md."
+  },
+
+  "final_signature": "theorem asym_nogo_001 (N : ℝ → ℝ) (α c C : ℝ) (hα : 0 < α) (hc : 0 < c) (hC : 0 < C) (hTLog : Tendsto (fun T => N T / (T * Real.log T)) atTop (nhds c)) (hPower : Tendsto (fun T => N T / T ^ α) atTop (nhds C)) : False",
+  "definitions": ["tLogScale", "normalizeTLog", "normalizeRpow", "powerLogFactor"],
+  "definitions_note": "todas noncomputable (dependem de Real.log e da divisao real); 4 lemas @[simp] de desdobramento; os teoremas usam as expressoes explicitas",
+
+  "theorems": [
+    {"id": "ASYM-NOGO-ALG-001", "name": "eventually_normalization_identity", "file": "Normalization.lean"},
+    {"id": "ASYM-NOGO-ALG-002", "name": "eventually_product_eq_normalizeRpow", "file": "Normalization.lean"},
+    {"id": "ASYM-NOGO-PL-000", "name": "tendsto_powerLogFactor_atTop_of_le_one", "file": "PowerLog.lean"},
+    {"id": "ASYM-NOGO-PL-001", "name": "tendsto_powerLogFactor_atTop_of_lt_one", "file": "PowerLog.lean"},
+    {"id": "ASYM-NOGO-PL-002a", "name": "powerLogFactor_eq_log_of_eq_one", "file": "PowerLog.lean"},
+    {"id": "ASYM-NOGO-PL-002", "name": "tendsto_powerLogFactor_atTop_of_eq_one", "file": "PowerLog.lean"},
+    {"id": "ASYM-NOGO-PL-003", "name": "tendsto_powerLogFactor_nhds_zero_of_one_lt", "file": "PowerLog.lean"},
+    {"id": "ASYM-NOGO-AUX-001", "name": "tendsto_normalizeRpow_atTop_of_factor_atTop", "file": "Incompatibility.lean"},
+    {"id": "ASYM-NOGO-AUX-002", "name": "tendsto_normalizeRpow_nhds_zero_of_factor_nhds_zero", "file": "Incompatibility.lean"},
+    {"id": "ASYM-NOGO-001", "name": "asym_nogo_001", "file": "Incompatibility.lean"},
+    {"id": "ASYM-NOGO-CONTRA-001", "name": "not_tendsto_normalizeRpow_of_tendsto_normalizeTLog", "file": "Audit.lean"},
+    {"id": "ASYM-NOGO-PROBE-001", "name": "asymNogoStatement_holds", "file": "Audit.lean"}
+  ],
+  "theorem_count": 12,
+  "eventual_identity": "N T / T^α = (N T / (T log T)) * (log T * T^(1-α)) para T > 1; sem divisao por N(T); sem hipotese sobre o sinal de N(T)",
+  "case_lt_one": "log T * T^(1-α) → +∞ (minoracao por log T, usando T^(1-α) ≥ 1 para T ≥ 1)",
+  "case_eq_one": "o fator reduz-se exatamente a log T (T^0 = 1) e diverge",
+  "case_gt_one": "log T * T^(1-α) → 0 via isLittleO_log_rpow_atTop com r = α-1 > 0 e T^(1-α) = (T^(α-1))⁻¹",
+  "contradiction_method": "tricotomia lt_trichotomy α 1; casos α ≤ 1 usam not_tendsto_nhds_of_tendsto_atTop; caso α > 1 usa tendsto_nhds_unique para forcar C = 0, contra C > 0",
+
+  "mathlib_lemmas_reused": [
+    "isLittleO_log_rpow_atTop (namespace raiz)",
+    "Asymptotics.IsLittleO.tendsto_div_nhds_zero",
+    "Real.tendsto_log_atTop", "Real.log_nonneg", "Real.log_pos",
+    "Real.one_le_rpow", "Real.rpow_neg", "Real.rpow_sub", "Real.rpow_one", "Real.rpow_pos_of_pos",
+    "tendsto_atTop_mono'", "Filter.Tendsto.pos_mul_atTop", "Filter.Tendsto.mul",
+    "Filter.Tendsto.congr'", "not_tendsto_nhds_of_tendsto_atTop", "tendsto_nhds_unique",
+    "lt_trichotomy", "eventually_gt_atTop", "eventually_ge_atTop"
+  ],
+
+  "lean_test": {"command": "lake env lean TamesisLab/Tests/RHNogoAsymptotic001.lean", "exit_code": 0, "duration_seconds": 2.486},
+  "lake_build": {"exit_code": 0, "jobs": 8691, "duration_seconds": 66.5},
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+  "kernel_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "kernel_axioms_note": "auditado com #print axioms nos seis teoremas principais; nenhum sorryAx, nenhum axioma local",
+  "python_tests": {"status": "PASS", "passed": 2},
+  "labctl_validate": {"status": "PASS", "errors": [], "warnings": []},
+
+  "claim_created": {
+    "claim_id": "ASYM-NOGO-FORMAL-001",
+    "domain": "formal_asymptotics",
+    "work_status": "VERIFIED",
+    "evidence_level": "F"
+  },
+  "rh_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "proved": "uma incompatibilidade abstrata entre duas normalizacoes assintoticas de uma funcao real",
+  "not_proved": [
+    "a formula de Riemann-von Mangoldt",
+    "a lei de Weyl",
+    "a aplicacao dessas formulas a uma classe de operadores",
+    "RH-NOGO-001 completo",
+    "inexistencia de operador de Hilbert-Polya",
+    "verdade ou falsidade da Hipotese de Riemann"
+  ],
+
+  "ASYM-NOGO-001": {"status": "VERIFIED"},
+  "RH-NOGO-001": {
+    "work_status": "SCOPED",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "proof_execution_authorized": false
+  },
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED",
+  "next_single_action": "Obter e auditar integralmente as fontes primarias necessarias para Riemann-von Mangoldt e para a versao exata da lei de Weyl, sem iniciar a prova do no-go espectral.",
+  "allowlist_additions": ["RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED"],
+  "allowlist_not_added": ["RH_NOGO_PROOF_EXECUTION", "RH_NOGO_OPERATOR_CLASS_PROOF_AUTHORIZED", "RH_PROOF_AUTHORIZED", "RIEMANN_PROOF_AUTHORIZED"],
+
+  "scientific_novelty": "STANDARD_ASYMPTOTIC_INCOMPATIBILITY_FORMALIZED_FOR_LOCAL_USE",
+  "final_status": "ASYM_NOGO_001_VERIFIED"
+}

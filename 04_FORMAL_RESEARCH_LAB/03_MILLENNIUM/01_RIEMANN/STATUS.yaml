@@ -1,11 +1,21 @@
 work_item_id: RH-NOGO-001
-work_status: READY
+work_status: SCOPED
 evidence_level: F
 specification: SPECIFICATION_READY
-next_gate: RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED
+proof_execution: NO_EXECUTION
 execution_authorized: false
-proof_execution: NOT_AUTHORIZED
+next_gate: RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED
+subartifacts:
+  ASYM-NOGO-001:
+    status: VERIFIED
+    lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/"
+    theorem_map: "03_MILLENNIUM/01_RIEMANN/ASYM_NOGO_001_THEOREM_MAP.md"
+    proof_audit: "03_MILLENNIUM/01_RIEMANN/ASYM_NOGO_001_PROOF_AUDIT.md"
+    scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
+current_blocker: >
+  A ponte entre o lema abstrato, Riemann-von Mangoldt e a lei de Weyl ainda
+  depende da leitura e auditoria das fontes primarias (GAP-RH-002,
+  GAP-RH-003). Nenhuma fonte esta CONTENT_AUDITED.
 note: >
-  READY refere-se exclusivamente à formalização do núcleo abstrato
-  ASYM-NOGO-001. A prova do no-go completo (Classe W) permanece não
-  autorizada e bloqueada por GAP-RH-002.
+  O no-go completo (Classe W) permanece NAO PROVADO e NAO AUTORIZADO. O
+  subartefato verificado e apenas um lema de analise real.

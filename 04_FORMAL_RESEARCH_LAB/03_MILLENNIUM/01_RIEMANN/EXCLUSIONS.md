@@ -41,7 +41,8 @@ deste no-go. Nada abaixo é refutado, tocado ou avaliado.
 
 ## Consequência epistemológica
 
-Como todas as rotas espectrais atualmente estudadas na literatura vivem em
+Como todas as propostas espectrais incluídas na amostra bibliográfica catalogada nesta sessão
+vivem em
 alguma dessas exclusões, o no-go **não** refuta Hilbert–Pólya e **não**
 constitui progresso sobre a verdade da RH. Ele delimita: se um operador
 espectral para os zeros existir, ele não vive na Classe W.

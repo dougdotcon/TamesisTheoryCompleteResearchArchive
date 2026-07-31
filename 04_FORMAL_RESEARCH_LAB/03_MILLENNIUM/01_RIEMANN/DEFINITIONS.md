@@ -48,7 +48,8 @@ Respostas às questões obrigatórias da especificação (seção 4 do gate).
     espectros embutidos/contínuos: ver `EXCLUSIONS.md`.
 14. **Exclui Hilbert–Pólya em geral?** — **Não.** A resposta esperada e
     obtida é não: a conjectura de Hilbert–Pólya não especifica classe de
-    operador, e todas as rotas vivas conhecidas ficam fora da Classe W
+    operador, e todas as rotas incluídas na amostra bibliográfica
+    catalogada nesta sessão ficam fora da Classe W
     (`ESCAPE_ROUTES.md`).
 
 ## Objetos técnicos

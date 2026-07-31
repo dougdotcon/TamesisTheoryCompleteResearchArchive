@@ -1,5 +1,53 @@
 # Changelog do laboratório formal
 
+## ASYM-NOGO-001 — 2026-07-31
+
+### Added
+
+- Núcleo assintótico formalizado em
+  `TamesisLab/RHNogo/AsymptoticCore/{Definitions,Normalization,PowerLog,Incompatibility,Audit}.lean`,
+  agregador e teste `Tests/RHNogoAsymptotic001.lean`: 4 definições e 12
+  teoremas rastreáveis (ASYM-NOGO-ALG/PL/AUX/CONTRA/PROBE).
+- Teorema principal `asym_nogo_001`: nenhuma função real admite
+  simultaneamente `N(T)/(T log T) → c > 0` e `N(T)/T^α → C > 0` com `α > 0`.
+- `ASYM_NOGO_001_THEOREM_MAP.md` e `ASYM_NOGO_001_PROOF_AUDIT.md`
+  (auditoria adversarial + `#print axioms`).
+- `EPISTEMIC_CORRECTIONS.md` com os dois eixos separados
+  (`source_retrieval_status` / `mathematical_claim_status`).
+- Claim `ASYM-NOGO-FORMAL-001` (`F`, `formal_asymptotics`, VERIFIED).
+
+### Corrected
+
+- Afirmação de exaustividade sobre a literatura substituída por
+  "amostra bibliográfica catalogada nesta sessão" em `DEFINITIONS.md` e
+  `EXCLUSIONS.md`.
+- `sources_audited` → `bibliographic_records_classified` em
+  `rh-nogo-001-specification-result.json`; nenhuma obra está
+  `CONTENT_AUDITED`. O relatório de sessão anterior não foi reescrito.
+- `SignatureProbe.lean`: nota registrando que o enunciado, antes sem corpo
+  probatório, passou a ser provado.
+
+### Changed
+
+- `authorized_action`: `RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED`
+  → `RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED`; entrada literal acrescentada
+  ao allowlist do `labctl`, sem wildcard.
+- `GAP-RH-004` fechado (`CLOSED_BY_FORMALIZATION`).
+
+### Verified
+
+- `lake build` PASS (8.691 jobs); teste isolado PASS; tokens proibidos zero.
+- `#print axioms`: apenas `propext`, `Classical.choice`, `Quot.sound`.
+- pytest 2 passed; `labctl validate` PASS.
+- `ASYM_NOGO_001_VERIFIED`.
+
+### Blocked
+
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`; a ponte
+  para Riemann–von Mangoldt e para a lei de Weyl depende de leitura
+  primária (GAP-RH-002, GAP-RH-003).
+- Nenhuma claim sobre a Hipótese de Riemann foi promovida.
+
 ## RH-NOGO-001 (especificação) — 2026-07-31
 
 ### Added

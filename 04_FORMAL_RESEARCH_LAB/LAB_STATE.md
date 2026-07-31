@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T05:40:00-03:00
-canonical_commit: "a4907b7cb2b421ccb52fc0262bf276ef2d94f8a9"
+updated_at: 2026-08-01T07:20:00-03:00
+canonical_commit: "23fdf957a2ddd63e52551bf2cd071bf290eb0d25"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,15 +10,16 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
-work_status: "SCOPED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 evidence_level: "F"
-last_verified_artifact: "portfolio-review-finite-state-runtime-result.json"
+last_verified_artifact: "eng-finite-state-runtime-001-specification-result.json"
 current_blocker: null
 next_single_action: >
-  Preparar a especificação de um adaptador executável que valide
-  uma tabela dinâmica de transições, construa uma função total
-  sobre Fin n e aplique o detector certificado de ciclos.
-authorized_action: "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a validade da tabela, a construção da função sobre
+  Fin n, a correspondência entre execução bruta e iteração
+  tipada e a API dinâmica baseada em Except.
+authorized_action: "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -65,7 +66,12 @@ governance_rules:
     termina com verificação independente do efeito.
 prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
-  - "Não implementar o adaptador antes de sua especificação estar pronta"
+  - "Não implementar o adaptador antes de sua especificação ser revista"
+  - "Não desviar das assinaturas congeladas em SPECIFICATION_DECISION.md sem gate próprio"
+  - "Não criar RawTransitionTable.stateCount — duplicaria next.size"
+  - "Não trocar ValidatedTransitionTable por Subtype nem manter ambos"
+  - "Não colapsar erro de tabela e erro de estado inicial num único construtor"
+  - "Não remover o ramo internalDetectorFailure da função executável"
   - "Não corrigir destinos inválidos por módulo, clamp ou fallback silencioso"
   - "Não converter estado inicial inválido por módulo"
   - "Não permitir que a tabela validada aponte para fora do domínio"
@@ -90,7 +96,8 @@ resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
   - "01_PORTFOLIO/NEXT_WORK_ITEM_FINITE_STATE_RUNTIME.md"
-  - "01_PORTFOLIO/PORTFOLIO_REVIEW_FINITE_STATE_RUNTIME.md"
+  - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/README.md"
+  - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/SPECIFICATION_DECISION.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/PUBLIC_API.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"

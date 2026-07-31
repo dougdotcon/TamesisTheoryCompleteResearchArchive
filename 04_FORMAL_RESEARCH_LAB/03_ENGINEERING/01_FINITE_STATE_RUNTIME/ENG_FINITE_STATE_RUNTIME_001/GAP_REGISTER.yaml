@@ -1,0 +1,142 @@
+schema: tamesis-gap-register/1
+work_item_id: ENG-FINITE-STATE-RUNTIME-001
+updated_at: 2026-08-01
+reviewed_at_gate: ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION
+total: 22
+resolved_by_design: 5
+resolved_by_boundary: 2
+ready_for_formalization: 7
+open_deferred: 7
+open_bibliographic: 1
+closed_by_expectation: 0
+
+gaps:
+  RT-GAP-001:
+    title: representacao bruta da tabela
+    status: RESOLVED_BY_DESIGN
+    resolution: "RawTransitionTable com um unico campo next : Array Nat"
+    evidence: "RAW_DATA_MODEL.md; size, stateCount, proof, start e fallback rejeitados"
+
+  RT-GAP-002:
+    title: predicado de fechamento dos destinos
+    status: RESOLVED_BY_DESIGN
+    resolution: "Valid por Fin next.size"
+    evidence: "VALIDITY_MODEL.md; tres formulacoes auditadas, uma adotada"
+
+  RT-GAP-003:
+    title: validacao executavel da tabela
+    status: READY_FOR_FORMALIZATION
+    plan: "dite sobre Valid, devolvendo Except"
+    evidence: "probe: quatro casos avaliados; axiomas [propext, Quot.sound]"
+
+  RT-GAP-004:
+    title: representacao da tabela validada
+    status: RESOLVED_BY_DESIGN
+    resolution: "estrutura nomeada ValidatedTransitionTable, nao Subtype"
+    evidence: "VALIDATED_DATA_MODEL.md; seis motivos registrados"
+
+  RT-GAP-005:
+    title: tratamento da tabela vazia
+    status: RESOLVED_BY_DESIGN
+    resolution: "estruturalmente valida; consulta rejeitada por initialStateOutOfBounds"
+    evidence: "probe: analyzeT #[] 0 -> error (initialStateOutOfBounds 0 0)"
+
+  RT-GAP-006:
+    title: validacao do estado inicial
+    status: READY_FOR_FORMALIZATION
+    plan: "validateStart com dite sobre <, preservando start exatamente"
+    evidence: "probe: dois casos de erro avaliados"
+
+  RT-GAP-007:
+    title: construcao de Fin n -> Fin n
+    status: READY_FOR_FORMALIZATION
+    plan: "step i := <t.next[i], t.closed i>"
+    evidence: "probe: definicao aceita; step_val fecha por rfl"
+
+  RT-GAP-008:
+    title: correspondencia entre step e lookup
+    status: READY_FOR_FORMALIZATION
+    plan: "step_val (@[simp], por rfl) e step?_eq_some_step"
+    note: "step?_eq_some_step PROMOVIDO a CORE: eh dependencia da inducao"
+
+  RT-GAP-009:
+    title: correspondencia entre iteracoes e execucao da tabela
+    status: READY_FOR_FORMALIZATION
+    plan: "run?_eq_iterate_step, por inducao em k com generalizacao do estado"
+    note: >
+      unico teorema da frente cuja prova nao eh mecanica; a variante
+      Function.iterate_succ_apply foi AUDITADA como a que casa com run?
+
+  RT-GAP-010:
+    title: aplicacao de detectCycleWitness?
+    status: READY_FOR_FORMALIZATION
+    plan: "detectCycle? := detectCycleWitness? t.step start, uma linha"
+    evidence: "probe: treze casos avaliados atraves de analyzeT"
+
+  RT-GAP-011:
+    title: eliminacao ou preservacao do Option
+    status: RESOLVED_BY_BOUNDARY
+    resolution: "Option PRESERVADO internamente; none convertido em internalDetectorFailure"
+    note: "nao totaliza o detector anterior; CD-GAP-017 permanece DEFERRED"
+
+  RT-GAP-012:
+    title: modelo de erros dinamicos
+    status: RESOLVED_BY_DESIGN
+    resolution: "RuntimeCycleError com tres construtores, deriving DecidableEq/Repr/BEq"
+    evidence: "ERROR_MODEL.md; erro de tabela e erro de consulta NAO colapsados"
+
+  RT-GAP-013:
+    title: execucao nativa via Lake
+    status: OPEN_DEFERRED
+    note: "nenhum alvo executavel; #eval nao eh extracao"
+
+  RT-GAP-014:
+    title: interface CLI minima
+    status: OPEN_DEFERRED
+
+  RT-GAP-015:
+    title: parsing de formato externo
+    status: OPEN_DEFERRED
+    note: "o nucleo recebe Array Nat; JSON, CSV e arquivo ficam fora"
+
+  RT-GAP-016:
+    title: extracao de certificado para tipos externos
+    status: READY_FOR_FORMALIZATION
+    plan: "detectCycle?_raw_repeat traduz o certificado para indices da tabela original"
+
+  RT-GAP-017:
+    title: abstracao de sistemas reais em estados finitos
+    status: OPEN_DEFERRED
+    note: >
+      converter um sistema real em tabela finita eh uma ABSTRACAO cuja
+      correcao NAO eh fornecida por esta frente; provavelmente permanecera
+      aberta, pois exigiria um modelo formal do sistema real
+
+  RT-GAP-018:
+    title: arquitetura de testes que importam a raiz
+    status: OPEN_DEFERRED
+    note: "herdado; os testes de auditoria nao podem ser registrados na raiz"
+
+  RT-GAP-019:
+    title: complexidade e escalabilidade
+    status: OPEN_DEFERRED
+    note: "nenhum modelo de custo; a busca limitada recomputa iteradas"
+
+  RT-GAP-020:
+    title: fronteira de novidade
+    status: RESOLVED_BY_BOUNDARY
+    resolution: "mathematical_novelty NONE, algorithmic_novelty NONE"
+    evidence: "NOVELTY_BOUNDARY.md"
+
+  RT-GAP-021:
+    title: bibliografia de verificacao de maquinas de estado
+    status: OPEN_BIBLIOGRAPHIC
+    note: "nenhuma fonte primaria consultada; nenhuma atribuicao afirmada"
+
+  RT-GAP-022:
+    title: detailed invalid-transition diagnostics
+    status: OPEN_DEFERRED
+    note: >
+      transitionDestinationOutOfBounds eh generico na v1; localizar o
+      primeiro destino invalido exigiria segunda busca e prova adicional,
+      sem afetar seguranca nem correcao

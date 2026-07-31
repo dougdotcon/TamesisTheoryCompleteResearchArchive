@@ -1,0 +1,97 @@
+schema: tamesis-work-item-status/1
+work_item_id: ENG-FINITE-STATE-RUNTIME-001
+title: "Certified Runtime Adapter for Finite Deterministic Systems"
+track: engineering_foundation
+work_status: READY
+specification_status: READY_FOR_REVIEW
+formalization_status: NOT_STARTED
+result_review: NOT_STARTED
+extension_status: NOT_AUTHORIZED
+
+updated_at: 2026-08-01
+specified_at_commit: 23fdf957a2ddd63e52551bf2cd071bf290eb0d25
+specification_root: "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/"
+
+frozen_decisions:
+  raw_input: "Array Nat"
+  empty_table: STRUCTURALLY_VALID
+  invalid_destination: ERROR_NEVER_CORRECTED
+  dynamic_result: "Except RuntimeCycleError CycleWitness"
+
+raw_structure: RawTransitionTable
+raw_fields: [next]
+raw_deriving: [DecidableEq, Repr, BEq]
+size_field_stored: false
+state_count_accessor_created: false
+
+validity_predicate: RawTransitionTable.Valid
+validity_formulation: FIN
+validity_alternatives_audited: [FIN, NAT, ELEMENTS]
+validity_decidable_instance: RawTransitionTable.decidableValid
+validity_requires_typeclass_from_caller: false
+
+validated_structure: ValidatedTransitionTable
+validated_representation: NAMED_STRUCTURE
+subtype_rejected: true
+to_raw_public: true
+
+error_type: RuntimeCycleError
+error_constructors: 3
+detailed_diagnostics: DEFERRED
+
+validation_api: validateTransitionTable
+start_validation_api: validateStart
+typed_step: ValidatedTransitionTable.step
+raw_step: RawTransitionTable.step?
+raw_run: RawTransitionTable.run?
+iteration_bridge: ValidatedTransitionTable.run?_eq_iterate_step
+iterate_variant_audited: Function.iterate_succ_apply
+detector_adapter: ValidatedTransitionTable.detectCycle?
+raw_witness_interpretation: ValidatedTransitionTable.detectCycle?_raw_repeat
+dynamic_api: analyzeTransitionTable
+
+option_preserved_internally: true
+totalization_required: false
+internal_detector_failure_branch: RETAINED_AS_DEFENSIVE
+false_certificate: false
+modulo_or_clamp: false
+fallback: false
+classical_choose: false
+
+consumer_typeclasses_required: 0
+consumer_inputs: ["Array Nat", "Nat"]
+
+theorems_core: 12
+definitions_core: 7
+structures_core: 3
+instances_core: 1
+optional_corollaries: 4
+tests_planned: 9
+gaps_total: 22
+
+probe: "/tmp/FiniteStateRuntimeSpecificationProbe.lean"
+probe_removed: true
+probe_cases_evaluated: 13
+probe_all_matched: true
+probe_axioms_validate: "[propext, Quot.sound]"
+probe_axioms_analyze: "[propext, Classical.choice, Quot.sound]"
+
+lean_api_found: 20
+lean_api_not_found: 3
+lean_api_not_needed: 4
+
+mathematical_novelty: NONE
+algorithmic_novelty: NONE
+research_role: FORMAL_SOFTWARE_BRIDGE
+evidence_level: NONE
+artifact_type: FORMAL_SOFTWARE_BRIDGE_SPECIFICATION
+
+lean_files_created: 0
+lean_proofs_created: 0
+adapter_implemented: false
+executable_created: false
+lake_build_executed: false
+claims_created: 0
+
+decision_document: "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/SPECIFICATION_DECISION.md"
+authorized_action: ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED

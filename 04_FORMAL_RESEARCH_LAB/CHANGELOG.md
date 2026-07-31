@@ -1,5 +1,81 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-RUNTIME-001-SPECIFICATION - 2026-08-01
+
+### Frozen
+
+```text
+entrada bruta        Array Nat
+tabela vazia         estruturalmente valida
+destino invalido     erro, NUNCA modulo/clamp/fallback
+resultado dinamico   Except RuntimeCycleError CycleWitness
+```
+
+- `RawTransitionTable` com **um** campo; `size`, `stateCount`, `proof`,
+  `start` e `fallback` rejeitados.
+- `Valid` na formulacao por `Fin`, decidivel, com as outras duas
+  auditadas e **nao** adotadas — sem tres predicados concorrentes.
+- `ValidatedTransitionTable` como **estrutura nomeada**, nao `Subtype`.
+- `RuntimeCycleError` com tres construtores; erro de **tabela** e erro de
+  **consulta** NAO colapsados.
+
+### Probed
+
+- Versao **descartavel** do pipeline inteiro escrita, executada e
+  removida. **Treze casos avaliados, todos com o resultado previsto.**
+- Os quatro que produzem certificado reproduzem **exatamente** os modelos
+  `Fin 1`, `Bool`, `Fin 3` e `Fin 4` ja verificados no detector — um
+  **oraculo independente**.
+- `step_val` fecha por `rfl`; a instancia decidivel foi sintetizada;
+  `run?` devolveu `none` no acesso fora do array, sem fallback.
+
+### Decided
+
+Quatro pontos que o gate deixou em aberto:
+
+1. **`stateCount` NAO sera criado** — duplicaria `next.size`.
+2. **`toRaw` sera publico** — eh a unica forma de enunciar os dois
+   teoremas centrais, que falam da tabela original.
+3. **`step?_eq_some_step` eh `CORE`** — a inducao depende dele.
+4. **A variante de iteracao eh `Function.iterate_succ_apply`**, nao a
+   linha: `run?` aplica um passo e recorre, logo a contagem externa
+   consome o passo **interno**. Auditado, nao presumido.
+
+### Audited
+
+- **20 APIs confirmadas**, 3 `NOT_FOUND` (`Array.get`, `Array.getElem?`,
+  `Array.size_toArray` — ausencias de NOME; a notacao `xs[i]` e `xs[i]?`
+  funciona), 4 `NOT_NEEDED`.
+- **`#print axioms validateT` -> `[propext, Quot.sound]`**: a camada de
+  validacao, isolada, **nao** depende de `Classical.choice`.
+
+### Binding
+
+- **Nao corrigir destinos invalidos.** `validateStart_sound` — preservacao
+  exata do `start` — eh o teorema **anti-clamp**.
+- O consumidor fornece `Array Nat` e `Nat`. **Zero** typeclasses.
+- `Option` preservado internamente; o `none` vira
+  `internalDetectorFailure`, ramo defensivo que a correcao prova
+  impossivel. **Nao totaliza** o detector anterior.
+- Converter um sistema real em tabela finita eh uma **abstracao** cuja
+  correcao esta frente **nao** fornece (`RT-GAP-017`).
+
+### Risk
+
+- `run?_eq_iterate_step` eh o **unico** teorema da frente cuja prova nao
+  eh mecanica. A revisao deve olha-lo primeiro.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** adaptador, **0** executavel,
+  **0** `lake build`, **0** claims (ledger em **20**), **0** legado, **0**
+  arquivos matematicos das tres fundacoes encerradas. Probe **removido**.
+
+### Result
+
+- `ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_READY`. Vinte e cinco
+  documentos, vinte e duas lacunas, nove testes, doze teoremas `CORE`.
+
 ## PORTFOLIO-REVIEW-FINITE-STATE-RUNTIME - 2026-08-01
 
 ### Selected

@@ -1,0 +1,279 @@
+{
+  "work_item": "ENG-FINITE-STATE-RUNTIME-001",
+  "gate": "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION",
+  "authorized_action": "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "executed_at": "2026-08-01T07:20:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "23fdf957a2ddd63e52551bf2cd071bf290eb0d25",
+  "canonical_commit_before": "a4907b7cb2b421ccb52fc0262bf276ef2d94f8a9",
+  "canonical_commit_after_preflight": "23fdf957a2ddd63e52551bf2cd071bf290eb0d25",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional", "historia-digital"],
+
+  "prior_api_reused": {
+    "CycleWitness": "devolvido diretamente pela camada dinamica",
+    "CycleWitness.Valid": "contrato herdado, instanciado com t.step",
+    "detectCycleWitness?": "aplicado a t.step, sem copia do corpo",
+    "detectCycleWitness?_sound": "reutilizado em detectCycle?_sound",
+    "detectCycleWitness?_complete": "reutilizado em detectCycle?_complete",
+    "reimplemented": 0,
+    "pigeonhole_repeated": false
+  },
+
+  "specification_location": "04_FORMAL_RESEARCH_LAB/03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/",
+  "engineering_track_existed": false,
+  "location_note": "prefixo 03_ repetido ao lado de 03_MILLENNIUM, seguindo o caminho literal do gate; ha precedente em 02_FOUNDATIONS com 04_FUNCTIONAL_GRAPHS e 04_MONOTONES",
+  "documents_created": 25,
+
+  "raw_data_model": {
+    "structure": "RawTransitionTable",
+    "fields": ["next : Array Nat"],
+    "deriving": ["DecidableEq", "Repr", "BEq"],
+    "rejected_fields": ["size", "stateCount", "proof", "start", "fallback"],
+    "frozen": true
+  },
+  "size_field": "REJEITADO — o numero de estados eh sempre next.size",
+  "state_count_accessor": {
+    "created": false,
+    "reason": "duplicaria next.size sob um segundo nome publico; a regra proibe dois nomes publicos para o tamanho. next.size ja aparece nos tipos Fin, em step, em validateStart e no erro initialStateOutOfBounds",
+    "alternative_registered": "adotar stateCount EM TODA PARTE e nunca next.size — nunca os dois"
+  },
+
+  "validity_model": {
+    "predicate": "∀ i : Fin t.next.size, t.next[i] < t.next.size",
+    "formulation_adopted": "FIN",
+    "reason": "corresponde diretamente ao dominio de step; o campo closed eh literalmente o que step consome",
+    "means": ["cada posicao eh um estado", "cada estado tem exatamente um sucessor", "todo sucessor pertence a Fin next.size"],
+    "does_not_mean": ["tabela nao vazia", "todos alcancaveis", "componente unico", "ciclo unico", "estado inicial valido", "ausencia de transitorios"],
+    "propositional": true, "finite": true, "decidable": true,
+    "classical_choose": false, "silent_correction": false
+  },
+  "alternative_formulations": {
+    "NAT": "∀ i : Nat, i < size → next[i] < size — serviria via Nat.decidableBallLT, nao adotada",
+    "ELEMENTS": "∀ d ∈ next.toList, d < size — nao adotada",
+    "three_public_predicates": false
+  },
+  "decidable_instance": {
+    "name": "RawTransitionTable.decidableValid",
+    "construction": "inferInstanceAs sobre a formula expandida",
+    "infrastructure": ["Fintype (Fin n)", "decidibilidade de < em Nat", "Fintype.decidableForallFintype"],
+    "classical_decEq": false, "classical_choose": false, "noncomputable": false,
+    "synth_verified": true
+  },
+
+  "empty_table_policy": {
+    "structural_validity": "VALID",
+    "executable_query": "REJECTED_WITH_INVALID_START",
+    "justification": "Valid eh universal sobre Fin 0 e vale vacuamente; nao existe estado inicial em Fin 0",
+    "probe_evidence": "validateT #[] isOk = true; analyzeT #[] 0 -> error (initialStateOutOfBounds 0 0)",
+    "nonempty_hypothesis_added": false
+  },
+
+  "validated_data_model": {
+    "structure": "ValidatedTransitionTable",
+    "fields": ["next : Array Nat", "closed : ∀ i : Fin next.size, next[i] < next.size"],
+    "rejected_fields": ["stateCount", "step como campo", "RawTransitionTable duplicada", "estado inicial", "CycleWitness"],
+    "toRaw": "publico",
+    "toRaw_reason": "eh a unica forma de enunciar run?_eq_iterate_step e detectCycle?_raw_repeat, que falam da tabela ORIGINAL",
+    "toRaw_valid": "CORE",
+    "deriving": "nenhum — contem campo Prop; comparacao e impressao acontecem sobre toRaw"
+  },
+  "subtype_versus_structure": {
+    "decision": "NAMED_STRUCTURE",
+    "reasons": ["API legivel", "namespace proprio", "campos diretos", "melhor superficie para execucao", "menos projecoes .1 e .2", "representacao trocavel"],
+    "both_public": false
+  },
+
+  "error_model": {
+    "type": "RuntimeCycleError",
+    "constructors": ["transitionDestinationOutOfBounds", "initialStateOutOfBounds (start stateCount : Nat)", "internalDetectorFailure"],
+    "deriving": ["DecidableEq", "Repr", "BEq"],
+    "table_and_start_errors_collapsed": false
+  },
+  "detailed_diagnostics": {
+    "in_v1": false,
+    "reason": "localizar o primeiro destino invalido exigiria segunda busca e prova adicional, sem afetar seguranca nem correcao",
+    "gap": "RT-GAP-022 OPEN_DEFERRED"
+  },
+
+  "validation_api": {
+    "signature": "validateTransitionTable (t : RawTransitionTable) : Except RuntimeCycleError ValidatedTransitionTable",
+    "body": "if h : t.Valid then .ok ⟨t.next, h⟩ else .error .transitionDestinationOutOfBounds",
+    "computable": true, "fallback": false, "modulo": false, "clamp": false,
+    "array_modified": false, "classical_choose": false, "noncomputable": false,
+    "probe_axioms": "[propext, Quot.sound] — SEM Classical.choice"
+  },
+  "validation_soundness": "validateTransitionTable_sound : .ok validated → validated.toRaw = raw ∧ raw.Valid",
+  "validation_completeness": "validateTransitionTable_complete : raw.Valid → ∃ validated, ... = .ok validated",
+  "validation_error_iff": "OPTIONAL_COROLLARY",
+
+  "start_validation": {
+    "signature": "validateStart (t : ValidatedTransitionTable) (start : Nat) : Except RuntimeCycleError (Fin t.next.size)",
+    "preserves_start_exactly": true,
+    "modulo": false, "clamp": false, "zero_default": false,
+    "nonempty_hypothesis": false
+  },
+  "start_soundness": "validateStart_sound : (s : Nat) = start — o teorema ANTI-CLAMP",
+  "start_completeness": "validateStart_complete : start < size → ∃ s, ... = .ok s",
+
+  "typed_step": {
+    "signature": "ValidatedTransitionTable.step : Fin t.next.size → Fin t.next.size",
+    "body": "fun i => ⟨t.next[i], t.closed i⟩",
+    "total_by_construction": true,
+    "forbidden_absent": ["Classical.choose", "fallback", "mod", "clamp", "getD"]
+  },
+  "step_val": {
+    "statement": "(t.step i : Nat) = t.next[i]",
+    "simp": true,
+    "proof": "rfl — VERIFICADO no probe"
+  },
+
+  "raw_step": "RawTransitionTable.step? (state : Nat) : Option Nat := t.next[state]?",
+  "raw_run": "RawTransitionTable.run? : Nat → Nat → Option Nat, recursao com bind",
+  "zero_step_semantics": "run? 0 state = some state, MESMO antes da validacao; run? eh fiel ao array, e a validade do inicio pertence a camada de consulta",
+  "raw_run_probe": "#[1,2,3,2].run? 0 0 = some 0; 2 0 = some 2; 4 0 = some 2; #[0].run? 3 0 = some 0; #[0].run? 1 5 = none",
+
+  "one_step_bridge": "step?_eq_some_step : t.toRaw.step? i = some (t.step i) — PROMOVIDO a CORE",
+  "iteration_bridge": {
+    "statement": "t.toRaw.run? k start = some ((t.step)^[k] start)",
+    "strategy": ["inducao em k", "caso zero por rfl", "caso sucessor via step?_eq_some_step", "generalizacao sobre o estado inicial"],
+    "iterate_variant_audited": "Function.iterate_succ_apply (f^[n+1] x = f^[n] (f x))",
+    "iterate_variant_rejected": "Function.iterate_succ_apply' — orientacao INVERSA a de run?",
+    "presumed": false,
+    "central_result": true,
+    "highest_risk": true
+  },
+
+  "detector_adapter": {
+    "signature": "ValidatedTransitionTable.detectCycle? (start : Fin t.next.size) : Option CycleWitness",
+    "body": "detectCycleWitness? t.step start",
+    "body_copied": false,
+    "instances_inferred": ["Fintype (Fin n)", "DecidableEq (Fin n)"]
+  },
+  "detector_soundness": "reutilizacao direta de detectCycleWitness?_sound",
+  "detector_completeness": "reutilizacao direta de detectCycleWitness?_complete",
+  "raw_witness_interpretation": {
+    "statement": "run? (baseIndex + period) start = run? baseIndex start, sobre a tabela ORIGINAL",
+    "proof_steps": ["detectCycle?_sound", "extrair a quarta clausula de Valid", "run?_eq_iterate_step nos dois lados", "reescrever"],
+    "minimality_asserted": false
+  },
+
+  "dynamic_analysis_api": {
+    "signature": "analyzeTransitionTable (raw : RawTransitionTable) (start : Nat) : Except RuntimeCycleError CycleWitness",
+    "structure": "do com dois ← e um match sobre Option",
+    "totalizes_detector": false,
+    "preserves_impossible_option_branch": true,
+    "default_certificate": false,
+    "classical_choice": false,
+    "hides_validation_errors": false,
+    "error_precedence_guaranteed_by": "a ordem do do — tabela, depois consulta, depois execucao"
+  },
+  "internal_detector_failure_branch": {
+    "retained": true,
+    "propositionally_impossible_for_valid_inputs": true,
+    "reasons": ["nao totalizar", "honestidade da API", "robustez a troca do detector"],
+    "theorem": "analyzeTransitionTable_ne_internalFailure",
+    "masks_validation_error": false
+  },
+
+  "analysis_soundness": "raw.Valid ∧ start < raw.next.size ∧ run? (baseIndex+period) start = run? baseIndex start",
+  "analysis_soundness_note": "a terceira conjuncao eh enunciada sobre raw, e por isso validateTransitionTable_sound precisa devolver a igualdade das tabelas",
+  "analysis_completeness": "raw.Valid → start < size → ∃ w, analyze = .ok w",
+  "minimality_in_soundness": false,
+
+  "expected_errors": ["analyzeTransitionTable_invalid_table", "analyzeTransitionTable_invalid_start", "analyzeTransitionTable_ne_internalFailure"],
+
+  "consumer_hypotheses": {
+    "typeclasses_required": 0,
+    "inputs": ["Array Nat", "Nat"],
+    "not_required": ["Fintype", "DecidableEq", "Fin", "provas", "funcoes Lean"],
+    "note": "ganho central da frente: as estruturas finitas sao construidas INTERNAMENTE"
+  },
+
+  "computability": {
+    "all_targets_computable": true,
+    "probe_evaluated": 13,
+    "forbidden_in_bodies": ["noncomputable", "Classical.choose", "Classical.decEq", "fallback", "mod", "clamp", "periodicOrbit", "SimpleGraph"],
+    "axiom_footprint_rule": "propext, Classical.choice e Quot.sound sao permitidos por infraestrutura apagada, desde que nada seja marcado noncomputable, #eval funcione e nenhuma escolha classica produza dado",
+    "validate_layer_axioms": "[propext, Quot.sound] — a validacao isolada NAO depende de Classical.choice",
+    "eval_is_extraction": false
+  },
+
+  "lean_api_audit": {
+    "API_FOUND": 20,
+    "NOT_FOUND": 3,
+    "NOT_NEEDED": 4,
+    "NAME_UNCERTAIN": 0,
+    "not_found_detail": ["Array.get", "Array.getElem?", "Array.size_toArray"],
+    "not_found_note": "ausencias de NOME DE CONSTANTE; a funcionalidade existe pela notacao xs[i] e xs[i]?, usadas com sucesso no probe",
+    "key_finding": "Function.iterate_succ_apply eh a variante que casa com run?; iterate_succ_apply' tem orientacao inversa",
+    "probe": "/tmp/FiniteStateRuntimeSpecificationProbe.lean",
+    "probe_removed": true
+  },
+
+  "test_plan": {
+    "tests": ["RT-TEST-001", "RT-TEST-002", "RT-TEST-003", "RT-TEST-004", "RT-TEST-005", "RT-TEST-006", "RT-TEST-007", "RT-TEST-008", "RT-TEST-009"],
+    "count": 9,
+    "all_pre_verified_in_probe": true,
+    "oracle": "os casos 004 a 007 reproduzem, em forma de tabela, os modelos Fin 1, Bool, Fin 3 e Fin 4 ja verificados no detector",
+    "minimality_claimed": false
+  },
+
+  "gaps": {
+    "total": 22,
+    "resolved_by_design": ["RT-GAP-001", "RT-GAP-002", "RT-GAP-004", "RT-GAP-005", "RT-GAP-012"],
+    "resolved_by_boundary": ["RT-GAP-011", "RT-GAP-020"],
+    "ready_for_formalization": ["RT-GAP-003", "RT-GAP-006", "RT-GAP-007", "RT-GAP-008", "RT-GAP-009", "RT-GAP-010", "RT-GAP-016"],
+    "open_deferred": ["RT-GAP-013", "RT-GAP-014", "RT-GAP-015", "RT-GAP-017", "RT-GAP-018", "RT-GAP-019", "RT-GAP-022"],
+    "open_bibliographic": ["RT-GAP-021"],
+    "closed_by_expectation": 0,
+    "new_gap": "RT-GAP-022"
+  },
+
+  "stop_conditions": {"count": 21, "triggered": 0},
+  "novelty_boundary": {"mathematical_novelty": "NONE", "algorithmic_novelty": "NONE", "research_role": "FORMAL_SOFTWARE_BRIDGE"},
+
+  "specification_decisions_taken": [
+    "stateCount NAO sera criado",
+    "toRaw sera publico",
+    "step?_eq_some_step eh CORE, nao opcional",
+    "a variante de iteracao eh Function.iterate_succ_apply, nao a linha"
+  ],
+  "highest_risk": "run?_eq_iterate_step eh o unico teorema da frente cuja prova nao eh mecanica",
+
+  "decision": "A_ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_READY",
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "adapter_implemented": "NO",
+  "executable_created": "NO",
+  "lake_build_executed": "NO",
+  "claims_promoted": 0,
+  "claim_count": 20,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+  "found_functional_graph_001_math_files_touched": 0,
+  "found_cycle_detection_001_math_files_touched": 0,
+  "temporary_probe_removed": "YES",
+
+  "governance_deviations": [
+    {"id": "DEC-023", "file": "10_TOOLS/labctl.py", "change": "entrada literal ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED acrescentada ao allowlist", "reason": "exigido pelo item 37 do gate", "wildcard": false}
+  ],
+
+  "artifact_type": "FORMAL_SOFTWARE_BRIDGE_SPECIFICATION",
+  "evidence_level": "NONE",
+
+  "work_status_final": "READY",
+  "specification_status": "READY_FOR_REVIEW",
+  "authorized_action_final": "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar a validade da tabela, a construcao da funcao sobre Fin n, a correspondencia entre execucao bruta e iteracao tipada e a API dinamica baseada em Except.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "commit_amend_used": false,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_READY"
+}

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T02:10:00-03:00
-canonical_commit: "8458f8af2adf7c8476bc1b853ab93175e1a0a062"
+updated_at: 2026-08-01T04:00:00-03:00
+canonical_commit: "d9d672caf817fdb6d0b2dd27a6bf5355bc8739fe"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -12,15 +12,21 @@ active_track: "foundations"
 active_work_item: "FOUND-CYCLE-DETECTION-001"
 work_status: "VERIFIED"
 evidence_level: "F"
-last_verified_artifact: "found-cycle-detection-001-formalization-result.json"
+last_verified_artifact: "found-cycle-detection-001-result-review.json"
 current_blocker: null
 specification_status: "APPROVED"
 formalization_status: "VERIFIED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
+totalization_status: "DEFERRED"
+extraction_status: "NOT_AUTHORIZED"
+optimization_status: "NOT_AUTHORIZED"
+minimality_status: "NOT_AUTHORIZED"
 next_single_action: >
-  Revisar a API executável, a instância decidível, os testes,
-  a soundness, a completeness e os limites de computabilidade
-  antes de autorizar qualquer otimização ou extração.
-authorized_action: "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar um gate explícito de revisão de portfólio.
+  Nenhuma totalização, otimização, extração ou integração de
+  FOUND-CYCLE-DETECTION-001 está autorizada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -46,7 +52,9 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não formalizar Floyd, Brent ou tabela visitada — todos DEFERRED"
+  - "Não formalizar Floyd, Brent ou tabela visitada — todos NOT_AUTHORIZED"
+  - "Não registrar testes que importam TamesisLab dentro de TamesisLab.lean — import circular"
+  - "Quando uma auditoria obrigatória falhar após o commit e amend e commit corretivo estiverem ambos proibidos, parar com GATE_POST_COMMIT_VALIDATION_FAILED"
   - "Não formalizar a função total detectCycleWitness sem gate próprio — CD-GAP-017"
   - "Não formalizar detected_cycle_is_component_cycle sem gate próprio — CD-GAP-012"
   - "Não importar FunctionalGraphs no núcleo de CycleDetection — dependência ociosa"

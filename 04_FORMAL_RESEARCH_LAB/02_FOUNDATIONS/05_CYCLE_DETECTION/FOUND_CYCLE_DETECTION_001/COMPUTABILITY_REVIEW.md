@@ -1,109 +1,85 @@
 ---
 document_id: FCD-COMPUTABILITY-REVIEW
+stage: RESULT_REVIEW
 verdict: COMPUTABLE
 ---
 
 # Revisão de computabilidade
 
-## Classificação congelada
+> Este documento foi iniciado no gate de revisão de especificação, quando
+> a evidência era de sonda descartável. Agora registra o estado
+> **medido sobre os módulos permanentes**.
+
+## Classificação confirmada
 
 ```text
 CycleWitness         computavel
 cycleCandidates      computavel
-CycleWitness.Valid   proposicional, DECIDIVEL com DecidableEq X
-detectCycleWitness?  computavel
+detectCycleWitness?  computavel e avaliavel
+CycleWitness.Valid   proposicional, decidivel com DecidableEq X
 ```
-
-Separadamente, e sem confusão possível:
 
 ```text
-Function.periodicOrbit  noncomputavel e proposicional
-Function.periodicPts    interface proposicional (Set X)
-EventuallyMeets         proposicional
-IterReachable           proposicional
+nenhuma definicao marcada como nao computavel;
+nenhuma escolha classica no codigo;
+nenhum dado produzido por escolha classica explicita.
 ```
 
-**`periodicPts` não foi transformada em detector executável.** O detector
-devolve um par de naturais; a pertinência a `periodicPts` é um teorema
-sobre esse par, não um cálculo.
+Verificado por `grep` sobre os seis módulos, o agregador da frente e os
+cinco testes: **zero** ocorrências dos tokens proibidos.
 
-## Evidência de execução
-
-Cinco modelos avaliados com `#eval` no probe descartável:
+## Pegada axiomática, medida
 
 ```text
-Fin 1, id                      some <0,1>
-Bool, id                       some <0,1>   (nos dois estados)
-Bool, not                      some <0,2>   (nos dois estados)
-Fin 3, 0->1->2->2, de 0        some <2,1>
-Fin 4, 0->1->2->3->2, de 0     some <2,2>
+cycleCandidates                does not depend on any axioms
+mem_cycleCandidates_iff        [propext, Classical.choice, Quot.sound]
+detectCycleWitness?            [propext, Classical.choice, Quot.sound]
+detectCycleWitness?_sound      [propext, Classical.choice, Quot.sound]
+detectCycleWitness?_complete   [propext, Classical.choice, Quot.sound]
+CycleWitness.isPeriodicPt      [propext, Classical.choice, Quot.sound]
+CycleWitness.mem_periodicPts   [propext, Classical.choice, Quot.sound]
+CycleWitness.propagates        [propext, Classical.choice, Quot.sound]
+
+sorryAx          0
+axiomas locais   0
 ```
 
-Nenhuma definição precisou de `noncomputable`. Nenhuma usou
-`Classical.choose`.
+`cycleCandidates` é o **único** objeto da frente que não menciona
+`Fintype` — e é exatamente o único sem pegada. A coincidência não é
+acidental: ela localiza a origem em `Fintype.card` e `Finset.univ`.
 
-## O achado sobre a pegada axiomática
+## A leitura correta, reafirmada
 
 ```text
-#print axioms cycleCandidates      does not depend on any axioms
-#print axioms detectCycleWitness?  [propext, Classical.choice, Quot.sound]
+A pegada de Classical.choice NAO eh prova de nao computabilidade.
 ```
 
-Localização da origem, com um segundo probe:
+A infraestrutura de `Finset` da Mathlib usa escolha dentro de **provas**,
+que são apagadas na compilação. `Fintype.card` é computável, e o detector
+que a usa também é — demonstrado por `#eval` em cinco modelos e por
+dezesseis teoremas verificados pelo kernel via `decide`.
 
-| Constante | Pegada |
-|---|---|
-| `List.range` | nenhuma |
-| `List.flatMap` | nenhuma |
-| `List.find?` | nenhuma |
-| `Nat.iterate` | nenhuma |
-| `cycleCandidates` | **nenhuma** |
-| `Fintype.card` | `[propext, Classical.choice, Quot.sound]` |
-| `Finset.univ` | `[propext, Classical.choice, Quot.sound]` |
-| `detectCycleWitness?` | `[propext, Classical.choice, Quot.sound]` |
+Exigir pegada vazia seria inatingível para qualquer detector cuja cota
+venha da cardinalidade.
 
-Uma variante `detectAt? (n : ℕ)` que **recebe** a cota, em vez de
-calculá-la, não depende de axioma algum — e avalia normalmente.
-
-## A leitura correta
+## Fronteira entre executar e extrair
 
 ```text
-Pegada axiomatica NAO eh o mesmo que noncomputabilidade.
+#eval eh evidencia operacional DENTRO do Lean.
+NAO eh ainda extracao de produto.
 ```
 
-`Fintype.card` é computável — `#eval Fintype.card (Fin 3)` devolve `3` —
-e mesmo assim carrega `Classical.choice`, porque a infraestrutura de
-`Finset` da Mathlib usa escolha dentro de **provas**, que são apagadas na
-compilação.
+Nenhum binário, alvo executável do Lake, API externa ou integração foi
+criado. `extraction_status` permanece `READY_FOR_FEASIBILITY_AUDIT`, e
+`extraction_authorized` permanece `false`.
 
-Portanto, o critério "sem `Classical.choice`" do gate deve ser lido como:
+## O que permanece proposicional
 
 ```text
-1. a definicao nao eh marcada noncomputable;
-2. #eval funciona em exemplos concretos;
-3. nenhum Classical.choose produz DADO.
+Function.periodicOrbit    noncomputavel, e ausente do nucleo
+Function.periodicPts      Set X, interface proposicional
+EventuallyMeets           proposicional, e nem sequer importado
 ```
 
-Os três estão confirmados. Exigir pegada axiomática vazia seria
-inatingível para qualquer definição que use `Fintype.card` — isto é, para
-qualquer detector com cota derivada da cardinalidade.
-
-## Consequência para `ValidAt`
-
-A tentação seria adotar `ValidAt n` para conservar o núcleo sem axiomas.
-Não resolve: `detectCycleWitness?` precisa **calcular** `Fintype.card X`
-para saber onde parar, de modo que a pegada volta pela porta da frente.
-
-```yaml
-ValidAt: DEFERRED
-```
-
-## Instância de decidibilidade
-
-Achado do probe: a instância `Decidable (CycleWitness.Valid f x w)`
-**não** é encontrada automaticamente, porque `Valid` é um `def` e a
-resolução de instâncias não o desdobra. É preciso declará-la
-explicitamente com `inferInstanceAs`. Isso funcionou.
-
-**A formalização deve incluir essa instância.** Sem ela,
-`decide (Valid f x w)` não elabora, e o detector nem sequer compila.
+O detector devolve um par de naturais. A pertinência a `periodicPts` é um
+**teorema sobre esse par**, não um cálculo.

@@ -1,5 +1,79 @@
 # Changelog do laboratório formal
 
+## FOUND-CYCLE-DETECTION-001-RESULT-REVIEW - 2026-08-01
+
+### Reviewed
+
+- **`CDR-001` a `CDR-011`: todos CONFIRMADOS**, conferidos contra o fonte.
+  `Valid` coincide termo a termo com a conclusao de
+  `exists_bounded_iterate_collision`; a soundness NAO depende de
+  `mem_cycleCandidates_iff`; as tres pontes tem uma linha cada e nao
+  exigem `DecidableEq`.
+- Semantica **medida**: a busca por `baseIndex` associado a "minimo" ou
+  "menor" retornou **zero**; `minimalPeriod` aparece em tres linhas, todas
+  documentais e todas **negando** a identificacao.
+- `List.find?` devolve o **primeiro** aceito segundo a ordem concreta —
+  isso **nao** eh o menor certificado segundo ordem matematica provada.
+  **Zero** teoremas de minimalidade.
+
+### Audited
+
+- **API publica: 13 declaracoes** classificadas — 3
+  `PUBLIC_EXECUTABLE_CORE`, 4 `PUBLIC_SPECIFICATION_CORE`, 5
+  `PUBLIC_COROLLARY`, 1 `INSTANCE_SUPPORT`. Zero `INTERNAL_HELPER`.
+- **Instancias: 1 declarada, 3 derivadas, 0 conflitos.** Nenhuma instancia
+  global de `DecidableEq X` — o detector a **recebe**, nao a fabrica.
+- **Cobertura dos agregadores verificada sobre o conteudo COMMITTADO**,
+  com `git show HEAD:`. Evidencia quantitativa: **8727 -> 8737 jobs**.
+
+### Found and fixed
+
+- **Import circular.** Registrar os dois testes de auditoria dentro de
+  `TamesisLab.lean` cria ciclo, pois eles importam a raiz. O `lake build`
+  falhou; o registro foi removido. Consequencia registrada: os tres testes
+  originais entram no build; os dois de auditoria **nao** entram e sao
+  executados explicitamente.
+
+### Governance
+
+- **`GOV-CD-001: ACKNOWLEDGED_NON_MATERIAL`.** Sete fatos verificados por
+  comando: o commit `61630fb` **nao** foi publicado (0 branches remotos
+  contendo o HEAD), **0** branches, tags e refs o contem, o HEAD final
+  contem os dois agregadores, o build cobre a frente, a arvore ficou
+  limpa, os artefatos registraram o desvio e o estado matematico eh
+  consistente. O `diff` do amend: cinco linhas de `import` e documentacao
+  — **nenhum modulo matematico**.
+- O desvio **foi** um desvio; a classificacao diz que o dano eh nulo, nao
+  que a regra foi cumprida.
+- **Regra normativa futura**: quando uma auditoria obrigatoria falhar
+  depois do commit e amend e commit corretivo estiverem ambos proibidos,
+  parar com `GATE_POST_COMMIT_VALIDATION_FAILED`. O historico atual
+  **nao** foi alterado para satisfaze-la.
+- **Causa raiz**: assumir sucesso a partir de saida truncada. Duas medidas
+  preventivas saem daqui.
+
+### Closed
+
+- **19 lacunas: 10 resolvidas, 9 abertas**, nenhuma fechada por
+  expectativa. Matriz de reutilizacao: 2 `DIRECT_REUSE`, 6
+  `REQUIRES_ADAPTER`, 2 `CONCEPTUAL_ONLY`, separando uso no Lean, apos
+  extracao e em sistemas reais.
+- `result_review: APPROVED`; `totalization`, `extraction`, `optimization`
+  e `minimality` todos **nao autorizados**; trava final
+  `PORTFOLIO_REVIEW_REQUIRED`.
+
+### Not done
+
+- **0** teoremas novos, **0** modulos matematicos alterados, **0**
+  alteracoes no detector, **0** claims novas (ledger em **20**), **0**
+  legado, **0** de `RH-NOGO-001`, **0** matematicos das duas fundacoes
+  anteriores. **Nenhum `commit --amend`.**
+
+### Result
+
+- `FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_APPROVED`. A primeira fundacao
+  algoritmica executavel do laboratorio fica encerrada.
+
 ## FOUND-CYCLE-DETECTION-001-FORMALIZATION - 2026-08-01
 
 ### Built

@@ -1,0 +1,231 @@
+{
+  "work_item": "FOUND-CYCLE-DETECTION-001",
+  "gate": "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW",
+  "authorized_action": "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_AUTHORIZED",
+  "executed_at": "2026-08-01T04:00:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "d9d672caf817fdb6d0b2dd27a6bf5355bc8739fe",
+  "canonical_commit_before": "8458f8af2adf7c8476bc1b853ab93175e1a0a062",
+  "canonical_commit_after_preflight": "d9d672caf817fdb6d0b2dd27a6bf5355bc8739fe",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "cdr_review": {
+    "CDR-001": {"verdict": "CONFIRMED", "note": "dois campos Nat, deriving DecidableEq/Repr/BEq; campos redundantes com grep zero (a unica ocorrencia de entryPoint eh documental)"},
+    "CDR-002": {"verdict": "CONFIRMED", "note": "quatro clausulas na ordem de exists_bounded_iterate_collision; sem DecidableEq; sem minimalidade"},
+    "CDR-003": {"verdict": "CONFIRMED", "note": "somente Fintype e DecidableEq; nenhum Classical; nenhum conflito"},
+    "CDR-004": {"verdict": "CONFIRMED", "note": "ordem baseIndex depois period; zero e um por rfl; fronteira incluida"},
+    "CDR-005": {"verdict": "CONFIRMED", "note": "sem Fintype, DecidableEq, Classical, f ou x"},
+    "CDR-006": {"verdict": "CONFIRMED", "note": "corpo = enumeracao + List.find? + decide; sem marca de nao-computabilidade, escolha classica, orbita quociente, grafo simples, recursao ilimitada ou fallback"},
+    "CDR-007": {"verdict": "CONFIRMED", "note": "List.find?_some com predicado explicito + of_decide_eq_true; mem_cycleCandidates_iff NAO eh dependencia"},
+    "CDR-008": {"verdict": "CONFIRMED", "note": "exists_bounded_iterate_collision, mem_cycleCandidates_iff, List.find?_isSome, Option.isSome_iff_exists; sem nova aplicacao do pigeonhole"},
+    "CDR-009": {"verdict": "CONFIRMED", "note": "periodic_tail_of_collision, uma linha"},
+    "CDR-010": {"verdict": "CONFIRMED", "note": "mk_mem_periodicPts consumindo 0 < period"},
+    "CDR-011": {"verdict": "CONFIRMED", "note": "collision_propagates, assinatura identica"}
+  },
+
+  "baseIndex_semantics": "indice-base da igualdade certificada; NAO menor indice de entrada, NAO comprimento exato da cauda, NAO primeiro estado do ciclo, NAO indice canonico",
+  "baseIndex_minimality_grep_hits": 0,
+  "period_semantics": "periodo positivo testemunhado; NAO minimalPeriod, NAO comprimento fundamental, NAO menor periodo, NAO canonico",
+  "minimalPeriod_in_core": "3 linhas, todas documentais e todas NEGANDO a identificacao",
+
+  "first_versus_minimal": {
+    "fact": "List.find? devolve o PRIMEIRO candidato aceito segundo a ordem concreta de cycleCandidates",
+    "not_promoted_to": ["baseIndex matematicamente minimo", "period matematicamente minimo", "minimalPeriod", "decomposicao cauda-ciclo canonica"],
+    "minimality_theorems": 0
+  },
+
+  "public_api": {
+    "declarations": 13,
+    "PUBLIC_EXECUTABLE_CORE": ["CycleWitness", "cycleCandidates", "detectCycleWitness?"],
+    "PUBLIC_SPECIFICATION_CORE": ["CycleWitness.Valid", "mem_cycleCandidates_iff", "detectCycleWitness?_sound", "detectCycleWitness?_complete"],
+    "PUBLIC_COROLLARY": ["CycleWitness.isPeriodicPt", "CycleWitness.mem_periodicPts", "CycleWitness.propagates", "cycleCandidates_zero", "cycleCandidates_one"],
+    "INSTANCE_SUPPORT": ["CycleWitness.decidableValid"],
+    "INTERNAL_HELPER": [],
+    "TEST_ONLY": ["f1", "fId", "fNot", "f3", "f4"]
+  },
+  "enumeration_corollaries": "cycleCandidates_zero e cycleCandidates_one classificados PUBLIC_COROLLARY: sem uso interno atual, mantidos como lemas @[simp] provados por rfl e ancoras de regressao",
+
+  "instance_audit": {
+    "instances_declared": 1,
+    "derived_instances": ["DecidableEq CycleWitness", "Repr CycleWitness", "BEq CycleWitness"],
+    "global_DecidableEq_X_created": false,
+    "setoid_created": false,
+    "conflicts": 0,
+    "synth_resolves": true,
+    "test": "TamesisLab/Tests/FoundCycleDetection001InstanceAudit.lean, exit 0, 80 s, importando a raiz TamesisLab",
+    "core_modified_for_test": false
+  },
+
+  "aggregator_coverage": {
+    "Foundations.lean_imports_CycleDetection": true,
+    "Foundations.lean_imports_Audit": true,
+    "TamesisLab.lean_reaches_front": true,
+    "verified_on_committed_content": "git show HEAD: sobre ambos os agregadores",
+    "umbrella_audit_test": "TamesisLab/Tests/FoundCycleDetection001UmbrellaAudit.lean, exit 0, 6 s",
+    "jobs_before_registration": 8727,
+    "jobs_after": 8737,
+    "circular_import_found": true,
+    "circular_import_detail": "registrar os dois testes de auditoria dentro de TamesisLab.lean cria ciclo, pois eles importam a raiz; o lake build falhou e o registro foi removido",
+    "audit_tests_in_lake_build": false,
+    "audit_tests_run_explicitly": true
+  },
+
+  "tests": {
+    "FoundCycleDetection001.lean": "exit 0, 28 s",
+    "FoundCycleDetection001Execution.lean": "exit 0, 3 s",
+    "FoundCycleDetection001Axioms.lean": "exit 0, 2 s",
+    "FoundCycleDetection001InstanceAudit.lean": "exit 0, 80 s",
+    "FoundCycleDetection001UmbrellaAudit.lean": "exit 0, 6 s"
+  },
+
+  "execution_results": {
+    "Fin1_id": "some <0,1>",
+    "Bool_id": "some <0,1> nos dois estados",
+    "Bool_not": "some <0,2> nos dois estados",
+    "Fin3_de_0": "some <2,1>",
+    "Fin4_de_0": "some <2,2>",
+    "Fin3_de_1": "<1,1>", "Fin3_de_2": "<0,1>",
+    "Fin4_de_1": "<1,2>", "Fin4_de_2": "<0,2>", "Fin4_de_3": "<0,2>",
+    "depends_on_enumeration_order": true,
+    "presented_as_general_minimality": false,
+    "regression_theorems": 16,
+    "native_decide": false
+  },
+
+  "lake_build": "PASS, 8737 jobs, 26 s",
+
+  "computability": {
+    "CycleWitness": "computavel",
+    "cycleCandidates": "computavel",
+    "detectCycleWitness?": "computavel e avaliavel",
+    "noncomputable_marked": 0,
+    "classical_choose_in_code": 0,
+    "data_from_classical_choice": 0,
+    "eval_is_extraction": false
+  },
+
+  "axioms": {
+    "cycleCandidates": "does not depend on any axioms",
+    "mem_cycleCandidates_iff": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?_sound": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?_complete": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.isPeriodicPt": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.mem_periodicPts": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.propagates": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "interpretation": "a pegada vem de Fintype.card e Finset.univ e NAO eh prova de nao computabilidade"
+  },
+
+  "forbidden_tokens": 0,
+  "forbidden_imports": 0,
+  "periodicOrbit_in_core": 0,
+  "pigeonhole_grep_hits": 0,
+  "pigeonhole_dependency": "exists_bounded_iterate_collision, sem copiar sua prova interna",
+
+  "empty_type": {"Nonempty_or_Inhabited_hypotheses": 0, "argument": "o detector recebe x : X; cycleCandidates 0 = [] eh compativel com a completeness"},
+
+  "completeness_strength": {
+    "asserts": "para toda chamada bem tipada sobre tipo finito, algum certificado eh devolvido",
+    "does_not_assert": ["qual certificado", "certificado minimo", "resultado unico", "independencia da ordem da lista", "funcao total sem Option"],
+    "public_api_remains": "Option CycleWitness"
+  },
+
+  "totalization": {"present": false, "status": "OPEN_DEFERRED", "authorized": false, "getD_or_fallback": 0, "created_in_this_gate": false},
+  "optimizations": {"Floyd": "NOT_AUTHORIZED", "Brent": "NOT_AUTHORIZED", "VisitedTable": "NOT_AUTHORIZED", "grep_hits": 0},
+  "complexity": {"formal_model": false, "asymptotic_claim": false, "recomputation_registered": "CD-GAP-019"},
+  "extraction": {"extraction_status": "READY_FOR_FEASIBILITY_AUDIT", "extraction_authorized": false, "binary": 0, "lake_executable_target": 0, "external_api": 0, "integrations": 0},
+
+  "claim_review": {
+    "claim_id": "EXECUTABLE-CYCLE-WITNESS-FORMAL-001",
+    "wording_supported": true,
+    "forbidden_wording_present": false,
+    "new_claims": 0,
+    "ledger_total": 20
+  },
+
+  "gaps": {
+    "resolved": ["CD-GAP-001", "CD-GAP-002", "CD-GAP-003", "CD-GAP-004", "CD-GAP-005", "CD-GAP-006", "CD-GAP-007", "CD-GAP-008", "CD-GAP-011", "CD-GAP-015"],
+    "open_deferred": ["CD-GAP-009", "CD-GAP-010", "CD-GAP-012", "CD-GAP-013", "CD-GAP-017", "CD-GAP-018", "CD-GAP-019"],
+    "open_bibliographic": ["CD-GAP-016"],
+    "ready_for_feasibility_audit": ["CD-GAP-014"],
+    "total": 19,
+    "closed_by_expectation": 0
+  },
+
+  "reuse_matrix": {
+    "DIRECT_REUSE": ["deteccao de loops", "automatos deterministicos"],
+    "REQUIRES_ADAPTER": ["maquinas de estado", "auditoria de transicoes", "parsers", "pipelines", "retries", "workflows"],
+    "CONCEPTUAL_ONLY": ["jogos finitos", "agentes discretos"],
+    "OUT_OF_SCOPE": [],
+    "layers": ["uso dentro do Lean: disponivel", "uso apos extracao: nao autorizado", "uso em sistemas reais: nao autorizado"],
+    "integrations_created": 0
+  },
+
+  "scientific_limits": {"mathematical_novelty": "NONE", "algorithmic_novelty": "NONE", "research_role": "FORMAL_ALGORITHM_FOUNDATION"},
+
+  "governance_deviation": {
+    "id": "GOV-CD-001",
+    "facts": {
+      "commit_defeituoso": "61630fbc095da4bd74333adf6393215756572151",
+      "publicado": false,
+      "remotos_configurados": 1,
+      "branches_remotos_contendo_HEAD": 0,
+      "branches_contendo_o_defeituoso": 0,
+      "tags_contendo": 0,
+      "refs_contendo": 0,
+      "objeto_ainda_existe": "sim, alcancavel apenas pelo reflog local",
+      "HEAD_contem_os_agregadores": true,
+      "build_cobre_a_frente": true,
+      "arvore_limpa": true,
+      "artefatos_registraram_o_desvio": true,
+      "estado_matematico_consistente": true,
+      "amend_ocultou_alteracao_matematica": false,
+      "diff_do_amend": "duas linhas de import em Foundations.lean, tres em TamesisLab.lean, e documentacao trocando 8727 por 8737"
+    },
+    "classification": "ACKNOWLEDGED_NON_MATERIAL",
+    "alternatives_evaluated": ["MATERIAL_GOVERNANCE_BREACH — nenhum dos cinco gatilhos ocorreu", "INSUFFICIENT_EVIDENCE — os sete fatos foram verificados por comando"],
+    "future_normative_rule": "Quando uma auditoria obrigatoria falhar depois do primeiro commit e amend e commit corretivo estiverem ambos proibidos, parar com GATE_POST_COMMIT_VALIDATION_FAILED e aguardar gate corretivo explicito",
+    "history_altered_to_satisfy_future_rule": false,
+    "root_cause": "assumir sucesso a partir de saida truncada; o script de patch abortou por ancora inexistente e a mensagem ficou fora da janela lida",
+    "preventive_measures": ["FoundCycleDetection001UmbrellaAudit.lean", "toda etapa de patch termina com verificacao independente do efeito"]
+  },
+
+  "decision": "A_FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_APPROVED",
+
+  "math_lean_modules_modified": 0,
+  "detector_implementation_modified": 0,
+  "new_theorems": 0,
+  "audit_tests_created": 2,
+  "commit_amend_used": false,
+
+  "pytest": "PASS",
+  "labctl_validate": "PASS",
+  "whitespace": "WHITESPACE_EOF_AUDIT_PASS",
+
+  "rh_nogo_state": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED", "files_touched": 0},
+  "found_semigroup_002_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_functional_graph_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+
+  "work_status_final": "VERIFIED",
+  "specification_status": "APPROVED",
+  "formalization_status": "VERIFIED",
+  "result_review": "APPROVED",
+  "extension_status": "NOT_AUTHORIZED",
+  "totalization_status": "DEFERRED",
+  "extraction_status": "NOT_AUTHORIZED",
+  "optimization_status": "NOT_AUTHORIZED",
+  "minimality_status": "NOT_AUTHORIZED",
+  "authorized_action_final": "PORTFOLIO_REVIEW_REQUIRED",
+  "authorized_action_note": "trava de governanca, nao acao autorizada; NO_ACTION_AUTHORIZED nao foi usado; nenhuma entrada nova no allowlist",
+  "next_single_action": "Aguardar um gate explicito de revisao de portfolio. Nenhuma totalizacao, otimizacao, extracao ou integracao de FOUND-CYCLE-DETECTION-001 esta autorizada.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_APPROVED"
+}

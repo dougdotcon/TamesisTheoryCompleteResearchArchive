@@ -1,0 +1,274 @@
+{
+  "work_item": "ENG-FINITE-STATE-RUNTIME-001",
+  "gate": "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW",
+  "authorized_action": "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED",
+  "executed_at": "2026-08-01T13:40:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "746102fa458fe7ccda6d8939bb3f8834a8ac0dc4",
+  "canonical_commit_before": "6c3b83794cfd315543ea579546941c9e17c9a943",
+  "canonical_commit_after_preflight": "746102fa458fe7ccda6d8939bb3f8834a8ac0dc4",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "metadata_correction": {
+    "file": "GAP_REGISTER.yaml",
+    "before": {"resolved_formally": 10, "open_deferred": 8},
+    "after": {"resolved_formally": 11, "open_deferred": 7},
+    "total_unchanged": 22,
+    "verified_by_script": true,
+    "consistency_check": "cabecalho == contagem das entradas, verificado por Counter apos a correcao",
+    "mathematical_impact": "NONE",
+    "lean_impact": "NONE",
+    "claim_impact": "NONE",
+    "statuses_changed": 0,
+    "gaps_closed": 0,
+    "record": "METADATA_CORRECTION_RECORD.md",
+    "root_cause": "cabecalho escrito a mao em vez de derivado das entradas; duas reclassificacoes de ultima hora nao foram propagadas"
+  },
+
+  "rtr_review": {
+    "RTR-001": {"verdict": "CONFIRMED", "note": "um campo Array Nat; deriving DecidableEq/Repr/BEq; size, stateCount, proof, start e fallback ausentes; raw.next.size eh o unico nome publico"},
+    "RTR-002": {"verdict": "CONFIRMED", "note": "nao exige estado inicial, nao exige tabela nao vazia, nao afirma alcancabilidade, componente unico nem ciclo unico"},
+    "RTR-003": {"verdict": "CONFIRMED", "note": "by unfold; infer_instance; sem Classical; sintese em #[], #[0], #[1]"},
+    "RTR-004": {"verdict": "CONFIRMED", "note": "valid_empty provado; validacao ok; analise devolve initialStateOutOfBounds start 0; nenhum erro emptyTable"},
+    "RTR-005": {"verdict": "CONFIRMED", "note": "next e closed; sem campos redundantes; sem deriving"},
+    "RTR-006": {"verdict": "CONFIRMED", "note": "toRaw devolve ⟨t.next⟩, array preservado; toRaw_valid fecha por t.closed"},
+    "RTR-007": {"verdict": "CONFIRMED", "note": "tres construtores; tabela e inicio NAO colapsados"}
+  },
+
+  "table_validation": {"behaviour_confirmed": true, "modulo": 0, "clamp": 0, "min_max": 0, "getD": 0, "fallback": 0, "array_altered": false},
+  "validation_soundness": "validated.toRaw = raw ∧ raw.Valid — forca a tabela a ser A MESMA",
+  "validation_completeness": "toda tabela valida eh aceita; termo de uma linha",
+  "detailed_diagnostics_required": false,
+
+  "start_validation": {"preserves_nat_exactly": true, "modulo": 0, "clamp": 0, "zero_default": 0, "fallback": 0, "arbitrary_choice": 0},
+  "start_soundness": "(typedStart : Nat) = start — teorema ANTI-CLAMP",
+  "start_completeness": "todo indice no dominio eh aceito; termo de uma linha",
+
+  "step": {"value": "⟨t.next[i], t.closed i⟩", "can_escape_Fin": false},
+  "step_val": {"proof": "rfl", "definitional": true, "simp": true},
+  "raw_step": "t.next[state]?",
+  "raw_run": "recursao com bind",
+  "zero_step_semantics": {"run_0_999": "some 999", "run_1_999": "none", "modified_in_review": false, "note": "run? eh semantica bruta parcial; validateStart eh a barreira da API segura"},
+
+  "single_step_bridge": {"relates": "lookup opcional sobre Nat com step total sobre Fin n", "api": "getElem?_pos", "fallback": false},
+  "iteration_bridge": {
+    "audited_line_by_line": true,
+    "induction_on_k": true,
+    "hypothesis_valid_for_all_start": true,
+    "quantifier_in_statement": true,
+    "generalizing_used": false,
+    "outer_step_first": true,
+    "iterate_variant": "Function.iterate_succ_apply",
+    "inverse_orientation": false,
+    "coercions_explicit": true,
+    "axioms": "[propext, Quot.sound]",
+    "second_parallel_semantics": false
+  },
+
+  "detector_reuse": {
+    "detectCycle?": "detectCycleWitness? t.step start",
+    "sound_and_complete": "reutilizacoes diretas, termos de uma linha",
+    "cycleCandidates_occurrences": 0,
+    "pigeonhole_occurrences": 0,
+    "bounded_collision_occurrences": 0,
+    "detector_copied": false
+  },
+  "witness_interpretation": {
+    "statement": "t.toRaw.run? (baseIndex + period) start = t.toRaw.run? baseIndex start",
+    "dag_confirmed": ["detectCycle?_sound", "CycleWitness.Valid", "igualdade entre iteradas", "run?_eq_iterate_step", "igualdade sobre o array original"],
+    "minimality_asserted": false,
+    "minimalPeriod_asserted": false,
+    "canonical_entry_asserted": false
+  },
+
+  "dynamic_api": {
+    "flow_confirmed": true,
+    "default_certificate": false, "option_getD": false, "classical_choose": false, "panic": false, "fallback": false,
+    "totalizes_previous_detector": false
+  },
+  "error_precedence": {
+    "order": ["tabela invalida", "inicio invalido", "falha interna", "sucesso"],
+    "proved": true,
+    "measured": "analyzeTransitionTable ⟨#[1]⟩ 100 -> transitionDestinationOutOfBounds",
+    "invalid_table_hypothesis": "apenas ¬raw.Valid — eh isso que faz a tabela vencer",
+    "invalid_start_hypothesis": "exige raw.Valid E ¬start < size"
+  },
+
+  "analysis_soundness": {
+    "audited_integrally": true,
+    "proves": ["raw.Valid", "start < raw.next.size", "raw.run? (baseIndex+period) start = raw.run? baseIndex start"],
+    "cast": 0, "eq_ndrec": 0, "manual_dependent_transport": 0,
+    "extra_consumer_hypotheses": 0,
+    "weakened_to_intermediate_table": false,
+    "why_no_transport": "a tabela concreta ⟨raw.next, hRaw⟩ tem next SINTATICAMENTE igual a raw.next; os dois Fin sao o mesmo tipo e toRaw dela eh definicionalmente raw por eta"
+  },
+  "analyze_reduce": {
+    "category": "INTERNAL_HELPER",
+    "visibility": "private",
+    "adds_mathematical_hypothesis": false,
+    "role": "encapsula as reducoes dos dois validadores; enunciado eh igualdade de definicoes"
+  },
+  "analysis_completeness": {
+    "audited": true,
+    "witness_from": "detectCycle?_complete",
+    "classical_choose": 0, "option_get": 0, "existential_projected_to_data": false,
+    "collision_repeated": false,
+    "does_not_assert": ["qual witness", "minimalidade", "unicidade", "independencia da ordem", "ausencia do construtor internalDetectorFailure"]
+  },
+  "invalid_table_theorem": "hipotese unica ¬raw.Valid; a tabela vence mesmo com inicio invalido",
+  "invalid_start_theorem": "exige tabela valida e inicio invalido",
+  "ne_internal_failure_theorem": "sob raw.Valid e start < size, o erro interno eh impossivel; construtor MANTIDO na funcao",
+
+  "declaration_order_deviation": {
+    "status": "ACKNOWLEDGED_NON_MATERIAL",
+    "api_impact": "NONE",
+    "mathematical_impact": "NONE",
+    "reason": "dependency order — a soundness usa os dois teoremas de erro nos ramos negativos",
+    "modules_reordered": false
+  },
+
+  "public_api": {
+    "declarations": 29,
+    "PUBLIC_EXECUTABLE_CORE": 10,
+    "PUBLIC_SPECIFICATION_CORE": 15,
+    "PUBLIC_COROLLARY": 3,
+    "INSTANCE_SUPPORT": 1,
+    "INTERNAL_HELPER": 1,
+    "TEST_ONLY": "modelos concretos dos testes"
+  },
+  "consumer_hypotheses": {
+    "required": 0,
+    "inputs": ["RawTransitionTable", "Nat"],
+    "not_required": ["Fintype", "DecidableEq", "Fin", "Nonempty", "Inhabited", "provas", "funcoes Lean"],
+    "finite_structures_built_internally": true
+  },
+
+  "computability": {
+    "all_nine_computable": true,
+    "noncomputable": 0, "classical_choose": 0, "classical_decEq": 0,
+    "eval_confirmed": true,
+    "internal_failure_is_explicit_error": true,
+    "internal_failure_is_default_witness": false
+  },
+  "axioms": {
+    "validation_layer": "[propext, Quot.sound] — sem Classical.choice",
+    "raw_execution_functions": "step? e run? does not depend on any axioms",
+    "bridges": "[propext, Quot.sound]",
+    "detector_layer": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0,
+    "local_axioms": 0
+  },
+
+  "forbidden_tokens": 0,
+  "forbidden_imports": 0,
+  "silent_corrections": {"in_code": 0, "documentation_matches": 2, "detail": "duas linhas de Validation.lean com as proprias proibicoes e o nome anti-clamp; revisadas manualmente"},
+
+  "aggregators": {
+    "front": "FiniteStateRuntime.lean importa os cinco modulos",
+    "engineering": "Engineering.lean importa a frente e o Audit",
+    "root": "TamesisLab.lean importa TamesisLab.Engineering na linha 2, mais os tres testes",
+    "umbrella_audit_test": "TamesisLab/Tests/EngFiniteStateRuntime001UmbrellaAudit.lean",
+    "umbrella_audit_registered_in_root": false,
+    "umbrella_audit_reason": "importa a raiz; registra-lo criaria ciclo"
+  },
+
+  "tests": {
+    "EngFiniteStateRuntime001.lean": "exit 0, 28 s, 0 erros",
+    "EngFiniteStateRuntime001Execution.lean": "exit 0, 3 s, 0 erros",
+    "EngFiniteStateRuntime001Axioms.lean": "exit 0, 2 s, 0 erros",
+    "EngFiniteStateRuntime001UmbrellaAudit.lean": "exit 0, 87 s, 0 erros",
+    "DynamicAnalysis.lean": "exit 0, 5 s"
+  },
+  "concrete_results": {
+    "empty": "validacao ok; analise initialStateOutOfBounds 0 0",
+    "invalid_destination_start_0": "transitionDestinationOutOfBounds",
+    "invalid_destination_start_100": "transitionDestinationOutOfBounds",
+    "invalid_start": "initialStateOutOfBounds 1 1",
+    "fixed_point": "ok <0,1>",
+    "two_cycle": "ok <0,2>",
+    "tail_to_fixed": "ok <2,1>",
+    "tail_to_two_cycle": "ok <2,2>",
+    "other_states": ["<1,2>", "<0,2>", "<0,2>"],
+    "two_components": ["<0,1>", "<0,2>", "<0,2>"],
+    "raw_semantics": {"run_0_999": "some 999", "run_1_999": "none"},
+    "global_component_enumeration": false
+  },
+
+  "claim_review": {
+    "claim_id": "FINITE-STATE-RUNTIME-ADAPTER-FORMAL-001",
+    "wording_supported": true,
+    "forbidden_wording_present": false,
+    "new_claims": 0,
+    "ledger_total": 21
+  },
+
+  "gaps": {
+    "total": 22,
+    "resolved_by_design": 1,
+    "resolved_formally": 11,
+    "resolved_by_boundary": 2,
+    "open_deferred": 7,
+    "open_bibliographic": 1,
+    "header_consistent_with_entries": true,
+    "closed_by_expectation": 0
+  },
+
+  "reuse_matrix": {
+    "DIRECT_WITH_ARRAY": ["configuracoes finitas", "automatos", "maquinas de estado"],
+    "REQUIRES_STATE_ENCODING": ["auditoria de transicoes", "workflows", "retries"],
+    "REQUIRES_ABSTRACTION_PROOF": ["parsers", "pipelines", "agentes deterministicos"],
+    "CONCEPTUAL_ONLY": ["jogos"],
+    "OUT_OF_SCOPE": [],
+    "layers": ["dentro do Lean: disponivel", "apos extracao: nao autorizado", "integrado: nao autorizado"],
+    "gain_over_previous_front": "tres aplicacoes passaram de REQUIRES_ADAPTER a DIRECT_WITH_ARRAY",
+    "mandatory_record": "o adaptador prova que a tabela fornecida eh analisada corretamente; NAO prova que ela representa um sistema externo real",
+    "integrations_created": 0
+  },
+
+  "scientific_limits": {
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_SOFTWARE_BRIDGE",
+    "limits": ["nenhum parser", "nenhuma CLI", "nenhum binario", "nenhuma API externa", "nenhuma integracao", "nenhum diagnostico detalhado", "nenhuma prova da abstracao externa", "nenhuma minimalidade", "nenhum modelo formal de custo", "detector subjacente ainda recompoe iteradas"]
+  },
+
+  "decision": "A_ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_APPROVED",
+
+  "math_modules_modified": 0,
+  "runtime_implementation_modified": 0,
+  "new_theorems": 0,
+  "audit_tests_created": 1,
+  "commit_amend_used": false,
+
+  "pytest": "PASS",
+  "labctl_validate": "PASS",
+  "whitespace": "WHITESPACE_EOF_AUDIT_PASS",
+
+  "rh_nogo_state": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED", "files_touched": 0},
+  "found_semigroup_002_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_functional_graph_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_cycle_detection_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "totalization_status": "DEFERRED", "math_files_touched": 0},
+
+  "work_status_final": "VERIFIED",
+  "specification_status": "APPROVED",
+  "formalization_status": "VERIFIED",
+  "result_review": "APPROVED",
+  "extension_status": "NOT_AUTHORIZED",
+  "extraction_status": "NOT_AUTHORIZED",
+  "cli_status": "NOT_AUTHORIZED",
+  "external_format_status": "NOT_AUTHORIZED",
+  "integration_status": "NOT_AUTHORIZED",
+  "detailed_diagnostics_status": "NOT_AUTHORIZED",
+  "external_abstraction_correctness": "DEFERRED",
+  "authorized_action_final": "PORTFOLIO_REVIEW_REQUIRED",
+  "authorized_action_note": "trava de governanca, nao acao autorizada; nenhuma entrada nova no allowlist; NO_ACTION_AUTHORIZED nao usado",
+  "next_single_action": "Aguardar um gate explicito de revisao de portfolio. Nenhuma extracao, CLI, parser, integracao ou ampliacao de ENG-FINITE-STATE-RUNTIME-001 esta autorizada.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_APPROVED"
+}

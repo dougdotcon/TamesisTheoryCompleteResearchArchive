@@ -1,5 +1,60 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-RUNTIME-001-RESULT-REVIEW - 2026-08-01
+
+### Closed
+
+- **A primeira cadeia completa do laboratorio que comeca em um dado de
+  runtime potencialmente invalido e termina em um certificado formal de
+  repeticao sobre esse mesmo dado** foi revisada e encerrada. `12`
+  documentos de fechamento; `53` documentos na frente; **zero** modulos
+  matematicos tocados e **zero** teoremas novos.
+
+### Fixed
+
+- `GAP_REGISTER.yaml`: `resolved_formally` `10 -> 11` e `open_deferred`
+  `8 -> 7`. Estritamente documental — nenhum status individual, nenhuma
+  claim, nenhuma forca de resultado. O cabecalho passou a ser
+  **verificado por script** contra as entradas.
+
+### Audited
+
+- `destinos invalidos sao REJEITADOS, nunca corrigidos`: busca por `%`,
+  `mod`, `clamp`, `min`, `max`, `getD` e `fallback` deu **zero no
+  codigo**. Os dois teoremas que tornam isso impossivel de esconder sao
+  `validateTransitionTable_sound` e o **anti-clamp**
+  `validateStart_sound`.
+- A ponte `run?_eq_iterate_step` foi auditada linha por linha:
+  quantificador **no enunciado**, `Function.iterate_succ_apply`, nenhuma
+  orientacao inversa, coercoes explicitas, `[propext, Quot.sound]`.
+- `analyzeTransitionTable_sound`: zero `cast`, zero `Eq.ndrec`, zero
+  transporte dependente, zero hipoteses extras do consumidor.
+- Precedencia medida: `analyzeTransitionTable ⟨#[1]⟩ 100` devolve
+  `transitionDestinationOutOfBounds` — o erro de **tabela** vence.
+
+### Covered
+
+- Novo `EngFiniteStateRuntime001UmbrellaAudit.lean` importa **apenas**
+  `TamesisLab` e referencia as `29` declaracoes por nome totalmente
+  qualificado. Exit `0`, `87` s. Nao registrado na raiz: importa-a, e
+  registra-lo criaria ciclo (`RT-GAP-018`).
+
+### Deviated
+
+- `DOC-RT-001`, `NAME_COLLISION_AVOIDED`: `COMPUTABILITY_REVIEW.md` ja
+  existia desde `6c3b837`. O conteudo de resultado foi para
+  `FINAL_COMPUTABILITY_REVIEW.md`, no padrao `FINAL_*` da propria frente,
+  e o original foi restaurado. **Zero documentos preexistentes apagados.**
+
+### Locked
+
+- `result_review: APPROVED`; extracao, CLI, formato externo, integracao
+  e diagnostico detalhado em `NOT_AUTHORIZED`;
+  `external_abstraction_correctness: DEFERRED`;
+  `authorized_action: PORTFOLIO_REVIEW_REQUIRED` — **trava**, nao
+  autorizacao. Nenhuma entrada nova no allowlist.
+
+
 ## ENG-FINITE-STATE-RUNTIME-001-FORMALIZATION - 2026-08-01
 
 ### Built

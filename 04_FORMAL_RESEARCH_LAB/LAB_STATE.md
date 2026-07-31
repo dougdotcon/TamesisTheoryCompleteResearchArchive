@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T11:30:00-03:00
-canonical_commit: "6c3b83794cfd315543ea579546941c9e17c9a943"
+updated_at: 2026-08-01T13:40:00-03:00
+canonical_commit: "746102fa458fe7ccda6d8939bb3f8834a8ac0dc4"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -13,15 +13,22 @@ active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
 work_status: "VERIFIED"
 specification_status: "APPROVED"
 formalization_status: "VERIFIED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
+extraction_status: "NOT_AUTHORIZED"
+cli_status: "NOT_AUTHORIZED"
+external_format_status: "NOT_AUTHORIZED"
+integration_status: "NOT_AUTHORIZED"
+detailed_diagnostics_status: "NOT_AUTHORIZED"
+external_abstraction_correctness: "DEFERRED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-runtime-001-formalization-result.json"
+last_verified_artifact: "eng-finite-state-runtime-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a API dinâmica, a precedência dos erros, a
-  correspondência entre execução bruta e iteração tipada,
-  a reutilização do detector e os limites de integração antes
-  de autorizar qualquer extração, CLI ou parser.
-authorized_action: "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar um gate explícito de revisão de portfólio.
+  Nenhuma extração, CLI, parser, integração ou ampliação de
+  ENG-FINITE-STATE-RUNTIME-001 está autorizada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -70,6 +77,7 @@ prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
   - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não criar CLI, parser, JSON, CSV, rede ou integração externa sem gate próprio"
+  - "Não derivar contagens agregadas à mão: verificar cabeçalho contra as entradas por script"
   - "Não remover o ramo internalDetectorFailure — sua impossibilidade é teorema, não motivo de remoção"
   - "Não estender ENG-FINITE-STATE-RUNTIME-001 nem abrir 002 sem gate próprio"
   - "Não alterar a semântica de zero passos de run? — run? 0 state = some state"

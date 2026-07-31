@@ -1,6 +1,6 @@
 schema: tamesis-benchmark-phase-status/1
 work_item_id: LAB-BENCH-001
-authorized_action: LAB_BENCHMARK_EXECUTION_AUTHORIZED
+authorized_action: FOUNDATIONS_EXECUTION_AUTHORIZED
 research_authorized: false
 phases:
   LEAN_ENVIRONMENT_DISCOVERY:
@@ -11,15 +11,15 @@ phases:
     evidence: "elan show e which lean/lake resolvem leanprover/lean4:v4.33.0-rc1 pelo lean-toolchain do projeto."
   LEAN_SMOKE_BUILD:
     status: PASS
-    evidence: "MathlibMinimalSmoke, MathlibTacticSmoke e MathlibSmoke compilaram com exit 0; lake build concluiu 8.670 jobs."
+    evidence: "MathlibMinimalSmoke, MathlibTacticSmoke e MathlibSmoke compilaram com exit 0."
   LAB_BENCHMARK_PREPARATION:
     status: PASS
-    evidence: "Toolchain definitivo, Mathlib fixada em 79d0395a1825a6264ad5d269e35e60537518955e (tag v4.33.0-rc1) e cache disponível com 8.643 arquivos descomprimidos."
+    evidence: "Toolchain definitivo, Mathlib fixada em 79d0395a1825a6264ad5d269e35e60537518955e (tag v4.33.0-rc1) e cache disponível."
   LAB_BENCHMARK_EXECUTION:
-    status: NOT_STARTED
-    evidence: "Nenhum arquivo Benchmark/*.lean foi criado ou executado."
+    status: PASS
+    evidence: "Benchmark/{Core,Structures,Relations,MathlibInterop}.lean, Benchmark.lean e Tests/BenchmarkSmoke.lean criados: 11 definições e 15 teoremas; lake build PASS com 8.676 jobs; zero tokens proibidos."
   LAB_BENCHMARK_VERIFICATION:
-    status: NOT_STARTED
-    evidence: "Não existe ainda pacote de evidências do benchmark completo."
+    status: PASS
+    evidence: "BenchmarkSmoke referencia os 15 teoremas e compila individualmente (exit 0); matriz de rastreabilidade LAB-BENCH-001_THEOREM_MAP.md completa; pytest e labctl validate PASS; lab-bench-001-result.json registrado."
 blockers: []
-next_single_action: "Executar o benchmark formal LAB-BENCH-001 conforme sua especificação canônica."
+next_single_action: "Preparar e executar FOUND-SEMIGROUP-001 conforme seu enunciado canônico."

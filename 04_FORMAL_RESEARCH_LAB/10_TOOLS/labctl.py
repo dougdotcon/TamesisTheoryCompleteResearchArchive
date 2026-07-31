@@ -218,8 +218,10 @@ def validate() -> dict[str, Any]:
 
     benchmark = item_by_id.get("LAB-BENCH-001", {})
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
-    if active != "LAB-BENCH-001":
-        errors.append("gate sequence requires LAB-BENCH-001 as active_work_item")
+    if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001"}:
+        errors.append("gate sequence requires LAB-BENCH-001 or FOUND-SEMIGROUP-001 as active_work_item")
+    if active == "FOUND-SEMIGROUP-001" and benchmark.get("status") != "VERIFIED":
+        errors.append("FOUND-SEMIGROUP-001 cannot be active before LAB-BENCH-001 is VERIFIED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -227,10 +229,15 @@ def validate() -> dict[str, Any]:
         "LAB_WINDOWS_CACHE_LAUNCH_RECOVERY_AUTHORIZED",
         "LAB_CACHE_NETWORK_RECOVERY_AUTHORIZED",
         "LAB_BENCHMARK_EXECUTION_AUTHORIZED",
+        "FOUNDATIONS_EXECUTION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
-    if benchmark.get("status") == "VERIFIED":
-        errors.append("LAB-BENCH-001 cannot be VERIFIED before execution and verification")
+    benchmark_phases = benchmark.get("phase_status", {})
+    if benchmark.get("status") == "VERIFIED" and (
+        benchmark_phases.get("LAB_BENCHMARK_EXECUTION") != "PASS"
+        or benchmark_phases.get("LAB_BENCHMARK_VERIFICATION") != "PASS"
+    ):
+        errors.append("LAB-BENCH-001 cannot be VERIFIED before execution and verification are PASS")
     if rh_nogo.get("status") != "SCOPED":
         errors.append("RH-NOGO-001 must remain SCOPED")
     if rh_nogo.get("authorization_state") != "NOT_AUTHORIZED":
@@ -252,10 +259,15 @@ def validate() -> dict[str, Any]:
     }
     if set(phases) != required_phases:
         errors.append("LAB-BENCH-001 phase classification is incomplete")
-    if phases.get("LAB_BENCHMARK_EXECUTION", {}).get("status") != "NOT_STARTED":
-        errors.append("LAB-BENCH-001 execution must remain NOT_STARTED in LAB-0.5")
-    if phases.get("LAB_BENCHMARK_VERIFICATION", {}).get("status") != "NOT_STARTED":
-        errors.append("LAB-BENCH-001 verification must remain NOT_STARTED in LAB-0.5")
+    if phases.get("LAB_BENCHMARK_EXECUTION", {}).get("status") not in {"NOT_STARTED", "PASS"}:
+        errors.append("LAB-BENCH-001 execution must be NOT_STARTED or PASS")
+    if phases.get("LAB_BENCHMARK_VERIFICATION", {}).get("status") not in {"NOT_STARTED", "PASS"}:
+        errors.append("LAB-BENCH-001 verification must be NOT_STARTED or PASS")
+    if (
+        phases.get("LAB_BENCHMARK_VERIFICATION", {}).get("status") == "PASS"
+        and phases.get("LAB_BENCHMARK_EXECUTION", {}).get("status") != "PASS"
+    ):
+        errors.append("LAB-BENCH-001 verification cannot be PASS before execution")
 
     claims_doc = read_yaml(LAB_ROOT / "00_GOVERNANCE" / "CLAIM_LEDGER.yaml")
     claims = claims_doc.get("claims", [])

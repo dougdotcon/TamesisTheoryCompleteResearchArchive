@@ -1,0 +1,152 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "LAB-BENCH-001",
+  "executed_at": "2026-07-31T02:24:40-03:00",
+  "runtime": {
+    "os": "Ubuntu 24.04 (WSL2)",
+    "user": "linuxdev",
+    "hostname": "linux-dev",
+    "repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+    "branch": "lab/wsl-lean-migration"
+  },
+  "initial_commit": "dc43bec5209be77ad227383d1405c33e4dc71484",
+
+  "environment": {
+    "lean": "v4.33.0-rc1",
+    "lake": "5.0.0-src+62eed1d",
+    "elan": "4.2.3",
+    "mathlib": "v4.33.0-rc1",
+    "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e"
+  },
+
+  "skills": {
+    "source": "/mnt/d/TamesisTheoryCompleteResearchArchive/AJUSTE_FINO/.claude/skills/",
+    "destination": ".claude/skills (fora do controle de versão via .git/info/exclude)",
+    "skill_md_count": 24,
+    "knowledge_base_count": 25,
+    "loaded_this_session": [
+      "engenharia-software",
+      "matematica-pura",
+      "historia-digital",
+      "linguistica-computacional"
+    ],
+    "nanotecnologia": "INCOMPLETA — SKILL.md ausente; não tratada como operacional",
+    "policy": "skill orienta método; base de conhecimento não promove claim; Lean verifica o fechamento lógico; nenhum resultado Tamesis/Omega/Braid usado como premissa"
+  },
+
+  "lean_files_created": [
+    "05_FORMAL/lean/TamesisLab/Benchmark/Core.lean",
+    "05_FORMAL/lean/TamesisLab/Benchmark/Structures.lean",
+    "05_FORMAL/lean/TamesisLab/Benchmark/Relations.lean",
+    "05_FORMAL/lean/TamesisLab/Benchmark/MathlibInterop.lean",
+    "05_FORMAL/lean/TamesisLab/Benchmark.lean",
+    "05_FORMAL/lean/TamesisLab/Tests/BenchmarkSmoke.lean"
+  ],
+  "lean_files_modified": [
+    "05_FORMAL/lean/TamesisLab.lean"
+  ],
+
+  "definitions_created": 11,
+  "theorems_created": 15,
+  "proof_methods": [
+    "rfl (definicional, incluindo eta de funções e estruturas)",
+    "cases <;> rfl (análise finita de casos)",
+    "cases <;> constructor (análise finita de casos)",
+    "funext/propext com match/cases/exact (composição relacional)",
+    "Finset.mem_singleton_self (uso controlado de Mathlib)",
+    "simp (não-pertencimento em singleton)"
+  ],
+  "traceability_map": "05_FORMAL/specifications/LAB-BENCH-001_THEOREM_MAP.md",
+
+  "results": {
+    "lake_build": {
+      "status": "PASS",
+      "exit_code": 0,
+      "jobs": 8676,
+      "duration_seconds": 126.729
+    },
+    "benchmark_smoke_individual": {
+      "command": "lake env lean TamesisLab/Tests/BenchmarkSmoke.lean",
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 3.260
+    },
+    "forbidden_tokens": {
+      "sorry": 0,
+      "admit": 0,
+      "axiom": 0,
+      "unsafe": 0,
+      "scope": "*.lean sob 05_FORMAL/lean, excluindo .lake"
+    },
+    "python_tests": {
+      "status": "PASS",
+      "passed": 2,
+      "invocation": "python3 -m pytest executado em 06_COMPUTATION/python"
+    },
+    "labctl_validate": {
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "all_changes_inside_lab": true
+    }
+  },
+
+  "claims": {
+    "scientific_claims_promoted": 0,
+    "infrastructure_claims_added": [
+      {
+        "claim_id": "BENCH-INFRA-001",
+        "evidence_level": "F",
+        "domain": "formal_infrastructure",
+        "work_status": "VERIFIED",
+        "note": "Registra somente que a infraestrutura compila com rastreabilidade; sem valor científico."
+      }
+    ]
+  },
+
+  "legacy_files_modified": 0,
+  "new_scientific_results": 0,
+  "RH-NOGO-001_execution": 0,
+
+  "labctl_guardrail_updates": [
+    "allowlist de authorized_action recebeu a entrada literal FOUNDATIONS_EXECUTION_AUTHORIZED",
+    "FOUND-SEMIGROUP-001 aceito como active_work_item somente com LAB-BENCH-001 VERIFIED",
+    "VERIFIED do benchmark exige fases de execução e verificação PASS",
+    "fases de execução/verificação aceitam NOT_STARTED ou PASS, com verificação condicionada à execução"
+  ],
+
+  "final_state": {
+    "LAB-BENCH-001": {
+      "status": "VERIFIED",
+      "phases": {
+        "LEAN_ENVIRONMENT_DISCOVERY": "PASS",
+        "LEAN_TOOLCHAIN_AVAILABILITY": "PASS",
+        "LEAN_SMOKE_BUILD": "PASS",
+        "LAB_BENCHMARK_PREPARATION": "PASS",
+        "LAB_BENCHMARK_EXECUTION": "PASS",
+        "LAB_BENCHMARK_VERIFICATION": "PASS"
+      }
+    },
+    "active_work_item": "FOUND-SEMIGROUP-001",
+    "work_status": "READY",
+    "current_blocker": null,
+    "authorized_action": "FOUNDATIONS_EXECUTION_AUTHORIZED",
+    "next_single_action": "Preparar e executar FOUND-SEMIGROUP-001 conforme seu enunciado canônico.",
+    "rh_nogo_001": {
+      "work_status": "SCOPED",
+      "authorized": false,
+      "execution": "NO_EXECUTION"
+    }
+  },
+
+  "not_done": [
+    "FOUND-SEMIGROUP-001 não foi executado",
+    "RH-NOGO-001 não foi aberto",
+    "nenhuma frente Clay, TOE, TRI, TDTR ou massa crítica foi tocada",
+    "nenhum arquivo fora de 04_FORMAL_RESEARCH_LAB/ foi modificado",
+    "o benchmark de Poincaré permanece exclusivamente documental"
+  ],
+
+  "scientific_value": "NONE — INFRASTRUCTURE BENCHMARK",
+  "status": "LAB_BENCH_001_VERIFIED"
+}

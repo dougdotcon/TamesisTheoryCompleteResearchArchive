@@ -1,5 +1,46 @@
 # Changelog do laboratório formal
 
+## LAB-BENCH-001 — 2026-07-31
+
+### Added
+
+- Módulos Lean do benchmark: `TamesisLab/Benchmark/{Core,Structures,Relations,MathlibInterop}.lean`,
+  agregador `TamesisLab/Benchmark.lean` e teste
+  `TamesisLab/Tests/BenchmarkSmoke.lean` — 11 definições e 15 teoremas
+  elementares conhecidos, todos referenciados no teste.
+- Matriz de rastreabilidade `05_FORMAL/specifications/LAB-BENCH-001_THEOREM_MAP.md`
+  ligando cada requisito BENCH-* a arquivo, assinatura e método de prova.
+- Claim de infraestrutura `BENCH-INFRA-001` (`evidence_level: F`,
+  `domain: formal_infrastructure`); nenhuma claim científica criada ou
+  promovida.
+- Skills locais de agente copiadas de `AJUSTE_FINO/` para `.claude/skills`
+  (24 operacionais, 1 incompleta), fora do controle de versão via
+  `.git/info/exclude`.
+
+### Changed
+
+- `LAB-BENCH-001`: `READY` → `VERIFIED`; todas as seis fases `PASS`.
+- `active_work_item`: `LAB-BENCH-001` → `FOUND-SEMIGROUP-001` (`READY`);
+  autorização passou a `FOUNDATIONS_EXECUTION_AUTHORIZED`.
+- `labctl` atualizado para o novo estágio do gate: entrada literal
+  `FOUNDATIONS_EXECUTION_AUTHORIZED` no allowlist; `FOUND-SEMIGROUP-001`
+  aceito como item ativo somente com `LAB-BENCH-001` `VERIFIED`; `VERIFIED`
+  do benchmark exige fases de execução e verificação `PASS`; fases de
+  execução/verificação aceitam `NOT_STARTED` ou `PASS`, com verificação
+  condicionada à execução.
+
+### Verified
+
+- `lake build` PASS com 8.676 jobs; `BenchmarkSmoke` PASS individual.
+- Tokens proibidos: zero nos fontes do laboratório.
+- pytest: 2 passed; `labctl validate`: PASS sem erros.
+- `LAB_BENCH_001_VERIFIED`.
+
+### Blocked
+
+- `FOUND-SEMIGROUP-001`: `READY`, não executado nesta sessão.
+- `RH-NOGO-001`: `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+
 ## LAB-WSL-MIGRATION — 2026-07-31
 
 ### Changed

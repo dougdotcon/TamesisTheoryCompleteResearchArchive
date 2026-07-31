@@ -3,8 +3,8 @@ schema: tamesis-formal-benchmark-specification/1
 work_item_id: LAB-BENCH-001
 gate: LAB_BENCHMARK_EXECUTION_AUTHORIZED
 preparation_status: PASS
-execution_status: NOT_STARTED
-verification_status: NOT_STARTED
+execution_status: PASS
+verification_status: PASS
 research_authorized: false
 ---
 
@@ -151,8 +151,13 @@ Interromper imediatamente se:
 
 ## Estado do gate
 
-A especificação está registrada e a preparação operacional está `PASS`: o
-toolchain é definitivo, a revisão Mathlib está fixada, o cache oficial está
-disponível e os três smokes de importação compilaram. Execução e verificação
-continuam `NOT_STARTED`; nenhum arquivo `Benchmark/*.lean` foi criado.
+O benchmark foi executado e verificado no runtime canônico WSL2: os módulos
+`Benchmark/{Core,Structures,Relations,MathlibInterop}.lean`, o agregador
+`Benchmark.lean` e o teste `TamesisLab/Tests/BenchmarkSmoke.lean` compilam
+(`lake build` PASS, 8.676 jobs), com 11 definições, 15 teoremas, zero tokens
+proibidos e matriz de rastreabilidade completa em
+`LAB-BENCH-001_THEOREM_MAP.md`. O teste previsto como `Tests/Benchmark.lean`
+foi realizado como `TamesisLab/Tests/BenchmarkSmoke.lean` para entrar no grafo
+de build da biblioteca; o desvio está registrado no mapa de rastreabilidade.
+Nenhum item do benchmark constitui resultado científico.
 

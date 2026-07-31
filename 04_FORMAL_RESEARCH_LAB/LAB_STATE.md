@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T13:40:00-03:00
-canonical_commit: "746102fa458fe7ccda6d8939bb3f8834a8ac0dc4"
+updated_at: 2026-08-01T15:20:00-03:00
+canonical_commit: "861dc6bf24b4e1f8da88af138554556e644a3b49"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,26 +9,16 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "engineering_foundation"
-active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
-extension_status: "NOT_AUTHORIZED"
-extraction_status: "NOT_AUTHORIZED"
-cli_status: "NOT_AUTHORIZED"
-external_format_status: "NOT_AUTHORIZED"
-integration_status: "NOT_AUTHORIZED"
-detailed_diagnostics_status: "NOT_AUTHORIZED"
-external_abstraction_correctness: "DEFERRED"
+active_work_item: "ENG-FINITE-STATE-ENCODING-001"
+work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-runtime-001-result-review.json"
+last_verified_artifact: "portfolio-review-after-runtime-adapter-result.json"
 current_blocker: null
 next_single_action: >
-  Aguardar um gate explícito de revisão de portfólio.
-  Nenhuma extração, CLI, parser, integração ou ampliação de
-  ENG-FINITE-STATE-RUNTIME-001 está autorizada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Preparar a especificação de uma codificação finita certificada,
+  construir conceitualmente a tabela correspondente e delimitar
+  os teoremas de comutação sem iniciar a formalização.
+authorized_action: "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -54,6 +44,20 @@ closed_work_items:
     minimality_status: NOT_AUTHORIZED
     mathematical_novelty: NONE
     algorithmic_novelty: NONE
+  ENG-FINITE-STATE-RUNTIME-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    extraction_status: NOT_AUTHORIZED
+    cli_status: NOT_AUTHORIZED
+    external_format_status: NOT_AUTHORIZED
+    integration_status: NOT_AUTHORIZED
+    detailed_diagnostics_status: NOT_AUTHORIZED
+    external_abstraction_correctness: DEFERRED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT
@@ -75,6 +79,10 @@ governance_rules:
     termina com verificação independente do efeito.
 prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
+  - "Não derivar encode de Fintype.equivFin: é noncomputable e não pode produzir dado"
+  - "Não modificar ENG-FINITE-STATE-RUNTIME-001 ao construir a codificação certificada"
+  - "Não declarar RT-GAP-017 fechado no caso geral: a frente cobre apenas o recorte tipado"
+  - "Não iniciar a formalização de ENG-FINITE-STATE-ENCODING-001 sem gate próprio"
   - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não criar CLI, parser, JSON, CSV, rede ou integração externa sem gate próprio"
   - "Não derivar contagens agregadas à mão: verificar cabeçalho contra as entradas por script"

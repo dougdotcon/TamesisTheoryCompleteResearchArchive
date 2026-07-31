@@ -1,5 +1,45 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-RUNTIME-ADAPTER - 2026-08-01
+
+### Selected
+
+- **`ENG-FINITE-STATE-ENCODING-001`**, codificacao certificada de estados
+  e construcao da tabela. Seis alternativas comparadas; as dez condicoes
+  da regra de decisao verificadas uma a uma, **dez de dez**.
+
+### Diagnosed
+
+- A proxima limitacao **nao** eh desempenho, CLI nem JSON. Eh `RT-GAP-017`:
+  a tabela eh analisada corretamente, mas nada prova que ela representa o
+  sistema que a originou. Extrair e empacotar amplificaria esse buraco em
+  vez de fecha-lo.
+
+### Measured
+
+- `Array.ofFn` eh **computavel**, sai com `[propext]` e produz dado sob
+  `#eval`. `Array.size_ofFn` e `Array.getElem_ofFn` existem no core.
+- **`Function.Semiconj.iterate_right`** existe com axiomas `[propext]` e a
+  forma exata `Semiconj f ga gb -> forall n, Semiconj f ga^[n] gb^[n]`. A
+  comutacao de iteradas vira corolario de uma linha.
+- **`Fintype.equivFin` eh `noncomputable`.** A codificacao tera de ser
+  **recebida**, nunca derivada — vira `STOP-ENC-006`.
+
+### Bounded
+
+- Uma codificacao certificada prova correspondencia entre um sistema
+  **tipado** e sua tabela. Ela **nao** prova que um sistema fisico,
+  servico, workflow ou programa real foi modelado corretamente.
+  `RT-GAP-017` sera fechado **apenas** no recorte tipado.
+
+### Locked
+
+- `authorized_action: ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+  Uma unica entrada literal no allowlist, sem wildcard. Formalizacao,
+  extracao, CLI e integracao seguem **NAO autorizadas**; todos os
+  `extension_status: NOT_AUTHORIZED` preservados.
+
+
 ## ENG-FINITE-STATE-RUNTIME-001-RESULT-REVIEW - 2026-08-01
 
 ### Closed

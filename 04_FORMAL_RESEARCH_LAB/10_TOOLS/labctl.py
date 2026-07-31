@@ -306,7 +306,8 @@ def validate() -> dict[str, Any]:
     semigroup = item_by_id.get("FOUND-SEMIGROUP-001", {})
     if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001",
                       "FOUND-SEMIGROUP-002", "FOUND-FUNCTIONAL-GRAPH-001",
-                      "FOUND-CYCLE-DETECTION-001", "ENG-FINITE-STATE-RUNTIME-001"}:
+                      "FOUND-CYCLE-DETECTION-001", "ENG-FINITE-STATE-RUNTIME-001",
+                      "ENG-FINITE-STATE-ENCODING-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -330,6 +331,11 @@ def validate() -> dict[str, Any]:
         fcd.get("status") != "VERIFIED" or fcd.get("result_review") != "APPROVED"
     ):
         errors.append("ENG-FINITE-STATE-RUNTIME-001 cannot be active before FOUND-CYCLE-DETECTION-001 is VERIFIED with result_review APPROVED")
+    fsr = item_by_id.get("ENG-FINITE-STATE-RUNTIME-001", {})
+    if active == "ENG-FINITE-STATE-ENCODING-001" and (
+        fsr.get("status") != "VERIFIED" or fsr.get("result_review") != "APPROVED"
+    ):
+        errors.append("ENG-FINITE-STATE-ENCODING-001 cannot be active before ENG-FINITE-STATE-RUNTIME-001 is VERIFIED with result_review APPROVED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -364,6 +370,7 @@ def validate() -> dict[str, Any]:
         "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED",
         "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_AUTHORIZED",
         "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED",
+        "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

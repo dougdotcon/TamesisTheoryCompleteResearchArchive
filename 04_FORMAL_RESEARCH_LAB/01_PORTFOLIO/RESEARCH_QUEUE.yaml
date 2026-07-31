@@ -533,3 +533,71 @@ queue:
       mas so aceita tipos definidos em compilacao. NAO eh extensao de
       FOUND-CYCLE-DETECTION-001, cujo extension_status permanece
       NOT_AUTHORIZED; a dependencia eh consumo de API verificada.
+
+  - work_item_id: ENG-FINITE-STATE-ENCODING-001
+    title: Certified Finite-State Encoding and Table Construction
+    track: engineering_foundation
+    target_statement: >
+      Construir, a partir de uma codificacao finita certificada e de uma
+      funcao deterministica tipada, uma tabela de transicoes validada e
+      provar a correspondencia entre a execucao do sistema tipado e a
+      execucao da tabela.
+    expected_product: >
+      Especificacao formal da codificacao, da construcao da tabela, das
+      leis de comutacao e da interpretacao do CycleWitness.
+    dependencies:
+      - FOUND-SEMIGROUP-002
+      - FOUND-FUNCTIONAL-GRAPH-001
+      - FOUND-CYCLE-DETECTION-001
+      - ENG-FINITE-STATE-RUNTIME-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/"
+      - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/PUBLIC_API.md"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 6
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: >
+      A construcao nao preservar exatamente a funcao de transicao ou
+      exigir correcao silenciosa ou escolha nao computavel para produzir
+      dados.
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_SOFTWARE_BRIDGE
+    gaps_opened: 16
+    stop_conditions_declared: 14
+    alternatives_compared: 6
+    decision_document: "01_PORTFOLIO/CERTIFIED_STATE_ENCODING_CANDIDATE.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_RUNTIME_ADAPTER.md"
+    comparison_matrix: "01_PORTFOLIO/NEXT_TARGET_COMPARISON_MATRIX.md"
+    gap_targeted: "RT-GAP-017, apenas no recorte de sistemas ja tipados em Lean"
+    encoding_source_policy: PROVIDED_NEVER_DERIVED
+    silent_correction_forbidden: true
+    audited_apis:
+      - "Array.ofFn"
+      - "Array.size_ofFn"
+      - "Array.getElem_ofFn"
+      - "Equiv"
+      - "Function.Semiconj"
+      - "Function.Semiconj.iterate_right"
+      - "Fintype.equivFin"
+    noncomputable_api_rejected: "Fintype.equivFin"
+    dependency_type_on_runtime_adapter:
+      - FORMAL_API
+      - EXECUTABLE_CORE
+      - CORRECTNESS_THEOREMS
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW apos o encerramento de
+      ENG-FINITE-STATE-RUNTIME-001. Seis alternativas foram comparadas:
+      extracao nativa isolada, CLI e formato externo, diagnostico
+      detalhado, abstracoes e simulacao, nova frente matematica
+      independente e esta. Eh a unica que ataca a lacuna semantica
+      registrada em RT-GAP-017 em vez de distribuir uma garantia que
+      ainda nao existe. NAO eh extensao de ENG-FINITE-STATE-RUNTIME-001,
+      cujo extension_status permanece NOT_AUTHORIZED; a dependencia eh
+      consumo de API verificada.

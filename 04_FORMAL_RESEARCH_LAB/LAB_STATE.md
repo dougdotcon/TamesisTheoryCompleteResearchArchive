@@ -1,32 +1,24 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T04:00:00-03:00
-canonical_commit: "d9d672caf817fdb6d0b2dd27a6bf5355bc8739fe"
+updated_at: 2026-08-01T05:40:00-03:00
+canonical_commit: "a4907b7cb2b421ccb52fc0262bf276ef2d94f8a9"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "foundations"
-active_work_item: "FOUND-CYCLE-DETECTION-001"
-work_status: "VERIFIED"
+active_track: "engineering_foundation"
+active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
+work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "found-cycle-detection-001-result-review.json"
+last_verified_artifact: "portfolio-review-finite-state-runtime-result.json"
 current_blocker: null
-specification_status: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
-extension_status: "NOT_AUTHORIZED"
-totalization_status: "DEFERRED"
-extraction_status: "NOT_AUTHORIZED"
-optimization_status: "NOT_AUTHORIZED"
-minimality_status: "NOT_AUTHORIZED"
 next_single_action: >
-  Aguardar um gate explícito de revisão de portfólio.
-  Nenhuma totalização, otimização, extração ou integração de
-  FOUND-CYCLE-DETECTION-001 está autorizada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Preparar a especificação de um adaptador executável que valide
+  uma tabela dinâmica de transições, construa uma função total
+  sobre Fin n e aplique o detector certificado de ciclos.
+authorized_action: "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -40,6 +32,18 @@ closed_work_items:
     result_review: APPROVED
     extension_status: NOT_AUTHORIZED
     mathematical_novelty: NONE
+  FOUND-CYCLE-DETECTION-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    totalization_status: DEFERRED
+    extraction_status: NOT_AUTHORIZED
+    optimization_status: NOT_AUTHORIZED
+    minimality_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT
@@ -51,52 +55,47 @@ governance_lock_renamed:
   to: PORTFOLIO_REVIEW_REQUIRED
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
+governance_rules:
+  post_commit_validation: >
+    Quando uma auditoria obrigatória falhar depois do primeiro commit e
+    amend e commit corretivo estiverem ambos proibidos, parar com
+    GATE_POST_COMMIT_VALIDATION_FAILED e aguardar gate corretivo explícito.
+  truncated_output: >
+    Não assumir sucesso a partir de saída truncada. Toda etapa de patch
+    termina com verificação independente do efeito.
 prohibited_actions:
+  - "Não criar arquivos Lean sob a autorização atual"
+  - "Não implementar o adaptador antes de sua especificação estar pronta"
+  - "Não corrigir destinos inválidos por módulo, clamp ou fallback silencioso"
+  - "Não converter estado inicial inválido por módulo"
+  - "Não permitir que a tabela validada aponte para fora do domínio"
+  - "Não usar Classical.choose para produzir dados"
+  - "Não depender de Function.periodicOrbit na execução"
+  - "Não reimplementar o detector nem a casa dos pombos"
+  - "Não misturar parsing JSON, CSV, arquivo ou rede com o núcleo formal"
+  - "Não incluir servidor, banco de dados ou interface web na primeira versão"
+  - "Não tornar Floyd, Brent ou a totalização dependências obrigatórias"
+  - "Não declarar automaticamente correta a abstração de um sistema real em estados finitos"
+  - "Não afirmar complexidade sem modelo de custo"
   - "Não formalizar Floyd, Brent ou tabela visitada — todos NOT_AUTHORIZED"
-  - "Não registrar testes que importam TamesisLab dentro de TamesisLab.lean — import circular"
-  - "Quando uma auditoria obrigatória falhar após o commit e amend e commit corretivo estiverem ambos proibidos, parar com GATE_POST_COMMIT_VALIDATION_FAILED"
-  - "Não formalizar a função total detectCycleWitness sem gate próprio — CD-GAP-017"
-  - "Não formalizar detected_cycle_is_component_cycle sem gate próprio — CD-GAP-012"
-  - "Não importar FunctionalGraphs no núcleo de CycleDetection — dependência ociosa"
   - "Não estender FOUND-CYCLE-DETECTION-001 nem abrir FOUND-CYCLE-DETECTION-002 sem gate próprio"
-  - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
-  - "Não acrescentar campos a CycleWitness — entryPoint é derivável e foi rejeitado"
-  - "Não usar os nomes superados prefixIndex, entryIndex, tailLength ou cycleEntry — o campo é baseIndex"
-  - "Não chamar period de minimalPeriod nem de comprimento fundamental do ciclo"
-  - "Não afirmar minimalidade de baseIndex ou de period — CD-GAP-009 e CD-GAP-010"
-  - "Não usar Option.getD com certificado padrão falso na totalização"
-  - "Não autorizar extração de código nem integração externa"
-  - "Não usar Classical.choose na função executável"
-  - "Não marcar o detector como noncomputable"
-  - "Não autorizar o wrapper total antes de checar #eval — CD-GAP-017"
-  - "Não decidir igualdade de Function.periodicOrbit — é noncomputável"
-  - "Não afirmar minimalidade de μ ou de λ sem prova e sem gate próprio"
-  - "Não autorizar extração de código nem integração com sistemas reais"
-  - "Não repetir a casa dos pombos: ela foi consumida uma única vez em FOUND-SEMIGROUP-002"
-  - "Não enumerar todos os componentes na primeira versão"
-  - "Não acrescentar DecidableEq X sem necessidade verificada na especificação (CD-GAP-004)"
-  - "Não tratar FOUND-CYCLE-DETECTION-001 como extensão de FOUND-FUNCTIONAL-GRAPH-001"
-  - "Não estender FOUND-FUNCTIONAL-GRAPH-001 nem abrir FOUND-FUNCTIONAL-GRAPH-002 sem gate próprio"
-  - "Não estender FOUND-SEMIGROUP-002 nem abrir FOUND-SEMIGROUP-003 sem gate próprio"
+  - "Não estender FOUND-FUNCTIONAL-GRAPH-001 nem FOUND-SEMIGROUP-002 sem gate próprio"
   - "Não reabrir RH-NOGO-001 sem que uma condição de RH_NOGO_REACTIVATION_CRITERIA.md ocorra e seja verificada"
-  - "Não conectar a nova frente a TRI, TDTR, teoria de tudo, tempo físico, entropia, mecânica quântica ou cosmologia"
-  - "Não conectar a nova frente à Hipótese de Riemann, Hilbert–Pólya ou qualquer conjectura Clay"
-  - "Não afirmar novo algoritmo, nova teoria de grafos, nova lei de dinâmica ou descoberta matemática"
+  - "Não registrar testes que importam TamesisLab dentro de TamesisLab.lean — import circular"
+  - "Não conectar a nova frente a TRI, TDTR, teoria de tudo, física, Hipótese de Riemann ou conjectura Clay"
+  - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/README.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/THEOREM_MAP.md"
+  - "01_PORTFOLIO/NEXT_WORK_ITEM_FINITE_STATE_RUNTIME.md"
+  - "01_PORTFOLIO/PORTFOLIO_REVIEW_FINITE_STATE_RUNTIME.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/PUBLIC_API.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/REVIEW_DECISION.md"
-  - "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
-  - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
----
-# Estado atual
+---# Estado atual
 
 ```text
 FOUND-FUNCTIONAL-GRAPH-001   VERIFIED / result_review APPROVED   ENCERRADO

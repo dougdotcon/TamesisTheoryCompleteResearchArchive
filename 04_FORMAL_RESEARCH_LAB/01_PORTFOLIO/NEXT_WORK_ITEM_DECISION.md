@@ -6,6 +6,13 @@ decided_at: 2026-07-31
 authorized_action: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED
 ---
 
+> **Decisão superada.** Este documento registra a seleção de
+> `FOUND-FUNCTIONAL-GRAPH-001`, encerrada em 2026-07-31. As duas
+> seleções seguintes têm documentos próprios:
+> `NEXT_WORK_ITEM_CYCLE_DETECTION.md` e
+> `NEXT_WORK_ITEM_FINITE_STATE_RUNTIME.md`. A decisão vigente é a
+> última. O conteúdo abaixo é preservado como registro histórico.
+
 # FOUND-FUNCTIONAL-GRAPH-001 — decisão e escopo preliminar
 
 > **Escopo apenas.** Nenhum teorema é especificado definitivamente aqui.

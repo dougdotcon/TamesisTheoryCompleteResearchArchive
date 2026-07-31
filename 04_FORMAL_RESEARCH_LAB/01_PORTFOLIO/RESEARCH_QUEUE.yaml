@@ -435,3 +435,74 @@ queue:
       declarado fora de escopo. Nao eh extensao de FOUND-SEMIGROUP-002 nem
       de FOUND-FUNCTIONAL-GRAPH-001, cujos extension_status permanecem
       NOT_AUTHORIZED.
+  - work_item_id: ENG-FINITE-STATE-RUNTIME-001
+    title: "Certified Runtime Adapter for Finite Deterministic Systems"
+    track: engineering_foundation
+    target_statement: >
+      Existe um adaptador executavel, definido em Lean e provado correto,
+      que recebe uma tabela de transicoes dinamica, valida que todo
+      destino permanece dentro do dominio, constroi uma funcao total
+      Fin n -> Fin n correspondente a tabela e aplica o detector de
+      ciclos ja verificado, devolvendo um certificado interpretavel na
+      tabela original.
+    expected_product: >
+      Representacao bruta, predicado de fechamento, validacao executavel
+      com erros tipados, estrutura validada, funcao de transicao tipada,
+      teoremas de correspondencia entre step e lookup e entre iteradas e
+      execucao da tabela, aplicacao do detector e testes concretos.
+    dependencies:
+      - LAB-BENCH-001
+      - FOUND-SEMIGROUP-001
+      - FOUND-SEMIGROUP-002
+      - FOUND-FUNCTIONAL-GRAPH-001
+      - FOUND-CYCLE-DETECTION-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/CycleDetection/"
+      - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/PUBLIC_API.md"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 5
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: >
+      corrigir destinos invalidos por modulo, clamp ou fallback silencioso;
+      permitir que a tabela validada aponte para fora do dominio; usar
+      escolha classica para produzir dados; depender de periodicOrbit;
+      reimplementar o detector ou a casa dos pombos; misturar parsing JSON
+      ao nucleo formal; incluir servidor ou rede na primeira versao;
+      tornar Floyd ou a totalizacao obrigatorios; declarar automaticamente
+      correta a abstracao de um sistema real; afirmar complexidade sem
+      modelo; reivindicar novidade
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_SOFTWARE_BRIDGE
+    expected_engineering_value: HIGH
+    expected_software_reuse: VERY_HIGH
+    raw_representation_candidate: "Array Nat"
+    validation_result_candidate: "Except TransitionValidationError ValidatedTransitionTable"
+    typed_step_candidate: "Fin n -> Fin n"
+    silent_correction_forbidden: true
+    totalization_required: false
+    gaps_opened: 21
+    tests_planned: 8
+    decision_document: "01_PORTFOLIO/NEXT_WORK_ITEM_FINITE_STATE_RUNTIME.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_FINITE_STATE_RUNTIME.md"
+    dependency_type_on_cycle_detection:
+      - FORMAL_API
+      - EXECUTABLE_CORE
+      - CORRECTNESS_THEOREMS
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW apos o encerramento de
+      FOUND-CYCLE-DETECTION-001. Seis alternativas foram comparadas:
+      totalizacao (DEFERRED_LOW_INCREMENTAL_VALUE), Floyd e Brent
+      (DEFERRED_PREMATURE_OPTIMIZATION), extracao isolada
+      (INSUFFICIENT_RUNTIME_VALUE), infraestrutura de testes
+      (P2_LAB_INFRASTRUCTURE) e este adaptador. Eh a unica das seis que
+      muda o que o laboratorio CONSEGUE FAZER: o detector eh verificado
+      mas so aceita tipos definidos em compilacao. NAO eh extensao de
+      FOUND-CYCLE-DETECTION-001, cujo extension_status permanece
+      NOT_AUTHORIZED; a dependencia eh consumo de API verificada.

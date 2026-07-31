@@ -1,0 +1,186 @@
+{
+  "gate": "PORTFOLIO_REVIEW",
+  "subject": "Selecao da ponte para sistemas finitos reais",
+  "authorized_action_at_entry": "PORTFOLIO_REVIEW_REQUIRED",
+  "authorized_action_during_gate": "PORTFOLIO_REVIEW_AUTHORIZED",
+  "executed_at": "2026-08-01T05:40:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "a4907b7cb2b421ccb52fc0262bf276ef2d94f8a9",
+  "canonical_commit_before": "d9d672caf817fdb6d0b2dd27a6bf5355bc8739fe",
+  "canonical_commit_after_preflight": "a4907b7cb2b421ccb52fc0262bf276ef2d94f8a9",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional", "historia-digital"],
+
+  "closed_fronts": {
+    "FOUND-CYCLE-DETECTION-001": {"work_status": "VERIFIED", "specification_status": "APPROVED", "formalization_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "totalization_status": "DEFERRED", "extraction_status": "NOT_AUTHORIZED", "optimization_status": "NOT_AUTHORIZED", "minimality_status": "NOT_AUTHORIZED", "mathematical_novelty": "NONE", "algorithmic_novelty": "NONE"},
+    "FOUND-FUNCTIONAL-GRAPH-001": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED"},
+    "FOUND-SEMIGROUP-002": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED"},
+    "RH-NOGO-001": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED"}
+  },
+  "extension_status_modified": 0,
+  "closed_front_math_files_touched": 0,
+
+  "alternatives_compared": 6,
+  "alternative_A_totalization": {"classification": "DEFERRED_LOW_INCREMENTAL_VALUE", "reason": "a completeness ja prova que none eh impossivel; remover Option melhora pouco a integracao e NAO resolve a entrada de dados externos; um consumidor externo precisara de Except de qualquer modo"},
+  "alternative_B_floyd": {"classification": "DEFERRED_PREMATURE_OPTIMIZATION", "reason": "nao existe adaptador nem baseline executavel sobre dados de runtime; otimizar antes de carga real eh otimizar contra suposicao"},
+  "alternative_C_brent": {"classification": "DEFERRED_PREMATURE_OPTIMIZATION", "reason": "idem, com risco formal ainda maior"},
+  "alternative_D_isolated_extraction": {"classification": "INSUFFICIENT_RUNTIME_VALUE", "reason": "compilar modelo fixo nao permite analisar sistemas fornecidos por terceiros; o binario responderia apenas sobre os cinco modelos ja escritos no fonte"},
+  "alternative_E_test_infrastructure": {"classification": "P2_LAB_INFRASTRUCTURE", "reason": "os dois testes de auditoria importam a raiz e nao podem ser registrados nela; funcionam e sao executados explicitamente; nenhum bloqueio real no build, que passa com 8737 jobs", "registered_as": "RT-GAP-018"},
+  "alternative_F_runtime_adapter": {"classification": "SELECTED", "reason": "unica das seis que muda o que o laboratorio CONSEGUE FAZER"},
+
+  "selected": {
+    "work_item": "ENG-FINITE-STATE-RUNTIME-001",
+    "title": "Certified Runtime Adapter for Finite Deterministic Systems",
+    "track": "ENGINEERING_FOUNDATION",
+    "work_status": "SCOPED",
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_SOFTWARE_BRIDGE"
+  },
+  "duplicate_found": false,
+  "duplicate_evidence": "0 itens com prefixo ENG- na fila; 0 ocorrencias de RawTransitionTable, TransitionTable ou RUNTIME-001 no repositorio; 0 usos de Array no nucleo Foundations. As mencoes a 'adaptador' sao ou o adaptador de componente (CD-GAP-012) ou a classificacao REQUIRES_ADAPTER das matrizes de reutilizacao — que descrevem exatamente a lacuna a fechar",
+  "rejection_criteria_triggered": 0,
+
+  "limitation_attacked": "o detector opera sobre X : Type* com [Fintype X] e [DecidableEq X] definidos em compilacao; nao recebe arrays de runtime, tabelas de transicao, JSON, CSV, estados numerados externos, configuracoes de workflow nem modelos de outros sistemas",
+  "lab_state_precise": {
+    "executavel_dentro_do_lean": ["CycleWitness", "cycleCandidates", "detectCycleWitness?"],
+    "apenas_proposicional": ["CycleWitness.Valid e os quatro teoremas", "periodicPts", "EventuallyMeets", "periodicOrbit", "toda a camada das duas fundacoes anteriores"],
+    "depende_de_tipos_de_compilacao": "o detector inteiro; os cinco modelos de teste sao definidos no fonte",
+    "falta_para_dados_externos": "tudo"
+  },
+
+  "raw_representation_candidate": "structure RawTransitionTable where next : Array Nat",
+  "size_field": "REJEITADO — size = next.size eh derivavel, mesma disciplina que rejeitou entryPoint em CycleWitness",
+  "raw_alternatives_to_compare": ["Array Nat", "List Nat", "Array UInt64", "ByteArray"],
+  "raw_recommendation": "Array Nat",
+
+  "table_validity": {
+    "predicate_candidate": "∀ i : Nat, i < t.next.size → t.next[i] < t.next.size",
+    "alternative_formulation": "∀ i : Fin t.next.size, t.next[i] < t.next.size",
+    "both_to_be_compared": true,
+    "means": ["todo estado registrado tem exatamente um sucessor", "todo sucessor permanece no mesmo espaco finito"],
+    "does_not_mean": ["todos os estados sao alcancaveis", "ha um unico componente", "ha um unico ciclo global", "a tabela eh nao vazia", "o estado inicial eh valido"]
+  },
+
+  "validated_representation_candidate": {
+    "route_a": "structure ValidatedTransitionTable with closed proof",
+    "route_b": "FiniteTransitionSystem com stateCount e stepIndex, certificado separado",
+    "recommendation": "manter dado executavel e provas separados; evitar redundancia entre stateCount e Array.size; nao armazenar funcoes arbitrarias quando uma tabela concreta basta",
+    "subtype_or_named_structure": "a decidir na especificacao"
+  },
+
+  "empty_table_policy": {
+    "recommendation": "permitir representar tabela vazia; rejeitar execucao sem estado inicial",
+    "rationale": "preserva a separacao entre validade estrutural e validade da consulta",
+    "gap": "RT-GAP-005",
+    "frozen": false
+  },
+
+  "dynamic_initial_state": {
+    "input": "start : Nat",
+    "validation": "start < table.next.size",
+    "error_candidate": "initialStateOutOfBounds (start stateCount : Nat)",
+    "three_separate_validations": ["validacao da tabela", "validacao da consulta", "execucao do detector"],
+    "single_bool_forbidden": true
+  },
+
+  "step_function": "ValidatedTransitionTable.step : Fin t.next.size → Fin t.next.size, derivada do array e da prova de fechamento",
+  "silent_correction_forbidden": {
+    "classical_choose": true, "fallback_zero": true, "mod": true, "clamp": true, "default_value": true,
+    "rationale": "um mod silencioso transformaria uma tabela errada em um sistema diferente, e o certificado seria correto sobre um sistema que o usuario nunca descreveu — o modo de falha mais perigoso da frente"
+  },
+
+  "step_lookup_bridge": "theorem step_val : (t.step i : Nat) = t.next[i]",
+  "iteration_bridge": "theorem iterate_step_corresponds — iterar a funcao tipada corresponde a seguir repetidamente os indices da tabela; principal resultado formal do adaptador",
+  "cycle_theory_reimplemented": false,
+
+  "detector_application": "detectTableCycle? t start := detectCycleWitness? t.step start",
+  "dynamic_api_candidate": "analyzeTransitionTable (next : Array Nat) (start : Nat) : Except RuntimeCycleError CycleWitness",
+  "dynamic_api_in_first_core": "a decidir na especificacao",
+  "none_branch": {
+    "routes_to_compare": ["Option dentro de Except", "usar a prova para eliminar none", "manter erro defensivo internalDetectorFailure"],
+    "decided_now": false,
+    "false_certificate_forbidden": true,
+    "gaps": ["RT-GAP-011", "RT-GAP-012"]
+  },
+
+  "candidate_results": ["RT-001 validacao correta", "RT-002 validacao completa", "RT-003 transicao preservada", "RT-004 iteracao preservada", "RT-005 witness no dominio tipado", "RT-006 witness interpretado na tabela", "RT-007 execucao dinamica segura"],
+  "not_authorized_yet": ["parsing JSON", "arquivo de configuracao", "servidor HTTP", "integracao com parser real", "integracao com pipeline real", "otimizacao Floyd", "benchmark"],
+
+  "future_extraction": {
+    "to_audit": ["#eval", "lake env lean", "Lake executable target", "compilacao nativa", "argumentos CLI simples"],
+    "first_core_separated_from": ["parsing de arquivo", "biblioteca JSON", "interface web", "banco de dados", "rede"],
+    "principle": "a execucao nativa deve ser consequencia do adaptador, nao seu substituto"
+  },
+
+  "tests_planned": ["RT-TEST-001 tabela vazia", "RT-TEST-002 destino fora dos limites", "RT-TEST-003 estado inicial fora dos limites", "RT-TEST-004 ponto fixo", "RT-TEST-005 ciclo de dois", "RT-TEST-006 cauda para ponto fixo", "RT-TEST-007 cauda para ciclo de dois", "RT-TEST-008 componentes separados"],
+  "tests_count": 8,
+  "tests_note": "RT-TEST-004 a 007 reproduzem em forma de tabela os modelos Fin 1, Bool, Fin 3 e Fin 4 ja verificados, o que da um oraculo para comparacao; RT-TEST-008 NAO deve ser lido como enumeracao global de componentes",
+
+  "applications": {
+    "DIRECT_WITH_TABLE": ["automatos", "configuracoes finitas", "maquinas de estado"],
+    "REQUIRES_STATE_ENCODING": ["workflows", "auditoria de transicoes", "retries"],
+    "REQUIRES_ABSTRACTION_PROOF": ["pipelines", "parsers", "agentes deterministicos"],
+    "CONCEPTUAL_ONLY": ["jogos"],
+    "OUT_OF_SCOPE": []
+  },
+  "abstraction_caveat": "converter um sistema real para uma tabela finita eh uma ABSTRACAO; a correcao dessa abstracao NAO eh automaticamente fornecida pelo detector nem pelo adaptador. O adaptador garante que A TABELA DADA eh analisada corretamente; que a tabela represente o sistema real eh responsabilidade de quem a produziu",
+
+  "gaps_opened": 21,
+  "gaps_closed": 0,
+  "stop_conditions_registered": 16,
+  "scientific_limits": {"mathematical_novelty": "NONE", "algorithmic_novelty": "NONE", "research_role": "FORMAL_SOFTWARE_BRIDGE"},
+
+  "dependency_dag": "FOUND-SEMIGROUP-002 -> FOUND-FUNCTIONAL-GRAPH-001 -> FOUND-CYCLE-DETECTION-001 -> ENG-FINITE-STATE-RUNTIME-001",
+  "dependency_type_on_cycle_detection": ["FORMAL_API", "EXECUTABLE_CORE", "CORRECTNESS_THEOREMS"],
+  "registered_as_authorized_extension": false,
+
+  "decision": "A_PORTFOLIO_REVIEW_APPROVED_FINITE_STATE_RUNTIME_SELECTED",
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "lake_build_executed": "NO",
+  "runtime_adapter_implemented": "NO",
+  "executable_created": "NO",
+  "claims_promoted": 0,
+  "claim_count": 20,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+  "found_functional_graph_001_math_files_touched": 0,
+  "found_cycle_detection_001_math_files_touched": 0,
+  "specification_folder_created": false,
+
+  "governance_deviations": [
+    {"id": "DEC-020", "file": "10_TOOLS/labctl.py", "change": "ENG-FINITE-STATE-RUNTIME-001 acrescentado ao conjunto literal de active_work_item permitidos, com a mensagem de erro correspondente", "reason": "sem isso o gate-sequence rejeita o novo item", "wildcard": false},
+    {"id": "DEC-021", "file": "10_TOOLS/labctl.py", "change": "pre-condicao: ENG-FINITE-STATE-RUNTIME-001 so pode ficar ativo com FOUND-CYCLE-DETECTION-001 VERIFIED E result_review APPROVED", "reason": "exigido pelo item 31 do gate; eh a primeira pre-condicao do laboratorio a exigir DUAS propriedades", "wildcard": false},
+    {"id": "DEC-022", "file": "10_TOOLS/labctl.py", "change": "entrada literal ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED acrescentada ao allowlist", "reason": "exigido pelo item 31 do gate", "wildcard": false}
+  ],
+  "allowlist_entries_added": 1,
+  "allowlist_wildcards_added": 0,
+  "portfolio_review_authorized_already_present": true,
+
+  "artifact_type": "PORTFOLIO_SELECTION",
+  "evidence_level": "NONE",
+
+  "pytest": "PASS",
+  "labctl_validate": "PASS",
+  "canonical_commit_check": "PASS",
+  "whitespace": "WHITESPACE_EOF_AUDIT_PASS",
+  "commit_amend_used": false,
+
+  "final_state": {
+    "active_work_item": "ENG-FINITE-STATE-RUNTIME-001",
+    "work_status": "SCOPED",
+    "current_blocker": null,
+    "authorized_action": "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  },
+  "next_single_action": "Preparar a especificacao de um adaptador executavel que valide uma tabela dinamica de transicoes, construa uma funcao total sobre Fin n e aplique o detector certificado de ciclos.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "PORTFOLIO_REVIEW_APPROVED_FINITE_STATE_RUNTIME_SELECTED"
+}

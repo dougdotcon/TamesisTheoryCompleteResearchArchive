@@ -1,5 +1,76 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-FINITE-STATE-RUNTIME - 2026-08-01
+
+### Selected
+
+- **`ENG-FINITE-STATE-RUNTIME-001`** — *Certified Runtime Adapter for
+  Finite Deterministic Systems*, criado como `SCOPED` na nova track
+  `engineering_foundation`.
+- **A lacuna**: o laboratorio tem um programa verificado que **nao
+  consegue receber uma entrada**. O detector opera sobre `X : Type*` com
+  `[Fintype X]` e `[DecidableEq X]` definidos em **compilacao**; os cinco
+  modelos de teste estao escritos no fonte.
+
+### Compared
+
+- **Seis alternativas.** `A` totalizacao
+  `DEFERRED_LOW_INCREMENTAL_VALUE` — em camada dinamica, `Option` eh o
+  **menor** dos problemas; o erro real a reportar eh "tabela invalida".
+  `B` Floyd e `C` Brent `DEFERRED_PREMATURE_OPTIMIZATION`. `D` extracao
+  isolada `INSUFFICIENT_RUNTIME_VALUE` — o binario responderia apenas
+  sobre os cinco modelos ja escritos. `E` infraestrutura de testes
+  `P2_LAB_INFRASTRUCTURE`, registrada em `RT-GAP-018`, sem bloqueio real.
+  `F` adaptador **`SELECTED`**: unica das seis que muda o que o
+  laboratorio **consegue fazer**.
+- **Duplicata: NAO encontrada.** Zero itens `ENG-`; zero ocorrencias de
+  `RawTransitionTable`, `TransitionTable` ou `RUNTIME-001`; zero `Array`
+  no nucleo. As mencoes a "adaptador" sao o adaptador de componente
+  (`CD-GAP-012`) ou a classificacao `REQUIRES_ADAPTER` — que **descreve**
+  a lacuna a fechar.
+
+### Scoped, not frozen
+
+- `RawTransitionTable` com **um** campo `next : Array Nat` — sem `size`,
+  derivavel, mesma disciplina que rejeitou `entryPoint`.
+- Validacao por `Except` com erros tipados e **tres** validacoes
+  separadas: tabela, consulta, execucao. Nunca um unico `Bool`.
+- `iterate_step_corresponds` sera o **principal resultado formal**: sem
+  ela o certificado fala de um objeto que ninguem relaciona com a entrada.
+- **21 lacunas** abertas, **8** testes planejados, **7** resultados
+  candidatos. Nada congelado.
+
+### Binding prohibition
+
+- **Nao corrigir destinos invalidos por modulo, clamp ou fallback.** Um
+  `% n` silencioso transformaria uma tabela errada em um **sistema
+  diferente**, e o certificado seria correto sobre um sistema que o
+  usuario nunca descreveu.
+- **Converter um sistema real em tabela finita eh uma ABSTRACAO**, cuja
+  correcao o adaptador **nao** fornece (`RT-GAP-017`).
+
+### Governance
+
+- Tres edicoes minimas e literais em `labctl.py`, sem wildcard:
+  `DEC-020` (gate sequence), `DEC-021` (**pre-condicao dupla** —
+  `VERIFIED` **e** `result_review APPROVED`, a primeira do laboratorio a
+  exigir duas propriedades) e `DEC-022` (allowlist).
+- Regras de governanca gravadas no `LAB_STATE.md`:
+  `GATE_POST_COMMIT_VALIDATION_FAILED` e a proibicao de assumir sucesso a
+  partir de saida truncada.
+- `canonical_commit`: `d9d672c` -> `a4907b7`.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** adaptador, **0** executavel,
+  **0** `lake build`, **0** claims (ledger em **20**), **0** legado, **0**
+  arquivos matematicos das tres fundacoes encerradas e de `RH-NOGO-001`.
+  Pasta de especificacao **nao** criada.
+
+### Result
+
+- `PORTFOLIO_REVIEW_APPROVED_FINITE_STATE_RUNTIME_SELECTED`.
+
 ## FOUND-CYCLE-DETECTION-001-RESULT-REVIEW - 2026-08-01
 
 ### Reviewed

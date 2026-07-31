@@ -29,8 +29,25 @@ FOUND-SEMIGROUP-002      VERIFIED    alcancabilidade, invariantes,
 FOUND-FUNCTIONAL-GRAPH-001   VERIFIED    componente por EventuallyMeets
         |                            e orbita periodica unica
         v
-FOUND-CYCLE-DETECTION-001    SCOPED      algoritmo executavel e certificado
+FOUND-CYCLE-DETECTION-001    VERIFIED    detector executavel, soundness
+        |                            e completeness provadas
+        v
+ENG-FINITE-STATE-RUNTIME-001 SCOPED      adaptador para dados dinamicos
 ```
+
+`ENG-FINITE-STATE-RUNTIME-001` fecha a lacuna de **entrada**: o detector
+eh verificado, mas so aceita tipos definidos em compilacao. A nova frente
+recebe uma tabela de transicoes em runtime, valida seus indices, constroi
+uma funcao total sobre `Fin n` e aplica o detector ja provado.
+
+```yaml
+FOUND-CYCLE-DETECTION-001:
+  dependency_type: [FORMAL_API, EXECUTABLE_CORE, CORRECTNESS_THEOREMS]
+```
+
+Dependencia por **consumo de API verificada**, nao por extensao: o
+`extension_status` de `FOUND-CYCLE-DETECTION-001` permanece
+`NOT_AUTHORIZED`.
 
 `FOUND-CYCLE-DETECTION-001` fecha a lacuna **computacional** deixada por
 `FOUND-FUNCTIONAL-GRAPH-001`: a existencia do ciclo esta provada, mas

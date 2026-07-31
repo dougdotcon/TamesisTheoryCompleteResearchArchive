@@ -29,3 +29,18 @@ ASYM-NOGO-001         (VERIFIED)
 ```
 
 Falta demonstrar que os objetos concretos satisfazem as interfaces.
+
+## RHNogo/Geometry — núcleo de positividade (GWB-008A / GWB-008B)
+
+| Arquivo | Conteúdo |
+|---|---|
+| `Geometry/PositiveCoefficient.lean` | `PositiveWeylCoefficient`, `ofFactors`, `dimension_div_order_pos`, `measure_pos_of_isOpen_subset`, `coefficient_pos_of_factors`, `integral_pos_of_nonneg_of_support_measure_pos` |
+| `Geometry/Audit.lean` | `#check` do núcleo local e dos cinco lemas Mathlib reutilizados |
+| `Geometry.lean` | agregador com o aviso de escopo |
+| `Tests/RHNogoPositiveCoefficient.lean` | teste isolado, instâncias concretas em `ℝ` |
+
+**Escopo, vinculante:** teoria da medida elementar. **Não** define
+variedade, fibrado cotangente, operador pseudodiferencial, símbolo
+principal, medida de Liouville nem coeficiente de Weyl concreto. Cobre o
+passo 5 de seis do argumento de `GWB-008A` e a aritmética de `GWB-008B`.
+**Não prova a lei de Weyl.** Ver `GEOMETRIC_LEAN_SCOPE.md`.

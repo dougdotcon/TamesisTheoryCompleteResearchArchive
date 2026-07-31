@@ -8,12 +8,45 @@ gaps:
     description: >
       GWB-008 (C_P > 0) nao eh afirmado por nenhuma fonte obtida. Sem ele a
       pertinencia a W-POWER falha, pois W-POWER exige constante positiva.
-      Argumento elementar registrado em GLOBAL_WEYL_CONSTANT.md, nao citado
-      nem demonstrado.
     severity: high
-    status: OPEN
+    status: SUPERSEDED
+    superseded_by: [SB-GAP-001A, SB-GAP-001B, SB-GAP-001C]
+    blocking: false
+    related: GAP-RH-014
+    note: "Dividido no gate RH_NOGO_GEOMETRIC_GAP_RESOLUTION."
+
+  - gap_id: SB-GAP-001A
+    title: "GWB-008A - positividade da medida no espaco de fases"
+    description: >
+      vol{xi : p_m(x,xi) < 1} > 0 para cada x, e a integral sobre M eh
+      positiva. Argumento em seis passos em WEYL_COEFFICIENT_POSITIVITY.md.
+    severity: high
+    status: DOCUMENTED_ARGUMENT_WITH_FORMALIZED_CORE
     blocking: "bloqueia POWER-LAW-FOR-NP"
     related: GAP-RH-014
+    formalized_core: "measure_pos_of_isOpen_subset (passo 5 de 6)"
+    note: >
+      Passos 1-4 e 6 sao DOCUMENTAIS. A continuidade de x |-> vol(B_x)
+      (passo 6) nao foi lida em fonte obtida.
+
+  - gap_id: SB-GAP-001B
+    title: "GWB-008B - C_P > 0"
+    description: "C_P = (2pi)^(-d) * integral_M vol(B_x) dx > 0."
+    severity: high
+    status: ELEMENTARY_COROLLARY_WITH_FORMALIZED_CORE
+    blocking: "bloqueia POWER-LAW-FOR-NP"
+    related: GAP-RH-014
+    formalized_core: "coefficient_pos_of_factors"
+
+  - gap_id: SB-GAP-001C
+    title: "GWB-008C - C_P < infinito"
+    description: >
+      W-POWER exige constante real, logo finita. Obrigacao SEPARADA de
+      GWB-008A/B, nao derivada delas.
+    severity: medium
+    status: DOCUMENTED_STANDARD_ARGUMENT_REQUIRING_SOURCE
+    blocking: "bloqueia POWER-LAW-FOR-NP"
+    related: GAP-RH-015
 
   - gap_id: SB-GAP-002
     description: >
@@ -24,7 +57,11 @@ gaps:
     status: EXPLICIT_CLASS_ASSUMPTION
     blocking: false
     related: GAP-RH-012
-    note: "Se obtida a fonte, passa a SOURCE_CITED_RESULT e sai da definicao."
+    classification_document: DISCRETENESS_CLASSIFICATION.md
+    note: >
+      Se obtida a fonte, passa a SOURCE_CITED_RESULT e sai da definicao.
+      Classificado no gate RH_NOGO_GEOMETRIC_GAP_RESOLUTION: GWB-001 eh
+      EXPLICIT_CLASS_ASSUMPTION; GWB-002 eh SOURCE_CITED_RESULT.
 
   - gap_id: SB-GAP-003
     description: >
@@ -64,7 +101,11 @@ gaps:
     status: DEFERRED_BY_NARROWING
     blocking: false
     related: GAP-RH-009
-    note: "GAP-RH-009 NAO foi fechado; foi contornado por estreitamento."
+    note: >
+      GAP-RH-009 NAO foi fechado; foi contornado por estreitamento (B1 de
+      W_ELLIPTIC_SCALAR_V3.md). Reconfirmado no gate
+      RH_NOGO_GEOMETRIC_GAP_RESOLUTION: a formula escalar de C_P NAO foi
+      aplicada a sistemas.
 
   - gap_id: SB-GAP-007
     description: >
@@ -136,3 +177,19 @@ gaps:
     severity: low
     status: OPEN_BY_DESIGN
     blocking: false
+
+  - gap_id: SB-GAP-012
+    title: "Acrescimos de ponte na classe escalar"
+    description: >
+      W-ELLIPTIC-SCALAR-BRIDGE contem seis condicoes (B1..B6) que NAO estao
+      em fonte alguma: escalar, sem bordo, M nao vazia, d >= 1, simbolo
+      principal real positivo homogeneo, espectro discreto. Metade da
+      classe eh deste laboratorio.
+    severity: high
+    status: EXPLICIT_BRIDGE_ASSUMPTIONS_REGISTERED
+    blocking: false
+    document: W_ELLIPTIC_SCALAR_V3.md
+    note: >
+      Registrado, nao resolvido. Em particular B5 (positividade do SIMBOLO
+      PRINCIPAL) nao decorre de S2 ('positive', dito do OPERADOR) em fonte
+      obtida.

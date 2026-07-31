@@ -10,11 +10,13 @@ import TamesisLab.Benchmark
 import TamesisLab.RHNogo.SignatureProbe
 import TamesisLab.RHNogo.AsymptoticCore
 import TamesisLab.RHNogo.Bridge
+import TamesisLab.RHNogo.Geometry
 import TamesisLab.Tests.MathlibSmoke
 import TamesisLab.Tests.BenchmarkSmoke
 import TamesisLab.Tests.FoundSemigroup001
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
+import TamesisLab.Tests.RHNogoPositiveCoefficient
 
 namespace TamesisLab
 

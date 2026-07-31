@@ -79,8 +79,14 @@ gaps:
       "no information beyond" Agmon-Kannai. A Classe W declara fibrados
       hermitianos gerais.
     severity: high
-    status: OPEN
+    status: OPEN_SYSTEMS_DEFERRED
     blocking: false
+    note: >
+      NAO fechado. Contornado por estreitamento (B1 de
+      W_ELLIPTIC_SCALAR_V3.md). A identidade de traco fibrada (tr_E) de
+      GWB-004 permanece nao auditada; a constante correta para sistemas eh
+      IVRII (3.1.3) com n(x,xi). A formula escalar de C_P NAO foi aplicada
+      a sistemas.
   - gap_id: GAP-RH-010
     description: >
       Auto-adjunção (W5): a Classe W exige essencial auto-adjunção;
@@ -112,13 +118,19 @@ gaps:
       1968. Consequência padrão de elipticidade mais compacidade, mas
       requer fonte.
     severity: high
-    status: PARTIALLY_SUPPORTED
+    status: EXPLICIT_CLASS_ASSUMPTION_CLASSIFIED
     blocking: false
+    classification_document: DISCRETENESS_CLASSIFICATION.md
     audit_finding: >
       Coriasco-Doll 2020, Secao 3, estabelece a cadeia resolvente compacto
       -> base ortonormal de autofuncoes -> 0 < lambda_1 <= ... -> +infinito,
       mas no contexto SG proprio deles. Para variedade compacta o analogo e
       teoria eliptica padrao, NAO lida em fonte obtida.
+    resolution_note: >
+      CLASSIFICADO, NAO RESOLVIDO. GWB-001 (discretude) permanece
+      EXPLICIT_CLASS_ASSUMPTION; GWB-002 (definicao e finitude de N_P) eh
+      SOURCE_CITED_RESULT por Coriasco-Doll eq.(1). Falta fonte para
+      variedade compacta.
   - gap_id: GAP-RH-008
     description: >
       Escopo das rotas de escape: mapa registrado em ESCAPE_ROUTES.md
@@ -145,9 +157,31 @@ legacy_gaps_superseded:
   - gap_id: GAP-RH-014
     description: >
       Positividade da constante global C_P > 0 não é afirmada por nenhuma
-      fonte obtida. Argumento elementar registrado em
-      GLOBAL_WEYL_CONSTANT.md, não citado nem demonstrado. Sem C_P > 0 a
-      pertinência a W-POWER falha.
+      fonte obtida. Sem C_P > 0 a pertinência a W-POWER falha.
+    severity: medium
+    status: RESOLVED_DOCUMENTALLY_FOR_SCALAR_BRIDGE_CLASS_ONLY
+    blocking: false
+    resolution_document: WEYL_COEFFICIENT_POSITIVITY.md
+    formalized_core: >
+      measure_pos_of_isOpen_subset (passo 5 de 6) e coefficient_pos_of_factors,
+      em TamesisLab/RHNogo/Geometry/PositiveCoefficient.lean.
+    resolution_note: >
+      NAO eh CLOSED. O argumento em seis passos foi ESCRITO, nao provado.
+      Passos 1-4 e 6 sao documentais; apenas o passo 5 tem nucleo abstrato
+      verificado. A resolucao vale SOMENTE dentro de
+      W-ELLIPTIC-SCALAR-BRIDGE, cuja metade das hipoteses eh deste
+      laboratorio. Nenhuma fonte obtida afirma C_P > 0.
+  - gap_id: GAP-RH-015
+    description: >
+      Finitude da constante global C_P < infinito (GWB-008C). W-POWER exige
+      constante real, logo finita; em Lean isso fica implicito no tipo
+      `constant : R`, mas a obrigacao matematica nao desaparece. O argumento
+      padrao usa cota inferior uniforme p_m(x,xi) >= c |xi|^m sobre o
+      fibrado cosferico compacto S*M.
     severity: medium
     status: OPEN
     blocking: false
+    note: >
+      NOVO neste gate. Nenhuma fonte obtida enuncia a cota uniforme.
+      Formalizar exigiria definir fibrado cosferico e simbolo principal,
+      PROIBIDO no gate atual.

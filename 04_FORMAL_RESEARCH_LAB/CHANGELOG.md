@@ -1,5 +1,69 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-GEOMETRIC-GAP-RESOLUTION - 2026-07-31
+
+### Added
+
+- `W_ELLIPTIC_SCALAR_V3.md`: classe dividida em
+  **W-ELLIPTIC-SCALAR-SOURCE** (6 condicoes literais de Coriasco-Doll p.1)
+  e **W-ELLIPTIC-SCALAR-BRIDGE** (mais 6 acrescimos deste laboratorio,
+  cada um marcado `EXPLICIT_BRIDGE_ASSUMPTION`). Metade da classe eh
+  deste laboratorio, e isso agora esta numa tabela.
+- Condicoes novas e explicitas: `M` nao vazia (B3), `d >= 1` (B4) e
+  simbolo principal real, positivo fora da secao nula e homogeneo de
+  grau `m > 0` (B5). B5 estava sendo usada TACITAMENTE.
+- `WEYL_COEFFICIENT_POSITIVITY.md`: argumento em seis passos para
+  `C_P > 0`, com o estado de cada passo.
+- `GLOBAL_WEYL_DATA_BRIDGE.md`: instanciacao de `PowerCountingLaw`
+  campo a campo, com fornecedor e evidencia.
+- `DISCRETENESS_CLASSIFICATION.md`, `GEOMETRIC_LEAN_SCOPE.md`,
+  `GEOMETRIC_GAP_RESOLUTION_AUDIT.md`.
+- Nucleo Lean em `05_FORMAL/lean/TamesisLab/RHNogo/Geometry/`:
+  5 teoremas, 1 estrutura, 1 construtor. Teoria da medida elementar.
+- Claim `WEYL-COEFFICIENT-INTERFACE-001` (`F`,
+  `spectral_interface_governance`).
+
+### Changed
+
+- **`GWB-008` dividida em tres**: `008A` (positividade da medida no
+  espaco de fases, `DOCUMENTED_ARGUMENT_WITH_FORMALIZED_CORE`),
+  `008B` (`C_P > 0`, `ELEMENTARY_COROLLARY_WITH_FORMALIZED_CORE`) e
+  `008C` (`C_P < infinito`, `DOCUMENTED_STANDARD_ARGUMENT_REQUIRING_SOURCE`).
+- **Discretude classificada sem inflacao**: `GWB-001` eh
+  `EXPLICIT_CLASS_ASSUMPTION`; `GWB-002` eh `SOURCE_CITED_RESULT`.
+- `GAP-RH-014` -> `RESOLVED_DOCUMENTALLY_FOR_SCALAR_BRIDGE_CLASS_ONLY`.
+  NAO eh `CLOSED`: o argumento foi ESCRITO, nao provado.
+- `GAP-RH-012` -> `EXPLICIT_CLASS_ASSUMPTION_CLASSIFIED`.
+- `GAP-RH-009` -> `OPEN_SYSTEMS_DEFERRED`. **NAO fechado.**
+- `authorized_action`: `RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED`
+  -> `RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED`
+  (entrada literal unica, sem wildcard).
+
+### Verified
+
+- `lake build` PASS com **8.703 jobs**; teste isolado exit 0.
+- Tokens proibidos: `sorry=0 admit=0 axiom=0 unsafe=0`.
+- `#print axioms` nos 7 objetos: apenas `propext`, `Classical.choice`,
+  `Quot.sound`.
+- Auditoria de escopo em `Geometry/`: nenhuma definicao de variedade,
+  fibrado cotangente, operador pseudodiferencial, simbolo principal,
+  medida de Liouville ou coeficiente de Weyl concreto. As unicas
+  ocorrencias desse vocabulario sao os avisos que declaram a exclusao.
+- pytest 2 passed; `labctl validate` PASS.
+
+### Blocked
+
+- **As onze obrigacoes `GWB-001..009` continuam NAO PROVADAS.**
+- `GAP-RH-015` (finitude de `C_P`) aberto; `SB-GAP-012` (seis acrescimos
+  de ponte sem fonte) aberto; `SB-GAP-001` dividido em `001A/001B/001C`.
+- `ASYM-NOGO-001` NAO aplicado. Nenhum operador construido ou excluido.
+  Hilbert-Polya NAO excluido. Nada afirmado sobre a Hipotese de Riemann.
+
+### Result
+
+- `RH_NOGO_SCALAR_GEOMETRIC_INTERFACE_READY`. A entrada geometrica foi
+  resolvida em nivel de INTERFACE e de REGISTRO, nao de prova.
+
 ## COUNTING-LAW-BRIDGE — 2026-07-31
 
 ### Added

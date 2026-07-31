@@ -5,11 +5,15 @@ specification: SPECIFICATION_READY
 primary_source_audit: PARTIALLY_SUFFICIENT
 local_to_global_bridge: DOCUMENTED
 source_bridge_specification: READY
+scalar_geometric_interface: READY
 operator_class: W-ELLIPTIC-SCALAR
-operator_class_version: 2
+operator_class_version: 3
+operator_class_split:
+  W-ELLIPTIC-SCALAR-SOURCE: "6 condicoes literais de CORIASCO-DOLL-2020 p.1"
+  W-ELLIPTIC-SCALAR-BRIDGE: "SOURCE + 6 acrescimos deste laboratorio (B1..B6)"
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED
+next_gate: RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
@@ -20,25 +24,45 @@ subartifacts:
     theorem_map: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_THEOREM_MAP.md"
     proof_audit: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_PROOF_AUDIT.md"
     scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
+  WEYL-COEFFICIENT-CORE:
+    status: VERIFIED
+    lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/Geometry/"
+    scope_document: "03_MILLENNIUM/01_RIEMANN/GEOMETRIC_LEAN_SCOPE.md"
+    argument_document: "03_MILLENNIUM/01_RIEMANN/WEYL_COEFFICIENT_POSITIVITY.md"
+    scope: >
+      teoria da medida elementar; cobre o passo 5 de 6 de GWB-008A e a
+      aritmetica de GWB-008B. NAO define variedade, simbolo, operador nem
+      coeficiente de Weyl concreto. NAO prova a lei de Weyl.
 abstract_components_verified:
   - ASYM-NOGO-001
   - COUNTING-LAW-BRIDGE
+  - WEYL-COEFFICIENT-CORE
+geometric_bridge_status:
+  GLOBAL-WEYL-BRIDGE-SCALAR: SPECIFIED_NOT_PROVED
+  GLOBAL-WEYL-DATA-BRIDGE: SPECIFIED_NOT_PROVED
+  obligations_total: 11
+  obligations_proved: 0
 remaining_work: >
-  Demonstrar que os objetos concretos satisfazem as interfaces. E onde a
-  auditoria encontrou as lacunas geometricas (GWB-008, discretude) e
-  bibliograficas.
+  Provar GWB-001..009. Nenhuma foi demonstrada. A travessia
+  W-ELLIPTIC-SCALAR-BRIDGE -> W-POWER continua sem execucao.
 open_gaps:
-  - "SB-GAP-001 / GAP-RH-014: C_P > 0 sem fonte (obrigacao GEOMETRICA; nao bloqueou este gate)"
-  - "SB-GAP-002 / GAP-RH-012: discretude eh hipotese incorporada"
+  - "GAP-RH-015: finitude de C_P (GWB-008C) sem fonte (NOVO)"
+  - "SB-GAP-002 / GAP-RH-012: discretude classificada como hipotese incorporada"
   - "SB-GAP-006 / GAP-RH-009: sistemas e fibrados adiados (NAO fechado)"
+  - "SB-GAP-003: convencoes de fronteira < vs <="
+  - "SB-GAP-005: provas da lei de Weyl em monografias nao obtidas"
+  - "SB-GAP-007: bordo excluido por estreitamento"
   - "SB-GAP-010B: Riemann-von Mangoldt concreto fora do alcance"
   - "SB-GAP-011: nivel E3 nao formalizado"
+partially_resolved_gaps:
+  - "SB-GAP-001 / GAP-RH-014: C_P > 0 RESOLVED_DOCUMENTALLY_FOR_SCALAR_BRIDGE_CLASS_ONLY"
 closed_gaps:
   - "SB-GAP-010A: CLOSED_BY_FORMALIZATION"
 current_blocker: >
-  Faltam as obrigacoes geometricas: positividade da constante de Weyl e as
-  hipoteses minimas de W-ELLIPTIC-SCALAR.
+  As obrigacoes GWB-001..009 permanecem nao provadas. O gate resolveu a
+  entrada geometrica no nivel de INTERFACE e de REGISTRO, nao de prova.
 note: >
   O no-go completo permanece NAO PROVADO e NAO AUTORIZADO. ASYM-NOGO-001
-  NAO foi aplicado. Nenhum operador foi construido ou excluido. Nada foi
-  afirmado sobre Hilbert-Polya ou sobre a Hipotese de Riemann.
+  NAO foi aplicado. Nenhum operador foi construido ou excluido.
+  Hilbert-Polya NAO foi excluido. Nada foi afirmado sobre a Hipotese de
+  Riemann.

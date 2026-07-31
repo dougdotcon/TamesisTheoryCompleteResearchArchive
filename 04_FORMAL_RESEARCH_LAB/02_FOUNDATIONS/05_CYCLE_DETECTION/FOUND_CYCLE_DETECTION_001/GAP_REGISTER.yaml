@@ -1,13 +1,12 @@
 schema: tamesis-gap-register/1
 work_item_id: FOUND-CYCLE-DETECTION-001
 updated_at: 2026-07-31
-reviewed_at_gate: FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW
+reviewed_at_gate: FOUND_CYCLE_DETECTION_001_FORMALIZATION
 total: 19
-resolved: 6
-ready_for_formalization: 5
-ready_for_feasibility_audit: 1
-open_deferred: 6
+resolved: 10
+open_deferred: 7
 open_bibliographic: 1
+ready_for_feasibility_audit: 1
 closed_by_expectation: 0
 
 gaps:
@@ -15,135 +14,118 @@ gaps:
     title: escolha entre Floyd, tabela visitada e Brent
     status: RESOLVED_BY_DESIGN
     resolution: BOUNDED_CERTIFICATE_SEARCH
-    evidence: "ALGORITHM_SELECTION.md; congelado na revisao"
+    evidence: "formalizado em Detector.lean; Floyd, Brent e tabela visitada NAO implementados"
 
   CD-GAP-002:
     title: representacao executavel do resultado
-    status: RESOLVED_BY_DESIGN
-    resolution: "CycleWitness com dois naturais, baseIndex e period"
-    evidence: "FINAL_DATA_MODEL.md; entryPoint rejeitado por derivabilidade"
-    note: "ValidAt permanece DEFERRED — a pegada axiomatica vem de Fintype.card e voltaria de qualquer modo"
+    status: RESOLVED_FORMALLY
+    resolution: "structure CycleWitness com baseIndex e period"
+    evidence: "Witness.lean; deriva DecidableEq, Repr e BEq; nao parametrizada por X"
 
   CD-GAP-003:
     title: prova de terminacao
-    status: RESOLVED_BY_DESIGN
-    resolution: "lista finita + List.find?"
-    evidence: "TERMINATION_PLAN.md; probe avaliou o detector em cinco modelos"
+    status: RESOLVED_FORMALLY
+    resolution: "List.find? sobre cycleCandidates (Fintype.card X)"
+    evidence: "o elaborador aceita a definicao sem medida nem combustivel; tres testes exit 0"
 
   CD-GAP-004:
     title: necessidade de DecidableEq X
-    status: RESOLVED_BY_API_AUDIT
+    status: RESOLVED_FORMALLY
     resolution: >
-      necessaria no detector executavel; ausente de CycleWitness,
-      cycleCandidates, mem_cycleCandidates_iff, Valid e das tres pontes
-      proposicionais
-    evidence: "COMPUTABILITY_REVIEW.md; instancia declarada com inferInstanceAs no probe"
+      presente apenas em detectCycleWitness? e, por heranca, em seus dois
+      teoremas; ausente de CycleWitness, cycleCandidates,
+      mem_cycleCandidates_iff, Valid e das tres pontes
+    evidence: "assinaturas impressas em FoundCycleDetection001.lean"
 
   CD-GAP-005:
     title: limite de busca
-    status: RESOLVED_BY_DESIGN
-    resolution: "Fintype.card X; pares com baseIndex + period <= card X"
-    evidence: >
-      fronteira MEDIDA por filtro no probe: n=3 -> <0,3>,<1,2>,<2,1>;
-      n=4 -> <0,4>,<1,3>,<2,2>,<3,1>
+    status: RESOLVED_FORMALLY
+    resolution: "Fintype.card X, com baseIndex + period <= card X dentro de Valid"
+    evidence: "mem_cycleCandidates_iff; cycleCandidates 3 e 4 avaliados com a fronteira presente"
 
   CD-GAP-006:
     title: correcao do candidato encontrado
-    status: READY_FOR_FORMALIZATION
-    plan: "of_decide_eq_true ou decide_eq_true_eq, sobre List.find?_some"
-    evidence: "os tres lemas de ponte confirmados no checkout"
+    status: RESOLVED_FORMALLY
+    resolution: "detectCycleWitness?_sound"
+    evidence: "List.find?_some com predicado explicito + of_decide_eq_true"
 
   CD-GAP-007:
     title: ponto-base do ciclo testemunhado
-    status: READY_FOR_FORMALIZATION
-    plan: "f^[w.baseIndex] x, via periodic_tail_of_collision"
-    note: 'reformulado; NAO eh "ponto de entrada minimo"'
+    status: RESOLVED_FORMALLY
+    resolution: "CycleWitness.isPeriodicPt e CycleWitness.mem_periodicPts"
+    evidence: "aplicacao direta de periodic_tail_of_collision"
+    note: 'NAO eh "ponto de entrada minimo"'
 
   CD-GAP-008:
     title: periodo positivo testemunhado
-    status: READY_FOR_FORMALIZATION
-    plan: "w.period, com 0 < w.period dentro de Valid"
-    note: >
-      NAO eh periodo minimo; o valor pode ser MULTIPLO do periodo minimo,
-      e toda documentacao publica repete isso
+    status: RESOLVED_FORMALLY
+    resolution: "0 < w.period dentro de Valid, consumido por Function.mk_mem_periodicPts"
+    note: "PODE ser multiplo do periodo minimo; NAO eh Function.minimalPeriod"
 
   CD-GAP-009:
     title: minimalidade de baseIndex
     status: OPEN_DEFERRED
-    note: >
-      List.find?_eq_some_iff_append da minimalidade POSICIONAL na lista;
-      converte-la em minimalidade matematica exigiria relacionar a ordem
-      da enumeracao com a ordem em baseIndex. Nao autorizado.
+    note: "os testes de regressao devolvem valores minimos por consequencia da ordem, sem prova"
 
   CD-GAP-010:
     title: minimalidade de period
     status: OPEN_DEFERRED
-    note: "mesma situacao; adicionalmente exigiria Function.minimalPeriod"
+    note: "exigiria Function.minimalPeriod, deliberadamente ausente da frente"
 
   CD-GAP-011:
     title: ponte com periodicPts
-    status: READY_FOR_FORMALIZATION
-    plan: "periodic_tail_of_collision + Function.mk_mem_periodicPts"
+    status: RESOLVED_FORMALLY
+    resolution: "CycleWitness.mem_periodicPts"
+    evidence: "Function.mk_mem_periodicPts h.2.1 (isPeriodicPt h)"
 
   CD-GAP-012:
     title: ponte proposicional com periodicOrbit
-    status: READY_FOR_FORMALIZATION
-    plan: "detected_cycle_is_component_cycle, OPTIONAL_CORE"
+    status: OPEN_DEFERRED
     note: >
-      auditado como replica mecanica de exists_component_cycle_with_entry_bound.
-      Se o gate de formalizacao optar por omiti-lo, este gap volta a
-      OPEN_DEFERRED e o adaptador fica documentado como futuro.
+      detected_cycle_is_component_cycle foi deliberadamente OMITIDO desta
+      primeira formalizacao: adaptador mecanico, nao necessario a
+      soundness, a completeness nem a execucao. FunctionalGraphs nao eh
+      importado.
 
   CD-GAP-013:
     title: complexidade formal
     status: OPEN_DEFERRED
-    note: >
-      complexity_status NOT_FORMALIZED. O comprimento medido de
-      cycleCandidates foi 6, 10 e 15 para n = 3, 4 e 5 — consistente com
-      n(n+1)/2, que continua NAO sendo lema. Nenhuma notacao assintotica
-      sera registrada.
+    note: "nenhum modelo de custo; nenhuma notacao assintotica em teorema ou claim"
 
   CD-GAP-014:
     title: extracao de codigo executavel
     status: READY_FOR_FEASIBILITY_AUDIT
     note: >
-      #eval confirmado para o detector em cinco modelos concretos. lean --run,
-      alvo Lake, binario e integracao externa NAO foram auditados e
-      permanecem nao autorizados. Executar no elaborador nao equivale a
-      extrair um produto.
+      #eval confirmado nos cinco modelos, dentro do elaborador. Alvo Lake,
+      binario e integracao externa NAO auditados e nao autorizados.
 
   CD-GAP-015:
     title: fronteira de novidade e uso em software
     status: RESOLVED_BY_BOUNDARY
     resolution: "mathematical_novelty NONE, algorithmic_novelty NONE"
-    evidence: "NOVELTY_BOUNDARY.md"
+    evidence: "RESULT_BOUNDARY.md"
 
   CD-GAP-016:
     title: bibliografia e atribuicao historica dos algoritmos
     status: OPEN_BIBLIOGRAPHIC
-    note: "Floyd e Brent citados sem fonte primaria; a propria atribuicao de tortoise and hare eh disputada"
+    note: "Floyd e Brent seguem sem fonte primaria; nao sao implementados nem citados como resultado"
 
   CD-GAP-017:
-    title: totalizacao sem Classical.choice
+    title: totalizacao sem escolha classica
     status: OPEN_DEFERRED
     note: >
-      seis dos sete criterios confirmados no probe, incluindo a avaliacao
-      de Option.get. O criterio restante — #eval com a prova vinda da
-      completude — exige provar um teorema central, proibido no probe.
-      Decisao no gate de formalizacao. API v1 permanece Option.
+      funcao total NAO formalizada. API garantida da v1 permanece
+      Option CycleWitness. Nenhum valor padrao falso introduzido.
 
   CD-GAP-018:
     title: ordem deterministica dos candidatos
     status: OPEN_DEFERRED
     note: >
-      ordem confirmada por avaliacao: baseIndex crescente, depois period
-      crescente. Autoriza regressao, NAO minimalidade. Ausencia de
-      duplicatas nao sera provada: nao afeta soundness nem completeness.
+      ordem confirmada por catorze teoremas de regressao provados por
+      decide. Ausencia de duplicatas NAO provada, por nao afetar soundness
+      nem completeness.
 
   CD-GAP-019:
-    title: custo de recomputacao de Function.iterate
+    title: custo de recomputacao de iteradas
     status: OPEN_DEFERRED
-    note: >
-      a busca recomputa f^[baseIndex] x e f^[baseIndex + period] x para
-      cada par candidato, sem memoizacao. Principal desvantagem pratica
-      frente a Floyd e a tabela visitada. Limitacao conhecida, nao claim.
+    note: "a busca recomputa as iteradas para cada par candidato; limitacao conhecida, nao claim"

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T00:30:00-03:00
-canonical_commit: "03e1ec36b97233df481597980f0a5383b2decc65"
+updated_at: 2026-08-01T02:10:00-03:00
+canonical_commit: "8458f8af2adf7c8476bc1b853ab93175e1a0a062"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,16 +10,17 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-CYCLE-DETECTION-001"
-work_status: "READY"
+work_status: "VERIFIED"
 evidence_level: "F"
-last_verified_artifact: "found-cycle-detection-001-specification-review-result.json"
+last_verified_artifact: "found-cycle-detection-001-formalization-result.json"
 current_blocker: null
 specification_status: "APPROVED"
+formalization_status: "VERIFIED"
 next_single_action: >
-  Formalizar a enumeração finita de certificados, o detector
-  parcial executável, sua soundness e sua completeness por
-  reutilização de exists_bounded_iterate_collision.
-authorized_action: "FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED"
+  Revisar a API executável, a instância decidível, os testes,
+  a soundness, a completeness e os limites de computabilidade
+  antes de autorizar qualquer otimização ou extração.
+authorized_action: "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -46,6 +47,10 @@ governance_lock_renamed:
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
   - "Não formalizar Floyd, Brent ou tabela visitada — todos DEFERRED"
+  - "Não formalizar a função total detectCycleWitness sem gate próprio — CD-GAP-017"
+  - "Não formalizar detected_cycle_is_component_cycle sem gate próprio — CD-GAP-012"
+  - "Não importar FunctionalGraphs no núcleo de CycleDetection — dependência ociosa"
+  - "Não estender FOUND-CYCLE-DETECTION-001 nem abrir FOUND-CYCLE-DETECTION-002 sem gate próprio"
   - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não acrescentar campos a CycleWitness — entryPoint é derivável e foi rejeitado"
   - "Não usar os nomes superados prefixIndex, entryIndex, tailLength ou cycleEntry — o campo é baseIndex"
@@ -75,7 +80,8 @@ resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/README.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/FINAL_SIGNATURES.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/THEOREM_MAP.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/REVIEW_DECISION.md"
   - "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
   - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"

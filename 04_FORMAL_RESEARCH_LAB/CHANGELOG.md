@@ -1,5 +1,92 @@
 # Changelog do laboratório formal
 
+## FOUND-CYCLE-DETECTION-001-FORMALIZATION - 2026-08-01
+
+### Built
+
+- **O primeiro programa executavel verificado do laboratorio.**
+  `1` estrutura, `3` definicoes, `1` instancia, `8` teoremas, `609`
+  linhas, em `TamesisLab/Foundations/CycleDetection/`.
+- `detectCycleWitness?` devolve `Option CycleWitness` por busca limitada
+  sobre `cycleCandidates (Fintype.card X)`, com `soundness` e
+  `completeness` provadas.
+
+### Layered
+
+```text
+camada 0   cycleCandidates, mem_cycleCandidates_iff   sem Fintype, sem DecidableEq
+camada 1   CycleWitness.Valid                         Fintype, SEM DecidableEq
+camada 2   detectCycleWitness?, _sound, _complete     Fintype e DecidableEq
+camada 3   isPeriodicPt, mem_periodicPts, propagates  SEM DecidableEq
+```
+
+`DecidableEq X` entra em **uma unica definicao** e nao vaza para resultado
+proposicional algum.
+
+### Reused, not reproved
+
+- Os tres teoremas de `Periodicity.lean` tem **uma linha de prova cada**:
+  `periodic_tail_of_collision`, `Function.mk_mem_periodicPts` e
+  `collision_propagates`.
+- A completude eh **transporte** de `exists_bounded_iterate_collision`,
+  cuja conclusao coincide termo a termo com `Valid`.
+- **Casa dos pombos NAO repetida**: contagem `grep` zero em toda a frente.
+  `Function.iterate_add_apply` nao aparece.
+
+### Two frictions
+
+- `List.find?_some` falhou por unificacao de ordem superior — Lean
+  escolhia `@decide (Valid f x w)` como funcao **constante**. Resolvido
+  passando o predicado explicitamente.
+- As auditorias de tokens e imports encontravam as **proprias mencoes
+  documentais** nas docstrings. Movidas para `COMPUTABILITY_RESULT.md`,
+  fora do Lean. As quatro auditorias passaram a **zero**.
+
+### Executed
+
+- Cinco modelos avaliados por `#eval` **e** provados por `decide`, sem
+  `native_decide`: `Fin 1` id, `Bool` id, `Bool` not, `Fin 3` cauda,
+  `Fin 4` cauda e ciclo de dois. **Catorze** teoremas de regressao.
+- Dois exemplos fecham o ciclo entre execucao e prova: soundness aplicada
+  a um resultado obtido por `decide`, e `mem_periodicPts` sobre ele.
+
+### Axioms
+
+- `cycleCandidates` **nao depende de axioma algum** — eh o unico objeto
+  que nao menciona `Fintype`, confirmando a origem da pegada em
+  `Fintype.card` e `Finset.univ`. Os demais listam `propext`,
+  `Classical.choice` e `Quot.sound`. `sorryAx`: **0**.
+- Registro vinculante: **pegada axiomatica nao eh nao-computabilidade**.
+
+### Omitted on purpose
+
+- `detected_cycle_is_component_cycle` **nao** formalizado — adaptador
+  mecanico; dispensa o import de `FunctionalGraphs` (`CD-GAP-012`).
+- Funcao total **nao** formalizada; API garantida permanece
+  `Option CycleWitness`, sem valor padrao falso (`CD-GAP-017`).
+- Floyd, Brent, tabela visitada, minimalidade, complexidade, extracao e
+  integracao: **nada implementado**.
+
+### Validated
+
+- Tres testes isolados `exit 0`; `lake build` **PASS, 8737 jobs** —
+  contra 8727 antes de registrar a frente em
+  `TamesisLab/Foundations.lean` e `TamesisLab.lean`;
+  `pytest` PASS; `labctl validate` PASS. Nenhum teste removido, nenhum
+  modulo anterior alterado.
+
+### Claimed
+
+- Uma claim, a vigesima: `EXECUTABLE-CYCLE-WITNESS-FORMAL-001`,
+  `VERIFIED`, `evidence_level F`, novidade matematica e algoritmica
+  **NONE**.
+
+### Result
+
+- `FOUND_CYCLE_DETECTION_001_FORMALIZATION_VERIFIED`. Dez lacunas
+  resolvidas, sete diferidas, uma bibliografica, uma pronta para auditoria
+  de viabilidade.
+
 ## FOUND-CYCLE-DETECTION-001-SPECIFICATION-REVIEW - 2026-07-31
 
 ### Renamed

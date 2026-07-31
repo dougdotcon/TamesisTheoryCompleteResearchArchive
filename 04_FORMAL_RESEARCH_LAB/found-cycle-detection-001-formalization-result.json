@@ -1,0 +1,237 @@
+{
+  "work_item": "FOUND-CYCLE-DETECTION-001",
+  "gate": "FOUND_CYCLE_DETECTION_001_FORMALIZATION",
+  "authorized_action": "FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED",
+  "executed_at": "2026-08-01T02:10:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "8458f8af2adf7c8476bc1b853ab93175e1a0a062",
+  "canonical_commit_before": "03e1ec36b97233df481597980f0a5383b2decc65",
+  "canonical_commit_after_preflight": "8458f8af2adf7c8476bc1b853ab93175e1a0a062",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "imports": [
+    "Mathlib.Data.Fintype.Card",
+    "Mathlib.Data.List.Range",
+    "Mathlib.Logic.Function.Iterate",
+    "TamesisLab.Foundations.FiniteDynamics.EventualPeriodicity"
+  ],
+  "imports_count": 4,
+  "functional_graphs_imported": false,
+  "functional_graphs_import_reason": "o adaptador de componente foi omitido; importar seria dependencia ociosa",
+  "forbidden_imports": 0,
+
+  "data_model": {
+    "structure": "CycleWitness",
+    "fields": ["baseIndex : Nat", "period : Nat"],
+    "deriving": ["DecidableEq", "Repr", "BEq"],
+    "parameterized_by_X": false,
+    "rejected_fields": ["entryPoint", "prefixIndex", "entryIndex", "tailLength", "cycleEntry", "isMinimal", "lista do ciclo", "provas", "tipo X", "funcao f", "estado x"]
+  },
+  "baseIndex_semantics": "indice-base de uma colisao certificada; NAO afirmado como o menor indice de entrada",
+  "period_semantics": "periodo positivo testemunhado; PODE ser multiplo do periodo minimo; NAO eh Function.minimalPeriod",
+
+  "valid_definition": {
+    "clauses": 4,
+    "order_matches_collision_theorem": true,
+    "hypotheses": ["Fintype X"],
+    "requires_DecidableEq": false,
+    "ValidAt_created": false,
+    "validB_created": false
+  },
+
+  "decidable_valid_instance": {
+    "name": "CycleWitness.decidableValid",
+    "construction": "inferInstanceAs (Decidable (_ ∧ _ ∧ _ ∧ _))",
+    "dependencies": ["Fintype X", "DecidableEq X"],
+    "classical_used": false,
+    "synth_resolves_to_it": true,
+    "necessary": "sim — Valid eh um def e a resolucao de instancias nao o desdobra"
+  },
+
+  "candidate_enumeration": {
+    "definition": "(List.range n).flatMap fun m => (List.range (n - m)).map fun k => <m, k + 1>",
+    "order": "baseIndex crescente; para cada baseIndex, period crescente",
+    "order_changed": false,
+    "cycleCandidates_zero": "[] por rfl, @[simp]",
+    "cycleCandidates_one": "[<0,1>] por rfl, @[simp]",
+    "length_lemmas": 0,
+    "triangular_formula_formalized": false
+  },
+
+  "enumeration_characterization": {
+    "theorem": "mem_cycleCandidates_iff",
+    "hypotheses": [],
+    "no_Fintype": true, "no_DecidableEq": true, "no_Classical": true, "no_f": true, "no_x": true,
+    "route": "rcases, simp only [cycleCandidates, List.mem_flatMap, List.mem_map, List.mem_range, CycleWitness.mk.injEq], constructor, omega",
+    "duplicates_proved": false,
+    "positional_minimality_proved": false
+  },
+
+  "partial_detector": {
+    "signature": "detectCycleWitness? {X} [Fintype X] [DecidableEq X] (f : X -> X) (x : X) : Option CycleWitness",
+    "body": "(cycleCandidates (Fintype.card X)).find? fun w => decide (CycleWitness.Valid f x w)",
+    "computable": true,
+    "marked_noncomputable": false,
+    "classical_choose": false,
+    "periodicOrbit_used": false,
+    "simplegraph_used": false,
+    "second_boolean_function": false
+  },
+
+  "computability": {
+    "verdict": "COMPUTABLE",
+    "eval_models": 5,
+    "criterion": ["nenhuma marca de nao-computabilidade", "#eval funciona", "nenhuma escolha classica construindo dado"],
+    "all_confirmed": true
+  },
+
+  "soundness": {
+    "theorem": "detectCycleWitness?_sound",
+    "route": "unfold; List.find?_some com predicado explicito; of_decide_eq_true",
+    "depends_on_mem_cycleCandidates_iff": false,
+    "reason": "as tres cotas ja pertencem a Valid",
+    "second_equivalent_soundness": false,
+    "issue_encountered": "unificacao de ordem superior escolhia @decide (Valid f x w) como funcao constante; resolvido passando (p := fun v => decide (Valid f x v))"
+  },
+
+  "completeness": {
+    "theorem": "detectCycleWitness?_complete",
+    "route": "exists_bounded_iterate_collision -> CycleWitness <mu, lam> -> mem_cycleCandidates_iff -> decide -> List.find?_isSome -> Option.isSome_iff_exists",
+    "proves_returned_equals_original_witness": false,
+    "classical_choose": false
+  },
+
+  "collision_reuse": "exists_bounded_iterate_collision aplicado diretamente; conclusao coincide termo a termo com Valid",
+  "pigeonhole": {"repeated": false, "grep_hits_in_front": 0, "body_copied": false},
+
+  "decidable_eq_hypothesis": {
+    "present_in": ["detectCycleWitness?", "detectCycleWitness?_sound", "detectCycleWitness?_complete", "CycleWitness.decidableValid"],
+    "absent_from": ["CycleWitness", "cycleCandidates", "mem_cycleCandidates_iff", "CycleWitness.Valid", "CycleWitness.isPeriodicPt", "CycleWitness.mem_periodicPts", "CycleWitness.propagates"]
+  },
+
+  "empty_type": {
+    "Nonempty_added": false,
+    "Inhabited_added": false,
+    "argument": "o detector recebe x : X; nao ha chamada bem tipada em tipo vazio; cycleCandidates 0 = [] nao contradiz a completeness"
+  },
+
+  "periodicity_bridge": "CycleWitness.isPeriodicPt := periodic_tail_of_collision f x h.2.2.2 — uma linha, sem prova nova",
+  "periodicPts_bridge": "CycleWitness.mem_periodicPts := Function.mk_mem_periodicPts h.2.1 (isPeriodicPt h) — sem minimalPeriod",
+  "propagation_bridge": "CycleWitness.propagates := collision_propagates f x h.2.2.2 k — assinatura identica, iterate_add_apply nao aparece",
+
+  "omitted_component_adapter": {
+    "name": "detected_cycle_is_component_cycle",
+    "formalized": false,
+    "reason": "adaptador mecanico; nao necessario a soundness, completeness nem execucao; mantem o nucleo minimo e dispensa o import de FunctionalGraphs",
+    "gap": "CD-GAP-012 OPEN_DEFERRED"
+  },
+  "totalization_status": {
+    "formalized": false,
+    "public_api": "Option CycleWitness",
+    "false_fallback_created": false,
+    "gap": "CD-GAP-017 OPEN_DEFERRED"
+  },
+
+  "execution_tests": {
+    "TEST-001 Fin 1 id": "some <0,1>",
+    "TEST-002 Bool id": "some <0,1> nos dois estados",
+    "TEST-003 Bool not": "some <0,2> nos dois estados",
+    "TEST-004 Fin 3 cauda": "some <2,1> a partir de 0",
+    "TEST-005 Fin 4 cauda e ciclo de dois": "some <2,2> a partir de 0",
+    "TEST-006 demais estados": {"Fin3 de 1": "<1,1>", "Fin3 de 2": "<0,1>", "Fin4 de 1": "<1,2>", "Fin4 de 2": "<0,2>", "Fin4 de 3": "<0,2>"},
+    "regression_theorems_by_decide": 14,
+    "native_decide_used": false,
+    "presented_as_minimality": false,
+    "chained_examples": "detectCycleWitness?_sound aplicado a um resultado obtido por decide, e mem_periodicPts sobre ele"
+  },
+
+  "axioms": {
+    "cycleCandidates": "does not depend on any axioms",
+    "mem_cycleCandidates_iff": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?_sound": "[propext, Classical.choice, Quot.sound]",
+    "detectCycleWitness?_complete": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.isPeriodicPt": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.mem_periodicPts": "[propext, Classical.choice, Quot.sound]",
+    "CycleWitness.propagates": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "note": "a pegada vem de Fintype.card e Finset.univ; cycleCandidates, que nao menciona Fintype, eh o unico sem pegada. Isso NAO significa nao-computabilidade."
+  },
+
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0, "noncomputable": 0, "Classical.choose": 0},
+  "forbidden_tokens_note": "as mencoes documentais foram movidas para COMPUTABILITY_RESULT.md, fora dos arquivos Lean, para permitir contagem zero",
+
+  "counts": {
+    "structures": 1,
+    "definitions": 3,
+    "instances": 1,
+    "theorems": 8,
+    "lean_files_core": 6,
+    "lean_files_aggregator": 1,
+    "lean_files_tests": 3,
+    "lean_lines": 609
+  },
+
+  "lake_build": "PASS, 8737 jobs (era 8727 antes de registrar a frente nos agregadores)",
+  "aggregators_updated": ["TamesisLab/Foundations.lean", "TamesisLab.lean"],
+  "aggregator_defect": "os dois agregadores nao foram atualizados na primeira passagem — o patch abortou por ancora inexistente e a falha passou despercebida em saida truncada; corrigido antes do fecho do gate",
+  "isolated_tests": {
+    "FoundCycleDetection001.lean": "exit 0, 26 s",
+    "FoundCycleDetection001Execution.lean": "exit 0, 2 s",
+    "FoundCycleDetection001Axioms.lean": "exit 0, 2 s"
+  },
+  "tests_removed_to_pass_build": 0,
+  "previous_modules_modified": 0,
+
+  "claim": {
+    "claim_id": "EXECUTABLE-CYCLE-WITNESS-FORMAL-001",
+    "work_status": "VERIFIED",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "ledger_total": 20
+  },
+  "novelty_claims": 0,
+  "physics_claims": 0,
+
+  "gaps": {
+    "resolved": ["CD-GAP-001", "CD-GAP-002", "CD-GAP-003", "CD-GAP-004", "CD-GAP-005", "CD-GAP-006", "CD-GAP-007", "CD-GAP-008", "CD-GAP-011", "CD-GAP-015"],
+    "open_deferred": ["CD-GAP-009", "CD-GAP-010", "CD-GAP-012", "CD-GAP-013", "CD-GAP-017", "CD-GAP-018", "CD-GAP-019"],
+    "open_bibliographic": ["CD-GAP-016"],
+    "ready_for_feasibility_audit": ["CD-GAP-014"],
+    "total": 19,
+    "closed_by_expectation": 0
+  },
+
+  "legacy_files_modified": 0,
+  "rh_nogo_state": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED", "files_touched": 0},
+  "found_semigroup_002_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_functional_graph_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+
+  "governance_deviations": [
+    {
+      "id": "DEC-019",
+      "file": "10_TOOLS/labctl.py",
+      "change": "entrada literal FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_AUTHORIZED acrescentada ao allowlist",
+      "reason": "exigido pelo item 34 do gate",
+      "wildcard": false
+    }
+  ],
+
+  "work_status_final": "VERIFIED",
+  "formalization_status": "VERIFIED",
+  "specification_status": "APPROVED",
+  "authorized_action_final": "FOUND_CYCLE_DETECTION_001_RESULT_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar a API executavel, a instancia decidivel, os testes, a soundness, a completeness e os limites de computabilidade antes de autorizar qualquer otimizacao ou extracao.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "commit_amend_used": true,
+  "commit_amend_reason": "correcao do registro nos agregadores, detectada apos o commit; o gate proibe tanto amend quanto commit corretivo, e o amend preserva a exigencia de exatamente um commit. Nada havia sido publicado.",
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_CYCLE_DETECTION_001_FORMALIZATION_VERIFIED"
+}

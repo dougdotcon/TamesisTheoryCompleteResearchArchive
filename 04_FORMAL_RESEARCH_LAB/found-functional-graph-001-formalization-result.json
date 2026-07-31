@@ -1,0 +1,201 @@
+{
+  "work_item": "FOUND-FUNCTIONAL-GRAPH-001",
+  "gate": "FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION",
+  "authorized_action": "FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED",
+  "executed_at": "2026-07-31T20:10:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "f8ccc0203e27dcb7870fa4f7f63a999038236235",
+  "canonical_commit_before": "90fb4e26da33cebed2ba414ee5aeb663647de149",
+  "canonical_commit_after_preflight": "f8ccc0203e27dcb7870fa4f7f63a999038236235",
+  "ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS"
+  },
+
+  "skills": [
+    "goal (lida como arquivo)", "matematica-pura", "engenharia-software",
+    "linguistica-computacional"
+  ],
+
+  "definitions": {
+    "IterReachable": "∃ n : ℕ, f^[n] x = y",
+    "MutuallyReachable": "IterReachable f x y ∧ IterReachable f y x",
+    "EventuallyMeets": "∃ m n : ℕ, f^[m] x = f^[n] y"
+  },
+  "not_created": ["SameFunctionalComponent", "componentSet", "IsRecurrent", "IsTransient", "IsCyclePoint", "IsTransientPoint"],
+
+  "relation_theorems": [
+    "iterReachable_refl", "iterReachable_trans", "IterReachable.eventuallyMeets",
+    "eventuallyMeets_refl", "eventuallyMeets_symm", "eventuallyMeets_trans",
+    "eventuallyMeets_isRefl", "eventuallyMeets_isSymm", "eventuallyMeets_isTrans"
+  ],
+  "iterReachable_trans_witness": "b + a",
+
+  "eventually_meets_transitivity": {
+    "index_map": "hxy: f^[mx] x = f^[ny] y ; hyz: f^[my] y = f^[nz] z",
+    "case_split": "Nat.le_total ny my",
+    "case_ny_le_my": {"d": "my - ny", "witnesses": "(d + mx, nz)"},
+    "case_my_le_ny": {"d": "ny - my", "witnesses": "(mx, d + nz)"},
+    "iterate_add_apply_orientation": "f^[m + n] x = f^[m] (f^[n] x) — contagem externa a esquerda; instanciado explicitamente",
+    "finiteness_used": false
+  },
+
+  "relational_wrappers": {
+    "created": ["eventuallyMeets_isRefl (Std.Refl)", "eventuallyMeets_isSymm (Std.Symm)", "eventuallyMeets_isTrans (IsTrans)"],
+    "note": "IsRefl e Symmetric estao DEPRECIADOS nesta revisao; usados Std.Refl e Std.Symm. IsTrans nao esta depreciado.",
+    "instances_created": 0,
+    "setoid_created": false
+  },
+
+  "periodic_orbit_theorem": {
+    "name": "periodicOrbit_eq_of_eventuallyMeets",
+    "orientation": "periodicOrbit f p = periodicOrbit f q",
+    "steps": 3,
+    "modular_arithmetic": false,
+    "hypotheses": "somente pertinencia a periodicPts; sem Fintype, sem DecidableEq",
+    "axioms": "[propext, Classical.choice, Quot.sound]"
+  },
+  "optional_inverse": {
+    "name": "eventuallyMeets_of_periodicOrbit_eq",
+    "status": "FORMALIZED",
+    "deferred": false,
+    "steps": 4,
+    "is_dependency_of_main": false
+  },
+
+  "existence_adapter": {
+    "name": "exists_cyclePoint_reachable_with_bound",
+    "derived_from": "TamesisLab.Foundations.FiniteDynamics.exists_eventual_period",
+    "via": "Function.mk_mem_periodicPts",
+    "pigeonhole_reapplied": false,
+    "artificial_pair": false
+  },
+
+  "main_theorem": {
+    "name": "exists_component_cycle_with_entry_bound",
+    "signature": "∀ {X} [Fintype X] (f : X → X) (x : X), ∃ mu < Fintype.card X, f^[mu] x ∈ Function.periodicPts f ∧ ∀ q ∈ Function.periodicPts f, EventuallyMeets f x q → Function.periodicOrbit f (f^[mu] x) = Function.periodicOrbit f q",
+    "composition": [
+      "exists_cyclePoint_reachable_with_bound",
+      "IterReachable.eventuallyMeets",
+      "eventuallyMeets_symm",
+      "eventuallyMeets_trans",
+      "periodicOrbit_eq_of_eventuallyMeets"
+    ],
+    "uses_exists_unique": false,
+    "claims_minimal_mu": false,
+    "claims_minimal_period": false,
+    "claims_unique_representative": false
+  },
+
+  "counterexamples": {
+    "FFG-CE-001": "a→a, b→b — refuta ciclo global unico",
+    "FFG-CE-002": "a→b→c→c — cauda; a_not_periodic na forma forte",
+    "FFG-CE-003": "a↔b — ciclo nao fixo; orbit_eq SEM decide",
+    "FFG-CE-004": "a→c←b, c→c — DECISIVO: EventuallyMeets sem MutuallyReachable",
+    "FFG-CE-005": "reutiliza CE-003 — dois pontos periodicos, uma orbita",
+    "FFG-CE-006": "a0↔a1, b0↔b1 — mesmo periodo minimo, componentes distintos"
+  },
+  "minimal_period_counterexample_status": "FORMALIZED_NOT_DEFERRED",
+  "minimal_period_route": "IsPeriodicPt.minimalPeriod_dvd, minimalPeriod_pos_of_mem_periodicPts, Nat.le_of_dvd, minimalPeriod_eq_one_iff_isFixedPt, omega",
+
+  "imports": [
+    "Mathlib.Logic.Function.Iterate",
+    "Mathlib.Order.Defs.Unbundled",
+    "Mathlib.Dynamics.PeriodicPts.Defs",
+    "Mathlib.Data.Fintype.Card",
+    "Mathlib.Data.Finset.Insert",
+    "Mathlib.Data.Fintype.Defs",
+    "TamesisLab.Foundations.FiniteDynamics.EventualPeriodicity"
+  ],
+  "imports_note": "Mathlib.Tactic.Omega NAO existe nesta revisao (omega eh core); o import sugerido pelo gate foi omitido. Umbrella Mathlib.Tactic nao foi necessario.",
+  "simplegraph_imports": 0,
+  "setoid_imports": 0,
+  "quotient_occurrences": 0,
+
+  "axioms": {
+    "iterReachable_trans": "does not depend on any axioms",
+    "eventuallyMeets_trans": "[propext, Quot.sound]",
+    "periodicOrbit_eq_of_eventuallyMeets": "[propext, Classical.choice, Quot.sound]",
+    "eventuallyMeets_of_periodicOrbit_eq": "[propext, Classical.choice, Quot.sound]",
+    "exists_cyclePoint_reachable_with_bound": "[propext, Classical.choice, Quot.sound]",
+    "exists_component_cycle_with_entry_bound": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0
+  },
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+  "native_decide_uses": 0,
+  "decide_on_periodicOrbit": false,
+
+  "inventory": {
+    "core_lean_files": 5,
+    "total_lean_files_created": 8,
+    "definitions": 8,
+    "private_helpers": 1,
+    "theorems": 44,
+    "structures": 0,
+    "inductives": 5,
+    "instances": 5,
+    "instances_in_core": 0
+  },
+
+  "tests": {
+    "FoundFunctionalGraph001.lean": "exit 0, 27 s",
+    "FoundFunctionalGraph001Counterexamples.lean": "exit 0, 2 s"
+  },
+  "lake_build": "PASS, 8726 jobs, 96 s",
+
+  "effective_hypotheses": {
+    "relations": "nenhuma",
+    "periodicOrbit_equality": "nenhuma finitude",
+    "existence_adapter": "[Fintype X]",
+    "main_theorem": "[Fintype X]",
+    "decidable_eq": "AUSENTE de todos"
+  },
+
+  "failures_during_execution": [
+    "le_total desconhecido sob imports minimos — trocado por Nat.le_total (core)",
+    "Symmetric depreciado em favor de Std.Symm, cujo construtor tem os dois elementos explicitos",
+    "rw nao fechava por rfl em cinco lemas de iteracao — rfl explicito acrescentado"
+  ],
+
+  "claim": {
+    "claim_id": "FUNCTIONAL-GRAPH-COMPONENT-FORMAL-001",
+    "domain": "finite_functional_dynamics",
+    "work_status": "VERIFIED",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE"
+  },
+  "claim_ledger_entries": 19,
+  "novelty_claims": 0,
+  "physics_claims": 0,
+
+  "gaps_resolved": ["FFG-GAP-001", "FFG-GAP-002", "FFG-GAP-003", "FFG-GAP-004", "FFG-GAP-005", "FFG-GAP-008", "FFG-GAP-009", "FFG-GAP-010", "FFG-GAP-011", "FFG-GAP-013", "FFG-GAP-015"],
+  "gaps_open": ["FFG-GAP-006", "FFG-GAP-007", "FFG-GAP-012", "FFG-GAP-014"],
+
+  "legacy_files_modified": 0,
+  "rh_nogo_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED",
+    "files_touched": 0
+  },
+  "found_semigroup_002_state": {
+    "work_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED",
+    "math_files_touched": 0
+  },
+
+  "work_status_final": "VERIFIED",
+  "formalization_status": "VERIFIED",
+  "authorized_action_final": "FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar a API formal, as instancias, os contraexemplos e os limites do resultado antes de autorizar qualquer extensao.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_VERIFIED"
+}

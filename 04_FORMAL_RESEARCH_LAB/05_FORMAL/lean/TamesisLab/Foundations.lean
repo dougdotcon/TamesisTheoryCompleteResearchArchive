@@ -1,6 +1,7 @@
 import TamesisLab.Foundations.Basic
 import TamesisLab.Foundations.Semigroups
 import TamesisLab.Foundations.FiniteDynamics
+import TamesisLab.Foundations.FunctionalGraphs
 
 namespace TamesisLab.Foundations
 

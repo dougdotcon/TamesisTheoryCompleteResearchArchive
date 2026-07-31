@@ -18,6 +18,8 @@ import TamesisLab.Tests.FoundSemigroup001
 import TamesisLab.Tests.FoundSemigroup002
 import TamesisLab.Tests.FoundSemigroup002Counterexamples
 import TamesisLab.Tests.FoundSemigroup002InstanceAudit
+import TamesisLab.Tests.FoundFunctionalGraph001
+import TamesisLab.Tests.FoundFunctionalGraph001Counterexamples
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

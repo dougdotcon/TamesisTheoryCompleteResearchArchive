@@ -1,5 +1,82 @@
 # Changelog do laboratório formal
 
+## FOUND-FUNCTIONAL-GRAPH-001-FORMALIZATION - 2026-07-31
+
+### Added
+
+- Nucleo Lean em
+  `05_FORMAL/lean/TamesisLab/Foundations/FunctionalGraphs/`:
+  `Relations`, `PeriodicOrbits`, `ComponentCycle`, `Counterexamples`,
+  `Audit`, agregador e dois testes isolados.
+  **8 definicoes, 44 teoremas, 5 indutivos, 5 instancias, 0 estruturas.**
+- Teorema principal `exists_component_cycle_with_entry_bound`: toda
+  trajetoria alcanca um ponto periodico antes de `card X` passos, e todos
+  os pontos periodicos do mesmo componente determinam a **mesma orbita
+  periodica**. Prova por composicao de cinco passos.
+- Corolario opcional `eventuallyMeets_of_periodicOrbit_eq`: **formalizado**,
+  nao adiado.
+- Seis contraexemplos `FFG-CE-001..006`, todos em Lean.
+- `THEOREM_MAP.md`, `PROOF_AUDIT.md`, `COUNTEREXAMPLE_AUDIT.md`,
+  `RESULT_BOUNDARY.md`.
+- Claim `FUNCTIONAL-GRAPH-COMPONENT-FORMAL-001` (`F`, VERIFIED,
+  `mathematical_novelty: NONE`). Ledger: **19 claims**.
+
+### Verified
+
+- `lake build` PASS com **8.726 jobs** em 96 s; dois testes isolados exit 0.
+- Tokens proibidos: `sorry=0 admit=0 axiom=0 unsafe=0`.
+- `#print axioms`: `iterReachable_trans` **nao depende de axioma algum**;
+  `eventuallyMeets_trans` usa apenas `propext` e `Quot.sound`; os demais
+  ficam em `propext, Classical.choice, Quot.sound`. Sem `sorryAx`.
+- **Arquitetura por hipoteses confirmada pelas assinaturas**:
+  `eventuallyMeets_trans` e `periodicOrbit_eq_of_eventuallyMeets` **nao**
+  exigem `Fintype X`; `DecidableEq X` **ausente de todos** os teoremas.
+- **Zero instancias no nucleo matematico**; as 5 sao `Fintype` dos
+  contraexemplos. Zero `Setoid`, zero import de `SimpleGraph`, zero
+  `Quotient`.
+- Pigeonhole **nao reaplicado** — consumido em `FOUND-SEMIGROUP-002`.
+- `decide` **nao** usado sobre igualdade de `periodicOrbit`
+  (noncomputavel); `CE003.orbit_eq` sai de
+  `periodicOrbit_apply_iterate_eq`. Zero `native_decide`.
+- Auditoria de whitespace executada **antes** do `git add`; **um unico
+  commit**, sem commit corretivo posterior.
+
+### Corrected
+
+- `le_total` desconhecido sob imports minimos -> `Nat.le_total` (core).
+- `Symmetric` **depreciado** -> `Std.Symm`, cujo construtor tem os dois
+  elementos **explicitos** (`⟨fun _ _ h => …⟩`).
+- `rw` nao fechava por `rfl` em cinco lemas de iteracao: o `rfl` automatico
+  usa transparencia reduzivel e nao desdobra funcoes por casamento de
+  padrao. `rfl` explicito acrescentado.
+- `Mathlib.Tactic.Omega` **nao existe** nesta revisao; o import sugerido
+  pelo gate foi omitido. `omega` eh do core.
+
+### Not deferred
+
+- **`FFG-CE-006` na versao FORTE.** O gate permitia adiar a igualdade dos
+  periodos minimos; nao foi necessario. `minimalPeriod f a0 =
+  minimalPeriod f b0 = 2` provado via `IsPeriodicPt.minimalPeriod_dvd`,
+  `minimalPeriod_pos_of_mem_periodicPts`, `Nat.le_of_dvd`,
+  `minimalPeriod_eq_one_iff_isFixedPt` e `omega`.
+
+### Blocked
+
+- **A unicidade eh da ORBITA**, nao do ponto (`FFG-CE-005` refuta), nao do
+  representante, nao de `mu`, nao do periodo, nao de um ciclo global
+  (`FFG-CE-001` refuta).
+- Diferidos: ponte `SimpleGraph` (`FFG-GAP-012`), arvores (`FFG-GAP-007`),
+  distancia minima (`FFG-GAP-006`), tempo minimo, representante canonico,
+  quociente, classificacao completa.
+- `FFG-GAP-014` permanece `OPEN_BIBLIOGRAPHIC`.
+- `mathematical_novelty: NONE`.
+- `RH-NOGO-001` e os arquivos matematicos de `FOUND-SEMIGROUP-002`:
+  **0 tocados**.
+
+### Result
+
+- `FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_VERIFIED`.
+
 ## FOUND-FUNCTIONAL-GRAPH-001-SPECIFICATION-REVIEW - 2026-07-31
 
 ### Corrected

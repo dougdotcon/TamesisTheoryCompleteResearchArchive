@@ -1,11 +1,11 @@
 work_item_id: FOUND-FUNCTIONAL-GRAPH-001
 title: "Finite Functional Graph Decomposition"
-work_status: READY
+work_status: VERIFIED
 specification_status: APPROVED
 evidence_level: F
-gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW
-artifact_type: FORMAL_SPECIFICATION
-scientific_value: FOUNDATIONAL_SPECIFICATION_ONLY
+gate: FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION
+artifact_type: FORMAL_RESULT
+scientific_value: FOUNDATIONAL_FORMALIZATION_ONLY
 mathematical_novelty: NONE
 research_role: FORMAL_FOUNDATION
 
@@ -126,7 +126,7 @@ resolved_gaps:
   - "FFG-GAP-011: RESOLVED_BY_API_AUDIT_WITH_RESIDUAL"
   - "FFG-GAP-013: RESOLVED_BY_BINDING_DOCUMENT"
 
-next_gate: FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED
+next_gate: FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_AUTHORIZED
 
 note: >
   Especificacao apenas. Nenhuma prova, nenhum arquivo Lean, nenhum build.
@@ -171,3 +171,38 @@ specification_review:
     removed: true
     repository_lean_files_created: 0
     lake_build_executed: false
+
+formalization:
+  status: VERIFIED
+  lean_root: "05_FORMAL/lean/TamesisLab/Foundations/FunctionalGraphs/"
+  theorem_map: "THEOREM_MAP.md"
+  proof_audit: "PROOF_AUDIT.md"
+  counterexample_audit: "COUNTEREXAMPLE_AUDIT.md"
+  result_boundary: "RESULT_BOUNDARY.md"
+  inventory:
+    core_lean_files: 5
+    definitions: 8
+    private_helpers: 1
+    theorems: 44
+    structures: 0
+    inductives: 5
+    instances: 5
+    instances_in_core: 0
+  hypotheses:
+    relations: "nenhuma finitude"
+    periodicOrbit_equality: "nenhuma finitude"
+    existence_and_main: "[Fintype X]"
+    decidable_eq: AUSENTE
+  discipline:
+    pigeonhole_reapplied: false
+    setoid_instances: 0
+    simplegraph_imports: 0
+    native_decide_uses: 0
+    decide_on_periodicOrbit: false
+  verification:
+    lake_build: PASS
+    lake_build_jobs: 8726
+    isolated_tests: "2 PASS"
+    forbidden_tokens: 0
+    axioms: "propext, Classical.choice, Quot.sound; iterReachable_trans sem axioma algum"
+  minimal_period_counterexample: FORMALIZED_NOT_DEFERRED

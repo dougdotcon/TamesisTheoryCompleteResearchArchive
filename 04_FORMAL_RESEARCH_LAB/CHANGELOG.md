@@ -1,5 +1,68 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-RUNTIME-001-SPECIFICATION-REVIEW - 2026-08-01
+
+### Demonstrated
+
+- **O teorema central FECHA.** O probe descartavel compilou com **zero
+  erros**, incluindo `run?_eq_iterate_step`, `step?_eq_some_step`,
+  `detectCycle?_raw_repeat` e os dois teoremas de precedencia de erro.
+  Era essa a condicao de aprovacao do gate.
+- `run?_eq_iterate_step` depende de **`[propext, Quot.sound]`** — sem
+  `Classical.choice`.
+
+### Frozen
+
+Tres detalhes da prova central:
+
+1. **a generalizacao vem do ENUNCIADO**, com `∀ start` depois de `k`;
+   `generalizing` NAO eh usado;
+2. **dois `show` sao obrigatorios** — o primeiro expoe o `bind` escondido
+   pela notacao `do`, o segundo forca a reducao de
+   `Option.bind (some a) f`;
+3. a variante correta eh **`Function.iterate_succ_apply`**, nao a linha.
+
+Precedencia dos erros congelada e **medida**:
+`analyzeT #[1] com start 100 -> transitionDestinationOutOfBounds` — tabela
+invalida **e** inicio invalido, e o erro de **tabela** vence.
+
+Coercoes `Fin`/`Nat` explicitas em todos os enunciados publicos.
+
+### Found
+
+- **As provas de precedencia exigem `show`.** Tres abordagens falham e
+  ficam registradas: `simp [..., Except.bind]`, `split`, e
+  `simp only [...]; simp [hStart]`. Motivo: apos `dif_pos`, a condicao usa
+  `validated` ainda ligado pelo `do`, e o campo projetado eh *defeq* mas
+  nao sintaticamente igual a `raw.next.size`.
+- **Correcao a auditoria anterior**: `Array.getElem?` nao existe como
+  constante (confirmado), mas `getElem?_pos` e
+  `Array.getElem?_eq_getElem` **existem** como lemas; `getElem?_pos` foi
+  o usado.
+- **As duas camadas de validacao e o teorema central nao dependem de
+  `Classical.choice`** — a pegada so entra onde o detector entra.
+
+### Remaining risk
+
+- `analyzeTransitionTable_sound` e `_complete` foram **planejadas**, nao
+  demonstradas no probe. Sao as duas unicas obrigacoes centrais sem
+  evidencia executavel. Mitigacao registrada: trabalhar com a tabela
+  concreta para evitar transporte dependente.
+
+### Not done
+
+- **0** arquivos Lean no repositorio, **0** provas, **0** implementacao
+  permanente, **0** `lake build`, **0** claims (ledger em **20**), **0**
+  legado, **0** matematicos das tres fundacoes. Probe **removido**.
+  Nenhum diretorio renomeado — a duplicacao de prefixo `03_` fica
+  `ACKNOWLEDGED_COSMETIC`.
+
+### Result
+
+- `ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_APPROVED`.
+  Vinte e cinco declaracoes publicas congeladas; 22 lacunas, nenhuma
+  fechada por expectativa.
+
 ## ENG-FINITE-STATE-RUNTIME-001-SPECIFICATION - 2026-08-01
 
 ### Frozen

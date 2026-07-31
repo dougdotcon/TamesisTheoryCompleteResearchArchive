@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T07:20:00-03:00
-canonical_commit: "23fdf957a2ddd63e52551bf2cd071bf290eb0d25"
+updated_at: 2026-08-01T09:10:00-03:00
+canonical_commit: "4d9e2488accc8d6a952e46b1d995c5e47c498a4f"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,15 +11,15 @@ repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
+specification_status: "APPROVED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-runtime-001-specification-result.json"
+last_verified_artifact: "eng-finite-state-runtime-001-specification-review-result.json"
 current_blocker: null
 next_single_action: >
-  Revisar a validade da tabela, a construção da função sobre
-  Fin n, a correspondência entre execução bruta e iteração
-  tipada e a API dinâmica baseada em Except.
-authorized_action: "ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar a validação da tabela e do estado inicial, a função
+  total sobre Fin n, a correspondência de iterações, a aplicação
+  do detector e a API dinâmica baseada em Except.
+authorized_action: "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -66,7 +66,10 @@ governance_rules:
     termina com verificação independente do efeito.
 prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
-  - "Não implementar o adaptador antes de sua especificação ser revista"
+  - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
+  - "Não alterar a semântica de zero passos de run? — run? 0 state = some state"
+  - "Não alterar a precedência dos erros: tabela, depois consulta, depois execução"
+  - "Não renomear 03_ENGINEERING — a duplicação de prefixo é cosmética e reconhecida"
   - "Não desviar das assinaturas congeladas em SPECIFICATION_DECISION.md sem gate próprio"
   - "Não criar RawTransitionTable.stateCount — duplicaria next.size"
   - "Não trocar ValidatedTransitionTable por Subtype nem manter ambos"

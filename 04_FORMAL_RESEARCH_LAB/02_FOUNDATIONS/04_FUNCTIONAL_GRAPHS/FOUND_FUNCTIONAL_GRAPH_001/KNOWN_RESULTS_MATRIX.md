@@ -76,4 +76,3 @@ periódico".
 
 `f^[m + n] x = f^[m] (f^[n] x)` — contagem **externa** à esquerda. As
 testemunhas naturais são `d + mx` e `d + nz`, não `mx + d` e `nz + d`.
-

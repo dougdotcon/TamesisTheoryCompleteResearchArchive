@@ -328,4 +328,3 @@ testemunhas da transitividade          CORRIGIDAS para a forma natural
 Motivo do colapso de `FFG-MAIN-001/002`: o `p` existencial era sempre
 `f^[mu] x`, logo redundante. A forma com `∃ mu : ℕ` elimina a duplicação e
 põe o limite de entrada no enunciado principal.
-

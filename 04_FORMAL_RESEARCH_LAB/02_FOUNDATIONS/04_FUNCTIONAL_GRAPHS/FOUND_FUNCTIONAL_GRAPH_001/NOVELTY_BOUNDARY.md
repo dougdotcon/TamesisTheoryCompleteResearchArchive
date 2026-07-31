@@ -86,4 +86,3 @@ ciclo.
 
 O termo **recorrência** não deve aparecer na API nem nos enunciados desta
 frente. Ele carrega, em dinâmica, significados que este núcleo não prova.
-

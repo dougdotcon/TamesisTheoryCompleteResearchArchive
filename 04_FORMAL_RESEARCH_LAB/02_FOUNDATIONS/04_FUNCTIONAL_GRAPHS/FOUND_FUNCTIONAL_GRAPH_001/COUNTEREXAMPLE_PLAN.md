@@ -192,4 +192,3 @@ segunda. Confundi-las anularia o exemplo.
 
 Os contraexemplos devem falar de **ponto periódico** e **ponto
 transitório**, nunca de "recorrente" — ver `API_NAMING_DECISION.md`.
-

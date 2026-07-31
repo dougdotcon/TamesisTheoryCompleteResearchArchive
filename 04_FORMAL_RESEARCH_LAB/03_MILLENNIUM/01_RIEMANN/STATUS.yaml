@@ -2,20 +2,30 @@ work_item_id: RH-NOGO-001
 work_status: SCOPED
 evidence_level: F
 specification: SPECIFICATION_READY
+primary_source_audit: PARTIALLY_SUFFICIENT
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED
+next_gate: RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
     lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/"
-    theorem_map: "03_MILLENNIUM/01_RIEMANN/ASYM_NOGO_001_THEOREM_MAP.md"
-    proof_audit: "03_MILLENNIUM/01_RIEMANN/ASYM_NOGO_001_PROOF_AUDIT.md"
     scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
+primary_sources:
+  pillar_A_zeros: SUPPORTED
+  pillar_A_source: "VONMANGOLDT-1905 p.19 (formula exata, erro efetivo O(log T), incondicional)"
+  pillar_B_spectral: PARTIALLY_SUPPORTED
+  pillar_B_source: "HORMANDER-1968 eq.(5.3) - lei de Weyl LOCAL da funcao espectral"
+  pillar_B_gap: "a contagem GLOBAL N_P(Lambda) ~ C_P Lambda^(d/m) NAO e enunciada no artigo"
+class_W_directly_supported: ["W4", "W6"]
+class_W_not_supported: ["W7", "W8"]
 current_blocker: >
-  A ponte entre o lema abstrato, Riemann-von Mangoldt e a lei de Weyl ainda
-  depende da leitura e auditoria das fontes primarias (GAP-RH-002,
-  GAP-RH-003). Nenhuma fonte esta CONTENT_AUDITED.
+  A lei de Weyl global (W8) e a discretude do espectro (W7) nao sao
+  sustentadas pela fonte primaria auditada. A cadeia da ponte esta quebrada
+  na etapa E de SOURCE_BRIDGE_REQUIREMENTS.md.
 note: >
-  O no-go completo (Classe W) permanece NAO PROVADO e NAO AUTORIZADO. O
-  subartefato verificado e apenas um lema de analise real.
+  O no-go completo (Classe W) permanece NAO PROVADO e NAO AUTORIZADO.
+  Documentos: SOURCE_MANIFEST.yaml, VON_MANGOLDT_1905_AUDIT.md,
+  HORMANDER_1968_AUDIT.md, RIEMANN_1859_AUDIT.md, BOMBIERI_CLAY_AUDIT.md,
+  CLASS_W_SOURCE_MAPPING.md, SOURCE_BRIDGE_REQUIREMENTS.md,
+  UNRESOLVED_SOURCE_QUESTIONS.md.

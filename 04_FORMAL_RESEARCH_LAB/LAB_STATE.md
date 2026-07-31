@@ -1,63 +1,71 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T06:15:28-03:00
-canonical_commit: "f2d50029db08608f04822f580c9e2d22c20be4b9"
+updated_at: 2026-07-31T06:49:05-03:00
+canonical_commit: "e1183da0f765189635d4d227ca4ffce313a77d18"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
 active_track: "millennium"
 active_work_item: "RH-NOGO-001"
 work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "asym-nogo-001-result.json"
-current_blocker: "A ponte entre o lema abstrato, Riemann–von Mangoldt e a lei de Weyl ainda depende da leitura e auditoria das fontes primárias."
-next_single_action: "Obter e auditar integralmente as fontes primárias necessárias para Riemann–von Mangoldt e para a versão exata da lei de Weyl, sem iniciar a prova do no-go espectral."
-authorized_action: "RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED"
+last_verified_artifact: "primary-source-audit-result.json"
+current_blocker: "A lei de Weyl global (W8) e a discretude do espectro (W7) não são sustentadas pela fonte primária auditada; a cadeia da ponte está quebrada na etapa E."
+next_single_action: "Obter a fonte primária ou monografia necessária para fechar as hipóteses ainda não sustentadas da Classe W, em especial a lei de Weyl global (W8) e a discretude do espectro (W7)."
+authorized_action: "RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED"
 prohibited_actions:
   - "Não executar a prova do no-go completo (RH_NOGO_PROOF_EXECUTION não autorizado)"
+  - "Não escrever a ponte formal entre as leis de contagem e ASYM-NOGO-001"
+  - "Não formalizar Riemann–von Mangoldt nem a lei de Weyl"
   - "Não construir operador espectral algum"
-  - "Não conectar o lema abstrato a Hörmander, von Mangoldt ou à Classe W antes da leitura primária"
   - "Não declarar que Hilbert–Pólya foi refutado"
   - "Não declarar progresso sobre a verdade ou falsidade da Hipótese de Riemann"
-  - "Não usar GUE, zeros ou dados definidos pelos próprios zeros como premissa"
-  - "Não citar preprints não auditados como resultado estabelecido"
+  - "Não citar as monografias candidatas de Q1 antes de obtê-las e lê-las"
+  - "Não tratar traduções ou textos secundários como originais"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "03_MILLENNIUM/01_RIEMANN/README.md"
-  - "03_MILLENNIUM/01_RIEMANN/EPISTEMIC_CORRECTIONS.md"
-  - "03_MILLENNIUM/01_RIEMANN/BIBLIOGRAPHY_AUDIT.md"
+  - "08_REVIEWS/SOURCES/RH_NOGO/SOURCE_MANIFEST.yaml"
+  - "08_REVIEWS/SOURCES/RH_NOGO/CLASS_W_SOURCE_MAPPING.md"
+  - "08_REVIEWS/SOURCES/RH_NOGO/UNRESOLVED_SOURCE_QUESTIONS.md"
   - "03_MILLENNIUM/01_RIEMANN/STOP_CONDITIONS.md"
   - "último relatório em 09_SESSIONS/"
 ---
 
 # Estado atual
 
-O núcleo abstrato `ASYM-NOGO-001` está **formalizado e verificado em Lean**.
-`RH-NOGO-001` permanece `SCOPED`: o no-go espectral completo não foi provado,
-nenhum operador foi construído e nada foi afirmado sobre a verdade ou
-falsidade da Hipótese de Riemann.
+A auditoria de fontes primárias de `RH-NOGO-001` foi executada. As quatro
+fontes obrigatórias foram **obtidas** e preservadas com proveniência e
+`sha256`. O resultado é **`PARTIALLY_SUFFICIENT`**.
 
-## O que foi provado
+## O que a auditoria estabeleceu
 
-```text
-Não existe N : ℝ → ℝ com N(T)/(T log T) → c > 0 e, simultaneamente,
-N(T)/T^α → C > 0 para algum α > 0.
+**Pilar A — contagem dos zeros: SUSTENTADO.** von Mangoldt 1905, p. 19,
+prova incondicionalmente, com termo de erro efetivo de ordem `log T`:
+
+```
+N = (T/2π)·l(T/2π) − T/2π + 7/8 + η·(0,43200 lT + 1,91662 llT + 12,20373)
 ```
 
-Análise real elementar, sem zeta, sem operadores, sem PDE, sem π. Doze
-teoremas rastreáveis em `05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/`;
-mapa em `03_MILLENNIUM/01_RIEMANN/ASYM_NOGO_001_THEOREM_MAP.md`; auditoria
-adversarial e de axiomas em `ASYM_NOGO_001_PROOF_AUDIT.md`.
+para `T > 28,558`, `−1 < η < 1`, contando zeros de `ξ(t)` por parte real,
+**com multiplicidade**, com `T` escolhido fora de zeros.
 
-## O que NÃO foi provado
+**Pilar B — lei de Weyl: PARCIALMENTE SUSTENTADO.** Hörmander 1968 prova a
+assíntota **local** da função espectral na diagonal (eq. 5.3), mas **não
+enuncia** a contagem global `N_P(Λ) ~ C_P Λ^{d/m}`. Busca no texto integral
+por "number of eigenvalues", "counting function", `N(λ)`: nenhuma
+ocorrência.
 
-- a fórmula de Riemann–von Mangoldt;
-- a lei de Weyl;
-- a aplicação dessas fórmulas a uma classe de operadores;
-- `RH-NOGO-001` completo (exclusão da Classe W);
-- inexistência de operador de Hilbert–Pólya;
-- verdade ou falsidade da Hipótese de Riemann.
+## Classe W contra a fonte
+
+| Estado | Hipóteses |
+|---|---|
+| `SUPPORTED_DIRECTLY` | W4 (elipticidade), W6 (positividade) |
+| `PARTIALLY_SUPPORTED` | W1, W2 (só autovalores distintos), W3 |
+| `AMBIGUOUS` | W5 (Friedrichs vs. essencial auto-adjunção) |
+| `NOT_SUPPORTED` | **W7 (espectro discreto)**, **W8 (contagem global)** |
+
+Duas de oito hipóteses diretamente sustentadas; as duas decisivas, não.
 
 ## Work items
 
@@ -66,40 +74,41 @@ adversarial e de axiomas em `ASYM_NOGO_001_PROOF_AUDIT.md`.
 | LAB-ARCH-001 | VERIFIED | governança e labctl |
 | LAB-BENCH-001 | VERIFIED | lab-bench-001-result.json |
 | FOUND-SEMIGROUP-001 | VERIFIED | found-semigroup-001-result.json |
-| RH-NOGO-001 | SCOPED | especificação pronta; subartefato `ASYM-NOGO-001` VERIFIED |
+| RH-NOGO-001 | SCOPED | especificação pronta; `ASYM-NOGO-001` VERIFIED; auditoria de fontes `PARTIALLY_SUFFICIENT` |
 
 ## Frente ativa
 
 `RH-NOGO-001` — `SCOPED`, `NOT_AUTHORIZED`, `NO_EXECUTION`. A única
-autorização vigente é a **auditoria das fontes primárias**
-(`RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED`).
+autorização vigente é **obter fontes adicionais**
+(`RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED`). A especificação da
+ponte **não** foi autorizada, precisamente porque a etapa E da ponte está
+sem fonte.
 
-Motivo do bloqueio: nenhuma das oito referências catalogadas está
-`CONTENT_AUDITED` — ver `03_MILLENNIUM/01_RIEMANN/EPISTEMIC_CORRECTIONS.md`,
-que separa `source_retrieval_status` de `mathematical_claim_status`. O lema
-abstrato não depende de nenhuma delas, mas a **ponte** para as duas leis de
-contagem depende (GAP-RH-002, GAP-RH-003).
+## Estados de leitura (dois eixos)
+
+`CONTENT_AUDITED`: apenas RIEMANN-1859 (tradução Wilkins; o **original
+alemão não foi obtido**).
+`PARTIALLY_AUDITED`: VONMANGOLDT-1905, HORMANDER-1968, BOMBIERI-CLAY.
 
 ## Runtime
 
 Ubuntu 24.04/WSL2; Lean `v4.33.0-rc1`; Mathlib
-`79d0395a1825a6264ad5d269e35e60537518955e`. Detalhes em
-`05_FORMAL/LEAN_ENVIRONMENT.md`.
+`79d0395a1825a6264ad5d269e35e60537518955e`.
 
 ## Próxima ação única
 
-Obter e auditar integralmente as fontes primárias necessárias para
-Riemann–von Mangoldt e para a versão exata da lei de Weyl, sem iniciar a
-prova do no-go espectral.
+Obter a fonte primária ou monografia necessária para fechar as hipóteses
+ainda não sustentadas da Classe W, em especial a lei de Weyl global (W8) e
+a discretude do espectro (W7).
 
 ## Ações proibidas
 
 - executar a prova do no-go completo ou qualquer frente Clay;
+- escrever a ponte formal antes de fechar a etapa E;
+- formalizar Riemann–von Mangoldt ou a lei de Weyl;
 - construir operador espectral;
-- conectar o lema abstrato às leis de contagem antes da leitura primária;
 - declarar refutação de Hilbert–Pólya ou progresso sobre a RH;
-- usar GUE, zeros ou dados definidos pelos próprios zeros como premissa;
-- citar preprints não auditados como resultados estabelecidos;
+- citar as monografias candidatas de Q1 antes de obtê-las e lê-las;
 - alterar arquivos fora de `04_FORMAL_RESEARCH_LAB/`;
 - usar sorry, admit, axioma local ou unsafe.
 
@@ -108,8 +117,8 @@ prova do no-go espectral.
 - 2026-07-31: LAB-WSL-MIGRATION migrou o runtime canônico para WSL2.
 - 2026-07-31: LAB-BENCH-001 verificado.
 - 2026-07-31: FOUND-SEMIGROUP-001 verificado (modelo C3).
-- 2026-07-31: RH-NOGO-001 especificado e catalogado
-  (`RH_NOGO_001_SPECIFICATION_READY`).
-- 2026-07-31: ASYM-NOGO-001 formalizado e verificado
-  (`ASYM_NOGO_001_VERIFIED`); duas correções epistemológicas aplicadas aos
-  artefatos do gate anterior, sem reescrever o relatório de sessão.
+- 2026-07-31: RH-NOGO-001 especificado (`SPECIFICATION_READY`).
+- 2026-07-31: ASYM-NOGO-001 formalizado e verificado em Lean.
+- 2026-07-31: auditoria de fontes primárias executada;
+  `RH_NOGO_PRIMARY_SOURCES_PARTIALLY_SUFFICIENT`. Nenhum teorema novo,
+  nenhuma claim promovida.

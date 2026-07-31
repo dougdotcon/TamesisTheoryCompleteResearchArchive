@@ -1,5 +1,14 @@
 # RH-NOGO-001 — Auditoria bibliográfica
 
+> **Atualização 2026-07-31 (gate RH_NOGO_PRIMARY_SOURCE_AUDIT).** As quatro
+> fontes obrigatórias foram efetivamente **obtidas** e parcialmente lidas.
+> Os estados de leitura abaixo foram substituídos pelos registros de
+> `../../08_REVIEWS/SOURCES/RH_NOGO/SOURCE_MANIFEST.yaml`, que é agora a
+> fonte canônica de proveniência. Auditorias por documento em
+> `VON_MANGOLDT_1905_AUDIT.md`, `HORMANDER_1968_AUDIT.md`,
+> `RIEMANN_1859_AUDIT.md` e `BOMBIERI_CLAY_AUDIT.md` (mesmo diretório).
+> `CONTENT_AUDITED` aplica-se somente à tradução de Riemann.
+
 Método: `PROTOCOLO_AUDITORIA_RIGOROSA_DE_ARTIGOS.md` (raiz do repositório,
 leitura obrigatória). Nenhuma fonte abaixo sustenta mais do que o campo
 `claim_supported` declara. Estados de verificação:

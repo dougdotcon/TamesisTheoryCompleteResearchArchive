@@ -1,5 +1,58 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-001 — auditoria de fontes primárias — 2026-07-31
+
+### Added
+
+- Acervo de fontes em `08_REVIEWS/SOURCES/RH_NOGO/`: quatro PDFs originais
+  não modificados, com proveniência, tamanho e `sha256` em
+  `SOURCE_MANIFEST.yaml`; extrações de texto marcadas como derivadas.
+  Nenhuma OCR usada.
+- Auditorias por documento: `VON_MANGOLDT_1905_AUDIT.md` (12 perguntas
+  respondidas com citação de página), `HORMANDER_1968_AUDIT.md` (17
+  perguntas), `RIEMANN_1859_AUDIT.md`, `BOMBIERI_CLAY_AUDIT.md`.
+- `CLASS_W_SOURCE_MAPPING.md`: matriz W1–W8 contra fonte primária.
+- `SOURCE_BRIDGE_REQUIREMENTS.md`: mapa lógico A–H, sem prova.
+- `UNRESOLVED_SOURCE_QUESTIONS.md`: dez questões abertas.
+
+### Verified
+
+- **Pilar A sustentado.** von Mangoldt 1905 p. 19 prova, para `T > 28,558`,
+  `N = (T/2π)l(T/2π) − T/2π + 7/8 + η(0,43200 lT + 1,91662 llT + 12,20373)`,
+  `−1 < η < 1`. Contagem por parte real de `ξ(t)`, **com multiplicidade**
+  ("jede so oft gezählt, als ihre Ordnungszahl angibt", p. 2), `T` escolhido
+  fora de zeros, método do princípio do argumento — **incondicional**.
+- Riemann 1859 (tradução Wilkins, lida integralmente) apenas esboça e
+  declara faltar prova estrita; Bombieri/Clay confirma
+  ("states, sketching a proof").
+
+### Blocked
+
+- **Pilar B parcialmente sustentado.** Hörmander 1968 prova a lei de Weyl
+  **local** da função espectral (eq. 5.3, p. 215) mas **não enuncia** a
+  contagem global `N_P(Λ) ~ C_P Λ^(d/m)`. Busca no texto integral por
+  "number of eigenvalues" / "counting function" / `N(λ)`: nenhuma
+  ocorrência.
+- Classe W: apenas W4 e W6 `SUPPORTED_DIRECTLY`; W7 e W8 `NOT_SUPPORTED`;
+  W5 `AMBIGUOUS` (Friedrichs vs. essencial auto-adjunção); W2 cobre apenas
+  sistemas com autovalores distintos do símbolo principal.
+- A cadeia da ponte quebra na etapa E de `SOURCE_BRIDGE_REQUIREMENTS.md`.
+
+### Changed
+
+- `authorized_action`: `RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED` →
+  `RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED` (entrada literal única
+  no allowlist). `RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED` **não**
+  foi concedida, por decisão B.
+- `GAP-RH-002` → `AUDITED_INSUFFICIENT`; abertos `GAP-RH-009` a
+  `GAP-RH-012`.
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+- Nenhum teorema Lean escrito, nenhuma claim criada ou promovida.
+
+### Result
+
+- `RH_NOGO_PRIMARY_SOURCES_PARTIALLY_SUFFICIENT`.
+
 ## ASYM-NOGO-001 — 2026-07-31
 
 ### Added

@@ -1,0 +1,124 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "RH_NOGO_PRIMARY_SOURCE_AUDIT",
+  "work_item": "RH-NOGO-001",
+  "executed_at": "2026-07-31T06:49:05-03:00",
+  "commit_before": "e1183da0f765189635d4d227ca4ffce313a77d18",
+  "runtime": {
+    "os": "Ubuntu 24.04 (WSL2)",
+    "repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+    "branch": "lab/wsl-lean-migration"
+  },
+  "skills_used": ["goal", "matematica-pura", "historia-digital", "linguistica-computacional", "engenharia-software"],
+
+  "sources_retrieved": 4,
+  "sources_not_retrieved": 1,
+  "retrieval": [
+    {"source_id": "VONMANGOLDT-1905", "retrieval_status": "RETRIEVED", "location": "GDZ Goettingen LOG_0007", "sha256": "7dd69d353ee6a173cc856131fc1bb07e222e1e2f99b138b4b251d0998d11a5ec", "bytes": 1143986, "pages": 20, "machine_readable_text": false, "reading_status": "PARTIALLY_AUDITED", "pages_read": ["1", "2", "18", "19"], "method": "leitura visual das paginas renderizadas (pdftoppm 170dpi); sem OCR"},
+    {"source_id": "HORMANDER-1968", "retrieval_status": "RETRIEVED", "location": "archive.ymsc.tsinghua.edu.cn (DOI 10.1007/BF02391913)", "sha256": "a633994ce0c78c888636ca4dd5b2c0eab010a98a49427e60b442ef7cb1b35822", "bytes": 1216191, "pages": 26, "machine_readable_text": true, "reading_status": "PARTIALLY_AUDITED", "sections_read": ["1 (pp.193-196)", "5 (pp.214-216)"]},
+    {"source_id": "RIEMANN-1859", "retrieval_status": "RETRIEVED", "location": "claymath.org Wilkins-translation.pdf", "sha256": "6b24341e3406d165baeb7ab1e00cfa0a544d0399e2b33175dfa71480bdddd24f", "bytes": 119504, "pages": 10, "machine_readable_text": true, "reading_status": "CONTENT_AUDITED", "translation_used": true, "note": "TRADUCAO Wilkins 1998; original alemao NAO obtido"},
+    {"source_id": "BOMBIERI-CLAY", "retrieval_status": "RETRIEVED", "location": "claymath.org riemann.pdf", "sha256": "1454b2909f99271726ffb68b056aef45b7d3e6893a66282cad596339d69bafa9", "bytes": 159267, "pages": 11, "machine_readable_text": true, "reading_status": "PARTIALLY_AUDITED", "sections_read": ["I (o problema)", "inicio da II"]},
+    {"source_id": "RIEMANN-1859-ORIGINAL", "retrieval_status": "NOT_RETRIEVED", "note": "original alemao (Monatsberichte 1859) nao obtido nesta sessao"}
+  ],
+  "retrieval_failures": [
+    {"target": "eudml.org/doc/158173", "http": 403, "resolution": "texto integral obtido pelo GDZ"}
+  ],
+
+  "von_mangoldt_findings": {
+    "counting_function": "N = numero de zeros de xi(t) cujas PARTES REAIS estao entre 0 e T",
+    "multiplicities_included": true,
+    "multiplicity_quote": "jede so oft gezaehlt, als ihre Ordnungszahl angibt (p.2)",
+    "boundary_convention": "T escolhido de modo que a reta vertical por T nao passe por zero algum (p.2)",
+    "asymptotic_variable": "T, com T > 28.558",
+    "exact_formula": "N = (T/2pi)l(T/2pi) - T/2pi + 7/8 + eta*(0,43200 lT + 1,91662 llT + 12,20373), -1 < eta < 1 (p.19)",
+    "error_term": "efetivo, ordem log T",
+    "depends_on_RH": false,
+    "method": "principio do argumento sobre contorno retangular com a > 1/2 arbitrario",
+    "notation_translation_required": true,
+    "notation_note": "parte real de t <-> ordenada Im(rho); na Fig.1 da p.2 o zero e escrito beta+i*gamma no plano t, invertendo a convencao moderna",
+    "consistency_check": "12,20373 + 7/8 = 13,07873, conciliando p.19 com p.1",
+    "verdict": "PILAR A SUSTENTADO"
+  },
+
+  "hormander_findings": {
+    "operator_class": "operador diferencial eliptico com coeficientes C-infinito em variedade paracompacta Omega",
+    "differential_or_pseudodifferential": "ambos; Secao 4 pseudodiferencial de ordem 1, Secao 5 diferencial de ordem m via A = P^(1/m)",
+    "order": "m fixa; simbolo principal e polinomio homogeneo REAL de grau m",
+    "ellipticity": "padrao, implicita na finitude de int_{B_x} d(xi)",
+    "self_adjointness": "extensao de Friedrichs escolhida - 'at least one self-adjoint extension'; NAO auto-adjuncao essencial",
+    "positivity": "formalmente positivo com cota inferior positiva c > 0",
+    "compactness": "NAO por hipotese; Omega paracompacta. Compacidade usada como conveniencia de prova (pp.196, 214)",
+    "boundary": "nenhuma condicao de bordo",
+    "scalar_or_bundles": "escalar no corpo; sistemas apenas com autovalores DISTINTOS do simbolo principal (p.216); multiplicidade: 'no information beyond' Agmon-Kannai",
+    "spectral_function": "e(x,y,lambda), nucleo de E_lambda, em C-infinito(Omega x Omega)",
+    "local_asymptotic": "|e(x,x,lambda) - (2pi)^(-n) int_{p(x,xi)<lambda} d(xi)| <= C(1+|lambda|)^((n-1)/m), eq.(5.3) p.215",
+    "global_counting_law_present": false,
+    "global_counting_evidence": "busca no texto integral por 'number of eigenvalues', 'counting function', N(lambda): nenhuma ocorrencia",
+    "power": "Lambda^(n/m) local; resto Lambda^((n-1)/m)",
+    "principal_constant": "(2pi)^(-n) vol(B_x) LOCAL; a constante global C_P nao e escrita no artigo",
+    "error_term": "C(1+|lambda|)^((n-1)/m), otimo em geral (contraexemplo de Avakumovic, Secao 6)",
+    "covers_class_W": false,
+    "verdict": "PILAR B PARCIALMENTE SUSTENTADO - lei LOCAL sim, contagem GLOBAL nao"
+  },
+
+  "class_W_mapping": {
+    "SUPPORTED_DIRECTLY": ["W4 elipticidade", "W6 positividade"],
+    "PARTIALLY_SUPPORTED": ["W1 variedade compacta fechada", "W2 fibrados (so autovalores distintos)", "W3 ordem fixa (paridade de m nao declarada)"],
+    "AMBIGUOUS": ["W5 auto-adjuncao (Friedrichs vs essencial)"],
+    "NOT_SUPPORTED": ["W7 espectro discreto", "W8 lei de Weyl global"],
+    "summary": "2 de 8 hipoteses diretamente sustentadas; as duas decisivas (W7, W8) nao estao"
+  },
+
+  "bridge_status": {
+    "A_definicao_N_zeta": "PROVED_IN_SOURCE",
+    "B_formula_riemann_von_mangoldt": "PROVED_IN_SOURCE",
+    "C_deducao_limite_zeros": "ELEMENTARY_COROLLARY + REQUIRES_FORMALIZATION",
+    "D_definicao_N_P": "REQUIRES_ADDITIONAL_SOURCE",
+    "E_lei_de_weyl_classe_exata": "REQUIRES_ADDITIONAL_SOURCE",
+    "F_deducao_limite_espectral": "UNRESOLVED",
+    "G_hipotese_de_igualdade": "REQUIRES_FORMALIZATION",
+    "H_aplicacao_ASYM_NOGO_001": "REQUIRES_FORMALIZATION",
+    "broken_at": "E"
+  },
+
+  "unresolved_questions": ["Q1 lei de Weyl global (bloqueante)", "Q2 discretude do espectro", "Q3 fibrados/sistemas", "Q4 formulacao da auto-adjuncao", "Q5 paridade de m", "Q6 convencao de fronteira", "Q7 zeros baixos em von Mangoldt", "Q8 original alemao de Riemann", "Q9 EuDML 403", "Q10 leitura integral pendente"],
+
+  "epistemic_axes": {
+    "source_retrieval_status": {
+      "CONTENT_AUDITED": ["RIEMANN-1859 (traducao Wilkins)"],
+      "PARTIALLY_AUDITED": ["VONMANGOLDT-1905", "HORMANDER-1968", "BOMBIERI-CLAY"],
+      "LISTING_CONFIRMED": [],
+      "RETRIEVAL_FAILED": ["RIEMANN-1859-ORIGINAL"]
+    },
+    "mathematical_claim_status": {
+      "ESTABLISHED": ["contagem de Riemann-von Mangoldt (VONMANGOLDT-1905 p.19)", "lei de Weyl LOCAL da funcao espectral (HORMANDER-1968 eq.5.3)"],
+      "CONDITIONAL": ["lei de Weyl GLOBAL para a Classe W - requer fonte adicional"],
+      "PROPOSED": ["RH-NOGO-001 (exclusao da Classe W)"],
+      "VERIFIED": ["ASYM-NOGO-001 (gate anterior, Lean)"],
+      "REJECTED": ["qualquer preprint de suposta prova da RH como autoridade"]
+    }
+  },
+
+  "lean_theorems_written": 0,
+  "formalizations_executed": 0,
+  "asym_nogo_001_applied": false,
+  "operators_constructed": 0,
+  "rh_claims_promoted": 0,
+  "scientific_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "RH-NOGO-001": {
+    "work_status": "SCOPED",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "proof_execution_authorized": false
+  },
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED",
+  "next_single_action": "Obter a fonte primaria ou monografia necessaria para fechar as hipoteses ainda nao sustentadas da Classe W, em especial a lei de Weyl global (W8) e a discretude do espectro (W7).",
+  "allowlist_additions": ["RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED"],
+  "allowlist_not_added": ["RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED", "RH_NOGO_PROOF_EXECUTION", "RH_NOGO_OPERATOR_CLASS_PROOF_AUTHORIZED", "RH_PROOF_AUTHORIZED", "RIEMANN_PROOF_AUTHORIZED"],
+
+  "final_status": "RH_NOGO_PRIMARY_SOURCES_PARTIALLY_SUFFICIENT"
+}

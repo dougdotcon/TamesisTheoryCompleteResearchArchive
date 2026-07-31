@@ -17,8 +17,13 @@ gaps:
       diferencial vs pseudodiferencial, forma do resto) antes do gate de
       prova do resultado completo.
     severity: high
-    status: OPEN
-    blocking: "bloqueia o gate de prova do resultado completo; NÃO bloqueia a formalização do núcleo abstrato"
+    status: AUDITED_INSUFFICIENT
+    blocking: "bloqueia o gate de prova do resultado completo; NÃO bloqueia o núcleo abstrato, já verificado"
+    audit_finding: >
+      Hörmander 1968 foi obtido e auditado (HORMANDER_1968_AUDIT.md). O
+      artigo prova a lei de Weyl LOCAL da função espectral na diagonal
+      (eq. 5.3), mas NÃO enuncia a contagem global N_P(Λ) ~ C_P Λ^(d/m).
+      É necessária fonte adicional. Ver UNRESOLVED_SOURCE_QUESTIONS.md Q1.
   - gap_id: GAP-RH-003
     description: >
       Tradução da contagem espectral para o sublema abstrato: definir em
@@ -65,6 +70,41 @@ gaps:
       exaustiva. O resultado NÃO deve ser apresentado como novo em
       matemática.
     severity: medium
+    status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-009
+    description: >
+      Fibrados vetoriais (W2): Hörmander 1968 p.216 cobre sistemas apenas
+      com autovalores DISTINTOS do símbolo principal; para multiplicidade,
+      "no information beyond" Agmon-Kannai. A Classe W declara fibrados
+      hermitianos gerais.
+    severity: high
+    status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-010
+    description: >
+      Auto-adjunção (W5): a Classe W exige essencial auto-adjunção;
+      Hörmander toma UMA extensão de Friedrichs ("at least one self-adjoint
+      extension"). Como o espectro depende da extensão, o enunciado precisa
+      dizer qual.
+    severity: medium
+    status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-011
+    description: >
+      Paridade da ordem m (W3): elipticidade mais positividade com símbolo
+      principal real forçam m par para d >= 2. OPERATOR_CLASS.md admite
+      m >= 1 qualquer, tornando a classe vazia para m ímpar. Defeito de
+      formulação, não de resultado.
+    severity: low
+    status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-012
+    description: >
+      Discretude do espectro (W7): não provada nem enunciada em Hörmander
+      1968. Consequência padrão de elipticidade mais compacidade, mas
+      requer fonte.
+    severity: high
     status: OPEN
     blocking: false
   - gap_id: GAP-RH-008

@@ -238,6 +238,7 @@ def validate() -> dict[str, Any]:
         "RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
         "RH_NOGO_PRIMARY_SOURCE_AUDIT_AUTHORIZED",
+        "RH_NOGO_ADDITIONAL_SOURCE_RETRIEVAL_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

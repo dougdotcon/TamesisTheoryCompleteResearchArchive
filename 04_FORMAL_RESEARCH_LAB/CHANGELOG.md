@@ -1,5 +1,79 @@
 # Changelog do laboratório formal
 
+## FOUND-CYCLE-DETECTION-001-SPECIFICATION-REVIEW - 2026-07-31
+
+### Renamed
+
+- **`prefixIndex` -> `baseIndex`**, 40 ocorrencias em 8 documentos.
+  `baseIndex` eh o **indice-base da igualdade**
+  `f^[baseIndex + period] x = f^[baseIndex] x`, e nao o menor indice de
+  entrada. Nomes proibidos: `prefixIndex`, `entryIndex`, `tailLength`,
+  `cycleEntry`.
+- **Registros historicos NAO foram reescritos.** O JSON do gate anterior,
+  sua sessao e o changelog preservam `prefixIndex`; a decisao esta
+  marcada como **superada** em `DATA_MODEL.md` e na tabela de
+  renomeacoes. A governanca viva foi atualizada.
+
+### Measured
+
+- Probe descartavel em `/tmp`, 28 s, **zero erros**, removido ao final.
+- **Os cinco casos obrigatorios bateram**: `Fin 1` id -> `<0,1>`;
+  `Bool` id -> `<0,1>`; `Bool` not -> `<0,2>`; `Fin 3` cauda -> `<2,1>`;
+  `Fin 4` cauda e ciclo de dois -> `<2,2>`. Nenhuma funcao e nenhuma
+  ordem foi alterada para satisfazer expectativa.
+- Enumeracao: `cycleCandidates 0 = []` e `1 = [<0,1>]` por `rfl`;
+  comprimentos 6, 10 e 15 para n = 3, 4 e 5; fronteira de soma medida por
+  filtro.
+
+### Findings
+
+- **A instancia `Decidable` precisa ser DECLARADA.** `Valid` eh um `def`
+  e a resolucao de instancias nao o desdobra; sem
+  `CycleWitness.decidableValid` o `decide` nao elabora. Ausente da
+  especificacao inicial; acrescentada as assinaturas congeladas.
+- **Pegada axiomatica NAO eh noncomputabilidade.**
+  `detectCycleWitness?` carrega `[propext, Classical.choice, Quot.sound]`
+  — origem localizada em `Fintype.card` e `Finset.univ`. `cycleCandidates`,
+  `List.range`, `find?` e `Nat.iterate` nao dependem de axioma algum.
+  Criterio reformulado: nao `noncomputable`, `#eval` funciona, nenhum
+  `Classical.choose` produzindo dado. Os tres confirmados.
+- **`ValidAt` nao resolveria** a pegada: o detector calcula
+  `Fintype.card X` de qualquer modo. Permanece `DEFERRED`.
+- `propagates` **alinhada** a ordem de argumentos de
+  `collision_propagates`: hipotese primeiro, `k` depois.
+- Rota unica de completude: `List.find?_isSome` + `Option.isSome_iff_exists`.
+
+### Frozen
+
+- `CycleWitness` com dois naturais; `Valid`; `cycleCandidates`;
+  `mem_cycleCandidates_iff`; `detectCycleWitness?`; soundness;
+  completeness; as tres pontes proposicionais. Doze assinaturas publicas
+  mais uma instancia.
+- `total_wrapper: DEFERRED`, `OPTIONAL_CORE_PENDING_EXECUTION_TEST`. Seis
+  dos sete criterios confirmados; o setimo exigiria provar a completude no
+  probe. API v1 permanece `Option`. `getD` com certificado falso
+  **proibido**.
+
+### Not done
+
+- **0** arquivos Lean no repositorio, **0** provas, **0** implementacao
+  permanente, **0** `lake build`, **0** claims (ledger em **19**), **0**
+  legado, **0** de `RH-NOGO-001`, **0** matematicos das duas fundacoes
+  encerradas. Probe **removido**.
+
+### Changed
+
+- `canonical_commit`: `ab79032` -> `03e1ec3`.
+- `specification_status` -> `APPROVED`.
+- `authorized_action` -> `FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED`
+  (`DEC-018`, uma entrada literal, sem wildcard).
+
+### Result
+
+- `FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_APPROVED`. Dezenove
+  lacunas reclassificadas: 6 resolvidas, 5 prontas para formalizacao, 1
+  para auditoria de viabilidade, 6 diferidas, 1 bibliografica.
+
 ## FOUND-CYCLE-DETECTION-001-SPECIFICATION - 2026-07-31
 
 ### Frozen

@@ -28,7 +28,7 @@ Assinaturas candidatas:
 
 ```lean
 structure CycleWitness where
-  prefixIndex : ℕ
+  baseIndex : ℕ
   period : ℕ
 
 def CycleWitness.Valid {X : Type*} [Fintype X]
@@ -38,7 +38,7 @@ def cycleCandidates (n : ℕ) : List CycleWitness
 
 theorem mem_cycleCandidates_iff {n : ℕ} {w : CycleWitness} :
     w ∈ cycleCandidates n ↔
-      w.prefixIndex < n ∧ 0 < w.period ∧ w.prefixIndex + w.period ≤ n
+      w.baseIndex < n ∧ 0 < w.period ∧ w.baseIndex + w.period ≤ n
 
 def detectCycleWitness? {X : Type*} [Fintype X] [DecidableEq X]
     (f : X → X) (x : X) : Option CycleWitness
@@ -54,16 +54,16 @@ theorem detectCycleWitness?_complete {X : Type*} [Fintype X] [DecidableEq X]
 
 theorem CycleWitness.isPeriodicPt {X : Type*} [Fintype X]
     {f : X → X} {x : X} {w : CycleWitness} (h : CycleWitness.Valid f x w) :
-    Function.IsPeriodicPt f w.period (f^[w.prefixIndex] x)
+    Function.IsPeriodicPt f w.period (f^[w.baseIndex] x)
 
 theorem CycleWitness.mem_periodicPts {X : Type*} [Fintype X]
     {f : X → X} {x : X} {w : CycleWitness} (h : CycleWitness.Valid f x w) :
-    f^[w.prefixIndex] x ∈ Function.periodicPts f
+    f^[w.baseIndex] x ∈ Function.periodicPts f
 
 theorem CycleWitness.propagates {X : Type*} [Fintype X]
     {f : X → X} {x : X} {w : CycleWitness} (h : CycleWitness.Valid f x w) :
     ∀ k : ℕ,
-      f^[w.prefixIndex + k + w.period] x = f^[w.prefixIndex + k] x
+      f^[w.baseIndex + k + w.period] x = f^[w.baseIndex + k] x
 ```
 
 Nota sobre os binders de `isPeriodicPt`, `mem_periodicPts` e `propagates`:
@@ -92,7 +92,7 @@ theorem detected_cycle_is_component_cycle {X : Type*} [Fintype X]
     {f : X → X} {x : X} {w : CycleWitness} (h : CycleWitness.Valid f x w) :
     ∀ q ∈ Function.periodicPts f,
       EventuallyMeets f x q →
-        Function.periodicOrbit f (f^[w.prefixIndex] x) =
+        Function.periodicOrbit f (f^[w.baseIndex] x) =
           Function.periodicOrbit f q
 ```
 
@@ -102,7 +102,7 @@ puramente proposicional e independe dela.
 ## `DEFERRED`
 
 ```text
-minimalidade de prefixIndex;
+minimalidade de baseIndex;
 minimalidade de period;
 Floyd;
 Brent;

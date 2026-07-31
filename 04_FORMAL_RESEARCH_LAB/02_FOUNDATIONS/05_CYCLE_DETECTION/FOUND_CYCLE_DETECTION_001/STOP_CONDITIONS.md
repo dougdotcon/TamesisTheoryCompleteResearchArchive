@@ -11,7 +11,8 @@ Decisão `NEEDS_REFINEMENT` se qualquer uma ocorrer:
 1.  Floyd permanecer obrigatorio na primeira versao;
 2.  o detector usar periodicOrbit como dado computavel;
 3.  a estrutura armazenar entryPoint redundantemente sem razao;
-4.  prefixIndex ser chamado de minimo sem prova;
+4.  baseIndex ser chamado de minimo sem prova, ou prefixIndex
+    reaparecer na API;
 5.  period ser chamado de minimalPeriod sem prova;
 6.  a terminacao depender de uma busca nao limitada;
 7.  o algoritmo usar Classical.choose;
@@ -33,7 +34,7 @@ Decisão `NEEDS_REFINEMENT` se qualquer uma ocorrer:
 | 1 | **não ocorre** — Floyd é `DEFERRED_OPTIMIZATION` |
 | 2 | **não ocorre** — `periodicOrbit` só aparece em enunciado proposicional |
 | 3 | **não ocorre** — `entryPoint` foi rejeitado do modelo de dados |
-| 4 | **não ocorre** — o nome `entryIndex` foi proibido; `prefixIndex` é "índice-base de colisão certificada" |
+| 4 | **não ocorre** — o nome `entryIndex` foi proibido; `baseIndex` é "índice-base de colisão certificada" |
 | 5 | **não ocorre** — `period` é "período positivo testemunhado"; `minimalPeriod` marcado `NOT_NEEDED` |
 | 6 | **não ocorre** — busca sobre `cycleCandidates (card X)`, lista finita |
 | 7 | **não ocorre** — `Classical.choose` proibido explicitamente |

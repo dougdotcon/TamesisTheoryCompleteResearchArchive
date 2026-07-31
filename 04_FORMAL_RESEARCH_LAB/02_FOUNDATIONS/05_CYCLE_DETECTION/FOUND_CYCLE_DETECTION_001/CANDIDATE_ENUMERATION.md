@@ -17,16 +17,16 @@ Sem hipótese alguma sobre `X` — a função nem menciona `X`.
 ## Domínio
 
 ```text
-prefixIndex < n
+baseIndex < n
 0 < period
-prefixIndex + period <= n
+baseIndex + period <= n
 ```
 
 ## Ordem
 
 ```text
-prefixIndex crescente;
-para cada prefixIndex, period crescente.
+baseIndex crescente;
+para cada baseIndex, period crescente.
 ```
 
 A ordem é determinística e serve a **testes de regressão**. Ela **não** é
@@ -87,9 +87,9 @@ hipótese `Nonempty` é necessária, exatamente como em
 ```lean
 theorem mem_cycleCandidates_iff {n : ℕ} {w : CycleWitness} :
     w ∈ cycleCandidates n ↔
-      w.prefixIndex < n ∧
+      w.baseIndex < n ∧
       0 < w.period ∧
-      w.prefixIndex + w.period ≤ n
+      w.baseIndex + w.period ≤ n
 ```
 
 Enunciado para `n` arbitrário, **sem** `Fintype` e **sem** `DecidableEq`.

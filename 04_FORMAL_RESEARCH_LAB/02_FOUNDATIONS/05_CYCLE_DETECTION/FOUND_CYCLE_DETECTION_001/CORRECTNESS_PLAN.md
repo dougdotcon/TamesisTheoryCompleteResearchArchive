@@ -45,8 +45,8 @@ O gate sugeriu que a prova dependesse de três coisas: correção de
 `List.find?`, correção do predicado executável e `mem_cycleCandidates_iff`.
 
 Auditoria: **`mem_cycleCandidates_iff` não é necessária para a
-soundness.** As três cotas (`prefixIndex < card X`, `0 < period`,
-`prefixIndex + period ≤ card X`) estão **dentro** de `Valid`, e portanto
+soundness.** As três cotas (`baseIndex < card X`, `0 < period`,
+`baseIndex + period ≤ card X`) estão **dentro** de `Valid`, e portanto
 são entregues pelo próprio predicado decidido, sem consultar a lista.
 
 Isso é uma **fortificação**, não uma lacuna: a soundness fica independente
@@ -65,7 +65,7 @@ venha a ser necessária por outro motivo; não é usada no plano atual.
 
 ```text
 NAO afirma que w eh o unico certificado;
-NAO afirma que w.prefixIndex eh minimo;
+NAO afirma que w.baseIndex eh minimo;
 NAO afirma que w.period eh minimo;
 NAO afirma nada sobre a ordem da enumeracao.
 ```

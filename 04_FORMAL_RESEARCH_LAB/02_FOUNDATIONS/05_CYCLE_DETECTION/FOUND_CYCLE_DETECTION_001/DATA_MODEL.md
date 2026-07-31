@@ -9,7 +9,7 @@ structure_frozen: true
 
 ```lean
 structure CycleWitness where
-  prefixIndex : ℕ
+  baseIndex : ℕ
   period : ℕ
 ```
 
@@ -19,7 +19,7 @@ Dois naturais. **Nada mais.**
 
 | Campo | Decisão | Motivo |
 |---|---|---|
-| `entryPoint : X` | **rejeitado** | derivável por `f^[w.prefixIndex] x₀`; armazená-lo cria estado redundante e força a estrutura a depender de `X` |
+| `entryPoint : X` | **rejeitado** | derivável por `f^[w.baseIndex] x₀`; armazená-lo cria estado redundante e força a estrutura a depender de `X` |
 | provas dentro da estrutura | **rejeitado** | tornaria a estrutura dependente de `f` e de `x₀`, e misturaria dado com evidência |
 | `isMinimal : Bool` | **rejeitado** | minimalidade não está autorizada |
 | `cycle : List X` | **rejeitado** | lista ordenada do ciclo está diferida |
@@ -31,13 +31,28 @@ vêm de graça.
 ## Semântica dos campos — vinculante
 
 ```text
-prefixIndex eh o indice-base de uma colisao certificada.
+baseIndex eh o indice-base de uma colisao certificada.
 ```
 
-**Não** se afirma que `prefixIndex` é o menor índice de entrada no ciclo. O
-nome `entryIndex` **não deve ser usado** enquanto a minimalidade não
-estiver formalizada — ele carrega a conotação de "o ponto onde a cauda
-termina", que é precisamente o que não foi provado.
+**Não** se afirma que `baseIndex` é o menor índice de entrada no ciclo.
+Nomes públicos **proibidos** enquanto a minimalidade não estiver
+formalizada:
+
+```text
+prefixIndex   superado — sugeria "comprimento do prefixo"
+entryIndex    proibido  — sugere o ponto onde a cauda termina
+tailLength    proibido  — afirma minimalidade diretamente
+cycleEntry    proibido  — idem
+```
+
+`baseIndex` é o **índice-base da igualdade**
+`f^[baseIndex + period] x = f^[baseIndex] x`, e nada além disso.
+
+> **Decisão superada.** A especificação inicial usava `prefixIndex`. O
+> gate de revisão substituiu o nome por `baseIndex`, porque `prefix`
+> ainda podia ser lido como "o prefixo antes do ciclo", isto é, como
+> minimalidade. O registro histórico permanece nos artefatos daquele
+> gate, que **não** foram reescritos.
 
 ```text
 period significa periodo positivo testemunhado,
@@ -57,11 +72,11 @@ def CycleWitness.Valid
     (f : X → X)
     (x : X)
     (w : CycleWitness) : Prop :=
-  w.prefixIndex < Fintype.card X ∧
+  w.baseIndex < Fintype.card X ∧
   0 < w.period ∧
-  w.prefixIndex + w.period ≤ Fintype.card X ∧
-  f^[w.prefixIndex + w.period] x =
-    f^[w.prefixIndex] x
+  w.baseIndex + w.period ≤ Fintype.card X ∧
+  f^[w.baseIndex + w.period] x =
+    f^[w.baseIndex] x
 ```
 
 ## Auditoria: `Fintype.card X` dentro de `Valid` ou como parâmetro?

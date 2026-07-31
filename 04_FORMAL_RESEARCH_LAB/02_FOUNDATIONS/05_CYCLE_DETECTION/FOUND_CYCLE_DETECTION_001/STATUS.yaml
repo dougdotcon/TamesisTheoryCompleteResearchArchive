@@ -3,13 +3,14 @@ work_item_id: FOUND-CYCLE-DETECTION-001
 title: "Executable Cycle Detection for Finite Deterministic Systems"
 track: foundations
 work_status: READY
-specification_status: READY_FOR_REVIEW
+specification_status: APPROVED
 formalization_status: NOT_STARTED
 result_review: NOT_STARTED
 extension_status: NOT_AUTHORIZED
 
 updated_at: 2026-07-31
 specified_at_commit: ab79032062cddf195671208058820993cfaabe76
+reviewed_at_commit: 03e1ec36b97233df481597980f0a5383b2decc65
 
 primary_algorithm: BOUNDED_CERTIFICATE_SEARCH
 algorithm_frozen: true
@@ -20,6 +21,9 @@ deferred_algorithm: BRENT
 data_structure: CycleWitness
 data_structure_fields: 2
 data_structure_frozen: true
+field_names: [baseIndex, period]
+field_name_superseded: prefixIndex
+forbidden_field_names: [prefixIndex, entryIndex, tailLength, cycleEntry]
 rejected_fields:
   - entryPoint
   - provas embutidas
@@ -31,6 +35,7 @@ bool_predicate_status: NOT_NEEDED
 partial_detector: detectCycleWitness?
 public_api_v1_shape: Option
 total_wrapper_status: DEFERRED
+total_wrapper_classification: OPTIONAL_CORE_PENDING_EXECUTION_TEST
 total_wrapper_reason: >
   a condicao "#eval funcionar em tipos concretos" so pode ser verificada
   implementando o detector, o que o gate de especificacao proibe
@@ -64,8 +69,11 @@ theorems_core: 10
 theorems_optional_core: 3
 tests_planned: 7
 gaps_total: 19
-gaps_resolved_by_design: 7
-gaps_open: 12
+gaps_resolved: 6
+gaps_ready_for_formalization: 5
+gaps_ready_for_feasibility_audit: 1
+gaps_open_deferred: 6
+gaps_open_bibliographic: 1
 
 mathematical_novelty: NONE
 algorithmic_novelty: NONE
@@ -81,4 +89,7 @@ claims_created: 0
 
 specification_root: "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/"
 decision_document: "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/SPECIFICATION_DECISION.md"
-authorized_action: FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED
+decidable_instance_required: CycleWitness.decidableValid
+probe_models_evaluated: 5
+probe_removed: true
+authorized_action: FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED

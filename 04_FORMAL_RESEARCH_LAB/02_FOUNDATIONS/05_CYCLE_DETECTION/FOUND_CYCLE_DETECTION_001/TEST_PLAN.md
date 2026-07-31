@@ -16,7 +16,7 @@ card X = 1
 ```
 
 ```yaml
-expected_prefixIndex: 0
+expected_baseIndex: 0
 expected_period: 1
 property_tested: caso degenerado; primeiro candidato da lista
 ```
@@ -29,7 +29,7 @@ card X = 3
 ```
 
 ```yaml
-expected_prefixIndex: 2
+expected_baseIndex: 2
 expected_period: 1
 property_tested: cauda nao trivial com ciclo trivial
 ```
@@ -45,7 +45,7 @@ card X = 3
 ```
 
 ```yaml
-expected_prefixIndex: 0
+expected_baseIndex: 0
 expected_period: 3
 property_tested: ciclo nao trivial sem cauda
 ```
@@ -62,7 +62,7 @@ card X = 4
 ```
 
 ```yaml
-expected_prefixIndex: 2
+expected_baseIndex: 2
 expected_period: 2
 property_tested: caso geral, as duas fases nao triviais
 ```
@@ -73,9 +73,9 @@ Executar o detector **separadamente** a partir de cada estado.
 
 ```yaml
 expected_period: pode coincidir entre os dois
-expected_prefixIndex: depende do estado inicial
+expected_baseIndex: depende do estado inicial
 property_tested: >
-  o periodo testemunhado eh propriedade do componente; o prefixIndex
+  o periodo testemunhado eh propriedade do componente; o baseIndex
   NAO eh. Liga-se a exists_component_cycle_with_entry_bound
 ```
 
@@ -85,14 +85,14 @@ property_tested: >
 property_tested: genericidade da API em tipo da biblioteca, nao inventado aqui
 note: >
   os valores dependem da funcao escolhida; para f = not espera-se
-  prefixIndex 0 e period 2, para f = id espera-se period 1
+  baseIndex 0 e period 2, para f = id espera-se period 1
 ```
 
 ## CD-TEST-007 — tipo unitário
 
 ```yaml
 card_X: 1
-expected_prefixIndex: 0
+expected_baseIndex: 0
 expected_period: 1
 property_tested: menor caso possivel; cycleCandidates 1 = [<0,1>]
 ```

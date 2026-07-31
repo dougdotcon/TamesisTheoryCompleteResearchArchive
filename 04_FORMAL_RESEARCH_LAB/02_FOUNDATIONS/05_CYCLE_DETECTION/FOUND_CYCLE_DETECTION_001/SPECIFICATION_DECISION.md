@@ -15,7 +15,7 @@ A. FOUND_CYCLE_DETECTION_001_SPECIFICATION_READY
 |---|---|
 | algoritmo primário congelado | `BOUNDED_CERTIFICATE_SEARCH`, em `ALGORITHM_SELECTION.md` |
 | estrutura de saída congelada | `CycleWitness` com dois naturais |
-| semântica não mínima explicitada | `prefixIndex` = índice-base de colisão; `period` = período testemunhado |
+| semântica não mínima explicitada | `baseIndex` = índice-base de colisão; `period` = período testemunhado |
 | domínio de candidatos completo | `μ < n`, `0 < λ`, `μ + λ ≤ n`; fronteira verificada por avaliação |
 | terminação clara | estrutural, `List.find?` sobre lista finita |
 | soundness planejada | `List.find?_some` + `decide_eq_true_eq` |
@@ -52,6 +52,7 @@ Três, todos registrados e justificados:
 |---|---|---|
 | `CycleDetectionResult` | `CycleWitness` | é um certificado, não uma resposta final |
 | `entryIndex` | `prefixIndex` | `entry` sugere minimalidade não provada |
+| `prefixIndex` | `baseIndex` | **superado na revisão** — `prefix` também podia ser lido como minimalidade |
 | três campos | dois campos | `entryPoint` é derivável |
 
 O gate de portfólio registrou explicitamente que a estrutura **não estava

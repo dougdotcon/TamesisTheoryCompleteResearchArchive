@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T23:20:00-03:00
-canonical_commit: "ab79032062cddf195671208058820993cfaabe76"
+updated_at: 2026-08-01T00:30:00-03:00
+canonical_commit: "03e1ec36b97233df481597980f0a5383b2decc65"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -12,14 +12,14 @@ active_track: "foundations"
 active_work_item: "FOUND-CYCLE-DETECTION-001"
 work_status: "READY"
 evidence_level: "F"
-last_verified_artifact: "found-cycle-detection-001-specification-result.json"
+last_verified_artifact: "found-cycle-detection-001-specification-review-result.json"
 current_blocker: null
-specification_status: "READY_FOR_REVIEW"
+specification_status: "APPROVED"
 next_single_action: >
-  Revisar a enumeração de certificados, a executabilidade do
-  detector parcial, a completude por reutilização da colisão
-  limitada e a viabilidade de totalização sem escolha clássica.
-authorized_action: "FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar a enumeração finita de certificados, o detector
+  parcial executável, sua soundness e sua completeness por
+  reutilização de exists_bounded_iterate_collision.
+authorized_action: "FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -45,13 +45,14 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não formalizar FOUND-CYCLE-DETECTION-001 antes de sua especificação ser revista"
-  - "Não criar arquivos Lean sob a autorização atual"
-  - "Não implementar Floyd, Brent ou tabela visitada — ambos DEFERRED_OPTIMIZATION"
-  - "Não desviar do algoritmo congelado BOUNDED_CERTIFICATE_SEARCH sem gate próprio"
+  - "Não formalizar Floyd, Brent ou tabela visitada — todos DEFERRED"
+  - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não acrescentar campos a CycleWitness — entryPoint é derivável e foi rejeitado"
-  - "Não chamar prefixIndex de entryIndex nem de comprimento exato da cauda"
-  - "Não chamar period de minimalPeriod"
+  - "Não usar os nomes superados prefixIndex, entryIndex, tailLength ou cycleEntry — o campo é baseIndex"
+  - "Não chamar period de minimalPeriod nem de comprimento fundamental do ciclo"
+  - "Não afirmar minimalidade de baseIndex ou de period — CD-GAP-009 e CD-GAP-010"
+  - "Não usar Option.getD com certificado padrão falso na totalização"
+  - "Não autorizar extração de código nem integração externa"
   - "Não usar Classical.choose na função executável"
   - "Não marcar o detector como noncomputable"
   - "Não autorizar o wrapper total antes de checar #eval — CD-GAP-017"
@@ -74,7 +75,8 @@ resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/README.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/SPECIFICATION_DECISION.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/FINAL_SIGNATURES.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/REVIEW_DECISION.md"
   - "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
   - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"

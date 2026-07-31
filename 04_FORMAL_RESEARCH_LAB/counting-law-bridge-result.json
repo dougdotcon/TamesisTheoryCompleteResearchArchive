@@ -1,0 +1,98 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "COUNTING-LAW-BRIDGE",
+  "work_item": "RH-NOGO-001",
+  "executed_at": "2026-07-31T08:59:57-03:00",
+  "commit_before": "331c0880e8278c1ba3b7cecade180b3e92c383a4",
+  "runtime": {"os": "Ubuntu 24.04 (WSL2)", "branch": "lab/wsl-lean-migration", "lean": "v4.33.0-rc1", "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e"},
+  "skills_used": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "sb_gap_010_correction": {
+    "old": "SB-GAP-010 afirmava que formalizar RVM-LIMIT exigiria definir a funcao zeta",
+    "assessment": "ERRADO para a parte generica",
+    "SB-GAP-010A": {"title": "Generic strong-asymptotic-to-limit corollary", "status": "FORMALIZABLE_WITHOUT_ZETA", "resolution": "CLOSED_BY_FORMALIZATION", "evidence": "tendsto_tLog_of_eq_main_add_littleO"},
+    "SB-GAP-010B": {"title": "Lean proof of the actual Riemann-von Mangoldt theorem", "status": "OUT_OF_CURRENT_SCOPE"},
+    "SB-GAP-010": {"status": "SUPERSEDED"}
+  },
+
+  "interfaces_created": ["PowerCountingLaw (Type)", "TLogCountingLaw (Type)", "SubdominantDifference", "SubdominantTLog", "EventualEquality", "BoundedDifference", "RatioEquivalence", "CountingLawBridgeStatement", "tLogScale"],
+  "little_o_definition": "SubdominantDifference NTarget NBase scale := (fun T => NTarget T - NBase T) =o[atTop] scale; especializacao SubdominantTLog usa scale = fun T => T * Real.log T",
+
+  "theorems": [
+    {"id": "CLB-SCALE-001", "name": "eventually_tLogScale_ne_zero", "file": "TLogScale.lean"},
+    {"id": "CLB-SCALE-002", "name": "tendsto_tLogScale_atTop", "file": "TLogScale.lean"},
+    {"id": "CLB-SCALE-003", "name": "tendsto_const_mul_tLogScale_div", "file": "TLogScale.lean"},
+    {"id": "CLB-LO-001", "name": "subdominantDifference_tendsto_zero", "file": "LittleOTransfer.lean"},
+    {"id": "CLB-ALG-001a", "name": "target_normalization_eq", "file": "LittleOTransfer.lean"},
+    {"id": "CLB-ALG-001", "name": "eventually_target_normalization_eq", "file": "LittleOTransfer.lean"},
+    {"id": "COUNTING-LAW-BRIDGE", "name": "counting_law_bridge", "file": "CountingLawBridge.lean"},
+    {"id": "COUNTING-LAW-BRIDGE-STRUCT", "name": "TLogCountingLaw.transfer", "file": "CountingLawBridge.lean", "kind": "def"},
+    {"id": "COUNTING-LAW-BRIDGE-CONST", "name": "TLogCountingLaw.transfer_constant", "file": "CountingLawBridge.lean"},
+    {"id": "COUNTING-LAW-BRIDGE-STATEMENT", "name": "countingLawBridgeStatement_holds", "file": "CountingLawBridge.lean"},
+    {"id": "STRONG-TLOG-COROLLARY", "name": "tendsto_tLog_of_eq_main_add_littleO", "file": "StrongAsymptoticCorollary.lean"},
+    {"id": "CLB-E0-E2", "name": "subdominantTLog_of_eventualEquality", "file": "StrongAsymptoticCorollary.lean"},
+    {"id": "CLB-E0-E1", "name": "boundedDifference_of_eventualEquality", "file": "StrongAsymptoticCorollary.lean"},
+    {"id": "CLB-NORM-001", "name": "tendsto_norm_tLogScale_atTop", "file": "StrongAsymptoticCorollary.lean"},
+    {"id": "CLB-E1-E2", "name": "subdominantTLog_of_boundedDifference", "file": "StrongAsymptoticCorollary.lean"}
+  ],
+  "theorem_count": 15,
+
+  "hypothesis_removed": {
+    "which": "0 < c em counting_law_bridge",
+    "reason": "Lean mostrou que nao eh necessaria para a transferencia do limite",
+    "kept_where": "TLogCountingLaw (parte da interface)"
+  },
+  "idle_hypothesis_avoided": "a identidade algebrica das normalizacoes vale pontualmente, sem exigir denominador nao nulo",
+
+  "E0_formalized": true,
+  "E1_formalized": true,
+  "E1_note": "os lemas Mathlib necessarios eram diretos; nenhuma teoria adicional de crescimento de T log T precisou ser desenvolvida",
+  "E3_formalized": false,
+  "E3_note": "definido como RatioEquivalence, nao usado; exige positividade e controle eventual do denominador (SB-GAP-011)",
+
+  "mathlib_lemmas": ["Asymptotics.IsLittleO.tendsto_div_nhds_zero", "Asymptotics.isLittleO_zero", "Asymptotics.isBigO_zero", "Asymptotics.IsBigO.trans_isLittleO", "Asymptotics.isLittleO_const_left", "Asymptotics.IsLittleO.congr'", "Asymptotics.IsBigO.congr'", "Filter.Tendsto.add", "Filter.Tendsto.congr", "Filter.Tendsto.congr'", "Filter.Tendsto.atTop_mul_atTop₀", "Real.tendsto_log_atTop", "Real.log_pos", "Real.norm_eq_abs", "tendsto_abs_atTop_atTop", "eventually_gt_atTop", "div_self", "mul_div_assoc", "div_eq_mul_inv"],
+
+  "lean_test": {"command": "lake env lean TamesisLab/Tests/RHNogoCountingBridge.lean", "exit_code": 0, "duration_seconds": 43.6},
+  "lake_build": {"exit_code": 0, "jobs": 8699, "duration_seconds": 125.4},
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+  "kernel_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "kernel_axioms_note": "auditado com #print axioms nos 13 objetos rastreaveis; nenhum sorryAx, nenhum axioma local",
+  "scope_audit": {
+    "bridge_imports": ["Mathlib.Analysis.SpecialFunctions.Log.Basic", "Mathlib.Analysis.SpecialFunctions.Pow.Real", "Mathlib.Analysis.Asymptotics.Lemmas"],
+    "forbidden_mentions_found": 0,
+    "searched_for": ["zeta", "Riemann", "Weyl", "Complex", "spectral", "operator", "Polya"]
+  },
+
+  "python_tests": {"status": "PASS", "passed": 2},
+  "labctl_validate": {"status": "PASS", "errors": [], "warnings": []},
+
+  "claim_created": {"claim_id": "COUNTING-BRIDGE-FORMAL-001", "domain": "formal_asymptotics", "work_status": "VERIFIED", "evidence_level": "F"},
+  "rh_claims_promoted": 0,
+  "asym_nogo_001_applied": false,
+  "operators_formalized": 0,
+  "legacy_files_modified": 0,
+
+  "proved": "uma lei de normalizacao T log T pode ser transferida entre duas funcoes cuja diferenca seja o(T log T)",
+  "not_proved": [
+    "que N_zeta satisfaz Riemann-von Mangoldt",
+    "que uma funcao espectral satisfaz Weyl",
+    "que algum operador pertence a W-ELLIPTIC-SCALAR",
+    "que N_P e N_zeta possuem diferenca subdominante",
+    "RH-NOGO-001",
+    "qualquer afirmacao sobre Hilbert-Polya ou RH"
+  ],
+
+  "abstract_components_verified": ["ASYM-NOGO-001", "COUNTING-LAW-BRIDGE"],
+
+  "RH-NOGO-001": {"work_status": "SCOPED", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION"},
+  "COUNTING-LAW-BRIDGE": {"status": "VERIFIED"},
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED",
+  "next_single_action": "Resolver documentalmente e, quando elementar, formalizar isoladamente GWB-008 (positividade da constante de Weyl) e as hipoteses minimas para W-ELLIPTIC-SCALAR, sem aplicar o no-go espectral.",
+  "allowlist_additions": ["RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED"],
+  "allowlist_not_added": ["RH_NOGO_PROOF_EXECUTION", "RH_NOGO_GLOBAL_WEYL_PROOF_AUTHORIZED", "RH_NOGO_OPERATOR_CLASS_PROOF_AUTHORIZED", "RH_PROOF_AUTHORIZED", "RIEMANN_PROOF_AUTHORIZED"],
+
+  "scientific_novelty": "STANDARD_ASYMPTOTIC_TRANSFER_FORMALIZED_FOR_LOCAL_USE",
+  "final_status": "RH_NOGO_COUNTING_BRIDGE_VERIFIED"
+}

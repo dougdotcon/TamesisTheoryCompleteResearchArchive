@@ -94,9 +94,45 @@ gaps:
 
   - gap_id: SB-GAP-010
     description: >
-      RVM-LIMIT eh corolario elementar de RVM-STRONG, mas sua formalizacao
-      exigiria formalizar zeta e seus zeros - fora de qualquer autorizacao
-      vigente e provavelmente por muito tempo.
+      SUPERSEDIDO. Dividido em SB-GAP-010A e SB-GAP-010B no gate
+      COUNTING-LAW-BRIDGE. A afirmacao anterior - de que formalizar
+      RVM-LIMIT exigiria definir a funcao zeta - estava ERRADA para a parte
+      generica: o corolario "formula forte implica limite" foi formalizado
+      sem qualquer mencao a zeta.
     severity: informational
-    status: OUT_OF_REACH_FOR_NOW
-    blocking: "bloqueia a formalizacao end-to-end do no-go, nao a especificacao"
+    status: SUPERSEDED
+    blocking: false
+
+  - gap_id: SB-GAP-010A
+    title: Generic strong-asymptotic-to-limit corollary
+    description: >
+      Derivar genericamente o limite N(T)/(T log T) -> c a partir de
+      N(T) = c*(T log T) + r(T) com r = o(T log T), para funcoes reais
+      arbitrarias.
+    severity: informational
+    status: FORMALIZABLE_WITHOUT_ZETA
+    resolution: CLOSED_BY_FORMALIZATION
+    closure_evidence: >
+      TamesisLab/RHNogo/Bridge/StrongAsymptoticCorollary.lean,
+      teorema tendsto_tLog_of_eq_main_add_littleO. Nenhuma mencao a zeta,
+      zeros ou Riemann-von Mangoldt. Ver COUNTING_BRIDGE_THEOREM_MAP.md.
+    blocking: false
+
+  - gap_id: SB-GAP-010B
+    title: Lean proof of the actual Riemann-von Mangoldt theorem
+    description: >
+      Provar em Lean que a funcao real N_zeta concreta satisfaz a formula
+      de Riemann-von Mangoldt. Exigiria formalizar zeta, seus zeros e a
+      analise complexa correspondente.
+    severity: informational
+    status: OUT_OF_CURRENT_SCOPE
+    blocking: "bloqueia a instanciacao concreta do ramo aritmetico, nao a ponte abstrata"
+
+  - gap_id: SB-GAP-011
+    description: >
+      Nivel E3 (equivalencia por razao) definido mas NAO formalizado. Sua
+      ligacao a E2 exige positividade e controle eventual do denominador
+      (N_base != 0 eventualmente), hipoteses fora da interface atual.
+    severity: low
+    status: OPEN_BY_DESIGN
+    blocking: false

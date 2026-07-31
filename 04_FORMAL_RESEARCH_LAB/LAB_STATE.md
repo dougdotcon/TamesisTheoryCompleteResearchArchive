@@ -1,125 +1,115 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T08:20:30-03:00
-canonical_commit: "0d52d375fc72741ea60c8e4c2a4cb9d14c90e5a6"
+updated_at: 2026-07-31T08:59:57-03:00
+canonical_commit: "331c0880e8278c1ba3b7cecade180b3e92c383a4"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
 active_track: "millennium"
 active_work_item: "RH-NOGO-001"
 work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "rh-nogo-source-bridge-specification-result.json"
-current_blocker: "Somente o segmento abstrato (W-POWER + TLOG + E2) está ao alcance de formalização; os ramos geométrico e aritmético permanecem documentais."
-next_single_action: "Formalizar somente as interfaces W-POWER/TLOG e o COUNTING-LAW-BRIDGE para discrepâncias o(T log T), sem formalizar operadores, lei de Weyl ou Riemann–von Mangoldt."
-authorized_action: "RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED"
+last_verified_artifact: "counting-law-bridge-result.json"
+current_blocker: "Faltam as obrigações geométricas: positividade da constante de Weyl (GWB-008) e as hipóteses mínimas de W-ELLIPTIC-SCALAR."
+next_single_action: "Resolver documentalmente e, quando elementar, formalizar isoladamente GWB-008 (positividade da constante de Weyl) e as hipóteses mínimas para W-ELLIPTIC-SCALAR, sem aplicar o no-go espectral."
+authorized_action: "RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED"
 prohibited_actions:
   - "Não executar a prova do no-go completo (RH_NOGO_PROOF_EXECUTION não autorizado)"
   - "Não aplicar ASYM-NOGO-001 a nenhum operador"
-  - "Não formalizar operadores pseudodiferenciais, lei de Weyl ou Riemann–von Mangoldt"
+  - "Não formalizar operadores pseudodiferenciais, lei de Weyl ou Riemann–von Mangoldt concreto"
   - "Não quantificar sobre todas as realizações auto-adjuntas de uma expressão formal"
   - "Não estender do caso escalar para sistemas ou fibrados"
   - "Não estender do caso sem bordo para problemas de bordo"
   - "Não citar Hörmander 1968 pela lei de Weyl global — apenas pelo resultado local"
-  - "Não usar a fórmula escalar da constante para sistemas"
   - "Não declarar que Hilbert–Pólya foi refutado"
   - "Não declarar progresso sobre a verdade ou falsidade da Hipótese de Riemann"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "03_MILLENNIUM/01_RIEMANN/SOURCE_BRIDGE_SPECIFICATION.md"
+  - "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_THEOREM_MAP.md"
+  - "03_MILLENNIUM/01_RIEMANN/GLOBAL_WEYL_BRIDGE_OBLIGATIONS.md"
   - "03_MILLENNIUM/01_RIEMANN/W_ELLIPTIC_SCALAR_V2.md"
-  - "03_MILLENNIUM/01_RIEMANN/COUNTING_LAW_BRIDGE_SPEC.md"
-  - "03_MILLENNIUM/01_RIEMANN/SOURCE_BRIDGE_DEPENDENCY_DAG.yaml"
+  - "03_MILLENNIUM/01_RIEMANN/SOURCE_BRIDGE_GAP_REGISTER.yaml"
   - "03_MILLENNIUM/01_RIEMANN/STOP_CONDITIONS.md"
   - "último relatório em 09_SESSIONS/"
 ---
 
 # Estado atual
 
-A ponte lógica está **especificada**. Nenhuma obrigação foi provada,
-`ASYM-NOGO-001` não foi aplicado e nenhum operador foi construído.
-
-## Arquitetura
+Os **dois componentes analíticos abstratos** da frente estão verificados em
+Lean:
 
 ```text
-W-ELLIPTIC-SCALAR                     classe geométrica estreita
-        ↓ GLOBAL-WEYL-BRIDGE-SCALAR   9 obrigações GWB-001..009
-W-POWER                               interface assintótica abstrata
-        ↓ COUNTING-LAW-BRIDGE         o(T log T) ⟹ mesma lei T log T
-ASYM-NOGO-001                         VERIFIED em Lean
+COUNTING-LAW-BRIDGE   VERIFIED
+          ↓
+ASYM-NOGO-001         VERIFIED
 ```
 
-`W-POWER` não menciona operadores. Qualquer estreitamento futuro de
-`W-ELLIPTIC-SCALAR` deixa o núcleo verificado intacto.
+`RH-NOGO-001` permanece `SCOPED`. `ASYM-NOGO-001` **não** foi aplicado,
+nenhum operador foi construído e nada foi afirmado sobre a Hipótese de
+Riemann.
 
-## Mudança central
-
-O alvo **deixou de ser** igualdade espectral exata. A relação central é
+## O que foi provado neste gate
 
 ```text
-N_P(T) − N_ζ(T) = o(T log T)          (nível E2)
+Se  N_base(T)/(T log T) → c
+e   N_target(T) − N_base(T) = o(T log T),
+então N_target(T)/(T log T) → c.
 ```
 
-que cobre igualdade exata, igualdade eventual, discrepância `O(1)` e
-equivalência por razão. Alvo estreito **e** mais robusto.
+Quinze teoremas em `05_FORMAL/lean/TamesisLab/RHNogo/Bridge/`, incluindo a
+versão estrutural (que **preserva a constante**), o corolário genérico
+"fórmula forte ⟹ limite" e a hierarquia `E0 ⟹ E1 ⟹ E2`.
 
-## Estreitamentos deliberados desta v2
+Auditoria de escopo: os únicos imports da pasta são `Log.Basic`,
+`Pow.Real` e `Asymptotics.Lemmas`; busca por `zeta`, `Riemann`, `Weyl`,
+`Complex`, `spectral`, `operator`, `Polya` na pasta: **nenhuma ocorrência**.
 
-| Exclusão | Motivo |
+## Correção de `SB-GAP-010`
+
+A afirmação anterior — de que formalizar `RVM-LIMIT` exigiria definir a
+função zeta — estava **errada para a parte genérica**. Dividido em:
+
+| Gap | Estado |
 |---|---|
-| **bordo** | evitar importar problemas elípticos de bordo não auditados; nenhuma fonte diz literalmente "closed manifold" para a forma pseudodiferencial |
-| **sistemas e fibrados** | a constante de Ivrii usa `n(x,ξ)` com multiplicidades e a identidade de traço fibrada não foi auditada; `GAP-RH-009` **não foi fechado**, foi contornado |
+| `SB-GAP-010A` — corolário genérico "fórmula forte ⟹ limite" | **CLOSED_BY_FORMALIZATION** (sem mencionar zeta) |
+| `SB-GAP-010B` — provar que a `N_ζ` concreta satisfaz Riemann–von Mangoldt | `OUT_OF_CURRENT_SCOPE` |
 
-## Regra de quantificação
+## O que falta
 
-Correta: *"para todo operador **realizado** `P` que satisfaça
-**individualmente** as hipóteses de `W-ELLIPTIC-SCALAR`"*.
+Demonstrar que os **objetos concretos** satisfazem as interfaces — exatamente
+onde a auditoria encontrou as lacunas:
 
-Proibida: *"para todas as realizações auto-adjuntas de uma expressão
-formal"* — incluiria realizações fora da classe pseudodiferencial auditada.
+- **`GWB-008` (`C_P > 0`)**: obrigação **geométrica**, não bloqueou este
+  gate; nenhuma fonte obtida a afirma.
+- **`GAP-RH-012`**: discretude é hipótese incorporada, não derivada.
+- **`GAP-RH-009`**: sistemas e fibrados adiados, **não fechado**.
+- **`SB-GAP-010B`**: ramo aritmético concreto fora de alcance.
+- **`SB-GAP-011`**: nível E3 não formalizado.
 
-## Estado da formalização
+## Work items
 
-| Objeto | Estado |
+| Item | Estado |
 |---|---|
-| `ASYM-NOGO-001` | **VERIFIED** |
-| `Bridge/SignatureProbe.lean` | assinaturas elaboradas, **sem provas** |
-| `COUNTING-LAW-BRIDGE` | especificado; formalização autorizada no próximo gate |
-| `GLOBAL-WEYL-BRIDGE-SCALAR` | documental; não formalizável agora |
-| `RVM-LIMIT` | documental; exigiria formalizar `ζ` |
-
-`lake build` PASS com 8.692 jobs; tokens proibidos zero.
-
-## Lacunas bloqueantes
-
-- `SB-GAP-001` / `GAP-RH-014`: **`C_P > 0` não é afirmado por nenhuma fonte
-  obtida**. Sem ele a pertinência a `W-POWER` falha.
-- `SB-GAP-002` / `GAP-RH-012`: discretude é hipótese **incorporada**, não
-  derivada.
-- `SB-GAP-003`: convenções de fronteira (`<` versus `≤`) não reconciliadas
-  por escrito.
-
-## Evidência canônica
-
-A identidade local→global de Ivrii, eq. (3.1.11), não pôde ser verificada
-independentemente por fontes públicas externas. A cópia preservada em
-`08_REVIEWS/SOURCES/RH_NOGO/pdf/ivrii_2016_100years_weyl.pdf`
-(`sha256 9ca07737…`) é a evidência canônica.
+| LAB-ARCH-001 | VERIFIED |
+| LAB-BENCH-001 | VERIFIED |
+| FOUND-SEMIGROUP-001 | VERIFIED |
+| RH-NOGO-001 | SCOPED; `ASYM-NOGO-001` e `COUNTING-LAW-BRIDGE` VERIFIED |
 
 ## Próxima ação única
 
-Formalizar somente as interfaces W-POWER/TLOG e o COUNTING-LAW-BRIDGE para
-discrepâncias `o(T log T)`, sem formalizar operadores, lei de Weyl ou
-Riemann–von Mangoldt.
+Resolver documentalmente e, quando elementar, formalizar isoladamente
+GWB-008 (positividade da constante de Weyl) e as hipóteses mínimas para
+W-ELLIPTIC-SCALAR, sem aplicar o no-go espectral.
 
 ## Histórico recente
 
 - 2026-07-31: migração WSL2; LAB-BENCH-001; FOUND-SEMIGROUP-001.
-- 2026-07-31: RH-NOGO-001 especificado; `ASYM-NOGO-001` verificado.
-- 2026-07-31: auditoria de fontes primárias — descoberto que Hörmander 1968
-  não enuncia a lei global.
-- 2026-07-31: recuperação adicional — classes separadas; ponte documentada.
-- 2026-07-31: ponte **especificada** (`SOURCE_BRIDGE_SPECIFICATION_READY`);
-  alvo migrado de igualdade exata para `o(T log T)`; bordo e sistemas
-  excluídos; nenhuma claim promovida.
+- 2026-07-31: `ASYM-NOGO-001` verificado em Lean.
+- 2026-07-31: auditoria de fontes primárias — Hörmander 1968 não enuncia a
+  lei global.
+- 2026-07-31: classes separadas; ponte local→global documentada.
+- 2026-07-31: ponte especificada; alvo migrado para `o(T log T)`.
+- 2026-07-31: `COUNTING-LAW-BRIDGE` **verificado**
+  (`RH_NOGO_COUNTING_BRIDGE_VERIFIED`); `SB-GAP-010` dividido e a parte
+  genérica fechada por formalização; nenhuma claim sobre a RH.

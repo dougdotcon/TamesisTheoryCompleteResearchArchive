@@ -9,11 +9,12 @@ import TamesisLab.TOE
 import TamesisLab.Benchmark
 import TamesisLab.RHNogo.SignatureProbe
 import TamesisLab.RHNogo.AsymptoticCore
-import TamesisLab.RHNogo.Bridge.SignatureProbe
+import TamesisLab.RHNogo.Bridge
 import TamesisLab.Tests.MathlibSmoke
 import TamesisLab.Tests.BenchmarkSmoke
 import TamesisLab.Tests.FoundSemigroup001
 import TamesisLab.Tests.RHNogoAsymptotic001
+import TamesisLab.Tests.RHNogoCountingBridge
 
 namespace TamesisLab
 

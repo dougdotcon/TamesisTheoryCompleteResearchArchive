@@ -1,5 +1,66 @@
 # Changelog do laboratório formal
 
+## COUNTING-LAW-BRIDGE — 2026-07-31
+
+### Added
+
+- Ponte de contagem formalizada em
+  `05_FORMAL/lean/TamesisLab/RHNogo/Bridge/`: `Definitions.lean`,
+  `TLogScale.lean`, `LittleOTransfer.lean`, `CountingLawBridge.lean`,
+  `StrongAsymptoticCorollary.lean`, `Audit.lean`, agregador `Bridge.lean`
+  e teste `Tests/RHNogoCountingBridge.lean`. **15 teoremas**, 9 definicoes.
+- Teorema principal `counting_law_bridge`: se `N_base/(T log T) -> c` e
+  `N_target - N_base = o(T log T)`, entao `N_target/(T log T) -> c`.
+- Versao estrutural `TLogCountingLaw.transfer`, com preservacao da
+  constante provada por `rfl`.
+- `STRONG-TLOG-COROLLARY` (`tendsto_tLog_of_eq_main_add_littleO`):
+  "formula forte implica limite", **sem mencionar zeta**.
+- Hierarquia `E0 => E1 => E2` formalizada.
+- `COUNTING_BRIDGE_THEOREM_MAP.md` e `COUNTING_BRIDGE_PROOF_AUDIT.md`.
+- Claim `COUNTING-BRIDGE-FORMAL-001` (`F`, `formal_asymptotics`, VERIFIED).
+
+### Corrected
+
+- **`SB-GAP-010` dividido e parcialmente fechado.** A afirmacao anterior de
+  que formalizar `RVM-LIMIT` exigiria definir a funcao zeta estava ERRADA
+  para a parte generica. `SB-GAP-010A` (corolario generico)
+  `CLOSED_BY_FORMALIZATION`; `SB-GAP-010B` (Riemann-von Mangoldt concreto)
+  `OUT_OF_CURRENT_SCOPE`; `SB-GAP-010` `SUPERSEDED`.
+- **Hipotese ociosa removida:** `0 < c` nao eh necessaria em
+  `counting_law_bridge` e foi retirada do teorema tecnico; a positividade
+  permanece apenas na interface `TLogCountingLaw`.
+- `Bridge/SignatureProbe.lean` reduzido a registro historico: as definicoes
+  foram promovidas para `Bridge/Definitions.lean`.
+
+### Verified
+
+- `lake build` PASS com **8.699 jobs**; teste isolado exit 0; tokens
+  proibidos zero.
+- `#print axioms` nos 13 objetos rastreaveis: apenas `propext`,
+  `Classical.choice`, `Quot.sound`.
+- Auditoria de escopo: imports da pasta `Bridge/` sao apenas `Log.Basic`,
+  `Pow.Real` e `Asymptotics.Lemmas`; busca por `zeta`, `Riemann`, `Weyl`,
+  `Complex`, `spectral`, `operator`, `Polya`: **nenhuma ocorrencia**.
+- pytest 2 passed; `labctl validate` PASS.
+- `ASYM-NOGO-001` **nao** aplicado.
+
+### Changed
+
+- `authorized_action`: `RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED`
+  -> `RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED` (entrada literal unica).
+
+### Blocked
+
+- `GWB-008` (`C_P > 0`): obrigacao GEOMETRICA; nao bloqueou este gate.
+- `GAP-RH-012` (discretude), `GAP-RH-009` (fibrados, NAO fechado),
+  `SB-GAP-010B`, `SB-GAP-011` (nivel E3 nao formalizado).
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+
+### Result
+
+- `RH_NOGO_COUNTING_BRIDGE_VERIFIED`. Componentes analiticos abstratos
+  verificados: `COUNTING-LAW-BRIDGE` -> `ASYM-NOGO-001`.
+
 ## RH-NOGO-001 — especificacao da ponte de contagem — 2026-07-31
 
 ### Added

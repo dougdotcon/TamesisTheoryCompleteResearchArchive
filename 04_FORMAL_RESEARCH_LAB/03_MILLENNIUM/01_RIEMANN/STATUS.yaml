@@ -9,41 +9,35 @@ operator_class: W-ELLIPTIC-SCALAR
 operator_class_version: 2
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED
-architecture:
-  chain: "W-ELLIPTIC-SCALAR -> GLOBAL-WEYL-BRIDGE-SCALAR -> W-POWER -> COUNTING-LAW-BRIDGE -> ASYM-NOGO-001"
-  central_relation: "N_P(T) - N_zeta(T) = o(T log T)   [nivel E2]"
-  excluded_in_v2: ["sistemas e fibrados", "problemas de bordo"]
+next_gate: RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
     lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/"
-  BRIDGE-SIGNATURE-PROBE:
-    status: ELABORATED_NO_PROOFS
-    lean: "05_FORMAL/lean/TamesisLab/RHNogo/Bridge/SignatureProbe.lean"
-quantification_rule: >
-  Para todo operador REALIZADO P que satisfaca INDIVIDUALMENTE as hipoteses
-  de W-ELLIPTIC-SCALAR. Proibido quantificar sobre todas as realizacoes
-  auto-adjuntas de uma expressao formal.
-citation_rule: >
-  Hormander 1968 e citado pelo resultado LOCAL (eq. 5.3). A lei GLOBAL e
-  citada por Coriasco-Doll 2020 / Ivrii 2016, ou derivada pela ponte
-  documentada.
-canonical_evidence_note: >
-  A identidade local-global de Ivrii (3.1.11) nao pode ser verificada
-  independentemente por fontes publicas externas. A copia preservada em
-  08_REVIEWS/SOURCES/RH_NOGO/pdf/ivrii_2016_100years_weyl.pdf
-  (sha256 9ca07737...) e a evidencia canonica.
+  COUNTING-LAW-BRIDGE:
+    status: VERIFIED
+    lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/Bridge/"
+    theorem_map: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_THEOREM_MAP.md"
+    proof_audit: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_PROOF_AUDIT.md"
+    scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
+abstract_components_verified:
+  - ASYM-NOGO-001
+  - COUNTING-LAW-BRIDGE
+remaining_work: >
+  Demonstrar que os objetos concretos satisfazem as interfaces. E onde a
+  auditoria encontrou as lacunas geometricas (GWB-008, discretude) e
+  bibliograficas.
 open_gaps:
-  - "SB-GAP-001 / GAP-RH-014: C_P > 0 sem fonte (BLOQUEANTE para POWER-LAW)"
+  - "SB-GAP-001 / GAP-RH-014: C_P > 0 sem fonte (obrigacao GEOMETRICA; nao bloqueou este gate)"
   - "SB-GAP-002 / GAP-RH-012: discretude eh hipotese incorporada"
-  - "SB-GAP-003: convencoes de fronteira nao reconciliadas"
   - "SB-GAP-006 / GAP-RH-009: sistemas e fibrados adiados (NAO fechado)"
-  - "SB-GAP-010: RVM-LIMIT fora de alcance de formalizacao"
+  - "SB-GAP-010B: Riemann-von Mangoldt concreto fora do alcance"
+  - "SB-GAP-011: nivel E3 nao formalizado"
+closed_gaps:
+  - "SB-GAP-010A: CLOSED_BY_FORMALIZATION"
 current_blocker: >
-  A especificacao esta pronta, mas somente o segmento abstrato
-  (W-POWER + TLOG + E2) esta ao alcance de formalizacao. Os ramos
-  geometrico e aritmetico permanecem documentais.
+  Faltam as obrigacoes geometricas: positividade da constante de Weyl e as
+  hipoteses minimas de W-ELLIPTIC-SCALAR.
 note: >
   O no-go completo permanece NAO PROVADO e NAO AUTORIZADO. ASYM-NOGO-001
   NAO foi aplicado. Nenhum operador foi construido ou excluido. Nada foi

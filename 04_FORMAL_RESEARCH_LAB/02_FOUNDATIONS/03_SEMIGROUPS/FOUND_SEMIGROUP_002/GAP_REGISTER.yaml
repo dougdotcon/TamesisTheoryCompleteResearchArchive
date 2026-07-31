@@ -101,7 +101,11 @@ gaps:
     description: >
       A assinatura sugerida pelo gate inclui [DecidableEq X], mas a prova
       esbocada de FSG2-PER-002 nao a utiliza.
-    status: OPEN_PENDING_EXECUTION
+    status: CLOSED_CONFIRMED_IDLE
+    resolution: >
+      Confirmado na execucao: exists_eventual_period compila exigindo
+      apenas [Fintype X]. A hipotese foi OMITIDA. Assinatura verificada por
+      #check no build.
     severity: low
     blocking: false
     decision: >
@@ -114,17 +118,17 @@ gaps:
     description: >
       De f^[mu + lam] x = f^[mu] x concluir
       f^[mu + k + lam] x = f^[mu + k] x para todo k.
-    status: SPECIFIED_LOW_COST
+    status: CLOSED_BY_FORMALIZATION
     severity: low
     blocking: false
-    route: >
-      Function.iterate_add_apply mais aritmetica de indices em N.
-      Incluido na meta C.
+    resolution: >
+      collision_propagates formalizado. Function.iterate_add_apply foi
+      LOCALIZADO na fonte (Mathlib/Logic/Function/Iterate.lean:76,
+      assinatura f^[m + n] x = f^[m] (f^[n] x)), resolvendo tambem o
+      NAME_UNCERTAIN de LEAN_FEASIBILITY.md.
     residual: >
-      Function.iterate_add_apply foi confirmado apenas pelos USOS no
-      Mathlib, nao pela declaracao original (esta em core/Batteries).
-      Classificado NAME_UNCERTAIN em LEAN_FEASIBILITY.md; deve ser
-      confirmado por #check antes de qualquer prova depender dele.
+      A primeira tentativa usou dois rw sem argumentos e reescreveu duas
+      vezes o mesmo lado; corrigido instanciando explicitamente.
 
   - gap_id: FSG2-GAP-006
     title: Preorder representation without unsafe global instance
@@ -146,14 +150,16 @@ gaps:
     description: >
       Escolher entre Fin n com notacao ![...] e tipos indutivos proprios ao
       estilo de Regime3.
-    status: OPEN_PENDING_EXECUTION
+    status: PARTIALLY_RESOLVED
     severity: low
     blocking: false
+    resolution: >
+      Estrategia de codificacao decidida na execucao: tipos indutivos
+      proprios com Fintype manual, seguindo o padrao de Regime3, e provas
+      finitas por decide sobre no maximo 8 casos. Nenhum native_decide.
     residual: >
-      Inclui tambem a negativa "o periodo pode depender do estado inicial",
-      registrada em ASSUMPTIONS.md SEM contraexemplo planejado. O modelo eh
-      trivial, mas nao foi incluido entre os cinco pedidos pelo gate e nao
-      sera afirmado sem exemplo.
+      A negativa "o periodo pode depender do estado inicial" continua SEM
+      contraexemplo e NAO eh afirmada em documento algum. Permanece aberta.
 
   - gap_id: FSG2-GAP-008
     title: Boundary between standard result and future Tamesis modelling

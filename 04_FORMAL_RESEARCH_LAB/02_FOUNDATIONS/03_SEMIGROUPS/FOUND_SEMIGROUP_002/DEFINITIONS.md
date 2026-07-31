@@ -114,6 +114,27 @@ A especificação prevê nomes separados: `IsInvariant`,
 `IsInvariantUnder a`, e a forma "ao longo da órbita" como *teorema*
 (`FSG2-INV-001`), não como definição concorrente.
 
+### Correção obrigatória — relação entre as duas primeiras noções
+
+A redação anterior deste documento dizia que `IsInvariantUnder a` seria
+"estritamente mais fraca" que `IsInvariant`. **Como afirmação universal,
+isso está errado.** O enunciado correto é:
+
+```text
+IsInvariant I  implica  IsInvariantUnder a I,  para todo a.
+
+IsInvariantUnder a PODE ser estritamente mais fraca que IsInvariant, em
+acoes apropriadas.
+
+A estrita fraqueza NAO vale uniformemente para toda acao e todo a.
+```
+
+Motivo concreto: se `a` **gera** `M`, então `IsInvariantUnder a I` implica
+`IsInvariant I`, e as duas noções coincidem. Só a implicação
+`IsInvariant → IsInvariantUnder` é demonstrável em geral, e é a única
+formalizada (`IsInvariant.under`). A recíproca não é enunciada nem negada
+em geral.
+
 ## Camada B — dinâmica de um elemento
 
 Fixados `a : M` e `x : X`, a sequência é

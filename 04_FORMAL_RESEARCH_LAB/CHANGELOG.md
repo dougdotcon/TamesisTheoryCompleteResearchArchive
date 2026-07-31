@@ -1,5 +1,80 @@
 # Changelog do laboratório formal
 
+## FOUND-SEMIGROUP-002-FORMALIZATION - 2026-07-31
+
+### Corrected
+
+- **5.1 Invariancia sob um elemento.** Retirada a afirmacao de que
+  `IsInvariantUnder a` seria *universalmente* mais fraca que
+  `IsInvariant`. O que vale e foi formalizado eh apenas a implicacao
+  `IsInvariant I -> IsInvariantUnder a I` (`IsInvariant.under`). A estrita
+  fraqueza PODE ocorrer, mas nao uniformemente: se `a` gera `M`, as duas
+  nocoes coincidem.
+- **5.2 Contraexemplo de alcancabilidade.** `CE-001` reconstruido como
+  **acao genuina de monoide** (`{idT, collapse}` sobre `{zero, one}`), com
+  as leis verificadas antes da instanciacao. O grafo de uma funcao isolada
+  refutaria apenas a alcancabilidade por aquele gerador, nao a simetria de
+  `Reachable`, que eh definida pela acao COMPLETA.
+
+### Added
+
+- Nucleo Lean em `05_FORMAL/lean/TamesisLab/Foundations/FiniteDynamics/`:
+  `Reachability`, `Invariants`, `EventualPeriodicity`, `MonoidIteration`,
+  `Counterexamples`, `Audit`, agregador e dois testes isolados.
+  **41 teoremas, 10 defs, 6 indutivos, 11 instancias.**
+- Teorema principal `exists_eventual_period`: toda trajetoria de
+  `f : X -> X` com `X` finito eh eventualmente periodica, com
+  `mu < card X`, `0 < lam`, `mu + lam <= card X`, ponto periodico na cauda
+  e propagacao a todos os indices posteriores.
+- Corolarios de acao `monoid_element_eventually_periodic` e
+  `..._propagates`, **derivados** via `smul_iterate_apply`.
+- Cinco contraexemplos formais (`CE-001..CE-005`), todos em Lean, **sem
+  Python** e **sem `native_decide`**.
+- `THEOREM_MAP.md`, `PROOF_AUDIT.md`, `COUNTEREXAMPLE_AUDIT.md`,
+  `RESULT_BOUNDARY.md`, `C3_BOUNDARY.md`.
+- Claim `FINITE-DYNAMICS-FORMAL-001` (`F`, VERIFIED,
+  `mathematical_novelty: NONE`).
+
+### Verified
+
+- `lake build` PASS com **8.717 jobs** em 117 s; dois testes isolados
+  exit 0. Build final **sem avisos**.
+- Tokens proibidos: `sorry=0 admit=0 axiom=0 unsafe=0`.
+- `#print axioms` nos 8 objetos: **quatro nao dependem de axioma algum**;
+  os demais usam apenas `propext`, `Classical.choice`, `Quot.sound`.
+- Casa dos pombos usada **uma unica vez**; `minimalPeriod` **nunca** usado;
+  **nenhuma** instancia global de `Preorder`.
+- Hipoteses ociosas confirmadas e removidas: `exists_eventual_period` exige
+  **somente** `[Fintype X]`; o corolario de acao nao exige `Fintype M`,
+  `DecidableEq X` nem `Group M`. `FSG2-GAP-004c` fechado.
+- pytest 9 passed; `labctl validate` PASS com `canonical_commit_check` PASS.
+
+### Changed
+
+- `canonical_commit`: `39e3d95` -> `2b86a880`, no preflight.
+- `FOUND-SEMIGROUP-002`: `READY` -> `VERIFIED`.
+- `authorized_action` -> `FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED`
+  (entrada literal unica).
+
+### Blocked
+
+- **Novidade matematica: NONE.** Periodicidade eventual em conjunto finito
+  eh o principio da casa dos pombos.
+- NAO provados: unicidade da cauda, minimalidade do periodo, decomposicao
+  canonica, classificacao de acoes finitas, sistemas infinitos, qualquer
+  resultado fisico, TRI, TDTR.
+- `C3_BOUNDARY.md` (vinculante): "propriedades de C3 falham em geral"
+  significa que para CADA UMA existe contraexemplo, **nao** que todas
+  falhem simultaneamente em toda acao. Nenhum teorema de
+  `FOUND-SEMIGROUP-001` foi alterado.
+- `FSG2-GAP-007`: a negativa "o periodo depende do estado inicial"
+  continua sem contraexemplo e **nao eh afirmada**.
+- `RH-NOGO-001` permanece `FROZEN_PARTIAL_RESULT`; **0** arquivos tocados.
+
+### Result
+
+- `FOUND_SEMIGROUP_002_FORMALIZATION_VERIFIED`.
+
 ## FOUND-SEMIGROUP-002-SPECIFICATION - 2026-07-31
 
 ### Preflight

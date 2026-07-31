@@ -1,0 +1,179 @@
+{
+  "work_item": "FOUND-SEMIGROUP-002",
+  "gate": "FOUND_SEMIGROUP_002_FORMALIZATION",
+  "authorized_action": "FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED",
+  "executed_at": "2026-07-31T14:10:00-03:00",
+  "agent": "claude-opus-5",
+  "canonical_repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+
+  "commit_before": "2b86a8809776774e4caf3a54d1469d240ecdaf1d",
+  "canonical_commit_before": "39e3d95925a7038da307017216dd4cb8e49c572a",
+  "canonical_commit_after_preflight": "2b86a8809776774e4caf3a54d1469d240ecdaf1d",
+  "canonical_ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS",
+    "diagnostics_preserved": [
+      "CANONICAL_COMMIT_UNAVAILABLE",
+      "CANONICAL_COMMIT_NOT_ANCESTOR",
+      "CANONICAL_COMMIT_GIT_ERROR"
+    ]
+  },
+
+  "specification_corrections": {
+    "5.1_invariance_under_element": {
+      "removed": "IsInvariantUnder a eh estritamente mais fraca que IsInvariant (afirmacao universal)",
+      "adopted": "IsInvariant I implica IsInvariantUnder a I para todo a; a estrita fraqueza PODE ocorrer, mas nao vale uniformemente",
+      "reason": "se a gera M, as duas nocoes coincidem",
+      "formalized": "IsInvariant.under (implicacao apenas; reciproca nao enunciada)",
+      "registered_in": ["DEFINITIONS.md", "KNOWN_RESULTS_MATRIX.md", "CHANGELOG.md", "RESULT_BOUNDARY.md"]
+    },
+    "5.2_reachability_counterexample": {
+      "removed": "grafo de f : X -> X para refutar simetria de Reachable",
+      "adopted": "acao genuina de monoide {idT, collapse} sobre {zero, one}, com leis verificadas",
+      "reason": "Reachable eh definida pela acao COMPLETA; o grafo de uma funcao refuta apenas alcancabilidade por aquele gerador",
+      "registered_in": ["KNOWN_RESULTS_MATRIX.md", "COUNTEREXAMPLE_AUDIT.md", "CHANGELOG.md"]
+    }
+  },
+
+  "definitions": ["Reachable", "IsInvariant", "IsInvariantUnder"],
+  "orbit_representation": "MulAction.orbit (Set X); ponte reachable_iff_mem_orbit eh Iff.rfl",
+
+  "theorems": {
+    "layer_A": [
+      "reachable_refl", "reachable_trans", "reachable_isRefl", "reachable_isTrans",
+      "reachable_iff_mem_orbit", "IsInvariant.under", "IsInvariant.of_reachable",
+      "IsInvariantUnder.pow"
+    ],
+    "layer_C": [
+      "eventual_period_of_lt (private)", "exists_bounded_iterate_collision",
+      "periodic_tail_of_collision", "collision_propagates", "exists_eventual_period"
+    ],
+    "layer_B": [
+      "monoid_element_eventually_periodic", "monoid_element_eventual_period_propagates"
+    ]
+  },
+  "main_theorem": "exists_eventual_period",
+  "cardinality_bounds": {
+    "mu_lt_card": true,
+    "lam_pos": true,
+    "mu_plus_lam_le_card": true,
+    "origin": "g : Fin (card X + 1) -> X, g k = f^[k] x; pigeonhole da i != j com i, j <= card X"
+  },
+  "index_case_split": "lt_or_gt_of_ne; ambos os ramos despachados pelo mesmo auxiliar eventual_period_of_lt, com hEq.symm no segundo",
+  "propagation": "collision_propagates, derivado da colisao por reindexacao (omega) e Function.iterate_add_apply instanciado explicitamente",
+  "monoid_corollary": "monoid_element_eventually_periodic, DERIVADO via smul_iterate_apply; pigeonhole NAO reaplicado",
+
+  "preorder_decision": "nenhuma instance Preorder; apenas reachable_isRefl (Std.Refl) e reachable_isTrans (IsTrans). IsRefl esta depreciada nesta revisao.",
+
+  "hypotheses_actually_used": {
+    "exists_eventual_period": "[Fintype X]",
+    "monoid_element_eventually_periodic": "[Monoid M] [Fintype X] [MulAction M X]",
+    "absent": ["DecidableEq X", "Fintype M", "Group M"],
+    "evidence": "assinaturas impressas por #check no build"
+  },
+
+  "counterexamples": {
+    "CE-001": "acao de monoide {idT, collapse}; Reachable zero one e NAO Reachable one zero",
+    "CE-002": "monoide trivial sobre {a,b}; acao nao transitiva",
+    "CE-003": "f : s0->s1->s2->s2; s0 eventualmente periodico mas NAO periodico (s0_not_periodic, forma forte)",
+    "CE-004": "monoide de CE-001 sobre um unico estado; dois elementos distintos, mesma funcao",
+    "CE-005": "invariante constante sobre as duas orbitas de CE-002"
+  },
+  "counterexample_gap": "a negativa 'o periodo depende do estado inicial' continua SEM contraexemplo e NAO eh afirmada (FSG2-GAP-007)",
+
+  "c3_boundary": {
+    "document": "C3_BOUNDARY.md",
+    "binding": true,
+    "correct_reading": "para CADA UMA das quatro propriedades existe um contraexemplo",
+    "forbidden_reading": "as quatro falham simultaneamente em toda acao",
+    "found_semigroup_001_theorems_modified": 0
+  },
+
+  "lean_files": [
+    "Foundations/FiniteDynamics/Reachability.lean",
+    "Foundations/FiniteDynamics/Invariants.lean",
+    "Foundations/FiniteDynamics/EventualPeriodicity.lean",
+    "Foundations/FiniteDynamics/MonoidIteration.lean",
+    "Foundations/FiniteDynamics/Counterexamples.lean",
+    "Foundations/FiniteDynamics/Audit.lean",
+    "Foundations/FiniteDynamics.lean"
+  ],
+  "test_files": [
+    "Tests/FoundSemigroup002.lean",
+    "Tests/FoundSemigroup002Counterexamples.lean"
+  ],
+  "inventory": {
+    "inductives": 6, "defs": 10, "theorems": 41, "instances": 11, "structures": 0
+  },
+  "imports": [
+    "Mathlib.Algebra.Group.Action.Defs",
+    "Mathlib.Data.Finset.Insert",
+    "Mathlib.Data.Fintype.Card",
+    "Mathlib.Data.Fintype.Defs",
+    "Mathlib.Data.Fintype.Pigeonhole",
+    "Mathlib.Dynamics.PeriodicPts.Defs",
+    "Mathlib.GroupTheory.GroupAction.Defs",
+    "Mathlib.Logic.Function.Iterate",
+    "Mathlib.Order.Defs.Unbundled"
+  ],
+
+  "axioms": {
+    "no_axioms_at_all": [
+      "reachable_refl", "reachable_trans", "IsInvariant.of_reachable",
+      "periodic_tail_of_collision"
+    ],
+    "propext_quot": ["collision_propagates"],
+    "propext_choice_quot": [
+      "exists_bounded_iterate_collision", "exists_eventual_period",
+      "monoid_element_eventually_periodic"
+    ],
+    "sorryAx": 0,
+    "local_axioms": 0
+  },
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+  "native_decide": "0 usos; 1 mencao em comentario declarando nao uso",
+  "pigeonhole_uses": 1,
+  "minimalPeriod_uses": 0,
+
+  "lake_test_results": {
+    "FoundSemigroup002.lean": "exit 0, 16 s",
+    "FoundSemigroup002Counterexamples.lean": "exit 0, 4 s"
+  },
+  "lake_build": "PASS, 8717 jobs, 117 s",
+  "pytest": "9 passed",
+  "labctl": "PASS, canonical_commit_check PASS",
+
+  "claim": {
+    "claim_id": "FINITE-DYNAMICS-FORMAL-001",
+    "domain": "finite_discrete_dynamics",
+    "work_status": "VERIFIED",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE"
+  },
+  "novelty_claims": 0,
+  "physics_claims": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED",
+    "files_touched": 0
+  },
+
+  "failures_during_execution": [
+    "import Mathlib.Tactic.Omega inexistente nesta revisao (omega eh do core) — removido",
+    "IsRefl depreciada em favor de Std.Refl — enunciado trocado",
+    "collision_propagates: dois rw sem argumentos reescreveram o mesmo lado — instanciados explicitamente",
+    "teste isolado: rw sobre IsPeriodicPt sem desdobrar — exemplo reescrito"
+  ],
+
+  "work_status_final": "VERIFIED",
+  "authorized_action_final": "FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar o resultado formal, os limites de escopo e o potencial de reutilizacao antes de autorizar qualquer extensao.",
+  "commit_after": null,
+  "working_tree": "clean",
+  "final_status": "FOUND_SEMIGROUP_002_FORMALIZATION_VERIFIED"
+}

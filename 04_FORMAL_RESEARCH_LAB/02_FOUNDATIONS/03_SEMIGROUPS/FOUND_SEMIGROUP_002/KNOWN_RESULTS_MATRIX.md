@@ -59,3 +59,27 @@ Quatro propriedades que valem em `C3` e falham em geral. É precisamente por
 isso que `C3` **não** serve como caso de teste do alvo: ele é bom demais.
 Usá-lo como evidência de generalidade seria o erro que
 `NOVELTY_BOUNDARY.md` proíbe.
+
+## Correções registradas na formalização
+
+### Invariância sob um elemento (correção 5.1)
+
+| Afirmação | Estado |
+|---|---|
+| `IsInvariant I → IsInvariantUnder a I` | **provado** (`IsInvariant.under`) |
+| `IsInvariantUnder a I → IsInvariant I` | falso em geral; **verdadeiro** se `a` gera `M` |
+| "`IsInvariantUnder a` é estritamente mais fraca" | **retirado** — falso como afirmação universal |
+
+A formulação anterior tratava a estrita fraqueza como propriedade
+universal. Ela é apenas **possível**, dependendo da ação e do elemento.
+
+### Contraexemplo de alcançabilidade (correção 5.2)
+
+`Reachable` é definida pela **ação completa** do monoide. Portanto o grafo
+de uma função isolada `f : X → X` **não** refuta a simetria de `Reachable`
+— refuta apenas a alcançabilidade por iterações daquele gerador.
+
+`CE-001` foi reconstruído como ação genuína de monoide
+(`{idT, collapse}` sobre `{zero, one}`), com as leis de monoide e de ação
+verificadas antes da instanciação. A negativa `not_reachable_one_zero`
+quantifica sobre **todo** o monoide.

@@ -1,9 +1,10 @@
 work_item_id: FOUND-SEMIGROUP-002
-work_status: READY
+work_status: VERIFIED
 evidence_level: F
-gate: FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION
+gate: FOUND_SEMIGROUP_002_FORMALIZATION
 specification: SPECIFICATION_READY
-scientific_value: FOUNDATIONAL_SPECIFICATION_ONLY
+formalization: VERIFIED
+scientific_value: FOUNDATIONAL_FORMALIZATION_ONLY
 mathematical_novelty: NONE
 
 layers:
@@ -49,13 +50,41 @@ mathlib_audit:
     - "periodicidade eventual AUSENTE no Mathlib fixado: enunciado sera local"
     - "minimalPeriod devolve 0 fora de periodicPts: armadilha registrada"
 
-executed_in_this_gate:
-  lean_files_created: 0
-  lean_proofs_created: 0
-  lake_builds: 0
-  python_experiments_created: 0
-  scientific_claims_promoted: 0
-  legacy_files_modified: 0
+lean_root: "05_FORMAL/lean/TamesisLab/Foundations/FiniteDynamics/"
+theorem_map: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/THEOREM_MAP.md"
+proof_audit: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/PROOF_AUDIT.md"
+counterexample_audit: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/COUNTEREXAMPLE_AUDIT.md"
+result_boundary: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/RESULT_BOUNDARY.md"
+c3_boundary: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/C3_BOUNDARY.md"
+
+formalization_inventory:
+  inductives: 6
+  defs: 10
+  theorems: 41
+  instances: 11
+  structures: 0
+  lean_files: 8
+  test_files: 2
+
+hypotheses_actually_used:
+  exists_eventual_period: "[Fintype X] somente"
+  monoid_element_eventually_periodic: "[Monoid M] [Fintype X] [MulAction M X]"
+  absent_as_planned: ["DecidableEq X", "Fintype M", "Group M"]
+
+specification_corrections:
+  - "5.1 IsInvariantUnder NAO eh universalmente mais fraca; apenas a implicacao IsInvariant -> IsInvariantUnder eh provada"
+  - "5.2 CE-001 reconstruido como acao genuina de monoide"
+
+verification:
+  lake_build: PASS
+  lake_build_jobs: 8717
+  isolated_tests: "2 PASS"
+  forbidden_tokens: 0
+  native_decide: "0 usos (1 mencao em comentario declarando nao uso)"
+  axioms: "propext, Classical.choice, Quot.sound; 4 de 8 sem axioma algum"
+  pigeonhole_uses: 1
+  minimalPeriod_uses: 0
+  global_preorder_instances: 0
 
 depends_on:
   FOUND-SEMIGROUP-001: VERIFIED
@@ -63,8 +92,7 @@ depends_on:
 open_gaps:
   - "FSG2-GAP-002b: minimalPeriod nao captura periodicidade eventual"
   - "FSG2-GAP-004b: decomposicao unica adiada apos analise de custo"
-  - "FSG2-GAP-004c: DecidableEq X possivelmente ociosa"
-  - "FSG2-GAP-007: estrategia de codificacao dos contraexemplos"
+  - "FSG2-GAP-007: negativa \"o periodo depende do estado inicial\" ainda sem contraexemplo"
   - "FSG2-GAP-009: bibliografia primaria NOT_AUDITED"
 resolved_gaps:
   - "FSG2-GAP-001: RESOLVED_BY_EXISTING_API"
@@ -74,8 +102,10 @@ resolved_gaps:
   - "FSG2-GAP-005: SPECIFIED_LOW_COST"
   - "FSG2-GAP-006: RESOLVED_BY_DESIGN_DECISION"
   - "FSG2-GAP-008: RESOLVED_BY_BINDING_DOCUMENT"
+  - "FSG2-GAP-004c: CLOSED — DecidableEq X era ociosa e foi omitida"
+  - "FSG2-GAP-005: CLOSED_BY_FORMALIZATION (collision_propagates)"
 
-next_gate: FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED
+next_gate: FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED
 
 note: >
   Especificacao apenas. Nenhuma prova Lean, nenhum experimento Python,

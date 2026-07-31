@@ -305,3 +305,27 @@ Ver `TARGET_RESULT.md`.
 | `DEFERRED` | ponte `SimpleGraph`, árvores, distância mínima, unicidade de `μ` — ver `NOVELTY_BOUNDARY.md` |
 
 Dezesseis enunciados previstos, nenhum provado.
+
+---
+
+# Estado após a revisão
+
+Este documento é **histórico**. As assinaturas vigentes estão em
+`FINAL_SIGNATURES.md`.
+
+Alterações aplicadas pela revisão:
+
+```text
+FFG-REC-000  IsRecurrent auditado      REMOVIDO   alias retirado
+FFG-MAIN-001 e FFG-MAIN-002            COLAPSADOS em
+             exists_component_cycle_with_entry_bound
+FFG-REC-001  versao sem limite          REMOVIDO   redundante
+FFG-REC-002  ->  exists_cyclePoint_reachable_with_bound
+FFG-COMP-001 e FFG-COMP-002            DEFERRED   componentSet nao usado
+testemunhas da transitividade          CORRIGIDAS para a forma natural
+```
+
+Motivo do colapso de `FFG-MAIN-001/002`: o `p` existencial era sempre
+`f^[mu] x`, logo redundante. A forma com `∃ mu : ℕ` elimina a duplicação e
+põe o limite de entrada no enunciado principal.
+

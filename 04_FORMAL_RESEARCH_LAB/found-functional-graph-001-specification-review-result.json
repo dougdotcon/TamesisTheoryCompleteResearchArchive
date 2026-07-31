@@ -1,0 +1,174 @@
+{
+  "work_item": "FOUND-FUNCTIONAL-GRAPH-001",
+  "gate": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW",
+  "authorized_action": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED",
+  "executed_at": "2026-07-31T18:50:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "90fb4e26da33cebed2ba414ee5aeb663647de149",
+  "canonical_commit_before": "df6adb93a3bf8c5570954c5a94b0701896be4877",
+  "canonical_commit_after_preflight": "90fb4e26da33cebed2ba414ee5aeb663647de149",
+  "ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS"
+  },
+
+  "skills": [
+    "goal (lida como arquivo)", "matematica-pura", "engenharia-software",
+    "linguistica-computacional", "historia-digital"
+  ],
+
+  "mutually_reachable_correction": {
+    "retired_wording": "MutuallyReachable identifica o ciclo, nao o componente",
+    "adopted_wording": "em pontos periodicos expressa pertencimento a mesma trajetoria ciclica; no dominio total, a classe de p periodico tem minimalPeriod f p elementos e cada ponto transitorio forma classe unitaria",
+    "isolation_argument": "se x != y, x alcanca y e y alcanca x, entao f^[n2 + n1] x = x com n2 + n1 > 0, logo x eh periodico; contrapositivo da o isolamento",
+    "refinement_added_by_review": "classe unitaria NAO distingue transitorio de ponto fixo — um ponto fixo tambem tem classe unitaria; o que distingue eh a pertinencia a periodicPts",
+    "optional_lemma": "mutuallyReachable_of_periodicOrbit_eq — OPTIONAL, nao dependencia do principal"
+  },
+
+  "is_recurrent_decision": {
+    "published": false,
+    "strategy": "A, com a clausula condicional resolvida negativamente",
+    "reason": "recorrencia tem significados mais amplos em dinamica (Poincare, retorno a vizinhanca, Markov)",
+    "aliases_created": [],
+    "public_usage": "x ∈ Function.periodicPts f  e  x ∉ Function.periodicPts f",
+    "why_no_aliases": "a lista CORE congelada nao usa IsCyclePoint nem IsTransientPoint; nao publicar definicao sem uso",
+    "note": "nesta resolucao a Estrategia A coincide com a B"
+  },
+
+  "final_public_aliases": [],
+  "definitions_frozen": {
+    "IterReachable": "∃ n : ℕ, f^[n] x = y",
+    "MutuallyReachable": "IterReachable f x y ∧ IterReachable f y x",
+    "EventuallyMeets": "∃ m n : ℕ, f^[m] x = f^[n] y"
+  },
+  "not_created": ["SameFunctionalComponent", "IsRecurrent", "IsTransient", "IsCyclePoint", "IsTransientPoint", "EventuallyMeets.of_iterReachable_left"],
+  "componentSet": "DEFERRED_API_ALIAS — sem uso na API publica",
+
+  "transitivity_review": {
+    "index_map": "hxy da mx, ny com f^[mx] x = f^[ny] y ; hyz da my, nz com f^[my] y = f^[nz] z",
+    "comparison": "ny versus my",
+    "case_ny_le_my": {"d": "my - ny", "witness_x": "d + mx", "witness_z": "nz"},
+    "case_my_le_ny": {"d": "ny - my", "witness_x": "mx", "witness_z": "d + nz"},
+    "orientation_audit": {
+      "lemma": "Function.iterate_add_apply (f) (m n) (x) : f^[m + n] x = f^[m] (f^[n] x)",
+      "finding": "a contagem EXTERNA vem primeiro, a esquerda da soma",
+      "specification_said": "x: mx + d, z: nz + d",
+      "corrected_to": "x: d + mx, z: d + nz",
+      "impact": "mesmo valor, forma sintatica diferente; mx + d exigiria Nat.add_comm para casar com rw"
+    },
+    "finiteness_required": false,
+    "setoid_created": false
+  },
+
+  "reach_meets_relation": {
+    "theorem": "IterReachable.eventuallyMeets",
+    "witnesses": "(n, 0), pois f^[n] x = y = f^[0] y",
+    "reverse_direction_created": false
+  },
+  "iterReachable_trans_witness": "b + a (contagem externa primeiro)",
+
+  "api_probe": {
+    "file": "/tmp/FFGSpecificationReviewProbe.lean",
+    "content": "somente import e #check",
+    "forbidden_content_count": 0,
+    "exit": 0,
+    "removed": true,
+    "repository_lean_files_created": 0,
+    "lake_build_executed": false
+  },
+
+  "periodicPts_api": "periodicPts f = { x | ∃ n > 0, IsPeriodicPt f n x }; IsPeriodicPt f 0 x eh sempre verdadeiro e nao serve sozinha",
+  "periodicOrbit_api": "periodicOrbit (f) (x) : Cycle α; periodicOrbit_apply_iterate_eq (hx) (n) : periodicOrbit f (f^[n] x) = periodicOrbit f x",
+  "noncomputability": "periodicOrbit esta em noncomputable section; NAO impede provas proposicionais, IMPEDE decide sobre igualdade de orbitas",
+
+  "cycle_theorem_orientation": "periodicOrbit f p = periodicOrbit f q, com p sendo o primeiro argumento de EventuallyMeets",
+  "reverse_result": {
+    "name": "eventuallyMeets_of_periodicOrbit_eq",
+    "classification": "OPTIONAL_COROLLARY",
+    "condition": "somente se a prova for composicao curta de self_mem_periodicOrbit, mem_periodicOrbit_iff e IterReachable.eventuallyMeets",
+    "is_dependency_of_main": false
+  },
+
+  "existence_adapter": "exists_cyclePoint_reachable_with_bound, derivado de exists_eventual_period via mk_mem_periodicPts",
+  "entry_bound": "mu < Fintype.card X",
+  "pigeonhole_reapplied": false,
+
+  "main_signature": "exists_component_cycle_with_entry_bound {X} [Fintype X] (f : X → X) (x : X) : ∃ mu, mu < Fintype.card X ∧ f^[mu] x ∈ Function.periodicPts f ∧ ∀ q, q ∈ Function.periodicPts f → EventuallyMeets f x q → Function.periodicOrbit f (f^[mu] x) = Function.periodicOrbit f q",
+  "main_signature_change": "FFG-MAIN-001 e FFG-MAIN-002 COLAPSADOS num unico teorema; o p existencial era sempre f^[mu] x, logo redundante",
+  "uniqueness_meaning": {
+    "is": "todos os pontos ciclicos do componente determinam a MESMA periodicOrbit",
+    "is_not": ["unico ponto ciclico", "representante canonico", "mu minimo", "periodo minimo", "∃! p : X"],
+    "unique_object": "Function.periodicOrbit f (f^[mu] x)"
+  },
+
+  "core_hypotheses": {
+    "relations": "nenhuma finitude",
+    "periodicOrbit_equality": "nenhuma finitude",
+    "existence_adapter": "[Fintype X]",
+    "main_theorem": "[Fintype X]"
+  },
+  "decidable_eq": "AUSENTE do nucleo",
+  "simple_graph": "DEFERRED — nao importado, ponte registrada como conjectura futura, nao como claim",
+
+  "counterexamples": {
+    "distinct_targets": true,
+    "FFG-CE-001": "dois ciclos globais distintos",
+    "FFG-CE-002": "cauda antes do ciclo",
+    "FFG-CE-003": "ciclo com comprimento maior que um",
+    "FFG-CE-004": "EventuallyMeets sem MutuallyReachable",
+    "FFG-CE-005": "varios pontos ciclicos na mesma periodicOrbit — SEM decide",
+    "FFG-CE-006": "mesmo comprimento de periodo em componentes diferentes — distinguir minimalPeriod de periodicOrbit"
+  },
+
+  "core_theorems": [
+    "iterReachable_refl", "iterReachable_trans", "IterReachable.eventuallyMeets",
+    "eventuallyMeets_refl", "eventuallyMeets_symm", "eventuallyMeets_trans",
+    "periodicOrbit_eq_of_eventuallyMeets",
+    "exists_cyclePoint_reachable_with_bound",
+    "exists_component_cycle_with_entry_bound"
+  ],
+  "core_theorem_count": 9,
+  "optional_corollaries": ["eventuallyMeets_of_periodicOrbit_eq", "mutuallyReachable_of_periodicOrbit_eq"],
+  "deferred": ["componentSet", "Setoid", "SimpleGraph", "componentes quociente", "arvores de entrada", "distancia minima", "tempo minimo de entrada", "representante canonico", "classificacao completa"],
+
+  "gaps_resolved": ["FFG-GAP-001", "FFG-GAP-003", "FFG-GAP-005", "FFG-GAP-008", "FFG-GAP-009", "FFG-GAP-010", "FFG-GAP-011", "FFG-GAP-013", "FFG-GAP-015"],
+  "gaps_ready_for_formalization": ["FFG-GAP-002", "FFG-GAP-004"],
+  "gaps_open": ["FFG-GAP-006", "FFG-GAP-007", "FFG-GAP-012", "FFG-GAP-014"],
+  "new_gap": "FFG-GAP-015 — orientacao de iterate_add_apply nas testemunhas, RESOLVED_BY_API_AUDIT",
+
+  "decision": "A_FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_APPROVED",
+
+  "repository_lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "lake_build_executed": false,
+  "python_experiments_created": 0,
+  "claims_promoted": 0,
+  "claim_ledger_entries": 18,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+
+  "rh_nogo_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED"
+  },
+  "found_semigroup_002_state": {
+    "work_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED"
+  },
+
+  "work_status_final": "READY",
+  "specification_status": "APPROVED",
+  "authorized_action_final": "FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED",
+  "next_single_action": "Formalizar o nucleo aprovado de alcance por iteracao, encontro eventual, existencia limitada de ponto ciclico e unicidade da orbita periodica do componente funcional.",
+  "commit_after": null,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_APPROVED"
+}

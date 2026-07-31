@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-31T16:30:00-03:00
-canonical_commit: "df6adb93a3bf8c5570954c5a94b0701896be4877"
+canonical_commit: "90fb4e26da33cebed2ba414ee5aeb663647de149"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,15 +11,15 @@ repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-FUNCTIONAL-GRAPH-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
+specification_status: "APPROVED"
 evidence_level: "F"
-last_verified_artifact: "found-functional-graph-001-specification-result.json"
+last_verified_artifact: "found-functional-graph-001-specification-review-result.json"
 current_blocker: null
 next_single_action: >
-  Revisar as definições de componente funcional, a unicidade
-  por periodicOrbit e a viabilidade das assinaturas antes de
-  autorizar formalização Lean.
-authorized_action: "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar o núcleo aprovado de alcance por iteração,
+  encontro eventual, existência limitada de ponto cíclico e
+  unicidade da órbita periódica do componente funcional.
+authorized_action: "FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -38,7 +38,11 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não formalizar FOUND-FUNCTIONAL-GRAPH-001 antes da REVISÃO da especificação"
+  - "Não publicar IsRecurrent — usar x ∈ Function.periodicPts f"
+  - "Não publicar SameFunctionalComponent nem componentSet sem uso na API pública"
+  - "Não usar ∃! p : X no teorema principal"
+  - "Não usar decide sobre igualdade de periodicOrbit (noncomputável)"
+  - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não definir componente funcional como MutuallyReachable (FFG-CE-004 refuta)"
   - "Não formular unicidade como existência de um único ponto periódico (FFG-CE-005 refuta)"
   - "Não importar SimpleGraph no núcleo (FFG-GAP-012 diferido)"
@@ -69,58 +73,52 @@ resume_read_order:
 # Estado atual
 
 ```text
-FOUND-FUNCTIONAL-GRAPH-001   READY / especificacao READY_FOR_REVIEW
+FOUND-FUNCTIONAL-GRAPH-001   READY / especificacao APPROVED
+                             formalizacao AUTORIZADA
 FOUND-SEMIGROUP-002          VERIFIED / APPROVED / sem extensao
 RH-NOGO-001                  FROZEN_PARTIAL_RESULT
 ```
 
-**Formalização NÃO autorizada.** A próxima etapa é a **revisão** da
-especificação — precisamente para que uma definição inadequada de
-componente não seja congelada em Lean.
+## Núcleo congelado
 
-## A decisão que a especificação travou
+Três definições — `IterReachable`, `MutuallyReachable`, `EventuallyMeets` —
+e **nove** teoremas, terminando em
 
-```text
-COMPONENTE FUNCIONAL := classe de EventuallyMeets
-                        (exists m n, f^[m] x = f^[n] y)
-
-NAO eh MutuallyReachable.
+```lean
+exists_component_cycle_with_entry_bound
 ```
 
-Contraexemplo decisivo `FFG-CE-004`:
+Assinaturas em `FINAL_SIGNATURES.md`; definições em
+`FINAL_DEFINITIONS.md`. Desviar delas exige gate próprio.
+
+## Três correções da revisão
 
 ```text
-a → c
-b → c
-c → c
+1. MutuallyReachable: semantica precisa por classes.
+   "Classe unitaria" NAO distingue transitorio de ponto fixo — um ponto
+   fixo tambem tem classe unitaria.
+
+2. IsRecurrent RETIRADO. "Recorrencia" tem significados mais amplos em
+   dinamica. Publico usa x ∈ Function.periodicPts f.
+
+3. Testemunhas corrigidas: iterate_add_apply poe a contagem EXTERNA a
+   esquerda, entao as testemunhas naturais sao d + mx e d + nz.
 ```
 
-`a` e `b` estão no mesmo componente; nenhum alcança o outro.
-
-## Unicidade — leitura vinculante
+## Hipóteses congeladas
 
 ```text
-"um ciclo por componente" significa que todos os pontos periodicos do
-componente produzem a MESMA Function.periodicOrbit.
-
-NAO significa um unico ponto periodico  (FFG-CE-005 refuta).
-NAO significa representante canonico.
-NAO significa ponto fixo               (FFG-CE-003 refuta).
+relacoes e igualdade de orbitas    nenhuma finitude
+existencia e teorema principal     [Fintype X]
+DecidableEq X                      AUSENTE do nucleo
 ```
 
-## Achados da auditoria da Mathlib
+## Diferidos
 
 ```text
-periodicPts                 exige periodo positivo POR DEFINICAO
-periodicOrbit               Cycle a, SEM DecidableEq
-periodicOrbit               NONCOMPUTAVEL: decide indisponivel para orbitas
-periodicOrbit_apply_iterate_eq   da FFG-CYCLE-001 em tres passos
-mk_mem_periodicPts          adaptador exato de exists_eventual_period
-NOT_FOUND                   zero — toda a maquinaria de ciclos ja existe
+componentSet, Setoid, SimpleGraph, arvores, distancia minima,
+representante canonico, classificacao completa.
 ```
-
-Uma previsão do gate anterior foi **refutada**: `DecidableEq X` **não** é
-necessária no núcleo.
 
 ## Novidade
 
@@ -129,8 +127,6 @@ mathematical_novelty: NONE
 research_role: FORMAL_FOUNDATION
 ```
 
-Decomposição "forma rho" da iteração finita é material padrão.
-
 ## Próxima ação
 
-Revisar a especificação. **Nenhuma prova. Nenhum arquivo Lean.**
+Formalizar o núcleo aprovado. **Somente ele.**

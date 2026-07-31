@@ -45,10 +45,29 @@ def MutuallyReachable {X : Type*} (f : X → X) (x y : X) : Prop :=
   IterReachable f x y ∧ IterReachable f y x
 ```
 
-Em grafo funcional finito, esta relação identifica **estados do mesmo
-ciclo**, e cada estado consigo próprio.
-
 **Não é a definição de componente.** Ver `COMPONENT_NOTIONS.md`.
+
+### Semântica precisa — corrigida na revisão
+
+A redação anterior deste documento dizia que `MutuallyReachable`
+"identifica estados do mesmo ciclo, e cada estado consigo próprio". Era
+**imprecisa** como afirmação sobre todo o domínio. A formulação congelada
+em `FINAL_DEFINITIONS.md` é:
+
+```text
+Em pontos periodicos, MutuallyReachable expressa pertencimento a mesma
+trajetoria ciclica.
+
+No conjunto total de estados:
+- a classe de um ponto periodico p tem exatamente minimalPeriod f p
+  elementos — os pontos do ciclo de p;
+- cada ponto transitorio forma uma classe unitaria;
+- portanto MutuallyReachable NAO representa a bacia funcional completa.
+```
+
+Refinamento acrescentado na revisão: "classe unitária" **não** distingue
+transitório de ponto fixo — um ponto fixo é periódico e sua classe também é
+unitária. O que distingue é a pertinência a `Function.periodicPts f`.
 
 ### 3. Encontro eventual — a relação central
 
@@ -117,7 +136,14 @@ def IsTransient {X : Type*} (f : X → X) (x : X) : Prop :=
   ¬ IsRecurrent f x
 ```
 
-### Decisão sobre os aliases
+### Decisão sobre os aliases — **REVERTIDA na revisão**
+
+A decisão abaixo foi **retirada**. `IsRecurrent` **não** será publicado:
+"recorrência" tem significados mais amplos em dinâmica. Os teoremas
+públicos usam `x ∈ Function.periodicPts f` diretamente. Ver
+`API_NAMING_DECISION.md` e `FINAL_DEFINITIONS.md`.
+
+Registro histórico da decisão superada:
 
 ```yaml
 decisao: CRIAR, com equivalencia definicional
@@ -180,3 +206,20 @@ periodicOrbit f q = periodicOrbit f p
 No teorema principal, `q` é o ponto periódico **arbitrário** e `p` o
 representante produzido pela existência; a conclusão lê-se "a órbita de
 qualquer periódico do componente é a órbita de `p`".
+
+
+---
+
+# Estado após a revisão
+
+Este documento é **histórico**. As definições vigentes estão em
+`FINAL_DEFINITIONS.md` e as assinaturas em `FINAL_SIGNATURES.md`, ambas
+congeladas no gate `FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW`.
+
+Correções aplicadas:
+
+1. semântica de `MutuallyReachable` tornada precisa;
+2. `IsRecurrent`/`IsTransient` **retirados**;
+3. `componentSet` marcado `DEFERRED_API_ALIAS`;
+4. testemunhas corrigidas para a forma natural de
+   `Function.iterate_add_apply` (contagem externa à esquerda).

@@ -74,3 +74,16 @@ sobre `f : X → X` com `X` finito, e nada mais.
 Em particular, **"bacia de atração" aqui não tem conteúdo métrico nem
 topológico**: é apenas o conjunto de estados cuja trajetória atinge um dado
 ciclo.
+
+## Nomenclatura — proibições acrescentadas na revisão
+
+| ❌ Não escrever | ✅ Escrever |
+|---|---|
+| "estado recorrente" | "ponto periódico", ou `x ∈ Function.periodicPts f` |
+| "`IsRecurrent`" | retirado da API; não use o termo |
+| "`MutuallyReachable` identifica o ciclo" | "em pontos periódicos, expressa pertencimento à mesma trajetória cíclica" |
+| "classe unitária, logo transitório" | um ponto fixo também tem classe unitária |
+
+O termo **recorrência** não deve aparecer na API nem nos enunciados desta
+frente. Ele carrega, em dinâmica, significados que este núcleo não prova.
+

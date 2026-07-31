@@ -1,5 +1,71 @@
 # Changelog do laboratório formal
 
+## FOUND-FUNCTIONAL-GRAPH-001-SPECIFICATION-REVIEW - 2026-07-31
+
+### Corrected
+
+- **`MutuallyReachable`**: retirada a formulacao imprecisa "identifica o
+  ciclo, nao o componente". Adotada a formulacao por classes: em pontos
+  periodicos expressa pertencimento a mesma trajetoria ciclica; no dominio
+  total, a classe de `p` periodico tem `minimalPeriod f p` elementos e cada
+  ponto transitorio forma classe unitaria. Argumento de isolamento escrito.
+  **Refinamento acrescentado pela revisao**: "classe unitaria" NAO distingue
+  transitorio de ponto fixo — um ponto fixo tambem tem classe unitaria.
+- **`IsRecurrent` RETIRADO.** "Recorrencia" tem significados mais amplos em
+  dinamica. Estrategia A com a clausula condicional resolvida
+  negativamente: os teoremas publicos usam `x ∈ Function.periodicPts f`
+  diretamente; `IsCyclePoint`/`IsTransientPoint` NAO criados, porque a
+  lista CORE nao os usa. Nessa resolucao A coincide com B.
+- **Testemunhas da transitividade corrigidas.** A auditoria confirmou
+  `iterate_add_apply (f) (m n) (x) : f^[m + n] x = f^[m] (f^[n] x)` — a
+  contagem EXTERNA vem a esquerda. Formas naturais: `d + mx` e `d + nz`,
+  nao `mx + d` e `nz + d`. Novo gap `FFG-GAP-015`.
+- **`FFG-MAIN-001` e `FFG-MAIN-002` COLAPSADOS** em
+  `exists_component_cycle_with_entry_bound`: o `p` existencial era sempre
+  `f^[mu] x`, logo redundante. `FFG-REC-001` tambem removido.
+
+### Added
+
+- `SPECIFICATION_REVIEW.md`, `FINAL_DEFINITIONS.md`, `FINAL_SIGNATURES.md`,
+  `API_NAMING_DECISION.md`, `REVIEW_DECISION.md` — **congelados**.
+- Nucleo: 3 definicoes e **9 teoremas**; 2 corolarios opcionais.
+
+### Verified
+
+- Probe descartavel em `/tmp`, somente `import` e `#check`, exit **0**,
+  **removido**. Zero `theorem`/`example`/`axiom`/`sorry`/`admit`.
+  **0 arquivos `.lean` no repositorio; nenhum `lake build`.**
+- `periodicPts` exige periodo positivo; `IsPeriodicPt f 0 x` eh sempre
+  verdadeiro e nao serve sozinha.
+- `periodicOrbit : Cycle X`, sem `DecidableEq`, **noncomputavel** — nao
+  impede provas proposicionais, impede `decide` sobre igualdade de orbitas.
+- Hipoteses: nenhuma finitude nas relacoes e na igualdade de orbitas;
+  `[Fintype X]` so na existencia e no principal; `DecidableEq X` ausente.
+- pytest 9 passed; `labctl validate` PASS.
+
+### Blocked
+
+- `componentSet` `DEFERRED_API_ALIAS` — sem uso na API publica.
+- `Setoid`, `SimpleGraph`, arvores, distancia minima, representante
+  canonico, classificacao completa: **DEFERRED**. A ponte com `SimpleGraph`
+  fica como **conjectura futura**, nao como claim.
+- `FFG-GAP-014` permanece `OPEN_BIBLIOGRAPHIC`.
+- `mathematical_novelty: NONE`; ledger em **18** claims.
+- `RH-NOGO-001` e os arquivos matematicos de `FOUND-SEMIGROUP-002`:
+  **0 tocados**.
+
+### Changed
+
+- `canonical_commit`: `df6adb9` -> `90fb4e2`, no preflight.
+- `specification_status`: `READY_FOR_REVIEW` -> `APPROVED`.
+- `authorized_action` -> `FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED`.
+- `DEFINITIONS.md` e `THEOREM_CANDIDATES.md` marcados **historicos**, com as
+  decisoes superadas preservadas e a correcao anexada.
+
+### Result
+
+- `FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_APPROVED`.
+
 ## FOUND-FUNCTIONAL-GRAPH-001-SPECIFICATION - 2026-07-31
 
 ### Decided

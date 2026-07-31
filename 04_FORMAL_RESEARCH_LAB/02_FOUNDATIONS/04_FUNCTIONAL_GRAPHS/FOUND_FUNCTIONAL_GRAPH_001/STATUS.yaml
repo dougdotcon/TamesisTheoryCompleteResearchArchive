@@ -1,9 +1,9 @@
 work_item_id: FOUND-FUNCTIONAL-GRAPH-001
 title: "Finite Functional Graph Decomposition"
 work_status: READY
-specification_status: READY_FOR_REVIEW
+specification_status: APPROVED
 evidence_level: F
-gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION
+gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW
 artifact_type: FORMAL_SPECIFICATION
 scientific_value: FOUNDATIONAL_SPECIFICATION_ONLY
 mathematical_novelty: NONE
@@ -126,7 +126,7 @@ resolved_gaps:
   - "FFG-GAP-011: RESOLVED_BY_API_AUDIT_WITH_RESIDUAL"
   - "FFG-GAP-013: RESOLVED_BY_BINDING_DOCUMENT"
 
-next_gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED
+next_gate: FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION_AUTHORIZED
 
 note: >
   Especificacao apenas. Nenhuma prova, nenhum arquivo Lean, nenhum build.
@@ -134,3 +134,41 @@ note: >
   especificacao, para que uma definicao inadequada de componente nao seja
   congelada em Lean. Decomposicao de grafo funcional eh material padrao;
   ver NOVELTY_BOUNDARY.md, vinculante.
+
+specification_review:
+  decision: APPROVED
+  frozen_documents:
+    - FINAL_DEFINITIONS.md
+    - FINAL_SIGNATURES.md
+    - API_NAMING_DECISION.md
+    - REVIEW_DECISION.md
+    - SPECIFICATION_REVIEW.md
+  corrections:
+    - "MutuallyReachable: semantica precisa por classes; classe unitaria NAO distingue transitorio de ponto fixo"
+    - "IsRecurrent RETIRADO; publico usa x ∈ Function.periodicPts f"
+    - "componentSet DEFERRED_API_ALIAS — sem uso na API publica"
+    - "testemunhas corrigidas para a forma natural de iterate_add_apply"
+    - "FFG-MAIN-001/002 colapsados em exists_component_cycle_with_entry_bound"
+  frozen_core:
+    definitions: [IterReachable, MutuallyReachable, EventuallyMeets]
+    theorems:
+      - iterReachable_refl
+      - iterReachable_trans
+      - IterReachable.eventuallyMeets
+      - eventuallyMeets_refl
+      - eventuallyMeets_symm
+      - eventuallyMeets_trans
+      - periodicOrbit_eq_of_eventuallyMeets
+      - exists_cyclePoint_reachable_with_bound
+      - exists_component_cycle_with_entry_bound
+    count: 9
+  optional_corollaries:
+    - eventuallyMeets_of_periodicOrbit_eq
+    - mutuallyReachable_of_periodicOrbit_eq
+  api_probe:
+    file: "/tmp/FFGSpecificationReviewProbe.lean"
+    exit: 0
+    removed: true
+    repository_lean_files_created: 0
+    lake_build_executed: false
+

@@ -48,3 +48,32 @@ Consequência honesta: o conteúdo matemático próprio desta frente é ainda
 | objeto central | `μ`, `λ`, propagação | componente e órbita |
 | finitude usada em | tudo da Camada C | apenas `FFG-REC-*` |
 | pigeonhole | **consumido aqui** | reutilizado, não reaplicado |
+
+## Correções registradas na revisão da especificação
+
+### Recorrência
+
+| Afirmação | Estado |
+|---|---|
+| `IsRecurrent` como alias de ponto periódico | **retirado** — semanticamente enganoso |
+| `x ∈ Function.periodicPts f` no enunciado público | **adotado** |
+| `IsCyclePoint` / `IsTransientPoint` | não criados — a lista `CORE` não os usa |
+
+"Recorrência" tem significados mais amplos em dinâmica — Poincaré, retorno
+a vizinhança, cadeias de Markov — e nenhum coincide com "ser ponto
+periódico".
+
+### `MutuallyReachable`
+
+| Afirmação | Estado |
+|---|---|
+| "identifica o ciclo, não o componente" | **impreciso** — retirado |
+| classe de `p` periódico = pontos do ciclo de `p` | correto |
+| classe de ponto transitório = `{x}` | correto, com argumento escrito |
+| "classe unitária ⟹ transitório" | **falso** — ponto fixo também é unitário |
+
+### Orientação de `iterate_add_apply`
+
+`f^[m + n] x = f^[m] (f^[n] x)` — contagem **externa** à esquerda. As
+testemunhas naturais são `d + mx` e `d + nz`, não `mx + d` e `nz + d`.
+

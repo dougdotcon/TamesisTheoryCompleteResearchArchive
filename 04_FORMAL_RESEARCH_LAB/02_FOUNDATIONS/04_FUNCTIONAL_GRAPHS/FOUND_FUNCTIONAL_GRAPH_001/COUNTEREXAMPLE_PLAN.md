@@ -155,3 +155,41 @@ Exceção obrigatória: igualdade de `periodicOrbit`, que exige
 `periodicOrbit_apply_iterate_eq` em vez de `decide`.
 
 Cada modelo em namespace próprio; nenhuma instância global.
+
+---
+
+## Revisão — alvos confirmados distintos
+
+| ID | Alvo distinto |
+|---|---|
+| `FFG-CE-001` | dois ciclos globais distintos |
+| `FFG-CE-002` | cauda antes do ciclo |
+| `FFG-CE-003` | ciclo com comprimento maior que um |
+| `FFG-CE-004` | `EventuallyMeets` sem `MutuallyReachable` |
+| `FFG-CE-005` | vários pontos cíclicos na mesma `periodicOrbit` |
+| `FFG-CE-006` | mesmo comprimento de período em componentes diferentes |
+
+Seis alvos, seis afirmações refutadas distintas.
+
+### `FFG-CE-005` — método obrigatório
+
+**Não** planejar `decide` sobre igualdade de `periodicOrbit`: ela é
+noncomputável. Usar `periodicOrbit_apply_iterate_eq`, com `b = f^[1] a`.
+
+### `FFG-CE-006` — distinção obrigatória
+
+Separar explicitamente as duas afirmações:
+
+```text
+minimalPeriod f x = minimalPeriod f y          verdadeiro no modelo
+periodicOrbit f x = periodicOrbit f y          FALSO no modelo
+```
+
+O contraexemplo existe para mostrar que a primeira **não** implica a
+segunda. Confundi-las anularia o exemplo.
+
+### Vocabulário
+
+Os contraexemplos devem falar de **ponto periódico** e **ponto
+transitório**, nunca de "recorrente" — ver `API_NAMING_DECISION.md`.
+

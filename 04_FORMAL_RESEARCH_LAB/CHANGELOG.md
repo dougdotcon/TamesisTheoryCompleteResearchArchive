@@ -1,5 +1,58 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-RESEARCH-REVIEW - 2026-07-31
+
+### Decided
+
+- **`RH-NOGO-001` CONGELADO** como resultado parcial formal
+  (`A_FREEZE_AS_PARTIAL_FORMAL_RESULT`, `DEC-012`). Congelado, **nao
+  descartado**: a camada abstrata eh verificada e reutilizavel.
+- Opcoes B (continuar), C (colaboracao externa) e D (rejeitar) descartadas
+  com motivo registrado.
+- `FOUND-SEMIGROUP-002` selecionado como proximo work item (`DEC-013`),
+  **apenas para especificacao**. Nenhum dos seis itens remanescentes da
+  fila satisfazia os criterios do gate.
+
+### Added
+
+- `RH_NOGO_FINAL_RESEARCH_REVIEW.md`, `RH_NOGO_FREEZE_RECORD.md`,
+  `RH_NOGO_REACTIVATION_CRITERIA.md`, `RH_NOGO_RESULT_BOUNDARY.md`.
+- `RESEARCH_QUEUE.yaml`: item `FOUND-SEMIGROUP-002` (algebra finita e
+  dinamica discreta; `Fintype`/`Decidable`/`decide` ja disponiveis).
+
+### Changed
+
+- `RH-NOGO-001`: `SCOPED` -> `FROZEN_PARTIAL_RESULT` na fila e em
+  `STATUS.yaml`. `authorization_state` e `execution_state` **inalterados**.
+- `active_work_item`: `RH-NOGO-001` -> `FOUND-SEMIGROUP-002`.
+- `authorized_action`: `RH_NOGO_RESEARCH_REVIEW_AUTHORIZED` ->
+  `FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- **`labctl.py`, quatro alteracoes minimas e literais** (registradas em
+  `DEC-012`): `ALLOWED_WORK_STATUS += FROZEN_PARTIAL_RESULT`; checagem de
+  `RH-NOGO-001` aceita `{SCOPED, FROZEN_PARTIAL_RESULT}` (deflacionaria,
+  segue bloqueando `READY`/`IN_PROGRESS`/`VERIFIED`); sequencia de gates
+  admite `FOUND-SEMIGROUP-002`; allowlist +1 entrada literal.
+  As travas `NOT_AUTHORIZED` / `NO_EXECUTION` **nao foram tocadas**.
+
+### Verified
+
+- Teoremas Lean novos: **0**. Claims promovidas: **0**. No-go executado:
+  **nao**. Legado modificado: **0**.
+- pytest 2 passed; `labctl validate` PASS.
+
+### Blocked
+
+- `GLOBAL-WEYL-BRIDGE-SCALAR`: 9 obrigacoes, **0 provadas**.
+- Riemann-von Mangoldt: **nao formalizada**.
+- Reativacao so por `REACT-001..005`. Mais capacidade computacional ou um
+  modelo de IA mais forte **nao** sao criterio.
+
+### Result
+
+- `RH_NOGO_FROZEN_AS_PARTIAL_FORMAL_RESULT`.
+  `spectral_nogo: NOT_ESTABLISHED`; `hilbert_polya: NOT_EXCLUDED`;
+  `riemann_hypothesis: NO_RESULT`.
+
 ## ABSTRACT-COUNTING-NOGO - 2026-07-31
 
 ### Added

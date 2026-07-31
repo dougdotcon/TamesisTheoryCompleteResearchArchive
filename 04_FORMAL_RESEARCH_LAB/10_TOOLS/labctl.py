@@ -35,6 +35,7 @@ ALLOWED_WORK_STATUS = {
     "FAILED",
     "REFUTED",
     "PARTIAL_RESULT",
+    "FROZEN_PARTIAL_RESULT",
     "VERIFIED",
     "EXTERNALLY_REVIEWED",
     "RETRACTED",
@@ -219,14 +220,18 @@ def validate() -> dict[str, Any]:
     benchmark = item_by_id.get("LAB-BENCH-001", {})
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
     semigroup = item_by_id.get("FOUND-SEMIGROUP-001", {})
-    if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001"}:
+    if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001",
+                      "FOUND-SEMIGROUP-002"}:
         errors.append(
-            "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001 or RH-NOGO-001 as active_work_item"
+            "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001 "
+            "or FOUND-SEMIGROUP-002 as active_work_item"
         )
     if active == "FOUND-SEMIGROUP-001" and benchmark.get("status") != "VERIFIED":
         errors.append("FOUND-SEMIGROUP-001 cannot be active before LAB-BENCH-001 is VERIFIED")
     if active == "RH-NOGO-001" and semigroup.get("status") != "VERIFIED":
         errors.append("RH-NOGO-001 cannot be active before FOUND-SEMIGROUP-001 is VERIFIED")
+    if active == "FOUND-SEMIGROUP-002" and semigroup.get("status") != "VERIFIED":
+        errors.append("FOUND-SEMIGROUP-002 cannot be active before FOUND-SEMIGROUP-001 is VERIFIED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -244,6 +249,7 @@ def validate() -> dict[str, Any]:
         "RH_NOGO_GEOMETRIC_GAP_RESOLUTION_AUTHORIZED",
         "RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED",
         "RH_NOGO_RESEARCH_REVIEW_AUTHORIZED",
+        "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
@@ -253,8 +259,8 @@ def validate() -> dict[str, Any]:
         or benchmark_phases.get("LAB_BENCHMARK_VERIFICATION") != "PASS"
     ):
         errors.append("LAB-BENCH-001 cannot be VERIFIED before execution and verification are PASS")
-    if rh_nogo.get("status") != "SCOPED":
-        errors.append("RH-NOGO-001 must remain SCOPED")
+    if rh_nogo.get("status") not in {"SCOPED", "FROZEN_PARTIAL_RESULT"}:
+        errors.append("RH-NOGO-001 must remain SCOPED or FROZEN_PARTIAL_RESULT")
     if rh_nogo.get("authorization_state") != "NOT_AUTHORIZED":
         errors.append("RH-NOGO-001 must remain NOT_AUTHORIZED")
     if rh_nogo.get("execution_state") != "NO_EXECUTION":

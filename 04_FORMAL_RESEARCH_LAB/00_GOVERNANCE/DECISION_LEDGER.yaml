@@ -99,3 +99,49 @@ decisions:
       - "lab0.10-cache-network-result.json"
       - "10_TOOLS/lean-env.ps1"
     reversibility: reversible
+  - decision_id: DEC-012
+    date: 2026-07-31
+    decision: "Congelar RH-NOGO-001 como resultado parcial formal (opcao A)."
+    rationale: >
+      A camada analitica abstrata esta completa e verificada. A camada
+      concreta exigiria infraestrutura Lean para operadores nao limitados,
+      resolvente compacto, projetores espectrais, calculo pseudodiferencial,
+      lei global de Weyl e Riemann-von Mangoldt. O resultado final excluiria
+      apenas uma classe estreita, metade de cujas condicoes eh hipotese
+      deste laboratorio, e nao resolveria RH. Opcoes B (continuar), C
+      (colaboracao externa) e D (rejeitar a frente) foram descartadas; D em
+      particular transformaria trabalho parcial valido em fracasso.
+    authority: RH_NOGO_RESEARCH_REVIEW_AUTHORIZED
+    affected_paths:
+      - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_FINAL_RESEARCH_REVIEW.md"
+      - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
+      - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+      - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md"
+      - "rh-nogo-research-review-result.json"
+    reversibility: reversible
+    reactivation_document: "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+    governance_changes:
+      - "labctl: ALLOWED_WORK_STATUS += FROZEN_PARTIAL_RESULT"
+      - "labctl: checagem de RH-NOGO-001 aceita SCOPED ou FROZEN_PARTIAL_RESULT (deflacionaria)"
+      - "labctl: sequencia de gates admite FOUND-SEMIGROUP-002"
+      - "labctl: allowlist += FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED"
+    untouched_safeguards:
+      - "RH-NOGO-001 authorization_state permanece NOT_AUTHORIZED"
+      - "RH-NOGO-001 execution_state permanece NO_EXECUTION"
+  - decision_id: DEC-013
+    date: 2026-07-31
+    decision: "Selecionar FOUND-SEMIGROUP-002 como proximo work item, apenas para especificacao."
+    rationale: >
+      Nenhum dos seis itens remanescentes da fila satisfazia os criterios
+      positivos do gate: NS-PRESSURE-001 (PDE avancada), PVSNP-PHYS-001
+      (outra frente Clay), YM-LIMIT-001 (QFT construtiva), HODGE-CDK-001
+      (geometria algebrica), BSD-HYP-MATRIX-001 (custo bibliografico
+      very_high), TOE-INTERFACE-001 (TOE, e dependente de uma frente agora
+      congelada). Criado item novo em algebra finita e dinamica discreta,
+      com infraestrutura Mathlib ja disponivel e acesso alto a
+      contraexemplos. Execucao NAO autorizada.
+    authority: RH_NOGO_RESEARCH_REVIEW_AUTHORIZED
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "LAB_STATE.md"
+    reversibility: reversible

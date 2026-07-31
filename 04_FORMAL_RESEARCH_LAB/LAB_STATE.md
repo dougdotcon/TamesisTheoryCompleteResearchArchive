@@ -1,100 +1,103 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T11:05:00-03:00
-canonical_commit: "e0337145fffd708840f937966cedd022732057f8"
+updated_at: 2026-07-31T11:50:00-03:00
+canonical_commit: "c186ab593e8371098964533237f4a4bb8c85247c"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
-active_track: "millennium"
-active_work_item: "RH-NOGO-001"
+active_track: "foundations"
+active_work_item: "FOUND-SEMIGROUP-002"
 work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "abstract-counting-nogo-result.json"
-current_blocker: "A camada abstrata está completa; falta instanciar PowerCountingLaw (lei de Weyl global, GWB-001..009) e TLogCountingLaw (Riemann–von Mangoldt), nenhuma das duas iniciada."
-next_single_action: "Realizar uma revisão de decisão do programa RH-NOGO-001: avaliar se o custo de formalizar a inclusão geométrica e a Riemann–von Mangoldt concreta é proporcional ao valor científico, ou se a frente deve ser congelada como resultado parcial formal."
-authorized_action: "RH_NOGO_RESEARCH_REVIEW_AUTHORIZED"
+last_verified_artifact: "rh-nogo-research-review-result.json"
+current_blocker: "FOUND-SEMIGROUP-002 ainda não foi especificado; execução não autorizada."
+next_single_action: "Especificar FOUND-SEMIGROUP-002: definições, enunciados decidíveis e contraexemplos alvo para o monoide finito de transições já formalizado, sem executar formalização."
+authorized_action: "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED"
+frozen_work_items:
+  RH-NOGO-001: "FROZEN_PARTIAL_RESULT desde 2026-07-31, commit c186ab59; ver 03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
 prohibited_actions:
+  - "Não reabrir RH-NOGO-001 sem que uma condição de RH_NOGO_REACTIVATION_CRITERIA.md tenha ocorrido e sido verificada"
+  - "Não tratar mais capacidade computacional ou um modelo de IA mais forte como critério de reativação"
   - "Não executar a prova do no-go completo (RH_NOGO_PROOF_EXECUTION não autorizado)"
   - "Não instanciar PowerCountingLaw com um operador"
   - "Não instanciar TLogCountingLaw com a função zeta"
   - "Não formalizar teoria pseudodiferencial, lei de Weyl ou Riemann–von Mangoldt concreto"
-  - "Não definir em Lean: variedade, fibrado cotangente, operador pseudodiferencial, símbolo principal, medida de Liouville, coeficiente de Weyl concreto"
-  - "Não fingir que um invólucro de teoria da medida prova a lei de Weyl"
-  - "Não apresentar W-ELLIPTIC-SCALAR-BRIDGE como classe copiada da literatura — metade das condições é deste laboratório"
-  - "Não quantificar sobre todas as realizações auto-adjuntas de uma expressão formal"
-  - "Não estender do caso escalar para sistemas ou fibrados"
-  - "Não usar a fórmula escalar da constante para sistemas"
-  - "Não estender do caso sem bordo para problemas de bordo"
-  - "Não citar Hörmander 1968 pela lei de Weyl global — apenas pelo resultado local"
-  - "Não citar monografias não obtidas como fonte de enunciado"
+  - "Não apresentar ABSTRACT-NOGO-001 como no-go espectral, como refutação de Hilbert–Pólya ou como progresso sobre RH"
   - "Não apresentar ABSTRACT-NOGO-001 como novidade matemática"
-  - "Não declarar que Hilbert–Pólya foi refutado"
-  - "Não declarar progresso sobre a verdade ou falsidade da Hipótese de Riemann"
+  - "Não apresentar W-ELLIPTIC-SCALAR-BRIDGE como classe copiada da literatura — seis das doze condições são deste laboratório"
+  - "Não executar FOUND-SEMIGROUP-002 antes de sua especificação estar pronta"
+  - "Não confundir o modelo finito de FOUND-SEMIGROUP-002 com teoria geral de semigrupos"
+  - "Não reutilizar o modelo finito como suporte de alegação física ou espectral"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_THEOREM_MAP.md"
-  - "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_PROOF_AUDIT.md"
-  - "03_MILLENNIUM/01_RIEMANN/GEOMETRIC_GAP_RESOLUTION_AUDIT.md"
-  - "03_MILLENNIUM/01_RIEMANN/W_ELLIPTIC_SCALAR_V3.md"
-  - "03_MILLENNIUM/01_RIEMANN/GLOBAL_WEYL_BRIDGE_OBLIGATIONS.md"
-  - "03_MILLENNIUM/01_RIEMANN/STOP_CONDITIONS.md"
+  - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
+  - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md"
+  - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+  - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+  - "00_GOVERNANCE/DECISION_LEDGER.yaml"
   - "último relatório em 09_SESSIONS/"
 ---
 
 # Estado atual
 
 ```text
+RH-NOGO-001   FROZEN_PARTIAL_RESULT   (congelado, NAO descartado)
+FOUND-SEMIGROUP-002   SCOPED          (ativo, apenas especificacao autorizada)
+```
+
+## RH-NOGO-001 — o que ficou pronto
+
+```text
 CAMADA ANALITICA ABSTRATA — COMPLETA
+  ASYM-NOGO-001          VERIFIED
+  COUNTING-LAW-BRIDGE    VERIFIED
+  ABSTRACT-NOGO-001      VERIFIED
+  WEYL-COEFFICIENT-CORE  VERIFIED  (interface, nao geometria)
 
-COUNTING-LAW-BRIDGE     VERIFIED
-ASYM-NOGO-001           VERIFIED
-ABSTRACT-NOGO-001       VERIFIED   <- fecha a camada
-WEYL-COEFFICIENT-CORE   VERIFIED   (interface, nao geometria)
-
-CAMADA CONCRETA — NAO INICIADA
-
-GLOBAL-WEYL-BRIDGE-SCALAR   SPECIFIED_NOT_PROVED   (11 obrigacoes, 0 provadas)
-Riemann-von Mangoldt        NAO FORMALIZADA        (SB-GAP-010B)
+CAMADA CONCRETA — DEFERIDA
+  GLOBAL-WEYL-BRIDGE-SCALAR   NOT_PROVED       (9 obrigacoes, 0 provadas)
+  Riemann-von Mangoldt        NOT_FORMALIZED
+  exclusao de operadores      NOT_PROVED
 ```
 
-`RH-NOGO-001` permanece `SCOPED`, `proof_execution: NO_EXECUTION`.
+Descrição canônica, vinculante:
 
-## O que foi provado
+> Teorema abstrato formal completo, com uma aplicação espectral candidata
+> rigorosamente delimitada, mas ainda não instanciada.
 
-```text
-Nenhuma dupla de funcoes reais NTarget, NBase satisfaz simultaneamente:
-1. lei de potencia positiva finita para NTarget;
-2. lei positiva finita T log T para NBase;
-3. NTarget - NBase = o(T log T).
+## RH-NOGO-001 — conclusões científicas
+
+```yaml
+spectral_nogo: NOT_ESTABLISHED
+hilbert_polya: NOT_EXCLUDED
+riemann_hypothesis: NO_RESULT
 ```
 
-Análise real abstrata. **Não é novidade matemática** — é a composição de
-dois fatos elementares já formalizados aqui.
+Claims permitidas e proibidas estão fixadas em
+`03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md`, documento
+vinculante.
 
-## O que **não** foi provado
+## Por que congelar
 
-```text
-que NBase seja a contagem dos zeros da zeta;
-que NTarget seja uma funcao espectral;
-Riemann-von Mangoldt;
-a lei de Weyl;
-que algum operador pertenca a classe geometrica;
-RH-NOGO-001 concreto;
-inexistencia de operador de Hilbert-Polya;
-qualquer coisa sobre a Hipotese de Riemann.
-```
+Continuar exigiria construir, em Lean, infraestrutura para operadores
+auto-adjuntos não limitados, resolvente compacto, projetores espectrais,
+cálculo pseudodiferencial, lei global de Weyl e Riemann–von Mangoldt. Isso
+é um projeto de formalização de grande porte, não o próximo gate — e o
+resultado final excluiria apenas uma classe estreita, metade de cujas
+condições é hipótese deste próprio laboratório, sem resolver RH.
 
-## Registro que precisa permanecer visível
+Congelar preserva o que é válido e reutilizável. As pastas
+`AsymptoticCore/`, `Bridge/` e `Composition/` são análise real abstrata
+sobre funções `ℝ → ℝ` e podem ser usadas fora desta frente.
 
-**Seis das doze condições de `W-ELLIPTIC-SCALAR-BRIDGE` são hipóteses
-explícitas deste laboratório**, não da literatura (`W_ELLIPTIC_SCALAR_V3.md`,
-tabela de proveniência; `SB-GAP-012`). A classe **não** pode ser
-apresentada como copiada integralmente da fonte.
+## Próxima frente
 
-## Próxima ação — revisão, não prova
+`FOUND-SEMIGROUP-002` — dinâmica discreta de monoides de transição
+finitos. Escolhido porque usa infraestrutura Mathlib já disponível e já
+exercitada aqui (`Fintype`, `Decidable`, `decide`), tem acesso alto a
+contraexemplos por ser finito e decidível, e reutiliza diretamente
+`FOUND-SEMIGROUP-001`, que está `VERIFIED`.
 
-Avaliar se o custo de formalizar a inclusão geométrica (`GWB-001..009`) e a
-Riemann–von Mangoldt concreta é proporcional ao valor científico, ou se a
-frente deve ser congelada como resultado parcial formal e o laboratório
-movido para outro work item.
+**Apenas a especificação está autorizada.** Nenhuma formalização foi
+executada neste gate.

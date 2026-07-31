@@ -66,6 +66,45 @@ queue:
     priority_class: P1
     status: VERIFIED
     authorized_next_gate: RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED
+  - work_item_id: FOUND-SEMIGROUP-002
+    title: "Dinamica discreta de monoides de transicao finitos"
+    track: foundations
+    target_statement: >
+      Para o monoide finito de transicoes ja formalizado em
+      FOUND-SEMIGROUP-001, caracterizar idempotentes, orbitas eventualmente
+      periodicas e o pre-periodo, e exibir contraexemplos explicitos as
+      generalizacoes ingenuas (nao comutatividade; orbita nao
+      eventualmente constante).
+    expected_product: >
+      Definicoes pequenas, teoremas decidiveis e contraexemplos verificados
+      por computacao em Lean.
+    dependencies:
+      - LAB-BENCH-001
+      - FOUND-SEMIGROUP-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/"
+      - "05_FORMAL/lean/TamesisLab/Tests/FoundSemigroup001.lean"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 2
+    external_dependency: none
+    cross_track_value: medium
+    stop_condition: >
+      confundir o exemplo finito com teoria geral; alegar resultado sobre
+      semigrupos infinitos; reutilizar o modelo finito como suporte de
+      alegacao fisica ou espectral
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_rationale: >
+      Selecionado no gate RH_NOGO_RESEARCH_REVIEW. Nenhum dos seis itens
+      remanescentes da fila satisfazia os criterios positivos daquele gate
+      (todos caem em "evitar": Clay, PDE avancada, geometria espectral,
+      TOE). Este item usa infraestrutura Mathlib ja disponivel e ja
+      exercitada (Fintype, Decidable, decide), tem acesso ALTO a
+      contraexemplos por ser finito e decidivel, e reutiliza diretamente
+      material VERIFIED.
   - work_item_id: RH-NOGO-001
     title: "No-go espectral rigorosamente delimitado"
     track: millennium
@@ -85,10 +124,16 @@ queue:
     cross_track_value: high
     stop_condition: "hipótese circular, trivialidade ou contraexemplo"
     priority_class: P1
-    status: SCOPED
+    status: FROZEN_PARTIAL_RESULT
     authorization_state: NOT_AUTHORIZED
     execution_state: NO_EXECUTION
-    authorized_next_gate: RH_NOGO_RESEARCH_REVIEW_AUTHORIZED
+    authorized_next_gate: RH_NOGO_REACTIVATION_BLOCKED
+    frozen_at: 2026-07-31
+    frozen_at_commit: c186ab593e8371098964533237f4a4bb8c85247c
+    freeze_decision: A_FREEZE_AS_PARTIAL_FORMAL_RESULT
+    freeze_record: "03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
+    reactivation_criteria: "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+    result_boundary: "03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md"
     specification_status: SPECIFICATION_READY
     primary_source_audit: PARTIALLY_SUFFICIENT
     local_to_global_bridge: DOCUMENTED
@@ -98,6 +143,10 @@ queue:
     counting_law_bridge: VERIFIED
     subartifacts:
       ASYM-NOGO-001: VERIFIED
+      COUNTING-LAW-BRIDGE: VERIFIED
+      ABSTRACT-NOGO-001: VERIFIED
+      WEYL-COEFFICIENT-CORE: VERIFIED
+      GLOBAL-WEYL-BRIDGE-SCALAR: SPECIFIED_NOT_PROVED
   - work_item_id: NS-PRESSURE-001
     title: "Auditoria do lema de pressão–alinhamento"
     track: millennium

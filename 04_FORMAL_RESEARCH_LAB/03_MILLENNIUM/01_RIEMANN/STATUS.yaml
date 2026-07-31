@@ -13,7 +13,7 @@ operator_class_split:
   W-ELLIPTIC-SCALAR-BRIDGE: "SOURCE + 6 acrescimos deste laboratorio (B1..B6)"
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED
+next_gate: RH_NOGO_RESEARCH_REVIEW_AUTHORIZED
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
@@ -24,6 +24,15 @@ subartifacts:
     theorem_map: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_THEOREM_MAP.md"
     proof_audit: "03_MILLENNIUM/01_RIEMANN/COUNTING_BRIDGE_PROOF_AUDIT.md"
     scope: "analise real abstrata; sem zeta, sem operadores, sem lei de Weyl"
+  ABSTRACT-NOGO-001:
+    status: VERIFIED
+    lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/Composition/"
+    theorem_map: "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_THEOREM_MAP.md"
+    proof_audit: "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_PROOF_AUDIT.md"
+    scope: >
+      composicao de COUNTING-LAW-BRIDGE com ASYM-NOGO-001. Analise real
+      abstrata; sem zeta, sem operadores, sem lei de Weyl, sem geometria.
+      Geometry/ NAO importado.
   WEYL-COEFFICIENT-CORE:
     status: VERIFIED
     lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/Geometry/"
@@ -36,15 +45,19 @@ subartifacts:
 abstract_components_verified:
   - ASYM-NOGO-001
   - COUNTING-LAW-BRIDGE
+  - ABSTRACT-NOGO-001
   - WEYL-COEFFICIENT-CORE
 geometric_bridge_status:
   GLOBAL-WEYL-BRIDGE-SCALAR: SPECIFIED_NOT_PROVED
   GLOBAL-WEYL-DATA-BRIDGE: SPECIFIED_NOT_PROVED
   obligations_total: 11
   obligations_proved: 0
+abstract_layer: COMPLETE
 remaining_work: >
-  Provar GWB-001..009. Nenhuma foi demonstrada. A travessia
-  W-ELLIPTIC-SCALAR-BRIDGE -> W-POWER continua sem execucao.
+  A camada analitica abstrata esta COMPLETA e verificada. O que falta eh
+  inteiramente concreto: provar GWB-001..009 (instanciar PowerCountingLaw)
+  e formalizar Riemann-von Mangoldt (instanciar TLogCountingLaw). Nenhuma
+  das duas foi iniciada.
 open_gaps:
   - "GAP-RH-015: finitude de C_P (GWB-008C) sem fonte (NOVO)"
   - "SB-GAP-002 / GAP-RH-012: discretude classificada como hipotese incorporada"

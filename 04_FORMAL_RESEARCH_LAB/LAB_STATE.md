@@ -1,41 +1,43 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T10:20:00-03:00
-canonical_commit: "1937c6dda2a4e6b448a1571b43ee9c16fc2e64a0"
+updated_at: 2026-07-31T11:05:00-03:00
+canonical_commit: "e0337145fffd708840f937966cedd022732057f8"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
 active_track: "millennium"
 active_work_item: "RH-NOGO-001"
 work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "rh-nogo-geometric-gap-resolution-result.json"
-current_blocker: "As obrigações GWB-001..009 permanecem não provadas; a entrada geométrica foi resolvida apenas no nível de interface e registro."
-next_single_action: "Formalizar a composição abstrata PowerCountingLaw → TLogCountingLaw → contradição, mantendo tudo em nível de interface, sem instanciar operador algum."
-authorized_action: "RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED"
+last_verified_artifact: "abstract-counting-nogo-result.json"
+current_blocker: "A camada abstrata está completa; falta instanciar PowerCountingLaw (lei de Weyl global, GWB-001..009) e TLogCountingLaw (Riemann–von Mangoldt), nenhuma das duas iniciada."
+next_single_action: "Realizar uma revisão de decisão do programa RH-NOGO-001: avaliar se o custo de formalizar a inclusão geométrica e a Riemann–von Mangoldt concreta é proporcional ao valor científico, ou se a frente deve ser congelada como resultado parcial formal."
+authorized_action: "RH_NOGO_RESEARCH_REVIEW_AUTHORIZED"
 prohibited_actions:
   - "Não executar a prova do no-go completo (RH_NOGO_PROOF_EXECUTION não autorizado)"
-  - "Não aplicar ASYM-NOGO-001 a nenhum operador"
+  - "Não instanciar PowerCountingLaw com um operador"
+  - "Não instanciar TLogCountingLaw com a função zeta"
   - "Não formalizar teoria pseudodiferencial, lei de Weyl ou Riemann–von Mangoldt concreto"
   - "Não definir em Lean: variedade, fibrado cotangente, operador pseudodiferencial, símbolo principal, medida de Liouville, coeficiente de Weyl concreto"
   - "Não fingir que um invólucro de teoria da medida prova a lei de Weyl"
+  - "Não apresentar W-ELLIPTIC-SCALAR-BRIDGE como classe copiada da literatura — metade das condições é deste laboratório"
   - "Não quantificar sobre todas as realizações auto-adjuntas de uma expressão formal"
   - "Não estender do caso escalar para sistemas ou fibrados"
   - "Não usar a fórmula escalar da constante para sistemas"
   - "Não estender do caso sem bordo para problemas de bordo"
   - "Não citar Hörmander 1968 pela lei de Weyl global — apenas pelo resultado local"
   - "Não citar monografias não obtidas como fonte de enunciado"
+  - "Não apresentar ABSTRACT-NOGO-001 como novidade matemática"
   - "Não declarar que Hilbert–Pólya foi refutado"
   - "Não declarar progresso sobre a verdade ou falsidade da Hipótese de Riemann"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
+  - "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_THEOREM_MAP.md"
+  - "03_MILLENNIUM/01_RIEMANN/ABSTRACT_COMPOSITION_PROOF_AUDIT.md"
   - "03_MILLENNIUM/01_RIEMANN/GEOMETRIC_GAP_RESOLUTION_AUDIT.md"
   - "03_MILLENNIUM/01_RIEMANN/W_ELLIPTIC_SCALAR_V3.md"
-  - "03_MILLENNIUM/01_RIEMANN/WEYL_COEFFICIENT_POSITIVITY.md"
-  - "03_MILLENNIUM/01_RIEMANN/GLOBAL_WEYL_DATA_BRIDGE.md"
   - "03_MILLENNIUM/01_RIEMANN/GLOBAL_WEYL_BRIDGE_OBLIGATIONS.md"
-  - "03_MILLENNIUM/01_RIEMANN/SOURCE_BRIDGE_GAP_REGISTER.yaml"
   - "03_MILLENNIUM/01_RIEMANN/STOP_CONDITIONS.md"
   - "último relatório em 09_SESSIONS/"
 ---
@@ -43,51 +45,56 @@ resume_read_order:
 # Estado atual
 
 ```text
-COUNTING-LAW-BRIDGE     VERIFIED   (análise real abstrata)
-          ↓
-ASYM-NOGO-001           VERIFIED   (incompatibilidade potência × log)
+CAMADA ANALITICA ABSTRATA — COMPLETA
 
-WEYL-COEFFICIENT-CORE   VERIFIED   (teoria da medida elementar)
+COUNTING-LAW-BRIDGE     VERIFIED
+ASYM-NOGO-001           VERIFIED
+ABSTRACT-NOGO-001       VERIFIED   <- fecha a camada
+WEYL-COEFFICIENT-CORE   VERIFIED   (interface, nao geometria)
 
-GLOBAL-WEYL-BRIDGE-SCALAR   SPECIFIED_NOT_PROVED   (11 obrigações, 0 provadas)
-GLOBAL-WEYL-DATA-BRIDGE     SPECIFIED_NOT_PROVED
+CAMADA CONCRETA — NAO INICIADA
+
+GLOBAL-WEYL-BRIDGE-SCALAR   SPECIFIED_NOT_PROVED   (11 obrigacoes, 0 provadas)
+Riemann-von Mangoldt        NAO FORMALIZADA        (SB-GAP-010B)
 ```
 
-`RH-NOGO-001` permanece `SCOPED`. `ASYM-NOGO-001` **não** foi aplicado.
-Nenhum operador foi construído. Hilbert–Pólya **não** foi excluído. Nada
-foi afirmado sobre a Hipótese de Riemann.
+`RH-NOGO-001` permanece `SCOPED`, `proof_execution: NO_EXECUTION`.
 
-## O que este gate fez
-
-Resolveu a **entrada geométrica** no nível de interface e de registro:
-
-1. `GWB-008` foi dividida em `008A` (positividade da medida no espaço de
-   fases), `008B` (`C_P > 0`) e `008C` (`C_P < ∞`, **novo gap**
-   `GAP-RH-015`).
-2. A classe foi dividida em `W-ELLIPTIC-SCALAR-SOURCE` (6 condições
-   literais de Coriasco–Doll) e `W-ELLIPTIC-SCALAR-BRIDGE` (mais 6
-   acréscimos deste laboratório, cada um marcado
-   `EXPLICIT_BRIDGE_ASSUMPTION`).
-3. Duas condições novas e necessárias ficaram explícitas: `M ≠ ∅` e
-   `d ≥ 1` — sem esta última, `α = d/m` seria `0` e `W-POWER` falharia.
-4. A discretude foi classificada sem inflação: `GWB-001` é hipótese
-   incorporada, `GWB-002` é resultado citado.
-
-## O que este gate **não** fez
+## O que foi provado
 
 ```text
-NAO provou nenhuma das onze obrigacoes GWB.
-NAO fechou GAP-RH-009 (sistemas e fibrados).
-NAO obteve fonte para C_P > 0 nem para C_P < infinito.
-NAO formalizou teoria pseudodiferencial.
-NAO instanciou PowerCountingLaw a partir de geometria.
+Nenhuma dupla de funcoes reais NTarget, NBase satisfaz simultaneamente:
+1. lei de potencia positiva finita para NTarget;
+2. lei positiva finita T log T para NBase;
+3. NTarget - NBase = o(T log T).
 ```
 
-O argumento de `C_P > 0` ficou **escrito**, não provado. Somente o passo 5
-de seis tem núcleo verificado em Lean, e esse núcleo é teoria da medida
-elementar.
+Análise real abstrata. **Não é novidade matemática** — é a composição de
+dois fatos elementares já formalizados aqui.
 
-## O que falta
+## O que **não** foi provado
 
-Provar `GWB-001..009`, ou obter fontes que as sustentem. É o mesmo gargalo
-de antes, agora com o inventário completo do que precisa ser provado.
+```text
+que NBase seja a contagem dos zeros da zeta;
+que NTarget seja uma funcao espectral;
+Riemann-von Mangoldt;
+a lei de Weyl;
+que algum operador pertenca a classe geometrica;
+RH-NOGO-001 concreto;
+inexistencia de operador de Hilbert-Polya;
+qualquer coisa sobre a Hipotese de Riemann.
+```
+
+## Registro que precisa permanecer visível
+
+**Seis das doze condições de `W-ELLIPTIC-SCALAR-BRIDGE` são hipóteses
+explícitas deste laboratório**, não da literatura (`W_ELLIPTIC_SCALAR_V3.md`,
+tabela de proveniência; `SB-GAP-012`). A classe **não** pode ser
+apresentada como copiada integralmente da fonte.
+
+## Próxima ação — revisão, não prova
+
+Avaliar se o custo de formalizar a inclusão geométrica (`GWB-001..009`) e a
+Riemann–von Mangoldt concreta é proporcional ao valor científico, ou se a
+frente deve ser congelada como resultado parcial formal e o laboratório
+movido para outro work item.

@@ -1,5 +1,65 @@
 # Changelog do laboratório formal
 
+## ABSTRACT-COUNTING-NOGO - 2026-07-31
+
+### Added
+
+- `ABSTRACT-NOGO-001` formalizado em
+  `05_FORMAL/lean/TamesisLab/RHNogo/Composition/`: `AbstractNogo.lean`,
+  `Corollaries.lean`, `Audit.lean`, agregador `Composition.lean` e teste
+  `Tests/RHNogoAbstractComposition.lean`. **5 teoremas**, 1 estrutura,
+  1 definicao.
+- Teorema principal `abstract_power_tlog_incompatibility`: uma lei de
+  potencia positiva para `NTarget`, uma lei positiva `T log T` para
+  `NBase` e `NTarget - NBase = o(T log T)` sao simultaneamente
+  insatisfaziveis. Prova em DUAS LINHAS: composicao de
+  `COUNTING-LAW-BRIDGE` com `ASYM-NOGO-001`.
+- Estrutura `AbstractCountingNogoData` (nao eh `class`) e o teorema
+  `.false` de inabitabilidade.
+- Corolarios `ABSTRACT-NOGO-E0-001` (igualdade eventual) e
+  `ABSTRACT-NOGO-E1-001` (diferenca limitada), reutilizando conversoes ja
+  verificadas.
+- `ABSTRACT_COMPOSITION_THEOREM_MAP.md` e
+  `ABSTRACT_COMPOSITION_PROOF_AUDIT.md`.
+- Claim `ABSTRACT-COUNTING-NOGO-FORMAL-001` (`F`, `formal_asymptotics`,
+  VERIFIED).
+
+### Verified
+
+- `lake build` PASS com **8.708 jobs** em 129 s; teste isolado exit 0.
+- Tokens proibidos: `sorry=0 admit=0 axiom=0 unsafe=0` na arvore inteira.
+- `#print axioms` nos 7 objetos: apenas `propext`, `Classical.choice`,
+  `Quot.sound`.
+- Imports da pasta `Composition/`: **apenas** `AsymptoticCore` e `Bridge`.
+  **`Geometry/` NAO importado.**
+- Vocabulario proibido na pasta: 7 ocorrencias, **todas em comentarios que
+  declaram a exclusao**; nenhuma em identificador, tipo ou termo de prova.
+- Direcao da diferenca confirmada por `Iff.rfl`: `SubdominantTLog X Y` eh
+  literalmente `X - Y = o(T log T)`. Opcao C (documentar a convencao
+  existente); nenhum lema de sinal foi necessario.
+- pytest 2 passed; `labctl validate` PASS.
+- Nenhuma falha de compilacao: os cinco arquivos passaram de primeira.
+
+### Changed
+
+- `authorized_action`: `RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED`
+  -> `RH_NOGO_RESEARCH_REVIEW_AUTHORIZED` (entrada literal unica).
+- `STATUS.yaml`: `abstract_layer: COMPLETE`.
+
+### Blocked
+
+- **Nenhuma instancia de `PowerCountingLaw` vinda de operador** — exigiria
+  `GWB-001..009`, zero provadas.
+- **Nenhuma instancia de `TLogCountingLaw` vinda da zeta** — exigiria
+  Riemann-von Mangoldt (`SB-GAP-010B`).
+- `E3` nao formalizado (`SB-GAP-011`).
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+
+### Result
+
+- `RH_NOGO_ABSTRACT_COMPOSITION_VERIFIED`. A camada analitica abstrata
+  esta COMPLETA. O resultado **nao eh novidade matematica**.
+
 ## RH-NOGO-GEOMETRIC-GAP-RESOLUTION - 2026-07-31
 
 ### Added

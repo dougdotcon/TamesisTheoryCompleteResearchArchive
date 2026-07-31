@@ -44,3 +44,18 @@ variedade, fibrado cotangente, operador pseudodiferencial, símbolo
 principal, medida de Liouville nem coeficiente de Weyl concreto. Cobre o
 passo 5 de seis do argumento de `GWB-008A` e a aritmética de `GWB-008B`.
 **Não prova a lei de Weyl.** Ver `GEOMETRIC_LEAN_SCOPE.md`.
+
+## RHNogo/Composition — ABSTRACT-NOGO-001
+
+| Arquivo | Conteúdo |
+|---|---|
+| `Composition/AbstractNogo.lean` | `abstract_power_tlog_incompatibility`, `AbstractCountingNogoData`, `.false`, `AbstractNogoStatement`, `abstractNogoStatement_holds` |
+| `Composition/Corollaries.lean` | `abstract_nogo_of_eventuallyEq` (E0), `abstract_nogo_of_boundedDifference` (E1) |
+| `Composition/Audit.lean` | `#check` do núcleo local e dos seis objetos reutilizados |
+| `Composition.lean` | agregador |
+| `Tests/RHNogoAbstractComposition.lean` | teste isolado, oito confirmações de assinatura |
+
+**Escopo:** composição de `COUNTING-LAW-BRIDGE` com `ASYM-NOGO-001`.
+Imports: apenas `AsymptoticCore` e `Bridge`. **`Geometry/` não é
+importado** — `W-ELLIPTIC-SCALAR-BRIDGE` não é premissa Lean deste
+teorema. Ver `ABSTRACT_COMPOSITION_THEOREM_MAP.md`.

@@ -1,0 +1,121 @@
+{
+  "gate": "ABSTRACT-SPECTRAL-NOGO",
+  "authorized_action": "RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED",
+  "work_item_id": "RH-NOGO-001",
+  "artifact_id": "ABSTRACT-NOGO-001",
+  "executed_at": "2026-07-31T11:05:00-03:00",
+  "agent": "claude-opus-5",
+  "canonical_repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+  "git_commit_before": "e0337145fffd708840f937966cedd022732057f8",
+  "result_status": "RH_NOGO_ABSTRACT_COMPOSITION_VERIFIED",
+
+  "toolchain": {
+    "lean": "v4.33.0-rc1",
+    "mathlib_tag": "v4.33.0-rc1",
+    "mathlib_rev": "79d0395a1825a6264ad5d269e35e60537518955e"
+  },
+
+  "main_theorem": {
+    "id": "ABSTRACT-NOGO-001",
+    "lean_name": "abstract_power_tlog_incompatibility",
+    "signature": "{NTarget NBase : R -> R} -> PowerCountingLaw NTarget -> TLogCountingLaw NBase -> SubdominantTLog NTarget NBase -> False",
+    "proof_shape": "composicao de API: um `have` (COUNTING-LAW-BRIDGE) e um `exact` (ASYM-NOGO-001)",
+    "reproved_alpha_cases": false,
+    "manipulated_limits_directly": false
+  },
+
+  "difference_convention": {
+    "definition": "SubdominantTLog NTarget NBase := (fun T => NTarget T - NBase T) =o[atTop] (fun T => T * Real.log T)",
+    "matches_requested_orientation": true,
+    "option_taken": "C — documentar a convenção existente",
+    "sign_lemma_created": false,
+    "confirmed_by": "Iff.rfl no teste isolado"
+  },
+
+  "reuse": {
+    "COUNTING-LAW-BRIDGE": "TLogCountingLaw.transfer / counting_law_bridge",
+    "ASYM-NOGO-001": "asym_nogo_001",
+    "E0_conversion": "subdominantTLog_of_eventualEquality",
+    "E1_conversion": "subdominantTLog_of_boundedDifference",
+    "new_asymptotic_analysis": false
+  },
+
+  "corollaries": {
+    "ABSTRACT-NOGO-E0-001": {
+      "lean_name": "abstract_nogo_of_eventuallyEq",
+      "implemented": true
+    },
+    "ABSTRACT-NOGO-E1-001": {
+      "lean_name": "abstract_nogo_of_boundedDifference",
+      "implemented": true,
+      "justification": "a conversao BoundedDifference -> SubdominantTLog ja estava verificada"
+    },
+    "E3": {
+      "implemented": false,
+      "reason": "fora do escopo do gate; SB-GAP-011 aberto"
+    }
+  },
+
+  "aggregator_structure": {
+    "created": true,
+    "name": "AbstractCountingNogoData",
+    "is_typeclass": false,
+    "justification": "reune as tres hipoteses num identificador rastreavel; nao ha sintese de instancia"
+  },
+
+  "lean": {
+    "root": "05_FORMAL/lean/TamesisLab/RHNogo/Composition/",
+    "theorems": 5,
+    "structures": 1,
+    "defs": 1,
+    "imports": [
+      "TamesisLab.RHNogo.AsymptoticCore",
+      "TamesisLab.RHNogo.Bridge"
+    ],
+    "geometry_imported": false
+  },
+
+  "verification": {
+    "lake_build": "PASS",
+    "lake_build_jobs": 8708,
+    "lake_build_seconds": 129,
+    "isolated_test": "TamesisLab/Tests/RHNogoAbstractComposition.lean exit 0",
+    "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+    "print_axioms": {
+      "objects_checked": 7,
+      "result": "[propext, Classical.choice, Quot.sound] em todos"
+    },
+    "forbidden_vocabulary_hits": 7,
+    "forbidden_vocabulary_note": "todas em comentarios que DECLARAM a exclusao; nenhuma em identificador, tipo ou termo de prova",
+    "pytest": "2 passed",
+    "labctl_validate": "PASS"
+  },
+
+  "claims": {
+    "added": [
+      {
+        "claim_id": "ABSTRACT-COUNTING-NOGO-FORMAL-001",
+        "domain": "formal_asymptotics",
+        "work_status": "VERIFIED",
+        "evidence_level": "F"
+      }
+    ]
+  },
+
+  "not_done": [
+    "NBase NAO foi identificada com a contagem de zeros da zeta",
+    "NTarget NAO foi identificada com uma funcao espectral",
+    "Riemann-von Mangoldt NAO foi formalizado",
+    "A lei de Weyl NAO foi formalizada",
+    "Nenhum operador foi mostrado pertencer a classe geometrica",
+    "A diferenca concreta NAO foi mostrada subdominante",
+    "RH-NOGO-001 concreto NAO foi executado",
+    "Hilbert-Polya NAO foi excluido",
+    "Nada foi afirmado sobre a verdade ou falsidade da Hipotese de Riemann",
+    "Geometry/ NAO foi importado",
+    "PowerCountingLaw NAO foi instanciado com um operador",
+    "TLogCountingLaw NAO foi instanciado com a zeta"
+  ],
+
+  "next_authorized_action": "RH_NOGO_RESEARCH_REVIEW_AUTHORIZED"
+}

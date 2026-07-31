@@ -1,10 +1,77 @@
+schema: tamesis-gap-register/1
+work_item_id: RH-NOGO-001
 gaps:
-  - gap_id: RH-GAP-001
-    description: "Classe de operadores e domínio ainda não definidos."
+  - gap_id: GAP-RH-001
+    description: >
+      Formulação exata da classe de operadores: a Classe W (W1–W8) está
+      especificada em OPERATOR_CLASS.md; a redação final em linguagem de
+      análise funcional (domínios, extensão de Friedrichs) deve ser
+      revisada no gate de prova.
+    severity: medium
+    status: SPECIFIED_PENDING_REVIEW
+    blocking: false
+  - gap_id: GAP-RH-002
+    description: >
+      Fonte primária para a versão específica da lei de Weyl usada (W8):
+      transcrever de Hörmander 1968 o enunciado exato (escalar vs fibrado,
+      diferencial vs pseudodiferencial, forma do resto) antes do gate de
+      prova do resultado completo.
+    severity: high
     status: OPEN
-  - gap_id: RH-GAP-002
-    description: "Qualquer cancelamento fora da diagonal deve ser não circular."
+    blocking: "bloqueia o gate de prova do resultado completo; NÃO bloqueia a formalização do núcleo abstrato"
+  - gap_id: GAP-RH-003
+    description: >
+      Tradução da contagem espectral para o sublema abstrato: definir em
+      Lean a função de contagem a partir de um multiconjunto/sequência de
+      autovalores e provar que as hipóteses A/B correspondem às leis
+      assintóticas declaradas.
+    severity: medium
     status: OPEN
-  - gap_id: RH-GAP-003
-    description: "Novidade e relação com literatura precisam de auditoria."
+    blocking: false
+  - gap_id: GAP-RH-004
+    description: >
+      Disponibilidade das ferramentas assintóticas na Mathlib: verificada
+      positivamente em 2026-07-31 (LEAN_FEASIBILITY.md); riscos residuais
+      de contabilidade de filtros e rpow registrados.
+    severity: low
+    status: VERIFIED_AVAILABLE
+    blocking: false
+  - gap_id: GAP-RH-005
+    description: >
+      Tratamento de multiplicidades: a coincidência é de multiconjuntos;
+      formalização futura deve escolher representação (sequência monótona
+      com repetição vs Multiset) e mantê-la coerente.
+    severity: medium
     status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-006
+    description: >
+      Dependência da RH: resolvida — o enunciado é incondicional
+      (DEFINITIONS.md, questão 4). Nenhuma hipótese sobre a localização
+      dos zeros é usada.
+    severity: low
+    status: RESOLVED_INDEPENDENT
+    blocking: false
+  - gap_id: GAP-RH-007
+    description: >
+      Novidade bibliográfica: a observação subjacente (contagem T log T
+      não é lei de potência de Weyl) é folclore da área, discutida ao
+      menos desde Berry–Keating 1999. Nenhuma formulação idêntica com
+      classe explícita e formalização foi localizada, mas a busca não foi
+      exaustiva. O resultado NÃO deve ser apresentado como novo em
+      matemática.
+    severity: medium
+    status: OPEN
+    blocking: false
+  - gap_id: GAP-RH-008
+    description: >
+      Escopo das rotas de escape: mapa registrado em ESCAPE_ROUTES.md
+      (14 rotas); revisão adversarial futura deve checar se alguma rota
+      relevante ficou de fora.
+    severity: medium
+    status: SPECIFIED_PENDING_REVIEW
+    blocking: false
+legacy_gaps_superseded:
+  - "RH-GAP-001 → GAP-RH-001 (classe agora especificada)"
+  - "RH-GAP-002 (cancelamento não circular) → sem objeto nesta rota: não há fórmula de traço; princípio preservado em STOP_CONDITIONS.md itens 2–3"
+  - "RH-GAP-003 → GAP-RH-007"

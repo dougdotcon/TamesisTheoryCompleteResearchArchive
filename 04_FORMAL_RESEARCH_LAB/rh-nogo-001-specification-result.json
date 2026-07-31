@@ -1,0 +1,135 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "work_item": "RH-NOGO-001",
+  "gate": "RH_NOGO_SPECIFICATION_PREPARATION",
+  "executed_at": "2026-07-31T05:37:29-03:00",
+  "commit_before": "a961eb6060d0b880c3452f179e094c94092df6b1",
+  "skills_used": [
+    "goal", "matematica-pura", "fisica-computacional",
+    "engenharia-software", "historia-digital",
+    "linguistica-computacional", "treinamento-modelos-rag"
+  ],
+
+  "candidate_operator_class": {
+    "name": "Classe W",
+    "conditions": [
+      "W1 variedade riemanniana suave compacta sem bordo, dim d finita >= 1",
+      "W2 fibrado vetorial hermitiano suave de posto finito (escalar incluido)",
+      "W3 operador diferencial classico de ordem inteira fixa m >= 1, coeficientes suaves",
+      "W4 eliptico",
+      "W5 essencialmente auto-adjunto em L^2",
+      "W6 positivo",
+      "W7 espectro discreto, multiplicidades finitas, contado com multiplicidade",
+      "W8 lei de Weyl padrao N_P(L) ~ C_P L^(d/m), C_P > 0"
+    ],
+    "note": "W7/W8 sao consequencias conhecidas de W1-W6 mas ficam POSTULADAS para que a exclusao nao dependa de reprova-las."
+  },
+
+  "candidate_statement": "Para P na Classe W, o multiconjunto dos autovalores positivos nao pode coincidir com as ordenadas positivas dos zeros nao triviais de zeta contadas com multiplicidade; nem com discrepancia limitada; nem com equivalencia assintotica de densidade.",
+  "exclusion_levels": ["igualdade exata de multiconjuntos", "discrepancia O(1)", "N_P(T)/N_zeta(T) -> 1"],
+
+  "abstract_sublemma": {
+    "id": "ASYM-NOGO-001",
+    "statement": "Nao existe N : R -> R com N(T)/(T log T) -> c > 0 e N(T)/T^alpha -> C > 0, alpha > 0.",
+    "cases": {
+      "alpha_lt_1": "log T * T^(1-alpha) -> infinito",
+      "alpha_eq_1": "divergencia do fator log T",
+      "alpha_gt_1": "log = o(T^(alpha-1)), produto -> 0"
+    },
+    "lean_signature_registered": "TamesisLab/RHNogo/SignatureProbe.lean :: AsymNogoStatement (Prop, sem corpo probatorio)",
+    "formalized": false,
+    "independent_of": ["zeta", "PDE", "pi"]
+  },
+
+  "questions_resolved": {
+    "espectro_positivo_completo": "multiconjunto dos autovalores > 0, com multiplicidade; coincidencia total, nao subconjunto",
+    "zeros_com_multiplicidade": true,
+    "apenas_ordenadas_positivas": true,
+    "depende_da_RH": false,
+    "positivo_ou_limitado_inferiormente": "v1 exige positivo; limitado inferiormente e extensao CONDITIONAL",
+    "bordo": "nao na v1 (CONDITIONAL)",
+    "fibrados_vetoriais": true,
+    "classe_com_lei_de_Weyl": "Classe W; fonte exata pendente (GAP-RH-002)",
+    "termo_assintotico_suficiente": "apenas termos dominantes",
+    "igualdade_excluida": "exata, O(1) e assintotica",
+    "exclui_hilbert_polya": false
+  },
+
+  "escape_routes_mapped": 14,
+  "escape_routes": [
+    "espacos nao compactos (Berry-Keating H=xp)", "geometrias singulares",
+    "geometria nao comutativa (Connes)", "espectros de absorcao (Connes)",
+    "ressonancias", "operadores nao locais", "ordem variavel",
+    "pseudodiferenciais fora da classe", "regularizacao dependente da energia",
+    "pares/problemas generalizados de autovalor",
+    "zeros como subconjunto proprio do espectro",
+    "PT-simetricos sem auto-adjuncao convencional (Bender-Brody-Muller)",
+    "auto-adjuncao adaptada em dominio nao padrao (Hedenmalm 2026)",
+    "reescalonamento espectral nao trivial"
+  ],
+
+  "sources_audited": [
+    {"id": "RIEMANN-1859", "type": "memoria historica", "peer_reviewed": false, "status": "KNOWN_RECORD + TO_FETCH"},
+    {"id": "VONMANGOLDT-1905", "type": "artigo", "peer_reviewed": true, "role": "ESTABLISHED pilar A", "status": "KNOWN_RECORD + TO_FETCH"},
+    {"id": "BOMBIERI-CLAY", "type": "descricao oficial", "role": "enunciado oficial da RH; problema em aberto", "status": "KNOWN_RECORD"},
+    {"id": "HORMANDER-1968", "type": "artigo", "peer_reviewed": true, "role": "ESTABLISHED pilar B (lei de Weyl)", "status": "KNOWN_RECORD + TO_FETCH", "gap": "GAP-RH-002"},
+    {"id": "BERRYKEATING-1999", "type": "revisao", "peer_reviewed": true, "role": "auditoria de novidade; rota de escape", "status": "KNOWN_RECORD + TO_FETCH"},
+    {"id": "CONNES-1999", "type": "artigo", "peer_reviewed": true, "role": "rota de escape (absorcao, nao comutativa)", "status": "KNOWN_RECORD"},
+    {"id": "BBM-2017", "type": "artigo", "peer_reviewed": true, "role": "rota de escape (PT, nao hermitiano)", "status": "KNOWN_RECORD"},
+    {"id": "HEDENMALM-2026", "type": "preprint", "peer_reviewed": false, "role": "rota de escape; CLAIMS_REQUIRING_INDEPENDENT_AUDIT", "status": "LISTING_CONFIRMED + TO_FETCH", "claim_supported": "NENHUMA"}
+  ],
+  "sources_rejected_as_authority": [
+    "preprints de suposta prova da RH (qualquer autor)",
+    "documentos legados Tamesis sobre Riemann",
+    "bases de conhecimento das skills"
+  ],
+
+  "rh_dependency": "INDEPENDENT - a formula de contagem vale incondicionalmente no strip critico",
+  "circularity_audit": "sem risco: nenhuma formula de traco, nenhum uso de GUE/Montgomery-Odlyzko, nenhum operador construido a partir dos zeros",
+
+  "lean_feasibility": {
+    "verdict": "VIAVEL",
+    "tools_verified": ["Filter.Tendsto", "Real.tendsto_log_atTop", "Real.rpow", "Asymptotics.IsBigO/IsLittleO", "isLittleO_log_rpow_atTop", "tendsto_rpow_atTop", "tendsto_nhds_unique", "Filter.Tendsto.div"],
+    "signature_probe_build": {"lake_env_lean_exit": 0, "lake_build_exit": 0, "jobs": 8684},
+    "proof_body_present": false
+  },
+
+  "gaps": ["GAP-RH-001 SPECIFIED_PENDING_REVIEW", "GAP-RH-002 OPEN (bloqueia prova completa, nao o nucleo)", "GAP-RH-003 OPEN", "GAP-RH-004 VERIFIED_AVAILABLE", "GAP-RH-005 OPEN", "GAP-RH-006 RESOLVED_INDEPENDENT", "GAP-RH-007 OPEN (novidade baixa: folclore desde Berry-Keating 1999)", "GAP-RH-008 SPECIFIED_PENDING_REVIEW"],
+
+  "decision": "A - SPECIFICATION_READY",
+  "decision_note": "Pronta para formalizar o nucleo abstrato, que e independente de PDE. GAP-RH-002 e GAP-RH-007 permanecem abertos e bloqueiam apenas a prova do resultado completo.",
+
+  "novelty_assessment": "BAIXA POR CONSTRUCAO - a observacao de que T log T nao e lei de potencia de Weyl e folclore da area. O valor esta na precisao da classe, na delimitacao das rotas de escape e na formalizacao futura.",
+
+  "scientific_claims_promoted": 0,
+  "claims_created": 0,
+  "legacy_files_modified": 0,
+  "operators_constructed": 0,
+  "proofs_executed": 0,
+
+  "python_tests": {"status": "PASS", "passed": 2},
+  "labctl_validate": {"status": "PASS", "errors": [], "warnings": []},
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
+  "next_single_action": "Formalizar somente o lema abstrato de incompatibilidade assintotica (ASYM-NOGO-001), sem formalizar PDE, lei de Weyl ou construir operador espectral.",
+  "RH-NOGO-001": {
+    "work_status": "SCOPED",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "proof_execution_authorized": false
+  },
+
+  "deviation_from_gate_spec": {
+    "item": "work_status de RH-NOGO-001",
+    "requested": "READY",
+    "applied": "SCOPED",
+    "reason": "labctl impoe 'RH-NOGO-001 must remain SCOPED' - o guardrail que mantem a frente Clay fechada. Altera-lo enfraqueceria exatamente a protecao do problema do milenio. A substancia do estado alvo (especificacao pronta, proxima acao = formalizar so o nucleo abstrato, prova nao autorizada) esta integralmente preservada via authorized_action, specification_status e next_single_action.",
+    "requires_maintainer_decision": true
+  },
+
+  "scope_statement": "Excluimos, no maximo, uma classe convencional delimitada; nao excluimos Hilbert-Polya e nao afirmamos nada sobre a verdade ou falsidade da Hipotese de Riemann.",
+  "final_status": "RH_NOGO_001_SPECIFICATION_READY"
+}

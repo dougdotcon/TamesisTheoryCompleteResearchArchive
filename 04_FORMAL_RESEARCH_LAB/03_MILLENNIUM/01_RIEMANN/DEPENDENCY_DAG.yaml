@@ -1,10 +1,41 @@
+schema: tamesis-front-dependency-dag/1
+work_item_id: RH-NOGO-001
 nodes:
   - id: RH-NOGO-001
-    status: SCOPED
-  - id: operator-class
-    status: NOT_FORMALIZED
-  - id: spectral-obstruction
-    status: NOT_FORMALIZED
+    status: SPECIFICATION_READY
+  - id: operator-class-W
+    kind: specification
+    doc: OPERATOR_CLASS.md
+    status: SPECIFIED
+  - id: riemann-von-mangoldt-counting
+    kind: established-external
+    source: VONMANGOLDT-1905
+    status: TO_TRANSCRIBE
+  - id: weyl-law-class-W
+    kind: established-external
+    source: HORMANDER-1968
+    status: TO_TRANSCRIBE (GAP-RH-002)
+  - id: ASYM-NOGO-001
+    kind: abstract-lemma
+    doc: ASYMPTOTIC_CORE.md
+    lean: TamesisLab/RHNogo/SignatureProbe.lean (assinatura)
+    status: SPECIFIED_NOT_PROVED
+  - id: counting-translation
+    kind: bridge
+    status: OPEN (GAP-RH-003, GAP-RH-005)
+  - id: class-W-exclusion
+    kind: target-theorem
+    status: NOT_AUTHORIZED
 edges:
-  - from: operator-class
-    to: spectral-obstruction
+  - from: operator-class-W
+    to: class-W-exclusion
+  - from: riemann-von-mangoldt-counting
+    to: class-W-exclusion
+  - from: weyl-law-class-W
+    to: class-W-exclusion
+  - from: ASYM-NOGO-001
+    to: class-W-exclusion
+  - from: counting-translation
+    to: class-W-exclusion
+acyclic: true
+note: "Somente ASYM-NOGO-001 está autorizado para formalização no próximo gate."

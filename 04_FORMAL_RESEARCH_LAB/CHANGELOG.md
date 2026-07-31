@@ -1,5 +1,49 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-001 (especificação) — 2026-07-31
+
+### Added
+
+- Especificação completa da frente em `03_MILLENNIUM/01_RIEMANN/`:
+  `OPERATOR_CLASS.md` (Classe W, W1–W8), `TARGET_RESULT.md` (enunciado
+  candidato em três níveis), `DEFINITIONS.md` (as 14 questões obrigatórias
+  respondidas), `ASSUMPTIONS.md`, `ASYMPTOTIC_CORE.md` (sublema
+  `ASYM-NOGO-001` com análise de casos e estratégia), `EXCLUSIONS.md`,
+  `ESCAPE_ROUTES.md` (14 rotas não cobertas), `BIBLIOGRAPHY_AUDIT.md`
+  (8 fontes classificadas), `CLAIM_MATRIX.md`
+  (ESTABLISHED/CONDITIONAL/PROPOSED/OUT_OF_SCOPE), `LEAN_FEASIBILITY.md`,
+  `STOP_CONDITIONS.md`, `GAP_REGISTER.yaml` (GAP-RH-001..008),
+  `DEPENDENCY_DAG.yaml`, `LEAN_MAP.md`, `PROOF_SKETCH.md` (sem execução).
+- `05_FORMAL/lean/TamesisLab/RHNogo/SignatureProbe.lean`: `Prop` do núcleo
+  abstrato **sem corpo probatório** + `#check` das ferramentas Mathlib
+  previstas. Compila (`lake build` 8.684 jobs).
+
+### Changed
+
+- `authorized_action`: `RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED` →
+  `RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED` (entrada literal
+  acrescentada ao allowlist do `labctl`; sem wildcard).
+  `RH_NOGO_PROOF_EXECUTION` **não** foi autorizado.
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`;
+  acrescentado `specification_status: SPECIFICATION_READY` na fila.
+
+### Verified
+
+- Fontes: Riemann 1859, von Mangoldt 1905, Bombieri/Clay, Hörmander 1968,
+  Berry–Keating 1999, Connes 1999, Bender–Brody–Müller 2017 e o preprint
+  Hedenmalm 2026 (existência confirmada em listagem arXiv nesta sessão;
+  classificado como preprint não revisado, em
+  `CLAIMS_REQUIRING_INDEPENDENT_AUDIT`).
+- Ferramentas assintóticas presentes na Mathlib fixada
+  (`isLittleO_log_rpow_atTop`, `tendsto_log_atTop`, `rpow`, `IsLittleO`).
+- `RH_NOGO_001_SPECIFICATION_READY`.
+
+### Blocked
+
+- Prova do no-go completo: bloqueada por GAP-RH-002 (transcrição da versão
+  exata da lei de Weyl de Hörmander 1968) e sem autorização.
+- Nenhuma claim científica foi criada ou promovida neste gate.
+
 ## FOUND-SEMIGROUP-001 — 2026-07-31
 
 ### Added

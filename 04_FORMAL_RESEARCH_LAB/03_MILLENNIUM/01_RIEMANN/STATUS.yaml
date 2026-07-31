@@ -4,33 +4,47 @@ evidence_level: F
 specification: SPECIFICATION_READY
 primary_source_audit: PARTIALLY_SUFFICIENT
 local_to_global_bridge: DOCUMENTED
-operator_class: W-ELLIPTIC-v2
+source_bridge_specification: READY
+operator_class: W-ELLIPTIC-SCALAR
+operator_class_version: 2
 proof_execution: NO_EXECUTION
 execution_authorized: false
-next_gate: RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED
+next_gate: RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED
 architecture:
-  W-POWER: "classe assintotica abstrata; ASYM-NOGO-001 aplica-se a ela"
-  W-ELLIPTIC: "pseudodiferencial classico, positivo, auto-adjunto, ordem m > 0, variedade compacta"
-  inclusion: "W-ELLIPTIC subconjunto de W-POWER - DOCUMENTADA, NAO formalizada"
+  chain: "W-ELLIPTIC-SCALAR -> GLOBAL-WEYL-BRIDGE-SCALAR -> W-POWER -> COUNTING-LAW-BRIDGE -> ASYM-NOGO-001"
+  central_relation: "N_P(T) - N_zeta(T) = o(T log T)   [nivel E2]"
+  excluded_in_v2: ["sistemas e fibrados", "problemas de bordo"]
 subartifacts:
   ASYM-NOGO-001:
     status: VERIFIED
     lean_root: "05_FORMAL/lean/TamesisLab/RHNogo/AsymptoticCore/"
-class_decision: REFORMULATE_AS_CLASSICAL_PSEUDODIFFERENTIAL
-order_decision: PSEUDODIFFERENTIAL_POSITIVE_ORDER
-self_adjointness_decision: positive_self_adjoint_operator
+  BRIDGE-SIGNATURE-PROBE:
+    status: ELABORATED_NO_PROOFS
+    lean: "05_FORMAL/lean/TamesisLab/RHNogo/Bridge/SignatureProbe.lean"
+quantification_rule: >
+  Para todo operador REALIZADO P que satisfaca INDIVIDUALMENTE as hipoteses
+  de W-ELLIPTIC-SCALAR. Proibido quantificar sobre todas as realizacoes
+  auto-adjuntas de uma expressao formal.
 citation_rule: >
   Hormander 1968 e citado pelo resultado LOCAL (eq. 5.3). A lei GLOBAL e
   citada por Coriasco-Doll 2020 / Ivrii 2016, ou derivada pela ponte
-  documentada em HORMANDER_LOCAL_TO_GLOBAL_BRIDGE.md.
+  documentada.
+canonical_evidence_note: >
+  A identidade local-global de Ivrii (3.1.11) nao pode ser verificada
+  independentemente por fontes publicas externas. A copia preservada em
+  08_REVIEWS/SOURCES/RH_NOGO/pdf/ivrii_2016_100years_weyl.pdf
+  (sha256 9ca07737...) e a evidencia canonica.
 open_gaps:
-  - "GAP-RH-009 fibrados/sistemas: W-ELLIPTIC v2 e escalar por omissao"
-  - "GAP-RH-012 discretude: sustentada por analogia, nao por fonte para variedades compactas"
-  - "positividade de C_P: corolario elementar registrado, nao citado"
-  - "bordo: nenhuma fonte diz literalmente 'closed manifold' para a forma pseudodiferencial"
+  - "SB-GAP-001 / GAP-RH-014: C_P > 0 sem fonte (BLOQUEANTE para POWER-LAW)"
+  - "SB-GAP-002 / GAP-RH-012: discretude eh hipotese incorporada"
+  - "SB-GAP-003: convencoes de fronteira nao reconciliadas"
+  - "SB-GAP-006 / GAP-RH-009: sistemas e fibrados adiados (NAO fechado)"
+  - "SB-GAP-010: RVM-LIMIT fora de alcance de formalizacao"
 current_blocker: >
-  A ponte documental esta preparada, mas sua aplicacao formal ao no-go
-  espectral ainda nao foi autorizada.
+  A especificacao esta pronta, mas somente o segmento abstrato
+  (W-POWER + TLOG + E2) esta ao alcance de formalizacao. Os ramos
+  geometrico e aritmetico permanecem documentais.
 note: >
   O no-go completo permanece NAO PROVADO e NAO AUTORIZADO. ASYM-NOGO-001
-  nao foi aplicado. Nenhum operador foi construido ou excluido.
+  NAO foi aplicado. Nenhum operador foi construido ou excluido. Nada foi
+  afirmado sobre Hilbert-Polya ou sobre a Hipotese de Riemann.

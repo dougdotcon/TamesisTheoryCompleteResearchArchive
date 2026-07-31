@@ -1,0 +1,141 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "gate": "RH_NOGO_SOURCE_BRIDGE_SPECIFICATION",
+  "work_item": "RH-NOGO-001",
+  "executed_at": "2026-07-31T08:20:30-03:00",
+  "commit_before": "0d52d375fc72741ea60c8e4c2a4cb9d14c90e5a6",
+  "runtime": {"os": "Ubuntu 24.04 (WSL2)", "branch": "lab/wsl-lean-migration", "lean": "v4.33.0-rc1", "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e"},
+  "skills_used": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional", "historia-digital"],
+
+  "decision": "SOURCE_BRIDGE_SPECIFICATION_READY",
+
+  "architecture": {
+    "chain": "W-ELLIPTIC-SCALAR -> GLOBAL-WEYL-BRIDGE-SCALAR -> W-POWER -> COUNTING-LAW-BRIDGE -> ASYM-NOGO-001",
+    "central_relation": "N_P(T) - N_zeta(T) = o(T log T)  [nivel E2]",
+    "isolation_property": "W-POWER nao menciona operadores; estreitamentos futuros de W-ELLIPTIC-SCALAR nao invalidam ASYM-NOGO-001"
+  },
+
+  "W_POWER": {
+    "data": ["N_P : R -> R", "alpha : R", "C_P : R"],
+    "assumptions": ["0 < alpha", "0 < C_P", "N_P(Lambda)/Lambda^alpha -> C_P"],
+    "not_presupposed": ["operador", "espaco de Hilbert", "auto-adjuncao", "elipticidade", "variedade", "PDE", "funcao zeta"]
+  },
+
+  "W_ELLIPTIC_SCALAR": {
+    "objects_distinguished": ["operador formal p", "dominio D", "realizacao auto-adjunta", "operador realizado P"],
+    "class_is_property_of": "operador realizado P",
+    "quantification_rule": "para todo operador REALIZADO P que satisfaca INDIVIDUALMENTE as hipoteses",
+    "forbidden_quantification": "para todas as realizacoes auto-adjuntas de uma expressao formal",
+    "hypotheses": {
+      "self_adjoint": "SOURCE_CITED_RESULT (Coriasco-Doll p.1)",
+      "positive": "SOURCE_CITED_RESULT (Coriasco-Doll p.1)",
+      "classical_pseudodifferential": "SOURCE_CITED_RESULT",
+      "elliptic": "SOURCE_CITED_RESULT",
+      "order_m_positive_real": "SOURCE_CITED_RESULT",
+      "smooth_compact_base": "SOURCE_CITED_RESULT",
+      "boundary": "EXCLUDED_IN_V2 (EXPLICIT_CLASS_ASSUMPTION)",
+      "scalar_action": "EXCLUDED_bundles (EXPLICIT_CLASS_ASSUMPTION)",
+      "discrete_spectrum": "EXPLICIT_CLASS_ASSUMPTION (nao derivada)",
+      "C_P_positive": "ELEMENTARY_COROLLARY_PENDING_FORMAL_ARGUMENT"
+    },
+    "boundary_exclusion_reason": "evitar importar resultados de problemas elipticos de bordo nao auditados; nenhuma fonte obtida diz literalmente 'closed manifold' para a forma pseudodiferencial",
+    "systems_exclusion_reason": "constante de Ivrii (3.1.3) usa n(x,xi) com multiplicidades; identidade de traco fibrada (tr_E) da etapa GWB-004 nao auditada"
+  },
+
+  "global_weyl_obligations": {
+    "GWB-001_espectro_discreto": "EXPLICIT_CLASS_ASSUMPTION",
+    "GWB-002_N_P_bem_definida": "SOURCE_CITED_RESULT (Coriasco-Doll eq.1, desigualdade ESTRITA)",
+    "GWB-003_N_igual_Tr_E": "SOURCE_CITED_RESULT (Coriasco-Doll Secao 3)",
+    "GWB-004_Tr_E_igual_integral": "SOURCE_CITED_RESULT (Ivrii 3.1.11, ESCALAR)",
+    "GWB-005_assintota_local_uniforme": "SOURCE_DIRECT (Hormander eq.5.3 p.215)",
+    "GWB-006_integracao_termo_principal": "ELEMENTARY_COROLLARY",
+    "GWB-007_integracao_do_erro": "ELEMENTARY_COROLLARY",
+    "GWB-008_C_P_positivo": "ELEMENTARY_COROLLARY_PENDING_FORMAL_ARGUMENT (BLOQUEANTE)",
+    "GWB-009_lei_de_potencia": "BRIDGE_DOCUMENTED (ou por citacao direta de Coriasco-Doll/Ivrii)"
+  },
+  "requirement_reduction": "Ivrii 3.1.1(iv): assintotica de UM termo vale sem hipotese de nao degenerescencia; micro-hiperbolicidade e nao periodicidade NAO sao necessarias para W-POWER",
+
+  "N_zeta": {
+    "definition": "numero de zeros nao triviais com ordenada positiva ate T, com multiplicidade",
+    "conventions_from_primary_source": {
+      "counted_object": "zeros de xi(t) por parte real",
+      "multiplicity": "incluida (von Mangoldt p.2, literal)",
+      "boundary": "T escolhido fora de zeros (von Mangoldt p.2)",
+      "translation": "Re(t) <-> Im(rho)"
+    },
+    "RVM_STRONG": "N_zeta(T) = (T/2pi)log(T/2pi) - T/(2pi) + 7/8 + O(log T)  [VONMANGOLDT-1905 p.19, SOURCE_DIRECT, incondicional]",
+    "RVM_LIMIT": "N_zeta(T)/(T log T) -> 1/(2pi)  [ELEMENTARY_COROLLARY_REQUIRING_FORMALIZATION]"
+  },
+
+  "counting_law_relations": {
+    "E0_igualdade_eventual": "forall-eventually T, N_P(T) = N_zeta(T)",
+    "E1_discrepancia_limitada": "N_P - N_zeta = O(1)",
+    "E2_discrepancia_subdominante": "N_P - N_zeta = o(T log T)   [NIVEL CENTRAL]",
+    "E3_equivalencia_por_razao": "N_P/N_zeta -> 1  (exige N_zeta != 0 eventualmente)",
+    "hierarchy": "E0 => E1 => E2 ; E3 => E2",
+    "arrows_proved": false
+  },
+
+  "counting_law_bridge": {
+    "statement": "Se N_zeta(T)/(T log T) -> c > 0 e N_P(T) - N_zeta(T) = o(T log T), entao N_P(T)/(T log T) -> c.",
+    "covers": ["E0", "E1", "E2", "E3"],
+    "proved": false,
+    "difficulty": "baixa",
+    "mathlib_tools": ["Asymptotics.IsLittleO.tendsto_div_nhds_zero", "Filter.Tendsto.add", "Filter.Tendsto.congr'"]
+  },
+
+  "narrow_nogo_statement": {
+    "conclusion_candidate": "Nenhum operador realizado P pertencente a W-ELLIPTIC-SCALAR pode possuir uma funcao de contagem espectral cuja diferenca para N_zeta seja o(T log T).",
+    "proved": false,
+    "forbidden_phrasings": ["nenhum operador de Hilbert-Polya", "Hilbert-Polya excluido", "progresso sobre a RH"]
+  },
+
+  "spectral_match_conventions": {
+    "SMC-001_desigualdade": "UNRESOLVED_CONVENTION_MISMATCH (N_P usa <, N_zeta moderna usa <=)",
+    "SMC-002_zeros_no_limite": "UNRESOLVED_CONVENTION_MISMATCH",
+    "SMC-003_multiplicidade": "COMPATIBLE",
+    "SMC-004_valores_positivos": "COMPATIBLE",
+    "SMC-005_deslocamentos": "ABSORVED_BY_E2",
+    "SMC-006_autovalores_extras": "OUT_OF_SCOPE (rota de escape 11)",
+    "SMC-007_normalizacao_da_variavel": "EXPLICIT_ASSUMPTION (rota de escape 14)",
+    "implication_direction": "igualdade espectral => E0 => E2; a reciproca eh FALSA"
+  },
+
+  "lean": {
+    "signature_probe": "05_FORMAL/lean/TamesisLab/RHNogo/Bridge/SignatureProbe.lean",
+    "contents": ["definicoes", "estruturas", "#check"],
+    "proofs": 0,
+    "asym_nogo_001_applied": false,
+    "signatures_elaborated": ["PowerCountingLaw : (R -> R) -> Type", "TLogCountingLaw : (R -> R) -> Type", "SubdominantDifference : Prop", "EventualEquality : Prop", "BoundedDifference : Prop", "RatioEquivalence : Prop", "CountingLawBridgeStatement : Prop", "NarrowSpectralNogoStatement : Prop"],
+    "autoImplicit": false,
+    "lake_env_lean_exit": 0,
+    "lake_build_exit": 0,
+    "lake_build_jobs": 8692,
+    "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0}
+  },
+
+  "gaps": {
+    "opened": ["SB-GAP-001 a SB-GAP-010"],
+    "blocking": ["SB-GAP-001 / GAP-RH-014: C_P > 0 sem fonte"],
+    "not_closed": ["GAP-RH-009 (sistemas/fibrados) — contornado por estreitamento, NAO fechado", "GAP-RH-012 (discretude) — hipotese incorporada"]
+  },
+
+  "canonical_evidence_note": "A identidade de Ivrii (3.1.11) nao pode ser verificada independentemente por fontes publicas externas; a copia preservada (sha256 9ca07737...) e a evidencia canonica.",
+
+  "analytic_theorems_created": 0,
+  "lean_theorems_created": 0,
+  "asym_nogo_001_applied": false,
+  "operators_constructed": 0,
+  "scientific_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "RH-NOGO-001": {"work_status": "SCOPED", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION"},
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED",
+  "next_single_action": "Formalizar somente as interfaces W-POWER/TLOG e o COUNTING-LAW-BRIDGE para discrepancias o(T log T), sem formalizar operadores, lei de Weyl ou Riemann-von Mangoldt.",
+  "allowlist_additions": ["RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED"],
+  "allowlist_not_added": ["RH_NOGO_PROOF_EXECUTION", "RH_NOGO_OPERATOR_CLASS_PROOF_AUTHORIZED", "RH_NOGO_GLOBAL_WEYL_PROOF_AUTHORIZED", "RH_PROOF_AUTHORIZED", "RIEMANN_PROOF_AUTHORIZED"],
+
+  "final_status": "RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_READY"
+}

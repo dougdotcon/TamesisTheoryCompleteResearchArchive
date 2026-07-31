@@ -1,0 +1,102 @@
+schema: tamesis-gap-register/1
+work_item_id: RH-NOGO-001
+gate: RH_NOGO_SOURCE_BRIDGE_SPECIFICATION
+scope: "lacunas desta especificacao; complementa 03_MILLENNIUM/01_RIEMANN/GAP_REGISTER.yaml"
+
+gaps:
+  - gap_id: SB-GAP-001
+    description: >
+      GWB-008 (C_P > 0) nao eh afirmado por nenhuma fonte obtida. Sem ele a
+      pertinencia a W-POWER falha, pois W-POWER exige constante positiva.
+      Argumento elementar registrado em GLOBAL_WEYL_CONSTANT.md, nao citado
+      nem demonstrado.
+    severity: high
+    status: OPEN
+    blocking: "bloqueia POWER-LAW-FOR-NP"
+    related: GAP-RH-014
+
+  - gap_id: SB-GAP-002
+    description: >
+      GWB-001 (espectro discreto) entra na classe como hipotese incorporada
+      explicita, nao como consequencia derivada. Nenhuma fonte obtida a
+      enuncia para variedades compactas.
+    severity: high
+    status: EXPLICIT_CLASS_ASSUMPTION
+    blocking: false
+    related: GAP-RH-012
+    note: "Se obtida a fonte, passa a SOURCE_CITED_RESULT e sai da definicao."
+
+  - gap_id: SB-GAP-003
+    description: >
+      SMC-001 e SMC-002: convencoes de fronteira divergem. N_P usa
+      desigualdade estrita (< lambda, Coriasco-Doll eq.1); N_zeta moderna usa
+      0 < Im(rho) <= T; von Mangoldt evita o problema escolhendo T fora de
+      zeros. A reconciliacao eh elementar mas NAO esta escrita.
+    severity: medium
+    status: OPEN
+    blocking: false
+
+  - gap_id: SB-GAP-004
+    description: >
+      A identidade local-global de Ivrii (3.1.11) nao pode ser verificada
+      independentemente por fontes publicas fora deste laboratorio. A copia
+      preservada (pdf/ivrii_2016_100years_weyl.pdf, sha256 9ca07737...,
+      90 pp.) eh a evidencia canonica.
+    severity: medium
+    status: CANONICAL_EVIDENCE_IS_LOCAL_COPY
+    blocking: false
+
+  - gap_id: SB-GAP-005
+    description: >
+      As provas da lei de Weyl global permanecem em monografias nao obtidas
+      (Safarov-Vassiliev, Shubin, Ivrii). O laboratorio possui ENUNCIADOS em
+      fontes revisadas por pares, nao as provas.
+    severity: medium
+    status: RETRIEVAL_FAILED
+    blocking: false
+
+  - gap_id: SB-GAP-006
+    description: >
+      Sistemas e fibrados excluidos de W-ELLIPTIC-SCALAR v2. A identidade de
+      traco fibrada (tr_E) da etapa GWB-004 nao foi auditada; a constante
+      correta eh a de Ivrii (3.1.3) com n(x,xi).
+    severity: medium
+    status: DEFERRED_BY_NARROWING
+    blocking: false
+    related: GAP-RH-009
+    note: "GAP-RH-009 NAO foi fechado; foi contornado por estreitamento."
+
+  - gap_id: SB-GAP-007
+    description: >
+      Bordo excluido de W-ELLIPTIC-SCALAR v2 por decisao deliberada.
+      Nenhuma fonte obtida diz literalmente "closed manifold" para a forma
+      pseudodiferencial; Ivrii formula com problema de contorno.
+    severity: low
+    status: DEFERRED_BY_NARROWING
+    blocking: false
+
+  - gap_id: SB-GAP-008
+    description: >
+      As setas E0 => E1 => E2 e E3 => E2 estao esbocadas, nao provadas.
+      E3 => E2 exige N_zeta != 0 eventualmente e N_zeta/(T log T) limitada.
+    severity: low
+    status: OPEN
+    blocking: false
+
+  - gap_id: SB-GAP-009
+    description: >
+      SMC-007: a comparacao de N_P e N_zeta na MESMA variavel T eh hipotese
+      explicita. Reescalas nao lineares da variavel espectral escapam do
+      enunciado (rota de escape 14).
+    severity: informational
+    status: EXPLICIT_ASSUMPTION
+    blocking: false
+
+  - gap_id: SB-GAP-010
+    description: >
+      RVM-LIMIT eh corolario elementar de RVM-STRONG, mas sua formalizacao
+      exigiria formalizar zeta e seus zeros - fora de qualquer autorizacao
+      vigente e provavelmente por muito tempo.
+    severity: informational
+    status: OUT_OF_REACH_FOR_NOW
+    blocking: "bloqueia a formalizacao end-to-end do no-go, nao a especificacao"

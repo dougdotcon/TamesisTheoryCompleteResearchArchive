@@ -1,5 +1,57 @@
 # Changelog do laboratório formal
 
+## RH-NOGO-001 — especificacao da ponte de contagem — 2026-07-31
+
+### Added
+
+- Especificacao completa da ponte em `03_MILLENNIUM/01_RIEMANN/`:
+  `SOURCE_BRIDGE_SPECIFICATION.md` (indice), `W_ELLIPTIC_SCALAR_V2.md`,
+  `W_ELLIPTIC_SYSTEM_DEFERRED.md`, `GLOBAL_WEYL_BRIDGE_OBLIGATIONS.md`
+  (GWB-001..009), `RVM_LIMIT_BRIDGE.md`, `COUNTING_LAW_RELATIONS.md`
+  (E0-E3), `COUNTING_LAW_BRIDGE_SPEC.md`, `NARROW_NOGO_STATEMENT.md`,
+  `SPECTRAL_MATCH_CONVENTIONS.md` (SMC-001..007),
+  `SOURCE_BRIDGE_DEPENDENCY_DAG.yaml`, `SOURCE_BRIDGE_GAP_REGISTER.yaml`
+  (SB-GAP-001..010), `SOURCE_BRIDGE_LEAN_FEASIBILITY.md`.
+- `05_FORMAL/lean/TamesisLab/RHNogo/Bridge/SignatureProbe.lean`: oito
+  assinaturas elaboradas (`PowerCountingLaw`, `TLogCountingLaw`,
+  `SubdominantDifference`, `EventualEquality`, `BoundedDifference`,
+  `RatioEquivalence`, `CountingLawBridgeStatement`,
+  `NarrowSpectralNogoStatement`), `set_option autoImplicit false`,
+  **nenhuma prova**.
+
+### Changed
+
+- **Alvo migrado de igualdade espectral exata para `N_P(T) - N_zeta(T) =
+  o(T log T)` (nivel E2)**, que cobre E0, E1, E2 e E3 com um unico lema.
+- `W-ELLIPTIC-SCALAR` v2: bordo e sistemas/fibrados **excluidos**
+  deliberadamente. `GAP-RH-009` NAO foi fechado - foi contornado por
+  estreitamento (`SB-GAP-006`).
+- Regra de quantificacao fixada: "para todo operador REALIZADO P que
+  satisfaca INDIVIDUALMENTE as hipoteses". A forma "para todas as
+  realizacoes de uma expressao formal" esta proibida.
+- `authorized_action`: `RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_AUTHORIZED` ->
+  `RH_NOGO_COUNTING_BRIDGE_FORMALIZATION_AUTHORIZED` (entrada literal
+  unica).
+
+### Verified
+
+- `lake build` PASS com 8.692 jobs; probe isolado exit 0; tokens proibidos
+  zero; `ASYM-NOGO-001` **nao** aplicado.
+- pytest 2 passed; `labctl validate` PASS.
+
+### Blocked
+
+- `SB-GAP-001` / `GAP-RH-014`: **`C_P > 0` nao eh afirmado por nenhuma
+  fonte obtida** - bloqueante para `POWER-LAW-FOR-NP`.
+- `SB-GAP-002` / `GAP-RH-012`: discretude eh hipotese incorporada.
+- `SB-GAP-003`: convencoes de fronteira (`<` vs `<=`) nao reconciliadas.
+- `SB-GAP-010`: `RVM-LIMIT` fora de alcance de formalizacao.
+- `RH-NOGO-001` permanece `SCOPED / NOT_AUTHORIZED / NO_EXECUTION`.
+
+### Result
+
+- `RH_NOGO_SOURCE_BRIDGE_SPECIFICATION_READY`.
+
 ## RH-NOGO-001 — fonte global e reformulação da classe — 2026-07-31
 
 ### Added

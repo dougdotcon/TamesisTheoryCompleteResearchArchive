@@ -1,0 +1,132 @@
+schema: tamesis-bridge-dag/1
+work_item_id: RH-NOGO-001
+gate: RH_NOGO_SOURCE_BRIDGE_SPECIFICATION
+acyclic: true
+proof_executed: false
+
+nodes:
+  - id: VON-MANGOLDT-1905
+    kind: primary-source
+    status: RETRIEVED_PARTIALLY_AUDITED
+  - id: RVM-STRONG
+    kind: external-theorem
+    status: SOURCE_DIRECT
+  - id: RVM-LIMIT
+    kind: corollary
+    status: ELEMENTARY_COROLLARY_REQUIRING_FORMALIZATION
+  - id: E2-HYPOTHESIS
+    kind: hypothesis
+    status: HYPOTHESIS_OF_THE_NOGO
+  - id: COUNTING-LAW-BRIDGE
+    kind: lemma
+    status: SPECIFIED_NOT_PROVED
+  - id: TLOG-LAW-FOR-NP
+    kind: derived-property
+    status: NOT_DERIVED
+  - id: W-ELLIPTIC-SCALAR
+    kind: geometric-class
+    status: SPECIFIED
+  - id: GLOBAL-WEYL-BRIDGE-SCALAR
+    kind: bridge
+    status: SPECIFIED_NOT_PROVED
+  - id: POWER-LAW-FOR-NP
+    kind: derived-property
+    status: NOT_DERIVED
+  - id: W-POWER
+    kind: abstract-class
+    status: SPECIFIED
+  - id: ASYM-NOGO-001
+    kind: lemma
+    status: VERIFIED_IN_LEAN
+  - id: NARROW-SPECTRAL-NOGO-SCALAR
+    kind: target-theorem
+    status: NOT_AUTHORIZED
+
+edges:
+  - from: VON-MANGOLDT-1905
+    to: RVM-STRONG
+    status: SOURCE_DIRECT
+    source: "VONMANGOLDT-1905 p.19 (formula final)"
+    formalization_status: NOT_FORMALIZED
+    blocker: null
+
+  - from: RVM-STRONG
+    to: RVM-LIMIT
+    status: ELEMENTARY_COROLLARY
+    source: "algebra elementar + log(T/2pi)/log T -> 1"
+    formalization_status: NOT_FORMALIZED
+    blocker: "exigiria formalizar zeta e seus zeros - fora de qualquer autorizacao"
+
+  - from: RVM-LIMIT
+    to: COUNTING-LAW-BRIDGE
+    status: INPUT_HYPOTHESIS
+    source: "COUNTING_LAW_BRIDGE_SPEC.md"
+    formalization_status: NOT_FORMALIZED
+    blocker: null
+
+  - from: E2-HYPOTHESIS
+    to: COUNTING-LAW-BRIDGE
+    status: INPUT_HYPOTHESIS
+    source: "COUNTING_LAW_RELATIONS.md nivel E2"
+    formalization_status: NOT_FORMALIZED
+    blocker: null
+
+  - from: COUNTING-LAW-BRIDGE
+    to: TLOG-LAW-FOR-NP
+    status: SPECIFIED_NOT_PROVED
+    source: "COUNTING_LAW_BRIDGE_SPEC.md"
+    formalization_status: SIGNATURE_ONLY
+    blocker: "autorizacao do proximo gate"
+
+  - from: W-ELLIPTIC-SCALAR
+    to: GLOBAL-WEYL-BRIDGE-SCALAR
+    status: INPUT_CLASS
+    source: "W_ELLIPTIC_SCALAR_V2.md"
+    formalization_status: NOT_FORMALIZED
+    blocker: null
+
+  - from: GLOBAL-WEYL-BRIDGE-SCALAR
+    to: POWER-LAW-FOR-NP
+    status: SPECIFIED_NOT_PROVED
+    source: "GLOBAL_WEYL_BRIDGE_OBLIGATIONS.md (GWB-001..009)"
+    formalization_status: NOT_FORMALIZED
+    blocker: "GWB-008 (C_P > 0) sem fonte; GWB-001 eh hipotese incorporada"
+
+  - from: POWER-LAW-FOR-NP
+    to: W-POWER
+    status: BY_DEFINITION
+    source: "W_POWER_CLASS.md"
+    formalization_status: SIGNATURE_ONLY
+    blocker: null
+
+  - from: TLOG-LAW-FOR-NP
+    to: ASYM-NOGO-001
+    status: INPUT_HYPOTHESIS
+    source: "asym_nogo_001 hipotese hTLog"
+    formalization_status: VERIFIED_TARGET
+    blocker: null
+
+  - from: W-POWER
+    to: ASYM-NOGO-001
+    status: INPUT_HYPOTHESIS
+    source: "asym_nogo_001 hipotese hPower"
+    formalization_status: VERIFIED_TARGET
+    blocker: null
+
+  - from: ASYM-NOGO-001
+    to: NARROW-SPECTRAL-NOGO-SCALAR
+    status: NOT_APPLIED
+    source: "NARROW_NOGO_STATEMENT.md"
+    formalization_status: NOT_FORMALIZED
+    blocker: "RH_NOGO_PROOF_EXECUTION nao autorizado; ASYM-NOGO-001 NAO foi aplicado"
+
+critical_path_blockers:
+  - "GWB-008: C_P > 0 nao afirmado por nenhuma fonte obtida (GAP-RH-014)"
+  - "GWB-001: discretude eh hipotese incorporada, nao derivada (GAP-RH-012)"
+  - "RVM-LIMIT: formalizacao exigiria zeta - fora de autorizacao"
+  - "SMC-001/002: convencoes de fronteira nao reconciliadas por escrito"
+
+note: >
+  Somente COUNTING-LAW-BRIDGE e as interfaces W-POWER/TLOG estao proximas de
+  formalizacao. O ramo geometrico (W-ELLIPTIC-SCALAR -> POWER-LAW) e o ramo
+  aritmetico (RVM-LIMIT) permanecem documentais.

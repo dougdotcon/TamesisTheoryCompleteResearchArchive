@@ -1,0 +1,85 @@
+work_item_id: FOUND-SEMIGROUP-002
+work_status: READY
+evidence_level: F
+gate: FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION
+specification: SPECIFICATION_READY
+scientific_value: FOUNDATIONAL_SPECIFICATION_ONLY
+mathematical_novelty: NONE
+
+layers:
+  A_monoid_action: "alcancabilidade, orbita, invariantes"
+  B_single_generator: "dinamica de um a fixo; corolario derivado"
+  C_finite_function: "periodicidade eventual; NAO requer monoide"
+
+main_target: FSG2-PER-002
+main_target_choice: C_CORE_BOUNDS_AND_PROPAGATION
+excluded_from_first_execution:
+  - "decomposicao unica em cauda e ciclo (FSG2-GAP-004b)"
+
+theorem_candidates:
+  - FSG2-REACH-001
+  - FSG2-REACH-002
+  - FSG2-REACH-003
+  - FSG2-ORBIT-001
+  - FSG2-INV-001
+  - FSG2-INV-002
+  - FSG2-PER-001
+  - FSG2-PER-002
+  - FSG2-PER-003
+  - FSG2-PER-004
+  - FSG2-ACT-001
+theorem_candidate_count: 11
+
+counterexamples:
+  - CE-001
+  - CE-002
+  - CE-003
+  - CE-004
+  - CE-005
+
+mathlib_audit:
+  api_found: 8
+  partial_api: 3
+  not_found: 1
+  name_uncertain: 2
+  key_findings:
+    - "MulAction.orbit e mem_orbit_iff (Iff.rfl) existem"
+    - "smul_iterate_apply existe: FSG2-GAP-003 resolvido pela API"
+    - "Fintype.exists_ne_map_eq_of_card_lt existe"
+    - "periodicidade eventual AUSENTE no Mathlib fixado: enunciado sera local"
+    - "minimalPeriod devolve 0 fora de periodicPts: armadilha registrada"
+
+executed_in_this_gate:
+  lean_files_created: 0
+  lean_proofs_created: 0
+  lake_builds: 0
+  python_experiments_created: 0
+  scientific_claims_promoted: 0
+  legacy_files_modified: 0
+
+depends_on:
+  FOUND-SEMIGROUP-001: VERIFIED
+
+open_gaps:
+  - "FSG2-GAP-002b: minimalPeriod nao captura periodicidade eventual"
+  - "FSG2-GAP-004b: decomposicao unica adiada apos analise de custo"
+  - "FSG2-GAP-004c: DecidableEq X possivelmente ociosa"
+  - "FSG2-GAP-007: estrategia de codificacao dos contraexemplos"
+  - "FSG2-GAP-009: bibliografia primaria NOT_AUDITED"
+resolved_gaps:
+  - "FSG2-GAP-001: RESOLVED_BY_EXISTING_API"
+  - "FSG2-GAP-002: RESOLVED_BY_EXISTING_API"
+  - "FSG2-GAP-003: RESOLVED_BY_EXISTING_API"
+  - "FSG2-GAP-004: RESOLVED_BY_ANALYSIS"
+  - "FSG2-GAP-005: SPECIFIED_LOW_COST"
+  - "FSG2-GAP-006: RESOLVED_BY_DESIGN_DECISION"
+  - "FSG2-GAP-008: RESOLVED_BY_BINDING_DOCUMENT"
+
+next_gate: FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED
+
+note: >
+  Especificacao apenas. Nenhuma prova Lean, nenhum experimento Python,
+  nenhum lake build. Periodicidade eventual em conjunto finito NAO eh
+  descoberta matematica; ver NOVELTY_BOUNDARY.md, documento vinculante.
+  O modelo C3 de FOUND-SEMIGROUP-001 NAO eh promovido a teoria universal:
+  quatro de suas propriedades falham em geral (CE-001..CE-004).

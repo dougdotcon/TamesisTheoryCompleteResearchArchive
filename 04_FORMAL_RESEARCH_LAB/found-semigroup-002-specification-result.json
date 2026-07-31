@@ -1,0 +1,195 @@
+{
+  "work_item": "FOUND-SEMIGROUP-002",
+  "gate": "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION",
+  "authorized_action": "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "executed_at": "2026-07-31T12:40:00-03:00",
+  "agent": "claude-opus-5",
+  "canonical_repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+
+  "commit_before": "39e3d95925a7038da307017216dd4cb8e49c572a",
+  "canonical_commit_before": "c186ab593e8371098964533237f4a4bb8c85247c",
+  "canonical_commit_after_preflight": "39e3d95925a7038da307017216dd4cb8e49c572a",
+  "canonical_commit_policy": "Aponta para o ultimo commit canonico integralmente encerrado antes da sessao atual. Deve existir e ser ancestral do HEAD.",
+  "ancestry_check": {
+    "implemented_in": "10_TOOLS/labctl.py :: check_canonical_commit",
+    "cat_file": "git cat-file -e <commit>^{commit}",
+    "ancestry": "git merge-base --is-ancestor <commit> HEAD",
+    "exit_code_table": {
+      "cat_file_nonzero": "CANONICAL_COMMIT_UNAVAILABLE (recomenda git fetch --unshallow)",
+      "ancestry_0": "PASS (inclui canonical_commit == HEAD)",
+      "ancestry_1": "CANONICAL_COMMIT_NOT_ANCESTOR",
+      "ancestry_other": "CANONICAL_COMMIT_GIT_ERROR"
+    },
+    "strict_ancestry": false,
+    "severity": "ERROR (nunca warning)",
+    "result_in_this_session": "PASS"
+  },
+
+  "skills_used": [
+    "goal (lida como arquivo; /goal e comando de UI, nao executavel)",
+    "matematica-pura",
+    "engenharia-software",
+    "linguistica-computacional",
+    "historia-digital"
+  ],
+  "skills_note": "As skills orientam o metodo; nenhuma foi usada como fonte matematica.",
+
+  "prior_foundation": {
+    "work_item": "FOUND-SEMIGROUP-001",
+    "status": "VERIFIED",
+    "reused": [
+      "convencao de composicao: comp a b aplica b primeiro (alinhada a mul_smul)",
+      "interface oficial Monoid / MulAction da Mathlib, sem duplicata local",
+      "modelo C3 como exemplo, NAO como teoria universal"
+    ],
+    "types": ["Regime3", "Shift3"],
+    "operations": ["Shift3.apply", "Shift3.comp"],
+    "instances": ["Monoid Shift3", "MulAction Shift3 Regime3"],
+    "theorems": "FOUND-SG-002..FOUND-SG-013 (12)",
+    "limitations_inherited": [
+      "FOUND-SG-GAP-003 bibliografia NOT_AUDITED",
+      "FOUND-SG-GAP-004 nenhuma ponte com TRI/TDTR"
+    ]
+  },
+
+  "layer_separation": {
+    "A": "acao completa do monoide: alcancabilidade, orbita, invariantes",
+    "B": "dinamica de um gerador a fixo",
+    "C": "sistema funcional finito (X, f); periodicidade eventual vive AQUI",
+    "rule": "todo teorema vai para a camada mais fraca em que ainda faz sentido"
+  },
+
+  "definitions": [
+    "Reachable x y := exists m : M, m . x = y",
+    "Orbit via MulAction.orbit (Set X), ponte definicional por mem_orbit_iff",
+    "IsInvariant I := forall m x, I (m . x) = I x",
+    "IsInvariantUnder a I := forall x, I (a . x) = I x (estritamente mais fraco)",
+    "iteracao via Function.iterate; ponte com a^n . x por smul_iterate_apply"
+  ],
+
+  "theorem_candidates": [
+    "FSG2-REACH-001 reflexividade",
+    "FSG2-REACH-002 transitividade",
+    "FSG2-REACH-003 preorder sem instancia global",
+    "FSG2-ORBIT-001 Reachable <-> mem orbit (esperado Iff.rfl)",
+    "FSG2-INV-001 invariante preservado por alcancabilidade",
+    "FSG2-INV-002 invariante de gerador ao longo da iteracao",
+    "FSG2-PER-001 CORE: existencia de colisao",
+    "FSG2-PER-002 alvo com limitantes de cardinalidade",
+    "FSG2-PER-003 PROPAGATION",
+    "FSG2-PER-004 ponte com Function.IsPeriodicPt no ponto f^[mu] x",
+    "FSG2-ACT-001 corolario para acao, DERIVADO"
+  ],
+  "theorem_candidate_count": 11,
+
+  "main_target_choice": {
+    "chosen": "C. CORE_BOUNDS_AND_PROPAGATION",
+    "rationale": "bounds saem de graca da formulacao com Fin (card X + 1); propagation eh corolario de 3 linhas",
+    "excluded": "DECOMPOSITION (unicidade de cauda + ciclo)",
+    "exclusion_cost_analysis": "cinco obrigacoes novas, nenhuma corolario; divisibilidade de periodos depende de lemas nao auditados",
+    "bounds_verified_before_promising": {
+      "mu_lt_card": true,
+      "lam_pos": true,
+      "mu_plus_lam_le_card": true,
+      "derivation": "g : Fin (card X + 1) -> X da i < j <= card X"
+    }
+  },
+
+  "mathlib_api_findings": {
+    "API_FOUND": [
+      "MulAction.orbit (GroupAction/Defs.lean:49)",
+      "MulAction.mem_orbit_iff (Iff.rfl)",
+      "MulAction.mem_orbit_self",
+      "smul_iterate / smul_iterate_apply (Algebra/Group/Action/Defs.lean:432,437)",
+      "Fintype.exists_ne_map_eq_of_card_lt (Data/Fintype/Pigeonhole.lean)",
+      "Finset.exists_ne_map_eq_of_card_lt_of_maps_to (Data/Finset/Card.lean:451)",
+      "Function.IsPeriodicPt (Dynamics/PeriodicPts/Defs.lean:62)",
+      "Function.IsFixedPt (Logic/Function/Defs.lean:173)"
+    ],
+    "PARTIAL_API": [
+      "MulAction.mem_orbit_of_mem_orbit (nao eh a transitividade geral)",
+      "Function.minimalPeriod (devolve 0 fora de periodicPts)",
+      "MulAction.period (herda a mesma armadilha)"
+    ],
+    "NOT_FOUND": [
+      "periodicidade eventual / preperiodicidade: ZERO ocorrencias de preperiodic, eventuallyPeriodic, eventually_periodic"
+    ],
+    "NAME_UNCERTAIN": [
+      "Function.iterate_add_apply (confirmado por uso, nao por declaracao)",
+      "Function.periodicOrbit / periodicPts para decomposicao"
+    ]
+  },
+
+  "counterexamples": [
+    "CE-001 alcancabilidade nao simetrica (0->1, 1->1)",
+    "CE-002 acao nao transitiva (identidade em dois estados)",
+    "CE-003 cauda antes do ciclo (0->1->2->2); refuta tambem o uso de minimalPeriod",
+    "CE-004 acao nao fiel (ZMod 4 sobre ZMod 2)",
+    "CE-005 invariante nao separa orbitas (constante sobre CE-002)"
+  ],
+  "counterexample_gap": "a negativa 'o periodo depende do estado inicial' ficou SEM modelo planejado; registrada em FSG2-GAP-007 em vez de afirmada",
+
+  "gaps": [
+    "FSG2-GAP-001 RESOLVED_BY_EXISTING_API",
+    "FSG2-GAP-002 RESOLVED_BY_EXISTING_API",
+    "FSG2-GAP-002b OPEN_DOCUMENTED_TRAP (minimalPeriod)",
+    "FSG2-GAP-003 RESOLVED_BY_EXISTING_API",
+    "FSG2-GAP-004 RESOLVED_BY_ANALYSIS",
+    "FSG2-GAP-004b DEFERRED_AFTER_COST_ANALYSIS",
+    "FSG2-GAP-004c OPEN_PENDING_EXECUTION (DecidableEq ociosa)",
+    "FSG2-GAP-005 SPECIFIED_LOW_COST",
+    "FSG2-GAP-006 RESOLVED_BY_DESIGN_DECISION",
+    "FSG2-GAP-007 OPEN_PENDING_EXECUTION",
+    "FSG2-GAP-008 RESOLVED_BY_BINDING_DOCUMENT",
+    "FSG2-GAP-009 NOT_AUDITED (bibliografia primaria)"
+  ],
+
+  "stop_conditions": "STOP-001..STOP-012 em STOP_CONDITIONS.md; nenhuma foi disparada neste gate",
+
+  "novelty_boundary": {
+    "document": "NOVELTY_BOUNDARY.md",
+    "binding": true,
+    "mathematical_novelty": "NONE",
+    "statement": "Periodicidade eventual em conjunto finito eh o principio da casa dos pombos; nao eh descoberta matematica.",
+    "forbidden_claims": [
+      "nova teoria do tempo",
+      "nova teoria da transicao",
+      "validacao de TRI",
+      "validacao de TDTR",
+      "lei universal da dinamica",
+      "resultado fisico",
+      "solucao de problema aberto"
+    ]
+  },
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "python_experiments_created": 0,
+  "scientific_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "governance_changes": {
+    "labctl": [
+      "check_canonical_commit adicionada (funcao pura, runner injetavel)",
+      "git_exit_code adicionada",
+      "validacao ligada a validate() como ERROR",
+      "allowlist += FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED"
+    ],
+    "tests_added": "06_COMPUTATION/python/tests/test_canonical_commit.py (7 testes)",
+    "rh_nogo_untouched": true
+  },
+
+  "rh_nogo_001_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED"
+  },
+
+  "decision": "A_FOUND_SEMIGROUP_002_SPECIFICATION_READY",
+  "work_status_final": "READY",
+  "authorized_action_final": "FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED",
+  "next_single_action": "Formalizar o nucleo aprovado de alcancabilidade, invariantes e periodicidade eventual para funcoes em tipos finitos, sem executar extensoes fisicas ou alegacoes Tamesis.",
+  "commit_after": null,
+  "final_status": "FOUND_SEMIGROUP_002_SPECIFICATION_READY"
+}

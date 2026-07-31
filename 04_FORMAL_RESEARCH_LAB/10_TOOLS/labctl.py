@@ -71,6 +71,90 @@ def read_front_matter(path: Path) -> tuple[dict[str, Any], str]:
     return data, match.group(2)
 
 
+CANONICAL_COMMIT_PASS = "PASS"
+CANONICAL_COMMIT_UNAVAILABLE = "CANONICAL_COMMIT_UNAVAILABLE"
+CANONICAL_COMMIT_NOT_ANCESTOR = "CANONICAL_COMMIT_NOT_ANCESTOR"
+CANONICAL_COMMIT_GIT_ERROR = "CANONICAL_COMMIT_GIT_ERROR"
+
+SHALLOW_CLONE_HINT = (
+    "complete the git history (git fetch --unshallow); a shallow clone that "
+    "lacks the canonical commit is not a valid canonical environment"
+)
+
+
+def git_exit_code(args: list[str]) -> int:
+    """Run a git command in REPO_ROOT and return only its exit code."""
+    return subprocess.run(
+        args,
+        cwd=REPO_ROOT,
+        capture_output=True,
+        check=False,
+    ).returncode
+
+
+def check_canonical_commit(
+    canonical_commit: str | None,
+    runner: Any = None,
+) -> dict[str, Any]:
+    """Non-destructive validation of LAB_STATE.canonical_commit.
+
+    The commit must exist as a commit object and must be an ancestor of HEAD.
+    Equality with HEAD is ACCEPTED: at the start of a session the canonical
+    commit is normally the current HEAD. Strict ancestry is deliberately NOT
+    implemented.
+
+    `runner` takes a git argument list and returns an exit code; it is
+    injected so the decision table can be unit tested without touching the
+    repository.
+    """
+    run = git_exit_code if runner is None else runner
+    if not canonical_commit:
+        return {
+            "status": CANONICAL_COMMIT_UNAVAILABLE,
+            "canonical_commit": canonical_commit,
+            "message": "LAB_STATE.canonical_commit is missing or empty",
+        }
+
+    exists = run(["git", "cat-file", "-e", f"{canonical_commit}^{{commit}}"])
+    if exists != 0:
+        return {
+            "status": CANONICAL_COMMIT_UNAVAILABLE,
+            "canonical_commit": canonical_commit,
+            "exit_code": exists,
+            "message": (
+                f"canonical_commit {canonical_commit} is not available as a "
+                f"commit object; {SHALLOW_CLONE_HINT}"
+            ),
+        }
+
+    ancestry = run(["git", "merge-base", "--is-ancestor", canonical_commit, "HEAD"])
+    if ancestry == 0:
+        return {
+            "status": CANONICAL_COMMIT_PASS,
+            "canonical_commit": canonical_commit,
+            "message": "canonical_commit exists and is an ancestor of HEAD (equality accepted)",
+        }
+    if ancestry == 1:
+        return {
+            "status": CANONICAL_COMMIT_NOT_ANCESTOR,
+            "canonical_commit": canonical_commit,
+            "exit_code": ancestry,
+            "message": (
+                f"canonical_commit {canonical_commit} exists but is not an "
+                "ancestor of HEAD"
+            ),
+        }
+    return {
+        "status": CANONICAL_COMMIT_GIT_ERROR,
+        "canonical_commit": canonical_commit,
+        "exit_code": ancestry,
+        "message": (
+            f"git merge-base --is-ancestor failed with exit code {ancestry}; "
+            "this is a git or environment error, NOT a non-ancestry verdict"
+        ),
+    }
+
+
 def git_status() -> list[str]:
     result = subprocess.run(
         ["git", "status", "--porcelain=v1", "--untracked-files=all"],
@@ -250,6 +334,7 @@ def validate() -> dict[str, Any]:
         "RH_NOGO_ABSTRACT_COMPOSITION_FORMALIZATION_AUTHORIZED",
         "RH_NOGO_RESEARCH_REVIEW_AUTHORIZED",
         "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED",
+        "FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
@@ -304,6 +389,12 @@ def validate() -> dict[str, Any]:
         if claim.get("work_status") in {"SOLVED", "CLOSED", "100_PERCENT", "CLAY_READY"}:
             errors.append(f"promotional status in claim ledger: {claim.get('claim_id')}")
 
+    canonical_check = check_canonical_commit(state.get("canonical_commit"))
+    if canonical_check["status"] != CANONICAL_COMMIT_PASS:
+        errors.append(
+            f"{canonical_check['status']}: {canonical_check['message']}"
+        )
+
     status_lines = git_status()
     if not all_changes_are_in_lab(status_lines):
         errors.append("changes detected outside 04_FORMAL_RESEARCH_LAB")
@@ -353,6 +444,7 @@ def validate() -> dict[str, Any]:
             "LAB0_LEAN_ENVIRONMENT_FAILED" if not errors else "LAB0_VALIDATION_FAILED"
         ),
         "errors": errors,
+        "canonical_commit_check": canonical_check,
         "warnings": warnings,
         "repository_changes": status_lines,
         "claim_count": len(claims),

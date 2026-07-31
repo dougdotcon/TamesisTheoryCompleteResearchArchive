@@ -1,0 +1,181 @@
+schema: tamesis-gap-register/1
+work_item_id: FOUND-SEMIGROUP-002
+gate: FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION
+note: >
+  Nenhum gap foi forcado a fechar neste gate. Os que aparecem como
+  RESOLVED_BY_EXISTING_API foram resolvidos por LEITURA da fonte fixada,
+  nao por prova.
+
+gaps:
+  - gap_id: FSG2-GAP-001
+    title: Mathlib orbit API suitability
+    description: >
+      Decidir se a orbita usa Set X, Finset X ou MulAction.orbit.
+    status: RESOLVED_BY_EXISTING_API
+    resolution: >
+      MulAction.orbit existe em Mathlib/GroupTheory/GroupAction/Defs.lean:49
+      e mem_orbit_iff eh literalmente Iff.rfl. Decisao: usar MulAction.orbit
+      com Set X. Finset exigiria DecidableEq X e Fintype M, hipoteses
+      desnecessarias para os teoremas estruturais.
+    severity: low
+    blocking: false
+
+  - gap_id: FSG2-GAP-002
+    title: Exact pigeonhole lemma for bounded repetition
+    description: >
+      Localizar o lema de casa dos pombos que produza indices com os
+      limitantes desejados.
+    status: RESOLVED_BY_EXISTING_API
+    resolution: >
+      Fintype.exists_ne_map_eq_of_card_lt (Mathlib/Data/Fintype/Pigeonhole.lean).
+      Aplicado a g : Fin (card X + 1) -> X, g i = f^[i] x, produz i != j com
+      i, j <= card X. Alternativa equivalente:
+      Finset.exists_ne_map_eq_of_card_lt_of_maps_to.
+    severity: low
+    blocking: false
+    residual: >
+      O lema devolve i != j, nao i < j. A ordenacao fica por conta da prova
+      local (lt_or_gt_of_ne). Custo baixo, mas nao nulo.
+
+  - gap_id: FSG2-GAP-002b
+    title: minimalPeriod nao captura periodicidade eventual
+    description: >
+      Function.minimalPeriod e MulAction.period devolvem 0 quando o ponto
+      NAO eh periodico. Num sistema com cauda (CE-003) o estado inicial nao
+      eh periodico, logo minimalPeriod devolve 0 e contradiria 0 < lam.
+    status: OPEN_DOCUMENTED_TRAP
+    severity: medium
+    blocking: false
+    mitigation: >
+      FSG2-PER-004 conecta o resultado local a API oficial aplicando
+      IsPeriodicPt ao ponto f^[mu] x, NAO a x. CE-003 existe para tornar a
+      armadilha visivel e testavel.
+
+  - gap_id: FSG2-GAP-003
+    title: Iterate-action identity
+    description: >
+      Relacao entre Function.iterate (fun y => a . y) n x e a^n . x.
+    status: RESOLVED_BY_EXISTING_API
+    resolution: >
+      smul_iterate e smul_iterate_apply, em
+      Mathlib/Algebra/Group/Action/Defs.lean:432,437. Nenhum lema local eh
+      necessario. A especificacao previa que este lema poderia nao existir;
+      a leitura da fonte mostrou que existe.
+    severity: low
+    blocking: false
+
+  - gap_id: FSG2-GAP-004
+    title: Sharp cardinal bounds for mu and lambda
+    description: >
+      Verificar se mu < card X e mu + lam <= card X sao simultaneamente
+      alcancaveis na primeira formalizacao.
+    status: RESOLVED_BY_ANALYSIS
+    resolution: >
+      Sim. Com g definida em Fin (card X + 1) tem-se i < j <= card X, logo
+      mu = i < card X e mu + lam = j <= card X. Verificado em
+      THEOREM_CANDIDATES.md antes de escolher a meta C.
+    severity: low
+    blocking: false
+    residual: >
+      Os limitantes NAO sao afirmados como otimos (sharp). Sao suficientes.
+      A otimalidade exigiria minimalidade de mu e lam — ver FSG2-GAP-004b.
+
+  - gap_id: FSG2-GAP-004b
+    title: Decomposicao unica em cauda e ciclo
+    description: >
+      Provar existencia e unicidade do par minimal (mu, lam), com
+      injetividade de f^[.] em [0, mu) e estrutura ciclica em
+      [mu, mu + lam).
+    status: DEFERRED_AFTER_COST_ANALYSIS
+    severity: medium
+    blocking: false
+    cost_analysis: >
+      Cinco obrigacoes novas, nenhuma corolario das anteriores: minimalidade
+      de mu, minimalidade de lam, unicidade do par, injetividade no
+      segmento inicial, estrutura ciclica. A parte de divisibilidade de
+      periodos depende de lemas de Dynamics/PeriodicPts nao auditados.
+      Excluida da meta C por decisao explicita deste gate.
+
+  - gap_id: FSG2-GAP-004c
+    title: DecidableEq X eh hipotese ociosa?
+    description: >
+      A assinatura sugerida pelo gate inclui [DecidableEq X], mas a prova
+      esbocada de FSG2-PER-002 nao a utiliza.
+    status: OPEN_PENDING_EXECUTION
+    severity: low
+    blocking: false
+    decision: >
+      Omitir DecidableEq X, salvo necessidade demonstrada na execucao.
+      Coerente com a politica ja aplicada em COUNTING-LAW-BRIDGE, onde a
+      hipotese ociosa 0 < c foi removida.
+
+  - gap_id: FSG2-GAP-005
+    title: Propagation from one collision to full eventual periodicity
+    description: >
+      De f^[mu + lam] x = f^[mu] x concluir
+      f^[mu + k + lam] x = f^[mu + k] x para todo k.
+    status: SPECIFIED_LOW_COST
+    severity: low
+    blocking: false
+    route: >
+      Function.iterate_add_apply mais aritmetica de indices em N.
+      Incluido na meta C.
+    residual: >
+      Function.iterate_add_apply foi confirmado apenas pelos USOS no
+      Mathlib, nao pela declaracao original (esta em core/Batteries).
+      Classificado NAME_UNCERTAIN em LEAN_FEASIBILITY.md; deve ser
+      confirmado por #check antes de qualquer prova depender dele.
+
+  - gap_id: FSG2-GAP-006
+    title: Preorder representation without unsafe global instance
+    description: >
+      Alcancabilidade eh reflexiva e transitiva, mas registrar
+      instance Preorder X seria perigoso.
+    status: RESOLVED_BY_DESIGN_DECISION
+    resolution: >
+      Nenhuma instancia global. A relacao depende de M, que nao aparece no
+      tipo X; duas acoes distintas sobre o mesmo X dariam instancias
+      incompativeis, e X frequentemente ja possui ordem propria. Decisao:
+      teoremas FSG2-REACH-001/002 mais um `def reachablePreorder` NAO
+      marcado como instance, para uso explicito com letI.
+    severity: low
+    blocking: false
+
+  - gap_id: FSG2-GAP-007
+    title: Counterexample encoding strategy
+    description: >
+      Escolher entre Fin n com notacao ![...] e tipos indutivos proprios ao
+      estilo de Regime3.
+    status: OPEN_PENDING_EXECUTION
+    severity: low
+    blocking: false
+    residual: >
+      Inclui tambem a negativa "o periodo pode depender do estado inicial",
+      registrada em ASSUMPTIONS.md SEM contraexemplo planejado. O modelo eh
+      trivial, mas nao foi incluido entre os cinco pedidos pelo gate e nao
+      sera afirmado sem exemplo.
+
+  - gap_id: FSG2-GAP-008
+    title: Boundary between standard result and future Tamesis modelling
+    description: >
+      Delimitar o que este nucleo formal autoriza a afirmar.
+    status: RESOLVED_BY_BINDING_DOCUMENT
+    resolution: >
+      NOVELTY_BOUNDARY.md eh vinculante e traz tabela de "nao escrever /
+      escrever". Nenhuma ponte com TRI/TDTR eh construida; qualquer ponte
+      futura exigira gate proprio, como ja registrado em FOUND-SG-GAP-004.
+    severity: informational
+    blocking: false
+
+  - gap_id: FSG2-GAP-009
+    title: Bibliografia primaria nao auditada
+    description: >
+      Nenhuma fonte primaria de teoria de semigrupos ou de dinamica
+      discreta foi obtida ou auditada por este laboratorio.
+    status: NOT_AUDITED
+    severity: low
+    blocking: false
+    note: >
+      Herdado de FOUND-SG-GAP-003. Consequencia vinculante: nenhuma
+      afirmacao de prioridade historica ou atribuicao a autor pode ser
+      feita. Os resultados usados sao elementares e cobertos pela Mathlib.

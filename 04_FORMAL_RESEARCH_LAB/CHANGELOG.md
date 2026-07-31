@@ -1,5 +1,73 @@
 # Changelog do laboratório formal
 
+## FOUND-SEMIGROUP-002-SPECIFICATION - 2026-07-31
+
+### Preflight
+
+- `canonical_commit` atualizado de `c186ab59` para `39e3d95` **antes** de
+  qualquer trabalho de especificacao; politica textual substituida por
+  "ultimo commit canonico integralmente encerrado antes da sessao atual;
+  deve existir e ser ancestral do HEAD".
+- Commits `1576cf1` e `39e3d95` fazem parte obrigatoria do estado de
+  retomada.
+
+### Added
+
+- Validacao nao destrutiva de `canonical_commit` em `labctl.py`
+  (`check_canonical_commit`, funcao pura com `runner` injetavel):
+  `cat-file` ausente -> `CANONICAL_COMMIT_UNAVAILABLE` com recomendacao de
+  completar o historico; `is-ancestor` exit 0 -> PASS (igualdade aceita);
+  exit 1 -> `CANONICAL_COMMIT_NOT_ANCESTOR`; outro exit ->
+  `CANONICAL_COMMIT_GIT_ERROR`. Severidade **erro**, nunca warning.
+- `tests/test_canonical_commit.py`: 7 testes cobrindo os cinco casos
+  pedidos, **sem criar branch nem reescrever historico**. O teste de
+  igualdade afirma que nao ha `rev-parse` extra, travando a ancestralidade
+  nao estrita.
+- Especificacao `FOUND-SEMIGROUP-002` em
+  `02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/` (13 artefatos).
+  Onze teoremas candidatos, cinco contraexemplos, doze gaps.
+
+### Decided
+
+- Meta principal: **`C. CORE_BOUNDS_AND_PROPAGATION`**. Os tres limitantes
+  foram verificados como simultaneamente alcancaveis ANTES da escolha.
+  **`DECOMPOSITION` excluida** apos analise de custo (`FSG2-GAP-004b`).
+- Tres camadas separadas: acao completa / gerador / funcao finita.
+  Periodicidade eventual pertence a Camada C e **nao** menciona monoide.
+- Sem instancia global `Preorder` para alcancabilidade (`FSG2-GAP-006`).
+
+### Verified
+
+- `smul_iterate_apply` **existe** na Mathlib fixada: `FSG2-GAP-003`
+  resolvido pela API, nao por prova.
+- `mem_orbit_iff` eh `Iff.rfl`: a ponte alcancabilidade/orbita custa zero.
+- Periodicidade eventual **ausente** do Mathlib (zero ocorrencias de
+  `preperiodic`/`eventuallyPeriodic`): o enunciado sera local.
+- **Armadilha registrada**: `minimalPeriod` e `MulAction.period` devolvem 0
+  fora de `periodicPts`; `CE-003` a torna detectavel (`FSG2-GAP-002b`).
+- pytest **9 passed**; `labctl validate` PASS com `canonical_commit_check`
+  PASS.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** `lake build`, **0** experimentos
+  Python, **0** claims cientificas promovidas, **0** arquivos de legado
+  modificados, **0** arquivos de `RH-NOGO-001` tocados.
+
+### Blocked
+
+- Novidade matematica: **NONE**. Periodicidade eventual em conjunto finito
+  eh o principio da casa dos pombos. `NOVELTY_BOUNDARY.md` eh vinculante.
+- Bibliografia primaria `NOT_AUDITED` (`FSG2-GAP-009`): nenhuma afirmacao
+  de prioridade historica eh permitida.
+- `RH-NOGO-001` permanece `FROZEN_PARTIAL_RESULT` / `NOT_AUTHORIZED` /
+  `NO_EXECUTION`.
+
+### Result
+
+- `FOUND_SEMIGROUP_002_SPECIFICATION_READY`.
+  `authorized_action` -> `FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED`.
+
 ## APPROVAL RECORD - 2026-07-31
 
 ### Approved

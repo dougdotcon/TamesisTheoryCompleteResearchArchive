@@ -1,17 +1,24 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-31T11:50:00-03:00
-canonical_commit: "c186ab593e8371098964533237f4a4bb8c85247c"
-canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
+canonical_commit: "39e3d95925a7038da307017216dd4cb8e49c572a"
+canonical_commit_policy: >
+  Aponta para o último commit canônico integralmente encerrado
+  antes da sessão atual. Deve existir e ser ancestral do HEAD.
+  Igualdade com o HEAD é válida no começo de uma sessão; a
+  ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-SEMIGROUP-002"
-work_status: "SCOPED"
+work_status: "READY"
 evidence_level: "F"
-last_verified_artifact: "rh-nogo-research-review-result.json"
-current_blocker: "FOUND-SEMIGROUP-002 ainda não foi especificado; execução não autorizada."
-next_single_action: "Especificar FOUND-SEMIGROUP-002: definições, enunciados decidíveis e contraexemplos alvo para o monoide finito de transições já formalizado, sem executar formalização."
-authorized_action: "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED"
+last_verified_artifact: "found-semigroup-002-specification-result.json"
+current_blocker: null
+next_single_action: >
+  Formalizar o núcleo aprovado de alcançabilidade, invariantes e
+  periodicidade eventual para funções em tipos finitos, sem executar
+  extensões físicas ou alegações Tamesis.
+authorized_action: "FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED"
 frozen_work_items:
   RH-NOGO-001: "FROZEN_PARTIAL_RESULT desde 2026-07-31, commit c186ab59; ver 03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
 prohibited_actions:
@@ -24,7 +31,11 @@ prohibited_actions:
   - "Não apresentar ABSTRACT-NOGO-001 como no-go espectral, como refutação de Hilbert–Pólya ou como progresso sobre RH"
   - "Não apresentar ABSTRACT-NOGO-001 como novidade matemática"
   - "Não apresentar W-ELLIPTIC-SCALAR-BRIDGE como classe copiada da literatura — seis das doze condições são deste laboratório"
-  - "Não executar FOUND-SEMIGROUP-002 antes de sua especificação estar pronta"
+  - "Não incluir decomposição única de órbitas na primeira formalização (FSG2-GAP-004b)"
+  - "Não usar Function.minimalPeriod nem MulAction.period como período eventual (FSG2-GAP-002b)"
+  - "Não criar instância global Preorder para alcançabilidade (FSG2-GAP-006)"
+  - "Não afirmar negativa sem contraexemplo planejado"
+  - "Não apresentar periodicidade eventual como novidade matemática"
   - "Não confundir o modelo finito de FOUND-SEMIGROUP-002 com teoria geral de semigrupos"
   - "Não reutilizar o modelo finito como suporte de alegação física ou espectral"
   - "Não modificar legado nem operar a partir de /mnt/d"
@@ -34,6 +45,9 @@ resume_read_order:
   - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
   - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md"
   - "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+  - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/README.md"
+  - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/THEOREM_CANDIDATES.md"
+  - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/NOVELTY_BOUNDARY.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "00_GOVERNANCE/DECISION_LEDGER.yaml"
   - "último relatório em 09_SESSIONS/"
@@ -42,62 +56,52 @@ resume_read_order:
 # Estado atual
 
 ```text
-RH-NOGO-001   FROZEN_PARTIAL_RESULT   (congelado, NAO descartado)
-FOUND-SEMIGROUP-002   SCOPED          (ativo, apenas especificacao autorizada)
+FOUND-SEMIGROUP-002   READY    especificacao pronta; formalizacao autorizada
+RH-NOGO-001           FROZEN_PARTIAL_RESULT   congelado, NAO descartado
 ```
 
-## RH-NOGO-001 — o que ficou pronto
+## O que a especificação fixou
+
+Três camadas separadas por construção, com a regra de que **todo teorema
+vai para a camada mais fraca em que ainda faz sentido**:
 
 ```text
-CAMADA ANALITICA ABSTRATA — COMPLETA
-  ASYM-NOGO-001          VERIFIED
-  COUNTING-LAW-BRIDGE    VERIFIED
-  ABSTRACT-NOGO-001      VERIFIED
-  WEYL-COEFFICIENT-CORE  VERIFIED  (interface, nao geometria)
-
-CAMADA CONCRETA — DEFERIDA
-  GLOBAL-WEYL-BRIDGE-SCALAR   NOT_PROVED       (9 obrigacoes, 0 provadas)
-  Riemann-von Mangoldt        NOT_FORMALIZED
-  exclusao de operadores      NOT_PROVED
+CAMADA A   acao completa de M      alcancabilidade, orbita, invariantes
+CAMADA B   um gerador a fixo       corolario DERIVADO
+CAMADA C   funcao finita (X, f)    periodicidade eventual vive AQUI
 ```
 
-Descrição canônica, vinculante:
+Alvo: `C. CORE_BOUNDS_AND_PROPAGATION` — existência da colisão, limitantes
+em `Fintype.card X` e propagação. **Decomposição única em cauda + ciclo
+fica fora**, com custo analisado (`FSG2-GAP-004b`).
 
-> Teorema abstrato formal completo, com uma aplicação espectral candidata
-> rigorosamente delimitada, mas ainda não instanciada.
+Onze teoremas candidatos, cinco contraexemplos planejados, doze gaps
+registrados.
 
-## RH-NOGO-001 — conclusões científicas
+## Achados da auditoria da Mathlib
 
-```yaml
-spectral_nogo: NOT_ESTABLISHED
-hilbert_polya: NOT_EXCLUDED
-riemann_hypothesis: NO_RESULT
+```text
+smul_iterate_apply      EXISTE  -> FSG2-GAP-003 resolvido pela API
+mem_orbit_iff           Iff.rfl -> ponte alcancabilidade/orbita custa zero
+pigeonhole              EXISTE  -> Fintype.exists_ne_map_eq_of_card_lt
+periodicidade eventual  AUSENTE -> enunciado sera local
+minimalPeriod           ARMADILHA: devolve 0 fora de periodicPts
 ```
 
-Claims permitidas e proibidas estão fixadas em
-`03_MILLENNIUM/01_RIEMANN/RH_NOGO_RESULT_BOUNDARY.md`, documento
-vinculante.
+## Preflight desta sessão
 
-## Por que congelar
+`canonical_commit` atualizado de `c186ab59` para `39e3d95` **antes** de
+qualquer trabalho, e a política textual corrigida. A validação de
+ancestralidade passou a ser executada por `labctl validate` como **erro**,
+com distinção entre exit `1` (não ancestral) e outros códigos (erro do
+git). Sete testes cobrem a tabela de decisão sem tocar no histórico.
 
-Continuar exigiria construir, em Lean, infraestrutura para operadores
-auto-adjuntos não limitados, resolvente compacto, projetores espectrais,
-cálculo pseudodiferencial, lei global de Weyl e Riemann–von Mangoldt. Isso
-é um projeto de formalização de grande porte, não o próximo gate — e o
-resultado final excluiria apenas uma classe estreita, metade de cujas
-condições é hipótese deste próprio laboratório, sem resolver RH.
+## Novidade
 
-Congelar preserva o que é válido e reutilizável. As pastas
-`AsymptoticCore/`, `Bridge/` e `Composition/` são análise real abstrata
-sobre funções `ℝ → ℝ` e podem ser usadas fora desta frente.
+**Zero.** Periodicidade eventual em conjunto finito é o princípio da casa
+dos pombos. `NOVELTY_BOUNDARY.md` é vinculante. Bibliografia primária
+`NOT_AUDITED`, logo nenhuma afirmação de prioridade histórica é permitida.
 
-## Próxima frente
+## Próxima ação
 
-`FOUND-SEMIGROUP-002` — dinâmica discreta de monoides de transição
-finitos. Escolhido porque usa infraestrutura Mathlib já disponível e já
-exercitada aqui (`Fintype`, `Decidable`, `decide`), tem acesso alto a
-contraexemplos por ser finito e decidível, e reutiliza diretamente
-`FOUND-SEMIGROUP-001`, que está `VERIFIED`.
-
-**Apenas a especificação está autorizada.** Nenhuma formalização foi
-executada neste gate.
+Formalizar o núcleo aprovado. **Somente ele.**

@@ -1,0 +1,110 @@
+schema: tamesis-dependency-dag/1
+work_item_id: FOUND-SEMIGROUP-002
+
+chain:
+  - FOUND-SEMIGROUP-001
+  - definicoes de acao e composicao
+  - FOUND-SEMIGROUP-002-SPEC
+  - alcancabilidade e invariantes
+  - pigeonhole em orbitas finitas
+  - periodicidade eventual
+  - contraexemplos e auditoria
+
+dependencies:
+  MATHEMATICAL:
+    - id: MATH-001
+      item: "principio da casa dos pombos em tipos finitos"
+      needed_by: FSG2-PER-001
+      available: true
+      source: Mathlib
+    - id: MATH-002
+      item: "aritmetica de iteracao: f^[m+n] x = f^[m] (f^[n] x)"
+      needed_by: FSG2-PER-003
+      available: true
+      source: "Lean core / Batteries (confirmado por uso no Mathlib)"
+      caveat: NAME_UNCERTAIN
+    - id: MATH-003
+      item: "leis de monoide e de acao (one_smul, mul_smul)"
+      needed_by: [FSG2-REACH-001, FSG2-REACH-002]
+      available: true
+      source: Mathlib
+    - id: MATH-004
+      item: "identidade iteracao <-> potencia da acao"
+      needed_by: FSG2-ACT-001
+      available: true
+      source: "Mathlib smul_iterate_apply"
+
+  LEAN_API:
+    - id: API-001
+      item: MulAction.orbit + mem_orbit_iff
+      needed_by: FSG2-ORBIT-001
+      classification: API_FOUND
+    - id: API-002
+      item: Fintype.exists_ne_map_eq_of_card_lt
+      needed_by: FSG2-PER-001
+      classification: API_FOUND
+    - id: API-003
+      item: smul_iterate_apply
+      needed_by: FSG2-ACT-001
+      classification: API_FOUND
+    - id: API-004
+      item: Function.IsPeriodicPt
+      needed_by: FSG2-PER-004
+      classification: API_FOUND
+    - id: API-005
+      item: "periodicidade eventual / preperiodicidade"
+      needed_by: FSG2-PER-002
+      classification: NOT_FOUND
+      consequence: "enunciado local; nao ha API a reutilizar"
+    - id: API-006
+      item: Function.iterate_add_apply
+      needed_by: FSG2-PER-003
+      classification: NAME_UNCERTAIN
+      action_required: "confirmar por #check antes de depender"
+
+  GOVERNANCE:
+    - id: GOV-001
+      item: "FOUND-SEMIGROUP-001 status VERIFIED"
+      required_by: "labctl gate sequence"
+      satisfied: true
+    - id: GOV-002
+      item: "authorized_action FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED"
+      satisfied: true
+    - id: GOV-003
+      item: "NOVELTY_BOUNDARY.md vinculante antes de qualquer texto publico"
+      satisfied: true
+    - id: GOV-004
+      item: "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT e intocado"
+      satisfied: true
+
+  COMPUTATIONAL:
+    - id: COMP-001
+      item: "verificacao finita dos cinco contraexemplos"
+      status: PLANNED_NOT_EXECUTED
+      note: "nenhum experimento Python foi criado neste gate"
+    - id: COMP-002
+      item: "deteccao de cauda e ciclo para CE-003"
+      status: PLANNED_NOT_EXECUTED
+
+  BIBLIOGRAPHIC:
+    - id: BIB-001
+      item: "fonte primaria de teoria de semigrupos"
+      status: NOT_AUDITED
+      inherited_from: FOUND-SG-GAP-003
+      blocking: false
+    - id: BIB-002
+      item: "fonte primaria de dinamica discreta finita"
+      status: NOT_AUDITED
+      blocking: false
+      consequence: "nenhuma afirmacao de prioridade historica eh permitida"
+
+blocking_summary:
+  blocking_dependencies: 0
+  note: >
+    Nenhuma dependencia bloqueia a execucao futura. As duas classificadas
+    NAME_UNCERTAIN exigem confirmacao por #check no primeiro arquivo, nao
+    trabalho novo.
+
+excluded_from_dag:
+  - "RH-NOGO-001 e toda a cadeia espectral: congelada e sem relacao com esta frente"
+  - "qualquer dependencia de TRI, TDTR, Omega, TOE ou claims fisicas"

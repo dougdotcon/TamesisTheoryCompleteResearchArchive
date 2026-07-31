@@ -1,59 +1,65 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T02:24:40-03:00
-canonical_commit: "dc43bec5209be77ad227383d1405c33e4dc71484"
+updated_at: 2026-07-31T02:54:50-03:00
+canonical_commit: "95e5865e174e77b19a56e6a3c1c243ef4c64a6c1"
 canonical_commit_policy: "aponta para o commit finalizado do gate; a atualização deste campo ocorre no commit de fechamento seguinte"
 repository_clean: true
-active_track: "foundations"
-active_work_item: "FOUND-SEMIGROUP-001"
-work_status: "READY"
+active_track: "millennium"
+active_work_item: "RH-NOGO-001"
+work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "lab-bench-001-result.json"
-current_blocker: null
-next_single_action: "Preparar e executar FOUND-SEMIGROUP-001 conforme seu enunciado canônico."
-authorized_action: "FOUNDATIONS_EXECUTION_AUTHORIZED"
+last_verified_artifact: "found-semigroup-001-result.json"
+current_blocker: "Especificação formal e auditoria bibliográfica ainda não executadas."
+next_single_action: "Preparar o enunciado formal, as dependências e a auditoria bibliográfica de RH-NOGO-001 sem iniciar sua prova."
+authorized_action: "RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED"
 prohibited_actions:
-  - "Não iniciar RH-NOGO-001 ou qualquer frente Clay"
+  - "Não executar a prova de RH-NOGO-001 (RH_NOGO_PROOF_EXECUTION não autorizado)"
+  - "Não usar os zeros como entrada para construir o espectro que depois os explica"
+  - "Não usar evidência numérica como prova da RH"
+  - "Não usar linguagem Tamesis no lugar do enunciado clássico"
   - "Não modificar legado"
   - "Não declarar descoberta"
   - "Não promover evidência automaticamente"
-  - "Não retomar a rota nativa Windows"
-  - "Não operar a partir de /mnt/d"
-  - "Não tratar o benchmark de infraestrutura como resultado científico"
+  - "Não retomar a rota nativa Windows nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "05_FORMAL/LEAN_ENVIRONMENT.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
-  - "05_FORMAL/specifications/LAB-BENCH-001_THEOREM_MAP.md"
+  - "00_GOVERNANCE/CLAIM_LEDGER.yaml (RH-NOGO-001)"
+  - "03_MILLENNIUM/01_RIEMANN/"
   - "último relatório em 09_SESSIONS/"
 ---
 
 # Estado atual
 
-O benchmark formal LAB-BENCH-001 foi executado e verificado no runtime
-canônico Ubuntu 24.04/WSL2. A infraestrutura Lean/Mathlib compila matemática
-elementar conhecida com rastreabilidade completa e zero tokens proibidos.
-O benchmark mede o processo; nenhum item dele é resultado científico.
+FOUND-SEMIGROUP-001 foi executado e verificado: o modelo finito de três
+regimes e três transições está formalizado como monoide cíclico com ação
+fiel e transitiva, sob a interface oficial da Mathlib
+(`SemigroupAction`/`MulAction`), com auditoria computacional e
+contraexemplos que impedem generalização indevida. Valor científico:
+`FOUNDATIONAL_FORMALIZATION_ONLY` — o modelo não valida TRI, TDTR ou
+qualquer claim histórica.
 
-## Estado do benchmark LAB-BENCH-001
+## Work items verificados
 
-`VERIFIED`
+| Item | Estado | Evidência |
+|---|---|---|
+| LAB-ARCH-001 | VERIFIED | governança e labctl |
+| LAB-BENCH-001 | VERIFIED | lab-bench-001-result.json |
+| FOUND-SEMIGROUP-001 | VERIFIED | found-semigroup-001-result.json; FOUND-SG-001..013 |
 
-| Etapa | Estado |
-|---|---|
-| LEAN_ENVIRONMENT_DISCOVERY | PASS |
-| LEAN_TOOLCHAIN_AVAILABILITY | PASS |
-| LEAN_SMOKE_BUILD | PASS |
-| LAB_BENCHMARK_PREPARATION | PASS |
-| LAB_BENCHMARK_EXECUTION | PASS |
-| LAB_BENCHMARK_VERIFICATION | PASS |
+## Frente ativa
 
-Evidências: `lab-bench-001-result.json`,
-`05_FORMAL/specifications/LAB-BENCH-001_THEOREM_MAP.md` (11 definições,
-15 teoremas, todos elementares e conhecidos), `lake build` PASS com 8.676
-jobs, `TamesisLab/Tests/BenchmarkSmoke.lean` PASS individual, pytest PASS,
-`labctl validate` PASS.
+`RH-NOGO-001` — `SCOPED`, com autorização exclusiva de **preparação de
+especificação** (`RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED`).
+
+A execução da prova (`RH_NOGO_PROOF_EXECUTION`) permanece
+`NOT_AUTHORIZED / NO_EXECUTION`. A preparação exige, antes de qualquer
+prova: enunciado exato da classe de operadores, hipóteses espectrais
+explícitas, auditoria de não circularidade (separação de GUE e dados
+definidos pelos próprios zeros), bibliografia primária, matriz de
+resultados conhecidos, gaps, contraexemplos, Lean map e critério de
+novidade.
 
 ## Runtime e ambiente Lean
 
@@ -68,40 +74,28 @@ jobs, `TamesisLab/Tests/BenchmarkSmoke.lean` PASS individual, pytest PASS,
 `FROZEN / HISTORICAL / NOT_OPERATIONAL` — tag `lab-native-windows-paused`,
 commit `634de1c3aa915fcb0ccc5f27d6fe6194368535a4`.
 
-## Estado de RH-NOGO-001
-
-SCOPED
-NOT_AUTHORIZED
-NO_EXECUTION
-
-Nenhuma sessão de Riemann foi aberta.
-
 ## Próxima ação única
 
-Preparar e executar FOUND-SEMIGROUP-001 conforme seu enunciado canônico.
-
-FOUND-SEMIGROUP-001 definirá com precisão regime, transição e composição em
-um exemplo finito, antes de qualquer frente Clay. Não foi executado nesta
-sessão.
+Preparar o enunciado formal, as dependências e a auditoria bibliográfica de
+RH-NOGO-001 sem iniciar sua prova.
 
 ## Ações proibidas
 
-- abrir ou executar RH-NOGO-001;
+- executar a prova de RH-NOGO-001 ou qualquer frente Clay;
 - alterar qualquer arquivo fora de `04_FORMAL_RESEARCH_LAB/`;
 - usar sorry, admit, axioma local ou unsafe;
-- interpretar o benchmark de infraestrutura como validação de TRI, TDTR, TOE
-  ou qualquer claim histórica;
-- promover evidência automaticamente;
+- promover computação, simulação ou modelo finito a teorema universal;
+- interpretar FOUND-SEMIGROUP-001 como validação de TRI, TDTR ou TOE;
 - retomar a rota nativa Windows ou operar a partir de `/mnt/d`.
 
 ## Histórico recente
 
-- 2026-07-28: LAB-0 técnico passou; LAB-0.5 corrigiu o gate.
-- 2026-07-28 a 2026-07-30: LAB-0.6 a LAB-0.11 bloqueados pelo cache Mathlib
-  sob o runtime Windows nativo.
-- 2026-07-31: LAB-WSL-MIGRATION migrou o runtime canônico para o WSL2 e
-  alinhou o par Lean/Mathlib a `v4.33.0-rc1`.
+- 2026-07-28 a 2026-07-30: LAB-0.x bloqueados pelo cache Mathlib no Windows.
+- 2026-07-31: LAB-WSL-MIGRATION migrou o runtime canônico para o WSL2
+  (`v4.33.0-rc1`).
 - 2026-07-31: LAB-BENCH-001 executado e verificado
-  (`LAB_BENCH_001_VERIFIED`); skills locais de agente disponibilizadas em
-  `.claude/skills` fora do controle de versão.
-- Nenhuma frente Clay foi iniciada.
+  (`LAB_BENCH_001_VERIFIED`).
+- 2026-07-31: FOUND-SEMIGROUP-001 executado e verificado
+  (`FOUND_SEMIGROUP_001_VERIFIED`); modelo C3 formalizado; claim
+  FOUND-SG-FORMAL-001 registrada em `F`.
+- Nenhuma prova de Riemann foi aberta; nenhuma frente Clay foi executada.

@@ -1,0 +1,122 @@
+{
+  "schema": "tamesis-lab-gate-result/1",
+  "work_item": "FOUND-SEMIGROUP-001",
+  "executed_at": "2026-07-31T02:54:50-03:00",
+  "commit_before": "95e5865e174e77b19a56e6a3c1c243ef4c64a6c1",
+  "runtime": {
+    "os": "Ubuntu 24.04 (WSL2)",
+    "repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+    "branch": "lab/wsl-lean-migration",
+    "lean": "v4.33.0-rc1",
+    "mathlib_revision": "79d0395a1825a6264ad5d269e35e60537518955e"
+  },
+  "skills_used": [
+    "matematica-pura",
+    "engenharia-software",
+    "linguistica-computacional",
+    "historia-digital"
+  ],
+
+  "abstract_interface": {
+    "decision": "REUSE_MATHLIB",
+    "structures": ["SemigroupAction (Mathlib.Algebra.Group.Action.Defs)", "MulAction"],
+    "local_duplicate_created": false,
+    "note": "A revisão fixada já contém SemigroupAction com mul_smul, adequada ao caso sem identidade; pela stop condition do gate, nenhuma estrutura local foi criada. Mapeamento terminológico em Semigroups/Basic.lean."
+  },
+  "composition_convention": "comp a b aplica b primeiro e depois a, alinhada a mul_smul: (a * b) • r = a • (b • r)",
+
+  "concrete_model": {
+    "regimes": "Regime3 = {alpha, beta, gamma}",
+    "transitions": "Shift3 = {identity, forward, forward2}",
+    "regime_cardinality": 3,
+    "transition_cardinality": 3,
+    "structure": "monoide cíclico C3 agindo regularmente"
+  },
+  "definitions": [
+    "Regime3", "Shift3", "Shift3.apply", "Shift3.comp",
+    "Fintype Regime3 (manual)", "Fintype Shift3 (manual)"
+  ],
+  "instances": ["Monoid Shift3", "MulAction Shift3 Regime3",
+                "Semigroup Shift3 (por herança)",
+                "SemigroupAction Shift3 Regime3 (por herança)"],
+  "theorems": [
+    "FOUND-SG-002 comp_assoc", "FOUND-SG-003 identity_comp",
+    "FOUND-SG-004 comp_identity", "FOUND-SG-005 apply_comp",
+    "FOUND-SG-006 forward_cycle", "FOUND-SG-007 card_regime3",
+    "FOUND-SG-008 card_shift3", "FOUND-SG-009 identity_ne_forward",
+    "FOUND-SG-010 identity_ne_forward2", "FOUND-SG-011 forward_ne_forward2",
+    "FOUND-SG-012 apply_faithful", "FOUND-SG-013 apply_transitive"
+  ],
+  "theorem_count": 12,
+  "closure": "FOUND-SG-001: closure is enforced by construction",
+  "proof_methods": [
+    "decide (análise finita exaustiva verificada pelo kernel)",
+    "rfl / cases <;> rfl (computação definicional)"
+  ],
+  "lean_files": [
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups/Basic.lean",
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups/Regime3.lean",
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups/Theorems.lean",
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups/Action.lean",
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups/Audit.lean",
+    "05_FORMAL/lean/TamesisLab/Foundations/Semigroups.lean",
+    "05_FORMAL/lean/TamesisLab/Tests/FoundSemigroup001.lean"
+  ],
+
+  "results": {
+    "associativity": "PASS (FOUND-SG-002, Lean + auditoria exaustiva)",
+    "identities": "PASS (FOUND-SG-003/004)",
+    "action_law": "PASS (FOUND-SG-005)",
+    "faithfulness": "PASS (FOUND-SG-012)",
+    "transitivity": "PASS (FOUND-SG-013)",
+    "cardinalities": "PASS (FOUND-SG-007/008)"
+  },
+  "lean_test": {"command": "lake env lean TamesisLab/Tests/FoundSemigroup001.lean", "exit_code": 0, "duration_seconds": 2.743},
+  "lake_build": {"exit_code": 0, "jobs": 8683, "duration_seconds": 80.644},
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+
+  "python_audit": {
+    "script": "06_COMPUTATION/python/experiments/found_semigroup_001_audit.py",
+    "result": "06_COMPUTATION/results/FOUND-SEMIGROUP-001-computational-audit.json",
+    "classification": "COMPUTATIONAL_FINITE_CROSS_CHECK_ONLY",
+    "status": "PASS",
+    "checks": {
+      "closure": "PASS", "associativity": "PASS", "left_identity": "PASS",
+      "right_identity": "PASS", "action_compatibility": "PASS",
+      "faithful_action": "PASS", "transitivity": "PASS"
+    },
+    "counterexamples_found_in_valid_model": 0,
+    "negative_fixtures_expected_failures_observed": 4
+  },
+  "python_tests": {"status": "PASS", "passed": 2},
+  "labctl_validate": {"status": "PASS", "errors": [], "warnings": []},
+
+  "counterexamples_documented": [
+    "operação finita não associativa (subtração truncada em {0,1,2})",
+    "ação incompatível com a composição (forward2 agindo como identidade)",
+    "sistema de transições não transitivo ({identity})",
+    "representação não fiel (identity e forward2 com a mesma ação)"
+  ],
+  "claim_created": {
+    "claim_id": "FOUND-SG-FORMAL-001",
+    "short_name": "finite_transition_monoid_c3",
+    "domain": "formal_foundations",
+    "work_status": "VERIFIED",
+    "evidence_level": "F"
+  },
+  "scientific_claims_promoted": 0,
+  "legacy_files_modified": 0,
+
+  "active_work_item_final": "RH-NOGO-001",
+  "work_status_final": "SCOPED",
+  "authorized_action_final": "RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "next_single_action": "Preparar o enunciado formal, as dependências e a auditoria bibliográfica de RH-NOGO-001 sem iniciar sua prova.",
+  "RH-NOGO-001": {
+    "work_status": "SCOPED",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "proof_execution_authorized": false
+  },
+  "scientific_value": "FOUNDATIONAL_FORMALIZATION_ONLY",
+  "final_status": "FOUND_SEMIGROUP_001_VERIFIED"
+}

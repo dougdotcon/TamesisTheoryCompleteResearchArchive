@@ -218,10 +218,15 @@ def validate() -> dict[str, Any]:
 
     benchmark = item_by_id.get("LAB-BENCH-001", {})
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
-    if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001"}:
-        errors.append("gate sequence requires LAB-BENCH-001 or FOUND-SEMIGROUP-001 as active_work_item")
+    semigroup = item_by_id.get("FOUND-SEMIGROUP-001", {})
+    if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001"}:
+        errors.append(
+            "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001 or RH-NOGO-001 as active_work_item"
+        )
     if active == "FOUND-SEMIGROUP-001" and benchmark.get("status") != "VERIFIED":
         errors.append("FOUND-SEMIGROUP-001 cannot be active before LAB-BENCH-001 is VERIFIED")
+    if active == "RH-NOGO-001" and semigroup.get("status") != "VERIFIED":
+        errors.append("RH-NOGO-001 cannot be active before FOUND-SEMIGROUP-001 is VERIFIED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -230,6 +235,7 @@ def validate() -> dict[str, Any]:
         "LAB_CACHE_NETWORK_RECOVERY_AUTHORIZED",
         "LAB_BENCHMARK_EXECUTION_AUTHORIZED",
         "FOUNDATIONS_EXECUTION_AUTHORIZED",
+        "RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     benchmark_phases = benchmark.get("phase_status", {})

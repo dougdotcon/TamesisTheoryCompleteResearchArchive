@@ -1,5 +1,57 @@
 # Changelog do laboratório formal
 
+## FOUND-SEMIGROUP-001 — 2026-07-31
+
+### Added
+
+- Frente de semigrupos formalizada:
+  `TamesisLab/Foundations/Semigroups/{Basic,Regime3,Theorems,Action,Audit}.lean`,
+  agregador `Semigroups.lean` e teste `Tests/FoundSemigroup001.lean`.
+- Modelo C3: `Regime3` (3 regimes), `Shift3` (3 transições),
+  `Shift3.apply`, `Shift3.comp`; 12 teoremas FOUND-SG-002..013
+  (associatividade, identidades, lei da ação, ciclo, cardinalidades,
+  distinção, fidelidade, transitividade); FOUND-SG-001 (fechamento)
+  registrado como garantido por construção.
+- Instâncias `Monoid Shift3` e `MulAction Shift3 Regime3` criadas após as
+  leis; camada abstrata reutiliza `SemigroupAction`/`MulAction` da Mathlib
+  — nenhuma duplicata local (stop condition respeitada).
+- Documentação da frente `02_FOUNDATIONS/03_SEMIGROUPS/`:
+  TARGET_RESULT, DEFINITIONS (convenção de composição explícita),
+  ASSUMPTIONS, KNOWN_RESULTS_MATRIX (separação álgebra padrão / modelo C3 /
+  vocabulário Tamesis não justificado), DEPENDENCY_DAG, GAP_REGISTER,
+  LEAN_MAP, THEOREM_MAP.
+- Auditoria computacional
+  `06_COMPUTATION/python/experiments/found_semigroup_001_audit.py`
+  (`COMPUTATIONAL_FINITE_CROSS_CHECK_ONLY`): 7 verificações exaustivas PASS
+  e 4 fixtures negativas com falha esperada observada (não associatividade,
+  ação incompatível, não transitividade, não fidelidade).
+- Claim `FOUND-SG-FORMAL-001` (`F`, `formal_foundations`, VERIFIED); nenhuma
+  claim científica promovida.
+
+### Changed
+
+- `FOUND-SEMIGROUP-001`: `READY` → `VERIFIED`.
+- `active_work_item`: `FOUND-SEMIGROUP-001` → `RH-NOGO-001` (`SCOPED`), com
+  autorização exclusiva de preparação
+  (`RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED`); a execução da prova
+  permanece `NOT_AUTHORIZED / NO_EXECUTION`.
+- `labctl`: entradas literais `RH_NOGO_SPECIFICATION_PREPARATION_AUTHORIZED`
+  no allowlist e `RH-NOGO-001` como item ativo condicionado a
+  `FOUND-SEMIGROUP-001` `VERIFIED`; sem wildcard.
+- Instâncias `Fintype` de `Regime3`/`Shift3` escritas manualmente: o derive
+  handler da revisão fixada falha sob imports mínimos (registrado em
+  `LEAN_MAP.md`).
+
+### Verified
+
+- `lake build` PASS, 8.683 jobs; teste isolado PASS; tokens proibidos zero.
+- Auditoria Python PASS; pytest 2 passed; `labctl validate` PASS.
+- `FOUND_SEMIGROUP_001_VERIFIED`.
+
+### Blocked
+
+- `RH-NOGO-001`: somente preparação autorizada; prova não autorizada.
+
 ## LAB-BENCH-001 — 2026-07-31
 
 ### Added

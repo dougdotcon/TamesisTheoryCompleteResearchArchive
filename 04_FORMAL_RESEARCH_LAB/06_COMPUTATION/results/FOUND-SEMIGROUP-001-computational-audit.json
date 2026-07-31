@@ -1,0 +1,85 @@
+{
+  "checks": {
+    "action_compatibility": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "associativity": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "closure": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "faithful_action": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "left_identity": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "right_identity": {
+      "counterexamples": [],
+      "status": "PASS"
+    },
+    "transitivity": {
+      "counterexamples": [],
+      "status": "PASS"
+    }
+  },
+  "classification": "COMPUTATIONAL_FINITE_CROSS_CHECK_ONLY",
+  "composition_convention": "comp(a, b) aplica b primeiro e depois a",
+  "counterexamples_found": 0,
+  "model_size": {
+    "regimes": 3,
+    "transitions": 3
+  },
+  "negative_fixtures": {
+    "incompatible_action": {
+      "counterexamples_found": 12,
+      "description": "forward2 agindo como identidade sob a mesma composição",
+      "expected_failure_observed": true,
+      "first_counterexample": {
+        "a": "forward",
+        "b": "forward",
+        "r": "alpha"
+      }
+    },
+    "non_associative_operation": {
+      "counterexamples_found": 11,
+      "description": "subtração truncada em {0,1,2}",
+      "expected_failure_observed": true,
+      "first_counterexample": {
+        "a": 1,
+        "b": 0,
+        "c": 1,
+        "left": 0,
+        "right": 1
+      }
+    },
+    "non_transitive_system": {
+      "description": "subsistema contendo apenas a transição identity",
+      "expected_failure_observed": true,
+      "first_counterexample": {
+        "from": "alpha",
+        "to": "beta"
+      },
+      "unreachable_pairs": 6
+    },
+    "unfaithful_representation": {
+      "colliding_pairs": 2,
+      "description": "identity e forward2 com a mesma ação",
+      "expected_failure_observed": true,
+      "first_counterexample": {
+        "a": "identity",
+        "b": "forward2"
+      }
+    }
+  },
+  "note": "Verificação cruzada finita; não promove resultado a teorema.",
+  "schema": "tamesis-computational-audit/1",
+  "status": "PASS",
+  "work_item": "FOUND-SEMIGROUP-001"
+}

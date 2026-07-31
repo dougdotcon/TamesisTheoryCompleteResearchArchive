@@ -9,6 +9,7 @@ import TamesisLab.TOE
 import TamesisLab.Benchmark
 import TamesisLab.Tests.MathlibSmoke
 import TamesisLab.Tests.BenchmarkSmoke
+import TamesisLab.Tests.FoundSemigroup001
 
 namespace TamesisLab
 

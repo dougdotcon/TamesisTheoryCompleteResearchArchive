@@ -1,0 +1,68 @@
+schema: tamesis-front-dependency-dag/1
+work_item_id: FOUND-SEMIGROUP-001
+nodes:
+  - id: Regime3
+    kind: definition
+    lean_file: "Semigroups/Regime3.lean"
+    depends_on: []
+  - id: Shift3
+    kind: definition
+    lean_file: "Semigroups/Regime3.lean"
+    depends_on: []
+  - id: Shift3.apply
+    kind: definition
+    lean_file: "Semigroups/Regime3.lean"
+    depends_on: [Regime3, Shift3]
+  - id: Shift3.comp
+    kind: definition
+    lean_file: "Semigroups/Regime3.lean"
+    depends_on: [Shift3]
+  - id: FOUND-SG-002
+    kind: theorem
+    depends_on: [Shift3.comp]
+  - id: FOUND-SG-003
+    kind: theorem
+    depends_on: [Shift3.comp]
+  - id: FOUND-SG-004
+    kind: theorem
+    depends_on: [Shift3.comp]
+  - id: FOUND-SG-005
+    kind: theorem
+    depends_on: [Shift3.comp, Shift3.apply]
+  - id: FOUND-SG-006
+    kind: theorem
+    depends_on: [Shift3.apply]
+  - id: FOUND-SG-007
+    kind: theorem
+    depends_on: [Regime3]
+  - id: FOUND-SG-008
+    kind: theorem
+    depends_on: [Shift3]
+  - id: FOUND-SG-009
+    kind: theorem
+    depends_on: [Shift3]
+  - id: FOUND-SG-010
+    kind: theorem
+    depends_on: [Shift3]
+  - id: FOUND-SG-011
+    kind: theorem
+    depends_on: [Shift3]
+  - id: FOUND-SG-012
+    kind: theorem
+    depends_on: [Shift3.apply]
+  - id: FOUND-SG-013
+    kind: theorem
+    depends_on: [Shift3.apply]
+  - id: Monoid-Shift3
+    kind: instance
+    lean_file: "Semigroups/Action.lean"
+    depends_on: [FOUND-SG-002, FOUND-SG-003, FOUND-SG-004]
+  - id: MulAction-Shift3-Regime3
+    kind: instance
+    lean_file: "Semigroups/Action.lean"
+    depends_on: [Monoid-Shift3, FOUND-SG-005]
+external:
+  - "Mathlib.Algebra.Group.Action.Defs (SemigroupAction, MulAction)"
+  - "Mathlib.Data.Finset.Insert, Mathlib.Data.Fintype.Defs, Mathlib.Data.Fintype.Card"
+acyclic: true
+note: "Nenhum nó depende do benchmark LAB-BENCH-001 nem de claims históricas."

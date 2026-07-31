@@ -1,4 +1,5 @@
 import TamesisLab.Foundations.Basic
+import TamesisLab.Foundations.Semigroups
 
 namespace TamesisLab.Foundations
 

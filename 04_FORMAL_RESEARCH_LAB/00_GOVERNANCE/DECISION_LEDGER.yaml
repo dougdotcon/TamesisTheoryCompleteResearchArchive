@@ -120,6 +120,23 @@ decisions:
       - "rh-nogo-research-review-result.json"
     reversibility: reversible
     reactivation_document: "03_MILLENNIUM/01_RIEMANN/RH_NOGO_REACTIVATION_CRITERIA.md"
+    approval_status: APPROVED_AFTER_REVIEW
+    approved_at: 2026-07-31
+    approved_by: proponente do laboratorio
+    approval_scope: "autoriza APENAS a preparacao da especificacao"
+    approval_record: >
+      APPROVED_AFTER_REVIEW - 2026-07-31
+
+            Deviation DEC-012 approved:
+            the labctl changes are minimal, literal, deflationary and preserve
+            RH-NOGO-001 as NOT_AUTHORIZED / NO_EXECUTION.
+
+            Deviation DEC-013 approved:
+            FOUND-SEMIGROUP-002 is accepted as a new scoped work item because
+            the remaining canonical queue items were incompatible with the
+            cost and dependency criteria of the research review.
+
+            This approval authorizes specification preparation only.
     governance_changes:
       - "labctl: ALLOWED_WORK_STATUS += FROZEN_PARTIAL_RESULT"
       - "labctl: checagem de RH-NOGO-001 aceita SCOPED ou FROZEN_PARTIAL_RESULT (deflacionaria)"
@@ -144,4 +161,49 @@ decisions:
     affected_paths:
       - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
       - "LAB_STATE.md"
+    reversibility: reversible
+    approval_status: APPROVED_AFTER_REVIEW
+    approved_at: 2026-07-31
+    approved_by: proponente do laboratorio
+    approval_scope: "autoriza APENAS a preparacao da especificacao"
+    approval_record: >
+      APPROVED_AFTER_REVIEW - 2026-07-31
+
+            Deviation DEC-012 approved:
+            the labctl changes are minimal, literal, deflationary and preserve
+            RH-NOGO-001 as NOT_AUTHORIZED / NO_EXECUTION.
+
+            Deviation DEC-013 approved:
+            FOUND-SEMIGROUP-002 is accepted as a new scoped work item because
+            the remaining canonical queue items were incompatible with the
+            cost and dependency criteria of the research review.
+
+            This approval authorizes specification preparation only.
+  - decision_id: DEC-014
+    date: 2026-07-31
+    decision: >
+      Registrar como PENDENTE, NAO implementado, o endurecimento de
+      governanca para o novo status FROZEN_PARTIAL_RESULT.
+    rationale: >
+      FROZEN_PARTIAL_RESULT passou a ser um status globalmente reconhecido
+      em ALLOWED_WORK_STATUS. Sem exigencia documental, outro item poderia
+      ser congelado sem o mesmo rigor. Uma revisao futura de governanca deve
+      exigir que todo item nesse estado possua freeze_record,
+      result_boundary, reactivation_criteria e concrete_layer_status.
+    authority: null
+    implementation_status: PENDING_NOT_IMPLEMENTED
+    proposed_requirements:
+      - freeze_record
+      - result_boundary
+      - reactivation_criteria
+      - concrete_layer_status
+    current_conformance:
+      RH-NOGO-001: CONFORMS
+    note: >
+      RH-NOGO-001, unico item nesse estado, ja possui os quatro campos.
+      O endurecimento seria portanto um no-op para o estado atual.
+      NAO foi implementado em labctl.py neste gate, por decisao explicita
+      do proponente de nao alterar o commit 1576cf1 nem antecipar a revisao
+      de governanca.
+    affected_paths: []
     reversibility: reversible

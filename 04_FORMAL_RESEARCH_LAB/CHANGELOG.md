@@ -1,5 +1,40 @@
 # Changelog do laboratório formal
 
+## APPROVAL RECORD - 2026-07-31
+
+### Approved
+
+- **`DEC-012` aprovado apos revisao.** As quatro alteracoes em
+  `labctl.py` sao minimas, literais e deflacionarias, e preservam
+  `RH-NOGO-001` como `NOT_AUTHORIZED` / `NO_EXECUTION`. Nao houve
+  relaxamento material do guardrail.
+- **`DEC-013` aprovado apos revisao.** `FOUND-SEMIGROUP-002` eh aceito
+  como novo work item `SCOPED`, porque os itens remanescentes da fila
+  canonica eram incompativeis com os criterios de custo e dependencia da
+  revisao. A criacao **nao** eh uma descoberta cientifica: o item deve
+  investigar propriedades padrao de acoes finitas de monoides - orbitas,
+  alcancabilidade, invariantes, periodicidade eventual e contraexemplos.
+- Escopo da aprovacao: **apenas preparacao da especificacao**.
+
+### Added
+
+- `DEC-014`: endurecimento futuro de governanca para
+  `FROZEN_PARTIAL_RESULT`, registrado como `PENDING_NOT_IMPLEMENTED`.
+  Todo item nesse estado deveria exigir `freeze_record`,
+  `result_boundary`, `reactivation_criteria` e `concrete_layer_status`.
+  **Nao implementado em `labctl.py`** neste gate.
+- `RESEARCH_QUEUE.yaml`: `concrete_layer_status: DEFERRED` em
+  `RH-NOGO-001`, que passa a conter os quatro campos propostos - o
+  endurecimento futuro sera um no-op para o estado atual.
+
+### Unchanged
+
+- Commit `1576cf1` **nao foi reescrito**.
+- `active_work_item: FOUND-SEMIGROUP-002`, `work_status: SCOPED`,
+  `authorized_action: FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- Nenhum teorema Lean, nenhuma claim promovida, nenhuma especificacao
+  iniciada.
+
 ## RH-NOGO-RESEARCH-REVIEW - 2026-07-31
 
 ### Decided

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-31T16:30:00-03:00
-canonical_commit: "f8ccc0203e27dcb7870fa4f7f63a999038236235"
+canonical_commit: "3f6d7e785ba8bd90a35f33f7dc889f1234a7b650"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -12,14 +12,16 @@ active_track: "foundations"
 active_work_item: "FOUND-FUNCTIONAL-GRAPH-001"
 work_status: "VERIFIED"
 formalization_status: "VERIFIED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
 specification_status: "APPROVED"
 evidence_level: "F"
-last_verified_artifact: "found-functional-graph-001-formalization-result.json"
+last_verified_artifact: "found-functional-graph-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a API formal, as instâncias, os contraexemplos e os
-  limites do resultado antes de autorizar qualquer extensão.
-authorized_action: "FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar um gate explícito de revisão de portfólio.
+  Nenhuma extensão de FOUND-FUNCTIONAL-GRAPH-001 está autorizada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -45,6 +47,10 @@ prohibited_actions:
   - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
   - "Não afirmar unicidade de ponto periódico, de representante, de μ ou de período"
   - "Não afirmar ponte com SimpleGraph, árvores ou distância mínima"
+  - "PORTFOLIO_REVIEW_REQUIRED é trava, não autorização: nenhum gate pode agir sob ela"
+  - "Não aplicar a recíproca de periodicOrbit a pontos não periódicos — órbitas vazias são iguais sem encontro"
+  - "Não apresentar periodicOrbit como algoritmo executável — é noncomputável"
+  - "Não estender FOUND-FUNCTIONAL-GRAPH-001 nem abrir FOUND-FUNCTIONAL-GRAPH-002 sem gate próprio"
   - "Não definir componente funcional como MutuallyReachable (FFG-CE-004 refuta)"
   - "Não formular unicidade como existência de um único ponto periódico (FFG-CE-005 refuta)"
   - "Não importar SimpleGraph no núcleo (FFG-GAP-012 diferido)"
@@ -75,50 +81,56 @@ resume_read_order:
 # Estado atual
 
 ```text
-FOUND-FUNCTIONAL-GRAPH-001   VERIFIED   formalizacao concluida
-FOUND-SEMIGROUP-002          VERIFIED / APPROVED / sem extensao
-RH-NOGO-001                  FROZEN_PARTIAL_RESULT
+FOUND-FUNCTIONAL-GRAPH-001   VERIFIED / result_review APPROVED   ENCERRADO
+FOUND-SEMIGROUP-002          VERIFIED / APPROVED                 ENCERRADO
+RH-NOGO-001                  FROZEN_PARTIAL_RESULT               congelado
+
+authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
-## O que foi provado
+**Nenhuma frente ativa.** A escolha do próximo trabalho exige um gate
+explícito de revisão de portfólio.
+
+## Força exata do resultado encerrado
 
 ```text
-alcance por iteracao: reflexivo e transitivo;
-encontro eventual: reflexivo, simetrico e transitivo;
-alcance implica encontro;
-pontos periodicos que se encontram determinam a MESMA orbita periodica;
-toda trajetoria em tipo finito alcanca um ponto periodico antes de card X;
-todos os pontos periodicos do componente determinam a mesma orbita;
-seis contraexemplos finitos.
+Para cada estado inicial x, existe entrada limitada numa orbita periodica.
+
+Todos os pontos periodicos do componente de x, definido por
+EventuallyMeets, pertencem a MESMA orbita periodica.
 ```
 
-## Interpretação vinculante
+**Não** provado: componente como conjunto ou quociente, representante
+canônico, menor `μ`, enumeração da bacia, grafo subjacente, conexidade em
+`SimpleGraph`, decomposição em árvores, unicidade global de ciclo.
+
+## A ressalva que precisa sobreviver
 
 ```text
-A unicidade eh da ORBITA PERIODICA, nao do ponto, nao do representante,
-nao de mu, nao do periodo. E nao eh decomposicao por SimpleGraph.
+A reciproca EXIGE ambos os pontos periodicos.
+
+Dois pontos NAO periodicos tem ambos periodicOrbit = Cycle.nil. As orbitas
+vazias sao iguais SEM que as trajetorias se encontrem.
 ```
 
-## Disciplina verificada
+## Limite computacional
+
+`periodicOrbit` é **noncomputável**. O resultado não fornece algoritmo de
+enumeração de componentes, cálculo de `μ` ou detecção de ciclo.
+
+## Auditoria da revisão
 
 ```text
-Fintype X apenas em ComponentCycle.lean;
-DecidableEq X ausente de TODOS os teoremas;
-zero instancias no nucleo matematico;
-zero Setoid, zero SimpleGraph, zero Quotient;
-pigeonhole NAO reaplicado — consumido em FOUND-SEMIGROUP-002;
-decide NAO usado sobre igualdade de periodicOrbit;
-zero native_decide.
+16 declaracoes publicas, 1 auxiliar private
+5 instancias, todas em contraexemplos; ZERO no nucleo
+0 conflitos; umbrella nao ambiguo
+DecidableEq ausente de todos; Fintype so na existencia
+zero Setoid, zero SimpleGraph, zero Quotient
+pigeonhole nao reaplicado; ∃! ausente
+FGR-001..008 todos CONFIRMADOS
 ```
 
-`iterReachable_trans` não depende de axioma algum.
-
-## Sem rebaixamento
-
-O gate permitia adiar a igualdade dos períodos mínimos em `FFG-CE-006`.
-**Não foi necessário**: `minimalPeriod f a0 = minimalPeriod f b0 = 2` está
-provado, via `IsPeriodicPt.minimalPeriod_dvd` e
-`minimalPeriod_eq_one_iff_isFixedPt`.
+Gaps: **onze resolvidos, quatro abertos** (`006`, `007`, `012`, `014`).
 
 ## Novidade
 
@@ -129,4 +141,4 @@ research_role: FORMAL_FOUNDATION
 
 ## Próxima ação
 
-Revisar o resultado. **Nenhuma extensão autorizada.**
+Aguardar gate de revisão de portfólio. Nada mais está autorizado.

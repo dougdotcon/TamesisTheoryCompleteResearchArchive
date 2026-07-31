@@ -3,7 +3,7 @@ title: "Finite Functional Graph Decomposition"
 work_status: VERIFIED
 specification_status: APPROVED
 evidence_level: F
-gate: FOUND_FUNCTIONAL_GRAPH_001_FORMALIZATION
+gate: FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW
 artifact_type: FORMAL_RESULT
 scientific_value: FOUNDATIONAL_FORMALIZATION_ONLY
 mathematical_novelty: NONE
@@ -126,7 +126,7 @@ resolved_gaps:
   - "FFG-GAP-011: RESOLVED_BY_API_AUDIT_WITH_RESIDUAL"
   - "FFG-GAP-013: RESOLVED_BY_BINDING_DOCUMENT"
 
-next_gate: FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_AUTHORIZED
+next_gate: PORTFOLIO_REVIEW_REQUIRED
 
 note: >
   Especificacao apenas. Nenhuma prova, nenhum arquivo Lean, nenhum build.
@@ -206,3 +206,49 @@ formalization:
     forbidden_tokens: 0
     axioms: "propext, Classical.choice, Quot.sound; iterReachable_trans sem axioma algum"
   minimal_period_counterexample: FORMALIZED_NOT_DEFERRED
+
+result_review:
+  decision: APPROVED
+  reviewed_commit: 3f6d7e785ba8bd90a35f33f7dc889f1234a7b650
+  extension_status: NOT_AUTHORIZED
+  documents:
+    - RESULT_REVIEW.md
+    - PUBLIC_API.md
+    - INSTANCE_AUDIT.md
+    - COUNTEREXAMPLE_REVIEW.md
+    - REUSE_MATRIX.md
+    - FINAL_GAP_STATUS.md
+    - CLOSURE_RECORD.md
+  api_audit:
+    public_declarations: 16
+    internal_helpers: 1
+    helper_visibility: private
+    instances_total: 5
+    instances_in_core: 0
+    instance_conflicts: 0
+    setoid_instances: 0
+    simplegraph_imports: 0
+    umbrella_ambiguity: false
+    instance_audit_test: "05_FORMAL/lean/TamesisLab/Tests/FoundFunctionalGraph001InstanceAudit.lean"
+  fgr_review:
+    FGR-001: CONFIRMED
+    FGR-002: CONFIRMED
+    FGR-003: CONFIRMED
+    FGR-004: CONFIRMED
+    FGR-005: CONFIRMED
+    FGR-006: CONFIRMED
+    FGR-007: CONFIRMED
+    FGR-008: CONFIRMED
+  binding_caveat: >
+    O resultado inverso EXIGE que ambos os pontos sejam periodicos. Dois
+    pontos NAO periodicos tem ambos periodicOrbit = Cycle.nil; a igualdade
+    das orbitas vazias NAO implica encontro de trajetorias. As hipoteses
+    hp e hq permanecem visiveis na assinatura.
+  computational_limit: >
+    periodicOrbit eh noncomputavel; o resultado NAO fornece algoritmo
+    executavel de enumeracao de componentes, calculo de mu ou deteccao de
+    ciclo.
+  not_formalized_observation: >
+    Nenhum dos seis contraexemplos exibe dois pontos nao periodicos com
+    orbitas vazias iguais que nao se encontram. Registrado como observacao
+    estrutural, NAO como fato formalizado.

@@ -1,5 +1,81 @@
 # Changelog do laboratório formal
 
+## FOUND-FUNCTIONAL-GRAPH-001-RESULT-REVIEW - 2026-07-31
+
+### Reviewed
+
+- `FGR-001` a `FGR-008`: **todos CONFIRMADOS**. Transitividade revisada
+  linha a linha, com o mapa `mx/ny/my/nz` e as testemunhas `(d + mx, nz)`
+  e `(mx, d + nz)`.
+- **Caso infinito**: `EventuallyMeets` continua relacao de equivalencia
+  para tipos infinitos; a existencia de ponto periodico eh FALSA em geral
+  (`X = N`, `f n = n + 1`). Nenhum teorema Lean criado para isso.
+  `[Fintype X]` aparece SOMENTE em `ComponentCycle.lean`.
+- **Caso vazio**: os teoremas recebem `x : X`; com `X` vazio nao existe tal
+  termo. Zero hipoteses de `Nonempty`, `Inhabited`, `Finite` ou
+  `DecidableEq`.
+
+### Binding caveat
+
+- **A reciproca EXIGE ambos os pontos periodicos.** Dois pontos NAO
+  periodicos tem, ambos, `periodicOrbit = Cycle.nil`; as orbitas vazias
+  sao iguais SEM que as trajetorias se encontrem. As hipoteses `hp` e `hq`
+  permanecem visiveis na assinatura, e o teste de auditoria verifica
+  concretamente `periodicOrbit CE002.f a = Cycle.nil`.
+- **Nao formalizado**: nenhum dos seis contraexemplos exibe dois pontos
+  nao periodicos que NAO se encontram — em `CE-002` e `CE-004` os
+  transitorios SE ENCONTRAM. Construi-lo exigiria um setimo modelo, isto
+  eh, matematica nova, proibida neste gate. Registrado como observacao
+  estrutural, NAO como fato formalizado.
+
+### API and instance audit
+
+- **16 declaracoes publicas**, exatamente a lista minima. Um unico
+  auxiliar, `minimalPeriod_eq_two`, confirmado `private`.
+- **5 instancias, ZERO no nucleo matematico.** Todas `Fintype` de
+  contraexemplo, em cinco namespaces; `CE005` nao declara instancia.
+- **0 conflitos**, zero `Setoid`, zero import de `SimpleGraph`, zero
+  `Quotient`. Umbrella nao ambiguo.
+- Wrappers relacionais usam `Std.Refl` e `Std.Symm`, os nomes **nao
+  depreciados**; `IsTrans` tambem nao esta depreciado. Nenhum exigiu API
+  depreciada.
+- Novo teste `Tests/FoundFunctionalGraph001InstanceAudit.lean` (exit 0),
+  que **nao altera modulo matematico algum** e verifica que, com todas as
+  instancias em escopo, a API continua se aplicando a `Bool`.
+
+### Limits
+
+- **`periodicOrbit` eh noncomputavel**: o resultado NAO fornece algoritmo
+  executavel de enumeracao de componentes, calculo de `mu` ou deteccao de
+  ciclo. Registrado em `REUSE_MATRIX.md`, que separa uso proposicional de
+  uso computacional.
+- Matriz de reutilizacao: **1** `DIRECT_REUSE`, **7** `REQUIRES_ADAPTER`,
+  **2** `CONCEPTUAL_ONLY`. Nenhuma integracao criada.
+
+### Gaps
+
+- **Onze resolvidos, quatro abertos** (`006`, `007`, `012` diferidos;
+  `014` bibliografico). Nenhum fechado sem evidencia.
+
+### Not done
+
+- **0** teoremas novos, **0** modulos matematicos alterados, **0** claims
+  novas (ledger em **19**), **0** arquivos de legado, **0** de
+  `RH-NOGO-001`, **0** de `FOUND-SEMIGROUP-002`.
+
+### Changed
+
+- `canonical_commit`: `f8ccc02` -> `3f6d7e7`, no preflight.
+- `result_review: APPROVED`; `extension_status: NOT_AUTHORIZED`.
+- `authorized_action` -> `PORTFOLIO_REVIEW_REQUIRED`, que eh **trava de
+  governanca**, nao acao autorizada. `NO_ACTION_AUTHORIZED` NAO foi usado.
+  Nenhuma entrada nova no allowlist.
+
+### Result
+
+- `FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_APPROVED`. A frente fica
+  encerrada. **O laboratorio nao tem frente ativa.**
+
 ## FOUND-FUNCTIONAL-GRAPH-001-FORMALIZATION - 2026-07-31
 
 ### Added

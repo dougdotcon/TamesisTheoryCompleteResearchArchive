@@ -1,0 +1,209 @@
+{
+  "work_item": "FOUND-FUNCTIONAL-GRAPH-001",
+  "gate": "FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW",
+  "authorized_action": "FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_AUTHORIZED",
+  "executed_at": "2026-07-31T21:30:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "3f6d7e785ba8bd90a35f33f7dc889f1234a7b650",
+  "canonical_commit_before": "f8ccc0203e27dcb7870fa4f7f63a999038236235",
+  "canonical_commit_after_preflight": "3f6d7e785ba8bd90a35f33f7dc889f1234a7b650",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal (lida como arquivo)", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "fgr_review": {
+    "FGR-001": {"verdict": "CONFIRMED", "note": "refl e trans, testemunha b + a, sem finitude nem DecidableEq"},
+    "FGR-002": {"verdict": "CONFIRMED", "note": "refl, symm, trans, sem finitude"},
+    "FGR-003": {"verdict": "CONFIRMED", "note": "componente eh EventuallyMeets; MutuallyReachable nao aparece no nucleo; nenhuma definicao concorrente"},
+    "FGR-004": {"verdict": "CONFIRMED", "note": "testemunhas (n, 0)"},
+    "FGR-005": {"verdict": "CONFIRMED", "note": "sem Fintype, DecidableEq, minimalPeriod ou aritmetica modular"},
+    "FGR-006": {"verdict": "CONFIRMED", "note": "reciproca formalizada, limitada a pontos periodicos"},
+    "FGR-007": {"verdict": "CONFIRMED", "note": "reutiliza exists_eventual_period; pigeonhole nao repetido"},
+    "FGR-008": {"verdict": "CONFIRMED", "note": "unicidade da ORBITA; sem ∃!"}
+  },
+
+  "inverse_limitation": {
+    "binding": true,
+    "statement": "a reciproca NAO vale para pontos arbitrarios",
+    "reason": "p ∉ periodicPts f implica periodicOrbit f p = Cycle.nil; duas orbitas VAZIAS sao iguais sem que as trajetorias se encontrem",
+    "hypotheses_visible_in_api": true,
+    "verified_concretely": "teste de auditoria: periodicOrbit CE002.f a = Cycle.nil, via periodicOrbit_eq_nil_iff_not_periodic_pt",
+    "counterexample_formalized": false,
+    "counterexample_note": "nenhum dos seis modelos exibe dois pontos nao periodicos que NAO se encontram; em CE-002 e CE-004 os transitorios SE ENCONTRAM. Construi-lo exigiria um setimo modelo, isto eh, matematica nova, proibida neste gate. Registrado como observacao estrutural."
+  },
+
+  "pigeonhole_reused": true,
+  "pigeonhole_reapplied": false,
+
+  "uniqueness_interpretation": {
+    "is": "unicidade da orbita periodica do componente definido por EventuallyMeets",
+    "is_not": ["unicidade de ponto", "unicidade de mu", "minimalidade de periodo", "representante canonico"],
+    "exists_unique_used": false
+  },
+
+  "transitivity_review": {
+    "index_map": "hxy: f^[mx] x = f^[ny] y ; hyz: f^[my] y = f^[nz] z",
+    "case_split": "Nat.le_total ny my",
+    "case_ny_le_my": {"d": "my - ny", "witnesses": "(d + mx, nz)", "alignment": "d + ny = my por omega"},
+    "case_my_le_ny": {"d": "ny - my", "witnesses": "(mx, d + nz)", "alignment": "d + my = ny por omega"},
+    "orientation": "f^[m + n] x = f^[m] (f^[n] x) — contagem externa a esquerda",
+    "explicit_arguments": "todas as chamadas usam Function.iterate_add_apply f _ _ _"
+  },
+
+  "infinite_case": {
+    "eventually_meets_still_equivalence": true,
+    "existence_false_in_general": true,
+    "documentary_example": "X = N, f(n) = n + 1",
+    "lean_theorem_created": false,
+    "fintype_only_in": "ComponentCycle.lean"
+  },
+  "empty_type_case": {
+    "argument": "os teoremas de existencia recebem x : X; com X vazio nao existe termo x : X",
+    "nonempty_hypotheses": 0,
+    "inhabited_hypotheses": 0,
+    "finite_hypotheses": 0,
+    "decidable_eq_hypotheses": 0
+  },
+
+  "public_api": {
+    "count": 16,
+    "declarations": [
+      "IterReachable", "MutuallyReachable", "EventuallyMeets",
+      "iterReachable_refl", "iterReachable_trans", "IterReachable.eventuallyMeets",
+      "eventuallyMeets_refl", "eventuallyMeets_symm", "eventuallyMeets_trans",
+      "eventuallyMeets_isRefl", "eventuallyMeets_isSymm", "eventuallyMeets_isTrans",
+      "periodicOrbit_eq_of_eventuallyMeets", "eventuallyMeets_of_periodicOrbit_eq",
+      "exists_cyclePoint_reachable_with_bound", "exists_component_cycle_with_entry_bound"
+    ],
+    "matches_expected_minimum": true
+  },
+  "internal_helper": {"name": "minimalPeriod_eq_two", "visibility": "private", "confirmed": true},
+
+  "relation_wrappers": {
+    "eventuallyMeets_isRefl": "Std.Refl",
+    "eventuallyMeets_isSymm": "Std.Symm",
+    "eventuallyMeets_isTrans": "IsTrans",
+    "instances_created": 0,
+    "setoid_created": false,
+    "deprecated_api_used": false,
+    "note": "Std.Refl e Std.Symm sao os nomes NAO depreciados; IsRefl e Symmetric estao depreciados nesta revisao. Nenhum wrapper exigiu API depreciada."
+  },
+
+  "instances": {
+    "total": 5,
+    "in_core": 0,
+    "by_namespace": {"CE001": 1, "CE002": 1, "CE003": 1, "CE004": 1, "CE005": 0, "CE006": 1},
+    "list": ["Fintype CE001.St", "Fintype CE002.St", "Fintype CE003.St", "Fintype CE004.St", "Fintype CE006.St"],
+    "conflicts": 0,
+    "setoid_instances": 0,
+    "simplegraph_imports": 0,
+    "umbrella_ambiguity": false
+  },
+  "umbrella_test": "com as 5 instancias em escopo, IterReachable, EventuallyMeets e os dois teoremas de existencia continuam se aplicando a Bool",
+
+  "counterexamples": {
+    "CE-001": "CONFIRMED — dois pontos fixos periodicos que nao se encontram",
+    "CE-002": "CONFIRMED — cauda; a_not_periodic na forma forte; principal instanciado",
+    "CE-003": "CONFIRMED — 2-ciclo, nenhum fixo, mesma periodicOrbit sem decide",
+    "CE-004": "CONFIRMED — decisivo: EventuallyMeets sem MutuallyReachable",
+    "CE-005": "CONFIRMED — dois pontos periodicos distintos, uma orbita",
+    "CE-006": "CONFIRMED — minimalPeriod 2 em ambos, componentes distintos",
+    "distinct_targets": true,
+    "independence_registered": true
+  },
+
+  "minimal_period_review": {
+    "used_only_in": "CE-006",
+    "absent_from_main_theorem": true,
+    "proof_route": "IsPeriodicPt f 2, minimalPeriod_dvd, positividade, Nat.le_of_dvd, exclusao de 1 por nao fixacao, omega",
+    "generalized": false
+  },
+  "periodicOrbit_interpretation": {
+    "object": "Cycle X, quociente por rotacao — objeto oficial da Mathlib",
+    "local_duplicate_structure": false,
+    "decided_by_decide": false,
+    "noncomputability_blocks_proofs": false,
+    "claim_presents_as_algorithm": false
+  },
+
+  "main_theorem_exact_strength": {
+    "proved": [
+      "para cada x existe entrada limitada numa orbita periodica",
+      "todos os pontos periodicos do componente de x pertencem a mesma orbita periodica"
+    ],
+    "not_proved": [
+      "componente construido como conjunto ou quociente",
+      "representante canonico",
+      "menor mu",
+      "bacia enumerada",
+      "grafo subjacente construido",
+      "conexidade em SimpleGraph",
+      "decomposicao explicita em arvores",
+      "unicidade global de ciclo"
+    ]
+  },
+
+  "claim_review": {
+    "claim_id": "FUNCTIONAL-GRAPH-COMPONENT-FORMAL-001",
+    "wording_supported": true,
+    "forbidden_terms_present": false,
+    "new_claims_created": 0,
+    "ledger_entries": 19
+  },
+
+  "gaps": {
+    "resolved": ["FFG-GAP-001", "FFG-GAP-002", "FFG-GAP-003", "FFG-GAP-004", "FFG-GAP-005", "FFG-GAP-008", "FFG-GAP-009", "FFG-GAP-010", "FFG-GAP-011", "FFG-GAP-013", "FFG-GAP-015"],
+    "open": ["FFG-GAP-006", "FFG-GAP-007", "FFG-GAP-012", "FFG-GAP-014"],
+    "totals": {"resolved": 11, "open": 4}
+  },
+
+  "reuse_matrix": {
+    "DIRECT_REUSE": ["testes de alcancabilidade"],
+    "REQUIRES_ADAPTER": ["maquinas de estado", "pipelines", "parsers", "deteccao de loops", "automatos deterministicos", "workflows", "auditoria de transicoes"],
+    "CONCEPTUAL_ONLY": ["jogos finitos", "agentes discretos"],
+    "OUT_OF_SCOPE": [],
+    "integrations_created": 0
+  },
+  "computational_limit": "periodicOrbit eh noncomputavel; o resultado formal NAO fornece algoritmo executavel de enumeracao de componentes, calculo de mu ou deteccao de ciclo",
+  "scientific_limits": {"mathematical_novelty": "NONE", "research_role": "FORMAL_FOUNDATION"},
+
+  "decision": "A_FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_APPROVED",
+
+  "math_lean_files_modified": 0,
+  "new_theorems": 0,
+  "instance_audit_test_created": "TamesisLab/Tests/FoundFunctionalGraph001InstanceAudit.lean",
+  "isolated_tests": {
+    "FoundFunctionalGraph001.lean": "exit 0, 30 s",
+    "FoundFunctionalGraph001Counterexamples.lean": "exit 0, 2 s",
+    "FoundFunctionalGraph001InstanceAudit.lean": "exit 0, 3 s"
+  },
+  "lake_build": "PASS, 8727 jobs, 108 s",
+  "axioms": {
+    "eventuallyMeets_trans": "[propext, Quot.sound]",
+    "periodicOrbit_eq_of_eventuallyMeets": "[propext, Classical.choice, Quot.sound]",
+    "eventuallyMeets_of_periodicOrbit_eq": "[propext, Classical.choice, Quot.sound]",
+    "exists_cyclePoint_reachable_with_bound": "[propext, Classical.choice, Quot.sound]",
+    "exists_component_cycle_with_entry_bound": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0
+  },
+  "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+  "pytest": "9 passed",
+  "labctl_validate": "PASS",
+  "whitespace_audit": "WHITESPACE_EOF_AUDIT_PASS",
+
+  "rh_nogo_state": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED", "files_touched": 0},
+  "found_semigroup_002_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+
+  "work_status_final": "VERIFIED",
+  "result_review": "APPROVED",
+  "extension_status": "NOT_AUTHORIZED",
+  "authorized_action_final": "PORTFOLIO_REVIEW_REQUIRED",
+  "authorized_action_note": "trava de governanca, nao acao autorizada; NO_ACTION_AUTHORIZED nao foi usado",
+  "next_single_action": "Aguardar um gate explicito de revisao de portfolio. Nenhuma extensao de FOUND-FUNCTIONAL-GRAPH-001 esta autorizada.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_FUNCTIONAL_GRAPH_001_RESULT_REVIEW_APPROVED"
+}

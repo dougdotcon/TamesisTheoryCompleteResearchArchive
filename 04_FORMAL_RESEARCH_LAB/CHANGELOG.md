@@ -1,5 +1,93 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-RUNTIME-001-FORMALIZATION - 2026-08-01
+
+### Built
+
+- **A primeira API do laboratorio que aceita diretamente uma estrutura de
+  dados dinamica** e preserva uma cadeia formal completa ate o
+  certificado. `2` estruturas, `1` indutivo, `9` definicoes, `1`
+  instancia, `18` teoremas, `869` linhas.
+- **As duas obrigacoes sem evidencia — `analyzeTransitionTable_sound` e
+  `_complete` — compilaram na PRIMEIRA tentativa**, junto com os outros
+  cinco modulos. A revisao ja havia demonstrado as demais em ambiente
+  descartavel e registrado os padroes que funcionam.
+
+### Key move
+
+- O auxiliar privado `analyze_reduce` isola de uma vez as duas reducoes
+  que a notacao `do` esconde. Soundness ficou com **sete** linhas;
+  completeness, com **quatro**.
+- **Nenhum transporte dependente.** A tabela concreta `⟨raw.next, hRaw⟩`
+  tem `next` sintaticamente igual a `raw.next`, e seu `toRaw` eh
+  definicionalmente `raw` por eta. Zero `cast`, zero `Eq.ndrec`.
+
+### Layered
+
+```text
+camada 0   Raw, Valid, step?, run?     nenhuma typeclass
+camada 1   validacoes                  nenhuma typeclass
+camada 2   step e pontes               nenhuma typeclass
+camada 3   detectCycle?                Fintype/DecidableEq INFERIDAS
+camada 4   analyzeTransitionTable      nenhuma do chamador
+```
+
+O consumidor fornece `Array Nat` e `Nat`. **Nada mais.**
+
+### Axioms
+
+- **`step?` e `run?` nao dependem de axioma nenhum.** Toda a camada de
+  validacao e `run?_eq_iterate_step` ficam em `[propext, Quot.sound]` —
+  **sem `Classical.choice`**. A pegada entra exatamente onde o detector
+  entra, por `Fintype.card`. `sorryAx`: **0**.
+
+### Enforced
+
+- **Destinos invalidos sao REJEITADOS, nunca corrigidos.**
+  `validateTransitionTable_sound` forca a tabela devolvida a ser a mesma;
+  `validateStart_sound` — o teorema **anti-clamp** — forca o indice a ter
+  o valor pedido. Correcoes silenciosas no codigo: **0**.
+- **Precedencia dos erros provada e medida**:
+  `analyzeTransitionTable ⟨#[1]⟩ 100 -> transitionDestinationOutOfBounds`
+  — tabela invalida **e** inicio invalido, e o erro de tabela vence.
+- `internalDetectorFailure` permanece na funcao executavel, com sua
+  impossibilidade provada. **O detector anterior NAO foi totalizado.**
+
+### Reused, not reproved
+
+- `detectCycleWitness?`, `_sound` e `_complete` — os dois teoremas sao
+  **termos de uma linha**. `cycleCandidates`, pigeonhole e colisao
+  limitada: **0** mencoes. Quinta frente a consumir a casa dos pombos
+  atraves do teorema original.
+
+### Validated
+
+- Tres testes `exit 0` com **zero** erros; `DynamicAnalysis.lean` isolado
+  `exit 0`; **`lake build` PASS, 8748 jobs** (era 8737 — os seis modulos,
+  o `Audit`, os dois agregadores e os tres testes). A raiz alcanca
+  `TamesisLab.Engineering`.
+- Dez casos executaveis, **22** teoremas de regressao, sem
+  `native_decide`. Os quatro que produzem certificado reproduzem, em
+  forma de tabela, os modelos `Fin 1`, `Bool`, `Fin 3` e `Fin 4` ja
+  verificados no detector.
+
+### Not done
+
+- **0** CLI, parser, JSON, CSV, rede, extracao, integracao, diagnostico
+  detalhado, Floyd, Brent ou tabela visitada. **0** legado, **0**
+  arquivos matematicos das quatro frentes anteriores.
+
+### Claimed
+
+- Uma claim, a vigesima primeira:
+  `FINITE-STATE-RUNTIME-ADAPTER-FORMAL-001`, `VERIFIED`,
+  `evidence_level F`, novidade matematica e algoritmica **NONE**.
+
+### Result
+
+- `ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_VERIFIED`. Onze lacunas
+  resolvidas formalmente, oito diferidas, uma bibliografica.
+
 ## ENG-FINITE-STATE-RUNTIME-001-SPECIFICATION-REVIEW - 2026-08-01
 
 ### Demonstrated

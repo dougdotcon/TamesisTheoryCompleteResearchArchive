@@ -606,3 +606,59 @@ claims:
       - "novidade matematica"
       - "novidade algoritmica"
       - "resultado fisico"
+  - claim_id: FINITE-STATE-RUNTIME-ADAPTER-FORMAL-001
+    short_name: Certified finite-state runtime adapter
+    exact_statement: >
+      Para raw : RawTransitionTable e start : Nat, se
+      analyzeTransitionTable raw start devolve ok w, entao raw.Valid,
+      start < raw.next.size e
+      raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start.
+      Reciprocamente, se raw.Valid e start < raw.next.size, entao existe w
+      com analyzeTransitionTable raw start = ok w.
+    domain: verified_software_engineering
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/"
+      - "04_FORMAL_RESEARCH_LAB/03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/THEOREM_MAP.md"
+      - "04_FORMAL_RESEARCH_LAB/03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/PROOF_AUDIT.md"
+      - "04_FORMAL_RESEARCH_LAB/03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/RESULT_BOUNDARY.md"
+    current_wording: >
+      Foi formalizado em Lean um adaptador executavel que valida
+      uma tabela dinamica de transicoes sobre Array Nat, constroi
+      uma funcao total sobre Fin n, aplica um detector certificado
+      de ciclos e devolve um witness cuja repeticao eh interpretada
+      sobre a tabela original. Foram formalizadas a correcao e a
+      completude da validacao e da analise dinamica.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - EXECUTABLE-CYCLE-WITNESS-FORMAL-001
+    known_gaps:
+      - "RT-GAP-013: nenhuma execucao nativa via Lake"
+      - "RT-GAP-014: nenhuma CLI"
+      - "RT-GAP-015: nenhum parsing externo"
+      - "RT-GAP-017: a correcao da abstracao de um sistema real NAO eh fornecida"
+      - "RT-GAP-019: nenhum modelo de custo"
+      - "RT-GAP-022: diagnostico detalhado do destino invalido diferido"
+    computational_scope: >
+      O consumidor fornece Array Nat e Nat, sem qualquer typeclass. A
+      camada de validacao e a execucao bruta nao dependem de escolha
+      classica; a pegada axiomatica entra apenas onde o detector entra,
+      por Fintype.card, e nao torna a funcao nao computavel — ela foi
+      avaliada em dezenove casos.
+    promotion_requirements:
+      - "nao aplicavel: eh engenharia formal padrao e nao admite promocao cientifica"
+    prohibited_claims:
+      - "CLI"
+      - "parsing externo"
+      - "produto extraido"
+      - "integracao real"
+      - "correcao de abstracao externa"
+      - "diagnostico detalhado"
+      - "minimalidade"
+      - "eficiencia"
+      - "novo algoritmo"
+      - "novidade matematica"
+      - "novidade algoritmica"
+      - "resultado fisico"

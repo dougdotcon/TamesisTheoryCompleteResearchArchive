@@ -1,0 +1,274 @@
+{
+  "work_item": "ENG-FINITE-STATE-RUNTIME-001",
+  "gate": "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION",
+  "authorized_action": "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_AUTHORIZED",
+  "executed_at": "2026-08-01T11:30:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "6c3b83794cfd315543ea579546941c9e17c9a943",
+  "canonical_commit_before": "4d9e2488accc8d6a952e46b1d995c5e47c498a4f",
+  "canonical_commit_after_preflight": "6c3b83794cfd315543ea579546941c9e17c9a943",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional"],
+
+  "imports": ["Mathlib.Data.Fintype.Card", "Mathlib.Logic.Function.Iterate", "TamesisLab.Foundations.CycleDetection"],
+  "imports_count": 3,
+  "forbidden_imports": 0,
+  "tactic_umbrella_imported": false,
+  "io_or_network_imported": false,
+
+  "module_location": "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/",
+  "modules": ["RawTable.lean", "Validation.lean", "Execution.lean", "DetectorAdapter.lean", "DynamicAnalysis.lean", "Audit.lean"],
+  "aggregators": ["TamesisLab/Engineering/FiniteStateRuntime.lean", "TamesisLab/Engineering.lean", "TamesisLab.lean"],
+  "namespace": "TamesisLab.Engineering.FiniteStateRuntime",
+  "import_cycle": false,
+  "directories_renamed": 0,
+
+  "raw_data_model": {"structure": "RawTransitionTable", "fields": ["next : Array Nat"], "absent": ["size", "stateCount", "proof", "start", "fallback"], "state_count_accessor": false},
+  "raw_deriving": ["DecidableEq", "Repr", "BEq"],
+
+  "validity_definition": "∀ i : Fin t.next.size, t.next[i] < t.next.size",
+  "validity_competing_variants": 0,
+  "decidable_valid_instance": {"form": "by unfold; infer_instance", "classical": false, "noncomputable": false, "synth_verified_on": ["#[]", "#[0]", "#[1]"]},
+
+  "empty_table_policy": {
+    "theorem": "valid_empty : RawTransitionTable.Valid ⟨#[]⟩",
+    "proof": "intro i; exact absurd i.isLt (by simp)",
+    "validation_result": "ok",
+    "analysis_result": "error (initialStateOutOfBounds 0 0)",
+    "empty_table_error_created": false,
+    "nonempty_hypotheses_added": 0
+  },
+
+  "validated_data_model": {"structure": "ValidatedTransitionTable", "fields": ["next", "closed"], "deriving": "nenhum", "absent": ["stateCount", "step como campo", "raw como campo", "start", "CycleWitness"]},
+  "to_raw": {"public": true, "subtype_api": false},
+  "to_raw_valid": {"proof": "t.closed", "compiles": true},
+
+  "error_model": {"type": "RuntimeCycleError", "constructors": 3, "deriving": ["DecidableEq", "Repr", "BEq"], "detailed_diagnostics": false, "gap": "RT-GAP-022 OPEN_DEFERRED"},
+
+  "table_validation": {
+    "definition": "if h : raw.Valid then .ok ⟨raw.next, h⟩ else .error .transitionDestinationOutOfBounds",
+    "array_preserved": true, "modulo": false, "clamp": false, "min_max": false, "getD": false, "fallback": false,
+    "sound": "validated.toRaw = raw ∧ raw.Valid — via by_cases + dif_pos/neg + Except.ok.inj",
+    "complete": "termo: ⟨⟨raw.next, h⟩, dif_pos h⟩",
+    "error_iff_formalized": false
+  },
+
+  "start_validation": {
+    "definition": "if h : start < t.next.size then .ok ⟨start, h⟩ else .error (.initialStateOutOfBounds start t.next.size)",
+    "sound": "(typedStart : Nat) = start — teorema ANTI-CLAMP",
+    "complete": "termo: ⟨⟨start, h⟩, dif_pos h⟩",
+    "start_altered": false
+  },
+
+  "typed_step": {"definition": "fun i => ⟨t.next[i], t.closed i⟩", "total_by_construction": true, "index_correction": false},
+  "step_val": {"simp": true, "proof": "rfl"},
+  "raw_step": "t.next[state]?",
+  "raw_run": "recursao com bind; caso zero devolve some state",
+  "zero_step_semantics": {"run_0_999": "some 999", "run_1_999": "none", "checked_in_zero_case": false, "proved_by": "rfl"},
+
+  "single_step_bridge": {
+    "theorem": "step?_eq_some_step",
+    "proof": "show t.next[(i : Nat)]? = some (t.next[i]); exact getElem?_pos t.next (i : Nat) i.isLt",
+    "classification": "CORE",
+    "getD_used": false
+  },
+
+  "iteration_bridge": {
+    "theorem": "run?_eq_iterate_step",
+    "compiles": true,
+    "axioms": "[propext, Quot.sound]",
+    "proof_shape": "induction k; zero por rfl; succ com dois show, step?_eq_some_step, ih (t.step start) e Function.iterate_succ_apply",
+    "quantifier_in_statement": true,
+    "generalizing_used": false,
+    "iterate_variant": "Function.iterate_succ_apply",
+    "inverse_variant_used": false,
+    "second_execution_semantics": false,
+    "isolated_test_exit": 0
+  },
+
+  "detector_adapter": {
+    "definition": "detectCycleWitness? t.step start",
+    "sound": "termo: detectCycleWitness?_sound h",
+    "complete": "termo: detectCycleWitness?_complete t.step start",
+    "body_copied": false,
+    "cycleCandidates_mentioned": 0,
+    "pigeonhole_mentioned": 0,
+    "collision_theorem_mentioned": 0
+  },
+  "raw_repeat_theorem": {
+    "theorem": "detectCycle?_raw_repeat",
+    "proof": "detectCycle?_sound; rw [run?_eq_iterate_step x2, hw.2.2.2]",
+    "periodicOrbit_used": false,
+    "minimality_asserted": false
+  },
+
+  "dynamic_analysis": {
+    "definition": "do com dois ← e um match sobre Option",
+    "totalizes_detector": false,
+    "getD_or_default_certificate": false,
+    "classical_choose": false,
+    "panic": false
+  },
+  "private_helper": {
+    "name": "analyze_reduce",
+    "purpose": "isola as duas reducoes que a notacao do esconde; usado por soundness e completeness",
+    "count": 1
+  },
+
+  "analysis_soundness": {
+    "PROVED": true,
+    "statement": "raw.Valid ∧ start < raw.next.size ∧ raw.run? (baseIndex+period) start = raw.run? baseIndex start",
+    "strategy": ["by_cases hRaw", "by_cases hStart", "analyze_reduce", "cases no detector", "Except.ok.inj", "detectCycle?_raw_repeat"],
+    "dependent_transport": false,
+    "casts_or_recasts": 0,
+    "reason_no_transport": "a tabela concreta ⟨raw.next, hRaw⟩ tem next SINTATICAMENTE igual a raw.next, e toRaw dela eh definicionalmente raw por eta de estruturas",
+    "minimality_included": false,
+    "signature_weakened": false
+  },
+  "analysis_completeness": {
+    "PROVED": true,
+    "statement": "raw.Valid → start < raw.next.size → ∃ w, analyze = .ok w",
+    "proof_lines": 4,
+    "strategy": ["detectCycle?_complete sobre a tabela concreta", "refine ⟨w, ?_⟩", "rw [analyze_reduce, hw]"],
+    "classical_choose": false,
+    "option_get": false,
+    "existential_projected_to_data": false,
+    "collision_repeated": false,
+    "signature_weakened": false
+  },
+
+  "error_precedence": {
+    "order": ["transitionDestinationOutOfBounds", "initialStateOutOfBounds", "internalDetectorFailure", "sucesso"],
+    "proved_by": ["analyzeTransitionTable_invalid_table", "analyzeTransitionTable_invalid_start"],
+    "decisive_test": "analyzeTransitionTable ⟨#[1]⟩ 100 = error transitionDestinationOutOfBounds",
+    "table_error_wins": true,
+    "internal_failure_masks_validation": false
+  },
+  "internal_failure_impossibility": {
+    "theorem": "analyzeTransitionTable_ne_internalFailure",
+    "derived_from": "analyzeTransitionTable_complete",
+    "constructor_removed_from_function": false
+  },
+
+  "execution_tests": {
+    "count": 10,
+    "regression_theorems": 22,
+    "native_decide": false,
+    "results": {
+      "empty": "error (initialStateOutOfBounds 0 0), validacao ok",
+      "invalid_destination_start_0": "error transitionDestinationOutOfBounds",
+      "invalid_destination_start_100": "error transitionDestinationOutOfBounds",
+      "invalid_start": "error (initialStateOutOfBounds 1 1)",
+      "fixed_point": "ok <0,1>",
+      "two_cycle": "ok <0,2>",
+      "tail_to_fixed": "ok <2,1>",
+      "tail_to_two_cycle": "ok <2,2>",
+      "other_states": ["<1,2>", "<0,2>", "<0,2>"],
+      "two_components": ["<0,1>", "<0,2>", "<0,2>"],
+      "raw_run": {"run_0_999": "some 999", "run_1_999": "none", "run_4_0": "some 2"}
+    },
+    "oracle": "os casos 004 a 007 reproduzem em forma de tabela os modelos Fin 1, Bool, Fin 3 e Fin 4 ja verificados no detector",
+    "global_component_enumeration": false,
+    "chained_example": "analyzeTransitionTable_sound aplicado a um resultado obtido por decide, entregando a igualdade de run? sobre o Array original",
+    "ne_internalFailure_example": true
+  },
+
+  "computability": {
+    "all_computable": true,
+    "noncomputable_marked": 0,
+    "classical_choose_in_bodies": 0,
+    "classical_decEq": 0,
+    "fallback": 0,
+    "modulo_or_clamp": 0,
+    "eval_works": true,
+    "internal_failure_is_error_not_fallback": true
+  },
+
+  "axioms": {
+    "validation_layer": "[propext, Quot.sound] — SEM Classical.choice",
+    "raw_execution": "step? e run? does not depend on any axioms",
+    "iteration_bridge": "[propext, Quot.sound]",
+    "detector_layer": "[propext, Classical.choice, Quot.sound]",
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "note": "a pegada entra exatamente onde o detector entra, por Fintype.card; nao eh marca de nao-computabilidade"
+  },
+
+  "forbidden_tokens": 0,
+  "silent_corrections": {
+    "in_code": 0,
+    "documentation_matches": 3,
+    "detail": "tres linhas de Validation.lean casaram por conterem as proprias proibicoes e o nome anti-clamp; revisadas manualmente"
+  },
+  "detector_reuse": {
+    "cycleCandidates": 0, "pigeonhole": 0, "bounded_collision": 0,
+    "only_call": "detectCycleWitness? e os dois teoremas publicos"
+  },
+
+  "counts": {
+    "structures": 2, "inductives": 1, "definitions": 9, "instances": 1,
+    "theorems": 18, "private_helpers": 1, "lean_lines": 869,
+    "core_files": 6, "front_aggregator": 1, "track_aggregator": 1, "tests": 3
+  },
+
+  "lake_build": "PASS, 8748 jobs, 100 s",
+  "jobs_before": 8737,
+  "jobs_after": 8748,
+  "root_reaches_engineering": true,
+  "isolated_tests": {
+    "DynamicAnalysis.lean": "exit 0, 29 s",
+    "EngFiniteStateRuntime001.lean": "exit 0, 2 s, 0 erros",
+    "EngFiniteStateRuntime001Execution.lean": "exit 0, 4 s, 0 erros",
+    "EngFiniteStateRuntime001Axioms.lean": "exit 0, 2 s, 0 erros"
+  },
+  "tests_removed_to_pass": 0,
+  "previous_fronts_modified": 0,
+
+  "claim": {
+    "claim_id": "FINITE-STATE-RUNTIME-ADAPTER-FORMAL-001",
+    "work_status": "VERIFIED",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "ledger_total": 21
+  },
+  "novelty_claims": 0,
+  "physics_claims": 0,
+
+  "gaps": {
+    "total": 22,
+    "resolved_formally": ["RT-GAP-002", "RT-GAP-003", "RT-GAP-004", "RT-GAP-005", "RT-GAP-006", "RT-GAP-007", "RT-GAP-008", "RT-GAP-009", "RT-GAP-010", "RT-GAP-012", "RT-GAP-016"],
+    "resolved_by_design": ["RT-GAP-001"],
+    "resolved_by_boundary": ["RT-GAP-011", "RT-GAP-020"],
+    "open_deferred": ["RT-GAP-013", "RT-GAP-014", "RT-GAP-015", "RT-GAP-017", "RT-GAP-018", "RT-GAP-019", "RT-GAP-022"],
+    "open_bibliographic": ["RT-GAP-021"],
+    "closed_by_expectation": 0
+  },
+
+  "legacy_files_modified": 0,
+  "rh_nogo_state": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED", "files_touched": 0},
+  "found_semigroup_002_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_functional_graph_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "math_files_touched": 0},
+  "found_cycle_detection_001_state": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "totalization_status": "DEFERRED", "math_files_touched": 0},
+
+  "not_created": {"CLI": true, "parser": true, "JSON": true, "CSV": true, "network": true, "extraction": true, "integration": true, "detailed_diagnostics": true, "Floyd": true, "Brent": true, "visited_table": true},
+
+  "governance_deviations": [
+    {"id": "DEC-025", "file": "10_TOOLS/labctl.py", "change": "entrada literal ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED acrescentada ao allowlist", "reason": "exigido pelo item 45 do gate", "wildcard": false}
+  ],
+  "declaration_order_note": "os dois teoremas de erro foram declarados ANTES de analyzeTransitionTable_sound, invertendo a ordem sugerida no item 5 do gate, porque a soundness os usa nos ramos negativos do by_cases. Escolha deliberada, registrada em THEOREM_MAP.md",
+
+  "work_status_final": "VERIFIED",
+  "specification_status": "APPROVED",
+  "formalization_status": "VERIFIED",
+  "authorized_action_final": "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar a API dinamica, a precedencia dos erros, a correspondencia entre execucao bruta e iteracao tipada, a reutilizacao do detector e os limites de integracao antes de autorizar qualquer extracao, CLI ou parser.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "commit_amend_used": false,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_VERIFIED"
+}

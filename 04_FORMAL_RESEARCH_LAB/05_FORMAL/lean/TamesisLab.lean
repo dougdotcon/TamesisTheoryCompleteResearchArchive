@@ -1,4 +1,5 @@
 import TamesisLab.Foundations
+import TamesisLab.Engineering
 import TamesisLab.Riemann
 import TamesisLab.NavierStokes
 import TamesisLab.Complexity
@@ -24,6 +25,9 @@ import TamesisLab.Tests.FoundFunctionalGraph001InstanceAudit
 import TamesisLab.Tests.FoundCycleDetection001
 import TamesisLab.Tests.FoundCycleDetection001Execution
 import TamesisLab.Tests.FoundCycleDetection001Axioms
+import TamesisLab.Tests.EngFiniteStateRuntime001
+import TamesisLab.Tests.EngFiniteStateRuntime001Execution
+import TamesisLab.Tests.EngFiniteStateRuntime001Axioms
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

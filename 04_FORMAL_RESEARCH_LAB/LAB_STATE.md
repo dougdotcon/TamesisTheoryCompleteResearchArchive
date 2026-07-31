@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T09:10:00-03:00
-canonical_commit: "4d9e2488accc8d6a952e46b1d995c5e47c498a4f"
+updated_at: 2026-08-01T11:30:00-03:00
+canonical_commit: "6c3b83794cfd315543ea579546941c9e17c9a943"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,16 +10,18 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-RUNTIME-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
+formalization_status: "VERIFIED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-runtime-001-specification-review-result.json"
+last_verified_artifact: "eng-finite-state-runtime-001-formalization-result.json"
 current_blocker: null
 next_single_action: >
-  Formalizar a validação da tabela e do estado inicial, a função
-  total sobre Fin n, a correspondência de iterações, a aplicação
-  do detector e a API dinâmica baseada em Except.
-authorized_action: "ENG_FINITE_STATE_RUNTIME_001_FORMALIZATION_AUTHORIZED"
+  Revisar a API dinâmica, a precedência dos erros, a
+  correspondência entre execução bruta e iteração tipada,
+  a reutilização do detector e os limites de integração antes
+  de autorizar qualquer extração, CLI ou parser.
+authorized_action: "ENG_FINITE_STATE_RUNTIME_001_RESULT_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -67,6 +69,9 @@ governance_rules:
 prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
   - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
+  - "Não criar CLI, parser, JSON, CSV, rede ou integração externa sem gate próprio"
+  - "Não remover o ramo internalDetectorFailure — sua impossibilidade é teorema, não motivo de remoção"
+  - "Não estender ENG-FINITE-STATE-RUNTIME-001 nem abrir 002 sem gate próprio"
   - "Não alterar a semântica de zero passos de run? — run? 0 state = some state"
   - "Não alterar a precedência dos erros: tabela, depois consulta, depois execução"
   - "Não renomear 03_ENGINEERING — a duplicação de prefixo é cosmética e reconhecida"

@@ -1,0 +1,166 @@
+{
+  "work_item": "FOUND-SEMIGROUP-002",
+  "gate": "FOUND_SEMIGROUP_002_RESULT_REVIEW",
+  "authorized_action": "FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED",
+  "executed_at": "2026-07-31T15:20:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "b4ce2551cd9f3588030fc7281d7f8c7aa624bac3",
+  "canonical_commit_before": "2b86a8809776774e4caf3a54d1469d240ecdaf1d",
+  "canonical_commit_after_preflight": "b4ce2551cd9f3588030fc7281d7f8c7aa624bac3",
+  "canonical_ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS"
+  },
+
+  "skills": [
+    "goal (lida como arquivo)", "matematica-pura",
+    "engenharia-software", "linguistica-computacional"
+  ],
+
+  "frr_review": {
+    "FRR-001": {"verdict": "CONFIRMED", "note": "reflexiva e transitiva; simetria NAO afirmada"},
+    "FRR-002": {"verdict": "CONFIRMED", "note": "Iff.rfl; nenhuma segunda definicao publica de orbita"},
+    "FRR-003": {"verdict": "CONFIRMED", "note": "reciproca de IsInvariant.under NAO afirmada"},
+    "FRR-004": {"verdict": "CONFIRMED", "note": "os quatro conjuntos na conclusao; unica classe eh Fintype X"},
+    "FRR-005": {"verdict": "CONFIRMED", "note": "ponto eh f^[mu] x; 'periodo' NAO significa minimo"},
+    "FRR-006": {"verdict": "CONFIRMED", "note": "aritmetica conferida; iterate_add_apply instanciado explicitamente"},
+    "FRR-007": {"verdict": "CONFIRMED", "note": "sem Fintype M, Group M, DecidableEq X"}
+  },
+
+  "card_zero_treatment": {
+    "argument": "o teorema recebe x : X, logo no ponto de aplicacao X eh habitado e card X > 0",
+    "hidden_contradiction": false,
+    "reason": "com card X = 0 nao existe termo x : X, entao o teorema nao pode ser invocado",
+    "nonempty_or_inhabited_instances": 0
+  },
+
+  "pigeonhole": {
+    "pigeonhole_uses_in_core": 1,
+    "bounded_collision_dependency": true,
+    "reproved_in_main_theorem": false,
+    "reproved_in_monoid_corollary": false,
+    "reproved_in_propagation": false,
+    "textual_hits": 3,
+    "textual_hits_note": "1 uso real, 1 docstring, 1 #check"
+  },
+
+  "public_api": {
+    "count": 17,
+    "declarations": [
+      "Reachable", "reachable_refl", "reachable_trans", "reachable_isRefl",
+      "reachable_isTrans", "reachable_iff_mem_orbit", "IsInvariant",
+      "IsInvariantUnder", "IsInvariant.under", "IsInvariant.of_reachable",
+      "IsInvariantUnder.pow", "exists_bounded_iterate_collision",
+      "periodic_tail_of_collision", "collision_propagates",
+      "exists_eventual_period", "monoid_element_eventually_periodic",
+      "monoid_element_eventual_period_propagates"
+    ],
+    "matches_expected_minimum": true
+  },
+  "internal_helpers": {
+    "count": 1,
+    "declarations": ["eventual_period_of_lt"],
+    "visibility": "private"
+  },
+
+  "instances": {
+    "total": 11,
+    "in_math_core": 0,
+    "by_namespace": {"CE001": 4, "CE002": 4, "CE003": 1, "CE004": 2, "CE005": 0},
+    "list": [
+      "CE001: Fintype St, Fintype Tr, Monoid Tr, MulAction Tr St",
+      "CE002: Fintype St, Fintype Tr, Monoid Tr, MulAction Tr St",
+      "CE003: Fintype St",
+      "CE004: Fintype St, MulAction CE001.Tr St"
+    ],
+    "conflicts": 0,
+    "preorder_instances": 0,
+    "umbrella_ambiguity": false,
+    "umbrella_test": "exists_eventual_period continua se aplicando a Bool com todas as 11 instancias em escopo"
+  },
+
+  "counterexamples": {
+    "CE-001": "acao genuina de monoide; Reachable zero one e NAO Reachable one zero",
+    "CE-002": "acao finita nao transitiva",
+    "CE-003": "cauda antes de ponto fixo; s0 nao periodico para periodo positivo algum; minimalPeriod NAO usado",
+    "CE-004": "acao nao fiel",
+    "CE-005": "invariante que nao separa orbitas distintas",
+    "independence": [
+      "NAO foi provado que todas essas falhas ocorrem simultaneamente em uma unica acao",
+      "NAO foi provado que todas as acoes finitas exibem essas falhas"
+    ]
+  },
+
+  "c3_boundary": {
+    "correct_reading": "cada propriedade promovida indevidamente possui algum contraexemplo na classe geral",
+    "forbidden_reading": "toda acao finita falha em fidelidade, transitividade, simetria e periodicidade inicial",
+    "c3_status": "modelo especial, NAO representante universal",
+    "found_semigroup_001_modified": 0
+  },
+
+  "gaps": {
+    "RESOLVED_FORMALLY": ["FSG2-GAP-002", "FSG2-GAP-003", "FSG2-GAP-004", "FSG2-GAP-004c", "FSG2-GAP-005"],
+    "RESOLVED_BY_API_AUDIT": ["FSG2-GAP-001"],
+    "RESOLVED_BY_DESIGN": ["FSG2-GAP-002b", "FSG2-GAP-006", "FSG2-GAP-008"],
+    "OPEN_DEFERRED": ["FSG2-GAP-004b", "FSG2-GAP-007"],
+    "OPEN_BIBLIOGRAPHIC": ["FSG2-GAP-009"],
+    "SUPERSEDED": []
+  },
+
+  "reuse_matrix": {
+    "DIRECT_REUSE": ["testes de alcancabilidade"],
+    "REQUIRES_ADAPTER": [
+      "maquinas de estados finitos", "automatos deterministicos",
+      "maquinas de estado de software", "transicoes de parsers",
+      "pipelines com estados finitos", "deteccao de ciclos"
+    ],
+    "CONCEPTUAL_ONLY": ["fluxos finitos", "jogos finitos", "modelos de agentes discretos"],
+    "OUT_OF_SCOPE": [],
+    "integrations_created": 0,
+    "binding_note": "a reutilizacao em software NAO transforma o resultado matematico padrao em descoberta cientifica"
+  },
+
+  "claim_review": {
+    "claim_id": "FINITE-DYNAMICS-FORMAL-001",
+    "wording_supported_by_theorems": true,
+    "mentions_allowed_terms": true,
+    "mentions_forbidden_terms": false,
+    "new_claims_created": 0
+  },
+
+  "new_theorems": 0,
+  "lean_math_files_modified": 0,
+  "lean_files_created": ["Tests/FoundSemigroup002InstanceAudit.lean"],
+  "physics_claims": 0,
+  "novelty_claims": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+
+  "verification": {
+    "isolated_tests": {
+      "FoundSemigroup002.lean": "exit 0",
+      "FoundSemigroup002Counterexamples.lean": "exit 0",
+      "FoundSemigroup002InstanceAudit.lean": "exit 0"
+    },
+    "lake_build": "PASS",
+    "forbidden_tokens": {"sorry": 0, "admit": 0, "axiom": 0, "unsafe": 0},
+    "sorryAx": 0,
+    "pytest": "9 passed",
+    "labctl_validate": "PASS",
+    "canonical_commit_check": "PASS"
+  },
+
+  "decision": "A_FOUND_SEMIGROUP_002_RESULT_REVIEW_APPROVED",
+  "work_status_final": "VERIFIED",
+  "result_review": "APPROVED",
+  "extension_status": "NOT_AUTHORIZED",
+  "authorized_action_final": "NO_ACTION_AUTHORIZED",
+  "authorized_action_note": "trava, nao autorizacao de execucao",
+  "next_single_action": "Aguardar um gate separado de revisao de portfolio para selecionar o proximo work item. Nenhuma extensao de FOUND-SEMIGROUP-002 esta autorizada.",
+  "commit_after": null,
+  "working_tree": "clean",
+  "final_status": "FOUND_SEMIGROUP_002_RESULT_REVIEW_APPROVED"
+}

@@ -1,5 +1,69 @@
 # Changelog do laboratório formal
 
+## FOUND-SEMIGROUP-002-RESULT-REVIEW - 2026-07-31
+
+### Reviewed
+
+- `FRR-001` a `FRR-007`: **todos CONFIRMADOS**. Verificado por inspecao
+  que a reciproca de `IsInvariant.under` NAO eh afirmada, e que a palavra
+  "periodo" nunca significa periodo minimo.
+- **Caso `card X = 0`**: o teorema recebe `x : X`, logo no ponto de
+  aplicacao `X` eh habitado. Sem contradicao escondida. Zero instancias de
+  `Nonempty`/`Inhabited`.
+- **Casa dos pombos**: 1 uso real (3 ocorrencias textuais: uso, docstring,
+  `#check`). Nao reprovada no teorema principal, no corolario de acao nem
+  na propagacao.
+- **`minimalPeriod`**: 4 mencoes, **todas em comentario**; 0 usos.
+  `MulAction.period`: 0 ocorrencias.
+
+### API and instance audit
+
+- **API publica: 17 declaracoes**, exatamente a lista minima esperada.
+  Um unico auxiliar, `eventual_period_of_lt`, e ele eh `private`.
+- **11 instancias, ZERO no nucleo matematico.** Todas em
+  `Counterexamples`, sob cinco namespaces: `CE001` 4, `CE002` 4,
+  `CE003` 1, `CE004` 2, `CE005` 0.
+- **0 conflitos.** `CE004` reutiliza `CE001.Tr` sobre outro espaco de
+  estados; os pares sao distintos e ambos `•` resolvem corretamente.
+- **Nenhuma instancia de `Preorder`** (1 ocorrencia da palavra, num
+  comentario que declara a exclusao).
+- Novo teste `Tests/FoundSemigroup002InstanceAudit.lean` (exit 0), que
+  **nao altera modulo matematico algum**: onze `#synth`, desambiguacao do
+  `•`, e a verificacao decisiva de que `exists_eventual_period` continua
+  se aplicando a `Bool` com todas as instancias em escopo.
+
+### Gaps
+
+- Nove resolvidos, tres abertos. **`FSG2-GAP-007` NAO fechado** (negativa
+  sobre o periodo continua sem contraexemplo); **`FSG2-GAP-009` NAO
+  fechado** (sem auditoria bibliografica).
+
+### Reuse
+
+- Um unico `DIRECT_REUSE`: testes de alcancabilidade — a parte da API que
+  **nao exige finitude**. Seis `REQUIRES_ADAPTER`, tres `CONCEPTUAL_ONLY`.
+  Nenhuma integracao criada.
+
+### Not done
+
+- **0** teoremas novos, **0** modulos matematicos alterados, **0** claims
+  novas, **0** claims fisicas ou de novidade, **0** arquivos de legado,
+  **0** arquivos de `RH-NOGO-001` tocados.
+
+### Changed
+
+- `canonical_commit`: `2b86a880` -> `b4ce2551`, no preflight.
+- `result_review: APPROVED`; `extension_status: NOT_AUTHORIZED`.
+- `authorized_action` -> `NO_ACTION_AUTHORIZED`, que eh **trava, nao
+  autorizacao de execucao**.
+
+### Result
+
+- `FOUND_SEMIGROUP_002_RESULT_REVIEW_APPROVED`. A frente fica **encerrada
+  como fundacao formal reutilizavel**, sem autorizacao ativa. O
+  laboratorio nao tem frente ativa: a escolha do proximo trabalho exige um
+  gate separado de revisao de portfolio.
+
 ## FOUND-SEMIGROUP-002-FORMALIZATION - 2026-07-31
 
 ### Corrected

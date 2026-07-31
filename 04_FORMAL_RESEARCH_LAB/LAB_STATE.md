@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-31T11:50:00-03:00
-canonical_commit: "2b86a8809776774e4caf3a54d1469d240ecdaf1d"
+canonical_commit: "b4ce2551cd9f3588030fc7281d7f8c7aa624bac3"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,13 +11,16 @@ repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-SEMIGROUP-002"
 work_status: "VERIFIED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-last_verified_artifact: "found-semigroup-002-formalization-result.json"
+last_verified_artifact: "found-semigroup-002-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado formal, os limites de escopo e o potencial
-  de reutilização antes de autorizar qualquer extensão.
-authorized_action: "FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED"
+  Aguardar um gate separado de revisão de portfólio para selecionar
+  o próximo work item. Nenhuma extensão de FOUND-SEMIGROUP-002
+  está autorizada.
+authorized_action: "NO_ACTION_AUTHORIZED"
 frozen_work_items:
   RH-NOGO-001: "FROZEN_PARTIAL_RESULT desde 2026-07-31, commit c186ab59; ver 03_MILLENNIUM/01_RIEMANN/RH_NOGO_FREEZE_RECORD.md"
 prohibited_actions:
@@ -30,6 +33,8 @@ prohibited_actions:
   - "Não apresentar ABSTRACT-NOGO-001 como no-go espectral, como refutação de Hilbert–Pólya ou como progresso sobre RH"
   - "Não apresentar ABSTRACT-NOGO-001 como novidade matemática"
   - "Não apresentar W-ELLIPTIC-SCALAR-BRIDGE como classe copiada da literatura — seis das doze condições são deste laboratório"
+  - "NO_ACTION_AUTHORIZED é trava, não autorização: nenhum gate pode agir sob ela"
+  - "Não estender FOUND-SEMIGROUP-002 nem abrir FOUND-SEMIGROUP-003 sem gate próprio"
   - "Não formalizar decomposição canônica de órbitas sem gate próprio (FSG2-GAP-004b)"
   - "Não afirmar que as quatro propriedades de C3 falham simultaneamente em toda ação"
   - "Não afirmar que IsInvariantUnder é universalmente mais fraca que IsInvariant"
@@ -57,53 +62,45 @@ resume_read_order:
 # Estado atual
 
 ```text
-FOUND-SEMIGROUP-002   VERIFIED   nucleo formal de dinamica finita
-RH-NOGO-001           FROZEN_PARTIAL_RESULT   congelado, NAO descartado
+FOUND-SEMIGROUP-002   VERIFIED / result_review APPROVED   ENCERRADO
+RH-NOGO-001           FROZEN_PARTIAL_RESULT               congelado
+
+authorized_action: NO_ACTION_AUTHORIZED   (trava, nao execucao)
 ```
 
-## O que foi provado
+**Nenhuma frente tem autorização ativa.** A escolha do próximo trabalho
+exige um gate separado de revisão de portfólio.
+
+## FOUND-SEMIGROUP-002 — encerrado como fundação reutilizável
 
 ```text
-alcancabilidade eh reflexiva e transitiva;
-invariantes completos sao preservados por alcancabilidade;
-toda trajetoria de uma funcao em tipo finito eh eventualmente periodica,
-  com mu < card X, 0 < lam, mu + lam <= card X, ponto periodico na cauda
-  e propagacao a todos os indices posteriores;
-a iteracao de um elemento de monoide em tipo finito eh eventualmente
-  periodica, DERIVADA do resultado funcional;
-propriedades especiais de C3 falham em acoes finitas gerais — no sentido
-  de que para CADA UMA existe um contraexemplo, e nao no sentido de que
-  todas falhem simultaneamente em toda acao.
+17 declaracoes publicas, 1 auxiliar private, 11 instancias
+0 instancias no nucleo matematico
+0 conflitos de instancia; umbrella nao ambiguo
+casa dos pombos usada 1 vez; minimalPeriod usado 0 vezes
+sem DecidableEq X, Fintype M, Group M
+FRR-001..FRR-007 todos CONFIRMADOS
 ```
 
-## O que **não** foi provado
+Gaps: **nove resolvidos, três abertos** (`FSG2-GAP-004b`, `FSG2-GAP-007`,
+`FSG2-GAP-009`). Encerrar a frente **não fecha** nenhum deles.
 
-```text
-unicidade da cauda;
-minimalidade do periodo;
-decomposicao canonica completa;
-classificacao de todas as acoes finitas;
-qualquer resultado sobre sistemas infinitos;
-qualquer resultado fisico;
-TRI ou TDTR;
-novidade matematica.
+## Limites vinculantes
+
+```yaml
+mathematical_novelty: NONE
 ```
 
-## Disciplina verificada
+`RESULT_BOUNDARY.md`, `C3_BOUNDARY.md` e `NOVELTY_BOUNDARY.md` permanecem
+vinculantes. A leitura correta de "propriedades de C3 falham em geral" é
+que **para cada uma existe um contraexemplo** — não que todas falhem
+simultaneamente em toda ação.
 
-```text
-casa dos pombos usada UMA unica vez;
-minimalPeriod NAO usado (armadilha do ponto pre-periodico);
-nenhuma instancia global de Preorder;
-CE-001 usa acao genuina de monoide, nao o grafo de uma funcao;
-hipoteses ociosas removidas: DecidableEq X, Fintype M, Group M ausentes.
-```
+## RH-NOGO-001
 
-## Novidade
-
-**Zero.** Periodicidade eventual em conjunto finito é o princípio da casa
-dos pombos. `RESULT_BOUNDARY.md` e `C3_BOUNDARY.md` são vinculantes.
+`FROZEN_PARTIAL_RESULT` / `NOT_AUTHORIZED` / `NO_EXECUTION` / `DEFERRED`.
+Reativação apenas por `REACT-001..005`.
 
 ## Próxima ação
 
-Revisão do resultado. **Nenhuma extensão autorizada.**
+Aguardar gate de revisão de portfólio. Nada mais está autorizado.

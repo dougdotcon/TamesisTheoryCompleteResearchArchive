@@ -1,5 +1,70 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-CYCLE-DETECTION - 2026-07-31
+
+### Selected
+
+- **`FOUND-CYCLE-DETECTION-001`** — *Executable Cycle Detection for
+  Finite Deterministic Systems*, criado como `SCOPED`. Ataca a lacuna
+  registrada no fechamento anterior: `periodicOrbit` eh **noncomputavel**,
+  e o resultado proposicional nao entrega algoritmo, `mu`, `lambda`,
+  ponto de entrada, lista do ciclo nem certificado computavel.
+- **Duplicata: NAO encontrada.** Zero ocorrencias de `CYCLE-DETECTION` ou
+  `detectCycle`. Floyd e Brent aparecem em tres documentos, e nos tres
+  como material declarado **fora de escopo**.
+
+### Audited
+
+- **Seis** itens nao executados reavaliados com os nove campos exigidos.
+  Todos rejeitados. `TOE-INTERFACE-001` por motivo estrutural: depende de
+  `RH-NOGO-001`, congelada — dependencia **bloqueante**.
+- Nenhuma pesquisa matematica das frentes rejeitadas foi iniciada.
+
+### Planned, not built
+
+- Estrutura candidata `CycleDetectionResult` com seis invariantes,
+  **nao congelada**.
+- Algoritmos comparados: `PRIMARY: FLOYD_WITH_FUEL`,
+  `REFERENCE_BASELINE: VISITED_TABLE`, `DEFERRED: BRENT`. **Nenhum
+  implementado.**
+- Risco principal: **terminacao**. Quatro camadas que a especificacao deve
+  manter separadas — terminacao, correcao, complexidade e equivalencia
+  com a API proposicional.
+- Seis casos de teste (`CD-CE-001..006`) com valores **candidatos**;
+  dezesseis lacunas (`CD-GAP-001..016`), **nenhuma fechada**.
+
+### Boundary
+
+- `DecidableEq X` eh sobre **estados**; `periodicOrbit` vive em
+  `Cycle X`, e nenhuma decidibilidade sobre `Cycle X` eh assumida,
+  requerida ou construida. A ponte eh **proposicional**.
+- Minimalidade de `mu` e de `lambda`, complexidade assintotica formal,
+  bacia completa e enumeracao global: **nao autorizadas**.
+- `mathematical_novelty: NONE`. Deteccao de ciclos em sistemas
+  deterministicos finitos eh material classico.
+
+### Governance
+
+- Tres edicoes minimas e literais em `10_TOOLS/labctl.py`, **sem
+  wildcard**: `DEC-014` (gate sequence), `DEC-015` (dependencia de
+  `FOUND-FUNCTIONAL-GRAPH-001` VERIFIED) e `DEC-016` (entrada de
+  allowlist). `PORTFOLIO_REVIEW_AUTHORIZED` ja existia.
+- `canonical_commit`: `3f6d7e7` -> `49924c3`, no preflight.
+- `authorized_action` ->
+  `FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+  Formalizacao, extracao e integracao permanecem **nao autorizadas**.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** algoritmos, **0** `lake build`,
+  **0** claims promovidas (ledger em **19**), **0** arquivos de legado,
+  **0** de `RH-NOGO-001`, **0** matematicos de `FOUND-SEMIGROUP-002` e de
+  `FOUND-FUNCTIONAL-GRAPH-001`. Pasta de especificacao **nao** criada.
+
+### Result
+
+- `PORTFOLIO_REVIEW_APPROVED_CYCLE_DETECTION_SELECTED`.
+
 ## FOUND-FUNCTIONAL-GRAPH-001-RESULT-REVIEW - 2026-07-31
 
 ### Reviewed

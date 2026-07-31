@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T16:30:00-03:00
-canonical_commit: "3f6d7e785ba8bd90a35f33f7dc889f1234a7b650"
+updated_at: 2026-07-31T22:10:00-03:00
+canonical_commit: "49924c3fe9b5cc2eab0cdea12c3554fc537c051d"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,22 +9,26 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-FUNCTIONAL-GRAPH-001"
-work_status: "VERIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
-extension_status: "NOT_AUTHORIZED"
-specification_status: "APPROVED"
+active_work_item: "FOUND-CYCLE-DETECTION-001"
+work_status: "SCOPED"
 evidence_level: "F"
-last_verified_artifact: "found-functional-graph-001-result-review.json"
+last_verified_artifact: "portfolio-review-cycle-detection-result.json"
 current_blocker: null
 next_single_action: >
-  Aguardar um gate explícito de revisão de portfólio.
-  Nenhuma extensão de FOUND-FUNCTIONAL-GRAPH-001 está autorizada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Preparar a especificação de um algoritmo executável e
+  formalmente correto para detectar a cauda e o ciclo de uma
+  trajetória determinística finita.
+authorized_action: "FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+  FOUND-FUNCTIONAL-GRAPH-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    formalization_status: VERIFIED
     result_review: APPROVED
     extension_status: NOT_AUTHORIZED
     mathematical_novelty: NONE
@@ -40,44 +44,34 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não publicar IsRecurrent — usar x ∈ Function.periodicPts f"
-  - "Não publicar SameFunctionalComponent nem componentSet sem uso na API pública"
-  - "Não usar ∃! p : X no teorema principal"
-  - "Não usar decide sobre igualdade de periodicOrbit (noncomputável)"
-  - "Não desviar das assinaturas congeladas em FINAL_SIGNATURES.md sem gate próprio"
-  - "Não afirmar unicidade de ponto periódico, de representante, de μ ou de período"
-  - "Não afirmar ponte com SimpleGraph, árvores ou distância mínima"
-  - "PORTFOLIO_REVIEW_REQUIRED é trava, não autorização: nenhum gate pode agir sob ela"
-  - "Não aplicar a recíproca de periodicOrbit a pontos não periódicos — órbitas vazias são iguais sem encontro"
-  - "Não apresentar periodicOrbit como algoritmo executável — é noncomputável"
-  - "Não estender FOUND-FUNCTIONAL-GRAPH-001 nem abrir FOUND-FUNCTIONAL-GRAPH-002 sem gate próprio"
-  - "Não definir componente funcional como MutuallyReachable (FFG-CE-004 refuta)"
-  - "Não formular unicidade como existência de um único ponto periódico (FFG-CE-005 refuta)"
-  - "Não importar SimpleGraph no núcleo (FFG-GAP-012 diferido)"
-  - "Não acrescentar DecidableEq X sem necessidade verificada — a auditoria mostrou que não é necessária"
-  - "Não criar instância global de Setoid, Preorder ou equivalência para EventuallyMeets"
+  - "Não formalizar FOUND-CYCLE-DETECTION-001 antes de sua especificação estar pronta"
   - "Não criar arquivos Lean sob a autorização atual"
-  - "Não afirmar unicidade do ciclo por componente antes de FFG-GAP-002 e FFG-GAP-004"
-  - "Não tratar FOUND-FUNCTIONAL-GRAPH-001 como extensão de FOUND-SEMIGROUP-002"
+  - "Não implementar Floyd, Brent ou tabela visitada antes da especificação"
+  - "Não decidir igualdade de Function.periodicOrbit — é noncomputável"
+  - "Não afirmar minimalidade de μ ou de λ sem prova e sem gate próprio"
+  - "Não autorizar extração de código nem integração com sistemas reais"
+  - "Não repetir a casa dos pombos: ela foi consumida uma única vez em FOUND-SEMIGROUP-002"
+  - "Não enumerar todos os componentes na primeira versão"
+  - "Não acrescentar DecidableEq X sem necessidade verificada na especificação (CD-GAP-004)"
+  - "Não tratar FOUND-CYCLE-DETECTION-001 como extensão de FOUND-FUNCTIONAL-GRAPH-001"
+  - "Não estender FOUND-FUNCTIONAL-GRAPH-001 nem abrir FOUND-FUNCTIONAL-GRAPH-002 sem gate próprio"
   - "Não estender FOUND-SEMIGROUP-002 nem abrir FOUND-SEMIGROUP-003 sem gate próprio"
   - "Não reabrir RH-NOGO-001 sem que uma condição de RH_NOGO_REACTIVATION_CRITERIA.md ocorra e seja verificada"
   - "Não conectar a nova frente a TRI, TDTR, teoria de tudo, tempo físico, entropia, mecânica quântica ou cosmologia"
   - "Não conectar a nova frente à Hipótese de Riemann, Hilbert–Pólya ou qualquer conjectura Clay"
-  - "Não afirmar nova lei universal, nova teoria de dinâmica, descoberta matemática ou descoberta física"
-  - "Não apresentar decomposição de grafo funcional como novidade — é material padrão"
+  - "Não afirmar novo algoritmo, nova teoria de grafos, nova lei de dinâmica ou descoberta matemática"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "01_PORTFOLIO/NEXT_WORK_ITEM_DECISION.md"
-  - "01_PORTFOLIO/PORTFOLIO_REVIEW_2026_07_31.md"
-  - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/PUBLIC_API.md"
-  - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/RESULT_BOUNDARY.md"
+  - "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
+  - "01_PORTFOLIO/PORTFOLIO_REVIEW_CYCLE_DETECTION.md"
+  - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"
+  - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/RESULT_BOUNDARY.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
 ---
-
 # Estado atual
 
 ```text

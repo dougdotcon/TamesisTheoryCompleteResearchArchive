@@ -1,0 +1,173 @@
+{
+  "gate": "PORTFOLIO_REVIEW",
+  "subject": "Selecao de deteccao executavel de ciclos",
+  "authorized_action_at_entry": "PORTFOLIO_REVIEW_REQUIRED",
+  "authorized_action_during_gate": "PORTFOLIO_REVIEW_AUTHORIZED",
+  "executed_at": "2026-07-31T22:10:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "49924c3fe9b5cc2eab0cdea12c3554fc537c051d",
+  "canonical_commit_before": "3f6d7e785ba8bd90a35f33f7dc889f1234a7b650",
+  "canonical_commit_after_preflight": "49924c3fe9b5cc2eab0cdea12c3554fc537c051d",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional", "historia-digital"],
+  "skills_note": "lidas como arquivo; nenhuma executada no terminal; nao constituem fonte matematica",
+
+  "closed_fronts": {
+    "FOUND-FUNCTIONAL-GRAPH-001": {"work_status": "VERIFIED", "specification_status": "APPROVED", "formalization_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED", "mathematical_novelty": "NONE"},
+    "FOUND-SEMIGROUP-002": {"work_status": "VERIFIED", "result_review": "APPROVED", "extension_status": "NOT_AUTHORIZED"},
+    "RH-NOGO-001": {"work_status": "FROZEN_PARTIAL_RESULT", "authorization_state": "NOT_AUTHORIZED", "execution_state": "NO_EXECUTION", "concrete_layer_status": "DEFERRED"}
+  },
+  "extension_status_modified": 0,
+  "closed_front_math_files_touched": 0,
+
+  "portfolio_items_audited": [
+    {"work_item": "NS-PRESSURE-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED", "reason": "Clay; Mathlib nao sustenta EDP"},
+    {"work_item": "PVSNP-PHYS-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED", "reason": "vizinho de Clay; valor concentrado em definicoes nao verificaveis"},
+    {"work_item": "YM-LIMIT-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED", "reason": "custo very_high; QFT construtiva ausente"},
+    {"work_item": "HODGE-CDK-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED", "reason": "custo bibliografico very_high; sem produto formal pequeno"},
+    {"work_item": "BSD-HYP-MATRIX-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED", "reason": "produto essencialmente bibliografico"},
+    {"work_item": "TOE-INTERFACE-001", "poc_30_day_feasibility": "NO", "verdict": "REJECTED_BLOCKED", "reason": "depende de RH-NOGO-001, congelada; dependencia BLOQUEANTE"}
+  ],
+  "portfolio_items_audited_count": 6,
+  "rejected_fronts_research_started": 0,
+
+  "selected": {
+    "work_item": "FOUND-CYCLE-DETECTION-001",
+    "title": "Executable Cycle Detection for Finite Deterministic Systems",
+    "track": "FOUNDATIONS",
+    "work_status": "SCOPED",
+    "mathematical_novelty": "NONE",
+    "research_role": "FORMAL_ALGORITHM_FOUNDATION"
+  },
+  "duplicate_found": false,
+  "duplicate_evidence": "0 ocorrencias de CYCLE-DETECTION/detectCycle como work item ou definicao; Floyd/Brent aparecem em 3 documentos APENAS como material declarado fora de escopo (FOUND_SEMIGROUP_002/KNOWN_RESULTS_MATRIX.md, FOUND_SEMIGROUP_002/REUSE_MATRIX.md, FOUND_FUNCTIONAL_GRAPH_001/REUSE_MATRIX.md)",
+  "rejection_criteria_triggered": 0,
+
+  "computational_gap_attacked": "periodicOrbit eh noncomputavel; o resultado proposicional nao entrega algoritmo, nem mu, nem lambda, nem ponto de entrada, nem lista do ciclo, nem certificado computavel",
+  "reused_results": ["exists_bounded_iterate_collision", "periodic_tail_of_collision", "exists_eventual_period", "exists_component_cycle_with_entry_bound"],
+  "pigeonhole_reuse": "consumida uma unica vez em FOUND-SEMIGROUP-002; NAO sera repetida",
+
+  "core_data": {"X": "tipo finito", "f": "X -> X", "x0": "X"},
+  "expected_hypotheses": {"Fintype X": "quase certamente necessaria", "DecidableEq X": "provavelmente necessaria, a CONFIRMAR (CD-GAP-004)"},
+  "hypotheses_frozen": false,
+
+  "candidate_structure": {
+    "name": "CycleDetectionResult",
+    "fields": ["entryIndex : Nat", "period : Nat", "entryPoint : X"],
+    "invariants": [
+      "entryIndex < card X",
+      "0 < period",
+      "entryIndex + period <= card X",
+      "entryPoint = f^[entryIndex] x0",
+      "f^[entryIndex + period] x0 = entryPoint",
+      "forall k, f^[entryIndex + k + period] x0 = f^[entryIndex + k] x0"
+    ],
+    "frozen": false,
+    "open_question": "somente mu e lambda; mu, lambda e ponto; lista/Finset do ciclo; ou certificados embutidos"
+  },
+
+  "algorithms_compared": ["FLOYD_TORTOISE_AND_HARE", "BRENT", "VISITED_TABLE"],
+  "algorithm_recommendation": {"PRIMARY": "FLOYD_WITH_FUEL", "REFERENCE_BASELINE": "VISITED_TABLE", "DEFERRED": "BRENT"},
+  "algorithm_implemented": false,
+
+  "termination_strategy_candidates": ["fuel = card X ou multiplo controlado", "recursao bem fundada", "StateM com contador", "execucao sobre Fin (card X + 1)", "busca em Finset/List de visitados"],
+  "termination_layers_separated": ["terminacao do programa", "correcao matematica", "limites de complexidade", "equivalencia com a API proposicional"],
+  "principal_risk": "Lean precisa reconhecer que o algoritmo termina",
+
+  "candidate_functional_result": "def detectCycle {X} [Fintype X] [DecidableEq X] (f : X -> X) (x : X) : CycleDetectionResult X",
+  "candidate_correctness_theorem": "detectCycle_correct — entryPoint = f^[entryIndex] x, entryIndex < card X, 0 < period, f^[entryIndex + period] x = entryPoint",
+  "candidate_propagation_theorem": "detectCycle_propagates — forall k, f^[entryIndex + k + period] x = f^[entryIndex + k] x",
+
+  "minimality_authorized": false,
+  "minimality_note": "minimalidade de mu, minimalidade de lambda, complexidade assintotica formal, lista completa da bacia e enumeracao de componentes globais NAO estao autorizadas. A especificacao decidira se Floyd produz valores minimos e se vale prova-lo no primeiro ciclo (CD-GAP-009, CD-GAP-010)",
+
+  "periodicOrbit_relation": {
+    "decidable_equality_of_Cycle": "NAO assumida, NAO requerida, NAO construida",
+    "decidable_equality_of_states": "eh sobre X, nao sobre Cycle X",
+    "bridge": "PROPOSICIONAL — entryPoint pertence a periodicPts; sua periodicOrbit eh a orbita unica do componente"
+  },
+
+  "applications_mapped": ["parsers", "retries de pipelines", "maquinas de estado", "workflows", "agentes deterministicos", "jogos finitos", "simuladores discretos", "auditoria de estados", "deteccao de dead loops", "sistemas embarcados finitos"],
+  "integrations_created": 0,
+
+  "test_cases": ["CD-CE-001", "CD-CE-002", "CD-CE-003", "CD-CE-004", "CD-CE-005", "CD-CE-006"],
+  "test_cases_count": 6,
+  "test_case_values_are_candidates": true,
+
+  "gaps_opened": ["CD-GAP-001", "CD-GAP-002", "CD-GAP-003", "CD-GAP-004", "CD-GAP-005", "CD-GAP-006", "CD-GAP-007", "CD-GAP-008", "CD-GAP-009", "CD-GAP-010", "CD-GAP-011", "CD-GAP-012", "CD-GAP-013", "CD-GAP-014", "CD-GAP-015", "CD-GAP-016"],
+  "gaps_opened_count": 16,
+  "gaps_closed": 0,
+
+  "stop_conditions_registered": 11,
+  "scientific_limits": {"mathematical_novelty": "NONE", "research_role": "FORMAL_ALGORITHM_FOUNDATION"},
+  "classical_attribution": "Algoritmos de deteccao de ciclos em sistemas deterministicos finitos sao resultados classicos. O valor deste work item estara na formalizacao executavel, na correcao verificada, na integracao com as fundacoes anteriores e na possibilidade de extracao para software.",
+
+  "dependency_dag": "FOUND-SEMIGROUP-002 -> periodicidade eventual e colisao limitada -> FOUND-FUNCTIONAL-GRAPH-001 -> componente e orbita periodica unica -> FOUND-CYCLE-DETECTION-001 -> algoritmo executavel e certificado",
+  "dependency_classes": ["MATHEMATICAL", "LEAN_API", "ALGORITHMIC", "COMPUTATIONAL", "GOVERNANCE", "BIBLIOGRAPHIC"],
+
+  "decision": "A_PORTFOLIO_REVIEW_APPROVED_CYCLE_DETECTION_SELECTED",
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "lake_build_executed": "NO",
+  "algorithm_implemented_flag": "NO",
+  "claims_promoted": 0,
+  "physics_claims": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+  "found_functional_graph_001_math_files_touched": 0,
+  "specification_folder_created": false,
+
+  "governance_deviations": [
+    {
+      "id": "DEC-014",
+      "file": "10_TOOLS/labctl.py",
+      "change": "FOUND-CYCLE-DETECTION-001 acrescentado ao conjunto de active_work_item permitidos, com a mensagem de erro correspondente",
+      "reason": "sem isso o gate-sequence rejeita o novo item e labctl validate falha",
+      "wildcard": false
+    },
+    {
+      "id": "DEC-015",
+      "file": "10_TOOLS/labctl.py",
+      "change": "nova checagem: FOUND-CYCLE-DETECTION-001 nao pode ser ativo antes de FOUND-FUNCTIONAL-GRAPH-001 estar VERIFIED",
+      "reason": "espelha a checagem existente para FOUND-FUNCTIONAL-GRAPH-001; mantem a governanca deflacionaria",
+      "wildcard": false
+    },
+    {
+      "id": "DEC-016",
+      "file": "10_TOOLS/labctl.py",
+      "change": "entrada literal FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED acrescentada ao allowlist",
+      "reason": "exigido pelo item 24 do gate",
+      "wildcard": false
+    }
+  ],
+  "allowlist_entries_added": 1,
+  "allowlist_wildcards_added": 0,
+  "portfolio_review_authorized_already_present": true,
+
+  "pytest": "PASS",
+  "labctl_validate": "PASS",
+  "canonical_commit_check": "PASS",
+  "whitespace_audit": "WHITESPACE_EOF_AUDIT_PASS",
+  "commit_amend_used": false,
+
+  "final_state": {
+    "active_work_item": "FOUND-CYCLE-DETECTION-001",
+    "work_status": "SCOPED",
+    "current_blocker": null,
+    "authorized_action": "FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  },
+  "next_single_action": "Preparar a especificacao de um algoritmo executavel e formalmente correto para detectar a cauda e o ciclo de uma trajetoria deterministica finita.",
+  "formalization_authorized": false,
+  "extraction_authorized": false,
+  "real_system_integration_authorized": false,
+
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "PORTFOLIO_REVIEW_APPROVED_CYCLE_DETECTION_SELECTED"
+}

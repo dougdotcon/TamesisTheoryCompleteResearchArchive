@@ -340,3 +340,64 @@ queue:
     priority_class: P4
     status: SCOPED
     authorized_next_gate: TOE_INTERFACE_EXECUTION
+  - work_item_id: FOUND-CYCLE-DETECTION-001
+    title: "Executable Cycle Detection for Finite Deterministic Systems"
+    track: foundations
+    target_statement: >
+      Existe um algoritmo executavel, definido em Lean e provado correto,
+      que a partir de um tipo finito X, de f : X -> X e de um estado
+      inicial devolve o comprimento da cauda, o comprimento do ciclo e o
+      ponto de entrada no ciclo, satisfazendo os invariantes de iteracao
+      correspondentes.
+    expected_product: >
+      Definicao executavel com argumento de terminacao, estrutura de
+      resultado, teorema de correcao, teorema de propagacao, ponte
+      proposicional com periodicPts e casos de teste avaliados por
+      computacao.
+    dependencies:
+      - LAB-BENCH-001
+      - FOUND-SEMIGROUP-001
+      - FOUND-SEMIGROUP-002
+      - FOUND-FUNCTIONAL-GRAPH-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/FiniteDynamics/"
+      - "05_FORMAL/lean/TamesisLab/Foundations/FunctionalGraphs/"
+      - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 4
+    external_dependency: none
+    cross_track_value: medium
+    stop_condition: >
+      tentar decidir igualdade de periodicOrbit; nao possuir argumento
+      claro de terminacao; misturar existencia com minimalidade sem prova;
+      repetir a casa dos pombos; depender de Classical.choice para
+      extracao; enumerar todos os componentes na primeira versao;
+      apresentar algoritmo classico como descoberta
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    research_role: FORMAL_ALGORITHM_FOUNDATION
+    expected_formal_value: HIGH
+    expected_software_reuse: VERY_HIGH
+    algorithmic_value: HIGH
+    algorithm_primary: FLOYD_WITH_FUEL
+    algorithm_reference_baseline: VISITED_TABLE
+    algorithm_deferred: BRENT
+    minimality_authorized: false
+    extraction_authorized: false
+    decision_document: "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_CYCLE_DETECTION.md"
+    gaps_opened: 16
+    counterexamples_planned: 6
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW apos o encerramento de
+      FOUND-FUNCTIONAL-GRAPH-001. Ataca a lacuna computacional registrada
+      naquele fechamento: periodicOrbit eh nao computavel e o resultado
+      proposicional nao entrega algoritmo. Nenhum item equivalente existe
+      na fila; Floyd e Brent aparecem no laboratorio apenas como material
+      declarado fora de escopo. Nao eh extensao de FOUND-SEMIGROUP-002 nem
+      de FOUND-FUNCTIONAL-GRAPH-001, cujos extension_status permanecem
+      NOT_AUTHORIZED.

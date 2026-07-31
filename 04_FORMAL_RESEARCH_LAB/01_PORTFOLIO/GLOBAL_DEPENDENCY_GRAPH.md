@@ -26,8 +26,22 @@ FOUND-SEMIGROUP-001      VERIFIED    modelo C3 (monoide finito agindo)
 FOUND-SEMIGROUP-002      VERIFIED    alcancabilidade, invariantes,
         |                            periodicidade eventual
         v
-FOUND-FUNCTIONAL-GRAPH-001   SCOPED      estrutura GLOBAL do grafo de f
+FOUND-FUNCTIONAL-GRAPH-001   VERIFIED    componente por EventuallyMeets
+        |                            e orbita periodica unica
+        v
+FOUND-CYCLE-DETECTION-001    SCOPED      algoritmo executavel e certificado
 ```
+
+`FOUND-CYCLE-DETECTION-001` fecha a lacuna **computacional** deixada por
+`FOUND-FUNCTIONAL-GRAPH-001`: a existencia do ciclo esta provada, mas
+`Function.periodicOrbit` eh noncomputavel e nenhum programa entrega
+`mu`, `lambda` ou o ponto de entrada. A dependencia eh de **reutilizacao
+de API verificada**; os `extension_status` das duas frentes anteriores
+permanecem `NOT_AUTHORIZED`.
+
+Classificacao das dependencias: `MATHEMATICAL`, `LEAN_API`,
+`ALGORITHMIC`, `COMPUTATIONAL`, `GOVERNANCE`, `BIBLIOGRAPHIC` — detalhada
+em `NEXT_WORK_ITEM_CYCLE_DETECTION.md`.
 
 `FOUND-FUNCTIONAL-GRAPH-001` depende de `FOUND-SEMIGROUP-002` por
 **reutilização de API verificada**, não por extensão de escopo: o
@@ -41,4 +55,3 @@ RH-NOGO-001   FROZEN_PARTIAL_RESULT   camada abstrata completa,
         |
         x   TOE-INTERFACE-001 depende dela — dependencia BLOQUEANTE
 ```
-

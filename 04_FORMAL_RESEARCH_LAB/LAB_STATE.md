@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-07-31T22:10:00-03:00
-canonical_commit: "49924c3fe9b5cc2eab0cdea12c3554fc537c051d"
+updated_at: 2026-07-31T23:20:00-03:00
+canonical_commit: "ab79032062cddf195671208058820993cfaabe76"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,15 +10,16 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-CYCLE-DETECTION-001"
-work_status: "SCOPED"
+work_status: "READY"
 evidence_level: "F"
-last_verified_artifact: "portfolio-review-cycle-detection-result.json"
+last_verified_artifact: "found-cycle-detection-001-specification-result.json"
 current_blocker: null
+specification_status: "READY_FOR_REVIEW"
 next_single_action: >
-  Preparar a especificação de um algoritmo executável e
-  formalmente correto para detectar a cauda e o ciclo de uma
-  trajetória determinística finita.
-authorized_action: "FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a enumeração de certificados, a executabilidade do
+  detector parcial, a completude por reutilização da colisão
+  limitada e a viabilidade de totalização sem escolha clássica.
+authorized_action: "FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -44,9 +45,16 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não formalizar FOUND-CYCLE-DETECTION-001 antes de sua especificação estar pronta"
+  - "Não formalizar FOUND-CYCLE-DETECTION-001 antes de sua especificação ser revista"
   - "Não criar arquivos Lean sob a autorização atual"
-  - "Não implementar Floyd, Brent ou tabela visitada antes da especificação"
+  - "Não implementar Floyd, Brent ou tabela visitada — ambos DEFERRED_OPTIMIZATION"
+  - "Não desviar do algoritmo congelado BOUNDED_CERTIFICATE_SEARCH sem gate próprio"
+  - "Não acrescentar campos a CycleWitness — entryPoint é derivável e foi rejeitado"
+  - "Não chamar prefixIndex de entryIndex nem de comprimento exato da cauda"
+  - "Não chamar period de minimalPeriod"
+  - "Não usar Classical.choose na função executável"
+  - "Não marcar o detector como noncomputable"
+  - "Não autorizar o wrapper total antes de checar #eval — CD-GAP-017"
   - "Não decidir igualdade de Function.periodicOrbit — é noncomputável"
   - "Não afirmar minimalidade de μ ou de λ sem prova e sem gate próprio"
   - "Não autorizar extração de código nem integração com sistemas reais"
@@ -65,10 +73,10 @@ prohibited_actions:
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/README.md"
+  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/SPECIFICATION_DECISION.md"
   - "01_PORTFOLIO/NEXT_WORK_ITEM_CYCLE_DETECTION.md"
-  - "01_PORTFOLIO/PORTFOLIO_REVIEW_CYCLE_DETECTION.md"
   - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/PUBLIC_API.md"
-  - "02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/RESULT_BOUNDARY.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
 ---

@@ -1,0 +1,250 @@
+{
+  "work_item": "FOUND-CYCLE-DETECTION-001",
+  "gate": "FOUND_CYCLE_DETECTION_001_SPECIFICATION",
+  "authorized_action": "FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "executed_at": "2026-07-31T23:20:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "ab79032062cddf195671208058820993cfaabe76",
+  "canonical_commit_before": "49924c3fe9b5cc2eab0cdea12c3554fc537c051d",
+  "canonical_commit_after_preflight": "ab79032062cddf195671208058820993cfaabe76",
+  "ancestry_check": {"cat_file_exit": 0, "merge_base_is_ancestor_exit": 0, "equality_with_head": true, "verdict": "PASS"},
+
+  "skills": ["goal", "matematica-pura", "engenharia-software", "linguistica-computacional", "historia-digital"],
+
+  "prior_results_reused": {
+    "exists_bounded_iterate_collision": "conclusao coincide TERMO A TERMO com CycleWitness.Valid — base da completude",
+    "periodic_tail_of_collision": "aplicacao direta em CycleWitness.isPeriodicPt, sem prova nova",
+    "collision_propagates": "assinatura IDENTICA a de CycleWitness.propagates, sem prova nova",
+    "exists_eventual_period": "NAO usado — o detector consome as pecas, nao o pacote",
+    "exists_cyclePoint_reachable_with_bound": "NOT_NEEDED — o certificado ja da mu",
+    "exists_component_cycle_with_entry_bound": "usado na ponte OPCIONAL com o componente",
+    "periodicOrbit_eq_of_eventuallyMeets": "usado na ponte OPCIONAL; exige ambos os pontos periodicos"
+  },
+  "prior_results_reimplemented": 0,
+
+  "algorithm_selection": {
+    "portfolio_preliminary": "FLOYD_WITH_FUEL",
+    "primary_algorithm": "BOUNDED_CERTIFICATE_SEARCH",
+    "frozen": true,
+    "reasons": [
+      "reutiliza diretamente exists_bounded_iterate_collision",
+      "terminacao estrutural e imediata",
+      "nao exige invariantes de tartaruga e lebre",
+      "nao repete a casa dos pombos",
+      "nao exige memoria ou estado mutavel complexo",
+      "produz certificado explicito",
+      "permite primeira extracao executavel",
+      "reduz o risco formal da primeira versao"
+    ],
+    "asymptotic_superiority_claimed": false
+  },
+  "rejected_algorithms": {
+    "Floyd": "DEFERRED_OPTIMIZATION",
+    "VisitedTable": "DEFERRED_REFERENCE_IMPLEMENTATION",
+    "Brent": "DEFERRED_OPTIMIZATION"
+  },
+
+  "data_model": {
+    "structure": "CycleWitness",
+    "fields": ["prefixIndex : Nat", "period : Nat"],
+    "frozen": true,
+    "not_parameterized_by_X": true,
+    "rejected_fields": ["entryPoint", "provas embutidas", "isMinimal", "lista do ciclo"],
+    "prefixIndex_semantics": "indice-base de uma colisao certificada — NAO o menor indice de entrada",
+    "period_semantics": "periodo positivo testemunhado — NAO minimalPeriod",
+    "entryIndex_name_forbidden": true,
+    "card_in_Valid": "PERMANECE DENTRO, com [Fintype X]; cycleCandidates e mem_cycleCandidates_iff recebem n arbitrario",
+    "card_in_Valid_fallback": "auxiliar ValidAt n, registrado em CD-GAP-002, nao adotado"
+  },
+
+  "candidate_enumeration": {
+    "signature": "cycleCandidates (n : Nat) : List CycleWitness",
+    "hypotheses": "nenhuma sobre X",
+    "construction": "(List.range n).flatMap (fun m => (List.range (n - m)).map (fun k => <m, k + 1>))",
+    "order": "prefixIndex crescente; para cada prefixIndex, period crescente",
+    "order_is_minimality_claim": false,
+    "boundary_case_included": true,
+    "boundary_evidence": "sonda: n=3 -> [(0,1),(0,2),(0,3),(1,1),(1,2),(2,1)]; n=4 -> 10 pares; n=1 -> [(0,1)]",
+    "empty_case": "n = 0 -> []; correto, pois X vazio nao fornece x : X",
+    "length_observation": "aparenta n(n+1)/2 — observacao de sonda, NAO lema",
+    "duplicates_proof_required": false
+  },
+
+  "executable_predicate": {
+    "decision": "OPTION_A_DECIDE",
+    "form": "fun w => decide (CycleWitness.Valid f x w)",
+    "bool_predicate": "NOT_NEEDED",
+    "bridge": "decide_eq_true_eq",
+    "bool_and_prop_frozen_simultaneously": false,
+    "evidence": "sonda: inferInstance produziu a instancia Decidable da conjuncao completa para X = Bool"
+  },
+
+  "partial_detector": {
+    "signature": "detectCycleWitness? {X} [Fintype X] [DecidableEq X] (f : X -> X) (x : X) : Option CycleWitness",
+    "body_candidate": "List.find? (fun w => decide (Valid f x w)) (cycleCandidates (Fintype.card X))",
+    "forbidden": ["decidir igualdade de periodicOrbit", "Classical.choice", "funcao noncomputable", "SimpleGraph", "quociente", "pigeonhole"]
+  },
+
+  "soundness_plan": {
+    "route": "List.find?_some -> decide_eq_true_eq -> Valid",
+    "depends_on_mem_cycleCandidates_iff": false,
+    "deviation_note": "as tres cotas vivem DENTRO de Valid; a soundness nao consulta a lista. Fortificacao, nao lacuna: sobrevive a troca de algoritmo",
+    "apis": ["List.find?_some", "decide_eq_true_eq"]
+  },
+
+  "completeness_plan": {
+    "route": "exists_bounded_iterate_collision -> construir CycleWitness -> mem_cycleCandidates_iff -> decide -> List.find?_isSome -> Option.isSome_iff_exists",
+    "is_transport_not_new_proof": true,
+    "apis": ["exists_bounded_iterate_collision", "mem_cycleCandidates_iff", "List.find?_isSome", "Option.isSome_iff_exists"],
+    "alternative_route": "List.find?_eq_none por contradicao"
+  },
+
+  "pigeonhole": {
+    "repeated": false,
+    "consumed_via": "exists_bounded_iterate_collision",
+    "forbidden_symbol": "Fintype.exists_ne_map_eq_of_card_lt",
+    "check_required_at_formalization": "zero ocorrencias nos arquivos desta frente"
+  },
+
+  "totalization_decision": {
+    "status": "DEFERRED",
+    "reason": "a condicao '#eval funcionar em tipos concretos' so eh verificavel implementando o detector, o que este gate proibe",
+    "conditions": {
+      "corpo computavel": "argumento favoravel",
+      "sem Classical.choice nas dependencias executaveis": "argumento favoravel",
+      "#eval funciona": "NAO VERIFICADO",
+      "prova apagada na extracao": "argumento favoravel",
+      "sem marca noncomputable": "argumento favoravel"
+    },
+    "public_api_v1": "Option",
+    "classical_choose_used": false
+  },
+
+  "computability": {
+    "computable": ["CycleWitness", "cycleCandidates", "detectCycleWitness?"],
+    "decidable_with_DecidableEq": ["CycleWitness.Valid"],
+    "noncomputable_and_propositional": ["Function.periodicOrbit", "Function.periodicPts", "EventuallyMeets", "IterReachable"],
+    "category_distinction": "DecidableEq X eh sobre ESTADOS; periodicOrbit vive em Cycle X; nenhuma decidibilidade sobre Cycle X eh assumida, requerida ou construida"
+  },
+
+  "periodicity_bridge": "CycleWitness.isPeriodicPt via periodic_tail_of_collision; CycleWitness.mem_periodicPts via Function.mk_mem_periodicPts consumindo 0 < period",
+  "propagation_bridge": "CycleWitness.propagates via collision_propagates — assinatura identica, sem reimplementar aritmetica",
+  "component_bridge": "detected_cycle_is_component_cycle, OPTIONAL_CORE, proposicional, via periodicOrbit_eq_of_eventuallyMeets e os lemas relacionais",
+
+  "decidable_eq_analysis": {
+    "needed_in": ["detectCycleWitness?", "e seus dois teoremas, por heranca da assinatura"],
+    "not_needed_in": ["CycleWitness", "cycleCandidates", "mem_cycleCandidates_iff", "CycleWitness.Valid", "isPeriodicPt", "mem_periodicPts", "propagates"],
+    "justification": "a comparacao executavel f^[mu+lam] x = f^[mu] x eh entre elementos de X",
+    "contradicts_previous_fronts": false,
+    "why_not": "as camadas anteriores sao puramente proposicionais; afirmar igualdade nao exige decidi-la"
+  },
+
+  "termination_analysis": {
+    "mechanism": "STRUCTURAL",
+    "argument": "cycleCandidates (card X) eh lista finita; List.find? termina estruturalmente; logo o detector termina por construcao",
+    "not_used": ["fuel recursivo sobre estados", "recursao bem fundada", "while sem cota", "StateM sem prova", "Classical.choice"]
+  },
+
+  "complexity_boundary": {
+    "complexity_status": "NOT_FORMALIZED",
+    "asymptotic_optimality": "NOT_CLAIMED",
+    "unproved_analysis": "a busca limitada pode ter custo superior a Floyd e Brent, especialmente porque avalia multiplas iteradas para varios pares",
+    "big_O_registered": false
+  },
+
+  "extraction_feasibility": {
+    "status": "READY_FOR_FEASIBILITY_AUDIT",
+    "eval_audited_for": ["List.range", "List.flatMap", "List.map", "List.find?", "Fintype.card", "Nat.iterate sobre Bool", "decide", "Option.get"],
+    "eval_audited_for_detector": false,
+    "lean_run": "NAO auditado",
+    "lake_executable_target": "NAO auditado",
+    "native_compilation": "NAO auditado",
+    "external_integration": "NENHUMA"
+  },
+
+  "lean_api_audit": {
+    "API_FOUND": 31,
+    "NOT_FOUND": 1,
+    "NAME_UNCERTAIN": 0,
+    "NOT_NEEDED": 5,
+    "name_corrections": {
+      "List.find?_eq_some": "List.find?_eq_some_iff_append",
+      "Function.iterate": "Nat.iterate"
+    },
+    "not_found_detail": "List.get? e List.getElem? nao existem como constantes nesta revisao; acesso indexado eh l[i]? via GetElem?",
+    "revision_checked": "79d0395a1825a6264ad5d269e35e60537518955e",
+    "probe": "/tmp/CycleDetectionSpecificationProbe.lean",
+    "probe_removed": true
+  },
+
+  "test_plan": {
+    "tests": ["CD-TEST-001", "CD-TEST-002", "CD-TEST-003", "CD-TEST-004", "CD-TEST-005", "CD-TEST-006", "CD-TEST-007"],
+    "count": 7,
+    "values_are_regression_not_minimality": true
+  },
+
+  "gaps": {
+    "total": 19,
+    "resolved_by_design": ["CD-GAP-001", "CD-GAP-002", "CD-GAP-003", "CD-GAP-005"],
+    "resolved_by_audit": ["CD-GAP-004"],
+    "resolved_by_plan": ["CD-GAP-006", "CD-GAP-007", "CD-GAP-008", "CD-GAP-011", "CD-GAP-012"],
+    "resolved_by_boundary": ["CD-GAP-015"],
+    "open_deferred": ["CD-GAP-009", "CD-GAP-010", "CD-GAP-013", "CD-GAP-017", "CD-GAP-018", "CD-GAP-019"],
+    "open_bibliographic": ["CD-GAP-016"],
+    "ready_for_feasibility_audit": ["CD-GAP-014"],
+    "new_gaps": ["CD-GAP-017", "CD-GAP-018", "CD-GAP-019"],
+    "closed_by_expectation": 0
+  },
+
+  "stop_conditions": {"count": 16, "triggered": 0},
+
+  "novelty_boundary": {
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_ALGORITHM_FOUNDATION",
+    "literal_record": "A busca finita por certificados de colisao eh uma implementacao direta de um resultado classico de periodicidade em sistemas deterministicos finitos. A contribuicao deste work item nao eh um novo algoritmo."
+  },
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "algorithm_implemented": "NO",
+  "lake_build_executed": "NO",
+  "claims_promoted": 0,
+  "claim_count": 19,
+  "physics_claims": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+  "found_functional_graph_001_math_files_touched": 0,
+  "temporary_probe_removed": "YES",
+
+  "governance_deviations": [
+    {
+      "id": "DEC-017",
+      "file": "10_TOOLS/labctl.py",
+      "change": "entrada literal FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED acrescentada ao allowlist",
+      "reason": "exigido pelo item 35 do gate",
+      "wildcard": false
+    }
+  ],
+  "specification_deviations": [
+    "mem_cycleCandidates_iff NAO eh dependencia da soundness — as cotas vivem dentro de Valid",
+    "totalizacao DEFERRED, nao aprovada — a condicao de #eval nao eh verificavel neste gate",
+    "dois nomes de API do gate corrigidos contra o checkout real"
+  ],
+
+  "artifact_type": "FORMAL_ALGORITHM_SPECIFICATION",
+  "evidence_level": "NONE",
+
+  "decision": "A_FOUND_CYCLE_DETECTION_001_SPECIFICATION_READY",
+  "work_status_final": "READY",
+  "specification_status": "READY_FOR_REVIEW",
+  "authorized_action_final": "FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED",
+  "next_single_action": "Revisar a enumeracao de certificados, a executabilidade do detector parcial, a completude por reutilizacao da colisao limitada e a viabilidade de totalizacao sem escolha classica.",
+  "commit_after": null,
+  "commits_in_this_gate": 1,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_CYCLE_DETECTION_001_SPECIFICATION_READY"
+}

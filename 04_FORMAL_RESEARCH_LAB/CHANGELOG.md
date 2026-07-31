@@ -1,5 +1,81 @@
 # Changelog do laboratório formal
 
+## FOUND-CYCLE-DETECTION-001-SPECIFICATION - 2026-07-31
+
+### Frozen
+
+- **`BOUNDED_CERTIFICATE_SEARCH`** como algoritmo primario. **Nao eh
+  Floyd.** O argumento decisivo: o contrato do certificado coincide
+  TERMO A TERMO com a conclusao de `exists_bounded_iterate_collision`,
+  ja `VERIFIED`. A completude deixa de ser prova nova e passa a ser
+  transporte.
+- **`CycleWitness`** com **dois** naturais, `prefixIndex` e `period`.
+  `entryPoint` **rejeitado** — derivavel por `f^[prefixIndex] x0`. A
+  estrutura NAO eh parametrizada por `X`.
+- Semantica vinculante: `prefixIndex` eh **indice-base de colisao
+  certificada**, NAO o menor indice de entrada — o nome `entryIndex` fica
+  proibido. `period` eh **periodo positivo testemunhado**, NAO
+  `minimalPeriod`.
+
+### Audited
+
+- **31 APIs confirmadas** com assinatura impressa pelo proprio Lean, via
+  sonda temporaria em `/tmp` (removida ao final). **Dois nomes do gate
+  divergiam do checkout**: `List.find?_eq_some` ->
+  `List.find?_eq_some_iff_append`; `Function.iterate` -> `Nat.iterate`.
+  `List.get?` e `List.getElem?` **nao existem** como constantes.
+- Fronteira `mu + lam = n` verificada **por avaliacao**: `n = 3` produz
+  `(0,3), (1,2), (2,1)`; `n = 1` produz `[(0,1)]`.
+- Predicado executavel: **Opcao A**, `decide`. A instancia `Decidable` da
+  conjuncao completa foi obtida por `inferInstance` para `X = Bool`.
+  `Bool` e `Prop` **nao** ficam congelados simultaneamente.
+
+### Deviations
+
+- **`mem_cycleCandidates_iff` NAO eh dependencia da soundness** — as tres
+  cotas vivem dentro de `Valid`. Fortificacao, nao lacuna: a soundness
+  sobrevive a uma troca de algoritmo. O DAG do gate foi corrigido nesse
+  ramo.
+- **Totalizacao `DEFERRED`.** Quatro das cinco condicoes tem argumento
+  favoravel; a quinta — `#eval` funcionar — so eh verificavel
+  implementando. API v1 permanece baseada em `Option`.
+
+### Boundary
+
+- `DecidableEq X` eh sobre **estados**; `periodicOrbit` vive em
+  `Cycle X`. Nenhuma decidibilidade sobre `Cycle X` eh assumida.
+  `DecidableEq` fica SOMENTE na camada do detector — as tres pontes
+  proposicionais nao a recebem.
+- Terminacao **estrutural**: lista finita + `List.find?`. Sem `fuel`, sem
+  recursao bem fundada, sem `Classical.choice`, sem `Classical.choose`.
+- Casa dos pombos consumida **uma unica vez**, em `FOUND-SEMIGROUP-002`;
+  `Fintype.exists_ne_map_eq_of_card_lt` NAO aparecera nesta frente.
+- `complexity_status: NOT_FORMALIZED`; minimalidade de `mu` e de `lam`
+  **nao autorizadas**; `mathematical_novelty` e `algorithmic_novelty`
+  ambas `NONE`.
+
+### Not done
+
+- **0** arquivos Lean permanentes, **0** provas, **0** algoritmos
+  implementados, **0** `lake build`, **0** claims (ledger em **19**),
+  **0** arquivos de legado, **0** de `RH-NOGO-001`, **0** matematicos de
+  `FOUND-SEMIGROUP-002` e de `FOUND-FUNCTIONAL-GRAPH-001`. Sonda
+  temporaria **removida**.
+
+### Changed
+
+- `canonical_commit`: `49924c3` -> `ab79032`, no preflight.
+- `work_status` -> `READY`; `specification_status: READY_FOR_REVIEW`.
+- `authorized_action` ->
+  `FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED`
+  (`DEC-017`, uma entrada literal no allowlist, sem wildcard).
+
+### Result
+
+- `FOUND_CYCLE_DETECTION_001_SPECIFICATION_READY`. Vinte e um documentos,
+  dezenove lacunas, sete casos de teste, dez teoremas `CORE` e tres
+  `OPTIONAL_CORE`.
+
 ## PORTFOLIO-REVIEW-CYCLE-DETECTION - 2026-07-31
 
 ### Selected

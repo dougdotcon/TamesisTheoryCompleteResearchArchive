@@ -1,0 +1,84 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-CYCLE-DETECTION-001
+title: "Executable Cycle Detection for Finite Deterministic Systems"
+track: foundations
+work_status: READY
+specification_status: READY_FOR_REVIEW
+formalization_status: NOT_STARTED
+result_review: NOT_STARTED
+extension_status: NOT_AUTHORIZED
+
+updated_at: 2026-07-31
+specified_at_commit: ab79032062cddf195671208058820993cfaabe76
+
+primary_algorithm: BOUNDED_CERTIFICATE_SEARCH
+algorithm_frozen: true
+future_optimization: FLOYD
+reference_alternative: VISITED_TABLE
+deferred_algorithm: BRENT
+
+data_structure: CycleWitness
+data_structure_fields: 2
+data_structure_frozen: true
+rejected_fields:
+  - entryPoint
+  - provas embutidas
+  - isMinimal
+  - lista do ciclo
+
+executable_predicate: OPTION_A_DECIDE
+bool_predicate_status: NOT_NEEDED
+partial_detector: detectCycleWitness?
+public_api_v1_shape: Option
+total_wrapper_status: DEFERRED
+total_wrapper_reason: >
+  a condicao "#eval funcionar em tipos concretos" so pode ser verificada
+  implementando o detector, o que o gate de especificacao proibe
+
+termination: STRUCTURAL
+termination_mechanism: "List.find? sobre lista finita"
+fuel_used: false
+well_founded_recursion_used: false
+classical_choice_used: false
+classical_choose_used: false
+noncomputable_marked: false
+
+pigeonhole_reused_via: exists_bounded_iterate_collision
+pigeonhole_repeated: false
+
+hypotheses:
+  cycleCandidates: []
+  CycleWitness.Valid: ["Fintype X"]
+  detectCycleWitness?: ["Fintype X", "DecidableEq X"]
+  proposicionais: []
+decidable_eq_justified: true
+decidable_eq_scope: "somente o detector executavel"
+
+minimal_prefix_index: NOT_AUTHORIZED
+minimal_period: NOT_AUTHORIZED
+complexity_status: NOT_FORMALIZED
+asymptotic_optimality: NOT_CLAIMED
+extraction_status: READY_FOR_FEASIBILITY_AUDIT
+
+theorems_core: 10
+theorems_optional_core: 3
+tests_planned: 7
+gaps_total: 19
+gaps_resolved_by_design: 7
+gaps_open: 12
+
+mathematical_novelty: NONE
+algorithmic_novelty: NONE
+research_role: FORMAL_ALGORITHM_FOUNDATION
+evidence_level: NONE
+artifact_type: FORMAL_ALGORITHM_SPECIFICATION
+
+lean_files_created: 0
+lean_proofs_created: 0
+algorithm_implemented: false
+lake_build_executed: false
+claims_created: 0
+
+specification_root: "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/"
+decision_document: "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/SPECIFICATION_DECISION.md"
+authorized_action: FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED

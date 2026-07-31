@@ -305,10 +305,10 @@ def validate() -> dict[str, Any]:
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
     semigroup = item_by_id.get("FOUND-SEMIGROUP-001", {})
     if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001",
-                      "FOUND-SEMIGROUP-002"}:
+                      "FOUND-SEMIGROUP-002", "FOUND-FUNCTIONAL-GRAPH-001"}:
         errors.append(
-            "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001 "
-            "or FOUND-SEMIGROUP-002 as active_work_item"
+            "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
+            "FOUND-SEMIGROUP-002 or FOUND-FUNCTIONAL-GRAPH-001 as active_work_item"
         )
     if active == "FOUND-SEMIGROUP-001" and benchmark.get("status") != "VERIFIED":
         errors.append("FOUND-SEMIGROUP-001 cannot be active before LAB-BENCH-001 is VERIFIED")
@@ -316,6 +316,9 @@ def validate() -> dict[str, Any]:
         errors.append("RH-NOGO-001 cannot be active before FOUND-SEMIGROUP-001 is VERIFIED")
     if active == "FOUND-SEMIGROUP-002" and semigroup.get("status") != "VERIFIED":
         errors.append("FOUND-SEMIGROUP-002 cannot be active before FOUND-SEMIGROUP-001 is VERIFIED")
+    fs2 = item_by_id.get("FOUND-SEMIGROUP-002", {})
+    if active == "FOUND-FUNCTIONAL-GRAPH-001" and fs2.get("status") != "VERIFIED":
+        errors.append("FOUND-FUNCTIONAL-GRAPH-001 cannot be active before FOUND-SEMIGROUP-002 is VERIFIED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -336,7 +339,9 @@ def validate() -> dict[str, Any]:
         "FOUND_SEMIGROUP_002_SPECIFICATION_PREPARATION_AUTHORIZED",
         "FOUND_SEMIGROUP_002_FORMALIZATION_AUTHORIZED",
         "FOUND_SEMIGROUP_002_RESULT_REVIEW_AUTHORIZED",
-        "NO_ACTION_AUTHORIZED",
+        "PORTFOLIO_REVIEW_REQUIRED",
+        "PORTFOLIO_REVIEW_AUTHORIZED",
+        "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

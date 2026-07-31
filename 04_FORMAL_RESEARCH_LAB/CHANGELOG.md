@@ -1,5 +1,72 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW - 2026-07-31
+
+### Lock transition
+
+- **`NO_ACTION_AUTHORIZED` -> `PORTFOLIO_REVIEW_REQUIRED`**, atomicamente,
+  nos cinco pontos de governanca viva: allowlist do `labctl.py`,
+  `LAB_STATE`, `RESEARCH_QUEUE`, `STATUS.yaml` e `CLOSURE_RECORD.md` de
+  `FOUND-SEMIGROUP-002`. Motivo: o sufixo `_AUTHORIZED` convidava a ler a
+  trava como autorizacao.
+- **Registros historicos NAO foram reescritos** —
+  `found-semigroup-002-result-review.json`, `09_SESSIONS/` e este
+  changelog documentam o que aquele gate decidiu, com o nome que a trava
+  tinha entao. Uma busca futura ainda encontrara o nome antigo neles, e
+  isso eh correto.
+- A trava foi **satisfeita** neste mesmo gate, pela emissao explicita de
+  uma revisao de portfolio.
+
+### Decided
+
+- **`FOUND-FUNCTIONAL-GRAPH-001` selecionado** (Finite Functional Graph
+  Decomposition), track `foundations`, status `SCOPED`. Busca por
+  duplicata: **0 ocorrencias**.
+- Os seis itens `SCOPED` remanescentes foram reavaliados; **nenhum**
+  satisfaz simultaneamente infraestrutura Mathlib pronta, acesso alto a
+  contraexemplos e PoC em 30 dias. `TOE-INTERFACE-001` esta **bloqueado**:
+  depende formalmente de `RH-NOGO-001`, congelado.
+- **Resultado forte NAO autorizado**: a unicidade do ciclo por componente
+  depende de qual nocao de componente for adotada (`FFG-GAP-002`,
+  `FFG-GAP-004`). `strong_result_status:
+  NOT_AUTHORIZED_BEFORE_SPECIFICATION`.
+
+### Added
+
+- `01_PORTFOLIO/PORTFOLIO_REVIEW_2026_07_31.md` e
+  `01_PORTFOLIO/NEXT_WORK_ITEM_DECISION.md`.
+- Entrada `FOUND-FUNCTIONAL-GRAPH-001` em `RESEARCH_QUEUE.yaml` e cadeia
+  de fundacoes finitas em `GLOBAL_DEPENDENCY_GRAPH.md`.
+- Dez gaps iniciais `FFG-GAP-001..010` e cinco contraexemplos planejados
+  `FFG-CE-001..005`.
+
+### Changed
+
+- `canonical_commit`: `b4ce2551` -> `3f72ad0`, no preflight.
+- `active_work_item`: `FOUND-SEMIGROUP-002` -> `FOUND-FUNCTIONAL-GRAPH-001`.
+- `authorized_action` -> `FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `labctl`: sequencia de gates admite o novo item, com pre-condicao
+  `FOUND-SEMIGROUP-002 VERIFIED`.
+
+### Blocked
+
+- **`FOUND-FUNCTIONAL-GRAPH-001` NAO eh extensao de `FOUND-SEMIGROUP-002`**,
+  cujo `extension_status` permanece `NOT_AUTHORIZED`. A relacao eh de
+  reutilizacao de API verificada.
+- `mathematical_novelty: NONE`. Decomposicao "rho shape" de iteracao
+  finita eh material padrao.
+- `RH-NOGO-001` permanece `FROZEN_PARTIAL_RESULT`; **0** arquivos tocados.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** `lake build`, **0** claims
+  promovidas, **0** arquivos de legado, **0** arquivos matematicos de
+  `FOUND-SEMIGROUP-002`, **0** pastas de especificacao da nova frente.
+
+### Result
+
+- `PORTFOLIO_REVIEW_APPROVED_FUNCTIONAL_GRAPH_SELECTED`.
+
 ## FOUND-SEMIGROUP-002-RESULT-REVIEW - 2026-07-31
 
 ### Reviewed

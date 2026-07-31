@@ -1,0 +1,177 @@
+{
+  "gate": "PORTFOLIO_REVIEW",
+  "authorized_action": "PORTFOLIO_REVIEW_AUTHORIZED",
+  "executed_at": "2026-07-31T16:30:00-03:00",
+  "agent": "claude-opus-5",
+  "canonical_repository": "/home/linuxdev/projects/TamesisTheoryCompleteResearchArchive",
+
+  "commit_before": "3f72ad0cf19e523f5b714d2d078cd71f3e44c46f",
+  "canonical_commit_before": "b4ce2551cd9f3588030fc7281d7f8c7aa624bac3",
+  "canonical_commit_after_preflight": "3f72ad0cf19e523f5b714d2d078cd71f3e44c46f",
+  "canonical_ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS"
+  },
+
+  "lock_transition": {
+    "from": "NO_ACTION_AUTHORIZED",
+    "to": "PORTFOLIO_REVIEW_REQUIRED",
+    "reason": "o sufixo _AUTHORIZED convidava a ler a trava como autorizacao",
+    "atomic": true,
+    "coupled_points_updated": [
+      "10_TOOLS/labctl.py (allowlist literal)",
+      "LAB_STATE.md (authorized_action, prohibited_actions, corpo)",
+      "01_PORTFOLIO/RESEARCH_QUEUE.yaml (authorized_next_gate de FOUND-SEMIGROUP-002)",
+      "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/STATUS.yaml (next_gate)",
+      "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/CLOSURE_RECORD.md"
+    ],
+    "historical_records_preserved": [
+      "found-semigroup-002-result-review.json",
+      "09_SESSIONS/2026/*",
+      "CHANGELOG.md"
+    ],
+    "historical_preservation_reason": "sao registros do que aquele gate decidiu, com o nome que a trava tinha entao; reescreve-los falsificaria o historico",
+    "wildcard_added": false
+  },
+
+  "gate_authorization": "PORTFOLIO_REVIEW_AUTHORIZED",
+
+  "skills": [
+    "goal (lida como arquivo)", "matematica-pura", "engenharia-software",
+    "linguistica-computacional", "historia-digital"
+  ],
+
+  "queue_audit": {
+    "NS-PRESSURE-001": {"scientific_value": "MODERATE", "formalization_cost": "HIGH", "mathlib_readiness": "LOW", "dependency_risk": "HIGH", "counterexample_access": "MEDIUM", "poc_30_day_feasibility": "NO", "reason_not_selected": "analise de EDP e fluidos; sem infraestrutura Mathlib"},
+    "PVSNP-PHYS-001": {"scientific_value": "MODERATE", "formalization_cost": "MEDIUM", "mathlib_readiness": "MEDIUM", "dependency_risk": "HIGH", "counterexample_access": "HIGH", "poc_30_day_feasibility": "PARTIAL", "reason_not_selected": "o mais viavel dos seis, mas o modelo de computacao fisica eh ele proprio contencioso, e abrir frente vizinha a Clay logo apos congelar outra seria erro de portfolio"},
+    "YM-LIMIT-001": {"scientific_value": "MODERATE", "formalization_cost": "VERY_HIGH", "mathlib_readiness": "NONE", "dependency_risk": "VERY_HIGH", "counterexample_access": "MEDIUM", "poc_30_day_feasibility": "NO", "reason_not_selected": "QFT construtiva; custo de formalizacao e bibliografico ambos very_high"},
+    "HODGE-CDK-001": {"scientific_value": "MODERATE", "formalization_cost": "HIGH", "mathlib_readiness": "LOW", "dependency_risk": "HIGH", "counterexample_access": "MEDIUM", "poc_30_day_feasibility": "NO", "reason_not_selected": "geometria algebrica; custo bibliografico very_high, sem fontes auditadas"},
+    "BSD-HYP-MATRIX-001": {"scientific_value": "MODERATE", "formalization_cost": "HIGH", "mathlib_readiness": "LOW", "dependency_risk": "HIGH", "counterexample_access": "MEDIUM", "poc_30_day_feasibility": "NO", "reason_not_selected": "produto seria sobretudo bibliografico; RH-NOGO-001 mostrou que auditoria sem acesso as provas produz registro, nao resultado"},
+    "TOE-INTERFACE-001": {"scientific_value": "LOW", "formalization_cost": "VERY_HIGH", "mathlib_readiness": "NONE", "dependency_risk": "BLOCKING", "counterexample_access": "MEDIUM", "poc_30_day_feasibility": "NO", "reason_not_selected": "depende formalmente de RH-NOGO-001, congelado — dependencia BLOQUEANTE"}
+  },
+
+  "selected_target": {
+    "work_item_id": "FOUND-FUNCTIONAL-GRAPH-001",
+    "title": "Finite Functional Graph Decomposition",
+    "track": "foundations",
+    "status": "SCOPED",
+    "duplicate_found": false,
+    "duplicate_search": "functional graph / grafo funcional / FUNCTIONAL_GRAPH em todos os .yaml e .md: 0 ocorrencias"
+  },
+
+  "reused_dependencies": [
+    "exists_eventual_period", "exists_bounded_iterate_collision",
+    "periodic_tail_of_collision", "collision_propagates",
+    "Reachable (se instanciado com monoide livre de um gerador)",
+    "CE-001..CE-005 como referencia de estilo",
+    "Fintype, DecidableEq, decide, Function.iterate"
+  ],
+
+  "preliminary_scope": {
+    "data": "X : tipo finito; f : X -> X",
+    "concepts": [
+      "trajetoria", "alcancabilidade por iteracao", "alcancabilidade mutua",
+      "estado periodico", "estado eventualmente periodico", "estado transitorio",
+      "estado recorrente", "ciclo", "bacia de atracao", "distancia ate o ciclo",
+      "componente funcional"
+    ]
+  },
+  "structural_candidate": "Cada componente de um grafo funcional finito contem um ciclo dirigido, e todo estado do componente alcanca esse ciclo apos um numero finito de iteracoes.",
+  "strong_result": {
+    "statement": "Cada componente conexa possui exatamente um ciclo dirigido, com arvores direcionadas entrando nesse ciclo.",
+    "status": "NOT_AUTHORIZED_BEFORE_SPECIFICATION",
+    "reason": "a unicidade depende de qual nocao de componente for adotada; tres candidatos incompativeis (FFG-GAP-002, FFG-GAP-004)"
+  },
+
+  "initial_gaps": [
+    "FFG-GAP-001 representacao do grafo funcional sem dependencia excessiva da API de grafos",
+    "FFG-GAP-002 definicao correta de componente funcional",
+    "FFG-GAP-003 equivalencia entre alcancabilidade mutua e pertencimento ao mesmo ciclo",
+    "FFG-GAP-004 existencia versus unicidade do ciclo por componente",
+    "FFG-GAP-005 definicao de estado recorrente",
+    "FFG-GAP-006 definicao e limites da distancia ate o ciclo",
+    "FFG-GAP-007 representacao de arvores de entrada",
+    "FFG-GAP-008 dependencia de DecidableEq e escolhas finitas",
+    "FFG-GAP-009 reutilizacao da periodicidade eventual ja formalizada",
+    "FFG-GAP-010 fronteira entre teorema padrao e aplicacoes de software"
+  ],
+
+  "planned_counterexamples": {
+    "FFG-CE-001": "dois ciclos desconectados",
+    "FFG-CE-002": "cauda longa antes de ciclo",
+    "FFG-CE-003": "ciclo de comprimento maior que um",
+    "FFG-CE-004": "arvores distintas para o mesmo ciclo",
+    "FFG-CE-005": "mesma periodicidade, componentes diferentes",
+    "classification": "COUNTEREXAMPLE_TO_OVERGENERALIZATION"
+  },
+
+  "permitted_applications": [
+    "maquinas de estado", "workflows", "pipelines de processamento",
+    "parsers", "sistemas de retry", "deteccao de loops",
+    "jogos deterministicos finitos", "automatos", "agentes discretos",
+    "auditoria de transicoes"
+  ],
+  "integrations_created": 0,
+
+  "scientific_limits": {
+    "mathematical_novelty": "NONE",
+    "research_role": "FORMAL_FOUNDATION",
+    "forbidden_connections": [
+      "TRI", "TDTR", "teoria de tudo", "tempo fisico", "entropia fisica",
+      "mecanica quantica", "cosmologia", "Hipotese de Riemann",
+      "Hilbert-Polya", "qualquer conjectura Clay"
+    ],
+    "forbidden_claims": [
+      "nova lei universal", "nova teoria de dinamica",
+      "descoberta matematica", "descoberta fisica"
+    ]
+  },
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "lake_build_executed": false,
+  "scientific_claims_promoted": 0,
+  "physics_claims_promoted": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+
+  "governance_note": {
+    "labctl_gate_sequence_extended": "FOUND-FUNCTIONAL-GRAPH-001 acrescentado ao conjunto de active_work_item permitidos, com pre-condicao FOUND-SEMIGROUP-002 VERIFIED",
+    "reason": "labctl exige que active_work_item pertenca a um conjunto literal; sem isso, o estado final exigido pelo gate reprovaria a validacao"
+  },
+
+  "verification": {
+    "pytest": "9 passed",
+    "labctl_status": "PASS",
+    "labctl_validate": "PASS",
+    "canonical_commit_check": "PASS"
+  },
+
+  "decision": "A_PORTFOLIO_REVIEW_APPROVED_FUNCTIONAL_GRAPH_SELECTED",
+  "rh_nogo_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED"
+  },
+  "found_semigroup_002_state": {
+    "work_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED",
+    "mathematical_novelty": "NONE"
+  },
+  "new_item_state": {
+    "work_item_id": "FOUND-FUNCTIONAL-GRAPH-001",
+    "work_status": "SCOPED",
+    "current_blocker": null
+  },
+  "authorized_action_final": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "next_single_action": "Preparar a especificacao formal da decomposicao de grafos funcionais finitos, sem executar provas.",
+  "commit_after": null,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "PORTFOLIO_REVIEW_APPROVED_FUNCTIONAL_GRAPH_SELECTED"
+}

@@ -17,11 +17,16 @@ work_status: VERIFIED
 result_review: APPROVED
 extension_status: NOT_AUTHORIZED
 current_blocker: null
-authorized_action: NO_ACTION_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
 ```
 
-`NO_ACTION_AUTHORIZED` é uma **trava**, não uma autorização de execução.
+`PORTFOLIO_REVIEW_REQUIRED` é uma **trava**, não uma autorização de execução.
 Nenhum gate pode agir sob ela.
+
+Renomeada de `NO_ACTION_AUTHORIZED` no gate `PORTFOLIO_REVIEW` (2026-07-31): o
+sufixo `_AUTHORIZED` convidava à leitura de que fosse autorização. A
+trava foi **satisfeita** nesse mesmo gate, pela emissão explícita de
+uma revisão de portfólio.
 
 ## O que fica como fundação reutilizável
 

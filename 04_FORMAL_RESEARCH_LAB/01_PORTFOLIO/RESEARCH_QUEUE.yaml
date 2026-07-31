@@ -96,7 +96,7 @@ queue:
       alegacao fisica ou espectral
     priority_class: P1
     status: VERIFIED
-    authorized_next_gate: NO_ACTION_AUTHORIZED
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     result_review: APPROVED
     extension_status: NOT_AUTHORIZED
     closure_record: "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/CLOSURE_RECORD.md"
@@ -120,6 +120,51 @@ queue:
       exercitada (Fintype, Decidable, decide), tem acesso ALTO a
       contraexemplos por ser finito e decidivel, e reutiliza diretamente
       material VERIFIED.
+  - work_item_id: FOUND-FUNCTIONAL-GRAPH-001
+    title: "Finite Functional Graph Decomposition"
+    track: foundations
+    target_statement: >
+      Cada componente de um grafo funcional finito contem um ciclo dirigido,
+      e todo estado do componente alcanca esse ciclo apos um numero finito
+      de iteracoes.
+    expected_product: >
+      Definicoes de estado transitorio, recorrente, ciclo, bacia de atracao
+      e distancia ate o ciclo; teorema estrutural de decomposicao; e
+      contraexemplos a decomposicoes incorretas.
+    dependencies:
+      - LAB-BENCH-001
+      - FOUND-SEMIGROUP-001
+      - FOUND-SEMIGROUP-002
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/FiniteDynamics/"
+      - "02_FOUNDATIONS/03_SEMIGROUPS/FOUND_SEMIGROUP_002/PUBLIC_API.md"
+    formalization_cost: low_to_moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 3
+    external_dependency: none
+    cross_track_value: medium
+    stop_condition: >
+      adotar nocao de componente sem registrar a escolha; afirmar unicidade
+      do ciclo antes de FFG-GAP-002 e FFG-GAP-004 estarem resolvidos;
+      tratar a decomposicao como descoberta; conectar a TRI, TDTR, fisica ou
+      conjectura Clay
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    decision_document: "01_PORTFOLIO/NEXT_WORK_ITEM_DECISION.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_2026_07_31.md"
+    strong_result_status: NOT_AUTHORIZED_BEFORE_SPECIFICATION
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW. Nenhum dos seis itens
+      remanescentes satisfazia simultaneamente infraestrutura Mathlib
+      pronta, acesso alto a contraexemplos e PoC em 30 dias. Este item
+      reutiliza diretamente a API verificada de FOUND-SEMIGROUP-002, eh
+      finito e decidivel, e nao depende de fisica, PDE, analise espectral
+      nem de problema Clay. NAO eh extensao de FOUND-SEMIGROUP-002, cujo
+      extension_status permanece NOT_AUTHORIZED.
   - work_item_id: RH-NOGO-001
     title: "No-go espectral rigorosamente delimitado"
     track: millennium

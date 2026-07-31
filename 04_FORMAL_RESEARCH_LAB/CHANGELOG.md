@@ -1,5 +1,78 @@
 # Changelog do laboratório formal
 
+## FOUND-FUNCTIONAL-GRAPH-001-SPECIFICATION - 2026-07-31
+
+### Decided
+
+- **Componente funcional := classe de `EventuallyMeets`**
+  (`∃ m n, f^[m] x = f^[n] y`). **NAO** `MutuallyReachable`.
+  Contraexemplo decisivo `FFG-CE-004`: em `a→c, b→c, c→c`, os estados `a` e
+  `b` estao no mesmo componente e nenhum alcanca o outro;
+  `MutuallyReachable` separaria em tres classes o que eh uma estrutura so.
+- **Um unico nome**: `EventuallyMeets`. `SameFunctionalComponent` rejeitado
+  como segundo nome, **inclusive na forma `abbrev`**.
+- **Unicidade = igualdade de `Function.periodicOrbit`**, nao existencia de
+  um unico ponto periodico (`FFG-CE-005` refuta) nem representante
+  canonico. O objeto unico eh a ORBITA.
+- **Orientacao fixada**: o primeiro argumento de `EventuallyMeets` vai para
+  o lado esquerdo da igualdade de orbitas. Consistente em `FFG-CYCLE-001` e
+  `FFG-MAIN-001`.
+- Alvo `CORE_UNIQUE_CYCLE_WITH_ENTRY_BOUND`, com `mu < Fintype.card X`.
+
+### Added
+
+- Especificacao em
+  `02_FOUNDATIONS/04_FUNCTIONAL_GRAPHS/FOUND_FUNCTIONAL_GRAPH_001/`,
+  **16 artefatos**. Quinze teoremas candidatos, seis contraexemplos,
+  catorze gaps, catorze stop conditions.
+- `COMPONENT_NOTIONS.md` e `NOVELTY_BOUNDARY.md` sao **vinculantes**.
+
+### Verified (auditoria da Mathlib, por leitura da fonte)
+
+- `periodicPts f = { x | ∃ n > 0, IsPeriodicPt f n x }` — periodo positivo
+  **por definicao**, o que resolve a armadilha de `n = 0`.
+- `periodicOrbit : Cycle α` **SEM `DecidableEq`** — bloco de variaveis em
+  `Dynamics/PeriodicPts/Defs.lean:57`.
+- **`periodicOrbit` eh NONCOMPUTAVEL** (`noncomputable section`, 240-490):
+  `decide` indisponivel para igualdade de orbitas. Afeta os contraexemplos,
+  nao o nucleo. `FFG-GAP-011`.
+- `periodicOrbit_apply_iterate_eq` da `FFG-CYCLE-001` em **tres passos**,
+  sem aritmetica modular.
+- `mk_mem_periodicPts` eh o adaptador exato de `exists_eventual_period`.
+- **Zero `NOT_FOUND`**: toda a maquinaria de ciclos ja existe. O conteudo
+  matematico proprio desta frente eh menor que o da anterior; o valor eh de
+  API e integracao.
+
+### Corrected
+
+- **Previsao refutada**: `FFG-GAP-008` previa que `DecidableEq X`
+  provavelmente seria necessaria aqui. A leitura da fonte mostrou que
+  **nao eh** — o nucleo exige apenas `[Fintype X]`. Registrado como
+  refutacao explicita.
+- **Assinatura rejeitada**: a forma `∃ μ p : ℕ × X` de
+  `exists_recurrent_reachable` foi descartada por ser par artificial;
+  adotada a forma limpa recomendada pelo proprio gate.
+
+### Blocked
+
+- **Formalizacao NAO autorizada.** A proxima etapa eh a REVISAO da
+  especificacao, para que uma definicao inadequada de componente nao seja
+  congelada em Lean.
+- Diferidos: ponte `SimpleGraph` (`FFG-GAP-012`), arvores de entrada,
+  distancia minima, unicidade de `mu`, contagem de componentes.
+- `mathematical_novelty: NONE`. Decomposicao "forma rho" eh material padrao.
+- `RH-NOGO-001` permanece `FROZEN_PARTIAL_RESULT`; **0** arquivos tocados.
+- `FOUND-SEMIGROUP-002.extension_status` permanece `NOT_AUTHORIZED`.
+
+### Not done
+
+- **0** arquivos Lean, **0** provas, **0** `lake build`, **0** experimentos
+  Python, **0** claims promovidas (ledger em 18), **0** arquivos de legado.
+
+### Result
+
+- `FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_READY`.
+
 ## PORTFOLIO-REVIEW - 2026-07-31
 
 ### Lock transition

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-07-31T16:30:00-03:00
-canonical_commit: "3f72ad0cf19e523f5b714d2d078cd71f3e44c46f"
+canonical_commit: "df6adb93a3bf8c5570954c5a94b0701896be4877"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,14 +10,16 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-FUNCTIONAL-GRAPH-001"
-work_status: "SCOPED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 evidence_level: "F"
-last_verified_artifact: "portfolio-review-result.json"
+last_verified_artifact: "found-functional-graph-001-specification-result.json"
 current_blocker: null
 next_single_action: >
-  Preparar a especificação formal da decomposição de grafos
-  funcionais finitos, sem executar provas.
-authorized_action: "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar as definições de componente funcional, a unicidade
+  por periodicOrbit e a viabilidade das assinaturas antes de
+  autorizar formalização Lean.
+authorized_action: "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -36,7 +38,12 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 prohibited_actions:
-  - "Não formalizar FOUND-FUNCTIONAL-GRAPH-001 antes de sua especificação estar pronta"
+  - "Não formalizar FOUND-FUNCTIONAL-GRAPH-001 antes da REVISÃO da especificação"
+  - "Não definir componente funcional como MutuallyReachable (FFG-CE-004 refuta)"
+  - "Não formular unicidade como existência de um único ponto periódico (FFG-CE-005 refuta)"
+  - "Não importar SimpleGraph no núcleo (FFG-GAP-012 diferido)"
+  - "Não acrescentar DecidableEq X sem necessidade verificada — a auditoria mostrou que não é necessária"
+  - "Não criar instância global de Setoid, Preorder ou equivalência para EventuallyMeets"
   - "Não criar arquivos Lean sob a autorização atual"
   - "Não afirmar unicidade do ciclo por componente antes de FFG-GAP-002 e FFG-GAP-004"
   - "Não tratar FOUND-FUNCTIONAL-GRAPH-001 como extensão de FOUND-SEMIGROUP-002"
@@ -62,38 +69,58 @@ resume_read_order:
 # Estado atual
 
 ```text
-FOUND-FUNCTIONAL-GRAPH-001   SCOPED      ativo; so especificacao autorizada
-FOUND-SEMIGROUP-002          VERIFIED    encerrado, APPROVED, sem extensao
+FOUND-FUNCTIONAL-GRAPH-001   READY / especificacao READY_FOR_REVIEW
+FOUND-SEMIGROUP-002          VERIFIED / APPROVED / sem extensao
 RH-NOGO-001                  FROZEN_PARTIAL_RESULT
 ```
 
-## Frente selecionada
+**Formalização NÃO autorizada.** A próxima etapa é a **revisão** da
+especificação — precisamente para que uma definição inadequada de
+componente não seja congelada em Lean.
 
-**Grafos funcionais finitos**: `X` finito, `f : X → X`, cada estado com
-exatamente uma transição seguinte. A pergunta muda de escala em relação a
-`FOUND-SEMIGROUP-002` — lá era **uma trajetória**, aqui é a **estrutura
-global** do grafo.
+## A decisão que a especificação travou
 
-Resultado estrutural candidato:
+```text
+COMPONENTE FUNCIONAL := classe de EventuallyMeets
+                        (exists m n, f^[m] x = f^[n] y)
 
-> Cada componente contém um ciclo dirigido, e todo estado do componente
-> alcança esse ciclo após um número finito de iterações.
+NAO eh MutuallyReachable.
+```
 
-Consequência direta de `exists_eventual_period`, já verificado.
+Contraexemplo decisivo `FFG-CE-004`:
 
-O resultado **mais forte** — unicidade do ciclo por componente conexa —
-**não está autorizado** antes da especificação, porque depende de qual
-noção de "componente" for adotada (`FFG-GAP-002`, `FFG-GAP-004`).
+```text
+a → c
+b → c
+c → c
+```
 
-## Trava renomeada
+`a` e `b` estão no mesmo componente; nenhum alcança o outro.
 
-`NO_ACTION_AUTHORIZED` → `PORTFOLIO_REVIEW_REQUIRED`, atomicamente, nos
-pontos acoplados: allowlist do `labctl.py`, `LAB_STATE`, `RESEARCH_QUEUE`,
-`STATUS.yaml` e `CLOSURE_RECORD.md` de `FOUND-SEMIGROUP-002`.
+## Unicidade — leitura vinculante
 
-Registros históricos — o JSON de resultado da revisão anterior, as sessões
-e o changelog — **não** foram reescritos: eles documentam o que o gate
-daquele momento decidiu, com o nome que a trava tinha então.
+```text
+"um ciclo por componente" significa que todos os pontos periodicos do
+componente produzem a MESMA Function.periodicOrbit.
+
+NAO significa um unico ponto periodico  (FFG-CE-005 refuta).
+NAO significa representante canonico.
+NAO significa ponto fixo               (FFG-CE-003 refuta).
+```
+
+## Achados da auditoria da Mathlib
+
+```text
+periodicPts                 exige periodo positivo POR DEFINICAO
+periodicOrbit               Cycle a, SEM DecidableEq
+periodicOrbit               NONCOMPUTAVEL: decide indisponivel para orbitas
+periodicOrbit_apply_iterate_eq   da FFG-CYCLE-001 em tres passos
+mk_mem_periodicPts          adaptador exato de exists_eventual_period
+NOT_FOUND                   zero — toda a maquinaria de ciclos ja existe
+```
+
+Uma previsão do gate anterior foi **refutada**: `DecidableEq X` **não** é
+necessária no núcleo.
 
 ## Novidade
 
@@ -102,9 +129,8 @@ mathematical_novelty: NONE
 research_role: FORMAL_FOUNDATION
 ```
 
-Decomposição de grafos funcionais em ciclos com árvores de entrada é
-material padrão. O valor é formal e de reutilização.
+Decomposição "forma rho" da iteração finita é material padrão.
 
 ## Próxima ação
 
-Preparar a especificação. **Nenhuma prova. Nenhum arquivo Lean.**
+Revisar a especificação. **Nenhuma prova. Nenhum arquivo Lean.**

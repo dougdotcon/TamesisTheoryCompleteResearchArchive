@@ -1,0 +1,178 @@
+schema: tamesis-gap-register/1
+work_item_id: FOUND-FUNCTIONAL-GRAPH-001
+gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION
+note: >
+  Nenhum gap foi fechado por expectativa. Os marcados RESOLVED_BY_* foram
+  resolvidos por LEITURA da fonte fixada ou por DECISAO registrada, nao por
+  prova.
+
+gaps:
+  - gap_id: FFG-GAP-001
+    title: Representação do componente funcional
+    description: >
+      Escolher entre MutuallyReachable, EventuallyMeets e componente conexa
+      de SimpleGraph.
+    status: RESOLVED_BY_DESIGN_DECISION
+    resolution: >
+      EventuallyMeets no nucleo; SimpleGraph diferida. Decisao vinculante em
+      COMPONENT_NOTIONS.md, com o contraexemplo FFG-CE-004 refutando
+      MutuallyReachable.
+    severity: high
+    blocking: false
+
+  - gap_id: FFG-GAP-002
+    title: Prova de transitividade de EventuallyMeets
+    description: >
+      Alinhar duas iteradas da trajetoria intermediaria, com os dois casos
+      n1 <= m2 e m2 <= n1.
+    status: OPEN_SPECIFIED
+    severity: medium
+    blocking: false
+    note: >
+      Unico ponto de atrito real do nucleo. As testemunhas de ambos os casos
+      ja estao escritas em THEOREM_CANDIDATES.md; falta apenas executar,
+      com subtracao truncada de N normalizada por omega.
+
+  - gap_id: FFG-GAP-003
+    title: Diferença entre alcançabilidade mútua e componente funcional
+    description: >
+      Registrar que as duas relacoes sao distintas, e que o teorema
+      principal nao eh tautologico.
+    status: RESOLVED_BY_DESIGN_DECISION
+    resolution: >
+      FFG-CE-004 refuta a coincidencia. O argumento de nao tautologia esta
+      em COMPONENT_NOTIONS.md: EventuallyMeets nao produz ponto periodico —
+      isso vem da finitude, via exists_eventual_period.
+    severity: high
+    blocking: false
+
+  - gap_id: FFG-GAP-004
+    title: Unicidade do ciclo como igualdade de periodicOrbit
+    description: >
+      Formular unicidade sem escolher representante.
+    status: RESOLVED_BY_API_AUDIT
+    resolution: >
+      Function.periodicOrbit devolve Cycle X, quociente por rotacao, e
+      periodicOrbit_apply_iterate_eq garante invariancia ao avancar. A
+      unicidade eh igualdade de orbitas, nao de representantes. Significado
+      exato fixado em TARGET_RESULT.md, refutado o mal-entendido por
+      FFG-CE-005.
+    severity: high
+    blocking: false
+
+  - gap_id: FFG-GAP-005
+    title: Recorrência via periodicPts
+    description: "definir estado recorrente sem admitir n = 0"
+    status: RESOLVED_BY_API_AUDIT
+    resolution: >
+      Function.periodicPts f = { x | ∃ n > 0, IsPeriodicPt f n x } ja exige
+      periodo positivo POR DEFINICAO. Os aliases IsRecurrent/IsTransient
+      serao criados com equivalencia Iff.rfl, auditada em FFG-REC-000.
+    severity: medium
+    blocking: false
+
+  - gap_id: FFG-GAP-006
+    title: Distância mínima até o ciclo
+    status: OPEN_DEFERRED
+    severity: medium
+    blocking: false
+    note: >
+      Exige minimalidade de mu, adiada desde FSG2-GAP-004b, e provavelmente
+      DecidableEq X ou escolha nao computavel. NAO autorizada.
+
+  - gap_id: FFG-GAP-007
+    title: Representação de árvores de entrada
+    status: OPEN_DEFERRED
+    severity: medium
+    blocking: false
+    note: "NOT_AUTHORIZED neste ciclo; depende de FFG-GAP-006"
+
+  - gap_id: FFG-GAP-008
+    title: Necessidade real de DecidableEq
+    description: >
+      A previsao do gate de portfolio era de que DecidableEq X
+      provavelmente SERIA necessaria aqui.
+    status: RESOLVED_BY_API_AUDIT
+    resolution: >
+      PREVISAO REFUTADA para o nucleo. O bloco de variaveis de
+      Dynamics/PeriodicPts/Defs.lean:57 nao inclui DecidableEq, e nenhum
+      dos lemas de periodicOrbit usados a acrescenta. O nucleo deve exigir
+      apenas [Fintype X]. A previsao continua plausivel para os itens
+      adiados (distancia minima, algoritmos executaveis).
+    severity: medium
+    blocking: false
+
+  - gap_id: FFG-GAP-009
+    title: Reutilização de exists_eventual_period
+    status: RESOLVED_BY_DESIGN_DECISION
+    resolution: >
+      FFG-REC-002 consome exists_eventual_period diretamente, via
+      Function.mk_mem_periodicPts. O pigeonhole NAO eh reaplicado —
+      permanece com uso unico, em FOUND-SEMIGROUP-002.
+    severity: low
+    blocking: false
+
+  - gap_id: FFG-GAP-010
+    title: Fronteira entre teorema padrão e aplicações de software
+    status: RESOLVED_BY_BINDING_DOCUMENT
+    resolution: "NOVELTY_BOUNDARY.md, vinculante"
+    severity: informational
+    blocking: false
+
+  - gap_id: FFG-GAP-011
+    title: periodicOrbit API suitability
+    description: >
+      Verificar se Function.periodicOrbit serve como representacao do ciclo.
+    status: RESOLVED_BY_API_AUDIT_WITH_RESIDUAL
+    resolution: >
+      Serve, e sem exigir DecidableEq. Nenhuma estrutura local de ciclo
+      sera criada.
+    residual: >
+      periodicOrbit esta em noncomputable section (linhas 240-490), logo
+      `decide` NAO se aplica a igualdade de orbitas. Nao bloqueia o nucleo,
+      mas obriga os contraexemplos a usarem
+      periodicOrbit_apply_iterate_eq. Registrado no plano de contraexemplos.
+    severity: low
+    blocking: false
+
+  - gap_id: FFG-GAP-012
+    title: equivalence with weak SimpleGraph connectivity
+    description: >
+      Provar que as classes de EventuallyMeets coincidem com as componentes
+      conexas do grafo simples subjacente.
+    status: OPEN_DEFERRED
+    severity: medium
+    blocking: false
+    note: >
+      SimpleGraph existe (Combinatorics/SimpleGraph/Basic.lean:93), com
+      Reachable e ConnectedComponent em Connectivity/Connected.lean:52,390.
+      A direcao dificil eh a reciproca: um caminho NAO dirigido pode subir e
+      descer ramos varias vezes, exigindo inducao sobre Walk. Sem relacao
+      com o nucleo. DEFERRED_TO_GRAPH_BRIDGE.
+    binding_consequence: >
+      Enquanto a ponte nao existir, "componente" nesta frente significa
+      classe de EventuallyMeets, e nenhum texto pode afirmar que coincide
+      com componente conexa de grafo.
+
+  - gap_id: FFG-GAP-013
+    title: unique representative versus unique cycle object
+    status: RESOLVED_BY_BINDING_DOCUMENT
+    resolution: >
+      TARGET_RESULT.md fixa: o objeto unico eh Function.periodicOrbit f p,
+      NAO o representante p. FFG-CE-005 exibe dois pontos periodicos
+      distintos com a mesma orbita.
+    severity: high
+    blocking: false
+
+  - gap_id: FFG-GAP-014
+    title: bibliografia primária não auditada
+    description: >
+      Nenhuma fonte primaria sobre grafos funcionais ou "forma rho" foi
+      obtida ou auditada por este laboratorio.
+    status: NOT_AUDITED
+    severity: low
+    blocking: false
+    note: >
+      Herdado do padrao de FSG2-GAP-009. Consequencia vinculante: nenhuma
+      afirmacao de prioridade historica ou atribuicao a autor eh permitida.
+      Os resultados usados sao elementares e cobertos pela Mathlib.

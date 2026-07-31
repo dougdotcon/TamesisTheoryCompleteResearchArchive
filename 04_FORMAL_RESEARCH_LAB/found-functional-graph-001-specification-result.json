@@ -1,0 +1,164 @@
+{
+  "work_item": "FOUND-FUNCTIONAL-GRAPH-001",
+  "gate": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION",
+  "authorized_action": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "executed_at": "2026-07-31T17:40:00-03:00",
+  "agent": "claude-opus-5",
+
+  "commit_before": "df6adb93a3bf8c5570954c5a94b0701896be4877",
+  "canonical_commit_before": "3f72ad0cf19e523f5b714d2d078cd71f3e44c46f",
+  "canonical_commit_after_preflight": "df6adb93a3bf8c5570954c5a94b0701896be4877",
+  "ancestry_check": {
+    "cat_file_exit": 0,
+    "merge_base_is_ancestor_exit": 0,
+    "equality_with_head": true,
+    "verdict": "PASS",
+    "diagnostics_preserved": [
+      "CANONICAL_COMMIT_UNAVAILABLE",
+      "CANONICAL_COMMIT_NOT_ANCESTOR",
+      "CANONICAL_COMMIT_GIT_ERROR"
+    ]
+  },
+
+  "skills": [
+    "goal (lida como arquivo)", "matematica-pura", "engenharia-software",
+    "linguistica-computacional", "historia-digital"
+  ],
+
+  "prior_results_reused": [
+    "exists_eventual_period (FOUND-SEMIGROUP-002, VERIFIED)",
+    "exists_bounded_iterate_collision",
+    "periodic_tail_of_collision",
+    "collision_propagates"
+  ],
+  "pigeonhole_reapplied": false,
+
+  "definitions": {
+    "IterReachable": "∃ n : ℕ, f^[n] x = y",
+    "MutuallyReachable": "IterReachable f x y ∧ IterReachable f y x",
+    "EventuallyMeets": "∃ m n : ℕ, f^[m] x = f^[n] y",
+    "componentSet": "{y | EventuallyMeets f x y} : Set X",
+    "IsRecurrent": "x ∈ Function.periodicPts f",
+    "IsTransient": "¬ IsRecurrent f x"
+  },
+
+  "component_choice": {
+    "adopted": "EventuallyMeets",
+    "single_name": true,
+    "rejected_alias": "SameFunctionalComponent (inclusive como abbrev)",
+    "rejected_notion": "MutuallyReachable",
+    "rejection_counterexample": "FFG-CE-004: a→c, b→c, c→c — a e b no mesmo componente, nenhum alcanca o outro",
+    "deferred_notion": "SimpleGraph.ConnectedComponent",
+    "binding_document": "COMPONENT_NOTIONS.md",
+    "tautology_check": "EventuallyMeets nao produz ponto periodico; isso vem da finitude. Para X infinito (f n = n+1) o teorema principal eh FALSO."
+  },
+  "rejected_component_notions": ["MutuallyReachable", "SimpleGraph.ConnectedComponent (diferida)"],
+
+  "periodic_point_representation": "Function.periodicPts — exige ∃ n > 0 POR DEFINICAO",
+  "cycle_representation": "Function.periodicOrbit f p : Cycle X — quociente por rotacao, sem representante escolhido",
+
+  "main_target": {
+    "option": "CORE_UNIQUE_CYCLE_WITH_ENTRY_BOUND",
+    "theorems": ["FFG-MAIN-001", "FFG-MAIN-002"],
+    "uniqueness_meaning": "todos os pontos periodicos do componente produzem a MESMA periodicOrbit",
+    "uniqueness_is_not": [
+      "um unico ponto periodico por componente (FFG-CE-005 refuta)",
+      "representante canonico escolhido",
+      "todo componente termina em ponto fixo (FFG-CE-003 refuta)"
+    ],
+    "orbit_equality_orientation": "o primeiro argumento de EventuallyMeets vai para o lado esquerdo"
+  },
+  "entry_bound": "mu < Fintype.card X, em FFG-REC-002 e FFG-MAIN-002",
+  "rejected_signature": "∃ μ p : ℕ × X — par artificial; adotada a forma limpa ∃ mu, mu < card X ∧ f^[mu] x ∈ periodicPts f",
+
+  "mathlib_api": {
+    "API_FOUND": 12,
+    "PARTIAL_API": 1,
+    "NOT_FOUND": 0,
+    "NAME_UNCERTAIN": 0,
+    "NOT_NEEDED_IN_CORE": 4,
+    "DEFERRED_TO_GRAPH_BRIDGE": 3,
+    "key_findings": [
+      "periodicPts f = { x | ∃ n > 0, IsPeriodicPt f n x } — periodo positivo por definicao",
+      "periodicOrbit : Cycle α SEM DecidableEq (variaveis em Defs.lean:57)",
+      "periodicOrbit eh NONCOMPUTAVEL (noncomputable section 240-490): decide indisponivel",
+      "periodicOrbit_apply_iterate_eq da FFG-CYCLE-001 em 3 passos, sem aritmetica modular",
+      "mem_periodicOrbit_iff eh literalmente IterReachable para pontos periodicos",
+      "mk_mem_periodicPts eh o adaptador exato de exists_eventual_period",
+      "SimpleGraph existe (Basic.lean:93), Reachable e ConnectedComponent em Connectivity/Connected.lean:52,390"
+    ]
+  },
+
+  "decidable_eq_analysis": {
+    "propositional_layer": "nao exige",
+    "periodicOrbit_layer": "nao exige — verificado no bloco de variaveis",
+    "minimal_distance_layer": "provavelmente exigiria, mas esta ADIADA",
+    "core_requires": "[Fintype X] somente",
+    "earlier_prediction": "provavelmente SERIA necessaria aqui",
+    "prediction_status": "REFUTED_FOR_CORE",
+    "gap": "FFG-GAP-008"
+  },
+
+  "counterexamples": {
+    "FFG-CE-001": "a→a, b→b — refuta ciclo global unico",
+    "FFG-CE-002": "a→b→c→c — refuta periodicidade desde o inicio; refuta simetria de IterReachable",
+    "FFG-CE-003": "a→b→a — refuta que todo ciclo seja ponto fixo",
+    "FFG-CE-004": "a→c, b→c, c→c — refuta que mesmo componente implique alcancabilidade mutua (DECISIVO)",
+    "FFG-CE-005": "a→b→a — refuta um unico ponto periodico por componente; confirma igualdade de orbitas",
+    "FFG-CE-006": "a↔b, c↔d — refuta que mesmo periodo implique mesmo componente",
+    "method_constraint": "igualdade de periodicOrbit NAO pode usar decide (noncomputavel); usar periodicOrbit_apply_iterate_eq"
+  },
+
+  "gaps": {
+    "RESOLVED_BY_DESIGN_DECISION": ["FFG-GAP-001", "FFG-GAP-003", "FFG-GAP-009"],
+    "RESOLVED_BY_API_AUDIT": ["FFG-GAP-004", "FFG-GAP-005", "FFG-GAP-008", "FFG-GAP-011"],
+    "RESOLVED_BY_BINDING_DOCUMENT": ["FFG-GAP-010", "FFG-GAP-013"],
+    "OPEN_SPECIFIED": ["FFG-GAP-002"],
+    "OPEN_DEFERRED": ["FFG-GAP-006", "FFG-GAP-007", "FFG-GAP-012"],
+    "NOT_AUDITED": ["FFG-GAP-014"],
+    "total": 14
+  },
+
+  "stop_conditions": "STOP-001..014 em STOP_CONDITIONS.md; nenhuma disparada",
+
+  "novelty_boundary": {
+    "document": "NOVELTY_BOUNDARY.md",
+    "binding": true,
+    "mathematical_novelty": "NONE",
+    "research_role": "FORMAL_FOUNDATION",
+    "statement": "decomposicao de grafo funcional em ciclo mais trajetorias de entrada eh a forma rho da iteracao finita — material padrao"
+  },
+
+  "lean_files_created": 0,
+  "lean_proofs_created": 0,
+  "python_experiments_created": 0,
+  "lake_build_executed": false,
+  "claims_promoted": 0,
+  "claim_ledger_entries": 18,
+  "legacy_files_modified": 0,
+  "rh_nogo_touched": 0,
+  "found_semigroup_002_math_files_touched": 0,
+
+  "rh_nogo_state": {
+    "work_status": "FROZEN_PARTIAL_RESULT",
+    "authorization_state": "NOT_AUTHORIZED",
+    "execution_state": "NO_EXECUTION",
+    "concrete_layer_status": "DEFERRED"
+  },
+  "found_semigroup_002_state": {
+    "work_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED"
+  },
+
+  "decision": "A_FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_READY",
+  "work_status_final": "READY",
+  "specification_status": "READY_FOR_REVIEW",
+  "authorized_action_final": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED",
+  "formalization_authorized": false,
+  "next_single_action": "Revisar as definicoes de componente funcional, a unicidade por periodicOrbit e a viabilidade das assinaturas antes de autorizar formalizacao Lean.",
+  "commit_after": null,
+  "working_tree": "clean",
+  "operational_status": "GATE_COMPLETED_LABORATORY_IDLE",
+  "final_status": "FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_READY"
+}

@@ -1,0 +1,136 @@
+work_item_id: FOUND-FUNCTIONAL-GRAPH-001
+title: "Finite Functional Graph Decomposition"
+work_status: READY
+specification_status: READY_FOR_REVIEW
+evidence_level: F
+gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_PREPARATION
+artifact_type: FORMAL_SPECIFICATION
+scientific_value: FOUNDATIONAL_SPECIFICATION_ONLY
+mathematical_novelty: NONE
+research_role: FORMAL_FOUNDATION
+
+data:
+  X: "tipo finito"
+  f: "X -> X"
+
+relations:
+  IterReachable: "exists n, f^[n] x = y — alcancabilidade dirigida"
+  MutuallyReachable: "vai e volta — identifica o CICLO, nao o componente"
+  EventuallyMeets: "exists m n, f^[m] x = f^[n] y — COMPONENTE FUNCIONAL"
+
+component_decision:
+  adopted: EventuallyMeets
+  rejected: MutuallyReachable
+  deferred: "SimpleGraph.ConnectedComponent"
+  binding_document: "COMPONENT_NOTIONS.md"
+  decisive_counterexample: FFG-CE-004
+  naming: >
+    uma unica definicao, EventuallyMeets. SameFunctionalComponent rejeitado
+    como segundo nome, inclusive na forma abbrev.
+
+main_target: FFG-MAIN-001
+main_target_option: CORE_UNIQUE_CYCLE_WITH_ENTRY_BOUND
+uniqueness_meaning: >
+  todos os pontos periodicos do componente produzem a MESMA
+  Function.periodicOrbit. NAO significa unico ponto periodico, NAO significa
+  representante canonico, NAO significa ponto fixo.
+orbit_equality_orientation: >
+  o primeiro argumento de EventuallyMeets vai para o lado esquerdo
+
+theorem_candidates:
+  CORE:
+    - FFG-REACH-001
+    - FFG-REACH-002
+    - FFG-MEET-001
+    - FFG-MEET-002
+    - FFG-MEET-003
+    - FFG-REC-001
+    - FFG-REC-002
+    - FFG-CYCLE-001
+    - FFG-MAIN-001
+    - FFG-MAIN-002
+  COROLLARY:
+    - FFG-MEET-004
+    - FFG-COMP-001
+    - FFG-COMP-002
+    - FFG-REC-000
+  OPTIONAL:
+    - FFG-CYCLE-002
+theorem_candidate_count: 15
+
+counterexamples:
+  - FFG-CE-001
+  - FFG-CE-002
+  - FFG-CE-003
+  - FFG-CE-004
+  - FFG-CE-005
+  - FFG-CE-006
+
+mathlib_audit:
+  API_FOUND: 12
+  PARTIAL_API: 1
+  NOT_FOUND: 0
+  NAME_UNCERTAIN: 0
+  NOT_NEEDED_IN_CORE: 4
+  DEFERRED_TO_GRAPH_BRIDGE: 3
+  key_findings:
+    - "periodicPts exige periodo positivo POR DEFINICAO"
+    - "periodicOrbit : Cycle a, SEM DecidableEq"
+    - "periodicOrbit eh NONCOMPUTAVEL: decide indisponivel para igualdade de orbitas"
+    - "periodicOrbit_apply_iterate_eq da FFG-CYCLE-001 em tres passos, sem aritmetica modular"
+    - "mem_periodicOrbit_iff eh literalmente IterReachable para pontos periodicos"
+    - "mk_mem_periodicPts eh o adaptador exato de exists_eventual_period"
+
+decidable_eq_decision:
+  core_requires: "[Fintype X] somente"
+  decidable_eq_needed: false
+  earlier_prediction: "provavelmente necessaria"
+  prediction_status: REFUTED_FOR_CORE
+  still_plausible_for: ["distancia minima", "algoritmos executaveis"]
+
+deferred:
+  weak_graph_component_bridge: DEFERRED
+  unique_directed_cycle_in_simple_graph_component: NOT_AUTHORIZED
+  incoming_tree_decomposition: NOT_AUTHORIZED
+  canonical_tail_cycle_decomposition: NOT_AUTHORIZED
+  minimal_entry_time: NOT_AUTHORIZED
+
+executed_in_this_gate:
+  lean_files_created: 0
+  lean_proofs_created: 0
+  lake_builds: 0
+  python_experiments_created: 0
+  claims_promoted: 0
+  legacy_files_modified: 0
+
+depends_on:
+  FOUND-SEMIGROUP-002:
+    status: VERIFIED
+    relation: "reutilizacao de API verificada, NAO extensao de escopo"
+    extension_status_preserved: NOT_AUTHORIZED
+
+open_gaps:
+  - "FFG-GAP-002: transitividade de EventuallyMeets, dois casos"
+  - "FFG-GAP-006: distancia minima ate o ciclo — DEFERRED"
+  - "FFG-GAP-007: arvores de entrada — DEFERRED"
+  - "FFG-GAP-012: ponte com SimpleGraph — DEFERRED"
+  - "FFG-GAP-014: bibliografia primaria NOT_AUDITED"
+resolved_gaps:
+  - "FFG-GAP-001: RESOLVED_BY_DESIGN_DECISION"
+  - "FFG-GAP-003: RESOLVED_BY_DESIGN_DECISION"
+  - "FFG-GAP-004: RESOLVED_BY_API_AUDIT"
+  - "FFG-GAP-005: RESOLVED_BY_API_AUDIT"
+  - "FFG-GAP-008: RESOLVED_BY_API_AUDIT (previsao refutada)"
+  - "FFG-GAP-009: RESOLVED_BY_DESIGN_DECISION"
+  - "FFG-GAP-010: RESOLVED_BY_BINDING_DOCUMENT"
+  - "FFG-GAP-011: RESOLVED_BY_API_AUDIT_WITH_RESIDUAL"
+  - "FFG-GAP-013: RESOLVED_BY_BINDING_DOCUMENT"
+
+next_gate: FOUND_FUNCTIONAL_GRAPH_001_SPECIFICATION_REVIEW_AUTHORIZED
+
+note: >
+  Especificacao apenas. Nenhuma prova, nenhum arquivo Lean, nenhum build.
+  A formalizacao NAO esta autorizada: a proxima etapa eh a REVISAO da
+  especificacao, para que uma definicao inadequada de componente nao seja
+  congelada em Lean. Decomposicao de grafo funcional eh material padrao;
+  ver NOVELTY_BOUNDARY.md, vinculante.

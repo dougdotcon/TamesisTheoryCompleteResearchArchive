@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T18:10:00-03:00
-canonical_commit: "4c15d4aded3ba706efd24c169a2a5a137eebaf5b"
+updated_at: 2026-08-01T21:00:00-03:00
+canonical_commit: "2066edc165ace0fbf4e183303e30c4ced246aaaa"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,21 +11,21 @@ repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-ENCODING-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
+specification_status: "APPROVED"
+specification_review: "APPROVED"
 formalization_status: "NOT_STARTED"
 extraction_status: "NOT_AUTHORIZED"
 cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-encoding-001-specification-result.json"
+last_verified_artifact: "eng-finite-state-encoding-001-specification-review-result.json"
 current_blocker: null
 next_single_action: >
-  Revisar a representação da codificação, a construção por
-  Array.ofFn, a política centralizada de casts, a comutação das
-  iterações e a interpretação tipada do CycleWitness antes de
-  autorizar qualquer formalização.
-authorized_action: "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar a codificação certificada, a construção única da
+  tabela, a política centralizada de casts, as comutações de
+  passo e iterações e a soundness e completeness tipadas.
+authorized_action: "ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -85,7 +85,11 @@ governance_rules:
     Não assumir sucesso a partir de saída truncada. Toda etapa de patch
     termina com verificação independente do efeito.
 prohibited_actions:
-  - "Não criar arquivos Lean sob a autorização atual"
+  - "Não desviar das assinaturas congeladas nos documentos FINAL_* sem gate próprio"
+  - "Não afirmar invariância do witness concreto sob recodificação: ENC-GAP-020"
+  - "Não tornar buildTransitionTable_getElem público: é INTERNAL_HELPER"
+  - "Não provar table_step_commutes diretamente: ele é o .symm da semiconjugação"
+  - "Não abrir frente para remover propext, Classical.choice ou Quot.sound infraestruturais"
   - "Não derivar a codificação de Fintype: equivFin é noncomputable e truncEquivFin não produz dado"
   - "Não criar um terceiro ponto de transporte Fin n ↔ Fin table.next.size"
   - "Não usar encode_decode onde decode_encode é a lei semanticamente necessária"

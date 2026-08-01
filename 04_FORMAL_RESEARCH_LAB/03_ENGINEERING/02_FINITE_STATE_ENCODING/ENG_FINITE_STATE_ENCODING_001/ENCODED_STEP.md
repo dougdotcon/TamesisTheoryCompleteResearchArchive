@@ -42,3 +42,19 @@ justification: >
 Foi avaliado torná-lo `INTERNAL_HELPER`, como o gate pede. A conclusão é
 que ele **precisa** ser público — mas apenas por isso, e o documento
 registra a razão para que a revisão possa contestá-la.
+
+
+---
+
+## Revisão — `2066edc`
+
+Classificação **confirmada** como `PUBLIC_EXECUTABLE_CORE`, mas com
+justificativa **substituída**.
+
+A razão dada aqui — *"aparece no enunciado de `buildTransitionTable_getElem`,
+que é público"* — deixou de valer: a revisão tornou aquele auxiliar
+interno. A razão vigente está em `FINAL_PUBLIC_API.md`: com o auxiliar
+interno, `encodedStep` é o **único nome público capaz de descrever o
+conteúdo da tabela**.
+
+Medido na revisão: `encodedStep` **não depende de axioma nenhum**.

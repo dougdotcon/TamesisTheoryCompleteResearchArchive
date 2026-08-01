@@ -67,3 +67,15 @@ Descoberta no gate de portfólio, ela transforma a comutação de iteradas —
 que na frente anterior custou uma indução com dois `show` e uma escolha
 delicada entre `iterate_succ_apply` e sua variante — em **um termo de uma
 linha**.
+
+
+---
+
+## Revisão — `2066edc`
+
+**Superado** por `FINAL_COMMUTATION_THEOREMS.md`.
+
+A revisão inverteu os papéis: a semiconjugação passa a ser **provada
+diretamente** e a comutação de um passo passa a ser seu `.symm`. O
+argumento deste documento — de que as duas devem coexistir — foi mantido;
+o que mudou foi qual delas é o teorema e qual é o corolário.

@@ -125,3 +125,16 @@ segunda funcao de execucao      NAO existe
 novo tipo de erro               NAO existe
 CLI, parser, JSON, IO           NAO existem
 ```
+
+
+---
+
+## Revisão — `2066edc`
+
+Este documento é **superado** por `FINAL_PUBLIC_API.md`. Registro
+preservado para histórico.
+
+Mudanças da revisão: `tableIndex_semiconj` passa a teorema semântico
+principal; `table_step_commutes` passa a `PUBLIC_COROLLARY`;
+`buildTransitionTable_getElem` passa a `INTERNAL_HELPER`; `tableIndex_val`
+recebe `@[simp]`. Declarações públicas: `16 → 14`.

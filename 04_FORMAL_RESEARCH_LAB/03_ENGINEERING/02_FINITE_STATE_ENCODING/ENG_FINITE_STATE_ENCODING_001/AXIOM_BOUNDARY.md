@@ -61,3 +61,18 @@ e a camada de validação ficava em `[propext, Quot.sound]`. Aqui a pegada
 é mais pesada desde o início, e a causa é única: `Array.getElem_ofFn`.
 Não é uma degradação da qualidade da prova; é o custo de trocar uma
 verificação de limites por uma construção indexada.
+
+
+---
+
+## Revisão — `2066edc`
+
+**Superado** por `AXIOM_FOOTPRINT_REVIEW.md`.
+
+Correção material: este documento afirmava pegada uniforme nas treze
+declarações. A revisão mediu que `encode_injective`, `encode_surjective`
+e `encodedStep` **não dependem de axioma nenhum**, e que a primeira
+declaração a carregar `[propext, Classical.choice, Quot.sound]` é
+`buildTransitionTable`, pelo campo `closed` via `Array.getElem_ofFn`.
+
+Decisão: `ACCEPT_INFRASTRUCTURAL_AXIOM_FOOTPRINT`.

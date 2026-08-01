@@ -67,3 +67,14 @@ de formalização. Registrados aqui apenas como plano.
 Lição herdada de `CD-GAP-018` e `RT-GAP-018`: um teste que importa a raiz
 `TamesisLab` **não** pode ser registrado em `TamesisLab.lean` — o import
 seria circular.
+
+
+---
+
+## Revisão — `2066edc`
+
+Reconfirmado: **um único import**, `TamesisLab.Engineering.FiniteStateRuntime`,
+mais `open TamesisLab.Engineering.FiniteStateRuntime` e
+`open TamesisLab.Foundations.CycleDetection`. O segundo `open` é
+necessário para nomear `CycleWitness` no enunciado de
+`analyzeEncodedSystem`.

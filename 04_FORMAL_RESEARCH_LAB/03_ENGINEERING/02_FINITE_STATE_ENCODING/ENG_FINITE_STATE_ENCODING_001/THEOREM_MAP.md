@@ -74,3 +74,17 @@ definicoes    4
 teoremas     12
 linhas       cerca de 260, contra 869 da frente anterior
 ```
+
+
+---
+
+## Revisão — `2066edc`
+
+Reclassificações: `ENC-CORE-008` (`table_step_commutes`) passa a
+`PUBLIC_COROLLARY`; `ENC-CORE-008b` (`tableIndex_semiconj`) passa a
+teorema semântico principal; `ENC-CORE-005b`
+(`buildTransitionTable_getElem`) passa a `INTERNAL_HELPER`.
+
+Todos os treze resultados CORE foram **reprovados** no probe de revisão,
+agora com a nova ordem de dependência: a semiconjugação é provada, e a
+comutação de um passo é derivada dela.

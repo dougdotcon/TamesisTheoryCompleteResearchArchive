@@ -1,5 +1,59 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-ENCODING-001-SPECIFICATION-REVIEW - 2026-08-01
+
+### Decided
+
+- **`encode_decode` fica** — e a auditoria mostrou por que **nao** era o
+  motivo suposto. O probe contem uma seccao `WeakEncoding` com apenas
+  `decode_encode`, e nela a cadeia inteira, ate a soundness tipada,
+  **compila**. Logo `encode_decode` nao eh dependencia de prova de nenhum
+  resultado CORE: ela eh o **contrato publico** de que todo indice de
+  `Fin n` eh um estado real e a tabela representa exatamente o sistema.
+- **`encodedStep` eh `PUBLIC_EXECUTABLE_CORE`**, com justificativa nova: a
+  revisao tornou `buildTransitionTable_getElem` interno, e sem ele
+  `encodedStep` passa a ser o unico nome publico capaz de descrever o
+  conteudo da tabela.
+- **`ACCEPT_INFRASTRUCTURAL_AXIOM_FOOTPRINT`.**
+
+### Measured
+
+- `encode_injective`, `encode_surjective` e `encodedStep` **nao dependem
+  de axioma nenhum**. A primeira declaracao a carregar
+  `[propext, Classical.choice, Quot.sound]` eh `buildTransitionTable`,
+  pelo campo `closed` via `Array.getElem_ofFn`. Isto **corrige** a
+  afirmacao de pegada uniforme feita na especificacao.
+- Rota leve tentada e **medida como inviavel**:
+  `(Array.ofFn f).size = n := rfl` falha com *"Not a definitional
+  equality"* para `n` generico, e passa apenas com tamanho literal.
+- Argumento decisivo: `analyzeTransitionTable` **ja carrega os tres
+  axiomas**. Uma prova de `closed` mais leve nao mudaria nada a jusante.
+
+### Corrected
+
+- `tableIndex_semiconj` passa a **teorema semantico principal**, provado
+  diretamente; `table_step_commutes` passa a `PUBLIC_COROLLARY`, um
+  `.symm` de uma linha. A especificacao previa o inverso.
+- `buildTransitionTable_getElem` passa a `INTERNAL_HELPER`.
+- `tableIndex_val` recebe `@[simp]`.
+- Declaracoes movidas para o namespace `CertifiedFiniteEncoding`.
+- Declaracoes publicas: `16 -> 14`.
+
+### Bounded
+
+- Novo `ENC-GAP-020` e `STOP-ENC-019`: **nao** se afirma invariancia do
+  witness concreto sob recodificacao. Medido: `#[1,2,3,2]` contra
+  `#[1,0,1,2]`; os witnesses coincidiram em `⟨2,2⟩` — **coincidencia
+  observada, nao teorema**.
+
+### Locked
+
+- `specification_status: APPROVED`;
+  `authorized_action: ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED`.
+  Uma entrada literal, sem wildcard. `0` arquivos Lean permanentes, `0`
+  provas permanentes, `lake build` **nao** executado, `21` claims intactas.
+
+
 ## ENG-FINITE-STATE-ENCODING-001-SPECIFICATION - 2026-08-01
 
 ### Specified

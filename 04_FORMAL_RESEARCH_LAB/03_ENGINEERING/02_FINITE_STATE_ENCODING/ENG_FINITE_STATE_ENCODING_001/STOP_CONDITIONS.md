@@ -54,3 +54,17 @@ As quatro mais próximas de disparar, e por que não dispararam:
 ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_BLOCKED
 e parar.
 ```
+
+
+---
+
+## Revisão — `2066edc`
+
+Acrescentada:
+
+```text
+STOP-ENC-019  witness concreto declarado invariavel sob recodificacao
+              sem prova
+```
+
+Total: **19** stop conditions, **zero** disparadas na revisão.

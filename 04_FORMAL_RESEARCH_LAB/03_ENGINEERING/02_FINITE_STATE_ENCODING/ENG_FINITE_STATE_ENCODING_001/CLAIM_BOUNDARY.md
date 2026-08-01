@@ -63,3 +63,15 @@ codificação errada produziria um certificado incorreto. O certificado da
 frente anterior é, e continua sendo, correto sobre o seu objeto. O que
 faltava — e o que esta frente fornece, no recorte tipado — é a ponte
 entre esse objeto e o sistema pretendido.
+
+
+---
+
+## Revisão — `2066edc`
+
+Nenhuma claim promovida. O ledger permanece com **21**.
+`CERTIFIED-FINITE-STATE-ENCODING-FORMAL-001` continua
+`CANDIDATE_NOT_PROMOTED`, `evidence_level: NONE`.
+
+Acrescentado à wording proibida: **invariância do witness concreto sob
+recodificação**.

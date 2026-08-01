@@ -100,3 +100,15 @@ nao modifica o runtime adapter nem o detector;
 nao apresenta algoritmo novo;
 nao apresenta novidade matematica.
 ```
+
+
+---
+
+## Revisão — `2066edc`
+
+`specification_status: APPROVED`. Documentos da frente: **39**.
+
+Ordem de leitura vigente após a revisão: começar por
+`SPECIFICATION_REVIEW.md` e `REVIEW_DECISION.md`, depois os seis
+`FINAL_*`, e só então os documentos de especificação, que permanecem como
+registro histórico.

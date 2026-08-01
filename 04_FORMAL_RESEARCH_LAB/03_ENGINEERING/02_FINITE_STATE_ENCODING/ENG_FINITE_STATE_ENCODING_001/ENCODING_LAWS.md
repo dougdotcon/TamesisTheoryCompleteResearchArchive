@@ -80,3 +80,13 @@ DecidableEq S nao eh exigida em lugar nenhum.
 
 As leis são proposicionais. A execução não compara estados de `S`; ela
 compara índices de `Fin n`, cuja decidibilidade já existe.
+
+
+---
+
+## Revisão — `2066edc`
+
+Confirmado que `decode_encode` é a lei da comutação. Acrescentado pela
+revisão: `encode_surjective`, provado por
+`Function.RightInverse.surjective` **sem axiomas**, é a consequência que
+exprime o contrato de `encode_decode`. Permanece `DEFERRED_OPTIONAL`.

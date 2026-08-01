@@ -54,3 +54,14 @@ CertifiedFiniteEncoding     S <-> Fin n, com as duas leis
 As duas primeiras existem e não mudam. A terceira é o que esta frente
 acrescenta, e ela **não** substitui nenhuma delas: `validateTransitionTable`
 continua sendo a porta para dados não confiáveis.
+
+
+---
+
+## Revisão — `2066edc`
+
+**Superado** por `FINAL_DATA_MODEL.md`. A estrutura não mudou; o que a
+revisão acrescentou foi a auditoria separada das duas leis, com a seção
+`WeakEncoding` do probe demonstrando que `encode_decode` **não** é
+dependência de prova de nenhum resultado CORE — e a decisão de mantê-la
+mesmo assim, por ser o contrato público.

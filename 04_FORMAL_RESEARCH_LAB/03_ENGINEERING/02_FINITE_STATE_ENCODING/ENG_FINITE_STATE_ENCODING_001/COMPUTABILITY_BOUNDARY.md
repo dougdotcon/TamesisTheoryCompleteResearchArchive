@@ -67,3 +67,13 @@ integration_status: NOT_AUTHORIZED
 Nenhum binário, alvo Lake, `main`, `IO`, arquivo, JSON, servidor ou API
 externa. A computabilidade interna é **pré-condição** para uma futura
 extração; ela não é extração, e não a autoriza.
+
+
+---
+
+## Revisão — `2066edc`
+
+**Superado** por `COMPUTABILITY_REVIEW.md`. Nenhuma conclusão foi
+alterada; a revisão acrescentou a distinção explícita entre axioma usado
+por prova e escolha clássica produzindo dado, com contagem zero para a
+segunda.

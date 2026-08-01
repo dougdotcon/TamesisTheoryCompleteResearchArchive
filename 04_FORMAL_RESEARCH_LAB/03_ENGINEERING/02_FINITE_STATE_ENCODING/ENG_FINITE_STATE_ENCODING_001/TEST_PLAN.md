@@ -96,3 +96,18 @@ sem afirmacao de desempenho.
 ```
 
 Mesma política das duas frentes anteriores.
+
+
+---
+
+## Revisão — `2066edc`
+
+Os oito testes foram **reexecutados** no probe de revisão, com os mesmos
+resultados. Acrescentados dois: a soundness aplicada concretamente ao
+sistema de quatro estados sob codificação permutada, e a exclusão de erro
+nas duas formas exigidas — para um `err` concreto e pelo teorema
+universal.
+
+Registrado, e **não** elevado a teorema: os witnesses das codificações
+identidade e permutada coincidiram em `⟨2,2⟩`. Coincidência observada.
+Ver `ENC-GAP-020`.

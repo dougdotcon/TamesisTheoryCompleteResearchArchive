@@ -195,3 +195,32 @@ Todas as assinaturas acima foram lidas de `#check` ou do arquivo-fonte no
 checkout. Duas suposições iniciais foram **refutadas** pelo probe: que
 `Array.getElem_ofFn` casaria com índice `Fin`, e que `Except.noConfusion`
 se aplicaria diretamente.
+
+
+---
+
+## Revisão — `2066edc`
+
+Medições acrescentadas pela revisão:
+
+```text
+Array.ofFn                       [propext]
+Array.size_ofFn                  [propext]
+Array.getElem_ofFn               [propext, Classical.choice, Quot.sound]
+Fin.cast                         NENHUM
+Fin.ext                          NENHUM
+Option.some.inj                  NENHUM
+Function.LeftInverse.injective   NENHUM
+Function.RightInverse.surjective NENHUM
+Function.Semiconj.iterate_right  [propext]
+
+ValidatedTransitionTable.step                  [propext, Quot.sound]
+ValidatedTransitionTable.toRaw_valid           [propext, Quot.sound]
+ValidatedTransitionTable.run?_eq_iterate_step  [propext, Quot.sound]
+analyzeTransitionTable                         [propext, Classical.choice, Quot.sound]
+analyzeTransitionTable_sound                   [propext, Classical.choice, Quot.sound]
+analyzeTransitionTable_complete                [propext, Classical.choice, Quot.sound]
+```
+
+`Array.size_ofFn` e `Array.getElem_ofFn` continuam **inacessíveis por
+`rfl`** para `n` genérico; passam apenas com tamanho literal.

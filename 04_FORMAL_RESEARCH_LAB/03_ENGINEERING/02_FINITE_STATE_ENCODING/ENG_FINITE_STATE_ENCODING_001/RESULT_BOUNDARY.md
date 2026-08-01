@@ -93,3 +93,22 @@ passando por um Array Nat que ela mesma constroi e prova correto.
 E o que continua faltando, dito sem rodeio: **de onde vem o objeto
 tipado**. Essa pergunta pertence a quem modela o sistema, e nenhuma
 frente formal a responde por ele.
+
+
+---
+
+## Revisão — `2066edc`
+
+Fronteira **inalterada**. Acrescentado um limite explícito:
+
+```yaml
+encoding_invariance_of_concrete_witness:
+  status: OPEN_DEFERRED
+  gap: ENC-GAP-020
+```
+
+A validade **semântica** do witness no sistema tipado é preservada por
+qualquer codificação correta — isso é `analyzeEncodedSystem_sound`. Não
+foi provado que duas codificações diferentes produzam o mesmo `Array`, o
+mesmo `baseIndex`, o mesmo `period` ou o mesmo primeiro witness segundo a
+ordem da busca.

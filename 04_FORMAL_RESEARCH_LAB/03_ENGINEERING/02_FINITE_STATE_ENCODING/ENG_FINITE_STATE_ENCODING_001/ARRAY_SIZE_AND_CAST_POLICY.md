@@ -84,3 +84,16 @@ modulo, clamp, fallback
 
 Se a formalização precisar de um terceiro ponto de transporte,
 `STOP-ENC-005` dispara e a frente para.
+
+
+---
+
+## Revisão — `2066edc`
+
+**Superado** por `FINAL_CAST_POLICY.md`.
+
+Confirmado: dois pontos de transporte, orientação `size = n`,
+`tableIndex_val` por `rfl`. Acrescentado pela revisão: `@[simp]` em
+`tableIndex_val`, e a medição explícita de que
+`(Array.ofFn f).size` **não** é definicionalmente igual a `n` para `n`
+genérico — erro reproduzido no probe de axiomas.

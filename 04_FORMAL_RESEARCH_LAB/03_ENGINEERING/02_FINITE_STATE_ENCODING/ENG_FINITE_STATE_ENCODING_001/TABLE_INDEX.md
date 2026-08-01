@@ -61,3 +61,14 @@ example : ((permEnc.tableIndex tailStep ⟨0, _⟩ : Fin _) : Nat) = 3 := by dec
 
 Passou no probe. O índice do estado `0` é `3`, e o transporte não o
 alterou.
+
+
+---
+
+## Revisão — `2066edc`
+
+`tableIndex_val` recebe `@[simp]`. A dependência de `tableIndex` em
+`stepS` foi auditada e classificada `ACCEPTED_TYPE_DEPENDENCY`: é
+dependência de tipo, não de valor — e é exatamente isso que
+`tableIndex_val` demonstra. Nenhum segundo `tableIndex` sobre `Fin n`
+será criado; esse papel já é de `encode`.

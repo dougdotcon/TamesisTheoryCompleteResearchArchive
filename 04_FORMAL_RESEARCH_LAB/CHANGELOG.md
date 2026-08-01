@@ -1,5 +1,47 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-ENCODING-001-CORRECTIVE-VALIDATION - 2026-08-01
+
+### Corrected
+
+- **`ENC-VAL-001`**, `NON_MATHEMATICAL_VALIDATION_FAILURE`. O probe de
+  axiomas do gate anterior terminou com `exit 1` e mesmo assim foi
+  reportado como `PASS`. As falhas eram experimentos negativos
+  intencionais sobre a rota definicional descartada — medicao valida, no
+  arquivo errado.
+- Os dois probes obrigatorios foram reescritos e reexecutados:
+
+```text
+FiniteStateEncodingReviewProbe.lean   exit 0, 30 s, 0 erros
+FiniteStateEncodingAxiomProbe.lean    exit 0,  3 s, 0 erros
+```
+
+### Unchanged
+
+- **Zero alteracao material.** A estrutura, as duas leis, a construcao
+  unica, os dois pontos de transporte, `tableIndex_val` por `rfl`,
+  `tableIndex_semiconj` como principal, a soundness terminando em `S`, a
+  completeness sem pre-condicoes — tudo permanece exatamente como a
+  revisao congelou. `20` lacunas e `21` claims intactas.
+- Pegada axiomatica reconfirmada, identica: `encode_injective` e
+  `encodedStep` **sem axioma nenhum**; primeira aparicao de
+  `Classical.choice` em `buildTransitionTable`.
+
+### Ruled
+
+- Nova regra de governanca: **experimentos negativos nao compartilham
+  arquivo com probes obrigatorios**. Validacao obrigatoria termina com
+  codigo de saida zero. Um processo Lean com `exit 1` nunca eh evidencia
+  de `PASS`.
+
+### Restored
+
+- A autorizacao `ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED`
+  esteve **suspensa** entre `751cef8` e este commit — presente no
+  allowlist, nao executavel. Volta a ser utilizavel apos os dois `exit 0`.
+  **Nenhuma entrada nova** foi adicionada ao allowlist.
+
+
 ## ENG-FINITE-STATE-ENCODING-001-SPECIFICATION-REVIEW - 2026-08-01
 
 ### Decided

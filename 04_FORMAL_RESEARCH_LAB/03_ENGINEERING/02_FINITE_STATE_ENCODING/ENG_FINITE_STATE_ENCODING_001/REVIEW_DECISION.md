@@ -85,3 +85,26 @@ zero escolha classica produzindo dado executavel.
 
 Este é o critério decisivo declarado pelo gate, e é o que o probe
 demonstrou ser alcançável.
+
+
+---
+
+## Correção de validação — `ENC-VAL-001`
+
+A decisão permanece:
+
+```text
+A. ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_APPROVED
+```
+
+Um dos vinte critérios — *"os probes compilam integralmente"* — foi
+declarado satisfeito indevidamente: o probe de axiomas havia terminado
+com `exit 1`. O gate corretivo separou os experimentos negativos e
+reexecutou ambos os arquivos com `exit 0`.
+
+```text
+a decisao A so se tornou integralmente valida apos o gate corretivo.
+```
+
+Entre `751cef8` e o commit corretivo, a autorização de formalização
+esteve **suspensa**.

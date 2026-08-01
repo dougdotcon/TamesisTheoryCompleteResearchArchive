@@ -129,3 +129,26 @@ nao bloqueia se:
 
 A novidade desta medição é que agora se sabe **exatamente** em qual
 declaração a pegada entra, e por qual lema.
+
+
+---
+
+## Correção de validação — `ENC-VAL-001`
+
+As medições deste documento permanecem **válidas e inalteradas**. O que
+mudou foi onde os experimentos negativos vivem.
+
+```yaml
+negative_experiments:
+  route: DEFINITIONAL_ARRAY_OF_FN_PROOF
+  status: REJECTED_BY_PROBE
+  included_in_mandatory_probe: false
+  rerun_required: false
+  preserved_in: este documento
+```
+
+As tentativas registradas na seção *"Rota B — tentada e medida"** são
+evidência histórica. Elas **não** são reexecutadas e **não** pertencem a
+nenhum probe obrigatório. A pegada axiomática foi reconfirmada em um
+probe limpo, com `exit 0`, cujos números são idênticos aos aqui
+registrados.

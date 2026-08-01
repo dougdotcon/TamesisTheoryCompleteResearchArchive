@@ -146,3 +146,23 @@ A. ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_APPROVED
 ```
 
 Zero stop conditions disparadas. A formalização está autorizada.
+
+
+---
+
+## Correção de validação — `ENC-VAL-001`
+
+O registro original permanece intacto acima. Acrescenta-se:
+
+O probe de axiomas daquele gate terminou com `exit 1`, porque continha
+experimentos negativos intencionais no mesmo arquivo da auditoria
+obrigatória. A decisão A era correta no mérito e **não** mudou, mas só
+passou a ser integralmente válida após o gate corretivo, no qual os dois
+probes terminaram com `exit 0`.
+
+```text
+main_probe_exit   0
+axiom_probe_exit  0
+```
+
+Nenhuma decisão técnica desta revisão foi alterada.

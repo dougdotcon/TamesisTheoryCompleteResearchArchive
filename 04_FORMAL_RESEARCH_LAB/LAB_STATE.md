@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T21:00:00-03:00
+updated_at: 2026-08-01T23:30:00-03:00
 canonical_commit: "2066edc165ace0fbf4e183303e30c4ced246aaaa"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -19,13 +19,14 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-encoding-001-specification-review-result.json"
+last_verified_artifact: "eng-finite-state-encoding-001-corrective-validation-result.json"
 current_blocker: null
 next_single_action: >
   Formalizar a codificação certificada, a construção única da
-  tabela, a política centralizada de casts, as comutações de
-  passo e iterações e a soundness e completeness tipadas.
+  tabela, os dois pontos controlados de transporte, as
+  comutações e a soundness e completeness tipadas.
 authorized_action: "ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED"
+formalization_authorization_state: "RESTORED_AFTER_ENC_VAL_001"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -84,7 +85,16 @@ governance_rules:
   truncated_output: >
     Não assumir sucesso a partir de saída truncada. Toda etapa de patch
     termina com verificação independente do efeito.
+  mandatory_probe_exit_code: >
+    Experimentos negativos, provas exploratórias destinadas a falhar e
+    testes de impossibilidade não podem compartilhar arquivo com probes
+    obrigatórios cujo contrato exige exit 0. Validações obrigatórias
+    devem terminar com código de saída zero. Resultados negativos são
+    preservados em documentação, nunca reexecutados como validação.
+    Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não usar processo com exit diferente de zero como evidência de PASS"
+  - "Não misturar experimento negativo com probe obrigatório no mesmo arquivo"
   - "Não desviar das assinaturas congeladas nos documentos FINAL_* sem gate próprio"
   - "Não afirmar invariância do witness concreto sob recodificação: ENC-GAP-020"
   - "Não tornar buildTransitionTable_getElem público: é INTERNAL_HELPER"

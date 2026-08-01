@@ -1,0 +1,285 @@
+{
+  "schema": "tamesis-governance-correction-result/1",
+  "gate": "LAB_GOV_YAML_DUPLICATE_KEYS_001",
+  "date": "2026-08-01",
+  "commit_before": "e9e2ce7e3ba589425942efd5b551cf03570334bc",
+  "canonical_commit_before": "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a",
+  "canonical_commit_after_preflight": "e9e2ce7e3ba589425942efd5b551cf03570334bc",
+  "ancestry_check": "cat-file exit 0; merge-base --is-ancestor exit 0",
+  "previous_commit_confirmed": "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a",
+  "repository_clean_at_start": true,
+  "processes_active_at_start": 0,
+  "metadata_deviation": {
+    "id": "META-ENC-003",
+    "classification": "GOVERNANCE_DATA_AMBIGUITY",
+    "source": "RESEARCH_QUEUE.yaml",
+    "duplicate_scope": "REPOSITORY_WIDE_AUDIT_REQUIRED",
+    "mathematical_impact": "NONE",
+    "formal_proof_impact": "NONE",
+    "parser_behavior": "SILENT_LAST_VALUE_WINS",
+    "portfolio_review_blocked": true,
+    "status": "CORRECTED"
+  },
+  "scan_scope": {
+    "root": "04_FORMAL_RESEARCH_LAB",
+    "patterns": [
+      "**/*.yaml",
+      "**/*.yml"
+    ],
+    "excluded_dirs": [
+      ".lake",
+      "__pycache__",
+      ".venv",
+      "node_modules",
+      ".git"
+    ],
+    "method": "yaml.compose_all sobre a arvore sintatica; nao safe_load",
+    "depth": "mapas raiz, aninhados e dentro de sequencias, em qualquer profundidade"
+  },
+  "inventory_before": {
+    "yaml_files_scanned": 55,
+    "documents_scanned": 55,
+    "mappings_scanned": 470,
+    "sequences_scanned": 320,
+    "scalars_scanned": 3471,
+    "unparsable_files": 0,
+    "duplicate_occurrences": 8,
+    "files_with_duplicates": 3,
+    "identical_duplicates": 5,
+    "divergent_duplicates": 3
+  },
+  "previous_report_claimed_items": 3,
+  "previous_report_scope": "apenas RESEARCH_QUEUE.yaml",
+  "occurrences": [
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[12]",
+      "key": "total_wrapper_status",
+      "first_line": 402,
+      "duplicate_line": 409,
+      "first_value": "DEFERRED",
+      "duplicate_value": "DEFERRED",
+      "classification": "IDENTICAL_DUPLICATE",
+      "resolution": "IDENTICAL_DUPLICATE_NORMALIZED"
+    },
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[13]",
+      "key": "tests_planned",
+      "first_line": 505,
+      "duplicate_line": 518,
+      "first_value": "9",
+      "duplicate_value": "8",
+      "classification": "DIVERGENT_DUPLICATE",
+      "resolution": "B_UPDATED_TO_SOURCE_OF_TRUTH",
+      "final_value": 9
+    },
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[14]",
+      "key": "extraction_status",
+      "first_line": 572,
+      "duplicate_line": 603,
+      "first_value": "NOT_AUTHORIZED",
+      "duplicate_value": "NOT_AUTHORIZED",
+      "classification": "IDENTICAL_DUPLICATE",
+      "resolution": "IDENTICAL_DUPLICATE_NORMALIZED"
+    },
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[14]",
+      "key": "cli_status",
+      "first_line": 573,
+      "duplicate_line": 604,
+      "first_value": "NOT_AUTHORIZED",
+      "duplicate_value": "NOT_AUTHORIZED",
+      "classification": "IDENTICAL_DUPLICATE",
+      "resolution": "IDENTICAL_DUPLICATE_NORMALIZED"
+    },
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[14]",
+      "key": "parser_status",
+      "first_line": 574,
+      "duplicate_line": 605,
+      "first_value": "NOT_AUTHORIZED",
+      "duplicate_value": "NOT_AUTHORIZED",
+      "classification": "IDENTICAL_DUPLICATE",
+      "resolution": "IDENTICAL_DUPLICATE_NORMALIZED"
+    },
+    {
+      "file": "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "document_index": 0,
+      "mapping_path": "queue[14]",
+      "key": "integration_status",
+      "first_line": 575,
+      "duplicate_line": 606,
+      "first_value": "NOT_AUTHORIZED",
+      "duplicate_value": "NOT_AUTHORIZED",
+      "classification": "IDENTICAL_DUPLICATE",
+      "resolution": "IDENTICAL_DUPLICATE_NORMALIZED"
+    },
+    {
+      "file": "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/STATUS.yaml",
+      "document_index": 0,
+      "mapping_path": "<root>",
+      "key": "extraction_status",
+      "first_line": 11,
+      "duplicate_line": 72,
+      "first_value": "NOT_AUTHORIZED",
+      "duplicate_value": "READY_FOR_FEASIBILITY_AUDIT",
+      "classification": "DIVERGENT_DUPLICATE",
+      "resolution": "B_UPDATED_TO_SOURCE_OF_TRUTH",
+      "final_value": "NOT_AUTHORIZED"
+    },
+    {
+      "file": "03_ENGINEERING/02_FINITE_STATE_ENCODING/ENG_FINITE_STATE_ENCODING_001/STATUS.yaml",
+      "document_index": 0,
+      "mapping_path": "<root>",
+      "key": "documents",
+      "first_line": 56,
+      "duplicate_line": 76,
+      "first_value": "39",
+      "duplicate_value": "65",
+      "classification": "DIVERGENT_DUPLICATE",
+      "resolution": "A_SINGLE_DOCUMENTED_VALUE_PRESERVED",
+      "final_value": 65
+    }
+  ],
+  "tests_planned_audit": {
+    "field": "tests_planned",
+    "duplicate_values": [
+      9,
+      8
+    ],
+    "parser_effective_value_before": 8,
+    "field_semantics": "numero de casos de teste CONGELADOS na especificacao, no TEST_PLAN.md; nao eh tests_formalized, nem arquivos de teste Lean, nem teoremas de regressao",
+    "authoritative_source": [
+      "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/TEST_PLAN.md",
+      "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/STATUS.yaml"
+    ],
+    "authoritative_value": 9,
+    "correction": "B_UPDATED_TO_SOURCE_OF_TRUTH",
+    "semantic_change_from_parser_effective_value": true,
+    "classification": "NON_MATHEMATICAL_GOVERNANCE_SEMANTIC_CORRECTION",
+    "mathematical_impact": "NONE",
+    "test_artifact_impact": "NONE",
+    "distinguished_counts": {
+      "tests_planned_selection_stage": 8,
+      "tests_planned_specification_frozen": 9,
+      "tests_formalized": 10,
+      "lean_test_files": 4,
+      "regression_theorems": 22
+    },
+    "peer_evidence": "FOUND-CYCLE-DETECTION-001: fila, TEST_PLAN e STATUS todos com 7"
+  },
+  "permanent_validator": {
+    "function": "detect_duplicate_yaml_keys(path) -> list[DuplicateYamlKey]",
+    "scanner": "scan_duplicate_yaml_keys(root=LAB_ROOT)",
+    "method": "yaml.compose_all; arvore sintatica",
+    "integrated_in": "labctl validate, antes do carregamento normal",
+    "error_code": "DUPLICATE_YAML_KEY",
+    "severity": "FAIL, inclusive para duplicatas identicas",
+    "fields": [
+      "file",
+      "document_index",
+      "mapping_path",
+      "key",
+      "first_line",
+      "duplicate_line",
+      "first_value",
+      "duplicate_value",
+      "classification"
+    ],
+    "payload_field": "yaml_duplicate_key_scan"
+  },
+  "validator_scope": {
+    "root": "04_FORMAL_RESEARCH_LAB",
+    "includes": [
+      "LAB_STATE e YAML de estado",
+      "RESEARCH_QUEUE",
+      "CLAIM_LEDGER",
+      "todos os GAP_REGISTER",
+      "todos os STATUS",
+      "schemas",
+      "qualquer outro YAML versionado"
+    ],
+    "limited_to_files_loaded_by_labctl": false
+  },
+  "regression_tests": {
+    "file": "06_COMPUTATION/python/tests/test_yaml_duplicate_keys.py",
+    "YAML-TEST-001_clean": "PASS",
+    "YAML-TEST-002_identical": "PASS",
+    "YAML-TEST-003_divergent": "PASS",
+    "YAML-TEST-004_nested": "PASS",
+    "YAML-TEST-005_sequence": "PASS",
+    "YAML-TEST-006_distinct_mappings": "PASS",
+    "YAML-TEST-007_multi_document": "PASS",
+    "YAML-TEST-008_reported_lines": "PASS",
+    "extra_sequence_values": "PASS",
+    "extra_repository_scan_clean": "PASS",
+    "extra_validate_rejects": "PASS",
+    "extra_excluded_dirs": "PASS"
+  },
+  "repository_scan_before_exit": 1,
+  "duplicate_count_before": 8,
+  "meta_enc_003_detected_by_new_detector": true,
+  "repository_scan_after_exit": 0,
+  "duplicate_count_after": 0,
+  "files_with_duplicates_after": 0,
+  "governance_rule_added": "YAML_DUPLICATE_KEY_POLICY.md e governance_rules.yaml_duplicate_keys",
+  "claims_before": 22,
+  "claims_after": 22,
+  "work_items_before": 15,
+  "work_items_after": 15,
+  "gaps_changed": 0,
+  "scientific_states_changed": 0,
+  "lean_files_created": 0,
+  "lean_files_modified": 0,
+  "lean_proofs_created": 0,
+  "lake_build_executed": false,
+  "legacy_files_modified": 0,
+  "rh_nogo_001_touched": 0,
+  "found_semigroup_002_math_touched": 0,
+  "found_functional_graph_001_math_touched": 0,
+  "found_cycle_detection_001_math_touched": 0,
+  "eng_finite_state_runtime_001_lean_touched": 0,
+  "eng_finite_state_encoding_001_lean_touched": 0,
+  "pytest": {
+    "status": "PASS",
+    "tests_before": 9,
+    "tests_after": 21
+  },
+  "labctl_validate": "PASS",
+  "canonical_commit_check": "PASS",
+  "final_state": {
+    "current_blocker": null,
+    "authorized_action": "PORTFOLIO_REVIEW_REQUIRED",
+    "portfolio_review_status": "READY",
+    "yaml_duplicate_key_status": "VERIFIED_CLEAN",
+    "consumed_authorizations": [
+      "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"
+    ]
+  },
+  "meta_enc_003": {
+    "status": "CORRECTED",
+    "repository_wide_scan": "PASS",
+    "duplicate_keys_remaining": 0,
+    "permanent_validator": "ACTIVE",
+    "regression_tests": "PASS"
+  },
+  "allowlist_entries_added": 1,
+  "allowlist_entry": "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
+  "wildcards_used": 0,
+  "commit_message": "lab: reject and normalize duplicate YAML keys",
+  "commits_created": 1,
+  "amend_used": false,
+  "next_expected_gate": "PORTFOLIO-REVIEW",
+  "operational_status": "LABORATORY_IDLE_AWAITING_INSTRUCTIONS",
+  "final_status": "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_VERIFIED"
+}

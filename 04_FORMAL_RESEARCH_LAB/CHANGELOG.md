@@ -1,5 +1,71 @@
 # Changelog do laboratório formal
 
+## LAB-GOV-YAML-DUPLICATE-KEYS-001 - 2026-08-01
+
+### Found
+
+- A varredura **integral** dos `55` arquivos YAML do laboratorio achou
+  **8 duplicatas em 3 arquivos**, e nao as tres da fila que o relatorio
+  anterior mencionava. Duas divergencias novas apareceram porque a busca
+  anterior olhou apenas `RESEARCH_QUEUE.yaml`:
+
+```text
+FOUND_CYCLE_DETECTION_001/STATUS.yaml  extraction_status
+    NOT_AUTHORIZED  contra  READY_FOR_FEASIBILITY_AUDIT
+ENG_FINITE_STATE_ENCODING_001/STATUS.yaml  documents
+    39  contra  65
+```
+
+- A primeira eh a mais seria: uma frente **encerrada** vinha sendo lida
+  com uma trava **mais fraca** do que a governanca de fato mantem.
+
+### Resolved
+
+- `tests_planned` do runtime adapter: `9` contra `8`, com o parser usando
+  `8`. Fonte de verdade: `TEST_PLAN.md`, que congela `RT-TEST-001..009`, e
+  o `STATUS.yaml` da frente — ambos `9`. O `8` era a contagem de
+  **selecao**, anterior ao congelamento. Valor final **`9`**, e a mudanca
+  eh classificada como
+  `NON_MATHEMATICAL_GOVERNANCE_SEMANTIC_CORRECTION`, nao como cosmetica.
+- `extraction_status` do detector de ciclos: valor final `NOT_AUTHORIZED`,
+  por `CLOSURE_RECORD.md` e `LAB_STATE`. O valor de estagio permanece
+  registrado em `COMPUTABILITY_REVIEW.md`.
+- `documents` da codificacao certificada: `65`, a contagem real do
+  diretorio.
+- Cinco duplicatas identicas normalizadas, mantida a primeira ocorrencia.
+
+### Enforced
+
+- `labctl validate` passou a **rejeitar** qualquer chave duplicada, com o
+  codigo `DUPLICATE_YAML_KEY`, antes de qualquer carregamento normal. A
+  deteccao percorre a **arvore sintatica** por `yaml.compose_all` — o
+  objeto ja carregado nao serve, porque nele a duplicata desapareceu.
+- Escopo: **todo** `.yaml` e `.yml` versionado sob o laboratorio, e nao
+  apenas os arquivos que o `labctl` carrega.
+- Duplicata identica tambem eh `FAIL`. Nao existe modo de aviso.
+
+### Tested
+
+- `pytest`: **21** testes, contra `9` antes. Doze novos cobrem mapa raiz,
+  mapa aninhado, mapa dentro de sequencia, multiplos documentos, linhas
+  reportadas, chaves iguais em mapas distintos, valores repetidos em
+  lista, diretorios excluidos e a varredura integral do repositorio.
+
+### Ruled
+
+- `00_GOVERNANCE/YAML_DUPLICATE_KEY_POLICY.md`: uma chave por mapa;
+  duplicatas identicas proibidas; "ultimo valor vence" nao eh semantica de
+  governanca; e **auditoria declarada integral deve percorrer o conjunto
+  completo** — uma auditoria parcial nao pode ser descrita como completa.
+
+### Preserved
+
+- `22` claims, `15` work items, zero arquivos Lean criados ou modificados,
+  zero teoremas tocados, `lake build` nao executado. Nenhum estado
+  cientifico alterado: as unicas mudancas de valor efetivo estao nos tres
+  campos divergentes, todos de governanca.
+
+
 ## ENG-FINITE-STATE-ENCODING-001-RESULT-REVIEW - 2026-08-01
 
 ### Closed

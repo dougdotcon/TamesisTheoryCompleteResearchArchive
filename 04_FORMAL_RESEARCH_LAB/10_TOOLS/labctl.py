@@ -12,7 +12,7 @@ import subprocess
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 try:
     import yaml
@@ -263,9 +263,151 @@ def lean_check() -> dict[str, Any]:
     }
 
 
+YAML_SCAN_EXCLUDED_DIRS = {".lake", "__pycache__", ".venv", "node_modules", ".git"}
+DUPLICATE_YAML_KEY = "DUPLICATE_YAML_KEY"
+
+
+class DuplicateYamlKey(NamedTuple):
+    """Uma chave definida mais de uma vez dentro do mesmo mapa YAML."""
+
+    file: str
+    document_index: int
+    mapping_path: str
+    key: str
+    first_line: int
+    duplicate_line: int
+    first_value: str
+    duplicate_value: str
+    classification: str
+
+    def as_error(self) -> str:
+        return (
+            f"{DUPLICATE_YAML_KEY}: {self.file}:{self.duplicate_line} "
+            f"path={self.mapping_path} key={self.key} "
+            f"first_defined_at={self.first_line} "
+            f"classification={self.classification}"
+        )
+
+
+def _yaml_node_label(node: Any) -> str:
+    if isinstance(node, yaml.ScalarNode):
+        return node.value
+    if isinstance(node, yaml.SequenceNode):
+        return f"<seq len={len(node.value)}>"
+    if isinstance(node, yaml.MappingNode):
+        return f"<map keys={len(node.value)}>"
+    return "<node>"
+
+
+def _yaml_path_label(path: list[Any]) -> str:
+    out = ""
+    for part in path:
+        if isinstance(part, int):
+            out += f"[{part}]"
+        else:
+            out += ("." if out else "") + str(part)
+    return out or "<root>"
+
+
+def _walk_yaml_node(node: Any, path: list[Any], file: str, doc_index: int,
+                    found: list[DuplicateYamlKey]) -> None:
+    """Percorre a ARVORE SINTATICA. O objeto ja colapsado pelo parser nao
+    serve: nele a duplicata desapareceu."""
+    if isinstance(node, yaml.MappingNode):
+        seen: dict[str, tuple[Any, Any]] = {}
+        for key_node, value_node in node.value:
+            key = key_node.value if isinstance(key_node, yaml.ScalarNode) else _yaml_node_label(key_node)
+            if key in seen:
+                first_key_node, first_value_node = seen[key]
+                first_value = _yaml_node_label(first_value_node)
+                duplicate_value = _yaml_node_label(value_node)
+                found.append(DuplicateYamlKey(
+                    file=file,
+                    document_index=doc_index,
+                    mapping_path=_yaml_path_label(path),
+                    key=key,
+                    first_line=first_key_node.start_mark.line + 1,
+                    duplicate_line=key_node.start_mark.line + 1,
+                    first_value=first_value,
+                    duplicate_value=duplicate_value,
+                    classification=("IDENTICAL_DUPLICATE"
+                                    if first_value == duplicate_value
+                                    else "DIVERGENT_DUPLICATE"),
+                ))
+            else:
+                seen[key] = (key_node, value_node)
+            _walk_yaml_node(value_node, path + [key], file, doc_index, found)
+    elif isinstance(node, yaml.SequenceNode):
+        for index, child in enumerate(node.value):
+            _walk_yaml_node(child, path + [index], file, doc_index, found)
+
+
+def detect_duplicate_yaml_keys(path: Path) -> list[DuplicateYamlKey]:
+    """Chaves duplicadas de um arquivo YAML, em qualquer profundidade.
+
+    Duplicatas com valores idênticos também são reportadas: a política do
+    laboratório não aceita "último valor vence" como semântica.
+    """
+    found: list[DuplicateYamlKey] = []
+    try:
+        label = str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        label = str(path)
+    documents = yaml.compose_all(path.read_text(encoding="utf-8"))
+    for index, document in enumerate(documents):
+        if document is None:
+            continue
+        _walk_yaml_node(document, [], label, index, found)
+    return found
+
+
+def yaml_files_under(root: Path) -> list[Path]:
+    files = []
+    for candidate in sorted(root.rglob("*")):
+        if candidate.suffix.lower() not in (".yaml", ".yml"):
+            continue
+        if any(part in YAML_SCAN_EXCLUDED_DIRS for part in candidate.parts):
+            continue
+        files.append(candidate)
+    return files
+
+
+def scan_duplicate_yaml_keys(root: Path | None = None) -> dict[str, Any]:
+    """Varredura integral. Todo YAML versionado sob o laboratório, não
+    apenas os arquivos que o labctl carrega."""
+    root = root or LAB_ROOT
+    duplicates: list[DuplicateYamlKey] = []
+    unparsable: list[str] = []
+    files = yaml_files_under(root)
+    for path in files:
+        try:
+            duplicates.extend(detect_duplicate_yaml_keys(path))
+        except yaml.YAMLError as exc:
+            unparsable.append(f"{path}: {exc}")
+    return {
+        "files_scanned": len(files),
+        "duplicate_count": len(duplicates),
+        "files_with_duplicates": len({d.file for d in duplicates}),
+        "identical_duplicates": sum(
+            1 for d in duplicates if d.classification == "IDENTICAL_DUPLICATE"),
+        "divergent_duplicates": sum(
+            1 for d in duplicates if d.classification == "DIVERGENT_DUPLICATE"),
+        "unparsable_files": unparsable,
+        "duplicates": [d._asdict() for d in duplicates],
+        "errors": [d.as_error() for d in duplicates]
+        + [f"UNPARSABLE_YAML: {u}" for u in unparsable],
+    }
+
+
 def validate() -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
+
+    # Integridade estrutural antes de qualquer carregamento: um YAML com
+    # chave duplicada nao possui semantica univoca, e o parser padrao
+    # descartaria silenciosamente parte do documento.
+    yaml_duplicate_scan = scan_duplicate_yaml_keys()
+    errors.extend(yaml_duplicate_scan["errors"])
     for path in required_paths():
         if not path.exists():
             errors.append(f"missing required path: {path.relative_to(REPO_ROOT)}")
@@ -374,6 +516,7 @@ def validate() -> dict[str, Any]:
         "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_AUTHORIZED",
         "ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED",
         "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_AUTHORIZED",
+        "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
@@ -483,6 +626,15 @@ def validate() -> dict[str, Any]:
             "LAB0_LEAN_ENVIRONMENT_FAILED" if not errors else "LAB0_VALIDATION_FAILED"
         ),
         "errors": errors,
+        "yaml_duplicate_key_scan": {
+            "files_scanned": yaml_duplicate_scan["files_scanned"],
+            "duplicate_count": yaml_duplicate_scan["duplicate_count"],
+            "files_with_duplicates": yaml_duplicate_scan["files_with_duplicates"],
+            "identical_duplicates": yaml_duplicate_scan["identical_duplicates"],
+            "divergent_duplicates": yaml_duplicate_scan["divergent_duplicates"],
+            "unparsable_files": yaml_duplicate_scan["unparsable_files"],
+            "status": "PASS" if not yaml_duplicate_scan["duplicate_count"] else "FAIL",
+        },
         "canonical_commit_check": canonical_check,
         "warnings": warnings,
         "repository_changes": status_lines,

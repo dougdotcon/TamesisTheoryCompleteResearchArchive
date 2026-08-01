@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
 updated_at: 2026-08-01T23:59:59-03:00
-canonical_commit: "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a"
+canonical_commit: "e9e2ce7e3ba589425942efd5b551cf03570334bc"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -24,13 +24,17 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
-last_verified_artifact: "eng-finite-state-encoding-001-result-review.json"
+last_verified_artifact: "lab-gov-yaml-duplicate-keys-001-result.json"
 current_blocker: null
 next_single_action: >
-  Aguardar um gate explícito de revisão de portfólio.
-  Nenhuma extensão, recodificação, extração, CLI, parser ou
-  integração está autorizada.
+  Aguardar um gate explícito de revisão de portfólio. A fila
+  possui interpretação YAML unívoca e o validador rejeita
+  qualquer chave duplicada. Nenhuma extensão, recodificação,
+  extração, CLI, parser ou integração está autorizada.
 authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+portfolio_review_status: "READY"
+yaml_duplicate_key_status: "VERIFIED_CLEAN"
+consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -89,6 +93,12 @@ governance_rules:
   truncated_output: >
     Não assumir sucesso a partir de saída truncada. Toda etapa de patch
     termina com verificação independente do efeito.
+  yaml_duplicate_keys: >
+    Cada chave de um mapa YAML ocorre exatamente uma vez. Duplicatas
+    idênticas também são proibidas. "Último valor vence" não é semântica
+    de governança, e a ausência de erro no parser não demonstra
+    integridade. labctl validate rejeita qualquer duplicata em todo YAML
+    versionado sob o laboratório, com o código DUPLICATE_YAML_KEY.
   aggregate_counts: >
     Contagens agregadas de declarações, gaps, arquivos, claims, testes e
     estados não são fonte primária. Toda contagem agregada deve ser
@@ -104,6 +114,8 @@ governance_rules:
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
   - "Não usar processo com exit diferente de zero como evidência de PASS"
+  - "Não aceitar duas definições da mesma chave YAML, ainda que os valores coincidam"
+  - "Não adotar o valor efetivo do parser como fonte de verdade ao resolver divergência"
   - "Não afirmar invariância do witness concreto sob recodificação"
   - "Não estender ENG-FINITE-STATE-ENCODING-001 nem abrir 002 sem gate próprio"
   - "Não conferir contagem agregada por amostragem: a varredura deve cobrir todas as entradas"

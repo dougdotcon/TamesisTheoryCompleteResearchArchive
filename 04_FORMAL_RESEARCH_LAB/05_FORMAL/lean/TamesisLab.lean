@@ -28,6 +28,9 @@ import TamesisLab.Tests.FoundCycleDetection001Axioms
 import TamesisLab.Tests.EngFiniteStateRuntime001
 import TamesisLab.Tests.EngFiniteStateRuntime001Execution
 import TamesisLab.Tests.EngFiniteStateRuntime001Axioms
+import TamesisLab.Tests.EngFiniteStateEncoding001
+import TamesisLab.Tests.EngFiniteStateEncoding001Execution
+import TamesisLab.Tests.EngFiniteStateEncoding001Axioms
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

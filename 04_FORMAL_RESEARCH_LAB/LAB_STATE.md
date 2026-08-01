@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T23:30:00-03:00
-canonical_commit: "2066edc165ace0fbf4e183303e30c4ced246aaaa"
+updated_at: 2026-08-01T23:59:00-03:00
+canonical_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,23 +10,25 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-ENCODING-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
-formalization_status: "NOT_STARTED"
+formalization_status: "VERIFIED"
 extraction_status: "NOT_AUTHORIZED"
 cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-last_verified_artifact: "eng-finite-state-encoding-001-corrective-validation-result.json"
+formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
+last_verified_artifact: "eng-finite-state-encoding-001-formalization-result.json"
 current_blocker: null
 next_single_action: >
-  Formalizar a codificação certificada, a construção única da
-  tabela, os dois pontos controlados de transporte, as
-  comutações e a soundness e completeness tipadas.
-authorized_action: "ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED"
-formalization_authorization_state: "RESTORED_AFTER_ENC_VAL_001"
+  Revisar a API pública, a construção da tabela, os dois pontos
+  de transporte, a semiconjugação, a correspondência de
+  iteradas, a soundness e completeness tipadas e os limites de
+  recodificação antes de autorizar qualquer extração ou
+  integração.
+authorized_action: "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -94,6 +96,10 @@ governance_rules:
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
   - "Não usar processo com exit diferente de zero como evidência de PASS"
+  - "Não expor buildTransitionTable_getElem: é private e vive em Commutation.lean"
+  - "Não provar table_step_commutes diretamente: é o .symm de tableIndex_semiconj"
+  - "Não criar segundo tableIndex sobre Fin n: esse papel já é de encode"
+  - "Não estender ENG-FINITE-STATE-ENCODING-001 nem abrir 002 sem gate próprio"
   - "Não misturar experimento negativo com probe obrigatório no mesmo arquivo"
   - "Não desviar das assinaturas congeladas nos documentos FINAL_* sem gate próprio"
   - "Não afirmar invariância do witness concreto sob recodificação: ENC-GAP-020"

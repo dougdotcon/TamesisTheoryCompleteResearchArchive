@@ -1,5 +1,63 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-ENCODING-001-FORMALIZATION - 2026-08-01
+
+### Built
+
+- **A cadeia que comeca em um objeto Lean TIPADO e termina em um
+  certificado interpretado NESSE objeto.** `1` estrutura, `4` definicoes,
+  `11` teoremas (1 privado), `450` linhas — contra `869` da frente
+  anterior. A diferenca eh reutilizacao: nada do detector nem da execucao
+  bruta foi reescrito.
+- **A soundness termina em `S`**:
+  `stepS^[b + p] start = stepS^[b] start`. Quatro linhas de prova, cuja
+  ultima seta eh `encode_injective`.
+- **A completeness nao exige pre-condicao nenhuma** do consumidor: a
+  validade da tabela e o dominio do indice vem da construcao.
+
+### Key move
+
+- `table_iterate_commutes` eh **um termo de uma linha**, por
+  `Function.Semiconj.iterate_right`. O resultado analogo da frente
+  anterior custou inducao manual com dois `show` obrigatorios.
+- **Dois** pontos de transporte, e apenas dois: `tableIndex`, publico, e
+  `buildTransitionTable_getElem`, `private`. Este ultimo vive em
+  `Commutation.lean` e nao em `TableConstruction.lean` por uma razao
+  concreta: `private` eh escopo de modulo, e seu unico consumidor eh a
+  semiconjugacao.
+
+### Measured
+
+- `encode_injective` e `encodedStep` **nao dependem de axioma nenhum**. A
+  pegada entra em `buildTransitionTable`, pelo campo `closed`.
+- `sorryAx` `0`, axiomas locais `0`, tokens proibidos `0`, correcoes
+  silenciosas `0`, `Eq.ndrec` `0`, `HEq` `0`.
+- `lake build` **PASS, 8757 jobs**, `120` s. Baseline `8748`; a diferenca
+  de `9` eh exatamente 5 modulos + agregador + 3 testes.
+- `ENC-TEST-006`: sob a codificacao `i ↦ 3 - i` a tabela vira
+  `#[1,0,1,2]` em vez de `#[1,2,3,2]`, e a **mesma** conclusao semantica
+  eh derivada no tipo original.
+
+### Corrected
+
+- `FINAL_PUBLIC_API.md` declarava `14` declaracoes publicas mas listava
+  quinze. O numero medido nos modulos eh **`15`**. Erro de cabecalho do
+  gate de revisao, registrado em vez de silenciado.
+
+### Bounded
+
+- Novidade `NONE`. **Nao** foi provada invariancia do witness concreto sob
+  recodificacao — `ENC-GAP-020`, `STOP-ENC-019` —, e a coincidencia
+  observada nos testes eh observacao, nao teorema.
+
+### Locked
+
+- `formalization_status: VERIFIED`;
+  `authorized_action: ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_AUTHORIZED`.
+  Uma entrada literal, sem wildcard. Extracao, CLI, parser, integracao e
+  `002` seguem **nao autorizadas**. Ledger: `22` claims.
+
+
 ## ENG-FINITE-STATE-ENCODING-001-CORRECTIVE-VALIDATION - 2026-08-01
 
 ### Corrected

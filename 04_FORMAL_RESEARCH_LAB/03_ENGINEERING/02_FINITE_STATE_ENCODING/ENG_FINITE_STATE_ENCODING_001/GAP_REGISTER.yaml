@@ -1,10 +1,11 @@
 schema: tamesis-gap-register/1
 work_item_id: ENG-FINITE-STATE-ENCODING-001
 updated_at: '2026-08-01'
-reviewed_at_gate: ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW
+reviewed_at_gate: ENG_FINITE_STATE_ENCODING_001_FORMALIZATION
 resolved_by_design: 3
 resolved_by_api_audit: 3
-ready_for_formalization: 9
+resolved_formally: 9
+ready_for_formalization: 0
 open_deferred: 4
 open_bibliographic: 1
 blocked: 0
@@ -32,8 +33,8 @@ gaps:
     portfolio_traceability: ENC-GAP-004 do portfolio
   ENC-GAP-005:
     title: validade estrutural automatica
-    status: READY_FOR_FORMALIZATION
-    note: campo closed provado no probe; toRaw_valid reutilizado sem linha nova
+    status: RESOLVED_FORMALLY
+    note: campo closed provado; toRaw_valid reutilizado sem linha nova
     portfolio_traceability: ENC-GAP-005 do portfolio
   ENC-GAP-006:
     title: indice central Fin n <-> Fin table.size
@@ -42,43 +43,43 @@ gaps:
     portfolio_traceability: ENC-GAP-006 do portfolio
   ENC-GAP-007:
     title: preservacao do valor Nat pelo cast
-    status: READY_FOR_FORMALIZATION
-    note: tableIndex_val por rfl; verificado tambem por decide sob codificacao permutada
+    status: RESOLVED_FORMALLY
+    note: tableIndex_val por rfl, @[simp]; conferido por decide sob codificacao permutada
     portfolio_traceability: ENC-GAP-007 do portfolio
   ENC-GAP-008:
     title: comutacao de um passo
-    status: READY_FOR_FORMALIZATION
-    note: cinco linhas no probe; decode_encode eh a lei usada
+    status: RESOLVED_FORMALLY
+    note: tableIndex_semiconj em seis linhas; decode_encode eh a lei usada
     portfolio_traceability: ENC-GAP-008 do portfolio
   ENC-GAP-009:
     title: semiconjugacao
-    status: READY_FOR_FORMALIZATION
-    note: termo de uma linha; a inversao de orientacao esta congelada
+    status: RESOLVED_FORMALLY
+    note: semiconjugacao eh o resultado principal; table_step_commutes eh seu .symm
     portfolio_traceability: ENC-GAP-009 do portfolio
   ENC-GAP-010:
     title: comutacao de iteradas
-    status: READY_FOR_FORMALIZATION
-    note: Function.Semiconj.iterate_right; sem inducao manual
+    status: RESOLVED_FORMALLY
+    note: table_iterate_commutes por Function.Semiconj.iterate_right, termo de uma linha
     portfolio_traceability: ENC-GAP-010 do portfolio
   ENC-GAP-011:
     title: correspondencia de run?
-    status: READY_FOR_FORMALIZATION
-    note: tres linhas; dois usos de tableIndex_val; nenhuma execucao nova
+    status: RESOLVED_FORMALLY
+    note: run?_corresponds_to_typed_iterate em tres linhas; nenhuma segunda execucao
     portfolio_traceability: ENC-GAP-011 do portfolio
   ENC-GAP-012:
     title: soundness tipada
-    status: READY_FOR_FORMALIZATION
-    note: tres linhas; termina em igualdade sobre S por encode_injective
+    status: RESOLVED_FORMALLY
+    note: analyzeEncodedSystem_sound termina em igualdade sobre S, por encode_injective
     portfolio_traceability: ENC-GAP-012 do portfolio
   ENC-GAP-013:
     title: completeness tipada
-    status: READY_FOR_FORMALIZATION
-    note: sem pre-condicoes do consumidor; nenhuma repeticao da casa dos pombos
+    status: RESOLVED_FORMALLY
+    note: analyzeEncodedSystem_complete sem pre-condicoes do consumidor
     portfolio_traceability: ENC-GAP-013 do portfolio, reescopado
   ENC-GAP-014:
     title: impossibilidade dos erros
-    status: READY_FOR_FORMALIZATION
-    note: um corolario quantificado sobre err; as tres exclusoes individuais ficam DEFERRED
+    status: RESOLVED_FORMALLY
+    note: analyzeEncodedSystem_ne_error, um corolario quantificado sobre err
     portfolio_traceability: ENC-GAP-014 do portfolio, reescopado
   ENC-GAP-015:
     title: computabilidade e axiomas

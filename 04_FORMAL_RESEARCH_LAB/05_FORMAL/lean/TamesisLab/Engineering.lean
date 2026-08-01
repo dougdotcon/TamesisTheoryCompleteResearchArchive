@@ -1,5 +1,7 @@
 import TamesisLab.Engineering.FiniteStateRuntime
 import TamesisLab.Engineering.FiniteStateRuntime.Audit
+import TamesisLab.Engineering.FiniteStateEncoding
+import TamesisLab.Engineering.FiniteStateEncoding.Audit
 
 /-!
 # Trilha de engenharia formal

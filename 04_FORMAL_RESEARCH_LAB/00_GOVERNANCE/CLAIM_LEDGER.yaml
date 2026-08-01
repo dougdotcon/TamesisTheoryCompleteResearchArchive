@@ -662,3 +662,60 @@ claims:
       - "novidade matematica"
       - "novidade algoritmica"
       - "resultado fisico"
+  - claim_id: CERTIFIED-FINITE-STATE-ENCODING-FORMAL-001
+    short_name: Certified finite-state encoding and table construction
+    exact_statement: 'Para encoding : CertifiedFiniteEncoding S n, stepS : S -> S e start : S, se analyzeEncodedSystem
+      encoding stepS start devolve ok witness, entao stepS^[witness.baseIndex + witness.period] start =
+      stepS^[witness.baseIndex] start, igualdade no tipo S. Reciprocamente, para quaisquer encoding, stepS
+      e start existe witness com analyzeEncodedSystem encoding stepS start = ok witness, sem qualquer pre-condicao
+      do consumidor.
+
+      '
+    domain: verified_software_engineering
+    source_artifacts:
+    - 04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Engineering/FiniteStateEncoding/
+    - 04_FORMAL_RESEARCH_LAB/03_ENGINEERING/02_FINITE_STATE_ENCODING/ENG_FINITE_STATE_ENCODING_001/THEOREM_IMPLEMENTATION_MAP.md
+    - 04_FORMAL_RESEARCH_LAB/03_ENGINEERING/02_FINITE_STATE_ENCODING/ENG_FINITE_STATE_ENCODING_001/TYPED_SOUNDNESS_AUDIT.md
+    - 04_FORMAL_RESEARCH_LAB/03_ENGINEERING/02_FINITE_STATE_ENCODING/ENG_FINITE_STATE_ENCODING_001/RESULT_BOUNDARY_FINAL.md
+    current_wording: 'Foi formalizada em Lean uma codificacao finita certificada e fornecida entre um tipo
+      de estados e Fin n. A partir dessa codificacao e de uma funcao deterministica tipada, foi construida
+      computavelmente uma tabela de transicoes validada. Foram provadas a correspondencia de passos e iteradas,
+      a correspondencia com a execucao bruta da tabela e a soundness e completeness da analise dinamica
+      no sistema tipado original.
+
+      '
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+    - FINITE-STATE-RUNTIME-ADAPTER-FORMAL-001
+    known_gaps:
+    - 'ENC-GAP-016: nenhuma fonte primaria consultada'
+    - 'ENC-GAP-017: nenhuma extracao'
+    - 'ENC-GAP-018: nenhum parser externo'
+    - 'ENC-GAP-019: a correcao da aplicacao concreta NAO eh fornecida'
+    - 'ENC-GAP-020: invariancia do witness concreto sob recodificacao NAO eh provada'
+    computational_scope: 'O consumidor fornece a codificacao, stepS e start, sem qualquer typeclass. A camada
+      de codificacao nao depende de axioma nenhum; a pegada [propext, Classical.choice, Quot.sound] entra
+      em buildTransitionTable pelo campo closed, via Array.getElem_ofFn, e nao torna nada nao computavel
+      — sete tabelas concretas foram verificadas por decide.
+
+      '
+    promotion_requirements:
+    - 'nao aplicavel: eh engenharia formal padrao e nao admite promocao cientifica'
+    prohibited_claims:
+    - correcao de sistema externo
+    - modelo universal
+    - invariancia do witness concreto sob recodificacao
+    - minimalidade
+    - unicidade
+    - eficiencia
+    - extracao
+    - CLI
+    - parser
+    - integracao
+    - novo algoritmo
+    - novidade matematica
+    - novidade algoritmica
+    - resultado fisico

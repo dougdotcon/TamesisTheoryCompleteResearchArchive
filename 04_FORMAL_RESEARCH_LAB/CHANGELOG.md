@@ -1,5 +1,53 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-ENCODING-001-RESULT-REVIEW - 2026-08-01
+
+### Closed
+
+- **A primeira cadeia do laboratorio que comeca em um objeto Lean TIPADO e
+  termina em um certificado interpretado nesse mesmo objeto.** `15`
+  declaracoes publicas — **derivadas do codigo, nao lidas do cabecalho** —,
+  `1` auxiliar privado, `2` pontos de transporte, `20` lacunas com `15`
+  resolvidas, `22` claims.
+
+### Verified
+
+- `tableIndex_val` eh `rfl`: o transporte **nao altera** o indice natural.
+- A semiconjugacao usa `decode_encode`; `encode_decode` **nao aparece** em
+  `Commutation.lean`.
+- A soundness termina em igualdade **em `S`**; a completeness nao exige
+  **nenhuma** pre-condicao.
+- `run?` e `step?` nao foram copiados; `validateTransitionTable` aparece
+  `1` vez em docstring e `0` vezes em codigo.
+- Novo `EngFiniteStateEncoding001UmbrellaAudit.lean` alcanca as quinze
+  declaracoes pela raiz. Exit `0`, `80` s. Nao registrado em
+  `TamesisLab.lean` — importa a raiz, e registra-lo criaria ciclo.
+
+### Found
+
+- **`META-ENC-003`**: a varredura de chaves duplicadas foi refeita sobre a
+  **fila inteira**, e nao sobre duas chaves nomeadas. Achou tres itens com
+  duplicatas, e um deles **divergente**:
+  `ENG-FINITE-STATE-RUNTIME-001.tests_planned = ['9', '8']`. Frente
+  encerrada: **nada foi alterado**, e o caso aguarda gate corretivo.
+- Uma verificacao parcial apresentada como completa eh o mesmo defeito de
+  `ENC-VAL-001` — evidencia mais fraca que a afirmacao que sustenta.
+
+### Ruled
+
+- Nova regra: **contagens agregadas nao sao fonte primaria**, devem ser
+  derivadas ou conferidas automaticamente, e a conferencia precisa
+  percorrer **todas** as entradas. Terceira divergencia deste tipo.
+
+### Locked
+
+- `result_review: APPROVED`; extensao, recodificacao, extracao, CLI,
+  parser e integracao em `NOT_AUTHORIZED`;
+  `external_abstraction_correctness: DEFERRED`;
+  `authorized_action: PORTFOLIO_REVIEW_REQUIRED` — **trava**, nao
+  autorizacao. Nenhuma entrada nova no allowlist.
+
+
 ## ENG-FINITE-STATE-ENCODING-001-FORMALIZATION - 2026-08-01
 
 ### Built

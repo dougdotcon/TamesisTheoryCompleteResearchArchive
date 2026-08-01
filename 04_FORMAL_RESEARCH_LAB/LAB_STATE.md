@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T23:59:00-03:00
-canonical_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
+updated_at: 2026-08-01T23:59:59-03:00
+canonical_commit: "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -14,21 +14,23 @@ work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
+reencoding_invariance_status: "NOT_AUTHORIZED"
+external_abstraction_correctness: "DEFERRED"
 extraction_status: "NOT_AUTHORIZED"
 cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
-last_verified_artifact: "eng-finite-state-encoding-001-formalization-result.json"
+last_verified_artifact: "eng-finite-state-encoding-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a API pública, a construção da tabela, os dois pontos
-  de transporte, a semiconjugação, a correspondência de
-  iteradas, a soundness e completeness tipadas e os limites de
-  recodificação antes de autorizar qualquer extração ou
-  integração.
-authorized_action: "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar um gate explícito de revisão de portfólio.
+  Nenhuma extensão, recodificação, extração, CLI, parser ou
+  integração está autorizada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -87,6 +89,12 @@ governance_rules:
   truncated_output: >
     Não assumir sucesso a partir de saída truncada. Toda etapa de patch
     termina com verificação independente do efeito.
+  aggregate_counts: >
+    Contagens agregadas de declarações, gaps, arquivos, claims, testes e
+    estados não são fonte primária. Toda contagem agregada deve ser
+    derivada ou conferida automaticamente contra as entradas individuais
+    antes do commit, e a conferência deve percorrer TODAS as entradas, não
+    um subconjunto nomeado.
   mandatory_probe_exit_code: >
     Experimentos negativos, provas exploratórias destinadas a falhar e
     testes de impossibilidade não podem compartilhar arquivo com probes
@@ -96,6 +104,9 @@ governance_rules:
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
   - "Não usar processo com exit diferente de zero como evidência de PASS"
+  - "Não afirmar invariância do witness concreto sob recodificação"
+  - "Não estender ENG-FINITE-STATE-ENCODING-001 nem abrir 002 sem gate próprio"
+  - "Não conferir contagem agregada por amostragem: a varredura deve cobrir todas as entradas"
   - "Não expor buildTransitionTable_getElem: é private e vive em Commutation.lean"
   - "Não provar table_step_commutes diretamente: é o .symm de tableIndex_semiconj"
   - "Não criar segundo tableIndex sobre Fin n: esse papel já é de encode"

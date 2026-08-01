@@ -1,0 +1,272 @@
+{
+  "schema": "tamesis-result-review/1",
+  "gate": "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW",
+  "date": "2026-08-01",
+  "initial_commit": "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a",
+  "canonical_commit_before": "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd",
+  "canonical_commit_after_preflight": "2a05887463d44bc3da1ca1c4ac4ea21c6b68390a",
+  "ancestry_check": "cat-file exit 0; merge-base --is-ancestor exit 0",
+  "repository_clean_at_start": true,
+  "processes_active_at_start": 0,
+  "decision": "A_ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_APPROVED",
+  "skills_read": 5,
+  "goal_executed": false,
+  "metadata_deviations": {
+    "META-ENC-001": {
+      "classification": "ACKNOWLEDGED_NON_MATERIAL",
+      "mathematical_impact": "NONE",
+      "api_impact": "NONE",
+      "correction": "COUNT_ALIGNED_WITH_LIST",
+      "verified_by": "extracao das declaracoes dos quatro modulos por regex",
+      "public_declarations_derived": 15
+    },
+    "META-ENC-002": {
+      "classification": "ACKNOWLEDGED_NON_MATERIAL",
+      "mathematical_impact": "NONE",
+      "governance_semantic_impact": "NONE",
+      "correction": "DUPLICATE_KEYS_NORMALIZED",
+      "fields_removed": 0,
+      "fields_changed": [
+        "status",
+        "formalization_status",
+        "authorized_next_gate",
+        "public_declarations"
+      ],
+      "changes_are_intended_gate_updates": true,
+      "governance_invariants_preserved": 13,
+      "duplicate_values_identical": true
+    },
+    "META-ENC-003": {
+      "classification": "PRE_EXISTING_DEFECT",
+      "scope": "OUTSIDE_THIS_WORK_ITEM",
+      "findings": [
+        "FOUND-CYCLE-DETECTION-001.total_wrapper_status ['DEFERRED','DEFERRED'] identico",
+        "ENG-FINITE-STATE-RUNTIME-001.tests_planned ['9','8'] DIVERGENTE"
+      ],
+      "action_taken": "NONE",
+      "requires": "EXPLICIT_CORRECTIVE_GATE"
+    }
+  },
+  "governance_rule_added": "contagens agregadas nao sao fonte primaria; conferencia automatica sobre TODAS as entradas antes do commit",
+  "structure": "CertifiedFiniteEncoding S n, quatro campos, zero typeclasses",
+  "fintype_required": false,
+  "decidable_eq_required": false,
+  "decode_encode_role": "PROOF_DEPENDENCY",
+  "encode_decode_role": "PUBLIC_CONTRACT",
+  "encode_injective": "LeftInverse.injective; sem axiomas; sem igualdade decidivel",
+  "encoded_step": "PUBLIC_EXECUTABLE_CORE; computavel; sem axiomas",
+  "table_construction": "unica; Array.ofFn; validateTransitionTable nao chamada",
+  "array_ofFn": true,
+  "table_size_theorem": "@[simp]; orientacao unica size = n",
+  "closed_proof": "Array.getElem_ofFn + Fin.isLt + Array.size_ofFn; zero correcao de valor",
+  "internal_helper": {
+    "declaration": "buildTransitionTable_getElem",
+    "visibility": "private",
+    "module": "Commutation.lean",
+    "reason": "private eh escopo de modulo; unico consumidor eh tableIndex_semiconj",
+    "adds_mathematical_hypothesis": false
+  },
+  "transport_points": {
+    "total": 2,
+    "public": 1,
+    "private": 1,
+    "Fin_cast_in_code": 2,
+    "Fin_cast_in_docstring": 1,
+    "Eq_ndrec": 0,
+    "cast_heq": 0,
+    "HEq": 0
+  },
+  "table_index": "Fin.cast (buildTransitionTable_size ...).symm (encode s)",
+  "table_index_val": "rfl, @[simp]; conferido por decide sob codificacao permutada",
+  "semiconjugation": {
+    "orientation": "tableIndex (stepS s) = step (tableIndex s)",
+    "law_used": "decode_encode",
+    "encode_decode_in_proof": false,
+    "category": "PUBLIC_SPECIFICATION_CORE"
+  },
+  "step_commutation": "PUBLIC_COROLLARY; (semiconj s).symm; sem prova duplicada",
+  "iterate_commutation": "Function.Semiconj.iterate_right; sem inducao manual",
+  "raw_run_correspondence": "lado bruto inicia em encode; run? e step? nao copiados",
+  "dynamic_analysis": "analyzeEncodedSystem; zero typeclasses; Except preservado",
+  "typed_soundness": {
+    "conclusion_type": "S",
+    "hypotheses": 1,
+    "cast": 0,
+    "Eq_ndrec": 0,
+    "dag": [
+      "analyzeTransitionTable_sound",
+      "run?_corresponds x2",
+      "Option.some.inj",
+      "Fin.ext",
+      "encode_injective"
+    ]
+  },
+  "typed_completeness": {
+    "preconditions": 0,
+    "witness_in_Prop": true,
+    "classical_choose": 0,
+    "detector_repeated": false,
+    "linter_adjustment": "NON_MATERIAL_LINTER_CLEANUP"
+  },
+  "universal_error_exclusion": "quantificado sobre err; construtores mantidos",
+  "empty_type": {
+    "encoding_structure": "ALLOWED",
+    "table_construction": "ALLOWED",
+    "table_structural_validity": "VALID",
+    "analysis_call": "UNINHABITED",
+    "measured_table": "#[]"
+  },
+  "public_api": {
+    "derived_from_code": true,
+    "total": 15,
+    "public_executable_core": 5,
+    "public_specification_core": 8,
+    "public_corollary": 2,
+    "internal_helpers": 1,
+    "by_kind": {
+      "structure": 1,
+      "def": 4,
+      "theorem": 10,
+      "instance": 0
+    }
+  },
+  "axioms": {
+    "encode_injective": "nenhum",
+    "encodedStep": "nenhum",
+    "first_with_classical_choice": "buildTransitionTable",
+    "cause": "campo closed via Array.getElem_ofFn",
+    "sorryAx": 0,
+    "local_axioms": 0
+  },
+  "computability": "todas computaveis; sete tabelas por decide",
+  "classical_choice_producing_data": 0,
+  "forbidden_tokens": 0,
+  "silent_corrections": 0,
+  "reuse": {
+    "analyzeTransitionTable": 4,
+    "run?_eq_iterate_step": 1,
+    "toRaw_valid": 2,
+    "cycleCandidates": 0,
+    "exists_bounded_iterate_collision": 0,
+    "exists_ne_map_eq_of_card_lt": 0,
+    "detectCycleWitness?": 0,
+    "validateTransitionTable_code": 0,
+    "validateTransitionTable_docstring": 1
+  },
+  "documentation_reference": {
+    "symbol": "validateTransitionTable",
+    "executable_call": false,
+    "mathematical_dependency": false,
+    "violation": false
+  },
+  "concrete_tests": {
+    "count": 8,
+    "native_decide": 0,
+    "results": {
+      "Fin 1": "#[0] -> ok 0/1",
+      "Bool id": "#[0,1] -> ok 0/1",
+      "Bool not": "#[1,0] -> ok 0/2",
+      "Fin 3": "#[1,2,2] -> ok 2/1",
+      "Fin 4": "#[1,2,3,2] -> ok 2/2",
+      "Fin 4 permutada": "#[1,0,1,2] -> ok 2/2",
+      "tableIndex permutado de 0": 3,
+      "Empty": "#[]"
+    }
+  },
+  "semantic_invariance": "preservada por qualquer codificacao certificada; eh a soundness",
+  "concrete_witness_invariance_claimed": false,
+  "aggregators": {
+    "front_umbrella_imports": 4,
+    "engineering_imports_front": true,
+    "root_reaches_engineering": true,
+    "tests_registered_in_root": 3,
+    "umbrella_audit_registered_in_root": false
+  },
+  "umbrella_audit": {
+    "file": "TamesisLab/Tests/EngFiniteStateEncoding001UmbrellaAudit.lean",
+    "exit": 0,
+    "seconds": 80,
+    "declarations_checked": 15
+  },
+  "isolated_tests": {
+    "Commutation.lean": 0,
+    "DynamicAnalysis.lean": 0,
+    "EngFiniteStateEncoding001.lean": 0,
+    "EngFiniteStateEncoding001Execution.lean": 0,
+    "EngFiniteStateEncoding001Axioms.lean": 0,
+    "EngFiniteStateEncoding001UmbrellaAudit.lean": 0
+  },
+  "lake_build": {
+    "status": "PASS",
+    "exit": 0,
+    "jobs": 8757,
+    "delta_vs_formalization": 0
+  },
+  "claim": {
+    "claim_id": "CERTIFIED-FINITE-STATE-ENCODING-FORMAL-001",
+    "work_status": "VERIFIED",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "new_claims_created": 0
+  },
+  "ledger_size": 22,
+  "gaps": {
+    "total": 20,
+    "resolved_by_design": 3,
+    "resolved_by_api_audit": 3,
+    "resolved_formally": 9,
+    "open_deferred": 4,
+    "open_bibliographic": 1,
+    "closed_by_expectation": 0
+  },
+  "stop_conditions": 19,
+  "stop_conditions_triggered": 0,
+  "mathematical_modules_modified": 0,
+  "new_mathematical_theorems": 0,
+  "runtime_implementation_modified": 0,
+  "public_api_changed": 0,
+  "lean_files_created": 1,
+  "cli_created": false,
+  "parser_created": false,
+  "json_interface_created": false,
+  "network_created": false,
+  "extraction_performed": false,
+  "integration_performed": false,
+  "legacy_files_modified": 0,
+  "rh_nogo_001_touched": 0,
+  "found_semigroup_002_touched": 0,
+  "found_functional_graph_001_touched": 0,
+  "found_cycle_detection_001_touched": 0,
+  "eng_finite_state_runtime_001_touched": 0,
+  "eng_finite_state_encoding_001_math_touched": 0,
+  "documents_created": 12,
+  "documents_total": 65,
+  "mathematical_novelty": "NONE",
+  "algorithmic_novelty": "NONE",
+  "research_role": "FORMAL_SOFTWARE_BRIDGE",
+  "final_state": {
+    "active_work_item": "ENG-FINITE-STATE-ENCODING-001",
+    "work_status": "VERIFIED",
+    "specification_status": "APPROVED",
+    "specification_review": "APPROVED",
+    "formalization_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED",
+    "reencoding_invariance_status": "NOT_AUTHORIZED",
+    "extraction_status": "NOT_AUTHORIZED",
+    "cli_status": "NOT_AUTHORIZED",
+    "parser_status": "NOT_AUTHORIZED",
+    "integration_status": "NOT_AUTHORIZED",
+    "external_abstraction_correctness": "DEFERRED",
+    "current_blocker": null,
+    "authorized_action": "PORTFOLIO_REVIEW_REQUIRED"
+  },
+  "allowlist_entries_added": 0,
+  "commit_message": "lab: review certified finite-state encoding result",
+  "commits_created": 1,
+  "amend_used": false,
+  "next_expected_gate": "PORTFOLIO-REVIEW",
+  "operational_status": "LABORATORY_IDLE_AWAITING_INSTRUCTIONS",
+  "final_status": "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_APPROVED"
+}

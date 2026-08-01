@@ -1,0 +1,258 @@
+{
+  "schema": "tamesis-portfolio-review-result/1",
+  "gate": "PORTFOLIO_REVIEW",
+  "gate_label": "PORTFOLIO-REVIEW-AFTER-CERTIFIED-ENCODING",
+  "date": "2026-08-01",
+  "initial_commit": "e0db1dceaf8e73239d361ed17453b050716d88bc",
+  "canonical_commit_before": "e9e2ce7e3ba589425942efd5b551cf03570334bc",
+  "canonical_commit_after_preflight": "e0db1dceaf8e73239d361ed17453b050716d88bc",
+  "ancestry_check": "cat-file exit 0; merge-base --is-ancestor exit 0",
+  "repository_clean_at_start": true,
+  "processes_active_at_start": 0,
+  "decision": "A_PORTFOLIO_REVIEW_APPROVED_FINITE_ABSTRACTION_SELECTED",
+  "selected_work_item": "FOUND-FINITE-ABSTRACTION-001",
+  "alternatives_compared": 7,
+  "skills_read": 5,
+  "goal_executed": false,
+  "closed_fronts": {
+    "ENG-FINITE-STATE-ENCODING-001": "VERIFIED / APPROVED / VERIFIED / APPROVED; extensao, recodificacao, extracao, CLI, parser e integracao NOT_AUTHORIZED",
+    "ENG-FINITE-STATE-RUNTIME-001": "VERIFIED / APPROVED; external_abstraction_correctness DEFERRED",
+    "FOUND-CYCLE-DETECTION-001": "VERIFIED / APPROVED; extraction NOT_AUTHORIZED; totalization DEFERRED",
+    "FOUND-FUNCTIONAL-GRAPH-001": "VERIFIED / APPROVED; extension NOT_AUTHORIZED",
+    "FOUND-SEMIGROUP-002": "VERIFIED / APPROVED; extension NOT_AUTHORIZED",
+    "RH-NOGO-001": "FROZEN_PARTIAL_RESULT / NOT_AUTHORIZED / NO_EXECUTION"
+  },
+  "yaml_integrity_at_start": {
+    "duplicate_keys": 0,
+    "files_scanned": 55,
+    "status": "VERIFIED_CLEAN"
+  },
+  "gaps": {
+    "GAP-A": "correcao da abstracao externa continua aberta (cientifica)",
+    "GAP-B": "abstracoes muitos-para-um nao sao cobertas (cientifica)",
+    "GAP-C": "um ciclo abstrato pode ser espurio (cientifica)",
+    "GAP-D": "invariancia do witness concreto (engenharia)",
+    "GAP-E": "extracao nativa (engenharia)",
+    "GAP-F": "CLI e parser (engenharia)",
+    "GAP-G": "diagnosticos detalhados (engenharia)",
+    "GAP-H": "front matter YAML em Markdown (governanca)"
+  },
+  "gap_classes": {
+    "cientificas": [
+      "GAP-A",
+      "GAP-B",
+      "GAP-C"
+    ],
+    "engenharia": [
+      "GAP-D",
+      "GAP-E",
+      "GAP-F",
+      "GAP-G"
+    ],
+    "governanca": [
+      "GAP-H"
+    ]
+  },
+  "alternatives": {
+    "A": {
+      "work_item_candidate": "FOUND-FINITE-ABSTRACTION-001",
+      "primary_gap_closed": "GAP-B e GAP-C",
+      "formal_cost": "MODERATE",
+      "scientific_value": "HIGH",
+      "reuse_of_verified_artifacts": "VERY_HIGH",
+      "risk_of_false_statement": "LOW",
+      "risk_of_implementation_coupling": "LOW",
+      "thirty_day_poc": "YES",
+      "user_visible_product": "NO",
+      "selected": true
+    },
+    "B": {
+      "work_item_candidate": "ENG-FINITE-STATE-REENCODING-001",
+      "primary_gap_closed": "GAP-D",
+      "formal_cost": "MODERATE",
+      "scientific_value": "LOW",
+      "risk_of_implementation_coupling": "HIGH",
+      "thirty_day_poc": "PARTIAL",
+      "selected": false
+    },
+    "C": {
+      "work_item_candidate": "ENG-LEAN-NATIVE-EXTRACTION-001",
+      "primary_gap_closed": "GAP-E",
+      "formal_cost": "LOW",
+      "scientific_value": "LOW",
+      "thirty_day_poc": "PARTIAL",
+      "selected": false
+    },
+    "D": {
+      "work_item_candidate": "ENG-FINITE-STATE-CLI-001",
+      "primary_gap_closed": "GAP-F",
+      "risk_of_scope_expansion": "VERY_HIGH",
+      "thirty_day_poc": "NO",
+      "selected": false
+    },
+    "E": {
+      "work_item_candidate": "ENG-FINITE-STATE-DIAGNOSTICS-001",
+      "primary_gap_closed": "GAP-G",
+      "scientific_value": "LOW",
+      "thirty_day_poc": "YES",
+      "selected": false
+    },
+    "F": {
+      "work_item_candidate": "LAB-GOV-YAML-FRONT-MATTER-001",
+      "primary_gap_closed": "GAP-H",
+      "governance_value": "MODERATE",
+      "thirty_day_poc": "YES",
+      "selected": false,
+      "audit": {
+        "markdown_files": 429,
+        "with_front_matter": 277,
+        "with_duplicate_keys": 0,
+        "lab_state_block": "sem duplicatas",
+        "concrete_immediate_risk": false
+      }
+    },
+    "G": {
+      "work_item_candidate": "frente Clay ou TOE",
+      "formal_cost": "EXTREME",
+      "risk_of_false_statement": "EXTREME",
+      "thirty_day_poc": "NO",
+      "selected": false
+    }
+  },
+  "decision_rule_conditions": {
+    "1_no_equivalent_item": "PASS",
+    "2_semiconj_gives_iterate_correspondence": "PASS_COMPILED",
+    "3_weak_soundness_ends_in_abstract_equality": "PASS_COMPILED",
+    "4_counterexample_to_naive_reflection": "PASS_COMPILED",
+    "5_explicit_reflection_condition": "PASS_COMPILED",
+    "6_condition_not_automatic_from_semiconj": "PASS_COMPILED",
+    "7_reuses_encoding_without_modifying_it": "PASS",
+    "8_no_external_integration_needed": "PASS",
+    "9_no_finiteness_of_C": "PASS_COMPILED",
+    "10_no_decidable_eq_C": "PASS_COMPILED",
+    "11_thirty_day_poc": "PASS",
+    "12_novelty_remains_none": "PASS"
+  },
+  "apis_audited": [
+    "Function.Semiconj",
+    "Function.Semiconj.iterate_right",
+    "Function.Injective",
+    "Set.InjOn",
+    "Set.range",
+    "Set.mem_range_self",
+    "Set.Pairwise",
+    "Nat.iterate",
+    "Function.iterate_succ_apply",
+    "Option.some.inj"
+  ],
+  "apis_all_found": true,
+  "observation_probe": {
+    "file": "/tmp/FiniteAbstractionObservationProbe.lean",
+    "exit": 0,
+    "seconds": 31,
+    "errors": 0,
+    "forbidden_tokens": 0
+  },
+  "reflection_probe": {
+    "file": "/tmp/FiniteAbstractionReflectionProbe.lean",
+    "exit": 0,
+    "seconds": 6,
+    "errors": 0,
+    "forbidden_tokens": 0
+  },
+  "api_probe": {
+    "exit": 0,
+    "checks": 10
+  },
+  "probes_removed": true,
+  "lake_build_executed": false,
+  "orbit_separating": {
+    "definition": "∀ i j, abstract (stepC^[i] start) = abstract (stepC^[j] start) → stepC^[i] start = stepC^[j] start",
+    "non_tautological": true,
+    "consumer_checkable": true,
+    "reusable": true,
+    "requires_global_injectivity": false,
+    "requires_only_orbit_injectivity": true,
+    "axioms": "nenhum"
+  },
+  "set_injOn_comparison": {
+    "equivalent": true,
+    "theorem": "orbitSeparating_iff_injOn",
+    "axioms": "nenhum",
+    "preliminary_recommendation": "OrbitSeparating primaria; Set.InjOn como vista equivalente",
+    "name_frozen": false
+  },
+  "counterexample": {
+    "id": "BOOL_TO_UNIT",
+    "C": "Bool",
+    "A": "Unit",
+    "stepC": "not",
+    "stepA": "id",
+    "abstract": "constante",
+    "semiconj_holds": true,
+    "abstract_period_one": true,
+    "concrete_repeats_after_one_step": false,
+    "naive_cycle_reflection": "FALSE",
+    "theorem": "naive_cycle_reflection_is_false",
+    "axioms": "nenhum"
+  },
+  "spurious_cycle_risk": "confirmado e formalizado: uma repeticao abstrata pode nao corresponder a repeticao concreta alguma",
+  "axioms_measured": {
+    "abstract_iterate": "[propext]",
+    "OrbitSeparating": "nenhum",
+    "orbitSeparating_iff_injOn": "nenhum",
+    "boolToUnit_not_orbitSeparating": "nenhum",
+    "orbitSeparating_of_injective": "nenhum",
+    "naive_cycle_reflection_is_false": "nenhum",
+    "observational_sound": "[propext, Classical.choice, Quot.sound]",
+    "concrete_cycle_of_orbit_separating": "[propext, Classical.choice, Quot.sound]"
+  },
+  "thirty_day_poc": "YES",
+  "duplicate_work_item": false,
+  "candidate_results": [
+    "ABS-CORE-001",
+    "ABS-CORE-002",
+    "ABS-CORE-003",
+    "ABS-CORE-004",
+    "ABS-CORE-005",
+    "ABS-CORE-006",
+    "ABS-CORE-007",
+    "ABS-CORE-008"
+  ],
+  "gaps_opened": 20,
+  "stop_conditions": 16,
+  "epistemic_boundary": "Uma semiconjugacao prova que a trajetoria concreta eh observada corretamente no sistema abstrato. Uma igualdade entre estados abstratos demonstra apenas que os estados concretos possuem a mesma observacao. A reflexao exige hipotese adicional. Mesmo formalizada, provar que a abstracao representa o sistema externo real continua sendo do adaptador da aplicacao.",
+  "mathematical_novelty": "NONE",
+  "algorithmic_novelty": "NONE",
+  "research_role": "FORMAL_SEMANTIC_FOUNDATION",
+  "lean_files_created": 0,
+  "permanent_proofs_created": 0,
+  "claims_promoted": 0,
+  "claim_count": 22,
+  "work_items_before": 15,
+  "work_items_after": 16,
+  "yaml_duplicate_keys_before": 0,
+  "yaml_duplicate_keys_after": 0,
+  "legacy_files_modified": 0,
+  "rh_nogo_001_touched": 0,
+  "found_semigroup_002_math_touched": 0,
+  "found_functional_graph_001_math_touched": 0,
+  "found_cycle_detection_001_math_touched": 0,
+  "eng_finite_state_runtime_001_math_touched": 0,
+  "eng_finite_state_encoding_001_math_touched": 0,
+  "allowlist_entries_added": 1,
+  "allowlist_entry": "FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+  "wildcards_used": 0,
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-ABSTRACTION-001",
+    "work_status": "SCOPED",
+    "current_blocker": null,
+    "authorized_action": "FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  },
+  "commit_message": "lab: select certified finite abstraction foundation",
+  "commits_created": 1,
+  "amend_used": false,
+  "next_expected_gate": "FOUND-FINITE-ABSTRACTION-001-SPECIFICATION",
+  "operational_status": "LABORATORY_IDLE_AWAITING_INSTRUCTIONS",
+  "status": "PASS"
+}

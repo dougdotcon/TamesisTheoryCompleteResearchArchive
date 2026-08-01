@@ -650,3 +650,68 @@ queue:
       ainda nao existe. NAO eh extensao de ENG-FINITE-STATE-RUNTIME-001,
       cujo extension_status permanece NOT_AUTHORIZED; a dependencia eh
       consumo de API verificada.
+
+  - work_item_id: FOUND-FINITE-ABSTRACTION-001
+    title: Certified Finite Abstraction, Simulation, and Cycle-Reflection Boundaries
+    track: FOUNDATIONS
+    target_statement: >
+      Formalizar a correspondencia entre um sistema deterministico
+      concreto e uma abstracao finita por semiconjugacao, provar a
+      recorrencia observacional produzida pela analise do sistema
+      abstrato e identificar uma condicao suficiente para refletir essa
+      recorrencia como igualdade concreta.
+    expected_product: >
+      Especificacao formal da abstracao, da correspondencia de iteradas,
+      da soundness observacional, da condicao de reflexao, do teorema
+      forte condicionado e de um contraexemplo a reflexao ingenua.
+    dependencies:
+      - FOUND-SEMIGROUP-002
+      - FOUND-FUNCTIONAL-GRAPH-001
+      - FOUND-CYCLE-DETECTION-001
+      - ENG-FINITE-STATE-RUNTIME-001
+      - ENG-FINITE-STATE-ENCODING-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateEncoding/"
+      - "03_ENGINEERING/02_FINITE_STATE_ENCODING/ENG_FINITE_STATE_ENCODING_001/PUBLIC_API.md"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 7
+    external_dependency: none
+    cross_track_value: very_high
+    stop_condition: >
+      A frente tratar uma igualdade abstrata como igualdade concreta sem
+      hipotese explicita de reflexao ou declarar correta uma abstracao
+      externa nao certificada.
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_SEMANTIC_FOUNDATION
+    gaps_opened: 20
+    stop_conditions_declared: 16
+    alternatives_compared: 7
+    decision_document: "01_PORTFOLIO/FINITE_ABSTRACTION_CANDIDATE.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_CERTIFIED_ENCODING.md"
+    comparison_matrix: "01_PORTFOLIO/NEXT_TARGET_COMPARISON_AFTER_ENCODING.md"
+    gaps_targeted: "abstracoes muitos-para-um e ciclos abstratos espurios"
+    naive_cycle_reflection: FALSE
+    counterexample: BOOL_TO_UNIT
+    reflection_condition_candidate: OrbitSeparating
+    reflection_condition_non_tautological: true
+    requires_finite_concrete_type: false
+    requires_decidable_eq_concrete_type: false
+    probes_compiled_in_portfolio_gate: 8
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW apos o encerramento de
+      ENG-FINITE-STATE-ENCODING-001. Sete alternativas foram comparadas:
+      invariancia do witness sob recodificacao, extracao nativa, CLI e
+      parser, diagnostico detalhado, integridade de front matter YAML,
+      nova frente matematica independente e esta. Eh a unica que ataca a
+      lacuna cientifica restante — abstracoes muitos-para-um que perdem
+      informacao. O resultado observacional, o contraexemplo a reflexao
+      ingenua e a condicao de reflexao ja compilaram em probe descartavel.
+      NAO eh extensao de ENG-FINITE-STATE-ENCODING-001, cujo
+      extension_status permanece NOT_AUTHORIZED; a dependencia eh consumo
+      de API verificada.

@@ -1,5 +1,64 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-CERTIFIED-ENCODING - 2026-08-01
+
+### Selected
+
+- **`FOUND-FINITE-ABSTRACTION-001`**, abstracao finita certificada,
+  simulacao e fronteiras de reflexao de ciclos. Sete alternativas
+  comparadas; as **doze** condicoes da regra de decisao verificadas,
+  **oito delas por compilacao**.
+
+### Proved in probe
+
+- **A reflexao ingenua eh FALSA, e agora isso eh teorema**:
+
+```lean
+theorem naive_cycle_reflection_is_false :
+    ¬ (∀ C A stepC stepA abstract, Function.Semiconj abstract stepC stepA →
+        ∀ start, abstract (stepC start) = abstract start → stepC start = start)
+```
+
+  Compilado **sem depender de axioma nenhum**, pelo contraexemplo
+  `Bool → Unit` com `stepC = not`: o sistema abstrato repete em um passo,
+  o concreto nao.
+- A **soundness observacional** vale com apenas semiconjugacao: a analise
+  do sistema abstrato conclui `abstract (stepC^[b+p] start) =
+  abstract (stepC^[b] start)` — igualdade entre **observacoes**, nao
+  entre estados.
+- `OrbitSeparating` recupera a igualdade concreta, e eh **nao
+  tautologica**: `boolToUnit_not_orbitSeparating` prova que ela falha
+  exatamente no contraexemplo. Sem axiomas.
+- `orbitSeparating_iff_injOn` — equivalente a `Set.InjOn` sobre a orbita.
+  Sem axiomas.
+
+### Measured
+
+- Nenhuma peca exige `C` finito nem `DecidableEq C`: os probes usam
+  `C : Type*` sem typeclass.
+- Auditoria da alternativa `F`: `429` arquivos Markdown, `277` com front
+  matter YAML, **`0`** com chave duplicada; o bloco de `LAB_STATE.md`
+  tambem limpo. A lacuna eh real — o scanner seleciona por extensao — mas
+  **nao esta sendo explorada**, e por isso nao tem prioridade.
+
+### Rejected
+
+- `B` fecharia `ENC-GAP-020`, mas a igualdade do witness concreto depende
+  da ordem de enumeracao do detector: risco de acoplamento **o mais alto
+  das sete**.
+- `C` e `D` distribuem garantia sem contrato semantico para o caso geral;
+  `D` ainda depende de `C`.
+- `E` eh conforto operacional. `G` nao tem produto em trinta dias.
+
+### Locked
+
+- `authorized_action: FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+  Uma entrada literal, sem wildcard. Formalizacao, bissimulacao,
+  quocientes, extracao, CLI e integracao seguem **nao autorizadas**;
+  todos os `extension_status: NOT_AUTHORIZED` preservados. `22` claims,
+  `0` duplicatas YAML.
+
+
 ## LAB-GOV-YAML-DUPLICATE-KEYS-001 - 2026-08-01
 
 ### Found

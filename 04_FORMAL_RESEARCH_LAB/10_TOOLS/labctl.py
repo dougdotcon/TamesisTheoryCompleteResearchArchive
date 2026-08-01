@@ -449,7 +449,8 @@ def validate() -> dict[str, Any]:
     if active not in {"LAB-BENCH-001", "FOUND-SEMIGROUP-001", "RH-NOGO-001",
                       "FOUND-SEMIGROUP-002", "FOUND-FUNCTIONAL-GRAPH-001",
                       "FOUND-CYCLE-DETECTION-001", "ENG-FINITE-STATE-RUNTIME-001",
-                      "ENG-FINITE-STATE-ENCODING-001"}:
+                      "ENG-FINITE-STATE-ENCODING-001",
+                      "FOUND-FINITE-ABSTRACTION-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -478,6 +479,11 @@ def validate() -> dict[str, Any]:
         fsr.get("status") != "VERIFIED" or fsr.get("result_review") != "APPROVED"
     ):
         errors.append("ENG-FINITE-STATE-ENCODING-001 cannot be active before ENG-FINITE-STATE-RUNTIME-001 is VERIFIED with result_review APPROVED")
+    fse = item_by_id.get("ENG-FINITE-STATE-ENCODING-001", {})
+    if active == "FOUND-FINITE-ABSTRACTION-001" and (
+        fse.get("status") != "VERIFIED" or fse.get("result_review") != "APPROVED"
+    ):
+        errors.append("FOUND-FINITE-ABSTRACTION-001 cannot be active before ENG-FINITE-STATE-ENCODING-001 is VERIFIED with result_review APPROVED")
     if state.get("authorized_action") not in {
         "LAB_BENCHMARK_FORMALIZATION_PREPARATION_AUTHORIZED",
         "LAB_MATHLIB_SMOKE_RECOVERY_AUTHORIZED",
@@ -516,6 +522,7 @@ def validate() -> dict[str, Any]:
         "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_AUTHORIZED",
         "ENG_FINITE_STATE_ENCODING_001_FORMALIZATION_AUTHORIZED",
         "ENG_FINITE_STATE_ENCODING_001_RESULT_REVIEW_AUTHORIZED",
+        "FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:

@@ -1,38 +1,31 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T23:59:59-03:00
-canonical_commit: "e9e2ce7e3ba589425942efd5b551cf03570334bc"
+updated_at: 2026-08-02T03:10:00-03:00
+canonical_commit: "e0db1dceaf8e73239d361ed17453b050716d88bc"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "engineering_foundation"
-active_work_item: "ENG-FINITE-STATE-ENCODING-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
-extension_status: "NOT_AUTHORIZED"
-reencoding_invariance_status: "NOT_AUTHORIZED"
-external_abstraction_correctness: "DEFERRED"
+active_track: "foundations"
+active_work_item: "FOUND-FINITE-ABSTRACTION-001"
+work_status: "SCOPED"
 extraction_status: "NOT_AUTHORIZED"
 cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
-last_verified_artifact: "lab-gov-yaml-duplicate-keys-001-result.json"
+last_verified_artifact: "portfolio-review-after-certified-encoding-result.json"
 current_blocker: null
 next_single_action: >
-  Aguardar um gate explícito de revisão de portfólio. A fila
-  possui interpretação YAML unívoca e o validador rejeita
-  qualquer chave duplicada. Nenhuma extensão, recodificação,
-  extração, CLI, parser ou integração está autorizada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
-portfolio_review_status: "READY"
+  Preparar a especificação da semiconjugação entre o sistema
+  concreto e a abstração finita, distinguir soundness
+  observacional de reflexão concreta e congelar o contraexemplo
+  à reflexão ingênua sem iniciar a formalização.
+authorized_action: "FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+portfolio_review_status: "CONSUMED"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
 closed_work_items:
@@ -71,6 +64,21 @@ closed_work_items:
     external_format_status: NOT_AUTHORIZED
     integration_status: NOT_AUTHORIZED
     detailed_diagnostics_status: NOT_AUTHORIZED
+    external_abstraction_correctness: DEFERRED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+  ENG-FINITE-STATE-ENCODING-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    reencoding_invariance_status: NOT_AUTHORIZED
+    extraction_status: NOT_AUTHORIZED
+    cli_status: NOT_AUTHORIZED
+    parser_status: NOT_AUTHORIZED
+    integration_status: NOT_AUTHORIZED
     external_abstraction_correctness: DEFERRED
     mathematical_novelty: NONE
     algorithmic_novelty: NONE
@@ -114,6 +122,9 @@ governance_rules:
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
   - "Não usar processo com exit diferente de zero como evidência de PASS"
+  - "Não tratar igualdade abstrata como igualdade concreta sem hipótese de reflexão"
+  - "Não afirmar que abstrações finitas não produzem ciclos espúrios"
+  - "Não assumir bissimulação onde só há semiconjugação"
   - "Não aceitar duas definições da mesma chave YAML, ainda que os valores coincidam"
   - "Não adotar o valor efetivo do parser como fonte de verdade ao resolver divergência"
   - "Não afirmar invariância do witness concreto sob recodificação"

@@ -1,0 +1,109 @@
+schema: tamesis-gap-register/1
+work_item_id: ENG-FINITE-STATE-ENCODING-001
+updated_at: '2026-08-01'
+reviewed_at_gate: ENG_FINITE_STATE_ENCODING_001_SPECIFICATION
+resolved_by_design: 3
+resolved_by_api_audit: 3
+ready_for_formalization: 9
+open_deferred: 3
+open_bibliographic: 1
+blocked: 0
+total: 19
+gaps:
+  ENC-GAP-001:
+    title: representacao encode/decode
+    status: RESOLVED_BY_DESIGN
+    note: estrutura de quatro campos congelada; a codificacao eh dado fornecido
+    portfolio_traceability: ENC-GAP-001 do portfolio
+  ENC-GAP-002:
+    title: politica para n = 0
+    status: RESOLVED_BY_DESIGN
+    note: nada eh adicionado a estrutura; a chamada de analise eh nao habitada
+    portfolio_traceability: ENC-GAP-002 e ENC-GAP-012 do portfolio
+  ENC-GAP-003:
+    title: construcao computavel com Array.ofFn
+    status: RESOLVED_BY_API_AUDIT
+    note: 'Array.ofFn computavel, [propext], #eval em sete modelos'
+    portfolio_traceability: ENC-GAP-003 do portfolio
+  ENC-GAP-004:
+    title: igualdade entre Array.size e n
+    status: RESOLVED_BY_API_AUDIT
+    note: Array.size_ofFn aceito em modo termo; orientacao size = n congelada
+    portfolio_traceability: ENC-GAP-004 do portfolio
+  ENC-GAP-005:
+    title: validade estrutural automatica
+    status: READY_FOR_FORMALIZATION
+    note: campo closed provado no probe; toRaw_valid reutilizado sem linha nova
+    portfolio_traceability: ENC-GAP-005 do portfolio
+  ENC-GAP-006:
+    title: indice central Fin n <-> Fin table.size
+    status: RESOLVED_BY_DESIGN
+    note: 'exatamente dois pontos: tableIndex e buildTransitionTable_getElem'
+    portfolio_traceability: ENC-GAP-006 do portfolio
+  ENC-GAP-007:
+    title: preservacao do valor Nat pelo cast
+    status: READY_FOR_FORMALIZATION
+    note: tableIndex_val por rfl; verificado tambem por decide sob codificacao permutada
+    portfolio_traceability: ENC-GAP-007 do portfolio
+  ENC-GAP-008:
+    title: comutacao de um passo
+    status: READY_FOR_FORMALIZATION
+    note: cinco linhas no probe; decode_encode eh a lei usada
+    portfolio_traceability: ENC-GAP-008 do portfolio
+  ENC-GAP-009:
+    title: semiconjugacao
+    status: READY_FOR_FORMALIZATION
+    note: termo de uma linha; a inversao de orientacao esta congelada
+    portfolio_traceability: ENC-GAP-009 do portfolio
+  ENC-GAP-010:
+    title: comutacao de iteradas
+    status: READY_FOR_FORMALIZATION
+    note: Function.Semiconj.iterate_right; sem inducao manual
+    portfolio_traceability: ENC-GAP-010 do portfolio
+  ENC-GAP-011:
+    title: correspondencia de run?
+    status: READY_FOR_FORMALIZATION
+    note: tres linhas; dois usos de tableIndex_val; nenhuma execucao nova
+    portfolio_traceability: ENC-GAP-011 do portfolio
+  ENC-GAP-012:
+    title: soundness tipada
+    status: READY_FOR_FORMALIZATION
+    note: tres linhas; termina em igualdade sobre S por encode_injective
+    portfolio_traceability: ENC-GAP-012 do portfolio
+  ENC-GAP-013:
+    title: completeness tipada
+    status: READY_FOR_FORMALIZATION
+    note: sem pre-condicoes do consumidor; nenhuma repeticao da casa dos pombos
+    portfolio_traceability: ENC-GAP-013 do portfolio, reescopado
+  ENC-GAP-014:
+    title: impossibilidade dos erros
+    status: READY_FOR_FORMALIZATION
+    note: um corolario quantificado sobre err; as tres exclusoes individuais ficam DEFERRED
+    portfolio_traceability: ENC-GAP-014 do portfolio, reescopado
+  ENC-GAP-015:
+    title: computabilidade e axiomas
+    status: RESOLVED_BY_API_AUDIT
+    note: 'pegada uniforme [propext, Classical.choice, Quot.sound]; nenhum sorryAx; #eval funciona'
+    portfolio_traceability: ENC-GAP-011 e ENC-GAP-015 do portfolio
+  ENC-GAP-016:
+    title: bibliografia e atribuicao historica
+    status: OPEN_BIBLIOGRAPHIC
+    note: nenhuma fonte primaria consultada; codificar tipo finito como Fin n eh rotina desde os anos
+      1950
+    portfolio_traceability: ENC-GAP-016 do portfolio
+  ENC-GAP-017:
+    title: extracao futura
+    status: OPEN_DEFERRED
+    note: computabilidade interna eh pre-condicao, nao extracao; NOT_AUTHORIZED
+    portfolio_traceability: ENC-GAP-013 do portfolio, preservado
+  ENC-GAP-018:
+    title: parser externo
+    status: OPEN_DEFERRED
+    note: nenhuma entrada textual, JSON, CSV, arquivo ou rede; NOT_AUTHORIZED
+    portfolio_traceability: ENC-GAP-014 do portfolio, preservado
+  ENC-GAP-019:
+    title: correcao da aplicacao concreta
+    status: OPEN_DEFERRED
+    note: a frente cobre apenas sistemas ja tipados com codificacao fornecida; o caso externo geral segue
+      aberto
+    portfolio_traceability: ENC-GAP-015 do portfolio, preservado; ver RT-GAP-017

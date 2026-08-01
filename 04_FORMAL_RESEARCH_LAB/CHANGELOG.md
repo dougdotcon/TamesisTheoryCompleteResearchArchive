@@ -1,5 +1,63 @@
 # Changelog do laboratório formal
 
+## ENG-FINITE-STATE-ENCODING-001-SPECIFICATION - 2026-08-01
+
+### Specified
+
+- **A ponte que faltava**: de um sistema Lean tipado ate um certificado
+  interpretado NESSE sistema. `16` declaracoes publicas planejadas, `13`
+  resultados CORE, `29` documentos, `19` lacunas, `18` stop conditions.
+- O consumidor fornece `CertifiedFiniteEncoding S n`, `stepS : S -> S` e
+  `start : S`. **Zero typeclasses** — sem `Fintype`, sem `DecidableEq`,
+  sem `Nonempty`, sem `Inhabited`.
+
+### Proved in probe
+
+- **Os treze resultados CORE compilaram**, nao apenas foram planejados.
+  Dois probes descartaveis, ambos exit `0`, ambos removidos.
+- A soundness termina em **igualdade sobre `S`**:
+  `stepS^[b+p] start = stepS^[b] start`. Tres linhas de prova.
+- A completeness **nao exige pre-condicao nenhuma** do consumidor: a
+  validade e o dominio sao consequencias da construcao.
+- `table_iterate_commutes` eh **um termo de uma linha** via
+  `Function.Semiconj.iterate_right` — contra a inducao com dois `show` que
+  o resultado analogo custou na frente anterior.
+
+### Frozen
+
+- **Dois** pontos de transporte `Fin n` ↔ `Fin table.next.size`, e apenas
+  dois: `tableIndex` e `buildTransitionTable_getElem`.
+- `tableIndex_val` — o teorema **anti-correcao** desta frente — eh `rfl`:
+  o cast nao modifica o indice natural.
+- Orientacao unica do tamanho: `size = n`.
+- `decode_encode` eh a lei da comutacao; `encode_decode` nao se aplica ali.
+
+### Measured
+
+- Achado tecnico central: `Array.size_ofFn` e `Array.getElem_ofFn` sao
+  aceitos **em modo termo** por defeq, e **rejeitados** por `rw`/`simp`,
+  que trabalham em transparencia reduzida. Quatro rotas testadas; a que
+  passou foi o termo puro.
+- `ENC-TEST-006`: com a codificacao permutada `i ↦ 3 - i`, a tabela muda
+  de `#[1,2,3,2]` para `#[1,0,1,2]` e o witness **permanece** `⟨2,2⟩`.
+
+### Bounded
+
+- `relationship_to_RT_GAP_017: ADDRESSED_FOR_CERTIFIED_TYPED_SYSTEMS_ONLY`.
+  `RT-GAP-017` **nao** foi alterado retroativamente e o caso externo geral
+  segue `OPEN`.
+- Precisao de linguagem congelada: um erro de codificacao **nao** torna
+  falso o certificado sobre a tabela; ele apenas impede que o certificado
+  sustente uma conclusao sobre o sistema pretendido.
+
+### Locked
+
+- `authorized_action: ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+  Uma entrada literal, sem wildcard. `0` arquivos Lean permanentes, `0`
+  provas permanentes, `lake build` **nao** executado, `21` claims
+  intactas.
+
+
 ## PORTFOLIO-REVIEW-AFTER-RUNTIME-ADAPTER - 2026-08-01
 
 ### Selected

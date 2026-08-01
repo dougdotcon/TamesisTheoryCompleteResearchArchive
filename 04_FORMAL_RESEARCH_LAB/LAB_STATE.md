@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-01T15:20:00-03:00
-canonical_commit: "861dc6bf24b4e1f8da88af138554556e644a3b49"
+updated_at: 2026-08-01T18:10:00-03:00
+canonical_commit: "4c15d4aded3ba706efd24c169a2a5a137eebaf5b"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,15 +10,22 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "engineering_foundation"
 active_work_item: "ENG-FINITE-STATE-ENCODING-001"
-work_status: "SCOPED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
+formalization_status: "NOT_STARTED"
+extraction_status: "NOT_AUTHORIZED"
+cli_status: "NOT_AUTHORIZED"
+parser_status: "NOT_AUTHORIZED"
+integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-last_verified_artifact: "portfolio-review-after-runtime-adapter-result.json"
+last_verified_artifact: "eng-finite-state-encoding-001-specification-result.json"
 current_blocker: null
 next_single_action: >
-  Preparar a especificação de uma codificação finita certificada,
-  construir conceitualmente a tabela correspondente e delimitar
-  os teoremas de comutação sem iniciar a formalização.
-authorized_action: "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a representação da codificação, a construção por
+  Array.ofFn, a política centralizada de casts, a comutação das
+  iterações e a interpretação tipada do CycleWitness antes de
+  autorizar qualquer formalização.
+authorized_action: "ENG_FINITE_STATE_ENCODING_001_SPECIFICATION_REVIEW_AUTHORIZED"
 closed_work_items:
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
@@ -79,6 +86,12 @@ governance_rules:
     termina com verificação independente do efeito.
 prohibited_actions:
   - "Não criar arquivos Lean sob a autorização atual"
+  - "Não derivar a codificação de Fintype: equivFin é noncomputable e truncEquivFin não produz dado"
+  - "Não criar um terceiro ponto de transporte Fin n ↔ Fin table.next.size"
+  - "Não usar encode_decode onde decode_encode é a lei semanticamente necessária"
+  - "Não reprovar a comutação de iteradas por indução manual: Semiconj.iterate_right resolve"
+  - "Não enunciar a soundness sobre a tabela: ela deve terminar em igualdade sobre S"
+  - "Não alterar retroativamente RT-GAP-017 nem tocar a frente do runtime adapter"
   - "Não derivar encode de Fintype.equivFin: é noncomputable e não pode produzir dado"
   - "Não modificar ENG-FINITE-STATE-RUNTIME-001 ao construir a codificação certificada"
   - "Não declarar RT-GAP-017 fechado no caso geral: a frente cobre apenas o recorte tipado"

@@ -1,5 +1,59 @@
 # Changelog do laboratório formal
 
+## FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION - 2026-08-03
+
+### Renamed
+
+- O item ativo passou a ser **`FOUND-FINITE-STATE-ABSTRACTION-001`**. O
+  nome candidato anterior, `FOUND-FINITE-ABSTRACTION-001`, sobrevive
+  apenas em artefatos historicos imutaveis. `aliases_active: 0`,
+  `duplicate_work_items: 0`. A saida (b) da secao 10 de
+  `PROGRAM_STATE_AND_ROADMAP.md` foi a executada.
+
+### Specified
+
+- Especificacao congelada em
+  `02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/`.
+- `CertifiedFiniteAbstraction`: **dois campos**, `abstract` e `commutes`.
+  Nao armazena encoding, estado inicial, witness, tabela nem condicao de
+  reflexao — a codificacao permanece argumento separado.
+- Orientacao da semiconjugacao auditada contra a assinatura real e
+  confirmada por `Iff.rfl`:
+  `abstract (stepC c) = stepA (abstract c)`.
+- **A soundness observacional termina em `A`**, depois de aplicar
+  `abstract`. Concluir em `C` sem hipotese adicional passou a ser
+  `STOP-ABS-004`.
+- A reflexao concreta exige `OrbitSeparating` **visivel na assinatura**.
+- `analyzeAbstractSystem_complete` garante existencia de witness
+  abstrato, e **nao** recorrencia concreta — `STOP-ABS-018`, nova.
+
+### Probed
+
+- `/tmp/FiniteStateAbstractionProbe.lean`, **exit 0**, removido depois.
+  Nenhuma declaracao destinada a falhar; o resultado negativo e o
+  teorema `boolToUnit_not_orbitSeparating`, que compila **sem depender
+  de axioma nenhum**.
+- `OrbitSeparating`, `orbitSeparating_iff_injOn` e
+  `orbitSeparating_of_injective`: nenhum axioma. A pegada
+  `propext, Classical.choice, Quot.sound` entra somente onde
+  `analyzeEncodedSystem` entra.
+- Nenhuma typeclass sobre `C` ou `A` na cadeia central, confirmado por
+  compilacao com `C A : Type*`.
+
+### Decided
+
+- `Set.InjOn` sobre a orbita: equivalencia **compilada sem axiomas** e
+  ainda assim classificada `DEFERRED_OPTIONAL`. Compilar nao e motivo
+  para publicar; nenhum resultado central a consome.
+
+### Locked
+
+- `authorized_action: FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_AUTHORIZED`,
+  entrada literal, sem wildcard. Formalizacao, bissimulacao, quocientes,
+  extracao, CLI e integracao seguem **nao autorizadas**. `0` arquivos
+  Lean permanentes criados, `0` claims promovidas, `22` no ledger, `0`
+  duplicatas YAML.
+
 ## PORTFOLIO-REVIEW-AFTER-CERTIFIED-ENCODING - 2026-08-01
 
 ### Selected

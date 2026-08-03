@@ -1,7 +1,8 @@
 ---
 document_id: PR-FINITE-ABSTRACTION-CANDIDATE
-work_item_id: FOUND-FINITE-ABSTRACTION-001
-status: SCOPED
+work_item_id: FOUND-FINITE-STATE-ABSTRACTION-001
+previous_candidate_id: FOUND-FINITE-ABSTRACTION-001
+status: READY
 mathematical_novelty: NONE
 algorithmic_novelty: NONE
 research_role: FORMAL_SEMANTIC_FOUNDATION

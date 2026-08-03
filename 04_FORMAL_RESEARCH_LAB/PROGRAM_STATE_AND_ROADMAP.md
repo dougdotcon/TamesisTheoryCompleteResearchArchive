@@ -1,8 +1,9 @@
 ---
 document_id: PROGRAM-STATE-AND-ROADMAP
 generated_at_commit: ffedf33b26b146354c2a5b09592431fcebfb92fd
-canonical_commit: e0db1dceaf8e73239d361ed17453b050716d88bc
+canonical_commit: 17c070fceba6f3c1600205ca9293228da73614a1
 scope: consolidado do laboratorio formal
+superseded_sections: "10 — resolvida pela secao 11"
 mathematical_novelty: NONE
 algorithmic_novelty: NONE
 ---
@@ -18,12 +19,12 @@ produzi-lo.
 ## 1. Checkpoint — onde estamos agora
 
 ```text
-HEAD                    ffedf33b26b146354c2a5b09592431fcebfb92fd
-canonical_commit        e0db1dceaf8e73239d361ed17453b050716d88bc
-active_work_item        FOUND-FINITE-ABSTRACTION-001
-work_status             SCOPED
-specification_status    <ainda nao existe>
-authorized_action       FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED
+HEAD                    17c070fceba6f3c1600205ca9293228da73614a1
+canonical_commit        17c070fceba6f3c1600205ca9293228da73614a1
+active_work_item        FOUND-FINITE-STATE-ABSTRACTION-001
+work_status             READY
+specification_status    READY_FOR_REVIEW
+authorized_action       FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_AUTHORIZED
 current_blocker         null
 portfolio_review_status CONSUMED
 yaml_duplicate_key_status VERIFIED_CLEAN
@@ -39,10 +40,10 @@ arvore de trabalho      limpa
 processos ativos        nenhum
 ```
 
-**A frente ativa está SCOPED, não especificada.** O gate de preparação da
-especificação foi emitido e **parou no §0**, e o gate de revisão foi
-emitido e **parou no §1** — os dois pelo mesmo motivo, detalhado na
-seção 10.
+**A frente ativa está READY e especificada.** O bloqueio descrito na
+seção 10 foi resolvido pela **saída (b)**, registrada na seção 11: o
+item foi renomeado para `FOUND-FINITE-STATE-ABSTRACTION-001` e a
+especificação foi congelada.
 
 ### As cinco frentes encerradas
 
@@ -314,7 +315,7 @@ nenhuma fonte primaria consultada em nenhuma das tres frentes formais
 
 ## 7. O que a próxima frente vai provar
 
-`FOUND-FINITE-ABSTRACTION-001` já teve suas peças centrais **compiladas
+`FOUND-FINITE-STATE-ABSTRACTION-001` já teve suas peças centrais **compiladas
 em probe descartável** durante o gate de portfólio. O que falta é
 especificá-las, revisá-las e formalizá-las em módulos permanentes.
 
@@ -368,8 +369,8 @@ separa os estados relevantes da orbita.
 ### Imediato — desbloquear e especificar
 
 ```text
-0.  resolver o identificador  (secao 10)
-1.  FOUND-FINITE-ABSTRACTION-001-SPECIFICATION
+0.  resolver o identificador  (secao 11)    CONCLUIDO
+1.  FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION   CONCLUIDO
 2.  ...-SPECIFICATION-REVIEW
 3.  ...-FORMALIZATION
 4.  ...-RESULT-REVIEW
@@ -488,6 +489,9 @@ aliases_active                0
 duplicate_work_items          0
 ```
 
+> **Superada pela seção 11.** O parágrafo abaixo registra a leitura
+> feita naquele momento; a decisão executada foi a **saída (b)**.
+
 O identificador canônico é **inequívoco**: `FOUND-FINITE-ABSTRACTION-001`.
 A forma com `STATE` **não existe no repositório** — ela aparece apenas no
 texto dos dois últimos prompts de gate. Não há conflito de identificadores
@@ -551,4 +555,56 @@ lake build                     8757 jobs, PASS
 duplicatas YAML                    0
 arquivos Lean com sorry            0
 axiomas locais                     0
+```
+
+---
+
+## 11. Resolução do identificador — saída (b), executada
+
+A seção 10 apresentou duas saídas. A executada foi a **(b)**: renomear o
+item.
+
+```text
+identificador canonico   FOUND-FINITE-STATE-ABSTRACTION-001
+nome candidato anterior  FOUND-FINITE-ABSTRACTION-001
+aliases operacionais ativos   0
+work items duplicados         0
+```
+
+### Por que (b), e não (a)
+
+O nome com `STATE` casa com `ENG-FINITE-STATE-RUNTIME-001` e
+`ENG-FINITE-STATE-ENCODING-001`, e nomeia o objeto real da frente: a
+abstração de **estados finitos**, que consome `CertifiedFiniteEncoding`.
+A saída (a) teria congelado uma inconsistência de nomenclatura na trilha
+inteira para poupar um commit.
+
+### Superfície migrada
+
+```text
+LAB_STATE.md                      active_work_item, authorized_action
+01_PORTFOLIO/RESEARCH_QUEUE.yaml  work_item_id, authorized_next_gate
+10_TOOLS/labctl.py                gate de sequencia, pre-condicao, allowlist
+01_PORTFOLIO/FINITE_ABSTRACTION_CANDIDATE.md   work_item_id
+PROGRAM_STATE_AND_ROADMAP.md      secoes 1, 7 e 10
+```
+
+Artefatos imutáveis de gates encerrados — `*-result.json`, relatórios de
+sessão, revisões de portfólio — **preservam** o nome anterior. Eles são
+registro histórico, não item ativo.
+
+### Além do rename
+
+O mesmo gate reconstruiu a especificação que faltava, em
+`02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/`.
+A numeração `07` foi escolhida porque `04`, `05` e `06` já estão em uso
+em `02_FOUNDATIONS`.
+
+```text
+probe descartavel        exit 0
+declaracoes publicas     7
+gaps                     20, nenhum fechado
+stop conditions          18, nenhuma disparada
+claims promovidas        0
+arquivos Lean criados    0
 ```

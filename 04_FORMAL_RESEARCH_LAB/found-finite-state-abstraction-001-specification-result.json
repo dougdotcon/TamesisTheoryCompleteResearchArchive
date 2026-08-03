@@ -1,0 +1,153 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION",
+  "executed_at": "2026-08-03T20:11:30-03:00",
+  "work_item_id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+  "previous_candidate_id": "FOUND-FINITE-ABSTRACTION-001",
+  "commit_before": "17c070fceba6f3c1600205ca9293228da73614a1",
+  "canonical_commit": "17c070fceba6f3c1600205ca9293228da73614a1",
+  "identifier_canonicalization": {
+    "canonical_work_item_id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "authorization_prefix": "FOUND_FINITE_STATE_ABSTRACTION_001_",
+    "aliases_active": 0,
+    "duplicate_work_items": 0,
+    "resolution": "PROGRAM_STATE_AND_ROADMAP section 10, exit (b)",
+    "operational_surface_migrated": [
+      "LAB_STATE.md",
+      "01_PORTFOLIO/RESEARCH_QUEUE.yaml",
+      "10_TOOLS/labctl.py",
+      "01_PORTFOLIO/FINITE_ABSTRACTION_CANDIDATE.md",
+      "PROGRAM_STATE_AND_ROADMAP.md"
+    ],
+    "historical_references_preserved": true
+  },
+  "specification_root": "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/",
+  "probe": {
+    "file": "/tmp/FiniteStateAbstractionProbe.lean",
+    "command": "lake env lean /tmp/FiniteStateAbstractionProbe.lean",
+    "exit_code": 0,
+    "removed": true,
+    "declarations_compiled": 17,
+    "declarations_intended_to_fail": 0,
+    "native_decide_used": false
+  },
+  "semiconjugation": {
+    "signature": "(alpha -> beta) -> (alpha -> alpha) -> (beta -> beta) -> Prop",
+    "orientation": "abstract (stepC c) = stepA (abstract c)",
+    "confirmed_by": "Iff.rfl",
+    "iterate_api": "Function.Semiconj.iterate_right",
+    "manual_induction_used": false
+  },
+  "public_api": {
+    "PUBLIC_EXECUTABLE_CORE": [
+      "CertifiedFiniteAbstraction",
+      "analyzeAbstractSystem"
+    ],
+    "PUBLIC_SPECIFICATION_CORE": [
+      "CertifiedFiniteAbstraction.iterate_commutes",
+      "analyzeAbstractSystem_observational_sound",
+      "OrbitSeparating",
+      "analyzeAbstractSystem_reflected_sound",
+      "analyzeAbstractSystem_complete"
+    ],
+    "DEFERRED_OPTIONAL": [
+      "orbitSeparating_iff_injOn",
+      "orbitSeparating_of_injective",
+      "abstract level universal error exclusion"
+    ],
+    "TEST_ONLY": [
+      "BOOL_TO_UNIT"
+    ],
+    "public_executable_core_count": 2,
+    "public_specification_core_count": 5,
+    "public_total": 7,
+    "counts_derived_from_lists": true
+  },
+  "boundaries": {
+    "observational_soundness_concludes_in": "A",
+    "reflected_soundness_concludes_in": "C",
+    "reflected_soundness_requires_hypothesis": "OrbitSeparating",
+    "hypothesis_visible_in_signature": true,
+    "completeness_is_abstract_only": true,
+    "naive_cycle_reflection": "FALSE",
+    "counterexample": "BOOL_TO_UNIT",
+    "counterexample_orbit_separating": "FALSE",
+    "orbit_separating_tautological": false,
+    "set_injon_equivalence": "DEFERRED_OPTIONAL",
+    "set_injon_equivalence_compiles": true,
+    "requires_fintype_concrete": false,
+    "requires_finite_concrete": false,
+    "requires_decidable_eq_concrete": false,
+    "requires_nonempty_concrete": false,
+    "requires_inhabited_concrete": false,
+    "requires_fintype_abstract": false,
+    "requires_decidable_eq_abstract": false,
+    "typeclasses_required": 0
+  },
+  "axiom_footprint": {
+    "CertifiedFiniteAbstraction.iterate_commutes": ["propext"],
+    "analyzeAbstractSystem": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_observational_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "OrbitSeparating": [],
+    "orbitSeparating_iff_injOn": [],
+    "orbitSeparating_of_injective": [],
+    "analyzeAbstractSystem_reflected_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_complete": ["propext", "Classical.choice", "Quot.sound"],
+    "boolToUnit_semiconj": [],
+    "boolToUnit_not_orbitSeparating": [],
+    "unitEncoding": [],
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "classical_choice_producing_data": 0
+  },
+  "gaps": {
+    "total": 20,
+    "closed": 0,
+    "register": "GAP_REGISTER.yaml"
+  },
+  "stop_conditions": {
+    "declared": 18,
+    "triggered": 0,
+    "added_in_this_gate": ["STOP-ABS-017", "STOP-ABS-018"]
+  },
+  "validation": {
+    "specification_probe": "PASS",
+    "specification_probe_exit": 0,
+    "probes_removed": "YES",
+    "pytest": "PASS",
+    "labctl_validate": "PASS",
+    "canonical_commit_check": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "duplicate_yaml_keys_before": 0,
+    "duplicate_yaml_keys_after": 0,
+    "lean_files_created": 0,
+    "permanent_proofs_created": 0,
+    "lake_build_executed": "NO",
+    "claims_promoted": 0,
+    "claim_ledger_total": 22,
+    "legacy_files_modified": 0
+  },
+  "closed_fronts_modified": {
+    "ENG-FINITE-STATE-ENCODING-001": 0,
+    "ENG-FINITE-STATE-RUNTIME-001": 0,
+    "FOUND-CYCLE-DETECTION-001": 0,
+    "FOUND-FUNCTIONAL-GRAPH-001": 0,
+    "FOUND-SEMIGROUP-002": 0,
+    "RH-NOGO-001": 0
+  },
+  "scientific_boundary": {
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_SEMANTIC_FOUNDATION"
+  },
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "READY",
+    "specification_status": "READY_FOR_REVIEW",
+    "specification_review": "NOT_STARTED",
+    "formalization_status": "NOT_STARTED",
+    "current_blocker": null,
+    "authorized_action": "FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  },
+  "next_expected_gate": "FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION-REVIEW"
+}

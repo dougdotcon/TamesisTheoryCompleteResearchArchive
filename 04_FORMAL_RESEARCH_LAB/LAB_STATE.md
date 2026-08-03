@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-02T03:10:00-03:00
-canonical_commit: "e0db1dceaf8e73239d361ed17453b050716d88bc"
+updated_at: 2026-08-03T20:09:49-03:00
+canonical_commit: "17c070fceba6f3c1600205ca9293228da73614a1"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,8 +9,15 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-FINITE-ABSTRACTION-001"
-work_status: "SCOPED"
+active_work_item: "FOUND-FINITE-STATE-ABSTRACTION-001"
+previous_candidate_work_item: "FOUND-FINITE-ABSTRACTION-001"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
+bisimulation_status: "NOT_AUTHORIZED"
+quotient_status: "NOT_AUTHORIZED"
 extraction_status: "NOT_AUTHORIZED"
 cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
@@ -20,11 +27,12 @@ formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
 last_verified_artifact: "portfolio-review-after-certified-encoding-result.json"
 current_blocker: null
 next_single_action: >
-  Preparar a especificação da semiconjugação entre o sistema
-  concreto e a abstração finita, distinguir soundness
-  observacional de reflexão concreta e congelar o contraexemplo
-  à reflexão ingênua sem iniciar a formalização.
-authorized_action: "FOUND_FINITE_ABSTRACTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a especificação congelada da abstração certificada de
+  estados finitos: orientação da semiconjugação, soundness
+  observacional terminando em A, não tautologicidade de
+  OrbitSeparating, reflexão condicionada, completeness abstrata e
+  o contraexemplo BOOL_TO_UNIT.
+authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
@@ -183,6 +191,11 @@ prohibited_actions:
   - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
+  - "Não usar FOUND-FINITE-ABSTRACTION-001 como item ativo: é nome candidato anterior"
+  - "Não concluir igualdade em C a partir da soundness observacional sem OrbitSeparating"
+  - "Não descrever a completeness abstrata como completeness concreta"
+  - "Não esconder OrbitSeparating dentro de CertifiedFiniteAbstraction"
+  - "Não armazenar encoding, witness, tabela ou estado inicial na estrutura da abstração"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
@@ -191,6 +204,8 @@ resume_read_order:
   - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/SPECIFICATION_DECISION.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/PUBLIC_API.md"
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
+  - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/README.md"
+  - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/SPECIFICATION_DECISION.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
 ---# Estado atual

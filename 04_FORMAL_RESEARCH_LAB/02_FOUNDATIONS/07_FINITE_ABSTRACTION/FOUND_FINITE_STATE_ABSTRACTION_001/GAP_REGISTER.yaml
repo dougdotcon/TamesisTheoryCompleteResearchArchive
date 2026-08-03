@@ -1,0 +1,109 @@
+schema: tamesis-gap-register/1
+work_item_id: FOUND-FINITE-STATE-ABSTRACTION-001
+gaps_total: 20
+gaps_closed: 0
+policy: >
+  Nenhum gap pode ser fechado no gate de especificacao. Fechamento exige
+  formalizacao permanente e revisao de resultado. Contagens sao derivadas
+  das entradas individuais, nunca escritas a mao.
+gaps:
+  - id: ABS-GAP-001
+    title: representacao da abstracao
+    status: OPEN
+    expected_resolution: RESOLVED_BY_DESIGN
+    note: CertifiedFiniteAbstraction com dois campos, sem encoding embutido
+  - id: ABS-GAP-002
+    title: orientacao da semiconjugacao
+    status: OPEN
+    expected_resolution: RESOLVED_BY_API_AUDIT
+    note: assinatura real lida em lake env lean e confirmada por Iff.rfl
+  - id: ABS-GAP-003
+    title: correspondencia de iteradas
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: rota unica por Semiconj.iterate_right
+  - id: ABS-GAP-004
+    title: integracao com CertifiedFiniteEncoding
+    status: OPEN
+    expected_resolution: RESOLVED_BY_DESIGN
+    note: encoding permanece argumento separado, nunca campo
+  - id: ABS-GAP-005
+    title: analise do sistema abstrato
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: analyzeAbstractSystem delega a analyzeEncodedSystem
+  - id: ABS-GAP-006
+    title: soundness observacional
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: conclusao termina em A, apos aplicar abstract
+  - id: ABS-GAP-007
+    title: formulacao de OrbitSeparating
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: quantifica sobre toda a orbita, nao tautologica
+  - id: ABS-GAP-008
+    title: relacao com Set.InjOn
+    status: OPEN
+    expected_resolution: RESOLVED_BY_API_AUDIT
+    note: equivalencia compilada sem axiomas, classificada DEFERRED_OPTIONAL
+  - id: ABS-GAP-009
+    title: reflexao da repeticao
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: hipotese explicita na assinatura
+  - id: ABS-GAP-010
+    title: contraexemplo BOOL_TO_UNIT
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: semiconjugacao, recorrencia abstrata e ausencia de recorrencia concreta
+  - id: ABS-GAP-011
+    title: necessidade de DecidableEq C
+    status: OPEN
+    expected_resolution: RESOLVED_BY_DESIGN
+    note: nenhuma instancia exigida, confirmado por compilacao
+  - id: ABS-GAP-012
+    title: necessidade de finitude de C
+    status: OPEN
+    expected_resolution: RESOLVED_BY_DESIGN
+    note: C permanece Type* sem Fintype nem Finite
+  - id: ABS-GAP-013
+    title: completude abstrata
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: existencia de witness, sem promessa de reflexao
+  - id: ABS-GAP-014
+    title: ciclos espurios
+    status: OPEN
+    expected_resolution: READY_FOR_FORMALIZATION
+    note: falha de OrbitSeparating provada no contraexemplo
+  - id: ABS-GAP-015
+    title: bissimulacao
+    status: OPEN
+    expected_resolution: OPEN_DEFERRED
+    note: fora de escopo, NOT_AUTHORIZED
+  - id: ABS-GAP-016
+    title: quocientes
+    status: OPEN
+    expected_resolution: OPEN_DEFERRED
+    note: fora de escopo, NOT_AUTHORIZED
+  - id: ABS-GAP-017
+    title: integracao externa e correcao da abstracao real
+    status: OPEN
+    expected_resolution: OPEN_DEFERRED
+    note: nenhuma frente formal decide se um sistema externo foi modelado corretamente
+  - id: ABS-GAP-018
+    title: extracao futura
+    status: OPEN
+    expected_resolution: OPEN_DEFERRED
+    note: fora de escopo, NOT_AUTHORIZED
+  - id: ABS-GAP-019
+    title: bibliografia e terminologia historica
+    status: OPEN
+    expected_resolution: OPEN_BIBLIOGRAPHIC
+    note: semiconjugacao, abstracao e simulacao possuem literatura extensa
+  - id: ABS-GAP-020
+    title: complexidade
+    status: OPEN
+    expected_resolution: OPEN_DEFERRED
+    note: nenhuma afirmacao de custo sem modelo de custo

@@ -1,5 +1,49 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-FINITE-STATE-ABSTRACTION - 2026-08-03
+
+### Found
+
+- **O scanner de chaves YAML duplicadas nunca varreu front matter.**
+  Medido por probe: `483` arquivos Markdown no laboratorio, `332` com
+  front matter YAML, `57` arquivos enumerados pelo scanner, **`0`**
+  deles Markdown. `LAB_STATE.md` — o arquivo mais critico da
+  governanca — **nao esta** no scan de duplicatas.
+- Ainda assim, todo relatorio de gate afirma
+  `yaml_duplicate_key_scan: PASS`. A afirmacao e verdadeira sobre `57`
+  arquivos e foi lida como se fosse sobre todos.
+- `read_front_matter` usa `yaml.safe_load` e aplica **"ultimo valor
+  vence"** — exatamente a semantica que a regra de governanca do
+  laboratorio proibe por escrito. Verificado: `status: READY` seguido de
+  `status: VERIFIED` resolve silenciosamente para `VERIFIED`.
+- O defeito e de **escopo, nao de algoritmo**:
+  `detect_duplicate_yaml_keys` aplicado a um `.md` com chave duplicada
+  encontra o problema. Apenas `yaml_files_under` filtra por extensao.
+
+### Selected
+
+- **`LAB-GOV-FRONTMATTER-SCAN-001`**, cobertura integral do scanner.
+  Seis alternativas comparadas.
+
+### Rejected
+
+- `B` e `D` — bissimulacao e quocientes sao a continuacao cientifica
+  natural, e merecem ser abertas com a cadeia de evidencia confiavel,
+  nao antes disso.
+- `C` — `ENC-GAP-020` segue com o acoplamento que o reprovou na revisao
+  anterior; nada mudou.
+- `E` — extracao, CLI e parser distribuem garantia sem contrato
+  semantico.
+- `F` — abrir frente matematica nova enquanto o instrumento de validacao
+  tem cobertura menor do que declara seria acumular resultados sobre uma
+  medicao ja sabidamente incompleta.
+
+### Locked
+
+- `authorized_action: LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED`,
+  literal, sem wildcard. `0` claims promovidas, `23` no ledger. Nenhuma
+  frente encerrada tocada, nenhum arquivo Lean tocado.
+
 ## FOUND-FINITE-STATE-ABSTRACTION-001-RESULT-REVIEW - 2026-08-03
 
 ### Approved

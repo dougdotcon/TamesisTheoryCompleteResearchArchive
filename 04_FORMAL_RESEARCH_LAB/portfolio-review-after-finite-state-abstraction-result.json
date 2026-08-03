@@ -1,0 +1,67 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "PORTFOLIO-REVIEW-AFTER-FINITE-STATE-ABSTRACTION",
+  "executed_at": "2026-08-03T21:50:00-03:00",
+  "commit_before": "ed5c4a9d6591fc29fdbff46c6b8b153f71371fbb",
+  "canonical_commit": "ed5c4a9d6591fc29fdbff46c6b8b153f71371fbb",
+  "previous_work_item": {
+    "id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED"
+  },
+  "finding": {
+    "title": "the duplicate YAML key scanner never covered Markdown front matter",
+    "markdown_files": 483,
+    "markdown_files_with_front_matter": 332,
+    "files_enumerated_by_scanner": 57,
+    "markdown_files_enumerated": 0,
+    "lab_state_md_in_duplicate_scan": false,
+    "root_cause": "labctl.yaml_files_under filters by file suffix (.yaml/.yml)",
+    "defect_kind": "SCOPE_NOT_ALGORITHM",
+    "detector_works_on_md_content": true,
+    "read_front_matter_last_value_wins": true,
+    "governance_rule_contradicted": "'ultimo valor vence' nao e semantica de governanca",
+    "discovered_by": "throwaway probe, not suspicion"
+  },
+  "alternatives_compared": 6,
+  "alternatives": [
+    {"id": "A", "name": "front matter scanner coverage", "verdict": "SELECTED"},
+    {"id": "B", "name": "bisimulation ABS-GAP-015", "verdict": "DEFERRED"},
+    {"id": "C", "name": "witness invariance under re-encoding ENC-GAP-020", "verdict": "REJECTED_AGAIN"},
+    {"id": "D", "name": "quotients ABS-GAP-016", "verdict": "DEFERRED"},
+    {"id": "E", "name": "native extraction, CLI, parser", "verdict": "REJECTED"},
+    {"id": "F", "name": "new independent mathematical front", "verdict": "DEFERRED"}
+  ],
+  "selection_principle": "when the measuring instrument is found to cover less than it declares, fix the instrument before producing more measurements with it",
+  "selected_action": {
+    "id": "LAB-GOV-FRONTMATTER-SCAN-001",
+    "kind": "GOVERNANCE_CORRECTION",
+    "format_precedent": "LAB-GOV-YAML-DUPLICATE-KEYS-001",
+    "gates": 1
+  },
+  "negative_scope": [
+    "do not change the duplicate detection logic",
+    "do not touch any closed front",
+    "do not touch any Lean file",
+    "do not promote any claim",
+    "do not open a mathematical front",
+    "no bisimulation, quotients, extraction, CLI or parser"
+  ],
+  "escalation_rule": "if the widened scan finds real duplicates they are fixed in the same gate, each recorded individually; if they are many or divergent the gate stops and reports instead of normalizing in bulk",
+  "validation": {
+    "labctl_validate": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "claims_promoted": 0,
+    "claim_ledger_total": 23,
+    "lean_files_modified": 0,
+    "closed_fronts_modified": 0
+  },
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "VERIFIED",
+    "authorized_action": "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED",
+    "frontmatter_scan_coverage": "PARTIAL_KNOWN_DEFECT"
+  },
+  "next_expected_gate": "LAB-GOV-FRONTMATTER-SCAN-001-CORRECTION"
+}

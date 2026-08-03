@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:38:19-03:00
-canonical_commit: "de1b8a9e8a57fb48f11a229e8ea96d747889a2a5"
+updated_at: 2026-08-03T20:44:17-03:00
+canonical_commit: "ed5c4a9d6591fc29fdbff46c6b8b153f71371fbb"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -29,10 +29,13 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar uma revisão explícita de portfólio. A frente
-  FOUND-FINITE-STATE-ABSTRACTION-001 está encerrada e travada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Ampliar a varredura de chaves YAML duplicadas para cobrir o
+  front matter dos documentos Markdown, corrigir as duplicatas
+  que a varredura ampliada encontrar e registrar a cobertura
+  real do instrumento.
+authorized_action: "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
+frontmatter_scan_coverage: "PARTIAL_KNOWN_DEFECT"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
 closed_work_items:
@@ -206,6 +209,7 @@ prohibited_actions:
   - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
+  - "Não declarar yaml_duplicate_key_scan integral enquanto o front matter Markdown estiver fora"
   - "Não usar código de saída capturado através de fronteira de shell como evidência"
   - "Não declarar PASS quando a saída contiver linha error: ainda que o exit seja zero"
   - "Não registrar FoundFiniteStateAbstraction001UmbrellaAudit em TamesisLab.lean"

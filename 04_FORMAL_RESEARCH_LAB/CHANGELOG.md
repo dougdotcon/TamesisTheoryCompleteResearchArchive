@@ -1,5 +1,47 @@
 # Changelog do laboratório formal
 
+## LAB-GOV-FRONTMATTER-SCAN-001 - 2026-08-03
+
+### Fixed
+
+- A varredura de chaves YAML duplicadas passou a cobrir o **front matter
+  dos documentos Markdown**. Cobertura de `57` para **`390`** arquivos:
+  `57` YAML mais `333` front matter.
+- `LAB_STATE.md` — onde vivem `authorized_action`, `work_status` e
+  `canonical_commit` — **entrou na varredura pela primeira vez**.
+- `read_front_matter` deixou de aceitar **"ultimo valor vence"**. Antes,
+  `status: READY` seguido de `status: VERIFIED` resolvia silenciosamente
+  para `VERIFIED`; num campo como `authorized_action` isso seria uma
+  autorizacao escolhida pelo parser. Agora falha com
+  `DUPLICATE_YAML_KEY`.
+
+### Found
+
+- Duplicatas em front matter: **`0`**. O corpus estava limpo.
+- Front matter malformado: **`1`**, e era o `LAB_STATE.md`. O
+  delimitador de fechamento dividia a linha com o primeiro titulo —
+  `---# Estado atual` — e passava apenas porque a expressao regular era
+  tolerante. Corrigido.
+
+### Preserved
+
+- **A logica de deteccao nao foi tocada.** O defeito era de escopo, nao
+  de algoritmo: `detect_duplicate_yaml_keys` ja funcionava sobre front
+  matter, e a nova funcao reutiliza o mesmo `_walk_yaml_node`.
+
+### Tested
+
+- `13` testes novos, `FM-TEST-001` a `FM-TEST-013`. Suite de `21` para
+  **`34`**, todos passando.
+- `FM-TEST-012` impede a regressao especifica: voltar a declarar a
+  varredura integral sem `LAB_STATE.md` dentro dela.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `0` claims promovidas,
+  `23` no ledger. `0` arquivos Lean tocados, `0` frentes encerradas
+  tocadas.
+
 ## PORTFOLIO-REVIEW-AFTER-FINITE-STATE-ABSTRACTION - 2026-08-03
 
 ### Found

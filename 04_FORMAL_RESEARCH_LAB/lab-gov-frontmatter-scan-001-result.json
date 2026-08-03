@@ -1,0 +1,90 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "LAB-GOV-FRONTMATTER-SCAN-001",
+  "executed_at": "2026-08-03T22:10:00-03:00",
+  "kind": "GOVERNANCE_CORRECTION",
+  "commit_before": "bc717e6ffb3e38155ec8401ca53476bcbd62462e",
+  "canonical_commit": "bc717e6ffb3e38155ec8401ca53476bcbd62462e",
+  "authorization_consumed": "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED",
+  "defect": {
+    "kind": "SCOPE_NOT_ALGORITHM",
+    "root_cause": "labctl.yaml_files_under filtered by file suffix",
+    "detection_logic_touched": false,
+    "coverage_before": {
+      "files_scanned": 57,
+      "markdown_front_matter_scanned": 0,
+      "lab_state_md_covered": false
+    },
+    "coverage_after": {
+      "files_scanned": 390,
+      "yaml_files_scanned": 57,
+      "markdown_files_seen": 484,
+      "markdown_front_matter_scanned": 333,
+      "lab_state_md_covered": true
+    }
+  },
+  "findings": {
+    "duplicate_keys_in_front_matter": 0,
+    "malformed_front_matter": 1,
+    "malformed_detail": {
+      "file": "04_FORMAL_RESEARCH_LAB/LAB_STATE.md",
+      "line": 233,
+      "before": "---# Estado atual",
+      "after": "--- on its own line, blank line, then # Estado atual",
+      "why_it_passed_before": "read_front_matter regex \\n---\\s*\\n? is lenient about what follows the closing delimiter"
+    }
+  },
+  "changes": {
+    "new_functions": [
+      "extract_front_matter",
+      "detect_duplicate_front_matter_keys",
+      "markdown_files_under"
+    ],
+    "modified_functions": [
+      "scan_duplicate_yaml_keys",
+      "read_front_matter",
+      "validate report block"
+    ],
+    "read_front_matter_now_rejects_duplicates": true,
+    "last_value_wins_accepted": false,
+    "line_offset_handling": "closing offset of exactly 1, pinned by FM-TEST-004"
+  },
+  "tests": {
+    "new_tests": 13,
+    "new_test_ids": ["FM-TEST-001", "FM-TEST-002", "FM-TEST-003", "FM-TEST-004",
+                     "FM-TEST-005", "FM-TEST-006", "FM-TEST-007", "FM-TEST-008",
+                     "FM-TEST-009", "FM-TEST-010", "FM-TEST-011", "FM-TEST-012",
+                     "FM-TEST-013"],
+    "suite_before": 21,
+    "suite_after": 34,
+    "all_passing": true,
+    "regression_pinned": "FM-TEST-012 fails if LAB_STATE.md ever leaves the scan"
+  },
+  "validation": {
+    "pytest": "PASS",
+    "pytest_count": 34,
+    "labctl_validate": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "duplicate_count": 0,
+    "malformed_front_matter_remaining": 0,
+    "canonical_commit_check": "PASS",
+    "whitespace_eof_audit": "PASS",
+    "lean_files_modified": 0,
+    "lake_build_executed": "NO",
+    "claims_promoted": 0,
+    "claim_ledger_total": 23,
+    "closed_fronts_modified": 0
+  },
+  "declared_limits": [
+    "TOML or JSON front matter is not covered, and none exists in the repository",
+    "YAML inside fenced code blocks is not covered, and is not governance",
+    "files outside 04_FORMAL_RESEARCH_LAB are out of scope"
+  ],
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "VERIFIED",
+    "frontmatter_scan_coverage": "FULL",
+    "authorized_action": "PORTFOLIO_REVIEW_REQUIRED"
+  },
+  "next_expected_gate": "PORTFOLIO-REVIEW"
+}

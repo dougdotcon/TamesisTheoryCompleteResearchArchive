@@ -59,12 +59,24 @@ def read_yaml(path: Path) -> Any:
 
 
 def read_front_matter(path: Path) -> tuple[dict[str, Any], str]:
+    """Front matter de um Markdown, REJEITANDO chaves duplicadas.
+
+    `yaml.safe_load` sozinho aplica "ultimo valor vence", que a governanca
+    do laboratorio proibe explicitamente. Carregar o bloco sem antes
+    verificar duplicatas faria o parser escolher silenciosamente um dos
+    valores — inclusive num campo como `authorized_action`.
+    """
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---"):
         raise ValueError(f"missing YAML front matter: {path}")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", text, re.DOTALL)
     if not match:
         raise ValueError(f"malformed YAML front matter: {path}")
+    duplicates = detect_duplicate_front_matter_keys(path)
+    if duplicates:
+        raise ValueError(
+            f"{DUPLICATE_YAML_KEY}: {path}: " + "; ".join(d.as_error() for d in duplicates)
+        )
     data = normalize_yaml(yaml.safe_load(match.group(1)) or {})
     if not isinstance(data, dict):
         raise ValueError(f"front matter is not a mapping: {path}")
@@ -361,6 +373,73 @@ def detect_duplicate_yaml_keys(path: Path) -> list[DuplicateYamlKey]:
     return found
 
 
+MALFORMED_FRONT_MATTER = "MALFORMED_FRONT_MATTER"
+
+FRONT_MATTER_PATTERN = re.compile(r"^---[ \t]*\n(.*?)\n---[ \t]*(?:\n|$)", re.DOTALL)
+
+# A linha de abertura "---" ocupa a primeira linha do arquivo, de modo que a
+# primeira linha do bloco YAML e a linha 2. O detector conta a partir de 1
+# dentro do bloco, e por isso o deslocamento para o arquivo eh exatamente 1.
+FRONT_MATTER_LINE_OFFSET = 1
+
+
+def extract_front_matter(text: str) -> str | None:
+    """Bloco YAML de um documento Markdown, ou None se nao houver.
+
+    Devolve None quando o arquivo nao comeca com "---". Levanta ValueError
+    quando comeca com "---" e o delimitador de fechamento nao esta numa
+    linha propria: nesse caso o front matter existe mas esta malformado, e
+    silenciar isso seria aceitar um documento sem estrutura univoca.
+    """
+    if not text.startswith("---"):
+        return None
+    match = FRONT_MATTER_PATTERN.match(text)
+    if not match:
+        raise ValueError(
+            "front matter opened with --- but the closing delimiter is not on a line of its own"
+        )
+    return match.group(1)
+
+
+def detect_duplicate_front_matter_keys(path: Path) -> list[DuplicateYamlKey]:
+    """Chaves duplicadas dentro do front matter YAML de um Markdown.
+
+    Reutiliza o MESMO percurso da arvore sintatica usado nos arquivos .yaml.
+    O defeito historico era de ESCOPO, nao de algoritmo: a deteccao sempre
+    funcionou, mas a selecao de arquivos filtrava por extensao.
+    """
+    try:
+        label = str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        label = str(path)
+    body = extract_front_matter(path.read_text(encoding="utf-8"))
+    if body is None:
+        return []
+    found: list[DuplicateYamlKey] = []
+    for index, document in enumerate(yaml.compose_all(body)):
+        if document is None:
+            continue
+        raw: list[DuplicateYamlKey] = []
+        _walk_yaml_node(document, [], label, index, raw)
+        found.extend(
+            item._replace(
+                first_line=item.first_line + FRONT_MATTER_LINE_OFFSET,
+                duplicate_line=item.duplicate_line + FRONT_MATTER_LINE_OFFSET,
+            )
+            for item in raw
+        )
+    return found
+
+
+def markdown_files_under(root: Path) -> list[Path]:
+    files = []
+    for candidate in sorted(root.rglob("*.md")):
+        if any(part in YAML_SCAN_EXCLUDED_DIRS for part in candidate.parts):
+            continue
+        files.append(candidate)
+    return files
+
+
 def yaml_files_under(root: Path) -> list[Path]:
     files = []
     for candidate in sorted(root.rglob("*")):
@@ -373,19 +452,50 @@ def yaml_files_under(root: Path) -> list[Path]:
 
 
 def scan_duplicate_yaml_keys(root: Path | None = None) -> dict[str, Any]:
-    """Varredura integral. Todo YAML versionado sob o laboratório, não
-    apenas os arquivos que o labctl carrega."""
+    """Varredura integral: arquivos .yaml/.yml E o front matter YAML dos
+    documentos Markdown.
+
+    O escopo do front matter foi acrescentado depois de se medir que a
+    varredura anterior cobria 57 arquivos e ZERO Markdown, deixando de fora
+    332 documentos com front matter — inclusive LAB_STATE.md, o arquivo mais
+    critico da governanca. Declarar aquela varredura como integral era
+    afirmar mais do que ela media.
+    """
     root = root or LAB_ROOT
     duplicates: list[DuplicateYamlKey] = []
     unparsable: list[str] = []
+    malformed: list[str] = []
+
     files = yaml_files_under(root)
     for path in files:
         try:
             duplicates.extend(detect_duplicate_yaml_keys(path))
         except yaml.YAMLError as exc:
             unparsable.append(f"{path}: {exc}")
+
+    markdown_files = markdown_files_under(root)
+    markdown_with_front_matter = 0
+    for path in markdown_files:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as exc:
+            unparsable.append(f"{path}: {exc}")
+            continue
+        if not text.startswith("---"):
+            continue
+        markdown_with_front_matter += 1
+        try:
+            duplicates.extend(detect_duplicate_front_matter_keys(path))
+        except ValueError as exc:
+            malformed.append(f"{path}: {exc}")
+        except yaml.YAMLError as exc:
+            unparsable.append(f"{path}: {exc}")
+
     return {
-        "files_scanned": len(files),
+        "files_scanned": len(files) + markdown_with_front_matter,
+        "yaml_files_scanned": len(files),
+        "markdown_files_seen": len(markdown_files),
+        "markdown_front_matter_scanned": markdown_with_front_matter,
         "duplicate_count": len(duplicates),
         "files_with_duplicates": len({d.file for d in duplicates}),
         "identical_duplicates": sum(
@@ -393,9 +503,11 @@ def scan_duplicate_yaml_keys(root: Path | None = None) -> dict[str, Any]:
         "divergent_duplicates": sum(
             1 for d in duplicates if d.classification == "DIVERGENT_DUPLICATE"),
         "unparsable_files": unparsable,
+        "malformed_front_matter": malformed,
         "duplicates": [d._asdict() for d in duplicates],
         "errors": [d.as_error() for d in duplicates]
-        + [f"UNPARSABLE_YAML: {u}" for u in unparsable],
+        + [f"UNPARSABLE_YAML: {u}" for u in unparsable]
+        + [f"{MALFORMED_FRONT_MATTER}: {m}" for m in malformed],
     }
 
 
@@ -639,12 +751,23 @@ def validate() -> dict[str, Any]:
         "errors": errors,
         "yaml_duplicate_key_scan": {
             "files_scanned": yaml_duplicate_scan["files_scanned"],
+            "yaml_files_scanned": yaml_duplicate_scan["yaml_files_scanned"],
+            "markdown_files_seen": yaml_duplicate_scan["markdown_files_seen"],
+            "markdown_front_matter_scanned":
+                yaml_duplicate_scan["markdown_front_matter_scanned"],
             "duplicate_count": yaml_duplicate_scan["duplicate_count"],
             "files_with_duplicates": yaml_duplicate_scan["files_with_duplicates"],
             "identical_duplicates": yaml_duplicate_scan["identical_duplicates"],
             "divergent_duplicates": yaml_duplicate_scan["divergent_duplicates"],
             "unparsable_files": yaml_duplicate_scan["unparsable_files"],
-            "status": "PASS" if not yaml_duplicate_scan["duplicate_count"] else "FAIL",
+            "malformed_front_matter": yaml_duplicate_scan["malformed_front_matter"],
+            "scope": "yaml_files_and_markdown_front_matter",
+            "status": (
+                "PASS"
+                if not yaml_duplicate_scan["duplicate_count"]
+                and not yaml_duplicate_scan["malformed_front_matter"]
+                else "FAIL"
+            ),
         },
         "canonical_commit_check": canonical_check,
         "warnings": warnings,

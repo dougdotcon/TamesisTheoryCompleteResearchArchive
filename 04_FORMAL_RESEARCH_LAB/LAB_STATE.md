@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:44:17-03:00
-canonical_commit: "ed5c4a9d6591fc29fdbff46c6b8b153f71371fbb"
+updated_at: 2026-08-03T20:50:06-03:00
+canonical_commit: "bc717e6ffb3e38155ec8401ca53476bcbd62462e"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -29,15 +29,16 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Ampliar a varredura de chaves YAML duplicadas para cobrir o
-  front matter dos documentos Markdown, corrigir as duplicatas
-  que a varredura ampliada encontrar e registrar a cobertura
-  real do instrumento.
-authorized_action: "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED"
+  Aguardar uma revisão explícita de portfólio. A varredura de
+  chaves duplicadas passou a cobrir o front matter Markdown, e
+  nenhuma frente nova está escolhida.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
-frontmatter_scan_coverage: "PARTIAL_KNOWN_DEFECT"
+frontmatter_scan_coverage: "FULL"
+yaml_scan_files_covered: 390
+yaml_scan_markdown_front_matter_covered: 333
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
-consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
+consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED"]
 closed_work_items:
   FOUND-FINITE-STATE-ABSTRACTION-001:
     work_status: VERIFIED
@@ -127,6 +128,11 @@ governance_rules:
   truncated_output: >
     Não assumir sucesso a partir de saída truncada. Toda etapa de patch
     termina com verificação independente do efeito.
+  yaml_scan_scope: >
+    A varredura de chaves duplicadas cobre arquivos .yaml e .yml E o front
+    matter YAML de todo documento Markdown versionado sob o laboratorio. O
+    relatorio publica yaml_files_scanned e markdown_front_matter_scanned
+    para que a palavra "integral" seja conferivel sem ler o codigo.
   yaml_duplicate_keys: >
     Cada chave de um mapa YAML ocorre exatamente uma vez. Duplicatas
     idênticas também são proibidas. "Último valor vence" não é semântica
@@ -209,7 +215,9 @@ prohibited_actions:
   - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
-  - "Não declarar yaml_duplicate_key_scan integral enquanto o front matter Markdown estiver fora"
+  - "Não declarar uma varredura integral sem publicar quantos arquivos ela abriu"
+  - "Não fechar front matter com o delimitador --- na mesma linha do corpo"
+  - "Não usar yaml.safe_load em front matter sem antes rejeitar chaves duplicadas"
   - "Não usar código de saída capturado através de fronteira de shell como evidência"
   - "Não declarar PASS quando a saída contiver linha error: ainda que o exit seja zero"
   - "Não registrar FoundFiniteStateAbstraction001UmbrellaAudit em TamesisLab.lean"
@@ -230,7 +238,9 @@ resume_read_order:
   - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/SPECIFICATION_DECISION.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
----# Estado atual
+---
+
+# Estado atual
 
 ```text
 FOUND-FUNCTIONAL-GRAPH-001   VERIFIED / result_review APPROVED   ENCERRADO

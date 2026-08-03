@@ -1,5 +1,50 @@
 # Changelog do laboratório formal
 
+## FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION-REVIEW - 2026-08-03
+
+### Approved
+
+- `FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_APPROVED`.
+  Os **quinze** criterios de aprovacao verificados um a um; nenhuma
+  correcao material foi necessaria.
+
+### Measured, not quoted
+
+- `#check` confirmou que `analyzeAbstractSystem_observational_sound`
+  conclui em `abstraction.abstract (…) = abstraction.abstract (…)` —
+  **ambos os lados sob `abstract`**, igualdade em `A`.
+- `#check` confirmou `OrbitSeparating` como hipotese **explicita e
+  primeira** de `analyzeAbstractSystem_reflected_sound`, que e a unica
+  declaracao publica a concluir em `C`.
+- `CertifiedFiniteAbstraction : (C : Type u) → (A : Type v) → (C → C) →
+  (A → A) → Type (max u v)`. Zero typeclasses no tipo.
+
+### Proved
+
+- `naive_cycle_reflection_is_false`, novo no probe de revisao:
+  **sem depender de axioma nenhum**.
+- `boolToUnit_not_orbitSeparating` reescrito como termo puro,
+  eliminando o `Quot.sound` que a versao com `simp` carregava.
+
+### Probed
+
+- `/tmp/FiniteStateAbstractionReviewProbe.lean`, **exit 0**, removido.
+  `0` declaracoes destinadas a falhar, `0` usos de `native_decide`.
+
+### Recorded
+
+- A especificacao e sua revisao ocorreram em sessoes consecutivas do
+  mesmo agente. A revisao vale pelo que **mediu**, nao por independencia
+  de autoria. Registrado em `SPECIFICATION_REVIEW.md`.
+
+### Locked
+
+- `authorized_action: FOUND_FINITE_STATE_ABSTRACTION_001_FORMALIZATION_AUTHORIZED`,
+  literal, sem wildcard. Bissimulacao, quocientes, extracao, integracao,
+  CLI e parser seguem **nao autorizados**. `0` arquivos Lean
+  permanentes, `0` claims promovidas, `22` no ledger, `0` duplicatas
+  YAML em `57` arquivos.
+
 ## FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION - 2026-08-03
 
 ### Renamed

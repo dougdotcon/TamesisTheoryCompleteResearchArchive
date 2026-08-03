@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:09:49-03:00
-canonical_commit: "17c070fceba6f3c1600205ca9293228da73614a1"
+updated_at: 2026-08-03T20:20:37-03:00
+canonical_commit: "b0dcabcee8d11fa47fd1aaf3053695ce38f49a43"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -12,8 +12,8 @@ active_track: "foundations"
 active_work_item: "FOUND-FINITE-STATE-ABSTRACTION-001"
 previous_candidate_work_item: "FOUND-FINITE-ABSTRACTION-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
-specification_review: "NOT_STARTED"
+specification_status: "APPROVED"
+specification_review: "APPROVED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
 bisimulation_status: "NOT_AUTHORIZED"
@@ -27,12 +27,11 @@ formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
 last_verified_artifact: "portfolio-review-after-certified-encoding-result.json"
 current_blocker: null
 next_single_action: >
-  Revisar a especificação congelada da abstração certificada de
-  estados finitos: orientação da semiconjugação, soundness
-  observacional terminando em A, não tautologicidade de
-  OrbitSeparating, reflexão condicionada, completeness abstrata e
-  o contraexemplo BOOL_TO_UNIT.
-authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar a abstração certificada, a correspondência de
+  iteradas, a soundness observacional, OrbitSeparating, a
+  reflexão condicionada, a completeness abstrata e o
+  contraexemplo BOOL_TO_UNIT.
+authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_FORMALIZATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]

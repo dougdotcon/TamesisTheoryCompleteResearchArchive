@@ -1,0 +1,129 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION-REVIEW",
+  "executed_at": "2026-08-03T20:30:00-03:00",
+  "work_item_id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+  "review_start_head": "b0dcabcee8d11fa47fd1aaf3053695ce38f49a43",
+  "specification_commit_message": "lab: specify certified finite-state abstraction boundary",
+  "canonical_commit": "b0dcabcee8d11fa47fd1aaf3053695ce38f49a43",
+  "canonical_commit_checks": {
+    "git_cat_file_exit": 0,
+    "git_merge_base_is_ancestor_exit": 0
+  },
+  "identifier": {
+    "canonical_work_item_id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "aliases_found": ["FOUND-FINITE-ABSTRACTION-001"],
+    "aliases_active": 0,
+    "duplicate_work_items": 0,
+    "historical_references_marked": true
+  },
+  "initial_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "READY",
+    "specification_status": "READY_FOR_REVIEW",
+    "formalization_status": "NOT_STARTED",
+    "current_blocker": null
+  },
+  "dependencies_unchanged": {
+    "FOUND-SEMIGROUP-002": "VERIFIED/APPROVED/NOT_AUTHORIZED",
+    "FOUND-FUNCTIONAL-GRAPH-001": "VERIFIED/APPROVED/NOT_AUTHORIZED",
+    "FOUND-CYCLE-DETECTION-001": "VERIFIED/APPROVED/NOT_AUTHORIZED",
+    "ENG-FINITE-STATE-RUNTIME-001": "VERIFIED/VERIFIED/APPROVED/NOT_AUTHORIZED",
+    "ENG-FINITE-STATE-ENCODING-001": "VERIFIED/VERIFIED/APPROVED/NOT_AUTHORIZED"
+  },
+  "review_probe": {
+    "file": "/tmp/FiniteStateAbstractionReviewProbe.lean",
+    "exit_code": 0,
+    "removed": true,
+    "declarations_intended_to_fail": 0,
+    "native_decide_used": false,
+    "new_theorem": "naive_cycle_reflection_is_false"
+  },
+  "measured_signatures": {
+    "CertifiedFiniteAbstraction": "(C : Type u_3) -> (A : Type u_4) -> (C -> C) -> (A -> A) -> Type (max u_3 u_4)",
+    "observational_sound_conclusion": "abstraction.abstract (stepC^[b+p] start) = abstraction.abstract (stepC^[b] start)",
+    "reflected_sound_hypothesis": "OrbitSeparating abstraction.abstract stepC start",
+    "reflected_sound_conclusion": "stepC^[b+p] start = stepC^[b] start",
+    "OrbitSeparating": "{C : Type u_3} -> {A : Type u_4} -> (C -> A) -> (C -> C) -> C -> Prop"
+  },
+  "axiom_footprint": {
+    "CertifiedFiniteAbstraction.iterate_commutes": ["propext"],
+    "analyzeAbstractSystem": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_observational_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "OrbitSeparating": [],
+    "analyzeAbstractSystem_reflected_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_complete": ["propext", "Classical.choice", "Quot.sound"],
+    "orbitSeparating_iff_injOn": [],
+    "orbitSeparating_of_injective": [],
+    "boolToUnit_semiconj": [],
+    "boolToUnit_not_orbitSeparating": [],
+    "naive_cycle_reflection_is_false": [],
+    "unitEncoding": [],
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "classical_choice_producing_data": 0
+  },
+  "public_api": {
+    "PUBLIC_EXECUTABLE_CORE": 2,
+    "PUBLIC_SPECIFICATION_CORE": 5,
+    "PUBLIC_TOTAL": 7,
+    "counts_derived_from_lists": true,
+    "typeclasses_required": 0
+  },
+  "gaps": {
+    "total": 20,
+    "closed_in_this_gate": 0,
+    "resolved_by_design": 4,
+    "resolved_by_api_audit": 3,
+    "ready_for_formalization": 8,
+    "open_deferred": 4,
+    "open_bibliographic": 1
+  },
+  "stop_conditions": {
+    "declared": 18,
+    "triggered": 0
+  },
+  "validation": {
+    "review_probe": "PASS",
+    "review_probe_exit": 0,
+    "probes_removed": "YES",
+    "pytest": "PASS",
+    "labctl_validate": "PASS",
+    "canonical_commit_check": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "duplicate_yaml_keys_before": 0,
+    "duplicate_yaml_keys_after": 0,
+    "whitespace_eof_audit": "PASS",
+    "lean_files_created": 0,
+    "permanent_proofs_created": 0,
+    "lake_build_executed": "NO",
+    "claims_promoted": 0,
+    "claim_ledger_total": 22,
+    "legacy_files_modified": 0
+  },
+  "closed_fronts_modified": {
+    "ENG-FINITE-STATE-ENCODING-001": 0,
+    "ENG-FINITE-STATE-RUNTIME-001": 0,
+    "FOUND-CYCLE-DETECTION-001": 0,
+    "FOUND-FUNCTIONAL-GRAPH-001": 0,
+    "FOUND-SEMIGROUP-002": 0,
+    "RH-NOGO-001": 0
+  },
+  "scientific_boundary": {
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_SEMANTIC_FOUNDATION"
+  },
+  "decision": "FOUND_FINITE_STATE_ABSTRACTION_001_SPECIFICATION_REVIEW_APPROVED",
+  "decision_letter": "A",
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "READY",
+    "specification_status": "APPROVED",
+    "specification_review": "APPROVED",
+    "formalization_status": "NOT_STARTED",
+    "current_blocker": null,
+    "authorized_action": "FOUND_FINITE_STATE_ABSTRACTION_001_FORMALIZATION_AUTHORIZED"
+  },
+  "next_expected_gate": "FOUND-FINITE-STATE-ABSTRACTION-001-FORMALIZATION"
+}

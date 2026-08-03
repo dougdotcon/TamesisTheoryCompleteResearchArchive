@@ -1,5 +1,60 @@
 # Changelog do laboratório formal
 
+## FOUND-FINITE-STATE-ABSTRACTION-001-FORMALIZATION - 2026-08-03
+
+### Formalized
+
+- Onze arquivos Lean permanentes. `lake build` **exit 0**, `8767` jobs,
+  `0` linhas de erro reais.
+- Sete declaracoes publicas, contagem **derivada por script** a partir do
+  codigo: `1` estrutura, `2` definicoes, `4` teoremas. Coincide com o
+  `PUBLIC_TOTAL` congelado; nenhuma correcao de contagem foi necessaria.
+- `OrbitSeparating` e as **dez** declaracoes do contraexemplo:
+  `does not depend on any axioms`. A camada nova da frente e onze
+  declaracoes com pegada zero.
+
+### Fixed
+
+- `FoundFiniteStateAbstraction001UmbrellaAudit.lean` falhou na primeira
+  elaboracao: `failed to synthesize Decidable (Function.Semiconj …)`.
+  `Function.Semiconj` e um `def`, e a resolucao de instancias nao o
+  desdobra — mesma armadilha ja registrada para `CycleWitness.Valid`.
+  Corrigido com `intro i; revert i; decide`. A falha foi registrada,
+  nao mascarada.
+
+### Corrected
+
+- **Defeito de metodo, nao de resultado**: codigos de saida capturados
+  com `echo $?` atravessavam uma fronteira de shell e refletiam o
+  hospedeiro, nao o `lean`. Detectado por dois sintomas: um "exit 0" com
+  `lake` ausente do PATH, e um "exit 0" com `error: failed to synthesize`
+  na saida.
+- Toda captura passou a viver em **arquivo de script**. Os dois probes
+  dos gates anteriores foram **reexecutados**: `errors=0`,
+  `REAL_EXIT_CODE=0` nos dois. Nenhuma afirmacao anterior era falsa.
+  Registrado em `VERIFICATION_METHOD_CORRECTION.md`.
+
+### Demonstrated
+
+- A auditoria umbrella instancia uma abstracao **genuinamente
+  muitos-para-um**: `Fin 4 → Fin 2` pela paridade, sobre rotacao. A
+  analise devolve `.ok ⟨0,2⟩`, a recorrencia **observacional vale** e a
+  **concreta falha** — `rotate4` so volta em quatro passos. O fenomeno
+  central da frente, sem depender da degenerescencia de `BOOL_TO_UNIT`.
+
+### Closed
+
+- `15` de `20` gaps. Permanecem abertos `ABS-GAP-015`, `016`, `018` e
+  `020` por escopo, e **`ABS-GAP-017` permanentemente**: nenhuma frente
+  formal decide se um sistema externo real foi corretamente modelado.
+
+### Locked
+
+- `authorized_action: FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_AUTHORIZED`.
+  `0` claims promovidas — a promocao pertence ao gate de revisao de
+  resultado. `22` no ledger. `0` duplicatas YAML. `0` arquivos de
+  frentes encerradas modificados.
+
 ## FOUND-FINITE-STATE-ABSTRACTION-001-SPECIFICATION-REVIEW - 2026-08-03
 
 ### Approved

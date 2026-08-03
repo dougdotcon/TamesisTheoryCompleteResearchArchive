@@ -1,0 +1,158 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "FOUND-FINITE-STATE-ABSTRACTION-001-FORMALIZATION",
+  "executed_at": "2026-08-03T21:00:00-03:00",
+  "work_item_id": "FOUND-FINITE-STATE-ABSTRACTION-001",
+  "commit_before": "d8a68e6bfd000062949c8349800d98b317763bbb",
+  "canonical_commit": "d8a68e6bfd000062949c8349800d98b317763bbb",
+  "build": {
+    "command": "lake build",
+    "real_exit_code": 0,
+    "jobs": 8767,
+    "real_error_lines": 0,
+    "exit_code_capture_method": "script file, no shell boundary crossing"
+  },
+  "lean_files_created": [
+    "TamesisLab/Foundations/FiniteStateAbstraction/Abstraction.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction/AbstractAnalysis.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction/Observation.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction/OrbitSeparation.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction/Counterexample.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction/Audit.lean",
+    "TamesisLab/Foundations/FiniteStateAbstraction.lean",
+    "TamesisLab/Tests/FoundFiniteStateAbstraction001.lean",
+    "TamesisLab/Tests/FoundFiniteStateAbstraction001Execution.lean",
+    "TamesisLab/Tests/FoundFiniteStateAbstraction001Axioms.lean",
+    "TamesisLab/Tests/FoundFiniteStateAbstraction001UmbrellaAudit.lean"
+  ],
+  "lean_files_created_count": 11,
+  "preexisting_files_modified": [
+    "TamesisLab/Foundations.lean",
+    "TamesisLab.lean"
+  ],
+  "preexisting_modification_kind": "import lines only",
+  "isolated_module_checks": {
+    "modules_checked": 11,
+    "failures": 0,
+    "all_exit_zero": true,
+    "all_zero_errors": true
+  },
+  "derived_counts": {
+    "structures": 1,
+    "defs": 2,
+    "theorems": 4,
+    "instances": 0,
+    "private_helpers": 0,
+    "public_total_derived": 7,
+    "public_total_declared": 7,
+    "divergence": 0,
+    "counterexample_declarations": 10,
+    "test_files": 4,
+    "tests_executed": 12
+  },
+  "axiom_footprint": {
+    "CertifiedFiniteAbstraction.iterate_commutes": ["propext"],
+    "analyzeAbstractSystem": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_complete": ["propext", "Classical.choice", "Quot.sound"],
+    "analyzeAbstractSystem_observational_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "OrbitSeparating": [],
+    "analyzeAbstractSystem_reflected_sound": ["propext", "Classical.choice", "Quot.sound"],
+    "counterexample_declarations_all_axiom_free": true,
+    "sorryAx": 0,
+    "local_axioms": 0,
+    "classical_choice_producing_data": 0
+  },
+  "computability": {
+    "noncomputable_declarations": 0,
+    "concrete_evaluations_by_decide": 4,
+    "native_evaluation_used": false
+  },
+  "forbidden_tokens": {
+    "sorry": 0,
+    "admit": 0,
+    "unsafe": 0,
+    "bare_axiom_token": 0,
+    "noncomputable": 0,
+    "Classical.choose": 0,
+    "Classical.decEq": 0,
+    "native_evaluation": 0
+  },
+  "typeclasses": {
+    "core_module_typeclass_brackets": 0,
+    "requires_fintype_concrete": false,
+    "requires_decidable_eq_concrete": false
+  },
+  "umbrella_audit": {
+    "file": "TamesisLab/Tests/FoundFiniteStateAbstraction001UmbrellaAudit.lean",
+    "registered_in_root_aggregator": false,
+    "reason": "importing TamesisLab from a module inside TamesisLab.lean would be circular",
+    "run_explicitly": true,
+    "real_exit_code": 0,
+    "error_lines": 0,
+    "many_to_one_instance": "Fin 4 -> Fin 2 by parity over rotation",
+    "observational_recurrence_holds": true,
+    "concrete_recurrence_fails": true
+  },
+  "failures_encountered": [
+    {
+      "what": "umbrella audit failed to elaborate",
+      "error": "failed to synthesize Decidable (Function.Semiconj parity rotate4 rotate2)",
+      "cause": "Function.Semiconj is a def; instance resolution does not unfold it",
+      "fix": "intro i; revert i; decide",
+      "masked": false
+    },
+    {
+      "what": "exit codes captured across a shell boundary were unreliable",
+      "detected_by": "an exit 0 reported while lake was absent from PATH, and an exit 0 reported alongside a real elaboration error",
+      "fix": "all exit-code capture moved into script files",
+      "reverification": "both earlier probes re-run: errors=0, real exit 0",
+      "prior_claims_false": false
+    }
+  ],
+  "gaps": {
+    "total": 20,
+    "closed": 15,
+    "open": 5,
+    "open_ids": ["ABS-GAP-015", "ABS-GAP-016", "ABS-GAP-017", "ABS-GAP-018", "ABS-GAP-020"],
+    "permanently_open": ["ABS-GAP-017"]
+  },
+  "stop_conditions": {
+    "declared": 18,
+    "triggered": 0
+  },
+  "validation": {
+    "lake_build": "PASS",
+    "isolated_modules": "PASS",
+    "umbrella_audit": "PASS",
+    "pytest": "PASS",
+    "labctl_validate": "PASS",
+    "canonical_commit_check": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "whitespace_eof_audit": "PASS",
+    "claims_promoted": 0,
+    "claim_ledger_total": 22
+  },
+  "closed_fronts_modified": {
+    "ENG-FINITE-STATE-ENCODING-001": 0,
+    "ENG-FINITE-STATE-RUNTIME-001": 0,
+    "FOUND-CYCLE-DETECTION-001": 0,
+    "FOUND-FUNCTIONAL-GRAPH-001": 0,
+    "FOUND-SEMIGROUP-002": 0,
+    "RH-NOGO-001": 0
+  },
+  "scientific_boundary": {
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "research_role": "FORMAL_SEMANTIC_FOUNDATION"
+  },
+  "final_state": {
+    "active_work_item": "FOUND-FINITE-STATE-ABSTRACTION-001",
+    "work_status": "READY",
+    "specification_status": "APPROVED",
+    "specification_review": "APPROVED",
+    "formalization_status": "VERIFIED",
+    "current_blocker": null,
+    "authorized_action": "FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_AUTHORIZED"
+  },
+  "next_expected_gate": "FOUND-FINITE-STATE-ABSTRACTION-001-RESULT-REVIEW"
+}

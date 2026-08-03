@@ -4,6 +4,8 @@ import TamesisLab.Foundations.FiniteDynamics
 import TamesisLab.Foundations.FunctionalGraphs
 import TamesisLab.Foundations.CycleDetection
 import TamesisLab.Foundations.CycleDetection.Audit
+import TamesisLab.Foundations.FiniteStateAbstraction
+import TamesisLab.Foundations.FiniteStateAbstraction.Audit
 
 namespace TamesisLab.Foundations
 

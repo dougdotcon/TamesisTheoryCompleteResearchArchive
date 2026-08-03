@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:20:37-03:00
-canonical_commit: "b0dcabcee8d11fa47fd1aaf3053695ce38f49a43"
+updated_at: 2026-08-03T20:33:38-03:00
+canonical_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -14,7 +14,7 @@ previous_candidate_work_item: "FOUND-FINITE-ABSTRACTION-001"
 work_status: "READY"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
-formalization_status: "NOT_STARTED"
+formalization_status: "VERIFIED"
 result_review: "NOT_STARTED"
 bisimulation_status: "NOT_AUTHORIZED"
 quotient_status: "NOT_AUTHORIZED"
@@ -23,15 +23,14 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "bdc67fb9481743a7463ae4b61faa9bc7dca9e5dd"
+formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "portfolio-review-after-certified-encoding-result.json"
 current_blocker: null
 next_single_action: >
-  Formalizar a abstração certificada, a correspondência de
-  iteradas, a soundness observacional, OrbitSeparating, a
-  reflexão condicionada, a completeness abstrata e o
-  contraexemplo BOOL_TO_UNIT.
-authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_FORMALIZATION_AUTHORIZED"
+  Revisar o resultado da formalização: API pública, pegada,
+  computabilidade, contagens derivadas, gaps, contraexemplo e
+  preservação das frentes encerradas.
+authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
@@ -190,6 +189,9 @@ prohibited_actions:
   - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
+  - "Não usar código de saída capturado através de fronteira de shell como evidência"
+  - "Não declarar PASS quando a saída contiver linha error: ainda que o exit seja zero"
+  - "Não registrar FoundFiniteStateAbstraction001UmbrellaAudit em TamesisLab.lean"
   - "Não usar FOUND-FINITE-ABSTRACTION-001 como item ativo: é nome candidato anterior"
   - "Não concluir igualdade em C a partir da soundness observacional sem OrbitSeparating"
   - "Não descrever a completeness abstrata como completeness concreta"

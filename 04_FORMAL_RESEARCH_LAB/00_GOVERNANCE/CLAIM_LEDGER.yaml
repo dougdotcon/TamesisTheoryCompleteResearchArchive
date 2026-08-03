@@ -719,3 +719,65 @@ claims:
     - novidade matematica
     - novidade algoritmica
     - resultado fisico
+  - claim_id: CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001
+    short_name: certified_finite_state_abstraction_and_cycle_reflection
+    exact_statement: "Um witness devolvido pela analise de um sistema abstrato finito certificadamente codificado implica recorrencia observacional no sistema concreto semiconjugado, e implica recorrencia concreta apenas sob uma hipotese explicita de separacao da orbita."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/FiniteStateAbstraction.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/FINAL_PUBLIC_API.md"
+      - "04_FORMAL_RESEARCH_LAB/found-finite-state-abstraction-001-formalization-result.json"
+      - "04_FORMAL_RESEARCH_LAB/found-finite-state-abstraction-001-result-review.json"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizada em Lean uma abstracao deterministica semiconjugada
+      entre um sistema concreto e um sistema abstrato finito
+      certificadamente codificado. Foi provado que um witness abstrato
+      implica recorrencia observacional no sistema concreto. Sob uma
+      hipotese explicita de separacao da orbita, essa recorrencia
+      observacional pode ser refletida como recorrencia concreta. Tambem
+      foi formalizado um contraexemplo mostrando que a semiconjugacao
+      isoladamente nao reflete ciclos.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - CERTIFIED-FINITE-STATE-ENCODING-FORMAL-001
+    known_gaps:
+      - 'ABS-GAP-015: bissimulacao nao formalizada'
+      - 'ABS-GAP-016: quocientes nao formalizados'
+      - 'ABS-GAP-017: a correcao da abstracao externa real NAO eh fornecida, e permanece fora de alcance'
+      - 'ABS-GAP-018: nenhuma extracao'
+      - 'ABS-GAP-020: nenhuma afirmacao de complexidade, por ausencia de modelo de custo'
+      - 'ABS-GAP-019 foi fechado por delimitacao de escopo, nao por revisao bibliografica'
+    counterevidence:
+      - 'BOOL_TO_UNIT: a reflexao ingenua e formalmente FALSA, e o teorema naive_cycle_reflection_is_false o prova sem depender de nenhum axioma'
+      - 'a abstracao por paridade Fin 4 -> Fin 2 exibe ciclo abstrato de periodo 2 que NAO e ciclo concreto'
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/"
+    last_reviewed: 2026-08-03
+    computational_scope: >
+      O consumidor fornece stepC, stepA, a abstracao com prova de
+      semiconjugacao, a codificacao certificada e o estado inicial, sem
+      qualquer typeclass. C nao precisa ser finito nem ter igualdade
+      decidivel. OrbitSeparating e o unico contrato adicional, e somente
+      para a conclusao concreta. A pegada propext, Classical.choice e
+      Quot.sound e herdada de analyzeEncodedSystem e vive em proposicoes
+      apagadas; quatro analises concretas foram verificadas por decide.
+    promotion_requirements:
+      - 'nao aplicavel: eh fundamento semantico formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - todo ciclo abstrato e concreto
+      - abstracoes finitas sao sempre corretas
+      - bissimulacao foi provada
+      - sistemas externos foram certificados
+      - correcao de abstracao externa
+      - minimalidade do witness
+      - unicidade do witness
+      - invariancia do witness sob recodificacao
+      - complexidade otima
+      - integracao pronta
+      - novo algoritmo
+      - novidade matematica
+      - novidade algoritmica
+      - resultado fisico

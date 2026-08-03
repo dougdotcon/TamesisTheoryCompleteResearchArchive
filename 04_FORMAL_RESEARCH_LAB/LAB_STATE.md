@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:33:38-03:00
-canonical_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
+updated_at: 2026-08-03T20:38:19-03:00
+canonical_commit: "de1b8a9e8a57fb48f11a229e8ea96d747889a2a5"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,11 +11,13 @@ repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-FINITE-STATE-ABSTRACTION-001"
 previous_candidate_work_item: "FOUND-FINITE-ABSTRACTION-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
-result_review: "NOT_STARTED"
+result_review: "APPROVED"
+extension_status: "NOT_AUTHORIZED"
+external_integration_status: "NOT_AUTHORIZED"
 bisimulation_status: "NOT_AUTHORIZED"
 quotient_status: "NOT_AUTHORIZED"
 extraction_status: "NOT_AUTHORIZED"
@@ -24,17 +26,32 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
-last_verified_artifact: "portfolio-review-after-certified-encoding-result.json"
+last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado da formalização: API pública, pegada,
-  computabilidade, contagens derivadas, gaps, contraexemplo e
-  preservação das frentes encerradas.
-authorized_action: "FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar uma revisão explícita de portfólio. A frente
+  FOUND-FINITE-STATE-ABSTRACTION-001 está encerrada e travada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED"]
 closed_work_items:
+  FOUND-FINITE-STATE-ABSTRACTION-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    bisimulation_status: NOT_AUTHORIZED
+    quotient_status: NOT_AUTHORIZED
+    extraction_status: NOT_AUTHORIZED
+    cli_status: NOT_AUTHORIZED
+    parser_status: NOT_AUTHORIZED
+    external_integration_status: NOT_AUTHORIZED
+    external_abstraction_correctness: PERMANENTLY_OUT_OF_SCOPE
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
   FOUND-SEMIGROUP-002:
     work_status: VERIFIED
     result_review: APPROVED

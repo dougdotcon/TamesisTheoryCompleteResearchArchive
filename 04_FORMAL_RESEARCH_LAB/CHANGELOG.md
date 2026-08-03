@@ -1,5 +1,43 @@
 # Changelog do laboratório formal
 
+## FOUND-FINITE-STATE-ABSTRACTION-001-RESULT-REVIEW - 2026-08-03
+
+### Approved
+
+- `FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_APPROVED`. Os
+  **quatorze** itens de conferencia CONFIRMADOS, com build, auditoria
+  umbrella e contagens **reexecutados** neste gate — nada foi herdado do
+  anterior.
+
+### Promoted
+
+- Uma unica claim: **`CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001`**,
+  `evidence_level: F`, `mathematical_novelty: NONE`,
+  `algorithmic_novelty: NONE`. Ledger de `22` para `23`.
+- A claim carrega a propria contraevidencia: `BOOL_TO_UNIT` e a
+  abstracao por paridade estao registrados em `counterevidence`, porque
+  medem o limite exato do que foi provado.
+
+### Closed
+
+- Frente **ENCERRADA**. `work_status: VERIFIED`,
+  `result_review: APPROVED`, `extension_status: NOT_AUTHORIZED`.
+- Bissimulacao, quocientes, extracao, integracao externa, CLI e parser
+  permanecem **NAO AUTORIZADOS**. `ABS-GAP-017` — a correcao de uma
+  abstracao externa real — fica **permanentemente aberto**.
+
+### Recorded
+
+- Os quatro gates foram executados pelo mesmo agente em sessoes
+  consecutivas. Nenhum substitui revisao externa; o que sustenta o
+  resultado e o que foi medido e reexecutado.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. A trava nao e
+  autorizacao: nenhuma frente nova esta escolhida. `0` arquivos de
+  frentes encerradas modificados, `0` duplicatas YAML em `57` arquivos.
+
 ## FOUND-FINITE-STATE-ABSTRACTION-001-FORMALIZATION - 2026-08-03
 
 ### Formalized

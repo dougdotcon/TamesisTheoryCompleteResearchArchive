@@ -839,3 +839,63 @@ claims:
       - novidade algoritmica
       - novo algoritmo
       - resultado fisico
+  - claim_id: INVARIANT-UNREACHABILITY-FORMAL-001
+    short_name: invariant_separates_implies_unreachable
+    exact_statement: "Se uma funcao e invariante sob o passo de um sistema deterministico total e atribui valores distintos a dois estados, entao o segundo nao e alcancavel a partir do primeiro; e para abstracoes invariantes a condicao OrbitSeparating vale exatamente nos pontos fixos."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/Invariants.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/09_INVARIANTS/FOUND_INVARIANT_UNREACHABILITY_001/SPECIFICATION_DECISION.md"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/09_INVARIANTS/FOUND_INVARIANT_UNREACHABILITY_001/RESULT_REVIEW.md"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizado em Lean que um invariante e definicionalmente uma
+      semiconjugacao para o sistema parado, e que um invariante que separa
+      dois estados demonstra inalcancabilidade. Nenhuma finitude e usada:
+      a instancia verificada roda sobre Int x Int. Foi provado tambem que,
+      para abstracoes invariantes, a condicao de reflexao OrbitSeparating
+      vale se e somente se o estado inicial e ponto fixo, de modo que
+      invariantes certificam impossibilidade e nunca recorrencia.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001
+    known_gaps:
+      - 'INV-GAP-001: existencia de invariante separador CALCULAVEL permanece ABERTA'
+      - 'INV-GAP-002: invariantes relacionais NAO foram tratados'
+      - 'INV-GAP-003: monovariantes e terminacao NAO foram tratados'
+      - 'INV-GAP-006: sistemas nao deterministicos NAO foram tratados'
+      - 'INV-GAP-009: bibliografia de argumentos de invariante permanece ABERTA'
+    counterevidence:
+      - 'o invariante constante e invariante legitimo e nao prova nada: a ferramenta e suficiente, nunca necessaria'
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/09_INVARIANTS/FOUND_INVARIANT_UNREACHABILITY_001/"
+    last_reviewed: 2026-08-04
+    computational_scope: >
+      A frente e inteiramente proposicional: nao introduz funcao
+      computavel sobre o sistema, nao decide alcancabilidade e nao exige
+      typeclass alguma. Tres das dez declaracoes nao dependem de axioma
+      nenhum, e Classical.choice nao aparece em nenhuma.
+    scope_qualifier_required: >
+      Toda formulacao desta claim deve conter dois qualificadores.
+      Primeiro, "suficiente, nunca necessaria": exibir um invariante que
+      separa e obrigacao de quem quer a conclusao, e a reciproca ingenua e
+      vacuamente verdadeira pelo invariante mais fino, logo nao diz nada.
+      Segundo, "para sistemas deterministicos totais". Sem os dois a
+      afirmacao e falsa ou vazia.
+    promotion_requirements:
+      - 'nao aplicavel: eh ferramenta formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - a ferramenta e completa
+      - inalcancabilidade implica existencia de invariante separador util
+      - a ferramenta decide alcancabilidade
+      - invariantes certificam recorrencia
+      - invariantes formam reticulado ou algebra
+      - sistemas nao deterministicos se comportam assim
+      - monovariantes foram tratados
+      - resultado novo em combinatoria
+      - novidade matematica
+      - novidade algoritmica
+      - resolve algum problema nomeado
+      - resultado fisico

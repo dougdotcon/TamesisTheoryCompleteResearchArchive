@@ -1,5 +1,49 @@
 # Changelog do laboratório formal
 
+## FOUND-INVARIANT-UNREACHABILITY-001-RESULT-REVIEW - 2026-08-04
+
+### Approved
+
+- `FOUND_INVARIANT_UNREACHABILITY_001_RESULT_REVIEW_APPROVED`. Nove itens
+  CONFIRMADOS, com build e contagens **reexecutados** neste gate.
+
+### Promoted
+
+- **`INVARIANT-UNREACHABILITY-FORMAL-001`**, `evidence_level: F`,
+  novidade `NONE`. Ledger de `24` para `25`.
+- A entrada carrega `scope_qualifier_required` com dois qualificadores:
+  **"suficiente, nunca necessaria"** e **"sistemas deterministicos
+  totais"**. Sem os dois a afirmacao e falsa ou vazia.
+
+### Footprint
+
+- **`Classical.choice` ausente das dez declaracoes.** Tres delas —
+  `Invariant.semiconj`, `invariantAbstraction` e
+  `constant_invariant_proves_nothing` — **nao dependem de axioma nenhum**.
+- Que `Invariant.semiconj` nao tenha pegada e a verificacao de que a
+  ponte com `Function.Semiconj` e **definicional**, nao uma prova
+  disfarcada.
+
+### Closed
+
+- Frente **ENCERRADA**. Invariantes relacionais, monovariantes,
+  terminacao, invariante completo e sistemas nao deterministicos seguem
+  **NAO AUTORIZADOS**.
+- `INV-GAP-001` fica **aberta**: a reciproca ingenua e vacuamente
+  verdadeira pelo invariante mais fino, e a pergunta com conteudo —
+  existe invariante separador *calculavel* — nao foi atacada.
+
+### Not done
+
+- **Nenhum problema de milenio foi atacado**, por decisao explicita: a
+  estrategia e acumular ferramentas antes de abrir tabuleiro.
+  `RH-NOGO-001` permanece `NOT_AUTHORIZED` / `NO_EXECUTION`.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `0` frentes encerradas
+  modificadas.
+
 ## FOUND-INVARIANT-UNREACHABILITY-001-FORMALIZATION - 2026-08-04
 
 ### Formalized

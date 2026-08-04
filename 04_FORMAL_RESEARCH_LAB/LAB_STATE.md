@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:34:58-03:00
-canonical_commit: "d5ddb69e4850bc9e5e28d8a0d55cb746a9b5b123"
+updated_at: 2026-08-04T00:37:40-03:00
+canonical_commit: "27b1972cab6906f8866a7aa46a640760b3615495"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,11 +10,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-INVARIANT-UNREACHABILITY-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
-result_review: "NOT_STARTED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,9 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado: reexecutar build e contagens, conferir a
-  pegada e promover no máximo uma claim.
-authorized_action: "FOUND_INVARIANT_UNREACHABILITY_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar revisão de portfólio. A frente
+  FOUND-INVARIANT-UNREACHABILITY-001 está encerrada e travada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -42,6 +42,21 @@ consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "
 decision_ledger_integrity: "VERIFIED_CLEAN"
 decision_citations_unregistered: 0
 closed_work_items:
+  FOUND-INVARIANT-UNREACHABILITY-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    relational_invariants_status: NOT_AUTHORIZED
+    monovariant_status: NOT_AUTHORIZED
+    termination_status: NOT_AUTHORIZED
+    complete_invariant_status: NOT_AUTHORIZED
+    nondeterministic_systems_status: NOT_AUTHORIZED
+    classical_choice_present: false
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
   FOUND-BISIMULATION-BOUNDARY-001:
     work_status: VERIFIED
     specification_status: APPROVED

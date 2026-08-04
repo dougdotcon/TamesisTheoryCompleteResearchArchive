@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T05:52:00-03:00
+updated_at: 2026-08-04T06:08:00-03:00
 canonical_commit: "909f7e06d52c172b49f908c22c3d32492c50bd7d"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -10,11 +10,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-COMPUTABILITY-BRIDGE-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "READY_FOR_REVIEW"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
-result_review: "NOT_STARTED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,10 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado: conferir as 29 declarações contra a especificação
-  congelada, a pegada 9/19, e se o enunciado negativo sobreviveu à
-  formalização.
-authorized_action: "FOUND_COMPUTABILITY_BRIDGE_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar revisão de portfólio. A ponte está encerrada, e a única
+  lacuna com conteúdo algorítmico é CB-GAP-001, o nível uniforme.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -43,6 +42,20 @@ consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "
 decision_ledger_integrity: "VERIFIED_CLEAN"
 decision_citations_unregistered: 0
 closed_work_items:
+  FOUND-COMPUTABILITY-BRIDGE-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    uniform_level_status: STATED_NOT_PROVED
+    cost_model_status: NOT_AUTHORIZED
+    complexity_class_status: NOT_AUTHORIZED
+    canonicity_status: ONE_CASE_NOT_AN_INVARIANCE
+    central_result_sign: NEGATIVE
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
   FOUND-MONOVARIANT-DESCENT-001:
     work_status: VERIFIED
     specification_status: APPROVED
@@ -360,7 +373,7 @@ FOUND-BISIMULATION-BOUNDARY-001     VERIFIED / APPROVED     ENCERRADO
 FOUND-INVARIANT-UNREACHABILITY-001  VERIFIED / APPROVED     ENCERRADO
 FOUND-MONOVARIANT-DESCENT-001       VERIFIED / APPROVED     ENCERRADO
 
-FOUND-COMPUTABILITY-BRIDGE-001      READY / FORMALIZATION VERIFIED  ATIVA
+FOUND-COMPUTABILITY-BRIDGE-001      VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
@@ -373,11 +386,11 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
-**Frente ativa: `FOUND-COMPUTABILITY-BRIDGE-001`**, especificação
-congelada e aguardando revisão. Doze frentes encerradas.
+**Nenhuma frente ativa.** Treze frentes encerradas. A escolha do
+próximo trabalho exige um gate explícito de revisão de portfólio.
 
 ## Por que este bloco existe
 
@@ -442,5 +455,4 @@ research_role: FORMAL_BRIDGE
 
 ## Próxima ação
 
-Revisar a especificação de `FOUND-COMPUTABILITY-BRIDGE-001`. Nada mais
-está autorizado.
+Aguardar gate de revisão de portfólio. Nada mais está autorizado.

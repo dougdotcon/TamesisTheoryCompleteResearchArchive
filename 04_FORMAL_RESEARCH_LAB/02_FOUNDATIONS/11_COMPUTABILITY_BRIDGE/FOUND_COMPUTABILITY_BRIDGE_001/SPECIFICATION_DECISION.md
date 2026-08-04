@@ -146,8 +146,21 @@ A cota é sobre o **certificado**: o testemunho cabe em `n`. Ela **não**
 diz que a computação custa `n` passos, e afirmar isso está proibido —
 não há modelo de custo.
 
+```lean
+private theorem analyze_reduce_cb {raw : RawTransitionTable} (hRaw : raw.Valid)
+    {start : Nat} (hStart : start < raw.next.size) :
+    analyzeTransitionTable raw start =
+      (match ValidatedTransitionTable.detectCycle?
+          (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
+        | some witness => .ok witness
+        | none => .error .internalDetectorFailure)
+```
+
 O auxiliar privado `analyze_reduce_cb` reproduz, com API exclusivamente
 pública, a redução do bloco `do` que a frente do runtime mantém privada.
+A assinatura está em bloco, e não só em prosa, porque o comparador
+automático da revisão de resultado só enxerga blocos —
+`RES-REV-CB-001`.
 **É a terceira cópia** dessa redução no laboratório: a original é privada
 em `FiniteStateRuntime/DynamicAnalysis.lean`, a segunda é privada em
 `Monovariants/WitnessBounds.lean`. A duplicação está declarada, não

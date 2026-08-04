@@ -978,3 +978,65 @@ claims:
       - novidade algoritmica
       - resolve algum problema nomeado
       - resultado fisico
+  - claim_id: COMPUTABILITY-CLASSIFICATION-VACUITY-FORMAL-001
+    short_name: finite_domain_makes_primrec_vacuous
+    exact_statement: "Toda funcao que sai de um tipo com codificacao certificada CertifiedFiniteEncoding S n e primitiva recursiva sob a Primcodable induzida, por Primrec.dom_finite e sem consultar a funcao; logo a analise executavel do laboratorio e Primrec e Computable, e a classificacao nao distingue a busca limitada de uma tabela de consulta."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/ComputabilityBridge.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/11_COMPUTABILITY_BRIDGE/FOUND_COMPUTABILITY_BRIDGE_001/SPECIFICATION_DECISION.md"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/11_COMPUTABILITY_BRIDGE/FOUND_COMPUTABILITY_BRIDGE_001/RESULT_REVIEW.md"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizado em Lean que CertifiedFiniteEncoding e uma
+      equivalencia com Fin n e portanto induz Primcodable, colocando os
+      tipos do laboratorio dentro da hierarquia de computabilidade do
+      Mathlib. E foi formalizado que essa insercao nao carrega informacao
+      algoritmica: sobre dominio finito toda funcao e primitiva recursiva,
+      pela lema dom_finite, cuja prova nunca consulta a funcao. A analise
+      executavel e Primrec e Computable, e todo predicado sobre o tipo e
+      ComputablePred, mas nenhuma dessas conclusoes depende do algoritmo.
+      Foi tambem provada a cota do certificado, baseIndex + period <= n,
+      que limita o TESTEMUNHO e nao os recursos.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001
+    known_gaps:
+      - 'CB-GAP-001: Primrec2 analyzeTransitionTable, o nivel uniforme, ELABORA mas NAO foi provado'
+      - 'CB-GAP-002: nao ha modelo de custo, logo nao ha complexidade'
+      - 'CB-GAP-010: a Primcodable induzida nao e canonica; ha um caso, nao ha invariancia'
+    last_reviewed: 2026-08-04
+    computational_scope: >
+      A frente e classificatoria e nao algoritmica. Nenhuma classe de
+      complexidade e definida, nenhum custo e afirmado, e o nivel uniforme
+      sobre RawTransitionTable x Nat permanece enunciado e nao provado.
+    scope_qualifier_required: >
+      Toda formulacao desta claim deve conter tres qualificadores.
+      Primeiro, "por finitude do dominio": a conclusao NAO decorre de a
+      busca ser limitada, e a prova nunca olha a funcao. Segundo, "sem
+      conteudo algoritmico": Primrec aqui nao distingue o detector de uma
+      tabela de consulta, e nao pode servir de degrau para classe de
+      complexidade. Terceiro, "cota do certificado, nao de recursos":
+      baseIndex + period <= n limita o testemunho, e afirmar custo exige
+      modelo de maquina que o laboratorio nao tem. Sem os tres a
+      afirmacao induz a erro.
+    promotion_requirements:
+      - 'nao aplicavel: eh ponte formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - o detector e Primrec porque a busca e limitada
+      - a classificacao mede custo ou complexidade
+      - baseIndex + period <= n e cota de recursos
+      - o nivel uniforme foi provado
+      - existe modelo de custo no laboratorio
+      - P_phys ou NP_phys foram definidas
+      - alguma coisa foi provada sobre P vs NP
+      - a Primcodable induzida e canonica
+      - a classificacao e invariante sob recodificacao
+      - o laboratorio esta pronto para atacar problema de milenio
+      - novidade matematica
+      - novidade algoritmica
+      - resolve algum problema nomeado
+      - resultado fisico

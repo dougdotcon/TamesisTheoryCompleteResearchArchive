@@ -1,5 +1,51 @@
 # Changelog do laboratório formal
 
+## FOUND-COMPUTABILITY-BRIDGE-001-RESULT-REVIEW - 2026-08-04
+
+### Verified
+
+- Build reexecutado: `exit 0`, `8802` jobs, `0` `error:`, `0` `sorry`.
+- Confronto **nome a nome** entre arvore instalada e especificacao
+  congelada: `28` assinaturas presentes, `0` ausentes, `0` duplicadas,
+  `0` divergentes. A 29a declaracao e o auxiliar privado.
+- Pegada `9` livres de axioma e `19` com pegada infraestrutural,
+  identica a prevista.
+
+### Corrected
+
+- `RES-REV-CB-001`: a assinatura do auxiliar privado estava so em prosa,
+  e o comparador automatico a leu como "instalada a mais". Defeito **do
+  comparador**, nao do resultado. A assinatura foi posta em bloco.
+
+### Promoted
+
+- `COMPUTABILITY-CLASSIFICATION-VACUITY-FORMAL-001`, nivel `F`. Ledger
+  passa de `26` para `27`. Tres qualificadores sao **obrigatorios** em
+  toda formulacao: *por finitude do dominio*, *sem conteudo algoritmico*
+  e *cota do certificado, nao de recursos*. Sem eles a afirmacao induz a
+  erro.
+
+### Closed
+
+- `FOUND-COMPUTABILITY-BRIDGE-001` — **decima terceira** frente
+  encerrada. `19` declaracoes publicas, `29` no total, `10` lacunas
+  abertas, `13` condicoes de parada, `0` disparadas, `6` defeitos achados
+  pelas revisoes.
+
+### Still open
+
+- `CB-GAP-001` e a unica lacuna desta frente com conteudo algoritmico: o
+  nivel **uniforme**, sobre `RawTransitionTable × Nat`, onde o dominio e
+  infinito e `dom_finite` nao se aplica. O enunciado elabora; a prova
+  **nao foi tentada**.
+- `CB-GAP-002` — sem modelo de custo nao ha complexidade. Fecha-la e
+  escolher um modelo, e escolher e decisao de portfolio.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`.
+- `DEC-040` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-COMPUTABILITY-BRIDGE-001-FORMALIZATION - 2026-08-04
 
 ### Formalized

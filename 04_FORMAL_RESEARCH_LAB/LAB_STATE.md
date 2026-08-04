@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T07:30:00-03:00
+updated_at: 2026-08-04T07:44:00-03:00
 canonical_commit: "2de54d9371e9124419c2f19c6f301f4b955e9022"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -10,11 +10,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-UNIFORM-PRIMREC-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
-result_review: "NOT_STARTED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,10 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado: 36 declarações contra a especificação congelada,
-  e se Primrec₂ analyzeTransitionTable sobreviveu à formalização sem
-  virar afirmação de eficiência.
-authorized_action: "FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar revisão de portfólio. CB-GAP-001 fechou; o que falta para
+  PVSNP-PHYS-001 é um modelo de custo, e escolher modelo é decisão de
+  portfólio, não descoberta.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -43,6 +43,20 @@ consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "
 decision_ledger_integrity: "VERIFIED_CLEAN"
 decision_citations_unregistered: 0
 closed_work_items:
+  FOUND-UNIFORM-PRIMREC-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    closes_gap: CB-GAP-001
+    cost_model_status: NOT_AUTHORIZED
+    complexity_class_status: NOT_AUTHORIZED
+    efficiency_claim_status: FORBIDDEN
+    proof_consults_algorithm: true
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
   FOUND-COMPUTABILITY-BRIDGE-001:
     work_status: VERIFIED
     specification_status: APPROVED
@@ -384,7 +398,7 @@ FOUND-MONOVARIANT-DESCENT-001       VERIFIED / APPROVED     ENCERRADO
 
 FOUND-COMPUTABILITY-BRIDGE-001      VERIFIED / APPROVED     ENCERRADO
 
-FOUND-UNIFORM-PRIMREC-001           READY / FORMALIZADA     ATIVA
+FOUND-UNIFORM-PRIMREC-001           VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
@@ -397,12 +411,11 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
-**Frente ativa: `FOUND-UNIFORM-PRIMREC-001`.** Treze frentes
-encerradas. A viabilidade da nova foi **medida por elaboração**: o núcleo
-`primrec_runList` compila.
+**Nenhuma frente ativa.** Quatorze frentes encerradas. `CB-GAP-001`
+fechou com prova: `Primrec₂ analyzeTransitionTable` está na árvore.
 
 ## Por que este bloco existe
 
@@ -467,9 +480,13 @@ research_role: FORMAL_BRIDGE
 
 ## Próxima ação
 
-Especificar `FOUND-UNIFORM-PRIMREC-001`. Nada mais está autorizado.
+Aguardar gate de revisão de portfólio. Nada mais está autorizado.
 
-O obstáculo do nível uniforme **não é computabilidade** — é tipo
-dependente: `analyzeTransitionTable` atravessa `Fin t.next.size`, e
-`Primrec` não conversa com isso. A rota medida é reformular sobre
-`List Nat` e casar depois.
+```text
+ponte      Primrec nao mede nada    porque e VACUO sobre dominio finito
+uniforme   Primrec nao mede custo   porque a CLASSE e enorme
+```
+
+São **dois limites diferentes**, e os dois valem. O que falta para
+`PVSNP-PHYS-001` é um **modelo de custo** — e escolher modelo é decisão
+de portfólio, não descoberta.

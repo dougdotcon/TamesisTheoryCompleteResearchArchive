@@ -1,5 +1,46 @@
 # Changelog do laboratório formal
 
+## FOUND-UNIFORM-PRIMREC-001-RESULT-REVIEW - 2026-08-04
+
+### Verified
+
+- Build reexecutado: `exit 0`, `8811` jobs, `0` `error:`, `0` `sorry`.
+  `36` declaracoes da arvore batendo com a especificacao congelada.
+  `0` defeitos novos.
+
+### Closed
+
+- **`CB-GAP-001` FECHADA.** `Primrec₂ analyzeTransitionTable` esta na
+  arvore. Era a unica lacuna da ponte com conteudo algoritmico.
+- `FOUND-UNIFORM-PRIMREC-001` — **decima quarta** frente encerrada.
+
+### Promoted
+
+- `UNIFORM-ANALYSIS-PRIMREC-FORMAL-001`, nivel `F`. Ledger de `27` para
+  `28`. **Dois** qualificadores obrigatorios, porque a claim erra nos
+  dois sentidos: *primitivo recursivo NAO significa eficiente* e *sobre
+  dominio infinito, e por isso NAO vacuo*.
+
+### The distinction that matters
+
+```text
+ponte      Primrec nao mede nada    porque e VACUO sobre dominio finito
+uniforme   Primrec nao mede custo   porque a CLASSE e enorme
+```
+
+Sao **dois limites diferentes**, e os dois valem. Fechar o nivel uniforme
+**nao** aproximou o laboratorio de eficiencia.
+
+### Still missing
+
+- Para `PVSNP-PHYS-001` falta um **modelo de custo** — `UP-GAP-001`. E
+  escolher um modelo e **decisao de portfolio, nao descoberta**.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`.
+- `DEC-045` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-UNIFORM-PRIMREC-001-FORMALIZATION - 2026-08-04
 
 ### Formalized

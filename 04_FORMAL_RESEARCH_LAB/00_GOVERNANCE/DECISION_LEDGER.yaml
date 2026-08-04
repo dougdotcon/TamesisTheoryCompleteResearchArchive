@@ -926,3 +926,36 @@ decisions:
       - "nenhum modelo de custo, nenhuma classe de complexidade"
       - "Primrec nao e apresentado como eficiencia"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+  - decision_id: DEC-045
+    date: 2026-08-04
+    decision: >
+      Encerrar FOUND-UNIFORM-PRIMREC-001 com result_review APPROVED,
+      promover UNIFORM-ANALYSIS-PRIMREC-FORMAL-001 com nivel F, e
+      registrar CB-GAP-001 como FECHADA.
+    rationale: >
+      lake build reexecutado com exit 0 e 8811 jobs, 36 declaracoes
+      derivadas da arvore batendo com a especificacao congelada, 0
+      defeitos novos. A prova de Primrec2 analyzeTransitionTable depende
+      do algoritmo e nao da finitude, o que a distingue do resultado da
+      ponte. A claim carrega dois qualificadores obrigatorios porque erra
+      nos dois sentidos: nem e vacua como a da ponte, nem e afirmacao de
+      eficiencia.
+    authority: FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/12_UNIFORM_PRIMREC/FOUND_UNIFORM_PRIMREC_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "CLAIM_LEDGER: +1 claim, total 28"
+      - "LAB_STATE: closed_work_items += FOUND-UNIFORM-PRIMREC-001"
+      - "LAB_STATE: authorized_action = PORTFOLIO_REVIEW_REQUIRED"
+      - "CB-GAP-001: ABERTA -> FECHADA"
+    untouched_safeguards:
+      - "nenhum modelo de custo e escolhido"
+      - "nenhuma classe de complexidade e definida"
+      - "Primrec nao e apresentado como eficiencia"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

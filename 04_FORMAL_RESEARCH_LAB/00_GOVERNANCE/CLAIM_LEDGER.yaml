@@ -1040,3 +1040,54 @@ claims:
       - novidade algoritmica
       - resolve algum problema nomeado
       - resultado fisico
+  - claim_id: UNIFORM-ANALYSIS-PRIMREC-FORMAL-001
+    short_name: table_analysis_is_primitive_recursive
+    exact_statement: "A analise de tabelas de transicao do laboratorio, vista como funcao de RawTransitionTable x Nat em Except RuntimeCycleError CycleWitness, e primitiva recursiva; o dominio e infinito, Primrec.dom_finite nao se aplica, e a prova depende do algoritmo."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/UniformPrimrec.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/12_UNIFORM_PRIMREC/FOUND_UNIFORM_PRIMREC_001/SPECIFICATION_DECISION.md"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/12_UNIFORM_PRIMREC/FOUND_UNIFORM_PRIMREC_001/RESULT_REVIEW.md"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizado em Lean que analyzeTransitionTable e Primrec2 sobre
+      um dominio infinito. A peca central e run?_eq_iterate, que reescreve
+      a recursao com Option de run? como uma iterada e libera
+      Primrec.nat_iterate; o tipo dependente restante, em detectCycle?, sai
+      por um casamento com um contrato equivalente sobre a tabela bruta,
+      apoiado na ponte run?_eq_iterate_step da frente do runtime. Com isso
+      fecha CB-GAP-001, deixada em aberto por FOUND-COMPUTABILITY-BRIDGE-001.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - COMPUTABILITY-CLASSIFICATION-VACUITY-FORMAL-001
+    known_gaps:
+      - 'UP-GAP-001: nao ha modelo de custo, logo nao ha complexidade'
+      - 'UP-GAP-003: nenhuma cota primitiva recursiva explicita foi enunciada'
+    last_reviewed: 2026-08-04
+    computational_scope: >
+      A frente e de classificacao, nao de custo. Provar Primrec e exibir
+      alguma derivacao primitiva recursiva, nao uma cota.
+    scope_qualifier_required: >
+      Toda formulacao desta claim deve conter dois qualificadores.
+      Primeiro, "primitivo recursivo NAO significa eficiente": a classe
+      contem torres de exponenciais, e nenhuma cota foi enunciada.
+      Segundo, "sobre dominio infinito, e por isso nao vacuo": este
+      resultado e diferente do da ponte, onde toda funcao era Primrec por
+      finitude. Sem os dois a afirmacao induz a erro, num sentido ou no
+      outro.
+    promotion_requirements:
+      - 'nao aplicavel: eh resultado formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - a analise e eficiente
+      - existe cota provada no numero de passos
+      - existe modelo de custo no laboratorio
+      - alguma classe de complexidade foi definida
+      - alguma coisa foi provada sobre P vs NP
+      - o laboratorio esta pronto para atacar problema de milenio
+      - novidade matematica
+      - novidade algoritmica
+      - resolve algum problema nomeado
+      - resultado fisico

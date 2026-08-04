@@ -610,6 +610,16 @@ def validate() -> dict[str, Any]:
     if active_item and state.get("work_status") != active_item.get("status"):
         errors.append("LAB_STATE work_status differs from active queue item")
 
+    invariant_dependency = item_by_id.get("FOUND-FINITE-STATE-ABSTRACTION-001", {})
+    if active == "FOUND-INVARIANT-UNREACHABILITY-001" and (
+        invariant_dependency.get("status") != "VERIFIED"
+        or invariant_dependency.get("result_review") != "APPROVED"
+    ):
+        errors.append(
+            "FOUND-INVARIANT-UNREACHABILITY-001 cannot be active before "
+            "FOUND-FINITE-STATE-ABSTRACTION-001 is VERIFIED with result_review APPROVED"
+        )
+
     benchmark = item_by_id.get("LAB-BENCH-001", {})
     rh_nogo = item_by_id.get("RH-NOGO-001", {})
     semigroup = item_by_id.get("FOUND-SEMIGROUP-001", {})
@@ -618,7 +628,8 @@ def validate() -> dict[str, Any]:
                       "FOUND-CYCLE-DETECTION-001", "ENG-FINITE-STATE-RUNTIME-001",
                       "ENG-FINITE-STATE-ENCODING-001",
                       "FOUND-FINITE-STATE-ABSTRACTION-001",
-                      "FOUND-BISIMULATION-BOUNDARY-001"}:
+                      "FOUND-BISIMULATION-BOUNDARY-001",
+                      "FOUND-INVARIANT-UNREACHABILITY-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -706,6 +717,7 @@ def validate() -> dict[str, Any]:
         "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED",
         "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
         "LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED",
+        "FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

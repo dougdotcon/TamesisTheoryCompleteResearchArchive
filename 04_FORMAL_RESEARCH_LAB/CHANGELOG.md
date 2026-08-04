@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-INVARIANT-TOOLKIT - 2026-08-04
+
+### Criterion
+
+- A escolha passou a ser por **transferencia**, nao por impacto local:
+  qual peca se encaixa em tabuleiros ainda nao abertos. Uma frente que so
+  serve a cadeia que a gerou nao vale a jogada.
+
+### Found
+
+- **Dez frentes encerradas usam abstracao para COLAPSAR. Zero usam para
+  SEPARAR** — embora separar seja o mecanismo de toda prova de
+  impossibilidade combinatoria: paridade, coloracao, monovariante.
+- A peca e quase gratuita: **um invariante E uma semiconjugacao com
+  `stepA = id`**, por igualdade definicional. `Invariant.semiconj` e o
+  proprio termo, sem conversao.
+
+### Selected
+
+- **`FOUND-INVARIANT-UNREACHABILITY-001`**. Cinco alternativas
+  comparadas. A finitude da orbita concreta perdeu por pouco: teorema
+  mais forte, mas transfere so para dentro da propria cadeia.
+
+### Probed
+
+- `10` declaracoes compiladas, `exit 0`, arvore versionada intocada.
+- `unreachable_of_invariant_ne`, a ferramenta, com pegada `[propext]`.
+- `diag_unreachable` prova impossibilidade sobre `Int x Int`, **infinito**,
+  sem usar finitude em lugar nenhum.
+- **O negativo afiado ja compilou**:
+  `invariant_orbitSeparating_iff_fixedPoint`. Para abstracoes
+  invariantes, a condicao de reflexao vale **exatamente nos pontos
+  fixos**. Invariantes certificam impossibilidade e **nunca**
+  recorrencia; os dois usos da mesma maquina sao incompativeis.
+
+### Not done
+
+- **Nenhum problema de milenio foi atacado.** A frente constroi uma peca.
+  `RH-NOGO-001` permanece `NOT_AUTHORIZED` / `NO_EXECUTION`.
+- `0` arquivos Lean permanentes, `0` claims promovidas, `24` no ledger.
+
+### Locked
+
+- `authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-026` e `DEC-027` registrados **no mesmo commit** que faz suas
+  edicoes. `DEC-027` carrega a pre-condicao **dupla**, seguindo o
+  padrao de `DEC-021` — que so existe como entrada registrada porque
+  o gate anterior a reconstruiu.
+
 ## LAB-GOV-DECISION-LEDGER-001 - 2026-08-04
 
 ### Found

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:08:08-03:00
-canonical_commit: "b81aa1000af432c08ec93f9346396db9fdbed7bb"
+updated_at: 2026-08-04T00:21:19-03:00
+canonical_commit: "8a645bfba90144172934a25a3af08eeb323f1c18"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,12 +9,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_work_item: "FOUND-INVARIANT-UNREACHABILITY-001"
+work_status: "SCOPED"
+specification_status: "NOT_STARTED"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,10 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Especificar FOUND-ORBIT-FINITENESS-001: a finitude da órbita
-  concreta sob separação, com cota dada pelo número de estados
-  abstratos.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Especificar FOUND-INVARIANT-UNREACHABILITY-001: invariantes como
+  semiconjugação para o sistema parado, a ferramenta de
+  inalcançabilidade, e o negativo contra o uso de colapso.
+authorized_action: "FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -172,6 +172,11 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não afirmar que um invariante separador é necessário para inalcançabilidade: é suficiente"
+  - "Não usar invariante para certificar recorrência: só vale em ponto fixo"
+  - "Não abrir monovariantes, boa ordem ou terminação nesta frente"
+  - "Não conectar invariantes a Clay, TOE, física ou Riemann"
+  - "Não atacar problema de milênio antes de a ferramenta estar encerrada"
   - "Não citar DEC-NNN como autoridade sem entrada correspondente no DECISION_LEDGER"
   - "Não reutilizar um decision_id já emitido para uma decisão diferente"
   - "Não reescrever entrada histórica do CHANGELOG para corrigir citação"

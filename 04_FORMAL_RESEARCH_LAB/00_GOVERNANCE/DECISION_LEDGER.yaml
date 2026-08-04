@@ -454,3 +454,51 @@ decisions:
       possuia o mecanismo de registro por gate; o que faltava era a
       consolidacao no ledger. A informacao nao estava perdida, estava
       desconsolidada.
+  - decision_id: DEC-026
+    date: 2026-08-04
+    decision: >
+      Acrescentar ao allowlist do labctl a entrada literal
+      FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED.
+    rationale: >
+      A revisao de portfolio PORTFOLIO-REVIEW-INVARIANT-TOOLKIT selecionou
+      FOUND-INVARIANT-UNREACHABILITY-001 pelo criterio de transferencia.
+      Sem a entrada, o gate de preparacao de especificacao seria recusado
+      por authorized_action inconsistente.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_INVARIANT_TOOLKIT.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+    untouched_safeguards:
+      - "nenhuma frente encerrada e modificada"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-027
+    date: 2026-08-04
+    decision: >
+      Duas edicoes literais em labctl.py, sem wildcard: admitir
+      FOUND-INVARIANT-UNREACHABILITY-001 na sequencia de gates, e exigir
+      para ela a pre-condicao DUPLA de que
+      FOUND-FINITE-STATE-ABSTRACTION-001 esteja VERIFIED E com
+      result_review APPROVED.
+    rationale: >
+      A frente consome a API verificada da abstracao certificada,
+      incluindo OrbitSeparating, que aparece no teorema negativo. A
+      pre-condicao dupla segue o padrao estabelecido em DEC-021, que ja
+      governa quatro frentes.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: gate sequence admite FOUND-INVARIANT-UNREACHABILITY-001"
+      - "labctl: pre-condicao dupla VERIFIED + result_review APPROVED para a nova frente"
+    follows_pattern: DEC-021
+    untouched_safeguards:
+      - "nenhuma frente encerrada e modificada"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"

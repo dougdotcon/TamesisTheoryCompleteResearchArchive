@@ -854,3 +854,56 @@ queue:
       gate: todo PASS estrutural desde entao repousa em edicoes cuja
       autorizacao existe apenas na narrativa do changelog. Mesmo padrao de
       LAB-GOV-FRONTMATTER-SCAN-001, que se pagou dois gates depois.
+
+  - work_item_id: FOUND-INVARIANT-UNREACHABILITY-001
+    title: "Invariantes, inalcancabilidade e o limite do colapso"
+    track: FOUNDATIONS
+    target_statement: >
+      Formalizar invariante como semiconjugacao para o sistema parado,
+      provar que um invariante que separa dois estados demonstra
+      inalcancabilidade, e provar que para abstracoes invariantes a
+      condicao de reflexao vale exatamente nos pontos fixos.
+    expected_product: >
+      Definicoes de Invariant e Reachable, a ponte definicional com
+      Function.Semiconj, a ferramenta de inalcancabilidade, a composicao
+      de invariantes, a ponte com CertifiedFiniteAbstraction, o teorema
+      negativo sobre OrbitSeparating e uma instancia concreta sobre tipo
+      infinito.
+    dependencies:
+      - FOUND-FINITE-STATE-ABSTRACTION-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/FiniteStateAbstraction/"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 8
+    external_dependency: none
+    cross_track_value: very_high
+    stop_condition: >
+      afirmar que invariante separador e necessario para
+      inalcancabilidade; usar invariante para certificar recorrencia fora
+      de ponto fixo; abrir monovariantes ou terminacao; conectar a Clay,
+      TOE, fisica ou Riemann; exigir finitude de C
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: TRANSFERABILITY
+    probes_compiled_in_portfolio_gate: 10
+    probe_exit: 0
+    requires_fintype_concrete: false
+    requires_decidable_eq_concrete: false
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_PROOF_TOOL
+    decision_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_INVARIANT_TOOLKIT.md"
+    selection_rationale: >
+      Selecionado pelo criterio de TRANSFERENCIA, nao de impacto local.
+      Dez frentes encerradas usam abstracao para COLAPSAR e nenhuma para
+      SEPARAR, embora separar seja o mecanismo de toda prova de
+      impossibilidade combinatoria. A peca e quase gratuita no frame
+      existente: um invariante E uma semiconjugacao com stepA = id, por
+      igualdade definicional. O negativo afiado
+      invariant_orbitSeparating_iff_fixedPoint ja compilou em probe e
+      mostra que os dois usos da mesma maquina sao incompativeis fora dos
+      pontos fixos. NAO e extensao de FOUND-FINITE-STATE-ABSTRACTION-001,
+      cujo extension_status permanece NOT_AUTHORIZED.

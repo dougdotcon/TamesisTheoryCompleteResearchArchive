@@ -870,3 +870,31 @@ decisions:
       - "nenhuma classe de complexidade e definida"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-043
+    date: 2026-08-04
+    decision: >
+      Aprovar a especificacao de FOUND-UNIFORM-PRIMREC-001 apos generalizar
+      dois lemas de Type para Type*, e acrescentar ao labctl a entrada
+      FOUND_UNIFORM_PRIMREC_001_FORMALIZATION_AUTHORIZED.
+    rationale: >
+      primrec_run?_gen e flatMap_eq_foldr estavam presos ao universo 0 sem
+      motivo: o primeiro so exige Primcodable, que e polimorfico, e o
+      segundo e lema puro de listas. Hipoteses estritamente mais fracas,
+      mesma conclusao, mesmo numero de declaracoes. Probe reexecutado com
+      exit 0.
+    authority: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/12_UNIFORM_PRIMREC/FOUND_UNIFORM_PRIMREC_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_UNIFORM_PRIMREC_001_FORMALIZATION_AUTHORIZED"
+      - "LAB_STATE: prohibited_actions += universo de lema geral"
+    untouched_safeguards:
+      - "as 31 assinaturas seguem congeladas, apenas generalizadas"
+      - "nenhum arquivo Lean da arvore versionada e criado ou modificado"
+      - "nenhum modelo de custo, nenhuma classe de complexidade"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"

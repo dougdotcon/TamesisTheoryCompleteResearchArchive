@@ -61,7 +61,7 @@ theorem run?_eq_iterate (t : RawTransitionTable) (k : Nat) (state : Nat) :
       | some s' => simp [RawTransitionTable.run?, hs, ih s']
 
 /-- `run?` de um argumento arbitrario. -/
-theorem primrec_run?_gen {α : Type} [Primcodable α]
+theorem primrec_run?_gen {α : Type*} [Primcodable α]
     {ft : α → RawTransitionTable} {fk : α → Nat} {fs : α → Nat}
     (ht : Primrec ft) (hk : Primrec fk) (hs : Primrec fs) :
     Primrec fun a => (ft a).run? (fk a) (fs a) := by
@@ -129,7 +129,7 @@ theorem primrec_validBool : Primrec validBool := by
 
 /-! ## 4 — candidatos -/
 
-theorem flatMap_eq_foldr {α β : Type} (f : α → List β) (l : List α) :
+theorem flatMap_eq_foldr {α β : Type*} (f : α → List β) (l : List α) :
     l.flatMap f = l.foldr (fun a acc => f a ++ acc) [] := by
   induction l with
   | nil => rfl

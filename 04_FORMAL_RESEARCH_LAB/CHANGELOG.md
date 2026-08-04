@@ -1,5 +1,33 @@
 # Changelog do laboratório formal
 
+## FOUND-UNIFORM-PRIMREC-001-SPECIFICATION-REVIEW - 2026-08-04
+
+### Reviewed
+
+- Probe reexecutado neste gate: `exit 0`, `0` linhas `error:`,
+  `git_dirty=0`.
+
+### Corrected
+
+- **Universo preso sem motivo.** `primrec_run?_gen` e
+  `flatMap_eq_foldr` estavam em `Type`; ambos sobem para `Type*` e o
+  probe recompila. Nao era erro de prova — era generalidade jogada fora
+  por descuido de assinatura. Hipoteses estritamente mais fracas, mesma
+  conclusao, `31` publicas inalteradas.
+
+### Confirmed
+
+- O limite esta escrito nos tres documentos: **`Primrec` NAO significa
+  eficiente**, a classe contem torres de exponenciais. A frente anterior
+  precisou dizer que a classificacao nao mede nada por ser vacua; esta
+  precisa dizer que, mesmo deixando de ser vacua, continua sem medir
+  custo. Sao dois limites distintos, e os dois valem.
+
+### Locked
+
+- `authorized_action: FOUND_UNIFORM_PRIMREC_001_FORMALIZATION_AUTHORIZED`.
+- `DEC-043` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-UNIFORM-PRIMREC-001-SPECIFICATION - 2026-08-04
 
 ### Specified

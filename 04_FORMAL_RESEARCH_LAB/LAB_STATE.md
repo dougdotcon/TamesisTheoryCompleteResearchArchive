@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T22:48:33-03:00
-canonical_commit: "71e2aceefae20ff877881a28b461f412edc4f7ec"
+updated_at: 2026-08-03T22:54:29-03:00
+canonical_commit: "6163bd5a572fe4e3cc0c5b01da7cd3ca9bc451c2"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,8 +10,8 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
-work_status: "SCOPED"
-specification_status: "NOT_STARTED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 specification_review: "NOT_STARTED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
@@ -30,11 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Preparar a especificação da bissimulação funcional determinística:
-  congelar Simulates, Reflects e Bisimulation, o teorema de colapso
-  com a semiconjugação e as negações que mostram que bissimulação
-  não reflete ciclos, sem iniciar a formalização.
-authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a especificação da bissimulação determinística: definição
+  não trivializada de Reflects, teorema de colapso, consequências
+  negativas e a fronteira do recorte determinístico total.
+authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -218,6 +217,9 @@ prohibited_actions:
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
   - "Não afirmar que bissimulação reflete ciclos: BOOL_TO_UNIT já é uma bissimulação sobrejetiva"
+  - "Não definir Reflects já resolvido: a existencial do zag é o conteúdo do colapso"
+  - "Não escrever \"bissimulação é semiconjugação\" sem o qualificador determinístico total e funcional"
+  - "Não afirmar que bissimulação é inútil: o resultado vale só neste recorte"
   - "Não estender o colapso zig/zag para sistemas não determinísticos ou bissimulação relacional"
   - "Não estender FOUND-FINITE-STATE-ABSTRACTION-001 nem abrir 002 sem gate próprio"
   - "Não declarar uma varredura integral sem publicar quantos arquivos ela abriu"
@@ -241,6 +243,8 @@ resume_read_order:
   - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
   - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/README.md"
   - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/SPECIFICATION_DECISION.md"
+  - "02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/README.md"
+  - "02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/SCOPE_BOUNDARY.md"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
 ---

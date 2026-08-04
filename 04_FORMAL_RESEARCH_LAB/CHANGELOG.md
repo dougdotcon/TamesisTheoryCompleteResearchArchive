@@ -1,5 +1,43 @@
 # Changelog do laboratório formal
 
+## FOUND-BISIMULATION-BOUNDARY-001-SPECIFICATION - 2026-08-03
+
+### Specified
+
+- Especificacao congelada em
+  `02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/`.
+- Tres definicoes — `Simulates`, `Reflects`, `Bisimulation` — e cinco
+  teoremas. `8` declaracoes publicas, `0` typeclasses, pegada axiomatica
+  **NENHUMA** em toda a frente.
+
+### Decided
+
+- **`Reflects` conserva o `∃ c'`**, mesmo sabendo que a testemunha esta
+  determinada. Escreve-lo ja resolvido tornaria o colapso uma tautologia
+  disfarcada de teorema — `STOP-BIS-002`. O contraste e verificavel:
+  `simulates_iff_semiconj` **e** `Iff.rfl`, e `reflects_iff_simulates`
+  **nao e** — precisou de prova nas duas direcoes.
+- Nenhuma estrutura de dado nova. A frente e inteiramente proposicional,
+  e por isso **nao ha testes executaveis**: inventar um `#eval` seria
+  teatro.
+
+### Bounded
+
+- `SCOPE_BOUNDARY.md` e o documento mais importante da frente. O colapso
+  vem da **ausencia de escolha** no zag: `stepC` e funcao total, entao a
+  testemunha e imposta. Qualquer relaxamento que devolva escolha —
+  nao determinismo, relacoes gerais, bissimulacao relacional, acoes
+  rotuladas, funcoes parciais — destroi o argumento.
+- Wording proibida registrada: escrever "bissimulacao e semiconjugacao"
+  **sem qualificador** e falso, e falso exatamente na teoria de
+  concorrencia onde a palavra nasceu.
+
+### Locked
+
+- `authorized_action: FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+  `0` arquivos Lean permanentes, `0` claims promovidas, `23` no ledger,
+  `0` duplicatas YAML.
+
 ## PORTFOLIO-REVIEW-AFTER-FRONTMATTER-SCAN - 2026-08-03
 
 ### Selected

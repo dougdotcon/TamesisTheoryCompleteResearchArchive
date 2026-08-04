@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T13:20:00-03:00
+updated_at: 2026-08-04T14:02:00-03:00
 canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -241,6 +241,8 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não usar Set.ncard_coe_Finset: o nome é ncard_coe_finset, f minúsculo"
+  - "Não buscar Nontrivial (lp …) para infinito-dimensionalidade: sai de autovetores independentes"
   - "Não ler a isometria de todos os Hs entre si como degenerescência: a dependência em s vive em toDist"
   - "Não declarar Hs como abbrev: a topologia de subtipo colidiria com a da norma"
   - "Não afirmar que existe teoria de EDP no laboratório"

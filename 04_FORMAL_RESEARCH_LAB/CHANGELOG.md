@@ -1,5 +1,60 @@
 # Changelog do laboratório formal
 
+## SC-GAP-001-CLOSURE - 2026-08-04
+
+### The debt was real
+
+- A instancia positiva da contagem espectral estava em **dimensao
+  finita**, onde o teorema e quase trivial. O conteudo real e *espectro
+  infinito, cada faixa acima de lambda finita*. Sem a instancia infinita,
+  o laboratorio **nao sabia** se tinha conteudo ou forma degenerada.
+
+### Closed
+
+- `463` linhas, `lake build` exit `0`, `0` `sorry`, `17` `#print axioms`
+  limpos. Em `lp (fun _ : ℕ => ℂ) 2`, operador diagonal `dᵢ = 1/(i+1)`.
+- `¬ FiniteDimensional`, compacto, autoadjunto, **espectro infinito**, e
+  cada faixa acima de `lam` finita e nao-vazia.
+
+### Exact counting law
+
+- Foi pedido `lam = 1/3`. Saiu a **lei geral**:
+  `eigCount_eq_floor : eigCount T lam = ⌊1/lam⌋₊`.
+- **Exata, nao assintotica.** Mais `eigCount T (1/3) = 3`,
+  `eigCount T (1/10) = 10`, e o conjunto explicito `{1, 1/2, 1/3}`.
+
+### The missing piece was the converse
+
+- `eigenvalue_mem_range : HasEigenvalue T μ → ∃ i, dseq i = μ`. Sem ela o
+  conjunto e so limitado por cima e o calculo explicito e **impossivel**.
+  Corolario: `0` **nao** e autovalor.
+
+### Anti-vacuity, three ways
+
+- `eigCount_third_cross_check` recalcula o mesmo `3` por **rota
+  independente**.
+- O zero e **genuino**: `eigCount T 2 = 0` alimenta `eigCount_eq_zero_iff`
+  e produz `no_eigenvalue_above_two`.
+- `eigCount_antitone` deixa de ser vacuo por `eigCount_strict_example`.
+
+### The previous dead end was unnecessary
+
+- A tentativa anterior parou em `Nontrivial (lp …)`. **A
+  infinito-dimensionalidade nao sai dali** — sai de
+  `eigenvectors_linearIndependent'` mais
+  `not_linearIndependent_of_infinite`.
+
+### Naming traps recorded
+
+- `Set.ncard_coe_Finset` **nao existe**: e `ncard_coe_finset`.
+  `push_neg` esta **depreciado**: e `push Not at h`.
+
+### Not claimed
+
+- A **lei de Weyl geral NAO esta provada** — isto e um operador
+  concreto. Nenhuma conexao com RH. **Nenhum problema de milenio
+  atacado.**
+
 ## FOUND-SOBOLEV-SPACE-001-CLOSURE - 2026-08-04
 
 ### The type exists

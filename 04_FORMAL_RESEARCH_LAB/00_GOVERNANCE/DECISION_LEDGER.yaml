@@ -1236,3 +1236,31 @@ decisions:
       - "nao ha teoria de EDP no laboratorio"
       - "o probe promovido NAO e PR ao Mathlib"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-055
+    date: 2026-08-04
+    decision: >
+      Fechar SC-GAP-001 com instancia positiva em dimensao infinita e lei
+      de contagem exata.
+    rationale: >
+      lake build exit 0, 8817 jobs, 463 linhas, zero sorry, 17 print
+      axioms limpos. A instancia anterior era de dimensao FINITA, onde o
+      teorema e quase trivial; o conteudo real e espectro infinito com
+      cada faixa finita, e isso agora esta provado em lp 2 com operador
+      diagonal. A lei saiu exata, eigCount = floor (1/lam), nao
+      assintotica. A peca que faltava era a reciproca
+      eigenvalue_mem_range, sem a qual o calculo explicito e impossivel.
+      Ha cross-check por rota independente e o zero e genuino, nao o junk
+      do ncard.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/SpectralCountingInstance.lean"
+      - "02_FOUNDATIONS/13_SPECTRAL_COUNTING/FOUND_SPECTRAL_COUNTING_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "SC-GAP-001 FECHADA"
+      - "LAB_STATE: prohibited_actions += 2 armadilhas de nome"
+    untouched_safeguards:
+      - "a lei de Weyl geral NAO e afirmada provada: isto e um operador concreto"
+      - "nenhuma conexao com RH e afirmada"
+      - "nenhum problema de milenio e atacado"

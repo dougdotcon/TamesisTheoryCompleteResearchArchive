@@ -1,5 +1,46 @@
 # Changelog do laboratório formal
 
+## FOUND-BISIMULATION-BOUNDARY-001-RESULT-REVIEW - 2026-08-03
+
+### Approved
+
+- `FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_APPROVED`. Doze itens
+  CONFIRMADOS, com build, modulos isolados e contagens **reexecutados**
+  neste gate.
+
+### Promoted
+
+- **`DETERMINISTIC-BISIMULATION-COLLAPSE-FORMAL-001`**,
+  `evidence_level: F`, novidade `NONE`. Ledger de `23` para `24`.
+- A entrada carrega um campo `scope_qualifier_required`: toda formulacao
+  precisa dizer "para sistemas deterministicos totais" e "bissimulacao
+  funcional". Sem isso a afirmacao e falsa.
+
+### Caught
+
+- **O scanner ampliado pegou dois duplicados YAML introduzidos neste
+  proprio ciclo**, antes do commit: um patch orfaou duas linhas do bloco
+  `probe:` do `STATUS.yaml`, que cairam dentro de `formalization:`, e um
+  `formalization_status` obsoleto sobreviveu na fila.
+- `LAB-GOV-FRONTMATTER-SCAN-001` pagou por si mesmo dois gates depois de
+  ter sido feito.
+
+### Closed
+
+- Frente **ENCERRADA**. `work_status: VERIFIED`,
+  `result_review: APPROVED`. Bissimulacao relacional, sistemas nao
+  deterministicos, acoes rotuladas, coinducao, quocientes e extracao
+  seguem **NAO AUTORIZADOS**.
+- `BIS-GAP-010`, a bibliografia de semantica de concorrencia, fica
+  **deliberadamente aberta**: o resultado toca uma nocao com literatura
+  propria, e fecha-la por delimitacao seria mais fragil do que foi na
+  frente anterior.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `0` frentes encerradas
+  modificadas, `0` duplicatas YAML em `413` arquivos.
+
 ## FOUND-BISIMULATION-BOUNDARY-001-FORMALIZATION - 2026-08-03
 
 ### Formalized

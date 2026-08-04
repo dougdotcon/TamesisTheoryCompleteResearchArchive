@@ -1,0 +1,101 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "FOUND-BISIMULATION-BOUNDARY-001-RESULT-REVIEW",
+  "executed_at": "2026-08-03T23:30:00-03:00",
+  "work_item_id": "FOUND-BISIMULATION-BOUNDARY-001",
+  "review_start_head": "25e85ff9f9386a658d01ec3aba0b45c1d115526b",
+  "canonical_commit": "25e85ff9f9386a658d01ec3aba0b45c1d115526b",
+  "independent_reexecution": {
+    "lake_build_real_exit": 0,
+    "lake_build_jobs": 8775,
+    "lake_build_real_error_lines": 0,
+    "isolated_modules_checked": 8,
+    "isolated_module_failures": 0,
+    "derived_public_declarations": 8,
+    "derived_test_only": 2,
+    "forbidden_tokens": 0,
+    "core_typeclass_brackets": 0,
+    "closed_fronts_touched": 0
+  },
+  "central_result": {
+    "collapse": "for total deterministic systems, functional bisimulation coincides with semiconjugation",
+    "why": "stepC is a total function, so the zag witness is imposed rather than chosen; what remains is exactly the zig",
+    "consequence_1": "BOOL_TO_UNIT is already a bisimulation",
+    "consequence_2": "forgetBool is surjective, and that does not help either",
+    "conclusion": "bisimulation does not reflect cycles; surjective bisimulation does not either",
+    "what_does_reflect": "OrbitSeparating, injectivity on the reached orbit"
+  },
+  "scope_qualifier_required": "for TOTAL DETERMINISTIC systems and FUNCTIONAL bisimulation; without it the statement is false, and false precisely in concurrency theory",
+  "axiom_footprint": {
+    "declarations_checked": 10,
+    "declarations_axiom_free": 10,
+    "footprint": "NONE",
+    "reason": "nothing here goes through analyzeEncodedSystem: no Array, no table, no execution"
+  },
+  "incidents": [
+    {
+      "what": "isolated elaboration reported exit=1 while lake build passed",
+      "cause": "lake env lean does not build dependencies; the new module's .olean did not exist yet",
+      "resolution": "re-run after the build; exit=0 errors=0 on all eight",
+      "masked": false
+    },
+    {
+      "what": "two duplicate YAML keys introduced by this cycle's own patches",
+      "detail_1": "a patch orphaned two lines from the STATUS.yaml probe block into formalization:, colliding on lean_files_created",
+      "detail_2": "a stale formalization_status survived in RESEARCH_QUEUE.yaml",
+      "detected_by": "the widened scanner from LAB-GOV-FRONTMATTER-SCAN-001, before commit",
+      "resolution": "both fixed; scan returns 0 duplicates over 415 files",
+      "masked": false
+    }
+  ],
+  "count_correction": {
+    "issue": "script derived 10 core declarations against 8 frozen",
+    "resolution": "moved boolToUnit_bisimulation and forgetBool_surjective into CounterexampleInstance.lean",
+    "principle": "the code was moved to match the classification, not the count adjusted to fit",
+    "note": "they remain library-resident because the public negations consume them, following the Counterexample.lean precedent"
+  },
+  "claim": {
+    "promoted": 1,
+    "claim_id": "DETERMINISTIC-BISIMULATION-COLLAPSE-FORMAL-001",
+    "evidence_level": "F",
+    "mathematical_novelty": "NONE",
+    "algorithmic_novelty": "NONE",
+    "ledger_before": 23,
+    "ledger_after": 24,
+    "carries_scope_qualifier_field": true
+  },
+  "gaps": {
+    "total": 10,
+    "closed": 5,
+    "open": 5,
+    "deliberately_open": ["BIS-GAP-010"],
+    "reason_bis_gap_010_open": "the result touches a notion with its own extensive literature in concurrency semantics; closing it by scope declaration would be weaker than it was in the previous front"
+  },
+  "validation": {
+    "lake_build": "PASS",
+    "pytest": "PASS",
+    "pytest_count": 34,
+    "labctl_validate": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "yaml_files_scanned": 415,
+    "duplicate_yaml_keys": 0,
+    "whitespace_eof_audit": "PASS"
+  },
+  "independence_caveat": "all four gates were executed by the same agent in consecutive sessions; none replaces external review. What supports the result is what was measured and re-executed, and in this case also what an agent-independent tool refused.",
+  "decision": "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_APPROVED",
+  "final_state": {
+    "active_work_item": "FOUND-BISIMULATION-BOUNDARY-001",
+    "work_status": "VERIFIED",
+    "specification_status": "APPROVED",
+    "specification_review": "APPROVED",
+    "formalization_status": "VERIFIED",
+    "result_review": "APPROVED",
+    "extension_status": "NOT_AUTHORIZED",
+    "relational_bisimulation_status": "NOT_AUTHORIZED",
+    "nondeterministic_systems_status": "NOT_AUTHORIZED",
+    "labelled_actions_status": "NOT_AUTHORIZED",
+    "coinduction_status": "NOT_AUTHORIZED",
+    "authorized_action": "PORTFOLIO_REVIEW_REQUIRED"
+  },
+  "next_expected_gate": "PORTFOLIO-REVIEW"
+}

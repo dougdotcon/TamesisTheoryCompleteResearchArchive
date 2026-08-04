@@ -781,3 +781,61 @@ claims:
       - novidade matematica
       - novidade algoritmica
       - resultado fisico
+  - claim_id: DETERMINISTIC-BISIMULATION-COLLAPSE-FORMAL-001
+    short_name: deterministic_functional_bisimulation_collapse
+    exact_statement: "Para sistemas deterministicos totais, a bissimulacao funcional dada pelo grafico de uma funcao de abstracao coincide com a semiconjugacao, e por isso nao reflete recorrencia abstrata como recorrencia concreta."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/BisimulationBoundary.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/FINAL_DEFINITIONS.md"
+      - "04_FORMAL_RESEARCH_LAB/found-bisimulation-boundary-001-result-review.json"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizado em Lean que, para sistemas deterministicos totais, a
+      bissimulacao funcional dada pelo grafico de uma funcao de abstracao
+      coincide com a semiconjugacao: a obrigacao zag e consequencia da zig,
+      porque o passo concreto sendo funcao total impoe a testemunha. Foi
+      provado que o contraexemplo BOOL_TO_UNIT ja satisfaz essa
+      bissimulacao e que a funcao de abstracao e sobrejetiva. Foi provado
+      que nem bissimulacao nem bissimulacao sobrejetiva refletem
+      recorrencia abstrata como recorrencia concreta.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001
+    known_gaps:
+      - 'BIS-GAP-006: bissimulacao relacional R subconjunto de C x A NAO foi tratada'
+      - 'BIS-GAP-007: sistemas nao deterministicos NAO foram tratados'
+      - 'BIS-GAP-008: acoes rotuladas NAO foram tratadas'
+      - 'BIS-GAP-009: coinducao e maior ponto fixo NAO foram tratados'
+      - 'BIS-GAP-010: bibliografia de semantica de concorrencia permanece ABERTA'
+    counterevidence:
+      - 'BOOL_TO_UNIT e uma bissimulacao sobrejetiva e mesmo assim o ciclo abstrato nao e concreto'
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/"
+    last_reviewed: 2026-08-03
+    computational_scope: >
+      A frente e inteiramente proposicional: nao introduz funcao computavel,
+      estrutura de dado nem avaliacao. As dez declaracoes, incluindo as duas
+      de instanciacao do contraexemplo, nao dependem de axioma nenhum.
+      Nenhuma typeclass e exigida.
+    scope_qualifier_required: >
+      Toda formulacao desta claim deve conter o qualificador "para sistemas
+      deterministicos totais" e "bissimulacao funcional". Sem ele a
+      afirmacao e falsa, e falsa exatamente na teoria de concorrencia, que
+      e nao deterministica e rotulada.
+    promotion_requirements:
+      - 'nao aplicavel: eh fundamento semantico formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - bissimulacao e o mesmo que semiconjugacao
+      - bissimulacao e inutil
+      - bissimulacao foi refutada
+      - sistemas nao deterministicos se comportam assim
+      - bissimulacao relacional foi tratada
+      - coinducao foi formalizada
+      - resultado novo em semantica de concorrencia
+      - novidade matematica
+      - novidade algoritmica
+      - novo algoritmo
+      - resultado fisico

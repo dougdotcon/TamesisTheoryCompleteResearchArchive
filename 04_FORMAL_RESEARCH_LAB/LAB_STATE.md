@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T23:05:39-03:00
-canonical_commit: "c2247d65ce1b0d2ff73cd12f245b76dd9a964772"
+updated_at: 2026-08-03T23:09:36-03:00
+canonical_commit: "25e85ff9f9386a658d01ec3aba0b45c1d115526b"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,11 +10,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
-work_status: "READY"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
 formalization_status: "VERIFIED"
-result_review: "NOT_STARTED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -27,13 +27,12 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
-last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
+last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar o resultado da bissimulação determinística: contagens
-  derivadas, pegada nula, recorte preservado e frentes encerradas
-  intocadas.
-authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED"
+  Aguardar uma revisão explícita de portfólio. A frente
+  FOUND-BISIMULATION-BOUNDARY-001 está encerrada e travada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -41,6 +40,22 @@ yaml_scan_markdown_front_matter_covered: 333
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
 consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED"]
 closed_work_items:
+  FOUND-BISIMULATION-BOUNDARY-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: APPROVED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    relational_bisimulation_status: NOT_AUTHORIZED
+    nondeterministic_systems_status: NOT_AUTHORIZED
+    labelled_actions_status: NOT_AUTHORIZED
+    coinduction_status: NOT_AUTHORIZED
+    quotient_status: NOT_AUTHORIZED
+    extraction_status: NOT_AUTHORIZED
+    axiom_footprint: NONE
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
   FOUND-FINITE-STATE-ABSTRACTION-001:
     work_status: VERIFIED
     specification_status: APPROVED

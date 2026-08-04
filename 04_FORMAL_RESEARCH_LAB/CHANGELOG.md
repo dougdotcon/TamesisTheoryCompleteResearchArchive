@@ -1,5 +1,38 @@
 # Changelog do laboratório formal
 
+## ENG-RUNTIME-SOUNDNESS-002-SPECIFICATION - 2026-08-04
+
+### Specified
+
+- `2` declaracoes publicas congeladas na frente do runtime, probe
+  `exit 0`, arvore intocada. `analyzeTransitionTable_reduce` e a reducao
+  ja existente tornada **publica**; `analyzeTransitionTable_rawValid` e
+  nova e devolve o **contrato inteiro**.
+
+### Removes
+
+- `3` auxiliares privados, tres copias da mesma reducao do bloco `do`:
+  `Monovariants/WitnessBounds.lean`, `ComputabilityBridge/WitnessBound.lean`
+  e `UniformPrimrec/Analysis.lean`. Os teoremas passam a **projetar do
+  contrato**.
+
+### Found
+
+- A clausula `w.baseIndex < raw.next.size` **nunca fora exposta a
+  consumidor nenhum**. Sai de graca com as outras, e mostra que a divida
+  era maior que as duas parcelas ja cobradas.
+
+### Preserved
+
+- `analyzeTransitionTable_sound` fica **intacta**. Alargar nao e
+  substituir. `0` assinaturas publicas quebradas, `0` mudancas de
+  semantica.
+
+### Locked
+
+- `authorized_action: ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_REVIEW_AUTHORIZED`.
+- `DEC-047` registrado no mesmo commit que faz sua edicao.
+
 ## PORTFOLIO-REVIEW-COST-MODEL - 2026-08-04
 
 ### Measured

@@ -996,3 +996,34 @@ decisions:
       - "a semantica de analyzeTransitionTable nao pode mudar"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-047
+    date: 2026-08-04
+    decision: >
+      Congelar 2 declaracoes publicas de ENG-RUNTIME-SOUNDNESS-002 na
+      frente do runtime, e acrescentar ao labctl a entrada
+      ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_REVIEW_AUTHORIZED.
+    rationale: >
+      Probe exit 0. analyzeTransitionTable_reduce e a reducao ja existente
+      tornada publica; analyzeTransitionTable_rawValid e nova e devolve o
+      contrato inteiro. Com as duas, os tres auxiliares privados
+      duplicados em Monovariants, ComputabilityBridge e UniformPrimrec
+      saem, e os teoremas passam a projetar do contrato. A clausula
+      w.baseIndex < raw.next.size, que nunca fora exposta a consumidor
+      nenhum, sai de graca. analyzeTransitionTable_sound permanece
+      intacta: alargar nao e substituir.
+    authority: ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "03_ENGINEERING/03_RUNTIME_SOUNDNESS/ENG_RUNTIME_SOUNDNESS_002/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_REVIEW_AUTHORIZED"
+    untouched_safeguards:
+      - "a semantica de analyzeTransitionTable nao muda"
+      - "analyzeTransitionTable_sound nao e removida nem alterada"
+      - "0 assinaturas publicas existentes quebradas"
+      - "nenhum arquivo Lean da arvore versionada e modificado neste gate"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"

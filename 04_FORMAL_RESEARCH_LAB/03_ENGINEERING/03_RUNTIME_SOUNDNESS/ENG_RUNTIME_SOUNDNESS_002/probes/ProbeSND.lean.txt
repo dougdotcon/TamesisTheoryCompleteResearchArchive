@@ -1,0 +1,84 @@
+import TamesisLab.Foundations.UniformPrimrec
+
+set_option autoImplicit false
+
+/-!
+PROBE SND — ENG-RUNTIME-SOUNDNESS-002.
+
+A divida: `analyzeTransitionTable_sound` devolve tres clausulas e perde o
+resto do contrato. Quatro reproducoes privadas da reducao do bloco `do`
+ja existem por causa disso.
+
+Aqui se mede se as DUAS declaracoes que pagam a divida sao provaveis:
+
+1. a reducao, tornada PUBLICA na origem;
+2. a soundness alargada ao contrato inteiro.
+
+Neste probe a reducao e reproduzida uma quinta vez, **so para medir**. Na
+formalizacao ela sera publicada na origem e as copias sumirao.
+-/
+
+namespace ProbeSND
+
+open TamesisLab.Engineering.FiniteStateRuntime
+open TamesisLab.Foundations.CycleDetection
+
+/-- A reducao, como ela ficara PUBLICA em `DynamicAnalysis.lean`. -/
+theorem analyzeTransitionTable_reduce {raw : RawTransitionTable} (hRaw : raw.Valid)
+    {start : Nat} (hStart : start < raw.next.size) :
+    analyzeTransitionTable raw start =
+      (match ValidatedTransitionTable.detectCycle?
+          (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
+        | some witness => .ok witness
+        | none => .error .internalDetectorFailure) := by
+  unfold analyzeTransitionTable
+  rw [show validateTransitionTable raw = .ok ⟨raw.next, hRaw⟩ from dif_pos hRaw]
+  show (validateStart ⟨raw.next, hRaw⟩ start).bind _ = _
+  rw [show validateStart ⟨raw.next, hRaw⟩ start = .ok ⟨start, hStart⟩
+      from dif_pos hStart]
+  rfl
+
+/-- **A soundness alargada.** As quatro clausulas do contrato, sobre a
+tabela bruta. Subsume `analyzeTransitionTable_sound` e acrescenta as tres
+que se perdiam. -/
+theorem analyzeTransitionTable_rawValid {raw : RawTransitionTable} {start : Nat}
+    {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
+    w.baseIndex < raw.next.size ∧ 0 < w.period ∧
+      w.baseIndex + w.period ≤ raw.next.size ∧
+        raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start := by
+  obtain ⟨hRaw, hStart, hrun⟩ := analyzeTransitionTable_sound h
+  rw [analyzeTransitionTable_reduce hRaw hStart] at h
+  cases hd : ValidatedTransitionTable.detectCycle?
+      (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
+  | none => rw [hd] at h; exact absurd h (by simp)
+  | some w' =>
+      rw [hd] at h
+      have hww : w' = w := Except.ok.inj h
+      subst hww
+      have hv := ValidatedTransitionTable.detectCycle?_sound hd
+      exact ⟨by simpa using hv.1, hv.2.1, by simpa using hv.2.2.1, hrun⟩
+
+/-! ## Os tres consumidores, reescritos SEM reducao privada -/
+
+/-- Substitui `Monovariants.analyzeTransitionTable_period_pos`. -/
+theorem period_pos_via_rawValid {raw : RawTransitionTable} {start : Nat}
+    {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
+    0 < w.period :=
+  (analyzeTransitionTable_rawValid h).2.1
+
+/-- Substitui `ComputabilityBridge.analyzeTransitionTable_bound`. -/
+theorem bound_via_rawValid {raw : RawTransitionTable} {start : Nat}
+    {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
+    w.baseIndex + w.period ≤ raw.next.size :=
+  (analyzeTransitionTable_rawValid h).2.2.1
+
+/-- A clausula que NENHUM consumidor tinha exposto ainda. -/
+theorem baseIndex_lt_via_rawValid {raw : RawTransitionTable} {start : Nat}
+    {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
+    w.baseIndex < raw.next.size :=
+  (analyzeTransitionTable_rawValid h).1
+
+#print axioms analyzeTransitionTable_reduce
+#print axioms analyzeTransitionTable_rawValid
+
+end ProbeSND

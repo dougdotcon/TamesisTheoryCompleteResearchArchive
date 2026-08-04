@@ -1292,3 +1292,30 @@ decisions:
       - "LP-GAP-003 permanece aberta: Id - P = grad Laplace^-1 div"
       - "Navier-Stokes NAO e afirmado alcancavel"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-057
+    date: 2026-08-04
+    decision: >
+      Fechar LP-GAP-003 com a decomposicao de Helmholtz provada no
+      simbolo e no operador.
+    rationale: >
+      lake build exit 0, 8819 jobs, 582 linhas, 54 declaracoes, zero
+      sorry, 42 print axioms limpos. gradInvLapDiv_eq_qMatrix prova em C
+      que grad vezes invLaplace vezes div E o simbolo do complemento,
+      com i ao quadrado cancelando o sinal — era prosa no registro
+      anterior, agora e identidade. No operador: P + Q = id, P Q = 0,
+      Q Q = Q, Q* = Q, cota 1, Pitagoras. Bonus nao pedido: Q e o
+      multiplicador matricial, nao apenas 1 - P, o que permitiu provar
+      qOpL2 != 0 pelo traco do simbolo igual a 1.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/Helmholtz.lean"
+      - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LP-GAP-003 FECHADA"
+    untouched_safeguards:
+      - "LP-GAP-004 permanece em execucao"
+      - "Navier-Stokes NAO e afirmado alcancavel"
+      - "a pressao NAO e afirmada recuperada de solucao alguma"
+      - "nenhum problema de milenio e atacado"

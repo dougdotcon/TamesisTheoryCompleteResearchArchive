@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T14:48:00-03:00
+updated_at: 2026-08-04T15:31:00-03:00
 canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -248,7 +248,7 @@ prohibited_actions:
   - "Não afirmar que existe teoria de EDP no laboratório"
   - "Não citar a proibição revogada: lerayOpL2 É projeção ortogonal desde DEC-056, provado"
   - "Não citar a cota como 2n²: é exatamente 1, e atingida, desde DEC-056"
-  - "Não afirmar que a pressão de Navier-Stokes foi recuperada"
+  - "Não afirmar que a pressão de Navier-Stokes foi recuperada: o projetor é peça, não solução"
   - "Não prever field_simp; ring para addSubMap: falha; usar linear_combination com certificados de ideal"
   - "Não afirmar Mordell-Weil provado: falta F, e F é escala de meses"
   - "Não apresentar o probe promovido como PR ao Mathlib: namespaces e linear_combination não estão em forma"

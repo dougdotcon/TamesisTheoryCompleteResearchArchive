@@ -1,5 +1,48 @@
 # Changelog do laboratório formal
 
+## LP-GAP-003-CLOSURE - 2026-08-04
+
+### Helmholtz fechou nos dois niveis
+
+- `582` linhas, `54` declaracoes, `lake build` exit `0`, `0` `sorry`,
+  `42` `#print axioms` limpos.
+
+### `Id − P = ∇Δ⁻¹div` virou IDENTIDADE PROVADA
+
+```lean
+gradInvLapDiv_eq_qMatrix :
+    gradSymbol b x j * invLaplaceSymbol x * divSymbol b x k = qMatrix b x j k
+```
+
+- Provada **em ℂ**, com `i² = −1` cancelando o sinal de `Δ⁻¹`. Era
+  **prosa** no registro anterior; agora e teorema.
+
+### O complemento e projecao de posto 1
+
+- `qMatrixR_rank_one : Q = u ⊗ u` com `u = ξ/‖ξ‖`. Traco `1`, idempotente,
+  simetrica, e `Q(ξ)ξ = ξ` — **`Q` e a direcao longitudinal**.
+- `P` e `Q` se aniquilam **nos dois sentidos**, e somam a identidade.
+
+### No operador
+
+- `P + Q = id`, `P ∘L Q = 0`, `Q ∘L Q = Q`, `Q* = Q`, `‖Q‖ ≤ 1`,
+  `‖f‖² = ‖Pf‖² + ‖Qf‖²`.
+
+### Bonus nao pedido
+
+- `Q` **e** o multiplicador matricial de simbolo `ξ_qξ_k/‖ξ‖²`, nao
+  apenas `1 − P`. Foi isso que permitiu provar `qOpL2 ≠ 0` pelo traco do
+  simbolo igual a `1`.
+- Com `lerayOpL2_ne_zero` ja provado, a decomposicao e **nao trivial dos
+  dois lados no nivel do operador**.
+
+### Not claimed
+
+- O projetor esta completo como **objeto**: ortogonal, cota `1`,
+  Helmholtz provada. E a peca que a medicao de NS disse faltar —
+  **peca, nao solucao**. A pressao **nao** foi recuperada de solucao
+  alguma, e **nenhum problema de milenio foi atacado.**
+
 ## LP-GAP-001-002-CLOSURE - 2026-08-04
 
 ### `P` e projecao ortogonal

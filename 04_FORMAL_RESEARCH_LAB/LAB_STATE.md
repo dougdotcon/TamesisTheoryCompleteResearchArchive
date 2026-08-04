@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:54:21-03:00
-canonical_commit: "9b773d83b7a72b4199ce9cede09eb4b844a8a131"
+updated_at: 2026-08-04T01:01:57-03:00
+canonical_commit: "a8929d7d9d3ce810619065656cc6a31a7d366ec1"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -30,9 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar revisão de portfólio. A frente
-  FOUND-MONOVARIANT-DESCENT-001 está encerrada e travada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Corrigir a vacuidade: registrar o teorema de vacuidade, publicar
+  DescendsOn com instância positiva, e anexar bloco de correção à
+  claim sem apagar o wording anterior.
+authorized_action: "LAB_CORR_MONOVARIANT_VACUITY_CORRECTION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -200,6 +201,9 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não fechar frente que introduz hipótese sem exibir instância positiva em tipo habitado"
+  - "Não tratar falha de instância como limite honesto sem testar satisfazibilidade"
+  - "Não usar Monovariant: a definição é vácua, implica IsEmpty C"
   - "Não usar ordem geral ou WellFoundedRelation: a medida vive em Nat"
   - "Não afirmar que boa fundação basta: k - 1 falha em zero"
   - "Não afirmar que monovariante é necessário para ausência de ciclo"

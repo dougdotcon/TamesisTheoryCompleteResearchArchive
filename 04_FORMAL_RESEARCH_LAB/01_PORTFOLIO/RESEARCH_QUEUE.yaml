@@ -994,3 +994,41 @@ queue:
       lacuna de API em que 0 < period se perdia. NAO e extensao de
       FOUND-INVARIANT-UNREACHABILITY-001, cujo extension_status permanece
       NOT_AUTHORIZED.
+
+  - work_item_id: LAB-CORR-MONOVARIANT-VACUITY-001
+    title: "Correcao da vacuidade de Monovariant"
+    track: governance
+    target_statement: >
+      A vacuidade de Monovariant e teorema no repositorio, existe uma
+      forma corrigida nao vacua com instancia positiva, e a claim afetada
+      carrega bloco de correcao sem perder o wording anterior.
+    expected_product: >
+      Modulo Descent com o teorema de vacuidade, DescendsOn, o teorema de
+      terminacao e a instancia que funciona; claim corrigida; regra nova
+      exigindo instancia positiva.
+    dependencies:
+      - FOUND-MONOVARIANT-DESCENT-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/Monovariants/"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 10
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: >
+      modificar arquivo Lean de frente encerrada; apagar a claim;
+      reescrever entrada historica do changelog; fechar sem instancia
+      positiva verificada
+    priority_class: P0
+    status: SCOPED
+    authorized_next_gate: LAB_CORR_MONOVARIANT_VACUITY_CORRECTION_AUTHORIZED
+    defect_severity: CRITICAL
+    defect_found_at_commit: a8929d7d9d3ce810619065656cc6a31a7d366ec1
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    selection_rationale: >
+      A definicao Monovariant implica IsEmpty C, provado sem axioma
+      nenhum. A alternativa que estava mentalmente selecionada, combinar
+      invariante com monovariante, foi abandonada: combinar uma peca vacua
+      com outra produziria duas pecas vacuas.

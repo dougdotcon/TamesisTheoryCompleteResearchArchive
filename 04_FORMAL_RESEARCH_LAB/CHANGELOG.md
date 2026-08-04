@@ -1,5 +1,55 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-VACUITY-CORRECTION - 2026-08-04
+
+### Found, and it is critical
+
+- **A definicao `Monovariant`, encerrada em `a8929d7`, e VACUA.**
+
+```text
+Monovariant measure stepC  ->  IsEmpty C
+```
+
+  Provado **sem depender de axioma nenhum**. Se `C` e habitado, a imagem
+  de `measure` em `Nat` tem minimo, e a hipotese exige um valor menor que
+  ele dentro da propria imagem.
+
+- Todos os teoremas daquela frente sao **verdadeiros**; nenhum e
+  **aplicavel** a tipo habitado. A claim
+  `MONOVARIANT-REFLECTION-LIMIT-FORMAL-001` foi promovida sobre hipotese
+  que nada satisfaz.
+
+### Why five gates missed it
+
+```text
+contagem derivada     conferida
+pegada axiomatica     medida
+tokens proibidos      varridos
+typeclasses           contadas
+SATISFAZIBILIDADE     NAO VERIFICADA
+```
+
+- A instancia `strictDown` **falhou** em ser monovariante, e isso foi
+  registrado como "limite honesto da ferramenta" quando era o **sintoma**.
+  Nenhuma instancia positiva foi exigida em gate nenhum.
+
+### Selected
+
+- **`LAB-CORR-MONOVARIANT-VACUITY-001`**. A alternativa que estava
+  selecionada — combinar invariante com monovariante — foi **abandonada**:
+  combinar uma peca vacua com outra produziria duas pecas vacuas.
+
+### New permanent rule
+
+- **Toda frente que introduz uma hipotese deve exibir uma instancia
+  positiva que a satisfaca, num tipo habitado, ou declarar explicitamente
+  que a hipotese e vacua.**
+
+### Locked
+
+- `authorized_action: LAB_CORR_MONOVARIANT_VACUITY_CORRECTION_AUTHORIZED`.
+- `DEC-035` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-MONOVARIANT-DESCENT-001-RESULT-REVIEW - 2026-08-04
 
 ### Approved

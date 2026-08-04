@@ -620,3 +620,28 @@ decisions:
     wildcard: false
     governance_changes:
       - "labctl: allowlist += FOUND_MONOVARIANT_DESCENT_001_RESULT_REVIEW_AUTHORIZED"
+  - decision_id: DEC-035
+    date: 2026-08-04
+    decision: >
+      Autorizar o gate corretivo LAB-CORR-MONOVARIANT-VACUITY-001 por
+      entrada literal de allowlist em labctl.py, sem wildcard.
+    rationale: >
+      A definicao Monovariant encerrada em a8929d7 e VACUA: ela implica
+      IsEmpty C, provado sem depender de axioma nenhum. Todos os teoremas
+      daquela frente sao verdadeiros e nenhum e aplicavel a tipo habitado,
+      e a claim MONOVARIANT-REFLECTION-LIMIT-FORMAL-001 foi promovida
+      sobre hipotese que nada satisfaz. Os cinco gates verificaram
+      contagem, pegada, tokens e typeclasses, e nenhum verificou
+      satisfazibilidade.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_VACUITY_CORRECTION.md"
+    reversibility: reversible
+    wildcard: false
+    defect_severity: CRITICAL
+    untouched_safeguards:
+      - "nenhum arquivo Lean de frente encerrada e modificado"
+      - "nenhuma entrada historica do CHANGELOG e reescrita"
+      - "a claim nao e removida: recebe bloco de correcao"

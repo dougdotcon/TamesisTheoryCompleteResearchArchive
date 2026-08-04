@@ -1,5 +1,47 @@
 # Changelog do laboratório formal
 
+## LAB-CORR-MONOVARIANT-VACUITY-001 - 2026-08-04
+
+### Recorded as a theorem, not as errata
+
+- **`Monovariant measure stepC` implica `IsEmpty C`**, e a prova **nao
+  depende de axioma nenhum**. Vive em
+  `Foundations/Descent/Vacuity.lean`, que **consome** a definicao
+  publicada sem modificar nenhum arquivo da frente encerrada.
+
+### Corrected
+
+- **`DescendsOn`**: a medida decresce **enquanto** `P` vale — que e o que
+  o argumento classico sempre exigiu.
+- **`DescendsOn.exits`**: a partir de qualquer estado, o sistema sai da
+  regiao `P` em numero finito de passos. A conclusao certa e
+  **terminacao**, nao ausencia de recorrencia.
+- **A instancia positiva que faltava**: `strictDown`, o mesmo que a
+  frente encerrada registrou como *falha*, **funciona** na forma
+  corrigida. Era sintoma, nao limite.
+
+### Claim
+
+- `MONOVARIANT-REFLECTION-LIMIT-FORMAL-001` **nao foi removida**. O
+  wording anterior fica preservado e um bloco `correction` declara
+  `applicability: VACUOUS_ON_INHABITED_TYPES` e
+  `superseded_by: DescendsOn`. Apagar a claim apagaria a evidencia do
+  defeito.
+
+### New permanent rule
+
+- `positive_instance_required`: **toda frente que introduz uma hipotese
+  deve exibir instancia positiva em tipo habitado, ou declarar que a
+  hipotese e vacua.**
+- Contagem derivada, pegada medida e tokens varridos verificam **forma**.
+  Satisfazibilidade e **conteudo**, e cinco gates passaram sem verifica-la.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `lake build` exit `0`,
+  `8794` jobs. `0` arquivos Lean de frente encerrada modificados,
+  `0` entradas historicas reescritas.
+
 ## PORTFOLIO-REVIEW-VACUITY-CORRECTION - 2026-08-04
 
 ### Found, and it is critical

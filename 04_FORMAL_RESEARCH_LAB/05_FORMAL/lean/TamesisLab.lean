@@ -40,6 +40,8 @@ import TamesisLab.Tests.FoundInvariantUnreachability001
 import TamesisLab.Tests.FoundInvariantUnreachability001Axioms
 import TamesisLab.Tests.FoundMonovariantDescent001
 import TamesisLab.Tests.FoundMonovariantDescent001Axioms
+import TamesisLab.Tests.LabCorrMonovariantVacuity001
+import TamesisLab.Tests.LabCorrMonovariantVacuity001Axioms
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

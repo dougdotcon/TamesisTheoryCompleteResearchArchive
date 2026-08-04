@@ -1,0 +1,13 @@
+import TamesisLab.Tests.LabCorrMonovariantVacuity001
+
+namespace TamesisLab.Tests.LabCorrMonovariantVacuity001Axioms
+
+open TamesisLab.Foundations.Descent
+
+#print axioms monovariant_forces_empty
+#print axioms no_monovariant_on_inhabited
+#print axioms DescendsOn.exits
+#print axioms TamesisLab.Tests.LabCorrMonovariantVacuity001.strictDown_descendsOn
+#print axioms TamesisLab.Tests.LabCorrMonovariantVacuity001.strictDown_reaches_zero
+
+end TamesisLab.Tests.LabCorrMonovariantVacuity001Axioms

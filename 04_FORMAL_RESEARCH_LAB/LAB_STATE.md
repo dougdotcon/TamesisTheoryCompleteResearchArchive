@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T01:01:57-03:00
+updated_at: 2026-08-04T01:04:59-03:00
 canonical_commit: "a8929d7d9d3ce810619065656cc6a31a7d366ec1"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -30,10 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Corrigir a vacuidade: registrar o teorema de vacuidade, publicar
-  DescendsOn com instância positiva, e anexar bloco de correção à
-  claim sem apagar o wording anterior.
-authorized_action: "LAB_CORR_MONOVARIANT_VACUITY_CORRECTION_AUTHORIZED"
+  Aguardar revisão de portfólio. A vacuidade está registrada como
+  teorema e a forma corrigida tem instância positiva verificada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -169,6 +168,12 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 governance_rules:
+  positive_instance_required: >
+    Toda frente que introduz uma hipotese deve exibir uma INSTANCIA
+    POSITIVA que a satisfaca, num tipo habitado, ou declarar
+    explicitamente que a hipotese e vacua. Contagem derivada, pegada
+    medida e tokens varridos verificam FORMA; satisfazibilidade e
+    CONTEUDO, e cinco gates passaram sem verifica-la.
   post_commit_validation: >
     Quando uma auditoria obrigatória falhar depois do primeiro commit e
     amend e commit corretivo estiverem ambos proibidos, parar com

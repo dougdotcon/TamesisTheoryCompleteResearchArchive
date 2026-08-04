@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## FOUND-FOURIER-MULTIPLIER-L2-001-CLOSURE - 2026-08-04
+
+### Corrected — minha propria especificacao era vacua
+
+- A "Peca A" foi especificada por mim como **enfraquecer
+  `HasTemperateGrowth`**. Provado em Lean que isso e **vacuo**:
+  `SchwartzMap.smulLeftCLM` e um **`dite` com valor-lixo `0`**, logo
+  sobre simbolo nao-temperado o operador do Mathlib **ja e literalmente
+  zero**, e o lema enfraquecido sai em **5 linhas** sem dizer nada sobre
+  Leray.
+- **Defeito de vacuidade outra vez** — desta vez na minha especificacao,
+  pego pela sondagem antes de virar frente.
+
+### Built
+
+- O alvo real era **construir um operador L² novo**, e foi construido:
+  `fourierMulL2` com cota `‖fourierMulL2 F g‖ ≤ ‖g‖` por **Plancherel
+  puro, zero suavidade**. `345` linhas, `38` declaracoes, `lake build`
+  exit `0`, `0` `sorry`.
+- **Estende** o operador do Mathlib: na sobreposicao temperada os dois
+  coincidem, provado.
+- Forma canonica em Sobolev por `∃!`, apoiada em duas injetividades
+  provadas.
+
+### Positive instance with the real Leray symbol
+
+- `lerayComponent` e o `ξ_jξ_k/|ξ|²` de verdade, nao brinquedo.
+  `positive_instance_leray` e conjuncao tripla: o simbolo **nao** e
+  temperado, o operador do Mathlib nele e **exatamente 0**, e o operador
+  novo da `∃!` com cota.
+
+### Cost revised: high -> LOW
+
+- Eu estimei `high`. Foi **uma sessao**, e o trabalho foi **montagem, nao
+  descoberta**.
+
+### Still blocking
+
+- `FM-GAP-001`: **o Mathlib nao tem TIPO de espaco de Sobolev**.
+  `MemSobolev` e `Prop`, e `grep -rl` retorna **um** arquivo. Logo
+  `H^s →L[ℂ] H^s` **nao e sequer enunciavel**. A forma `∃!` entregue e a
+  mais forte enunciavel hoje.
+- `FM-GAP-002`: o simbolo aqui e **escalar**; Leray e **matricial**.
+
+### Not claimed
+
+- **O projetor de Leray NAO esta construido.** Navier-Stokes **nao**
+  ficou alcancavel. **Nenhum problema de milenio atacado.**
+
 ## FOUND-SPECTRAL-COUNTING-001-CLOSURE - 2026-08-04
 
 ### Proved

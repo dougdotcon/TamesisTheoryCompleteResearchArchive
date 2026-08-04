@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T10:22:00-03:00
+updated_at: 2026-08-04T11:05:00-03:00
 canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -9,7 +9,7 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-SPECTRAL-COUNTING-001"
+active_work_item: "FOUND-FOURIER-MULTIPLIER-L2-001"
 work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
@@ -241,6 +241,9 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não enfraquecer HasTemperateGrowth achando que resolve Leray: smulLeftCLM é dite com lixo 0"
+  - "Não afirmar que o projetor de Leray está construído: falta o caso matricial"
+  - "Não citar MemSobolev como espaço: é Prop, não tipo normado"
   - "Não fechar contagem espectral com N(λ) ainda junk: Nat.card devolve 0 em conjunto infinito"
   - "Não abrir a enumeração ℕ → ℝ monótona: é SC-GAP-002, e não é necessária para N(λ)"
   - "Não citar TamesisLab/TOE.lean ou YangMills.lean como conteúdo: são esqueletos de 8 linhas"
@@ -414,6 +417,7 @@ FOUND-UNIFORM-PRIMREC-001           VERIFIED / APPROVED     ENCERRADO
 ENG-RUNTIME-SOUNDNESS-002           VERIFIED / APPROVED     ENCERRADO
 
 FOUND-SPECTRAL-COUNTING-001         VERIFIED / APPROVED     ENCERRADO
+FOUND-FOURIER-MULTIPLIER-L2-001     VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 

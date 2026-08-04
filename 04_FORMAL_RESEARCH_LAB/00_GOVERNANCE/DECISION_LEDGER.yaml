@@ -207,3 +207,28 @@ decisions:
       de governanca.
     affected_paths: []
     reversibility: reversible
+  - decision_id: DEC-024
+    date: 2026-08-04
+    decision: >
+      Autorizar o gate corretivo LAB-GOV-DECISION-LEDGER-001 por meio de
+      uma entrada literal de allowlist em labctl.py, sem wildcard.
+    rationale: >
+      A revisao de portfolio verificou que o DECISION_LEDGER termina em
+      DEC-014 enquanto o CHANGELOG invoca DEC-015, DEC-016, DEC-017,
+      DEC-018, DEC-020, DEC-021 e DEC-022 como autoridade de edicoes
+      literais no proprio labctl.py, o validador de todo gate. Ha ainda
+      uma colisao de identificador em DEC-014 e um buraco em DEC-019.
+      Esta entrada e registrada NO MESMO COMMIT que faz a edicao,
+      exatamente a disciplina que as sete citacoes violaram.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_BISIMULATION.md"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: allowlist += LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED"
+    untouched_safeguards:
+      - "nenhuma frente encerrada e modificada"
+      - "nenhuma entrada historica do CHANGELOG e reescrita"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"

@@ -650,6 +650,7 @@ def validate() -> dict[str, Any]:
         "FOUND_BISIMULATION_BOUNDARY_001_FORMALIZATION_AUTHORIZED",
         "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED",
         "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
+        "LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

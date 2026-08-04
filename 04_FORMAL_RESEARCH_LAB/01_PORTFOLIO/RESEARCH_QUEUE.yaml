@@ -807,3 +807,46 @@ queue:
       sobrejetiva e mesmo assim nao reflete ciclos. NAO eh extensao de
       FOUND-FINITE-STATE-ABSTRACTION-001, cujo extension_status permanece
       NOT_AUTHORIZED; a dependencia eh consumo de API verificada.
+
+  - work_item_id: LAB-GOV-DECISION-LEDGER-001
+    title: "Integridade do registro de decisoes de governanca"
+    track: governance
+    target_statement: >
+      Toda citacao DEC-NNN usada como autoridade possui exatamente uma
+      entrada no DECISION_LEDGER, e o labctl recusa qualquer violacao.
+    expected_product: >
+      Sete decisoes reconstruidas, a colisao de DEC-014 resolvida sem
+      reescrever o changelog, o buraco de DEC-019 registrado, e uma
+      verificacao automatica de integridade de citacao.
+    dependencies:
+      - LAB-ARCH-001
+    existing_assets:
+      - "00_GOVERNANCE/DECISION_LEDGER.yaml"
+      - "CHANGELOG.md"
+      - "10_TOOLS/labctl.py"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: >
+      reescrever entrada historica do changelog; inventar conteudo de
+      decisao nao sustentado pelo registro sobrevivente; alterar frente
+      encerrada; renumerar decisoes ja emitidas
+    priority_class: P0
+    status: SCOPED
+    authorized_next_gate: LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED
+    defect_verified_at_commit: e3572a876fd0fb0748fb237f820bb1411259ee84
+    unregistered_citations: 7
+    identifier_collisions: 1
+    numbering_gaps: 1
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO-REVIEW-AFTER-BISIMULATION. Sete
+      alternativas foram comparadas. As sete citacoes sem registro
+      autorizam edicoes literais no labctl.py, que e o validador de todo
+      gate: todo PASS estrutural desde entao repousa em edicoes cuja
+      autorizacao existe apenas na narrativa do changelog. Mesmo padrao de
+      LAB-GOV-FRONTMATTER-SCAN-001, que se pagou dois gates depois.

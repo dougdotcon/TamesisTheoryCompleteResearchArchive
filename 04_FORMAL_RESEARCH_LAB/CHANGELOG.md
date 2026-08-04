@@ -1,5 +1,46 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-BISIMULATION - 2026-08-04
+
+### Selected
+
+- **`LAB-GOV-DECISION-LEDGER-001`**. Sete alternativas comparadas.
+
+### Found
+
+- O `DECISION_LEDGER.yaml` termina em `DEC-014`. O `CHANGELOG.md` invoca
+  `DEC-015`, `DEC-016`, `DEC-017`, `DEC-018`, `DEC-020`, `DEC-021` e
+  `DEC-022` como autoridade. **Nenhuma das sete existe no ledger.**
+- `DEC-014` designa **duas decisoes diferentes**: no ledger, o
+  endurecimento PENDENTE de `FROZEN_PARTIAL_RESULT` com `authority: null`;
+  no changelog, uma edicao de sequencia de gates no `labctl.py`.
+- `DEC-019` nunca e citado: buraco na numeracao.
+- Todas autorizam edicoes literais em `10_TOOLS/labctl.py`, **o validador
+  de todo gate**.
+
+### Rejected
+
+- O candidato **certificado de reflexao decidivel** foi formalizado em
+  probe, **compilou**, e foi **rejeitado mesmo assim**: a hipotese da
+  janela implica a da equacao unica, o excedente nao tem nenhum
+  consumidor, e "decidivel" e pago com `DecidableEq C`, exatamente a
+  hipotese que a frente anterior mede como nao exigida.
+- A proposta era minha. Caiu em verificacao adversarial **antes** de
+  virar frente.
+
+### Probed
+
+- `15` declaracoes compiladas em probe descartavel, `exit 0`, arvore
+  versionada intocada. Duas objecoes dos refutadores foram **derrubadas
+  pelo probe**: `0 < period` e `baseIndex + period <= n` **sao**
+  recuperaveis da API publica, re-derivando a reducao em namespace novo.
+
+### Locked
+
+- `authorized_action: LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED`.
+  `0` claims promovidas, `24` no ledger, `0` frentes encerradas tocadas.
+- `DEC-024` registrado **no mesmo commit** que faz sua edicao.
+
 ## FOUND-BISIMULATION-BOUNDARY-001-RESULT-REVIEW - 2026-08-03
 
 ### Approved

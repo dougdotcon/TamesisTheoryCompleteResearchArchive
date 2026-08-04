@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T23:09:36-03:00
-canonical_commit: "25e85ff9f9386a658d01ec3aba0b45c1d115526b"
+updated_at: 2026-08-04T00:04:40-03:00
+canonical_commit: "e3572a876fd0fb0748fb237f820bb1411259ee84"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -30,9 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar uma revisão explícita de portfólio. A frente
-  FOUND-BISIMULATION-BOUNDARY-001 está encerrada e travada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Reconstruir as sete decisões citadas sem registro, resolver a
+  colisão de DEC-014 sem reescrever o changelog, e fazer o labctl
+  recusar qualquer citação DEC-NNN sem entrada no ledger.
+authorized_action: "LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -169,6 +170,11 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não citar DEC-NNN como autoridade sem entrada correspondente no DECISION_LEDGER"
+  - "Não reutilizar um decision_id já emitido para uma decisão diferente"
+  - "Não reescrever entrada histórica do CHANGELOG para corrigir citação"
+  - "Não tratar a janela limitada como hipótese mais fraca que OrbitSeparating"
+  - "Não afirmar custo menor que busca concreta direta: não há modelo de custo"
   - "Não usar processo com exit diferente de zero como evidência de PASS"
   - "Não tratar igualdade abstrata como igualdade concreta sem hipótese de reflexão"
   - "Não afirmar que abstrações finitas não produzem ciclos espúrios"

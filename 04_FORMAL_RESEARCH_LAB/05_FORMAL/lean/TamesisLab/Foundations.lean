@@ -12,6 +12,7 @@ import TamesisLab.Foundations.Monovariants
 import TamesisLab.Foundations.Descent
 import TamesisLab.Foundations.ComputabilityBridge
 import TamesisLab.Foundations.UniformPrimrec
+import TamesisLab.Foundations.SpectralCounting
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

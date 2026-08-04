@@ -1,6 +1,49 @@
 # Changelog do laboratório formal
 
-## PORTFOLIO-REVIEW-SPECTRAL-COUNTING - 2026-08-04
+## FOUND-SPECTRAL-COUNTING-001-CLOSURE - 2026-08-04
+
+### Proved
+
+- **`finite_eigenvalues_above`**: os autovalores de um operador compacto
+  autoadjunto **nao se acumulam fora de zero**. `lake build` exit `0`,
+  `8812` jobs, `257` linhas, `14` declaracoes, `0` `sorry`.
+- **Mais forte que o alvo**: `CompleteSpace H` **nao e necessario**.
+
+### The proof avoids Pythagoras
+
+- O argumento classico usa `‖Tv − Tw‖² = μ² + ν²`. Aqui, Cauchy-Schwarz
+  contra o **proprio autovetor**: `⟨v, Tv − Tw⟩ = μ`, logo
+  `|μ| ≤ ‖Tv − Tw‖`. Separacao `lam` em vez de `√2·lam`, e **sem
+  `Real.sqrt`**.
+
+### N(λ) deixou de ser junk
+
+- `5` teoremas de contagem. O que importa e `eigCount_eq_zero_iff`: so
+  vale **porque a finitude veio antes**. `Set.ncard` devolve `0` tambem
+  para conjunto infinito.
+- `eigCount_antitone` seria **falso** para o valor junk.
+
+### Genuinely new
+
+- O Mathlib **nao tem** lema de espectro discreto fora de 0. E os dois
+  lemas que a especificacao previa usar —
+  `finite_dimensional_eigenspace` e
+  `orthogonalComplement_iSup_eigenspaces_eq_bot` — **nao foram
+  necessarios**.
+
+### Protocol deviation, declared
+
+- Os **4 gates foram combinados num commit**. Nenhuma verificacao foi
+  pulada; a separacao em quatro commits foi. Registrado no
+  `CLOSURE_RECORD.md`, no `STATUS.yaml` e em `DEC-050` — nao escondido.
+
+### Not claimed
+
+- A **lei de Weyl NAO esta provada**. RH **nao** ficou alcancavel.
+  `N(λ)` sozinho nao vale nada para RH. **Nenhum problema de milenio
+  atacado.**
+
+ PORTFOLIO-REVIEW-SPECTRAL-COUNTING - 2026-08-04
 
 ### Selected
 

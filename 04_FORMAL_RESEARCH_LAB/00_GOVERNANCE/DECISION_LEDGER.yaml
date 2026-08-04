@@ -1089,3 +1089,31 @@ decisions:
       - "nenhuma conexao com RH e afirmada"
       - "a lei de Weyl NAO e afirmada provada"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-050
+    date: 2026-08-04
+    decision: >
+      Encerrar FOUND-SPECTRAL-COUNTING-001 combinando os quatro gates num
+      commit, com o desvio declarado.
+    rationale: >
+      A sondagem produziu a prova inteira com exit 0 antes do gate de
+      especificacao, e o material entrou na arvore sem alteracao de
+      enunciado. Nenhuma verificacao foi pulada: probe exit 0, lake build
+      exit 0 com 8812 jobs, zero sorry conferido por grep, pegada medida,
+      instancia positiva verificada. O que foi pulado e a separacao em
+      quatro commits, e isso esta registrado no CLOSURE_RECORD e no
+      STATUS.yaml em vez de escondido.
+    authority: FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/SpectralCounting.lean"
+      - "LAB_STATE.md"
+      - "02_FOUNDATIONS/13_SPECTRAL_COUNTING/FOUND_SPECTRAL_COUNTING_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: closed_work_items += FOUND-SPECTRAL-COUNTING-001"
+      - "desvio de protocolo declarado: 4 gates em 1 commit"
+    untouched_safeguards:
+      - "a lei de Weyl NAO e afirmada provada"
+      - "nenhuma conexao com RH e afirmada"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

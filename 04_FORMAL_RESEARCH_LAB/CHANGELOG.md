@@ -1,5 +1,57 @@
 # Changelog do laboratório formal
 
+## FOUND-SOBOLEV-SPACE-001-CLOSURE - 2026-08-04
+
+### The type exists
+
+- **`H^s` agora e um espaco de Banach**: `NormedAddCommGroup` +
+  `NormedSpace ℂ` + `CompleteSpace`. `345` linhas, `57` declaracoes,
+  `lake build` exit `0`, `0` `sorry`, `27` `#print axioms` limpos.
+- O Mathlib **nao tinha tipo**: `MemSobolev` era `Prop`, e
+  `grep -rl MemSobolev Mathlib` retornava **um** arquivo.
+
+### Design, with the reason
+
+- **Subtipo via `Submodule`, nao pullback de `Lp`.** O pullback daria o
+  tipo normado de graca mas seria objeto **paralelo** a `𝓢'`; o subtipo e
+  o predicado do Mathlib **promovido a tipo**, e isso e demonstravel:
+  `range_toDist : Set.range toDist = {f | MemSobolev s 2 f}`.
+- `Hs` e `def` **opaco** e nao `abbrev`: impede colisao entre a topologia
+  de subtipo herdada de `𝓢'` e a topologia metrica da norma.
+
+### The chain paid for itself
+
+- A norma e bem definida por `toTemperedDistribution_injective` e
+  `besselPotential_injective` — **ambas provadas na frente anterior**.
+- Da isometria de Bessel `toL2ₗᵢ : Hs ≃ₗᵢ Lp 2` caem completude **e**
+  `fourierMultiplierSobolevCLM`.
+
+### Positive instance with closed-form norm
+
+- `concrete_norm_bump : ‖bump ℝ ℂ (5/2) 1‖ = 2^(1/2)` — **√2**, em
+  enunciado **fechado, sem variaveis livres nem hipoteses**.
+- E o circulo fecha: `concrete_leray_operator` mostra o simbolo de Leray,
+  no qual o operador do Mathlib **e zero**, com operador genuino em
+  `H^s`.
+
+### Reading caveat, recorded
+
+- Todos os `Hs E F s` sao isometricos entre si. **Isso e o teorema
+  correto** — Bessel e isomorfismo `H^s ≅ L²` — e a dependencia em `s`
+  vive no **mergulho** `toDist`. **Nao e degenerescencia.**
+
+### Elaboration bug, not math
+
+- `Lp (α := E) F 2` falha `volume_tac` em `3` sitios de `~23` no mesmo
+  arquivo. Contornado com `Lp F 2 (volume : Measure E)` explicito. Bug do
+  Lean `4.33.0-rc1`.
+
+### Not claimed
+
+- Navier-Stokes **nao** ficou alcancavel, **nao ha teoria de EDP** no
+  laboratorio, e o probe promovido **nao** e PR ao Mathlib. **Nenhum
+  problema de milenio atacado.**
+
 ## FOUND-LERAY-PROJECTOR-001-CLOSURE - 2026-08-04
 
 ### Built

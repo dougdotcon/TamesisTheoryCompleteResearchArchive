@@ -1205,3 +1205,34 @@ decisions:
       - "a cota NAO e afirmada otima: LP-GAP-001"
       - "a pressao de Navier-Stokes NAO e afirmada recuperada"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-054
+    date: 2026-08-04
+    decision: >
+      Encerrar FOUND-SOBOLEV-SPACE-001 com o tipo H^s construido como
+      espaco de Banach, e fechar FM-GAP-001.
+    rationale: >
+      lake build exit 0, 8816 jobs, 345 linhas, 57 declaracoes, zero
+      sorry, 27 print axioms limpos. O Mathlib nao tinha TIPO de espaco
+      de Sobolev: MemSobolev era Prop e grep retornava um arquivo. A
+      forma escolhida e subtipo via Submodule, e nao pullback de Lp,
+      porque o subtipo e o predicado do Mathlib promovido a tipo, o que e
+      demonstravel por range_toDist. A norma e bem definida pelas duas
+      injetividades provadas na frente anterior. A instancia positiva tem
+      norma em forma fechada, raiz de 2, em enunciado sem variaveis
+      livres.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/SobolevSpace.lean"
+      - "LAB_STATE.md"
+      - "02_FOUNDATIONS/17_SOBOLEV_SPACE/FOUND_SOBOLEV_SPACE_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "FM-GAP-001 FECHADA"
+      - "LAB_STATE: prohibited_actions += 3 entradas de Sobolev"
+      - "desvio de protocolo declarado: 4 gates em 1 commit"
+    untouched_safeguards:
+      - "Navier-Stokes NAO e afirmado alcancavel"
+      - "nao ha teoria de EDP no laboratorio"
+      - "o probe promovido NAO e PR ao Mathlib"
+      - "nenhum problema de milenio e atacado"

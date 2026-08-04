@@ -1,0 +1,65 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-SOBOLEV-SPACE-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: APPROVED
+formalization_status: VERIFIED
+result_review: APPROVED
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+research_role: FORMAL_FOUNDATION
+closes_gap: FM-GAP-001
+formalization:
+  lean_modules_created: 1
+  file_lines: 345
+  declarations: 57
+  definitions: 10
+  instances: 6
+  theorems: 41
+  axiom_prints: 27
+  lake_build_exit: 0
+  lake_build_jobs: 8816
+  sorry_declarations: 0
+result:
+  type_exists: true
+  structure: BANACH
+  form: SUBMODULE_SUBTYPE
+  form_rejected: LP_PULLBACK
+  form_rejected_reason: "seria objeto paralelo a S-linha, nao o predicado do Mathlib promovido"
+  opaque_def_not_abbrev: true
+  opaque_reason: "impede colisao entre topologia de subtipo e topologia da norma"
+  range_is_exactly_memsobolev: true
+  bessel_isometry: toL2ₗᵢ
+  sobolev_multiplier_clm: true
+positive_instance:
+  closed_statement: true
+  no_free_variables: true
+  norm_closed_form: "‖c‖ * volume.real(ball 0 1) ^ (1/2)"
+  concrete: "‖bump R C (5/2) 1‖ = 2^(1/2)"
+  nontrivial_proved: true
+  leray_circle_closed: true
+reading_caveat:
+  all_Hs_isometric: true
+  is_correct_theorem: true
+  reason: "Bessel e isomorfismo H^s = L2; a dependencia em s vive no mergulho toDist"
+  is_degeneracy: false
+elaboration_obstacle:
+  issue: "Lp (α := E) F 2 falha volume_tac em 3 sitios de ~23"
+  workaround: "Lp F 2 (volume : Measure E) explicito"
+  nature: LEAN_ELABORATION_BUG_NOT_MATH
+gaps:
+  gaps_total: 5
+  gaps_open: 5
+gate_combination:
+  declared: true
+  gates_combined: 4
+claims:
+  promoted: 0
+  ledger_total: 28
+prohibitions:
+  navier_stokes_reachable: FORBIDDEN
+  pde_theory_claim: FORBIDDEN
+  mathlib_pr_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

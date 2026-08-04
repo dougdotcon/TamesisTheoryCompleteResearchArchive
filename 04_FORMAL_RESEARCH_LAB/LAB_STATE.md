@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T20:50:06-03:00
-canonical_commit: "bc717e6ffb3e38155ec8401ca53476bcbd62462e"
+updated_at: 2026-08-03T22:48:33-03:00
+canonical_commit: "71e2aceefae20ff877881a28b461f412edc4f7ec"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,15 +9,16 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-FINITE-STATE-ABSTRACTION-001"
-previous_candidate_work_item: "FOUND-FINITE-ABSTRACTION-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
+work_status: "SCOPED"
+specification_status: "NOT_STARTED"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
+relational_bisimulation_status: "NOT_AUTHORIZED"
+nondeterministic_systems_status: "NOT_AUTHORIZED"
 bisimulation_status: "NOT_AUTHORIZED"
 quotient_status: "NOT_AUTHORIZED"
 extraction_status: "NOT_AUTHORIZED"
@@ -29,10 +30,11 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar uma revisão explícita de portfólio. A varredura de
-  chaves duplicadas passou a cobrir o front matter Markdown, e
-  nenhuma frente nova está escolhida.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Preparar a especificação da bissimulação funcional determinística:
+  congelar Simulates, Reflects e Bisimulation, o teorema de colapso
+  com a semiconjugação e as negações que mostram que bissimulação
+  não reflete ciclos, sem iniciar a formalização.
+authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -215,6 +217,9 @@ prohibited_actions:
   - "Não afirmar novo modelo de computação, novo algoritmo, nova teoria de autômatos ou descoberta"
   - "Não tratar reutilização em software como descoberta científica"
   - "Não modificar legado nem operar a partir de /mnt/d"
+  - "Não afirmar que bissimulação reflete ciclos: BOOL_TO_UNIT já é uma bissimulação sobrejetiva"
+  - "Não estender o colapso zig/zag para sistemas não determinísticos ou bissimulação relacional"
+  - "Não estender FOUND-FINITE-STATE-ABSTRACTION-001 nem abrir 002 sem gate próprio"
   - "Não declarar uma varredura integral sem publicar quantos arquivos ela abriu"
   - "Não fechar front matter com o delimitador --- na mesma linha do corpo"
   - "Não usar yaml.safe_load em front matter sem antes rejeitar chaves duplicadas"

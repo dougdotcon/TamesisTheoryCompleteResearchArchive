@@ -1,5 +1,52 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-FRONTMATTER-SCAN - 2026-08-03
+
+### Selected
+
+- **`FOUND-BISIMULATION-BOUNDARY-001`**, bissimulacao deterministica e o
+  limite da reflexao de ciclos. Cinco alternativas comparadas. Ataca
+  `ABS-GAP-015`, deixado aberto pela frente anterior.
+
+### Proved in probe
+
+- **Zig e zag COLAPSAM em sistemas deterministicos totais:**
+
+```lean
+theorem bisimulation_iff_semiconj (abstract) (stepC) (stepA) :
+    Bisimulation abstract stepC stepA
+      ↔ Function.Semiconj abstract stepC stepA
+```
+
+  Sem depender de nenhum axioma. O zag e gratuito: a testemunha do passo
+  concreto e `stepC c`, e a obrigacao que sobra e exatamente o zig.
+- **`BOOL_TO_UNIT` ja e uma bissimulacao**, e `forgetBool` e
+  **sobrejetiva**. Portanto `bisimulation_does_not_reflect_cycles` e
+  `surjective_bisimulation_does_not_reflect_cycles`, ambos teoremas que
+  compilam, ambos sem pegada.
+
+### Clarified
+
+- A proibicao ja existente — "nao assumir bissimulacao onde so ha
+  semiconjugacao" — deixava implicito que **obter** bissimulacao
+  resolveria o problema. No recorte deterministico total nao ha nada a
+  obter, e o ciclo continua espurio. O que separa e injetividade sobre a
+  orbita.
+
+### Bounded
+
+- O colapso vale para bissimulacao **funcional** entre sistemas
+  **deterministicos totais**. Sistemas nao deterministicos, relacoes de
+  transicao gerais, bissimulacao relacional, acoes rotuladas e coinducao
+  seguem **NAO AUTORIZADOS**, e generalizar o colapso e a stop condition
+  principal da frente.
+
+### Locked
+
+- `authorized_action: FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED`,
+  literal, sem wildcard. `17` itens na fila, `0` claims promovidas, `23`
+  no ledger, `0` arquivos Lean tocados.
+
 ## LAB-GOV-FRONTMATTER-SCAN-001 - 2026-08-03
 
 ### Fixed

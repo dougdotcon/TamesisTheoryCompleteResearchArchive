@@ -562,7 +562,8 @@ def validate() -> dict[str, Any]:
                       "FOUND-SEMIGROUP-002", "FOUND-FUNCTIONAL-GRAPH-001",
                       "FOUND-CYCLE-DETECTION-001", "ENG-FINITE-STATE-RUNTIME-001",
                       "ENG-FINITE-STATE-ENCODING-001",
-                      "FOUND-FINITE-STATE-ABSTRACTION-001"}:
+                      "FOUND-FINITE-STATE-ABSTRACTION-001",
+                      "FOUND-BISIMULATION-BOUNDARY-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -592,6 +593,11 @@ def validate() -> dict[str, Any]:
     ):
         errors.append("ENG-FINITE-STATE-ENCODING-001 cannot be active before ENG-FINITE-STATE-RUNTIME-001 is VERIFIED with result_review APPROVED")
     fse = item_by_id.get("ENG-FINITE-STATE-ENCODING-001", {})
+    ffsa = item_by_id.get("FOUND-FINITE-STATE-ABSTRACTION-001", {})
+    if active == "FOUND-BISIMULATION-BOUNDARY-001" and (
+        ffsa.get("status") != "VERIFIED" or ffsa.get("result_review") != "APPROVED"
+    ):
+        errors.append("FOUND-BISIMULATION-BOUNDARY-001 cannot be active before FOUND-FINITE-STATE-ABSTRACTION-001 is VERIFIED with result_review APPROVED")
     if active == "FOUND-FINITE-STATE-ABSTRACTION-001" and (
         fse.get("status") != "VERIFIED" or fse.get("result_review") != "APPROVED"
     ):
@@ -639,6 +645,10 @@ def validate() -> dict[str, Any]:
         "FOUND_FINITE_STATE_ABSTRACTION_001_FORMALIZATION_AUTHORIZED",
         "FOUND_FINITE_STATE_ABSTRACTION_001_RESULT_REVIEW_AUTHORIZED",
         "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED",
+        "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED",
+        "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_REVIEW_AUTHORIZED",
+        "FOUND_BISIMULATION_BOUNDARY_001_FORMALIZATION_AUTHORIZED",
+        "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED",
         "LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:

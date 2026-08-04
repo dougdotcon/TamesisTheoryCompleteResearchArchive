@@ -737,3 +737,56 @@ queue:
       NAO eh extensao de ENG-FINITE-STATE-ENCODING-001, cujo
       extension_status permanece NOT_AUTHORIZED; a dependencia eh consumo
       de API verificada.
+
+  - work_item_id: FOUND-BISIMULATION-BOUNDARY-001
+    title: Deterministic Bisimulation and the Limits of Cycle Reflection
+    track: FOUNDATIONS
+    target_statement: >
+      Provar que, para sistemas deterministicos totais, a bissimulacao
+      funcional coincide com a semiconjugacao, e concluir que obter
+      bissimulacao NAO reflete recorrencia abstrata como recorrencia
+      concreta.
+    expected_product: >
+      Definicoes de Simulates, Reflects e Bisimulation; o teorema de
+      colapso entre bissimulacao e semiconjugacao; a demonstracao de que o
+      contraexemplo BOOL_TO_UNIT ja e uma bissimulacao sobrejetiva; e as
+      negacoes correspondentes como teoremas que compilam.
+    dependencies:
+      - FOUND-CYCLE-DETECTION-001
+      - ENG-FINITE-STATE-ENCODING-001
+      - FOUND-FINITE-STATE-ABSTRACTION-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/FiniteStateAbstraction/"
+      - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/FINAL_PUBLIC_API.md"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 8
+    external_dependency: none
+    cross_track_value: high
+    stop_condition: >
+      A frente afirmar que bissimulacao reflete ciclos, ou estender o
+      resultado do colapso para alem de sistemas deterministicos totais e
+      bissimulacao funcional.
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_SEMANTIC_FOUNDATION
+    gap_targeted: ABS-GAP-015
+    decision_document: "01_PORTFOLIO/BISIMULATION_BOUNDARY_CANDIDATE.md"
+    portfolio_review: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_FRONTMATTER_SCAN.md"
+    bisimulation_scope: FUNCTIONAL_BETWEEN_TOTAL_DETERMINISTIC_SYSTEMS
+    relational_bisimulation: NOT_AUTHORIZED
+    nondeterministic_systems: NOT_AUTHORIZED
+    probes_compiled_in_portfolio_gate: 5
+    probe_exit: 0
+    selection_rationale: >
+      Selecionado no gate PORTFOLIO_REVIEW apos a correcao da cobertura do
+      scanner. Ataca ABS-GAP-015, deixado aberto pela frente anterior. O
+      resultado central ja compilou sem depender de nenhum axioma: zig e
+      zag colapsam, de modo que BOOL_TO_UNIT ja e uma bissimulacao
+      sobrejetiva e mesmo assim nao reflete ciclos. NAO eh extensao de
+      FOUND-FINITE-STATE-ABSTRACTION-001, cujo extension_status permanece
+      NOT_AUTHORIZED; a dependencia eh consumo de API verificada.

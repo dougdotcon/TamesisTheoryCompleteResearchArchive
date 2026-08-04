@@ -1,0 +1,67 @@
+{
+  "schema": "tamesis-gate-result/1",
+  "gate": "PORTFOLIO-REVIEW-AFTER-FRONTMATTER-SCAN",
+  "executed_at": "2026-08-03T22:40:00-03:00",
+  "commit_before": "71e2aceefae20ff877881a28b461f412edc4f7ec",
+  "canonical_commit": "71e2aceefae20ff877881a28b461f412edc4f7ec",
+  "alternatives_compared": 5,
+  "alternatives": [
+    {"id": "A", "name": "deterministic bisimulation ABS-GAP-015", "verdict": "SELECTED"},
+    {"id": "B", "name": "quotients ABS-GAP-016", "verdict": "DEFERRED"},
+    {"id": "C", "name": "witness invariance ENC-GAP-020", "verdict": "REJECTED"},
+    {"id": "D", "name": "native extraction, CLI, parser", "verdict": "REJECTED"},
+    {"id": "E", "name": "independent mathematical front", "verdict": "DEFERRED"}
+  ],
+  "selected_work_item": "FOUND-BISIMULATION-BOUNDARY-001",
+  "gap_targeted": "ABS-GAP-015",
+  "probe": {
+    "file": "/tmp/BisimulationProbe.lean",
+    "real_exit_code": 0,
+    "error_lines": 0,
+    "removed": true,
+    "declarations_axiom_free": 5
+  },
+  "central_finding": {
+    "statement": "for total deterministic systems, functional bisimulation coincides with semiconjugation",
+    "reason": "the zag obligation is discharged by taking stepC c as the witness, leaving exactly the zig",
+    "consequence": "BOOL_TO_UNIT is already a bisimulation, and forgetBool is surjective",
+    "therefore": "bisimulation does not reflect cycles, and neither does surjective bisimulation",
+    "what_actually_separates": "injectivity on the reached orbit, i.e. OrbitSeparating"
+  },
+  "scope_boundary": {
+    "holds_for": "functional bisimulation between total deterministic systems",
+    "does_not_apply_to": [
+      "nondeterministic systems",
+      "general transition relations",
+      "relational bisimulation R subset of C x A",
+      "labelled actions",
+      "coinduction"
+    ],
+    "generalising_the_collapse_is_the_primary_stop_condition": true
+  },
+  "negative_scope": [
+    "nondeterministic systems NOT_AUTHORIZED",
+    "relational bisimulation NOT_AUTHORIZED",
+    "labelled actions NOT_AUTHORIZED",
+    "coinduction NOT_AUTHORIZED",
+    "quotients NOT_AUTHORIZED",
+    "extraction, CLI, parser NOT_AUTHORIZED",
+    "no closed front may be modified"
+  ],
+  "validation": {
+    "labctl_validate": "PASS",
+    "yaml_duplicate_key_scan": "PASS",
+    "work_item_count": 17,
+    "claims_promoted": 0,
+    "claim_ledger_total": 23,
+    "lean_files_modified": 0,
+    "closed_fronts_modified": 0
+  },
+  "final_state": {
+    "active_work_item": "FOUND-BISIMULATION-BOUNDARY-001",
+    "work_status": "SCOPED",
+    "specification_status": "NOT_STARTED",
+    "authorized_action": "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  },
+  "next_expected_gate": "FOUND-BISIMULATION-BOUNDARY-001-SPECIFICATION"
+}

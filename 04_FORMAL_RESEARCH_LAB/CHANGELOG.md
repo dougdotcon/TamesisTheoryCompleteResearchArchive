@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-UNIFORM - 2026-08-04
+
+### Counted
+
+- `22` itens na fila: `15` VERIFIED, `1` FROZEN (`RH-NOGO-001`), `6`
+  SCOPED. As **16 linhas proprias** do laboratorio estao fechadas. Os `6`
+  SCOPED nao sao linhas do laboratorio — sao os problemas que ele
+  gostaria de atacar.
+
+### Selected
+
+- `FOUND-UNIFORM-PRIMREC-001`. Das `10` lacunas abertas pela ponte, e a
+  **unica** cuja resolucao produz informacao algoritmica.
+
+### Measured
+
+- Viabilidade por **elaboracao**, probe descartavel `exit 0`, arvore
+  intocada. Compilaram: `primrec_stepList`, `primrec_runList` e
+  `primrec_validList`. O segundo e o coracao — **iterar a tabela
+  codificada e primitivo recursivo**, via `Primrec.nat_iterate`.
+- O obstaculo real e **tipo dependente**, nao computabilidade:
+  `analyzeTransitionTable` atravessa `Fin t.next.size`. A rota medida e
+  reformular sobre `List Nat` e casar depois — e o casamento e o volume
+  da frente.
+
+### Corrected
+
+- `LAB_STATE.md` carregava `specification_status: READY_FOR_REVIEW`
+  enquanto o `STATUS.yaml` da frente dizia `APPROVED` — divergencia entre
+  as duas fontes que **sobreviveu a dois gates**, o de formalizacao e o
+  de resultado. `labctl validate` nao a pega: ele confere `work_status`
+  contra a fila, nao `specification_status` contra a frente. Corrigida na
+  transicao de frente, e o furo de validacao fica registrado como
+  observacao.
+
+### Not claimed
+
+- Nenhum dos `6` problemas em aberto ficou mais perto. Para
+  `PVSNP-PHYS-001` faltam, em ordem: o nivel uniforme, um modelo de
+  custo, e reavaliacao — e **o modelo de custo e escolha, nao
+  descoberta**.
+- Os outros cinco seguem com primeiro passo bibliografico e custo
+  `very_high` declarado desde 2026-07-31.
+
+### Locked
+
+- `authorized_action: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-041` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-COMPUTABILITY-BRIDGE-001-RESULT-REVIEW - 2026-08-04
 
 ### Verified

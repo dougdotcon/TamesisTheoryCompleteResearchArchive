@@ -1099,3 +1099,51 @@ queue:
       computabilidade, e exige uma nocao formalizada de computacao que o
       laboratorio nao possui apesar de ter execucao certificada. Esta
       ponte e o pre-requisito, e NAO e ataque a problema nenhum.
+
+  - work_item_id: FOUND-UNIFORM-PRIMREC-001
+    title: "O nivel uniforme: a analise de tabelas e primitiva recursiva"
+    track: FOUNDATIONS
+    target_statement: >
+      Determinar se analyzeTransitionTable, vista como funcao de
+      RawTransitionTable x Nat, e primitiva recursiva. O dominio e
+      INFINITO, logo Primrec.dom_finite nao se aplica e a conclusao passa
+      a depender do algoritmo.
+    expected_product: >
+      Ou uma prova de Primrec2 analyzeTransitionTable, ou um limite
+      declarado e verificavel de por que ela nao foi obtida. Em qualquer
+      caso, com instancia positiva.
+    dependencies:
+      - FOUND-COMPUTABILITY-BRIDGE-001
+      - FOUND-CYCLE-DETECTION-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/ComputabilityBridge/"
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 12
+    external_dependency: "Mathlib.Computability.Primrec"
+    cross_track_value: high
+    stop_condition: >
+      definir classe de complexidade; afirmar custo ou complexidade
+      assintotica; alegar qualquer coisa sobre P vs NP; usar sorry, admit
+      ou axioma local no lugar da prova; declarar o nivel uniforme
+      provado antes de o build fechar; fechar sem instancia positiva
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: ONLY_OPEN_GAP_WITH_ALGORITHMIC_CONTENT
+    feasibility_probe_exit: 0
+    feasibility_probe_evidence: "primrec_stepList, primrec_runList e primrec_validList compilaram em probe descartavel; iterar a tabela codificada e Primrec via Primrec.nat_iterate"
+    known_obstacle: "tipo dependente Fin t.next.size, nao computabilidade"
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    decision_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_UNIFORM.md"
+    selection_rationale: >
+      Das dez lacunas abertas por FOUND-COMPUTABILITY-BRIDGE-001, esta e a
+      unica cuja resolucao produz informacao algoritmica. Sobre dominio
+      finito toda funcao e primitiva recursiva e a classificacao nao mede
+      nada; sobre RawTransitionTable x Nat o dominio e infinito e a
+      conclusao passa a depender do que a funcao faz. A viabilidade foi
+      MEDIDA por elaboracao, nao estimada: o nucleo compila.

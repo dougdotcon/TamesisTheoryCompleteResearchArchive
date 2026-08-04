@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T06:08:00-03:00
-canonical_commit: "909f7e06d52c172b49f908c22c3d32492c50bd7d"
+updated_at: 2026-08-04T06:26:00-03:00
+canonical_commit: "f1d9924d14acb8d164aa0b184e49381fd0333f40"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,12 +9,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-COMPUTABILITY-BRIDGE-001"
-work_status: "VERIFIED"
-specification_status: "READY_FOR_REVIEW"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_work_item: "FOUND-UNIFORM-PRIMREC-001"
+work_status: "SCOPED"
+specification_status: "NOT_STARTED"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,9 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar revisão de portfólio. A ponte está encerrada, e a única
-  lacuna com conteúdo algorítmico é CB-GAP-001, o nível uniforme.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Especificar FOUND-UNIFORM-PRIMREC-001: a reformulação sobre List Nat
+  sem tipo dependente, a busca limitada, e o casamento com
+  analyzeTransitionTable.
+authorized_action: "FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -227,6 +228,9 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não declarar o nível uniforme provado antes de lake build fechar sobre ele"
+  - "Não confundir o obstáculo: é tipo dependente Fin t.next.size, não computabilidade"
+  - "Não tratar o fechamento do nível uniforme como definição de classe de complexidade"
   - "Não escrever sorry, admit ou axioma em docstring Lean: a varredura de tokens acha a própria documentação"
   - "Não tratar a Primcodable induzida como canônica: Primcodable Bool já existe no Mathlib"
   - "Não afirmar invariância da classificação sob recodificação: há um caso, não um teorema"
@@ -375,6 +379,8 @@ FOUND-MONOVARIANT-DESCENT-001       VERIFIED / APPROVED     ENCERRADO
 
 FOUND-COMPUTABILITY-BRIDGE-001      VERIFIED / APPROVED     ENCERRADO
 
+FOUND-UNIFORM-PRIMREC-001           SCOPED                  ATIVA
+
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
 NS-PRESSURE-001                     SCOPED                  nunca executado
@@ -386,11 +392,12 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
+authorized_action: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED
 ```
 
-**Nenhuma frente ativa.** Treze frentes encerradas. A escolha do
-próximo trabalho exige um gate explícito de revisão de portfólio.
+**Frente ativa: `FOUND-UNIFORM-PRIMREC-001`.** Treze frentes
+encerradas. A viabilidade da nova foi **medida por elaboração**: o núcleo
+`primrec_runList` compila.
 
 ## Por que este bloco existe
 
@@ -455,4 +462,9 @@ research_role: FORMAL_BRIDGE
 
 ## Próxima ação
 
-Aguardar gate de revisão de portfólio. Nada mais está autorizado.
+Especificar `FOUND-UNIFORM-PRIMREC-001`. Nada mais está autorizado.
+
+O obstáculo do nível uniforme **não é computabilidade** — é tipo
+dependente: `analyzeTransitionTable` atravessa `Fin t.next.size`, e
+`Primrec` não conversa com isso. A rota medida é reformular sobre
+`List Nat` e casar depois.

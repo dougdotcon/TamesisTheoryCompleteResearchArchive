@@ -804,3 +804,36 @@ decisions:
       - "nenhuma afirmacao de custo e feita"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-041
+    date: 2026-08-04
+    decision: >
+      Selecionar FOUND-UNIFORM-PRIMREC-001 como frente seguinte, e
+      acrescentar ao labctl a admissao na sequencia de gates mais a
+      entrada literal
+      FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED.
+    rationale: >
+      Das dez lacunas abertas pela ponte, CB-GAP-001 e a unica cuja
+      resolucao produz informacao algoritmica: sobre dominio infinito
+      Primrec.dom_finite nao se aplica e a conclusao passa a depender do
+      algoritmo. A viabilidade foi medida por ELABORACAO, com probe
+      descartavel de exit 0: primrec_stepList, primrec_runList e
+      primrec_validList compilam, e o obstaculo real e tipo dependente,
+      nao computabilidade.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_UNIFORM.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+      - "labctl: gate sequence admite FOUND-UNIFORM-PRIMREC-001"
+      - "LAB_STATE: prohibited_actions += 3 entradas do nivel uniforme"
+    untouched_safeguards:
+      - "nenhum dos 6 problemas em aberto muda de status"
+      - "nenhuma classe de complexidade e definida"
+      - "nenhum modelo de custo e escolhido"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-SPECTRAL-COUNTING - 2026-08-04
+
+### Selected
+
+- `FOUND-SPECTRAL-COUNTING-001`, com **corte explicito**: cobre so
+  `N(λ)`; a enumeracao monotona `ℕ → ℝ` fica como `SC-GAP-002`, aberta de
+  proposito, porque custa `500+` linhas e **nao e necessaria** para o
+  alvo.
+
+### Positive instance built BEFORE the gate
+
+- **Primeira vez neste laboratorio.** Operador diagonal em
+  `lp (fun _ : ℕ => ℂ) 2` com `dᵢ = 1/(i+1)`: compacidade **provada**
+  (~90 linhas, sem nenhuma API de `lp` para operadores), autoadjuncao
+  **provada**, espectro **infinito** provado. `exit 0`, sem `sorry`.
+
+### Trap found before it cost a gate
+
+- `N(λ)` elabora, mas seria **vacuo por junk value**: `Nat.card`,
+  `finrank` e `ncard` devolvem `0` em conjunto infinito, entao
+  `N(λ) = 0` e demonstravel e vazio sem prova de finitude. **Mesmo
+  defeito que derrubou `FOUND-MONOVARIANT-DESCENT-001`** — desta vez
+  pego antes.
+
+### The bottleneck is one theorem
+
+- *Autovalores de operador compacto nao acumulam fora de 0.* Todos os
+  ingredientes ja estao no Mathlib:
+  `IsSymmetric.orthogonalFamily_eigenspaces`,
+  `IsCompactOperator.isCompact_closure_image_closedBall`,
+  `finite_dimensional_eigenspace`.
+
+### Novelty evidence
+
+- `17` nomes candidatos sondados, **0 existem**. `4` buscas `exact?`,
+  **0 fecham**. Nao e colagem de API existente.
+
+### Not claimed
+
+- **RH nao ficou alcancavel**, a lei de Weyl **nao** esta provada, e
+  `N(λ)` sozinho nao vale nada para RH. O valor e **upstream e
+  independente**: hoje "lei de contagem de Weyl" nao tem enunciado
+  tipavel.
+
+### Locked
+
+- `authorized_action: FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-049` registrado no mesmo commit que faz sua edicao.
+
 ## ENG-RUNTIME-SOUNDNESS-002-CLOSURE - 2026-08-04
 
 ### Paid

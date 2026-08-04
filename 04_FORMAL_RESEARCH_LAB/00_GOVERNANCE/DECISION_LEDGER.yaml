@@ -1056,3 +1056,36 @@ decisions:
       - "0 mudancas de semantica"
       - "analyzeTransitionTable_sound nao removida"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-049
+    date: 2026-08-04
+    decision: >
+      Selecionar FOUND-SPECTRAL-COUNTING-001 com corte em N(lambda), e
+      acrescentar ao labctl a admissao na sequencia de gates mais a
+      entrada FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED.
+    rationale: >
+      Sondagem com exit 0 mostrou que N(lambda) elabora mas seria VACUO
+      por junk value: Nat.card e finrank devolvem 0 em conjunto infinito.
+      O gargalo e um unico teorema, nao-acumulacao de autovalores de
+      operador compacto, e todos os ingredientes ja estao no Mathlib. A
+      instancia positiva — diagonal em lp 2 com compacidade e
+      autoadjuncao PROVADAS e espectro infinito — foi construida ANTES
+      do gate, primeira vez que isso ocorre aqui. A enumeracao monotona
+      Nat -> R fica de fora por corte explicito: custa 500+ linhas e nao
+      e necessaria para o alvo.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_SPECTRAL_COUNTING.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+      - "labctl: gate sequence admite FOUND-SPECTRAL-COUNTING-001"
+      - "LAB_STATE: prohibited_actions += 2 entradas de contagem espectral"
+    untouched_safeguards:
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhuma conexao com RH e afirmada"
+      - "a lei de Weyl NAO e afirmada provada"
+      - "nenhum problema de milenio e atacado"

@@ -1220,3 +1220,48 @@ queue:
       classe, nao um ataque. Diante disso, a frente barata e devida e
       pagar a divida de soundness, cuja quarta parcela venceu nesta
       sessao.
+
+  - work_item_id: FOUND-SPECTRAL-COUNTING-001
+    title: "Contagem espectral de operadores compactos autoadjuntos"
+    track: FOUNDATIONS
+    target_statement: >
+      Provar que os autovalores de um operador compacto autoadjunto nao
+      se acumulam fora de zero, e com isso tornar N(lambda) uma funcao de
+      contagem genuina em vez de junk value.
+    expected_product: >
+      O teorema de nao-acumulacao, a finitude do conjunto de autovalores
+      acima de lambda, e N(lambda) nao-vacuo, com instancia positiva
+      concreta em lp 2.
+    dependencies: []
+    existing_assets:
+      - "Mathlib Analysis/InnerProductSpace/Spectrum.lean"
+      - "Mathlib Analysis/Normed/Operator/Compact/"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "Mathlib.Analysis.InnerProductSpace"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; fechar com N(lambda) ainda junk;
+      afirmar que a lei de Weyl foi provada; conectar a RH; abrir a
+      enumeracao Nat -> R, que e SC-GAP-002
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: SINGLE_THEOREM_BOTTLENECK_WITH_ALL_INGREDIENTS_PRESENT
+    probe_exit: 0
+    positive_instance_built_before_gate: true
+    positive_instance: "diagonal em lp (fun _ : Nat => C) 2, d_i = 1/(i+1); compacto e autoadjunto PROVADOS, espectro infinito"
+    scope_cut: "cobre so N(lambda); a enumeracao monotona e SC-GAP-002"
+    novelty_evidence: "17 nomes sondados, 0 existem; 4 exact?, 0 fecham"
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    decision_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_SPECTRAL_COUNTING.md"
+    selection_rationale: >
+      Das quatro pecas construiveis medidas, esta e a unica cuja
+      instancia positiva ja foi construida e verificada ANTES do gate,
+      e cujo gargalo e um unico teorema com todos os ingredientes
+      presentes no Mathlib. O valor e upstream e independente de RH:
+      hoje lei de contagem de Weyl nao tem enunciado tipavel.

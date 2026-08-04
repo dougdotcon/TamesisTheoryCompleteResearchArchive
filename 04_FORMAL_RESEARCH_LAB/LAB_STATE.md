@@ -1,20 +1,20 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T09:20:00-03:00
-canonical_commit: "1465c073838fef4b5028e64333826046ffd5a459"
+updated_at: 2026-08-04T09:44:00-03:00
+canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "engineering"
-active_work_item: "ENG-RUNTIME-SOUNDNESS-002"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_track: "foundations"
+active_work_item: "FOUND-SPECTRAL-COUNTING-001"
+work_status: "SCOPED"
+specification_status: "NOT_STARTED"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,9 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar revisão de portfólio. A dívida de soundness está paga na
-  origem: 4 cópias da redução viraram 0.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Especificar FOUND-SPECTRAL-COUNTING-001: o teorema de não-acumulação
+  e N(λ) não-vácuo. A instância positiva já está construída.
+authorized_action: "FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -241,6 +241,8 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não fechar contagem espectral com N(λ) ainda junk: Nat.card devolve 0 em conjunto infinito"
+  - "Não abrir a enumeração ℕ → ℝ monótona: é SC-GAP-002, e não é necessária para N(λ)"
   - "Não citar TamesisLab/TOE.lean ou YangMills.lean como conteúdo: são esqueletos de 8 linhas"
   - "Não tratar toe_smoke : True como afirmação: é o caso-limite da vacuidade"
   - "Não dizer que falta toolchain a TOE-INTERFACE-001: a base categorial é 15 de 15"
@@ -411,6 +413,8 @@ FOUND-UNIFORM-PRIMREC-001           VERIFIED / APPROVED     ENCERRADO
 
 ENG-RUNTIME-SOUNDNESS-002           VERIFIED / APPROVED     ENCERRADO
 
+FOUND-SPECTRAL-COUNTING-001         SCOPED                  ATIVA
+
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
 NS-PRESSURE-001                     SCOPED                  nunca executado
@@ -422,7 +426,7 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
+authorized_action: FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED
 ```
 
 **Frente ativa: `ENG-RUNTIME-SOUNDNESS-002`.** Quatorze encerradas.

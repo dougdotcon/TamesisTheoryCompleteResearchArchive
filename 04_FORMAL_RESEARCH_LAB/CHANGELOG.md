@@ -1,5 +1,39 @@
 # Changelog do laboratório formal
 
+## FOUND-MONOVARIANT-DESCENT-001-SPECIFICATION-REVIEW - 2026-08-04
+
+### Approved
+
+- `FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_REVIEW_APPROVED`. Sete
+  itens: **seis confirmados, um corrigido**.
+
+### Caught, and it is the second in a row
+
+```text
+derivado por script   12
+declarado             13
+soma das partes       12
+```
+
+- A decomposicao estava **correta**. O total e que estava errado, e o
+  campo `extra_negation_registrations: 1` era **espurio**, inventado para
+  a conta fechar.
+- **Segundo defeito de contagem agregada em duas frentes consecutivas.**
+  A proibicao gravada no gate anterior foi violada por mim no gate
+  seguinte ao que a criou. Registrado como tal, sem atenuacao.
+
+### Confirmed
+
+- `0 < period` **e** recuperavel da API publica, e a recuperacao **nao
+  toca frente encerrada**.
+- `strictDown_not_monovariant` compila: `Nat` e bem fundado e ainda assim
+  `k - 1` **nao** e monovariante, porque falha em zero.
+
+### Locked
+
+- `authorized_action: FOUND_MONOVARIANT_DESCENT_001_FORMALIZATION_AUTHORIZED`.
+  `0` Lean permanentes, `0` claims, `25` no ledger.
+
 ## FOUND-MONOVARIANT-DESCENT-001-SPECIFICATION - 2026-08-04
 
 ### Specified

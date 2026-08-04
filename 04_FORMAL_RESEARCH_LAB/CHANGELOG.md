@@ -1,5 +1,47 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-COST-MODEL - 2026-08-04
+
+### Measured
+
+- **O Mathlib TEM modelo de custo.** Probe `exit 0`:
+  `Turing.TM2ComputableInTime` e `Turing.TM2ComputableInPolyTime`
+  elaboram, junto com `FinTM2` e `TM2OutputsInTime`.
+- Era um quase-Bochner: **nome nao procurado**, nao teoria ausente. A
+  proibicao *nao declarar teoria ausente sem tentar elaborar* pegou o
+  caso a tempo.
+
+### And priced
+
+- `TM2ComputableInPolyTime` e `Type 1` — **estrutura de dados que carrega
+  uma maquina**, nao proposicao. Usa-la significa **construir um
+  `FinTM2` para `analyzeTransitionTable`**.
+- O unico exemplo trabalhado do Mathlib e `idComputableInPolyTime`: a
+  **identidade**, e `noncomputable`.
+- E mesmo instanciado, o produto seria uma **definicao de classe**, nao
+  um ataque. Acumular pre-requisitos nao aproxima de um resultado.
+
+### Selected
+
+- `ENG-RUNTIME-SOUNDNESS-002`. Nao a mais ambiciosa — a unica **barata e
+  devida**.
+- `analyzeTransitionTable_sound` perde o contrato `Valid`, e a reducao do
+  bloco `do` ja foi reproduzida **quatro vezes**, todas privadas, todas
+  declaradas como divida: runtime (origem), monovariantes, ponte, e
+  uniforme. Fecha `CB-GAP-004` e `UP-GAP-002`.
+- Toca frente encerrada, e por isso **esta revisao autoriza o gate**, e
+  nada alem da soundness.
+
+### Unchanged
+
+- Os `6` problemas em aberto seguem com o mesmo status. Nenhum ficou mais
+  perto.
+
+### Locked
+
+- `authorized_action: ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-046` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-UNIFORM-PRIMREC-001-RESULT-REVIEW - 2026-08-04
 
 ### Verified

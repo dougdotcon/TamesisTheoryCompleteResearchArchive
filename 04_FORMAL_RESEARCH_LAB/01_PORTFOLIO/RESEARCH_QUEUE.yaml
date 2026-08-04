@@ -1164,3 +1164,53 @@ queue:
       nada; sobre RawTransitionTable x Nat o dominio e infinito e a
       conclusao passa a depender do que a funcao faz. A viabilidade foi
       MEDIDA por elaboracao, nao estimada: o nucleo compila.
+
+  - work_item_id: ENG-RUNTIME-SOUNDNESS-002
+    title: "Alargar a soundness da analise de tabelas ao contrato inteiro"
+    track: ENGINEERING
+    target_statement: >
+      Fazer analyzeTransitionTable_sound devolver o contrato
+      CycleWitness.Valid inteiro, em vez de tres clausulas, eliminando a
+      necessidade de reproduzir a reducao do bloco do fora da frente de
+      origem.
+    expected_product: >
+      Soundness alargada na origem, com as quatro reproducoes privadas
+      substituidas por uso direto, e nenhuma assinatura publica existente
+      quebrada.
+    dependencies:
+      - ENG-FINITE-STATE-RUNTIME-001
+      - FOUND-UNIFORM-PRIMREC-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/"
+    formalization_cost: low
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 13
+    external_dependency: "nenhuma"
+    cross_track_value: moderate
+    stop_condition: >
+      quebrar assinatura publica existente; alterar semantica de
+      analyzeTransitionTable; remover o ramo internalDetectorFailure;
+      afirmar custo ou complexidade; tocar frente encerrada alem da
+      soundness autorizada
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: MEASURED_TECHNICAL_DEBT_FOUR_OCCURRENCES
+    touches_closed_front: ENG-FINITE-STATE-RUNTIME-001
+    touches_closed_front_authorized_by: PORTFOLIO_REVIEW_COST_MODEL
+    closes_gaps:
+      - CB-GAP-004
+      - UP-GAP-002
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_MAINTENANCE
+    decision_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_COST_MODEL.md"
+    selection_rationale: >
+      O modelo de custo existe no toolchain (TM2ComputableInPolyTime,
+      medido por elaboracao com exit 0), mas instancia-lo exige construir
+      um FinTM2 para analyzeTransitionTable, e o unico exemplo trabalhado
+      do Mathlib e a identidade. O produto disso seria uma DEFINICAO de
+      classe, nao um ataque. Diante disso, a frente barata e devida e
+      pagar a divida de soundness, cuja quarta parcela venceu nesta
+      sessao.

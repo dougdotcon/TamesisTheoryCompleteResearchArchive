@@ -1,0 +1,49 @@
+import TamesisLab.Foundations.UniformPrimrec
+import Mathlib.Computability.TuringMachine.Computable
+
+set_option autoImplicit false
+
+/-!
+PROBE COST — existe modelo de custo no toolchain?
+
+`UP-GAP-001` e `CB-GAP-002` dizem que nao ha modelo de custo. Isto mede
+se essa afirmacao ainda vale, ou se e um "Bochner": nome que nao foi
+procurado.
+-/
+
+namespace ProbeCOST
+
+open Turing
+
+/-! ## 1 — o que o Mathlib tem -/
+
+#check @FinTM2
+#check @TM2OutputsInTime
+#check @TM2ComputableInTime
+#check @TM2ComputableInPolyTime
+#check @TM2ComputableInPolyTime.toTM2ComputableInTime
+#check @idComputableInPolyTime
+
+/-! ## 2 — o unico exemplo trabalhado do Mathlib -/
+
+#print axioms idComputableInPolyTime
+
+/-- O exemplo do Mathlib e a IDENTIDADE. Se a unica funcao com custo
+formalizado no toolchain e `id`, a distancia ate a analise do laboratorio
+nao e uma lacuna: e uma frente inteira. -/
+noncomputable def idCost : TM2ComputableInPolyTime (fun b : Bool => [b]) (fun b : Bool => [b])
+    (id : Bool → Bool) :=
+  idComputableInPolyTime (fun b : Bool => [b])
+
+#check idCost
+
+/-! ## 3 — o que o laboratorio tem, para comparar -/
+
+open TamesisLab.Foundations.UniformPrimrec
+
+#check @primrec_analyzeTransitionTable
+
+-- a cota do certificado, que NAO e cota de recursos
+#check @TamesisLab.Foundations.ComputabilityBridge.analyzeEncodedSystem_bound
+
+end ProbeCOST

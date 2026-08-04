@@ -642,7 +642,8 @@ def validate() -> dict[str, Any]:
                       "FOUND-INVARIANT-UNREACHABILITY-001",
                       "FOUND-MONOVARIANT-DESCENT-001",
                       "FOUND-COMPUTABILITY-BRIDGE-001",
-                      "FOUND-UNIFORM-PRIMREC-001"}:
+                      "FOUND-UNIFORM-PRIMREC-001",
+                      "ENG-RUNTIME-SOUNDNESS-002"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -747,6 +748,7 @@ def validate() -> dict[str, Any]:
         "FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED",
         "FOUND_UNIFORM_PRIMREC_001_FORMALIZATION_AUTHORIZED",
         "FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED",
+        "ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

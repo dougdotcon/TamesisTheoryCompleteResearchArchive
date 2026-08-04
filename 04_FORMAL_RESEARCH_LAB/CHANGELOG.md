@@ -1,5 +1,82 @@
 # Changelog do laboratório formal
 
+## FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION - 2026-08-04
+
+### Specified
+
+- Cinco documentos, `19` declaracoes publicas congeladas (`7` definicoes,
+  `4` instancias, `8` teoremas), `1` auxiliar privado, `2` TEST_ONLY,
+  `6` testes, `28` declaracoes ao todo, `5` modulos Lean planejados mais
+  `1` agregador. Todas compilaram em probe, `exit 0`, `0` avisos.
+
+### Frozen
+
+- A ponte e uma linha: `Primcodable.ofEquiv (Fin n) (encodingEquiv e)`.
+  `CertifiedFiniteEncoding` tem exatamente os quatro campos de uma
+  equivalencia, e **e** um `S ≃ Fin n`.
+- **O resultado central e NEGATIVO.** `primrec_of_encoding` prova que
+  toda funcao que sai de um tipo com codificacao certificada e primitiva
+  recursiva, e seu corpo — `Primrec.dom_finite` — nunca consulta a
+  funcao. A classificacao `Primrec`/`Computable` e **constante** sobre o
+  dominio finito do laboratorio.
+- Logo: "o detector e `Primrec`" e verdadeiro, e **nao** porque a busca e
+  limitada. A classificacao nao distingue o detector de uma tabela de
+  consulta, e nao serve de degrau para classe de complexidade nenhuma.
+
+### Answered
+
+- As cinco perguntas de `ATTACK_READINESS.md`: `SIM` por construcao para
+  `Primcodable`; `SIM` por **finitude** para `Computable`, `Primrec` e
+  `ComputablePred`; `NAO` para cota de recursos — `baseIndex + period ≤ n`
+  limita o **certificado**, nao o custo; `NAO` para custo sem modelo de
+  maquina neste nivel.
+
+### Declared
+
+- `analyze_reduce_cb` e a **terceira** ocorrencia da mesma reducao do
+  bloco `do` — original privada no runtime, segunda em
+  `Monovariants/WitnessBounds.lean`. Declarada, nao escondida. A correcao
+  propria alarga `analyzeTransitionTable_sound` e exige gate sobre frente
+  encerrada: `CB-GAP-004`.
+- `4` declaracoes `instance`. Primeira frente com
+  `instance_declarations ≠ 0`, e a contagem esta publicada.
+
+### Declared open
+
+- `9` lacunas. `CB-GAP-001` e a unica com conteudo algoritmico: no nivel
+  uniforme, sobre `RawTransitionTable × Nat`, o dominio e infinito e
+  `dom_finite` nao se aplica. `UniformPrimrecStatement : Prop` existe
+  para provar que o enunciado **elabora**; a prova nao foi tentada.
+- Escolhido `def : Prop` em vez de `sorry` ou axioma local — o enunciado
+  fica verificadamente escrevivel sem que nada seja afirmado.
+
+### Corrected
+
+- A varredura de pegada axiomatica cobria `20` de `28` declaracoes e
+  seria publicada como integral. Refeita para `28`, cobertura `FULL`, e
+  a regra `axiom_scan_scope` foi acrescentada a governanca.
+- A prosa de `Estado atual` em `LAB_STATE.md` voltou a dizer "Nenhuma
+  frente ativa" enquanto tres frentes eram abertas e duas encerradas —
+  **reincidencia** do defeito que o proprio bloco documenta. Corrigida, e
+  a reincidencia esta registrada em vez de apagada.
+
+### Observed
+
+- `AGENTS.md` passo 7 exige relatorio em `09_SESSIONS/`. O ultimo
+  existente era `2026-08-03_2210`: oito gates passaram sem um. Registrado
+  como observacao; **nada e reescrito retroativamente**.
+
+### Not done
+
+- `0` arquivos Lean permanentes, `0` `lake build`, `0` claims, `26` no
+  ledger, `0` frentes encerradas tocadas, `0` classes de complexidade.
+- **Nenhum problema de milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+- `DEC-037` registrado no mesmo commit que faz sua edicao.
+
 ## ATTACK-READINESS - 2026-08-04
 
 ### Measured, not read

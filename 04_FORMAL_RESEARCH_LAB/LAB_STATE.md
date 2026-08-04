@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T05:03:26-03:00
-canonical_commit: "f46568d2e61d3fcce03dab5d923d2c808a80eecc"
+updated_at: 2026-08-04T05:20:30-03:00
+canonical_commit: "909f7e06d52c172b49f908c22c3d32492c50bd7d"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,8 +10,8 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-COMPUTABILITY-BRIDGE-001"
-work_status: "SCOPED"
-specification_status: "NOT_STARTED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 specification_review: "NOT_STARTED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
@@ -30,10 +30,11 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Especificar FOUND-COMPUTABILITY-BRIDGE-001: responder se a
-  codificação certificada induz Primcodable e se a análise
-  executável é Computable no sentido de Mathlib.
-authorized_action: "FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a especificação: conferir as 19 assinaturas congeladas, a
+  instância positiva em Bool, e sobretudo se o resultado central está
+  enunciado como NEGATIVO — a classificação é constante sobre domínio
+  finito e não carrega informação algorítmica.
+authorized_action: "FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -169,6 +170,13 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 governance_rules:
+  axiom_scan_scope: >
+    Uma varredura de pegada axiomática só pode ser publicada como
+    integral se cobrir TODAS as declarações do artefato, incluindo
+    auxiliares privados, TEST_ONLY e testes. O relatório publica
+    axiom_scan_declarations_covered para que a palavra "medida" seja
+    conferível sem reexecutar o probe. A primeira medição desta
+    frente cobriu 20 de 28 e seria publicada como integral.
   positive_instance_required: >
     Toda frente que introduz uma hipotese deve exibir uma INSTANCIA
     POSITIVA que a satisfaca, num tipo habitado, ou declarar
@@ -207,6 +215,13 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não apresentar a ponte de computabilidade como se ela certificasse o algoritmo"
+  - "Não usar Primrec do detector como degrau para classe de complexidade: é verdade por finitude"
+  - "Não tratar baseIndex + period <= n como cota de recursos: é cota do certificado"
+  - "Não afirmar o nível uniforme: Primrec₂ analyzeTransitionTable elabora e NÃO está provado"
+  - "Não preencher a lacuna uniforme com sorry, admit ou axioma local"
+  - "Não registrar encodingPrimcodable como instance global: ela toma argumento explícito"
+  - "Não publicar varredura de pegada axiomática sem cobrir todas as declarações"
   - "Não definir classe de complexidade antes da ponte de computabilidade existir"
   - "Não afirmar custo ou complexidade assintótica sem modelo de máquina declarado"
   - "Não tratar disponibilidade de riemannZeta como prontidão para RH"
@@ -338,6 +353,10 @@ ENG-FINITE-STATE-RUNTIME-001        VERIFIED / APPROVED     ENCERRADO
 ENG-FINITE-STATE-ENCODING-001       VERIFIED / APPROVED     ENCERRADO
 FOUND-FINITE-STATE-ABSTRACTION-001  VERIFIED / APPROVED     ENCERRADO
 FOUND-BISIMULATION-BOUNDARY-001     VERIFIED / APPROVED     ENCERRADO
+FOUND-INVARIANT-UNREACHABILITY-001  VERIFIED / APPROVED     ENCERRADO
+FOUND-MONOVARIANT-DESCENT-001       VERIFIED / APPROVED     ENCERRADO
+
+FOUND-COMPUTABILITY-BRIDGE-001      READY / READY_FOR_REVIEW  ATIVA
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
@@ -350,11 +369,11 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
+authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED
 ```
 
-**Nenhuma frente ativa.** A escolha do próximo trabalho exige um gate
-explícito de revisão de portfólio.
+**Frente ativa: `FOUND-COMPUTABILITY-BRIDGE-001`**, especificação
+congelada e aguardando revisão. Doze frentes encerradas.
 
 ## Por que este bloco existe
 
@@ -363,6 +382,10 @@ Ele esteve **desatualizado por seis gates**, descrevendo
 já registrava dez frentes encerradas. O YAML é a fonte de verdade e
 sempre esteve correto; a prosa não. Como `resume_read_order` manda ler
 este arquivo primeiro, a prosa obsoleta enganava exatamente na retomada.
+
+E **aconteceu de novo**: entre a correção acima e este gate, a prosa
+voltou a dizer "Nenhuma frente ativa" enquanto três frentes eram abertas
+e duas encerradas. A reincidência está registrada aqui em vez de apagada.
 
 ## O que a cadeia de dez frentes estabeleceu
 
@@ -385,14 +408,35 @@ consumidor, por órbita, e **não** foi tornada decidível — a tentativa foi
 formalizada em probe, compilou, e foi rejeitada por não comprar nada que
 a equação única já não comprasse.
 
+## O que a ponte de computabilidade estabeleceu
+
+```text
+CertifiedFiniteEncoding induz Primcodable        SIM, direto
+analyzeEncodedSystem e Computable e Primrec      SIM, POR FINITUDE
+a busca limitada importa para essa conclusao     NAO
+baseIndex + period <= n e cota de recursos       NAO, e do CERTIFICADO
+custo formalizavel sem modelo de maquina         NAO neste nivel
+```
+
+`Primrec.dom_finite` prova que **toda** função que sai de um tipo finito
+codificável é primitiva recursiva, sem consultar a função. A
+classificação é **constante** sobre o domínio do laboratório: ela não
+distingue o detector de uma tabela de consulta.
+
+A pergunta só readquire conteúdo no nível **uniforme**, sobre
+`RawTransitionTable × Nat`, onde o domínio é infinito. O enunciado
+`UniformPrimrecStatement` elabora; a prova **não é tentada** —
+`CB-GAP-001`.
+
 ## Novidade
 
 ```yaml
 mathematical_novelty: NONE
 algorithmic_novelty: NONE
-research_role: FORMAL_FOUNDATION
+research_role: FORMAL_BRIDGE
 ```
 
 ## Próxima ação
 
-Aguardar gate de revisão de portfólio. Nada mais está autorizado.
+Revisar a especificação de `FOUND-COMPUTABILITY-BRIDGE-001`. Nada mais
+está autorizado.

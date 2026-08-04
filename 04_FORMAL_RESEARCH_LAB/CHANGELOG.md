@@ -1,5 +1,45 @@
 # Changelog do laboratório formal
 
+## FOUND-BISIMULATION-BOUNDARY-001-SPECIFICATION-REVIEW - 2026-08-03
+
+### Approved
+
+- `FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_REVIEW_APPROVED`. Dez
+  itens conferidos, nenhuma correcao material necessaria.
+
+### Verified
+
+- **`STOP-BIS-002` testada diretamente.** A existencial do zag continua
+  no lugar:
+
+```lean
+example : Reflects abstract stepC stepA
+    ↔ ∀ c, ∃ c', stepC c = c' ∧ abstract c' = stepA (abstract c) := Iff.rfl
+```
+
+  E o contraste fecha o argumento: `simulates_iff_semiconj` **e**
+  `Iff.rfl`, e `reflects_iff_simulates` **nao e** — precisou de prova nas
+  duas direcoes. Se `Reflects` tivesse sido trivializado, os dois seriam
+  `Iff.rfl`.
+
+### Measured
+
+- **Sete de sete declaracoes sem pegada axiomatica.** Ao contrario da
+  frente anterior, nada aqui atravessa `analyzeEncodedSystem`, de modo
+  que `propext`, `Classical.choice` e `Quot.sound` nao entram.
+- Probe de revisao: `error_lines=0`, `REAL_EXIT_CODE=0`, capturado por
+  arquivo de script.
+
+### Recorded
+
+- Especificacao e revisao sao do mesmo agente, em sessoes consecutivas.
+  A revisao vale pelo que mediu.
+
+### Locked
+
+- `authorized_action: FOUND_BISIMULATION_BOUNDARY_001_FORMALIZATION_AUTHORIZED`.
+  `0` arquivos Lean permanentes, `0` claims promovidas, `23` no ledger.
+
 ## FOUND-BISIMULATION-BOUNDARY-001-SPECIFICATION - 2026-08-03
 
 ### Specified

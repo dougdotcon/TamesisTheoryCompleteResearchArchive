@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T22:54:29-03:00
-canonical_commit: "6163bd5a572fe4e3cc0c5b01da7cd3ca9bc451c2"
+updated_at: 2026-08-03T22:57:25-03:00
+canonical_commit: "a51fc14b5e6e30d03de135ad0eb9100905df413e"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,8 +11,8 @@ repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
-specification_review: "NOT_STARTED"
+specification_status: "APPROVED"
+specification_review: "APPROVED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
@@ -30,10 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a especificação da bissimulação determinística: definição
-  não trivializada de Reflects, teorema de colapso, consequências
-  negativas e a fronteira do recorte determinístico total.
-authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar Simulates, Reflects, Bisimulation, o teorema de
+  colapso e as duas negações, reutilizando o contraexemplo
+  BOOL_TO_UNIT sem alterá-lo.
+authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_FORMALIZATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390

@@ -10,6 +10,7 @@ import TamesisLab.Foundations.BisimulationBoundary
 import TamesisLab.Foundations.Invariants
 import TamesisLab.Foundations.Monovariants
 import TamesisLab.Foundations.Descent
+import TamesisLab.Foundations.ComputabilityBridge
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

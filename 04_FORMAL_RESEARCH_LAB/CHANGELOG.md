@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## FOUND-COMPUTABILITY-BRIDGE-001-FORMALIZATION - 2026-08-04
+
+### Formalized
+
+- `5` modulos mais agregador e `2` arquivos de teste, `8` arquivos novos,
+  `2` agregadores modificados. **`lake build` exit `0`, `8802` jobs,
+  `0` linhas `error:`, `0` `sorry`, `0` tokens proibidos.**
+- `29` declaracoes derivadas **da arvore instalada** batem termo a termo
+  com a especificacao congelada: `19` publicas (`7` def, `4` instance,
+  `8` teoremas), `1` auxiliar privado, `2` TEST_ONLY, `7` testes.
+
+### Measured
+
+- Pegada axiomatica: `9` declaracoes livres de axioma, `19` com
+  `propext, Classical.choice, Quot.sound`. Identica a do probe.
+- O unico `warning:` do build e **anterior a esta frente**, em
+  `RHNogo/AsymptoticCore/Incompatibility.lean:49`. Esta frente produz
+  `0`.
+
+### Corrected
+
+- A palavra `sorry` aparecia numa **docstring** de `Classification.lean`,
+  e a varredura de tokens proibidos encontrou a propria documentacao.
+  Movida para `STOP_CONDITIONS.md`, seguindo o precedente ja registrado
+  em `FOUND-CYCLE-DETECTION-001`. Correcao de documentacao: nenhuma
+  assinatura mudou.
+
+### Established
+
+- Primeira vez que o laboratorio importa `Mathlib.Computability`. A ponte
+  esta na arvore: `Mathlib.Computability.Primrec.List` e
+  `Mathlib.Computability.Halting`.
+- E o enunciado negativo sobreviveu a formalizacao:
+  `primrec_analyzeEncodedSystem` tem corpo de **uma linha**,
+  `primrec_of_encoding e _`, e este tem corpo `Primrec.dom_finite f`.
+
+### Not done
+
+- `0` claims promovidas, `26` no ledger — a promocao e do gate de
+  revisao de resultado.
+- `0` classes de complexidade, `0` afirmacoes de custo. O nivel uniforme
+  segue **enunciado e nao provado**.
+- **Nenhum problema de milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_RESULT_REVIEW_AUTHORIZED`.
+- `DEC-039` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION-REVIEW - 2026-08-04
 
 ### Reviewed

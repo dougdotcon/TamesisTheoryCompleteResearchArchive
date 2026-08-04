@@ -8,6 +8,7 @@ import TamesisLab.Foundations.FiniteStateAbstraction
 import TamesisLab.Foundations.FiniteStateAbstraction.Audit
 import TamesisLab.Foundations.BisimulationBoundary
 import TamesisLab.Foundations.Invariants
+import TamesisLab.Foundations.Monovariants
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

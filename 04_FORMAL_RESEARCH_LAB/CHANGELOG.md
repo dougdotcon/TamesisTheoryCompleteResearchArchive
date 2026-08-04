@@ -1,5 +1,51 @@
 # Changelog do laboratório formal
 
+## FOUND-MONOVARIANT-DESCENT-001-FORMALIZATION - 2026-08-04
+
+### Formalized
+
+- Quatro modulos permanentes, dois agregadores tocados so em imports,
+  dois arquivos de teste. `lake build` **exit 0**, `8789` jobs, `0`
+  linhas de erro reais.
+- `7` publicas (`1` definicao, `6` teoremas), `1` auxiliar privado, `2`
+  TEST_ONLY — **derivadas por script ANTES de escrever qualquer total**,
+  que e a proibicao criada dois gates atras e violada um gate atras.
+- `0` `Fintype`, `0` `DecidableEq`, `0` instancias, `0` tokens proibidos.
+
+### Recovered
+
+- **`0 < period` esta de volta na superficie publica.**
+  `analyzeTransitionTable_period_pos` e
+  `analyzeAbstractSystem_period_pos` recuperam a clausula que se perdia
+  entre `detectCycle?_sound` e `analyzeTransitionTable_sound`, sem tocar
+  em **nenhum** arquivo de frente encerrada.
+
+### Corrected
+
+- `lt_irrefl` nao resolve com o import minimo de `Definitions.lean`, onde
+  so entra `Mathlib.Logic.Function.Iterate`. Trocado por
+  `Nat.lt_irrefl`, do core. **Correcao de tatica: nenhuma assinatura
+  congelada mudou.**
+
+### Footprint
+
+```text
+Monovariant.iterate_lt            propext, Quot.sound
+Monovariant.no_periodic_point     propext, Quot.sound
+Monovariant.not_reachable_self    propext, Quot.sound
+analyzeAbstractSystem_period_pos  propext, Classical.choice, Quot.sound
+monovariant_not_orbitSeparating   propext, Classical.choice, Quot.sound
+strictDown_not_monovariant        propext
+```
+
+`Classical.choice` entra **apenas** no que atravessa
+`analyzeEncodedSystem`. A parte de descida pura nao o carrega.
+
+### Locked
+
+- `authorized_action: FOUND_MONOVARIANT_DESCENT_001_RESULT_REVIEW_AUTHORIZED`.
+  `0` claims, `25` no ledger, `0` frentes encerradas tocadas.
+
 ## FOUND-MONOVARIANT-DESCENT-001-SPECIFICATION-REVIEW - 2026-08-04
 
 ### Approved

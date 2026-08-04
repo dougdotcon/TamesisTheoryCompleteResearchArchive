@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:48:02-03:00
-canonical_commit: "e3337354a157cf8559271844457ae7d82d8c9bee"
+updated_at: 2026-08-04T00:51:54-03:00
+canonical_commit: "7c3e8779d289a341855101ccc5da8d27eb3f7d8a"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -13,7 +13,7 @@ active_work_item: "FOUND-MONOVARIANT-DESCENT-001"
 work_status: "READY"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
-formalization_status: "NOT_STARTED"
+formalization_status: "VERIFIED"
 result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -30,9 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Formalizar os quatro módulos permanentes, com contagem derivada
-  por script antes de escrever qualquer total.
-authorized_action: "FOUND_MONOVARIANT_DESCENT_001_FORMALIZATION_AUTHORIZED"
+  Revisar o resultado: reexecutar build e contagens, conferir a
+  pegada e promover no máximo uma claim.
+authorized_action: "FOUND_MONOVARIANT_DESCENT_001_RESULT_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390

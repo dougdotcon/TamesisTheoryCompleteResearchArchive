@@ -4,6 +4,7 @@ reviewed_at: 2026-08-04
 selected_work_item: ENG-RUNTIME-SOUNDNESS-002
 cost_model_probe_exit: 0
 cost_model_exists_in_toolchain: true
+price_measured_in: COST_MODEL_PRICE_MEASURED-2026-08-04
 ---
 
 # Revisao de portfolio — o modelo de custo, medido
@@ -50,6 +51,21 @@ para `analyzeTransitionTable`**. O unico precedente no Mathlib e `id`.
 ```text
 Primrec2 analyzeTransitionTable    FEITO, 31 declaracoes, 4 gates
 FinTM2 para a mesma funcao         frente inteira, sem precedente proximo
+```
+
+## O preco, medido depois
+
+Este documento chamou o custo de "caro". Medido em
+`COST_MODEL_PRICE_MEASURED.md`, o numero e pior do que o adjetivo:
+
+```text
+FinTM2                        14 campos, Fintype Lambda decisivo
+unico exemplo do Mathlib      20 linhas para uma maquina que NAO COMPUTA
+TM2OutputsInTime              Type, nao Prop: o traco e DADO
+segundo exemplo                NAO EXISTE em todo o Mathlib
+composicao                     proof_wanted
+ponte Partrec->TM2             nao produz FinTM2; Fintype Lambda' e FALSE
+limite polinomial              NAO-TEOREMA declarado pelo proprio Mathlib
 ```
 
 ## O veredito sobre `PVSNP-PHYS-001`

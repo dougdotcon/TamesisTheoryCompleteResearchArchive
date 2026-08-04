@@ -58,7 +58,7 @@ espectral, zero geometria algébrica.**
 |---|---|---|
 | `PVSNP-PHYS-001` | estrutural sobre computabilidade | **SIM** |
 | `RH-NOGO-001` | lei global de Weyl, cálculo pseudodiferencial | NÃO |
-| `NS-PRESSURE-001` | EDP e análise de fluidos | NÃO |
+| `NS-PRESSURE-001` | ver correção abaixo: **formal**, não bibliográfico | NÃO |
 | `YM-LIMIT-001` | QFT construtiva | NÃO |
 | `HODGE-CDK-001` | geometria algébrica | NÃO |
 | `BSD-HYP-MATRIX-001` | aritmética de curvas, Iwasawa | NÃO |
@@ -73,6 +73,20 @@ nisso, e fingir o contrário seria teatro.
 `GLOBAL-WEYL-BRIDGE-SCALAR`, `SPECIFIED_NOT_PROVED`, que exige cálculo
 pseudodiferencial e lei de contagem global. Ter o objeto não é ter a
 teoria.
+
+## CORREÇÃO de 2026-08-04 — `NS-PRESSURE-001`
+
+A afirmação abaixo, de que o primeiro passo dos cinco seria
+**bibliográfico**, foi medida e está **errada para `NS-PRESSURE-001`**.
+
+Ver `NS_PRESSURE_FIRST_STEP_MEASURED.md`. O primeiro passo é **formal**:
+relaxar `HasTemperateGrowth` para mensurabilidade mais limitação
+essencial no lema de multiplicador de Fourier, caso `L^2`, onde é
+Plancherel puro. Sem isso o projetor de Leray não existe, e sem o
+projetor não há pressão.
+
+Custo revisto de `very_high` para `high`. A tabela acima **não** foi
+reescrita: a correção fica registrada, não apagada.
 
 ## O que foi descoberto, e é a resposta pedida
 

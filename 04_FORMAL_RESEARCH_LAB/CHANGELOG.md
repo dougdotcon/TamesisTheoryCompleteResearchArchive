@@ -1,5 +1,157 @@
 # Changelog do laboratório formal
 
+## OPEN-PROBLEMS-MEASURED - 2026-08-04
+
+### Measured in parallel
+
+- **Cinco medicoes concorrentes**, todas por elaboracao, todas `exit 0`,
+  todas somente-leitura com `git_dirty=0` conferido individualmente.
+  Primeira vez que o laboratorio mede varias frentes ao mesmo tempo.
+
+### Corrected
+
+- `ATTACK_READINESS.md` classificava os cinco problemas de baixo como
+  tendo **primeiro passo bibliografico**. Medido, isso esta errado em
+  **tres dos cinco**.
+
+```text
+NS-PRESSURE-001    FORMAL   projetor de Leray            high
+RH-NOGO-001        FORMAL   enumeracao espectral         very_high
+TOE-INTERFACE-001  falta o OBJETO, nao a ferramenta      moderate
+YM-LIMIT-001       bibliografico, confirmado             very_high
+PVSNP-PHYS-001     formal, mas escala de pesquisa        very_high
+```
+
+### `TOE-INTERFACE-001` — o achado que separa
+
+- **O bloqueio nao e do toolchain.** `CategoryTheory` elabora **15 de
+  15**: `Category`, `Functor`, `Adjunction`, `Limits`, `Monad`, `Sheaf`,
+  `MonoidalCategory`, `Abelian`. O alvo da fila e especificacao
+  categorial, nao fisica, e a base esta **completa**.
+- Falta o **objeto**: nao existe definicao candidata de "regime" nem de
+  "interface" em lugar nenhum. Custo rebaixado de `very_high` para
+  **`moderate`** no passo formal.
+- E `TamesisLab/TOE.lean` tem **8 linhas**, com
+  `theorem toe_smoke : True := by trivial` — **caso-limite do defeito de
+  vacuidade**. `YangMills.lean` e identico. Os dois diretorios so tem
+  `.gitkeep`.
+
+### `RH-NOGO-001` — a lacuna era maior que o registrado
+
+- `GLOBAL-WEYL-BRIDGE-SCALAR` supunha faltar so calculo
+  pseudodiferencial. Falta **tudo**: classes de Hormander, parametrix,
+  elipticidade, Schatten, traco, Rellich-Kondrachov, medida riemanniana,
+  Laplace-Beltrami. Todo "Weyl" no Mathlib e **grupo** de Weyl.
+- Mas ha primeiro passo formal com valor proprio: estender
+  `IsSymmetric.eigenvalues` de dimensao finita para **compactos
+  autoadjuntos em Hilbert separavel**, produzindo `N(λ)`. Apoia-se em
+  dois lemas que **ja existem**, e e contribuicao upstream
+  **independente de RH**.
+
+### `YM-LIMIT-001` — tres abismos
+
+- Falta `PrincipalBundle`, `Connection`, `Curvature`: a acao de
+  Yang-Mills **classica** nao e enunciavel. Falta Bochner-Minlos: nem o
+  campo **livre** e construivel. Falta Wightman/OS: o **enunciado** do
+  gap nao existe.
+- Ter `LieGroup` + `VectorBundle` + `SchwartzMap` cria **ilusao de
+  proximidade** — vocabulario partilhado, maquinaria nenhuma.
+
+### Not claimed
+
+- **Nenhum dos 6 ficou alcancavel, e nenhum foi aberto.** Primeiro passo
+  formal nao significa primeiro passo barato. `authorized_action` nao
+  muda.
+
+## NS-PRESSURE-FIRST-STEP-MEASURED - 2026-08-04
+
+### Corrected
+
+- `ATTACK_READINESS.md` afirmava que o primeiro passo dos cinco problemas
+  de baixo seria **bibliografico**. Medido por elaboracao, `exit 0`, isso
+  esta **errado para `NS-PRESSURE-001`**: o primeiro passo e **formal**,
+  e o gargalo tem nome.
+- Custo revisto de `very_high` para **`high`**. A tabela original **nao
+  foi reescrita** — a correcao fica registrada ao lado dela.
+
+### Measured
+
+- Mathlib **tem** `H^s` via distribuicoes temperadas
+  (`TemperedDistribution.MemSobolev`, `besselPotential`), Gagliardo-
+  Nirenberg-Sobolev (`eLpNorm_le_eLpNorm_fderiv`) e Laplaciano.
+- Mathlib **nao tem**, com zero ocorrencias em toda a arvore: `Leray`,
+  `Helmholtz`, `Riesz transform`, `Calderon`, `Zygmund`, `Mikhlin`,
+  `Hormander`, `maximal function`, `Navier`, `fluid`.
+
+### The bottleneck, named
+
+- A pressao exige o **projetor de Leray**, simbolo
+  `δ_jk - ξ_jξ_k/|ξ|²` — limitado mas **descontinuo na origem**.
+- O unico lema de multiplicador disponivel,
+  `MemSobolev.fourierMultiplierCLM_of_bounded`, exige
+  `HasTemperateGrowth`, que comeca com `ContDiff ℝ ∞` **global**. A
+  hipotese falha, e nao ha rota alternativa.
+- **Primeiro passo real**: trocar `HasTemperateGrowth` por
+  mensurabilidade mais limitacao essencial, caso `L²`, onde e
+  **Plancherel puro**. Lema autocontido.
+
+### Non-vacuous
+
+- O agente construiu `IsNSSolution` do zero com primitivas e provou os
+  **dois** lados: escoamento uniforme **e** solucao, campo radial
+  **nao** e. Satisfazivel e refutavel — cumpre
+  `positive_instance_required`.
+
+### Not claimed
+
+- `NS-PRESSURE-001` **nao** ficou proximo, e **nao** foi aberto.
+  Regularidade de Navier-Stokes segue fora de alcance. A medicao corrige
+  **uma classificacao**, nada mais.
+
+## COST-MODEL-PRICE-MEASURED - 2026-08-04
+
+### Measured
+
+- `DEC-046` chamou o custo de instanciar `TM2ComputableInPolyTime` de
+  "caro". Medicao por elaboracao, `exit 0`, trocou o adjetivo por
+  numeros — e o numero e pior.
+- `FinTM2` exige **14 campos**. O unico exemplo do Mathlib custa
+  **20 linhas** para uma maquina que **nao computa nada**: `m _ := halt`,
+  para no passo 1, e `evals_in_steps` fecha com `rfl`. O piso medido e
+  **vacuo**.
+- `TM2OutputsInTime` e **`Type`, nao `Prop`**: o traco de execucao e
+  **dado a construir**, nao existencia a afirmar.
+
+### Found missing
+
+- **Nenhum segundo exemplo** em todo o Mathlib: `grep -rl FinTM2` retorna
+  1 arquivo.
+- **Nenhuma composicao**: `TM2ComputableInPolyTime.comp` e
+  `proof_wanted`. A construcao nao e modular.
+- **Nenhuma ponte utilizavel**: `ToPartrec.lean` (1290 linhas) vai de
+  `Partrec` a TM2 mas **nao produz `FinTM2`**, e `Fintype
+  PartrecToTM2.Λ'` e **FALSE** — medido, nao suposto. O Mathlib contorna
+  com `TM2.Supports`, condicao estritamente mais fraca.
+- **Nenhum limite polinomial**: o cabecalho de `ToPartrec.lean` diz
+  textualmente *"We don't prove it here"*. O limite e **nao-teorema
+  declarado**.
+- **Nenhuma codificacao reutilizavel**: `Encoding.lean` cobre `Nat`,
+  `Bool`, `List` e `Prod`. Nada para `Array`, `Except` ou struct.
+
+### Verdict
+
+- Instanciar o modelo de custo para `analyzeTransitionTable` e frente de
+  **escala de pesquisa, 4 digitos de linhas, com risco de nao fechar** —
+  e exigiria fazer primeiro algo que **o Mathlib nunca fez para funcao
+  nenhuma**: limite de passos polinomial sobre uma TM2 concreta.
+- O laboratorio nao estaria aplicando teoria existente. Estaria
+  criando-a.
+
+### Unchanged
+
+- `PVSNP-PHYS-001` continua `SCOPED`. Nenhum gate foi aberto por esta
+  medicao, e `authorized_action` nao muda.
+
 ## ENG-RUNTIME-SOUNDNESS-002-SPECIFICATION - 2026-08-04
 
 ### Specified

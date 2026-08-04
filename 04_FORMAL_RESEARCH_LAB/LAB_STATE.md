@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T08:26:00-03:00
+updated_at: 2026-08-04T08:41:00-03:00
 canonical_commit: "1465c073838fef4b5028e64333826046ffd5a459"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -242,6 +242,13 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não citar TamesisLab/TOE.lean ou YangMills.lean como conteúdo: são esqueletos de 8 linhas"
+  - "Não tratar toe_smoke : True como afirmação: é o caso-limite da vacuidade"
+  - "Não dizer que falta toolchain a TOE-INTERFACE-001: a base categorial é 15 de 15"
+  - "Não reduzir a lacuna de RH-NOGO-001 a pseudodiferencial: falta Weyl espectral inteiro"
+  - "Não repetir que o primeiro passo de NS-PRESSURE-001 é bibliográfico: medido, é formal"
+  - "Não tratar TM2ComputableInPolyTime como aplicável: o limite polinomial é não-teorema no Mathlib"
+  - "Não citar ToPartrec como ponte para FinTM2: Fintype Λ' é FALSE, medido"
   - "Não afirmar que falta modelo de custo ao toolchain: TM2ComputableInPolyTime elabora"
   - "Não confundir existir com ser barato: instanciar o custo exige construir um FinTM2"
   - "Não tratar acúmulo de pré-requisitos como aproximação de um ataque"

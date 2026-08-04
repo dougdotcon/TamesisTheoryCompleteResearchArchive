@@ -1035,3 +1035,49 @@ queue:
       nenhum. A alternativa que estava mentalmente selecionada, combinar
       invariante com monovariante, foi abandonada: combinar uma peca vacua
       com outra produziria duas pecas vacuas.
+
+  - work_item_id: FOUND-COMPUTABILITY-BRIDGE-001
+    title: "Ponte entre a execucao certificada e a hierarquia de computabilidade"
+    track: FOUNDATIONS
+    target_statement: >
+      Determinar se CertifiedFiniteEncoding induz Primcodable, se a
+      analise executavel do laboratorio e Computable no sentido de
+      Mathlib, e se a busca limitada do detector e Primrec.
+    expected_product: >
+      Respostas verificaveis em Lean para as cinco perguntas registradas
+      em ATTACK_READINESS.md, com instancia positiva para cada hipotese
+      introduzida.
+    dependencies:
+      - ENG-FINITE-STATE-ENCODING-001
+      - FOUND-CYCLE-DETECTION-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateEncoding/"
+      - "05_FORMAL/lean/TamesisLab/Foundations/CycleDetection/"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 11
+    external_dependency: "Mathlib.Computability"
+    cross_track_value: very_high
+    stop_condition: >
+      definir classe de complexidade; afirmar custo ou complexidade
+      assintotica; alegar qualquer coisa sobre P vs NP; tratar
+      disponibilidade de objeto como prontidao de teoria; fechar sem
+      instancia positiva
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: ONLY_PATH_WHERE_CLOSED_FRONTS_TRANSFER
+    capability_probe_evidence: "ComputablePred, Nat.Partrec, Nat.Partrec.Code e Turing.TM2.Stmt elaboram; nenhum arquivo sob TamesisLab os menciona"
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_BRIDGE
+    decision_document: "01_PORTFOLIO/ATTACK_READINESS.md"
+    selection_rationale: >
+      Dos seis itens nunca executados, cinco exigem analise, EDP,
+      geometria algebrica ou aritmetica de curvas, e o laboratorio tem
+      zero disso em arvore propria: o primeiro passo neles seria
+      bibliografico. O sexto, PVSNP-PHYS-001, e estrutural sobre
+      computabilidade, e exige uma nocao formalizada de computacao que o
+      laboratorio nao possui apesar de ter execucao certificada. Esta
+      ponte e o pre-requisito, e NAO e ataque a problema nenhum.

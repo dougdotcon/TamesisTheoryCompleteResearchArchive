@@ -645,3 +645,30 @@ decisions:
       - "nenhum arquivo Lean de frente encerrada e modificado"
       - "nenhuma entrada historica do CHANGELOG e reescrita"
       - "a claim nao e removida: recebe bloco de correcao"
+  - decision_id: DEC-036
+    date: 2026-08-04
+    decision: >
+      Duas edicoes literais em labctl.py, sem wildcard: allowlist para o
+      gate de especificacao de FOUND-COMPUTABILITY-BRIDGE-001 e admissao
+      na sequencia de gates.
+    rationale: >
+      A avaliacao de prontidao ATTACK_READINESS mediu por ELABORACAO, nao
+      por leitura, o que o toolchain tem. Mathlib fornece ComputablePred,
+      Nat.Partrec, Nat.Partrec.Code e maquinas de Turing, e nenhum arquivo
+      sob TamesisLab menciona qualquer um deles. Ligar a maquina executavel
+      certificada do laboratorio a essa hierarquia e o unico caminho em que
+      as doze frentes encerradas transferem para um problema em aberto.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/ATTACK_READINESS.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+      - "labctl: gate sequence admite FOUND-COMPUTABILITY-BRIDGE-001"
+    untouched_safeguards:
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"
+      - "nenhuma classe de complexidade e definida nesta selecao"

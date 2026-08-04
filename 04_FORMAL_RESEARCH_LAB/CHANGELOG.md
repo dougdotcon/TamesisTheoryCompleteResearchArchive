@@ -1,5 +1,64 @@
 # Changelog do laboratório formal
 
+## ATTACK-READINESS - 2026-08-04
+
+### Measured, not read
+
+- A prontidao foi medida por **elaboracao**, nao por leitura de
+  documentos: um probe que tenta `#check` nos objetos de que cada
+  problema precisa.
+
+```text
+riemannZeta, riemannZeta_one_sub, completedRiemannZeta   ELABORAM
+InnerProductSpace, MeasureTheory.Measure, fderiv         ELABORAM
+Turing.TM2.Stmt, Nat.Partrec, Nat.Partrec.Code           ELABORAM
+ComputablePred                                            ELABORA
+```
+
+- Correcao de metodo registrada: `MeasureTheory.Integral.Bochner` **nao
+  tem `.olean`** porque o modulo foi dividido em versoes recentes. Isso e
+  **nome obsoleto, nao lacuna de teoria** — e so se descobre elaborando.
+
+### Found
+
+- **As duas metades nunca se tocaram.** O laboratorio prova coisas sobre
+  sistemas finitos **executaveis e certificados**; o Mathlib tem
+  `ComputablePred` e `Nat.Partrec`; e **nenhum arquivo sob `TamesisLab/`
+  menciona `Computable`, `Partrec` ou `Turing`**.
+
+### Verdict, unflattering
+
+- **O laboratorio NAO esta pronto para atacar nenhum dos seis.** Cinco
+  exigem analise, EDP, geometria algebrica ou aritmetica de curvas, e a
+  arvore propria tem **zero** disso: o primeiro passo neles e
+  bibliografico, com custo `very_high` declarado desde 2026-07-31.
+- `riemannZeta` elaborar **nao** e prontidao para RH: a lacuna congelada
+  e `GLOBAL-WEYL-BRIDGE-SCALAR`, que exige calculo pseudodiferencial.
+  **Ter o objeto nao e ter a teoria.**
+
+### The five checkable questions
+
+1. `analyzeEncodedSystem` e `ComputablePred`-compativel?
+2. `CertifiedFiniteEncoding S n` induz `Primcodable S`?
+3. O detector, sendo busca limitada, e `Primrec` e nao so `Computable`?
+4. A cota `baseIndex + period <= n` da limite de RECURSOS?
+5. Existe nocao de custo formalizavel sem comprometer-se com um modelo?
+
+Nenhuma e programa de pesquisa. Todas tem resposta verificavel em Lean, e
+**nenhuma foi respondida**.
+
+### Selected
+
+- **`FOUND-COMPUTABILITY-BRIDGE-001`**, o unico caminho em que as doze
+  frentes encerradas transferem para um problema em aberto. **Nao e
+  ataque**: e pre-requisito, e o caminho mais curto custa no minimo esta
+  ponte mais uma frente de recursos, e entao **reavaliacao**.
+
+### Locked
+
+- `authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-036` registrado no mesmo commit que faz suas edicoes.
+
 ## LAB-CORR-MONOVARIANT-VACUITY-001 - 2026-08-04
 
 ### Recorded as a theorem, not as errata

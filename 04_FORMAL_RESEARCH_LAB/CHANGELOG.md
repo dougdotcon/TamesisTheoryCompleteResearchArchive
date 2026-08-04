@@ -1,5 +1,55 @@
 # Changelog do laboratório formal
 
+## FOUND-ELLIPTIC-HEIGHT-001-CLOSURE - 2026-08-04
+
+### Closed
+
+- **Obrigacao D, todos os oito ramos.** `lake build` exit `0`, `8814`
+  jobs, `361` linhas, `0` `sorry`. Nada ficou em aberto.
+
+### Unconditional now
+
+- `parallelogram` — a lei do paralelogramo aproximada, **sem hipotese**
+  alem de `AdmissibleAbsValues`.
+- `torsion_finite` — **a finitude da torcao de `E(K)` sai SEM qualquer
+  forma de Mordell-Weil fraco.** Era a previsao da medicao, confirmada.
+- `pecaC_conditional_on_F` isola **F como a unica hipotese restante**.
+
+### Discharges Mathlib TODOs
+
+- `NumberTheory/Height/EllipticCurve.lean`: os **3 de 3** itens.
+- `Affine/AddSubMap.lean`: provado no nivel de x-coordenadas, que e
+  exatamente o enunciado do docstring.
+
+### Method prediction was wrong
+
+- Eu previ `field_simp; ring`. **Falha** — rebenta num termo com
+  `(4y²+4a₁xy+…)⁻¹` espalhado.
+- A rota: limpar denominadores **um fator por vez**, tratar `addX` como
+  **atomo**, e fechar com `linear_combination` usando as duas equacoes de
+  Weierstrass como **certificados de pertinencia ao ideal**.
+- **O gargalo era achar os multiplicadores, nao prova-los.** Sem CAS no
+  ambiente, foram obtidos com um redutor polinomial multivariado escrito
+  em **Python puro**, ~90 linhas, todos com resto `0`.
+
+### Cost revised
+
+```text
+antes   moderate-high, 300-600 linhas, dias a semana
+agora   pequeno: 120 linhas de teorema, uma sessao
+```
+
+### Honest caveat
+
+- E um probe promovido em estilo de laboratorio, **nao um PR ao
+  Mathlib**. Portar exige namespaces corretos, reduzir os
+  `linear_combination` gigantes, e as variantes `map`/`baseChange`.
+
+### Not claimed
+
+- **Mordell-Weil NAO esta provado** — falta F, escala de meses. BSD
+  **nao** ficou alcancavel. **Nenhum problema de milenio atacado.**
+
 ## FOUND-FOURIER-MULTIPLIER-L2-001-CLOSURE - 2026-08-04
 
 ### Corrected — minha propria especificacao era vacua

@@ -1144,3 +1144,35 @@ decisions:
       - "o projetor de Leray NAO e afirmado construido"
       - "Navier-Stokes NAO e afirmado alcancavel"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-052
+    date: 2026-08-04
+    decision: >
+      Encerrar FOUND-ELLIPTIC-HEIGHT-001 com a obrigacao D fechada em
+      todos os ramos, e registrar que a lei do paralelogramo e a
+      finitude da torcao ficaram INCONDICIONAIS.
+    rationale: >
+      lake build exit 0, 8814 jobs, 361 linhas, zero sorry. Os oito ramos
+      de D fecharam, e com eles os tres itens do TODO de
+      NumberTheory/Height/EllipticCurve.lean. A finitude da torcao de
+      E(K) sai sem qualquer forma de Mordell-Weil fraco, confirmando a
+      previsao da medicao. A previsao de metodo estava errada: field_simp
+      ring falha, e a rota e limpar denominadores um fator por vez com
+      linear_combination usando as equacoes de Weierstrass como
+      certificados de ideal. O gargalo real foi achar os multiplicadores,
+      obtidos com um redutor polinomial escrito em Python por ausencia de
+      CAS. Estimativa revista de moderate-high para pequeno.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/EllipticHeight.lean"
+      - "LAB_STATE.md"
+      - "02_FOUNDATIONS/15_ELLIPTIC_HEIGHT/FOUND_ELLIPTIC_HEIGHT_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: prohibited_actions += 3 entradas de altura eliptica"
+      - "desvio de protocolo declarado: 4 gates em 1 commit"
+    untouched_safeguards:
+      - "Mordell-Weil NAO e afirmado provado: falta F"
+      - "BSD NAO e afirmado alcancavel"
+      - "o probe promovido NAO e apresentado como PR ao Mathlib"
+      - "nenhum problema de milenio e atacado"

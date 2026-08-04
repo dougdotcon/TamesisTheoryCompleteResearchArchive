@@ -1,0 +1,59 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-ELLIPTIC-HEIGHT-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: APPROVED
+formalization_status: VERIFIED
+result_review: APPROVED
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+research_role: FORMAL_FOUNDATION
+formalization:
+  lean_modules_created: 1
+  file_lines: 361
+  lake_build_exit: 0
+  lake_build_jobs: 8814
+  sorry_declarations: 0
+  key_theorem_lines: 120
+  compile_seconds: 6.7
+result:
+  obligation_closed: D
+  branches_closed: 8
+  branches_open: 0
+  unconditional_corollaries:
+    - parallelogram
+    - torsion_finite
+  torsion_needs_weak_mordell_weil: false
+  remaining_hypothesis_for_FG: F
+discharges_mathlib_todo:
+  - "NumberTheory/Height/EllipticCurve.lean: 3 de 3 itens"
+  - "Affine/AddSubMap.lean: no nivel de x-coordenadas"
+method_correction:
+  predicted: "field_simp; ring sobre funcoes racionais grandes"
+  actual: "FALHA; rota e limpar denominadores um fator por vez + linear_combination com as equacoes de Weierstrass como certificados de ideal"
+  real_bottleneck: "achar os multiplicadores, nao prova-los"
+  tooling: "redutor polinomial multivariado em Python puro, ~90 linhas, por ausencia de CAS"
+cost_estimate_revised:
+  before: "moderate-high, 300-600 linhas, dias a semana"
+  after: "pequeno, 120 linhas, uma sessao"
+positive_instance:
+  curve: "y^2 = x^3 + 1 sobre Q"
+  points: "Pa = (2,3), Pb = (0,1)"
+  non_degenerate: "D_lhs_at_Pa_Pb = ![-8,4,4] != 0"
+gate_combination:
+  declared: true
+  gates_combined: 4
+mathlib_pr_ready: false
+mathlib_pr_gaps:
+  - "namespaces"
+  - "linear_combination gigantes"
+  - "variantes map e baseChange"
+claims:
+  promoted: 0
+  ledger_total: 28
+prohibitions:
+  bsd_reachable: FORBIDDEN
+  mordell_weil_proved: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

@@ -1,5 +1,52 @@
 # Changelog do laboratório formal
 
+## FOUND-INVARIANT-UNREACHABILITY-001-SPECIFICATION - 2026-08-04
+
+### Specified
+
+- Cinco documentos, `8` declaracoes publicas congeladas, `2` TEST_ONLY
+  residentes na biblioteca, `4` modulos Lean planejados.
+- **Todas as assinaturas ja compilaram em probe**, `exit 0`. Congela-las
+  nao e aposta.
+
+### Frozen
+
+- `Invariant` e definicionalmente `Function.Semiconj abstract stepC id`.
+  `Invariant.semiconj` e o proprio termo `h` — sem `Iff`, sem transporte,
+  sem conversao. A ponte esta **exposta** porque e o conteudo da frente.
+- `invariant_orbitSeparating_iff_fixedPoint` e a declaracao central: para
+  abstracoes invariantes, a condicao de reflexao vale **exatamente nos
+  pontos fixos**.
+
+### Bounded
+
+- `0` typeclasses no nucleo. `Fintype` e `DecidableEq` **nao** aparecem
+  em declaracao nenhuma. A instancia usa `Int x Int`, **infinito nas duas
+  coordenadas**, escolha deliberada para que ninguem leia a ferramenta
+  como dependente de finitude.
+- `Classical.choice` nao e esperado: a frente nao atravessa
+  `analyzeEncodedSystem`, nao ha `Array`, tabela nem execucao.
+
+### Declared open
+
+- `10` lacunas abertas. `INV-GAP-001`, a completude, e a honesta: a
+  reciproca e **vacuamente verdadeira** pelo invariante mais fino, e
+  portanto nao diz nada. A pergunta com conteudo — existe invariante
+  separador *calculavel* ou de forma restrita — fica **aberta**.
+- `INV-GAP-009`, a bibliografia de argumentos de invariante em
+  combinatoria, fica **deliberadamente aberta**.
+
+### Not done
+
+- `0` arquivos Lean permanentes, `0` `lake build`, `0` claims promovidas,
+  `24` no ledger, `0` frentes encerradas tocadas.
+- **Nenhum problema de milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+- `DEC-028` registrado no mesmo commit que faz sua edicao.
+
 ## PORTFOLIO-REVIEW-INVARIANT-TOOLKIT - 2026-08-04
 
 ### Criterion

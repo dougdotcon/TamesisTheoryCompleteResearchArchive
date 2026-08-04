@@ -2,12 +2,12 @@ schema: tamesis-work-item-status/1
 work_item_id: FOUND-COMPUTABILITY-BRIDGE-001
 track: FOUNDATIONS
 work_status: READY
-specification_status: READY_FOR_REVIEW
-specification_review: NOT_STARTED
+specification_status: APPROVED
+specification_review: APPROVED
 formalization_status: NOT_STARTED
 result_review: NOT_STARTED
 extension_status: NOT_AUTHORIZED
-authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED
+authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_FORMALIZATION_AUTHORIZED
 selection_criterion: ONLY_PATH_WHERE_CLOSED_FRONTS_TRANSFER
 research_role: FORMAL_BRIDGE
 specification:
@@ -19,30 +19,51 @@ specification:
   public_theorems: 8
   private_helpers: 1
   test_only_library_resident: 2
-  tests_planned: 6
-  declarations_total: 28
-  typeclasses_required_of_consumer: 0
+  tests_planned: 7
+  declarations_total: 29
+  typeclasses_required_on_main_path: 0
+  typeclasses_required_by_generic_lemma: 1
   instance_declarations: 4
+  instance_declarations_preexisting_in_lab: 22
   requires_fintype_concrete: false
   requires_decidable_eq: false
   signatures_frozen: true
 probe:
-  declarations_compiled: 28
+  declarations_compiled: 29
   declarations_public: 19
   declarations_private: 1
   declarations_test_only_library_resident: 2
-  declarations_tests: 6
+  declarations_tests: 7
   count_source: DERIVED_BY_SCRIPT
+  count_corrected_in_gate: FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION-REVIEW
   partition_check: PARTITION_OK
   probe_exit: 0
   probe_error_lines: 0
   probe_warning_lines: 0
   versioned_tree_touched: false
+  reexecuted_in_review_gate: true
   axiom_footprint_measured: true
   axiom_scan_coverage: FULL
-  axiom_scan_declarations_covered: 28
+  axiom_scan_declarations_covered: 29
   declarations_axiom_free: 9
-  declarations_with_infrastructural_footprint: 19
+  declarations_with_infrastructural_footprint: 20
+specification_review_record:
+  defects_found: 4
+  defects_corrected: 4
+  signatures_changed: 0
+  defects:
+    - id: SPEC-REV-CB-001
+      kind: FALSE_PRIMACY_CLAIM
+      detail: "declarava ser a primeira frente com instancias; a biblioteca ja tinha 22 em 6 arquivos"
+    - id: SPEC-REV-CB-002
+      kind: IMPRECISE_FIELD
+      detail: "typeclasses_required_of_consumer nao separava caminho principal de lema generico"
+    - id: SPEC-REV-CB-003
+      kind: TEST_THAT_DOES_NOT_TEST
+      detail: "boolEncoding_bound_concrete era decidivel por avaliacao e passaria sem o teorema"
+    - id: SPEC-REV-CB-004
+      kind: UNDECLARED_HAZARD
+      detail: "a Primcodable induzida nao e canonica; Primcodable Bool ja existe no Mathlib"
 external_dependency:
   package: Mathlib
   modules_used:
@@ -62,6 +83,7 @@ answers:
     finito do laboratorio, logo nao carrega informacao algoritmica.
     A pergunta so tem conteudo no nivel uniforme, sobre
     RawTransitionTable x Nat, e esse nivel NAO e provado aqui.
+  independence_of_encoding: DEMONSTRATED_IN_ONE_CASE_NOT_PROVED_IN_GENERAL
 positive_instance:
   required_by: positive_instance_required
   type: Bool
@@ -69,6 +91,7 @@ positive_instance:
   inhabited: true
   verification_method: DECIDE_BY_EVALUATION
   vacuous_case_named: isEmpty_of_encoding_zero
+  bound_test_quantified: true
 duplication_declared:
   helper: analyze_reduce_cb
   occurrence_index: 3
@@ -79,17 +102,21 @@ duplication_declared:
   closed_front_files_touched: 0
   proper_fix_gap: CB-GAP-004
 gaps:
-  gaps_total: 9
+  gaps_total: 10
   gaps_closed: 0
-  gaps_open: 9
+  gaps_open: 10
+  opened_in_review:
+    - CB-GAP-010
   deliberately_open:
     - CB-GAP-001
     - CB-GAP-002
     - CB-GAP-009
 stop_conditions:
-  declared: 12
-  tested_by_anticipation: 12
+  declared: 13
+  tested_by_anticipation: 13
   triggered: 0
+  opened_in_review:
+    - STOP-CB-013
 claims:
   promoted: 0
   claim_candidate: COMPUTABILITY-CLASSIFICATION-VACUITY-FORMAL-001
@@ -101,6 +128,8 @@ prohibitions:
   p_vs_np_claim: FORBIDDEN
   uniform_level_claim: FORBIDDEN
   algorithm_certification_claim: FORBIDDEN
+  canonicity_claim: FORBIDDEN
+  encoding_invariance_claim: FORBIDDEN
   millennium_connection: FORBIDDEN
 mathematical_novelty: NONE
 algorithmic_novelty: NONE

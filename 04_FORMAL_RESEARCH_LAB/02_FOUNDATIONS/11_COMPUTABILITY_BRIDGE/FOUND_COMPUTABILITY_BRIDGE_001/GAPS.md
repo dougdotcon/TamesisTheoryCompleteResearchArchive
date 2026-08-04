@@ -1,7 +1,7 @@
 ---
 document_id: FOUND-COMPUTABILITY-BRIDGE-001-GAPS
 work_item_id: FOUND-COMPUTABILITY-BRIDGE-001
-gaps_opened: 9
+gaps_opened: 10
 gaps_closed_at_specification: 0
 ---
 
@@ -18,6 +18,7 @@ gaps_closed_at_specification: 0
 | `CB-GAP-007` | `Primcodable` para `CertifiedFiniteAbstraction` | ABERTA |
 | `CB-GAP-008` | definição de `P_phys` e `NP_phys` de `PVSNP-PHYS-001` | ABERTA |
 | `CB-GAP-009` | bibliografia de teoria da computação | **DELIBERADAMENTE ABERTA** |
+| `CB-GAP-010` | a `Primcodable` induzida não é canônica | ABERTA |
 
 ## `CB-GAP-001`, que é a lacuna com conteúdo
 
@@ -44,6 +45,22 @@ comprometer-se com um modelo — e comprometer-se está fora do recorte.
 
 A lacuna fica aberta de propósito: fechá-la é escolher um modelo, e
 escolher um modelo é decisão de portfólio, não de frente.
+
+## `CB-GAP-010`, aberta pela revisão
+
+`Primcodable Bool` já existe no Mathlib, e `encodingPrimcodable
+boolEncoding` é **outra** instância. `Primrec` é um predicado sobre a
+instância: enunciados sob uma não são, sintaticamente, enunciados sob a
+outra.
+
+Aqui a diferença não morde, e `boolEncoding_primrec_canonical` prova
+isso — sob a canônica a conclusão é a mesma, pela mesma linha. Mas o
+laboratório **não** enunciou nenhuma invariância geral, e afirmá-la está
+proibido por `STOP-CB-013`.
+
+Fechar a lacuna seria provar que duas codificações certificadas do mesmo
+tipo induzem a mesma classe `Primrec`. É irmã de `CB-GAP-005`, a
+invariância sob recodificação, e nenhuma das duas fecha aqui.
 
 ## `CB-GAP-004`, a dívida de API que já cobrou juros
 

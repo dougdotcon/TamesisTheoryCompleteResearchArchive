@@ -8,11 +8,14 @@ public_instances: 4
 public_theorems: 8
 private_helpers: 1
 test_only_declarations: 2
-tests: 6
-declarations_total: 28
+tests: 7
+declarations_total: 29
 count_source: DERIVED_BY_SCRIPT
-typeclasses_required: 0
+count_corrected_in_gate: FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION-REVIEW
+typeclasses_required_on_main_path: 0
+typeclasses_required_by_generic_lemma: 1
 instance_declarations: 4
+instance_declarations_preexisting_in_lab: 22
 probe_exit: 0
 probe_error_lines: 0
 probe_warning_lines: 0
@@ -85,8 +88,17 @@ instance instPrimcodableRawTransitionTable : Primcodable RawTransitionTable
 construtor é descartado, e o Mathlib não tem `Primcodable Unit` que
 tornasse a soma tripla mais natural.
 
-Quatro `instance` são declaradas. É a primeira frente do laboratório com
-`instance_declarations ≠ 0`, e a contagem está aqui em vez de escondida.
+Quatro `instance` são declaradas. A biblioteca já tem **22**, em seis
+arquivos — `CycleWitness.decidableValid`, `Fintype Regime3`,
+`Monoid Shift3`, `MulAction Shift3 Regime3` e as dos contraexemplos.
+Ambas as contagens são derivadas por script.
+
+**A instância induzida não é canônica.** `Primcodable Bool` já existe no
+Mathlib e é *diferente* de `encodingPrimcodable boolEncoding`. Enunciados
+sob uma não são, sintaticamente, enunciados sob a outra. Ver
+`CB-GAP-010`, `STOP-CB-013` e o teste `boolEncoding_primrec_canonical`,
+que mostra que aqui a diferença não morde — porque quem faz o trabalho é
+a finitude, não a codificação.
 
 ## Classification.lean — 1 definição, 4 teoremas
 
@@ -144,7 +156,7 @@ escondida, e a correção própria — alargar
 exige gate sobre frente encerrada e **não está autorizada**. Ver
 `CB-GAP-004`.
 
-## Instance.lean — 2 TEST_ONLY, 6 testes
+## Instance.lean — 2 TEST_ONLY, 7 testes
 
 ```lean
 def boolEncoding : CertifiedFiniteEncoding Bool 2
@@ -153,12 +165,24 @@ def emptyEncoding : CertifiedFiniteEncoding Empty 0
 theorem boolEncoding_nonempty : Nonempty Bool
 theorem boolEncoding_analysis_concrete :
     analyzeEncodedSystem boolEncoding not true = .ok ⟨0, 2⟩
-theorem boolEncoding_bound_concrete :
-    (⟨0, 2⟩ : CycleWitness).baseIndex + (⟨0, 2⟩ : CycleWitness).period ≤ 2
+theorem boolEncoding_bound_applies :
+    ∀ w : CycleWitness, analyzeEncodedSystem boolEncoding not true = .ok w →
+      w.baseIndex + w.period ≤ 2
 theorem boolEncoding_primrec : Primrec (analyzeEncodedSystem boolEncoding not)
+theorem boolEncoding_primrec_canonical :
+    Primrec (analyzeEncodedSystem boolEncoding not)
 theorem boolEncoding_computable : Computable (analyzeEncodedSystem boolEncoding not)
 theorem emptyEncoding_isEmpty : IsEmpty Empty
 ```
+
+`boolEncoding_bound_applies` é **quantificada sobre `w`** de propósito. A
+primeira versão enunciava `0 + 2 ≤ 2`, decidível por avaliação, e teria
+passado com o teorema da cota removido do arquivo. Corrigido na revisão.
+
+`boolEncoding_primrec` e `boolEncoding_primrec_canonical` diferem
+**apenas** na instância `Primcodable Bool` usada — a da frente e a do
+Mathlib. As duas provas têm uma linha, e é o mesmo ponto negativo visto
+de outro ângulo.
 
 **A instância positiva exigida pela governança.** `Bool` é habitado,
 `n = 2 > 0`, e `boolEncoding_analysis_concrete` é decidida por avaliação
@@ -172,8 +196,8 @@ caso vácuo e o caso positivo esteja escrito no mesmo arquivo.
 publicas             19   (7 definicoes, 4 instancias, 8 teoremas)
 auxiliar privado      1
 TEST_ONLY residentes  2   (definicoes)
-testes                6   (teoremas)
-total                28
+testes                7   (teoremas)
+total                29
 ```
 
 Derivada por script sobre o arquivo do probe, com verificação de
@@ -188,13 +212,13 @@ SEM AXIOMA (9)
   isEmpty_of_encoding_zero runtimeCycleErrorEquiv  boolEncoding
   emptyEncoding            boolEncoding_nonempty   emptyEncoding_isEmpty
 
-propext, Classical.choice, Quot.sound (19)
+propext, Classical.choice, Quot.sound (20)
   todas as demais
 ```
 
-Medida por `#print axioms` sobre as **28** declarações — cobertura
-`FULL`, não amostra. A primeira medição cobriu 20 e teria sido publicada
-como se fosse integral; foi refeita antes do commit.
+Medida por `#print axioms` sobre as **29** declarações — cobertura
+`FULL`, não amostra. A primeira medição cobriu 20 de 28 e teria sido
+publicada como se fosse integral; foi refeita antes do commit.
 
 `Classical.choice` entra pela infraestrutura do Mathlib e por
 `analyzeEncodedSystem`; sua remoção é explicitamente proibida.

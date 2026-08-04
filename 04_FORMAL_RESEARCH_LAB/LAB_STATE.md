@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T05:20:30-03:00
+updated_at: 2026-08-04T05:38:00-03:00
 canonical_commit: "909f7e06d52c172b49f908c22c3d32492c50bd7d"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -12,7 +12,7 @@ active_track: "foundations"
 active_work_item: "FOUND-COMPUTABILITY-BRIDGE-001"
 work_status: "READY"
 specification_status: "READY_FOR_REVIEW"
-specification_review: "NOT_STARTED"
+specification_review: "APPROVED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
@@ -30,11 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a especificação: conferir as 19 assinaturas congeladas, a
-  instância positiva em Bool, e sobretudo se o resultado central está
-  enunciado como NEGATIVO — a classificação é constante sobre domínio
-  finito e não carrega informação algorítmica.
-authorized_action: "FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar FOUND-COMPUTABILITY-BRIDGE-001: cinco módulos mais
+  agregador, 29 declarações, e lake build com exit 0.
+authorized_action: "FOUND_COMPUTABILITY_BRIDGE_001_FORMALIZATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -215,6 +213,10 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não tratar a Primcodable induzida como canônica: Primcodable Bool já existe no Mathlib"
+  - "Não afirmar invariância da classificação sob recodificação: há um caso, não um teorema"
+  - "Não publicar afirmação de primazia sem derivá-la: a biblioteca já tinha 22 instâncias"
+  - "Não aceitar teste cujo enunciado passe com o teorema removido do arquivo"
   - "Não apresentar a ponte de computabilidade como se ela certificasse o algoritmo"
   - "Não usar Primrec do detector como degrau para classe de complexidade: é verdade por finitude"
   - "Não tratar baseIndex + period <= n como cota de recursos: é cota do certificado"
@@ -411,7 +413,7 @@ a equação única já não comprasse.
 ## O que a ponte de computabilidade estabeleceu
 
 ```text
-CertifiedFiniteEncoding induz Primcodable        SIM, direto
+CertifiedFiniteEncoding induz Primcodable        SIM, direto (nao canonica)
 analyzeEncodedSystem e Computable e Primrec      SIM, POR FINITUDE
 a busca limitada importa para essa conclusao     NAO
 baseIndex + period <= n e cota de recursos       NAO, e do CERTIFICADO

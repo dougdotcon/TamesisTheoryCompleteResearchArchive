@@ -1,8 +1,8 @@
 ---
 document_id: FOUND-COMPUTABILITY-BRIDGE-001-STOP-CONDITIONS
 work_item_id: FOUND-COMPUTABILITY-BRIDGE-001
-stop_conditions_declared: 12
-tested_by_anticipation: 12
+stop_conditions_declared: 13
+tested_by_anticipation: 13
 triggered: 0
 ---
 
@@ -24,6 +24,7 @@ Todas testadas por antecipação no probe. Nenhuma disparou.
 | STOP-CB-010 | Usar `sorry`, `admit` ou axioma local no lugar do uniforme | sim |
 | STOP-CB-011 | Conectar a Clay, TOE, física ou Riemann | sim |
 | STOP-CB-012 | Novidade ≠ `NONE` | sim |
+| STOP-CB-013 | Tratar a `Primcodable` induzida como canônica | sim |
 
 ## STOP-CB-004, que é a armadilha real desta frente
 
@@ -58,6 +59,16 @@ infinito — trabalho real, de gate próprio.
 Preencher a lacuna com `sorry` ou axioma local produziria a aparência do
 resultado sem o resultado. Está proibido pelo `AGENTS.md`, e a `def :
 Prop` é a alternativa que não mente.
+
+## STOP-CB-013, aberta pela revisão
+
+A instância induzida **não** é canônica: `Primcodable Bool` já existe no
+Mathlib. Afirmar que a classificação independe da codificação exigiria um
+teorema de invariância que esta frente não prova — `CB-GAP-010`.
+
+O que existe é um caso: `boolEncoding_primrec_canonical`. Um caso não é
+uma invariância, e a diferença entre as duas coisas é exatamente o que
+esta condição de parada protege.
 
 ## STOP-CB-007, herdada do defeito anterior
 

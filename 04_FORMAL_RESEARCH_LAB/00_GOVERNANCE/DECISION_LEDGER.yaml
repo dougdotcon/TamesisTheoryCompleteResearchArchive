@@ -706,3 +706,36 @@ decisions:
       - "nenhuma afirmacao de custo ou complexidade assintotica"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-038
+    date: 2026-08-04
+    decision: >
+      Aprovar a especificacao de FOUND-COMPUTABILITY-BRIDGE-001 apos
+      corrigir quatro defeitos, e acrescentar ao allowlist do labctl a
+      entrada literal FOUND_COMPUTABILITY_BRIDGE_001_FORMALIZATION_AUTHORIZED.
+    rationale: >
+      Os quatro defeitos foram: afirmacao de primazia falsa sobre
+      instancias (a biblioteca ja tinha 22, derivadas por script);
+      typeclasses_required_of_consumer impreciso, pois primrec_of_encoding
+      exige Primcodable sigma do chamador; um teste cujo enunciado era
+      decidivel por avaliacao e passaria com o teorema removido; e a
+      omissao de que a Primcodable induzida NAO e canonica, ja que
+      Primcodable Bool existe no Mathlib. Nenhuma das 19 assinaturas
+      publicas mudou.
+    authority: FOUND_COMPUTABILITY_BRIDGE_001_SPECIFICATION_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/11_COMPUTABILITY_BRIDGE/FOUND_COMPUTABILITY_BRIDGE_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_COMPUTABILITY_BRIDGE_001_FORMALIZATION_AUTHORIZED"
+      - "LAB_STATE: prohibited_actions += 4 entradas da revisao"
+      - "front: CB-GAP-010 e STOP-CB-013 abertas pela revisao"
+    untouched_safeguards:
+      - "as 19 assinaturas publicas permanecem congeladas"
+      - "nenhum arquivo Lean da arvore versionada e criado ou modificado"
+      - "nenhuma frente encerrada e tocada"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

@@ -1,5 +1,54 @@
 # Changelog do laboratório formal
 
+## FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION-REVIEW - 2026-08-04
+
+### Reviewed
+
+- Probe reexecutado neste gate: `exit 0`, `0` linhas `error:`, `0`
+  `warning:`, `git_dirty=0`, `29` declaracoes derivadas por script,
+  pegada medida `29/29`.
+- `5` defeitos encontrados, `5` corrigidos, `0` assinaturas alteradas.
+
+### Corrected
+
+- **Afirmacao de primazia FALSA.** A especificacao dizia ser "a primeira
+  frente com `instance_declarations != 0`". Derivado por script: a
+  biblioteca ja tinha **`22`** instancias em **`6`** arquivos. Terceiro
+  defeito de contagem agregada em tres frentes consecutivas, e o primeiro
+  que nao e aritmetico — era uma contagem disfarcada de adjetivo.
+- `typeclasses_required_of_consumer: 0` era impreciso: o caminho
+  principal exige `0`, mas `primrec_of_encoding` exige `[Primcodable σ]`
+  do chamador. Separado em dois campos.
+- **Teste que nao testava.** `boolEncoding_bound_concrete` enunciava
+  `0 + 2 ≤ 2`, decidivel por avaliacao, e passaria com o teorema da cota
+  removido do arquivo. Substituido por `boolEncoding_bound_applies`,
+  quantificado sobre `w`.
+
+- **Chave YAML duplicada**, pega por `labctl validate` dentro do proprio
+  gate: `specification_review` aparecia como campo de status e como bloco
+  em `STATUS.yaml`. Renomeado para `specification_review_record`. A regra
+  `yaml_duplicate_keys` cobrou, e o defeito morreu antes do commit.
+
+### Declared open
+
+- **A `Primcodable` induzida NAO e canonica.** `Primcodable Bool` ja
+  existe no Mathlib e e diferente de `encodingPrimcodable boolEncoding`.
+  Omissao da especificacao, corrigida com `CB-GAP-010`, `STOP-CB-013` e
+  um teste novo: `boolEncoding_primrec_canonical` mostra que sob a
+  instancia canonica a conclusao e a mesma, pela mesma linha — **porque
+  quem faz o trabalho e a finitude, nao a codificacao**.
+- `10` lacunas, `13` condicoes de parada.
+
+### Frozen
+
+- As `19` assinaturas publicas **nao mudaram**. Os quatro defeitos
+  atingiram documentacao, um teste e uma lacuna omitida.
+
+### Locked
+
+- `authorized_action: FOUND_COMPUTABILITY_BRIDGE_001_FORMALIZATION_AUTHORIZED`.
+- `DEC-038` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-COMPUTABILITY-BRIDGE-001-SPECIFICATION - 2026-08-04
 
 ### Specified

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:44:00-03:00
-canonical_commit: "1a43f893fa4470c0ed10900b1c6daded9a6309bd"
+updated_at: 2026-08-04T00:46:17-03:00
+canonical_commit: "7a93a03145ad561b9748d6187a44cd4dcc7b7866"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,8 +10,8 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-MONOVARIANT-DESCENT-001"
-work_status: "SCOPED"
-specification_status: "NOT_STARTED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 specification_review: "NOT_STARTED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
@@ -30,10 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Especificar FOUND-MONOVARIANT-DESCENT-001: medida decrescente em
-  Nat, ausência de ponto periódico, recuperação de 0 < period e o
-  negativo contra a reflexão.
-authorized_action: "FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a especificação: conferir as sete assinaturas congeladas,
+  a recuperação de 0 < period e a negação sobre boa fundação.
+authorized_action: "FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390

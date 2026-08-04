@@ -1,5 +1,49 @@
 # Changelog do laboratório formal
 
+## FOUND-MONOVARIANT-DESCENT-001-SPECIFICATION - 2026-08-04
+
+### Specified
+
+- Cinco documentos, `7` declaracoes publicas congeladas (`1` definicao,
+  `6` teoremas), `1` auxiliar privado, `2` TEST_ONLY, `2` testes,
+  `4` modulos Lean planejados. Todas ja compilaram em probe, `exit 0`.
+
+### Frozen
+
+- A medida vive em **`Nat`, e so em `Nat`**. Boa fundacao vem de graca,
+  `0` typeclasses sao exigidas. Ordens gerais, `WellFoundedRelation` e
+  ordinais ficam **NAO AUTORIZADOS**.
+- `monovariant_not_orbitSeparating` e a declaracao central, e **nao tem
+  hipotese que o consumidor precise inventar**.
+
+### Declared
+
+- O auxiliar `reduce'` e **privado** e reproduz, com API exclusivamente
+  publica, uma reducao que a frente encerrada mantem privada. A linha
+  esta escrita: **reproduzir uma reducao curta a partir de API publica e
+  permitido; reimplementar o detector nao e.** A duplicacao esta
+  declarada, nao escondida.
+
+### Declared open
+
+- `8` lacunas. `MON-GAP-001`, a necessidade, e a honesta: para `C`
+  finito a reciproca e trivial, para `C` infinito **nao e obvia**, e a
+  frente nao trata.
+- `MON-GAP-007` fica aberta **de proposito**: descida estrita sobre `Nat`
+  implica cota no numero de passos, mas enuncia-la seria afirmacao
+  quantitativa, e afirmacao de custo sem modelo esta proibida.
+
+### Not done
+
+- `0` arquivos Lean permanentes, `0` `lake build`, `0` claims, `25` no
+  ledger, `0` frentes encerradas tocadas.
+- **Nenhum problema de milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+- `DEC-032` registrado no mesmo commit que faz sua edicao.
+
 ## PORTFOLIO-REVIEW-MONOVARIANT - 2026-08-04
 
 ### Selected

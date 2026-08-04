@@ -1,5 +1,48 @@
 # Changelog do laboratório formal
 
+## FOUND-INVARIANT-UNREACHABILITY-001-FORMALIZATION - 2026-08-04
+
+### Formalized
+
+- Quatro modulos Lean permanentes, dois agregadores tocados so em
+  imports, dois arquivos de teste. `lake build` **exit 0**, `8782` jobs,
+  `0` linhas de erro reais.
+- `8` declaracoes publicas e `2` TEST_ONLY, **derivadas por script** e
+  batendo com o congelado. `0` `Fintype`, `0` `DecidableEq`, `0`
+  instancias, `0` tokens proibidos.
+
+### Footprint
+
+- **`Classical.choice` nao aparece em nenhuma declaracao da frente**, como
+  a especificacao previu: nada aqui atravessa `analyzeEncodedSystem`, nao
+  ha `Array`, tabela nem execucao.
+
+```text
+Invariant.semiconj                        sem pegada
+Invariant.iterate                         propext
+unreachable_of_invariant_ne               propext
+Invariant.pair                            propext
+invariantAbstraction                      sem pegada
+invariant_orbitSeparating_iff_fixedPoint  propext, Quot.sound
+diagStep_invariant                        propext, Quot.sound
+diag_unreachable                          propext, Quot.sound
+```
+
+### Result
+
+- **A ferramenta morde.** `diag_unreachable` prova que `(1, 0)` nao e
+  alcancavel a partir de `(0, 0)` sob `diagStep`, sobre `Int x Int`,
+  **infinito**, sem enumeracao e sem finitude.
+- **O limite esta escrito em Lean.**
+  `invariant_orbitSeparating_iff_fixedPoint` mostra que, para abstracoes
+  invariantes, a condicao de reflexao vale **exatamente nos pontos
+  fixos**. Invariantes certificam impossibilidade e nunca recorrencia.
+
+### Locked
+
+- `authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_RESULT_REVIEW_AUTHORIZED`.
+  `0` claims promovidas, `24` no ledger, `0` frentes encerradas tocadas.
+
 ## FOUND-INVARIANT-UNREACHABILITY-001-SPECIFICATION-REVIEW - 2026-08-04
 
 ### Approved

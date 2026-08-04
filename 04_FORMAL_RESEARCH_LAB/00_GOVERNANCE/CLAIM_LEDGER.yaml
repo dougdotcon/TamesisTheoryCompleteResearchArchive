@@ -899,3 +899,66 @@ claims:
       - novidade algoritmica
       - resolve algum problema nomeado
       - resultado fisico
+  - claim_id: MONOVARIANT-REFLECTION-LIMIT-FORMAL-001
+    short_name: monovariant_forbids_reflection
+    exact_statement: "Uma medida com valores em Nat que decresce estritamente a cada passo exclui ponto periodico em qualquer numero positivo de passos; e como a analise abstrata sempre devolve certificado com periodo positivo, um sistema concreto com monovariante nunca satisfaz OrbitSeparating."
+    domain: formal_semantics
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/Monovariants.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/10_MONOVARIANTS/FOUND_MONOVARIANT_DESCENT_001/SPECIFICATION_DECISION.md"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/10_MONOVARIANTS/FOUND_MONOVARIANT_DESCENT_001/RESULT_REVIEW.md"
+    historical_wording: ""
+    current_wording: >
+      Foi formalizado em Lean que uma medida estritamente decrescente com
+      valores em Nat exclui recorrencia concreta em qualquer numero
+      positivo de passos. Foi recuperada da API publica a positividade do
+      periodo do certificado, que se perdia entre detectCycle?_sound e
+      analyzeTransitionTable_sound, sem tocar em frente encerrada. Com as
+      duas, foi provado que um sistema com monovariante nunca satisfaz
+      OrbitSeparating, de modo que todo ciclo abstrato desse sistema e
+      espurio.
+    work_status: VERIFIED
+    evidence_level: F
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    dependencies:
+      - INVARIANT-UNREACHABILITY-FORMAL-001
+      - CERTIFIED-FINITE-STATE-ABSTRACTION-FORMAL-001
+    known_gaps:
+      - 'MON-GAP-001: necessidade do monovariante para C infinito permanece ABERTA'
+      - 'MON-GAP-002: ordens gerais e ordinais NAO foram tratados'
+      - 'MON-GAP-004: terminacao de programas NAO foi tratada'
+      - 'MON-GAP-006: sistemas nao deterministicos NAO foram tratados'
+      - 'MON-GAP-007: cota quantitativa NAO foi enunciada'
+      - 'MON-GAP-008: bibliografia permanece ABERTA'
+    counterevidence:
+      - 'Nat e bem fundado e ainda assim k - 1 NAO e monovariante: falha em zero, onde a subtracao trunca'
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/10_MONOVARIANTS/FOUND_MONOVARIANT_DESCENT_001/"
+    last_reviewed: 2026-08-04
+    computational_scope: >
+      A frente e proposicional: nao decide existencia de monovariante, nao
+      enuncia cota de passos e nao exige typeclass alguma. Classical.choice
+      aparece apenas no que atravessa analyzeEncodedSystem.
+    scope_qualifier_required: >
+      Toda formulacao desta claim deve conter tres qualificadores.
+      Primeiro, "medida com valores em Nat": ordens gerais e ordinais NAO
+      foram tratados. Segundo, "suficiente, nunca necessaria": exibir o
+      monovariante e obrigacao de quem quer a conclusao, e a necessidade
+      para C infinito nao e obvia nem foi provada. Terceiro, "decrescimo
+      ESTRITO": boa fundacao do contradominio nao basta, e k - 1 sobre Nat
+      e o contraexemplo verificado. Sem os tres a afirmacao e falsa.
+    promotion_requirements:
+      - 'nao aplicavel: eh ferramenta formal e nao admite promocao cientifica'
+    prohibited_claims:
+      - boa fundacao basta
+      - monovariante e necessario para ausencia de ciclo
+      - a ferramenta decide existencia de monovariante
+      - existe cota quantitativa provada no numero de passos
+      - terminacao de programas foi tratada
+      - ordinais foram tratados
+      - sistemas nao deterministicos se comportam assim
+      - resultado novo em combinatoria ou em terminacao
+      - novidade matematica
+      - novidade algoritmica
+      - resolve algum problema nomeado
+      - resultado fisico

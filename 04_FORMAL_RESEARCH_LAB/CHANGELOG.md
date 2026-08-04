@@ -1,5 +1,55 @@
 # Changelog do laboratório formal
 
+## FOUND-MONOVARIANT-DESCENT-001-RESULT-REVIEW - 2026-08-04
+
+### Approved
+
+- `FOUND_MONOVARIANT_DESCENT_001_RESULT_REVIEW_APPROVED`, com build e
+  contagens **reexecutados** neste gate.
+
+### Promoted
+
+- **`MONOVARIANT-REFLECTION-LIMIT-FORMAL-001`**, `evidence_level: F`,
+  novidade `NONE`. Ledger de `25` para `26`.
+- `scope_qualifier_required` com **tres** qualificadores: "medida em
+  `Nat`", "suficiente, nunca necessaria" e **"decrescimo ESTRITO"**. Sem
+  os tres a afirmacao e falsa.
+
+### Closed
+
+- O **par classico esta completo**:
+
+```text
+invariante     quantidade conservada   -> impossibilidade
+monovariante   quantidade decrescente  -> ausencia de recorrencia
+```
+
+- E os dois medem o mesmo limite de angulos opostos: com invariante a
+  reflexao vale nos pontos fixos, com monovariante **nao vale em lugar
+  nenhum**.
+
+### Recovered, and it stays
+
+- `0 < period` esta de volta na superficie publica, recuperada **sem
+  tocar em frente encerrada**.
+
+### Recorded
+
+- **Dois defeitos nesta frente**, ambos registrados sem atenuacao: a
+  contagem agregada errada, pega pela propria revisao, **segundo do mesmo
+  tipo em duas frentes consecutivas**; e `lt_irrefl` nao resolvendo com o
+  import minimo, corrigido em tatica sem mudar assinatura.
+
+### Not done
+
+- **Nenhum problema de milenio atacado.** `RH-NOGO-001` permanece
+  `NOT_AUTHORIZED` / `NO_EXECUTION`.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `0` frentes encerradas
+  modificadas.
+
 ## FOUND-MONOVARIANT-DESCENT-001-FORMALIZATION - 2026-08-04
 
 ### Formalized

@@ -898,3 +898,31 @@ decisions:
       - "nenhum arquivo Lean da arvore versionada e criado ou modificado"
       - "nenhum modelo de custo, nenhuma classe de complexidade"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+  - decision_id: DEC-044
+    date: 2026-08-04
+    decision: >
+      Formalizar FOUND-UNIFORM-PRIMREC-001 em 6 modulos mais agregador e
+      2 arquivos de teste, e acrescentar ao labctl a entrada
+      FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED.
+    rationale: >
+      lake build exit 0, 8811 jobs, 0 error, 0 sorry, 0 tokens proibidos.
+      As 36 declaracoes derivadas da arvore instalada batem com a
+      especificacao congelada. Primrec2 analyzeTransitionTable esta na
+      arvore, e com ela CB-GAP-001 tem prova.
+    authority: FOUND_UNIFORM_PRIMREC_001_FORMALIZATION_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/UniformPrimrec/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED"
+      - "LAB_STATE: prohibited_actions += docstring nao carrega linha de declaracao"
+    untouched_safeguards:
+      - "nenhuma assinatura congelada foi alterada"
+      - "nenhum arquivo de frente encerrada e modificado"
+      - "nenhum modelo de custo, nenhuma classe de complexidade"
+      - "Primrec nao e apresentado como eficiencia"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"

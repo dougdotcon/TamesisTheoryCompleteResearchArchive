@@ -1,5 +1,43 @@
 # Changelog do laboratório formal
 
+## FOUND-UNIFORM-PRIMREC-001-FORMALIZATION - 2026-08-04
+
+### Formalized
+
+- `6` modulos mais agregador e `2` arquivos de teste, `9` arquivos novos,
+  `2` agregadores modificados. **`lake build` exit `0`, `8811` jobs,
+  `0` `error:`, `0` `sorry`, `0` tokens proibidos.**
+- `36` declaracoes derivadas **da arvore instalada** batem com a
+  especificacao congelada: `31` publicas (`4` def, `27` teoremas),
+  `1` privado, `1` TEST_ONLY, `3` testes.
+
+### In the tree
+
+- **`Primrec₂ analyzeTransitionTable`.** `CB-GAP-001` deixa de ser lacuna
+  e passa a ser teorema compilado.
+- `uniformPrimrecStatement_holds` fecha, por nome, o `def : Prop` que
+  `FOUND-COMPUTABILITY-BRIDGE-001` registrou sem prova.
+
+### Corrected
+
+- Um **docstring** de `Analysis.lean` continha linha comecando por
+  `theorem`, e o contador leu a propria documentacao como declaracao:
+  `32` publicas em vez de `31`. Reescrito. Mesmo defeito ja registrado em
+  `FOUND-CYCLE-DETECTION-001` — texto de declaracao dentro do arquivo
+  Lean faz a auditoria encontrar a si mesma. Nenhuma assinatura mudou.
+
+### Not claimed
+
+- **`Primrec` continua nao significando eficiente.** A classe contem
+  torres de exponenciais, e `0` cotas foram enunciadas.
+- `0` modelos de custo, `0` classes de complexidade. **Nenhum problema de
+  milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_UNIFORM_PRIMREC_001_RESULT_REVIEW_AUTHORIZED`.
+- `DEC-044` registrado no mesmo commit que faz sua edicao.
+
 ## FOUND-UNIFORM-PRIMREC-001-SPECIFICATION-REVIEW - 2026-08-04
 
 ### Reviewed

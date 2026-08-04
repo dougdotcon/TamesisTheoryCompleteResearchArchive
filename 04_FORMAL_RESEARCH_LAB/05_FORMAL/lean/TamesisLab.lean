@@ -44,6 +44,8 @@ import TamesisLab.Tests.LabCorrMonovariantVacuity001
 import TamesisLab.Tests.LabCorrMonovariantVacuity001Axioms
 import TamesisLab.Tests.FoundComputabilityBridge001
 import TamesisLab.Tests.FoundComputabilityBridge001Axioms
+import TamesisLab.Tests.FoundUniformPrimrec001
+import TamesisLab.Tests.FoundUniformPrimrec001Axioms
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

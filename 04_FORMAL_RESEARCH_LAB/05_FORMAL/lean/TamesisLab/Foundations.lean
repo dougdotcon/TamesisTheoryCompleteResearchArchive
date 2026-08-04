@@ -18,6 +18,7 @@ import TamesisLab.Foundations.EllipticHeight
 import TamesisLab.Foundations.LerayProjector
 import TamesisLab.Foundations.SobolevSpace
 import TamesisLab.Foundations.SpectralCountingInstance
+import TamesisLab.Foundations.LerayOrthogonal
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

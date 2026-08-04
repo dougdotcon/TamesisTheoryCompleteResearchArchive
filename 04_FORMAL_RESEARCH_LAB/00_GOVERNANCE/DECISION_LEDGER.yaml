@@ -1264,3 +1264,31 @@ decisions:
       - "a lei de Weyl geral NAO e afirmada provada: isto e um operador concreto"
       - "nenhuma conexao com RH e afirmada"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-056
+    date: 2026-08-04
+    decision: >
+      Fechar LP-GAP-001 e LP-GAP-002, e REVOGAR por prova as duas
+      proibicoes de DEC-053 sobre ortogonalidade e cota.
+    rationale: >
+      lake build exit 0, 8818 jobs, 379 linhas, zero sorry, 23 print
+      axioms limpos. adjoint_lerayOpL2 e isSelfAdjoint_lerayOpL2 fecham,
+      logo P e autoadjunta; com idempotencia e Cauchy-Schwarz a cota cai
+      para 1 e e ATINGIDA para 2 <= n. Pitagoras fecha. Duas previsoes
+      minhas estavam erradas: adjoint estava disponivel, e a cota otima
+      nao exigia Plancherel operador-valorado, que alias nao existe no
+      Mathlib. A nao-vacuidade foi provada, lerayOpL2 != 0 via traco do
+      simbolo igual a n-1.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonal.lean"
+      - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_001/"
+      - "LAB_STATE.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LP-GAP-001 e LP-GAP-002 FECHADAS"
+      - "duas proibicoes de DEC-053 REVOGADAS POR PROVA"
+    untouched_safeguards:
+      - "LP-GAP-003 permanece aberta: Id - P = grad Laplace^-1 div"
+      - "Navier-Stokes NAO e afirmado alcancavel"
+      - "nenhum problema de milenio e atacado"

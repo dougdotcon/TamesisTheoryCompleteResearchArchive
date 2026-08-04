@@ -1,6 +1,6 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T14:02:00-03:00
+updated_at: 2026-08-04T14:48:00-03:00
 canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
@@ -246,8 +246,8 @@ prohibited_actions:
   - "Não ler a isometria de todos os Hs entre si como degenerescência: a dependência em s vive em toDist"
   - "Não declarar Hs como abbrev: a topologia de subtipo colidiria com a da norma"
   - "Não afirmar que existe teoria de EDP no laboratório"
-  - "Não chamar lerayOpL2 de projeção ortogonal: P* = P não foi provado, LP-GAP-002"
-  - "Não citar a cota como ótima: é 2n², a ótima é 1, LP-GAP-001"
+  - "Não citar a proibição revogada: lerayOpL2 É projeção ortogonal desde DEC-056, provado"
+  - "Não citar a cota como 2n²: é exatamente 1, e atingida, desde DEC-056"
   - "Não afirmar que a pressão de Navier-Stokes foi recuperada"
   - "Não prever field_simp; ring para addSubMap: falha; usar linear_combination com certificados de ideal"
   - "Não afirmar Mordell-Weil provado: falta F, e F é escala de meses"

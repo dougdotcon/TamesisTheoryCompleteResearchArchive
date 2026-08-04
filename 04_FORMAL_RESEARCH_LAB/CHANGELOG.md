@@ -1,5 +1,59 @@
 # Changelog do laboratório formal
 
+## LP-GAP-001-002-CLOSURE - 2026-08-04
+
+### `P` e projecao ortogonal
+
+- `adjoint_lerayOpL2 : adjoint (lerayOpL2 b) = lerayOpL2 b` e
+  `isSelfAdjoint_lerayOpL2` fecham. `379` linhas, `lake build` exit `0`,
+  `0` `sorry`, `23` `#print axioms` limpos.
+- Mais Pitagoras: `‖f‖² = ‖Pf‖² + ‖f − Pf‖²`. Autoadjunta, idempotente,
+  contracao, decomposicao — **projecao ortogonal**.
+
+### A cota nao so melhorou, e ATINGIDA
+
+```text
+antes   2n^2   (n=3: 18)
+agora   1      e IGUAL a 1 para 2 <= n
+```
+
+- Cai de Cauchy-Schwarz em tres linhas:
+  `‖Pf‖² = ⟪f, P²f⟫ = ⟪f, Pf⟫ ≤ ‖f‖‖Pf‖`.
+
+### Duas previsoes minhas, ambas erradas
+
+```text
+previ   adjoint pode nao estar disponivel; forma fraca e o maximo
+saiu    as tres formas fecham
+
+previ   cota otima exige Plancherel matricial, que nao existe
+saiu    nao precisou dele; Cauchy-Schwarz basta
+```
+
+### Two prohibitions REVOKED by proof
+
+- `DEC-053` proibia chamar `lerayOpL2` de projecao ortogonal e citar a
+  cota como otima. **As duas caem por prova**, e a revogacao esta em
+  `DEC-056`.
+
+### Non-vacuity, not asked for
+
+- `lerayOpL2_ne_zero`: se `P = 0`, o simbolo aniquila todo `L²`; testando
+  com indicadores de bolas o simbolo e a.e. nulo; mas o **traco** e
+  `n − 1` em todo `ξ ≠ 0`, o que forca `n = 1`, contra `2 ≤ n`.
+
+### Traps recorded
+
+- `volume_tac` falha de forma **intermitente** — o mesmo binder passa
+  numa declaracao e falha na seguinte. Solucao: `abbrev`.
+- `local notation` quebra o parser; `inner_self_eq_norm_sq_to_K` produz
+  `RCLike.ofReal`, que **nao** e sintaticamente `Complex.ofReal`.
+
+### Not claimed
+
+- `LP-GAP-003` (`Id − P = ∇Δ⁻¹div`) segue **aberta**. Navier-Stokes
+  **nao** ficou alcancavel. **Nenhum problema de milenio atacado.**
+
 ## SC-GAP-001-CLOSURE - 2026-08-04
 
 ### The debt was real

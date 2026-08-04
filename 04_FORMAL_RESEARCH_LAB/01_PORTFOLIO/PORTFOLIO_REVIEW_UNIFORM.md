@@ -7,6 +7,8 @@ queue_verified: 15
 queue_frozen: 1
 queue_scoped_open_problems: 6
 feasibility_probe_exit: 0
+second_probe_exit: 0
+second_probe_target: RawTransitionTable.run?
 ---
 
 # Revisão de portfólio — depois da ponte
@@ -66,6 +68,38 @@ theorem primrec_validList : PrimrecPred (fun q => ValidList ...)   COMPILA
 O segundo é o coração: **iterar a tabela codificada é primitivo
 recursivo**, via `Primrec.nat_iterate`. O terceiro reproduz as quatro
 cláusulas de `CycleWitness.Valid` na mesma ordem e no mesmo aninhamento.
+
+## Segundo probe: a funcao DO LABORATORIO, nao uma reformulacao
+
+O primeiro probe mediu uma reformulacao. O segundo foi direto ao alvo, e
+tambem deu `exit 0`:
+
+```lean
+theorem primrec_step? : Primrec₂ RawTransitionTable.step?        COMPILA
+theorem run?_eq_iterate : t.run? k s = (bind step?)^[k] (some s)  COMPILA
+theorem primrec_run? : Primrec (fun p => p.1.1.run? p.1.2 p.2)    COMPILA
+```
+
+**`RawTransitionTable.run?` e primitiva recursiva.** Nao por finitude —
+o dominio `RawTransitionTable × Nat × Nat` e infinito. A prova passa por
+`Primrec.nat_iterate` e depende do que a funcao **faz**.
+
+E o primeiro resultado do laboratorio cuja demonstracao de computabilidade
+consulta o algoritmo. A descoberta que o tornou barato: `run?` **ja e nao
+dependente** — `Nat → Nat → Option Nat` —, e a recursao vira iterada em
+`Option Nat` sob a leitura `run? k s = (fun o => o.bind step?)^[k] (some s)`.
+
+## O que ainda falta, e agora com rota conhecida
+
+```text
+decisao de raw.Valid e Primrec          rota: Primrec.list_foldr
+cycleCandidates e Primrec               rota: Primrec.list_range
+find? sobre os candidatos e Primrec     rota: Primrec.list_findIdx
+montagem de analyzeTransitionTable      rota: Primrec.option_bind
+```
+
+Nenhuma dessas e especulacao: as quatro ferramentas foram verificadas por
+`#check` no mesmo probe.
 
 ## A arquitetura que o probe validou
 

@@ -35,6 +35,20 @@
   transicao de frente, e o furo de validacao fica registrado como
   observacao.
 
+### Measured again, harder
+
+- Segundo probe, `exit 0`, arvore intocada, direto sobre a funcao do
+  laboratorio em vez de uma reformulacao:
+  **`Primrec (fun p => p.1.1.run? p.1.2 p.2)` compila.**
+- `RawTransitionTable.run?` e primitiva recursiva sobre um dominio
+  **infinito**. A prova passa por `Primrec.nat_iterate` e **depende do
+  que a funcao faz** — e o primeiro resultado de computabilidade do
+  laboratorio que consulta o algoritmo.
+- O que o tornou barato: `run?` **ja e nao dependente**, e a recursao le-se
+  como iterada em `Option Nat`, `run? k s = (fun o => o.bind step?)^[k]
+  (some s)`. O obstaculo de tipo dependente vive em `detectCycle?`, nao
+  na execucao.
+
 ### Not claimed
 
 - Nenhum dos `6` problemas em aberto ficou mais perto. Para

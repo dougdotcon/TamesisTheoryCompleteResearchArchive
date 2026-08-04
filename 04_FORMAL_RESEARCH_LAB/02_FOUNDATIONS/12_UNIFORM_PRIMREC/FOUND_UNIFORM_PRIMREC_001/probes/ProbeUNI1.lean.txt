@@ -1,0 +1,85 @@
+import TamesisLab.Foundations.ComputabilityBridge
+import Mathlib.Computability.Primrec.List
+
+set_option autoImplicit false
+
+/-!
+PROBE UNI — viabilidade de CB-GAP-001, o nivel uniforme.
+
+A pergunta: `Primrec2 analyzeTransitionTable` e alcancavel?
+
+Estrategia medida aqui: reformular sobre `List Nat` (sem tipos
+dependentes), provar Primrec da reformulacao, e so depois casar com a
+funcao do laboratorio. Este probe mede a PRIMEIRA metade.
+-/
+
+namespace ProbeUNI
+
+#check @Primrec.nat_iterate
+#check @Primrec.list_getElem?
+#check @Primrec.option_getD
+#check @Primrec.list_range
+#check @Primrec.list_findIdx
+#check @Primrec.of_graph
+#check @PrimrecPred
+#check @PrimrecPred.and
+
+/-! ## 1 — o passo, sobre lista, sem tipo dependente -/
+
+/-- Sucessor do indice `i` na tabela `l`. Fora do dominio devolve `0`,
+escolha que so precisa coincidir com a do laboratorio DENTRO do dominio. -/
+def stepList (l : List Nat) (i : Nat) : Nat := (l[i]?).getD 0
+
+theorem primrec_stepList : Primrec₂ stepList := by
+  unfold stepList
+  exact Primrec.option_getD.comp₂ Primrec.list_getElem? (Primrec₂.const 0)
+
+/-! ## 2 — a iteracao, que e o coracao da questao -/
+
+/-- `k` passos a partir de `i`. -/
+def runList (l : List Nat) (k i : Nat) : Nat := (stepList l)^[k] i
+
+theorem primrec_runList :
+    Primrec fun p : (List Nat × Nat) × Nat => runList p.1.1 p.1.2 p.2 := by
+  unfold runList
+  exact Primrec.nat_iterate
+    (Primrec.snd.comp Primrec.fst)
+    Primrec.snd
+    (primrec_stepList.comp₂ (Primrec.fst.comp (Primrec.fst.comp Primrec.fst)) Primrec.snd)
+
+/-! ## 3 — o predicado do certificado, sobre lista -/
+
+/-- `w = (b, p)` e valido para `l` a partir de `start`, com `n = l.length`.
+
+As quatro clausulas estao na MESMA ORDEM e com o MESMO aninhamento de
+`CycleWitness.Valid`. E isso que tornara o casamento um transporte. -/
+def ValidList (l : List Nat) (start b p : Nat) : Prop :=
+  b < l.length ∧ 0 < p ∧ b + p ≤ l.length ∧
+    runList l (b + p) start = runList l b start
+
+theorem primrec_validList :
+    PrimrecPred fun q : ((List Nat × Nat) × Nat) × Nat =>
+      ValidList q.1.1.1 q.1.1.2 q.1.2 q.2 := by
+  unfold ValidList
+  have hl : Primrec fun q : ((List Nat × Nat) × Nat) × Nat => q.1.1.1 :=
+    Primrec.fst.comp (Primrec.fst.comp Primrec.fst)
+  have hstart : Primrec fun q : ((List Nat × Nat) × Nat) × Nat => q.1.1.2 :=
+    Primrec.snd.comp (Primrec.fst.comp Primrec.fst)
+  have hb : Primrec fun q : ((List Nat × Nat) × Nat) × Nat => q.1.2 :=
+    Primrec.snd.comp Primrec.fst
+  have hp : Primrec fun q : ((List Nat × Nat) × Nat) × Nat => q.2 := Primrec.snd
+  have hlen : Primrec fun q : ((List Nat × Nat) × Nat) × Nat => q.1.1.1.length :=
+    Primrec.list_length.comp hl
+  have hrun : Primrec fun q : ((List Nat × Nat) × Nat) × Nat =>
+      runList q.1.1.1 (q.1.2 + q.2) q.1.1.2 :=
+    primrec_runList.comp (((hl.pair (Primrec.nat_add.comp hb hp)).pair hstart))
+  have hrun2 : Primrec fun q : ((List Nat × Nat) × Nat) × Nat =>
+      runList q.1.1.1 q.1.2 q.1.1.2 :=
+    primrec_runList.comp ((hl.pair hb).pair hstart)
+  exact ((((Primrec.nat_lt.comp hb hlen).and
+      (Primrec.nat_lt.comp (Primrec.const 0) hp)).and
+      (Primrec.nat_le.comp (Primrec.nat_add.comp hb hp) hlen)).and
+      (Primrec.eq.comp hrun hrun2)).of_eq
+    (fun _ => by simp [and_assoc])
+
+end ProbeUNI

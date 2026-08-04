@@ -1,0 +1,68 @@
+import TamesisLab.Foundations.ComputabilityBridge
+import Mathlib.Computability.Primrec.List
+
+set_option autoImplicit false
+
+/-!
+PROBE UNI2 — Primrec sobre a funcao DO LABORATORIO, nao sobre uma
+reformulacao. `RawTransitionTable.run?` ja e nao dependente.
+-/
+
+namespace ProbeUNI2
+
+open TamesisLab.Engineering.FiniteStateRuntime
+open TamesisLab.Foundations.ComputabilityBridge
+
+#check @Primrec.list_foldr
+#check @Primrec.option_bind
+#check @Primrec.dom_bool
+#check @Primrec.list_range
+
+/-! ## 1 — a tabela e a sua lista -/
+
+theorem primrec_next_toList : Primrec fun t : RawTransitionTable => t.next.toList :=
+  Primrec.of_equiv (e := rawTableEquiv)
+
+/-! ## 2 — um passo, sobre a tabela bruta -/
+
+theorem primrec_step? : Primrec₂ RawTransitionTable.step? := by
+  have h : Primrec₂ fun (t : RawTransitionTable) (s : Nat) => t.next.toList[s]? :=
+    Primrec.list_getElem?.comp₂ (primrec_next_toList.comp Primrec.fst) Primrec.snd
+  exact h.of_eq (fun t s => by simp [RawTransitionTable.step?])
+
+/-! ## 3 — a execucao, como iterada em `Option Nat`
+
+`run? k state = (fun o => o.bind t.step?)^[k] (some state)`.
+-/
+
+/-- Uma vez fora do dominio, sempre fora: iterar o `bind` sobre `none`
+devolve `none`. -/
+theorem iterate_bind_none (f : Nat → Option Nat) (k : Nat) :
+    (fun o : Option Nat => o.bind f)^[k] none = none := by
+  induction k with
+  | zero => rfl
+  | succ k ih => rw [Function.iterate_succ_apply]; simpa using ih
+
+theorem run?_eq_iterate (t : RawTransitionTable) (k : Nat) (state : Nat) :
+    t.run? k state = (fun o : Option Nat => o.bind t.step?)^[k] (some state) := by
+  induction k generalizing state with
+  | zero => rfl
+  | succ k ih =>
+      rw [Function.iterate_succ_apply]
+      show t.run? (k + 1) state = _
+      cases hs : t.step? state with
+      | none => simp [RawTransitionTable.run?, hs, iterate_bind_none]
+      | some s' => simp [RawTransitionTable.run?, hs, ih s']
+
+theorem primrec_run? :
+    Primrec fun p : (RawTransitionTable × Nat) × Nat => p.1.1.run? p.1.2 p.2 := by
+  have hiter : Primrec fun p : (RawTransitionTable × Nat) × Nat =>
+      (fun o : Option Nat => o.bind p.1.1.step?)^[p.1.2] (some p.2) := by
+    refine Primrec.nat_iterate (Primrec.snd.comp Primrec.fst)
+      (Primrec.option_some.comp Primrec.snd) ?_
+    exact Primrec.option_bind Primrec.snd
+      (primrec_step?.comp₂ (Primrec.fst.comp (Primrec.fst.comp (Primrec.fst.comp Primrec.fst)))
+        Primrec.snd)
+  exact hiter.of_eq (fun p => (run?_eq_iterate p.1.1 p.1.2 p.2).symm)
+
+end ProbeUNI2

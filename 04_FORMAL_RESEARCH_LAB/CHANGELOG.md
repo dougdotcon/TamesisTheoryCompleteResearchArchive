@@ -1,5 +1,56 @@
 # Changelog do laboratório formal
 
+## BUILDABLE-PIECES - 2026-08-04
+
+### Found
+
+- A quinta medicao paralela fechou o quadro: as sondas nao acharam so
+  bloqueios, acharam **4 pecas nomeaveis e autocontidas**, cada uma com
+  valor upstream independente do problema que destrava.
+
+```text
+B  enumeracao espectral de compactos   RH      moderate
+C  Mordell-Weil f.g. sobre Q           BSD     moderate
+D  equivalencia racional e Chow        Hodge   PR-scale
+A  multiplicador L2 sem suavidade      NS      high
+```
+
+### Peca C — o achado da rodada
+
+- `CommGroup.fg_of_descent'` existe no Mathlib e tem **ZERO consumidores
+  em toda a arvore**. Junto com `Height.logHeight` e
+  `abs_logHeight_addSubMap_sub_two_mul_logHeight_le`, sao tres insumos
+  prontos e **desconectados**.
+- Falta so a altura ingenua em pontos — **TODO explicito** no proprio
+  `Mathlib/NumberTheory/Height/EllipticCurve.lean`. Fechar a cadeia da
+  **Mordell-Weil finitamente gerado**, sem o qual `rank` e indefinivel.
+
+### Corrected
+
+- **`EllipticCurve` foi REMOVIDA do Mathlib**, refatorada em
+  `WeierstrassCurve` + `IsElliptic`. Novo desde julho: `localEulerFactor`,
+  `LFunction`, `LSeries`.
+- Mas `LFunction` e serie de Dirichlet **formal**: sem convergencia, sem
+  continuacao, sem equacao funcional. `ord_{s=1} L(E,s)` **nao e
+  expressavel**, e as **5** quantidades da formula BSD sao todas
+  indefiniveis.
+
+### Hodge
+
+- `AlgebraicCycle` existe ha semanas; falta **equivalencia racional**,
+  logo falta grupo de Chow. Definir a equivalencia e escala-PR.
+- Os **dois** lados da bicondicional carecem de objetos: sem de Rham
+  algebrico, sem Betti, sem comparacao, sem (p,q), sem variedade
+  complexa, sem `QuasiCoherent`, sem cotangente relativo. `H^q(X, Ω^p)`
+  e **informulavel**.
+- Homonimo registrado: `RingTheory/Kaehler` e **diferenciais**, nao
+  metrica.
+
+### Not claimed
+
+- Peca C da **Mordell-Weil**, nao BSD. Peca D da **Chow**, nao Hodge.
+  Nenhum dos 6 ficou alcancavel, e nenhum gate foi aberto.
+
 ## OPEN-PROBLEMS-MEASURED - 2026-08-04
 
 ### Measured in parallel

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-03T22:57:25-03:00
-canonical_commit: "a51fc14b5e6e30d03de135ad0eb9100905df413e"
+updated_at: 2026-08-03T23:05:39-03:00
+canonical_commit: "c2247d65ce1b0d2ff73cd12f245b76dd9a964772"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -13,7 +13,7 @@ active_work_item: "FOUND-BISIMULATION-BOUNDARY-001"
 work_status: "READY"
 specification_status: "APPROVED"
 specification_review: "APPROVED"
-formalization_status: "NOT_STARTED"
+formalization_status: "VERIFIED"
 result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -30,10 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-finite-state-abstraction-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Formalizar Simulates, Reflects, Bisimulation, o teorema de
-  colapso e as duas negações, reutilizando o contraexemplo
-  BOOL_TO_UNIT sem alterá-lo.
-authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_FORMALIZATION_AUTHORIZED"
+  Revisar o resultado da bissimulação determinística: contagens
+  derivadas, pegada nula, recorte preservado e frentes encerradas
+  intocadas.
+authorized_action: "FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -228,6 +228,7 @@ prohibited_actions:
   - "Não usar código de saída capturado através de fronteira de shell como evidência"
   - "Não declarar PASS quando a saída contiver linha error: ainda que o exit seja zero"
   - "Não registrar FoundFiniteStateAbstraction001UmbrellaAudit em TamesisLab.lean"
+  - "Não usar lake env lean isolado antes do build: sem .olean das dependências dá exit 1 falso"
   - "Não usar FOUND-FINITE-ABSTRACTION-001 como item ativo: é nome candidato anterior"
   - "Não concluir igualdade em C a partir da soundness observacional sem OrbitSeparating"
   - "Não descrever a completeness abstrata como completeness concreta"

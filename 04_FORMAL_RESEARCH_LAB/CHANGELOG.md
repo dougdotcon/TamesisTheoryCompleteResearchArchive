@@ -1,5 +1,45 @@
 # Changelog do laboratório formal
 
+## FOUND-BISIMULATION-BOUNDARY-001-FORMALIZATION - 2026-08-03
+
+### Formalized
+
+- Oito arquivos Lean permanentes. `lake build` **exit 0**, `8775` jobs,
+  `0` linhas de erro reais.
+- `8` declaracoes publicas — `3` definicoes e `5` teoremas — contagem
+  **derivada por script**, batendo com o congelado.
+- **Pegada axiomatica NENHUMA, em dez de dez declaracoes.** Nada aqui
+  atravessa `analyzeEncodedSystem`: nao ha `Array`, nao ha tabela, nao ha
+  execucao, entao `propext`, `Classical.choice` e `Quot.sound` nao entram
+  em lugar nenhum.
+
+### Corrected
+
+- A primeira organizacao deixava `boolToUnit_bisimulation` e
+  `forgetBool_surjective` no modulo das negacoes publicas, e o script
+  derivava **10** declaracoes contra as **8** congeladas. As duas nao
+  podiam ir para os testes — as negacoes publicas as consomem — entao
+  foram separadas em `CounterexampleInstance.lean`, como a frente
+  anterior fez com `Counterexample.lean`.
+- A divergencia foi resolvida **movendo o codigo para refletir a
+  classificacao**, nao ajustando a contagem para caber.
+
+### Recorded
+
+- **Um falso negativo, registrado e explicado.** Logo apos criar o modulo
+  novo, dois arquivos reportaram `exit=1 errors=1` na elaboracao isolada
+  enquanto o `lake build` passava. Causa: `lake env lean` nao constroi
+  dependencias, e o `.olean` do modulo recem-criado ainda nao existia.
+  Reexecutados apos o build: `exit=0 errors=0` nos oito.
+- Um `exit=1` ao lado de um build verde e exatamente o padrao que nao
+  pode ser silenciado. Aqui a contradicao tinha explicacao verificavel, e
+  foi verificada.
+
+### Locked
+
+- `authorized_action: FOUND_BISIMULATION_BOUNDARY_001_RESULT_REVIEW_AUTHORIZED`.
+  `0` claims promovidas, `23` no ledger, `0` frentes encerradas tocadas.
+
 ## FOUND-BISIMULATION-BOUNDARY-001-SPECIFICATION-REVIEW - 2026-08-03
 
 ### Approved

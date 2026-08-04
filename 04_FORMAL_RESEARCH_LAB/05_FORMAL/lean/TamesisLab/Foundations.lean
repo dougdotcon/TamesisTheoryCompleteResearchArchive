@@ -6,6 +6,8 @@ import TamesisLab.Foundations.CycleDetection
 import TamesisLab.Foundations.CycleDetection.Audit
 import TamesisLab.Foundations.FiniteStateAbstraction
 import TamesisLab.Foundations.FiniteStateAbstraction.Audit
+import TamesisLab.Foundations.BisimulationBoundary
+import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations
 

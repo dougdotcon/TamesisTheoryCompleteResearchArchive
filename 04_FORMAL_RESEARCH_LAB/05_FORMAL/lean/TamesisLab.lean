@@ -34,6 +34,8 @@ import TamesisLab.Tests.EngFiniteStateEncoding001Axioms
 import TamesisLab.Tests.FoundFiniteStateAbstraction001
 import TamesisLab.Tests.FoundFiniteStateAbstraction001Execution
 import TamesisLab.Tests.FoundFiniteStateAbstraction001Axioms
+import TamesisLab.Tests.FoundBisimulationBoundary001
+import TamesisLab.Tests.FoundBisimulationBoundary001Axioms
 import TamesisLab.Tests.RHNogoAsymptotic001
 import TamesisLab.Tests.RHNogoCountingBridge
 import TamesisLab.Tests.RHNogoPositiveCoefficient

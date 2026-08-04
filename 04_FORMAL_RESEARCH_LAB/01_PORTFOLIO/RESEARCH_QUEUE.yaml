@@ -926,3 +926,56 @@ queue:
       mostra que os dois usos da mesma maquina sao incompativeis fora dos
       pontos fixos. NAO e extensao de FOUND-FINITE-STATE-ABSTRACTION-001,
       cujo extension_status permanece NOT_AUTHORIZED.
+
+  - work_item_id: FOUND-MONOVARIANT-DESCENT-001
+    title: "Monovariantes, descida e a impossibilidade de reflexao"
+    track: FOUNDATIONS
+    target_statement: >
+      Formalizar medida estritamente decrescente com valores em Nat,
+      provar que ela exclui ponto periodico, recuperar da API publica a
+      positividade do periodo do certificado, e provar que um sistema com
+      monovariante nunca satisfaz OrbitSeparating.
+    expected_product: >
+      Definicao de Monovariant, o lema de descida ao longo de iteradas, a
+      ausencia de ponto periodico, a recuperacao de 0 < period e o teorema
+      negativo contra a reflexao, com duas negacoes registradas.
+    dependencies:
+      - FOUND-INVARIANT-UNREACHABILITY-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/Invariants/"
+      - "05_FORMAL/lean/TamesisLab/Foundations/FiniteStateAbstraction/"
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 9
+    external_dependency: none
+    cross_track_value: very_high
+    stop_condition: >
+      usar ordem geral em vez de Nat; afirmar que boa fundacao basta sem
+      decrescimo estrito; afirmar necessidade do monovariante; abrir
+      terminacao de programas ou ordinais; exigir finitude de C; conectar
+      a Clay, TOE, fisica ou Riemann
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    selection_criterion: TRANSFERABILITY
+    probes_compiled_in_portfolio_gate: 10
+    probe_exit: 0
+    measure_codomain: Nat
+    requires_fintype_concrete: false
+    requires_decidable_eq_concrete: false
+    closes_api_gap: "0 < period perdido entre detectCycle?_sound e analyzeTransitionTable_sound"
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_PROOF_TOOL
+    decision_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_MONOVARIANT.md"
+    selection_rationale: >
+      Segunda metade do par classico: invariante prova que algo nao muda,
+      monovariante prova que algo decresce. O negativo desta frente e mais
+      forte que o da anterior: com invariante a reflexao vale nos pontos
+      fixos, com monovariante nao vale em lugar nenhum, porque a analise
+      abstrata sempre devolve ciclo com periodo positivo enquanto o
+      sistema concreto nao tem recorrencia alguma. Fecha de passagem a
+      lacuna de API em que 0 < period se perdia. NAO e extensao de
+      FOUND-INVARIANT-UNREACHABILITY-001, cujo extension_status permanece
+      NOT_AUTHORIZED.

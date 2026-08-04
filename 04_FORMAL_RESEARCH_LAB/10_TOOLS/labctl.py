@@ -610,6 +610,16 @@ def validate() -> dict[str, Any]:
     if active_item and state.get("work_status") != active_item.get("status"):
         errors.append("LAB_STATE work_status differs from active queue item")
 
+    monovariant_dependency = item_by_id.get("FOUND-INVARIANT-UNREACHABILITY-001", {})
+    if active == "FOUND-MONOVARIANT-DESCENT-001" and (
+        monovariant_dependency.get("status") != "VERIFIED"
+        or monovariant_dependency.get("result_review") != "APPROVED"
+    ):
+        errors.append(
+            "FOUND-MONOVARIANT-DESCENT-001 cannot be active before "
+            "FOUND-INVARIANT-UNREACHABILITY-001 is VERIFIED with result_review APPROVED"
+        )
+
     invariant_dependency = item_by_id.get("FOUND-FINITE-STATE-ABSTRACTION-001", {})
     if active == "FOUND-INVARIANT-UNREACHABILITY-001" and (
         invariant_dependency.get("status") != "VERIFIED"
@@ -629,7 +639,8 @@ def validate() -> dict[str, Any]:
                       "ENG-FINITE-STATE-ENCODING-001",
                       "FOUND-FINITE-STATE-ABSTRACTION-001",
                       "FOUND-BISIMULATION-BOUNDARY-001",
-                      "FOUND-INVARIANT-UNREACHABILITY-001"}:
+                      "FOUND-INVARIANT-UNREACHABILITY-001",
+                      "FOUND-MONOVARIANT-DESCENT-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -721,6 +732,7 @@ def validate() -> dict[str, Any]:
         "FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_REVIEW_AUTHORIZED",
         "FOUND_INVARIANT_UNREACHABILITY_001_FORMALIZATION_AUTHORIZED",
         "FOUND_INVARIANT_UNREACHABILITY_001_RESULT_REVIEW_AUTHORIZED",
+        "FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")

@@ -1,5 +1,52 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-MONOVARIANT - 2026-08-04
+
+### Selected
+
+- **`FOUND-MONOVARIANT-DESCENT-001`**, a segunda metade do par classico.
+  Quatro alternativas comparadas, criterio de **transferencia**.
+
+### Probed
+
+- `10` declaracoes, `exit 0`, arvore intocada.
+- **O negativo e mais forte que o da frente anterior**:
+
+```text
+invariante     OrbitSeparating vale EXATAMENTE nos pontos fixos
+monovariante   OrbitSeparating NAO VALE EM LUGAR NENHUM
+```
+
+  Um monovariante exclui recorrencia concreta em qualquer numero positivo
+  de passos, enquanto a analise abstrata **sempre** devolve ciclo com
+  periodo positivo. Logo **todo ciclo abstrato de sistema monovariante e
+  espurio**.
+
+### Recovered
+
+- `detectCycle?_sound` prova `0 < period`, mas
+  `analyzeTransitionTable_sound` devolve tres clausulas e **a
+  positividade se perde**. O probe recupera, re-derivando a reducao em
+  namespace novo com API so publica, **sem tocar em frente encerrada**.
+- E o que torna o negativo **livre de hipotese inventada**.
+
+### Registered
+
+- Duas negacoes impedem a leitura da ferramenta como universal.
+  `strictDown_not_monovariant` e a que importa: `Nat` e bem fundado e
+  ainda assim `k - 1` **nao** e monovariante, porque falha em zero. **Boa
+  fundacao do contradominio nao substitui decrescimo estrito.**
+
+### Not done
+
+- **Nenhum problema de milenio atacado.** `0` arquivos Lean permanentes,
+  `0` claims, `25` no ledger.
+
+### Locked
+
+- `authorized_action: FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED`.
+- `DEC-031` registrado no mesmo commit que faz suas tres edicoes.
+
 ## FOUND-INVARIANT-UNREACHABILITY-001-RESULT-REVIEW - 2026-08-04
 
 ### Approved

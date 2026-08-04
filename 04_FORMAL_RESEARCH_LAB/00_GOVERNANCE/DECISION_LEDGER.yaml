@@ -547,3 +547,31 @@ decisions:
     wildcard: false
     governance_changes:
       - "labctl: allowlist += FOUND_INVARIANT_UNREACHABILITY_001_RESULT_REVIEW_AUTHORIZED"
+  - decision_id: DEC-031
+    date: 2026-08-04
+    decision: >
+      Tres edicoes literais em labctl.py, sem wildcard: allowlist para o
+      gate de especificacao de FOUND-MONOVARIANT-DESCENT-001, admissao na
+      sequencia de gates, e pre-condicao DUPLA de que
+      FOUND-INVARIANT-UNREACHABILITY-001 esteja VERIFIED E com
+      result_review APPROVED.
+    rationale: >
+      A frente consome Reachable e a estrutura da frente de invariantes, e
+      seu teorema negativo consome OrbitSeparating. A pre-condicao dupla
+      segue o padrao de DEC-021.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_MONOVARIANT.md"
+    reversibility: reversible
+    wildcard: false
+    follows_pattern: DEC-021
+    governance_changes:
+      - "labctl: allowlist += FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+      - "labctl: gate sequence admite FOUND-MONOVARIANT-DESCENT-001"
+      - "labctl: pre-condicao dupla VERIFIED + result_review APPROVED"
+    untouched_safeguards:
+      - "nenhuma frente encerrada e modificada"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

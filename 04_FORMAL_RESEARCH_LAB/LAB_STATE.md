@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:37:40-03:00
-canonical_commit: "27b1972cab6906f8866a7aa46a640760b3615495"
+updated_at: 2026-08-04T00:44:00-03:00
+canonical_commit: "1a43f893fa4470c0ed10900b1c6daded9a6309bd"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -9,12 +9,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-INVARIANT-UNREACHABILITY-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_work_item: "FOUND-MONOVARIANT-DESCENT-001"
+work_status: "SCOPED"
+specification_status: "NOT_STARTED"
+specification_review: "NOT_STARTED"
+formalization_status: "NOT_STARTED"
+result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -30,9 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Aguardar revisão de portfólio. A frente
-  FOUND-INVARIANT-UNREACHABILITY-001 está encerrada e travada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Especificar FOUND-MONOVARIANT-DESCENT-001: medida decrescente em
+  Nat, ausência de ponto periódico, recuperação de 0 < period e o
+  negativo contra a reflexão.
+authorized_action: "FOUND_MONOVARIANT_DESCENT_001_SPECIFICATION_PREPARATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -186,6 +187,10 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não usar ordem geral ou WellFoundedRelation: a medida vive em Nat"
+  - "Não afirmar que boa fundação basta: k - 1 falha em zero"
+  - "Não afirmar que monovariante é necessário para ausência de ciclo"
+  - "Não abrir terminação de programas nem ordinais"
   - "Não escrever contagem agregada sem derivá-la por script no mesmo gate"
   - "Não afirmar que um invariante separador é necessário para inalcançabilidade: é suficiente"
   - "Não usar invariante para certificar recorrência: só vale em ponto fixo"

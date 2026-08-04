@@ -1176,3 +1176,32 @@ decisions:
       - "BSD NAO e afirmado alcancavel"
       - "o probe promovido NAO e apresentado como PR ao Mathlib"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-053
+    date: 2026-08-04
+    decision: >
+      Encerrar FOUND-LERAY-PROJECTOR-001 com o projetor de Leray
+      construido em L2, e fechar FM-GAP-002.
+    rationale: >
+      lake build exit 0, 8815 jobs, 561 linhas, 42 declaracoes, zero
+      sorry, 29 print axioms todos limpos. A escolha de simbolo como
+      familia finita sobre base ortonormal reusa a arvore e evita a
+      ausencia de Lp.norm_smul_le operador-valorado, ao custo declarado
+      de cota 2n^2 em vez de 1. A idempotencia fechou em tres niveis
+      quando um foi pedido, incluindo o do operador em L2. A instancia
+      positiva em R3 e nao trivial: P != 0 e P != Id, com traco 2.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayProjector.lean"
+      - "LAB_STATE.md"
+      - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "FM-GAP-002 FECHADA"
+      - "LAB_STATE: prohibited_actions += 3 entradas do projetor"
+      - "desvio de protocolo declarado: 4 gates em 1 commit"
+    untouched_safeguards:
+      - "P NAO e afirmado projecao ortogonal: LP-GAP-002"
+      - "a cota NAO e afirmada otima: LP-GAP-001"
+      - "a pressao de Navier-Stokes NAO e afirmada recuperada"
+      - "nenhum problema de milenio e atacado"

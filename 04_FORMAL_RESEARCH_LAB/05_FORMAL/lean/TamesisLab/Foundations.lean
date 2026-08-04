@@ -15,6 +15,7 @@ import TamesisLab.Foundations.UniformPrimrec
 import TamesisLab.Foundations.SpectralCounting
 import TamesisLab.Foundations.FourierMultiplierL2
 import TamesisLab.Foundations.EllipticHeight
+import TamesisLab.Foundations.LerayProjector
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

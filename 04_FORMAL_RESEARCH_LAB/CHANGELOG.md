@@ -1,5 +1,57 @@
 # Changelog do laboratório formal
 
+## FOUND-LERAY-PROJECTOR-001-CLOSURE - 2026-08-04
+
+### Built
+
+- **O projetor de Leray esta construido em `L²`.** `561` linhas, `42`
+  declaracoes, `lake build` exit `0`, `0` `sorry`, `29` `#print axioms`
+  todos limpos.
+- `lerayOpL2` limitado, **idempotente**, simetrico, **mata gradientes**,
+  traco `n − 1`.
+
+### Idempotence closed at THREE levels
+
+- Foi pedido **um**: o pontual do simbolo. Fecharam **tres**, incluindo
+  `lerayOpL2 ∘L lerayOpL2 = lerayOpL2` no nivel do **operador em L²**.
+
+### Design choice, with its cost declared
+
+- Simbolo como **familia finita sobre base ortonormal**, nao
+  `Lp (F →L[ℂ] F) ∞`: reusa `norm_lerayComponent_le` da arvore, evita a
+  ausencia de `Lp.norm_smul_le` operador-valorado, e a soma
+  `Σₖ ξₖ² = ‖ξ‖²` sai de `OrthonormalBasis.sum_inner_mul_inner`.
+- **Custo declarado**: cota `2n²` em vez da otima `1`.
+
+### The multiplier calculus became an algebra
+
+- `fourierMulL2_comp : fourierMulL2 g ∘L fourierMulL2 h = fourierMulL2 (g • h)`,
+  mais `_add`, `_sum`, `_zero`. **Homomorfismo de algebra**, nao operador
+  solto.
+
+### Non-trivial positive instance
+
+- Em `EuclideanSpace ℝ (Fin 3)`: `P_00 = 0`, `P_11 = 1`, traco `= 2`,
+  logo **`P ≠ 0` e `P ≠ Id`**. Projecao **nao trivial** — quarta vez
+  nesta sessao que essa checagem impede forma sem satisfazibilidade.
+- E o simbolo **nao e temperado**: o operador do Mathlib colapsa em `0`
+  nele.
+
+### What is missing is refinement, NOT existence
+
+```text
+LP-GAP-001  cota otima 1 (tenho 2n^2)
+LP-GAP-002  P* = P, projecao ORTOGONAL
+LP-GAP-003  Id - P = grad Laplace^-1 div explicito
+LP-GAP-004  versao H^s matricial, bloqueada por FM-GAP-001
+```
+
+### Not claimed
+
+- **`P` NAO e projecao ortogonal** — `P* = P` nao foi provado. A cota
+  **nao** e otima. A pressao de Navier-Stokes **nao** foi recuperada.
+  **Nenhum problema de milenio atacado.**
+
 ## FOUND-ELLIPTIC-HEIGHT-001-CLOSURE - 2026-08-04
 
 ### Closed

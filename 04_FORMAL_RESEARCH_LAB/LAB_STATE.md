@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:04:40-03:00
-canonical_commit: "e3572a876fd0fb0748fb237f820bb1411259ee84"
+updated_at: 2026-08-04T00:08:08-03:00
+canonical_commit: "b81aa1000af432c08ec93f9346396db9fdbed7bb"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -30,16 +30,18 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Reconstruir as sete decisões citadas sem registro, resolver a
-  colisão de DEC-014 sem reescrever o changelog, e fazer o labctl
-  recusar qualquer citação DEC-NNN sem entrada no ledger.
-authorized_action: "LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED"
+  Especificar FOUND-ORBIT-FINITENESS-001: a finitude da órbita
+  concreta sob separação, com cota dada pelo número de estados
+  abstratos.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
 yaml_scan_markdown_front_matter_covered: 333
 yaml_duplicate_key_status: "VERIFIED_CLEAN"
-consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED"]
+consumed_authorizations: ["LAB_GOV_YAML_DUPLICATE_KEYS_CORRECTION_AUTHORIZED", "LAB_GOV_FRONTMATTER_SCAN_CORRECTION_AUTHORIZED", "LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED"]
+decision_ledger_integrity: "VERIFIED_CLEAN"
+decision_citations_unregistered: 0
 closed_work_items:
   FOUND-BISIMULATION-BOUNDARY-001:
     work_status: VERIFIED
@@ -274,9 +276,27 @@ resume_read_order:
 # Estado atual
 
 ```text
-FOUND-FUNCTIONAL-GRAPH-001   VERIFIED / result_review APPROVED   ENCERRADO
-FOUND-SEMIGROUP-002          VERIFIED / APPROVED                 ENCERRADO
-RH-NOGO-001                  FROZEN_PARTIAL_RESULT               congelado
+LAB-ARCH-001                        VERIFIED                ENCERRADO
+LAB-BENCH-001                       VERIFIED                ENCERRADO
+FOUND-SEMIGROUP-001                 VERIFIED                ENCERRADO
+FOUND-SEMIGROUP-002                 VERIFIED / APPROVED     ENCERRADO
+FOUND-FUNCTIONAL-GRAPH-001          VERIFIED / APPROVED     ENCERRADO
+FOUND-CYCLE-DETECTION-001           VERIFIED / APPROVED     ENCERRADO
+ENG-FINITE-STATE-RUNTIME-001        VERIFIED / APPROVED     ENCERRADO
+ENG-FINITE-STATE-ENCODING-001       VERIFIED / APPROVED     ENCERRADO
+FOUND-FINITE-STATE-ABSTRACTION-001  VERIFIED / APPROVED     ENCERRADO
+FOUND-BISIMULATION-BOUNDARY-001     VERIFIED / APPROVED     ENCERRADO
+
+RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
+
+NS-PRESSURE-001                     SCOPED                  nunca executado
+PVSNP-PHYS-001                      SCOPED                  nunca executado
+YM-LIMIT-001                        SCOPED                  nunca executado
+HODGE-CDK-001                       SCOPED                  nunca executado
+BSD-HYP-MATRIX-001                  SCOPED                  nunca executado
+TOE-INTERFACE-001                   SCOPED                  nunca executado
+
+LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
 authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
@@ -284,51 +304,40 @@ authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 **Nenhuma frente ativa.** A escolha do próximo trabalho exige um gate
 explícito de revisão de portfólio.
 
-## Força exata do resultado encerrado
+## Por que este bloco existe
+
+Ele esteve **desatualizado por seis gates**, descrevendo
+`FOUND-FUNCTIONAL-GRAPH-001` como estado corrente enquanto o front matter
+já registrava dez frentes encerradas. O YAML é a fonte de verdade e
+sempre esteve correto; a prosa não. Como `resume_read_order` manda ler
+este arquivo primeiro, a prosa obsoleta enganava exatamente na retomada.
+
+## O que a cadeia de dez frentes estabeleceu
 
 ```text
-Para cada estado inicial x, existe entrada limitada numa orbita periodica.
-
-Todos os pontos periodicos do componente de x, definido por
-EventuallyMeets, pertencem a MESMA orbita periodica.
+semiconjugacao             NAO reflete recorrencia
+bissimulacao funcional     NAO reflete   (e a mesma coisa, no caso total)
+bissimulacao sobrejetiva   NAO reflete
+OrbitSeparating            REFLETE
+injetividade global        REFLETE  (forte demais)
 ```
 
-**Não** provado: componente como conjunto ou quociente, representante
-canônico, menor `μ`, enumeração da bacia, grafo subjacente, conexidade em
-`SimpleGraph`, decomposição em árvores, unicidade global de ciclo.
+Abstração entrega **observação**, não reflexão. Reforçar a relação de
+simulação não atravessa essa fronteira; o que atravessa é **separação de
+estados**.
 
-## A ressalva que precisa sobreviver
+## Limite computacional que permanece
 
-```text
-A reciproca EXIGE ambos os pontos periodicos.
-
-Dois pontos NAO periodicos tem ambos periodicOrbit = Cycle.nil. As orbitas
-vazias sao iguais SEM que as trajetorias se encontrem.
-```
-
-## Limite computacional
-
-`periodicOrbit` é **noncomputável**. O resultado não fornece algoritmo de
-enumeração de componentes, cálculo de `μ` ou detecção de ciclo.
-
-## Auditoria da revisão
-
-```text
-16 declaracoes publicas, 1 auxiliar private
-5 instancias, todas em contraexemplos; ZERO no nucleo
-0 conflitos; umbrella nao ambiguo
-DecidableEq ausente de todos; Fintype so na existencia
-zero Setoid, zero SimpleGraph, zero Quotient
-pigeonhole nao reaplicado; ∃! ausente
-FGR-001..008 todos CONFIRMADOS
-```
-
-Gaps: **onze resolvidos, quatro abertos** (`006`, `007`, `012`, `014`).
+`periodicOrbit` é **noncomputável**. `OrbitSeparating` é obrigação do
+consumidor, por órbita, e **não** foi tornada decidível — a tentativa foi
+formalizada em probe, compilou, e foi rejeitada por não comprar nada que
+a equação única já não comprasse.
 
 ## Novidade
 
 ```yaml
 mathematical_novelty: NONE
+algorithmic_novelty: NONE
 research_role: FORMAL_FOUNDATION
 ```
 

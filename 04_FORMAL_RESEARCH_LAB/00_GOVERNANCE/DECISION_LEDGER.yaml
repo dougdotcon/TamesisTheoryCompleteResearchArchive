@@ -232,3 +232,225 @@ decisions:
       - "nenhuma frente encerrada e modificada"
       - "nenhuma entrada historica do CHANGELOG e reescrita"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+  - decision_id: DEC-015
+    date: 2026-07-31
+    decision: >
+      Exigir no labctl que FOUND-CYCLE-DETECTION-001 nao possa ser o item
+      ativo antes de FOUND-FUNCTIONAL-GRAPH-001 estar VERIFIED.
+    rationale: >
+      A frente consome a API verificada do grafo funcional. Sem a
+      pre-condicao, a sequencia de gates aceitaria a frente com a
+      dependencia ainda aberta.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: pre-condicao de dependencia para FOUND-CYCLE-DETECTION-001"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao PORTFOLIO-REVIEW-CYCLE-DETECTION, bloco Governance"
+    reconstruction_confidence: HIGH
+    reconstruction_note: >
+      O conteudo vem da unica fonte sobrevivente, o changelog, que descreve
+      a edicao como uma entrada minima e literal, sem wildcard. A data e a
+      da secao do changelog. Nada aqui foi inferido alem do que o texto diz.
+  - decision_id: DEC-016
+    date: 2026-07-31
+    decision: >
+      Acrescentar ao allowlist do labctl a entrada literal
+      FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED.
+    rationale: >
+      Sem a entrada, o gate de preparacao de especificacao seria recusado
+      por authorized_action inconsistente.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: allowlist += FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao PORTFOLIO-REVIEW-CYCLE-DETECTION, bloco Governance"
+    reconstruction_confidence: HIGH
+  - decision_id: DEC-017
+    date: 2026-07-31
+    decision: >
+      Acrescentar ao allowlist do labctl a entrada literal
+      FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED.
+    rationale: >
+      Transicao do gate de especificacao para o de revisao de
+      especificacao, uma entrada por vez, sem wildcard.
+    authority: FOUND_CYCLE_DETECTION_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: allowlist += FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao FOUND-CYCLE-DETECTION-001-SPECIFICATION, bloco Changed"
+    reconstruction_confidence: HIGH
+  - decision_id: DEC-018
+    date: 2026-07-31
+    decision: >
+      Acrescentar ao allowlist do labctl a entrada literal
+      FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED.
+    rationale: >
+      Transicao do gate de revisao de especificacao para o de
+      formalizacao, uma entrada literal, sem wildcard.
+    authority: FOUND_CYCLE_DETECTION_001_SPECIFICATION_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: allowlist += FOUND_CYCLE_DETECTION_001_FORMALIZATION_AUTHORIZED"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao FOUND-CYCLE-DETECTION-001-SPECIFICATION-REVIEW, bloco Changed"
+    reconstruction_confidence: HIGH
+  - decision_id: DEC-019
+    date: 2026-08-04
+    decision: >
+      Registrar DEC-019 como identificador NUNCA EMITIDO.
+    rationale: >
+      A varredura do gate LAB-GOV-DECISION-LEDGER-001 nao encontrou
+      nenhuma citacao de DEC-019 em lugar nenhum do laboratorio, e o
+      ledger nunca teve entrada correspondente. O identificador e um
+      buraco na numeracao, nao uma decisao perdida. Registrar o buraco
+      explicitamente e preferivel a reutilizar o numero, que produziria
+      ambiguidade indistinguivel da colisao de DEC-014.
+    authority: LAB_GOV_DECISION_LEDGER_CORRECTION_AUTHORIZED
+    status: NEVER_ISSUED
+    affected_paths: []
+    reversibility: irreversible
+    reuse_policy: FORBIDDEN
+  - decision_id: DEC-020
+    date: 2026-08-01
+    decision: >
+      Estender a sequencia de gates do labctl para admitir
+      ENG-FINITE-STATE-RUNTIME-001.
+    rationale: >
+      A frente de engenharia foi selecionada em revisao de portfolio e a
+      sequencia de gates ainda nao a reconhecia.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: gate sequence admite ENG-FINITE-STATE-RUNTIME-001"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao ENG-FINITE-STATE-RUNTIME-001, bloco Governance"
+    reconstruction_confidence: HIGH
+  - decision_id: DEC-021
+    date: 2026-08-01
+    decision: >
+      Exigir pre-condicao DUPLA para ENG-FINITE-STATE-RUNTIME-001: a
+      dependencia deve estar VERIFIED E com result_review APPROVED.
+    rationale: >
+      Primeira pre-condicao do laboratorio a exigir duas propriedades
+      simultaneas. Status VERIFIED sozinho nao demonstra que o resultado
+      passou por revisao independente.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: pre-condicao dupla VERIFIED + result_review APPROVED"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao ENG-FINITE-STATE-RUNTIME-001, bloco Governance"
+    reconstruction_confidence: HIGH
+    note: >
+      Esta e a decisao de maior alcance entre as sete reconstruidas: o
+      padrao de pre-condicao dupla foi replicado depois para
+      ENG-FINITE-STATE-ENCODING-001, FOUND-FINITE-STATE-ABSTRACTION-001 e
+      FOUND-BISIMULATION-BOUNDARY-001, e governa quatro frentes sem que
+      sua autorizacao estivesse registrada.
+  - decision_id: DEC-022
+    date: 2026-08-01
+    decision: >
+      Acrescentar ao allowlist do labctl as entradas literais dos gates de
+      ENG-FINITE-STATE-RUNTIME-001.
+    rationale: >
+      Sem as entradas, os gates da frente seriam recusados por
+      authorized_action inconsistente.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: allowlist += ENG_FINITE_STATE_RUNTIME_001_*, uma entrada por vez"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao ENG-FINITE-STATE-RUNTIME-001, bloco Governance"
+    reconstruction_confidence: HIGH
+  - decision_id: DEC-025
+    date: 2026-07-31
+    decision: >
+      Estender a sequencia de gates do labctl para admitir
+      FOUND-CYCLE-DETECTION-001.
+    rationale: >
+      Esta decisao existe de fato e esta descrita no changelog, que a cita
+      como DEC-014. Mas DEC-014 ja designava, no ledger, o endurecimento
+      PENDENTE de FROZEN_PARTIAL_RESULT, com authority null e
+      affected_paths vazio. Sao duas decisoes distintas com o mesmo
+      identificador. A colisao e resolvida atribuindo um identificador
+      novo a esta, sem tocar no texto historico do changelog.
+    authority: PORTFOLIO_REVIEW_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    governance_changes:
+      - "labctl: gate sequence admite FOUND-CYCLE-DETECTION-001"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "CHANGELOG.md, secao PORTFOLIO-REVIEW-CYCLE-DETECTION, bloco Governance"
+    reconstruction_confidence: HIGH
+    cited_in_changelog_as: DEC-014
+    collision_with: DEC-014
+    collision_resolution: NEW_IDENTIFIER_HISTORY_PRESERVED
+    collision_note: >
+      O changelog NAO foi reescrito. Quem ler "DEC-014 (gate sequence)"
+      naquela secao deve resolver a citacao por este campo. Reescrever a
+      entrada historica apagaria a evidencia do proprio defeito.
+  - decision_id: DEC-023
+    date: 2026-08-01
+    decision: >
+      Acrescentar ao allowlist do labctl a entrada literal
+      ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED.
+    rationale: "exigido pelo item 37 do gate"
+    authority: ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += ENG_FINITE_STATE_RUNTIME_001_SPECIFICATION_REVIEW_AUTHORIZED"
+    original_registration: MISSING
+    reconstructed_at: 2026-08-04
+    reconstructed_in_gate: LAB-GOV-DECISION-LEDGER-001
+    reconstructed_from: "eng-finite-state-runtime-001-specification-result.json, governance_deviations[0]"
+    reconstruction_confidence: EXACT
+    discovered_by: scan_decision_citations
+    discovery_note: >
+      Esta entrada NAO foi encontrada pela inspecao manual que abriu o
+      gate, que cobriu apenas CHANGELOG.md e arquivos YAML. Foi a propria
+      verificacao automatica, na sua primeira execucao, que a encontrou
+      num arquivo .json. E a razao de a verificacao existir.
+    source_quality_note: >
+      A fonte aqui e ESTRUTURADA, um bloco governance_deviations com id,
+      file, change, reason e wildcard, e portanto melhor do que a prosa de
+      changelog que sustenta DEC-015..DEC-022 e DEC-025. O laboratorio ja
+      possuia o mecanismo de registro por gate; o que faltava era a
+      consolidacao no ledger. A informacao nao estava perdida, estava
+      desconsolidada.

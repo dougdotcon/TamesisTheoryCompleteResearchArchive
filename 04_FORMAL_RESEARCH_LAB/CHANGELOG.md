@@ -1,5 +1,76 @@
 # Changelog do laboratório formal
 
+## LAB-GOV-DECISION-LEDGER-001 - 2026-08-04
+
+### Found
+
+- O `DECISION_LEDGER.yaml` terminava em `DEC-014`. Oito identificadores
+  eram citados como autoridade **sem entrada nenhuma**: `DEC-015`,
+  `DEC-016`, `DEC-017`, `DEC-018`, `DEC-020`, `DEC-021`, `DEC-022` e
+  `DEC-023`.
+- **`DEC-014` designava duas decisoes diferentes.** No ledger, o
+  endurecimento PENDENTE de `FROZEN_PARTIAL_RESULT`, com `authority: null`
+  e `affected_paths: []`. No changelog, uma edicao de sequencia de gates
+  no `labctl.py`.
+- `DEC-019` nunca foi citado em lugar nenhum: buraco na numeracao.
+- Todas as oito autorizavam **edicoes literais em `10_TOOLS/labctl.py`**,
+  o validador de todo gate. `DEC-021` e a de maior alcance: a
+  pre-condicao dupla `VERIFIED` **e** `result_review APPROVED` foi depois
+  replicada para **quatro** frentes, governando-as sem que sua
+  autorizacao estivesse registrada.
+
+### Reconstructed
+
+- Oito decisoes registradas, cada uma com `original_registration: MISSING`,
+  `reconstructed_from` apontando a fonte sobrevivente e
+  `reconstruction_confidence`. Nada foi inventado alem do que a fonte diz.
+- `DEC-019` registrado como `NEVER_ISSUED` com `reuse_policy: FORBIDDEN`.
+  Registrar o buraco e preferivel a reutilizar o numero, que produziria
+  ambiguidade indistinguivel da colisao de `DEC-014`.
+- A colisao foi resolvida atribuindo `DEC-025` a decisao de sequencia de
+  gates, com `cited_in_changelog_as: DEC-014`. **O texto historico do
+  changelog nao foi tocado** — reescreve-lo apagaria a evidencia do
+  proprio defeito.
+
+### Caught
+
+- **A verificacao nova encontrou, na primeira execucao, uma oitava
+  decisao que a inspecao manual perdeu.** `DEC-023` estava citado num
+  `.json`, fora do alcance do grep manual que cobriu changelog e YAML.
+- A fonte de `DEC-023` e **estruturada**, um bloco
+  `governance_deviations`. O laboratorio ja tinha o mecanismo de registro
+  por gate; faltava a consolidacao. A informacao estava desconsolidada,
+  nao perdida.
+
+### Added
+
+- `scan_decision_citations` no `labctl`: toda citacao `DEC-NNN` sob o
+  laboratorio precisa de exatamente uma entrada no ledger, e
+  `DECISION_LEDGER has duplicate decision_id` passa a ser erro.
+- **Teste negativo executado**: um arquivo temporario citando um
+  identificador `DEC-NNN` inexistente foi criado, a verificacao o
+  **recusou**, e o arquivo foi removido. Uma verificacao que nunca falhou
+  nao foi demonstrada.
+- **A verificacao entao recusou esta propria entrada de changelog**, que
+  na primeira redacao continha o identificador falso escrito por extenso.
+  O instrumento morde quem o escreveu, que e a unica evidencia que vale.
+- Limite declarado: a verificacao detecta citacao **sem** entrada. Ela
+  **nao** detecta citacao com entrada **errada** — a colisao de `DEC-014`
+  foi resolvida por campo explicito, nao por varredura.
+
+### Fixed
+
+- O corpo em prosa do `LAB_STATE.md` estava **desatualizado por seis
+  gates**, apresentando `FOUND-FUNCTIONAL-GRAPH-001` como estado corrente
+  enquanto o front matter ja registrava dez frentes encerradas. Como
+  `resume_read_order` manda ler esse arquivo primeiro, a prosa obsoleta
+  enganava exatamente na retomada.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`. `0` claims promovidas,
+  `24` no ledger, `0` frentes encerradas tocadas, `0` arquivos Lean.
+
 ## PORTFOLIO-REVIEW-AFTER-BISIMULATION - 2026-08-04
 
 ### Selected

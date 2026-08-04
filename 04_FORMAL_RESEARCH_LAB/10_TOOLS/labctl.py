@@ -511,6 +511,61 @@ def scan_duplicate_yaml_keys(root: Path | None = None) -> dict[str, Any]:
     }
 
 
+DECISION_CITATION_PATTERN = re.compile(r"\bDEC-(\d{3})\b")
+
+DECISION_TEXT_SUFFIXES = (".md", ".yaml", ".yml", ".json")
+
+
+def decision_ids_registered() -> set[str]:
+    """Identificadores com entrada propria no ledger de decisoes."""
+    doc = read_yaml(LAB_ROOT / "00_GOVERNANCE" / "DECISION_LEDGER.yaml")
+    return {
+        str(entry.get("decision_id"))
+        for entry in doc.get("decisions", [])
+        if entry.get("decision_id")
+    }
+
+
+def scan_decision_citations(root: Path | None = None) -> dict[str, Any]:
+    """Toda citacao DEC-NNN sob o laboratorio precisa de entrada no ledger.
+
+    Motivo: DEC-015..DEC-022 foram citados no CHANGELOG como autoridade de
+    edicoes literais no proprio labctl.py sem nunca terem entrada. Uma
+    autoridade que so existe em narrativa nao e autoridade.
+
+    A verificacao detecta citacao SEM entrada. Ela nao detecta citacao com
+    entrada ERRADA: a colisao de DEC-014 foi resolvida por um campo
+    explicito, nao por esta varredura.
+    """
+    base = root if root is not None else LAB_ROOT
+    registered = decision_ids_registered()
+    cited: dict[str, list[str]] = {}
+    for path in sorted(base.rglob("*")):
+        if not path.is_file() or path.suffix not in DECISION_TEXT_SUFFIXES:
+            continue
+        if ".lake" in path.parts:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        for match in DECISION_CITATION_PATTERN.finditer(text):
+            cited.setdefault(match.group(0), []).append(
+                str(path.relative_to(REPO_ROOT))
+            )
+    unregistered = {
+        identifier: sorted(set(files))
+        for identifier, files in cited.items()
+        if identifier not in registered
+    }
+    return {
+        "registered": len(registered),
+        "cited": len(cited),
+        "unregistered": unregistered,
+        "files_scanned": sum(len(set(f)) for f in cited.values()),
+    }
+
+
 def validate() -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -704,6 +759,17 @@ def validate() -> dict[str, Any]:
             errors.append(f"invalid evidence level: {claim.get('claim_id')}")
         if claim.get("work_status") in {"SOLVED", "CLOSED", "100_PERCENT", "CLAY_READY"}:
             errors.append(f"promotional status in claim ledger: {claim.get('claim_id')}")
+
+    decisions_doc = read_yaml(LAB_ROOT / "00_GOVERNANCE" / "DECISION_LEDGER.yaml")
+    decision_entries = decisions_doc.get("decisions", [])
+    decision_ids = [entry.get("decision_id") for entry in decision_entries]
+    if len(decision_ids) != len(set(decision_ids)):
+        errors.append("DECISION_LEDGER has duplicate decision_id")
+    citation_scan = scan_decision_citations()
+    for identifier, files in sorted(citation_scan["unregistered"].items()):
+        errors.append(
+            f"decision cited without ledger entry: {identifier} in {files}"
+        )
 
     canonical_check = check_canonical_commit(state.get("canonical_commit"))
     if canonical_check["status"] != CANONICAL_COMMIT_PASS:

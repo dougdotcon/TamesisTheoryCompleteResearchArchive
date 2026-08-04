@@ -1,5 +1,47 @@
 # Changelog do laboratório formal
 
+## ENG-RUNTIME-SOUNDNESS-002-CLOSURE - 2026-08-04
+
+### Paid
+
+- **A divida esta paga na origem.** `lake build` exit `0`, `8811` jobs,
+  `0` `error:`.
+
+```text
+copias da reducao do bloco do   4  ->  0
+auxiliares privados removidos   3
+declaracoes publicas novas      2
+assinaturas quebradas           0
+mudancas de semantica           0
+```
+
+- Verificado por grep: `private theorem analyze_reduce` -> **0**;
+  `analyze_reduce_public|_cb|_u` -> **0**.
+
+### Simplified
+
+- Duas provas de dez linhas viraram **uma projecao cada**:
+
+```lean
+analyzeTransitionTable_period_pos := (analyzeTransitionTable_rawValid h).2.1
+analyzeTransitionTable_bound      := (analyzeTransitionTable_rawValid h).2.2.1
+```
+
+### Closed
+
+- `CB-GAP-004` e `UP-GAP-002` **FECHADAS**.
+- `ENG-RUNTIME-SOUNDNESS-002` — **decima quinta** frente encerrada.
+
+### Preserved
+
+- `analyzeTransitionTable_sound` **intacta**, `analyzeTransitionTable`
+  com semantica inalterada, ramo `internalDetectorFailure` no lugar.
+
+### Locked
+
+- `authorized_action: PORTFOLIO_REVIEW_REQUIRED`.
+- `DEC-048` registrado no mesmo commit que faz sua edicao.
+
 ## BUILDABLE-PIECES - 2026-08-04
 
 ### Found

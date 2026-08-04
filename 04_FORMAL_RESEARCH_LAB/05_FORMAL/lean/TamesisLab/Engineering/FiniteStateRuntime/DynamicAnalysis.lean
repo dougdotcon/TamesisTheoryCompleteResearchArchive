@@ -44,9 +44,13 @@ def analyzeTransitionTable (raw : RawTransitionTable) (start : Nat) :
 
 /-- Redução da análise quando ambas as validações passam.
 
-Auxiliar privado: ele isola, de uma vez, as duas reduções que o `do`
-esconde, e é o que torna soundness e completeness curtas. -/
-private theorem analyze_reduce {raw : RawTransitionTable} (hRaw : raw.Valid)
+Isola, de uma vez, as duas reduções que o `do` esconde, e é o que torna
+soundness e completeness curtas.
+
+**Pública desde ENG-RUNTIME-SOUNDNESS-002.** Enquanto era privada, quatro
+frentes distintas reproduziram esta mesma redução em auxiliares próprios.
+Publicá-la é o que elimina as quatro cópias. -/
+theorem analyzeTransitionTable_reduce {raw : RawTransitionTable} (hRaw : raw.Valid)
     {start : Nat} (hStart : start < raw.next.size) :
     analyzeTransitionTable raw start =
       (match ValidatedTransitionTable.detectCycle?
@@ -97,7 +101,7 @@ theorem analyzeTransitionTable_sound {raw : RawTransitionTable} {start : Nat}
     raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start := by
   by_cases hRaw : raw.Valid
   · by_cases hStart : start < raw.next.size
-    · rw [analyze_reduce hRaw hStart] at h
+    · rw [analyzeTransitionTable_reduce hRaw hStart] at h
       cases hd : ValidatedTransitionTable.detectCycle?
           (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
       | none => rw [hd] at h; exact absurd h (by simp)
@@ -112,6 +116,32 @@ theorem analyzeTransitionTable_sound {raw : RawTransitionTable} {start : Nat}
   · rw [analyzeTransitionTable_invalid_table raw start hRaw] at h
     exact absurd h (by simp)
 
+/-- **Soundness alargada: o contrato inteiro.**
+
+`analyzeTransitionTable_sound` devolve três cláusulas e perde o resto de
+`CycleWitness.Valid`. Esta devolve as quatro, sobre a tabela bruta.
+
+A cláusula `w.baseIndex < raw.next.size` nunca havia sido exposta a
+consumidor algum — sai de graça junto com as outras.
+
+`analyzeTransitionTable_sound` **permanece**: alargar não é substituir. -/
+theorem analyzeTransitionTable_rawValid {raw : RawTransitionTable} {start : Nat}
+    {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
+    w.baseIndex < raw.next.size ∧ 0 < w.period ∧
+      w.baseIndex + w.period ≤ raw.next.size ∧
+        raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start := by
+  obtain ⟨hRaw, hStart, hrun⟩ := analyzeTransitionTable_sound h
+  rw [analyzeTransitionTable_reduce hRaw hStart] at h
+  cases hd : ValidatedTransitionTable.detectCycle?
+      (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
+  | none => rw [hd] at h; exact absurd h (by simp)
+  | some w' =>
+      rw [hd] at h
+      have hww : w' = w := Except.ok.inj h
+      subst hww
+      have hv := ValidatedTransitionTable.detectCycle?_sound hd
+      exact ⟨by simpa using hv.1, hv.2.1, by simpa using hv.2.2.1, hrun⟩
+
 /-- **Completude da análise.**
 
 Para toda tabela válida e todo índice no domínio, a análise devolve um
@@ -123,7 +153,7 @@ theorem analyzeTransitionTable_complete (raw : RawTransitionTable)
     ValidatedTransitionTable.detectCycle?_complete
       (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩
   refine ⟨w, ?_⟩
-  rw [analyze_reduce hRaw hStart, hw]
+  rw [analyzeTransitionTable_reduce hRaw hStart, hw]
 
 /-- O ramo defensivo é **inalcançável** sob as pré-condições formais.
 

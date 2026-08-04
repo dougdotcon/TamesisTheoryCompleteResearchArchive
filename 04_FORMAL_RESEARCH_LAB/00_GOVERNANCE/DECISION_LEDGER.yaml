@@ -1027,3 +1027,32 @@ decisions:
       - "0 assinaturas publicas existentes quebradas"
       - "nenhum arquivo Lean da arvore versionada e modificado neste gate"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+  - decision_id: DEC-048
+    date: 2026-08-04
+    decision: >
+      Formalizar e encerrar ENG-RUNTIME-SOUNDNESS-002. A reducao do bloco
+      do passa a ser publica na origem e a soundness ganha o contrato
+      inteiro; as tres copias privadas saem.
+    rationale: >
+      lake build exit 0, 8811 jobs, 0 error. Verificado por grep: zero
+      ocorrencias de private theorem analyze_reduce e zero de
+      analyze_reduce_public, _cb e _u. As quatro copias da mesma reducao
+      viraram zero, e a divida esta paga na ORIGEM, nao contornada.
+      analyzeTransitionTable_sound permanece intacta e a semantica de
+      analyzeTransitionTable nao muda.
+    authority: ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_REVIEW_AUTHORIZED
+    affected_paths:
+      - "05_FORMAL/lean/TamesisLab/Engineering/FiniteStateRuntime/DynamicAnalysis.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/Monovariants/WitnessBounds.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/ComputabilityBridge/WitnessBound.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/UniformPrimrec/Analysis.lean"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "CB-GAP-004 e UP-GAP-002 fechadas"
+      - "LAB_STATE: closed_work_items += ENG-RUNTIME-SOUNDNESS-002"
+    untouched_safeguards:
+      - "0 assinaturas publicas quebradas"
+      - "0 mudancas de semantica"
+      - "analyzeTransitionTable_sound nao removida"
+      - "nenhum problema de milenio e atacado"

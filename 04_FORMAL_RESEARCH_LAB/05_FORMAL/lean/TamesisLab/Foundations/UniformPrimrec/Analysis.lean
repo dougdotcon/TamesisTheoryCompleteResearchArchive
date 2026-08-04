@@ -17,8 +17,9 @@ Fecha `CB-GAP-001`.
 **`Primrec` nao significa eficiente.** A classe contem torres de
 exponenciais, e esta frente nao enuncia cota nenhuma — ver `UP-GAP-003`.
 
-`analyze_reduce_u` e a quarta reproducao da reducao do bloco `do`,
-declarada em `UP-GAP-002`.
+A reducao do bloco `do` vem de `analyzeTransitionTable_reduce`, publica
+desde `ENG-RUNTIME-SOUNDNESS-002`. Antes dela esta frente mantinha a
+**quarta** copia privada da mesma reducao — `UP-GAP-002`, fechada.
 -/
 
 namespace TamesisLab.Foundations.UniformPrimrec
@@ -38,27 +39,13 @@ def analyzeRaw (raw : RawTransitionTable) (start : Nat) :
     else .error (.initialStateOutOfBounds start raw.next.size)
   else .error .transitionDestinationOutOfBounds
 
-private theorem analyze_reduce_u {raw : RawTransitionTable} (hRaw : raw.Valid)
-    {start : Nat} (hStart : start < raw.next.size) :
-    analyzeTransitionTable raw start =
-      (match ValidatedTransitionTable.detectCycle?
-          (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
-        | some witness => .ok witness
-        | none => .error .internalDetectorFailure) := by
-  unfold analyzeTransitionTable
-  rw [show validateTransitionTable raw = .ok ⟨raw.next, hRaw⟩ from dif_pos hRaw]
-  show (validateStart ⟨raw.next, hRaw⟩ start).bind _ = _
-  rw [show validateStart ⟨raw.next, hRaw⟩ start = .ok ⟨start, hStart⟩
-      from dif_pos hStart]
-  rfl
-
 theorem analyzeRaw_eq (raw : RawTransitionTable) (start : Nat) :
     analyzeRaw raw start = analyzeTransitionTable raw start := by
   unfold analyzeRaw
   by_cases hRaw : raw.Valid
   · have hvb : validBool raw = true := (validBool_iff raw).mpr hRaw
     by_cases hStart : start < raw.next.size
-    · rw [if_pos hvb, if_pos hStart, analyze_reduce_u hRaw hStart,
+    · rw [if_pos hvb, if_pos hStart, analyzeTransitionTable_reduce hRaw hStart,
         detectCycle?_eq_raw (⟨raw.next, hRaw⟩ : ValidatedTransitionTable)
           ⟨start, hStart⟩]
       rfl

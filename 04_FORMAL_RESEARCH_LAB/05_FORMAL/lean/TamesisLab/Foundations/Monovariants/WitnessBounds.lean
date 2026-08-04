@@ -29,38 +29,11 @@ open TamesisLab.Engineering.FiniteStateRuntime
 
 variable {C A : Type*} {stepC : C → C} {stepA : A → A} {n : Nat}
 
-/-- Redução do bloco `do` quando as duas validações passam.
-
-Auxiliar **privado**. Reproduz, com API pública, o que a frente do
-runtime mantém privado. -/
-private theorem analyze_reduce_public {raw : RawTransitionTable} (hRaw : raw.Valid)
-    {start : Nat} (hStart : start < raw.next.size) :
-    analyzeTransitionTable raw start =
-      (match ValidatedTransitionTable.detectCycle?
-          (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
-        | some witness => .ok witness
-        | none => .error .internalDetectorFailure) := by
-  unfold analyzeTransitionTable
-  rw [show validateTransitionTable raw = .ok ⟨raw.next, hRaw⟩ from dif_pos hRaw]
-  show (validateStart ⟨raw.next, hRaw⟩ start).bind _ = _
-  rw [show validateStart ⟨raw.next, hRaw⟩ start = .ok ⟨start, hStart⟩
-      from dif_pos hStart]
-  rfl
-
 /-- **A positividade, recuperada no nível da tabela.** -/
 theorem analyzeTransitionTable_period_pos {raw : RawTransitionTable} {start : Nat}
     {w : CycleWitness} (h : analyzeTransitionTable raw start = .ok w) :
-    0 < w.period := by
-  obtain ⟨hRaw, hStart, -⟩ := analyzeTransitionTable_sound h
-  rw [analyze_reduce_public hRaw hStart] at h
-  cases hd : ValidatedTransitionTable.detectCycle?
-      (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
-  | none => rw [hd] at h; exact absurd h (by simp)
-  | some w' =>
-      rw [hd] at h
-      have hww : w' = w := Except.ok.inj h
-      subst hww
-      exact (ValidatedTransitionTable.detectCycle?_sound hd).2.1
+    0 < w.period :=
+  (analyzeTransitionTable_rawValid h).2.1
 
 /-- **A positividade, no nível da análise abstrata.**
 

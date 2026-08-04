@@ -837,3 +837,36 @@ decisions:
       - "nenhum modelo de custo e escolhido"
       - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-042
+    date: 2026-08-04
+    decision: >
+      Congelar 31 assinaturas publicas de FOUND-UNIFORM-PRIMREC-001,
+      entre elas primrec_analyzeTransitionTable, e acrescentar ao labctl
+      a entrada FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED.
+    rationale: >
+      O probe fechou com exit 0 e 0 linhas de erro, arvore intocada, e
+      contem a prova de Primrec2 analyzeTransitionTable. O obstaculo era
+      tipo dependente e nao computabilidade: run? ja e nao dependente e a
+      sua recursao le-se como iterada, o que libera Primrec.nat_iterate.
+      O tipo dependente restante sai por casamento, valid_iff_rawValid,
+      apoiado na ponte run?_eq_iterate_step que a frente do runtime ja
+      tinha. A declaracao morta validBool_eq_decide foi removida antes do
+      congelamento.
+    authority: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED
+    affected_paths:
+      - "10_TOOLS/labctl.py"
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/12_UNIFORM_PRIMREC/FOUND_UNIFORM_PRIMREC_001/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "labctl: allowlist += FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED"
+      - "LAB_STATE: prohibited_actions += 3 entradas do nivel uniforme"
+    untouched_safeguards:
+      - "nenhum arquivo Lean da arvore versionada e criado ou modificado"
+      - "nenhuma frente encerrada e tocada"
+      - "nenhum modelo de custo e escolhido"
+      - "nenhuma classe de complexidade e definida"
+      - "RH-NOGO-001 permanece NOT_AUTHORIZED / NO_EXECUTION"
+      - "nenhum problema de milenio e atacado"

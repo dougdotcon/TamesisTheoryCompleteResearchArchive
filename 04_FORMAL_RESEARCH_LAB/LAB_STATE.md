@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T06:26:00-03:00
-canonical_commit: "f1d9924d14acb8d164aa0b184e49381fd0333f40"
+updated_at: 2026-08-04T07:02:00-03:00
+canonical_commit: "2de54d9371e9124419c2f19c6f301f4b955e9022"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -10,8 +10,8 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-UNIFORM-PRIMREC-001"
-work_status: "SCOPED"
-specification_status: "NOT_STARTED"
+work_status: "READY"
+specification_status: "READY_FOR_REVIEW"
 specification_review: "NOT_STARTED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
@@ -30,10 +30,10 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Especificar FOUND-UNIFORM-PRIMREC-001: a reformulação sobre List Nat
-  sem tipo dependente, a busca limitada, e o casamento com
-  analyzeTransitionTable.
-authorized_action: "FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED"
+  Revisar a especificação: 31 assinaturas congeladas, o casamento
+  valid_iff_rawValid, e sobretudo se o limite está escrito — Primrec
+  NÃO significa eficiente.
+authorized_action: "FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -228,6 +228,9 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não tratar Primrec como sinônimo de eficiente: a classe contém torres de exponenciais"
+  - "Não misturar decide e if no mesmo predicado: PrimrecPred carrega instância própria"
+  - "Não reimplementar o detector: detectCycle?_eq_raw é casamento, não reescrita"
   - "Não declarar o nível uniforme provado antes de lake build fechar sobre ele"
   - "Não confundir o obstáculo: é tipo dependente Fin t.next.size, não computabilidade"
   - "Não tratar o fechamento do nível uniforme como definição de classe de complexidade"
@@ -379,7 +382,7 @@ FOUND-MONOVARIANT-DESCENT-001       VERIFIED / APPROVED     ENCERRADO
 
 FOUND-COMPUTABILITY-BRIDGE-001      VERIFIED / APPROVED     ENCERRADO
 
-FOUND-UNIFORM-PRIMREC-001           SCOPED                  ATIVA
+FOUND-UNIFORM-PRIMREC-001           READY / READY_FOR_REVIEW  ATIVA
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
@@ -392,7 +395,7 @@ TOE-INTERFACE-001                   SCOPED                  nunca executado
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 
-authorized_action: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_PREPARATION_AUTHORIZED
+authorized_action: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED
 ```
 
 **Frente ativa: `FOUND-UNIFORM-PRIMREC-001`.** Treze frentes

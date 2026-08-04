@@ -1,0 +1,388 @@
+import TamesisLab.Foundations.ComputabilityBridge
+import Mathlib.Computability.Primrec.List
+
+set_option autoImplicit false
+
+/-!
+PROBE UNI7 — FECHAMENTO. `Primrec₂ analyzeTransitionTable`.
+-/
+
+namespace ProbeUNI7
+
+open TamesisLab.Engineering.FiniteStateRuntime
+open TamesisLab.Foundations.CycleDetection
+open TamesisLab.Foundations.ComputabilityBridge
+
+/-! ## 1 — dados basicos -/
+
+theorem primrec_next_toList : Primrec fun t : RawTransitionTable => t.next.toList :=
+  Primrec.of_equiv (e := rawTableEquiv)
+
+theorem primrec_size : Primrec fun t : RawTransitionTable => t.next.size :=
+  (Primrec.list_length.comp primrec_next_toList).of_eq (fun t => by simp)
+
+theorem primrec_witness_pair :
+    Primrec fun w : CycleWitness => (w.baseIndex, w.period) :=
+  Primrec.of_equiv (e := cycleWitnessEquiv)
+
+theorem primrec_baseIndex : Primrec CycleWitness.baseIndex :=
+  Primrec.fst.comp primrec_witness_pair
+
+theorem primrec_period : Primrec CycleWitness.period :=
+  Primrec.snd.comp primrec_witness_pair
+
+theorem primrec_mk : Primrec₂ fun b p : Nat => (⟨b, p⟩ : CycleWitness) := by
+  have h : Primrec fun q : Nat × Nat => cycleWitnessEquiv.symm q :=
+    Primrec.of_equiv_symm (e := cycleWitnessEquiv)
+  exact h.of_eq (fun _ => rfl)
+
+/-! ## 2 — o passo e a execucao -/
+
+theorem primrec_step? : Primrec₂ RawTransitionTable.step? := by
+  have h : Primrec₂ fun (t : RawTransitionTable) (s : Nat) => t.next.toList[s]? :=
+    Primrec.list_getElem?.comp₂ (primrec_next_toList.comp Primrec.fst) Primrec.snd
+  exact h.of_eq (fun t s => by simp [RawTransitionTable.step?])
+
+theorem iterate_bind_none (f : Nat → Option Nat) (k : Nat) :
+    (fun o : Option Nat => o.bind f)^[k] none = none := by
+  induction k with
+  | zero => rfl
+  | succ k ih => rw [Function.iterate_succ_apply]; simpa using ih
+
+theorem run?_eq_iterate (t : RawTransitionTable) (k : Nat) (state : Nat) :
+    t.run? k state = (fun o : Option Nat => o.bind t.step?)^[k] (some state) := by
+  induction k generalizing state with
+  | zero => rfl
+  | succ k ih =>
+      rw [Function.iterate_succ_apply]
+      show t.run? (k + 1) state = _
+      cases hs : t.step? state with
+      | none => simp [RawTransitionTable.run?, hs, iterate_bind_none]
+      | some s' => simp [RawTransitionTable.run?, hs, ih s']
+
+/-- `run?` de um argumento arbitrario. -/
+theorem primrec_run?_gen {α : Type} [Primcodable α]
+    {ft : α → RawTransitionTable} {fk : α → Nat} {fs : α → Nat}
+    (ht : Primrec ft) (hk : Primrec fk) (hs : Primrec fs) :
+    Primrec fun a => (ft a).run? (fk a) (fs a) := by
+  have hiter : Primrec fun a =>
+      (fun o : Option Nat => o.bind (ft a).step?)^[fk a] (some (fs a)) := by
+    refine Primrec.nat_iterate hk (Primrec.option_some.comp hs) ?_
+    exact Primrec.option_bind Primrec.snd
+      (primrec_step?.comp₂ (ht.comp (Primrec.fst.comp Primrec.fst)) Primrec.snd)
+  exact hiter.of_eq (fun a => (run?_eq_iterate (ft a) (fk a) (fs a)).symm)
+
+/-! ## 3 — validade da tabela -/
+
+def validBool (raw : RawTransitionTable) : Bool :=
+  (raw.next.toList).foldr
+    (fun x s => if x < raw.next.toList.length then s else false) true
+
+theorem foldr_lt_eq_true (n : Nat) :
+    ∀ l : List Nat,
+      (l.foldr (fun x s => if x < n then s else false) true = true) ↔ ∀ x ∈ l, x < n := by
+  intro l
+  induction l with
+  | nil => simp
+  | cons a l ih =>
+      rw [List.foldr_cons]
+      by_cases h : a < n
+      · rw [if_pos h, ih]
+        constructor
+        · intro hl x hx
+          rcases List.mem_cons.mp hx with rfl | hx'
+          · exact h
+          · exact hl x hx'
+        · intro hl x hx
+          exact hl x (List.mem_cons_of_mem _ hx)
+      · rw [if_neg h]
+        constructor
+        · intro hf; simp at hf
+        · intro hl; exact absurd (hl a (by simp)) h
+
+theorem validBool_iff (raw : RawTransitionTable) :
+    validBool raw = true ↔ raw.Valid := by
+  unfold validBool RawTransitionTable.Valid
+  rw [foldr_lt_eq_true]
+  constructor
+  · intro h i
+    have hm : raw.next.toList[(i : Nat)]'(by simp) ∈ raw.next.toList :=
+      List.getElem_mem _
+    have hx := h _ hm
+    simpa using hx
+  · intro h x hx
+    obtain ⟨i, hi, rfl⟩ := List.mem_iff_getElem.mp hx
+    have hi' : i < raw.next.size := by simpa using hi
+    have := h ⟨i, hi'⟩
+    simpa using this
+
+theorem primrec_validBool : Primrec validBool := by
+  have hc : PrimrecPred fun a : RawTransitionTable × (Nat × Bool) =>
+      a.2.1 < a.1.next.toList.length :=
+    Primrec.nat_lt.comp (Primrec.fst.comp Primrec.snd)
+      (Primrec.list_length.comp (primrec_next_toList.comp Primrec.fst))
+  have h : Primrec₂ fun (raw : RawTransitionTable) (p : Nat × Bool) =>
+      (if p.1 < raw.next.toList.length then p.2 else false) :=
+    Primrec.ite hc (Primrec.snd.comp Primrec.snd) (Primrec.const false)
+  exact (Primrec.list_foldr primrec_next_toList (Primrec.const true) h).of_eq
+    (fun _ => rfl)
+
+/-! ## 4 — candidatos -/
+
+theorem flatMap_eq_foldr {α β : Type} (f : α → List β) (l : List α) :
+    l.flatMap f = l.foldr (fun a acc => f a ++ acc) [] := by
+  induction l with
+  | nil => rfl
+  | cons a l ih => rw [List.flatMap_cons, ih, List.foldr_cons]
+
+theorem primrec_cycleCandidates : Primrec cycleCandidates := by
+  have hinner : Primrec fun q : (Nat × (Nat × List CycleWitness)) × Nat =>
+      (⟨q.1.2.1, q.2 + 1⟩ : CycleWitness) :=
+    primrec_mk.comp (Primrec.fst.comp (Primrec.snd.comp Primrec.fst))
+      (Primrec.succ.comp Primrec.snd)
+  have hrange : Primrec fun q : Nat × (Nat × List CycleWitness) =>
+      List.range (q.1 - q.2.1) :=
+    Primrec.list_range.comp (Primrec.nat_sub.comp Primrec.fst
+      (Primrec.fst.comp Primrec.snd))
+  have hmap : Primrec fun q : Nat × (Nat × List CycleWitness) =>
+      (List.range (q.1 - q.2.1)).map fun k => (⟨q.2.1, k + 1⟩ : CycleWitness) :=
+    Primrec.list_map hrange hinner
+  have hstep : Primrec₂ fun (n : Nat) (p : Nat × List CycleWitness) =>
+      ((List.range (n - p.1)).map fun k => (⟨p.1, k + 1⟩ : CycleWitness)) ++ p.2 :=
+    Primrec.list_append.comp hmap (Primrec.snd.comp Primrec.snd)
+  have hfold : Primrec fun n : Nat =>
+      (List.range n).foldr
+        (fun m acc => ((List.range (n - m)).map fun k =>
+          (⟨m, k + 1⟩ : CycleWitness)) ++ acc) [] :=
+    Primrec.list_foldr Primrec.list_range (Primrec.const []) hstep
+  exact hfold.of_eq (fun n => by rw [cycleCandidates, flatMap_eq_foldr])
+
+/-! ## 5 — o contrato bruto -/
+
+def RawValid (raw : RawTransitionTable) (start : Nat) (w : CycleWitness) : Prop :=
+  w.baseIndex < raw.next.size ∧ 0 < w.period ∧
+    w.baseIndex + w.period ≤ raw.next.size ∧
+      raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start
+
+def rawValidBool (raw : RawTransitionTable) (start : Nat) (w : CycleWitness) : Bool :=
+  if w.baseIndex < raw.next.size then
+    if 0 < w.period then
+      if w.baseIndex + w.period ≤ raw.next.size then
+        if raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start then
+          true else false
+      else false
+    else false
+  else false
+
+theorem rawValidBool_iff (raw : RawTransitionTable) (start : Nat) (w : CycleWitness) :
+    rawValidBool raw start w = true ↔ RawValid raw start w := by
+  unfold rawValidBool RawValid
+  by_cases h1 : w.baseIndex < raw.next.size
+  · by_cases h2 : 0 < w.period
+    · by_cases h3 : w.baseIndex + w.period ≤ raw.next.size
+      · by_cases h4 : raw.run? (w.baseIndex + w.period) start = raw.run? w.baseIndex start
+        · simp [h1, h2, h3, h4]
+        · simp [h1, h2, h3, h4]
+      · simp [h1, h2, h3]
+    · simp [h1, h2]
+  · simp [h1]
+
+theorem primrec_rawValidBool :
+    Primrec fun q : (RawTransitionTable × Nat) × CycleWitness =>
+      rawValidBool q.1.1 q.1.2 q.2 := by
+  have hraw : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness => q.1.1 :=
+    Primrec.fst.comp Primrec.fst
+  have hstart : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness => q.1.2 :=
+    Primrec.snd.comp Primrec.fst
+  have hb : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness => q.2.baseIndex :=
+    primrec_baseIndex.comp Primrec.snd
+  have hp : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness => q.2.period :=
+    primrec_period.comp Primrec.snd
+  have hsize : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness =>
+      q.1.1.next.size := primrec_size.comp hraw
+  have hsum : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness =>
+      q.2.baseIndex + q.2.period := Primrec.nat_add.comp hb hp
+  have hrun1 : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness =>
+      q.1.1.run? (q.2.baseIndex + q.2.period) q.1.2 :=
+    primrec_run?_gen hraw hsum hstart
+  have hrun2 : Primrec fun q : (RawTransitionTable × Nat) × CycleWitness =>
+      q.1.1.run? q.2.baseIndex q.1.2 := primrec_run?_gen hraw hb hstart
+  exact Primrec.ite (Primrec.nat_lt.comp hb hsize)
+    (Primrec.ite (Primrec.nat_lt.comp (Primrec.const 0) hp)
+      (Primrec.ite (Primrec.nat_le.comp hsum hsize)
+        (Primrec.ite (Primrec.eq.comp hrun1 hrun2)
+          (Primrec.const true) (Primrec.const false))
+        (Primrec.const false))
+      (Primrec.const false))
+    (Primrec.const false)
+
+/-! ## 6 — o casamento com o detector tipado -/
+
+theorem valid_iff_rawValid (t : ValidatedTransitionTable)
+    (start : Fin t.next.size) (w : CycleWitness) :
+    CycleWitness.Valid t.step start w ↔ RawValid t.toRaw (start : Nat) w := by
+  unfold CycleWitness.Valid RawValid
+  rw [Fintype.card_fin]
+  constructor
+  · rintro ⟨h1, h2, h3, h4⟩
+    refine ⟨h1, h2, h3, ?_⟩
+    rw [t.run?_eq_iterate_step (w.baseIndex + w.period) start,
+        t.run?_eq_iterate_step w.baseIndex start, h4]
+  · rintro ⟨h1, h2, h3, h4⟩
+    refine ⟨h1, h2, h3, ?_⟩
+    rw [t.run?_eq_iterate_step (w.baseIndex + w.period) start,
+        t.run?_eq_iterate_step w.baseIndex start] at h4
+    exact Fin.ext (Option.some.inj h4)
+
+theorem detectCycle?_eq_raw (t : ValidatedTransitionTable) (start : Fin t.next.size) :
+    t.detectCycle? start =
+      (cycleCandidates t.next.size).find?
+        (fun w => rawValidBool t.toRaw (start : Nat) w) := by
+  show detectCycleWitness? t.step start = _
+  unfold detectCycleWitness?
+  rw [Fintype.card_fin]
+  congr 1
+  funext w
+  by_cases h : RawValid t.toRaw (start : Nat) w
+  · rw [decide_eq_true ((valid_iff_rawValid t start w).mpr h),
+      (rawValidBool_iff _ _ w).mpr h]
+  · have h1 : ¬ CycleWitness.Valid t.step start w :=
+      fun hc => h ((valid_iff_rawValid t start w).mp hc)
+    have h2 : rawValidBool t.toRaw (start : Nat) w = false :=
+      Bool.eq_false_iff.mpr (fun hc => h ((rawValidBool_iff _ _ w).mp hc))
+    rw [decide_eq_false h1, h2]
+
+/-! ## 7 — a analise, sem tipo dependente, e o FECHAMENTO -/
+
+def analyzeRaw (raw : RawTransitionTable) (start : Nat) :
+    Except RuntimeCycleError CycleWitness :=
+  if validBool raw = true then
+    if start < raw.next.size then
+      match (cycleCandidates raw.next.size).find?
+          (fun w => rawValidBool raw start w) with
+      | some w => .ok w
+      | none => .error .internalDetectorFailure
+    else .error (.initialStateOutOfBounds start raw.next.size)
+  else .error .transitionDestinationOutOfBounds
+
+private theorem analyze_reduce_u {raw : RawTransitionTable} (hRaw : raw.Valid)
+    {start : Nat} (hStart : start < raw.next.size) :
+    analyzeTransitionTable raw start =
+      (match ValidatedTransitionTable.detectCycle?
+          (⟨raw.next, hRaw⟩ : ValidatedTransitionTable) ⟨start, hStart⟩ with
+        | some witness => .ok witness
+        | none => .error .internalDetectorFailure) := by
+  unfold analyzeTransitionTable
+  rw [show validateTransitionTable raw = .ok ⟨raw.next, hRaw⟩ from dif_pos hRaw]
+  show (validateStart ⟨raw.next, hRaw⟩ start).bind _ = _
+  rw [show validateStart ⟨raw.next, hRaw⟩ start = .ok ⟨start, hStart⟩
+      from dif_pos hStart]
+  rfl
+
+theorem analyzeRaw_eq (raw : RawTransitionTable) (start : Nat) :
+    analyzeRaw raw start = analyzeTransitionTable raw start := by
+  unfold analyzeRaw
+  by_cases hRaw : raw.Valid
+  · have hvb : validBool raw = true := (validBool_iff raw).mpr hRaw
+    by_cases hStart : start < raw.next.size
+    · rw [if_pos hvb, if_pos hStart, analyze_reduce_u hRaw hStart,
+        detectCycle?_eq_raw (⟨raw.next, hRaw⟩ : ValidatedTransitionTable)
+          ⟨start, hStart⟩]
+      rfl
+    · rw [if_pos hvb, if_neg hStart,
+        analyzeTransitionTable_invalid_start raw start hRaw hStart]
+  · have hvb : ¬ (validBool raw = true) := fun hc => hRaw ((validBool_iff raw).mp hc)
+    rw [if_neg hvb, analyzeTransitionTable_invalid_table raw start hRaw]
+
+
+/-! ## 8 — o FECHAMENTO: Primrec₂ analyzeTransitionTable -/
+
+theorem primrec_ok :
+    Primrec fun w : CycleWitness =>
+      (Except.ok w : Except RuntimeCycleError CycleWitness) := by
+  have h : Primrec fun s : RuntimeCycleError ⊕ CycleWitness =>
+      (exceptEquiv RuntimeCycleError CycleWitness).symm s :=
+    Primrec.of_equiv_symm (e := exceptEquiv RuntimeCycleError CycleWitness)
+  exact (h.comp Primrec.sumInr).of_eq (fun _ => rfl)
+
+theorem primrec_error :
+    Primrec fun e : RuntimeCycleError =>
+      (Except.error e : Except RuntimeCycleError CycleWitness) := by
+  have h : Primrec fun s : RuntimeCycleError ⊕ CycleWitness =>
+      (exceptEquiv RuntimeCycleError CycleWitness).symm s :=
+    Primrec.of_equiv_symm (e := exceptEquiv RuntimeCycleError CycleWitness)
+  exact (h.comp Primrec.sumInl).of_eq (fun _ => rfl)
+
+theorem primrec_initialStateOutOfBounds :
+    Primrec fun p : Nat × Nat =>
+      RuntimeCycleError.initialStateOutOfBounds p.1 p.2 := by
+  have h : Primrec fun s : Bool ⊕ (Nat × Nat) => runtimeCycleErrorEquiv.symm s :=
+    Primrec.of_equiv_symm (e := runtimeCycleErrorEquiv)
+  exact (h.comp Primrec.sumInr).of_eq (fun _ => rfl)
+
+theorem primrec_find :
+    Primrec fun p : RawTransitionTable × Nat =>
+      (cycleCandidates p.1.next.size).find? (fun w => rawValidBool p.1 p.2 w) := by
+  have hcand : Primrec fun p : RawTransitionTable × Nat =>
+      cycleCandidates p.1.next.size :=
+    primrec_cycleCandidates.comp (primrec_size.comp Primrec.fst)
+  have hidx : Primrec fun p : RawTransitionTable × Nat =>
+      List.findIdx (fun w => rawValidBool p.1 p.2 w)
+        (cycleCandidates p.1.next.size) :=
+    Primrec.list_findIdx hcand primrec_rawValidBool
+  exact (Primrec.list_getElem?.comp hcand hidx).of_eq
+    (fun _ => (List.find?_eq_getElem?_findIdx).symm)
+
+/-- **O FECHAMENTO.** A analise de tabelas e primitiva recursiva sobre um
+dominio INFINITO. Nao por finitude — a prova consulta o algoritmo. -/
+theorem primrec_analyzeRaw : Primrec₂ analyzeRaw := by
+  have hvalid : PrimrecPred fun p : RawTransitionTable × Nat =>
+      validBool p.1 = true :=
+    Primrec.eq.comp (primrec_validBool.comp Primrec.fst) (Primrec.const true)
+  have hsize : Primrec fun p : RawTransitionTable × Nat => p.1.next.size :=
+    primrec_size.comp Primrec.fst
+  have hstart : PrimrecPred fun p : RawTransitionTable × Nat =>
+      p.2 < p.1.next.size := Primrec.nat_lt.comp Primrec.snd hsize
+  have herr : Primrec fun p : RawTransitionTable × Nat =>
+      (Except.error (RuntimeCycleError.initialStateOutOfBounds p.2 p.1.next.size)
+        : Except RuntimeCycleError CycleWitness) :=
+    primrec_error.comp (primrec_initialStateOutOfBounds.comp
+      (Primrec.snd.pair hsize))
+  have hmatch : Primrec fun p : RawTransitionTable × Nat =>
+      (match (cycleCandidates p.1.next.size).find?
+          (fun w => rawValidBool p.1 p.2 w) with
+        | some w => (Except.ok w : Except RuntimeCycleError CycleWitness)
+        | none => .error .internalDetectorFailure) := by
+    refine (Primrec.option_casesOn primrec_find
+      (Primrec.const (Except.error RuntimeCycleError.internalDetectorFailure
+        : Except RuntimeCycleError CycleWitness))
+      (primrec_ok.comp Primrec.snd).to₂).of_eq (fun p => ?_)
+    cases (cycleCandidates p.1.next.size).find?
+        (fun w => rawValidBool p.1 p.2 w) <;> rfl
+  exact Primrec.ite hvalid (Primrec.ite hstart hmatch herr)
+    (Primrec.const (Except.error RuntimeCycleError.transitionDestinationOutOfBounds
+      : Except RuntimeCycleError CycleWitness))
+
+/-- **CB-GAP-001 fechada.** -/
+theorem primrec_analyzeTransitionTable : Primrec₂ analyzeTransitionTable :=
+  primrec_analyzeRaw.of_eq analyzeRaw_eq
+
+/-- O enunciado que a ponte deixou registrado e nao provou. -/
+theorem uniformPrimrecStatement_holds : UniformPrimrecStatement :=
+  primrec_analyzeTransitionTable
+
+
+/-! ## 9 — instancia positiva -/
+
+def twoCycle : RawTransitionTable := ⟨#[1, 0]⟩
+
+theorem twoCycle_valid : twoCycle.Valid := by decide
+
+theorem twoCycle_analysis : analyzeTransitionTable twoCycle 0 = .ok ⟨0, 2⟩ := by decide
+
+theorem twoCycle_analyzeRaw : analyzeRaw twoCycle 0 = .ok ⟨0, 2⟩ := by decide
+
+#print axioms primrec_analyzeTransitionTable
+#print axioms uniformPrimrecStatement_holds
+
+end ProbeUNI7

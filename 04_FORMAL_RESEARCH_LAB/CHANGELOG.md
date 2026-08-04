@@ -1,5 +1,62 @@
 # Changelog do laboratório formal
 
+## FOUND-UNIFORM-PRIMREC-001-SPECIFICATION - 2026-08-04
+
+### Specified
+
+- `31` declaracoes publicas congeladas (`4` definicoes, `27` teoremas),
+  `1` auxiliar privado, `1` TEST_ONLY, `3` testes, `36` no total,
+  `6` modulos mais agregador. Probe `exit 0`, `0` linhas `error:`,
+  arvore intocada.
+
+### Proved
+
+- **`Primrec₂ analyzeTransitionTable`.** O dominio
+  `RawTransitionTable × Nat` e **infinito**, `Primrec.dom_finite` nao se
+  aplica, e a prova **consulta o algoritmo**. Primeiro resultado de
+  computabilidade do laboratorio com essa propriedade.
+- `uniformPrimrecStatement_holds` fecha por nome o `def : Prop` que
+  `FOUND-COMPUTABILITY-BRIDGE-001` deixou registrado sem prova.
+
+### Discovered
+
+- O obstaculo nunca foi computabilidade — era **tipo dependente**. A
+  chave: `run?` **ja e nao dependente**, e a sua recursao com `Option`
+  le-se como iterada, `run? k s = (fun o => o.bind step?)^[k] (some s)`.
+  Dai `Primrec.nat_iterate` faz o trabalho.
+- O tipo dependente restante vive em `detectCycle?` e sai por
+  **casamento**, `valid_iff_rawValid`, apoiado na ponte
+  `run?_eq_iterate_step` que a frente do runtime ja tinha. Nada e
+  reimplementado.
+
+### Declared
+
+- `PrimrecPred` carrega instancia propria de `DecidablePred`. Construir
+  `Primrec fun a => decide (p a)` por fora e entrega-lo onde se espera
+  `PrimrecPred p` **falha**, e nenhuma tatica desfaz. Os predicados foram
+  escritos com `if ... then true else false` e `Primrec.ite`.
+  Registrado em `STOP-UP-005`.
+- `analyze_reduce_u` e a **quarta** reproducao da reducao do bloco `do`.
+  `UP-GAP-002`.
+
+### Corrected
+
+- `validBool_eq_decide` ficou **morta** quando a condicao passou a ser
+  `validBool raw = true`. Removida antes do congelamento: `32` publicas
+  viraram `31`.
+
+### Not claimed
+
+- **`Primrec` NAO significa eficiente** — a classe contem torres de
+  exponenciais. `STOP-UP-002` existe so para isso.
+- `0` modelos de custo, `0` classes de complexidade, `0` afirmacoes sobre
+  P vs NP. **Nenhum problema de milenio atacado.**
+
+### Locked
+
+- `authorized_action: FOUND_UNIFORM_PRIMREC_001_SPECIFICATION_REVIEW_AUTHORIZED`.
+- `DEC-042` registrado no mesmo commit que faz sua edicao.
+
 ## PORTFOLIO-REVIEW-UNIFORM - 2026-08-04
 
 ### Counted

@@ -1,7 +1,7 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T00:27:16-03:00
-canonical_commit: "0611e7fc99faeb048a18e2bfc0ddb12467321325"
+updated_at: 2026-08-04T00:30:27-03:00
+canonical_commit: "b83598392af465b5a8409ec809f8765196bfa63e"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -11,8 +11,8 @@ repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-INVARIANT-UNREACHABILITY-001"
 work_status: "READY"
-specification_status: "READY_FOR_REVIEW"
-specification_review: "NOT_STARTED"
+specification_status: "APPROVED"
+specification_review: "APPROVED"
 formalization_status: "NOT_STARTED"
 result_review: "NOT_STARTED"
 extension_status: "NOT_AUTHORIZED"
@@ -30,10 +30,9 @@ formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
 last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
 current_blocker: null
 next_single_action: >
-  Revisar a especificação: conferir as oito assinaturas congeladas
-  contra o probe, a ausência de typeclasses e a assimetria entre
-  suficiência e necessidade.
-authorized_action: "FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_REVIEW_AUTHORIZED"
+  Formalizar os quatro módulos permanentes a partir do probe, com
+  contagem derivada por script e pegada medida por declaração.
+authorized_action: "FOUND_INVARIANT_UNREACHABILITY_001_FORMALIZATION_AUTHORIZED"
 portfolio_review_status: "CONSUMED"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
@@ -172,6 +171,7 @@ governance_rules:
     preservados em documentação, nunca reexecutados como validação.
     Um processo Lean com exit 1 nunca é evidência de PASS.
 prohibited_actions:
+  - "Não escrever contagem agregada sem derivá-la por script no mesmo gate"
   - "Não afirmar que um invariante separador é necessário para inalcançabilidade: é suficiente"
   - "Não usar invariante para certificar recorrência: só vale em ponto fixo"
   - "Não abrir monovariantes, boa ordem ou terminação nesta frente"

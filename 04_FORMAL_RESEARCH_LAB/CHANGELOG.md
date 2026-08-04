@@ -1,5 +1,51 @@
 # Changelog do laboratório formal
 
+## FOUND-INVARIANT-UNREACHABILITY-001-SPECIFICATION-REVIEW - 2026-08-04
+
+### Approved
+
+- `FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_REVIEW_APPROVED`.
+  Oito itens: **sete confirmados, um corrigido**.
+
+### Re-executed
+
+- O probe foi **rodado de novo neste gate**, nada herdado: `exit 0`,
+  `0` erros, arvore intocada, `0` ocorrencias de `Fintype`, `0` de
+  `DecidableEq`, `0` instancias.
+- Pegada medida agora, e bate com a esperada. `Classical.choice` **nao**
+  aparece.
+
+### Caught
+
+- **A contagem derivada por script deu `12`; a especificacao declarava
+  `10`.** A classificacao estava correta — `8` publicas, `2` TEST_ONLY,
+  `2` testes — mas o campo `probe.declarations_compiled` **omitiu os dois
+  testes**.
+- E exatamente a contagem agregada escrita a mao que o `LAB_STATE.md`
+  proibe. A regra existia; nao foi aplicada ao proprio campo.
+- Corrigido **contra a derivacao**, com a decomposicao explicita. A
+  classificacao **nao** foi alterada para caber no numero.
+- Documentos historicos **nao foram reescritos**. Quem ler `10` neles
+  resolve por `SPECIFICATION_REVIEW.md`. Mesmo principio da colisao de
+  `DEC-014`.
+
+### Confirmed
+
+- `Invariant.semiconj` e literalmente o termo `h`, verificado por
+  **extracao do corpo do teorema**, nao por leitura. `Invariant` e
+  `Function.Semiconj abstract stepC id` sao a mesma proposicao.
+- O teorema negativo exige **uma** hipotese e um ponto inicial. Nada
+  mais entra: nem finitude, nem decidibilidade, nem hipotese sobre a
+  orbita.
+
+### Locked
+
+- `authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_FORMALIZATION_AUTHORIZED`.
+  `0` arquivos Lean permanentes, `0` claims, `24` no ledger, `0` frentes
+  encerradas tocadas.
+- Nova proibicao: **nao escrever contagem agregada sem deriva-la por
+  script no mesmo gate**.
+
 ## FOUND-INVARIANT-UNREACHABILITY-001-SPECIFICATION - 2026-08-04
 
 ### Specified

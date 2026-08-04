@@ -2,12 +2,12 @@ schema: tamesis-work-item-status/1
 work_item_id: FOUND-INVARIANT-UNREACHABILITY-001
 track: FOUNDATIONS
 work_status: READY
-specification_status: READY_FOR_REVIEW
-specification_review: NOT_STARTED
+specification_status: APPROVED
+specification_review: APPROVED
 formalization_status: NOT_STARTED
 result_review: NOT_STARTED
 extension_status: NOT_AUTHORIZED
-authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_SPECIFICATION_REVIEW_AUTHORIZED
+authorized_action: FOUND_INVARIANT_UNREACHABILITY_001_FORMALIZATION_AUTHORIZED
 selection_criterion: TRANSFERABILITY
 research_role: FORMAL_PROOF_TOOL
 specification:
@@ -21,7 +21,16 @@ specification:
   requires_decidable_eq: false
   signatures_frozen: true
 probe:
-  declarations_compiled: 10
+  declarations_compiled: 12
+  declarations_public: 8
+  declarations_test_only_library_resident: 2
+  declarations_tests: 2
+  count_source: DERIVED_BY_SCRIPT
+  count_corrected_in_gate: FOUND-INVARIANT-UNREACHABILITY-001-SPECIFICATION-REVIEW
+  count_defect: >
+    O campo declarava 10 e omitia os dois testes. A classificacao
+    estava correta; o numero e que estava errado. Corrigido contra a
+    derivacao, nao o contrario.
   probe_exit: 0
   versioned_tree_touched: false
   lean_files_created: 0
@@ -43,6 +52,17 @@ stop_conditions:
   declared: 12
   tested_by_anticipation: 12
   triggered: 0
+review:
+  items_checked: 8
+  items_confirmed: 7
+  items_corrected: 1
+  probe_reexecuted: true
+  reprobe_exit: 0
+  fintype_occurrences: 0
+  decidable_eq_occurrences: 0
+  instance_declarations: 0
+  semiconj_is_definitional: true
+  closed_front_files_changed: 0
 claims:
   promoted_in_this_gate: 0
   ledger_total: 24

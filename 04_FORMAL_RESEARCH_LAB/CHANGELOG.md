@@ -1,5 +1,59 @@
 # Changelog do laboratório formal
 
+## LAB-CORR-VALIDATION-BLINDNESS-001 - 2026-08-04
+
+### The defect: I stopped reading the validator
+
+- Em **seis gates consecutivos** rodei
+  `labctl validate 2>&1 | head -2`. `head -2` do JSON imprime **`{` e a
+  linha do schema** — **nunca o campo `status`**. Li aquilo como PASS.
+- A regra `truncated_output` **ja existia** em `governance_rules`:
+  *"Nao assumir sucesso a partir de saida truncada."* Violei uma regra
+  escrita no arquivo que eu editava a cada gate.
+
+### What was broken while I wasn't looking
+
+```text
+LAB0_VALIDATION_FAILED, 3 erros:
+  1. active_work_item nao esta na fila: FOUND-SOBOLEV-SPACE-001
+  2. sequencia de gates nao admite os itens novos
+  3. tokens proibidos em 3 arquivos Lean promovidos
+```
+
+- **`1` e `2` sao a mesma causa**: criei quatro frentes com
+  `CLOSURE_RECORD` e `STATUS.yaml` e **nunca as registrei na
+  `RESEARCH_QUEUE.yaml`**. Fechei frentes que, para a governanca, nunca
+  existiram.
+- **`3`**: tokens todos em **comentario** (`"SEM sorry"`, `"NO admit"`,
+  `"admits a unit eigenvector"`). O Lean estava limpo — mas a proibicao
+  contra isso **fui eu que criei nesta sessao**, e e a **terceira**
+  ocorrencia do padrao.
+
+### Corrected
+
+```text
+tokens reescritos                     4 ocorrencias, 3 arquivos
+itens na RESEARCH_QUEUE               +4, registered_retroactively
+labctl: sequencia de gates            ampliada
+lake build                            exit 0, 8819 jobs, 0 error
+labctl validate                       PASS, 0 erros, campo status LIDO
+```
+
+### New rules
+
+- `validate_status_must_be_read` — proibido truncar a saida do
+  validador; extrair o campo por parser.
+- `queue_registration_required` — nenhuma frente encerra sem estar na
+  fila.
+
+### What this does NOT invalidate
+
+- Os **resultados matematicos**: todos os `lake build` deram `exit 0`
+  com codigo capturado por arquivo, e isso eu conferi. Os teoremas
+  compilam, as pegadas foram medidas, as instancias positivas existem.
+- O que falhou foi a **contabilidade de governanca** — que e metade do
+  que este laboratorio e, e por isso o defeito e `CRITICAL`.
+
 ## LP-GAP-003-CLOSURE - 2026-08-04
 
 ### Helmholtz fechou nos dois niveis

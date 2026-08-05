@@ -196,6 +196,17 @@ governance_lock_renamed:
   reason: "o sufixo _AUTHORIZED convidava a ler a trava como autorização"
   satisfied_by: PORTFOLIO_REVIEW
 governance_rules:
+  validate_status_must_be_read: >
+    Nenhum gate pode encerrar sem que o campo status de labctl validate
+    seja LIDO e reportado. Proibido pipe para head, tail ou qualquer
+    truncagem sobre a saida do validador — head -2 do JSON imprime a
+    chave de abertura e o schema, nunca o status. A forma canonica
+    extrai o campo por parser. Seis gates consecutivos encerraram cegos
+    por causa disso.
+  queue_registration_required: >
+    Nenhuma frente pode ser encerrada sem estar registrada na
+    RESEARCH_QUEUE.yaml. Quatro frentes foram fechadas com CLOSURE_RECORD
+    e STATUS.yaml sem jamais existirem na fila.
   axiom_scan_scope: >
     Uma varredura de pegada axiomática só pode ser publicada como
     integral se cobrir TODAS as declarações do artefato, incluindo

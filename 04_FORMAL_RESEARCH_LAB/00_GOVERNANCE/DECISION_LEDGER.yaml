@@ -1319,3 +1319,39 @@ decisions:
       - "Navier-Stokes NAO e afirmado alcancavel"
       - "a pressao NAO e afirmada recuperada de solucao alguma"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-058
+    date: 2026-08-04
+    decision: >
+      Gate corretivo LAB-CORR-VALIDATION-BLINDNESS-001: corrigir tokens
+      proibidos em docstring, registrar retroativamente quatro frentes na
+      RESEARCH_QUEUE, ampliar a sequencia de gates do labctl, e
+      acrescentar duas regras de governanca.
+    rationale: >
+      Em seis gates consecutivos o validador foi invocado com pipe para
+      head -2, que imprime a chave de abertura e a linha do schema e
+      nunca o campo status. O laboratorio acumulou LAB0_VALIDATION_FAILED
+      com tres erros sem que eu percebesse: quatro frentes fechadas sem
+      registro na fila, e tokens proibidos em comentario de tres arquivos
+      promovidos. A regra truncated_output ja existia e foi violada por
+      mim no proprio arquivo que eu editava a cada gate. O Lean estava
+      limpo e todos os lake build deram exit 0 conferido; o que falhou
+      foi a contabilidade de governanca.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+      - "00_GOVERNANCE/CORR_VALIDATION_BLINDNESS.md"
+      - "05_FORMAL/lean/TamesisLab/Foundations/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: governance_rules += validate_status_must_be_read"
+      - "LAB_STATE: governance_rules += queue_registration_required"
+      - "RESEARCH_QUEUE: +4 itens, marcados registered_retroactively"
+      - "labctl: sequencia de gates ampliada para os 4 itens"
+    untouched_safeguards:
+      - "nenhum teorema foi alterado: so comentarios"
+      - "lake build exit 0, 8819 jobs, 0 error, conferido"
+      - "labctl validate PASS com o campo status LIDO"
+      - "nenhum problema de milenio e atacado"

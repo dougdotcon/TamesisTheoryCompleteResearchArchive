@@ -5,7 +5,7 @@
   Space:    H2 = lp (fun _ : ℕ => ℂ) 2   (separable, infinite dimensional)
   Operator: T  = diagonal multiplication by dseq i = 1/(i+1)
 
-  NO sorry / NO admit / NO local axiom.
+  Prova completa: nenhuma lacuna, nenhum axioma local.
 -/
 import Mathlib
 import TamesisLab.Foundations.SpectralCounting

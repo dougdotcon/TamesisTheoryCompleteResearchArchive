@@ -1,7 +1,7 @@
 /-
   Tamesis formal lab -- Piece B key theorem.
   Eigenvalues of a compact symmetric operator do not accumulate away from 0.
-  NO sorry / NO admit / NO local axiom.
+  Prova completa: nenhuma lacuna, nenhum axioma local.
 -/
 
 import Mathlib.Analysis.InnerProductSpace.Spectrum
@@ -53,7 +53,7 @@ variable {𝕜 : Type*} {H : Type*} [RCLike 𝕜] [NormedAddCommGroup H]
 
 /-! ### Step 1 -- unit eigenvectors -/
 
-/-- Every eigenvalue admits a unit eigenvector. -/
+/-- Todo autovalor tem autovetor unitário. -/
 theorem exists_unit_eigenvector {T : H →ₗ[𝕜] H} {μ : 𝕜}
     (h : HasEigenvalue T μ) : ∃ v : H, ‖v‖ = 1 ∧ T v = μ • v := by
   obtain ⟨v, hv₁, hv₂⟩ := h.exists_hasEigenvector

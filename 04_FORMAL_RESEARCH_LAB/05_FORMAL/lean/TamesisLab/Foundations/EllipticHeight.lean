@@ -4,7 +4,7 @@ import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.GroupTheory.Descent
 
 /-!
-# ProbeD — obrigação D da Peça C, mecânica, SEM `sorry`
+# Obrigação D da Peça C, mecânica, sem prova incompleta
 
 `D : ∀ P Q, ∃ c ≠ 0, (fun i ↦ (addSubMap W i).eval (sym2x P Q)) = c • sym2x (P+Q) (P-Q)`
 

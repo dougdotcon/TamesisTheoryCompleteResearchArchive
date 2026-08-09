@@ -84,11 +84,14 @@ import Mathlib.Analysis.Normed.Lp.MeasurableSpace
 import Mathlib.MeasureTheory.Measure.Haar.OfBasis
 import Mathlib.MeasureTheory.Constructions.HaarToSphere
 import Mathlib.MeasureTheory.Integral.Bochner.Set
+import Mathlib.Analysis.Normed.Lp.PiLp
+import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
 import Mathlib.Tactic
 
 namespace TamesisNSCalderonZygmundKernelDefs
 
-open Matrix InnerProductGeometry MeasureTheory
+open Matrix InnerProductGeometry MeasureTheory Set
+open scoped Pointwise
 
 /-! ## Restatação isolada de `D` (ver nota no cabeçalho do arquivo)
 
@@ -325,6 +328,428 @@ theorem contDiffAt_K (e2 e3 : EuclideanSpace ℝ (Fin 3)) {y : EuclideanSpace �
   have hne : ‖y‖ ^ 3 ≠ 0 := pow_ne_zero 3 (norm_ne_zero_iff.mpr hy)
   exact hcomp.div hnorm3 hne
 
+/-! ## Parte 4 — fechamento de `mean_zero` para `K e2 e3` sobre
+`sphereSurfaceMeasure`
+
+Extensão autorizada por `PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md`
+(`FOUND-CZ-MEAN-ZERO-001_AUTHORIZED`). Segue exatamente o argumento
+verificado nessa revisão (citando Grafakos, *Classical Fourier
+Analysis*, 3ª ed., §5.1.4/5.2.1-5.2.2): `D(θ,e2,e3) = (θ·e3)(θ·w)`,
+`w := e2×e3`, é uma forma quadrática em `θ`; se o tensor de segundo
+momento de `μ` é isotrópico (`∫ θᵢθⱼ dμ = c·δᵢⱼ`), então
+`∫ D(θ,e2,e3) dμ = c·(e3·w) = c·tripleProduct e3 e2 e3 = 0` (produto
+triplo com o primeiro e terceiro argumento iguais -- `dot_cross_self`).
+
+Duas partes, na ordem do escopo autorizado:
+
+* Parte A (`tripleProduct_self_left`, `IsotropicSecondMoment`,
+  `integral_D_eq_zero_of_isotropicSecondMoment`): a redução puramente
+  algébrica/de integração acima, condicional a uma hipótese de isotropia
+  arbitrária -- não depende de `sphereSurfaceMeasure` nem de nenhuma
+  maquinaria de invariância por rotação.
+* Parte B (`sphereSurfaceMeasure_map_linearIsometryEquiv` e o que segue):
+  estabelece que `sphereSurfaceMeasure` de fato tem essa propriedade de
+  isotropia. A rota seguida seguiu exatamente a estratégia recomendada
+  na revisão -- não a invariância pelo grupo `SO(3)` completo, mas pelo
+  grupo finito gerado por permutações de coordenadas e inversões de
+  sinal por coordenada, cada uma realizada como um
+  `LinearIsometryEquiv ℝ E E` concreto (`flipCoord`, `permCoord`, via
+  `LinearIsometryEquiv.piLpCongrRight`/`piLpCongrLeft`, Mathlib). A
+  invariância de `sphereSurfaceMeasure` sob qualquer isometria linear de
+  `E` é obtida a partir de `LinearIsometryEquiv.measurePreserving`
+  (Mathlib, `Haar.InnerProductSpace`) aplicada à medida de Haar ambiente
+  `volume`, propagada por `MeasureTheory.Measure.toSphere` via a fórmula
+  `toSphere_apply'` (Kudryashov, `HaarToSphere.lean`) e a igualdade de
+  conjuntos `(↑) '' (T'⁻¹' s) = T⁻¹' ((↑) '' s)` (imagem/pré-imagem sob a
+  restrição de `T` à esfera), e então empurrada ao longo da inclusão do
+  subtipo até `sphereSurfaceMeasure` em `E`. Isso fechou completamente a
+  isotropia -- nenhum gap foi deixado nesta frente. -/
+
+/-- **Parte A, passo algébrico**: `tripleProduct` com o primeiro e o
+terceiro argumento iguais é zero -- `e3 · (e2 × e3) = 0`, ortogonalidade
+padrão do produto vetorial ao seu segundo fator (`dot_cross_self`,
+Mathlib `LinearAlgebra.CrossProduct`), reescrita na forma `inner`/`EuclideanSpace`
+via `EuclideanSpace.inner_eq_star_dotProduct`. Distinto de
+`tripleProduct_self_right`-style (não usado aqui, ver nota do cabeçalho
+sobre o arquivo irmão `ConstantinFeffermanDepletionKernel.lean`): ali a
+repetição é no 2º/3º argumento (via `cross_self`), aqui é no 1º/3º (via
+`dot_cross_self`). -/
+theorem tripleProduct_self_left (e2 e3 : EuclideanSpace ℝ (Fin 3)) :
+    tripleProduct e3 e2 e3 = 0 := by
+  unfold tripleProduct
+  rw [EuclideanSpace.inner_eq_star_dotProduct]
+  simp [dotProduct_comm, dot_cross_self]
+
+/-- **Parte A, hipótese de isotropia**: `μ` tem tensor de segundo
+momento isotrópico com constante `c` se, para cada par de coordenadas
+`i,j : Fin 3`, `θ ↦ θ i * θ j` é `μ`-integrável e sua integral vale
+`c` quando `i=j` e `0` caso contrário. Formulação com extração de
+coordenada real via aplicação direta `θ i` (definitionalmente igual a
+`WithLp.ofLp θ i` para `EuclideanSpace`, mesmo padrão usado em
+`EuclideanSpace.norm_eq`/`Fin.sum_univ_three` já empregado no arquivo
+irmão `ConstantinFeffermanDepletionKernel.lean`). -/
+def IsotropicSecondMoment (μ : MeasureTheory.Measure (EuclideanSpace ℝ (Fin 3))) (c : ℝ) : Prop :=
+  (∀ i j : Fin 3, Integrable (fun θ : EuclideanSpace ℝ (Fin 3) => θ i * θ j) μ) ∧
+  (∀ i j : Fin 3, ∫ θ, θ i * θ j ∂μ = c * (if i = j then (1:ℝ) else 0))
+
+/-- **Parte A, teorema principal (condicional)**: se `μ` tem tensor de
+segundo momento isotrópico com constante `c`, então
+`∫ D(θ,e2,e3) dμ = 0` para quaisquer `e2, e3` fixos. Prova: expande
+`D(θ,e2,e3) = (θ·e3)(θ·w)` (`w := e2×e3`) como soma dupla explícita
+`∑ i,j, (e3ᵢ wⱼ)(θᵢθⱼ)` sobre `Fin 3 × Fin 3` (nove termos), troca soma
+por integral via `integral_finsetSum` (usando a integrabilidade de cada
+termo, parte de `hiso`), aplica a hipótese de isotropia termo a termo
+(colapsando os seis termos fora da diagonal para `0` e os três da
+diagonal para `c`), obtendo `c * (e3·w) = c * tripleProduct e3 e2 e3`,
+que é `0` por `tripleProduct_self_left`. Não depende de
+`sphereSurfaceMeasure`: vale para qualquer `μ` que satisfaça a hipótese
+de isotropia. -/
+theorem integral_D_eq_zero_of_isotropicSecondMoment
+    {μ : MeasureTheory.Measure (EuclideanSpace ℝ (Fin 3))} {c : ℝ}
+    (hiso : IsotropicSecondMoment μ c) (e2 e3 : EuclideanSpace ℝ (Fin 3)) :
+    ∫ θ, D θ e2 e3 ∂μ = 0 := by
+  obtain ⟨hint, hval⟩ := hiso
+  set w : EuclideanSpace ℝ (Fin 3) := WithLp.toLp 2 (WithLp.ofLp e2 ⨯₃ WithLp.ofLp e3) with hw
+  have hDeq : ∀ θ : EuclideanSpace ℝ (Fin 3),
+      D θ e2 e3 = ∑ p : Fin 3 × Fin 3, (e3 p.1 * w p.2) * (θ p.1 * θ p.2) := by
+    intro θ
+    unfold D tripleProduct
+    rw [EuclideanSpace.inner_eq_star_dotProduct, EuclideanSpace.inner_eq_star_dotProduct]
+    unfold dotProduct
+    simp [Fin.sum_univ_three, Fintype.sum_prod_type]
+    ring
+  have hintg : ∀ p : Fin 3 × Fin 3,
+      Integrable (fun θ : EuclideanSpace ℝ (Fin 3) => (e3 p.1 * w p.2) * (θ p.1 * θ p.2)) μ :=
+    fun p => (hint p.1 p.2).const_mul _
+  calc ∫ θ, D θ e2 e3 ∂μ
+      = ∫ θ, ∑ p : Fin 3 × Fin 3, (e3 p.1 * w p.2) * (θ p.1 * θ p.2) ∂μ := by
+        simp_rw [hDeq]
+    _ = ∑ p : Fin 3 × Fin 3, ∫ θ, (e3 p.1 * w p.2) * (θ p.1 * θ p.2) ∂μ :=
+        integral_finsetSum Finset.univ (fun p _ => hintg p)
+    _ = ∑ p : Fin 3 × Fin 3, (e3 p.1 * w p.2) * ∫ θ, θ p.1 * θ p.2 ∂μ := by
+        simp_rw [integral_const_mul]
+    _ = ∑ p : Fin 3 × Fin 3, (e3 p.1 * w p.2) * (c * (if p.1 = p.2 then (1:ℝ) else 0)) := by
+        simp_rw [hval]
+    _ = c * ∑ i : Fin 3, e3 i * w i := by
+        simp [Fintype.sum_prod_type, Fin.sum_univ_three]
+        ring
+    _ = c * tripleProduct e3 e2 e3 := by
+        congr 1
+        unfold tripleProduct
+        rw [EuclideanSpace.inner_eq_star_dotProduct]
+        unfold dotProduct
+        simp [Fin.sum_univ_three]
+        ring
+    _ = 0 := by rw [tripleProduct_self_left]; ring
+
+/-! ### Parte B — isotropia de `sphereSurfaceMeasure`
+
+Estabelecida via invariância de `sphereSurfaceMeasure` sob QUALQUER
+isometria linear de `E` (não apenas o grupo finito discutido no escopo
+autorizado -- o argumento abaixo prova o caso geral diretamente, e o
+grupo finito de permutações/inversões de sinal é aplicado como caso
+particular). -/
+
+/-- Volume (medida de Haar ambiente `volume` de `E`) da imagem de
+QUALQUER conjunto sob uma isometria linear `T` é igual ao volume do
+conjunto original -- sem hipótese de mensurabilidade em `B`, via
+`MeasurableEquiv.map_apply` (válido para todo conjunto, não só
+mensurável) aplicado a `T.toMeasurableEquiv`, usando
+`LinearIsometryEquiv.measurePreserving` (Mathlib,
+`Haar.InnerProductSpace`). -/
+theorem volume_image_linearIsometryEquiv (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3))
+    (B : Set (EuclideanSpace ℝ (Fin 3))) :
+    (MeasureTheory.volume : Measure (EuclideanSpace ℝ (Fin 3))) (T '' B) = MeasureTheory.volume B := by
+  have hmp : Measure.map (⇑T) (MeasureTheory.volume : Measure (EuclideanSpace ℝ (Fin 3))) =
+      MeasureTheory.volume := (LinearIsometryEquiv.measurePreserving T).map_eq
+  have h1 : Measure.map (⇑T.toMeasurableEquiv)
+      (MeasureTheory.volume : Measure (EuclideanSpace ℝ (Fin 3))) (T '' B) = MeasureTheory.volume (T '' B) := by
+    rw [LinearIsometryEquiv.coe_toMeasurableEquiv, hmp]
+  rw [MeasurableEquiv.map_apply] at h1
+  rw [LinearIsometryEquiv.coe_toMeasurableEquiv, Set.preimage_image_eq B T.injective] at h1
+  exact h1.symm
+
+/-- O cone `Ioo 0 1 • A` sobre `A` comuta com a imagem por uma isometria
+linear `T`: `T '' (Ioo 0 1 • A) = Ioo 0 1 • (T '' A)`. Via
+`iUnion_smul_set` (o cone é a união dos raios `t • A`) e `image_smul_set`
+(um mapa linear comuta com a multiplicação por escalar em conjuntos). -/
+theorem image_smul_Ioo_linearIsometryEquiv
+    (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) (A : Set (EuclideanSpace ℝ (Fin 3))) :
+    T '' (Set.Ioo (0:ℝ) 1 • A) = Set.Ioo (0:ℝ) 1 • (T '' A) := by
+  rw [← iUnion_smul_set, ← iUnion_smul_set, Set.image_iUnion₂]
+  simp_rw [image_smul_set (F := EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) T]
+
+/-- Toda isometria linear de `E` mapeia a esfera unitária nela mesma
+(preserva a norma). -/
+theorem mapsTo_sphere (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    Set.MapsTo T (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1) (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1) := by
+  intro x hx
+  simp only [Metric.mem_sphere, dist_zero_right] at hx ⊢
+  rw [LinearIsometryEquiv.norm_map]
+  exact hx
+
+/-- Restrição de `T` à esfera unitária, como auto-mapa do subtipo
+`↥(sphere 0 1)`, via `Set.MapsTo.restrict`. -/
+noncomputable def sphereMap (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1) → (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1) :=
+  (mapsTo_sphere T).restrict T _ _
+
+theorem sphereMap_continuous (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    Continuous (sphereMap T) :=
+  Continuous.subtype_mk (T.continuous.comp continuous_subtype_val) _
+
+theorem sphereMap_measurable (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    Measurable (sphereMap T) := (sphereMap_continuous T).measurable
+
+/-- Igualdade de conjuntos chave: a imagem pela inclusão do subtipo da
+pré-imagem de `s` por `sphereMap T` é igual à pré-imagem por `T`
+(em `E`) da imagem de `s` pela inclusão. Usa que `T` leva pontos fora
+da esfera para fora da esfera (isometria) para garantir que ambos os
+lados coincidem exatamente (não apenas na esfera). -/
+theorem image_val_preimage_sphereMap (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3))
+    (s : Set (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) :
+    ((↑) : Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 → EuclideanSpace ℝ (Fin 3)) '' ((sphereMap T) ⁻¹' s)
+      = T ⁻¹' (((↑) : Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 → EuclideanSpace ℝ (Fin 3)) '' s) := by
+  ext y
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    refine ⟨sphereMap T x, hx, ?_⟩
+    show ((sphereMap T x : EuclideanSpace ℝ (Fin 3))) = T (x : EuclideanSpace ℝ (Fin 3))
+    exact (Set.MapsTo.val_restrict_apply (mapsTo_sphere T) x)
+  · rintro hy
+    rw [Set.mem_preimage] at hy
+    obtain ⟨x', hx', hx'eq⟩ := hy
+    have hyS : y ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 := by
+      have hx'2 : ‖(x' : EuclideanSpace ℝ (Fin 3))‖ = 1 := by
+        have hx'3 := x'.2
+        simp only [Metric.mem_sphere, dist_zero_right] at hx'3
+        exact hx'3
+      have hty : ‖T y‖ = 1 := by rw [← hx'eq]; exact hx'2
+      simpa [Metric.mem_sphere, dist_zero_right, LinearIsometryEquiv.norm_map] using hty
+    refine ⟨⟨y, hyS⟩, ?_, rfl⟩
+    show sphereMap T ⟨y, hyS⟩ ∈ s
+    have hval : ((sphereMap T ⟨y, hyS⟩ : EuclideanSpace ℝ (Fin 3))) = T y :=
+      Set.MapsTo.val_restrict_apply (mapsTo_sphere T) ⟨y, hyS⟩
+    have heq : sphereMap T ⟨y, hyS⟩ = x' := by
+      apply Subtype.ext
+      rw [hval, hx'eq]
+    rwa [heq]
+
+theorem preimage_eq_image_symm (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3))
+    (A : Set (EuclideanSpace ℝ (Fin 3))) : T ⁻¹' A = T.symm '' A := by
+  ext y
+  simp only [Set.mem_preimage, Set.mem_image]
+  constructor
+  · intro h; exact ⟨T y, h, T.symm_apply_apply y⟩
+  · rintro ⟨a, ha, rfl⟩; simpa using ha
+
+/-- **Lema-chave da Parte B**: `volume.toSphere` (a medida genuína de
+Kudryashov na esfera) é invariante sob a restrição `sphereMap T` de
+qualquer isometria linear `T`. Combina `toSphere_apply'` (Kudryashov,
+fórmula do cone) com `image_val_preimage_sphereMap`,
+`preimage_eq_image_symm`, `image_smul_Ioo_linearIsometryEquiv` e
+`volume_image_linearIsometryEquiv` acima. -/
+theorem toSphere_map_sphereMap (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    Measure.map (sphereMap T) (MeasureTheory.volume.toSphere) = MeasureTheory.volume.toSphere := by
+  apply Measure.ext
+  intro s hs
+  rw [Measure.map_apply (sphereMap_measurable T) hs]
+  rw [Measure.toSphere_apply' _ hs, Measure.toSphere_apply' _ (hs.preimage (sphereMap_measurable T))]
+  rw [image_val_preimage_sphereMap T s, preimage_eq_image_symm T]
+  rw [← image_smul_Ioo_linearIsometryEquiv T.symm]
+  rw [volume_image_linearIsometryEquiv T.symm]
+
+/-- **Invariância de `sphereSurfaceMeasure` sob toda isometria linear de
+`E`**: consequência de `toSphere_map_sphereMap`, propagada ao longo da
+inclusão do subtipo via `Measure.map_map` (duas vezes) e a comutação
+`(↑) ∘ sphereMap T = T ∘ (↑)` (`Set.MapsTo.restrict_commutes`,
+Mathlib). Este é o fato central da Parte B: NÃO ficou como gap. -/
+theorem sphereSurfaceMeasure_map_linearIsometryEquiv
+    (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) :
+    Measure.map T sphereSurfaceMeasure = sphereSurfaceMeasure := by
+  unfold sphereSurfaceMeasure
+  rw [Measure.map_map T.continuous.measurable measurable_subtype_coe]
+  have hcomm : (T : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3)) ∘
+        ((↑) : Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 → EuclideanSpace ℝ (Fin 3))
+      = ((↑) : Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 → EuclideanSpace ℝ (Fin 3)) ∘ (sphereMap T) :=
+    (Set.MapsTo.restrict_commutes T _ _ (mapsTo_sphere T)).symm
+  rw [hcomm, ← Measure.map_map measurable_subtype_coe (sphereMap_measurable T),
+    toSphere_map_sphereMap]
+
+/-- `sphereSurfaceMeasure` dá massa total a.e. à esfera unitária:
+`{θ | θ ∉ sphere 0 1}` tem pré-imagem vazia pela inclusão do subtipo. -/
+theorem ae_mem_sphere_sphereSurfaceMeasure :
+    ∀ᵐ θ ∂sphereSurfaceMeasure, θ ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 := by
+  rw [ae_iff]
+  have hmeas : MeasurableSet {x : EuclideanSpace ℝ (Fin 3) | ¬ x ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1} :=
+    (Metric.isClosed_sphere).measurableSet.compl
+  unfold sphereSurfaceMeasure
+  rw [Measure.map_apply measurable_subtype_coe hmeas]
+  have hempty : ((↑) : Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1 → EuclideanSpace ℝ (Fin 3)) ⁻¹'
+      {x : EuclideanSpace ℝ (Fin 3) | ¬ x ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1} = ∅ := by
+    ext x; simp
+  rw [hempty]; simp
+
+/-- `sphereSurfaceMeasure` é uma medida finita: pushforward, via
+`Measure.map`, da medida `volume.toSphere` de Kudryashov, que já é
+`IsFiniteMeasure` por instância do Mathlib
+(`Measure.toSphere.instIsFiniteMeasure`, `HaarToSphere.lean`) --
+pushforward de medida finita é finita. Necessária para a
+integrabilidade abaixo (`integrable_const` requer medida finita). -/
+instance instIsFiniteMeasure_sphereSurfaceMeasure : IsFiniteMeasure sphereSurfaceMeasure := by
+  unfold sphereSurfaceMeasure
+  infer_instance
+
+/-- `θᵢθⱼ` é `sphereSurfaceMeasure`-integrável: limitada por `1` a.e.
+(`|θᵢ| ≤ ‖θ‖ = 1` a.e., via `PiLp.norm_apply_le` e
+`ae_mem_sphere_sphereSurfaceMeasure`), e `sphereSurfaceMeasure` é uma
+medida finita (`instIsFiniteMeasure_sphereSurfaceMeasure` acima). -/
+theorem integrable_coord_mul_sphereSurfaceMeasure (i j : Fin 3) :
+    Integrable (fun θ : EuclideanSpace ℝ (Fin 3) => θ i * θ j) sphereSurfaceMeasure := by
+  apply Integrable.mono' (integrable_const (1:ℝ))
+  · fun_prop
+  · filter_upwards [ae_mem_sphere_sphereSurfaceMeasure] with θ hθ
+    have hθ' : ‖θ‖ = 1 := by simpa [Metric.mem_sphere, dist_zero_right] using hθ
+    have hi : ‖θ i‖ ≤ 1 := by rw [← hθ']; exact PiLp.norm_apply_le θ i
+    have hj : ‖θ j‖ ≤ 1 := by rw [← hθ']; exact PiLp.norm_apply_le θ j
+    calc ‖θ i * θ j‖ = ‖θ i‖ * ‖θ j‖ := norm_mul _ _
+      _ ≤ 1 * 1 := mul_le_mul hi hj (norm_nonneg _) (by norm_num)
+      _ = 1 := by ring
+
+/-- Inversão de sinal na coordenada `k` (mantendo as demais fixas), como
+`LinearIsometryEquiv` de `E`: produto de isometrias unidimensionais de
+`ℝ` (`LinearIsometryEquiv.neg`/`.refl`), via
+`LinearIsometryEquiv.piLpCongrRight` (Mathlib, `Normed.Lp.PiLp`). -/
+noncomputable def flipCoord (k : Fin 3) :
+    EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3) :=
+  LinearIsometryEquiv.piLpCongrRight 2
+    (fun i => if i = k then LinearIsometryEquiv.neg ℝ else LinearIsometryEquiv.refl ℝ ℝ)
+
+theorem flipCoord_apply_self (k : Fin 3) (θ : EuclideanSpace ℝ (Fin 3)) :
+    (flipCoord k θ) k = - θ k := by
+  unfold flipCoord
+  rw [LinearIsometryEquiv.piLpCongrRight_apply]
+  simp
+
+theorem flipCoord_apply_other (k i : Fin 3) (θ : EuclideanSpace ℝ (Fin 3)) (h : i ≠ k) :
+    (flipCoord k θ) i = θ i := by
+  unfold flipCoord
+  rw [LinearIsometryEquiv.piLpCongrRight_apply]
+  simp [h]
+
+/-- Permutação de coordenadas por `σ : Equiv.Perm (Fin 3)`, como
+`LinearIsometryEquiv` de `E`, via `LinearIsometryEquiv.piLpCongrLeft`
+(Mathlib, `Normed.Lp.PiLp`). -/
+noncomputable def permCoord (σ : Equiv.Perm (Fin 3)) :
+    EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3) :=
+  LinearIsometryEquiv.piLpCongrLeft 2 ℝ ℝ σ
+
+theorem permCoord_apply (σ : Equiv.Perm (Fin 3)) (θ : EuclideanSpace ℝ (Fin 3)) (i : Fin 3) :
+    (permCoord σ θ) i = θ (σ.symm i) := by
+  unfold permCoord
+  rw [LinearIsometryEquiv.piLpCongrLeft_apply]
+  simp [Equiv.piCongrLeft']
+
+/-- Troca de integral por qualquer isometria linear de `E`, aplicada à
+medida `sphereSurfaceMeasure` invariante: consequência direta de
+`sphereSurfaceMeasure_map_linearIsometryEquiv` empacotada como
+`MeasurePreserving` e `MeasurePreserving.integral_comp'` (Mathlib). -/
+theorem integral_comp_linearIsometryEquiv_sphereSurfaceMeasure
+    (T : EuclideanSpace ℝ (Fin 3) ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 3)) (g : EuclideanSpace ℝ (Fin 3) → ℝ) :
+    ∫ θ, g (T θ) ∂sphereSurfaceMeasure = ∫ θ, g θ ∂sphereSurfaceMeasure := by
+  have hMP : MeasurePreserving T.toMeasurableEquiv sphereSurfaceMeasure sphereSurfaceMeasure := by
+    refine ⟨T.toMeasurableEquiv.measurable, ?_⟩
+    rw [LinearIsometryEquiv.coe_toMeasurableEquiv]
+    exact sphereSurfaceMeasure_map_linearIsometryEquiv T
+  have hcomp := hMP.integral_comp' g
+  simpa [LinearIsometryEquiv.coe_toMeasurableEquiv] using hcomp
+
+/-- Termos fora da diagonal do tensor de segundo momento de
+`sphereSurfaceMeasure` são zero: aplica-se `flipCoord i` (que troca o
+sinal de `θᵢ` e mantém `θⱼ`, `j≠i`, fixo), obtendo
+`∫θᵢθⱼ = ∫(-θᵢ)θⱼ = -∫θᵢθⱼ`, logo `∫θᵢθⱼ=0`. -/
+theorem integral_offdiag_eq_zero_sphereSurfaceMeasure (i j : Fin 3) (h : i ≠ j) :
+    ∫ θ, θ i * θ j ∂sphereSurfaceMeasure = 0 := by
+  have hkey := integral_comp_linearIsometryEquiv_sphereSurfaceMeasure (flipCoord i)
+    (fun θ => θ i * θ j)
+  have hpt : ∀ θ : EuclideanSpace ℝ (Fin 3),
+      (flipCoord i θ) i * (flipCoord i θ) j = - (θ i * θ j) := by
+    intro θ
+    rw [flipCoord_apply_self, flipCoord_apply_other i j θ (Ne.symm h)]
+    ring
+  simp_rw [hpt] at hkey
+  rw [integral_neg] at hkey
+  linarith
+
+/-- Termos da diagonal do tensor de segundo momento de
+`sphereSurfaceMeasure` coincidem entre si: aplica-se `permCoord` da
+transposição `(i j)`, que troca `θᵢ` e `θⱼ`, obtendo
+`∫θᵢθᵢ = ∫θⱼθⱼ`. -/
+theorem integral_diag_eq_sphereSurfaceMeasure (i j : Fin 3) :
+    ∫ θ, θ i * θ i ∂sphereSurfaceMeasure = ∫ θ, θ j * θ j ∂sphereSurfaceMeasure := by
+  have hkey := integral_comp_linearIsometryEquiv_sphereSurfaceMeasure
+    (permCoord (Equiv.swap i j)) (fun θ => θ i * θ i)
+  have hpt : ∀ θ : EuclideanSpace ℝ (Fin 3),
+      (permCoord (Equiv.swap i j) θ) i * (permCoord (Equiv.swap i j) θ) i = θ j * θ j := by
+    intro θ
+    rw [permCoord_apply]
+    simp [Equiv.symm_swap, Equiv.swap_apply_left]
+  simp_rw [hpt] at hkey
+  linarith
+
+/-- **Fechamento da Parte B**: `sphereSurfaceMeasure` tem tensor de
+segundo momento isotrópico, com constante `c := ∫θ₀² dμ` (escolha
+concreta, canônica dado `Fin 3`). Combina
+`integral_offdiag_eq_zero_sphereSurfaceMeasure` (fora da diagonal),
+`integral_diag_eq_sphereSurfaceMeasure` (diagonal) e
+`integrable_coord_mul_sphereSurfaceMeasure` (integrabilidade). -/
+theorem sphereSurfaceMeasure_isotropicSecondMoment :
+    IsotropicSecondMoment sphereSurfaceMeasure (∫ θ, θ 0 * θ 0 ∂sphereSurfaceMeasure) := by
+  refine ⟨integrable_coord_mul_sphereSurfaceMeasure, ?_⟩
+  intro i j
+  by_cases h : i = j
+  · subst h
+    simp only [mul_one, ite_true]
+    exact integral_diag_eq_sphereSurfaceMeasure i 0
+  · simp only [if_neg h, mul_zero]
+    exact integral_offdiag_eq_zero_sphereSurfaceMeasure i j h
+
+/-- **`mean_zero` para `K e2 e3` sobre `sphereSurfaceMeasure`**: sobre a
+esfera, `yHat y = y` e `‖y‖³=1`, logo `K e2 e3 y = D y e2 e3`; a integral
+de conjunto sobre `sphere 0 1` coincide com a integral plena porque
+`sphereSurfaceMeasure` já dá massa total a.e. à esfera
+(`ae_mem_sphere_sphereSurfaceMeasure`, via `Measure.restrict_eq_self_of_ae_mem`);
+o resultado segue de `integral_D_eq_zero_of_isotropicSecondMoment`
+aplicado a `sphereSurfaceMeasure_isotropicSecondMoment`. Instancia o
+campo `mean_zero` de `CZKernelClass` -- o item central desta frente. -/
+theorem K_mean_zero_sphereSurfaceMeasure (e2 e3 : EuclideanSpace ℝ (Fin 3)) :
+    ∫ y in Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1, K e2 e3 y ∂sphereSurfaceMeasure = 0 := by
+  have heq : Set.EqOn (K e2 e3) (fun y => D y e2 e3) (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1) := by
+    intro y hy
+    have hynorm : ‖y‖ = 1 := by simpa [Metric.mem_sphere, dist_zero_right] using hy
+    show D (yHat y) e2 e3 / ‖y‖ ^ 3 = D y e2 e3
+    unfold yHat
+    rw [hynorm]
+    simp
+  rw [setIntegral_congr_fun Metric.isClosed_sphere.measurableSet heq]
+  show ∫ y, D y e2 e3 ∂(sphereSurfaceMeasure.restrict (Metric.sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) = 0
+  rw [Measure.restrict_eq_self_of_ae_mem ae_mem_sphere_sphereSurfaceMeasure]
+  exact integral_D_eq_zero_of_isotropicSecondMoment sphereSurfaceMeasure_isotropicSecondMoment e2 e3
+
+/-- **Termo completo de `CZKernelClass`** para o núcleo de coeficiente
+congelado de Constantin-Fefferman, relativo a `sphereSurfaceMeasure`,
+para quaisquer `e2, e3` fixos: o primeiro termo completo desta classe em
+todo o laboratório. Combina os três campos já provados:
+`K_homogeneous` (homogeneidade, `FOUND-CZ-KERNEL-DEFINITIONS-001`),
+`contDiffAt_K` (suavidade fora da origem, idem) e
+`K_mean_zero_sphereSurfaceMeasure` (média zero, esta frente,
+`FOUND-CZ-MEAN-ZERO-001`). -/
+theorem czKernelClass_sphereSurfaceMeasure_K (e2 e3 : EuclideanSpace ℝ (Fin 3)) :
+    CZKernelClass sphereSurfaceMeasure (K e2 e3) where
+  homogeneous := K_homogeneous e2 e3
+  smooth_off_origin := fun _ hy => contDiffAt_K e2 e3 hy
+  mean_zero := K_mean_zero_sphereSurfaceMeasure e2 e3
+
 end TamesisNSCalderonZygmundKernelDefs
 
 /-! ## O que NÃO é afirmado
@@ -339,25 +764,47 @@ NÃO prova NS-GAP-001/004 nem qualquer regularidade condicional real
 NÃO afirma que Navier-Stokes ficou alcançável, aproximável, ou resolvido
 ```
 
-## Item registrado como intratável nesta janela de escopo: `mean_zero`
-para o `K e2 e3` concreto da Parte 3
+## `mean_zero` fechado (atualização de `PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md`)
 
-Diferente da homogeneidade e da suavidade, a condição de média zero
-`∫ y in Metric.sphere 0 1, K e2 e3 y ∂μ = 0` NÃO foi tentada para o `K`
-concreto acima. Motivo preciso: essa condição exige calcular de fato uma
-integral de superfície não-trivial de uma função racional em `D(ŷ,e2,e3)`
-sobre a esfera unitária -- um cálculo analítico genuíno (não uma
-identidade puramente algébrica, ao contrário da homogeneidade, e não uma
-composição mecânica de suavidades, ao contrário de `contDiffAt_K`).
-Nenhuma simetria de paridade óbvia de `D` (em relação a `e1 ↦ -e1`, por
-exemplo) permite reduzir isso a uma manipulação algébrica curta: `D` não
-é par nem ímpar em `e1` de forma exploitável sem análise adicional.
-Consequentemente, NENHUM termo completo de `CZKernelClass μ (K e2 e3)`
-é exibido neste arquivo para nenhuma medida `μ` -- apenas os dois campos
-tratáveis (`homogeneous`, `smooth_off_origin`) são provados como teoremas
-autônomos (`K_homogeneous`, `contDiffAt_K`). Isso é consistente com o
-escopo autorizado em `PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md`,
-que pede a tentativa mas explicitamente permite não forçá-la.
+A nota anterior deste bloco registrava `mean_zero` como item intratável
+nesta janela de escopo, supondo que exigisse um cálculo analítico de
+integral de superfície genuíno. Uma revisão de portfólio posterior
+(`PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md`,
+`FOUND-CZ-MEAN-ZERO-001_AUTHORIZED`, citando Grafakos, *Classical
+Fourier Analysis*, 3ª ed., Springer GTM 249, 2014, §5.1.4/§5.2.1-5.2.2)
+identificou que essa suposição estava incorreta: `D(θ,e2,e3)` é uma
+forma quadrática em `θ`, e sua média sobre a esfera se reduz a uma
+identidade puramente algébrica (isotropia do tensor de segundo momento
+mais `det`/`tripleProduct` com argumento repetido = 0), NÃO a um cálculo
+analítico. Essa formalização está completa na Parte 4 acima:
+
+* Parte A (`integral_D_eq_zero_of_isotropicSecondMoment`): a redução
+  algébrica condicional, provada sem nenhuma hipótese sobre
+  `sphereSurfaceMeasure` especificamente.
+* Parte B (`sphereSurfaceMeasure_map_linearIsometryEquiv` e o que segue
+  até `sphereSurfaceMeasure_isotropicSecondMoment`): a isotropia de
+  `sphereSurfaceMeasure` foi estabelecida via invariância sob QUALQUER
+  isometria linear de `E` -- não ficou como gap, nem precisou ser
+  restrita ao subgrupo finito de permutações/inversões de sinal
+  sugerido como estratégia de recuo no escopo autorizado (esse subgrupo
+  finito é usado, mas apenas porque é suficiente, não porque a
+  invariância geral tenha sido inalcançável).
+* `K_mean_zero_sphereSurfaceMeasure` combina as duas partes e instancia
+  literalmente o campo `mean_zero` de `CZKernelClass` para `K e2 e3` e
+  `sphereSurfaceMeasure`.
+* `czKernelClass_sphereSurfaceMeasure_K` é o termo completo resultante
+  de `CZKernelClass sphereSurfaceMeasure (K e2 e3)`, para quaisquer
+  `e2, e3` fixos -- o primeiro termo completo desta classe em todo o
+  laboratório, combinando `K_homogeneous`, `contDiffAt_K` (ambos de
+  `FOUND-CZ-KERNEL-DEFINITIONS-001`) e `K_mean_zero_sphereSurfaceMeasure`
+  (desta frente).
+
+Isso NÃO prova limitação L² do operador (exigiria a maquinaria completa
+de Grafakos Prop. 5.2.3/Cor. 5.2.6 -- derivar um multiplicador de
+Fourier a partir do núcleo espacial p.v., fora de escopo aqui), NÃO toca
+o operador não-linear real das eq. 2.1/2.2 (onde `e3=ω̂(t,x-y)` varia com
+`y`), e NÃO é progresso em NS-GAP-001/004. Ver também o bloco "O que NÃO
+é afirmado" acima, que permanece válido sem alteração.
 
 Fontes citadas:
 - P. Constantin, C. Fefferman, "Direction of vorticity and the problem
@@ -366,8 +813,14 @@ Fontes citadas:
 - Siran Li, "On Vortex Alignment and Boundedness of L^q Norm of
   Vorticity", Acta Math. Sci. 40(6) (2020), 1700-1708, arXiv:1712.00551,
   eq. 2.1-2.3.
+- Loukas Grafakos, *Classical Fourier Analysis*, 3ª ed., Springer GTM
+  249, 2014, §5.1.4 e §5.2.1-5.2.2 (achado que motivou esta frente --
+  não usado diretamente na formalização, que é auto-contida em termos
+  de álgebra linear + invariância de medida).
 - `MeasureTheory.Measure.toSphere`, Yury Kudryashov,
   `Mathlib.MeasureTheory.Constructions.HaarToSphere`.
+- `LinearIsometryEquiv.measurePreserving`, Sébastien Gouëzel,
+  `Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace`.
 -/
 
 #print axioms TamesisNSCalderonZygmundKernelDefs.tripleProduct
@@ -382,3 +835,31 @@ Fontes citadas:
 #print axioms TamesisNSCalderonZygmundKernelDefs.contDiff_D_fst
 #print axioms TamesisNSCalderonZygmundKernelDefs.contDiffAt_yHat
 #print axioms TamesisNSCalderonZygmundKernelDefs.contDiffAt_K
+
+-- Parte 4 (mean_zero) -- novas declarações
+#print axioms TamesisNSCalderonZygmundKernelDefs.tripleProduct_self_left
+#print axioms TamesisNSCalderonZygmundKernelDefs.integral_D_eq_zero_of_isotropicSecondMoment
+#print axioms TamesisNSCalderonZygmundKernelDefs.volume_image_linearIsometryEquiv
+#print axioms TamesisNSCalderonZygmundKernelDefs.image_smul_Ioo_linearIsometryEquiv
+#print axioms TamesisNSCalderonZygmundKernelDefs.mapsTo_sphere
+#print axioms TamesisNSCalderonZygmundKernelDefs.sphereMap
+#print axioms TamesisNSCalderonZygmundKernelDefs.sphereMap_continuous
+#print axioms TamesisNSCalderonZygmundKernelDefs.sphereMap_measurable
+#print axioms TamesisNSCalderonZygmundKernelDefs.image_val_preimage_sphereMap
+#print axioms TamesisNSCalderonZygmundKernelDefs.preimage_eq_image_symm
+#print axioms TamesisNSCalderonZygmundKernelDefs.toSphere_map_sphereMap
+#print axioms TamesisNSCalderonZygmundKernelDefs.sphereSurfaceMeasure_map_linearIsometryEquiv
+#print axioms TamesisNSCalderonZygmundKernelDefs.ae_mem_sphere_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.instIsFiniteMeasure_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.integrable_coord_mul_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.flipCoord
+#print axioms TamesisNSCalderonZygmundKernelDefs.flipCoord_apply_self
+#print axioms TamesisNSCalderonZygmundKernelDefs.flipCoord_apply_other
+#print axioms TamesisNSCalderonZygmundKernelDefs.permCoord
+#print axioms TamesisNSCalderonZygmundKernelDefs.permCoord_apply
+#print axioms TamesisNSCalderonZygmundKernelDefs.integral_comp_linearIsometryEquiv_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.integral_offdiag_eq_zero_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.integral_diag_eq_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.sphereSurfaceMeasure_isotropicSecondMoment
+#print axioms TamesisNSCalderonZygmundKernelDefs.K_mean_zero_sphereSurfaceMeasure
+#print axioms TamesisNSCalderonZygmundKernelDefs.czKernelClass_sphereSurfaceMeasure_K

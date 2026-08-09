@@ -33,7 +33,7 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "PENDING_NEXT_COMMIT"
+formalized_at_commit: "e95d029a2f92a8eda8c9acd26865ba37c29afe58"
 last_verified_artifact: "TamesisLab/Foundations/LerayProjectorSobolev.lean, lake env lean exit 0, full lake build exit 0 (8820 jobs), 9 declarations, standard axiom footprint, zero sorry"
 current_blocker: >
   Revisão adversarial de FOUND-LERAY-PROJECTOR-SOBOLEV-001 em andamento

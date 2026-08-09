@@ -23,6 +23,7 @@ import TamesisLab.Foundations.Helmholtz
 import TamesisLab.Foundations.LerayProjectorSobolev
 import TamesisLab.Foundations.LerayOrthogonalSobolev
 import TamesisLab.Foundations.HeatSemigroup
+import TamesisLab.Foundations.DuhamelSkeleton
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

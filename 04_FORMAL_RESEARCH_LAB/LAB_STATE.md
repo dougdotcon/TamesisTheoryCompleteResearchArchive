@@ -20,7 +20,7 @@ active_work_item: "FOUND-DUHAMEL-SKELETON-001"
 work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "IN_PROGRESS"
+formalization_status: "VERIFIED"
 result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -37,11 +37,14 @@ formalized_at_commit: "5c85550c8d1197faf70571d8b3e339c51af8a629"
 last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean (201->408 lines), lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-DUHAMEL-SKELETON-001 autorizada (DEC-069): esqueleto abstrato da
-  formula de Duhamel para o semigrupo do calor, com o termo nao-linear B
-  completamente abstrato (apenas continuo). Ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md.
-  Formalizacao em andamento.
+  FOUND-DUHAMEL-SKELETON-001: formalizacao completa entregue em
+  DuhamelSkeleton.lean (160 linhas) -- continuidade conjunta de
+  heatOpL2 em (t,f), reversao de tempo total, integrando de Duhamel,
+  boa definicao da integral de Bochner, e o caso de saneamento B=0.
+  Reverificada de forma independente nesta sessao -- lake env lean exit
+  0, lake build completo exit 0 (8823 jobs), zero sorry/admit, checados
+  diretamente sem pipe. Revisao adversarial independente disparada,
+  ainda pendente. Integracao final apos o veredito.
 authorized_action: "FORMALIZATION"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"

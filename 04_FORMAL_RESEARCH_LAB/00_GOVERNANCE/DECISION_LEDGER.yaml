@@ -2162,3 +2162,58 @@ decisions:
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
       - "esta declaracao de exaustao e revisavel: qualquer uma das tres vias registradas no documento de revisao reabre a fila"
+
+  - decision_id: DEC-076
+    date: 2026-08-09
+    decision: >
+      Reabrir a fila com uma excecao nomeada e delimitada ao
+      stop_condition de NS-PRESSURE-001/NS-GAP-001: autorizar
+      FOUND-CF-DEPLETION-KERNEL-001, a formalizacao do nucleo algebrico
+      de depleção geometrica D(e1,e2,e3) := (e1.e3)*det(e1,e2,e3) do
+      mecanismo de Constantin-Fefferman 1993 (Indiana Univ. Math. J. 42,
+      775-789), restatado com numeros de equacao (2.1-2.3) em Siran Li,
+      "On Vortex Alignment and Boundedness of L^q Norm of Vorticity",
+      Acta Math. Sci. 40(6) (2020), arXiv:1712.00551. NAO autoriza a
+      prova do teorema completo de Constantin-Fefferman (que exige
+      teoria de solucoes fracas de Leray-Hopf, estimativas de
+      energia/enstrofia, e limitacao de operadores integrais singulares
+      -- fora de escopo).
+    rationale: >
+      Pedido explicito do usuario: reavaliar a governanca para continuar
+      atacando, fundamentado exclusivamente em fontes reais verificadas
+      -- nao no corpus Tamesis mais amplo. Uma exploracao completa de
+      cinco clusters do corpus Tamesis (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md)
+      nao encontrou nenhum conteudo de analise harmonica/Calderon-Zygmund
+      utilizavel -- confirmado por autoauditorias do proprio corpus
+      (ToE_Refutation, RELATORIO_INTEGRAL_DO_PROGRAMA_TAMESIS_2026.md:
+      "a ambicao de ToE foi refutada pelo proprio programa"). Um achado
+      relevante foi registrado: RIGOROUS_DERIVATIONS.md (fora do
+      04_FORMAL_RESEARCH_LAB) rotula indevidamente "Q.E.D." um argumento
+      de escala heuristico sobre um unico vortice idealizado -- nao uma
+      prova -- para exatamente o Lemma 3.1/NS-GAP-001 que este
+      laboratorio ja trata corretamente como nao provado.
+      Diante disso, o usuario escolheu formalizar Constantin-Fefferman
+      1993 -- um resultado real, publicado e citavel. O nucleo D e
+      puramente algebrico (funcao de tres vetores em R^3), nao exige
+      integral singular nem teoria de solucao fraca -- mesmo padrao de
+      "nucleo algebrico dentro de uma estimativa maior" ja usado em
+      PressureHessianAlgebra.lean (tr(AOmega)=0) nesta mesma sessao.
+    authority: "principal do laboratorio (direcao de pesquisa explicita, revisao de governanca autorizada)"
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
+      - "09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md"
+      - "LAB_STATE.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-CF-DEPLETION-KERNEL-001), status SCOPED"
+      - "LAB_STATE: authorized_action NO_AUTONOMOUS_WORK_AVAILABLE -> FORMALIZATION"
+      - "excecao NOMEADA e DELIMITADA ao stop_condition de NS-PRESSURE-001/NS-GAP-001: permite reproduzir identidades algebricas de fontes publicadas e citadas sobre o mecanismo de Constantin-Fefferman; NAO remove a proibicao geral de tentar a estimativa nao-local completa ou de afirmar NS-GAP-001/004 resolvido"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "a prova completa do teorema de Constantin-Fefferman permanece fora de escopo, nomeada explicitamente"
+      - "NS-GAP-001/004 permanecem nomeados e abertos"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"
+      - "a excecao e nomeada e auditavel -- nao uma remocao geral de salvaguardas contra overclaiming"

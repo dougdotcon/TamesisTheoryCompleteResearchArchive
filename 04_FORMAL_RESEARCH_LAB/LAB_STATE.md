@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: true
-active_track: "foundations"
-active_work_item: "FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
-work_status: "VERIFIED"
+repository_clean: false
+active_track: "millennium"
+active_work_item: "FOUND-CF-DEPLETION-KERNEL-001"
+work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -35,26 +35,24 @@ integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "11e90dbaa47b5bbd492db8fe3ede3888c9f14e08"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPointInstance.lean (114 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
-current_blocker: >
-  Nenhum item SCOPED/READY executável na fila. TOE-INTERFACE-001 (único
-  SCOPED) permanece bloqueado por RH-NOGO-001 (FROZEN_PARTIAL_RESULT,
-  nenhuma condição de reativação satisfeita). Próximo passo real na
-  linha Foundations exigiria a estimativa Lipschitz/bilinear do B REAL
-  de Navier-Stokes (NS-GAP-001/004), avaliada como estruturalmente
-  comparável a critérios de regularidade condicional nunca verificados
-  a priori — fora do alcance de execução autônoma.
+current_blocker: null
 next_single_action: >
-  Fila reavaliada com rigor (PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md)
-  e declarada genuinamente esgotada pela segunda vez nesta sessão. Nada
-  mudou desde a revisão anterior de exaustão: nenhuma das cinco
-  condições de reativação de RH-NOGO-001 ocorreu; os quatro gaps
-  pré-nomeados (SC-GAP-002, ENC-GAP-020, RT-GAP-017, YM-GAP-007)
-  continuam sem justificativa nova; nenhuma infraestrutura executável
-  identificada em PVSNP/Yang-Mills/Hodge/BSD além do que já foi
-  auditado. Sem uma nova decisão de direção de pesquisa do principal do
-  laboratório, ou uma das condições de reativação, nenhuma execução
-  autônoma adicional é justificável.
-authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
+  Pedido explícito do usuário: reavaliar a governança para continuar
+  atacando, fundamentado exclusivamente em fontes reais verificadas.
+  Exploração completa de cinco clusters do corpus Tamesis
+  (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md) não
+  encontrou nenhuma alavanca de análise harmônica/Calderón-Zygmund
+  utilizável — confirmado pelas próprias autoauditorias do corpus.
+  Achado registrado: RIGOROUS_DERIVATIONS.md (fora deste laboratório)
+  rotula indevidamente "Q.E.D." um argumento heurístico para o Lemma
+  3.1/NS-GAP-001. Direção escolhida pelo usuário: formalizar
+  Constantin-Fefferman 1993 (fonte real, citável). DEC-076 abre uma
+  exceção NOMEADA e DELIMITADA ao stop_condition de NS-PRESSURE-001:
+  FOUND-CF-DEPLETION-KERNEL-001, o núcleo algébrico de depleção
+  geométrica D(e1,e2,e3):=(e1·e3)·det(e1,e2,e3) — NÃO o teorema
+  completo, que continua fora de escopo. Formalização em andamento.
+authorized_action: "FORMALIZATION"
+portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"

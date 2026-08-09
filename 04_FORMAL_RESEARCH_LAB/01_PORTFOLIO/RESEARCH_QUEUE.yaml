@@ -1743,3 +1743,47 @@ queue:
       FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001, nao uma frente nova
       inventada sem relacao.
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-CF-DEPLETION-KERNEL-001
+    title: "Nucleo algebrico de depleção geometrica de Constantin-Fefferman"
+    track: millennium
+    target_statement: >
+      Definir D(e1,e2,e3) := (e1.e3) * det(e1,e2,e3) para vetores em
+      R^3 (Constantin-Fefferman 1993, Indiana Univ. Math. J. 42,
+      775-789; restatado eq. 2.1-2.3 em Siran Li, Acta Math. Sci. 40(6)
+      2020, arXiv:1712.00551). Provar (1) D(e1,e2,e2) = 0 -- depleção
+      exata quando as direcoes de vorticidade coincidem; (2) uma cota
+      quantitativa |D(e1,e2,e3)| <= C * ||e2-e3|| para vetores
+      unitarios, conectando a hipotese de Lipschitz |sin phi| <=
+      |x-y|/rho do teorema real ao nucleo de estiramento.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry,
+      provando as duas propriedades algebricas de D, com instancia
+      positiva concreta. NAO tenta a integral p.v. (2.1)/(2.2), nem
+      limitacao de operador integral singular, nem o teorema completo.
+    dependencies: []
+    existing_assets:
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PressureHessianAlgebra.lean"
+    formalization_cost: moderate
+    bibliographic_cost: moderate
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "Mathlib, Constantin-Fefferman 1993 via Li 2020"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar provar a integral p.v.
+      (2.1)/(2.2) ou qualquer limitacao de operador integral singular;
+      tentar o teorema completo de Constantin-Fefferman (exige teoria
+      de solucoes fracas de Leray-Hopf, fora de escopo); afirmar
+      NS-GAP-001/004 resolvido, aproximado, ou que Navier-Stokes ficou
+      alcancavel
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md,
+      DEC-076 -- excecao nomeada e delimitada ao stop_condition geral de
+      NS-PRESSURE-001, apos exploracao completa do corpus Tamesis nao
+      encontrar alavanca utilizavel
+      (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md).
+    research_role: FORMAL_FOUNDATION

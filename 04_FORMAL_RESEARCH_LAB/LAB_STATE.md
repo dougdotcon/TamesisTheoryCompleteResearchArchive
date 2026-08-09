@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: false
+repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
-work_status: "IN_PROGRESS"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,19 +33,19 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "3a6b93d0fb860ace5a54a695c60e7a5ce07e274f"
-last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPoint.lean (257 lines), lake env lean exit 0, full lake build exit 0 (8824 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "11e90dbaa47b5bbd492db8fe3ede3888c9f14e08"
+last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPointInstance.lean (114 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001: instância concreta entregue em
-  DuhamelFixedPointInstance.lean (114 linhas) -- E3/F3 (R³ concreto, mesmo
-  par de concrete_stokesOpL2_R3), concreteB := (1/2:C)•id (não-nulo),
-  L=1/2>0, T=1, u0=0, concrete_mild_solution_instance. Reverificada de
-  forma independente nesta sessão -- lake env lean exit 0, lake build
-  completo exit 0 (8825 jobs), zero sorry/admit, checados diretamente sem
-  pipe. Revisão adversarial (escopo leve, tarefa de instanciação de baixo
-  risco) disparada, ainda pendente. Integração final após o veredito.
-authorized_action: "FORMALIZATION"
+  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 fechou VERIFIED / result_review
+  APPROVED (revisão adversarial: 0 problemas). A cadeia Sobolev → Leray →
+  semigrupo do calor → Duhamel (bem definição) → ponto fixo abstrato →
+  instância positiva concreta está completa e não-vácua. Nenhum resultado
+  principal desta sessão carece de instância concreta. Fila volta a
+  exigir revisão de portfólio antes de qualquer frente nova. O único
+  caminho adiante nesta linha exigiria a estimativa Lipschitz do B REAL
+  de Navier-Stokes (NS-GAP-001/004) — genuinamente aberta, não tentada.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"
@@ -462,6 +462,27 @@ closed_work_items:
       seria provado com a hipotese na bola).
     concrete_B_lipschitz_claim: FORBIDDEN
     global_existence_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    predecessor: FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001
+    scope_note: >
+      concrete_mild_solution_instance: instancia concreta e
+      nao-degenerada de exists_unique_mild_solution, em E3/F3 (R³
+      concreto, mesmo par de concrete_stokesOpL2_R3), com concreteB :=
+      (1/2:C)•id (nao-nulo), L=1/2 provado > 0 a partir da norma real do
+      operador (nao afirmado), T=1, u0=0. Corrige a unica lacuna
+      deixada por FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 (ausencia de
+      instancia positiva).
+    concrete_B_navier_stokes_claim: FORBIDDEN
     navier_stokes_reachable_claim: FORBIDDEN
     ns_gap_001_progress_claim: FORBIDDEN
     mathematical_novelty: NONE

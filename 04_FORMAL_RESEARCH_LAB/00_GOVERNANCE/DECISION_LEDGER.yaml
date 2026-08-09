@@ -2087,3 +2087,40 @@ decisions:
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "B concreto usado e um exemplo abstrato generico, NAO o B real de Navier-Stokes"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+
+  - decision_id: DEC-074
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001: instancia positiva
+      concreta e nao-degenerada de exists_unique_mild_solution
+      (concreteB nao-nulo, L=1/2>0 derivado da norma real do operador,
+      T=1, u0=0). VERIFIED apos revisao adversarial independente
+      (APPROVED, zero problemas).
+    rationale: >
+      Corrige a unica lacuna real deixada por
+      FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 -- ausencia de instancia
+      positiva, unico resultado principal da sessao a quebrar esse
+      padrao. Revisao adversarial (escopo proporcional ao baixo risco de
+      uma tarefa de instanciacao, nao matematica nova) confirmou L>0
+      genuino, a cadeia real de lemas do Mathlib por tras da cota de
+      Lipschitz, e ausencia total de overclaiming.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_DUHAMEL_FIXEDPOINT_INSTANCE_001/STATUS.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPointInstance.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 status SCOPED -> VERIFIED, result_review APPROVED"
+      - "LAB_STATE closed_work_items: +1 entrada"
+      - "CLAIM_LEDGER: +1 claim (DUHAMEL-FIXEDPOINT-INSTANCE-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "concreteB e um exemplo abstrato generico, NAO o B real de Navier-Stokes"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8825 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"

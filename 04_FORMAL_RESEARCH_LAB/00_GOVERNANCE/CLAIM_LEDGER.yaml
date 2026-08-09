@@ -1581,3 +1581,39 @@ claims:
       - existencia global de solucao foi provada
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: DUHAMEL-FIXEDPOINT-INSTANCE-FORMAL-001
+    short_name: concrete_nondegenerate_mild_solution_instance
+    exact_statement: >
+      Instancia concreta e nao-degenerada de exists_unique_mild_solution:
+      E3/F3 = EuclideanSpace R (Fin 3) / EuclideanSpace C (Fin 3) (mesmo
+      par de concrete_stokesOpL2_R3), concreteB := (1/2:C) * id (nao-nulo),
+      L=1/2 provado > 0 (derivado da norma real do operador, nao
+      afirmado), T=1, u0=0 -- exibindo que o teorema abstrato produz de
+      fato uma solucao, corrigindo a ausencia de instancia positiva em
+      DUHAMEL-FIXEDPOINT-FORMAL-001.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPointInstance.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_DUHAMEL_FIXEDPOINT_INSTANCE_001/STATUS.yaml"
+    historical_wording: ""
+    current_wording: >
+      B concreto e um exemplo abstrato generico (multiplo escalar da
+      identidade), NAO relacionado a Navier-Stokes (revisao adversarial:
+      APPROVED, recompilou por conta propria, confirmou L>0 genuino via a
+      cadeia real de lemas do Mathlib, confirmou E3/F3/V3 genuinamente
+      nao-degenerados).
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - DUHAMEL-FIXEDPOINT-FORMAL-001
+    known_gaps: []
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_DUHAMEL_FIXEDPOINT_INSTANCE_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - concreteB e ou aproxima o B real de Navier-Stokes
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

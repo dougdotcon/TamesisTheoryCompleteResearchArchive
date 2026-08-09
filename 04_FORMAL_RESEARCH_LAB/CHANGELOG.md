@@ -1,5 +1,42 @@
 # Changelog do laboratório formal
 
+## FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 - 2026-08-09
+
+### Fechando a última lacuna: instância positiva concreta
+
+`exists_unique_mild_solution` fechou (`DEC-072`) sem instância positiva
+concreta — o único resultado principal da sessão a quebrar o padrão que
+todo outro resultado seguiu (`concrete_stokesOpL2_R3`,
+`concrete_lerayOpHs_orthogonal_R3`, `positive_instance_helmholtz_R3`,
+etc.). Corrigido.
+
+Novo `DuhamelFixedPointInstance.lean` (114 linhas): `E3`/`F3` (ℝ³
+concreto, mesmo par de `concrete_stokesOpL2_R3`), `concreteB := (1/2:ℂ)
+• id` (múltiplo escalar não-nulo da identidade — não `B=0`, que
+`duhamelTerm_of_zero` já cobre trivialmente), `L=1/2` provado `> 0` a
+partir da norma real do operador (`opNorm_smul_le`/`norm_id_le`, não
+afirmado), `T=1`, `u0=0`, culminando em `concrete_mild_solution_instance`
+— o teorema abstrato instanciado, produzindo de fato uma solução.
+
+`lake env lean` e `lake build` completo, ambos `exit 0` (8825 jobs).
+
+### Revisão adversarial: APPROVED
+
+Escopo proporcional ao baixo risco (instanciação de um teorema já
+verificado, não matemática nova): confirmou que `L>0` é genuíno (não a
+trivialidade `0≤1/2`), verificou a cadeia real de lemas do Mathlib por
+trás da cota de Lipschitz contra as assinaturas reais, confirmou
+`E3`/`F3`/`V3` genuinamente não-degenerados, e ausência total de
+overclaiming.
+
+### Onde a cadeia para
+
+Sobolev → Leray → semigrupo do calor → termo de Duhamel → ponto fixo
+abstrato → instância positiva concreta: completa e não-vácua. Nenhum
+resultado principal desta sessão carece de testemunha concreta. O único
+caminho adiante nesta linha exigiria a estimativa Lipschitz do `B` REAL
+de Navier-Stokes — `NS-GAP-001`/`004`, genuinamente aberta.
+
 ## FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 - 2026-08-09
 
 ### O último tijolo mecânico do toolkit abstrato: ponto fixo de Banach

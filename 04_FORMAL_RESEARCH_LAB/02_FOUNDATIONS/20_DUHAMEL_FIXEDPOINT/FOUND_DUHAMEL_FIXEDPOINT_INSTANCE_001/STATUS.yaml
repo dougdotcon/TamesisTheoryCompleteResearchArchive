@@ -1,0 +1,58 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: APPROVED
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED
+  reviewer: independent subagent, re-ran lake env lean and full lake build itself
+    (direct exit codes, no pipe), confirmed concreteB_L_pos proves strict
+    positivity (not the trivial 0<=1/2), verified the ContinuousLinearMap lemma
+    chain against real Mathlib signatures, confirmed E3/F3/V3 are genuinely
+    nontrivial (not a degenerate 0-dim edge case), scanned for overclaiming
+  issues_confirmed: []
+  issues_plausible: []
+  soundness_issues_found: 0
+research_role: FORMAL_FOUNDATION
+predecessor: FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPointInstance.lean"
+  file_lines: 114
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8825
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations"
+  verified_independently_by:
+    - "implementing agent"
+    - "orchestrating session (direct re-run, no pipe)"
+    - "adversarial reviewer (direct re-run, no pipe)"
+result:
+  concrete_choice:
+    E3_F3: "EuclideanSpace R (Fin 3) / EuclideanSpace C (Fin 3) -- same pair
+      concrete_stokesOpL2_R3 already uses"
+    B: "concreteB := (1/2:C) smul ContinuousLinearMap.id -- nonzero scaled
+      identity, NOT B=0 (which duhamelTerm_of_zero already covers trivially)"
+    L: "1/2, proved > 0 (concreteB_L_pos), derived from the actual operator
+      norm via opNorm_smul_le/norm_id_le/opNorm_le_iff_lipschitz, not asserted"
+    T: 1
+    u0: 0
+  key_theorem: concrete_mild_solution_instance
+  statement: "the abstract theorem exists_unique_mild_solution instantiated
+    with concreteB, T=1, u0=0, non-vacuously producing a genuine local mild
+    solution instance"
+claims:
+  promoted: 1
+prohibitions:
+  concrete_B_navier_stokes_claim: FORBIDDEN
+  navier_stokes_reachable: FORBIDDEN
+  ns_gap_001_progress_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

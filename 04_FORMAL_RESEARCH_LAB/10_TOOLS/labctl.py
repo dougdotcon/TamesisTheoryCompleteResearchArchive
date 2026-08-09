@@ -655,7 +655,8 @@ def validate() -> dict[str, Any]:
                       "HODGE-CDK-001",
                       "BSD-HYP-MATRIX-001",
                       "FOUND-LERAY-PROJECTOR-SOBOLEV-001",
-                      "FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001"}:
+                      "FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001",
+                      "FOUND-HEAT-SEMIGROUP-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "

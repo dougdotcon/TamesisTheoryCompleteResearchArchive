@@ -1699,3 +1699,100 @@ decisions:
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8821 jobs"
       - "revisao adversarial recompilou por conta propria e tracou as provas a mao, nao confiou na alegacao"
       - "FOUND-LERAY-PROJECTOR-SOBOLEV-001 (registro fechado anterior) nao foi reescrito, so anotado"
+
+  - decision_id: DEC-065
+    date: 2026-08-09
+    decision: >
+      Registrar e autorizar FOUND-HEAT-SEMIGROUP-001: semigrupo do calor
+      e^{tDelta} como multiplicador de Fourier real limitado em L^2,
+      composto com o projetor de Leray ja caracterizado, produzindo o
+      operador de Stokes P*e^{tDelta}. A lei de semigrupo e a
+      continuidade forte ficam deliberadamente fora de escopo desta
+      frente (gap aberto, mesmo padrao ja usado para SC-GAP-002).
+    rationale: >
+      STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md revisou as seis linhas de
+      pesquisa (Riemann/RH-NOGO-001 travada e sem condicao de reativacao
+      satisfeita; Navier-Stokes com a infraestrutura Lean mais profunda
+      do laboratorio -- seis modulos encadeados, zero sorry -- mas
+      NS-GAP-001/004 genuinamente aberto e de dificuldade estrutural
+      comparavel a criterios de regularidade condicional nunca
+      verificados a priori; P vs NP, Yang-Mills, Hodge e BSD sem
+      infraestrutura Lean nova executavel identificada; os quatro gaps
+      pre-nomeados pela revisao anterior -- SC-GAP-002, ENC-GAP-020,
+      RT-GAP-017 caso geral, YM-GAP-007 -- reavaliados e nenhum
+      selecionado, com motivo registrado para cada um). A direcao
+      estrategica explicita do usuario nesta sessao ("revise as linhas,
+      identifique a mais fragil, construa o que falta") e, ela mesma, a
+      via 2 que PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md deixou
+      aberta: o principal do laboratorio registrando uma nova entrada de
+      fila com target_statement/expected_product/stop_condition proprios
+      — decisao de direcao de pesquisa, nao um gate autonomo decidindo
+      por conta propria que "agora vale a pena" (padrao explicitamente
+      proibido).
+    authority: "principal do laboratorio (direcao de pesquisa explicita)"
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
+      - "LAB_STATE.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-HEAT-SEMIGROUP-001), status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: active_work_item -> FOUND-HEAT-SEMIGROUP-001, authorized_action -> FORMALIZATION"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
+      - "NS-GAP-001/004 nao sao alvo desta frente; a lacuna real permanece nomeada e aberta"
+      - "a lei de semigrupo e continuidade forte serao declaradas gap aberto se nao demonstradas, nunca afirmadas sem prova"
+
+  - decision_id: DEC-066
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-HEAT-SEMIGROUP-001: semigrupo do calor e^{tDelta}
+      como multiplicador de Fourier limitado e simetrico via produto
+      interno em L^2 (identidade bruta, nao IsSelfAdjoint/adjoint do
+      Mathlib), composto com o projetor de Leray ja caracterizado no
+      operador de Stokes P*e^{tDelta}. VERIFIED apos revisao adversarial
+      independente (APPROVED, 0 problemas de solidez, 1 nota cosmetica
+      de terminologia na fila corrigida). HEAT-GAP-001 (lei de
+      semigrupo, continuidade forte) fica aberto de proposito.
+    rationale: >
+      Ao tentar provar IsSelfAdjoint/ContinuousLinearMap.adjoint para
+      heatOpL2, uma incompatibilidade de instancia Module foi encontrada:
+      fourierMulL2/mulL2 (FourierMultiplierL2.lean, que nao importa
+      Mathlib.Analysis.InnerProductSpace.Adjoint) usam Lp.instModule,
+      enquanto ContinuousLinearMap.adjoint/eq_adjoint_iff exigem
+      InnerProductSpace.toNormedSpace.toModule -- quase certamente
+      defeq, mas a unificacao de metavariaveis que eq_adjoint_iff precisa
+      nao resolve isso automaticamente. Em vez de forcar uma instancia ou
+      adicionar coercoes especulativas, a identidade bruta de produto
+      interno (inner_heatOpL2_symm, via inner_fourierMulL2_symm ja
+      verificado) foi mantida como o conteudo entregue -- mesma categoria
+      de restricao prudente que a decisao de escopo de LP-GAP-005. A
+      revisao adversarial re-executou lake env lean e lake build por
+      conta propria (exit 0, 8822 jobs, sem pipe), releu
+      FourierMultiplierL2.lean e LerayOrthogonal.lean para confirmar que
+      a instanciacao de inner_fourierMulL2_symm nao era vacua, conferiu a
+      aritmetica da cota concreta (18 = 2*3^2) e varreu o arquivo inteiro
+      por overclaiming, sem encontrar nenhum.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/STATUS.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action RESULT_REVIEW_REQUIRED -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-HEAT-SEMIGROUP-001 status SCOPED -> VERIFIED, result_review APPROVED, open_gap HEAT-GAP-001; expected_product wording corrected (autoadjuncao -> simetria via produto interno)"
+      - "LAB_STATE closed_work_items: +1 entrada"
+      - "CLAIM_LEDGER: +1 claim (HEAT-SEMIGROUP-STOKES-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
+      - "NS-GAP-001/004 nao sao alvo desta frente; a lacuna real permanece nomeada e aberta"
+      - "HEAT-GAP-001 (lei de semigrupo, continuidade forte) declarado aberto, nao afirmado sem prova"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8822 jobs, por dois processos independentes (esta sessao e a revisao adversarial)"

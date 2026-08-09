@@ -16,7 +16,7 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001"
+active_work_item: "FOUND-HEAT-SEMIGROUP-001"
 work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
@@ -33,20 +33,25 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "e95d029a2f92a8eda8c9acd26865ba37c29afe58"
-last_verified_artifact: "TamesisLab/Foundations/LerayOrthogonalSobolev.lean, lake env lean exit 0, full lake build exit 0 (8821 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "1432535a5cbd737dfff5b3bfb217d815ef2ba068"
+last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean, lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 fechou VERIFIED /
-  result_review APPROVED (revisão adversarial: 0 problemas, sem
-  ressalvas). LP-GAP-005 fechado — a cadeia iniciada por
-  FOUND-SOBOLEV-SPACE-001 (fechou FM-GAP-001) → 
-  FOUND-LERAY-PROJECTOR-SOBOLEV-001 (fechou LP-GAP-004, abriu LP-GAP-005)
-  → esta frente (fechou LP-GAP-005) está completa. Nenhum gap conhecido
-  do projetor de Leray permanece aberto. Fila volta a exigir revisão de
-  portfólio antes de qualquer frente nova.
+  FOUND-HEAT-SEMIGROUP-001 fechou VERIFIED / result_review APPROVED
+  (revisão adversarial independente: 0 problemas de solidez, 1 nota
+  cosmética de terminologia na fila, corrigida neste commit). Semigrupo
+  do calor e^{tDelta} construído como multiplicador de Fourier limitado
+  e simétrico via produto interno em L², composto com o projetor de
+  Leray já caracterizado no operador de Stokes P·e^{tDelta}. Lei de
+  semigrupo e continuidade forte deliberadamente NÃO demonstradas —
+  HEAT-GAP-001, aberto. Este é o primeiro artefato da direção
+  estratégica registrada em STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md
+  (linha Navier-Stokes/Foundations selecionada por concentração de
+  infraestrutura, não por proximidade à solução do problema de milênio).
+  Fila volta a exigir revisão de portfólio antes de qualquer frente nova.
 authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document_heat_semigroup: "01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
 portfolio_review_document_leray_orthogonal_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
 portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
@@ -329,6 +334,31 @@ closed_work_items:
       IsSelfAdjoint/ContinuousLinearMap.adjoint do Mathlib — risco de
       diamante de tipo com a norma ja instalada, evitado por decisao
       deliberada de escopo.
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-HEAT-SEMIGROUP-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    open_gap: HEAT-GAP-001
+    strategic_direction_source: STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md, DEC-065
+    scope_note: >
+      Contracao (norma <= 1) e simetria via produto interno
+      (inner_heatOpL2_symm, reusando inner_fourierMulL2_symm ja
+      verificado) provadas para o semigrupo do calor e^{tDelta} em L^2;
+      composto com o projetor de Leray ja caracterizado no operador de
+      Stokes P*e^{tDelta}. IsSelfAdjoint/ContinuousLinearMap.adjoint do
+      Mathlib NAO foram provados — incompatibilidade de instancia
+      Module (Lp.instModule vs InnerProductSpace.toNormedSpace.toModule)
+      encontrada ao tentar, nao forcada. Lei de semigrupo
+      S(t+r)=S(t)S(r) e continuidade forte em t NAO demonstradas —
+      HEAT-GAP-001, aberto de proposito.
+    self_adjoint_instance_claim: FORBIDDEN
+    semigroup_law_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
     mathematical_novelty: NONE
     research_role: FORMAL_FOUNDATION
 frozen_work_items:

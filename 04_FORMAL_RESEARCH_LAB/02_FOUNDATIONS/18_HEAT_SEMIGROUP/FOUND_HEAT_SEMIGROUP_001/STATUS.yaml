@@ -1,0 +1,77 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-HEAT-SEMIGROUP-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: APPROVED
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED
+  reviewer: independent subagent, re-ran lake env lean and full lake build itself
+    (never through a pipe), re-read FourierMultiplierL2.lean and LerayOrthogonal.lean
+    in full to check inner_fourierMulL2_symm's real instantiation was non-vacuous,
+    verified the 18 = 2*3^2 arithmetic against norm_lerayOpL2_le, scanned the whole
+    file text for overclaiming
+  issues_confirmed: []
+  issues_plausible:
+    - "RESEARCH_QUEUE.yaml expected_product wording said 'autoadjuncao' where the
+       file itself proves raw inner-product symmetry, not IsSelfAdjoint/adjoint --
+       cosmetic, fixed in this closing commit"
+  soundness_issues_found: 0
+research_role: FORMAL_FOUNDATION
+open_gap: HEAT-GAP-001
+strategic_direction_source: >
+  Direcao de pesquisa explicita do principal do laboratorio (sessao 2026-08-09,
+  "mapa de batalha" estilo Xadrez/Arte da Guerra) -- via 2 de
+  PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md. Ver
+  01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md e DECISION_LEDGER DEC-065.
+scope_decision: >
+  IsSelfAdjoint/ContinuousLinearMap.adjoint NAO foram provados para heatOpL2. A
+  primeira tentativa falhou por incompatibilidade entre o Module instance usado ao
+  definir fourierMulL2/mulL2 (Lp.instModule, em FourierMultiplierL2.lean, que nao
+  importa Mathlib.Analysis.InnerProductSpace.Adjoint) e o Module instance que
+  ContinuousLinearMap.adjoint/eq_adjoint_iff exigem
+  (InnerProductSpace.toNormedSpace.toModule) -- quase certamente defeq, mas a
+  unificacao de metavariaveis que eq_adjoint_iff precisa nao resolve isso
+  automaticamente. Em vez de forcar, a identidade bruta de produto interno
+  (inner_heatOpL2_symm) foi mantida como o conteudo matematico entregue, sem o
+  invólucro IsSelfAdjoint/adjoint -- mesma categoria de restricao prudente que a
+  decisao de escopo de LP-GAP-005 (pareamento pullback em vez de instancia global).
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8822
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations"
+result:
+  key_objects:
+    - "heatSymbol / heatSymbolL2 / heatOpL2: e^{tDelta} as a bounded L^2 Fourier
+       multiplier via the pre-existing fourierMulL2 (no HasTemperateGrowth needed)"
+    - "norm_heatOpL2_le: contraction, norm <= 1, for any t >= 0"
+    - "inner_heatOpL2_symm: raw inner-product symmetry, reusing
+       inner_fourierMulL2_symm (already verified, no new symmetry proof)"
+    - "stokesOpL2 := lerayOpL2 b comp heatOpL2: the Stokes operator P*e^{tDelta},
+       composed with the already fully characterized matrix Leray projector"
+    - "norm_stokesOpL2_le / norm_stokesOpL2_le': explicit numeric bounds"
+    - "concrete_stokesOpL2_R3: non-vacuous instance on R^3, t=1, norm <= 18,
+       reusing E3/b3 from TamesisProbe (no duplicate MeasurableSpace instance)"
+  deliberately_open:
+    - "HEAT-GAP-001: the semigroup law S(t+r) = S(t) comp S(r) and strong
+       continuity in t are NOT proven -- require algebra on products of Lp-infinity
+       symbols not verified this session"
+claims:
+  promoted: 1
+prohibitions:
+  semigroup_law_proved: FORBIDDEN
+  strong_continuity_proved: FORBIDDEN
+  is_self_adjoint_instance_claim: FORBIDDEN
+  navier_stokes_reachable: FORBIDDEN
+  ns_gap_001_progress_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

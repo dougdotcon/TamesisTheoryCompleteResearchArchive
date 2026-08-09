@@ -1390,3 +1390,49 @@ claims:
       - o resultado usa IsSelfAdjoint ou ContinuousLinearMap.adjoint do Mathlib
       - Navier-Stokes ficou alcancavel
       - novidade matematica
+
+  - claim_id: HEAT-SEMIGROUP-STOKES-FORMAL-001
+    short_name: heat_semigroup_leray_stokes_operator
+    exact_statement: >
+      O semigrupo do calor e^{tDelta} (t >= 0), construido como
+      multiplicador de Fourier de simbolo real limitado exp(-t|xi|^2) via
+      fourierMulL2 (sem exigir HasTemperateGrowth), e uma contracao
+      (norma <= 1) em L^2 e satisfaz a identidade bruta de simetria via
+      produto interno <Sf,g> = <f,Sg> (reusando inner_fourierMulL2_symm
+      ja verificado). Composto com o projetor de Leray matricial ja
+      totalmente caracterizado (lerayOpL2), da o operador de Stokes
+      P*e^{tDelta}, com cota numerica explicita (<= 2n^2). Instancia
+      positiva concreta em R^3, t=1, norma <= 18.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      A simetria via produto interno E' provada (identidade bruta, nao
+      IsSelfAdjoint/adjoint do Mathlib -- incompatibilidade de instancia
+      Module encontrada e nao forcada). A lei de semigrupo
+      S(t+r)=S(t)S(r) e a continuidade forte em t NAO sao provadas --
+      HEAT-GAP-001, aberto de proposito (revisao adversarial
+      independente: APPROVED, recompilou por conta propria, verificou a
+      aritmetica da cota concreta e a ausencia de overclaiming no texto
+      inteiro do arquivo).
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001
+    known_gaps:
+      - "HEAT-GAP-001: lei de semigrupo e continuidade forte, nao demonstradas"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - S(t+r) = S(t) compos S(r) (lei de semigrupo) foi provada
+      - t -> heatOpL2 t e fortemente continuo
+      - o resultado usa IsSelfAdjoint ou ContinuousLinearMap.adjoint do Mathlib
+      - existe formalizacao de solucao branda ou formula de Duhamel
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

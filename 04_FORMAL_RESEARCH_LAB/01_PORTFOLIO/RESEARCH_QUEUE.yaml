@@ -1510,3 +1510,58 @@ queue:
     mathematical_novelty: NONE
     algorithmic_novelty: NONE
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-HEAT-SEMIGROUP-001
+    title: "Semigrupo do calor como multiplicador de Fourier limitado em L^2, composto com o projetor de Leray"
+    track: FOUNDATIONS
+    target_statement: >
+      Construir e^{tDelta} (t >= 0) como multiplicador de Fourier de
+      simbolo real limitado exp(-t|xi|^2) em L^2, via a extensao ja
+      verificada fourierMulL2 (sem exigir HasTemperateGrowth), provar
+      contracao (norma <= 1) e autoadjuncao (via inner_fourierMulL2_symm,
+      ja provado para qualquer simbolo real), e compor com o projetor de
+      Leray matricial ja totalmente caracterizado (lerayOpL2) para obter
+      o operador de Stokes P*e^{tDelta} -- o bloco de construcao padrao
+      da formula de Duhamel/solucao branda de Navier-Stokes.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry, provando
+      limitacao (norma <= 1) e simetria via produto interno do semigrupo
+      do calor escalar (identidade bruta <Sf,g> = <f,Sg>, reusando
+      inner_fourierMulL2_symm ja verificado -- NAO IsSelfAdjoint/adjoint
+      do Mathlib, por incompatibilidade de instancia Module encontrada
+      nesta frente), e a composicao com o projetor de Leray, com
+      instancia positiva concreta.
+    dependencies:
+      - FOUND-FOURIER-MULTIPLIER-L2-001
+      - FOUND-LERAY-PROJECTOR-001
+      - FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/FourierMultiplierL2.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayProjector.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonal.lean"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 3
+    external_dependency: "Mathlib"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; afirmar a lei de semigrupo
+      S(t+r)=S(t)S(r) ou continuidade forte sem prova (registrar como
+      gap deliberadamente aberto se nao demonstrada); afirmar que
+      Navier-Stokes ficou alcancavel ou que o Lemma 3.1/NS-GAP-001 tem
+      caminho de prova
+    priority_class: P1
+    status: VERIFIED
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
+    result_review: APPROVED
+    closes_gap: null
+    open_gap: HEAT-GAP-001
+    strategic_direction_source: >
+      Direcao de pesquisa explicita do principal do laboratorio (sessao
+      2026-08-09, revisao "mapa de batalha") -- via 2 de
+      PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md ("o principal do
+      laboratorio registrar uma nova entrada... decisao de direcao de
+      pesquisa, nao decisao de execucao"). Nao e um gate autonomo
+      decidindo por conta propria.
+    research_role: FORMAL_FOUNDATION

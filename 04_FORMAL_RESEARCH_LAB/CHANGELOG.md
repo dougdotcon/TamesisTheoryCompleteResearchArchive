@@ -1,5 +1,78 @@
 # Changelog do laboratório formal
 
+## FOUND-HEAT-SEMIGROUP-001 - 2026-08-09
+
+### Xadrez / Arte da Guerra: revisão estratégica das seis linhas
+
+O usuário pediu uma revisão de todas as seis linhas de pesquisa
+(Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD), identificando
+a mais "frágil" para construir infraestrutura em direção a um "ataque" —
+traduzido honestamente neste laboratório como: nenhum ataque a um
+Problema do Milênio é permitido; "frágil" significa onde a fronteira
+entre infraestrutura já provada e a lacuna real é mais nítida.
+`01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md` registra a
+revisão completa. Conclusão: Navier-Stokes/Foundations tem a
+infraestrutura Lean mais profunda (seis módulos encadeados, zero sorry),
+mas `NS-GAP-001`/`004` continua genuinamente aberto e de dificuldade
+estrutural comparável a critérios de regularidade condicional nunca
+verificados a priori. Os quatro gaps pré-nomeados pela revisão anterior
+(`SC-GAP-002`, `ENC-GAP-020`, `RT-GAP-017` caso geral, `YM-GAP-007`)
+foram reavaliados e nenhum selecionado, com motivo registrado para cada.
+
+### FOUND-HEAT-SEMIGROUP-001: o semigrupo do calor, composto com Leray
+
+`DEC-065`/`DEC-066`. Construído `e^{tDelta}` (t >= 0) como multiplicador
+de Fourier de símbolo real limitado em L², via `fourierMulL2` já
+verificado (sem exigir `HasTemperateGrowth`): contração (norma <= 1) e
+simetria via produto interno (`inner_heatOpL2_symm`, reusando
+`inner_fourierMulL2_symm` já verificado — nenhuma nova prova de simetria
+foi necessária). Composto com o projetor de Leray matricial já
+totalmente caracterizado (`lerayOpL2`) no operador de Stokes
+`P·e^{tDelta}` — o bloco de construção padrão que uma futura
+formalização de fórmula de Duhamel/solução branda de Navier-Stokes
+precisaria.
+
+### Decisão de escopo: sem `IsSelfAdjoint`/`adjoint` do Mathlib
+
+Ao tentar `ContinuousLinearMap.adjoint (heatOpL2 ...) = heatOpL2 ...`,
+uma incompatibilidade de instância `Module` apareceu:
+`fourierMulL2`/`mulL2` (`FourierMultiplierL2.lean`, que não importa
+`Mathlib.Analysis.InnerProductSpace.Adjoint`) usam `Lp.instModule`,
+enquanto `ContinuousLinearMap.adjoint`/`eq_adjoint_iff` exigem
+`InnerProductSpace.toNormedSpace.toModule` — quase certamente defeq, mas
+a unificação de metavariáveis que `eq_adjoint_iff` precisa não resolve
+isso automaticamente. Em vez de forçar, a identidade bruta de produto
+interno foi mantida como o conteúdo entregue — mesma categoria de
+restrição prudente que a decisão de escopo de `LP-GAP-005`.
+
+```text
+HEAT-GAP-001  lei de semigrupo S(t+r)=S(t)S(r) e continuidade forte em t.
+              DELIBERADAMENTE ABERTA: exige álgebra sobre produtos de
+              elementos de Lp-infinito não verificada nesta sessão.
+```
+
+### Revisão adversarial: APPROVED
+
+Agente independente recompilou `lake env lean` e o `lake build` completo
+por conta própria (exit 0, 8822 jobs, nunca via pipe), releu
+`FourierMultiplierL2.lean` e `LerayOrthogonal.lean` para confirmar que a
+instanciação de `inner_fourierMulL2_symm` não era vazia, conferiu a
+aritmética da cota concreta (`18 = 2·3²`) contra `norm_lerayOpL2_le`, e
+varreu o arquivo inteiro por overclaiming — nada encontrado. Uma nota
+cosmética (a fila usava "autoadjunção" onde o arquivo prova simetria via
+produto interno) foi corrigida neste commit.
+
+### O que NÃO é afirmado
+
+```text
+que S(t+r) = S(t) ∘ S(r) foi provada
+que t ↦ heatOpL2 t é fortemente contínuo
+que o resultado usa IsSelfAdjoint ou ContinuousLinearMap.adjoint do Mathlib
+que existe formalização de solução branda ou fórmula de Duhamel
+que Navier-Stokes ficou alcançável, ou que NS-GAP-001/004 tem caminho de prova
+que RH-NOGO-001 foi reativada
+```
+
 ## FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 - 2026-08-09
 
 ### LP-GAP-005 fecha — continuação direta, mesma sessão

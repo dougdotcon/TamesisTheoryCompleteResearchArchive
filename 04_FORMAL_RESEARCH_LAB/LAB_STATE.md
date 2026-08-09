@@ -35,17 +35,27 @@ integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "11e90dbaa47b5bbd492db8fe3ede3888c9f14e08"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPointInstance.lean (114 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
-current_blocker: null
+current_blocker: >
+  Nenhum item SCOPED/READY executável na fila. TOE-INTERFACE-001 (único
+  SCOPED) permanece bloqueado por RH-NOGO-001 (FROZEN_PARTIAL_RESULT,
+  nenhuma condição de reativação satisfeita). Próximo passo real na
+  linha Foundations exigiria a estimativa Lipschitz/bilinear do B REAL
+  de Navier-Stokes (NS-GAP-001/004), avaliada como estruturalmente
+  comparável a critérios de regularidade condicional nunca verificados
+  a priori — fora do alcance de execução autônoma.
 next_single_action: >
-  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 fechou VERIFIED / result_review
-  APPROVED (revisão adversarial: 0 problemas). A cadeia Sobolev → Leray →
-  semigrupo do calor → Duhamel (bem definição) → ponto fixo abstrato →
-  instância positiva concreta está completa e não-vácua. Nenhum resultado
-  principal desta sessão carece de instância concreta. Fila volta a
-  exigir revisão de portfólio antes de qualquer frente nova. O único
-  caminho adiante nesta linha exigiria a estimativa Lipschitz do B REAL
-  de Navier-Stokes (NS-GAP-001/004) — genuinamente aberta, não tentada.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Fila reavaliada com rigor (PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md)
+  e declarada genuinamente esgotada pela segunda vez nesta sessão. Nada
+  mudou desde a revisão anterior de exaustão: nenhuma das cinco
+  condições de reativação de RH-NOGO-001 ocorreu; os quatro gaps
+  pré-nomeados (SC-GAP-002, ENC-GAP-020, RT-GAP-017, YM-GAP-007)
+  continuam sem justificativa nova; nenhuma infraestrutura executável
+  identificada em PVSNP/Yang-Mills/Hodge/BSD além do que já foi
+  auditado. Sem uma nova decisão de direção de pesquisa do principal do
+  laboratório, ou uma das condições de reativação, nenhuma execução
+  autônoma adicional é justificável.
+authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
+portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"

@@ -2124,3 +2124,41 @@ decisions:
       - "concreteB e um exemplo abstrato generico, NAO o B real de Navier-Stokes"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8825 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"
+
+  - decision_id: DEC-075
+    date: 2026-08-09
+    decision: >
+      Declarar a fila genuinamente esgotada pela segunda vez nesta
+      sessao, apos verificacao rigorosa pedida explicitamente (nao
+      presumida). Nenhuma frente nova autorizada.
+    rationale: >
+      Checagem completa: (1) RESEARCH_QUEUE.yaml inteiro varrido por
+      status SCOPED/READY/UNSCOPED -- unico resultado, TOE-INTERFACE-001,
+      bloqueado por RH-NOGO-001 FROZEN_PARTIAL_RESULT, mesma conclusao
+      da revisao anterior. (2) Os quatro gaps pre-nomeados (SC-GAP-002,
+      ENC-GAP-020, RT-GAP-017, YM-GAP-007) reexaminados por angulo novo
+      -- nenhuma justificativa nova surgiu; YM-GAP-007 ja foi
+      reverificado hoje mesmo (PARALLEL-WAVE-002) e continua vigilancia
+      passiva. (3) RH-NOGO-001: nenhuma das cinco condicoes de
+      reativacao ocorreu. (4) PVSNP/Yang-Mills/Hodge/BSD: nenhuma
+      infraestrutura executavel nova alem da auditoria ja feita. (5) A
+      cadeia Foundations desta sessao (Sobolev/Leray/calor/Duhamel)
+      esta completa e nao-vacua; o unico proximo passo real exige a
+      estimativa Lipschitz/bilinear do B REAL de Navier-Stokes
+      (NS-GAP-001/004), avaliada como estruturalmente comparavel a
+      criterios de regularidade condicional nunca verificados a priori
+      -- fora do alcance de execucao autonoma, nao uma lacuna de
+      engenharia Lean fechavel por mais tempo de agente.
+    authority: PORTFOLIO_REVIEW
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> NO_AUTONOMOUS_WORK_AVAILABLE"
+      - "LAB_STATE: current_blocker preenchido com o motivo especifico e nomeado"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
+      - "esta declaracao de exaustao e revisavel: qualquer uma das tres vias registradas no documento de revisao reabre a fila"

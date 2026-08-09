@@ -1,5 +1,58 @@
 # Changelog do laboratório formal
 
+## FOUND-DUHAMEL-SKELETON-001 - 2026-08-09
+
+### Termo de Duhamel bem definido, B completamente abstrato
+
+Usuário pediu para continuar imediatamente após o fechamento de
+`PARALLEL-WAVE-002`. Com `HEAT-GAP-001` fechado por completo, o
+semigrupo do calor está totalmente caracterizado. Próximo passo honesto,
+sem tocar `NS-GAP-001`: infraestrutura de tipo que permite sequer
+ENUNCIAR "solução branda" em Lean.
+
+Novo `DuhamelSkeleton.lean` (160 linhas):
+
+```text
+heatOpJoint_continuous     heatOpL2 e continuo CONJUNTAMENTE em (t,f),
+                           nao so em t para f fixo -- fortalecimento
+                           genuino, via sanduiche triangular usando a
+                           cota de contracao uniforme.
+revTime                    reversao de tempo total s -> max(t-s,0),
+                           continua em toda parte, igual a t-s
+                           (via coercao do subtipo) quando s <= t.
+duhamelIntegrand           heatOpJoint(revTime(t,s), B(u(s))), total.
+intervalIntegrable_...     a integral de Bochner esta bem definida,
+                           dado u continua em [0,t] e B continua.
+duhamelTerm                heatOpL2 t u0 + integral de 0 a t do integrando.
+duhamelTerm_of_zero        para B=0, reduz a evolucao linear pura,
+                           para qualquer u -- caso de saneamento.
+```
+
+`B : L² → L²` é uma variável completamente abstrata — apenas `Continuous
+B` é assumida. Nenhuma estimativa bilinear/Lipschitz, nenhum ponto fixo,
+nenhuma existência/unicidade de solução branda.
+
+`lake env lean` e `lake build` completo, ambos `exit 0` (8823 jobs),
+checados diretamente por três processos independentes (implementador,
+esta sessão, revisor adversarial).
+
+### Revisão adversarial: APPROVED, sem ressalvas
+
+Traçou a mão o argumento de sanduíche triangular confirmando que `(t,f)`
+genuinamente se movem juntos; confirmou `revTime_coe_of_le` não-vácua
+(exige `s ≤ t`); confirmou que `hB` e `hu` são ambas genuinamente usadas
+em `continuousOn_duhamelIntegrand`; traçou `duhamelTerm_of_zero` até
+`intervalIntegral.integral_zero`. Nenhum overclaiming encontrado.
+
+### O que NÃO é afirmado
+
+```text
+que existe estimativa bilinear ou Lipschitz de B
+que existe argumento de ponto fixo
+que existencia ou unicidade de solucao branda foi provada
+que Navier-Stokes ficou alcançável, ou que NS-GAP-001/004 tem caminho de prova
+```
+
 ## PARALLEL-WAVE-002 - 2026-08-09
 
 ### Três frentes concorrentes, arquivos disjuntos, pedido explícito de paralelismo

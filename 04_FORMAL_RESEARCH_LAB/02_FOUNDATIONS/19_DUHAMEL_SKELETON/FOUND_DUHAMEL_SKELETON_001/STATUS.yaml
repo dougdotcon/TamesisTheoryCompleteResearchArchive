@@ -1,0 +1,66 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-DUHAMEL-SKELETON-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: APPROVED
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED
+  reviewer: independent subagent, re-ran lake env lean and full lake build itself
+    (exit codes checked directly, never piped), hand-traced heatOpJoint_continuousAt's
+    squeeze argument to confirm both coordinates genuinely move together (not a
+    disguised single-variable proof), confirmed revTime_coe_of_le is non-vacuous
+    (requires s <= t), confirmed continuousOn_duhamelIntegrand genuinely uses both
+    hB and hu, and hand-traced duhamelTerm_of_zero's use of intervalIntegral.integral_zero
+  issues_confirmed: []
+  issues_plausible: []
+  soundness_issues_found: 0
+research_role: FORMAL_FOUNDATION
+predecessor: FOUND-HEAT-SEMIGROUP-LAW-001
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/DuhamelSkeleton.lean"
+  file_lines: 160
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8823
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations"
+  verified_independently_by:
+    - "implementing agent"
+    - "orchestrating session (direct re-run, no pipe)"
+    - "adversarial reviewer (direct re-run, no pipe)"
+result:
+  key_objects:
+    - "heatOpJoint / heatOpJoint_continuousAt / heatOpJoint_continuous: heatOpL2 is
+       JOINTLY continuous in (t,f), not just in t for fixed f -- via a
+       triangle-inequality squeeze combining the existing pointwise strong continuity
+       with the uniform contraction bound norm_heatOpL2_apply_le"
+    - "revTime / continuous_revTime / revTime_coe_of_le: total, junk-free time
+       reversal s -> max(t-s,0), continuous everywhere, equal to t-s (via the
+       subtype coercion) exactly when s <= t"
+    - "duhamelIntegrand := heatOpJoint (revTime t s, B (u s)): total on all of R"
+    - "continuousOn_duhamelIntegrand: ContinuousOn given ContinuousOn u (Icc 0 t)
+       and Continuous B"
+    - "intervalIntegrable_duhamelIntegrand: the Bochner integral is well-defined,
+       via ContinuousOn.intervalIntegrable_of_Icc"
+    - "duhamelTerm := heatOpL2 t u0 + integral of duhamelIntegrand from 0 to t"
+    - "duhamelTerm_of_zero: for B = 0, duhamelTerm reduces to pure linear evolution
+       heatOpL2 t u0, for ANY u -- sanity check, proved via intervalIntegral.integral_zero"
+  B_is: "bare abstract variable, only Continuous B ever assumed -- no Lipschitz,
+    no bilinear estimate, no fixed point"
+claims:
+  promoted: 1
+prohibitions:
+  bilinear_estimate_proved: FORBIDDEN
+  existence_uniqueness_claim: FORBIDDEN
+  fixed_point_argument_claim: FORBIDDEN
+  navier_stokes_reachable: FORBIDDEN
+  ns_gap_001_progress_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

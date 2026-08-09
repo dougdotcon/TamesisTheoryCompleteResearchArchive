@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: false
+repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-DUHAMEL-SKELETON-001"
-work_status: "IN_PROGRESS"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,19 +33,20 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "5c85550c8d1197faf70571d8b3e339c51af8a629"
-last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean (201->408 lines), lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "245e2b276df328a963a0c915ad325d45586e8633"
+last_verified_artifact: "TamesisLab/Foundations/DuhamelSkeleton.lean (160 lines), lake env lean exit 0, full lake build exit 0 (8823 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-DUHAMEL-SKELETON-001: formalizacao completa entregue em
-  DuhamelSkeleton.lean (160 linhas) -- continuidade conjunta de
-  heatOpL2 em (t,f), reversao de tempo total, integrando de Duhamel,
-  boa definicao da integral de Bochner, e o caso de saneamento B=0.
-  Reverificada de forma independente nesta sessao -- lake env lean exit
-  0, lake build completo exit 0 (8823 jobs), zero sorry/admit, checados
-  diretamente sem pipe. Revisao adversarial independente disparada,
-  ainda pendente. Integracao final apos o veredito.
-authorized_action: "FORMALIZATION"
+  FOUND-DUHAMEL-SKELETON-001 fechou VERIFIED / result_review APPROVED
+  (revisão adversarial: 0 problemas de solidez, sem ressalvas). Termo de
+  Duhamel bem definido para B completamente abstrato, via continuidade
+  CONJUNTA de heatOpL2 em (t,f) e caso de saneamento B=0. A cadeia
+  Sobolev -> Leray -> semigrupo do calor -> Duhamel (bem definição) está
+  completa até onde é honesto ir sem a estimativa bilinear/Lipschitz de
+  B, que é exatamente NS-GAP-001/004 -- não tentada, nem em frente
+  autônoma futura sem justificativa nova explícita. Fila volta a exigir
+  revisão de portfólio antes de qualquer frente nova.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
 portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
@@ -417,6 +418,29 @@ closed_work_items:
       Ver 03_MILLENNIUM/04_YANG_MILLS/GAP_REGISTER.yaml, campo
       recheck_2026_08_09_parallel_wave_002 em YM-GAP-007.
     research_role: LITERATURE_AUDIT
+  FOUND-DUHAMEL-SKELETON-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    predecessor: FOUND-HEAT-SEMIGROUP-LAW-001
+    scope_note: >
+      Termo de Duhamel bem definido (integral de Bochner integravel)
+      para B completamente abstrato (apenas Continuous B, sem
+      Lipschitz/estimativa bilinear), via continuidade CONJUNTA de
+      heatOpL2 em (t,f) — fortalecimento genuino sobre
+      heatOpL2_continuousAt, provado por argumento de sanduiche
+      triangular usando a cota de contracao uniforme. Caso de saneamento
+      B=0 reduz a evolucao linear pura. Nenhum ponto fixo, existencia ou
+      unicidade de solucao branda tentados ou afirmados.
+    bilinear_estimate_claim: FORBIDDEN
+    existence_uniqueness_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT

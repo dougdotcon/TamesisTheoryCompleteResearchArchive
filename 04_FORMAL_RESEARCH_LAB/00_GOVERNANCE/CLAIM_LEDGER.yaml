@@ -1480,3 +1480,51 @@ claims:
       - existe formalizacao de solucao branda ou formula de Duhamel
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: DUHAMEL-SKELETON-FORMAL-001
+    short_name: duhamel_term_well_defined_abstract_B
+    exact_statement: >
+      O termo de Duhamel duhamelTerm(t,u0,u) := heatOpL2 t u0 + integral
+      de 0 a t de heatOpJoint(revTime(t,s), B(u(s))) ds esta bem definido
+      (integral de Bochner integravel) dado u continua em [0,t] e B
+      continua -- B e uma variavel completamente abstrata, sem hipotese
+      de Lipschitz nem estimativa bilinear. heatOpL2 e continuidade
+      CONJUNTA em (t,f), nao apenas em t para f fixo (fortalecimento
+      genuino sobre heatOpL2_continuousAt), via argumento de sanduiche
+      triangular usando a cota de contracao uniforme. Caso de saneamento:
+      para B=0, o termo reduz a evolucao linear pura heatOpL2 t u0, para
+      qualquer u.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/DuhamelSkeleton.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/19_DUHAMEL_SKELETON/FOUND_DUHAMEL_SKELETON_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      Apenas boa definicao (integrabilidade) do termo de Duhamel e
+      provada. NENHUMA estimativa bilinear/Lipschitz de B, NENHUM
+      argumento de ponto fixo, NENHUMA afirmacao de existencia ou
+      unicidade de solucao branda (revisao adversarial: APPROVED, sem
+      ressalvas -- recompilou por conta propria, tracou a mao o
+      argumento de sanduiche triangular confirmando continuidade
+      genuinamente conjunta, confirmou revTime_coe_of_le nao-vacuo, e
+      confirmou que hB e hu sao ambas genuinamente usadas em
+      continuousOn_duhamelIntegrand).
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - HEAT-SEMIGROUP-LAW-FORMAL-001
+    known_gaps:
+      - "estimativa bilinear/Lipschitz de B: nao tentada, e NS-GAP-001/004"
+      - "existencia/unicidade de solucao branda: nao tentada"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/19_DUHAMEL_SKELETON/FOUND_DUHAMEL_SKELETON_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - estimativa bilinear ou Lipschitz de B foi provada
+      - existe argumento de ponto fixo
+      - existencia ou unicidade de solucao branda foi provada
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

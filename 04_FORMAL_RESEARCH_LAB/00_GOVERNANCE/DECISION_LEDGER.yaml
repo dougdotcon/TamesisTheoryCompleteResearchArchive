@@ -1920,3 +1920,48 @@ decisions:
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "B permanece completamente abstrato; nenhuma estimativa bilinear/Lipschitz e tentada"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+
+  - decision_id: DEC-070
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-DUHAMEL-SKELETON-001: termo de Duhamel bem definido
+      (integral de Bochner integravel) para B completamente abstrato,
+      via continuidade CONJUNTA de heatOpL2 em (t,f) (fortalecimento
+      genuino sobre heatOpL2_continuousAt), reversao de tempo total, e
+      caso de saneamento B=0. VERIFIED apos revisao adversarial
+      independente (APPROVED, sem ressalvas, zero problemas de
+      solidez).
+    rationale: >
+      Escopo entregue integralmente conforme registrado em
+      FOUND-DUHAMEL-SKELETON-001 -- nenhum descope foi necessario. A
+      revisao adversarial recompilou por conta propria (lake env lean e
+      lake build completo, exit 0 diretos, 8823 jobs), tracou a mao o
+      argumento de sanduiche triangular de heatOpJoint_continuousAt
+      confirmando que ambas as coordenadas (t,f) genuinamente se movem
+      juntas (nao uma prova de variavel unica disfarcada), confirmou que
+      revTime_coe_of_le nao e vacua (exige s<=t), confirmou que
+      continuousOn_duhamelIntegrand usa genuinamente hB e hu, e tracou a
+      mao duhamelTerm_of_zero ate intervalIntegral.integral_zero. Varreu
+      o arquivo inteiro por overclaiming de existencia/unicidade/ponto
+      fixo -- nada encontrado alem dos disclaimers explicitos do proprio
+      arquivo.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/19_DUHAMEL_SKELETON/FOUND_DUHAMEL_SKELETON_001/STATUS.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/DuhamelSkeleton.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-DUHAMEL-SKELETON-001 status SCOPED -> VERIFIED, result_review APPROVED"
+      - "LAB_STATE closed_work_items: +1 entrada"
+      - "CLAIM_LEDGER: +1 claim (DUHAMEL-SKELETON-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "B permanece completamente abstrato; nenhuma estimativa bilinear/Lipschitz, ponto fixo, existencia ou unicidade e afirmada"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8823 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"

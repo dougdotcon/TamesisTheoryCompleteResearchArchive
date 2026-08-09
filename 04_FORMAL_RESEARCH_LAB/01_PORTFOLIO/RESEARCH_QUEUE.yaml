@@ -1985,3 +1985,853 @@ queue:
       Hodge, Riemann, Yang-Mills, Navier-Stokes, BSD, Poincare -- este
       ultimo ja resolvido). Nenhum trabalho formal foi tentado; este
       registro e puramente estrutural/organizacional.
+
+  - work_item_id: WAVE1-BATCH-001
+    title: "Onda 1 de execucao do plano de ataque de portfolio completo (item guarda-chuva, 27 sub-itens)"
+    track: multi
+    target_statement: >
+      Item guarda-chuva, sem conteudo formal proprio. Representa a
+      execucao paralela dos 27 itens WAVE1-* individuais (ver cada um
+      separadamente na fila), cada um com seu proprio teste falsificavel
+      pequeno, escopo estreito, e stop_condition. Existe apenas porque
+      LAB_STATE.md tem um unico campo active_work_item singular e uma
+      onda paralela de 27 itens nao cabe nele individualmente.
+    expected_product: >
+      Nenhum -- ver os 27 itens WAVE1-* individuais para produtos
+      esperados especificos.
+    dependencies: []
+    existing_assets:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver itens individuais"
+    cross_track_value: high
+    stop_condition: >
+      qualquer alegacao agregada de progresso alem do que cada item
+      individual honestamente fechou; tratar este item guarda-chuva como
+      se tivesse conteudo formal proprio
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      DEC-086 -- onda 1 do plano de ataque (DEC-085), escolhida pelo
+      usuario via AskUserQuestion ("Onda 1 completa, todas as 24" --
+      contagem corrigida para 27 nesta integracao).
+  - work_item_id: WAVE1-RH-1
+    title: "Close RVM-LIMIT as a standalone real-analysis lemma (no zeta, no operators)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "RH-1"
+    target_statement: >
+      TESTE: In a fresh Lean file, state and prove (with the O(log T) remainder abstracted as an arbitrary function bounded by c*log T for some fixed c, or omitted entirely for a first pass): Tendsto (fun T : R => ((T/(2*Real.pi))*Real.log(T/(2*Real.pi)) - T/(2*Real.pi) + 7/8) / (T * Real.log T)) atTop (nhds (1/(2*Real.pi))). If this compiles cleanly in one session reusing only Mathlib.Analysis.SpecialFunctions.{Log,Pow}.* lemmas, the elementary-claim is confirmed and directly reduces GAP status in RVM_LIMIT_BRIDGE.md. If it stalls on composing log(T/c) vs log T asymptotics, that specific sub-lemma (not previously flagged) is the real obstruction.
+      
+      NOTA DA REVISAO ADVERSARIAL: Same as proposed; optionally start even narrower by first proving just Tendsto (fun T => Real.log (T/(2*Real.pi)) / Real.log T) atTop (nhds 1) in isolation (an even smaller sub-lemma), then compose it into the full quotient limit -- this isolates the one genuinely new step (log(T/c)/log T -> 1) from the routine arithmetic-of-limits composition around it.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This closes only the abstract asymptotic-limit fact for a symbolic function shaped like the RVM formula. It does NOT establish that N_zeta(T) (the actual Riemann zeta zero-counting function) satisfies RVM-STRONG in the first place -- that remains SB-GAP-010B, OUT_OF_CURRENT_SCOPE, requiring von Mangoldt's formula to be formalized separately. It also does not touch the operator/spectral side (GWB-*) at all. Net effect: one dependency arrow in RVM_LIMIT_BRIDGE.md's diagram moves from 'not formalized' to 'formalized', nothing about zeta zeros or Weyl's law changes.
+    mathlib_support_cited: >
+      The exact toolkit needed is already exercised in this repo's own VERIFIED code: TamesisLab/RHNogo/AsymptoticCore/PowerLog.lean:2 imports Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics and uses `isLittleO_log_rpow_atTop` and `Real.tendsto_log_atTop` (read directly, file:line above) to prove structurally similar log/power-law limits. No new Mathlib infrastructure is required, only composing existing Tendsto/IsLittleO lemmas for `log(T/2*pi)/log T -> 1` and the resulting quotient limit -- these are standard `Filter.Tendsto.div`, `Real.log_div`, and squeeze-type arguments over `Real.log` and `r
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-RH-2
+    title: "Wire up Mathlib's own riemannZetaZeros discreteness/finiteness to define N_zeta(T) with zero literature dependency"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "RH-2"
+    target_statement: >
+      TESTE ORIGINAL: Define NZeta(T) := Set.ncard {z ∈ riemannZetaZeros | z.re ∈ Set.Ioo (0:R) 1 ∧ z.im ∈ Set.Ioc (0:R) T} for T : R, and prove it is finite for every T by exhibiting an explicit compact rectangle [0,1] x [0,T] in C containing the region and applying `IsCompact.inter_riemannZetaZeros_finite`. This is a single self-contained lemma: if the compactness-of-a-box-in-C argument (standard, via `Metric.isCompact_of_isClosed_isBounded` or `isCompact_Icc`-style product arguments already in Mathlib) goes through in one session, the finding is confirmed reusable; if the ℂ-as-ℝ² compactness plumbing turns out unexpectedly fiddly, that specific friction point is the honest result.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Proposed test is fine as stated; no narrowing needed.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Only the finiteness/well-definedness of a zero-counting function is obtained -- not its asymptotic growth rate. Nothing here gives (T log T) asymptotics, nothing distinguishes trivial from non-trivial zeros without extra work, nothing touches RH, and nothing connects to the spectral/operator side of the no-go at all. It replaces a documental 'this would need von Mangoldt as a source' note with an actual Lean finiteness proof for a strip-restricted count -- a genuine but small strengthening of concrete-layer scaffolding, explicitly NOT REACT-003 (which requires the full asymptotic formula).
+    mathlib_support_cited: >
+      Mathlib/NumberTheory/LSeries/ZetaZeros.lean: `def riemannZetaZeros : Set C := riemannZeta ⁻¹' {0}` (line 33); `isClosed_riemannZetaZeros` (line 57); `isDiscrete_riemannZetaZeros` (line 60); `IsCompact.inter_riemannZetaZeros_finite {S : Set C} (hS : IsCompact S) : (S ∩ riemannZetaZeros).Finite` (line 64). Confirmed by direct read of the file, not recalled from training (file header attributes it to 'Huanyu Zheng, 2026', and `git log -1` on the vendored mathlib package shows commit 79d0395a dated 2026-07-16). Grep across 03_MILLENNIUM/01_RIEMANN and TamesisLab confirms `riemannZetaZeros`/`ZetaZe
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-RH-3
+    title: "Minimal unbounded-self-adjoint-operator instance via Mathlib's LinearPMap (partial test of REACT-001)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "RH-3"
+    target_statement: >
+      TESTE ORIGINAL: Attempt to prove `IsSelfAdjoint` (in the `LinearPMap` sense, `A dagger = A`) for the simplest standard example of an unbounded self-adjoint operator: a real multiplication operator M_f on L^2(R) or L^2([0,1]) by an unbounded measurable f, with domain {g : f*g in L^2}, using Mathlib's `LinearPMap.adjoint`/`IsFormalAdjoint` machinery end to end. If this compiles in one session, REACT-001's 'compile a minimal example' bar is met at the self-adjointness (not compact-resolvent) level -- a fact worth registering explicitly as partial, not as reactivation. If deriving `IsFormalAdjoint` for even this simplest case requires substantial new integration/domain lemmas Mathlib doesn't already provide, that is honest evidence the infrastructure gap is deeper than the file listing alone suggests.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Replace the L^2(R) multiplication operator with a diagonal operator on a sequence space: take H = the subtype of (N -> R) sequences in l^2 (Mathlib's lp/PiLp machinery), with LinearPMap domain {x : l^2 | (fun n => (n:R) * x n) in l^2}, and adjoint action (n * x_n). This sidesteps all measure-theoretic density/integrability plumbing (density of the domain follows from finite-support sequences being l^2-dense, a much more elementary fact than density in L^2(R)), while still exercising the same LinearPMap.adjoint/IsFormalAdjoint machinery end to end -- a genuinely single-session-scoped version of the same test.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a fully successful compiled instance only exercises the definitional/self-adjointness layer. REACT-001 explicitly requires COMPACT RESOLVENT, and there is no `spectrum`, `resolvent`, or compactness-of-resolvent machinery for `LinearPMap` anywhere in Mathlib to build on -- that entire analytic chain (define resolvent of an unbounded operator as a bounded operator, prove it compact, derive discrete spectrum) would need to be built from scratch, which is precisely the hard content the freeze record already identifies as missing. A successful instance therefore narrows, but does not close, REACT-001, and does not by itself justify reopening RH-NOGO-001.
+    mathlib_support_cited: >
+      Mathlib/Topology/Algebra/Module/LinearPMap.lean:22-27 (`LinearPMap.IsClosed`, `IsClosable`, `closure`, `HasCore`, docstring citing Weidmann's *Linear Operators in Hilbert Spaces*). Mathlib/Analysis/InnerProductSpace/LinearPMap.lean: `LinearPMap.IsFormalAdjoint` and `LinearPMap.adjoint` (notation `T dagger`) defined around lines 72-154; `isSelfAdjoint_def : IsSelfAdjoint A <-> A dagger = A` (line 235); `IsSelfAdjoint.dense_domain` (line 242); `IsSelfAdjoint.isClosed` (line 341). All confirmed by direct read. Confirmed ABSENT by exhaustive grep across every file that imports `LinearPMap` (8 file
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-RH-4
+    title: "Extend FOUND-SPECTRAL-COUNTING-001's fixed-threshold eigCount into a full counting-function N(Lambda) (bounded compact-o"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "RH-4"
+    target_statement: >
+      TESTE ORIGINAL: For a compact self-adjoint operator T on an infinite-dimensional Hilbert space, define N(Lambda) via the existing `eigCount`-style set and prove `Filter.Tendsto (fun L => N L) Filter.atTop Filter.atTop` (the counting function is unbounded), reusing only `finite_eigenvalues_above` plus a hypothesis that T has infinitely many distinct eigenvalues. If it compiles smoothly by direct reuse of the existing lemmas, that confirms 'assembling the full counting function' is cheap infrastructure work as opposed to the power-law asymptotic, which is the genuinely hard part. If the infinite-eigenvalue-enumeration step needs real new machinery, that is useful negative information delimiting how much of GWB-002/003 is 'free' versus not.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Correct the direction: for a compact self-adjoint operator T with an assumed infinite set of distinct nonzero eigenvalues, prove Filter.Tendsto (fun lam : R => (eigCount T lam : R)) (nhdsWithin 0 (Set.Ioi (0:R))) Filter.atTop, reusing finite_eigenvalues_above/eigCount_antitone. Separately and explicitly flag in the write-up that this bounded/compact-operator tail-count is NOT directly GWB's N(Lambda) (which counts an unbounded operator's eigenvalues below Lambda, increasing to infinity as Lambda -> +infinity) -- the two are related only via spectral inversion (lambda_unbounded = 1/mu_compact-resolvent), a nontrivial additional bridge fact that should be named as a separate, currently-missing obligation, not silently assumed away.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This stays entirely in the bounded-operator, no-manifold setting and gives zero progress on GWB-001 (discreteness for unbounded pseudodifferential operators on a manifold, explicitly classified as an EXPLICIT_CLASS_ASSUMPTION in DISCRETENESS_CLASSIFICATION.md, not a theorem) or on the power-law asymptotic N(Lambda) ~ C*Lambda^(d/m) (GWB-006/GWB-009), which require symbol calculus and manifold integration machinery that is confirmed absent from Mathlib (no Weyl-law file, no pseudodifferential-operator development). It is pure scaffolding around an already-solved sub-case; per the task's own ground rule, building this infrastructure is explicitly not the same as solving anything about GWB or RH.
+    mathlib_support_cited: >
+      Builds directly on TamesisLab/Foundations/SpectralCounting.lean (this repo, already VERIFIED): `eigCount`, `finite_eigenvalues_above`, `eigCount_antitone`, `eigCount_eq_natCard` (lines 92-192, read directly). For the 'N(Lambda) -> infinity as Lambda -> 0 in an infinite-dimensional space' direction, Mathlib/Analysis/InnerProductSpace/Spectrum.lean supplies `orthogonalComplement_iSup_eigenspaces_eq_bot` and `finite_dimensional_eigenspace` for compact self-adjoint operators (doc comments read directly, lines ~44-49 of that file).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-RH-5
+    title: "Nevanlinna/Jensen-formula route to an unconditional crude zero-counting bound for zeta (dual formulation, bypassing spec"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "RH-5"
+    target_statement: >
+      TESTE ORIGINAL: Search specifically for any existing convexity/growth bound on riemannZeta of the form |riemannZeta(sigma+i*t)| = O(|t|^c) for 0 < sigma < 1 anywhere in Mathlib (beyond the grep already done here) and, if none exists, attempt to state (not prove) the minimal such bound needed to invoke `logCounting_isBigO_one_iff_analyticOnNhd`-style machinery. If even stating the required hypothesis in Mathlib's Nevanlinna vocabulary is awkward or requires re-deriving standard complex-analytic estimates for zeta from scratch, that confirms this route is not a low-cost first test and should be deprioritized relative to candidates 1-4.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Skip the redundant search (already confirmed absent by two independent checks) and go straight to the sharper single-session probe: attempt to state and prove the much weaker, classically trivial bound |riemannZeta (sigma + I*t)| = O(1) for a FIXED sigma > 1 (i.e., away from the critical strip entirely, where the Dirichlet series converges absolutely) as |t| -> infinity, using only the existing Euler-product/Dirichlet-series machinery already in Mathlib for Re s > 1. If even this trivial half-plane bound isn't already packaged as a reusable IsBigO lemma and requires assembling from the raw series, that confirms growth-bound infrastructure for zeta is missing at every level, not just the critical-strip case -- decisively supporting deprioritization without needing to touch the actually-hard convexity estimate.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even if the growth bound were separately established and the Jensen-formula machinery instantiated, this would only give a crude big-O bound, not the precise (T/2*pi)*log(T/2*pi) - T/2*pi + 7/8 asymptotic RVM actually supplies, and still says nothing about the spectral/operator side of the no-go, nothing about RH, and nothing about Hilbert-Polya.
+    mathlib_support_cited: >
+      The relevant general machinery exists in principle: Mathlib/Analysis/Complex/JensenFormula.lean and Mathlib/Analysis/Complex/ValueDistribution/LogCounting/{Basic,Asymptotic}.lean (confirmed present; `logCounting_isBigO_one_iff_analyticOnNhd` read at LogCounting/Asymptotic.lean:109). However, instantiating this on riemannZeta requires a growth/convexity bound for zeta in the critical strip (the classical input to any Jensen-formula zero count), and an exhaustive grep of Mathlib/NumberTheory/LSeries/RiemannZeta.lean turns up no such bound (`IsBigO`/growth-rate lemmas for zeta in a vertical strip
+    dependencies: []
+    existing_assets: []
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-NS-1
+    title: "Extend the already-proved mean-zero fact from 'K integrates to zero over spheres' to 'p.v. of K against a Lipschitz/C^1 "
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "NS-1"
+    target_statement: >
+      TESTE ORIGINAL: Pick the single concrete test function φ(y) = χ(‖y‖) for a fixed smooth cutoff χ (or even simpler: a fixed Lipschitz radial bump), and attempt to prove HasLocalPV (fun y => K e2 e3 y * φ y) 0 R L for some explicit L, using exactly the four pieces cited above (K_homogeneous, K_mean_zero_sphereSurfaceMeasure, the polar-coordinate machinery, boundedness on the sphere). Session-sized; if the shell-decomposition + squeeze argument closes cleanly, this is a real (if small) new theorem and the angle is worth investing further (e.g. generalizing φ, then building the p.v.-distribution term). If it instead requires machinery beyond a Riemann-sum/squeeze argument (e.g. a genuine dominated-convergence argument over a moving family of shells that doesn't reduce cleanly to the already-computed constant case), that tells us the mean-zero win was more special-cased than it looked and the angle should be deprioritized.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Prove HasLocalPV (fun y => K e2 e3 y * φ y) 0 R L for a single fixed Lipschitz radial bump φ by: (1) deriving mean-zero at radius r from K_homogeneous + K_mean_zero_sphereSurfaceMeasure + an explicit dilation-scaling lemma for sphereSurfaceMeasure (this sub-lemma is the real new work, not yet cited anywhere); (2) bounding |K| ≤ C*‖y‖^{-3} via contDiffAt_K + compactness of the unit sphere; (3) invoking integrableOn_ball_of_norm_le_rpow directly (dim=3, α=2) to get absolute integrability of K(y)(φ(y)-φ(0)) on the full ball; (4) concluding convergence of the annulus integral via absolute continuity of the Lebesgue integral as ε→0. If step (1) closes cleanly the whole thing is cheap; if it doesn't, that pinpoints exactly where the difficulty actually is (radius-scaling of mean-zero, not the Fubini machinery).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This would NOT give a distribution (no continuity-in-topology claim, no linearity-as-operator claim), would NOT give any L^p or weak-(1,1) bound, and would still be restricted to a fixed test function rather than a general Schwartz space map. It is a existence-only statement for HasLocalPV against one concrete Lipschitz φ (or a small class of them), useful only as connective tissue toward eventually building an actual p.v.-distribution term via Mathlib's general 𝓓'(Ω,F) framework (see candidate 2) — it is infrastructure, not a step toward NS regularity itself, and must not be described as such.
+    mathlib_support_cited: >
+      VERIFIED present and directly reusable: (1) the shell-rescaling step needs homogeneity of K at radius r from radius 1, which K_homogeneous (CalderonZygmundKernelDefinitions.lean:272-282) already supplies; (2) the mean-zero-at-radius-1 fact is K_mean_zero_sphereSurfaceMeasure (same file, line 725); (3) the shell/polar decomposition itself is directly supported by MeasureTheory.Measure.toSphere's generalized polar coordinates, specifically `measurePreserving_homeomorphUnitSphereProd` (Mathlib.MeasureTheory.Constructions.HaarToSphere, line 142) and the ready-made radial-integral formula `integral
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-NS-3
+    title: "Discretized/periodic toy analogue: the finite-circle (ZMod N) discrete Fourier transform plus the already-proved cotange"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "NS-3"
+    target_statement: >
+      TESTE ORIGINAL: Fix a small concrete N (e.g. N=8) and a simple integer-valued odd proxy kernel k : ZMod N → ℂ (e.g. k(j) := if j = 0 then 0 else (N:ℝ)/2 - (j.val : ℝ), an explicit sawtooth), compute 𝓕 k via Mathlib's `dft` for this fixed N by `decide`/`norm_num`/explicit finite sum, and check numerically that the values stay bounded by a constant independent of the specific small values tried (e.g. compare N=8 vs N=16 by hand). This is a low-cost, fully mechanical first check with no open-ended proof search; if the numbers behave as the classical theory predicts (values approaching ∓i·(N/π) type bounded-after-normalization behavior), it licenses investing in the general-N uniform bound (which would then need `cot_series_rep` or a direct geometric-series Fourier-coefficient computation); if the naive proxy kernel's DFT does NOT stay bounded in the expected way, that's an early, cheap signal that the toy model needs the exact cot-kernel (not a linear proxy) and the true cost is higher than hoped.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Use N=4 instead of N=8 for the true first sanity check: the only roots of unity involved are {1, i, -1, -i}, all already in Mathlib-normal form (Complex.I_sq, etc.), so a small odd proxy kernel's DFT genuinely can be computed by simp/norm_num without needing new special-angle lemmas. Only escalate to N=8 or general N (requiring cot_series_rep or explicit π/4-angle values) once N=4 closes cleanly.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a fully successful, uniformly-in-N bounded discrete/periodic Hilbert transform result would say NOTHING about the actual 3D Constantin-Fefferman kernel, about Navier-Stokes regularity, or even about the continuous (non-periodic) Hilbert transform — it is a genuinely separate classical object living in 1D finite/periodic harmonic analysis. Its only value to this research line is as a reusable methodological proof-of-concept: it would demonstrate, end to end and inside THIS Mathlib snapshot, that a full 'kernel → Fourier multiplier → bounded operator' pipeline for a genuine (odd, singular, mean-zero-flavored) kernel can be closed without any of the missing CZ/dyadic/p.v. infrastructure, which is valuable calibration for deciding whether to invest in the continuous case at all — but it would not constitute progress on the CF kernel or on NS-GAP-001/004 in any way, and must be described as pure methodology validation, not partial results.
+    mathlib_support_cited: >
+      VERIFIED present and directly relevant, previously unconnected to this lab's NS work: (1) full discrete Fourier transform on ZMod N with Plancherel-adjacent structure in Mathlib.Analysis.Fourier.ZMod — `dft`, `invDFT`, `dft_dft`, and critically `dft_odd_iff` (line 197: DFT of an odd function is odd) which is exactly the structural fact needed since any p.v.-type kernel is odd; (2) the classical Mittag-Leffler partial-fraction expansion of cotangent, `Complex.cot_series_rep` (Mathlib.Analysis.SpecialFunctions.Trigonometric.Cotangent, line 231: π·cot(πx) = 1/x + Σ_{n≥1}(1/(x-n)+1/(x+n))) — this 
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-PN-1
+    title: "Formalize Language.P / Language.NP as decision-problem predicates over Mathlib's dormant TM2ComputableInPolyTime scaffol"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "PN-1"
+    target_statement: >
+      TESTE ORIGINAL: In a standalone scratch file, define `Language.P {α} {αΓ} (ea : α → List αΓ) (L : Set α) : Prop := ∃ βΓ (eb : Bool → List βΓ), TM2ComputableInPolyTime ea eb (fun a => decide (a ∈ L))` and an analogous `Language.NP` with an existential polynomial-length-bounded certificate, then prove `Language.P ea L → Language.NP ea L` with zero `sorry`/`axiom`. If it compiles cleanly this session, the definitional scaffold is cheaper than it looks and worth registering as a real work item; if Fintype/DecidableEq/existential-over-types instance search stalls, that is itself informative about why nobody bothered.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Step 1: define `Language.P {α αΓ} (ea : α → List αΓ) (L : Set α) : Prop := Nonempty (TM2ComputableInPolyTime ea encodeBool (fun a => decide (a ∈ L)))` (drop the unnecessary ∃ βΓ, fix eb = encodeBool) and verify it compiles and is inhabited for `L = Set.univ` via `idComputableInPolyTime`-style construction, zero sorry. Step 2 (separate, don't bundle): state (no proof required) `Language.NP` using `α × γ` as the verifier's domain with an explicit auxiliary hypothesis `∃ p : Polynomial ℕ, ∀ x y, (x,y) is considered → (encode y).length ≤ p.eval (ea x).length`, and see whether this typechecks and whether `Language.P → Language.NP` (trivial certificate = Unit) still goes through cleanly. A stall at step 2's bookkeeping is the informative signal, not step 1.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a clean, sorry-free result only gives definitions plus the logically trivial containment P ⊆ NP (a deterministic machine is a certificate-ignoring verifier). No reduction theory, no NP-completeness, no connection to k-SAT or any concrete NP-complete problem, and absolutely no bearing on whether P = NP. It would be scaffolding, not evidence.
+    mathlib_support_cited: >
+      Verified by Read: Mathlib/Computability/TuringMachine/Computable.lean:46 (structure FinTM2, finite alphabets/states), :179-188 (structure TM2ComputableInPolyTime, field `time : Polynomial ℕ`), :204-230 (the only existing nontrivial-ish instance in all of Mathlib is `idComputableInPolyTime`, the identity function). Verified by grep across the lab's own Lean tree (05_FORMAL/lean/TamesisLab) that TM2ComputableInPolyTime/FinTM2 are never referenced there; TamesisLab/Complexity.lean is an empty placeholder (`def TargetStatus : String := "P_PHYS_SEPARATE"`, one `trivial` smoke theorem).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-PN-3
+    title: "Produce a second, non-identity TM2ComputableInPolyTime witness, as a usability probe gating candidates 1 and 2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "PN-3"
+    target_statement: >
+      TESTE: Construct `TM2ComputableInPolyTime` for plain `Bool → Bool` negation from scratch (not reusing `idComputableInPolyTime`): write the one-state `TM2.Stmt` program, unfold `initList`/`haltList` under the machine's `step`, and discharge `outputsFun` with a concrete `Polynomial ℕ` time bound, zero `sorry`. If the 'smallest possible non-identity case' requires materially more machinery than the identity instance, that is a real negative data point (matches this lab's own precedent of confirming some angles genuinely hard, e.g. Marcinkiewicz/dyadic cubes on the Navier-Stokes line) rather than mere neglect; if it goes through smoothly, a size-parametric example becomes worth trying next.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      A witness for one small, fixed-size function (even the lab's own step function) is a complexity fact about a single decidable instance, not an asymptotic family over growing input size — it says nothing about scaling behavior, let alone NP or any separation.
+    mathlib_support_cited: >
+      Same file as above; grep confirms `idComputableInPolyTime`/`inhabitedTM2ComputableInPolyTime` are the only constructors of `TM2ComputableInPolyTime` anywhere in Mathlib — no second example exists to copy from. Lab side: RESEARCH_QUEUE.yaml FOUND-UNIFORM-PRIMREC-001 entry, `second_probe_evidence: "primrec_run? compila ... via Primrec.nat_iterate"`, status VERIFIED, closed with stop_condition explicitly barring complexity-class claims.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-PN-4
+    title: "Toy relativization probe via Mathlib's new (2025) Nat.RecursiveIn / TuringDegree oracle-computability machinery"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "PN-4"
+    target_statement: >
+      TESTE: Using only `Nat.RecursiveIn`, exhibit a concrete oracle singleton `O = {haltingSetIndicator}` (built from Mathlib's already-formalized undecidability of the halting problem in Computability/Halting.lean) and a function `f` with `RecursiveIn O f` provable via the `.oracle` constructor while `Partrec f` is refutable. If it compiles, this confirms the new API composes cleanly with existing halting-problem infrastructure (a base camp only useful if someone later builds time-bounded oracle machines, which is a separate, much larger undertaking); if the halting set isn't already packaged in the right `ℕ →. ℕ` shape, that reveals an encoding gap even before resource-bounding is considered.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This is UNBOUNDED (total/partial recursive) relativization — Turing-degree theory — not the TIME-BOUNDED relativization Baker-Gill-Solovay is actually about. Mathlib has no oracle-augmented, time-bounded machine (no oracle version of FinTM2/TM2ComputableInPolyTime exists). A fully successful result here gives literally zero progress toward formalizing the real P^A/NP^A relativization barrier; it would be recursion theory wearing relativization's clothes, and stating that plainly matters more than the result itself.
+    mathlib_support_cited: >
+      Verified by full Read: Mathlib/Computability/RecursiveIn.lean:61-266 (inductive `Nat.RecursiveIn O f` with zero/succ/left/right/oracle/pair/comp/prec/rfind constructors, `RecursiveIn`, `ComputableIn`, monotonicity `RecursiveIn.mono`, `recursiveIn_empty_iff`). Confirmed via grep: zero occurrences of `RecursiveIn`/`TuringDegree` in 05_FORMAL/lean/TamesisLab.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-YM-1
+    title: "Finite-dimensional transfer-matrix spectral gap (explicit small lattice, using Mathlib's existing Hermitian-matrix spect"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "YM-1"
+    target_statement: >
+      TESTE ORIGINAL: In a single session: define an explicit small (2x2 or 3x3) symmetric positive-definite real matrix meant to represent a toy transfer matrix with coupling parameter beta (e.g. entries built from cosh(beta)/sinh(beta) or just fixed rationals), prove it is `Matrix.IsHermitian`, invoke the existing eigenvalue machinery (or, if beta is fixed to a rational, just compute eigenvalues directly via the characteristic polynomial and `nlinarith`/`polyrith`) to show `eigenvalues 0 > eigenvalues 1`, i.e. a literal Lean `theorem` with a positive numeric gap and no `sorry`. Outcome: if this builds cleanly in a session, it validates the infra is truly plug-and-play (as in FOUND-CZ-MEAN-ZERO-001); if the generic `IsHermitian.eigenvalues` API turns out to be too abstract/irreducible-def-locked to extract concrete numbers from without heavy machinery, that itself is a useful negative finding about the API's ergonomics for finite explicit examples.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Skip Matrix.IsHermitian.eigenvalues entirely for the first pass. For an explicit 2x2 real symmetric matrix [[a,b],[b,d]] with concrete rational a,b,d, prove directly via the quadratic formula / discriminant (trace = a+d, det = ad-b^2) that the two roots of X^2 - trace*X + det differ by a strictly positive amount, using nlinarith. Only afterward attempt to connect this to the abstract eigenvalues API via eigenvalues_eq/charpoly_eq as a stretch goal.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Nothing about the continuum limit, nothing about SU(N) gauge theory specifically, nothing about the actual Yang-Mills measure -- this is a hand-picked finite matrix (e.g. an explicit Z2 or small-permutation-group toy transfer matrix), not a formalization of the lattice-gauge partition function itself. It would only demonstrate that the lab's existing spectral-theorem infrastructure is directly reusable for 'spectral gap' language, giving a template other lines (or a future finite-volume YM front) could build on.
+    mathlib_support_cited: >
+      VERIFIED by direct read, not recalled: Mathlib/Analysis/Matrix/Spectrum.lean has a full finite-dimensional spectral theorem for Hermitian matrices -- `Matrix.IsHermitian.spectral_theorem`, `eigenvalues_eq`, `det_eq_prod_eigenvalues`, `spectrum_real_eq_range_eigenvalues`, `trace_eq_sum_eigenvalues` (grepped `^theorem`/`^def` in that file). Mathlib/LinearAlgebra/Matrix/Hermitian.lean and Mathlib/Analysis/InnerProductSpace/Spectrum.lean additionally give the general finite-dim self-adjoint diagonalization theorem with `eigenvalues_antitone` (sorted, monotone-decreasing eigenvalue list) -- exactly
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-YM-2
+    title: "Formalize the missing Perron-Frobenius spectral-gap theorem on top of Mathlib's existing (but incomplete) IsIrreducible/"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "YM-2"
+    target_statement: >
+      TESTE: Do NOT attempt the general theorem first. Pick one concrete 3x3 primitive stochastic (or symmetric positive) matrix, prove `Matrix.IsPrimitive` for it directly (should be mechanical given the quiver/positive-power API already in Defs.lean), then attempt to derive strict eigenvalue dominance for THAT SPECIFIC matrix using only Mathlib's existing charpoly/eigenvalue tools (Matrix/Charpoly/Eigs.lean, Analysis/Matrix/Spectrum.lean) without inventing new general machinery. Outcome: if the specific-instance proof goes through with existing tools in a session, the general theorem is a realistic multi-session target; if even the single instance requires building real new eigenvalue-perturbation/variational infrastructure, that confirms the general Perron-Frobenius gap is a genuinely substantial (not small) Mathlib contribution.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a complete formalization only gives a general finite-matrix fact (irreducible/primitive nonnegative matrix has a spectral gap) -- it says nothing about how to build the actual Yang-Mills lattice transfer matrix, reflection positivity of the real YM action, or any continuum question. It is pure reusable linear-algebra infrastructure, several steps removed from Yang-Mills specifically.
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/LinearAlgebra/Matrix/Irreducible/Defs.lean (the ONLY file in that directory -- confirmed via `find`) defines `Matrix.toQuiver`, `Matrix.IsIrreducible`, `Matrix.IsPrimitive`, and proves `Matrix.isIrreducible_iff_exists_pow_pos` and `Matrix.IsPrimitive.to_IsIrreducible`, citing Seneta 2006 and tagging the file with the keyword 'perron-frobenius' in its own `## Tags` section (read directly, lines ~1-80). Grepped the whole Mathlib tree for `PerronFrobenius|perron_frobenius|Perron-Frobenius|spectralRadius.*Perron|dominant.*eigen` outside that one file: zero hits. The actual eigenv
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-YM-3
+    title: "Fixed-finite-dimension eigenvalue-gap stability under operator-norm convergence (the deliberate converse of the lab's ow"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "YM-3"
+    target_statement: >
+      TESTE: In a fixed 2-dimensional real inner product space, state and prove: for self-adjoint A, B with ||A - B|| < eps, |lambda_max(A) - lambda_max(B)| <= eps, using `norm_eq_iSup_rayleighQuotient`/`spectralRadius_eq_nnnorm` directly. This is the cheapest possible falsifiable slice. Outcome: if it compiles quickly from the cited lemmas, extend informally to check whether the second-eigenvalue (orthogonal-complement) argument is similarly short before committing to a full session; if the top-eigenvalue case itself needs unexpected scaffolding, deprioritize.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Only the top-eigenvalue case follows near-trivially from existing Mathlib content; the actual GAP statement needs the SECOND eigenvalue too (restrict to the orthogonal complement of the top eigenvector and repeat), which is straightforward in principle but not literally sitting in Mathlib as a named lemma -- real, if modest, proof work. Even fully done, this says nothing about Yang-Mills or about growing-dimension limits (i.e. the actual lattice-spacing-to-zero limit), which is precisely the case the counterexample already shows is NOT covered.
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/Analysis/InnerProductSpace/Rayleigh.lean (grepped `^theorem`/`^def`) already has `norm_eq_iSup_rayleighQuotient` (operator norm = sup of |Rayleigh quotient|) and `spectralRadius_eq_nnnorm` for self-adjoint operators -- exactly the variational tool needed for a one-line proof that the TOP eigenvalue is 1-Lipschitz in operator norm (|sup f - sup g| <= sup|f-g| <= ||A-B||). Grepped the whole tree for `Weyl` eigenvalue-perturbation results and for `eigenvalue.*Lipschitz`/`eigenvalues_sub_le`: all `Weyl` hits are Lie-theoretic Weyl groups (Algebra/Lie/*, RootSystem), CONFIRMED ABS
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-HG-1
+    title: "Principal-divisor-as-algebraic-cycle bridge (AlgebraicCycle.Basic \u00d7 OrderOfVanishing)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "HG-1"
+    target_statement: >
+      TESTE: In a scratch file, for X a locally Noetherian integral scheme -- to keep it small, X = Spec of a concrete Dedekind domain, matching the dimension-1/codim-1 special case already worked in WORKED_CASE_NOETHER_LEFSCHETZ.md -- and f a nonzero element of X.functionField, attempt to prove `(Function.support (fun x => X.ord f x ...)).Finite` (or the locally-finite-within version) using only lemmas already present in RingTheory/OrderOfVanishing/Noetherian.lean and AlgebraicGeometry/Noetherian.lean, then package the result as a term of `AlgebraicCycle X ℤ`. Success = compiles reusing only existing lemmas, no new finiteness axiom needed. Wall = the finiteness step needs an extra hypothesis (e.g. properness, not just local-Noetherian-ness) nowhere yet stated in Mathlib, revealing this is itself a nontrivial new finiteness theorem rather than a one-file glue job.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a clean bridge lemma is 100% classical commutative algebra/scheme theory: it constructs only the 'cycle' side of a future cycle-class map and says nothing about complex structure, the Hodge/(1,1) condition, or cohomology. It would remain several entirely-absent layers (de Rham/singular cohomology, Hodge decomposition, exponential sequence) away from even stating Lefschetz (1,1) formally, let alone the general conjecture.
+    mathlib_support_cited: >
+      Verified by direct read: AlgebraicGeometry/AlgebraicCycle/Basic.lean defines `abbrev AlgebraicCycle (X : Scheme.{u}) (R : Type*) [Zero R] := Function.locallyFinsupp X R` (git log: commit d31b5731de, 'feat(AlgebraicGeometry): define algebraic cycles (#37901)', 2026-06-25). AlgebraicGeometry/OrderOfVanishing.lean defines `Scheme.ordHom`/`Scheme.ord` for a locally Noetherian integral scheme (commit dated 2026-07-02), both authored by Raphael Douglas Giles. Confirmed by grep that neither file's text contains the other's identifiers, and that no name matching 'principalDivisor'/'divisorOf'/'divisor
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-HG-2
+    title: "Repurpose ClassGroup.equivPic as the algebraic skeleton of 'divisor class = line-bundle class'"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "HG-2"
+    target_statement: >
+      TESTE: Pick a concrete Dedekind-domain instance already available in Mathlib (or the coordinate ring of a specific smooth affine curve, if such a Dedekind-domain instance already exists) and specialize `ClassGroup.equivPic` to it, checking the statement elaborates with no new sorries. Success = clean instantiation, confirming the bridge is reusable. Wall = no ready-made 'coordinate ring of this curve is a Dedekind domain' instance exists in Mathlib yet, meaning the geometry side of the bridge -- not just the algebra side -- would need to be built first, which is itself informative about where the real gap is.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This is a purely algebraic statement about a ring's class group (holds for any Dedekind domain, e.g. ℤ[i], with zero geometric content), with no connection to a complex/Kähler structure, cohomology, or the (1,1)-type condition. It is not Lefschetz's theorem itself, which additionally requires that every integral class of type (1,1) arises this way -- only that Pic embeds correctly, not surjectivity onto H^{1,1}∩H^2(ℤ). A fully worked instantiation proves nothing new about Hodge classes; it only demonstrates that one already-existing tool is usable off the shelf.
+    mathlib_support_cited: >
+      Verified by direct read: `noncomputable def ClassGroup.equivPic (R) [CommRing R] [IsDomain R] : ClassGroup R ≃* Pic R` at RingTheory/PicardGroup.lean:878, with the docstring claim confirmed at line 29 ('ClassGroup.equivPic: the class group of a domain is isomorphic to the Picard group'). Confirmed by grep across AlgebraicGeometry/ that `Pic`/`PicardGroup` appears only as a hypothesis in a docstring of EllipticCurve/Weierstrass.lean (trivial-Picard-group side condition for defining elliptic curves over a general base ring) -- no actual formalized link from any geometry object to `ClassGroup.equ
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-HG-4
+    title: "Minimal holomorphic-line-bundle stub on Geometry/Manifold/Complex.lean, to state (not prove) Lefschetz (1,1)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "HG-4"
+    target_statement: >
+      TESTE: Attempt to define a `HolomorphicLineBundle` structure over a `ComplexManifold`-style base by reusing Mathlib's generic `Bundle`/`VectorBundle` API plus a holomorphic-transition-function compatibility field, then check that the trivial bundle M x C satisfies it in <=30 lines. Success = clean instance compiles, giving a genuine minimal formal target for future sessions. Wall = Mathlib's generic vector-bundle API does not cleanly support a 'holomorphic' transition-function condition without first threading a sheaf-of-holomorphic-functions structure through the whole bundle machinery, revealing the gap is deeper than one missing definition.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      A bare definition, even if it compiles and admits the trivial bundle M x C as an instance, proves nothing by itself. Actually proving Lefschetz (1,1) afterward would still require Dolbeault or sheaf cohomology (an H^1(X,O) obstruction-theory argument via the exponential sequence) that would need to be built essentially from scratch -- this candidate only produces a statement, not a step toward a proof.
+    mathlib_support_cited: >
+      Geometry/Manifold/Complex.lean confirmed to exist and to already use `ModelWithCorners ℂ` / `IsManifold` typeclasses (used by its two proved results: a manifold maximum-modulus principle and a Liouville-type constancy theorem). Its own module docstring TODO section explicitly states: 'Maybe a next step would be to develop a theory of holomorphic vector/line bundles...' -- confirmed by direct read, lines ~27-34. Cross-checked with grep across the whole tree for 'holomorph' combined with 'bundle'/'linebundle' (case-insensitive): the only hit anywhere is this TODO sentence itself -- no definition
+    dependencies: []
+    existing_assets: []
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-BSD-1
+    title: "BSD-L-MULT-001: Prove WeierstrassCurve.LFunction is a multiplicative arithmetic function"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "BSD-1"
+    target_statement: >
+      TESTE ORIGINAL: In a single session: state and attempt `theorem WeierstrassCurve.LFunction_isMultiplicative {K} [Field K] [NumberField K] (W : WeierstrassCurve K) : W.LFunction.IsMultiplicative`, proved by `isMultiplicative_eulerProduct` applied pointwise via `isMultiplicative_ofPowerSeries_of_isPrimePow`, discharging the `IsPrimePow (Nat.card (ResidueField ...))` side condition from finite-field cardinality theory. Outcome telling: if the residue-field-is-prime-power step composes cleanly with existing Mathlib finiteness/`Fintype` instances for `HeightOneSpectrum (𝓞 K)` residue fields, this closes in well under a session and the angle is validated as genuinely low-hanging; if the `Finite`/`Fintype` instance chain for adic residue fields is missing or awkward to invoke, that surfaces as a concrete, separately reusable sub-gap.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Split the test: first attempt ONLY the isolated lemma `Finite (IsLocalRing.ResidueField (v.adicCompletionIntegers K))` (equivalently, IsPrimePow (Nat.card ...)) for `v : HeightOneSpectrum (𝓞 K)`, `K` a number field, as a standalone goal before touching IsMultiplicative at all. If that closes cleanly (e.g. via a residue-field isomorphism to 𝓞K⧸v.asIdeal that already exists or is a one-line `Quotient.congr`), the full candidate is validated as cheap; if it instead requires building fresh compatibility lemmas between the two completion frameworks, that is itself the useful, cheaply-discovered negative finding -- and only then is the full IsMultiplicative theorem (which itself IS cheap given that side condition) worth attempting.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a fully proved `W.LFunction.IsMultiplicative` gives only a structural coefficient identity (a_{mn}=a_m a_n for coprime m,n) about a *formal* Dirichlet series. It says nothing about: convergence of the associated `LSeries` anywhere in ℂ, analytic continuation, the functional equation, the conductor, or any connection to the Mordell-Weil rank (the actual BSD statement). It is pure, honest, reusable plumbing -- useful as a lemma for essentially every downstream analytic step, but zero progress toward the conjecture itself.
+    mathlib_support_cited: >
+      VERIFIED by direct read: Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean:79-85 defines `WeierstrassCurve.LFunction : ArithmeticFunction ℤ` for `W : WeierstrassCurve K` with `[NumberField K]` as `eulerProduct fun p : HeightOneSpectrum (𝓞 K) ↦ (W.baseChange (p.adicCompletion K)).localEulerFactor (p.adicCompletionIntegers K)`, and `:57` defines `localEulerFactor` via `ArithmeticFunction.ofPowerSeries (Nat.card residueField) (localPowerSeries)`. The generic tools needed to prove multiplicativity are both present: `Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean:314-315` `isMultiplica
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-BSD-2
+    title: "BSD-BAD-PRIMES-FINITE-001: Finiteness of the bad-reduction locus of a Weierstrass curve over a number field"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "BSD-2"
+    target_statement: >
+      TESTE ORIGINAL: Formalize `theorem WeierstrassCurve.finite_not_hasGoodReduction {K} [NumberField K] (W : WeierstrassCurve K) (h : IsIntegral (𝓞 K) W) : {p : HeightOneSpectrum (𝓞 K) | ¬ (W.baseChange ...).HasGoodReduction (p.adicCompletionIntegers K)}.Finite`, by relating the local `valuation K (maximalIdeal R) W.Δ` used in Reduction.lean to the global `HeightOneSpectrum.valuation`/`maxPowDividing` used in Factorization.lean, and invoking `HasFiniteMulSupport`. Outcome telling: success (even with some `sorry`-free but inelegant glue) confirms the two valuation frameworks (local DVR-style vs. global adic HeightOneSpectrum-style) are compatible off the shelf, worth building the conductor definition on top of; if the two `valuation` notions used across `Reduction.lean` and `Factorization.lean`/`AdicValuation.lean` turn out not to line up cleanly (different normalizations, missing `IsIntegral` transfer lemmas), that is itself a useful, cheaply-discovered finding about where the reduction-theory file and the global adic infrastructure don't yet talk to each other.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Narrow the first test to proving ONLY the bridge lemma in isolation, decoupled from HasGoodReduction/reduction theory entirely: for `x : 𝓞 K` nonzero and `p : HeightOneSpectrum (𝓞 K)`, show `valuation K (maximalIdeal (p.adicCompletionIntegers K)) (algebraMap (𝓞 K) (p.adicCompletion K) x) < 1 ↔ x ∈ p.asIdeal` (or the closest formulable analogue). If this compatibility lemma is a short derivation from existing adicCompletionIntegers/valuation API, the full finiteness result is genuinely moderate-cost as claimed; if it requires re-deriving valuation-subring/completion theory from scratch, that is the honest negative finding worth logging before investing further.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This gives only the *set* of bad primes is finite -- not the conductor exponent at each bad prime (which requires classifying additive/multiplicative reduction more finely, itself only partly done: `HasMultiplicativeReduction`/`HasAdditiveReduction`/`HasSplitMultiplicativeReduction` exist in Reduction.lean but with a `TODO: add characterization ... when characteristic is not 2` at line 314), and nothing about analytic continuation, functional equation, or BSD's rank statement. It is groundwork that would unblock a later conductor definition, no more.
+    mathlib_support_cited: >
+      VERIFIED: `Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean:281-282` defines `HasGoodReduction R W` (extends `IsMinimal R W`) via `valuation K (maximalIdeal R) W.Δ = 1`, i.e. bad reduction at a place corresponds to the discriminant `Δ` lying in that place's maximal ideal (`< 1` valuation, line ~304/311). The generic Dedekind-domain machinery to turn "Δ is a fixed nonzero element" into "only finitely many height-one primes divide it" already exists: `Mathlib/RingTheory/DedekindDomain/Factorization.lean:112` `HasFiniteMulSupport fun v : HeightOneSpectrum R ↦ v.maxPowDividing I` (for `I` a 
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-BSD-3
+    title: "BSD-HASSE-CONDITIONAL-CONV-001: Conditional convergence half-plane for L(E,s) from an explicit, clearly-flagged Hasse-bo"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "BSD-3"
+    target_statement: >
+      TESTE ORIGINAL: In one session, state (not prove Hasse, but assume it as an explicit hypothesis) `theorem WeierstrassCurve.LSeriesSummable_of_hasse_bound {K} [NumberField K] (W : WeierstrassCurve K) (hHasse : ∀ p : HeightOneSpectrum (𝓞 K), ‖(W.LFunction) (Ideal.absNorm p.asIdeal)‖ ≤ ... ) {s : ℂ} (hs : 3/2 < s.re) : LSeriesSummable ((↑) ∘ W.LFunction) s`, and try to actually push the local-factor coefficient bound (from the quadratic `1 - a T + q T²` reciprocal power series) through to a global `n^{1/2+ε}` bound via `LSeriesSummable_of_le_const_mul_rpow`. Outcome telling: if translating "bounded local factor" to "bounded global Dirichlet coefficient via multiplicativity" goes through with only routine estimates, the angle is validated as a legitimate honest-partial-result template; if the coefficient-growth estimate for the reciprocal of `1-aT+qT²` (a Chebyshev-like recursion) turns out to need real analytic estimation work Mathlib doesn't support cleanly, that itself is useful information about the true cost of this route.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Decouple and test only the arithmetic core, independent of WeierstrassCurve/L-function scaffolding entirely: given a, q : ℝ (or ℤ) with |a| ≤ 2√q, define c : ℕ → ℝ by the recursion c₀ = 1, c₁ = a, c_{n+1} = a·c_n − q·c_{n-1} (coefficients of 1/(1−aT+qT²)), and attempt `|c_n| ≤ (n+1) * q ^ (n/2 : ℝ)` by induction. This isolates the actual mathematical crux (whether Mathlib's induction/rpow API makes this bound tractable in one sitting) without requiring candidate 1 or any adic/HeightOneSpectrum machinery -- a genuinely small, falsifiable first move.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a clean conditional proof gives only a convergence half-plane for L(E,s) under an assumption that is itself unformalized and, honestly, comparably deep to prove as several of the arithmetic pieces the lab already catalogued as hard (BSD-GAP-004 in the lab's own register). It would NOT give: Hasse's bound itself, analytic continuation beyond the convergence half-plane, the functional equation (which needs modularity -- confirmed absent: `grep -rl modularity|Modularity|TaniyamaShimura` over Mathlib returns nothing relevant), or any connection to rank. This is scaffolding for a scaffolding; useful mainly as a template that later slots in Hasse's bound once/if it is ever formalized.
+    mathlib_support_cited: >
+      VERIFIED: `Mathlib/NumberTheory/LSeries/Basic.lean:341` `LSeriesSummable_of_le_const_mul_rpow {f : ℕ → ℂ} {x : ℝ} {s : ℂ} (hs : x < s.re) (h : ∃ C, ∀ n ≠ 0, ‖f n‖ ≤ C * n ^ x) : LSeriesSummable f s` and `:367` `LSeriesSummable_of_isBigO_rpow` are exactly the generic convergence criteria that would be invoked once coefficient growth `O(n^{1/2+ε})` is established. `WeierstrassCurve.LSeries` itself is defined at `Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean:84` as `LSeries ((↑) ∘ W.LFunction) s`, so it is a genuine instance of the abstract `LSeries` the convergence lemmas target. Search
+    dependencies: []
+    existing_assets: []
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-BSD-4
+    title: "BSD-MW-DESCENT-GAP-001: Pin down the exact remaining gap in Mathlib's own in-progress Mordell-Weil chain"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "BSD-4"
+    target_statement: >
+      TESTE ORIGINAL: Read `AddSubMap.lean`, `Height/EllipticCurve.lean`, and `Descent.lean` closely enough to write out the exact remaining Prop-level statement list needed to invoke `CommGroup.fg_of_descent'` for `E(ℚ)` (no new Lean code required, or at most a stub `example` showing the current instance chain resolves up to the missing pieces via `sorry`). Outcome telling: if the gap turns out to be a short, enumerable list (e.g. "just weak MW + the AddSubMap TODO"), that is a meaningful scouting result worth flagging for a dedicated future front; if attempting to even state the missing pieces reveals additional undocumented dependencies, that lowers confidence this route is currently tractable at all.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): No change needed to the test itself (reading + writing an enumerated gap list is already appropriately cheap); only the expected/reported outcome should be corrected: report that the height-and-parallelogram-law side has at least 3 distinct outstanding sub-gaps (AddSubMap correctness, naive height definition, and the parallelogram law statement itself for curve points, not just projective coordinates), in addition to all of weak Mordell-Weil being separately absent -- do not characterize this side as 'nearly closed.'
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Nothing is "proved" by this candidate by design -- it is a scoping exercise. Even in the best case (confirming the parallelogram-law side is nearly closed), weak Mordell-Weil is still completely missing and is arguably as hard as a self-contained arithmetic-geometry project in its own right (Galois cohomology of the n-torsion, Kummer sequence, bounding the Selmer group). Success here only tells the lab WHERE to aim a future dedicated Mordell-Weil effort, not that BSD or even Mordell-Weil is closer to done.
+    mathlib_support_cited: >
+      VERIFIED, multi-file: `Mathlib/GroupTheory/Descent.lean` (commit 2026-07-08, author Michael Stoll) proves the *abstract* descent theorem (`CommGroup.fg_of_descent'` etc., docstring lines 1-45) that is "one of the main ingredients of the standard proof of the Mordell-Weil Theorem" (quoted from its own docstring) given (a) a height function with the approximate parallelogram law and (b) finiteness of `G / n•G`. `Mathlib/NumberTheory/Height/EllipticCurve.lean` (commit 2026-06-12) already PROVES the approximate parallelogram law's key input, `abs_logHeight_addSubMap_sub_two_mul_logHeight_le` (line
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-TOE-1
+    title: "Instantiate Mathlib's ActionCategory on the already-VERIFIED FOUND-SEMIGROUP-001 finite action (objects=regimes, morphis"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "TOE-1"
+    target_statement: >
+      TESTE: In a scratch file, write `abbrev RegimeCat := CategoryTheory.ActionCategory TamesisLab.Foundations.Semigroups.Shift3 TamesisLab.Foundations.Semigroups.Regime3` and check it elaborates as a `Category` instance with `#check (inferInstance : Category RegimeCat)`, then verify `Fintype RegimeCat` gives cardinality 3 (via the existing `Fintype Regime3` instance) and exhibit one concrete non-identity morphism (e.g. the `forward` transition as a morphism alpha ⟶ beta) with `#check`. Outcome: if this fails to elaborate or requires nontrivial new lemmas, the '15 de 15 elaborate' finding was overstated for actual instantiation (not just isolated declarations) and the angle is weaker than documented; if it elaborates cleanly (expected, since ActionCategory is generic and MulAction Shift3 Regime3 already exists), this becomes the lab's first non-vacuous TOE Lean artifact, replacing `theorem toe_smoke : True := by trivial`.
+      
+      NOTA DA REVISAO ADVERSARIAL: Same as proposed, but replace the Fintype step with an explicit `Fintype.ofEquiv Regime3 (ActionCategory.objEquiv Shift3 Regime3)` and add a line noting the objects are equiv-images of Regime3, not literally Regime3.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This gives only a 3-object, 3-morphism toy category with zero physical content -- satisfying at most 3 of the 11 TOE_CONVERGENCE_CRITERIA.md bullets ('objetos definidos', 'morfismos definidos', 'composição definida') for a case the lab itself already labels FOUNDATIONAL_FORMALIZATION_ONLY. It gives no invariants-vs-monotones distinction, no consistency conditions, no recovery theorems for QM/GR/YM/thermodynamics (per THEORY_RECOVERY_MATRIX.md, still all UNRESOLVED), no impossibility theorems, no falsifiable predictions, and does nothing toward RH or NS themselves. It would NOT unblock the full TOE-INTERFACE-001 item as scoped in RESEARCH_QUEUE.yaml -- only a narrower sub-item.
+    mathlib_support_cited: >
+      Grep-verified, file:line. CategoryTheory.ActionCategory exists at 05_FORMAL/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Action.lean:46-51: 'A multiplicative action M ↻ X induces a category structure on X, where a morphism from x to y is a scalar taking x to y' — literally objects=X, morphisms=action elements, built generically from any `MulAction M X`. The lab already has `instance : MulAction Shift3 Regime3` at TamesisLab/Foundations/Semigroups/Action.lean:28-31, built and VERIFIED as part of FOUND-SEMIGROUP-001. Also independently spot-checked the '15 de 15' claim: `class Category` (C
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-TOE-2
+    title: "Split TOE-INTERFACE-001 into a narrower TOE-INTERFACE-SKELETON-001 item whose dependencies are [FOUND-SEMIGROUP-001] onl"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "TOE-2"
+    target_statement: >
+      TESTE ORIGINAL: Re-read RESEARCH_QUEUE.yaml's TOE-INTERFACE-001 entry once more for any rationale field connecting the `external_dependency: "teoria de categorias e física matemática"` phrase specifically to RH or NS (not just physics in general); if a hidden justification is found on closer reading, this candidate is falsified and the dependency is load-bearing after all. Absent that (the search already done here found none), draft the split as a queue-registration exercise and see whether it survives the lab's own gate discipline (LAB-CORR-VALIDATION-BLINDNESS-001, queue_registration_required) without objection -- i.e. whether any reviewer can articulate a real technical reason RH/NS output is needed before the categorical skeleton step can proceed.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): As proposed; no narrowing needed.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even if the split is approved and the narrower item is VERIFIED, this only removes a paperwork obstacle -- it produces no new theorem by itself (that's candidate 1's job) and does not touch RH-NOGO-001 (which stays FROZEN_PARTIAL_RESULT for its own separate, well-documented reasons: missing pseudodifferential/Weyl-spectral infrastructure, per OPEN_PROBLEMS_MEASURED_2026-08-04.md) or NS-PRESSURE-001. The full TOE-INTERFACE-001 (aiming at QM/GR/YM/thermodynamics recovery) remains exactly as blocked as before on the physics side; only a toy/finite sub-slice becomes independently attackable.
+    mathlib_support_cited: >
+      N/A -- this is a governance/scoping candidate, not a Mathlib-content candidate. Its Mathlib-relevant premise (that a category-skeleton step needs no RH/NS infrastructure) is the same evidence cited in candidate 1.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-TOE-4
+    title: "Formalize the TRANSITION_ATLAS's own epistemic-status promotion policy as a small decidable relation on a finite enum (b"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "TOE-4"
+    target_statement: >
+      TESTE ORIGINAL: Define `inductive EpistemicStatus` mirroring the 12 Python enum cases, define a `Decidable`-instance predicate `mayPromote : EpistemicStatus -> EpistemicStatus -> Prop` capturing just the 'preregistered_test requires frozen protocol' / 'independently_replicated requires independent source' ordering constraints (ignore the free-text `reasons` machinery), and check `decide`-based unit tests reproduce promotion.py's `approved` verdict on a couple of hand-picked cases (e.g. metaphorical -> falsified should be rejected as skipping required intermediate evidence, per policy text). If porting the rule cleanly into a decidable relation surfaces hidden non-monotonicities in the Python logic (e.g. rules that don't compose into a clean partial order), that's a genuine, cheap, useful finding about the registry itself, independent of whether it advances TOE; if it ports trivially, this confirms the candidate is real but thin.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): As proposed; no narrowing needed.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even complete success formalizes a rule about HOW THE LAB'S OWN REGISTRY IS ALLOWED TO CHANGE STATUS, not a mathematical statement about physical regimes/interfaces/invariants/obstructions in the TOE sense. It is infrastructure about infrastructure -- valuable for the lab's own audit trail (and could feed audit_evidence.py-style checks) but contributes essentially nothing toward TOE_CONVERGENCE_CRITERIA.md's harder bullets (invariants, obstruction theorems, recovery theorems, falsifiable predictions about physical regimes). Genuinely low physics content; flagged honestly as the weakest candidate here.
+    mathlib_support_cited: >
+      No specific new Mathlib lookup needed beyond basic `Fintype`/`DecidableEq`/`Decidable` machinery already used elsewhere in this lab (e.g. TamesisLab/Foundations/Semigroups/Regime3.lean's own `Fintype` instances) -- the target is porting `EpistemicStatus`/promotion logic from Python (transition_atlas/models.py's `EpistemicStatus` enum, promotion.py's `promotion_decision`) into an inductive Lean type and a decidable predicate, not new Mathlib infrastructure.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-QF-1
+    title: "CHSH/Tsirelson tightness (explicit 2\u221a2-achieving CHSH tuple in 4x4 complex matrices)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "QF-1"
+    target_statement: >
+      TESTE: In a single session: pick the standard textbook CHSH-tuple realization on C^2 tensor C^2 (Pauli observables sigma_z, sigma_x for A0,A1 and (sigma_z+sigma_x)/sqrt2, (sigma_z-sigma_x)/sqrt2 for B0,B1, via Kronecker/tensor product to 4x4 matrices), verify in Lean that IsCHSHTuple holds for the concrete matrices, and check whether `A0*B0+A0*B1+A1*B0-A1*B1` has 2*sqrt(2) as an eigenvalue (e.g. via explicit eigenvector or char-poly computation). If this closes cleanly with existing Matrix/CStarMatrix/spectrum lemmas, the angle is cheap and worth finishing; if eigenvalue/spectrum computation over 4x4 complex matrices turns out to require infrastructure Mathlib lacks (e.g. no decidable/computable eigenvalue tooling for concrete small matrices), that itself is a useful negative finding.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a fully successful, clean formalization only proves that the algebraic Tsirelson bound (already proved as an inequality) is attained -- it says nothing new about 'unifying' classical and quantum mechanics; it sharpens an existing quantum/classical SEPARATION result. It does not touch correspondence principle, deformation/geometric quantization, or any dynamical (Hamiltonian/Schrodinger) content. It is a self-contained linear-algebra exercise, not infrastructure toward the harder facets in SCOPE.md.
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/Algebra/Star/CHSH.lean (199 lines) -- IsCHSHTuple structure, CHSH_inequality_of_comm (commutative bound <= 2), tsirelson_inequality (noncommutative bound <= 2*sqrt(2), proved via explicit sum-of-squares P^2+Q^2 decomposition), file's own '## Future work' section (lines ~60-67) states the tightness/explicit-matrix construction is NOT yet done. Also verified Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean:807-808 gives `instStarOrderedRing : StarOrderedRing (CStarMatrix n n A)` for the required matrix C*-algebra typeclasses, so the target type for the explicit tuple already has 
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-QF-2
+    title: "Finite-dimensional impossibility of the canonical commutation relation (Wielandt-Wintner-style trace argument)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "QF-2"
+    target_statement: >
+      TESTE: Formalize, for square matrices X P : Matrix (Fin n) (Fin n) K (K a field of characteristic zero, n > 0): if X*P - P*X = c • 1 then c = 0. Proof sketch: trace(X*P-P*X) = trace(X*P) - trace(P*X) = 0 by trace_mul_comm, but trace(c•1) = c * n, so c * n = 0, and n ≠ 0 in char 0 forces c = 0. If this compiles in well under an hour using only cited lemmas, the angle is confirmed cheap and could anchor a short 'why QM needs infinite dimensions' note; if the char-zero/cast bookkeeping turns out fussier than expected, that itself bounds the cost realistically.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      This gives only a negative/no-go structural lemma about finite-dimensional or bounded-operator representations of the CCR; it says nothing about actual quantum dynamics, does not construct position/momentum operators on L^2(R), and does not touch Ehrenfest's theorem itself (which needs unbounded self-adjoint operators and their expectation-value dynamics -- confirmed Mathlib has only LinearPMap / InnerProductSpace.LinearPMap for partially-defined operators, no assembled unbounded-self-adjoint-operator or Stone's-theorem infrastructure: searched 'Unbounded', 'Stone's theorem', 'StoneVonNeumann', 'OneParameter' -- all absent or only tangential).
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/LinearAlgebra/Trace.lean:103 `theorem trace_mul_comm (f g : M →ₗ[R] M) : trace R M (f * g) = trace R M (g * f)`; Mathlib/LinearAlgebra/Matrix/Trace.lean:158 the matrix analogue `trace_mul_comm`; Matrix/Trace.lean:146 `trace_one : trace (1 : Matrix n n R) = Fintype.card n`, plus `trace_smul`/`trace_sub`. Searched for 'Wielandt', 'Wintner', 'canonical commutation' across all of Mathlib -- confirmed absent as a named result; this would be new content, not a restatement of something already there.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-QF-3
+    title: "Gelfand duality as a formal 'commutative = classical, noncommutative = quantum' correspondence statement"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "QF-3"
+    target_statement: >
+      TESTE: State and prove, using only existing GelfandDuality.lean exports, a one-line corollary: for a commutative unital C*-algebra A, the character space with the Gelfand transform realizes every self-adjoint element as a real-valued continuous function (i.e., 'classical' observables literally ARE functions on a space). If this is a two-line consequence of gelfandStarTransform + existing spectrum lemmas, that confirms the angle is cheap but thin; if it requires nontrivial new work to state 'self-adjoint -> real-valued function' precisely, that signals the framing itself is not as free as it looks.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Formalizing a clean corollary statement ('X is classical in the Gelfand sense iff its observable algebra is commutative') is essentially a definitional repackaging of an already-proved duality theorem -- it would NOT establish any correspondence-limit (hbar -> 0), dynamics, or Ehrenfest-type statement, and reviewers could reasonably call it a relabeling exercise rather than new mathematical content. This is the weakest candidate of the batch on 'genuine new content' grounds, flagged honestly here rather than inflated.
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean -- gelfandTransform, gelfandStarTransform, and doc comment stating the contravariant equivalence of categories between compact Hausdorff spaces and commutative unital C*-algebras is fully established ('Gelfand Duality' implemented). Also verified Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean (GNS construction, 2025, still has an open TODO for the cyclic-vector/state construction) and Mathlib/Analysis/VonNeumannAlgebra/Basic.lean, whose own doc comment says 'We still have a major project ahead of us to show the equivalence bet
+    dependencies: []
+    existing_assets: []
+    formalization_cost: low
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito SURVIVES apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE1-QF-4
+    title: "Ehrenfest's theorem as a bounded-self-adjoint-operator statement (stated, not attempted in full generality)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    plan_code: "QF-4"
+    target_statement: >
+      TESTE ORIGINAL: For a finite-dimensional Hilbert space, self-adjoint H (the Hamiltonian) and self-adjoint A (an observable), define Heisenberg evolution A(t) via the bounded operator flow, and check whether d/dt <psi, A(t) psi> = <psi, i[H,A(t)] psi> can be derived in Lean directly from ContinuousLinearMap.HasDerivAt / matrix exponential machinery already in Mathlib (search 'Matrix.exp' derivative lemmas) without new operator-theoretic infrastructure. If the derivative-of-conjugation-by-exp(itH) computation goes through with existing NormedSpace/Matrix.exp API, this is cheap; if it requires building differentiability-of-operator-valued-curve infrastructure from scratch, the cost jumps to moderate/high and the angle should be deprioritized.
+      
+      TESTE REVISADO PELA REVISAO ADVERSARIAL (usar este, nao o original, quando diferem): Narrow to a single-lemma first test: for a fixed skew-Hermitian 2x2 or 3x3 complex matrix H, verify `hasFDerivAt_exp_smul_const_of_mem_ball` instantiates and gives `HasFDerivAt (fun t : ℝ => exp (t • H)) (exp (t • H) • ...) t` for the matrix algebra, with no side-condition friction from the `Metric.eball`/radius-of-convergence hypothesis (finite-dim matrix algebras should have infinite radius, but confirm this compiles rather than assuming it). Only if that isolated lemma instantiation is clean should the team commit to attempting the full 3-factor-product Ehrenfest derivation as a separate, larger-scoped follow-on task.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    still_missing_if_success: >
+      Even a clean bounded-operator Ehrenfest statement is a toy version: it would NOT recover the real physical statement (which needs unbounded X, P satisfying CCR, hence infinite-dimensional Hilbert spaces per candidate #2 above) and would not connect to any hbar -> 0 classical limit, since 'classical' bounded dynamics isn't parametrized by hbar in this weakened form. It would be an isolated illustrative lemma, not a load-bearing step toward any of the SCOPE.md facets.
+    mathlib_support_cited: >
+      VERIFIED: Mathlib/Analysis/InnerProductSpace/Spectrum.lean -- full finite-dimensional/compact spectral theorem for IsSymmetric operators (diagonalization, eigenvectorBasis, eigenvalues). Mathlib/Analysis/InnerProductSpace/Adjoint.lean -- bounded operator adjoints. Confirmed ABSENT via grep across all of Mathlib: 'Ehrenfest', 'Schrodinger'/'Schrödinger', 'WKB', 'Stone's theorem', 'StoneVonNeumann', 'OneParameter' unitary group content. Confirmed present but not obviously sufficient: Mathlib/Topology/Algebra/Module/LinearPMap.lean and Mathlib/Analysis/InnerProductSpace/LinearPMap.lean for partia
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).

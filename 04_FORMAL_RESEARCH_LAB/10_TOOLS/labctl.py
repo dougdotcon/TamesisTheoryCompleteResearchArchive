@@ -664,7 +664,16 @@ def validate() -> dict[str, Any]:
                       "FOUND-CF-DEPLETION-KERNEL-001",
                       "FOUND-CZ-KERNEL-DEFINITIONS-001",
                       "FOUND-CZ-MEAN-ZERO-001",
-                      "FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001"}:
+                      "FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001",
+                      "WAVE1-BATCH-001",
+                      "WAVE1-RH-1", "WAVE1-RH-2", "WAVE1-RH-3", "WAVE1-RH-4", "WAVE1-RH-5",
+                      "WAVE1-NS-1", "WAVE1-NS-3",
+                      "WAVE1-PN-1", "WAVE1-PN-3", "WAVE1-PN-4",
+                      "WAVE1-YM-1", "WAVE1-YM-2", "WAVE1-YM-3",
+                      "WAVE1-HG-1", "WAVE1-HG-2", "WAVE1-HG-4",
+                      "WAVE1-BSD-1", "WAVE1-BSD-2", "WAVE1-BSD-3", "WAVE1-BSD-4",
+                      "WAVE1-TOE-1", "WAVE1-TOE-2", "WAVE1-TOE-4",
+                      "WAVE1-QF-1", "WAVE1-QF-2", "WAVE1-QF-3", "WAVE1-QF-4"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "

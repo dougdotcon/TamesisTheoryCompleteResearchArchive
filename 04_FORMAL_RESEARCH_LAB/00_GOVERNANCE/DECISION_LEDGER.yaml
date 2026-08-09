@@ -2666,3 +2666,46 @@ decisions:
       - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
       - "candidatos REFUTED registrados explicitamente para nao serem re-propostos sem evidencia nova"
       - "extensoes TOE-INTERFACE-001 e QCU-001 seguem rotuladas nao-Clay-oficiais em todo o documento"
+
+  - decision_id: DEC-086
+    date: 2026-08-09
+    decision: >
+      Autorizar a Onda 1 de execucao do plano de ataque de portfolio
+      completo (DEC-085): 27 itens WAVE1-* registrados em
+      RESEARCH_QUEUE.yaml (nota de correcao: o resumo apresentado ao
+      usuario disse "24" por erro de contagem; o numero correto, extraido
+      programaticamente da lista real de Onda 1 do plano, e 27). Cada
+      item e um teste pequeno e falsificavel, com o texto exato (original
+      + revisao adversarial, quando aplicavel) extraido diretamente dos
+      dados brutos do workflow de reconhecimento+revisao (nao re-derivado
+      de memoria) -- ver
+      /tmp/.../scratchpad/wave1_items.json (efemero, reconstrutivel a
+      partir do plano) para a extracao completa.
+    rationale: >
+      Usuario respondeu explicitamente "Onda 1 completa, todas as 24
+      (Recomendado)" via AskUserQuestion, apos receber o resumo do plano
+      de ataque completo (DEC-085) com a onda 1 proposta e os 3 favoritos
+      pessoais nomeados (QF-2, RH-2, QF-1). Cada um dos 27 itens carrega
+      seu proprio stop_condition proibindo: sorry/admit/axioma/unsafe;
+      alegacao de que qualquer Problema do Milenio foi resolvido,
+      aproximado ou tornado alcancavel; alegacao de novidade matematica;
+      expansao alem do escopo estreito do teste falsificavel especifico;
+      e forcar fechamento se o angulo se revelar intratavel -- nesse
+      caso, registrar como gap nomeado, exatamente como toda frente
+      anterior desta sessao. Nenhum item foi formalizado ainda por este
+      DEC -- apenas registrado e autorizado para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +27 itens (WAVE1-RH-1..5, WAVE1-NS-1/3, WAVE1-PN-1/3/4, WAVE1-YM-1/2/3, WAVE1-HG-1/2/4, WAVE1-BSD-1/2/3/4, WAVE1-TOE-1/2/4, WAVE1-QF-1/2/3/4), status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "itens REFUTED do plano (PN-5, YM-4, HG-3) explicitamente NAO incluidos nesta onda"
+      - "itens dependentes de onda 1 (ex. NS-2, BSD multiplicatividade completa) explicitamente NAO incluidos -- ficam para onda 2, contingente ao fechamento da onda 1"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE1 sao testes auxiliares/reconhecimento, nao reativacao"

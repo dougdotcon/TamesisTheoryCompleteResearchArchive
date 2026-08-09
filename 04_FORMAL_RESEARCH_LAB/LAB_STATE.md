@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: true
+repository_clean: false
 active_track: "foundations"
-active_work_item: "FOUND-HEAT-SEMIGROUP-LAW-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-DUHAMEL-SKELETON-001"
+work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,21 +37,14 @@ formalized_at_commit: "5c85550c8d1197faf70571d8b3e339c51af8a629"
 last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean (201->408 lines), lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  PARALLEL-WAVE-002 integrada por completo. (A)
-  FOUND-HEAT-SEMIGROUP-LAW-001 fechou VERIFIED / result_review
-  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de solidez, 1
-  imprecisão factual corrigida — contagem de linhas do diff era
-  256->408, correto é 201->408). HEAT-GAP-001 fechado: lei de semigrupo
-  E continuidade forte, ambas provadas. (B) NS-GAP-005 reverificado:
-  CONFIRMED_CONDITIONAL, não incondicional como o documento legado
-  implicava; achado adicional não verificado (preprint
-  Cheskidov-Dai-Palasek 2511.09556 alegando construção de blow-up Tipo
-  I) registrado como claim externa não endossada. (C) YM-GAP-007
-  reverificado: arXiv:2606.19362 ganhou journal-ref (Fortschr. Phys.)
-  desde a última checagem; 2506.00284 continua retirada. Fila volta a
-  exigir revisão de portfólio antes de qualquer frente nova.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  FOUND-DUHAMEL-SKELETON-001 autorizada (DEC-069): esqueleto abstrato da
+  formula de Duhamel para o semigrupo do calor, com o termo nao-linear B
+  completamente abstrato (apenas continuo). Ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md.
+  Formalizacao em andamento.
+authorized_action: "FORMALIZATION"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
 portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
 portfolio_review_document_heat_semigroup: "01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
 portfolio_review_document_leray_orthogonal_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"

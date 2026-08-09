@@ -1884,3 +1884,39 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
       - "verificacao independente feita por DOIS processos alem do implementador (esta sessao e o revisor adversarial), exit codes diretos, nunca via pipe"
       - "achados bibliograficos (B, C) preservam o texto de auditoria original, apenas adicionam campos de reverificacao"
+
+  - decision_id: DEC-069
+    date: 2026-08-09
+    decision: >
+      Autorizar e registrar FOUND-DUHAMEL-SKELETON-001: esqueleto
+      abstrato da formula de Duhamel para o semigrupo do calor, com o
+      termo nao-linear B completamente abstrato (apenas continuo, sem
+      estimativa bilinear/Lipschitz), provando apenas que a integral de
+      Bochner do termo de Duhamel esta bem definida.
+    rationale: >
+      Com HEAT-GAP-001 fechado (DEC-068), o semigrupo do calor esta
+      totalmente caracterizado. A continuacao natural e honesta -- sem
+      tocar NS-GAP-001/004 -- e a infraestrutura de tipo que permite
+      sequer ENUNCIAR "solucao branda" em Lean: o termo de Duhamel bem
+      definido. Nenhuma tentativa de ponto fixo, existencia, unicidade ou
+      estimativa da nao-linearidade e autorizada por esta decisao.
+      01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md
+      registra as alternativas descartadas (reabrir os quatro gaps
+      ja reavaliados na revisao estrategica; atacar NS-GAP-001
+      diretamente, proibido pelo stop_condition ja registrado).
+    authority: FORMALIZATION
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
+      - "LAB_STATE.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-DUHAMEL-SKELETON-001), status SCOPED"
+      - "LAB_STATE: active_work_item -> FOUND-DUHAMEL-SKELETON-001"
+      - "labctl.py: allow-list += FOUND-DUHAMEL-SKELETON-001"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "B permanece completamente abstrato; nenhuma estimativa bilinear/Lipschitz e tentada"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"

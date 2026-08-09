@@ -1607,3 +1607,43 @@ queue:
       onda paralela PARALLEL-WAVE-002, autorizada por
       01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md.
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-DUHAMEL-SKELETON-001
+    title: "Esqueleto abstrato da formula de Duhamel para o semigrupo do calor"
+    track: FOUNDATIONS
+    target_statement: >
+      Definir o termo de Duhamel u(t) = S(t)u0 + integral de 0 a t de
+      S(t-s)(B(u(s))) ds, com B : L^2 -> L^2 completamente ABSTRATO
+      (apenas continuo, nenhuma estimativa bilinear/Lipschitz), e provar
+      que a integral de Bochner esta bem definida (integravel) dado u
+      continua em [0,t] e B continua, usando heatOpL2_continuousAt (ja
+      verificado) para a continuidade do integrando.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry, definindo
+      o termo de Duhamel e provando integrabilidade/boa definicao dado
+      hipoteses de continuidade abstratas; instancia positiva com B = 0
+      reduzindo a evolucao linear pura u(t) = S(t)u0.
+    dependencies:
+      - FOUND-HEAT-SEMIGROUP-LAW-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 5
+    external_dependency: "Mathlib"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar a estimativa bilinear/Lipschitz
+      de B (isso e NS-GAP-001/004, fora de escopo); afirmar existencia,
+      unicidade ou ponto fixo de solucao branda; afirmar que Navier-Stokes
+      ficou alcancavel ou que NS-GAP-001/004 tem caminho de prova
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md --
+      continuacao natural da cadeia Sobolev -> Leray -> semigrupo do
+      calor, agora totalmente caracterizado (contracao, simetria, lei de
+      semigrupo, continuidade forte).
+    research_role: FORMAL_FOUNDATION

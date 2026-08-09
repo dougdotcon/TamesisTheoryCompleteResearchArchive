@@ -1,5 +1,71 @@
 # Changelog do laboratório formal
 
+## FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 - 2026-08-09
+
+### O último tijolo mecânico do toolkit abstrato: ponto fixo de Banach
+
+Usuário pediu para continuar. Fila sem itens `SCOPED`/`READY` restantes.
+Pergunta honesta: existe infraestrutura genuína que não exige resolver
+`NS-GAP-001`/`004`? Sim — o teorema de ponto fixo de Banach aplicado ao
+mapa de Duhamel é um fato padrão de EDPs semilineares abstratas
+(Fujita-Kato, Cannone), reutilizável para qualquer `B` hipoteticamente
+Lipschitz, **não específico de Navier-Stokes**. Ver
+`01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md`.
+
+Novo `DuhamelFixedPoint.lean` (257 linhas). Teorema principal:
+
+```text
+exists_unique_mild_solution {L : R≥0} (hB : LipschitzWith L B)
+    (u0 : L²) {T : R} (hT0 : 0 < T) (hTL : T * L < 1) :
+    ∃! u : [0,T] →ᵇ L², ∀ t, u t = duhamelTerm B t u0 (IccExtend u) t
+```
+
+Dado `B` **globalmente** Lipschitz (hipótese explícita, nunca derivada,
+nunca afirmada para o `B` real de Navier-Stokes) e `T*L < 1`, existe
+solução branda **única**, **local** (nunca global), via
+`ContractingWith`/teorema do ponto fixo de Banach (Mathlib) aplicado ao
+mapa de Duhamel totalizado em `BoundedContinuousFunction`.
+
+`lake env lean` e `lake build` completo, ambos `exit 0` (8824 jobs),
+checados diretamente por três processos independentes.
+
+### Revisão adversarial: APPROVED_WITH_NOTES
+
+Este é o resultado de maior risco da sessão inteira — um erro sutil na
+aritmética da constante de contração seria fácil de esconder atrás de
+uma build verde. O revisor traçou a mão a cadeia completa: cota de
+contração do semigrupo (fator 1) × constante de Lipschitz de `B` (fator
+`L`) × comprimento do intervalo (fator `T`) = exatamente `T·L`, sem
+fator faltante ou extra, contra três lemas do Mathlib. Verificou a
+assinatura real de `ContractingWith.fixedPoint` para confirmar
+existência **e** unicidade genuínas. Confirmou que
+`phiTotal_eq_duhamelTerm` liga o ponto fixo de volta à equação real de
+Duhamel, não uma equação mais fraca. Varreu o arquivo inteiro por
+qualquer insinuação de que `B` é/aproxima o `B` real de Navier-Stokes —
+nada encontrado.
+
+**Uma nota real**: o alvo registrado previa `B` Lipschitz numa bola
+(raio `R`); o resultado entregue usa `B` Lipschitz **global** —
+hipótese mais forte, não mais fraca (um caso particular do que seria
+provado com a hipótese na bola, não uma generalização indevida).
+Corrigido em `RESEARCH_QUEUE.yaml`.
+
+### O que NÃO é afirmado
+
+```text
+que o B real de Navier-Stokes satisfaz a hipotese Lipschitz
+que existe solucao global (apenas local, sob a hipotese)
+que Navier-Stokes ficou alcançável, ou que NS-GAP-001/004 tem caminho de prova
+```
+
+### Onde a cadeia para
+
+Sobolev → Leray → semigrupo do calor → termo de Duhamel (bem definição)
+→ ponto fixo abstrato: completa até onde é honesto ir sem a estimativa
+Lipschitz do `B` REAL. Isso é `NS-GAP-001`/`004` — genuinamente aberto.
+A próxima revisão de portfólio pode legitimamente encontrar a fila
+esgotada de novo.
+
 ## FOUND-DUHAMEL-SKELETON-001 - 2026-08-09
 
 ### Termo de Duhamel bem definido, B completamente abstrato

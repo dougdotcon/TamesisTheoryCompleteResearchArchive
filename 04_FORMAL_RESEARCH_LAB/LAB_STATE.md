@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: false
+repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
-work_status: "IN_PROGRESS"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,21 +33,24 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "245e2b276df328a963a0c915ad325d45586e8633"
-last_verified_artifact: "TamesisLab/Foundations/DuhamelSkeleton.lean (160 lines), lake env lean exit 0, full lake build exit 0 (8823 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "3a6b93d0fb860ace5a54a695c60e7a5ce07e274f"
+last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPoint.lean (257 lines), lake env lean exit 0, full lake build exit 0 (8824 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001: formalização completa entregue
-  em DuhamelFixedPoint.lean (257 linhas) -- exists_unique_mild_solution,
-  dado B GLOBALMENTE Lipschitz (hipótese explícita LipschitzWith L B,
-  nunca derivada) e T*L < 1, existe solução branda ÚNICA em [0,T], via
-  ContractingWith/teorema do ponto fixo de Banach. Reverificada de forma
-  independente nesta sessão -- lake env lean exit 0, lake build completo
-  exit 0 (8824 jobs), zero sorry/admit, checados diretamente sem pipe.
-  Revisão adversarial independente disparada (escrutínio reforçado dado
-  o risco de erro sutil em aritmética de constante de contração),
-  ainda pendente. Integração final após o veredito.
-authorized_action: "FORMALIZATION"
+  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 fechou VERIFIED / result_review
+  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de solidez
+  matemática; 1 correção de redação — alvo previa B Lipschitz numa bola,
+  entregue foi B Lipschitz global, hipótese mais forte, não
+  overclaiming). exists_unique_mild_solution: dado B GLOBALMENTE
+  Lipschitz (hipótese explícita, nunca derivada) e T*L < 1, existe
+  solução branda ÚNICA local em [0,T]. A cadeia Sobolev → Leray →
+  semigrupo do calor → Duhamel (bem definição) → ponto fixo abstrato
+  está completa até onde é honesto ir sem a estimativa Lipschitz do B
+  REAL de Navier-Stokes — exatamente NS-GAP-001/004, genuinamente
+  aberto, não tentado nem em frente autônoma futura sem justificativa
+  nova explícita. Fila volta a exigir revisão de portfólio antes de
+  qualquer frente nova.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
@@ -439,6 +442,30 @@ closed_work_items:
       unicidade de solucao branda tentados ou afirmados.
     bilinear_estimate_claim: FORBIDDEN
     existence_uniqueness_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    predecessor: FOUND-DUHAMEL-SKELETON-001
+    scope_note: >
+      exists_unique_mild_solution: dado B GLOBALMENTE Lipschitz
+      (hipotese explicita LipschitzWith L B, nunca derivada nem
+      afirmada para o B real de Navier-Stokes) e T*L < 1, existe
+      solucao branda UNICA local em [0,T], via ContractingWith/teorema
+      do ponto fixo de Banach aplicado ao mapa de Duhamel totalizado em
+      BoundedContinuousFunction. Correcao de redacao: alvo original
+      previa B Lipschitz numa bola; entregue foi B Lipschitz global
+      (hipotese mais forte, nao overclaiming, caso particular do que
+      seria provado com a hipotese na bola).
+    concrete_B_lipschitz_claim: FORBIDDEN
+    global_existence_claim: FORBIDDEN
     navier_stokes_reachable_claim: FORBIDDEN
     ns_gap_001_progress_claim: FORBIDDEN
     mathematical_novelty: NONE

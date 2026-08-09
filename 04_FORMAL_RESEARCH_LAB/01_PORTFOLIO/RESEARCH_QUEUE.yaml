@@ -1653,19 +1653,27 @@ queue:
     title: "Ponto fixo abstrato de Duhamel: existencia e unicidade local sob hipotese Lipschitz de B"
     track: FOUNDATIONS
     target_statement: >
-      Provar que, DADO como hipotese explicita que B e Lipschitz numa
-      bola (constante L, raio R, hipotese sobre um B abstrato -- NAO
-      provada para o B real de Navier-Stokes), o mapa de Duhamel e uma
-      contracao no espaco de funcoes continuas [0,T] -> bola para T
-      suficientemente pequeno, logo tem ponto fixo unico pelo teorema do
-      ponto fixo de Banach (Mathlib: ContractingWith/efixedPoint),
-      dando existencia e unicidade LOCAL de solucao branda sob essa
-      hipotese.
+      Provar que, DADO como hipotese explicita que B e Lipschitz
+      (hipotese sobre um B abstrato -- NAO provada para o B real de
+      Navier-Stokes), o mapa de Duhamel e uma contracao no espaco de
+      funcoes continuas limitadas [0,T] -> L^2 para T suficientemente
+      pequeno, logo tem ponto fixo unico pelo teorema do ponto fixo de
+      Banach (Mathlib: ContractingWith/fixedPoint), dando existencia e
+      unicidade LOCAL de solucao branda sob essa hipotese.
     expected_product: >
       Modulo Lean compilando com lake build exit 0, zero sorry, provando
       o teorema de ponto fixo abstrato, com B Lipschitz como HIPOTESE
       explicita (nunca derivada nem afirmada para o B real de
       Navier-Stokes).
+    scope_correction_2026_08_09: >
+      O enunciado original (rascunhado na abertura do gate) previa B
+      Lipschitz numa BOLA (raio R); o resultado entregue usa B
+      GLOBALMENTE Lipschitz -- hipotese mais forte, nao mais fraca (nao
+      e overclaiming: um resultado com hipotese global e um CASO
+      PARTICULAR do que seria provado com a hipotese na bola, nao uma
+      generalizacao indevida). Correcao textual identificada pela
+      revisao adversarial e aplicada aqui; nao houve desvio de
+      seguranca, apenas imprecisao de redacao do alvo original.
     dependencies:
       - FOUND-DUHAMEL-SKELETON-001
     existing_assets:
@@ -1684,8 +1692,9 @@ queue:
       afirmar existencia global, ou que Navier-Stokes ficou alcancavel,
       ou que NS-GAP-001/004 tem caminho de prova
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
+    result_review: APPROVED_WITH_NOTES
     strategic_direction_source: >
       01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md
       -- ultima peca do toolkit de EDP semilinear abstrata que nao

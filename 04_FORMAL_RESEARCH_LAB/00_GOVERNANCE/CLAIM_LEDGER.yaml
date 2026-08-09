@@ -1528,3 +1528,56 @@ claims:
       - existencia ou unicidade de solucao branda foi provada
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: DUHAMEL-FIXEDPOINT-FORMAL-001
+    short_name: local_mild_solution_exists_unique_given_lipschitz_B
+    exact_statement: >
+      exists_unique_mild_solution: dado {L : R>=0} (hB : LipschitzWith L B)
+      (u0 : L^2) {T : R} (hT0 : 0 < T) (hTL : T * L < 1), existe uma UNICA
+      curva continua limitada u : [0,T] ->b L^2 tal que u(t) = duhamelTerm
+      B t u0 (IccExtend u) t para todo t em [0,T] -- existencia e unicidade
+      LOCAL de solucao branda, SOB a hipotese explicita de que B e
+      GLOBALMENTE Lipschitz (nunca derivada, nunca afirmada para nenhum B
+      concreto ou relacionado a Navier-Stokes). Via teorema do ponto fixo
+      de Banach (Mathlib ContractingWith.fixedPoint) aplicado ao mapa de
+      Duhamel totalizado em BoundedContinuousFunction (Set.Icc 0 T) L^2.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPoint.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_ABSTRACT_DUHAMEL_FIXEDPOINT_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      A hipotese de Lipschitz sobre B e GLOBAL (mais forte que a bola
+      originalmente prevista no alvo registrado -- correcao textual
+      aplicada em RESEARCH_QUEUE.yaml, nao overclaiming: hipotese mais
+      forte e caso particular, nao generalizacao indevida). Apenas
+      existencia LOCAL, nunca global. B permanece completamente
+      hipotetico -- nenhuma tentativa de provar Lipschitz para o B real
+      de Navier-Stokes (revisao adversarial: APPROVED_WITH_NOTES,
+      recompilou por conta propria, tracou a mao a aritmetica da
+      constante de contracao T*L contra tres lemas do Mathlib
+      confirmando ausencia de fator faltante/extra, verificou a
+      assinatura real de ContractingWith.fixedPoint para confirmar
+      existencia E unicidade genuinas, e confirmou que
+      phiTotal_eq_duhamelTerm liga o ponto fixo de volta a equacao real
+      de Duhamel, nao uma equacao mais fraca).
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - DUHAMEL-SKELETON-FORMAL-001
+      - HEAT-SEMIGROUP-LAW-FORMAL-001
+    known_gaps:
+      - "estimativa Lipschitz para o B real de Navier-Stokes: nao tentada,
+         e NS-GAP-001/004"
+      - "existencia global: nao tentada"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_ABSTRACT_DUHAMEL_FIXEDPOINT_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - o B real de Navier-Stokes satisfaz a hipotese Lipschitz
+      - existencia global de solucao foi provada
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

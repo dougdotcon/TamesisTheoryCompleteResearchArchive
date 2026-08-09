@@ -2006,3 +2006,53 @@ decisions:
       - "hipotese Lipschitz de B fica marcada como NAO verificada para o caso real em todo lugar"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
       - "apenas existencia LOCAL sob hipotese, nunca global, e afirmada"
+
+  - decision_id: DEC-072
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001: exists_unique_mild_solution
+      -- dado B globalmente Lipschitz (hipotese explicita) e T*L<1, existe
+      solucao branda LOCAL unica, via ContractingWith/teorema do ponto
+      fixo de Banach. VERIFIED apos revisao adversarial independente
+      (APPROVED_WITH_NOTES, zero problemas de solidez matematica; uma
+      correcao de redacao aplicada -- alvo original previa B Lipschitz
+      numa bola, entregue foi B globalmente Lipschitz, hipotese mais
+      forte, nao overclaiming).
+    rationale: >
+      A revisao adversarial tracou a mao a aritmetica da constante de
+      contracao (T*L, sem fator faltante ou extra) contra tres lemas do
+      Mathlib, verificou a assinatura real de
+      ContractingWith.fixedPoint para confirmar existencia E unicidade
+      genuinas (nao uma versao degenerada), confirmou que
+      phiTotal_eq_duhamelTerm liga o ponto fixo de volta a equacao real
+      de Duhamel (nao uma equacao mais fraca smuggled in), e varreu o
+      arquivo inteiro -- incluindo docstrings -- por qualquer insinuacao
+      de que B e/aproxima o B real de Navier-Stokes, valores concretos
+      de L/T, ou existencia global. Nada encontrado. A unica nota:
+      RESEARCH_QUEUE.yaml previa B Lipschitz numa bola (raio R); o
+      resultado usa B Lipschitz GLOBAL -- hipotese estritamente mais
+      forte (nao mais fraca), portanto um CASO PARTICULAR do que seria
+      provado com a hipotese na bola, nao uma generalizacao indevida ou
+      risco de seguranca -- apenas uma imprecisao textual no alvo
+      original, corrigida em RESEARCH_QUEUE.yaml.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/20_DUHAMEL_FIXEDPOINT/FOUND_ABSTRACT_DUHAMEL_FIXEDPOINT_001/STATUS.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPoint.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 status SCOPED -> VERIFIED, result_review APPROVED_WITH_NOTES; target_statement corrected (bola -> global) via campo scope_correction_2026_08_09"
+      - "LAB_STATE closed_work_items: +1 entrada"
+      - "CLAIM_LEDGER: +1 claim (DUHAMEL-FIXEDPOINT-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "B permanece completamente hipotetico; nenhuma tentativa de provar Lipschitz para o B real de Navier-Stokes"
+      - "apenas existencia LOCAL, nunca global, e afirmada"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8824 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"

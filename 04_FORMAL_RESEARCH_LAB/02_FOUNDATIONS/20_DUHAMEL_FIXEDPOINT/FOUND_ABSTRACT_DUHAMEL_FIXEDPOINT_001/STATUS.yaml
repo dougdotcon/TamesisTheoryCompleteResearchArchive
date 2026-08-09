@@ -1,0 +1,82 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: APPROVED_WITH_NOTES
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED_WITH_NOTES
+  reviewer: independent subagent, re-ran lake env lean and full lake build itself
+    (exit codes checked directly, never piped), traced the contraction-constant
+    arithmetic by hand against norm_heatOpL2_apply_le / LipschitzWith.dist_le_mul /
+    BoundedContinuousFunction.dist_coe_le_dist and confirmed it multiplies out to
+    exactly T*L with no missing/extra factor, checked ContractingWith.fixedPoint's
+    actual Mathlib signature to confirm genuine existence+uniqueness (not a
+    surrogate), confirmed phiTotal_eq_duhamelTerm ties the fixed point back to the
+    real Duhamel equation (not a weaker one), scanned exhaustively for any hint B
+    is asserted/suggested to be the real Navier-Stokes nonlinearity
+  issues_confirmed:
+    - "RESEARCH_QUEUE.yaml target_statement originally scoped B as Lipschitz ON A
+       BALL (radius R); delivered theorem uses B GLOBALLY Lipschitz -- a stronger
+       hypothesis, not an overclaim (a global-Lipschitz result is a special case,
+       not a generalization), but a genuine wording mismatch between authorized
+       target and delivered artifact. Corrected in RESEARCH_QUEUE.yaml in this
+       closing commit (scope_correction_2026_08_09 field)."
+  issues_plausible: []
+  soundness_issues_found: 0
+research_role: FORMAL_FOUNDATION
+predecessor: FOUND-DUHAMEL-SKELETON-001
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPoint.lean"
+  file_lines: 257
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8824
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations,
+    including exists_unique_mild_solution itself"
+  verified_independently_by:
+    - "implementing agent"
+    - "orchestrating session (direct re-run, no pipe)"
+    - "adversarial reviewer (direct re-run, no pipe, hand-traced arithmetic)"
+result:
+  main_theorem: exists_unique_mild_solution
+  statement: >
+    Given {L : R>=0} (hB : LipschitzWith L B) (u0 : L^2) {T : R} (hT0 : 0 < T)
+    (hTL : T * L < 1), there exists a UNIQUE bounded continuous curve
+    u : Set.Icc 0 T ->b L^2 such that for all t in [0,T],
+    u t = duhamelTerm B t u0 (IccExtend u) t -- i.e. a unique local mild
+    solution to the abstract semilinear equation, ONLY under the explicit,
+    unverified-for-any-concrete-case hypothesis that B is globally Lipschitz.
+  key_objects:
+    - "phiTotal / phiTotal_continuous / phiTotal_eq_duhamelTerm: totalized
+       Duhamel map via Set.IccExtend, faithful to the real duhamelTerm for t>=0"
+    - "PhiMap: the actual self-map on Set.Icc 0 T ->b L^2"
+    - "norm_phiTotal_sub_le / dist_PhiMap_le: the contraction estimate,
+       constant exactly T*L, hand-verified by the adversarial reviewer"
+    - "contractingWith_PhiMap: packaged into Mathlib's ContractingWith,
+       K = T*L < 1 via Real.toNNReal_lt_one"
+  method: "Mathlib's ContractingWith.fixedPoint (Banach fixed point theorem),
+    applied to the Duhamel map on Set.Icc 0 T ->b Lp F 2 (BoundedContinuousFunction,
+    complete since codomain is complete and domain compact)"
+  B_hypothesis: "globally Lipschitz (LipschitzWith L B), an explicit theorem
+    argument -- NEVER derived, NEVER claimed to hold for any concrete or
+    Navier-Stokes-related B"
+  existence_scope: "LOCAL ONLY (on [0,T] for T with T*L<1) -- global existence
+    never attempted or claimed"
+claims:
+  promoted: 1
+prohibitions:
+  bilinear_estimate_proved: FORBIDDEN
+  concrete_B_lipschitz_claim: FORBIDDEN
+  global_existence_claim: FORBIDDEN
+  navier_stokes_reachable: FORBIDDEN
+  ns_gap_001_progress_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

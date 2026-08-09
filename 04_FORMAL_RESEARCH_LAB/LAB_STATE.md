@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "millennium"
 active_work_item: "FOUND-CZ-MEAN-ZERO-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,31 +33,25 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "4564786"
-last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean (~384 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry -- verified independently three times (implementer agent, this session, adversarial reviewer)"
+formalized_at_commit: "d9de958"
+last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean (865 lines), lake env lean exit 0 (foreground, 66-line #print axioms log read in full), full lake build exit 0 (8825 jobs), zero sorryAx across 38 declarations, zero forbidden tokens -- verified independently three times (implementer agent, this session, adversarial reviewer with elevated scrutiny)"
 current_blocker: null
 next_single_action: >
-  FOUND-CZ-MEAN-ZERO-001 aberta (SCOPED), terceira extensão nomeada da
-  exceção de DEC-076 (via DEC-078) através de DEC-080. Pesquisa dedicada
-  (sem edição de código, fontes verificadas por leitura direta de PDF —
-  Grafakos, Classical Fourier Analysis, 3ª ed., Springer GTM 249, 2014,
-  Sec.5.1.4/5.2.1-5.2.2) descobriu que média zero para
-  K(y):=D(ŷ,e2,e3)/‖y‖³ — deixada em aberto por
-  FOUND-CZ-KERNEL-DEFINITIONS-001 — é um fato ELEMENTAR, não o cálculo
-  analítico difícil que se supunha: D(θ,e2,e3) é forma quadrática em θ,
-  e sua integral sobre a esfera colapsa via isotropia do tensor de
-  segundo momento para um múltiplo de det(e3,e2,e3)=0 (linha repetida).
-  Re-derivado manualmente nesta revisão, confere. Escopo: (1) isotropia
-  do tensor de segundo momento de sphereSurfaceMeasure; (2) fechamento
-  de mean_zero usando (1); (3) instanciar o termo COMPLETO de
-  CZKernelClass — o primeiro termo completo desta classe no laboratório.
-  O próprio relatório de pesquisa é explícito: isso NÃO alcança
-  limitação L²/L^p (exige maquinaria de Grafakos Prop.5.2.3/Cor.5.2.6,
-  ausente do Mathlib, não alcançável a partir de fourierMulL2 já
-  formalizado) nem toca o operador não-linear real das eq. 2.1/2.2.
-  Usuário escolheu esta opção explicitamente via AskUserQuestion, com
-  essas ressalvas apresentadas. Se a isotropia se revelar intratável,
-  registrar como gap nomeado, não forçar.
+  FOUND-CZ-MEAN-ZERO-001 fechou VERIFIED / result_review APPROVED
+  (revisão adversarial com escrutínio reforçado, terceira frente ligada
+  a NS-GAP-001 e a mais sofisticada matematicamente: zero problemas
+  encontrados, sem ressalvas). Isotropia do tensor de segundo momento de
+  sphereSurfaceMeasure PROVADA em geral — invariância sob TODO
+  LinearIsometryEquiv de E, mais forte que o subgrupo finito
+  originalmente sugerido como alternativa. Campo mean_zero de
+  CZKernelClass fechado para K(y):=D(ŷ,e2,e3)/‖y‖³; resultado
+  czKernelClass_sphereSurfaceMeasure_K é o primeiro termo COMPLETO de
+  CZKernelClass no laboratório. NS-GAP-001 permanece OPEN, anotado com
+  cross-referência: isso NÃO alcança limitação L²/L^p (exige maquinaria
+  de Grafakos Prop.5.2.3/Cor.5.2.6 ausente do Mathlib) nem toca o
+  operador não-linear real das eq. 2.1/2.2 (e3=ω̂(t,x-y) varia com y).
+  Fila volta a exigir revisão de portfólio antes de qualquer frente
+  nova.
   ---
   (histórico anterior preservado abaixo)
   ---
@@ -114,7 +108,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
 portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
@@ -616,6 +610,48 @@ closed_work_items:
       solidez, 1 citacao Mathlib fabricada encontrada
       (contDiffOn_of_forall_contDiffAt, nao usada em nenhuma prova) e
       corrigida para ContDiffAt.contDiffWithinAt.
+    lp_boundedness_claim: FORBIDDEN
+    calderon_zygmund_theorem_claim: FORBIDDEN
+    integral_pv_representation_claim: FORBIDDEN
+    real_ns_solution_estimate_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-CZ-MEAN-ZERO-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    track: millennium
+    governance_exception: DEC-080
+    predecessor: FOUND-CZ-KERNEL-DEFINITIONS-001
+    scope_note: >
+      Fecha o campo mean_zero de CZKernelClass para K(y):=
+      D(y-hat,e2,e3)/||y||^3, deixado em aberto pela frente anterior.
+      Parte A: prova condicional integral_D_eq_zero_of_isotropicSecondMoment
+      -- isotropia do tensor de segundo momento de uma medida implica
+      media zero de D, via D(theta,e2,e3)=(theta.e3)(theta.w),
+      w:=e2xe3, e a identidade de argumento repetido e3.(e2xe3)=0
+      (tripleProduct_self_left, via dot_cross_self do Mathlib). Parte B:
+      isotropia de sphereSurfaceMeasure PROVADA EM GERAL -- invariancia
+      sob TODO LinearIsometryEquiv de E (via
+      LinearIsometryEquiv.measurePreserving do Mathlib propagada pela
+      formula de cone de toSphere), mais forte que o subgrupo finito de
+      permutacao/troca-de-sinal originalmente sugerido como alternativa
+      tratavel. Resultado: czKernelClass_sphereSurfaceMeasure_K, o
+      primeiro termo COMPLETO de CZKernelClass no laboratorio (384->865
+      linhas). Revisao adversarial com escrutinio reforcado (terceira
+      frente ligada a NS-GAP-001, a mais sofisticada matematicamente):
+      APPROVED, sem ressalvas -- recompilou de forma independente no
+      primeiro plano, leu o conteudo matematico completo (nao so as
+      assinaturas), confirmou uso genuino da hipotese de isotropia,
+      confirmou flipCoord/permCoord como isometrias genuinas nao-
+      degeneradas, verificou cada citacao Mathlib contra o codigo-fonte,
+      auditou toda a prosa contra overclaiming (nenhum encontrado).
+    l2_boundedness_claim: FORBIDDEN
     lp_boundedness_claim: FORBIDDEN
     calderon_zygmund_theorem_claim: FORBIDDEN
     integral_pv_representation_claim: FORBIDDEN

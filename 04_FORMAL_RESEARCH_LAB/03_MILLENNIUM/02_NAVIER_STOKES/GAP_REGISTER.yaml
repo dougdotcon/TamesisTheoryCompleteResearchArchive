@@ -51,6 +51,23 @@ gaps:
       estimativa sobre a integral p.v. real foi tentada. Ver
       03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean.
 
+      FOUND-CZ-MEAN-ZERO-001 (DEC-080, terceira extensão nomeada de
+      DEC-076) fechou o campo mean_zero de CZKernelClass para este K:
+      provou isotropia do tensor de segundo momento de
+      sphereSurfaceMeasure (invariância sob TODO LinearIsometryEquiv de
+      E, via LinearIsometryEquiv.measurePreserving do Mathlib) e, com
+      isso, ∫_{S²} D(θ,e2,e3) dσ = 0 (colapso via forma quadrática +
+      det(e3,e2,e3)=0). Resultado: czKernelClass_sphereSurfaceMeasure_K,
+      o primeiro termo COMPLETO de CZKernelClass no laboratório. Revisão
+      adversarial com escrutínio reforçado: APPROVED, sem ressalvas.
+      Ainda NÃO fecha NS-GAP-001: nenhuma limitação L^2/L^p (exigiria
+      derivar um multiplicador de Fourier do núcleo espacial p.v. --
+      maquinaria ausente do Mathlib, não alcançável a partir de
+      fourierMulL2 já formalizado), e o operador real das eq. 2.1/2.2 é
+      não-linear/não-convolução (e3=ω̂(t,x-y) varia com y) --
+      fundamentalmente diferente do núcleo de coeficiente congelado aqui
+      fechado.
+
   - gap_id: NS-GAP-002
     description: "Controle de enstrofia não foi convertido na norma
       necessária (Passos 4-5 do esboço legado)."

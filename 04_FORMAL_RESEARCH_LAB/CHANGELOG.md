@@ -1,5 +1,76 @@
 # Changelog do laboratório formal
 
+## FOUND-CZ-MEAN-ZERO-001 - 2026-08-09
+
+### Primeiro termo COMPLETO de CZKernelClass no laboratório
+
+Terceira extensão nomeada da exceção de `DEC-076` (via `DEC-078`, agora
+`DEC-080`). Uma pesquisa dedicada (sem edição de código, citações
+verificadas por leitura direta de PDF — Loukas Grafakos, *Classical
+Fourier Analysis*, 3ª ed., Springer GTM 249, 2014, §5.1.4/§5.2.1-5.2.2)
+descobriu que o campo `mean_zero` deixado em aberto por
+`FOUND-CZ-KERNEL-DEFINITIONS-001` — supostamente um cálculo analítico
+difícil — é na verdade elementar: `D(θ,e2,e3)` é uma forma quadrática em
+`θ`, e sua integral sobre a esfera colapsa, via isotropia do tensor de
+segundo momento de uma medida rotacionalmente simétrica, para um
+múltiplo de `det(e3,e2,e3)=0` (determinante com linha repetida).
+Apresentado ao usuário com as ressalvas honestas do relatório (isso NÃO
+alcança limitação L², NÃO toca a integral p.v. real) via
+`AskUserQuestion`; usuário escolheu formalizar.
+
+Formalizado em `CalderonZygmundKernelDefinitions.lean` (384 → 865
+linhas):
+
+1. **Parte A** — prova condicional `integral_D_eq_zero_of_isotropicSecondMoment`:
+   isotropia do tensor de segundo momento de uma medida `μ` implica
+   média zero de `D`, via a decomposição `D(θ,e2,e3)=(θ·e3)(θ·w)`
+   (`w:=e2×e3`) e `tripleProduct_self_left` (`e3·(e2×e3)=0`, via
+   `dot_cross_self` do Mathlib).
+2. **Parte B** — isotropia de `sphereSurfaceMeasure` **PROVADA EM
+   GERAL**: invariância sob **todo** `LinearIsometryEquiv` de `E` (mais
+   forte que o subgrupo finito de permutação/troca-de-sinal
+   originalmente cogitado como alternativa tratável), via
+   `LinearIsometryEquiv.measurePreserving` do Mathlib propagada pela
+   fórmula de cone de `Measure.toSphere` (Kudryashov,
+   `HaarToSphere.lean`).
+3. **Resultado**: `czKernelClass_sphereSurfaceMeasure_K` — o **primeiro
+   termo completo de `CZKernelClass` em todo o laboratório**, combinando
+   `homogeneous`, `smooth_off_origin` (já provados) com `mean_zero`
+   (novo), para `e2,e3` fixos arbitrários.
+
+Revisão adversarial com escrutínio reforçado (terceira frente ligada
+diretamente a `NS-GAP-001`, a mais sofisticada matematicamente das
+três): **APPROVED**, sem ressalvas. O revisor recompilou de forma
+independente no primeiro plano, leu o conteúdo matemático completo das
+provas (não apenas as assinaturas), confirmou uso genuíno — não vácuo —
+da hipótese de isotropia, confirmou que `flipCoord`/`permCoord` são
+isometrias genuínas que não degeneram para a identidade, verificou cada
+citação Mathlib com peso de prova contra o código-fonte, e auditou toda
+a prosa em busca de overclaiming (dado que este é o resultado mais forte
+da linha até agora) — nenhum encontrado. Nota de processo: o agente
+implementador travou uma vez esperando uma checagem em segundo plano não
+lida (`#print axioms` revelou depois um `sorryAx` silencioso vindo de
+uma instância `IsFiniteMeasure` faltante — nenhum token `sorry` literal
+foi escrito, mas a síntese de instância falhou silenciosamente); foi
+retomado com instrução explícita de rodar verificações no primeiro
+plano, e a revisão confirmou nenhum resíduo desse incidente.
+
+### O que NÃO foi afirmado
+
+```text
+NENHUMA limitação L² ou L^p de operador integral singular
+NENHUM teorema de Calderón-Zygmund (decomposição, tipo-fraco, interpolação)
+NENHUMA estimativa sobre a integral p.v. real das eq. 2.1/2.2 aplicada a
+  um campo de vorticidade genuíno -- esse operador é não-linear/não-
+  convolução (e3=ω̂(t,x-y) varia com y), fundamentalmente diferente do
+  núcleo de coeficiente congelado aqui fechado
+NENHUM progresso em NS-GAP-001/004
+que Navier-Stokes ficou alcançável, aproximado, ou resolvido
+```
+
+`NS-GAP-001` permanece `OPEN`, anotado com cross-referência a esta
+frente em `GAP_REGISTER.yaml`.
+
 ## FOUND-CZ-KERNEL-DEFINITIONS-001 - 2026-08-09
 
 ### Camada definicional de Calderón-Zygmund em R^3

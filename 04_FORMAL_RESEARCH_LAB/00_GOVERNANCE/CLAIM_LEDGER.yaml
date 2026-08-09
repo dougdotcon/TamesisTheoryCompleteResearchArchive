@@ -1737,3 +1737,71 @@ claims:
       - qualquer afirmacao sobre a integral p.v. real aplicada a vorticidade genuina
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: CZ-MEAN-ZERO-FORMAL-001
+    short_name: calderon_zygmund_kernel_class_complete_instance
+    exact_statement: >
+      Para o nucleo de coeficiente congelado K(y):=D(y-hat,e2,e3)/||y||^3
+      (e2,e3 fixos quaisquer): (1) prova condicional
+      integral_D_eq_zero_of_isotropicSecondMoment -- isotropia do tensor
+      de segundo momento de uma medida implica media zero de D, via
+      D(theta,e2,e3)=(theta.e3)(theta.w), w:=e2xe3, e a identidade de
+      argumento repetido e3.(e2xe3)=0; (2) isotropia de
+      sphereSurfaceMeasure PROVADA em geral -- invariancia sob TODO
+      LinearIsometryEquiv de E (nao apenas o subgrupo finito de
+      permutacao/troca-de-sinal), via LinearIsometryEquiv.measurePreserving
+      (Mathlib) propagada pela formula de cone de toSphere; (3)
+      instanciacao COMPLETA czKernelClass_sphereSurfaceMeasure_K -- o
+      primeiro termo completo de CZKernelClass no laboratorio,
+      combinando homogeneous, smooth_off_origin (ja provados em
+      FOUND-CZ-KERNEL-DEFINITIONS-001) com mean_zero (novo).
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      Fecha um campo estrutural (mean_zero) deixado em aberto pela
+      frente anterior -- NAO prova limitacao L^2 ou L^p de operador
+      algum (exigiria a maquinaria completa de Grafakos
+      Prop.5.2.3/Cor.5.2.6, derivar um multiplicador de Fourier a partir
+      do nucleo espacial p.v., ausente do Mathlib e nao alcancavel a
+      partir de fourierMulL2 ja formalizado nesta sessao), NENHUM
+      teorema de Calderon-Zygmund, NENHUMA estimativa sobre a integral
+      p.v. real das eq. 2.1/2.2 aplicada a um campo de vorticidade
+      genuino. Revisao adversarial com escrutinio reforcado (terceira
+      frente ligada a NS-GAP-001, a mais sofisticada matematicamente das
+      tres): APPROVED, sem ressalvas -- recompilou de forma independente
+      no primeiro plano (nao em segundo plano), leu o conteudo
+      matematico completo (nao apenas as assinaturas), confirmou uso
+      genuino (nao vacuo) da hipotese de isotropia, confirmou que
+      flipCoord/permCoord sao isometrias genuinas e nao degeneram para a
+      identidade, verificou cada citacao Mathlib carregando peso contra
+      o codigo-fonte, e auditou toda a prosa em busca de overclaiming
+      dado que este e o resultado mais forte desta linha -- nenhum
+      encontrado.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: ["CZ-KERNEL-DEFINITIONS-FORMAL-001"]
+    known_gaps:
+      - "limitacao L^2 ou L^p do operador: nao tentada, exige maquinaria
+         ausente do Mathlib (derivar multiplicador de Fourier de nucleo
+         espacial p.v.)"
+      - "teorema de Calderon-Zygmund completo, interpolacao de
+         Marcinkiewicz: nao tentados, fora de escopo"
+      - "integral p.v. real das eq. 2.1/2.2 aplicada a vorticidade
+         genuina: nao tentada -- o operador real e nao-linear/nao-
+         convolucao (e3 varia com y), fundamentalmente diferente do
+         nucleo de coeficiente congelado aqui fechado"
+      - "NS-GAP-001/004: permanece aberto, nao e alvo desta frente"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund (decomposicao/tipo-fraco/interpolacao)
+      - qualquer afirmacao sobre a integral p.v. real aplicada a vorticidade genuina
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

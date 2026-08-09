@@ -2418,3 +2418,68 @@ decisions:
       - "NS-GAP-001/004 permanecem nomeados e abertos"
       - "isotropia de sphereSurfaceMeasure pode ficar registrada como gap nomeado se intratavel -- nao forcada"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"
+
+  - decision_id: DEC-081
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-CZ-MEAN-ZERO-001: campo mean_zero de CZKernelClass
+      fechado para o nucleo de coeficiente congelado K(y):=
+      D(y-hat,e2,e3)/||y||^3, via (1) prova condicional de que isotropia
+      do tensor de segundo momento de uma medida implica media zero de
+      D, e (2) isotropia de sphereSurfaceMeasure PROVADA em geral --
+      invariancia sob todo LinearIsometryEquiv de E, mais forte que o
+      subgrupo finito originalmente sugerido como alternativa. Resultado:
+      czKernelClass_sphereSurfaceMeasure_K, o primeiro termo COMPLETO de
+      CZKernelClass no laboratorio. VERIFIED apos revisao adversarial
+      independente com escrutinio reforcado (APPROVED, sem ressalvas).
+    rationale: >
+      Terceira frente ligada diretamente a NS-GAP-001, e a mais
+      sofisticada matematicamente das tres (argumento de invariancia de
+      medida). Revisao adversarial instruida a escrutinar tanto a
+      compilacao quanto o CONTEUDO matematico (nao apenas as
+      assinaturas). Verificou por conta propria, no primeiro plano:
+      recompilacao independente (lake env lean e lake build completo,
+      ambos exit 0, log de 66 linhas lido por inteiro, zero sorryAx em
+      todas as 38 declaracoes); leitura completa das provas de
+      tripleProduct_self_left (via dot_cross_self do Mathlib, uso real
+      nao vacuo), integral_D_eq_zero_of_isotropicSecondMoment (hipotese
+      de isotropia genuinamente usada, nao decorativa),
+      sphereSurfaceMeasure_map_linearIsometryEquiv (provado para T
+      arbitrario, nao especializado aos casos de uso),
+      sphereSurfaceMeasure_isotropicSecondMoment (argumentos de
+      fora-da-diagonal e diagonal ambos genuinamente presentes e
+      distintos), e flipCoord/permCoord (confirmadas isometrias
+      genuinas, nao degeneram para identidade); verificacao de cada
+      citacao Mathlib com peso de prova contra o codigo-fonte
+      (dot_cross_self, LinearIsometryEquiv.measurePreserving,
+      Measure.toSphere_apply', piLpCongrRight/Left, entre outras);
+      confirmacao de que a estrutura CZKernelClass em si NAO foi
+      enfraquecida entre as duas frentes (diff dos tres campos); e
+      auditoria de prosa linha-a-linha, dado que este e o resultado mais
+      forte da linha ate agora e portanto o de maior risco de
+      overclaiming -- nenhum encontrado. Nota adicional preservada do
+      processo: o agente implementador travou uma vez esperando uma
+      checagem em segundo plano nao lida, foi retomado com instrucao
+      explicita de rodar verificacoes no primeiro plano; a revisao
+      confirmou nenhum residuo desse incidente (sem estado WIP orfao,
+      arvore de trabalho identica ao HEAD).
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/GAP_REGISTER.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-CZ-MEAN-ZERO-001 status SCOPED -> VERIFIED, result_review APPROVED"
+      - "GAP_REGISTER (Navier-Stokes): NS-GAP-001 anotado com cross-reference a esta frente -- status permanece OPEN"
+      - "CLAIM_LEDGER: +1 claim (CZ-MEAN-ZERO-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NS-GAP-001/004 permanecem OPEN, nao alterados por esta frente"
+      - "NENHUMA limitacao L^2 ou L^p, NENHUM teorema de Calderon-Zygmund, NENHUMA estimativa sobre a integral p.v. real foram tentados"
+      - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
+      - "lake env lean e lake build completo confirmados exit 0 (no primeiro plano, nao via checagem em segundo plano nao lida) por dois processos independentes (esta sessao, revisor adversarial)"

@@ -1805,3 +1805,63 @@ claims:
       - qualquer afirmacao sobre a integral p.v. real aplicada a vorticidade genuina
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: DIRICHLET-INTEGRAL-FORMAL-001
+    short_name: dirichlet_oscillatory_integral_standalone
+    exact_statement: >
+      A integral de Dirichlet classica integral(0,infinity) sin(x)/x dx
+      = pi/2 esta provada em Lean como tendsto_integral_sin_div_atTop --
+      Tendsto (fun N => integral x in 0..N, sin x / x) atTop (nhds
+      (pi/2)) -- e sua forma intermediaria via Real.sinc. Rota: truque
+      de Feynman reorganizado para evitar diferenciacao sob integral
+      impropria (nao suportada de forma limpa pelo Mathlib), via troca
+      de uma integral dupla genuinamente FINITA (retangulo compacto,
+      sem Fubini improprio), convergencia dominada, e limite explicito
+      O(1/N) do termo residual. Lema 5.2.5 de Grafakos (o limite
+      log(1/|a|)) NAO foi tentado -- decisao de escopo deliberada, nao
+      lacuna descoberta -- documentado no proprio arquivo, incluindo o
+      achado de que a parte real (5.2.10)/(5.2.11) NAO precisa desta
+      integral (prova FTC autonoma), so a parte complexa (5.2.12)/
+      (5.2.13) a consome, e mesmo assim falta um lema de limitacao
+      uniforme adicional.
+    domain: real_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/DirichletOscillatoryIntegral.lean"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      Item de fundamentos standalone, general-purpose, NAO especifico de
+      Navier-Stokes -- sem qualquer conexao a CZKernelClass, ao nucleo
+      D, a fourierMulL2, ou a distribuicoes de valor principal nesta
+      frente. Revisao adversarial: APPROVED, sem ressalvas -- recompilou
+      de forma independente (log vazio, zero avisos), reconstruiu o
+      footprint de axiomas por conta propria (18 declaracoes, apenas
+      [propext, Classical.choice, Quot.sound]), re-derivou a matematica
+      a mao em cada passo nao-trivial (sem erro de sinal, sem
+      circularidade, constantes corretas), verificou cada citacao
+      Mathlib contra o codigo-fonte, e confirmou a citacao de Grafakos
+      contra o OCR em cache da fonte primaria -- nenhum problema
+      encontrado.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "Lema 5.2.5 de Grafakos (limite log(1/|a|), formas real e
+         complexa) nao formalizado -- decisao de escopo, nao lacuna
+         Mathlib descoberta"
+      - "mesmo apos Lema 5.2.5, a Proposicao 5.2.3 completa exige um
+         construtor de distribuicoes de valor principal que o Mathlib
+         nao tem -- ver RESEARCH_SCOPING_SINGULAR_INTEGRAL_INFRASTRUCTURE_2026_08_09.md"
+      - "nenhuma conexao a CZKernelClass, ao nucleo D, ou a
+         fourierMulL2 tentada nesta frente"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - Lema 5.2.5 de Grafakos foi provado
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer conexao a CZKernelClass, ao nucleo D, ou a fourierMulL2
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

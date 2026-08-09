@@ -1,5 +1,72 @@
 # Changelog do laboratório formal
 
+## FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001 - 2026-08-09
+
+### Integral de Dirichlet formalizada — primeiro item de análise real pura do dia
+
+Depois que a linha Constantin-Fefferman/Calderón-Zygmund fechou seu
+terceiro gate (`FOUND-CZ-MEAN-ZERO-001`), uma checagem rigorosa de
+exaustão de fila (terceira do dia) confirmou que nenhuma frente nova
+estava pronta para execução autônoma. Apresentado ao usuário o dilema:
+parar por aqui ou investir em construir infraestrutura de integral
+singular. O usuário escolheu investir; uma pesquisa de escopo dedicada
+(citações re-verificadas por leitura direta do PDF de Grafakos, não
+confiadas de pesquisa anterior) identificou a menor unidade irredutível
+de trabalho em qualquer rota rumo a limitação L²/L^p do núcleo
+Constantin-Fefferman: a integral de Dirichlet clássica.
+
+Formalizado em `02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/DirichletOscillatoryIntegral.lean`
+(461 linhas, item standalone, general-purpose, **não** específico de
+Navier-Stokes):
+
+- **`tendsto_integral_sin_div_atTop`**: `∫₀^N (sin x)/x dx → π/2` quando
+  `N → ∞` — a integral de Dirichlet, na forma padrão não-degenerada.
+- Rota: truque do parâmetro de Feynman reorganizado para evitar
+  diferenciação sob integral imprópria (que o Mathlib não suporta de
+  forma limpa) — via formas fechadas elementares por FTC, troca de uma
+  integral dupla genuinamente FINITA sobre um retângulo compacto (sem
+  Fubini impróprio), convergência dominada quando o parâmetro de Laplace
+  `→ ∞`, e um limitante explícito `O(1/N)` para o termo residual.
+- O Lema 5.2.5 completo de Grafakos (o limite `log(1/|a|)`) **NÃO** foi
+  tentado — decisão de escopo deliberada, documentada honestamente no
+  próprio arquivo. Achado relevante para quem continuar: a parte real do
+  lema, (5.2.10)/(5.2.11), é **independente** desta integral (prova FTC
+  autônoma via integração por partes) — tarefa futura separada, tamanho
+  comparável. Só a parte complexa, (5.2.12)/(5.2.13), consome o que foi
+  provado aqui, e mesmo assim falta um lema de limitação uniforme
+  adicional.
+
+Revisão adversarial: **APPROVED**, sem ressalvas. O revisor recompilou
+de forma independente (log vazio, zero avisos), reconstruiu por conta
+própria o footprint de axiomas para as 18 declarações (o arquivo não
+embute `#print axioms`, checado separadamente — zero `sorryAx`, apenas
+`[propext, Classical.choice, Quot.sound]`), re-derivou a mão cada passo
+matemático não-trivial (sem erro de sinal, sem circularidade), verificou
+cada citação Mathlib contra o código-fonte, e — passo notável —
+reencontrou o cache OCR do PDF de Grafakos desta mesma sessão para
+confirmar a citação sobre a independência da parte real do Lema 5.2.5
+contra o texto literal da fonte primária.
+
+### O que NÃO foi afirmado
+
+```text
+NÃO prova o Lema 5.2.5 completo de Grafakos
+NÃO toca a Proposição 5.2.3, distribuições de valor principal, ou
+  qualquer multiplicador de Fourier
+NENHUMA conexão a CZKernelClass, ao núcleo D, ou a fourierMulL2
+NENHUMA limitação L² ou L^p de operador
+NENHUM progresso em NS-GAP-001/004
+que Navier-Stokes ficou alcançável, aproximado, ou resolvido
+```
+
+Separadamente, a pedido do usuário, foi compilado (diretamente na
+conversa, não como documento de governança) um inventário completo da
+infraestrutura ainda ausente para a linha Calderón-Zygmund (decomposição
+CZ, cubos diádicos, função maximal de Hardy-Littlewood, interpolação de
+Marcinkiewicz, BMO, Cotlar-Stein, distribuições de valor principal,
+harmônicos esféricos) e das cinco condições de reativação de
+`RH-NOGO-001`, nenhuma satisfeita.
+
 ## FOUND-CZ-MEAN-ZERO-001 - 2026-08-09
 
 ### Primeiro termo COMPLETO de CZKernelClass no laboratório

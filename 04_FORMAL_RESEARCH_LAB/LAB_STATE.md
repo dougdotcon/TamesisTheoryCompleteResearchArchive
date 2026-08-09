@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "FOUNDATIONS"
 active_work_item: "FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,33 +33,36 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "d9de958"
-last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean (865 lines), lake env lean exit 0 (foreground, 66-line #print axioms log read in full), full lake build exit 0 (8825 jobs), zero sorryAx across 38 declarations, zero forbidden tokens -- verified independently three times (implementer agent, this session, adversarial reviewer with elevated scrutiny)"
+formalized_at_commit: "b3e66ea"
+last_verified_artifact: "02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/DirichletOscillatoryIntegral.lean (461 lines), lake env lean exit 0 (foreground, empty log), full lake build exit 0 (8825 jobs), zero sorryAx across 18 declarations (independently reconstructed via #print axioms, not embedded in the file), zero forbidden tokens -- verified independently three times (implementer agent, this session, adversarial reviewer who also cross-checked the Grafakos citation against cached primary-source OCR)"
 current_blocker: null
 next_single_action: >
-  FOUND-CZ-MEAN-ZERO-001 fechou VERIFIED / result_review APPROVED
-  (revisão adversarial com escrutínio reforçado, terceira frente ligada
-  a NS-GAP-001 e a mais sofisticada matematicamente: zero problemas
-  encontrados, sem ressalvas). czKernelClass_sphereSurfaceMeasure_K é o
-  primeiro termo COMPLETO de CZKernelClass no laboratório. Revisão de
-  portfólio subsequente (PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md,
-  terceira checagem de exaustão do dia) confirmou, com rigor -- não
-  presunção -- que nenhuma frente nova legítima resta: RESEARCH_QUEUE
-  inteira VERIFIED exceto TOE-INTERFACE-001 (bloqueada, dependência
-  RH-NOGO-001 congelada) e RH-NOGO-001 em si; as cinco condições de
-  reativação de RH-NOGO-001 checadas explicitamente uma a uma —
-  inclusive contra FOUND-SPECTRAL-COUNTING-001, construído nesta mesma
-  sessão, cujo próprio stop_condition proíbe conectar à lei de Weyl
-  global ou a RH — nenhuma ocorreu. A linha Constantin-
-  Fefferman/Calderón-Zygmund (a mais produtiva do dia) atingiu seu
-  limite honesto: o próximo passo real exige teoria de integral
-  singular/Calderón-Zygmund ausente do Mathlib, um empreendimento de
-  escala muito maior que qualquer frente aberta hoje. `authorized_action`
-  passou a `NO_AUTONOMOUS_WORK_AVAILABLE`. Próxima frente exige: (1) uma
-  condição de reativação de RH-NOGO-001 ocorrer de fato, (2) decisão
-  explícita do usuário sobre investir em construir infraestrutura de
-  integral singular, ou (3) um colaborador especializado assumir
-  NS-GAP-001/004 ou a teoria necessária à linha Constantin-Fefferman.
+  FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001 fechou VERIFIED / result_review
+  APPROVED (revisão adversarial: zero problemas, incluindo re-verificação
+  da citação de Grafakos contra o OCR em cache da fonte primária).
+  Integral de Dirichlet integral(0,infinity) sin(x)/x dx = pi/2 provada
+  em Lean (tendsto_integral_sin_div_atTop), item standalone de
+  fundamentos gerais, escolhido pelo usuário após a terceira checagem de
+  exaustão do dia (PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md) e
+  a pesquisa de escopo (RESEARCH_SCOPING_SINGULAR_INTEGRAL_INFRASTRUCTURE_2026_08_09.md)
+  que identificou esta integral como a menor unidade irredutível de
+  trabalho em qualquer rota rumo a limitação L²/L^p do núcleo
+  Constantin-Fefferman. Lema 5.2.5 completo de Grafakos NÃO tentado --
+  decisão de escopo deliberada, documentada honestamente no próprio
+  arquivo, com o achado de que sua parte real é independente desta
+  integral (tarefa futura separada, tamanho comparável). NENHUMA conexão
+  a CZKernelClass/fourierMulL2/distribuições p.v. feita. Um usuário
+  pediu, à parte, um inventário completo do que falta (infraestrutura
+  CZ/integral singular ausente do Mathlib, e as cinco condições de
+  reativação de RH-NOGO-001) — respondido diretamente na conversa, não
+  como documento de governança separado. `authorized_action` volta a
+  `PORTFOLIO_REVIEW_REQUIRED`. Próxima frente exige revisão de
+  portfólio: candidatos honestos incluem (a) o Lema 5.2.5 completo de
+  Grafakos como continuação direta, (b) o construtor de distribuições de
+  valor principal necessário para a Proposição 5.2.3, ou (c) qualquer
+  uma das três condições já nomeadas em ciclos anteriores (reativação de
+  RH-NOGO-001, decisão do usuário sobre investimento maior, colaborador
+  especializado).
   ---
   (histórico anterior preservado abaixo)
   ---
@@ -116,7 +119,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
@@ -668,6 +671,50 @@ closed_work_items:
     real_ns_solution_estimate_claim: FORBIDDEN
     navier_stokes_reachable_claim: FORBIDDEN
     ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    track: FOUNDATIONS
+    governance_exception: DEC-082
+    predecessor: null
+    scope_note: >
+      Prova a integral de Dirichlet classica
+      integral(0,infinity) sin(x)/x dx = pi/2 (tendsto_integral_sin_div_atTop),
+      item standalone de fundamentos gerais, escolhido apos a pesquisa
+      de escopo que identificou esta integral como a menor unidade
+      irredutivel de trabalho em qualquer rota rumo a limitacao L^2/L^p
+      do nucleo Constantin-Fefferman. Rota: truque de Feynman
+      reorganizado para evitar diferenciacao sob integral impropria, via
+      troca de uma integral dupla genuinamente finita (retangulo
+      compacto, sem Fubini improprio), convergencia dominada, limitante
+      explicito O(1/N). Lema 5.2.5 completo de Grafakos NAO tentado --
+      decisao de escopo deliberada, documentada honestamente no proprio
+      arquivo, com o achado de que sua parte real (5.2.10)/(5.2.11) e
+      independente desta integral (prova FTC autonoma; tarefa futura
+      separada, tamanho comparavel) -- so a parte complexa (5.2.12)/
+      (5.2.13) a consome, e mesmo assim falta um lema de limitacao
+      uniforme adicional. Revisao adversarial: APPROVED, sem ressalvas
+      -- recompilou de forma independente (log vazio, zero avisos),
+      reconstruiu por conta propria o footprint de axiomas (18
+      declaracoes, so [propext, Classical.choice, Quot.sound]),
+      re-derivou a mao cada passo matematico nao-trivial, verificou cada
+      citacao Mathlib contra o codigo-fonte, e re-verificou a citacao de
+      Grafakos contra o OCR em cache da fonte primaria.
+    l2_boundedness_claim: FORBIDDEN
+    lp_boundedness_claim: FORBIDDEN
+    calderon_zygmund_theorem_claim: FORBIDDEN
+    integral_pv_representation_claim: FORBIDDEN
+    real_ns_solution_estimate_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    cz_kernel_connection_claim: FORBIDDEN
+    grafakos_lemma_525_complete_claim: FORBIDDEN
     mathematical_novelty: NONE
     research_role: FORMAL_FOUNDATION
 frozen_work_items:

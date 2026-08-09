@@ -2217,3 +2217,52 @@ decisions:
       - "NS-GAP-001/004 permanecem nomeados e abertos"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"
       - "a excecao e nomeada e auditavel -- nao uma remocao geral de salvaguardas contra overclaiming"
+
+  - decision_id: DEC-077
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-CF-DEPLETION-KERNEL-001: nucleo algebrico
+      D(e1,e2,e3):=(e1.e3)*det(e1,e2,e3) do mecanismo de
+      Constantin-Fefferman 1993 -- depleção exata D(e1,e2,e2)=0, cota
+      quantitativa |D|<=||e2-e3|| (constante 1) para vetores unitarios,
+      instancia concreta nao-degenerada. VERIFIED apos revisao
+      adversarial independente com escrutinio reforcado
+      (APPROVED_WITH_NOTES, zero problemas de solidez matematica; uma
+      frase reformulada por precaucao de leitura).
+    rationale: >
+      Dada a sensibilidade desta frente (primeira ligada diretamente a
+      NS-GAP-001 e a uma excecao nomeada de governanca), a revisao
+      adversarial foi instruida a escrutinar tanto a matematica quanto
+      CADA PALAVRA do texto ao redor com cuidado extra. Verificou por
+      conta propria: assinatura real dos lemas do Mathlib usados
+      (triple_product_eq_det, cross_self, norm_ofLp_crossProduct) contra
+      o codigo-fonte do Mathlib; aritmetica exata da instancia concreta
+      via script Python independente (D=588/15625, confirmado); uso
+      genuino de cada hipotese (‖e1‖,‖e2‖,‖e3‖<=1) na cadeia de
+      desigualdades, nenhuma vestigial; ausencia de registro no
+      agregador compartilhado TamesisLab.lean (mantendo a fronteira
+      entre o track de Milenio e Foundations). Unica nota: uma frase
+      ("conectando diretamente à hipótese de Lipschitz... do teorema
+      real") foi julgada mais forte do que ideal para um arquivo desta
+      sensibilidade -- corrigida para "mesma forma qualitativa,
+      NAO uma implicacao formal" antes do fechamento.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/GAP_REGISTER.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-CF-DEPLETION-KERNEL-001 status SCOPED -> VERIFIED, result_review APPROVED_WITH_NOTES"
+      - "GAP_REGISTER (Navier-Stokes): NS-GAP-001 anotado com cross-reference a esta frente e ao achado do Q.E.D. indevido em RIGOROUS_DERIVATIONS.md -- status permanece OPEN"
+      - "CLAIM_LEDGER: +1 claim (CF-DEPLETION-KERNEL-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NS-GAP-001/004 permanecem OPEN, nao alterados por esta frente"
+      - "a representacao integral p.v. real e o teorema completo de Constantin-Fefferman permanecem fora de escopo"
+      - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8825 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"

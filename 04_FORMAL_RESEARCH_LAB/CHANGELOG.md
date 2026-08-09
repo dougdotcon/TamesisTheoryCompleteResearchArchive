@@ -1,5 +1,83 @@
 # Changelog do laboratório formal
 
+## FOUND-CF-DEPLETION-KERNEL-001 - 2026-08-09
+
+### Exceção nomeada de governança, fundamentada em fonte real
+
+Usuário pediu para reavaliar a estrutura de governança para continuar
+atacando `NS-GAP-001`, com liberdade para registrar frente nova, desde
+que fundamentada exclusivamente em conceitos e filosofias de Tamesis já
+citados. Antes de aceitar essa premissa, uma exploração completa de
+cinco clusters do corpus Tamesis (`01_TAMESIS_CORE`, `90_LEGACY`,
+`RECURSOS_PARA_PESQUISA`) foi feita em paralelo — ver
+`09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md`. Veredito:
+nenhum conteúdo de análise harmônica/Calderón-Zygmund utilizável em
+lugar nenhum, confirmado pelas próprias autoauditorias do corpus
+(`ToE_Refutation`: "bonita, mas não é uma Teoria de Tudo", erro de 24
+ordens de magnitude; `RELATORIO_INTEGRAL_DO_PROGRAMA_TAMESIS_2026.md`:
+"a ambição de ToE foi refutada pelo próprio programa"). Achado
+registrado: `RIGOROUS_DERIVATIONS.md` rotula indevidamente "Q.E.D." um
+argumento heurístico de escala para o Lemma 3.1/`NS-GAP-001`.
+
+Diante disso, o usuário escolheu formalizar Constantin-Fefferman 1993
+— um resultado real, publicado, citável (*Indiana Univ. Math. J.* 42,
+1993, 775-789; equações restatadas em Siran Li, *Acta Math. Sci.*
+40(6), 2020, arXiv:1712.00551). `DEC-076` abriu uma exceção **nomeada e
+delimitada** ao `stop_condition` de `NS-PRESSURE-001` — não uma
+remoção geral das salvaguardas contra overclaiming.
+
+### O que foi formalizado
+
+Não o teorema completo (exige teoria de soluções fracas de
+Leray-Hopf, fora de escopo) — o **núcleo algébrico isolado** do
+mecanismo:
+
+```text
+D(e1,e2,e3) := (e1·e3)·det(e1,e2,e3)              (eq. 2.3)
+
+D_self_right       D(e1,e2,e2) = 0 -- depleção EXATA quando as
+                    direções coincidem (determinante alternado).
+abs_D_le            |D(e1,e2,e3)| <= ||e2-e3|| para vetores unitários
+                    -- constante exatamente 1, sem enfraquecimento.
+concrete_depletion  instância racional não-degenerada (triplas
+                    3-4-5/7-24-25): D = 588/15625, cota respeitada
+                    com margem.
+```
+
+Novo arquivo standalone `ConstantinFeffermanDepletionKernel.lean`
+(266 linhas), no track de Milênio (`03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/`,
+mesmo padrão de `PressureHessianAlgebra.lean`), **não** registrado no
+agregador compartilhado `TamesisLab.lean` — mantendo a fronteira entre
+o track de Milênio e a biblioteca Foundations.
+
+### Revisão adversarial com escrutínio reforçado
+
+Dada a sensibilidade (primeira frente ligada diretamente a
+`NS-GAP-001`), o revisor foi instruído a escrutinar tanto a matemática
+quanto cada palavra do texto ao redor. Verificou por conta própria: a
+assinatura real dos lemas do Mathlib usados
+(`triple_product_eq_det`, `cross_self`, `norm_ofLp_crossProduct`)
+contra o código-fonte; a aritmética exata da instância concreta via
+script Python independente; uso genuíno de cada hipótese na cadeia de
+desigualdades. **Verdict: APPROVED_WITH_NOTES** — zero problemas de
+solidez; uma frase ("conectando diretamente à hipótese de Lipschitz...
+do teorema real") julgada mais forte do que ideal, corrigida para
+"mesma forma qualitativa, NÃO uma implicação formal" antes do
+fechamento.
+
+### O que NÃO é afirmado
+
+```text
+que a representação integral p.v. (eq. 2.1/2.2) foi provada
+que o teorema completo de Constantin-Fefferman foi formalizado
+que qualquer estimativa sobre soluções reais de Navier-Stokes foi provada
+que NS-GAP-001/004 foi resolvido, aproximado, ou tem caminho de prova
+que Navier-Stokes ficou alcançável
+```
+
+`NS-GAP-001` permanece `OPEN` em `GAP_REGISTER.yaml`, anotado com
+cross-referência a esta frente e ao achado do "Q.E.D." indevido.
+
 ## FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 - 2026-08-09
 
 ### Fechando a última lacuna: instância positiva concreta

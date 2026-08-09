@@ -1617,3 +1617,58 @@ claims:
       - concreteB e ou aproxima o B real de Navier-Stokes
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: CF-DEPLETION-KERNEL-FORMAL-001
+    short_name: constantin_fefferman_algebraic_depletion_kernel
+    exact_statement: >
+      O nucleo geometrico D(e1,e2,e3) := (e1.e3)*det(e1,e2,e3) do
+      mecanismo de Constantin-Fefferman 1993 (Indiana Univ. Math. J. 42,
+      775-789; eq. 2.1-2.3 restatadas em Siran Li, Acta Math. Sci.
+      40(6) 2020, arXiv:1712.00551) satisfaz: (1) depleção EXATA
+      D(e1,e2,e2)=0 quando as direcoes coincidem; (2) cota quantitativa
+      |D(e1,e2,e3)| <= ||e2-e3|| para vetores unitarios (constante
+      exatamente 1, sem enfraquecimento). Instancia concreta
+      nao-degenerada com vetores racionais (triplas 3-4-5/7-24-25):
+      D = 588/15625 (nao-nulo), cota ||e2-e3||=sqrt(2)/5 respeitada com
+      margem.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
+      - "04_FORMAL_RESEARCH_LAB/09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md"
+    historical_wording: ""
+    current_wording: >
+      Apenas o nucleo algebrico ISOLADO (funcao de tres vetores em R^3,
+      sem integral, sem teoria de solucao fraca) e formalizado -- NAO a
+      representacao integral p.v. real (eq. 2.1/2.2), NAO o teorema
+      completo de Constantin-Fefferman, NAO nenhuma estimativa sobre
+      solucoes reais de Navier-Stokes. A cota tem a MESMA FORMA
+      QUALITATIVA da hipotese de Lipschitz do teorema real, NAO e uma
+      etapa de prova dele -- distincao explicita, corrigida apos nota
+      da revisao adversarial (frase original "conectando diretamente"
+      suavizada para evitar leitura apressada como progresso de prova).
+      Revisao adversarial: APPROVED_WITH_NOTES -- recompilou por conta
+      propria, verificou a aritmetica da cota de contracao e da
+      instancia concreta por script independente, tracou a assinatura
+      real dos lemas do Mathlib usados (triple_product_eq_det,
+      cross_self, norm_ofLp_crossProduct), confirmou arquivo standalone
+      nao registrado no agregador compartilhado.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "representacao integral p.v. (eq 2.1/2.2): nao tentada"
+      - "teorema completo de Constantin-Fefferman: nao tentado, exige
+         teoria de solucoes fracas de Leray-Hopf"
+      - "NS-GAP-001/004: permanece aberto, nao e alvo desta frente"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - prova do teorema de Constantin-Fefferman
+      - qualquer afirmacao sobre a representacao integral p.v. real
+      - qualquer estimativa sobre solucoes reais de Navier-Stokes
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

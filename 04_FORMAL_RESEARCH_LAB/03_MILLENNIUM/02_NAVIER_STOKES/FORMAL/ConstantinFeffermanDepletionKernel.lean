@@ -37,11 +37,14 @@ Formalizamos aqui, e apenas aqui:
 1. `D e1 e2 e2 = 0` — depleção EXATA quando as direções coincidem
    (o determinante com duas linhas iguais se anula; forma alternada).
 2. Uma cota quantitativa `|D e1 e2 e3| ≤ ‖e2 - e3‖` para `‖e1‖,‖e2‖,‖e3‖
-   ≤ 1` — conectando diretamente à hipótese de Lipschitz
-   `|sin φ(t,x,y)| ≤ |x-y|/ρ` do teorema real (Li 2020, eq. 1.7/1.9):
-   quando a direção da vorticidade varia pouco (`‖e2-e3‖` pequeno), o
-   núcleo de estiramento `D` também é pequeno, mesmo antes de qualquer
-   análise da integral.
+   ≤ 1` — com a MESMA FORMA QUALITATIVA da hipótese de Lipschitz
+   `|sin φ(t,x,y)| ≤ |x-y|/ρ` do teorema real (Li 2020, eq. 1.7/1.9),
+   NÃO uma implicação formal dela: esta é uma observação estrutural
+   sobre o núcleo algébrico isolado, não uma etapa de prova do teorema.
+   Quando a direção da vorticidade varia pouco (`‖e2-e3‖` pequeno), o
+   núcleo `D` também é pequeno — mas conectar isso à integral p.v. real
+   exigiria a análise harmônica que esta frente explicitamente não
+   tenta.
 3. Uma instância numérica concreta, não-vazia, exibindo o fenômeno de
    depleção: `D` pequeno quando `e2`, `e3` estão próximos.
 

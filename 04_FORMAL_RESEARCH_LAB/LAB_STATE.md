@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: false
+repository_clean: true
 active_track: "millennium"
 active_work_item: "FOUND-CF-DEPLETION-KERNEL-001"
-work_status: "IN_PROGRESS"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,25 +33,36 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "11e90dbaa47b5bbd492db8fe3ede3888c9f14e08"
-last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPointInstance.lean (114 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "4a46b13ceb56d6e37ab46bae007302ffa294c2fd"
+last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean (266 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  Pedido explícito do usuário: reavaliar a governança para continuar
-  atacando, fundamentado exclusivamente em fontes reais verificadas.
-  Exploração completa de cinco clusters do corpus Tamesis
+  FOUND-CF-DEPLETION-KERNEL-001 fechou VERIFIED / result_review
+  APPROVED_WITH_NOTES (revisão adversarial com escrutínio reforçado:
+  0 problemas de solidez matemática; 1 frase reformulada por precaução
+  de leitura, corrigida). Núcleo algébrico de Constantin-Fefferman 1993
+  formalizado: depleção exata + cota quantitativa + instância concreta
+  não-degenerada. NS-GAP-001 permanece OPEN, anotado com
+  cross-referência. A representação integral p.v. real e o teorema
+  completo permanecem fora de escopo. Fila volta a exigir revisão de
+  portfólio antes de qualquer frente nova.
+  ---
+  Contexto: pedido explícito do usuário de reavaliar a governança para
+  continuar atacando, fundamentado exclusivamente em fontes reais
+  verificadas. Exploração completa de cinco clusters do corpus Tamesis
   (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md) não
   encontrou nenhuma alavanca de análise harmônica/Calderón-Zygmund
   utilizável — confirmado pelas próprias autoauditorias do corpus.
   Achado registrado: RIGOROUS_DERIVATIONS.md (fora deste laboratório)
   rotula indevidamente "Q.E.D." um argumento heurístico para o Lemma
   3.1/NS-GAP-001. Direção escolhida pelo usuário: formalizar
-  Constantin-Fefferman 1993 (fonte real, citável). DEC-076 abre uma
+  Constantin-Fefferman 1993 (fonte real, citável). DEC-076 abriu uma
   exceção NOMEADA e DELIMITADA ao stop_condition de NS-PRESSURE-001:
   FOUND-CF-DEPLETION-KERNEL-001, o núcleo algébrico de depleção
   geométrica D(e1,e2,e3):=(e1·e3)·det(e1,e2,e3) — NÃO o teorema
-  completo, que continua fora de escopo. Formalização em andamento.
-authorized_action: "FORMALIZATION"
+  completo, que continua fora de escopo. Formalização concluída e
+  fechada (ver início deste campo).
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
@@ -491,6 +502,33 @@ closed_work_items:
       deixada por FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 (ausencia de
       instancia positiva).
     concrete_B_navier_stokes_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-CF-DEPLETION-KERNEL-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    track: millennium
+    governance_exception: DEC-076
+    scope_note: >
+      Nucleo algebrico isolado D(e1,e2,e3):=(e1.e3)*det(e1,e2,e3) do
+      mecanismo de Constantin-Fefferman 1993 (Indiana Univ. Math. J. 42,
+      775-789; eq. 2.1-2.3 via Li 2020, arXiv:1712.00551): depleção
+      exata D(e1,e2,e2)=0, cota quantitativa |D|<=||e2-e3|| (constante
+      1) para vetores unitarios, instancia concreta nao-degenerada
+      (D=588/15625, triplas racionais 3-4-5/7-24-25). Revisao
+      adversarial com escrutinio reforcado (primeira frente ligada
+      diretamente a NS-GAP-001): APPROVED_WITH_NOTES, zero problemas de
+      solidez, uma frase reformulada por precaucao de leitura ("mesma
+      forma qualitativa", nao "conectando diretamente").
+    integral_pv_representation_claim: FORBIDDEN
+    full_constantin_fefferman_theorem_claim: FORBIDDEN
+    real_ns_solution_estimate_claim: FORBIDDEN
     navier_stokes_reachable_claim: FORBIDDEN
     ns_gap_001_progress_claim: FORBIDDEN
     mathematical_novelty: NONE

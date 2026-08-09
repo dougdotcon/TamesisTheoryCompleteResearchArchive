@@ -1565,3 +1565,43 @@ queue:
       pesquisa, nao decisao de execucao"). Nao e um gate autonomo
       decidindo por conta propria.
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-HEAT-SEMIGROUP-LAW-001
+    title: "Lei de semigrupo e continuidade forte do semigrupo do calor em L^2"
+    track: FOUNDATIONS
+    target_statement: >
+      Fechar HEAT-GAP-001: provar heatOpL2 (t+r) = heatOpL2 t ∘L heatOpL2 r
+      (t, r >= 0) via algebra sobre o produto pontual dos simbolos
+      heatSymbolL2 em Lp-infinito, e continuidade forte de t ↦ heatOpL2 t
+      -- ambos deixados deliberadamente abertos em FOUND-HEAT-SEMIGROUP-001.
+    expected_product: >
+      Modulo Lean (extensao de HeatSemigroup.lean ou novo arquivo)
+      compilando com lake build exit 0, zero sorry, provando a lei de
+      semigrupo E/OU continuidade forte -- se apenas uma das duas se
+      mostrar tratavel nesta frente, fechar parcialmente e registrar a
+      outra como gap remanescente nomeado, nao forcar as duas.
+    dependencies:
+      - FOUND-HEAT-SEMIGROUP-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/FourierMultiplierL2.lean"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 4
+    external_dependency: "Mathlib"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; instalar IsSelfAdjoint/adjoint sem
+      resolver a incompatibilidade de instancia Module ja documentada
+      (nao e o alvo desta frente); afirmar que Navier-Stokes ficou
+      alcancavel ou que NS-GAP-001/004 tem caminho de prova
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      Continuacao direta do gap que a propria sessao anterior abriu de
+      proposito (HEAT-GAP-001) -- nao frente nova inventada. Parte da
+      onda paralela PARALLEL-WAVE-002, autorizada por
+      01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md.
+    research_role: FORMAL_FOUNDATION

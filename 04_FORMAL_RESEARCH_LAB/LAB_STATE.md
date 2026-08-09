@@ -14,14 +14,22 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: true
+repository_clean: false
 active_track: "foundations"
-active_work_item: "FOUND-HEAT-SEMIGROUP-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-HEAT-SEMIGROUP-LAW-001"
+active_work_items:
+  - "FOUND-HEAT-SEMIGROUP-LAW-001"
+  - "NS-GAP-005-RECHECK"
+  - "YM-GAP-007-RECHECK"
+active_work_items_note: >
+  Campo aditivo temporario (mesmo padrao usado em
+  PARALLEL-AUDIT-WAVE-001), reintroduzido para PARALLEL-WAVE-002.
+  Fecha para closed_work_items quando a onda integrar.
+work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,20 +45,15 @@ formalized_at_commit: "1432535a5cbd737dfff5b3bfb217d815ef2ba068"
 last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean, lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-HEAT-SEMIGROUP-001 fechou VERIFIED / result_review APPROVED
-  (revisão adversarial independente: 0 problemas de solidez, 1 nota
-  cosmética de terminologia na fila, corrigida neste commit). Semigrupo
-  do calor e^{tDelta} construído como multiplicador de Fourier limitado
-  e simétrico via produto interno em L², composto com o projetor de
-  Leray já caracterizado no operador de Stokes P·e^{tDelta}. Lei de
-  semigrupo e continuidade forte deliberadamente NÃO demonstradas —
-  HEAT-GAP-001, aberto. Este é o primeiro artefato da direção
-  estratégica registrada em STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md
-  (linha Navier-Stokes/Foundations selecionada por concentração de
-  infraestrutura, não por proximidade à solução do problema de milênio).
-  Fila volta a exigir revisão de portfólio antes de qualquer frente nova.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  PARALLEL-WAVE-002 em execução: (A) FOUND-HEAT-SEMIGROUP-LAW-001
+  tentando fechar HEAT-GAP-001 (lei de semigrupo + continuidade forte);
+  (B) reverificação bibliográfica de NS-GAP-005; (C) reverificação
+  bibliográfica de YM-GAP-007. Ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md e
+  DEC-067. Integração única após as três retornarem.
+authorized_action: "PARALLEL_AUDIT_WAVE_IN_PROGRESS"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
 portfolio_review_document_heat_semigroup: "01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
 portfolio_review_document_leray_orthogonal_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
 portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"

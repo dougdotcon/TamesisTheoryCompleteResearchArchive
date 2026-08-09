@@ -1796,3 +1796,43 @@ decisions:
       - "NS-GAP-001/004 nao sao alvo desta frente; a lacuna real permanece nomeada e aberta"
       - "HEAT-GAP-001 (lei de semigrupo, continuidade forte) declarado aberto, nao afirmado sem prova"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8822 jobs, por dois processos independentes (esta sessao e a revisao adversarial)"
+
+  - decision_id: DEC-067
+    date: 2026-08-09
+    decision: >
+      Autorizar PARALLEL-WAVE-002: tres frentes concorrentes com
+      conjuntos de arquivos disjuntos, sem isolamento de worktree
+      necessario. (A) FOUND-HEAT-SEMIGROUP-LAW-001, formalizacao Lean de
+      HEAT-GAP-001 (lei de semigrupo + continuidade forte). (B)
+      reverificacao bibliografica de NS-GAP-005 (Seregin-Sverak,
+      exclusao de blow-up Tipo I -- auditoria anterior nao confirmou
+      incondicionalidade). (C) reverificacao bibliografica de YM-GAP-007
+      (duas preprints arXiv de Yang-Mills -- checar mudanca de status).
+    rationale: >
+      Pedido explicito do usuario por paralelismo/concorrencia nesta
+      sessao. Segue o precedente ja usado nesta mesma sessao
+      (PARALLEL-AUDIT-WAVE-001, 5 frentes simultaneas). (A) e continuacao
+      direta de um gap que a sessao anterior abriu de proposito -- nao
+      frente nova inventada. (B) e (C) sao continuacoes de auditoria de
+      itens ja VERIFIED/APPROVED_WITH_NOTES (NS-PRESSURE-001,
+      YM-LIMIT-001) sobre gaps ja nomeados em seus proprios
+      GAP_REGISTER.yaml, nao pesquisa original nem novos work items na
+      fila -- apenas atualizacao de status de um achado bibliografico ja
+      registrado. Nenhuma das tres frentes reivindica resolver ou
+      aproximar um Problema do Milenio.
+    authority: "principal do laboratorio (pedido explicito de paralelismo)"
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
+      - "LAB_STATE.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-HEAT-SEMIGROUP-LAW-001), status SCOPED"
+      - "LAB_STATE: authorized_action -> PARALLEL_AUDIT_WAVE_IN_PROGRESS, active_work_items (aditivo) = [FOUND-HEAT-SEMIGROUP-LAW-001, NS-GAP-005-RECHECK, YM-GAP-007-RECHECK]"
+      - "labctl.py: allow-list += FOUND-HEAT-SEMIGROUP-LAW-001"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "(B) e (C) nao criam novos work items nem novas claims cientificas -- apenas atualizam o status de verificacao bibliografica de gaps ja registrados"
+      - "cada frente roda sobre conjunto de arquivos disjunto; nenhum isolamento de worktree necessario; nenhum commit individual por sub-agente -- integracao final unica"

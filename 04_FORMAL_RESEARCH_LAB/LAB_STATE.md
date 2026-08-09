@@ -1,14 +1,14 @@
 ---
 schema: tamesis-formal-lab-state/1
 schema_extension_note: >
-  active_work_items (lista, abaixo) é um campo aditivo sob o schema/1
-  existente (additionalProperties: true), não uma versão nova. Registra
-  execução paralela; active_work_item (singular) permanece o ponteiro de
-  compatibilidade lido por labctl e aponta para o primeiro item da lista.
-  Mudança pedida explicitamente na sessão 2026-08-09, autorizada por
-  PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
+  Esta sessão usou temporariamente um campo aditivo active_work_items
+  (lista) sob o schema/1 existente (additionalProperties: true) para
+  registrar execução paralela. A onda fechou nesta mesma sessão — as
+  cinco frentes migraram para closed_work_items abaixo, e o campo foi
+  removido. Mudança pedida explicitamente na sessão 2026-08-09,
+  autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-09T00:00:00-03:00
-canonical_commit: "1bfd33c1a7e512674e04b63f2bc3217aa2f1eb8f"
+canonical_commit: "9fc26a9a4fd64ad2a93a1c7007491b856615f7aa"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -17,42 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "millennium"
 active_work_item: "NS-PRESSURE-001"
-active_work_items:
-  - work_item_id: "NS-PRESSURE-001"
-    track: millennium
-    path: "03_MILLENNIUM/02_NAVIER_STOKES/"
-    work_status: "PARTIAL_RESULT"
-    audit_outcome: "REFUTED_NAIVE_FORM_STRENGTHENED_OPEN"
-    execution_mode: "PARALLEL_AUDIT_WAVE"
-  - work_item_id: "PVSNP-PHYS-001"
-    track: millennium
-    path: "03_MILLENNIUM/03_P_VS_NP/"
-    work_status: "PARTIAL_RESULT"
-    audit_outcome: "NO_UNIVERSAL_BRIDGE_FOUND"
-    execution_mode: "PARALLEL_AUDIT_WAVE"
-  - work_item_id: "YM-LIMIT-001"
-    track: millennium
-    path: "03_MILLENNIUM/04_YANG_MILLS/"
-    work_status: "PARTIAL_RESULT"
-    audit_outcome: "INSUFFICIENCY_THEOREM_PROVED"
-    execution_mode: "PARALLEL_AUDIT_WAVE"
-  - work_item_id: "HODGE-CDK-001"
-    track: millennium
-    path: "03_MILLENNIUM/05_HODGE/"
-    work_status: "PARTIAL_RESULT"
-    audit_outcome: "SCOPE_DELINEATED_WORKED_CASE"
-    execution_mode: "PARALLEL_AUDIT_WAVE"
-  - work_item_id: "BSD-HYP-MATRIX-001"
-    track: millennium
-    path: "03_MILLENNIUM/06_BSD/"
-    work_status: "PARTIAL_RESULT"
-    audit_outcome: "MATRIX_BUILT_NO_PROOF"
-    execution_mode: "PARALLEL_AUDIT_WAVE"
-work_status: "PARTIAL_RESULT"
+work_status: "VERIFIED"
 specification_status: "N_A_AUDIT_FRONT"
 specification_review: "N_A_AUDIT_FRONT"
-formalization_status: "PARTIAL"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -64,17 +33,18 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "1bfd33c1a7e512674e04b63f2bc3217aa2f1eb8f"
-last_verified_artifact: "5 lean sketches under 03_MILLENNIUM/*/FORMAL/, lake env lean exit 0 each (see CHANGELOG PARALLEL-AUDIT-WAVE-001-INTEGRATION)"
+formalized_at_commit: "9fc26a9a4fd64ad2a93a1c7007491b856615f7aa"
+last_verified_artifact: "5 lean sketches under 03_MILLENNIUM/*/FORMAL/, lake env lean exit 0 each, result_review APPROVED_WITH_NOTES for all five"
 current_blocker: null
 next_single_action: >
-  As cinco frentes reportaram e foram integradas (build real, ledgers
-  atualizados). Nenhuma está VERIFIED — todas PARTIAL_RESULT com
-  result_review: PENDING. Próxima ação: revisão adversarial independente
-  de cada resultado (result_review), uma por vez, antes de estender
-  qualquer frente ou promover status. Ver 09_SESSIONS/ para o relatório
-  desta rodada.
-authorized_action: "RESULT_REVIEW_REQUIRED"
+  As cinco frentes da onda paralela fecharam: VERIFIED, result_review
+  APPROVED_WITH_NOTES. Nenhum problema bloqueante foi encontrado na
+  revisão adversarial; correções menores (citação Cantwell 1992,
+  LEAN_MAP.md desatualizado em 4 frentes, citação Deligne/Clay
+  fundindo duas cláusulas) foram aplicadas nesta integração. Aguardar
+  gate de revisão de portfólio antes de abrir qualquer frente nova —
+  nada mais está autorizado.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
 frontmatter_scan_coverage: "FULL"
@@ -275,6 +245,52 @@ closed_work_items:
     mathematical_novelty: NONE
     research_role: FORMAL_FOUNDATION
     backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  NS-PRESSURE-001:
+    work_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    audit_outcome: REFUTED_NAIVE_FORM_STRENGTHENED_OPEN
+    execution_mode: PARALLEL_AUDIT_WAVE
+    mathematical_novelty: NONE
+    research_role: LITERATURE_AUDIT
+    decision_ref: DEC-059, DEC-060, DEC-061
+  PVSNP-PHYS-001:
+    work_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    audit_outcome: NO_UNIVERSAL_BRIDGE_FOUND
+    execution_mode: PARALLEL_AUDIT_WAVE
+    mathematical_novelty: NONE
+    research_role: LITERATURE_AUDIT
+    decision_ref: DEC-059, DEC-060, DEC-061
+  YM-LIMIT-001:
+    work_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    audit_outcome: INSUFFICIENCY_THEOREM_PROVED
+    execution_mode: PARALLEL_AUDIT_WAVE
+    mathematical_novelty: NONE
+    research_role: LITERATURE_AUDIT
+    external_claim_watch: YM-GAP-007
+    decision_ref: DEC-059, DEC-060, DEC-061
+  HODGE-CDK-001:
+    work_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    audit_outcome: SCOPE_DELINEATED_WORKED_CASE
+    execution_mode: PARALLEL_AUDIT_WAVE
+    mathematical_novelty: NONE
+    research_role: LITERATURE_AUDIT
+    decision_ref: DEC-059, DEC-060, DEC-061
+  BSD-HYP-MATRIX-001:
+    work_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    audit_outcome: MATRIX_BUILT_NO_PROOF
+    execution_mode: PARALLEL_AUDIT_WAVE
+    mathematical_novelty: NONE
+    research_role: LITERATURE_AUDIT
+    decision_ref: DEC-059, DEC-060, DEC-061
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT
@@ -534,27 +550,28 @@ FOUND-SOBOLEV-SPACE-001             VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
-NS-PRESSURE-001                     PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
-PVSNP-PHYS-001                      PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
-YM-LIMIT-001                        PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
-HODGE-CDK-001                       PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
-BSD-HYP-MATRIX-001                  PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
+NS-PRESSURE-001                     VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+PVSNP-PHYS-001                      VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+YM-LIMIT-001                        VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+HODGE-CDK-001                       VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+BSD-HYP-MATRIX-001                  VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
 TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NOGO-001/NS-PRESSURE-001 nao satisfeita
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-authorized_action: RESULT_REVIEW_REQUIRED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
-**Onda concluída e integrada: cinco frentes em paralelo no track
-`millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`, `YM-LIMIT-001`,
-`HODGE-CDK-001`, `BSD-HYP-MATRIX-001`. Dezenove frentes encerradas antes
-desta onda. Autorizada por `PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09`,
-que também corrigiu `closed_work_items` faltando seis entradas (a mesma
-classe de defeito prosa/YAML que `LAB-CORR-VALIDATION-BLINDNESS-001` já
-havia corrigido uma vez). `TOE-INTERFACE-001` fica fora desta onda: duas
-de suas três dependências não estão satisfeitas.
+**Onda concluída, integrada e revisada: cinco frentes em paralelo no
+track `millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`,
+`YM-LIMIT-001`, `HODGE-CDK-001`, `BSD-HYP-MATRIX-001`. Vinte e quatro
+frentes encerradas antes desta onda. Autorizada por
+`PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09`, que também corrigiu
+`closed_work_items` faltando seis entradas (a mesma classe de defeito
+prosa/YAML que `LAB-CORR-VALIDATION-BLINDNESS-001` já havia corrigido
+uma vez). `TOE-INTERFACE-001` fica fora desta onda: duas de suas três
+dependências não estão satisfeitas.
 
 **Integração (sessão orquestradora, mesmo ciclo):** os cinco rascunhos
 Lean escritos em paralelo corretamente NÃO rodaram `lake build` (regra
@@ -574,6 +591,29 @@ literal `sorry`/`admit` dentro de docstrings alegando sua ausência — o
 mesmo padrão que `LAB-CORR-VALIDATION-BLINDNESS-001` já havia proibido
 duas vezes antes; corrigido proativamente nesta integração, antes de
 qualquer gate acusar.
+
+**Revisão adversarial (mesmo ciclo):** cinco agentes independentes,
+cada um revendo uma frente diferente da que formalizou, com instrução
+explícita de tentar refutar antes de aprovar. Veredito: `APPROVED_WITH_NOTES`
+nas cinco — nenhum stop_condition violado, nenhuma citação fabricada,
+nenhuma linguagem inflada, nenhum conteúdo Lean mais fraco que o
+alegado. Achados corrigidos nesta integração: intervalo de página de
+Cantwell 1992 (782–792 → 782–793); `LEAN_MAP.md` desatualizado em
+quatro frentes (ainda dizia `NOT_FORMALIZED` apesar do rascunho Lean já
+compilado); uma citação do PDF do Clay/Deligne que fundia duas cláusulas
+distintas numa só (corrigida com o texto exato, re-extraído do PDF
+primário — a correção na verdade reforça a tese central de
+`HODGE-CDK-001`, já que a cláusula perdida cita CDK 1995 como a fonte da
+parte "conhecida"); cinco entradas pré-existentes em `CLAIM_LEDGER.yaml`
+(datadas de 2026-07-28, antes desta sessão) que ainda diziam `SCOPED`.
+**Achado que não foi apenas corrigido, mas registrado como observação
+externa** (`YM-GAP-007`, ver `GAP_REGISTER.yaml` de `YM-LIMIT-001`): duas
+preprints de 2025/2026 alegam prova construtiva completa de existência e
+mass gap de Yang-Mills 4D — uma (arXiv:2506.00284, SU(3)) foi **retirada
+pelo arXiv admin**; a outra (arXiv:2606.19362, SU(N) geral) permanece
+publicada, sem revisão por pares confirmada. Este laboratório não
+verifica, endossa nem refuta nenhuma das duas — registrado só para
+rastreabilidade.
 
 ## Por que este bloco existe
 

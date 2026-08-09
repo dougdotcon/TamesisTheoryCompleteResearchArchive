@@ -1,5 +1,42 @@
 # Changelog do laboratório formal
 
+## PARALLEL-AUDIT-WAVE-001-RESULT-REVIEW - 2026-08-09
+
+### Revisão adversarial: cinco vereditos, cinco APPROVED_WITH_NOTES
+
+Cinco agentes independentes, cada um revendo uma frente diferente da que
+formalizou, com instrução explícita de tentar refutar antes de aprovar.
+Nenhum encontrou stop_condition violado, citação fabricada, ou conteúdo
+Lean mais fraco que o alegado na prosa. Achados menores, todos
+corrigidos nesta integração:
+
+```text
+Cantwell 1992      pagina final citada 792, correta 793 (3 arquivos)
+LEAN_MAP.md         desatualizado (NOT_FORMALIZED) em 4 frentes
+citação Deligne/Clay  fundia duas clausulas do PDF original numa so
+CLAIM_LEDGER        5 entradas de 2026-07-28 nao refletiam o audit
+```
+
+A correção da citação de Deligne (HODGE-CDK-001) na verdade **reforça**
+a tese central da frente: a cláusula perdida cita CDK 1995
+explicitamente como a fonte da parte que Deligne já considerava
+conhecida ("known: see [4]").
+
+### Achado externo registrado, não verificado
+
+A revisão de `YM-LIMIT-001` encontrou duas preprints recentes alegando
+prova construtiva completa de existência e mass gap de Yang-Mills 4D:
+uma (arXiv:2506.00284, SU(3)) foi **retirada pelo arXiv admin**; a outra
+(arXiv:2606.19362, SU(N) geral) permanece publicada, sem revisão por
+pares confirmada. Registrado em `YM-GAP-007` para rastreabilidade — este
+laboratório não verifica, endossa nem refuta nenhuma das duas.
+
+### Fechamento
+
+As cinco frentes fecham `VERIFIED` / `result_review: APPROVED_WITH_NOTES`.
+`authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED` — nenhuma frente
+nova pode abrir sem um gate de revisão de portfólio.
+
 ## PARALLEL-AUDIT-WAVE-001-INTEGRATION - 2026-08-09
 
 ### O que as cinco frentes trouxeram

@@ -6,7 +6,7 @@ Integra numericamente a equação de Euler restrita (restricted Euler
 equation), o truncamento clássico do tensor gradiente de velocidade que
 zera a parte anisotrópica e não-local do Hessiano de pressão e mantém só
 a parte isotrópica (Vieillefosse 1982; forma fechada em Cantwell 1992,
-*Phys. Fluids A* 4, 782–792 — ver `REVIEWS/AUDIT_REPORT.md` para a
+*Phys. Fluids A* 4, 782–793 — ver `REVIEWS/AUDIT_REPORT.md` para a
 citação verificada nesta sessão).
 
 Sistema (dedução própria desta sessão, verificada simbolicamente com

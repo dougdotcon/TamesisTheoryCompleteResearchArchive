@@ -1476,3 +1476,63 @@ decisions:
       - "nenhum arquivo Lean novo registrado em TamesisLab.lean"
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "todos os cinco lake env lean confirmados exit 0 nesta sessao, nao assumidos"
+  - decision_id: DEC-061
+    date: 2026-08-09
+    decision: >
+      Fechar as cinco frentes da onda paralela como VERIFIED com
+      result_review: APPROVED_WITH_NOTES, apos revisao adversarial
+      independente (cinco agentes, um por frente, instruidos a tentar
+      refutar antes de aprovar) nao encontrar nenhum erro que invalide
+      as alegacoes centrais. Corrigir os achados confirmados. Retravar
+      authorized_action em PORTFOLIO_REVIEW_REQUIRED.
+    rationale: >
+      As cinco revisoes voltaram APPROVED_WITH_NOTES (nao APPROVED puro,
+      nao CHANGES_REQUESTED): stop_condition respeitado nas cinco,
+      nenhuma citacao fabricada, nenhuma linguagem inflada, conteudo Lean
+      fiel ao alegado na prosa nas cinco. Os problemas achados foram
+      menores e corrigidos aqui: (1) Cantwell 1992 citado com pagina
+      final 792 em vez de 793 (NS-PRESSURE-001, tres arquivos); (2)
+      LEAN_MAP.md desatualizado dizendo NOT_FORMALIZED em quatro frentes
+      (NS, PVSNP, HODGE, BSD) apesar do rascunho Lean ja compilado pela
+      integracao anterior (DEC-060); (3) uma citacao do PDF do Clay por
+      Deligne, na secao Verificado de HODGE-CDK-001, fundia duas
+      clausulas distintas do original numa so, perdendo o qualificador
+      "(known: see [4])" — corrigido apos re-extrair o PDF primario
+      diretamente; a citacao correta na verdade REFORCA a tese central
+      da frente, porque a clausula perdida cita CDK 1995 como a fonte da
+      parte que Deligne ja considerava conhecida; (4) cinco entradas
+      pre-existentes em CLAIM_LEDGER.yaml, datadas de 2026-07-28 (antes
+      desta sessao), ainda diziam work_status SCOPED sem refletir o
+      resultado do audit — corrigidas para PARTIAL_RESULT com
+      referencia cruzada para as novas claims *-AUDIT-001. Achado
+      separado, registrado mas nao corrigido por estar fora do escopo
+      desta auditoria: duas preprints (arXiv:2506.00284, retirada pelo
+      arXiv; arXiv:2606.19362, ainda publicada) alegam prova construtiva
+      completa do mass gap de Yang-Mills 4D — nao verificadas nem
+      endossadas por este laboratorio, registradas em YM-GAP-007 para
+      rastreabilidade futura.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/"
+      - "03_MILLENNIUM/03_P_VS_NP/"
+      - "03_MILLENNIUM/04_YANG_MILLS/"
+      - "03_MILLENNIUM/05_HODGE/"
+      - "03_MILLENNIUM/06_BSD/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action RESULT_REVIEW_REQUIRED -> PORTFOLIO_REVIEW_REQUIRED"
+      - "LAB_STATE: 5 itens migrados de active_work_items (removido) para closed_work_items"
+      - "RESEARCH_QUEUE: 5 itens PARTIAL_RESULT -> VERIFIED, result_review APPROVED_WITH_NOTES"
+      - "STATUS.yaml (x5, 03_MILLENNIUM): work_status PARTIAL_RESULT -> VERIFIED"
+      - "CLAIM_LEDGER: 5 entradas pre-existentes (2026-07-28) atualizadas com see_also"
+      - "GAP_REGISTER YM-LIMIT-001: +YM-GAP-007 (external claims, unverified)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "as duas preprints externas sobre Yang-Mills NAO sao endossadas nem refutadas, so registradas"
+      - "TOE-INTERFACE-001 permanece SCOPED, dependencias nao satisfeitas"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT"
+      - "authorized_action volta a travar novas frentes ate proxima revisao de portfolio"

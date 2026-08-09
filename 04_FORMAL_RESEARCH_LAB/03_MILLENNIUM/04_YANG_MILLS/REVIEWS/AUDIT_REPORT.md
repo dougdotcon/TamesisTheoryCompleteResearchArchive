@@ -70,14 +70,20 @@ Afirmações com citação recuperável via WebSearch nesta sessão
 
 7. **Os dois lemas de insuficiência abstratos** (`toyGap_no_unique_
    continuum_limit`, `finite_volume_gap_does_not_survive_without_
-   uniform_bound`) são checados nesta sessão apenas por leitura manual
-   linha a linha do texto de prova em Lean e conferência por grep dos
-   nomes de lema do Mathlib contra o snapshot vendorizado local — **não**
-   por `lake build` (deliberadamente não executado, ver
-   `FORMAL/InsufficiencyToyModel.lean`, cabeçalho). Isto é uma verificação
-   mais fraca que "T" no sentido pleno do laboratório; tratado como
-   `PARTIAL_RESULT`, não como prova formalmente fechada, até a integração
-   em série confirmar `lake build` exit 0.
+   uniform_bound`) foram checados nesta rodada paralela apenas por
+   leitura manual e grep — deliberadamente sem `lake build` (regra de
+   isolamento do cache compartilhado). **Atualização (integração
+   serial, mesma sessão):** a sessão orquestradora rodou `lake env lean`
+   sobre `FORMAL/InsufficiencyToyModel.lean` fora desta etapa paralela;
+   três correções foram necessárias (duas reduções de lambda sob
+   `StrictMono`, uma `def` de divisão real marcada `noncomputable`) e o
+   arquivo agora compila com `exit 0`; `#print axioms` nos dois lemas
+   confirma `[propext, Classical.choice, Quot.sound]` — ver
+   `LAB_STATE.md`, seção "Integração". A verificação por compilação real
+   está, portanto, feita; o status da frente continua `PARTIAL_RESULT`
+   porque nenhuma revisão de conteúdo substitui compilação, mas por
+   outro motivo: o teorema é sobre a estrutura lógica abstrata, não
+   sobre a medida real de Yang-Mills.
 
 ## Aproximado
 

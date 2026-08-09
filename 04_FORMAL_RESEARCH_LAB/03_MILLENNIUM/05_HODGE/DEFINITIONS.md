@@ -117,14 +117,26 @@ que foi provado:
 > "We don't get information on the field of definition."
 
 Esta frase é o núcleo do gap de arithmetic descent registrado em
-`GAP_REGISTER.yaml` (`HODGE-GAP-004`), e ecoa uma observação do próprio
-Deligne no documento oficial do Clay: ao introduzir o locus de Hodge
-como consequência da conjectura, ele anota explicitamente `(unknown)`
-ao lado da afirmação de que esse locus seria uma união denumerável de
-subvariedades algébricas de `S_{Q̄}` — i.e., mesmo a versão "sobre
-`Q̄`" (não apenas sobre `C`) da algebricidade do locus era, na descrição
-de Deligne, um ponto em aberto que CDK endereça apenas parcialmente
-(algebricidade sobre `C`, sem controle do corpo de definição).
+`GAP_REGISTER.yaml` (`HODGE-GAP-004`). **Correção de citação** (achada
+na revisão adversarial de 2026-08-09, ver `REVIEWS/AUDIT_REPORT.md`): a
+versão anterior deste parágrafo fundia duas cláusulas distintas do
+documento oficial do Clay numa só. A frase exata de Deligne (seção 4,
+re-extraída diretamente do PDF nesta correção) é:
+
+> "The Hodge conjecture implies that the locus where this happens is a
+> denumerable union of algebraic subvarieties of S **(known: see [4])**,
+> and is defined over Q̄ **(unknown)**."
+
+São duas afirmações separadas, cada uma com seu próprio qualificador: a
+algebricidade do locus sobre `S` é `(known: see [4])` — e a referência
+`[4]` na bibliografia do próprio documento do Clay é exatamente
+Deligne–Cattani–Kaplan, JAMS 8 (1995), 483–505, isto é, **CDK é citado
+pelo próprio Deligne como a fonte dessa parte já conhecida**. O que
+permanece `(unknown)` é separado: se esse locus está definido sobre
+`Q̄` (não apenas sobre `C`). Isso é mais preciso do que — e reforça, em
+vez de enfraquecer — a tese central desta frente: CDK estabelece a
+algebricidade (citada como conhecida pelo próprio Deligne), e o corpo de
+definição é o gap que permanece aberto.
 
 **Nota de precisão histórica** `[A]`: um refinamento posterior e
 distinto — usando geometria tame/o-minimal para obter informação sobre

@@ -88,13 +88,22 @@ indicado explicitamente.
    números — não a prova.
 
 8. **Deligne já registrava, no documento oficial do Clay, que a
-   algebricidade do locus era consequência (não fonte) da conjectura,
-   e um ponto em aberto quanto ao corpo de definição.** Citação
-   literal, extraída diretamente do PDF nesta sessão:
+   algebricidade do locus é conhecida (citando CDK) e que o corpo de
+   definição é o que permanece em aberto.** **Correção** (revisão
+   adversarial de 2026-08-09): a citação abaixo, na versão original
+   desta seção, fundia duas cláusulas distintas numa só, perdendo o
+   qualificador `(known: see [4])`. Re-extraída diretamente do PDF:
 
    > "The Hodge conjecture implies that the locus where this happens
-   > is a denumerable union of algebraic subvarieties of S_Q̄
-   > (unknown)."
+   > is a denumerable union of algebraic subvarieties of S
+   > **(known: see [4])**, and is defined over Q̄ **(unknown)**."
+
+   A referência `[4]` na bibliografia do próprio documento do Clay é
+   Deligne–Cattani–Kaplan, JAMS 8 (1995), 483–505 — Deligne cita CDK
+   como a fonte do "known". Isso é mais preciso do que — e reforça, em
+   vez de enfraquecer — a leitura desta frente: CDK estabelece a
+   algebricidade (creditada por Deligne), e o corpo de definição é o
+   gap que permanece aberto (`HODGE-GAP-004`).
 
 9. **Decomposição de Deligne da Conjectura de Hodge em duas
    sub-conjecturas** ("classes de Hodge são absolutas" +

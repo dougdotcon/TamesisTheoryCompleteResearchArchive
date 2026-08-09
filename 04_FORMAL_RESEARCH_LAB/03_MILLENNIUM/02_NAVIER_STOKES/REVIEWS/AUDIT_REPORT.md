@@ -52,7 +52,7 @@ por computação nesta sessão (Python/sympy/scipy). Ver
    a conservação de momento angular via um modelo de Euler restrita.
 
 6. **Cantwell (1992)**, "Exact solution of a restricted Euler equation
-   for the velocity gradient tensor", *Phys. Fluids A* 4, 782–792.
+   for the velocity gradient tensor", *Phys. Fluids A* 4, 782–793.
    Citação e conteúdo confirmados: solução exata (funções elípticas de
    Jacobi) da dinâmica de Vieillefosse.
 

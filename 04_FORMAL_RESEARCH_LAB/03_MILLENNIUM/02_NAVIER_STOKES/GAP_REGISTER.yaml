@@ -1,7 +1,103 @@
 gaps:
   - gap_id: NS-GAP-001
-    description: "Sinal/dominância da Hessiana de pressão não provados."
+    description: "Sinal/dominância da Hessiana de pressão (parte anisotrópica,
+      não-local) não provados. Corresponde ao 'Lemma 3.1' do documento
+      legado ANALISE_CRITICA_NS.md, lá marcado explicitamente
+      '🔴 NÃO PROVADO'. Não é uma identidade de álgebra linear finita
+      (essa parte, tr(AΩ)=0 e correlatas, foi verificada nesta sessão,
+      ver FORMAL/PressureHessianAlgebra.lean) — é uma estimativa
+      não-local (tipo Biot-Savart/Riesz) sobre soluções de
+      Navier-Stokes, sem fórmula local fechada."
     status: OPEN
+    audited_this_session: true
+    finding: "Não resolvido. Avaliado como estruturalmente da mesma
+      dificuldade que critérios de regularidade condicional já
+      publicados (Constantin-Fefferman 1993, tipo Prodi-Serrin, Evan
+      Miller 2020) e nunca verificados a priori para uma solução geral
+      -- não uma prova formal de equivalência, mas o motivo do
+      stop_condition ter sido acionado para a versão fortalecida da
+      hipótese. Ver PROOF_SKETCH.md, seção STOP CONDITION."
+
   - gap_id: NS-GAP-002
-    description: "Controle de enstrofia não foi convertido na norma necessária."
+    description: "Controle de enstrofia não foi convertido na norma
+      necessária (Passos 4-5 do esboço legado)."
     status: OPEN
+    audited_this_session: true
+    finding: "Não auditado a fundo nesta rodada porque é condicional a
+      NS-GAP-001/NS-GAP-003: Passos 4-5 são Gronwall/Sobolev padrão SE
+      o Passo 3 (Stretching Reduction) já estiver estabelecido. Como
+      Passo 3 depende do Lemma 3.1 (NS-GAP-001), não há ainda hipótese
+      resolvida para converter. Não é um gap novo desta sessão; herdado
+      do documento legado."
+
+  - gap_id: NS-GAP-003
+    description: "A forma NUA do 'Alignment Gap' (Passo 2 isolado,
+      <alpha_1> <= 1-delta_0 sem a componente de taxa do Lemma 3.1) NAO
+      e, por si so, uma barreira contra blow-up."
+    status: REFUTED
+    audited_this_session: true
+    finding: "Contraexemplo explícito, verificado por computação nesta
+      sessão (não citação de terceiros): na equação de Euler restrita
+      (Vieillefosse 1982) -- o truncamento de Navier-Stokes que descarta
+      exatamente a parte anisotrópica do Hessiano de pressão -- em 6/6
+      condições iniciais aleatórias testadas, o sistema explode em
+      tempo finito enquanto o cosseno de alinhamento com e1 tende a
+      zero (desalinhamento quase perfeito, muito além de qualquer
+      delta_0 < 1 proposto). Ver COUNTEREXAMPLES/restricted_euler_alignment_gap.md
+      e COMPUTATION/restricted_euler.py. Escopo do contraexemplo:
+      refuta a forma isolada do Passo 2; NÃO refuta Navier-Stokes
+      completo, porque o termo descartado é exatamente o termo ao qual
+      a hipótese completa atribui o papel regularizador."
+    counterexample_path: "COUNTEREXAMPLES/restricted_euler_alignment_gap.md"
+
+  - gap_id: NS-GAP-004
+    description: "A parte anisotrópica do Hessiano de pressão não tem
+      fórmula local fechada (é uma integral singular tipo
+      Biot-Savart/Riesz sobre todo o domínio); nenhuma estimativa
+      quantitativa local dela, em termos de A(x), omega(x) e escala
+      local, foi encontrada ou produzida nesta sessão."
+    status: OPEN
+    audited_this_session: true
+    finding: "Não é um gap que uma auditoria de literatura possa fechar;
+      exigiria pesquisa matemática original (estimativa de integral
+      singular, ou um closure model rigoroso -- os closures existentes,
+      ex. Chevillard-Meneveau 2006 'Recent Fluid Deformation', são
+      estocásticos/fenomenológicos, comparados com DNS, não provados
+      como cota rigorosa; os próprios autores notam que características
+      em regiões dominadas por rotação não são bem reproduzidas pelo
+      modelo). Ver KNOWN_RESULTS_MATRIX.md, linha 10."
+
+  - gap_id: NS-GAP-005
+    description: "Enunciado exato de 'Seregin-Sverak: Type I blow-up
+      excluído' citado no documento legado como resultado clássico
+      100% rigoroso, sem qualificação de hipóteses."
+    status: OPEN
+    audited_this_session: true
+    finding: "Verificação parcial: confirmada a existência e o tema dos
+      artigos (Seregin-Sverak 2002 ARMA sobre cotas inferiores de
+      pressão; versão axissimétrica 2009), mas não foi possível
+      confirmar nesta sessão que a exclusão de blow-up Tipo I é
+      incondicional em geral, fora de axissimetria ou hipóteses
+      adicionais de pressão. Distinto de Necas-Ruzicka-Sverak 1996
+      (Acta Math., confirmado), que exclui apenas a subclasse
+      autossimilar. Recomenda-se tratar a linha do documento legado
+      como aproximada, não verificada, até confirmação em sessão
+      futura com acesso aos artigos originais."
+
+stop_condition:
+  triggered: true
+  which_form: "forma fortalecida da hipótese (Passo 1 + Lemma 3.1, com
+    componente de taxa) -- não a forma nua (Passo 2 isolado), que foi
+    refutada por contraexemplo explícito (NS-GAP-003), satisfazendo
+    também o critério de parada por essa via."
+  detail: "A versão da hipótese que sobrevive ao contraexemplo desta
+    sessão (NS-GAP-003) exige uma cota quantitativa a priori sobre o
+    comportamento da solução ate um tempo de blow-up hipotetico -- a
+    mesma estrutura de dificuldade de todo criterio de regularidade
+    condicional publicado e nunca verificado a priori (Constantin-Fefferman
+    1993, tipo Prodi-Serrin, Evan Miller 2020). Nao e uma prova formal
+    de equivalencia logica bicondicional a regularidade global; e uma
+    avaliacao estrutural que motiva parar em vez de tentar forcar uma
+    prova do Lemma 3.1 nesta rodada. Ver PROOF_SKETCH.md."
+  action_taken: "PARADO conforme protocolo. Nao foi tentada prova do
+    Lemma 3.1/NS-GAP-001/NS-GAP-004 nesta sessão."

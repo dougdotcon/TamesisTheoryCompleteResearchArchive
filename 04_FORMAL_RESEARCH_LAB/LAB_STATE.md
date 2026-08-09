@@ -21,32 +21,37 @@ active_work_items:
   - work_item_id: "NS-PRESSURE-001"
     track: millennium
     path: "03_MILLENNIUM/02_NAVIER_STOKES/"
-    work_status: "IN_PROGRESS"
+    work_status: "PARTIAL_RESULT"
+    audit_outcome: "REFUTED_NAIVE_FORM_STRENGTHENED_OPEN"
     execution_mode: "PARALLEL_AUDIT_WAVE"
   - work_item_id: "PVSNP-PHYS-001"
     track: millennium
     path: "03_MILLENNIUM/03_P_VS_NP/"
-    work_status: "IN_PROGRESS"
+    work_status: "PARTIAL_RESULT"
+    audit_outcome: "NO_UNIVERSAL_BRIDGE_FOUND"
     execution_mode: "PARALLEL_AUDIT_WAVE"
   - work_item_id: "YM-LIMIT-001"
     track: millennium
     path: "03_MILLENNIUM/04_YANG_MILLS/"
-    work_status: "IN_PROGRESS"
+    work_status: "PARTIAL_RESULT"
+    audit_outcome: "INSUFFICIENCY_THEOREM_PROVED"
     execution_mode: "PARALLEL_AUDIT_WAVE"
   - work_item_id: "HODGE-CDK-001"
     track: millennium
     path: "03_MILLENNIUM/05_HODGE/"
-    work_status: "IN_PROGRESS"
+    work_status: "PARTIAL_RESULT"
+    audit_outcome: "SCOPE_DELINEATED_WORKED_CASE"
     execution_mode: "PARALLEL_AUDIT_WAVE"
   - work_item_id: "BSD-HYP-MATRIX-001"
     track: millennium
     path: "03_MILLENNIUM/06_BSD/"
-    work_status: "IN_PROGRESS"
+    work_status: "PARTIAL_RESULT"
+    audit_outcome: "MATRIX_BUILT_NO_PROOF"
     execution_mode: "PARALLEL_AUDIT_WAVE"
-work_status: "IN_PROGRESS"
+work_status: "PARTIAL_RESULT"
 specification_status: "N_A_AUDIT_FRONT"
 specification_review: "N_A_AUDIT_FRONT"
-formalization_status: "IN_PROGRESS"
+formalization_status: "PARTIAL"
 result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -60,14 +65,16 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "1bfd33c1a7e512674e04b63f2bc3217aa2f1eb8f"
-last_verified_artifact: "found-sobolev-space-001 chain (see closed_work_items)"
+last_verified_artifact: "5 lean sketches under 03_MILLENNIUM/*/FORMAL/, lake env lean exit 0 each (see CHANGELOG PARALLEL-AUDIT-WAVE-001-INTEGRATION)"
 current_blocker: null
 next_single_action: >
-  Executar as cinco frentes de auditoria em paralelo (NS-PRESSURE-001,
-  PVSNP-PHYS-001, YM-LIMIT-001, HODGE-CDK-001, BSD-HYP-MATRIX-001), cada
-  uma restrita ao seu próprio diretório sob 03_MILLENNIUM/, e reportar de
-  volta para integração serial nos ledgers de governança.
-authorized_action: "PARALLEL_AUDIT_WAVE_IN_PROGRESS"
+  As cinco frentes reportaram e foram integradas (build real, ledgers
+  atualizados). Nenhuma está VERIFIED — todas PARTIAL_RESULT com
+  result_review: PENDING. Próxima ação: revisão adversarial independente
+  de cada resultado (result_review), uma por vez, antes de estender
+  qualquer frente ou promover status. Ver 09_SESSIONS/ para o relatório
+  desta rodada.
+authorized_action: "RESULT_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
 frontmatter_scan_coverage: "FULL"
@@ -527,27 +534,46 @@ FOUND-SOBOLEV-SPACE-001             VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
-NS-PRESSURE-001                     IN_PROGRESS             onda paralela, em execucao
-PVSNP-PHYS-001                      IN_PROGRESS             onda paralela, em execucao
-YM-LIMIT-001                        IN_PROGRESS             onda paralela, em execucao
-HODGE-CDK-001                       IN_PROGRESS             onda paralela, em execucao
-BSD-HYP-MATRIX-001                  IN_PROGRESS             onda paralela, em execucao
+NS-PRESSURE-001                     PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
+PVSNP-PHYS-001                      PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
+YM-LIMIT-001                        PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
+HODGE-CDK-001                       PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
+BSD-HYP-MATRIX-001                  PARTIAL_RESULT          onda paralela, integrada, result_review PENDING
 TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NOGO-001/NS-PRESSURE-001 nao satisfeita
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-authorized_action: PARALLEL_AUDIT_WAVE_IN_PROGRESS
+authorized_action: RESULT_REVIEW_REQUIRED
 ```
 
-**Onda ativa: cinco frentes em paralelo no track `millennium`** —
-`NS-PRESSURE-001`, `PVSNP-PHYS-001`, `YM-LIMIT-001`, `HODGE-CDK-001`,
-`BSD-HYP-MATRIX-001`. Dezenove frentes encerradas antes desta onda.
-Autorizada por `PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09`, que
-também corrigiu `closed_work_items` faltando seis entradas (a mesma
+**Onda concluída e integrada: cinco frentes em paralelo no track
+`millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`, `YM-LIMIT-001`,
+`HODGE-CDK-001`, `BSD-HYP-MATRIX-001`. Dezenove frentes encerradas antes
+desta onda. Autorizada por `PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09`,
+que também corrigiu `closed_work_items` faltando seis entradas (a mesma
 classe de defeito prosa/YAML que `LAB-CORR-VALIDATION-BLINDNESS-001` já
 havia corrigido uma vez). `TOE-INTERFACE-001` fica fora desta onda: duas
 de suas três dependências não estão satisfeitas.
+
+**Integração (sessão orquestradora, mesmo ciclo):** os cinco rascunhos
+Lean escritos em paralelo corretamente NÃO rodaram `lake build` (regra
+da onda, para não corromper o cache compartilhado). Na integração serial,
+dois deles falharam ao compilar de primeira — `NS-PRESSURE-001` (faltava
+`import Mathlib.Tactic.Linarith`; `ring` falhou em `Matrix n n ℝ`, que
+não é comutativa, corrigido para `noncomm_ring`) e `PVSNP-PHYS-001`
+(`omega` não reduzia uma aplicação de lambda sob um `def` não
+desdobrado). `YM-LIMIT-001` teve três correções menores (mesma classe de
+problema de redução de lambda, mais uma `def` que precisava de
+`noncomputable`). `HODGE-CDK-001` e `BSD-HYP-MATRIX-001` tiveram um erro
+cada (`BSD`: doc-comment `/-- -/` antes de `section`, que não é uma
+declaração; `Decidable` não sintetizado através de um `def` não
+desdobrado). Os cinco compilam agora com `exit 0`; nenhum está registrado
+em `TamesisLab.lean`. Adicionalmente, todos os cinco continham a palavra
+literal `sorry`/`admit` dentro de docstrings alegando sua ausência — o
+mesmo padrão que `LAB-CORR-VALIDATION-BLINDNESS-001` já havia proibido
+duas vezes antes; corrigido proativamente nesta integração, antes de
+qualquer gate acusar.
 
 ## Por que este bloco existe
 
@@ -612,11 +638,13 @@ research_role: FORMAL_BRIDGE
 
 ## Próxima ação
 
-Executar as cinco frentes da onda paralela (`NS-PRESSURE-001`,
-`PVSNP-PHYS-001`, `YM-LIMIT-001`, `HODGE-CDK-001`, `BSD-HYP-MATRIX-001`),
-cada uma confinada ao seu diretório em `03_MILLENNIUM/`, ver
+As cinco frentes da onda paralela (`NS-PRESSURE-001`, `PVSNP-PHYS-001`,
+`YM-LIMIT-001`, `HODGE-CDK-001`, `BSD-HYP-MATRIX-001`) reportaram e foram
+integradas nesta sessão. Nenhuma está `VERIFIED`: todas `PARTIAL_RESULT`
+com `result_review: PENDING`. Próxima ação: revisão adversarial
+independente de cada resultado, uma por vez — ver
 `PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md` para as condições de
-paralelismo. O texto abaixo é histórico, da frente
+paralelismo que continuam valendo. O texto abaixo é histórico, da frente
 `FOUND-COMPUTABILITY-BRIDGE-001`, preservado por política do laboratório
 de não reescrever entradas antigas.
 

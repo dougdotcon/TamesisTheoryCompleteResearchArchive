@@ -1,5 +1,52 @@
 # Changelog do laboratório formal
 
+## PARALLEL-AUDIT-WAVE-001-INTEGRATION - 2026-08-09
+
+### O que as cinco frentes trouxeram
+
+```text
+NS-PRESSURE-001      REFUTED_NAIVE_FORM_STRENGTHENED_OPEN
+PVSNP-PHYS-001       NO_UNIVERSAL_BRIDGE_FOUND
+YM-LIMIT-001         INSUFFICIENCY_THEOREM_PROVED
+HODGE-CDK-001        SCOPE_DELINEATED_WORKED_CASE
+BSD-HYP-MATRIX-001   MATRIX_BUILT_NO_PROOF
+```
+
+Nenhum Problema do Milênio foi declarado resolvido, aproximado ou
+alcançável — cada frente respeitou seu `stop_condition` (ver
+`REVIEWS/AUDIT_REPORT.md` em cada diretório sob `03_MILLENNIUM/`).
+Destaque: `NS-PRESSURE-001` encontrou um contraexemplo explícito e
+verificado por computação própria (equação de Euler restrita de
+Vieillefosse) para a forma isolada da hipótese; `BSD-HYP-MATRIX-001`
+identificou que o documento legado `ANALISE_CRITICA_BSD.md` comete
+exatamente a falácia que o `stop_condition` da frente proíbe (soma de
+percentuais de cobertura tratada como quase-universal) e documentou o
+erro sem reproduzi-lo.
+
+### Integração: dois rascunhos Lean não compilavam de primeira
+
+As cinco frentes corretamente não rodaram `lake build` durante a etapa
+paralela. Na integração serial (`lake env lean` por arquivo), dois
+falharam: `NS-PRESSURE-001` (import de tática faltando; `ring` numa
+identidade sobre matriz não comutativa) e `PVSNP-PHYS-001` (`omega` não
+reduzia uma aplicação de lambda). Corrigidos; os cinco compilam agora com
+`exit 0`. Nenhum está registrado em `TamesisLab.lean`.
+
+### Recorrência: tokens proibidos em docstring, pela terceira vez
+
+Os cinco arquivos continham a palavra literal `sorry`/`admit` dentro de
+docstrings alegando sua própria ausência — o mesmo padrão que
+`LAB-CORR-VALIDATION-BLINDNESS-001` (`DEC-058`) já havia proibido duas
+vezes antes. Corrigido proativamente aqui, antes de qualquer gate
+acusar, usando a mesma convenção de substituição do DEC-058.
+
+### Fechamento honesto: PARTIAL_RESULT, não VERIFIED
+
+As cinco frentes fecham como `PARTIAL_RESULT` com `result_review:
+PENDING`. Corrigir a compilação e checar tokens não é o mesmo que uma
+revisão adversarial independente do conteúdo matemático/bibliográfico —
+essa revisão é a próxima ação, registrada em `LAB_STATE.md`.
+
 ## PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN - 2026-08-09
 
 ### O que fechou sem gate de portfólio entre elas

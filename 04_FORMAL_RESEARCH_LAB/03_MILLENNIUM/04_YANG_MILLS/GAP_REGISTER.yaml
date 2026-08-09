@@ -2,9 +2,36 @@ gaps:
   - gap_id: YM-GAP-001
     description: "Tightness não dá unicidade nem não trivialidade."
     status: OPEN
+    audited_by: YM-LIMIT-001
+    audit_date: 2026-08-09
+    abstract_counterexample: "toyGap (FORMAL/InsufficiencyToyModel.lean, toyGap_no_unique_continuum_limit) -- gap uniforme >= 2 em toda escala, mas subsequencias par/impar convergem para limites distintos (2 e 3); nenhuma unica teoria limite"
+    note: "Gap logico confirmado no nivel abstrato (Lean, sem sorry). Nao fechado para a medida real de Yang-Mills -- permanece OPEN."
   - gap_id: YM-GAP-002
     description: "Gap finito-volume não implica gap uniforme no limite."
     status: OPEN
+    audited_by: YM-LIMIT-001
+    audit_date: 2026-08-09
+    abstract_counterexample: "toyFiniteVolumeGap = 1/(n+1) (FORMAL/InsufficiencyToyModel.lean, finite_volume_gap_does_not_survive_without_uniform_bound) -- positivo em todo n, infimo zero"
+    note: "Corresponde ao GAP 1/GAP 2 de RECURSOS_PARA_PESQUISA/07_MILLENNIUM_VALIDATION/PROBLEM_04_YANG_MILLS/ANALISE_CRITICA_YM.md (legado, so leitura). Gap logico confirmado no nivel abstrato. Permanece OPEN para a teoria real."
   - gap_id: YM-GAP-003
     description: "Axiomas OS/Wightman e reconstrução não estão estabelecidos."
     status: OPEN
+  - gap_id: YM-GAP-004
+    description: "Convergência forte de resolvente (ou mesmo convergência em norma) não garante que o gap espectral sobreviva ao limite -- o espectro do limite pode 'contrair repentinamente' mesmo sob convergência forte."
+    status: OPEN
+    audited_by: YM-LIMIT-001
+    audit_date: 2026-08-09
+    abstract_counterexample: "Operador de multiplicacao H_n = 0 (+) M_{f_n}, f_n(x)=max(x,1/n) em L^2([0,1]); spec(H_n)={0}U[1/n,1] (gap 1/n>0), H_n -> H em norma, spec(H)=[0,1] (gap fechado). Ver COUNTEREXAMPLES/ABSTRACT_COUNTEREXAMPLES.md#contraexemplo-3."
+    note: "NAO formalizado em Lean nesta rodada (infraestrutura de operadores/espectro em L^2 fora do orcamento desta frente). Prova em prosa apoiada em fato padrao de analise espectral (ver REVIEWS/AUDIT_REPORT.md, secao Verificado)."
+  - gap_id: YM-GAP-005
+    description: "Extensão dos bounds de Balaban (UV stability) de SU(2) para SU(N) geral é citada na literatura secundária como 'por universalidade', sem prova rigorosa fechada."
+    status: OPEN
+    audited_by: YM-LIMIT-001
+    audit_date: 2026-08-09
+    note: "Nao verificado nesta sessao (fora de escopo de tempo). Ver KNOWN_RESULTS_MATRIX.md e ASSUMPTIONS.md."
+  - gap_id: YM-GAP-006
+    description: "Svetitsky-Yaffe (1982) e um resultado de universalidade sobre a transicao de deconfinamento a temperatura finita T>0; nao e, por si, um teorema sobre ausencia de transicao a T=0 no limite euclidiano infinito -- o argumento de interpolacao weak/strong coupling da literatura secundaria usa esse resultado fora do regime em que foi estabelecido."
+    status: OPEN
+    audited_by: YM-LIMIT-001
+    audit_date: 2026-08-09
+    note: "Confirmado via WebSearch nesta sessao que o resultado publicado e sobre universalidade de transicao termica (ver REVIEWS/AUDIT_REPORT.md, secao Verificado)."

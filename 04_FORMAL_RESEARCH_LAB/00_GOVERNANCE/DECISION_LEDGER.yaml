@@ -1409,3 +1409,70 @@ decisions:
       - "nenhum problema de milenio e declarado resolvido ou alcancavel"
       - "nenhuma frente autorizada a escrever fora do proprio subdiretorio"
       - "validate_status_must_be_read e queue_registration_required continuam valendo por frente"
+  - decision_id: DEC-060
+    date: 2026-08-09
+    decision: >
+      Integrar os cinco resultados da onda paralela
+      PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09: compilar de fato os
+      cinco rascunhos Lean, corrigir os dois que falharam, corrigir
+      docstring com tokens proibidos nos cinco, e fechar cada frente como
+      PARTIAL_RESULT com result_review PENDING (nao VERIFIED — falta gate
+      de revisao adversarial independente).
+    rationale: >
+      As cinco frentes corretamente nao rodaram lake build durante a
+      etapa paralela (regra de isolamento do cache compartilhado). Na
+      integracao serial, `lake env lean` foi executado individualmente
+      contra cada um dos cinco arquivos em 03_MILLENNIUM/*/FORMAL/: dois
+      falharam de primeira. NS-PRESSURE-001 (PressureHessianAlgebra.lean)
+      usava `linarith` sem importar `Mathlib.Tactic.Linarith`, e `ring`
+      numa identidade sobre `Matrix n n ℝ` (nao comutativa) — corrigido
+      com o import certo e `noncomm_ring`. PVSNP-PHYS-001 (PvsNPPhys.lean)
+      tinha `omega` falhando por nao reduzir uma aplicacao de lambda sob
+      um `def` nao desdobrado — corrigido com `unfold` explicito antes do
+      `refine`. YM-LIMIT-001 teve o mesmo padrao de reducao de lambda em
+      dois lemas de `StrictMono`, mais uma `def` de divisao real que
+      precisava `noncomputable`. HODGE-CDK-001 tinha um doc-comment
+      `/-- ... -/` imediatamente antes de `section`, que nao e uma
+      declaracao — Lean rejeita doc-comments que nao precedem uma
+      declaracao. BSD-HYP-MATRIX-001 tinha `by decide` falhando a
+      sintetizar `Decidable` atraves de um `def` nao desdobrado —
+      corrigido com `simp` no lugar. Todos os cinco compilam agora com
+      exit 0; `#print axioms` nos teoremas centrais de NS e YM confirma a
+      pegada padrao [propext, Classical.choice, Quot.sound]. Adicional e
+      separadamente: os cinco arquivos continham a palavra literal
+      `sorry`/`admit` dentro de docstrings alegando sua propria ausencia
+      — o mesmo padrao que `LAB-CORR-VALIDATION-BLINDNESS-001` (DEC-058)
+      ja havia proibido duas vezes antes nesta sessao anterior. Corrigido
+      proativamente aqui, antes de qualquer gate de validacao acusar,
+      seguindo a mesma convencao de substituicao usada em DEC-058
+      (parafrasear em vez de citar o token). Nenhuma frente foi declarada
+      VERIFIED: todas fecham como PARTIAL_RESULT com result_review
+      PENDING, porque a auditoria e correcao de compilacao feitas aqui
+      pela sessao orquestradora nao substituem uma revisao adversarial
+      independente do conteudo matematico/bibliografico — essa revisao
+      fica como proxima acao.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "10_TOOLS/labctl.py"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/"
+      - "03_MILLENNIUM/03_P_VS_NP/"
+      - "03_MILLENNIUM/04_YANG_MILLS/"
+      - "03_MILLENNIUM/05_HODGE/"
+      - "03_MILLENNIUM/06_BSD/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action PARALLEL_AUDIT_WAVE_IN_PROGRESS -> RESULT_REVIEW_REQUIRED"
+      - "LAB_STATE: active_work_items work_status IN_PROGRESS -> PARTIAL_RESULT (x5)"
+      - "RESEARCH_QUEUE: 5 itens IN_PROGRESS -> PARTIAL_RESULT, result_review: PENDING, audit_outcome registrado"
+      - "STATUS.yaml (x5, 03_MILLENNIUM): work_status IN_PROGRESS -> PARTIAL_RESULT, lean_sketch_status: BUILT_STANDALONE_NOT_REGISTERED"
+      - "CLAIM_LEDGER: +5 claims (uma por frente)"
+      - "labctl.py: authorized_action allow-list += RESULT_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "nenhuma frente declarada VERIFIED sem gate de result_review dedicado"
+      - "nenhum arquivo Lean novo registrado em TamesisLab.lean"
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "todos os cinco lake env lean confirmados exit 0 nesta sessao, nao assumidos"

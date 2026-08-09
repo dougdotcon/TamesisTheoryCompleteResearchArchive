@@ -1091,3 +1091,183 @@ claims:
       - novidade algoritmica
       - resolve algum problema nomeado
       - resultado fisico
+  - claim_id: NS-PRESSURE-AUDIT-001
+    short_name: alignment_gap_counterexample
+    exact_statement: "A forma isolada da hipotese pressao-alinhamento (alinhamento vorticidade-deformacao limitado, sem componente de taxa sobre a parte anisotropica do Hessiano de pressao) admite contraexemplo explicito: a equacao de Euler restrita de Vieillefosse explode em tempo finito enquanto esse alinhamento tende a zero."
+    domain: pde_literature_audit
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/COUNTEREXAMPLES/restricted_euler_alignment_gap.md"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/COMPUTATION/restricted_euler.py"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PressureHessianAlgebra.lean"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/REVIEWS/AUDIT_REPORT.md"
+    historical_wording: ""
+    current_wording: >
+      A auditoria de literatura desta sessao encontrou, por computacao
+      propria (integracao numerica, 6/6 condicoes iniciais), que a forma
+      nua da hipotese pressao-alinhamento nao carrega conteudo
+      regularizador. A forma fortalecida (Lemma 3.1 do documento legado,
+      com componente sobre a parte anisotropica e nao-local do Hessiano
+      de pressao) permanece sem prova nem refutacao -- fechar essa forma
+      exigiria pesquisa matematica original, nao uma auditoria de
+      literatura, e por isso o stop_condition da frente foi respeitado em
+      vez de forcado. A identidade algebrica de suporte
+      (tr(A*Omega) = 0 para A simetrica, Omega antissimetrica) esta
+      formalizada em Lean, compilada (exit 0), fora da arvore
+      TamesisLab.
+    work_status: PARTIAL_RESULT
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "Lemma 3.1 fortalecido (parte anisotropica/nao-local do Hessiano de pressao) permanece NOT_FORMALIZED e sem prova ou refutacao"
+      - "Conexao entre tr(A^2), tr(Omega^2) e o cosseno de alinhamento alpha_1 do documento legado nao foi formalizada"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: resultado formal/auditoria de literatura, nao admite promocao cientifica"
+    prohibited_claims:
+      - resolve ou aproxima a regularidade global de Navier-Stokes
+      - o problema do milenio ficou alcancavel
+      - o Lemma 3.1 fortalecido foi provado ou refutado
+      - novidade matematica
+  - claim_id: PVSNP-PHYS-AUDIT-001
+    short_name: no_universal_simulation_bridge
+    exact_statement: "Nenhuma fonte encontrada nesta sessao estabelece uma ponte de simulacao universal entre modelos de complexidade fisica/analogica (BSS, redes analogicas, vidro de spin) e maquinas de Turing capaz de decidir P vs NP classico."
+    domain: complexity_theory_literature_audit
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/RESULTS/TECHNICAL_NOTE.md"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/FORMAL/PvsNPPhys.lean"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/REVIEWS/AUDIT_REPORT.md"
+    historical_wording: ""
+    current_wording: >
+      P_phys/NP_phys foram definidas como familia parametrizada por
+      (codificacao, modelo fisico, medida de recurso); a nocao de "ponte
+      de simulacao" e o unico objeto capaz de conecta-las a P vs NP
+      classico. Nenhuma fonte auditada (Blum-Shub-Smale, Burgisser-Cucker,
+      Maass-Orponen, Talagrand, Aaronson, Deutsch) estabelece essa ponte
+      de forma incondicional e universal. O termo "Physical Computation
+      Axiom" do documento legado nao foi localizado em nenhuma fonte
+      primaria pesquisada.
+    work_status: PARTIAL_RESULT
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "PNP-GAP-001: indefinicao de codificacao entre modelos fisicos candidatos"
+      - "PNP-GAP-002: ausencia de ponte de simulacao superpolinomial estabelecida"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: resultado formal/auditoria de literatura, nao admite promocao cientifica"
+    prohibited_claims:
+      - decide, aproxima ou torna alcancavel P vs NP classico
+      - existe uma ponte de simulacao universal estabelecida
+      - novidade matematica
+  - claim_id: YM-LIMIT-AUDIT-001
+    short_name: gap_survival_insufficiency_theorem
+    exact_statement: "Tightness (compacidade) mais gap de volume finito positivo, isoladamente, nao implicam nem unicidade da teoria limite nem sobrevivencia do gap espectral no limite -- provado no nivel abstrato por dois contraexemplos formalizados em Lean."
+    domain: spectral_limits_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/RESULTS/INSUFFICIENCY_THEOREM.md"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/InsufficiencyToyModel.lean"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/COUNTEREXAMPLES/ABSTRACT_COUNTEREXAMPLES.md"
+    historical_wording: ""
+    current_wording: >
+      Dois contraexemplos abstratos, formalizados em Lean e compilados
+      (exit 0, axiomas [propext, Classical.choice, Quot.sound]): (1)
+      `toyGap`, com gap uniforme >= 2 em todo estagio finito mas
+      subsequencias par/impar convergindo a limites distintos (2 e 3),
+      logo sem limite continuo unico; (2) `toyFiniteVolumeGap = 1/(n+1)`,
+      positivo em todo estagio finito mas com infimo zero, logo sem cota
+      uniforme que sobreviva ao limite. Nao formaliza a medida de
+      Yang-Mills real nem afirma nada sobre ela ter ou nao ter limite
+      unico -- e um teorema sobre a estrutura logica do argumento de
+      insuficiencia, nao sobre a teoria fisica.
+    work_status: PARTIAL_RESULT
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "Nao se aplica aos objetos reais de Yang-Mills (medidas de rede, hamiltonianos, espectro) -- apenas a estrutura logica abstrata"
+      - "Contraexemplo espectral (operador de multiplicacao) descrito so em prosa, nao formalizado em Lean"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: resultado formal, nao admite promocao cientifica"
+    prohibited_claims:
+      - resolve, aproxima ou torna alcancavel o mass gap de Yang-Mills
+      - afirma que a medida real de Yang-Mills tem ou nao tem limite unico
+      - novidade matematica alem da instancia dos contraexemplos abstratos
+  - claim_id: HODGE-CDK-AUDIT-001
+    short_name: cdk_scope_delineation
+    exact_statement: "O teorema de Cattani-Deligne-Kaplan (1995) prova algebricidade do locus de Hodge sobre C, sem informacao sobre corpo de definicao; nao prova existencia de ciclo algebrico numa fibra fixa, i.e. nao prova a Conjectura de Hodge."
+    domain: algebraic_geometry_literature_audit
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/RESULTS/WORKED_CASE_NOETHER_LEFSCHETZ.md"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/hodge_locus_fallacy_sketch.lean"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/REVIEWS/AUDIT_REPORT.md"
+    historical_wording: ""
+    current_wording: >
+      Reconstruido com fonte primaria lida diretamente nesta sessao
+      (PDF oficial do Clay por Deligne; notas de Francois Charles, 2010).
+      Um caso especial verificavel (Noether-Lefschetz, superficies em
+      P^3) foi auditado passo a passo. A inferencia proibida pelo
+      stop_condition desta frente -- tratar a algebricidade/transversalidade
+      do locus (CDK) como se implicasse sobrejetividade do mapa de ciclos
+      sobre as classes de Hodge -- foi identificada como o ponto exato
+      onde a extensao de codimensao 1 para codimensao >= 2 exigiria essa
+      inferencia, e a auditoria parou ali. A estrutura logica dessa
+      falacia (locus com propriedade estrutural forte != sobrejetividade)
+      esta formalizada em Lean, compilada (exit 0), como analogia
+      abstrata, nao como formalizacao de CDK.
+    work_status: PARTIAL_RESULT
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "CDK 1995 em si nao esta formalizado em Lean (Mathlib nao tem variacoes de estrutura de Hodge)"
+      - "Atribuicao exata de tecnica de prova e alguns intervalos de pagina permanecem nao confirmados por fonte primaria"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: resultado formal/auditoria de literatura, nao admite promocao cientifica"
+    prohibited_claims:
+      - resolve, aproxima ou torna alcancavel a Conjectura de Hodge
+      - CDK prova existencia de ciclo algebrico
+      - novidade matematica
+  - claim_id: BSD-HYP-MATRIX-AUDIT-001
+    short_name: hypothesis_partition_no_exhaustiveness
+    exact_statement: "A literatura conhecida sobre BSD cobre um conjunto de hipoteses/curvas/postos por teoremas condicionais independentes; nenhuma fonte auditada prova que esse conjunto de hipoteses e exaustivo sobre todas as curvas elipticas, logo a uniao dos casos cobertos nao constitui cobertura universal da conjectura."
+    domain: number_theory_literature_audit
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/KNOWN_RESULTS_MATRIX.md"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/FORMAL/hypothesis_partition_guardrail.lean"
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/REVIEWS/AUDIT_REPORT.md"
+    historical_wording: ""
+    current_wording: >
+      Matriz de 13 linhas particionando a literatura de BSD (Gross-Zagier,
+      Kolyvagin, Coates-Wiles, Rubin, Skinner-Urban, Bhargava-Skinner-Zhang,
+      Burungale-Castella-Skinner, Burungale-Skinner-Tian-Wan,
+      Castella-Grossi-Skinner, entre outros) por hipotese exata, curva,
+      posto analitico e primos exigidos/excluidos, sem unir teoremas de
+      hipoteses distintas. O documento legado ANALISE_CRITICA_BSD.md foi
+      identificado cometendo exatamente a falacia proibida pelo
+      stop_condition desta frente (soma de percentuais de casos cobertos
+      tratada como ~99.95% de cobertura da conjectura); esta auditoria
+      documenta o erro sem reproduzi-lo. A estrutura logica da falacia
+      esta formalizada em Lean puro (sem Mathlib), compilada (exit 0).
+    work_status: PARTIAL_RESULT
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "BSD-GAP-005: nenhuma prova de exaustividade das hipoteses conhecidas sobre todas as curvas elipticas"
+      - "Lista exata de hipoteses (H1)-(H4) de Skinner-Urban e escopo preciso de posto de Rubin 1991 permanecem 'Aproximado', sem fonte primaria confirmada nesta sessao"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: resultado formal/auditoria de literatura, nao admite promocao cientifica"
+    prohibited_claims:
+      - resolve, aproxima ou torna alcancavel BSD
+      - a uniao de casos cobertos e cobertura universal ou quase-universal
+      - novidade matematica

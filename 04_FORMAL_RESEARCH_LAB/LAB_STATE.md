@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: true
+repository_clean: false
 active_track: "foundations"
-active_work_item: "FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
+work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,20 +37,15 @@ formalized_at_commit: "3a6b93d0fb860ace5a54a695c60e7a5ce07e274f"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPoint.lean (257 lines), lake env lean exit 0, full lake build exit 0 (8824 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 fechou VERIFIED / result_review
-  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de solidez
-  matemática; 1 correção de redação — alvo previa B Lipschitz numa bola,
-  entregue foi B Lipschitz global, hipótese mais forte, não
-  overclaiming). exists_unique_mild_solution: dado B GLOBALMENTE
-  Lipschitz (hipótese explícita, nunca derivada) e T*L < 1, existe
-  solução branda ÚNICA local em [0,T]. A cadeia Sobolev → Leray →
-  semigrupo do calor → Duhamel (bem definição) → ponto fixo abstrato
-  está completa até onde é honesto ir sem a estimativa Lipschitz do B
-  REAL de Navier-Stokes — exatamente NS-GAP-001/004, genuinamente
-  aberto, não tentado nem em frente autônoma futura sem justificativa
-  nova explícita. Fila volta a exigir revisão de portfólio antes de
-  qualquer frente nova.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 autorizada (DEC-073): instância
+  positiva concreta (B não-degenerado, L>0) de exists_unique_mild_solution
+  -- corrige a ausência de instância positiva em
+  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001, único resultado principal desta
+  sessão a quebrar esse padrão. Ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md.
+  Formalização em andamento.
+authorized_action: "FORMALIZATION"
+portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"

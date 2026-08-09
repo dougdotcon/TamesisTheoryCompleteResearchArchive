@@ -1702,3 +1702,43 @@ queue:
       (ponto fixo -> existencia/unicidade local) preparado para o caso
       em que a estimativa real for encontrada no futuro.
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001
+    title: "Instancia positiva concreta de exists_unique_mild_solution"
+    track: FOUNDATIONS
+    target_statement: >
+      Instanciar exists_unique_mild_solution com um B concreto,
+      genuinamente Lipschitz com constante L > 0 (nao degenerado, ex.
+      um ContinuousLinearMap limitado, automaticamente Lipschitz com
+      L = norma do operador), e um T concreto satisfazendo T*L < 1,
+      exibindo que o teorema abstrato produz de fato uma solucao --
+      corrigindo a ausencia de instancia positiva em
+      FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001, que quebrou o padrao
+      seguido por todo outro resultado principal desta sessao.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry,
+      exibindo uma instancia concreta nao-degenerada (L > 0) de
+      exists_unique_mild_solution.
+    dependencies:
+      - FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/DuhamelFixedPoint.lean"
+    formalization_cost: low
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 7
+    external_dependency: "Mathlib"
+    cross_track_value: moderate
+    stop_condition: >
+      usar sorry ou axioma local; usar B especifico de Navier-Stokes ou
+      sugerir que o B real satisfaz a hipotese; afirmar que Navier-Stokes
+      ficou alcancavel ou que NS-GAP-001/004 tem caminho de prova
+    priority_class: P3
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md
+      -- correcao de uma lacuna real no artefato entregue em
+      FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001, nao uma frente nova
+      inventada sem relacao.
+    research_role: FORMAL_FOUNDATION

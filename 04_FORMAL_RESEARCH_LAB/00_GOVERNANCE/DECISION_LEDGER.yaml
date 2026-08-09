@@ -2056,3 +2056,34 @@ decisions:
       - "apenas existencia LOCAL, nunca global, e afirmada"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8824 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"
+
+  - decision_id: DEC-073
+    date: 2026-08-09
+    decision: >
+      Autorizar e registrar FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001:
+      instancia positiva concreta (B nao-degenerado, L>0) de
+      exists_unique_mild_solution.
+    rationale: >
+      FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 fechou (DEC-072) sem
+      instancia positiva concreta -- unico resultado principal desta
+      sessao a quebrar esse padrao (todos os outros: concrete_stokesOpL2_R3,
+      concrete_lerayOpHs_orthogonal_R3, positive_instance_helmholtz_R3,
+      positive_instance_lerayMatrix, etc., tem). Isto e correcao de uma
+      lacuna real no artefato ja entregue, nao uma frente nova
+      inventada, e tem custo baixo (instanciacao, nao matematica nova).
+    authority: FORMALIZATION
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
+      - "LAB_STATE.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001), status SCOPED"
+      - "LAB_STATE: active_work_item -> FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
+      - "labctl.py: allow-list += FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "B concreto usado e um exemplo abstrato generico, NAO o B real de Navier-Stokes"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"

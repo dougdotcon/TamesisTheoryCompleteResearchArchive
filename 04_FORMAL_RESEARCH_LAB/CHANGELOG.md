@@ -1,5 +1,76 @@
 # Changelog do laboratório formal
 
+## PARALLEL-WAVE-002 - 2026-08-09
+
+### Três frentes concorrentes, arquivos disjuntos, pedido explícito de paralelismo
+
+Usuário pediu paralelismo/concorrência explicitamente. Autorizado por
+`DEC-067`/`01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md`,
+mesmo precedente de `PARALLEL-AUDIT-WAVE-001`. Três frentes com
+conjuntos de arquivos disjuntos (sem isolamento de worktree necessário):
+
+### (A) FOUND-HEAT-SEMIGROUP-LAW-001 — `HEAT-GAP-001` fecha por completo
+
+Estende `HeatSemigroup.lean` (201 → 408 linhas) com **as duas metades**
+de `HEAT-GAP-001`, não apenas uma:
+
+```text
+Lei de semigrupo    heatOpL2_add/heatOpL2_add': S(t+r) = S(t) ∘ S(r),
+                     via heatSymbol_add (Real.exp_add) +
+                     mulL2_heatSymbolL2_heatSymbolL2 (levantado a L^2 via
+                     rota a.e.-pontual espelhando inner_smul_Lp_symm).
+Continuidade forte   heatOpL2_continuousAt, para t0 >= 0 arbitrário, na
+                     topologia de subespaço de {t : R // 0 <= t}, via
+                     convergência dominada com cota FIXA (independente
+                     do parâmetro variável) e integrabilidade provada
+                     (não postulada) a partir da própria pertinência L²
+                     do vetor.
+```
+
+`lake env lean` e `lake build` completo, ambos `exit 0` (8822 jobs),
+checados diretamente (sem pipe) por três processos independentes: o
+implementador, esta sessão, e o revisor adversarial.
+
+**Revisão adversarial: APPROVED_WITH_NOTES.** Zero problemas de solidez
+— traçou a mão a cadeia de `rw` de `heatOpL2_add'` contra
+degenerescência de hipóteses, confirmou a cota de convergência dominada
+fixa (não a falsa alegação de que a diferença de símbolos L∞ se anula),
+confirmou `t0` genuinamente arbitrário. Uma nota: a contagem de linhas
+do diff foi reportada errada (256→408 alegado, 201→408 real via
+`git diff --stat`) — imprecisão factual sem relação com corretude
+matemática, corrigida no fechamento.
+
+### (B) NS-GAP-005 reverificado — CONFIRMED_CONDITIONAL
+
+"Seregin-Sverak: Type I blow-up excluído", citado sem qualificação no
+documento legado, confirmado **condicional**: ARMA 2002 é critério de
+regularidade condicional (hipótese de controle de pressão); Comm.PDE
+2009 restrito a soluções axissimétricas sob "certas hipóteses naturais"
+não detalhadas; Acta Math. 2009 (Liouville) reporta o caso 3D geral como
+"fora de alcance das técnicas existentes". Achado adicional: preprint
+não verificado (Cheskidov-Dai-Palasek, arXiv:2511.09556, nov. 2025)
+alega **construir** blow-up Tipo I via não-unicidade — registrado como
+claim externa, não endossada nem refutada por este laboratório.
+
+### (C) YM-GAP-007 reverificado — status atualizado
+
+`arXiv:2506.00284` continua retirada (motivo genérico de padrão de
+qualidade do arXiv). `arXiv:2606.19362` ganhou journal-ref desde a
+última checagem (*Fortschritte der Physik* 74(2026)4, e70097) — status
+atualizado para "publicamente verificável como publicada com revisão
+por pares"; este laboratório continua sem avaliar se essa revisão foi
+adequada ao escopo da alegação.
+
+### O que NÃO é afirmado
+
+```text
+que existe formalização de solução branda ou fórmula de Duhamel
+que Navier-Stokes ficou alcançável, ou que NS-GAP-001/004 tem caminho de prova
+que a claim de Cheskidov-Dai-Palasek foi verificada ou endossada
+que a revisão por pares de arXiv:2606.19362 avaliou o escopo completo da alegação
+que RH-NOGO-001 foi reativada
+```
+
 ## FOUND-HEAT-SEMIGROUP-001 - 2026-08-09
 
 ### Xadrez / Arte da Guerra: revisão estratégica das seis linhas

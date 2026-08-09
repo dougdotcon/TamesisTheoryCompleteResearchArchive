@@ -1,0 +1,71 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-HEAT-SEMIGROUP-LAW-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: APPROVED_WITH_NOTES
+extension_status: NOT_AUTHORIZED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED_WITH_NOTES
+  reviewer: independent subagent, re-ran lake env lean and full lake build itself
+    (exit codes written to file and read back, never piped), hand-traced the
+    heatOpL2_add' rw chain, confirmed the dominated-convergence bound is fixed
+    and independent of the varying parameter and that its integrability is
+    proved (not asserted), confirmed the subtype topology is Mathlib's default
+    subspace instance
+  issues_confirmed:
+    - "commit message / initial framing stated the file grew '256 -> 408 lines';
+       actual git diff shows 201 -> 408 lines (~27% inaccuracy in the stated
+       diff size, no bearing on mathematical correctness) -- corrected in this
+       closing commit"
+  issues_plausible: []
+  soundness_issues_found: 0
+research_role: FORMAL_FOUNDATION
+closes_gap: HEAT-GAP-001
+predecessor: FOUND-HEAT-SEMIGROUP-001
+parallel_wave: PARALLEL-WAVE-002
+formalization:
+  lean_module_extended: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+  line_count_before: 201
+  line_count_after: 408
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8822
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations, incl. the 7 new ones"
+  verified_independently_by:
+    - "implementing agent"
+    - "orchestrating session (direct re-run, no pipe)"
+    - "adversarial reviewer (direct re-run, no pipe)"
+result:
+  semigroup_law:
+    key_objects:
+      - "heatSymbol_add: pointwise multiplicativity of the heat kernel symbol via Real.exp_add"
+      - "mulL2_heatSymbolL2_heatSymbolL2: lifted through ofBounded/Lp-infinity via an
+         a.e.-pointwise route mirroring inner_smul_Lp_symm (LerayOrthogonal.lean), not a shortcut"
+      - "heatOpL2_add / heatOpL2_add': heatOpL2 (t+r) = heatOpL2 t comp heatOpL2 r,
+         with t, r, t+r as three genuinely independent 0<= hypotheses"
+    status: PROVED
+  strong_continuity:
+    key_objects:
+      - "continuous_heatSymbol_apply, tendsto_mulL2_heatSymbolL2, heatOpL2_continuousAt"
+      - "formalized on the subtype {t : R // 0 <= t} with Mathlib's default subspace
+         topology, so heatOpL2 stays total (no junk value for negative t)"
+      - "dominated convergence uses a bound fixed and independent of the varying
+         parameter (4*|g x|_e^2), with integrability proved from g's own L^2 membership,
+         not asserted"
+      - "proved for an ARBITRARY t0 >= 0 (implicit, unrestricted), not just t0 = 0"
+    status: PROVED
+claims:
+  promoted: 1
+prohibitions:
+  navier_stokes_reachable: FORBIDDEN
+  ns_gap_001_progress_claim: FORBIDDEN
+  duhamel_formula_exists_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

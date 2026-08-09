@@ -1408,31 +1408,75 @@ claims:
       - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
       - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/STATUS.yaml"
       - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
-    historical_wording: ""
-    current_wording: >
-      A simetria via produto interno E' provada (identidade bruta, nao
-      IsSelfAdjoint/adjoint do Mathlib -- incompatibilidade de instancia
-      Module encontrada e nao forcada). A lei de semigrupo
+    historical_wording: >
+      (versao original, 2026-08-09, antes de HEAT-GAP-001 fechar) A
+      simetria via produto interno E' provada; a lei de semigrupo
       S(t+r)=S(t)S(r) e a continuidade forte em t NAO sao provadas --
-      HEAT-GAP-001, aberto de proposito (revisao adversarial
-      independente: APPROVED, recompilou por conta propria, verificou a
-      aritmetica da cota concreta e a ausencia de overclaiming no texto
-      inteiro do arquivo).
+      HEAT-GAP-001, aberto de proposito.
+    current_wording: >
+      HEAT-GAP-001 fechou na frente seguinte, mesma sessao,
+      HEAT-SEMIGROUP-LAW-FORMAL-001 (lei de semigrupo E continuidade
+      forte, ambas provadas) -- ver essa claim para o resultado. A
+      simetria via produto interno permanece identidade bruta, nao
+      IsSelfAdjoint/adjoint do Mathlib.
     work_status: VERIFIED
     evidence_level: F
     dependencies:
       - LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001
-    known_gaps:
-      - "HEAT-GAP-001: lei de semigrupo e continuidade forte, nao demonstradas"
+    known_gaps: []
+    see_also: HEAT-SEMIGROUP-LAW-FORMAL-001
     counterevidence: []
     canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/"
     last_reviewed: 2026-08-09
     promotion_requirements:
       - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
     prohibited_claims:
-      - S(t+r) = S(t) compos S(r) (lei de semigrupo) foi provada
-      - t -> heatOpL2 t e fortemente continuo
       - o resultado usa IsSelfAdjoint ou ContinuousLinearMap.adjoint do Mathlib
+      - existe formalizacao de solucao branda ou formula de Duhamel
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica
+
+  - claim_id: HEAT-SEMIGROUP-LAW-FORMAL-001
+    short_name: heat_semigroup_law_and_strong_continuity
+    exact_statement: >
+      O semigrupo do calor e^{tDelta} em L^2 (heatOpL2) satisfaz a lei de
+      semigrupo heatOpL2 (t+r) = heatOpL2 t compos heatOpL2 r para t, r,
+      t+r >= 0 genericos e independentes (heatOpL2_add/heatOpL2_add'), e
+      e fortemente continuo em t: para t0 >= 0 arbitrario (nao apenas
+      t0=0), t -> heatOpL2 t f converge no sentido da topologia de
+      subespaco em {t : R // 0 <= t} (heatOpL2_continuousAt), via
+      convergencia dominada com cota fixa 4|g x|_e^2, independente do
+      parametro variavel, com integrabilidade da cota provada a partir da
+      propria pertinencia L^2 de g, nao postulada.
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_LAW_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      Ambas as metades de HEAT-GAP-001 foram fechadas nesta frente, nao
+      apenas uma (revisao adversarial: APPROVED_WITH_NOTES, recompilou
+      por conta propria, tracou a mao a cadeia de rw de heatOpL2_add' e
+      confirmou os tres hipoteses 0<=t/0<=r/0<=t+r genuinamente
+      independentes, verificou que a cota da convergencia dominada e fixa
+      -- nao depende do parametro variavel -- e que sua integrabilidade e
+      provada, confirmou a topologia de subespaco padrao do Mathlib em
+      {t // 0<=t}, e confirmou t0 arbitrario, nao restrito a 0). Uma nota:
+      a contagem de linhas do diff foi inicialmente reportada errada
+      (256->408 em vez de 201->408 real) -- imprecisao factual sem
+      relacao com a corretude matematica, corrigida no fechamento.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - HEAT-SEMIGROUP-STOKES-FORMAL-001
+    known_gaps: []
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_LAW_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
       - existe formalizacao de solucao branda ou formula de Duhamel
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica

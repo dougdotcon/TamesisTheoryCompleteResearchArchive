@@ -14,22 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: false
+repository_clean: true
 active_track: "foundations"
 active_work_item: "FOUND-HEAT-SEMIGROUP-LAW-001"
-active_work_items:
-  - "FOUND-HEAT-SEMIGROUP-LAW-001"
-  - "NS-GAP-005-RECHECK"
-  - "YM-GAP-007-RECHECK"
-active_work_items_note: >
-  Campo aditivo temporario (mesmo padrao usado em
-  PARALLEL-AUDIT-WAVE-001), reintroduzido para PARALLEL-WAVE-002.
-  Fecha para closed_work_items quando a onda integrar.
-work_status: "IN_PROGRESS"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -41,20 +33,24 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "1432535a5cbd737dfff5b3bfb217d815ef2ba068"
-last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean, lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "5c85550c8d1197faf70571d8b3e339c51af8a629"
+last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean (201->408 lines), lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  PARALLEL-WAVE-002: (B) e (C) já integradas (commit 9242b2b). (A)
-  FOUND-HEAT-SEMIGROUP-LAW-001: formalização completa entregue
-  (heatOpL2_add'/lei de semigrupo E heatOpL2_continuousAt/continuidade
-  forte, ambas), reverificada de forma independente nesta sessão --
-  lake env lean exit 0, lake build completo exit 0 (8822 jobs), zero
-  sorry/admit, checados diretamente sem pipe. Revisão adversarial
-  independente disparada, ainda pendente. Integração final (ledgers,
-  STATUS.yaml, CHANGELOG, session report, labctl validate) após o
-  veredito retornar.
-authorized_action: "PARALLEL_AUDIT_WAVE_IN_PROGRESS"
+  PARALLEL-WAVE-002 integrada por completo. (A)
+  FOUND-HEAT-SEMIGROUP-LAW-001 fechou VERIFIED / result_review
+  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de solidez, 1
+  imprecisão factual corrigida — contagem de linhas do diff era
+  256->408, correto é 201->408). HEAT-GAP-001 fechado: lei de semigrupo
+  E continuidade forte, ambas provadas. (B) NS-GAP-005 reverificado:
+  CONFIRMED_CONDITIONAL, não incondicional como o documento legado
+  implicava; achado adicional não verificado (preprint
+  Cheskidov-Dai-Palasek 2511.09556 alegando construção de blow-up Tipo
+  I) registrado como claim externa não endossada. (C) YM-GAP-007
+  reverificado: arXiv:2606.19362 ganhou journal-ref (Fortschr. Phys.)
+  desde a última checagem; 2506.00284 continua retirada. Fila volta a
+  exigir revisão de portfólio antes de qualquer frente nova.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"
 portfolio_review_document_heat_semigroup: "01_PORTFOLIO/STRATEGIC_REVIEW_BATTLE_MAP_2026_08_09.md"
@@ -367,6 +363,64 @@ closed_work_items:
     navier_stokes_reachable_claim: FORBIDDEN
     mathematical_novelty: NONE
     research_role: FORMAL_FOUNDATION
+    open_gap_closed_by: >
+      FOUND-HEAT-SEMIGROUP-LAW-001 (mesma sessao, onda PARALLEL-WAVE-002).
+      Este registro nao e reescrito, apenas anotado.
+  FOUND-HEAT-SEMIGROUP-LAW-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    closes_gap: HEAT-GAP-001
+    predecessor: FOUND-HEAT-SEMIGROUP-001
+    parallel_wave: PARALLEL-WAVE-002
+    scope_note: >
+      Lei de semigrupo (heatOpL2_add/heatOpL2_add', S(t+r)=S(t)∘S(r)) E
+      continuidade forte (heatOpL2_continuousAt, para t0 >= 0 arbitrario,
+      via convergencia dominada com cota fixa independente do parametro
+      variavel) — ambas provadas, nao apenas uma. Revisao adversarial
+      corrigiu uma imprecisao factual de contagem de linhas
+      (256->408 alegado, 201->408 real); nenhum problema de solidez.
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  NS-GAP-005-RECHECK:
+    action_type: BIBLIOGRAPHIC_VERIFICATION
+    parent_work_item: NS-PRESSURE-001
+    verdict: CONFIRMED_CONDITIONAL
+    note: >
+      "Seregin-Sverak: Type I blow-up excluido" (citado sem qualificacao
+      no documento legado) confirmado CONDICIONAL, nao incondicional:
+      ARMA 2002 e criterio de regularidade condicional (hipotese de
+      controle de pressao); Comm.PDE 2009 restrito a solucoes
+      axissimetricas sob "certas hipoteses naturais" nao detalhadas;
+      Acta Math. 2009 (Liouville) reporta o caso 3D geral como "fora de
+      alcance das tecnicas existentes". Achado adicional: preprint nao
+      verificado (Cheskidov-Dai-Palasek, arXiv:2511.09556, nov. 2025)
+      alega CONSTRUIR blow-up Tipo I via nao-unicidade -- registrado como
+      claim externa, nao endossada nem refutada.
+      Ver 03_MILLENNIUM/02_NAVIER_STOKES/GAP_REGISTER.yaml, campo
+      recheck_2026_08_09_parallel_wave_002 em NS-GAP-005.
+    research_role: LITERATURE_AUDIT
+  YM-GAP-007-RECHECK:
+    action_type: BIBLIOGRAPHIC_VERIFICATION
+    parent_work_item: YM-LIMIT-001
+    verdict: STATUS_UPDATED
+    note: >
+      arXiv:2506.00284 continua retirada (motivo generico de padrao de
+      qualidade do arXiv, sem refutacao matematica especifica
+      encontrada). arXiv:2606.19362 ganhou journal-ref desde a ultima
+      checagem (Fortschr. Phys. 74(2026)4, e70097) -- status atualizado
+      para "publicamente verificavel como publicada em revista com
+      revisao por pares"; este laboratorio continua sem avaliar se essa
+      revisao foi adequada ao escopo da alegacao. Nenhuma nova preprint
+      2026 relevante encontrada.
+      Ver 03_MILLENNIUM/04_YANG_MILLS/GAP_REGISTER.yaml, campo
+      recheck_2026_08_09_parallel_wave_002 em YM-GAP-007.
+    research_role: LITERATURE_AUDIT
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT

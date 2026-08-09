@@ -1836,3 +1836,51 @@ decisions:
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "(B) e (C) nao criam novos work items nem novas claims cientificas -- apenas atualizam o status de verificacao bibliografica de gaps ja registrados"
       - "cada frente roda sobre conjunto de arquivos disjunto; nenhum isolamento de worktree necessario; nenhum commit individual por sub-agente -- integracao final unica"
+
+  - decision_id: DEC-068
+    date: 2026-08-09
+    decision: >
+      Integrar e fechar PARALLEL-WAVE-002 por completo. (A)
+      FOUND-HEAT-SEMIGROUP-LAW-001: VERIFIED, result_review
+      APPROVED_WITH_NOTES -- HEAT-GAP-001 fechado, lei de semigrupo E
+      continuidade forte, ambas provadas (nao apenas parcial). (B)
+      NS-GAP-005: CONFIRMED_CONDITIONAL. (C) YM-GAP-007: status
+      atualizado (journal-ref para 2606.19362). LAB_STATE volta a
+      authorized_action PORTFOLIO_REVIEW_REQUIRED.
+    rationale: >
+      As tres frentes retornaram. (A) foi reverificada de forma
+      independente por esta sessao (lake env lean e lake build completo,
+      exit 0 diretos, sem pipe, 8822 jobs) e por um revisor adversarial
+      independente separado, que recompilou por conta propria, tracou a
+      mao a cadeia de prova de heatOpL2_add' contra degenerescencia de
+      hipoteses, verificou que a cota da convergencia dominada de
+      tendsto_mulL2_heatSymbolL2 e fixa (nao depende do parametro t
+      variavel) com integrabilidade provada (nao postulada), e confirmou
+      heatOpL2_continuousAt para t0 arbitrario sob a topologia de
+      subespaco padrao do Mathlib -- nao uma versao degenerada/vacua.
+      Verdict APPROVED_WITH_NOTES: zero problemas de solidez matematica;
+      uma imprecisao factual de contagem de linhas do diff (256->408
+      alegado vs 201->408 real, confirmado via git diff --stat) corrigida
+      neste fechamento. (B) e (C) sao atualizacoes de status
+      bibliografico dentro de work items ja VERIFIED, YAML-validadas,
+      preservando o texto de auditoria original (append, nao reescrita).
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_001/STATUS.yaml"
+      - "02_FOUNDATIONS/18_HEAT_SEMIGROUP/FOUND_HEAT_SEMIGROUP_LAW_001/STATUS.yaml"
+      - "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action PARALLEL_AUDIT_WAVE_IN_PROGRESS -> PORTFOLIO_REVIEW_REQUIRED; active_work_items (aditivo) removido, 3 entradas migradas para closed_work_items"
+      - "RESEARCH_QUEUE: FOUND-HEAT-SEMIGROUP-LAW-001 status SCOPED -> VERIFIED, result_review APPROVED_WITH_NOTES, closes_gap HEAT-GAP-001"
+      - "CLAIM_LEDGER: +1 claim (HEAT-SEMIGROUP-LAW-FORMAL-001); HEAT-SEMIGROUP-STOKES-FORMAL-001 atualizada (known_gaps esvaziado, prohibited_claims sobre lei de semigrupo/continuidade removidas, ja que passaram a ser verdadeiras -- padrao ja usado em LERAY-SOBOLEV-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NS-GAP-001/004 nao sao alvo desta frente; permanecem nomeados e abertos"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada"
+      - "verificacao independente feita por DOIS processos alem do implementador (esta sessao e o revisor adversarial), exit codes diretos, nunca via pipe"
+      - "achados bibliograficos (B, C) preservam o texto de auditoria original, apenas adicionam campos de reverificacao"

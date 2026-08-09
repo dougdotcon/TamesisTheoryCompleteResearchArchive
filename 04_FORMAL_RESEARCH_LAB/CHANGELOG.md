@@ -1,5 +1,45 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-QUEUE-EXHAUSTED - 2026-08-09
+
+### A fila está esgotada — e isso é a conclusão certa
+
+Depois de fechar a onda paralela de cinco frentes, `RESEARCH_QUEUE.yaml`
+tem 28 de 29 itens `VERIFIED`. Os dois que restam:
+
+```text
+RH-NOGO-001            FROZEN_PARTIAL_RESULT (congelado antes desta sessão)
+TOE-INTERFACE-001       SCOPED, bloqueado — depende de RH-NOGO-001
+                        (as outras duas dependências já são VERIFIED)
+```
+
+`RH_NOGO_REACTIVATION_CRITERIA.md` lista cinco condições de reativação;
+nenhuma ocorreu. O mesmo documento nomeia explicitamente o que **não**
+conta como reativação, e o primeiro item da lista é exatamente esta
+situação: *"um gate autônomo decidir por conta própria que agora vale a
+pena."* Esta revisão não reativa `RH-NOGO-001` nem inventa uma frente
+nova sem motivo — ver `01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`.
+
+### Verificação feita em vez disso: build completo da árvore
+
+Nunca tinha sido rodado nesta sessão (só builds individuais por
+arquivo/alvo). `lake build` sem alvo, árvore `TamesisLab/` inteira:
+
+```text
+Build completed successfully (8819 jobs). exit 0.
+```
+
+Confirma que os 24 itens fechados antes desta sessão, mais o trabalho
+desta sessão (que vive fora de `TamesisLab/`, em `03_MILLENNIUM/`),
+continuam mutuamente consistentes como uma única árvore de compilação.
+
+### Trava
+
+`authorized_action`: `NO_AUTONOMOUS_WORK_AVAILABLE`. Abrir a próxima
+frente exige uma condição de reativação de RH-NOGO-001, uma nova entrada
+registrada por decisão externa a este gate, ou uma lacuna já aberta
+receber gate próprio com justificativa explícita.
+
 ## PARALLEL-AUDIT-WAVE-001-RESULT-REVIEW - 2026-08-09
 
 ### Revisão adversarial: cinco vereditos, cinco APPROVED_WITH_NOTES

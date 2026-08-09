@@ -1536,3 +1536,49 @@ decisions:
       - "TOE-INTERFACE-001 permanece SCOPED, dependencias nao satisfeitas"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT"
       - "authorized_action volta a travar novas frentes ate proxima revisao de portfolio"
+  - decision_id: DEC-062
+    date: 2026-08-09
+    decision: >
+      Concluir, por revisao de portfolio, que RESEARCH_QUEUE.yaml esta
+      esgotada (28 de 29 itens VERIFIED) e que nenhuma frente nova pode
+      ser aberta por decisao autonoma deste gate. Nao reativar
+      RH-NOGO-001. Rodar lake build completo da arvore como verificacao
+      de integridade em vez de fabricar trabalho novo.
+    rationale: >
+      Apos o fechamento da onda paralela de cinco frentes (DEC-059,
+      DEC-060, DEC-061), todo item de RESEARCH_QUEUE.yaml com
+      dependencias satisfeitas e status SCOPED/READY ja foi executado.
+      Os dois itens restantes sao RH-NOGO-001 (FROZEN_PARTIAL_RESULT) e
+      TOE-INTERFACE-001 (bloqueado por depender de RH-NOGO-001; as
+      outras duas dependencias ja sao VERIFIED).
+      RH_NOGO_REACTIVATION_CRITERIA.md lista cinco condicoes de
+      reativacao (infraestrutura Lean para operadores nao limitados,
+      formalizacao reutilizavel da lei GLOBAL de Weyl, formalizacao de
+      Riemann-von Mangoldt, colaborador especializado comprometido, ou
+      prioridade estrategica registrada em decisao) — nenhuma ocorreu.
+      O mesmo documento exclui explicitamente "um gate autonomo decidir
+      por conta propria que agora vale a pena" como reativacao valida.
+      Abrir uma frente nova sem registro previo na fila violaria
+      queue_registration_required (a mesma regra que DEC-058 corrigiu).
+      Em vez de fabricar trabalho para nao ficar ocioso, esta revisao
+      fez a unica verificacao genuina ainda pendente: lake build sem
+      alvo especificado sobre toda a arvore TamesisLab/, nunca rodado
+      nesta sessao (so builds individuais por arquivo). Resultado: 8819
+      jobs, exit 0 — os 24 itens fechados antes desta sessao permanecem
+      mutuamente consistentes como uma unica arvore de compilacao.
+    authority: NO_AUTONOMOUS_WORK_AVAILABLE
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> NO_AUTONOMOUS_WORK_AVAILABLE"
+      - "labctl.py: authorized_action allow-list += NO_AUTONOMOUS_WORK_AVAILABLE"
+    untouched_safeguards:
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, NAO reativado"
+      - "TOE-INTERFACE-001 permanece SCOPED, bloqueado"
+      - "nenhuma frente nova foi aberta sem registro na fila"
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "lake build completo confirmado exit 0, 8819 jobs, nao assumido"

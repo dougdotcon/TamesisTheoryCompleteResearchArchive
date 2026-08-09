@@ -764,6 +764,7 @@ def validate() -> dict[str, Any]:
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
         "PARALLEL_AUDIT_WAVE_IN_PROGRESS",
         "RESULT_REVIEW_REQUIRED",
+        "NO_AUTONOMOUS_WORK_AVAILABLE",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     benchmark_phases = benchmark.get("phase_status", {})

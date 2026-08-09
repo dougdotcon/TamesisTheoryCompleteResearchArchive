@@ -35,18 +35,26 @@ integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "9fc26a9a4fd64ad2a93a1c7007491b856615f7aa"
 last_verified_artifact: "5 lean sketches under 03_MILLENNIUM/*/FORMAL/, lake env lean exit 0 each, result_review APPROVED_WITH_NOTES for all five"
-current_blocker: null
+current_blocker: >
+  Fila de pesquisa esgotada: 28 de 29 itens VERIFIED. RH-NOGO-001
+  permanece FROZEN_PARTIAL_RESULT (nenhuma das cinco condições de
+  RH_NOGO_REACTIVATION_CRITERIA.md ocorreu — a lista exclui
+  explicitamente "um gate autônomo decidir por conta própria que agora
+  vale a pena"). TOE-INTERFACE-001 permanece bloqueado por depender de
+  RH-NOGO-001 (as outras duas dependências já são VERIFIED).
 next_single_action: >
-  As cinco frentes da onda paralela fecharam: VERIFIED, result_review
-  APPROVED_WITH_NOTES. Nenhum problema bloqueante foi encontrado na
-  revisão adversarial; correções menores (citação Cantwell 1992,
-  LEAN_MAP.md desatualizado em 4 frentes, citação Deligne/Clay
-  fundindo duas cláusulas) foram aplicadas nesta integração. Aguardar
-  gate de revisão de portfólio antes de abrir qualquer frente nova —
-  nada mais está autorizado.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Nenhuma execução autônoma adicional está autorizada. Abrir a próxima
+  frente exige uma de três coisas, nenhuma decidível por este gate: (1)
+  uma condição de RH_NOGO_REACTIVATION_CRITERIA.md ocorrer e ser
+  verificada; (2) o principal registrar uma nova entrada em
+  RESEARCH_QUEUE.yaml com target_statement/expected_product/
+  stop_condition próprios; (3) uma lacuna já aberta (SC-GAP-002,
+  LP-GAP-004, ENC-GAP-020, RT-GAP-017 caso geral, YM-GAP-007) receber
+  gate próprio com justificativa explícita. Ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md.
+authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
 portfolio_review_status: "CONSUMED"
-portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
+portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
 yaml_scan_markdown_front_matter_covered: 333
@@ -555,13 +563,22 @@ PVSNP-PHYS-001                      VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
 YM-LIMIT-001                        VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
 HODGE-CDK-001                       VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
 BSD-HYP-MATRIX-001                  VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
-TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NOGO-001/NS-PRESSURE-001 nao satisfeita
+TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NOGO-001 nao satisfeita (as outras duas ja sao VERIFIED)
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
+authorized_action: NO_AUTONOMOUS_WORK_AVAILABLE   (fila revisada e esgotada, nao e uma trava de gate pendente)
 ```
+
+**Fila esgotada em 2026-08-09.** 28 de 29 itens de `RESEARCH_QUEUE.yaml`
+estão `VERIFIED`. Os dois que restam (`RH-NOGO-001` congelado,
+`TOE-INTERFACE-001` bloqueado por depender dele) só reabrem sob as
+condições explícitas de `RH_NOGO_REACTIVATION_CRITERIA.md` — nenhuma
+ocorreu. Ver `01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`.
+Este NÃO é um convite para inventar uma frente nova sem motivo — é
+exatamente a disciplina que o laboratório pede: quando não há resultado
+verificável ao alcance, dizer isso é a ação correta.
 
 **Onda concluída, integrada e revisada: cinco frentes em paralelo no
 track `millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`,

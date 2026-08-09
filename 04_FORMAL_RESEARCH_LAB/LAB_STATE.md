@@ -20,7 +20,7 @@ active_work_item: "FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001"
 work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "IN_PROGRESS"
+formalization_status: "VERIFIED"
 result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -37,13 +37,14 @@ formalized_at_commit: "3a6b93d0fb860ace5a54a695c60e7a5ce07e274f"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelFixedPoint.lean (257 lines), lake env lean exit 0, full lake build exit 0 (8824 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001 autorizada (DEC-073): instância
-  positiva concreta (B não-degenerado, L>0) de exists_unique_mild_solution
-  -- corrige a ausência de instância positiva em
-  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001, único resultado principal desta
-  sessão a quebrar esse padrão. Ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md.
-  Formalização em andamento.
+  FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001: instância concreta entregue em
+  DuhamelFixedPointInstance.lean (114 linhas) -- E3/F3 (R³ concreto, mesmo
+  par de concrete_stokesOpL2_R3), concreteB := (1/2:C)•id (não-nulo),
+  L=1/2>0, T=1, u0=0, concrete_mild_solution_instance. Reverificada de
+  forma independente nesta sessão -- lake env lean exit 0, lake build
+  completo exit 0 (8825 jobs), zero sorry/admit, checados diretamente sem
+  pipe. Revisão adversarial (escopo leve, tarefa de instanciação de baixo
+  risco) disparada, ainda pendente. Integração final após o veredito.
 authorized_action: "FORMALIZATION"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"

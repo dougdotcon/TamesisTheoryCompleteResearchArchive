@@ -1897,3 +1897,49 @@ queue:
       AskUserQuestion diante das ressalvas honestas do relatorio de
       pesquisa (nao alcanca L^2, nao toca a integral p.v. real).
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001
+    title: "Lema de integral oscilatoria tipo Dirichlet (Grafakos Lema 5.2.5)"
+    track: FOUNDATIONS
+    target_statement: >
+      Formalizar o valor da integral de Dirichlet
+      integral(0,infinity) sin(r)/r dr = pi/2 (ou o limite improprio
+      equivalente), e o(s) limite(s) de integral oscilatoria do Lema
+      5.2.5 de Grafakos: lim_{eps->0,N->infinity}
+      integral(eps,N) (cos(r*a) - cos(r))/r dr = log(1/|a|) para a real
+      != 0 (forma exata a confirmar por leitura direta da fonte
+      primaria antes de comprometer o enunciado Lean).
+    expected_product: >
+      Lema(s) standalone em 02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/,
+      lake build exit 0, zero sorry, SEM qualquer conexao a
+      distribuicoes de valor principal, a Proposicao 5.2.3 de Grafakos,
+      a multiplicador de Fourier, ou ao nucleo D deste laboratorio --
+      isso fica para frente futura e separada.
+    dependencies: []
+    existing_assets: []
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "nenhuma infraestrutura Mathlib de integral oscilatoria/Fresnel/Dirichlet existe -- verificado por busca exaustiva"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar a Proposicao 5.2.3 de Grafakos
+      ou qualquer limitacao de multiplicador; conectar a CZKernelClass,
+      ao nucleo D, a fourierMulL2, ou a distribuicoes de valor
+      principal; afirmar progresso em NS-GAP-001/004 ou que
+      Navier-Stokes ficou alcancavel; forcar a prova se intratavel --
+      registrar como gap nomeado em vez disso
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md,
+      DEC-082 -- fundamentado em
+      RESEARCH_SCOPING_SINGULAR_INTEGRAL_INFRASTRUCTURE_2026_08_09.md,
+      que identificou esta integral como a menor unidade irredutivel de
+      trabalho em qualquer rota rumo a limitacao L^2/L^p do nucleo
+      Constantin-Fefferman. Usuario escolheu investir nesta
+      infraestrutura apos apresentacao explicita dos dois caminhos
+      possiveis.
+    research_role: FORMAL_FOUNDATION

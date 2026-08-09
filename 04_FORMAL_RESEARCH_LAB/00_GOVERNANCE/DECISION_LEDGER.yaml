@@ -2483,3 +2483,44 @@ decisions:
       - "NENHUMA limitacao L^2 ou L^p, NENHUM teorema de Calderon-Zygmund, NENHUMA estimativa sobre a integral p.v. real foram tentados"
       - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
       - "lake env lean e lake build completo confirmados exit 0 (no primeiro plano, nao via checagem em segundo plano nao lida) por dois processos independentes (esta sessao, revisor adversarial)"
+
+  - decision_id: DEC-082
+    date: 2026-08-09
+    decision: >
+      Autorizar FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001 -- formalizar,
+      como item de fundamentos standalone em 02_FOUNDATIONS/ (nao em
+      03_MILLENNIUM/), o valor da integral de Dirichlet
+      integral(0,infinity) sin(r)/r dr = pi/2 e o(s) limite(s) de
+      integral oscilatoria tipo Grafakos Lema 5.2.5 (forma exata a
+      confirmar por leitura direta da fonte primaria antes de
+      comprometer o enunciado Lean). Sem qualquer conexao a
+      distribuicoes de valor principal, a Proposicao 5.2.3, ao
+      multiplicador de Fourier, ou ao nucleo D deste laboratorio --
+      isso fica para frente futura e separada.
+    rationale: >
+      RESEARCH_SCOPING_SINGULAR_INTEGRAL_INFRASTRUCTURE_2026_08_09.md
+      (pesquisa dedicada, sem edicao de codigo, citacao re-verificada
+      por leitura direta do PDF de Grafakos, nao confiada da pesquisa
+      anterior) identificou esta integral oscilatoria como a menor
+      unidade irredutivel de trabalho em qualquer rota rumo a limitacao
+      L^2/L^p do nucleo Constantin-Fefferman de coeficiente congelado --
+      reutilizavel alem desta linha especifica. Apresentado ao usuario
+      com dois caminhos explicitos (investir nesta infraestrutura vs.
+      parar na fronteira ja fechada); usuario respondeu "continue",
+      interpretado como autorizacao para o caminho de investimento.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001), status SCOPED"
+      - "LAB_STATE: authorized_action NO_AUTONOMOUS_WORK_AVAILABLE -> FORMALIZATION"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NENHUMA limitacao L^2/L^p, NENHUM teorema de Calderon-Zygmund tentados"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao tocados por esta frente"
+      - "item explicitamente NAO conectado a CZKernelClass, ao nucleo D, ou a fourierMulL2 nesta frente"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"

@@ -15,13 +15,13 @@ canonical_commit_policy: >
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "millennium"
-active_work_item: "FOUND-CZ-MEAN-ZERO-001"
-work_status: "VERIFIED"
+active_track: "FOUNDATIONS"
+active_work_item: "FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -116,7 +116,8 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
+authorized_action: "FORMALIZATION"
+portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
 portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"

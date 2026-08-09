@@ -1842,3 +1842,57 @@ queue:
       p.v.). Escopo escolhido explicitamente pelo usuario: camada
       definicional apenas.
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-CZ-MEAN-ZERO-001
+    title: "Fechamento do campo mean_zero de CZKernelClass para o nucleo de coeficiente congelado"
+    track: millennium
+    target_statement: >
+      (1) Estabelecer isotropia do tensor de segundo momento de
+      sphereSurfaceMeasure: integral_{S^2} theta_i*theta_j d-sigma(theta)
+      = c*delta_ij para alguma constante c (via rotacao-invariancia da
+      medida, ou via coordenadas polares e o momento de inercia
+      isotropico da bola unitaria, se rotacao-invariancia direta de
+      MeasureTheory.Measure.toSphere nao estiver pronta no Mathlib). (2)
+      Usando (1) e det(e3,e2,e3)=0 (linha repetida), provar
+      integral_{S^2} D(theta,e2,e3) d-sigma(theta) = 0 para e2,e3 fixos
+      quaisquer. (3) Instanciar o termo COMPLETO de CZKernelClass
+      sphereSurfaceMeasure (K e2 e3), combinando com K_homogeneous e
+      contDiffAt_K ja provados em FOUND-CZ-KERNEL-DEFINITIONS-001.
+    expected_product: >
+      Extensao de CalderonZygmundKernelDefinitions.lean (ou arquivo novo
+      na mesma pasta) com lake build exit 0, zero sorry, produzindo o
+      primeiro termo COMPLETO de CZKernelClass em todo o laboratorio. Se
+      o passo (1) (isotropia de sphereSurfaceMeasure) for genuinamente
+      intratavel no tempo disponivel, registrar como gap nomeado --
+      NAO forcar. NAO tenta limitacao L^2/L^p, NENHUM teorema de
+      Calderon-Zygmund, NENHUMA estimativa sobre a integral p.v. real
+      aplicada a um campo de vorticidade genuino.
+    dependencies: ["FOUND-CZ-KERNEL-DEFINITIONS-001"]
+    existing_assets:
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 2
+    external_dependency: "Mathlib MeasureTheory.Measure.toSphere (Mathlib/MeasureTheory/Constructions/HaarToSphere.lean) -- rotation-invariance/isotropy lemmas not yet confirmed usable"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar provar limitacao L^2 ou L^p de
+      qualquer operador; tentar qualquer teorema de Calderon-Zygmund
+      (decomposicao, tipo-fraco, interpolacao); tentar a integral p.v.
+      real das eq. 2.1/2.2 aplicada a um campo de vorticidade genuino;
+      forcar a prova de isotropia/media-zero se intratavel -- registrar
+      como gap nomeado em vez disso; afirmar NS-GAP-001/004 resolvido,
+      aproximado, ou que Navier-Stokes ficou alcancavel
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md, DEC-080
+      -- terceira extensao nomeada da excecao de DEC-076 (via DEC-078),
+      fundamentada em pesquisa dedicada citando Grafakos, Classical
+      Fourier Analysis (2014), Sec.5.1.4/5.2.1-5.2.2, verificada por
+      leitura direta de PDF. Escolhido explicitamente pelo usuario via
+      AskUserQuestion diante das ressalvas honestas do relatorio de
+      pesquisa (nao alcanca L^2, nao toca a integral p.v. real).
+    research_role: FORMAL_FOUNDATION

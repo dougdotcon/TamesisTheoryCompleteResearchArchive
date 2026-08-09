@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "millennium"
-active_work_item: "FOUND-CZ-KERNEL-DEFINITIONS-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-CZ-MEAN-ZERO-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,6 +37,30 @@ formalized_at_commit: "4564786"
 last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean (~384 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry -- verified independently three times (implementer agent, this session, adversarial reviewer)"
 current_blocker: null
 next_single_action: >
+  FOUND-CZ-MEAN-ZERO-001 aberta (SCOPED), terceira extensão nomeada da
+  exceção de DEC-076 (via DEC-078) através de DEC-080. Pesquisa dedicada
+  (sem edição de código, fontes verificadas por leitura direta de PDF —
+  Grafakos, Classical Fourier Analysis, 3ª ed., Springer GTM 249, 2014,
+  Sec.5.1.4/5.2.1-5.2.2) descobriu que média zero para
+  K(y):=D(ŷ,e2,e3)/‖y‖³ — deixada em aberto por
+  FOUND-CZ-KERNEL-DEFINITIONS-001 — é um fato ELEMENTAR, não o cálculo
+  analítico difícil que se supunha: D(θ,e2,e3) é forma quadrática em θ,
+  e sua integral sobre a esfera colapsa via isotropia do tensor de
+  segundo momento para um múltiplo de det(e3,e2,e3)=0 (linha repetida).
+  Re-derivado manualmente nesta revisão, confere. Escopo: (1) isotropia
+  do tensor de segundo momento de sphereSurfaceMeasure; (2) fechamento
+  de mean_zero usando (1); (3) instanciar o termo COMPLETO de
+  CZKernelClass — o primeiro termo completo desta classe no laboratório.
+  O próprio relatório de pesquisa é explícito: isso NÃO alcança
+  limitação L²/L^p (exige maquinaria de Grafakos Prop.5.2.3/Cor.5.2.6,
+  ausente do Mathlib, não alcançável a partir de fourierMulL2 já
+  formalizado) nem toca o operador não-linear real das eq. 2.1/2.2.
+  Usuário escolheu esta opção explicitamente via AskUserQuestion, com
+  essas ressalvas apresentadas. Se a isotropia se revelar intratável,
+  registrar como gap nomeado, não forçar.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   FOUND-CZ-KERNEL-DEFINITIONS-001 fechou VERIFIED / result_review
   APPROVED_WITH_NOTES (revisão adversarial com escrutínio reforçado:
   0 problemas de solidez matemática; 1 citação Mathlib fabricada
@@ -90,7 +114,8 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
+portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
 portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"

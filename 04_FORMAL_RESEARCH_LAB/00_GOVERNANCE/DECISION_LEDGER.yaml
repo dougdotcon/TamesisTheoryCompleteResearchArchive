@@ -2368,3 +2368,53 @@ decisions:
       - "media zero para o K concreto: nao tentada, registrada honestamente como intratavel nesta janela de escopo, nao forcada"
       - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado) por dois processos independentes (esta sessao, revisor adversarial), apos a correcao da citacao fabricada"
+
+  - decision_id: DEC-080
+    date: 2026-08-09
+    decision: >
+      Autorizar FOUND-CZ-MEAN-ZERO-001 -- fechar o campo mean_zero de
+      CZKernelClass sphereSurfaceMeasure (K e2 e3) para o nucleo de
+      coeficiente congelado K(y):=D(y-hat,e2,e3)/||y||^3, deixado em
+      aberto por FOUND-CZ-KERNEL-DEFINITIONS-001. Escopo: (1) isotropia
+      do tensor de segundo momento de sphereSurfaceMeasure (integral
+      theta_i*theta_j d-sigma = c*delta_ij); (2) usando (1) e
+      det(e3,e2,e3)=0 (linha repetida), provar integral D(theta,e2,e3)
+      d-sigma = 0; (3) instanciar o termo completo de CZKernelClass.
+    rationale: >
+      Pesquisa dedicada (agente de pesquisa, sem edicao de codigo,
+      fontes verificadas por leitura direta de PDF -- Grafakos,
+      Classical Fourier Analysis, 3a ed., Springer GTM 249, 2014,
+      Sec.5.1.4/5.2.1-5.2.2, paginas e numeros de equacao citados)
+      descobriu que mean_zero, supostamente um calculo analitico dificil,
+      e na verdade um fato elementar: D(theta,e2,e3) e uma forma
+      quadratica em theta, e sua integral sobre a esfera colapsa para um
+      multiplo de det(e3,e2,e3)=0 via isotropia do tensor de segundo
+      momento de uma medida de superficie rotacionalmente invariante.
+      Re-derivado manualmente nesta revisao, confere. O mesmo relatorio
+      de pesquisa e explicito que isso NAO alcanca limitacao L^2 (exige
+      a maquinaria completa de Grafakos Prop.5.2.3/Cor.5.2.6, ausente do
+      Mathlib e nao alcancavel a partir de fourierMulL2 ja formalizado)
+      nem toca o operador nao-linear real das eq. 2.1/2.2. Apresentado
+      ao usuario via AskUserQuestion com essas ressalvas explicitas;
+      usuario escolheu "Formalizar o fechamento de mean_zero
+      (Recomendado)".
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-CZ-MEAN-ZERO-001), status SCOPED"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "terceira extensao NOMEADA e DELIMITADA da excecao de DEC-076 (via DEC-078): permite fechar mean_zero para o nucleo de coeficiente congelado apenas -- SEM tentar limitacao L^2/L^p, SEM tocar a integral p.v. real"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NENHUMA limitacao L^2 ou L^p de operador tentada"
+      - "NENHUM teorema de Calderon-Zygmund (decomposicao, tipo-fraco, interpolacao) tentado"
+      - "NENHUMA estimativa sobre a integral p.v. real aplicada a campo de vorticidade genuino"
+      - "NS-GAP-001/004 permanecem nomeados e abertos"
+      - "isotropia de sphereSurfaceMeasure pode ficar registrada como gap nomeado se intratavel -- nao forcada"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"

@@ -648,7 +648,12 @@ def validate() -> dict[str, Any]:
                       "FOUND-FOURIER-MULTIPLIER-L2-001",
                       "FOUND-ELLIPTIC-HEIGHT-001",
                       "FOUND-LERAY-PROJECTOR-001",
-                      "FOUND-SOBOLEV-SPACE-001"}:
+                      "FOUND-SOBOLEV-SPACE-001",
+                      "NS-PRESSURE-001",
+                      "PVSNP-PHYS-001",
+                      "YM-LIMIT-001",
+                      "HODGE-CDK-001",
+                      "BSD-HYP-MATRIX-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -757,6 +762,7 @@ def validate() -> dict[str, Any]:
         "ENG_RUNTIME_SOUNDNESS_002_SPECIFICATION_REVIEW_AUTHORIZED",
         "FOUND_SPECTRAL_COUNTING_001_SPECIFICATION_PREPARATION_AUTHORIZED",
         "RH_NOGO_ASYMPTOTIC_LEMMA_FORMALIZATION_AUTHORIZED",
+        "PARALLEL_AUDIT_WAVE_IN_PROGRESS",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     benchmark_phases = benchmark.get("phase_status", {})

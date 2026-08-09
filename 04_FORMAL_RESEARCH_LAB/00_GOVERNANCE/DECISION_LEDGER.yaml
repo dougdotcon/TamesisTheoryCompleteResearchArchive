@@ -1355,3 +1355,57 @@ decisions:
       - "lake build exit 0, 8819 jobs, 0 error, conferido"
       - "labctl validate PASS com o campo status LIDO"
       - "nenhum problema de milenio e atacado"
+  - decision_id: DEC-059
+    date: 2026-08-09
+    decision: >
+      Consumir PORTFOLIO_REVIEW_REQUIRED com
+      PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09; autorizar execucao
+      paralela de cinco frentes SCOPED do track millennium
+      (NS-PRESSURE-001, PVSNP-PHYS-001, YM-LIMIT-001, HODGE-CDK-001,
+      BSD-HYP-MATRIX-001); backfillar seis entradas de closed_work_items
+      faltando em LAB_STATE.md.
+    rationale: >
+      A sessao foi instruida explicitamente pelo principal a trabalhar em
+      varias frentes ao mesmo tempo, com paralelismo e concorrencia, e a
+      nunca ficar ociosa entre ciclos. O laboratorio operava em serie
+      desde LAB-ARCH-001 por disciplina de contabilidade de um agente
+      unico, nao por limite estrutural: as seis frentes millennium
+      SCOPED ja tinham authorized_next_gate individual na fila e
+      diretorio proprio pre-escafoldado sob 03_MILLENNIUM/, com
+      dependencies: [LAB-BENCH-001] (VERIFIED) apenas. TOE-INTERFACE-001
+      fica de fora: duas de suas tres dependencias (RH-NOGO-001,
+      NS-PRESSURE-001) nao estao satisfeitas. O paralelismo autorizado
+      aqui preserva a disciplina de LAB-CORR-VALIDATION-BLINDNESS-001:
+      cada frente escreve so no seu proprio subdiretorio; os ledgers
+      compartilhados (LAB_STATE.md, RESEARCH_QUEUE.yaml, CHANGELOG.md,
+      DECISION_LEDGER.yaml, CLAIM_LEDGER.yaml) sao escritos so pela
+      sessao orquestradora, em serie, apos cada frente reportar.
+      LAB_STATE.md tambem tinha closed_work_items faltando seis entradas
+      (ENG-RUNTIME-SOUNDNESS-002 e a cadeia de cinco de EDP/analise
+      funcional) que so existiam na tabela em prosa — a mesma classe de
+      defeito que DEC-058 ja havia corrigido uma vez, recorrendo aqui sem
+      custar um gate porque foi achada antes da proxima frente abrir.
+    authority: PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/STATUS.yaml"
+      - "03_MILLENNIUM/03_P_VS_NP/STATUS.yaml"
+      - "03_MILLENNIUM/04_YANG_MILLS/STATUS.yaml"
+      - "03_MILLENNIUM/05_HODGE/STATUS.yaml"
+      - "03_MILLENNIUM/06_BSD/STATUS.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: schema tamesis-formal-lab-state/1 -> /2, active_work_items (lista) adicionado"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> PARALLEL_AUDIT_WAVE_IN_PROGRESS"
+      - "LAB_STATE: closed_work_items +6 (backfill)"
+      - "RESEARCH_QUEUE: 5 itens SCOPED -> IN_PROGRESS, execution_authorized: true"
+      - "STATUS.yaml (x5, 03_MILLENNIUM): execution_authorized false -> true"
+    untouched_safeguards:
+      - "TOE-INTERFACE-001 permanece SCOPED: dependencias nao satisfeitas"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reaberto"
+      - "nenhum problema de milenio e declarado resolvido ou alcancavel"
+      - "nenhuma frente autorizada a escrever fora do proprio subdiretorio"
+      - "validate_status_must_be_read e queue_registration_required continuam valendo por frente"

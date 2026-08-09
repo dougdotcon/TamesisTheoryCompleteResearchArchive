@@ -1,20 +1,53 @@
 ---
 schema: tamesis-formal-lab-state/1
-updated_at: 2026-08-04T15:31:00-03:00
-canonical_commit: "ac9976cb5d163a8b820dc1cc1a9144bd29a0c180"
+schema_extension_note: >
+  active_work_items (lista, abaixo) é um campo aditivo sob o schema/1
+  existente (additionalProperties: true), não uma versão nova. Registra
+  execução paralela; active_work_item (singular) permanece o ponteiro de
+  compatibilidade lido por labctl e aponta para o primeiro item da lista.
+  Mudança pedida explicitamente na sessão 2026-08-09, autorizada por
+  PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
+updated_at: 2026-08-09T00:00:00-03:00
+canonical_commit: "1bfd33c1a7e512674e04b63f2bc3217aa2f1eb8f"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "foundations"
-active_work_item: "FOUND-SOBOLEV-SPACE-001"
-work_status: "VERIFIED"
-specification_status: "APPROVED"
-specification_review: "APPROVED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+active_track: "millennium"
+active_work_item: "NS-PRESSURE-001"
+active_work_items:
+  - work_item_id: "NS-PRESSURE-001"
+    track: millennium
+    path: "03_MILLENNIUM/02_NAVIER_STOKES/"
+    work_status: "IN_PROGRESS"
+    execution_mode: "PARALLEL_AUDIT_WAVE"
+  - work_item_id: "PVSNP-PHYS-001"
+    track: millennium
+    path: "03_MILLENNIUM/03_P_VS_NP/"
+    work_status: "IN_PROGRESS"
+    execution_mode: "PARALLEL_AUDIT_WAVE"
+  - work_item_id: "YM-LIMIT-001"
+    track: millennium
+    path: "03_MILLENNIUM/04_YANG_MILLS/"
+    work_status: "IN_PROGRESS"
+    execution_mode: "PARALLEL_AUDIT_WAVE"
+  - work_item_id: "HODGE-CDK-001"
+    track: millennium
+    path: "03_MILLENNIUM/05_HODGE/"
+    work_status: "IN_PROGRESS"
+    execution_mode: "PARALLEL_AUDIT_WAVE"
+  - work_item_id: "BSD-HYP-MATRIX-001"
+    track: millennium
+    path: "03_MILLENNIUM/06_BSD/"
+    work_status: "IN_PROGRESS"
+    execution_mode: "PARALLEL_AUDIT_WAVE"
+work_status: "IN_PROGRESS"
+specification_status: "N_A_AUDIT_FRONT"
+specification_review: "N_A_AUDIT_FRONT"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -26,14 +59,17 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "d8a68e6bfd000062949c8349800d98b317763bbb"
-last_verified_artifact: "found-bisimulation-boundary-001-result-review.json"
+formalized_at_commit: "1bfd33c1a7e512674e04b63f2bc3217aa2f1eb8f"
+last_verified_artifact: "found-sobolev-space-001 chain (see closed_work_items)"
 current_blocker: null
 next_single_action: >
-  Aguardar revisão de portfólio. A não-acumulação está provada e N(λ)
-  deixou de ser junk.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Executar as cinco frentes de auditoria em paralelo (NS-PRESSURE-001,
+  PVSNP-PHYS-001, YM-LIMIT-001, HODGE-CDK-001, BSD-HYP-MATRIX-001), cada
+  uma restrita ao seu próprio diretório sob 03_MILLENNIUM/, e reportar de
+  volta para integração serial nos ledgers de governança.
+authorized_action: "PARALLEL_AUDIT_WAVE_IN_PROGRESS"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390
 yaml_scan_markdown_front_matter_covered: 333
@@ -184,6 +220,54 @@ closed_work_items:
     external_abstraction_correctness: DEFERRED
     mathematical_novelty: NONE
     algorithmic_novelty: NONE
+  ENG-RUNTIME-SOUNDNESS-002:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  FOUND-SPECTRAL-COUNTING-001:
+    work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    closes_gap: SC-GAP-001
+    open_gap: SC-GAP-002
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  FOUND-FOURIER-MULTIPLIER-L2-001:
+    work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  FOUND-ELLIPTIC-HEIGHT-001:
+    work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  FOUND-LERAY-PROJECTOR-001:
+    work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    closes_gap: LP-GAP-003
+    open_gap: LP-GAP-004
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    decision_ref: DEC-056, DEC-057
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
+  FOUND-SOBOLEV-SPACE-001:
+    work_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+    backfilled_at_gate: LAB-CORR-VALIDATION-BLINDNESS-001
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT
@@ -403,15 +487,12 @@ prohibited_actions:
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
-  - "01_PORTFOLIO/NEXT_WORK_ITEM_FINITE_STATE_RUNTIME.md"
-  - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/README.md"
-  - "03_ENGINEERING/01_FINITE_STATE_RUNTIME/ENG_FINITE_STATE_RUNTIME_001/SPECIFICATION_DECISION.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/PUBLIC_API.md"
-  - "02_FOUNDATIONS/05_CYCLE_DETECTION/FOUND_CYCLE_DETECTION_001/RESULT_BOUNDARY.md"
-  - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/README.md"
-  - "02_FOUNDATIONS/07_FINITE_ABSTRACTION/FOUND_FINITE_STATE_ABSTRACTION_001/SPECIFICATION_DECISION.md"
-  - "02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/README.md"
-  - "02_FOUNDATIONS/08_BISIMULATION/FOUND_BISIMULATION_BOUNDARY_001/SCOPE_BOUNDARY.md"
+  - "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
+  - "03_MILLENNIUM/02_NAVIER_STOKES/STATUS.yaml"
+  - "03_MILLENNIUM/03_P_VS_NP/STATUS.yaml"
+  - "03_MILLENNIUM/04_YANG_MILLS/STATUS.yaml"
+  - "03_MILLENNIUM/05_HODGE/STATUS.yaml"
+  - "03_MILLENNIUM/06_BSD/STATUS.yaml"
   - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
   - "último relatório em 09_SESSIONS/"
 ---
@@ -446,21 +527,27 @@ FOUND-SOBOLEV-SPACE-001             VERIFIED / APPROVED     ENCERRADO
 
 RH-NOGO-001                         FROZEN_PARTIAL_RESULT   congelado
 
-NS-PRESSURE-001                     SCOPED                  nunca executado
-PVSNP-PHYS-001                      SCOPED                  nunca executado
-YM-LIMIT-001                        SCOPED                  nunca executado
-HODGE-CDK-001                       SCOPED                  nunca executado
-BSD-HYP-MATRIX-001                  SCOPED                  nunca executado
-TOE-INTERFACE-001                   SCOPED                  nunca executado
+NS-PRESSURE-001                     IN_PROGRESS             onda paralela, em execucao
+PVSNP-PHYS-001                      IN_PROGRESS             onda paralela, em execucao
+YM-LIMIT-001                        IN_PROGRESS             onda paralela, em execucao
+HODGE-CDK-001                       IN_PROGRESS             onda paralela, em execucao
+BSD-HYP-MATRIX-001                  IN_PROGRESS             onda paralela, em execucao
+TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NOGO-001/NS-PRESSURE-001 nao satisfeita
 
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
+LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
+authorized_action: PARALLEL_AUDIT_WAVE_IN_PROGRESS
 ```
 
-**Frente ativa: `ENG-RUNTIME-SOUNDNESS-002`.** Quatorze encerradas.
-`CB-GAP-001` fechou com prova. A nova frente paga dívida técnica cuja
-**quarta parcela** venceu, e toca frente encerrada sob gate explícito.
+**Onda ativa: cinco frentes em paralelo no track `millennium`** —
+`NS-PRESSURE-001`, `PVSNP-PHYS-001`, `YM-LIMIT-001`, `HODGE-CDK-001`,
+`BSD-HYP-MATRIX-001`. Dezenove frentes encerradas antes desta onda.
+Autorizada por `PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09`, que
+também corrigiu `closed_work_items` faltando seis entradas (a mesma
+classe de defeito prosa/YAML que `LAB-CORR-VALIDATION-BLINDNESS-001` já
+havia corrigido uma vez). `TOE-INTERFACE-001` fica fora desta onda: duas
+de suas três dependências não estão satisfeitas.
 
 ## Por que este bloco existe
 
@@ -525,7 +612,13 @@ research_role: FORMAL_BRIDGE
 
 ## Próxima ação
 
-Aguardar gate de revisão de portfólio. Nada mais está autorizado.
+Executar as cinco frentes da onda paralela (`NS-PRESSURE-001`,
+`PVSNP-PHYS-001`, `YM-LIMIT-001`, `HODGE-CDK-001`, `BSD-HYP-MATRIX-001`),
+cada uma confinada ao seu diretório em `03_MILLENNIUM/`, ver
+`PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md` para as condições de
+paralelismo. O texto abaixo é histórico, da frente
+`FOUND-COMPUTABILITY-BRIDGE-001`, preservado por política do laboratório
+de não reescrever entradas antigas.
 
 ```text
 ponte      Primrec nao mede nada    porque e VACUO sobre dominio finito

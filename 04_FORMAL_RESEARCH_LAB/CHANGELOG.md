@@ -1,5 +1,50 @@
 # Changelog do laboratório formal
 
+## PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN - 2026-08-09
+
+### O que fechou sem gate de portfólio entre elas
+
+Cinco frentes de análise funcional/EDP fecharam em sequência
+(`FOUND-SPECTRAL-COUNTING-001`, `FOUND-FOURIER-MULTIPLIER-L2-001`,
+`FOUND-ELLIPTIC-HEIGHT-001`, `FOUND-LERAY-PROJECTOR-001`,
+`FOUND-SOBOLEV-SPACE-001`), todas `VERIFIED/APPROVED`, todas
+`mathematical_novelty: NONE`. `LAB_STATE.md` registrava as cinco na
+tabela em prosa mas não no bloco estruturado `closed_work_items` — junto
+com `ENG-RUNTIME-SOUNDNESS-002`. Corrigido neste gate (`DEC-059`).
+
+### A mudança pedida: paralelismo
+
+A sessão foi instruída a trabalhar em várias frentes ao mesmo tempo em
+vez de em série. `PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md` autoriza uma
+onda paralela sobre as cinco frentes `SCOPED` do track `millennium` cuja
+única dependência (`LAB-BENCH-001`) já está `VERIFIED`:
+
+```text
+NS-PRESSURE-001      auditoria da hipotese de pressao-alinhamento (Navier-Stokes)
+PVSNP-PHYS-001       definicao de P_phys/NP_phys sem alegar P != NP
+YM-LIMIT-001         insuficiencia ou contraexemplo sobre sobrevivencia do gap
+HODGE-CDK-001        auditoria exata do que CDK prova e nao prova
+BSD-HYP-MATRIX-001   particao da literatura BSD por hipotese/curva/posto/primo
+```
+
+`TOE-INTERFACE-001` fica de fora: duas de suas três dependências
+(`RH-NOGO-001`, `NS-PRESSURE-001`) não estão satisfeitas.
+
+Cada frente escreve só no seu próprio diretório sob `03_MILLENNIUM/`,
+pré-escafoldado desde `LAB-ARCH-001`. Os ledgers compartilhados são
+escritos só pela sessão orquestradora, em série, depois de cada frente
+reportar — a mesma disciplina que `LAB-CORR-VALIDATION-BLINDNESS-001`
+existiu para restaurar, agora sob concorrência em vez de só em série no
+tempo.
+
+### O que isto NÃO afirma
+
+```text
+que qualquer Problema do Milenio ficou alcancavel
+que exista novidade matematica ou algoritmica nesta onda
+que auditoria de literatura equivale a resultado formal
+```
+
 ## LAB-CORR-VALIDATION-BLINDNESS-001 - 2026-08-04
 
 ### The defect: I stopped reading the validator

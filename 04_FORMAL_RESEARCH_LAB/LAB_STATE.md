@@ -28,7 +28,7 @@ active_work_items_note: >
 work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "IN_PROGRESS"
+formalization_status: "VERIFIED"
 result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -45,12 +45,15 @@ formalized_at_commit: "1432535a5cbd737dfff5b3bfb217d815ef2ba068"
 last_verified_artifact: "TamesisLab/Foundations/HeatSemigroup.lean, lake env lean exit 0, full lake build exit 0 (8822 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  PARALLEL-WAVE-002 em execução: (A) FOUND-HEAT-SEMIGROUP-LAW-001
-  tentando fechar HEAT-GAP-001 (lei de semigrupo + continuidade forte);
-  (B) reverificação bibliográfica de NS-GAP-005; (C) reverificação
-  bibliográfica de YM-GAP-007. Ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md e
-  DEC-067. Integração única após as três retornarem.
+  PARALLEL-WAVE-002: (B) e (C) já integradas (commit 9242b2b). (A)
+  FOUND-HEAT-SEMIGROUP-LAW-001: formalização completa entregue
+  (heatOpL2_add'/lei de semigrupo E heatOpL2_continuousAt/continuidade
+  forte, ambas), reverificada de forma independente nesta sessão --
+  lake env lean exit 0, lake build completo exit 0 (8822 jobs), zero
+  sorry/admit, checados diretamente sem pipe. Revisão adversarial
+  independente disparada, ainda pendente. Integração final (ledgers,
+  STATUS.yaml, CHANGELOG, session report, labctl validate) após o
+  veredito retornar.
 authorized_action: "PARALLEL_AUDIT_WAVE_IN_PROGRESS"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"

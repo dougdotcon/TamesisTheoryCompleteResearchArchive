@@ -21,7 +21,7 @@ work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -34,21 +34,16 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "e95d029a2f92a8eda8c9acd26865ba37c29afe58"
-last_verified_artifact: "TamesisLab/Foundations/LerayProjectorSobolev.lean, lake env lean exit 0, full lake build exit 0 (8820 jobs), 9 declarations, standard axiom footprint, zero sorry"
-current_blocker: >
-  Revisão adversarial de FOUND-LERAY-PROJECTOR-SOBOLEV-001 em andamento
-  (agente independente checando o arquivo Lean e o documento de
-  portfólio). Fila de pesquisa continua com 28 de 29 itens antigos
-  VERIFIED; esta é a primeira frente nova desde a onda paralela,
-  justificada por LP-GAP-004 ter deixado de estar bloqueada (ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md).
+last_verified_artifact: "TamesisLab/Foundations/LerayProjectorSobolev.lean, lake env lean exit 0, full lake build exit 0 (8820 jobs), 12 declarations, standard axiom footprint, zero sorry, independently reproduced by adversarial review"
+current_blocker: null
 next_single_action: >
-  Integrar o veredito da revisão adversarial de
-  FOUND-LERAY-PROJECTOR-SOBOLEV-001. Se aprovado, fechar como VERIFIED
-  com result_review preenchido e retravar authorized_action em
-  PORTFOLIO_REVIEW_REQUIRED. Se a revisão pedir mudanças, corrigi-las
-  antes de fechar.
-authorized_action: "RESULT_REVIEW_REQUIRED"
+  FOUND-LERAY-PROJECTOR-SOBOLEV-001 fechou VERIFIED / result_review
+  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de corretude,
+  2 nits cosméticos corrigidos). LP-GAP-004 fechado; LP-GAP-005 aberto
+  de propósito (auto-adjunção em H^s requer transportar o produto
+  interno, não tentado). Fila volta a exigir revisão de portfólio antes
+  de qualquer frente nova.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
@@ -296,6 +291,20 @@ closed_work_items:
     mathematical_novelty: NONE
     research_role: LITERATURE_AUDIT
     decision_ref: DEC-059, DEC-060, DEC-061
+  FOUND-LERAY-PROJECTOR-SOBOLEV-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    closes_gap: LP-GAP-004
+    open_gap: LP-GAP-005
+    unblocked_by: FOUND-SOBOLEV-SPACE-001
+    self_adjoint_claim: FORBIDDEN
+    orthogonal_projection_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
 frozen_work_items:
   RH-NOGO-001:
     work_status: FROZEN_PARTIAL_RESULT
@@ -512,9 +521,14 @@ prohibited_actions:
   - "Não descrever a completeness abstrata como completeness concreta"
   - "Não esconder OrbitSeparating dentro de CertifiedFiniteAbstraction"
   - "Não armazenar encoding, witness, tabela ou estado inicial na estrutura da abstração"
+  - "Não afirmar que lerayOpHs é auto-adjunto ou projeção ortogonal em H^s: Hs E F s não tem produto interno, isso é LP-GAP-005"
+  - "Não citar RH_NOGO_REACTIVATION_CRITERIA.md como regra que rege FOUND-LERAY-PROJECTOR-SOBOLEV-001: está escopado a RH-NOGO-001, é analogia, não autoridade"
+  - "Não confiar no código de saída de um pipe truncado por head/tail: conferir o exit code do processo lean separadamente"
 resume_read_order:
   - "LAB_STATE.md"
   - "AGENTS.md"
+  - "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
+  - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_001/STATUS.yaml"
   - "01_PORTFOLIO/PORTFOLIO_REVIEW_AFTER_SOBOLEV_CHAIN.md"
   - "03_MILLENNIUM/02_NAVIER_STOKES/STATUS.yaml"
   - "03_MILLENNIUM/03_P_VS_NP/STATUS.yaml"
@@ -565,17 +579,25 @@ TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NO
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-authorized_action: NO_AUTONOMOUS_WORK_AVAILABLE   (fila revisada e esgotada, nao e uma trava de gate pendente)
+FOUND-LERAY-PROJECTOR-SOBOLEV-001   VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+
+authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
-**Fila esgotada em 2026-08-09.** 28 de 29 itens de `RESEARCH_QUEUE.yaml`
-estão `VERIFIED`. Os dois que restam (`RH-NOGO-001` congelado,
-`TOE-INTERFACE-001` bloqueado por depender dele) só reabrem sob as
-condições explícitas de `RH_NOGO_REACTIVATION_CRITERIA.md` — nenhuma
-ocorreu. Ver `01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`.
-Este NÃO é um convite para inventar uma frente nova sem motivo — é
-exatamente a disciplina que o laboratório pede: quando não há resultado
-verificável ao alcance, dizer isso é a ação correta.
+**Fila esgotada em 2026-08-09** para as 28 frentes antigas (ver
+`01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`) — mas uma
+29ª surgiu depois, de forma justificada: `LP-GAP-004` (versão H^s do
+projetor de Leray) estava bloqueada por `FM-GAP-001`, e `FM-GAP-001`
+tinha acabado de fechar nesta mesma sessão via `FOUND-SOBOLEV-SPACE-001`.
+Não é invenção de trabalho — é o reconhecimento de que um bloqueador
+especificamente nomeado deixou de existir (ver
+`01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md`).
+`FOUND-LERAY-PROJECTOR-SOBOLEV-001` fechou `VERIFIED` com revisão
+adversarial `APPROVED_WITH_NOTES` (zero problemas de corretude, dois
+nits cosméticos corrigidos). `LP-GAP-005` (auto-adjunção/projeção
+ortogonal em H^s) abre de propósito, não tentado. `RH-NOGO-001` e
+`TOE-INTERFACE-001` continuam sem condição de reativação satisfeita —
+isto não muda a conclusão de esgotamento sobre eles.
 
 **Onda concluída, integrada e revisada: cinco frentes em paralelo no
 track `millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`,

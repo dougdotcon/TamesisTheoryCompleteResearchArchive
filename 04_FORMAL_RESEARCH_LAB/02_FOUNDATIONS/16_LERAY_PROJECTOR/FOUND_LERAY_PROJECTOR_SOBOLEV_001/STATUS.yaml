@@ -5,9 +5,16 @@ work_status: VERIFIED
 specification_status: APPROVED
 specification_review: N_A_SELF_SPECIFIED
 formalization_status: VERIFIED
-result_review: PENDING
+result_review: APPROVED_WITH_NOTES
 extension_status: NOT_AUTHORIZED
-authorized_action: RESULT_REVIEW_REQUIRED
+authorized_action: PORTFOLIO_REVIEW_REQUIRED
+adversarial_review:
+  verdict: APPROVED_WITH_NOTES
+  reviewer: independent subagent, re-ran lake env lean itself (did not trust claimed exit 0)
+  issues_confirmed:
+    - "declaration count metadata said 9, actually 12 (1 def + 11 theorem) — cosmetic, no soundness impact, fixed"
+    - "RH_NOGO_REACTIVATION_CRITERIA.md cited analogically but is scoped to RH-NOGO-001, not this track — citation reframed, actual justification (FM-GAP-001 closed) stands independently"
+  soundness_issues_found: 0
 research_role: FORMAL_FOUNDATION
 closes_gap: LP-GAP-004
 opens_gap: LP-GAP-005
@@ -16,20 +23,28 @@ unblocked_by: FOUND-SOBOLEV-SPACE-001
 reactivation_note: >
   LP-GAP-004 was registered as blocked by FM-GAP-001 (no Sobolev-space
   TYPE in Mathlib) at FOUND-LERAY-PROJECTOR-001's closure. FM-GAP-001
-  closed in this same session via FOUND-SOBOLEV-SPACE-001. This front
-  is the direct consequence, not an autonomously invented direction —
-  see PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md.
+  closed in this same session via FOUND-SOBOLEV-SPACE-001, independently
+  corroborated by three separate STATUS.yaml records (this one,
+  FOUND-LERAY-PROJECTOR-001's, and FOUND-SOBOLEV-SPACE-001's), not just
+  asserted in the portfolio review document. Correction from adversarial
+  review: RH_NOGO_REACTIVATION_CRITERIA.md is scoped explicitly to
+  work_item_id RH-NOGO-001 and does not literally govern this track; it
+  was cited analogically for its general principle ("a gate deciding on
+  its own it's worth it now" is not sufficient justification), and the
+  actual justification here stands independently on the concretely
+  closed, specifically-named blocker FM-GAP-001. See
+  PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md.
 formalization:
   lean_modules_created: 1
   file: "05_FORMAL/lean/TamesisLab/Foundations/LerayProjectorSobolev.lean"
   registered_in: "TamesisLab/Foundations.lean"
   file_lines: 178
-  declarations: 9
+  declarations: 12
   lake_env_lean_exit: 0
   full_project_lake_build_exit: 0
   full_project_lake_build_jobs: 8820
   sorry_declarations: 0
-  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all 9 declarations"
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all 12 declarations, independently reproduced by adversarial review"
 result:
   operator: lerayOpHs
   construction: "conjugation of lerayOpL2 through the toL2ₗᵢ isometric equivalence (Hs E F s ≃ₗᵢ[ℂ] Lp F 2)"

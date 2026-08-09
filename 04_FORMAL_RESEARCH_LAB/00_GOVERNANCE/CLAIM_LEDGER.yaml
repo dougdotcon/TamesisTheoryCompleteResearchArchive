@@ -1307,3 +1307,44 @@ claims:
       - resolve, aproxima ou torna alcancavel BSD
       - a uniao de casos cobertos e cobertura universal ou quase-universal
       - novidade matematica
+  - claim_id: LERAY-SOBOLEV-FORMAL-001
+    short_name: leray_projector_on_Hs
+    exact_statement: "O projetor de Leray matricial (lerayOpL2), ja verificado limitado/idempotente/norma 1 em L^2, admite levantamento a H^s por conjugacao com a isometria toL2ₗᵢ, preservando limitacao, idempotencia e norma exatamente 1 (n >= 2, nao nulo)."
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/LerayProjectorSobolev.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      lerayOpHs e definido por conjugacao de lerayOpL2 atraves da
+      equivalencia linear isometrica Hs E F s ≃ₗᵢ[ℂ] Lp F 2
+      (F := EuclideanSpace ℂ (Fin n)). Prova-se, por transferencia exata
+      (nao reprovando do zero): idempotencia, norma operador IGUAL
+      (nao so cota) a norma de lerayOpL2, cota <= 1, e nao-nulidade com
+      norma exatamente 1 para n >= 2. Compilado (lake env lean e lake
+      build completo do projeto, ambos exit 0, 8820 jobs), 12
+      declaracoes, zero sorry, axiomas [propext, Classical.choice,
+      Quot.sound] em todas, independentemente reproduzido por revisao
+      adversarial (agente que rodou o build de novo por conta propria).
+      Auto-adjuncao e projecao ortogonal em H^s NAO sao afirmadas: Hs E
+      F s carrega NormedSpace/CompleteSpace, nao produto interno, logo
+      ContinuousLinearMap.adjoint nao e enunciavel sobre ele sem
+      transportar o produto interno de L^2 primeiro — isso e LP-GAP-005,
+      aberto de proposito, nao tentado nesta frente.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "LP-GAP-005: auto-adjuncao/projecao ortogonal em H^s requer transportar o produto interno de L^2, nao feito"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - o operador em H^s e auto-adjunto
+      - o operador em H^s e projecao ortogonal
+      - Hs E F s tem estrutura de produto interno
+      - Navier-Stokes ficou alcancavel
+      - novidade matematica

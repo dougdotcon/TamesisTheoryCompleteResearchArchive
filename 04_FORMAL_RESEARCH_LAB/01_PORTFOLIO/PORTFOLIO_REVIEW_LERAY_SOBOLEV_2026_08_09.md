@@ -15,10 +15,18 @@ por FM-GAP-001") estava registrada como bloqueada desde o fechamento de
 `FOUND-LERAY-PROJECTOR-001`. `FM-GAP-001` era exatamente "o Mathlib não
 tem TIPO de espaço de Sobolev" — e essa lacuna fechou **nesta mesma
 sessão**, via `FOUND-SOBOLEV-SPACE-001` (`Hs E F s`, construído como
-espaço de Banach). Isso não é um gate autônomo decidindo por conta
-própria que "agora vale a pena" — proibido explicitamente por
-`RH_NOGO_REACTIVATION_CRITERIA.md` — é o reconhecimento de que o
-bloqueador especificamente nomeado no registro deixou de existir.
+espaço de Banach). A cadeia está corroborada de forma independente em
+três `STATUS.yaml` distintos (`FOUND-LERAY-PROJECTOR-001`,
+`FOUND-SOBOLEV-SPACE-001`, e o desta frente), não apenas afirmada aqui.
+
+**Correção pós-revisão adversarial**: `RH_NOGO_REACTIVATION_CRITERIA.md`
+está escopado explicitamente a `work_item_id: RH-NOGO-001` e não rege
+literalmente esta trilha — citá-lo abaixo é analógico, pelo princípio
+geral que ele registra (um gate decidir sozinho que "agora vale a pena"
+não basta), não como regra de controle sobre `FOUND-LERAY-PROJECTOR-001`.
+A justificativa real desta frente não depende dessa analogia: repousa
+sobre o fato concreto e verificável de que o bloqueador especificamente
+nomeado (`FM-GAP-001`) deixou de existir.
 
 ## O que a sondagem encontrou antes de escrever qualquer prova nova
 
@@ -34,21 +42,26 @@ base ortonormal) — não inventar uma construção nova.
 
 ## O que foi provado
 
-`TamesisLab/Foundations/LerayProjectorSobolev.lean`, compilado
-(`lake env lean` e `lake build` completo, ambos `exit 0`, `#print axioms`
-em todas as 9 declarações confirma `[propext, Classical.choice,
-Quot.sound]`, sem `sorryAx`):
+`TamesisLab/Foundations/LerayProjectorSobolev.lean` (12 declarações: 1
+`def` + 11 `theorem`), compilado (`lake env lean` e `lake build`
+completo, ambos `exit 0`, `#print axioms` em todas as 12 declarações
+confirma `[propext, Classical.choice, Quot.sound]`, sem `sorryAx` —
+independentemente reproduzido pela revisão adversarial, que rodou o
+build de novo em vez de confiar nesta afirmação):
 
 ```text
-lerayOpHs                operador em H^s, por conjugacao com lerayOpL2
-toL2_lerayOpHs            a acao no representante L^2 e exatamente lerayOpL2
-lerayOpHs_idem            idempotente, transferido (nao reprovado do zero)
-norm_lerayOpHs_eq         norma EXATA (nao so cota) igual a norma em L^2
-norm_lerayOpHs_le_one     ‖P‖ <= 1
-lerayOpHs_ne_zero         nao-nulo para n >= 2
-norm_lerayOpHs_eq_one     ‖P‖ = 1 (para n >= 2)
-lerayOpHs_package         pacote fechado das quatro propriedades acima
-concrete_lerayOpHs_R3     instancia concreta, sem hipoteses livres, em R^3, s=5/2
+lerayOpHs                       operador em H^s, por conjugacao com lerayOpL2
+toL2_lerayOpHs                   a acao no representante L^2 e exatamente lerayOpL2
+lerayOpHs_idem                   idempotente, transferido (nao reprovado do zero)
+norm_lerayOpHs_apply             norma pontual = norma do representante L^2
+norm_lerayOpHs_le                cota <= norma de lerayOpL2 (uma direcao)
+norm_lerayOpL2_le_norm_lerayOpHs  cota na direcao oposta
+norm_lerayOpHs_eq                norma EXATA (nao so cota) igual a norma em L^2
+norm_lerayOpHs_le_one            ‖P‖ <= 1
+lerayOpHs_ne_zero                nao-nulo para n >= 2
+norm_lerayOpHs_eq_one            ‖P‖ = 1 (para n >= 2)
+lerayOpHs_package                pacote fechado das propriedades acima
+concrete_lerayOpHs_R3            instancia concreta, sem hipoteses livres, em R^3, s=5/2
 ```
 
 ## O que esta frente explicitamente NÃO afirma
@@ -80,8 +93,28 @@ separadamente do `head`/`tail` usado para exibir o log — não do `head`
 que trunca a saída, o mesmo defeito de classe já corrigido em
 `LAB-CORR-VALIDATION-BLINDNESS-001`.
 
-## Trava
+## Revisão adversarial (agente independente)
 
-`authorized_action` para esta frente: `RESULT_REVIEW_REQUIRED` — revisão
-adversarial independente pendente antes de `VERIFIED` ser afirmado como
-fechamento final do ciclo.
+**Veredito: `APPROVED_WITH_NOTES`.** O revisor rodou `lake env lean` de
+novo por conta própria (não confiou na alegação de `exit 0`), leu os
+quatro arquivos Lean envolvidos por inteiro, e checou especificamente:
+não-vacuidade da conjugação, não-circularidade da prova de igualdade de
+norma nas duas direções, uso correto de `toL2_surjective` em
+`lerayOpHs_ne_zero`, não-vacuidade de `concrete_lerayOpHs_R3` (confirmou
+que `OrthonormalBasis (Fin 3) ℝ (EuclideanSpace ℝ (Fin 3))` tem
+habitante real, `TamesisProbe.b3`), ausência de auto-adjunção/projeção
+ortogonal disfarçada, ausência de `sorry`/`admit`/`axiom`/escape hatches,
+e a cadeia de dependência de gaps corroborada por três `STATUS.yaml`
+independentes. Dois achados, ambos corrigidos nesta integração:
+contagem de declarações (9 → 12, corrigido acima) e o escopo de
+`RH_NOGO_REACTIVATION_CRITERIA.md` (corrigido acima). Nenhum problema de
+corretude matemática ou lógica encontrado.
+
+## Fechamento
+
+`FOUND-LERAY-PROJECTOR-SOBOLEV-001` fecha `VERIFIED` / `result_review:
+APPROVED_WITH_NOTES`. `LP-GAP-004` fecha. `LP-GAP-005` (auto-adjunção em
+`H^s`, requer transportar o produto interno) abre, de propósito, não
+tentado nesta frente. `authorized_action` do laboratório volta a
+`PORTFOLIO_REVIEW_REQUIRED` — nenhuma frente nova pode abrir sem um novo
+gate de revisão de portfólio.

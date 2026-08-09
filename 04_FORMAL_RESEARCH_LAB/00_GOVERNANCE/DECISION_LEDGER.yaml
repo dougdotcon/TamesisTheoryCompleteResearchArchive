@@ -1582,3 +1582,61 @@ decisions:
       - "nenhuma frente nova foi aberta sem registro na fila"
       - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
       - "lake build completo confirmado exit 0, 8819 jobs, nao assumido"
+  - decision_id: DEC-063
+    date: 2026-08-09
+    decision: >
+      Abrir e fechar FOUND-LERAY-PROJECTOR-SOBOLEV-001: levantar o
+      projetor de Leray matricial de L^2 para H^s por conjugacao de
+      isometria, fechando LP-GAP-004 e abrindo LP-GAP-005 (auto-adjuncao
+      em H^s, nao tentada). VERIFIED apos revisao adversarial
+      independente (APPROVED_WITH_NOTES, zero problemas de corretude).
+    rationale: >
+      DEC-062 concluiu a fila esgotada e travou
+      NO_AUTONOMOUS_WORK_AVAILABLE. LP-GAP-004 era a unica excecao
+      genuina: estava bloqueada nomeadamente por FM-GAP-001 (ausencia de
+      TIPO de espaco de Sobolev no Mathlib), e FM-GAP-001 fechou
+      exatamente nesta sessao via FOUND-SOBOLEV-SPACE-001 -- corroborado
+      por tres STATUS.yaml independentes, nao apenas afirmado. Uma
+      sondagem de SobolevSpace.lean mostrou que a construcao necessaria
+      (conjugacao por toL2ₗᵢ, uma equivalencia linear isometrica entre
+      Hs E F s e L^2) ja existia demonstrada la para um multiplicador
+      escalar -- nao foi preciso inventar tecnica nova, so aplica-la ao
+      operador matricial ja montado (lerayOpL2). O rascunho inicial
+      teve dois erros de sintaxe (nao de matematica), corrigidos antes
+      de qualquer registro de sucesso; um deles quase repetiu o defeito
+      de LAB-CORR-VALIDATION-BLINDNESS-001 (codigo de saida de `head`
+      confundido com o de `lean` num pipe) -- capturado a tempo, exit
+      code real conferido separadamente. Revisao adversarial
+      independente (agente que rodou lake env lean de novo por conta
+      propria, leu os quatro arquivos Lean envolvidos por inteiro, e
+      checou nao-vacuidade, nao-circularidade, ausencia de
+      auto-adjuncao disfarcada, e ausencia de sorry/axioma) devolveu
+      APPROVED_WITH_NOTES: zero problemas de corretude matematica ou
+      logica, dois nits cosmeticos (contagem de declaracoes 9->12;
+      citacao de RH_NOGO_REACTIVATION_CRITERIA.md, escopada a
+      RH-NOGO-001, usada apenas analogicamente) -- ambos corrigidos
+      nesta integracao.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
+      - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_001/"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayProjectorSobolev.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action NO_AUTONOMOUS_WORK_AVAILABLE -> RESULT_REVIEW_REQUIRED -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: +1 item (FOUND-LERAY-PROJECTOR-SOBOLEV-001), VERIFIED, result_review APPROVED_WITH_NOTES"
+      - "LAB_STATE closed_work_items: +1 entrada"
+      - "CLAIM_LEDGER: +1 claim (LERAY-SOBOLEV-FORMAL-001)"
+      - "labctl.py: allow-lists += FOUND-LERAY-PROJECTOR-SOBOLEV-001"
+    untouched_safeguards:
+      - "auto-adjuncao e projecao ortogonal em H^s NAO afirmadas"
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8820 jobs"
+      - "revisao adversarial rodou o build de novo por conta propria, nao confiou na alegacao"
+      - "FOUND-LERAY-PROJECTOR-001 (registro fechado anterior) nao foi reescrito"

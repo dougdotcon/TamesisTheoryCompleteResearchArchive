@@ -1,5 +1,55 @@
 # Changelog do laboratório formal
 
+## FOUND-LERAY-PROJECTOR-SOBOLEV-001 - 2026-08-09
+
+### A fila esgotada teve uma exceção genuína
+
+`PORTFOLIO-REVIEW-QUEUE-EXHAUSTED` concluiu que não havia frente nova
+legítima. Uma reapareceu horas depois, por um motivo concreto:
+`LP-GAP-004` (versão `H^s` do projetor de Leray) estava bloqueada
+nomeadamente por `FM-GAP-001` — e `FM-GAP-001` tinha fechado na mesma
+sessão via `FOUND-SOBOLEV-SPACE-001`. Não é o laboratório decidindo por
+conta própria que "agora vale a pena" (padrão explicitamente banido); é
+o reconhecimento de que o bloqueador nomeado deixou de existir,
+corroborado por três `STATUS.yaml` independentes.
+
+### A construção já estava demonstrada, só não aplicada ao caso matricial
+
+`SobolevSpace.lean` já continha o padrão de conjugação por isometria
+(`fourierMultiplierSobolevCLM`) para um multiplicador escalar —
+inclusive já provado especificamente para o componente escalar do
+símbolo de Leray. Faltava aplicá-lo ao operador matricial já montado
+(`lerayOpL2`), não inventar técnica nova.
+
+```text
+lerayOpHs        limitado, idempotente, norma EXATA igual a lerayOpL2, norma = 1 (n>=2)
+```
+
+Auto-adjunção e projeção ortogonal em `H^s` **não são afirmadas** — `Hs`
+não tem produto interno ainda; registrado como `LP-GAP-005`, de
+propósito, não como lacuna escondida.
+
+### Quase repetiu um defeito já corrigido — pego a tempo
+
+Um `head`/`tail` no meio de um pipe estava prestes a mascarar o código
+de saída real do processo `lean`, exatamente o padrão de
+`LAB-CORR-VALIDATION-BLINDNESS-001`. Capturado antes de qualquer
+registro de sucesso; o exit code real foi conferido separadamente.
+
+### Revisão adversarial: zero problemas de corretude
+
+Agente independente rodou `lake env lean` de novo por conta própria, leu
+os quatro arquivos Lean envolvidos por inteiro, e verificou
+não-vacuidade, não-circularidade, e ausência de auto-adjunção
+disfarçada. Veredito `APPROVED_WITH_NOTES`: dois nits cosméticos
+(contagem de declarações, escopo de uma citação), zero problemas
+matemáticos ou lógicos.
+
+### Fechamento
+
+`work_status: VERIFIED`, `result_review: APPROVED_WITH_NOTES`.
+`authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED`.
+
 ## PORTFOLIO-REVIEW-QUEUE-EXHAUSTED - 2026-08-09
 
 ### A fila está esgotada — e isso é a conclusão certa

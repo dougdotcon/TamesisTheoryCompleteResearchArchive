@@ -14,14 +14,14 @@ canonical_commit_policy: >
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
-repository_clean: true
+repository_clean: false
 active_track: "foundations"
-active_work_item: "FOUND-DUHAMEL-SKELETON-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
+work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "IN_PROGRESS"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,16 +37,14 @@ formalized_at_commit: "245e2b276df328a963a0c915ad325d45586e8633"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelSkeleton.lean (160 lines), lake env lean exit 0, full lake build exit 0 (8823 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-DUHAMEL-SKELETON-001 fechou VERIFIED / result_review APPROVED
-  (revisão adversarial: 0 problemas de solidez, sem ressalvas). Termo de
-  Duhamel bem definido para B completamente abstrato, via continuidade
-  CONJUNTA de heatOpL2 em (t,f) e caso de saneamento B=0. A cadeia
-  Sobolev -> Leray -> semigrupo do calor -> Duhamel (bem definição) está
-  completa até onde é honesto ir sem a estimativa bilinear/Lipschitz de
-  B, que é exatamente NS-GAP-001/004 -- não tentada, nem em frente
-  autônoma futura sem justificativa nova explícita. Fila volta a exigir
-  revisão de portfólio antes de qualquer frente nova.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 autorizada (DEC-071): teorema
+  abstrato de ponto fixo de Duhamel, dando existência/unicidade LOCAL de
+  solução branda SOB HIPÓTESE explícita de que B é Lipschitz numa bola
+  -- hipótese NUNCA afirmada para o B real de Navier-Stokes. Ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md.
+  Formalização em andamento.
+authorized_action: "FORMALIZATION"
+portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_duhamel_skeleton: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_SKELETON_2026_08_09.md"
 portfolio_review_document_parallel_wave_002: "01_PORTFOLIO/PORTFOLIO_REVIEW_PARALLEL_WAVE_002_2026_08_09.md"

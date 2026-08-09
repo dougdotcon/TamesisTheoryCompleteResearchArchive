@@ -1965,3 +1965,44 @@ decisions:
       - "B permanece completamente abstrato; nenhuma estimativa bilinear/Lipschitz, ponto fixo, existencia ou unicidade e afirmada"
       - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8823 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"
+
+  - decision_id: DEC-071
+    date: 2026-08-09
+    decision: >
+      Autorizar e registrar FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001:
+      teorema abstrato de ponto fixo de Duhamel, dando existencia e
+      unicidade LOCAL de solucao branda SOB A HIPOTESE explicita
+      (nao provada, nao afirmada para o B real de Navier-Stokes) de
+      que B e Lipschitz numa bola.
+    rationale: >
+      A fila nao tem itens SCOPED/READY sobrando. A cadeia Foundations
+      (Sobolev -> Leray -> semigrupo do calor -> termo de Duhamel bem
+      definido) esta completa sem tocar NS-GAP-001/004. A pergunta
+      honesta -- existe infraestrutura genuina que nao exige resolver
+      essa lacuna? -- tem resposta sim: o teorema de ponto fixo de
+      Banach aplicado ao mapa de Duhamel e um fato PADRAO de EDPs
+      semilineares abstratas (Fujita-Kato, Cannone), reutilizavel para
+      qualquer B Lipschitz hipotetico, nao especifico de Navier-Stokes.
+      Genuinamente diferente de NS-GAP-001/004: aquela lacuna e provar
+      que o B REAL satisfaz Lipschitz; esta frente apenas deriva o que
+      SEGUE se essa hipotese valesse, preparando o "ultimo passo"
+      mecanico para quando/se a estimativa real for encontrada.
+      01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md
+      registra a distincao completa.
+    authority: FORMALIZATION
+    affected_paths:
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
+      - "LAB_STATE.md"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001), status SCOPED"
+      - "LAB_STATE: active_work_item -> FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
+      - "labctl.py: allow-list += FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "hipotese Lipschitz de B fica marcada como NAO verificada para o caso real em todo lugar"
+      - "NS-GAP-001/004 permanecem nomeados e abertos, nao alvo desta frente"
+      - "apenas existencia LOCAL sob hipotese, nunca global, e afirmada"

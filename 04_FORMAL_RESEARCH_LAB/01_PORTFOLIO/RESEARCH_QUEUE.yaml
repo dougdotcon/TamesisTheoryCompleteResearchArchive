@@ -1648,3 +1648,48 @@ queue:
       calor, agora totalmente caracterizado (contracao, simetria, lei de
       semigrupo, continuidade forte).
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001
+    title: "Ponto fixo abstrato de Duhamel: existencia e unicidade local sob hipotese Lipschitz de B"
+    track: FOUNDATIONS
+    target_statement: >
+      Provar que, DADO como hipotese explicita que B e Lipschitz numa
+      bola (constante L, raio R, hipotese sobre um B abstrato -- NAO
+      provada para o B real de Navier-Stokes), o mapa de Duhamel e uma
+      contracao no espaco de funcoes continuas [0,T] -> bola para T
+      suficientemente pequeno, logo tem ponto fixo unico pelo teorema do
+      ponto fixo de Banach (Mathlib: ContractingWith/efixedPoint),
+      dando existencia e unicidade LOCAL de solucao branda sob essa
+      hipotese.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry, provando
+      o teorema de ponto fixo abstrato, com B Lipschitz como HIPOTESE
+      explicita (nunca derivada nem afirmada para o B real de
+      Navier-Stokes).
+    dependencies:
+      - FOUND-DUHAMEL-SKELETON-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/DuhamelSkeleton.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/HeatSemigroup.lean"
+    formalization_cost: high
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 6
+    external_dependency: "Mathlib"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar provar que o B real de
+      Navier-Stokes (envolvendo a Hessiana de pressao) satisfaz a
+      hipotese Lipschitz (isso e NS-GAP-001/004, fora de escopo);
+      afirmar existencia global, ou que Navier-Stokes ficou alcancavel,
+      ou que NS-GAP-001/004 tem caminho de prova
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md
+      -- ultima peca do toolkit de EDP semilinear abstrata que nao
+      depende de resolver NS-GAP-001/004: o "ultimo passo" mecanico
+      (ponto fixo -> existencia/unicidade local) preparado para o caso
+      em que a estimativa real for encontrada no futuro.
+    research_role: FORMAL_FOUNDATION

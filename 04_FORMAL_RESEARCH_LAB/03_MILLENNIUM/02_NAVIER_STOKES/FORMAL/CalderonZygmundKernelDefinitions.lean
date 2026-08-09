@@ -128,8 +128,9 @@ padrão do Mathlib para `ℝ`), então `tendsto_nhds_unique` se aplica
 diretamente. -/
 theorem HasLocalPV.unique {f : EuclideanSpace ℝ (Fin 3) → ℝ}
     {x0 : EuclideanSpace ℝ (Fin 3)} {R L L' : ℝ}
-    (h : HasLocalPV f x0 R L) (h' : HasLocalPV f x0 R L') : L = L' :=
-  tendsto_nhds_unique h h'
+    (h : HasLocalPV f x0 R L) (h' : HasLocalPV f x0 R L') : L = L' := by
+  unfold HasLocalPV at h h'
+  exact tendsto_nhds_unique h h'
 
 /-- `localPV f x0 R` é o valor do limite de valor-principal quando ele
 existe (escolhido via `Classical.choice`/`dite`), e `0` caso contrário
@@ -137,6 +138,7 @@ existe (escolhido via `Classical.choice`/`dite`), e `0` caso contrário
 existe -- ver `localPV_eq` abaixo). -/
 noncomputable def localPV (f : EuclideanSpace ℝ (Fin 3) → ℝ) (x0 : EuclideanSpace ℝ (Fin 3))
     (R : ℝ) : ℝ :=
+  open Classical in
   if h : ∃ L, HasLocalPV f x0 R L then h.choose else 0
 
 /-- `localPV` de fato calcula o limite quando ele existe: se

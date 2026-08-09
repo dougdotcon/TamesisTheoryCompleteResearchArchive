@@ -40,18 +40,26 @@ next_single_action: >
   FOUND-CZ-MEAN-ZERO-001 fechou VERIFIED / result_review APPROVED
   (revisão adversarial com escrutínio reforçado, terceira frente ligada
   a NS-GAP-001 e a mais sofisticada matematicamente: zero problemas
-  encontrados, sem ressalvas). Isotropia do tensor de segundo momento de
-  sphereSurfaceMeasure PROVADA em geral — invariância sob TODO
-  LinearIsometryEquiv de E, mais forte que o subgrupo finito
-  originalmente sugerido como alternativa. Campo mean_zero de
-  CZKernelClass fechado para K(y):=D(ŷ,e2,e3)/‖y‖³; resultado
-  czKernelClass_sphereSurfaceMeasure_K é o primeiro termo COMPLETO de
-  CZKernelClass no laboratório. NS-GAP-001 permanece OPEN, anotado com
-  cross-referência: isso NÃO alcança limitação L²/L^p (exige maquinaria
-  de Grafakos Prop.5.2.3/Cor.5.2.6 ausente do Mathlib) nem toca o
-  operador não-linear real das eq. 2.1/2.2 (e3=ω̂(t,x-y) varia com y).
-  Fila volta a exigir revisão de portfólio antes de qualquer frente
-  nova.
+  encontrados, sem ressalvas). czKernelClass_sphereSurfaceMeasure_K é o
+  primeiro termo COMPLETO de CZKernelClass no laboratório. Revisão de
+  portfólio subsequente (PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md,
+  terceira checagem de exaustão do dia) confirmou, com rigor -- não
+  presunção -- que nenhuma frente nova legítima resta: RESEARCH_QUEUE
+  inteira VERIFIED exceto TOE-INTERFACE-001 (bloqueada, dependência
+  RH-NOGO-001 congelada) e RH-NOGO-001 em si; as cinco condições de
+  reativação de RH-NOGO-001 checadas explicitamente uma a uma —
+  inclusive contra FOUND-SPECTRAL-COUNTING-001, construído nesta mesma
+  sessão, cujo próprio stop_condition proíbe conectar à lei de Weyl
+  global ou a RH — nenhuma ocorreu. A linha Constantin-
+  Fefferman/Calderón-Zygmund (a mais produtiva do dia) atingiu seu
+  limite honesto: o próximo passo real exige teoria de integral
+  singular/Calderón-Zygmund ausente do Mathlib, um empreendimento de
+  escala muito maior que qualquer frente aberta hoje. `authorized_action`
+  passou a `NO_AUTONOMOUS_WORK_AVAILABLE`. Próxima frente exige: (1) uma
+  condição de reativação de RH-NOGO-001 ocorrer de fato, (2) decisão
+  explícita do usuário sobre investir em construir infraestrutura de
+  integral singular, ou (3) um colaborador especializado assumir
+  NS-GAP-001/004 ou a teoria necessária à linha Constantin-Fefferman.
   ---
   (histórico anterior preservado abaixo)
   ---
@@ -108,7 +116,8 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
+portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"
 portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"

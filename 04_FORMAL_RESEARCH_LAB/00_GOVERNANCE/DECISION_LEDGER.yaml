@@ -1640,3 +1640,62 @@ decisions:
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8820 jobs"
       - "revisao adversarial rodou o build de novo por conta propria, nao confiou na alegacao"
       - "FOUND-LERAY-PROJECTOR-001 (registro fechado anterior) nao foi reescrito"
+  - decision_id: DEC-064
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001: auto-adjuncao,
+      ortogonalidade e Pitagoras do projetor de Leray em H^s, via
+      pareamento pullback explicito (nao instancia global
+      InnerProductSpace). Fecha LP-GAP-005. VERIFIED apos revisao
+      adversarial independente (APPROVED, sem ressalvas).
+    rationale: >
+      LP-GAP-005 foi aberto pela propria sessao no gate imediatamente
+      anterior (DEC-063), como corte de escopo deliberado, nao lacuna
+      descoberta em outro lugar — continuacao direta, nao frente nova
+      inventada. Decisao de escopo: em vez de instalar
+      InnerProductSpace (Hs E F s) via InnerProductSpace.induced do
+      Mathlib (que exige que a norma ja instalada seja
+      definicionalmente a mesma SeminormedAddCommGroup.induced usada
+      para induzir o produto interno, e Hs foi instalada via
+      NormedAddCommGroup.induced com um AddMonoidHom — compatibilidade
+      nao verificada, risco de diamante de tipo silencioso), o conteudo
+      matematico foi provado atraves de um pareamento pullback explicito
+      hsInner, uma funcao comum, nao uma instancia concorrente. Tres
+      erros de sintaxe no rascunho inicial, corrigidos: variante errada
+      do lema de auto-produto-interno (parte real vs valor em 𝕜);
+      RCLike.ofReal nao sintaticamente igual a Complex.ofReal (armadilha
+      ja documentada em ORTHOGONAL_CLOSURE.md), ring falhando numa
+      igualdade trivial disfarcada por casts diferentes, trocado por
+      simp; map_sub nao se aplica a toL2 (funcao comum, nao hom
+      empacotado), resolvido com lema auxiliar toL2_sub derivado de
+      toL2ₗ. lake env lean e lake build completo do projeto, ambos exit
+      0 (8821 jobs), conferidos sem pipe. Revisao adversarial
+      independente (agente que recompilou por conta propria e tracou
+      manualmente cada cadeia de rw contra os originais L^2 em
+      LerayOrthogonal.lean, verificou ausencia de instancia
+      InnerProductSpace instalada, e confirmou nao-vacuidade da instancia
+      concreta): APPROVED, zero problemas, sem ressalvas.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
+      - "02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_ORTHOGONAL_001/"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonalSobolev.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations.lean"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action RESULT_REVIEW_REQUIRED -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: +1 item (FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001), VERIFIED, result_review APPROVED"
+      - "LAB_STATE closed_work_items: +1 entrada; FOUND-LERAY-PROJECTOR-SOBOLEV-001 anotada com resolucao de LP-GAP-005"
+      - "CLAIM_LEDGER: +1 claim (LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001); LERAY-SOBOLEV-FORMAL-001 atualizada (known_gaps esvaziado, prohibited_claims precisado)"
+      - "labctl.py: allow-lists += FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001"
+    untouched_safeguards:
+      - "nenhuma instancia global InnerProductSpace (Hs E F s) foi instalada"
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8821 jobs"
+      - "revisao adversarial recompilou por conta propria e tracou as provas a mao, nao confiou na alegacao"
+      - "FOUND-LERAY-PROJECTOR-SOBOLEV-001 (registro fechado anterior) nao foi reescrito, so anotado"

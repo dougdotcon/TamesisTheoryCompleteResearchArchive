@@ -81,7 +81,23 @@ que ContinuousLinearMap.adjoint (lerayOpHs b s) = lerayOpHs b s (a forma da API 
 que Navier-Stokes ficou alcancavel
 ```
 
-## Trava
+## Revisão adversarial (agente independente)
 
-`authorized_action` para esta frente: `RESULT_REVIEW_REQUIRED` — revisão
-adversarial independente pendente antes de fechamento final.
+**Veredito: `APPROVED`, sem ressalvas.** O revisor recompilou o arquivo
+por conta própria (`lake env lean`, exit 0, `#print axioms` reproduzido
+independentemente em todas as 8 declarações), traçou manualmente cada
+cadeia de `rw` das provas de auto-adjunção, ortogonalidade e Pitágoras
+contra os originais em `LerayOrthogonal.lean` (confirmando que reduzem
+exatamente aos fatos L² certos, sem troca de direção nem enfraquecimento),
+verificou que `toL2_sub` é definicionalmente sobre a mesma função `toL2`
+(via `toL2ₗ.toFun`), confirmou ausência de qualquer `instance
+InnerProductSpace` instalada globalmente, checou ausência de
+`sorry`/`admit`/`axiom`/escape hatches, e verificou de forma independente
+a não-vacuidade de `concrete_lerayOpHs_orthogonal_R3` compilando um
+teste próprio com `EuclideanSpace.basisFun`. Nenhum problema encontrado.
+
+## Fechamento
+
+`FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001` fecha `VERIFIED` /
+`result_review: APPROVED`. `LP-GAP-005` fecha. `authorized_action` do
+laboratório volta a `PORTFOLIO_REVIEW_REQUIRED`.

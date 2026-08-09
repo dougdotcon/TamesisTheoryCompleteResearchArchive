@@ -1327,24 +1327,66 @@ claims:
       declaracoes, zero sorry, axiomas [propext, Classical.choice,
       Quot.sound] em todas, independentemente reproduzido por revisao
       adversarial (agente que rodou o build de novo por conta propria).
-      Auto-adjuncao e projecao ortogonal em H^s NAO sao afirmadas: Hs E
-      F s carrega NormedSpace/CompleteSpace, nao produto interno, logo
-      ContinuousLinearMap.adjoint nao e enunciavel sobre ele sem
-      transportar o produto interno de L^2 primeiro — isso e LP-GAP-005,
-      aberto de proposito, nao tentado nesta frente.
+      Auto-adjuncao e projecao ortogonal via a instancia/API do Mathlib
+      (IsSelfAdjoint, ContinuousLinearMap.adjoint) NAO sao afirmadas por
+      esta frente: Hs E F s carrega NormedSpace/CompleteSpace, nao
+      instancia InnerProductSpace instalada globalmente. LP-GAP-005 (essa
+      lacuna) fechou na frente seguinte, LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001,
+      via pareamento pullback explicito — ver essa claim para o resultado.
     work_status: VERIFIED
     evidence_level: F
     dependencies: []
-    known_gaps:
-      - "LP-GAP-005: auto-adjuncao/projecao ortogonal em H^s requer transportar o produto interno de L^2, nao feito"
+    known_gaps: []
+    see_also: LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001
     counterevidence: []
     canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_001/"
     last_reviewed: 2026-08-09
     promotion_requirements:
       - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
     prohibited_claims:
-      - o operador em H^s e auto-adjunto
-      - o operador em H^s e projecao ortogonal
-      - Hs E F s tem estrutura de produto interno
+      - o operador em H^s e auto-adjunto via IsSelfAdjoint/adjoint do Mathlib
+      - Hs E F s tem instancia global InnerProductSpace instalada
+      - Navier-Stokes ficou alcancavel
+      - novidade matematica
+  - claim_id: LERAY-SOBOLEV-ORTHOGONAL-FORMAL-001
+    short_name: leray_projector_self_adjoint_on_Hs
+    exact_statement: "O projetor de Leray em H^s (lerayOpHs) e auto-adjunto e projecao ortogonal com respeito ao pareamento pullback explicito hsInner (f g := inner (toL2 f) (toL2 g)), com Pitagoras valendo, transferidos das provas ja verificadas em L^2."
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonalSobolev.lean"
+      - "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_ORTHOGONAL_001/STATUS.yaml"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      hsInner e um pareamento pullback explicito (funcao comum, NAO uma
+      instancia InnerProductSpace instalada globalmente em Hs E F s —
+      decisao deliberada de escopo, por risco de diamante de tipo com a
+      norma ja instalada via NormedAddCommGroup.induced). Provado, por
+      transferencia exata das provas ja verificadas em
+      LerayOrthogonal.lean: hsInner (P f) g = hsInner f (P g)
+      (auto-adjuncao), hsInner (P f) (f - P f) = 0 (ortogonalidade do
+      complemento), e ‖f‖² = ‖P f‖² + ‖f - P f‖² (Pitagoras, transferido
+      diretamente via norma). Compilado (lake env lean e lake build
+      completo, ambos exit 0, 8821 jobs), zero sorry, axiomas [propext,
+      Classical.choice, Quot.sound] em todas as declaracoes,
+      independentemente reproduzido por revisao adversarial (agente que
+      recompilou por conta propria e tracou manualmente cada cadeia de
+      rw contra os originais L^2). Instancia global
+      InnerProductSpace (Hs E F s), e a forma
+      IsSelfAdjoint/ContinuousLinearMap.adjoint do Mathlib, NAO sao
+      afirmadas.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - LERAY-SOBOLEV-FORMAL-001
+    known_gaps: []
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/02_FOUNDATIONS/16_LERAY_PROJECTOR/FOUND_LERAY_PROJECTOR_SOBOLEV_ORTHOGONAL_001/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - Hs E F s tem instancia global InnerProductSpace instalada
+      - o resultado usa IsSelfAdjoint ou ContinuousLinearMap.adjoint do Mathlib
       - Navier-Stokes ficou alcancavel
       - novidade matematica

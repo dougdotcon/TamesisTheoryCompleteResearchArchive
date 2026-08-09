@@ -1,5 +1,48 @@
 # Changelog do laboratório formal
 
+## FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 - 2026-08-09
+
+### LP-GAP-005 fecha — continuação direta, mesma sessão
+
+O gate anterior abriu `LP-GAP-005` de propósito (auto-adjunção do
+projetor de Leray em `H^s`, deixada de fora por falta de estrutura de
+produto interno em `Hs E F s`). Esta frente fecha esse gap — não é uma
+frente nova inventada, é a continuação natural do corte de escopo que a
+própria sessão acabou de fazer.
+
+### Decisão de escopo: pareamento explícito, não instância global
+
+Instalar `InnerProductSpace (Hs E F s)` via `InnerProductSpace.induced`
+do Mathlib exigiria verificar que a norma já instalada em `Hs`
+(`NormedAddCommGroup.induced`, usando um `AddMonoidHom`) bate
+exatamente com o que essa ferramenta espera — risco de diamante de tipo
+silencioso. Em vez disso, o conteúdo matemático (auto-adjunção,
+ortogonalidade, Pitágoras) foi provado através de um pareamento pullback
+explícito, `hsInner`, uma função `ℂ`-valorada comum, não uma instância
+concorrente.
+
+```text
+hsInner_lerayOpHs_symm      auto-adjuncao (transferida de LerayOrthogonal.inner_lerayOpL2_symm)
+hsInner_lerayOpHs_sub       ortogonalidade do complemento (transferida)
+norm_sq_lerayOpHs_pythagoras  Pitagoras (transferido direto via norma)
+```
+
+Três erros de sintaxe corrigidos antes do build limpo — um deles a
+armadilha `RCLike.ofReal` vs `Complex.ofReal` já documentada em
+`ORTHOGONAL_CLOSURE.md`.
+
+### Revisão adversarial: APPROVED, sem ressalvas
+
+Agente independente recompilou o arquivo por conta própria e traçou
+manualmente cada cadeia de `rw` contra os originais em L² — zero
+problemas encontrados.
+
+### Fechamento
+
+`work_status: VERIFIED`, `result_review: APPROVED`. Nenhum gap
+conhecido do projetor de Leray permanece aberto. `authorized_action`
+volta a `PORTFOLIO_REVIEW_REQUIRED`.
+
 ## FOUND-LERAY-PROJECTOR-SOBOLEV-001 - 2026-08-09
 
 ### A fila esgotada teve uma exceção genuína

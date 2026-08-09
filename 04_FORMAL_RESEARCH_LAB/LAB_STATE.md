@@ -21,7 +21,7 @@ work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "PENDING"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -35,17 +35,17 @@ integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "e95d029a2f92a8eda8c9acd26865ba37c29afe58"
 last_verified_artifact: "TamesisLab/Foundations/LerayOrthogonalSobolev.lean, lake env lean exit 0, full lake build exit 0 (8821 jobs), standard axiom footprint, zero sorry"
-current_blocker: >
-  Revisão adversarial de FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 em
-  andamento (agente independente checando o arquivo Lean e o documento
-  de portfólio). Continuação direta de FOUND-LERAY-PROJECTOR-SOBOLEV-001
-  (fechou LP-GAP-004), fechando o LP-GAP-005 que aquela mesma frente
-  abriu de propósito.
+current_blocker: null
 next_single_action: >
-  Integrar o veredito da revisão adversarial de
-  FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001. Se aprovado, fechar como
-  VERIFIED e retravar authorized_action em PORTFOLIO_REVIEW_REQUIRED.
-authorized_action: "RESULT_REVIEW_REQUIRED"
+  FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 fechou VERIFIED /
+  result_review APPROVED (revisão adversarial: 0 problemas, sem
+  ressalvas). LP-GAP-005 fechado — a cadeia iniciada por
+  FOUND-SOBOLEV-SPACE-001 (fechou FM-GAP-001) → 
+  FOUND-LERAY-PROJECTOR-SOBOLEV-001 (fechou LP-GAP-004, abriu LP-GAP-005)
+  → esta frente (fechou LP-GAP-005) está completa. Nenhum gap conhecido
+  do projetor de Leray permanece aberto. Fila volta a exigir revisão de
+  portfólio antes de qualquer frente nova.
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
 portfolio_review_document_leray_orthogonal_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
 portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
@@ -306,6 +306,29 @@ closed_work_items:
     unblocked_by: FOUND-SOBOLEV-SPACE-001
     self_adjoint_claim: FORBIDDEN
     orthogonal_projection_claim: FORBIDDEN
+    note: >
+      Auto-adjuncao/ortogonalidade FORBIDDEN dentro do escopo desta
+      frente especificamente. LP-GAP-005 fechou depois, na frente
+      seguinte, via pareamento pullback explicito (nao a API
+      IsSelfAdjoint do Mathlib) — ver FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001.
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED
+    extension_status: NOT_AUTHORIZED
+    closes_gap: LP-GAP-005
+    predecessor: FOUND-LERAY-PROJECTOR-SOBOLEV-001
+    scope_note: >
+      Auto-adjuncao/ortogonalidade/Pitagoras provados via pareamento
+      pullback explicito hsInner (funcao comum), NAO via instancia
+      global InnerProductSpace (Hs E F s) nem via
+      IsSelfAdjoint/ContinuousLinearMap.adjoint do Mathlib — risco de
+      diamante de tipo com a norma ja instalada, evitado por decisao
+      deliberada de escopo.
     mathematical_novelty: NONE
     research_role: FORMAL_FOUNDATION
 frozen_work_items:
@@ -582,25 +605,29 @@ TOE-INTERFACE-001                   SCOPED                  bloqueado: dep RH-NO
 LAB-GOV-DECISION-LEDGER-001         VERIFIED                ENCERRADO
 LAB-CORR-VALIDATION-BLINDNESS-001   VERIFIED                ENCERRADO
 
-FOUND-LERAY-PROJECTOR-SOBOLEV-001   VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+FOUND-LERAY-PROJECTOR-SOBOLEV-001            VERIFIED / APPROVED_WITH_NOTES  ENCERRADO
+FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 VERIFIED / APPROVED             ENCERRADO
 
 authorized_action: PORTFOLIO_REVIEW_REQUIRED   (trava, nao execucao)
 ```
 
 **Fila esgotada em 2026-08-09** para as 28 frentes antigas (ver
-`01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`) — mas uma
-29ª surgiu depois, de forma justificada: `LP-GAP-004` (versão H^s do
-projetor de Leray) estava bloqueada por `FM-GAP-001`, e `FM-GAP-001`
-tinha acabado de fechar nesta mesma sessão via `FOUND-SOBOLEV-SPACE-001`.
-Não é invenção de trabalho — é o reconhecimento de que um bloqueador
-especificamente nomeado deixou de existir (ver
-`01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md`).
+`01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md`) — mas duas
+frentes novas surgiram depois, em cadeia justificada: `LP-GAP-004`
+(versão H^s do projetor de Leray) estava bloqueada por `FM-GAP-001`, e
+`FM-GAP-001` tinha acabado de fechar nesta mesma sessão via
+`FOUND-SOBOLEV-SPACE-001`. Não é invenção de trabalho — é o
+reconhecimento de que um bloqueador especificamente nomeado deixou de
+existir (ver `01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md`).
 `FOUND-LERAY-PROJECTOR-SOBOLEV-001` fechou `VERIFIED` com revisão
-adversarial `APPROVED_WITH_NOTES` (zero problemas de corretude, dois
-nits cosméticos corrigidos). `LP-GAP-005` (auto-adjunção/projeção
-ortogonal em H^s) abre de propósito, não tentado. `RH-NOGO-001` e
-`TOE-INTERFACE-001` continuam sem condição de reativação satisfeita —
-isto não muda a conclusão de esgotamento sobre eles.
+adversarial `APPROVED_WITH_NOTES`, abrindo `LP-GAP-005`
+(auto-adjunção/projeção ortogonal em H^s) de propósito. A frente seguinte,
+`FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001`, fechou esse gap via um
+pareamento pullback explícito (não a API `IsSelfAdjoint` do Mathlib, por
+risco de diamante de tipo) — revisão adversarial `APPROVED`, sem
+ressalvas. **Nenhum gap conhecido do projetor de Leray permanece aberto.**
+`RH-NOGO-001` e `TOE-INTERFACE-001` continuam sem condição de reativação
+satisfeita — isto não muda a conclusão de esgotamento sobre eles.
 
 **Onda concluída, integrada e revisada: cinco frentes em paralelo no
 track `millennium`** — `NS-PRESSURE-001`, `PVSNP-PHYS-001`,

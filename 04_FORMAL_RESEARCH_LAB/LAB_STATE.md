@@ -20,7 +20,7 @@ active_work_item: "FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001"
 work_status: "IN_PROGRESS"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "IN_PROGRESS"
+formalization_status: "VERIFIED"
 result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
@@ -37,12 +37,16 @@ formalized_at_commit: "245e2b276df328a963a0c915ad325d45586e8633"
 last_verified_artifact: "TamesisLab/Foundations/DuhamelSkeleton.lean (160 lines), lake env lean exit 0, full lake build exit 0 (8823 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001 autorizada (DEC-071): teorema
-  abstrato de ponto fixo de Duhamel, dando existência/unicidade LOCAL de
-  solução branda SOB HIPÓTESE explícita de que B é Lipschitz numa bola
-  -- hipótese NUNCA afirmada para o B real de Navier-Stokes. Ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md.
-  Formalização em andamento.
+  FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001: formalização completa entregue
+  em DuhamelFixedPoint.lean (257 linhas) -- exists_unique_mild_solution,
+  dado B GLOBALMENTE Lipschitz (hipótese explícita LipschitzWith L B,
+  nunca derivada) e T*L < 1, existe solução branda ÚNICA em [0,T], via
+  ContractingWith/teorema do ponto fixo de Banach. Reverificada de forma
+  independente nesta sessão -- lake env lean exit 0, lake build completo
+  exit 0 (8824 jobs), zero sorry/admit, checados diretamente sem pipe.
+  Revisão adversarial independente disparada (escrutínio reforçado dado
+  o risco de erro sutil em aritmética de constante de contração),
+  ainda pendente. Integração final após o veredito.
 authorized_action: "FORMALIZATION"
 portfolio_review_document_abstract_wellposedness: "01_PORTFOLIO/PORTFOLIO_REVIEW_ABSTRACT_WELLPOSEDNESS_2026_08_09.md"
 portfolio_review_status: "CONSUMED"

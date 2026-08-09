@@ -24,6 +24,7 @@ import TamesisLab.Foundations.LerayProjectorSobolev
 import TamesisLab.Foundations.LerayOrthogonalSobolev
 import TamesisLab.Foundations.HeatSemigroup
 import TamesisLab.Foundations.DuhamelSkeleton
+import TamesisLab.Foundations.DuhamelFixedPoint
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

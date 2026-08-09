@@ -1468,3 +1468,45 @@ queue:
     mathematical_novelty: NONE
     algorithmic_novelty: NONE
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001
+    title: "Auto-adjuncao e projecao ortogonal do projetor de Leray em H^s"
+    track: FOUNDATIONS
+    target_statement: >
+      Provar que lerayOpHs e auto-adjunto e projecao ortogonal em H^s,
+      com respeito a um pareamento pullback explicito hsInner (nao uma
+      instancia global InnerProductSpace, para evitar risco de diamante
+      de tipo com a norma ja instalada em Hs E F s), transferindo as
+      propriedades ja provadas em L^2.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry, provando
+      auto-adjuncao (hsInner (P f) g = hsInner f (P g)), ortogonalidade
+      do complemento, e Pitagoras em H^s, por transferencia das provas
+      ja verificadas em LerayOrthogonal.lean.
+    dependencies:
+      - FOUND-LERAY-PROJECTOR-SOBOLEV-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayProjectorSobolev.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonal.lean"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 2
+    external_dependency: "Mathlib"
+    cross_track_value: moderate
+    stop_condition: >
+      usar sorry ou axioma local; instalar InnerProductSpace (Hs E F s)
+      como instancia global sem verificar ausencia de diamante de tipo;
+      afirmar que Navier-Stokes ficou alcancavel
+    priority_class: P1
+    status: VERIFIED
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
+    result_review: PENDING
+    closes_gap: LP-GAP-005
+    reactivation_justification: >
+      LP-GAP-005 foi aberto por esta propria sessao, no gate anterior
+      (FOUND-LERAY-PROJECTOR-SOBOLEV-001), como continuacao natural e
+      de escopo limitado -- nao uma frente nova inventada sem relacao.
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_FOUNDATION

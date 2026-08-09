@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "foundations"
-active_work_item: "FOUND-LERAY-PROJECTOR-SOBOLEV-001"
+active_work_item: "FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001"
 work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -34,17 +34,20 @@ parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
 formalized_at_commit: "e95d029a2f92a8eda8c9acd26865ba37c29afe58"
-last_verified_artifact: "TamesisLab/Foundations/LerayProjectorSobolev.lean, lake env lean exit 0, full lake build exit 0 (8820 jobs), 12 declarations, standard axiom footprint, zero sorry, independently reproduced by adversarial review"
-current_blocker: null
+last_verified_artifact: "TamesisLab/Foundations/LerayOrthogonalSobolev.lean, lake env lean exit 0, full lake build exit 0 (8821 jobs), standard axiom footprint, zero sorry"
+current_blocker: >
+  Revisão adversarial de FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001 em
+  andamento (agente independente checando o arquivo Lean e o documento
+  de portfólio). Continuação direta de FOUND-LERAY-PROJECTOR-SOBOLEV-001
+  (fechou LP-GAP-004), fechando o LP-GAP-005 que aquela mesma frente
+  abriu de propósito.
 next_single_action: >
-  FOUND-LERAY-PROJECTOR-SOBOLEV-001 fechou VERIFIED / result_review
-  APPROVED_WITH_NOTES (revisão adversarial: 0 problemas de corretude,
-  2 nits cosméticos corrigidos). LP-GAP-004 fechado; LP-GAP-005 aberto
-  de propósito (auto-adjunção em H^s requer transportar o produto
-  interno, não tentado). Fila volta a exigir revisão de portfólio antes
-  de qualquer frente nova.
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Integrar o veredito da revisão adversarial de
+  FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001. Se aprovado, fechar como
+  VERIFIED e retravar authorized_action em PORTFOLIO_REVIEW_REQUIRED.
+authorized_action: "RESULT_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document_leray_orthogonal_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_ORTHOGONAL_SOBOLEV_2026_08_09.md"
 portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
 frontmatter_scan_coverage: "FULL"

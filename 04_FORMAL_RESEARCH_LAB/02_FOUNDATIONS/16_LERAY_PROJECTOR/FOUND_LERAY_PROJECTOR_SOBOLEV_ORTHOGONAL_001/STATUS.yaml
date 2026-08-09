@@ -1,0 +1,51 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-LERAY-PROJECTOR-SOBOLEV-ORTHOGONAL-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: PENDING
+extension_status: NOT_AUTHORIZED
+authorized_action: RESULT_REVIEW_REQUIRED
+research_role: FORMAL_FOUNDATION
+closes_gap: LP-GAP-005
+predecessor: FOUND-LERAY-PROJECTOR-SOBOLEV-001
+scope_decision: >
+  Proved via an explicit pullback pairing hsInner (f g := inner (toL2 f)
+  (toL2 g)), NOT via a global InnerProductSpace (Hs E F s) instance.
+  Mathlib's InnerProductSpace.induced requires the domain's norm to be
+  definitionally the matching SeminormedAddCommGroup.induced instance for
+  the SAME map; Hs's norm was installed via NormedAddCommGroup.induced
+  with an AddMonoidHom (toL2AddHom), not verified compatible with what
+  InnerProductSpace.induced expects. Installing the instance blind risked
+  a silent type-class diamond. The pullback pairing proves the same
+  mathematical content (self-adjointness as a symmetry identity,
+  orthogonal-complement identity, Pythagoras) without that risk.
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonalSobolev.lean"
+  registered_in: "TamesisLab/Foundations.lean"
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8821
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all declarations"
+result:
+  pairing: hsInner
+  properties_proved:
+    - "hsInner_self_eq_normSq: the pairing genuinely represents the H^s norm-squared"
+    - "hsInner_lerayOpHs_symm: self-adjointness (⟪Pf,g⟫ = ⟪f,Pg⟫), transferred from LerayOrthogonal.inner_lerayOpL2_symm"
+    - "hsInner_lerayOpHs_sub: range of P orthogonal to range of 1-P, transferred"
+    - "norm_sq_lerayOpHs_pythagoras: ‖f‖² = ‖Pf‖² + ‖f-Pf‖², transferred directly via norm, not via hsInner"
+    - "lerayOpHs_orthogonal_package: closed package combining all of the above with the earlier bounded/idempotent/norm=1/nonzero package"
+  positive_instance: "concrete_lerayOpHs_orthogonal_R3, hypothesis-free at s = 5/2 in R^3"
+  global_inner_product_instance_installed: false
+  reason_not_installed: "see scope_decision — diamond risk with the already-installed NormedAddCommGroup.induced instance on Hs, not verified safe"
+claims:
+  promoted: 0
+prohibitions:
+  navier_stokes_reachable: FORBIDDEN
+  inner_product_space_instance_claim: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

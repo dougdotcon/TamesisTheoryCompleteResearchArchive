@@ -2709,3 +2709,51 @@ decisions:
       - "itens REFUTED do plano (PN-5, YM-4, HG-3) explicitamente NAO incluidos nesta onda"
       - "itens dependentes de onda 1 (ex. NS-2, BSD multiplicatividade completa) explicitamente NAO incluidos -- ficam para onda 2, contingente ao fechamento da onda 1"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE1 sao testes auxiliares/reconhecimento, nao reativacao"
+
+  - decision_id: DEC-087
+    date: 2026-08-09
+    decision: >
+      Fechar WAVE1-BATCH-001: os 27 itens da Onda 1 do plano de ataque de
+      portfolio (DEC-085/DEC-086) VERIFICADOS. 25 de 27 CLOSED (18
+      VERIFIED, 7 VERIFIED_WITH_NOTES), 2 de 27 GAP_DIAGNOSED com nota de
+      gap exaustiva (BSD-1, BSD-4), 0 REJECTED. 27 novos arquivos Lean
+      standalone, zero modificacao a qualquer arquivo pre-existente.
+    rationale: >
+      Verificacao em quatro camadas independentes para cada um dos 27
+      itens: (1) implementador formaliza e auto-verifica no primeiro
+      plano; (2) revisor adversarial independente recompila do zero,
+      reconstroi footprint de axiomas por conta propria, verifica
+      citacoes Mathlib contra o codigo-fonte, checa scope creep; (3) esta
+      sessao recompila TODOS os 27 arquivos por conta propria (lake env
+      lean, exit 0 em todos os 27, sem excecao), reconstroi o footprint
+      de axiomas independentemente para os 6 arquivos que nao embutiam
+      #print axioms (zero sorryAx em todos os 27, sem excecao); (4) UMA
+      lake build central apos todos os 27 pousarem (exit 0, 8825 jobs --
+      mesma contagem de antes, confirmando que os arquivos standalone nao
+      entraram no build registrado, nenhuma regressao). git status
+      confirmou que NENHUM arquivo pre-existente foi tocado -- apenas 27
+      arquivos .lean novos + 2 notas de gap (BSD-1, BSD-4). As duas notas
+      de gap foram lidas integralmente e confirmadas como diagnosticos
+      honestos e exaustivos (BSD-1: tres buscas independentes confirmam
+      ausencia de lema-ponte entre dois frameworks de completacao adica
+      do Mathlib nunca conectados; BSD-4: levantamento de 5 gaps reais
+      para Mordell-Weil fraco, maior e mais espalhado que a recon
+      original supos) -- nao "desistencia disfarcada".
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "27 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE1-* para paths exatos)"
+      - "03_MILLENNIUM/06_BSD/BSD-1_GAP_NOTE.md"
+      - "03_MILLENNIUM/06_BSD/BSD-4_GAP_NOTE.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 27 itens WAVE1-* + item guarda-chuva WAVE1-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 27 itens"
+      - "NS-GAP-001 e os gaps centrais de cada Problema do Milenio permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "os 2 itens GAP_DIAGNOSED nao foram forcados -- registrados honestamente, com nota exaustiva"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

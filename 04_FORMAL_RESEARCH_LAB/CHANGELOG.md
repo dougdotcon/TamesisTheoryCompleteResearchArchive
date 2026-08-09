@@ -1,5 +1,94 @@
 # Changelog do laboratório formal
 
+## WAVE1-BATCH-001 - 2026-08-09
+
+### Onda 1 do plano de ataque de portfólio: 27 testes falsificáveis, 8 linhas de pesquisa, execução paralela
+
+A pedido explícito do usuário -- "vamos atacar todas... construindo
+infraestrutura, operadores... se não há bibliotecas em Lean vamos
+construir", sob a filosofia "atacar o inimigo onde ele não está" --
+um workflow de 17 agentes (reconhecimento + ceticismo adversarial) mapeou
+ângulos não-convencionais para as 8 linhas do laboratório (os 6
+Problemas do Milênio Clay oficiais + 2 extensões internas não-Clay),
+produzindo `PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md` (DEC-085):
+21 candidatos revisados, 3 REFUTED com justificativa, uma Onda 1 de 27
+testes pequenos e falsificáveis propostos.
+
+O usuário escolheu despachar a Onda 1 completa. Um segundo workflow (54
+agentes: 27 implementadores + 27 revisores adversariais independentes,
+DEC-086) executou todos os 27 em paralelo. **Resultado: 25 de 27
+CLOSED (18 VERIFIED, 7 VERIFIED_WITH_NOTES), 2 de 27 GAP_DIAGNOSED com
+nota exaustiva, 0 REJECTED.**
+
+Verificação em quatro camadas antes de qualquer item ser aceito:
+1. Implementador formaliza e auto-verifica no primeiro plano.
+2. Revisor adversarial independente recompila do zero, reconstrói o
+   footprint de axiomas por conta própria, verifica citações Mathlib
+   contra o código-fonte.
+3. **Esta sessão recompilou todos os 27 arquivos por conta própria**
+   (`lake env lean`, exit 0 em todos os 27, sem exceção) e reconstruiu o
+   footprint de axiomas independentemente para os 6 arquivos que não
+   embutiam `#print axioms` -- zero `sorryAx` em todos os 27, sem
+   exceção.
+4. Uma `lake build` central após os 27 pousarem -- exit 0, 8825 jobs
+   (mesma contagem de antes, confirmando que os arquivos standalone não
+   entraram no build registrado, nenhuma regressão). `git status`
+   confirmou zero arquivo pré-existente modificado -- apenas 27 `.lean`
+   novos + 2 notas de gap.
+
+### Destaques por linha
+
+- **Riemann** (5/5 fechados): `RVMLimit.lean` fecha o passo elementar de
+  assintótica que faltava na ponte RVM-LIMIT; `ZetaZerosCountingFiniteness.lean`
+  conecta pela primeira vez a infraestrutura `riemannZetaZeros` (Mathlib,
+  checkout de 2026-07-16) à função de contagem de zeros do laboratório.
+- **Navier-Stokes** (2/2 fechados): `CalderonZygmundLocalPVExistence.lean`
+  estende a prova de média-zero de hoje (`FOUND-CZ-MEAN-ZERO-001`) para
+  existência genuína do valor principal contra uma função-teste Lipschitz.
+- **P vs NP** (3/3 fechados): primeira formalização de `Language.P`/
+  `Language.NP` sobre o scaffold `TM2ComputableInPolyTime` do Mathlib, e
+  uma segunda testemunha não-trivial (negação booleana) do aparato.
+- **Yang-Mills** (3/3 fechados): gap espectral explícito 2×2 via
+  discriminante, instância concreta de Perron-Frobenius, estabilidade de
+  gap sob convergência em norma.
+- **Hodge** (3/3 fechados): ponte divisor-principal-como-ciclo-algébrico,
+  especialização de `ClassGroup.equivPic` a corpos de números.
+- **BSD** (2/4 fechados, 2 gaps honestamente diagnosticados): multiplicação
+  condicional de `WeierstrassCurve.LFunction` provada
+  (`LFunctionMultiplicativity.lean`), mas o caso incondicional trava numa
+  lacuna real -- nenhuma ponte Mathlib entre dois frameworks de
+  completação ádica nunca conectados (`BSD-1_GAP_NOTE.md`, registrado
+  como `BSD-GAP-007`). Levantamento exaustivo dos 5 gaps reais que faltam
+  para Mordell-Weil fraco (`BSD-4_GAP_NOTE.md`, `BSD-GAP-008`) -- maior e
+  mais espalhado do que o reconhecimento original supôs.
+- **TOE Synthesis** (3/3 fechados): `ActionCategoryRegime3.lean`
+  instancia a `ActionCategory` do Mathlib sobre a ação finita já
+  verificada de `FOUND-SEMIGROUP-001`.
+- **Problema 8 / Fundamentos Quânticos** (4/4 fechados): impossibilidade
+  em dimensão finita da relação de comutação canônica (argumento de
+  traço, 4-6 linhas, citado nesta integração como o candidato mais limpo
+  do lote), tightness explícita de CHSH/Tsirelson (fechando um `## Future
+  work` real do próprio Mathlib), dualidade de Gelfand como
+  correspondência clássico/quântico.
+
+### O que isto NÃO significa
+
+```text
+NENHUM Problema do Milênio (Riemann, Navier-Stokes, P vs NP, Yang-Mills,
+  Hodge, BSD) ficou resolvido, aproximado, ou alcançável
+NENHUMA das 27 pistas toca o problema central da sua linha -- são todas
+  infraestrutura auxiliar, resultados negativos, ou resultados de
+  esclarecimento
+NS-GAP-001 e os gaps centrais de cada linha permanecem abertos, sem
+  exceção
+que TOE-INTERFACE-001 ou QCU-001 (Problema 8) têm status Clay-oficial
+que Ondas 2/3 do plano de ataque (itens dependentes, e a ponte de
+  infraestrutura compartilhada HeightOneSpectrum<->coaltura-1) foram
+  tentadas nesta frente
+```
+
+`authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED`.
+
 ## FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001 - 2026-08-09
 
 ### Integral de Dirichlet formalizada — primeiro item de análise real pura do dia

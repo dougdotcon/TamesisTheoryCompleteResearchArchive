@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
 active_work_item: "WAVE1-BATCH-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,40 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "b3e66ea"
-last_verified_artifact: "02_FOUNDATIONS/21_DIRICHLET_OSCILLATORY_INTEGRAL/DirichletOscillatoryIntegral.lean (461 lines), lake env lean exit 0 (foreground, empty log), full lake build exit 0 (8825 jobs), zero sorryAx across 18 declarations (independently reconstructed via #print axioms, not embedded in the file), zero forbidden tokens -- verified independently three times (implementer agent, this session, adversarial reviewer who also cross-checked the Grafakos citation against cached primary-source OCR)"
+formalized_at_commit: "this integration commit (Wave 1 batch, 27 new files committed together)"
+last_verified_artifact: "27 Wave-1 Lean files across 8 research lines (see RESEARCH_QUEUE.yaml WAVE1-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 27), axiom footprints reconstructed independently for the 6 files that did not embed #print axioms (zero sorryAx on all 27), one central full lake build after all 27 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status), zero forbidden tokens on all 27, zero modification to any pre-existing tracked file (git status confirmed) -- on top of each item's own implementer self-check and independent adversarial reviewer pass (54 agents total across the batch)"
 current_blocker: null
 next_single_action: >
+  WAVE1-BATCH-001 (27 itens da Onda 1 do plano de ataque de portfólio,
+  DEC-085/DEC-086) fechou VERIFIED / result_review APPROVED. Pedido
+  explícito do usuário ("Onda 1 completa, todas as 24" -- contagem real
+  27, corrigida) após apresentação do plano de ataque completo. Cada um
+  dos 27 itens: implementador formaliza + auto-verifica no primeiro
+  plano -> revisor adversarial independente recompila e re-verifica
+  citações -> esta sessão recompila TODOS os 27 arquivos por conta
+  própria (lake env lean, exit 0 em todos), reconstrói o footprint de
+  axiomas para os 6 arquivos sem #print axioms embutido (zero sorryAx em
+  todos os 27), roda UMA lake build central (exit 0, 8825 jobs, mesma
+  contagem de antes -- confirma que os novos arquivos standalone não
+  entraram no build registrado), e confirma via git status que NENHUM
+  arquivo pré-existente foi tocado. Resultado: 25 de 27 CLOSED
+  (18 VERIFIED, 7 VERIFIED_WITH_NOTES), 2 de 27 GAP_DIAGNOSED com nota de
+  gap exaustiva e honesta (BSD-1: multiplicatividade condicional de
+  WeierstrassCurve.LFunction provada, mas o lado incondicional trava numa
+  lacuna genuína de compatibilidade de corpo de resíduo entre dois
+  frameworks de completação do Mathlib nunca conectados; BSD-4:
+  levantamento dos 5 gaps reais que faltam para invocar
+  AddCommGroup.fg_of_descent' e obter Mordell-Weil fraco, maior e mais
+  espalhado do que a recon original supôs). ZERO REJECTED. `NS-GAP-001`
+  e os demais gaps centrais de cada Problema do Milênio permanecem
+  abertos -- nenhuma linha destas 27 toca o problema central de forma
+  alguma; são todas peças de infraestrutura auxiliar ou resultados
+  negativos/de esclarecimento, exatamente como o plano prometeu. Ver
+  09_SESSIONS/2026/2026-08-09_WAVE1_EXECUTION.md para detalhe completo
+  por item. `authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED`.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   FOUND-DIRICHLET-OSCILLATORY-INTEGRAL-001 fechou VERIFIED / result_review
   APPROVED (revisão adversarial: zero problemas, incluindo re-verificação
   da citação de Grafakos contra o OCR em cache da fonte primária).
@@ -119,7 +149,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"

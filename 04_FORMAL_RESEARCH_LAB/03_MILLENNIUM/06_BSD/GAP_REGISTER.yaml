@@ -58,3 +58,43 @@ gaps:
       primos pequenos/de má redução aditiva estão tratados por alguma
       das linhas da matriz. Marcado OPEN por precaução epistêmica, não
       por contraexemplo conhecido.
+  - gap_id: BSD-GAP-007
+    description: "Nenhuma ponte Mathlib entre corpo de resíduo de completação ádica (Valued/UniformSpace.Completion) e corpo de resíduo de completação de módulo (AdicCompletion) -- necessária até para a multiplicatividade incondicional de WeierstrassCurve.LFunction."
+    status: OPEN
+    detail: >
+      Descoberto por WAVE1-BSD-1 (item de infraestrutura formal, não
+      literatura) em 2026-08-09. Categoria diferente dos gaps 001-006
+      acima (esses são lacunas de cobertura na LITERATURA matemática;
+      este é uma lacuna de INFRAESTRUTURA FORMAL no Mathlib). Três buscas
+      independentes confirmam ausência: nenhum lema liga
+      `v.adicCompletionIntegers K` (construção via `UniformSpace.Completion`
+      de um corpo valorado) a `AdicCompletion (maximalIdeal R) R`
+      (construção via limite inverso de módulo) -- são objetos
+      genuinamente distintos sem ponte no Mathlib atual. Bloqueia a
+      versão incondicional de `WeierstrassCurve.LFunction.IsMultiplicative`
+      (a versão condicional, assumindo cardinalidade potência-de-primo do
+      corpo de resíduo, já está provada). Ver
+      03_MILLENNIUM/06_BSD/BSD-1_GAP_NOTE.md para o diagnóstico completo
+      e o caminho de continuação sugerido.
+  - gap_id: BSD-GAP-008
+    description: "Cinco lacunas formais Mathlib separadas impedem invocar AddCommGroup.fg_of_descent' para obter Mordell-Weil fraco -- maior e mais espalhado do que o reconhecimento inicial supôs."
+    status: OPEN
+    detail: >
+      Descoberto por WAVE1-BSD-4 (item de reconhecimento formal, não
+      literatura) em 2026-08-09. Categoria diferente dos gaps 001-006
+      acima (infraestrutura formal, não cobertura de literatura). Lista
+      exata: (1) Mordell-Weil fraco (E(Q)/2E(Q) finito) totalmente ausente
+      -- zero isogenia, zero mapa de Kummer, zero grupo de Selmer
+      específico de curva elíptica em todo o Mathlib; (2) correção de
+      `AddSubMap.lean:21` (TODO aberto, a fórmula da adição em
+      coordenadas não está provada correta); (3) altura ingênua sobre
+      E(K) não definida (TODO aberto em `Height/EllipticCurve.lean`);
+      (4) lei do paralelogramo aproximada existe apenas como desigualdade
+      de coordenadas em `Fin 3 → K` genérico, não como enunciado sobre
+      pontos reais de E(K); (5) propriedade Northcott existe para
+      `mulHeight₁` em P¹(K) mas não para qualquer altura em E(K) (depende
+      de (3) primeiro). Ver 03_MILLENNIUM/06_BSD/BSD-4_GAP_NOTE.md para o
+      diagnóstico completo, incluindo a tabela peça-por-peça e o caminho
+      de continuação sugerido caso o laboratório abra uma frente dedicada
+      de Mordell-Weil no futuro (projeto de escala própria, não uma
+      continuação direta desta nota).

@@ -1865,3 +1865,90 @@ claims:
       - qualquer conexao a CZKernelClass, ao nucleo D, ou a fourierMulL2
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: WAVE1-BATCH-FORMAL-001
+    short_name: wave1_portfolio_attack_execution
+    exact_statement: >
+      27 testes falsificaveis pequenos, um por candidato sobrevivente do
+      plano de ataque de portfolio (DEC-085/086), executados em paralelo
+      atraves das 8 linhas de pesquisa (6 Problemas do Milenio Clay
+      oficiais + 2 extensoes internas nao-Clay). 25 de 27 fecharam
+      (CLOSED), 2 de 27 foram diagnosticados honestamente como gaps reais
+      apos investigacao exaustiva (GAP_DIAGNOSED), 0 REJECTED. Lista
+      completa por item, formato "CODIGO: outcome/veredito-adversarial --
+      caminho do arquivo":
+      - "RH-1: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/RHNogo/Bridge/RVMLimit.lean"
+      - "RH-2: CLOSED/VERIFIED_WITH_NOTES -- 05_FORMAL/lean/TamesisLab/Riemann/ZetaZerosCountingFiniteness.lean"
+      - "RH-3: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/DiagonalSelfAdjointOperatorProbe.lean"
+      - "RH-4: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/Foundations/SpectralCountingLimit.lean"
+      - "RH-5: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/Riemann/ZetaHalfPlaneGrowthBound.lean"
+      - "NS-1: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundLocalPVExistence.lean"
+      - "NS-3: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/DiscreteHilbertTransformToySanityCheck.lean"
+      - "PN-1: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN1_LanguagePNP.lean"
+      - "PN-3: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN3_NegationWitness.lean"
+      - "PN-4: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN4_OracleHaltingProbe.lean"
+      - "YM-1: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/FiniteLatticeTransferGap.lean"
+      - "YM-2: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/PerronFrobeniusInstance.lean"
+      - "YM-3: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/FixedDimEigenvalueStability.lean"
+      - "HG-1: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/principal_divisor_algebraic_cycle_bridge.lean"
+      - "HG-2: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/ClassGroupPicardBridgeProbe.lean"
+      - "HG-4: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionProbe.lean"
+      - "BSD-1: GAP_DIAGNOSED/GAP_CONFIRMED -- 03_MILLENNIUM/06_BSD/FORMAL/LFunctionMultiplicativity.lean"
+      - "BSD-2: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/06_BSD/FORMAL/BadReductionValuationBridge.lean"
+      - "BSD-3: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/HasseCoefficientRecursionBound.lean"
+      - "BSD-4: GAP_DIAGNOSED/GAP_CONFIRMED -- 03_MILLENNIUM/06_BSD/FORMAL/MordellWeilGapProbe.lean"
+      - "TOE-1: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/ActionCategoryRegime3.lean"
+      - "TOE-2: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/InterfaceSkeletonDependencyProbe.lean"
+      - "TOE-4: CLOSED/VERIFIED_WITH_NOTES -- 05_FORMAL/lean/TamesisLab/TOE/EpistemicStatusPromotion.lean"
+      - "QF-1: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/CHSHTsirelsonTightness.lean"
+      - "QF-2: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/CCRFiniteDimImpossibility.lean"
+      - "QF-3: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/GelfandSelfAdjointRealValued.lean"
+      - "QF-4: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowDerivativeProbe.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE1-*)"
+      - "09_SESSIONS/2026/2026-08-09_WAVE1_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 27 itens e uma peca de infraestrutura auxiliar,
+      resultado negativo, ou resultado de esclarecimento -- NENHUM toca o
+      problema central de qualquer Problema do Milenio. Verificado em
+      quatro camadas: implementador auto-verifica -> revisor adversarial
+      independente recompila e re-verifica citacoes -> esta sessao
+      recompila todos os 27 arquivos por conta propria (lake env lean,
+      exit 0 em todos) e reconstroi footprint de axiomas para os 6
+      arquivos sem #print axioms embutido (zero sorryAx em todos os 27)
+      -> uma lake build central confirma zero regressao (8825 jobs,
+      mesma contagem de antes). git status confirma zero arquivo
+      pre-existente modificado. As duas notas de gap (BSD-1, BSD-4) foram
+      lidas integralmente e confirmadas honestas e exaustivas, nao
+      desistencia disfarcada.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: []
+    known_gaps:
+      - "BSD-1: multiplicatividade condicional de WeierstrassCurve.LFunction
+         provada, mas o caso incondicional trava numa lacuna genuina de
+         compatibilidade de corpo de residuo entre dois frameworks de
+         completacao adica do Mathlib nunca conectados -- ver
+         03_MILLENNIUM/06_BSD/BSD-1_GAP_NOTE.md"
+      - "BSD-4: 5 gaps reais identificados para invocar
+         AddCommGroup.fg_of_descent' e obter Mordell-Weil fraco --
+         Selmer/isogenia ausentes de todo o Mathlib, lei do paralelogramo
+         tem 3 sub-lacunas separadas -- ver
+         03_MILLENNIUM/06_BSD/BSD-4_GAP_NOTE.md"
+      - "onda 2 e onda 3 do plano de ataque (itens dependentes de onda 1
+         fechar, e a ponte de infraestrutura compartilhada
+         HeightOneSpectrum<->coaltura-1) NAO tentadas nesta frente"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

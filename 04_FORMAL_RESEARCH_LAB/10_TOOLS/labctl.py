@@ -661,7 +661,8 @@ def validate() -> dict[str, Any]:
                       "FOUND-DUHAMEL-SKELETON-001",
                       "FOUND-ABSTRACT-DUHAMEL-FIXEDPOINT-001",
                       "FOUND-DUHAMEL-FIXEDPOINT-INSTANCE-001",
-                      "FOUND-CF-DEPLETION-KERNEL-001"}:
+                      "FOUND-CF-DEPLETION-KERNEL-001",
+                      "FOUND-CZ-KERNEL-DEFINITIONS-001"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "
@@ -773,6 +774,7 @@ def validate() -> dict[str, Any]:
         "PARALLEL_AUDIT_WAVE_IN_PROGRESS",
         "RESULT_REVIEW_REQUIRED",
         "NO_AUTONOMOUS_WORK_AVAILABLE",
+        "FORMALIZATION",
     }:
         errors.append("authorized_action is inconsistent with the active infrastructure gate")
     benchmark_phases = benchmark.get("phase_status", {})

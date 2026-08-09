@@ -2266,3 +2266,46 @@ decisions:
       - "a representacao integral p.v. real e o teorema completo de Constantin-Fefferman permanecem fora de escopo"
       - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
       - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado), 8825 jobs, por tres processos independentes (implementador, esta sessao, revisor adversarial)"
+
+  - decision_id: DEC-078
+    date: 2026-08-09
+    decision: >
+      Autorizar FOUND-CZ-KERNEL-DEFINITIONS-001 -- camada definicional de
+      Calderon-Zygmund em R^3: (1) integral de valor principal LOCAL,
+      (2) classe estrutural de nucleo CZ (homogeneo grau -3, suave fora
+      da origem, media zero sobre a esfera unitaria), (3) verificacao de
+      homogeneidade (e, se tratavel, media zero) da peca de coeficiente
+      congelado do nucleo de Constantin-Fefferman K(y):=D(y-hat,e2,e3)/
+      |y|^3, reusando D ja formalizado em FOUND-CF-DEPLETION-KERNEL-001.
+    rationale: >
+      Busca exaustiva no Mathlib (05_FORMAL/lean/.lake/packages/mathlib)
+      confirmou zero arquivos para Calderon-Zygmund, integral singular,
+      BMO, funcao maximal de Hardy-Littlewood, tipo-fraco, interpolacao
+      de Marcinkiewicz, ou integral de valor principal -- ver
+      01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md.
+      Diante disso, tres escopos foram apresentados ao usuario (camada
+      definicional apenas, fundacao completa a partir da funcao maximal,
+      ou buscar biblioteca externa); o usuario escolheu explicitamente
+      "camada definicional apenas" -- a unica compativel com avaliacao
+      explicita a cada ciclo, em vez de comprometer a pesquisa a um
+      programa de meses/anos sem gate intermediario.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +1 item (FOUND-CZ-KERNEL-DEFINITIONS-001), status SCOPED"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "extensao NOMEADA e DELIMITADA da excecao de DEC-076: permite definir vocabulario estrutural de Calderon-Zygmund (p.v. integral local, classe de nucleo, homogeneidade) SEM tentar limitacao L^p, teorema CZ completo, ou a integral p.v. real das eq. 2.1/2.2"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NENHUMA limitacao L^p de operador tentada"
+      - "NENHUM teorema de Calderon-Zygmund (decomposicao, tipo-fraco, interpolacao) tentado"
+      - "NENHUMA estimativa sobre a integral p.v. real aplicada a campo de vorticidade genuino"
+      - "NS-GAP-001/004 permanecem nomeados e abertos"
+      - "media zero sobre a esfera pode ficar registrada como gap nomeado se intratavel -- nao forcada"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"

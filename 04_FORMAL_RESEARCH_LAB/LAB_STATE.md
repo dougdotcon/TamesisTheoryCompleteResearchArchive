@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "millennium"
-active_work_item: "FOUND-CF-DEPLETION-KERNEL-001"
-work_status: "VERIFIED"
+active_work_item: "FOUND-CZ-KERNEL-DEFINITIONS-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,15 +37,22 @@ formalized_at_commit: "4a46b13ceb56d6e37ab46bae007302ffa294c2fd"
 last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean (266 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
 current_blocker: null
 next_single_action: >
-  FOUND-CF-DEPLETION-KERNEL-001 fechou VERIFIED / result_review
-  APPROVED_WITH_NOTES (revisão adversarial com escrutínio reforçado:
-  0 problemas de solidez matemática; 1 frase reformulada por precaução
-  de leitura, corrigida). Núcleo algébrico de Constantin-Fefferman 1993
-  formalizado: depleção exata + cota quantitativa + instância concreta
-  não-degenerada. NS-GAP-001 permanece OPEN, anotado com
-  cross-referência. A representação integral p.v. real e o teorema
-  completo permanecem fora de escopo. Fila volta a exigir revisão de
-  portfólio antes de qualquer frente nova.
+  FOUND-CZ-KERNEL-DEFINITIONS-001 aberta (SCOPED), extensão nomeada da
+  exceção de DEC-076 via DEC-078. Escopo (camada definicional apenas,
+  escolhido explicitamente pelo usuário diante do achado de que o
+  Mathlib não tem nenhuma infraestrutura de Calderón-Zygmund/BMO/
+  maximal/interpolação/p.v.): (1) integral de valor principal LOCAL em
+  R^3; (2) classe estrutural de núcleo Calderón-Zygmund (homogêneo grau
+  -3, suave fora da origem, média zero sobre a esfera unitária); (3)
+  verificação de homogeneidade (e, se tratável, média zero — não
+  forçada, gap nomeado se intratável) da peça de coeficiente congelado
+  K(y):=D(ŷ,e2,e3)/|y|³, reusando D já formalizado em
+  FOUND-CF-DEPLETION-KERNEL-001. NENHUMA limitação L^p, NENHUM teorema
+  CZ completo, NENHUMA estimativa sobre a integral p.v. real aplicada a
+  campo de vorticidade genuíno, NENHUM progresso em NS-GAP-001/004.
+  Próximo passo: dispatchar formalização Lean, verificar build de forma
+  independente, revisão adversarial com escrutínio reforçado (mesma
+  classe de sensibilidade da frente anterior).
   ---
   Contexto: pedido explícito do usuário de reavaliar a governança para
   continuar atacando, fundamentado exclusivamente em fontes reais
@@ -53,16 +60,20 @@ next_single_action: >
   (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md) não
   encontrou nenhuma alavanca de análise harmônica/Calderón-Zygmund
   utilizável — confirmado pelas próprias autoauditorias do corpus.
-  Achado registrado: RIGOROUS_DERIVATIONS.md (fora deste laboratório)
-  rotula indevidamente "Q.E.D." um argumento heurístico para o Lemma
-  3.1/NS-GAP-001. Direção escolhida pelo usuário: formalizar
-  Constantin-Fefferman 1993 (fonte real, citável). DEC-076 abriu uma
-  exceção NOMEADA e DELIMITADA ao stop_condition de NS-PRESSURE-001:
-  FOUND-CF-DEPLETION-KERNEL-001, o núcleo algébrico de depleção
-  geométrica D(e1,e2,e3):=(e1·e3)·det(e1,e2,e3) — NÃO o teorema
-  completo, que continua fora de escopo. Formalização concluída e
-  fechada (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+  Direção escolhida pelo usuário: formalizar Constantin-Fefferman 1993
+  (fonte real, citável). DEC-076 abriu uma exceção NOMEADA e DELIMITADA
+  ao stop_condition de NS-PRESSURE-001: FOUND-CF-DEPLETION-KERNEL-001,
+  o núcleo algébrico de depleção geométrica
+  D(e1,e2,e3):=(e1·e3)·det(e1,e2,e3) — NÃO o teorema completo, que
+  continua fora de escopo. Formalização concluída e fechada
+  (FOUND-CF-DEPLETION-KERNEL-001, VERIFIED/APPROVED_WITH_NOTES). Usuário
+  pediu "vamos construir a teoria de operadores"; avaliação honesta
+  (busca exaustiva no Mathlib) mostrou zero infraestrutura CZ existente
+  — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
+  diante dessa realidade, a camada definicional apenas para este ciclo
+  (ver início deste campo).
+authorized_action: "FORMALIZATION"
+portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
 portfolio_review_document_duhamel_fixedpoint_instance: "01_PORTFOLIO/PORTFOLIO_REVIEW_DUHAMEL_FIXEDPOINT_INSTANCE_2026_08_09.md"

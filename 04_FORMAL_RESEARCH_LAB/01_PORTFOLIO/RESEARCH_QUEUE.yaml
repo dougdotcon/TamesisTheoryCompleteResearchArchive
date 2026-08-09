@@ -1788,3 +1788,56 @@ queue:
       encontrar alavanca utilizavel
       (09_SESSIONS/2026/2026-08-09_TAMESIS_CORPUS_EXPLORATION.md).
     research_role: FORMAL_FOUNDATION
+
+  - work_item_id: FOUND-CZ-KERNEL-DEFINITIONS-001
+    title: "Camada definicional de Calderon-Zygmund: integral de valor principal local e classe de nucleo"
+    track: millennium
+    target_statement: >
+      (1) Definir integral de valor principal LOCAL em R^3: p.v.
+      integral_{B_R(x0)} f := lim_{eps->0+} integral_{eps<=|y-x0|<R} f(y)
+      dy, quando o limite existe. (2) Definir a classe estrutural de
+      nucleo Calderon-Zygmund em R^3: homogeneo de grau -3, suave fora
+      da origem, media zero sobre a esfera unitaria (condicao de
+      cancelamento). (3) Verificar que a peca de coeficiente congelado
+      do nucleo de Constantin-Fefferman -- K(y) := D(y-hat,e2,e3)/|y|^3
+      para e2,e3 fixos, reusando D de
+      ConstantinFeffermanDepletionKernel.lean -- satisfaz homogeneidade
+      de grau -3. A condicao de media zero sobre a esfera sera tentada;
+      se intratavel no tempo disponivel, fica registrada como gap
+      nomeado, nao forcada.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry,
+      definindo a integral de valor principal local e a classe de
+      nucleo CZ, com a verificacao de homogeneidade de K provada. NAO
+      tenta limitacao L^p, NENHUM teorema de Calderon-Zygmund
+      (decomposicao, tipo-fraco, interpolacao de Marcinkiewicz), NENHUMA
+      estimativa sobre a integral p.v. real das eq. 2.1/2.2 aplicada a
+      um campo de vorticidade genuino.
+    dependencies: ["FOUND-CF-DEPLETION-KERNEL-001"]
+    existing_assets:
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean"
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "Mathlib (busca exaustiva confirmou zero infraestrutura CZ/BMO/maximal/interpolacao/p.v.)"
+    cross_track_value: high
+    stop_condition: >
+      usar sorry ou axioma local; tentar provar limitacao L^p de
+      qualquer operador; tentar qualquer teorema de Calderon-Zygmund
+      (decomposicao, tipo-fraco, interpolacao); tentar a integral p.v.
+      real das eq. 2.1/2.2 aplicada a um campo de vorticidade genuino;
+      forcar a prova de media zero se intratavel -- registrar como gap
+      nomeado em vez disso; afirmar NS-GAP-001/004 resolvido,
+      aproximado, ou que Navier-Stokes ficou alcancavel
+    priority_class: P1
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md,
+      DEC-078 -- extensao nomeada da excecao de DEC-076, apos busca
+      exaustiva confirmar que o Mathlib nao tem nenhuma infraestrutura
+      de analise harmonica (Calderon-Zygmund/BMO/maximal/interpolacao/
+      p.v.). Escopo escolhido explicitamente pelo usuario: camada
+      definicional apenas.
+    research_role: FORMAL_FOUNDATION

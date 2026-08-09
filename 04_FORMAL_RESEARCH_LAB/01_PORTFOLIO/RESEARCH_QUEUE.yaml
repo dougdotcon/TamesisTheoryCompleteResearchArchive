@@ -1418,3 +1418,53 @@ queue:
     algorithmic_novelty: NONE
     research_role: FORMAL_FOUNDATION
 
+
+  - work_item_id: FOUND-LERAY-PROJECTOR-SOBOLEV-001
+    title: "O projetor de Leray matricial em H^s"
+    track: FOUNDATIONS
+    target_statement: >
+      Levantar o projetor de Leray matricial ja verificado em L^2
+      (lerayOpL2) para H^s, conjugando pela isometria toL2ₗᵢ entre Hs E F s
+      e L^2 construida em FOUND-SOBOLEV-SPACE-001 — o mesmo padrao ja
+      demonstrado em SobolevSpace.fourierMultiplierSobolevCLM para um
+      multiplicador escalar, aqui aplicado ao operador matricial ja
+      montado.
+    expected_product: >
+      Modulo Lean compilando com lake build exit 0, zero sorry, provando
+      limitacao, idempotencia e norma exatamente 1 (para n >= 2, nao
+      nulo) do operador em H^s, por transferencia exata das propriedades
+      ja provadas em L^2 (nao reprovadas do zero).
+    dependencies:
+      - FOUND-SOBOLEV-SPACE-001
+      - FOUND-LERAY-PROJECTOR-001
+    existing_assets:
+      - "05_FORMAL/lean/TamesisLab/Foundations/SobolevSpace.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayProjector.lean"
+      - "05_FORMAL/lean/TamesisLab/Foundations/LerayOrthogonal.lean"
+    formalization_cost: moderate
+    bibliographic_cost: none
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "Mathlib"
+    cross_track_value: moderate
+    stop_condition: >
+      usar sorry ou axioma local; afirmar auto-adjuncao ou projecao
+      ortogonal em H^s sem transportar o produto interno (isso e
+      LP-GAP-005, explicitamente fora de escopo); afirmar que
+      Navier-Stokes ficou alcancavel
+    priority_class: P1
+    status: VERIFIED
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
+    result_review: PENDING
+    closes_gap: LP-GAP-004
+    open_gap: LP-GAP-005
+    reactivation_justification: >
+      FM-GAP-001 (tipo H^s ausente do Mathlib), o bloqueador registrado
+      de LP-GAP-004, fechou nesta propria sessao de trabalho via
+      FOUND-SOBOLEV-SPACE-001. Nao e um gate autonomo decidindo por
+      conta propria "agora vale a pena" (proibido por
+      RH_NOGO_REACTIVATION_CRITERIA.md) -- e o reconhecimento de que o
+      bloqueador especifico e nomeado deixou de existir.
+    mathematical_novelty: NONE
+    algorithmic_novelty: NONE
+    research_role: FORMAL_FOUNDATION

@@ -20,6 +20,7 @@ import TamesisLab.Foundations.SobolevSpace
 import TamesisLab.Foundations.SpectralCountingInstance
 import TamesisLab.Foundations.LerayOrthogonal
 import TamesisLab.Foundations.Helmholtz
+import TamesisLab.Foundations.LerayProjectorSobolev
 import TamesisLab.Foundations.BisimulationBoundary.Audit
 
 namespace TamesisLab.Foundations

@@ -15,13 +15,13 @@ canonical_commit_policy: >
   Igualdade com o HEAD é válida no começo de uma sessão; a
   ancestralidade NÃO é estrita.
 repository_clean: true
-active_track: "millennium"
-active_work_item: "NS-PRESSURE-001"
+active_track: "foundations"
+active_work_item: "FOUND-LERAY-PROJECTOR-SOBOLEV-001"
 work_status: "VERIFIED"
-specification_status: "N_A_AUDIT_FRONT"
-specification_review: "N_A_AUDIT_FRONT"
+specification_status: "APPROVED"
+specification_review: "N_A_SELF_SPECIFIED"
 formalization_status: "VERIFIED"
-result_review: "APPROVED_WITH_NOTES"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,27 +33,24 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "9fc26a9a4fd64ad2a93a1c7007491b856615f7aa"
-last_verified_artifact: "5 lean sketches under 03_MILLENNIUM/*/FORMAL/, lake env lean exit 0 each, result_review APPROVED_WITH_NOTES for all five"
+formalized_at_commit: "PENDING_NEXT_COMMIT"
+last_verified_artifact: "TamesisLab/Foundations/LerayProjectorSobolev.lean, lake env lean exit 0, full lake build exit 0 (8820 jobs), 9 declarations, standard axiom footprint, zero sorry"
 current_blocker: >
-  Fila de pesquisa esgotada: 28 de 29 itens VERIFIED. RH-NOGO-001
-  permanece FROZEN_PARTIAL_RESULT (nenhuma das cinco condições de
-  RH_NOGO_REACTIVATION_CRITERIA.md ocorreu — a lista exclui
-  explicitamente "um gate autônomo decidir por conta própria que agora
-  vale a pena"). TOE-INTERFACE-001 permanece bloqueado por depender de
-  RH-NOGO-001 (as outras duas dependências já são VERIFIED).
+  Revisão adversarial de FOUND-LERAY-PROJECTOR-SOBOLEV-001 em andamento
+  (agente independente checando o arquivo Lean e o documento de
+  portfólio). Fila de pesquisa continua com 28 de 29 itens antigos
+  VERIFIED; esta é a primeira frente nova desde a onda paralela,
+  justificada por LP-GAP-004 ter deixado de estar bloqueada (ver
+  01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md).
 next_single_action: >
-  Nenhuma execução autônoma adicional está autorizada. Abrir a próxima
-  frente exige uma de três coisas, nenhuma decidível por este gate: (1)
-  uma condição de RH_NOGO_REACTIVATION_CRITERIA.md ocorrer e ser
-  verificada; (2) o principal registrar uma nova entrada em
-  RESEARCH_QUEUE.yaml com target_statement/expected_product/
-  stop_condition próprios; (3) uma lacuna já aberta (SC-GAP-002,
-  LP-GAP-004, ENC-GAP-020, RT-GAP-017 caso geral, YM-GAP-007) receber
-  gate próprio com justificativa explícita. Ver
-  01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md.
-authorized_action: "NO_AUTONOMOUS_WORK_AVAILABLE"
+  Integrar o veredito da revisão adversarial de
+  FOUND-LERAY-PROJECTOR-SOBOLEV-001. Se aprovado, fechar como VERIFIED
+  com result_review preenchido e retravar authorized_action em
+  PORTFOLIO_REVIEW_REQUIRED. Se a revisão pedir mudanças, corrigi-las
+  antes de fechar.
+authorized_action: "RESULT_REVIEW_REQUIRED"
 portfolio_review_status: "CONSUMED"
+portfolio_review_document_leray_sobolev: "01_PORTFOLIO/PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md"
 portfolio_review_document: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09.md"
 frontmatter_scan_coverage: "FULL"
 yaml_scan_files_covered: 390

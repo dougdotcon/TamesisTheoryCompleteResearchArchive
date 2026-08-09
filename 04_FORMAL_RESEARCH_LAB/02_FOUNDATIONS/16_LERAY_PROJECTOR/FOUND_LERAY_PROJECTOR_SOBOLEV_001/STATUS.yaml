@@ -1,0 +1,68 @@
+schema: tamesis-work-item-status/1
+work_item_id: FOUND-LERAY-PROJECTOR-SOBOLEV-001
+track: FOUNDATIONS
+work_status: VERIFIED
+specification_status: APPROVED
+specification_review: N_A_SELF_SPECIFIED
+formalization_status: VERIFIED
+result_review: PENDING
+extension_status: NOT_AUTHORIZED
+authorized_action: RESULT_REVIEW_REQUIRED
+research_role: FORMAL_FOUNDATION
+closes_gap: LP-GAP-004
+opens_gap: LP-GAP-005
+predecessor: FOUND-LERAY-PROJECTOR-001
+unblocked_by: FOUND-SOBOLEV-SPACE-001
+reactivation_note: >
+  LP-GAP-004 was registered as blocked by FM-GAP-001 (no Sobolev-space
+  TYPE in Mathlib) at FOUND-LERAY-PROJECTOR-001's closure. FM-GAP-001
+  closed in this same session via FOUND-SOBOLEV-SPACE-001. This front
+  is the direct consequence, not an autonomously invented direction —
+  see PORTFOLIO_REVIEW_LERAY_SOBOLEV_2026_08_09.md.
+formalization:
+  lean_modules_created: 1
+  file: "05_FORMAL/lean/TamesisLab/Foundations/LerayProjectorSobolev.lean"
+  registered_in: "TamesisLab/Foundations.lean"
+  file_lines: 178
+  declarations: 9
+  lake_env_lean_exit: 0
+  full_project_lake_build_exit: 0
+  full_project_lake_build_jobs: 8820
+  sorry_declarations: 0
+  axiom_footprint: "[propext, Classical.choice, Quot.sound] on all 9 declarations"
+result:
+  operator: lerayOpHs
+  construction: "conjugation of lerayOpL2 through the toL2ₗᵢ isometric equivalence (Hs E F s ≃ₗᵢ[ℂ] Lp F 2)"
+  properties_proved:
+    - "toL2_lerayOpHs: acts exactly as lerayOpL2 on the L² representative"
+    - "lerayOpHs_idem: idempotent, transferred (not reproved)"
+    - "norm_lerayOpHs_eq: EXACT norm equality with lerayOpL2 (both directions proved, not just a bound)"
+    - "norm_lerayOpHs_le_one: contraction, transferred from the optimal L² bound"
+    - "lerayOpHs_ne_zero (n >= 2): nonzero, transferred"
+    - "norm_lerayOpHs_eq_one (n >= 2): norm exactly 1, transferred"
+  positive_instance: "concrete_lerayOpHs_R3, hypothesis-free at s = 5/2 in R^3"
+  self_adjointness_claimed: false
+  orthogonal_projection_claimed: false
+  reason_not_claimed: "Hs E F s carries NormedSpace/CompleteSpace, not an inner product; ContinuousLinearMap.adjoint is not statable on it without transporting the L² inner product through toL2ₗᵢ, which this front does not do"
+gaps:
+  closed:
+    - LP-GAP-004
+  opened:
+    - LP-GAP-005
+  LP-GAP-005:
+    title: "self-adjointness / orthogonal projection of the Leray operator on H^s"
+    status: OPEN
+    note: >
+      Requires transporting the L² inner product onto Hs E F s through
+      the linear isometric equivalence toL2ₗᵢ (a standard pullback
+      construction, not yet done in SobolevSpace.lean), then restating
+      and reproving isSelfAdjoint_lerayOpL2's analogue. Not attempted
+      in this gate.
+claims:
+  promoted: 0
+prohibitions:
+  navier_stokes_reachable: FORBIDDEN
+  self_adjoint_claim_on_Hs: FORBIDDEN
+  orthogonal_projection_claim_on_Hs: FORBIDDEN
+mathematical_novelty: NONE
+algorithmic_novelty: NONE

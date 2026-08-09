@@ -207,10 +207,22 @@ Três condições, na ordem do escopo autorizado:
   equivalentes quando `t > 0`).
 * `smooth_off_origin`: suavidade `C^∞` fora da origem, via `ContDiffAt`
   pontual (mais fácil de instanciar do que `ContDiffOn` num `K`
-  concreto, e implica `ContDiffOn` na região `{y ≠ 0}` via
-  `contDiffOn_of_forall_contDiffAt` caso seja necessário depois).
+  concreto). Se `ContDiffOn` na região `{y ≠ 0}` for necessário depois,
+  segue por composição pontual de `ContDiffAt.contDiffWithinAt`
+  (Mathlib) sobre cada `y` do conjunto -- não há um único lema "forall"
+  pronto no Mathlib para essa passagem; é uma aplicação direta,
+  não usada neste arquivo.
 * `mean_zero`: condição de cancelamento (média zero) sobre a esfera
-  unitária, relativa à medida `μ` fornecida. -/
+  unitária, relativa à medida `μ` fornecida.
+
+Nota de honestidade (achado da revisão adversarial): esta classe é
+PARAMETRIZADA por `μ` arbitrária, então `mean_zero` é trivialmente
+satisfeita por QUALQUER `K` quando `μ` é a medida nula (ou qualquer
+medida degenerada) -- `CZKernelClass 0 K` não tem conteúdo para nenhum
+`K`. A instanciação com conteúdo real é `sphereSurfaceMeasure` (definida
+acima), que é genuinamente não-nula e suportada na esfera. Nenhum termo
+de `CZKernelClass` é construído neste arquivo para nenhuma medida --
+ver a nota final "O que NÃO é afirmado". -/
 structure CZKernelClass
     (μ : MeasureTheory.Measure (EuclideanSpace ℝ (Fin 3)))
     (K : EuclideanSpace ℝ (Fin 3) → ℝ) : Prop where

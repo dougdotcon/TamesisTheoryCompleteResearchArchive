@@ -1,5 +1,67 @@
 # Changelog do laboratório formal
 
+## FOUND-CZ-KERNEL-DEFINITIONS-001 - 2026-08-09
+
+### Camada definicional de Calderón-Zygmund em R^3
+
+Segunda extensão nomeada da exceção de `DEC-076` (via `DEC-078`), na
+mesma linha que `FOUND-CF-DEPLETION-KERNEL-001`. Usuário pediu para
+continuar construindo "a teoria de operadores"; uma busca exaustiva no
+Mathlib (`05_FORMAL/lean/.lake/packages/mathlib/Mathlib`) confirmou
+**zero** infraestrutura de Calderón-Zygmund/BMO/função maximal/
+interpolação/valor principal — um programa de meses/anos se atacado por
+inteiro. Diante disso, o usuário escolheu explicitamente a "camada
+definicional apenas" (`PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md`).
+
+Formalizado em `CalderonZygmundKernelDefinitions.lean` (~384 linhas,
+arquivo autônomo, mesma convenção de isolamento de
+`ConstantinFeffermanDepletionKernel.lean`):
+
+1. **Integral de valor principal LOCAL** em R^3 (`HasLocalPV`/`localPV`),
+   com unicidade do limite (`tendsto_nhds_unique`) e instância positiva
+   não-degenerada (função nula, valor-principal trivialmente 0).
+2. **`CZKernelClass`** — classe estrutural de núcleo Calderón-Zygmund,
+   parametrizada por uma medida `μ` arbitrária fornecida pelo chamador
+   (o Mathlib não tem medida de superfície canônica pronta em
+   `EuclideanSpace ℝ (Fin 3)`; `sphereSurfaceMeasure` é oferecida como
+   instanciação concreta não-degenerada, via pushforward de
+   `MeasureTheory.Measure.toSphere`).
+3. Para a peça de coeficiente congelado do núcleo de Constantin-Fefferman
+   `K(y):=D(ŷ,e2,e3)/‖y‖³`: **homogeneidade de grau -3 PROVADA**
+   (`K_homogeneous`) e, além do mínimo do escopo, **suavidade C^∞ fora
+   da origem PROVADA** (`contDiffAt_K`). A condição de média zero para
+   esse `K` concreto **não foi tentada** — exige um cálculo analítico de
+   integral de superfície sem atalho algébrico, registrado
+   explicitamente no próprio arquivo como item intratável nesta janela
+   de escopo, não forçado.
+
+Revisão adversarial com escrutínio reforçado (segunda frente ligada
+diretamente a `NS-GAP-001`): **APPROVED_WITH_NOTES**. Zero problemas de
+solidez matemática. Um achado real: a citação
+`contDiffOn_of_forall_contDiffAt` (num comentário de docstring, nunca
+usada em nenhuma prova) não existe em nenhum lugar do Mathlib —
+confirmado por duas buscas independentes na árvore inteira; corrigida
+para o lema real `ContDiffAt.contDiffWithinAt` antes do fechamento. O
+revisor também verificou, por conta própria: recompilação independente
+(`lake env lean` e `lake build` completo, exit 0 ambos, direto, não via
+pipe truncado); diff caractere-a-caractere confirmando que a restatação
+standalone de `tripleProduct`/`D` é genuinamente idêntica ao arquivo
+predecessor; e a não-degenerescência matemática de `sphereSurfaceMeasure`.
+
+### O que NÃO foi afirmado
+
+```text
+NENHUMA limitação L^p de operador integral singular
+NENHUM teorema de Calderón-Zygmund (decomposição, tipo-fraco, interpolação)
+NENHUMA estimativa sobre a integral p.v. real das eq. 2.1/2.2 aplicada a
+  um campo de vorticidade genuíno
+NENHUM progresso em NS-GAP-001/004
+que Navier-Stokes ficou alcançável, aproximado, ou resolvido
+```
+
+`NS-GAP-001` permanece `OPEN`, anotado com cross-referência a esta
+frente em `GAP_REGISTER.yaml`.
+
 ## FOUND-CF-DEPLETION-KERNEL-001 - 2026-08-09
 
 ### Exceção nomeada de governança, fundamentada em fonte real

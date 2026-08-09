@@ -2309,3 +2309,62 @@ decisions:
       - "NS-GAP-001/004 permanecem nomeados e abertos"
       - "media zero sobre a esfera pode ficar registrada como gap nomeado se intratavel -- nao forcada"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, nao reativada por este gate"
+
+  - decision_id: DEC-079
+    date: 2026-08-09
+    decision: >
+      Fechar FOUND-CZ-KERNEL-DEFINITIONS-001: camada definicional de
+      Calderon-Zygmund em R^3 -- integral de valor principal LOCAL
+      (HasLocalPV/localPV, com unicidade e instancia positiva),
+      CZKernelClass (estrutura parametrizada por medida mu arbitraria,
+      com sphereSurfaceMeasure oferecida como instanciacao concreta
+      nao-degenerada), e homogeneidade de grau -3 + suavidade C^infinito
+      fora da origem PROVADAS para a peca de coeficiente congelado
+      K(y):=D(y-hat,e2,e3)/||y||^3. VERIFIED apos revisao adversarial
+      independente com escrutinio reforcado (APPROVED_WITH_NOTES).
+    rationale: >
+      Dada a proximidade continuada com NS-GAP-001 (segunda frente desta
+      linha, apos FOUND-CF-DEPLETION-KERNEL-001), a revisao adversarial
+      foi novamente instruida a escrutinar com cuidado extra. Verificou
+      por conta propria: recompilou o arquivo duas vezes de forma
+      independente (lake env lean e lake build completo, ambos exit 0,
+      nao via pipe truncado); confirmou por diff caractere-a-caractere
+      que a restatacao standalone de tripleProduct/D e genuinamente
+      identica ao arquivo predecessor (nao uma versao sutilmente
+      enfraquecida ou alterada); checou a existencia real no
+      codigo-fonte do Mathlib de cada citacao de API mencionada em
+      comentarios; sanidade matematica da construcao de
+      sphereSurfaceMeasure (pushforward via Measure.map, nao degenerada,
+      nao a medida nula); re-derivou a algebra de K_homogeneous de forma
+      independente. UM problema real encontrado: a citacao
+      `contDiffOn_of_forall_contDiffAt` no comentario da estrutura
+      CZKernelClass nao existe em nenhum lugar do Mathlib (confirmado
+      por duas buscas independentes na arvore inteira) -- nao usada em
+      nenhuma prova (apenas em prosa de docstring, nao carrega peso),
+      corrigida antes do fechamento para o lema real
+      ContDiffAt.contDiffWithinAt. Sugestao adicional (nao bloqueante,
+      aplicada por precaucao): documentar explicitamente que
+      CZKernelClass e trivialmente satisfeita para mu degenerada (ex.
+      medida nula), para que um leitor nao confunda uma instancia com mu
+      trivial como tendo conteudo real.
+    authority: RESULT_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean"
+      - "03_MILLENNIUM/02_NAVIER_STOKES/GAP_REGISTER.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "RESEARCH_QUEUE: FOUND-CZ-KERNEL-DEFINITIONS-001 status SCOPED -> VERIFIED, result_review APPROVED_WITH_NOTES"
+      - "GAP_REGISTER (Navier-Stokes): NS-GAP-001 anotado com cross-reference a esta frente -- status permanece OPEN"
+      - "CLAIM_LEDGER: +1 claim (CZ-KERNEL-DEFINITIONS-FORMAL-001)"
+    untouched_safeguards:
+      - "nenhum problema de milenio e declarado resolvido, aproximado ou alcancavel"
+      - "NS-GAP-001/004 permanecem OPEN, nao alterados por esta frente"
+      - "NENHUMA limitacao L^p, NENHUM teorema de Calderon-Zygmund, NENHUMA estimativa sobre a integral p.v. real foram tentados"
+      - "media zero para o K concreto: nao tentada, registrada honestamente como intratavel nesta janela de escopo, nao forcada"
+      - "arquivo standalone, nao registrado no agregador compartilhado TamesisLab.lean"
+      - "lake env lean e lake build completo confirmados exit 0 (nao via pipe truncado) por dois processos independentes (esta sessao, revisor adversarial), apos a correcao da citacao fabricada"

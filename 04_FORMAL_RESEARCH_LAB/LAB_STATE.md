@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "millennium"
 active_work_item: "FOUND-CZ-KERNEL-DEFINITIONS-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED_WITH_NOTES"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,28 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "4a46b13ceb56d6e37ab46bae007302ffa294c2fd"
-last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/ConstantinFeffermanDepletionKernel.lean (266 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry"
+formalized_at_commit: "4564786"
+last_verified_artifact: "03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean (~384 lines), lake env lean exit 0, full lake build exit 0 (8825 jobs), standard axiom footprint, zero sorry -- verified independently three times (implementer agent, this session, adversarial reviewer)"
 current_blocker: null
 next_single_action: >
+  FOUND-CZ-KERNEL-DEFINITIONS-001 fechou VERIFIED / result_review
+  APPROVED_WITH_NOTES (revisão adversarial com escrutínio reforçado:
+  0 problemas de solidez matemática; 1 citação Mathlib fabricada
+  encontrada e corrigida — não usada em nenhuma prova, apenas em prosa
+  de docstring). Camada definicional de Calderón-Zygmund formalizada:
+  integral de valor principal local (com instância positiva), classe
+  estrutural CZKernelClass (parametrizada por medida μ arbitrária —
+  sphereSurfaceMeasure oferecida como instanciação concreta), e
+  homogeneidade de grau -3 + suavidade C^∞ fora da origem PROVADAS para
+  a peça de coeficiente congelado K(y):=D(ŷ,e2,e3)/‖y‖³. Média zero para
+  esse K concreto NÃO foi tentada — registrada honestamente como
+  intratável nesta janela de escopo. NS-GAP-001 permanece OPEN, anotado
+  com cross-referência. Fila volta a exigir revisão de portfólio antes
+  de qualquer frente nova.
+  ---
+  (histórico anterior preservado abaixo, por política de não reescrever
+  next_single_action retroativamente)
+  ---
   FOUND-CZ-KERNEL-DEFINITIONS-001 aberta (SCOPED), extensão nomeada da
   exceção de DEC-076 via DEC-078. Escopo (camada definicional apenas,
   escolhido explicitamente pelo usuário diante do achado de que o
@@ -72,7 +90,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 portfolio_review_document_cz_kernel_definitions: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
 portfolio_review_document_cf_depletion_kernel: "01_PORTFOLIO/PORTFOLIO_REVIEW_CF_DEPLETION_KERNEL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_pm: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_PM.md"
@@ -539,6 +557,43 @@ closed_work_items:
       forma qualitativa", nao "conectando diretamente").
     integral_pv_representation_claim: FORBIDDEN
     full_constantin_fefferman_theorem_claim: FORBIDDEN
+    real_ns_solution_estimate_claim: FORBIDDEN
+    navier_stokes_reachable_claim: FORBIDDEN
+    ns_gap_001_progress_claim: FORBIDDEN
+    mathematical_novelty: NONE
+    research_role: FORMAL_FOUNDATION
+  FOUND-CZ-KERNEL-DEFINITIONS-001:
+    work_status: VERIFIED
+    specification_status: APPROVED
+    specification_review: N_A_SELF_SPECIFIED
+    formalization_status: VERIFIED
+    result_review: APPROVED_WITH_NOTES
+    extension_status: NOT_AUTHORIZED
+    track: millennium
+    governance_exception: DEC-078
+    predecessor: FOUND-CF-DEPLETION-KERNEL-001
+    scope_note: >
+      Camada definicional de Calderon-Zygmund em R^3: (1) integral de
+      valor principal LOCAL (HasLocalPV/localPV, unicidade via
+      tendsto_nhds_unique, instancia positiva nao-degenerada para a
+      funcao nula); (2) CZKernelClass (mu K), parametrizada por medida
+      mu arbitraria fornecida pelo chamador -- Mathlib nao tem medida de
+      superficie canonica pronta em EuclideanSpace R (Fin 3);
+      sphereSurfaceMeasure oferecida como instanciacao concreta
+      nao-degenerada via pushforward de Measure.toSphere; (3)
+      homogeneidade de grau -3 PROVADA (K_homogeneous) e suavidade
+      C^infinito fora da origem PROVADA (contDiffAt_K, alem do minimo do
+      escopo) para K(y):=D(y-hat,e2,e3)/||y||^3. mean_zero para esse K
+      NAO tentada -- registrada como intratavel nesta janela de escopo,
+      exige calculo analitico de integral de superficie sem atalho
+      algebrico. Revisao adversarial com escrutinio reforcado (segunda
+      frente ligada a NS-GAP-001): APPROVED_WITH_NOTES -- 0 problemas de
+      solidez, 1 citacao Mathlib fabricada encontrada
+      (contDiffOn_of_forall_contDiffAt, nao usada em nenhuma prova) e
+      corrigida para ContDiffAt.contDiffWithinAt.
+    lp_boundedness_claim: FORBIDDEN
+    calderon_zygmund_theorem_claim: FORBIDDEN
+    integral_pv_representation_claim: FORBIDDEN
     real_ns_solution_estimate_claim: FORBIDDEN
     navier_stokes_reachable_claim: FORBIDDEN
     ns_gap_001_progress_claim: FORBIDDEN

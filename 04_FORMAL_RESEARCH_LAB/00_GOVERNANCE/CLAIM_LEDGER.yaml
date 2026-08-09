@@ -1672,3 +1672,68 @@ claims:
       - qualquer estimativa sobre solucoes reais de Navier-Stokes
       - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
       - novidade matematica
+
+  - claim_id: CZ-KERNEL-DEFINITIONS-FORMAL-001
+    short_name: calderon_zygmund_kernel_definitional_layer
+    exact_statement: >
+      Tres definicoes formais em R^3, camada puramente definicional: (1)
+      integral de valor principal LOCAL (HasLocalPV/localPV, com
+      unicidade do limite via tendsto_nhds_unique e uma instancia
+      positiva nao-degenerada para a funcao nula); (2) a classe
+      estrutural CZKernelClass (mu : Measure E)(K : E -> R), com campos
+      homogeneous, smooth_off_origin, mean_zero, parametrizada por uma
+      medida mu arbitraria fornecida pelo chamador (o Mathlib nao tem
+      medida de superficie canonica pronta em EuclideanSpace R (Fin 3);
+      sphereSurfaceMeasure e oferecida como instanciacao concreta
+      nao-degenerada, via pushforward de MeasureTheory.Measure.toSphere
+      ao longo da inclusao do subtipo esfera); (3) para a peca de
+      coeficiente congelado do nucleo de Constantin-Fefferman K(y):=
+      D(y-hat,e2,e3)/||y||^3 -- homogeneidade de grau -3 PROVADA
+      (K_homogeneous) e suavidade C-infinito fora da origem PROVADA
+      (contDiffAt_K, alem do minimo do escopo autorizado).
+    domain: pde_functional_analysis_formal
+    source_artifacts:
+      - "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/CalderonZygmundKernelDefinitions.lean"
+      - "04_FORMAL_RESEARCH_LAB/01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_KERNEL_DEFINITIONS_2026_08_09.md"
+    historical_wording: ""
+    current_wording: >
+      Camada definicional apenas -- NENHUMA limitacao L^p, NENHUM
+      teorema de Calderon-Zygmund (decomposicao/tipo-fraco/interpolacao
+      de Marcinkiewicz), NENHUMA estimativa sobre a integral p.v. real
+      das eq. 2.1/2.2 aplicada a campo de vorticidade genuino. A
+      condicao mean_zero para o K concreto da parte (3) NAO foi
+      tentada -- exige um calculo analitico de integral de superficie
+      sem atalho algebrico exploitavel, registrado explicitamente no
+      proprio arquivo Lean como item intratavel nesta janela de escopo,
+      nao forcado nem escondido. Revisao adversarial com escrutinio
+      reforcado (segunda frente ligada a NS-GAP-001): APPROVED_WITH_NOTES
+      -- recompilou por conta propria duas vezes, verificou por diff
+      caractere-a-caractere que a restatacao de D e tripleProduct e
+      genuinamente identica ao arquivo predecessor, checou a existencia
+      real de cada citacao Mathlib no codigo-fonte, e encontrou UMA
+      citacao fabricada (contDiffOn_of_forall_contDiffAt, inexistente no
+      Mathlib) -- nao usada em nenhuma prova (apenas em prosa de
+      docstring), corrigida antes do fechamento para o lema real
+      ContDiffAt.contDiffWithinAt.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies: ["CF-DEPLETION-KERNEL-FORMAL-001"]
+    known_gaps:
+      - "mean_zero sobre a esfera unitaria para o K concreto: nao tentada"
+      - "CZKernelClass parametrizada por mu arbitraria: trivialmente
+         satisfeita para mu degenerada (ex. medida nula) -- documentado
+         explicitamente no arquivo apos nota da revisao adversarial"
+      - "limitacao L^p, teorema de Calderon-Zygmund completo,
+         interpolacao de Marcinkiewicz: nao tentados, fora de escopo"
+      - "NS-GAP-001/004: permanece aberto, nao e alvo desta frente"
+    counterevidence: []
+    canonical_owner: "04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/"
+    last_reviewed: 2026-08-09
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer limitacao L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund (decomposicao/tipo-fraco/interpolacao)
+      - qualquer afirmacao sobre a integral p.v. real aplicada a vorticidade genuina
+      - Navier-Stokes ficou alcancavel, ou NS-GAP-001/004 tem caminho de prova
+      - novidade matematica

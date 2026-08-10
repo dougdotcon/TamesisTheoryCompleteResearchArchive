@@ -2757,3 +2757,105 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "os 2 itens GAP_DIAGNOSED nao foram forcados -- registrados honestamente, com nota exaustiva"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-088
+    date: 2026-08-10
+    decision: >
+      Registrar 01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md -- plano
+      de ataque da Onda 2, cobrindo follow-ons dependentes dos outcomes
+      reais da Onda 1 (DEC-085/086/087) nas mesmas 8 frentes (6 Problemas
+      do Milenio Clay oficiais + 2 extensoes internas nao-Clay) mais uma
+      categoria nova, infraestrutura compartilhada (SHARED-INFRA).
+      Produzido por workflow de reconhecimento + revisao adversarial
+      (19 agentes: 9 grupos de recon -- um por linha de pesquisa +
+      infraestrutura compartilhada -- 9 ceticos independentes, 1 sintese)
+      a pedido explicito do usuario para continuar "o proximo ciclo do
+      mesmo jeito, paralelismo e concorrencia, atacando todos de uma vez".
+      PURAMENTE PLANEJAMENTO -- nenhuma linha de Lean escrita, nenhum
+      arquivo de governanca alterado pelos agentes.
+    rationale: >
+      Cada grupo de recon foi instruido a nao apenas propor passos novos,
+      mas primeiro revisitar o que a Onda 1 REALMENTE fechou (nao o que o
+      plano original previu) e verificar se os passos originalmente
+      previstos para a Onda 2 continuavam relevantes -- varias frentes
+      mudaram de forma inesperada (ex. YM-1/YM-2/YM-3 da Onda 1 abriram
+      3 sub-passos de infraestrutura compartilhada nao previstos
+      originalmente; BSD-1 revelou que o alvo STEP2-FULL originalmente
+      cogitado nao pode nem ser DECLARADO com O_K como origem, um muro de
+      tipagem estrutural, nao de dificuldade de prova). Revisao
+      adversarial independente re-verificou citacoes Mathlib por leitura
+      direta de arquivo, incluindo verificacao de compilacao em scratch
+      para o candidato PN-5 e um computo a mao para o candidato TOE.
+      20 candidatos com veredito SURVIVES/NEEDS_NARROWING formam a lista
+      de execucao da Onda 2; 3 candidatos REFUTED com justificativa
+      registrada no proprio documento (PN comp geral: quebra o truque de
+      rfl unico que barateava os outros itens PN; BSD-1-STEP2-FULL
+      inteiro: muro de tipagem, O_K nunca e anel local; QF-6 fundacao de
+      quantizacao geometrica: zero scaffold no Mathlib, mesma categoria
+      que o QF-4 da Onda 1 ja rejeitou). O proprio documento reafirma:
+      infraestrutura formal construida NAO equivale a Problema do Milenio
+      resolvido, aproximado, ou alcancavel.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status em RESEARCH_QUEUE.yaml -- documento de planejamento, nao gate de execucao"
+      - "LAB_STATE: authorized_action permanece PORTFOLIO_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "ZERO linha de Lean escrita por este gate"
+      - "ZERO arquivo de governanca alterado pelos agentes do workflow alem deste documento de plano"
+      - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
+      - "candidatos REFUTED registrados explicitamente para nao serem re-propostos sem evidencia nova"
+      - "extensoes TOE-INTERFACE-001 e QCU-001 seguem rotuladas nao-Clay-oficiais em todo o documento"
+
+  - decision_id: DEC-089
+    date: 2026-08-10
+    decision: >
+      Autorizar a Onda 2 de execucao do plano de ataque de portfolio
+      completo (DEC-088): 20 itens WAVE2-* registrados em
+      RESEARCH_QUEUE.yaml (WAVE2-RH-1/2, WAVE2-NS-2A/2B, WAVE2-PN-5,
+      WAVE2-PN-2PRIME, WAVE2-YM-1-CONNECT, WAVE2-YM-2-SIMPLE,
+      WAVE2-YM-1-YM-3, WAVE2-HG-1B/4B, WAVE2-BSD-1-STEP1-COMPOSE,
+      WAVE2-BSD-1-STEP2-CORE, WAVE2-TOE-3A/3B/3C, WAVE2-QF-5,
+      WAVE2-SHARED-2A/2B/2C) mais o item guarda-chuva WAVE2-BATCH-001,
+      seguindo o mesmo padrao de DEC-086. Cada item e um teste pequeno e
+      falsificavel, com o texto exato (ja revisado pela adversarial da
+      Onda 2) extraido diretamente da lista de execucao numerada do
+      documento de plano -- nao re-derivado de memoria. Duas dependencias
+      internas explicitas: WAVE2-NS-2B depende de WAVE2-NS-2A;
+      WAVE2-BSD-1-STEP2-CORE depende parcialmente de
+      WAVE2-BSD-1-STEP1-COMPOSE (reusa a sobrejetividade para o ultimo
+      passo, mas e testado independentemente primeiro).
+    rationale: >
+      Continuacao direta do ciclo pedido explicitamente pelo usuario
+      ("Ok, vamos continuar o proximo ciclo do mesmo jeito, paralelismo e
+      concorrencia, atacando todos de uma vez") apos o fechamento da Onda
+      1 (DEC-087, 25/27 CLOSED, 2/27 GAP_DIAGNOSED, 0 REJECTED). Instrucao
+      explicita do usuario e de nao esperar por nova confirmacao a cada
+      ciclo, mantendo o mesmo rigor e paralelismo. Cada um dos 20 itens
+      carrega seu proprio stop_condition proibindo: sorry/admit/
+      axioma/unsafe; alegacao de que qualquer Problema do Milenio foi
+      resolvido, aproximado ou tornado alcancavel; alegacao de novidade
+      matematica; expansao alem do escopo estreito do teste falsificavel
+      especifico; e forcar fechamento se o angulo se revelar intratavel
+      -- nesse caso, registrar como gap nomeado. Nenhum item foi
+      formalizado ainda por este DEC -- apenas registrado e autorizado
+      para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +20 itens WAVE2-* + item guarda-chuva WAVE2-BATCH-001, status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "labctl: active_work_item allowlist += WAVE2-BATCH-001 e os 20 WAVE2-* ids"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "candidatos REFUTED do plano (PN comp geral, BSD-1-STEP2-FULL, QF-6) explicitamente NAO incluidos nesta onda"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE2 sao testes auxiliares/reconhecimento, nao reativacao"

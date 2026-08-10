@@ -7,8 +7,8 @@ schema_extension_note: >
   cinco frentes migraram para closed_work_items abaixo, e o campo foi
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
-updated_at: 2026-08-09T00:00:00-03:00
-canonical_commit: "9fc26a9a4fd64ad2a93a1c7007491b856615f7aa"
+updated_at: 2026-08-10T00:00:00-03:00
+canonical_commit: "9ab9e67156c84433da2e70c7bfbaa3cf58bb4e03"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
-active_work_item: "WAVE1-BATCH-001"
-work_status: "VERIFIED"
+active_work_item: "WAVE2-BATCH-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,6 +37,28 @@ formalized_at_commit: "this integration commit (Wave 1 batch, 27 new files commi
 last_verified_artifact: "27 Wave-1 Lean files across 8 research lines (see RESEARCH_QUEUE.yaml WAVE1-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 27), axiom footprints reconstructed independently for the 6 files that did not embed #print axioms (zero sorryAx on all 27), one central full lake build after all 27 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status), zero forbidden tokens on all 27, zero modification to any pre-existing tracked file (git status confirmed) -- on top of each item's own implementer self-check and independent adversarial reviewer pass (54 agents total across the batch)"
 current_blocker: null
 next_single_action: >
+  WAVE2-BATCH-001 (20 itens da Onda 2 do plano de ataque de portfólio,
+  DEC-088/DEC-089) registrado e o gate de execução aberto. Pedido
+  explícito do usuário para continuar "o próximo ciclo do mesmo jeito,
+  paralelismo e concorrência, atacando todos de uma vez", sem esperar
+  nova confirmação a cada onda. Plano da Onda 2 produzido por workflow de
+  19 agentes (9 grupos de recon -- um por linha de pesquisa + 1 grupo de
+  infraestrutura compartilhada -- 9 céticos independentes, 1 síntese),
+  cada grupo instruído a revisitar o que a Onda 1 REALMENTE fechou (não
+  o que o plano original previu) antes de propor os passos da Onda 2. 20
+  candidatos SURVIVES/NEEDS_NARROWING viraram itens WAVE2-* (texto exato
+  extraído da lista de execução numerada do documento de plano, não
+  re-derivado de memória); 3 candidatos REFUTED ficaram de fora (PN comp
+  geral, BSD-1-STEP2-FULL inteiro, QF-6 quantização geométrica). Duas
+  dependências internas: WAVE2-NS-2B depende de WAVE2-NS-2A;
+  WAVE2-BSD-1-STEP2-CORE depende parcialmente de
+  WAVE2-BSD-1-STEP1-COMPOSE. `authorized_action` -> `FORMALIZATION`.
+  Próximo passo: dispatch do workflow de execução (formalizar + revisão
+  adversarial por item, mesmo padrão da Onda 1), depois verificação
+  independente completa desta sessão antes de qualquer integração.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE1-BATCH-001 (27 itens da Onda 1 do plano de ataque de portfólio,
   DEC-085/DEC-086) fechou VERIFIED / result_review APPROVED. Pedido
   explícito do usuário ("Onda 1 completa, todas as 24" -- contagem real
@@ -149,9 +171,11 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
+wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+wave2_batch_authorization: "DEC-089, 20 itens WAVE2-*, continuacao direta do ciclo pedida explicitamente pelo usuario"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

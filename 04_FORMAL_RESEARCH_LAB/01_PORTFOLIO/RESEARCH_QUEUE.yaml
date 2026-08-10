@@ -2954,3 +2954,629 @@ queue:
     authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md, DEC-086 -- onda 1 de execucao paralela do plano de ataque de portfolio completo (DEC-085), escolhida pelo usuario ('Onda 1 completa, todas as 24' via AskUserQuestion -- contagem corrigida para 27 nesta integracao). Candidato com veredito NEEDS_NARROWING apos revisao adversarial independente (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE2-BATCH-001
+    title: "Onda 2 de execucao do plano de ataque de portfolio completo (item guarda-chuva, 20 sub-itens)"
+    track: multi
+    target_statement: >
+      Item guarda-chuva, sem conteudo formal proprio. Representa a
+      execucao paralela dos 20 itens WAVE2-* individuais (ver cada um
+      separadamente na fila), cada um com seu proprio teste falsificavel
+      pequeno, escopo estreito, e stop_condition. Existe apenas porque
+      LAB_STATE.md tem um unico campo active_work_item singular e uma
+      onda paralela de 20 itens nao cabe nele individualmente. Onda 2
+      foi gerada por um workflow de reconhecimento (9 grupos, um por
+      linha de pesquisa + infraestrutura compartilhada) que revisitou
+      cada passo originalmente previsto na Onda 1 e verificou se ainda
+      era relevante a luz dos outcomes reais da Onda 1 (nao apenas do
+      plano original), seguido por ceticismo adversarial independente.
+    expected_product: >
+      Nenhum -- ver os 20 itens WAVE2-* individuais para produtos
+      esperados especificos.
+    dependencies: []
+    existing_assets:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver itens individuais"
+    cross_track_value: high
+    stop_condition: >
+      qualquer alegacao agregada de progresso alem do que cada item
+      individual honestamente fechou; tratar este item guarda-chuva como
+      se tivesse conteudo formal proprio
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      DEC-089 -- onda 2 do plano de ataque (DEC-088), continuacao direta
+      do ciclo Onda 1 -> Onda 2 pedida explicitamente pelo usuario
+      ("vamos continuar o proximo ciclo do mesmo jeito, paralelismo e
+      concorrencia, atacando todos de uma vez").
+  - work_item_id: WAVE2-RH-1
+    title: "Close RVM-LIMIT-ERROR: compose two o(T log T) terms via tendsto_tLog_of_eq_main_add_littleO"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "RH-1"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar, como corolario de tendsto_tLog_of_eq_main_add_littleO
+      (SB-GAP-010A, ja fechado): (a) e =o[atTop] (T*log T) via
+      IsBigO.trans_isLittleO a partir de e =O[atTop] log T e
+      log T =o[atTop] (T*log T); (b) rvmFormula - c*(T*log T) =o(T log T),
+      extraido de tendsto_rvmLimitFormula_div_tLogScale; (c) somar os dois
+      termos o(T log T) e invocar tendsto_tLog_of_eq_main_add_littleO.
+      Registrar como item novo com gate/DEC proprio. #print axioms so com
+      os 3 axiomas padrao.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-RH-2
+    title: "Prove Monotone NZeta and NZeta T = 0 for T <= 0 (structural properties)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "RH-2"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar Monotone NZeta (via zetaZerosInStrip_subset composto com
+      Set.ncard_le_ncard contra NZeta_region_finite T2 como testemunha de
+      finitude) e NZeta T = 0 para T <= 0 (via zetaZerosInStrip T =
+      (empty : Set C) por Set.Ioc_eq_empty).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-NS-2A
+    title: "hasLocalPV_K_mul_lipschitz: relax exact equality hphidiff to a Lipschitz bound"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "NS-2a"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Declarar hasLocalPV_K_mul_lipschitz (g : E -> R)
+      (hg : LipschitzWith L.toNNReal g). Substituir a igualdade exata
+      hphidiff por |g y - g 0| <= L * norm y via hg.dist_le_mul y 0 (reescrito
+      por dist_eq_norm); reescrever hnormeq e o calc final de hdecay como
+      cadeia <= terminando em C*L*norm y^(-2). Manter phi_lipschitz so para
+      mensurabilidade/continuidade.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-NS-2B
+    title: "pvK: principal-value distribution on the complete space, restricted to a compact K (depends on NS-2a)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "NS-2b"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Tentar pvK (e2 e3 : EuclideanSpace R (Fin 3)) :
+      D'^{1}(EuclideanSpace R (Fin 3), R) (ordem 1) no espaco COMPLETO
+      (nao Omega \ {0}), restrito primeiro a um unico compacto
+      K = closedBall 0 R, via TestFunction.mkCLM com cont descarregado
+      pelo bound Lipschitz de NS-2a contra as seminormas N[K,1,i].
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies:
+      - "WAVE2-NS-2A"
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-PN-5
+    title: "FinTM2 non-trivial certificate witness (Bool x Bool -> Bool, steps=1)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "PN-5"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Construir FinTM2 com K:=Unit, sigma:=Bool: pop x, pop c com funcao de
+      atualizacao decide (ob.getD false = !v), push, load-reset, halt,
+      verificando Bool x Bool -> Bool. Provar TM2ComputableInPolyTime via
+      steps:=1 / rfl. Ja confirmado compilar standalone.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-PN-2PRIME
+    title: "Chained-goto FinTM2 witness across two phases (same stack)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "PN-2'"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Construir uma FinTM2 (Lambda := Bool ou 2 elementos, K:=Unit,
+      Gamma:=Bool) com goto cruzando duas fases; outputsFun com steps := 2,
+      evals_in_steps := rfl. So recorrer a EvalsToInTime.trans explicito se
+      a rota direta falhar para caso onde steps depende do comprimento do
+      input.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-YM-1-CONNECT
+    title: "spectrum R YM1.TransferGap.M = {1, 3} via charpoly + Hermitian spectrum"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "YM-1-Connect"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar spectrum R YM1.TransferGap.M = {1, 3} via Matrix.eval_charpoly
+      + Matrix.det_fin_two + Matrix.mem_spectrum_iff_isRoot_charpoly
+      (espelhando A_spectrum_real), depois rw
+      [M_isHermitian.spectrum_real_eq_range_eigenvalues] para concluir
+      Set.range M_isHermitian.eigenvalues = {1, 3}.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-YM-2-SIMPLE
+    title: "Root multiplicities of A.charpoly via Polynomial.funext decomposition"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "YM-2-Simple"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Via Polynomial.funext, decompor A.charpoly usando rootMultiplicity_mul
+      + rootMultiplicity_X_sub_C_pow/X_sub_C_self para o fator
+      correspondente e Polynomial.rootMultiplicity_eq_zero para o fator
+      nao-correspondente. Concluir rootMultiplicity 4 A.charpoly = 1 e
+      rootMultiplicity 1 A.charpoly = 2.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-YM-1-YM-3
+    title: "Operator-norm bound probe for L2Operator composition of YM-1/YM-3"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "YM-1+YM-3"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Sonda 1: open scoped Matrix.Norms.L2Operator; verificar que
+      Matrix.toEuclideanCLM (!![2,1;1,2.1] - !![2,1;1,2]) unifica com
+      (E ->L[R] E) e que Matrix.l2_opNorm_toEuclideanCLM reescreve
+      norm (toEuclideanCLM (M1-M2)) para norm (M1-M2) via map_sub. Sonda 2 (a
+      pergunta real): achar/provar bound numerico nessa norma L2Operator
+      via ContinuousLinearMap.opNorm_le_bound, OU achar lema de comparacao
+      op-norm-vs-entrywise/Frobenius. Reportar qual sub-passo e o
+      obstaculo se nenhum fechar numa sessao.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-HG-1B
+    title: "algebraMap/germToFunctionField compatibility via ord_mul decomposition of f=3/2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "HG-1b"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar algebraMap Z testScheme.functionField x =
+      testScheme.germToFunctionField top ((Scheme.GammaSpecIso testRing).inv x)
+      via Scheme.GammaSpecIso_inv + desdobramento de StructureSheaf.toStalk.
+      Decompor f = 3/2 via IsFractionRing.div_surjective (A := Z), aplicar
+      a numerador/denominador, invocar ord_mul, reduzir a duas aplicacoes
+      de finite_support_ord_f (a0=3, a0=2).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-HG-4B
+    title: "not Differentiable C (starRingEnd C) via HasFDerivAt uniqueness contradiction"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "HG-4b"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar not Differentiable C (starRingEnd C), usando
+      ContinuousLinearEquiv.hasFDerivAt para obter HasFDerivAt
+      (starRingEnd C) (Complex.conjCLE : C ->L[R] C) x, mais
+      HasFDerivAt.unique / HasFDerivAt.restrictScalars para a contradicao
+      (mapa C-linear generico c*z nao pode igualar conj em z=1 e z=i
+      simultaneamente).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-BSD-1-STEP1-COMPOSE
+    title: "Compose IsLocalization.AtPrime.equivQuotMaximalIdeal with valuationSubringAtPrime_eq_valuationSubring"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "BSD-1-STEP1-COMPOSE"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Compor IsLocalization.AtPrime.equivQuotMaximalIdeal (instanciado com
+      Rp := valuationSubringAtPrime K v) com
+      valuationSubringAtPrime_eq_valuationSubring para obter O_K/v.asIdeal
+      equiv IsLocalRing.ResidueField Rp.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-BSD-1-STEP2-CORE
+    title: "Density-ball approximation in v.adicCompletionIntegers K via denseRange_algebraMap (partially depends on STEP1-COMPOSE)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "BSD-1-STEP2-CORE"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Para K corpo de numeros, v : HeightOneSpectrum, x : v.
+      adicCompletionIntegers K, provar existe k : valuationSubringAtPrime K
+      v com Valued.v (coercao x - coercao k em v.adicCompletion K) < 1,
+      via denseRange_algebraMap + Valued.isOpen_ball/mem_maximalIdeal_iff.
+      Nao tentar produzir y : O_K diretamente nesta etapa.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies:
+      - "WAVE2-BSD-1-STEP1-COMPOSE"
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-TOE-3A
+    title: "instance : Group Shift3 unlocking Groupoid (ActionCategory Shift3 Regime3)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "TOE-3a"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Construir instance : Group Shift3 (idioma revert a; decide sobre a
+      tabela de comp ja confirmada em Regime3.lean:63-70), desbloqueando
+      instance : Groupoid (ActionCategory Shift3 Regime3) via
+      CategoryTheory.groupoidOfElements.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-TOE-3B
+    title: "MulAction.IsPretransitive Shift3 Regime3 unlocking IsConnected (ActionCategory Shift3 Regime3)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "TOE-3b"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Instanciar MulAction.IsPretransitive Shift3 Regime3 a partir de
+      apply_transitive (Theorems.lean:66-68, defeq a exists_smul_eq),
+      desbloqueando instance : IsConnected (ActionCategory Shift3 Regime3)
+      via Nonempty Regime3 := angle.alpha.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-TOE-3C
+    title: "2-element monoid K with constant action exhibiting two distinct endomorphisms in ActionCategory K Regime3"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "TOE-3c"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Construir monoide K de 2 elementos (identidade + k idempotente
+      nao-identidade) com MulAction K Regime3 constante (tudo -> alpha).
+      Exibir os dois elementos distintos de Hom(alpha,alpha) em
+      ActionCategory K Regime3: (id,rfl) e (k,rfl), via decide.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-QF-5
+    title: "Heisenberg commutator-flow identity d/dt[exp(-tH) A exp(tH)] via hasFDerivAt_exp_smul_const_of_mem_ball"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "QF-5"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Instanciar hasFDerivAt_exp_smul_const_of_mem_ball em
+      x := -heisenbergGenerator para obter a derivada de exp(-t*H) em um
+      passo. Aplicar HasFDerivAt.mul' duas vezes, Commute.exp_right para
+      deslizar H atraves do segundo fator, fechar a algebra final com
+      noncomm_ring, concluindo d/dt[exp(-tH) A exp(tH)] = exp(-tH)(AH-HA)
+      exp(tH) (identidade de fluxo-comutador de Heisenberg).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-SHARED-2B
+    title: "(A.map (algebraMap R C)).IsHermitian and spectrum inclusion in range(R) -- YM-2 realness gap"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "SHARED-INFRA-2B"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Provar (A.map (algebraMap R C)).IsHermitian via isHermitian_iff_isSymm
+      + IsHermitian.map (semiconjugacao trivial de algebraMap R C com
+      star), depois aplicar Matrix.IsHermitian.spectrum_eq_image_range para
+      concluir spectrum C (A.map (algebraMap R C)) subseteq range(R).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-SHARED-2A
+    title: "Second-eigenvalue Lipschitz bound lambda2 via trace - lambdaMax -- YM-3, 2D fixed"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "SHARED-INFRA-2A"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Em E := EuclideanSpace R (Fin 2), definir lambda2 T := (LinearMap.
+      trace R E T) - lambdaMax T usando IsSymmetric.trace_eq_sum_eigenvalues.
+      Provar |trace A - trace B| <= 2*norm (A-B) via trace_eq_sum_inner sobre
+      base ortonormal fixa. Combinar linearmente com lambdaMax_lipschitz
+      (ja provado no YM-3) para |lambda2 A - lambda2 B| <= 3*norm (A-B).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
+  - work_item_id: WAVE2-SHARED-2C
+    title: "Spectral bridge probe: LinearPMap eigenvalue vs Module.End.HasEigenvalue on a toy diagonal operator -- RH-4"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    plan_code: "SHARED-INFRA-2C"
+    target_statement: >
+      TESTE (Onda 2, ja revisado pela adversarial, pronto para despacho):
+      Caracterizar mu : R como autovalor de um LinearPMap T via
+      exists v in T.domain, v != 0, T v = mu * v. Conectar a mao a
+      Module.End.HasEigenvalue de um operador limitado R construido como
+      mapa inverso explicito num LinearPMap diagonal nao-limitado de
+      brinquedo (dominio = sequencias de suporte finito, T x_n = n*x_n,
+      R = operador diagonal 1/(n+1) de SpectralCounting.InfDim.T).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 2 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).

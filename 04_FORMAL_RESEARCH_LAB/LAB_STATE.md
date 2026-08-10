@@ -8,7 +8,7 @@ schema_extension_note: >
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-10T00:00:00-03:00
-canonical_commit: "5abc04f401dd4f3e46d209dc3f8b6c492030980c"
+canonical_commit: "85775d8d886f7e2fabd22207e4ca0c47b5dc5d11"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
-active_work_item: "WAVE2-BATCH-001"
-work_status: "VERIFIED"
+active_work_item: "WAVE3-BATCH-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,6 +37,39 @@ formalized_at_commit: "this integration commit (Wave 2 batch, 20 new files commi
 last_verified_artifact: "20 Wave-2 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE2-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 20), axiom footprints reconstructed independently for the 2 files that did not embed #print axioms (HG-1B, YM-1-YM-3; zero sorryAx on all 20), one central full lake build after all 20 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status), zero forbidden tokens on all 20, zero modification to any pre-existing tracked file (git status confirmed) -- on top of each item's own implementer self-check and independent adversarial reviewer pass (40 agents total across the batch)"
 current_blocker: null
 next_single_action: >
+  WAVE3-BATCH-001 (15 itens da Onda 3 do plano de ataque de portfólio,
+  DEC-091/DEC-092) registrado e o gate de execução aberto. Pedido
+  explícito do usuário ("Siga para onda 3"), continuação direta do ciclo
+  pedido anteriormente ("vamos continuar o próximo ciclo do mesmo jeito,
+  paralelismo e concorrência, atacando todos de uma vez"). Plano da Onda
+  3 produzido por workflow de 19 agentes (9 grupos de recon -- um por
+  linha de pesquisa + 1 grupo de infraestrutura compartilhada -- 9
+  céticos independentes, 1 síntese), cada grupo instruído a ler os
+  arquivos REAIS da Onda 2 (não confiar em resumo) antes de propor os
+  passos da Onda 3, com autorização explícita para reportar ZERO
+  candidatos numa linha se genuinamente nada pequeno restasse. 18
+  candidatos revisados: 15 SURVIVES/NEEDS_NARROWING viraram itens
+  WAVE3-* (texto exato extraído da lista de execução numerada do
+  documento de plano, não re-derivado de memória); 1 REFUTED (ponte
+  ord<->ClassGroup/Pic para Hodge) e 3 sub-frentes honestamente sem alvo
+  pequeno (RH/RVM-NZeta composição, NS distribuição p.v. global/NS-3b,
+  extensão mecânica PN de 3 labels) ficaram de fora. Contagem (15) menor
+  que a Onda 2 (20) -- resultado honesto, não ajustado. Duas dependências
+  internas: WAVE3-PN-7 depende de WAVE3-PN-6; WAVE3-BSD-1-STEP4 depende
+  de WAVE3-BSD-1-STEP3. A revisão adversarial encontrou e corrigiu erros
+  reais em vários candidatos (uma citação "confirmado ausente" que na
+  verdade existe em YM-STABILITY-GROUNDED; três citações de arquivo/linha
+  erradas em QF-6; um bloco de reprodução verbatim faltante não percebido
+  em SHARED-2A-EXT; uma hipótese de teste matematicamente errada em
+  NS-3a que tornaria o teste trivial) -- nenhum invalidou o alvo
+  subjacente, todos permanecem SURVIVES/NEEDS_NARROWING após correção de
+  rota. `authorized_action` -> `FORMALIZATION`. Próximo passo: dispatch
+  do workflow de execução (formalizar + revisão adversarial por item,
+  mesmo padrão das Ondas 1-2), depois verificação independente completa
+  desta sessão antes de qualquer integração.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE2-BATCH-001 (20 itens da Onda 2 do plano de ataque de portfólio,
   DEC-088/DEC-089) fechou VERIFIED / result_review APPROVED (DEC-090).
   20 de 20 CLOSED (18 VERIFIED, 2 VERIFIED_WITH_NOTES -- RH-1, HG-1B,
@@ -177,12 +210,14 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
 wave2_batch_authorization: "DEC-089, 20 itens WAVE2-*, continuacao direta do ciclo pedida explicitamente pelo usuario"
 wave2_closure: "DEC-090, 20/20 CLOSED (18 VERIFIED + 2 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED"
+wave3_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md"
+wave3_batch_authorization: "DEC-092, 15 itens WAVE3-*, pedido explicito do usuario (\"Siga para onda 3\")"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

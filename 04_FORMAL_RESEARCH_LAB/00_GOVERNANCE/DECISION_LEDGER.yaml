@@ -3074,3 +3074,61 @@ decisions:
       - "os gaps centrais de cada Problema do Milenio (incluindo BSD-GAP-007/008, abertos na Onda 1) permanecem abertos -- nenhum item toca o problema central"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-094
+    date: 2026-08-10
+    decision: >
+      Registrar 01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md -- plano
+      de ataque da Onda 4, cobrindo follow-ons dependentes dos outcomes
+      reais da Onda 3 (DEC-091/092/093) nas mesmas 8 frentes (6 Problemas
+      do Milenio Clay oficiais + 2 extensoes internas nao-Clay) mais
+      infraestrutura compartilhada. Produzido por workflow de
+      reconhecimento + revisao adversarial (19 agentes: 9 grupos de recon
+      -- um por linha de pesquisa + infraestrutura compartilhada -- 9
+      ceticos independentes, 1 sintese). PURAMENTE PLANEJAMENTO -- nenhuma
+      linha de Lean escrita, nenhum arquivo de governanca alterado pelos
+      agentes. Registro feito SEM decidir ainda se a Onda 4 sera executada
+      no mesmo modo das Ondas 1-3 -- essa decisao permanece explicitamente
+      em aberto, pendente de resposta do usuario a uma pergunta estrategica
+      levantada nesta mesma sessao (se vale a pena pausar o ciclo de ondas
+      paralelas e abrir, em vez disso, um gate dedicado
+      TOE_INTERFACE_EXECUTION para a Teoria de Interfaces de Regime, ou
+      continuar o ciclo de ondas como esta).
+    rationale: >
+      15 candidatos revisados no total; 14 formam a lista de execucao
+      numerada (contagem caindo estruturalmente onda a onda: 25 -> 20 ->
+      15 -> 14, sinal de exaustao progressiva, nao acidente de
+      amostragem). Achado central desta rodada, na linha BSD: a revisao
+      adversarial verificou que BSD-1-STEP3-HASEXTENSION e
+      BSD-1-STEP4-RESIDUE-BIJECTION (Onda 3), embora nao tenham seguido a
+      rota originalmente prevista pelo BSD-1_GAP_NOTE.md (Onda 1),
+      alcancaram o MESMO objeto por uma rota diferente via
+      Valuation.HasExtension do proprio Mathlib -- e que compo-los
+      (STEP5a, ainda nao tentado) entregaria exatamente a equivalencia de
+      corpo de residuo que o gap note original pedia. Mas dois pontos
+      impedem declarar BSD-GAP-007 fechado agora: (1) a composicao em si
+      ainda nao foi compilada; (2) mesmo se fechar, alimentar isso na
+      versao incondicional de WeierstrassCurve.LFunction.IsMultiplicative
+      (STEP5b) e um checkpoint separado, nao verificado. O documento nomeia
+      precisamente o que resta como BSD-GAP-007-RESIDUAL e recomenda os
+      dois checkpoints como testes SEPARADOS, nao bundlados. O documento
+      tambem inclui uma secao autocritica honesta ("O laboratorio chegou
+      ao ponto de pausar o ciclo de ondas?") que recomenda um modo HIBRIDO:
+      continuar ondas pequenas-paralelas para linhas que seguem produzindo
+      candidatos baratos (HG, YM, TOE, SHARED-INFRA), mas abrir um
+      projeto/sessao DEDICADO e de escala propria para BSD-GAP-007
+      especificamente, em vez de tratá-lo como mais um item de onda.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status em RESEARCH_QUEUE.yaml -- documento de planejamento, nao gate de execucao"
+      - "LAB_STATE: authorized_action permanece PORTFOLIO_REVIEW_REQUIRED -- Onda 4 aguarda decisao explicita do usuario sobre modo/ritmo antes de qualquer despacho"
+    untouched_safeguards:
+      - "ZERO linha de Lean escrita por este gate"
+      - "ZERO arquivo de governanca alterado pelos agentes do workflow alem deste documento de plano"
+      - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
+      - "BSD-GAP-007 explicitamente NAO declarado fechado -- nomeado com precisao o que resta (BSD-GAP-007-RESIDUAL)"
+      - "nenhuma execucao autorizada por este DEC -- decisao de modo/ritmo permanece pendente"

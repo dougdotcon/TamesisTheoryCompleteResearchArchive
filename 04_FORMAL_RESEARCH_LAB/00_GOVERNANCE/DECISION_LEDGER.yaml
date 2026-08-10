@@ -3025,3 +3025,52 @@ decisions:
       - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
       - "candidatos REFUTED e sub-frentes com 0 candidatos do plano (RH/RVM-NZeta, NS-3b, HG ord/ClassGroup, extensao mecanica PN) explicitamente NAO incluidos nesta onda"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE3 sao testes auxiliares/reconhecimento, nao reativacao"
+
+  - decision_id: DEC-093
+    date: 2026-08-10
+    decision: >
+      Fechar WAVE3-BATCH-001: os 15 itens da Onda 3 do plano de ataque de
+      portfolio (DEC-091/DEC-092) VERIFICADOS. 15 de 15 CLOSED (12
+      VERIFIED, 3 VERIFIED_WITH_NOTES -- PN-6, HG-1D, TOE-3E, todas notas
+      menores/cosmeticas), 0 GAP_DIAGNOSED, 0 REJECTED. 15 novos arquivos
+      Lean standalone, zero modificacao a qualquer arquivo pre-existente.
+    rationale: >
+      Verificacao em quatro camadas independentes para cada um dos 15
+      itens, identica ao protocolo das Ondas 1-2: (1) implementador
+      formaliza e auto-verifica no primeiro plano; (2) revisor adversarial
+      independente recompila do zero, reconstroi footprint de axiomas por
+      conta propria, verifica citacoes Mathlib contra o codigo-fonte,
+      checa scope creep; (3) esta sessao recompila TODOS os 15 arquivos
+      por conta propria (lake env lean, exit 0 em todos os 15, sem
+      excecao), reconstroi o footprint de axiomas independentemente para
+      os 2 arquivos que nao embutiam #print axioms (HG-1C, HG-1D; zero
+      sorryAx em todos os 15); (4) UMA lake build central apos todos os 15
+      pousarem (exit 0, 8825 jobs -- mesma contagem de antes das Ondas
+      1-2, confirmando que os arquivos standalone nao entraram no build
+      registrado, nenhuma regressao). git status confirmou que NENHUM
+      arquivo pre-existente foi tocado -- apenas 15 arquivos .lean novos.
+      As tres notas VERIFIED_WITH_NOTES foram lidas integralmente:
+      PN-6 tem um comentario que descreve incorretamente o modo de falha
+      de um `deriving Fintype` (o comentario diz que "type-checks antes de
+      falhar" quando na verdade falha imediatamente com erro rigido) --
+      nao afeta a prova, so a narrativa no comentario; HG-1D cita
+      `Filter.univ_mem` no arquivo errado (`Basic.lean` em vez de
+      `Defs.lean`); TOE-3E cita um intervalo de linha errado para
+      `back_coe`. Nenhuma das tres afeta corretude, footprint de axiomas,
+      ou escopo.
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "15 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE3-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 15 itens WAVE3-* + item guarda-chuva WAVE3-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE3-BATCH-FORMAL-001), total 47"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 15 itens"
+      - "os gaps centrais de cada Problema do Milenio (incluindo BSD-GAP-007/008, abertos na Onda 1) permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

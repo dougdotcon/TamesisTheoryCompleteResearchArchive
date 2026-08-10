@@ -2029,3 +2029,64 @@ claims:
       - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
+  - claim_id: WAVE3-BATCH-FORMAL-001
+    short_name: wave3_portfolio_attack_execution
+    exact_statement: >
+      15 testes falsificaveis pequenos, follow-ons diretos da Onda 2
+      (DEC-091/092), executados em paralelo atraves das 8 linhas de
+      pesquisa + infraestrutura compartilhada. 15 de 15 fecharam (CLOSED),
+      0 GAP_DIAGNOSED, 0 REJECTED. Lista completa por item, formato
+      "CODIGO: outcome/veredito-adversarial -- caminho do arquivo":
+      - "RH-3: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountFloorLaw.lean"
+      - "NS-3a: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/RadiusIndependencePVLipschitz.lean"
+      - "PN-6: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN6_DataDependentGotoWitness.lean"
+      - "PN-7: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN7_BranchCoverageWitness.lean"
+      - "YM-STABILITY-COMPOSE: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMStabilityCompose.lean"
+      - "YM-STABILITY-GROUNDED: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/StabilityGrounded.lean"
+      - "HG-1c: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1CParametrizedFiniteSupportOrdProbe.lean"
+      - "HG-1d: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1DPrincipalCycleFProbe.lean"
+      - "HG-4c: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionConjugationBridgeProbe.lean"
+      - "BSD-1-STEP3-HASEXTENSION: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD1Step3HasExtension.lean"
+      - "BSD-1-STEP4-RESIDUE-BIJECTION: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD1Step4ResidueBijection.lean"
+      - "TOE-3d: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/HomKNotIsoActionCategoryK.lean"
+      - "TOE-3e: CLOSED/VERIFIED_WITH_NOTES -- 05_FORMAL/lean/TamesisLab/TOE/MonoidKNonPretransitiveZigzagConnected.lean"
+      - "QF-6: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/EhrenfestExpectationValueIdentity.lean"
+      - "SHARED-2A-EXT: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/SecondEigenvalueHasEigenvalue.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE3-*)"
+      - "09_SESSIONS/2026/2026-08-10_WAVE3_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 15 itens e uma peca de infraestrutura auxiliar ou
+      resultado de esclarecimento, follow-on direto de um item da Onda 2
+      -- NENHUM toca o problema central de qualquer Problema do Milenio.
+      Verificado em quatro camadas: implementador auto-verifica -> revisor
+      adversarial independente recompila e re-verifica citacoes -> esta
+      sessao recompila todos os 15 arquivos por conta propria (lake env
+      lean, exit 0 em todos) e reconstroi footprint de axiomas para os 2
+      arquivos sem #print axioms embutido (HG-1c, HG-1d; zero sorryAx em
+      todos os 15) -> uma lake build central confirma zero regressao
+      (8825 jobs, mesma contagem de antes das Ondas 1-2). git status
+      confirma zero arquivo pre-existente modificado -- apenas 15
+      arquivos .lean novos.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+      - WAVE2-BATCH-FORMAL-001
+    known_gaps:
+      - "sub-frentes sem alvo pequeno nesta rodada permanecem abertas para revisao futura (RH/RVM-NZeta composicao, NS distribuicao p.v. global/NS-3b, extensao mecanica PN de 3 labels), ver PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md secao 'Descartados'"
+      - "ponte ord(HG-1b)<->ClassGroup/Pic(HG-2) permanece REFUTED -- identificacao classica grupo-de-Weil<->grupo-de-ideais ausente do Mathlib"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md"
+    last_reviewed: 2026-08-10
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

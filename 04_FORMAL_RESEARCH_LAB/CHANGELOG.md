@@ -1,5 +1,56 @@
 # Changelog do laboratório formal
 
+## WAVE3-BATCH-001 - 2026-08-10
+
+### Onda 3 do plano de ataque de portfólio: 15 testes falsificáveis, follow-ons diretos da Onda 2
+
+A pedido explícito do usuário -- "Siga para onda 3", continuando o
+mesmo ciclo sem esperar confirmação a cada onda -- um workflow de 19
+agentes (9 grupos de reconhecimento + 1 dedicado a infraestrutura
+compartilhada, 9 céticos independentes, 1 síntese) leu os arquivos
+REAIS da Onda 2 (não um resumo) e propôs
+`PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md` (DEC-091): 18 candidatos
+revisados, 15 SURVIVES/NEEDS_NARROWING viraram a Onda 3, 1 REFUTED
+(ponte `ord`↔`ClassGroup`/`Pic` para Hodge, teorema clássico ausente do
+Mathlib) e 3 sub-frentes honestamente sem alvo pequeno nesta rodada.
+
+Gate aberto diretamente (DEC-092), sem novo `AskUserQuestion`. Um
+segundo workflow (30 agentes: 15 implementadores + 15 revisores
+adversariais independentes) executou todos os 15 em paralelo.
+**Resultado: 15 de 15 CLOSED (12 VERIFIED, 3 VERIFIED_WITH_NOTES), 0
+GAP_DIAGNOSED, 0 REJECTED.**
+
+Mesma verificação em quatro camadas das Ondas 1-2. Esta sessão
+recompilou todos os 15 arquivos por conta própria (`lake env lean`,
+exit 0 em todos), reconstruiu axiomas independentemente para os 2
+arquivos sem `#print axioms` embutido (zero `sorryAx`), rodou uma
+`lake build` central (exit 0, 8825 jobs -- mesma contagem de antes,
+zero regressão) e confirmou via `git status` que nenhum arquivo
+pré-existente foi tocado -- apenas 15 `.lean` novos.
+
+Ver `09_SESSIONS/2026/2026-08-10_WAVE3_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- Nenhuma das 15 pistas toca o problema central de sua linha.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- Uma eventual Onda 4 foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-091 (registro do plano, apenas planejamento),
+  DEC-092 (abertura do gate, 15 itens + guarda-chuva), DEC-093
+  (fechamento).
+- `RESEARCH_QUEUE`: +15 itens `WAVE3-*` + item guarda-chuva
+  `WAVE3-BATCH-001`, status SCOPED -> VERIFIED (total 106 itens).
+- `CLAIM_LEDGER`: +1 claim (`WAVE3-BATCH-FORMAL-001`), total 47.
+- `labctl.py`: allowlist estendida com os 15 códigos `WAVE3-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE2-BATCH-001 - 2026-08-10
 
 ### Onda 2 do plano de ataque de portfólio: 20 testes falsificáveis, follow-ons diretos da Onda 1

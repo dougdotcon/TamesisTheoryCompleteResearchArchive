@@ -1,5 +1,66 @@
 # Changelog do laboratório formal
 
+## WAVE2-BATCH-001 - 2026-08-10
+
+### Onda 2 do plano de ataque de portfólio: 20 testes falsificáveis, follow-ons diretos da Onda 1
+
+A pedido explícito do usuário -- "vamos continuar o próximo ciclo do
+mesmo jeito, paralelismo e concorrência, atacando todos de uma vez",
+sem esperar nova confirmação a cada onda -- um workflow de 19 agentes
+(9 grupos de reconhecimento + 1 dedicado a infraestrutura compartilhada,
+9 céticos independentes, 1 síntese) revisitou o que a Onda 1
+REALMENTE fechou (não o que o plano original previu) e propôs
+`PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md` (DEC-088): 20 candidatos
+SURVIVES/NEEDS_NARROWING viraram a Onda 2, 3 REFUTED ficaram de fora
+com justificativa.
+
+Gate aberto diretamente (DEC-089), sem novo `AskUserQuestion`, por
+instrução explícita do usuário. Um segundo workflow (40 agentes: 20
+implementadores + 20 revisores adversariais independentes) executou
+todos os 20 em paralelo. **Resultado: 20 de 20 CLOSED (18 VERIFIED, 2
+VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED** -- melhor taxa de
+fechamento que a Onda 1 (25/27).
+
+Mesma verificação em quatro camadas da Onda 1. Esta sessão recompilou
+todos os 20 arquivos por conta própria (`lake env lean`, exit 0 em
+todos), reconstruiu axiomas independentemente para os 2 arquivos sem
+`#print axioms` embutido (zero `sorryAx`), rodou uma `lake build`
+central (exit 0, 8825 jobs -- mesma contagem de antes, confirmando
+zero regressão) e confirmou via `git status` que nenhum arquivo
+pré-existente foi tocado -- apenas 20 `.lean` novos (17 em diretórios
+`FORMAL/` já existentes + 3 no novo diretório
+`03_MILLENNIUM/_SHARED_INFRA/FORMAL/`).
+
+Peculiaridade técnica diagnosticada e corrigida: `RVMLimit.lean`
+(saída da Onda 1) nunca havia sido compilado no cache `.lake/build/`
+compartilhado por não ser importado por nenhum arquivo registrado --
+esta sessão compilou-o diretamente para dentro do cache de build
+(artefato gitignored, não arquivo fonte) para que `RH-1` (que o
+importa) recompile com exit 0 de forma reprodutível.
+
+Ver `09_SESSIONS/2026/2026-08-10_WAVE2_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- Nenhuma das 20 pistas toca o problema central de sua linha.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- A Onda 3 do plano foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-088 (registro do plano, apenas planejamento),
+  DEC-089 (abertura do gate, 20 itens + guarda-chuva), DEC-090
+  (fechamento).
+- `RESEARCH_QUEUE`: +20 itens `WAVE2-*` + item guarda-chuva
+  `WAVE2-BATCH-001`, status SCOPED -> VERIFIED.
+- `CLAIM_LEDGER`: +1 claim (`WAVE2-BATCH-FORMAL-001`), total 46.
+- `labctl.py`: allowlist estendida com os 20 códigos `WAVE2-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE1-BATCH-001 - 2026-08-09
 
 ### Onda 1 do plano de ataque de portfólio: 27 testes falsificáveis, 8 linhas de pesquisa, execução paralela

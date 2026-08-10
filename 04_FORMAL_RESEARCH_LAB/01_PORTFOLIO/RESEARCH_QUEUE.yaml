@@ -2987,8 +2987,36 @@ queue:
       individual honestamente fechou; tratar este item guarda-chuva como
       se tivesse conteudo formal proprio
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    wave2_outcome_summary: >
+      20 de 20 itens fecharam CLOSED apos revisao adversarial
+      independente (18 VERIFIED + 2 VERIFIED_WITH_NOTES -- RH-1 e HG-1B,
+      ambas notas menores/cosmeticas, sem problema de corretude). 0
+      GAP_DIAGNOSED, 0 REJECTED -- melhor taxa de fechamento que a Onda 1
+      (25/27). Recompilacao central independente desta sessao (nao
+      confiada ao autorrelato dos agentes): lake env lean em cada um dos
+      20 arquivos, exit 0 em todos; zero token proibido (sorry/admit/
+      axiom/unsafe) em todos; axiomas reconstruidos independentemente
+      para os 2 arquivos sem #print axioms embutido (HG-1B, YM-1-YM-3),
+      zero sorryAx em todos os 20. Uma lake build central apos todos os
+      20 pousarem: exit 0, 8825 jobs -- mesma contagem de antes da Onda 1
+      e depois da Onda 1, confirmando que os 20 arquivos standalone nao
+      entraram no build registrado. git status confirmou que NENHUM
+      arquivo pre-existente foi tocado -- apenas 20 arquivos .lean novos
+      (17 em diretorios FORMAL/ ja existentes + 3 no novo diretorio
+      03_MILLENNIUM/_SHARED_INFRA/FORMAL/). Uma peculiaridade tecnica
+      diagnosticada e corrigida por esta sessao: RVMLimit.lean (saida da
+      Onda 1, WAVE1-RH-1) nunca tinha sido compilado no cache .lake/
+      compartilhado (por nao ser importado por nenhum arquivo
+      registrado), entao o comando padrao de verificacao falhava com
+      exit 1 para RH-1 (que importa RVMLimit.lean) ate esta sessao
+      compilar RVMLimit.lean diretamente para dentro do cache .lake/
+      (artefato de build, nao rastreado pelo git) -- apos isso, RH-1
+      recompila com exit 0 de forma reproduzivel. Ver
+      09_SESSIONS/2026/2026-08-10_WAVE2_EXECUTION.md para detalhe
+      completo por item.
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       DEC-089 -- onda 2 do plano de ataque (DEC-088), continuacao direta
       do ciclo Onda 1 -> Onda 2 pedida explicitamente pelo usuario
@@ -3022,8 +3050,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/RHNogo/Bridge/RVMLimitErrorComposition.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-RH-2
@@ -3050,8 +3082,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/ZetaZerosCountingMonotoneVanishing.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-NS-2A
@@ -3080,8 +3116,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/K_LipschitzDifference_HasLocalPV.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-NS-2B
@@ -3110,8 +3150,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVDistributionOnCompactK.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-PN-5
@@ -3138,8 +3182,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/FORMAL/PN5_XorCertificateWitness.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-PN-2PRIME
@@ -3167,8 +3215,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/FORMAL/PN2PRIME_ChainedGotoWitness.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-YM-1-CONNECT
@@ -3196,8 +3248,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/TransferGapSpectrumCharpoly.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-YM-2-SIMPLE
@@ -3225,8 +3281,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/PerronFrobeniusRootMultiplicities.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-YM-1-YM-3
@@ -3257,8 +3317,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/L2OperatorNormProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-HG-1B
@@ -3287,8 +3351,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/AlgebraMapGermToFunctionFieldOrdMulProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-HG-4B
@@ -3317,8 +3385,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/ConjugationNotHolomorphicProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-BSD-1-STEP1-COMPOSE
@@ -3345,8 +3417,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/FORMAL/BSD1Step1ComposeResidueField.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-BSD-1-STEP2-CORE
@@ -3375,8 +3451,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/FORMAL/BSD1Step2CoreDensityBall.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-TOE-3A
@@ -3403,8 +3483,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/TOE/GroupShift3ActionGroupoid.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-TOE-3B
@@ -3431,8 +3515,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/TOE/Shift3PretransitiveActionCategoryConnected.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-TOE-3C
@@ -3459,8 +3547,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/TOE/MonoidKConstantActionDistinctEndomorphisms.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-QF-5
@@ -3489,8 +3581,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergCommutatorFlowIdentity.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-SHARED-2B
@@ -3517,8 +3613,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/HermitianComplexEmbeddingRange.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-SHARED-2A
@@ -3546,8 +3646,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/SecondEigenvalueLipschitz.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).
   - work_item_id: WAVE2-SHARED-2C
@@ -3576,7 +3680,11 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/LinearPMapEigenvalueBridge.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md, DEC-089 -- onda 2 de execucao paralela do plano de ataque de portfolio completo (DEC-088, sintese fundamentada nos outcomes reais da Onda 1). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta segunda rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo, incluindo verificacao de compilacao em scratch para PN-5 e computo a mao para TOE).

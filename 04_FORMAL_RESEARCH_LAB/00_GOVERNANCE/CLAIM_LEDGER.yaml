@@ -1952,3 +1952,80 @@ claims:
       - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
+  - claim_id: WAVE2-BATCH-FORMAL-001
+    short_name: wave2_portfolio_attack_execution
+    exact_statement: >
+      20 testes falsificaveis pequenos, follow-ons diretos da Onda 1
+      (DEC-088/089), executados em paralelo atraves das 8 linhas de
+      pesquisa + 1 categoria nova de infraestrutura compartilhada. 20 de
+      20 fecharam (CLOSED), 0 GAP_DIAGNOSED, 0 REJECTED -- melhor taxa de
+      fechamento que a Onda 1 (25/27). Lista completa por item, formato
+      "CODIGO: outcome/veredito-adversarial -- caminho do arquivo":
+      - "RH-1: CLOSED/VERIFIED_WITH_NOTES -- 05_FORMAL/lean/TamesisLab/RHNogo/Bridge/RVMLimitErrorComposition.lean"
+      - "RH-2: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/ZetaZerosCountingMonotoneVanishing.lean"
+      - "NS-2A: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/K_LipschitzDifference_HasLocalPV.lean"
+      - "NS-2B: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVDistributionOnCompactK.lean"
+      - "PN-5: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN5_XorCertificateWitness.lean"
+      - "PN-2PRIME: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN2PRIME_ChainedGotoWitness.lean"
+      - "YM-1-CONNECT: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/TransferGapSpectrumCharpoly.lean"
+      - "YM-2-SIMPLE: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/PerronFrobeniusRootMultiplicities.lean"
+      - "YM-1-YM-3: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/L2OperatorNormProbe.lean"
+      - "HG-1B: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/05_HODGE/FORMAL/AlgebraMapGermToFunctionFieldOrdMulProbe.lean"
+      - "HG-4B: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/ConjugationNotHolomorphicProbe.lean"
+      - "BSD-1-STEP1-COMPOSE: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD1Step1ComposeResidueField.lean"
+      - "BSD-1-STEP2-CORE: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD1Step2CoreDensityBall.lean"
+      - "TOE-3A: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/GroupShift3ActionGroupoid.lean"
+      - "TOE-3B: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/Shift3PretransitiveActionCategoryConnected.lean"
+      - "TOE-3C: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/MonoidKConstantActionDistinctEndomorphisms.lean"
+      - "QF-5: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergCommutatorFlowIdentity.lean"
+      - "SHARED-2B: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/HermitianComplexEmbeddingRange.lean"
+      - "SHARED-2A: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/SecondEigenvalueLipschitz.lean"
+      - "SHARED-2C: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/LinearPMapEigenvalueBridge.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE2-*)"
+      - "09_SESSIONS/2026/2026-08-10_WAVE2_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 20 itens e uma peca de infraestrutura auxiliar ou
+      resultado de esclarecimento, follow-on direto de um item da Onda 1
+      -- NENHUM toca o problema central de qualquer Problema do Milenio.
+      Verificado em quatro camadas: implementador auto-verifica -> revisor
+      adversarial independente recompila e re-verifica citacoes -> esta
+      sessao recompila todos os 20 arquivos por conta propria (lake env
+      lean, exit 0 em todos) e reconstroi footprint de axiomas para os 2
+      arquivos sem #print axioms embutido (HG-1B, YM-1-YM-3; zero sorryAx
+      em todos os 20) -> uma lake build central confirma zero regressao
+      (8825 jobs, mesma contagem de antes da Onda 1 e depois da Onda 1).
+      git status confirma zero arquivo pre-existente modificado -- apenas
+      20 arquivos .lean novos. Uma peculiaridade tecnica: RVMLimit.lean
+      (saida da Onda 1) nunca fora compilado no cache .lake/ compartilhado
+      por nao ser importado por nenhum arquivo registrado; esta sessao
+      compilou-o diretamente para o cache de build (artefato nao
+      rastreado pelo git) para que RH-1 (que o importa) recompile com
+      exit 0 de forma reproduzivel -- diagnosticado honestamente pelo
+      proprio revisor adversarial do item como "nota, nao defeito do
+      implementador".
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+    known_gaps:
+      - "onda 3 do plano de ataque (itens dependentes de onda 2 fechar, e
+         qualquer ponte de infraestrutura compartilhada de escala maior)
+         NAO tentada nesta frente"
+      - "os 3 candidatos REFUTED da Onda 2 (PN comp geral, BSD-1-STEP2-FULL
+         inteiro, QF-6 quantizacao geometrica) permanecem fora de escopo,
+         com justificativa registrada no plano"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
+    last_reviewed: 2026-08-10
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

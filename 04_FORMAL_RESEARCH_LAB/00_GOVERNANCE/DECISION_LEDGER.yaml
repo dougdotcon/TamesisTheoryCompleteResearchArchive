@@ -2859,3 +2859,58 @@ decisions:
       - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
       - "candidatos REFUTED do plano (PN comp geral, BSD-1-STEP2-FULL, QF-6) explicitamente NAO incluidos nesta onda"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE2 sao testes auxiliares/reconhecimento, nao reativacao"
+
+  - decision_id: DEC-090
+    date: 2026-08-10
+    decision: >
+      Fechar WAVE2-BATCH-001: os 20 itens da Onda 2 do plano de ataque de
+      portfolio (DEC-088/DEC-089) VERIFICADOS. 20 de 20 CLOSED (18
+      VERIFIED, 2 VERIFIED_WITH_NOTES -- RH-1, HG-1B, ambas notas
+      menores/cosmeticas), 0 GAP_DIAGNOSED, 0 REJECTED -- melhor taxa de
+      fechamento que a Onda 1 (25/27). 20 novos arquivos Lean standalone
+      (17 em diretorios FORMAL/ ja existentes + 3 no novo diretorio
+      03_MILLENNIUM/_SHARED_INFRA/FORMAL/), zero modificacao a qualquer
+      arquivo pre-existente.
+    rationale: >
+      Verificacao em quatro camadas independentes para cada um dos 20
+      itens, identica ao protocolo da Onda 1: (1) implementador formaliza
+      e auto-verifica no primeiro plano; (2) revisor adversarial
+      independente recompila do zero, reconstroi footprint de axiomas por
+      conta propria, verifica citacoes Mathlib contra o codigo-fonte,
+      checa scope creep; (3) esta sessao recompila TODOS os 20 arquivos
+      por conta propria (lake env lean, exit 0 em todos os 20, sem
+      excecao), reconstroi o footprint de axiomas independentemente para
+      os 2 arquivos que nao embutiam #print axioms (HG-1B, YM-1-YM-3;
+      zero sorryAx em todos os 20); (4) UMA lake build central apos todos
+      os 20 pousarem (exit 0, 8825 jobs -- mesma contagem de antes da
+      Onda 1 e depois da Onda 1, confirmando que os arquivos standalone
+      nao entraram no build registrado, nenhuma regressao). git status
+      confirmou que NENHUM arquivo pre-existente foi tocado -- apenas 20
+      arquivos .lean novos. Peculiaridade tecnica diagnosticada e
+      corrigida por esta sessao: RVMLimit.lean (saida da Onda 1,
+      WAVE1-RH-1) nunca tinha sido compilado no cache .lake/ compartilhado
+      por nao ser importado por nenhum arquivo registrado -- o comando
+      padrao de verificacao falhava com exit 1 para RH-1 (que o importa)
+      por essa razao externa, corretamente diagnosticada tanto pelo
+      implementador quanto pelo revisor adversarial do item como "nota,
+      nao defeito". Esta sessao compilou RVMLimit.lean diretamente para
+      dentro do cache de build (.lake/, artefato gitignored, nao
+      rastreado) -- apos isso, RH-1 recompila com exit 0 de forma
+      reproduzivel, sem qualquer alteracao a arquivo fonte rastreado.
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "20 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE2-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 20 itens WAVE2-* + item guarda-chuva WAVE2-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE2-BATCH-FORMAL-001), total 46"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 20 itens"
+      - "os gaps centrais de cada Problema do Milenio (incluindo BSD-GAP-007/008, abertos na Onda 1) permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+      - "o unico artefato escrito fora dos 20 arquivos novos foi um .olean dentro de .lake/build/ (gitignored, nao rastreado, nao um arquivo fonte)"

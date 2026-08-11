@@ -3453,3 +3453,98 @@ decisions:
       - "PNP-GAP-001 a PNP-GAP-004 (GAP_REGISTER.yaml de 03_P_VS_NP) permanecem OPEN, nao tocados por este DEC"
       - "reativacao da linha permanece possivel por decisao de portfolio explicita futura, sem necessidade de reverter este DEC"
       - "nenhum arquivo Lean, claim, ou item de RESEARCH_QUEUE alterado por este DEC -- puramente operacional/de rotacao de reconhecimento"
+
+  - decision_id: DEC-101
+    date: 2026-08-11
+    decision: >
+      Registrar 01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md -- plano
+      de ataque da Onda 6, cobrindo follow-ons dependentes dos outcomes
+      reais da Onda 5 (DEC-097/098/099, incluindo o primeiro fechamento
+      total 14/14 do ciclo) em 8 grupos (7 linhas de pesquisa mais
+      infraestrutura compartilhada -- PN retirada da rotacao por DEC-100).
+      Produzido por workflow de reconhecimento + revisao adversarial (17
+      agentes) a pedido explicito do usuario, que escolheu "Onda 6 (mesmo
+      modo)" entre 4 opcoes apresentadas via AskUserQuestion apos o
+      fechamento da Onda 5. PURAMENTE PLANEJAMENTO -- nenhuma linha de
+      Lean escrita, nenhum arquivo de governanca alterado pelos agentes.
+    rationale: >
+      13 candidatos revisados, 13 formam a lista de execucao. Queda
+      honesta frente aos 14 da Onda 5 -- nao forcada: NS, BSD e
+      SHARED-INFRA cada uma rendeu apenas 1 item; RH(2) + NS(1) + YM(2) +
+      HG(2) + BSD(1, exploratorio) + TOE(2) + QF(2) + SHARED-INFRA(1) =
+      13. Zero candidato REFUTED nesta rodada. ACHADO: a sub-linha
+      IsMultiplicative de BSD (unica fonte de candidatos baratos de BSD
+      desde a Onda 4) confirmada genuinamente esgotada -- o unico item
+      que BSD rendeu (BSD-7) veio de uma linha adjacente
+      (HasseCoefficientRecursionBound.lean, BSD-3) nao mencionada pelo
+      recon inicial, e e explicitamente exploratorio/bounded, com risco
+      real de terminar "fora de escopo de onda". Documento recomenda
+      promover BSD-GAP-008 (Mordell-Weil fraco) de "candidato maduro"
+      (linguagem da Onda 5) para "recomendacao ativa" de projeto dedicado
+      na proxima revisao de portfolio -- sinal de esgotamento parcial
+      similar ao de PN na Onda 5, porem mais fraco (um item exploratorio
+      ainda pode render algo pequeno). RH, HG, QF, YM continuam
+      produzindo candidatos genuinos sem sinal de esgotamento equivalente
+      -- RH-7B fecha outro gap de honestidade genuino (Tp formalmente
+      autoadjunto no dominio de suporte finito, nunca provado antes),
+      mesmo padrao de RH-6c na Onda 5. TOE_INTERFACE_EXECUTION permanece
+      candidato adiado, sem mudanca de status.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status em RESEARCH_QUEUE.yaml -- documento de planejamento, nao gate de execucao"
+      - "LAB_STATE: authorized_action permanece PORTFOLIO_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "ZERO linha de Lean escrita por este gate"
+      - "ZERO arquivo de governanca alterado pelos agentes do workflow alem deste documento de plano"
+      - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
+      - "PN permanece retirada da rotacao (DEC-100), nao reavaliada nesta onda"
+      - "BSD-GAP-008 nomeado como recomendacao ativa para projeto dedicado, NAO incluido como item de onda pequena"
+      - "item 8 (BSD-7) explicitamente marcado exploratorio -- pode terminar em 'fora de escopo de onda' sem invalidar os demais 12"
+
+  - decision_id: DEC-102
+    date: 2026-08-11
+    decision: >
+      Autorizar a Onda 6 de execucao do plano de ataque de portfolio
+      (01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md, DEC-101).
+      Registrados 13 itens WAVE6-* + item guarda-chuva WAVE6-BATCH-001
+      em 01_PORTFOLIO/RESEARCH_QUEUE.yaml (status SCOPED,
+      authorized_next_gate FORMALIZATION). `authorized_action` em
+      LAB_STATE.md muda de PORTFOLIO_REVIEW_REQUIRED para FORMALIZATION.
+    rationale: >
+      Continuacao direta do ciclo pedida explicitamente pelo usuario
+      ("Onda 6 (mesmo modo)", escolhida entre 4 opcoes apresentadas via
+      AskUserQuestion). Cada um dos 13 itens carrega seu proprio
+      stop_condition proibindo: sorry/admit/axioma/unsafe; alegacao de
+      que qualquer Problema do Milenio foi resolvido, aproximado ou
+      tornado alcancavel; alegacao de novidade matematica; expansao alem
+      do escopo estreito do teste falsificavel especifico; e forcar
+      fechamento se o angulo se revelar intratavel. Item 5
+      (YM-CAPSTONE-DET-BRACKET-TIGHTENED) tem dependencia explicita em
+      item 4 (YM-CAPSTONE-TRACE-M1-EXACT), registrada via campo
+      dependencies em RESEARCH_QUEUE.yaml. Item 8 (BSD-7) marcado
+      exploratorio/bounded -- pode terminar "fora de escopo de onda" sem
+      invalidar os demais 12. Nenhum item toca BSD-GAP-008, nomeado no
+      plano como recomendacao ativa para projeto dedicado separado, nao
+      item de onda pequena. Nenhum item foi formalizado ainda por este
+      DEC -- apenas registrado e autorizado para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +13 itens WAVE6-* + item guarda-chuva WAVE6-BATCH-001, status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "labctl: active_work_item allowlist += WAVE6-BATCH-001 e os 13 WAVE6-* ids"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "PN permanece retirada da rotacao (DEC-100); BSD-GAP-008 explicitamente NAO incluido nesta onda -- recomendacao ativa de projeto dedicado separado"
+      - "item 8 (BSD-7) pode terminar fora de escopo de onda sem que isso invalide os demais 12 itens"

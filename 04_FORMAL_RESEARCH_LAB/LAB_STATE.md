@@ -8,7 +8,7 @@ schema_extension_note: >
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-11T00:00:00-03:00
-canonical_commit: "920be31ffe0ccd5171b15c5b0a35ce8826dcc569"
+canonical_commit: "2457c9a520a4dec61da48234225c0b9a28614ba6"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
-active_work_item: "WAVE5-BATCH-001"
-work_status: "VERIFIED"
+active_work_item: "WAVE6-BATCH-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,40 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "this integration commit (Wave 5 batch, 14 new files committed together)"
+formalized_at_commit: "2457c9a520a4dec61da48234225c0b9a28614ba6 (Wave 5 integration + PN retirement, prior to this Wave 6 registration)"
 last_verified_artifact: "14 Wave-5 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE5-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 14, one file re-run standalone after a batch timeout), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 14, axiom footprints reconstructed independently from the raw log output (not from report transcriptions) for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 14 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status, identical to Waves 1-4), zero modification to any pre-existing tracked file (git status confirmed: exactly 14 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (28 agents total across the batch). First wave with a full 14/14 CLOSED result (10 VERIFIED + 4 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). RH-6C closes a genuine honesty gap (Tp_unbounded, never proved by Wave-3/4 siblings despite prose calling Tp \"unbounded\"). HG-4F's own formalizer independently re-verified HG-4E's closure before attempting the gated Estagio 2. BSD-6 reported minimal scope and optional extension as separate individually-verified results, touching neither BSD-GAP-008 nor the BSD conjecture."
 current_blocker: null
 next_single_action: >
+  WAVE6-BATCH-001 (13 itens da Onda 6 do plano de ataque de portfólio,
+  DEC-101/DEC-102) registrado e o gate de execução aberto. Usuário
+  respondeu explicitamente "Onda 6 (mesmo modo)" a uma pergunta de 4
+  opções levantada nesta sessão via AskUserQuestion (continuar o ciclo
+  no mesmo modo vs. abrir projeto dedicado `BSD-GAP-008` vs. abrir gate
+  `TOE_INTERFACE_EXECUTION` vs. outra direção). Antes do planejamento,
+  `DEC-100` retirou formalmente a linha PN da rotação de reconhecimento
+  (esgotamento genuíno confirmado na Onda 5). Plano da Onda 6 produzido
+  por workflow de 17 agentes (8 grupos -- 7 linhas + infraestrutura
+  compartilhada, PN excluída) fundamentado nos arquivos reais da Onda 5.
+  13 candidatos formam a lista de execução (queda honesta frente aos 14
+  da Onda 5 -- NS, BSD e SHARED-INFRA cada uma rendeu apenas 1 item).
+  Zero candidato REFUTED. **ACHADO:** a sub-linha `IsMultiplicative` de
+  BSD confirmada genuinamente esgotada -- o único item de BSD (`BSD-7`)
+  veio de uma linha adjacente não antes mencionada e é explicitamente
+  exploratório/bounded, podendo terminar "fora de escopo de onda" sem
+  invalidar os demais 12. O plano recomenda promover `BSD-GAP-008` de
+  "candidato maduro" para "recomendação ativa" de projeto dedicado na
+  próxima revisão de portfólio. Item 5
+  (`YM-CAPSTONE-DET-BRACKET-TIGHTENED`) tem dependência explícita em
+  item 4 (`YM-CAPSTONE-TRACE-M1-EXACT`). RH, HG, QF, YM seguem
+  produzindo candidatos genuínos sem sinal de esgotamento equivalente --
+  `RH-7B` fecha outro gap de honestidade genuíno (Tp formalmente
+  autoadjunto no domínio de suporte finito). `authorized_action` ->
+  `FORMALIZATION`. Próximo passo: dispatch do workflow de execução,
+  depois verificação independente completa desta sessão antes de
+  qualquer integração.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE5-BATCH-001 (14 itens da Onda 5 do plano de ataque de portfólio,
   DEC-097/DEC-098) fechou VERIFIED / result_review APPROVED (DEC-099).
   14 de 14 CLOSED (10 VERIFIED, 4 VERIFIED_WITH_NOTES -- RH-6a, RH-6b,
@@ -321,7 +351,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -340,6 +370,9 @@ wave5_pn_line_status: "esgotada genuinamente segundo a revisao adversarial -- re
 wave5_bsd_gap_008_status: "OPEN, nomeado como candidato maduro a projeto dedicado de escala propria -- NAO incluido nesta onda"
 wave5_closure: "DEC-099, 14/14 CLOSED (10 VERIFIED + 4 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- primeiro fechamento total 14/14 do ciclo"
 pn_line_wave_rotation_status: "RETIRADA da rotacao de reconhecimento a partir da Onda 6 (DEC-100), por escolha explicita do usuario apos esgotamento genuino na Onda 5 (0 candidatos, apos 1 na Onda 4). Retirada operacional/reversivel -- P vs NP NAO declarado fechado, PNP-GAP-001..004 permanecem OPEN, linha pode ser reativada por decisao de portfolio futura."
+wave6_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
+wave6_batch_authorization: "DEC-102, 13 itens WAVE6-*, usuario escolheu \"Onda 6 (mesmo modo)\" entre 4 opcoes apresentadas via AskUserQuestion"
+wave6_bsd_gap_008_status: "OPEN, promovido de \"candidato maduro\" (linguagem da Onda 5) para \"recomendacao ativa\" de projeto dedicado -- sub-linha IsMultiplicative de BSD confirmada esgotada nesta onda"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

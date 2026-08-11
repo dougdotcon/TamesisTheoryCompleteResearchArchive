@@ -711,7 +711,16 @@ def validate() -> dict[str, Any]:
                       "WAVE5-BSD-6",
                       "WAVE5-TOE-5",
                       "WAVE5-QF-8", "WAVE5-QF-9",
-                      "WAVE5-SHARED-5A"}:
+                      "WAVE5-SHARED-5A",
+                      "WAVE6-BATCH-001",
+                      "WAVE6-RH-7A", "WAVE6-RH-7B",
+                      "WAVE6-NS-6A",
+                      "WAVE6-YM-CAPSTONE-TRACE-M1-EXACT", "WAVE6-YM-CAPSTONE-DET-BRACKET-TIGHTENED",
+                      "WAVE6-HG-1H", "WAVE6-HG-4G",
+                      "WAVE6-BSD-7",
+                      "WAVE6-TOE-6A", "WAVE6-TOE-6B",
+                      "WAVE6-QF-10", "WAVE6-QF-11",
+                      "WAVE6-SHARED-6A"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "

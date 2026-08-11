@@ -3409,3 +3409,47 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "linha PN declarada esgotada apenas para esta rodada de reconhecimento -- nao permanentemente fechada para pesquisa futura"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-100
+    date: 2026-08-11
+    decision: >
+      Retirar formalmente a linha PN (P vs NP) da rotacao de
+      reconhecimento do ciclo de ondas, a partir da Onda 6 em diante.
+      Usuario, ao ser perguntado sobre a proxima direcao do laboratorio
+      apos o fechamento da Onda 5 (via AskUserQuestion, 3 opcoes
+      apresentadas: continuar o ciclo no mesmo modo / abrir projeto
+      dedicado BSD-GAP-008 / abrir gate TOE_INTERFACE_EXECUTION),
+      escolheu explicitamente continuar o ciclo no mesmo modo,
+      especificando "retirando formalmente a linha PN esgotada da
+      rotacao de reconhecimento".
+    rationale: >
+      A linha PN produziu candidatos pequenos genuinos nas Ondas 1-4
+      (incluindo PN-8, fechado na Onda 4), mas a rodada de
+      reconhecimento da Onda 5 (workflow de 9 grupos, fundamentado nos
+      arquivos reais da Onda 4) nao encontrou nenhum candidato pequeno
+      adicional -- primeira vez que PN produziu 0 candidatos no ciclo,
+      apos ja ter caido para 1 candidato na Onda 4. O plano da Onda 5
+      recomendou encerramento formal como sub-frente de cobertura de
+      construtor, e o plano da Onda 5 explicitamente registrou (linha
+      946) que nenhuma outra linha ativa apresenta esgotamento
+      equivalente ao de PN nesta rodada. Esta retirada e apenas
+      operacional: remove PN da lista de grupos que o workflow de
+      reconhecimento de cada onda futura audita por padrao, reduzindo o
+      overhead de reconhecimento sem candidato. NAO e um fechamento do
+      problema P vs NP, nem uma afirmacao de que a linha esta
+      permanentemente esgotada -- se um angulo pequeno genuino surgir no
+      futuro (nova ferramenta Mathlib, nova ideia, revisao manual fora
+      do ciclo de ondas), a linha pode ser reativada por decisao de
+      portfolio explicita, sem precisar reverter este DEC.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "LAB_STATE: +campo pn_line_wave_rotation_status registrando a retirada operacional"
+    untouched_safeguards:
+      - "P vs NP nao declarado resolvido, aproximado, alcancavel, ou permanentemente fechado para pesquisa"
+      - "PNP-GAP-001 a PNP-GAP-004 (GAP_REGISTER.yaml de 03_P_VS_NP) permanecem OPEN, nao tocados por este DEC"
+      - "reativacao da linha permanece possivel por decisao de portfolio explicita futura, sem necessidade de reverter este DEC"
+      - "nenhum arquivo Lean, claim, ou item de RESEARCH_QUEUE alterado por este DEC -- puramente operacional/de rotacao de reconhecimento"

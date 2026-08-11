@@ -339,6 +339,7 @@ wave5_batch_authorization: "DEC-098, 14 itens WAVE5-*, pedido explicito do usuar
 wave5_pn_line_status: "esgotada genuinamente segundo a revisao adversarial -- recomendada para encerramento formal como sub-frente de cobertura de construtor, nao mais reavaliada onda a onda"
 wave5_bsd_gap_008_status: "OPEN, nomeado como candidato maduro a projeto dedicado de escala propria -- NAO incluido nesta onda"
 wave5_closure: "DEC-099, 14/14 CLOSED (10 VERIFIED + 4 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- primeiro fechamento total 14/14 do ciclo"
+pn_line_wave_rotation_status: "RETIRADA da rotacao de reconhecimento a partir da Onda 6 (DEC-100), por escolha explicita do usuario apos esgotamento genuino na Onda 5 (0 candidatos, apos 1 na Onda 4). Retirada operacional/reversivel -- P vs NP NAO declarado fechado, PNP-GAP-001..004 permanecem OPEN, linha pode ser reativada por decisao de portfolio futura."
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

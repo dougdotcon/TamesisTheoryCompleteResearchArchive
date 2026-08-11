@@ -4272,3 +4272,505 @@ queue:
     authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md, DEC-092 -- onda 3 de execucao paralela do plano de ataque de portfolio completo (DEC-091, sintese fundamentada nos outcomes reais da Onda 2). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta terceira rodada (citacoes Mathlib re-verificadas por leitura direta de arquivo).
+
+  - work_item_id: WAVE4-BATCH-001
+    title: "Onda 4 de execucao do plano de ataque de portfolio completo (item guarda-chuva, 14 sub-itens)"
+    track: multi
+    target_statement: >
+      Item guarda-chuva, sem conteudo formal proprio. Representa a
+      execucao paralela dos 14 itens WAVE4-* individuais (ver cada um
+      separadamente na fila), cada um com seu proprio teste falsificavel
+      pequeno, escopo estreito, e stop_condition. Existe apenas porque
+      LAB_STATE.md tem um unico campo active_work_item singular e uma
+      onda paralela de 14 itens nao cabe nele individualmente. Onda 4
+      foi gerada por um workflow de reconhecimento (9 grupos) que leu os
+      arquivos REAIS da Onda 3 antes de propor os passos da Onda 4,
+      seguido por ceticismo adversarial independente que efetivamente
+      recompilou dois candidatos inteiros e corrigiu um erro matematico
+      substantivo (hipotese route-b incondicional falsa em RH-5) antes do
+      despacho. Contagem (14) menor que a Onda 3 (15) -- resultado
+      honesto, nao ajustado: a contagem de candidatos por rodada esta
+      caindo estruturalmente (25 -> 20 -> 15 -> 14). Usuario explicitamente
+      escolheu continuar o ciclo de ondas no mesmo modo (opcao 1 de 3
+      apresentadas), em vez de pausar para um gate dedicado
+      TOE_INTERFACE_EXECUTION ou tratar BSD-GAP-007 como projeto separado.
+    expected_product: >
+      Nenhum -- ver os 14 itens WAVE4-* individuais para produtos
+      esperados especificos.
+    dependencies: []
+    existing_assets:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver itens individuais"
+    cross_track_value: high
+    stop_condition: >
+      qualquer alegacao agregada de progresso alem do que cada item
+      individual honestamente fechou; tratar este item guarda-chuva como
+      se tivesse conteudo formal proprio; alegar BSD-GAP-007 fechado com
+      base em fechamento parcial de WAVE4-BSD-1-STEP5-COMPOSE
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      DEC-095 -- onda 4 do plano de ataque (DEC-094), continuacao direta
+      do ciclo Onda 1 -> Onda 2 -> Onda 3 -> Onda 4, usuario respondeu
+      explicitamente "1" (continuar o ciclo de ondas no mesmo modo) a uma
+      pergunta de tres opcoes levantada nesta sessao.
+  - work_item_id: WAVE4-RH-4
+    title: "unboundedEigCount Weyl-type limit law: Tendsto (unboundedEigCount Lam / Lam) atTop (nhds 1)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "RH-4"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Provar Tendsto (fun Lam => (unboundedEigCount Lam : R)/Lam) atTop
+      (nhds 1), via unboundedEigCount_eq_floor (congr'ado eventualmente
+      em Lam>=0 via eventually_ge_atTop), reescrito como
+      (floor Lam + 1)/Lam = floor Lam/Lam + 1/Lam, fechando com
+      Tendsto.add contra tendsto_nat_floor_div_atTop (limite 1) e
+      tendsto_inv_atTop_zero (limite 0). #print axioms so com os 3
+      axiomas padrao.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-RH-5
+    title: "Route-b set bridge (revised): eigenvalue set equality via eigenvalue_bridge, restricted transport lemma"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "RH-5"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Para Lam >= 0, provar {mu : C | IsEigenvalue Tp mu /\ ||mu||<=Lam} =
+      (fun mu => (mu+1)^-1) ⁻¹' {nu : C | Module.End.HasEigenvalue T nu /\
+      (Lam+1)^-1 <= ||nu||}, construido ponto a ponto via eigenvalue_bridge
+      composto com o lema de transporte RESTRITO a mu=(n:C), n:N:
+      forall n:N, (n:R)<=Lam <-> (Lam+1)^-1 <= ||((n:C)+1)^-1|| (via norm_inv +
+      Complex.norm_natCast + one_div_le_one_div). NAO usar a versao
+      incondicional para todo mu:C -- e falsa (contraexemplo mu=i,
+      Lam=0.5).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-NS-4A
+    title: "Principal-value functional over an arbitrary compact K' (composing pvKCLM with monoCLM)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "NS-4a"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Compor pvKCLM (bola) com monoCLM (K' -> bola) para obter o
+      funcional p.v. continuo-linear sobre K' arbitrario; fechar
+      radius-independence via pv_value_radius_independent aplicado com
+      (min R1 R2, max R1 R2) (wlog sobre qual raio e menor); derivar
+      hsupp de f.zero_on_compl composto com K' <= closedBall 0
+      (min R1 R2) via ContDiffMapSupportedIn.tsupport_subset/
+      support_subset.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-PN-8
+    title: "Peek coverage witness (non-consuming stack read)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "PN-8"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Construir FinTM2 de pilha unica, Lambda:=Unit: popar o bit
+      simbolico de entrada em sigma, empurra-lo de volta (padrao
+      testemunha-identidade de PN1/PN3/PN5/PN7), depois
+      peek(fun _ ob => ob.getD false) para reler o topo em sigma sem
+      consumir, load/halt, steps=1. Tentar evals_in_steps := rfl
+      primeiro; fallback by cases b <;> rfl, documentando explicitamente
+      se rfl falhar (achado, nao suavizado). Preferir tambem reler o
+      valor na pilha de SAIDA, nao so armazena-lo em sigma sem uso.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-YM-CAPSTONE-BRACKET
+    title: "Numeric bracket for lambdaMax(toEuclideanCLM M1) in [2.9, 3.1], capstone dedup file"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "YM-CAPSTONE-BRACKET"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Arquivo capstone unico, deduplicando E/lambdaMax/M2 de
+      YMStabilityCompose.lean e StabilityGrounded.lean sob um namespace
+      compartilhado, SEM `open Matrix WithLp` (vestigial, causa
+      ambiguidade em sub_apply). Provar lambdaMax_M1_bracket : 2.9 <=
+      lambdaMax (toEuclideanCLM M1) /\ lambdaMax (toEuclideanCLM M1) <=
+      3.1, via rw [lambdaMax_grounded_eq_three] at h; rw [abs_le] at h;
+      constructor <;> linarith.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-YM-CAPSTONE-FULL
+    title: "Two-step capstone: trace(M2)=4 / lambda2(M2)=1, then (gated) lambda2(M1) bracket"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "YM-CAPSTONE-FULL"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      PASSO 1 (trace/lambda2 de M2): Provar
+      trace (toEuclideanCLM M2 : E ->l[R] E) = 4, usando
+      open Matrix (obrigatorio para notacao infixa dotProduct/mulVec),
+      LinearMap.trace_eq_sum_inner _ basis2, Matrix.inner_toEuclideanCLM
+      M2 (basis2 i) (basis2 i) com parenteses externos explicitos
+      (basis2 i) dotProduct (M2 *v (basis2 i)), e
+      EuclideanSpace.basisFun_apply (iota:=Fin 2) (K:=R) i com argumentos
+      NOMEADOS (posicionais atribuem K/iota errado). Depois
+      lambda2 (toEuclideanCLM M2) = 1 via unfold lambda2;
+      rw [trace_toEuclideanCLM_M2_eq_four, lambdaMax_grounded_eq_three];
+      norm_num.
+
+      PASSO 2 (gated em Passo 1, nao verificado pela adversarial):
+      Provar M1.IsHermitian (mesma forma de M2_isHermitian), aplicar
+      lambda2_hasEigenvalue a M1, compor tres vias com
+      stability_compose_lambda2 e o bracket de lambdaMax (WAVE4-YM-CAPSTONE-BRACKET)
+      para obter o bracket analogo de lambda2 (M1). So tentar apos Passo 1
+      fechar; reportar honestamente onde travar, se travar.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-HG-1E
+    title: "principalCycle parametrized over explicit a0 (extends HG-1c)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "HG-1e"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Inlinar as declaracoes de HG-1C verbatim num arquivo novo
+      autonomo; adicionar principalCycle_a0 (a0:Z)(ha0:a0!=0) :
+      AlgebraicCycle testScheme Z usando genf a0/
+      finite_support_ord_genf a0 ha0. lake env lean exit 0.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-HG-1F
+    title: "Quotient divisor as difference of AlgebraicCycle terms (Num - Den)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "HG-1f"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      A partir dos namespaces Num/Den existentes de HG-1D, definir
+      principalCycle_Num, principalCycle_Den via o mesmo padrao de tres
+      campos; provar principalCycle_f = principalCycle_Num -
+      principalCycle_Den via Function.locallyFinsuppWithin.ext, fechando
+      o objetivo pontual com coe_sub mais rearranjo de uma linha
+      (sub_eq_of_eq_add/omega) da identidade ord_mul ja derivada em
+      finite_support_ord_f.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-HG-4D
+    title: "Closure of IsHolomorphicTransition under mul/inv"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "HG-4d"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Inlinar o predicado+ponte de HG-4/HG-4C num arquivo novo autonomo;
+      provar isHolomorphicTransition_mul via
+      isHolomorphicTransition_iff_differentiable.mpr
+      ((...).mp hg).mul ((...).mp hh), mais isHolomorphicTransition_inv
+      exigindo forall x, g x != 0 (Differentiable.inv). lake env lean exit 0.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-BSD-1-STEP5-COMPOSE
+    title: "Residue-field equivalence composition (STEP5a, composing Wave2/3 STEP1+STEP4), then (gated, unverified) universal IsPrimePow wiring (STEP5b)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "BSD-1-STEP5-COMPOSE"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      STEP5a: example : IsLocalRing.ResidueField (v.adicCompletionIntegers K) =~+*
+      (O_K quotient v.asIdeal) := (STEP1result.trans (RingEquiv.ofBijective _
+      STEP4result)).symm. lake env lean exit 0, zero tatica proibida.
+      NAO alegar BSD-GAP-007 fechado so com STEP5a -- ver STEP5b.
+
+      STEP5b (depende de STEP5a, NAO verificado pela adversarial):
+      Usando o equiv de STEP5a mais finiteQuotientOfFreeOfNeBot e
+      FiniteField.isPrimePow_card, produzir o termo hq literal que
+      LFunction_isMultiplicative_of_residueField_isPrimePow exige;
+      enunciar theorem WeierstrassCurve.LFunction_isMultiplicative ... :=
+      LFunction_isMultiplicative_of_residueField_isPrimePow W (fun v =>
+      ...) sem hipotese. lake env lean exit 0. Reportar STEP5a e STEP5b
+      como resultados pass/fail SEPARADOS -- nao alegar
+      LFunction_isMultiplicative incondicional fechado se so STEP5a tiver
+      sucesso.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-TOE-4
+    title: "Functorial comparison between the Shift3-world and the K-world (non-Faithful functor + non-existence of a reverse functor)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "TOE-4"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Porta de entrada: dois decide autonomos -- (a) liberdade de Shift3
+      nos tres pontos-base; (b) Hom_K(beta,gamma) = vazio. Depois construir
+      F : KCat => ShiftCat (funtor "morfismo unico" via Nonempty+
+      Subsingleton dos Hom-sets alvo, campo map por tabela de casos
+      explicita, NAO Classical.choice); provar not Faithful F via
+      homIdentity != homK mapeando ambos ao unico elemento de
+      Hom_Shift(alpha,alpha). Depois, fixando explicitamente a hipotese
+      "G.obj p = show KCat from p.back para todo p", provar que nenhum
+      tal G : ShiftCat => KCat existe, via o morfismo beta->gamma de
+      Shift3 precisando de imagem em Hom_K(beta,gamma) = vazio.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-QF-7
+    title: "Unitarity of the Heisenberg flow exp(t . heisenbergGenerator) for t : R (revised, R only, not C)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "QF-7"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      Provar exp (t . heisenbergGenerator) in unitary (Matrix (Fin 2)
+      (Fin 2) C) para t:R (NAO "ou C" -- descartado, falso em geral),
+      via: (a) skewAdjoint.smul_mem em R:=R, A:=Matrix (Fin 2)(Fin 2) C,
+      alimentado por TrivialStar R e StarModule R (Matrix (Fin 2)(Fin 2)
+      C) (via StarModule R C encadeado pela instancia generica
+      StarModule a (Matrix n n b)); (b) exp_mem_unitary_of_mem_skewAdjoint.
+      Se (a) nao resolver/unificar, reportar exatamente qual sub-passo
+      falhou -- essa e a condicao real de falsificacao. Passo 2 (extensao
+      via produto interno, unitary.mapEquiv +
+      inner_map_map_of_mem_unitary) so apos Passo 1, risco moderado ja
+      sinalizado (ponte StarAlgEquiv->StarRingEquiv).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-SHARED-4A
+    title: "Two-eigenvalue exhaustiveness in dimension 2: every eigenvalue equals lambdaMax or lambda2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "SHARED-4A"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      theorem eigenvalue_eq_lambdaMax_or_lambda2 (T : E ->L[R] E)
+      (hT : (T:E ->l[R] E).IsSymmetric) (hn : Module.finrank R E = 2)
+      {mu:R} (hmu : Module.End.HasEigenvalue (T:E ->l[R] E) mu) :
+      mu = lambdaMax T \/ mu = lambda2 T, via exists_eigenvalues_eq
+      aplicado ao mu de hmu, mais os fatos internos heq0/hlambda2 de
+      SecondEigenvalueHasEigenvalue.lean promovidos a lemas nomeados,
+      mais case-split em Fin 2.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+  - work_item_id: WAVE4-SHARED-4B
+    title: "det = lambdaMax * lambda2 in dimension 2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    plan_code: "SHARED-4B"
+    target_statement: >
+      TESTE (Onda 4, ja revisado pela adversarial, pronto para despacho):
+      theorem lambdaMax_mul_lambda2_eq_det (T : E ->L[R] E)
+      (hT : (T:E ->l[R] E).IsSymmetric) (hn : Module.finrank R E = 2) :
+      lambdaMax T * lambda2 T = (T:E ->l[R] E).det, via
+      det_eq_prod_eigenvalues + Fin.prod_univ_two + heq0/hlambda2
+      (mesmos fatos internos do item SHARED-4A).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 4 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).

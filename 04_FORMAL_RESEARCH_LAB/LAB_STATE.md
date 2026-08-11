@@ -8,7 +8,7 @@ schema_extension_note: >
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-10T00:00:00-03:00
-canonical_commit: "452a5673f0ff679242fa556c965b95cc2ccf2412"
+canonical_commit: "e1bafc32a463837c01e2122d8783b7157df5f3e5"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
-active_work_item: "WAVE3-BATCH-001"
-work_status: "VERIFIED"
+active_work_item: "WAVE4-BATCH-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,6 +37,36 @@ formalized_at_commit: "this integration commit (Wave 3 batch, 15 new files commi
 last_verified_artifact: "15 Wave-3 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE3-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 15), axiom footprints reconstructed independently for the 2 files that did not embed #print axioms (HG-1C, HG-1D; zero sorryAx on all 15), one central full lake build after all 15 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status), zero forbidden tokens on all 15, zero modification to any pre-existing tracked file (git status confirmed) -- on top of each item's own implementer self-check and independent adversarial reviewer pass (30 agents total across the batch)"
 current_blocker: null
 next_single_action: >
+  WAVE4-BATCH-001 (14 itens da Onda 4 do plano de ataque de portfólio,
+  DEC-094/DEC-095) registrado e o gate de execução aberto. Usuário
+  respondeu explicitamente "1" a uma pergunta de três opções levantada
+  nesta sessão (continuar o ciclo de ondas no mesmo modo vs. pausar para
+  um gate dedicado `TOE_INTERFACE_EXECUTION` vs. modo híbrido com um
+  projeto dedicado para `BSD-GAP-007`) -- opção 1 escolhida: continuar o
+  ciclo de ondas. Plano da Onda 4 produzido por workflow de 19 agentes
+  fundamentado nos arquivos reais da Onda 3, com atenção especial à
+  pergunta central sobre BSD: revisão adversarial confirmou que
+  `BSD-1-STEP3`/`STEP4` (Onda 3), embora por rota diferente da
+  originalmente prevista, alcançam o mesmo objeto que `BSD-1_GAP_NOTE.md`
+  pedia -- mas compor isso (`STEP5a`) ainda não foi tentado, e mesmo se
+  fechar, alimentar isso na versão incondicional de
+  `WeierstrassCurve.LFunction.IsMultiplicative` (`STEP5b`) é checkpoint
+  separado não verificado. Nomeado com precisão como
+  `BSD-GAP-007-RESIDUAL`, não declarado fechado. 15 candidatos revisados,
+  14 formam a lista de execução (contagem caindo estruturalmente onda a
+  onda: 25 -> 20 -> 15 -> 14); zero REFUTED nesta rodada -- primeira onda
+  desde a Onda 2 com essa característica, mas a revisão adversarial
+  efetivamente recompilou dois candidatos inteiros e encontrou/corrigiu
+  um erro matemático substantivo (hipótese route-b incondicional falsa em
+  RH-5, contraexemplo mu=i, Lam=0.5, antes do despacho). O documento
+  também recomenda um modo híbrido para o futuro (não adotado nesta
+  rodada): abrir projeto dedicado para `BSD-GAP-007` em vez de tratá-lo
+  como item de onda. `authorized_action` -> `FORMALIZATION`. Próximo
+  passo: dispatch do workflow de execução, depois verificação
+  independente completa desta sessão antes de qualquer integração.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE3-BATCH-001 (15 itens da Onda 3 do plano de ataque de portfólio,
   DEC-091/DEC-092) fechou VERIFIED / result_review APPROVED (DEC-093).
   15 de 15 CLOSED (12 VERIFIED, 3 VERIFIED_WITH_NOTES -- PN-6, HG-1D,
@@ -198,7 +228,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -207,6 +237,9 @@ wave2_closure: "DEC-090, 20/20 CLOSED (18 VERIFIED + 2 VERIFIED_WITH_NOTES), 0 G
 wave3_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_3_2026_08_10.md"
 wave3_batch_authorization: "DEC-092, 15 itens WAVE3-*, pedido explicito do usuario (\"Siga para onda 3\")"
 wave3_closure: "DEC-093, 15/15 CLOSED (12 VERIFIED + 3 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED"
+wave4_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+wave4_batch_authorization: "DEC-095, 14 itens WAVE4-*, usuario escolheu opcao 1 (continuar ciclo de ondas) entre 3 apresentadas"
+wave4_bsd_gap_007_status: "AINDA NAO fechado -- STEP5a/STEP5b propostos nesta onda, ver BSD-GAP-007-RESIDUAL no plano da Onda 4"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

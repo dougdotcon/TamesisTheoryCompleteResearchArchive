@@ -3132,3 +3132,52 @@ decisions:
       - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
       - "BSD-GAP-007 explicitamente NAO declarado fechado -- nomeado com precisao o que resta (BSD-GAP-007-RESIDUAL)"
       - "nenhuma execucao autorizada por este DEC -- decisao de modo/ritmo permanece pendente"
+
+  - decision_id: DEC-095
+    date: 2026-08-10
+    decision: >
+      Autorizar a Onda 4 de execucao do plano de ataque de portfolio
+      completo (DEC-094): 14 itens WAVE4-* registrados em
+      RESEARCH_QUEUE.yaml (WAVE4-RH-4, WAVE4-RH-5, WAVE4-NS-4A,
+      WAVE4-PN-8, WAVE4-YM-CAPSTONE-BRACKET, WAVE4-YM-CAPSTONE-FULL,
+      WAVE4-HG-1E, WAVE4-HG-1F, WAVE4-HG-4D,
+      WAVE4-BSD-1-STEP5-COMPOSE, WAVE4-TOE-4, WAVE4-QF-7,
+      WAVE4-SHARED-4A, WAVE4-SHARED-4B) mais o item guarda-chuva
+      WAVE4-BATCH-001, seguindo o mesmo padrao de DEC-086/089/092. Cada
+      item e um teste pequeno e falsificavel, com o texto exato (ja
+      revisado pela adversarial da Onda 4) extraido diretamente da lista
+      de execucao numerada do documento de plano -- nao re-derivado de
+      memoria. WAVE4-BSD-1-STEP5-COMPOSE contem dois checkpoints internos
+      gated (STEP5a/STEP5b), com stop_condition explicito proibindo
+      alegar BSD-GAP-007 fechado com base apenas em STEP5a. Usuario
+      respondeu explicitamente "1" a uma pergunta de tres opcoes
+      levantada nesta sessao (continuar o ciclo de ondas no mesmo modo
+      vs. pausar para gate dedicado TOE_INTERFACE_EXECUTION vs. modo
+      hibrido) -- opcao 1 escolhida.
+    rationale: >
+      Continuacao direta do ciclo pedido explicitamente pelo usuario.
+      Cada um dos 14 itens carrega seu proprio stop_condition proibindo:
+      sorry/admit/axioma/unsafe; alegacao de que qualquer Problema do
+      Milenio foi resolvido, aproximado ou tornado alcancavel; alegacao
+      de novidade matematica; expansao alem do escopo estreito do teste
+      falsificavel especifico; e forcar fechamento se o angulo se
+      revelar intratavel -- nesse caso, registrar como gap nomeado.
+      Nenhum item foi formalizado ainda por este DEC -- apenas registrado
+      e autorizado para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +14 itens WAVE4-* + item guarda-chuva WAVE4-BATCH-001, status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "labctl: active_work_item allowlist += WAVE4-BATCH-001 e os 14 WAVE4-* ids"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "candidatos REFUTED do plano (nenhum nesta rodada) explicitamente NAO incluidos"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE4 sao testes auxiliares/reconhecimento, nao reativacao"
+      - "BSD-GAP-007 nao sera declarado fechado so por WAVE4-BSD-1-STEP5-COMPOSE -- STEP5a e STEP5b devem ser reportados separadamente"

@@ -4312,8 +4312,45 @@ queue:
       se tivesse conteudo formal proprio; alegar BSD-GAP-007 fechado com
       base em fechamento parcial de WAVE4-BSD-1-STEP5-COMPOSE
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    wave4_outcome_summary: >
+      14 de 14 itens fecharam CLOSED apos revisao adversarial
+      independente (10 VERIFIED + 4 VERIFIED_WITH_NOTES -- RH-4, RH-5,
+      YM-CAPSTONE-FULL, HG-1E, todas notas menores/cosmeticas -- um
+      exagero de "reproducao byte-identica" em comentarios de doc
+      (codigo real intacto), um diagnostico de gap sub-otimo mas nao
+      invalido, uma citacao de caminho de arquivo herdada e imprecisa --
+      sem problema de corretude em nenhuma). 0 GAP_DIAGNOSED, 0
+      REJECTED. ACHADO CENTRAL: WAVE4-BSD-1-STEP5-COMPOSE fechou AMBOS
+      os checkpoints internos (STEP5a e STEP5b) -- esta sessao verificou
+      de forma independente e extensa (recompilacao propria, leitura
+      integral do arquivo de 389 linhas, comparacao literal contra o
+      alvo exato nomeado em BSD-1_GAP_NOTE.md linha 95, verificacao de
+      que a quantificacao universal sobre todos os lugares v e genuina)
+      que BSD-GAP-007 fecha genuinamente: STEP5a produz
+      IsLocalRing.ResidueField (v.adicCompletionIntegers K) =~+*
+      (O_K quociente v.asIdeal), exatamente o objeto que o gap note
+      original (Onda 1) nomeou como faltante; STEP5b usa isso para
+      provar WeierstrassCurve.LFunction_isMultiplicative SEM hipotese
+      -- exatamente o "alvo incondicional" que o gap note dizia
+      permanecer nao-provado. Ver GAP_REGISTER.yaml (BSD-GAP-007 ->
+      CLOSED) e a nota de nao-alegacao cuidadosa la registrada: isto
+      e uma propriedade estrutural basica (multiplicatividade de
+      Dirichlet) de um produto de Euler formal, NAO progresso sobre a
+      conjectura de Birch e Swinnerton-Dyer (convergencia de LSeries,
+      continuacao analitica, equacao funcional, e posto de
+      Mordell-Weil permanecem inteiramente fora de escopo e nao
+      tocados). Recompilacao central independente desta sessao para
+      todos os 14 itens: lake env lean exit 0 em todos; zero token
+      proibido; axiomas reconstruidos independentemente para os 2
+      arquivos sem #print axioms embutido (HG-1E, HG-1F), zero
+      sorryAx em todos os 14. Uma lake build central: exit 0, 8825
+      jobs -- mesma contagem de antes. git status confirmou que
+      NENHUM arquivo pre-existente foi tocado -- apenas 14 arquivos
+      .lean novos. Ver 09_SESSIONS/2026/2026-08-11_WAVE4_EXECUTION.md
+      para detalhe completo por item.
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       DEC-095 -- onda 4 do plano de ataque (DEC-094), continuacao direta
       do ciclo Onda 1 -> Onda 2 -> Onda 3 -> Onda 4, usuario respondeu
@@ -4346,8 +4383,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountWeylLimitLaw.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-RH-5
@@ -4378,8 +4419,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/EigenvalueSetBridgeRestricted.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-NS-4A
@@ -4409,8 +4454,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVFunctionalOnArbitraryCompactK.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-PN-8
@@ -4441,8 +4490,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/03_P_VS_NP/FORMAL/PN8_PeekCoverageWitness.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-YM-CAPSTONE-BRACKET
@@ -4472,8 +4525,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneBracket.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-YM-CAPSTONE-FULL
@@ -4514,8 +4571,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneFull.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-HG-1E
@@ -4542,8 +4603,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HG1EPrincipalCycleA0Probe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-HG-1F
@@ -4573,8 +4638,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HG1FPrincipalCycleNumDenProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-HG-4D
@@ -4602,8 +4671,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionMulInvClosureProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-BSD-1-STEP5-COMPOSE
@@ -4641,8 +4714,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/FORMAL/BSD1Step5Compose.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-TOE-4
@@ -4675,8 +4752,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/TOE/KToShiftFunctorNotFaithfulNoReverse.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-QF-7
@@ -4710,8 +4791,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowUnitarity.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-SHARED-4A
@@ -4741,8 +4826,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/TwoEigenvalueExhaustiveness.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
   - work_item_id: WAVE4-SHARED-4B
@@ -4770,7 +4859,11 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para o item BSD-1-STEP5-COMPOSE especificamente, NAO alegar BSD-GAP-007 fechado com base apenas em STEP5a -- reportar STEP5a e STEP5b como resultados separados
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/LambdaMaxMulLambda2EqDet.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).

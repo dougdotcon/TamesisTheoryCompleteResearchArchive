@@ -1,5 +1,66 @@
 # Changelog do laboratório formal
 
+## WAVE4-BATCH-001 - 2026-08-11
+
+### Onda 4 do plano de ataque de portfólio: 14 testes falsificáveis, e BSD-GAP-007 fecha genuinamente
+
+A pedido explícito do usuário -- "Siga para onda 4", escolhendo
+explicitamente continuar o ciclo de ondas (opção 1 de 3 apresentadas,
+sobre pausar para um gate `TOE_INTERFACE_EXECUTION` dedicado ou abrir
+um projeto separado para `BSD-GAP-007`) -- um workflow de 19 agentes
+propôs `PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md` (DEC-094): 15 candidatos
+revisados, 14 formam a Onda 4 (contagem caindo estruturalmente onda a
+onda: 25 -> 20 -> 15 -> 14), zero REFUTED nesta rodada, mas a revisão
+adversarial recompilou dois candidatos inteiros e corrigiu um erro
+matemático real (hipótese route-b incondicional falsa em RH-5).
+
+Gate aberto (DEC-095). Um segundo workflow (28 agentes) executou os 14
+em paralelo. **Resultado: 14 de 14 CLOSED (10 VERIFIED, 4
+VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED.**
+
+**Achado central: `BSD-GAP-007` (aberto desde a Onda 1) fecha
+genuinamente.** `WAVE4-BSD-1-STEP5-COMPOSE` compõe
+`WAVE2-BSD-1-STEP1-COMPOSE` com `WAVE3-BSD-1-STEP4-RESIDUE-BIJECTION`
+para produzir `IsLocalRing.ResidueField (v.adicCompletionIntegers K) ≃+*
+(𝓞 K ⧸ v.asIdeal)` -- comparado letra por letra contra `BSD-1_GAP_NOTE.md`
+e confirmado ser exatamente o objeto nomeado como faltante -- e usa isso
+para provar `WeierstrassCurve.LFunction_isMultiplicative` **sem
+hipótese**, universalmente sobre todo lugar `v`. Esta sessão aplicou
+escrutínio extra além do protocolo padrão: leitura integral do arquivo
+de 389 linhas, reconstrução de `#print axioms` para as 12 declarações,
+e comparação byte a byte das seções "reproduzidas" contra os três
+arquivos-fonte originais. **O que isso NÃO significa:** nenhum
+progresso sobre a conjectura de Birch e Swinnerton-Dyer --
+`IsMultiplicative` de coeficientes de Dirichlet é propriedade estrutural
+básica, não toca `LSeries`/continuação analítica/equação
+funcional/posto de Mordell-Weil. `BSD-GAP-008` (Mordell-Weil fraco)
+permanece `OPEN`.
+
+Ver `09_SESSIONS/2026/2026-08-11_WAVE4_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- O fechamento de `BSD-GAP-007` constitui progresso sobre BSD.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- Uma eventual Onda 5 foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-094 (plano), DEC-095 (abertura), DEC-096
+  (fechamento).
+- `RESEARCH_QUEUE`: +14 itens `WAVE4-*` + guarda-chuva
+  `WAVE4-BATCH-001`, status SCOPED -> VERIFIED (total 121 itens).
+- `CLAIM_LEDGER`: +1 claim (`WAVE4-BATCH-FORMAL-001`), total 48.
+- `GAP_REGISTER` (BSD): `BSD-GAP-007` OPEN -> CLOSED, `closed_by
+  WAVE4-BSD-1-STEP5-COMPOSE`, com `prohibited_claims_reaffirmed`
+  explícito.
+- `labctl.py`: allowlist estendida com os 14 códigos `WAVE4-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE3-BATCH-001 - 2026-08-10
 
 ### Onda 3 do plano de ataque de portfólio: 15 testes falsificáveis, follow-ons diretos da Onda 2

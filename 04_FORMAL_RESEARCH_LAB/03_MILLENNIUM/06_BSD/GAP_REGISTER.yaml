@@ -60,22 +60,60 @@ gaps:
       por contraexemplo conhecido.
   - gap_id: BSD-GAP-007
     description: "Nenhuma ponte Mathlib entre corpo de resíduo de completação ádica (Valued/UniformSpace.Completion) e corpo de resíduo de completação de módulo (AdicCompletion) -- necessária até para a multiplicatividade incondicional de WeierstrassCurve.LFunction."
-    status: OPEN
+    status: CLOSED
+    closed_at: 2026-08-10
+    closed_by: WAVE4-BSD-1-STEP5-COMPOSE
     detail: >
       Descoberto por WAVE1-BSD-1 (item de infraestrutura formal, não
       literatura) em 2026-08-09. Categoria diferente dos gaps 001-006
       acima (esses são lacunas de cobertura na LITERATURA matemática;
       este é uma lacuna de INFRAESTRUTURA FORMAL no Mathlib). Três buscas
-      independentes confirmam ausência: nenhum lema liga
+      independentes confirmam ausência original: nenhum lema ligava
       `v.adicCompletionIntegers K` (construção via `UniformSpace.Completion`
       de um corpo valorado) a `AdicCompletion (maximalIdeal R) R`
       (construção via limite inverso de módulo) -- são objetos
-      genuinamente distintos sem ponte no Mathlib atual. Bloqueia a
+      genuinamente distintos sem ponte no Mathlib atual. Bloqueava a
       versão incondicional de `WeierstrassCurve.LFunction.IsMultiplicative`
       (a versão condicional, assumindo cardinalidade potência-de-primo do
-      corpo de resíduo, já está provada). Ver
-      03_MILLENNIUM/06_BSD/BSD-1_GAP_NOTE.md para o diagnóstico completo
-      e o caminho de continuação sugerido.
+      corpo de resíduo, já estava provada desde a Onda 1). Ver
+      03_MILLENNIUM/06_BSD/BSD-1_GAP_NOTE.md para o diagnóstico original
+      completo.
+    closure_detail: >
+      Fechado não pela rota originalmente prevista (passos (1)+(2)
+      literais do gap note, que exigiam uma ponte direta entre as duas
+      construções de completação), mas por uma rota diferente construída
+      ao longo de três ondas: WAVE2-BSD-1-STEP1-COMPOSE (Onda 2, closes
+      passo (1) -- equivalência entre corpo de resíduo da localização de
+      `𝓞 K` em `v` e a valuation subring pré-completação) +
+      WAVE3-BSD-1-STEP3-HASEXTENSION/WAVE3-BSD-1-STEP4-RESIDUE-BIJECTION
+      (Onda 3, chegam ao mesmo objeto do passo (2) via a maquinaria
+      `Valuation.HasExtension` do próprio Mathlib, não a rota
+      dense-image/open-maximal-ideal originalmente esboçada) +
+      WAVE4-BSD-1-STEP5-COMPOSE (Onda 4, passo (3) -- compõe os dois
+      resultados anteriores). Verificado de forma independente e
+      exaustiva por esta sessão (não apenas pelo autorrelato do workflow
+      nem pela revisão adversarial do próprio item): recompilação
+      própria do arquivo de 389 linhas (`lake env lean`, exit 0),
+      `#print axioms` reconstruído mostrando apenas os 3 axiomas padrão
+      em todas as 12 declarações, leitura integral do arquivo, e
+      comparação literal contra o alvo exato nomeado em
+      `BSD-1_GAP_NOTE.md` linha 95
+      (`IsLocalRing.ResidueField (v.adicCompletionIntegers K) ≃ 𝓞 K ⧸ v.asIdeal`)
+      -- STEP5a produz exatamente esse objeto (como `RingEquiv`, mais
+      forte que o `Equiv` nomeado). STEP5b usa isso para provar
+      `WeierstrassCurve.LFunction_isMultiplicative` SEM hipótese --
+      exatamente o "alvo incondicional" que a linha 134 do gap note dizia
+      permanecer não-provado -- via `residueField_isPrimePow`, universal
+      sobre TODO lugar `p : HeightOneSpectrum (𝓞 K)`, não um único
+      testemunho.
+    prohibited_claims_reaffirmed: >
+      Fechar este gap NÃO constitui progresso sobre a conjectura de Birch
+      e Swinnerton-Dyer (Problema do Milênio Clay). `IsMultiplicative` dos
+      coeficientes de Dirichlet de um produto de Euler formal é uma das
+      propriedades estruturais mais básicas possíveis de uma L-função;
+      nada aqui diz respeito a convergência de `LSeries`, continuação
+      analítica, equação funcional, condutor, ou posto de Mordell-Weil.
+      BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN e não relacionado.
   - gap_id: BSD-GAP-008
     description: "Cinco lacunas formais Mathlib separadas impedem invocar AddCommGroup.fg_of_descent' para obter Mordell-Weil fraco -- maior e mais espalhado do que o reconhecimento inicial supôs."
     status: OPEN

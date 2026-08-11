@@ -3181,3 +3181,78 @@ decisions:
       - "candidatos REFUTED do plano (nenhum nesta rodada) explicitamente NAO incluidos"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado -- estes itens WAVE4 sao testes auxiliares/reconhecimento, nao reativacao"
       - "BSD-GAP-007 nao sera declarado fechado so por WAVE4-BSD-1-STEP5-COMPOSE -- STEP5a e STEP5b devem ser reportados separadamente"
+
+  - decision_id: DEC-096
+    date: 2026-08-11
+    decision: >
+      Fechar WAVE4-BATCH-001: os 14 itens da Onda 4 do plano de ataque de
+      portfolio (DEC-094/DEC-095) VERIFICADOS. 14 de 14 CLOSED (10
+      VERIFIED, 4 VERIFIED_WITH_NOTES -- RH-4, RH-5, YM-CAPSTONE-FULL,
+      HG-1E, todas notas menores/cosmeticas), 0 GAP_DIAGNOSED, 0
+      REJECTED. 14 novos arquivos Lean standalone, zero modificacao a
+      qualquer arquivo pre-existente. Adicionalmente: BSD-GAP-007
+      (aberto desde a Onda 1, DEC-decisions anteriores) fechado
+      genuinamente por WAVE4-BSD-1-STEP5-COMPOSE, apos verificacao
+      independente extraordinariamente cuidadosa desta sessao (ver
+      rationale).
+    rationale: >
+      Verificacao em quatro camadas identica as Ondas 1-3, com camada
+      extra de escrutinio para BSD-1-STEP5-COMPOSE dada a magnitude do
+      achado. (1) implementador formaliza e auto-verifica; (2) revisor
+      adversarial independente recompila do zero, reconstroi footprint
+      de axiomas, verifica citacoes Mathlib contra o codigo-fonte,
+      checa scope creep; (3) esta sessao recompila TODOS os 14 arquivos
+      por conta propria (lake env lean, exit 0 em todos os 14, sem
+      excecao), reconstroi o footprint de axiomas independentemente para
+      os 2 arquivos que nao embutiam #print axioms (HG-1E, HG-1F; zero
+      sorryAx em todos os 14); (4) UMA lake build central apos todos os
+      14 pousarem (exit 0, 8825 jobs -- mesma contagem de antes,
+      confirmando que os arquivos standalone nao entraram no build
+      registrado, nenhuma regressao). git status confirmou que NENHUM
+      arquivo pre-existente foi tocado -- apenas 14 arquivos .lean novos.
+
+      Para WAVE4-BSD-1-STEP5-COMPOSE especificamente (STEP5a e STEP5b,
+      ambos alegados fechados pelo implementador e confirmados pela
+      revisao adversarial): esta sessao NAO se contentou com a
+      recompilacao padrao. Leu o arquivo de 389 linhas na integra;
+      comparou letra por letra a conclusao de STEP5a
+      (IsLocalRing.ResidueField (v.adicCompletionIntegers K) ≃+*
+      (𝓞 K ⧸ v.asIdeal)) contra o alvo EXATO nomeado como faltante em
+      BSD-1_GAP_NOTE.md (Onda 1) linha 95 -- confirmado identico (com
+      RingEquiv, mais forte que o Equiv la nomeado); confirmou que
+      residueField_isPrimePow (o hq que alimenta STEP5b) e universalmente
+      quantificado sobre TODO lugar p : HeightOneSpectrum (𝓞 K), nao um
+      unico testemunho; confirmou que o teorema final
+      WeierstrassCurve.LFunction_isMultiplicative nao carrega nenhuma
+      hipotese residual, correspondendo exatamente ao "alvo incondicional"
+      que a linha 134 do gap note dizia permanecer nao-provado; recompilou
+      o arquivo pessoalmente (exit 0) e reconstruiu #print axioms para
+      todas as 12 declaracoes (so os 3 axiomas padrao, zero sorryAx);
+      comparou as secoes marcadas "reproduzidas byte-identicas" contra
+      BSD1Step1ComposeResidueField.lean, BSD1Step4ResidueBijection.lean e
+      LFunctionMultiplicativity.lean diretamente e confirmou que o CODIGO
+      (nao so os comentarios) realmente bate. Conclusao: BSD-GAP-007 fecha
+      genuinamente, por uma rota diferente da originalmente prevista pelo
+      gap note (via Valuation.HasExtension do proprio Mathlib, nao a rota
+      dense-image/open-maximal-ideal original), mas entregando exatamente
+      o mesmo objeto e o mesmo teorema-alvo incondicional.
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "03_MILLENNIUM/06_BSD/GAP_REGISTER.yaml"
+      - "14 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE4-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 14 itens WAVE4-* + item guarda-chuva WAVE4-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE4-BATCH-FORMAL-001), total 48"
+      - "GAP_REGISTER (BSD): BSD-GAP-007 OPEN -> CLOSED, closed_by WAVE4-BSD-1-STEP5-COMPOSE"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 14 itens"
+      - "fechamento de BSD-GAP-007 explicitamente NAO reclassificado como progresso sobre a conjectura BSD -- ver prohibited_claims_reaffirmed em GAP_REGISTER.yaml e prohibited_claims em CLAIM_LEDGER.yaml"
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao tocado"
+      - "os gaps centrais das demais 5 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

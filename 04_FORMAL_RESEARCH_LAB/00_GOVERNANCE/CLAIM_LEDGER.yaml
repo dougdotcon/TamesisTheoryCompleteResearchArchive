@@ -2090,3 +2090,84 @@ claims:
       - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova de BSD, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
+  - claim_id: WAVE4-BATCH-FORMAL-001
+    short_name: wave4_portfolio_attack_execution
+    exact_statement: >
+      14 testes falsificaveis pequenos, follow-ons diretos da Onda 3
+      (DEC-094/095), executados em paralelo atraves das 8 linhas de
+      pesquisa + infraestrutura compartilhada. 14 de 14 fecharam (CLOSED),
+      0 GAP_DIAGNOSED, 0 REJECTED. Lista completa por item, formato
+      "CODIGO: outcome/veredito-adversarial -- caminho do arquivo":
+      - "RH-4: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountWeylLimitLaw.lean"
+      - "RH-5: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/EigenvalueSetBridgeRestricted.lean"
+      - "NS-4a: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVFunctionalOnArbitraryCompactK.lean"
+      - "PN-8: CLOSED/VERIFIED -- 03_MILLENNIUM/03_P_VS_NP/FORMAL/PN8_PeekCoverageWitness.lean"
+      - "YM-CAPSTONE-BRACKET: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneBracket.lean"
+      - "YM-CAPSTONE-FULL: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneFull.lean"
+      - "HG-1e: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1EPrincipalCycleA0Probe.lean"
+      - "HG-1f: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1FPrincipalCycleNumDenProbe.lean"
+      - "HG-4d: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionMulInvClosureProbe.lean"
+      - "BSD-1-STEP5-COMPOSE: CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD1Step5Compose.lean"
+      - "TOE-4: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/KToShiftFunctorNotFaithfulNoReverse.lean"
+      - "QF-7: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowUnitarity.lean"
+      - "SHARED-4A: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/TwoEigenvalueExhaustiveness.lean"
+      - "SHARED-4B: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/LambdaMaxMulLambda2EqDet.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE4-*)"
+      - "09_SESSIONS/2026/2026-08-11_WAVE4_EXECUTION.md"
+      - "03_MILLENNIUM/06_BSD/GAP_REGISTER.yaml (BSD-GAP-007, CLOSED)"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 14 itens e uma peca de infraestrutura auxiliar ou
+      resultado de esclarecimento, follow-on direto de um item da Onda 3
+      -- NENHUM toca o problema central de qualquer Problema do Milenio.
+      Verificado em quatro camadas: implementador auto-verifica -> revisor
+      adversarial independente recompila e re-verifica citacoes -> esta
+      sessao recompila todos os 14 arquivos por conta propria (lake env
+      lean, exit 0 em todos) e reconstroi footprint de axiomas para os 2
+      arquivos sem #print axioms embutido (HG-1e, HG-1f; zero sorryAx em
+      todos os 14) -> uma lake build central confirma zero regressao
+      (8825 jobs, mesma contagem de antes). git status confirma zero
+      arquivo pre-existente modificado -- apenas 14 arquivos .lean novos.
+
+      ACHADO ESPECIAL, VERIFICADO COM CUIDADO EXTRA: WAVE4-BSD-1-STEP5-COMPOSE
+      fecha genuinamente BSD-GAP-007 (aberto desde a Onda 1). STEP5a
+      compoe WAVE2-BSD-1-STEP1-COMPOSE com WAVE3-BSD-1-STEP4-RESIDUE-BIJECTION
+      para produzir IsLocalRing.ResidueField (v.adicCompletionIntegers K)
+      =~+* (O_K quociente v.asIdeal) -- comparado letra por letra contra
+      BSD-1_GAP_NOTE.md linha 95 e confirmado ser exatamente o objeto
+      nomeado como faltante. STEP5b usa isso para provar
+      WeierstrassCurve.LFunction_isMultiplicative SEM hipotese, via
+      quantificacao universal genuina sobre TODO lugar v (nao um unico
+      testemunho) -- exatamente o "alvo incondicional" que a linha 134 do
+      gap note dizia permanecer nao-provado. Verificado por esta sessao de
+      forma independente e extensa: recompilacao propria do arquivo de
+      389 linhas, leitura integral, #print axioms reconstruido para todas
+      as 12 declaracoes (so os 3 axiomas padrao), comparacao byte a byte
+      das declaracoes reproduzidas contra os arquivos-fonte originais
+      (BSD1Step1ComposeResidueField.lean, BSD1Step4ResidueBijection.lean,
+      LFunctionMultiplicativity.lean).
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+      - WAVE2-BATCH-FORMAL-001
+      - WAVE3-BATCH-FORMAL-001
+    known_gaps:
+      - "sub-frentes sem alvo pequeno identificadas nas Ondas 3-4 permanecem abertas (RH/RVM-NZeta composicao, NS distribuicao p.v. global via limitCLM)"
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao relacionado a este fechamento"
+      - "registro de _SHARED_INFRA/FORMAL no lakefile.toml continua adiado para sessao dedicada de governanca (nao tentado nesta onda)"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md"
+    last_reviewed: 2026-08-11
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - que o fechamento de BSD-GAP-007 constitui progresso sobre a conjectura de Birch e Swinnerton-Dyer -- IsMultiplicative de coeficientes de Dirichlet e propriedade estrutural basica, nao toca LSeries/continuacao analitica/equacao funcional/posto de Mordell-Weil
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

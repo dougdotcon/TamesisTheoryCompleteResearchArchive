@@ -3256,3 +3256,88 @@ decisions:
       - "os gaps centrais das demais 5 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-097
+    date: 2026-08-11
+    decision: >
+      Registrar 01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md -- plano
+      de ataque da Onda 5, cobrindo follow-ons dependentes dos outcomes
+      reais da Onda 4 (DEC-094/095/096, incluindo o fechamento de
+      BSD-GAP-007) nas mesmas 8 frentes mais infraestrutura compartilhada.
+      Produzido por workflow de reconhecimento + revisao adversarial (19
+      agentes) a pedido explicito do usuario ("Siga para onda 5").
+      PURAMENTE PLANEJAMENTO -- nenhuma linha de Lean escrita, nenhum
+      arquivo de governanca alterado pelos agentes.
+    rationale: >
+      14 candidatos revisados, 14 formam a lista de execucao (15 entradas
+      numeradas -- HG-4F dividido em dois estagios gated conta como um
+      candidato). Mesma contagem numerica que a Onda 4, mas por
+      composicao diferente: PN caiu de 1 para 0 -- primeira linha a
+      esgotar genuinamente em cinco ondas -- enquanto RH subiu de 2 para
+      3 e QF de 1 para 2. Documento atualiza a autoavaliacao da Onda 4:
+      recomenda encerrar formalmente PN como sub-frente de cobertura de
+      construtor (nao mais reavaliada onda a onda), nomeia BSD-GAP-008
+      (Mordell-Weil fraco, 5 lacunas formais separadas) como o candidato
+      mais maduro para projeto dedicado de escala propria (mais maduro
+      agora que BSD-GAP-007 provou que uma cadeia longa de composicao
+      pode fechar neste laboratorio), mas recomenda continuar o modo
+      onda-pequena-paralela para as linhas que seguem produzindo
+      candidatos baratos (RH, HG, QF, YM, SHARED-INFRA). Zero candidato
+      REFUTED nesta rodada.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status em RESEARCH_QUEUE.yaml -- documento de planejamento, nao gate de execucao"
+      - "LAB_STATE: authorized_action permanece PORTFOLIO_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "ZERO linha de Lean escrita por este gate"
+      - "ZERO arquivo de governanca alterado pelos agentes do workflow alem deste documento de plano"
+      - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
+      - "PN recomendado para encerramento formal como sub-frente, nao forcado a produzir item nesta rodada"
+      - "BSD-GAP-008 nomeado como candidato a projeto dedicado, NAO incluido como item de onda pequena"
+
+  - decision_id: DEC-098
+    date: 2026-08-11
+    decision: >
+      Autorizar a Onda 5 de execucao do plano de ataque de portfolio
+      completo (DEC-097): 14 itens WAVE5-* registrados em
+      RESEARCH_QUEUE.yaml (WAVE5-RH-6A, WAVE5-RH-6B, WAVE5-RH-6C,
+      WAVE5-NS-5A, WAVE5-YM-CAPSTONE-DET-BRACKET,
+      WAVE5-YM-CAPSTONE-EIGVAL-DICHOTOMY, WAVE5-HG-4E, WAVE5-HG-1G,
+      WAVE5-HG-4F, WAVE5-BSD-6, WAVE5-TOE-5, WAVE5-QF-8, WAVE5-QF-9,
+      WAVE5-SHARED-5A) mais o item guarda-chuva WAVE5-BATCH-001,
+      seguindo o mesmo padrao de DEC-086/089/092/095. WAVE5-HG-4F
+      contem dois estagios internos gated (Estagio 1 autonomo, Estagio 2
+      dependente de WAVE5-HG-4E). A linha PN nao contribui item algum --
+      esgotada genuinamente segundo a revisao adversarial desta onda.
+    rationale: >
+      Continuacao direta do ciclo pedido explicitamente pelo usuario
+      ("Siga para onda 5"). Cada um dos 14 itens carrega seu proprio
+      stop_condition proibindo: sorry/admit/axioma/unsafe; alegacao de
+      que qualquer Problema do Milenio foi resolvido, aproximado ou
+      tornado alcancavel; alegacao de novidade matematica; expansao alem
+      do escopo estreito do teste falsificavel especifico; e forcar
+      fechamento se o angulo se revelar intratavel. Nenhum item toca
+      BSD-GAP-008, nomeado no plano como candidato a projeto dedicado
+      separado, nao item de onda pequena. Nenhum item foi formalizado
+      ainda por este DEC -- apenas registrado e autorizado para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +14 itens WAVE5-* + item guarda-chuva WAVE5-BATCH-001, status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "labctl: active_work_item allowlist += WAVE5-BATCH-001 e os 14 WAVE5-* ids"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "BSD-GAP-008 explicitamente NAO incluido nesta onda -- candidato a projeto dedicado separado"
+      - "PN nao forcado a produzir item -- esgotamento genuino registrado, nao contornado"

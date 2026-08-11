@@ -4867,3 +4867,465 @@ queue:
     authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_4_2026_08_10.md, DEC-095 -- onda 4 de execucao paralela do plano de ataque de portfolio completo (DEC-094, sintese fundamentada nos outcomes reais da Onda 3, escolhida pelo usuario: continuar o ciclo de ondas no mesmo modo). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quarta rodada (dois candidatos inteiros efetivamente recompilados pela propria revisao adversarial com lake env lean; um erro matematico substantivo -- a hipotese route-b incondicional sobre mu:C em RH-5 -- encontrado e corrigido antes do despacho).
+
+  - work_item_id: WAVE5-BATCH-001
+    title: "Onda 5 de execucao do plano de ataque de portfolio completo (item guarda-chuva, 14 sub-itens)"
+    track: multi
+    target_statement: >
+      Item guarda-chuva, sem conteudo formal proprio. Representa a
+      execucao paralela dos 14 itens WAVE5-* individuais (ver cada um
+      separadamente na fila), cada um com seu proprio teste falsificavel
+      pequeno, escopo estreito, e stop_condition. Existe apenas porque
+      LAB_STATE.md tem um unico campo active_work_item singular e uma
+      onda paralela de 14 itens nao cabe nele individualmente. Onda 5
+      foi gerada por um workflow de reconhecimento (9 grupos) que leu os
+      arquivos REAIS da Onda 4 antes de propor os passos da Onda 5.
+      Mesma contagem numerica que a Onda 4 (14), mas por composicao
+      diferente -- PN caiu de 1 para 0 (primeira linha a esgotar
+      genuinamente em cinco ondas, recomendada para encerramento formal
+      como sub-frente de cobertura de construtor), enquanto RH e QF
+      cresceram. O documento nomeia BSD-GAP-008 (Mordell-Weil fraco)
+      como candidato maduro para projeto dedicado de escala propria fora
+      do ciclo de ondas, mas nenhum item desta onda toca BSD-GAP-008.
+    expected_product: >
+      Nenhum -- ver os 14 itens WAVE5-* individuais para produtos
+      esperados especificos.
+    dependencies: []
+    existing_assets:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver itens individuais"
+    cross_track_value: high
+    stop_condition: >
+      qualquer alegacao agregada de progresso alem do que cada item
+      individual honestamente fechou; tratar este item guarda-chuva como
+      se tivesse conteudo formal proprio; tratar o fechamento de qualquer
+      item BSD-6 como progresso sobre BSD-GAP-008 (nao relacionado)
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      DEC-098 -- onda 5 do plano de ataque (DEC-097), continuacao direta
+      do ciclo Onda 1 -> ... -> Onda 5 pedida explicitamente pelo
+      usuario ("Siga para onda 5").
+  - work_item_id: WAVE5-RH-6A
+    title: "Non-asymptotic rate bound for the Weyl-type limit law of unboundedEigCount"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "RH-6a"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Para Lam>=1 (ou Lam>0), provar 0 < (unboundedEigCount Lam : R)/Lam -
+      1 /\ (unboundedEigCount Lam : R)/Lam - 1 <= 1/Lam, diretamente de
+      unboundedEigCount_eq_floor + Nat.floor_le + Nat.lt_floor_add_one.
+      #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-RH-6B
+    title: "Cross-consistency bridge between unboundedEigCount and eigCount (revised, 3 lemmas)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "RH-6b"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      (i) {nu:C | HasEigenvalue T nu /\ (Lam+1)^-1<=||nu||} = (Complex.ofReal)
+      '' {mu:R | (Lam+1)^-1<=|mu| /\ HasEigenvalue T (mu:C)}, via
+      Complex.norm_real + ext; (ii) tomar ncard de ambos os lados via
+      Set.ncard_image_of_injective + Complex.ofReal_injective para obter
+      S.ncard = eigCount T ((Lam+1)^-1); (iii) compor com
+      eigenvalue_set_eq_preimage (RH-5) via
+      Set.ncard_preimage_of_injective_subset_range para fechar
+      unboundedEigCount Lam = eigCount T ((Lam+1)^-1) para Lam>=0.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-RH-6C
+    title: "Formally confirm Tp is genuinely unbounded"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "RH-6c"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Provar not (exists C:R, forall x:Tp.domain, ||(Tp x:H2)|| <= C * ||(x:H2)||) usando
+      Tp_eDom, lp.norm_single, norm_smul, Complex.norm_natCast e
+      exists_nat_gt. #print axioms limpo (3 axiomas padrao).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-NS-5A
+    title: "Cross-compact monotonicity of the p.v. envelope functional (cheap composition route)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "NS-5a"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      (1) pvKCLM e2 e3 R2 hR2 (monoCLM R (monoCLM R f : ... K2)) =
+      pvKCLM e2 e3 R2 hR2 (monoCLM R f : ... (pvKCompact R2)) via
+      monoCLM_apply em ambos os lados (usando K1<=K2 e K2<=pvKCompact R2);
+      (2) invocar pvKCLM_comp_monoCLM_radius_independent (ja provado) em
+      K':=K1; (3) encadear. Se (1) nao elaborar limpo, reportar a friccao
+      exata (possivel diamante de composicao de monoCLM).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-YM-CAPSTONE-DET-BRACKET
+    title: "Numeric bracket for det(toEuclideanCLM M1) via lambdaMax*lambda2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "YM-CAPSTONE-DET-BRACKET"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Provar 2.03 <= det(toEuclideanCLM M1) <= 4.03 via have hdet :=
+      lambdaMax_mul_lambda2_eq_det (toEuclideanCLM M1)
+      toEuclideanCLM_M1_isSymmetric finrank_E_eq_two; constructor <;>
+      nlinarith [...]. Fallback: mul_le_mul explicito se nlinarith nao
+      fechar.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-YM-CAPSTONE-EIGVAL-DICHOTOMY
+    title: "Eigenvalue dichotomy exhaustiveness for toEuclideanCLM M1"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "YM-CAPSTONE-EIGVAL-DICHOTOMY"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Provar (2.9<=mu<=3.1) \/ (0.7<=mu<=1.3) para todo autovalor mu de
+      toEuclideanCLM M1, via rcases
+      eigenvalue_eq_lambdaMax_or_lambda2 _ toEuclideanCLM_M1_isSymmetric
+      finrank_E_eq_two hmu with h | h, substituindo os dois brackets ja
+      fechados.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-HG-4E
+    title: "Subgroup of IsHolomorphicTransition (mul/inv closure packaged as a Subgroup)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "HG-4e"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Construir HolomorphicTransitionSubgroup <= (C->C)^x via mul_mem'/
+      one_mem'/inv_mem', usando isHolomorphicTransition_mul/_inv (HG-4D) +
+      Units.val_inv_eq_inv_val + Pi.isUnit_iff. Fallback se diamante de
+      instancia: provar (u^-1 : C->C) = ((u:C->C))^-1 pontualmente em vez de
+      via a cadeia DivisionMonoid.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-HG-1G
+    title: "Full parametrization of the Num/Den principal-cycle identity over explicit a0"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "HG-1g"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Generalizar principalCycle_f_eq_sub sobre a base ja parametrizada de
+      HG-1E (a0:Z, ha0:a0!=0) em vez do par fixo Num.a0=3/Den.a0=2,
+      reusando genf/finite_support_ord_genf parametrizados.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-HG-4F
+    title: "Two-stage: non-differentiability of exp-compose-conj (autonomous), then HolomorphicTransitionSubgroup is proper (gated on HG-4E)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "HG-4f"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      ESTAGIO 1 (autonomo): Provar not Differentiable C (Complex.exp o starRingEnd C), via
+      Complex.hasDerivAt_exp + HasDerivAt.hasFDerivAt (ponte explicita) +
+      HasFDerivAt.comp + contradicao de linearidade-C escalada por
+      c=exp(conj x)!=0 (Complex.exp_ne_zero).
+
+      ESTAGIO 2 (gated em WAVE5-HG-4E, propriedade de subgrupo proprio, NAO tentar antes de #7 fechar):
+      Empacotar exp o conj como u:(C->C)^x (via Complex.exp_ne_zero +
+      Pi.isUnit_iff.mpr + isUnit_iff_ne_zero); provar u nao pertence a
+      HolomorphicTransitionSubgroup.carrier usando o resultado do Estagio
+      1; concluir HolomorphicTransitionSubgroup != top. So tentar apos
+      HG-4E fechar; nao alegar "propriedade" so com o Estagio 1.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-BSD-6
+    title: "LFunction determined by values at prime powers (minimal scope, corollary of IsMultiplicative)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "BSD-6"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Escopo minimo: theorem LFunction_eq_iff_eq_on_prime_powers ... :=
+      (LFunction_isMultiplicative W).eq_iff_eq_on_prime_powers ... .
+      Extensao opcional (declaracao SEPARADA, seu proprio check):
+      LFunction_apply_eq_prod_prime_powers via
+      .multiplicative_factorization. Nao alegar ambos fechados a menos que
+      ambos passem lake env lean/#print axioms individualmente.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-TOE-5
+    title: "No injective reverse functor ShiftCat to KCat exists (generalized)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "TOE-5"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      theorem no_injective_reverse_functor (G : ShiftCat => KCat) (hinj :
+      Function.Injective G.obj) : False, via (1) homK_nonempty_iff (x y :
+      Regime3) : (exists m:K, m . x = y) -> y = x \/ y = Regime3.alpha (revert
+      x y; decide); (2) sigma injetivo via hinj; (3) para q:=beta,
+      p:=gamma (e simetricamente p:=beta, q:=gamma) via
+      shiftCat_hom_nonempty + G.map + homK_nonempty_iff, forcar sigma
+      beta = sigma gamma = alpha com beta!=gamma, contradizendo
+      injetividade de sigma diretamente (sem Finite.injective_iff_bijective).
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-QF-8
+    title: "Norm/inner-product preservation under the Heisenberg flow"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "QF-8"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Provar preservacao de norma e produto interno sob exp(t.
+      heisenbergGenerator) via Matrix.toEuclideanCLM + unitary.map_mem +
+      norm_map_of_mem_unitary/inner_map_map_of_mem_unitary, reusando a
+      prova de unitariedade de QF-7.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-QF-9
+    title: "One-parameter group law of the Heisenberg flow"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "QF-9"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      theorem heisenbergFlow_add (s t : R) : exp ((s + t) .
+      heisenbergGenerator) = exp (s . heisenbergGenerator) * exp (t .
+      heisenbergGenerator) := by haveI : NormedAlgebra Q (Matrix (Fin 2)
+      (Fin 2) C) := NormedAlgebra.restrictScalars Q C (Matrix (Fin 2)
+      (Fin 2) C); rw [add_smul]; exact exp_add_of_commute (((Commute.refl
+      heisenbergGenerator).smul_right t).smul_left s). Tentar primeiro sob
+      o escopo Matrix.Norms.Operator (mais simples); reportar qual escopo
+      de fato fechou.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
+  - work_item_id: WAVE5-SHARED-5A
+    title: "Characteristic polynomial factorization for a symmetric operator in dimension 2 (cheap route via charpoly_eq)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    plan_code: "SHARED-5A"
+    target_statement: >
+      TESTE (Onda 5, ja revisado pela adversarial, pronto para despacho):
+      Para E:=EuclideanSpace R (Fin 2), T : E ->L[R] E, hT :
+      (T:E ->l[R] E).IsSymmetric, hn : Module.finrank R E = 2, provar
+      (T:E ->l[R] E).charpoly = (X - C (lambdaMax T)) * (X - C (lambda2
+      T)) via hT.charpoly_eq hn + Fin.prod_univ_two +
+      lambdaMax_eq_eigenvalues_zero/lambda2_eq_eigenvalues_one. Sem
+      Matrix.charpoly_fin_two, sem ponte ToMatrix, sem base explicita.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 5 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.

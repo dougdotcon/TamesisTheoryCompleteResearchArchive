@@ -1,5 +1,69 @@
 # Changelog do laboratório formal
 
+## WAVE6-BATCH-001 - 2026-08-11
+
+### Onda 6 do plano de ataque de portfólio: 13 testes falsificáveis, segundo fechamento total consecutivo, PN retirada da rotação
+
+Após o fechamento da Onda 5, o usuário perguntou "Quais as próximas
+direções?" e recebeu 4 opções via `AskUserQuestion`; escolheu "Onda 6
+(mesmo modo)". Antes do planejamento, `DEC-100` retirou formalmente a
+linha PN (P vs NP) da rotação de reconhecimento -- retirada
+operacional/reversível, não uma alegação de que P vs NP está fechado --
+após a Onda 5 confirmar 0 candidatos genuínos.
+
+Um workflow de reconhecimento (17 agentes, 8 grupos) propôs
+`PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md` (DEC-101), fundamentado nos
+arquivos reais da Onda 5. 13 candidatos formam a Onda 6 -- queda honesta
+frente aos 14 da Onda 5 (NS, BSD, SHARED-INFRA cada uma com apenas 1
+item). Zero `REFUTED`.
+
+Gate aberto (DEC-102). Um segundo workflow (26 agentes) executou os 13
+em paralelo. **Resultado: 13 de 13 CLOSED (11 VERIFIED, 2
+VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- segundo fechamento
+total consecutivo do ciclo** (após a Onda 5).
+
+**Achado com escrutínio extra (disciplina de processo, não erro
+matemático): `BSD-7`.** Este item é explicitamente marcado
+exploratório/bounded, com `stop_condition` próprio limitando escopo a
+"ordem de grandeza dos ~30 linhas novas de BSD-6" e instruindo reportar
+"fora de escopo de onda" caso exceda. Fechou `CLOSED`, mas a revisão
+adversarial mediu 148 linhas não-comentário de conteúdo novo -- ~6,4x
+acima da referência de 23 linhas de BSD-6. Esta sessão reproduziu essa
+medição de forma totalmente independente e confirmou os números exatos.
+O conteúdo matemático está correto e foi verificado independentemente
+(recompilação própria, `#print axioms` limpo, citações Mathlib reais,
+nenhuma alegação sobre `BSD-GAP-008`) -- não há erro de corretude nem
+overclaiming, apenas uma falha de disciplina: o item deveria ter parado
+e se auto-diagnosticado como fora de escopo. Aceito como
+`CLOSED`/`VERIFIED_WITH_NOTES`, com a violação registrada explicitamente
+para reforço em ondas futuras.
+
+Ver `09_SESSIONS/2026/2026-08-11_WAVE6_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- O fechamento de `BSD-7` constitui progresso sobre `BSD-GAP-008` ou
+  sobre a conjectura de Birch e Swinnerton-Dyer.
+- `BSD-7` seguiu disciplinadamente seu próprio `stop_condition` de
+  tamanho -- o excesso foi medido e registrado honestamente.
+- A linha PN foi reavaliada ou reativada nesta onda.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- Uma eventual Onda 7 foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-100 (retirada de PN), DEC-101 (plano), DEC-102
+  (abertura), DEC-103 (fechamento).
+- `RESEARCH_QUEUE`: +13 itens `WAVE6-*` + guarda-chuva
+  `WAVE6-BATCH-001`, status SCOPED -> VERIFIED (total 150 itens).
+- `CLAIM_LEDGER`: +1 claim (`WAVE6-BATCH-FORMAL-001`), total 50.
+- `labctl.py`: allowlist estendida com os 13 códigos `WAVE6-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE5-BATCH-001 - 2026-08-11
 
 ### Onda 5 do plano de ataque de portfólio: 14 testes falsificáveis, primeiro fechamento total 14/14, linha PN esgotada

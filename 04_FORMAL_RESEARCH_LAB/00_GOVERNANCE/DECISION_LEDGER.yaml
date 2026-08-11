@@ -3548,3 +3548,77 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "PN permanece retirada da rotacao (DEC-100); BSD-GAP-008 explicitamente NAO incluido nesta onda -- recomendacao ativa de projeto dedicado separado"
       - "item 8 (BSD-7) pode terminar fora de escopo de onda sem que isso invalide os demais 12 itens"
+
+  - decision_id: DEC-103
+    date: 2026-08-11
+    decision: >
+      Fechar WAVE6-BATCH-001: os 13 itens da Onda 6 do plano de ataque de
+      portfolio (DEC-101/DEC-102) VERIFICADOS. 13 de 13 CLOSED (11
+      VERIFIED, 2 VERIFIED_WITH_NOTES -- BSD-7, QF-11), 0 GAP_DIAGNOSED,
+      0 REJECTED -- segundo fechamento total consecutivo do ciclo (apos a
+      Onda 5). 13 novos arquivos Lean standalone, zero modificacao a
+      qualquer arquivo pre-existente.
+    rationale: >
+      Verificacao em quatro camadas identica as Ondas 1-5. (1)
+      implementador formaliza e auto-verifica; (2) revisor adversarial
+      independente, dentro do proprio workflow, recompila do zero,
+      reconstroi footprint de axiomas, verifica citacoes Mathlib,
+      identifica excesso de escopo quando presente; (3) esta sessao
+      recompila TODOS os 13 arquivos por conta propria (lake env lean,
+      exit 0 em todos os 13, sem excecao -- BSD-7 com 2 warnings de lint
+      inofensivos, "try simp instead of simpa", nao erros), grep -nw
+      independente por sorry/admit/axiom/unsafe (zero hits em todos), e
+      reconstroi o footprint de axiomas para cada declaracao a partir do
+      log bruto -- subconjunto de [propext, Classical.choice,
+      Quot.sound] em 100% das declaracoes, zero sorryAx; (4) UMA lake
+      build central apos todos os 13 pousarem (exit 0, 8825 jobs -- mesma
+      contagem das Ondas 1-5, nenhuma regressao). git status confirmou
+      exatamente 13 arquivos .lean novos untracked, zero arquivo
+      pre-existente tocado.
+
+      ACHADO COM ESCRUTINIO EXTRA (disciplina de processo, nao erro
+      matematico): BSD-7 e explicitamente marcado exploratorio/bounded
+      no seu proprio stop_condition ("ordem de grandeza dos ~30 linhas
+      novas de BSD6", reportar "fora de escopo de onda" se exceder). A
+      revisao adversarial mediu 148 linhas nao-comentario de conteudo
+      novo contra as 23 de BSD6 -- ~6.4x acima. Esta sessao reproduziu
+      essa medicao de forma totalmente independente (mesmo metodo:
+      remocao de comentarios/linhas em branco via sed+grep) e confirmou
+      os numeros exatos: 148 vs 23. O conteudo matematico esta correto e
+      verificado (recompilacao propria, #print axioms limpo em todas as
+      15 declaracoes, citacoes Mathlib reais, nenhuma alegacao sobre
+      BSD-GAP-008 ou a conjectura BSD) -- este NAO e um erro de
+      corretude nem overclaiming, e sim uma falha de disciplina de
+      processo: o item deveria ter parado e se auto-diagnosticado como
+      fora de escopo, e nao o fez. Decisao desta sessao: aceitar o item
+      como CLOSED/VERIFIED_WITH_NOTES (o resultado matematico e real e
+      nao ha razao honesta para rejeitar matematica correta por um
+      criterio de tamanho), mas registrar a violacao de disciplina
+      explicitamente em CLAIM_LEDGER.yaml e aqui, como sinal para
+      futuras ondas reforçarem o cumprimento de stop_conditions de
+      tamanho em itens explicitamente exploratorios.
+
+      Item 5 (YM-CAPSTONE-DET-BRACKET-TIGHTENED) teve sua dependencia de
+      gate (item 4, YM-CAPSTONE-TRACE-M1-EXACT) verificada de forma
+      genuina -- tanto o implementador quanto o revisor adversarial
+      recompilaram o item 4 por conta propria antes de prosseguir,
+      confirmando que o gate nao foi apenas presumido.
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "13 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE6-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 13 itens WAVE6-* + item guarda-chuva WAVE6-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE6-BATCH-FORMAL-001), total 50"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 13 itens"
+      - "BSD-7 explicitamente NAO reclassificado como progresso sobre BSD-GAP-008 ou a conjectura BSD -- excesso de escopo registrado honestamente, nao escondido nem usado para inflar a alegacao"
+      - "BSD-GAP-008 permanece OPEN, promovido a recomendacao ativa de projeto dedicado (nao decidido, apenas recomendado)"
+      - "os gaps centrais das 6 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

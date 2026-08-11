@@ -8,7 +8,7 @@ schema_extension_note: >
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-11T00:00:00-03:00
-canonical_commit: "2457c9a520a4dec61da48234225c0b9a28614ba6"
+canonical_commit: "4b115521481af156ffb23b56af0fb003effb1247"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
 active_work_item: "WAVE6-BATCH-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,43 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "2457c9a520a4dec61da48234225c0b9a28614ba6 (Wave 5 integration + PN retirement, prior to this Wave 6 registration)"
-last_verified_artifact: "14 Wave-5 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE5-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 14, one file re-run standalone after a batch timeout), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 14, axiom footprints reconstructed independently from the raw log output (not from report transcriptions) for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 14 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status, identical to Waves 1-4), zero modification to any pre-existing tracked file (git status confirmed: exactly 14 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (28 agents total across the batch). First wave with a full 14/14 CLOSED result (10 VERIFIED + 4 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). RH-6C closes a genuine honesty gap (Tp_unbounded, never proved by Wave-3/4 siblings despite prose calling Tp \"unbounded\"). HG-4F's own formalizer independently re-verified HG-4E's closure before attempting the gated Estagio 2. BSD-6 reported minimal scope and optional extension as separate individually-verified results, touching neither BSD-GAP-008 nor the BSD conjecture."
+formalized_at_commit: "this integration commit (Wave 6 batch, 13 new files committed together)"
+last_verified_artifact: "13 Wave-6 Lean files across 7 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE6-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 13), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 13, axiom footprints reconstructed independently from the raw log output for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 13 landed (exit 0, 8825 jobs, unchanged job count, identical to Waves 1-5), zero modification to any pre-existing tracked file (git status confirmed: exactly 13 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (26 agents total across the batch). Second consecutive fully-clean wave (13/13 CLOSED, 11 VERIFIED + 2 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). BSD-7 (explicitly exploratory/bounded, own stop_condition capping scope at ~BSD-6's ~30-line size) closed CLOSED but this session independently re-measured its new content at 148 non-comment lines vs BSD-6's 23 -- confirming the adversarial reviewer's ~6.4x overshoot finding exactly. Mathematical content is correct and independently verified (clean recompile, clean axioms, real Mathlib citations, no BSD-GAP-008/conjecture claim) -- this is a scope-discipline process finding, not a correctness defect, and is recorded honestly in CLAIM_LEDGER/DECISION_LEDGER rather than hidden. Item 5 (YM-CAPSTONE-DET-BRACKET-TIGHTENED) genuinely gated on item 4 (YM-CAPSTONE-TRACE-M1-EXACT) -- both implementer and reviewer independently recompiled the gate dependency before proceeding."
 current_blocker: null
 next_single_action: >
+  WAVE6-BATCH-001 (13 itens da Onda 6 do plano de ataque de portfólio,
+  DEC-101/DEC-102) fechou VERIFIED / result_review APPROVED (DEC-103).
+  13 de 13 CLOSED (11 VERIFIED, 2 VERIFIED_WITH_NOTES -- BSD-7, QF-11),
+  0 GAP_DIAGNOSED, 0 REJECTED -- segundo fechamento total consecutivo do
+  ciclo (após a Onda 5). **ACHADO COM ESCRUTÍNIO EXTRA (disciplina de
+  processo, não erro matemático):** `BSD-7`, item explicitamente
+  exploratório/bounded com stop_condition próprio limitando escopo a
+  "ordem de grandeza dos ~30 linhas novas de BSD6", fechou CLOSED, mas a
+  revisão adversarial mediu 148 linhas não-comentário de conteúdo novo
+  (~6,4x acima da referência) -- esta sessão reproduziu a medição de
+  forma independente e confirmou os números exatos (148 vs 23). O
+  conteúdo matemático está correto e verificado (recompilação própria,
+  `#print axioms` limpo, citações Mathlib reais, nenhuma alegação sobre
+  `BSD-GAP-008`) -- não é erro de corretude nem overclaiming, é uma
+  falha de disciplina: o item deveria ter parado e se auto-diagnosticado
+  como fora de escopo. Aceito como CLOSED/VERIFIED_WITH_NOTES (matemática
+  correta não deve ser rejeitada por um critério de tamanho), mas
+  registrado explicitamente como sinal de disciplina para ondas futuras.
+  Verificação em quatro camadas idêntica às Ondas 1-5 para todos os 13
+  itens: `lake env lean` exit 0 em todos, zero token proibido via
+  `grep -nw` independente, axiomas reconstruídos a partir do log bruto
+  (zero `sorryAx`), `lake build` central sem regressão (8825 jobs).
+  `git status` confirmou que NENHUM arquivo pré-existente foi tocado --
+  apenas 13 arquivos `.lean` novos. Ver
+  `09_SESSIONS/2026/2026-08-11_WAVE6_EXECUTION.md` para detalhe completo
+  por item. `authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED`.
+  Próximo passo: decisão de portfólio pendente -- continuar Onda 7 no
+  mesmo modo, reforçar disciplina de stop_condition de tamanho em itens
+  exploratórios, e/ou decidir sobre a recomendação ativa de projeto
+  dedicado `BSD-GAP-008`.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE6-BATCH-001 (13 itens da Onda 6 do plano de ataque de portfólio,
   DEC-101/DEC-102) registrado e o gate de execução aberto. Usuário
   respondeu explicitamente "Onda 6 (mesmo modo)" a uma pergunta de 4
@@ -351,7 +384,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -373,6 +406,7 @@ pn_line_wave_rotation_status: "RETIRADA da rotacao de reconhecimento a partir da
 wave6_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
 wave6_batch_authorization: "DEC-102, 13 itens WAVE6-*, usuario escolheu \"Onda 6 (mesmo modo)\" entre 4 opcoes apresentadas via AskUserQuestion"
 wave6_bsd_gap_008_status: "OPEN, promovido de \"candidato maduro\" (linguagem da Onda 5) para \"recomendacao ativa\" de projeto dedicado -- sub-linha IsMultiplicative de BSD confirmada esgotada nesta onda"
+wave6_closure: "DEC-103, 13/13 CLOSED (11 VERIFIED + 2 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- segundo fechamento total consecutivo. Nota de disciplina de processo em BSD-7 (excesso de ~6.4x sobre o proprio stop_condition de tamanho, conteudo matematico correto)"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

@@ -2278,3 +2278,93 @@ claims:
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
       - que a linha PN esta permanentemente fechada para pesquisa futura -- apenas que esta onda de reconhecimento nao encontrou candidato pequeno genuino
+
+  - claim_id: WAVE6-BATCH-FORMAL-001
+    short_name: wave6_portfolio_attack_execution
+    exact_statement: >
+      13 testes falsificaveis pequenos, follow-ons diretos da Onda 5
+      (DEC-101/102), executados em paralelo atraves de 7 linhas de
+      pesquisa (RH, NS, YM, HG, BSD, TOE, QF) + infraestrutura
+      compartilhada (linha PN retirada por DEC-100). 13 de 13 fecharam
+      (CLOSED), 0 GAP_DIAGNOSED, 0 REJECTED -- segundo fechamento total
+      consecutivo do ciclo (apos a Onda 5). Lista completa por item,
+      formato "CODIGO: outcome/veredito-adversarial -- caminho do
+      arquivo":
+      - "RH-7a: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountRateBoundEigCountBridge.lean"
+      - "RH-7b: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/TpFormalAdjointProbe.lean"
+      - "NS-6a: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVCrossCompactMonotonicityAutoRadius.lean"
+      - "YM-CAPSTONE-TRACE-M1-EXACT: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneTraceM1Exact.lean"
+      - "YM-CAPSTONE-DET-BRACKET-TIGHTENED (gated no item anterior): CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneDetBracketTightened.lean"
+      - "HG-1h: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1HPrincipalCycleA0MulProbe.lean"
+      - "HG-4g: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG4GHolomorphicTransitionQuotientNontrivialProbe.lean"
+      - "BSD-7 (exploratorio/bounded): CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/06_BSD/FORMAL/BSD7CoeffCSeqBridge.lean -- ver nota de disciplina de escopo abaixo"
+      - "TOE-6a: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/NoSurjectiveReverseFunctorShiftCatKCat.lean"
+      - "TOE-6b: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/FNotFullKCatShiftCat.lean"
+      - "QF-10: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowMonoidHom.lean"
+      - "QF-11: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowContinuitySmulProbe.lean"
+      - "SHARED-6A: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/QuadraticFormulaDim2.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE6-*)"
+      - "09_SESSIONS/2026/2026-08-11_WAVE6_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 13 itens e uma peca de infraestrutura auxiliar,
+      resultado de esclarecimento, ou follow-on direto de um item da
+      Onda 5 -- NENHUM toca o problema central de qualquer Problema do
+      Milenio. Verificado em quatro camadas: implementador auto-verifica
+      -> revisor adversarial independente (dentro do proprio workflow)
+      recompila e re-verifica citacoes -> esta sessao recompila todos os
+      13 arquivos por conta propria (lake env lean, exit 0 em todos,
+      incluindo BSD-7 com 2 warnings de lint inofensivos) e reconstroi
+      footprint de axiomas para cada declaracao a partir do log bruto ->
+      uma lake build central confirma zero regressao (8825 jobs, mesma
+      contagem das Ondas 1-5). git status confirmou exatamente 13
+      arquivos .lean novos untracked, zero arquivo pre-existente
+      modificado.
+
+      ACHADO QUE RECEBEU ESCRUTINIO EXTRA (nao um erro matematico, mas
+      uma disciplina de processo): BSD-7 e um item explicitamente
+      marcado exploratorio/bounded, com stop_condition proprio limitando
+      escopo a "ordem de grandeza dos ~30 linhas novas de BSD6" e
+      instruindo reportar "fora de escopo de onda" caso exceda isso. O
+      item fechou CLOSED, mas esta sessao mediu de forma independente
+      (mesmo metodo de contagem que a revisao adversarial usou --
+      remocao de comentarios/linhas em branco) que o conteudo novo real
+      totaliza 148 linhas nao-comentario contra as 23 de BSD6 -- ~6.4x
+      acima da referencia. O conteudo matematico em si esta correto,
+      verificado independentemente (recompilacao propria exit 0, #print
+      axioms limpo em todas as 15 declaracoes, zero token proibido,
+      citacoes Mathlib reais confirmadas) e nao alega nada sobre
+      BSD-GAP-008 ou a conjectura BSD -- nao ha erro de conteudo nem
+      overclaiming. O problema e que o item deveria, pela sua propria
+      regra explicita, ter parado e reportado "fora de escopo" em vez de
+      ser empurrado ate o fechamento. Registrado honestamente como uma
+      nota de disciplina de processo, nao como motivo para invalidar um
+      resultado matematico correto.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+      - WAVE2-BATCH-FORMAL-001
+      - WAVE3-BATCH-FORMAL-001
+      - WAVE4-BATCH-FORMAL-001
+      - WAVE5-BATCH-FORMAL-001
+    known_gaps:
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao tocado por BSD-7; promovido nesta onda de 'candidato maduro' para 'recomendacao ativa' de projeto dedicado"
+      - "disciplina de escopo em itens exploratorios/bounded (BSD-7) precisa de reforco explicito em futuras ondas -- o stop_condition existiu mas nao foi respeitado pelo agente formalizador"
+      - "registro de _SHARED_INFRA/FORMAL no lakefile.toml continua adiado para sessao dedicada de governanca (nao tentado nesta onda)"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
+    last_reviewed: 2026-08-11
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - que o fechamento de BSD-7 constitui progresso sobre BSD-GAP-008 ou sobre a conjectura de Birch e Swinnerton-Dyer
+      - que BSD-7 seguiu disciplinadamente seu proprio stop_condition de tamanho -- o excesso de ~6.4x sobre a referencia foi medido e registrado honestamente, nao escondido
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

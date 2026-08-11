@@ -3341,3 +3341,71 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
       - "BSD-GAP-008 explicitamente NAO incluido nesta onda -- candidato a projeto dedicado separado"
       - "PN nao forcado a produzir item -- esgotamento genuino registrado, nao contornado"
+
+  - decision_id: DEC-099
+    date: 2026-08-11
+    decision: >
+      Fechar WAVE5-BATCH-001: os 14 itens da Onda 5 do plano de ataque de
+      portfolio (DEC-097/DEC-098) VERIFICADOS. 14 de 14 CLOSED (10
+      VERIFIED, 4 VERIFIED_WITH_NOTES -- RH-6a, RH-6b, RH-6c,
+      YM-CAPSTONE-EIGVAL-DICHOTOMY, todas notas menores/cosmeticas), 0
+      GAP_DIAGNOSED, 0 REJECTED -- primeiro fechamento total 14/14 do
+      ciclo. 14 novos arquivos Lean standalone, zero modificacao a
+      qualquer arquivo pre-existente. Linha PN confirmada formalmente
+      esgotada nesta onda (0 candidatos), conforme diagnosticado pelo
+      plano de reconhecimento da Onda 5.
+    rationale: >
+      Verificacao em quatro camadas identica as Ondas 1-4. (1)
+      implementador formaliza e auto-verifica; (2) revisor adversarial
+      independente, dentro do proprio workflow, recompila do zero,
+      reconstroi footprint de axiomas, verifica citacoes Mathlib contra
+      o codigo-fonte vendorizado, checa scope creep; (3) esta sessao
+      recompila TODOS os 14 arquivos por conta propria (lake env lean,
+      exit 0 em todos os 14, sem excecao, incluindo um segundo round
+      apos timeout no primeiro batch), grep -nw independente por
+      sorry/admit/axiom/unsafe (zero hits em todos), e reconstroi o
+      footprint de axiomas para cada declaracao a partir do log bruto
+      (nao das transcricoes dos relatorios) -- subconjunto de [propext,
+      Classical.choice, Quot.sound] em 100% das declaracoes, zero
+      sorryAx; (4) UMA lake build central apos todos os 14 pousarem
+      (exit 0, 8825 jobs -- mesma contagem das Ondas 1-4, confirmando
+      que os arquivos standalone nao entraram no build registrado,
+      nenhuma regressao). git status confirmou exatamente 14 arquivos
+      .lean novos untracked, zero arquivo pre-existente tocado.
+
+      Achados desta onda: RH-6c fecha um gap de honestidade genuino
+      (Tp_unbounded, nunca provado pelos irmaos das Ondas 3-4 apesar de
+      chamarem Tp de "operador nao limitado" em prosa) -- classificado
+      como resultado de esclarecimento, nao como progresso sobre RH
+      (reafirmado em prohibited_claims). HG-4f executou corretamente seu
+      proprio gate interno de dois estagios -- o agente formalizador
+      re-verificou HG-4e de forma independente (lake env lean +
+      #print axioms proprios) antes de tentar o Estagio 2 gated, nao
+      apenas confiando na alegacao de fechamento de HG-4e. BSD-6
+      reportou escopo minimo e extensao opcional como resultados
+      SEPARADOS, ambos individualmente verificados; nao alega e nao
+      toca BSD-GAP-008. O padrao recorrente de nota (RH-6a/6b/6c e
+      YM-CAPSTONE-EIGVAL-DICHOTOMY) e uma imprecisao cosmetica de
+      "byte-identico"/contagem de declaracoes nos proprios relatorios,
+      sem qualquer impacto de corretude, escopo, ou build -- ja
+      documentado em CLAIM_LEDGER.yaml (WAVE5-BATCH-FORMAL-001).
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "14 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE5-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 14 itens WAVE5-* + item guarda-chuva WAVE5-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE5-BATCH-FORMAL-001), total 49"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 14 itens"
+      - "RH-6c (Tp_unbounded) explicitamente NAO reclassificado como progresso sobre a Hipotese de Riemann -- fato estrutural de um operador toy, nao de zeta"
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao tocado por BSD-6"
+      - "os gaps centrais das 6 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado"
+      - "linha PN declarada esgotada apenas para esta rodada de reconhecimento -- nao permanentemente fechada para pesquisa futura"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

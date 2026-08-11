@@ -2171,3 +2171,110 @@ claims:
       - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
+
+  - claim_id: WAVE5-BATCH-FORMAL-001
+    short_name: wave5_portfolio_attack_execution
+    exact_statement: >
+      14 testes falsificaveis pequenos, follow-ons diretos da Onda 4
+      (DEC-097/098), executados em paralelo atraves de 8 linhas de
+      pesquisa (RH, NS, YM, HG, BSD, TOE, QF) + infraestrutura
+      compartilhada. Linha PN esgotada nesta onda (0 candidatos, primeira
+      linha a esgotar genuinamente em cinco ondas). 14 de 14 fecharam
+      (CLOSED), 0 GAP_DIAGNOSED, 0 REJECTED. Lista completa por item,
+      formato "CODIGO: outcome/veredito-adversarial -- caminho do
+      arquivo":
+      - "RH-6a: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountRateBound.lean"
+      - "RH-6b: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountEigCountBridge.lean"
+      - "RH-6c: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/01_RIEMANN/FORMAL/TpUnboundedNormProbe.lean"
+      - "NS-5a: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVEnvelopeCrossCompactMonotonicity.lean"
+      - "YM-CAPSTONE-DET-BRACKET: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneDetBracket.lean"
+      - "YM-CAPSTONE-EIGVAL-DICHOTOMY: CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneEigvalDichotomy.lean"
+      - "HG-4e: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionSubgroupProbe.lean"
+      - "HG-1g: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1GPrincipalCycleNumDenParamProbe.lean"
+      - "HG-4f (Estagio 1 + Estagio 2, gated): CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG4FExpConjNotHolomorphicSubgroupProbe.lean"
+      - "BSD-6 (escopo minimo + extensao opcional, separadas): CLOSED/VERIFIED -- 03_MILLENNIUM/06_BSD/FORMAL/BSD6LFunctionEqOnPrimePowers.lean"
+      - "TOE-5: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/NoInjectiveReverseFunctorShiftCatKCat.lean"
+      - "QF-8: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowNormPreservation.lean"
+      - "QF-9: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowGroupLaw.lean"
+      - "SHARED-5A: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/CharpolyFactorizationDim2.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE5-*)"
+      - "09_SESSIONS/2026/2026-08-11_WAVE5_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 14 itens e uma peca de infraestrutura auxiliar,
+      resultado de esclarecimento, ou follow-on direto de um item da
+      Onda 4 -- NENHUM toca o problema central de qualquer Problema do
+      Milenio. Verificado em quatro camadas: implementador auto-verifica
+      -> revisor adversarial independente (dentro do proprio workflow)
+      recompila e re-verifica citacoes -> esta sessao recompila todos os
+      14 arquivos por conta propria (lake env lean, exit 0 em todos) e
+      reconstroi footprint de axiomas para cada declaracao a partir do
+      log bruto (nao das transcricoes dos relatorios) -> uma lake build
+      central confirma zero regressao (8825 jobs, mesma contagem das
+      Ondas 1-4). git status confirma zero arquivo pre-existente
+      modificado -- apenas 14 arquivos .lean novos untracked, exatamente
+      como esperado.
+
+      PADRAO DE NOTA RECORRENTE (nao um defeito): tres dos quatro itens
+      VERIFIED_WITH_NOTES desta onda (RH-6a, RH-6b, RH-6c) compartilham
+      o mesmo tipo de imprecisao -- o cabecalho do arquivo alega
+      reproducao "byte-identica"/"verbatim" de comentarios de
+      documentacao de um arquivo de onda anterior, quando na verdade
+      apenas o CODIGO (definicoes, enunciados de teorema, termos de
+      prova) e byte-identico; alguns comentarios em prosa foram
+      reescritos ou tiveram referencias cruzadas corrigidas. Em todos os
+      tres casos isto foi confirmado nao afetar a corretude (diff
+      apos remover comentarios mostra zero diferenca no codigo
+      executavel). O quarto item VERIFIED_WITH_NOTES
+      (YM-CAPSTONE-EIGVAL-DICHOTOMY) teve um erro trivial de contagem no
+      proprio relatorio (34 declaracoes alegadas vs 36 reais) sem
+      impacto na corretude.
+
+      ACHADO NOTAVEL: RH-6c fecha um gap de honestidade genuino que
+      nenhum irmao das Ondas 3-4 (UnboundedEigCountFloorLaw.lean,
+      UnboundedEigCountWeylLimitLaw.lean, EigenvalueSetBridgeRestricted.lean)
+      havia fechado apesar de chamar Tp de "o operador diagonal toy nao
+      limitado" repetidamente em prosa -- nenhum desses arquivos prova
+      Tp_unbounded em lugar nenhum do corpo. RH-6c formaliza isso pela
+      primeira vez: ¬ ∃ C : ℝ, ∀ x : Tp.domain, ‖(Tp x : H2)‖ ≤ C *
+      ‖(x : H2)‖, via exists_nat_gt + norm_smul. HG-4f executou
+      corretamente seu proprio gate de dois estagios interno: o Estagio
+      2 (subgrupo proprio) so foi tentado depois que o proprio agente
+      formalizador re-verificou de forma independente, por conta
+      propria (lake env lean + #print axioms), que HG-4e havia
+      genuinamente fechado -- nao apenas confiando na propria alegacao
+      de HG-4e. BSD-6 reportou o escopo minimo
+      (LFunction_eq_iff_eq_on_prime_powers) e a extensao opcional
+      (LFunction_apply_eq_prod_prime_powers) como resultados SEPARADOS,
+      ambos individualmente verificados com #print axioms limpo; nao
+      alega e nao toca BSD-GAP-008 (Mordell-Weil fraco, que permanece
+      OPEN) nem qualquer progresso sobre a conjectura de Birch e
+      Swinnerton-Dyer.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+      - WAVE2-BATCH-FORMAL-001
+      - WAVE3-BATCH-FORMAL-001
+      - WAVE4-BATCH-FORMAL-001
+    known_gaps:
+      - "linha PN formalmente declarada esgotada nesta onda (0 candidatos pequenos genuinos identificados) -- recomendado para encerramento como sub-frente de cobertura de construtor, decisao de portfolio pendente"
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao tocado por BSD-6"
+      - "registro de _SHARED_INFRA/FORMAL no lakefile.toml continua adiado para sessao dedicada de governanca (nao tentado nesta onda)"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
+    last_reviewed: 2026-08-11
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - que o fechamento de qualquer item BSD-6 constitui progresso sobre BSD-GAP-008 ou sobre a conjectura de Birch e Swinnerton-Dyer
+      - que RH-6c (prova de Tp_unbounded) constitui qualquer progresso sobre a Hipotese de Riemann -- e um fato estrutural sobre um operador toy de brinquedo, nao uma propriedade de zeta ou de qualquer operador espectral com relevancia RH
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica
+      - que a linha PN esta permanentemente fechada para pesquisa futura -- apenas que esta onda de reconhecimento nao encontrou candidato pequeno genuino

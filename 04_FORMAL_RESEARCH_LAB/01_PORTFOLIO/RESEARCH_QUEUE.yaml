@@ -4905,12 +4905,47 @@ queue:
       se tivesse conteudo formal proprio; tratar o fechamento de qualquer
       item BSD-6 como progresso sobre BSD-GAP-008 (nao relacionado)
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    wave5_outcome_summary: >
+      14 de 14 itens fecharam CLOSED apos revisao adversarial
+      independente (10 VERIFIED + 4 VERIFIED_WITH_NOTES -- RH-6A, RH-6B,
+      RH-6C, YM-CAPSTONE-EIGVAL-DICHOTOMY, todas notas menores/cosmeticas
+      -- o mesmo padrao de exagero "byte-identico"/"copiado verbatim" em
+      comentarios de doc reaparecendo nos tres itens RH, mais um erro de
+      contagem de declaracoes 34-vs-36 no proprio relatorio de
+      YM-CAPSTONE-EIGVAL-DICHOTOMY -- sem problema de corretude
+      matematica, escopo, ou build em nenhum item). 0 GAP_DIAGNOSED, 0
+      REJECTED -- primeira onda com fechamento total de 14/14 desde o
+      inicio do ciclo. Destaque: RH-6C fechou um honesty gap genuino nao
+      coberto por nenhum irmao anterior (Waves 3/4 chamavam Tp de
+      "operador diagonal nao-limitado" sem nunca provar isso -- RH-6C
+      formaliza Tp_unbounded pela primeira vez). HG-4F executou
+      corretamente seu gate interno de dois estagios (Estagio 2 so
+      tentado apos re-verificacao independente, pelo proprio agente
+      formalizador, de que HG-4E genuinamente fechou). BSD-6 reportou
+      escopo minimo e extensao opcional como resultados SEPARADOS,
+      ambos individualmente verificados, sem tocar BSD-GAP-008 ou
+      alegar progresso sobre a conjectura BSD (confirmado por leitura
+      integral do arquivo e do header de nao-alegacao). Recompilacao
+      central independente desta sessao para todos os 14 itens: lake
+      env lean exit 0 em todos; zero tokens proibidos (sorry/admit/
+      axiom/unsafe) via grep -nw independente; #print axioms
+      reconstruido para cada declaracao, subconjunto de
+      [propext, Classical.choice, Quot.sound] em 100% dos casos, sem
+      sorryAx; git status confirmou exatamente 14 arquivos novos
+      untracked, zero arquivos rastreados modificados; lake build
+      central confirmou 8825 jobs (identico as Ondas 1-4), confirmando
+      que todos os 14 arquivos permanecem standalone/nao registrados em
+      TamesisLab.lean, como esperado pela convencao do laboratorio.
+      Linha PN permanece formalmente esgotada (0 candidatos nesta
+      onda, conforme diagnosticado pelo plano da Onda 5); BSD-GAP-008
+      permanece OPEN e intocado.
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       DEC-098 -- onda 5 do plano de ataque (DEC-097), continuacao direta
       do ciclo Onda 1 -> ... -> Onda 5 pedida explicitamente pelo
-      usuario ("Siga para onda 5").
+      usuario ("Siga para onda 5"). Fechamento em DEC-099.
   - work_item_id: WAVE5-RH-6A
     title: "Non-asymptotic rate bound for the Weyl-type limit law of unboundedEigCount"
     track: millennium
@@ -4935,8 +4970,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountRateBound.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-RH-6B
@@ -4967,8 +5006,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/UnboundedEigCountEigCountBridge.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-RH-6C
@@ -4994,8 +5037,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/01_RIEMANN/FORMAL/TpUnboundedNormProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-NS-5A
@@ -5024,8 +5071,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVEnvelopeCrossCompactMonotonicity.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-YM-CAPSTONE-DET-BRACKET
@@ -5053,8 +5104,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneDetBracket.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-YM-CAPSTONE-EIGVAL-DICHOTOMY
@@ -5082,8 +5137,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED_WITH_NOTES
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneEigvalDichotomy.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-HG-4E
@@ -5111,8 +5170,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HolomorphicTransitionSubgroupProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-HG-1G
@@ -5138,8 +5201,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HG1GPrincipalCycleNumDenParamProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-HG-4F
@@ -5173,8 +5240,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/05_HODGE/FORMAL/HG4FExpConjNotHolomorphicSubgroupProbe.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-BSD-6
@@ -5203,8 +5274,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/06_BSD/FORMAL/BSD6LFunctionEqOnPrimePowers.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-TOE-5
@@ -5235,8 +5310,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/TOE/NoInjectiveReverseFunctorShiftCatKCat.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-QF-8
@@ -5263,8 +5342,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowNormPreservation.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-QF-9
@@ -5295,8 +5378,12 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowGroupLaw.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.
   - work_item_id: WAVE5-SHARED-5A
@@ -5325,7 +5412,11 @@ queue:
     stop_condition: >
       usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para HG-4F, NAO tentar o Estagio 2 antes do Estagio 1 e de HG-4E fecharem; para BSD-6, reportar a extensao opcional separadamente do escopo minimo
     priority_class: P2
-    status: SCOPED
-    authorized_next_gate: FORMALIZATION
+    status: VERIFIED
+    result_review: APPROVED
+    formal_outcome: CLOSED
+    adversarial_verdict: VERIFIED
+    lean_file: "/home/user/TamesisTheoryCompleteResearchArchive/04_FORMAL_RESEARCH_LAB/03_MILLENNIUM/_SHARED_INFRA/FORMAL/CharpolyFactorizationDim2.lean"
+    authorized_next_gate: PORTFOLIO_REVIEW_REQUIRED
     strategic_direction_source: >
       01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md, DEC-098 -- onda 5 de execucao paralela do plano de ataque de portfolio completo (DEC-097, sintese fundamentada nos outcomes reais da Onda 4, continuacao pedida explicitamente pelo usuario: "Siga para onda 5"). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta quinta rodada.

@@ -1,5 +1,71 @@
 # Changelog do laboratório formal
 
+## WAVE5-BATCH-001 - 2026-08-11
+
+### Onda 5 do plano de ataque de portfólio: 14 testes falsificáveis, primeiro fechamento total 14/14, linha PN esgotada
+
+A pedido explícito do usuário -- "Siga para onda 5", continuando o
+mesmo ciclo -- um workflow de reconhecimento (9 grupos por linha)
+propôs `PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md` (DEC-097), fundamentado
+nos arquivos reais da Onda 4 (incluindo o fechamento de
+`BSD-GAP-007`). 14 candidatos formam a Onda 5 -- mesma contagem
+numérica que a Onda 4, mas por composição diferente: **linha PN caiu
+de 1 para 0**, primeira linha a esgotar genuinamente candidatos
+pequenos em cinco ondas, enquanto RH e QF cresceram. Zero REFUTED
+nesta rodada.
+
+Gate aberto (DEC-098). Um segundo workflow (28 agentes) executou os 14
+em paralelo. **Resultado: 14 de 14 CLOSED (10 VERIFIED, 4
+VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- primeiro
+fechamento total do ciclo de ondas** (Ondas 1-4 tiveram ao menos um
+`GAP_DIAGNOSED` ou `REJECTED` cada).
+
+**Achado de interesse: `RH-6C` fecha um honesty gap genuíno.** Nenhum
+dos arquivos das Ondas 3-4 (`UnboundedEigCountFloorLaw.lean`,
+`UnboundedEigCountWeylLimitLaw.lean`, `EigenvalueSetBridgeRestricted.lean`)
+provava que `Tp` é de fato não limitado, apesar de chamá-lo assim
+repetidamente em prosa. `RH-6C` formaliza isso pela primeira vez --
+classificado como resultado de esclarecimento sobre um operador de
+brinquedo, **não** como progresso sobre a Hipótese de Riemann.
+`HG-4F` executou corretamente seu gate interno de dois estágios (o
+próprio agente formalizador re-verificou HG-4E de forma independente
+antes de tentar o Estágio 2). `BSD-6` reportou escopo mínimo e
+extensão opcional como resultados separados, sem tocar `BSD-GAP-008`.
+
+Esta sessão recompilou os 14 arquivos de forma independente (`lake env
+lean`, exit 0 em todos), confirmou zero token proibido via `grep -nw`
+independente, reconstruiu o footprint de axiomas de cada declaração a
+partir do log bruto (subconjunto de `[propext, Classical.choice,
+Quot.sound]` em 100% dos casos, zero `sorryAx`), e confirmou via `lake
+build` central que a contagem de jobs permanece em 8825 (idêntica às
+Ondas 1-4).
+
+Ver `09_SESSIONS/2026/2026-08-11_WAVE5_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- O fechamento de qualquer item `BSD-6` constitui progresso sobre
+  `BSD-GAP-008` ou sobre a conjectura de Birch e Swinnerton-Dyer.
+- `RH-6C` (prova de `Tp_unbounded`) constitui progresso sobre a
+  Hipótese de Riemann.
+- A linha PN está permanentemente fechada para pesquisa futura.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- Uma eventual Onda 6 foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-097 (plano), DEC-098 (abertura), DEC-099
+  (fechamento).
+- `RESEARCH_QUEUE`: +14 itens `WAVE5-*` + guarda-chuva
+  `WAVE5-BATCH-001`, status SCOPED -> VERIFIED (total 136 itens).
+- `CLAIM_LEDGER`: +1 claim (`WAVE5-BATCH-FORMAL-001`), total 49.
+- `labctl.py`: allowlist estendida com os 14 códigos `WAVE5-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE4-BATCH-001 - 2026-08-11
 
 ### Onda 4 do plano de ataque de portfólio: 14 testes falsificáveis, e BSD-GAP-007 fecha genuinamente

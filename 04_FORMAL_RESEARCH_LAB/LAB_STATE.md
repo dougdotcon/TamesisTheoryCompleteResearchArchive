@@ -7,8 +7,8 @@ schema_extension_note: >
   cinco frentes migraram para closed_work_items abaixo, e o campo foi
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
-updated_at: 2026-08-10T00:00:00-03:00
-canonical_commit: "f6743bc0730edaaff3a9866bc77212e22d27bdbd"
+updated_at: 2026-08-11T00:00:00-03:00
+canonical_commit: "920be31ffe0ccd5171b15c5b0a35ce8826dcc569"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
 active_work_item: "WAVE5-BATCH-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,48 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "this integration commit (Wave 4 batch, 14 new files committed together)"
-last_verified_artifact: "14 Wave-4 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE4-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 14), axiom footprints reconstructed independently for the 2 files that did not embed #print axioms (HG-1E, HG-1F; zero sorryAx on all 14), one central full lake build after all 14 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status), zero forbidden tokens on all 14, zero modification to any pre-existing tracked file (git status confirmed) -- on top of each item's own implementer self-check and independent adversarial reviewer pass (28 agents total across the batch). BSD-1-STEP5-COMPOSE received extra scrutiny given it closes BSD-GAP-007: full 389-line file read, STEP5a's conclusion compared letter-by-letter against BSD-1_GAP_NOTE.md's exact named target, universal quantification of residueField_isPrimePow over every place confirmed genuine (not a single witness)."
+formalized_at_commit: "this integration commit (Wave 5 batch, 14 new files committed together)"
+last_verified_artifact: "14 Wave-5 Lean files across 8 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE5-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 14, one file re-run standalone after a batch timeout), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 14, axiom footprints reconstructed independently from the raw log output (not from report transcriptions) for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 14 landed (exit 0, 8825 jobs, unchanged job count confirming standalone/unregistered status, identical to Waves 1-4), zero modification to any pre-existing tracked file (git status confirmed: exactly 14 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (28 agents total across the batch). First wave with a full 14/14 CLOSED result (10 VERIFIED + 4 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). RH-6C closes a genuine honesty gap (Tp_unbounded, never proved by Wave-3/4 siblings despite prose calling Tp \"unbounded\"). HG-4F's own formalizer independently re-verified HG-4E's closure before attempting the gated Estagio 2. BSD-6 reported minimal scope and optional extension as separate individually-verified results, touching neither BSD-GAP-008 nor the BSD conjecture."
 current_blocker: null
 next_single_action: >
+  WAVE5-BATCH-001 (14 itens da Onda 5 do plano de ataque de portfólio,
+  DEC-097/DEC-098) fechou VERIFIED / result_review APPROVED (DEC-099).
+  14 de 14 CLOSED (10 VERIFIED, 4 VERIFIED_WITH_NOTES -- RH-6a, RH-6b,
+  RH-6c, YM-CAPSTONE-EIGVAL-DICHOTOMY, todas notas menores/cosméticas,
+  sem problema de corretude), 0 GAP_DIAGNOSED, 0 REJECTED -- primeiro
+  fechamento total 14/14 do ciclo de ondas. **ACHADO NOTÁVEL:** `RH-6c`
+  formaliza pela primeira vez que `Tp` é genuinamente não limitado
+  (`¬ ∃ C : ℝ, ∀ x : Tp.domain, ‖(Tp x : H2)‖ ≤ C * ‖(x : H2)‖`) --
+  nenhum irmão das Ondas 3-4 provava isso apesar de chamar `Tp` de
+  "operador não limitado" em prosa repetidamente. Classificado como
+  resultado de esclarecimento sobre um operador de brinquedo, **não**
+  como progresso sobre a Hipótese de Riemann (reafirmado em
+  `prohibited_claims`). `HG-4F` executou corretamente seu próprio gate
+  interno de dois estágios: o agente formalizador re-verificou de forma
+  independente (recompilação + `#print axioms` próprios) que `HG-4E`
+  havia genuinamente fechado antes de tentar o Estágio 2 gated. `BSD-6`
+  reportou escopo mínimo e extensão opcional como resultados
+  SEPARADOS, ambos individualmente verificados; não toca `BSD-GAP-008`
+  (que permanece `OPEN`) nem alega progresso sobre a conjectura BSD.
+  Linha `PN` confirmada formalmente esgotada nesta onda (0 candidatos).
+  Verificação em quatro camadas idêntica às Ondas 1-4 para todos os 14
+  itens: `lake env lean` exit 0 em todos, zero token proibido via
+  `grep -nw` independente, axiomas reconstruídos a partir do log bruto
+  para cada declaração (zero `sorryAx`), `lake build` central sem
+  regressão (8825 jobs). `git status` confirmou que NENHUM arquivo
+  pré-existente foi tocado -- apenas 14 arquivos `.lean` novos. Ver
+  `09_SESSIONS/2026/2026-08-11_WAVE5_EXECUTION.md` para detalhe
+  completo por item. `authorized_action` volta a
+  `PORTFOLIO_REVIEW_REQUIRED`. Próximo passo: decisão de portfólio
+  pendente sobre encerramento formal da linha `PN` como sub-frente
+  esgotada, e sobre se/quando `BSD-GAP-008` vira projeto dedicado
+  separado fora do ciclo de ondas (ambas ainda não decididas, apenas
+  nomeadas pelo plano da Onda 5) -- ou continuação do ciclo de ondas no
+  mesmo modo para as linhas que ainda produzem candidatos
+  (RH/HG/QF/YM/SHARED-INFRA).
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE5-BATCH-001 (14 itens da Onda 5 do plano de ataque de portfólio,
   DEC-097/DEC-098) registrado e o gate de execução aberto. Pedido
   explícito do usuário ("Siga para onda 5"), continuação direta do
@@ -283,7 +321,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -300,6 +338,7 @@ wave5_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_5_2026_08_11.md"
 wave5_batch_authorization: "DEC-098, 14 itens WAVE5-*, pedido explicito do usuario (\"Siga para onda 5\")"
 wave5_pn_line_status: "esgotada genuinamente segundo a revisao adversarial -- recomendada para encerramento formal como sub-frente de cobertura de construtor, nao mais reavaliada onda a onda"
 wave5_bsd_gap_008_status: "OPEN, nomeado como candidato maduro a projeto dedicado de escala propria -- NAO incluido nesta onda"
+wave5_closure: "DEC-099, 14/14 CLOSED (10 VERIFIED + 4 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- primeiro fechamento total 14/14 do ciclo"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

@@ -161,16 +161,16 @@ claims:
     preregistration_lock_commit: "d110407"
     data_provenance_path: "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
     adversarial_review_verdict: CONFIRMED
-    replication_status: NOT_SUBMITTED
-    replication_gate_report_path: null
+    replication_status: REPLICATION_PASSED
+    replication_gate_report_path: "02_TESTS/RH_ZETA_ZEROS/analysis/result_gate_third_dataset.json"
     promoted_to_formal_lab: false
     dependencies: []
     known_gaps:
       - "raciocinio direcional original da Secao 1 do pre-registro estava errado (previu mais runs, nao menos) -- a interpretacao mecanistica correta (correlacao negativa promove alternancia, nao persistencia) foi formulada DEPOIS de ver o resultado, o que e legitimo para INTERPRETAR um resultado ja travado e computado, mas nao deve ser confundido com ter previsto corretamente a direcao a priori"
-      - "efeito so significativo em c=0,30 apos correcao de Bonferroni -- c=0,10 e c=0,20 nao mostram efeito detectavel; a magnitude/robustez em c ainda mais estritos (c=0,40, 0,50) nao foi testada (nao estava na grade pre-declarada, testar agora seria um novo pre-registro)"
-      - "dataset secundario (zeros3.txt, regime ~10^12) reforca consistencia mas nao e um holdout selado no sentido do Gate de Replicacao -- seu conteudo ja havia sido inspecionado nesta sessao antes de qualquer pre-registro (para fins de formato/proveniencia), diferente do holdout genuinamente selado usado em DISC-COSMOLOGY-MOND-SPARC-002"
-      - "nao ha Gate de Replicacao completo acionado -- decisao de acionar (exigiria um terceiro dataset genuinamente novo, ex. zeros4/zeros5 de Odlyzko, regime ~10^21/10^22) pendente do usuario"
-      - "achado e uma confirmacao numerica de estrutura GUE ja conhecida na literatura (correlacao serial negativa entre gaps), nao uma descoberta matematica nova -- nao seria promovido a 04_FORMAL_RESEARCH_LAB mesmo com Gate completo, ja que nao ha teorema novo a extrair, apenas verificacao numerica de fato ja estabelecido"
+      - "efeito so significativo em c=0,30 apos correcao de Bonferroni em TODOS os tres datasets (primario, secundario, terceiro do Gate) -- c=0,10 e c=0,20 nao mostram efeito detectavel; magnitude/robustez em c ainda mais estritos (c=0,40, 0,50) nao foi testada (nao estava na grade pre-declarada)"
+      - "achado e uma confirmacao numerica de estrutura GUE ja conhecida na literatura (correlacao serial negativa entre gaps), nao uma descoberta matematica nova -- nao promovido a 04_FORMAL_RESEARCH_LAB apesar do REPLICATION_PASSED, ja que nao ha teorema novo a extrair, apenas verificacao numerica de fato ja estabelecido, confirmado pelo proprio adversario de nulo do Gate"
+      - "adversario de nulo do Gate encontrou que o padrao de supressao de runs e uma consequencia GENERICA de correlacao serial negativa (reproduzido por simulacao sintetica AR(1)/copula Gaussiana sem nenhum conteudo de zeta) -- a alegacao substantiva especifica sobre zeta e apenas 'gaps de zeta tem correlacao serial negativa' (ja bem estabelecido na literatura GUE), nao que a estatistica de runs em si seja unicamente reveladora sobre zeta"
+      - "nenhuma publicacao anterior encontrada implementando esta estatistica exata de runs via teste de permutacao sobre gaps de zeta (busca de literatura do adversario de nulo do Gate) -- o metodo e novo mesmo que o mecanismo subjacente (repulsao de nivel GUE) seja classico"
     counterevidence: []
     prohibited_claims:
       - qualquer confirmacao ou refutacao da conjectura arXiv:2412.15481
@@ -178,11 +178,13 @@ claims:
         finito; este teste avalia apenas uma pergunta proxy
       - qualquer alegacao de progresso sobre a Hipotese de Riemann
       - descoberta matematica nova -- a correlacao serial negativa entre
-        gaps de zeta ja e conhecida na literatura GUE padrao
+        gaps de zeta ja e conhecida na literatura GUE padrao; o proprio
+        Gate confirmou que o padrao de runs e generico a qualquer
+        sequencia com a mesma correlacao serial, nao especifico de zeta
       - peer review formal ou publicacao -- este e um achado computacional
         interno, nao um artigo revisado
-      - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
-        Replicacao completo -- replication_status e NOT_SUBMITTED
+      - promocao a 04_FORMAL_RESEARCH_LAB -- apesar do REPLICATION_PASSED,
+        promoted_to_formal_lab permanece false (ver known_gaps)
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

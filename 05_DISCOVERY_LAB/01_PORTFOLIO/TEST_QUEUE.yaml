@@ -237,14 +237,17 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-RH-REAL-001 (linha guarda-chuva; este e o primeiro sub-teste pre-registrado)"
-    status: ADVERSARIALLY_REVIEWED
+    status: REPLICATION_PASSED
     existing_assets:
       - "02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md"
       - "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
+      - "02_TESTS/RH_ZETA_ZEROS/data/zeros4.txt"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/run_preregistered_analysis.py"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/result_primary.json"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/adversarial_reproduction.py"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/result_adversarial.json"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/gate_third_dataset_replication.py"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/result_gate_third_dataset.json"
     description: >
       Pergunta proxy falsificavel motivada pela questao aberta arXiv:2412.15481
       (existem infinitos runs de r gaps consecutivos normalizados >= c?
@@ -299,22 +302,62 @@ queue:
       c=0,30, dando mais poder para distinguir ordem real de ordem
       aleatoria), nao evidencia de cherry-picking -- a grade completa de
       6 celulas foi travada antes de qualquer calculo.
+    gate_replication_result: >
+      Gate de Replicacao completo acionado a pedido do usuario. Sem
+      holdout selado declarado neste pre-registro -- clausula de fallback
+      de 03_REPLICATION_GATE/PROTOCOL.md Secao 3 aplicada: checagem de
+      robustez contra uma terceira fonte de dado genuinamente nova
+      (zeros4.txt, regime de altura ~10^21, ~9 ordens de magnitude acima
+      do secundario e ~15 acima do primario, nunca baixado nem inspecionado
+      nesta sessao antes desta etapa). Terceiro agente independente
+      (nao participou da analise primaria nem da primeira reexecucao
+      adversarial): (1) baixou e verificou proveniencia do zeros4.txt por
+      conta propria (fetch direto, checksum, verificacao do valor do
+      primeiro zero contra o proprio cabecalho do arquivo -- adicionado a
+      data/PROVENANCE.md); (2) implementacao nova, escrita antes de ler
+      qualquer script anterior -- pegou e corrigiu por conta propria um
+      risco de cancelamento catastrofico de ponto flutuante ao formar
+      gamma=base+offset com base de 21 digitos (gaps computados
+      diretamente dos offsets brutos, nao por subtracao de gammas ja
+      somados); (3) rodou a MESMA grade travada (c em {0,10;0,20;0,30} x
+      r em {2;3}, 10.000 permutacoes, Bonferroni) sobre zeros4.txt --
+      MESMO padrao replicado: c=0,30 r=2 p=0,00100, c=0,30 r=3 p=0,00120,
+      ambos significativos na direcao inversa; c<=0,20 nao significativo.
+      Correlacao posicao-vs-gap ~-2,5x10^-4 -- artefato de deriva
+      descartado tambem neste dataset. (4) Adversario de nulo dedicado:
+      descartou artefato de precisao/truncamento (apenas 38 de 99.999
+      gaps do primario ficam a 0,001 do limiar c=0,30; erro de
+      truncamento verdadeiro ~3x10^-9, e truncamento afeta identicamente
+      real e permutado, cancelando da comparacao por construcao); buscou
+      na literatura e nao encontrou publicacao previa com esta estatistica
+      exata de runs via permutacao (mecanismo subjacente -- correlacao
+      serial negativa GUE -- e classico, mas esta forma de teste nao);
+      simulacao sintetica AR(1)/copula Gaussiana com a MESMA correlacao
+      de lag-1 (-0,349 vs -0,357 real) mas SEM nenhum conteudo de zeta
+      reproduziu o mesmo padrao -- confirma que o efeito e consequencia
+      generica de correlacao serial negativa (nao um artefato numerico,
+      nem circular, nem exclusivo de zeta) -- a alegacao substantiva
+      sempre foi "gaps de zeta SAO correlacionados negativamente" (ja
+      bem estabelecido), e este teste de runs e uma segunda assinatura
+      estatistica independente disso, nao uma alegacao de que o proprio
+      teste de runs seja unicamente revelador. VEREDITO DO GATE:
+      REPLICATION_PASSED -- os quatro requisitos satisfeitos e o terceiro
+      dataset confirma o padrao a ~15 ordens de magnitude de distancia do
+      dataset primario.
     next_action: >
-      Resultado confirmado por reexecucao adversarial, ja com
-      consistencia cruzada entre dois datasets reais disjuntos (primario
-      + secundario) desde o desenho do proprio pre-registro. Decisao
-      pendente do usuario: acionar o Gate de Replicacao completo
-      (03_REPLICATION_GATE/PROTOCOL.md -- exigiria um TERCEIRO dataset
-      genuinamente novo, ex. zeros4.txt/zeros5.txt de Odlyzko, regime
-      ~10^21/10^22, ainda nao baixados nesta trilha) ou registrar o
-      achado no nivel de confianca atual (ADVERSARIALLY_REVIEWED,
-      replication_status NOT_SUBMITTED).
+      Nenhuma pendente neste teste. REPLICATION_PASSED, mas
+      promoted_to_formal_lab permanece false (RESEARCH_PIPELINE.md --
+      confirmacao numerica de estrutura GUE ja conhecida na literatura,
+      nao ha teorema novo a extrair). Escolher proxima linha/sub-teste
+      (outro candidato de RH-REAL, ou DISC-TRI-RG-001).
     stop_condition: >
       reformular a grade de c/r, o modelo nulo, ou o criterio de
       agregacao depois de ver os resultados; alegar confirmacao/refutacao
       da conjectura arXiv:2412.15481 em si a partir deste teste proxy;
       alegar progresso sobre RH; interpretar qualquer resultado da grade
-      secundaria (zeros3.txt) como parte do criterio de decisao primario.
+      secundaria (zeros3.txt) como parte do criterio de decisao primario;
+      alegar que o REPLICATION_PASSED e uma descoberta matematica nova em
+      vez de confirmacao numerica de estrutura GUE ja conhecida.
 
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"

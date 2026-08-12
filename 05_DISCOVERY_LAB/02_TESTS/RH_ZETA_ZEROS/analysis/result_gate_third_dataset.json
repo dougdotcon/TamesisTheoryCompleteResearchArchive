@@ -1,0 +1,128 @@
+{
+  "test_id": "DISC-RH-ZERO-GAP-RUNS-001",
+  "role": "REPLICATION_GATE_THIRD_DATASET_ROBUSTNESS_CHECK",
+  "gate_requirement_satisfied": "PROTOCOL.md Section 3 fallback clause (no sealed holdout declared at pre-registration time; formal robustness check against an additional, previously-untouched data source, documented explicitly as such)",
+  "dataset": "zeros4.txt",
+  "dataset_description": "Odlyzko zeta_tables/zeros4: zeros #10^21+1 through 10^21+10^4, offsets from base gamma = 144176897509546973000",
+  "height_regime_gamma_approx": 1.4417689750954697e+20,
+  "comparison_regimes": {
+    "primary_zeros1": "gamma up to ~75000",
+    "secondary_zeros3": "gamma ~ 2.68e11",
+    "this_gate_zeros4": "gamma ~ 1.44e20"
+  },
+  "parse_metadata": {
+    "base": 144176897509546973000,
+    "n_offsets_parsed": 10000,
+    "first_data_line_no": 10,
+    "last_data_line_no": 10009,
+    "total_lines_in_file": 10009,
+    "n_header_lines_skipped": 5
+  },
+  "gap_stats": {
+    "n_gaps": 9999,
+    "mean": 0.9999699077245581,
+    "std": 0.4237110393671333,
+    "min": 0.037604769672613954,
+    "max": 2.866626579779057,
+    "lag1_pearson_corr": -0.3168500156083741,
+    "position_vs_gap_pearson_corr": -0.0002539766509172886
+  },
+  "rng_seed": 20260812,
+  "n_permutations_per_cell": 10000,
+  "grid_c": [
+    0.1,
+    0.2,
+    0.3
+  ],
+  "grid_r": [
+    2,
+    3
+  ],
+  "bonferroni_threshold": 0.008333333333333333,
+  "cells": [
+    {
+      "c": 0.1,
+      "r": 2,
+      "observed_count": 9978,
+      "null_mean": 9978.013,
+      "null_std": 0.11415340555585714,
+      "p_value_real_greater": 1.0,
+      "p_value_real_lower": 0.9871012898710129,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": false,
+      "cell_verdict": "NOT_SIGNIFICANT"
+    },
+    {
+      "c": 0.1,
+      "r": 3,
+      "observed_count": 9967,
+      "null_mean": 9967.0373,
+      "null_std": 0.2516122214837745,
+      "p_value_real_greater": 1.0,
+      "p_value_real_lower": 0.976002399760024,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": false,
+      "cell_verdict": "NOT_SIGNIFICANT"
+    },
+    {
+      "c": 0.2,
+      "r": 2,
+      "observed_count": 9832,
+      "null_mean": 9832.7055,
+      "null_std": 0.8372393624286903,
+      "p_value_real_greater": 1.0,
+      "p_value_real_lower": 0.49335066493350666,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": false,
+      "cell_verdict": "NOT_SIGNIFICANT"
+    },
+    {
+      "c": 0.2,
+      "r": 3,
+      "observed_count": 9749,
+      "null_mean": 9750.101,
+      "null_std": 1.849864589638928,
+      "p_value_real_greater": 0.7583241675832417,
+      "p_value_real_lower": 0.41755824417558246,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": false,
+      "cell_verdict": "NOT_SIGNIFICANT"
+    },
+    {
+      "c": 0.3,
+      "r": 2,
+      "observed_count": 9484,
+      "null_mean": 9490.6244,
+      "null_std": 2.5123544017514727,
+      "p_value_real_greater": 1.0,
+      "p_value_real_lower": 0.000999900009999,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": true,
+      "cell_verdict": "INVERSE_SIGNAL_LOW"
+    },
+    {
+      "c": 0.3,
+      "r": 3,
+      "observed_count": 9231,
+      "null_mean": 9245.7433,
+      "null_std": 5.514272854148587,
+      "p_value_real_greater": 0.9993000699930007,
+      "p_value_real_lower": 0.0011998800119988001,
+      "bonferroni_threshold": 0.008333333333333333,
+      "significant_greater": false,
+      "significant_lower": true,
+      "cell_verdict": "INVERSE_SIGNAL_LOW"
+    }
+  ],
+  "n_cells_support_h_high": 0,
+  "n_cells_inverse_signal": 2,
+  "aggregate_verdict_locked_criteria": "INVERSE_SIGNAL",
+  "c030_both_r_inverse_significant": true,
+  "matches_primary_and_secondary_pattern": true,
+  "elapsed_seconds": 5.637383699417114
+}

@@ -89,23 +89,57 @@ avaliado como assinatura coerente de poder estatístico (fração de gaps
 "pequenos" cresce de 0,1% para 2,1% entre c=0,10 e c=0,30), não
 cherry-picking — a grade completa foi travada antes de qualquer cálculo.
 
+## Gate de Replicação completo (acionado a pedido do usuário)
+
+Sem holdout selado declarado neste pré-registro — cláusula de fallback de
+`03_REPLICATION_GATE/PROTOCOL.md` Seção 3 aplicada: checagem de robustez
+contra uma terceira fonte de dado genuinamente nova. Terceiro agente
+independente (nunca tocou código/resultados anteriores):
+
+1. **Proveniência**: baixou `zeros4.txt` (Odlyzko, zeros #10²¹+1..+10⁴,
+   γ≈1,44×10²⁰ — ~9 ordens de magnitude acima do secundário e ~15 acima
+   do primário) por conta própria, fetch direto, checksum, verificação
+   cruzada do primeiro valor contra o próprio cabeçalho do arquivo.
+2. **Implementação nova**: pegou e corrigiu por conta própria um risco
+   real de cancelamento catastrófico de ponto flutuante ao formar
+   `gamma=base+offset` com uma base de 21 dígitos (não representável
+   exatamente em float64) — gaps computados diretamente dos offsets
+   brutos.
+3. **Mesma grade travada rodada sobre `zeros4.txt`**: mesmo padrão
+   replicado — `c=0,30` significativo em ambas r=2 (p=0,00100) e r=3
+   (p=0,00120), `c≤0,20` não significativo. Artefato de deriva descartado
+   também aqui (correlação posição-vs-gap ≈ −2,5×10⁻⁴).
+4. **Adversário de nulo dedicado**: descartou artefato de
+   precisão/truncamento (matematicamente incapaz de afetar a comparação
+   real-vs-permutado, já que afeta os dois lados igualmente); não achou
+   publicação prévia com esta estatística exata de runs via permutação;
+   **achado importante**: uma simulação sintética AR(1)/cópula Gaussiana
+   com a mesma correlação de lag-1 (−0,349) mas **sem nenhum conteúdo de
+   zeta** reproduziu o mesmo padrão — confirma que o efeito é consequência
+   **genérica** de correlação serial negativa, não um artefato numérico
+   nem circular nem exclusivo de zeta. Isso não enfraquece o achado: a
+   alegação substantiva sempre foi "gaps de zeta têm correlação serial
+   negativa" (já bem estabelecido na literatura GUE), e este teste de
+   runs é uma segunda assinatura estatística independente disso.
+
+**Veredito do Gate: `REPLICATION_PASSED`.** Os quatro requisitos
+satisfeitos, padrão confirmado a ~15 ordens de magnitude de distância do
+dataset primário.
+
 ## Estado final
 
-`DISC-CLAIM-003` registrado: `evidence_level: preregistered_falsified`
-(a direção prevista por H foi falsificada — nota explícita de que isso
-NÃO significa "sem efeito": um efeito real, forte e replicado foi
+`DISC-CLAIM-003`: `evidence_level: preregistered_falsified` (direção
+prevista por H falsificada — não significa "sem efeito": um efeito real,
+forte e replicado em TRÊS datasets/regimes de altura disjuntos foi
 encontrado na direção oposta). `adversarial_review_verdict: CONFIRMED`.
-`replication_status: NOT_SUBMITTED` — Gate de Replicação completo ainda
-não acionado (exigiria um terceiro dataset genuinamente novo, ex.
-`zeros4.txt`/`zeros5.txt` de Odlyzko, regime ~10²¹/10²², ainda não
-baixados). `promoted_to_formal_lab: false` — este é uma confirmação
-numérica de estrutura GUE já conhecida na literatura (correlação serial
-negativa entre gaps de zeta), não uma descoberta matemática nova; não
-haveria teorema a extrair mesmo com Gate completo.
+`replication_status: REPLICATION_PASSED`. `promoted_to_formal_lab: false`
+— mantido `false` apesar do Gate ter passado, porque o próprio adversário
+de nulo do Gate confirmou que é confirmação numérica de estrutura GUE já
+conhecida (e genérica a qualquer sequência com a mesma correlação serial),
+não descoberta matemática nova — não há teorema a extrair.
 
 ## Próxima decisão (não tomada nesta sessão)
 
-Acionar o Gate de Replicação completo para `DISC-CLAIM-003` (com um
-terceiro dataset em regime de altura ainda maior), ou considerar este
-resultado suficientemente estabelecido no nível atual e seguir para outro
-candidato da linha RH-REAL ou para `DISC-TRI-RG-001`.
+Escolher outro candidato da Fase 0 de RH-REAL (item 7, constante de gaps
+pequenos de Inoue 2026 — ainda sem desenho falsificável adequado) ou
+seguir para `DISC-TRI-RG-001` (ainda não iniciado).

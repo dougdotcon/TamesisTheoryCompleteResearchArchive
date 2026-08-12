@@ -61,7 +61,8 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-001 (fechado CLOSED_INCONCLUSIVE -- teste de diferenca de grupo, metodologicamente distinto deste)"
-    status: ADVERSARIALLY_REVIEWED
+    status: REPLICATION_FAILED
+    replication_gate_outcome: REPLICATION_FAILED_INCONCLUSIVE
     existing_assets:
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
@@ -70,6 +71,30 @@ queue:
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_primary.json"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/adversarial_reproduction.py"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_adversarial.json"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/gate_holdout_replication.py"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_gate_holdout.json"
+    gate_holdout_result: >
+      Terceiro agente independente, provenance re-auditada do zero
+      (checksums batem: SPARC_Lelli2016c.mrt e discovery_holdout_split.json
+      identicos aos documentados; 175/175 correspondencia catalogo<->rotmod
+      confirmada), abriu o holdout selado (55 galaxias, 1062 pontos, 0
+      excluidos) pela primeira vez e reexecutou EXATAMENTE a estatistica da
+      Secao 4 do pre-registro (nenhuma mudanca de criterio). Codigo proprio
+      validado reproduzindo a amostra de descoberta a 5 casas decimais
+      antes de aplicar no holdout. g-dagger ajustado no holdout = 4,1518e-10
+      m/s^2 -- MUITO diferente do valor de descoberta (1,1977e-10) e da
+      literatura. IC bootstrap 95% = [8,02e-11, 9,07e-10] -- largo o
+      suficiente para conter TANTO a0_A quanto a0_B
+      (verdict_pattern_holdout: BOTH_SURVIVE_INCONCLUSIVE). Diagnostico
+      informativo (nao parte do criterio): 3 de 55 galaxias
+      (UGC06787, UGC11914, UGC02953) respondem por 91,7% da soma pooled de
+      g_bar^2 no holdout -- concentracao de leverage muito maior que na
+      amostra de descoberta (58,9% nas top-3 la), o que explica a
+      discrepancia sem indicar erro de codigo ou dado. Gate verdict oficial:
+      REPLICATION_FAILED_INCONCLUSIVE -- nao contradiz o resultado de
+      descoberta (H_B nao passou a sobreviver), mas tambem nao o confirma
+      de forma independente. O achado de descoberta (H_A sobrevive/H_B
+      falsificada) deve ser tratado como SUGESTIVO, nao confirmado.
     result_summary: >
       g-dagger ajustado (120 galaxias de descoberta, dado real, holdout
       selado intocado) = 1,1977e-10 m/s^2 (0,2% do valor de McGaugh et
@@ -101,14 +126,16 @@ queue:
       escolhas de implementacao razoaveis -- nao e um resultado fragil
       como o piloto SPARC-001 (p=0,049).
     next_action: >
-      Resultado forte o suficiente para justificar o Gate de Replicacao
-      completo (03_REPLICATION_GATE/PROTOCOL.md) -- abertura do holdout
-      selado (55 galaxias) por um TERCEIRO agente independente (nao o que
-      rodou a analise primaria, nem o que fez a primeira reexecucao
-      adversarial), mais adversario de nulo dedicado
-      (METHODOLOGY_EXTENSIONS.md Sec.5). Ainda nao acionado nesta sessao
-      -- reportado ao usuario antes de prosseguir, dado que abrir o
-      holdout e um recurso de uso unico.
+      Gate de Replicacao acionado e concluido (holdout aberto, ver
+      gate_holdout_result acima) -- REPLICATION_FAILED_INCONCLUSIVE.
+      Adversario de nulo dedicado (METHODOLOGY_EXTENSIONS.md Sec.5) ainda
+      em andamento nesta sessao; resultado final sera integrado ao fechar.
+      Nao ha promocao a 04_FORMAL_RESEARCH_LAB -- este e um achado
+      empirico, sem nucleo matematico demonstravel
+      (RESEARCH_PIPELINE.md), e mesmo se fosse, o Gate nao passou.
+      Reabrir este teste especifico exigiria um holdout novo (este ja foi
+      consumido) -- um eventual teste de sequencia usaria um novo split,
+      registrado como novo pre-registro.
     pivot_note: >
       Desenho original (SPARC como comparacao preditiva "Tamesis vs.
       modelo concorrente nomeado") abandonado ANTES de qualquer

@@ -61,11 +61,26 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-001 (fechado CLOSED_INCONCLUSIVE -- teste de diferenca de grupo, metodologicamente distinto deste)"
-    status: CANDIDATE_LOCKED
+    status: ANALYZED
     existing_assets:
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/discovery_holdout_split.json"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/run_preregistered_analysis.py"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_primary.json"
+    preliminary_result_note: >
+      Ajuste inicial de g-dagger via scipy.optimize.curve_fit sem
+      reescala falhou silenciosamente (Jacobiano numerico underflow em
+      escala absoluta ~1e-10, retornava o proprio p0 disfarcado de
+      "convergencia"). Corrigido reescalando para unidades de 1e-10 antes
+      do ajuste, com verificacao de convergencia por dois pontos de
+      partida distintos. Resultado apos a correcao: g-dagger=1,1977e-10
+      m/s^2 (0,2% do valor de McGaugh et al. 2016, checagem de sanidade
+      passa), IC 95% bootstrap = [6,76e-11, 2,78e-10]. a0_A (Holographic
+      Bridge, ~1,08e-10) DENTRO do IC -- H_A sobrevive. a0_B (MOND
+      Emergence, ~6,80e-10) FORA do IC -- H_B falsificada. Aguardando
+      reexecucao adversarial independente antes de qualquer registro em
+      CLAIM_LEDGER.yaml.
     pivot_note: >
       Desenho original (SPARC como comparacao preditiva "Tamesis vs.
       modelo concorrente nomeado") abandonado ANTES de qualquer

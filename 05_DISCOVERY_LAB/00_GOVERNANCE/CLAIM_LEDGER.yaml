@@ -41,6 +41,57 @@ claims:
         interno, nao um artigo revisado
       - EFE CONFIRMED (ou qualquer linguagem categorica) -- o resultado
         correto e reportado como INCONCLUSIVO / FRAGIL
+
+  - claim_id: DISC-CLAIM-002
+    short_name: tamesis-internal-a0-derivation-holographic-bridge-survives-mond-emergence-falsified
+    test_id: DISC-COSMOLOGY-MOND-SPARC-002
+    exact_statement: >
+      Das duas derivacoes internas conflitantes de a0 documentadas em
+      01_TAMESIS_CORE (nunca antes testadas uma contra a outra nem contra
+      dado real): (A) a0=cH0/(2pi) ("Ponte Holografica",
+      Operational_Derivation/03_Holographic_Bridge/mond_derivation_proof.py:28,
+      a0_A~=1,0824e-10 m/s^2) e (B) a0=cH0 ("MOND Emergence",
+      Universe_Equation/02_MOND_Emergence/index.html:282, a0_B~=6,8009e-10
+      m/s^2 -- alegacao numerica da propria linha 282, "~1,2e-10", ja
+      aritmeticamente incorreta por fator ~5,7 independente de qualquer
+      dado). Ajustando g-dagger diretamente ao dado real SPARC (120
+      galaxias de descoberta, 2327 pontos, holdout de 55 galaxias
+      permanece selado): g-dagger=1,1977e-10 m/s^2 (0,2% do valor de
+      McGaugh et al. 2016), IC bootstrap 95% = [6,76e-11, 2,78e-10]. a0_A
+      cai DENTRO do IC (H_A sobrevive); a0_B cai FORA por fator ~2,5x
+      acima do limite superior (H_B falsificada). Resultado reproduzido
+      de forma independente (agente separado, codigo proprio escrito
+      antes de ler o script primario) com diferenca de 0,004% no ponto
+      estimado, robusto a ajuste em espaco log e a exclusao do pior
+      outlier.
+    evidence_level: preregistered_falsified
+    preregistration_path: "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
+    preregistration_lock_commit: "d374210"
+    data_provenance_path: "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
+    adversarial_review_verdict: CONFIRMED
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies: []
+    known_gaps:
+      - "holdout selado (55 galaxias) nao aberto -- este resultado usa apenas a amostra de descoberta (120 galaxias); Gate de Replicacao completo ainda nao acionado"
+      - "ajuste em espaco linear (nao o metodo exato do paper original, que usa peso/metodo mais sofisticado) -- scatter residual ~0,20 dex vs ~0,11-0,13 dex publicado; nao afeta o veredito binario (checado por robustez em espaco log)"
+      - "a0_A sobrevive dentro do IC nao significa que a derivacao 'Ponte Holografica' esteja provada correta -- apenas que nao foi falsificada por este teste; a tolerancia de 15% ja embutida no proprio script mond_derivation_proof.py e mais generosa que o IC empirico aqui obtido"
+    counterevidence: []
+    prohibited_claims:
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
+        a partir deste teste isolado -- este teste e interno a Tamesis,
+        nao compara Tamesis a nenhum modelo concorrente externo
+      - a derivacao MOND Emergence (a0=cH0) permanece uma tese valida do
+        corpo teorico Tamesis -- este teste falsifica especificamente
+        essa derivacao contra dado real; ela deveria ser corrigida ou
+        retirada em 01_TAMESIS_CORE, nao apenas notada aqui
+      - peer review formal ou publicacao -- este e um achado computacional
+        interno, nao um artigo revisado
+      - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
+        Replicacao completo -- holdout permanece selado, replication_status
+        e NOT_SUBMITTED
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

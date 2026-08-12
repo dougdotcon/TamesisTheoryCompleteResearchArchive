@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | nenhum pré-registrado. 3 linhas candidatas em `CANDIDATE_FORMULATING`: `DISC-COSMOLOGY-MOND-SPARC-002`, `DISC-RH-REAL-001`, `DISC-TRI-RG-001` |
-| Fase | Piloto 001 concluído (`CLOSED_INCONCLUSIVE`); arquitetura de três motores + seis extensões de metodologia adotadas (`DISC-DEC-003`); aguardando priorização do usuário entre as 3 linhas candidatas para aprofundamento |
-| Próxima ação obrigatória | Para a linha priorizada: resolver o `next_action` declarado na entrada correspondente de `01_PORTFOLIO/TEST_QUEUE.yaml` (formulação de hipótese + localização de dado real) antes de qualquer pré-registro |
-| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões de metodologia) |
-| Claims fechados | 1 (`DISC-CLAIM-001`, evidence_level: `preregistered_inconclusive`) |
+| Teste ativo | `DISC-COSMOLOGY-MOND-SPARC-002` (pivotado, `ADVERSARIALLY_REVIEWED`) — as outras 2 linhas candidatas (`DISC-RH-REAL-001`, `DISC-TRI-RG-001`) seguem `CANDIDATE_FORMULATING` |
+| Fase | Achado forte e robusto: uma das duas derivações internas conflitantes de `a₀` do corpo teórico Tamesis (`a₀=cH₀`, "MOND Emergence") foi falsificada contra dado real SPARC; a outra (`a₀=cH₀/2π`, "Ponte Holográfica") sobreviveu. Reproduzido de forma independente (0,004% de diferença). Holdout selado (55 galáxias) ainda não aberto |
+| Próxima ação obrigatória | Decisão do usuário: acionar o Gate de Replicação completo (`03_REPLICATION_GATE/PROTOCOL.md` — terceiro agente independente, abertura do holdout, adversário de nulo dedicado) para este resultado, ou seguir para outra linha |
+| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
+| Claims fechados/registrados | 2 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_falsified` para H_B, `adversarial_review_verdict: CONFIRMED`) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)

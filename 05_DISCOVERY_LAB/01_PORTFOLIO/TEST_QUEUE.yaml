@@ -61,26 +61,54 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-001 (fechado CLOSED_INCONCLUSIVE -- teste de diferenca de grupo, metodologicamente distinto deste)"
-    status: ANALYZED
+    status: ADVERSARIALLY_REVIEWED
     existing_assets:
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/discovery_holdout_split.json"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/run_preregistered_analysis.py"
       - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_primary.json"
-    preliminary_result_note: >
-      Ajuste inicial de g-dagger via scipy.optimize.curve_fit sem
-      reescala falhou silenciosamente (Jacobiano numerico underflow em
-      escala absoluta ~1e-10, retornava o proprio p0 disfarcado de
-      "convergencia"). Corrigido reescalando para unidades de 1e-10 antes
-      do ajuste, com verificacao de convergencia por dois pontos de
-      partida distintos. Resultado apos a correcao: g-dagger=1,1977e-10
-      m/s^2 (0,2% do valor de McGaugh et al. 2016, checagem de sanidade
-      passa), IC 95% bootstrap = [6,76e-11, 2,78e-10]. a0_A (Holographic
-      Bridge, ~1,08e-10) DENTRO do IC -- H_A sobrevive. a0_B (MOND
-      Emergence, ~6,80e-10) FORA do IC -- H_B falsificada. Aguardando
-      reexecucao adversarial independente antes de qualquer registro em
-      CLAIM_LEDGER.yaml.
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/adversarial_reproduction.py"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_adversarial.json"
+    result_summary: >
+      g-dagger ajustado (120 galaxias de descoberta, dado real, holdout
+      selado intocado) = 1,1977e-10 m/s^2 (0,2% do valor de McGaugh et
+      al. 2016 -- checagem de sanidade passa). IC bootstrap 95% (1000
+      replicas por galaxia) = [6,76e-11, 2,78e-10]. a0_A (Holographic
+      Bridge, cH0/2pi ~= 1,08e-10) DENTRO do IC -- H_A sobrevive. a0_B
+      (MOND Emergence, cH0 ~= 6,80e-10) FORA do IC por fator ~2,5x acima
+      do limite superior -- H_B falsificada. Bug numerico real encontrado
+      e corrigido durante a propria execucao (curve_fit sem reescala
+      "convergia" silenciosamente para o proprio p0 em escala absoluta
+      ~1e-10 -- verificado e corrigido antes de aceitar qualquer
+      resultado).
+    adversarial_verdict: CONFIRMED
+    adversarial_verdict_detail: >
+      Reexecucao independente (agente separado, codigo proprio, escrito
+      ANTES de ler o script/resultado primario) reproduziu N de pontos
+      (2327), N excluidos (2), e g-dagger (1,19762e-10 vs 1,19767e-10,
+      0,004% de diferenca) -- e redescobriu, de forma independente, o
+      mesmo bug de underflow numerico antes de corrigi-lo do mesmo jeito.
+      Nenhum bug de implementacao encontrado (razoes massa-luz,
+      quadratura com preservacao de sinal, conversao de unidades,
+      bootstrap em nivel de galaxia -- todos conferidos linha a linha).
+      Holdout confirmado intocado nos dois scripts (grep + leitura de
+      codigo). Checagens de robustez: ajuste em espaco log (informativo,
+      nao pre-registrado) da g-dagger=9,44e-11, mais baixo mas H_B
+      continua falsificada por margem grande (~7x fora); excluir a
+      galaxia de pior residuo (UGC02455) desloca o IC minimamente,
+      veredito identico. Falsificacao de H_B e decisiva e robusta a
+      escolhas de implementacao razoaveis -- nao e um resultado fragil
+      como o piloto SPARC-001 (p=0,049).
+    next_action: >
+      Resultado forte o suficiente para justificar o Gate de Replicacao
+      completo (03_REPLICATION_GATE/PROTOCOL.md) -- abertura do holdout
+      selado (55 galaxias) por um TERCEIRO agente independente (nao o que
+      rodou a analise primaria, nem o que fez a primeira reexecucao
+      adversarial), mais adversario de nulo dedicado
+      (METHODOLOGY_EXTENSIONS.md Sec.5). Ainda nao acionado nesta sessao
+      -- reportado ao usuario antes de prosseguir, dado que abrir o
+      holdout e um recurso de uso unico.
     pivot_note: >
       Desenho original (SPARC como comparacao preditiva "Tamesis vs.
       modelo concorrente nomeado") abandonado ANTES de qualquer

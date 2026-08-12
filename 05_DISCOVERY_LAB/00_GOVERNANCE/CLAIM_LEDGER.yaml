@@ -118,6 +118,71 @@ claims:
       - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
         Replicacao completo bem-sucedido -- replication_status e
         REPLICATION_FAILED (inconclusivo, nao contraditorio)
+
+  - claim_id: DISC-CLAIM-003
+    short_name: zeta-zero-gap-runs-inverse-signal-real-lt-permuted-null
+    test_id: DISC-RH-ZERO-GAP-RUNS-001
+    exact_statement: >
+      Motivado pela questao aberta arXiv:2412.15481 (existem infinitos
+      runs de r gaps normalizados consecutivos >= c entre zeros de zeta?
+      -- nao testavel com dado finito), este teste comparou a contagem de
+      tais runs na sequencia REAL ordenada por altura de zeros de zeta
+      (dado real, tabelas de Odlyzko) contra um modelo nulo de
+      reordenacao aleatoria do mesmo multiconjunto de gaps (teste de
+      permutacao, 10.000 replicas, grade pre-declarada c em
+      {0,10;0,20;0,30} x r em {2;3}, Bonferroni). A hipotese pre-registrada
+      previa MAIS runs no dado real (motivada por correlacao de Pearson
+      negativa entre gaps consecutivos, -0,357, achado exploratorio da
+      Fase 0). O resultado real foi o OPOSTO do previsto: em c=0,30 (r=2
+      e r=3), a contagem real de runs ficou significativamente ABAIXO da
+      distribuicao nula (p~=0,0001, muito abaixo do limiar de Bonferroni
+      0,00833) tanto no dataset primario (100k zeros, alturas ate ~75.000)
+      quanto no secundario (10k zeros, regime de altura ~10^12,
+      completamente disjunto) -- consistencia cruzada de altura. Em
+      c=0,10 e c=0,20 nenhum efeito significativo apos correcao. Reexecucao
+      adversarial independente (codigo proprio, seed distinta) reproduziu
+      as 12 contagens de runs relatadas BIT A BIT, descartou artefato de
+      deriva/tendencia (correlacao posicao-vs-gap ~5x10^-5, indistinguivel
+      de zero), e confirmou o padrao de crescimento do efeito com c como
+      assinatura de poder estatistico coerente, nao cherry-picking.
+    evidence_level: preregistered_falsified
+    evidence_level_note: >
+      "Falsificado" refere-se especificamente a direcao prevista pela
+      hipotese H (mais runs no dado real). O teste NAO produziu um
+      resultado nulo/sem-efeito -- encontrou um efeito real,
+      estatisticamente forte e replicado (INVERSE_SIGNAL): o dado real
+      tem MENOS runs de gaps grandes consecutivos que a reordenacao
+      aleatoria, nao mais. Isto e consistente com a correlacao serial
+      negativa entre gaps de zeta ja documentada na literatura GUE
+      (Montgomery, Odlyzko) -- nao e uma descoberta matematica nova, e
+      uma confirmacao numerica independente de estrutura ja conhecida,
+      detectada por este metodo especifico nesta amostra especifica.
+    preregistration_path: "02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md"
+    preregistration_lock_commit: "d110407"
+    data_provenance_path: "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
+    adversarial_review_verdict: CONFIRMED
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies: []
+    known_gaps:
+      - "raciocinio direcional original da Secao 1 do pre-registro estava errado (previu mais runs, nao menos) -- a interpretacao mecanistica correta (correlacao negativa promove alternancia, nao persistencia) foi formulada DEPOIS de ver o resultado, o que e legitimo para INTERPRETAR um resultado ja travado e computado, mas nao deve ser confundido com ter previsto corretamente a direcao a priori"
+      - "efeito so significativo em c=0,30 apos correcao de Bonferroni -- c=0,10 e c=0,20 nao mostram efeito detectavel; a magnitude/robustez em c ainda mais estritos (c=0,40, 0,50) nao foi testada (nao estava na grade pre-declarada, testar agora seria um novo pre-registro)"
+      - "dataset secundario (zeros3.txt, regime ~10^12) reforca consistencia mas nao e um holdout selado no sentido do Gate de Replicacao -- seu conteudo ja havia sido inspecionado nesta sessao antes de qualquer pre-registro (para fins de formato/proveniencia), diferente do holdout genuinamente selado usado em DISC-COSMOLOGY-MOND-SPARC-002"
+      - "nao ha Gate de Replicacao completo acionado -- decisao de acionar (exigiria um terceiro dataset genuinamente novo, ex. zeros4/zeros5 de Odlyzko, regime ~10^21/10^22) pendente do usuario"
+      - "achado e uma confirmacao numerica de estrutura GUE ja conhecida na literatura (correlacao serial negativa entre gaps), nao uma descoberta matematica nova -- nao seria promovido a 04_FORMAL_RESEARCH_LAB mesmo com Gate completo, ja que nao ha teorema novo a extrair, apenas verificacao numerica de fato ja estabelecido"
+    counterevidence: []
+    prohibited_claims:
+      - qualquer confirmacao ou refutacao da conjectura arXiv:2412.15481
+        em si (runs infinitos) -- essa afirmacao nao e testavel com dado
+        finito; este teste avalia apenas uma pergunta proxy
+      - qualquer alegacao de progresso sobre a Hipotese de Riemann
+      - descoberta matematica nova -- a correlacao serial negativa entre
+        gaps de zeta ja e conhecida na literatura GUE padrao
+      - peer review formal ou publicacao -- este e um achado computacional
+        interno, nao um artigo revisado
+      - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
+        Replicacao completo -- replication_status e NOT_SUBMITTED
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

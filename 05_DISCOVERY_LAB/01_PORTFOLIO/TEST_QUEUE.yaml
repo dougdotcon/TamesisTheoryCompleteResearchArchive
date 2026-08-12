@@ -237,12 +237,14 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-RH-REAL-001 (linha guarda-chuva; este e o primeiro sub-teste pre-registrado)"
-    status: ANALYZED
+    status: ADVERSARIALLY_REVIEWED
     existing_assets:
       - "02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md"
       - "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/run_preregistered_analysis.py"
       - "02_TESTS/RH_ZETA_ZEROS/analysis/result_primary.json"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/adversarial_reproduction.py"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/result_adversarial.json"
     description: >
       Pergunta proxy falsificavel motivada pela questao aberta arXiv:2412.15481
       (existem infinitos runs de r gaps consecutivos normalizados >= c?
@@ -275,9 +277,38 @@ queue:
       mas o teste capturou corretamente um efeito real na direcao oposta,
       exatamente o cenario INVERSE_SIGNAL que o proprio pre-registro
       exigia reportar de forma proeminente, nao escondido.
+    adversarial_verdict: CONFIRMED
+    adversarial_verdict_detail: >
+      Reexecucao independente (agente separado, codigo proprio escrito
+      antes de ler o script primario, seed distinta) reproduziu as 12
+      contagens de runs relatadas (6 celulas x 2 datasets) BIT A BIT --
+      concordancia exata, nao aproximada. Nenhum bug encontrado (formula
+      de gap normalizado, contagem de runs vetorizada vs. loop ingenuo,
+      preservacao de multiconjunto na permutacao, parsing do cabecalho de
+      zeros3.txt, aplicacao do limiar de Bonferroni -- todos conferidos
+      de forma independente). Checagem de artefato de deriva/tendencia
+      (a preocupacao mais seria: um efeito de tendencia lenta ao longo da
+      faixa de altura poderia produzir o mesmo padrao estatistico por um
+      mecanismo totalmente diferente, sem relacao com correlacao
+      sequencial real): correlacao entre indice de posicao e gap
+      normalizado = ~5x10^-5 em ambos os datasets -- indistinguivel de
+      zero, artefato descartado. Padrao de crescimento do efeito com c
+      (nao significativo em 0,10, sugestivo em 0,20, forte em 0,30)
+      avaliado como assinatura estatistica coerente de poder de teste
+      (fracao de gaps "pequenos" cresce de 0,1% para 2,1% entre c=0,10 e
+      c=0,30, dando mais poder para distinguir ordem real de ordem
+      aleatoria), nao evidencia de cherry-picking -- a grade completa de
+      6 celulas foi travada antes de qualquer calculo.
     next_action: >
-      Reexecucao adversarial independente (AGENTS.md passo 7) antes de
-      qualquer registro em CLAIM_LEDGER.yaml.
+      Resultado confirmado por reexecucao adversarial, ja com
+      consistencia cruzada entre dois datasets reais disjuntos (primario
+      + secundario) desde o desenho do proprio pre-registro. Decisao
+      pendente do usuario: acionar o Gate de Replicacao completo
+      (03_REPLICATION_GATE/PROTOCOL.md -- exigiria um TERCEIRO dataset
+      genuinamente novo, ex. zeros4.txt/zeros5.txt de Odlyzko, regime
+      ~10^21/10^22, ainda nao baixados nesta trilha) ou registrar o
+      achado no nivel de confianca atual (ADVERSARIALLY_REVIEWED,
+      replication_status NOT_SUBMITTED).
     stop_condition: >
       reformular a grade de c/r, o modelo nulo, ou o criterio de
       agregacao depois de ver os resultados; alegar confirmacao/refutacao

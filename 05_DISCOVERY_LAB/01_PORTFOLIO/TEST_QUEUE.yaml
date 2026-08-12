@@ -56,38 +56,50 @@ queue:
       legados sem re-derivar do dado bruto real.
 
   - test_id: DISC-COSMOLOGY-MOND-SPARC-002
-    title: "SPARC como comparacao preditiva de modelos (nao confirmacao/refutacao de EFE)"
+    title: "PIVOTADO 2026-08-12 (DISC-DEC-004): qual derivacao interna de a0 sobrevive ao dado real SPARC"
     domain: cosmologia_observacional
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-001 (fechado CLOSED_INCONCLUSIVE -- teste de diferenca de grupo, metodologicamente distinto deste)"
-    status: CANDIDATE_FORMULATING
-    existing_assets: []
+    status: CANDIDATE_LOCKED
+    existing_assets:
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
+      - "02_TESTS/COSMOLOGY_A0_DERIVATION/data/discovery_holdout_split.json"
+    pivot_note: >
+      Desenho original (SPARC como comparacao preditiva "Tamesis vs.
+      modelo concorrente nomeado") abandonado ANTES de qualquer
+      pre-registro: investigacao do next_action original (busca dedicada
+      em 01_TAMESIS_CORE) encontrou que nao existe previsao Tamesis
+      numericamente distinta de MOND generico para dinamica galactica --
+      ver DISC-DEC-004 para o achado completo e a citacao exata dos
+      arquivos. Pivotado para um teste genuinamente Tamesis-especifico
+      que o proprio achado negativo revelou: o corpo teorico Tamesis
+      contem DUAS derivacoes internas conflitantes de a0 (fator ~2pi de
+      diferenca, uma delas ainda aritmeticamente inconsistente com sua
+      propria alegacao numerica), nunca testadas uma contra a outra.
+      Pre-registro completo em
+      02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md.
     description: >
-      Reformulacao explicita a pedido do usuario: o objetivo NAO e provar
-      Tamesis com SPARC nem confirmar/refutar EFE isoladamente. A pergunta
-      e: existe uma funcao derivada independentemente da arquitetura
-      Tamesis que preveja alguma caracteristica das curvas de rotacao FORA
-      DA AMOSTRA melhor que modelos concorrentes comparaveis reais e
-      nomeados? Se Tamesis perder essa comparacao, isso e um resultado
-      excelente -- elimina uma regiao do espaco teorico.
+      Testa qual das duas derivacoes internas de a0 documentadas em
+      01_TAMESIS_CORE (a0=cH0/(2pi), "Ponte Holografica"; a0=cH0, "MOND
+      Emergence") e compativel com g-dagger ajustado diretamente ao dado
+      real SPARC (nao ao valor de literatura citado de memoria). Split
+      discovery (120 galaxias)/holdout selado (55 galaxias) ja gerado e
+      commitado antes de qualquer analise.
     next_action: >
-      Antes de qualquer pre-registro: (1) extrair de 01_TAMESIS_CORE uma
-      previsao Tamesis quantitativa especifica (nao MOND generico -- ja
-      usado no piloto 001) para alguma observavel SPARC, com fonte exata
-      arquivo:linha; (2) nomear pelo menos um modelo concorrente real com
-      formula citavel (ex. Radial Acceleration Relation, McGaugh/Lelli/
-      Schombert 2016, DOI 10.1103/PhysRevLett.117.201101; ou um fit padrao
-      de halo NFW); (3) declarar o discriminating observable
-      (METHODOLOGY_EXTENSIONS.md Sec.1); (4) declarar split discovery/
-      development/holdout selado (Sec.6) e metrica de comparacao +
-      criterio de vitoria/morte ANTES de tocar nos dados reais ja
-      baixados (02_TESTS/COSMOLOGY_MOND_SPARC/data/, reaproveitaveis).
+      Rodar o ajuste nao-linear de g-dagger sobre a amostra de descoberta
+      (120 galaxias) exatamente como travado na Secao 4 do
+      PREREGISTRATION.md, calcular IC bootstrap de 95%, verificar se
+      a0_A e/ou a0_B caem dentro. Depois: reexecucao adversarial
+      independente (AGENTS.md passo 7).
     stop_condition: >
-      escrever pre-registro sem os quatro itens de next_action resolvidos
-      primeiro; reusar a previsao MOND generica do piloto 001 como se
-      fosse "a previsao Tamesis"; escolher o modelo concorrente ou a
-      metrica de comparacao depois de ver como os dados se comportam.
+      reformular H_A/H_B, a formula de g_bar, o split discovery/holdout,
+      ou o criterio de falsificacao depois de olhar o resultado do ajuste;
+      abrir o holdout (55 galaxias) fora do Gate de Replicacao; alegar
+      "Tamesis confirmado" a partir de qualquer resultado aqui -- o
+      maximo que este teste decide e qual das duas derivacoes internas
+      sobrevive, nao se Tamesis e verdadeiro.
 
   - test_id: DISC-RH-REAL-001
     title: "Linha RH real (riemannZeta) -- distinta de RH-TOY/Tp em 04_FORMAL_RESEARCH_LAB"

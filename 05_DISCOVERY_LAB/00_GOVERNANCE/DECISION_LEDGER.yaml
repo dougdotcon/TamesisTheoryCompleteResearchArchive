@@ -203,3 +203,89 @@ decisions:
       - "DISC-COSMOLOGY-MOND-SPARC-001 permanece CLOSED_INCONCLUSIVE, nao reaberto nem reinterpretado"
       - "toda a disciplina previa (proveniencia, stop conditions, revisao adversarial, negativos catalogados) permanece obrigatoria e inalterada"
       - "nenhum Problema do Millennium nem tese Tamesis declarados provados, confirmados, ou alcancaveis por esta decisao"
+
+  - decision_id: DISC-DEC-004
+    date: 2026-08-12
+    decision: >
+      Priorizar DISC-COSMOLOGY-MOND-SPARC-002 entre as 3 linhas candidatas
+      registradas em DISC-DEC-003, a pedido explicito do usuario ("a que
+      temos mais riquezas de ferramentas... e onde podemos fazer
+      descobertas em curto/medio prazo"). Antes de qualquer pre-registro,
+      resolver o next_action original da linha (extrair de
+      01_TAMESIS_CORE uma previsao Tamesis quantitativa distinta de MOND
+      generico, com fonte exata arquivo:linha) -- busca dedicada
+      (subagente Explore) confirmou que TAL PREVISAO NAO EXISTE. Como
+      resultado, o desenho original da linha ("Tamesis vs. modelo
+      concorrente nomeado") e abandonado ANTES de qualquer dado ser
+      tocado, e pivotado para um teste genuinamente Tamesis-especifico
+      que a propria busca revelou: qual das duas derivacoes internas
+      conflitantes de a0 documentadas em 01_TAMESIS_CORE sobrevive ao
+      contato com dado real SPARC. Pre-registro completo travado e
+      commitado em 02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md
+      antes de qualquer calculo sobre os dados.
+    rationale: >
+      Achado da busca (citacoes exatas, verificadas nesta sessao por
+      leitura direta dos arquivos, nao apenas relatadas pelo subagente):
+      (1) 01_TAMESIS_CORE/RESEARCH_RESULTS.md:34 e
+      MOND_EFE/paper_validacao_galactica/reactive_gravity.py:29-38 usam
+      a0=1,2e-10 m/s^2 citado diretamente de McGaugh et al. 2016, nao
+      derivado a um numero diferente; (2) a funcao de interpolacao usada
+      (RESEARCH_RESULTS.md:95,713; reactive_gravity.py:66-69) e a forma
+      "simple" padrao de Famaey & Binney 2005, ja estabelecida na
+      literatura MOND, nao uma forma Tamesis-original; (3) as proprias
+      notas de auditoria internas ja admitem isso --
+      03_Axiomatic_Closure/Universe_Equation/02_MOND_Emergence/AUDITORIA.md:3
+      diz textualmente que "o termo reativo reproduz uma interpolacao
+      MOND por construcao; isso nao demonstra a derivacao a partir de uma
+      acao fundamental"; (4) 02_Holographic_Uniqueness/AUDITORIA.md:3 diz
+      que a derivacao "nao demonstra unicidade entre todas as funcoes de
+      interpolacao".
+
+      Achado adicional, verificado por releitura direta e recalculo
+      numerico independente nesta sessao (nao apenas aceito do
+      subagente): o corpo teorico contem DUAS derivacoes de a0 a partir
+      de primeiros principios que nunca foram testadas uma contra a
+      outra e discordam entre si: (A)
+      Operational_Derivation/03_Holographic_Bridge/mond_derivation_proof.py:28,
+      a0=cH0/(2*pi), que com H0=70 km/s/Mpc (mesmo valor usado no
+      arquivo) da a0_A ~= 1,08e-10 m/s^2 -- proximo do valor observado;
+      (B) Universe_Equation/02_MOND_Emergence/index.html:282, a0=c^2/R_H
+      = cH0 ~= 1,2e-10 m/s^2 -- mas o recalculo direto nesta sessao
+      mostra que cH0 com H0=70 km/s/Mpc da ~6,8e-10 m/s^2, NAO ~1,2e-10:
+      a propria alegacao numerica da linha 282 e aritmeticamente
+      incorreta por um fator de ~5,7, independente de qualquer
+      comparacao com dado externo. Isso e uma inconsistencia interna do
+      proprio arquivo do repositorio, descoberta por esta sessao, nao
+      inventada.
+
+      Este achado negativo ("Tamesis nao tem previsao distinta de MOND")
+      e tratado como resultado de valor por si so (METHODOLOGY_EXTENSIONS.md
+      Sec.1, "identificabilidade") -- documentado aqui em vez de forcar
+      um pre-registro em cima de uma previsao inexistente. O pivo
+      resultante (qual derivacao interna de a0 sobrevive) reaproveita o
+      dado SPARC ja baixado e verificado (mesma proveniencia do piloto
+      001), preservando a vantagem de "ferramentas prontas" que motivou
+      a escolha desta linha entre as 3 candidatas.
+
+      Split discovery(120)/holdout selado(55) gerado com seed
+      deterministico (data de lock, 20260812) ANTES de qualquer analise,
+      por exigencia de METHODOLOGY_EXTENSIONS.md Sec.6 (ajuste de
+      parametro de modelo exige holdout selado). Formula de g_bar/g_obs e
+      razoes massa-luz (Upsilon_disk=0,50, Upsilon_bul=0,7) verificadas
+      por WebFetch/WebSearch direto de McGaugh, Lelli & Schombert 2016
+      (PRL 117, 201101, arXiv:1609.05917) nesta sessao, nao assumidas de
+      memoria.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-COSMOLOGY-MOND-SPARC-002 pivotado, CANDIDATE_FORMULATING -> CANDIDATE_LOCKED)"
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_A0_DERIVATION/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-COSMOLOGY-MOND-SPARC-002: titulo e description reescritos para refletir o pivo; pivot_note adicionado; status CANDIDATE_LOCKED"
+      - "novo diretorio 02_TESTS/COSMOLOGY_A0_DERIVATION/ com PREREGISTRATION.md, data/PROVENANCE.md, data/discovery_holdout_split.json"
+    untouched_safeguards:
+      - "nenhuma previsao Tamesis inventada -- o pivo nasce exatamente de nao ter encontrado uma, nao de contornar essa exigencia"
+      - "holdout (55 galaxias) permanece selado, nao tocado nesta sessao, so abre no Gate de Replicacao"
+      - "pre-registro travado e commitado antes de qualquer calculo de g_bar/g_obs/g-dagger sobre o dado real"
+      - "nenhuma alegacao de Tamesis confirmado/refutado a partir deste teste -- o veredito maximo e sobre qual derivacao interna sobrevive"

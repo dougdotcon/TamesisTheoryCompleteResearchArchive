@@ -1,4 +1,11 @@
 schema: tamesis-discovery-lab-test-queue/1
+# Ciclo de vida de status (ver ../00_GOVERNANCE/RESEARCH_PIPELINE.md):
+#   CANDIDATE_FORMULATING -> CANDIDATE_LOCKED -> ANALYZED ->
+#   ADVERSARIALLY_REVIEWED -> (REPLICATION_PENDING -> REPLICATION_PASSED/
+#   REPLICATION_FAILED -> PROMOTED_TO_FORMAL_LAB) | CLOSED_{REFUTED,NULL,
+#   INCONCLUSIVE,OUT_OF_DOMAIN,CONFIRMED_PENDING_REPLICATION}
+# CLOSED_* nao e derrota -- e informacao, catalogada com o mesmo peso que
+# PROMOTED_TO_FORMAL_LAB.
 queue:
   - test_id: DISC-COSMOLOGY-MOND-SPARC-001
     title: "Auditoria + refazimento do teste EFE/SPARC legado com dado real e pre-registro"
@@ -40,3 +47,104 @@ queue:
       fonte teorica exata; formular ou reformular o pre-registro depois de
       olhar os dados reais; reusar qualquer numero ou alegacao dos scripts
       legados sem re-derivar do dado bruto real.
+
+  - test_id: DISC-COSMOLOGY-MOND-SPARC-002
+    title: "SPARC como comparacao preditiva de modelos (nao confirmacao/refutacao de EFE)"
+    domain: cosmologia_observacional
+    parent_legacy: null
+    related_tests:
+      - "DISC-COSMOLOGY-MOND-SPARC-001 (fechado CLOSED_INCONCLUSIVE -- teste de diferenca de grupo, metodologicamente distinto deste)"
+    status: CANDIDATE_FORMULATING
+    existing_assets: []
+    description: >
+      Reformulacao explicita a pedido do usuario: o objetivo NAO e provar
+      Tamesis com SPARC nem confirmar/refutar EFE isoladamente. A pergunta
+      e: existe uma funcao derivada independentemente da arquitetura
+      Tamesis que preveja alguma caracteristica das curvas de rotacao FORA
+      DA AMOSTRA melhor que modelos concorrentes comparaveis reais e
+      nomeados? Se Tamesis perder essa comparacao, isso e um resultado
+      excelente -- elimina uma regiao do espaco teorico.
+    next_action: >
+      Antes de qualquer pre-registro: (1) extrair de 01_TAMESIS_CORE uma
+      previsao Tamesis quantitativa especifica (nao MOND generico -- ja
+      usado no piloto 001) para alguma observavel SPARC, com fonte exata
+      arquivo:linha; (2) nomear pelo menos um modelo concorrente real com
+      formula citavel (ex. Radial Acceleration Relation, McGaugh/Lelli/
+      Schombert 2016, DOI 10.1103/PhysRevLett.117.201101; ou um fit padrao
+      de halo NFW); (3) declarar o discriminating observable
+      (METHODOLOGY_EXTENSIONS.md Sec.1); (4) declarar split discovery/
+      development/holdout selado (Sec.6) e metrica de comparacao +
+      criterio de vitoria/morte ANTES de tocar nos dados reais ja
+      baixados (02_TESTS/COSMOLOGY_MOND_SPARC/data/, reaproveitaveis).
+    stop_condition: >
+      escrever pre-registro sem os quatro itens de next_action resolvidos
+      primeiro; reusar a previsao MOND generica do piloto 001 como se
+      fosse "a previsao Tamesis"; escolher o modelo concorrente ou a
+      metrica de comparacao depois de ver como os dados se comportam.
+
+  - test_id: DISC-RH-REAL-001
+    title: "Linha RH real (riemannZeta) -- distinta de RH-TOY/Tp em 04_FORMAL_RESEARCH_LAB"
+    domain: matematica_pura
+    parent_legacy: null
+    related_tests:
+      - "04_FORMAL_RESEARCH_LAB 03_MILLENNIUM/01_RIEMANN (Tp, reclassificado por DEC-107 como teste unitario de maquinario, nao pesquisa sobre RH)"
+    status: CANDIDATE_FORMULATING
+    existing_assets: []
+    description: >
+      Motivada pelo caso Anthropic (bound de proporcao de zeros de zeta na
+      linha critica, 41.6%->67.2%, artefato Lean publico sobre
+      Mathlib.riemannZeta/analyticOrderAt sem sorry) -- evidencia de que
+      exploracao em larga escala sobre o objeto matematico REAL, seguida
+      de formalizacao forte, podem coexistir. Esta linha ataca
+      `riemannZeta` real, nao um operador de brinquedo.
+    next_action: >
+      Fase 0 (antes de qualquer pre-registro formal, e ainda nao
+      pre-registravel como teste estatistico -- e busca de literatura +
+      triagem numerica): levantar 50-500 hipoteses candidatas a partir de
+      literatura recente sobre zeros de zeta (densidade de zeros, formula
+      explicita, correlacao de pares, Odlyzko/Montgomery, resultados
+      pos-2020), verificar cada uma contra dados numericos reais de zeros
+      (tabelas Odlyzko, LMFDB) e contra a literatura para conflito
+      conhecido, buscar contra-exemplos. So conjecturas sobreviventes a
+      essa filtragem viram candidatas a pre-registro formal + eventual
+      formalizacao Lean em 04_FORMAL_RESEARCH_LAB via Gate de Replicacao.
+    stop_condition: >
+      pular a fase de filtragem numerica/literatura e ir direto para Lean;
+      alegar progresso sobre RH em si a partir de qualquer resultado desta
+      linha antes de sobreviver ao Gate de Replicacao; reusar qualquer
+      construcao de Tp/RH-TOY como se fosse resultado sobre riemannZeta
+      real.
+
+  - test_id: DISC-TRI-RG-001
+    title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"
+    domain: multi_dominio
+    parent_legacy: "01_TAMESIS_CORE (Theory of Regime Interfaces / TOE_INTERFACE_EXECUTION)"
+    related_tests: []
+    status: CANDIDATE_FORMULATING
+    existing_assets: []
+    description: >
+      Nao tenta construir uma Theory of Everything diretamente. Tenta
+      descobrir uma lei de interface: um mapa de coarse-graining
+      R_lambda: X_micro -> X_macro e uma quantidade I(X) tal que, em
+      dominios DIFERENTES (sistema quantico, rede, fluido, sistema
+      caotico, grafo, modelo cosmologico), sem alterar a definicao de
+      I(X) a cada dominio, uma variacao Delta I preveja uma transicao de
+      regime. Se a mesma estrutura matematica prever transicoes em varios
+      dominios sem seu formalismo mudar dominio a dominio, isso e uma
+      regularidade cross-domain inesperada -- nao automaticamente uma ToE,
+      mas muito mais interessante que mais lemas sobre um operador
+      construido para ser tratavel.
+    next_action: >
+      Nomear o mapa R_lambda candidato (METHODOLOGY_EXTENSIONS.md Sec.2,
+      mesmo que informal/numerico nesta fase) e identificar pelo menos
+      DOIS dominios reais com dado publico onde I(X) e computavel de
+      forma identica (mesma formula, sem reajuste por dominio) antes de
+      qualquer pre-registro. 01_TAMESIS_CORE/03_TRANSITION_ATLAS e
+      infraestrutura reaproveitavel candidata para hospedar o resultado
+      depois de sobreviver ao Gate de Replicacao.
+    stop_condition: >
+      redefinir I(X) ou R_lambda por dominio (isso deixa de ser uma
+      regularidade cross-domain e vira dois modelos separados fingindo
+      ser um); alegar deteccao de invariante com apenas um dominio testado;
+      alegar progresso sobre TOE a partir de qualquer resultado aqui antes
+      do Gate de Replicacao.

@@ -9,6 +9,12 @@ inflada — ver `02_TESTS/COSMOLOGY_MOND_SPARC/AUDIT_LEGACY_MOND_EFE_SPARC.md`
 para o caso concreto. Estas regras não são burocracia abstrata; são a
 resposta direta a um erro que já aconteceu aqui.
 
+Ver também `RESEARCH_PIPELINE.md` (onde este laboratório se encaixa entre
+a busca ampla e o laboratório formal Lean) e `METHODOLOGY_EXTENSIONS.md`
+(identificabilidade, RG/EFT, MDL, descoberta automática de invariantes,
+adversário de nulo, holdout selado — seis regras técnicas adicionadas em
+2026-08-12, `DISC-DEC-003`).
+
 ## Ordem obrigatória para um novo teste
 
 1. Ler `DISCOVERY_LAB_STATE.md`.
@@ -20,24 +26,39 @@ resposta direta a um erro que já aconteceu aqui.
    usando `00_GOVERNANCE/PREREGISTRATION_TEMPLATE.md`, **antes** de
    tocar no dado real. O pré-registro trava: hipótese exata, estatística
    de teste, modelo nulo, critério de falsificação numérico, e (quando
-   aplicável) correção para comparações múltiplas.
+   aplicável) correção para comparações múltiplas. **Além disso, agora
+   obrigatório** (`METHODOLOGY_EXTENSIONS.md` §1): declarar o
+   *discriminating observable* — a observação e o modelo concorrente
+   nomeado que ela deveria separar de Tamesis. Se o dataset tem múltiplas
+   unidades amostrais e a análise envolve busca de padrão/ajuste de
+   parâmetro (não uma única comparação de grupo simples), declarar
+   também o split discovery/development/holdout (§6) antes de tocar em
+   qualquer dado.
 4. Commitar o pré-registro (hash do commit vira parte do registro —
    qualquer mudança de critério depois de ver o dado é uma violação e
    deve ser reportada como tal, não escondida).
 5. Buscar o dado real, documentar proveniência completa em
    `02_TESTS/<nome>/data/PROVENANCE.md` (URL exata, data de acesso,
    checksum se possível, contagem de registros).
-6. Rodar a análise pré-registrada. Reportar o resultado exatamente como
-   saiu — sem reformular a hipótese depois de ver o resultado
-   (isso é uma nova hipótese, precisa de novo pré-registro).
+6. Rodar a análise pré-registrada sobre discovery+development apenas
+   (holdout, se declarado, permanece selado). Reportar o resultado
+   exatamente como saiu — sem reformular a hipótese depois de ver o
+   resultado (isso é uma nova hipótese, precisa de novo pré-registro).
 7. Um segundo agente reexecuta a análise de forma independente (código
    próprio, mesma proveniência de dado) e produz um veredito adversarial.
 8. Registrar o resultado em `01_PORTFOLIO/TEST_QUEUE.yaml` e, se aplicável,
    `00_GOVERNANCE/CLAIM_LEDGER.yaml` — **qualquer resultado**, inclusive
    nulo/negativo/inconclusivo.
-9. Criar relatório de sessão em `09_SESSIONS/YYYY/`.
-10. Atualizar `DISCOVERY_LAB_STATE.md`.
-11. Parar.
+9. Se o resultado sobreviveu ao passo 7 e é candidato a promoção para
+   `04_FORMAL_RESEARCH_LAB`: entra no Gate de Replicação
+   (`03_REPLICATION_GATE/PROTOCOL.md`) — implementação nova por agente
+   independente, abertura do holdout selado se houver, adversário de
+   nulo dedicado (`METHODOLOGY_EXTENSIONS.md` §5), auditoria de
+   proveniência. Só sai de lá `REPLICATION_PASSED` ou
+   `REPLICATION_FAILED`.
+10. Criar relatório de sessão em `09_SESSIONS/YYYY/`.
+11. Atualizar `DISCOVERY_LAB_STATE.md`.
+12. Parar.
 
 ## Proibições
 

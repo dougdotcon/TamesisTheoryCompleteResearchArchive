@@ -3781,3 +3781,90 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
       - "sinal qualitativo de afinamento em TOE-7 registrado como observacao, nao como esgotamento decidido"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-107
+    date: 2026-08-12
+    decision: >
+      Reclassificar as Ondas 1-7 (WAVE1-BATCH-001 .. WAVE7-BATCH-001, DEC-086
+      a DEC-106) como "Formal Capability & Method Calibration Archive":
+      evidencia mantida de que o pipeline deste laboratorio (definir alvo,
+      gerar lema, compilar Lean, revisao adversarial, controle de claims,
+      deteccao de scope creep) funciona -- nao evidencia de progresso sobre
+      nenhum dos seis problemas Clay-oficiais nem sobre nenhuma tese
+      Tamesis. NAO havera Onda 8 no formato de onda-fechavel-por-portfolio-
+      review que gerou as Ondas 1-7. As 91 entradas WAVE*-* em
+      RESEARCH_QUEUE.yaml e os 51 claims associados nao sao retratados --
+      permanecem VERIFIED exatamente como estao -- apenas reclassificados
+      quanto ao PAPEL que desempenham daqui para frente.
+
+      Reclassificacao adicional, mais especifica: o operador de brinquedo
+      `Tp` (linha RH-TOY, todo o material sob
+      03_MILLENNIUM/01_RIEMANN/FORMAL/) deixa de ser tratado como "caminho
+      ate RH" e passa a ser tratado como teste unitario do maquinario
+      espectral/formal do laboratorio -- infraestrutura de calibracao, nao
+      pesquisa sobre a Hipotese de Riemann em si. RH-NOGO-001 (FROZEN_
+      PARTIAL_RESULT desde ondas anteriores) nao muda de status por esta
+      decisao. Uma nova linha `RH-REAL` (fora deste laboratorio,
+      registrada em 05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml como
+      DISC-RH-REAL-001) passa a ser o unico lugar onde este arquivo alega
+      fazer pesquisa sobre `riemannZeta` real -- este laboratorio Lean
+      permanece o alvo de formalizacao EVENTUAL dessa linha, apos triagem
+      numerica/literatura e um Gate de Replicacao, nao o ponto de partida.
+    rationale: >
+      Revisao estrategica externa (usuario, apos auditar publicamente o
+      repositorio e o caso Anthropic/Riemann-zeta) identificou um sinal
+      metodologico especifico: tres ondas consecutivas (5, 6, 7) fecharam
+      13/13, 14/14 (ajustado), 13/13 -- uma taxa de fechamento
+      extraordinariamente alta para pesquisa exploratoria de fronteira.
+      A inferencia nao e que os resultados individuais estejam errados
+      (cada um passou por revisao adversarial de quatro camadas e
+      permanece verdadeiro como declaracao formal Lean) -- e que o
+      PROCESSO DE SELECAO DE ALVOS deste laboratorio provavelmente
+      aprendeu, onda apos onda, a escolher itens com alta probabilidade de
+      fechamento (lemas pequenos, escopo controlavel, gates bem definidos)
+      em vez de maximizar valor cientifico esperado (novidade x
+      falsificabilidade x contato com a realidade x poder discriminatorio
+      entre teorias concorrentes). Um laboratorio que tenta coisas
+      genuinamente dificeis deveria produzir REFUTED/NULL/GAP_DIAGNOSED/
+      BLOCKED com frequencia -- nao circuito de fechamento quase perfeito.
+      Essa nao e uma falha deste laboratorio: e o comportamento esperado
+      de um sistema desenhado para produzir itens fechaveis, exatamente
+      como foi desenhado nas Ondas 1-7 (DEC-086 em diante).
+
+      O caso Anthropic (bound de zeros de zeta, 41.6%->67.2%, artefato Lean
+      publico usando `Mathlib.riemannZeta`/`analyticOrderAt` sem `sorry`)
+      derruba a premissa de que "objeto real vs. formalizacao forte" seja
+      uma escolha inevitavel: exploracao em larga escala sobre o objeto
+      matematico REAL, seguida de formalizacao forte, coexistiram naquele
+      trabalho. Este laboratorio, ao formalizar exclusivamente sobre `Tp`
+      (o operador de brinquedo, nunca `riemannZeta`), nunca testou essa
+      combinacao -- e por isso nao pode alegar progresso comparavel sobre
+      RH em nenhum sentido, apenas progresso sobre a capacidade de
+      formalizar.
+
+      Decisao tomada em conjunto com a criacao da arquitetura de tres
+      motores (05_DISCOVERY_LAB -> Gate de Replicacao -> este laboratorio)
+      documentada em 05_DISCOVERY_LAB/00_GOVERNANCE/RESEARCH_PIPELINE.md e
+      na decisao correspondente DISC-DEC-003. Este laboratorio Lean nao e
+      abandonado nem esvaziado -- toda sua disciplina (claim ledger,
+      proveniencia, stop conditions, revisao adversarial, `#print axioms`,
+      versionamento) e explicitamente preservada e vira o padrao de
+      verificacao que qualquer claim replicado do Discovery Lab tera que
+      atender antes de virar teorema Lean.
+    authority: user_explicit_strategic_direction
+    affected_paths:
+      - "LAB_STATE.md (authorized_action)"
+      - "nenhum arquivo .lean modificado -- reclassificacao e apenas de papel/proposito, nao de conteudo"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "Ondas 1-7 (WAVE1-BATCH-001..WAVE7-BATCH-001) rotuladas retroativamente como Formal Capability & Method Calibration Archive -- status VERIFIED de cada item individual nao muda"
+      - "Tp/RH-TOY reclassificado de 'caminho ate RH' para 'teste unitario de maquinario formal'"
+      - "authorized_action: PORTFOLIO_REVIEW_REQUIRED -> AWAITING_REPLICATED_CLAIM_FROM_DISCOVERY_LAB (este laboratorio nao gera mais seu proprio proximo alvo por portfolio review interno; espera claims que sobrevivam ao Gate de Replicacao em 05_DISCOVERY_LAB)"
+      - "nenhuma Onda 8 no formato anterior sera aberta"
+    untouched_safeguards:
+      - "nenhum dos 91 itens WAVE*-* e retratado, invalidado, ou tem seu #print axioms reaberto -- todos seguem VERIFIED como estavam"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT, sem mudanca"
+      - "PN permanece retirada de rotacao (DEC-100), sem mudanca"
+      - "toda a disciplina de verificacao (quatro camadas, #print axioms, grep de tokens proibidos, revisao adversarial) permanece obrigatoria para qualquer trabalho futuro neste laboratorio, incluindo formalizacoes vindas do Gate de Replicacao"
+      - "nenhum Problema do Millennium declarado resolvido, aproximado, ou alcancavel por esta reclassificacao"

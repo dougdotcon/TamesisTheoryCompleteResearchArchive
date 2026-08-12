@@ -441,7 +441,21 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "AWAITING_REPLICATED_CLAIM_FROM_DISCOVERY_LAB"
+authorized_action_note: >
+  Mudou de PORTFOLIO_REVIEW_REQUIRED por DEC-107 (2026-08-12): este
+  laboratorio nao abre mais Onda 8 no formato de portfolio-review interno
+  que produziu as Ondas 1-7 (agora reclassificadas como "Formal
+  Capability & Method Calibration Archive" -- ver DEC-107 para
+  justificativa completa, motivada por revisao estrategica do usuario
+  apos auditar o repositorio publicamente e o caso Anthropic/Riemann-
+  zeta). O proximo trabalho de formalizacao aqui, se houver, vem de um
+  claim que sobreviveu ao Gate de Replicacao de
+  05_DISCOVERY_LAB/00_GOVERNANCE/RESEARCH_PIPELINE.md -- nao de um novo
+  ciclo autogerado de portfolio review. `Tp`/RH-TOY reclassificado de
+  "caminho ate RH" para teste unitario do maquinario formal; pesquisa
+  real sobre `riemannZeta` agora vive em
+  05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-RH-REAL-001).
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"

@@ -112,3 +112,94 @@ decisions:
     untouched_safeguards:
       - "nenhuma linguagem 'CONFIRMED'/'DETECTED' usada para este resultado, em nenhum arquivo desta trilha"
       - "checagem de robustez pos-hoc reportada como informativa, explicitamente NAO recatalogada como novo teste pre-registrado"
+
+  - decision_id: DISC-DEC-003
+    date: 2026-08-12
+    decision: >
+      Adotar a arquitetura de tres motores (05_DISCOVERY_LAB -> Gate de
+      Replicacao -> 04_FORMAL_RESEARCH_LAB), documentada em
+      00_GOVERNANCE/RESEARCH_PIPELINE.md e 03_REPLICATION_GATE/PROTOCOL.md,
+      substituindo o modelo anterior de dois laboratorios paralelos
+      desacoplados. Adotar seis extensoes de metodologia (identificabilidade,
+      RG/EFT para TRI, MDL/complexidade, descoberta automatica de
+      invariantes, descoberta adversarial de nulos, holdout selado),
+      documentadas em 00_GOVERNANCE/METHODOLOGY_EXTENSIONS.md e
+      incorporadas ao passo-a-passo obrigatorio de 00_GOVERNANCE/AGENTS.md.
+      Registrar tres linhas candidatas em 01_PORTFOLIO/TEST_QUEUE.yaml
+      (status CANDIDATE_FORMULATING, nenhuma pre-registrada ainda):
+      DISC-COSMOLOGY-MOND-SPARC-002 (SPARC como comparacao preditiva de
+      modelos, nao confirmacao/refutacao de EFE isolada),
+      DISC-RH-REAL-001 (pesquisa sobre riemannZeta real, distinta do
+      operador de brinquedo Tp), e DISC-TRI-RG-001 (busca de invariante
+      cross-domain via lente de renormalizacao para TRI/TDTR).
+    rationale: >
+      Revisao estrategica extensa do usuario apos auditar publicamente o
+      repositorio (identificando corretamente que o branch publico
+      complete-archive-v1 nao reflete este trabalho -- ver nota de
+      transparencia no relatorio de sessao) e o caso Anthropic/Riemann-
+      zeta. Argumento central: o laboratorio formal tem boa governanca
+      cientifica mas seu motor de selecao de alvos provavelmente aprendeu
+      a maximizar probabilidade de fechamento (13/13, 13/13, 13/13 nas
+      Ondas 5-7) em vez de valor cientifico esperado (novidade x
+      falsificabilidade x contato com a realidade x poder discriminatorio
+      entre teorias). Um laboratorio que tenta coisas dificeis deveria
+      produzir REFUTED/NULL/INCONCLUSIVE/OUT_OF_DOMAIN com frequencia --
+      informacao, nao desperdicio. Ver DEC-107 em
+      04_FORMAL_RESEARCH_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml para a
+      reclassificacao correspondente das Ondas 1-7 e do operador `Tp`.
+
+      O caso Anthropic tambem derruba a premissa de que "objeto real
+      versus formalizacao forte" seja uma escolha inevitavel -- o artefato
+      publico deles formaliza diretamente sobre Mathlib.riemannZeta apos
+      exploracao em larga escala, nao sobre um substituto de brinquedo.
+      Isso justifica abrir DISC-RH-REAL-001 como linha propria, distinta
+      de Tp/RH-TOY.
+
+      O piloto DISC-COSMOLOGY-MOND-SPARC-001 (fechado INCONCLUSIVE nesta
+      mesma sessao, antes desta decisao) foi avaliado como o movimento
+      certo na forma errada: o objetivo nao deveria ter sido "confirmar ou
+      refutar EFE" isoladamente, mas comparacao preditiva contra modelos
+      concorrentes nomeados com poder discriminatorio declarado a priori
+      (identificabilidade, METHODOLOGY_EXTENSIONS.md Sec.1) -- daqui
+      DISC-COSMOLOGY-MOND-SPARC-002 como reformulacao, nao correcao do
+      piloto (o piloto 001 permanece CLOSED_INCONCLUSIVE, nao e reaberto).
+
+      Seis extensoes tecnicas especificas (nao filosoficas) foram
+      propostas: identificabilidade (P(D|Tamesis) >> P(D|concorrentes),
+      nao apenas P(D|Tamesis) >> 0); renormalizacao/EFT para dar a TRI/TDTR
+      uma conexao matematica testavel com fisica conhecida (mapa
+      R_lambda, pontos fixos, operadores relevantes/marginais/irrelevantes);
+      MDL/complexidade algoritmica para operacionalizar a intuicao verbal
+      de "camada nova compensa seu custo" como Delta J mensuravel; busca
+      automatica de invariantes (regressao simbolica etc.) ANTES de
+      interpretacao por LLM, para reduzir risco de historia convincente
+      sem sinal real; descoberta adversarial de nulos (agente dedicado a
+      explicar qualquer anomalia por mecanismo convencional, distinto do
+      agente que so tenta refutar o calculo); e holdout selado obrigatorio
+      para testes com espaco de busca amplo, resolvido apenas dentro do
+      Gate de Replicacao.
+
+      O usuario foi explicito em preservar toda a disciplina ja construida
+      (claim ledger, proveniencia, stop conditions, REFUTED, revisao
+      adversarial, Lean, versionamento, negativos documentados, Transition
+      Atlas) -- esta decisao muda ONDE o risco e aceito (alto na
+      descoberta, baixissimo na promocao de claim), nao remove nenhuma
+      salvaguarda existente.
+    authority: user_explicit_strategic_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/00_GOVERNANCE/{AGENTS.md,RESEARCH_PIPELINE.md,METHODOLOGY_EXTENSIONS.md}"
+      - "05_DISCOVERY_LAB/03_REPLICATION_GATE/PROTOCOL.md (novo)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (+3 linhas candidatas)"
+      - "04_FORMAL_RESEARCH_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml (DEC-107, decisao espelhada)"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "novo Gate de Replicacao entre Discovery Lab e Formal Lab (03_REPLICATION_GATE/)"
+      - "AGENTS.md: passos 3, 6, 9 (renumerados de 3,6,7) incorporam identificabilidade, holdout selado, e handoff para o Gate"
+      - "TEST_QUEUE.yaml: ciclo de vida de status estendido com documentacao do lifecycle completo (comentario de schema)"
+      - "3 novas linhas candidatas registradas, nenhuma pre-registrada (CANDIDATE_FORMULATING)"
+    untouched_safeguards:
+      - "nenhuma das 3 novas linhas candidatas tem pre-registro travado -- todas exigem trabalho de formulacao (next_action) antes de qualquer analise"
+      - "DISC-COSMOLOGY-MOND-SPARC-001 permanece CLOSED_INCONCLUSIVE, nao reaberto nem reinterpretado"
+      - "toda a disciplina previa (proveniencia, stop conditions, revisao adversarial, negativos catalogados) permanece obrigatoria e inalterada"
+      - "nenhum Problema do Millennium nem tese Tamesis declarados provados, confirmados, ou alcancaveis por esta decisao"

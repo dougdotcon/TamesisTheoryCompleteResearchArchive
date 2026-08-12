@@ -1,16 +1,22 @@
 # Estado da Trilha de Descoberta Computacional
 
 **Última atualização:** 2026-08-12
-**Trilha paralela a:** `04_FORMAL_RESEARCH_LAB` (ciclo de ondas Lean, não afetado por esta trilha)
+**Arquitetura:** motor 1 de 3 — ver `00_GOVERNANCE/RESEARCH_PIPELINE.md`
+(`05_DISCOVERY_LAB` → `03_REPLICATION_GATE` → `04_FORMAL_RESEARCH_LAB`,
+adotada em `DISC-DEC-003`). `04_FORMAL_RESEARCH_LAB` não é mais um
+laboratório paralelo desacoplado — é o destino de formalização para claims
+que sobrevivem ao Gate de Replicação (ver `DEC-107` de lá, que reclassifica
+as Ondas 1-7 como arquivo de calibração de capacidade formal, não pesquisa
+sobre nenhum Problema do Millennium).
 
 ## Status atual
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | nenhum — `DISC-COSMOLOGY-MOND-SPARC-001` fechado |
-| Fase | Piloto concluído (CLOSED_INCONCLUSIVE); trilha aguardando próximo teste |
-| Próxima ação obrigatória | Nenhuma pendente. Escolher e pré-registrar o próximo teste (domínio aberto — ver `README.md`) quando houver decisão do usuário sobre onde apontar a trilha em seguida |
-| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto) |
+| Teste ativo | nenhum pré-registrado. 3 linhas candidatas em `CANDIDATE_FORMULATING`: `DISC-COSMOLOGY-MOND-SPARC-002`, `DISC-RH-REAL-001`, `DISC-TRI-RG-001` |
+| Fase | Piloto 001 concluído (`CLOSED_INCONCLUSIVE`); arquitetura de três motores + seis extensões de metodologia adotadas (`DISC-DEC-003`); aguardando priorização do usuário entre as 3 linhas candidatas para aprofundamento |
+| Próxima ação obrigatória | Para a linha priorizada: resolver o `next_action` declarado na entrada correspondente de `01_PORTFOLIO/TEST_QUEUE.yaml` (formulação de hipótese + localização de dado real) antes de qualquer pré-registro |
+| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões de metodologia) |
 | Claims fechados | 1 (`DISC-CLAIM-001`, evidence_level: `preregistered_inconclusive`) |
 | Claims em andamento | 0 |
 
@@ -60,21 +66,48 @@ demais para sustentar qualquer alegação de detecção.
    e `CLAIM_LEDGER.yaml` (`DISC-CLAIM-001`).
 9. Decisão de fechamento registrada (`DISC-DEC-002`).
 
+## Arquitetura adotada em 2026-08-12 (`DISC-DEC-003`)
+
+Revisão estratégica externa do usuário identificou que o laboratório
+formal (Ondas 1-7, `04_FORMAL_RESEARCH_LAB`) provavelmente otimizava
+probabilidade de fechamento (13/13 em três ondas seguidas) em vez de valor
+científico esperado. Resposta: arquitetura de três motores
+(`00_GOVERNANCE/RESEARCH_PIPELINE.md`) — descoberta de risco alto aqui,
+Gate de Replicação (`03_REPLICATION_GATE/PROTOCOL.md`) de risco baixo no
+meio, formalização Lean de risco baixíssimo só para quem sobrevive os dois.
+Seis extensões técnicas de metodologia adotadas junto
+(`00_GOVERNANCE/METHODOLOGY_EXTENSIONS.md`): identificabilidade
+(discriminating observable obrigatório), RG/EFT para TRI/TDTR, MDL/
+complexidade algorítmica (`ΔJ`), descoberta automática de invariantes
+antes de narrativa LLM, descoberta adversarial de nulos (debunker
+convencional dedicado), holdout selado obrigatório para buscas amplas.
+
+Três linhas candidatas registradas (`01_PORTFOLIO/TEST_QUEUE.yaml`,
+status `CANDIDATE_FORMULATING`, nenhuma pré-registrada):
+- `DISC-COSMOLOGY-MOND-SPARC-002` — SPARC como comparação preditiva de
+  modelos nomeados, não confirmação/refutação de EFE isolada.
+- `DISC-RH-REAL-001` — pesquisa real sobre `riemannZeta`, distinta do
+  operador de brinquedo `Tp` (agora reclassificado em
+  `04_FORMAL_RESEARCH_LAB` como teste unitário de maquinário, não
+  caminho até RH — ver `DEC-107` de lá).
+- `DISC-TRI-RG-001` — busca de invariante cross-domain via lente de
+  renormalização/coarse-graining para a Theory of Regime Interfaces.
+
 ## O que ainda não foi feito
 
-- Relatório de sessão em `09_SESSIONS/2026/`.
-- Commit final de todo o ciclo (análise + governança + relatório) e push.
-- Escolher o próximo teste da trilha (domínio ainda aberto/multi-domínio,
-  conforme decisão original do usuário — nenhum compromisso além do piloto
-  de cosmologia foi feito).
+- Priorização do usuário entre as 3 linhas candidatas para aprofundamento
+  real nesta sessão ou na próxima.
+- Resolver o `next_action` de qualquer uma delas (todas exigem trabalho de
+  formulação — literatura, dado real, modelo concorrente nomeado — antes
+  de qualquer pré-registro).
 
 ## Como continuar (para o próximo agente/sessão)
 
-O piloto está fechado. Para um novo teste, seguir `00_GOVERNANCE/AGENTS.md`
-desde o passo 1 (ler este arquivo, formular hipótese nova, localizar fonte
-de dado real, escrever e commitar um NOVO `PREREGISTRATION.md` antes de
-tocar em qualquer dado). Não reabrir nem editar
-`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` — está fechado e travado;
-uma extensão dessa linha de investigação (ex. amostra maior, correção de
-leverage, ou o desenho de campo externo de Chae et al. 2020) é um novo teste
-com seu próprio pré-registro, não uma reabertura deste.
+Ler `00_GOVERNANCE/RESEARCH_PIPELINE.md` e `METHODOLOGY_EXTENSIONS.md`
+primeiro. Para uma das 3 linhas candidatas, seguir `00_GOVERNANCE/AGENTS.md`
+desde o passo 1 — mas agora o passo 3 exige declarar o discriminating
+observable (e holdout selado, se aplicável) no `PREREGISTRATION.md` antes
+do commit de lock. Não reabrir nem editar
+`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` (piloto 001, fechado e
+travado) — uma extensão dessa linha de investigação é um novo teste com
+seu próprio pré-registro, não uma reabertura deste.

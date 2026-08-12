@@ -1,5 +1,44 @@
 # Changelog do laboratório formal
 
+## DEC-107 - 2026-08-12
+
+### Reclassificação estratégica: Ondas 1-7 viram "Formal Capability & Method Calibration Archive"; sem Onda 8 no formato anterior
+
+Revisão estratégica externa do usuário, após auditar o repositório
+publicamente e o caso Anthropic/Riemann-zeta, identificou um sinal
+metodológico: três ondas consecutivas (5, 6, 7) fecharam essencialmente
+13/13 cada — taxa de fechamento alta demais para pesquisa exploratória de
+fronteira, sugerindo que o processo de seleção de alvos deste laboratório
+otimizava probabilidade de fechamento em vez de valor científico esperado
+(novidade × falsificabilidade × contato com a realidade × poder
+discriminatório entre teorias).
+
+Decisão (`DEC-107`, `00_GOVERNANCE/DECISION_LEDGER.yaml`): as Ondas 1-7
+(91 itens, 51 claims) não são retratadas — cada uma permanece `VERIFIED`
+exatamente como estava — mas são reclassificadas quanto ao papel que
+desempenham: evidência de que o pipeline (definir alvo, gerar lema,
+compilar Lean, revisão adversarial, controle de claims) funciona, não
+evidência de progresso sobre nenhum Problema do Millennium nem sobre
+nenhuma tese Tamesis. Não haverá Onda 8 no formato de portfolio-review
+interno que produziu as Ondas 1-7.
+
+`Tp`/RH-TOY reclassificado de "caminho até RH" para teste unitário do
+maquinário espectral/formal do laboratório — infraestrutura de calibração,
+não pesquisa sobre a Hipótese de Riemann em si. Pesquisa real sobre
+`riemannZeta` passa a viver em uma nova linha `RH-REAL`, fora deste
+laboratório (`05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml`,
+`DISC-RH-REAL-001`), que só chega aqui para formalização depois de
+triagem numérica/literatura e um Gate de Replicação — não como ponto de
+partida.
+
+`LAB_STATE.authorized_action`: `PORTFOLIO_REVIEW_REQUIRED` →
+`AWAITING_REPLICATED_CLAIM_FROM_DISCOVERY_LAB`. Toda a disciplina de
+verificação deste laboratório (quatro camadas, `#print axioms`, grep de
+tokens proibidos, revisão adversarial) permanece obrigatória e passa a
+ser o padrão que qualquer claim replicado do Discovery Lab precisa
+atender antes de virar teorema Lean — ver
+`05_DISCOVERY_LAB/00_GOVERNANCE/RESEARCH_PIPELINE.md`.
+
 ## WAVE7-BATCH-001 - 2026-08-12
 
 ### Onda 7 do plano de ataque de portfólio: 13 testes falsificáveis, terceiro fechamento total consecutivo, lição de BSD-7 confirmada

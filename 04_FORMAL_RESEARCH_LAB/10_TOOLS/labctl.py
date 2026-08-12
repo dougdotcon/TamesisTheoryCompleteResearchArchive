@@ -720,7 +720,16 @@ def validate() -> dict[str, Any]:
                       "WAVE6-BSD-7",
                       "WAVE6-TOE-6A", "WAVE6-TOE-6B",
                       "WAVE6-QF-10", "WAVE6-QF-11",
-                      "WAVE6-SHARED-6A"}:
+                      "WAVE6-SHARED-6A",
+                      "WAVE7-BATCH-001",
+                      "WAVE7-RH-7C", "WAVE7-RH-7D",
+                      "WAVE7-NS-7A",
+                      "WAVE7-YM-CAPSTONE-DET-M1-EXACT", "WAVE7-YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT", "WAVE7-YM-CAPSTONE-EIGVAL-DICHOTOMY-TIGHTENED",
+                      "WAVE7-HG-4H", "WAVE7-HG-1I",
+                      "WAVE7-BSD-8",
+                      "WAVE7-TOE-7",
+                      "WAVE7-QF-12", "WAVE7-QF-13",
+                      "WAVE7-SHARED-7A"}:
         errors.append(
             "gate sequence requires LAB-BENCH-001, FOUND-SEMIGROUP-001, RH-NOGO-001, "
             "FOUND-SEMIGROUP-002, FOUND-FUNCTIONAL-GRAPH-001, "

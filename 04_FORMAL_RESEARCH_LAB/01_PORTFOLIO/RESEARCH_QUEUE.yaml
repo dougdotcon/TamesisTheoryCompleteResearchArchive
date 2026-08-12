@@ -5954,3 +5954,445 @@ queue:
       do ciclo Onda 1 -> ... -> Onda 6 escolhida explicitamente pelo
       usuario via AskUserQuestion ("Onda 6 (mesmo modo)"). Fechamento em
       DEC-103.
+  - work_item_id: WAVE7-RH-7C
+    title: "Tp <= Tp.adjoint via densidade + le_adjoint"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "RH-7c"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Reproduzir o bloco minimo finiteSupport/TpFun/Tp; provar
+      densidade de finiteSupport em H2 (via lp.single, trivial); fechar
+      Tp <= Tp.adjoint via LinearPMap.IsFormalAdjoint.le_adjoint aplicado a
+      Tp_isFormalAdjoint (RH-7B, Onda 6) mais a densidade. NAO tentar
+      IsSelfAdjoint. Teto: 50 linhas novas nao-comentario. #print axioms
+      limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-RH-7D
+    title: "Forma quadratica <Tp x,x> real e >=0"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "RH-7d"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Reproduzir o bloco minimo finiteSupport/TpFun/Tp; provar
+      Tp_inner_self_real_nonneg: forall x em Tp.domain, (inner (Tp x) x : C).im
+      = 0 e 0 <= (inner (Tp x) x : C).re, via RCLike.inner_apply' +
+      lp.hasSum_inner + funext + Complex.conj_natCast reduzindo a
+      Sum i*normSq(x_i), fechado por Complex.normSq_nonneg. Teto: 60 linhas
+      novas nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-NS-7A
+    title: "Independencia de compacto/raio do funcional p.v. composto (estreitado)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "NS-7a"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Protocolo de duas fases OBRIGATORIO: (a) tentar rw [eq_integral,
+      eq_integral, hfun] e esperar objetivo residual integral sobre bolas de
+      raios diferentes (nao um fechamento de 2 linhas); (b) fechar o residual
+      adaptando o metodo wlog/hsupp da Parte 10 de NS-4A (escolhendo a
+      contencao de K1 ou K2 conforme qual autoEnvelopeRadius e o minimo). Se o
+      teto for atingido sem fechar, PARAR e reportar fora de escopo. Teto: 90
+      linhas novas nao-comentario, medidas -- nao estimadas -- antes de
+      declarar CLOSED.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-YM-CAPSTONE-DET-M1-EXACT
+    title: "det(M1)=3.2 exato"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "YM-CAPSTONE-DET-M1-EXACT"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Provar det_toEuclideanCLM_M1_eq_three_point_two via
+      coe_toEuclideanCLM_eq_toEuclideanLin -> toEuclideanLin_eq_toLin_
+      orthonormal -> Matrix.det_toLin -> Matrix.det_fin_two + norm_num. Teto:
+      20 linhas novas nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT
+    title: "lambda2(M1) exato via formula quadratica (gated no item YM-CAPSTONE-DET-M1-EXACT)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      So apos YM-CAPSTONE-DET-M1-EXACT fechar: aplicar
+      lambdaMax_eq_quadratic_formula (SHARED-6A) a toEuclideanCLM M1 usando o
+      traco exato (4.1, Onda 6) e o det exato (3.2, item anterior); derivar
+      lambda2 por ring/linarith. Boilerplate reproduzido de SHARED-6A e de
+      arquivos YM anteriores EXCLUIDO da contagem. Teto: 15 linhas novas
+      nao-comentario (conteudo genuinamente novo apenas), declaradas no
+      cabecalho do arquivo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies:
+      - WAVE7-YM-CAPSTONE-DET-M1-EXACT
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 1
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-YM-CAPSTONE-EIGVAL-DICHOTOMY-TIGHTENED
+    title: "Dicotomia de autovalor de M1 estreitada (independente, gated so no bracket da Onda 6)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "YM-CAPSTONE-EIGVAL-DICHOTOMY-TIGHTENED"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Provar eigenvalue_dichotomy_toEuclideanCLM_M1_tightened: para todo
+      autovalor mu de toEuclideanCLM M1, (2.9<=mu<=3.1) ou (1.0<=mu<=1.2),
+      pelo padrao rcases eigenvalue_eq_lambdaMax_or_lambda2 +
+      lambdaMax_M1_bracket + lambda2_toEuclideanCLM_M1_bracket (Onda 6) +
+      linarith. Teto: 15 linhas novas nao-comentario alem do boilerplate
+      reproduzido.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-HG-4H
+    title: "Classe de expConjUnit no quociente != identidade"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "HG-4h"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      theorem expConjUnit_coset_ne_one : (expConjUnit : (C -> C)^x /
+      HolomorphicTransitionSubgroup) != 1 := fun h => expConjUnit_not_mem
+      ((QuotientGroup.eq_one_iff _).mp h). Teto: 40 linhas novas
+      nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-HG-1I
+    title: "Lei de potencia para principalCycle_a0 (receita corrigida)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "HG-1i"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Provar principalCycle_a0 (a0^(n+1)) = (n+1) . principalCycle_a0
+      a0, por inducao: caso succ via rw [pow_succ',
+      principalCycle_a0_mul a0 (a0^(n+1)) ha0 (pow_ne_zero (n+1) ha0), ih,
+      <- succ_nsmul'] -- emparelhar pow_succ' com succ_nsmul' (nao
+      succ_nsmul), conforme o precedente em
+      Mathlib/Algebra/GradedMonoid.lean:566. Teto: 80 linhas novas
+      nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-BSD-8
+    title: "Identidades de coeficiente do fator de Euler local, tres ramos de nao-boa-reducao (escopo bounded, continuacao direta da veia de BSD-7)"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "BSD-8"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Tres lemas sequenciais, medindo linhas apos CADA um: (1)
+      split-multiplicativa: coeff n (localPowerSeries) = 1 via if_pos +
+      invOfUnit (1-X) 1 = mk 1 (mk_one_mul_one_sub_eq_one); (2)
+      nao-split-multiplicativa: coeff n = (-1)^n via invOfUnit (1+X) 1 =
+      rescale (-1) (mk 1) (rescale_neg_one_X); (3) aditiva: localPowerSeries =
+      1 via HasAdditiveReduction.not_hasGoodReduction +
+      not_hasMultiplicativeReduction eliminando os 3 primeiros ramos do if.
+      Teto: 90 linhas novas nao-comentario TOTAIS, medidas apos cada lema (nao
+      so ao final) -- parar e reportar fora de escopo imediatamente se o
+      total corrente ultrapassar 90 antes do terceiro lema. #print axioms
+      limpo nos tres.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-TOE-7
+    title: "F.obj e Bijective, KCat -> ShiftCat"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "TOE-7"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      theorem F_obj_bijective : Function.Bijective (F.obj : KCat ->
+      ShiftCat), mostrando F.obj = coe e.symm (funext fun c => by simp [e,
+      ActionCategory.objEquiv], ou cadeia explicita Equiv.symm_trans_apply +
+      Equiv.symm_symm se simp nao fechar), entao Equiv.bijective e.symm. Teto:
+      35 linhas novas nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-QF-12
+    title: "Empacotamento ContinuousMonoidHom completo do fluxo de Heisenberg"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "QF-12"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Construir heisenbergFlowContinuousHom : ContinuousMonoidHom
+      (Multiplicative R) (unitary (Matrix (Fin 2)(Fin 2) C)) via
+      { heisenbergFlowHom with continuous_toFun := continuous_exp_smul_
+      heisenbergGenerator (adaptada) } (ou massagem explicita de campo se a
+      extensao anonima nao resolver). Reportar sob qual escopo (Operator ou
+      L2Operator) de fato fechou e a contagem real de linhas. Teto: 100
+      linhas novas nao-comentario. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-QF-13
+    title: "Representacao via Matrix.toEuclideanCLM (receita corrigida)"
+    track: toe_synthesis
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "QF-13"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Construir heisenbergFlowEuclideanHom via MonoidHom.mk' (fun t =>
+      <toEuclideanCLM (heisenbergFlowHom t), unitary.map_mem toEuclideanCLM
+      (heisenbergFlowHom t).2>) (...) -- rota PONTUAL, NAO a composicao
+      unitary.map toEuclideanCLM.toStarMonoidHom (essa projecao nao existe
+      para StarAlgEquiv). Se a rota pontual tambem falhar, reportar BLOCKED
+      imediatamente, sem tentar construcoes de composicao empacotada
+      alternativas. Teto: 60 linhas novas nao-comentario. #print axioms
+      limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-SHARED-7A
+    title: "Corolario de formula quadratica, ramo negativo de lambda2"
+    track: millennium
+    parent_plan: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    plan_code: "SHARED-7A"
+    target_statement: >
+      TESTE (Onda 7, ja revisado pela adversarial, pronto para despacho):
+      Provar lambda2_eq_quadratic_formula a partir de lambdaMax_eq_
+      quadratic_formula (SHARED-6A) + unfold lambda2 + ring. Reportar
+      contagem linha-a-linha contra o bloco reproduzido de SHARED-6A para
+      tornar a exclusao auditavel. Teto: 20 linhas novas nao-comentario alem
+      do bloco reproduzido. #print axioms limpo.
+    expected_product: >
+      Lema(s) Lean standalone fechando o teste falsificavel abaixo, com build verificado e revisao adversarial -- OU, se o teste revelar que o angulo nao fecha, um gap nomeado e precisamente diagnosticado (nao forcado).
+    dependencies: []
+    existing_assets: []
+    formalization_cost: moderate
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver plano de ataque Onda 7 para detalhe especifico do angulo"
+    cross_track_value: medium
+    stop_condition: >
+      usar sorry, admit, axioma local, ou unsafe; alegar que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel; alegar novidade matematica; exceder o escopo estreito deste teste falsificavel especifico (nao expandir para o problema geral); tocar qualquer arquivo fora do escopo deste item; forcar o fechamento se o teste revelar que o angulo nao e tratavel -- registrar como gap nomeado em vez disso; para YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT, NAO tentar antes de YM-CAPSTONE-DET-M1-EXACT fechar; para itens com teto explicito de linhas novas nao-comentario, MEDIR a contagem real (nao estimar) antes de declarar CLOSED, e reportar 'fora de escopo de onda' se o teto for excedido -- licao de disciplina de BSD-7 (Onda 6, DEC-103) aplicada explicitamente a todos os itens com teto
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-105 -- onda 7 de execucao paralela do plano de ataque de portfolio completo (DEC-104, sintese fundamentada nos outcomes reais da Onda 6, continuacao pedida explicitamente pelo usuario ("Siga para onda 7")). Item com veredito SURVIVES ou NEEDS_NARROWING apos revisao adversarial independente desta setima rodada.
+  - work_item_id: WAVE7-BATCH-001
+    title: "Onda 7 de execucao do plano de ataque de portfolio completo (item guarda-chuva, 13 sub-itens)"
+    track: multi
+    target_statement: >
+      Item guarda-chuva, sem conteudo formal proprio. Representa a
+      execucao paralela dos 13 itens WAVE7-* individuais (ver cada um
+      separadamente na fila), cada um com seu proprio teste falsificavel
+      pequeno, escopo estreito, e stop_condition. Existe apenas porque
+      LAB_STATE.md tem um unico campo active_work_item singular e uma
+      onda paralela de 13 itens nao cabe nele individualmente. Onda 7
+      foi gerada por um workflow de reconhecimento (8 grupos -- PN
+      permanece retirada da rotacao por DEC-100) que leu os arquivos
+      REAIS da Onda 6 antes de propor os passos da Onda 7. Mesma
+      contagem agregada que a Onda 6 (13), mas por composicao diferente:
+      NS estavel em 1 item; YM subiu de 2 para 3 (a adversarial
+      encontrou um terceiro candidato que o recon original perdeu por
+      completo). Reforco explicito da licao de disciplina de escopo de
+      BSD-7 (DEC-103, Onda 6) aplicado a todos os itens com teto de
+      linhas -- inclusive pegou uma tentativa similar de inflar o teto
+      em um candidato YM antes do despacho.
+    expected_product: >
+      Nenhum -- ver os 13 itens WAVE7-* individuais para produtos
+      esperados especificos.
+    dependencies: []
+    existing_assets:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    formalization_cost: high
+    bibliographic_cost: low
+    counterexample_access: high
+    dependency_depth: 0
+    external_dependency: "ver itens individuais"
+    cross_track_value: high
+    stop_condition: >
+      qualquer alegacao agregada de progresso alem do que cada item
+      individual honestamente fechou; tratar este item guarda-chuva como
+      se tivesse conteudo formal proprio; tratar o fechamento de BSD-8
+      como progresso sobre BSD-GAP-008 (nao relacionado); ignorar os
+      tetos explicitos de linhas de qualquer item individual
+    priority_class: P2
+    status: SCOPED
+    authorized_next_gate: FORMALIZATION
+    strategic_direction_source: >
+      DEC-105 -- onda 7 do plano de ataque (DEC-104), continuacao direta
+      do ciclo Onda 1 -> ... -> Onda 7 pedida explicitamente pelo
+      usuario ("Siga para onda 7").

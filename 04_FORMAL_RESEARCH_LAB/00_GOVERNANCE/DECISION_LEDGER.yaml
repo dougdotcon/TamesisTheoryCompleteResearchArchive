@@ -3622,3 +3622,94 @@ decisions:
       - "os gaps centrais das 6 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
       - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"
+
+  - decision_id: DEC-104
+    date: 2026-08-12
+    decision: >
+      Registrar 01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md -- plano
+      de ataque da Onda 7, cobrindo follow-ons dependentes dos outcomes
+      reais da Onda 6 (DEC-101/102/103) em 8 grupos (7 linhas de pesquisa
+      mais infraestrutura compartilhada -- PN permanece retirada da
+      rotacao por DEC-100, nao reavaliada). Produzido por workflow de
+      reconhecimento + revisao adversarial (17 agentes) a pedido
+      explicito do usuario ("Siga para onda 7"). PURAMENTE PLANEJAMENTO
+      -- nenhuma linha de Lean escrita, nenhum arquivo de governanca
+      alterado pelos agentes.
+    rationale: >
+      13 candidatos revisados, 13 formam a lista de execucao -- mesma
+      contagem agregada da Onda 6, mas composicao diferente: NS estavel
+      em 1 item; YM subiu de 2 para 3 porque a revisao adversarial
+      encontrou um terceiro candidato genuino
+      (YM-CAPSTONE-EIGVAL-DICHOTOMY-TIGHTENED) que o reconhecimento
+      original havia perdido por completo. Zero candidato REFUTED --
+      todos os defeitos encontrados (NS-7A: contradicao no proprio
+      raciocinio citado; HG-1i: par de lemas Mathlib incompativel;
+      QF-13: classe inexistente citada) foram corrigidos com testes
+      revisados, nao descartados. ACHADO NOTAVEL: a licao de disciplina
+      de escopo de BSD-7 (DEC-103, Onda 6) generalizou -- a mesma
+      revisao adversarial pegou, de forma independente, uma manobra
+      retorica identica ("preciso reproduzir mais, logo o teto deve
+      crescer") em um candidato YM antes do despacho, corrigindo o teto
+      antes da execucao. BSD-8 registrado como continuacao bounded
+      direta da mesma veia que produziu BSD-7, com protocolo reforcado
+      de medicao apos CADA sub-lema (nao so ao final). TOE-7 sinaliza um
+      primeiro afinamento QUALITATIVO (nao quantitativo) da linha TOE --
+      avaliado como "quase tautologico" -- registrado como sinal a
+      observar, nao como esgotamento ainda.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status em RESEARCH_QUEUE.yaml -- documento de planejamento, nao gate de execucao"
+      - "LAB_STATE: authorized_action permanece PORTFOLIO_REVIEW_REQUIRED"
+    untouched_safeguards:
+      - "ZERO linha de Lean escrita por este gate"
+      - "ZERO arquivo de governanca alterado pelos agentes do workflow alem deste documento de plano"
+      - "nenhuma alegacao de que qualquer Problema do Milenio ficou resolvido, aproximado, ou alcancavel"
+      - "PN permanece retirada da rotacao (DEC-100), nao reavaliada nesta onda"
+      - "BSD-GAP-008 permanece recomendacao ativa, sem mudanca de urgencia; BSD-8 tratado como continuacao bounded, nao reabertura de sub-frente"
+
+  - decision_id: DEC-105
+    date: 2026-08-12
+    decision: >
+      Autorizar a Onda 7 de execucao do plano de ataque de portfolio
+      (01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md, DEC-104).
+      Registrados 13 itens WAVE7-* + item guarda-chuva WAVE7-BATCH-001
+      em 01_PORTFOLIO/RESEARCH_QUEUE.yaml (status SCOPED,
+      authorized_next_gate FORMALIZATION). `authorized_action` em
+      LAB_STATE.md muda de PORTFOLIO_REVIEW_REQUIRED para FORMALIZATION.
+    rationale: >
+      Continuacao direta do ciclo pedida explicitamente pelo usuario
+      ("Siga para onda 7"). Cada um dos 13 itens carrega seu proprio
+      stop_condition proibindo: sorry/admit/axioma/unsafe; alegacao de
+      que qualquer Problema do Milenio foi resolvido, aproximado ou
+      tornado alcancavel; alegacao de novidade matematica; expansao alem
+      do escopo estreito do teste falsificavel especifico; e forcar
+      fechamento se o angulo se revelar intratavel. Reforco explicito
+      (aplicado a todos os itens com teto de linhas, nao so BSD-8): medir
+      a contagem real de linhas novas nao-comentario antes de declarar
+      CLOSED, e reportar "fora de escopo de onda" se o teto for excedido
+      -- licao direta de BSD-7/DEC-103. Item
+      YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT tem dependencia explicita
+      em YM-CAPSTONE-DET-M1-EXACT, registrada via campo dependencies.
+      Nenhum item toca BSD-GAP-008. Nenhum item foi formalizado ainda
+      por este DEC -- apenas registrado e autorizado para execucao.
+    authority: PORTFOLIO_REVIEW_REQUIRED
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "10_TOOLS/labctl.py"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "RESEARCH_QUEUE: +13 itens WAVE7-* + item guarda-chuva WAVE7-BATCH-001, status SCOPED, authorized_next_gate FORMALIZATION"
+      - "LAB_STATE: authorized_action PORTFOLIO_REVIEW_REQUIRED -> FORMALIZATION"
+      - "labctl: active_work_item allowlist += WAVE7-BATCH-001 e os 13 WAVE7-* ids"
+    untouched_safeguards:
+      - "nenhum Problema do Milenio declarado resolvido, aproximado, ou alcancavel por este gate"
+      - "cada item mantem escopo estreito do teste falsificavel especifico -- nao o problema geral"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
+      - "BSD-GAP-008 explicitamente NAO incluido nesta onda -- recomendacao ativa de projeto dedicado permanece separada"
+      - "todos os itens com teto de linhas carregam instrucao explicita de medir (nao estimar) e parar honestamente se excederem o teto"

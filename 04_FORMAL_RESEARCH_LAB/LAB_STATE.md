@@ -7,8 +7,8 @@ schema_extension_note: >
   cinco frentes migraram para closed_work_items abaixo, e o campo foi
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
-updated_at: 2026-08-11T00:00:00-03:00
-canonical_commit: "4b115521481af156ffb23b56af0fb003effb1247"
+updated_at: 2026-08-12T00:00:00-03:00
+canonical_commit: "046a55fb7fa4d45262daea4522d562370863b61c"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -16,12 +16,12 @@ canonical_commit_policy: >
   ancestralidade NÃO é estrita.
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
-active_work_item: "WAVE6-BATCH-001"
-work_status: "VERIFIED"
+active_work_item: "WAVE7-BATCH-001"
+work_status: "SCOPED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "VERIFIED"
-result_review: "APPROVED"
+formalization_status: "NOT_STARTED"
+result_review: "PENDING"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -37,6 +37,32 @@ formalized_at_commit: "this integration commit (Wave 6 batch, 13 new files commi
 last_verified_artifact: "13 Wave-6 Lean files across 7 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE6-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 13), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 13, axiom footprints reconstructed independently from the raw log output for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 13 landed (exit 0, 8825 jobs, unchanged job count, identical to Waves 1-5), zero modification to any pre-existing tracked file (git status confirmed: exactly 13 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (26 agents total across the batch). Second consecutive fully-clean wave (13/13 CLOSED, 11 VERIFIED + 2 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). BSD-7 (explicitly exploratory/bounded, own stop_condition capping scope at ~BSD-6's ~30-line size) closed CLOSED but this session independently re-measured its new content at 148 non-comment lines vs BSD-6's 23 -- confirming the adversarial reviewer's ~6.4x overshoot finding exactly. Mathematical content is correct and independently verified (clean recompile, clean axioms, real Mathlib citations, no BSD-GAP-008/conjecture claim) -- this is a scope-discipline process finding, not a correctness defect, and is recorded honestly in CLAIM_LEDGER/DECISION_LEDGER rather than hidden. Item 5 (YM-CAPSTONE-DET-BRACKET-TIGHTENED) genuinely gated on item 4 (YM-CAPSTONE-TRACE-M1-EXACT) -- both implementer and reviewer independently recompiled the gate dependency before proceeding."
 current_blocker: null
 next_single_action: >
+  WAVE7-BATCH-001 (13 itens da Onda 7 do plano de ataque de portfólio,
+  DEC-104/DEC-105) registrado e o gate de execução aberto. Pedido
+  explícito do usuário ("Siga para onda 7"), continuação direta do
+  ciclo. Plano da Onda 7 produzido por workflow de 17 agentes
+  fundamentado nos arquivos reais da Onda 6. 13 candidatos formam a
+  lista de execução -- mesma contagem agregada que a Onda 6, mas
+  composição diferente: NS estável em 1 item; YM subiu de 2 para 3
+  porque a revisão adversarial encontrou um terceiro candidato genuíno
+  que o reconhecimento original havia perdido por completo. Zero
+  candidato `REFUTED`. **ACHADO NOTÁVEL:** a lição de disciplina de
+  escopo de `BSD-7` (DEC-103, Onda 6) generalizou -- a mesma revisão
+  pegou, de forma independente, uma tentativa similar de inflar teto de
+  linhas em um candidato YM antes do despacho, corrigindo-o
+  preventivamente. `BSD-8` registrado como continuação bounded direta
+  da mesma veia que produziu `BSD-7`, com protocolo reforçado de medição
+  após CADA sub-lema. `TOE-7` sinaliza um primeiro afinamento
+  QUALITATIVO (não quantitativo) da linha TOE -- avaliado como "quase
+  tautológico" no próprio plano, sinal a observar nas próximas 1-2
+  ondas. Item `YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT` tem dependência
+  explícita em `YM-CAPSTONE-DET-M1-EXACT`. `authorized_action` ->
+  `FORMALIZATION`. Próximo passo: dispatch do workflow de execução,
+  depois verificação independente completa desta sessão antes de
+  qualquer integração.
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE6-BATCH-001 (13 itens da Onda 6 do plano de ataque de portfólio,
   DEC-101/DEC-102) fechou VERIFIED / result_review APPROVED (DEC-103).
   13 de 13 CLOSED (11 VERIFIED, 2 VERIFIED_WITH_NOTES -- BSD-7, QF-11),
@@ -384,7 +410,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
+authorized_action: "FORMALIZATION"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -407,6 +433,10 @@ wave6_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_6_2026_08_11.md"
 wave6_batch_authorization: "DEC-102, 13 itens WAVE6-*, usuario escolheu \"Onda 6 (mesmo modo)\" entre 4 opcoes apresentadas via AskUserQuestion"
 wave6_bsd_gap_008_status: "OPEN, promovido de \"candidato maduro\" (linguagem da Onda 5) para \"recomendacao ativa\" de projeto dedicado -- sub-linha IsMultiplicative de BSD confirmada esgotada nesta onda"
 wave6_closure: "DEC-103, 13/13 CLOSED (11 VERIFIED + 2 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED -- segundo fechamento total consecutivo. Nota de disciplina de processo em BSD-7 (excesso de ~6.4x sobre o proprio stop_condition de tamanho, conteudo matematico correto)"
+wave7_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+wave7_batch_authorization: "DEC-105, 13 itens WAVE7-*, pedido explicito do usuario (\"Siga para onda 7\")"
+wave7_bsd_gap_008_status: "OPEN, recomendacao ativa (linguagem da Onda 6, sem mudanca de urgencia) -- BSD-8 tratado como continuacao bounded da mesma veia de BSD-7, nao reabertura de sub-frente"
+wave7_toe_qualitative_signal: "primeiro sinal de afinamento QUALITATIVO (nao quantitativo) da linha TOE -- TOE-7 avaliado como quase tautologico no plano da Onda 7, sinal a observar nas proximas 1-2 ondas, nao esgotamento ainda"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

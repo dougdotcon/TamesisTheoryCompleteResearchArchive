@@ -1,0 +1,68 @@
+schema: tamesis-discovery-lab-decision-ledger/1
+decisions:
+  - decision_id: DISC-DEC-001
+    date: 2026-08-12
+    decision: >
+      Criar a trilha de descoberta computacional (05_DISCOVERY_LAB),
+      paralela ao 04_FORMAL_RESEARCH_LAB, a pedido explicito do usuario.
+      Escopo inicial: aberto/multi-dominio (nenhum dominio unico fixado
+      ainda -- infraestrutura primeiro). Piloto autorizado: auditar e
+      refazer o trabalho legado de cosmologia/MOND-EFE
+      (01_TAMESIS_CORE/02_Experimental_Validation/{Cosmology,MOND_EFE})
+      como primeiro teste real desta trilha.
+    rationale: >
+      Contexto: sessao pesquisou e verificou um resultado real da
+      Anthropic (bound de proporcao de zeros de zeta na linha critica,
+      41.6% -> 67.2%, anthropic.com/research/riemann-zeta) produzido por
+      exploracao LLM em larga escala sem peer review formal, mas com
+      revisao adversarial substituindo peer review. O usuario perguntou
+      se fazia sentido adotar metodologia semelhante. Discussao levou a
+      uma pergunta mais fundamental: o usuario quer atacar "problemas
+      fundamentais" via descoberta computacional (algoritmo, simulacao,
+      maquina, dados publicos), explicitamente sem exigir peer review
+      academico (que ele corretamente identifica como requisito
+      institucional de credibilizacao, nao pre-requisito logico de
+      descoberta) -- mas com disciplina de revisao interna substituindo.
+
+      Mapeamento do arquivo (agente Explore) revelou que exatamente este
+      tipo de trabalho ja foi tentado neste laboratorio, na linha G
+      (cosmologia observacional): os scripts
+      02_Experimental_Validation/{Cosmology,MOND_EFE} tentam testar
+      Tamesis contra dados publicos reais (SPARC, Gaia), mas contem dado
+      fabricado/embutido disfarcado de download real (URL quebrada com
+      typo, SSL desabilitado, fallback silencioso para catalogo
+      hardcoded) e alegacoes estatisticas infladas ("EFE CONFIRMED,
+      p<0.000001") que precisaram ser corrigidas depois por notas de
+      auditoria (AUDITORIA.md, 2026-07-29) -- corrigidas DEPOIS do fato,
+      nao impedidas antes. Isso e evidencia concreta, dentro do proprio
+      arquivo, do risco que a ausencia de peer review cria quando nao
+      substituida por outra disciplina.
+
+      Tambem foi encontrada infraestrutura reaproveitavel real:
+      01_TAMESIS_CORE/03_TRANSITION_ATLAS (registro schema-driven,
+      Pydantic + JSON Schema, proveniencia rastreada, suite pytest,
+      politica de promocao epistemica) -- nao reusada diretamente nesta
+      decisao (usuario escolheu diretorio de topo separado), mas serve
+      como precedente de disciplina dentro do proprio Tamesis Core.
+
+      Usuario escolheu explicitamente: (a) trilha nova como diretorio de
+      topo separado (05_DISCOVERY_LAB), nao dentro de 03_TRANSITION_ATLAS;
+      (b) escopo aberto/multi-dominio, infraestrutura primeiro; (c)
+      cosmologia/MOND-EFE como piloto, auditando e refazendo com dado
+      real e disciplina de pre-registro, ja que o codigo e a hipotese ja
+      existem -- so os dados e a disciplina estao quebrados.
+    authority: user_explicit_authorization
+    affected_paths:
+      - "05_DISCOVERY_LAB/ (novo diretorio de topo)"
+    reversibility: reversible
+    wildcard: true
+    governance_changes:
+      - "novo diretorio de topo 05_DISCOVERY_LAB com sua propria governanca (AGENTS.md, DECISION_LEDGER.yaml, CLAIM_LEDGER.yaml, PREREGISTRATION_TEMPLATE.md)"
+      - "04_FORMAL_RESEARCH_LAB permanece intocado e continua rodando em paralelo (ciclo de ondas Lean nao pausado)"
+    untouched_safeguards:
+      - "nenhuma alegacao de Problema do Millennium resolvido, aproximado, ou alcancavel por esta trilha"
+      - "nenhuma alegacao de 'nova fisica confirmada' sem replicacao independente"
+      - "dado embutido/fabricado proibido -- toda fonte precisa de URL real verificada por fetch direto"
+      - "reexecucao adversarial obrigatoria antes de catalogar qualquer resultado"
+      - "resultados negativos/nulos catalogados com o mesmo peso que positivos"
+      - "trabalho legado de cosmologia/MOND-EFE e Millennium fora do Lean lab tratado como nao-citavel ate ser auditado individualmente"

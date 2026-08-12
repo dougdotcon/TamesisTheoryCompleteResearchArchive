@@ -184,7 +184,14 @@ queue:
     related_tests:
       - "04_FORMAL_RESEARCH_LAB 03_MILLENNIUM/01_RIEMANN (Tp, reclassificado por DEC-107 como teste unitario de maquinario, nao pesquisa sobre RH)"
     status: CANDIDATE_FORMULATING
-    existing_assets: []
+    existing_assets:
+      - "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
+      - "02_TESTS/RH_ZETA_ZEROS/data/zeros1.txt (100k zeros reais, Odlyzko)"
+      - "02_TESTS/RH_ZETA_ZEROS/data/zeros2.txt (100 zeros alta precisao)"
+      - "02_TESTS/RH_ZETA_ZEROS/data/zeros3.txt (10k zeros perto de #10^12)"
+      - "02_TESTS/RH_ZETA_ZEROS/PHASE0_TRIAGE_SUMMARY.md"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/phase0_triage.py"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/phase0_triage_result.json"
     description: >
       Motivada pelo caso Anthropic (bound de proporcao de zeros de zeta na
       linha critica, 41.6%->67.2%, artefato Lean publico sobre
@@ -192,23 +199,37 @@ queue:
       exploracao em larga escala sobre o objeto matematico REAL, seguida
       de formalizacao forte, podem coexistir. Esta linha ataca
       `riemannZeta` real, nao um operador de brinquedo.
+    phase0_progress: >
+      Fase 0 iniciada 2026-08-12. Dado real localizado e baixado
+      (tabelas de Odlyzko, verificadas por fetch direto -- ver
+      data/PROVENANCE.md). Levantamento de literatura produziu 12
+      conjecturas/resultados concretos e numericamente testaveis, cada
+      um com citacao verificada (nao as 50-500 originalmente previstas --
+      12 bem documentadas priorizadas sobre um numero maior e raso).
+      Triagem numerica rodada para 6 dos 12 itens (os que so precisam de
+      localizacao de zeros, nao avaliacao de zeta(s)) sobre 100k zeros
+      reais -- ver PHASE0_TRIAGE_SUMMARY.md para a tabela completa de
+      resultados. Achado operacional: pipeline valida contra estatisticas
+      GUE/N(T) conhecidas (itens 1,2,3) -- ferramental funciona. Item 9
+      (runs de gaps moderados consecutivos, questao aberta arXiv:2412.15481)
+      e item 7 (constante de gaps pequenos, Inoue 2026, arXiv:2604.05733)
+      sinalizados como os candidatos mais promissores a pre-registro real
+      -- nenhum ainda desenhado como pergunta falsificavel adequada.
     next_action: >
-      Fase 0 (antes de qualquer pre-registro formal, e ainda nao
-      pre-registravel como teste estatistico -- e busca de literatura +
-      triagem numerica): levantar 50-500 hipoteses candidatas a partir de
-      literatura recente sobre zeros de zeta (densidade de zeros, formula
-      explicita, correlacao de pares, Odlyzko/Montgomery, resultados
-      pos-2020), verificar cada uma contra dados numericos reais de zeros
-      (tabelas Odlyzko, LMFDB) e contra a literatura para conflito
-      conhecido, buscar contra-exemplos. So conjecturas sobreviventes a
-      essa filtragem viram candidatas a pre-registro formal + eventual
-      formalizacao Lean em 04_FORMAL_RESEARCH_LAB via Gate de Replicacao.
+      Escolher um candidato (provavelmente item 9 ou item 7 do
+      PHASE0_TRIAGE_SUMMARY.md) e desenhar uma pergunta genuinamente
+      falsificavel com criterio de decisao a priori antes de qualquer
+      pre-registro formal -- "o minimo/maximo observado e X" nao e
+      falsificavel por si so. Itens 5, 6, 10 do levantamento (exigem
+      avaliacao de zeta(s), nao so localizacao de zeros) permanecem
+      nao-triados.
     stop_condition: >
       pular a fase de filtragem numerica/literatura e ir direto para Lean;
       alegar progresso sobre RH em si a partir de qualquer resultado desta
       linha antes de sobreviver ao Gate de Replicacao; reusar qualquer
       construcao de Tp/RH-TOY como se fosse resultado sobre riemannZeta
-      real.
+      real; tratar qualquer achado de Fase 0 (exploratory_only) como se
+      fosse resultado pre-registrado.
 
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"

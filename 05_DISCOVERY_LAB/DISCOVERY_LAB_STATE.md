@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | nenhum — `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`, ver abaixo). As outras 2 linhas candidatas (`DISC-RH-REAL-001`, `DISC-TRI-RG-001`) seguem `CANDIDATE_FORMULATING` |
-| Fase | Primeiro uso real do Gate de Replicação concluído nos dois papéis (holdout aberto por terceiro agente independente + adversário de nulo dedicado). Resultado que parecia decisivo na amostra de descoberta (H_A sobrevive/H_B falsificada) não se replicou no holdout (`REPLICATION_FAILED_INCONCLUSIVE`) — rebaixado para `preregistered_inconclusive`. O Gate funcionou como desenhado |
-| Próxima ação obrigatória | Nenhuma pendente nesta linha. Escolher a próxima linha candidata (`DISC-RH-REAL-001` ou `DISC-TRI-RG-001`) para aprofundamento, ou nova investigação |
+| Teste ativo | `DISC-RH-REAL-001` (Fase 0 — triagem exploratória, `CANDIDATE_FORMULATING`, ainda não pré-registrado). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
+| Fase | RH-REAL: dado real baixado (100k zeros de Odlyzko), 12 conjecturas falsificáveis levantadas da literatura com citação verificada, triagem numérica rodada para 6 delas — pipeline validado contra estatísticas GUE/N(T) conhecidas. Nenhum resultado é descoberta ainda; 2 candidatos (gaps moderados consecutivos, constante de gaps pequenos) sinalizados para possível pré-registro futuro. Ver `02_TESTS/RH_ZETA_ZEROS/PHASE0_TRIAGE_SUMMARY.md` |
+| Próxima ação obrigatória | Escolher entre os candidatos da Fase 0 (ou outro) e desenhar uma pergunta genuinamente falsificável com critério a priori antes de qualquer pré-registro — "o mínimo/máximo observado é X" não é falsificável por si só |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
-| Claims fechados/registrados | 2 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`) |
+| Claims fechados/registrados | 2 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`) — RH-REAL ainda não gerou claim (Fase 0 é `exploratory_only`, sem pré-registro) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)

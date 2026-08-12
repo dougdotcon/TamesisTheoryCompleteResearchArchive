@@ -8,7 +8,7 @@ schema_extension_note: >
   removido. Mudança pedida explicitamente na sessão 2026-08-09,
   autorizada por PORTFOLIO-REVIEW-AFTER-SOBOLEV-CHAIN-2026-08-09.
 updated_at: 2026-08-12T00:00:00-03:00
-canonical_commit: "046a55fb7fa4d45262daea4522d562370863b61c"
+canonical_commit: "08a7c7a75f13ac52feeb89e0fd334b494a26182e"
 canonical_commit_policy: >
   Aponta para o último commit canônico integralmente encerrado
   antes da sessão atual. Deve existir e ser ancestral do HEAD.
@@ -17,11 +17,11 @@ canonical_commit_policy: >
 repository_clean: true
 active_track: "multi (millennium + toe_synthesis)"
 active_work_item: "WAVE7-BATCH-001"
-work_status: "SCOPED"
+work_status: "VERIFIED"
 specification_status: "APPROVED"
 specification_review: "N_A_SELF_SPECIFIED"
-formalization_status: "NOT_STARTED"
-result_review: "PENDING"
+formalization_status: "VERIFIED"
+result_review: "APPROVED"
 extension_status: "NOT_AUTHORIZED"
 external_integration_status: "NOT_AUTHORIZED"
 relational_bisimulation_status: "NOT_AUTHORIZED"
@@ -33,10 +33,41 @@ cli_status: "NOT_AUTHORIZED"
 parser_status: "NOT_AUTHORIZED"
 integration_status: "NOT_AUTHORIZED"
 evidence_level: "F"
-formalized_at_commit: "this integration commit (Wave 6 batch, 13 new files committed together)"
-last_verified_artifact: "13 Wave-6 Lean files across 7 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE6-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 13), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 13, axiom footprints reconstructed independently from the raw log output for every declaration -- subset of [propext, Classical.choice, Quot.sound] in 100% of cases, zero sorryAx -- one central full lake build after all 13 landed (exit 0, 8825 jobs, unchanged job count, identical to Waves 1-5), zero modification to any pre-existing tracked file (git status confirmed: exactly 13 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (26 agents total across the batch). Second consecutive fully-clean wave (13/13 CLOSED, 11 VERIFIED + 2 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED). BSD-7 (explicitly exploratory/bounded, own stop_condition capping scope at ~BSD-6's ~30-line size) closed CLOSED but this session independently re-measured its new content at 148 non-comment lines vs BSD-6's 23 -- confirming the adversarial reviewer's ~6.4x overshoot finding exactly. Mathematical content is correct and independently verified (clean recompile, clean axioms, real Mathlib citations, no BSD-GAP-008/conjecture claim) -- this is a scope-discipline process finding, not a correctness defect, and is recorded honestly in CLAIM_LEDGER/DECISION_LEDGER rather than hidden. Item 5 (YM-CAPSTONE-DET-BRACKET-TIGHTENED) genuinely gated on item 4 (YM-CAPSTONE-TRACE-M1-EXACT) -- both implementer and reviewer independently recompiled the gate dependency before proceeding."
+formalized_at_commit: "this integration commit (Wave 7 batch, 13 new files committed together)"
+last_verified_artifact: "13 Wave-7 Lean files across 7 research lines + shared infrastructure (see RESEARCH_QUEUE.yaml WAVE7-* entries for exact paths) -- each independently recompiled by this session directly (lake env lean, foreground, exit 0 on all 13, zero lint warnings on any), zero forbidden tokens (sorry/admit/axiom/unsafe) via independent grep -nw on all 13, axiom footprints reconstructed from raw #print axioms output for every declaration (subset of [propext, Classical.choice, Quot.sound], zero sorryAx), one central full lake build after all 13 landed (exit 0, 8825 jobs, unchanged job count, identical to Waves 1-6), zero modification to any pre-existing tracked file (git status confirmed: exactly 13 new untracked files) -- on top of each item's own implementer self-check and independent adversarial reviewer pass within the workflow (26 agents total across the batch). Third consecutive fully-clean wave (13/13 CLOSED, 12 VERIFIED + 1 VERIFIED_WITH_NOTES, 0 GAP_DIAGNOSED, 0 REJECTED, 0 BLOCKED). BSD-8 (bounded continuation of the BSD-7 vein, reinforced 90-line ceiling with per-sub-lemma measurement protocol) genuinely respected its discipline this time -- this session independently re-measured its true new content at 66 non-comment lines (own nested-comment-stripping script, distinct from the naive sed/grep method used by implementer/reviewer), comfortably under the 90-line ceiling, confirming the adversarial reviewer's finding that the implementer's self-reported \"89/90\" was a naive-counting-methodology artifact (systematically overestimates by miscounting multi-line block-comment continuations as code), not a near-miss on discipline. Item YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT genuinely gated on YM-CAPSTONE-DET-M1-EXACT -- both implementer and reviewer independently recompiled the gate dependency before proceeding."
 current_blocker: null
 next_single_action: >
+  WAVE7-BATCH-001 (13 itens da Onda 7 do plano de ataque de portfólio,
+  DEC-104/DEC-105) fechou VERIFIED / result_review APPROVED (DEC-106).
+  13 de 13 CLOSED (12 VERIFIED, 1 VERIFIED_WITH_NOTES -- BSD-8), 0
+  GAP_DIAGNOSED, 0 REJECTED, 0 BLOCKED -- terceiro fechamento total
+  consecutivo do ciclo (após as Ondas 5 e 6). **ACHADO POSITIVO:**
+  `BSD-8` -- desenhado especificamente para testar se a lição de
+  disciplina de `BSD-7` (Onda 6, DEC-103, excesso de ~6,4x) colaria --
+  respeitou genuinamente seu teto de 90 linhas com protocolo de medição
+  por sub-lema. Esta sessão re-mediu de forma totalmente independente
+  (script próprio de remoção de comentários de bloco aninhados) e
+  confirmou 66 linhas não-comentário genuínas contra o teto de 90 --
+  margem real confortável. O auto-relato "89/90" do implementador foi
+  identificado, pela própria revisão adversarial e confirmado por esta
+  sessão, como artefato de metodologia de contagem ingênua que
+  superestima sistematicamente (não esconde) o conteúdo real -- o mesmo
+  padrão apareceu em quase todos os 13 itens desta onda. Verificação em
+  quatro camadas idêntica às Ondas 1-6 para todos os 13 itens: `lake
+  env lean` exit 0 em todos (zero warnings), zero token proibido via
+  `grep -nw` independente, axiomas reconstruídos a partir do log bruto
+  (zero `sorryAx`), `lake build` central sem regressão (8825 jobs).
+  `git status` confirmou que NENHUM arquivo pré-existente foi tocado --
+  apenas 13 arquivos `.lean` novos. Ver
+  `09_SESSIONS/2026/2026-08-12_WAVE7_EXECUTION.md` para detalhe completo
+  por item. `authorized_action` volta a `PORTFOLIO_REVIEW_REQUIRED`.
+  Próximo passo: decisão de portfólio pendente -- continuar Onda 8 no
+  mesmo modo, e/ou decidir sobre a recomendação ativa de projeto
+  dedicado `BSD-GAP-008`, e/ou observar se TOE mostra um segundo item
+  quase-tautológico (sinal qualitativo de esgotamento).
+  ---
+  (histórico anterior preservado abaixo)
+  ---
   WAVE7-BATCH-001 (13 itens da Onda 7 do plano de ataque de portfólio,
   DEC-104/DEC-105) registrado e o gate de execução aberto. Pedido
   explícito do usuário ("Siga para onda 7"), continuação direta do
@@ -410,7 +441,7 @@ next_single_action: >
   — um programa de meses/anos se atacado por inteiro. Usuário escolheu,
   diante dessa realidade, a camada definicional apenas para este ciclo
   (ver início deste campo).
-authorized_action: "FORMALIZATION"
+authorized_action: "PORTFOLIO_REVIEW_REQUIRED"
 attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_PORTFOLIO_COMPLETO_2026_08_09.md"
 wave1_batch_authorization: "DEC-086, 27 itens WAVE1-*, escolhido pelo usuario via AskUserQuestion"
 wave2_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_2_2026_08_09.md"
@@ -437,6 +468,7 @@ wave7_attack_plan_document: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
 wave7_batch_authorization: "DEC-105, 13 itens WAVE7-*, pedido explicito do usuario (\"Siga para onda 7\")"
 wave7_bsd_gap_008_status: "OPEN, recomendacao ativa (linguagem da Onda 6, sem mudanca de urgencia) -- BSD-8 tratado como continuacao bounded da mesma veia de BSD-7, nao reabertura de sub-frente"
 wave7_toe_qualitative_signal: "primeiro sinal de afinamento QUALITATIVO (nao quantitativo) da linha TOE -- TOE-7 avaliado como quase tautologico no plano da Onda 7, sinal a observar nas proximas 1-2 ondas, nao esgotamento ainda"
+wave7_closure: "DEC-106, 13/13 CLOSED (12 VERIFIED + 1 VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED, 0 BLOCKED -- terceiro fechamento total consecutivo. BSD-8 respeitou genuinamente seu teto de linhas (66/90 real, confirmado independentemente) -- licao de BSD-7/DEC-103 colou"
 portfolio_review_document_dirichlet_oscillatory_integral: "01_PORTFOLIO/PORTFOLIO_REVIEW_DIRICHLET_OSCILLATORY_INTEGRAL_2026_08_09.md"
 portfolio_review_document_queue_exhausted_eve: "01_PORTFOLIO/PORTFOLIO_REVIEW_QUEUE_EXHAUSTED_2026_08_09_EVE.md"
 portfolio_review_document_cz_mean_zero: "01_PORTFOLIO/PORTFOLIO_REVIEW_CZ_MEAN_ZERO_2026_08_09.md"

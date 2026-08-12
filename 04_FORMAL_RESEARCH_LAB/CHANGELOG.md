@@ -1,5 +1,65 @@
 # Changelog do laboratório formal
 
+## WAVE7-BATCH-001 - 2026-08-12
+
+### Onda 7 do plano de ataque de portfólio: 13 testes falsificáveis, terceiro fechamento total consecutivo, lição de BSD-7 confirmada
+
+A pedido explícito do usuário -- "Siga para onda 7", continuando o
+mesmo ciclo -- um workflow de reconhecimento (17 agentes, 8 grupos)
+propôs `PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md` (DEC-104), fundamentado
+nos arquivos reais da Onda 6. 13 candidatos formam a Onda 7 -- mesma
+contagem agregada que a Onda 6, mas composição diferente: YM subiu de
+2 para 3 porque a revisão adversarial encontrou um terceiro candidato
+que o reconhecimento original perdera. A mesma revisão também pegou,
+de forma independente, uma tentativa de inflar teto de linhas em um
+candidato YM antes do despacho -- evidência de que a lição de
+disciplina de `BSD-7` (Onda 6, DEC-103) está generalizando.
+
+Gate aberto (DEC-105). Um segundo workflow (26 agentes) executou os 13
+em paralelo. **Resultado: 13 de 13 CLOSED (12 VERIFIED, 1
+VERIFIED_WITH_NOTES), 0 GAP_DIAGNOSED, 0 REJECTED, 0 BLOCKED --
+terceiro fechamento total consecutivo do ciclo** (após as Ondas 5 e 6).
+
+**Achado positivo: `BSD-8` testa e confirma a lição de `BSD-7`.** Este
+item, continuação bounded direta da veia de `BSD-7` (que excedeu seu
+teto em ~6,4x na Onda 6), recebeu um teto reforçado de 90 linhas com
+protocolo de medição após cada um de seus três sub-lemas. O
+implementador auto-reportou "89/90, quase no limite" -- mas a revisão
+adversarial identificou que o método de contagem (`sed`/`grep`
+ingênuo) superestima sistematicamente por não rastrear comentários de
+bloco multi-linha. Esta sessão re-mediu de forma totalmente
+independente e confirmou **66** linhas reais contra o teto de 90 --
+margem confortável genuína, não uma aproximação perigosa. Ao contrário
+de `BSD-7`, `BSD-8` respeitou de fato sua disciplina de escopo; a nota
+`VERIFIED_WITH_NOTES` reflete apenas a imprecisão de metodologia do
+auto-relato.
+
+Ver `09_SESSIONS/2026/2026-08-12_WAVE7_EXECUTION.md` para detalhe
+completo por item.
+
+#### O que NÃO foi afirmado
+
+- Nenhum Problema do Milênio ficou resolvido, aproximado, ou alcançável.
+- O fechamento de `BSD-8` constitui progresso sobre `BSD-GAP-008` ou
+  sobre a conjectura de Birch e Swinnerton-Dyer.
+- A nota `VERIFIED_WITH_NOTES` em `BSD-8` indica um problema de
+  disciplina de escopo.
+- A linha PN foi reavaliada ou reativada nesta onda.
+- `TOE-INTERFACE-001` ou `QCU-001` têm status Clay-oficial.
+- Uma eventual Onda 8 foi tentada.
+
+#### Governance
+
+- `DECISION_LEDGER`: DEC-104 (plano), DEC-105 (abertura), DEC-106
+  (fechamento).
+- `RESEARCH_QUEUE`: +13 itens `WAVE7-*` + guarda-chuva
+  `WAVE7-BATCH-001`, status SCOPED -> VERIFIED (total 164 itens).
+- `CLAIM_LEDGER`: +1 claim (`WAVE7-BATCH-FORMAL-001`), total 51.
+- `labctl.py`: allowlist estendida com os 13 códigos `WAVE7-*` + o
+  guarda-chuva.
+- `LAB_STATE`: `authorized_action` PORTFOLIO_REVIEW_REQUIRED ->
+  FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED (ciclo fechado).
+
 ## WAVE6-BATCH-001 - 2026-08-11
 
 ### Onda 6 do plano de ataque de portfólio: 13 testes falsificáveis, segundo fechamento total consecutivo, PN retirada da rotação

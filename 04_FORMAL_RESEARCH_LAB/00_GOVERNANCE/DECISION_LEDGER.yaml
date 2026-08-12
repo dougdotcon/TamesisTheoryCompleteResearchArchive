@@ -3713,3 +3713,71 @@ decisions:
       - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
       - "BSD-GAP-008 explicitamente NAO incluido nesta onda -- recomendacao ativa de projeto dedicado permanece separada"
       - "todos os itens com teto de linhas carregam instrucao explicita de medir (nao estimar) e parar honestamente se excederem o teto"
+
+  - decision_id: DEC-106
+    date: 2026-08-12
+    decision: >
+      Fechar WAVE7-BATCH-001: os 13 itens da Onda 7 do plano de ataque de
+      portfolio (DEC-104/DEC-105) VERIFICADOS. 13 de 13 CLOSED (12
+      VERIFIED, 1 VERIFIED_WITH_NOTES -- BSD-8), 0 GAP_DIAGNOSED, 0
+      REJECTED, 0 BLOCKED -- terceiro fechamento total consecutivo do
+      ciclo (apos as Ondas 5 e 6). 13 novos arquivos Lean standalone,
+      zero modificacao a qualquer arquivo pre-existente.
+    rationale: >
+      Verificacao em quatro camadas identica as Ondas 1-6. (1)
+      implementador formaliza e auto-verifica; (2) revisor adversarial
+      independente, dentro do proprio workflow, recompila do zero,
+      reconstroi footprint de axiomas, verifica citacoes Mathlib, e
+      re-mede contagens de linha de forma independente quando aplicavel;
+      (3) esta sessao recompila TODOS os 13 arquivos por conta propria
+      (lake env lean, exit 0 em todos os 13, sem excecao, e sem nenhum
+      warning de lint em nenhum -- diferente da Onda 6), grep -nw
+      independente por sorry/admit/axiom/unsafe (zero hits em todos), e
+      reconstroi o footprint de axiomas para cada declaracao a partir do
+      log bruto -- subconjunto de [propext, Classical.choice,
+      Quot.sound] em 100% das declaracoes, zero sorryAx; (4) UMA lake
+      build central apos todos os 13 pousarem (exit 0, 8825 jobs -- mesma
+      contagem das Ondas 1-6, nenhuma regressao). git status confirmou
+      exatamente 13 arquivos .lean novos untracked, zero arquivo
+      pre-existente tocado.
+
+      ACHADO POSITIVO SOBRE A LICAO DE BSD-7/DEC-103: BSD-8 -- desenhado
+      explicitamente como teste da disciplina de escopo reforcada apos o
+      excesso de ~6.4x de BSD-7 na Onda 6 -- respeitou genuinamente seu
+      teto de 90 linhas com protocolo de medicao apos cada um dos tres
+      sub-lemas. Esta sessao re-mediu de forma totalmente independente
+      (script proprio de remocao de comentarios de bloco aninhados,
+      distinto do metodo sed/grep ingenuo usado pelo implementador e
+      revisor) e confirmou 66 linhas nao-comentario genuinas contra o
+      teto de 90 -- margem real confortavel, nao uma aproximacao
+      perigosa do limite. O auto-relato "89/90" do implementador (e
+      inicialmente tambem reproduzido pelo revisor adversarial usando o
+      mesmo metodo ingenuo) foi corretamente identificado pelo proprio
+      revisor, e confirmado por esta sessao, como um artefato de
+      metodologia de contagem que superestima sistematicamente por nao
+      rastrear corretamente continuacoes de comentarios de bloco
+      multi-linha `/-! -/`. O mesmo padrao de superestimacao apareceu em
+      quase todos os 13 itens desta onda (nenhum subestimou). O veredito
+      VERIFIED_WITH_NOTES em BSD-8 reflete essa imprecisao de
+      metodologia de relato -- nao um problema de corretude matematica,
+      nem uma repeticao do lapso de disciplina de BSD-7.
+    authority: FORMALIZATION
+    affected_paths:
+      - "LAB_STATE.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml"
+      - "00_GOVERNANCE/CLAIM_LEDGER.yaml"
+      - "13 arquivos .lean novos (ver RESEARCH_QUEUE.yaml WAVE7-* para paths exatos)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "RESEARCH_QUEUE: 13 itens WAVE7-* + item guarda-chuva WAVE7-BATCH-001, status SCOPED -> VERIFIED"
+      - "LAB_STATE: authorized_action FORMALIZATION -> PORTFOLIO_REVIEW_REQUIRED"
+      - "CLAIM_LEDGER: +1 claim (WAVE7-BATCH-FORMAL-001), total 51"
+    untouched_safeguards:
+      - "NENHUM Problema do Milenio declarado resolvido, aproximado, ou alcancavel por qualquer um dos 13 itens"
+      - "BSD-8 explicitamente NAO reclassificado como progresso sobre BSD-GAP-008 ou a conjectura BSD"
+      - "BSD-GAP-008 permanece OPEN, recomendacao ativa sem mudanca de urgencia"
+      - "os gaps centrais das 6 frentes Clay-oficiais permanecem abertos -- nenhum item toca o problema central"
+      - "RH-NOGO-001 permanece FROZEN_PARTIAL_RESULT; TOE-INTERFACE-001 original permanece bloqueado; PN permanece retirada da rotacao (DEC-100)"
+      - "sinal qualitativo de afinamento em TOE-7 registrado como observacao, nao como esgotamento decidido"
+      - "zero arquivo pre-existente modificado (confirmado por git status antes de qualquer commit)"

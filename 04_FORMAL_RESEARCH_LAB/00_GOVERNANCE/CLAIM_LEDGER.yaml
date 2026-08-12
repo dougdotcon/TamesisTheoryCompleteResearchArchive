@@ -2368,3 +2368,94 @@ claims:
       - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
       - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
       - novidade matematica
+
+  - claim_id: WAVE7-BATCH-FORMAL-001
+    short_name: wave7_portfolio_attack_execution
+    exact_statement: >
+      13 testes falsificaveis pequenos, follow-ons diretos da Onda 6
+      (DEC-104/105), executados em paralelo atraves de 7 linhas de
+      pesquisa (RH, NS, YM, HG, BSD, TOE, QF) + infraestrutura
+      compartilhada (linha PN permanece retirada por DEC-100). 13 de 13
+      fecharam (CLOSED), 0 GAP_DIAGNOSED, 0 REJECTED, 0 BLOCKED --
+      terceiro fechamento total consecutivo do ciclo (apos as Ondas 5 e
+      6). Lista completa por item, formato "CODIGO: outcome/
+      veredito-adversarial -- caminho do arquivo":
+      - "RH-7c: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/TpLeAdjointProbe.lean"
+      - "RH-7d: CLOSED/VERIFIED -- 03_MILLENNIUM/01_RIEMANN/FORMAL/TpInnerSelfNonnegProbe.lean"
+      - "NS-7a: CLOSED/VERIFIED -- 03_MILLENNIUM/02_NAVIER_STOKES/FORMAL/PVComposedIndependenceOfCompactAutoRadiusNarrow.lean"
+      - "YM-CAPSTONE-DET-M1-EXACT: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneDetM1Exact.lean"
+      - "YM-CAPSTONE-LAMBDAMAX-M1-QUADRATIC-EXACT (gated no item anterior): CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneLambdaMaxM1QuadraticExact.lean"
+      - "YM-CAPSTONE-EIGVAL-DICHOTOMY-TIGHTENED: CLOSED/VERIFIED -- 03_MILLENNIUM/04_YANG_MILLS/FORMAL/YMCapstoneEigvalDichotomyTightened.lean"
+      - "HG-4h: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG4HExpConjUnitCosetNeOneProbe.lean"
+      - "HG-1i: CLOSED/VERIFIED -- 03_MILLENNIUM/05_HODGE/FORMAL/HG1IPrincipalCycleA0PowProbe.lean"
+      - "BSD-8 (teto reforcado, tres sub-lemas): CLOSED/VERIFIED_WITH_NOTES -- 03_MILLENNIUM/06_BSD/FORMAL/BSD8LocalPowerSeriesBadReductionCoeffs.lean -- nota de metodologia de contagem, nao de disciplina (ver abaixo)"
+      - "TOE-7: CLOSED/VERIFIED -- 05_FORMAL/lean/TamesisLab/TOE/FObjBijectiveKCatShiftCat.lean"
+      - "QF-12: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowContinuousMonoidHom.lean"
+      - "QF-13: CLOSED/VERIFIED -- 03_MILLENNIUM/07_QUANTUM_CLASSICAL_UNIFICATION/FORMAL/HeisenbergFlowEuclideanCLMHom.lean"
+      - "SHARED-7A: CLOSED/VERIFIED -- 03_MILLENNIUM/_SHARED_INFRA/FORMAL/QuadraticFormulaDim2NegativeBranch.lean"
+    domain: multi_domain_formal_verification
+    source_artifacts:
+      - "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+      - "01_PORTFOLIO/RESEARCH_QUEUE.yaml (entradas WAVE7-*)"
+      - "09_SESSIONS/2026/2026-08-12_WAVE7_EXECUTION.md"
+    historical_wording: ""
+    current_wording: >
+      Cada um dos 13 itens e uma peca de infraestrutura auxiliar,
+      resultado de esclarecimento, ou follow-on direto de um item da
+      Onda 6 -- NENHUM toca o problema central de qualquer Problema do
+      Milenio. Verificado em quatro camadas: implementador auto-verifica
+      -> revisor adversarial independente (dentro do proprio workflow)
+      recompila e re-verifica citacoes -> esta sessao recompila todos os
+      13 arquivos por conta propria (lake env lean, exit 0 em todos, sem
+      nenhum warning) e reconstroi footprint de axiomas para cada
+      declaracao a partir do log bruto -> uma lake build central
+      confirma zero regressao (8825 jobs, mesma contagem das Ondas 1-6).
+      git status confirmou exatamente 13 arquivos .lean novos untracked,
+      zero arquivo pre-existente modificado.
+
+      ACHADO POSITIVO SOBRE A LICAO DE BSD-7: `BSD-8` -- continuacao
+      bounded direta da mesma veia de `BSD-7` (Onda 6, que excedeu seu
+      proprio teto em ~6.4x, DEC-103) -- desta vez respeitou
+      genuinamente a disciplina de escopo. Com um teto de 90 linhas
+      novas e protocolo reforcado exigindo medicao apos CADA um dos tres
+      sub-lemas, o item fechou com margem confortavel real: esta sessao
+      re-mediu de forma totalmente independente (stripper de
+      comentarios aninhados proprio, distinto do metodo sed/grep
+      ingenuo do implementador/revisor) e confirmou **66** linhas
+      nao-comentario genuinas contra o teto de 90. O auto-relato do
+      implementador ("89/90, praticamente no limite") foi identificado,
+      pela propria revisao adversarial e depois confirmado
+      independentemente por esta sessao, como um artefato de
+      metodologia de contagem ingenua que nao rastreia comentarios de
+      bloco `/-! -/` multi-linha corretamente -- superestimando
+      sistematicamente (nunca subestimando) o conteudo real em
+      praticamente todos os 13 itens desta onda. `VERIFIED_WITH_NOTES`
+      em BSD-8 reflete essa imprecisao de metodologia de relato, NAO um
+      problema de corretude, disciplina, ou aproximacao do teto real.
+    work_status: VERIFIED
+    evidence_level: F
+    dependencies:
+      - WAVE1-BATCH-FORMAL-001
+      - WAVE2-BATCH-FORMAL-001
+      - WAVE3-BATCH-FORMAL-001
+      - WAVE4-BATCH-FORMAL-001
+      - WAVE5-BATCH-FORMAL-001
+      - WAVE6-BATCH-FORMAL-001
+    known_gaps:
+      - "BSD-GAP-008 (Mordell-Weil fraco) permanece OPEN, nao tocado por BSD-8; recomendacao ativa de projeto dedicado permanece sem mudanca de urgencia"
+      - "metodologia de contagem de linhas via sed/grep ingenuo superestima sistematicamente (nao rastreia comentarios de bloco multi-linha) -- recomendado para futuras ondas adotar o stripper de comentarios aninhados mais preciso usado pela revisao adversarial e por esta sessao, para relatos de contagem mais honestos/precisos, embora a direcao do erro atual seja conservadora e nao explorável"
+      - "TOE-7 reafirma o sinal QUALITATIVO de afinamento identificado no plano da Onda 7 -- item genuino mas de baixo conteudo cientifico, observar nas proximas 1-2 ondas"
+      - "registro de _SHARED_INFRA/FORMAL no lakefile.toml continua adiado para sessao dedicada de governanca (nao tentado nesta onda)"
+    counterevidence: []
+    canonical_owner: "01_PORTFOLIO/PLANO_DE_ATAQUE_ONDA_7_2026_08_11.md"
+    last_reviewed: 2026-08-12
+    promotion_requirements:
+      - "nao aplicavel: eh resultado formal e nao admite promocao cientifica"
+    prohibited_claims:
+      - qualquer Problema do Milenio (Riemann, Navier-Stokes, P vs NP, Yang-Mills, Hodge, BSD) ficou resolvido, aproximado, ou alcancavel
+      - que o fechamento de BSD-8 constitui progresso sobre BSD-GAP-008 ou sobre a conjectura de Birch e Swinnerton-Dyer
+      - que a nota VERIFIED_WITH_NOTES em BSD-8 indica um problema de disciplina de escopo -- ao contrario de BSD-7 (Onda 6), BSD-8 respeitou genuinamente seu teto, com margem real confirmada independentemente (66 de 90 linhas)
+      - qualquer limitacao L^2 ou L^p de operador integral singular
+      - qualquer teorema de Calderon-Zygmund, prova de Mordell-Weil, prova do gap de massa, prova de Hodge geral, ou separacao P vs NP
+      - que TOE-INTERFACE-001 ou QCU-001 tem status Clay-oficial
+      - novidade matematica

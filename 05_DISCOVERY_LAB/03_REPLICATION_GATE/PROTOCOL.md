@@ -39,6 +39,22 @@ primeira reexecução adversarial:
    uma checagem de robustez formal contra pelo menos uma fonte de dado
    adicional ou reamostragem independente, documentada explicitamente como
    tal.
+
+   **Esclarecimento (adicionado em 2026-08-12, antes do primeiro uso real
+   deste Gate, para fechar uma ambiguidade que o pré-registro original de
+   nenhum teste até agora precisou resolver):** quando um split
+   discovery/holdout foi declarado, "testar" o holdout significa reexecutar
+   EXATAMENTE a mesma estatística de teste da Seção 4 do pré-registro
+   (mesma fórmula, mesmo procedimento de ajuste, mesmo IC bootstrap),
+   agora usando SOMENTE os dados do holdout como amostra — nunca combinando
+   holdout com discovery, nunca ajustando um novo critério de decisão
+   específico para o holdout. Isso responde à pergunta "qual estatística
+   rodar no holdout?" com a resposta mais literal e menos manipulável
+   possível: a mesma que já estava travada. Qualquer teste diferente
+   (ex. usar o holdout para checar erro de predição em vez de re-ajustar)
+   é uma escolha adicional que precisa ser declarada explicitamente pelo
+   agente do Gate, com justificativa, antes de rodar — não escolhida
+   silenciosamente pela conveniência do resultado.
 4. **Auditoria de proveniência.** Reconfirmar, por conta própria (novo
    fetch/checksum quando aplicável), que a fonte de dado é a mesma
    declarada em `data/PROVENANCE.md` e que nenhum dado embutido/fabricado

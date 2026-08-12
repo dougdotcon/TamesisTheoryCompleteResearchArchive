@@ -1,11 +1,18 @@
 schema: tamesis-discovery-lab-test-queue/1
 # Ciclo de vida de status (ver ../00_GOVERNANCE/RESEARCH_PIPELINE.md):
 #   CANDIDATE_FORMULATING -> CANDIDATE_LOCKED -> ANALYZED ->
-#   ADVERSARIALLY_REVIEWED -> (REPLICATION_PENDING -> REPLICATION_PASSED/
-#   REPLICATION_FAILED -> PROMOTED_TO_FORMAL_LAB) | CLOSED_{REFUTED,NULL,
-#   INCONCLUSIVE,OUT_OF_DOMAIN,CONFIRMED_PENDING_REPLICATION}
+#   ADVERSARIALLY_REVIEWED -> (REPLICATION_PENDING -> REPLICATION_PASSED |
+#   REPLICATION_FAILED) | CLOSED_{REFUTED,NULL,INCONCLUSIVE,OUT_OF_DOMAIN}
 # CLOSED_* nao e derrota -- e informacao, catalogada com o mesmo peso que
-# PROMOTED_TO_FORMAL_LAB.
+# REPLICATION_PASSED.
+#
+# REPLICATION_PASSED e um terminus valido por si so -- NAO implica
+# PROMOTED_TO_FORMAL_LAB automaticamente. So faz sentido promover a
+# 04_FORMAL_RESEARCH_LAB (Lean) um candidato cujo nucleo seja uma
+# afirmacao matematica demonstravel (ex. RH-REAL, ou um invariante formal
+# de TRI/RG). Um achado empirico/estatistico (ex. linha SPARC-*) nao tem
+# teorema para extrair -- REPLICATION_PASSED e seu estado final legitimo,
+# catalogado como achado empirico replicado, sem passagem por Lean.
 queue:
   - test_id: DISC-COSMOLOGY-MOND-SPARC-001
     title: "Auditoria + refazimento do teste EFE/SPARC legado com dado real e pre-registro"

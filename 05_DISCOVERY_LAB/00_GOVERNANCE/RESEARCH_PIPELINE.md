@@ -46,18 +46,36 @@ por um fluxo único com um portão explícito no meio.
                                     │
                     ┌───────────────┴────────────────┐
                     │                                 │
-                   NÃO                                SIM
+                   NÃO                            REPLICATION_PASSED
                     │                                 │
-             NEGATIVE LEDGER                          ▼
-                                          ┌─────────────────────┐
-                                          │04_FORMAL_RESEARCH   │  risco
-                                          │       _LAB          │  BAIXÍSSIMO
-                                          │                     │
-                                          │ Lean, prova simbólica│
-                                          │ cotas de erro         │
-                                          │ extração de teorema   │
-                                          └─────────────────────┘
+             NEGATIVE LEDGER               núcleo é afirmação
+                                            matemática demonstrável?
+                                                       │
+                                        ┌──────────────┴──────────────┐
+                                        │                              │
+                                       NÃO                            SIM
+                                        │                              │
+                              TERMINUS LEGÍTIMO                        ▼
+                          (achado empírico replicado,      ┌─────────────────────┐
+                           catalogado, sem Lean --          │04_FORMAL_RESEARCH   │  risco
+                           ex. linha SPARC-*)                │       _LAB          │  BAIXÍSSIMO
+                                                              │                     │
+                                                              │ Lean, prova simbólica│
+                                                              │ cotas de erro         │
+                                                              │ extração de teorema   │
+                                                              └─────────────────────┘
 ```
+
+**Assimetria importante entre as linhas candidatas:** nem todo
+`REPLICATION_PASSED` tem para onde ir depois. `RH-REAL` e (potencialmente)
+o invariante de `TRI/RG` têm núcleo matemático demonstrável — um teorema
+real a extrair. Um achado como `SPARC-002` é uma comparação estatística
+entre modelos sobre dado observacional: não existe teorema Lean para
+"curvas de rotação de Ursa Maior declinam mais que as de campo". Para essas
+linhas, `REPLICATION_PASSED` já é o estado terminal legítimo — um achado
+empírico replicado e catalogado, com o mesmo peso evidencial que qualquer
+outro item desta trilha, sem passar por `04_FORMAL_RESEARCH_LAB`. A
+promoção a Lean é condicional ao tipo de claim, não automática.
 
 ## O que muda e o que não muda
 
@@ -110,12 +128,19 @@ CLOSED_*   REPLICATION_PENDING     -- entra no Gate de Replicação
                 NÃO     SIM
                  │       │
                  ▼       ▼
-            CLOSED_*   PROMOTED_TO_FORMAL_LAB
+            CLOSED_*   REPLICATION_PASSED (terminal, catalogado)
                               │
-                              ▼
-                    (vira item RESEARCH_QUEUE.yaml em
-                     04_FORMAL_RESEARCH_LAB, sujeito à
-                     disciplina de verificação Lean padrão)
+                       núcleo é afirmação
+                     matemática demonstrável?
+                              │
+                        (só então) ──▶ PROMOTED_TO_FORMAL_LAB
+                                       -- vira item RESEARCH_QUEUE.yaml em
+                                       04_FORMAL_RESEARCH_LAB, sujeito à
+                                       disciplina de verificação Lean padrão.
+                                       Achados puramente empíricos (ex.
+                                       linha SPARC-*) param em
+                                       REPLICATION_PASSED -- não há
+                                       teorema a extrair.
 ```
 
 `CLOSED_*` nunca é um estado envergonhado. Um laboratório que tenta coisas

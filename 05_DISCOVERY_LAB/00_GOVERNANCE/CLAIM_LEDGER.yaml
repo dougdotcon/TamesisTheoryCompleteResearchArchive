@@ -20,6 +20,9 @@ claims:
     preregistration_lock_commit: "49867fa"
     data_provenance_path: "02_TESTS/COSMOLOGY_MOND_SPARC/data/PROVENANCE.md"
     adversarial_review_verdict: INCONCLUSIVE
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
     dependencies: []
     known_gaps:
       - "amostra de aglomerado pequena e desbalanceada (N=28 vs N=147)"
@@ -30,14 +33,14 @@ claims:
       - "excluir as 4 galaxias de campo com ajuste de 2 pontos inverte o veredito binario (p=0.0635, informativo, nao pre-registrado)"
     prohibited_claims:
       - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
-      - "Tamesis confirmado", "detectado", ou "favorecido sobre LambdaCDM/MOND"
+      - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
         a partir deste teste isolado sem replicacao independente
       - novidade matematica/fisica sem citacao da fonte teorica exata em
         01_TAMESIS_CORE que motivou a hipotese
       - peer review formal ou publicacao -- este e um achado computacional
         interno, nao um artigo revisado
-      - "EFE CONFIRMED" ou qualquer linguagem categorica -- o resultado
-        correto e classificado e disponivel como INCONCLUSIVO / FRAGIL
+      - EFE CONFIRMED (ou qualquer linguagem categorica) -- o resultado
+        correto e reportado como INCONCLUSIVO / FRAGIL
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>
@@ -50,12 +53,25 @@ claims:
 #   preregistration_lock_commit: <hash>
 #   data_provenance_path: "02_TESTS/<nome>/data/PROVENANCE.md"
 #   adversarial_review_verdict: <CONFIRMED | REFUTED | INCONCLUSIVE | METHODOLOGY_FLAW_FOUND>
+#   replication_status: <NOT_SUBMITTED | REPLICATION_PENDING |
+#                         REPLICATION_PASSED | REPLICATION_FAILED>
+#     -- NOT_SUBMITTED e o padrao: sobreviveu so a reexecucao adversarial
+#     de primeira linha (AGENTS.md passo 7), nao ao Gate de Replicacao
+#     (03_REPLICATION_GATE/PROTOCOL.md). Um claim REPLICATION_PASSED tem
+#     peso evidencial maior que um so NOT_SUBMITTED -- essa e a distincao
+#     que o Gate existe para capturar, ver RESEARCH_PIPELINE.md.
+#   replication_gate_report_path: <path para o relatorio do Gate, se aplicavel>
+#   promoted_to_formal_lab: <true | false>
+#     -- so pode ser true se replication_status=REPLICATION_PASSED E o
+#     claim tiver nucleo matematico demonstravel (RESEARCH_PIPELINE.md);
+#     achados puramente empiricos (linha SPARC-*, por ex.) permanecem
+#     false mesmo apos REPLICATION_PASSED -- nao ha teorema a extrair.
 #   dependencies: []
 #   known_gaps: []
 #   counterevidence: []
 #   prohibited_claims:
 #     - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
-#     - "Tamesis confirmado", "detectado", ou "favorecido sobre LambdaCDM/MOND"
+#     - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
 #       a partir deste teste isolado sem replicacao independente
 #     - novidade matematica/fisica sem citacao da fonte teorica exata em
 #       01_TAMESIS_CORE que motivou a hipotese

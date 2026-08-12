@@ -185,6 +185,73 @@ claims:
         interno, nao um artigo revisado
       - promocao a 04_FORMAL_RESEARCH_LAB -- apesar do REPLICATION_PASSED,
         promoted_to_formal_lab permanece false (ver known_gaps)
+
+  - claim_id: DISC-CLAIM-004
+    short_name: zeta-zero-min-gap-scaling-confirms-gue-excludes-poisson-and-goe
+    test_id: DISC-RH-GAP-EXTREME-VALUE-SCALING-001
+    exact_statement: >
+      Motivado pela constante de gaps pequenos de Inoue (2026,
+      arXiv:2604.05733, liminf < 0,50895, RH-condicional -- nao testavel
+      com dado finito), este teste perguntou, via teoria de valores
+      extremos, se o gap normalizado minimo entre N zeros reais de zeta
+      escala como N^(-1/3) (previsao GUE, repulsao de nivel) ou N^(-1)
+      (Poisson, sem correlacao). Metodo: blocos nao-sobrepostos, grade N
+      em {500;1000;2000;5000;10000} (199,99,49,19,9 blocos), mediana dos
+      minimos de bloco, ajuste OLS de log(mediana) vs log(N), IC
+      bootstrap 95% em beta (10.000 replicas). Resultado: beta observado
+      = -0,3395, quase exatamente -1/3=-0,3333 (diferenca ~0,006). IC
+      95% = [-0,3872; -0,2868] -- contem -1/3 folgadamente, exclui -1
+      (Poisson) com folga grande. Checagem bonus (nao pre-registrada,
+      informativa): o expoente GOE (-1/2) tambem cai fora do IC --
+      discrimina especificamente a classe de universalidade GUE, nao so
+      "GUE vs. aleatorio". Reexecucao adversarial independente reproduziu
+      medianas de bloco e beta ajustado BIT A BIT, verificou o expoente
+      teorico da Wigner surmise por calculo direto (nao assumido), e
+      confirmou robustez removendo qualquer extremo da grade de N.
+    evidence_level: preregistered_confirmed
+    evidence_level_note: >
+      H_GUE (expoente -1/3) sobreviveu ao IC; H_Poisson (-1) foi
+      excluida com folga grande, robusta a remocao de qualquer extremo
+      da grade. IMPORTANTE: o IC (largura ~0,10) discrimina
+      DECISIVAMENTE GUE de Poisson, mas NAO tem precisao para confirmar
+      que o expoente e EXATAMENTE -1/3 contra outros valores proximos
+      nao motivados teoricamente (ex. -0,30, -0,35, -0,38 tambem caem
+      dentro do IC) -- a interpretacao GUE e justificada pela
+      fundamentacao teorica independente (Wigner surmise, universalidade
+      GUE ja estabelecida na literatura para zeros de zeta), nao pela
+      proximidade numerica de -0,3395 a -1/3 isoladamente. Nao
+      superestimar como "confirma exatamente -1/3".
+    preregistration_path: "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/PREREGISTRATION.md"
+    preregistration_lock_commit: "db9bc89"
+    data_provenance_path: "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/data/PROVENANCE.md"
+    adversarial_review_verdict: CONFIRMED
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies:
+      - "DISC-CLAIM-003 (correlacao serial negativa entre gaps, REPLICATION_PASSED -- motiva a expectativa GUE testada aqui, mas este teste avalia uma propriedade estatistica distinta -- escala de valor extremo, nao correlacao serial)"
+    known_gaps:
+      - "IC discrimina GUE de Poisson com folga grande, mas nao tem precisao para confirmar o expoente exato -1/3 contra outros valores proximos nao motivados teoricamente -- ver evidence_level_note"
+      - "com apenas 9 blocos em N=10000, o bootstrap da mediana tem discretizacao conhecida na literatura estatistica (Bickel & Freedman 1981) -- afeta a PRECISAO do IC nesse ponto extremo, nao a direcao/magnitude da conclusao (verificado por reexecucao adversarial: remover N=10000 da grade preserva o veredito)"
+      - "erro de digitacao cosmetico no texto (nao no calculo) do pre-registro travado -- Secao 4 diz '99, 99, 49, 19, 9 blocos', deveria ser '199, 99, 49, 19, 9' (floor(99999/500)=199); nao corrigido por estar no documento travado, e nao afetou nenhum calculo em nenhum dos dois scripts (ambos usam floor division correta)"
+      - "achado e uma confirmacao numerica de estrutura GUE ja conhecida na literatura (universalidade de zeros de zeta), nao uma descoberta matematica nova -- nao promovido a 04_FORMAL_RESEARCH_LAB"
+      - "Gate de Replicacao completo nao acionado -- decisao pendente do usuario (exigiria zeros5.txt, regime #10^22, ja reservado mas nao baixado)"
+    counterevidence: []
+    prohibited_claims:
+      - qualquer confirmacao ou refutacao da constante de Inoue 2026
+        (liminf < 0,50895) em si -- essa afirmacao nao e testavel com
+        dado finito; este teste avalia apenas uma pergunta proxy sobre
+        lei de escala
+      - qualquer alegacao de progresso sobre a Hipotese de Riemann
+      - descoberta matematica nova -- a universalidade GUE de zeros de
+        zeta ja e conhecida na literatura padrao (Montgomery, Odlyzko,
+        Katz-Sarnak)
+      - confirma exatamente o expoente -1/3 -- o IC nao tem precisao
+        para isso, ver evidence_level_note
+      - peer review formal ou publicacao -- este e um achado computacional
+        interno, nao um artigo revisado
+      - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
+        Replicacao completo -- replication_status e NOT_SUBMITTED
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

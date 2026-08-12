@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | nenhum — `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`, ver abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
-| Fase | RH-REAL: Fase 0 completa + primeiro sub-teste (`DISC-RH-ZERO-GAP-RUNS-001`) passou pelo Gate de Replicação completo. Achado (`INVERSE_SIGNAL`): gaps grandes consecutivos entre zeros reais de zeta são significativamente MENOS comuns que sob reordenação aleatória (não mais, como a hipótese original previa) — confirmado em TRÊS datasets/regimes de altura disjuntos (~75.000, ~10¹², ~10²¹), com adversário de nulo do Gate mostrando que o padrão é consequência genérica de correlação serial negativa (não circular, não artefato numérico) |
-| Próxima ação obrigatória | Nenhuma pendente nesta linha. Escolher outro candidato de RH-REAL (item 7 da Fase 0, ainda sem desenho falsificável) ou seguir para `DISC-TRI-RG-001` |
+| Teste ativo | `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` (`ADVERSARIALLY_REVIEWED`, `CONFIRMED` — ver abaixo). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
+| Fase | RH-REAL: dois sub-testes concluídos. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — resultado decisivo, `β̂=-0,3395` vs. previsão `-0,3333` |
+| Próxima ação obrigatória | Decisão do usuário: acionar o Gate de Replicação completo para `DISC-CLAIM-004` (exigiria baixar `zeros5.txt`, regime #10²², já reservado) ou seguir para `DISC-TRI-RG-001` |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
-| Claims fechados/registrados | 3 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_PASSED`, `promoted_to_formal_lab: false`) |
+| Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: NOT_SUBMITTED`) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)

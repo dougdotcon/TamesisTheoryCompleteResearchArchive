@@ -366,12 +366,14 @@ queue:
     related_tests:
       - "DISC-RH-REAL-001 (linha guarda-chuva)"
       - "DISC-RH-ZERO-GAP-RUNS-001 (REPLICATION_PASSED -- mesma linha, motiva a expectativa GUE via correlacao serial negativa ja confirmada)"
-    status: ANALYZED
+    status: ADVERSARIALLY_REVIEWED
     existing_assets:
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/PREREGISTRATION.md"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/data/PROVENANCE.md"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/run_preregistered_analysis.py"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_primary.json"
+      - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/adversarial_reproduction.py"
+      - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_adversarial.json"
     description: >
       Pergunta proxy falsificavel motivada pelo item 7 do levantamento de
       literatura (constante de gaps pequenos de Inoue 2026, arXiv:2604.05733,
@@ -392,9 +394,39 @@ queue:
       limpo que o teste anterior desta linha (DISC-RH-ZERO-GAP-RUNS-001).
       Mediana dos minimos de bloco decrescente monotonicamente com N como
       esperado (0,1204 em N=500 ate 0,0445 em N=10000).
+    adversarial_verdict: CONFIRMED
+    adversarial_verdict_detail: >
+      Reexecucao independente (agente separado, codigo proprio escrito
+      antes de ler o script primario) reproduziu as medianas de minimo
+      por bloco BIT A BIT (8 casas decimais), beta ajustado identico
+      (-0,339539, verificado por tres metodos independentes: equacoes
+      normais, np.polyfit, scipy.stats.linregress; r^2=0,987), e IC
+      bootstrap identico a 5-6 casas significativas (mesma seed).
+      Verificacao numerica direta de que a Wigner surmise GUE tem
+      expoente proximo de zero = 2 exato (confirmado, nao assumido) --
+      justifica o expoente de escala -1/3 a partir de primeiros
+      principios, nao so por ajuste. Checagem bonus: expoente GOE (-1/2)
+      TAMBEM cai fora do IC -- discrimina corretamente nao so GUE vs.
+      Poisson, mas a classe de universalidade GUE especificamente contra
+      GOE. Checagem de robustez: remover qualquer extremo da grade de N
+      (so 4 pontos, sem N=10000 OU sem N=500) preserva o veredito
+      qualitativo -- H_GUE sobrevive, H_Poisson excluida com folga em
+      ambos os casos. Ressalva legitima identificada: com apenas 9 blocos
+      em N=10000, o bootstrap da mediana tem discretizacao conhecida na
+      literatura estatistica (Bickel & Freedman 1981) -- afeta a
+      PRECISAO do IC nesse ponto extremo, nao a direcao/magnitude da
+      conclusao (confirmado pela checagem de robustez). Nenhum bug de
+      codigo encontrado -- unico defeito achado foi um erro de digitacao
+      cosmetico no texto do pre-registro travado (Secao 4 diz "99, 99,
+      49, 19, 9 blocos", deveria ser "199, 99, 49, 19, 9" -- floor(99999/500)=199,
+      nao 99; o erro esta so na prosa, o codigo sempre usou floor
+      division correta em ambos os scripts, nao se propagou para nenhum
+      calculo).
     next_action: >
-      Reexecucao adversarial independente (AGENTS.md passo 7) antes de
-      qualquer registro em CLAIM_LEDGER.yaml.
+      Resultado confirmado por reexecucao adversarial. Decisao pendente
+      do usuario: acionar o Gate de Replicacao completo (exigiria
+      zeros5.txt, regime #10^22, ainda reservado e nao baixado) ou
+      registrar o achado no nivel de confianca atual.
     stop_condition: >
       reformular a grade de N, o metodo de bloco, ou o criterio apos ver
       os resultados; alegar confirmacao/refutacao da constante de Inoue

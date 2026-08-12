@@ -237,10 +237,12 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-RH-REAL-001 (linha guarda-chuva; este e o primeiro sub-teste pre-registrado)"
-    status: CANDIDATE_LOCKED
+    status: ANALYZED
     existing_assets:
       - "02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md"
       - "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/run_preregistered_analysis.py"
+      - "02_TESTS/RH_ZETA_ZEROS/analysis/result_primary.json"
     description: >
       Pergunta proxy falsificavel motivada pela questao aberta arXiv:2412.15481
       (existem infinitos runs de r gaps consecutivos normalizados >= c?
@@ -252,10 +254,30 @@ queue:
       ja observada na Fase 0 (exploratoria, nao e a estatistica de teste).
       Grade pre-declarada: c em {0,10;0,20;0,30} x r em {2;3}, teste de
       permutacao (10.000 replicas), Bonferroni sobre as 6 celulas.
+    result_summary: >
+      VEREDITO: INVERSE_SIGNAL -- a hipotese H previu MAIS runs de gaps
+      grandes consecutivos no dado real vs. nulo permutado; o resultado
+      real foi o OPOSTO. Em c=0,30 (r=2 e r=3), a contagem real de runs
+      ficou significativamente ABAIXO da distribuicao nula (p~0,0001,
+      muito abaixo do limiar de Bonferroni 0,00833) -- essencialmente
+      NENHUMA das 10.000 permutacoes teve contagem tao baixa quanto o
+      dado real ordenado. Em c=0,20 o efeito e sugestivo mas nao cruza o
+      limiar corrigido (p~0,02). Em c=0,10 sem efeito detectavel. MESMO
+      padrao replicado no dataset secundario (zeros3.txt, regime de
+      altura ~10^12, completamente disjunto): significativo em c=0,30
+      (p~0,001 e p~0,0001), nao significativo em c<=0,20 -- consistencia
+      cruzada de altura fortalece a confianca de que o efeito e real, nao
+      um artefato de uma amostra especifica. INTERPRETACAO CORRIGIDA: a
+      correlacao negativa entre gaps vizinhos (-0,357, achado da Fase 0)
+      na verdade SUPRIME runs de gaps grandes consecutivos (correlacao
+      negativa promove alternancia, nao persistencia) -- o raciocinio
+      direcional da Secao 1 do pre-registro estava ERRADO na direcao,
+      mas o teste capturou corretamente um efeito real na direcao oposta,
+      exatamente o cenario INVERSE_SIGNAL que o proprio pre-registro
+      exigia reportar de forma proeminente, nao escondido.
     next_action: >
-      Rodar o teste de permutacao travado na Secao 4 do PREREGISTRATION.md
-      sobre zeros1.txt (primario) e zeros3.txt (secundario/generalizacao).
-      Depois: reexecucao adversarial independente (AGENTS.md passo 7).
+      Reexecucao adversarial independente (AGENTS.md passo 7) antes de
+      qualquer registro em CLAIM_LEDGER.yaml.
     stop_condition: >
       reformular a grade de c/r, o modelo nulo, ou o criterio de
       agregacao depois de ver os resultados; alegar confirmacao/refutacao

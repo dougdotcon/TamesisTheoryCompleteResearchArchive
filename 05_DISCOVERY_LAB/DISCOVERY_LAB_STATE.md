@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | `DISC-COSMOLOGY-MOND-SPARC-002` (pivotado, `ADVERSARIALLY_REVIEWED`) — as outras 2 linhas candidatas (`DISC-RH-REAL-001`, `DISC-TRI-RG-001`) seguem `CANDIDATE_FORMULATING` |
-| Fase | Achado forte e robusto: uma das duas derivações internas conflitantes de `a₀` do corpo teórico Tamesis (`a₀=cH₀`, "MOND Emergence") foi falsificada contra dado real SPARC; a outra (`a₀=cH₀/2π`, "Ponte Holográfica") sobreviveu. Reproduzido de forma independente (0,004% de diferença). Holdout selado (55 galáxias) ainda não aberto |
-| Próxima ação obrigatória | Decisão do usuário: acionar o Gate de Replicação completo (`03_REPLICATION_GATE/PROTOCOL.md` — terceiro agente independente, abertura do holdout, adversário de nulo dedicado) para este resultado, ou seguir para outra linha |
+| Teste ativo | nenhum — `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`, ver abaixo). As outras 2 linhas candidatas (`DISC-RH-REAL-001`, `DISC-TRI-RG-001`) seguem `CANDIDATE_FORMULATING` |
+| Fase | Primeiro uso real do Gate de Replicação concluído nos dois papéis (holdout aberto por terceiro agente independente + adversário de nulo dedicado). Resultado que parecia decisivo na amostra de descoberta (H_A sobrevive/H_B falsificada) não se replicou no holdout (`REPLICATION_FAILED_INCONCLUSIVE`) — rebaixado para `preregistered_inconclusive`. O Gate funcionou como desenhado |
+| Próxima ação obrigatória | Nenhuma pendente nesta linha. Escolher a próxima linha candidata (`DISC-RH-REAL-001` ou `DISC-TRI-RG-001`) para aprofundamento, ou nova investigação |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
-| Claims fechados/registrados | 2 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_falsified` para H_B, `adversarial_review_verdict: CONFIRMED`) |
+| Claims fechados/registrados | 2 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)
@@ -47,6 +47,34 @@ Este é o resultado que a trilha foi desenhada para produzir: nem a manchete
 inflada do código legado, nem uma negação categórica — um número real,
 reproduzido de forma independente, e corretamente rotulado como frágil
 demais para sustentar qualquer alegação de detecção.
+
+## Resultado de DISC-COSMOLOGY-MOND-SPARC-002 (pivotado, encerrado)
+
+`next_action` original (extrair de `01_TAMESIS_CORE` uma previsão Tamesis
+distinta de MOND genérico) resolvido com achado **negativo**: essa
+previsão não existe. Pivotado para testar qual das duas derivações
+internas conflitantes de `a₀` sobrevive ao dado real — `a₀=cH₀/(2π)`
+("Ponte Holográfica") vs. `a₀=cH₀` ("MOND Emergence", cuja própria
+alegação numérica já é aritmeticamente incorreta por fator ~5,7,
+independente de qualquer dado).
+
+Na amostra de descoberta (120 galáxias), o resultado pareceu decisivo:
+`H_A` sobrevive, `H_B` falsificada por fator ~2,5×, reproduzido de forma
+independente com 0,004% de diferença. O Gate de Replicação (holdout de 55
+galáxias, nunca antes visto, aberto por um terceiro agente independente)
+**não confirmou** esse resultado — `g†` no holdout saiu 3,5× maior,
+intervalo de confiança largo o suficiente para conter as duas hipóteses.
+Um adversário de nulo dedicado mostrou que o achado sobrevive a
+sistemáticas conhecidas do SPARC, mas seu peso evidencial específico para
+Tamesis é mais fraco do que parecia (a0_A reproduz uma coincidência já
+conhecida na literatura MOND padrão desde antes de Tamesis existir).
+Achado lateral acionável: `MOND_Emergence/index.html:282` provavelmente
+contém um erro de copy-paste, independente do veredito estatístico.
+
+Veredito final: `DISC-CLAIM-002`, `evidence_level: preregistered_inconclusive`,
+`replication_status: REPLICATION_FAILED` (inconclusivo, não contraditório).
+Ver `09_SESSIONS/2026/2026-08-12_A0_DERIVATION_PIVOT.md` para o relato
+completo em ordem cronológica.
 
 ## O que já foi feito nesta trilha
 
@@ -95,19 +123,24 @@ status `CANDIDATE_FORMULATING`, nenhuma pré-registrada):
 
 ## O que ainda não foi feito
 
-- Priorização do usuário entre as 3 linhas candidatas para aprofundamento
-  real nesta sessão ou na próxima.
-- Resolver o `next_action` de qualquer uma delas (todas exigem trabalho de
+- Escolher entre `DISC-RH-REAL-001` e `DISC-TRI-RG-001` (ou uma nova
+  linha) para aprofundamento real.
+- Resolver o `next_action` da linha escolhida (todas exigem trabalho de
   formulação — literatura, dado real, modelo concorrente nomeado — antes
   de qualquer pré-registro).
+- Fora do escopo desta trilha, mas acionável: reportar/corrigir o
+  provável erro de copy-paste em
+  `01_TAMESIS_CORE/03_Axiomatic_Closure/Universe_Equation/02_MOND_Emergence/index.html:282`.
 
 ## Como continuar (para o próximo agente/sessão)
 
 Ler `00_GOVERNANCE/RESEARCH_PIPELINE.md` e `METHODOLOGY_EXTENSIONS.md`
-primeiro. Para uma das 3 linhas candidatas, seguir `00_GOVERNANCE/AGENTS.md`
-desde o passo 1 — mas agora o passo 3 exige declarar o discriminating
-observable (e holdout selado, se aplicável) no `PREREGISTRATION.md` antes
-do commit de lock. Não reabrir nem editar
-`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` (piloto 001, fechado e
-travado) — uma extensão dessa linha de investigação é um novo teste com
-seu próprio pré-registro, não uma reabertura deste.
+primeiro. Para uma das 2 linhas candidatas restantes, seguir
+`00_GOVERNANCE/AGENTS.md` desde o passo 1 — mas agora o passo 3 exige
+declarar o discriminating observable (e holdout selado, se aplicável) no
+`PREREGISTRATION.md` antes do commit de lock. Não reabrir nem editar
+`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` (piloto 001) nem
+`02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md` (teste 002, ambos
+fechados e travados, holdout deste último já consumido) — uma extensão
+de qualquer uma dessas linhas de investigação é um novo teste com seu
+próprio pré-registro, não uma reabertura.

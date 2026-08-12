@@ -54,44 +54,70 @@ claims:
       Universe_Equation/02_MOND_Emergence/index.html:282, a0_B~=6,8009e-10
       m/s^2 -- alegacao numerica da propria linha 282, "~1,2e-10", ja
       aritmeticamente incorreta por fator ~5,7 independente de qualquer
-      dado). Ajustando g-dagger diretamente ao dado real SPARC (120
-      galaxias de descoberta, 2327 pontos, holdout de 55 galaxias
-      permanece selado): g-dagger=1,1977e-10 m/s^2 (0,2% do valor de
-      McGaugh et al. 2016), IC bootstrap 95% = [6,76e-11, 2,78e-10]. a0_A
-      cai DENTRO do IC (H_A sobrevive); a0_B cai FORA por fator ~2,5x
-      acima do limite superior (H_B falsificada). Resultado reproduzido
-      de forma independente (agente separado, codigo proprio escrito
-      antes de ler o script primario) com diferenca de 0,004% no ponto
-      estimado, robusto a ajuste em espaco log e a exclusao do pior
-      outlier.
-    evidence_level: preregistered_falsified
+      dado; o adversario de nulo desta sessao encontrou evidencia de que
+      "1,2e-10" na linha 282 e provavelmente um copy-paste incorreto do
+      RESULTADO da derivacao A, mal rotulado como B). NA AMOSTRA DE
+      DESCOBERTA (120 galaxias, 2327 pontos, dado real SPARC): g-dagger
+      ajustado=1,1977e-10 m/s^2 (0,2% do valor de McGaugh et al. 2016), IC
+      bootstrap 95%=[6,76e-11, 2,78e-10]. a0_A DENTRO do IC (H_A
+      sobrevive); a0_B FORA por fator ~2,5x (H_B falsificada). Reproduzido
+      de forma independente com 0,004% de diferenca, robusto a espaco log
+      e exclusao de outlier. NO HOLDOUT SELADO (55 galaxias, aberto pela
+      primeira vez pelo Gate de Replicacao, 1062 pontos): g-dagger=4,1518e-10
+      m/s^2, IC bootstrap 95%=[8,02e-11, 9,07e-10] -- largo o suficiente
+      para conter TANTO a0_A QUANTO a0_B (BOTH_SURVIVE_INCONCLUSIVE),
+      atribuivel a concentracao de leverage em 3 de 55 galaxias (91,7% da
+      soma pooled de g_bar^2). O Gate nao contradiz o achado de descoberta,
+      mas tambem nao o confirma de forma independente. Adversario de nulo
+      dedicado testou sistematicas SPARC conhecidas (quality flag,
+      inclinacao, erro de distancia ate 30% coerente) sobre a amostra de
+      descoberta -- nenhuma desloca g-dagger o suficiente para reconciliar
+      H_B (deslocamentos de 1-16%, precisaria de ~5,7x) -- mas encontrou
+      que a0_A=cH0/(2pi) reproduz uma coincidencia numerica ja conhecida na
+      literatura MOND padrao (Milgrom, decadas antes de Tamesis, ver
+      arXiv:2001.09729), reduzindo o poder discriminativo especifico de
+      Tamesis do achado, e que o IC de 95% de descoberta e largo o
+      suficiente para que ~20-30% de um prior log-uniforme razoavel para
+      a0 cairia dentro dele por acaso.
+    evidence_level: preregistered_inconclusive
     preregistration_path: "02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md"
     preregistration_lock_commit: "d374210"
     data_provenance_path: "02_TESTS/COSMOLOGY_A0_DERIVATION/data/PROVENANCE.md"
     adversarial_review_verdict: CONFIRMED
-    replication_status: NOT_SUBMITTED
-    replication_gate_report_path: null
+    replication_status: REPLICATION_FAILED
+    replication_gate_report_path: "02_TESTS/COSMOLOGY_A0_DERIVATION/analysis/result_gate_holdout.json"
     promoted_to_formal_lab: false
     dependencies: []
     known_gaps:
-      - "holdout selado (55 galaxias) nao aberto -- este resultado usa apenas a amostra de descoberta (120 galaxias); Gate de Replicacao completo ainda nao acionado"
-      - "ajuste em espaco linear (nao o metodo exato do paper original, que usa peso/metodo mais sofisticado) -- scatter residual ~0,20 dex vs ~0,11-0,13 dex publicado; nao afeta o veredito binario (checado por robustez em espaco log)"
-      - "a0_A sobrevive dentro do IC nao significa que a derivacao 'Ponte Holografica' esteja provada correta -- apenas que nao foi falsificada por este teste; a tolerancia de 15% ja embutida no proprio script mond_derivation_proof.py e mais generosa que o IC empirico aqui obtido"
-    counterevidence: []
+      - "Gate de Replicacao (holdout de 55 galaxias) resultou em REPLICATION_FAILED_INCONCLUSIVE -- o achado de descoberta (H_A sobrevive/H_B falsificada) e SUGESTIVO, nao confirmado de forma independente; o holdout nao teve poder estatistico para distinguir H_A de H_B (IC largo, dominado por 3 galaxias de alta luminosidade)"
+      - "IC de 95% da amostra de descoberta e largo o suficiente que ~20-30% de um prior log-uniforme razoavel para a0 (1e-11 a 1e-8 ou 1e-11 a 1e-9 m/s^2) cairia dentro dele por acaso -- H_A sobreviver e evidencia real mas modesta (fator ~3-5x de poder discriminativo), nao rejeicao decisiva de candidatos genericos"
+      - "a0_A=cH0/(2pi) reproduz uma coincidencia numerica ja conhecida na literatura MOND padrao (Milgrom, decadas antes de Tamesis, ver arXiv:2001.09729) -- H_A sobreviver nao e evidencia de poder discriminativo especifico de Tamesis, apenas consistencia com um fato numerico pre-existente no campo"
+      - "testado contra sistematicas SPARC conhecidas (Q flag, corte de inclinacao Inc<30, erro de distancia aleatorio e sistematico coerente ate 30%) -- nenhuma desloca g-dagger por mais que ~1-16%, muito aquem do necessario para reconciliar H_B; a falsificacao de H_B na amostra de descoberta e robusta a essas sistematicas (verificado por agente debunker adversarial)"
+      - "ajuste em espaco linear (nao o metodo exato do paper original, que usa peso/metodo mais sofisticado) -- scatter residual ~0,20 dex vs ~0,11-0,13 dex publicado; nao afeta o veredito binario na amostra de descoberta (checado por robustez em espaco log)"
+      - "a0_A sobrevive dentro do IC nao significa que a derivacao 'Ponte Holografica' esteja provada correta -- apenas que nao foi falsificada pela amostra de descoberta; a tolerancia de 15% ja embutida no proprio script mond_derivation_proof.py e mais generosa que o IC empirico ali obtido"
+      - "holdout consumido -- este split especifico (seed 20260812) nao pode ser reaberto para um teste cego futuro; uma investigacao de sequencia sobre a mesma pergunta exigiria um novo split e novo pre-registro"
+    counterevidence:
+      - "Gate de Replicacao no holdout (55 galaxias): g-dagger=4,1518e-10 m/s^2, IC 95%=[8,02e-11, 9,07e-10] -- a0_A e a0_B ambos dentro do IC, nao distingue as hipoteses. Nao contradiz o achado de descoberta, mas nao o confirma"
+      - "a0_A=cH0/(2pi) e uma coincidencia numerica ja conhecida na literatura MOND padrao decadas antes de Tamesis (Milgrom, arXiv:2001.09729) -- reduz a forca do achado como evidencia especifica de Tamesis"
     prohibited_claims:
       - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
       - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
         a partir deste teste isolado -- este teste e interno a Tamesis,
         nao compara Tamesis a nenhum modelo concorrente externo
       - a derivacao MOND Emergence (a0=cH0) permanece uma tese valida do
-        corpo teorico Tamesis -- este teste falsifica especificamente
-        essa derivacao contra dado real; ela deveria ser corrigida ou
-        retirada em 01_TAMESIS_CORE, nao apenas notada aqui
+        corpo teorico Tamesis -- a amostra de descoberta falsifica
+        especificamente essa derivacao contra dado real; ela deveria ser
+        corrigida ou retirada em 01_TAMESIS_CORE, nao apenas notada aqui
+        (o Gate inconclusivo no holdout nao reabilita a derivacao B --
+        apenas nao a testou de forma decisiva)
+      - a derivacao Holografica (a0=cH0/2pi) foi confirmada ou validada de
+        forma independente por este teste -- o Gate de Replicacao no
+        holdout foi INCONCLUSIVO, nao um REPLICATION_PASSED
       - peer review formal ou publicacao -- este e um achado computacional
         interno, nao um artigo revisado
       - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
-        Replicacao completo -- holdout permanece selado, replication_status
-        e NOT_SUBMITTED
+        Replicacao completo bem-sucedido -- replication_status e
+        REPLICATION_FAILED (inconclusivo, nao contraditorio)
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

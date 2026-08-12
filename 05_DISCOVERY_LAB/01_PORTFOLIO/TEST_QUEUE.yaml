@@ -231,6 +231,38 @@ queue:
       real; tratar qualquer achado de Fase 0 (exploratory_only) como se
       fosse resultado pre-registrado.
 
+  - test_id: DISC-RH-ZERO-GAP-RUNS-001
+    title: "Runs de gaps moderados consecutivos entre zeros reais de zeta -- correlacao sequencial vs. reordenacao aleatoria"
+    domain: matematica_pura
+    parent_legacy: null
+    related_tests:
+      - "DISC-RH-REAL-001 (linha guarda-chuva; este e o primeiro sub-teste pre-registrado)"
+    status: CANDIDATE_LOCKED
+    existing_assets:
+      - "02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md"
+      - "02_TESTS/RH_ZETA_ZEROS/data/PROVENANCE.md"
+    description: >
+      Pergunta proxy falsificavel motivada pela questao aberta arXiv:2412.15481
+      (existem infinitos runs de r gaps consecutivos normalizados >= c?
+      nao testavel com dado finito). Testa em vez disso: a sequencia real
+      ordenada por altura de gaps normalizados mostra correlacao
+      sequencial de curto alcance (mais runs "todos >= c" do que uma
+      reordenacao aleatoria do mesmo multiconjunto de valores)? Motivado
+      por correlacao de Pearson negativa (-0,357) entre gaps consecutivos
+      ja observada na Fase 0 (exploratoria, nao e a estatistica de teste).
+      Grade pre-declarada: c em {0,10;0,20;0,30} x r em {2;3}, teste de
+      permutacao (10.000 replicas), Bonferroni sobre as 6 celulas.
+    next_action: >
+      Rodar o teste de permutacao travado na Secao 4 do PREREGISTRATION.md
+      sobre zeros1.txt (primario) e zeros3.txt (secundario/generalizacao).
+      Depois: reexecucao adversarial independente (AGENTS.md passo 7).
+    stop_condition: >
+      reformular a grade de c/r, o modelo nulo, ou o criterio de
+      agregacao depois de ver os resultados; alegar confirmacao/refutacao
+      da conjectura arXiv:2412.15481 em si a partir deste teste proxy;
+      alegar progresso sobre RH; interpretar qualquer resultado da grade
+      secundaria (zeros3.txt) como parte do criterio de decisao primario.
+
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"
     domain: multi_dominio

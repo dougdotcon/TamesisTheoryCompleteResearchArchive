@@ -1,5 +1,43 @@
 schema: tamesis-discovery-lab-claim-ledger/1
-claims: []
+claims:
+  - claim_id: DISC-CLAIM-001
+    short_name: efe-sparc-uma-vs-field-outer-slope-inconclusive
+    test_id: DISC-COSMOLOGY-MOND-SPARC-001
+    exact_statement: >
+      Em dado real SPARC (175 galaxias, Lelli/McGaugh/Schombert 2016),
+      comparando a inclinacao externa log-log da curva de rotacao entre
+      galaxias do aglomerado de Ursa Maior (f_D=4, N=28, media slope
+      +0.0781 +/- 0.1937) e galaxias de campo (f_D!=4, N=147, media slope
+      +0.1491 +/- 0.2544), um teste t de Welch de uma cauda na direcao
+      prevista pelo EFE deu p=0.049373 -- cruza o limiar pre-registrado de
+      0.05 mas cai na zona fragil (0.04-0.06) declarada a priori no
+      pre-registro. O resultado nao e robusto: excluir 4 galaxias de campo
+      cuja inclinacao externa foi ajustada com apenas 2 pontos (checagem
+      de robustez informativa, nao um novo teste) inverte o veredito
+      binario para "nao suporta EFE" (p=0.0635).
+    evidence_level: preregistered_inconclusive
+    preregistration_path: "02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md"
+    preregistration_lock_commit: "49867fa"
+    data_provenance_path: "02_TESTS/COSMOLOGY_MOND_SPARC/data/PROVENANCE.md"
+    adversarial_review_verdict: INCONCLUSIVE
+    dependencies: []
+    known_gaps:
+      - "amostra de aglomerado pequena e desbalanceada (N=28 vs N=147)"
+      - "aglomerado de Ursa Maior tem campo externo esperado muito mais fraco que o Virgem usado na predicao quantitativa original (g_ext/a0~1.25); este teste avalia apenas direcao, nao magnitude"
+      - "estatistica outer-slope sensivel a galaxias com poucos pontos observados (leverage de ajustes de 2 pontos)"
+      - "nao controla inclinacao, qualidade (Q flag), nem tipo morfologico entre os grupos"
+    counterevidence:
+      - "excluir as 4 galaxias de campo com ajuste de 2 pontos inverte o veredito binario (p=0.0635, informativo, nao pre-registrado)"
+    prohibited_claims:
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - "Tamesis confirmado", "detectado", ou "favorecido sobre LambdaCDM/MOND"
+        a partir deste teste isolado sem replicacao independente
+      - novidade matematica/fisica sem citacao da fonte teorica exata em
+        01_TAMESIS_CORE que motivou a hipotese
+      - peer review formal ou publicacao -- este e um achado computacional
+        interno, nao um artigo revisado
+      - "EFE CONFIRMED" ou qualquer linguagem categorica -- o resultado
+        correto e classificado e disponivel como INCONCLUSIVO / FRAGIL
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

@@ -4,22 +4,39 @@ queue:
     title: "Auditoria + refazimento do teste EFE/SPARC legado com dado real e pre-registro"
     domain: cosmologia_observacional
     parent_legacy: "01_TAMESIS_CORE/02_Experimental_Validation/MOND_EFE/efe/simulations/sparc_real_download.py"
-    status: AUDITED_LEGACY_DATA_VERIFIED_PREREGISTRATION_PENDING
+    status: CLOSED_INCONCLUSIVE
     existing_assets:
       - "02_TESTS/COSMOLOGY_MOND_SPARC/AUDIT_LEGACY_MOND_EFE_SPARC.md"
       - "02_TESTS/COSMOLOGY_MOND_SPARC/data/PROVENANCE.md"
+      - "02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md"
+      - "02_TESTS/COSMOLOGY_MOND_SPARC/analysis/run_preregistered_analysis.py"
+      - "02_TESTS/COSMOLOGY_MOND_SPARC/analysis/result_primary.json"
+      - "02_TESTS/COSMOLOGY_MOND_SPARC/analysis/adversarial_reproduction.py"
+      - "02_TESTS/COSMOLOGY_MOND_SPARC/analysis/result_adversarial.json"
+    result_summary: >
+      Analise pre-registrada rodada sobre dado real (175 galaxias SPARC,
+      classificacao de ambiente via campo nativo f_D=4 "Ursa Major Cluster
+      of Galaxies", N=28 aglomerado vs N=147 campo): inclinacao externa
+      media do aglomerado mais negativa que a do campo (+0.078 vs +0.149),
+      teste t de Welch de uma cauda p=0.049373 -- tecnicamente cruza o
+      limiar pre-registrado de p<0.05 na direcao prevista pelo EFE, mas
+      cai exatamente na "zona fragil" (0.04-0.06) que o proprio
+      pre-registro (Secao 5) exigia declarar como fragil a priori.
+      Reexecucao adversarial independente (agente separado, codigo
+      proprio) reproduziu os numeros exatamente e nao encontrou bugs, mas
+      identificou que o resultado depende de 4 galaxias de campo cuja
+      "inclinacao externa" e um ajuste de apenas 2 pontos (residuo zero,
+      alavancagem maxima); excluindo essas 4 galaxias (checagem de
+      robustez informativa, nao um novo teste pre-registrado), p sobe
+      para 0.0635 e o mesmo criterio inverte para "nao suporta EFE".
+    adversarial_verdict: INCONCLUSIVE
     next_action: >
-      Ler a teoria Tamesis real sobre External Field Effect / MOND (nao
-      inventar previsao) em 01_TAMESIS_CORE (comecar por
-      02_Experimental_Validation/MOND_EFE/efe/README.md e
-      lab_gravity/README.md, e qualquer paper teorico citado la) para
-      extrair a previsao numerica EXATA que Tamesis faz, com fonte
-      exata (arquivo:linha). So entao escrever o pre-registro
-      (PREREGISTRATION.md) travando hipotese, modelo nulo, estatistica
-      de teste, e criterio de falsificacao -- antes de tocar nos dados
-      reais SPARC ja baixados e verificados.
+      Nenhuma acao pendente neste teste. Um novo teste EFE mais robusto
+      (amostra maior, correcao de leverage, ou desenho de Chae et al. 2020
+      usando estimativas de campo externo em vez do outer-slope aglomerado
+      vs campo) exigiria um NOVO pre-registro, nao uma reformulacao deste.
     stop_condition: >
-      inventar uma previsao Tamesis sem citar a fonte teorica exata;
-      formular ou reformular o pre-registro depois de olhar os dados
-      reais; reusar qualquer numero ou alegacao dos scripts legados sem
-      re-derivar do dado bruto real
+      [historico, ja cumprido] inventar uma previsao Tamesis sem citar a
+      fonte teorica exata; formular ou reformular o pre-registro depois de
+      olhar os dados reais; reusar qualquer numero ou alegacao dos scripts
+      legados sem re-derivar do dado bruto real.

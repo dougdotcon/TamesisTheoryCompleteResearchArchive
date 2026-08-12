@@ -66,3 +66,49 @@ decisions:
       - "reexecucao adversarial obrigatoria antes de catalogar qualquer resultado"
       - "resultados negativos/nulos catalogados com o mesmo peso que positivos"
       - "trabalho legado de cosmologia/MOND-EFE e Millennium fora do Lean lab tratado como nao-citavel ate ser auditado individualmente"
+
+  - decision_id: DISC-DEC-002
+    date: 2026-08-12
+    decision: >
+      Fechar DISC-COSMOLOGY-MOND-SPARC-001 (o piloto autorizado por
+      DISC-DEC-001) como INCONCLUSIVO/FRAGIL, nao como "EFE detectado" nem
+      como "EFE falsificado". Registrado em DISC-CLAIM-001.
+    rationale: >
+      Pre-registro (PREREGISTRATION.md, commit 49867fa) travado antes de
+      qualquer calculo sobre dado real, adaptando o desenho original
+      Virgem-vs-campo (impossivel de reproduzir: nenhuma das galaxias de
+      Virgem citadas pelo codigo legado esta no catalogo SPARC publico
+      real, ver AUDIT_LEGACY_MOND_EFE_SPARC.md Achado 5) para
+      aglomerado-de-Ursa-Maior-vs-campo usando um campo nativo do proprio
+      catalogo (f_D=4). Analise pre-registrada rodada sobre
+      SPARC_Lelli2016c.mrt + Rotmod_LTG/*.dat reais (175 galaxias, 0
+      exclusoes) deu p=0.049373 (uma cauda, direcao EFE) -- cruza o limiar
+      de 0.05 mas cai na zona fragil (0.04-0.06) que o proprio
+      pre-registro (Secao 5) ja previa e exigia reportar como tal, nao
+      como confirmacao limpa.
+
+      Reexecucao adversarial (agente independente, codigo proprio escrito
+      do zero, sem ler o script primario antes) reproduziu os numeros
+      exatamente (nenhum bug encontrado) e adicionou uma checagem de
+      robustez informativa (nao pre-registrada, declarada como tal):
+      excluir 4 galaxias de campo cuja "inclinacao externa" e um ajuste de
+      apenas 2 pontos (residuo zero, alavancagem maxima) faz p subir para
+      0.0635, invertendo o veredito binario pela mesma formula. Veredito
+      formal do agente adversarial: INCONCLUSIVE.
+
+      Isto e o resultado que a trilha foi desenhada para produzir com
+      honestidade: nem a manchete inflada do codigo legado ("EFE
+      CONFIRMED, p<0.000001", ver AUDIT_LEGACY_MOND_EFE_SPARC.md), nem uma
+      negação categorica -- um resultado real, correto, reproduzido de
+      forma independente, e corretamente rotulado como fragil demais para
+      sustentar qualquer alegacao de deteccao.
+    authority: agent_protocol_compliance
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (status -> CLOSED_INCONCLUSIVE)"
+      - "05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml (DISC-CLAIM-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes: []
+    untouched_safeguards:
+      - "nenhuma linguagem 'CONFIRMED'/'DETECTED' usada para este resultado, em nenhum arquivo desta trilha"
+      - "checagem de robustez pos-hoc reportada como informativa, explicitamente NAO recatalogada como novo teste pre-registrado"

@@ -366,14 +366,17 @@ queue:
     related_tests:
       - "DISC-RH-REAL-001 (linha guarda-chuva)"
       - "DISC-RH-ZERO-GAP-RUNS-001 (REPLICATION_PASSED -- mesma linha, motiva a expectativa GUE via correlacao serial negativa ja confirmada)"
-    status: ADVERSARIALLY_REVIEWED
+    status: REPLICATION_FAILED
     existing_assets:
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/PREREGISTRATION.md"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/data/PROVENANCE.md"
+      - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/data/zeros5.txt"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/run_preregistered_analysis.py"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_primary.json"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/adversarial_reproduction.py"
       - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_adversarial.json"
+      - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/gate_third_dataset_replication.py"
+      - "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_gate_third_dataset.json"
     description: >
       Pergunta proxy falsificavel motivada pelo item 7 do levantamento de
       literatura (constante de gaps pequenos de Inoue 2026, arXiv:2604.05733,
@@ -422,16 +425,70 @@ queue:
       nao 99; o erro esta so na prosa, o codigo sempre usou floor
       division correta em ambos os scripts, nao se propagou para nenhum
       calculo).
+    gate_replication_result: >
+      Gate de Replicacao completo acionado a pedido do usuario. Clausula
+      de fallback de 03_REPLICATION_GATE/PROTOCOL.md Secao 3 aplicada
+      (sem holdout selado declarado): checagem de robustez contra
+      zeros5.txt (Odlyzko, regime #10^22, gamma~=1,37x10^21, nunca
+      baixado nem inspecionado nesta sessao antes desta etapa). Terceiro
+      agente independente baixou o arquivo, verificou proveniencia por
+      conta propria (checksum, verificacao de conteudo em precisao exata
+      via decimal.Decimal, nao float64), e escreveu implementacao nova
+      antes de ler qualquer script anterior -- corretamente identificou e
+      evitou o mesmo risco de cancelamento catastrofico de ponto
+      flutuante ja visto no Gate do teste-irmao (base de 22 digitos).
+
+      ACHADO ESTRUTURAL: zeros5.txt tem apenas 10.000 zeros -> 9.999
+      gaps -- quase 10x menos que o primario (zeros1.txt, 99.999 gaps).
+      Isso e insuficiente para a grade de N travada (ate N=10.000):
+      contagens de bloco obtidas foram 19 (N=500), 9 (N=1.000), 4
+      (N=2.000), 1 (N=5.000), 0 (N=10.000 -- estruturalmente impossivel,
+      o dataset tem so 9.999 gaps). So N=500 e N=1.000 atingem a barra de
+      qualidade de >=8 blocos que o proprio pre-registro declara para o
+      dataset primario. Restrito a esses dois pontos: beta=-0,137203, IC
+      95%=[-0,682116; 0,115586] -- inclui -1/3, exclui -1, mas e
+      essencialmente nao-informativo (tambem inclui 0 e -1/2). Grade
+      ingenua completa de 4 pontos usaveis (incluindo os pontos de 1 e 4
+      blocos, estatisticamente contaminados): beta=-0,171345, IC
+      95%=[-0,240284; -0,096531] -- exclui tanto -1/3 quanto -1, mas o
+      proprio agente do Gate avalia este resultado como nao confiavel
+      (dirigido inteiramente pelos pontos de 1 e 4 blocos, nao um sinal
+      robusto).
+
+      Adversario de nulo: artefato de precisao descartado (erro relativo
+      ~0,016% no minimo de bloco observado, desprezivel frente ao efeito);
+      nenhuma publicacao previa encontrada rodando este teste especifico
+      de escala em alturas tao extremas; caveat de bootstrap de amostra
+      pequena (ja identificado no dataset primario, N=10000 com 9 blocos)
+      e PIOR aqui de forma estrutural, nao apenas marginal.
+
+      VEREDITO DO GATE: REPLICATION_FAILED / CLOSED_INCONCLUSIVE -- nao
+      por contradicao com confianca, e nao uma falha de processo (os
+      requisitos 1, 2 e 4 do Gate -- agente independente, implementacao
+      nova, auditoria de proveniencia -- plenamente satisfeitos). O
+      requisito 3 (checagem de robustez contra fonte adicional) foi
+      executado honestamente, mas a fonte reservada acabou sendo pequena
+      demais para a grade travada entregar uma checagem bem-poderada.
+      Registrado com o mesmo peso evidencial que um REPLICATION_PASSED --
+      e informativo por si so (expoe uma incompatibilidade real entre o
+      tamanho do dataset reservado e o alcance superior da grade travada),
+      nao um defeito do processo.
     next_action: >
-      Resultado confirmado por reexecucao adversarial. Decisao pendente
-      do usuario: acionar o Gate de Replicacao completo (exigiria
-      zeros5.txt, regime #10^22, ainda reservado e nao baixado) ou
-      registrar o achado no nivel de confianca atual.
+      Nenhuma pendente. Achado primario (zeros1.txt, 100k zeros)
+      permanece preregistered_confirmed -- o Gate nao o contradisse, so
+      nao conseguiu confirma-lo de forma independente numa terceira
+      altura por falta de poder estatistico no dataset reservado. Licao
+      de governanca: reservar um dataset para checagem de robustez do
+      Gate deveria verificar a priori que ele tem amostra suficiente para
+      a grade travada, nao so que existe em um regime diferente --
+      nenhuma fonte adicional de Odlyzko com mais zeros no regime #10^22
+      esta disponivel para resolver isso sem um novo pre-registro.
     stop_condition: >
       reformular a grade de N, o metodo de bloco, ou o criterio apos ver
       os resultados; alegar confirmacao/refutacao da constante de Inoue
-      2026 em si; alegar progresso sobre RH; baixar ou inspecionar
-      zeros5.txt fora do Gate de Replicacao.
+      2026 em si; alegar progresso sobre RH; interpretar o
+      REPLICATION_FAILED como contradicao do achado primario -- e
+      inconclusivo por falta de poder, nao um resultado oposto.
 
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"

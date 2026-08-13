@@ -57,21 +57,59 @@ usam divisão inteira correta).
   & Freedman 1981) — afeta a precisão do IC nesse ponto extremo, não a
   direção/magnitude da conclusão (confirmado pela checagem de robustez).
 
+## Gate de Replicação completo (acionado a pedido do usuário) — resultado inconclusivo por falta de poder
+
+Sem holdout selado declarado — cláusula de fallback aplicada, checagem
+contra `zeros5.txt` (Odlyzko, regime #10²², γ≈1,37×10²¹, nunca baixado
+nesta sessão antes). Terceiro agente independente baixou o arquivo,
+verificou proveniência por conta própria (incluindo verificação de
+conteúdo em precisão exata via `decimal.Decimal`, não `float64`, evitando
+o mesmo risco de cancelamento catastrófico já visto no Gate do
+teste-irmão), e escreveu implementação nova.
+
+**Achado estrutural:** `zeros5.txt` tem apenas 10.000 zeros → 9.999
+gaps — quase 10× menos que o primário (`zeros1.txt`, 99.999 gaps).
+Insuficiente para a grade travada (até `N=10.000`): contagens de bloco
+obtidas foram 19 (N=500), 9 (N=1.000), 4 (N=2.000), 1 (N=5.000), **0
+(N=10.000 — estruturalmente impossível)**. Só `N=500` e `N=1.000`
+atingem a barra de `≥8` blocos que o próprio pré-registro declara.
+Restrito a esses dois pontos: IC=[-0,682; 0,116] — não-informativo
+(inclui -1/3, 0, e -1/2 simultaneamente). A grade ingênua de 4 pontos
+(contaminada por pontos de 1 e 4 blocos) dá IC=[-0,240; -0,097], mas o
+próprio agente do Gate avaliou esse resultado como não confiável.
+
+Adversário de nulo: artefato de precisão descartado (erro relativo
+~0,016%, desprezível); nenhuma publicação prévia encontrada rodando este
+teste específico nesta altura extrema; o caveat de bootstrap de amostra
+pequena (já identificado no dataset primário) é estruturalmente pior
+aqui, não apenas marginal.
+
+**Veredito do Gate: `REPLICATION_FAILED` / `CLOSED_INCONCLUSIVO`** — não
+por contradição com confiança, e não uma falha de processo (requisitos 1,
+2 e 4 do Gate plenamente satisfeitos). O requisito 3 foi executado
+honestamente, mas a fonte reservada acabou pequena demais para a grade
+travada entregar uma checagem bem-poderada. Registrado com o mesmo peso
+evidencial que um `REPLICATION_PASSED`.
+
+**Lição de governança documentada em `03_REPLICATION_GATE/PROTOCOL.md`:**
+ao reservar uma fonte de dado adicional para o Gate, verificar A PRIORI
+que ela tem amostra suficiente para a grade já travada — não apenas que
+existe em regime diferente.
+
 ## Estado final
 
-`DISC-CLAIM-004` registrado: `evidence_level: preregistered_confirmed`,
-com nota explícita de que o IC discrimina GUE de Poisson decisivamente
-mas NÃO tem precisão para confirmar o expoente exato -1/3 contra outros
-valores próximos não motivados teoricamente — a interpretação GUE é
-justificada pela fundamentação teórica independente, não pela proximidade
-numérica isolada. `adversarial_review_verdict: CONFIRMED`.
-`replication_status: NOT_SUBMITTED` — Gate de Replicação completo ainda
-não acionado. `promoted_to_formal_lab: false` — confirmação numérica de
-universalidade GUE já conhecida na literatura, não descoberta matemática
-nova.
+`DISC-CLAIM-004`: `evidence_level: preregistered_confirmed` (achado
+primário sobre `zeros1.txt`, 100k zeros — NÃO contradito pelo Gate).
+`adversarial_review_verdict: CONFIRMED`. `replication_status:
+REPLICATION_FAILED`, com nota explícita de que isso significa
+inconclusivo por falta de poder, não contradição. `promoted_to_formal_lab:
+false` — confirmação numérica de universalidade GUE já conhecida na
+literatura, não descoberta matemática nova.
 
 ## Próxima decisão (não tomada nesta sessão)
 
-Acionar o Gate de Replicação completo para `DISC-CLAIM-004` (exigiria
-baixar `zeros5.txt`, regime #10²², ainda reservado), ou considerar este
-resultado suficientemente estabelecido e seguir para `DISC-TRI-RG-001`.
+Não há mais fonte adicional de Odlyzko disponível no regime #10²² para
+resolver a falta de poder sem consumir dado já usado. Seguir para
+`DISC-TRI-RG-001`, ou considerar as duas linhas RH-REAL já executadas
+(gap-runs `REPLICATION_PASSED`, escala de valor extremo
+`preregistered_confirmed` com Gate inconclusivo) suficientes por ora.

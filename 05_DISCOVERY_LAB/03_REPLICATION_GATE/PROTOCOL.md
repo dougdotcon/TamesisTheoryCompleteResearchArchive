@@ -55,7 +55,22 @@ primeira reexecução adversarial:
    é uma escolha adicional que precisa ser declarada explicitamente pelo
    agente do Gate, com justificativa, antes de rodar — não escolhida
    silenciosamente pela conveniência do resultado.
-4. **Auditoria de proveniência.** Reconfirmar, por conta própria (novo
+
+   **Lição de governança (adicionada em 2026-08-13, após o Gate de
+   `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` resultar em
+   `REPLICATION_FAILED`/inconclusivo por falta de poder, não por
+   contradição):** ao reservar uma fonte de dado adicional para esta
+   checagem, o pré-registro deve verificar A PRIORI que essa fonte tem
+   amostra suficiente para a grade/estatística já travada — não apenas
+   que ela existe em um regime diferente. No caso citado, o dataset
+   reservado (`zeros5.txt`, ~10.000 zeros) tinha gaps insuficientes para
+   o maior valor de `N` da grade travada (10.000), tornando o ponto mais
+   extremo da grade estruturalmente impossível de calcular ali. Isso não
+   invalida o processo — um `REPLICATION_FAILED` por falta de poder é um
+   resultado informativo, registrado com o mesmo peso que um
+   `REPLICATION_PASSED` — mas poderia ter sido evitado checando a
+   contagem de registros da fonte reservada contra a grade travada antes
+   do lock do pré-registro, não depois.
    fetch/checksum quando aplicável), que a fonte de dado é a mesma
    declarada em `data/PROVENANCE.md` e que nenhum dado embutido/fabricado
    entrou em nenhuma etapa.

@@ -225,8 +225,21 @@ claims:
     preregistration_lock_commit: "db9bc89"
     data_provenance_path: "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/data/PROVENANCE.md"
     adversarial_review_verdict: CONFIRMED
-    replication_status: NOT_SUBMITTED
-    replication_gate_report_path: null
+    replication_status: REPLICATION_FAILED
+    replication_status_note: >
+      REPLICATION_FAILED aqui significa INCONCLUSIVO POR FALTA DE PODER,
+      NAO CONTRADICAO. O dataset reservado (zeros5.txt, regime #10^22)
+      so tem 9.999 gaps -- insuficiente para a grade travada (ate
+      N=10.000: contagens de bloco 19,9,4,1,0). Restrito aos 2 pontos com
+      >=8 blocos (N=500,1000): IC=[-0,682;0,116], nao-informativo (inclui
+      -1/3, 0, e -1/2 simultaneamente). A grade ingenua de 4 pontos
+      (contaminada por pontos de 1 e 4 blocos) da IC=[-0,240;-0,097],
+      mas o proprio agente do Gate avalia esse resultado como nao
+      confiavel. O achado primario (zeros1.txt, 100k zeros,
+      preregistered_confirmed) NAO foi contradito -- apenas nao pode ser
+      confirmado de forma independente numa terceira altura com este
+      dataset reservado especifico.
+    replication_gate_report_path: "02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/analysis/result_gate_third_dataset.json"
     promoted_to_formal_lab: false
     dependencies:
       - "DISC-CLAIM-003 (correlacao serial negativa entre gaps, REPLICATION_PASSED -- motiva a expectativa GUE testada aqui, mas este teste avalia uma propriedade estatistica distinta -- escala de valor extremo, nao correlacao serial)"
@@ -235,7 +248,8 @@ claims:
       - "com apenas 9 blocos em N=10000, o bootstrap da mediana tem discretizacao conhecida na literatura estatistica (Bickel & Freedman 1981) -- afeta a PRECISAO do IC nesse ponto extremo, nao a direcao/magnitude da conclusao (verificado por reexecucao adversarial: remover N=10000 da grade preserva o veredito)"
       - "erro de digitacao cosmetico no texto (nao no calculo) do pre-registro travado -- Secao 4 diz '99, 99, 49, 19, 9 blocos', deveria ser '199, 99, 49, 19, 9' (floor(99999/500)=199); nao corrigido por estar no documento travado, e nao afetou nenhum calculo em nenhum dos dois scripts (ambos usam floor division correta)"
       - "achado e uma confirmacao numerica de estrutura GUE ja conhecida na literatura (universalidade de zeros de zeta), nao uma descoberta matematica nova -- nao promovido a 04_FORMAL_RESEARCH_LAB"
-      - "Gate de Replicacao completo nao acionado -- decisao pendente do usuario (exigiria zeros5.txt, regime #10^22, ja reservado mas nao baixado)"
+      - "Gate de Replicacao completo acionado mas INCONCLUSIVO por falta de poder estatistico -- zeros5.txt (dataset reservado, regime #10^22) tem apenas 9.999 gaps, insuficiente para a grade travada de N ate 10.000 (ver replication_status_note); a licao de governanca (verificar a priori que um dataset reservado tem amostra suficiente para a grade travada, nao so que existe em regime diferente) foi documentada em 03_REPLICATION_GATE/PROTOCOL.md"
+      - "nao ha mais nenhuma fonte adicional de Odlyzko disponivel no regime #10^22 para resolver a falta de poder sem consumir dado ja usado -- uma tentativa nova de Gate para este claim exigiria um pre-registro novo com uma grade de N adaptada ao tamanho de amostra tipico das tabelas de Odlyzko em alturas extremas (~10^4 zeros por arquivo)"
     counterevidence: []
     prohibited_claims:
       - qualquer confirmacao ou refutacao da constante de Inoue 2026
@@ -251,7 +265,13 @@ claims:
       - peer review formal ou publicacao -- este e um achado computacional
         interno, nao um artigo revisado
       - REPLICATION_PASSED ou qualquer linguagem que sugira Gate de
-        Replicacao completo -- replication_status e NOT_SUBMITTED
+        Replicacao completo bem-sucedido -- replication_status e
+        REPLICATION_FAILED (inconclusivo por falta de poder, nao
+        contraditorio -- ver replication_status_note)
+      - que o REPLICATION_FAILED contradiz ou enfraquece o achado
+        primario (preregistered_confirmed sobre zeros1.txt) -- e um
+        resultado inconclusivo por amostra pequena no dataset reservado,
+        nao uma refutacao
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

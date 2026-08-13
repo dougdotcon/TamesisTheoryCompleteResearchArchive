@@ -1,6 +1,6 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-12
+**Última atualização:** 2026-08-13
 **Arquitetura:** motor 1 de 3 — ver `00_GOVERNANCE/RESEARCH_PIPELINE.md`
 (`05_DISCOVERY_LAB` → `03_REPLICATION_GATE` → `04_FORMAL_RESEARCH_LAB`,
 adotada em `DISC-DEC-003`). `04_FORMAL_RESEARCH_LAB` não é mais um
@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` (`ADVERSARIALLY_REVIEWED`, `CONFIRMED` — ver abaixo). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
-| Fase | RH-REAL: dois sub-testes concluídos. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — resultado decisivo, `β̂=-0,3395` vs. previsão `-0,3333` |
-| Próxima ação obrigatória | Decisão do usuário: acionar o Gate de Replicação completo para `DISC-CLAIM-004` (exigiria baixar `zeros5.txt`, regime #10²², já reservado) ou seguir para `DISC-TRI-RG-001` |
+| Teste ativo | Nenhum. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório |
+| Próxima ação obrigatória | Decisão do usuário: seguir para `DISC-TRI-RG-001`, ou considerar a linha RH-REAL suficiente por ora e escolher outra linha/candidato |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
-| Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: NOT_SUBMITTED`) |
+| Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)
@@ -76,6 +76,53 @@ Veredito final: `DISC-CLAIM-002`, `evidence_level: preregistered_inconclusive`,
 Ver `09_SESSIONS/2026/2026-08-12_A0_DERIVATION_PIVOT.md` para o relato
 completo em ordem cronológica.
 
+## Resultado da linha RH-REAL (dois sub-testes, ambos com Gate acionado)
+
+Motivada pela pesquisa de zeros de zeta da Anthropic, a linha `DISC-RH-REAL-001`
+converteu duas afirmações de literatura não-testáveis com dado finito
+(`liminf`/"infinitos") em perguntas proxy falsificáveis com modelo
+concorrente nomeado, satisfazendo a exigência de discriminating observable.
+
+**Sub-teste 1 — `DISC-RH-ZERO-GAP-RUNS-001`** (item 9, correlação sequencial
+de gaps). Hipótese direcional original **errada** — previu mais runs de
+gaps grandes consecutivos, achado real foi o oposto (`INVERSE_SIGNAL`,
+reportado honestamente como tal, sem spin). Gate de Replicação com
+`zeros4.txt` (regime #10²¹): `REPLICATION_PASSED`. Adversário de nulo
+mostrou que o efeito é genérico a qualquer sequência com autocorrelação
+serial negativa (confirmado via simulação sintética AR(1)) — isso não
+enfraquece o achado, já que a alegação substantiva sempre foi "gaps de
+zeta têm correlação serial negativa", não um mecanismo exclusivo de zeta.
+Ver `09_SESSIONS/2026/` para o relato completo desta sessão.
+
+**Sub-teste 2 — `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`** (item 7,
+constante de gaps pequenos de Inoue 2026, arXiv:2604.05733). Pergunta
+proxy via teoria de valores extremos: gap normalizado mínimo entre `N`
+zeros escala como `N^(-1/3)` (GUE) ou `N^(-1)` (Poisson)? Resultado sobre
+`zeros1.txt` (100k zeros): `β̂=-0,3395`, quase exatamente `-1/3=-0,3333`,
+IC 95% bootstrap `[-0,3872;-0,2868]` — contém GUE folgadamente, exclui
+Poisson e GOE (`-1/2`) com folga grande. `evidence_level:
+preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`
+(reprodução bit a bit por agente independente, três métodos de ajuste
+concordantes). Gate de Replicação completo acionado sobre `zeros5.txt`
+(regime #10²², nunca antes baixado): **`REPLICATION_FAILED` por falta de
+poder estatístico**, não por contradição — o dataset reservado só tem
+9.999 gaps, insuficiente para a grade travada (0 blocos possíveis em
+N=10.000; só N=500/N=1.000 atingem a barra de ≥8 blocos declarada no
+pré-registro, e restritos a esses dois pontos o IC vira
+não-informativo). O achado primário sobre `zeros1.txt` permanece de pé,
+apenas não pôde ser confirmado de forma independente numa terceira altura
+com esta fonte específica. `promoted_to_formal_lab: false` — confirmação
+numérica de universalidade GUE já conhecida na literatura, não descoberta
+matemática nova. Lição de governança documentada em
+`03_REPLICATION_GATE/PROTOCOL.md`: verificar A PRIORI que uma fonte
+reservada tem amostra suficiente para a grade já travada, não apenas que
+existe em regime diferente. Ver
+`09_SESSIONS/2026/2026-08-12_RH_GAP_EXTREME_VALUE_SCALING.md` para o
+relato completo.
+
+Não há mais fonte adicional de Odlyzko disponível no regime #10²² para
+resolver a falta de poder do sub-teste 2 sem consumir dado já usado.
+
 ## O que já foi feito nesta trilha
 
 1. Governança criada: `00_GOVERNANCE/{AGENTS.md,DECISION_LEDGER.yaml,CLAIM_LEDGER.yaml,PREREGISTRATION_TEMPLATE.md}`.
@@ -123,11 +170,10 @@ status `CANDIDATE_FORMULATING`, nenhuma pré-registrada):
 
 ## O que ainda não foi feito
 
-- Escolher entre `DISC-RH-REAL-001` e `DISC-TRI-RG-001` (ou uma nova
-  linha) para aprofundamento real.
-- Resolver o `next_action` da linha escolhida (todas exigem trabalho de
-  formulação — literatura, dado real, modelo concorrente nomeado — antes
-  de qualquer pré-registro).
+- Decisão do usuário: abrir `DISC-TRI-RG-001` (ainda exige trabalho de
+  formulação substancial — nomear um mapa de renormalização, achar dois
+  domínios reais comparáveis) ou considerar a linha RH-REAL suficiente
+  por ora e escolher outra linha/candidato.
 - Fora do escopo desta trilha, mas acionável: reportar/corrigir o
   provável erro de copy-paste em
   `01_TAMESIS_CORE/03_Axiomatic_Closure/Universe_Equation/02_MOND_Emergence/index.html:282`.
@@ -135,12 +181,17 @@ status `CANDIDATE_FORMULATING`, nenhuma pré-registrada):
 ## Como continuar (para o próximo agente/sessão)
 
 Ler `00_GOVERNANCE/RESEARCH_PIPELINE.md` e `METHODOLOGY_EXTENSIONS.md`
-primeiro. Para uma das 2 linhas candidatas restantes, seguir
-`00_GOVERNANCE/AGENTS.md` desde o passo 1 — mas agora o passo 3 exige
-declarar o discriminating observable (e holdout selado, se aplicável) no
-`PREREGISTRATION.md` antes do commit de lock. Não reabrir nem editar
-`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` (piloto 001) nem
-`02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md` (teste 002, ambos
-fechados e travados, holdout deste último já consumido) — uma extensão
-de qualquer uma dessas linhas de investigação é um novo teste com seu
-próprio pré-registro, não uma reabertura.
+primeiro. Para `DISC-TRI-RG-001` ou uma nova linha, seguir
+`00_GOVERNANCE/AGENTS.md` desde o passo 1 — mas o passo 3 exige declarar
+o discriminating observable (e holdout selado, se aplicável) no
+`PREREGISTRATION.md` antes do commit de lock, e ao reservar uma fonte de
+dado adicional para o Gate, verificar A PRIORI que ela tem amostra
+suficiente para a grade/estatística que será travada (lição de
+`03_REPLICATION_GATE/PROTOCOL.md`, 2026-08-13). Não reabrir nem editar
+`02_TESTS/COSMOLOGY_MOND_SPARC/PREREGISTRATION.md` (piloto 001),
+`02_TESTS/COSMOLOGY_A0_DERIVATION/PREREGISTRATION.md` (teste 002),
+`02_TESTS/RH_ZETA_ZEROS/PREREGISTRATION.md` (RH-REAL sub-teste 1) nem
+`02_TESTS/RH_GAP_EXTREME_VALUE_SCALING/PREREGISTRATION.md` (RH-REAL
+sub-teste 2) — todos fechados e travados, holdouts/fontes reservadas já
+consumidos. Uma extensão de qualquer uma dessas linhas de investigação é
+um novo teste com seu próprio pré-registro, não uma reabertura.

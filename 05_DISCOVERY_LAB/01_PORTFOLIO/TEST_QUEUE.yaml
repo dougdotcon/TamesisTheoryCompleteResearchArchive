@@ -183,7 +183,7 @@ queue:
     parent_legacy: "01_TAMESIS_CORE/02_Experimental_Validation/MOND_EFE/lab_gravity/analysis/gaia_real_analysis.py"
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-002 (mesmas duas hipoteses H_A/H_B, mesmo criterio de decisao -- este teste e uma replica de canal fisico independente, nao uma nova alegacao)"
-    status: CANDIDATE_LOCKED
+    status: CLOSED_INCONCLUSIVE
     existing_assets:
       - "02_TESTS/COSMOLOGY_WIDE_BINARIES/phase0/PHASE0_SEARCH.md (busca de formulacao, 3 rotas investigadas em paralelo, 2026-08-14)"
       - "02_TESTS/COSMOLOGY_WIDE_BINARIES/PREREGISTRATION.md (travado 2026-08-14)"
@@ -256,22 +256,84 @@ queue:
       faixa de dado disponivel. H_A/H_B identicas as ja travadas em
       SPARC-002, nao reformuladas. Nenhuma razao de velocidade observada
       foi calculada antes deste lock.
+    analysis_and_adversarial_result: >
+      2026-08-14: analise pre-registrada rodada sobre os 30.203 sistemas
+      de descoberta (holdout de 12.944 nunca lido alem da contagem, ver
+      abaixo), seguida de reexecucao adversarial independente (segundo
+      agente, implementacao escrita do zero so a partir do
+      PREREGISTRATION.md, sem ler o script/resultado primario ate ter o
+      proprio resultado pronto). CONCORDANCIA BIT A BIT em toda a parte
+      deterministica entre os dois agentes (contagens por bin
+      6042/6040/6040/6039/6042, medianas de g_N e de razao por bin,
+      ambos os ajustes de a0 para x0=1 e x0=5, magnitude da falha de
+      sanidade, a0_A/a0_B recalculados) -- nenhum bug de formula,
+      unidade, constante ou binagem em nenhum dos dois scripts.
+
+      RESULTADO: as 5 medianas empiricas de v_p_obs/v_p_N por bin
+      (0,6932; 0,6409; 0,6243; 0,6150; 0,5941) sao TODAS abaixo de 1.
+      O modelo MOND "simple" em espaco de velocidade,
+      (1-exp(-sqrt(g_N/a0)))^(-1/2), tem imagem estritamente em
+      (1,+infinito) para qualquer a0>0 finito -- NAO EXISTE a0 que
+      alcance o alvo. Isso torna o ajuste estruturalmente mal-
+      condicionado (sem minimo interior): checagem de convergencia
+      FALHOU (x0=1 -> 5,047e-13; x0=5 -> 4,242e-13, ~16% de diferenca);
+      checagem de sanidade da Secao 3 FALHOU (a0 ajustado ~2,4 ordens de
+      grandeza abaixo do valor de referencia McGaugh 1,2e-10, muito alem
+      da tolerancia de 1 ordem declarada).
+
+      CAUSA RAIZ (confirmada independentemente, nao e erro de
+      implementacao): formulas conferidas termo a termo, spot-check
+      manual de sistemas individuais fisicamente plausiveis, e --
+      decisivo -- o agente adversarial rodou uma simulacao de Monte
+      Carlo propria (N=200.000) de binarias Keplerianas PURAMENTE
+      NEWTONIANAS (excentricidade termica, orientacao isotropica, fase
+      orbital uniforme, ZERO fisica MOND) e obteve mediana(v_proj/
+      v_circ)~=0,55 -- mesma ordem de grandeza das medianas <1
+      observadas no dado real. E o efeito de diluicao por projecao ja
+      documentado na literatura (Pittordis & Sutherland 2018; Banik &
+      Zhao 2018), ja antecipado no proprio preambulo da Secao 4 do
+      pre-registro como limitacao declarada da estatistica simplificada
+      (em vez do metodo de desprojecao 3D completo de Chae).
+
+      Por instrucao EXPLICITA da propria Secao 3 do pre-registro ("se
+      nao estiver [em ordem de grandeza]... o teste para ate isso ser
+      resolvido, antes de aceitar qualquer veredito H_A/H_B"): NENHUM
+      veredito H_A/H_B e aceito. O criterio literal da Secao 5,
+      mecanicamente aplicado, produziria "BOTH_FALSIFIED" -- mas isso
+      NAO e lido como evidencia real contra a0_A nem a0_B, por nao
+      haver poder de discriminacao genuino na estatistica como
+      pre-registrada. Holdout (12.944 sistemas) confirmado intocado
+      pelos dois agentes -- permanece selado, disponivel para um teste
+      futuro genuinamente redesenhado (ex. com desprojecao Monte Carlo
+      completa de Chae).
+
+      LICAO DE GOVERNANCA: antes de travar um pre-registro cuja
+      estatistica discriminadora tenha uma restricao de imagem
+      derivavel (ex. uma razao de boost com piso teorico em 1), validar
+      via uma simulacao sintetica/nula rapida que valores reais
+      plausiveis do dado NAO ficam estruturalmente fora dessa imagem --
+      isso teria pego o problema antes do lock, nao depois de rodar a
+      analise completa sobre 30.203 sistemas reais.
     next_action: >
-      Rodar a analise pre-registrada (Secao 4 do PREREGISTRATION.md)
-      sobre a amostra de descoberta (30.203 sistemas): calcular
-      velocidade projetada observada por sistema, medianas por bin,
-      ajustar a0 via minimos quadrados nao-linear contra o modelo MOND,
-      IC bootstrap 95% (1000 replicas), verificar se a0_A e/ou a0_B caem
-      dentro. Depois: reexecucao adversarial independente (AGENTS.md
-      passo 7).
+      Nenhuma pendente para este teste -- fechado como CLOSED_INCONCLUSIVE.
+      Decisao do usuario sobre o proximo passo geral da trilha
+      (retomar DISC-TRI-RG-001, desenhar uma versao com desprojecao
+      completa de SPARC-003 reaproveitando o holdout selado, ou outra
+      linha).
     stop_condition: >
       reformular H_A/H_B, os cortes de qualidade, as bordas de bin, ou o
       criterio de decisao ja travados em PREREGISTRATION.md depois de
-      ver qualquer razao de velocidade calculada; abrir o holdout
-      (12.944 sistemas) fora do Gate de Replicacao; usar qualquer numero
-      do dataset fabricado em gaia_real_analysis.py; alegar "Tamesis
-      confirmado/refutado" a partir deste teste -- o maximo que decide e
-      se H_A e/ou H_B sobrevivem num canal fisico independente de SPARC.
+      ver qualquer razao de velocidade calculada (NAO violado -- o
+      diagnostico estrutural foi descoberto, nao usado para reformular
+      a metodologia ja travada); abrir o holdout (12.944 sistemas) fora
+      do Gate de Replicacao (NAO violado -- holdout permanece selado,
+      Gate nunca acionado pois o teste ja falhou sua propria checagem de
+      sanidade na amostra de descoberta); usar qualquer numero do
+      dataset fabricado em gaia_real_analysis.py; alegar "Tamesis
+      confirmado/refutado" ou "H_A/H_B falsificadas" a partir deste
+      teste -- o resultado e INCONCLUSIVO por limitacao estrutural da
+      estatistica escolhida, nao uma falsificacao real de nenhuma das
+      duas hipoteses.
 
   - test_id: DISC-RH-REAL-001
     title: "Linha RH real (riemannZeta) -- distinta de RH-TOY/Tp em 04_FORMAL_RESEARCH_LAB"

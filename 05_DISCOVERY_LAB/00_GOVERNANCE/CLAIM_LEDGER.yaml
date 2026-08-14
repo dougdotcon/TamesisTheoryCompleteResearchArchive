@@ -272,6 +272,91 @@ claims:
         primario (preregistered_confirmed sobre zeros1.txt) -- e um
         resultado inconclusivo por amostra pequena no dataset reservado,
         nao uma refutacao
+
+  - claim_id: DISC-CLAIM-005
+    short_name: wide-binary-projected-velocity-statistic-structurally-inconclusive-for-a0
+    test_id: DISC-COSMOLOGY-MOND-SPARC-003
+    exact_statement: >
+      Teste desenhado como replica independente do veredito ainda
+      inconclusivo de DISC-CLAIM-002 (H_A: a0=cH0/2pi vs H_B: a0=cH0),
+      usando um canal fisico completamente diferente de curvas de
+      rotacao: binarias largas Keplerianas do catalogo real El-Badry,
+      Rix & Heintz (2021, MNRAS 506, 2269), 43.147 sistemas pos-corte de
+      qualidade (R<0,01, 200<sepAU<30.000, BinType==MSMS,
+      distancia<200pc, 4<M_G<14 -- cortes reais de Chae 2023, verificados
+      por fetch direto de dois artigos primarios), 30.203 de descoberta
+      (12.944 holdout selado, nao tocado). Estatistica pre-registrada
+      (simplificacao declarada do metodo de desprojecao 3D completo de
+      Chae 2023): mediana de v_p_obs/v_p_N por bin de log(g_N) (5 bins,
+      bordas fixadas a priori so de massa+separacao), ajustada contra o
+      modelo MOND "simple" em espaco de velocidade,
+      (1-exp(-sqrt(g_N/a0)))^(-1/2). RESULTADO: as 5 medianas empiricas
+      (0,6932; 0,6409; 0,6243; 0,6150; 0,5941) sao TODAS abaixo de 1 --
+      mas o modelo pre-registrado tem imagem estritamente em
+      (1,+infinito) para qualquer a0>0 finito, entao NAO EXISTE a0 que
+      alcance o alvo. Ajuste estruturalmente mal-condicionado: checagem
+      de convergencia (x0=1 -> 5,047e-13; x0=5 -> 4,242e-13, ~16% de
+      diferenca) e checagem de sanidade da Secao 3 (a0 ajustado ~2,4
+      ordens de grandeza abaixo do valor de referencia McGaugh
+      1,2e-10) AMBAS FALHARAM, exatamente como a Secao 3 do
+      pre-registro ja previa que aconteceria em caso de problema
+      estrutural -- "o teste para ate isso ser resolvido, antes de
+      aceitar qualquer veredito H_A/H_B". Reexecucao adversarial
+      independente (segundo agente, implementacao do zero) reproduziu
+      TODOS os numeros deterministicos bit a bit (nenhum bug de formula,
+      unidade, constante ou binagem em nenhum dos dois scripts) e, de
+      forma decisiva, rodou uma simulacao de Monte Carlo propria
+      (N=200.000) de binarias Keplerianas PURAMENTE NEWTONIANAS
+      (excentricidade termica, orientacao isotropica, fase orbital
+      uniforme -- zero fisica MOND) obtendo mediana(v_proj/v_circ)~=0,55,
+      mesma ordem de grandeza das medianas <1 observadas no dado real --
+      confirmando que o efeito e diluicao por projecao (Pittordis &
+      Sutherland 2018; Banik & Zhao 2018), ja antecipada no proprio
+      preambulo da Secao 4 do pre-registro como limitacao declarada da
+      estatistica simplificada.
+    evidence_level: preregistered_inconclusive
+    evidence_level_note: >
+      NAO e preregistered_falsified para H_A nem H_B, apesar do criterio
+      literal da Secao 5 produzir mecanicamente "BOTH_FALSIFIED" --
+      isso e explicitamente descartado como veredito valido porque a
+      propria Secao 3 do pre-registro instrui parar o teste quando a
+      checagem de sanidade falha por mais de 1 ordem de grandeza (aqui
+      falhou por ~2,4 ordens). A estatistica pre-registrada nao tem
+      poder de discriminacao genuino entre H_A, H_B, ou qualquer outro
+      valor de a0 neste canal de dado -- e uma limitacao estrutural do
+      DESENHO do teste (imagem do modelo incompativel com diluicao por
+      projecao dos dados projetados), nao uma medida real de a0.
+    preregistration_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES/PREREGISTRATION.md"
+    preregistration_lock_commit: "652e7e5"
+    data_provenance_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES/data/PROVENANCE.md"
+    adversarial_review_verdict: METHODOLOGY_FLAW_FOUND
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies:
+      - "DISC-CLAIM-002 (mesmas hipoteses H_A/H_B, este teste tentou replicar o veredito por canal fisico independente -- nao conseguiu render um veredito valido)"
+    known_gaps:
+      - "estatistica simplificada (velocidade projetada sem desprojecao) escolhida por tratabilidade computacional -- o metodo primario completo de Chae (2023) usa desprojecao 3D via Monte Carlo orbital com excentricidades individuais de Hwang et al. 2022, nao verificadas nesta sessao, e provavelmente nao sofreria do mesmo problema estrutural de imagem"
+      - "diluicao por projecao (fator ~0,55 medido por simulacao Monte Carlo Newtoniana pura) nao foi incorporada ao modelo pre-registrado -- um pre-registro futuro poderia declarar um modelo que inclua esse fator de diluicao explicitamente, mas isso exigiria um NOVO pre-registro, nao uma reformulacao deste"
+      - "holdout (12.944 sistemas) nunca foi aberto -- permanece disponivel para um teste futuro genuinamente redesenhado sobre o mesmo catalogo real ja baixado e verificado"
+      - "ambiguidade textual descoberta pela reexecucao adversarial: o pre-registro nao especifica se a checagem de convergencia dupla de a0 deve ser reaplicada a cada replica de bootstrap ou so ao ajuste agregado primario -- as duas politicas foram testadas e documentadas, ambas levam ao mesmo veredito qualitativo, mas isso deveria ser declarado explicitamente em pre-registros futuros"
+    counterevidence:
+      - "nenhuma -- este nao e um teste que produziu evidencia a favor ou contra H_A/H_B; e um teste cuja estatistica de decisao nao conseguiu ser calculada de forma valida"
+    prohibited_claims:
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
+        a partir deste teste
+      - "H_A ou H_B falsificadas por este teste -- o criterio literal da Secao 5 produz BOTH_FALSIFIED mecanicamente, mas isso foi explicitamente descartado como veredito valido pela propria Secao 3 do pre-registro (falha de sanidade > 1 ordem de grandeza); nenhuma das duas hipoteses foi genuinamente testada aqui"
+      - que o resultado de DISC-CLAIM-002 foi replicado, confirmado, ou
+        contradito por este teste -- o canal independente nao conseguiu
+        produzir nenhum veredito valido sobre a0, nem positivo nem negativo
+      - peer review formal ou publicacao -- este e um achado computacional
+        interno, nao um artigo revisado
+      - que este e um erro de implementacao ou bug de codigo -- verificado
+        independentemente por dois agentes (concordancia bit a bit em toda
+        parte deterministica) e por uma simulacao Monte Carlo dedicada; e
+        uma limitacao estrutural genuina do desenho da estatistica
+
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

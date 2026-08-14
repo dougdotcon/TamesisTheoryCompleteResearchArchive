@@ -13,11 +13,11 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | `DISC-COSMOLOGY-MOND-SPARC-003` (`CANDIDATE_LOCKED`, ver seção própria abaixo — pré-registro travado 2026-08-14, análise ainda não rodada). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` PAUSADA (`DISC-DEC-005`, 2026-08-14) |
-| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) e `wavelet-multiresolution-scaling` (rank 2) tiveram gaps completos fechados e testados, ambos NEGATIVO (o segundo com checagem adversarial completa dado o tamanho do efeito inicial); `dfa-multiscale-entropy` (rank 3) não testado, precisaria de reformulação. Linha PAUSADA por decisão do usuário. SPARC-003: busca exaustiva de Fase 0 não encontrou nova alegação Tamesis-específica — pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (El-Badry et al. 2021, 43.147 sistemas pós-corte, 30.203 descoberta/12.944 holdout selado), com achado de integridade grave (dado fabricado em `gaia_real_analysis.py`) descoberto no processo |
-| Próxima ação obrigatória | Rodar a análise pré-registrada de `DISC-COSMOLOGY-MOND-SPARC-003` sobre a amostra de descoberta (30.203 sistemas): calcular razão de velocidade projetada por bin, ajustar `a0` via mínimos quadrados não-linear, IC bootstrap 95% (1000 réplicas), verificar se `a0_A`/`a0_B` sobrevivem — depois reexecução adversarial independente |
+| Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE`, ver seção própria abaixo — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` PAUSADA (`DISC-DEC-005`, 2026-08-14) |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) e `wavelet-multiresolution-scaling` (rank 2) tiveram gaps completos fechados e testados, ambos NEGATIVO; `dfa-multiscale-entropy` (rank 3) não testado. Linha PAUSADA por decisão do usuário. SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); análise rodada + reexecução adversarial (concordância bit a bit) mostraram que o modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível, confirmado por simulação Monte Carlo independente (diluição por projeção, efeito conhecido na literatura). `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
+| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, `DISC-TRI-RG-001` pausada. Aguardando próxima direção do usuário (retomar TRI-RG, redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado, investigar o achado de integridade de `gaia_real_analysis.py`, ou nova linha) |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (pausa de `DISC-TRI-RG-001` a pedido do usuário) |
-| Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
+| Claims fechados/registrados | 5 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]) |
 | Claims em andamento | 0 |
 
 ## Resultado do piloto (DISC-COSMOLOGY-MOND-SPARC-001)
@@ -150,6 +150,44 @@ observada foi calculada antes deste lock.
 
 Status: `CANDIDATE_LOCKED`. Próximo passo: rodar a análise
 pré-registrada, depois reexecução adversarial independente.
+
+## Resultado final de `DISC-COSMOLOGY-MOND-SPARC-003` (2026-08-14) — `CLOSED_INCONCLUSIVE`
+
+Análise pré-registrada rodada sobre os 30.203 sistemas de descoberta,
+seguida de reexecução adversarial independente (segundo agente,
+implementação do zero, sem ler o código/resultado primário antes de ter
+o próprio pronto). **Concordância bit a bit** em toda a parte
+determinística entre os dois agentes — nenhum bug de fórmula, unidade,
+constante ou binagem em nenhum dos dois scripts.
+
+**As 5 medianas empíricas de `v_p_obs/v_p_N` por bin** (0,6932; 0,6409;
+0,6243; 0,6150; 0,5941) **são todas abaixo de 1** — mas o modelo MOND
+pré-registrado, `(1-e^{-√(g_N/a0)})^{-1/2}`, tem imagem estritamente em
+`(1,+∞)` para qualquer `a0>0` finito. **Não existe `a0` que alcance o
+alvo.** Checagem de convergência e checagem de sanidade (Seção 3 do
+pré-registro) — ambas já declaradas como salvaguardas — falharam:
+ajustes de `x0=1` e `x0=5` divergem ~16%; `a0` ajustado sai ~2,4 ordens
+de grandeza abaixo do valor de referência McGaugh.
+
+**Causa raiz confirmada independentemente, não é bug:** o agente
+adversarial rodou uma simulação Monte Carlo própria (N=200.000) de
+binárias Keplerianas puramente Newtonianas (zero física MOND) e obteve
+mediana(v_proj/v_circ)≈0,55 — mesma ordem de grandeza do observado no
+dado real. É diluição por projeção, efeito conhecido na literatura
+(Pittordis & Sutherland 2018; Banik & Zhao 2018), já antecipada no
+preâmbulo da Seção 4 do pré-registro como limitação da estatística
+simplificada adotada.
+
+Por instrução explícita da própria Seção 3 ("o teste para até isso ser
+resolvido, antes de aceitar qualquer veredito H_A/H_B"): **nenhum
+veredito H_A/H_B é aceito.** Registrado como `DISC-CLAIM-005`,
+`evidence_level: preregistered_inconclusive`,
+`adversarial_review_verdict: METHODOLOGY_FLAW_FOUND`. Gate de
+Replicação nunca acionado (teste já falhou sua própria checagem de
+sanidade). Holdout (12.944 sistemas) permanece selado, disponível para
+um teste futuro genuinamente redesenhado com desprojeção completa.
+Lição de governança registrada em `METHODOLOGY_EXTENSIONS.md` Seção 1.
+Detalhes completos: `09_SESSIONS/2026/2026-08-14_SPARC003_WIDE_BINARIES.md`.
 
 ## Resultado da linha RH-REAL (dois sub-testes, ambos com Gate acionado)
 

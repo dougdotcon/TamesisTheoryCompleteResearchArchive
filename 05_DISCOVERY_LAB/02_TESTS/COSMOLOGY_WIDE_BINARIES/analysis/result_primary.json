@@ -1,0 +1,133 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-003",
+  "preregistration_path": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES/PREREGISTRATION.md",
+  "analysis_script": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES/analysis/run_preregistered_analysis.py",
+  "run_timestamp_utc": "2026-08-14T19:15:17Z",
+  "n_discovery_used": 30203,
+  "n_holdout_declared_not_read": 12944,
+  "constants": {
+    "G_SI": 6.6743e-11,
+    "MSUN_KG": 1.98892e+30,
+    "AU_M": 149597870700.0,
+    "mas_yr_to_km_s_per_pc": 0.00474047,
+    "c_light_m_s": 299792458.0,
+    "H0_km_s_Mpc": 70.0,
+    "H0_si_s^-1": 2.268308489954634e-18
+  },
+  "a0_A_holographic_bridge": {
+    "formula": "c*H0/(2*pi)",
+    "value_si_m_s2": 1.0822882733201101e-10
+  },
+  "a0_B_mond_emergence": {
+    "formula": "c*H0",
+    "value_si_m_s2": 6.80021777705768e-10
+  },
+  "bin_edges_log10_gN_fixed_from_preregistration": [
+    -11.7012,
+    -9.1728,
+    -8.4667,
+    -7.9752,
+    -7.5548,
+    -6.5224
+  ],
+  "n_bins": 5,
+  "bins": [
+    {
+      "bin_index": 0,
+      "log10_gN_range": [
+        -11.7012,
+        -9.1728
+      ],
+      "n_systems": 6042,
+      "g_N_bin_median_si_m_s2": 1.880655689217262e-10,
+      "log10_g_N_bin_median": -9.725690707884159,
+      "median_ratio_vpobs_over_vpN": 0.6932055159869476
+    },
+    {
+      "bin_index": 1,
+      "log10_gN_range": [
+        -9.1728,
+        -8.4667
+      ],
+      "n_systems": 6040,
+      "g_N_bin_median_si_m_s2": 1.6645464809358482e-09,
+      "log10_g_N_bin_median": -8.778704073062372,
+      "median_ratio_vpobs_over_vpN": 0.6408906482441828
+    },
+    {
+      "bin_index": 2,
+      "log10_gN_range": [
+        -8.4667,
+        -7.9752
+      ],
+      "n_systems": 6040,
+      "g_N_bin_median_si_m_s2": 6.2203271655564165e-09,
+      "log10_g_N_bin_median": -8.206186772470089,
+      "median_ratio_vpobs_over_vpN": 0.6243326440126697
+    },
+    {
+      "bin_index": 3,
+      "log10_gN_range": [
+        -7.9752,
+        -7.5548
+      ],
+      "n_systems": 6039,
+      "g_N_bin_median_si_m_s2": 1.7190232822044468e-08,
+      "log10_g_N_bin_median": -7.764718241251026,
+      "median_ratio_vpobs_over_vpN": 0.6150140844084122
+    },
+    {
+      "bin_index": 4,
+      "log10_gN_range": [
+        -7.5548,
+        -6.5224
+      ],
+      "n_systems": 6042,
+      "g_N_bin_median_si_m_s2": 4.863807305547588e-08,
+      "log10_g_N_bin_median": -7.3130236392853,
+      "median_ratio_vpobs_over_vpN": 0.5940733942353079
+    }
+  ],
+  "fit": {
+    "model": "ratio_MOND(a0, g_N_bin) = (1 - exp(-sqrt(g_N_bin/a0)))^(-1/2)",
+    "rescaling": "a0 = x * 1e-10, ajustado em x (SPARC-002 li\u00e7\u00e3o de converg\u00eancia)",
+    "convergence_check": {
+      "x0_1": 1.0,
+      "a0_fit_from_x0_1_si_m_s2": 5.046649463394608e-13,
+      "x0_2": 5.0,
+      "a0_fit_from_x0_2_si_m_s2": 4.241887914575404e-13,
+      "converged_to_same_value": false
+    },
+    "a0_fit_si_m_s2": 5.046649463394608e-13,
+    "a0_fit_x1e-10_units": 0.005046649463394608
+  },
+  "bootstrap": {
+    "n_replicas_requested": 1000,
+    "n_replicas_valid": 1000,
+    "n_replicas_failed_empty_bin": 0,
+    "n_replicas_failed_fit": 0,
+    "seed": 20260814,
+    "seed_note": "N\u00e3o especificado explicitamente no pr\u00e9-registro para o bootstrap (apenas para o split/bordas de bin). Escolhido = LOCK_DATE_SEED por conven\u00e7\u00e3o de reprodutibilidade, declarado aqui como decis\u00e3o de implementa\u00e7\u00e3o.",
+    "resampling_level": "sistema (n\u00e3o bin)",
+    "rebin_per_replica": "SIM, usando as mesmas bordas fixas da Se\u00e7\u00e3o 2 (nunca recalculadas por r\u00e9plica)",
+    "ci_95_low_si_m_s2": 1.9076719180105483e-14,
+    "ci_95_high_si_m_s2": 5.352066264167206e-13
+  },
+  "decision": {
+    "a0_A_within_ci95": false,
+    "a0_B_within_ci95": false,
+    "verdict_section5": "BOTH_FALSIFIED"
+  },
+  "sanity_check_section3": {
+    "reference_a0_mcgaugh2016_si_m_s2": 1.2e-10,
+    "abs_log10_ratio_fit_to_reference": 2.376178106045544,
+    "passes_within_one_order_of_magnitude": false
+  },
+  "diagnostics_model_range_mismatch": {
+    "note": "A fun\u00e7\u00e3o MOND 'simple' (1 - exp(-sqrt(g_N/a0)))^(-1/2), para qualquer a0 > 0 finito, tem imagem estritamente em (1, +infinito) -- tende a 1 por cima quando a0 -> 0, e diverge quando a0 -> +infinito. As 5 medianas emp\u00edricas observadas neste teste (ver 'bins' acima) s\u00e3o TODAS < 1. Isso torna o ajuste estruturalmente mal-condicionado: o otimizador s\u00f3 consegue se aproximar do alvo empurrando a0 para valores muito pequenos (fazendo o modelo tender a 1 por cima), sem nunca alcan\u00e7ar de fato os valores < 1 observados -- o que explica a n\u00e3o-converg\u00eancia entre p0 diferentes e a falha na checagem de sanidade da Se\u00e7\u00e3o 3.",
+    "fraction_all_discovery_systems_with_ratio_gt_1": 0.20286064298248518,
+    "median_ratio_overall_all_discovery_systems": 0.6311090671495662,
+    "likely_cause": "Vi\u00e9s de proje\u00e7\u00e3o conhecido e j\u00e1 declarado no pre\u00e2mbulo da Se\u00e7\u00e3o 4 do pr\u00e9-registro: a estat\u00edstica usada aqui \u00e9 a simplifica\u00e7\u00e3o de Chae (2023) em espa\u00e7o projetado (sem desproje\u00e7\u00e3o Monte Carlo de excentricidades de Hwang et al. 2022), explicitamente descrita como checagem de robustez, n\u00e3o como m\u00e9todo principal de Chae. Tanto a velocidade transversal projetada quanto a separa\u00e7\u00e3o projetada (sem corre\u00e7\u00e3o geom\u00e9trica de proje\u00e7\u00e3o/excentricidade) tendem a produzir v_p_obs/v_p_N sistematicamente < 1 mesmo em regime puramente Newtoniano -- isso N\u00c3O foi identificado como um erro de implementa\u00e7\u00e3o nesta execu\u00e7\u00e3o (f\u00f3rmulas conferidas termo a termo contra a Se\u00e7\u00e3o 4 e contra generate_split_and_bins.py, valores f\u00edsicos plaus\u00edveis verificados por amostragem manual), mas sim como uma propriedade estrutural da estat\u00edstica simplificada pr\u00e9-registrada, j\u00e1 antecipada pelo pr\u00f3prio texto do pr\u00e9-registro como limita\u00e7\u00e3o declarada."
+  },
+  "elapsed_seconds": 5.045785188674927
+}

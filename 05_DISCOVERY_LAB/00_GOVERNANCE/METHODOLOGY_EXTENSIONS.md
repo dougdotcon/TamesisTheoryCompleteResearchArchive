@@ -36,6 +36,31 @@ nenhum mecanismo convencional (seleção, tides, etc.). Isso é consistente
 com o veredito INCONCLUSIVE ter sido o teto de informação que aquele
 desenho conseguia entregar, independente do valor do p.
 
+**Lição de governança (adicionada em 2026-08-14, após
+`DISC-COSMOLOGY-MOND-SPARC-003` resultar em `preregistered_inconclusive`
+por um problema estrutural, não por falta de sinal):** quando o
+discriminating observable é uma RAZÃO ou estatística cujo modelo
+candidato tem uma imagem matematicamente derivável (ex. uma razão de
+boost cujo modelo só pode produzir valores em $(1,+\infty)$), verificar
+ANTES do lock, via uma simulação sintética/nula rápida (nem que seja um
+Monte Carlo simples do cenário nulo mais mundano, ex. gravidade padrão
+projetada sem correção geométrica), que valores reais plausíveis do
+domínio observacional-alvo não ficam estruturalmente fora dessa imagem
+por um efeito conhecido e mundano (no caso citado, diluição por
+projeção em binárias largas — Pittordis & Sutherland 2018; Banik & Zhao
+2018 — empurra a razão observada abaixo do piso teórico do modelo
+`(1-e^{-\sqrt{g_N/a_0}})^{-1/2}`, tornando o ajuste de `a0`
+estruturalmente impossível independente do valor real de `a0`). Essa
+checagem de "a imagem do modelo cobre a faixa mundana esperada do
+dado?" é distinta da validação de pipeline contra dado sintético já
+praticada nesta trilha (que confirma que o CÓDIGO funciona) — aqui o
+problema não era o código (confirmado por reexecução adversarial bit a
+bit e por uma simulação Monte Carlo dedicada), era que a ESTATÍSTICA
+ESCOLHIDA não podia, por construção, produzir uma estimativa válida a
+partir do tipo de dado disponível. Um Monte Carlo de 5-10 minutos do
+cenário nulo mundano antes do lock teria revelado isso sem gastar o
+tempo de baixar e processar 43 mil sistemas reais.
+
 ## 2. Renormalização / Effective Field Theory (para TRI/TDTR)
 
 A Theory of Regime Interfaces já fala de regimes, transições, escalas,

@@ -1,0 +1,103 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-003",
+  "role": "adversarial_reproduction",
+  "n_discovery_systems": 30203,
+  "bin_edges_log10_gN_fixed": [
+    -11.7012,
+    -9.1728,
+    -8.4667,
+    -7.9752,
+    -7.5548,
+    -6.5224
+  ],
+  "bin_counts": [
+    6042,
+    6040,
+    6040,
+    6039,
+    6042
+  ],
+  "bin_gN_median": [
+    1.880655689217262e-10,
+    1.6645464809358482e-09,
+    6.2203271655564165e-09,
+    1.7190232822044468e-08,
+    4.863807305547588e-08
+  ],
+  "bin_log10_gN_median": [
+    -9.725690707884159,
+    -8.778704073062372,
+    -8.206186772470089,
+    -7.764718241251026,
+    -7.3130236392853
+  ],
+  "bin_ratio_median_empirical": [
+    0.6932055159869476,
+    0.6408906482441828,
+    0.6243326440126697,
+    0.6150140844084122,
+    0.5940733942353079
+  ],
+  "fit": {
+    "a0_fit_SI": 5.046649463394608e-13,
+    "a0_fit_scaled_x_per_p0": [
+      0.005046649463394608,
+      0.004241887914575404
+    ],
+    "converged_consistently_across_p0": false,
+    "p0_values_tested_scaled": [
+      1.0,
+      5.0
+    ],
+    "a0_scale_used": 1e-10
+  },
+  "bootstrap_strict_dual_p0_gate": {
+    "description": "Cada uma das 1000 replicas so e aceita se o ajuste convergir para o mesmo a0 com p0=1.0 E p0=5.0 (rel_spread<1e-4) -- aplicando a licao de convergencia da tarefa a CADA replica, nao so ao ajuste agregado primario.",
+    "n_replicas_requested": 1000,
+    "n_replicas_valid": 1,
+    "n_failed_fit": 999,
+    "n_empty_bin_skipped": 0,
+    "rng_seed_used_for_bootstrap": 20260814,
+    "ci_95_low": 3.591990458057882e-13,
+    "ci_95_high": 3.591990458057882e-13,
+    "reliability_warning": "IC DEGENERADO/NAO-CONFIAVEL: apenas 1/1000 replicas passaram no gate de convergencia dupla -- percentis calculados sobre <30 pontos nao devem ser interpretados como um IC bootstrap valido.",
+    "a0_A_in_ci95": false,
+    "a0_B_in_ci95": false,
+    "verdict_section5": "BOTH_FALSIFIED"
+  },
+  "bootstrap_single_p0_no_gate": {
+    "description": "Cada uma das 1000 replicas usa um unico ajuste com p0=1.0, sem reverificar convergencia dupla por replica (only o ajuste primario agregado foi verificado com 2 p0's). Politica de implementacao alternativa, diagnostica, incluida para comparacao direta com result_primary.json.",
+    "n_replicas_requested": 1000,
+    "n_replicas_valid": 1000,
+    "n_failed_fit": 0,
+    "rng_seed_used_for_bootstrap": 20260814,
+    "ci_95_low": 1.9076719180105483e-14,
+    "ci_95_high": 5.352066264167206e-13,
+    "a0_A_in_ci95": false,
+    "a0_B_in_ci95": false,
+    "verdict_section5": "BOTH_FALSIFIED"
+  },
+  "hypotheses": {
+    "a0_A_holographic_bridge": 1.0822882733201101e-10,
+    "a0_B_mond_emergence": 6.80021777705768e-10
+  },
+  "sanity_check_section3": {
+    "a0_literature_reference": 1.2e-10,
+    "ratio_fit_to_literature": 0.004205541219495506,
+    "within_one_order_of_magnitude": false
+  },
+  "structural_diagnostic_model_range_mismatch": {
+    "finding": "O modelo MOND 'simple' em espaco de velocidade, (1-exp(-sqrt(g_N/a0)))^(-1/2), tem imagem estritamente em (1, +infinito) para qualquer a0>0 finito (monotonico crescente em a0; tende a 1 por cima quando a0->0). As 5 medianas empiricas de v_p_obs/v_p_N observadas nesta amostra real sao TODAS < 1 (0.594 a 0.693). Isso torna o ajuste de minimos quadrados estruturalmente mal-condicionado: nao existe minimo interior, o SSE so decresce monotonicamente conforme a0->0+ (perseguindo uma assintota inatingivel), entao qualquer 'a0 ajustado' reportado e um artefato de onde o otimizador para numericamente, nao uma estimativa genuina.",
+    "verified_not_a_coding_bug": "Formulas conferidas termo a termo contra a Secao 4 do pre-registro; unidades e constantes conferidas manualmente por amostragem de linhas individuais; bordas de bin e contagens batem exatamente com as declaradas no pre-registro (6042/6040/6040/6039/6042).",
+    "independent_confirmation_montecarlo": "Simulacao de Monte Carlo independente (N=200000) de binarias Keplerianas PURAMENTE NEWTONIANAS com excentricidade termica f(e)=2e, orientacao isotropica e fase orbital uniforme reproduz o mesmo efeito: mediana(v_proj/v_circ(s_proj)) ~= 0.55, mesma ordem de grandeza dos ~0.6-0.69 observados no dado real. Isto e um efeito de diluicao por projecao ja conhecido na literatura (Pittordis & Sutherland 2018, Banik & Zhao 2018) e explicitamente antecipado no proprio texto do pre-registro (Secao 4, preambulo: a estatistica projetada e 'checagem de robustez' de Chae, nao seu metodo principal, que usa desprojecao Monte Carlo).",
+    "fraction_discovery_systems_ratio_gt_1": 0.20286064298248518,
+    "conclusion": "A falsificacao de H_A e H_B por este teste (Secao 5, criterio literal) e tecnicamente o que acontece quando se aplica o procedimento exatamente como escrito -- mas isso nao deve ser lido como evidencia real contra a0_A ou a0_B: o modelo especificado nao consegue reproduzir a mediana empirica para NENHUM valor de a0, entao o teste como especificado nao tem poder de discriminacao genuino aqui. Isto e uma limitacao estrutural da estatistica simplificada escolhida na Secao 4 (ja declarada como simplificacao no proprio pre-registro), nao um erro de implementacao."
+  },
+  "verdict": "BOTH_FALSIFIED",
+  "verdict_note": "Reportado usando a politica de bootstrap ESTRITA (dual-p0 gate por replica), que e a leitura mais fiel as instrucoes de convergencia da tarefa. Ver bootstrap_single_p0_no_gate para a politica alternativa -- ambas chegam ao mesmo veredito qualitativo (BOTH_FALSIFIED) porque a0_A e a0_B estao 2-4 ordens de grandeza acima de qualquer a0 ajustavel por este modelo/dado, mas ver structural_diagnostic_model_range_mismatch antes de aceitar esse veredito como evidencia real contra H_A/H_B.",
+  "holdout_untouched_check": {
+    "n_holdout_ids_declared": 12944,
+    "n_holdout_rows_matched_but_not_used_in_stats": 12944,
+    "note": "holdout_ids usado SOMENTE para checagem de particao do split; nenhuma linha de holdout entrou em delta_mu/v_p_obs/g_N/ajuste/bootstrap."
+  }
+}

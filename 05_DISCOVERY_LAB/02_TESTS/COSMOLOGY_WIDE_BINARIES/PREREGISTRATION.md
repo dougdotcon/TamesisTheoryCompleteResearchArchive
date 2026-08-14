@@ -229,4 +229,93 @@ de declarar explicitamente que são duas hipóteses, não uma.
 
 ## [Preenchido depois da análise] Resultado
 
+Analisados os 30.203 sistemas de descoberta (holdout de 12.944 nunca
+lido além da contagem). Bordas de bin fixas reutilizadas sem alteração;
+contagens por bin: 6042/6040/6040/6039/6042. `a0_A` e `a0_B`
+recalculados batem dígito a dígito com os valores da Seção 1.
+
+**5 medianas empíricas de $v_p^{\text{obs}}/v_p^N$ por bin (log$_{10}(g_N)$
+crescente):** `0,6932; 0,6409; 0,6243; 0,6150; 0,5941` — **todas abaixo
+de 1**.
+
+**Checagem de convergência do ajuste (Seção 4, passo 4): FALHOU.**
+$a_0$ ajustado a partir de $x_0=1$: $5,047\times10^{-13}$ m/s²; a partir
+de $x_0=5$: $4,242\times10^{-13}$ m/s² — diferem ~16%, não convergem ao
+mesmo valor.
+
+**Checagem de sanidade (Seção 3): FALHOU.** $a_0$ ajustado
+(~$5\times10^{-13}$) está ~2,4 ordens de grandeza abaixo do valor de
+referência McGaugh ($1,2\times10^{-10}$) — muito além da tolerância de
+1 ordem de grandeza declarada.
+
+**Causa raiz identificada (não é erro de implementação — verificado por
+fórmulas conferidas termo a termo, spot-check manual de sistemas
+individuais, e confirmação independente por Monte Carlo — ver Veredito
+adversarial abaixo):** o modelo MOND "simple" em espaço de velocidade,
+$(1-e^{-\sqrt{g_N/a_0}})^{-1/2}$, tem imagem estritamente em
+$(1,+\infty)$ para qualquer $a_0>0$ finito. As 5 medianas empíricas são
+todas $<1$. Não existe $a_0$ que faça o modelo alcançar o alvo — o
+ajuste é estruturalmente mal-condicionado (sem mínimo interior),
+explicando tanto a não-convergência quanto a falha de sanidade. Causa
+provável: diluição por projeção, já antecipada no preâmbulo da Seção 4
+como limitação declarada da estatística simplificada (em vez do método
+de desprojeção 3D completo de Chae).
+
+**Por instrução explícita da própria Seção 3 deste pré-registro** ("se
+não estiver [em ordem de grandeza compatível]... o teste para até isso
+ser resolvido, antes de aceitar qualquer veredito H_A/H_B"): **nenhum
+veredito H_A/H_B é aceito a partir deste resultado.** O critério
+literal da Seção 5, aplicado mecanicamente, produziria `BOTH_FALSIFIED`
+— mas isso não é lido como evidência real contra $a_0^A$ ou $a_0^B$,
+por não haver poder de discriminação genuíno na estatística como
+pré-registrada (ver diagnóstico completo abaixo).
+
+Resultado completo:
+`analysis/result_primary.json`. Script: `analysis/run_preregistered_analysis.py`.
+
 ## [Preenchido depois da reexecução adversarial] Veredito adversarial
+
+Reexecução independente (agente separado, implementação escrita do
+zero a partir SOMENTE deste `PREREGISTRATION.md`, sem ler
+`run_preregistered_analysis.py` nem `result_primary.json` antes de ter
+seu próprio resultado pronto).
+
+**Concordância bit a bit em toda a parte determinística:** contagens
+por bin, medianas de `g_N` e de razão por bin, ambos os ajustes de
+$a_0$ ($x_0=1$ e $x_0=5$), a magnitude da falha de sanidade, e
+$a_0^A$/$a_0^B$ — idênticos entre as duas implementações. **Nenhum bug
+de fórmula, unidade, constante ou binagem encontrado em nenhum dos dois
+scripts.**
+
+IC bootstrap divergiu inicialmente entre os dois agentes por uma
+**ambiguidade textual não coberta pelo pré-registro** (se a checagem de
+convergência dupla de $a_0$ deve ser reaplicada a cada réplica de
+bootstrap ou só ao ajuste agregado primário) — não um bug; as duas
+políticas foram testadas e documentadas lado a lado em
+`result_adversarial.json`, ambas levando ao mesmo veredito qualitativo.
+
+**Confirmação independente adicional, decisiva:** o agente adversarial
+rodou uma simulação de Monte Carlo própria ($N=200.000$) de binárias
+Keplerianas **puramente Newtonianas** (excentricidade térmica
+$f(e)=2e$, orientação isotrópica, fase orbital uniforme — nenhuma
+física MOND envolvida) e obteve mediana$(v_{\text{proj}}/v_{\text{circ}})
+\approx 0,55$ — mesma ordem de grandeza das medianas $<1$ observadas no
+dado real. Isso é o efeito de diluição por projeção já documentado na
+literatura (Pittordis & Sutherland 2018; Banik & Zhao 2018) e confirma
+que valores de razão $<1$ são esperados por geometria de projeção
+sozinha, independentemente de qualquer física de $a_0$.
+
+**Veredito adversarial final:** o critério literal da Seção 5 produz
+`BOTH_FALSIFIED` nos dois scripts, mas essa conclusão é **cientificamente
+vazia** — a estatística projetada simplificada, como pré-registrada na
+Seção 4, não tem poder de discriminação genuíno entre H_A e H_B (nem
+entre nenhum valor de $a_0$) neste canal de dado, por incompatibilidade
+estrutural entre a imagem do modelo e o efeito de diluição por
+projeção. **Isto deve ser registrado como uma limitação estrutural do
+desenho do teste pré-registrado — não como uma réplica válida do
+veredito de SPARC-002.** Holdout (12.944 sistemas) confirmado intocado
+pelos dois agentes — permanece selado, disponível para um teste futuro
+genuinamente redesenhado (ex. com desprojeção Monte Carlo completa).
+
+Resultado completo: `analysis/result_adversarial.json`. Script:
+`analysis/adversarial_reproduction.py`.

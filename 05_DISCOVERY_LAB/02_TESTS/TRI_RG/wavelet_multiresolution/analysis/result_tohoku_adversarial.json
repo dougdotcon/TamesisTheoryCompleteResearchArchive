@@ -1,0 +1,475 @@
+{
+  "candidate": "wavelet-multiresolution-scaling",
+  "line": "DISC-TRI-RG-001",
+  "domain": "seismology_tohoku_2011_mainshock",
+  "role": "null-discovery adversary (00_GOVERNANCE/AGENTS.md step 7 / METHODOLOGY_EXTENSIONS.md sec. 5) -- attacks result_tohoku.json's \u0394C2/\u0394C1 finding with a mundane-mechanism hypothesis (digitizer/sensor saturation) plus real (non-no-op) robustness checks. Does NOT modify wtmm_common.py, METHODOLOGY_NOTE.md, or result_tohoku.json.",
+  "attacked_result": {
+    "path": "result_tohoku.json",
+    "primary_real_dC2": 0.35566732704972387,
+    "primary_p_dC2_twotail": 0.005,
+    "primary_real_dC1": 0.9416872624729417,
+    "primary_p_dC1_twotail": 0.0,
+    "flagged_caveat": "POST std (~303,016 counts) is ~585x PRE std (~518 counts), with POST peaks in the millions of counts -- flagged by the original agent as plausibly near/above digitizer saturation, and the 'robustness' variant in result_tohoku.json was a numerical no-op (PRE/POST both already 144,000 samples, so min(len,len) truncated nothing)."
+  },
+  "data_reproduction": {
+    "method": "Re-downloaded PRE/POST from the exact URLs recorded in result_tohoku.json's data_provenance and verified byte-identical sha256 before any analysis.",
+    "pre_url": "https://service.iris.edu/fdsnws/dataselect/1/query?net=IU&sta=ANMO&loc=00&cha=BHZ&start=2011-03-11T03:46:24&end=2011-03-11T05:46:24",
+    "post_url": "https://service.iris.edu/fdsnws/dataselect/1/query?net=IU&sta=ANMO&loc=00&cha=BHZ&start=2011-03-11T05:46:24&end=2011-03-11T07:46:24",
+    "pre_sha256_matches_original": true,
+    "post_sha256_matches_original": true,
+    "sha256_pre": "89b8e0694f19286fc5a3ea9bc5b61ae64cca37a059a9bfc4da580528661fd17e",
+    "sha256_post": "2c22f19c55df0739983eb62ba756d8144c454f9b89ed4f8f9ba53c157e553d9f"
+  },
+  "step1_clipping_saturation_forensics": {
+    "method": "Direct inspection of raw POST waveform for the two classic digital-clipping signatures (exact-repeat pinning at a rail value, flat-topped plateaus at the waveform extrema), cross-checked against the true digitizer full-scale count and the live IRIS-metadata instrument sensitivity for this exact channel/epoch (IU.ANMO.00.BHZ, requested at the mainshock time) to convert counts to physical ground velocity and compare against the actual 24-bit ADC saturation level.",
+    "peak_positive_counts": 2365976.0,
+    "peak_negative_counts": -2627403.0,
+    "repeat_count_at_peak_positive_value": 1,
+    "repeat_count_at_peak_negative_value": 1,
+    "max_repeat_count_of_any_single_value_anywhere_in_post": 25,
+    "max_repeat_value": -49394,
+    "n_unique_values_in_post": 120932,
+    "n_samples_post": 144000,
+    "flat_plateau_runs_ge3_consecutive_identical_samples": [
+      {
+        "start_idx": 428,
+        "run_len": 3,
+        "value": -48348.0
+      },
+      {
+        "start_idx": 901,
+        "run_len": 3,
+        "value": -50046.0
+      },
+      {
+        "start_idx": 967,
+        "run_len": 3,
+        "value": -48946.0
+      },
+      {
+        "start_idx": 977,
+        "run_len": 3,
+        "value": -48968.0
+      },
+      {
+        "start_idx": 1862,
+        "run_len": 3,
+        "value": -49730.0
+      },
+      {
+        "start_idx": 2196,
+        "run_len": 3,
+        "value": -48616.0
+      },
+      {
+        "start_idx": 4493,
+        "run_len": 3,
+        "value": -49978.0
+      },
+      {
+        "start_idx": 4772,
+        "run_len": 3,
+        "value": -49697.0
+      },
+      {
+        "start_idx": 5878,
+        "run_len": 3,
+        "value": -49054.0
+      },
+      {
+        "start_idx": 5972,
+        "run_len": 3,
+        "value": -50166.0
+      },
+      {
+        "start_idx": 6182,
+        "run_len": 3,
+        "value": -48954.0
+      },
+      {
+        "start_idx": 10670,
+        "run_len": 3,
+        "value": -49741.0
+      },
+      {
+        "start_idx": 10921,
+        "run_len": 3,
+        "value": -49780.0
+      },
+      {
+        "start_idx": 11063,
+        "run_len": 4,
+        "value": -49609.0
+      },
+      {
+        "start_idx": 11953,
+        "run_len": 3,
+        "value": -49257.0
+      },
+      {
+        "start_idx": 12046,
+        "run_len": 3,
+        "value": -48523.0
+      },
+      {
+        "start_idx": 12953,
+        "run_len": 3,
+        "value": -49856.0
+      },
+      {
+        "start_idx": 13290,
+        "run_len": 3,
+        "value": -49395.0
+      }
+    ],
+    "n_flat_plateau_runs": 18,
+    "waveform_shape_at_extrema": "Both the positive and negative peaks rise/fall smoothly across the surrounding +-15 samples with monotonically changing curvature and NO repeated identical consecutive values -- the classic hard-clip 'flat top' signature is absent. All 18 short flat runs found anywhere in POST (max run length 4 samples) sit near the mean amplitude (~-49,000 to -50,000 counts, i.e. the quiet coda/background region), not at the waveform extrema -- consistent with ordinary low-amplitude quantization coincidences, not saturation.",
+    "instrument_metadata_source": "live re-fetch, https://service.iris.edu/fdsnws/station/1/query?net=IU&sta=ANMO&loc=00&cha=BHZ&level=response&start=2011-03-11T05:46:24&end=2011-03-11T05:46:25",
+    "sensor_description_from_iris_metadata": "Geotech KS-54000 Borehole Seismometer",
+    "total_instrument_sensitivity_counts_per_mps_at_0.02Hz": 3275110000.0,
+    "adc_bit_depth_assumed": 24,
+    "adc_one_sided_fullscale_counts": 8388607,
+    "peak_abs_counts_observed": 2627403.0,
+    "fraction_of_24bit_fullscale_used_by_peak": 0.31321088233123806,
+    "peak_ground_velocity_mm_per_s": 0.8022335127675101,
+    "literature_context": "WebSearch found no documentation of IU.ANMO (or GSN broadband stations generally) clipping during the Tohoku 2011 mainshock; the one relevant hit found was that the STS-2 vertical component went nonlinear on the first Rayleigh wave for the 2004 Sumatra M9.1 event at unspecified station(s) -- i.e. GSN sensor nonlinearity during M9-class events is a real, literature-documented phenomenon in general, but is reported as a near/mid-field or largest-event issue, and general seismological literature attributes on-scale/clipping problems during Tohoku specifically to near-field STRONG-MOTION instruments in Japan, not teleseismic GSN broadband stations like ANMO (~9,600 km from the epicenter, in New Mexico, USA). No source found documents STS-1/KS-54000/Q680-family clip counts as a fixed universal number; the quantitative check below therefore uses the specific, live-verified instrument response for this exact channel and epoch rather than a generic literature figure.",
+    "verdict": "NO clipping/saturation evidence found. Peak POST amplitude (2,627,403 counts) uses only 31.3% of the channel's 24-bit ADC full-scale range, corresponding to a peak ground velocity of only 0.802 mm/s -- two to three orders of magnitude below typical broadband-seismometer clip levels (~1-20+ mm/s depending on sensor model). The waveform shows smooth, rounded peaks with no repeated-value pinning and no flat-topped plateaus at the extrema. The huge PRE->POST std ratio (~585x) reflects a genuine, large, but NOT saturating, real teleseismic P/S/surface-wave arrival, not a digitizer or sensor saturation artifact."
+  },
+  "step2_genuine_truncated_robustness": {
+    "n_small": 16384,
+    "definition": "Genuine truncation to N_SMALL=16384 samples (~13.65 min at 20 Hz), a round power-of-two chosen inside the 10,000-20,000 sample range requested for this adversarial check, ~8.8x smaller than the original 144,000-sample primary/robustness variants in result_tohoku.json (whose 'robustness' variant was a no-op because both segments already matched in length). Same truncation rule as METHODOLOGY_NOTE.md: samples closest to the transition on each side (tail of PRE, head of POST).",
+    "pre_stats": {
+      "n": 16384,
+      "std": 480.7388477192382,
+      "min": -51061.0,
+      "max": -47716.0
+    },
+    "post_stats": {
+      "n": 16384,
+      "std": 24807.644462390417,
+      "min": -272994.0,
+      "max": 193810.0
+    },
+    "result": {
+      "real_pre": {
+        "n_levels_used": 10,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0
+        ],
+        "mean_logabs_per_j": [
+          0.20758540707387485,
+          1.8904832778046468,
+          2.5494551588688434,
+          5.3580548482369545,
+          8.402443283445162,
+          10.674541387902838,
+          10.756370284030883,
+          8.073294271963533,
+          6.8572410808567925,
+          6.852453052008043
+        ],
+        "var_logabs_per_j": [
+          2.590329815122793,
+          2.5477077311208496,
+          2.4665594580227066,
+          2.3312642771850864,
+          2.7353011630115964,
+          2.2001087064809175,
+          2.4187403051198877,
+          3.0571952526030928,
+          2.92151495393742,
+          1.7628239116250428
+        ],
+        "coeff_counts_per_j": [
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "C1_slope": 0.8524688085035481,
+        "C1_intercept": 1.473613758449641,
+        "C2_slope": -0.013033260433867308,
+        "C2_intercept": 2.5748374898092092,
+        "n_samples": 16384,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 10,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0
+        ],
+        "mean_logabs_per_j": [
+          0.5004862415826786,
+          2.304931520421829,
+          3.271409048119668,
+          5.977947464354993,
+          9.18622417766848,
+          10.931490452131019,
+          11.747211289752938,
+          9.441953076099981,
+          8.402205983744665,
+          9.685930043912226
+        ],
+        "var_logabs_per_j": [
+          3.4058297109979807,
+          5.30266316327644,
+          8.569146694569234,
+          8.22404521576923,
+          6.1779825819656695,
+          6.518302760002102,
+          6.711666473793577,
+          12.646339439713564,
+          20.95114716237361,
+          31.368636938470534
+        ],
+        "coeff_counts_per_j": [
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "C1_slope": 1.0621557173017195,
+        "C1_intercept": 1.30312248461939,
+        "C2_slope": 2.2872351558712993,
+        "C2_intercept": -1.5922173431989557,
+        "n_samples": 16384,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": 2.3002684163051668,
+      "real_dC1": 0.20968690879817142,
+      "p_dC2_twotail": 0.015,
+      "p_dC1_twotail": 0.595,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": 0.9092937480067195,
+      "surrogate_dC2_std": 0.6246292370108045,
+      "surrogate_dC1_mean": 0.20804514260951057,
+      "surrogate_dC1_std": 0.22193248849366515
+    },
+    "runtime_seconds": 24.138553380966187,
+    "instability_diagnostic": {
+      "note": "The C2_slope linear regression is fit over only n_levels_used points (10 for this truncated variant, vs 13 for the original 144,000-sample variants). The coarsest surviving scale sits right at the MIN_COEFFS_PER_SCALE=16 discard threshold, giving it very few coefficients to estimate a variance from -- a classic high-leverage, high-noise regression point at the extreme end of the j-axis.",
+      "pre_coarsest_scale_j": 10.0,
+      "pre_coarsest_scale_n_coeffs": 8192,
+      "pre_coarsest_scale_var_logabs": 1.7628239116250428,
+      "pre_previous_scale_var_logabs": 2.92151495393742,
+      "post_coarsest_scale_j": 10.0,
+      "post_coarsest_scale_n_coeffs": 8192,
+      "post_coarsest_scale_var_logabs": 31.368636938470534,
+      "post_previous_scale_var_logabs": 20.95114716237361,
+      "interpretation": "POST's var(log2|coeff|) jumps from 20.95 at j=9.0 to 31.37 at the coarsest scale j=10.0, where only 8192 coefficients (the bare minimum allowed) are available to estimate that variance. This single noisy endpoint has outsized leverage on a 10-point linear fit and plausibly explains most of why C2_slope(POST) balloons to ~2.29 here vs ~0.48 in the 144,000-sample primary variant (13 points, 72,000 coefficients at the coarsest scale, far less noisy) -- i.e. the truncated variant's larger |\u0394C2| is not obviously a *stronger* genuine signal, it is at least partly a small-sample regression artifact of the log-cumulant estimator itself, unrelated to clipping."
+    }
+  },
+  "step3_extreme_amplitude_sensitivity": {
+    "reason_this_step_was_run_despite_no_clipping_found": "Step 1 found no evidence of literal ADC/sensor clipping (peak amplitude only ~31% of the true 24-bit full-scale count for this channel/epoch). This step was nonetheless run as an extra, more conservative stress test: does \u0394C2/\u0394C1 depend on the small number of most extreme-amplitude POST samples (the direct wave arrival peak), independent of whether they are physically clipped?",
+    "winsorization_threshold_counts": 1258714.12,
+    "winsorization_percentile": 99,
+    "threshold_basis": "Purely statistical (99th percentile of |POST| itself), NOT tied to any instrument saturation level -- chosen only to test outlier sensitivity, not to 'declip' a signal that was not found to be clipped.",
+    "n_samples_affected": 1440,
+    "fraction_samples_affected": 0.01,
+    "post_clean_stats": {
+      "std": 281188.5629526449,
+      "min": -1258714.12,
+      "max": 1258714.12
+    },
+    "post_original_stats": {
+      "std": 303016.63196296646,
+      "min": -2627403.0,
+      "max": 2365976.0
+    },
+    "result": {
+      "real_pre": {
+        "n_levels_used": 13,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0
+        ],
+        "mean_logabs_per_j": [
+          0.32609360254322695,
+          1.9259357099354344,
+          2.7212490221234558,
+          5.331882275980302,
+          8.474186865338817,
+          10.535443919323217,
+          10.925594485201481,
+          8.424686106248855,
+          6.880595844809012,
+          6.092731652796878,
+          6.801996463359833,
+          7.520556029802752,
+          8.860753764680943
+        ],
+        "var_logabs_per_j": [
+          2.5856360251834194,
+          2.5862479011450805,
+          2.592936213773535,
+          2.6247756785891734,
+          2.6477169786996306,
+          2.527307929886946,
+          2.534683883536821,
+          2.5781281680097528,
+          3.2894710046303657,
+          5.057572568206683,
+          3.3410740583672,
+          3.4690639828736605,
+          3.6639925250202974
+        ],
+        "coeff_counts_per_j": [
+          18,
+          36,
+          71,
+          141,
+          282,
+          563,
+          1125,
+          2250,
+          4500,
+          9000,
+          18000,
+          36000,
+          72000
+        ],
+        "C1_slope": 0.5081794539199133,
+        "C1_intercept": 2.9674904181101627,
+        "C2_slope": 0.12367851508173444,
+        "C2_intercept": 2.172604772729595,
+        "n_samples": 144000,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 13,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0
+        ],
+        "mean_logabs_per_j": [
+          0.4755895904032648,
+          3.2526403811567395,
+          6.319793552804174,
+          9.077509908174278,
+          11.921515516123376,
+          15.044633216559218,
+          17.770827504833353,
+          19.136270578543222,
+          18.63479459684556,
+          18.362102320302622,
+          18.526675476638562,
+          18.009757339932904,
+          17.663227868758003
+        ],
+        "var_logabs_per_j": [
+          13.825907582435695,
+          15.518014131915658,
+          16.085683975271493,
+          11.473169525719046,
+          5.655359888643042,
+          5.53981089460167,
+          7.907774214334615,
+          16.13498706567481,
+          19.24562110211753,
+          17.409475604071215,
+          9.914061652693483,
+          4.146491510297619,
+          1.8163492887910704
+        ],
+        "coeff_counts_per_j": [
+          18,
+          36,
+          71,
+          141,
+          282,
+          563,
+          1125,
+          2250,
+          4500,
+          9000,
+          18000,
+          36000,
+          72000
+        ],
+        "C1_slope": 1.489620411643738,
+        "C1_intercept": 2.9722984916534743,
+        "C2_slope": -0.5385540402592928,
+        "C2_intercept": 14.898548007704814,
+        "n_samples": 144000,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.6622325553410272,
+      "real_dC1": 0.9814409577238247,
+      "p_dC2_twotail": 0.99,
+      "p_dC1_twotail": 0.0,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": -0.8870471536834584,
+      "surrogate_dC2_std": 0.08470742815907625,
+      "surrogate_dC1_mean": 0.6365527235898742,
+      "surrogate_dC1_std": 0.01976124861169415
+    },
+    "runtime_seconds": 270.7576789855957
+  },
+  "cross_check_against_methodology_notes_own_iaaft_caveat": {
+    "note": "METHODOLOGY_NOTE.md's own synthetic-validation section (before any real data was touched) already documents that IAAFT surrogates fail to properly null out C2 signatures when the marginal amplitude distribution is highly degenerate/heavy-tailed (their binomial-cascade control had a max/min ratio of ~190x, and its IAAFT surrogates stayed nearly as negative as the real C2_slope, -0.22 to -0.67 vs real -0.59). The real Tohoku POST segment has a PRE/POST std ratio of ~585x -- more extreme by this measure than the case the team already flagged as an IAAFT limitation in their own validation. IAAFT preserves each segment's own amplitude distribution exactly, so if POST's real marginal is dominated by a small number of very large, non-Gaussian transient samples, that structural degeneracy plausibly propagates into every IAAFT surrogate too, and the pipeline's own documented self-critique already anticipates the null model performing poorly under exactly this condition."
+  },
+  "verdict": {
+    "clipping_hypothesis": "REJECTED. Peak POST amplitude uses only ~31% of the true 24-bit ADC full-scale for this exact channel/epoch (live IRIS metadata), corresponding to a peak ground velocity of only ~0.80 mm/s -- far below typical broadband-seismometer clip levels. No repeated-value pinning at the extrema, no flat-topped plateaus. This part of the original agent's caveat does not hold up: the instrument did not saturate.",
+    "robustness_of_the_reported_effect": "DOES NOT SURVIVE. Two independent, real (non-no-op) stress tests both break the headline \u0394C2 result: (1) truncating to a genuinely smaller window (16,384 vs 144,000 samples, ~8.8x smaller) leaves \u0394C2 nominally significant (p=0.015) but its magnitude swings by ~6.5x (0.356 -> 2.30) in a way traceable to a high-leverage, low-coefficient-count point in the log-cumulant regression, not to a stronger genuine signal, AND makes \u0394C1 lose significance entirely (p=0.000 -> 0.595); (2) winsorizing only the most extreme 1% of POST amplitude samples (1,440 of 144,000, none of them clipped) flips \u0394C2's sign and destroys its significance entirely (0.356, p=0.005 -> -0.662, p=0.990), while \u0394C1 stays roughly unchanged (0.942 -> 0.981, still p=0.000). No single variant tested here has BOTH \u0394C2 and \u0394C1 simultaneously significant and of stable sign/magnitude the way the primary result reports.",
+    "most_likely_mundane_mechanism": "NOT instrument/digitizer saturation. Most likely: (a) \u0394C1 (the C1/mean-log-amplitude effect) is a real but physically unremarkable signature of the well-known, large, genuine, non-clipped teleseismic ground-motion increase after the mainshock -- POST is louder throughout, not just at one peak, which is exactly what P/S/surface wave arrivals plus aftershock coda do; it is not itself evidence of multifractal cascade structure (see METHODOLOGY_NOTE.md: C2, not C1, is 'the primary indicator of change of multifractality'). (b) \u0394C2 -- the statistic that is actually supposed to indicate genuine multifractality -- is fragile: sign-flipping under 1% amplitude trimming and swinging 6.5x under window truncation are both signatures of (i) the C2_slope linear-regression estimator being dominated by a small number of extreme, high-leverage points (worsened at small sample size, per the coarsest-scale diagnostic above) and (ii) the IAAFT null model's own previously self-documented failure to null out C2 correctly under a heavy-tailed/degenerate real amplitude marginal, which is present here (585x std ratio) even more strongly than in the pipeline's own synthetic validation failure case (190x). Together these are a coherent, mundane, non-clipping explanation for why \u0394C2 looked significant in the single primary variant tested.",
+    "overall": "The wavelet-multiresolution-scaling finding for Tohoku 2011 (DISC-TRI-RG-001) does NOT survive this adversarial check. It should NOT be treated as evidence of genuine multifractal-structure change at the mainshock transition. The original caveat's specific proposed mechanism (ADC/sensor clipping) is refuted by direct evidence, but a different, equally mundane failure mode -- estimator fragility to a handful of extreme-but-real transient samples, interacting with a previously self-documented IAAFT weakness for heavy-tailed marginals -- plausibly explains the original p<0.01 result. Per lab language rules (00_GOVERNANCE/AGENTS.md), this test should be logged as NOT surviving adversarial re-execution, not as 'Tamesis confirmed/detected' under any phrasing."
+  }
+}

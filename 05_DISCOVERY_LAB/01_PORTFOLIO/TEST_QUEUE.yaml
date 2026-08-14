@@ -506,6 +506,10 @@ queue:
       - "02_TESTS/TRI_RG/wavelet_multiresolution/SECOND_DOMAIN_SEARCH.md (busca de segundo dominio, 2026-08-14)"
       - "02_TESTS/TRI_RG/wavelet_multiresolution/data/eeg_seizure_prepared.json (CHB-MIT, dominio recomendado)"
       - "02_TESTS/TRI_RG/wavelet_multiresolution/data/turbulence_prepared.json (vento solar/choque interplanetario, dominio de apoio)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/METHODOLOGY_NOTE.md (regra de janela + protocolo IAAFT + validacao sintetica, fixados antes do calculo)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/analysis/wtmm_common.py (pipeline log-cumulantes unica, chamada sem modificacao nos 2 dominios)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/analysis/result_{chb_mit,tohoku,tohoku_adversarial}.json (resultados completos por dominio + checagem adversarial)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/RESULTS_SUMMARY.md (sintese honesta do resultado negativo)"
     description: >
       Nao tenta construir uma Theory of Everything diretamente. Tenta
       descobrir uma lei de interface: um mapa de coarse-graining
@@ -584,31 +588,60 @@ queue:
       PREREGISTRATION.md foi escrito -- o proprio passo de fechamento de
       gaps evitou travar um pre-registro fadado ao fracasso.
     next_action: >
-      Decisao do usuario, dado que critical-slowing-down nao sobreviveu
-      ao fechamento de gaps: seguir com wavelet-multiresolution-scaling
-      -- busca de segundo dominio concluida em 2026-08-14 (ver
-      02_TESTS/TRI_RG/wavelet_multiresolution/SECOND_DOMAIN_SEARCH.md).
-      EEG de crise epileptica (CHB-MIT/PhysioNet) recomendado como
-      segundo dominio robusto (junto com sismologia/Tohoku ja verificado
-      na Fase 0); turbulencia de plasma no vento solar (NASA OMNI +
-      catalogo CfA de choques interplanetarios) fica como terceiro
-      dominio de apoio valido, mas com ressalva explicita de ser um
-      dominio fisicamente diferente do WTMM hidrodinamico historico;
-      MAWI/MAWILab descartado (falha estrutural de amostragem -- so
-      capturas diarias de 15min, nunca continuas -- alem de descontinuado
-      pelos mantenedores em dez/2024). Antes de qualquer
-      PREREGISTRATION.md ainda falta: (a) fixar regra de janela para o
-      dominio de EEG (mesma convencao de fracao-do-registro ja usada em
-      critical-slowing-down); (b) rodar o metodo WTMM/wavelet-leader real
-      (nenhum calculo de h(q)/Delta-alpha foi feito ainda em nenhum
-      dominio desta linha -- so acesso e rotulo verificados ate agora);
-      (c) desenhar o protocolo de dados substitutos IAAFT ja identificado
-      como obrigatorio na Fase 0. Alternativas ainda abertas: reformular
-      dfa-multiscale-entropy (rank 3); nova rodada de busca por outros
-      candidatos; ou considerar DISC-TRI-RG-001 suficientemente explorada
-      por ora. 01_TAMESIS_CORE/03_TRANSITION_ATLAS e infraestrutura
-      reaproveitavel candidata para hospedar um resultado futuro depois
-      de sobreviver ao Gate de Replicacao.
+      Decisao do usuario, dado que critical-slowing-down e wavelet-
+      multiresolution-scaling nao sobreviveram: reformular dfa-
+      multiscale-entropy (rank 3) em torno de uma transicao temporal
+      genuina dentro do mesmo sujeito/sistema (em vez da comparacao de
+      classe estatica usada na Fase 0); nova rodada de busca por
+      candidatos ainda nao considerados; ou considerar DISC-TRI-RG-001
+      suficientemente explorada por ora (3 candidatos formulados e
+      testados com rigor -- 2 fecharam gaps completos e adversarialmente
+      checados, resultado negativo em ambos -- e priorizar outra linha.
+      01_TAMESIS_CORE/03_TRANSITION_ATLAS e infraestrutura reaproveitavel
+      candidata para hospedar um resultado futuro depois de sobreviver
+      ao Gate de Replicacao.
+    gap_closing_result_2: >
+      2026-08-14: gaps de wavelet-multiresolution-scaling (rank 2 na Fase
+      0) fechados a pedido do usuario -- ver
+      02_TESTS/TRI_RG/wavelet_multiresolution/{METHODOLOGY_NOTE.md,
+      RESULTS_SUMMARY.md}. Metodo WTMM/wavelet-leader completo substituido
+      honestamente por log-cumulantes de coeficientes wavelet (WCM --
+      Castaing/Gagne/Hopfinger 1990, Delbeke/Abry 2000, Wendt/Abry/Jaffard
+      2007), por tratabilidade computacional do protocolo de 200
+      substitutos IAAFT; R_lambda continua a mesma projecao multi-
+      resolucao wavelet. Regra de janela (ate 2h de dado disponivel de
+      cada lado da transicao, ou todo o disponivel se menor; variante de
+      robustez trunca ao menor dos dois lados) e protocolo IAAFT (bicaudal,
+      sem previsao direcional a priori) fixados e commitados ANTES de
+      qualquer calculo real (commit 6da7112), pipeline validada contra
+      controle sintetico multifractal (ruido gaussiano modulado por
+      cascata log-normal: real C2=-1,81 vs substitutos -0,37 a -0,84,
+      p=0,000; nulo mono-vs-mono corretamente nao-significativo).
+      RESULTADO: NEGATIVO nos 2 dominios. EEG (CHB-MIT, chb01_03):
+      variante primaria com significancia nominal (p=0,040 ΔC2; p=0,015
+      ΔC1) desaparece por completo quando o PRE e truncado ao mesmo
+      tamanho do POST (p=0,290; p=0,900, ΔC1 ate inverte de sinal) --
+      frageis, dependentes do desenho do teste. Sismologia (Tohoku
+      2011, IU.ANMO/BHZ): achado inicial muito significativo
+      (ΔC2=+0,356 p=0,005; ΔC1=+0,942 p=0,000) acionou checagem
+      adversarial completa -- hipotese de saturacao/clipping do
+      sismometro REJEITADA (pico usa so 31,3% da escala de 24 bits,
+      sem assinatura de clipping, sem relatos documentados para
+      ANMO/GSN em Tohoku 2011), MAS o achado nao sobrevive a
+      truncamento genuino (N=16.384: ΔC2 dispara para 2,30 mas
+      diagnosticado como artefato de estimador de amostra pequena;
+      ΔC1 perde significancia, p=0,595) nem a aparar so 1% das
+      amostras extremas do POST (ΔC2 inverte de sinal e perde toda
+      significancia, p=0,990) -- consistente com a propria limitacao
+      do IAAFT sob marginais de cauda pesada ja documentada na
+      validacao sintetica desta metodologia (razao de desvio-padrao
+      POST/PRE de ~585x, ainda mais extrema que os ~190x ja sinalizados
+      como problematicos). Nenhuma variante em nenhum dos 2 dominios
+      tem ΔC2 E ΔC1 simultaneamente significativos e estaveis.
+      wavelet-multiresolution-scaling, como critical-slowing-down antes
+      dele, NAO produz um invariante cross-domain confiavel nestes 2
+      dominios/transicoes testados com protocolo genuinamente cego ao
+      dominio. NENHUM PREREGISTRATION.md foi escrito.
     stop_condition: >
       redefinir I(X) ou R_lambda por dominio (isso deixa de ser uma
       regularidade cross-domain e vira dois modelos separados fingindo

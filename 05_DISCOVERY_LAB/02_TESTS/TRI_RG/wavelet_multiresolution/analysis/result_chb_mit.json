@@ -1,0 +1,315 @@
+{
+  "test_id": "DISC-TRI-RG-001",
+  "candidate": "wavelet-multiresolution-scaling",
+  "domain": "eeg_epileptic_seizure_chb_mit",
+  "generated_by": "wtmm_common.transition_test (imported, not reimplemented), CHB-MIT second-domain application agent, 2026-08-14",
+  "methodology_note_ref": "../METHODOLOGY_NOTE.md",
+  "pipeline_module_ref": "wtmm_common.py (WAVELET=db4, MIN_COEFFS_PER_SCALE=16, N_SURROGATES=200, N_IAAFT_ITER=50, SEED=12345)",
+  "source_data_file": "../data/eeg_seizure_prepared.json",
+  "source_data_provenance": {
+    "record_used": "chb01/chb01_03.edf",
+    "channel_used": "FP1-F7",
+    "sampling_rate_hz": 256.0,
+    "seizure_start_sec_from_file_start": 2996,
+    "seizure_end_sec_from_file_start": 3036,
+    "seizure_duration_sec": 40
+  },
+  "indices_used": {
+    "n_samples_total": 163840,
+    "seizure_onset_index_in_series": 76800,
+    "seizure_offset_index_in_series": 87040,
+    "verified_against_source_json": true
+  },
+  "segment_definition": {
+    "primary": {
+      "pre": {
+        "description": "All available interictal data before onset (index 0 to onset) -- full 5 min available, well under the 2h cap, so 'all available' rule applies per METHODOLOGY_NOTE.md",
+        "index_range": [
+          0,
+          76800
+        ],
+        "n_samples": 76800
+      },
+      "post": {
+        "description": "All available ictal data (onset to offset) -- the full clinically annotated seizure duration (~40s), well under the 2h cap",
+        "index_range": [
+          76800,
+          87040
+        ],
+        "n_samples": 10240
+      }
+    },
+    "robustness": {
+      "pre": {
+        "description": "PRE truncated to len(POST), taking the samples closest to onset (last len(POST) samples of the interictal segment)",
+        "index_range": [
+          66560,
+          76800
+        ],
+        "n_samples": 10240
+      },
+      "post": {
+        "description": "Same as primary POST -- already the smaller of the two segments, so unchanged by truncation",
+        "index_range": [
+          76800,
+          87040
+        ],
+        "n_samples": 10240
+      }
+    }
+  },
+  "results": {
+    "primary": {
+      "real_pre": {
+        "n_levels_used": 12,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0
+        ],
+        "mean_logabs_per_j": [
+          -0.17599784875928645,
+          0.7755555239729821,
+          2.7523658422802852,
+          3.9605565923170767,
+          4.514785646459434,
+          5.251739153113553,
+          5.885339725290188,
+          5.808256328472958,
+          5.571716471220532,
+          5.2524193531597625,
+          4.4050202057151635,
+          3.745919677647842
+        ],
+        "var_logabs_per_j": [
+          2.417422089218026,
+          2.5521199117767184,
+          2.705147188421536,
+          3.399478578604793,
+          2.8525815094639335,
+          2.779565300042878,
+          2.9140638755824577,
+          3.1157740907882037,
+          2.917497588092105,
+          4.080497786773703,
+          2.4028686780215587,
+          3.795852671409864
+        ],
+        "coeff_counts_per_j": [
+          19,
+          38,
+          75,
+          150,
+          300,
+          600,
+          1200,
+          2400,
+          4800,
+          9600,
+          19200,
+          38400
+        ],
+        "C1_slope": 0.37019741788478605,
+        "C1_intercept": 1.5726898396564295,
+        "C2_slope": 0.07678706592911842,
+        "C2_intercept": 2.4952898438103768,
+        "n_samples": 76800,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 9,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0
+        ],
+        "mean_logabs_per_j": [
+          2.4054249708435504,
+          3.5286362266060536,
+          4.3397839309887285,
+          5.129787055261178,
+          6.746860646307456,
+          8.055021438252487,
+          8.355425021188946,
+          8.50115501997539,
+          6.835650500440883
+        ],
+        "var_logabs_per_j": [
+          4.409891189900716,
+          4.528177882182272,
+          3.5205393613698224,
+          2.615947732159072,
+          2.7204265307788478,
+          2.0041219123388685,
+          2.8177107515100555,
+          3.0481998214658947,
+          3.556362893614785
+        ],
+        "coeff_counts_per_j": [
+          20,
+          40,
+          80,
+          160,
+          320,
+          640,
+          1280,
+          2560,
+          5120
+        ],
+        "C1_slope": 0.7265829176981514,
+        "C1_intercept": 2.3557237237164306,
+        "C2_slope": -0.16452550678054345,
+        "C2_intercept": 4.069447320049421,
+        "n_samples": 10240,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.2413125727096619,
+      "real_dC1": 0.35638549981336537,
+      "p_dC2_twotail": 0.04,
+      "p_dC1_twotail": 0.015,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": -0.0363302371387979,
+      "surrogate_dC2_std": 0.12571658212514703,
+      "surrogate_dC1_mean": 0.2847393317147402,
+      "surrogate_dC1_std": 0.03231008118217824
+    },
+    "robustness": {
+      "real_pre": {
+        "n_levels_used": 9,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0
+        ],
+        "mean_logabs_per_j": [
+          -0.13696885493250385,
+          0.8653641856227757,
+          3.1340666233759773,
+          4.702224506590868,
+          4.76644734323754,
+          5.730061481599727,
+          6.328609519928466,
+          6.400158757439224,
+          5.864786935528022
+        ],
+        "var_logabs_per_j": [
+          2.3049507157499116,
+          2.3966470667799413,
+          2.615245863510926,
+          3.456732257292763,
+          2.484305926926421,
+          2.2690965413422672,
+          3.330203810177019,
+          2.4407660320178355,
+          1.9065800912683557
+        ],
+        "coeff_counts_per_j": [
+          20,
+          40,
+          80,
+          160,
+          320,
+          640,
+          1280,
+          2560,
+          5120
+        ],
+        "C1_slope": 0.800472160756755,
+        "C1_intercept": 0.18150036270401462,
+        "C2_slope": -0.02031409041384752,
+        "C2_intercept": 2.679851374854287,
+        "n_samples": 10240,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 9,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0
+        ],
+        "mean_logabs_per_j": [
+          2.4054249708435504,
+          3.5286362266060536,
+          4.3397839309887285,
+          5.129787055261178,
+          6.746860646307456,
+          8.055021438252487,
+          8.355425021188946,
+          8.50115501997539,
+          6.835650500440883
+        ],
+        "var_logabs_per_j": [
+          4.409891189900716,
+          4.528177882182272,
+          3.5205393613698224,
+          2.615947732159072,
+          2.7204265307788478,
+          2.0041219123388685,
+          2.8177107515100555,
+          3.0481998214658947,
+          3.556362893614785
+        ],
+        "coeff_counts_per_j": [
+          20,
+          40,
+          80,
+          160,
+          320,
+          640,
+          1280,
+          2560,
+          5120
+        ],
+        "C1_slope": 0.7265829176981514,
+        "C1_intercept": 2.3557237237164306,
+        "C2_slope": -0.16452550678054345,
+        "C2_intercept": 4.069447320049421,
+        "n_samples": 10240,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.14421141636669593,
+      "real_dC1": -0.07388924305860356,
+      "p_dC2_twotail": 0.29,
+      "p_dC1_twotail": 0.9,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": -0.01959333450153511,
+      "surrogate_dC2_std": 0.14785373210768665,
+      "surrogate_dC1_mean": -0.12432045703586639,
+      "surrogate_dC1_std": 0.03888686693507553
+    }
+  }
+}

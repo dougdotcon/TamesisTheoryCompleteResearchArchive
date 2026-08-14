@@ -158,6 +158,67 @@ segmento ultrapassar esse patamar, o `p` correspondente deve ser reportado
 com a mesma ressalva já documentada (substitutos IAAFT podem não zerar a
 estatística sob marginal degenerada/cauda pesada).
 
+## Adendo ao Gap (c) — teste complementar de bootstrap por blocos (adicionado APÓS validação sintética, ANTES de qualquer dado real)
+
+A validação sintética obrigatória (seção abaixo) revelou um problema
+estrutural real com o teste IAAFT bicaudal especificado acima, não um bug:
+o controle positivo (`PRE`=fGn `H=0,5`, `POST`=fGn `H=0,9`, mudança de
+correlação inequívoca por construção) NÃO atingiu `p<0,05`
+(`p_alpha=0,255`). Diagnóstico: substitutos IAAFT preservam o espectro de
+amplitude EXATO de cada segmento real, e `alpha` do DFA é essencialmente
+uma quantidade espectral/linear para um processo gaussiano autossimilar —
+então o substituto do PRE reproduz um `alpha` quase idêntico ao `alpha`
+real do PRE, e o mesmo para o POST, deixando a distribuição nula de `Delta
+alpha` centrada quase exatamente no `Delta alpha` real. O teste IAAFT, como
+especificado, responde a uma pergunta mais estreita ("há estrutura NÃO-
+LINEAR além do espectro linear de cada segmento?"), não "há alguma mudança
+de `alpha`?" — e é precisamente para isso que existe a etapa de validação
+antes de tocar dado real (mesma disciplina de
+`METHODOLOGY_EXTENSIONS.md` Seção 1, lição de `DISC-COSMOLOGY-MOND-SPARC-003`).
+
+**Correção, fixada ANTES de qualquer cálculo em dado real:** adicionar um
+segundo teste, complementar ao IAAFT (que continua sendo calculado e
+reportado, pois responde a uma pergunta real e válida sobre estrutura não-
+linear) — um teste de **bootstrap por blocos móveis** (moving-block
+bootstrap, Künsch 1989), desenhado especificamente para testar se
+`Delta alpha` excede a variabilidade de estimação de amostra finita, sem
+depender de preservar o espectro (o problema do IAAFT aqui):
+
+1. Para cada segmento (PRE e POST, independentemente), comprimento de bloco
+   `L = n_max` daquele MESMO segmento (o maior `n` já usado na própria
+   grade de escala DFA desse segmento — regra fixada a priori, ligada
+   diretamente à análise, não um valor arbitrário) — blocos grandes o
+   bastante para preservar a estrutura de correlação até a escala mais
+   grosseira efetivamente medida.
+2. Gerar `N_BOOTSTRAP=1000` reamostras por blocos móveis com reposição
+   (blocos de tamanho `L`, início sorteado uniformemente, concatenados até
+   igualar o comprimento original do segmento) de CADA segmento,
+   independentemente. Semente fixa (`seed=12345`), reaproveitada da mesma
+   convenção já usada nesta nota.
+3. Computar `alpha` (mesma pipeline `compute_alphas`, sem modificação) em
+   cada reamostra — dando duas distribuições bootstrap independentes,
+   `alpha_boot_PRE` e `alpha_boot_POST`, cada uma com 1000 valores.
+4. Parear a `i`-ésima reamostra do PRE com a `i`-ésima do POST (pareamento
+   arbitrário entre distribuições independentes, convenção padrão de
+   bootstrap de duas amostras) para formar `Delta alpha_boot_i =
+   alpha_boot_POST_i - alpha_boot_PRE_i`, 1000 valores.
+5. Reportar o intervalo percentílico de 95% de `Delta alpha_boot` (e
+   `Delta alpha1_boot`, `Delta alpha2_boot`) e se ele exclui zero
+   (bicaudal, mesmo espírito de "sem previsão direcional a priori" já
+   declarado para o IAAFT); `p_bootstrap = 2 * min(fração de `Delta
+   alpha_boot <= 0`, fração de `Delta alpha_boot >= 0`)`, construção padrão
+   de p-valor percentílico bicaudal.
+
+**Interpretação declarada a priori:** o veredito desta linha depende do
+teste de bootstrap por blocos para a pergunta "há uma diferença real de
+`alpha` maior que ruído de amostra finita?" — o IAAFT continua reportado
+como checagem COMPLEMENTAR e mais estreita ("essa diferença reflete algo
+além de estrutura linear/espectral?"), não como o teste principal, dado o
+limite de poder já demonstrado na validação. Isto é análogo à lição já
+registrada para `ΔC1` em `wavelet-multiresolution-scaling` ("provavelmente
+reflete apenas amplitude, não estrutura genuína") — aqui, ao contrário, é o
+teste original que se mostrou fraco demais, não o achado.
+
 ## Validação contra dado sintético (obrigatória ANTES do cálculo final real)
 
 Pipeline nova (`analysis/dfa_common.py`, implementação limpa, não
@@ -176,6 +237,11 @@ ordem, ANTES de tocar qualquer segmento PRE/POST real dos 2 domínios:
    nenhum dos controles sintéticos usados tem razão max/min patologicamente
    alta, e registrar a razão max/min de cada um para referência de
    comparação com o dado real.
+5. Repetir os controles positivo e negativo (item 2 e 3) com o teste de
+   bootstrap por blocos móveis do adendo acima, confirmando que ele
+   recupera poder onde o IAAFT falhou (`p_bootstrap` pequeno no controle
+   positivo H=0,5 vs H=0,9) e continua corretamente não-significativo no
+   controle negativo (mesmo H, sorteios independentes).
 
 ## O que este passo NÃO é
 

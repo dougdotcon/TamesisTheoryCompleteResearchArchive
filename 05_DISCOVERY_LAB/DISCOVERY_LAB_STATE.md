@@ -15,7 +15,7 @@ sobre nenhum Problema do Millennium).
 |---|---|
 | Teste ativo | Nenhum travado. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING` — Fase 0 concluída (5 candidatos avaliados) E gaps de `critical-slowing-down` fechados com resultado NEGATIVO (ver seção própria abaixo), nenhum candidato travado ainda |
 | Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) teve seus 3 gaps fechados e testado nos 3 domínios verificados, resultado NEGATIVO (12 testes, só 1 significativo — consistente com ruído sob múltiplas comparações; 2 domínios com tendência na direção OPOSTA à prevista) |
-| Próxima ação obrigatória | Decisão do usuário sobre `DISC-TRI-RG-001`, dado que `critical-slowing-down` não sobreviveu ao teste: considerar `wavelet-multiresolution-scaling` (precisa de 2º domínio robusto), reformular `dfa-multiscale-entropy` (comparações de classe → transição temporal genuína), nova busca, ou considerar a linha suficientemente explorada por ora |
+| Próxima ação obrigatória | Decisão do usuário sobre `DISC-TRI-RG-001`: `wavelet-multiresolution-scaling` agora tem 2 domínios verificados (sismologia/Tohoku + EEG de crise epiléptica/CHB-MIT, ver seção própria abaixo) — falta fixar regra de janela, rodar WTMM real, e desenhar protocolo de substitutos IAAFT antes de `PREREGISTRATION.md` |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
 | Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
 | Claims em andamento | 0 |
@@ -199,6 +199,43 @@ mostra que esta instanciação específica cross-domain não sobrevive.
 Nenhum `PREREGISTRATION.md` foi escrito — o próprio passo de fechamento
 de gaps evitou travar um pré-registro fadado ao fracasso. Detalhes
 completos em `02_TESTS/TRI_RG/critical_slowing_down/RESULTS_SUMMARY.md`.
+
+## Busca de segundo domínio para `wavelet-multiresolution-scaling` (2026-08-14)
+
+Com `critical-slowing-down` descartado, usuário pediu para buscar um
+segundo domínio robusto para `wavelet-multiresolution-scaling` (que
+tinha só sismologia/Tohoku 2011 na Fase 0). Três agentes investigaram em
+paralelo três candidatos — relato completo em
+`02_TESTS/TRI_RG/wavelet_multiresolution/SECOND_DOMAIN_SEARCH.md`.
+
+**Recomendado: EEG de crise epiléptica (CHB-MIT, PhysioNet).** Banco
+aberto (sem login), registro real de 42,4 MB baixado e parseado byte a
+byte com parser EDF escrito do zero, rótulo de transição clínico
+(onset/offset de crise em segundos, dentro do mesmo registro contínuo do
+paciente) — mesma estrutura de rótulo já validada em sismologia e no
+domínio cardíaco de `critical-slowing-down`. Ressalvas: só 1 crise/1
+paciente verificada (182 crises/22 pacientes disponíveis para
+replicação futura); EEG de escalpo é mais suscetível a artefato que
+ECG/sismômetro.
+
+**Domínio de apoio válido: turbulência de plasma no vento solar** (NASA
+OMNI + catálogo independente CfA de choques interplanetários) —
+transição real confirmada numericamente (velocidade do vento solar
+400→729 km/s, `|B|` 7,7→30,5 nT no choque de 2024-10-10), mas domínio
+FISICAMENTE DIFERENTE do WTMM hidrodinâmico histórico (que continua sem
+fonte livremente acessível encontrada — lacuna honesta reconfirmada).
+
+**Descartado: MAWI/MAWILab** — dado real verificado, rótulo genuíno para
+fluxos isolados, mas falha estrutural (só captura amostras diárias de 15
+min, nunca contínuas — eventos pequenos ficam invisíveis no agregado,
+eventos grandes preenchem a janela toda sem baseline); também
+descontinuado pelos mantenedores em dezembro/2024.
+
+Ainda faltam, antes de qualquer `PREREGISTRATION.md`: regra de janela
+fixada para o domínio de EEG, cálculo real do método WTMM/wavelet-leader
+(nenhum `h(q)`/`Δα` foi calculado em nenhum domínio desta linha até
+agora — só acesso e rótulo verificados), e o protocolo de dados
+substitutos IAAFT já identificado como obrigatório na Fase 0.
 
 ## O que já foi feito nesta trilha
 

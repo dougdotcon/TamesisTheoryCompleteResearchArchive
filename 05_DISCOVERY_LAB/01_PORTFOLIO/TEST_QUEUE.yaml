@@ -503,6 +503,9 @@ queue:
       - "02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py (pipeline unica, chamada sem modificacao nos 3 dominios)"
       - "02_TESTS/TRI_RG/critical_slowing_down/analysis/result_{gisp2,sddb,nasdaq}.json (resultados completos por dominio)"
       - "02_TESTS/TRI_RG/critical_slowing_down/RESULTS_SUMMARY.md (sintese honesta do resultado negativo)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/SECOND_DOMAIN_SEARCH.md (busca de segundo dominio, 2026-08-14)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/data/eeg_seizure_prepared.json (CHB-MIT, dominio recomendado)"
+      - "02_TESTS/TRI_RG/wavelet_multiresolution/data/turbulence_prepared.json (vento solar/choque interplanetario, dominio de apoio)"
     description: >
       Nao tenta construir uma Theory of Everything diretamente. Tenta
       descobrir uma lei de interface: um mapa de coarse-graining
@@ -582,18 +585,30 @@ queue:
       gaps evitou travar um pre-registro fadado ao fracasso.
     next_action: >
       Decisao do usuario, dado que critical-slowing-down nao sobreviveu
-      ao fechamento de gaps: (a) considerar wavelet-multiresolution-
-      scaling (rank 2 na Fase 0) -- precisa de um segundo dominio robusto
-      alem de sismologia/Tohoku (MAWI/MAWILab ainda nao verificado de
-      fato, ou turbulencia, continuam como lacunas); (b) reformular dfa-
-      multiscale-entropy (rank 3) em torno de uma transicao temporal
-      genuina dentro do mesmo sujeito/sistema, em vez da comparacao de
-      classe estatica usada na Fase 0; (c) nova rodada de busca por
-      candidatos ainda nao considerados; (d) considerar DISC-TRI-RG-001
-      suficientemente explorada por ora e priorizar outra linha.
-      01_TAMESIS_CORE/03_TRANSITION_ATLAS e infraestrutura reaproveitavel
-      candidata para hospedar um resultado futuro depois de sobreviver ao
-      Gate de Replicacao.
+      ao fechamento de gaps: seguir com wavelet-multiresolution-scaling
+      -- busca de segundo dominio concluida em 2026-08-14 (ver
+      02_TESTS/TRI_RG/wavelet_multiresolution/SECOND_DOMAIN_SEARCH.md).
+      EEG de crise epileptica (CHB-MIT/PhysioNet) recomendado como
+      segundo dominio robusto (junto com sismologia/Tohoku ja verificado
+      na Fase 0); turbulencia de plasma no vento solar (NASA OMNI +
+      catalogo CfA de choques interplanetarios) fica como terceiro
+      dominio de apoio valido, mas com ressalva explicita de ser um
+      dominio fisicamente diferente do WTMM hidrodinamico historico;
+      MAWI/MAWILab descartado (falha estrutural de amostragem -- so
+      capturas diarias de 15min, nunca continuas -- alem de descontinuado
+      pelos mantenedores em dez/2024). Antes de qualquer
+      PREREGISTRATION.md ainda falta: (a) fixar regra de janela para o
+      dominio de EEG (mesma convencao de fracao-do-registro ja usada em
+      critical-slowing-down); (b) rodar o metodo WTMM/wavelet-leader real
+      (nenhum calculo de h(q)/Delta-alpha foi feito ainda em nenhum
+      dominio desta linha -- so acesso e rotulo verificados ate agora);
+      (c) desenhar o protocolo de dados substitutos IAAFT ja identificado
+      como obrigatorio na Fase 0. Alternativas ainda abertas: reformular
+      dfa-multiscale-entropy (rank 3); nova rodada de busca por outros
+      candidatos; ou considerar DISC-TRI-RG-001 suficientemente explorada
+      por ora. 01_TAMESIS_CORE/03_TRANSITION_ATLAS e infraestrutura
+      reaproveitavel candidata para hospedar um resultado futuro depois
+      de sobreviver ao Gate de Replicacao.
     stop_condition: >
       redefinir I(X) ou R_lambda por dominio (isso deixa de ser uma
       regularidade cross-domain e vira dois modelos separados fingindo

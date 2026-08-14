@@ -289,3 +289,54 @@ decisions:
       - "holdout (55 galaxias) permanece selado, nao tocado nesta sessao, so abre no Gate de Replicacao"
       - "pre-registro travado e commitado antes de qualquer calculo de g_bar/g_obs/g-dagger sobre o dado real"
       - "nenhuma alegacao de Tamesis confirmado/refutado a partir deste teste -- o veredito maximo e sobre qual derivacao interna sobrevive"
+
+  - decision_id: DISC-DEC-005
+    date: 2026-08-14
+    decision: >
+      Considerar DISC-TRI-RG-001 (busca de invariante cross-domain via
+      lente de renormalizacao/coarse-graining) suficientemente explorada
+      por ora, a pedido explicito do usuario. Linha PAUSADA, nao fechada:
+      DISC-TRI-RG-001 permanece CANDIDATE_FORMULATING em TEST_QUEUE.yaml
+      (nenhum candidato foi travado em PREREGISTRATION.md), disponivel
+      para retomada futura (reformular dfa-multiscale-entropy, buscar
+      novos candidatos, ou revisitar os 2 ja testados com dado/dominio
+      diferente) sem exigir nova formulacao do zero -- toda a
+      infraestrutura (pipelines validadas, dados preparados, resultados
+      documentados) fica reaproveitavel.
+    rationale: >
+      Dos 5 candidatos de (R_lambda, I(X)) levantados na Fase 0
+      (2026-08-14, 02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md), 3 foram
+      viable=true: critical-slowing-down (rank 1) e wavelet-
+      multiresolution-scaling (rank 2) tiveram TODOS os gaps fechados a
+      pedido do usuario -- metodologia fixada e commitada antes de
+      qualquer calculo real, pipeline validada contra dado sintetico com
+      verdade conhecida, aplicada sem modificacao aos dominios reais
+      verificados, com checagem adversarial completa onde o tamanho do
+      efeito justificou (o achado inicial de wavelet-multiresolution-
+      scaling em sismologia, ΔC2=+0,356 p=0,005, nao sobreviveu a
+      truncamento genuino nem a aparar 1% das amostras extremas).
+      RESULTADO: NEGATIVO nos dois. Nenhum dos dois candidatos produz um
+      invariante cross-domain confiavel quando testado com uma regra de
+      escala genuinamente cega ao dominio -- a exigencia central da
+      propria linha. O terceiro candidato viavel (dfa-multiscale-entropy,
+      rank 3) tem a execucao empirica mais solida dos 5, mas os 2
+      dominios usados na Fase 0 sao comparacoes ESTATICAS de classe
+      (saudavel vs. ICC; continental vs. oceanico), nao transicoes
+      temporais dentro do mesmo sistema -- precisaria de reformulacao
+      substancial antes de poder ser testado com o mesmo rigor. Dado que
+      2 dos 3 candidatos formulados e adversarialmente testados falharam,
+      e o terceiro exige trabalho de reformulacao ainda nao iniciado, o
+      usuario decidiu pausar a linha em vez de continuar imediatamente
+      para o terceiro candidato ou uma nova rodada de busca.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: next_action atualizado para refletir a pausa)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status permanece CANDIDATE_FORMULATING (nao ha status 'PAUSED' formal na maquina de estados de TEST_QUEUE.yaml -- a pausa e registrada aqui e no next_action, nao por uma mudanca de status que nao existe no schema)"
+      - "nenhum arquivo de teste (PREREGISTRATION.md, CLAIM_LEDGER.yaml) criado ou modificado -- nao ha claim a fechar, pois nenhum pre-registro foi travado nesta linha"
+    untouched_safeguards:
+      - "toda a infraestrutura desta linha (METHODOLOGY_NOTE.md, pipelines validadas csd_common.py/wtmm_common.py, dados preparados, resultados JSON, relatorios de sessao) permanece no repositorio, commitada e reaproveitavel para retomada futura"
+      - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre esta rodada especifica de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"

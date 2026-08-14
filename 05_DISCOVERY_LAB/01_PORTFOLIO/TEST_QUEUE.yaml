@@ -496,7 +496,9 @@ queue:
     parent_legacy: "01_TAMESIS_CORE (Theory of Regime Interfaces / TOE_INTERFACE_EXECUTION)"
     related_tests: []
     status: CANDIDATE_FORMULATING
-    existing_assets: []
+    existing_assets:
+      - "02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md (levantamento de 5 candidatos R_lambda/I(X), 2026-08-14)"
+      - "02_TESTS/TRI_RG/phase0/workflow_raw_output.json (resultado bruto completo dos 5 agentes de pesquisa + sintese)"
     description: >
       Nao tenta construir uma Theory of Everything diretamente. Tenta
       descobrir uma lei de interface: um mapa de coarse-graining
@@ -509,17 +511,61 @@ queue:
       regularidade cross-domain inesperada -- nao automaticamente uma ToE,
       mas muito mais interessante que mais lemas sobre um operador
       construido para ser tratavel.
+    phase0_result: >
+      2026-08-14: 5 candidatos de (R_lambda, I(X)) avaliados em paralelo
+      por agentes independentes com instrucao de verificar dado real (nao
+      so citar) -- ver 02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md para o
+      relato completo. 3/5 viable=true com dado real baixado e verificado
+      em >=2 dominios: (1) critical-slowing-down [rank 1] -- variancia/
+      autocorrelacao lag-1 crescentes perto de bifurcacao (Scheffer 2009,
+      Dakos 2008/2012, Lenton 2012), 3 dominios com TRANSICAO REAL dentro
+      do mesmo sistema no tempo verificados (GISP2 Younger Dryas, PhysioNet
+      SDDB onset de FV, NASDAQ crash pontocom), modelo concorrente nomeado
+      real (B-tipping vs R/N-tipping, Ashwin 2012) -- mas Delta I ainda NAO
+      foi calculado (so acesso ao dado verificado), falta regra unica de
+      selecao de lambda cross-domain, falta protocolo de nulo substituto;
+      (2) wavelet-multiresolution-scaling [rank 2] -- WTMM/expoente de
+      Hurst generalizado, R_lambda mais rigoroso matematicamente (R_2λ=
+      R_λ'∘R_λ por construcao), mas so 1 dominio robusto (sismologia,
+      mainshock de Tohoku 2011, rotulo USGS/GCMT externo) -- fisiologia e
+      trafego de rede tem rotulos fracos/de classe, nao de transicao;
+      (3) dfa-multiscale-entropy [rank 3] -- execucao empirica mais solida
+      (DFA implementado do zero, validado contra nulos teoricos, rodado
+      sobre dado PhysioNet real decodificado E sobre gaps de zeta ja
+      usados em DISC-RH-GAP-EXTREME-VALUE-SCALING-001), mas os 2 dominios
+      usados sao comparacoes ESTATICAS de classe (saudavel vs ICC;
+      continental vs oceanico), nao transicoes temporais -- mesmo defeito
+      estrutural que corretamente derrubou o candidato (4) abaixo, so
+      detectado na sintese cross-candidato, nao pelo proprio agente.
+      2/5 corretamente marcados viable=false pelos proprios agentes: (4)
+      box-covering-network-renorm -- R_lambda mais literal/rigoroso de
+      todos, dado real de 4 redes (SNAP/CAIDA) verificado, mas toda
+      "transicao" fractal<->nao-fractal na literatura vem de modelos
+      SINTETICOS com parametro artificial, dado real so mostra
+      classificacao estatica (e essa classificacao esta sob disputa ativa
+      em 2025); (5) spacing-statistics-rmt-non-zeta -- dado real (niveis
+      nucleares RIPL-3, autovalores de rede SNAP) e computacao real
+      executados, mas falha em identificabilidade (previsao identica ao
+      consenso BGS/RMT de 40 anos, sem discriminador Tamesis) e em RG/EFT
+      (nenhum R_lambda genuino implementado). NENHUM candidato foi travado
+      -- decisao pendente do usuario sobre qual/quais perseguir.
     next_action: >
-      Nomear o mapa R_lambda candidato (METHODOLOGY_EXTENSIONS.md Sec.2,
-      mesmo que informal/numerico nesta fase) e identificar pelo menos
-      DOIS dominios reais com dado publico onde I(X) e computavel de
-      forma identica (mesma formula, sem reajuste por dominio) antes de
-      qualquer pre-registro. 01_TAMESIS_CORE/03_TRANSITION_ATLAS e
-      infraestrutura reaproveitavel candidata para hospedar o resultado
-      depois de sobreviver ao Gate de Replicacao.
+      Decisao do usuario: (a) prosseguir com critical-slowing-down
+      fechando os 3 gaps identificados (regra de lambda cross-domain,
+      protocolo de nulo substituto, calculo real de Delta I nos 3
+      dominios ja verificados) antes de qualquer PREREGISTRATION.md; ou
+      (b) buscar um segundo dominio robusto para wavelet-multiresolution-
+      scaling (MAWI/MAWILab ainda nao verificado de fato, ou turbulencia,
+      continuam como lacunas); ou (c) reformular dfa-multiscale-entropy
+      em torno de uma transicao temporal genuina em vez da comparacao de
+      classe atual; ou (d) nova rodada de busca. 01_TAMESIS_CORE/
+      03_TRANSITION_ATLAS e infraestrutura reaproveitavel candidata para
+      hospedar o resultado depois de sobreviver ao Gate de Replicacao.
     stop_condition: >
       redefinir I(X) ou R_lambda por dominio (isso deixa de ser uma
       regularidade cross-domain e vira dois modelos separados fingindo
       ser um); alegar deteccao de invariante com apenas um dominio testado;
-      alegar progresso sobre TOE a partir de qualquer resultado aqui antes
-      do Gate de Replicacao.
+      tratar uma comparacao ESTATICA de classe entre sistemas diferentes
+      como se fosse uma transicao de regime (defeito ja identificado nesta
+      Fase 0 em 2 dos 5 candidatos); alegar progresso sobre TOE a partir
+      de qualquer resultado aqui antes do Gate de Replicacao.

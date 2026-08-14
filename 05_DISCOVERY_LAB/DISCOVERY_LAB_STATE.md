@@ -1,6 +1,6 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-13
+**Última atualização:** 2026-08-14
 **Arquitetura:** motor 1 de 3 — ver `00_GOVERNANCE/RESEARCH_PIPELINE.md`
 (`05_DISCOVERY_LAB` → `03_REPLICATION_GATE` → `04_FORMAL_RESEARCH_LAB`,
 adotada em `DISC-DEC-003`). `04_FORMAL_RESEARCH_LAB` não é mais um
@@ -13,9 +13,9 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | Nenhum. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING`, não iniciado |
-| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório |
-| Próxima ação obrigatória | Decisão do usuário: seguir para `DISC-TRI-RG-001`, ou considerar a linha RH-REAL suficiente por ora e escolher outra linha/candidato |
+| Teste ativo | Nenhum travado. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING` — Fase 0 concluída (5 candidatos avaliados, ver seção própria abaixo), nenhum travado ainda |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado, nenhum ainda pronto para pré-registro (ver seção própria) |
+| Próxima ação obrigatória | Decisão do usuário sobre `DISC-TRI-RG-001`: prosseguir com `critical-slowing-down` (candidato mais forte, mas com 3 gaps concretos a fechar antes de pré-registro), buscar segundo domínio para `wavelet-multiresolution-scaling`, reformular `dfa-multiscale-entropy`, ou nova rodada de busca |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
 | Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
 | Claims em andamento | 0 |
@@ -123,6 +123,48 @@ relato completo.
 Não há mais fonte adicional de Odlyzko disponível no regime #10²² para
 resolver a falta de poder do sub-teste 2 sem consumir dado já usado.
 
+## Resultado da Fase 0 de `DISC-TRI-RG-001` (2026-08-14)
+
+5 candidatos de par `(R_lambda, I(X))` avaliados em paralelo por agentes
+de pesquisa independentes, cada um obrigado a verificar dado real (baixar/
+inspecionar, não só citar) antes de declarar um domínio utilizável. Relato
+completo em `02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md`.
+
+**3/5 `viable: true`**, ranqueados por uma síntese adversarial que aplicou
+a mesma régua a todos: (1) **critical-slowing-down** — variância/
+autocorrelação lag-1 crescentes perto de bifurcação (Scheffer 2009, Dakos
+2008/2012, Lenton 2012); 3 domínios com transição REAL dentro do mesmo
+sistema no tempo, dado verificado (GISP2/Younger Dryas, PhysioNet SDDB/
+onset de fibrilação ventricular, NASDAQ/crash pontocom); modelo
+concorrente nomeado real (B-tipping vs. R/N-tipping, Ashwin 2012); ainda
+faltam regra de `lambda` cross-domain, protocolo de nulo substituto, e o
+cálculo real de `Delta I` (só o acesso ao dado foi verificado). (2)
+**wavelet-multiresolution-scaling** — `R_lambda` mais rigoroso
+matematicamente dos 5 (`R_2λ=R_λ'∘R_λ` por construção via subespaços
+aninhados), mas só 1 domínio robusto (sismologia, mainshock de Tohoku
+2011, rótulo USGS/GCMT externo). (3) **dfa-multiscale-entropy** —
+execução empírica mais sólida (DFA implementado do zero, validado contra
+nulos teóricos, rodado sobre dado PhysioNet real decodificado E sobre os
+gaps de zeta já usados em `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`), mas
+os 2 domínios usados são comparações ESTÁTICAS de classe (saudável vs.
+insuficiência cardíaca; continental vs. oceânico), não transições
+temporais — mesmo defeito que corretamente derrubou o candidato (4)
+abaixo, só detectado na síntese cross-candidato.
+
+**2/5 `viable: false`**, corretamente rejeitados pelos próprios agentes:
+(4) **box-covering-network-renorm** (Song-Havlin-Makse) — `R_lambda` mais
+literal de todos, dado real de 4 redes verificado (SNAP/CAIDA), mas toda
+"transição" fractal↔não-fractal na literatura vem de modelos sintéticos
+com parâmetro artificial; dado real só mostra classificação estática, e
+essa classificação está sob disputa ativa em 2025. (5)
+**spacing-statistics-rmt-non-zeta** — dado real e computação real
+executados (níveis nucleares RIPL-3, autovalores de rede SNAP), mas falha
+em identificabilidade (previsão idêntica ao consenso BGS/RMT de 40 anos)
+e em RG/EFT (nenhum `R_lambda` genuíno implementado).
+
+**Nenhum candidato foi travado.** Decisão de qual (ou quais) perseguir
+fica com o usuário.
+
 ## O que já foi feito nesta trilha
 
 1. Governança criada: `00_GOVERNANCE/{AGENTS.md,DECISION_LEDGER.yaml,CLAIM_LEDGER.yaml,PREREGISTRATION_TEMPLATE.md}`.
@@ -170,10 +212,9 @@ status `CANDIDATE_FORMULATING`, nenhuma pré-registrada):
 
 ## O que ainda não foi feito
 
-- Decisão do usuário: abrir `DISC-TRI-RG-001` (ainda exige trabalho de
-  formulação substancial — nomear um mapa de renormalização, achar dois
-  domínios reais comparáveis) ou considerar a linha RH-REAL suficiente
-  por ora e escolher outra linha/candidato.
+- Decisão do usuário sobre qual candidato de `DISC-TRI-RG-001` perseguir
+  (ver seção própria acima) e fechamento dos gaps concretos do candidato
+  escolhido antes de qualquer `PREREGISTRATION.md`.
 - Fora do escopo desta trilha, mas acionável: reportar/corrigir o
   provável erro de copy-paste em
   `01_TAMESIS_CORE/03_Axiomatic_Closure/Universe_Equation/02_MOND_Emergence/index.html:282`.

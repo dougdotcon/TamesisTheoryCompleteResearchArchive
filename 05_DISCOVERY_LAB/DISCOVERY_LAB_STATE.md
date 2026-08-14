@@ -13,9 +13,9 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | Nenhum travado. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` PAUSADA (`DISC-DEC-005`, 2026-08-14). `DISC-COSMOLOGY-MOND-SPARC-003` iniciada (2026-08-14) — Fase 0 concluída (ver seção própria abaixo), `CANDIDATE_FORMULATING`, aguardando decisão do usuário sobre prosseguir para pré-registro |
-| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) e `wavelet-multiresolution-scaling` (rank 2) tiveram gaps completos fechados e testados, ambos NEGATIVO (o segundo com checagem adversarial completa dado o tamanho do efeito inicial); `dfa-multiscale-entropy` (rank 3) não testado, precisaria de reformulação. Linha PAUSADA por decisão do usuário. SPARC-003: busca exaustiva não encontrou nova alegação Tamesis-específica — rota recomendada é réplica de SPARC-002 via binárias largas Gaia (El-Badry et al. 2021), com achado de integridade grave (dado fabricado em `gaia_real_analysis.py`) descoberto no processo |
-| Próxima ação obrigatória | Decisão do usuário sobre `DISC-COSMOLOGY-MOND-SPARC-003`: prosseguir para pré-registro do teste de binárias largas (formula do estimador de Chae 2023 a verificar por fetch direto antes do lock), ou considerar a busca de Fase 0 (achado negativo — nenhuma alegação nova) suficiente e encerrar aqui |
+| Teste ativo | `DISC-COSMOLOGY-MOND-SPARC-003` (`CANDIDATE_LOCKED`, ver seção própria abaixo — pré-registro travado 2026-08-14, análise ainda não rodada). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` PAUSADA (`DISC-DEC-005`, 2026-08-14) |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) e `wavelet-multiresolution-scaling` (rank 2) tiveram gaps completos fechados e testados, ambos NEGATIVO (o segundo com checagem adversarial completa dado o tamanho do efeito inicial); `dfa-multiscale-entropy` (rank 3) não testado, precisaria de reformulação. Linha PAUSADA por decisão do usuário. SPARC-003: busca exaustiva de Fase 0 não encontrou nova alegação Tamesis-específica — pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (El-Badry et al. 2021, 43.147 sistemas pós-corte, 30.203 descoberta/12.944 holdout selado), com achado de integridade grave (dado fabricado em `gaia_real_analysis.py`) descoberto no processo |
+| Próxima ação obrigatória | Rodar a análise pré-registrada de `DISC-COSMOLOGY-MOND-SPARC-003` sobre a amostra de descoberta (30.203 sistemas): calcular razão de velocidade projetada por bin, ajustar `a0` via mínimos quadrados não-linear, IC bootstrap 95% (1000 réplicas), verificar se `a0_A`/`a0_B` sobrevivem — depois reexecução adversarial independente |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (pausa de `DISC-TRI-RG-001` a pedido do usuário) |
 | Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
 | Claims em andamento | 0 |
@@ -116,6 +116,40 @@ qualquer pré-registro: verificar por fetch direto a fórmula exata do
 estimador de Chae (2023), declarar corte de qualidade e split
 discovery/holdout próprios. Detalhes completos em
 `02_TESTS/COSMOLOGY_WIDE_BINARIES/phase0/PHASE0_SEARCH.md`.
+
+## Pré-registro travado de `DISC-COSMOLOGY-MOND-SPARC-003` (2026-08-14)
+
+A pedido do usuário, pré-registro escrito e travado
+(`02_TESTS/COSMOLOGY_WIDE_BINARIES/PREREGISTRATION.md`). Metodologia de
+Chae verificada por fetch direto de **dois** artigos primários (uma
+confusão de arXiv ID entre o título/ApJ citado e o número arXiv
+originalmente fornecido foi descoberta e corrigida: são dois artigos
+reais e distintos do mesmo autor, "Artigo A" ApJ 952,128/arXiv:2305.04613
+e "Artigo B" arXiv:2309.10404, artigo de acompanhamento). O método
+primário de Chae (desprojeção 3D via Monte Carlo orbital, dependente de
+excentricidades de Hwang et al. 2022 não verificadas nesta sessão) foi
+declarado tratável demais para reproduzir diretamente — adotado em vez
+disso o método de perfil de velocidade projetada do Artigo B (simplicação
+honesta e declarada, ainda real/publicada, validada pelo próprio Chae
+como correlacionada ao método completo).
+
+Catálogo real El-Badry, Rix & Heintz (2021) baixado por completo
+(1.937.351.290 bytes = 100% do esperado, sha256 verificado duas vezes,
+1.817.594 pares, contagem exata batendo com o paper). Cortes de
+qualidade REAIS de Chae aplicados (`R<0,01` — não `R<0,1` como suposto
+inicialmente —, `200<sepAU<30.000`, `BinType==MSMS`, distância`<200pc`,
+`4<M_G<14`): **43.147 sistemas** sobrevivem. Massa estelar derivada via
+relação massa-luminosidade de Pecaut & Mamajek (2013), tabela de Mamajek
+baixada diretamente (catálogo não traz massa). Split
+discovery(**30.203**)/holdout(**12.944** selado) gerado com seed
+determinístico. Bordas de 5 bins de `log(g_N)` calculadas somente de
+massa+separação — `a0_A` e `a0_B` ambos caem dentro da faixa de dado
+disponível, dando poder genuíno ao teste. H_A/H_B idênticas às já
+travadas em SPARC-002, não reformuladas. Nenhuma razão de velocidade
+observada foi calculada antes deste lock.
+
+Status: `CANDIDATE_LOCKED`. Próximo passo: rodar a análise
+pré-registrada, depois reexecução adversarial independente.
 
 ## Resultado da linha RH-REAL (dois sub-testes, ambos com Gate acionado)
 

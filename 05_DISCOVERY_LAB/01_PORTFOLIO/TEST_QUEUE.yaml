@@ -183,9 +183,15 @@ queue:
     parent_legacy: "01_TAMESIS_CORE/02_Experimental_Validation/MOND_EFE/lab_gravity/analysis/gaia_real_analysis.py"
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-002 (mesmas duas hipoteses H_A/H_B, mesmo criterio de decisao -- este teste e uma replica de canal fisico independente, nao uma nova alegacao)"
-    status: CANDIDATE_FORMULATING
+    status: CANDIDATE_LOCKED
     existing_assets:
       - "02_TESTS/COSMOLOGY_WIDE_BINARIES/phase0/PHASE0_SEARCH.md (busca de formulacao, 3 rotas investigadas em paralelo, 2026-08-14)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/PREREGISTRATION.md (travado 2026-08-14)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/data/PROVENANCE.md (catalogo El-Badry+2021 real, 1.817.594 pares, sha256 verificado)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/data/quality_filtered_sample.parquet (43.147 sistemas pos-corte)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/data/discovery_holdout_split.json (30.203 descoberta / 12.944 holdout selado, seed=20260814)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/data/mamajek_mass_luminosity.tsv (relacao massa-luminosidade Pecaut & Mamajek 2013)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES/analysis/{apply_quality_cuts.py,generate_split_and_bins.py}"
     description: >
       Iniciada a pedido do usuario ("comece a linha
       DISC-COSMOLOGY-MOND-SPARC-003"). Fase 0 (3 agentes independentes em
@@ -221,21 +227,51 @@ queue:
       nao-resolvidas de forma generica, mas NAO menciona que o dataset
       embutido e sintetico. Isso precisa ser corrigido (substituido pelo
       catalogo real) como parte do desenho deste teste, nao contornado.
+    preregistration_result: >
+      2026-08-14: pre-registro travado (PREREGISTRATION.md). Metodologia
+      de Chae (2023) verificada por fetch direto de AMBOS os artigos
+      primarios (Chae 2023, ApJ 952,128, arXiv:2305.04613 -- "Artigo A" --
+      e Chae 2023, arXiv:2309.10404 -- "Artigo B", artigo de acompanhamento
+      distinto, nao o mesmo do titulo/ApJ citado inicialmente -- confusao
+      de arXiv ID descoberta e corrigida nesta sessao). Metodo primario de
+      Chae (desprojecao 3D via Monte Carlo orbital com excentricidades de
+      Hwang et al. 2022) NAO reproduzido -- tratavel demais para um
+      protocolo direto; adotado em vez disso o metodo de perfil de
+      velocidade projetada (Artigo B Sec.4.2), simplificacao declarada
+      explicitamente, ainda real e publicada (usada por Pittordis &
+      Sutherland 2018, Banik & Zhao 2018, e validada pelo proprio Chae
+      como correlacionada com o metodo completo). Cortes de qualidade
+      REAIS de Chae (R<0.01, nao R<0.1 como suposto inicialmente;
+      200<sepAU<30000; MSMS; distancia<200pc; 4<M_G<14) aplicados ao
+      catalogo real (El-Badry, Rix & Heintz 2021, 1.817.594 pares
+      baixados por completo, sha256 verificado, contagem de linhas exata).
+      Massa estelar derivada via relacao massa-luminosidade Pecaut &
+      Mamajek (2013), tabela de Mamajek baixada diretamente (nao
+      reproduzido o polinomio exato de Chae -- interpolacao linear na
+      mesma fonte primaria, desvio declarado). 43.147 sistemas sobrevivem
+      aos cortes. Split discovery(30.203)/holdout(12.944) gerado com seed
+      determinístico (data de lock), holdout selado. Bordas de 5 bins de
+      log(g_N) calculadas SOMENTE de massa+separacao (nunca de
+      movimento proprio/velocidade) -- ambos a0_A e a0_B caem dentro da
+      faixa de dado disponivel. H_A/H_B identicas as ja travadas em
+      SPARC-002, nao reformuladas. Nenhuma razao de velocidade observada
+      foi calculada antes deste lock.
     next_action: >
-      Decisao do usuario: prosseguir com o pre-registro do teste de
-      binarias largas (formula do estimador de Chae 2023 precisa ser
-      verificada por fetch direto do paper antes do lock, corte de
-      qualidade R<0.1 e split discovery/holdout proprios declarados
-      a priori); ou nao prosseguir e considerar SPARC-003 encerrada com
-      o achado negativo da Fase 0 (nenhuma nova alegacao Tamesis-
-      especifica encontrada) registrado por si so.
+      Rodar a analise pre-registrada (Secao 4 do PREREGISTRATION.md)
+      sobre a amostra de descoberta (30.203 sistemas): calcular
+      velocidade projetada observada por sistema, medianas por bin,
+      ajustar a0 via minimos quadrados nao-linear contra o modelo MOND,
+      IC bootstrap 95% (1000 replicas), verificar se a0_A e/ou a0_B caem
+      dentro. Depois: reexecucao adversarial independente (AGENTS.md
+      passo 7).
     stop_condition: >
-      reformular H_A/H_B ou o criterio de decisao ja travados em
-      SPARC-002; usar qualquer numero do dataset fabricado em
-      gaia_real_analysis.py; assumir a formula do estimador de Chae 2023
-      de memoria sem verificar por fetch direto; alegar "Tamesis
+      reformular H_A/H_B, os cortes de qualidade, as bordas de bin, ou o
+      criterio de decisao ja travados em PREREGISTRATION.md depois de
+      ver qualquer razao de velocidade calculada; abrir o holdout
+      (12.944 sistemas) fora do Gate de Replicacao; usar qualquer numero
+      do dataset fabricado em gaia_real_analysis.py; alegar "Tamesis
       confirmado/refutado" a partir deste teste -- o maximo que decide e
-      se H_A sobrevive num canal fisico independente de SPARC.
+      se H_A e/ou H_B sobrevivem num canal fisico independente de SPARC.
 
   - test_id: DISC-RH-REAL-001
     title: "Linha RH real (riemannZeta) -- distinta de RH-TOY/Tp em 04_FORMAL_RESEARCH_LAB"

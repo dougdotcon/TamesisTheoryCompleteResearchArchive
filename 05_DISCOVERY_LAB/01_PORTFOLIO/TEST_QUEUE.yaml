@@ -499,6 +499,10 @@ queue:
     existing_assets:
       - "02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md (levantamento de 5 candidatos R_lambda/I(X), 2026-08-14)"
       - "02_TESTS/TRI_RG/phase0/workflow_raw_output.json (resultado bruto completo dos 5 agentes de pesquisa + sintese)"
+      - "02_TESTS/TRI_RG/critical_slowing_down/METHODOLOGY_NOTE.md (regra de lambda + protocolo de nulo substituto, fixados antes do calculo)"
+      - "02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py (pipeline unica, chamada sem modificacao nos 3 dominios)"
+      - "02_TESTS/TRI_RG/critical_slowing_down/analysis/result_{gisp2,sddb,nasdaq}.json (resultados completos por dominio)"
+      - "02_TESTS/TRI_RG/critical_slowing_down/RESULTS_SUMMARY.md (sintese honesta do resultado negativo)"
     description: >
       Nao tenta construir uma Theory of Everything diretamente. Tenta
       descobrir uma lei de interface: um mapa de coarse-graining
@@ -547,20 +551,49 @@ queue:
       nucleares RIPL-3, autovalores de rede SNAP) e computacao real
       executados, mas falha em identificabilidade (previsao identica ao
       consenso BGS/RMT de 40 anos, sem discriminador Tamesis) e em RG/EFT
-      (nenhum R_lambda genuino implementado). NENHUM candidato foi travado
-      -- decisao pendente do usuario sobre qual/quais perseguir.
+      (nenhum R_lambda genuino implementado).
+    gap_closing_result: >
+      2026-08-14: os 3 gaps de critical-slowing-down (rank 1 na Fase 0)
+      foram fechados a pedido do usuario -- ver
+      02_TESTS/TRI_RG/critical_slowing_down/METHODOLOGY_NOTE.md e
+      RESULTS_SUMMARY.md. Regra de lambda cross-domain (fracoes fixas do
+      comprimento do segmento, convencao Dakos et al. 2012) e protocolo
+      de nulo substituto AR(1) (Dakos et al. 2008 PNAS) fixados e
+      commitados ANTES de qualquer calculo real (commit b43fde0), pipeline
+      unica (csd_common.py) validada contra dado sintetico primeiro, depois
+      chamada sem modificacao por 3 agentes independentes nos 3 dominios ja
+      verificados (GISP2, PhysioNet SDDB, NASDAQ). RESULTADO: NEGATIVO --
+      das 12 combinacoes testadas (3 dominios x 2 variantes x 2 canais),
+      so 1 cruzou p<0,05 (GISP2/robustez/AC1, p=0,032), estatisticamente
+      consistente com ruido puro sob 12 comparacoes multiplas sem correcao
+      (esperado ~0,6 falsos positivos ao acaso). Pior: em 2 dos 3 dominios
+      (PhysioNet SDDB, NASDAQ primaria) o canal de AC1 mostrou tendencia
+      FORTEMENTE NEGATIVA (tau=-0,82, tau=-0,95, tau=-0,37) -- direcao
+      OPOSTA a prevista por CSD, nao apenas "sem sinal". critical-slowing-
+      down, formulado com uma regra de lambda genuinamente cega ao
+      dominio (exigencia central de DISC-TRI-RG-001), NAO produz um
+      invariante cross-domain confiavel nestes 3 dominios/transicoes.
+      Achado negativo honesto, catalogado com o mesmo peso que um
+      resultado positivo -- nao invalida CSD como fenomeno geral na
+      literatura (que usa janelas informadas por conhecimento especifico
+      de cada sistema, nao uma regra cega), apenas mostra que esta
+      instanciacao especifica cross-domain nao sobrevive. NENHUM
+      PREREGISTRATION.md foi escrito -- o proprio passo de fechamento de
+      gaps evitou travar um pre-registro fadado ao fracasso.
     next_action: >
-      Decisao do usuario: (a) prosseguir com critical-slowing-down
-      fechando os 3 gaps identificados (regra de lambda cross-domain,
-      protocolo de nulo substituto, calculo real de Delta I nos 3
-      dominios ja verificados) antes de qualquer PREREGISTRATION.md; ou
-      (b) buscar um segundo dominio robusto para wavelet-multiresolution-
-      scaling (MAWI/MAWILab ainda nao verificado de fato, ou turbulencia,
-      continuam como lacunas); ou (c) reformular dfa-multiscale-entropy
-      em torno de uma transicao temporal genuina em vez da comparacao de
-      classe atual; ou (d) nova rodada de busca. 01_TAMESIS_CORE/
-      03_TRANSITION_ATLAS e infraestrutura reaproveitavel candidata para
-      hospedar o resultado depois de sobreviver ao Gate de Replicacao.
+      Decisao do usuario, dado que critical-slowing-down nao sobreviveu
+      ao fechamento de gaps: (a) considerar wavelet-multiresolution-
+      scaling (rank 2 na Fase 0) -- precisa de um segundo dominio robusto
+      alem de sismologia/Tohoku (MAWI/MAWILab ainda nao verificado de
+      fato, ou turbulencia, continuam como lacunas); (b) reformular dfa-
+      multiscale-entropy (rank 3) em torno de uma transicao temporal
+      genuina dentro do mesmo sujeito/sistema, em vez da comparacao de
+      classe estatica usada na Fase 0; (c) nova rodada de busca por
+      candidatos ainda nao considerados; (d) considerar DISC-TRI-RG-001
+      suficientemente explorada por ora e priorizar outra linha.
+      01_TAMESIS_CORE/03_TRANSITION_ATLAS e infraestrutura reaproveitavel
+      candidata para hospedar um resultado futuro depois de sobreviver ao
+      Gate de Replicacao.
     stop_condition: >
       redefinir I(X) ou R_lambda por dominio (isso deixa de ser uma
       regularidade cross-domain e vira dois modelos separados fingindo

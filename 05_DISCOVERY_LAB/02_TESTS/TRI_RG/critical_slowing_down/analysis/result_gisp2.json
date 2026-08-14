@@ -1,0 +1,79 @@
+{
+  "domain": "paleoclimate_GISP2",
+  "source": {
+    "name": "GISP2 Ice Core Temperature and Accumulation Data (Alley 2000)",
+    "url": "https://www.ncei.noaa.gov/pub/data/paleo/icecore/greenland/summit/gisp2/isotopes/gisp2_temp_accum_alley2000.txt",
+    "downloaded_bytes": 116283,
+    "download_verification": "curl HTTP 200, byte size matches prior Phase 0 verification (116283 bytes); file content inspected directly (header, column definitions at lines 72-75, 1632-row temperature data block at lines 76-1707) before parsing.",
+    "reference": "Alley, R.B. 2000. The Younger Dryas cold interval as viewed from central Greenland. Quaternary Science Reviews 19:213-226.",
+    "columns": "Column 1: Age (thousand years before present, kyr BP); Column 2: Temperature in central Greenland (degrees C)",
+    "n_rows_temperature_block_total": 1632,
+    "age_range_kyr_bp_full_record": [
+      0.0951409,
+      49.981
+    ]
+  },
+  "transition": {
+    "documented_event": "Younger Dryas -> Preboreal warming",
+    "nominal_age_kyr_bp": 11.5,
+    "operational_definition": "pre-transition segment = all samples with Age (kyr BP) > 11.5, strictly",
+    "closest_sample_to_nominal_age": {
+      "age_kyr_bp": 11.496,
+      "temp_C": -36.6361,
+      "delta_from_nominal_kyr": -0.0039999999999995595
+    },
+    "note": "The GISP2 age grid is irregular (~0.015-0.03 kyr spacing in this interval), not a regular grid; 11.5 kyr BP does not fall exactly on a sample. The threshold Age > 11.5 was applied strictly (no rounding/snapping), so the most recent (last) sample retained in the primary pre-transition segment is the closest sample with Age > 11.5, and the closest overall sample to 11.5 (age=11.496) falls just on the post-transition side and is excluded from both variants."
+  },
+  "segments": {
+    "ordering": "chronological, oldest first (Age descending) as required by methodology",
+    "primary": {
+      "definition": "all available record with Age > 11.5 kyr BP (from record start ~49.981 kyr BP to the transition)",
+      "n_samples": 764,
+      "age_min_kyr_bp": 11.512,
+      "age_max_kyr_bp": 49.981
+    },
+    "robustness": {
+      "definition": "most recent 50% (by sample count, floor division) of the primary segment",
+      "n_samples": 382,
+      "age_min_kyr_bp": 11.512,
+      "age_max_kyr_bp": 27.346,
+      "n_primary_for_reference": 764
+    }
+  },
+  "pipeline_results": {
+    "primary": {
+      "ar1_a": 0.9685827406151126,
+      "ar1_sigma": 1.0466133736099679,
+      "real_tau_ac1": 0.21846153846153846,
+      "real_tau_var": -0.36615384615384616,
+      "p_ac1_onetail": 0.398,
+      "p_var_onetail": 0.718,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.019329230769230765,
+      "surrogate_tau_ac1_std": 0.5066846921780586,
+      "surrogate_tau_var_mean": 0.020504615384615392,
+      "surrogate_tau_var_std": 0.5102139623482955,
+      "n_samples": 764,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    },
+    "robustness": {
+      "ar1_a": 0.9761129450824213,
+      "ar1_sigma": 0.8342357169077405,
+      "real_tau_ac1": 0.8478260869565217,
+      "real_tau_var": 0.8043478260869565,
+      "p_ac1_onetail": 0.032,
+      "p_var_onetail": 0.058,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": -0.005898550724637683,
+      "surrogate_tau_ac1_std": 0.5169261398986136,
+      "surrogate_tau_var_mean": -0.007079710144927536,
+      "surrogate_tau_var_std": 0.5203992694589743,
+      "n_samples": 382,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    }
+  }
+}

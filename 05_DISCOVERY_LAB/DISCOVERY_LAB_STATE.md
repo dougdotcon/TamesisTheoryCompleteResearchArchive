@@ -13,9 +13,9 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | Nenhum travado. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING` — Fase 0 concluída (5 candidatos avaliados, ver seção própria abaixo), nenhum travado ainda |
-| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado, nenhum ainda pronto para pré-registro (ver seção própria) |
-| Próxima ação obrigatória | Decisão do usuário sobre `DISC-TRI-RG-001`: prosseguir com `critical-slowing-down` (candidato mais forte, mas com 3 gaps concretos a fechar antes de pré-registro), buscar segundo domínio para `wavelet-multiresolution-scaling`, reformular `dfa-multiscale-entropy`, ou nova rodada de busca |
+| Teste ativo | Nenhum travado. `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito, ver seção própria abaixo). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-TRI-RG-001` segue `CANDIDATE_FORMULATING` — Fase 0 concluída (5 candidatos avaliados) E gaps de `critical-slowing-down` fechados com resultado NEGATIVO (ver seção própria abaixo), nenhum candidato travado ainda |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) teve seus 3 gaps fechados e testado nos 3 domínios verificados, resultado NEGATIVO (12 testes, só 1 significativo — consistente com ruído sob múltiplas comparações; 2 domínios com tendência na direção OPOSTA à prevista) |
+| Próxima ação obrigatória | Decisão do usuário sobre `DISC-TRI-RG-001`, dado que `critical-slowing-down` não sobreviveu ao teste: considerar `wavelet-multiresolution-scaling` (precisa de 2º domínio robusto), reformular `dfa-multiscale-entropy` (comparações de classe → transição temporal genuína), nova busca, ou considerar a linha suficientemente explorada por ora |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀) |
 | Claims fechados/registrados | 4 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]) |
 | Claims em andamento | 0 |
@@ -164,6 +164,41 @@ e em RG/EFT (nenhum `R_lambda` genuíno implementado).
 
 **Nenhum candidato foi travado.** Decisão de qual (ou quais) perseguir
 fica com o usuário.
+
+## Fechamento dos 3 gaps de `critical-slowing-down` (2026-08-14) — resultado NEGATIVO
+
+A pedido do usuário, os 3 gaps concretos do candidato `critical-slowing-
+down` (rank 1 na Fase 0) foram fechados: (a) regra de `lambda`
+cross-domain — todos os parâmetros de escala expressos como frações fixas
+do comprimento do segmento (convenção Dakos et al. 2012), a mesma em
+todo domínio; (b) protocolo de teste contra nulo substituto — AR(1) de
+parâmetro constante, 1000 substitutos, teste unicaudal (Dakos et al. 2008
+*PNAS*); (c) `Delta I` calculado de fato nos 3 domínios já verificados
+(GISP2, PhysioNet SDDB, NASDAQ). Metodologia fixada e commitada (commit
+`b43fde0`) ANTES de qualquer cálculo real; pipeline única
+(`csd_common.py`) validada contra dado sintético primeiro (caso nulo:
+sem tendência; caso com CSD injetado: `τ=1,000`, detectado), depois
+chamada sem modificação por 3 agentes independentes.
+
+**Resultado: NEGATIVO.** Das 12 combinações testadas (3 domínios × 2
+variantes de janela × 2 canais — AC1 e variância), apenas 1 cruzou
+`p<0,05` (GISP2, variante de 50% mais recente, canal AC1: `τ=0,848`,
+`p=0,032`) — estatisticamente consistente com ruído puro sob 12
+comparações múltiplas sem correção (esperado ~0,6 falsos positivos ao
+acaso). Mais grave: em 2 dos 3 domínios (PhysioNet SDDB, NASDAQ variante
+primária), o canal de AC1 mostrou tendência FORTEMENTE NEGATIVA
+(`τ=-0,82`, `τ=-0,95`, `τ=-0,37`) — direção OPOSTA à prevista por CSD,
+não apenas ausência de sinal. `critical-slowing-down`, formulado com uma
+regra de `lambda` genuinamente cega ao domínio (exigência central de
+`DISC-TRI-RG-001`), não produz um invariante cross-domain confiável
+nestes 3 domínios/transições. Achado negativo honesto, catalogado com o
+mesmo peso que um resultado positivo teria — não invalida CSD como
+fenômeno geral na literatura (que usa janelas informadas por
+conhecimento específico de cada sistema, não uma regra cega), apenas
+mostra que esta instanciação específica cross-domain não sobrevive.
+Nenhum `PREREGISTRATION.md` foi escrito — o próprio passo de fechamento
+de gaps evitou travar um pré-registro fadado ao fracasso. Detalhes
+completos em `02_TESTS/TRI_RG/critical_slowing_down/RESULTS_SUMMARY.md`.
 
 ## O que já foi feito nesta trilha
 

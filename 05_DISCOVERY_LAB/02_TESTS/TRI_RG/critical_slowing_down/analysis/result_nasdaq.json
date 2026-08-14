@@ -1,0 +1,128 @@
+{
+  "domain": "financial_nasdaq_composite",
+  "source": {
+    "provider": "FRED (Federal Reserve Bank of St. Louis)",
+    "series_id": "NASDAQCOM",
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM",
+    "download_verification": {
+      "http_status": 200,
+      "bytes_downloaded": 280220,
+      "note": "Verified via curl at execution time (2026-08-14), not assumed from prior session. Byte count/line count differ slightly from the earlier Phase 0 verification note (~280,199 bytes / ~14,485 lines) because the FRED series has continued to accumulate new daily observations between that check and this download (series now runs through 2026-08-13)."
+    },
+    "csv_header_actual": [
+      "observation_date",
+      "NASDAQCOM"
+    ],
+    "csv_header_note": "Actual downloaded header is 'observation_date,NASDAQCOM', not 'DATE,NASDAQCOM' as stated in the task prompt -- same two columns, different column name for the date field in the current FRED export format. No functional impact."
+  },
+  "missing_value_handling": {
+    "expected_marker_per_task": ".",
+    "actual_marker_found_in_download": "empty string (blank field after comma), not '.'",
+    "deviation_note": "The task instructions described FRED's non-trading-day marker as '.'. In this download (retrieved 2026-08-14), missing observations are instead encoded as an empty field (e.g. '1971-02-15,' with nothing after the comma) -- zero literal '.' rows were found. Both encodings represent the same non-trading-day placeholder used by FRED, so this analysis discards rows where the value field is empty OR equal to '.' (a superset check), consistent with the spirit of the task's instruction (discard, do not interpolate). This is a deviation from the literal marker string, not from the discard-don't-interpolate rule.",
+    "total_rows_excl_header": 14485,
+    "total_missing_rows_discarded_full_series": 487,
+    "pre_transition_total_rows_incl_missing": 7590,
+    "pre_transition_missing_rows_discarded": 239,
+    "pre_transition_valid_rows_kept": 7351
+  },
+  "transition": {
+    "documented_peak_date": "2000-03-10",
+    "documented_peak_value_approx": 5048,
+    "actual_max_value_in_kept_pre_transition_segment": 5046.86,
+    "actual_max_value_date": "2000-03-09",
+    "values_around_documented_peak": [
+      [
+        "2000-03-06",
+        4904.85
+      ],
+      [
+        "2000-03-07",
+        4847.84
+      ],
+      [
+        "2000-03-08",
+        4897.26
+      ],
+      [
+        "2000-03-09",
+        5046.86
+      ],
+      [
+        "2000-03-10",
+        5048.62
+      ],
+      [
+        "2000-03-13",
+        4907.24
+      ],
+      [
+        "2000-03-14",
+        4706.63
+      ],
+      [
+        "2000-03-15",
+        4582.62
+      ]
+    ]
+  },
+  "value_transform": "log(NASDAQCOM), natural log",
+  "segments": {
+    "primary": {
+      "definition": "All available valid (non-missing) daily observations from series start (1971-02-05) up to but excluding 2000-03-10, chronologically ordered oldest-first.",
+      "n_samples": 7351,
+      "date_min": "1971-02-05",
+      "date_max": "2000-03-09"
+    },
+    "robustness": {
+      "definition": "Most recent 50% (by sample count, floor division) of the primary segment, i.e. the n_primary//2 rows closest to the transition date, chronologically ordered oldest-first.",
+      "n_samples": 3675,
+      "n_primary_used_for_split": 7351,
+      "date_min": "1985-08-23",
+      "date_max": "2000-03-09"
+    }
+  },
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py",
+  "pipeline_params_fixed_a_priori": {
+    "bandwidth_frac": 0.2,
+    "window_frac": 0.5,
+    "step_frac": 0.02,
+    "n_surrogates": 1000,
+    "seed": 12345
+  },
+  "results": {
+    "primary": {
+      "ar1_a": 1.0010234676289307,
+      "ar1_sigma": 0.009374425871816713,
+      "real_tau_ac1": -0.37230769230769234,
+      "real_tau_var": -0.21846153846153846,
+      "p_ac1_onetail": 1.0,
+      "p_var_onetail": 1.0,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.7132416805496862,
+      "surrogate_tau_ac1_std": 0.20855377051559978,
+      "surrogate_tau_var_mean": 1.0,
+      "surrogate_tau_var_std": 0.0,
+      "n_samples": 7351,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    },
+    "robustness": {
+      "ar1_a": 1.0018482353040254,
+      "ar1_sigma": 0.01086646809351989,
+      "real_tau_ac1": 0.6266666666666666,
+      "real_tau_var": 0.5466666666666665,
+      "p_ac1_onetail": 0.851,
+      "p_var_onetail": 1.0,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.8053154693973457,
+      "surrogate_tau_ac1_std": 0.16171654151201742,
+      "surrogate_tau_var_mean": 0.9999999999999999,
+      "surrogate_tau_var_std": 1.1102230246251565e-16,
+      "n_samples": 3675,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    }
+  }
+}

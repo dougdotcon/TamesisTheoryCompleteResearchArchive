@@ -1,0 +1,110 @@
+{
+  "domain": "cardiac_electrophysiology_physionet_sddb",
+  "test_id": "DISC-TRI-RG-001",
+  "candidate": "critical_slowing_down",
+  "generated_by": "phase0-followup agent, 2026-08-14",
+  "methodology_note": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/critical_slowing_down/METHODOLOGY_NOTE.md",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py (imported unmodified, not reimplemented)",
+  "dataset": {
+    "source": "PhysioNet Sudden Cardiac Death Holter Database (sddb), record 30",
+    "urls": [
+      "https://physionet.org/files/sddb/1.0.0/30.hea",
+      "https://physionet.org/files/sddb/1.0.0/30.dat",
+      "https://physionet.org/files/sddb/1.0.0/30.ari"
+    ],
+    "header_summary": {
+      "n_channels": 2,
+      "fs_hz": 250,
+      "n_samples_per_channel": 22099250,
+      "record_duration_sec": 88397.0,
+      "record_duration_hms": "24:33:17",
+      "record_start_time": "12:00:00"
+    },
+    "transition_label": {
+      "source": "embedded in record 30 .hea header comment",
+      "raw_annotation": "#vfon: 07:54:33",
+      "meaning": "elapsed time from record start to onset of sustained ventricular fibrillation",
+      "elapsed_seconds": 28473
+    }
+  },
+  "extraction_path": {
+    "priority_used": 1,
+    "reason": "wfdb.rdann('30', 'ari', pn_dir=None) on the locally downloaded .hea/.ari pair succeeded on first attempt and returned 131512 annotations with fs=250 Hz consistent with the header -- no fallback to raw ECG voltage (Priority 2) was needed.",
+    "method": "RR-interval series (standard cardiac HRV / critical-slowing-down series per Peng et al., Ivanov et al.), NOT raw ECG voltage. beat_time_sec = annotation_sample / fs (250 Hz). RR_i = beat_time[i+1] - beat_time[i], in seconds, taken in chronological order."
+  },
+  "annotation_filtering": {
+    "total_annotations_in_ari_file": 131512,
+    "symbols_present": {
+      "N": 129970,
+      "S": 831,
+      "r": 404,
+      "s": 113,
+      "V": 105,
+      "?": 50,
+      "+": 26,
+      "E": 13
+    },
+    "excluded_symbols": [
+      "+",
+      "s"
+    ],
+    "excluded_count": 139,
+    "rationale": "Looked up each symbol's official MIT-BIH ecgcodes.h category via wfdb.io.annotation.ann_label_table: '+' = Rhythm change (label_store 28) and 's' = ST change (label_store 18) are both NON-BEAT annotations (they mark rhythm/ST-segment events, not a QRS complex location) and would corrupt the RR series if left in (an RR 'interval' spanning a non-beat mark is not a real cardiac cycle length). All other symbols present (N=normal, S=supraventricular premature, r=R-on-T PVC, V=premature ventricular contraction, E=ventricular escape, '?'=beat not classified during learning) are genuine beat-location annotations per the same table and were KEPT. This is a simple, standard, table-driven filter (not a hand-tuned or invented one). Ectopic/abnormal beats (S, V, r, E) were deliberately NOT removed beyond this: excluding them would require an interpolation/NN-interval scheme, which is exactly the kind of extra methodological judgment call the task instructed against inventing, and since ectopic burden is itself expected to rise approaching a VF transition, removing it risks removing part of the physiological signal being tested rather than removing noise.",
+    "not_filtered_but_noted": {
+      "issue": "36 of 35382 RR intervals in the primary segment (0.09%) exceed 2 seconds (max 10.68 s), most likely brief automatic-detector dropouts (signal quality loss) rather than true beats; a few could be genuine sinus pauses, which are also a plausible pre-VF phenomenon. These were left in unfiltered, per the same reasoning above (no complex artifact-rejection scheme invented post hoc) and are logged here as a known limitation."
+    }
+  },
+  "segments": {
+    "primary": {
+      "definition": "All RR intervals from record start (elapsed 00:00:00) up to the last beat at or before vfon elapsed time (07:54:33 = 28473 s).",
+      "n_beats_used": 35383,
+      "n_rr_intervals": 35382,
+      "first_beat_time_sec": 0.52,
+      "last_beat_time_sec": 28472.292,
+      "total_duration_sec": 28471.772,
+      "total_duration_hms": "07:54:31.772 (sum of RR intervals; 1.228 s short of the 07:54:33 vfon mark because the segment necessarily ends at the last detected beat at/before that instant)"
+    },
+    "robustness": {
+      "definition": "The 50% most recent RR intervals (by sample count) of the primary segment -- i.e. the second half, closest to VF onset.",
+      "n_rr_intervals": 17691,
+      "total_duration_sec": 14167.784000000001,
+      "total_duration_hms": "~03:56:07.784"
+    }
+  },
+  "results": {
+    "primary": {
+      "ar1_a": 0.5403971482470311,
+      "ar1_sigma": 0.14337496738198932,
+      "real_tau_ac1": -0.8199999999999998,
+      "real_tau_var": 0.27333333333333326,
+      "p_ac1_onetail": 0.985,
+      "p_var_onetail": 0.361,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.03246666666666667,
+      "surrogate_tau_ac1_std": 0.4941240105254729,
+      "surrogate_tau_var_mean": 0.010306666666666662,
+      "surrogate_tau_var_std": 0.5110000601869936,
+      "n_samples": 35382,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    },
+    "robustness": {
+      "ar1_a": 0.2704393299537991,
+      "ar1_sigma": 0.14003228596828243,
+      "real_tau_ac1": -0.9466666666666665,
+      "real_tau_var": 0.5799999999999998,
+      "p_ac1_onetail": 1.0,
+      "p_var_onetail": 0.158,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": -0.005419999999999998,
+      "surrogate_tau_ac1_std": 0.5067985806785351,
+      "surrogate_tau_var_mean": -0.0036599999999999966,
+      "surrogate_tau_var_std": 0.49865024923955126,
+      "n_samples": 17691,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    }
+  }
+}

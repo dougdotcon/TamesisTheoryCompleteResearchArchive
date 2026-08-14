@@ -1,0 +1,712 @@
+{
+  "domain": "paleoclimate_GISP2",
+  "candidate": "dfa-multiscale-entropy",
+  "test_line": "DISC-TRI-RG-001",
+  "pipeline": "dfa_common.run_dfa_pipeline (unmodified, see analysis/dfa_common.py)",
+  "source": {
+    "name": "GISP2 Ice Core Temperature and Accumulation Data (Alley 2000)",
+    "url": "https://www.ncei.noaa.gov/pub/data/paleo/icecore/greenland/summit/gisp2/isotopes/gisp2_temp_accum_alley2000.txt",
+    "downloaded_bytes": 116283,
+    "expected_bytes_from_prior_verification": 116283,
+    "download_verification": "curl HTTP 200; byte size matches prior critical-slowing-down verification (116283 bytes) exactly; downloaded fresh in this session, not copied.",
+    "reference": "Alley, R.B. 2000. The Younger Dryas cold interval as viewed from central Greenland. Quaternary Science Reviews 19:213-226.",
+    "columns": "Column 1: Age (thousand years before present, kyr BP); Column 2: Temperature in central Greenland (degrees C)",
+    "n_rows_temperature_block_total": 1632,
+    "data_block_lines_1indexed": [
+      76,
+      1707
+    ],
+    "age_range_kyr_bp_full_record": [
+      0.0951409,
+      49.981
+    ],
+    "temp_range_C_full_record": [
+      -53.5933,
+      -28.702
+    ]
+  },
+  "transition": {
+    "documented_event": "Younger Dryas -> Preboreal warming",
+    "nominal_age_kyr_bp": 11.5,
+    "operational_definition_source": "reused verbatim from critical-slowing-down result_gisp2.json / METHODOLOGY_NOTE.md gap (b)",
+    "pre_definition": "PRE (primary) = all samples with Age (kyr BP) > 11.5, strictly",
+    "post_definition": "POST (primary) = all samples with Age (kyr BP) <= 11.5, down to the most recent sample in the record (no intermediate documented event between Preboreal and present in this line)"
+  },
+  "segments": {
+    "ordering": "chronological, oldest first (Age descending), as required by METHODOLOGY_NOTE.md",
+    "pre_primary": {
+      "n_samples": 764,
+      "age_min_kyr_bp": 11.512,
+      "age_max_kyr_bp": 49.981,
+      "cross_check_against_critical_slowing_down_reference": "764 (matches result_gisp2.json segments.primary.n_samples exactly)"
+    },
+    "post_primary": {
+      "n_samples": 868,
+      "age_min_kyr_bp": 0.0951409,
+      "age_max_kyr_bp": 11.496
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division) of pre_primary, i.e. last n_pre//2 samples in chronological order (closest to the transition)",
+      "n_samples": 382,
+      "age_min_kyr_bp": 11.512,
+      "age_max_kyr_bp": 27.346
+    },
+    "post_robustness": {
+      "definition": "50% of post_primary closest to the transition (floor division), i.e. first n_post//2 samples in chronological order",
+      "n_samples": 434,
+      "age_min_kyr_bp": 4.48559,
+      "age_max_kyr_bp": 11.496
+    }
+  },
+  "input_series_note": "x = temperature values (degrees C, GISP2), NOT age, in chronological order, passed directly (unmodified, including sign) into run_dfa_pipeline/compute_alphas per METHODOLOGY_NOTE.md gap (a). Temperature is negative throughout this series (~-30 to -45 C), so compute_alphas' internal max_min_ratio check returns not_applicable (series not strictly positive) for both real segments and every IAAFT/bootstrap resample -- this is expected pipeline behavior, not an error.",
+  "auxiliary_positive_scale_max_min_ratio_check": {
+    "declared_transformation": "Kelvin: T_K = T_C + 273.15 (affine transform, does not affect DFA alpha -- DFA-1 is invariant to affine transforms of the input series since the linear-detrending step removes any constant offset and rescaling only rescales F(n) and log F(n) by a constant that cancels in the log-log slope). Computed SEPARATELY from and does NOT feed into run_dfa_pipeline/compute_alphas -- the actual pipeline always received the raw, unmodified temperature-in-Celsius series.",
+    "results": {
+      "pre_primary": {
+        "ratio": 1.0993802512061805,
+        "basis": "raw_positive",
+        "max": 241.3763,
+        "min": 219.55669999999998,
+        "flag": "ok"
+      },
+      "post_primary": {
+        "ratio": 1.0460116228268177,
+        "basis": "raw_positive",
+        "max": 244.44799999999998,
+        "min": 233.69529999999997,
+        "flag": "ok"
+      },
+      "pre_robust": {
+        "ratio": 1.099150465431648,
+        "basis": "raw_positive",
+        "max": 241.3763,
+        "min": 219.60259999999997,
+        "flag": "ok"
+      },
+      "post_robust": {
+        "ratio": 1.0460116228268177,
+        "basis": "raw_positive",
+        "max": 244.44799999999998,
+        "min": 233.69529999999997,
+        "flag": "ok"
+      }
+    }
+  },
+  "pipeline_results_primary": {
+    "real_pre": {
+      "n_samples": 764,
+      "n_min": 4,
+      "n_max": 191,
+      "n_split": 16,
+      "scales_used": [
+        4,
+        5,
+        6,
+        7,
+        9,
+        11,
+        14,
+        17,
+        20,
+        25,
+        31,
+        38,
+        46,
+        56,
+        69,
+        85,
+        104,
+        127,
+        156,
+        191
+      ],
+      "F_n": [
+        0.486275558031663,
+        0.8135827160548322,
+        0.9821512362692099,
+        1.3506063595111268,
+        1.8466682127039138,
+        3.103214451541473,
+        3.6588543512432348,
+        5.504617897548196,
+        7.324261915806263,
+        8.554805327568497,
+        11.90699641607129,
+        12.828998020634879,
+        17.39075246825642,
+        20.08353204470539,
+        21.980111340885944,
+        29.319902314836472,
+        29.80406944087449,
+        42.385167266835595,
+        32.26826747140912,
+        66.22960595341839
+      ],
+      "alpha": {
+        "alpha": 1.1829831050663024,
+        "intercept": -1.9078409842071018,
+        "n_points": 20,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          9,
+          11,
+          14,
+          17,
+          20,
+          25,
+          31,
+          38,
+          46,
+          56,
+          69,
+          85,
+          104,
+          127,
+          156,
+          191
+        ]
+      },
+      "alpha1": {
+        "alpha": 1.6276774619160348,
+        "intercept": -2.9052122655379375,
+        "n_points": 7,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          9,
+          11,
+          14
+        ]
+      },
+      "alpha2": {
+        "alpha": 0.9034392183950032,
+        "intercept": -0.7209321175514335,
+        "n_points": 13,
+        "scales": [
+          17,
+          20,
+          25,
+          31,
+          38,
+          46,
+          56,
+          69,
+          85,
+          104,
+          127,
+          156,
+          191
+        ]
+      },
+      "max_min_ratio": {
+        "ratio": null,
+        "basis": "signed_or_zero_crossing",
+        "max": null,
+        "min": null,
+        "flag": "not_applicable_series_not_strictly_positive"
+      }
+    },
+    "real_post": {
+      "n_samples": 868,
+      "n_min": 4,
+      "n_max": 217,
+      "n_split": 16,
+      "scales_used": [
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        14,
+        17,
+        21,
+        27,
+        33,
+        40,
+        50,
+        61,
+        76,
+        94,
+        116,
+        143,
+        176,
+        217
+      ],
+      "F_n": [
+        0.06612054830258182,
+        0.09873264553731798,
+        0.14011128370802417,
+        0.23485519235728436,
+        0.2763901660469751,
+        0.3676017207402968,
+        0.5749898485711222,
+        0.8585885634095908,
+        1.3245462283777634,
+        1.7773645454613203,
+        2.278065966351266,
+        2.9420807572016527,
+        3.703619973170095,
+        5.046993492858193,
+        6.408756620117895,
+        8.973973631854523,
+        14.453119892668429,
+        20.53199112573109,
+        30.064457923738253,
+        32.13862518756871
+      ],
+      "alpha": {
+        "alpha": 1.5449047974595709,
+        "intercept": -4.680279801861088,
+        "n_points": 20,
+        "scales": [
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          14,
+          17,
+          21,
+          27,
+          33,
+          40,
+          50,
+          61,
+          76,
+          94,
+          116,
+          143,
+          176,
+          217
+        ]
+      },
+      "alpha1": {
+        "alpha": 1.7100482739662373,
+        "intercept": -5.057057038402846,
+        "n_points": 7,
+        "scales": [
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          14
+        ]
+      },
+      "alpha2": {
+        "alpha": 1.4411001724916521,
+        "intercept": -4.229153791277581,
+        "n_points": 13,
+        "scales": [
+          17,
+          21,
+          27,
+          33,
+          40,
+          50,
+          61,
+          76,
+          94,
+          116,
+          143,
+          176,
+          217
+        ]
+      },
+      "max_min_ratio": {
+        "ratio": null,
+        "basis": "signed_or_zero_crossing",
+        "max": null,
+        "min": null,
+        "flag": "not_applicable_series_not_strictly_positive"
+      }
+    },
+    "delta_alpha": 0.36192169239326843,
+    "delta_alpha1": 0.08237081205020247,
+    "delta_alpha2": 0.5376609540966489,
+    "config": {
+      "n_min": 4,
+      "n_max_frac": 0.25,
+      "n_scales": 20,
+      "n_split": 16,
+      "n_surrogates": 200,
+      "n_iaaft_iter": 50,
+      "n_bootstrap": 1000,
+      "seed": 12345,
+      "max_min_ratio_alert_threshold": 190.0
+    },
+    "surrogate_max_min_ratio_pre": {
+      "mean": null,
+      "min": null,
+      "max": null
+    },
+    "surrogate_max_min_ratio_post": {
+      "mean": null,
+      "min": null,
+      "max": null
+    },
+    "p_alpha": 0.0,
+    "surrogate_alpha_n_valid": 200,
+    "surrogate_alpha_n_undefined": 0,
+    "surrogate_alpha_mean": 0.17614304516019635,
+    "surrogate_alpha_std": 0.039915654160503876,
+    "p_alpha1": 0.425,
+    "surrogate_alpha1_n_valid": 200,
+    "surrogate_alpha1_n_undefined": 0,
+    "surrogate_alpha1_mean": 0.0250502768216757,
+    "surrogate_alpha1_std": 0.09367795296721318,
+    "p_alpha2": 0.0,
+    "surrogate_alpha2_n_valid": 200,
+    "surrogate_alpha2_n_undefined": 0,
+    "surrogate_alpha2_mean": 0.27192219926007755,
+    "surrogate_alpha2_std": 0.0726399729699532,
+    "bootstrap_block_length_pre": 191,
+    "bootstrap_block_length_post": 217,
+    "bootstrap_n_bootstrap": 1000,
+    "bootstrap_seed": 12345,
+    "delta_alpha_boot_ci95": [
+      -0.042476909842788145,
+      0.3973694772998705
+    ],
+    "p_bootstrap_alpha": 0.126,
+    "delta_alpha_boot_mean": 0.16886401267494874,
+    "delta_alpha_boot_std": 0.11142242825191921,
+    "delta_alpha_boot_n_valid": 1000,
+    "delta_alpha_boot_n_undefined": 0,
+    "delta_alpha1_boot_ci95": [
+      -0.30163904938040387,
+      0.33107112464684324
+    ],
+    "p_bootstrap_alpha1": 0.466,
+    "delta_alpha1_boot_mean": 0.0839799828744787,
+    "delta_alpha1_boot_std": 0.14873535038922328,
+    "delta_alpha1_boot_n_valid": 1000,
+    "delta_alpha1_boot_n_undefined": 0,
+    "delta_alpha2_boot_ci95": [
+      -0.2393885252819739,
+      0.553711513722637
+    ],
+    "p_bootstrap_alpha2": 0.506,
+    "delta_alpha2_boot_mean": 0.14433113477062676,
+    "delta_alpha2_boot_std": 0.205871229180571,
+    "delta_alpha2_boot_n_valid": 1000,
+    "delta_alpha2_boot_n_undefined": 0
+  },
+  "pipeline_results_robustness": {
+    "real_pre": {
+      "n_samples": 382,
+      "n_min": 4,
+      "n_max": 95,
+      "n_split": 16,
+      "scales_used": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        15,
+        18,
+        21,
+        25,
+        30,
+        35,
+        41,
+        49,
+        58,
+        68,
+        80,
+        95
+      ],
+      "F_n": [
+        0.34067925319943737,
+        0.5355071676605169,
+        0.7500484147564805,
+        0.9891177971143813,
+        1.3122391450234803,
+        1.6114295113240455,
+        2.0543413352160598,
+        3.121473760603538,
+        3.0223259802561935,
+        4.138155337283465,
+        4.039148362954149,
+        5.362751365726759,
+        9.124243393249943,
+        7.834308923057697,
+        9.324892952176523,
+        11.815031920772078,
+        18.261811152006434,
+        24.595027871104776,
+        19.287561859105647,
+        44.410026720235685
+      ],
+      "alpha": {
+        "alpha": 1.3717187918617555,
+        "intercept": -2.686542002262795,
+        "n_points": 20,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          13,
+          15,
+          18,
+          21,
+          25,
+          30,
+          35,
+          41,
+          49,
+          58,
+          68,
+          80,
+          95
+        ]
+      },
+      "alpha1": {
+        "alpha": 1.7209539244003014,
+        "intercept": -3.381760739359222,
+        "n_points": 9,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          13,
+          15
+        ]
+      },
+      "alpha2": {
+        "alpha": 1.3385856606578261,
+        "intercept": -2.587531918973606,
+        "n_points": 11,
+        "scales": [
+          18,
+          21,
+          25,
+          30,
+          35,
+          41,
+          49,
+          58,
+          68,
+          80,
+          95
+        ]
+      },
+      "max_min_ratio": {
+        "ratio": null,
+        "basis": "signed_or_zero_crossing",
+        "max": null,
+        "min": null,
+        "flag": "not_applicable_series_not_strictly_positive"
+      }
+    },
+    "real_post": {
+      "n_samples": 434,
+      "n_min": 4,
+      "n_max": 108,
+      "n_split": 16,
+      "scales_used": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        13,
+        16,
+        19,
+        23,
+        27,
+        32,
+        38,
+        45,
+        54,
+        64,
+        76,
+        91,
+        108
+      ],
+      "F_n": [
+        0.08352027075695372,
+        0.12553053286509808,
+        0.1806444266388024,
+        0.22624363352733856,
+        0.2943977861153707,
+        0.3832161856046437,
+        0.45447444773821993,
+        0.5739431762004251,
+        0.9950634388463927,
+        1.550377442616798,
+        1.9354006875380216,
+        2.2894603649971006,
+        2.9158805462194404,
+        3.4211826903018046,
+        4.255712585561565,
+        5.321022822256574,
+        6.953572738903969,
+        8.455659036271053,
+        11.571757280992918,
+        16.38838653454312
+      ],
+      "alpha": {
+        "alpha": 1.5676528313020015,
+        "intercept": -4.497285929207962,
+        "n_points": 20,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          11,
+          13,
+          16,
+          19,
+          23,
+          27,
+          32,
+          38,
+          45,
+          54,
+          64,
+          76,
+          91,
+          108
+        ]
+      },
+      "alpha1": {
+        "alpha": 1.690895099911892,
+        "intercept": -4.795648480943343,
+        "n_points": 9,
+        "scales": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          11,
+          13,
+          16
+        ]
+      },
+      "alpha2": {
+        "alpha": 1.3493772217520292,
+        "intercept": -3.641338071569148,
+        "n_points": 12,
+        "scales": [
+          16,
+          19,
+          23,
+          27,
+          32,
+          38,
+          45,
+          54,
+          64,
+          76,
+          91,
+          108
+        ]
+      },
+      "max_min_ratio": {
+        "ratio": null,
+        "basis": "signed_or_zero_crossing",
+        "max": null,
+        "min": null,
+        "flag": "not_applicable_series_not_strictly_positive"
+      }
+    },
+    "delta_alpha": 0.195934039440246,
+    "delta_alpha1": -0.030058824488409464,
+    "delta_alpha2": 0.010791561094203095,
+    "config": {
+      "n_min": 4,
+      "n_max_frac": 0.25,
+      "n_scales": 20,
+      "n_split": 16,
+      "n_surrogates": 200,
+      "n_iaaft_iter": 50,
+      "n_bootstrap": 1000,
+      "seed": 12345,
+      "max_min_ratio_alert_threshold": 190.0
+    },
+    "surrogate_max_min_ratio_pre": {
+      "mean": null,
+      "min": null,
+      "max": null
+    },
+    "surrogate_max_min_ratio_post": {
+      "mean": null,
+      "min": null,
+      "max": null
+    },
+    "p_alpha": 0.075,
+    "surrogate_alpha_n_valid": 200,
+    "surrogate_alpha_n_undefined": 0,
+    "surrogate_alpha_mean": 0.10987219516626116,
+    "surrogate_alpha_std": 0.056783659392884045,
+    "p_alpha1": 0.915,
+    "surrogate_alpha1_n_valid": 200,
+    "surrogate_alpha1_n_undefined": 0,
+    "surrogate_alpha1_mean": 0.14134900625492486,
+    "surrogate_alpha1_std": 0.09500100538865322,
+    "p_alpha2": 0.945,
+    "surrogate_alpha2_n_valid": 200,
+    "surrogate_alpha2_n_undefined": 0,
+    "surrogate_alpha2_mean": 0.09583711937892604,
+    "surrogate_alpha2_std": 0.13650109006291716,
+    "bootstrap_block_length_pre": 95,
+    "bootstrap_block_length_post": 108,
+    "bootstrap_n_bootstrap": 1000,
+    "bootstrap_seed": 12345,
+    "delta_alpha_boot_ci95": [
+      -0.13047397248845657,
+      0.3870931985593006
+    ],
+    "p_bootstrap_alpha": 0.458,
+    "delta_alpha_boot_mean": 0.10538282419799463,
+    "delta_alpha_boot_std": 0.13449571134072266,
+    "delta_alpha_boot_n_valid": 1000,
+    "delta_alpha_boot_n_undefined": 0,
+    "delta_alpha1_boot_ci95": [
+      0.005029579664925938,
+      0.9083142454721287
+    ],
+    "p_bootstrap_alpha1": 0.042,
+    "delta_alpha1_boot_mean": 0.3478761471541463,
+    "delta_alpha1_boot_std": 0.22510446291768046,
+    "delta_alpha1_boot_n_valid": 1000,
+    "delta_alpha1_boot_n_undefined": 0,
+    "delta_alpha2_boot_ci95": [
+      -0.4152515478695987,
+      0.42358092275899384
+    ],
+    "p_bootstrap_alpha2": 0.996,
+    "delta_alpha2_boot_mean": -0.0018949947208405141,
+    "delta_alpha2_boot_std": 0.23251342185435955,
+    "delta_alpha2_boot_n_valid": 1000,
+    "delta_alpha2_boot_n_undefined": 0
+  }
+}

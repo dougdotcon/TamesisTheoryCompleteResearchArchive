@@ -1,0 +1,774 @@
+{
+  "domain": "physiology_apnea_ecg_a04",
+  "test_line": "DISC-TRI-RG-001",
+  "candidate": "dfa-multiscale-entropy",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/dfa_multiscale_entropy/analysis/dfa_common.py",
+  "pipeline_function": "run_dfa_pipeline(pre_segment, post_segment) -- UNMODIFIED",
+  "generated_at_utc": "2026-08-14T23:44:44Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a04",
+    "record": "a04",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220). Apnea annotations scored by Thomas Penzel from independent respiration/SpO2 signals, not from the ECG itself.",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a04.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a04.hea",
+        "downloaded_bytes": 57,
+        "sha256": "1ce5fd413a939a375cad29335dbeafbf17cf9068ffa4355cbfae98c608c1cfa4"
+      },
+      "a04.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a04.dat",
+        "downloaded_bytes": 5960000,
+        "sha256": "12e94661de20bab060d1d64d2bb6653a975c16dc2f0514551a4bf18cb0ecc10b"
+      },
+      "a04.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a04.apn",
+        "downloaded_bytes": 3932,
+        "sha256": "3c3dfc0443e041a391eee8027ebec371bc01b88d45f9c00dff897f4dba8ea1ba"
+      },
+      "a04.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a04.qrs",
+        "downloaded_bytes": 62488,
+        "sha256": "2efc17e716614c3325cc82507ce693c42fec7fbfe6435e78e41553341954d006"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 2980000,
+      "sig_len_minutes": 496.6666666666667
+    },
+    "apn_annotation": {
+      "n_minute_labels": 492,
+      "alignment_rule": "label i (0-indexed) is at sample i*6000 at fs=100Hz (i.e. minute i, 60s * 100Hz = 6000 samples/minute) -- reverified programmatically against the actual ann.sample array (np.array_equal check), not assumed.",
+      "alignment_verified": true,
+      "unique_symbols": [
+        "A",
+        "N"
+      ]
+    },
+    "qrs_annotation": {
+      "n_beats_total": 31243,
+      "first_beat_sample": 3,
+      "last_beat_sample": 2979034,
+      "strictly_increasing_verified": true
+    },
+    "rr_interval_definition": {
+      "unit": "seconds",
+      "formula": "RR_i = (qrs_sample[i+1] - qrs_sample[i]) / fs, fs=100 Hz",
+      "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock (the same clock as the apn minute labels) -- never by raw QRS-array index."
+    }
+  },
+  "transition": {
+    "documented_event": "N (normal) -> A (apnea/hypopnea) label transition, first occurrence in record",
+    "apnea_label_runs_first_three": [
+      {
+        "symbol": "N",
+        "minute_start": 0,
+        "minute_end": 34,
+        "n_minutes": 35
+      },
+      {
+        "symbol": "A",
+        "minute_start": 35,
+        "minute_end": 174,
+        "n_minutes": 140
+      },
+      {
+        "symbol": "N",
+        "minute_start": 175,
+        "minute_end": 176,
+        "n_minutes": 2
+      }
+    ],
+    "pre_run_minutes_inclusive": [
+      0,
+      34
+    ],
+    "post_run_minutes_inclusive": [
+      35,
+      174
+    ],
+    "post_run_end_reason": "next N label in the clinical annotation sequence (minute 175)"
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "pre_primary": {
+      "definition": "entire contiguous block of minutes labeled N immediately preceding the transition (METHODOLOGY_NOTE.md gap b)",
+      "minute_range_inclusive": [
+        0,
+        34
+      ],
+      "sample_window": [
+        0,
+        210000
+      ],
+      "n_beats": 2748,
+      "n_rr_intervals": 2747,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.23,
+      "rr_seconds_max": 1.09
+    },
+    "post_primary": {
+      "definition": "entire contiguous block of minutes labeled A immediately following the transition, up to (not including) the next N label (METHODOLOGY_NOTE.md gap b)",
+      "minute_range_inclusive": [
+        35,
+        174
+      ],
+      "sample_window": [
+        210000,
+        1050000
+      ],
+      "n_beats": 9196,
+      "n_rr_intervals": 9195,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.32
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval count) of pre_primary (closest to the transition)",
+      "n_rr_intervals": 1373,
+      "n_rr_intervals_primary_for_reference": 2747,
+      "rr_seconds_min": 0.34,
+      "rr_seconds_max": 0.99
+    },
+    "post_robustness": {
+      "definition": "50% (floor division, by RR-interval count) of post_primary closest to the transition (i.e. the FIRST half of post_primary in chronological order)",
+      "n_rr_intervals": 4597,
+      "n_rr_intervals_primary_for_reference": 9195,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.26
+    }
+  },
+  "pipeline_results": {
+    "primary": {
+      "real_pre": {
+        "n_samples": 2747,
+        "n_min": 4,
+        "n_max": 686,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          9,
+          12,
+          15,
+          20,
+          27,
+          35,
+          46,
+          60,
+          79,
+          103,
+          135,
+          177,
+          232,
+          304,
+          399,
+          523,
+          686
+        ],
+        "F_n": [
+          0.01737659529769689,
+          0.021844457600701656,
+          0.027983310199640114,
+          0.03381207215531982,
+          0.04100328034477433,
+          0.04849760146191081,
+          0.06125812092162646,
+          0.08882665921767806,
+          0.10250981692777072,
+          0.13990093061694103,
+          0.1575102382032412,
+          0.22265686886333808,
+          0.31758024299150445,
+          0.36121670350070473,
+          0.5656202979815613,
+          0.760675734905127,
+          1.046250584653453,
+          1.196518935976197,
+          1.5979240829665486,
+          2.1052491499378316
+        ],
+        "alpha": {
+          "alpha": 0.9438411982979248,
+          "intercept": -5.506307679325907,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            12,
+            15,
+            20,
+            27,
+            35,
+            46,
+            60,
+            79,
+            103,
+            135,
+            177,
+            232,
+            304,
+            399,
+            523,
+            686
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.7595326981986515,
+          "intercept": -5.0710485159953,
+          "n_points": 6,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            12,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 1.0133130237905075,
+          "intercept": -5.861973533885695,
+          "n_points": 14,
+          "scales": [
+            20,
+            27,
+            35,
+            46,
+            60,
+            79,
+            103,
+            135,
+            177,
+            232,
+            304,
+            399,
+            523,
+            686
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 4.739130434782608,
+          "basis": "raw_positive",
+          "max": 1.09,
+          "min": 0.23,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 9195,
+        "n_min": 4,
+        "n_max": 2298,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          6,
+          8,
+          11,
+          15,
+          21,
+          30,
+          42,
+          58,
+          81,
+          113,
+          158,
+          221,
+          309,
+          432,
+          603,
+          843,
+          1177,
+          1645,
+          2298
+        ],
+        "F_n": [
+          0.017469169659682784,
+          0.026835190329303534,
+          0.03945647119381484,
+          0.062213969633183534,
+          0.10014646153248198,
+          0.16204245558952993,
+          0.25013403508976184,
+          0.3639106254988855,
+          0.4557921240385267,
+          0.49948852810969296,
+          0.5409646676878265,
+          0.6010556569855864,
+          0.6795584063636421,
+          0.9461046999522235,
+          1.2641448964675512,
+          1.5937712903729992,
+          2.013083790547932,
+          2.7283221198649312,
+          3.656700798411959,
+          4.260890971718247
+        ],
+        "alpha": {
+          "alpha": 0.8094178183166616,
+          "intercept": -4.601270315769719,
+          "n_points": 20,
+          "scales": [
+            4,
+            6,
+            8,
+            11,
+            15,
+            21,
+            30,
+            42,
+            58,
+            81,
+            113,
+            158,
+            221,
+            309,
+            432,
+            603,
+            843,
+            1177,
+            1645,
+            2298
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.3283331891619912,
+          "intercept": -5.94846315341848,
+          "n_points": 5,
+          "scales": [
+            4,
+            6,
+            8,
+            11,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.6475988655543594,
+          "intercept": -3.6370826729126278,
+          "n_points": 15,
+          "scales": [
+            21,
+            30,
+            42,
+            58,
+            81,
+            113,
+            158,
+            221,
+            309,
+            432,
+            603,
+            843,
+            1177,
+            1645,
+            2298
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 6.0,
+          "basis": "raw_positive",
+          "max": 1.32,
+          "min": 0.22,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.1344233799812632,
+      "delta_alpha1": 0.5688004909633396,
+      "delta_alpha2": -0.36571415823614806,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 4.739130434782608,
+        "min": 4.739130434782608,
+        "max": 4.739130434782608
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 6.0,
+        "min": 6.0,
+        "max": 6.0
+      },
+      "p_alpha": 0.8,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.15162103705730087,
+      "surrogate_alpha_std": 0.017818721635723823,
+      "p_alpha1": 0.045,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": 0.5196934127516638,
+      "surrogate_alpha1_std": 0.03225620981477302,
+      "p_alpha2": 0.845,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.3967655896252099,
+      "surrogate_alpha2_std": 0.03293853903367798,
+      "bootstrap_block_length_pre": 686,
+      "bootstrap_block_length_post": 2298,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.3123041765813437,
+        -0.09236370801935605
+      ],
+      "p_bootstrap_alpha": 0.0,
+      "delta_alpha_boot_mean": -0.19840558584649648,
+      "delta_alpha_boot_std": 0.056667546398306026,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        0.38556728561474946,
+        0.6754430506935681
+      ],
+      "p_bootstrap_alpha1": 0.0,
+      "delta_alpha1_boot_mean": 0.5469706687749029,
+      "delta_alpha1_boot_std": 0.07310815004855768,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.5939218782179795,
+        -0.2901157806683892
+      ],
+      "p_bootstrap_alpha2": 0.0,
+      "delta_alpha2_boot_mean": -0.439267894447338,
+      "delta_alpha2_boot_std": 0.07987241601088818,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    },
+    "robustness": {
+      "real_pre": {
+        "n_samples": 1373,
+        "n_min": 4,
+        "n_max": 343,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          13,
+          16,
+          21,
+          26,
+          33,
+          42,
+          53,
+          67,
+          84,
+          106,
+          134,
+          170,
+          215,
+          271,
+          343
+        ],
+        "F_n": [
+          0.011359164240598787,
+          0.013900322949564514,
+          0.016016647563225538,
+          0.019736388419551273,
+          0.023108641024086544,
+          0.031586560812702606,
+          0.036492757434259594,
+          0.05141861190424495,
+          0.07340309470619255,
+          0.09140436930230414,
+          0.10493243280092757,
+          0.12918125556252438,
+          0.17800296812854746,
+          0.1876975802168594,
+          0.3016536637434192,
+          0.30396150878971495,
+          0.45634307846180405,
+          0.5261693939836816,
+          0.7111649189625041,
+          0.965220112212176
+        ],
+        "alpha": {
+          "alpha": 0.9986546622463549,
+          "intercept": -5.963521613224633,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            10,
+            13,
+            16,
+            21,
+            26,
+            33,
+            42,
+            53,
+            67,
+            84,
+            106,
+            134,
+            170,
+            215,
+            271,
+            343
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.8377143990056951,
+          "intercept": -5.642710747830707,
+          "n_points": 7,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            10,
+            13,
+            16
+          ]
+        },
+        "alpha2": {
+          "alpha": 1.016962726462131,
+          "intercept": -6.044457947537698,
+          "n_points": 14,
+          "scales": [
+            16,
+            21,
+            26,
+            33,
+            42,
+            53,
+            67,
+            84,
+            106,
+            134,
+            170,
+            215,
+            271,
+            343
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 2.911764705882353,
+          "basis": "raw_positive",
+          "max": 0.99,
+          "min": 0.34,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 4597,
+        "n_min": 4,
+        "n_max": 1149,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          10,
+          13,
+          18,
+          24,
+          32,
+          43,
+          58,
+          79,
+          106,
+          143,
+          192,
+          259,
+          349,
+          470,
+          633,
+          853,
+          1149
+        ],
+        "F_n": [
+          0.018376205904077937,
+          0.023496115947864094,
+          0.03236155276038551,
+          0.05245137269563402,
+          0.07332946742701256,
+          0.12178247531497238,
+          0.1798531130972317,
+          0.2576548104988368,
+          0.3232047381785552,
+          0.3889733667169613,
+          0.40032653589338385,
+          0.4421459730098327,
+          0.4895538668149864,
+          0.5847728657793644,
+          0.6256011904371791,
+          0.9722425652571055,
+          1.4318452919175317,
+          1.6774848184677913,
+          2.5640390995905573,
+          2.354645075365838
+        ],
+        "alpha": {
+          "alpha": 0.8295738236314087,
+          "intercept": -4.733466376200975,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13,
+            18,
+            24,
+            32,
+            43,
+            58,
+            79,
+            106,
+            143,
+            192,
+            259,
+            349,
+            470,
+            633,
+            853,
+            1149
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.1719597430724944,
+          "intercept": -5.647004976677139,
+          "n_points": 5,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.6705304541249626,
+          "intercept": -3.8637928031485007,
+          "n_points": 15,
+          "scales": [
+            18,
+            24,
+            32,
+            43,
+            58,
+            79,
+            106,
+            143,
+            192,
+            259,
+            349,
+            470,
+            633,
+            853,
+            1149
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 5.7272727272727275,
+          "basis": "raw_positive",
+          "max": 1.26,
+          "min": 0.22,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.16908083861494616,
+      "delta_alpha1": 0.3342453440667993,
+      "delta_alpha2": -0.34643227233716845,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 2.9117647058823524,
+        "min": 2.911764705882353,
+        "max": 2.911764705882353
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 5.7272727272727275,
+        "min": 5.7272727272727275,
+        "max": 5.7272727272727275
+      },
+      "p_alpha": 0.99,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.21460159302963602,
+      "surrogate_alpha_std": 0.019451677461117225,
+      "p_alpha1": 0.12,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": 0.27634856485693804,
+      "surrogate_alpha1_std": 0.05080650019147148,
+      "p_alpha2": 0.96,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.4095663746442226,
+      "surrogate_alpha2_std": 0.03434730816231123,
+      "bootstrap_block_length_pre": 343,
+      "bootstrap_block_length_post": 1149,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.394807831220059,
+        -0.025121053662923054
+      ],
+      "p_bootstrap_alpha": 0.018,
+      "delta_alpha_boot_mean": -0.18660665286297257,
+      "delta_alpha_boot_std": 0.09735588745561093,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        0.055299573898933814,
+        0.5192786518849858
+      ],
+      "p_bootstrap_alpha1": 0.024,
+      "delta_alpha1_boot_mean": 0.29823792054352294,
+      "delta_alpha1_boot_std": 0.11775995173034354,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.6388086429421802,
+        -0.11594913269665193
+      ],
+      "p_bootstrap_alpha2": 0.002,
+      "delta_alpha2_boot_mean": -0.3551897991945915,
+      "delta_alpha2_boot_std": 0.14103209553775278,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 21.063602685928345,
+    "robustness_seconds": 12.51784086227417
+  },
+  "notes": [
+    "This JSON reports the FINAL result per METHODOLOGY_NOTE.md; it supersedes the earlier exploratory viability numbers (alpha PRE=1.133, POST full=0.840, POST truncated=0.929) cited in the methodology note's 'Contexto' section, which used an unvalidated pipeline and no robustness variant.",
+    "dfa_common.py was NOT modified to produce this result (verified via git diff after the run)."
+  ]
+}

@@ -411,3 +411,75 @@ decisions:
       - "toda a infraestrutura desta linha (3 METHODOLOGY_NOTE.md, 3 pipelines validadas, dados de 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT, resultados JSON, relatorios de sessao, APNEA_BACKUP_RECORDS_REVISIT.md) permanece no repositorio, commitada e reaproveitavel para retomada futura"
       - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"
       - "o achado fisiologico de apneia-ECG (CVHR) permanece documentado honestamente como replicacao de mecanismo ja conhecido, nao promovido a claim nem a invariante Tamesis-especifico"
+
+  - decision_id: DISC-DEC-007
+    date: 2026-08-15
+    decision: >
+      Considerar DISC-TRI-RG-001 (busca de invariante cross-domain via
+      lente de renormalizacao/coarse-graining) suficientemente explorada
+      por ora, a pedido explicito do usuario -- terceira vez que esta
+      decisao e tomada (a primeira, DISC-DEC-005, e a segunda,
+      DISC-DEC-006, foram ambas revertidas pelo proprio usuario ao pedir
+      retomada/nova busca). Linha PAUSADA, nao fechada: DISC-TRI-RG-001
+      permanece CANDIDATE_FORMULATING em TEST_QUEUE.yaml (nenhum
+      candidato foi travado em PREREGISTRATION.md em nenhum momento de
+      sua historia), disponivel para retomada futura (fechar gaps de
+      grafo de visibilidade ou RQA, ja formalizados com viable=true na
+      Fase 0.5; nova rodada de busca por candidatos ainda nao
+      considerados; ou revisitar qualquer um dos 5 ja testados com
+      dominios/dados diferentes dos ja usados) sem exigir nova
+      formulacao do zero -- toda a infraestrutura fica reaproveitavel.
+    rationale: >
+      Desde DISC-DEC-006, o usuario pediu uma nova rodada de busca por
+      candidatos ainda nao considerados (unica das 3 rotas de retomada
+      da pausa anterior ainda nao exercida). 5 agentes independentes
+      investigaram 6 candidatos genuinamente novos: 4 viable=true
+      (entropia multiescala/MSE, criticalidade auto-organizada/SOC,
+      grafo de visibilidade, RQA) e 2 viable=false com justificativa
+      concreta (percolacao sob ataque a hubs, escala de Anderson).
+      Usuario entao pediu fechamento de gaps de soc-avalanches (rank #1)
+      e depois de mse-multiscale-entropy (rank #2), ambos com a mesma
+      disciplina completa ja praticada nesta linha -- metodologia
+      fixada e commitada antes de qualquer calculo real, pipeline
+      validada contra dado sintetico (incluindo, nos dois casos,
+      correcoes de metodologia motivadas pela propria validacao: SOC
+      precisou de um teste de bootstrap pareado apos o substituto
+      Poisson mostrar perda de poder sob desequilibrio de taxa; MSE nao
+      precisou de correcao, e a validacao ja confirmou empiricamente que
+      o IAAFT tem poder real para CI/beta, resolvendo substancialmente o
+      risco de redundancia com a familia Hurst ja testada). RESULTADO:
+      NEGATIVO nos dois. soc-avalanches teve um achado inicial na
+      sismicidade de Ridgecrest que nao sobreviveu ao nulo ETAS
+      subcritico (escalada condicional ja pre-declarada na propria
+      metodologia) nem a descoberta adversarial de nulos (o mesmo
+      "efeito" reproduzido dividindo uma unica janela homogenea --
+      decaimento classico de Omori-Utsu, nao SOC novo); flares solares
+      GOES nao mostrou sinal. mse-multiscale-entropy nao mostrou sinal
+      em nenhuma das 8 combinacoes testadas em geomagnetismo e
+      degradacao de rolamento.
+      Com isso, 5 dos 6 candidatos considerados nesta linha (3 da Fase 0
+      original + soc-avalanches + mse-multiscale-entropy da nova busca)
+      estao testados com rigor completo -- os 5 resultado NEGATIVO para
+      invariante cross-domain. Restam 2 candidatos formalizados mas nao
+      fechados (grafo de visibilidade, RQA), ambos ja com riscos
+      concretos identificados na propria busca (grafo de visibilidade:
+      risco de redundancia com Hurst documentado diretamente na
+      literatura, Xie & Zhou 2011, mais custo computacional O(N^2); RQA:
+      sondagem exploratoria ja mostrou o mesmo padrao de inconsistencia
+      cross-domain que derrubou critical-slowing-down). Dado o padrao
+      consistente de 5/6 candidatos negativos e os riscos ja conhecidos
+      dos 2 restantes, o usuario decidiu pausar a linha em vez de
+      continuar para o proximo candidato.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: next_action atualizado para refletir a pausa)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status permanece CANDIDATE_FORMULATING (mesma nota de DISC-DEC-005/DISC-DEC-006 -- nao ha status 'PAUSED' formal na maquina de estados de TEST_QUEUE.yaml)"
+      - "nenhum arquivo de teste (PREREGISTRATION.md, CLAIM_LEDGER.yaml) criado ou modificado -- nao ha claim a fechar, pois nenhum pre-registro foi travado nesta linha em nenhum momento de sua historia"
+    untouched_safeguards:
+      - "toda a infraestrutura desta linha (5 METHODOLOGY_NOTE.md, 5 pipelines validadas, dados reais de 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT/Ridgecrest/GOES/geomagnetismo-1989/FEMTO-rolamento, resultados JSON, relatorios de sessao) permanece no repositorio, commitada e reaproveitavel para retomada futura"
+      - "2 candidatos formalizados (grafo de visibilidade, RQA) permanecem disponiveis com viable=true, prontos para fechamento de gaps sem precisar de nova busca, se e quando a linha for retomada"
+      - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"

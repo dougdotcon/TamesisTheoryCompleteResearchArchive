@@ -787,26 +787,63 @@ queue:
       dele, NAO produz um invariante cross-domain confiavel nestes 2
       dominios/transicoes testados com protocolo genuinamente cego ao
       dominio. NENHUM PREREGISTRATION.md foi escrito.
+    gap_closing_result_3: >
+      2026-08-14: gaps de dfa-multiscale-entropy (rank 3 na Fase 0, apos
+      retomada explicita da linha pelo usuario) fechados -- ver
+      02_TESTS/TRI_RG/dfa_multiscale_entropy/{METHODOLOGY_NOTE.md,
+      RESULTS_SUMMARY.md}. Pipeline DFA-1 nova (analysis/dfa_common.py)
+      validada contra dado sintetico; validacao revelou que o teste IAAFT
+      bicaudal originalmente especificado tem baixo poder para alpha
+      (substitutos preservam o espectro linear, que e essencialmente o
+      que alpha mede) -- corrigido ANTES de qualquer dado real com um
+      teste complementar de bootstrap por blocos moveis (Kunsch 1989),
+      que passou a ser o teste PRIMARIO de significancia desta linha.
+      RESULTADO: NEGATIVO cross-domain. Apneia-ECG (PhysioNet a04, 35min
+      normal->140min apneia severa): sinal forte nos 6 testes de
+      bootstrap (p<0,05, maioria p<0,001) -- sobreviveu a reexecucao
+      adversarial cega (extracao independente bate ~byte a byte) e a
+      winsorizacao (nao e outlier), mas: perde significancia sob
+      truncamento severo do POST (canal alpha completo), trajetoria
+      dentro do POST e flutuante nao monotonica (consistente com
+      natureza ciclica da apneia, ja declarada a priori), e a
+      descoberta adversarial de nulos identificou um mecanismo mundano
+      que explica o efeito por completo -- CVHR (Cyclical Variation of
+      Heart Rate, Guilleminault et al. 1984), pico espectral de
+      ~41-48 batimentos no POST (73,7% da potencia relevante, vs 18,3%
+      no PRE) batendo com o AHI=77,4/h documentado. GISP2 (mesmo dado
+      ja usado em critical-slowing-down, Younger Dryas->Preboreal): 5
+      dos 6 testes de bootstrap NAO significativos (p entre 0,126 e
+      0,996) -- nenhuma replicacao do sinal de apneia. dfa-multiscale-
+      entropy, como critical-slowing-down e wavelet-multiresolution-
+      scaling antes dele, NAO produz um invariante cross-domain
+      confiavel. Achado isolado de apneia-ECG e real mas e replicacao de
+      fisiologia ja conhecida (nao invariante novo), com confundidor de
+      estagio do sono nao resolvido (N=1 registro) e risco de vies de
+      selecao (3 registros de backup mapeados, nunca executados).
+      NENHUM PREREGISTRATION.md foi escrito.
     next_action: >
-      PAUSADA a pedido explicito do usuario em 2026-08-14 (DISC-DEC-005)
-      -- linha considerada suficientemente explorada por ora. 2 dos 3
-      candidatos viaveis da Fase 0 (critical-slowing-down,
-      wavelet-multiresolution-scaling) tiveram gaps completos fechados
-      com metodologia pre-commitada, pipeline validada contra dado
-      sintetico, e checagem adversarial onde o tamanho do efeito
-      justificou -- ambos resultado NEGATIVO. O terceiro
-      (dfa-multiscale-entropy, rank 3) permanece nao testado com o mesmo
-      rigor -- precisaria de reformulacao em torno de uma transicao
-      temporal genuina antes de poder ser testado. Retomada futura (se
-      decidida): reformular dfa-multiscale-entropy, nova rodada de busca
-      por candidatos ainda nao considerados, ou revisitar
-      critical-slowing-down/wavelet-multiresolution-scaling com
-      dominios/dados diferentes dos ja testados. Toda a infraestrutura
-      desta linha (metodologia, pipelines validadas, dados preparados,
-      resultados) fica commitada e reaproveitavel. 01_TAMESIS_CORE/
-      03_TRANSITION_ATLAS continua infraestrutura reaproveitavel
-      candidata para hospedar um resultado futuro depois de sobreviver
-      ao Gate de Replicacao, se e quando esta linha for retomada.
+      Os 3 candidatos viaveis da Fase 0 (critical-slowing-down,
+      wavelet-multiresolution-scaling, dfa-multiscale-entropy) foram
+      agora testados com rigor completo (metodologia pre-commitada,
+      pipeline validada contra dado sintetico, checagem adversarial
+      completa onde o efeito justificou) -- os 3 resultado NEGATIVO para
+      invariante cross-domain. Nenhuma linha ativa nesta trilha no
+      momento. Tres rotas honestas para uma retomada futura, nenhuma
+      decidida: (a) nova rodada de busca por candidatos ainda nao
+      considerados (box-covering e spacing-statistics, os 2 inviaveis da
+      Fase 0, ja tem rotas alternativas anotadas como sementes futuras
+      em phase0/PHASE0_SURVEY.md); (b) revisitar os 3 candidatos ja
+      testados com dominios/dados diferentes (ex. os registros de
+      backup do Apnea-ECG -- a18, a14, a01 -- nunca executados, embora
+      isso nao resolva por si so a exigencia cross-domain da linha);
+      (c) considerar a linha suficientemente explorada por ora (mesma
+      decisao ja tomada uma vez, DISC-DEC-005). Toda a infraestrutura
+      (metodologia, 3 pipelines validadas, dados preparados, 9
+      dominios/variantes testados no total) fica commitada e
+      reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS continua
+      infraestrutura reaproveitavel candidata para hospedar um resultado
+      futuro depois de sobreviver ao Gate de Replicacao, se e quando
+      esta linha for retomada.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

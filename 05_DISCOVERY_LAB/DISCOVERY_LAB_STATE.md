@@ -13,10 +13,10 @@ sobre nenhum Problema do Millennium).
 
 | Campo | Valor |
 |---|---|
-| Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE`, ver seção própria abaixo — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` PAUSADA (`DISC-DEC-005`, 2026-08-14) |
-| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: Fase 0 concluída — 3/5 candidatos `viable=true` com dado real verificado; `critical-slowing-down` (rank 1) e `wavelet-multiresolution-scaling` (rank 2) tiveram gaps completos fechados e testados, ambos NEGATIVO; `dfa-multiscale-entropy` (rank 3) não testado. Linha PAUSADA por decisão do usuário. SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); análise rodada + reexecução adversarial (concordância bit a bit) mostraram que o modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível, confirmado por simulação Monte Carlo independente (diluição por projeção, efeito conhecido na literatura). `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
-| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, `DISC-TRI-RG-001` pausada. Aguardando próxima direção do usuário (retomar TRI-RG, redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado, investigar o achado de integridade de `gaia_real_analysis.py`, ou nova linha) |
-| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (pausa de `DISC-TRI-RG-001` a pedido do usuário) |
+| Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE`, ver seção própria abaixo — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` retomada a pedido do usuário e os 3 candidatos viáveis da Fase 0 agora testados com rigor completo — os 3 resultado NEGATIVO (ver seção própria abaixo) |
+| Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: os 3 candidatos viáveis da Fase 0 agora testados com rigor completo, os 3 NEGATIVO para invariante cross-domain — `critical-slowing-down` (GISP2/SDDB/NASDAQ), `wavelet-multiresolution-scaling` (Tohoku/CHB-MIT), `dfa-multiscale-entropy` (Apneia-ECG/GISP2, achado forte de 1 domínio explicado por mecanismo fisiológico já conhecido — CVHR — e não replicado no segundo domínio). SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); análise rodada + reexecução adversarial (concordância bit a bit) mostraram que o modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível, confirmado por simulação Monte Carlo independente (diluição por projeção, efeito conhecido na literatura). `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
+| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, e agora também os 3 candidatos viáveis de `DISC-TRI-RG-001`. Aguardando próxima direção do usuário: (a) nova rodada de busca por candidatos TRI-RG ainda não considerados; (b) revisitar os 3 candidatos já testados com domínios/dados diferentes (ex. registros de backup do Apnea-ECG nunca executados); (c) considerar `DISC-TRI-RG-001` suficientemente explorada por ora; (d) redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado; (e) investigar o achado de integridade de `gaia_real_analysis.py`; (f) nova linha inteiramente distinta |
+| Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (pausa de `DISC-TRI-RG-001` a pedido do usuário, revertida por instrução explícita subsequente do usuário em 2026-08-14) |
 | Claims fechados/registrados | 5 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]) |
 | Claims em andamento | 0 |
 
@@ -382,6 +382,51 @@ dele, não produz um invariante cross-domain confiável testado com
 protocolo genuinamente cego ao domínio e checagem adversarial completa.
 Nenhum `PREREGISTRATION.md` foi escrito. Detalhes completos em
 `02_TESTS/TRI_RG/wavelet_multiresolution/RESULTS_SUMMARY.md`.
+
+## Retomada de `DISC-TRI-RG-001` e fechamento dos gaps de `dfa-multiscale-entropy` (2026-08-14) — resultado NEGATIVO
+
+Usuário pediu explicitamente para retomar a linha após a pausa
+(`DISC-DEC-005`). Um agente de busca dedicado encontrou um domínio
+fisiológico com transição temporal GENUÍNA (corrigindo o defeito da Fase
+0, que usava comparações estáticas de classe): PhysioNet Apnea-ECG
+Database, registro `a04` (AHI=77,4, apneia severa), 35 min de sono normal
+seguidos imediatamente por 140 min contínuos de apneia dentro do mesmo
+paciente/registro, rótulo clínico externo (Thomas Penzel). Segundo
+domínio cross-domain: paleoclima GISP2, reaproveitado de
+`critical-slowing-down` (mesma transição Younger Dryas→Preboreal).
+
+Pipeline DFA-1 nova (`dfa_common.py`) validada contra dado sintético
+ANTES de qualquer dado real — a validação revelou que o teste IAAFT
+bicaudal originalmente especificado na metodologia tem baixo poder para
+`alpha` (substitutos preservam o espectro linear, que é essencialmente o
+que `alpha` mede: o controle positivo sintético, H=0,5→H=0,9, não atingiu
+`p<0,05`). Corrigido ANTES de tocar dado real: adicionado um teste
+complementar de bootstrap por blocos móveis (Künsch 1989), que passou a
+ser o teste PRIMÁRIO de significância — mesma disciplina de
+`METHODOLOGY_EXTENSIONS.md` Seção 1 (verificar comportamento da
+estatística contra nulo/sintético antes de gastar tempo em dado real).
+
+**Resultado: NEGATIVO cross-domain.** Apneia-ECG mostrou sinal forte nos
+6 testes de bootstrap (`p<0,05`, maioria `p<0,001`), que sobreviveu à
+reexecução adversarial cega (extração independente de RR bate ~byte a
+byte) e à winsorização (não é artefato de outlier) — mas a descoberta
+adversarial de nulos identificou um mecanismo fisiológico já conhecido há
+40 anos (CVHR — Cyclical Variation of Heart Rate, Guilleminault et al.
+1984) que explica o efeito por completo, batendo exatamente com o AHI
+documentado do paciente. GISP2 não replicou o sinal (5 dos 6 testes de
+bootstrap não significativos). `dfa-multiscale-entropy`, como os outros 2
+candidatos antes dele, não produz um invariante cross-domain confiável.
+Detalhes completos em
+`02_TESTS/TRI_RG/dfa_multiscale_entropy/RESULTS_SUMMARY.md`.
+
+**Estado final da linha:** os 3 candidatos viáveis da Fase 0
+(`critical-slowing-down`, `wavelet-multiresolution-scaling`,
+`dfa-multiscale-entropy`) testados com rigor completo — metodologia
+pré-commitada, pipeline validada contra dado sintético, checagem
+adversarial completa onde o efeito justificou — os 3 resultado NEGATIVO
+para invariante cross-domain. Nenhum `PREREGISTRATION.md` foi escrito em
+nenhum dos 3. Toda a infraestrutura (3 pipelines validadas, 9
+domínios/variantes testados no total) fica commitada e reaproveitável.
 
 ## O que já foi feito nesta trilha
 

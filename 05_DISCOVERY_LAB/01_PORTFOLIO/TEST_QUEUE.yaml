@@ -932,23 +932,37 @@ queue:
       delta_tau inverte de sinal entre variantes. soc-avalanches, como
       os 3 candidatos anteriores desta linha, NAO produz invariante
       cross-domain confiavel. NENHUM PREREGISTRATION.md foi escrito.
+    mse_gap_closing_started: >
+      2026-08-15: usuario escolheu comecar o fechamento de gaps do
+      candidato ranqueado #2 na nova busca, mse-multiscale-entropy
+      (entropia multiescala, Costa et al. 2002/2005). Metodologia
+      completa fixada em
+      02_TESTS/TRI_RG/mse_multiscale_entropy/METHODOLOGY_NOTE.md,
+      commitada ANTES de qualquer calculo real: regra de escala tau
+      domain-agnostic (tau_max=floor(N/200), piso de amostra minimo de
+      Yentes et al. 2013 para SampEn confiavel, nao a convencao literal
+      de Costa de tau inteiro absoluto 1-20, incompativel entre
+      dominios de amostragem muito diferentes); I(X)=CI (Complexity
+      Index, soma de SampEn sobre a grade de escalas) + beta (inclinacao,
+      canal companheiro); declaracao explicita de identificabilidade
+      (risco de redundancia com Hurst ja testado via DFA/wavelet,
+      discriminador proposto: MSE e sensivel a estrutura NAO-linear que
+      IAAFT nao reproduz, ao contrario de DFA-alpha ja mostrado quase
+      puramente espectral nesta linha); protocolo IAAFT bicaudal como
+      teste PRIMARIO (nao secundario como nos candidatos anteriores,
+      porque e o proprio discriminador de identificabilidade), com
+      obrigacao de validar poder real antes de prosseguir. Proximo
+      passo: construir e validar a pipeline contra dado sintetico antes
+      de tocar dado real.
     next_action: >
-      4 dos 6 candidatos considerados nesta linha (3 da Fase 0 original +
-      soc-avalanches da nova busca) agora testados com rigor completo --
-      os 4 resultado NEGATIVO para invariante cross-domain. Restam 3
-      candidatos da nova busca ainda nao fechados: MSE (rank #2 --
-      fundamentacao formal mais rigorosa ja considerada nesta linha, mas
-      risco de redundancia com Hurst ja testado), grafo de visibilidade
-      (rank #3 -- mesma forca formal, risco de redundancia mais
-      diretamente documentado na literatura), RQA (rank #4 -- unico com
-      regras de parametro nao-arbitrarias publicadas, mas sondagem
-      exploratoria ja mostrou o mesmo padrao de inconsistencia
-      cross-domain que derrubou critical-slowing-down). Ver
-      phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md. Nenhuma decisao tomada --
-      fica com o usuario: fechar gaps de MSE/grafo de visibilidade/RQA,
-      nova busca adicional, ou considerar a linha suficientemente
-      explorada por ora. Toda a infraestrutura (metodologia, 4 pipelines
-      validadas, dominios reais testados) fica commitada e reaproveitavel.
+      Fechamento de gaps de mse-multiscale-entropy EM ANDAMENTO --
+      metodologia fixada e commitada (ver mse_gap_closing_started acima).
+      Pipeline (mse_common.py) ainda a construir e validar contra dado
+      sintetico antes de qualquer calculo real nos 2 dominios (tempestade
+      geomagnetica marco/1989, degradacao de rolamento FEMTO/PRONOSTIA).
+      Os outros 2 candidatos novos (grafo de visibilidade, RQA,
+      ranqueados #3-4) permanecem disponiveis para uma rodada futura, nao
+      descartados.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

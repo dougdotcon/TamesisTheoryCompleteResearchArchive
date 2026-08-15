@@ -849,32 +849,58 @@ queue:
       (efeitos mais modestos que o 6/6 original de a04, custo alto vs.
       valor marginal baixo dado que nao mudaria o veredito cross-domain
       -- declarado explicitamente, nao escondido).
+    new_candidate_search_result_2026_08_15: >
+      Usuario pediu a unica rota de retomada ainda nao exercida (DISC-DEC-006
+      next_action item (c)): nova rodada de busca por candidatos ainda nao
+      considerados. 5 agentes independentes em paralelo investigaram 6
+      candidatos novos (nenhum reformulacao leve dos 5 originais). RESULTADO:
+      4 viable=true, 2 viable=false. (1) Entropia Multiescala/MSE (Costa et
+      al. 2002/2005) -- fundamentacao formal de R_lambda mais rigorosa ja
+      considerada nesta linha (conexao direta com CLT/RG via Jona-Lasinio
+      2001), 2 dominios novos verificados (tempestade geomagnetica 1989,
+      rolamento FEMTO/PRONOSTIA ate falha), mas risco real de redundancia
+      com a familia Hurst ja testada (DFA/wavelet). (2) Expoentes de
+      criticalidade auto-organizada/SOC -- matematica genuinamente distinta
+      dos 3 ja testados (eventos discretos/leis de potencia), 2 dominios
+      novos (sismicidade Ridgecrest 2019 via API USGS, flares solares
+      GOES/NOAA), sem risco de redundancia identificado, mecanismos mundanos
+      ja mapeados e corrigiveis (STAI em sismologia; vies de deteccao em
+      flares). (3) Grafo de visibilidade + box-covering -- reaproveita
+      box-covering ja verificado (nunca implementado em codigo na Fase 0
+      original), 2 dominios novos (geomagnetismo 2015, furacao Harvey), mas
+      risco de redundancia com Hurst documentado DIRETAMENTE na literatura
+      (Xie & Zhou 2011) mais custo computacional O(N^2). (4) RQA (Recurrence
+      Quantification Analysis) -- unico candidato com regras de parametro
+      NAO-arbitrarias publicadas (FNN, informacao mutua, RR-fixo), 2 dominios
+      novos (rolamento IMS/Rexnord, vulcao Kilauea 2018), mas sondagem
+      exploratoria ja mostrou o MESMO padrao de inconsistencia cross-domain
+      que derrubou critical-slowing-down (sinal robusto em 1 dominio, ausente
+      no outro). (5) Percolacao sob ataque a hubs -- viable=false, unico
+      evento real que fragmentou (blecaute 2003) nao tem S(f) publicado do
+      evento real; unico com S(f) publicado (Eyjafjallajokull) nao cruzou o
+      limiar. (6) Escala de Anderson -- viable=false, nenhuma generalizacao
+      real encontrada se liberta de transporte de onda quantico. Ranking
+      honesto (nao travado): SOC > MSE > grafo de visibilidade > RQA.
+      Detalhes completos em phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md.
     next_action: >
-      PAUSADA a pedido explicito do usuario em 2026-08-15 (DISC-DEC-006 --
-      segunda vez que esta decisao e tomada; a primeira, DISC-DEC-005, foi
-      revertida pelo proprio usuario ao pedir retomada). Os 3 candidatos
-      viaveis da Fase 0 (critical-slowing-down, wavelet-multiresolution-
-      scaling, dfa-multiscale-entropy) foram testados com rigor completo,
-      incluindo uma revisita com 3 registros adicionais de apneia-ECG
-      (a18, a14, a01) como dominio fisiologico novo para os 3 candidatos
-      -- os 3 continuam sem produzir invariante cross-domain confiavel.
-      Das 3 rotas de retomada listadas na pausa anterior, 2 ja foram
-      exercidas nesta rodada ((a) reformulacao de dfa-multiscale-entropy;
-      (b) revisitar candidatos com dado diferente via registros de backup)
-      sem mudar o veredito -- resta so (c) nova rodada de busca por
-      candidatos ainda nao considerados (box-covering e spacing-
-      statistics, os 2 inviaveis da Fase 0, ja tem rotas alternativas
-      anotadas como sementes futuras em phase0/PHASE0_SURVEY.md), nao
-      exercida. Retomada futura (se decidida): nova busca de candidatos,
-      ou revisitar os 3 ja testados com um dominio fisico genuinamente
-      diferente dos ja usados (fisiologia cardiaca, paleoclima, sismologia,
-      EEG, financeiro ja cobertos). Toda a infraestrutura (metodologia, 3
-      pipelines validadas, 4 registros de apneia + GISP2/SDDB/NASDAQ/
-      Tohoku/CHB-MIT, 12+ dominios/variantes testados no total) fica
-      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
-      continua infraestrutura reaproveitavel candidata para hospedar um
-      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
-      quando esta linha for retomada.
+      Nova rodada de busca concluida (ver
+      new_candidate_search_result_2026_08_15 acima e
+      phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md para detalhes completos).
+      4 candidatos novos viable=true (SOC/avalanches, MSE, grafo de
+      visibilidade, RQA), nenhum travado -- decisao de qual perseguir
+      (se algum) fica com o usuario. Linha permanece
+      CANDIDATE_FORMULATING; PAUSADA continua sendo o estado de fato ate
+      que o usuario escolha um candidato para fechamento de gaps ou
+      decida encerrar a busca. As 3 rotas de retomada da pausa anterior
+      (DISC-DEC-006) estao todas agora exercidas: (a) reformulacao de
+      dfa-multiscale-entropy; (b) revisita com dado diferente (registros
+      de backup Apnea-ECG); (c) nova busca de candidatos -- nenhuma
+      produziu um invariante cross-domain confirmado ainda, mas (c)
+      deixou 4 candidatos novos com viabilidade formal genuina para uma
+      eventual proxima rodada de fechamento de gaps. Toda a
+      infraestrutura (metodologia, 3 pipelines validadas dos candidatos
+      antigos, 6 candidatos novos formalizados com dominios reais
+      verificados) fica commitada e reaproveitavel.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

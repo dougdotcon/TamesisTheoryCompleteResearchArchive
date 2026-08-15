@@ -15,7 +15,7 @@ sobre nenhum Problema do Millennium).
 |---|---|
 | Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE`, ver seção própria abaixo — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` PAUSADA novamente (`DISC-DEC-006`, 2026-08-15) após os 3 candidatos viáveis da Fase 0 e a revisita com registros de backup do Apnea-ECG não produzirem invariante cross-domain confiável (ver seção própria abaixo) |
 | Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: os 3 candidatos viáveis da Fase 0 agora testados com rigor completo, os 3 NEGATIVO para invariante cross-domain — `critical-slowing-down` (GISP2/SDDB/NASDAQ), `wavelet-multiresolution-scaling` (Tohoku/CHB-MIT), `dfa-multiscale-entropy` (Apneia-ECG/GISP2, achado forte de 1 domínio explicado por mecanismo fisiológico já conhecido — CVHR — e não replicado no segundo domínio). SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); análise rodada + reexecução adversarial (concordância bit a bit) mostraram que o modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível, confirmado por simulação Monte Carlo independente (diluição por projeção, efeito conhecido na literatura). `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
-| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, e `DISC-TRI-RG-001` pausada novamente (`DISC-DEC-006`). Aguardando próxima direção do usuário: (a) nova rodada de busca por candidatos TRI-RG ainda não considerados (única das 3 rotas de retomada da pausa anterior ainda não exercida); (b) redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta |
+| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora. `DISC-TRI-RG-001` teve uma nova rodada de busca de candidatos (ver seção própria abaixo): 4 candidatos novos `viable=true` (SOC/avalanches, MSE, grafo de visibilidade, RQA), nenhum travado. Aguardando próxima direção do usuário: (a) escolher um dos 4 candidatos novos para fechamento de gaps completo; (b) redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (1ª pausa de `DISC-TRI-RG-001`, revertida por instrução explícita do usuário em 2026-08-14), `DISC-DEC-006` (2ª pausa de `DISC-TRI-RG-001` a pedido do usuário, 2026-08-15, após reformulação de dfa-multiscale-entropy e revisita com registros de backup do Apnea-ECG não produzirem invariante cross-domain) |
 | Claims fechados/registrados | 5 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]) |
 | Claims em andamento | 0 |
@@ -452,6 +452,42 @@ continua sendo a mesma explicação mundana já identificada (CVHR). Checagem
 adversarial adicional não foi acionada para os registros de backup
 (efeitos mais modestos que o achado original, custo alto vs. valor
 marginal baixo, declarado explicitamente).
+
+## Nova rodada de busca de candidatos para `DISC-TRI-RG-001` (2026-08-15)
+
+Após `DISC-DEC-006` (segunda pausa), usuário pediu a única rota de
+retomada ainda não exercida: nova busca por candidatos ainda não
+considerados. 5 agentes independentes em paralelo investigaram 6
+candidatos genuinamente novos (não variações dos 5 originais). Detalhes
+completos em `02_TESTS/TRI_RG/phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md`.
+
+**4 `viable=true`:** (1) **Entropia Multiescala (MSE)** — fundamentação
+formal de `R_lambda` mais rigorosa já considerada nesta linha (conexão
+direta com o Teorema Central do Limite via Jona-Lasinio 2001), 2 domínios
+novos verificados (tempestade geomagnética 1989, rolamento FEMTO/PRONOSTIA
+até falha), mas risco real de redundância com a família Hurst já testada
+(DFA/wavelet). (2) **Expoentes de criticalidade auto-organizada (SOC)** —
+matemática genuinamente distinta dos 3 já testados, 2 domínios novos
+(sismicidade Ridgecrest 2019, flares solares GOES/NOAA), sem risco de
+redundância identificado, mecanismos mundanos já mapeados e corrigíveis.
+(3) **Grafo de visibilidade + box-covering** — reaproveita box-covering já
+verificado (nunca implementado em código na Fase 0 original), 2 domínios
+novos (geomagnetismo 2015, furacão Harvey), mas risco de redundância com
+Hurst documentado DIRETAMENTE na literatura (Xie & Zhou 2011). (4) **RQA
+(Recurrence Quantification Analysis)** — único candidato com regras de
+parâmetro NÃO-arbitrárias publicadas, mas sondagem exploratória própria já
+mostrou o MESMO padrão de inconsistência cross-domain que derrubou
+`critical-slowing-down`.
+
+**2 `viable=false`, corretamente rejeitados com justificativa concreta:**
+percolação sob ataque a hubs (nenhum evento real tem simultaneamente
+fragmentação genuína E reconstrução publicada de `S(f)`); escala de
+Anderson (nenhuma generalização real se liberta de transporte de onda
+quântico).
+
+**Ranking honesto, não travado:** SOC > MSE > grafo de visibilidade > RQA.
+Nenhum candidato foi travado — decisão de qual perseguir (se algum) fica
+com o usuário.
 
 ## O que já foi feito nesta trilha
 

@@ -821,25 +821,52 @@ queue:
       estagio do sono nao resolvido (N=1 registro) e risco de vies de
       selecao (3 registros de backup mapeados, nunca executados).
       NENHUM PREREGISTRATION.md foi escrito.
+    backup_records_revisit_result: >
+      2026-08-15: usuario pediu para revisitar os candidatos com os
+      registros de backup do Apnea-ECG (a18, a14, a01); questionado sobre
+      escopo, optou por tratar o banco como dominio fisiologico NOVO para
+      os 3 candidatos (nao so replicacao de DFA). 3 agentes independentes
+      (um por registro) baixaram/decodificaram os 3 registros e rodaram
+      as 3 pipelines ja validadas SEM MODIFICACAO (git diff vazio
+      confirmado). Detalhes completos em
+      02_TESTS/TRI_RG/APNEA_BACKUP_RECORDS_REVISIT.md. RESULTADO: nao
+      resolve a exigencia cross-domain (os 3 registros sao do MESMO
+      dominio ja testado em a04, nao um dominio fisico novo). CSD: sem
+      sinal em nenhum dos 3 registros (so 1 de 12 testes cruza p<0,05,
+      consistente com ruido). Wavelet (primeira aplicacao a apneia-ECG):
+      ΔC1 mostra padrao direcionalmente consistente mas e exatamente o
+      canal que a propria linha ja suspeitava refletir amplitude, nao
+      estrutura multifractal genuina (mesma ressalva do achado original
+      de Tohoku/CHB-MIT); ΔC2 instavel, inverte de sinal entre variantes.
+      DFA: direcao de Delta_alpha/Delta_alpha2 (queda) REPLICA nos 4
+      registros de apneia (a18 e o mais fraco, nunca atinge p<0,05);
+      Delta_alpha1 (canal mais dramatico em a04) e o menos replicavel
+      (inconsistente em a14). Isso fortalece a leitura ja registrada --
+      efeito fisiologico real que generaliza parcialmente entre
+      pacientes, mas e a MESMA explicacao mundana ja identificada (CVHR,
+      Guilleminault et al. 1984), nao um invariante novo. Checagem
+      adversarial adicional NAO foi acionada para os registros de backup
+      (efeitos mais modestos que o 6/6 original de a04, custo alto vs.
+      valor marginal baixo dado que nao mudaria o veredito cross-domain
+      -- declarado explicitamente, nao escondido).
     next_action: >
       Os 3 candidatos viaveis da Fase 0 (critical-slowing-down,
       wavelet-multiresolution-scaling, dfa-multiscale-entropy) foram
-      agora testados com rigor completo (metodologia pre-commitada,
-      pipeline validada contra dado sintetico, checagem adversarial
-      completa onde o efeito justificou) -- os 3 resultado NEGATIVO para
-      invariante cross-domain. Nenhuma linha ativa nesta trilha no
-      momento. Tres rotas honestas para uma retomada futura, nenhuma
-      decidida: (a) nova rodada de busca por candidatos ainda nao
-      considerados (box-covering e spacing-statistics, os 2 inviaveis da
-      Fase 0, ja tem rotas alternativas anotadas como sementes futuras
-      em phase0/PHASE0_SURVEY.md); (b) revisitar os 3 candidatos ja
-      testados com dominios/dados diferentes (ex. os registros de
-      backup do Apnea-ECG -- a18, a14, a01 -- nunca executados, embora
-      isso nao resolva por si so a exigencia cross-domain da linha);
-      (c) considerar a linha suficientemente explorada por ora (mesma
-      decisao ja tomada uma vez, DISC-DEC-005). Toda a infraestrutura
-      (metodologia, 3 pipelines validadas, dados preparados, 9
-      dominios/variantes testados no total) fica commitada e
+      testados com rigor completo, incluindo uma revisita com 3
+      registros adicionais de apneia-ECG (a18, a14, a01) -- os 3
+      candidatos continuam sem produzir invariante cross-domain
+      confiavel. Nenhuma linha ativa nesta trilha no momento. Duas rotas
+      honestas restantes para uma retomada futura, nenhuma decidida: (a)
+      nova rodada de busca por candidatos ainda nao considerados
+      (box-covering e spacing-statistics, os 2 inviaveis da Fase 0, ja
+      tem rotas alternativas anotadas como sementes futuras em
+      phase0/PHASE0_SURVEY.md); (b) considerar a linha suficientemente
+      explorada por ora (mesma decisao ja tomada uma vez, DISC-DEC-005).
+      A rota de revisitar os candidatos com dados diferentes ja foi
+      exercida (registros de backup do Apnea-ECG) e nao mudou o
+      veredito. Toda a infraestrutura (metodologia, 3 pipelines
+      validadas, 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT,
+      12+ dominios/variantes testados no total) fica commitada e
       reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS continua
       infraestrutura reaproveitavel candidata para hospedar um resultado
       futuro depois de sobreviver ao Gate de Replicacao, se e quando

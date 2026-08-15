@@ -1,0 +1,227 @@
+{
+  "domain": "physiology_apnea_ecg_a01",
+  "test_line": "DISC-TRI-RG-001",
+  "candidate": "critical-slowing-down",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py",
+  "pipeline_function": "run_csd_pipeline(x) -- UNMODIFIED",
+  "generated_at_utc": "2026-08-15T01:00:00Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a01",
+    "record": "a01",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220). Apnea annotations scored by Thomas Penzel from independent respiration/SpO2 signals, not from the ECG itself.",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a01.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.hea",
+        "downloaded_bytes": 55,
+        "sha256": "3df82d6715ec61e9a3d1a8a514e11012a5c42ab4de6a441e37745c5d1067cee7"
+      },
+      "a01.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.dat",
+        "downloaded_bytes": 5914000,
+        "sha256": "0cf9b8181e240136067f5e7fcbc3a16750e793350935fa473ca9becb5b71a9fc"
+      },
+      "a01.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.apn",
+        "downloaded_bytes": 3908,
+        "sha256": "b7404271c576572ce8c99af1fe455cae2954dce1c18caf21a61a25bf1c00f803"
+      },
+      "a01.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.qrs",
+        "downloaded_bytes": 59878,
+        "sha256": "52e73fe9f8c6075a71c79c4bb9df385f5a4d8fb4afeb3ee180072cc9718ca7db"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 2957000,
+      "sig_len_minutes": 492.8333333333333
+    },
+    "apn_annotation": {
+      "n_minute_labels": 489,
+      "alignment_rule": "label i (0-indexed) is at sample i*6000 at fs=100Hz (60s*100Hz=6000 samples/minute) -- reverified programmatically against the actual ann.sample array (np.array_equal check), not assumed.",
+      "alignment_verified": true,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "full_label_sequence": "NNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANNNNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "label_runs": [
+        {
+          "symbol": "N",
+          "start_idx": 0,
+          "end_idx": 12,
+          "n_minutes": 13
+        },
+        {
+          "symbol": "A",
+          "start_idx": 13,
+          "end_idx": 226,
+          "n_minutes": 214
+        },
+        {
+          "symbol": "N",
+          "start_idx": 227,
+          "end_idx": 230,
+          "n_minutes": 4
+        },
+        {
+          "symbol": "A",
+          "start_idx": 231,
+          "end_idx": 351,
+          "n_minutes": 121
+        },
+        {
+          "symbol": "N",
+          "start_idx": 352,
+          "end_idx": 353,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "start_idx": 354,
+          "end_idx": 488,
+          "n_minutes": 135
+        }
+      ]
+    },
+    "qrs_annotation": {
+      "n_beats_total": 29938,
+      "first_beat_sample": 34,
+      "last_beat_sample": 2956445,
+      "strictly_increasing_verified": true
+    },
+    "rr_interval_definition": {
+      "unit": "seconds",
+      "formula": "RR_i = (qrs_sample[i+1] - qrs_sample[i]) / fs, fs=100 Hz",
+      "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock (the same clock as the apn minute labels) -- never by raw QRS-array index."
+    }
+  },
+  "transition": {
+    "documented_event": "N (normal) -> A (apnea/hypopnea) label transition, chosen as the LARGEST contiguous N block immediately followed by a contiguous A block (until the next N), among all N->A candidates in the full a01 label sequence",
+    "n_to_a_candidates_considered": [
+      {
+        "pre_n_minutes": 13,
+        "post_n_minutes": 214,
+        "pre_minute_range": [
+          0,
+          12
+        ],
+        "post_minute_range": [
+          13,
+          226
+        ]
+      },
+      {
+        "pre_n_minutes": 4,
+        "post_n_minutes": 121,
+        "pre_minute_range": [
+          227,
+          230
+        ],
+        "post_minute_range": [
+          231,
+          351
+        ]
+      },
+      {
+        "pre_n_minutes": 2,
+        "post_n_minutes": 135,
+        "pre_minute_range": [
+          352,
+          353
+        ],
+        "post_minute_range": [
+          354,
+          488
+        ]
+      }
+    ],
+    "selection_rule": "max(pre_n_minutes) among N->A candidates (largest contiguous N block immediately preceding an A block)",
+    "pre_run_minutes_inclusive": [
+      0,
+      12
+    ],
+    "post_run_minutes_inclusive": [
+      13,
+      226
+    ],
+    "post_run_end_reason": "next N label in the clinical annotation sequence"
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "pre_primary": {
+      "definition": "entire contiguous block of minutes labeled N immediately preceding the transition",
+      "minute_range_inclusive": [
+        0,
+        12
+      ],
+      "sample_window": [
+        0,
+        78000
+      ],
+      "n_beats": 956,
+      "n_rr_intervals": 955,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.6,
+      "rr_seconds_max": 1.37
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval count) of pre_primary (closest to the transition)",
+      "n_rr_intervals": 477,
+      "n_rr_intervals_primary_for_reference": 955,
+      "rr_seconds_min": 0.63,
+      "rr_seconds_max": 1.37
+    },
+    "note": "CSD tests only the PRE segment (sliding-window trend vs AR(1) null), per critical_slowing_down/METHODOLOGY_NOTE.md -- no POST segment is used."
+  },
+  "pipeline_results": {
+    "primary": {
+      "ar1_a": 0.8029757811983576,
+      "ar1_sigma": 0.04743450118130184,
+      "real_tau_ac1": -0.26153846153846155,
+      "real_tau_var": 0.8523076923076923,
+      "p_ac1_onetail": 0.629,
+      "p_var_onetail": 0.019,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": -0.016984615384615383,
+      "surrogate_tau_ac1_std": 0.4979544010872182,
+      "surrogate_tau_var_mean": 0.0015753846153846141,
+      "surrogate_tau_var_std": 0.5068213121245679,
+      "n_samples": 955,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    },
+    "robustness": {
+      "ar1_a": 0.686957562643027,
+      "ar1_sigma": 0.05610060393664984,
+      "real_tau_ac1": 0.35507246376811596,
+      "real_tau_var": -0.4782608695652174,
+      "p_ac1_onetail": 0.299,
+      "p_var_onetail": 0.776,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.0028623188405797104,
+      "surrogate_tau_ac1_std": 0.5054562083142509,
+      "surrogate_tau_var_mean": -0.006623188405797099,
+      "surrogate_tau_var_std": 0.4982109667618792,
+      "n_samples": 477,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 2.811941146850586,
+    "robustness_seconds": 2.207226037979126
+  },
+  "notes": [
+    "First application of run_csd_pipeline to the PhysioNet Apnea-ECG domain (a04 only had a DFA result at the time of this run; this is a new physiological data point for CSD).",
+    "csd_common.py was NOT modified to produce this result (verify via git diff after the run)."
+  ]
+}

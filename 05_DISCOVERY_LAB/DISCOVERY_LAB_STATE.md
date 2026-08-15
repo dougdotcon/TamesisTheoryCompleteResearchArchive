@@ -15,7 +15,7 @@ sobre nenhum Problema do Millennium).
 |---|---|
 | Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE`, ver seção própria abaixo — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` retomada a pedido do usuário e os 3 candidatos viáveis da Fase 0 agora testados com rigor completo — os 3 resultado NEGATIVO (ver seção própria abaixo) |
 | Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: os 3 candidatos viáveis da Fase 0 agora testados com rigor completo, os 3 NEGATIVO para invariante cross-domain — `critical-slowing-down` (GISP2/SDDB/NASDAQ), `wavelet-multiresolution-scaling` (Tohoku/CHB-MIT), `dfa-multiscale-entropy` (Apneia-ECG/GISP2, achado forte de 1 domínio explicado por mecanismo fisiológico já conhecido — CVHR — e não replicado no segundo domínio). SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); análise rodada + reexecução adversarial (concordância bit a bit) mostraram que o modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível, confirmado por simulação Monte Carlo independente (diluição por projeção, efeito conhecido na literatura). `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
-| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, e agora também os 3 candidatos viáveis de `DISC-TRI-RG-001`. Aguardando próxima direção do usuário: (a) nova rodada de busca por candidatos TRI-RG ainda não considerados; (b) revisitar os 3 candidatos já testados com domínios/dados diferentes (ex. registros de backup do Apnea-ECG nunca executados); (c) considerar `DISC-TRI-RG-001` suficientemente explorada por ora; (d) redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado; (e) investigar o achado de integridade de `gaia_real_analysis.py`; (f) nova linha inteiramente distinta |
+| Próxima ação obrigatória | Nenhuma — todas as linhas cosmológicas SPARC/MOND encerradas por ora, e agora também os 3 candidatos viáveis de `DISC-TRI-RG-001` (incluindo a revisita com registros de backup do Apnea-ECG, ver seção própria abaixo). Aguardando próxima direção do usuário: (a) nova rodada de busca por candidatos TRI-RG ainda não considerados; (b) considerar `DISC-TRI-RG-001` suficientemente explorada por ora; (c) redesenhar SPARC-003 com desprojeção completa reaproveitando o holdout selado; (d) investigar o achado de integridade de `gaia_real_analysis.py`; (e) nova linha inteiramente distinta |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (pausa de `DISC-TRI-RG-001` a pedido do usuário, revertida por instrução explícita subsequente do usuário em 2026-08-14) |
 | Claims fechados/registrados | 5 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]) |
 | Claims em andamento | 0 |
@@ -427,6 +427,31 @@ adversarial completa onde o efeito justificou — os 3 resultado NEGATIVO
 para invariante cross-domain. Nenhum `PREREGISTRATION.md` foi escrito em
 nenhum dos 3. Toda a infraestrutura (3 pipelines validadas, 9
 domínios/variantes testados no total) fica commitada e reaproveitável.
+
+## Revisita com registros de backup do Apnea-ECG (2026-08-15)
+
+Usuário pediu para revisitar os candidatos com os registros de backup do
+Apnea-ECG mapeados na busca de `dfa-multiscale-entropy` (`a18`, `a14`,
+`a01`). Questionado sobre escopo, optou por tratar o banco como um
+domínio fisiológico NOVO para os 3 candidatos (não só replicação de DFA).
+3 agentes independentes baixaram os 3 registros e rodaram as 3 pipelines
+já validadas sem modificação. Detalhes completos em
+`02_TESTS/TRI_RG/APNEA_BACKUP_RECORDS_REVISIT.md`.
+
+**Não resolve a exigência cross-domain** (os 3 registros são do MESMO
+domínio já testado em `a04`). CSD: sem sinal em nenhum registro (mesmo
+padrão de ausência já visto em todos os outros domínios). Wavelet
+(primeira aplicação a apneia-ECG): `ΔC1` mostra padrão direcionalmente
+consistente, mas é exatamente o canal que a própria linha já suspeitava
+refletir amplitude, não estrutura multifractal genuína; `ΔC2` instável.
+DFA: a direção de `Δalpha`/`Δalpha2` (queda) **replica nos 4 registros de
+apneia** (`a18` é o mais fraco); `Δalpha1` (o canal mais dramático em
+`a04`) é o menos replicável. Fortalece a leitura já registrada — efeito
+fisiológico real que generaliza parcialmente entre pacientes, mas
+continua sendo a mesma explicação mundana já identificada (CVHR). Checagem
+adversarial adicional não foi acionada para os registros de backup
+(efeitos mais modestos que o achado original, custo alto vs. valor
+marginal baixo, declarado explicitamente).
 
 ## O que já foi feito nesta trilha
 

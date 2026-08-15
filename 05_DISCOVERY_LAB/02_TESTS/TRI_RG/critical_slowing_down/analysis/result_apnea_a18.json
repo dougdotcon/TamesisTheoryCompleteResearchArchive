@@ -1,0 +1,250 @@
+{
+  "test_line": "DISC-TRI-RG-001",
+  "generated_at_utc": "2026-08-15T00:58:33Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a18",
+    "record": "a18",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220).",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a18.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.hea",
+        "downloaded_bytes": 55,
+        "sha256": "1b7e8ab0b71200f346cd8ca63ae599ae3da07e3bb584519b11e7e6bbc69374c0"
+      },
+      "a18.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.dat",
+        "downloaded_bytes": 5914000,
+        "sha256": "5b6b795976db78da34fb096aef4d0ede2ede7d822b85961ae65d7c87e6131b0c"
+      },
+      "a18.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.apn",
+        "downloaded_bytes": 3908,
+        "sha256": "1365b34bdf4a8dd1dd6077a3b757a088c24f3dad36e93ab2c7cf71d6d67febd1"
+      },
+      "a18.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.qrs",
+        "downloaded_bytes": 60510,
+        "sha256": "b7b21c4a0b8b3ab21116e0f348f88963985284b51664f6dca9cbc162470dd2e9"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 2957000,
+      "sig_len_minutes": 492.8333333333333
+    },
+    "apn_annotation": {
+      "n_minute_labels": 489,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "alignment_rule": "label i (0-indexed) at sample i*6000 at fs=100Hz -- verified programmatically (np.array_equal) against the actual ann.sample array, not assumed.",
+      "alignment_verified": true
+    }
+  },
+  "transition": {
+    "documented_event": "N (normal) -> A (apnea/hypopnea) label transition; largest contiguous N run immediately followed by a contiguous A run, among ALL runs in the full label sequence",
+    "full_run_sequence": [
+      {
+        "symbol": "N",
+        "minute_start": 0,
+        "minute_end": 32,
+        "n_minutes": 33
+      },
+      {
+        "symbol": "A",
+        "minute_start": 33,
+        "minute_end": 169,
+        "n_minutes": 137
+      },
+      {
+        "symbol": "N",
+        "minute_start": 170,
+        "minute_end": 179,
+        "n_minutes": 10
+      },
+      {
+        "symbol": "A",
+        "minute_start": 180,
+        "minute_end": 186,
+        "n_minutes": 7
+      },
+      {
+        "symbol": "N",
+        "minute_start": 187,
+        "minute_end": 189,
+        "n_minutes": 3
+      },
+      {
+        "symbol": "A",
+        "minute_start": 190,
+        "minute_end": 194,
+        "n_minutes": 5
+      },
+      {
+        "symbol": "N",
+        "minute_start": 195,
+        "minute_end": 195,
+        "n_minutes": 1
+      },
+      {
+        "symbol": "A",
+        "minute_start": 196,
+        "minute_end": 225,
+        "n_minutes": 30
+      },
+      {
+        "symbol": "N",
+        "minute_start": 226,
+        "minute_end": 227,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "A",
+        "minute_start": 228,
+        "minute_end": 229,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "N",
+        "minute_start": 230,
+        "minute_end": 231,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "A",
+        "minute_start": 232,
+        "minute_end": 488,
+        "n_minutes": 257
+      }
+    ],
+    "chosen_pre_run": {
+      "symbol": "N",
+      "minute_start": 0,
+      "minute_end": 32,
+      "n_minutes": 33
+    },
+    "chosen_post_run": {
+      "symbol": "A",
+      "minute_start": 33,
+      "minute_end": 169,
+      "n_minutes": 137
+    },
+    "run_after_post": {
+      "symbol": "N",
+      "minute_start": 170,
+      "minute_end": 179,
+      "n_minutes": 10
+    }
+  },
+  "sample_alignment": {
+    "rule": "label i (0-indexed) at sample i*6000 (60s * fs=100Hz)",
+    "verified_programmatically": true,
+    "n_minute_labels": 489
+  },
+  "qrs": {
+    "n_beats_total": 30254,
+    "first_beat_sample": 62,
+    "last_beat_sample": 2956281,
+    "strictly_increasing_verified": true
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock -- never by raw QRS-array index.",
+    "segment_rule_note": "Segment definition (full contiguous N/A block for primary; 50%-by-count nearest-to-transition for robustness) applied UNIFORMLY to all 3 candidates (CSD, WCM/wavelet, DFA) per explicit task instructions -- this is the SAME rule already locked and used for record a04 in dfa_multiscale_entropy/METHODOLOGY_NOTE.md gap (b) and RESULTS_SUMMARY.md (count-based convention resolved there). Note this differs from wavelet_multiresolution/METHODOLOGY_NOTE.md's own stated PRE/POST rule for THAT candidate (2h time cap, min-length-truncation robustness) -- that rule was never actually executed on any apnea record (no result_apnea_*.json exists for wavelet_multiresolution before this run), so there was no established a04 precedent for wavelet to reuse; the explicit segment rule given in the task instructions for THIS run is used instead, documented here transparently.",
+    "pre_primary": {
+      "minute_range_inclusive": [
+        0,
+        32
+      ],
+      "sample_window": [
+        0,
+        198000
+      ],
+      "n_beats": 2183,
+      "n_rr_intervals": 2182,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.41
+    },
+    "post_primary": {
+      "minute_range_inclusive": [
+        33,
+        169
+      ],
+      "sample_window": [
+        198000,
+        1020000
+      ],
+      "n_beats": 8468,
+      "n_rr_intervals": 8467,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.37,
+      "rr_seconds_max": 1.95
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval COUNT) of pre_primary",
+      "n_rr_intervals": 1091,
+      "n_rr_intervals_primary_for_reference": 2182,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.4
+    },
+    "post_robustness": {
+      "definition": "50% (floor division, by RR-interval COUNT) of post_primary closest to the transition (first half in chronological order)",
+      "n_rr_intervals": 4233,
+      "n_rr_intervals_primary_for_reference": 8467,
+      "rr_seconds_min": 0.37,
+      "rr_seconds_max": 1.95
+    }
+  },
+  "domain": "physiology_apnea_ecg_a18",
+  "candidate": "critical-slowing-down",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/critical_slowing_down/analysis/csd_common.py",
+  "pipeline_function": "run_csd_pipeline(x) -- UNMODIFIED",
+  "note": "CSD tests the PRE segment ONLY (trend within the pre-transition segment itself vs AR(1) null), per critical_slowing_down/METHODOLOGY_NOTE.md -- there is no POST channel for this candidate.",
+  "pipeline_results": {
+    "pre_primary": {
+      "ar1_a": 0.19453879242289598,
+      "ar1_sigma": 0.05976468679109882,
+      "real_tau_ac1": -0.05333333333333332,
+      "real_tau_var": 0.4133333333333333,
+      "p_ac1_onetail": 0.557,
+      "p_var_onetail": 0.28,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": 0.029419999999999998,
+      "surrogate_tau_ac1_std": 0.49598075370365363,
+      "surrogate_tau_var_mean": -0.005346666666666668,
+      "surrogate_tau_var_std": 0.5147233473106368,
+      "n_samples": 2182,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    },
+    "pre_robustness": {
+      "ar1_a": 0.14494238683791927,
+      "ar1_sigma": 0.06286211289170049,
+      "real_tau_ac1": -0.6799999999999998,
+      "real_tau_var": 0.43333333333333324,
+      "p_ac1_onetail": 0.889,
+      "p_var_onetail": 0.224,
+      "n_surrogates": 1000,
+      "surrogate_tau_ac1_mean": -0.012753333333333334,
+      "surrogate_tau_ac1_std": 0.5100416292813753,
+      "surrogate_tau_var_mean": -0.028546666666666658,
+      "surrogate_tau_var_std": 0.4921457090469582,
+      "n_samples": 1091,
+      "bandwidth_frac": 0.2,
+      "window_frac": 0.5,
+      "step_frac": 0.02
+    }
+  },
+  "timing_seconds": {
+    "total_seconds": 6.466372966766357
+  }
+}

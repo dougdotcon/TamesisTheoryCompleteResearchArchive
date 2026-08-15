@@ -1,0 +1,1025 @@
+{
+  "domain": "physiology_apnea_ecg_a14",
+  "test_line": "DISC-TRI-RG-001",
+  "candidate": "dfa-multiscale-entropy",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/dfa_multiscale_entropy/analysis/dfa_common.py",
+  "pipeline_function": "run_dfa_pipeline(pre_segment, post_segment) -- UNMODIFIED",
+  "generated_at_utc": "2026-08-15T01:00:00Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a14 (backup record)",
+    "record": "a14",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220). Apnea annotations scored by Thomas Penzel from independent respiration/SpO2 signals, not from the ECG itself.",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a14.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.hea",
+        "downloaded_bytes": 56,
+        "sha256": "e1acb7294a51d3bb386de099d91bc4d5c80b42d90c9e307856e0727f175d2555"
+      },
+      "a14.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.dat",
+        "downloaded_bytes": 6270000,
+        "sha256": "82bd01fc69bd77d4ce53f94e7caa03a9eda15a049442ca87856b01c404a29899"
+      },
+      "a14.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.apn",
+        "downloaded_bytes": 4068,
+        "sha256": "341ec102b563829650916f11e84a8150f113f1fabccc0de1459887283cc1b93a"
+      },
+      "a14.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.qrs",
+        "downloaded_bytes": 58038,
+        "sha256": "35708d9026c8d46a6c65bed316388f489954845e6cbe56e3197acb30a4d3de23"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 3135000,
+      "sig_len_minutes": 522.5
+    },
+    "apn_annotation": {
+      "n_minute_labels": 509,
+      "alignment_rule": "label i (0-indexed) is at sample i*6000 at fs=100Hz (i.e. minute i, 60s * 100Hz = 6000 samples/minute) -- reverified programmatically against the actual ann.sample array (np.array_equal check), not assumed.",
+      "alignment_verified": true,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "full_run_length_encoding": [
+        {
+          "symbol": "N",
+          "minute_start": 0,
+          "minute_end": 14,
+          "n_minutes": 15
+        },
+        {
+          "symbol": "A",
+          "minute_start": 15,
+          "minute_end": 104,
+          "n_minutes": 90
+        },
+        {
+          "symbol": "N",
+          "minute_start": 105,
+          "minute_end": 106,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "minute_start": 107,
+          "minute_end": 329,
+          "n_minutes": 223
+        },
+        {
+          "symbol": "N",
+          "minute_start": 330,
+          "minute_end": 366,
+          "n_minutes": 37
+        },
+        {
+          "symbol": "A",
+          "minute_start": 367,
+          "minute_end": 370,
+          "n_minutes": 4
+        },
+        {
+          "symbol": "N",
+          "minute_start": 371,
+          "minute_end": 373,
+          "n_minutes": 3
+        },
+        {
+          "symbol": "A",
+          "minute_start": 374,
+          "minute_end": 378,
+          "n_minutes": 5
+        },
+        {
+          "symbol": "N",
+          "minute_start": 379,
+          "minute_end": 380,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "minute_start": 381,
+          "minute_end": 394,
+          "n_minutes": 14
+        },
+        {
+          "symbol": "N",
+          "minute_start": 395,
+          "minute_end": 412,
+          "n_minutes": 18
+        },
+        {
+          "symbol": "A",
+          "minute_start": 413,
+          "minute_end": 419,
+          "n_minutes": 7
+        },
+        {
+          "symbol": "N",
+          "minute_start": 420,
+          "minute_end": 428,
+          "n_minutes": 9
+        },
+        {
+          "symbol": "A",
+          "minute_start": 429,
+          "minute_end": 448,
+          "n_minutes": 20
+        },
+        {
+          "symbol": "N",
+          "minute_start": 449,
+          "minute_end": 451,
+          "n_minutes": 3
+        },
+        {
+          "symbol": "A",
+          "minute_start": 452,
+          "minute_end": 471,
+          "n_minutes": 20
+        },
+        {
+          "symbol": "N",
+          "minute_start": 472,
+          "minute_end": 508,
+          "n_minutes": 37
+        }
+      ]
+    },
+    "qrs_annotation": {
+      "n_beats_total": 29018,
+      "first_beat_sample": 17,
+      "last_beat_sample": 3134160,
+      "strictly_increasing_verified": true
+    },
+    "rr_interval_definition": {
+      "unit": "seconds",
+      "formula": "RR_i = (qrs_sample[i+1] - qrs_sample[i]) / fs, fs=100 Hz",
+      "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock (the same clock as the apn minute labels) -- never by raw QRS-array index. No filtering/winsorization of RR intervals was applied (same no-filtering convention as a04's primary result)."
+    }
+  },
+  "transition_selection": {
+    "rule_applied": "DISC-TRI-RG-001 a14 task instructions: among all N->A transition candidates (an N run immediately followed by an A run) in the full minute-by-minute label sequence, choose the one with the largest N block immediately followed by the largest A block available. Since a14 (unlike a04) has MULTIPLE N<->A transitions and no single candidate simultaneously maximizes both the N-run length and the A-run length in isolation, the tie-break used here is the product of (N-run length x immediately-following A-run length) -- a joint measure of 'large N followed by large A' that is decisive in this record (winner's product is 3x the runner-up's).",
+    "all_candidates_considered": [
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 0,
+          "minute_end": 14,
+          "n_minutes": 15
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 15,
+          "minute_end": 104,
+          "n_minutes": 90
+        },
+        "n_len": 15,
+        "a_len": 90,
+        "product": 1350
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 105,
+          "minute_end": 106,
+          "n_minutes": 2
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 107,
+          "minute_end": 329,
+          "n_minutes": 223
+        },
+        "n_len": 2,
+        "a_len": 223,
+        "product": 446
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 330,
+          "minute_end": 366,
+          "n_minutes": 37
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 367,
+          "minute_end": 370,
+          "n_minutes": 4
+        },
+        "n_len": 37,
+        "a_len": 4,
+        "product": 148
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 371,
+          "minute_end": 373,
+          "n_minutes": 3
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 374,
+          "minute_end": 378,
+          "n_minutes": 5
+        },
+        "n_len": 3,
+        "a_len": 5,
+        "product": 15
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 379,
+          "minute_end": 380,
+          "n_minutes": 2
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 381,
+          "minute_end": 394,
+          "n_minutes": 14
+        },
+        "n_len": 2,
+        "a_len": 14,
+        "product": 28
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 395,
+          "minute_end": 412,
+          "n_minutes": 18
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 413,
+          "minute_end": 419,
+          "n_minutes": 7
+        },
+        "n_len": 18,
+        "a_len": 7,
+        "product": 126
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 420,
+          "minute_end": 428,
+          "n_minutes": 9
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 429,
+          "minute_end": 448,
+          "n_minutes": 20
+        },
+        "n_len": 9,
+        "a_len": 20,
+        "product": 180
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 449,
+          "minute_end": 451,
+          "n_minutes": 3
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 452,
+          "minute_end": 471,
+          "n_minutes": 20
+        },
+        "n_len": 3,
+        "a_len": 20,
+        "product": 60
+      }
+    ],
+    "chosen": {
+      "n_run": {
+        "symbol": "N",
+        "minute_start": 0,
+        "minute_end": 14,
+        "n_minutes": 15
+      },
+      "a_run": {
+        "symbol": "A",
+        "minute_start": 15,
+        "minute_end": 104,
+        "n_minutes": 90
+      },
+      "product": 1350,
+      "next_n_minute": 105
+    },
+    "discarded_candidates_and_why": [
+      {
+        "candidate": "N[105,106] len=2 -> A[107,329] len=223",
+        "product": 446,
+        "why_discarded": "Has the single LARGEST A run in the whole record (223 min, larger than the chosen candidate's 90 min), but the immediately-preceding N run is only 2 minutes (~120-200 RR intervals). A 2-minute PRE segment is far too fragile as the primary CSD/DFA/wavelet PRE segment: the robustness variant (50% of PRE) would leave roughly 1 minute (~60 RR intervals), which is marginal-to-unusable for a rolling-window (window_frac=0.5) CSD analysis or a 20-point log-spaced DFA scale grid. This candidate has the largest single component (A) but the weakest joint quality."
+      },
+      {
+        "candidate": "N[330,366] len=37 -> A[367,370] len=4",
+        "product": 148,
+        "why_discarded": "Has the single LARGEST N run in the whole record (37 min, larger than the chosen candidate's 15 min), but the immediately-following A run is only 4 minutes. Moreover, the minutes immediately after this A run show RAPID N/A alternation (N=3, A=5, N=2, A=14, N=18, A=7, N=9, A=20, N=3, A=20 -- see full_run_length_encoding above), unlike the chosen candidate's structure (a clean single 90-minute contiguous A block with the next N run only starting after minute 104). This section of the record is not a clean single sustained apnea episode analogous to a04's transition, and the tiny 4-minute POST would give the weakest joint quality among the top candidates."
+      },
+      {
+        "candidate": "N[420,428] len=9 -> A[429,448] len=20",
+        "product": 180,
+        "why_discarded": "Third-best by the product criterion, but both blocks (9 min N, 20 min A) are substantially smaller than the chosen candidate's (15 min N, 90 min A) and this section of the record also shows rapid N/A alternation on both sides (part of the same fragmented late-record region as the two candidates above)."
+      },
+      {
+        "candidate": "remaining 4 candidates (N[395,412]->A[413,419] len 18/7; N[449,451]->A[452,471] len 3/20; N[379,380]->A[381,394] len 2/14; N[371,373]->A[374,378] len 3/5)",
+        "why_discarded": "All have product <= 126, an order of magnitude below the chosen candidate (1350); none is competitive on either the N-run or the A-run dimension."
+      }
+    ]
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "pre_primary": {
+      "definition": "entire contiguous block of minutes labeled N immediately preceding the chosen transition (dfa_multiscale_entropy/METHODOLOGY_NOTE.md gap b)",
+      "minute_range_inclusive": [
+        0,
+        14
+      ],
+      "sample_window": [
+        0,
+        90000
+      ],
+      "n_beats": 871,
+      "n_rr_intervals": 870,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.71,
+      "rr_seconds_max": 1.32
+    },
+    "post_primary": {
+      "definition": "entire contiguous block of minutes labeled A immediately following the transition, up to (not including) the next N label (dfa_multiscale_entropy/METHODOLOGY_NOTE.md gap b)",
+      "minute_range_inclusive": [
+        15,
+        104
+      ],
+      "sample_window": [
+        90000,
+        630000
+      ],
+      "n_beats": 4588,
+      "n_rr_intervals": 4587,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.53,
+      "rr_seconds_max": 1.86
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval count) of pre_primary (closest to the transition)",
+      "n_rr_intervals": 435,
+      "n_rr_intervals_primary_for_reference": 870,
+      "rr_seconds_min": 0.72,
+      "rr_seconds_max": 1.31
+    },
+    "post_robustness": {
+      "definition": "50% (floor division, by RR-interval count) of post_primary closest to the transition (i.e. the FIRST half of post_primary in chronological order)",
+      "n_rr_intervals": 2293,
+      "n_rr_intervals_primary_for_reference": 4587,
+      "rr_seconds_min": 0.53,
+      "rr_seconds_max": 1.53
+    }
+  },
+  "pipeline_results": {
+    "primary": {
+      "real_pre": {
+        "n_samples": 870,
+        "n_min": 4,
+        "n_max": 217,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          14,
+          17,
+          21,
+          27,
+          33,
+          40,
+          50,
+          61,
+          76,
+          94,
+          116,
+          143,
+          176,
+          217
+        ],
+        "F_n": [
+          0.03230221632834971,
+          0.04559958156694489,
+          0.059176838321764555,
+          0.08653034946113393,
+          0.0900486979590223,
+          0.10472157077560384,
+          0.13836915183878373,
+          0.16653546722164073,
+          0.2120141096816299,
+          0.28469369891639906,
+          0.3269742195656809,
+          0.4070378875061284,
+          0.5000365162006396,
+          0.6268566623147056,
+          0.6493302925242043,
+          0.7619789002234971,
+          1.0403996302929919,
+          1.20200301485101,
+          1.4506028380927993,
+          2.212051409742059
+        ],
+        "alpha": {
+          "alpha": 0.9819459516952765,
+          "intercept": -4.596527786293664,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            9,
+            11,
+            14,
+            17,
+            21,
+            27,
+            33,
+            40,
+            50,
+            61,
+            76,
+            94,
+            116,
+            143,
+            176,
+            217
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.129902182988927,
+          "intercept": -4.9099316813017015,
+          "n_points": 7,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            9,
+            11,
+            14
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.9326541707878775,
+          "intercept": -4.385319375033878,
+          "n_points": 13,
+          "scales": [
+            17,
+            21,
+            27,
+            33,
+            40,
+            50,
+            61,
+            76,
+            94,
+            116,
+            143,
+            176,
+            217
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 1.859154929577465,
+          "basis": "raw_positive",
+          "max": 1.32,
+          "min": 0.71,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 4587,
+        "n_min": 4,
+        "n_max": 1146,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          10,
+          13,
+          18,
+          24,
+          32,
+          43,
+          58,
+          79,
+          106,
+          143,
+          192,
+          259,
+          348,
+          469,
+          632,
+          851,
+          1146
+        ],
+        "F_n": [
+          0.04015898813587976,
+          0.05115735768553065,
+          0.07469825575394047,
+          0.11573908956462652,
+          0.16620870916271782,
+          0.23324224737820357,
+          0.32219822002939513,
+          0.48359839692880585,
+          0.6080724427767394,
+          0.7809469184693585,
+          1.0288938225879696,
+          1.1760155931516234,
+          1.4098313470749688,
+          1.7678290200539462,
+          2.0262724679632647,
+          2.159710880958472,
+          2.010303459704983,
+          2.2901084965445406,
+          3.1760266319341586,
+          3.887942063490246
+        ],
+        "alpha": {
+          "alpha": 0.7871107103650016,
+          "intercept": -3.8230147390246474,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13,
+            18,
+            24,
+            32,
+            43,
+            58,
+            79,
+            106,
+            143,
+            192,
+            259,
+            348,
+            469,
+            632,
+            851,
+            1146
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.1994739134799473,
+          "intercept": -4.899767221157984,
+          "n_points": 5,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.6095572741324357,
+          "intercept": -2.853000420786285,
+          "n_points": 15,
+          "scales": [
+            18,
+            24,
+            32,
+            43,
+            58,
+            79,
+            106,
+            143,
+            192,
+            259,
+            348,
+            469,
+            632,
+            851,
+            1146
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 3.509433962264151,
+          "basis": "raw_positive",
+          "max": 1.86,
+          "min": 0.53,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.19483524133027497,
+      "delta_alpha1": 0.06957173049102017,
+      "delta_alpha2": -0.32309689665544183,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 1.8591549295774643,
+        "min": 1.859154929577465,
+        "max": 1.859154929577465
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 3.509433962264152,
+        "min": 3.509433962264151,
+        "max": 3.509433962264151
+      },
+      "p_alpha": 0.25,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.18229552703511168,
+      "surrogate_alpha_std": 0.019138893634747942,
+      "p_alpha1": 0.125,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": 0.018040339309598447,
+      "surrogate_alpha1_std": 0.03988393972541188,
+      "p_alpha2": 0.085,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.2810949111682577,
+      "surrogate_alpha2_std": 0.03514978337192781,
+      "bootstrap_block_length_pre": 217,
+      "bootstrap_block_length_post": 1146,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.4062299264463892,
+        0.02268316702817368
+      ],
+      "p_bootstrap_alpha": 0.078,
+      "delta_alpha_boot_mean": -0.20227906317420702,
+      "delta_alpha_boot_std": 0.10941089920832224,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        -0.16673545803034437,
+        0.188020903124522
+      ],
+      "p_bootstrap_alpha1": 0.884,
+      "delta_alpha1_boot_mean": 0.015624796454664377,
+      "delta_alpha1_boot_std": 0.093578166216548,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.5614054369940752,
+        -0.020035758360155396
+      ],
+      "p_bootstrap_alpha2": 0.04,
+      "delta_alpha2_boot_mean": -0.3155750406831826,
+      "delta_alpha2_boot_std": 0.13749650273432049,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    },
+    "robustness": {
+      "real_pre": {
+        "n_samples": 435,
+        "n_min": 4,
+        "n_max": 108,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          11,
+          13,
+          16,
+          19,
+          23,
+          27,
+          32,
+          38,
+          45,
+          54,
+          64,
+          76,
+          91,
+          108
+        ],
+        "F_n": [
+          0.032039833425377306,
+          0.040667137739875694,
+          0.04793265778714636,
+          0.06171911783438024,
+          0.07320423265174297,
+          0.09267754611887351,
+          0.09929790616249665,
+          0.12894378287410277,
+          0.1484083022252797,
+          0.19326983206448314,
+          0.28000764367753217,
+          0.3042184106325961,
+          0.3503799020566285,
+          0.4397174300763094,
+          0.5348860178368874,
+          0.5579703630881722,
+          0.7872710969389779,
+          0.821997209869827,
+          1.356055077688681,
+          1.1754660253815603
+        ],
+        "alpha": {
+          "alpha": 1.1381210265492137,
+          "intercept": -5.004367094452516,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            10,
+            11,
+            13,
+            16,
+            19,
+            23,
+            27,
+            32,
+            38,
+            45,
+            54,
+            64,
+            76,
+            91,
+            108
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.146180401079092,
+          "intercept": -5.036849682027548,
+          "n_points": 9,
+          "scales": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            10,
+            11,
+            13,
+            16
+          ]
+        },
+        "alpha2": {
+          "alpha": 1.094644709921582,
+          "intercept": -4.835521469814839,
+          "n_points": 12,
+          "scales": [
+            16,
+            19,
+            23,
+            27,
+            32,
+            38,
+            45,
+            54,
+            64,
+            76,
+            91,
+            108
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 1.8194444444444446,
+          "basis": "raw_positive",
+          "max": 1.31,
+          "min": 0.72,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 2293,
+        "n_min": 4,
+        "n_max": 573,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          9,
+          11,
+          15,
+          19,
+          25,
+          32,
+          42,
+          55,
+          71,
+          92,
+          119,
+          155,
+          201,
+          262,
+          340,
+          441,
+          573
+        ],
+        "F_n": [
+          0.041588338243261816,
+          0.050169102689093636,
+          0.06755432420719863,
+          0.08817290107570551,
+          0.11261994206587841,
+          0.16547323483684126,
+          0.20916384966079726,
+          0.2854947814378282,
+          0.34042119118759917,
+          0.40958419077255964,
+          0.4393549472102229,
+          0.5056388685169485,
+          0.5288324535444738,
+          0.631589534282016,
+          0.7325636863305488,
+          0.7552983748421841,
+          0.9281487643478257,
+          0.8335132461903159,
+          1.0659900762313392,
+          1.1327941589893933
+        ],
+        "alpha": {
+          "alpha": 0.6601490560419832,
+          "intercept": -3.720043596875324,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            11,
+            15,
+            19,
+            25,
+            32,
+            42,
+            55,
+            71,
+            92,
+            119,
+            155,
+            201,
+            262,
+            340,
+            441,
+            573
+          ]
+        },
+        "alpha1": {
+          "alpha": 1.038614397850625,
+          "intercept": -4.665981840811713,
+          "n_points": 6,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            11,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.45581674832985614,
+          "intercept": -2.6951979998781566,
+          "n_points": 14,
+          "scales": [
+            19,
+            25,
+            32,
+            42,
+            55,
+            71,
+            92,
+            119,
+            155,
+            201,
+            262,
+            340,
+            441,
+            573
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 2.8867924528301887,
+          "basis": "raw_positive",
+          "max": 1.53,
+          "min": 0.53,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.4779719705072305,
+      "delta_alpha1": -0.10756600322846688,
+      "delta_alpha2": -0.6388279615917258,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 1.819444444444444,
+        "min": 1.8194444444444446,
+        "max": 1.8194444444444446
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 2.8867924528301887,
+        "min": 2.8867924528301887,
+        "max": 2.8867924528301887
+      },
+      "p_alpha": 0.065,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.444848737656548,
+      "surrogate_alpha_std": 0.02638063924691734,
+      "p_alpha1": 0.73,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": -0.1363952107027648,
+      "surrogate_alpha1_std": 0.05170114955915778,
+      "p_alpha2": 0.27,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.5972451555128053,
+      "surrogate_alpha2_std": 0.05797915759373122,
+      "bootstrap_block_length_pre": 108,
+      "bootstrap_block_length_post": 573,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.6030668117006158,
+        -0.3543265097953327
+      ],
+      "p_bootstrap_alpha": 0.0,
+      "delta_alpha_boot_mean": -0.4826973392703802,
+      "delta_alpha_boot_std": 0.06574161169380736,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        -0.32596362303320636,
+        -0.01828071197152375
+      ],
+      "p_bootstrap_alpha1": 0.032,
+      "delta_alpha1_boot_mean": -0.17321470103015985,
+      "delta_alpha1_boot_std": 0.08133709231878325,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.839995066424272,
+        -0.43518054449289345
+      ],
+      "p_bootstrap_alpha2": 0.0,
+      "delta_alpha2_boot_mean": -0.6561806584746159,
+      "delta_alpha2_boot_std": 0.10562366913260203,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 7.068774223327637,
+    "robustness_seconds": 6.485342502593994
+  },
+  "notes": [
+    "dfa_common.py was NOT modified to produce this result (verified via git diff after the run).",
+    "Per dfa_multiscale_entropy/METHODOLOGY_NOTE.md 'Adendo ao Gap (c)': the moving-block bootstrap (Kunsch 1989, N_BOOTSTRAP=1000, seed=12345) is the PRIMARY significance test for Delta alpha/alpha1/alpha2 (p_bootstrap_*, delta_*_boot_ci95). The two-tailed IAAFT surrogate test (N_SURROGATES=200, N_IAAFT_ITER=50, seed=12345; p_alpha/p_alpha1/p_alpha2) is a complementary/secondary check of nonlinear structure beyond the linear spectrum, known from the a04 synthetic validation to have low power to detect genuine alpha changes.",
+    "This is a first-look result on a14 (not yet subjected to the adversarial/null-discovery destruction pass that a04 went through in null_discovery_apnea_a04.md); no cross-domain or artifact-robustness claim is made here beyond the raw numbers."
+  ]
+}

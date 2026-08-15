@@ -1,0 +1,598 @@
+{
+  "domain": "physiology_apnea_ecg_a14",
+  "test_line": "DISC-TRI-RG-001",
+  "candidate": "wavelet-multiresolution-scaling",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/wavelet_multiresolution/analysis/wtmm_common.py",
+  "pipeline_function": "transition_test(pre, post) -- UNMODIFIED",
+  "generated_at_utc": "2026-08-15T01:00:00Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a14 (backup record)",
+    "record": "a14",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220). Apnea annotations scored by Thomas Penzel from independent respiration/SpO2 signals, not from the ECG itself.",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a14.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.hea",
+        "downloaded_bytes": 56,
+        "sha256": "e1acb7294a51d3bb386de099d91bc4d5c80b42d90c9e307856e0727f175d2555"
+      },
+      "a14.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.dat",
+        "downloaded_bytes": 6270000,
+        "sha256": "82bd01fc69bd77d4ce53f94e7caa03a9eda15a049442ca87856b01c404a29899"
+      },
+      "a14.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.apn",
+        "downloaded_bytes": 4068,
+        "sha256": "341ec102b563829650916f11e84a8150f113f1fabccc0de1459887283cc1b93a"
+      },
+      "a14.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a14.qrs",
+        "downloaded_bytes": 58038,
+        "sha256": "35708d9026c8d46a6c65bed316388f489954845e6cbe56e3197acb30a4d3de23"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 3135000,
+      "sig_len_minutes": 522.5
+    },
+    "apn_annotation": {
+      "n_minute_labels": 509,
+      "alignment_rule": "label i (0-indexed) is at sample i*6000 at fs=100Hz (i.e. minute i, 60s * 100Hz = 6000 samples/minute) -- reverified programmatically against the actual ann.sample array (np.array_equal check), not assumed.",
+      "alignment_verified": true,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "full_run_length_encoding": [
+        {
+          "symbol": "N",
+          "minute_start": 0,
+          "minute_end": 14,
+          "n_minutes": 15
+        },
+        {
+          "symbol": "A",
+          "minute_start": 15,
+          "minute_end": 104,
+          "n_minutes": 90
+        },
+        {
+          "symbol": "N",
+          "minute_start": 105,
+          "minute_end": 106,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "minute_start": 107,
+          "minute_end": 329,
+          "n_minutes": 223
+        },
+        {
+          "symbol": "N",
+          "minute_start": 330,
+          "minute_end": 366,
+          "n_minutes": 37
+        },
+        {
+          "symbol": "A",
+          "minute_start": 367,
+          "minute_end": 370,
+          "n_minutes": 4
+        },
+        {
+          "symbol": "N",
+          "minute_start": 371,
+          "minute_end": 373,
+          "n_minutes": 3
+        },
+        {
+          "symbol": "A",
+          "minute_start": 374,
+          "minute_end": 378,
+          "n_minutes": 5
+        },
+        {
+          "symbol": "N",
+          "minute_start": 379,
+          "minute_end": 380,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "minute_start": 381,
+          "minute_end": 394,
+          "n_minutes": 14
+        },
+        {
+          "symbol": "N",
+          "minute_start": 395,
+          "minute_end": 412,
+          "n_minutes": 18
+        },
+        {
+          "symbol": "A",
+          "minute_start": 413,
+          "minute_end": 419,
+          "n_minutes": 7
+        },
+        {
+          "symbol": "N",
+          "minute_start": 420,
+          "minute_end": 428,
+          "n_minutes": 9
+        },
+        {
+          "symbol": "A",
+          "minute_start": 429,
+          "minute_end": 448,
+          "n_minutes": 20
+        },
+        {
+          "symbol": "N",
+          "minute_start": 449,
+          "minute_end": 451,
+          "n_minutes": 3
+        },
+        {
+          "symbol": "A",
+          "minute_start": 452,
+          "minute_end": 471,
+          "n_minutes": 20
+        },
+        {
+          "symbol": "N",
+          "minute_start": 472,
+          "minute_end": 508,
+          "n_minutes": 37
+        }
+      ]
+    },
+    "qrs_annotation": {
+      "n_beats_total": 29018,
+      "first_beat_sample": 17,
+      "last_beat_sample": 3134160,
+      "strictly_increasing_verified": true
+    },
+    "rr_interval_definition": {
+      "unit": "seconds",
+      "formula": "RR_i = (qrs_sample[i+1] - qrs_sample[i]) / fs, fs=100 Hz",
+      "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock (the same clock as the apn minute labels) -- never by raw QRS-array index. No filtering/winsorization of RR intervals was applied (same no-filtering convention as a04's primary result)."
+    }
+  },
+  "transition_selection": {
+    "rule_applied": "DISC-TRI-RG-001 a14 task instructions: among all N->A transition candidates (an N run immediately followed by an A run) in the full minute-by-minute label sequence, choose the one with the largest N block immediately followed by the largest A block available. Since a14 (unlike a04) has MULTIPLE N<->A transitions and no single candidate simultaneously maximizes both the N-run length and the A-run length in isolation, the tie-break used here is the product of (N-run length x immediately-following A-run length) -- a joint measure of 'large N followed by large A' that is decisive in this record (winner's product is 3x the runner-up's).",
+    "all_candidates_considered": [
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 0,
+          "minute_end": 14,
+          "n_minutes": 15
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 15,
+          "minute_end": 104,
+          "n_minutes": 90
+        },
+        "n_len": 15,
+        "a_len": 90,
+        "product": 1350
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 105,
+          "minute_end": 106,
+          "n_minutes": 2
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 107,
+          "minute_end": 329,
+          "n_minutes": 223
+        },
+        "n_len": 2,
+        "a_len": 223,
+        "product": 446
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 330,
+          "minute_end": 366,
+          "n_minutes": 37
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 367,
+          "minute_end": 370,
+          "n_minutes": 4
+        },
+        "n_len": 37,
+        "a_len": 4,
+        "product": 148
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 371,
+          "minute_end": 373,
+          "n_minutes": 3
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 374,
+          "minute_end": 378,
+          "n_minutes": 5
+        },
+        "n_len": 3,
+        "a_len": 5,
+        "product": 15
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 379,
+          "minute_end": 380,
+          "n_minutes": 2
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 381,
+          "minute_end": 394,
+          "n_minutes": 14
+        },
+        "n_len": 2,
+        "a_len": 14,
+        "product": 28
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 395,
+          "minute_end": 412,
+          "n_minutes": 18
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 413,
+          "minute_end": 419,
+          "n_minutes": 7
+        },
+        "n_len": 18,
+        "a_len": 7,
+        "product": 126
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 420,
+          "minute_end": 428,
+          "n_minutes": 9
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 429,
+          "minute_end": 448,
+          "n_minutes": 20
+        },
+        "n_len": 9,
+        "a_len": 20,
+        "product": 180
+      },
+      {
+        "n_run": {
+          "symbol": "N",
+          "minute_start": 449,
+          "minute_end": 451,
+          "n_minutes": 3
+        },
+        "a_run": {
+          "symbol": "A",
+          "minute_start": 452,
+          "minute_end": 471,
+          "n_minutes": 20
+        },
+        "n_len": 3,
+        "a_len": 20,
+        "product": 60
+      }
+    ],
+    "chosen": {
+      "n_run": {
+        "symbol": "N",
+        "minute_start": 0,
+        "minute_end": 14,
+        "n_minutes": 15
+      },
+      "a_run": {
+        "symbol": "A",
+        "minute_start": 15,
+        "minute_end": 104,
+        "n_minutes": 90
+      },
+      "product": 1350,
+      "next_n_minute": 105
+    },
+    "discarded_candidates_and_why": [
+      {
+        "candidate": "N[105,106] len=2 -> A[107,329] len=223",
+        "product": 446,
+        "why_discarded": "Has the single LARGEST A run in the whole record (223 min, larger than the chosen candidate's 90 min), but the immediately-preceding N run is only 2 minutes (~120-200 RR intervals). A 2-minute PRE segment is far too fragile as the primary CSD/DFA/wavelet PRE segment: the robustness variant (50% of PRE) would leave roughly 1 minute (~60 RR intervals), which is marginal-to-unusable for a rolling-window (window_frac=0.5) CSD analysis or a 20-point log-spaced DFA scale grid. This candidate has the largest single component (A) but the weakest joint quality."
+      },
+      {
+        "candidate": "N[330,366] len=37 -> A[367,370] len=4",
+        "product": 148,
+        "why_discarded": "Has the single LARGEST N run in the whole record (37 min, larger than the chosen candidate's 15 min), but the immediately-following A run is only 4 minutes. Moreover, the minutes immediately after this A run show RAPID N/A alternation (N=3, A=5, N=2, A=14, N=18, A=7, N=9, A=20, N=3, A=20 -- see full_run_length_encoding above), unlike the chosen candidate's structure (a clean single 90-minute contiguous A block with the next N run only starting after minute 104). This section of the record is not a clean single sustained apnea episode analogous to a04's transition, and the tiny 4-minute POST would give the weakest joint quality among the top candidates."
+      },
+      {
+        "candidate": "N[420,428] len=9 -> A[429,448] len=20",
+        "product": 180,
+        "why_discarded": "Third-best by the product criterion, but both blocks (9 min N, 20 min A) are substantially smaller than the chosen candidate's (15 min N, 90 min A) and this section of the record also shows rapid N/A alternation on both sides (part of the same fragmented late-record region as the two candidates above)."
+      },
+      {
+        "candidate": "remaining 4 candidates (N[395,412]->A[413,419] len 18/7; N[449,451]->A[452,471] len 3/20; N[379,380]->A[381,394] len 2/14; N[371,373]->A[374,378] len 3/5)",
+        "why_discarded": "All have product <= 126, an order of magnitude below the chosen candidate (1350); none is competitive on either the N-run or the A-run dimension."
+      }
+    ]
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "segment_rule_deviation_note": "wavelet_multiresolution/METHODOLOGY_NOTE.md's own robustness variant is 'truncate PRE and POST both to min(len(PRE), len(POST)), taking the samples nearest the transition on each side' -- different from the 50%-of-own-segment split used by critical_slowing_down and dfa_multiscale_entropy for a04. Per the explicit task instructions for this a14 registry ('Defina os segmentos PRE/POST usando a MESMA regra ja usada para a04 em cada candidato'), the SAME PRE/POST primary+robustness definition (matching what a04 used, i.e. the 50%-by-RR-count split) was applied uniformly to all 3 candidates for this record, to keep the comparison of the three pipelines on this one new domain point consistent. This is a deliberate, explicitly-documented substitution for THIS record's segment definition only -- wtmm_common.py itself (the actual WCM/IAAFT computation) was not modified, and the 2-hour PRE/POST cap from the wavelet methodology note is moot here since both segments (15 min PRE, 90 min POST) are well under 2 hours.",
+    "pre_primary": {
+      "definition": "entire contiguous block of minutes labeled N immediately preceding the chosen transition (well under the 2h cap, so no truncation applies)",
+      "minute_range_inclusive": [
+        0,
+        14
+      ],
+      "sample_window": [
+        0,
+        90000
+      ],
+      "n_rr_intervals": 870,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.71,
+      "rr_seconds_max": 1.32
+    },
+    "post_primary": {
+      "definition": "entire contiguous block of minutes labeled A immediately following the transition, up to (not including) the next N label (well under the 2h cap, so no truncation applies)",
+      "minute_range_inclusive": [
+        15,
+        104
+      ],
+      "sample_window": [
+        90000,
+        630000
+      ],
+      "n_rr_intervals": 4587,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.53,
+      "rr_seconds_max": 1.86
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval count) of pre_primary (closest to the transition) -- see segment_rule_deviation_note",
+      "n_rr_intervals": 435,
+      "n_rr_intervals_primary_for_reference": 870,
+      "rr_seconds_min": 0.72,
+      "rr_seconds_max": 1.31
+    },
+    "post_robustness": {
+      "definition": "50% (floor division, by RR-interval count) of post_primary closest to the transition (i.e. the FIRST half of post_primary in chronological order) -- see segment_rule_deviation_note",
+      "n_rr_intervals": 2293,
+      "n_rr_intervals_primary_for_reference": 4587,
+      "rr_seconds_min": 0.53,
+      "rr_seconds_max": 1.53
+    }
+  },
+  "pipeline_results": {
+    "primary": {
+      "real_pre": {
+        "n_levels_used": 5,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "mean_logabs_per_j": [
+          -5.75451361805325,
+          -4.335963025454822,
+          -3.811358916382409,
+          -2.9897930823963113,
+          -2.633489414995854
+        ],
+        "var_logabs_per_j": [
+          3.1719082530428713,
+          2.480493456160448,
+          2.7135164110963994,
+          1.4161833654036695,
+          2.208963645904222
+        ],
+        "coeff_counts_per_j": [
+          28,
+          55,
+          109,
+          218,
+          435
+        ],
+        "C1_slope": 0.7588218349173304,
+        "C1_intercept": -6.181489116208521,
+        "C2_slope": -0.2990199305034077,
+        "C2_intercept": 3.295272817831745,
+        "n_samples": 870,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 8,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0
+        ],
+        "mean_logabs_per_j": [
+          -4.979878436331363,
+          -4.867026873457137,
+          -3.771398302459125,
+          -2.959123727494417,
+          -2.297306676963554,
+          -2.0524235318983193,
+          -2.8313267947143603,
+          -2.6950043763211404
+        ],
+        "var_logabs_per_j": [
+          3.124249128146275,
+          3.606425873221336,
+          2.515626321894354,
+          3.0891180402949123,
+          3.120352967970823,
+          1.8991733282940142,
+          5.309733878226915,
+          2.4879498306601446
+        ],
+        "coeff_counts_per_j": [
+          18,
+          36,
+          72,
+          144,
+          287,
+          574,
+          1147,
+          2294
+        ],
+        "C1_slope": 0.3808495259047466,
+        "C1_intercept": -5.020508956526288,
+        "C2_slope": 0.026718105827379525,
+        "C2_intercept": 3.02384719486539,
+        "n_samples": 4587,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": 0.32573803633078724,
+      "real_dC1": -0.3779723090125838,
+      "p_dC2_twotail": 0.23,
+      "p_dC1_twotail": 0.01,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": -0.004116825582216435,
+      "surrogate_dC2_std": 0.2682203943014093,
+      "surrogate_dC1_mean": -0.22148483565593335,
+      "surrogate_dC1_std": 0.0627715764239586
+    },
+    "robustness": {
+      "real_pre": {
+        "n_levels_used": 4,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        "mean_logabs_per_j": [
+          -5.718782846015704,
+          -4.5752042839988345,
+          -4.123001608861461,
+          -3.4706868610211967
+        ],
+        "var_logabs_per_j": [
+          2.5145397677989574,
+          3.3469715991651507,
+          2.63608691991912,
+          2.4174926104421766
+        ],
+        "coeff_counts_per_j": [
+          28,
+          55,
+          109,
+          218
+        ],
+        "C1_slope": 0.7196490630120892,
+        "C1_intercept": -6.271041557504521,
+        "C2_slope": -0.10020261513163733,
+        "C2_intercept": 2.979279262160445,
+        "n_samples": 435,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 7,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "mean_logabs_per_j": [
+          -4.577826955324705,
+          -4.935275410251991,
+          -3.7811785512871867,
+          -2.99962079362941,
+          -2.827924762703473,
+          -2.834763269352927,
+          -3.605781333985552
+        ],
+        "var_logabs_per_j": [
+          2.7653669008389965,
+          3.7315807485482173,
+          2.2184721691925398,
+          3.0875234628854296,
+          3.0496693906951693,
+          0.7944700808910684,
+          2.957060403553666
+        ],
+        "coeff_counts_per_j": [
+          18,
+          36,
+          72,
+          144,
+          287,
+          574,
+          1147
+        ],
+        "C1_slope": 0.2882291047999743,
+        "C1_intercept": -4.80468371584779,
+        "C2_slope": -0.15956941448813042,
+        "C2_intercept": 3.296012394610392,
+        "n_samples": 2293,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.05936679935649308,
+      "real_dC1": -0.4314199582121149,
+      "p_dC2_twotail": 0.92,
+      "p_dC1_twotail": 0.63,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": 0.014775055165885159,
+      "surrogate_dC2_std": 0.48720561304537546,
+      "surrogate_dC1_mean": -0.449982670206419,
+      "surrogate_dC1_std": 0.09104669797358637
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 4.530228137969971,
+    "robustness_seconds": 4.468919277191162
+  },
+  "notes": [
+    "wtmm_common.py was NOT modified to produce this result (verified via git diff after the run).",
+    "C2_slope=0 for an exactly monofractal process, negative for a genuine multifractal cascade. \u0394C2 = C2(POST)-C2(PRE) is the primary indicator; \u0394C1 = C1(POST)-C1(PRE) is the companion (H proxy). Two-tailed IAAFT surrogate test (N_SURROGATES=200, N_IAAFT_ITER=50, seed=12345), no directional prediction declared a priori (same as the seismology/EEG domains already tested on this candidate)."
+  ]
+}

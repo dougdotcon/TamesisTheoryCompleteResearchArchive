@@ -1,0 +1,832 @@
+{
+  "test_line": "DISC-TRI-RG-001",
+  "generated_at_utc": "2026-08-15T00:58:33Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a18",
+    "record": "a18",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220).",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a18.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.hea",
+        "downloaded_bytes": 55,
+        "sha256": "1b7e8ab0b71200f346cd8ca63ae599ae3da07e3bb584519b11e7e6bbc69374c0"
+      },
+      "a18.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.dat",
+        "downloaded_bytes": 5914000,
+        "sha256": "5b6b795976db78da34fb096aef4d0ede2ede7d822b85961ae65d7c87e6131b0c"
+      },
+      "a18.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.apn",
+        "downloaded_bytes": 3908,
+        "sha256": "1365b34bdf4a8dd1dd6077a3b757a088c24f3dad36e93ab2c7cf71d6d67febd1"
+      },
+      "a18.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a18.qrs",
+        "downloaded_bytes": 60510,
+        "sha256": "b7b21c4a0b8b3ab21116e0f348f88963985284b51664f6dca9cbc162470dd2e9"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 2957000,
+      "sig_len_minutes": 492.8333333333333
+    },
+    "apn_annotation": {
+      "n_minute_labels": 489,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "alignment_rule": "label i (0-indexed) at sample i*6000 at fs=100Hz -- verified programmatically (np.array_equal) against the actual ann.sample array, not assumed.",
+      "alignment_verified": true
+    }
+  },
+  "transition": {
+    "documented_event": "N (normal) -> A (apnea/hypopnea) label transition; largest contiguous N run immediately followed by a contiguous A run, among ALL runs in the full label sequence",
+    "full_run_sequence": [
+      {
+        "symbol": "N",
+        "minute_start": 0,
+        "minute_end": 32,
+        "n_minutes": 33
+      },
+      {
+        "symbol": "A",
+        "minute_start": 33,
+        "minute_end": 169,
+        "n_minutes": 137
+      },
+      {
+        "symbol": "N",
+        "minute_start": 170,
+        "minute_end": 179,
+        "n_minutes": 10
+      },
+      {
+        "symbol": "A",
+        "minute_start": 180,
+        "minute_end": 186,
+        "n_minutes": 7
+      },
+      {
+        "symbol": "N",
+        "minute_start": 187,
+        "minute_end": 189,
+        "n_minutes": 3
+      },
+      {
+        "symbol": "A",
+        "minute_start": 190,
+        "minute_end": 194,
+        "n_minutes": 5
+      },
+      {
+        "symbol": "N",
+        "minute_start": 195,
+        "minute_end": 195,
+        "n_minutes": 1
+      },
+      {
+        "symbol": "A",
+        "minute_start": 196,
+        "minute_end": 225,
+        "n_minutes": 30
+      },
+      {
+        "symbol": "N",
+        "minute_start": 226,
+        "minute_end": 227,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "A",
+        "minute_start": 228,
+        "minute_end": 229,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "N",
+        "minute_start": 230,
+        "minute_end": 231,
+        "n_minutes": 2
+      },
+      {
+        "symbol": "A",
+        "minute_start": 232,
+        "minute_end": 488,
+        "n_minutes": 257
+      }
+    ],
+    "chosen_pre_run": {
+      "symbol": "N",
+      "minute_start": 0,
+      "minute_end": 32,
+      "n_minutes": 33
+    },
+    "chosen_post_run": {
+      "symbol": "A",
+      "minute_start": 33,
+      "minute_end": 169,
+      "n_minutes": 137
+    },
+    "run_after_post": {
+      "symbol": "N",
+      "minute_start": 170,
+      "minute_end": 179,
+      "n_minutes": 10
+    }
+  },
+  "sample_alignment": {
+    "rule": "label i (0-indexed) at sample i*6000 (60s * fs=100Hz)",
+    "verified_programmatically": true,
+    "n_minute_labels": 489
+  },
+  "qrs": {
+    "n_beats_total": 30254,
+    "first_beat_sample": 62,
+    "last_beat_sample": 2956281,
+    "strictly_increasing_verified": true
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock -- never by raw QRS-array index.",
+    "segment_rule_note": "Segment definition (full contiguous N/A block for primary; 50%-by-count nearest-to-transition for robustness) applied UNIFORMLY to all 3 candidates (CSD, WCM/wavelet, DFA) per explicit task instructions -- this is the SAME rule already locked and used for record a04 in dfa_multiscale_entropy/METHODOLOGY_NOTE.md gap (b) and RESULTS_SUMMARY.md (count-based convention resolved there). Note this differs from wavelet_multiresolution/METHODOLOGY_NOTE.md's own stated PRE/POST rule for THAT candidate (2h time cap, min-length-truncation robustness) -- that rule was never actually executed on any apnea record (no result_apnea_*.json exists for wavelet_multiresolution before this run), so there was no established a04 precedent for wavelet to reuse; the explicit segment rule given in the task instructions for THIS run is used instead, documented here transparently.",
+    "pre_primary": {
+      "minute_range_inclusive": [
+        0,
+        32
+      ],
+      "sample_window": [
+        0,
+        198000
+      ],
+      "n_beats": 2183,
+      "n_rr_intervals": 2182,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.41
+    },
+    "post_primary": {
+      "minute_range_inclusive": [
+        33,
+        169
+      ],
+      "sample_window": [
+        198000,
+        1020000
+      ],
+      "n_beats": 8468,
+      "n_rr_intervals": 8467,
+      "contiguous_beats_verified": true,
+      "rr_seconds_min": 0.37,
+      "rr_seconds_max": 1.95
+    },
+    "pre_robustness": {
+      "definition": "most recent 50% (floor division, by RR-interval COUNT) of pre_primary",
+      "n_rr_intervals": 1091,
+      "n_rr_intervals_primary_for_reference": 2182,
+      "rr_seconds_min": 0.22,
+      "rr_seconds_max": 1.4
+    },
+    "post_robustness": {
+      "definition": "50% (floor division, by RR-interval COUNT) of post_primary closest to the transition (first half in chronological order)",
+      "n_rr_intervals": 4233,
+      "n_rr_intervals_primary_for_reference": 8467,
+      "rr_seconds_min": 0.37,
+      "rr_seconds_max": 1.95
+    }
+  },
+  "domain": "physiology_apnea_ecg_a18",
+  "candidate": "dfa-multiscale-entropy",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/dfa_multiscale_entropy/analysis/dfa_common.py",
+  "pipeline_function": "run_dfa_pipeline(pre_segment, post_segment) -- UNMODIFIED",
+  "pipeline_results": {
+    "primary": {
+      "real_pre": {
+        "n_samples": 2182,
+        "n_min": 4,
+        "n_max": 545,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          9,
+          11,
+          15,
+          19,
+          24,
+          32,
+          41,
+          53,
+          69,
+          89,
+          115,
+          150,
+          194,
+          251,
+          325,
+          421,
+          545
+        ],
+        "F_n": [
+          0.022214446906824992,
+          0.027588556329880224,
+          0.031632787478361124,
+          0.03574967812116299,
+          0.03887056441612624,
+          0.052784833452266144,
+          0.07052062207416064,
+          0.08953490452192907,
+          0.1275827713779199,
+          0.14654169496944547,
+          0.18215603460279722,
+          0.24056724473895888,
+          0.26536731415117754,
+          0.3518900370466471,
+          0.38643043654185516,
+          0.5672915130720674,
+          0.670589914907727,
+          0.7596884708947789,
+          0.779642532294111,
+          0.9685586560394789
+        ],
+        "alpha": {
+          "alpha": 0.8162979706127046,
+          "intercept": -5.008675515647319,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            11,
+            15,
+            19,
+            24,
+            32,
+            41,
+            53,
+            69,
+            89,
+            115,
+            150,
+            194,
+            251,
+            325,
+            421,
+            545
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.5937013656887085,
+          "intercept": -4.606825511034888,
+          "n_points": 6,
+          "scales": [
+            4,
+            5,
+            7,
+            9,
+            11,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.7809060268626536,
+          "intercept": -4.822719475566562,
+          "n_points": 14,
+          "scales": [
+            19,
+            24,
+            32,
+            41,
+            53,
+            69,
+            89,
+            115,
+            150,
+            194,
+            251,
+            325,
+            421,
+            545
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 6.409090909090908,
+          "basis": "raw_positive",
+          "max": 1.41,
+          "min": 0.22,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 8467,
+        "n_min": 4,
+        "n_max": 2116,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          6,
+          8,
+          11,
+          15,
+          21,
+          29,
+          40,
+          56,
+          78,
+          109,
+          151,
+          210,
+          292,
+          406,
+          565,
+          786,
+          1094,
+          1521,
+          2116
+        ],
+        "F_n": [
+          0.014949189304760463,
+          0.017621566714338326,
+          0.025233962392835353,
+          0.03326636295662962,
+          0.04362884553059536,
+          0.0671827347943021,
+          0.08589821762776363,
+          0.1227697085820905,
+          0.15824624362360948,
+          0.18815136022232784,
+          0.2139316208824667,
+          0.24681224111907143,
+          0.3252044382807121,
+          0.36178828637910526,
+          0.4378749911248351,
+          0.5167007902116552,
+          0.7399076999310331,
+          1.2316698387261795,
+          1.5850671760786181,
+          2.7131872119540286
+        ],
+        "alpha": {
+          "alpha": 0.765195624712325,
+          "intercept": -5.186443594971196,
+          "n_points": 20,
+          "scales": [
+            4,
+            6,
+            8,
+            11,
+            15,
+            21,
+            29,
+            40,
+            56,
+            78,
+            109,
+            151,
+            210,
+            292,
+            406,
+            565,
+            786,
+            1094,
+            1521,
+            2116
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.8475068829291178,
+          "intercept": -5.447925429095864,
+          "n_points": 5,
+          "scales": [
+            4,
+            6,
+            8,
+            11,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.7135273675484711,
+          "intercept": -4.8798731208402,
+          "n_points": 15,
+          "scales": [
+            21,
+            29,
+            40,
+            56,
+            78,
+            109,
+            151,
+            210,
+            292,
+            406,
+            565,
+            786,
+            1094,
+            1521,
+            2116
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 5.27027027027027,
+          "basis": "raw_positive",
+          "max": 1.95,
+          "min": 0.37,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.05110234590037954,
+      "delta_alpha1": 0.25380551724040934,
+      "delta_alpha2": -0.06737865931418252,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 6.409090909090907,
+        "min": 6.409090909090908,
+        "max": 6.409090909090908
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 5.270270270270271,
+        "min": 5.27027027027027,
+        "max": 5.27027027027027
+      },
+      "p_alpha": 0.76,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.06622331591761274,
+      "surrogate_alpha_std": 0.02078126162840176,
+      "p_alpha1": 0.005,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": 0.15437740993208013,
+      "surrogate_alpha1_std": 0.04056963424117179,
+      "p_alpha2": 0.88,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.10884642965832708,
+      "surrogate_alpha2_std": 0.03483520300004571,
+      "bootstrap_block_length_pre": 545,
+      "bootstrap_block_length_post": 2116,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.09099573301616005,
+        0.05186701707304623
+      ],
+      "p_bootstrap_alpha": 0.65,
+      "delta_alpha_boot_mean": -0.016776415775614312,
+      "delta_alpha_boot_std": 0.03638572155602328,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        0.002166810038614456,
+        0.4431419465315355
+      ],
+      "p_bootstrap_alpha1": 0.042,
+      "delta_alpha1_boot_mean": 0.24073306551746296,
+      "delta_alpha1_boot_std": 0.11097741349844382,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.12617350068414895,
+        0.04492261385433602
+      ],
+      "p_bootstrap_alpha2": 0.424,
+      "delta_alpha2_boot_mean": -0.036277764841156086,
+      "delta_alpha2_boot_std": 0.044519812164669416,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    },
+    "robustness": {
+      "real_pre": {
+        "n_samples": 1091,
+        "n_min": 4,
+        "n_max": 272,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15,
+          19,
+          24,
+          30,
+          37,
+          46,
+          57,
+          72,
+          90,
+          112,
+          140,
+          174,
+          218,
+          272
+        ],
+        "F_n": [
+          0.025078553058926912,
+          0.026453178300571666,
+          0.02685205879397427,
+          0.03909104349301194,
+          0.040668722061658676,
+          0.04666593475394518,
+          0.053009074420324244,
+          0.06134402210193095,
+          0.0994523052381221,
+          0.11519544978223223,
+          0.12826586542138196,
+          0.18431395400841044,
+          0.20292612570308668,
+          0.24435511505399007,
+          0.3521732746779912,
+          0.3760164787831588,
+          0.3791185371401706,
+          0.459386192058241,
+          0.5888264292882776,
+          0.6192918593229805
+        ],
+        "alpha": {
+          "alpha": 0.8366400884330248,
+          "intercept": -5.03481334777583,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            15,
+            19,
+            24,
+            30,
+            37,
+            46,
+            57,
+            72,
+            90,
+            112,
+            140,
+            174,
+            218,
+            272
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.6140091827237706,
+          "intercept": -4.600059509089378,
+          "n_points": 7,
+          "scales": [
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            15
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.8328102920396349,
+          "intercept": -5.006570188258461,
+          "n_points": 13,
+          "scales": [
+            19,
+            24,
+            30,
+            37,
+            46,
+            57,
+            72,
+            90,
+            112,
+            140,
+            174,
+            218,
+            272
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 6.363636363636363,
+          "basis": "raw_positive",
+          "max": 1.4,
+          "min": 0.22,
+          "flag": "ok"
+        }
+      },
+      "real_post": {
+        "n_samples": 4233,
+        "n_min": 4,
+        "n_max": 1058,
+        "n_split": 16,
+        "scales_used": [
+          4,
+          5,
+          7,
+          10,
+          13,
+          17,
+          23,
+          31,
+          42,
+          56,
+          75,
+          101,
+          136,
+          182,
+          244,
+          327,
+          439,
+          588,
+          789,
+          1058
+        ],
+        "F_n": [
+          0.014556778866359244,
+          0.01624938624045502,
+          0.022192299151749993,
+          0.027629506710974208,
+          0.04052115789247003,
+          0.0536853711552189,
+          0.0759936120333548,
+          0.10132300495189381,
+          0.12489301691438225,
+          0.16576207670717877,
+          0.17890815040599814,
+          0.2171883803552557,
+          0.2536278747160895,
+          0.2984655641292541,
+          0.36297428454075553,
+          0.47673035115709145,
+          0.629745062609891,
+          0.5750356978803358,
+          0.9219582783324871,
+          1.2932144101369332
+        ],
+        "alpha": {
+          "alpha": 0.7747184468588858,
+          "intercept": -5.183055775451959,
+          "n_points": 20,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13,
+            17,
+            23,
+            31,
+            42,
+            56,
+            75,
+            101,
+            136,
+            182,
+            244,
+            327,
+            439,
+            588,
+            789,
+            1058
+          ]
+        },
+        "alpha1": {
+          "alpha": 0.8447848768014885,
+          "intercept": -5.447770972496562,
+          "n_points": 5,
+          "scales": [
+            4,
+            5,
+            7,
+            10,
+            13
+          ]
+        },
+        "alpha2": {
+          "alpha": 0.6948869101379236,
+          "intercept": -4.748939587646705,
+          "n_points": 15,
+          "scales": [
+            17,
+            23,
+            31,
+            42,
+            56,
+            75,
+            101,
+            136,
+            182,
+            244,
+            327,
+            439,
+            588,
+            789,
+            1058
+          ]
+        },
+        "max_min_ratio": {
+          "ratio": 5.27027027027027,
+          "basis": "raw_positive",
+          "max": 1.95,
+          "min": 0.37,
+          "flag": "ok"
+        }
+      },
+      "delta_alpha": -0.06192164157413904,
+      "delta_alpha1": 0.23077569407771792,
+      "delta_alpha2": -0.13792338190171127,
+      "config": {
+        "n_min": 4,
+        "n_max_frac": 0.25,
+        "n_scales": 20,
+        "n_split": 16,
+        "n_surrogates": 200,
+        "n_iaaft_iter": 50,
+        "n_bootstrap": 1000,
+        "seed": 12345,
+        "max_min_ratio_alert_threshold": 190.0
+      },
+      "surrogate_max_min_ratio_pre": {
+        "mean": 6.363636363636362,
+        "min": 6.363636363636363,
+        "max": 6.363636363636363
+      },
+      "surrogate_max_min_ratio_post": {
+        "mean": 5.270270270270271,
+        "min": 5.27027027027027,
+        "max": 5.27027027027027
+      },
+      "p_alpha": 0.005,
+      "surrogate_alpha_n_valid": 200,
+      "surrogate_alpha_n_undefined": 0,
+      "surrogate_alpha_mean": -0.004176050885368451,
+      "surrogate_alpha_std": 0.02271012340490467,
+      "p_alpha1": 0.11,
+      "surrogate_alpha1_n_valid": 200,
+      "surrogate_alpha1_n_undefined": 0,
+      "surrogate_alpha1_mean": 0.1622203393920375,
+      "surrogate_alpha1_std": 0.05490335690012376,
+      "p_alpha2": 0.01,
+      "surrogate_alpha2_n_valid": 200,
+      "surrogate_alpha2_n_undefined": 0,
+      "surrogate_alpha2_mean": -0.042513288126170154,
+      "surrogate_alpha2_std": 0.03703182984559813,
+      "bootstrap_block_length_pre": 272,
+      "bootstrap_block_length_post": 1058,
+      "bootstrap_n_bootstrap": 1000,
+      "bootstrap_seed": 12345,
+      "delta_alpha_boot_ci95": [
+        -0.17849016109900342,
+        0.05702199484961062
+      ],
+      "p_bootstrap_alpha": 0.552,
+      "delta_alpha_boot_mean": -0.038776236304123614,
+      "delta_alpha_boot_std": 0.06179500556832367,
+      "delta_alpha_boot_n_valid": 1000,
+      "delta_alpha_boot_n_undefined": 0,
+      "delta_alpha1_boot_ci95": [
+        -0.1455079343120088,
+        0.5037262753900211
+      ],
+      "p_bootstrap_alpha1": 0.16,
+      "delta_alpha1_boot_mean": 0.22529843548092376,
+      "delta_alpha1_boot_std": 0.17355530130315402,
+      "delta_alpha1_boot_n_valid": 1000,
+      "delta_alpha1_boot_n_undefined": 0,
+      "delta_alpha2_boot_ci95": [
+        -0.21423460281758988,
+        0.030090497511210082
+      ],
+      "p_bootstrap_alpha2": 0.148,
+      "delta_alpha2_boot_mean": -0.0906541524892017,
+      "delta_alpha2_boot_std": 0.06167542357202303,
+      "delta_alpha2_boot_n_valid": 1000,
+      "delta_alpha2_boot_n_undefined": 0
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 25.469310522079468,
+    "robustness_seconds": 7.831090211868286
+  }
+}

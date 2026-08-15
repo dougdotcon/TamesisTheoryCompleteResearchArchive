@@ -1,0 +1,385 @@
+{
+  "domain": "physiology_apnea_ecg_a01",
+  "test_line": "DISC-TRI-RG-001",
+  "candidate": "wavelet-multiresolution-scaling",
+  "pipeline_module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/wavelet_multiresolution/analysis/wtmm_common.py",
+  "pipeline_function": "transition_test(pre, post) -- UNMODIFIED",
+  "generated_at_utc": "2026-08-15T01:00:00Z",
+  "source": {
+    "name": "PhysioNet Apnea-ECG Database, record a01",
+    "record": "a01",
+    "reference": "Penzel T, Moody GB, Mark RG, Goldberger AL, Peter JH. The Apnea-ECG Database. Computers in Cardiology 2000;27:255-258. PhysioNet (Goldberger et al. 2000, Circulation 101(23):e215-e220). Apnea annotations scored by Thomas Penzel from independent respiration/SpO2 signals, not from the ECG itself.",
+    "database_url": "https://physionet.org/content/apnea-ecg/1.0.0/",
+    "files_downloaded": {
+      "a01.hea": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.hea",
+        "downloaded_bytes": 55,
+        "sha256": "3df82d6715ec61e9a3d1a8a514e11012a5c42ab4de6a441e37745c5d1067cee7"
+      },
+      "a01.dat": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.dat",
+        "downloaded_bytes": 5914000,
+        "sha256": "0cf9b8181e240136067f5e7fcbc3a16750e793350935fa473ca9becb5b71a9fc"
+      },
+      "a01.apn": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.apn",
+        "downloaded_bytes": 3908,
+        "sha256": "b7404271c576572ce8c99af1fe455cae2954dce1c18caf21a61a25bf1c00f803"
+      },
+      "a01.qrs": {
+        "url": "https://physionet.org/files/apnea-ecg/1.0.0/a01.qrs",
+        "downloaded_bytes": 59878,
+        "sha256": "52e73fe9f8c6075a71c79c4bb9df385f5a4d8fb4afeb3ee180072cc9718ca7db"
+      }
+    },
+    "decoding_library": "wfdb 4.3.1",
+    "record_header": {
+      "fs_hz": 100,
+      "n_sig": 1,
+      "sig_name": [
+        "ECG"
+      ],
+      "sig_len": 2957000,
+      "sig_len_minutes": 492.8333333333333
+    },
+    "apn_annotation": {
+      "n_minute_labels": 489,
+      "alignment_rule": "label i (0-indexed) is at sample i*6000 at fs=100Hz (60s*100Hz=6000 samples/minute) -- reverified programmatically against the actual ann.sample array (np.array_equal check), not assumed.",
+      "alignment_verified": true,
+      "unique_symbols": [
+        "A",
+        "N"
+      ],
+      "full_label_sequence": "NNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANNNNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "label_runs": [
+        {
+          "symbol": "N",
+          "start_idx": 0,
+          "end_idx": 12,
+          "n_minutes": 13
+        },
+        {
+          "symbol": "A",
+          "start_idx": 13,
+          "end_idx": 226,
+          "n_minutes": 214
+        },
+        {
+          "symbol": "N",
+          "start_idx": 227,
+          "end_idx": 230,
+          "n_minutes": 4
+        },
+        {
+          "symbol": "A",
+          "start_idx": 231,
+          "end_idx": 351,
+          "n_minutes": 121
+        },
+        {
+          "symbol": "N",
+          "start_idx": 352,
+          "end_idx": 353,
+          "n_minutes": 2
+        },
+        {
+          "symbol": "A",
+          "start_idx": 354,
+          "end_idx": 488,
+          "n_minutes": 135
+        }
+      ]
+    },
+    "qrs_annotation": {
+      "n_beats_total": 29938,
+      "first_beat_sample": 34,
+      "last_beat_sample": 2956445,
+      "strictly_increasing_verified": true
+    },
+    "rr_interval_definition": {
+      "unit": "seconds",
+      "formula": "RR_i = (qrs_sample[i+1] - qrs_sample[i]) / fs, fs=100 Hz",
+      "segment_assignment_rule": "An RR interval is assigned to a segment iff BOTH its start beat and end beat sample fall inside that segment's minute-boundary sample window [lo, hi) on the record's own 100Hz clock (the same clock as the apn minute labels) -- never by raw QRS-array index."
+    }
+  },
+  "transition": {
+    "documented_event": "N (normal) -> A (apnea/hypopnea) label transition, chosen as the LARGEST contiguous N block immediately followed by a contiguous A block (until the next N), among all N->A candidates in the full a01 label sequence",
+    "n_to_a_candidates_considered": [
+      {
+        "pre_n_minutes": 13,
+        "post_n_minutes": 214,
+        "pre_minute_range": [
+          0,
+          12
+        ],
+        "post_minute_range": [
+          13,
+          226
+        ]
+      },
+      {
+        "pre_n_minutes": 4,
+        "post_n_minutes": 121,
+        "pre_minute_range": [
+          227,
+          230
+        ],
+        "post_minute_range": [
+          231,
+          351
+        ]
+      },
+      {
+        "pre_n_minutes": 2,
+        "post_n_minutes": 135,
+        "pre_minute_range": [
+          352,
+          353
+        ],
+        "post_minute_range": [
+          354,
+          488
+        ]
+      }
+    ],
+    "selection_rule": "max(pre_n_minutes) among N->A candidates (largest contiguous N block immediately preceding an A block)",
+    "pre_run_minutes_inclusive": [
+      0,
+      12
+    ],
+    "post_run_minutes_inclusive": [
+      13,
+      226
+    ],
+    "post_run_end_reason": "next N label in the clinical annotation sequence"
+  },
+  "segments": {
+    "ordering": "chronological (beat order), as required by methodology",
+    "pre_primary": {
+      "definition": "up to 2h of data immediately before the transition (or all available if less than 2h) -- METHODOLOGY_NOTE.md wavelet gap(1). PRE block here is only 13 min (0.22h) < 2h, so identical to pre_primary_dfa_csd.",
+      "sample_window": [
+        0,
+        78000
+      ],
+      "n_rr_intervals": 955,
+      "rr_seconds_min": 0.6,
+      "rr_seconds_max": 1.37
+    },
+    "post_primary": {
+      "definition": "up to 2h of data immediately after the transition (or all available if less) -- METHODOLOGY_NOTE.md wavelet gap(1). POST block here is 214 min (3.57h) > 2h, so capped to the first 2h (7200s = 720000 samples) after the transition.",
+      "sample_window": [
+        78000,
+        798000
+      ],
+      "n_rr_intervals": 7638,
+      "rr_seconds_min": 0.52,
+      "rr_seconds_max": 1.51
+    },
+    "pre_robustness": {
+      "definition": "PRE and POST (wavelet primary variants) truncated to min(len(PRE),len(POST)) by RR count, taking the samples closest to the transition on each side",
+      "n_rr_intervals": 955
+    },
+    "post_robustness": {
+      "definition": "PRE and POST (wavelet primary variants) truncated to min(len(PRE),len(POST)) by RR count, taking the samples closest to the transition on each side",
+      "n_rr_intervals": 955
+    }
+  },
+  "pipeline_results": {
+    "primary": {
+      "real_pre": {
+        "n_levels_used": 5,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "mean_logabs_per_j": [
+          -6.759425936107229,
+          -5.546701163661,
+          -4.645251266162723,
+          -4.035380012116463,
+          -3.7429272302991707
+        ],
+        "var_logabs_per_j": [
+          3.128615571417656,
+          2.9235176408550965,
+          2.6249970349926692,
+          2.3673266207196524,
+          7.30096833496791
+        ],
+        "coeff_counts_per_j": [
+          30,
+          60,
+          120,
+          239,
+          478
+        ],
+        "C1_slope": 0.7544318563160655,
+        "C1_intercept": -7.209232690617516,
+        "C2_slope": 0.7788514506965064,
+        "C2_intercept": 1.3325306885010788,
+        "n_samples": 955,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 8,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0
+        ],
+        "mean_logabs_per_j": [
+          -5.625616175957374,
+          -5.192911995302767,
+          -4.237430490713428,
+          -2.915197534370625,
+          -2.3733829257185586,
+          -2.573112361284321,
+          -3.2713750279864398,
+          -2.9629286165205944
+        ],
+        "var_logabs_per_j": [
+          3.0592028053872165,
+          3.0553226927545922,
+          2.7877200769113326,
+          2.4640332532033016,
+          2.2987305363628714,
+          3.375238325331471,
+          4.304673653478287,
+          2.622719857024435
+        ],
+        "coeff_counts_per_j": [
+          30,
+          60,
+          120,
+          239,
+          478,
+          955,
+          1910,
+          3819
+        ],
+        "C1_slope": 0.4021579374949817,
+        "C1_intercept": -5.453705109709182,
+        "C2_slope": 0.05700745468451183,
+        "C2_intercept": 2.7394216039763855,
+        "n_samples": 7638,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.7218439960119946,
+      "real_dC1": -0.3522739188210838,
+      "p_dC2_twotail": 0.015,
+      "p_dC1_twotail": 0.0,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": 0.005366154974548323,
+      "surrogate_dC2_std": 0.28391400308493947,
+      "surrogate_dC1_mean": -0.14114791100567198,
+      "surrogate_dC1_std": 0.06333445414547009
+    },
+    "robustness": {
+      "real_pre": {
+        "n_levels_used": 5,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "mean_logabs_per_j": [
+          -6.759425936107229,
+          -5.546701163661,
+          -4.645251266162723,
+          -4.035380012116463,
+          -3.7429272302991707
+        ],
+        "var_logabs_per_j": [
+          3.128615571417656,
+          2.9235176408550965,
+          2.6249970349926692,
+          2.3673266207196524,
+          7.30096833496791
+        ],
+        "coeff_counts_per_j": [
+          30,
+          60,
+          120,
+          239,
+          478
+        ],
+        "C1_slope": 0.7544318563160655,
+        "C1_intercept": -7.209232690617516,
+        "C2_slope": 0.7788514506965064,
+        "C2_intercept": 1.3325306885010788,
+        "n_samples": 955,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_post": {
+        "n_levels_used": 5,
+        "j_values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "mean_logabs_per_j": [
+          -5.402084050294607,
+          -4.913276688651123,
+          -4.4660766888002605,
+          -3.5554432178442057,
+          -3.0038942294463804
+        ],
+        "var_logabs_per_j": [
+          2.362563451518113,
+          2.3688810283023756,
+          3.0283815480952914,
+          2.7857747249868687,
+          2.388327735050996
+        ],
+        "coeff_counts_per_j": [
+          30,
+          60,
+          120,
+          239,
+          478
+        ],
+        "C1_slope": 0.6154213112503372,
+        "C1_intercept": -6.114418908758327,
+        "C2_slope": 0.04684222637502583,
+        "C2_intercept": 2.446259018465652,
+        "n_samples": 955,
+        "wavelet": "db4",
+        "min_coeffs_per_scale": 16
+      },
+      "real_dC2": -0.7320092243214806,
+      "real_dC1": -0.1390105450657283,
+      "p_dC2_twotail": 0.045,
+      "p_dC1_twotail": 0.05,
+      "n_surrogates_requested": 200,
+      "n_surrogate_failures": 0,
+      "surrogate_dC2_mean": 0.0401941090399962,
+      "surrogate_dC2_std": 0.33894044120460454,
+      "surrogate_dC1_mean": -0.00856653103586006,
+      "surrogate_dC1_std": 0.07192300442649179
+    }
+  },
+  "timing_seconds": {
+    "primary_seconds": 7.035813570022583,
+    "robustness_seconds": 2.5208382606506348
+  },
+  "notes": [
+    "First application of transition_test (WCM/log-cumulant) to the PhysioNet Apnea-ECG domain (a04 only had a DFA result at the time of this run; this is a new physiological data point for wavelet-multiresolution-scaling).",
+    "wtmm_common.py was NOT modified to produce this result (verify via git diff after the run)."
+  ]
+}

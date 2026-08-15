@@ -906,14 +906,49 @@ queue:
       para evitar a transicao de satelite GOES ja identificada como
       risco. Proximo passo: construir e validar a pipeline contra dado
       sintetico antes de tocar dado real.
+    soc_avalanches_gap_closing_result: >
+      2026-08-15: gaps de soc-avalanches fechados -- ver
+      02_TESTS/TRI_RG/soc_avalanches/{METHODOLOGY_NOTE.md,
+      RESULTS_SUMMARY.md}. Pipeline (soc_common.py: binagem por intervalo
+      medio entre eventos, extracao de avalanches Beggs & Plenz, MLE
+      discreta de lei de potencia Clauset-Shalizi-Newman, substituto
+      Poisson + bootstrap pareado de tau) validada contra dado sintetico
+      (controle positivo: processo critico Hawkes, tau=1.484 vs teorico
+      1.5; controle de transicao com taxa desemparelhada confirmou perda
+      de poder do Poisson e recuperacao pelo bootstrap) ANTES de qualquer
+      calculo real. RESULTADO: NEGATIVO nos 2 dominios. Ridgecrest 2019
+      (sismicidade, API FDSN USGS): variante primaria falhou (PRE com so
+      9 avalanches); variante de robustez mostrou p_bootstrap_tau=0.0
+      (primario) mas p_tau(Poisson,secundario)=0.32 -- divergencia
+      acionou a escalada condicional ja pre-declarada (nulo ETAS
+      subcritico). ETAS deu p_ETAS_tau=0.273, NAO significativo --
+      achado nao sobrevive a nulo com fisica de replicas conhecida.
+      Descoberta adversarial de nulos reproduziu o mesmo "efeito"
+      dividindo a janela POST sozinha (sem nenhuma transicao envolvida) --
+      decaimento classico de Omori-Utsu (tau acompanha taxa local de
+      eventos, r=-0.53), nao SOC/invariante novo. Flares solares GOES
+      (fase de declinio do ciclo 24, instrumento unico): SEM sinal em
+      nenhuma variante (p_bootstrap_tau=0.288/0.216), direcao de
+      delta_tau inverte de sinal entre variantes. soc-avalanches, como
+      os 3 candidatos anteriores desta linha, NAO produz invariante
+      cross-domain confiavel. NENHUM PREREGISTRATION.md foi escrito.
     next_action: >
-      Fechamento de gaps de soc-avalanches EM ANDAMENTO -- metodologia
-      fixada e commitada (ver soc_avalanches_gap_closing_started acima).
-      Pipeline (soc_common.py) ainda a construir e validar contra dado
-      sintetico antes de qualquer calculo real nos 2 dominios
-      (sismicidade Ridgecrest 2019, flares solares GOES). Os outros 3
-      candidatos novos (MSE, grafo de visibilidade, RQA, ranqueados #2-4)
-      permanecem disponiveis para uma rodada futura, nao descartados.
+      4 dos 6 candidatos considerados nesta linha (3 da Fase 0 original +
+      soc-avalanches da nova busca) agora testados com rigor completo --
+      os 4 resultado NEGATIVO para invariante cross-domain. Restam 3
+      candidatos da nova busca ainda nao fechados: MSE (rank #2 --
+      fundamentacao formal mais rigorosa ja considerada nesta linha, mas
+      risco de redundancia com Hurst ja testado), grafo de visibilidade
+      (rank #3 -- mesma forca formal, risco de redundancia mais
+      diretamente documentado na literatura), RQA (rank #4 -- unico com
+      regras de parametro nao-arbitrarias publicadas, mas sondagem
+      exploratoria ja mostrou o mesmo padrao de inconsistencia
+      cross-domain que derrubou critical-slowing-down). Ver
+      phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md. Nenhuma decisao tomada --
+      fica com o usuario: fechar gaps de MSE/grafo de visibilidade/RQA,
+      nova busca adicional, ou considerar a linha suficientemente
+      explorada por ora. Toda a infraestrutura (metodologia, 4 pipelines
+      validadas, dominios reais testados) fica commitada e reaproveitavel.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

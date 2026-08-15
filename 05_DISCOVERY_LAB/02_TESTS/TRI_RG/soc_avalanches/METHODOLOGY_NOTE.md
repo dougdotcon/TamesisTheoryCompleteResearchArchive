@@ -147,6 +147,53 @@ implementado como checagem adversarial adicional antes de qualquer
 conclusão — mesmo padrão de escalada proporcional ao efeito já usado 2x
 nesta linha (Tohoku, apneia-ECG a04).
 
+## Adendo ao Gap (c) — teste complementar de bootstrap pareado de `tau` (adicionado APÓS validação sintética, ANTES de qualquer dado real)
+
+A validação sintética obrigatória (abaixo) revelou um problema estrutural
+real com o teste de substituto Poisson homogêneo especificado acima, não
+um bug: quando PRE e POST têm taxas médias de evento MUITO diferentes
+(cenário extremamente provável em sismologia real — poucos eventos de
+fundo antes do mainshock, muitos na sequência de réplicas), o teste perde
+poder. Um controle sintético de transição com taxa desemparelhada
+(`branching_ratio` PRE=0,5 vs POST=1,0, mesma diferença real usada no
+controle bem-sucedido, mas SEM emparelhar a taxa média de eventos entre os
+dois) produziu `p_tau=0,285` apesar de uma diferença real enorme de `tau`
+(1,5 vs 3,0) — porque substitutos Poisson gerados em taxas muito diferentes
+produzem, eles mesmos, `tau`s com variância muito diferente sob o mesmo
+`lambda` compartilhado, inflando a dispersão do nulo combinado.
+
+**Correção, fixada ANTES de qualquer cálculo em dado real:** adicionar um
+segundo teste, complementar ao substituto Poisson (que continua sendo
+calculado e reportado, pois responde a uma pergunta real e válida —
+"há estrutura além de pura aleatoriedade emparelhada em taxa?") — um teste
+de **bootstrap pareado de `tau`**, reaproveitando o próprio mecanismo de
+incerteza de bootstrap do MLE já exigido pelo Gap (b) (reamostragem com
+reposição das avalanches observadas, `N_BOOTSTRAP=500` mínimo, já
+implementado na pipeline):
+
+1. Para PRE e para POST, independentemente: usar a distribuição bootstrap
+   de `tau` JÁ COMPUTADA pela pipeline (reamostragem das avalanches
+   observadas daquele segmento, refit MLE em cada reamostra) — nenhum
+   cálculo novo, só reaproveitar o que já existe.
+2. Parear a `i`-ésima reamostra do PRE com a `i`-ésima do POST (convenção
+   padrão de bootstrap de duas amostras, mesma já usada no adendo de
+   `dfa-multiscale-entropy`) para formar `Delta_tau_boot_i =
+   tau_boot_POST_i - tau_boot_PRE_i`.
+3. IC percentílico de 95% de `Delta_tau_boot`; `p_bootstrap_tau =
+   2*min(fração<=0, fração>=0)`.
+
+**Este teste de bootstrap passa a ser o teste PRIMÁRIO de significância
+para `tau`** (não depende de emparelhar taxas entre substitutos, evitando
+o problema de poder demonstrado acima). O teste de substituto Poisson
+continua reportado como checagem SECUNDÁRIA/complementar. `sigma` mantém o
+substituto Poisson como único teste por ora — a validação também revelou
+uma calibração do nulo de `sigma` só levemente checada (1 de 3 sorteios
+independentes do controle negativo deu `p_sigma=0,024`, sem resolução
+completa com apenas 3 sorteios) — **qualquer `p_sigma` real na faixa
+0,01–0,05 deve ser tratado com cautela**, com `tau`/seu IC de bootstrap
+como evidência primária, exatamente como a nota original já designava
+`tau` como canal principal.
+
 ## Gap (d): definição de segmento PRE/POST e mitigação de STAI (mecanismo mundano já identificado a priori)
 
 Regra domain-agnostic REAPROVEITADA sem modificação de

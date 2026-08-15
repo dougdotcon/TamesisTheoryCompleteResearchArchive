@@ -340,3 +340,74 @@ decisions:
     untouched_safeguards:
       - "toda a infraestrutura desta linha (METHODOLOGY_NOTE.md, pipelines validadas csd_common.py/wtmm_common.py, dados preparados, resultados JSON, relatorios de sessao) permanece no repositorio, commitada e reaproveitavel para retomada futura"
       - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre esta rodada especifica de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"
+
+  - decision_id: DISC-DEC-006
+    date: 2026-08-15
+    decision: >
+      Considerar DISC-TRI-RG-001 (busca de invariante cross-domain via
+      lente de renormalizacao/coarse-graining) suficientemente explorada
+      por ora, a pedido explicito do usuario -- segunda vez que esta
+      decisao e tomada (a primeira, DISC-DEC-005, foi revertida pelo
+      proprio usuario ao pedir para retomar a linha). Linha PAUSADA, nao
+      fechada: DISC-TRI-RG-001 permanece CANDIDATE_FORMULATING em
+      TEST_QUEUE.yaml (nenhum candidato foi travado em
+      PREREGISTRATION.md), disponivel para retomada futura (nova rodada
+      de busca por candidatos ainda nao considerados, ou revisitar os 3
+      ja testados com um dominio fisico genuinamente diferente dos ja
+      usados) sem exigir nova formulacao do zero -- toda a infraestrutura
+      fica reaproveitavel.
+    rationale: >
+      Desde DISC-DEC-005, o usuario pediu para retomar a linha e o
+      terceiro candidato viavel da Fase 0 (dfa-multiscale-entropy, rank
+      3) foi reformulado em torno de uma transicao temporal genuina
+      (PhysioNet Apnea-ECG, registro a04) e testado com o mesmo rigor dos
+      outros dois -- metodologia fixada e commitada antes de qualquer
+      calculo real (incluindo uma correcao pos-validacao-sintetica: o
+      teste IAAFT original tinha baixo poder para alpha, corrigido com
+      bootstrap por blocos moveis ANTES de tocar dado real), pipeline
+      validada contra dado sintetico, aplicada sem modificacao aos 2
+      dominios (apneia-ECG, paleoclima GISP2), com checagem adversarial
+      completa dado o tamanho do efeito em apneia-ECG (reexecucao
+      adversarial cega + descoberta adversarial de nulos dedicada).
+      RESULTADO: NEGATIVO -- o achado forte em apneia-ECG e real mas
+      explicado por completo por um mecanismo fisiologico ja conhecido
+      ha 40 anos (CVHR, Guilleminault et al. 1984), e nao replicou no
+      segundo dominio (GISP2). Com isso, os 3 candidatos viaveis da Fase
+      0 (critical-slowing-down, wavelet-multiresolution-scaling,
+      dfa-multiscale-entropy) estavam todos testados com rigor completo,
+      os 3 resultado NEGATIVO para invariante cross-domain.
+      Em seguida, o usuario pediu para revisitar os candidatos com os 3
+      registros de backup do banco Apnea-ECG (a18, a14, a01), estendidos
+      -- por decisao explicita do usuario ao ser consultado sobre escopo
+      -- aos 3 candidatos como um dominio fisiologico novo, nao so
+      replicacao de DFA. As 3 pipelines ja validadas foram aplicadas sem
+      modificacao aos 3 registros. RESULTADO: nao resolveu a exigencia
+      cross-domain (os registros de backup sao do MESMO dominio ja
+      testado em a04, nao um dominio fisico distinto). CSD continuou sem
+      sinal; wavelet mostrou um canal (ΔC1) direcionalmente consistente
+      mas ja suspeito de refletir amplitude, nao estrutura multifractal
+      genuina; DFA mostrou a direcao do efeito original replicando nos 4
+      registros de apneia (mais fraca em a18), fortalecendo a leitura de
+      um efeito fisiologico real que generaliza entre pacientes mas
+      permanece explicado pelo mesmo mecanismo mundano ja identificado.
+      Com as 3 rotas de retomada da pausa anterior agora exercidas ((a)
+      reformulacao de dfa-multiscale-entropy -- feita; (b) revisitar
+      candidatos com dado diferente -- feita, via registros de backup;
+      resta so (c) nova busca de candidatos ainda nao considerados, nao
+      exercida nesta rodada), e nenhuma delas produzindo um invariante
+      cross-domain confiavel, o usuario decidiu pausar a linha novamente
+      em vez de iniciar uma nova rodada de busca por candidatos
+      inteiramente diferentes agora.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: next_action atualizado para refletir a pausa)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status permanece CANDIDATE_FORMULATING (mesma nota de DISC-DEC-005 -- nao ha status 'PAUSED' formal na maquina de estados de TEST_QUEUE.yaml)"
+      - "nenhum arquivo de teste (PREREGISTRATION.md, CLAIM_LEDGER.yaml) criado ou modificado -- nao ha claim a fechar, pois nenhum pre-registro foi travado nesta linha em nenhum momento de sua historia"
+    untouched_safeguards:
+      - "toda a infraestrutura desta linha (3 METHODOLOGY_NOTE.md, 3 pipelines validadas, dados de 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT, resultados JSON, relatorios de sessao, APNEA_BACKUP_RECORDS_REVISIT.md) permanece no repositorio, commitada e reaproveitavel para retomada futura"
+      - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"
+      - "o achado fisiologico de apneia-ECG (CVHR) permanece documentado honestamente como replicacao de mecanismo ja conhecido, nao promovido a claim nem a invariante Tamesis-especifico"

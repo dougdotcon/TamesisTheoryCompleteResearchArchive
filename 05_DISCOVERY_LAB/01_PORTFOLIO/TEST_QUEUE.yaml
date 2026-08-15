@@ -882,25 +882,38 @@ queue:
       real encontrada se liberta de transporte de onda quantico. Ranking
       honesto (nao travado): SOC > MSE > grafo de visibilidade > RQA.
       Detalhes completos em phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md.
+    soc_avalanches_gap_closing_started: >
+      2026-08-15: usuario escolheu comecar o fechamento de gaps do
+      candidato ranqueado #1 na nova busca, soc-avalanches (expoentes de
+      criticalidade auto-organizada). Metodologia completa fixada em
+      02_TESTS/TRI_RG/soc_avalanches/METHODOLOGY_NOTE.md, commitada ANTES
+      de qualquer calculo real: regra de binning R_lambda (lambda =
+      intervalo medio entre eventos do fluxo PRE+POST combinado, nao
+      recalculado por segmento -- evita conflar mudanca de taxa com
+      mudanca de estrutura); I(X) = tau (expoente de lei de potencia via
+      MLE, metodo Clauset-Shalizi-Newman 2009, nao regressao OLS
+      enviesada) + sigma (razao de ramificacao, canal companheiro);
+      declaracao explicita de identificabilidade distinguindo tau de
+      avalanche (estrutura de clustering temporal) de leis ja conhecidas
+      nos 2 dominios (Gutenberg-Richter em sismologia, Lu & Hamilton em
+      flares solares); protocolo de substituto Poisson homogeneo
+      (N=1000, bicaudal, seed=12345), com escalada para nulo ETAS
+      subcritico reservada condicionalmente ao tamanho do efeito em
+      sismologia; mitigacao de STAI via Mc conservador (max(Mc_PRE,
+      Mc_POST)+0,2, tecnica de maxima curvatura) em vez de buffer
+      temporal arbitrario; janela de flares solares restrita ao arquivo
+      de instrumento unico (fase de declinio do ciclo 24, 2014->2017)
+      para evitar a transicao de satelite GOES ja identificada como
+      risco. Proximo passo: construir e validar a pipeline contra dado
+      sintetico antes de tocar dado real.
     next_action: >
-      Nova rodada de busca concluida (ver
-      new_candidate_search_result_2026_08_15 acima e
-      phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md para detalhes completos).
-      4 candidatos novos viable=true (SOC/avalanches, MSE, grafo de
-      visibilidade, RQA), nenhum travado -- decisao de qual perseguir
-      (se algum) fica com o usuario. Linha permanece
-      CANDIDATE_FORMULATING; PAUSADA continua sendo o estado de fato ate
-      que o usuario escolha um candidato para fechamento de gaps ou
-      decida encerrar a busca. As 3 rotas de retomada da pausa anterior
-      (DISC-DEC-006) estao todas agora exercidas: (a) reformulacao de
-      dfa-multiscale-entropy; (b) revisita com dado diferente (registros
-      de backup Apnea-ECG); (c) nova busca de candidatos -- nenhuma
-      produziu um invariante cross-domain confirmado ainda, mas (c)
-      deixou 4 candidatos novos com viabilidade formal genuina para uma
-      eventual proxima rodada de fechamento de gaps. Toda a
-      infraestrutura (metodologia, 3 pipelines validadas dos candidatos
-      antigos, 6 candidatos novos formalizados com dominios reais
-      verificados) fica commitada e reaproveitavel.
+      Fechamento de gaps de soc-avalanches EM ANDAMENTO -- metodologia
+      fixada e commitada (ver soc_avalanches_gap_closing_started acima).
+      Pipeline (soc_common.py) ainda a construir e validar contra dado
+      sintetico antes de qualquer calculo real nos 2 dominios
+      (sismicidade Ridgecrest 2019, flares solares GOES). Os outros 3
+      candidatos novos (MSE, grafo de visibilidade, RQA, ranqueados #2-4)
+      permanecem disponiveis para uma rodada futura, nao descartados.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

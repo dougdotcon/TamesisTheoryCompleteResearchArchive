@@ -954,15 +954,47 @@ queue:
       obrigacao de validar poder real antes de prosseguir. Proximo
       passo: construir e validar a pipeline contra dado sintetico antes
       de tocar dado real.
+    mse_gap_closing_result: >
+      2026-08-15: gaps de mse-multiscale-entropy fechados -- ver
+      02_TESTS/TRI_RG/mse_multiscale_entropy/{METHODOLOGY_NOTE.md,
+      RESULTS_SUMMARY.md}. Pipeline (mse_common.py: coarse-graining de
+      blocos nao sobrepostos, SampEn m=2/r=0.15SD fixo, I(X)=CI+beta,
+      IAAFT proprio como teste PRIMARIO) validada contra dado sintetico
+      ANTES de qualquer calculo real -- controle positivo (PRE=ruido
+      branco, POST=mapa logistico caotico, marginal/espectro casados)
+      confirmou que o IAAFT TEM poder real aqui (p=0.0 em ambos os
+      canais, ao contrario do que se descobriu para alpha/DFA), o que ja
+      resolve substancialmente o risco de redundancia com Hurst
+      declarado na Fase 0.5 (se beta fosse so reparametrizacao de H, o
+      IAAFT teria o mesmo problema de baixo poder de alpha). RESULTADO:
+      NEGATIVO nos 2 dominios, sem ambiguidade -- geomagnetismo (SYM-H,
+      tempestade marco/1989): p_CI=0.86/0.875, p_beta=0.83/0.275 (todas
+      as 2 variantes, nenhuma <0.05); rolamento (FEMTO/PRONOSTIA
+      Bearing1_1): p_CI=1.0/1.0, p_beta=0.995/0.16 (idem). Desvio
+      metodologico declarado no dominio de rolamento: PRE decimado por
+      stride uniforme fator 200 (7.05M->35.266 amostras) por
+      inviabilidade computacional do protocolo de 200 substitutos sobre
+      a serie completa -- risco honesto de ter atenuado sinal fino, nao
+      pode ser descartado. Nenhum achado significativo em nenhuma das 8
+      combinacoes testadas (2 dominios x 2 variantes x 2 canais) --
+      reexecucao adversarial completa NAO acionada por proporcionalidade
+      (sem achado a explicar, ao contrario de DFA/apneia e SOC/Ridgecrest).
+      NENHUM PREREGISTRATION.md foi escrito.
     next_action: >
-      Fechamento de gaps de mse-multiscale-entropy EM ANDAMENTO --
-      metodologia fixada e commitada (ver mse_gap_closing_started acima).
-      Pipeline (mse_common.py) ainda a construir e validar contra dado
-      sintetico antes de qualquer calculo real nos 2 dominios (tempestade
-      geomagnetica marco/1989, degradacao de rolamento FEMTO/PRONOSTIA).
-      Os outros 2 candidatos novos (grafo de visibilidade, RQA,
-      ranqueados #3-4) permanecem disponiveis para uma rodada futura, nao
-      descartados.
+      5 dos 6 candidatos considerados nesta linha (3 da Fase 0 original +
+      soc-avalanches + mse-multiscale-entropy da nova busca) agora
+      testados com rigor completo -- os 5 resultado NEGATIVO para
+      invariante cross-domain. Resta 1 candidato da nova busca ainda nao
+      fechado: grafo de visibilidade (rank #3 -- risco de redundancia
+      com Hurst mais diretamente documentado na literatura que o de MSE,
+      mais custo computacional O(N^2)); RQA (rank #4) tambem nao
+      fechado. Ver phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md. Nenhuma
+      decisao tomada -- fica com o usuario: fechar gaps de grafo de
+      visibilidade/RQA, nova busca adicional, ou considerar a linha
+      suficientemente explorada por ora (com 5 de 6 candidatos agora
+      negativos, esta ultima opcao fica cada vez mais defensavel). Toda
+      a infraestrutura (metodologia, 5 pipelines validadas, dominios
+      reais testados) fica commitada e reaproveitavel.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

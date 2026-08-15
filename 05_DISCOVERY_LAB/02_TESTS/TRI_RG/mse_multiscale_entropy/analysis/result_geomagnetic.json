@@ -1,0 +1,400 @@
+{
+  "provenance": {
+    "domain": "GEOMAGNETISMO",
+    "candidate": "mse-multiscale-entropy",
+    "test_line": "DISC-TRI-RG-001",
+    "source": {
+      "dataset": "NASA/SPDF OMNIweb High Resolution OMNI (HRO), 5-min resolution",
+      "url": "https://spdf.gsfc.nasa.gov/pub/data/omni/high_res_omni/omni_5min1989.asc",
+      "format_reference_url": "https://spdf.gsfc.nasa.gov/pub/data/omni/high_res_omni/hroformat.txt",
+      "local_path": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/mse_multiscale_entropy/data/omni_5min1989.asc",
+      "downloaded_bytes": 34374240,
+      "sha256": "eb5e40ec314604dfdbda8fdabd06d3e1d76249845694bdb75c18838e86da147d",
+      "total_lines": 105120,
+      "expected_lines_full_year_5min": "365 days * 288 samples/day = 105120 (1989 is not a leap year) -- matches exactly"
+    },
+    "column_used": {
+      "description": "Whitespace-delimited ASCII, 49 fields per line, no header row. Field order confirmed against hroformat.txt (common HRO block: Year I4, Day I4, Hour I3, Minute I3, spacecraft IDs, IMF/plasma parameters, spacecraft position, then 'Ancillary Data' block AE, AL, AU, SYM/D, SYM/H, ASY/D, ASY/H, PC(N), Magnetosonic Mach number, then (5-min only) 3 GOES proton flux fields appended at the end -> 49 fields total, matching the observed field count).",
+      "year_field_index_1based": 1,
+      "day_of_year_field_index_1based": 2,
+      "hour_field_index_1based": 3,
+      "minute_field_index_1based": 4,
+      "symh_field_index_1based": 42,
+      "symh_field_format": "I6, fill = 99999",
+      "verification": "First data row's ancillary block reproduces the documented order exactly: field41=-1 (SYM/D, real value even though AE/AL/AU at fields 38-40 are fill=99999), field42=-39 (SYM/H), field43=64 (ASY/D), field44=35 (ASY/H), field45=2.96 (PC(N)), field46=99.9 (Magnetosonic Mach fill). Global minimum of field42 across the full 1989 file is -714 nT, occurring at day=73 (=1989-03-14), hour=0, minutes 40-50 UT -- matches the independently-known 'Quebec Blackout' storm SYM-H minimum of -714 nT cited in PHASE0_5_SURVEY_NEW_CANDIDATES.md, confirming the column identification."
+    },
+    "fill_value_handling": {
+      "fill_value": 99999,
+      "count_in_full_1989_file_symh_column": 0,
+      "count_in_pre_primary_segment": 0,
+      "count_in_post_primary_segment": 0,
+      "note": "SYM/H (unlike AE/AL/AU, which do have many fill=99999 rows in this file since they need more magnetometer stations) has ZERO fill values anywhere in the 1989 file. No interpolation, gap-filling, or exclusion was needed for the segments actually used; the check was performed explicitly (equality to 99999) rather than assumed."
+    },
+    "transition_definition": {
+      "ssc_primary": {
+        "date_utc": "1989-03-13",
+        "time_utc": "01:27",
+        "day_of_year": 72,
+        "source": "Boteler 2019, Space Weather 17:1427 (documented externally, provided in task instructions)",
+        "boundary_rule": "A 5-min HRO record's (hour, minute) label is the START of its averaging interval (per hroformat.txt). Boundary rule applied: a record belongs to PRE if (day < 72) or (day==72 and hour*60+minute < 87); it belongs to POST (until the next transition) if (day>72 or (day==72 and hour*60+minute>=87)) and before the POST-segment upper bound below. This assigns the record labeled 1989-03-13 01:25 (85 min-of-day < 87) to PRE and the record labeled 01:30 (90 >= 87) to POST -- the first POST record already shows the SSC signature (SYM/H jumps from 29 nT at 01:25 to 68 nT at 01:30)."
+      },
+      "post_upper_bound": {
+        "chosen_rule": "next documented storm event visible directly in the data (not a fixed calendar window)",
+        "date_utc": "1989-03-26",
+        "time_utc": "~22:50-22:52",
+        "day_of_year": 85,
+        "rationale": "Daily min/max SYM/H in the recovery tail of the March-13 storm gradually approaches quiet levels by ~day 83-85 (daily min rises from -714 on day73 to -11 on day85). At 1989-03-26 22:45-22:55 UT (day 85), SYM/H jumps abruptly from 9 nT to 36 nT then 50-65 nT -- a second, distinct SSC-like sudden commencement signature, i.e. the onset of a new storm, found directly by inspecting the downloaded data rather than assumed a priori. POST (primary) is therefore bounded at this second transition using the same boundary rule as SSC1 (record label < day85 22:50 UT is the last POST record; the record at day85 22:50 UT, where the jump is already visible, and everything after it, is excluded as belonging to the NEXT storm, a documented confounder external to the March-13 event).",
+        "deviation_note": "METHODOLOGY_NOTE.md gap (d) allows either 'until the next documented storm event, if any' or 'a fixed reasonable recovery period, explicitly documented' -- this run uses the former, with the 'next event' identified empirically in the downloaded SYM/H series itself (a second SSC-like jump) rather than from an external storm catalog citation. This is disclosed explicitly as the chosen convention, not asserted as an externally pre-documented event time."
+      }
+    },
+    "segment_definitions": {
+      "pre_primary": {
+        "rule": "All continuous available SYM/H in the downloaded 1989 record strictly before the SSC boundary (day<72, or day==72 and minute-of-day<87).",
+        "n_samples": 20466,
+        "start_utc": "1989-01-01 00:00",
+        "end_utc": "1989-03-13 01:25",
+        "fill_values_present": 0
+      },
+      "pre_robust": {
+        "rule": "Most recent 50% of pre_primary BY SAMPLE COUNT (last floor(20466/2)=10233 samples, i.e. samples[10233:]).",
+        "n_samples": 10233,
+        "start_utc": "1989-02-05 12:45",
+        "end_utc": "1989-03-13 01:25"
+      },
+      "post_primary": {
+        "rule": "All continuous available SYM/H from the SSC boundary (inclusive) up to (exclusive of) the next documented/observed storm transition.",
+        "n_samples": 4000,
+        "start_utc": "1989-03-13 01:30",
+        "end_utc": "1989-03-26 22:45",
+        "fill_values_present": 0
+      },
+      "post_robust": {
+        "rule": "Closest-to-transition 50% of post_primary BY SAMPLE COUNT (first floor(4000/2)=2000 samples, i.e. samples[:2000]).",
+        "n_samples": 2000,
+        "start_utc": "1989-03-13 01:30",
+        "end_utc": "1989-03-20 00:05"
+      }
+    },
+    "pipeline_provenance": {
+      "module": "05_DISCOVERY_LAB/02_TESTS/TRI_RG/mse_multiscale_entropy/analysis/mse_common.py (UNMODIFIED -- called via run_mse_pipeline only, per task instructions)",
+      "function_called": "run_mse_pipeline(pre_segment, post_segment)",
+      "no_decimation": "No decimation or resampling of the SYM/H series was performed -- all 4 segments (20466, 10233, 4000, 2000 samples) ran the full pipeline (200 IAAFT surrogates x 50 iterations each) directly, well within tractable runtime (see wall_clock_seconds below)."
+    },
+    "runtime": {
+      "primary_variant_wall_clock_seconds": 260.9,
+      "robustness_variant_wall_clock_seconds": 88.3,
+      "note": "Both runs executed synchronously in the foreground (no backgrounding of the pipeline calculation itself), per task instructions."
+    }
+  },
+  "primary": {
+    "real_pre": {
+      "n_samples": 20466,
+      "tau_min": 1,
+      "tau_max": 102,
+      "scales_used": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        11,
+        15,
+        19,
+        24,
+        30,
+        39,
+        49,
+        63,
+        80,
+        102
+      ],
+      "sd_original": 24.66531096024899,
+      "r": 3.6997966440373484,
+      "sampen_values": [
+        0.2223554045708942,
+        0.3278011779409568,
+        0.4089695684069524,
+        0.5076452252545463,
+        0.5577678540187274,
+        0.6701781698974107,
+        0.7441983225797729,
+        0.8217469735277897,
+        0.9350518358890343,
+        1.0288373471254493,
+        1.0759691545868855,
+        1.160538291991531,
+        1.2251236858374082,
+        1.2532024323565387,
+        1.2271471684494848,
+        1.3600461350449542,
+        1.200394982978052
+      ],
+      "n_scales_valid": 17,
+      "n_scales_undefined": 0,
+      "CI": 14.726973730456386,
+      "CI_partial_sum_valid_only": 14.726973730456386,
+      "beta": {
+        "beta": 0.2638370194383206,
+        "intercept": 0.17929545488878085,
+        "n_points": 17,
+        "scales": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9,
+          11,
+          15,
+          19,
+          24,
+          30,
+          39,
+          49,
+          63,
+          80,
+          102
+        ]
+      }
+    },
+    "real_post": {
+      "n_samples": 4000,
+      "tau_min": 1,
+      "tau_max": 20,
+      "scales_used": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        15,
+        17,
+        20
+      ],
+      "sd_original": 92.7290341532791,
+      "r": 13.909355122991865,
+      "sampen_values": [
+        0.06784913728018743,
+        0.10477029963978828,
+        0.13607034416625355,
+        0.16379959167655245,
+        0.18724006943283783,
+        0.20585488621693807,
+        0.22181930976480668,
+        0.24151221731069053,
+        0.2525138664502443,
+        0.2825222588976311,
+        0.2852615629632504,
+        0.32097580055124453,
+        0.33689396995142523,
+        0.3786859611174927
+      ],
+      "n_scales_valid": 14,
+      "n_scales_undefined": 0,
+      "CI": 3.185769275419343,
+      "CI_partial_sum_valid_only": 3.185769275419343,
+      "beta": {
+        "beta": 0.1038009824386337,
+        "intercept": 0.033138486878744,
+        "n_points": 14,
+        "scales": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12,
+          15,
+          17,
+          20
+        ]
+      }
+    },
+    "CI_pre": 14.726973730456386,
+    "CI_post": 3.185769275419343,
+    "beta_pre": 0.2638370194383206,
+    "beta_post": 0.1038009824386337,
+    "delta_CI": -11.541204455037043,
+    "delta_beta": -0.1600360369996869,
+    "p_CI": 0.86,
+    "p_beta": 0.83,
+    "surrogate_CI_mean": -12.682091381464303,
+    "surrogate_CI_std": 1.1208266156334754,
+    "surrogate_CI_n_valid": 200,
+    "surrogate_CI_n_undefined": 0,
+    "surrogate_beta_mean": -0.18889037503257966,
+    "surrogate_beta_std": 0.030333071827506653,
+    "surrogate_beta_n_valid": 200,
+    "surrogate_beta_n_undefined": 0,
+    "config": {
+      "m": 2,
+      "r_fraction": 0.15,
+      "tau_min": 1,
+      "min_points_at_coarsest": 200,
+      "n_scales_cap": 20,
+      "min_fit_points": 3,
+      "n_surrogates": 200,
+      "n_iaaft_iter": 50,
+      "seed": 12345
+    }
+  },
+  "robustness": {
+    "real_pre": {
+      "n_samples": 10233,
+      "tau_min": 1,
+      "tau_max": 51,
+      "scales_used": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        15,
+        18,
+        22,
+        27,
+        34,
+        41,
+        51
+      ],
+      "sd_original": 18.234880227959707,
+      "r": 2.735232034193956,
+      "sampen_values": [
+        0.3159153866377479,
+        0.4432991607721786,
+        0.5395659613750255,
+        0.6700935766644537,
+        0.7402945333224022,
+        0.7816196732972593,
+        0.9248054909581636,
+        0.9942749011790144,
+        1.1039223713142157,
+        1.179492935061545,
+        1.2644940402544524,
+        1.256627511085948,
+        1.3272159466901177,
+        1.3940420479107165,
+        1.38173854458403,
+        1.4766031412240257
+      ],
+      "n_scales_valid": 16,
+      "n_scales_undefined": 0,
+      "CI": 15.794005222331295,
+      "CI_partial_sum_valid_only": 15.794005222331295,
+      "beta": {
+        "beta": 0.32211310419948713,
+        "intercept": 0.25022629213009545,
+        "n_points": 16,
+        "scales": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15,
+          18,
+          22,
+          27,
+          34,
+          41,
+          51
+        ]
+      }
+    },
+    "real_post": {
+      "n_samples": 2000,
+      "tau_min": 1,
+      "tau_max": 10,
+      "scales_used": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10
+      ],
+      "sd_original": 118.44103986372292,
+      "r": 17.766155979558437,
+      "sampen_values": [
+        0.08314728499697827,
+        0.1146854138681843,
+        0.139593451324443,
+        0.16357797432884735,
+        0.19167486938913403,
+        0.20809837550533267,
+        0.23631633004565203,
+        0.2682639865946794
+      ],
+      "n_scales_valid": 8,
+      "n_scales_undefined": 0,
+      "CI": 1.405357686053251,
+      "CI_partial_sum_valid_only": 1.405357686053251,
+      "beta": {
+        "beta": 0.08078137930651988,
+        "intercept": 0.06498631782951479,
+        "n_points": 8,
+        "scales": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10
+        ]
+      }
+    },
+    "CI_pre": 15.794005222331295,
+    "CI_post": 1.405357686053251,
+    "beta_pre": 0.32211310419948713,
+    "beta_post": 0.08078137930651988,
+    "delta_CI": -14.388647536278043,
+    "delta_beta": -0.24133172489296725,
+    "p_CI": 0.875,
+    "p_beta": 0.275,
+    "surrogate_CI_mean": -15.408466502422925,
+    "surrogate_CI_std": 0.861840480824914,
+    "surrogate_CI_n_valid": 200,
+    "surrogate_CI_n_undefined": 0,
+    "surrogate_beta_mean": -0.2141670963703236,
+    "surrogate_beta_std": 0.04547290367374629,
+    "surrogate_beta_n_valid": 200,
+    "surrogate_beta_n_undefined": 0,
+    "config": {
+      "m": 2,
+      "r_fraction": 0.15,
+      "tau_min": 1,
+      "min_points_at_coarsest": 200,
+      "n_scales_cap": 20,
+      "min_fit_points": 3,
+      "n_surrogates": 200,
+      "n_iaaft_iter": 50,
+      "seed": 12345
+    }
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "1_positive_control": {
+    "description": "Standalone critical branching process (branching_ratio=1.0), theoretical tau=1.5 (Borel/GW total-progeny asymptotics, Otter 1949/Dwass 1969)",
+    "generator": {
+      "model": "immigration-birth branching process (Hawkes cluster representation)",
+      "mu_immigrants": 0.05,
+      "branching_ratio": 1.0,
+      "mean_delay": 0.02,
+      "duration": 6000,
+      "max_cluster_size": 3000,
+      "max_events": 500000,
+      "gen_seed": 2024
+    },
+    "n_events": 20732,
+    "lambda": 0.2868775675509593,
+    "n_avalanches": 303,
+    "tau": 1.4836650970545056,
+    "tau_xmin": 1.0,
+    "tau_D": 0.03537177040839079,
+    "tau_n_tail": 303,
+    "tau_bootstrap_ci95": [
+      1.4402598968577613,
+      1.5387480877502666
+    ],
+    "tau_bootstrap_std": 0.025200226821280876,
+    "sigma": 0.9941252560094859,
+    "n_sigma_pairs": 195,
+    "compute_time_s": 0.07294917106628418
+  },
+  "2_negative_control": {
+    "description": "Standalone pure homogeneous Poisson process (rate-matched to control 1's mean rate) -- no clustering structure; checks the MLE/KS fit does not spuriously recover a clean tau~1.5 power law where none exists.",
+    "generator": {
+      "model": "homogeneous Poisson",
+      "mu": 3.4859757264297273,
+      "duration": 6000,
+      "gen_seed": 3033
+    },
+    "n_events": 20934,
+    "lambda": 0.28661906474995535,
+    "n_avalanches": 4890,
+    "tau": 5.591940040062242,
+    "tau_xmin": 14.0,
+    "tau_D": 0.035652058957398564,
+    "tau_n_tail": 153,
+    "tau_bootstrap_ci95": [
+      5.037799826340508,
+      6.39100171501041
+    ],
+    "tau_bootstrap_std": 0.35144757393280845,
+    "sigma": 0.9984839296543359,
+    "n_sigma_pairs": 8302,
+    "avalanche_T_distribution_note": "expected near-geometric run-length distribution for Poisson bin occupancy, not a clean power law",
+    "compute_time_s": 0.06681656837463379
+  },
+  "3_transition_control": {
+    "description": "PRE=subcritical branching process (branching_ratio=0.5, mu_immigrants tuned for comparable total event RATE to POST), POST=critical branching process (branching_ratio=1.0, tau_theory=1.5). Real Delta_tau/Delta_sigma tested against the N_SURROGATES=1000 homogeneous-Poisson surrogate null.",
+    "generator": {
+      "pre": {
+        "mu_immigrants": 0.6,
+        "branching_ratio": 0.5,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "post": {
+        "mu_immigrants": 0.05,
+        "branching_ratio": 1.0,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "gen_seed": 555
+    },
+    "n_events_pre": 6978,
+    "n_events_post": 34046,
+    "lambda": 0.14618018834201468,
+    "n_avalanches_pre": 3062,
+    "n_avalanches_post": 309,
+    "tau_pre": 4.904807252372018,
+    "tau_post": 1.480964976939325,
+    "delta_tau": -3.423842275432693,
+    "tau_pre_xmin": 9.0,
+    "tau_post_xmin": 1.0,
+    "tau_pre_D": 0.03879513986467659,
+    "tau_post_D": 0.023013057183117275,
+    "p_tau": 0.018,
+    "delta_tau_boot_ci95": [
+      -4.269221836939755,
+      -2.7928167014353753
+    ],
+    "p_bootstrap_tau": 0.0,
+    "n_paired_bootstrap": 500,
+    "delta_tau_boot_mean": -3.4714185054434337,
+    "delta_tau_boot_std": 0.400120823894451,
+    "sigma_pre": 0.965766951942067,
+    "sigma_post": 0.9951179324443902,
+    "delta_sigma": 0.02935098050232321,
+    "p_sigma": 0.012,
+    "n_sigma_pairs_pre": 653,
+    "n_sigma_pairs_post": 426,
+    "n_surrogates_valid_tau": 1000,
+    "n_surrogates_valid_sigma": 1000,
+    "surrogate_delta_tau_mean": -0.2079894984111753,
+    "surrogate_delta_tau_std": 1.514366589875902,
+    "surrogate_delta_sigma_mean": -0.00016131502027338186,
+    "surrogate_delta_sigma_std": 0.012384102217094179,
+    "robustness": {
+      "lambda_x2": {
+        "lambda": 0.29236037668402937,
+        "tau_pre": 4.357613546728125,
+        "tau_post": 1.4785750518598129,
+        "delta_tau": -2.879038494868312,
+        "sigma_pre": 1.0472074468085106,
+        "sigma_post": 0.9876868126703638,
+        "delta_sigma": -0.05952063413814679,
+        "n_avalanches_pre": 2699,
+        "n_avalanches_post": 306
+      },
+      "lambda_div2": {
+        "lambda": 0.07309009417100734,
+        "tau_pre": 5.031647230330009,
+        "tau_post": 1.490099522977155,
+        "delta_tau": -3.541547707352854,
+        "sigma_pre": 0.9377289377289376,
+        "sigma_post": 0.9954282964388834,
+        "delta_sigma": 0.0576993587099458,
+        "n_avalanches_pre": 3276,
+        "n_avalanches_post": 319
+      }
+    },
+    "compute_time_s": 49.35054802894592
+  },
+  "4_negative_control_null_test": {
+    "description": "PRE and POST independently drawn from the SAME critical branching process (branching_ratio=1.0 for both) -- structurally null case; checks the Poisson-surrogate test does not spuriously flag a genuinely-null transition.",
+    "generator": {
+      "pre": {
+        "mu_immigrants": 0.05,
+        "branching_ratio": 1.0,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "post": {
+        "mu_immigrants": 0.05,
+        "branching_ratio": 1.0,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "gen_seed": 1234321
+    },
+    "n_events_pre": 35860,
+    "n_events_post": 12308,
+    "lambda": 0.12351554330540943,
+    "n_avalanches_pre": 280,
+    "n_avalanches_post": 285,
+    "tau_pre": 1.4894869478841422,
+    "tau_post": 1.5474164547686087,
+    "delta_tau": 0.05792950688446652,
+    "p_tau": 0.949,
+    "delta_tau_boot_ci95": [
+      -0.02571764956873323,
+      0.1450914069493727
+    ],
+    "p_bootstrap_tau": 0.156,
+    "n_paired_bootstrap": 500,
+    "delta_tau_boot_mean": 0.05831532342054095,
+    "delta_tau_boot_std": 0.0424448147756587,
+    "sigma_pre": 1.0002013287698812,
+    "sigma_post": 0.9802023373451946,
+    "delta_sigma": -0.01999899142468664,
+    "p_sigma": 0.024,
+    "n_sigma_pairs_pre": 444,
+    "n_sigma_pairs_post": 276,
+    "n_surrogates_valid_tau": 1000,
+    "n_surrogates_valid_sigma": 1000,
+    "compute_time_s": 65.04749846458435
+  },
+  "4b_null_negative_control_repeats": {
+    "description": "Two additional independent PRE=POST-same-critical-process draws (n_mle_bootstrap reduced to 50 here since only p_tau/p_sigma from the surrogate loop, and p_bootstrap_tau from the (coarser, 50-pair) paired-bootstrap test, are needed, not tau's own tightly-resolved CI) -- checks whether the p_sigma=0.024 observed in run 4 was an isolated ~5%-level false positive or systematic, and whether p_bootstrap_tau is similarly well-calibrated under the null.",
+    "runs": [
+      {
+        "gen_seed": 222222,
+        "tau_pre": 1.5282202056761518,
+        "tau_post": 1.4800934690309613,
+        "delta_tau": -0.048126736645190515,
+        "p_tau": 0.955,
+        "delta_tau_boot_ci95": [
+          -0.1239887376882268,
+          0.029857995326204794
+        ],
+        "p_bootstrap_tau": 0.32,
+        "n_paired_bootstrap": 50,
+        "sigma_pre": 0.9935525909667684,
+        "sigma_post": 0.9963966646813579,
+        "delta_sigma": 0.002844073714589501,
+        "p_sigma": 0.657,
+        "n_avalanches_pre": 293,
+        "n_avalanches_post": 308,
+        "compute_time_s": 99.63808274269104
+      },
+      {
+        "gen_seed": 333333,
+        "tau_pre": 1.4690185725411702,
+        "tau_post": 1.5131633426263615,
+        "delta_tau": 0.044144770085191354,
+        "p_tau": 0.953,
+        "delta_tau_boot_ci95": [
+          -0.023749817249496458,
+          0.1113921588683983
+        ],
+        "p_bootstrap_tau": 0.32,
+        "n_paired_bootstrap": 50,
+        "sigma_pre": 0.9892412231030577,
+        "sigma_post": 0.9877131394182548,
+        "delta_sigma": -0.00152808368480295,
+        "p_sigma": 0.843,
+        "n_avalanches_pre": 284,
+        "n_avalanches_post": 291,
+        "compute_time_s": 72.98141980171204
+      }
+    ],
+    "p_sigma_values_across_all_3_null_negative_runs": [
+      0.024,
+      0.657,
+      0.843
+    ],
+    "p_tau_values_across_all_3_null_negative_runs": [
+      0.949,
+      0.955,
+      0.953
+    ],
+    "p_bootstrap_tau_values_across_all_3_null_negative_runs": [
+      0.156,
+      0.32,
+      0.32
+    ]
+  },
+  "5_transition_control_rate_mismatched": {
+    "description": "Adendo ao Gap (c) validation: same branching_ratio difference as check 3 (PRE=0.5 subcritical, POST=1.0 critical) but mu_immigrants NOT tuned for equal PRE/POST rate (both 0.05) -- reproduces the large-rate-mismatch scenario class documented in METHODOLOGY_NOTE.md as giving p_tau=0.285 under the Poisson-surrogate test alone despite a large real Delta_tau. Confirms p_bootstrap_tau (PRIMARY test) recovers power where p_tau (SECONDARY test) does not.",
+    "generator": {
+      "pre": {
+        "mu_immigrants": 0.05,
+        "branching_ratio": 0.5,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "post": {
+        "mu_immigrants": 0.05,
+        "branching_ratio": 1.0,
+        "mean_delay": 0.02,
+        "duration": 6000,
+        "max_cluster_size": 3000,
+        "max_events": 500000
+      },
+      "gen_seed": 777
+    },
+    "n_events_pre": 601,
+    "n_events_post": 24546,
+    "rate_pre": 0.10016666666666667,
+    "rate_post": 4.091,
+    "rate_ratio_post_over_pre": 40.84193011647255,
+    "lambda": 0.23732394144592733,
+    "n_avalanches_pre": 302,
+    "n_avalanches_post": 278,
+    "tau_pre": 2.168481431301561,
+    "tau_post": 1.5331833523292977,
+    "delta_tau": -0.6352980789722633,
+    "tau_pre_xmin": 1.0,
+    "tau_post_xmin": 1.0,
+    "tau_pre_D": 0.05911380134705441,
+    "tau_post_D": 0.015385036738700564,
+    "p_tau_poisson_surrogate_SECONDARY": 0.606,
+    "delta_tau_boot_ci95": [
+      -0.7635433938389121,
+      -0.521003047409934
+    ],
+    "p_bootstrap_tau_PRIMARY": 0.0,
+    "n_paired_bootstrap": 500,
+    "delta_tau_boot_mean": -0.6385748841230031,
+    "delta_tau_boot_std": 0.06488175621707015,
+    "sigma_pre": 0.8070175438596492,
+    "sigma_post": 0.9968713335940556,
+    "delta_sigma": 0.18985378973440636,
+    "p_sigma": 0.001,
+    "n_sigma_pairs_pre": 24,
+    "n_sigma_pairs_post": 190,
+    "n_surrogates_valid_tau": 1000,
+    "n_surrogates_valid_sigma": 1000,
+    "surrogate_delta_tau_mean": 0.45750503344815274,
+    "surrogate_delta_tau_std": 1.4137615081387396,
+    "robustness": {
+      "lambda_x2": {
+        "lambda": 0.47464788289185467,
+        "tau_pre": 2.1363746651005067,
+        "tau_post": 1.5278195165286967,
+        "delta_tau": -0.6085551485718099,
+        "sigma_pre": 1.0999999999999999,
+        "sigma_post": 0.9987331081081082,
+        "delta_sigma": -0.10126689189189164,
+        "n_avalanches_pre": 295,
+        "n_avalanches_post": 273
+      },
+      "lambda_div2": {
+        "lambda": 0.11866197072296367,
+        "tau_pre": 2.1800527188132097,
+        "tau_post": 1.5332083296194319,
+        "delta_tau": -0.6468443891937778,
+        "sigma_pre": 0.778846153846154,
+        "sigma_post": 0.9907235621521336,
+        "delta_sigma": 0.21187740830597968,
+        "n_avalanches_pre": 305,
+        "n_avalanches_post": 280
+      }
+    },
+    "compute_time_s": 22.813921451568604
+  },
+  "_config": {
+    "N_SURROGATES": 1000,
+    "N_MLE_BOOTSTRAP": 500,
+    "pipeline_internal_seed": 12345,
+    "total_compute_time_s": 310.236444234848
+  }
+}

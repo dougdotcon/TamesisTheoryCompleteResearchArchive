@@ -174,6 +174,71 @@ imitar; `epsilon` recalculado por substituto via `RR_target` fixo). `p =
 fração de substitutos com |Delta_DET_substituto| >= |Delta_DET_real|`
 (e igualmente para `Delta_ENTR`).
 
+## Adendo — controle positivo do Gap (b) redesenhado (fixado ANTES de qualquer dado real)
+
+A validação sintética obrigatória (`analysis/validate_synthetic.py`,
+`VALIDATION_NOTE.md`) mostrou que o controle positivo exato do Gap (b)
+(PRE=ruído branco Gaussiano iid) não pôde ser calculado: FNN nunca
+resolve `m<=10` para ruído branco puro (nem para AR(1) com `phi` até
+0,9 — só resolve a partir de `phi=0,95` ou `H(fGn)>=0,3`), confirmado
+robustamente (5 sementes, `N=2.000` e `N=5.000`, ambas as marginais
+Gaussiana e uniforme, bootstrap testado e não resolve). Isso bloqueia
+`%DET` e `ENTR` SIMULTANEAMENTE (diferente de `grafo-de-visibilidade`,
+onde só `d_B` falhava) porque ambos dependem do mesmo passo de embedding
+compartilhado do Gap (a).
+
+Uma tentativa informal de trocar o PRE para fGn-like `H=0,7` (que resolve
+FNN, mesmo processo já validado no controle negativo) com o mapa
+logístico remapeado por posto sobre esse novo PRE foi tentada e
+descartada pelo próprio agente de validação: o mapa logístico tem
+espectro naturalmente quase-branco/banda larga, então remapear sua ORDEM
+temporal sobre a marginal de um `fGn H=0,7` (espectro colorido) NÃO
+preserva o casamento de espectro que o desenho do Gap (b) exige — o IAAFT
+(que preserva o espectro real de cada série) reproduziu corretamente esse
+descasamento não controlado, mascarando qualquer sinal genuíno
+(`p_DET=1,0` na checagem informal, não formalizada).
+
+**Correção, fixada ANTES de qualquer dado real (nenhuma razão de
+determinismo real foi calculada até este ponto):** trocar a FONTE do
+sinal caótico do controle positivo de POST — do mapa logístico (espectro
+banda-larga/quase-branco) para o sistema de Rössler (Rössler 1976, *Phys.
+Lett. A* 57:397; espectro naturalmente colorido/banda-limitada perto de
+uma frequência de oscilação dominante, muito mais próximo em caráter
+espectral de um `fGn` do que o mapa logístico) — mantendo PRE=`fGn-like
+H=0,7` (já validado, resolve FNN) e a mesma técnica de remapeamento por
+posto. Isso é uma correção de DESENHO de validação (qual processo caótico
+usar como fonte de POST), não uma reformulação de `R_lambda`, `I(X)`,
+regra de PRE/POST, teto de subamostragem, ou protocolo de significância
+— nenhum desses é alterado.
+
+**Protocolo de decisão, fixado a priori para este único passo adicional
+de validação (não uma busca aberta):**
+1. Gerar POST via a coordenada `x` do sistema de Rössler (parâmetros
+   clássicos `a=0,2, b=0,2, c=5,7`, regime caótico bem documentado),
+   integrado e reamostrado para `N=2.000`, remapeado por posto sobre a
+   marginal do PRE `fGn H=0,7`.
+2. Reportar honestamente o casamento espectral empírico (mesmo
+   diagnóstico de inclinação de periodograma já usado) — sem exigir
+   casamento perfeito, só reportar o quão próximo ficou.
+3. Rodar o controle positivo completo (embedding a partir do PRE, IAAFT,
+   `p_DET`/`p_ENTR`) com essa combinação.
+4. **Se `%DET` e/ou `ENTR` mostrarem poder real** (`p<0,05` com separação
+   clara da nula, na mesma linha do que já se viu em MSE/VG): validação
+   PASSA sob este desenho corrigido, `Status` pode seguir para o dado
+   real real com o protocolo IAAFT como especificado.
+5. **Se NENHUM dos dois canais mostrar poder real** mesmo sob este
+   segundo desenho: a identificabilidade de `%DET`/`ENTR` sob a
+   convenção de embedding travada (`R_tol=10`, `A_tol=2`, `m<=10`,
+   `RR_target=0,05`) não pôde ser estabelecida com nenhum dos dois
+   desenhos de controle positivo tentados — o candidato `RQA` é fechado
+   NA ETAPA DE VALIDAÇÃO, sem tocar dado real, com veredito honesto de
+   identificabilidade não estabelecida (um resultado válido e diferente
+   de "negativo no dado real", registrado como tal). Nenhuma terceira
+   tentativa de redesenho será feita — dois desenhos documentados e
+   testados rigorosamente já são suficientes para reportar honestamente
+   os limites desta linha de investigação, sem transformar a validação
+   num processo aberto de tentativa-e-erro até "dar certo".
+
 ## O que este passo NÃO é
 
 Continua Fase 0/exploratório — `DISC-TRI-RG-001` segue

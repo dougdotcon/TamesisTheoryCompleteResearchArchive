@@ -1,0 +1,76 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-004",
+  "role": "Metodologia 5 - Descoberta adversarial de nulos (nao multiplicidade oculta)",
+  "verdict": "ACHADO NAO SOBREVIVE INTACTO -- mecanismo mundano quantificavel identificado e confirmado experimentalmente; nao elimina 100% do sinal mas invalida a magnitude/CI reportados e expoe uma lacuna estrutural no desenho do proprio Adendo 4c",
+  "locked_files_touched": false,
+  "git_diff_stat_empty": true,
+  "mechanisms_tested": {
+    "1_parallax_distance_systematic": {
+      "verdict": "DESCARTADO",
+      "corr_plx_relerr_vs_theta_deg": -0.10401203268748148,
+      "corr_plx_relerr_vs_log_sepAU": 0.003479078944969267,
+      "note": "Sem correlacao relevante entre erro relativo de paralaxe e separacao angular/projetada -- direcao da correlacao (levemente negativa) e' oposta a hipotese."
+    },
+    "2_malmquist_pm_precision_selection": {
+      "verdict": "MECANISMO SECUNDARIO/FRACO, NAO A CAUSA PRINCIPAL",
+      "note": "O corte PM_RELERR_MAX=0.01 em apply_quality_cuts.py e' aplicado ao erro relativo do movimento proprio TOTAL de CADA estrela individualmente (pmRA1 sozinho como denominador, nao o modulo total pmRA/pmDE nem dmu do par) -- nao seleciona diretamente por v_p/dmu do par. O mecanismo dominante encontrado (item 5) e' relacionado mas distinto."
+    },
+    "3_chance_alignment_residual": {
+      "verdict": "DESCARTADO COMO CAUSA PRINCIPAL, MAS DIRECIONALMENTE CONSISTENTE",
+      "mean_R_chance_align_bin0": 0.0007311923137856616,
+      "expected_contaminants_bin0": 4.4,
+      "n_bin0": 6042,
+      "frac_R_gt_0p005_bin0": 0.03260509764978484,
+      "note": "Contaminacao residual esperada de R_chance_align (media de R, que e' a propria estimativa de probabilidade de alinhamento casual) e' de ~0,07% em bin0 (~4-5 sistemas de 6042) -- pequena demais para mover uma MEDIANA. R decai ~500x de bin0 para bin4, direcionalmente compativel com o padrao observado, mas quantitativamente irrelevante frente ao mecanismo do item 5."
+    },
+    "4_mass_luminosity_systematic": {
+      "verdict": "DESCARTADO COMO EXPLICACAO DA TENDENCIA",
+      "median_Mtot_Msun_by_bin": [0.9035969823358423, 0.9170336749737317, 0.8914214205886046, 0.9020897526034796, 1.0407464268703335],
+      "note": "Mtot mediano e' aproximadamente FLAT entre bins 0-3 (~0.90-0.92 Msun) e mais ALTO (nao mais baixo) em bin4 (1.04 Msun) -- tendencia oposta a necessaria para produzir o declinio monotonico observado de delta_obs-newt via subestimativa de massa dependente de bin."
+    },
+    "5_estimator_rice_rayleigh_noise_bias": {
+      "verdict": "MECANISMO REAL, QUANTIFICADO, CONFIRMADO EXPERIMENTALMENTE -- LACUNA ESTRUTURAL NO ADENDO 4c",
+      "description": "dmu = |vetor 2D (dpmRA,dpmDE)| e' a magnitude de um vetor Gaussiano ruidoso -- sua esperanca E[dmu_obs] eh SEMPRE >= dmu_verdadeiro (viés de Rice/Rayleigh), pior em baixo SNR. O ramo 'mock' oficial do Adendo 4c (generate_synthetic_vp_newtonian) e' SEMPRE gerado sem qualquer ruido de medida injetado, mas o ramo 'real' NECESSARIAMENTE carrega ruido astrometrico Gaia real -- assimetria estrutural entre os dois ramos que delta_obs-newt = mediana_real - mediana_mock nao cancela.",
+      "corroboration_independent_literature_quantity": {
+        "note": "dpm_sig (Hwang, Ting & Zakamska 2022), ja presente no catalogo cruzado e usado no Gap(a) para outro proposito, e' essencialmente a MESMA quantidade (SNR de dmu) que este ataque calculou de forma independente.",
+        "corr_dpm_sig_hwang_vs_independently_computed_snr_proxy": 0.9943681584698759,
+        "median_dpm_sig_by_bin": [5.784, 9.850, 12.867, 17.030, 30.172],
+        "frac_dpm_sig_lt_3_by_bin": [0.260, 0.144, 0.090, 0.052, 0.023]
+      },
+      "isolated_mechanism_test_rice_bias_null_test": {
+        "description": "Simulacao 100% Newtoniana (zero MOND): ramo 'teste' = orbita Kepleriana pura + RUIDO GAUSSIANO REAL por sistema (e_pmRA/e_pmDE reais de cada sistema) no calculo de dmu_obs->v_p, exatamente como o pipeline real faz. Ramo 'mock' = oficial (Adendo 4c), sem ruido.",
+        "delta_null_noise_per_bin": [0.0749812184647741, 0.03175240972224144, 0.014011420300761662, 0.006406104261057255, -0.005599005079413633],
+        "ci95_lo": [0.05185325875789305, 0.0065010321309259735, -0.008705800680715801, -0.017083521406045084, -0.02982067572019932],
+        "ci95_hi": [0.09797167719215015, 0.05644443665727556, 0.03693339486168872, 0.028601900395238394, 0.016562598543131715],
+        "comparison_delta_obs_newt_primary_real_data": [0.22736621639398957, 0.1723131937189055, 0.13134918904591655, 0.10267561803620519, 0.04667166410886919],
+        "fraction_of_real_signal_explained_by_isolated_mechanism_bin0": 0.330,
+        "significance": "CI95% exclui 0 nos bins 0 e 1; consistente com 0 nos bins 2-4 -- mesma forma qualitativa (positivo, decrescente com bin de gN) do sinal reivindicado."
+      },
+      "decisive_symmetric_noise_test": {
+        "description": "Mesma simulacao 100% Newtoniana, mas agora AMBOS os ramos (teste E mock) recebem ruido Gaussiano real independente (mesmo orcamento de erro por sistema) -- comparacao nula corretamente simetrica.",
+        "delta_symmetric_noise_per_bin": [0.00840330729915556, 0.00993455575602245, 0.004793468586481858, 0.0003272043291935589, 0.004790233166860752],
+        "ci95_lo": [-0.014697160540996712, -0.013638932264308429, -0.018805083058653926, -0.024092517235794426, -0.01950998121432634],
+        "ci95_hi": [0.03290299254295905, 0.03454586881621452, 0.027528444706332256, 0.020960267746709428, 0.02745017903502789],
+        "conclusion": "Delta colapsa para consistente-com-zero em TODOS os 5 bins (CI95% contem 0 em todos), comparavel ao piso de ruido do proprio controle negativo oficial do pre-registro (~0.02-0.07 dex). CONFIRMA que o viés positivo de +0.075/+0.032/... encontrado no teste isolado acima e' causado pela ASSIMETRIA de desenho (mock sempre sem ruido) do Adendo 4c, nao por qualquer propriedade fisica do dado real."
+      },
+      "empirical_robustness_check_on_real_data_dpm_sig_gt_3": {
+        "description": "Restringir a amostra de DESCOBERTA REAL (nao simulacao) ao subconjunto dpm_sig>3 (mesmo limiar de confiabilidade ja usado por Hwang/Chae para ajuste orbital, 88.6% da amostra, 26769/30203 sistemas) e re-rodar don.run_delta_obs_newt oficial sem modificacao.",
+        "n_full": 30203,
+        "n_dpm_sig_gt3": 26769,
+        "delta_obs_newt_primary_dpm_sig_gt3": [0.3303, 0.2335, 0.1715, 0.1260, 0.0721],
+        "delta_obs_newt_primary_full_sample": [0.22736621639398957, 0.1723131937189055, 0.13134918904591655, 0.10267561803620519, 0.04667166410886919],
+        "finding": "CONTRARIO a hipotese ingenua de 'ruido explica tudo': restringir a alto-SNR AUMENTA o sinal em todos os bins, nao diminui.",
+        "explanation_of_apparent_contradiction": "O subconjunto excluido (dpm_sig<=3) carrega excentricidade medida sistematicamente MAIOR (mediana e=0.95 vs 0.83 em bin0) e Mtot menor (0.69 vs 0.98 Msun) -- a excentricidade mais alta empurra o BASELINE do proprio ramo mock para baixo (efeito estrutural v^2/r-vs-excentricidade ja documentado no Adendo 4c/Secao 4c da PREREGISTRATION.md), diluindo (nao inflando) o delta bruto nesse subconjunto de baixo SNR. Dois mecanismos mundanos SEPARADOS (viés de Rice em dmu, e viés de v^2/r-vs-excentricidade) estao entrelacados na amostra real de um jeito que um corte simples de SNR nao consegue separar -- por isso o corte dpm_sig>3 nao serve como teste limpo do mecanismo de Rice isolado no dado real (so' no teste sintetico isolado acima, onde a excentricidade e' controlada)."
+      }
+    },
+    "6_other": {
+      "escape_velocity_sanity_check": {
+        "description": "v_p <= v_esc(s_proj) = sqrt(2*G*Mtot/s) e' condicao NECESSARIA para orbita Newtoniana ligada (pois r_3D>=s => v_esc(r_3D)<=v_esc(s), e MOND so' aumenta o G efetivo por um fator O(1-3), insuficiente para violacoes >2x)",
+        "frac_vp_gt_vesc_proj_by_bin": [0.1343925852366766, 0.0956953642384106, 0.07731788079470199, 0.054975989402218914, 0.03889440582588547],
+        "frac_vp_gt_2x_vesc_proj_by_bin": [0.012909632571996028, 0.004966887417218543, 0.0016556291390728477, 0.0009935419771485345, 0.00016550810989738498],
+        "interpretation": "13.4% de bin0 'viola' o piso de velocidade de escape Newtoniana -- MUITO maior que a contaminacao esperada de alinhamento casual residual (~0.07%, item 3), mas consistente em escala e em padrao por bin com o mecanismo de viés de Rice (item 5): sistemas com baixo SNR de dmu tem dmu_obs inflado, o que pode empurra-los acima do piso de v_esc mesmo sendo genuinamente ligados com velocidade verdadeira menor."
+      }
+    }
+  },
+  "recommendation": "O a0 ajustado (3.634e-10 m/s^2, IC95% [2.944,4.494]e-10) e o veredito BOTH_FALSIFIED em result_primary.json NAO devem ser aceitos como definitivos sem antes: (1) reconstruir o ramo mock do Adendo 4c injetando ruido Gaussiano de medida realista por sistema (mesmo orcamento e_pmRA/e_pmDE do sistema real correspondente) em vez de v_p sintetico noiseless: teste 'symmetric_noise_null_test' demonstra que isso elimina o viés estrutural identificado; (2) re-rodar a analise primaria completa (n_mc=200, bootstrap=1000) com esse mock corrigido sobre os 30.203 sistemas reais; (3) so' entao comparar a0 resultante com a0_A/a0_B. Ate essa correcao, o resultado LOCKED atual carrega uma fonte de viés sistematico documentada, direcionalmente identica ao sinal reivindicado, nao capturada pelo IC bootstrap reportado (que so' resample a variancia geometrica MC + amostral, nao a incerteza/viés de medida de v_p_real, que e' fixado deterministicamente ANTES do bootstrap)."
+}

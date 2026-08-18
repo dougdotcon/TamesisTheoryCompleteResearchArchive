@@ -1,0 +1,477 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-004",
+  "role": "adversarial_hidden_multiplicity_check_agent2",
+  "run_timestamp_utc": "2026-08-18T01:29:50Z",
+  "literature_sources": {
+    "primary": "Chae (2023), ApJ 952, 128, arXiv:2305.04613, Secoes 2.3/3.2/3.3 (texto integral verificado, arquivo local chae_2305.04613.txt)",
+    "f_multi_literature_range": "0.25-0.47 (Tokovinin 2014b, Riddle et al. 2015, Moe & Stefano 2017, Raghavan et al. 2010, ver Chae Sec.2.3)",
+    "f_multi_chae_self_calibrated_range": "0.3-0.5 (Chae Sec.3.2, livre, auto-calibrado)",
+    "mass_luminosity_exponent": "alpha=3.5 (Chae Fig.7/Sec.2.2/3.2)",
+    "companion_assignment_rule": "40% componente brilhante so, 30% fraco so, 30% ambos (Chae Sec.3.2)",
+    "delta_mag_powerlaw_gammaM": "-0.7 (Tokovinin 2008, binarias largas s>200au) ou -0.6 (Riddle 2015+Raghavan 2010) (Chae Eq.13/Sec.3.2)",
+    "inner_semi_major_axis": "log-uniforme [0.01, d_pc] au (Belokurov et al. 2020 citado por Chae; limite superior = 1 arcsec nao resolvido) (Chae Sec.3.2 item 7)",
+    "photocenter_wobble_formula": "Eq.19-20 de Chae (2023), citando Belokurov et al. 2020 e Penoyre et al. 2022 para o mecanismo fisico de wobble astrometrico",
+    "ruwe_threshold_convention": "RUWE>1.2 (convencao comum de nao-single-star / excesso astrometrico, documentacao Gaia DR2/EDR3, Lindegren et al. 2021)"
+  },
+  "item1_analytic_estimate": {
+    "0.25": {
+      "frac_bright_only": 0.1,
+      "frac_faint_only": 0.075,
+      "frac_both": 0.075,
+      "frac_unaffected": 0.75,
+      "median_log10_mass_shift_if_one_component_affected": 0.11293748115829733,
+      "median_log10_mass_shift_if_both_affected": 0.20248425692888478,
+      "population_mean_log10_g_over_gN_shift_expected": 0.027903203148421638
+    },
+    "0.4": {
+      "frac_bright_only": 0.16000000000000003,
+      "frac_faint_only": 0.12,
+      "frac_both": 0.12,
+      "frac_unaffected": 0.6,
+      "median_log10_mass_shift_if_one_component_affected": 0.11293748115829733,
+      "median_log10_mass_shift_if_both_affected": 0.20248425692888478,
+      "population_mean_log10_g_over_gN_shift_expected": 0.044645125037474614
+    },
+    "0.5": {
+      "frac_bright_only": 0.2,
+      "frac_faint_only": 0.15,
+      "frac_both": 0.15,
+      "frac_unaffected": 0.5,
+      "median_log10_mass_shift_if_one_component_affected": 0.11293748115829733,
+      "median_log10_mass_shift_if_both_affected": 0.20248425692888478,
+      "population_mean_log10_g_over_gN_shift_expected": 0.055806406296843275
+    }
+  },
+  "item2_ruwe_direct_test": {
+    "ruwe_threshold": 1.2,
+    "n_systems_ruwe_high": 9380,
+    "n_systems_ruwe_low": 20823,
+    "fraction_ruwe_high": 0.3105651756448035,
+    "ruwe_high": {
+      "n_bins": 5,
+      "bin_edges_log10_gN_projected": [
+        -11.7012,
+        -9.1728,
+        -8.4667,
+        -7.9752,
+        -7.5548,
+        -6.5224
+      ],
+      "n_systems_per_bin": [
+        1421,
+        1544,
+        1609,
+        1837,
+        2969
+      ],
+      "gN_bin_median_si": [
+        2.142378527941599e-10,
+        1.6777155070272088e-09,
+        6.304743726529563e-09,
+        1.7896276514162243e-08,
+        5.370182385896127e-08
+      ],
+      "median_real_log_g_ratio_primary": [
+        0.2909590374365163,
+        0.22740662743653428,
+        0.15715758444651728,
+        0.0864498854811485,
+        -0.05043680970926399
+      ],
+      "median_mock_log_g_ratio_primary": [
+        -0.2041269761278554,
+        -0.19445254348822014,
+        -0.2101074844387335,
+        -0.21296108701552202,
+        -0.19905506401704454
+      ],
+      "delta_obs_newt_primary": [
+        0.4950860135643717,
+        0.42185917092475445,
+        0.3672650688852508,
+        0.29941097249667054,
+        0.14861825430778056
+      ],
+      "bootstrap": {
+        "n_bootstrap": 300,
+        "n_valid_replicas_per_bin": [
+          300,
+          300,
+          300,
+          300,
+          300
+        ],
+        "ci95_lo": [
+          0.4296454636321679,
+          0.37149181458481234,
+          0.31090371357564006,
+          0.25248088532708024,
+          0.11163337669423833
+        ],
+        "ci95_hi": [
+          0.5577487395420185,
+          0.4742139018707251,
+          0.4160046938516849,
+          0.34355609988146407,
+          0.18396900678905725
+        ],
+        "delta_obs_newt_boot_mean": [
+          0.4955780223317735,
+          0.4232124389109629,
+          0.3674770969164058,
+          0.29751092766914944,
+          0.14922169672694804
+        ],
+        "delta_obs_newt_boot_std": [
+          0.03060672310895242,
+          0.02739956493266347,
+          0.028346102671690986,
+          0.02424943501811525,
+          0.018083456441861417
+        ]
+      },
+      "seeds": {
+        "seed_input": 987654322,
+        "seed_real": 987654322,
+        "seed_mock_true_geometry": 1098765433,
+        "seed_mock_recovery": 1209876544,
+        "seed_bootstrap": 1320987655
+      },
+      "n_mc": 200,
+      "n_sys": 9380,
+      "mock_generation_diagnostics": {
+        "fraction_individual_eccentricity": 0.8146055437100214,
+        "median_e_true": 0.7247512967152522,
+        "fraction_e_true_gt_0p5": 0.8133262260127931,
+        "median_log_g_true_over_gN_true_3d_no_recovery_noise": -0.16993127041461,
+        "a0_boost": null
+      }
+    },
+    "ruwe_low": {
+      "n_bins": 5,
+      "bin_edges_log10_gN_projected": [
+        -11.7012,
+        -9.1728,
+        -8.4667,
+        -7.9752,
+        -7.5548,
+        -6.5224
+      ],
+      "n_systems_per_bin": [
+        4621,
+        4496,
+        4431,
+        4202,
+        3073
+      ],
+      "gN_bin_median_si": [
+        1.8030748978240438e-10,
+        1.6605633330055625e-09,
+        6.1955076018281385e-09,
+        1.6934861857136443e-08,
+        4.465728610768771e-08
+      ],
+      "median_real_log_g_ratio_primary": [
+        -0.06770410632060242,
+        -0.13953200568191973,
+        -0.16169583101697843,
+        -0.17219871668976133,
+        -0.21007211498070166
+      ],
+      "median_mock_log_g_ratio_primary": [
+        -0.22389254726265906,
+        -0.2161959123473018,
+        -0.20726220648867558,
+        -0.19765211006223427,
+        -0.20139581444787413
+      ],
+      "delta_obs_newt_primary": [
+        0.15618844094205664,
+        0.07666390666538206,
+        0.045566375471697146,
+        0.025453393372472932,
+        -0.00867630053282753
+      ],
+      "bootstrap": {
+        "n_bootstrap": 300,
+        "n_valid_replicas_per_bin": [
+          300,
+          300,
+          300,
+          300,
+          300
+        ],
+        "ci95_lo": [
+          0.12589513879014586,
+          0.04671161243232728,
+          0.015363721449187054,
+          -0.0022945253286158628,
+          -0.04300958732572517
+        ],
+        "ci95_hi": [
+          0.18639165590307596,
+          0.10978757316335681,
+          0.07192282295080751,
+          0.05484061373361881,
+          0.024391777974223084
+        ],
+        "delta_obs_newt_boot_mean": [
+          0.15648236467624135,
+          0.07688795361858992,
+          0.04515146289337948,
+          0.025981707735656587,
+          -0.008216532186314759
+        ],
+        "delta_obs_newt_boot_std": [
+          0.015730614591292096,
+          0.016112924026638366,
+          0.014915116126761465,
+          0.015392767960121744,
+          0.01691455883772247
+        ]
+      },
+      "seeds": {
+        "seed_input": 987654323,
+        "seed_real": 987654323,
+        "seed_mock_true_geometry": 1098765434,
+        "seed_mock_recovery": 1209876545,
+        "seed_bootstrap": 1320987656
+      },
+      "n_mc": 200,
+      "n_sys": 20823,
+      "mock_generation_diagnostics": {
+        "fraction_individual_eccentricity": 0.7105124141574221,
+        "median_e_true": 0.7310975483962244,
+        "fraction_e_true_gt_0p5": 0.8195745089564423,
+        "median_log_g_true_over_gN_true_3d_no_recovery_noise": -0.17586846402884249,
+        "a0_boost": null
+      }
+    },
+    "delta_obs_newt_diff_high_minus_low": [
+      0.33889757262231507,
+      0.3451952642593724,
+      0.3216986934135536,
+      0.2739575791241976,
+      0.1572945548406081
+    ],
+    "ci95_no_overlap_per_bin": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "item3_monte_carlo_injection": {
+    "f_multi_0.3_with_wobble": {
+      "delta_obs_newt_primary": [
+        0.12809860409106677,
+        0.12101534420814793,
+        0.10823279639498265,
+        0.09663301011375681,
+        0.09172893124543757
+      ],
+      "n_systems_per_bin": [
+        6042,
+        6040,
+        6040,
+        6039,
+        6042
+      ],
+      "diagnostics": {
+        "n": 30203,
+        "f_multi_target": 0.3,
+        "gamma_M": -0.7,
+        "frac_has_multi": 0.2981491904777671,
+        "frac_affects_1_only": 0.119656987716452,
+        "frac_affects_2_only": 0.09022282554713108,
+        "frac_affects_both": 0.08826937721418403,
+        "median_Mtot_true_over_cat": 1.0,
+        "mean_log10_Mtot_true_over_cat": 0.03398158516046931,
+        "median_wobble_speed_km_s": 1.414767831052971,
+        "frac_nonzero_wobble": 0.15243518855742808
+      },
+      "bootstrap_ci95_lo": [
+        0.1030272515850892,
+        0.09654540217801195,
+        0.08242983439250534,
+        0.07387420080696547,
+        0.07061268800811994
+      ],
+      "bootstrap_ci95_hi": [
+        0.15620741141887717,
+        0.14574931593526255,
+        0.13475077475327696,
+        0.1227934742671407,
+        0.11616178081830139
+      ]
+    },
+    "f_multi_0.4_with_wobble": {
+      "delta_obs_newt_primary": [
+        0.16720345242216528,
+        0.1574894743289406,
+        0.14006549322127695,
+        0.1252707419511721,
+        0.11469393499379293
+      ],
+      "n_systems_per_bin": [
+        6042,
+        6040,
+        6040,
+        6039,
+        6042
+      ],
+      "diagnostics": {
+        "n": 30203,
+        "f_multi_target": 0.4,
+        "gamma_M": -0.7,
+        "frac_has_multi": 0.39952984802834157,
+        "frac_affects_1_only": 0.16163957222792438,
+        "frac_affects_2_only": 0.1175711022083899,
+        "frac_affects_both": 0.12031917359202728,
+        "median_Mtot_true_over_cat": 1.0,
+        "mean_log10_Mtot_true_over_cat": 0.04582983949217958,
+        "median_wobble_speed_km_s": 1.4236401194322525,
+        "frac_nonzero_wobble": 0.1991855113730424
+      },
+      "bootstrap_ci95_lo": [
+        0.1416968551596044,
+        0.13484301333874682,
+        0.11623463677133952,
+        0.09671838847801846,
+        0.09073753669524363
+      ],
+      "bootstrap_ci95_hi": [
+        0.19550745927196544,
+        0.18615745542561196,
+        0.16156019566558724,
+        0.1462986623805048,
+        0.13731012067934614
+      ]
+    },
+    "f_multi_0.5_with_wobble": {
+      "delta_obs_newt_primary": [
+        0.2184381352936655,
+        0.21824361763847064,
+        0.2028400358469501,
+        0.1527623911167443,
+        0.14133735008033205
+      ],
+      "n_systems_per_bin": [
+        6042,
+        6040,
+        6040,
+        6039,
+        6042
+      ],
+      "diagnostics": {
+        "n": 30203,
+        "f_multi_target": 0.5,
+        "gamma_M": -0.7,
+        "frac_has_multi": 0.5011091613415886,
+        "frac_affects_1_only": 0.19815912326590074,
+        "frac_affects_2_only": 0.15114392610005628,
+        "frac_affects_both": 0.15180611197563157,
+        "median_Mtot_true_over_cat": 1.0127429743168759,
+        "mean_log10_Mtot_true_over_cat": 0.057089164780592866,
+        "median_wobble_speed_km_s": 1.4168338977777901,
+        "frac_nonzero_wobble": 0.25586862232228585
+      },
+      "bootstrap_ci95_lo": [
+        0.19046116115939943,
+        0.19108851490362497,
+        0.17710848981998475,
+        0.13071859027609775,
+        0.11877284525512877
+      ],
+      "bootstrap_ci95_hi": [
+        0.2438299338152564,
+        0.2416764100957407,
+        0.22552689743122775,
+        0.17825366420650537,
+        0.16735021129162253
+      ]
+    },
+    "f_multi_0.4_no_wobble_mass_only": {
+      "delta_obs_newt_primary": [
+        0.04149036809512732,
+        0.03208796983593101,
+        0.03250144999331803,
+        0.02936359134403846,
+        0.05246865237710502
+      ],
+      "n_systems_per_bin": [
+        6042,
+        6040,
+        6040,
+        6039,
+        6042
+      ],
+      "diagnostics": {
+        "n": 30203,
+        "f_multi_target": 0.4,
+        "gamma_M": -0.7,
+        "frac_has_multi": 0.4033705261066781,
+        "frac_affects_1_only": 0.1629970532728537,
+        "frac_affects_2_only": 0.11737244644571732,
+        "frac_affects_both": 0.12300102638810714,
+        "median_Mtot_true_over_cat": 1.0,
+        "mean_log10_Mtot_true_over_cat": 0.0459005635210871
+      },
+      "bootstrap_ci95_lo": [
+        0.016988186044559872,
+        0.007972104399350186,
+        0.010347752747970018,
+        0.005278106356114234,
+        0.03238998832591036
+      ],
+      "bootstrap_ci95_hi": [
+        0.06370688609970727,
+        0.055197779807580935,
+        0.06081318014129427,
+        0.053255474899313295,
+        0.07412937783485092
+      ]
+    }
+  },
+  "comparison_with_real_observed_pattern": {
+    "real_delta_obs_newt": [
+      0.22736621639398957,
+      0.1723131937189055,
+      0.13134918904591655,
+      0.10267561803620519,
+      0.04667166410886919
+    ],
+    "synthetic_over_real_ratio_per_scenario": {
+      "f_multi_0.3_with_wobble": [
+        0.563402101344257,
+        0.7022987711873082,
+        0.8240081052738517,
+        0.9411485605052053,
+        1.9654094833958573
+      ],
+      "f_multi_0.4_with_wobble": [
+        0.735392685307426,
+        0.9139722323634322,
+        1.066359786753715,
+        1.220063188779633,
+        2.4574640134161663
+      ],
+      "f_multi_0.5_with_wobble": [
+        0.9607325958890341,
+        1.2665519855344998,
+        1.5442808388869613,
+        1.4878156473611648,
+        3.0283332034323838
+      ],
+      "f_multi_0.4_no_wobble_mass_only": [
+        0.18248255503021213,
+        0.18621887937540127,
+        0.24744309599015715,
+        0.2859840720285156,
+        1.1242078759975949
+      ]
+    }
+  },
+  "elapsed_seconds": 112.57592415809631
+}

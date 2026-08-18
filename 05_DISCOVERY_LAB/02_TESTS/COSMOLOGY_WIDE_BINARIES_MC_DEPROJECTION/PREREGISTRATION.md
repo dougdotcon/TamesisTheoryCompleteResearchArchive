@@ -191,26 +191,32 @@ critério H_A/H_B).
    well determined for N>100 MC realizations*", citação literal já
    verificada). Para CADA sistema, em CADA realização: sorteio
    independente de $(e,i,\phi_0,t)$ conforme Gaps (a)-(b), cálculo de
-   $(r,v,g,g_N)$.
-2. Para cada sistema, isso produz uma distribuição de 200 valores de
-   $\log_{10}(g_i/g_{N,i})$ — capturando a incerteza geométrica/orbital
-   daquele sistema individual.
-3. **IC de 95% via bootstrap por sistema, reaproveitando os 200 sorteios
-   já computados (sem recomputar a desprojeção por réplica):** 1000
-   réplicas bootstrap sobre os 30.203 sistemas (reamostragem com
+   $(r,v,g,g_N)$ — feito DUAS VEZES em paralelo por sistema/realização,
+   uma vez usando o $v_p$ REAL observado, outra vez usando um $v_p$
+   MOCK sintético Newtoniano puro (mesma geometria orbital sorteada
+   independentemente) — conforme o Adendo 4c.
+2. Para cada sistema, isso produz duas distribuições de 200 valores cada:
+   $\log_{10}(g_i/g_{N,i})_{\text{real}}$ e
+   $\log_{10}(g_i/g_{N,i})_{\text{mock}}$ — capturando a incerteza
+   geométrica/orbital daquele sistema individual em ambos os ramos.
+3. **IC de 95% via bootstrap por sistema, reaproveitando os 200×2
+   sorteios já computados (sem recomputar a desprojeção por réplica):**
+   1000 réplicas bootstrap sobre os 30.203 sistemas (reamostragem com
    reposição); para cada réplica, cada sistema resamostrado usa UM dos
-   seus 200 valores de $\log_{10}(g/g_N)$ já pré-computados, sorteado
-   uniformemente; medianas por bin recalculadas (mesmas bordas fixas) e
-   `a0` reajustado (passo 4 abaixo) em cada réplica — dá o IC de 95% em
-   `a0` capturando TANTO variabilidade amostral QUANTO incerteza de
-   desprojeção, sem custo combinatório de recomputar 1000×200
-   desprojeções completas.
+   seus 200 pares `(real, mock)` já pré-computados, sorteado
+   uniformemente (o par vem do MESMO índice de realização MC, preservando
+   qualquer correlação real-mock por construção); $\delta_{\text{obs-newt}}$
+   por bin recalculado (mesmas bordas fixas) e `a0` reajustado (passo 4
+   abaixo) em cada réplica — dá o IC de 95% em `a0` capturando TANTO
+   variabilidade amostral QUANTO incerteza de desprojeção, sem custo
+   combinatório de recomputar 1000×200 desprojeções completas.
 4. Ajuste não-linear de mínimos quadrados de `a0` (único parâmetro
-   livre) entre as 5 medianas reais (da realização primária, item 1) e
-   o modelo $\nu(g_{N,\text{bin}}/a_0)$ — mesmo procedimento de SPARC-003
-   Seção 4, adaptado ao novo espaço de aceleração desprojetada.
-   Convergência verificada com $\geq2$ pontos de partida diferentes
-   (lição de SPARC-002, reaplicada).
+   livre) entre os 5 valores reais de $\delta_{\text{obs-newt}}(\text{bin})$
+   (da realização primária, item 1) e o modelo
+   $\delta_{\text{AQUAL}}(\text{bin};a_0)=\log_{10}(\nu(g_{N,\text{bin}}/a_0))$
+   — mesmo procedimento de SPARC-003 Seção 4, adaptado à estatística
+   diferenciada do Adendo 4c. Convergência verificada com $\geq2$ pontos
+   de partida diferentes (lição de SPARC-002, reaplicada).
 5. Verificar se $a_0^A$ e/ou $a_0^B$ caem dentro do IC de 95%.
 
 ### Simplificação declarada: correção de companheiras ocultas ($f_{multi}$) NÃO implementada
@@ -235,6 +241,12 @@ efeito" já usado 2x na linha `DISC-TRI-RG-001` para SOC/DFA).
 
 ## 4b. Validação sintética OBRIGATÓRIA antes do lock
 
+**Nota:** esta seção documenta a PRIMEIRA rodada de validação (critério
+original, sobre `g/g_N` bruto) e seu resultado — mantida por
+transparência histórica, não removida. O critério de aceitação real,
+após o Adendo 4c corrigir a estatística para `δ_obs-newt`, é o descrito
+em 4c ("Revalidação obrigatória sob a estatística corrigida").
+
 Antes de `Status` mudar para `LOCKED`: rodar a pipeline completa de
 desprojeção sobre um Monte Carlo sintético de binárias PURAMENTE
 Newtonianas (zero física MOND), usando a MESMA distribuição de
@@ -254,6 +266,67 @@ o achado de SPARC-003 — feita ANTES do lock desta vez, não depois.
 diferente de 1 sob Newtoniano puro simulado): o desenho precisa ser
 revisto ANTES do lock — não travar um pré-registro fadado ao mesmo
 problema estrutural.
+
+## 4c. Adendo de metodologia — estatística corrigida para `δ_obs-newt` (adicionado APÓS validação sintética, ANTES de qualquer dado real)
+
+A validação sintética obrigatória da Seção 4b (rodada com dado real de
+separação/massa/excentricidade, `v_p` sintético gerado por órbita
+Kepleriana Newtoniana pura) revelou um problema real, não um bug: a
+mediana de $\log_{10}(g/g_N)$ recuperada sob Newtoniano puro simulado foi
+$-0{,}204$ (IC 95% $[-0{,}213,-0{,}195]$), NÃO próxima de 0 como a Seção
+4b originalmente exigia. Diagnóstico confirmado (checagem de excentricidade
+zero recupera $\approx-0{,}005$, isolando a causa): $g\equiv v^2/r$ **não
+é** a aceleração radial newtoniana instantânea para uma órbita excêntrica
+— é uma aproximação tipo-circular que subestima sistematicamente $g_N$
+quando média sobre a fase orbital, porque o sistema passa mais tempo perto
+do afélio (velocidade menor) do que do periélio. Esse deslocamento
+($\approx-0{,}17$ a $-0{,}20$ dex para $e\gtrsim0{,}5$) bate em SINAL e
+ORDEM DE GRANDEZA com o que o próprio Artigo A de Chae já documenta (Eq.
+16, já citada na Seção 0 deste pré-registro) — **não é um artefato de
+implementação**, é uma propriedade conhecida da própria estatística
+$v^2/r$ sob excentricidade real, e é exatamente por isso que Chae usa a
+estatística DIFERENCIADA `δ_obs-newt`, não o valor bruto de $g/g_N$.
+
+**Correção, fixada ANTES de qualquer dado real:** o observável
+discriminador (Gap (d)/(e) da Seção 4) passa a ser
+
+$$\delta_{\text{obs-newt}}(\text{bin}) = \text{mediana}_{\text{real}}
+\big(\log_{10}(g/g_N)\big) - \text{mediana}_{\text{mock}}
+\big(\log_{10}(g/g_N)\big)$$
+
+onde o ensemble **mock** usa a MESMA separação $s_i$, massa total $M_{tot,i}$
+e parâmetros de excentricidade ($e_m,e_l,e_u,\alpha,dpm\_sig$) de CADA
+sistema real, mas com $v_p$ gerado SINTETICAMENTE por uma órbita
+Kepleriana puramente Newtoniana (geometria orbital $e,i,\phi_0,\phi$
+sorteada independentemente da usada no cálculo real, projetada de volta
+pelas mesmas fórmulas inversas) — exatamente o procedimento já
+implementado e usado na validação da Seção 4b (`validate_synthetic_newtonian.py`),
+reaproveitado aqui como o "ensemble Newtoniano mock" do próprio método de
+Chae (Artigo A, Seção 3.4), que este pré-registro havia inicialmente
+simplificado por engano ao tratar $g/g_N=1$ como baseline direto.
+
+**Predição MOND por bin, agora em termos de `δ`:**
+
+$$\delta_{\text{AQUAL}}(\text{bin};a_0) = \log_{10}\!\big(\nu(g_{N,\text{bin}}/a_0)\big),
+\qquad \nu(x)=\frac{1}{1-e^{-\sqrt{x}}}$$
+
+(pois o mock, por construção, já teria $\delta=0$ sob Newton puro — o
+boost MOND aparece como um deslocamento ADICIONAL de `δ` relativo ao
+próprio mock, não relativo a $g/g_N=1$ bruto).
+
+**Revalidação obrigatória sob a estatística corrigida, ANTES do lock:**
+1. **Controle negativo (nulo):** dois ensembles Newtonianos independentes
+   (real E mock ambos sintéticos Newtonianos, sorteios de geometria
+   orbital independentes) — `δ_obs-newt` deve ficar próximo de 0 (IC 95%
+   contendo 0) em cada bin.
+2. **Controle positivo:** ensemble "real" sintético com um boost MOND
+   injetado explicitamente (`v_p` multiplicado por $\sqrt{\nu(g_N/a_0^{\text{teste}})}$
+   para um `a0` de teste conhecido, ex. $a_0=1{,}2\times10^{-10}$),
+   ensemble mock permanece Newtoniano puro — `δ_obs-newt` recuperado deve
+   bater, em sinal e ordem de grandeza, com $\delta_{\text{AQUAL}}(\text{bin};a_0^{\text{teste}})$
+   previsto.
+
+Só após os itens 1 e 2 acima passarem, `Status` muda para `LOCKED`.
 
 ## 5. Critério de falsificação
 

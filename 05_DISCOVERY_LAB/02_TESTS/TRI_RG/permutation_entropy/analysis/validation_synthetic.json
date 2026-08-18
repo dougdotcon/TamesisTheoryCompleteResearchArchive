@@ -1,0 +1,196 @@
+{
+  "code_correctness_diagnostic": {
+    "description": "Deterministic sine wave (period=50), N=1000, m=4, tau_BP=1, single scale s=1 (no coarse-graining). NOT a PRE/POST identifiability test; exists only to confirm the Bandt-Pompe embedding + Lehmer-code pattern counting + H_S/C_JS formulas are implemented correctly before testing on genuinely ambiguous stochastic data. Expectation (hand-verifiable): a smooth periodic curve is overwhelmingly monotonic across any 4 consecutive samples except near its 2 extrema per cycle, so the ordinal-pattern distribution should concentrate on ~2 of the 24 possible patterns (monotonic increasing / monotonic decreasing), giving LOW H_S.",
+    "n_samples": 1000,
+    "period": 50,
+    "m": 4,
+    "n_windows": 997,
+    "n_states": 24,
+    "n_patterns_observed": 13,
+    "top_patterns_by_probability": [
+      [
+        0,
+        0.4684052156469408
+      ],
+      [
+        23,
+        0.45135406218655966
+      ],
+      [
+        22,
+        0.01905717151454363
+      ],
+      [
+        4,
+        0.0160481444332999
+      ],
+      [
+        17,
+        0.011033099297893681
+      ]
+    ],
+    "H_S": 0.34053245925462683,
+    "C_JS": 0.2517676099810924,
+    "verdict": "CODE_CORRECT_LOW_H_S_AS_EXPECTED"
+  },
+  "positive_control": {
+    "status": "ok",
+    "PCI_pre": 11.85968840248821,
+    "PCI_post": 11.552006721884343,
+    "MCI_pre": 0.18675624479170194,
+    "MCI_post": 0.5430156687980118,
+    "delta_PCI": -0.30768168060386714,
+    "delta_MCI": 0.35625942400630983,
+    "p_PCI": 0.0,
+    "p_MCI": 0.0,
+    "surrogate_PCI_mean": -0.00047800792049359055,
+    "surrogate_PCI_std": 0.024844215000215088,
+    "surrogate_PCI_n_valid": 200,
+    "surrogate_PCI_n_undefined": 0,
+    "surrogate_MCI_mean": 0.0005006570661314274,
+    "surrogate_MCI_std": 0.03355239131172289,
+    "surrogate_MCI_n_valid": 200,
+    "surrogate_MCI_n_undefined": 0,
+    "n_scales_pre": 12,
+    "n_scales_post": 12,
+    "scales_used_pre": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "scales_used_post": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "PRE = iid Gaussian white noise (linear, zero autocorrelation). POST = logistic map (r=4, fully chaotic, genuine deterministic nonlinear process), rank-remapped onto PRE's own sorted values so PRE and POST share an EXACTLY identical empirical marginal by construction. Amplitude-spectrum match documented empirically via periodogram-slope spectral_exponent (both expected near-flat, two broadband processes).",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "spectral_exponent_pre": -0.05801777764723775,
+    "spectral_exponent_post": 0.01440315449456079,
+    "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
+    "wall_clock_seconds": 5.00632119178772
+  },
+  "negative_control": {
+    "status": "ok",
+    "PCI_pre": 9.737620831966955,
+    "PCI_post": 9.42916180581842,
+    "MCI_pre": 2.1671424432928488,
+    "MCI_post": 2.3565786029648,
+    "delta_PCI": -0.30845902614853493,
+    "delta_MCI": 0.18943615967195138,
+    "p_PCI": 0.63,
+    "p_MCI": 0.585,
+    "surrogate_PCI_mean": -0.4076199867568268,
+    "surrogate_PCI_std": 0.26584505731454094,
+    "surrogate_PCI_n_valid": 200,
+    "surrogate_PCI_n_undefined": 0,
+    "surrogate_MCI_mean": 0.23014645219278823,
+    "surrogate_MCI_std": 0.14092819715112265,
+    "surrogate_MCI_n_valid": 200,
+    "surrogate_MCI_n_undefined": 0,
+    "n_scales_pre": 12,
+    "n_scales_post": 12,
+    "scales_used_pre": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "scales_used_post": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes METHODOLOGY_NOTE.md Gap (b)'s named spectral/linear risk (Zunino et al. 2008: H_S ~ near-monotone function of Hurst H) directly: same H, no genuine structural change -- p should typically be non-significant for both channels if IAAFT is correctly calibrated under the null.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "wall_clock_seconds": 5.123574733734131
+  },
+  "iaaft_power_check": {
+    "PCI_channel_H_S": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_PCI_positive": 0.0,
+      "p_PCI_negative": 0.63,
+      "sigma_equivalent_positive": -12.36519941083725,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_HAS_REAL_POWER"
+    },
+    "MCI_channel_C_JS": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_MCI_positive": 0.0,
+      "p_MCI_negative": 0.585,
+      "sigma_equivalent_positive": 10.6030823149073,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_HAS_REAL_POWER"
+    },
+    "overall_note": "Unlike RQA (shared embedding step upstream of BOTH channels), the Bandt-Pompe ordinal-pattern embedding needs no resolution step -- H_S and C_JS are computed independently per scale from the same empirical pattern distribution P(s), so a low-power finding for one channel does not imply the other is uncomputable; each channel's verdict is reported on its own merits."
+  },
+  "a_priori_hypothesis_check": {
+    "hypothesis": "METHODOLOGY_NOTE.md Gap (b): C_JS/MCI (built by Rosso et al. 2007 specifically to separate linear stochastic noise from deterministic chaos) shows real IAAFT power (like MSE's CI); H_S/PCI (at risk per Zunino et al. 2008 of reparametrizing the Hurst exponent, already closed negative 6x in this line) may not (like DFA-alpha).",
+    "PCI_verdict": "IAAFT_HAS_REAL_POWER",
+    "MCI_verdict": "IAAFT_HAS_REAL_POWER",
+    "pattern_observed": "BOTH_CHANNELS_SHOW_POWER"
+  },
+  "pipeline_config": {
+    "m": 4,
+    "tau_bp": 1,
+    "s_min": 1,
+    "n_min_per_scale": 120,
+    "n_scales_cap": 15,
+    "max_n_per_segment": 20000,
+    "n_surrogates": 200,
+    "n_iaaft_iter": 50,
+    "seed": 12345,
+    "Q0": 1.6510470181287602,
+    "n_states": 24
+  },
+  "generator_notes": {
+    "colored_noise_fgn_like": "FFT-filtering spectral synthesis: white Gaussian noise scaled per-frequency by f^(-exponent/2), inverse-transformed, z-scored. fGn-like approximation via exponent=2H+1 (spectral relation for fractional Gaussian noise); same technique as mse_multiscale_entropy/rqa validate_synthetic.py, independent implementation.",
+    "logistic_map": "x_{k+1} = 4*x_k*(1-x_k), burn_in=500 discarded transient iterations.",
+    "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure.",
+    "sine_diagnostic": "Plain deterministic sine wave (period 50), used ONLY for the code-correctness diagnostic (check 0), not a PRE/POST identifiability control. No dither was needed here (unlike RQA's FNN-based diagnostic) because ordinal-pattern ranking via stable-sort tie-breaking is well-defined even for exact ties, and floating-point sine samples essentially never tie exactly in practice at N=1000/period=50."
+  },
+  "wall_clock_seconds_total": 10.432987451553345
+}

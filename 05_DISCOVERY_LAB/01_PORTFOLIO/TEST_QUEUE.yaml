@@ -335,6 +335,56 @@ queue:
       estatistica escolhida, nao uma falsificacao real de nenhuma das
       duas hipoteses.
 
+  - test_id: DISC-COSMOLOGY-MOND-SPARC-004
+    title: "Redesenho de SPARC-003 com desprojecao 3D via Monte Carlo (metodo primario de Chae 2023)"
+    domain: cosmologia_observacional
+    parent_legacy: null
+    related_tests:
+      - "DISC-COSMOLOGY-MOND-SPARC-002/003 (mesmas H_A/H_B, mesmo criterio de decisao -- este teste adapta o observavel discriminador ao metodo primario de Chae, nao redefine as hipoteses)"
+    status: CANDIDATE_FORMULATING
+    existing_assets:
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md (DRAFT, nao travado -- so trava apos validacao sintetica obrigatoria da Secao 4b passar)"
+      - "reaproveita sem modificacao: 02_TESTS/COSMOLOGY_WIDE_BINARIES/data/{PROVENANCE.md,quality_filtered_sample.parquet,discovery_holdout_split.json,mamajek_mass_luminosity.tsv} e analysis/apply_quality_cuts.py"
+    description: >
+      Usuario pediu para redesenhar SPARC-003 com desprojecao Monte Carlo
+      completa. Pesquisa dedicada (nao memoria) verificou o algoritmo
+      exato de Chae (2023) via leitura direta do LaTeX-fonte
+      (arXiv:2305.04613v4) e confirmou, por download e inspecao real, que
+      o catalogo eletronico de excentricidades de Hwang, Ting & Zakamska
+      (2022, MNRAS 512:3383, arXiv:2111.01789 -- correcao de citacao: NAO
+      e "Hamers, Kratter & Shu" como presumido inicialmente) esta de fato
+      acessivel (208MB FITS, 1.817.594 linhas, cobertura total do
+      El-Badry+2021, sha256 verificado). Achado decisivo: o metodo
+      primario de Chae NAO ajusta a0 livre -- usa uma estatistica
+      diferente (delta_obs-newt, residuo de log g vs log g_N
+      DESPROJETADOS) que nao sofre da restricao de imagem (1,+inf) que
+      matou a tentativa anterior. Pre-registro DRAFT escrito adaptando
+      essa estatistica para testar H_A/H_B especificamente (extensao
+      declarada, nao literal do artigo), reaproveitando H_A/H_B, catalogo,
+      cortes de qualidade e split discovery/holdout de SPARC-003 sem
+      modificacao. Simplificacao declarada: correcao de multiplicidade
+      oculta (f_multi) de Chae NAO implementada -- vies unidirecional
+      conhecido (infla g/g_N), checagem adversarial obrigatoria se o
+      resultado mostrar g/g_N>1 consistente com H_A ou H_B.
+    next_action: >
+      Extrair subconjunto do catalogo de excentricidades de Hwang para os
+      43.147 sistemas ja filtrados (com proveniencia completa); construir
+      pipeline de desprojecao vetorizada (equacao de Kepler via
+      Newton-Raphson); rodar a validacao sintetica OBRIGATORIA (Monte
+      Carlo de binarias puramente Newtonianas com a mesma distribuicao de
+      excentricidade real, confirmando que g/g_N desprojetado recuperado
+      cai proximo de 1) ANTES de travar o pre-registro. So entao lock +
+      analise real sobre a amostra de descoberta + reexecucao adversarial.
+    stop_condition: >
+      travar o pre-registro (Status: LOCKED) antes da validacao sintetica
+      da Secao 4b passar; redefinir H_A/H_B; reabrir ou modificar os
+      cortes de qualidade/split discovery-holdout ja travados em
+      SPARC-003; abrir o holdout selado (12.944 sistemas) fora do Gate de
+      Replicacao; alegar "Tamesis confirmado" a partir de qualquer
+      resultado aqui; aceitar g/g_N>1 consistente com H_A/H_B sem a
+      checagem adversarial de multiplicidade oculta ja declarada como
+      obrigatoria nesse cenario.
+
   - test_id: DISC-RH-REAL-001
     title: "Linha RH real (riemannZeta) -- distinta de RH-TOY/Tp em 04_FORMAL_RESEARCH_LAB"
     domain: matematica_pura

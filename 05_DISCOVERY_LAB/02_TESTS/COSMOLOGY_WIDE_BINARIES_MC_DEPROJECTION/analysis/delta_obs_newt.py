@@ -66,6 +66,56 @@ v_p = v_true * fator_de_projecao e multiplicacao comuta, multiplicar v_true
 por sqrt(nu(...)) antes de projetar ou multiplicar v_p_synth por
 sqrt(nu(...)) depois de projetar da' EXATAMENTE o mesmo resultado -- este
 modulo aplica no v_p_synth final, ja projetado, por simplicidade.
+
+===========================================================================
+Decisao de design 4 -- correcao pos-lock (PREREGISTRATION.md Secao 5b):
+ruido astrometrico simetrico injetado no ramo mock
+===========================================================================
+A checagem adversarial obrigatoria (Secao 6) apos a primeira analise real
+(`result_primary.json`) encontrou uma assimetria estrutural: o ramo REAL de
+`v_p` vem de `|Delta_mu|` = magnitude de um vetor 2D de movimento proprio
+DIFERENCIAL medido, que carrega o erro astrometrico genuino do Gaia
+(`e_pmRA1`,`e_pmRA2`,`e_pmDE1`,`e_pmDE2` do catalogo El-Badry+2021, ja
+presentes em `quality_filtered_sample.parquet`, nomes de coluna confirmados
+em `../../COSMOLOGY_WIDE_BINARIES/data/COLUMN_DICTIONARY.md`). Tomar a
+magnitude de um vetor 2D ruidoso tem vies conhecido para CIMA em baixo SNR
+(distribuicao de Rice/Rayleigh, E[|v|_obs] >= |v|_verdadeiro sempre). O ramo
+MOCK gerado por `generate_synthetic_vp_newtonian` nunca carregava esse
+ruido -- a subtracao `real-mock` de delta_obs-newt NAO cancelava o vies,
+ao contrario do que o Adendo 4c pretendia (prova decisiva e diagnostico
+completo em `analysis/null_discovery_sparc004.md`).
+
+Correcao (Secao 5b, fixada apos a descoberta, antes de qualquer novo dado
+real ser tocado): `generate_synthetic_vp_newtonian` ganha dois parametros
+opcionais `sigma_v_ra_si`/`sigma_v_de_si` (shape (n_sys,), SI, m/s) -- desvio
+padrao do ruido de medida projetado em cada componente RA/DE. Quando
+fornecidos (nao-None), a funcao decompoe o v_p sintetico (real OU mock,
+depois de qualquer boost MOND opcional) num vetor 2D via um angulo de
+posicao isotropico sorteado U(0,2*pi) (a pipeline nunca rastreia a
+orientacao fisica desse vetor -- so' a magnitude v_p entra em `deproject`
+-- entao um angulo isotropico e' a unica caracterizacao disponivel, e e'
+exatamente o que replica, em media sobre a amostra, a mistura de
+orientacoes orbitais aleatorias real -- mesmo procedimento usado no Teste
+1/Teste 2 de `null_discovery_sparc004.md`), injeta ruido Gaussiano
+independente por componente (`rng.normal(0, sigma_v_ra_si)`,
+`rng.normal(0, sigma_v_de_si)`) e retoma a magnitude do vetor ruidoso como
+o `v_p_synth` final -- reproduzindo exatamente o mesmo processo de medicao
+ruidosa (decompor em RA/DE, medir com erro Gaia, tomar magnitude) que gerou
+o `v_p` REAL observado. Independencia entre RA e DE assumida: as colunas
+de correlacao `pmRApmDEcor1`/`pmRApmDEcor2` do catalogo completo
+El-Badry+2021 (ver COLUMN_DICTIONARY.md linha 135-136) NAO estao presentes
+em `quality_filtered_sample.parquet` (nao commitadas nesta subamostra),
+logo indisponiveis para esta pipeline -- mesma suposicao ja usada pelo
+agente adversarial no diagnostico do bug. `sigma_v_ra_si`/`sigma_v_de_si`
+sao tipicamente calculados por `astrometric_noise_sigma_v_si` (abaixo),
+propagacao de erro padrao: sigma_combinado(Delta_mu_RA) =
+sqrt(sigma_pmRA1^2+sigma_pmRA2^2) [mas/yr] (idem DE), convertido para SI
+via o mesmo fator `MAS_YR_TO_KM_S_PER_PC` ja usado pela formula de v_p
+(Chae 2023 Eq. 4). Se ambos os parametros forem None (default),
+`generate_synthetic_vp_newtonian` se comporta EXATAMENTE como antes da
+correcao (sem ruido) -- preserva compatibilidade com qualquer chamador que
+nao passe ruido explicitamente; todo chamador NOVO (revalidacao v2,
+analise primaria v2) passa os dois parametros sempre.
 """
 
 from __future__ import annotations
@@ -134,12 +184,49 @@ def assign_bins_by_projected_gN(log_gN_proj: np.ndarray,
 # Geracao do v_p sintetico Newtoniano puro (+ boost MOND opcional)
 # ---------------------------------------------------------------------
 
+def astrometric_noise_sigma_v_si(pmra_err1: np.ndarray, pmra_err2: np.ndarray,
+                                  pmde_err1: np.ndarray, pmde_err2: np.ndarray,
+                                  d_mean_pc: np.ndarray):
+    """Secao 5b / Decisao de design 4: converte os erros de movimento
+    proprio reportados pelo Gaia por COMPONENTE (mas/yr, El-Badry+2021)
+    para o sigma de ruido de medida da velocidade projetada (SI, m/s) em
+    cada eixo RA/DE, para uso em `generate_synthetic_vp_newtonian`.
+
+    Propagacao de erro padrao (RA e DE tratados como independentes -- as
+    colunas de correlacao pmRApmDEcor1/2 do catalogo completo El-Badry+2021
+    nao estao presentes em quality_filtered_sample.parquet, ver docstring
+    do modulo):
+        sigma(Delta_mu_RA) = sqrt(pmra_err1^2 + pmra_err2^2)   [mas/yr]
+        sigma(Delta_mu_DE) = sqrt(pmde_err1^2 + pmde_err2^2)   [mas/yr]
+    Convertido para velocidade SI pelo MESMO fator usado pela formula de
+    v_p (Chae 2023 Eq. 4, ja travada em SPARC-003/004):
+        sigma_v_X_si = MAS_YR_TO_KM_S_PER_PC * sigma(Delta_mu_X) * d_mean_pc * 1000
+
+    Retorna (sigma_v_ra_si, sigma_v_de_si), cada um shape (n_sys,) SI.
+    """
+    pmra_err1 = np.asarray(pmra_err1, dtype=np.float64)
+    pmra_err2 = np.asarray(pmra_err2, dtype=np.float64)
+    pmde_err1 = np.asarray(pmde_err1, dtype=np.float64)
+    pmde_err2 = np.asarray(pmde_err2, dtype=np.float64)
+    d_mean_pc = np.asarray(d_mean_pc, dtype=np.float64)
+
+    sigma_dmu_ra = np.sqrt(pmra_err1 ** 2 + pmra_err2 ** 2)  # mas/yr
+    sigma_dmu_de = np.sqrt(pmde_err1 ** 2 + pmde_err2 ** 2)  # mas/yr
+
+    to_v_si_per_masyr = dc.MAS_YR_TO_KM_S_PER_PC * d_mean_pc * 1000.0  # m/s per (mas/yr)
+    sigma_v_ra_si = to_v_si_per_masyr * sigma_dmu_ra
+    sigma_v_de_si = to_v_si_per_masyr * sigma_dmu_de
+    return sigma_v_ra_si, sigma_v_de_si
+
+
 def generate_synthetic_vp_newtonian(s: np.ndarray, M_tot: np.ndarray,
                                      e_m: np.ndarray, e_lo: np.ndarray,
                                      e_hi: np.ndarray, alpha: np.ndarray,
                                      dpm_sig: np.ndarray,
                                      rng: np.random.Generator,
-                                     a0_boost: float | None = None):
+                                     a0_boost: float | None = None,
+                                     sigma_v_ra_si: np.ndarray | None = None,
+                                     sigma_v_de_si: np.ndarray | None = None):
     """Gera UMA realizacao 'verdadeira' de orbita Kepleriana Newtoniana
     pura (Gaps a-c de deprojection_common.py) e projeta de volta para um
     v_p sintetico observavel. Reimplementacao limpa/reutilizavel da logica
@@ -150,6 +237,16 @@ def generate_synthetic_vp_newtonian(s: np.ndarray, M_tot: np.ndarray,
     Se `a0_boost` != None: multiplica o v_p sintetico puro por
     sqrt(nu_aqual(gN_true/a0_boost)) -- boost MOND explicito, usado SOMENTE
     pelo controle positivo da revalidacao (Adendo 4c, Parte 2 item 2).
+
+    Se `sigma_v_ra_si`/`sigma_v_de_si` != None (ambos devem ser fornecidos
+    juntos, shape (n_sys,) SI): correcao pos-lock da Secao 5b / Decisao de
+    design 4 -- decompoe o v_p sintetico (ja com boost MOND aplicado, se
+    houver) num vetor 2D via angulo de posicao isotropico U(0,2*pi), injeta
+    ruido Gaussiano independente por componente com esses desvios padrao, e
+    retoma a magnitude do vetor ruidoso como o v_p_synth final --
+    replicando o mesmo processo de medicao ruidosa que gera o v_p real
+    observado (magnitude de um vetor 2D de PM diferencial com erro Gaia).
+    Se None (default): comportamento IDENTICO ao pre-correcao (sem ruido).
 
     Retorna (v_p_synth, diagnostics), v_p_synth shape (n_sys,) SI.
     """
@@ -216,6 +313,47 @@ def generate_synthetic_vp_newtonian(s: np.ndarray, M_tot: np.ndarray,
         diagnostics["boost_factor_median"] = float(np.median(boost))
         diagnostics["boost_factor_min_max"] = (float(boost.min()), float(boost.max()))
 
+    # ---- Secao 5b / Decisao de design 4: injecao de ruido astrometrico
+    #      simetrico, aplicada DEPOIS de qualquer boost MOND (o boost muda
+    #      a velocidade FISICA verdadeira; o ruido de medida se aplica por
+    #      cima disso, exatamente como no ramo real: v_p real observado
+    #      carrega ruido Gaia sobre a velocidade fisica verdadeira,
+    #      newtoniana ou nao) ----
+    if (sigma_v_ra_si is not None) or (sigma_v_de_si is not None):
+        if sigma_v_ra_si is None or sigma_v_de_si is None:
+            raise ValueError(
+                "sigma_v_ra_si e sigma_v_de_si devem ser fornecidos juntos "
+                "(ou ambos None para o comportamento sem ruido)."
+            )
+        sigma_v_ra_si = np.asarray(sigma_v_ra_si, dtype=np.float64)
+        sigma_v_de_si = np.asarray(sigma_v_de_si, dtype=np.float64)
+        if sigma_v_ra_si.shape[0] != n or sigma_v_de_si.shape[0] != n:
+            raise ValueError(
+                f"sigma_v_ra_si/sigma_v_de_si devem ter shape ({n},), "
+                f"recebido {sigma_v_ra_si.shape}/{sigma_v_de_si.shape}."
+            )
+
+        v_p_synth_clean = v_p_synth.copy()
+        position_angle = rng.uniform(0.0, 2.0 * np.pi, size=n)
+        v_ra_clean = v_p_synth_clean * np.cos(position_angle)
+        v_de_clean = v_p_synth_clean * np.sin(position_angle)
+
+        v_ra_noisy = v_ra_clean + rng.normal(0.0, sigma_v_ra_si, size=n)
+        v_de_noisy = v_de_clean + rng.normal(0.0, sigma_v_de_si, size=n)
+
+        v_p_synth = np.sqrt(v_ra_noisy ** 2 + v_de_noisy ** 2)
+
+        diagnostics["astrometric_noise_injected"] = True
+        diagnostics["v_p_synth_clean_pre_noise_si_median"] = float(np.median(v_p_synth_clean))
+        diagnostics["v_p_synth_noisy_si_median"] = float(np.median(v_p_synth))
+        diagnostics["sigma_v_ra_si_median"] = float(np.median(sigma_v_ra_si))
+        diagnostics["sigma_v_de_si_median"] = float(np.median(sigma_v_de_si))
+        diagnostics["snr_median"] = float(
+            np.median(v_p_synth_clean / np.sqrt(sigma_v_ra_si ** 2 + sigma_v_de_si ** 2))
+        )
+    else:
+        diagnostics["astrometric_noise_injected"] = False
+
     return v_p_synth, diagnostics
 
 
@@ -226,6 +364,11 @@ def generate_synthetic_vp_newtonian(s: np.ndarray, M_tot: np.ndarray,
 def run_delta_obs_newt(s: np.ndarray, v_p_real: np.ndarray, M_tot: np.ndarray,
                         e_m: np.ndarray, e_lo: np.ndarray, e_hi: np.ndarray,
                         alpha: np.ndarray, dpm_sig: np.ndarray,
+                        pmra_err1: np.ndarray | None = None,
+                        pmra_err2: np.ndarray | None = None,
+                        pmde_err1: np.ndarray | None = None,
+                        pmde_err2: np.ndarray | None = None,
+                        d_mean_pc: np.ndarray | None = None,
                         bin_edges: np.ndarray = BIN_EDGES_LOG_GN_SPARC003,
                         n_mc: int = 200, n_bootstrap: int = 1000,
                         seed: int = 12345) -> dict:
@@ -247,6 +390,20 @@ def run_delta_obs_newt(s: np.ndarray, v_p_real: np.ndarray, M_tot: np.ndarray,
     5. delta_AQUAL(bin;a0) disponivel via `delta_aqual` (nao ajustado aqui --
        o ajuste de a0 fica para o script de analise principal do teste,
        fora do escopo desta revalidacao).
+
+    Correcao pos-lock (Secao 5b / Decisao de design 4): se
+    `pmra_err1,pmra_err2,pmde_err1,pmde_err2,d_mean_pc` forem todos
+    fornecidos (nao-None, shape (n_sys,)), o ramo MOCK (item 2 acima) recebe
+    ruido astrometrico Gaussiano simetrico, de mesma magnitude/origem do
+    ruido genuino que ja esta embutido no `v_p_real` observado (via
+    `astrometric_noise_sigma_v_si` + `generate_synthetic_vp_newtonian`
+    parametros `sigma_v_ra_si`/`sigma_v_de_si`) -- corrige a assimetria
+    estrutural documentada em `analysis/null_discovery_sparc004.md` e
+    PREREGISTRATION.md Secao 5b. Se ALGUM desses 5 parametros for None
+    (default): comportamento IDENTICO ao pre-correcao (ramo mock sem
+    ruido) -- preserva compatibilidade retroativa com qualquer chamador
+    antigo que nao os forneça (ex.: `revalidate_delta_obs_newt.py`,
+    resultado historico mantido sem reexecucao).
 
     Todos os arrays de entrada shape (n_sys,), unidades SI (identico a
     run_mc_deprojection). `bin_edges` deve ter n_bins+1 valores em
@@ -276,6 +433,21 @@ def run_delta_obs_newt(s: np.ndarray, v_p_real: np.ndarray, M_tot: np.ndarray,
     n_bins = len(bin_edges) - 1
     n_sys = s.shape[0]
 
+    astrometric_noise_params = (pmra_err1, pmra_err2, pmde_err1, pmde_err2, d_mean_pc)
+    inject_mock_noise = all(p is not None for p in astrometric_noise_params)
+    if any(p is not None for p in astrometric_noise_params) and not inject_mock_noise:
+        raise ValueError(
+            "pmra_err1, pmra_err2, pmde_err1, pmde_err2, d_mean_pc devem ser "
+            "todos fornecidos juntos (correcao Secao 5b), ou todos None "
+            "(comportamento pre-correcao, sem ruido no ramo mock)."
+        )
+    if inject_mock_noise:
+        sigma_v_ra_si, sigma_v_de_si = astrometric_noise_sigma_v_si(
+            pmra_err1, pmra_err2, pmde_err1, pmde_err2, d_mean_pc,
+        )
+    else:
+        sigma_v_ra_si, sigma_v_de_si = None, None
+
     seed_real = seed
     seed_mock_true = seed + 111_111_111
     seed_mock_recovery = seed + 222_222_222
@@ -297,6 +469,7 @@ def run_delta_obs_newt(s: np.ndarray, v_p_real: np.ndarray, M_tot: np.ndarray,
     rng_mock_true = np.random.default_rng(seed_mock_true)
     v_p_mock, mock_diag = generate_synthetic_vp_newtonian(
         s, M_tot, e_m, e_lo, e_hi, alpha, dpm_sig, rng_mock_true,
+        sigma_v_ra_si=sigma_v_ra_si, sigma_v_de_si=sigma_v_de_si,
     )
 
     # ---- ramo MOCK (recuperacao, seed INDEPENDENTE de todos os outros) ----
@@ -380,6 +553,7 @@ def run_delta_obs_newt(s: np.ndarray, v_p_real: np.ndarray, M_tot: np.ndarray,
         },
         "n_mc": n_mc,
         "n_sys": n_sys,
+        "section5b_mock_astrometric_noise_correction_applied": inject_mock_noise,
         "mock_generation_diagnostics": {
             "fraction_individual_eccentricity": float(mock_diag["use_individual_ecc"].mean()),
             "median_e_true": float(np.median(mock_diag["e_true"])),

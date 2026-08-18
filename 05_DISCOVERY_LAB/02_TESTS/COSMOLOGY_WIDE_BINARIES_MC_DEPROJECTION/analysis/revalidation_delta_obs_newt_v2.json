@@ -1,0 +1,310 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-004",
+  "section": "PREREGISTRATION.md Secao 5b -- revalidacao obrigatoria da correcao de assimetria de ruido astrometrico no ramo mock",
+  "n_subsample": 8000,
+  "subsample_seed": 20260818,
+  "subsample_seed_note": "Mesmo seed/N de validate_synthetic_newtonian.py e de revalidate_delta_obs_newt.py (v1), reaproveitado para comparabilidade direta.",
+  "n_mc": 200,
+  "n_bootstrap": 1000,
+  "a0_test": 1.2e-10,
+  "correction_applied": true,
+  "correction_description": "generate_synthetic_vp_newtonian agora aceita sigma_v_ra_si/sigma_v_de_si (SI, m/s), calculados por astrometric_noise_sigma_v_si a partir dos erros de PM reportados pelo Gaia (e_pmRA1/2, e_pmDE1/2, mas/yr) e da distancia media (d_mean_pc) de CADA sistema real -- propagacao de erro padrao assumindo independencia RA/DE (colunas de correlacao nao disponiveis na subamostra commitada). O ruido e' injetado decompondo v_p sintetico num vetor 2D via angulo de posicao isotropico, somando ruido Gaussiano independente por componente, e retomando a magnitude -- exatamente o mesmo processo de medicao que gera o v_p real observado. run_delta_obs_newt agora injeta esse MESMO ruido no ramo mock (antes sempre limpo).",
+  "note_no_real_vp_used": "Em NENHUM momento desta revalidacao o v_p REAL observado de qualquer sistema real foi lido ou usado -- ambos os lados (real E mock) de ambos os controles sao v_p SINTETICO gerado por orbita Kepleriana Newtoniana pura, com ruido astrometrico simetrico injetado de ambos os lados (Secao 5b). Apenas separacao/massa/excentricidade/erros de PM/distancia REAIS dos 8000 sistemas da subamostra (variaveis preditoras e orcamento de ruido, nunca velocidade real observada) foram usadas.",
+  "negative_control": {
+    "n_bins": 5,
+    "bin_edges_log10_gN_projected": [
+      -11.7012,
+      -9.1728,
+      -8.4667,
+      -7.9752,
+      -7.5548,
+      -6.5224
+    ],
+    "n_systems_per_bin": [
+      1605,
+      1555,
+      1601,
+      1649,
+      1590
+    ],
+    "gN_bin_median_si": [
+      1.7405429895178684e-10,
+      1.6533858037205524e-09,
+      6.286306139306484e-09,
+      1.748566361406449e-08,
+      4.93572563418889e-08
+    ],
+    "median_real_log_g_ratio_primary": [
+      -0.14955702426817868,
+      -0.19224490850671766,
+      -0.2026306994382473,
+      -0.17367509336514542,
+      -0.18462824841055747
+    ],
+    "median_mock_log_g_ratio_primary": [
+      -0.14115577723483153,
+      -0.18860854584232134,
+      -0.19950917449426198,
+      -0.2051303895130444,
+      -0.19193603459826414
+    ],
+    "delta_obs_newt_primary": [
+      -0.008401247033347159,
+      -0.00363636266439632,
+      -0.003121524943985321,
+      0.03145529614789899,
+      0.007307786187706666
+    ],
+    "bootstrap": {
+      "n_bootstrap": 1000,
+      "n_valid_replicas_per_bin": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "ci95_lo": [
+        -0.054418003283462704,
+        -0.049808907180106346,
+        -0.04823716686176516,
+        -0.013463116352924057,
+        -0.0412062180400699
+      ],
+      "ci95_hi": [
+        0.038785745182272104,
+        0.03908500883302034,
+        0.04340696218693012,
+        0.07776195143529109,
+        0.053498612116771975
+      ],
+      "delta_obs_newt_boot_mean": [
+        -0.007548636955672559,
+        -0.0038928332655815694,
+        -0.002883378289254608,
+        0.03125802264158657,
+        0.006623379370573487
+      ],
+      "delta_obs_newt_boot_std": [
+        0.024367176713003598,
+        0.02276476541266039,
+        0.022963202191006733,
+        0.02448306444932519,
+        0.02419305609011638
+      ]
+    },
+    "seeds": {
+      "seed_input": 611001001,
+      "seed_real": 611001001,
+      "seed_mock_true_geometry": 722112112,
+      "seed_mock_recovery": 833223223,
+      "seed_bootstrap": 944334334
+    },
+    "n_mc": 200,
+    "n_sys": 8000,
+    "section5b_mock_astrometric_noise_correction_applied": true,
+    "mock_generation_diagnostics": {
+      "fraction_individual_eccentricity": 0.74575,
+      "median_e_true": 0.731881772542104,
+      "fraction_e_true_gt_0p5": 0.822625,
+      "median_log_g_true_over_gN_true_3d_no_recovery_noise": -0.18400734803959856,
+      "a0_boost": null
+    },
+    "real_side_generation": {
+      "kind": "pure_newtonian_synthetic_plus_symmetric_astrometric_noise",
+      "seed_real_true_geometry": 511001001,
+      "fraction_individual_eccentricity": 0.74575,
+      "median_e_true": 0.7288696591312893,
+      "astrometric_noise_injected": true,
+      "snr_median": 7.763593013534782
+    },
+    "ci_contains_zero_per_bin": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_negative_control": true
+  },
+  "positive_control": {
+    "n_bins": 5,
+    "bin_edges_log10_gN_projected": [
+      -11.7012,
+      -9.1728,
+      -8.4667,
+      -7.9752,
+      -7.5548,
+      -6.5224
+    ],
+    "n_systems_per_bin": [
+      1605,
+      1555,
+      1601,
+      1649,
+      1590
+    ],
+    "gN_bin_median_si": [
+      1.7405429895178684e-10,
+      1.6533858037205524e-09,
+      6.286306139306484e-09,
+      1.748566361406449e-08,
+      4.93572563418889e-08
+    ],
+    "median_real_log_g_ratio_primary": [
+      0.06391892870839257,
+      -0.15932706701548988,
+      -0.18210201508817675,
+      -0.202878384576017,
+      -0.19908978820582465
+    ],
+    "median_mock_log_g_ratio_primary": [
+      -0.14637124996884673,
+      -0.19445374216838912,
+      -0.18882034270021683,
+      -0.19041249792745324,
+      -0.17556240201909884
+    ],
+    "delta_obs_newt_primary": [
+      0.21029017867723931,
+      0.035126675152899245,
+      0.0067183276120400814,
+      -0.012465886648563768,
+      -0.023527386186725813
+    ],
+    "bootstrap": {
+      "n_bootstrap": 1000,
+      "n_valid_replicas_per_bin": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "ci95_lo": [
+        0.15913399627298017,
+        -0.015178326713040704,
+        -0.03740187378112695,
+        -0.060394866739023015,
+        -0.06835494721020387
+      ],
+      "ci95_hi": [
+        0.26106198416879234,
+        0.08144906247305184,
+        0.050167606284093176,
+        0.029148383108750908,
+        0.024733551786138917
+      ],
+      "delta_obs_newt_boot_mean": [
+        0.20997553657207235,
+        0.03436144168559083,
+        0.007680240682274091,
+        -0.013720625576044603,
+        -0.023525031147395153
+      ],
+      "delta_obs_newt_boot_std": [
+        0.0253043907669578,
+        0.024422053097969677,
+        0.0231171607841667,
+        0.02292622222418728,
+        0.02347172035845113
+      ]
+    },
+    "seeds": {
+      "seed_input": 612002002,
+      "seed_real": 612002002,
+      "seed_mock_true_geometry": 723113113,
+      "seed_mock_recovery": 834224224,
+      "seed_bootstrap": 945335335
+    },
+    "n_mc": 200,
+    "n_sys": 8000,
+    "section5b_mock_astrometric_noise_correction_applied": true,
+    "mock_generation_diagnostics": {
+      "fraction_individual_eccentricity": 0.74575,
+      "median_e_true": 0.7226644909889018,
+      "fraction_e_true_gt_0p5": 0.8155,
+      "median_log_g_true_over_gN_true_3d_no_recovery_noise": -0.17155317694717453,
+      "a0_boost": null
+    },
+    "real_side_generation": {
+      "kind": "pure_newtonian_synthetic_plus_mond_boost_plus_symmetric_astrometric_noise",
+      "seed_real_true_geometry": 512002002,
+      "a0_boost_test_value_si": 1.2e-10,
+      "fraction_individual_eccentricity": 0.74575,
+      "median_e_true": 0.7372597856920857,
+      "boost_factor_median": 1.0009675145032468,
+      "boost_factor_min_max": [
+        1.0,
+        5.107765829277101
+      ],
+      "astrometric_noise_injected": true,
+      "snr_median": 8.080556108055237
+    },
+    "delta_aqual_predicted_a0_test": [
+      0.15483226958792878,
+      0.010742015529476545,
+      0.00031231999637711865,
+      2.485021277234543e-06,
+      6.760033896678948e-10
+    ],
+    "same_sign_per_bin": [
+      true,
+      true,
+      true,
+      false,
+      false
+    ],
+    "ratio_recovered_over_predicted_per_bin": [
+      1.3581805604019526,
+      3.270026472826274,
+      21.511038966355095,
+      -5016.410427856149,
+      -34803651.204004005
+    ],
+    "order_of_magnitude_ok_per_bin": [
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "predicted_value_within_bootstrap_ci95_per_bin": [
+      false,
+      true,
+      true,
+      true,
+      true
+    ],
+    "passes_positive_control": false,
+    "noise_floor_analysis": {
+      "noise_floor_half_ci95_width_negative_control_v2_per_bin": [
+        0.04660187423286741,
+        0.04444695800656334,
+        0.04582206452434764,
+        0.045612533894107576,
+        0.04735241507842094
+      ],
+      "signal_above_noise_floor_per_bin": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "per_bin_ok_noise_aware": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "passes_positive_control_noise_aware": true,
+      "interpretation": "Mesmo criterio noise-aware da primeira revalidacao (v1), agora aplicado com o piso de ruido do controle NEGATIVO v2 (pipeline corrigida) -- razao recuperado/previsto diverge nos bins de gN alto porque delta_AQUAL previsto ali e' proximo de zero (nu->1), nao porque o metodo falhou; exige sinal/magnitude corretos so' onde ha sinal fisicamente detectavel acima do piso de ruido."
+    }
+  },
+  "overall_revalidation_pass_literal_criterion": false,
+  "overall_revalidation_pass_noise_aware_criterion": true,
+  "overall_revalidation_pass": true,
+  "wall_time_seconds": 11.638565301895142
+}

@@ -1,0 +1,366 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-004",
+  "preregistration_path": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md",
+  "analysis_script": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/analysis/run_primary_analysis_v2.py",
+  "supersedes": {
+    "previous_result_path": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/analysis/result_primary.json",
+    "note": "result_primary.json (v1) e' MANTIDO sem alteracao, por transparencia historica -- documentadamente afetado pelo bug de assimetria de ruido astrometrico descrito em analysis/null_discovery_sparc004.md e corrigido conforme PREREGISTRATION.md Secao 5b. Este arquivo (result_primary_v2.json) e' o resultado com a pipeline CORRIGIDA -- substitui v1 como o resultado a ser usado para qualquer veredito H_A/H_B."
+  },
+  "section5b_bugfix_applied": true,
+  "locked_pipeline_files_used": [
+    "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/analysis/delta_obs_newt.py",
+    "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/analysis/deprojection_common.py"
+  ],
+  "locked_pipeline_files_note": "deprojection_common.py NAO foi editado (permanece PROIBIDO). delta_obs_newt.py FOI editado nesta sessao -- autorizado explicitamente pela Secao 5b do pre-registro, que ja documentava a correcao exigida (injecao de ruido astrometrico simetrico no ramo mock) como a acao correta a tomar apos a checagem adversarial ter encontrado o bug.",
+  "run_timestamp_utc": "2026-08-18T01:43:24Z",
+  "note_first_time_real_vp_used": "A analise primaria original (result_primary.json, v1) foi a PRIMEIRA execucao deste teste sobre v_p observado real -- toda validacao/revalidacao anterior aquele ponto (validation_synthetic_newtonian.json, revalidation_delta_obs_newt.json) usou somente v_p sintetico em AMBOS os ramos. Esta execucao (v2) reusa o MESMO v_p_real_si observado (nenhuma mudanca no ramo real -- ja carrega ruido genuino por construcao); a UNICA mudanca e' que o ramo MOCK agora tambem carrega ruido astrometrico simetrico (Secao 5b), revalidado sinteticamente em revalidation_delta_obs_newt_v2.json antes desta execucao real, conforme exigido pelo pre-registro.",
+  "n_discovery_used": 30203,
+  "n_holdout_declared_not_used": 12944,
+  "n_holdout_confirmed_disjoint_not_used": 12944,
+  "holdout_seal_check": "Verificado programaticamente: interseccao entre pair_ids de descoberta usados e pair_ids de holdout (discovery_holdout_split.json) e' vazia; nenhum dado FISICO (velocidade, massa, separacao, excentricidade) do holdout foi lido em nenhum momento -- so' a LISTA de identificadores foi usada para a checagem de disjuncao.",
+  "constants": {
+    "G_SI": 6.6743e-11,
+    "MSUN_KG": 1.98892e+30,
+    "AU_M": 149597870700.0,
+    "mas_yr_to_km_s_per_pc": 0.00474047,
+    "c_light_m_s": 299792458.0,
+    "H0_km_s_Mpc": 70.0,
+    "H0_si_s^-1": 2.268308489954634e-18
+  },
+  "vp_formula": {
+    "description": "v_p = 4.74047e-3 * dmu[mas/yr] * d_mean_pc[pc] (km/s), Chae (2023) Eq. 4, ja travada em SPARC-003 Secao 4. dmu = sqrt((pmRA1-pmRA2)^2 + (pmDE1-pmDE2)^2).",
+    "columns_used_catalog_el_badry_2021": [
+      "pmRA1",
+      "pmRA2",
+      "pmDE1",
+      "pmDE2",
+      "d_mean_pc (derivado de Plx1/Plx2)",
+      "sepAU",
+      "Mtot_Msun (derivado de Gmag1/Gmag2 via Mamajek)"
+    ],
+    "median_dmu_mas_yr": 0.8322577416142053,
+    "median_vp_real_km_s": 0.5335837237768581,
+    "min_vp_real_km_s": 0.0025214251319132497,
+    "max_vp_real_km_s": 4.830511289809786
+  },
+  "section5b_astrometric_noise_correction": {
+    "description": "Ramo MOCK (generate_synthetic_vp_newtonian, chamado internamente por don.run_delta_obs_newt) agora recebe sigma_v_ra_si/sigma_v_de_si calculados por don.astrometric_noise_sigma_v_si a partir de e_pmRA1,e_pmRA2,e_pmDE1,e_pmDE2 (mas/yr, El-Badry+2021, COLUMN_DICTIONARY.md) e d_mean_pc de CADA sistema real -- mesma propagacao de erro/conversao SI usada pelo v_p_real acima. RA/DE tratados como independentes (colunas de correlacao pmRApmDEcor1/2 nao presentes em quality_filtered_sample.parquet).",
+    "columns_used": [
+      "e_pmRA1",
+      "e_pmRA2",
+      "e_pmDE1",
+      "e_pmDE2",
+      "d_mean_pc"
+    ],
+    "median_sigma_v_ra_km_s": 0.0405252762792009,
+    "median_sigma_v_de_km_s": 0.037742410486651626,
+    "applied_to_mock_branch_confirmed": true
+  },
+  "a0_A_holographic_bridge": {
+    "formula": "c*H0/(2*pi)",
+    "value_si_m_s2": 1.0822882733201101e-10
+  },
+  "a0_B_mond_emergence": {
+    "formula": "c*H0",
+    "value_si_m_s2": 6.80021777705768e-10
+  },
+  "n_bins": 5,
+  "bin_edges_log10_gN_projected_fixed_from_sparc003": [
+    -11.7012,
+    -9.1728,
+    -8.4667,
+    -7.9752,
+    -7.5548,
+    -6.5224
+  ],
+  "n_mc": 200,
+  "n_bootstrap": 1000,
+  "seed": 12345,
+  "seeds_derived": {
+    "seed_real": 12345,
+    "seed_mock_true_geometry": 111123456,
+    "seed_mock_recovery": 222234567,
+    "seed_bootstrap": 333345678
+  },
+  "official_run_delta_obs_newt_output": {
+    "n_bins": 5,
+    "bin_edges_log10_gN_projected": [
+      -11.7012,
+      -9.1728,
+      -8.4667,
+      -7.9752,
+      -7.5548,
+      -6.5224
+    ],
+    "n_systems_per_bin": [
+      6042,
+      6040,
+      6040,
+      6039,
+      6042
+    ],
+    "gN_bin_median_si": [
+      1.880655689217262e-10,
+      1.6645464809358482e-09,
+      6.2203271655564165e-09,
+      1.7190232822044468e-08,
+      4.863807305547588e-08
+    ],
+    "median_real_log_g_ratio_primary": [
+      0.004293537963481763,
+      -0.06177649543914221,
+      -0.08720267707124929,
+      -0.09747547113037262,
+      -0.13403242748997746
+    ],
+    "median_mock_log_g_ratio_primary": [
+      -0.1442744187489997,
+      -0.21001462402045604,
+      -0.20219492978189413,
+      -0.1923669244244997,
+      -0.17703322841763064
+    ],
+    "delta_obs_newt_primary": [
+      0.14856795671248146,
+      0.14823812858131383,
+      0.11499225271064484,
+      0.09489145329412708,
+      0.04300080092765318
+    ],
+    "bootstrap": {
+      "n_bootstrap": 1000,
+      "n_valid_replicas_per_bin": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "ci95_lo": [
+        0.12248454040362225,
+        0.12155971336259003,
+        0.08787490598517865,
+        0.07035462390464316,
+        0.018187192795806006
+      ],
+      "ci95_hi": [
+        0.17425974300174457,
+        0.1749793318381501,
+        0.14321991082212354,
+        0.11999160560059437,
+        0.06678526945921387
+      ],
+      "delta_obs_newt_boot_mean": [
+        0.1490292013132508,
+        0.14903990265143116,
+        0.11465059899340352,
+        0.09484701587096325,
+        0.042824539816198534
+      ],
+      "delta_obs_newt_boot_std": [
+        0.01329608491354932,
+        0.013675470370650675,
+        0.013792268713828324,
+        0.012799178793647913,
+        0.012443059016615384
+      ]
+    },
+    "seeds": {
+      "seed_input": 12345,
+      "seed_real": 12345,
+      "seed_mock_true_geometry": 111123456,
+      "seed_mock_recovery": 222234567,
+      "seed_bootstrap": 333345678
+    },
+    "n_mc": 200,
+    "n_sys": 30203,
+    "section5b_mock_astrometric_noise_correction_applied": true,
+    "mock_generation_diagnostics": {
+      "fraction_individual_eccentricity": 0.7428401152203423,
+      "median_e_true": 0.7296804689923158,
+      "fraction_e_true_gt_0p5": 0.8153825778896137,
+      "median_log_g_true_over_gN_true_3d_no_recovery_noise": -0.1751757595965275,
+      "a0_boost": null
+    }
+  },
+  "crosscheck_manual_reproduction_vs_official": {
+    "delta_obs_newt_primary_matches": true,
+    "n_systems_per_bin_matches": true,
+    "bootstrap_ci95_delta_matches": true,
+    "tolerance_abs": 1e-09,
+    "note": "Confirma que a reproducao manual (necessaria para extrair delta_obs-newt POR REPLICA de bootstrap, nao exposto pelo retorno de don.run_delta_obs_newt) usando as mesmas sementes documentadas produz resultados identicos (dentro de tolerancia de ponto flutuante) aos da chamada oficial da funcao travada."
+  },
+  "bins": [
+    {
+      "bin_index": 0,
+      "log10_gN_range": [
+        -11.7012,
+        -9.1728
+      ],
+      "n_systems": 6042,
+      "gN_bin_median_si_m_s2": 1.880655689217262e-10,
+      "log10_gN_bin_median": -9.725690707884159,
+      "median_real_log10_g_over_gN": 0.004293537963481763,
+      "median_mock_log10_g_over_gN": -0.1442744187489997,
+      "g_over_gN_real_linear": 1.009935266788865,
+      "g_over_gN_real_gt_1": true,
+      "delta_obs_newt_primary": 0.14856795671248146,
+      "delta_obs_newt_ci95_lo": 0.12248454040362225,
+      "delta_obs_newt_ci95_hi": 0.17425974300174457
+    },
+    {
+      "bin_index": 1,
+      "log10_gN_range": [
+        -9.1728,
+        -8.4667
+      ],
+      "n_systems": 6040,
+      "gN_bin_median_si_m_s2": 1.6645464809358482e-09,
+      "log10_gN_bin_median": -8.778704073062372,
+      "median_real_log10_g_over_gN": -0.06177649543914221,
+      "median_mock_log10_g_over_gN": -0.21001462402045604,
+      "g_over_gN_real_linear": 0.8674081623463826,
+      "g_over_gN_real_gt_1": false,
+      "delta_obs_newt_primary": 0.14823812858131383,
+      "delta_obs_newt_ci95_lo": 0.12155971336259003,
+      "delta_obs_newt_ci95_hi": 0.1749793318381501
+    },
+    {
+      "bin_index": 2,
+      "log10_gN_range": [
+        -8.4667,
+        -7.9752
+      ],
+      "n_systems": 6040,
+      "gN_bin_median_si_m_s2": 6.2203271655564165e-09,
+      "log10_gN_bin_median": -8.206186772470089,
+      "median_real_log10_g_over_gN": -0.08720267707124929,
+      "median_mock_log10_g_over_gN": -0.20219492978189413,
+      "g_over_gN_real_linear": 0.8180829151163012,
+      "g_over_gN_real_gt_1": false,
+      "delta_obs_newt_primary": 0.11499225271064484,
+      "delta_obs_newt_ci95_lo": 0.08787490598517865,
+      "delta_obs_newt_ci95_hi": 0.14321991082212354
+    },
+    {
+      "bin_index": 3,
+      "log10_gN_range": [
+        -7.9752,
+        -7.5548
+      ],
+      "n_systems": 6039,
+      "gN_bin_median_si_m_s2": 1.7190232822044468e-08,
+      "log10_gN_bin_median": -7.764718241251026,
+      "median_real_log10_g_over_gN": -0.09747547113037262,
+      "median_mock_log10_g_over_gN": -0.1923669244244997,
+      "g_over_gN_real_linear": 0.7989590654489575,
+      "g_over_gN_real_gt_1": false,
+      "delta_obs_newt_primary": 0.09489145329412708,
+      "delta_obs_newt_ci95_lo": 0.07035462390464316,
+      "delta_obs_newt_ci95_hi": 0.11999160560059437
+    },
+    {
+      "bin_index": 4,
+      "log10_gN_range": [
+        -7.5548,
+        -6.5224
+      ],
+      "n_systems": 6042,
+      "gN_bin_median_si_m_s2": 4.863807305547588e-08,
+      "log10_gN_bin_median": -7.3130236392853,
+      "median_real_log10_g_over_gN": -0.13403242748997746,
+      "median_mock_log10_g_over_gN": -0.17703322841763064,
+      "g_over_gN_real_linear": 0.734459026217173,
+      "g_over_gN_real_gt_1": false,
+      "delta_obs_newt_primary": 0.04300080092765318,
+      "delta_obs_newt_ci95_lo": 0.018187192795806006,
+      "delta_obs_newt_ci95_hi": 0.06678526945921387
+    }
+  ],
+  "fit_a0_primary": {
+    "model": "delta_AQUAL(bin;a0) = log10(nu(gN_bin/a0)), nu(x)=1/(1-exp(-sqrt(x)))",
+    "rescaling": "a0 = x * 1e-10, ajustado em x (licao de convergencia de SPARC-002)",
+    "convergence_check": {
+      "x0_1": 1.0,
+      "a0_0_1_si": 1e-10,
+      "a0_fit_from_x0_1_si_m_s2": 1.657463124325722e-10,
+      "x0_2": 5.0,
+      "a0_0_2_si": 5e-10,
+      "a0_fit_from_x0_2_si_m_s2": 1.657498626806454e-10,
+      "converged_to_same_value": false
+    },
+    "a0_fit_si_m_s2": 1.657463124325722e-10,
+    "a0_fit_x1e-10_units": 1.6574631243257218
+  },
+  "bootstrap_a0_refit": {
+    "n_bootstrap": 1000,
+    "n_replicas_failed_empty_bin": 0,
+    "gN_bin_recomputed_per_replica": true,
+    "gN_bin_recompute_note": "gN_bin (eixo-x do ajuste MOND por bin) recalculado a cada replica como mediana de gN projetado dos sistemas REAMOSTRADOS naquele bin -- decisao de implementacao documentada no docstring deste script (a atribuicao de bin por sistema e' fixa, Design Decision 1 de delta_obs_newt.py, mas o valor representativo de gN do bin varia com a reamostragem).",
+    "refit_x0_1p0": {
+      "a0_0_si": 1e-10,
+      "n_valid_replicas": 1000,
+      "n_failed_fit": 0,
+      "ci95_lo_si_m_s2": 1.2324951372598306e-10,
+      "ci95_hi_si_m_s2": 2.181334129992901e-10,
+      "mean_si_m_s2": 1.6782625295045783e-10,
+      "std_si_m_s2": 2.3997739343540052e-11
+    },
+    "refit_x0_5p0": {
+      "a0_0_si": 5e-10,
+      "n_valid_replicas": 1000,
+      "n_failed_fit": 0,
+      "ci95_lo_si_m_s2": 1.2325196656823586e-10,
+      "ci95_hi_si_m_s2": 2.1814642160899468e-10,
+      "mean_si_m_s2": 1.678286763726169e-10,
+      "std_si_m_s2": 2.4000661704948212e-11
+    },
+    "n_replicas_x0_disagreement": 18,
+    "primary_ci_used_for_decision": "refit_x0_1p0 (consistente com x0 primario usado no fit principal)"
+  },
+  "decision": {
+    "a0_ci95_used_lo_si_m_s2": 1.2324951372598306e-10,
+    "a0_ci95_used_hi_si_m_s2": 2.181334129992901e-10,
+    "a0_A_within_ci95": false,
+    "a0_B_within_ci95": false,
+    "verdict_section5_raw": "BOTH_FALSIFIED",
+    "verdict_note": "Veredito bruto calculado conforme Secao 5, mas NAO deve ser aceito como final se a pre-condicao de sanidade (Secao 3/4b) abaixo falhar -- mesma regra ja usada em SPARC-002/003. Reexecucao adversarial independente (Secao 6) ainda pendente antes de catalogar qualquer resultado."
+  },
+  "sanity_check_section3": {
+    "reference_a0_mcgaugh2016_si_m_s2": 1.2e-10,
+    "a0_fit_si_m_s2": 1.657463124325722e-10,
+    "abs_log10_ratio_fit_to_reference": 0.14026262883913707,
+    "passes_within_one_order_of_magnitude": true
+  },
+  "adversarial_trigger_hidden_multiplicity": {
+    "description": "Gap (e) / simplificacao declarada da Secao 4: se g/gN REAL (mediana, ANTES de subtrair o mock) vier > 1 de forma consistente em algum bin, isso e' o gatilho pre-declarado para a checagem adversarial obrigatoria de multiplicidade oculta (f_multi nao corrigida, Secao 6) -- NAO implementada aqui, delegada a agente adversarial separado.",
+    "median_real_log10_g_over_gN_per_bin": [
+      0.004293537963481763,
+      -0.06177649543914221,
+      -0.08720267707124929,
+      -0.09747547113037262,
+      -0.13403242748997746
+    ],
+    "g_over_gN_real_linear_per_bin": [
+      1.009935266788865,
+      0.8674081623463826,
+      0.8180829151163012,
+      0.7989590654489573,
+      0.734459026217173
+    ],
+    "bins_with_g_over_gN_real_gt_1": [
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "any_bin_triggers_adversarial_check": true
+  },
+  "eccentricity_sampling_diagnostics": {
+    "fraction_individual_eccentricity_real_branch": 0.7428401152203423,
+    "fraction_individual_eccentricity_mock_branch_true_geometry": 0.7428401152203423,
+    "note": "Fracao de sistemas que usaram a Gaussiana truncada individual de Hwang (dpm_sig>3, e/e0/e1 validos, e<0.99) em vez do fallback populacional p(e;alpha) -- Gap (a) da Secao 4."
+  },
+  "elapsed_seconds": 57.201987981796265
+}

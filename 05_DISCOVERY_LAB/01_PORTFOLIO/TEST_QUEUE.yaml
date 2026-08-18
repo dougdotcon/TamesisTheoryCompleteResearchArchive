@@ -341,9 +341,11 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-002/003 (mesmas H_A/H_B, mesmo criterio de decisao -- este teste adapta o observavel discriminador ao metodo primario de Chae, nao redefine as hipoteses)"
-    status: CANDIDATE_FORMULATING
+    status: CANDIDATE_LOCKED
     existing_assets:
-      - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md (DRAFT, nao travado -- so trava apos validacao sintetica obrigatoria da Secao 4b passar)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md (LOCKED 2026-08-15, apos revalidacao do Adendo 4c passar)"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/data/{hwang_eccentricity_subset.parquet,PROVENANCE_HWANG.md}"
+      - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/analysis/{deprojection_common.py,delta_obs_newt.py} (validados, prontos para dado real)"
       - "reaproveita sem modificacao: 02_TESTS/COSMOLOGY_WIDE_BINARIES/data/{PROVENANCE.md,quality_filtered_sample.parquet,discovery_holdout_split.json,mamajek_mass_luminosity.tsv} e analysis/apply_quality_cuts.py"
     description: >
       Usuario pediu para redesenhar SPARC-003 com desprojecao Monte Carlo
@@ -366,15 +368,35 @@ queue:
       oculta (f_multi) de Chae NAO implementada -- vies unidirecional
       conhecido (infla g/g_N), checagem adversarial obrigatoria se o
       resultado mostrar g/g_N>1 consistente com H_A ou H_B.
+    lock_result: >
+      2026-08-15: catalogo de Hwang extraido (100% de cobertura dos
+      43.147 sistemas, 88,53% via excentricidade individual, 11,47% via
+      fallback populacional). Pipeline de desprojecao vetorizada
+      construida e validada geometricamente (excentricidade zero
+      recupera g/g_N~1 exatamente). Primeira validacao sintetica (g/g_N
+      bruto) FALHOU no criterio literal -- mediana -0,204 dex sob
+      Newtoniano puro real, nao um bug, mas o efeito Kepleriano
+      conhecido de v^2/r subestimar g_N sob orbita excentrica (bate com
+      a propria Eq. 16 de Chae). Corrigido ANTES de qualquer dado real:
+      estatistica passou a ser delta_obs-newt (real menos mock
+      Newtoniano casado por sistema) -- o metodo original de Chae, que
+      este pre-registro havia simplificado por engano. Revalidacao sob
+      a estatistica corrigida PASSOU (controle negativo: 5 ICs de 95%
+      contem 0; controle positivo: sinal MOND injetado recuperado
+      corretamente no unico bin onde e fisicamente detectavel acima do
+      piso de ruido, razao 1,44). Pre-registro travado (LOCKED). Nenhum
+      dado real de saida (v_p observado) foi tocado ate este ponto --
+      toda a validacao/revalidacao usou dado sintetico dos dois lados.
     next_action: >
-      Extrair subconjunto do catalogo de excentricidades de Hwang para os
-      43.147 sistemas ja filtrados (com proveniencia completa); construir
-      pipeline de desprojecao vetorizada (equacao de Kepler via
-      Newton-Raphson); rodar a validacao sintetica OBRIGATORIA (Monte
-      Carlo de binarias puramente Newtonianas com a mesma distribuicao de
-      excentricidade real, confirmando que g/g_N desprojetado recuperado
-      cai proximo de 1) ANTES de travar o pre-registro. So entao lock +
-      analise real sobre a amostra de descoberta + reexecucao adversarial.
+      Aplicar a pipeline travada (delta_obs_newt.py), sem modificacao,
+      ao v_p REAL observado (pmRA/pmDE) dos 30.203 sistemas de
+      descoberta -- primeira vez que dado real de saida e tocado neste
+      teste. Ajustar a0 via minimos quadrados nao-linear entre
+      delta_obs-newt real e a previsao AQUAL, IC de 95% via bootstrap
+      pareado. Verificar se a0_A e/ou a0_B caem dentro do IC. Reexecucao
+      adversarial obrigatoria (segundo agente, implementacao propria do
+      zero); checagem de multiplicidade oculta obrigatoria se g/g_N>1
+      consistente com H_A/H_B.
     stop_condition: >
       travar o pre-registro (Status: LOCKED) antes da validacao sintetica
       da Secao 4b passar; redefinir H_A/H_B; reabrir ou modificar os

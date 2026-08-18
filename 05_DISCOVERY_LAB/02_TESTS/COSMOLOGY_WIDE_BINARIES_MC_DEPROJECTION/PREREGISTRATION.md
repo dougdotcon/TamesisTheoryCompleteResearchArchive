@@ -355,6 +355,59 @@ Só após os itens 1 e 2 acima passarem, `Status` muda para `LOCKED`.
   checagem de sanidade da Seção 3/4b falhar, o teste para até isso ser
   resolvido, mesma regra já usada em SPARC-002/003.
 
+## 5b. Correção de bug pós-lock: assimetria de ruído astrométrico no ramo mock
+
+**Contexto:** após o lock (Seção 4c) e a primeira análise real (30.203
+sistemas de descoberta, `analysis/result_primary.json`), a checagem
+adversarial obrigatória (Seção 6) — especificamente o agente de
+descoberta adversarial de nulos — encontrou um problema estrutural real
+na IMPLEMENTAÇÃO da pipeline, não na metodologia pré-registrada em si:
+o ramo REAL de `v_p` vem de `|Δμ|` (magnitude de um vetor 2D de
+movimento próprio DIFERENCIAL medido, com erro astrométrico genuíno do
+Gaia embutido), enquanto o ramo MOCK (`generate_synthetic_vp_newtonian`)
+era gerado inteiramente SEM ruído. Tomar a magnitude de um vetor 2D
+ruidoso tem viés conhecido para CIMA em baixo SNR (distribuição de
+Rice/Rayleigh) — pior exatamente no bin de menor $g_N$ (maior separação,
+menor SNR de $\Delta\mu$, correlação 0,994 com `dpm_sig` já presente no
+catálogo de Hwang). Como o ramo mock nunca carregava esse viés, a
+subtração `real-mock` de $\delta_{\text{obs-newt}}$ NÃO o cancelava —
+ao contrário do que a Seção 4c pretendia.
+
+**Prova decisiva (já rodada pelo agente adversarial, dado 100% sintético,
+zero física MOND):** injetar o MESMO ruído astrométrico real
+(por-sistema, dos erros de PM reportados pelo Gaia) SIMETRICAMENTE nos
+dois ramos colapsa o efeito para consistente-com-zero nos 5 bins.
+Injetar só no ramo real (deixando o mock limpo, replicando o bug)
+reproduz o padrão qualitativo e ~33% da magnitude do sinal do bin 0.
+
+**Classificação:** isto é um BUG DE IMPLEMENTAÇÃO no gerador do ramo
+mock, não uma reformulação de H_A/H_B, do critério de decisão, dos
+cortes de qualidade, ou da própria estatística $\delta_{\text{obs-newt}}$
+(que continua sendo a correta, conceitualmente — real menos um mock
+GENUINAMENTE comparável, o que exige que o mock replique TODAS as fontes
+de variância do ramo real, incluindo ruído de medição, não só a
+geometria orbital). Corrigir isto é o mesmo tipo de ação já autorizada
+pelo passo 7 de `AGENTS.md` (reexecução adversarial existe precisamente
+para achar e corrigir bugs antes de catalogar um resultado) — não uma
+violação da disciplina de "não reformular depois de ver resultado".
+
+**Correção:** `generate_synthetic_vp_newtonian` passa a receber, por
+sistema, os erros de PM reportados pelo próprio Gaia (`pmra_error`,
+`pmdec_error` de cada componente, já presentes no catálogo El-Badry+2021)
+e injeta ruído Gaussiano de mesma magnitude no `(Δμ_RA, Δμ_DE)` mock
+ANTES de tomar a magnitude — replicando exatamente o mesmo processo de
+medição ruidosa que o dado real passou, simetricamente.
+
+**Revalidação obrigatória da correção, ANTES de reaceitar qualquer
+resultado real:** repetir os controles negativo e positivo do Adendo 4c
+(Seção 4c) com a versão corrigida — confirmar que o controle negativo
+continua com os 5 ICs contendo 0, e que o controle positivo continua
+recuperando o sinal MOND injetado corretamente. Só então a análise real
+(Seção 4, sobre os 30.203 sistemas de descoberta) é re-executada com a
+pipeline corrigida, substituindo `result_primary.json` por um resultado
+final, com nova reexecução adversarial completa antes de catalogar
+qualquer veredito H_A/H_B.
+
 ## 6. Correção para comparações múltiplas / checagem adversarial obrigatória
 
 Duas hipóteses pré-registradas testadas contra o mesmo IC de um único

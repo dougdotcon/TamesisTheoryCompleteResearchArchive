@@ -46,6 +46,16 @@ Checks, all synthetic, all seeded for reproducibility:
    shared-embedding step itself fails for PRE before %DET/ENTR can even be
    computed. ***
 
+1b. Positive control v2 (Roessler-sourced POST) -- the ONE additional
+   validation attempt pre-authorized in METHODOLOGY_NOTE.md's addendum
+   (commit 024e7a9) after check 1 above hit embedding_not_resolved: same
+   PRE (fGn-like H=0.7, already confirmed to resolve FNN), POST = Roessler
+   system x-coordinate (colored/band-limited spectrum, closer to fGn's
+   than the logistic map's near-white spectrum) rank-remapped onto PRE.
+   Decision rule fixed a priori: p<0.05 with clear null separation on
+   EITHER channel -> validation passes; neither -> RQA closed at the
+   validation stage, no third attempt.
+
 2. Negative control: PRE and POST = two INDEPENDENT realizations of the
    SAME linear process (fGn-like, fixed H=0.7, independent seeds) --
    probes Gap (b)'s named spectral/linear-risk directly: same H, no
@@ -155,6 +165,46 @@ def ar1_process(n, phi, rng):
     for i in range(1, n):
         x[i] = phi * x[i - 1] + e[i]
     return x
+
+
+def rossler_x(n_out, sample_dt=0.15, dt_internal=0.01, a=0.2, b=0.2, c=5.7,
+              burn_in_time=200.0, x0=(1.0, 1.0, 1.0)):
+    """Roessler system (Roessler 1976, Phys. Lett. A 57:397), classic
+    chaotic parameters a=0.2, b=0.2, c=5.7, RK4 integration with a fine
+    internal step (dt_internal=0.01, standard/sufficient for this system),
+    decimated to sample_dt after a burn-in transient. Returns the x-
+    coordinate only (n_out samples).
+
+    sample_dt=0.15 was chosen (see METHODOLOGY_NOTE.md addendum rationale
+    and VALIDATION_NOTE.md diagnostic table) because it empirically gives a
+    periodogram-slope spectral exponent (~2.4) close to fGn H=0.7's target
+    exponent (2*H+1=2.4) -- i.e. this sampling rate is what makes Roessler's
+    natural colored/band-limited spectrum resemble the fGn PRE's spectrum
+    BEFORE any rank-remap is applied, addressing the exact spectral-mismatch
+    confound found with the logistic map in the original Gap (b) design.
+    """
+    def deriv(s):
+        x, y, z = s
+        return np.array([-y - z, x + a * y, b + z * (x - c)])
+
+    steps_per_sample = max(1, round(sample_dt / dt_internal))
+    burn_in_steps = int(round(burn_in_time / dt_internal))
+    total_steps = burn_in_steps + n_out * steps_per_sample
+    s = np.array(x0, dtype=float)
+    h = dt_internal
+    xs = np.empty(n_out)
+    k = 0
+    for i in range(total_steps):
+        k1 = deriv(s)
+        k2 = deriv(s + h / 2 * k1)
+        k3 = deriv(s + h / 2 * k2)
+        k4 = deriv(s + h * k3)
+        s = s + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+        if i >= burn_in_steps and (i - burn_in_steps) % steps_per_sample == 0:
+            if k < n_out:
+                xs[k] = s[0]
+                k += 1
+    return xs
 
 
 def sine_with_dither(n, period, dither_frac, rng):
@@ -321,6 +371,58 @@ def main():
         },
     )
 
+    # ---- 1b. Positive control v2 -- Roessler-sourced POST (METHODOLOGY_NOTE.md
+    # addendum, commit 024e7a9, the ONE pre-authorized additional validation
+    # attempt after positive_control (v1, above) hit embedding_not_resolved
+    # for its white-noise PRE). PRE = fGn-like H=0.7 (unchanged, already
+    # validated to resolve FNN cleanly in the negative control above). POST =
+    # Roessler system x-coordinate, rank-remapped onto PRE's exact marginal
+    # -- same rank-remap technique, only the chaotic SOURCE for POST changes
+    # (logistic map's near-white spectrum -> Roessler's colored/band-limited
+    # spectrum, closer in character to fGn). Fixed a priori decision rule
+    # (addendum steps 4-5): if EITHER channel shows p<0.05 with clear null
+    # separation, validation passes under this corrected design; if NEITHER
+    # does, RQA is closed at the validation stage -- no third attempt. ----
+    rng_pos2_pre = np.random.default_rng(424242)
+    pos2_pre = fgn_like(N_CTRL, H=0.7, rng=rng_pos2_pre)
+    rossler_raw = rossler_x(N_CTRL, sample_dt=0.15)
+    pos2_post = rank_remap_to_reference(rossler_raw, pos2_pre)
+
+    pos2_spec_pre = estimate_spectral_exponent(pos2_pre)
+    pos2_spec_post = estimate_spectral_exponent(pos2_post)
+    pos2_spec_rossler_raw = estimate_spectral_exponent(rossler_raw)
+
+    t0 = time.time()
+    pos2_result = run_rqa_analysis(pos2_pre, pos2_post, seed=SEED)
+    t_pos2 = time.time() - t0
+
+    results["positive_control_v2_rossler"] = _pipeline_summary(
+        pos2_result,
+        extra={
+            "description": (
+                "METHODOLOGY_NOTE.md addendum (commit 024e7a9), the ONE "
+                "pre-authorized additional validation attempt. PRE = fGn-like "
+                "H=0.7 (same generator/technique as the negative control, "
+                "already confirmed to resolve FNN). POST = Roessler system "
+                "(a=0.2, b=0.2, c=5.7, classic chaotic regime, RK4 "
+                "integration dt_internal=0.01, sampled at dt=0.15) x-"
+                "coordinate, rank-remapped onto PRE's exact empirical "
+                "distribution. Spectral match reported honestly (periodogram-"
+                "slope diagnostic), not required to be perfect per the "
+                "addendum's own instruction."
+            ),
+            "n_pre": N_CTRL, "n_post": N_CTRL,
+            "spectral_exponent_pre": pos2_spec_pre,
+            "spectral_exponent_post": pos2_spec_post,
+            "spectral_exponent_rossler_raw_pre_remap": pos2_spec_rossler_raw,
+            "spectral_exponent_target_fgn_H0.7": 2 * 0.7 + 1,
+            "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
+            "rossler_params": {"a": 0.2, "b": 0.2, "c": 5.7, "sample_dt": 0.15,
+                                "dt_internal": 0.01, "burn_in_time": 200.0},
+            "wall_clock_seconds": t_pos2,
+        },
+    )
+
     # ---- 3. Structural-wall characterization (supplementary): (a) fGn-H /
     # AR(1)-phi resolvability sweep, (b) explicit bootstrap-on-white-noise
     # check -- both run to TEST, not assume, per task instructions. ----
@@ -463,6 +565,55 @@ def main():
         ),
     }
 
+    # ---- 4b. Addendum decision rule (METHODOLOGY_NOTE.md commit 024e7a9,
+    # steps 4-5), applied mechanically and honestly to positive_control_v2's
+    # result -- this is the FINAL, pre-authorized verdict for this
+    # candidate's validation stage; no further redesign is authorized. ----
+    pos2 = results["positive_control_v2_rossler"]
+    pos2_computable = pos2["status"] == "ok"
+
+    if not pos2_computable:
+        pos2_p_DET = pos2_p_ENTR = None
+        sigma_DET_v2 = sigma_ENTR_v2 = None
+        v2_DET_verdict = v2_ENTR_verdict = "NOT_COMPUTABLE"
+    else:
+        pos2_p_DET, pos2_p_ENTR = pos2["p_DET"], pos2["p_ENTR"]
+        sigma_DET_v2 = sigma_equivalent(pos2["delta_DET"], pos2["surrogate_DET_mean"], pos2["surrogate_DET_std"])
+        sigma_ENTR_v2 = sigma_equivalent(pos2["delta_ENTR"], pos2["surrogate_ENTR_mean"], pos2["surrogate_ENTR_std"])
+        v2_DET_verdict = "IAAFT_HAS_REAL_POWER" if (pos2_p_DET is not None and pos2_p_DET < 0.05) else "IAAFT_LOW_POWER"
+        v2_ENTR_verdict = "IAAFT_HAS_REAL_POWER" if (pos2_p_ENTR is not None and pos2_p_ENTR < 0.05) else "IAAFT_LOW_POWER"
+
+    any_power_v2 = pos2_computable and (
+        (pos2_p_DET is not None and pos2_p_DET < 0.05) or
+        (pos2_p_ENTR is not None and pos2_p_ENTR < 0.05)
+    )
+
+    final_verdict = "VALIDATION_PASSED_PROCEED_TO_REAL_DATA" if any_power_v2 else \
+        "VALIDATION_FAILED_CLOSE_AT_VALIDATION_STAGE_NO_THIRD_ATTEMPT"
+
+    results["addendum_decision_rossler"] = {
+        "description": (
+            "Mechanical application of METHODOLOGY_NOTE.md addendum (commit "
+            "024e7a9) steps 4-5 to positive_control_v2_rossler above: "
+            "'if EITHER channel shows p<0.05 with clear null separation, "
+            "validation passes; if NEITHER does, close RQA at the "
+            "validation stage without touching real data -- no third "
+            "attempt.'"
+        ),
+        "DET_channel": {
+            "p_DET": pos2_p_DET, "sigma_equivalent": sigma_DET_v2,
+            "significant_at_0.05": pos2_computable and pos2_p_DET is not None and pos2_p_DET < 0.05,
+            "verdict": v2_DET_verdict,
+        },
+        "ENTR_channel": {
+            "p_ENTR": pos2_p_ENTR, "sigma_equivalent": sigma_ENTR_v2,
+            "significant_at_0.05": pos2_computable and pos2_p_ENTR is not None and pos2_p_ENTR < 0.05,
+            "verdict": v2_ENTR_verdict,
+        },
+        "any_channel_shows_power": any_power_v2,
+        "final_verdict": final_verdict,
+    }
+
     results["pipeline_config"] = (
         pos_result["config"] if pos_result["status"] == "ok" else neg_result["config"]
     )
@@ -488,6 +639,16 @@ def main():
             "the dither breaks floating-point-exact self-recurrences that "
             "otherwise spuriously blow up FNN's ratio criterion."
         ),
+        "rossler_x": (
+            "Roessler system (a=0.2, b=0.2, c=5.7, classic chaotic regime), "
+            "RK4 integration with dt_internal=0.01, 200 time-unit burn-in, "
+            "sampled at dt=0.15 (chosen because it empirically gives a "
+            "periodogram-slope spectral exponent close to fGn H=0.7's target "
+            "2H+1=2.4 -- see positive_control_v2_rossler). x-coordinate only. "
+            "Used for METHODOLOGY_NOTE.md addendum's (commit 024e7a9) "
+            "positive_control_v2_rossler, rank-remapped onto the fGn PRE, "
+            "same technique as the logistic-map v1 control."
+        ),
     }
     results["wall_clock_seconds_total"] = time.time() - t_start
 
@@ -497,6 +658,7 @@ def main():
 
     print(json.dumps(results["iaaft_power_check"], indent=2))
     print(json.dumps(results["structural_wall_characterization"]["bootstrap_on_white_noise"], indent=2))
+    print(json.dumps(results["addendum_decision_rossler"], indent=2))
     print(f"\nWrote {out_path}")
     print(f"Total wall clock: {results['wall_clock_seconds_total']:.1f}s")
 

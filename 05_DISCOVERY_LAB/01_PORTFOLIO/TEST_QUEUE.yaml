@@ -1181,21 +1181,63 @@ queue:
       Ranking honesto (nao travado): permutacao+CECP > Kramers-Moyal >
       TDA > EVT/Hill. Detalhes completos em
       phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md.
+    permutation_entropy_gap_closing_result: >
+      2026-08-18: usuario pediu para fechar o candidato ranqueado #1 na
+      busca de Fase 0.6, entropia-de-permutacao (entropia de permutacao
+      multiescala + plano complexidade-entropia, Bandt-Pompe/Rosso).
+      Metodologia fixada em
+      02_TESTS/TRI_RG/permutation_entropy/METHODOLOGY_NOTE.md ANTES de
+      qualquer calculo real: coarse-graining reaproveitado de MSE +
+      embedding ordinal Bandt-Pompe (m=4 fixo, tau_BP=1), I(X)=H_S/PCI
+      + C_JS/MCI, declaracao de identificabilidade citando o risco
+      documentado de H_S~Hurst (Zunino et al. 2008). VALIDACAO SINTETICA
+      (ANTES de dado real) deu o resultado mais limpo desta linha ate
+      agora: AMBOS os canais mostraram poder real completo contra IAAFT
+      no controle positivo (mapa logistico, p_PCI=0,0 sigma~-12,4;
+      p_MCI=0,0 sigma~+10,6) -- refutando parcialmente a hipotese a
+      priori assimetrica (esperava-se que so C_JS tivesse poder). Um
+      controle adicional de Hurst diferencial (H=0,3 vs H=0,9, pedido
+      pela sessao orquestradora, sem conteudo nao-linear) confirmou que
+      nenhum canal mostra significancia espuria por mero desvio linear
+      de Hurst (p=1,0 em ambos) -- resolvendo o risco de
+      identificabilidade antes de tocar dado real. RESULTADO REAL (2
+      dominios x 2 variantes x 2 canais = 8 combinacoes): VitalDB
+      (inducao de anestesia, EEG, caso 408) sem sinal em nenhuma
+      variante/canal; PhysioNet European ST-T (episodio isquemico,
+      registro e0103) sem sinal significativo em nenhuma combinacao,
+      mas a variante primaria teve os p mais baixos da linha (p_PCI=
+      0,275, p_MCI=0,325, direcao qualitativamente intuitiva para
+      isquemia) sem reproduzir na variante de robustez -- reportado
+      honestamente como tendencia sub-limiar, nao achado. Durante a
+      etapa de dado real, um bug de desempenho real foi encontrado e
+      corrigido (subamostragem do Gap d nao estava sendo aplicada antes
+      da geracao de substitutos IAAFT, tornando o protocolo inviavel em
+      escala -- corrigido, revalidacao sintetica confirmada bit-identica
+      apos a correcao, nao e reformulacao metodologica). Reexecucao
+      adversarial completa NAO acionada por proporcionalidade (nenhuma
+      das 8 combinacoes significativa, mesmo principio ja usado em MSE/
+      VG). Fechado NEGATIVO em dado real -- 8o candidato desta linha sem
+      invariante sobrevivente, apesar de ter a validacao de PODER mais
+      limpa e completa de toda a linha (nao e um artefato de teste sem
+      poder). Detalhes completos:
+      02_TESTS/TRI_RG/permutation_entropy/{METHODOLOGY_NOTE.md,
+      VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      4 novos candidatos formalizados (viable=true) aguardando escolha
-      do usuario para fechamento de gaps: entropia de permutacao +
-      plano complexidade-entropia (rank #1), Kramers-Moyal/Friedrich-
+      3 candidatos formalizados (viable=true) da Fase 0.6 ainda nao
+      fechados, aguardando escolha do usuario: Kramers-Moyal/Friedrich-
       Peinke (rank #2), homologia persistente/TDA (rank #3), indice de
       cauda EVT/Hill (rank #4). Ver phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md.
-      Alternativas: revisitar qualquer um dos 7 ja fechados com dados
-      diferentes, ou considerar a linha suficientemente explorada por
-      ora. Toda a infraestrutura das buscas anteriores (7 METHODOLOGY_NOTE.md,
-      6 pipelines validadas e aplicadas a dado real, dominios reais de
-      14+ fontes testadas no total) fica commitada e reaproveitavel.
-      01_TAMESIS_CORE/03_TRANSITION_ATLAS continua infraestrutura
-      reaproveitavel candidata para hospedar um resultado futuro depois
-      de sobreviver ao Gate de Replicacao, se e quando esta linha
-      produzir um achado.
+      Alternativas: revisitar qualquer um dos 8 ja fechados com dados
+      diferentes, nova rodada de busca, ou considerar a linha
+      suficientemente explorada por ora (8/8 sem invariante confiavel,
+      incluindo o candidato com a validacao de poder mais limpa de toda
+      a linha). Toda a infraestrutura das buscas anteriores (8
+      METHODOLOGY_NOTE.md, 7 pipelines validadas e aplicadas a dado
+      real, dominios reais de 16+ fontes testadas no total) fica
+      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
+      continua infraestrutura reaproveitavel candidata para hospedar um
+      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
+      quando esta linha produzir um achado.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

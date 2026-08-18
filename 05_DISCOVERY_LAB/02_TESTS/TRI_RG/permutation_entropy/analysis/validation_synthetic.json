@@ -89,7 +89,7 @@
     "spectral_exponent_pre": -0.05801777764723775,
     "spectral_exponent_post": 0.01440315449456079,
     "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
-    "wall_clock_seconds": 5.00632119178772
+    "wall_clock_seconds": 5.093456983566284
   },
   "negative_control": {
     "status": "ok",
@@ -144,7 +144,79 @@
     "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes METHODOLOGY_NOTE.md Gap (b)'s named spectral/linear risk (Zunino et al. 2008: H_S ~ near-monotone function of Hurst H) directly: same H, no genuine structural change -- p should typically be non-significant for both channels if IAAFT is correctly calibrated under the null.",
     "n_pre": 3000,
     "n_post": 3000,
-    "wall_clock_seconds": 5.123574733734131
+    "wall_clock_seconds": 5.331674814224243
+  },
+  "differential_hurst_control": {
+    "status": "ok",
+    "PCI_pre": 11.059865065798517,
+    "PCI_post": 7.6456859584898815,
+    "MCI_pre": 1.098490695623903,
+    "MCI_post": 3.034696617456819,
+    "delta_PCI": -3.4141791073086356,
+    "delta_MCI": 1.936205921832916,
+    "p_PCI": 1.0,
+    "p_MCI": 1.0,
+    "surrogate_PCI_mean": -4.472941375971612,
+    "surrogate_PCI_std": 0.23504105386869317,
+    "surrogate_PCI_n_valid": 200,
+    "surrogate_PCI_n_undefined": 0,
+    "surrogate_MCI_mean": 2.1177056826351928,
+    "surrogate_MCI_std": 0.0704295210926745,
+    "surrogate_MCI_n_valid": 200,
+    "surrogate_MCI_n_undefined": 0,
+    "n_scales_pre": 12,
+    "n_scales_post": 12,
+    "scales_used_pre": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "scales_used_post": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25
+    ],
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "Coordinator-requested post-hoc addition, directly probing the interpretive caveat flagged (not tested) in the original validation: PRE = fGn-like H=0.3 (weakly persistent), POST = fGn-like H=0.9 (strongly persistent), independent seeds 777001/777002. BOTH are purely LINEAR Gaussian self-similar processes -- no nonlinear or deterministic structure of any kind, only a genuine Hurst-exponent shift. Tests whether H_S/PCI shows artificial/spurious IAAFT significance purely from a linear spectral (Hurst) shift with no genuine complexity change -- the actual Zunino et al. 2008 redundancy risk, which the original same-H negative control could not probe. Also checks whether C_JS/MCI (designed to track nonlinear/deterministic structure, not linear spectral shape) stays quiet under a pure Hurst shift, as expected if it is genuinely NOT just tracking spectral slope.",
+    "H_pre": 0.3,
+    "H_post": 0.9,
+    "n_pre": 3000,
+    "n_post": 3000,
+    "spectral_exponent_pre": 1.6003426697353218,
+    "spectral_exponent_post": 2.7961163222012506,
+    "spectral_exponent_target_pre_2H+1": 1.6,
+    "spectral_exponent_target_post_2H+1": 2.8,
+    "wall_clock_seconds": 5.235231399536133
+  },
+  "differential_hurst_control_verdict": {
+    "description": "Mechanical read of the differential_hurst_control result above: does a PURE linear Hurst shift (H=0.3 -> H=0.9, no nonlinear content) produce spurious IAAFT significance on H_S/PCI, and does C_JS/MCI stay quiet as expected if it genuinely tracks nonlinear/deterministic structure rather than linear spectral shape?",
+    "computable": true,
+    "p_PCI": 1.0,
+    "sigma_equivalent_PCI": 4.504584417216146,
+    "H_S_PCI_shows_spurious_significance": false,
+    "p_MCI": 1.0,
+    "sigma_equivalent_MCI": -2.5770409621762274,
+    "C_JS_MCI_shows_signal": false,
+    "interpretation": "PCI_CORRECTLY_QUIET_UNDER_PURE_HURST_SHIFT_NO_COMPANION_CHECK_REQUIRED"
   },
   "iaaft_power_check": {
     "PCI_channel_H_S": {
@@ -192,5 +264,5 @@
     "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure.",
     "sine_diagnostic": "Plain deterministic sine wave (period 50), used ONLY for the code-correctness diagnostic (check 0), not a PRE/POST identifiability control. No dither was needed here (unlike RQA's FNN-based diagnostic) because ordinal-pattern ranking via stable-sort tie-breaking is well-defined even for exact ties, and floating-point sine samples essentially never tie exactly in practice at N=1000/period=50."
   },
-  "wall_clock_seconds_total": 10.432987451553345
+  "wall_clock_seconds_total": 15.680501699447632
 }

@@ -290,6 +290,110 @@ def main():
         },
     )
 
+    # ---- 2b. Differential-Hurst-only control (coordinator-requested,
+    # post-hoc addition after the main validation above -- targets the
+    # interpretive caveat flagged but not tested in the original negative
+    # control): PRE = fGn-like H=0.3 (weakly persistent), POST = fGn-like
+    # H=0.9 (strongly persistent), independent seeds, BOTH purely linear
+    # Gaussian self-similar processes with NO nonlinear/deterministic
+    # structure at all -- only a genuine Hurst-exponent shift. Zunino et
+    # al. 2008's redundancy risk is specifically about H_S as a function
+    # of H for fGn/fBm; the original negative control (same H=0.7 vs.
+    # H=0.7) could not probe this because there was no H shift to begin
+    # with. This control asks directly: does H_S/PCI show SPURIOUS
+    # significance from a pure linear Hurst shift alone (with no genuine
+    # complexity change), and does C_JS/MCI (which should track nonlinear/
+    # deterministic structure, not linear spectral shape) stay quiet? ----
+    N_HURST = N_CTRL
+    rng_hurst_pre = np.random.default_rng(777001)
+    rng_hurst_post = np.random.default_rng(777002)
+    H_LOW, H_HIGH = 0.3, 0.9
+    hurst_pre = fgn_like(N_HURST, H=H_LOW, rng=rng_hurst_pre)
+    hurst_post = fgn_like(N_HURST, H=H_HIGH, rng=rng_hurst_post)
+
+    hurst_spec_pre = estimate_spectral_exponent(hurst_pre)
+    hurst_spec_post = estimate_spectral_exponent(hurst_post)
+
+    t0 = time.time()
+    hurst_result = run_pe_analysis(hurst_pre, hurst_post, seed=SEED)
+    t_hurst = time.time() - t0
+
+    results["differential_hurst_control"] = _pipeline_summary(
+        hurst_result,
+        extra={
+            "description": (
+                "Coordinator-requested post-hoc addition, directly probing "
+                "the interpretive caveat flagged (not tested) in the "
+                "original validation: PRE = fGn-like H=0.3 (weakly "
+                "persistent), POST = fGn-like H=0.9 (strongly persistent), "
+                "independent seeds 777001/777002. BOTH are purely LINEAR "
+                "Gaussian self-similar processes -- no nonlinear or "
+                "deterministic structure of any kind, only a genuine "
+                "Hurst-exponent shift. Tests whether H_S/PCI shows "
+                "artificial/spurious IAAFT significance purely from a "
+                "linear spectral (Hurst) shift with no genuine complexity "
+                "change -- the actual Zunino et al. 2008 redundancy risk, "
+                "which the original same-H negative control could not "
+                "probe. Also checks whether C_JS/MCI (designed to track "
+                "nonlinear/deterministic structure, not linear spectral "
+                "shape) stays quiet under a pure Hurst shift, as expected "
+                "if it is genuinely NOT just tracking spectral slope."
+            ),
+            "H_pre": H_LOW, "H_post": H_HIGH,
+            "n_pre": N_HURST, "n_post": N_HURST,
+            "spectral_exponent_pre": hurst_spec_pre,
+            "spectral_exponent_post": hurst_spec_post,
+            "spectral_exponent_target_pre_2H+1": 2 * H_LOW + 1,
+            "spectral_exponent_target_post_2H+1": 2 * H_HIGH + 1,
+            "wall_clock_seconds": t_hurst,
+        },
+    )
+
+    hurst_computable = results["differential_hurst_control"]["status"] == "ok"
+    if hurst_computable:
+        hurst_p_PCI = results["differential_hurst_control"]["p_PCI"]
+        hurst_p_MCI = results["differential_hurst_control"]["p_MCI"]
+        hurst_sigma_PCI = sigma_equivalent(
+            results["differential_hurst_control"]["delta_PCI"],
+            results["differential_hurst_control"]["surrogate_PCI_mean"],
+            results["differential_hurst_control"]["surrogate_PCI_std"],
+        )
+        hurst_sigma_MCI = sigma_equivalent(
+            results["differential_hurst_control"]["delta_MCI"],
+            results["differential_hurst_control"]["surrogate_MCI_mean"],
+            results["differential_hurst_control"]["surrogate_MCI_std"],
+        )
+        pci_spurious = hurst_p_PCI is not None and hurst_p_PCI < 0.05
+        mci_signal = hurst_p_MCI is not None and hurst_p_MCI < 0.05
+    else:
+        hurst_p_PCI = hurst_p_MCI = hurst_sigma_PCI = hurst_sigma_MCI = None
+        pci_spurious = mci_signal = None
+
+    results["differential_hurst_control_verdict"] = {
+        "description": (
+            "Mechanical read of the differential_hurst_control result "
+            "above: does a PURE linear Hurst shift (H=0.3 -> H=0.9, no "
+            "nonlinear content) produce spurious IAAFT significance on "
+            "H_S/PCI, and does C_JS/MCI stay quiet as expected if it "
+            "genuinely tracks nonlinear/deterministic structure rather "
+            "than linear spectral shape?"
+        ),
+        "computable": hurst_computable,
+        "p_PCI": hurst_p_PCI,
+        "sigma_equivalent_PCI": hurst_sigma_PCI,
+        "H_S_PCI_shows_spurious_significance": pci_spurious,
+        "p_MCI": hurst_p_MCI,
+        "sigma_equivalent_MCI": hurst_sigma_MCI,
+        "C_JS_MCI_shows_signal": mci_signal,
+        "interpretation": (
+            "PCI_SPURIOUS_FROM_PURE_HURST_SHIFT_REAL_DATA_NEEDS_DFA_COMPANION_CHECK"
+            if pci_spurious else
+            "PCI_CORRECTLY_QUIET_UNDER_PURE_HURST_SHIFT_NO_COMPANION_CHECK_REQUIRED"
+            if hurst_computable else
+            "NOT_COMPUTABLE"
+        ),
+    }
+
     # ---- 3. IAAFT power-check verdict, PER CHANNEL -- the central,
     # honestly-reported empirical answer to METHODOLOGY_NOTE.md's a priori
     # hypothesis (C_JS/MCI shows power like MSE's CI; H_S/PCI may not, like
@@ -406,6 +510,7 @@ def main():
     print(json.dumps(results["code_correctness_diagnostic"], indent=2, default=str))
     print(json.dumps(results["iaaft_power_check"], indent=2))
     print(json.dumps(results["a_priori_hypothesis_check"], indent=2))
+    print(json.dumps(results["differential_hurst_control_verdict"], indent=2))
     print(f"\nWrote {out_path}")
     print(f"Total wall clock: {results['wall_clock_seconds_total']:.1f}s")
 

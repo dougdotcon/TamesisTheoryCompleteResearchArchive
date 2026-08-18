@@ -200,3 +200,112 @@ fica registrado aqui:
   candidato `entropia-de-permutacao` está pronto, do ponto de vista desta
   validação, para a etapa de dado real — decisão final de prosseguir cabe
   à sessão orquestradora.
+
+## Adendo — controle de Hurst diferencial (solicitado pela sessão orquestradora, testa diretamente a ressalva de interpretação acima)
+
+A ressalva de interpretação da seção anterior ficou registrada mas não
+testada: o controle negativo original (fGn `H=0,7` vs. fGn `H=0,7`,
+MESMO `H`) não conseguia sondar o risco de Zunino et al. 2008
+especificamente, porque esse risco é sobre `H_S` como função de `H`
+para pares fGn/fBm com `H` DIFERENTE — sem um deslocamento de `H`, não
+há nada para o teste detectar de forma espúria. A sessão orquestradora
+pediu um controle adicional, direcionado, para fechar essa lacuna ANTES
+de tocar dado real: PRE = fGn-like `H=0,3` (fracamente persistente),
+POST = fGn-like `H=0,9` (fortemente persistente), sementes independentes
+(`777001`/`777002`), `N=3.000`, mesma grade de escala (`s_max=25`,
+`n_scales=12`) — ambos processos puramente lineares Gaussianos
+autossimilares, SEM qualquer estrutura não-linear ou determinística,
+apenas um deslocamento genuíno de `H`.
+
+### Casamento espectral (diagnóstico, confirma que o gerador produziu o deslocamento de H pretendido)
+
+| Série | Expoente espectral (periodograma) | Alvo teórico (`2H+1`) |
+|---|---|---|
+| PRE (`H=0,3`) | 1,6003 | 1,6 |
+| POST (`H=0,9`) | 2,7961 | 2,8 |
+
+Casamento excelente com o alvo teórico em ambos os lados — confirma que
+o gerador produziu exatamente o deslocamento de `H` pretendido, sem
+introduzir nenhuma outra confusão.
+
+### Resultado
+
+| Canal | PRE real | POST real | Δ real | média nula IAAFT | desvio nulo | σ-equivalente | `p` (bicaudal, n=200) |
+|---|---|---|---|---|---|---|---|
+| `PCI` (`H_S` somado) | 11,0599 | 7,6457 | **−3,4142** | −4,4729 | 0,2350 | +4,50σ | **1,0** |
+| `MCI` (`C_JS` somado) | 1,0985 | 3,0347 | **+1,9362** | +2,1177 | 0,0704 | −2,58σ | **1,0** |
+
+**`p=1,0` em AMBOS os canais — nem `H_S`/`PCI` nem `C_JS`/`MCI` mostram
+significância espúria a partir de um deslocamento puramente linear de
+Hurst.** Como no adendo Rössler do `RQA`, o σ-equivalente aparentemente
+grande (+4,50σ / −2,58σ) NÃO contradiz `p=1,0` — é uma consequência de a
+nula IAAFT ser estreita e ela própria já refletir quase todo o
+deslocamento espectral/linear (porque o IAAFT preserva o espectro de
+CADA série, e um processo fGn autossimilar tem quase toda a sua
+identidade estatística codificada no espectro): o Δ real, em módulo,
+fica MENOR que a média dos 200 Δ substitutos (`|Δ_PCI_real|=3,414 <
+|Δ_PCI_substituto|≈4,473±0,235`; `|Δ_MCI_real|=1,936 <
+|Δ_MCI_substituto|≈2,118±0,070`), então a fração de substitutos com
+`|Δ_substituto| >= |Δ_real|` fica em ~100% para os dois canais. O
+critério de decisão pré-declarado é o valor-p bicaudal por MAGNITUDE, não
+a distância à média nula — e por esse critério, correto e aplicado
+mecanicamente, o resultado é inequivocamente não significativo nos dois
+canais.
+
+### Leitura honesta — a pergunta específica da sessão orquestradora, respondida
+
+**`H_S`/`PCI` NÃO mostra significância espúria a partir de um
+deslocamento puramente linear de Hurst.** Isso é o resultado
+tranquilizador (não o de risco) entre os dois desfechos que a sessão
+orquestradora havia colocado como possíveis: o IAAFT absorve
+corretamente o deslocamento espectral/linear de Hurst na sua própria
+nula (a nula IAAFT desloca-se por −4,47, quase tanto quanto o Δ real de
+−3,41) — o mesmo mecanismo, por analogia, que já explica por que
+`alpha` de DFA nunca mostrou poder IAAFT nesta linha (DFA mede
+essencialmente a mesma característica espectral que o IAAFT já
+preserva por construção). Isso sugere que um resultado significativo de
+`H_S`/`PCI` em dado real muito provavelmente refletiria algo além de um
+mero deslocamento de Hurst — precisamente porque, se fosse SÓ isso, o
+IAAFT já teria absorvido o efeito na nula, como aconteceu aqui.
+
+**`C_JS`/`MCI` também não mostra sinal sob este controle
+(`p=1,0`)** — reportado honestamente, como pedido, mesmo sendo o
+resultado esperado se `C_JS` de fato rastreia estrutura
+não-linear/determinística em vez de forma espectral linear (consistente
+com o desenho teórico de Rosso et al. 2007 e com o resultado do controle
+positivo do mapa logístico, onde `C_JS` mostrou poder total `p=0,0`
+contra uma mudança GENUINAMENTE não-linear, mas aqui, contra uma mudança
+PURAMENTE linear, fica quieto).
+
+### Decisão sobre a salvaguarda de verificação complementar (DFA/wavelet)
+
+Dado que `H_S`/`PCI` NÃO mostrou significância espúria sob um
+deslocamento puramente linear de Hurst neste controle direcionado, **a
+salvaguarda de verificação complementar obrigatória (checagem DFA/wavelet
+nas mesmas janelas antes de confiar em um `Delta_PCI` significativo em
+dado real) NÃO é exigida por este resultado** — o cenário que a
+motivaria (IAAFT cego a um deslocamento de Hurst puro, permitindo que
+`H_S` "vaze" significância de `H` sem o IAAFT notar) não se confirmou
+empiricamente aqui. Isso não elimina por completo o risco de
+identificabilidade nomeado por Zunino et al. 2008 como questão de
+INTERPRETAÇÃO (um `Delta_PCI` significativo em dado real ainda pode, em
+princípio, refletir uma mudança de `H` efetivo em vez de uma mudança de
+complexidade "nova"), mas demonstra que o teste de PODER estatístico
+primário (IAAFT) usado nesta linha não é cego a essa possibilidade — ele
+absorve corretamente o cenário puramente linear na própria nula, o que é
+a garantia relevante para a decisão de "confiar ou não" que esta
+validação de poder existe para responder. Recomendação prática, ainda
+assim leve e não bloqueante: ao reportar um `Delta_PCI` significativo em
+dado real, mencionar o `H` efetivo estimado por DFA/wavelet (já
+disponível como diagnóstico rotineiro desta linha, sem custo adicional)
+como contexto interpretativo — não como um pré-requisito de gate, já que
+este controle não encontrou evidência de que seja necessário como tal.
+
+**Nenhum desvio metodológico adicional.** Este controle foi acrescentado
+como um teste post-hoc a pedido explícito da sessão orquestradora, DEPOIS
+da validação principal já ter passado — não substitui, reformula, nem
+enfraquece nenhum critério de `METHODOLOGY_NOTE.md`; usa a mesma técnica
+de geração fGn-like já documentada (`colored_noise`/`fgn_like`) e a mesma
+`run_pe_analysis` sem modificação, apenas com um novo par `H` escolhido a
+priori pela sessão orquestradora antes de ver o resultado (`H=0,3` vs.
+`H=0,9`, sementes `777001`/`777002`).

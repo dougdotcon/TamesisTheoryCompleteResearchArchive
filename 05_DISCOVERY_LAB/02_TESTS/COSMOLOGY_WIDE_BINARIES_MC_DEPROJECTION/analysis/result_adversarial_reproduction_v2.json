@@ -1,0 +1,143 @@
+{
+  "test_id": "DISC-COSMOLOGY-MOND-SPARC-004",
+  "role": "adversarial_reproduction_v2 (reexecucao cega independente, AGENTS.md passo 7)",
+  "compares_against": "result_primary_v2.json",
+  "n_discovery_used": 30203,
+  "holdout_disjoint_confirmed": true,
+  "n_mc": 200,
+  "n_bootstrap": 1000,
+  "seed": 12345,
+  "a0_A_si": 1.0824013602391998e-10,
+  "a0_B_si": 6.800928323126138e-10,
+  "n_systems_per_bin": [
+    6042,
+    6040,
+    6040,
+    6039,
+    6042
+  ],
+  "gN_bin_median_si": [
+    1.880655689217262e-10,
+    1.6645464809358482e-09,
+    6.2203271655564165e-09,
+    1.7190232822044468e-08,
+    4.863807305547588e-08
+  ],
+  "median_real_log_g_ratio_primary": [
+    0.004293537963481763,
+    -0.06177649543914221,
+    -0.08720267707124929,
+    -0.09747547113037262,
+    -0.13403242748997746
+  ],
+  "median_mock_log_g_ratio_primary": [
+    -0.1442744187489997,
+    -0.21001462402045604,
+    -0.20219492978189413,
+    -0.1923669244244997,
+    -0.17703322841763064
+  ],
+  "delta_obs_newt_primary": [
+    0.14856795671248146,
+    0.14823812858131383,
+    0.11499225271064484,
+    0.09489145329412708,
+    0.04300080092765318
+  ],
+  "bootstrap_delta_ci95_lo": [
+    0.12248454040362225,
+    0.12155971336259003,
+    0.08787490598517865,
+    0.07035462390464316,
+    0.018187192795806006
+  ],
+  "bootstrap_delta_ci95_hi": [
+    0.17425974300174457,
+    0.1749793318381501,
+    0.14321991082212354,
+    0.11999160560059437,
+    0.06678526945921387
+  ],
+  "crosscheck_manual_vs_official_run_delta_obs_newt": {
+    "delta_primary_matches": true,
+    "gN_bin_matches": true,
+    "bootstrap_delta_ci95_matches": true
+  },
+  "fit_a0_primary": {
+    "a0_fit_x0_1p0_si": 1.6575273508822755e-10,
+    "a0_fit_x0_5p0_si": 1.6574987014331265e-10,
+    "converged_to_same_value": true
+  },
+  "bootstrap_a0_refit": {
+    "ci95_lo_si": 1.23249511897994e-10,
+    "ci95_hi_si": 2.1813340177409316e-10,
+    "mean_si": 1.6782734721705287e-10,
+    "std_si": 2.399781322796752e-11,
+    "n_failed_fit": 0
+  },
+  "decision": {
+    "a0_A_within_ci95": false,
+    "a0_B_within_ci95": false
+  },
+  "elapsed_seconds": 61.248350381851196,
+  "crosscheck_vs_result_primary_v2": {
+    "delta_obs_newt_primary_matches_exactly": true,
+    "n_systems_per_bin_matches_exactly": true,
+    "bootstrap_delta_ci95_matches_exactly": true,
+    "bootstrap_a0_refit_ci95_matches_closely": true,
+    "a0_fit_primary_matches_closely_minor_solver_precision_diff": true,
+    "note": "Todos os numeros oficiais de result_primary_v2.json foram reproduzidos de forma cega e independente (extracao de dado propria, sem olhar run_primary_analysis_v2.py ate este resultado estar pronto) e batem: delta_obs_newt_primary, n_systems_per_bin e o IC95 bootstrap de delta batem BIT A BIT (tolerancia 1e-9). O IC95 bootstrap de a0 (refeito manualmente, replicando por replica o par (real,mock) do MESMO indice MC, exatamente como a nota de crosscheck do agente anterior descreve ser necessario) bate ao nivel de 6 casas significativas. O a0_fit primario bate a cerca de 0.004% (diferenca de convergencia do solver least_squares, sem significancia fisica)."
+  },
+  "additional_adversarial_check_ra_de_correlation": {
+    "claim_in_locked_pipeline": "delta_obs_newt.py, secao Decisao de design 4, declara que pmRApmDEcor1/pmRApmDEcor2 (colunas de correlacao PM RA/DE do catalogo El-Badry+2021) nao estao presentes em quality_filtered_sample.parquet, logo indisponiveis para esta pipeline, e assume RA/DE independentes no ramo mock por essa razao.",
+    "finding": "A alegacao de indisponibilidade e tecnicamente FALSA: pmRApmDEcor1/pmRApmDEcor2 EXISTEM no catalogo bruto completo (COSMOLOGY_WIDE_BINARIES/data/catalog.parquet, 1817594 linhas, presente no working tree mas nao commitado por tamanho -- o mesmo arquivo do qual quality_filtered_sample.parquet foi originalmente derivado) e sao recuperaveis por cross-match Source1/Source2: confirmado 30203/30203 pares de descoberta cruzados com sucesso.",
+    "magnitude_of_correlation_found": {
+      "median": 0.0005074337105793357,
+      "mean": -0.0009534676820410835,
+      "std": 0.23854170957017456,
+      "frac_abs_gt_0p1": 0.6813892659669569,
+      "frac_abs_gt_0p3": 0.20872098798132635,
+      "min": -0.8591356220668396,
+      "max": 0.8763472285732173
+    },
+    "magnitude_note": "A correlacao efetiva do ruido da diferenca (dmu_RA,dmu_DE) por sistema nao e desprezivel a nivel individual: mediana ~0, mas desvio padrao ~0.24, com 68 por cento dos sistemas tendo |rho|>0.1 e 21 por cento tendo |rho|>0.3 -- a suposicao de independencia e falsa por sistema.",
+    "sensitivity_experiment": "Reimplementado (codigo NOVO, sem editar os arquivos travados) um ramo mock alternativo que injeta ruido 2D correlacionado (via decomposicao de Cholesky da matriz de covariancia real RA/DE por sistema, recuperada do catalogo bruto) no lugar do ruido independente ja implementado, usando os mesmos z_ra/z_de padrao-normais e o mesmo angulo de posicao isotropico em ambos os bracos, para isolar o efeito puro da correlacao (sem misturar com variancia adicional de amostragem).",
+    "sensitivity_result_delta_obs_newt_per_bin": {
+      "independent_noise_this_experiment": [
+        0.15395673861367726,
+        0.14775874488648752,
+        0.11572167168481687,
+        0.09573660174151828,
+        0.044586783317660056
+      ],
+      "correlated_noise_real_rho": [
+        0.1545937998581336,
+        0.1482400124480922,
+        0.11534731475255919,
+        0.09521877793984275,
+        0.044465810751609214
+      ],
+      "official_result_primary_v2": [
+        0.14856795671248146,
+        0.14823812858131383,
+        0.11499225271064484,
+        0.09489145329412708,
+        0.04300080092765318
+      ],
+      "diff_corr_minus_indep": [
+        0.0006370612444563384,
+        0.00048126756160468687,
+        -0.0003743569322576801,
+        -0.0005178238016755321,
+        -0.00012097256605084206
+      ]
+    },
+    "verdict": "O efeito agregado de ignorar a correlacao RA/DE em delta_obs_newt(bin) e pequeno: |diferenca(correlacionado menos independente)| <= 0.00064 dex em todos os 5 bins -- cerca de 2 ordens de grandeza menor que o proprio delta_obs_newt (0.04 a 0.15 dex) e cerca de 2 ordens de grandeza menor que a largura do IC95 bootstrap por bin (0.03 a 0.05 dex). Alem disso o sinal do deslocamento nao e monotonico entre bins (positivo nos bins 0-1, negativo nos bins 2-4), consistente com ruido estatistico residual de amostragem, nao com um vies sistematico direcional. Conclusao: a suposicao de independencia RA/DE, embora seu fundamento declarado (indisponibilidade dos dados) esteja incorreto, nao introduz vies residual detectavel no resultado -- a razao teorica e que o angulo de posicao isotropico ja sorteado aleatoriamente pelo ramo mock, combinado com agregacao sobre cerca de 6000 sistemas por bin, faz a correlacao (que depende da orientacao relativa entre o eixo RA/DE e a orientacao do vetor, nao rastreada) cancelar em media -- apenas a variancia marginal (soma quadratica, ja usada corretamente na pipeline travada) sobrevive no limite de primeira ordem em ruido sobre sinal."
+  },
+  "honest_verdict_on_a0_A_margin": {
+    "a0_A_si": 1.082288e-10,
+    "bootstrap_a0_ci95_lo_si": 1.23249511897994e-10,
+    "log10_ratio_a0_A_to_ci_lo": 0.056442364846347404,
+    "assessment": "a0_A cai genuinamente FORA (abaixo) do IC95 bootstrap, por uma margem de aproximadamente 0.057 dex em log10(a0) -- pequena mas reproduzida de forma identica (bit a bit) por uma implementacao independente. A checagem especifica pedida (correlacao RA/DE ignorada) foi investigada e quantificada: seu efeito maximo sobre delta_obs_newt por bin (~0.0006 dex) e' cerca de 100x menor que a margem de 0.057 dex que separa a0_A do IC -- nao poderia, sozinha, explicar ou apagar essa margem, mesmo no pior caso. Nao foi encontrada nenhuma outra escolha de implementacao (ponto de partida do ajuste, recomputo de gN_bin por replica, tolerancia do solver) que mova o veredito: duas reproducoes totalmente independentes (agente original e este agente adversarial, dados extraidos do zero) concordam ao nivel de 6 casas significativas no IC95 de a0. A margem pequena e' real, nao um artefato de implementacao ainda nao resolvido -- mas permanece condicionada a limitacao JA DECLARADA e NAO testada por este agente: a correcao de multiplicidade oculta (f_multi, Secao 4 'Simplificacao declarada') nao foi implementada; como esse vies e unidirecional para CIMA em g/gN (mais forte no bin de menor g_N, que e' o bin mais afetado pelo veredito de H_A), corrigi-lo tenderia a REDUZIR delta_obs_newt(bin0), o que empurraria o a0 ajustado PARA BAIXO -- na direcao que ajudaria a0_A a sobreviver. Essa e' precisamente a checagem adversarial obrigatoria da Secao 6 (gatilho ja ativo, g/gN real bruto=1.0099>1 no bin 0), delegada a um agente separado (ver hidden_companion_check_v2.json neste mesmo diretorio, gerado em paralelo a esta reproducao) -- nao resolvida aqui."
+  }
+}

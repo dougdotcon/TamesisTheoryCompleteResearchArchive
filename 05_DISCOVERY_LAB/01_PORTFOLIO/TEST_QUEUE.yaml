@@ -1120,27 +1120,56 @@ queue:
       linha de fechamento exploratorio de gaps). Detalhes completos:
       02_TESTS/TRI_RG/visibility_graph/{METHODOLOGY_NOTE.md,
       VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    rqa_gap_closing_result: >
+      2026-08-18: usuario pediu para fechar tambem o RQA -- ultimo
+      candidato identificado (rank #4, 7o de 7 no total) na linha.
+      Metodologia completa fixada em 02_TESTS/TRI_RG/rqa/METHODOLOGY_NOTE.md
+      ANTES de qualquer calculo real: regras de parametro NAO-arbitrarias
+      e publicadas (FNN para m, Kennel et al. 1992; informacao mutua
+      para tau, Fraser & Swinney 1986; RR fixo para epsilon, Marwan et
+      al. 2007), embedding compartilhado entre PRE/POST, I(X)=%DET+ENTR,
+      protocolo IAAFT primario. VALIDACAO SINTETICA (tentativa 1, PRE=
+      ruido branco conforme especificado) revelou achado estrutural mais
+      severo que o de grafo-de-visibilidade: FNN nunca resolve m<=10
+      para ruido branco (nem AR(1) ate phi=0,9), bloqueando %DET E ENTR
+      simultaneamente (embedding compartilhado). Nao e bug (diagnostico
+      determinístico confirma codigo correto) nem falta de poder
+      (bootstrap testado, 0/25 resolve). Correcao formal fixada ANTES de
+      dado real (commit 024e7a9): trocar fonte caotica de POST do mapa
+      logistico (espectro banda-larga, causa do descasamento espectral
+      que confundiu uma tentativa informal anterior) para o sistema de
+      Rossler (espectro colorido, compativel com o PRE fGn H=0,7),
+      protocolo de decisao pre-fixado sem terceira tentativa autorizada.
+      VALIDACAO tentativa 2 (Rossler): embedding resolveu (m=4,tau=40),
+      casamento espectral bom, mas p_DET=1,0 e p_ENTR=1,0 -- SEM PODER
+      REAL em nenhum canal. Aplicando o protocolo mecanicamente:
+      candidato FECHADO NA ETAPA DE VALIDACAO, dado real (rolamento
+      IMS/Rexnord, vulcao Kilauea 2018) NUNCA TOCADO -- resultado
+      honesto e completo, distinto de "negativo no dado real" mas
+      igualmente definitivo. Detalhes completos: 02_TESTS/TRI_RG/rqa/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      6 dos 7 candidatos identificados nesta linha (3 da Fase 0 original
-      + 4 da nova busca de 2026-08-15) agora tem resultado completo -- os
-      6 resultado NEGATIVO para invariante cross-domain. Resta apenas 1
-      candidato formalizado (viable=true) mas nao fechado: RQA (rank #4
-      -- sondagem exploratoria ja mostrou o mesmo padrao de
-      inconsistencia cross-domain que derrubou critical-slowing-down).
-      Ver phase0/PHASE0_5_SURVEY_NEW_CANDIDATES.md. Aguardando proxima
-      direcao do usuario: fechar gaps de RQA (unico candidato pronto sem
-      precisar de nova formulacao), nova rodada de busca por candidatos
-      ainda nao considerados, revisitar qualquer um dos 6 ja testados
-      com dominios/dados diferentes dos ja usados, ou considerar a linha
-      suficientemente explorada (6/6 negativos e um forte prior contra
-      qualquer invariante cross-domain simples nesta familia de
-      candidatos). Toda a infraestrutura (6 METHODOLOGY_NOTE.md, 6
-      pipelines validadas, dominios reais de 14+ fontes testadas no
-      total) fica commitada e reaproveitavel.
-      01_TAMESIS_CORE/03_TRANSITION_ATLAS continua infraestrutura
-      reaproveitavel candidata para hospedar um resultado futuro depois
-      de sobreviver ao Gate de Replicacao, se e quando esta linha for
-      retomada.
+      NENHUMA -- os 7 de 7 candidatos identificados nesta linha (3 da
+      Fase 0 original + 4 da nova busca de 2026-08-15) agora tem
+      resultado completo: 6 testados em dado real, todos NEGATIVO (2 com
+      achados isolados de 1 dominio ja explicados por mecanismo
+      convencional/nulo); 1 (RQA) fechado na propria etapa de validacao,
+      sem alcancar dado real (identificabilidade nao estabelecida sob a
+      convencao de embedding travada, mesmo apos uma correcao de desenho
+      pre-autorizada). Nao ha mais candidatos formalizados pendentes.
+      Opcoes para o usuario, todas em aberto: nova rodada de busca por
+      candidatos ainda nao considerados; revisitar qualquer um dos 6
+      testados com dominios/dados diferentes dos ja usados; ou considerar
+      a linha suficientemente explorada por ora (7/7 candidatos fechados,
+      nenhum produziu invariante cross-domain confiavel -- um prior forte
+      e honesto contra a hipotese central desta linha tal como formulada
+      ate aqui, nao uma prova de impossibilidade). Toda a infraestrutura
+      (7 METHODOLOGY_NOTE.md, 6 pipelines validadas e aplicadas a dado
+      real, dominios reais de 14+ fontes testadas no total) fica
+      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
+      continua infraestrutura reaproveitavel candidata para hospedar um
+      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
+      quando esta linha for retomada.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

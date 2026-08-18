@@ -168,6 +168,75 @@ disciplina já usada em CSD/MSE). `p = fração de substitutos com
 |Delta_d_B_substituto| >= |Delta_d_B_real|` (e igualmente para
 `Delta_C`).
 
+## Adendo — `d_B` estruturalmente NÃO COMPUTÁVEL sob a grade a priori; `C` promovido a discriminador único (fixado ANTES de qualquer dado real)
+
+A validação sintética obrigatória do Gap (b) (`analysis/validate_synthetic.py`,
+`analysis/validation_synthetic.json`) revelou que `d_B`, o `I(X)` primário
+originalmente declarado no Gap (a), é **estruturalmente NÃO COMPUTÁVEL**
+para séries temporais estocásticas típicas sob a própria grade a priori
+já declarada (`l_B_max=floor(diam(G)/4)`, mínimo de 4 escalas
+distintas, ou seja `diam(G)>=20`). Isso não é um bug de implementação:
+o diagnóstico de correção do código (`box_covering_code_diagnostic`) usa
+uma rampa linear determinística quase-colinear e produz `d_B=1,899`
+corretamente (diâmetro 89, grade de 13 escalas) — o algoritmo de
+box-covering/CBB/ajuste OLS funciona quando a grade é atingível.
+
+**O problema é estrutural do próprio grafo de visibilidade sob dado
+estocástico:** ruído branco Gaussiano e um processo tipo-fGn (`H=0,7`)
+produzem grafos de visibilidade com diâmetro pequeno (~9-14) e CRESCIMENTO
+EXTREMAMENTE LENTO com `N` — verificado empiricamente, sem custo de
+box-covering/IAAFT, até o teto declarado `MAX_N_PER_SEGMENT=5000`:
+
+| processo | N=500 | N=1000 | N=2000 | N=3500 | N=5000 |
+|---|---|---|---|---|---|
+| ruído branco | diam=10 | diam=9 | diam=11 | diam=12 | diam=14 |
+| fGn-símile H=0,7 | diam=8 | diam=9 | diam=14 | diam=12 | diam=14 |
+
+Mesmo no TETO de tamanho de segmento já declarado a priori (5.000
+amostras — o maior que esta linha jamais permitiria usar, por custo
+O(N²)), o diâmetro nunca se aproxima de 20. Isso bate com a propriedade
+de "mundo pequeno" (*small-world*) já bem documentada na literatura de
+grafos de visibilidade (Lacasa et al. 2008/2010) — e está em tensão
+direta e conhecida com a própria premissa do box-covering fractal de
+Song-Havlin-Makse (2005), que só produz um expoente bem-definido para
+redes NÃO-mundo-pequeno. Ou seja: **não é uma limitação de amostra
+pequena, corrigível com mais dado** — é uma incompatibilidade estrutural
+entre o candidato `grafo-de-visibilidade + box-covering` e qualquer
+série temporal estocástica real de tamanho tratável, generalizável a
+QUALQUER domínio desta linha, não específica de nenhum dos 2 dominios
+alvo.
+
+**Decisão, fixada ANTES de qualquer dado real (nenhuma razão de aceleração,
+razão de escala, ou dado observacional real foi tocado até este ponto):**
+honrar a própria regra já pré-declarada no Gap (a) ("se `l_B_max` render
+menos de 4 valores distintos de `l_B`, o domínio é REJEITADO... declarado
+honestamente... não forçado") em vez de afrouxar o divisor ou o piso de
+escalas agora que o resultado desfavorável foi visto — isso seria
+precisamente o tipo de ajuste de metodologia após ver resultado que esta
+disciplina proíbe, mesmo sendo ainda dado sintético. `d_B` é **retirado
+do critério de decisão** desta rodada de fechamento de gaps — mantido no
+código apenas como diagnóstico reportável quando (raramente) computável,
+nunca como parte de um veredito de significância.
+
+`C` (coeficiente de clustering médio, canal companheiro já declarado no
+Gap (a) como informação distinta de `d_B` por construção, Lacasa & Toral
+2010) é **promovido a `I(X)` único** desta rodada: a validação mostrou
+poder real e decisivo contra o risco de identificabilidade nomeado no
+Gap (b) — controle positivo (ruído branco vs. mapa logístico caótico,
+marginal/espectro casados por remapeamento de posto) recuperou `Delta C`
+fora da distribuição nula IAAFT por **~14,5 desvios-padrão equivalentes**
+(`p_C=0,0`, `n=200` substitutos); controle negativo (dois processos
+lineares idênticos, sementes independentes) corretamente NÃO significativo
+(`p_C=0,25`). Isso resolve — para o canal `C` especificamente — o mesmo
+risco de redundância com Hurst já nomeado na Fase 0.5 (se `C` fosse mera
+reparametrização de `H`, o IAAFT teria o mesmo problema de baixo poder já
+visto para `alpha`/DFA nesta linha; não teve).
+
+Todas as referências a `I(X)=d_B+C` no restante deste documento devem ser
+lidas, a partir deste ponto, como `I(X)=C` (único, decisivo); `d_B`
+permanece reportado nos resultados apenas como diagnóstico, nunca como
+parte do critério de significância ou do veredito cross-domain.
+
 ## O que este passo NÃO é
 
 Continua Fase 0/exploratório — `DISC-TRI-RG-001` segue

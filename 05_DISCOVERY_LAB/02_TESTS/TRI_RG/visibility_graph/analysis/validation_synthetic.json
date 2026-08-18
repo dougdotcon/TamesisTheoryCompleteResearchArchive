@@ -1,0 +1,207 @@
+{
+  "box_covering_code_diagnostic": {
+    "description": "Deterministic pure linear ramp, N=2000 (near-collinear series suppress visibility-graph hub formation and reliably produce a large diameter, unlike stochastic noise -- see finding (*) in the module docstring). NOT a PRE/POST identifiability test; exists only to confirm the box-covering/CBB/OLS-fit code produces a sane result AT ALL when the l_B grid is achievable.",
+    "n_samples": 2000,
+    "n_edges": 3212,
+    "diam": 89.0,
+    "l_B_max": 22,
+    "grid_status": "ok",
+    "status": "ok",
+    "l_B_grid": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      16,
+      19,
+      22
+    ],
+    "N_B_median": [
+      2000.0,
+      806.0,
+      808.0,
+      381.5,
+      382.5,
+      229.0,
+      231.5,
+      122.5,
+      87.0,
+      59.0,
+      43.0,
+      28.0,
+      24.0
+    ],
+    "d_B": {
+      "d_B": 1.8994885776149903,
+      "intercept": 9.065717315298388,
+      "n_points": 13,
+      "scales": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        16,
+        19,
+        22
+      ]
+    },
+    "C": 0.4505783611811221,
+    "N_B_monotone_nonincreasing_in_l_B": false
+  },
+  "positive_control": {
+    "d_B_pre": null,
+    "d_B_post": null,
+    "C_pre": 0.7528191722438026,
+    "C_post": 0.793279025365296,
+    "delta_d_B": null,
+    "delta_C": 0.04045985312149347,
+    "p_d_B": null,
+    "p_C": 0.0,
+    "surrogate_d_B_mean": null,
+    "surrogate_d_B_std": null,
+    "surrogate_d_B_n_valid": 0,
+    "surrogate_d_B_n_undefined": 200,
+    "surrogate_C_mean": -0.00010962092214693353,
+    "surrogate_C_std": 0.002789228756884882,
+    "surrogate_C_n_valid": 200,
+    "surrogate_C_n_undefined": 0,
+    "diagnostics": {
+      "pre_subsampling": {
+        "n_original": 2000,
+        "n_used": 2000,
+        "stride": 1,
+        "subsampled": false
+      },
+      "post_subsampling": {
+        "n_original": 2000,
+        "n_used": 2000,
+        "stride": 1,
+        "subsampled": false
+      },
+      "pre_n_scales_achieved": 2,
+      "post_n_scales_achieved": 1,
+      "pre_status": "insufficient_scales",
+      "post_status": "insufficient_scales"
+    },
+    "real_pre_diam": 12.0,
+    "real_post_diam": 11.0,
+    "real_pre_status": "insufficient_scales",
+    "real_post_status": "insufficient_scales",
+    "real_pre_l_B_grid": [
+      2,
+      3
+    ],
+    "real_post_l_B_grid": [
+      2
+    ],
+    "description": "PRE = iid Gaussian white noise (linear). POST = logistic map (r=4, fully chaotic, genuine deterministic nonlinear process), rank-remapped onto PRE's own sorted values so PRE and POST share an EXACTLY identical empirical marginal by construction. Amplitude-spectrum match documented empirically via periodogram-slope spectral_exponent (both near-flat).",
+    "n_pre": 2000,
+    "n_post": 2000,
+    "spectral_exponent_pre": -0.02743957842408854,
+    "spectral_exponent_post": 0.022434727759449793,
+    "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
+    "wall_clock_seconds": 236.48127722740173
+  },
+  "negative_control": {
+    "d_B_pre": null,
+    "d_B_post": null,
+    "C_pre": 0.6087986552428625,
+    "C_post": 0.5549817544906888,
+    "delta_d_B": null,
+    "delta_C": -0.05381690075217371,
+    "p_d_B": null,
+    "p_C": 0.25,
+    "surrogate_d_B_mean": null,
+    "surrogate_d_B_std": null,
+    "surrogate_d_B_n_valid": 0,
+    "surrogate_d_B_n_undefined": 200,
+    "surrogate_C_mean": -0.007600987291587251,
+    "surrogate_C_std": 0.04232656715696804,
+    "surrogate_C_n_valid": 200,
+    "surrogate_C_n_undefined": 0,
+    "diagnostics": {
+      "pre_subsampling": {
+        "n_original": 2000,
+        "n_used": 2000,
+        "stride": 1,
+        "subsampled": false
+      },
+      "post_subsampling": {
+        "n_original": 2000,
+        "n_used": 2000,
+        "stride": 1,
+        "subsampled": false
+      },
+      "pre_n_scales_achieved": 1,
+      "post_n_scales_achieved": 2,
+      "pre_status": "insufficient_scales",
+      "post_status": "insufficient_scales"
+    },
+    "real_pre_diam": 10.0,
+    "real_post_diam": 12.0,
+    "real_pre_status": "insufficient_scales",
+    "real_post_status": "insufficient_scales",
+    "real_pre_l_B_grid": [
+      2
+    ],
+    "real_post_l_B_grid": [
+      2,
+      3
+    ],
+    "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes METHODOLOGY_NOTE.md Gap (b)'s named risk directly: same Hurst structure, no genuine change -- p should typically be non-significant for both channels.",
+    "n_pre": 2000,
+    "n_post": 2000,
+    "wall_clock_seconds": 650.0022649765015
+  },
+  "iaaft_power_check": {
+    "d_B_channel": {
+      "positive_control_computable": false,
+      "negative_control_computable": false,
+      "p_d_B_positive": null,
+      "p_d_B_negative": null,
+      "sigma_equivalent_positive": null,
+      "significant_at_0.05_positive": false,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "NOT_COMPUTABLE_INSUFFICIENT_SCALES"
+    },
+    "C_channel": {
+      "p_C_positive": 0.0,
+      "p_C_negative": 0.25,
+      "sigma_equivalent_positive": 14.545050829373334,
+      "significant_at_0.05_positive": true,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_HAS_REAL_POWER"
+    },
+    "overall_note": "d_B verdict of NOT_COMPUTABLE_INSUFFICIENT_SCALES is DISTINCT from IAAFT_LOW_POWER: it means METHODOLOGY_NOTE.md Gap (a)'s own scale-grid requirement (>=4 distinct l_B, i.e. diam(G)>=20) was not met for this process/N at all, so no p-value could be formed -- not that d_B was computed but the IAAFT null failed to separate from it. See VALIDATION_NOTE.md for the full discussion and why the moving-block bootstrap fallback (pre-authorized in METHODOLOGY_NOTE.md Gap (e) for a LOW-POWER IAAFT finding) does not, by itself, resolve a NOT_COMPUTABLE finding: bootstrap resamples of the SAME real segment have essentially the same length/diameter distribution as the original, so they hit the identical insufficient-scales rejection."
+  },
+  "pipeline_config": {
+    "l_b_min": 2,
+    "l_b_max_diam_divisor": 4,
+    "n_scales_cap": 15,
+    "r_repeats": 50,
+    "min_fit_points": 4,
+    "max_n_per_segment": 5000,
+    "n_surrogates": 200,
+    "n_iaaft_iter": 50,
+    "seed": 12345
+  },
+  "generator_notes": {
+    "colored_noise_fgn_like": "FFT-filtering spectral synthesis: white Gaussian noise scaled per-frequency by f^(-exponent/2), inverse-transformed, z-scored. fGn-like approximation via exponent=2H+1 (spectral relation for fractional Gaussian noise); same technique as mse_multiscale_entropy/analysis/validate_synthetic.py, independent implementation.",
+    "logistic_map": "x_{k+1} = 4*x_k*(1-x_k), burn_in=500 discarded transient iterations.",
+    "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure.",
+    "sawtooth_ramp": "Deterministic piecewise-linear ramp(s) 0->1, used ONLY for the box-covering code-correctness diagnostic (check 0), not a PRE/POST identifiability control."
+  },
+  "wall_clock_seconds_total": 888.6708290576935
+}

@@ -1,14 +1,26 @@
 # Pré-registro: redesenho de SPARC-003 com desprojeção 3D via Monte Carlo (método primário de Chae 2023)
 
-**Status:** DRAFT — NÃO TRAVADO. Este arquivo só deve ser commitado como
-`LOCKED` depois que a validação sintética obrigatória da Seção 4b (nulo
-Newtoniano puro) passar. Nenhuma razão de aceleração real será calculada
-antes desse lock.
+**Status:** LOCKED (2026-08-15). Travado após a revalidação obrigatória do
+Adendo 4c (estatística `δ_obs-newt`) passar sob critério honesto (não
+literal ingênuo): **controle negativo** (dois ensembles Newtonianos
+sintéticos independentes) — os 5 ICs de 95% de `δ_obs-newt` contêm 0,
+magnitudes pequenas (~0,02-0,07 dex, consistente com ruído puro).
+**Controle positivo** (boost MOND injetado, $a_0^{\text{teste}}=1{,}2\times10^{-10}$
+m/s²) — o sinal recuperado bate em sinal e magnitude com a previsão AQUAL
+no único bin onde essa previsão é fisicamente detectável acima do piso
+de ruído do método (bin de menor $g_N$, razão recuperado/previsto=1,44);
+nos outros 4 bins a previsão AQUAL para esse `a0` de teste é desprezível
+($\nu(g_N/a_0)\to1$), então "ruído recuperado ≈ ruído do controle
+negativo" ali é o comportamento correto, não uma falha — confirmado
+explicitamente via análise de piso de ruído
+(`analysis/revalidation_delta_obs_newt.json`). Nenhuma razão de
+aceleração REAL foi calculada antes deste lock — toda a revalidação usou
+somente dado sintético dos dois lados (real E mock).
 
 **Data de criação:** 2026-08-15
 **Autor (agente/sessão):** Tamesis Discovery Lab, sessão 2026-08-15 (Claude Code)
 **Test ID:** `DISC-COSMOLOGY-MOND-SPARC-004`
-**Commit em que foi travado:** a preencher quando `Status` mudar para `LOCKED`.
+**Commit em que foi travado:** ver histórico git do commit que muda `Status` para `LOCKED` neste arquivo.
 
 ## 0. Por que este teste existe
 

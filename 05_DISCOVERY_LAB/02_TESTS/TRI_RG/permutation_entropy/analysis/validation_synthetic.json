@@ -89,7 +89,7 @@
     "spectral_exponent_pre": -0.05801777764723775,
     "spectral_exponent_post": 0.01440315449456079,
     "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
-    "wall_clock_seconds": 5.093456983566284
+    "wall_clock_seconds": 5.09809136390686
   },
   "negative_control": {
     "status": "ok",
@@ -144,7 +144,7 @@
     "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes METHODOLOGY_NOTE.md Gap (b)'s named spectral/linear risk (Zunino et al. 2008: H_S ~ near-monotone function of Hurst H) directly: same H, no genuine structural change -- p should typically be non-significant for both channels if IAAFT is correctly calibrated under the null.",
     "n_pre": 3000,
     "n_post": 3000,
-    "wall_clock_seconds": 5.331674814224243
+    "wall_clock_seconds": 5.394055128097534
   },
   "differential_hurst_control": {
     "status": "ok",
@@ -205,7 +205,7 @@
     "spectral_exponent_post": 2.7961163222012506,
     "spectral_exponent_target_pre_2H+1": 1.6,
     "spectral_exponent_target_post_2H+1": 2.8,
-    "wall_clock_seconds": 5.235231399536133
+    "wall_clock_seconds": 5.232468843460083
   },
   "differential_hurst_control_verdict": {
     "description": "Mechanical read of the differential_hurst_control result above: does a PURE linear Hurst shift (H=0.3 -> H=0.9, no nonlinear content) produce spurious IAAFT significance on H_S/PCI, and does C_JS/MCI stay quiet as expected if it genuinely tracks nonlinear/deterministic structure rather than linear spectral shape?",
@@ -256,7 +256,19 @@
     "n_iaaft_iter": 50,
     "seed": 12345,
     "Q0": 1.6510470181287602,
-    "n_states": 24
+    "n_states": 24,
+    "pre_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    },
+    "post_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    }
   },
   "generator_notes": {
     "colored_noise_fgn_like": "FFT-filtering spectral synthesis: white Gaussian noise scaled per-frequency by f^(-exponent/2), inverse-transformed, z-scored. fGn-like approximation via exponent=2H+1 (spectral relation for fractional Gaussian noise); same technique as mse_multiscale_entropy/rqa validate_synthetic.py, independent implementation.",
@@ -264,5 +276,5 @@
     "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure.",
     "sine_diagnostic": "Plain deterministic sine wave (period 50), used ONLY for the code-correctness diagnostic (check 0), not a PRE/POST identifiability control. No dither was needed here (unlike RQA's FNN-based diagnostic) because ordinal-pattern ranking via stable-sort tie-breaking is well-defined even for exact ties, and floating-point sine samples essentially never tie exactly in practice at N=1000/period=50."
   },
-  "wall_clock_seconds_total": 15.680501699447632
+  "wall_clock_seconds_total": 15.744145631790161
 }

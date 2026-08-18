@@ -581,8 +581,26 @@ def run_pe_analysis(pre_series, post_series, seed=SEED, n_surrogates=N_SURROGATE
     """
     n_surr = n_mc if n_mc is not None else n_surrogates
 
-    pre = np.asarray(pre_series, dtype=float)
-    post = np.asarray(post_series, dtype=float)
+    pre_raw = np.asarray(pre_series, dtype=float)
+    post_raw = np.asarray(post_series, dtype=float)
+
+    # Gap (d): subsample ONCE, up front, before anything else touches the
+    # series -- including IAAFT surrogate generation. This mirrors the
+    # convention already established (and audited) for MAX_N_PER_SEGMENT
+    # in rqa_common.py's run_rqa_analysis in this same lab/line: without
+    # this, IAAFT (FFT + argsort per iteration, N_IAAFT_ITER times,
+    # N_SURROGATES times, for BOTH pre and post) would run at the FULL
+    # un-subsampled segment length, defeating the entire point of the
+    # computational-budget rule Gap (d) declares (and making a real-data
+    # segment of, e.g., 10^6+ samples computationally infeasible within
+    # the 200-surrogates x 50-iterations protocol). compute_pe()'s own
+    # internal subsample_segment() call becomes a no-op here (already
+    # <= max_n), so this changes nothing for any series already <= max_n
+    # (in particular, every synthetic validation control in this line
+    # used N=3000 < max_n=20000, so validate_synthetic.py's results are
+    # completely unaffected by this fix).
+    pre, pre_sub_info = subsample_segment(pre_raw, max_n=max_n)
+    post, post_sub_info = subsample_segment(post_raw, max_n=max_n)
 
     real_pre = compute_pe(pre, m=m, tau=tau, s_min=s_min,
                            n_min_per_scale=n_min_per_scale, n_scales_cap=n_scales_cap, max_n=max_n)
@@ -594,6 +612,7 @@ def run_pe_analysis(pre_series, post_series, seed=SEED, n_surrogates=N_SURROGATE
         "n_scales_cap": n_scales_cap, "max_n_per_segment": max_n,
         "n_surrogates": n_surr, "n_iaaft_iter": n_iter, "seed": seed,
         "Q0": Q0, "n_states": N_STATES,
+        "pre_subsample_info": pre_sub_info, "post_subsample_info": post_sub_info,
     }
 
     if real_pre["status"] != "ok" or real_post["status"] != "ok":

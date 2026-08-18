@@ -309,3 +309,21 @@ de geração fGn-like já documentada (`colored_noise`/`fgn_like`) e a mesma
 `run_pe_analysis` sem modificação, apenas com um novo par `H` escolhido a
 priori pela sessão orquestradora antes de ver o resultado (`H=0,3` vs.
 `H=0,9`, sementes `777001`/`777002`).
+
+## Adendo 2 — correção de bug de desempenho descoberta no passo de dado real (não afeta nenhum resultado desta nota)
+
+Ao aplicar `run_pe_analysis` aos 2 domínios reais (ver `RESULTS_SUMMARY.md`),
+foi descoberto que os substitutos IAAFT estavam sendo gerados a partir da
+série bruta (NÃO subamostrada) em vez de a subamostragem
+`MAX_N_PER_SEGMENT=20.000` (Gap (d)) ser aplicada ANTES da geração de
+substitutos — tornando o protocolo computacionalmente inviável em escala
+real (segmentos de até 1,2 milhões de amostras). Corrigido em
+`pe_common.py` movendo a subamostragem para o topo de `run_pe_analysis`,
+aplicada UMA VEZ antes de qualquer substituto ser gerado — mesma
+convenção já estabelecida em `rqa_common.py::run_rqa_analysis` nesta
+linha. **`validate_synthetic.py` foi reexecutado integralmente após a
+correção e produziu resultados BIT-IDÊNTICOS aos já reportados nesta
+nota** (todas as séries de validação usaram `N=3.000 < MAX_N_PER_SEGMENT
+=20.000`, onde a subamostragem nunca era acionada de qualquer forma) —
+nenhuma conclusão desta nota de validação muda. Detalhes completos da
+correção e do impacto no dado real em `RESULTS_SUMMARY.md`.

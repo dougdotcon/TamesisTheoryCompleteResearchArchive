@@ -426,3 +426,112 @@ comparação com H_A/H_B específicos é uma extensão da estatística
 $\delta_{\text{obs-newt}}$ de Chae, não literal do artigo). O holdout
 selado de SPARC-003 (12.944 sistemas) permanece intocado, reservado para
 o Gate de Replicação futuro deste teste, se e quando ele chegar lá.
+
+## 7. Resultado — `CLOSED_INCONCLUSIVE` (2026-08-18)
+
+### 7a. Análise primária v1 e reexecução adversarial
+
+Pipeline travada aplicada pela primeira vez ao $v_p$ real observado dos
+30.203 sistemas de descoberta (`analysis/result_primary.json`):
+$\delta_{\text{obs-newt}}$ por bin = `+0,2274; +0,1723; +0,1313; +0,1027;
++0,0467`; `a0_fit=3,634\times10^{-10}` m/s² (IC 95%
+`[2,944\times10^{-10}, 4,494\times10^{-10}]`); $a_0^A$ e $a_0^B$ ambos
+fora do IC → veredito bruto `BOTH_FALSIFIED`; checagem de sanidade
+passou (0,48 dex do valor de referência McGaugh); gatilho de
+multiplicidade oculta ativo (bin 0, $g/g_N$ bruto=1,0099>1). Reexecução
+adversarial independente (segundo agente, implementação do zero)
+reproduziu todos os números deterministicamente, bit a bit — nenhum bug
+nos arquivos travados.
+
+### 7b. Bug encontrado pela descoberta adversarial de nulos obrigatória — assimetria de ruído astrométrico
+
+O agente de descoberta adversarial de nulos (`AGENTS.md` passo 7) achou
+um bug estrutural real na implementação do ramo mock: `v_p` real carrega
+ruído astrométrico Gaia genuíno (viés de Rice/Rayleigh, pior em baixo
+SNR), mas o mock era gerado sem ruído algum — a subtração
+`real-mock` de $\delta_{\text{obs-newt}}$ não cancelava esse viés como a
+Seção 4c pretendia, inflando artificialmente o sinal (mais forte
+justamente no bin de menor $g_N$). Prova decisiva: injetar o MESMO
+ruído real simetricamente nos dois ramos colapsa o efeito para
+consistente-com-zero nos 5 bins (100% dado sintético, zero física MOND).
+Classificado como BUG DE IMPLEMENTAÇÃO (Seção 5b acima), não reformulação
+de H_A/H_B/critério/cortes — corrigido (`generate_synthetic_vp_newtonian`
+passou a injetar ruído Gaussiano simétrico usando os erros de PM reais do
+Gaia de cada sistema), revalidado sob os mesmos controles negativo/
+positivo do Adendo 4c (`revalidation_delta_obs_newt_v2.json`, PASSOU)
+antes de reaceitar qualquer resultado real.
+
+### 7c. Análise primária v2 (corrigida) e reexecução adversarial
+
+Reexecução completa da análise real com a pipeline corrigida
+(`analysis/result_primary_v2.json`, mesmos 30.203 sistemas, mesmas
+sementes): $\delta_{\text{obs-newt}}$ por bin = `+0,1486; +0,1482;
++0,1150; +0,0949; +0,0430` — cerca de 5× menor que v1.
+`a0_fit=1,657\times10^{-10}` m/s² (IC 95%
+`[1,232\times10^{-10}, 2,181\times10^{-10}]`). $a_0^A=1,082288\times10^{-10}$
+cai **logo abaixo** do limite inferior do IC (margem pequena, ≈0,057 dex);
+$a_0^B$ permanece claramente fora. Checagem de sanidade passou (0,14 dex
+do valor de referência McGaugh, bem mais próxima que v1). Gatilho de
+multiplicidade oculta continua ativo (bin 0, $g/g_N$ bruto=1,010).
+Reexecução adversarial independente reproduziu o resultado bit a bit
+(IC de `a0` idêntico a 6 algarismos significativos). Essa reexecução
+também encontrou uma imprecisão factual menor (não numérica) no comentário
+do código de correção: as colunas de correlação `pmRApmDEcor1/2` existem
+no `catalog.parquet` bruto não commitado, ao contrário do que o comentário
+afirmava — mas um teste de sensibilidade via decomposição de Cholesky
+confirmou que o efeito residual é desprezível (≤0,00064 dex, ~100× menor
+que a margem de 0,057 dex), não muda nenhuma conclusão numérica; deixado
+como imprecisão de documentação conhecida, não corrigido no código.
+
+### 7d. Checagem adversarial de multiplicidade oculta obrigatória (Gap declarado na Seção 4) — achado decisivo
+
+O gatilho pré-declarado ($g/g_N$ real bruto > 1 no bin 0) ativou, nas duas
+versões (v1 e v2), a checagem adversarial obrigatória de multiplicidade
+oculta ($f_{multi}$, Chae Eqs. 11-13, NÃO implementada por simplificação
+declarada). **Na v1** (sinal inflado pelo bug), a estimativa analítica de
+inflação de massa cobria no máximo ~25% do sinal do bin de maior efeito,
+mesmo no limite superior de $f_{multi}$ (0,25-0,47) — a diferença
+RUWE-alto vs. RUWE-baixo era significativa mas não bastava para explicar
+o padrão declinante completo; conclusão da checagem v1: "contribui mas
+não basta, não reverteria `BOTH_FALSIFIED`."
+
+**Na v2** (sinal corrigido, ~5× menor), a mesma checagem refeita produz o
+resultado OPOSTO e decisivo: (1) a estimativa analítica de inflação de
+massa sozinha (sem wobble) já cobre de 23% a 146% do sinal por bin, e no
+bin de menor $g_N$ (bin 4) cobre sozinha de 79% a 146%; (2) a diferença
+RUWE-alto vs. RUWE-baixo permanece grande e estatisticamente significativa
+em todos os 5 bins, e agora excede o sinal real TOTAL em vários bins
+(ex.: bin 0, diferença RUWE=+0,377 > sinal real inteiro=+0,149); (3) uma
+simulação Monte Carlo própria de injeção (inflação de massa + wobble de
+fotocentro), mesmo no limite INFERIOR da faixa observacional de
+$f_{multi}$ (0,25), já produz um sinal sintético (zero física MOND) MAIOR
+que o sinal real inteiro em todos os 5 bins (razão sintético/real de
+1,25× a 3,46×). Detalhes completos:
+`analysis/hidden_companion_check_v2.json`/`.md`.
+
+### 7e. Veredito honesto
+
+O critério mecânico da Seção 5, aplicado literalmente ao resultado v2,
+produziria `BOTH_FALSIFIED`. **Esse veredito não é aceito.** A própria
+Seção 4 ("Simplificação declarada") já pré-comprometeu, antes de ver
+qualquer resultado real, a regra de que um gatilho de $g/g_N>1$
+consistente com H_A/H_B exige a checagem adversarial de multiplicidade
+oculta ANTES de aceitar o veredito — e essa checagem, executada com o
+sinal corrigido, mostra que um confundidor mundano já nomeado e conhecido
+(companheiras não resolvidas, em magnitude inteiramente plausível pela
+literatura, sem qualquer ajuste ad hoc para o caso) é **plausivelmente
+suficiente, sozinho, para produzir o resíduo observado inteiro**, sem
+física MOND nenhuma. Um `a0_fit` calculado sobre um sinal que pode ser
+majoritariamente ou inteiramente artefato de multiplicidade não pode
+sustentar uma conclusão de falsificação de $a_0^A$ ou $a_0^B$. Este teste
+é fechado `CLOSED_INCONCLUSIVE` — mesma disciplina já usada em SPARC-003:
+um critério mecânico não pode ser aceito quando o próprio pré-registro já
+sinalizou, a priori, que um confundidor não corrigido poderia produzir
+exatamente esse padrão, e a checagem confirma que ele consegue.
+
+O Gate de Replicação não é acionado — o teste falhou sua própria
+pré-condição declarada antes de chegar lá. O holdout selado (12.944
+sistemas) permanece intocado, disponível para uma futura tentativa que
+implemente a auto-calibração completa de $f_{multi}$ de Chae (Eqs. 11-13)
+antes de qualquer ajuste de `a0`. Detalhes completos da sessão:
+`09_SESSIONS/2026/2026-08-18_SPARC004_MC_DEPROJECTION.md`.

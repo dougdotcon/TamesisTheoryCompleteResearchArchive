@@ -341,7 +341,7 @@ queue:
     parent_legacy: null
     related_tests:
       - "DISC-COSMOLOGY-MOND-SPARC-002/003 (mesmas H_A/H_B, mesmo criterio de decisao -- este teste adapta o observavel discriminador ao metodo primario de Chae, nao redefine as hipoteses)"
-    status: CANDIDATE_LOCKED
+    status: CLOSED_INCONCLUSIVE
     existing_assets:
       - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md (LOCKED 2026-08-15, apos revalidacao do Adendo 4c passar)"
       - "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/data/{hwang_eccentricity_subset.parquet,PROVENANCE_HWANG.md}"
@@ -388,15 +388,42 @@ queue:
       dado real de saida (v_p observado) foi tocado ate este ponto --
       toda a validacao/revalidacao usou dado sintetico dos dois lados.
     next_action: >
-      Aplicar a pipeline travada (delta_obs_newt.py), sem modificacao,
-      ao v_p REAL observado (pmRA/pmDE) dos 30.203 sistemas de
-      descoberta -- primeira vez que dado real de saida e tocado neste
-      teste. Ajustar a0 via minimos quadrados nao-linear entre
-      delta_obs-newt real e a previsao AQUAL, IC de 95% via bootstrap
-      pareado. Verificar se a0_A e/ou a0_B caem dentro do IC. Reexecucao
-      adversarial obrigatoria (segundo agente, implementacao propria do
-      zero); checagem de multiplicidade oculta obrigatoria se g/g_N>1
-      consistente com H_A/H_B.
+      Nenhuma -- teste fechado. Uma tentativa futura genuinamente nova
+      exigiria implementar a auto-calibracao completa de f_multi de Chae
+      (Eqs. 11-13) ANTES de qualquer ajuste de a0, e so entao reabrir
+      (com um NOVO pre-registro, nao reformulando este) o holdout selado
+      (12.944 sistemas) para o Gate de Replicacao.
+    final_result: >
+      2026-08-18: analise primaria v1 sobre os 30.203 sistemas de
+      descoberta produziu delta_obs-newt=[+0,2274;+0,1723;+0,1313;
+      +0,1027;+0,0467], a0_fit=3,634e-10 (IC95%
+      [2,944e-10;4,494e-10]), BOTH_FALSIFIED bruto. Reexecucao
+      adversarial bit a bit confirmou v1 sem bug nos arquivos travados,
+      mas a descoberta adversarial de nulos obrigatoria (AGENTS.md passo
+      7) achou um BUG DE IMPLEMENTACAO real: o ramo mock nao carregava
+      ruido astrometrico Gaia, enquanto o ramo real carrega (vies de
+      Rice/Rayleigh nao cancelado pela subtracao real-mock) -- prova
+      decisiva via teste 100% sintetico (injetar o mesmo ruido
+      simetricamente nos dois ramos colapsa o efeito a zero). Corrigido
+      (Secao 5b do pre-registro), revalidado sob os controles negativo/
+      positivo do Adendo 4c, analise real re-executada: v2 produz
+      delta_obs-newt=[+0,1486;+0,1482;+0,1150;+0,0949;+0,0430] (~5x
+      menor), a0_fit=1,657e-10 (IC95% [1,232e-10;2,181e-10]) -- a0_A
+      cai logo ABAIXO do IC (margem ~0,057 dex), a0_B claramente fora.
+      Reexecucao adversarial v2 confirmou bit a bit. O gatilho
+      pre-declarado de multiplicidade oculta (g/g_N real bruto>1 no bin
+      0) ativou a checagem adversarial obrigatoria: com o sinal v2
+      corrigido (bem menor que v1), inflacao de massa por companheiras
+      nao resolvidas SOZINHA ja cobre 23-146% do sinal por bin, a
+      diferenca RUWE-alto/baixo excede o sinal real total em varios
+      bins, e mesmo f_multi=0,25 (limite inferior da faixa
+      observacional da literatura) produz sinal sintetico (zero MOND)
+      MAIOR que o sinal real inteiro nos 5 bins. Veredito bruto
+      BOTH_FALSIFIED da Secao 5 NAO aceito -- a Secao 4 ja pre-
+      comprometia essa regra antes de ver dado real. Fechado
+      CLOSED_INCONCLUSIVE. Registrado como DISC-CLAIM-006. Detalhes:
+      02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md
+      Secao 7; 09_SESSIONS/2026/2026-08-18_SPARC004_MC_DEPROJECTION.md.
     stop_condition: >
       travar o pre-registro (Status: LOCKED) antes da validacao sintetica
       da Secao 4b passar; redefinir H_A/H_B; reabrir ou modificar os

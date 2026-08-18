@@ -357,6 +357,85 @@ claims:
         parte deterministica) e por uma simulacao Monte Carlo dedicada; e
         uma limitacao estrutural genuina do desenho da estatistica
 
+  - claim_id: DISC-CLAIM-006
+    short_name: wide-binary-mc-deprojection-delta-obs-newt-confounded-by-hidden-multiplicity
+    test_id: DISC-COSMOLOGY-MOND-SPARC-004
+    exact_statement: >
+      Redesenho de DISC-CLAIM-005/SPARC-003 usando o metodo PRIMARIO
+      completo de Chae (2023): desprojecao 3D via Monte Carlo orbital
+      (excentricidades individuais de Hwang, Ting & Zakamska 2022,
+      MNRAS 512:3383, 74,3% da amostra; fallback populacional para o
+      resto), mesmos H_A/H_B, catalogo, cortes de qualidade e split
+      discovery(30.203)/holdout(12.944 selado, nao tocado) de
+      SPARC-002/003. Estatistica discriminadora corrigida ANTES de
+      qualquer dado real (Adendo 4c, apos validacao sintetica pre-lock
+      revelar o efeito Kepleriano conhecido de v^2/r subestimar g_N sob
+      excentricidade -- Eq. 16 de Chae): delta_obs-newt(bin) = mediana_real
+      (log g/g_N) - mediana_mock(log g/g_N), mock Newtoniano casado por
+      sistema. Analise primaria v1 (result_primary.json) produziu
+      delta_obs-newt=[+0,2274;+0,1723;+0,1313;+0,1027;+0,0467],
+      a0_fit=3,634e-10 (IC95% [2,944e-10;4,494e-10]), BOTH_FALSIFIED
+      bruto. Descoberta adversarial de nulos obrigatoria (AGENTS.md passo
+      7) achou um BUG DE IMPLEMENTACAO real (nao reformulacao): o ramo
+      mock era gerado sem ruido astrometrico, enquanto o ramo real carrega
+      ruido Gaia genuino (vies de Rice/Rayleigh) -- prova decisiva via
+      teste sintetico (injetar o mesmo ruido simetricamente nos dois ramos
+      colapsa o efeito para zero nos 5 bins). Corrigido (Secao 5b),
+      revalidado sob os mesmos controles negativo/positivo do Adendo 4c,
+      analise real re-executada: v2 (result_primary_v2.json) produz
+      delta_obs-newt=[+0,1486;+0,1482;+0,1150;+0,0949;+0,0430] (~5x menor
+      que v1), a0_fit=1,657e-10 (IC95% [1,232e-10;2,181e-10]) -- a0_A
+      (1,082288e-10) cai logo ABAIXO do limite inferior do IC (margem
+      ~0,057 dex), a0_B claramente fora. Reexecucao adversarial
+      independente reproduziu v2 bit a bit. Gatilho pre-declarado de
+      multiplicidade oculta (g/g_N real bruto>1 no bin 0) ativou a
+      checagem adversarial obrigatoria (Secao 4/6): com o sinal v2
+      corrigido, a inflacao de massa por companheiras nao resolvidas
+      SOZINHA cobre de 23% a 146% do sinal por bin (79-146% no bin de
+      menor g_N), a diferenca RUWE-alto vs. RUWE-baixo excede o sinal real
+      total em varios bins, e uma simulacao MC propria de injecao mostra
+      que mesmo f_multi=0,25 (limite inferior da faixa observacional da
+      literatura) ja produz sinal sintetico (zero MOND) MAIOR que o sinal
+      real inteiro nos 5 bins.
+    evidence_level: preregistered_inconclusive
+    evidence_level_note: >
+      NAO e preregistered_falsified para H_A nem H_B, apesar do criterio
+      literal da Secao 5 produzir mecanicamente "BOTH_FALSIFIED" sobre o
+      resultado v2 -- descartado como veredito valido porque a propria
+      Secao 4 do pre-registro ja pre-comprometia, antes de ver qualquer
+      dado real, que um gatilho de g/g_N>1 exige a checagem adversarial
+      de multiplicidade oculta antes de aceitar o veredito, e essa
+      checagem (Secao 7d) mostra que um confundidor mundano ja nomeado e
+      conhecido (companheiras ocultas, f_multi=0,25-0,47, faixa inteira
+      da literatura, sem ajuste ad hoc) e plausivelmente suficiente
+      sozinho para produzir o residuo inteiro observado. Um a0_fit
+      calculado sobre um sinal que pode ser majoritaria ou inteiramente
+      artefato nao sustenta uma conclusao de falsificacao.
+    preregistration_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/PREREGISTRATION.md"
+    preregistration_lock_commit: "ver historico git do commit que muda Status para LOCKED neste arquivo (2026-08-15)"
+    data_provenance_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/data/PROVENANCE_HWANG.md"
+    adversarial_review_verdict: METHODOLOGY_FLAW_FOUND
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies:
+      - "DISC-CLAIM-005 (SPARC-003, mesmas H_A/H_B, mesma amostra/cortes/split -- este teste redesenha o observavel discriminador usando o metodo primario de Chae em vez da simplificacao de velocidade projetada que matou SPARC-003 por restricao de imagem)"
+    known_gaps:
+      - "correcao de multiplicidade oculta (f_multi) de Chae (Eqs. 11-13, auto-calibracao completa) declarada NAO implementada desde o pre-registro -- exatamente o gap que a checagem adversarial (Secao 7d) mostrou ser suficiente para explicar todo o sinal residual; um pre-registro futuro que implemente essa auto-calibracao completa (nao a aproximacao desta checagem adversarial) e reaplique a mesma pipeline poderia produzir um veredito genuinamente conclusivo"
+      - "bug de assimetria de ruido astrometrico no ramo mock (Secao 5b) foi encontrado e corrigido DEPOIS da primeira analise real (v1) -- documentado por transparencia, resultado v1 mantido intocado no repositorio como registro historico, v2 e' o resultado valido"
+      - "holdout (12.944 sistemas) nunca foi aberto -- permanece disponivel para uma tentativa futura com a correcao de f_multi implementada"
+      - "imprecisao de documentacao encontrada pela reexecucao adversarial v2: comentario do codigo afirma que as colunas de correlacao pmRApmDEcor1/2 do Gaia nao estao disponiveis, mas elas existem no catalog.parquet bruto (nao commitado) -- efeito numerico confirmado desprezivel (<=0,00064 dex) via teste de sensibilidade por decomposicao de Cholesky, nao corrigido no codigo por ser irrelevante ao resultado"
+    counterevidence:
+      - "checagem RUWE-alto vs. RUWE-baixo (Secao 7d, Item 2): diferenca grande e estatisticamente significativa em todos os 5 bins, excedendo o sinal real total em varios bins -- evidencia direta e nao-ambigua de contaminacao por multiplicidade oculta no delta_obs-newt medido"
+    prohibited_claims:
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
+        a partir deste teste
+      - "H_A ou H_B falsificadas por este teste -- o criterio literal da Secao 5 produz BOTH_FALSIFIED mecanicamente sobre o resultado v2, mas isso e explicitamente descartado como veredito valido pela propria Secao 4 do pre-registro (gatilho pre-declarado de multiplicidade oculta, checagem adversarial mostrou confundidor plausivelmente suficiente); nenhuma das duas hipoteses foi genuinamente testada aqui"
+      - que o resultado de DISC-CLAIM-005/SPARC-003 foi replicado, confirmado, ou contradito por este teste -- o metodo primario de Chae tambem nao produziu um veredito valido, por uma razao estrutural diferente (confundidor de multiplicidade, nao restricao de imagem)
+      - peer review formal ou publicacao -- este e um achado computacional interno, nao um artigo revisado
+      - "que o bug de assimetria de ruido astrometrico (Secao 5b) invalida a estatistica delta_obs-newt em si -- o conceito permanece correto (Chae 2023), o bug era apenas na geracao do ramo mock, ja corrigido e revalidado antes de qualquer resultado real ser reaceito"
+
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

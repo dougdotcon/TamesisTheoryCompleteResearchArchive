@@ -1265,25 +1265,75 @@ queue:
       encontrada em choques extremos -- registrada, nao implementada.
       Detalhes completos: 02_TESTS/TRI_RG/kramers_moyal/
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    evt_hill_gap_closing_result: >
+      2026-08-19: usuario pediu para fechar o ultimo candidato
+      formalizado da Fase 0.6, evt-hill (dinamica do indice de cauda via
+      estimador de Hill). Metodologia fixada em
+      02_TESTS/TRI_RG/evt_hill/METHODOLOGY_NOTE.md ANTES de qualquer
+      calculo real, com um desvio deliberado e justificado da convencao
+      padrao desta linha: o protocolo de significancia NAO usa IAAFT
+      (que preserva a marginal exata por construcao, tornando a nula
+      degenerada para um estimador puramente baseado em estatisticas de
+      ordem como Hill) -- usa em vez disso um teste de randomizacao do
+      ponto de corte dentro da serie combinada PRE+POST. I(X)=xi_Hill
+      (primario, selecao de k* via bootstrap simples de MSE, limiar
+      REESTIMADO por segmento, nao fixado do PRE -- licao aprendida do
+      colapso de bins em kramers-moyal/EUR-CHF) + xi_MLE (companheiro,
+      GPD/MLE). VALIDACAO SINTETICA confirmou xi_Hill correto contra
+      distribuicoes de cauda conhecida (Pareto, Student-t) e poder real
+      do teste de randomizacao para PRE/POST desbalanceado (o caso
+      realista); achado honesto: com PRE/POST de comprimento IGUAL a
+      nula fica estruturalmente deslocada perto do Delta real (menor
+      poder), fenomeno depois confirmado generalizar para dado real.
+      Checagem obrigatoria de redundancia com SOC (reaproveitando dado
+      ja commitado) ficou inconclusiva por poder estatistico (n=3),
+      levemente contra redundancia simples. RESULTADO REAL: PDX (onda
+      de calor 2021, NOAA GHCN-Daily) ESTRUTURALMENTE NAO TESTAVEL --
+      piso de amostra MIN_N_PER_SEGMENT=200 nao atingido (POST=37 dias,
+      consequencia inevitavel da resolucao de 1 obs/dia combinada com a
+      janela de "semanas nao dias" exigida para evitar circularidade);
+      Cape Fear (furacao Florence 2018, USGS 02105769) -- canal
+      primario xi_Hill SEM significancia em nenhuma variante
+      (p=0,185/0,22), canal companheiro xi_MLE significativo so na
+      variante de robustez (p=0,025), investigado a fundo e explicado
+      por um platô de crista de cheia fisico real e limitado (suporte
+      GPD finito, nao cauda mais pesada) mais um modo de instabilidade
+      de xi_MLE ja documentado na validacao ANTES de dado real.
+      Checagem de confundidor de comporta (Lock 1, gatilho pre-
+      declarado) acionada -- log operacional publico nao encontrado,
+      mas evidencia circunstancial (estrutura submersa no pico,
+      documentado fotograficamente) pesa contra o confundidor. Fechado
+      NEGATIVO no canal primario nos 2 dominios (1 nao testavel por
+      piso de amostra, 1 sem significancia) -- 10o e ultimo candidato
+      formalizado da Fase 0.6, sem invariante cross-domain sobrevivente.
+      Detalhes completos: 02_TESTS/TRI_RG/evt_hill/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      2 candidatos formalizados (viable=true) da Fase 0.6 ainda nao
-      fechados, aguardando escolha do usuario: homologia persistente/
-      TDA (rank #3), indice de cauda EVT/Hill (rank #4). Ver
-      phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md. Alternativas: revisitar
-      qualquer um dos 9 ja fechados com dados diferentes, nova rodada de
-      busca, ou considerar a linha suficientemente explorada por ora
-      (9/9 sem invariante confiavel, incluindo um candidato -- entropia-
-      de-permutacao -- com a validacao de poder mais limpa de toda a
-      linha, e outro -- kramers-moyal -- cujo fechamento revelou um
-      motivo estrutural honesto por dominio em vez de um p-valor
-      simples). Toda a infraestrutura das buscas anteriores (9
-      METHODOLOGY_NOTE.md, 7 pipelines validadas e aplicadas a dado
-      real com veredito computavel, dominios reais de 18+ fontes
-      testadas no total) fica commitada e reaproveitavel.
-      01_TAMESIS_CORE/03_TRANSITION_ATLAS continua infraestrutura
-      reaproveitavel candidata para hospedar um resultado futuro depois
-      de sobreviver ao Gate de Replicacao, se e quando esta linha
-      produzir um achado.
+      10 de 11 candidatos identificados nesta linha ate agora (3 da
+      Fase 0 original + 4 da busca de 2026-08-15 + 4 da busca de
+      2026-08-18) tem resultado final -- os 10 sem invariante
+      cross-domain confiavel. Resta apenas 1 candidato formalizado
+      (viable=true) nao fechado: homologia persistente/TDA (rank #3 da
+      Fase 0.6) -- ver phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md.
+      Aguardando proxima direcao do usuario: (a) fechar gaps de TDA;
+      (b) nova rodada de busca por candidatos ainda nao considerados;
+      (c) revisitar qualquer um dos 10 ja fechados com dados
+      diferentes; (d) considerar a linha suficientemente explorada por
+      ora -- 10/10 sem invariante confiavel e um padrao consistente de
+      motivos honestos e distintos (baixo poder corrigido, nao-
+      computabilidade estrutural, redundancia com familia Hurst,
+      confundidores mundanos plausiveis, piso de amostra) e um forte
+      prior contra a hipotese central desta linha tal como formulada
+      ate aqui, nao uma prova de impossibilidade; (e) outra linha do
+      laboratorio (SPARC com auto-calibracao de f_multi, achado de
+      integridade de gaia_real_analysis.py, ou linha inteiramente
+      nova). Toda a infraestrutura das buscas (10 METHODOLOGY_NOTE.md,
+      8 pipelines validadas e aplicadas a dado real com veredito
+      computavel, dominios reais de 20+ fontes testadas no total) fica
+      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
+      continua infraestrutura reaproveitavel candidata para hospedar um
+      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
+      quando esta linha produzir um achado.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

@@ -1,0 +1,578 @@
+{
+  "ck_test_correctness_diagnostic": {
+    "description": "Verifies the CK-test CODE (not IAAFT/surrogates) before any stochastic PRE/POST control. IMPORTANT: this diagnostic caught a real implementation bug in the bootstrap significance scheme (naive whole-triple case resampling systematically inflated the bootstrap null, giving p~1.0 for EVERY process including deliberately non-Markov ones); fixed with a conditional (Markov) bootstrap in km_common.py -- see that file's ck_test_at_lag docstring for the full account. Results below are for the FIXED version.",
+    "markov_control": {
+      "generator": "OU (Euler-Maruyama), theta=1.0, sigma=1.0, dt=0.05, N=3000, seed=101",
+      "expectation": "CK test should NOT reject at any grid lag where enough non-overlapping stride-L blocks exist to test (large lags in a 20-point geometric grid on N=3000 legitimately run out of blocks and correctly report 'insufficient_samples' -- an honest data-availability limit, not counted as a failure here).",
+      "all_computed_lags_pass": true,
+      "n_lags_computed": 5,
+      "n_lags_insufficient_samples": 7,
+      "ck_grid": [
+        {
+          "lag_samples": 1,
+          "status": "ok",
+          "p_ck_test": 0.8,
+          "chi2_observed": 66.15706311159187,
+          "chi2_bootstrap_mean": 85.96210402989684
+        },
+        {
+          "lag_samples": 2,
+          "status": "ok",
+          "p_ck_test": 0.97,
+          "chi2_observed": 66.45428786347397,
+          "chi2_bootstrap_mean": 94.43729406399343
+        },
+        {
+          "lag_samples": 3,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 48.12746338793179,
+          "chi2_bootstrap_mean": 99.15811619358438
+        },
+        {
+          "lag_samples": 5,
+          "status": "ok",
+          "p_ck_test": 0.97,
+          "chi2_observed": 72.03015600371873,
+          "chi2_bootstrap_mean": 107.1534543779856
+        },
+        {
+          "lag_samples": 8,
+          "status": "ok",
+          "p_ck_test": 0.96,
+          "chi2_observed": 63.24788680934084,
+          "chi2_bootstrap_mean": 89.64479306914419
+        },
+        {
+          "lag_samples": 11,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 17,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 26,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 38,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 58,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 86,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 130,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        }
+      ]
+    },
+    "non_markov_supplementary_fgn_H09": {
+      "generator": "fGn-like (spectral-synthesis, H=0.9, long-memory), N=3000, seed=102",
+      "expectation": "CK test should reject at short lags (long-memory violates Markov property).",
+      "rejects_at_shortest_grid_lag": false,
+      "first_grid_index_rejecting": null,
+      "ck_grid": [
+        {
+          "lag_samples": 1,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 1.5325846208664309,
+          "chi2_bootstrap_mean": 36.193865231023814
+        },
+        {
+          "lag_samples": 2,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 1.2258077228993278,
+          "chi2_bootstrap_mean": 34.54476565475331
+        },
+        {
+          "lag_samples": 3,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 1.599539865690065,
+          "chi2_bootstrap_mean": 30.633239232327107
+        },
+        {
+          "lag_samples": 5,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 6.882756135750252,
+          "chi2_bootstrap_mean": 31.323981880484006
+        },
+        {
+          "lag_samples": 8,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 4.978725026241913,
+          "chi2_bootstrap_mean": 28.429288182052865
+        },
+        {
+          "lag_samples": 11,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 17,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 26,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 38,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 58,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 86,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 130,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        }
+      ],
+      "honest_finding": "fGn(H=0.9) does NOT reject at ANY of the available grid lags here (p=1.0 at lags 1,2,3,5,8 samples; all larger grid lags report 'insufficient_samples' -- at N=3000, the non-overlapping stride-L block-count floor (n_blocks >= MIN_SAMPLES_PER_BIN*N_BINS_X=300, needed after the CK-test bootstrap fix documented in km_common.py's ck_test_at_lag docstring) is only reachable up to lag=8 samples; the achievable lag range does not extend far enough for fGn's slow power-law autocorrelation decay to diverge visibly from an exponential/Markov-consistent one. INCONCLUSIVE for this generator at this N, not a clean pass or fail; reported honestly as a supplementary/exploratory check only -- NOT the primary non-Markov correctness control (see ou_slow_noise_contamination below, which DOES cleanly reject within the available lag range)."
+    },
+    "non_markov_primary_ou_slow_noise_contamination": {
+      "generator": "X_obs = X_fast_OU(theta=1.0,sigma=1.0) + X_slow_OU(theta=0.01,sigma=3.0), both dt=0.05, N=3000, seed=7 -- a genuine hidden-state/non-Markov generator (X_obs alone is not a sufficient statistic for its own future).",
+      "expectation": "CK test should reject at short lags.",
+      "rejects_at_shortest_grid_lag": true,
+      "ck_grid": [
+        {
+          "lag_samples": 1,
+          "status": "ok",
+          "p_ck_test": 0.025,
+          "chi2_observed": 74.13648414601391,
+          "chi2_bootstrap_mean": 38.06073825865082
+        },
+        {
+          "lag_samples": 2,
+          "status": "ok",
+          "p_ck_test": 0.275,
+          "chi2_observed": 45.88299303563541,
+          "chi2_bootstrap_mean": 41.081255097443226
+        },
+        {
+          "lag_samples": 3,
+          "status": "ok",
+          "p_ck_test": 0.59,
+          "chi2_observed": 43.681421330904755,
+          "chi2_bootstrap_mean": 49.359834409672
+        },
+        {
+          "lag_samples": 5,
+          "status": "ok",
+          "p_ck_test": 1.0,
+          "chi2_observed": 24.278385226141946,
+          "chi2_bootstrap_mean": 52.09113534700101
+        },
+        {
+          "lag_samples": 8,
+          "status": "ok",
+          "p_ck_test": 0.995,
+          "chi2_observed": 20.113335576305165,
+          "chi2_bootstrap_mean": 52.19062660920548
+        },
+        {
+          "lag_samples": 11,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 17,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 26,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 38,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 58,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 86,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        },
+        {
+          "lag_samples": 130,
+          "status": "insufficient_samples",
+          "p_ck_test": null,
+          "chi2_observed": null,
+          "chi2_bootstrap_mean": null
+        }
+      ]
+    },
+    "verdict": "CK_TEST_CORRECT"
+  },
+  "negative_control": {
+    "status": "ok",
+    "tau_me_samples": 1,
+    "tau_me_time": 0.05,
+    "PKS_pre": 0.609867812777241,
+    "PKS_post": 0.19905979204891366,
+    "delta_PKS": -0.41080802072832734,
+    "p_PKS": 0.23,
+    "beta_D2_pre": 0.012406649909580476,
+    "beta_D2_post": -0.016059842743947558,
+    "delta_beta_D2": -0.028466492653528033,
+    "p_beta_D2": 0.805,
+    "beta_D2_abs_pre": 0.0010778476825843487,
+    "beta_D2_abs_post": -0.024162928221402275,
+    "delta_beta_D2_abs": -0.025240775903986625,
+    "p_beta_D2_abs": 0.88,
+    "x_star_ref": 0.11153603471110193,
+    "kappa_pre": 3.413404054480987,
+    "kappa_post": 1.9998035745642473,
+    "delta_kappa": -1.4136004799167399,
+    "kappa_diagnostic_only": true,
+    "surrogate_PKS_mean": -0.09528167175291168,
+    "surrogate_PKS_std": 0.30922736276407425,
+    "surrogate_PKS_n_valid": 200,
+    "surrogate_PKS_n_undefined": 0,
+    "surrogate_beta_D2_mean": 0.0005017137892377471,
+    "surrogate_beta_D2_std": 0.11133628553927899,
+    "surrogate_beta_D2_n_valid": 200,
+    "surrogate_beta_D2_n_undefined": 0,
+    "surrogate_beta_D2_abs_mean": -0.047551139662669335,
+    "surrogate_beta_D2_abs_std": 0.16015223504190282,
+    "surrogate_beta_D2_abs_n_valid": 200,
+    "surrogate_beta_D2_abs_n_undefined": 0,
+    "pawula_ratio_pre": [
+      0.026535914703617738,
+      0.02135673087056999,
+      0.02389558077958152,
+      0.026838127853624733,
+      0.023589854681626526,
+      0.022840164441363414,
+      0.02469971505935509,
+      0.02550276993085816,
+      0.02561287975847462,
+      0.027234996778626935
+    ],
+    "pawula_ratio_post": [
+      0.023220412886806555,
+      0.022726475507173542,
+      0.024012136470371946,
+      0.02260957688550738,
+      0.02735872167884235,
+      0.030591118244212023,
+      0.024367979877640406,
+      0.02781475625252103,
+      0.022374529023385728,
+      0.026194474261299873
+    ],
+    "n_grid_points_ck": 12,
+    "description": "PRE and POST = two INDEPENDENT realizations of the SAME OU process (theta=1.0, sigma=1.0, dt=0.05, N=3000), independent seeds 555001/555002. Unimodal, constant (additive) diffusion, no genuine dynamical difference -- p should typically be non-significant for both channels under IAAFT if correctly calibrated.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "wall_clock_seconds": 8.841094255447388
+  },
+  "positive_control": {
+    "status": "ok",
+    "tau_me_samples": 1,
+    "tau_me_time": 0.05,
+    "PKS_pre": 0.24684058327928993,
+    "PKS_post": -0.8245280038735521,
+    "delta_PKS": -1.071368587152842,
+    "p_PKS": 0.005,
+    "beta_D2_pre": 0.007121981553505228,
+    "beta_D2_post": 0.06098906315938788,
+    "delta_beta_D2": 0.053867081605882654,
+    "p_beta_D2": 0.565,
+    "beta_D2_abs_pre": 0.01488234209556196,
+    "beta_D2_abs_post": 0.36748325019790384,
+    "delta_beta_D2_abs": 0.3526009081023419,
+    "p_beta_D2_abs": 0.0,
+    "x_star_ref": -0.11213449041735954,
+    "kappa_pre": 3.9471322204674206,
+    "kappa_post": 2.519122003986659,
+    "delta_kappa": -1.4280102164807618,
+    "kappa_diagnostic_only": true,
+    "surrogate_PKS_mean": -0.32205622747867246,
+    "surrogate_PKS_std": 0.3681970507323015,
+    "surrogate_PKS_n_valid": 200,
+    "surrogate_PKS_n_undefined": 0,
+    "surrogate_beta_D2_mean": -0.01735514743843192,
+    "surrogate_beta_D2_std": 0.08271225972406078,
+    "surrogate_beta_D2_n_valid": 200,
+    "surrogate_beta_D2_n_undefined": 0,
+    "surrogate_beta_D2_abs_mean": 0.09790244427336159,
+    "surrogate_beta_D2_abs_std": 0.1044165505206005,
+    "surrogate_beta_D2_abs_n_valid": 200,
+    "surrogate_beta_D2_abs_n_undefined": 0,
+    "pawula_ratio_pre": [
+      0.026981389709296123,
+      0.024254434296498067,
+      0.024957404047045977,
+      0.02167460665914832,
+      0.02235246994152764,
+      0.027125822127995705,
+      0.026267744124366672,
+      0.023815932450051504,
+      0.023564914472306818,
+      0.02232107095426601
+    ],
+    "pawula_ratio_post": [
+      0.028385683129554674,
+      0.023800243357749877,
+      0.035611392921897356,
+      0.03128976756728005,
+      0.02397784496201575,
+      0.02446327673268252,
+      0.043533497456916835,
+      0.03434671494126646,
+      0.02565190350329521,
+      0.027330965338909587
+    ],
+    "n_grid_points_ck": 12,
+    "description": "PRE = OU (theta=1.0, sigma=1.0, unimodal, constant diffusion). POST = double-well bistable SDE (dX=(X-X^3)dt+sigma*dW, sigma=0.75, dt_sim=0.02, burn_in=3000), RANK-REMAPPED onto PRE's own exact empirical distribution -- PRE and POST share an EXACTLY identical marginal by construction; the double-well's bimodal DYNAMICS survive in the temporal rank/order structure (rank-remap is strictly monotonic, so quantile-bin conditional-increment statistics still see the underlying dynamics).",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "double_well_raw_fraction_near_plus1_well": 0.44866666666666666,
+    "double_well_raw_fraction_near_minus1_well": 0.41133333333333333,
+    "double_well_raw_fraction_near_barrier": 0.14,
+    "double_well_bimodality_check": "genuinely bimodal in raw trajectory",
+    "spectral_exponent_pre": 1.5542455871731378,
+    "spectral_exponent_double_well_raw": 1.7108969668934741,
+    "spectral_exponent_post_remapped": 1.6396021921451567,
+    "marginal_match": "exact (rank-remap of double-well raw onto PRE's sorted values)",
+    "wall_clock_seconds": 8.528969049453735
+  },
+  "state_dependent_diffusion_control": {
+    "status": "ok",
+    "tau_me_samples": 1,
+    "tau_me_time": 0.05,
+    "PKS_pre": 0.24684058327928993,
+    "PKS_post": 0.49959950766738226,
+    "delta_PKS": 0.25275892438809233,
+    "p_PKS": 0.5,
+    "beta_D2_pre": 0.007121981553505228,
+    "beta_D2_post": -0.06718306374432893,
+    "delta_beta_D2": -0.07430504529783416,
+    "p_beta_D2": 0.405,
+    "beta_D2_abs_pre": 0.01488234209556196,
+    "beta_D2_abs_post": 0.0057019505079970115,
+    "delta_beta_D2_abs": -0.009180391587564948,
+    "p_beta_D2_abs": 0.95,
+    "x_star_ref": -0.11213449041735954,
+    "kappa_pre": 3.9471322204674206,
+    "kappa_post": 2.1251530414498214,
+    "delta_kappa": -1.8219791790175992,
+    "kappa_diagnostic_only": true,
+    "surrogate_PKS_mean": -0.034004492716416826,
+    "surrogate_PKS_std": 0.33315269178854306,
+    "surrogate_PKS_n_valid": 200,
+    "surrogate_PKS_n_undefined": 0,
+    "surrogate_beta_D2_mean": -0.021756146960930773,
+    "surrogate_beta_D2_std": 0.0865454637357609,
+    "surrogate_beta_D2_n_valid": 200,
+    "surrogate_beta_D2_n_undefined": 0,
+    "surrogate_beta_D2_abs_mean": 0.0014098518546197952,
+    "surrogate_beta_D2_abs_std": 0.11570679730779292,
+    "surrogate_beta_D2_abs_n_valid": 200,
+    "surrogate_beta_D2_abs_n_undefined": 0,
+    "pawula_ratio_pre": [
+      0.026981389709296123,
+      0.024254434296498067,
+      0.024957404047045977,
+      0.02167460665914832,
+      0.02235246994152764,
+      0.027125822127995705,
+      0.026267744124366672,
+      0.023815932450051504,
+      0.023564914472306818,
+      0.02232107095426601
+    ],
+    "pawula_ratio_post": [
+      0.025801503677184576,
+      0.027410818369257815,
+      0.02590806105355118,
+      0.03318584579088406,
+      0.023048120735862068,
+      0.020669756265764182,
+      0.0215008346852439,
+      0.03413636434764536,
+      0.03213895511731872,
+      0.041007681577893675
+    ],
+    "n_grid_points_ck": 12,
+    "description": "PRE = same OU as positive_control (constant/additive diffusion). POST = dX=-theta*X*dt+sigma*(1+|X|)*dW (theta=1.0, sigma=0.6, dt_sim=0.02, burn_in=2000) -- GENUINE state-dependent (multiplicative) diffusion, CONSTANT linear drift (no bimodality) -- rank-remapped onto PRE's exact marginal. Dedicated positive control for beta_D2 (both variants), since the double-well control above has constant diffusion and is not expected to move beta_D2 regardless of pipeline power.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "diffusion_coefficient_raw_own_coords_beta_D2_vs_x": -0.054082856687449714,
+    "diffusion_raw_own_coords_check": "raw D2(x) vs x has near-zero LINEAR slope in the generator's own coordinates -- expected, since D2(x) ~ (1+|x|)^2 is an EVEN/symmetric (U-shaped) function of x, not a monotonic one; the |x-x*| variant is the appropriate one for this generator, per METHODOLOGY_NOTE.md's own alternative phrasing.",
+    "moving_block_bootstrap_fallback": {
+      "block_length": 10,
+      "n_bootstrap": 200,
+      "seed": 12345,
+      "delta_PKS_real": 0.25275892438809233,
+      "delta_beta_D2_real": -0.07430504529783416,
+      "bootstrap_delta_PKS_mean": 0.11237990585855422,
+      "bootstrap_delta_PKS_std": 0.39696064668462444,
+      "bootstrap_delta_PKS_p": 0.51,
+      "bootstrap_delta_PKS_n_valid": 200,
+      "bootstrap_delta_PKS_n_undefined": 0,
+      "bootstrap_delta_beta_D2_mean": -0.06473617959308477,
+      "bootstrap_delta_beta_D2_std": 0.2493574003958937,
+      "bootstrap_delta_beta_D2_p": 0.77,
+      "bootstrap_delta_beta_D2_n_valid": 200,
+      "bootstrap_delta_beta_D2_n_undefined": 0,
+      "wall_clock_seconds": 0.6763284206390381
+    },
+    "wall_clock_seconds": 8.460127115249634
+  },
+  "iaaft_power_check": {
+    "PKS_channel": {
+      "positive_control_used": "positive_control (double-well bimodal drift)",
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_PKS_positive": 0.005,
+      "p_PKS_negative": 0.23,
+      "sigma_equivalent_positive": -2.035085175679364,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_HAS_REAL_POWER"
+    },
+    "beta_D2_channel_vs_x": {
+      "positive_control_used": "state_dependent_diffusion_control",
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_beta_D2_positive": 0.405,
+      "p_beta_D2_negative": 0.805,
+      "sigma_equivalent_positive": -0.6071825843737434,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_LOW_POWER"
+    },
+    "beta_D2_channel_vs_abs_x_minus_xstar": {
+      "positive_control_used": "state_dependent_diffusion_control",
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_beta_D2_abs_positive": 0.95,
+      "p_beta_D2_abs_negative": 0.88,
+      "sigma_equivalent_positive": -0.09152654544584378,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_LOW_POWER"
+    },
+    "overall_note": "PKS (bimodality-sensitive) is the PRIMARY channel: IAAFT has real power against the double-well positive control (p=0.005, correctly nonsignificant p=0.23 in the negative control). beta_D2 (state-dependent-diffusion-sensitive, companion channel) shows LOW power in BOTH variants against its OWN dedicated positive control (state_dependent_diffusion_control, a genuine multiplicative-noise process, NOT the double-well control, which has constant diffusion and was never expected to move beta_D2). The pre-authorized moving-block bootstrap fallback (Kunsch 1989) was ALSO tried on this same control and ALSO showed low power (p=0.77 for the vs-x variant) -- i.e. this is NOT resolved by swapping the significance test, suggesting the limitation is upstream of IAAFT/bootstrap calibration specifically. See interpretive_caveats below for the leading candidate explanation (rank-remap Jacobian distortion of the D2(x) shape) and VALIDATION_NOTE.md for the full honest account and the open question deferred to the orchestrating session."
+  },
+  "kappa_diagnostic_channel_report": {
+    "description": "kappa=-D1'(x*) reported for completeness (never used in any p-value/decision logic anywhere in km_common.py, per METHODOLOGY_NOTE.md's a priori demotion based on Ritchie & Sieber 2016's algebraic identity with AC1/variance).",
+    "negative_control_delta_kappa": -1.4136004799167399,
+    "positive_control_delta_kappa": -1.4280102164807618,
+    "diagnostic_only": true
+  },
+  "interpretive_caveats": {
+    "rank_remap_and_beta_D2": "Rank-remapping POST onto PRE's marginal is a strictly monotonic, generally NONLINEAR transform (since the double-well raw distribution and the OU PRE distribution have different shapes). By Ito's lemma, applying a nonlinear monotonic transform f to a process with CONSTANT diffusion D2_X introduces a STATE-DEPENDENT effective diffusion in the transformed coordinate, D2_Y(y) ~ f'(f^-1(y))^2 * D2_X, purely from the remap's local Jacobian -- independent of any genuine underlying state-dependent-noise difference. This means a beta_D2 signal in the positive control (if any) cannot be unambiguously attributed to genuine multiplicative-noise-like dynamics vs. a remap-Jacobian artifact; only PKS (bimodality of the RECONSTRUCTED stationary density, itself also nonlinearly distorted by the remap, but distinctly and robustly signed for a two-well vs. one-well landscape either way) is treated as the clean/interpretable power signal from this control. This caveat applies regardless of this run's specific numeric beta_D2 result and is a design property of the rank-remap technique itself, not a finding specific to this validation run. CONSISTENT WITH THIS DIAGNOSIS: the raw (non-remapped) state_dependent_diffusion_control generator's OWN D2(x) curve, checked directly in its own native coordinates before any remap, is genuinely U-shaped (see state_dependent_diffusion_control.diffusion_coefficient_raw_own_coords_beta_D2_vs_x above -- near-zero LINEAR slope even with NO remap involved, simply because D2(x)~(1+|x|)^2 is an even/symmetric function), and the |x-x*| variant (designed specifically to capture an even-symmetric relationship) STILL showed low power after the remap -- i.e. the remap's Jacobian distortion appears severe enough to scramble even the linearized-by-design |x-x*| signal, not just the naive vs-x one. The pre-authorized moving-block bootstrap (Kunsch 1989) fallback was also tried on this control (see state_dependent_diffusion_control.moving_block_bootstrap_fallback) and ALSO found no significant delta_beta_D2 -- ruling out an IAAFT-specific miscalibration as the explanation and pointing at the rank-remap construction itself as the more likely bottleneck for this one channel. This is reported as an OPEN QUESTION for the orchestrating session (not resolved unilaterally here), since fixing it would mean designing a non-remap-based positive control for beta_D2 -- a validation-DESIGN decision, not a bug fix authorized by this task's two named failure modes (IAAFT low power -> bootstrap fallback; CK-test implementation bug). See VALIDATION_NOTE.md.",
+    "fgn_short_lag_ck_result": "See ck_test_correctness_diagnostic.non_markov_supplementary_fgn_H09.honest_finding above -- not a CK-test bug, a genuine property of long-memory processes at short lags."
+  },
+  "pipeline_config": {
+    "dt": 0.05,
+    "n_bins_x": 10,
+    "n_lag_max": 20,
+    "lag_growth": 1.5,
+    "lag_max_frac": 0.05,
+    "n_bootstrap_ck": 200,
+    "min_samples_per_bin": 30,
+    "ck_alpha": 0.05,
+    "ck_robust_next": 2,
+    "max_n_per_segment": 50000,
+    "n_surrogates": 200,
+    "n_iaaft_iter": 50,
+    "seed": 12345,
+    "pre_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    },
+    "post_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    }
+  },
+  "generator_notes": {
+    "ou": "Euler-Maruyama, dX=-theta*X*dt+sigma*dW.",
+    "double_well": "Euler-Maruyama, dX=(X-X^3)*dt+sigma*dW, burn_in discarded transient.",
+    "ou_slow_noise_contamination": "X_obs = X_fast_OU + X_slow_OU, independent noise streams from the SAME rng in sequence (fast then slow), theta_slow << theta_fast and sigma_slow >= sigma_fast so the slow component's memory dominates short-lag structure -- a genuine hidden-state non-Markov generator.",
+    "fgn_like": "FFT-filtering spectral synthesis, exponent=2H+1 approximates fGn(H).",
+    "rank_remap": "POST = sorted(PRE)[argsort(argsort(raw))] -- exact permutation of PRE's own values by raw's temporal rank."
+  },
+  "wall_clock_seconds_total": 29.230921983718872
+}

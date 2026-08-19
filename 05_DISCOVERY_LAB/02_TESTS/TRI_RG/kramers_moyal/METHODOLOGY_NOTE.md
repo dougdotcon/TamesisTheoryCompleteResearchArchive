@@ -178,6 +178,52 @@ mudança de `PKS`/`beta_D2` excede o que um substituto de espectro
 casado produziria, um teste de significância de propósito geral, não
 específico a um risco nomeado.
 
+## Adendo — `beta_D2` demovido a diagnóstico; `PKS` único canal de decisão (fixado ANTES de dado real)
+
+A validação sintética obrigatória (`analysis/validate_synthetic.py`,
+commit `aa95e8f`, `VALIDATION_NOTE.md`) mostrou um resultado assimétrico
+entre os dois canais declarados no Gap (b):
+
+- **`PKS` (primário):** poder real confirmado — controle positivo
+  (SDE biestável de poço duplo, `dX=(X-X^3)dt+sigma*dW`, remapeado por
+  posto) recuperou `p=0,005` (fora da nula IAAFT, `sigma≈-2,04`),
+  controle negativo corretamente não-significativo (`p=0,23`).
+- **`beta_D2` (companheiro):** SEM poder detectável, nas duas variantes
+  já pré-autorizadas pelo Gap (b) (`vs. x` e `vs. |x-x*|`), mesmo após o
+  fallback de bootstrap por blocos móveis pré-autorizado (Kunsch 1989)
+  ser testado explicitamente no mesmo controle positivo dedicado
+  (`p=0,77`, ainda sem sinal) — descartando uma miscalibração específica
+  do IAAFT como explicação isolada.
+
+**Diagnóstico, investigado e documentado, não assumido:** o próprio
+gerador de controle positivo (difusão dependente de estado,
+`D2(x)∝x²`) tem `D2(x)` genuinamente em forma de U antes do
+remapeamento por posto — mas a técnica de remapeamento (uma
+transformação monotônica não-linear necessária para casar
+marginal/espectro com o PRE, mesma técnica usada em toda a linha) pode
+distorcer via Jacobiano exatamente a forma de `D2(x)` que `beta_D2`
+tenta capturar, mascarando o sinal que o gerador realmente carrega antes
+do remapeamento. Isso é uma limitação do DESENHO do controle de
+validação para este canal especificamente, não necessariamente uma
+prova de que `beta_D2` nunca teria poder sob outra construção — mas
+nenhuma terceira tentativa de redesenho é autorizada aqui (mesmo
+princípio de escalada limitada já usado no RQA: duas tentativas e um
+fallback já testados são suficientes para reportar honestamente os
+limites, sem transformar a validação num processo aberto de
+tentativa-e-erro).
+
+**Decisão, fixada ANTES de qualquer dado real (nenhuma razão de mudança
+de forma de potencial real foi calculada até este ponto):** `beta_D2` é
+retirado do critério de decisão desta rodada — mantido no código apenas
+como diagnóstico reportável, nunca como parte de um veredito de
+significância. `PKS` é o único canal de decisão para a análise de dado
+real. Mesma disciplina já aplicada a `d_B` em `grafo-de-visibilidade`
+(canal companheiro com poder não estabelecido, demovido antes do dado
+real) — a diferença aqui é que a causa é uma limitação do desenho do
+CONTROLE de validação (possível distorção de Jacobiano do
+remapeamento), não uma impossibilidade estrutural do próprio canal como
+foi o caso de `d_B`.
+
 ## O que este passo NÃO é
 
 Continua Fase 0/exploratório — `DISC-TRI-RG-001` segue

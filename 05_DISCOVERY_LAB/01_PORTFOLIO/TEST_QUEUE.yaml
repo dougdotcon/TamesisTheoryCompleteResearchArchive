@@ -1222,22 +1222,68 @@ queue:
       poder). Detalhes completos:
       02_TESTS/TRI_RG/permutation_entropy/{METHODOLOGY_NOTE.md,
       VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    kramers_moyal_gap_closing_result: >
+      2026-08-19: usuario pediu para fechar o candidato ranqueado #2 na
+      busca de Fase 0.6, kramers-moyal (reconstrucao de Fokker-Planck
+      via coeficientes de Kramers-Moyal). Metodologia fixada em
+      02_TESTS/TRI_RG/kramers_moyal/METHODOLOGY_NOTE.md ANTES de
+      qualquer calculo real: teste de Markov-Einstein/Chapman-Kolmogorov
+      para selecionar tau_ME (R_lambda orientado a dado), D1(x)/D2(x)
+      via momentos condicionais binados, I(X)=PKS (curtose de forma do
+      potencial reconstruido) primario + beta_D2 (dependencia de estado
+      do ruido) companheiro -- com kappa=-D1'(x*) demovido a
+      diagnostico-apenas DESDE O INICIO, com base em prova algebrica ja
+      publicada (Ritchie & Sieber 2016) de identidade com a taxa de
+      decaimento ja testada e refutada por critical_slowing_down.
+      VALIDACAO SINTETICA confirmou poder real e limpo para PKS
+      (controle positivo SDE biestavel, p=0,005; controle negativo
+      p=0,23); beta_D2 nao mostrou poder detectavel em nenhuma variante
+      nem sob o fallback de bootstrap pre-autorizado -- demovido tambem
+      a diagnostico por decisao da sessao orquestradora (adendo,
+      commit 9d35eeb), antes de qualquer dado real. RESULTADO REAL (2
+      dominios x 2 variantes): PhysioNet vfdb (arritmia ventricular
+      maligna, registro 418) -- propriedade de Markov NUNCA
+      ESTABELECIDA (teste de CK rejeita fortemente em quase todos os
+      lags curtos, esperado teoricamente para ECG bruto sem informacao
+      de fase cardiaca) -- tau_ME nao encontrado, PKS nao computado, em
+      ambas as variantes; EUR/CHF (choque do SNB, 15/01/2015) -- tau_ME
+      estabelecido normalmente no PRE, mas PKS fica ESTRUTURALMENTE
+      INDEFINIDO no POST (nao apenas nao-significativo): o choque
+      (~15% num dia, confirmado empiricamente) e grande demais para os
+      10 bins de quantil fixados do PRE resolverem o POST (~50% de todo
+      o POST cai num unico bin), retornando insufficient_defined_bins
+      -- consequencia honesta da propria regra de bins-fixos-do-PRE
+      (travada precisamente para evitar reestimacao ad hoc) colidindo
+      com um choque extremo. Reexecucao adversarial NAO acionada
+      (nenhum achado positivo computavel a explicar). Fechado sem
+      veredito de significancia computavel em nenhuma das 4
+      combinacoes, por dois motivos estruturais distintos e honestos
+      (nao um problema de poder de IAAFT). 9o candidato desta linha sem
+      achado sobrevivente. Nota metodologica para tentativas futuras
+      (nao decidida): bins definidos sobre a uniao PRE+POST, ou
+      normalizacao por log-retorno, poderiam evitar a colisao de bins
+      encontrada em choques extremos -- registrada, nao implementada.
+      Detalhes completos: 02_TESTS/TRI_RG/kramers_moyal/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      3 candidatos formalizados (viable=true) da Fase 0.6 ainda nao
-      fechados, aguardando escolha do usuario: Kramers-Moyal/Friedrich-
-      Peinke (rank #2), homologia persistente/TDA (rank #3), indice de
-      cauda EVT/Hill (rank #4). Ver phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md.
-      Alternativas: revisitar qualquer um dos 8 ja fechados com dados
-      diferentes, nova rodada de busca, ou considerar a linha
-      suficientemente explorada por ora (8/8 sem invariante confiavel,
-      incluindo o candidato com a validacao de poder mais limpa de toda
-      a linha). Toda a infraestrutura das buscas anteriores (8
+      2 candidatos formalizados (viable=true) da Fase 0.6 ainda nao
+      fechados, aguardando escolha do usuario: homologia persistente/
+      TDA (rank #3), indice de cauda EVT/Hill (rank #4). Ver
+      phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md. Alternativas: revisitar
+      qualquer um dos 9 ja fechados com dados diferentes, nova rodada de
+      busca, ou considerar a linha suficientemente explorada por ora
+      (9/9 sem invariante confiavel, incluindo um candidato -- entropia-
+      de-permutacao -- com a validacao de poder mais limpa de toda a
+      linha, e outro -- kramers-moyal -- cujo fechamento revelou um
+      motivo estrutural honesto por dominio em vez de um p-valor
+      simples). Toda a infraestrutura das buscas anteriores (9
       METHODOLOGY_NOTE.md, 7 pipelines validadas e aplicadas a dado
-      real, dominios reais de 16+ fontes testadas no total) fica
-      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
-      continua infraestrutura reaproveitavel candidata para hospedar um
-      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
-      quando esta linha produzir um achado.
+      real com veredito computavel, dominios reais de 18+ fontes
+      testadas no total) fica commitada e reaproveitavel.
+      01_TAMESIS_CORE/03_TRANSITION_ATLAS continua infraestrutura
+      reaproveitavel candidata para hospedar um resultado futuro depois
+      de sobreviver ao Gate de Replicacao, se e quando esta linha
+      produzir um achado.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

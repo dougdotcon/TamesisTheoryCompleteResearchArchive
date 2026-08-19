@@ -1,6 +1,6 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-18 (fechamento de `entropia-de-permutacao`, `DISC-TRI-RG-001` — 8º candidato fechado)
+**Última atualização:** 2026-08-19 (fechamento de `kramers-moyal`, `DISC-TRI-RG-001` — 9º candidato fechado)
 **Arquitetura:** motor 1 de 3 — ver `00_GOVERNANCE/RESEARCH_PIPELINE.md`
 (`05_DISCOVERY_LAB` → `03_REPLICATION_GATE` → `04_FORMAL_RESEARCH_LAB`,
 adotada em `DISC-DEC-003`). `04_FORMAL_RESEARCH_LAB` não é mais um
@@ -15,7 +15,7 @@ sobre nenhum Problema do Millennium).
 |---|---|
 | Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-004` encerrado (`CLOSED_INCONCLUSIVE`, 2026-08-18, ver seção própria abaixo — redesenho de SPARC-003 com desprojeção Monte Carlo completa; confundidor de multiplicidade oculta plausivelmente suficiente para explicar todo o sinal residual). `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE` — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` retomada em 2026-08-18 a pedido do usuário e agora COMPLETA — os 7 de 7 candidatos identificados na linha têm resultado final (6 NEGATIVO em dado real, `RQA` fechado na própria etapa de validação sem tocar dado real; ver seção própria abaixo) |
 | Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: os 3 candidatos viáveis da Fase 0 agora testados com rigor completo, os 3 NEGATIVO para invariante cross-domain — `critical-slowing-down` (GISP2/SDDB/NASDAQ), `wavelet-multiresolution-scaling` (Tohoku/CHB-MIT), `dfa-multiscale-entropy` (Apneia-ECG/GISP2, achado forte de 1 domínio explicado por mecanismo fisiológico já conhecido — CVHR — e não replicado no segundo domínio); mais 3 candidatos novos fechados NEGATIVO (`soc-avalanches`, `mse-multiscale-entropy`, `grafo-de-visibilidade` — este último com achado adicional decisivo: `d_B`, o canal originalmente primário, é estruturalmente não computável para séries estocásticas, small-world por construção; `C`, promovido a canal único ANTES de dado real, validado com poder real mas sem sinal em nenhum dos 2 domínios); e o 7º e último candidato, `RQA`, fechado na própria etapa de validação (identificabilidade nunca estabelecida, mesmo após uma correção de desenho pré-autorizada — dado real nunca tocado). Linha `DISC-TRI-RG-001` agora completa, 7/7 candidatos com resultado final. SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível (diluição por projeção). `CLOSED_INCONCLUSIVE`. SPARC-004: redesenho de SPARC-003 com desprojeção 3D via Monte Carlo (método primário de Chae 2023, estatística `δ_obs-newt`); `a0_fit=1,657×10⁻¹⁰` (IC95% `[1,232×10⁻¹⁰;2,181×10⁻¹⁰]`) após correção de um bug de assimetria de ruído astrométrico encontrado pela descoberta adversarial de nulos; veredito bruto `BOTH_FALSIFIED`, mas a checagem adversarial de multiplicidade oculta (gatilho pré-declarado) mostrou que companheiras não resolvidas, em magnitude plausível pela literatura, são sozinhas suficientes para explicar todo o sinal — `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
-| Próxima ação obrigatória | Nenhuma obrigatória. `DISC-TRI-RG-001`: Fase 0.6 encontrou 4 candidatos novos `viable=true`, dos quais `entropia-de-permutacao` (rank #1) já foi fechado NEGATIVO (2026-08-18, ver seção própria abaixo — 8º candidato desta linha, mas com a validação de PODER mais limpa e completa de toda a linha). Restam 3 candidatos formalizados não fechados: Kramers-Moyal/Friedrich-Peinke (rank #2), homologia persistente/TDA (rank #3), índice de cauda EVT/Hill (rank #4). Aguardando escolha do usuário: (a) fechar gaps de um dos 3 candidatos restantes; (b) implementar a auto-calibração completa de `f_multi` de Chae (Eqs. 11-13) e reabrir a linha SPARC com um pré-registro genuinamente novo sobre o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta; (e) revisitar algum dos 8 candidatos já fechados de TRI-RG com dados diferentes |
+| Próxima ação obrigatória | Nenhuma obrigatória. `DISC-TRI-RG-001`: Fase 0.6 encontrou 4 candidatos novos `viable=true`; `entropia-de-permutacao` (rank #1) e `kramers-moyal` (rank #2) já foram fechados sem invariante sobrevivente (ver seções próprias abaixo — 8º e 9º candidatos desta linha). Restam 2 candidatos formalizados não fechados: homologia persistente/TDA (rank #3), índice de cauda EVT/Hill (rank #4). Aguardando escolha do usuário: (a) fechar gaps de um dos 2 candidatos restantes; (b) implementar a auto-calibração completa de `f_multi` de Chae (Eqs. 11-13) e reabrir a linha SPARC com um pré-registro genuinamente novo sobre o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta; (e) revisitar algum dos 9 candidatos já fechados de TRI-RG com dados diferentes |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (1ª pausa de `DISC-TRI-RG-001`, revertida em 2026-08-14), `DISC-DEC-006` (2ª pausa, revertida em 2026-08-15), `DISC-DEC-007` (3ª pausa de `DISC-TRI-RG-001` a pedido do usuário, 2026-08-15, após 5 dos 6 candidatos considerados na nova busca resultarem NEGATIVO) |
 | Claims fechados/registrados | 6 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]; `DISC-CLAIM-006`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [confundidor de multiplicidade oculta plausivelmente suficiente para explicar o sinal residual, não erro de implementação — o bug de assimetria de ruído foi corrigido antes de catalogar]) |
 | Claims em andamento | 0 |
@@ -766,6 +766,52 @@ original + este) sem invariante cross-domain sobrevivente. Restam 3
 candidatos formalizados da Fase 0.6 ainda não fechados: Kramers-Moyal/
 Friedrich-Peinke (rank #2), homologia persistente/TDA (rank #3), índice
 de cauda EVT/Hill (rank #4).
+
+## Fechamento de gaps de `kramers-moyal` (2026-08-19) — sem veredito computável, dois motivos estruturais honestos
+
+Usuário pediu para fechar o candidato ranqueado #2 na Fase 0.6.
+Metodologia (teste de Markov-Einstein/Chapman-Kolmogorov para `tau_ME`;
+`I(X)=PKS`, curtose de forma do potencial reconstruído) fixada em
+`02_TESTS/TRI_RG/kramers_moyal/METHODOLOGY_NOTE.md` ANTES de qualquer
+cálculo real — incluindo uma decisão a priori incomum: `kappa`
+(taxa de decaimento local) foi demovido a diagnóstico-apenas DESDE O
+INÍCIO, com base numa prova algébrica publicada (Ritchie & Sieber 2016,
+não uma correlação empírica) de que é identidade exata com a mesma
+grandeza que `critical_slowing_down` já testou e refutou.
+
+**Validação sintética:** `PKS` (canal primário) confirmado com poder
+real e limpo (`p=0,005` no controle positivo de SDE biestável, `p=0,23`
+no negativo). `beta_D2` (companheiro) não mostrou poder detectável em
+nenhuma das duas variantes pré-autorizadas nem sob o fallback de
+bootstrap — demovido também a diagnóstico por decisão da sessão
+orquestradora (adendo, commit `9d35eeb`), ANTES de qualquer dado real.
+
+**Resultado real, dois motivos estruturais distintos, nenhum deles
+problema de poder do IAAFT:**
+- **PhysioNet `vfdb`** (arritmia ventricular maligna, registro 418):
+  propriedade de Markov NUNCA estabelecida — o teste de CK rejeita
+  fortemente em quase todos os lags curtos testados, resultado
+  teoricamente esperado para amplitude bruta de ECG sem informação de
+  fase cardíaca. `tau_ME` não encontrado, `PKS` não computado.
+- **EUR/CHF** (choque do SNB, 15/01/2015, confirmado empiricamente:
+  preço caiu de 1,200975 para 1,020855 em 5min): `tau_ME` estabelecido
+  normalmente no PRE, mas `PKS` fica ESTRUTURALMENTE INDEFINIDO no
+  POST — o choque (~15% num dia) é grande demais para os 10 bins de
+  quantil fixados do PRE resolverem o POST (~50% de todo o POST cai
+  num único bin), consequência honesta da própria regra "bins fixados
+  do PRE" (travada precisamente para evitar reestimação ad hoc)
+  colidindo com um choque de magnitude extrema.
+
+Reexecução adversarial não acionada (nenhum achado positivo computável
+a explicar). Uma nota metodológica para tentativas futuras (bins sobre
+a união PRE+POST, ou normalização por log-retorno) foi registrada, não
+implementada. Detalhes completos:
+`02_TESTS/TRI_RG/kramers_moyal/RESULTS_SUMMARY.md`.
+
+**Estado da linha:** 9 dos 9 candidatos fechados até agora sem
+invariante cross-domain sobrevivente. Restam 2 candidatos formalizados
+da Fase 0.6 ainda não fechados: homologia persistente/TDA (rank #3),
+índice de cauda EVT/Hill (rank #4).
 
 ## O que já foi feito nesta trilha
 

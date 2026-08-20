@@ -1414,24 +1414,68 @@ queue:
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md,
       analysis/CONFOUND_CHECK_DAPHNET.md,
       analysis/ADVERSARIAL_REPRODUCTION_DAPHNET.md}.
+    largest_lyapunov_exponent_gap_closing_result: >
+      2026-08-20: usuario pediu para fechar o segundo candidato da Fase
+      0.7, maior expoente de Lyapunov (LLE, algoritmo de Rosenstein et
+      al. 1993). Metodologia fixada em METHODOLOGY_NOTE.md ANTES de
+      qualquer calculo real: gate de FNN OBRIGATORIO e nao-negociavel
+      (R_tol=10, A_tol=2, m<=10, REJEITE duro sem fallback forcado --
+      risco ja nomeado a priori na propria sondagem da Fase 0.7, ja que
+      a inclinacao bruta de Rosenstein nao falha de forma limpa em
+      ruido, diferente do NOT_COMPUTABLE honesto de %DET/ENTR do RQA),
+      embedding PRE/POST compartilhado reaproveitado de
+      rqa/analysis/rqa_common.py (importacao direta, nao
+      reimplementacao), janela de Theiler via periodo orbital medio
+      (convencao de Rosenstein, distinta do w=tau do RQA), regiao de
+      ajuste linear via criterio de convergencia de Kantz-Schreiber
+      2004 + gate de R²>=0,95 (refinamento mecanico adicionado durante
+      diagnostico de correcao de codigo, ANTES de qualquer controle
+      estocastico -- corrige um bug real onde o plato de saturacao de
+      um atrator caotico limitado seria trivialmente "estavel"),
+      I(X)=lambda_1 (primario) + D2 (companheiro, dimensao de
+      correlacao de Grassberger-Procaccia). VALIDACAO SINTETICA:
+      tentativa 1 (PRE=ruido branco) reproduziu EXATAMENTE a mesma
+      parede estrutural do RQA -- FNN nunca resolve m<=10 para ruido
+      branco/fGn fracamente correlacionado (curva de fracao de FNN
+      quase identica a do RQA), bloqueando os 2 canais simultaneamente;
+      confirmado via bootstrap (0/25 reamostras resolveram embedding)
+      que e parede estrutural, nao falta de poder do IAAFT. Acionou o
+      redesenho pre-autorizado (mesmo gatilho mecanico do RQA):
+      tentativa 2 (PRE=fGn H=0,7, POST=Rossler rank-remapeado) resolveu
+      o embedding (m=4,tau=40 -- mesmos valores do RQA para o par
+      equivalente) mas SEM poder estatistico real em nenhum canal
+      (p_lambda1=1,0, p_d2=0,16, ambos IAAFT_LOW_POWER). Por decisao
+      pre-fixada, nenhuma terceira tentativa foi autorizada.
+      FECHADO NA ETAPA DE VALIDACAO -- dado real (Kilauea 2018 inicio
+      explosivo de 17/05, MIT-BIH afdb registro 04936) nunca tocado.
+      2o candidato desta linha a fechar assim (apos RQA), confirmando
+      que a maquinaria de embedding compartilhada (FNN/informacao
+      mutua) e um risco estrutural real e recorrente para candidatos
+      desta linha, nao um acidente isolado. Detalhes completos:
+      02_TESTS/TRI_RG/largest_lyapunov_exponent/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      Fase 0.7: 1 de 3 candidatos formalizados fechado (complexidade de
-      Lempel-Ziv, negativo apos reexecucao adversarial). Restam 2
-      candidatos formalizados com viable=true, ainda nao travados nem
-      testados: maior expoente de Lyapunov (rank 2 -- validacao sintetica
-      de 2 etapas obrigatoria antes de dado real, dado o risco conhecido
-      de nao-convergencia de FNN ja visto no RQA) e DMD/espectro de
-      Koopman (rank 3 -- canal primario ja revisado durante a propria
-      Fase 0.7 apos ser encontrado identico ao critical-slowing-down).
-      Aguardando escolha do usuario sobre qual fechar em seguida, ou
-      considerar a linha suficientemente explorada por ora. status
-      permanece CANDIDATE_FORMULATING. Toda a infraestrutura das buscas
-      anteriores (12 METHODOLOGY_NOTE.md agora, pipelines validadas,
-      dominios reais de 20+ fontes testadas no total) permanece
-      commitada e reaproveitavel, incluindo os dominios verificados
-      pelos 2 candidatos viable=false da Fase 0.7 (MIT-BIH afdb 08215,
-      Bitcoin out/2025, SCADA de turbina eolica Kelmarsh, extensao de
-      gelo marinho artico 2007).
+      Fase 0.7: 2 de 3 candidatos formalizados fechados (complexidade de
+      Lempel-Ziv, negativo apos reexecucao adversarial; maior expoente
+      de Lyapunov, fechado na etapa de validacao). Resta 1 candidato
+      formalizado com viable=true, ainda nao travado nem testado:
+      DMD/espectro de Koopman (rank 3 -- canal primario ja revisado
+      durante a propria Fase 0.7 apos ser encontrado identico ao
+      critical-slowing-down; herda o MESMO risco de embedding
+      Hankel/Takens que ja fechou RQA e maior-expoente-de-Lyapunov na
+      validacao 2x consecutivas nesta linha -- checagem de controle
+      positivo ANTES de qualquer dado real e obrigatoria, mesmo padrao
+      agora confirmado necessario). Aguardando escolha do usuario sobre
+      fechar DMD/Koopman em seguida, ou considerar a linha
+      suficientemente explorada por ora (13/13 candidatos identificados
+      ate agora com resultado final, nenhum invariante cross-domain
+      sobrevivente). status permanece CANDIDATE_FORMULATING. Toda a
+      infraestrutura das buscas anteriores (13 METHODOLOGY_NOTE.md
+      agora, pipelines validadas, dominios reais de 20+ fontes testadas
+      no total) permanece commitada e reaproveitavel, incluindo os
+      dominios verificados pelos 2 candidatos viable=false da Fase 0.7
+      (MIT-BIH afdb 08215, Bitcoin out/2025, SCADA de turbina eolica
+      Kelmarsh, extensao de gelo marinho artico 2007).
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

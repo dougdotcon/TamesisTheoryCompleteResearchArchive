@@ -483,3 +483,79 @@ decisions:
       - "toda a infraestrutura desta linha (5 METHODOLOGY_NOTE.md, 5 pipelines validadas, dados reais de 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT/Ridgecrest/GOES/geomagnetismo-1989/FEMTO-rolamento, resultados JSON, relatorios de sessao) permanece no repositorio, commitada e reaproveitavel para retomada futura"
       - "2 candidatos formalizados (grafo de visibilidade, RQA) permanecem disponiveis com viable=true, prontos para fechamento de gaps sem precisar de nova busca, se e quando a linha for retomada"
       - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"
+
+  - decision_id: DISC-DEC-008
+    date: 2026-08-20
+    decision: >
+      Considerar DISC-TRI-RG-001 (busca de invariante cross-domain via
+      lente de renormalizacao/coarse-graining) suficientemente explorada
+      por ora, a pedido explicito do usuario -- quarta vez que esta
+      decisao e tomada (DISC-DEC-005 e DISC-DEC-006 foram revertidas pelo
+      proprio usuario ao pedir retomada/nova busca; DISC-DEC-007, a
+      terceira pausa, tambem foi revertida quando o usuario pediu
+      retomada e fechamento dos 2 candidatos entao pendentes). Linha
+      PAUSADA, nao fechada: DISC-TRI-RG-001 permanece
+      CANDIDATE_FORMULATING em TEST_QUEUE.yaml (nenhum candidato foi
+      travado em PREREGISTRATION.md em nenhum momento de sua historia),
+      disponivel para retomada futura sem exigir nova formulacao do zero
+      -- toda a infraestrutura de todos os 11 candidatos ja identificados
+      fica reaproveitavel para revisita com dominios/dados diferentes, e
+      uma nova rodada de busca por candidatos ainda nao considerados
+      continua sendo uma via de retomada valida, como ja demonstrado pela
+      Fase 0.6.
+    rationale: >
+      Desde DISC-DEC-007, o usuario pediu retomada explicita e, em
+      sequencia, o fechamento dos 2 candidatos entao formalizados mas
+      pendentes (grafo de visibilidade, RQA), seguido de uma nova rodada
+      de busca (Fase 0.6, 5 agentes independentes, 4 candidatos novos
+      viable=true + 1 viable=false com justificativa analitica rigorosa
+      citando van Enter-Fernandez-Sokal 1993), e entao o fechamento
+      sequencial dos 4 candidatos da Fase 0.6 (entropia de permutacao,
+      Kramers-Moyal, indice de cauda EVT/Hill, homologia
+      persistente/TDA). Todos os 6 fechamentos desta janela seguiram a
+      disciplina completa ja estabelecida na linha: METHODOLOGY_NOTE.md
+      travado e commitado antes de qualquer calculo real, validacao
+      contra dado sintetico com controles positivo e negativo,
+      disciplina de "uma correcao delimitada e pre-declarada, depois
+      fechar" quando a validacao revelou problemas de desenho (grafo de
+      visibilidade: d_B rebaixado a diagnostico apos nao-computabilidade
+      estrutural; RQA: redesenho do controle positivo para o sistema de
+      Rossler, ainda assim fechado na etapa de validacao por falha
+      estrutural de resolucao de embedding para ruido branco;
+      Kramers-Moyal: kappa rebaixado a priori por identidade algebrica
+      da literatura, beta_D2 rebaixado apos falta de poder mesmo com
+      fallback de bootstrap; homologia persistente: fechado na etapa de
+      validacao apos IAAFT E o fallback de bootstrap pre-autorizado
+      falharem em mostrar poder em ambos os canais, confirmando
+      empiricamente o risco de redundancia com %DET(RQA) ja medido
+      informalmente na propria Fase 0.6, r~=0,92). RESULTADO: os 11
+      candidatos identificados ate agora nesta linha (3 da Fase 0
+      original + soc-avalanches + mse-multiscale-entropy da busca
+      anterior + grafo de visibilidade + RQA + os 4 da Fase 0.6) tem
+      todos resultado final -- nenhum produziu um invariante cross-domain
+      sobrevivente. 2 fecharam na etapa de validacao por falha
+      estrutural/de poder antes de tocar dado real (RQA, homologia
+      persistente); os demais foram testados ate o dado real e
+      terminaram negativos ou estruturalmente nao-testaveis (EVT/Hill:
+      piso de amostra em PDX, sem significancia no canal primario em
+      Cape Fear; Kramers-Moyal: propriedade de Markov nunca estabelecida
+      em vfdb, PKS estruturalmente indefinido em EUR/CHF por colapso de
+      bin). Dado que todos os candidatos ate agora identificados,
+      incluindo uma rodada de busca inteiramente nova gerada
+      especificamente para superar o esgotamento da rodada anterior, ja
+      terminaram sem produzir um achado cross-domain sobrevivente, o
+      usuario decidiu pausar a linha nesta 11a parada em vez de gerar
+      imediatamente uma 12a rodada de busca.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: next_action atualizado para refletir a pausa)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status permanece CANDIDATE_FORMULATING (mesma nota de DISC-DEC-005/006/007 -- nao ha status 'PAUSED' formal na maquina de estados de TEST_QUEUE.yaml)"
+      - "nenhum arquivo de teste (PREREGISTRATION.md, CLAIM_LEDGER.yaml) criado ou modificado -- nao ha claim a fechar, pois nenhum pre-registro foi travado nesta linha em nenhum momento de sua historia"
+    untouched_safeguards:
+      - "toda a infraestrutura desta linha (11 METHODOLOGY_NOTE.md, 11 pipelines validadas, dados reais de 4 registros de apneia + GISP2/SDDB/NASDAQ/Tohoku/CHB-MIT/Ridgecrest/GOES/geomagnetismo-1989/FEMTO-rolamento/wide-binaries-Gaia/Rossler-sintetico/VitalDB/EDB/VFDB/EUR-CHF/PDX-NOAA/Cape-Fear-USGS/LIGO-GW150914/S&P500, resultados JSON, RESULTS_SUMMARY.md e relatorios de sessao de cada candidato) permanece no repositorio, commitada e reaproveitavel para retomada futura"
+      - "os 11 candidatos identificados desde a criacao da linha permanecem documentados com resultado final honesto (2 fechados na etapa de validacao, 9 testados ate o dado real ou ate uma parede estrutural de nao-testabilidade), disponiveis para revisita com dominios/dados diferentes dos ja usados sem precisar refazer o desenho metodologico do zero"
+      - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"

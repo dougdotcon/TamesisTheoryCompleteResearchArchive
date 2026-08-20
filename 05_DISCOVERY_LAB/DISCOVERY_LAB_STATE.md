@@ -1,6 +1,6 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-19 (fechamento de `evt-hill`, `DISC-TRI-RG-001` — 10º candidato fechado, resta só TDA)
+**Última atualização:** 2026-08-20 (fechamento de `homologia-persistente`, `DISC-TRI-RG-001` — 11/11 candidatos identificados fechados, Fase 0.6 completa)
 **Arquitetura:** motor 1 de 3 — ver `00_GOVERNANCE/RESEARCH_PIPELINE.md`
 (`05_DISCOVERY_LAB` → `03_REPLICATION_GATE` → `04_FORMAL_RESEARCH_LAB`,
 adotada em `DISC-DEC-003`). `04_FORMAL_RESEARCH_LAB` não é mais um
@@ -15,7 +15,7 @@ sobre nenhum Problema do Millennium).
 |---|---|
 | Teste ativo | Nenhum. `DISC-COSMOLOGY-MOND-SPARC-004` encerrado (`CLOSED_INCONCLUSIVE`, 2026-08-18, ver seção própria abaixo — redesenho de SPARC-003 com desprojeção Monte Carlo completa; confundidor de multiplicidade oculta plausivelmente suficiente para explicar todo o sinal residual). `DISC-COSMOLOGY-MOND-SPARC-003` encerrado (`CLOSED_INCONCLUSIVE` — estatística pré-registrada estruturalmente incapaz de produzir veredito válido, não erro nem falta de dado). `DISC-RH-ZERO-GAP-RUNS-001` encerrado (`REPLICATION_PASSED`). `DISC-RH-GAP-EXTREME-VALUE-SCALING-001` encerrado (`REPLICATION_FAILED` — inconclusivo por falta de poder no dataset reservado, achado primário NÃO contradito). `DISC-COSMOLOGY-MOND-SPARC-002` encerrado (`REPLICATION_FAILED`). `DISC-COSMOLOGY-MOND-SPARC-001` encerrado (`CLOSED_INCONCLUSIVE`). `DISC-TRI-RG-001` retomada em 2026-08-18 a pedido do usuário e agora COMPLETA — os 7 de 7 candidatos identificados na linha têm resultado final (6 NEGATIVO em dado real, `RQA` fechado na própria etapa de validação sem tocar dado real; ver seção própria abaixo) |
 | Fase | RH-REAL: dois sub-testes concluídos, ambos com Gate de Replicação completo acionado. (1) `DISC-RH-ZERO-GAP-RUNS-001`: `INVERSE_SIGNAL` `REPLICATION_PASSED` — gaps grandes consecutivos são menos comuns que sob reordenação aleatória, confirmado em 3 regimes de altura (~75.000, ~10¹², ~10²¹). (2) `DISC-RH-GAP-EXTREME-VALUE-SCALING-001`: gap mínimo escala como `N^(-1/3)` (GUE), exclui `N^(-1)` (Poisson) e `N^(-1/2)` (GOE) — `β̂=-0,3395` vs. previsão `-0,3333`, `evidence_level: preregistered_confirmed` sobre o dataset primário; Gate no terceiro dataset reservado (`zeros5.txt`, #10²²) resultou `REPLICATION_FAILED` por amostra pequena demais para a grade travada (0 blocos possíveis em N=10.000) — inconclusivo, não contraditório. TRI-RG: os 3 candidatos viáveis da Fase 0 agora testados com rigor completo, os 3 NEGATIVO para invariante cross-domain — `critical-slowing-down` (GISP2/SDDB/NASDAQ), `wavelet-multiresolution-scaling` (Tohoku/CHB-MIT), `dfa-multiscale-entropy` (Apneia-ECG/GISP2, achado forte de 1 domínio explicado por mecanismo fisiológico já conhecido — CVHR — e não replicado no segundo domínio); mais 3 candidatos novos fechados NEGATIVO (`soc-avalanches`, `mse-multiscale-entropy`, `grafo-de-visibilidade` — este último com achado adicional decisivo: `d_B`, o canal originalmente primário, é estruturalmente não computável para séries estocásticas, small-world por construção; `C`, promovido a canal único ANTES de dado real, validado com poder real mas sem sinal em nenhum dos 2 domínios); e o 7º e último candidato, `RQA`, fechado na própria etapa de validação (identificabilidade nunca estabelecida, mesmo após uma correção de desenho pré-autorizada — dado real nunca tocado). Linha `DISC-TRI-RG-001` agora completa, 7/7 candidatos com resultado final. SPARC-003: pré-registro travado como réplica independente do veredito de SPARC-002 via binárias largas Gaia reais (43.147 sistemas pós-corte); modelo MOND pré-registrado tem imagem `(1,+∞)` mas as 5 medianas empíricas reais são todas `<1` — ajuste estruturalmente impossível (diluição por projeção). `CLOSED_INCONCLUSIVE`. SPARC-004: redesenho de SPARC-003 com desprojeção 3D via Monte Carlo (método primário de Chae 2023, estatística `δ_obs-newt`); `a0_fit=1,657×10⁻¹⁰` (IC95% `[1,232×10⁻¹⁰;2,181×10⁻¹⁰]`) após correção de um bug de assimetria de ruído astrométrico encontrado pela descoberta adversarial de nulos; veredito bruto `BOTH_FALSIFIED`, mas a checagem adversarial de multiplicidade oculta (gatilho pré-declarado) mostrou que companheiras não resolvidas, em magnitude plausível pela literatura, são sozinhas suficientes para explicar todo o sinal — `CLOSED_INCONCLUSIVE`, nenhum veredito H_A/H_B aceito |
-| Próxima ação obrigatória | Nenhuma obrigatória. `DISC-TRI-RG-001`: Fase 0.6 encontrou 4 candidatos novos `viable=true`; `entropia-de-permutacao` (rank #1), `kramers-moyal` (rank #2) e `evt-hill` (rank #4) já foram fechados sem invariante sobrevivente (ver seções próprias abaixo — 8º, 9º e 10º candidatos desta linha). Resta 1 candidato formalizado não fechado: homologia persistente/TDA (rank #3). Aguardando escolha do usuário: (a) fechar gaps de TDA; (b) implementar a auto-calibração completa de `f_multi` de Chae (Eqs. 11-13) e reabrir a linha SPARC com um pré-registro genuinamente novo sobre o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta; (e) revisitar algum dos 10 candidatos já fechados de TRI-RG com dados diferentes |
+| Próxima ação obrigatória | Nenhuma obrigatória. `DISC-TRI-RG-001`: Fase 0.6 completa — todos os 4 candidatos novos `viable=true` (`entropia-de-permutacao`, `kramers-moyal`, `homologia-persistente`, `evt-hill`) fechados sem invariante sobrevivente (ver seções próprias abaixo). **Os 11 candidatos identificados nesta linha desde sua criação têm resultado final — nenhum produziu invariante cross-domain confiável.** Aguardando escolha do usuário: (a) nova rodada de busca por candidatos ainda não considerados; (b) implementar a auto-calibração completa de `f_multi` de Chae (Eqs. 11-13) e reabrir a linha SPARC com um pré-registro genuinamente novo sobre o holdout selado; (c) investigar o achado de integridade de `gaia_real_analysis.py`; (d) nova linha inteiramente distinta; (e) revisitar algum dos 11 candidatos já fechados de TRI-RG com dados diferentes; (f) considerar a linha TRI-RG suficientemente explorada por ora |
 | Decisões de governança | `DISC-DEC-001` (criação da trilha), `DISC-DEC-002` (fechamento do piloto), `DISC-DEC-003` (arquitetura de três motores + seis extensões), `DISC-DEC-004` (pivô de SPARC-002 + pré-registro do teste de derivação de a₀), `DISC-DEC-005` (1ª pausa de `DISC-TRI-RG-001`, revertida em 2026-08-14), `DISC-DEC-006` (2ª pausa, revertida em 2026-08-15), `DISC-DEC-007` (3ª pausa de `DISC-TRI-RG-001` a pedido do usuário, 2026-08-15, após 5 dos 6 candidatos considerados na nova busca resultarem NEGATIVO) |
 | Claims fechados/registrados | 6 (`DISC-CLAIM-001`, `preregistered_inconclusive`; `DISC-CLAIM-002`, `preregistered_inconclusive` após Gate, `replication_status: REPLICATION_FAILED`; `DISC-CLAIM-003`, `preregistered_falsified` [direção de H, efeito real na direção oposta], `replication_status: REPLICATION_PASSED`; `DISC-CLAIM-004`, `preregistered_confirmed`, `adversarial_review_verdict: CONFIRMED`, `replication_status: REPLICATION_FAILED` [inconclusivo por falta de poder no dataset reservado, não contradição]; `DISC-CLAIM-005`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [estatística estruturalmente incapaz de produzir veredito válido, não erro de implementação]; `DISC-CLAIM-006`, `preregistered_inconclusive`, `adversarial_review_verdict: METHODOLOGY_FLAW_FOUND` [confundidor de multiplicidade oculta plausivelmente suficiente para explicar o sinal residual, não erro de implementação — o bug de assimetria de ruído foi corrigido antes de catalogar]) |
 | Claims em andamento | 0 |
@@ -849,6 +849,46 @@ acionada — evidência circunstancial pesa contra o confundidor
 **Estado da linha:** 10 dos 11 candidatos identificados fechados sem
 invariante cross-domain sobrevivente. Resta apenas 1 candidato
 formalizado não fechado: homologia persistente/TDA (rank #3).
+
+## Fechamento de gaps de `homologia-persistente` (2026-08-20) — fechado NA VALIDAÇÃO, Fase 0.6 completa
+
+Usuário pediu para fechar o último candidato formalizado da Fase 0.6
+(rank #3, TDA via filtração de Vietoris-Rips sobre embedding de
+Takens). Metodologia fixada em
+`02_TESTS/TRI_RG/persistent_homology/METHODOLOGY_NOTE.md` ANTES de
+qualquer cálculo real: embedding `m=3` FIXO (deliberadamente diferente
+da regra de FNN do RQA, que já falhara estruturalmente para ruído
+branco), desenho de sub-janelas (`N_WINDOW=200`, até 10 por segmento)
+diretamente motivado pelo custo computacional já MEDIDO na Fase 0.6.
+
+**Validação sintética — achado decisivo, respondendo diretamente ao
+risco já medido na Fase 0.6** (correlação `r≈0,92` entre persistência
+máxima de H1 e um análogo do `%DET`(RQA) num teste informal): os DOIS
+canais (`I(X)`=persistência máxima e total de H1) mostraram
+`IAAFT_LOW_POWER` contra o controle positivo não-linear (`p=0,355` e
+`p=0,320`), e o fallback de bootstrap por blocos móveis pré-autorizado,
+acionado automaticamente, TAMBÉM não mostrou poder (`p=0,454`/`0,368`).
+Controle negativo corretamente não-significativo em ambos os testes.
+Diagnóstico de correção de código passou limpo (onda senoidal traça um
+laço inequívoco em espaço de fase).
+
+**Mecanismo diferente de como o RQA falhou, resultado final igual:** o
+embedding com `m=3` fixo resolveu perfeitamente em ~1.200 séries (zero
+falhas de `tau`) — o problema não é resolução de embedding, é que a
+própria estatística de persistência não separa sinal caótico genuíno de
+ruído colorido de espectro casado, sob este desenho. Fechado NA ETAPA DE
+VALIDAÇÃO, sem terceira tentativa de redesenho (mesma disciplina já
+usada no RQA) — o dado real (LIGO GW150914, S&P500/Lehman) nunca foi
+tocado. Detalhes completos:
+`02_TESTS/TRI_RG/persistent_homology/RESULTS_SUMMARY.md`.
+
+**Estado da linha:** Fase 0.6 completa — 4 de 4 candidatos formalizados
+fechados, nenhum produziu invariante cross-domain sobrevivente. **11 de
+11 candidatos identificados nesta linha, desde sua criação, têm
+resultado final** (2 fechados na etapa de validação — RQA e
+homologia-persistente —, 9 testados até dado real, todos negativos ou
+estruturalmente não-testáveis). Nenhum invariante cross-domain
+confiável foi encontrado por esta linha até agora.
 
 ## O que já foi feito nesta trilha
 

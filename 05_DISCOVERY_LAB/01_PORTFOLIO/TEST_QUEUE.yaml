@@ -1308,32 +1308,65 @@ queue:
       formalizado da Fase 0.6, sem invariante cross-domain sobrevivente.
       Detalhes completos: 02_TESTS/TRI_RG/evt_hill/
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    persistent_homology_gap_closing_result: >
+      2026-08-20: usuario pediu para fechar o ultimo candidato
+      formalizado da Fase 0.6, homologia-persistente (TDA via filtracao
+      de Vietoris-Rips sobre embedding de Takens, rank #3). Metodologia
+      fixada em 02_TESTS/TRI_RG/persistent_homology/METHODOLOGY_NOTE.md
+      ANTES de qualquer calculo real: embedding m=3 FIXO (deliberadamente
+      diferente da regra de FNN do RQA, que ja falhara estruturalmente),
+      desenho de sub-janelas (N_WINDOW=200, ate 10 por segmento)
+      diretamente motivado pelo custo computacional ja MEDIDO na Fase
+      0.6, I(X)=persistencia maxima de H1 (primario) + persistencia
+      total (companheiro), protocolo IAAFT. Diagnostico de correcao de
+      codigo passou limpo (onda senoidal traca um laco inequivoco).
+      VALIDACAO SINTETICA -- achado decisivo, respondendo diretamente
+      ao risco ja medido na Fase 0.6 (correlacao r~0,92 entre
+      persistencia maxima e um analogo de %DET do RQA): os DOIS canais
+      mostraram IAAFT_LOW_POWER contra o controle positivo (mapa
+      logistico, p=0,355/0,320), e o fallback de bootstrap por blocos
+      moveis pre-autorizado, acionado automaticamente, TAMBEM nao
+      mostrou poder (p=0,454/0,368). Controle negativo corretamente
+      nao-significativo em ambos os testes. Mecanismo DIFERENTE de como
+      o RQA falhou (aqui o embedding resolveu perfeitamente em ~1.200
+      series, zero falhas de tau -- e a propria estatistica de
+      persistencia que nao separa sinal caotico de ruido colorido de
+      espectro casado), mas resultado final igual: fechado NA ETAPA DE
+      VALIDACAO, sem nenhuma terceira tentativa de redesenho autorizada
+      (mesma disciplina ja usada no RQA), dado real (LIGO GW150914,
+      S&P500/Lehman) NUNCA TOCADO. Isto fecha os 4 de 4 candidatos
+      formalizados da Fase 0.6 -- nenhum produziu invariante cross-
+      domain sobrevivente. 11o e ultimo candidato identificado nesta
+      linha ate agora, sem achado cross-domain sobrevivente (2 fechados
+      na validacao -- RQA e este --, 9 testados ate dado real, todos
+      negativos ou estruturalmente nao-testaveis). Detalhes completos:
+      02_TESTS/TRI_RG/persistent_homology/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      10 de 11 candidatos identificados nesta linha ate agora (3 da
-      Fase 0 original + 4 da busca de 2026-08-15 + 4 da busca de
-      2026-08-18) tem resultado final -- os 10 sem invariante
-      cross-domain confiavel. Resta apenas 1 candidato formalizado
-      (viable=true) nao fechado: homologia persistente/TDA (rank #3 da
-      Fase 0.6) -- ver phase0/PHASE0_6_SURVEY_NEW_CANDIDATES.md.
-      Aguardando proxima direcao do usuario: (a) fechar gaps de TDA;
-      (b) nova rodada de busca por candidatos ainda nao considerados;
-      (c) revisitar qualquer um dos 10 ja fechados com dados
-      diferentes; (d) considerar a linha suficientemente explorada por
-      ora -- 10/10 sem invariante confiavel e um padrao consistente de
-      motivos honestos e distintos (baixo poder corrigido, nao-
-      computabilidade estrutural, redundancia com familia Hurst,
-      confundidores mundanos plausiveis, piso de amostra) e um forte
-      prior contra a hipotese central desta linha tal como formulada
-      ate aqui, nao uma prova de impossibilidade; (e) outra linha do
-      laboratorio (SPARC com auto-calibracao de f_multi, achado de
-      integridade de gaia_real_analysis.py, ou linha inteiramente
-      nova). Toda a infraestrutura das buscas (10 METHODOLOGY_NOTE.md,
-      8 pipelines validadas e aplicadas a dado real com veredito
-      computavel, dominios reais de 20+ fontes testadas no total) fica
-      commitada e reaproveitavel. 01_TAMESIS_CORE/03_TRANSITION_ATLAS
-      continua infraestrutura reaproveitavel candidata para hospedar um
-      resultado futuro depois de sobreviver ao Gate de Replicacao, se e
-      quando esta linha produzir um achado.
+      NENHUM candidato formalizado pendente -- os 11 candidatos
+      identificados nesta linha ate agora (3 da Fase 0 original + 4 da
+      busca de 2026-08-15 + 4 da busca de 2026-08-18) tem resultado
+      final, nenhum produziu invariante cross-domain confiavel. Aguardando
+      proxima direcao do usuario: (a) nova rodada de busca por
+      candidatos ainda nao considerados; (b) revisitar qualquer um dos
+      11 ja fechados com dados diferentes; (c) considerar a linha
+      suficientemente explorada por ora -- 11/11 sem invariante
+      confiavel e um padrao consistente de motivos honestos e distintos
+      (baixo poder mesmo apos correcao, nao-computabilidade estrutural,
+      redundancia com familia Hurst, confundidores mundanos plausiveis,
+      piso de amostra, degenerescencia de protocolo de significancia) e
+      um forte prior contra a hipotese central desta linha tal como
+      formulada ate aqui, nao uma prova de impossibilidade; (d) outra
+      linha do laboratorio (SPARC com auto-calibracao de f_multi,
+      achado de integridade de gaia_real_analysis.py, ou linha
+      inteiramente nova). Toda a infraestrutura das buscas (11
+      METHODOLOGY_NOTE.md, 8 pipelines validadas e aplicadas a dado
+      real com veredito computavel, dominios reais de 20+ fontes
+      testadas no total) fica commitada e reaproveitavel.
+      01_TAMESIS_CORE/03_TRANSITION_ATLAS continua infraestrutura
+      reaproveitavel candidata para hospedar um resultado futuro depois
+      de sobreviver ao Gate de Replicacao, se e quando esta linha
+      produzir um achado.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

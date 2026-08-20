@@ -1,0 +1,167 @@
+{
+  "code_correctness_diagnostic": {
+    "description": "Clean, strongly periodic deterministic sine wave (period=50), N=1000, tiny (1e-6 relative) dither. A clean periodic signal should Takens-embed (m=3 FIXED) as a clear closed loop in phase space, giving a large, unambiguous max-H1-persistence value. NOT a PRE/POST identifiability test; exists only to confirm the embedding/sub-window/Rips/persistence-extraction code produces a sane result on unambiguous deterministic dynamics before testing on genuinely ambiguous stochastic data.",
+    "n_samples": 1000,
+    "tau": 5,
+    "tau_info": {
+      "tau": 5,
+      "method": "mi_local_minimum",
+      "lag_max": 100,
+      "status": "ok"
+    },
+    "M_embedded_points": 990,
+    "n_subwindows_used": 4,
+    "median_max_persistence": 1.4763050228357315,
+    "median_total_persistence": 1.4806654729374031,
+    "per_window_max_persistence": [
+      1.4763057976961136,
+      1.4763054698705673,
+      1.4763045758008957,
+      1.476302519440651
+    ],
+    "status": "ok",
+    "wall_clock_seconds": 0.15503287315368652
+  },
+  "negative_control": {
+    "status": "ok",
+    "median_max_persistence_pre": 0.05904535762965679,
+    "median_max_persistence_post": 0.05328480899333954,
+    "median_total_persistence_pre": 0.2199133625254035,
+    "median_total_persistence_post": 0.193331066519022,
+    "delta_median_max_persistence": -0.005760548636317253,
+    "delta_median_total_persistence": -0.02658229600638151,
+    "p_max_persistence": 0.645,
+    "p_total_persistence": 0.5,
+    "surrogate_max_persistence_mean": 0.0009820729633793234,
+    "surrogate_max_persistence_std": 0.013955726991158393,
+    "surrogate_max_persistence_n_valid": 200,
+    "surrogate_max_persistence_n_undefined": 0,
+    "surrogate_total_persistence_mean": -0.014362349262228236,
+    "surrogate_total_persistence_std": 0.040538401286528226,
+    "surrogate_total_persistence_n_valid": 200,
+    "surrogate_total_persistence_n_undefined": 0,
+    "diagnostics": {
+      "pre_status": "ok",
+      "post_status": "ok",
+      "pre_tau": 83,
+      "post_tau": 73,
+      "pre_M": 2834,
+      "post_M": 2854,
+      "pre_n_subwindows": 10,
+      "post_n_subwindows": 10,
+      "n_surrogate_tau_failures_pre": 0,
+      "n_surrogate_tau_failures_post": 0,
+      "n_surrogate_insufficient_pre": 0,
+      "n_surrogate_insufficient_post": 0
+    },
+    "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes METHODOLOGY_NOTE.md Gap (c)'s named spectral/linear risk directly: same autocorrelation structure, no genuine structural change -- p should typically be non-significant for both channels.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "wall_clock_seconds": 165.18074440956116
+  },
+  "positive_control": {
+    "status": "ok",
+    "median_max_persistence_pre": 0.40732237696647644,
+    "median_max_persistence_post": 0.3791874945163727,
+    "median_total_persistence_pre": 8.413482934236526,
+    "median_total_persistence_post": 8.919980093836784,
+    "delta_median_max_persistence": -0.02813488245010376,
+    "delta_median_total_persistence": 0.5064971596002579,
+    "p_max_persistence": 0.355,
+    "p_total_persistence": 0.32,
+    "surrogate_max_persistence_mean": 0.0005690912902355194,
+    "surrogate_max_persistence_std": 0.03378896728433794,
+    "surrogate_max_persistence_n_valid": 200,
+    "surrogate_max_persistence_n_undefined": 0,
+    "surrogate_total_persistence_mean": 0.009486421011388302,
+    "surrogate_total_persistence_std": 0.5031865164610947,
+    "surrogate_total_persistence_n_valid": 200,
+    "surrogate_total_persistence_n_undefined": 0,
+    "diagnostics": {
+      "pre_status": "ok",
+      "post_status": "ok",
+      "pre_tau": 2,
+      "post_tau": 12,
+      "pre_M": 2996,
+      "post_M": 2976,
+      "pre_n_subwindows": 10,
+      "post_n_subwindows": 10,
+      "n_surrogate_tau_failures_pre": 0,
+      "n_surrogate_tau_failures_post": 0,
+      "n_surrogate_insufficient_pre": 0,
+      "n_surrogate_insufficient_post": 0
+    },
+    "description": "PRE = iid Gaussian white noise (linear, zero autocorrelation). POST = logistic map (r=4, fully chaotic, genuine deterministic nonlinear process), rank-remapped onto PRE's own sorted values so PRE and POST share an EXACTLY identical empirical marginal by construction. Amplitude-spectrum match documented empirically via periodogram-slope spectral_exponent (both near-flat, as expected for two broadband processes). THIS IS THE DECISIVE TEST of METHODOLOGY_NOTE.md Gap (c)'s named r~=0.92 raw-correlation risk against RQA's %DET (which itself never showed IAAFT power, see ../../rqa/VALIDATION_NOTE.md) -- unlike RQA, this candidate's m=3 is FIXED (not FNN-estimated), so white noise does not block the embedding step here the way it blocked RQA's.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "spectral_exponent_pre": -0.05801777764723775,
+    "spectral_exponent_post": 0.01440315449456079,
+    "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
+    "wall_clock_seconds": 124.72328352928162
+  },
+  "iaaft_power_check": {
+    "max_persistence_channel": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_positive": 0.355,
+      "p_negative": 0.645,
+      "sigma_equivalent_positive": -0.8495072814387055,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_LOW_POWER"
+    },
+    "total_persistence_channel": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_positive": 0.32,
+      "p_negative": 0.5,
+      "sigma_equivalent_positive": 0.987726662638619,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_LOW_POWER"
+    },
+    "central_identifiability_question": "METHODOLOGY_NOTE.md Gap (c) names a risk ALREADY MEASURED empirically in Phase 0.6 (noisy sinusoid, 9 noise levels): max-H1-persistence correlated with an RQA-%DET analog at r~=0.92 in the structure-degradation regime most relevant to detecting a transition. RQA's %DET itself NEVER showed real IAAFT power (p=1.0 both channels, best-case Roessler redesign, ../../rqa/VALIDATION_NOTE.md). The verdicts above answer directly whether persistent homology inherits that same lack of power despite the raw correlation, or carries power %DET never demonstrated."
+  },
+  "bootstrap_fallback": {
+    "bootstrap_block_length": 14,
+    "bootstrap_n_bootstrap": 1000,
+    "bootstrap_seed": 12345,
+    "delta_max_persistence_boot_ci95": [
+      -0.0728133961558342,
+      0.0656627595424652
+    ],
+    "p_bootstrap_max_persistence": 0.454,
+    "delta_max_persistence_boot_mean": -0.0036244805455207824,
+    "delta_max_persistence_boot_std": 0.035332761282511775,
+    "delta_max_persistence_boot_n_valid": 1000,
+    "delta_max_persistence_boot_n_undefined": 0,
+    "delta_total_persistence_boot_ci95": [
+      -0.979779091104865,
+      1.2539875576272608
+    ],
+    "p_bootstrap_total_persistence": 0.368,
+    "delta_total_persistence_boot_mean": 0.14333089496195317,
+    "delta_total_persistence_boot_std": 0.5515063477804442,
+    "delta_total_persistence_boot_n_valid": 1000,
+    "delta_total_persistence_boot_n_undefined": 0,
+    "wall_clock_seconds": 574.3078606128693,
+    "channels_triggered_by_low_iaaft_power": [
+      "max_persistence",
+      "total_persistence"
+    ],
+    "triggered": true
+  },
+  "pipeline_config": {
+    "m": 3,
+    "n_window": 200,
+    "k_subwindows_max": 10,
+    "n_surrogates": 200,
+    "n_iaaft_iter": 50,
+    "seed": 12345
+  },
+  "generator_notes": {
+    "colored_noise_fgn_like": "FFT-filtering spectral synthesis: white Gaussian noise scaled per-frequency by f^(-exponent/2), inverse-transformed, z-scored. fGn-like approximation via exponent=2H+1 (spectral relation for fractional Gaussian noise); same technique used throughout this line, independent implementation.",
+    "logistic_map": "x_{k+1} = 4*x_k*(1-x_k), burn_in=500 discarded transient iterations.",
+    "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure.",
+    "sine_clean": "Deterministic sine wave (period 50) plus a tiny 1e-6-relative Gaussian dither, used ONLY for the embedding/Rips code-correctness diagnostic (check 0), not a PRE/POST identifiability control."
+  },
+  "wall_clock_seconds_total": 864.3748803138733
+}

@@ -1,0 +1,212 @@
+{
+  "code_correctness_diagnostic": {
+    "description": "Two checks, PLUS a fast-vs-naive cross-validation. (1) Kaspar & Schuster 1987's own worked example: binary string '1001111011000010' (16 symbols) has a documented, hand-verifiable raw LZ76 parse count c(n)=6. (2) Monotonicity sanity check on N=500 binary sequences: constant < alternating-periodic < iid random, expected because LZ76 finds new phrases fastest in less structured sequences. (3) `lz76_complexity` (the fast, O(n log n) suffix-array-based implementation actually used by this pipeline, added after a real-data performance defect was found in the naive nested-loop version -- see lzc_common.py module docstring) is cross-checked here against `lz76_complexity_naive` (the original slow-but-trusted reference) on all 4 sequences above; the full validation of this fix (500 random + 300 structured small-N sequences, plus exact real-data-scale N tests up to 200,000) was run separately before this fix was integrated, documented in VALIDATION_NOTE.md.",
+    "kaspar_schuster_worked_example": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "kaspar_schuster_expected_c": 6,
+    "kaspar_schuster_computed_c": 6,
+    "kaspar_schuster_computed_c_naive_reference": 6,
+    "kaspar_schuster_match": true,
+    "c_n_constant_N500": 2,
+    "c_n_alternating_N500": 3,
+    "c_n_random_N500": 62,
+    "c_n_constant_N500_naive_reference": 2,
+    "c_n_alternating_N500_naive_reference": 3,
+    "c_n_random_N500_naive_reference": 62,
+    "fast_vs_naive_reference_match": true,
+    "monotonicity_as_expected": true,
+    "verdict": "CODE_CORRECT"
+  },
+  "positive_control": {
+    "status": "ok",
+    "LZC_median_pre": 1.0357169617560307,
+    "LZC_median_post": 1.047267708541414,
+    "LZC_ternary_pre": 1.0154209019862959,
+    "LZC_ternary_post": 0.5320028170693751,
+    "delta_LZC_median": 0.011550746785383259,
+    "delta_LZC_ternary": -0.48341808491692073,
+    "p_LZC_median": 0.455,
+    "p_LZC_ternary": 0.0,
+    "surrogate_LZC_median_mean": 9.625622321152605e-05,
+    "surrogate_LZC_median_std": 0.013345639839477485,
+    "surrogate_LZC_median_n_valid": 200,
+    "surrogate_LZC_median_n_undefined": 0,
+    "surrogate_LZC_ternary_mean": -0.0004008240402577423,
+    "surrogate_LZC_ternary_std": 0.011740471874391145,
+    "surrogate_LZC_ternary_n_valid": 200,
+    "surrogate_LZC_ternary_n_undefined": 0,
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "PRE = iid Gaussian white noise (linear, zero autocorrelation). POST = logistic map (r=4, fully chaotic, genuine deterministic nonlinear process), rank-remapped onto PRE's own sorted values so PRE and POST share an EXACTLY identical empirical marginal by construction. Amplitude-spectrum match documented empirically via periodogram-slope spectral_exponent (both expected near-flat, two broadband processes).",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "spectral_exponent_pre": -0.05801777764723775,
+    "spectral_exponent_post": 0.01440315449456079,
+    "marginal_match": "exact (rank-remap of POST onto PRE's sorted values)",
+    "wall_clock_seconds": 28.6561017036438
+  },
+  "negative_control": {
+    "status": "ok",
+    "LZC_median_pre": 0.046202987141532974,
+    "LZC_median_post": 0.06160398285537729,
+    "LZC_ternary_pre": 0.0704478616210588,
+    "LZC_ternary_post": 0.07530633483630425,
+    "delta_LZC_median": 0.015400995713844318,
+    "delta_LZC_ternary": 0.0048584732152454485,
+    "p_LZC_median": 0.5,
+    "p_LZC_ternary": 0.74,
+    "surrogate_LZC_median_mean": 0.013129348846052285,
+    "surrogate_LZC_median_std": 0.014752986313933854,
+    "surrogate_LZC_median_n_valid": 200,
+    "surrogate_LZC_median_n_undefined": 0,
+    "surrogate_LZC_ternary_mean": 0.010312109399358435,
+    "surrogate_LZC_ternary_std": 0.01274943703374558,
+    "surrogate_LZC_ternary_n_valid": 200,
+    "surrogate_LZC_ternary_n_undefined": 0,
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "PRE and POST = two INDEPENDENT realizations of the SAME linear process (fGn-like spectral-synthesis generator, fixed H=0.7, independent seeds 555001/555002). Probes the Ziv & Lempel 1978 asymptotic entropy-rate redundancy risk (same H, no genuine structural change) -- p should typically be non-significant for both channels if IAAFT is correctly calibrated under the null.",
+    "n_pre": 3000,
+    "n_post": 3000,
+    "wall_clock_seconds": 40.2929425239563
+  },
+  "differential_hurst_control": {
+    "status": "ok",
+    "LZC_median_pre": 0.26566717606381457,
+    "LZC_median_post": 0.019251244642305404,
+    "LZC_ternary_pre": 0.28664991969948067,
+    "LZC_ternary_post": 0.026721602683849894,
+    "delta_LZC_median": -0.24641593142150917,
+    "delta_LZC_ternary": -0.2599283170156308,
+    "p_LZC_median": 0.365,
+    "p_LZC_ternary": 0.455,
+    "surrogate_LZC_median_mean": -0.23263204025761852,
+    "surrogate_LZC_median_std": 0.033517870962321984,
+    "surrogate_LZC_median_n_valid": 200,
+    "surrogate_LZC_median_n_undefined": 0,
+    "surrogate_LZC_ternary_mean": -0.2582521437563711,
+    "surrogate_LZC_ternary_std": 0.022839204070369053,
+    "surrogate_LZC_ternary_n_valid": 200,
+    "surrogate_LZC_ternary_n_undefined": 0,
+    "n_samples_used_pre": 3000,
+    "n_samples_used_post": 3000,
+    "description": "PRE = fGn-like H=0.3 (weakly persistent), POST = fGn-like H=0.9 (strongly persistent), independent seeds 777001/777002. BOTH are purely LINEAR Gaussian self-similar processes -- no nonlinear or deterministic structure of any kind, only a genuine Hurst-exponent shift. Tests whether LZC_median/LZC_ternary show artificial/spurious IAAFT significance purely from a linear spectral (Hurst) shift with no genuine complexity change -- the Ziv & Lempel 1978 asymptotic redundancy risk, which the same-H negative control above cannot probe (no H shift there to begin with).",
+    "H_pre": 0.3,
+    "H_post": 0.9,
+    "n_pre": 3000,
+    "n_post": 3000,
+    "spectral_exponent_pre": 1.6003426697353218,
+    "spectral_exponent_post": 2.7961163222012506,
+    "spectral_exponent_target_pre_2H+1": 1.6,
+    "spectral_exponent_target_post_2H+1": 2.8,
+    "wall_clock_seconds": 39.00690150260925
+  },
+  "differential_hurst_control_verdict": {
+    "description": "Mechanical read of the differential_hurst_control result above: does a PURE linear Hurst shift (H=0.3 -> H=0.9, no nonlinear content) produce spurious IAAFT significance on either channel?",
+    "computable": true,
+    "p_LZC_median": 0.365,
+    "sigma_equivalent_LZC_median": -0.411240056964995,
+    "LZC_median_shows_spurious_significance": false,
+    "p_LZC_ternary": 0.455,
+    "sigma_equivalent_LZC_ternary": -0.07339017831336307,
+    "LZC_ternary_shows_spurious_significance": false
+  },
+  "iaaft_power_check": {
+    "LZC_median_channel": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_positive": 0.455,
+      "p_negative": 0.5,
+      "sigma_equivalent_positive": 0.858294596583404,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_LOW_POWER"
+    },
+    "LZC_ternary_channel": {
+      "positive_control_computable": true,
+      "negative_control_computable": true,
+      "p_positive": 0.0,
+      "p_negative": 0.74,
+      "sigma_equivalent_positive": -41.14121357679348,
+      "correctly_nonsignificant_negative": true,
+      "verdict": "IAAFT_HAS_REAL_POWER"
+    },
+    "overall_note": "No shared embedding step here (unlike RQA) -- LZC_median and LZC_ternary are computed independently per segment from the raw values, so a low-power finding for one channel does not imply the other is uncomputable; each channel's verdict is reported on its own merits."
+  },
+  "a_priori_hypothesis_check": {
+    "hypothesis": "METHODOLOGY_NOTE.md gap (b): LZC_median and LZC_ternary risk redundancy with the Hurst/entropy-rate family already closed negative in this line (Ziv & Lempel 1978 asymptotic target), but real published counter-evidence of finite-sample non-redundancy exists (Villazana et al. 2015; Mateos et al. 2017/2020). No a priori prediction was made about WHICH channel (if either) would show power -- unlike the PE candidate's C_JS/H_S asymmetric prediction, LZC_ternary is explicitly named as a robustness diagnostic, not a purpose-built chaos/noise discriminator (Nagarajan 2002) -- so both channels are tested and reported on equal footing.",
+    "LZC_median_verdict": "IAAFT_LOW_POWER",
+    "LZC_ternary_verdict": "IAAFT_HAS_REAL_POWER",
+    "pattern_observed": "ONLY_TERNARY_SHOWS_POWER"
+  },
+  "bootstrap_fallback_check": {
+    "description": "Triggered because IAAFT showed low power for channel(s): ['LZC_median']. Moving-block bootstrap (Kunsch 1989), block_length=max(N//20,10), n_bootstrap=200, seed=12345, run on the SAME positive/negative control series as the IAAFT check above. Pre-authorized by METHODOLOGY_NOTE.md gap (d) -- this is the ONE bounded correction attempt allowed by this line's escalation discipline, not a second redesign.",
+    "low_power_channels_triggering_this_check": [
+      "LZC_median"
+    ],
+    "positive_control": {
+      "block_length": 150,
+      "delta_LZC_median_real": 0.011550746785383259,
+      "bootstrap_delta_LZC_median_p": 0.95,
+      "delta_LZC_ternary_real": -0.48341808491692073,
+      "bootstrap_delta_LZC_ternary_p": 0.0
+    },
+    "negative_control": {
+      "block_length": 150,
+      "delta_LZC_median_real": 0.015400995713844318,
+      "bootstrap_delta_LZC_median_p": 0.74,
+      "delta_LZC_ternary_real": 0.0048584732152454485,
+      "bootstrap_delta_LZC_ternary_p": 1.02
+    },
+    "LZC_median_bootstrap_verdict": "BOOTSTRAP_LOW_POWER",
+    "LZC_median_negative_correctly_nonsignificant": true,
+    "LZC_ternary_bootstrap_verdict": "BOOTSTRAP_HAS_REAL_POWER",
+    "LZC_ternary_negative_correctly_nonsignificant": true,
+    "wall_clock_seconds": 60.44449472427368
+  },
+  "final_decision_protocol_verdict": {
+    "description": "Mechanical combination of the IAAFT primary test (check 3) with the pre-authorized bootstrap fallback (check 4, only run for channels IAAFT found low-power). This is the ONE correction cycle this line's escalation discipline allows -- no further redesign is authorized regardless of the outcome here.",
+    "LZC_median": "NO_POWER_ESTABLISHED_EITHER_TEST",
+    "LZC_ternary": "SURVIVES_PRIMARY_IAAFT_TEST"
+  },
+  "pipeline_config": {
+    "min_n_segment": 50,
+    "max_n_per_segment": 200000,
+    "n_surrogates": 200,
+    "n_iaaft_iter": 50,
+    "seed": 12345,
+    "pre_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    },
+    "post_subsample_info": {
+      "n_original": 3000,
+      "n_used": 3000,
+      "stride": 1,
+      "subsampled": false
+    }
+  },
+  "generator_notes": {
+    "colored_noise_fgn_like": "FFT-filtering spectral synthesis: white Gaussian noise scaled per-frequency by f^(-exponent/2), inverse-transformed, z-scored. fGn-like approximation via exponent=2H+1 (spectral relation for fractional Gaussian noise); same technique as other validate_synthetic.py scripts in this lab, independent implementation.",
+    "logistic_map": "x_{k+1} = 4*x_k*(1-x_k), burn_in=500 discarded transient iterations.",
+    "rank_remap": "POST = sorted(PRE)[argsort(argsort(logistic_map_raw))] -- POST is an exact permutation of PRE's own values, reordered by the logistic map's temporal rank structure."
+  },
+  "wall_clock_seconds_total": 168.4468801021576
+}

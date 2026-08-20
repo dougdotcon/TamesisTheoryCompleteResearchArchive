@@ -1372,23 +1372,66 @@ queue:
       ja testado 2x negativo, por 2 grupos de pesquisa independentes).
       Detalhes completos: 02_TESTS/TRI_RG/phase0/
       PHASE0_7_SURVEY_NEW_CANDIDATES.md.
+    lempel_ziv_gap_closing_result: >
+      2026-08-20: usuario pediu para fechar o primeiro candidato da Fase
+      0.7, complexidade de Lempel-Ziv (LZC, LZ76/Kaspar & Schuster 1987,
+      binarizacao por mediana/LZC_median primario + quantizacao ternaria/
+      LZC_ternary companheiro). Metodologia fixada em METHODOLOGY_NOTE.md
+      ANTES de qualquer calculo real. VALIDACAO SINTETICA: LZC_median
+      (primario) NAO estabeleceu poder discriminativo por NENHUM dos 2
+      testes disponiveis (IAAFT p=0,455, fallback de bootstrap p=0,95 --
+      PIOR que IAAFT, nao melhor -- NO_POWER_ESTABLISHED_EITHER_TEST);
+      LZC_ternary (companheiro) teve poder IAAFT real desde o inicio
+      (p=0,0, sigma=-41,14). Bug de desempenho O(n^2) descoberto e
+      corrigido no meio do caminho (reimplementacao O(n log n) via array
+      de sufixos + LCP de Kasai, verificada bit-a-bit contra a versao
+      ingenua em 800+ casos -- correcao estritamente de desempenho, nao
+      de R_lambda/I(X)). REAL: Daphnet Freezing-of-Gait (S01R01,
+      Parkinson) e Kilauea 2018 LERZ (HV.HAT..HHZ). Kilauea: NENHUMA
+      combinacao significativa (p=1,0/0,805/0,09). Daphnet primaria: NAO
+      significativa (p=1,0). Daphnet robustez: SIGNIFICATIVA nos 2 canais
+      (p=0,0), sobreviveu a 3 checagens de confundidor da propria sessao
+      (composicao de rotulo, glitch de sensor, deriva generica) --
+      acionou reexecucao adversarial independente (passo 7 de
+      AGENTS.md). REEXECUCAO ADVERSARIAL (segundo agente, sem memoria da
+      sessao original): confirmou reproducao bit-a-bit e robustez ao
+      deslocamento do ponto de corte (+-120s), MAS o achado NAO
+      sobreviveu a 2 rotas novas -- (1) generalizacao entre sujeitos: de
+      4 sujeitos testados sob o MESMO pipeline travado, so S01R01 atinge
+      significancia; S07R01 mostra o padrao INVERTIDO com igual forca
+      estatistica; S03R01 tem os 2 canais discordando em sinal entre si;
+      (2) metodo de substituto alternativo ja pre-autorizado (bootstrap
+      por blocos moveis): LZC_ternary (canal com poder IAAFT validado
+      desde a etapa sintetica) PERDE significancia (p=0,07), invertendo
+      a hierarquia de confianca entre canais estabelecida na validacao.
+      VEREDITO: nenhum invariante cross-domain sobrevivente (Kilauea
+      nulo em tudo) e o achado intra-dominio de Daphnet nao sobrevive de
+      forma robusta a reexecucao adversarial -- tratado como observacao
+      intrigante de um unico sujeito/registro, nao como achado
+      replicavel. 12o candidato desta linha (contando os 11 anteriores +
+      este) a terminar sem produzir invariante cross-domain sobrevivente.
+      Detalhes completos: 02_TESTS/TRI_RG/lempel_ziv_complexity/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md,
+      analysis/CONFOUND_CHECK_DAPHNET.md,
+      analysis/ADVERSARIAL_REPRODUCTION_DAPHNET.md}.
     next_action: >
-      Fase 0.7 completa -- 3 novos candidatos formalizados com
-      viable=true (complexidade de Lempel-Ziv, maior expoente de
-      Lyapunov, DMD/espectro de Koopman), nenhum ainda travado em
-      METHODOLOGY_NOTE.md nem testado contra dado real. Aguardando
-      escolha do usuario sobre qual (ou quais) fechar primeiro. status
-      permanece CANDIDATE_FORMULATING; a pausa formal de DISC-DEC-008
-      fica superada na pratica por esta nova rodada de busca (mesmo
-      padrao ja visto para DISC-DEC-005/006/007) -- o registro formal da
-      reabertura fica para quando a rodada atual for encerrada, mesmo
-      padrao que DISC-DEC-008 seguiu para toda a saga desde
-      DISC-DEC-007. Toda a infraestrutura das 11 buscas anteriores (11
-      METHODOLOGY_NOTE.md, pipelines validadas, dominios reais de 20+
-      fontes testadas no total) permanece commitada e reaproveitavel,
-      incluindo os dominios verificados pelos 2 candidatos viable=false
-      desta rodada (MIT-BIH afdb 08215, Bitcoin out/2025, SCADA de
-      turbina eolica Kelmarsh, extensao de gelo marinho artico 2007).
+      Fase 0.7: 1 de 3 candidatos formalizados fechado (complexidade de
+      Lempel-Ziv, negativo apos reexecucao adversarial). Restam 2
+      candidatos formalizados com viable=true, ainda nao travados nem
+      testados: maior expoente de Lyapunov (rank 2 -- validacao sintetica
+      de 2 etapas obrigatoria antes de dado real, dado o risco conhecido
+      de nao-convergencia de FNN ja visto no RQA) e DMD/espectro de
+      Koopman (rank 3 -- canal primario ja revisado durante a propria
+      Fase 0.7 apos ser encontrado identico ao critical-slowing-down).
+      Aguardando escolha do usuario sobre qual fechar em seguida, ou
+      considerar a linha suficientemente explorada por ora. status
+      permanece CANDIDATE_FORMULATING. Toda a infraestrutura das buscas
+      anteriores (12 METHODOLOGY_NOTE.md agora, pipelines validadas,
+      dominios reais de 20+ fontes testadas no total) permanece
+      commitada e reaproveitavel, incluindo os dominios verificados
+      pelos 2 candidatos viable=false da Fase 0.7 (MIT-BIH afdb 08215,
+      Bitcoin out/2025, SCADA de turbina eolica Kelmarsh, extensao de
+      gelo marinho artico 2007).
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

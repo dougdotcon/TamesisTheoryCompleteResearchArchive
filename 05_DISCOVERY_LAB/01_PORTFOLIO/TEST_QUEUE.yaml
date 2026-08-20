@@ -1454,28 +1454,68 @@ queue:
       desta linha, nao um acidente isolado. Detalhes completos:
       02_TESTS/TRI_RG/largest_lyapunov_exponent/
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    dmd_koopman_gap_closing_result: >
+      2026-08-20: usuario pediu para fechar o terceiro e ultimo
+      candidato da Fase 0.7, DMD/espectro de Koopman. Metodologia
+      fixada em METHODOLOGY_NOTE.md ANTES de qualquer calculo real:
+      embedding de Hankel + truncamento de posto otimo de Gavish &
+      Donoho 2014, DMD exato de Tu et al. 2014, canal PRIMARIO revisado
+      a priori (frequencia/razao de amortecimento do par de autovalores
+      complexos conjugados menos amortecido -- alvo de bifurcacao tipo
+      Hopf, distinto do canal de autovalor real ja demovido a
+      diagnostico-only desde o inicio por ser matematicamente identico
+      ao AC1/variancia do critical-slowing-down, confirmado por 2
+      artigos independentes incl. validacao em dado real de blackout),
+      canal companheiro spectral_gap. VALIDACAO SINTETICA (oscilador de
+      Stuart-Landau ajustavel, foco estavel -> ciclo-limite): PASSOU
+      apos o unico ajuste pre-autorizado (sigma:0,05->0,15) -- mas so o
+      canal zeta mostrou poder real (p=0,03); f_dom ficou perto (p=0,08)
+      sem cruzar; o companheiro spectral_gap NUNCA mostrou poder em
+      nenhum dos 4 controles sinteticos, incluindo um p=0,07
+      preocupante no controle NEGATIVO -- sinal de alerta ja nomeado
+      antes de qualquer dado real. REAL: Italia COVID-19 (lockdown
+      09/03/2020) NOT_COMPUTABLE nas 4 combinacoes (serie curta demais,
+      tau nunca resolve, regra travada sem afrouxamento post-hoc).
+      Kilauea 2018 (abertura de fissura 03/05, distinto da transicao de
+      17/05 ja usada por largest_lyapunov_exponent): canal PRIMARIO
+      (f_dom, zeta) SEM significancia em nenhuma variante; unico p<0,05
+      foi o canal companheiro spectral_gap (p=0,0 nas 2 variantes) --
+      acionou reexecucao adversarial (passo 7 de AGENTS.md), 4
+      checagens rodadas pelo proprio agente: (a) placebo, divisao
+      arbitraria sem transicao real -- TAMBEM significativo (p=0,02),
+      confirmando risco de falso-positivo generico do dominio; (b)
+      exclusao do terremoto M6,9 de flanco sul -- efeito colapsa ~73x
+      (p:0,0->0,08); (c) bootstrap de blocos moveis nas 2 variantes --
+      contradiz o IAAFT nas 2 (p=0,615 e p=1,0, com sinal INVERTIDO na
+      robustez). Achado NAO sobrevive a NENHUMA das 4 checagens --
+      artefato do M6,9 dominando a decomposicao espectral, nao
+      assinatura genuina de bifurcacao oscilatoria. VEREDITO: nenhum
+      invariante cross-domain sobrevivente (1 dominio NOT_COMPUTABLE,
+      achado do outro refutado por reexecucao adversarial completa).
+      14o candidato desta linha a fechar sem invariante sobrevivente.
+      Isto encerra INTEIRAMENTE a Fase 0.7 -- os 3 candidatos
+      viable=true (Lempel-Ziv, Lyapunov, DMD/Koopman) tem agora
+      resultado completo. Detalhes completos:
+      02_TESTS/TRI_RG/dmd_koopman/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md,
+      analysis/CONFOUND_CHECK_KILAUEA.md}.
     next_action: >
-      Fase 0.7: 2 de 3 candidatos formalizados fechados (complexidade de
-      Lempel-Ziv, negativo apos reexecucao adversarial; maior expoente
-      de Lyapunov, fechado na etapa de validacao). Resta 1 candidato
-      formalizado com viable=true, ainda nao travado nem testado:
-      DMD/espectro de Koopman (rank 3 -- canal primario ja revisado
-      durante a propria Fase 0.7 apos ser encontrado identico ao
-      critical-slowing-down; herda o MESMO risco de embedding
-      Hankel/Takens que ja fechou RQA e maior-expoente-de-Lyapunov na
-      validacao 2x consecutivas nesta linha -- checagem de controle
-      positivo ANTES de qualquer dado real e obrigatoria, mesmo padrao
-      agora confirmado necessario). Aguardando escolha do usuario sobre
-      fechar DMD/Koopman em seguida, ou considerar a linha
-      suficientemente explorada por ora (13/13 candidatos identificados
-      ate agora com resultado final, nenhum invariante cross-domain
-      sobrevivente). status permanece CANDIDATE_FORMULATING. Toda a
-      infraestrutura das buscas anteriores (13 METHODOLOGY_NOTE.md
-      agora, pipelines validadas, dominios reais de 20+ fontes testadas
-      no total) permanece commitada e reaproveitavel, incluindo os
-      dominios verificados pelos 2 candidatos viable=false da Fase 0.7
-      (MIT-BIH afdb 08215, Bitcoin out/2025, SCADA de turbina eolica
-      Kelmarsh, extensao de gelo marinho artico 2007).
+      2026-08-20 (DISC-DEC-009): a pedido explicito do usuario, a linha
+      foi considerada SUFICIENTEMENTE EXPLORADA POR ORA -- PAUSADA, nao
+      fechada (quinta vez que esta decisao e tomada; DISC-DEC-005/006/
+      007/008 foram todas revertidas em rodadas anteriores quando o
+      usuario pediu retomada/nova busca). Os 14 candidatos identificados
+      nesta linha ate agora (3 da Fase 0 original + 4 da busca de
+      2026-08-15 + 4 da busca de 2026-08-18 + 3 da busca de 2026-08-20)
+      tem resultado final, nenhum produziu invariante cross-domain
+      confiavel. status permanece CANDIDATE_FORMULATING (nao ha status
+      PAUSED formal). Ver DISC-DEC-009 em DECISION_LEDGER.yaml. Toda a
+      infraestrutura das 4 buscas (14 METHODOLOGY_NOTE.md, pipelines
+      validadas, dominios reais de 20+ fontes testadas no total)
+      permanece commitada e reaproveitavel, incluindo os dominios
+      verificados pelos 2 candidatos viable=false da Fase 0.7 (MIT-BIH
+      afdb 08215, Bitcoin out/2025, SCADA de turbina eolica Kelmarsh,
+      extensao de gelo marinho artico 2007).
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

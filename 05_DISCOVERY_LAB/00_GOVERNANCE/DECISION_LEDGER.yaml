@@ -722,3 +722,57 @@ decisions:
       - "toda a infraestrutura das 5 rodadas de busca (16 METHODOLOGY_NOTE.md, 16 pipelines validadas, dominios reais de mais de 20 fontes distintas testadas no total, incluindo dominios verificados mas nunca processados por candidatos fechados na validacao -- Old Faithful, La Palma 2021, genoma de E. coli) permanece no repositorio, commitada e reaproveitavel"
       - "encerramento formal e reversivel -- a linha pode ser reaberta no futuro com um candidato genuinamente novo ou uma reimplementacao corrigida de um candidato ja fechado (ex. CSSR incremental completo para epsilon-machine-complexity), exatamente como as 5 pausas anteriores foram todas revertidas quando o usuario pediu retomada; a diferenca e que reabrir apos um CLOSED_NULL formal exigiria uma nova justificativa explicita, nao apenas um pedido de retomada"
       - "nenhuma alegacao de invalidacao da hipotese TRI/TDTR em geral, nem do programa de pesquisa mais amplo do qual ela faz parte -- o encerramento e sobre esta linha empirica especifica, com estas 16 tentativas, sob esta disciplina metodologica, nao sobre a ideia de interface cross-domain como conceito"
+
+  - decision_id: DISC-DEC-011
+    date: 2026-08-21
+    decision: >
+      Reabrir DISC-TRI-RG-001 (status: CLOSED_NULL -> CANDIDATE_FORMULATING)
+      com uma justificativa explicita e delimitada, exatamente como
+      DISC-DEC-010 previu que uma reabertura futura exigiria: NAO uma
+      nova rodada de busca por candidatos, mas uma revisita tecnica
+      pontual ao candidato `epsilon-machine-complexity`, substituindo a
+      implementacao simplificada de CSSR (clustering de L fixo) por uma
+      implementacao incremental completa (Shalizi & Klinkner 2004),
+      corrigindo a limitacao estrutural ja nomeada honestamente em
+      epsilon_machine_complexity/VALIDATION_NOTE.md (o Processo Even
+      convergindo para 3 estados em vez dos 2 verdadeiros).
+    rationale: >
+      `epsilon-machine-complexity` fechou na etapa de validacao
+      sintetica (nao por identificabilidade genuinamente refutada em
+      dado real) porque `C_mu` nao mostrou poder discriminativo em
+      nenhum dos 3 controles positivos computaveis -- mas o proprio
+      RESULTS_SUMMARY.md daquele fechamento ja nomeou honestamente que
+      esse resultado tinha DUAS explicacoes nao-distinguiveis com o
+      orcamento daquela tarefa: (1) uma fragilidade especifica da
+      simplificacao de escopo da implementacao (clustering guloso de L
+      fixo em vez do CSSR incremental completo, que introduz ruido de
+      decisao de clustering discreto entre a serie real e cada
+      substituto, inflando a variancia nula de C_mu); ou (2) uma
+      fragilidade mais geral do proprio C_mu como estimador em amostra
+      finita. O usuario pediu para resolver especificamente essa
+      ambiguidade, revisitando com uma implementacao CSSR incremental
+      completa -- nao uma reformulacao de I(X) (C_mu permanece primario,
+      h_mu permanece companheiro/diagnostico rebaixado a priori) nem de
+      R_lambda em sua concepcao (ainda CSSR com o mesmo gate de
+      rejeicao obrigatorio), apenas uma correcao de completude de
+      implementacao de um algoritmo ja especificado na metodologia
+      original, na mesma categoria de "corrigir bug de implementacao
+      genuino encontrado por revisao adversarial" que o passo 7 de
+      AGENTS.md ja autoriza -- distinto de uma reformulacao de hipotese
+      apos ver resultado real (nenhum dado real foi tocado pelo
+      fechamento original, entao nao ha resultado real a proteger de
+      contaminacao retroativa aqui).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: status mudado de CLOSED_NULL para CANDIDATE_FORMULATING, next_action atualizado)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+      - "05_DISCOVERY_LAB/02_TESTS/TRI_RG/epsilon_machine_complexity/ (revisao pontual da implementacao de R_lambda; METHODOLOGY_NOTE.md original permanece a fonte de verdade para I(X)/dominios/protocolo de significancia)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status muda de CLOSED_NULL para CANDIDATE_FORMULATING -- reabertura formal e delimitada, nao uma nova rodada de busca generica; escopo explicitamente restrito a revisitar epsilon-machine-complexity"
+      - "I(X) (C_mu primario, h_mu companheiro/diagnostico) e o protocolo de significancia (IAAFT + bootstrap) da metodologia original permanecem inalterados -- apenas a completude algoritmica de R_lambda (CSSR) e revisada, dentro da disciplina ja estabelecida de correcao de bug/limitacao de implementacao genuina"
+    untouched_safeguards:
+      - "nenhum dado real foi tocado pelo fechamento original de epsilon-machine-complexity -- a revisita nao corre risco de contaminacao retroativa de um resultado real ja observado"
+      - "os outros 15 candidatos desta linha permanecem com seus vereditos finais documentados e nao sao reabertos por esta decisao -- o escopo desta reabertura e estritamente epsilon-machine-complexity"
+      - "se a implementacao CSSR incremental completa tambem nao mostrar poder discriminativo, o fechamento anterior (validacao, sem dado real tocado) permanece a conclusao honesta, agora com a ambiguidade de implementacao vs. fragilidade de estimador genuinamente resolvida"

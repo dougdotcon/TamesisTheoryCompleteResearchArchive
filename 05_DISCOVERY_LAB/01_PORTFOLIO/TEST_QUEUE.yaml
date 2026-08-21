@@ -752,7 +752,7 @@ queue:
     domain: multi_dominio
     parent_legacy: "01_TAMESIS_CORE (Theory of Regime Interfaces / TOE_INTERFACE_EXECUTION)"
     related_tests: []
-    status: CLOSED_NULL
+    status: CANDIDATE_FORMULATING
     existing_assets:
       - "02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md (levantamento de 5 candidatos R_lambda/I(X), 2026-08-14)"
       - "02_TESTS/TRI_RG/phase0/workflow_raw_output.json (resultado bruto completo dos 5 agentes de pesquisa + sintese)"
@@ -1629,24 +1629,26 @@ queue:
       epsilon_machine_complexity/
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
     next_action: >
-      NENHUMA -- linha ENCERRADA FORMALMENTE (nao apenas pausada) em
-      2026-08-21, a pedido explicito do usuario, apos os 16/16
-      candidatos identificados em 5 rodadas de busca (Fase 0 original +
-      0.5 + 0.6 + 0.7 + 0.8) terem resultado completo, nenhum
-      produzindo invariante cross-domain sobrevivente. status mudado de
-      CANDIDATE_FORMULATING para CLOSED_NULL -- a PRIMEIRA mudanca de
-      status desta linha desde sua criacao (todas as 5 pausas
-      anteriores mantiveram CANDIDATE_FORMULATING, ja que pausa e
-      encerramento formal sao estados distintos nesta maquina de
-      estados). Sintese completa da historia da linha, do padrao
-      estrutural descoberto (colapso em ~4 eixos matematicos latentes),
-      da disciplina metodologica que se provou decisiva, e do veredito
-      final honesto em 02_TESTS/TRI_RG/CLOSURE_SUMMARY.md. Ver
-      DISC-DEC-010 em DECISION_LEDGER.yaml. Toda a infraestrutura das 5
-      rodadas de busca (16 METHODOLOGY_NOTE.md, pipelines validadas,
-      dominios reais de 20+ fontes testadas no total) permanece
-      commitada e reaproveitavel caso a linha seja reaberta no futuro
-      com um candidato genuinamente novo.
+      2026-08-21 (DISC-DEC-011): linha REABERTA a pedido explicito do
+      usuario, com escopo estritamente delimitado (nao uma nova rodada
+      de busca) -- revisitar epsilon-machine-complexity substituindo o
+      CSSR de clustering guloso de L fixo por uma implementacao
+      incremental completa (Shalizi & Klinkner 2004), resolvendo a
+      ambiguidade ja nomeada honestamente no fechamento original
+      (limitacao de implementacao vs. fragilidade generica do
+      estimador C_mu em amostra finita). I(X) (C_mu primario, h_mu
+      companheiro/diagnostico) e o protocolo de significancia
+      permanecem os mesmos da METHODOLOGY_NOTE.md original -- apenas a
+      completude algoritmica de R_lambda e revisada. status mudado de
+      CLOSED_NULL para CANDIDATE_FORMULATING. Os outros 15 candidatos
+      desta linha NAO sao reabertos por esta decisao -- permanecem com
+      seus vereditos finais documentados em CLOSURE_SUMMARY.md. Proxima
+      acao concreta: reimplementar CSSR incremental completo, revalidar
+      contra dado sintetico (incluindo reexecutar o Processo Even, que
+      deve agora convergir para os 2 estados verdadeiros), e prosseguir
+      para os 2 dominios reais ja verificados (Old Faithful,
+      La Palma 2021) apenas se a validacao mostrar poder discriminativo
+      real.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

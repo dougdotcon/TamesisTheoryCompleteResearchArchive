@@ -1,0 +1,27 @@
+==============================================================================
+epsilon_machine_complexity -- synthetic validation (DISC-TRI-RG-001)
+==============================================================================
+
+--- (a) code-correctness diagnostics ---
+[a0] chi2 sanity: identical dists equivalent=True (want True), opposite dists equivalent=False (want False) -> OK
+[a1] period-2 process: n_states=2 (want 2), C_mu=1.000000 (want 1.0), h_mu=0.000000 (want 0.0) -> OK
+[a2] first-order Markov (P(1|0)=0.1,P(1|1)=0.5, N=200000): n_states=2 (want 2), C_mu=0.6488 (theory=0.6500, |err|=0.0012) -> OK
+[a3] Even Process (TRUE: 2 states, C_mu=0.9183): n_states(L=1..8)=[2, 3, 3, 3, 3, 3, 3, 3] -- recovers true 2-state topology for L>=2: False (KNOWN, DOCUMENTED LIMITATION of scope decision #1 -- L=1 coincidentally matches by a different mechanism, see VALIDATION_NOTE.md)
+
+--- (b) the ONE pre-authorized correction ---
+[b] L=1 triviality (AR(1) phi=0.3, median-binary, N=3000): real C_mu(L=1)=1.000000 (== log2(2)=1.000000), 20 IAAFT surrogates' C_mu(L=1): mean=1.000000 std=0.00000000 (want std~=0, confirming triviality) -> CORRECTION APPLIED: min_L_for_selection=2 in select_Lmax_and_reconstruct (em_common.py), L=1 excluded from the stability search from now on (still computed/reported in the sweep curve for transparency).
+
+--- (c) positive controls (4 designs) ---
+[c1] positive control (median, order-1 vs order-2 Markov, N=5000, 200 surrogates, 8.8s): {'status': 'ok', 'n_states_pre': 2, 'n_states_post': 4, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 0.8220363822610173, 'p_C_mu': 0.735, 'surrogate_delta_C_mu_mean': 0.791027699915866, 'surrogate_delta_C_mu_std': 0.21079307217206, 'delta_h_mu': -0.28250557954987643, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': -0.16775553902056523, 'surrogate_delta_h_mu_std': 0.0072975746675278145}
+[c2] positive control (ternary, weak vs strong 3-symbol Markov, N=8000, 200 surrogates, 13.7s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 4, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 0.21100060467328108, 'p_C_mu': 0.405, 'surrogate_delta_C_mu_mean': 0.14084090418638187, 'surrogate_delta_C_mu_std': 0.16828016221323105, 'delta_h_mu': -0.4300768798209609, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': -0.22329853416902434, 'surrogate_delta_h_mu_std': 0.003557478501883345}
+[c3] positive control (ternary, weak Markov vs logistic r=4 remap, N=5000, 200 surrogates, 9.0s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 2, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': -0.6636941406771459, 'p_C_mu': 1.0, 'surrogate_delta_C_mu_mean': -1.5616116180493476, 'surrogate_delta_C_mu_std': 0.07117967330627664, 'delta_h_mu': -0.7933235431912293, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': 0.033689896365142115, 'surrogate_delta_h_mu_std': 0.002105922776123614}
+[c4] structural finding: logistic map r=4, median-binary: verdict=DEGENERATE curve=[1, 1, 1, 1, 2, 2, 2, 1] (DEGENERATE as expected -- median threshold ~= generating partition, conjugate to IID Bernoulli(1/2); consistent with lempel_ziv_complexity's own finding that LZC_median [same R_lambda] lacks IAAFT power in this exact scenario)
+
+--- (d) bootstrap fallback check ---
+[d] bootstrap fallback (Kunsch 1989) on positive-control-1's C_mu (median), 200 resamples, 1.2s: real_delta_C_mu=0.8220, bootstrap mean/std=0.7904/0.1385, p=0.595 (fallback does NOT recover power -- consistent with lempel_ziv_complexity's own finding that the bootstrap fallback can be WORSE than IAAFT, not better)
+
+--- (e) negative control ---
+[e1] negative control (order-1 Markov, both channels, N=5000, 200 surrogates, 8.5s): median={'status': 'ok', 'n_states_pre': 2, 'n_states_post': 2, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 1.1550799428050595e-07, 'p_C_mu': 0.385, 'surrogate_delta_C_mu_mean': -0.007093173379451713, 'surrogate_delta_C_mu_std': 0.13056427424590172, 'delta_h_mu': 0.0018873836880031192, 'p_h_mu': 0.85, 'surrogate_delta_h_mu_mean': 0.005311801417529311, 'surrogate_delta_h_mu_std': 0.003831857527470585}, ternary={'status': 'not_computable', 'pre_verdict': 'OK', 'post_verdict': 'NOT_DETERMINISTIC', 'pre_L_selected': 2, 'post_L_selected': 2, 'pre_n_states_curve': [3, 3, 3, 2, 2, 2, 1, 1], 'post_n_states_curve': [3, 3, 3, 2, 3, 2, 2, 1]}
+[e2] negative control (3-symbol Markov, ternary, N=8000, 200 surrogates, 13.3s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 3, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': -1.3534570331152906e-07, 'p_C_mu': 0.2, 'surrogate_delta_C_mu_mean': 0.0013922041597459734, 'surrogate_delta_C_mu_std': 0.029871272052223417, 'delta_h_mu': 0.013484809925148111, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': 0.0030968117388727266, 'surrogate_delta_h_mu_std': 0.0017859192111792021}
+
+Saved validation_synthetic.json

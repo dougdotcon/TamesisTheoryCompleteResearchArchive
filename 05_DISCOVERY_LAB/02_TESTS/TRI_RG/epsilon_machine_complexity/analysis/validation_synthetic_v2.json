@@ -1,0 +1,246 @@
+{
+  "a_code_correctness": {
+    "chi2_sanity": {
+      "identical_equivalent": true,
+      "opposite_equivalent": false,
+      "pass": true
+    },
+    "period2_process": {
+      "n_states": 2,
+      "C_mu": 0.9999999927850819,
+      "h_mu": 0.0,
+      "pass": true
+    },
+    "markov1_handcomputed": {
+      "n_states": 2,
+      "C_mu": 0.6488116679802353,
+      "theoretical_C_mu": 0.6500224216483541,
+      "abs_error": 0.0012107536681188469,
+      "pass": true
+    },
+    "markov2_finite_order_handcomputed_NEW_IN_V2": {
+      "n_states_curve_L1_to_8": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "theoretical_n_states": 4,
+      "theoretical_C_mu": 1.8112781244591332,
+      "theoretical_pi": [
+        0.37500000000000033,
+        0.12500000000000017,
+        0.12500000000000003,
+        0.3749999999999994
+      ],
+      "L2_n_states": 4,
+      "L2_C_mu": 1.8101594856202046,
+      "L2_determinism_violation_frac": 0.0,
+      "pass": true
+    },
+    "even_process_decisive_test": {
+      "n_states_curve_L1_to_8": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n_sufficient_histories_curve": [
+        2,
+        4,
+        7,
+        12,
+        20,
+        33,
+        54,
+        88
+      ],
+      "theoretical_n_states": 2,
+      "theoretical_C_mu": 0.9182958340544896,
+      "select_Lmax_and_reconstruct_verdict": "NOT_CONVERGENT",
+      "recovers_true_topology_for_L_ge_2": false,
+      "q_k_analytic_check": {
+        "1": {
+          "n": 1333368,
+          "P_next_is_1": 0.7501529960221034
+        },
+        "2": {
+          "n": 1000230,
+          "P_next_is_1": 0.6669386041210521
+        },
+        "3": {
+          "n": 667092,
+          "P_next_is_1": 0.7505336595252229
+        },
+        "4": {
+          "n": 500675,
+          "P_next_is_1": 0.6676147201278274
+        },
+        "5": {
+          "n": 334258,
+          "P_next_is_1": 0.7506806119823609
+        },
+        "6": {
+          "n": 250921,
+          "P_next_is_1": 0.6678755464867429
+        }
+      },
+      "investigated_not_a_bug": true,
+      "analytic_explanation": "Exact non-decaying period-2 alternation in P(state=B | window='1'^k): q_k=1/2 (odd k), q_k=1/3 (even k), forever -- derived via the emit-1 sub-stochastic transfer matrix M_1=[[0,0.5],[1,0]] applied to the stationary start vector. Resolvable only via MIN_COUNT_PER_HISTORY exclusion at L~15-20+, far beyond the locked L_max<=8 budget."
+    }
+  },
+  "b_correction": {
+    "real_C_mu_L1": 0.9999999197968141,
+    "log2_K": 1.0,
+    "surrogate_C_mu_L1_mean": 0.999999919796814,
+    "surrogate_C_mu_L1_std": 1.1102230246251565e-16,
+    "n_surrogates_tested": 20,
+    "correction_status": "carried over unchanged from v1 (min_L_for_selection=2)"
+  },
+  "c_positive_controls": {
+    "control_1_markov_order_median": {
+      "pre_process": "1st-order symmetric Markov, weak persistence",
+      "post_process": "2nd-order Markov, all 4 histories distinct",
+      "runtime_s": 13.372286558151245,
+      "result": {
+        "status": "ok",
+        "n_states_pre": 2,
+        "n_states_post": 4,
+        "L_selected_pre": 2,
+        "L_selected_post": 2,
+        "delta_C_mu": 0.8220363822610173,
+        "p_C_mu": 0.735,
+        "surrogate_delta_C_mu_mean": 0.791027699915866,
+        "surrogate_delta_C_mu_std": 0.21079307217206,
+        "delta_h_mu": -0.28250557954987643,
+        "p_h_mu": 0.0,
+        "surrogate_delta_h_mu_mean": -0.16775553902056523,
+        "surrogate_delta_h_mu_std": 0.0072975746675278145
+      }
+    },
+    "control_2_markov_persistence_ternary": {
+      "pre_process": "3-symbol Markov, weak persistence (diag=0.5)",
+      "post_process": "3-symbol Markov, strong persistence (diag=0.75)",
+      "runtime_s": 18.806280851364136,
+      "result": {
+        "status": "ok",
+        "n_states_pre": 3,
+        "n_states_post": 4,
+        "L_selected_pre": 2,
+        "L_selected_post": 2,
+        "delta_C_mu": 0.21100060467328108,
+        "p_C_mu": 0.4,
+        "surrogate_delta_C_mu_mean": 0.13590302528322123,
+        "surrogate_delta_C_mu_std": 0.16459689014334797,
+        "delta_h_mu": -0.4300768798209609,
+        "p_h_mu": 0.0,
+        "surrogate_delta_h_mu_mean": -0.22318828298286703,
+        "surrogate_delta_h_mu_std": 0.003512209642071143
+      }
+    },
+    "control_3_chaos_vs_markov_ternary": {
+      "pre_process": "3-symbol Markov, weak persistence",
+      "post_process": "logistic map r=4, rank-remapped onto PRE marginal",
+      "runtime_s": 14.987452268600464,
+      "result": {
+        "status": "ok",
+        "n_states_pre": 3,
+        "n_states_post": 3,
+        "L_selected_pre": 2,
+        "L_selected_post": 3,
+        "delta_C_mu": -0.00010379126833481855,
+        "p_C_mu": 1.0,
+        "surrogate_delta_C_mu_mean": -1.557142961612808,
+        "surrogate_delta_C_mu_std": 0.2168094278012558,
+        "delta_h_mu": -0.7988146573473448,
+        "p_h_mu": 0.0,
+        "surrogate_delta_h_mu_mean": 0.03408627888448172,
+        "surrogate_delta_h_mu_std": 0.0018788612421027362
+      }
+    },
+    "control_4_logistic_r4_median_degenerate_finding": {
+      "process": "logistic map r=4, median-binary channel",
+      "verdict": "DEGENERATE",
+      "n_states_curve": [
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  },
+  "d_bootstrap_fallback": {
+    "real_delta_C_mu": 0.8220363822610173,
+    "L_pre": 2,
+    "L_post": 2,
+    "bootstrap_delta_C_mu_mean": 0.7904325924900397,
+    "bootstrap_delta_C_mu_std": 0.13846856315870354,
+    "p_bootstrap": 0.595,
+    "runtime_s": 3.621699333190918
+  },
+  "e_negative_control": {
+    "pair1_order1_median_and_ternary": {
+      "median": {
+        "status": "ok",
+        "n_states_pre": 2,
+        "n_states_post": 2,
+        "L_selected_pre": 2,
+        "L_selected_post": 2,
+        "delta_C_mu": 1.1550799428050595e-07,
+        "p_C_mu": 0.385,
+        "surrogate_delta_C_mu_mean": -0.007093173379451713,
+        "surrogate_delta_C_mu_std": 0.13056427424590172,
+        "delta_h_mu": 0.0018873836880031192,
+        "p_h_mu": 0.85,
+        "surrogate_delta_h_mu_mean": 0.005311801417529311,
+        "surrogate_delta_h_mu_std": 0.003831857527470585
+      },
+      "ternary": {
+        "status": "ok",
+        "n_states_pre": 4,
+        "n_states_post": 4,
+        "L_selected_pre": 2,
+        "L_selected_post": 2,
+        "delta_C_mu": -0.0013080261144498007,
+        "p_C_mu": 0.005,
+        "surrogate_delta_C_mu_mean": -0.0009938345649474023,
+        "surrogate_delta_C_mu_std": 0.014019958368754174,
+        "delta_h_mu": 0.004248105443145578,
+        "p_h_mu": 0.665,
+        "surrogate_delta_h_mu_mean": 0.00595680992062904,
+        "surrogate_delta_h_mu_std": 0.00619016824039306
+      },
+      "runtime_s": 24.4622220993042
+    },
+    "pair2_3symbol_ternary": {
+      "result": {
+        "status": "ok",
+        "n_states_pre": 3,
+        "n_states_post": 3,
+        "L_selected_pre": 2,
+        "L_selected_post": 2,
+        "delta_C_mu": -1.3534570331152906e-07,
+        "p_C_mu": 0.18,
+        "surrogate_delta_C_mu_mean": 0.002719278423908824,
+        "surrogate_delta_C_mu_std": 0.028570927084076568,
+        "delta_h_mu": 0.013484809925148111,
+        "p_h_mu": 0.0,
+        "surrogate_delta_h_mu_mean": 0.003077500726981418,
+        "surrogate_delta_h_mu_std": 0.0017898950085780175
+      },
+      "runtime_s": 18.217405080795288
+    }
+  }
+}

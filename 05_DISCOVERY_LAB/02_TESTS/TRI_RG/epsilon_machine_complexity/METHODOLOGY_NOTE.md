@@ -321,3 +321,98 @@ de duplicatas/magnitude de La Palma), mas NENHUM valor de `C_mu`,
 `Delta_C_mu`, ou p-valor foi calculado sobre esses dados reais até este
 ponto — a etapa de validação sintética (obrigatória, `validate_synthetic.py`)
 vem a seguir.
+
+---
+
+## ADENDO DE REVISÃO — 2026-08-21 (`DISC-DEC-011`)
+
+**Natureza desta revisão:** correção de completude de implementação,
+autorizada explicitamente pela sessão orquestradora (`DISC-DEC-011`) —
+NÃO uma reformulação de hipótese. Este candidato foi fechado na etapa de
+validação (nenhum dado real jamais tocado — ver `RESULTS_SUMMARY.md`
+original), deixando uma ambiguidade honesta e nomeada explicitamente
+naquele fechamento: a falta de poder discriminativo de `C_mu` observada na
+validação sintética original era causada (1) pela simplificação de escopo
+#1 daquela implementação ("clustering de estados causais em `L` fixo", não
+o crescimento incremental completo de CSSR de Shalizi & Klinkner 2004),
+ou (2) por uma fragilidade mais geral de `C_mu` como estimador em amostra
+finita? Como nenhum dado real havia sido tocado, não havia risco de
+contaminação retroativa de um resultado real ao revisitar apenas a
+implementação de `R_lambda` — exatamente o tipo de correção que este
+laboratório permite (`AGENTS.md`, passo 7).
+
+**O que mudou:** `analysis/em_common.py` foi reescrito para implementar
+CSSR incremental completo (Shalizi & Klinkner 2004, *UAI*; também descrito
+em Shalizi, Shalizi & Crutchfield, arXiv:cs/0210025), substituindo (não
+apenas remendando) o motor de reconstrução de estados causais:
+
+1. Estado inicial único (L=0) contendo todos os históricos de comprimento
+   zero (o histórico vazio).
+2. `L` cresce incrementalmente de 1 até `L_max` (a mesma regra de
+   convergência já fixada — varrer e escolher onde o número de estados
+   estabiliza, excluindo o caso trivial `L=1` já identificado como não
+   informativo, correção #1 da validação original, mantida sem alteração
+   por ser ortogonal à troca de algoritmo — ver `em_common.py`,
+   `select_Lmax_and_reconstruct`).
+3. A cada `L`, para cada histórico de comprimento `L` com contagem
+   suficiente (`MIN_COUNT_PER_HISTORY=10`, inalterado): teste (via
+   qui-quadrado comparando distribuições condicionais do próximo símbolo,
+   no nível de significância `alpha=10⁻³` já fixado a priori) se pertence
+   ao estado causal ao qual seu SUFIXO de comprimento `L-1` já pertence
+   (a etapa de "crescimento" que a implementação anterior simplesmente NÃO
+   fazia); se não, testa contra todos os outros estados já descobertos
+   naquele `L`; cria um novo estado apenas se nenhum corresponder.
+4. Após crescer os históricos de comprimento `L`, executa a etapa de
+   determinização/refinamento de CSSR: verifica se a máquina resultante é
+   unifilar (determinística — de cada estado, cada símbolo leva a
+   exatamente um próximo estado); se não, DIVIDE os estados
+   recursivamente (`_determinize`, em `em_common.py`) até que seja, ou até
+   um teto de iterações fixado a priori (`MAX_DETERMINIZE_ITERS=30`) sem
+   convergência, o que por si só alimenta o gate de rejeição
+   `NOT_DETERMINISTIC` — nunca aceito silenciosamente. Isto substitui a
+   decisão de escopo #2 original (determinismo apenas DIAGNOSTICADO, não
+   corrigido).
+5. Repete até `L_max`, usando a MESMA regra de seleção de `L_max` de
+   antes (menor `L_max` além do qual o número de estados causais
+   inferidos para de crescer).
+6. Gate de rejeição obrigatório mantido: `DEGENERATE` (1 estado),
+   `NOT_CONVERGENT` (curva nunca estabiliza), `NOT_DETERMINISTIC` (agora
+   uma checagem de sanidade PÓS-determinização, deveria ser ~0 por
+   construção) — nunca um valor calculado silenciosamente.
+
+**O que NÃO mudou (confirmado explicitamente, não uma alegação vazia):**
+`I(X)=C_mu` primário / `h_mu` companheiro REBAIXADO permanecem
+EXATAMENTE como definidos acima (seção "Gap (b)"); o protocolo de
+significância (IAAFT primário, 200 substitutos, 50 iterações,
+seed=12345, bicaudal; bootstrap por blocos móveis pré-autorizado como
+fallback) permanece EXATAMENTE como definido (seção "Gap (e)"); o esquema
+de simbolização (binarização por mediana primária, quantização ternária
+companheira, reestimadas por segmento) permanece EXATAMENTE como definido
+(seção "Gap (a)", parágrafo de simbolização); os 2 domínios reais já
+verificados (Old Faithful, La Palma 2021) permanecem os mesmos, nenhuma
+nova busca de domínio foi feita. `L_max` continua selecionado UMA VEZ por
+segmento real e mantido fixo para os substitutos (decisão de escopo #4,
+inalterada) — a única mudança é que "manter `L` fixo" para um substituto
+agora significa crescer o CSSR incremental DAQUELE substituto de `L=1`
+até o `L` fixado (CSSR genuíno é inerentemente sequencial — não é possível
+pular direto para `L=8` sem passar pelas etapas de crescimento+
+determinização em `L=1,...,7` primeiro), não mais reclusterizar do zero
+em um único `L` como a implementação anterior fazia.
+
+**Resultado da re-validação:** ver `VALIDATION_NOTE_V2.md` (nota completa)
+e `RESULTS_SUMMARY_V2.md` (veredito final desta revisão) — a ambiguidade
+nomeada acima foi RESOLVIDA: `C_mu` continua sem poder discriminativo
+genuíno mesmo sob CSSR incremental completo (implementação agora
+verificada correta contra um caso de ordem finita com solução exata à
+mão), apontando para explicação (2) — fragilidade genuína de `C_mu` como
+estimador em amostra finita — não para explicação (1), o artefato de
+implementação suspeitado originalmente.
+
+**Escopo desta revisão, reafirmado:** estritamente limitado a este único
+candidato (`epsilon-machine-complexity`), por autorização explícita da
+sessão orquestradora (`DISC-DEC-011`). Os outros 15 candidatos desta linha
+permanecem fechados exatamente como documentado em
+`02_TESTS/TRI_RG/CLOSURE_SUMMARY.md` — nenhum deles foi tocado por esta
+revisão. `TEST_QUEUE.yaml`, `DISCOVERY_LAB_STATE.md`, `DECISION_LEDGER.yaml`
+e `CLOSURE_SUMMARY.md` não foram modificados por este agente — ficam a
+cargo da sessão orquestradora.

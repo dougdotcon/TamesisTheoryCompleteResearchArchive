@@ -1,0 +1,28 @@
+==============================================================================
+epsilon_machine_complexity -- synthetic validation V2 (full incremental CSSR revision, DISC-TRI-RG-001 / DISC-DEC-011)
+==============================================================================
+
+--- (a) code-correctness diagnostics ---
+[a0] chi2 sanity: identical dists equivalent=True (want True), opposite dists equivalent=False (want False) -> OK
+[a1] period-2 process: n_states=2 (want 2), C_mu=1.000000 (want 1.0), h_mu=0.000000 (want 0.0) -> OK
+[a2] first-order Markov (P(1|0)=0.1,P(1|1)=0.5, N=200000): n_states=2 (want 2), C_mu=0.6488 (theory=0.6500, |err|=0.0012) -> OK
+[a3] 2nd-order Markov, finite order (N=300000): n_states_curve(L=1..8)=[2, 4, 4, 4, 4, 4, 4, 4] (want [2,4,4,4,4,4,4,4]), at L=2: n_states=4 (want 4), C_mu=1.8102 (theory=1.8113) dvf=0.000000 (want 0) -> OK
+[a4] Even Process (TRUE: 2 states, C_mu=0.9183): n_states(L=1..8)=[2, 3, 4, 5, 6, 7, 8, 9] (n_sufficient_histories=[2, 4, 7, 12, 20, 33, 54, 88]) -- select_Lmax_and_reconstruct verdict=NOT_CONVERGENT -- recovers true 2-state topology: False -- INVESTIGATED, NOT A BUG (see docstring: proven exact non-decaying period-2 alternation in the 'constant-run' branch's conditional distribution; q_k check: {1: {'n': 1333368, 'P_next_is_1': 0.7501529960221034}, 2: {'n': 1000230, 'P_next_is_1': 0.6669386041210521}, 3: {'n': 667092, 'P_next_is_1': 0.7505336595252229}, 4: {'n': 500675, 'P_next_is_1': 0.6676147201278274}, 5: {'n': 334258, 'P_next_is_1': 0.7506806119823609}, 6: {'n': 250921, 'P_next_is_1': 0.6678755464867429}})
+
+--- (b) the ONE pre-authorized correction (carried over from v1) ---
+[b] L=1 triviality (AR(1) phi=0.3, median-binary, N=3000), full-CSSR engine: real C_mu(L=1)=1.000000 (== log2(2)=1.000000), 20 IAAFT surrogates' C_mu(L=1): mean=1.000000 std=0.00000000 (want std~=0, confirming the v1 correction remains necessary and valid) -> CORRECTION CARRIED OVER UNCHANGED: min_L_for_selection=2 in select_Lmax_and_reconstruct.
+
+--- (c) positive controls (4 designs) ---
+[c1] positive control (median, order-1 vs order-2 Markov, N=5000, 200 surrogates, 13.4s): {'status': 'ok', 'n_states_pre': 2, 'n_states_post': 4, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 0.8220363822610173, 'p_C_mu': 0.735, 'surrogate_delta_C_mu_mean': 0.791027699915866, 'surrogate_delta_C_mu_std': 0.21079307217206, 'delta_h_mu': -0.28250557954987643, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': -0.16775553902056523, 'surrogate_delta_h_mu_std': 0.0072975746675278145}
+[c2] positive control (ternary, weak vs strong 3-symbol Markov, N=8000, 200 surrogates, 18.8s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 4, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 0.21100060467328108, 'p_C_mu': 0.4, 'surrogate_delta_C_mu_mean': 0.13590302528322123, 'surrogate_delta_C_mu_std': 0.16459689014334797, 'delta_h_mu': -0.4300768798209609, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': -0.22318828298286703, 'surrogate_delta_h_mu_std': 0.003512209642071143}
+[c3] positive control (ternary, weak Markov vs logistic r=4 remap, N=5000, 200 surrogates, 15.0s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 3, 'L_selected_pre': 2, 'L_selected_post': 3, 'delta_C_mu': -0.00010379126833481855, 'p_C_mu': 1.0, 'surrogate_delta_C_mu_mean': -1.557142961612808, 'surrogate_delta_C_mu_std': 0.2168094278012558, 'delta_h_mu': -0.7988146573473448, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': 0.03408627888448172, 'surrogate_delta_h_mu_std': 0.0018788612421027362}
+[c4] structural finding check: logistic map r=4, median-binary, full CSSR: verdict=DEGENERATE curve=[1, 1, 1, 1, 6, 6, 6, 6]
+
+--- (d) bootstrap fallback check ---
+[d] bootstrap fallback (Kunsch 1989) on positive-control-1's C_mu (median), 200 resamples, 3.6s: real_delta_C_mu=0.8220, bootstrap mean/std=0.7904/0.1385, p=0.595
+
+--- (e) negative control ---
+[e1] negative control (order-1 Markov, both channels, N=5000, 200 surrogates, 24.5s): median={'status': 'ok', 'n_states_pre': 2, 'n_states_post': 2, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': 1.1550799428050595e-07, 'p_C_mu': 0.385, 'surrogate_delta_C_mu_mean': -0.007093173379451713, 'surrogate_delta_C_mu_std': 0.13056427424590172, 'delta_h_mu': 0.0018873836880031192, 'p_h_mu': 0.85, 'surrogate_delta_h_mu_mean': 0.005311801417529311, 'surrogate_delta_h_mu_std': 0.003831857527470585}, ternary={'status': 'ok', 'n_states_pre': 4, 'n_states_post': 4, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': -0.0013080261144498007, 'p_C_mu': 0.005, 'surrogate_delta_C_mu_mean': -0.0009938345649474023, 'surrogate_delta_C_mu_std': 0.014019958368754174, 'delta_h_mu': 0.004248105443145578, 'p_h_mu': 0.665, 'surrogate_delta_h_mu_mean': 0.00595680992062904, 'surrogate_delta_h_mu_std': 0.00619016824039306}
+[e2] negative control (3-symbol Markov, ternary, N=8000, 200 surrogates, 18.2s): {'status': 'ok', 'n_states_pre': 3, 'n_states_post': 3, 'L_selected_pre': 2, 'L_selected_post': 2, 'delta_C_mu': -1.3534570331152906e-07, 'p_C_mu': 0.18, 'surrogate_delta_C_mu_mean': 0.002719278423908824, 'surrogate_delta_C_mu_std': 0.028570927084076568, 'delta_h_mu': 0.013484809925148111, 'p_h_mu': 0.0, 'surrogate_delta_h_mu_mean': 0.003077500726981418, 'surrogate_delta_h_mu_std': 0.0017898950085780175}
+
+Saved validation_synthetic_v2.json

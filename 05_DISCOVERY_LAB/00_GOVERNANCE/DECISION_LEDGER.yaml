@@ -776,3 +776,62 @@ decisions:
       - "nenhum dado real foi tocado pelo fechamento original de epsilon-machine-complexity -- a revisita nao corre risco de contaminacao retroativa de um resultado real ja observado"
       - "os outros 15 candidatos desta linha permanecem com seus vereditos finais documentados e nao sao reabertos por esta decisao -- o escopo desta reabertura e estritamente epsilon-machine-complexity"
       - "se a implementacao CSSR incremental completa tambem nao mostrar poder discriminativo, o fechamento anterior (validacao, sem dado real tocado) permanece a conclusao honesta, agora com a ambiguidade de implementacao vs. fragilidade de estimador genuinamente resolvida"
+
+  - decision_id: DISC-DEC-012
+    date: 2026-08-21
+    decision: >
+      Encerrar DISC-TRI-RG-001 novamente (status: CANDIDATE_FORMULATING
+      -> CLOSED_NULL), apos a revisao delimitada autorizada por
+      DISC-DEC-011 concluir. A reabertura tinha escopo estritamente
+      restrito a revisitar epsilon-machine-complexity com CSSR
+      incremental completo -- essa tarefa concluiu com um veredito
+      honesto e decisivo, e nenhuma nova candidatura ou rodada de busca
+      foi autorizada, entao o estado natural da linha volta a ser o
+      encerramento formal ja registrado em DISC-DEC-010.
+    rationale: >
+      A implementacao CSSR incremental completa (Shalizi & Klinkner
+      2004) substituiu o clustering guloso de L fixo em
+      epsilon_machine_complexity/analysis/em_common.py. A correcao foi
+      verificada como CORRETA por um novo diagnostico decisivo: uma
+      cadeia de Markov de segunda ordem genuina, com solucao teorica
+      exata, foi recuperada EXATAMENTE (4 estados, C_mu=1,8102 vs.
+      teoria 1,8113). O Processo Even (teste decisivo do proprio artigo
+      de Shalizi & Klinkner) continuou nao convergindo para a topologia
+      minima verdadeira dentro do orcamento L_max<=8 travado a priori --
+      mas desta vez com uma explicacao matematicamente PROVADA (nao uma
+      limitacao vaga): derivacao analitica via matriz de transicao
+      sub-estocastica mostrando que o ramo de "corrida constante de 1s"
+      do processo tem uma alternacao periodo-2 nunca decadente,
+      resolvivel apenas em L~15-20+, muito alem do orcamento
+      autorizado -- confirmada numericamente a 4 digitos significativos
+      ate N=2 milhoes. Os 4 controles positivos deram valores de p_C_mu
+      praticamente identicos aos da implementacao simplificada (V1), e
+      um controle negativo que V1 nao conseguia sequer computar
+      (bloqueado por NOT_DETERMINISTIC) agora e computavel sob CSSR
+      completo -- revelando um NOVO falso positivo em C_mu, reforcando
+      em vez de enfraquecer a conclusao de fragilidade do estimador.
+      A ambiguidade explicitamente nomeada no fechamento original
+      (limitacao de implementacao vs. fragilidade generica do
+      estimador C_mu em amostra finita) esta agora RESOLVIDA de forma
+      decisiva a favor da segunda explicacao -- a implementacao
+      demonstravelmente correta e ainda assim nao produz poder
+      discriminativo. Nenhum dado real (Old Faithful, La Palma 2021)
+      foi tocado nem na sessao original nem nesta revisao. Uma futura
+      revisita legitima exigiria uma medida de complexidade
+      fundamentalmente diferente de C_mu, o que constituiria uma NOVA
+      candidatura (fora do escopo desta decisao), nao uma correcao de
+      implementacao adicional.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: status mudado de CANDIDATE_FORMULATING para CLOSED_NULL novamente, next_action atualizado)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status volta de CANDIDATE_FORMULATING para CLOSED_NULL -- mesmo estado terminal de DISC-DEC-010, agora com evidencia adicional (a revisao de epsilon-machine-complexity nao encontrou nenhum invariante, e resolveu a ambiguidade de implementacao vs. estimador a favor de fragilidade genuina)"
+      - "16/16 candidatos permanecem com resultado final -- nenhuma nova candidatura foi criada por esta revisao, apenas uma implementacao corrigida do candidato #16 (epsilon-machine-complexity), que chegou ao mesmo veredito qualitativo (fechado na validacao) com maior confianca"
+    untouched_safeguards:
+      - "02_TESTS/TRI_RG/epsilon_machine_complexity/RESULTS_SUMMARY_V2.md e VALIDATION_NOTE_V2.md documentam a revisao completa, preservando os arquivos V1 originais intactos como registro historico -- nenhuma reescrita do fechamento original"
+      - "os outros 15 candidatos desta linha nao foram tocados por esta revisao nem por este fechamento -- 02_TESTS/TRI_RG/CLOSURE_SUMMARY.md continua valido para eles"
+      - "os dominios reais (Old Faithful, La Palma 2021) permanecem verificados e documentados, mas nunca processados -- reaproveitaveis para uma futura candidatura genuinamente nova (nao uma correcao de C_mu) que a linha venha a testar"
+      - "encerramento permanece reversivel -- uma reabertura futura exigiria, como sempre nesta linha desde DISC-DEC-010, uma nova justificativa explicita do usuario"

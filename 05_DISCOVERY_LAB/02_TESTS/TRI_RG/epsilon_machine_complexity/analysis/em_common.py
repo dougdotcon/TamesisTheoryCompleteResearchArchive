@@ -19,35 +19,62 @@ used elsewhere in this line (same convention already documented in
 `lempel_ziv_complexity/analysis/lzc_common.py`).
 
 ============================================================================
-SCOPE DECISIONS (documented here AND in METHODOLOGY_NOTE.md, honestly, as
-engineering choices -- not hypothesis reformulations):
+REVISION (dated in METHODOLOGY_NOTE.md's addendum, `DISC-DEC-011`): this
+module now implements FULL INCREMENTAL CSSR (Shalizi & Klinkner 2004, UAI;
+Shalizi, Shalizi & Crutchfield, arXiv:cs/0210025), replacing the earlier
+"fixed-L causal-state clustering" simplification (scope decisions #1/#2 of
+the original implementation, preserved only in the historical record --
+`VALIDATION_NOTE.md`, `validate_synthetic.py`/`.json` -- and NOT in this
+file). This is an implementation-completeness correction: `I(X)=C_mu`
+primary / `h_mu` companion, the IAAFT+bootstrap significance protocol, and
+the median/ternary R_lambda symbolization are ALL unchanged from the
+original METHODOLOGY_NOTE.md -- only the causal-state reconstruction
+engine underneath `R_lambda` changed.
+
+============================================================================
+SCOPE DECISIONS (documented here AND in METHODOLOGY_NOTE.md's addendum,
+honestly, as engineering choices -- not hypothesis reformulations):
 ============================================================================
 
-1. CSSR here is implemented as "fixed-L causal-state clustering", not the
-   full incremental tree-growing/pruning procedure of Shalizi & Klinkner
-   2004. For a SMALL alphabet (2 or 3 symbols) and L_max<=8 (per
-   METHODOLOGY_NOTE.md), the full history space (<=3^8=6,561 possible
-   histories) is directly enumerable without the combinatorial-explosion
-   concern that motivated CSSR's incremental-growth design for larger
-   alphabets. At each candidate L in the L_max sweep, we therefore: (a)
-   build the empirical next-symbol distribution for every length-L history
-   observed >= MIN_COUNT times; (b) greedily cluster those histories into
-   causal states via a chi-square test of distributional equivalence
-   (alpha=1e-3, fixed a priori); (c) run ONE non-recursive determinism-
-   repair diagnostic (see #2). This is mathematically equivalent to what
-   CSSR converges to at that L for this alphabet/L_max regime, and is
-   dramatically simpler/faster to implement correctly and validate in the
-   time available than the full incremental algorithm.
+1. CSSR is now implemented as genuine INCREMENTAL growth (`cssr_incremental_
+   grow`): starting from the single causal state containing the length-0
+   (empty) history, history length L is grown one step at a time from 1 up
+   to L_max. At each step L: (a) build the empirical next-symbol
+   distribution for every length-L history observed >= MIN_COUNT_PER_HISTORY
+   times; (b) for each such history, in descending-count order, test it
+   FIRST against the causal state its length-(L-1) SUFFIX already belongs
+   to (chi-square equivalence test, alpha=1e-3, fixed a priori) -- this is
+   the step the earlier fixed-L clustering did NOT do, and is precisely
+   what lets statistically-indistinguishable-but-nominally-different
+   histories of different lengths (e.g. "111" and "11111", both landing in
+   the SAME true causal state) merge into one state, which the earlier
+   from-scratch-at-every-L clustering could never achieve; (c) if that
+   fails (or the suffix itself was not itself classified), test against
+   every OTHER state discovered so far at this L, and only create a new
+   state if none match. This exactly implements the "grow" half of Shalizi
+   & Klinkner's algorithm.
 
-2. Determinism is checked, not enforced by recursive splitting. A single
-   diagnostic pass measures `determinism_violation_frac`: among all
-   (state, next-symbol) transitions with sufficient data on both ends, the
-   fraction whose resulting state is NOT the majority (mode) resulting
-   state for that (state, symbol) pair. Full CSSR does recursive splitting
-   to drive this to exactly zero; that recursive repair is out of scope
-   here. Instead, `determinism_violation_frac > DETERMINISM_VIOLATION_MAX`
-   (0.05, fixed a priori) is itself an ADDITIONAL REJECT-GATE criterion --
-   more conservative than skipping the problem, not less.
+2. Determinism (unifilarity) is now ENFORCED by genuine recursive
+   splitting (`_determinize`), not merely diagnosed. After the grow step at
+   each L, states are iteratively split until every (state, symbol)
+   transition with sufficient empirical evidence
+   (>= DETERMINIZE_MIN_TRANSITION_COUNT occurrences, fixed a priori, a
+   lower floor than MIN_COUNT_PER_HISTORY since per-symbol transition
+   counts are finer-grained than per-history totals) leads to exactly ONE
+   resulting causal state -- histories within a state that disagree on
+   the resulting state for some symbol are split into separate states,
+   using each history's *transition signature* (the tuple, over symbols,
+   of resulting-state ids where known) as the splitting criterion, greedily
+   grouped by pairwise signature compatibility (histories agreeing on every
+   symbol both have evidence for), iterated to a fixed point (capped at
+   MAX_DETERMINIZE_ITERS=30, fixed a priori -- exceeding the cap without
+   convergence is itself folded into the NOT_DETERMINISTIC reject-gate
+   criterion below, never silently accepted). `determinism_violation_frac`
+   is still computed and reported (same formula as before, on real
+   occurrences) as a POST-determinize sanity check -- it should be ~0 by
+   construction; a nonzero value beyond DETERMINISM_VIOLATION_MAX now
+   signals a genuine reconstruction problem (e.g. the iteration cap was
+   hit), not an accepted-but-imperfect approximation.
 
 3. Bayesian Structural Inference (Strelioff & Crutchfield 2014) is NOT
    reimplemented as full topology-space Bayesian model comparison (which
@@ -73,7 +100,13 @@ engineering choices -- not hypothesis reformulations):
    not required by the methodology note (L_max is a property of R_lambda,
    fixed once the real data has determined it, exactly as median/tercile
    thresholds are fixed once computed and then applied identically to
-   surrogates elsewhere in this line).
+   surrogates elsewhere in this line). UNCHANGED by this revision, except
+   that "holding L fixed" for a surrogate now means growing the surrogate's
+   OWN incremental CSSR from L=1 up to that fixed L (genuine CSSR is
+   inherently sequential -- you cannot jump straight to L=8 without passing
+   through the grow+determinize steps at L=1,...,7 first) and reading off
+   the state at that L, rather than reclustering from scratch at a single L
+   as the earlier implementation did.
 ============================================================================
 """
 import math
@@ -99,6 +132,19 @@ DETERMINISM_VIOLATION_MAX = 0.05  # additional reject-gate criterion, gap #2 abo
 N_STABLE_STEPS = 2              # consecutive equal-n_states steps required
                                  # for the L_max convergence rule
 N_BSI_SAMPLES = 2000            # posterior Monte Carlo draws for the BSI companion
+
+DETERMINIZE_MIN_TRANSITION_COUNT = 5  # floor (fixed a priori, independent of
+                                 # MIN_COUNT_PER_HISTORY) below which a
+                                 # specific (history, symbol) empirical
+                                 # transition is not trusted as evidence
+                                 # during the unifilarity/determinize split
+                                 # step -- lower than MIN_COUNT_PER_HISTORY
+                                 # because per-symbol transition counts are
+                                 # finer-grained than per-history totals
+MAX_DETERMINIZE_ITERS = 30      # cap on recursive-splitting iterations per
+                                 # history length L; exceeding it without
+                                 # convergence feeds the NOT_DETERMINISTIC
+                                 # reject gate, never silently accepted
 
 
 # --------------------------------------------------------------------------
@@ -188,8 +234,9 @@ def _build_count_table(codes, next_syms, K, L):
 
 
 # --------------------------------------------------------------------------
-# CSSR-style causal-state clustering at a FIXED history length L (see scope
-# decision #1 in the module docstring).
+# Full incremental CSSR (Shalizi & Klinkner 2004, UAI; Shalizi, Shalizi &
+# Crutchfield, arXiv:cs/0210025) -- replaces the earlier fixed-L clustering
+# (see the REVISION note and scope decisions #1/#2 in the module docstring).
 # --------------------------------------------------------------------------
 
 def _chi2_equivalent(c1, c2, alpha):
@@ -208,87 +255,277 @@ def _chi2_equivalent(c1, c2, alpha):
     return bool(p >= alpha)
 
 
-def cssr_fixed_L(symbols, alphabet_size, L, alpha=ALPHA_CSSR,
-                  min_count=MIN_COUNT_PER_HISTORY):
-    """Cluster all length-L histories with count>=min_count into causal
-    states via chi-square distributional equivalence (greedy, order by
-    descending count -- most-reliable histories seed clusters first), then
-    run the determinism-violation diagnostic (scope decision #2).
+def _shift_code_scalar(code, next_sym, L, K):
+    """Scalar version of `_shift_code` (drop the oldest symbol of a
+    length-L history, append `next_sym` as the newest -- the resulting
+    history code, also length L)."""
+    return (code % (K ** (L - 1))) * K + next_sym
 
-    Returns a dict:
-      status: "ok" or "insufficient_samples"
-      n_states, n_sufficient_histories, n_total_histories_observed,
-      frac_occurrences_excluded (occurrences whose history never reached
-          min_count, therefore excluded from the causal-state model),
-      determinism_violation_frac,
-      pi_s (occurrence-fraction stationary distribution, length n_states),
-      C_mu (bits), h_mu (bits),
-      cluster_next_symbol_counts (n_states x K array, for BSI/diagnostics),
-      transition_counts (n_states x n_states array, state-to-state, used
-          by the BSI companion),
-      hist_to_cluster (dict code->cluster id, for surrogate-recomputation
-          reuse is NOT assumed -- each call is self-contained).
+
+def _determinize(code_to_state, table, L, K,
+                  min_transition_count=DETERMINIZE_MIN_TRANSITION_COUNT,
+                  max_iters=MAX_DETERMINIZE_ITERS):
+    """Recursive causal-state splitting until every (state, symbol)
+    transition with sufficient empirical evidence (>=min_transition_count
+    occurrences of that exact history->symbol pair) leads to exactly ONE
+    resulting state (unifilarity) -- CSSR's determinize step, genuinely
+    enforced (scope decision #2 of the module docstring), not merely
+    diagnosed. `code_to_state`: length-K^L array, state id per history code
+    (-1 = not classified). `table`: K^L x K next-symbol count table for
+    this L. Returns (new_code_to_state, n_iterations_used, converged bool).
+    """
+    code_to_state = code_to_state.copy()
+    classified_codes = np.nonzero(code_to_state >= 0)[0]
+    if len(classified_codes) == 0:
+        return code_to_state, 0, True
+
+    n_iters = 0
+    converged = False
+    for it in range(max_iters):
+        n_iters = it + 1
+        members_by_state = defaultdict(list)
+        for code in classified_codes:
+            members_by_state[int(code_to_state[code])].append(int(code))
+
+        changed = False
+        new_assignment = {}
+        next_id = 0
+        # deterministic order: by ascending old state id
+        for old_sid in sorted(members_by_state.keys()):
+            codes_list = sorted(members_by_state[old_sid], key=lambda c: -table[c].sum())
+            groups = []  # [{"sig": {a: target_state}, "codes": [...]}]
+            for code in codes_list:
+                sig = {}
+                for a in range(K):
+                    if table[code, a] >= min_transition_count:
+                        shifted = _shift_code_scalar(code, a, L, K)
+                        if 0 <= shifted < len(code_to_state) and code_to_state[shifted] >= 0:
+                            sig[a] = int(code_to_state[shifted])
+                placed = False
+                for g in groups:
+                    compatible = True
+                    for a, t in sig.items():
+                        if a in g["sig"] and g["sig"][a] != t:
+                            compatible = False
+                            break
+                    if compatible:
+                        g["sig"].update(sig)
+                        g["codes"].append(code)
+                        placed = True
+                        break
+                if not placed:
+                    groups.append({"sig": dict(sig), "codes": [code]})
+            if len(groups) > 1:
+                changed = True
+            for g in groups:
+                for code in g["codes"]:
+                    new_assignment[code] = next_id
+                next_id += 1
+
+        for code, sid in new_assignment.items():
+            code_to_state[code] = sid
+
+        if not changed:
+            converged = True
+            break
+
+    return code_to_state, n_iters, converged
+
+
+def _determinism_violation_frac_occ(codes, next_syms, code_to_state, L, K):
+    """Post-determinize sanity check (same formula as the pre-revision
+    diagnostic, computed on ACTUAL occurrences, not just the count table):
+    among all (state, next-symbol) transitions with sufficient data on
+    both ends, the fraction whose resulting state is NOT the majority
+    (mode) resulting state for that (state, symbol) pair. Should be ~0
+    after a converged `_determinize` call; a nonzero value here signals a
+    genuine reconstruction problem (e.g. the determinize iteration cap was
+    hit), which feeds the NOT_DETERMINISTIC reject gate."""
+    occ_cluster = code_to_state[codes]
+    valid_mask = occ_cluster >= 0
+    if not valid_mask.any():
+        return 0.0
+    result_codes = _shift_code(codes, next_syms, L, K)
+    result_cluster = code_to_state[result_codes]
+    both_valid = valid_mask & (result_cluster >= 0)
+    if not both_valid.any():
+        return 0.0
+    origin = occ_cluster[both_valid]
+    nsym = next_syms[both_valid]
+    dest = result_cluster[both_valid]
+    groups = defaultdict(Counter)
+    for o, a, d in zip(origin.tolist(), nsym.tolist(), dest.tolist()):
+        groups[(o, a)][d] += 1
+    n_total = 0
+    n_mismatch = 0
+    for key, ctr in groups.items():
+        total = sum(ctr.values())
+        majority = max(ctr.values())
+        n_total += total
+        n_mismatch += (total - majority)
+    return (n_mismatch / n_total) if n_total > 0 else 0.0
+
+
+def cssr_incremental_grow(symbols, alphabet_size, L_max, alpha=ALPHA_CSSR,
+                           min_count=MIN_COUNT_PER_HISTORY):
+    """Full incremental CSSR: grow causal states from the single L=0 state
+    (all histories) up to L_max, one history length at a time.
+
+    At each L=1,...,L_max:
+      (1) GROW -- for every length-L history observed >=min_count times, in
+          descending-count order: test it FIRST against the causal state
+          its length-(L-1) SUFFIX already belongs to (the state's L-1
+          aggregate next-symbol distribution); if that state has not yet
+          been "claimed" this round by an earlier history, seed a new
+          current-round state for it and test against the OLD (L-1)
+          aggregate directly. If the suffix test fails (or the suffix
+          itself was not classified at L-1), fall back to testing against
+          every OTHER state discovered so far this round, and only create a
+          brand-new state if none match (chi-square equivalence,
+          alpha=1e-3, fixed a priori).
+      (2) DETERMINIZE -- recursively split states (`_determinize`) until
+          unifilar.
+
+    Returns {"sweep": [per-L summary dicts, L=1..L_max], "per_L": {L: {...}}}
+    where `per_L[L]` carries everything needed to finalize a reconstruction
+    (pi_s/C_mu/h_mu/transition_counts) at that L without re-growing.
     """
     K = alphabet_size
     s = np.asarray(symbols, dtype=np.int64)
     n = len(s)
-    if n <= L + 1:
-        return {"status": "insufficient_samples", "n": int(n), "L": int(L)}
 
-    codes, next_syms = _sliding_hist_codes(s, L, K)
-    table = _build_count_table(codes, next_syms, K, L)
-    totals = table.sum(axis=1)
+    global_counts = np.bincount(s, minlength=K).astype(np.int64) if n > 0 else np.zeros(K, dtype=np.int64)
+    prev_code_to_state = np.zeros(1, dtype=np.int64)   # L=0: 1 history (empty), state 0
+    prev_states_counts = [global_counts]
 
-    sufficient_codes = np.nonzero(totals >= min_count)[0]
-    if len(sufficient_codes) == 0:
-        return {"status": "insufficient_samples", "n": int(n), "L": int(L)}
+    sweep = []
+    per_L = {}
 
-    order = sufficient_codes[np.argsort(-totals[sufficient_codes])]
+    for L in range(1, L_max + 1):
+        if n <= L:
+            sweep.append({"L": int(L), "status": "insufficient_samples", "n_states": None,
+                           "determinism_violation_frac": None})
+            continue
 
-    clusters = []  # list of {"counts": np.array(K), "codes": [int,...]}
-    hist_to_cluster = {}
-    for code in order:
-        c = table[code]
-        assigned = None
-        for ci, cl in enumerate(clusters):
-            if _chi2_equivalent(c, cl["counts"], alpha):
-                assigned = ci
-                break
-        if assigned is None:
-            clusters.append({"counts": c.copy(), "codes": [int(code)]})
-            assigned = len(clusters) - 1
-        else:
-            clusters[assigned]["counts"] = clusters[assigned]["counts"] + c
-            clusters[assigned]["codes"].append(int(code))
-        hist_to_cluster[int(code)] = assigned
+        codes, next_syms = _sliding_hist_codes(s, L, K)
+        table = _build_count_table(codes, next_syms, K, L)
+        totals = table.sum(axis=1)
+        n_hist_total = K ** L
 
-    n_states = len(clusters)
+        sufficient = np.nonzero(totals >= min_count)[0]
+        if len(sufficient) == 0:
+            sweep.append({"L": int(L), "status": "insufficient_samples", "n_states": None,
+                           "determinism_violation_frac": None})
+            continue
 
-    # occurrence classification: every position gets a cluster id if its
-    # history is sufficient, else excluded (-1).
-    code_to_cluster_arr = -np.ones(K ** L, dtype=np.int64)
-    for code, ci in hist_to_cluster.items():
-        code_to_cluster_arr[code] = ci
-    occ_cluster = code_to_cluster_arr[codes]
+        order = sufficient[np.argsort(-totals[sufficient])]
+
+        # ---- (1) GROW ----
+        code_to_state = -np.ones(n_hist_total, dtype=np.int64)
+        current_counts = []          # list of np.array(K), this round's aggregates
+        state_of_parent = {}         # old (L-1) state id -> this-round state id
+
+        for code in order:
+            code = int(code)
+            c = table[code]
+            suffix = (code % (K ** (L - 1))) if L > 1 else 0
+            parent = None
+            if 0 <= suffix < len(prev_code_to_state):
+                p = int(prev_code_to_state[suffix])
+                if p >= 0:
+                    parent = p
+
+            assigned = None
+            if parent is not None:
+                if parent in state_of_parent:
+                    csid = state_of_parent[parent]
+                    if _chi2_equivalent(c, current_counts[csid], alpha):
+                        assigned = csid
+                elif parent < len(prev_states_counts) and _chi2_equivalent(c, prev_states_counts[parent], alpha):
+                    csid = len(current_counts)
+                    current_counts.append(np.zeros(K, dtype=np.int64))
+                    state_of_parent[parent] = csid
+                    assigned = csid
+
+            if assigned is None:
+                for csid in range(len(current_counts)):
+                    if _chi2_equivalent(c, current_counts[csid], alpha):
+                        assigned = csid
+                        break
+
+            if assigned is None:
+                assigned = len(current_counts)
+                current_counts.append(np.zeros(K, dtype=np.int64))
+                if parent is not None and parent not in state_of_parent:
+                    state_of_parent[parent] = assigned
+
+            current_counts[assigned] = current_counts[assigned] + c
+            code_to_state[code] = assigned
+
+        # ---- (2) DETERMINIZE ----
+        code_to_state, n_det_iters, det_converged = _determinize(code_to_state, table, L, K)
+
+        classified = np.nonzero(code_to_state >= 0)[0]
+        if len(classified) == 0:
+            sweep.append({"L": int(L), "status": "insufficient_samples", "n_states": None,
+                           "determinism_violation_frac": None})
+            continue
+
+        n_states = int(code_to_state[classified].max()) + 1
+        states_counts = [np.zeros(K, dtype=np.int64) for _ in range(n_states)]
+        for code in classified.tolist():
+            states_counts[int(code_to_state[code])] = states_counts[int(code_to_state[code])] + table[code]
+
+        dvf = _determinism_violation_frac_occ(codes, next_syms, code_to_state, L, K)
+
+        sweep.append({
+            "L": int(L), "status": "ok", "n_states": int(n_states),
+            "n_sufficient_histories": int(len(sufficient)),
+            "n_total_histories_observed": int(np.count_nonzero(totals > 0)),
+            "determinism_violation_frac": float(dvf),
+            "determinize_iterations": int(n_det_iters),
+            "determinize_converged": bool(det_converged),
+        })
+
+        per_L[L] = {
+            "code_to_state": code_to_state, "states_counts": states_counts,
+            "table": table, "codes": codes, "next_syms": next_syms,
+        }
+
+        prev_code_to_state = code_to_state
+        prev_states_counts = states_counts
+
+    return {"sweep": sweep, "per_L": per_L}
+
+
+def _finalize_reconstruction(entry, L, K):
+    """Given one `per_L[L]` growth entry, compute the full reconstruction
+    dict (pi_s, C_mu, h_mu, transition_counts, determinism_violation_frac,
+    frac_occurrences_excluded) -- same output shape as the pre-revision
+    `cssr_fixed_L`, for downstream (BSI, reject-gate, run_variant_analysis)
+    compatibility."""
+    code_to_state = entry["code_to_state"]
+    codes = entry["codes"]
+    next_syms = entry["next_syms"]
+    states_counts = entry["states_counts"]
+    n_states = len(states_counts)
+
+    occ_cluster = code_to_state[codes]
     valid_mask = occ_cluster >= 0
     n_valid = int(valid_mask.sum())
     frac_excluded = 1.0 - (n_valid / len(codes)) if len(codes) > 0 else 1.0
-
     if n_valid == 0:
-        return {"status": "insufficient_samples", "n": int(n), "L": int(L)}
+        return {"status": "insufficient_samples"}
 
-    # occurrence-fraction stationary distribution (simple, always defined)
     counts_per_state = np.bincount(occ_cluster[valid_mask], minlength=n_states)
     pi_s = counts_per_state / counts_per_state.sum()
 
-    # C_mu: Shannon entropy (bits) of pi_s
     nz = pi_s[pi_s > 0]
     C_mu = float(-np.sum(nz * np.log2(nz)))
 
-    # h_mu: entropy rate = sum_s pi_s * H(next_symbol | state=s)
     h_per_state = np.zeros(n_states)
-    for ci, cl in enumerate(clusters):
-        cc = cl["counts"].astype(float)
+    for ci in range(n_states):
+        cc = states_counts[ci].astype(float)
         tot = cc.sum()
         if tot > 0:
             p = cc / tot
@@ -296,14 +533,9 @@ def cssr_fixed_L(symbols, alphabet_size, L, alpha=ALPHA_CSSR,
             h_per_state[ci] = -np.sum(p_nz * np.log2(p_nz))
     h_mu = float(np.sum(pi_s * h_per_state))
 
-    # state-to-state transition counts (for BSI) + determinism-violation
-    # diagnostic (scope decision #2): both/either endpoint may be
-    # insufficient -- only occurrences with BOTH the origin and the
-    # resulting history classified (sufficient) are used.
     result_codes = _shift_code(codes, next_syms, L, K)
-    result_cluster = code_to_cluster_arr[result_codes]
+    result_cluster = code_to_state[result_codes]
     both_valid = valid_mask & (result_cluster >= 0)
-
     transition_counts = np.zeros((n_states, n_states), dtype=np.int64)
     if both_valid.any():
         origin = occ_cluster[both_valid]
@@ -312,41 +544,32 @@ def cssr_fixed_L(symbols, alphabet_size, L, alpha=ALPHA_CSSR,
         flat_counts = np.bincount(flat, minlength=n_states * n_states)
         transition_counts = flat_counts.reshape(n_states, n_states)
 
-    # determinism_violation_frac: group by (state, next_symbol), find the
-    # majority resulting state, count occurrences that disagree with it.
-    determinism_violation_frac = 0.0
-    if both_valid.any():
-        origin = occ_cluster[both_valid]
-        nsym = next_syms[both_valid]
-        dest = result_cluster[both_valid]
-        groups = defaultdict(Counter)
-        for o, a, d in zip(origin.tolist(), nsym.tolist(), dest.tolist()):
-            groups[(o, a)][d] += 1
-        n_total_grouped = 0
-        n_mismatch = 0
-        for key, ctr in groups.items():
-            total = sum(ctr.values())
-            majority = max(ctr.values())
-            n_total_grouped += total
-            n_mismatch += (total - majority)
-        determinism_violation_frac = (n_mismatch / n_total_grouped) if n_total_grouped > 0 else 0.0
+    dvf = _determinism_violation_frac_occ(codes, next_syms, code_to_state, L, K)
 
     return {
-        "status": "ok",
-        "n": int(n), "L": int(L), "alphabet_size": int(K),
-        "n_states": int(n_states),
-        "n_sufficient_histories": int(len(sufficient_codes)),
-        "n_total_histories_observed": int(np.count_nonzero(totals > 0)),
-        "n_occurrences_total": int(len(codes)),
-        "n_occurrences_valid": int(n_valid),
+        "status": "ok", "L": int(L), "alphabet_size": int(K), "n_states": int(n_states),
+        "n_occurrences_total": int(len(codes)), "n_occurrences_valid": int(n_valid),
         "frac_occurrences_excluded": float(frac_excluded),
-        "determinism_violation_frac": float(determinism_violation_frac),
-        "pi_s": pi_s.tolist(),
-        "C_mu": C_mu,
-        "h_mu": h_mu,
-        "cluster_next_symbol_counts": [cl["counts"].tolist() for cl in clusters],
+        "determinism_violation_frac": float(dvf),
+        "pi_s": pi_s.tolist(), "C_mu": C_mu, "h_mu": h_mu,
+        "cluster_next_symbol_counts": [sc.tolist() for sc in states_counts],
         "transition_counts": transition_counts.tolist(),
     }
+
+
+def reconstruct_at_fixed_L(symbols, alphabet_size, L_target, alpha=ALPHA_CSSR,
+                            min_count=MIN_COUNT_PER_HISTORY):
+    """Grow full incremental CSSR from L=1 up to L_target (inclusive) and
+    return the finalized reconstruction AT L_target. Used for IAAFT
+    surrogates / bootstrap resamples, where L is already selected (scope
+    decision #4, unchanged) -- genuine CSSR is inherently sequential, so
+    even a "fixed L" surrogate reconstruction must be reached by growing
+    through L=1,...,L_target-1 first, not skipped-to directly."""
+    grown = cssr_incremental_grow(symbols, alphabet_size, L_max=L_target,
+                                   alpha=alpha, min_count=min_count)
+    if L_target not in grown["per_L"]:
+        return {"status": "insufficient_samples"}
+    return _finalize_reconstruction(grown["per_L"][L_target], L_target, alphabet_size)
 
 
 # --------------------------------------------------------------------------
@@ -360,7 +583,8 @@ def select_Lmax_and_reconstruct(symbols, alphabet_size, L_grid=L_MAX_GRID,
                                  n_stable=N_STABLE_STEPS,
                                  determinism_max=DETERMINISM_VIOLATION_MAX,
                                  min_L_for_selection=2):
-    """Run cssr_fixed_L across L_grid, select the smallest L such that
+    """Run ONE full incremental-CSSR growth pass (`cssr_incremental_grow`)
+    across L=1..max(L_grid), select the smallest L such that
     n_states(L) == n_states(L+1) == ... for `n_stable` consecutive steps
     (BIC/AIC-style order-selection analogue, per METHODOLOGY_NOTE.md -- NOT
     a fixed constant, NOT visual). Applies the MANDATORY reject gate:
@@ -368,17 +592,19 @@ def select_Lmax_and_reconstruct(symbols, alphabet_size, L_grid=L_MAX_GRID,
       - NOT_CONVERGENT: the n_states(L) curve never stabilizes across the
         WHOLE grid (no run of `n_stable` consecutive equal values found)
       - NOT_DETERMINISTIC: determinism_violation_frac at the selected L
-        exceeds `determinism_max` (scope decision #2 above)
-    Returns a dict with the full sweep (`sweep`: list of per-L results),
+        exceeds `determinism_max` (now a POST-determinize sanity check --
+        see scope decision #2 in the module docstring; should be ~0 unless
+        the determinize iteration cap was hit)
+    Returns a dict with the full sweep (`sweep`: list of per-L summaries),
     `L_selected`, `verdict` ("OK" or one of the three reject codes above),
-    and (if verdict=="OK") the selected L's full cssr_fixed_L result under
+    and (if verdict=="OK") the selected L's full reconstruction dict under
     `reconstruction`.
 
-    `min_L_for_selection=2` (THE ONE PRE-AUTHORIZED CORRECTION, applied
-    during synthetic validation, documented in VALIDATION_NOTE.md -- NOT a
-    post-hoc tuning after real data): L=1 is EXCLUDED from the stability
-    search (though still computed and reported in the sweep curve for
-    transparency). Reason, discovered by the mandatory code-correctness/
+    `min_L_for_selection=2` (THE ONE PRE-AUTHORIZED CORRECTION FROM THE V1
+    VALIDATION, carried over UNCHANGED by this revision -- documented in
+    VALIDATION_NOTE.md, not re-derived here): L=1 is EXCLUDED from the
+    stability search (though still computed and reported in the sweep curve
+    for transparency). Reason, discovered by the mandatory code-correctness/
     positive-control diagnostics: for median-binary (K=2) and tercile-
     ternary (K=3) R_lambda specifically, whenever the L=1 histories do not
     merge into one cluster, pi_s at L=1 is MATHEMATICALLY FORCED to equal
@@ -387,19 +613,15 @@ def select_Lmax_and_reconstruct(symbols, alphabet_size, L_grid=L_MAX_GRID,
     median/tercile threshold IS, independent of the segment's actual
     dynamics. C_mu at L=1 therefore collapses to a TRIVIAL, CONSTANT value
     (log2(K)) whenever n_states(1)==K, carrying ZERO discriminating
-    information about real vs. surrogate dynamics -- confirmed empirically
-    in `validate_synthetic.py` (both a real AR(1) segment and its IAAFT
-    surrogates gave IDENTICAL C_mu=log2(K) at L=1, std=0.0 across 30
-    surrogates). This is a genuine design problem in the naive reading of
-    "smallest L where n_states stops growing" (L=1 trivially "stops
-    growing" the moment histories stop merging, for a reason that has
-    nothing to do with genuine memory), not a bug in the arithmetic.
+    information about real vs. surrogate dynamics. This property is
+    ORTHOGONAL to fixed-L-clustering vs. full incremental CSSR (it is a
+    fact about what "state" means at L=1 for a binarized/ternarized series,
+    not an artifact of the earlier simplification), so the correction
+    remains valid and is kept unchanged under this revision.
     """
-    sweep = []
-    for L in L_grid:
-        res = cssr_fixed_L(symbols, alphabet_size, L, alpha=alpha, min_count=min_count)
-        sweep.append(res)
-
+    L_max = max(L_grid)
+    grown = cssr_incremental_grow(symbols, alphabet_size, L_max=L_max, alpha=alpha, min_count=min_count)
+    sweep = grown["sweep"]
     n_states_curve = [r.get("n_states") if r.get("status") == "ok" else None for r in sweep]
 
     start_idx = 0
@@ -422,8 +644,13 @@ def select_Lmax_and_reconstruct(symbols, alphabet_size, L_grid=L_MAX_GRID,
             "L_selected": None, "verdict": "NOT_CONVERGENT",
         }
 
-    idx = L_grid.index(L_selected)
-    reconstruction = sweep[idx]
+    if L_selected not in grown["per_L"]:
+        return {
+            "sweep": sweep, "n_states_curve": n_states_curve,
+            "L_selected": L_selected, "verdict": "NOT_CONVERGENT",
+        }
+
+    reconstruction = _finalize_reconstruction(grown["per_L"][L_selected], L_selected, alphabet_size)
 
     if reconstruction.get("status") != "ok":
         return {
@@ -461,7 +688,7 @@ def select_Lmax_and_reconstruct(symbols, alphabet_size, L_grid=L_MAX_GRID,
 
 def bsi_credible_interval(reconstruction, n_samples=N_BSI_SAMPLES, seed=SEED):
     """Posterior mean/std/2.5%/97.5% credible interval for C_mu, given a
-    FIXED topology (n_states, transition_counts) from cssr_fixed_L.
+    FIXED topology (n_states, transition_counts) from the CSSR reconstruction.
     Independent Dirichlet(1,...,1) prior per state's outgoing row;
     posterior = Dirichlet(1 + counts); each MC draw's induced stationary
     distribution (leading left eigenvector of the sampled row-stochastic
@@ -656,8 +883,8 @@ def run_variant_analysis(pre_raw, post_raw, symbolize_fn, alphabet_size,
         surr_pre_sym = symbolize_fn(surr_pre_raw)
         surr_post_sym = symbolize_fn(surr_post_raw)
 
-        r_pre = cssr_fixed_L(surr_pre_sym, alphabet_size, L_pre)
-        r_post = cssr_fixed_L(surr_post_sym, alphabet_size, L_post)
+        r_pre = reconstruct_at_fixed_L(surr_pre_sym, alphabet_size, L_pre)
+        r_post = reconstruct_at_fixed_L(surr_post_sym, alphabet_size, L_post)
 
         if r_pre.get("status") != "ok" or r_post.get("status") != "ok":
             n_surr_not_computable += 1
@@ -723,8 +950,8 @@ def run_bootstrap_variant_analysis(pre_raw, post_raw, symbolize_fn, alphabet_siz
         b_post_raw = moving_block_bootstrap_resample(post_raw, L_post_block, rng)
         b_pre_sym = symbolize_fn(b_pre_raw)
         b_post_sym = symbolize_fn(b_post_raw)
-        r_pre = cssr_fixed_L(b_pre_sym, alphabet_size, L_pre)
-        r_post = cssr_fixed_L(b_post_sym, alphabet_size, L_post)
+        r_pre = reconstruct_at_fixed_L(b_pre_sym, alphabet_size, L_pre)
+        r_post = reconstruct_at_fixed_L(b_post_sym, alphabet_size, L_post)
         if r_pre.get("status") != "ok" or r_post.get("status") != "ok":
             n_undef += 1
             continue

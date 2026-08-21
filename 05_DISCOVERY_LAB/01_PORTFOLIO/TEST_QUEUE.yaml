@@ -752,7 +752,7 @@ queue:
     domain: multi_dominio
     parent_legacy: "01_TAMESIS_CORE (Theory of Regime Interfaces / TOE_INTERFACE_EXECUTION)"
     related_tests: []
-    status: CANDIDATE_FORMULATING
+    status: CLOSED_NULL
     existing_assets:
       - "02_TESTS/TRI_RG/phase0/PHASE0_SURVEY.md (levantamento de 5 candidatos R_lambda/I(X), 2026-08-14)"
       - "02_TESTS/TRI_RG/phase0/workflow_raw_output.json (resultado bruto completo dos 5 agentes de pesquisa + sintese)"
@@ -1628,27 +1628,58 @@ queue:
       Lyapunov). Detalhes completos: 02_TESTS/TRI_RG/
       epsilon_machine_complexity/
       {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md}.
+    epsilon_machine_complexity_v2_revision_result: >
+      2026-08-21 (DISC-DEC-011 -> DISC-DEC-012): revisao delimitada
+      concluida. CSSR incremental completo (Shalizi & Klinkner 2004)
+      substituiu o clustering guloso de L fixo em analysis/em_common.py.
+      I(X) (C_mu primario, h_mu companheiro/diagnostico) e o protocolo
+      de significancia permaneceram exatamente inalterados.
+      VERIFICACAO DE CORRECAO: um NOVO diagnostico decisivo (cadeia de
+      Markov de 2a ordem genuina, N=300.000, solucao teorica exata) foi
+      recuperado EXATAMENTE (4 estados, C_mu=1,8102 vs. teoria 1,8113)
+      -- confirma que o motor GROW+DETERMINIZE esta correto. O Processo
+      Even (teste decisivo do proprio artigo de Shalizi & Klinkner)
+      continuou nao convergindo para a topologia minima verdadeira (2
+      estados) dentro do orcamento L_max<=8 travado a priori -- mas
+      desta vez com uma explicacao matematicamente PROVADA (nao vaga):
+      derivacao analitica via matriz de transicao sub-estocastica
+      mostrando que o ramo "corrida constante de 1s" tem alternacao
+      periodo-2 nunca decadente, resolvivel apenas em L~15-20+, muito
+      alem do orcamento autorizado -- confirmada numericamente a 4
+      digitos significativos ate N=2 milhoes (propriedade do fenomeno,
+      nao bug de implementacao). Os 4 controles positivos deram p_C_mu
+      PRATICAMENTE IDENTICOS a V1 (0,735/0,4/1,0-direcao-errada/
+      DEGENERATE); fallback de bootstrap identico (p=0,595). ACHADO
+      NOVO: um controle negativo que V1 nao conseguia computar
+      (bloqueado por NOT_DETERMINISTIC) agora e computavel sob CSSR
+      completo e revela um NOVO falso positivo em C_mu (p=0,005) --
+      REFORCANDO a conclusao de fragilidade do estimador. VEREDITO: a
+      ambiguidade honesta do fechamento original (limitacao de
+      implementacao vs. fragilidade generica do estimador) esta agora
+      RESOLVIDA DE FORMA DECISIVA a favor da segunda explicacao --
+      implementacao demonstravelmente correta, poder discriminativo
+      ainda ausente. FECHADO NA ETAPA DE VALIDACAO novamente, desta vez
+      com maior confianca -- dado real (Old Faithful, La Palma 2021)
+      nunca tocado nem na sessao original nem nesta revisao. Uma futura
+      revisita legitima exigiria uma medida de complexidade
+      fundamentalmente diferente de C_mu (nova candidatura, fora do
+      escopo desta revisao). Detalhes completos:
+      02_TESTS/TRI_RG/epsilon_machine_complexity/
+      {VALIDATION_NOTE_V2.md,RESULTS_SUMMARY_V2.md}.
     next_action: >
-      2026-08-21 (DISC-DEC-011): linha REABERTA a pedido explicito do
-      usuario, com escopo estritamente delimitado (nao uma nova rodada
-      de busca) -- revisitar epsilon-machine-complexity substituindo o
-      CSSR de clustering guloso de L fixo por uma implementacao
-      incremental completa (Shalizi & Klinkner 2004), resolvendo a
-      ambiguidade ja nomeada honestamente no fechamento original
-      (limitacao de implementacao vs. fragilidade generica do
-      estimador C_mu em amostra finita). I(X) (C_mu primario, h_mu
-      companheiro/diagnostico) e o protocolo de significancia
-      permanecem os mesmos da METHODOLOGY_NOTE.md original -- apenas a
-      completude algoritmica de R_lambda e revisada. status mudado de
-      CLOSED_NULL para CANDIDATE_FORMULATING. Os outros 15 candidatos
-      desta linha NAO sao reabertos por esta decisao -- permanecem com
-      seus vereditos finais documentados em CLOSURE_SUMMARY.md. Proxima
-      acao concreta: reimplementar CSSR incremental completo, revalidar
-      contra dado sintetico (incluindo reexecutar o Processo Even, que
-      deve agora convergir para os 2 estados verdadeiros), e prosseguir
-      para os 2 dominios reais ja verificados (Old Faithful,
-      La Palma 2021) apenas se a validacao mostrar poder discriminativo
-      real.
+      NENHUMA -- linha ENCERRADA FORMALMENTE novamente (status:
+      CANDIDATE_FORMULATING -> CLOSED_NULL, DISC-DEC-012) apos a revisao
+      delimitada de epsilon-machine-complexity concluir com um veredito
+      mais decisivo (fragilidade genuina do estimador C_mu confirmada,
+      nao limitacao de implementacao). 16/16 candidatos permanecem com
+      resultado final -- nenhuma nova candidatura foi criada. Ver
+      02_TESTS/TRI_RG/CLOSURE_SUMMARY.md (historico original) e
+      02_TESTS/TRI_RG/epsilon_machine_complexity/RESULTS_SUMMARY_V2.md
+      (revisao). Reabertura futura permanece possivel mas exigiria uma
+      nova justificativa explicita do usuario -- uma revisita legitima
+      a epsilon-machine-complexity exigiria uma medida de complexidade
+      fundamentalmente diferente de C_mu (nova candidatura), nao mais
+      uma correcao de implementacao.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

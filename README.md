@@ -24,6 +24,28 @@ O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISA
 | Tamesis `M_c v1` | **Hipótese testável** | O valor `M_c = 5.292674126388712e-16 kg` é um parâmetro do modelo, não uma medição. |
 | Evidência física independente | **Ainda não estabelecida** | Não há, neste arquivo, confirmação experimental da ontologia Tamesis. |
 | Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
+| Adjudicação numérica do núcleo | **Onda 1 concluída (2026-08-21)** | Ver seção "Adjudicação numérica em andamento" abaixo — 3 alegações fechadas negativas com veredito final, 1 parcialmente confirmada por reprodução adversarial. |
+
+### Adjudicação numérica em andamento (Discovery Lab, atualizado 2026-08-21)
+
+O `05_DISCOVERY_LAB` mantém uma adjudicação contínua das alegações quantitativas
+deste arquivo contra referências externas reais (PDG, CODATA, Planck), com
+metodologia fixada antes de cada cálculo, proveniência de todo valor de
+referência e reprodução adversarial obrigatória para achados positivos.
+Registro completo: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` e
+`05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml` (`DISC-DEC-013`/`-014`).
+
+| Alegação do núcleo | Veredito (critérios a priori) |
+|---|---|
+| Consistência interna de `M_c` | **Inconsistente.** 4 valores divergem em até ~190×; o valor congelado usa o ramo `a₀=cH₀` desfavorecido pelo próprio teste SPARC-002 do laboratório; fórmula do rascunho PRL dimensionalmente inconsistente. |
+| Massas de quarks via nós (`M∝e^{αL/D}`, "R²>0,99") | **Não sobrevive.** R² real 0,986/0,935; leave-one-out falha em 5/6 quarks; percentil 86/70 no nulo de permutação (limiar 95). |
+| `sin²θ_W=3/13`, `α⁻¹=Ω^{1.03}`, `n_s` do bounce, Λ holográfico | **Nenhuma sobrevive como formulada.** 7,5σ no esquema mais favorável; ajuste com 0 g.l.; tuning de `ξ` confirmado no código; Λ reproduz `ρ_crit` por identidade algébrica (razão ≡ 1/Ω_Λ). |
+| Classe de universalidade U₁/₂ (`φ(c)=(1+c)^{-1/2}`) | **Parcialmente confirmada** (reprodução adversarial independente): expoente de cauda 1/2 e distinção das classes concorrentes CONFIRMADOS; o "teorema" de limite exato REFUTADO (desvios estáveis até n=64.000); o objeto-limite verdadeiro foi identificado e explica todo o dado. Pergunta aberta: qual é a função-limite exata? |
+| Zeros de ζ — triagem itens 5/6/10 (avaliação de `ζ(s)`) | Itens 5 e 6 despriorizados com justificativa concreta; **item 10 (máximos FHK em intervalos curtos) priorizado** — único com pergunta falseável e modelo concorrente nomeado; pré-registro em desenho. |
+
+Anteriormente: a linha `DISC-TRI-RG-001` (invariante cross-domain) foi encerrada
+`CLOSED_NULL` após 16/16 candidatos sem sobrevivente, e as linhas SPARC/MOND
+fecharam inconclusivas — ver `05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md`.
 
 ## Visão do laboratório
 

@@ -472,14 +472,29 @@ queue:
       e item 7 (constante de gaps pequenos, Inoue 2026, arXiv:2604.05733)
       sinalizados como os candidatos mais promissores a pre-registro real
       -- nenhum ainda desenhado como pergunta falsificavel adequada.
+    phase0_zeta_eval_triage: >
+      2026-08-21 (DISC-DEC-013, exploratory_only): itens 5, 6 e 10
+      triados com motor Riemann-Siegel proprio validado (bug real de
+      precisao float64 encontrado e corrigido na validacao, run falho
+      preservado). Item 5 (momentos de zeta): k=3 fica 13-18x acima do
+      termo lider Keating-Snaith em T acessivel (termos de ordem
+      inferior dominam) -- NAO priorizar (teste real = replicar
+      polinomio CFKRS ja publicado). Item 6 (CLT de Selberg):
+      variancia empirica fica entre os dois modelos nomeados, ~11
+      sigma de ambos -- observavel nao-informativo sem modelo de
+      correcao de altura finita, NAO priorizar. Item 10 (maximos FHK
+      em intervalos curtos): slope -0,408+-0,184, compativel com FHK
+      (-3/4) E iid (-1/4) -- sem poder na escala da triagem, mas E o
+      unico com pergunta falsificavel genuina e modelo concorrente
+      nomeado; pre-registro viavel exige M~2000/altura + altura 10^11
+      (~4-5h de computo, separacao projetada ~8 sigma). Ver
+      02_TESTS/RH_ZETA_ZEROS/phase0_zeta_eval_triage/TRIAGE_RESULTS.md
     next_action: >
-      Escolher um candidato (provavelmente item 9 ou item 7 do
-      PHASE0_TRIAGE_SUMMARY.md) e desenhar uma pergunta genuinamente
-      falsificavel com criterio de decisao a priori antes de qualquer
-      pre-registro formal -- "o minimo/maximo observado e X" nao e
-      falsificavel por si so. Itens 5, 6, 10 do levantamento (exigem
-      avaliacao de zeta(s), nao so localizacao de zeros) permanecem
-      nao-triados.
+      Onda 2 (DISC-DEC-014): desenhar e TRAVAR o pre-registro do
+      sub-teste FHK item 10 (DISC-RH-FHK-SHORT-INTERVAL-MAX-001)
+      seguindo o plano de poder da triagem, validar pipeline contra
+      ground truth sintetico ANTES do lock, e so entao computar --
+      regra ternaria de decisao, altura de holdout selada.
     stop_condition: >
       pular a fase de filtragem numerica/literatura e ir direto para Lean;
       alegar progresso sobre RH em si a partir de qualquer resultado desta
@@ -1725,7 +1740,7 @@ queue:
     title: "Adjudicacao numerica de alegacoes quantitativas internas do nucleo Tamesis (4 frentes de mesa)"
     domain: adjudicacao_interna
     parent_legacy: "01_TAMESIS_CORE (multiplos modulos -- ver frentes)"
-    status: CANDIDATE_FORMULATING
+    status: ADVERSARIALLY_REVIEWED
     created_by: DISC-DEC-013
     fronts:
       - front_id: mc-internal-consistency
@@ -1762,7 +1777,59 @@ queue:
       qualquer alegacao de fisica nova a partir de consistencia interna
       (o maximo que esta linha pode produzir e "consistente/inconsistente
       como formulado").
+    wave1_results:
+      mc_internal_consistency: >
+        INCONSISTENTE COMO FORMULADO (C1 pass / C2 fail / C3 fail,
+        criterios fixados a priori). Aritmetica do valor congelado
+        reproduz suas proprias premissas (rel. dev. 2,8e-12), mas usa
+        a0=cH0 -- o ramo desfavorecido por SPARC-002; sob o ramo
+        sobrevivente (cH0/2pi) M_c=4,206e-16 kg, fator (2pi)^(1/8)=
+        1,2583 (+25,8%). Os 4 valores de M_c do nucleo divergem em ate
+        189,7x (2,28 ordens). Achados novos: formula do rascunho PRL
+        (hbar^2/Gc)^(1/4) e dimensionalmente inconsistente e 805,7x
+        fora do proprio valor alegado; expoente 1/8 veio de varredura
+        de fracoes contra janela-alvo (calculo_mc.py). Ver
+        02_TESTS/CORE_NUMERICS/mc_consistency/RESULTS_SUMMARY.md
+      knot_quark_mass: >
+        NAO SOBREVIVE (falha nos 4 criterios pre-declarados). R2>0,99
+        alegado nunca foi computado pelo proprio script (R2 real
+        0,986/0,935; provavel Pearson r rotulado como R2);
+        leave-one-out falha 5/6 quarks (erros ate 52x); nulo de
+        permutacao: atribuicao alegada no percentil 86/70 (limiar 95);
+        rope-lengths do arquivo nem batem com a fonte (ACPR
+        arXiv:1002.1723). Ver 02_TESTS/CORE_NUMERICS/knot_quark_mass/
+      constant_fits: >
+        NENHUMA ALEGACAO SOBREVIVE COMO FORMULADA. sin2(theta_W)=3/13:
+        7,5 sigma no esquema mais caridoso (MS-bar), tuning confessado
+        no codigo (target_s2w hardcoded); alpha^-1=Omega^1.03: ajuste
+        de 1 parametro a 1 numero, 0 g.l., e Omega^1.033=136,956 (a
+        propria aritmetica nao fecha); n_s bounce: 0,50 sigma de Planck
+        mas NAO-IDENTIFICAVEL (xi escaneado ate N=60, n_s=1-2/N
+        automatico -- comentado no proprio codigo); Lambda holografico
+        "CONFIRMED" com 46%: por identidade algebrica a construcao
+        reproduz rho_crit (razao = 1/Omega_Lambda), 25 sigma. Ver
+        02_TESTS/CORE_NUMERICS/constant_fits/RESULTS_SUMMARY.md
+      u12_universality: >
+        PARCIALMENTE SOBREVIVE -- REPRODUCAO ADVERSARIAL COMPLETA
+        (implementacao independente, validada por enumeracao exata
+        n<=6, seeds proprios). CONFIRMADO: expoente alpha=0,4992
+        +-0,0187 (consistente com 1/2 e com o 0,508+-0,033 do
+        arquivo); forma (1+c)^(-1/2) decisivamente distinta das
+        classes concorrentes do Atlas (pior margem dAIC +2648);
+        gap=2/n exato. REFUTADO: o "teorema" de limite exato -- desvios
+        sistematicos NAO encolhem ate n=64.000 (+32,5 sigma em c=0,5,
+        -44,6 sigma em c=50, chi2 p~5e-227). Achado NOVO adversarial:
+        simulacao direta do objeto-limite (Poisson-Dirichlet(1) +
+        reroteamento Poisson(c)) da phi_inf(0,5)=0,85493+-0,00053
+        (teorema: 0,81650, +73 sigma) e explica TODO o dado finito
+        (chi2 p=0,09/0,58) -- o limite existe mas nao e (1+c)^(-1/2);
+        a forma fechada e aproximacao de ~2-4% com cauda c^(-1/2)
+        correta. Pergunta aberta legitima: qual E a funcao-limite
+        exata? Ver 02_TESTS/CORE_NUMERICS/u12_universality/
+        (RESULTS_SUMMARY.md + adversarial/ADVERSARIAL_VERDICT.md)
     next_action: >
-      5 agentes paralelos despachados 2026-08-21 (4 frentes desta linha
-      + triagem RH itens 5/6/10 sob DISC-RH-REAL-001). Integrar
-      resultados quando voltarem.
+      Onda 2 (DISC-DEC-014): frente u12-limit-characterization --
+      caracterizar a funcao-limite verdadeira phi_inf(c) do ensemble
+      U_1/2 (analitica + numerica de alta precisao sobre o
+      objeto-limite ja validado adversarialmente). As 3 frentes
+      negativas estao FECHADAS com veredito final.

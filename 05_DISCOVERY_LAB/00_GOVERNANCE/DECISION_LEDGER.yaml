@@ -891,3 +891,64 @@ decisions:
       - "reproducao adversarial obrigatoria para qualquer achado positivo antes de reporta-lo como real"
       - "resultados negativos catalogados com o mesmo peso que positivos; nenhuma alegacao de Problema do Millennium; nenhuma inferencia Tamesis alem do que o numero especifico sustenta"
       - "nenhum dado ou citacao fabricado -- qualquer referencia inacessivel e reportada como inacessivel, nao substituida por valor de memoria"
+
+  - decision_id: DISC-DEC-014
+    date: 2026-08-21
+    decision: >
+      Integrar os resultados da onda 1 de DISC-DEC-013 (5 frentes + 1
+      reproducao adversarial, todas concluidas) e autorizar a onda 2
+      com 2 frentes paralelas: (a) u12-limit-characterization sob
+      DISC-CORE-NUMERICS-001 -- caracterizar a funcao-limite verdadeira
+      phi_inf(c) do ensemble U_1/2, ja que a reproducao adversarial
+      confirmou que o limite existe, e distinto das classes
+      concorrentes, tem expoente de cauda 1/2, mas NAO e a forma
+      fechada (1+c)^(-1/2) alegada como teorema pelo nucleo; (b)
+      DISC-RH-FHK-SHORT-INTERVAL-MAX-001 sob DISC-RH-REAL-001 --
+      desenhar e travar pre-registro do teste FHK de maximos em
+      intervalos curtos (item 10, unico priorizado pela triagem), com
+      validacao de pipeline contra ground truth sintetico ANTES do
+      lock. Sob diretriz permanente do usuario ("continue colocando
+      agentes para trabalhar... ir o mais longe que pudermos...
+      sempre mantenha readme atualizado"), o README raiz passa a ser
+      atualizado a cada integracao de onda.
+    rationale: >
+      Resultados da onda 1, todos com criterios fixados a priori e
+      referencia externa por fetch com proveniencia: (1)
+      mc-internal-consistency: INCONSISTENTE (4 valores de M_c
+      divergem ate 189,7x; formula PRL dimensionalmente inconsistente;
+      expoente 1/8 de varredura contra alvo); (2) knot-quark-mass:
+      NAO SOBREVIVE (R2>0,99 nunca computado de fato, leave-one-out
+      falha 5/6, percentil 86/70 no nulo de permutacao); (3)
+      constant-fits: NENHUMA sobrevive (3/13: 7,5 sigma + tuning
+      hardcoded; Omega^1.03: 0 g.l.; n_s bounce: nao-identificavel;
+      Lambda: identidade algebrica com rho_crit); (4)
+      u12-universality: PARCIALMENTE SOBREVIVE com reproducao
+      adversarial completa -- expoente 1/2 e distincao de classe
+      CONFIRMADOS por implementacao independente validada contra
+      enumeracao exata, "teorema" de limite exato REFUTADO
+      (desvios estaveis ate n=64.000), e o objeto-limite
+      (Poisson-Dirichlet(1) + reroteamento Poisson) simulado
+      diretamente explica todo o dado finito -- gerando a pergunta
+      aberta legitima da frente (a); (5) triagem RH 5/6/10:
+      itens 5 e 6 despriorizados com justificativa concreta, item 10
+      priorizado com plano de poder quantificado -- gerando a frente
+      (b). Nenhum resultado negativo foi suavizado; os 3 fechamentos
+      negativos sao vereditos finais catalogados com peso integral.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: status ADVERSARIALLY_REVIEWED + wave1_results; DISC-RH-REAL-001: phase0_zeta_eval_triage + next_action)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/ (4 frentes + adversarial, novos arquivos)"
+      - "05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/phase0_zeta_eval_triage/ (novo)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atualizado)"
+      - "README.md (secao de estado da adjudicacao numerica adicionada -- diretriz permanente de manter README atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-CORE-NUMERICS-001: CANDIDATE_FORMULATING -> ADVERSARIALLY_REVIEWED (3 frentes fechadas negativas com veredito final; 1 frente com achado parcialmente positivo confirmado adversarialmente e pergunta aberta derivada)"
+      - "onda 2 autorizada: u12-limit-characterization + pre-registro FHK item 10 (DISC-RH-FHK-SHORT-INTERVAL-MAX-001)"
+      - "diretriz permanente registrada: README raiz atualizado a cada integracao de onda"
+    untouched_safeguards:
+      - "frente (b) exige validacao de pipeline contra ground truth sintetico ANTES de travar o pre-registro, e lock ANTES de computar a estatistica de teste em alturas reais -- mesma disciplina de toda a linha"
+      - "frente (a) e matematica computacional pura -- qualquer forma fechada candidata para phi_inf(c) exige criterio de comparacao pre-declarado e verificacao em multiplos c fora do conjunto de ajuste"
+      - "nenhuma alegacao de fisica nova a partir de U_1/2: e um resultado de matematica combinatoria sobre um ensemble especifico, nao um invariante fisico cross-domain (DISC-TRI-RG-001 permanece CLOSED_NULL)"
+      - "reproducao adversarial obrigatoria continua valendo para qualquer achado positivo de qualquer frente da onda 2"

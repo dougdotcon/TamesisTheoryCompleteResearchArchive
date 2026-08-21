@@ -1,0 +1,86 @@
+========================================================================
+A1 - VERIFICACAO ARITMETICA DO CONTRATO (constantes congeladas)
+========================================================================
+l_P (contrato)                    = 1.616255023929e-35 m
+m_P (contrato, sqrt(hbar c/G))    = 2.176434342051e-08 kg
+m_P CODATA 2022 tabulado          = 2.176434e-08 kg
+  desvio relativo                 = 1.572e-07  (tol sanidade 2.2e-5)
+a_P = c^2/l_P                     = 5.560726280388e+51 m/s^2
+a0 = c*H0_si (ramo do contrato)   = 6.800928323281e-10 m/s^2
+M_c recomputado                   = 5.292674126403759e-16 kg
+M_c congelado                     = 5.292674126388712e-16 kg
+  desvio relativo                 = 2.843e-12  (criterio C1: <= 1e-9)
+H0 70 km/s/Mpc -> SI (Mpc IAU)    = 2.268545502611056e-18 s^-1
+H0 si_value congelado             = 2.268545502662652e-18 s^-1
+  desvio relativo                 = 2.274e-11  (criterio C1: <= 1e-6)
+C1 (aritmetica do contrato): APROVADO
+
+========================================================================
+A2 - OS DOIS RAMOS DE a0 (H0 = 70 km/s/Mpc, constantes do contrato)
+========================================================================
+a0_B = cH0        (ramo do contrato; FALSIFICADO por SPARC-002) = 6.800928e-10 m/s^2
+a0_A = cH0/(2pi)  (ramo SOBREVIVENTE em SPARC-002)              = 1.082401e-10 m/s^2
+M_c[a0=cH0]      = 5.292674126403759e-16 kg   (= valor congelado)
+M_c[a0=cH0/2pi]  = 4.206323510621529e-16 kg
+fator de deslocamento (2pi)^(1/8) = 1.258266063710756
+razao M_c_congelado / M_c_ramo_sobrevivente = 1.258266063710756
+excesso percentual do valor congelado sobre o ramo sobrevivente = 25.8266 %
+C2 (coerencia com ramo sobrevivente): REPROVADO (contrato usa a0=cH0, ramo falsificado; diferenca 25.83% > 1%)
+
+========================================================================
+A3 - SENSIBILIDADE A H0 (ambos os ramos)
+========================================================================
+H0 =  67.4: M_c[cH0] = 5.267692e-16 kg (-0.472% vs congelado) | M_c[cH0/2pi] = 4.186469e-16 kg
+H0 =  70.0: M_c[cH0] = 5.292674e-16 kg (-0.000% vs congelado) | M_c[cH0/2pi] = 4.206324e-16 kg
+H0 =  73.0: M_c[cH0] = 5.320510e-16 kg (+0.526% vs congelado) | M_c[cH0/2pi] = 4.228446e-16 kg
+Nota: M_c ~ H0^(1/8); a variacao 67.4-73 muda M_c em ~1%, muito menor que o fator (2pi)^(1/8) de ~26% entre ramos.
+
+========================================================================
+A4 - OUTRAS DERIVACOES DE M_c NO NUCLEO
+========================================================================
+(a) M_P * Omega^-4, Omega = 117.038 (01_Foundation/README.md:97)
+    recomputado = 1.159946e-16 kg | alegado = 1.16e-16 kg | desvio = 0.005%  -> fiel (tol 5%)
+(b) (hbar^2/(Gc))^(1/4) (08_.../prl_submission.html:239, paper.html:410)
+    dimensao: kg^(3/4) s^(1/4) -> DIMENSIONALMENTE INCONSISTENTE (nao e massa)
+    valor numerico da expressao como escrita (SI) = 2.730433e-17
+    alegado ~ 2.2e-14 kg | razao alegado/calculado = 805.7x
+    -> infiel: a expressao escrita NAO reproduz 2.2e-14 (desvio 100%)
+(c) (hbar*m_atom*c^3/(4G))^(1/3) (01_Mc_Derivation/index.html:255)
+    dimensao: kg m^(2/3) s^(-2/3) -> DIMENSIONALMENTE INCONSISTENTE (nao e massa)
+    valor com m_atom = 1 u = 2.604797e-09 (unidades mistas)
+    m_atom necessario p/ reproduzir 2.2e-14 = 1.000e-42 kg (= 6.02e-16 u; nenhum atomo fisico)
+    checagem lateral: 2.2e-14 kg = 1.325e+13 u, mas o arquivo alega '~320 million amu' (3.2e8 u) -> discrepancia interna de 4.1e+04x
+
+========================================================================
+A5 - MATRIZ DE RAZOES ENTRE OS VALORES DE M_c DO NUCLEO
+========================================================================
+                                        frozen_contrac  killer_predict  paper08_order_  foundation_ome  surviving_bran
+frozen_contract                                  1.000           0.024           0.053           4.563           1.258
+killer_prediction_2p2e14                        41.567           1.000           2.200         189.655          52.302
+paper08_order_1e14                              18.894           0.455           1.000          86.207          23.774
+foundation_omega4_claim                          0.219           0.005           0.012           1.000           0.276
+surviving_branch_cH0_over_2pi                    0.795           0.019           0.042           3.626           1.000
+
+maior razao par-a-par = 189.7x (2.28 ordens de grandeza)
+pares com razao > 10x: 6
+  frozen_contract vs killer_prediction_2p2e14: 41.6x
+  frozen_contract vs paper08_order_1e14: 18.9x
+  killer_prediction_2p2e14 vs foundation_omega4_claim: 189.7x
+  killer_prediction_2p2e14 vs surviving_branch_cH0_over_2pi: 52.3x
+  paper08_order_1e14 vs foundation_omega4_claim: 86.2x
+  paper08_order_1e14 vs surviving_branch_cH0_over_2pi: 23.8x
+pares com razao entre 2x e 10x: 3
+  frozen_contract vs foundation_omega4_claim: 4.6x
+  killer_prediction_2p2e14 vs paper08_order_1e14: 2.2x
+  foundation_omega4_claim vs surviving_branch_cH0_over_2pi: 3.6x
+C3 (coerencia entre formulacoes): REPROVADO
+
+========================================================================
+VEREDITO (criterios de METHODOLOGY_NOTE.md)
+========================================================================
+C1 aritmetica do contrato      : APROVADO
+C2 ramo a0 sobrevivente        : REPROVADO
+C3 coerencia entre formulacoes : REPROVADO
+VEREDITO GLOBAL: INCONSISTENTE_COMO_FORMULADO
+
+results.json gravado em /home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/mc_consistency/analysis/results.json

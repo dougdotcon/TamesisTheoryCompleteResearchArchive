@@ -1,0 +1,26 @@
+=== Tier 0: code-correctness diagnostic ===
+  independent Gaussians: TE(X->Y)=0.00006  TE(Y->X)=-0.00332
+  coupled AR(1) (c=0.5, X->Y ground truth): TE(X->Y)=0.33996  TE(Y->X)=0.00135
+  Tier 0 overall_pass = True
+=== Tier 1: positive control (v1_c0.5, c_strong=0.5) ===
+  status=ok  (304.1s)
+  delta={'TE_net': 0.19470937325533255, 'TE_sum': 0.25855538470643646, 'STE_net': 0.15960581785488537, 'STE_sum': -0.22237284979478433}
+  p_iaaft={'TE_net': 0.0, 'TE_sum': 0.0, 'STE_net': 0.0, 'STE_sum': 0.0}
+  p_circular_shift={'TE_net': 0.0, 'TE_sum': 0.0, 'STE_net': 0.0, 'STE_sum': 0.0}
+=== Tier 2: negative control (3 seeds, no real transition) ===
+  seed 0: status=ok (237.4s)
+    delta={'TE_net': 0.009648535781596967, 'TE_sum': 0.01663958950896549, 'STE_net': -0.02042658730774405, 'STE_sum': 0.10136983111145437}
+    p_iaaft={'TE_net': 0.55, 'TE_sum': 0.365, 'STE_net': 0.55, 'STE_sum': 0.07}
+    p_circular_shift={'TE_net': 0.6, 'TE_sum': 0.325, 'STE_net': 0.5, 'STE_sum': 0.025}
+  seed 1: status=ok (265.6s)
+    delta={'TE_net': 0.02969510495165628, 'TE_sum': -0.00023973017851264267, 'STE_net': 0.02861805222693703, 'STE_sum': -0.05073694080830071}
+    p_iaaft={'TE_net': 0.08, 'TE_sum': 0.995, 'STE_net': 0.42, 'STE_sum': 0.315}
+    p_circular_shift={'TE_net': 0.045, 'TE_sum': 0.99, 'STE_net': 0.41, 'STE_sum': 0.785}
+  seed 2: status=ok (160.4s)
+    delta={'TE_net': -0.031164962611323066, 'TE_sum': -0.01885765535186623, 'STE_net': -0.06701700357976459, 'STE_sum': -0.015889100745747786}
+    p_iaaft={'TE_net': 0.06, 'TE_sum': 0.26, 'STE_net': 0.035, 'STE_sum': 0.74}
+    p_circular_shift={'TE_net': 0.05, 'TE_sum': 0.295, 'STE_net': 0.255, 'STE_sum': 0.68}
+  false-positive rate across seeds/channels/nulls: 1/12 = 0.08333333333333333
+
+FINAL VERDICT: PASS_PROCEED_TO_REAL_DATA
+Total wall time: 969.7s

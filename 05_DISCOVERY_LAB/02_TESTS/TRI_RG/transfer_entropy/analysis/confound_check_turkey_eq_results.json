@@ -1,0 +1,123 @@
+{
+  "diagnostic": {
+    "contam_start_bin": 303,
+    "pre_x_clean_median": 1807639.3798610785,
+    "pre_x_clean_max": 1948142.2528479185,
+    "pre_x_contam_median": 7197.574881762838,
+    "pre_x_contam_max": 1963093.4600657176,
+    "pre_y_clean_median": 10877.669366842023,
+    "pre_y_contam_median": 10765.48019641948,
+    "pre_y_contam_max": 10854.582367990948,
+    "interpretation": "PRE/X (GAZ) median jumps from clean-region to contaminated-region by >100x while PRE/Y (BNN) stays flat across the same absolute time window -- station-specific artifact, not a real shared regional signal."
+  },
+  "check_a_placebo_split": {
+    "status": "ok",
+    "delta": {
+      "TE_net": -0.14166822485135766,
+      "TE_sum": 0.15957885738271527,
+      "STE_net": -0.13219317450133522,
+      "STE_sum": 2.2206968949258568
+    },
+    "p_iaaft": {
+      "TE_net": 0.115,
+      "TE_sum": 0.12,
+      "STE_net": 0.135,
+      "STE_sum": 0.0
+    },
+    "p_circular_shift": {
+      "TE_net": 0.985,
+      "TE_sum": 0.035,
+      "STE_net": 0.095,
+      "STE_sum": 0.93
+    },
+    "note": "pseudo-PRE = PRE bins [0:360) (clean), pseudo-POST = PRE bins [360:720) (includes the contaminated region from bin 303 onward) -- NO real transition."
+  },
+  "check_b_clean_pre": {
+    "status": "ok",
+    "delta": {
+      "TE_net": 0.014000838146784211,
+      "TE_sum": 0.01899625053835674,
+      "STE_net": -0.02032421610341495,
+      "STE_sum": 2.3944398920537013
+    },
+    "p_iaaft": {
+      "TE_net": 0.515,
+      "TE_sum": 0.475,
+      "STE_net": 0.935,
+      "STE_sum": 0.0
+    },
+    "p_circular_shift": {
+      "TE_net": 0.555,
+      "TE_sum": 0.32,
+      "STE_net": 1.0,
+      "STE_sum": 1.0
+    },
+    "note": "PRE truncated to bins [0:303) only (~10.1h), POST unchanged (real)."
+  },
+  "check_c_highpass_filtered": {
+    "status": "ok",
+    "delta": {
+      "TE_net": 0.027955093253560825,
+      "TE_sum": -0.016669013499644336,
+      "STE_net": -0.08852389222073032,
+      "STE_sum": -0.5899744554626838
+    },
+    "p_iaaft": {
+      "TE_net": 0.305,
+      "TE_sum": 0.61,
+      "STE_net": 0.82,
+      "STE_sum": 0.04
+    },
+    "p_circular_shift": {
+      "TE_net": 0.41,
+      "TE_sum": 0.545,
+      "STE_net": 0.37,
+      "STE_sum": 0.0
+    },
+    "note": "detrend(linear) + highpass(1Hz, 4 corners, zerophase) applied to raw waveform BEFORE RMS binning, both channels, both PRE and POST, refetched from IRIS.",
+    "pre_x_filtered_median": 17.21781562072654,
+    "pre_x_filtered_max": 14556.31592902245
+  },
+  "check_d_post_early_only": {
+    "status": "ok",
+    "delta": {
+      "TE_net": null,
+      "TE_sum": null,
+      "STE_net": -0.06823019923190327,
+      "STE_sum": 0.9871091220529746
+    },
+    "p_iaaft": {
+      "TE_net": null,
+      "TE_sum": null,
+      "STE_net": 0.7,
+      "STE_sum": 0.02
+    },
+    "p_circular_shift": {
+      "TE_net": null,
+      "TE_sum": null,
+      "STE_net": 1.0,
+      "STE_sum": 1.0
+    }
+  },
+  "check_d_post_excluding_early": {
+    "status": "ok",
+    "delta": {
+      "TE_net": 0.00821467507999718,
+      "TE_sum": -0.07744906373362404,
+      "STE_net": -0.2665953132444476,
+      "STE_sum": 1.9156837056654425
+    },
+    "p_iaaft": {
+      "TE_net": 0.91,
+      "TE_sum": 0.195,
+      "STE_net": 0.145,
+      "STE_sum": 0.0
+    },
+    "p_circular_shift": {
+      "TE_net": 0.985,
+      "TE_sum": 0.815,
+      "STE_net": 1.0,
+      "STE_sum": 1.0
+    }
+  }
+}

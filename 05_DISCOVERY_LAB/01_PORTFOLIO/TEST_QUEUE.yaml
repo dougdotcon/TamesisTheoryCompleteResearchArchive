@@ -1530,18 +1530,74 @@ queue:
       usado) e par de terremotos de Kahramanmaraş 2023 (dominio
       genuinamente novo). Detalhes completos: 02_TESTS/TRI_RG/phase0/
       PHASE0_8_SURVEY_NEW_CANDIDATES.md.
+    transfer_entropy_gap_closing_result: >
+      2026-08-21: usuario pediu para fechar o primeiro candidato da Fase
+      0.8, transferencia de entropia/fluxo de informacao direcionado --
+      a PRIMEIRA candidatura bivariada/direcional de toda a linha (as
+      14 anteriores eram todas univariadas). Metodologia fixada em
+      METHODOLOGY_NOTE.md ANTES de qualquer calculo real: embedding de
+      historia propria via Ragwitz-Kantz 2002 (criterio estruturalmente
+      diferente do FNN que ja fechou RQA/LLE), estimador KSG-CMI
+      (auto-implementado e verificado -- IDTxl/JIDT indisponiveis neste
+      ambiente), TE Simbolica via reaproveitamento do embedding ordinal
+      ja auditado de permutation_entropy como estimador de robustez,
+      sub-janelamento para nao-estacionariedade, protocolo de nulo
+      substituto DUPLO (IAAFT primario + deslocamento circular
+      companheiro, Quian Quiroga et al. 2002 -- territorio genuinamente
+      novo desta linha), mitigacao obrigatoria pre-declarada de
+      propagacao de onda compartilhada para o dominio sismico
+      (binning RMS em vez de forma de onda bruta). VALIDACAO SINTETICA:
+      passou sem necessidade do passo de correcao pre-autorizado --
+      controle positivo (AR(1) acoplado) mostrou poder discriminativo
+      forte nos 4 canais sob os 2 nulos (p=0,0), controle negativo com
+      taxa de falso-positivo compativel com o nivel nominal (~8,3%).
+      REAL: CHB-MIT EEG (chb01_03.edf, onset de convulsao, eletrodos
+      FP1-F7/T7-P7) e par de terremotos de Kahramanmaras, Turquia
+      (06/02/2023, estacoes GAZ/BNN). CHB-MIT: sem significancia
+      robusta no canal primario em nenhuma variante; o unico p<0,05
+      isolado (canal de robustez, so sob 1 dos 2 nulos) nao replicou em
+      2 pares de eletrodo alternativos e e compativel com a taxa de
+      falso-positivo de base. Turquia: variante primaria mostrou
+      achados p<0,05 fortes no canal PRIMARIO sob AMBOS os nulos --
+      reproducao adversarial obrigatoria (4 checagens) descobriu um
+      ARTEFATO INSTRUMENTAL de baixa frequencia especifico da estacao
+      GAZ contaminando ~44% da janela PRE (nao um evento sismico real
+      -- BNN nao mostra nada no mesmo intervalo); com o dado
+      corretamente filtrado (passa-alta 1Hz), a significancia
+      desaparece completamente (p entre 0,305 e 0,61). O achado
+      companheiro (TE Simbolica) foi separadamente descartado --
+      dispara significancia mesmo numa divisao placebo sem transicao
+      real, confirmando empiricamente o risco de esparsidade
+      combinatoria ja nomeado a priori. VEREDITO: nenhum invariante
+      cross-domain sobrevivente -- padrao de refutacao estruturalmente
+      identico ao de dmd_koopman/Kilauea (mecanismo mundano concreto
+      explica o achado bruto), mas ainda mais decisivo aqui (o "sinal"
+      nem correspondia a atividade sismica real, era artefato de
+      instrumentacao). Validacao sintetica com poder real descarta a
+      explicacao "pipeline cega" -- o negativo e informativo. 15o
+      candidato desta linha a terminar sem produzir invariante
+      cross-domain sobrevivente. Detalhes completos:
+      02_TESTS/TRI_RG/transfer_entropy/
+      {METHODOLOGY_NOTE.md,VALIDATION_NOTE.md,RESULTS_SUMMARY.md,
+      analysis/CONFOUND_CHECK_CHBMIT.md,
+      analysis/CONFOUND_CHECK_TURKEY_EARTHQUAKE.md}.
     next_action: >
-      Fase 0.8 completa -- 2 novos candidatos formalizados com
-      viable=true (transferencia de entropia [rank 1], complexidade de
-      ε-machines [rank 2]), nenhum ainda travado em METHODOLOGY_NOTE.md
-      nem testado contra dado real. Aguardando escolha do usuario sobre
-      qual fechar primeiro. status permanece CANDIDATE_FORMULATING; a
-      pausa formal de DISC-DEC-009 fica superada na pratica por esta
-      nova rodada de busca (mesmo padrao ja visto 4x nesta linha) -- o
-      registro formal da reabertura fica para quando a rodada atual for
-      encerrada. Toda a infraestrutura das buscas anteriores (14
-      METHODOLOGY_NOTE.md, pipelines validadas, dominios reais de 20+
-      fontes testadas no total) permanece commitada e reaproveitavel.
+      Fase 0.8: 1 de 2 candidatos formalizados fechado (transferencia de
+      entropia, negativo apos reproducao adversarial revelar artefato
+      instrumental). Resta 1 candidato formalizado com viable=true,
+      ainda nao travado nem testado: complexidade estatistica de
+      ε-machines (C_mu, rank 2 -- provado matematicamente distinto do
+      C_JS ja fechado, mas compartilha a mesma estrategia de deteccao;
+      dominio do genoma de E. coli e ESPACIAL, nao temporal, precisa de
+      aval explicito antes de METHODOLOGY_NOTE.md). Aguardando escolha
+      do usuario sobre fechar C_mu em seguida (encerrando toda a Fase
+      0.8), ou considerar a linha suficientemente explorada por ora
+      (15/15 candidatos identificados com resultado final, nenhum
+      invariante sobrevivente). status permanece CANDIDATE_FORMULATING.
+      Toda a infraestrutura das buscas anteriores (15
+      METHODOLOGY_NOTE.md agora, pipelines validadas, dominios reais de
+      20+ fontes testadas no total) permanece commitada e
+      reaproveitavel.
     dfa_reformulation_search_result: >
       2026-08-14: usuario pediu para retomar a linha (RETOMADA, DISC-DEC-005
       revertida implicitamente pela nova instrucao explicita). Agente de

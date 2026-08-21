@@ -651,3 +651,74 @@ decisions:
       - "os 14 candidatos identificados desde a criacao da linha permanecem documentados com resultado final honesto (3 fechados na etapa de validacao, 11 testados ate o dado real ou ate uma parede estrutural de nao-testabilidade, incluindo 2 achados reais refutados por reexecucao adversarial completa), disponiveis para revisita com dominios/dados diferentes dos ja usados sem precisar refazer o desenho metodologico do zero"
       - "os 2 candidatos viable=false da Fase 0.7 (largura de espectro multifractal MF-DFA, EMD/Hilbert-Huang) permanecem documentados em phase0/PHASE0_7_SURVEY_NEW_CANDIDATES.md com seus dominios reais ja verificados (MIT-BIH afdb 08215, Bitcoin out/2025, SCADA de turbina eolica Kelmarsh, extensao de gelo marinho artico 2007), reaproveitaveis se uma futura reformulacao encontrar um canal I(X) que escape da redundancia identificada"
       - "nenhuma alegacao de encerramento definitivo ou de invalidacao da hipotese TRI/TDTR em geral -- a pausa e sobre estas rodadas especificas de candidatos e dominios, nao sobre a ideia de interface cross-domain como um todo"
+
+  - decision_id: DISC-DEC-010
+    date: 2026-08-21
+    decision: >
+      Encerrar DISC-TRI-RG-001 FORMALMENTE, a pedido explicito do
+      usuario -- distinto de todas as 5 pausas anteriores
+      (DISC-DEC-005/006/007/008/009), que mantiveram a linha em
+      CANDIDATE_FORMULATING e foram todas revertidas quando o usuario
+      pediu retomada. Esta e a primeira mudanca de status desta linha
+      desde sua criacao: CANDIDATE_FORMULATING -> CLOSED_NULL (per
+      00_GOVERNANCE/RESEARCH_PIPELINE.md, "CLOSED_* nunca e um estado
+      envergonhado" -- CLOSED_NULL escolhido especificamente, nao
+      CLOSED_REFUTED (nenhuma hipotese unica pre-registrada foi
+      limpamente refutada -- foram 16 candidatos independentes), nem
+      CLOSED_INCONCLUSIVE (os resultados foram decisivos, nao por falta
+      de poder), nem CLOSED_OUT_OF_DOMAIN.
+    rationale: >
+      Desde DISC-DEC-009 (5a pausa, apos a Fase 0.7 completar 14
+      candidatos), o usuario pediu para formalizar 2 hipoteses
+      discutidas em conversa como Fase 0.8 (transferencia de
+      entropia/fluxo de informacao direcionado -- a primeira
+      candidatura bivariada/direcional de toda a linha; complexidade
+      estatistica de ε-machines/C_mu -- provada matematicamente
+      distinta do C_JS ja fechado). Ambos os 2 candidatos foram
+      formalizados, validados sinteticamente, e fechados: transferencia
+      de entropia mostrou um achado forte em dado real (terremotos de
+      Kahramanmaras, Turquia) sob os 2 nulos substitutos, mas a
+      reproducao adversarial obrigatoria descobriu um artefato
+      instrumental de baixa frequencia especifico de uma estacao
+      (nao sinal sismico real) que, uma vez filtrado corretamente, fez a
+      significancia desaparecer por completo; complexidade de
+      ε-machines fechou na etapa de validacao sintetica, sem
+      estabelecer poder discriminativo em nenhum dos 3 controles
+      positivos computaveis mesmo apos a unica correcao pre-autorizada.
+      Isto completou a Fase 0.8 e, com ela, os 16 candidatos
+      identificados nesta linha desde sua criacao (3 da Fase 0 original
+      + 4 da Fase 0.5 + 4 da Fase 0.6 + 3 da Fase 0.7 + 2 da Fase 0.8) --
+      pela primeira vez desde a criacao da linha, nenhuma candidatura
+      formulada permaneceu sem teste. Uma sintese retrospectiva
+      completa (02_TESTS/TRI_RG/CLOSURE_SUMMARY.md, escrita como parte
+      deste encerramento) revelou que os 16 candidatos, apesar de
+      parecerem ideias distintas, colapsam estruturalmente em ~4 eixos
+      matematicos latentes independentes (persistencia/taxa-de-entropia;
+      taxa de relaxacao local; densidade de recorrencia via embedding de
+      Takens/Hankel -- estruturalmente fragil para dado real fracamente
+      correlacionado, responsavel por 3 dos 4 fechamentos na etapa de
+      validacao; estatistica de cauda/eventos extremos) -- e que mesmo
+      os 2 candidatos da Fase 0.8, desenhados especificamente para
+      escapar desses eixos, nao produziram invariante sobrevivente.
+      Diante de 16 tentativas genuinamente distintas, com disciplina
+      metodologica completa (validacao sintetica obrigatoria,
+      reproducao adversarial obrigatoria para qualquer achado positivo,
+      escalonamento de "uma correcao delimitada, depois fechar"),
+      resultando em 4 achados brutos p<0,05 refutados por reproducao
+      adversarial e 4 fechamentos na propria etapa de validacao, o
+      usuario decidiu encerrar a linha formalmente em vez de autorizar
+      uma 6a rodada de busca.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-TRI-RG-001: status mudado de CANDIDATE_FORMULATING para CLOSED_NULL, next_action atualizado)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+      - "05_DISCOVERY_LAB/02_TESTS/TRI_RG/CLOSURE_SUMMARY.md (novo -- sintese completa da historia da linha, do padrao estrutural descoberto, e do veredito final)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-TRI-RG-001: status muda de CANDIDATE_FORMULATING para CLOSED_NULL -- a PRIMEIRA mudanca de status desta linha desde sua criacao (distinto de todas as 5 pausas anteriores, que mantiveram CANDIDATE_FORMULATING por nao haver estado PAUSED formal)"
+      - "nenhum arquivo de claim (CLAIM_LEDGER.yaml) criado ou modificado -- nao ha claim a fechar, pois nenhum pre-registro foi travado nesta linha em nenhum momento de sua historia, e nenhum candidato sobreviveu para justificar um claim"
+    untouched_safeguards:
+      - "toda a infraestrutura das 5 rodadas de busca (16 METHODOLOGY_NOTE.md, 16 pipelines validadas, dominios reais de mais de 20 fontes distintas testadas no total, incluindo dominios verificados mas nunca processados por candidatos fechados na validacao -- Old Faithful, La Palma 2021, genoma de E. coli) permanece no repositorio, commitada e reaproveitavel"
+      - "encerramento formal e reversivel -- a linha pode ser reaberta no futuro com um candidato genuinamente novo ou uma reimplementacao corrigida de um candidato ja fechado (ex. CSSR incremental completo para epsilon-machine-complexity), exatamente como as 5 pausas anteriores foram todas revertidas quando o usuario pediu retomada; a diferenca e que reabrir apos um CLOSED_NULL formal exigiria uma nova justificativa explicita, nao apenas um pedido de retomada"
+      - "nenhuma alegacao de invalidacao da hipotese TRI/TDTR em geral, nem do programa de pesquisa mais amplo do qual ela faz parte -- o encerramento e sobre esta linha empirica especifica, com estas 16 tentativas, sob esta disciplina metodologica, nao sobre a ideia de interface cross-domain como conceito"

@@ -1720,3 +1720,49 @@ queue:
       como se fosse uma transicao de regime (defeito ja identificado nesta
       Fase 0 em 2 dos 5 candidatos); alegar progresso sobre TOE a partir
       de qualquer resultado aqui antes do Gate de Replicacao.
+
+  - test_id: DISC-CORE-NUMERICS-001
+    title: "Adjudicacao numerica de alegacoes quantitativas internas do nucleo Tamesis (4 frentes de mesa)"
+    domain: adjudicacao_interna
+    parent_legacy: "01_TAMESIS_CORE (multiplos modulos -- ver frentes)"
+    status: CANDIDATE_FORMULATING
+    created_by: DISC-DEC-013
+    fronts:
+      - front_id: mc-internal-consistency
+        claim_under_test: >
+          O valor congelado M_c=5,2927e-16 kg (contrato tamesis-mc-v1)
+          e internamente consistente com o restante do nucleo. Fato ja
+          conhecido: construido via M_c=m_P*(a0/a_P)^(1/8) com a0=cH0,
+          ramo desfavorecido por SPARC-002; nucleo contem 4 valores de
+          M_c mutuamente inconsistentes (2,2e-14 a 5,3e-16 kg).
+        expected_output: "tabela de derivacoes com fontes exatas (arquivo:linha), recomputo sob cada ramo de a0, veredito de consistencia"
+      - front_id: u12-universality
+        claim_under_test: >
+          phi(c)=(1+c)^(-1/2) com gap(n)=2/n e expoente medido
+          alpha=0,508+-0,033 e uma classe de universalidade real e
+          distinta das classes concorrentes ja nomeadas no Atlas de
+          Universalidade (U_0, U_1, U_2, U_inf).
+        expected_output: "reproducao independente do expoente + teste contra classes concorrentes com criterio fixado a priori"
+      - front_id: knot-quark-mass
+        claim_under_test: >
+          M ~ exp(alpha*L/D) sobre rope-length de nos ideais ajusta as
+          massas de quarks com R2>0,99 e sobrevive a validacao
+          leave-one-out nunca executada.
+        expected_output: "ajuste reproduzido com dados PDG + rope-length verificados por fetch, leave-one-out, comparacao contra nulo de permutacao"
+      - front_id: constant-fit-adjudication
+        claim_under_test: >
+          sin2(theta_W)=3/13 "CONFIRMED 0,19%" (vs PDG 0,23122+-0,00004);
+          alpha^-1=Omega^1.03~137,04; n_s=0,967 do bounce xi=100 e
+          previsao genuina (nao tuning de xi escaneado ate N>60).
+        expected_output: "adjudicacao com sigma real por alegacao + checagem de identificabilidade do bounce"
+    stop_condition: >
+      digitar valor de referencia de memoria em vez de fetch com
+      proveniencia; reformular qualquer alegacao do nucleo apos ver o
+      numero real; reportar achado positivo sem reproducao adversarial;
+      qualquer alegacao de fisica nova a partir de consistencia interna
+      (o maximo que esta linha pode produzir e "consistente/inconsistente
+      como formulado").
+    next_action: >
+      5 agentes paralelos despachados 2026-08-21 (4 frentes desta linha
+      + triagem RH itens 5/6/10 sob DISC-RH-REAL-001). Integrar
+      resultados quando voltarem.

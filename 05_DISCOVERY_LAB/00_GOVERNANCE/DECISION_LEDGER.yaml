@@ -835,3 +835,59 @@ decisions:
       - "os outros 15 candidatos desta linha nao foram tocados por esta revisao nem por este fechamento -- 02_TESTS/TRI_RG/CLOSURE_SUMMARY.md continua valido para eles"
       - "os dominios reais (Old Faithful, La Palma 2021) permanecem verificados e documentados, mas nunca processados -- reaproveitaveis para uma futura candidatura genuinamente nova (nao uma correcao de C_mu) que a linha venha a testar"
       - "encerramento permanece reversivel -- uma reabertura futura exigiria, como sempre nesta linha desde DISC-DEC-010, uma nova justificativa explicita do usuario"
+
+  - decision_id: DISC-DEC-013
+    date: 2026-08-21
+    decision: >
+      Criar a linha DISC-CORE-NUMERICS-001 (adjudicacao numerica de
+      alegacoes quantitativas internas do nucleo Tamesis nunca testadas
+      pelo Discovery Lab) com 4 frentes, e autorizar simultaneamente a
+      continuacao da Fase 0 de DISC-RH-REAL-001 (triagem dos itens 5, 6
+      e 10 do levantamento, que exigem avaliacao de zeta(s)). As 5
+      frentes executam em paralelo por agentes independentes, cada um
+      obrigado a fixar criterios de decisao em nota de metodologia ANTES
+      de computar contra valores de referencia reais.
+    rationale: >
+      Releitura completa do repositorio (2 agentes de levantamento,
+      2026-08-21) identificou, apos o encerramento de DISC-TRI-RG-001,
+      as unicas alegacoes quantitativas do nucleo que (a) sao
+      falseaveis como formuladas, (b) tem referencia externa real ou
+      sao puramente computacionais, e (c) nunca entraram na fila do
+      laboratorio: (1) consistencia interna de M_c -- o valor congelado
+      5,2927e-16 kg usa a0=cH0, exatamente o ramo desfavorecido por
+      SPARC-002, e M_c aparece em 4 valores mutuamente inconsistentes
+      no nucleo (2,2e-14 a 5,3e-16 kg); (2) classe de universalidade
+      U_1/2, phi(c)=(1+c)^(-1/2), alpha=0,508+-0,033 -- a unica
+      descoberta que o proprio arquivo considera sobrevivente apos a
+      auto-refutacao da ToE (Estagio 35), puramente computacional, com
+      classes concorrentes ja nomeadas no Atlas de Universalidade;
+      (3) lei de massa de quarks por topologia de nos,
+      M ~ exp(alpha*L/D) com R2>0,99 alegado -- testavel contra tabelas
+      publicadas de rope-length e massas PDG, com a validacao
+      leave-one-out que a propria AUDITORIA.md do arquivo exige e nunca
+      foi feita; (4) ajustes de constantes -- sin2(theta_W)=3/13
+      marcado "CONFIRMED, 0,19%" no nucleo mas ~11 sigma discrepante do
+      PDG, alpha^-1=Omega^1.03, e a checagem de identificabilidade do
+      n_s=0,967 do bounce (xi visivelmente escaneado em {1,10,100,1000}
+      ate N>60). A triagem RH dos itens 5/6/10 e continuacao natural da
+      unica linha nunca fechada do portfolio. Autoridade: pedido
+      explicito do usuario ("prepare agentes para fazer tudo usando
+      paralelismo e concorrencia") apos receber a sintese completa das
+      rotas que produzem numero verificavel.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (nova entrada DISC-CORE-NUMERICS-001)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/ (novo diretorio, 4 frentes)"
+      - "05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/ (triagem Fase 0 dos itens 5/6/10, exploratory_only)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atual atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nova linha DISC-CORE-NUMERICS-001 criada com status CANDIDATE_FORMULATING -- adjudicacoes de mesa sobre alegacoes internas, nao busca de invariante cross-domain (DISC-TRI-RG-001 permanece CLOSED_NULL, intocada por esta decisao)"
+      - "DISC-RH-REAL-001 permanece CANDIDATE_FORMULATING -- a triagem dos itens 5/6/10 e Fase 0 exploratory_only, nao um pre-registro"
+    untouched_safeguards:
+      - "cada frente fixa nota de metodologia com criterios de decisao ANTES de computar contra referencia real -- mesma disciplina de METHODOLOGY_NOTE.md de toda a historia da linha TRI-RG"
+      - "valores de referencia externos (PDG, Planck, tabelas de rope-length) verificados por fetch direto com proveniencia documentada, nunca digitados de memoria"
+      - "reproducao adversarial obrigatoria para qualquer achado positivo antes de reporta-lo como real"
+      - "resultados negativos catalogados com o mesmo peso que positivos; nenhuma alegacao de Problema do Millennium; nenhuma inferencia Tamesis alem do que o numero especifico sustenta"
+      - "nenhum dado ou citacao fabricado -- qualquer referencia inacessivel e reportada como inacessivel, nao substituida por valor de memoria"

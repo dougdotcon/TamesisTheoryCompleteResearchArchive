@@ -1,0 +1,308 @@
+# Tamesis Discovery Lab — 对抗性研究档案库
+
+[![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+[![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-38-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
+[![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
+[![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
+[![Maintainer](https://img.shields.io/badge/maintainer-Douglas%20H.%20M.%20Fulber-111111?style=for-the-badge)](README.md#governance-authorship-and-responsibility)
+[![Language](https://img.shields.io/badge/language-%E4%B8%AD%E6%96%87%EF%BC%88%E7%AE%80%E4%BD%93%EF%BC%89-6c757d?style=for-the-badge)](README.md)
+
+**语言:** [English](README.md) · [Português (BR)](README_PTBR.md) · [日本語](README_JA.md) · **中文（简体）** · [Español](README_ES.md)
+
+> **一个跨学科研究档案库,涵盖信息、几何、相变、复杂系统与认知——明确将假设与证据分离。**
+
+本仓库保存了 Tamesis 实验室的完整轨迹:其当前的实验分支,以及历史、数学、物理、计算与认知等研究方向。该档案库包含 **280 份经审计的记录**,整理为 **274 份审计档案(dossiers)**。此处的审计并不会把猜想变成事实——它只是明确指出哪些内容是证明、条件性推论、数值拟合、计算示例、猜想,或是推测性情景。
+
+自 2026 年起,该档案库还运行着一个**持续裁定实验室**(`05_DISCOVERY_LAB`):档案库自身提出的每一项定量主张,都会依据预先登记(pre-registered)的标准,并结合真实的外部参考数据,逐一地、以**强制性的对抗性复现(adversarial reproduction)**方式予以裁定并结案。迄今为止的结果——数十项已编目、附有最终裁决的否定性结案,以及一项经独立重新推导并对抗性验证的正面数学结果——综合呈现于**[Discovery Lab 论文](index.html)**(本仓库的首页)之中。
+
+## 快速阅读
+
+机构报告[Tamesis 实验室最终愿景](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)阐述了整个研究计划所提出的问题、答案、影响、应用及新问题。同时也提供了[适合打印的 HTML/PDF 版本](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)。
+
+### 当前科学状态
+
+| 层面 | 状态 | 正确解读 |
+|---|---|---|
+| 档案库与方法论 | **完整 / 已审计** | 清单、主张分类、来源与证伪标准均已记录在案。 |
+| 计算模型 | **为审计而冻结** | 可复现的输出应被理解为模型输出,而非实测常数。 |
+| Tamesis `M_c v1` | **可检验假设** | 数值 `M_c = 5.292674126388712e-16 kg` 是一个模型参数,而非测量值。 |
+| 独立物理证据 | **尚未确立** | 本档案库中没有任何内容构成对 Tamesis 本体论的实验证实。 |
+| 千禧年大奖难题与万有理论(TOE)主张 | **未解决** | 这些文本是猜想、归约,或受限模型下的论证——并非被公认接受的解答。 |
+| 核心数值裁定 | **数学层面的整合已完成,`K=10` 以内的缺口已无条件地闭合(截至 2026-08-22)** | 详见下文——3 项主张以最终裁决被否定性结案;第 4 项(`U₁/₂`)已有经对抗性同行评审(referee)证明的核心结果,其中开放引理(Open Lemma)现已对 `K=0,…,10` 无条件证明;对于一般的 `K`,速率猜想存在一个条件性证明(其正则性附加条件已被一位敌对评审员判定为界定准确),但尚非无条件的闭合。 |
+
+### 裁定计划(Discovery Lab,更新于 2026-08-22)
+
+`05_DISCOVERY_LAB` 持续地将本档案库的定量主张与真实的外部参考数据(PDG、CODATA、Planck、SPARC、Gaia、Odlyzko)进行裁定,方法论在每次计算*之前*即已确定,每一个参考值都有完整的出处溯源,任何正面发现都必须经过**强制性的对抗性复现**。完整记录见:`05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` 与 `05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml`。论文形式的综述见:**[`index.html`](index.html)**(本仓库的首页)。
+
+```mermaid
+flowchart LR
+    R[280 份经审计的<br/>档案记录] --> S[全档案库范围的<br/>第 0 阶段调查<br/>19 个候选项,7 个领域]
+    S -->|18/19 被否决,<br/>并给出具体理由| N1[CLOSED_NULL]
+    S -->|1 条不成熟线索<br/>被提升| L13[13 条正式的<br/>Discovery Lab<br/>测试线]
+    L13 --> C8[8 项预先登记的主张<br/>已锁定 + 经对抗性评审]
+    C8 --> V1[1 项已证明的正面结果<br/>U&#40;1/2&#41; 极限律]
+    C8 --> V2[7 项具有信息量的负面<br/>结果——REFUTED /<br/>INCONCLUSIVE / NULL]
+    style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
+    style N1 fill:#f0e5e8,stroke:#7a3b4a
+```
+
+**完整的存活漏斗(2026 年):**
+
+| 研究线 | 已测试项 | 结果 |
+|---|---|---|
+| 跨领域不变量(TRI-RG) | 16 个候选项,5 轮 | `CLOSED_NULL`——0 项存活;4 项 `p<0.05` 的发现被对抗性复现推翻(证实为平凡的解释) |
+| SPARC/MOND 宇宙学 + Gaia 宽双星 | 4 项预先登记的测试 | 4/4 项因证实存在真实的混杂因素(confounder)而无法定论(inconclusive);发现 2 项历史上的头条结果建立在**伪造数据**之上,已用真实数据重新计算 |
+| 黎曼 zeta 函数零点(RH-REAL) | 12/12 项调查内容,全部最终得到处置 | 2 项复现的发现(相邻间距反聚集;`N^(-1/3)` GUE 标度);FHK 极大值与数方差(number-variance)均以 `CLOSED_INCONCLUSIVE` 结案,但各自都有一个强分量经对抗性确认(iid 一侧排除 ≥8.8σ;朴素 GUE 排除高达 203σ——对抗性复现还发现并修复了主估计量中的第 3 个真实缺陷) |
+| 核心定量主张裁定(第 1 轮) | 7 项主张 | `M_c` 不一致(不同数值间相差约 190 倍);夸克/纽结质量模型未通过留一法(leave-one-out)检验;`sin²θ_W=3/13` 偏离 7.5σ,且存在硬编码调参;`α⁻¹=Ω^{1.03}` 自由度为 0;反弹(bounce)模型的 `n_s` 不可辨识;全息 `Λ` 依代数恒等式即等于 `ρ_crit` |
+| **`U₁/₂` 极限律(第 2–7 轮,整合结果)** | 1 项定理 + 1 项推广 + 开放引理在 `K=2,…,10` 情形下的证明 + 一般 `K` 的速率猜想 | **已证明,经对抗性同行评审(3 轮独立评审,采用不同技术),已发表为论文并附可复现的软件包;`K=2` 于第 5 轮证明,`K=3,4,5` 于第 6 轮证明,`K=6,…,10` 于第 7 轮证明,均采用转移矩阵(transfer-matrix)方法;一般 `K` 的速率已于第 7 轮被证明,但明确以一个正则性附加条件为前提**(见下文) |
+| 全档案库候选项调查(第 0 阶段,超出 TRI-RG 范围) | 19 个候选项,7 个领域 | `CLOSED_NULL`——18/19 项被否决并给出具体理由;1 条不成熟线索(认知 EEG 频谱特征)被提升为新的研究线,见下文 |
+| 认知——抑郁症中的 EEG 频谱特征(Mumtaz,`DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 项已锁定的预先登记,N=30 MDD / 26 HC | `CLOSED_REFUTED`——重度抑郁症(MDD)患者的频谱熵**更高**而非更低(`d=1.447`,`p=3.97×10⁻⁶`)——方向与所测试的假设相反,已由一次独立的、从零开始的对抗性复现所证实(数值吻合至 <10⁻⁹) |
+| SPARC-004 宇宙学——`f_multi` 自校准(第 1→2 阶段) | 流程已验证 + 已应用于真实的发现数据(30,203 个系统) | `CLOSED_INCONCLUSIVE`——机械裁决为 `BOTH_FALSIFIED`,但强制性的证伪复核(debunker pass)发现了一个真实的混杂因素:样本中占 19% 的一个子群体(高 RUWE)被单标量 `f_multi` 模型系统性地欠校正,即使在校准自身的锚定区间(anchor bin)内也存在具有统计学稳健性的过量 |
+
+### 头号正面结果:一条精确的闭式(closed-form)普适律
+
+`U₁/₂` 普适类(以速率 `c/n` 向随机映射扰动的随机置换)具有如下精确的极限律:
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/phi_infinity_curve.svg" alt="phi_infinity(c) 的图像,即定理 1 给出的 U(1/2) 普适类的精确闭式极限律" width="640"></p>
+
+> `φ_∞(c) = ∫₀¹ e^(−ct²) dt = ½·√(π/c)·erf(√c)` ——零自由参数,
+
+该结果是解析推导得出的(而非拟合所得),修正了档案库最初的猜想 `(1+c)^(-1/2)`(该猜想在级数的第一个系数处即被排除:`a₁ = 1/3 ≠ 1/2`,已通过精确枚举证实)。这一结果现已是一个**已证明的定理**,而非猜想:一份自足的数学文档(`THEOREM.md`)分六个步骤证明了该闭式表达式,其中包括对所访问弧段(arcs)*大小偏倚(size-biasing)*的正确处理,并由一名充当敌对评审员的独立智能体进行了评审——**未发现任何错误**。
+
+有限模型与极限对象之间的桥接,现已对 `K=0,…,10` 完成无条件证明;而一般 `K` 的速率猜想,则在一个被精确命名、且经敌对评审员界定范围的正则性假设的前提下得到证明:
+
+```mermaid
+flowchart LR
+    K01["K=0,1<br/>精确,无缺口<br/>第 1–2 轮"] --> K2["K=2<br/>第 5 轮<br/>四层评审"]
+    K2 --> K345["K=3,4,5<br/>第 6 轮<br/>K-一致转移矩阵"]
+    K345 --> K610["K=6,…,10<br/>第 7 轮<br/>同一方法,再加 5 级"]
+    K610 --> Kgen["一般 K<br/>第 7 轮:速率已证明,<br/>以 1 项已命名的附加条件为前提"]
+    Kgen -.->|"第 8 轮,目前正在进行"| Close["移除该附加条件 →<br/>对所有 K 均无条件成立"]
+    style K01 fill:#e8f0e0,stroke:#1f6f5c
+    style K2 fill:#e8f0e0,stroke:#1f6f5c
+    style K345 fill:#e8f0e0,stroke:#1f6f5c
+    style K610 fill:#e8f0e0,stroke:#1f6f5c
+    style Kgen fill:#f5ecd8,stroke:#96702a
+    style Close fill:#e3edf3,stroke:#33566f,stroke-dasharray: 4 4
+```
+
+以上每一级都由一名独立的敌对评审智能体重新推导,所用的证明技术与原始推导*不同*,并配有其自有的暴力枚举(brute-force enumeration)与完整的递归代入检验——在 3 轮独立评审中,**任何一层都未发现错误**。`K=6,…,10` 还额外在两个留出(held-out)点处,与全新的穷举枚举逐位(bit-for-bit)核对确认。剩下的唯一一个**开放引理**——在 `K=10` 以内已被无条件证明,对一般 `K` 已被条件性证明——正是 Hansen & Jaworski(EJC, 2014)论文中固定参数情形的精确对应;经系统性文献检索(记录在案的查询超过 35 次)未发现具有闭式 `erf` 表达的泊松混合模型,但需明确说明这并不等同于"新颖(novel)"。另一条研究路线推导出了**指数为何恰好是 1/2**:在整个扰动机制参数化家族中,`α ∈ [1/2, 1]` 始终成立——`α < 1/2` 被*证明是不可能的*(一种二次聚集效应,即使不存在任何循环性的"消亡"也依然存在)。第 5 轮还找到并确认了一种自然机制(`M-WEIB(β)`,非齐次威布尔(Weibull)风险率),它可以达到 `α ∈ (1/2, 1)` 之间的每一个中间值。这里不作任何物理含义上的断言——这纯粹是关于某个特定系综(ensemble)的组合数学结果。
+
+**在哪里能找到全部内容:** 完整的定理与评审报告位于 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`;其推广及对抗性验证位于 `.../generalization_u_alpha/`;一个**独立的可复现软件包**——已编译的 LaTeX 论文(PDF)、自足的证明、洁净室(clean-room)模拟,以及 49 项自动化测试——位于 **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**。而**本实验室所尝试过但未能存活的一切**的诚实清单——以便这一项正面结果能被置于正确的语境中理解——位于 **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**。
+
+一项对整个 Tamesis 档案库(不局限于 TRI-RG,涵盖 7 个领域的 19 个候选项)的诚实调查以 `CLOSED_NULL` 结案——18/19 项被否决并给出具体理由——并将发现的唯一一条不成熟线索(认知 EEG 频谱特征,抑郁症与焦虑症对比)提升为一条新的候选研究线。其操作化(operationalization)阶段已经完成(可观测量被定义为归一化香农频谱熵、指定了一个竞争模型、计算了统计功效,并且已核实抑郁症分支的真实数据可获取性)——焦虑症分支仍卡在一个需要人工登录的数据提供方处,这一点已被如实报告;该分支尚未计算任何真实数据。详见 `05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md` 与 `05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/OPERATIONALIZATION.md`。
+
+## 实验室愿景
+
+该研究计划探究的是:在有限资源约束下的系统,当额外复杂性的代价能够被误差、耗散、不稳定性或未来搜索成本的降低所抵消时,系统是否能够构建出额外的组织层级。这是一条**建模原则**,而非赋予自然界某种目的。
+
+该实验室将四个层面联系在一起:
+
+1. **数学:** 算子、谱、拓扑、图、普适性与正则性。
+2. **基础物理学:** 信息、几何、全息原理、引力、粒子,以及量子到经典的转变。
+3. **复杂系统:** 热力学、记忆、不可逆性、网络、稳定性与控制。
+4. **生命与认知:** 整合的有机体、脑机接口、意识,以及认知生态系统。
+
+```mermaid
+flowchart LR
+    A[有限资源] --> B[组织层级]
+    B --> C[记忆与控制]
+    C --> D[状态转变]
+    D --> E[可观测量与检验]
+    E --> F{独立证据?}
+    F -->|是| G[可发表的结果]
+    F -->|否| H[可修订的假设]
+    H --> B
+```
+
+![全息原理:信息边界与涌现的三维实在示意图](01_TAMESIS_CORE/01_Foundation/assets/holographic_principle.png)
+
+<p align="center"><sub>图 1 —— 全息原理的工作示意图。这是一个建模假设,并非宇宙具有全息性质或是一场模拟的证据。</sub></p>
+
+## 从这里开始
+
+- **[Discovery Lab 科学论文(2026)——对抗性裁定与 `U₁/₂` 极限律](index.html)**(仓库首页)
+- **[`tamesis-cycle-survival/`](tamesis-cycle-survival/) 可复现软件包** —— `U₁/₂` 定理的已编译 LaTeX 论文、证明、模拟与自动化测试
+- **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)** —— 本实验室中每一项经测试但未能存活的假设的诚实清单
+- [实验室最终愿景报告](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
+- [用于展示的 HTML 与 PDF 版本](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
+- [280 篇文章的审计报告](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+- [严格审计规程](PROTOCOLO_AUDITORIA_RIGOROSA_DE_ARTIGOS.md)
+- [机器可读的清单文件](ARTICLE_MANIFEST.csv)
+- [冻结状态与恢复条件](PROJECT_FREEZE.md)
+- [项目状态(JSON 格式)](PROJECT_STATE.json)
+- [时间线](00_HOME/TIMELINE.md)
+- [档案库地图](00_HOME/WORKSPACE_MAP.md)
+- [可导航的主页](00_HOME/README.md)
+- [交互式假设图谱](atlas.html)
+- [`U₁/₂` 研究线的证明依赖关系图](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)
+
+## 研究方向
+
+| 研究线 | 核心问题 | 当前状态 | 潜在应用 |
+|---|---|---|---|
+| **A. 基础与实在的架构** | 信息、几何或计算能否生成时空与有效定律? | 概念架构与候选模型。 | 量子引力、信息几何、网络建模。 |
+| **B. 公理与操作性桥接** | 一个小型公理集能否在不针对各扇区分别调参的情况下重现已观测到的方程? | 部分的、条件性的闭合。 | 模型推导、一致性检验、参数简化。 |
+| **C. TDTR、TRI 与不可逆性** | 状态是如何变化的?为何某些转变是不可逆的? | 词汇体系、程序库与转变模型。 | 热力学、耗散动力学、时间之箭。 |
+| **D. 普适性** | 不同系统是否共享不变量与标度律? | **`U₁/₂` 类的精确极限律,已推导并经对抗性验证(2026 年 8 月)**;跨领域不变量的实证搜索以空结果(null)结案(16/16)。 | 转变检测、失效分析、自适应控制。 |
+| **E. 谱与黎曼猜想** | 是否存在一个算子,其谱恰好实现 zeta 函数的零点? | 合理的数学路径;尚无黎曼假设的证明。 | 谱理论、量子混沌、数值分析。 |
+| **F. 计算、图与素数** | 算术结构能否被编码进图与计算系统中? | 探索性的算法与对应关系。 | 图学习、网络分析、谱算法。 |
+| **G. 观测宇宙学** | 什么样的可观测量能将 Tamesis 与 `ΛCDM`、MOND 及其他竞争模型区分开? | 测试目录;尚无经证实的经验性替代方案。 | CMB(宇宙微波背景)、BAO(重子声学振荡)、超新星、引力透镜、SPARC、引力波。 |
+| **H. 黑洞与奇点** | 信息与几何如何处理视界与奇点? | 推测性的热力学/全息模型。 | 量子信息、引力、视界热力学。 |
+| **I. 粒子与拓扑** | 拓扑能否解释质量、代际(family)、混合与耦合? | 候选机制与数值关系。 | 粒子唯象学与精密检验。 |
+| **J. 量子到经典的极限** | 量子动力学在何时、为何会变为经典的? | 相互竞争的假设与实验设计。 | 干涉测量、光力学(optomechanics)、量子计量学。 |
+| **K. 认知生态系统** | 有机体如何构建控制、记忆与意识特征? | 概念性议程与实证研究计划。 | 网络神经科学、生理学、脑机接口。 |
+| **L. 认知拓扑与混合控制论** | 认知状态能否通过关系性/谱不变量来分类? | 理论结构与控制原型。 | 人机系统与具身机器人技术。 |
+| **M. 稳定性与算子** | 强制性(coercivity)、耗散与谱裕度能否检测出病态状态? | 候选方法与受限定理。 | 基础设施控制、异常检测、自适应网络。 |
+| **N. 千禧年大奖难题** | 有限容量能否推出关于 `P vs NP`、黎曼假设(RH)或偏微分方程(PDE)的定理? | 无被公认接受的解答;仅有受限的论证。 | 新的数学引理,而非解决声明。 |
+| **O. 推测性宇宙学与度规工程** | 反弹(bounce)、母宇宙,或修改后的度规能否产生可观测量? | 推测性情景。 | 只有在得到一个协变、稳定、满足因果性的解之后才可能。 |
+| **P. 科研基础设施** | 如何保持跨学科研究的可复现性与诚实性? | 可追溯的清单与审计。 | 治理、评审、预印本、外部合作。 |
+
+### 各研究线的完成度潜力(操作性估计,并非档案库指标)
+
+下表逐条研究线估计**每个核心问题中所指明的缺口已被表征(characterized)到何种程度**——而不是该假设正确的概率,也不是实验室计算出的某项指标。这是一种外部解读,依据每条研究线所记录的真实状态(`RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md` 第 6 节及 `05_DISCOVERY_LAB/`)进行校准,并对原始清单作出一处重要修正:**研究线 D 必须分两部分来看待。** 由 Discovery Lab 严格裁定的 `U₁/₂` 子集已进展良好;但作为整体的研究线 D——在原始报告中还包括 `U₀`、`U₂`/林德布拉德(Lindblad)方程、一般类别图谱以及拓扑应用——**并未**以同样的比例取得进展:实验室自身的全档案库调查(`DISC-ARCHIVE-PHASE0-SURVEY-001`)记录显示,与 `U₁/₂` 不同,`U₀` 和 `U₂` 从未达到过闭式候选阶段。若将"研究线 D"笼统地视为已解决 85%,正是本档案库的纪律所要防止的那种混淆。
+
+| 排名 | 研究线 | 估计完成度 | 状态 | 待解决事项 |
+|---:|---|---:|---|---|
+| 🥇 | **D —— `U₁/₂`**(已裁定子集,`DISC-CORE-NUMERICS-001`) | **约 85%** | 🔥 活跃中——开放引理已对 `K=0,…,10` 无条件证明,一般 `K` 的速率已条件性证明 | 消除一般 `K` 的正则性附加条件,**以及**解决 M-CLUST 残差问题——这是目前正在进行的两条战线(见[依赖关系图](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
+| 🥈 | **P —— 基础设施** | **约 90%** | 🔧 持续进行中——自 2026 年 7 月起新增了第二层:预先登记 + 强制性对抗性复现 + 决策/主张台账(`05_DISCOVERY_LAB/00_GOVERNANCE/`) | 语义化版本管理、开放数据/代码、外部评审 |
+| 🥉 | **B —— 公理** | 35% | 🟡 有希望 | 证明桥接在不针对各扇区分别调参的情况下保持对称性/守恒律 |
+| 4 | **E —— 黎曼** | 30% | 🟡 探索性——自 2026 年 7 月起,`RH-REAL` 调查的全部 12 项内容均已最终处置;2 项复现的发现(反聚集;GUE 标度),均未涉及黎曼假设本身 | 一个自伴算子,其谱能实现这些零点,并具备完整的误差控制 |
+| 5 | **M —— 稳定性** | 30% | 🟡 探索性 | 一个小型定理、完整的假设条件,以及与 Lyapunov(李雅普诺夫)/LQR 方法的基准对比 |
+| 6 | **C —— 不可逆性** | 25% | 🟡 | 一个非平凡的单调量 + 一个可检验的转变类别 |
+| 7 | **F —— 图/素数** | 25% | 🟡 | 基准测试与形式化的对应定理 |
+| 8 | **J —— 量子-经典** | 25% | 🟡 | 一个能够区分退相干、坍缩与引力的盲实验方案 |
+| 9 | **L —— 认知拓扑** | 25% | 🟡 | 已定义的不变量 + 评审者间信度(inter-rater reliability) + 独立数据 |
+| 10 | **A —— 基础** | 20% | ⚪ | 一个具有自由度、单位制,并给出新预测的极小作用量 |
+| 11 | **G —— 宇宙学** | 20% | ⚪——自 2026 年 7 月起,已在真实数据上**执行**了 4 项预先登记的测试(SPARC-001…004),全部以 `CLOSED_INCONCLUSIVE` 结案;这是一项诚实的 RUWE 混杂因素发现,而不仅仅是一份待完成的测试目录 | 一个能将 Tamesis 与 `ΛCDM`/MOND 区分开、并能经受样本外(out-of-sample)检验的可观测量 |
+| 12 | **I —— 粒子** | 20% | ⚪ | 一个完整的规范作用量 + 重整化 + 幺正性 + 对撞机预测 |
+| 13 | **H —— 黑洞** | 15% | ⚪ | 度规/应力-能量张量 + 因果性 + 一个视界可观测量 |
+| 14 | **K —— 认知** | 15% | ⚪——自 2026 年 7 月起,一项具体假设经过测试并被对抗性地**推翻**(`DISC-COGNITIVE-EEG-SPECTRAL-001`:抑郁症中的 EEG 频谱熵,真实效应方向与预测相反);广义问题(控制/记忆/意识)仍缺乏一个统一模型 | 归约为一个具有可复现预测的可测量现象 |
+| 15 | **O —— 推测性宇宙学** | 10% | ⚪ | 在给出任何可观测量之前,先要有一个自洽的协变解 |
+| 16 | **N —— 千禧年** | 5% | 🔴——无解答;本研究线永久性地不在"解决声明"的范围之内 | 针对原始问题的一个完整、可验证的定理,而非受限的启发式论证 |
+
+**本表不应如何使用。** "85%"并不意味着 `U₁/₂` 类正确的概率是 85%,也不意味着研究线 D 已接近完成——它的含义是,在该特定问题中明确指明的各项缺口中,大多数已经被证明或精确地表征。如果评判标准是"当前研究精力应投向何处",答案正是目前已经在指导本实验室的那个答案:大部分可用的研究能力都投向了 `D —— U₁/₂`,并精确地分配在目前正在进行的两条战线之间——解决 M-CLUST 残差问题,以及移除一般 `K` 的正则性附加条件。
+
+## 一个可验证的研究周期
+
+```mermaid
+flowchart TD
+    A[假设] --> B[操作性定义]
+    B --> C[数学或计算模型]
+    C --> D[参数、单位与不确定度]
+    D --> E[零模型与竞争模型]
+    E --> F[预先登记的测试]
+    F --> G{结果}
+    G -->|可复现且具区分度| H[发表 / 状态更新]
+    G -->|不具区分度| I[修订或放弃]
+    G -->|失败| J[有记录的证伪]
+```
+
+这一周期是本档案库的编辑准则。一个能重现某条曲线的模拟并不自动构成一项发现;一个数值上的巧合并不是一个推导;系统之间的类比也并不等同于物理上的同一性。
+
+## 当前实验核心:`Tamesis M_c v1`
+
+当前的实验分支被冻结在 `frozen_and_ready` 状态,硬件鉴定尚未开始。演示装置 A(Demonstrator A)以 5 K 至 20 K 之间的盲法光学测温校准为起点;它**尚不能测量 `M_c`**。
+
+- [`Tamesis M_c v1` README](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
+- [演示装置 A v0.6 执行报告](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md)
+- [可视化输出、图表与动画](02_TAMESIS_MC_V1_OUTPUTS/README.md)
+- [实验合作套件](03_EXPERIMENTAL_COLLABORATION_PACKAGE/README.md)
+
+![量子到经典转变极限的地图](01_TAMESIS_CORE/01_Foundation/assets/experimental_limits_map.png)
+
+<p align="center"><sub>图 2 —— 用作测试指南的极限地图。图中的区域与标记代表的是假设与参考数据;它们并不构成对某一普适边界的确认。</sub></p>
+
+## 复杂系统与转变
+
+![相变与熵重组](01_TAMESIS_CORE/01_Foundation/assets/phase_transition.png)
+
+<p align="center"><sub>图 3 —— 压缩、饱和与重组的概念性可视化。这是一幅模型示意图,而非一条普遍适用的经验定律。</sub></p>
+
+该实验室使用一套共同的语言来比较不同的系统:**状态、资源、耦合、记忆、转变、耗散、稳定性、可观测量,以及失效判据**。这种比较是方法论层面的——它并不主张星系、细胞、图与大脑属于同一类对象。
+
+## 本实验室已经取得的成果
+
+- 对 280 份记录进行了完整、可追溯的清单编制与审计;
+- 明确区分了证明、假设、模型、拟合、模拟与推测性情景;
+- 编制了涵盖状态、转变、算子、网络与认知系统的图谱;
+- 编制了附带零模型的观测与实验测试目录;
+- 制作了用于学术展示的机构版 HTML/PDF 文档;
+- 保存了历史版本,但不将其中的主张认可为当前的结果;
+- **对核心定量主张进行了完整的对抗性裁定**(2026 年):依据预先登记的标准结案了 30 余项主张,其中包括发现并纠正了 2 项建立在伪造数据之上的历史头条结果;
+- **一项经推导并对抗性验证的新数学结果**:`U₁/₂` 类的精确闭式极限律 `φ_∞(c) = ½√(π/c)·erf(√c)`(见[论文](index.html));
+- 两项关于黎曼 zeta 函数真实零点的复现发现(相邻间距反聚集;最小间距的 GUE 标度)。
+
+## 尚未得到证实的内容
+
+本档案库**不宣称**已经解决了黎曼假设、`P vs NP`、纳维-斯托克斯(Navier–Stokes)方程、杨-米尔斯(Yang–Mills)理论、霍奇(Hodge)猜想,或贝赫和斯维讷通-戴尔(Birch–Swinnerton-Dyer)猜想。同样地,也没有任何被公认接受的证明表明 Tamesis 取代了 `ΛCDM`、消除了暗物质/暗能量、赋予意识在量子坍缩中某种因果作用、实现了度规推进(metric propulsion),或证明了宇宙是一场模拟。
+
+在产生形式化证明、独立数据、新的预测与复现结果之前,这些研究线仍将保持猜想、测试计划或受限模型的性质。
+
+## 仓库结构
+
+| 文件夹/文件 | 功能 |
+|---|---|
+| `00_HOME` | 导览、时间线与档案库地图。 |
+| `01_TAMESIS_CORE` | 核心理论、模型、素材,以及当前的实验验证。 |
+| `02_TAMESIS_MC_V1_OUTPUTS` | `M_c v1` 分支图表与动画的便捷副本。 |
+| `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | 用于实验合作与鉴定的材料。 |
+| `05_DISCOVERY_LAB` | 裁定实验室:测试队列、治理台账、方法论说明、结果,以及对抗性裁决。 |
+| `index.html` | **裁定计划的综述论文**(首页;图表及其生成脚本位于 `ARTIGO_DISCOVERY_LAB/figures/`)。 |
+| `tamesis-cycle-survival` | `U₁/₂` 定理的独立可复现软件包——已编译的 LaTeX 论文、证明、洁净室模拟与自动化测试。 |
+| `FAILED_HYPOTHESES.md` | Discovery Lab 测试过的每一项假设/候选项(无论存活与否)的完整、诚实的清单。 |
+| `computational_freeze.html` | 此前的根首页(Tamesis `M_c v1` 冻结状态),予以保留。 |
+| `90_LEGACY` | 历史性的、已被取代的、推测性的,或目前不受支持的分支。 |
+| `RECURSOS_PARA_PESQUISA` | 参考资料;并非本项目产出的证据。 |
+| `publicar` / `publicados` | 拟发表及已发表文章的编辑组织。 |
+| `ARTICLE_MANIFEST.csv` | 机器可读的文章清单。 |
+| `RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md` | 逐篇文章的审计跟踪。 |
+| `RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html` | 适合生成 PDF 的机构文档。 |
+
+## 治理、著作权与责任
+
+**本档案库的科研方向、主要著作权与策展工作由:** **Douglas H. M. Fulber** 负责。
+
+Tamesis 实验室是在本仓库内以独立研究计划的形式运作的。历史文档中提及的大学、实验室、作者或 DOI,并不意味着获得了机构认可、共同著作权或外部验证,除非存在明确的授权与记录。
+
+编辑治理遵循以下规则:
+
+1. 由负责的维护者掌控状态分类、研究线组织,以及结构性变更的采纳;
+2. 欢迎外部贡献,但若未经记录在案的评审,不得改变著作权、出处或证据状态;
+3. 新的结果必须包含方法、(适用时的)数据/代码、不确定度、零模型、局限性,以及证伪判据;
+4. 历史遗留文档予以保留以备溯源,但不会自动被提升为有效结果;
+5. 任何衍生出版物都必须引用本实验室、作者/策展人,以及所使用的具体档案库版本。
+
+如需提议合作或提出更正,请提交一个 issue/patch,并记录以下内容:受影响的文件、理由、来源、对分类的影响,以及一项验证测试。
+
+## 许可与署名
+
+本档案库中的原创材料依据 [知识共享署名 4.0 国际许可协议(CC BY 4.0)](LICENSE) 提供,除非文件本身另有说明,或受第三方权利的约束。该许可允许在保留署名并标明修改之处的前提下,对材料进行分享与改编。
+
+建议的署名格式:
+
+> Douglas H. M. Fulber, Tamesis Laboratory —— *Tamesis Research Archive*,所用版本/提交(commit),依据 CC BY 4.0 许可:[repository](.)。
+
+在重新使用某幅图表时,请保留其图注、素材路径,以及——当其记录分类如此注明时——该图为模型可视化的说明。第三方的图像、数据或文本可能受各自条款的约束;CC BY 4.0 并不转让本实验室并不拥有的权利。
+
+## 诚信原则与使用限制
+
+- 不要将档案库中的猜想呈现为既定事实。
+- 不要将 DOI 的存在当作同行评审或实验验证的证明。
+- 不要在未经正式授权的情况下,将机构认可归于被引用的大学或团体。
+- 不要隐瞒局限性、拟合参数、负面结果,或失效条件。
+- 在未经独立专业评估的情况下,不要将本材料用作医疗、法律、财务或安全方面的建议。
+
+## 如何引用本档案库
+
+```text
+Fulber, Douglas H. M. (2026). Tamesis Research Archive: Tamesis Laboratory — vision, audit, and research program. CC BY 4.0.
+```
+
+## 联系与合作
+
+推荐的联系入口是在本仓库中提交一个记录完整的 issue。如需用于学术展示,请使用[机构版 HTML/PDF 报告](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)与[完整的 Markdown 报告](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md),并始终保留其中标明的证据分类。

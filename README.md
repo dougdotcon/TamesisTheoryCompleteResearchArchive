@@ -44,7 +44,7 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 |---|---|---|
 | Invariante cross-domain (TRI-RG) | 16 candidatos, 5 rodadas | `CLOSED_NULL` — 0 sobreviventes; 4 achados `p<0,05` refutados por reprodução adversarial (explicações mundanas demonstradas) |
 | Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
-| Zeros de ζ (RH-REAL, linha aberta) | 8 itens triados, 3 sub-testes completos | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); teste FHK (máximos em intervalos curtos) fechado `CLOSED_INCONCLUSIVE` — lado iid excluído a ≥8,8σ, mas curva CUE canônica também rejeitada (-3,62σ); confirmado por reprodução adversarial com motor de ζ independente |
+| Zeros de ζ (RH-REAL) | 12/12 itens do levantamento com disposição final | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); FHK e variância do número fecharam `CLOSED_INCONCLUSIVE`, ambos com componente forte confirmado adversarialmente (exclusão do lado iid ≥8,8σ; exclusão de GUE ingênuo a até 203σ — reprodução adversarial ainda achou e corrigiu um 3º bug real no estimador primário) |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
 | **Função-limite U₁/₂ (ondas 2–3, consolidada)** | 1 teorema + 1 generalização | **Provada, verificada por referee adversarial, publicada como paper + pacote reproduzível** (ver abaixo) |
 

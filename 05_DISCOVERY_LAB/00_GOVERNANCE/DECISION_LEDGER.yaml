@@ -1215,3 +1215,54 @@ decisions:
     untouched_safeguards:
       - "residuo sistematico remanescente documentado explicitamente como nao fechado, nao apresentado como resolvido"
       - "classificacao assintotica alpha=1/2 de M-CLUST(b) para b fixo, ja provada na onda 3, nao foi tocada nem re-questionada"
+
+  - decision_id: DISC-DEC-021
+    date: 2026-08-22
+    decision: >
+      Fechar DISC-RH-NUMBER-VARIANCE-001 (item 12). Corrigir
+      PREREGISTRATION.md com um adendo datado apos a reproducao
+      adversarial encontrar um terceiro bug real no estimador
+      primario (autorizado como correcao de implementacao, nao
+      reformulacao de hipotese -- AGENTS.md passo 7). Veredito final:
+      CLOSED_INCONCLUSIVE, subcaso NEITHER_MODEL (corrigido de
+      PARTIAL_DISAGREEMENT). Componente de exclusao de GUE
+      CONFIRMADO como achado real e mais forte do que o relatorio
+      original sugeria.
+    rationale: >
+      A reproducao adversarial obrigatoria (implementacao do zero a
+      partir SOMENTE do pre-registro travado, validada contra rede
+      regular/Poisson/forca bruta antes de tocar dado real) encontrou
+      um erro de arredondamento de ponto flutuante em
+      estimator.py::block_number_variance (round-trip (a+L/2)-L/2 na
+      recomposicao da borda do bloco 0), nao detectado nas duas
+      validacoes pre-lock do proprio agente primario. O bug afeta
+      15/23 pontos da grade e, criticamente, o ponto decisivo de
+      zeros3 (SE inflado ~31x), mas nao afeta zeros1 (arredondamento
+      caiu do lado seguro, numeros batem exatamente). Corrigido:
+      zeros3 z_A=-160,76 (nao -4,13), z_B=-18,29 (nao +0,00) --
+      confirmado por 3 metodos independentes concordantes (estimador
+      adversarial, forca bruta, reproducao minima do bug). Aplicando
+      a MESMA regra ternaria travada (regra em si nao mudou) aos
+      numeros corrigidos: subcaso correto e NEITHER_MODEL, nao
+      PARTIAL_DISAGREEMENT -- os dois datasets rejeitam formalmente
+      os DOIS modelos pelo limiar pre-declarado, nao "discordam de
+      direcao" como o numero com bug sugeria. O veredito de TOPO
+      (INCONCLUSIVE) nao muda. O componente de exclusao de GUE (a
+      unica parte que exigia reproducao adversarial pela condicao de
+      parada da Secao 8) fica CONFIRMADO com margem ainda maior
+      (z_A de -203 e -161 em vez de -203 e apenas -4).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/number_variance/PREREGISTRATION.md (adendo datado pos-adversarial anexado; texto original do 'Resultado' preservado intacto)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (novo test_id DISC-RH-NUMBER-VARIANCE-001, CLOSED_INCONCLUSIVE; DISC-RH-REAL-001 next_action atualizado -- todos os 12 itens do levantamento original agora tem disposicao final)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md, README.md (na integracao)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "novo test_id DISC-RH-NUMBER-VARIANCE-001 criado ja em CLOSED_INCONCLUSIVE -- ciclo completo pre-registro->validacao->analise->adversarial->correcao ja concluido quando integrado"
+      - "linha DISC-RH-REAL-001: todos os 12 itens do levantamento original de 2026-08-12 agora tem disposicao final (7 e 9 -> sub-testes fechados; 5,6 despriorizados; 10 -> FHK fechado; 12 -> este teste; 1,2,3,8 sem pergunta nova; 4,11 NAO TRIAVEL permanente)"
+    untouched_safeguards:
+      - "texto original do 'Resultado' em PREREGISTRATION.md preservado intacto como registro historico do que foi computado antes da correcao -- nao apagado nem reescrito"
+      - "holdout zeros4 permanece selado -- a correcao nao produziu um veredito que favorece formalmente um modelo, entao a condicao de abertura do holdout continua nao satisfeita"
+      - "estimator.py com o bug preservado como esta -- a correcao minima fica documentada em adversarial/bug_report_block0_fp.py, nao aplicada retroativamente ao codigo primario"
+      - "nenhuma alegacao sobre a Hipotese de Riemann feita ou implicada por este fechamento"

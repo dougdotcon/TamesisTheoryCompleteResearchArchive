@@ -1,0 +1,13 @@
+[validate_gue] N_MATRIX=2500 N_REPLICAS=25 BULK_FRAC=0.6 seed_base=2026082201
+[check] borda empirica=99.743 vs R teorico 2*sqrt(N)=100.000 (razao=0.9974, esperado perto de 1, com flutuacao de borda finita-N)
+[info] largura media do bulk usado: 1498.7 pontos (N*BULK_FRAC nominal=1500)
+  L=    5.0 (SAFE(decisivo)        , L/bulk=  0.3%)  V_hat=0.5072  SE=0.0030  model_A=0.5090  z=-0.607  PASS
+  L=   10.0 (SAFE(decisivo)        , L/bulk=  0.7%)  V_hat=0.5770  SE=0.0056  model_A=0.5793  z=-0.403  PASS
+  L=   20.0 (SAFE(decisivo)        , L/bulk=  1.3%)  V_hat=0.6426  SE=0.0069  model_A=0.6495  z=-1.001  PASS
+  L=   40.0 (DESCRITIVO(nao decide), L/bulk=  2.7%)  V_hat=1.0464  SE=0.0968  model_A=0.7198  z=+3.374  FAIL/desvio-N-finito
+  L=   80.0 (DESCRITIVO(nao decide), L/bulk=  5.3%)  V_hat=1.1428  SE=0.0987  model_A=0.7900  z=+3.575  FAIL/desvio-N-finito
+  L=  160.0 (DESCRITIVO(nao decide), L/bulk= 10.7%)  V_hat=1.2128  SE=0.1025  model_A=0.8602  z=+3.438  FAIL/desvio-N-finito
+  L=  320.0 (DESCRITIVO(nao decide), L/bulk= 21.3%)  V_hat=1.2895  SE=0.1142  model_A=0.9305  z=+3.145  FAIL/desvio-N-finito
+
+[RESULTADO] Check A (L seguro, decisivo p/ lock) all_pass=True  wall_time=60.2s
+[nota] L=40..320 mostram desvio SISTEMATICO do Modelo A -- efeito de N finito da matriz sintetica (N=2500, bulk~1500), NAO um bug do estimador: validate_estimator_bruteforce.py confirma que o metodo exato bate com integracao por forca bruta nesses mesmos L (e alem, ate L~2000+), isolando a causa do desvio na COMPARACAO CONTRA O MODELO A ASSINTOTICO N=infinito, nao na implementacao do estimador.

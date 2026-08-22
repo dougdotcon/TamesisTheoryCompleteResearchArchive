@@ -1,0 +1,38 @@
+[validate_power_saturating] JITTER_W=0.45 seed_base=2026082203
+
+[checagem preliminar] V(L) do processo jittered-lattice (janela unica, M=50000):
+    L=     5  V=0.3009   (model_A(L)=0.5090, cresce; saturando? ver padrao abaixo)
+    L=    20  V=0.3013   (model_A(L)=0.6495, cresce; saturando? ver padrao abaixo)
+    L=    80  V=0.3012   (model_A(L)=0.7900, cresce; saturando? ver padrao abaixo)
+    L=   320  V=1.3021   (model_A(L)=0.9305, cresce; saturando? ver padrao abaixo)
+    L=  1000  V=0.3003   (model_A(L)=1.0459, cresce; saturando? ver padrao abaixo)
+    L=  3000  V=1.3019   (model_A(L)=1.1572, cresce; saturando? ver padrao abaixo)
+  [avaliacao] razao V(L=3000)/V(L=80) = 4.323 (GUE/model_A daria razao log(3000)/log(80) ~ 1.583 -- se a razao empirica for MUITO menor, confirma saturacao qualitativa)
+
+[cenario zeros1_scale] M=100000 L_primary=2155.044 B_target(declarado)=11 n_replicas=10
+    replica 0: B_used=11  V_hat=0.3910  SE=0.0908  model_A=1.1237  z=-8.07
+    replica 1: B_used=11  V_hat=0.3892  SE=0.0905  model_A=1.1237  z=-8.11
+    replica 2: B_used=11  V_hat=0.3913  SE=0.0915  model_A=1.1237  z=-8.00
+    replica 3: B_used=11  V_hat=0.3014  SE=0.0010  model_A=1.1237  z=-831.15
+    replica 4: B_used=11  V_hat=0.3899  SE=0.0906  model_A=1.1237  z=-8.10
+    replica 5: B_used=11  V_hat=0.3913  SE=0.0901  model_A=1.1237  z=-8.13
+    replica 6: B_used=11  V_hat=0.3903  SE=0.0909  model_A=1.1237  z=-8.07
+    replica 7: B_used=11  V_hat=0.2997  SE=0.0008  model_A=1.1237  z=-1010.16
+    replica 8: B_used=11  V_hat=0.3006  SE=0.0003  model_A=1.1237  z=-2379.22
+    replica 9: B_used=11  V_hat=0.3927  SE=0.0911  model_A=1.1237  z=-8.03
+  [resultado zeros1_scale] media(z)=-427.70  fracao rejeitando Modelo A a 3sigma=1.00  PASS(poder>=80%)
+
+[cenario zeros3_scale] M=10000 L_primary=210.504 B_target(declarado)=11 n_replicas=10
+    replica 0: B_used=11  V_hat=0.3937  SE=0.0884  model_A=0.8880  z=-5.59
+    replica 1: B_used=11  V_hat=0.3015  SE=0.0022  model_A=0.8880  z=-269.61
+    replica 2: B_used=11  V_hat=0.3904  SE=0.0896  model_A=0.8880  z=-5.55
+    replica 3: B_used=11  V_hat=0.3920  SE=0.0915  model_A=0.8880  z=-5.42
+    replica 4: B_used=11  V_hat=0.3036  SE=0.0028  model_A=0.8880  z=-205.79
+    replica 5: B_used=11  V_hat=0.3968  SE=0.0949  model_A=0.8880  z=-5.17
+    replica 6: B_used=11  V_hat=0.3951  SE=0.0903  model_A=0.8880  z=-5.46
+    replica 7: B_used=11  V_hat=0.3002  SE=0.0015  model_A=0.8880  z=-401.06
+    replica 8: B_used=11  V_hat=0.3941  SE=0.0931  model_A=0.8880  z=-5.30
+    replica 9: B_used=11  V_hat=0.3961  SE=0.0920  model_A=0.8880  z=-5.35
+  [resultado zeros3_scale] media(z)=-91.43  fracao rejeitando Modelo A a 3sigma=1.00  PASS(poder>=80%)
+
+[RESULTADO FINAL] all_pass=True  wall_time=0.4s

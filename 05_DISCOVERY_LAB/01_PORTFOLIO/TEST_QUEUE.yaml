@@ -496,14 +496,33 @@ queue:
       (>=8,8 sigma) confirmado por reproducao adversarial independente
       (pipeline proprio, motor zeta distinto, offsets recomputados da
       especificacao).
+    untried_items_review: >
+      2026-08-22 (DISC-DEC-019): itens 1,2,3,4,8,11,12 revisados
+      honestamente. Itens 1,2,3,8: checagens de ferramental sem
+      pergunta nova (1 e 2 SAO as proprias estatisticas GUE canonicas
+      ja replicadas desde Odlyzko 1987; 3 e teorema incondicional; 8 e
+      resultado assintotico de existencia). Itens 4 e 11: NAO TRIAVEL
+      -- buraco de proveniencia honesto, o levantamento original de 12
+      itens nunca foi persistido verbatim, busca exaustiva nao
+      encontrou o que alegavam. Item 12 (variancia do numero/rigidez
+      GUE): candidato genuino, virou sub-teste completo (ver
+      DISC-RH-NUMBER-VARIANCE-001 abaixo). Ver
+      02_TESTS/RH_ZETA_ZEROS/untried_items_review/REVIEW.md
+    number_variance_result: >
+      DISC-RH-NUMBER-VARIANCE-001 concluido e fechado (ver entrada
+      propria da fila abaixo) -- CLOSED_INCONCLUSIVE (subcaso
+      NEITHER_MODEL apos correcao de um bug real encontrado na
+      reproducao adversarial), com o componente de exclusao de GUE
+      CONFIRMADO como achado real.
     next_action: >
-      Nenhuma acao obrigatoria. O unico sub-teste desenhado a partir
-      da triagem (item 10, FHK) fechou CLOSED_INCONCLUSIVE com holdout
-      selado (altura 10^11) preservado para um futuro teste que tente
-      dicionarios de altura finita adicionais (nao apenas iid vs CUE
-      canonico). Itens 5 e 6 permanecem despriorizados (ver
-      phase0_zeta_eval_triage acima); itens 1,2,3,4,8,11,12 do
-      levantamento original nunca desenhados como sub-teste.
+      Nenhuma acao obrigatoria. Sub-testes desenhados a partir da
+      triagem: item 10 (FHK) fechou CLOSED_INCONCLUSIVE, holdout
+      selado (altura 10^11); item 12 (variancia do numero) fechou
+      CLOSED_INCONCLUSIVE/NEITHER_MODEL, holdout selado (zeros4,
+      T~10^20). Itens 5 e 6 permanecem despriorizados. Itens 1,2,3,8
+      confirmados sem pergunta nova; itens 4 e 11 marcados NAO
+      TRIAVEL permanentemente. Todos os 12 itens do levantamento
+      original agora tem disposicao final registrada.
     stop_condition: >
       pular a fase de filtragem numerica/literatura e ir direto para Lean;
       alegar progresso sobre RH em si a partir de qualquer resultado desta
@@ -842,6 +861,83 @@ queue:
       qualquer progresso sobre a Hipotese de Riemann a partir deste
       teste -- e um teste sobre o comportamento de maximos locais de
       zeta em altura finita, nao sobre RH.
+
+  - test_id: DISC-RH-NUMBER-VARIANCE-001
+    title: "Variancia do numero de zeros de zeta -- GUE ingenuo (Modelo A) vs correcao de primos de Berry (Modelo B)"
+    domain: matematica_pura
+    parent_legacy: "DISC-RH-REAL-001 (item 12 do levantamento original, identificado por untried_items_review/REVIEW.md, DISC-DEC-019)"
+    related_tests:
+      - "DISC-RH-REAL-001 (linha guarda-chuva)"
+    status: CLOSED_INCONCLUSIVE
+    existing_assets:
+      - "02_TESTS/RH_ZETA_ZEROS/number_variance/PREREGISTRATION.md (LOCKED + correcao pos-adversarial datada)"
+      - "02_TESTS/RH_ZETA_ZEROS/number_variance/DESIGN.json, estimator.py, run_primary.py, primary_result.json"
+      - "02_TESTS/RH_ZETA_ZEROS/number_variance/validate_{gue,estimator_bruteforce,power_saturating}.py + logs (incl. 3 FAILED preservados)"
+      - "02_TESTS/RH_ZETA_ZEROS/number_variance/adversarial/ (reproducao independente completa, achou bug real)"
+    description: >
+      Modelo A (GUE ingenuo, Conjectura 1.4.1(a) de Berry 1988) vs Modelo
+      B (correcao de primos, Conjectura 1.4.1(b) de Berry 1988, apoiada
+      pela prova condicional de Lugar-Milinovich-Quesada-Herrera 2022,
+      arXiv:2211.14918) como modelos concorrentes nomeados para a
+      variancia do numero V(L) de zeros reais de zeta. Formulas
+      verificadas por fetch direto do PDF fonte (nao de memoria).
+      Estimador exato (integracao de funcao em escada, sem discretizacao)
+      substituindo o ad hoc de um piloto exploratorio anterior. Validado
+      contra rede regular, processo de Poisson e forca bruta ANTES de
+      dado real -- 2 bugs reais encontrados e corrigidos nessa etapa
+      (normalizacao de matriz GUE 2x; convencao de fronteira no
+      estimador). Datasets primarios zeros1.txt (T~75k) e zeros3.txt
+      (T~2,7e11); zeros4.txt (T~1,4e20, maior altura disponivel) selado
+      como holdout, nunca tocado.
+    primary_result: >
+      zeros1 (L=2155,04): V_hat=0,3600, z_A=-203,25, z_B=+14,66.
+      zeros3 (L=210,50, RESULTADO ORIGINAL COM BUG -- ver correcao
+      abaixo): V_hat=0,5182, z_A=-4,13, z_B=+0,00.
+    adversarial_verdict: >
+      CONFIRMADO o componente de exclusao GUE, E ACHADO UM TERCEIRO BUG
+      REAL no estimador primario (mesmo modulo ja corrigido 2x antes do
+      lock) -- erro de arredondamento de ponto flutuante no round-trip
+      da borda do bloco 0, afetando 15/23 pontos da grade, incluindo o
+      ponto decisivo de zeros3 (SE inflado ~31x). Numeros corretos
+      (reproduzidos por 3 metodos independentes -- estimador adversarial
+      do zero, forca bruta, reproducao minima do bug): zeros3
+      V_hat=0,4272, z_A=-160,76 (nao -4,13), z_B=-18,29 (nao +0,00).
+      zeros1 nao afetado (arredondamento caiu do lado seguro), bate
+      exatamente. Correcao integrada no proprio PREREGISTRATION.md
+      (adendo datado, texto original preservado intacto), autorizada
+      como correcao de implementacao (nao reformulacao de hipotese),
+      mesma disciplina de AGENTS.md passo 7.
+    corrected_result: >
+      Veredito de topo pela regra ternaria travada (regra em si
+      inalterada): INCONCLUSIVE (nem BERRY_FAVORED nem GUE_FAVORED
+      satisfeitos). Subcaso CORRIGIDO: NEITHER_MODEL (nao
+      PARTIAL_DISAGREEMENT como reportado originalmente) -- os dois
+      datasets, de forma consistente, rejeitam formalmente os DOIS
+      modelos pelo limiar de 2-3 sigma pre-declarado (zeros1: |z_A|=203
+      e |z_B|=14,7; zeros3 corrigido: |z_A|=160,8 e |z_B|=18,3), mesmo
+      com o dado ficando MUITO mais proximo do Modelo B em distancia
+      absoluta nos 23/23 pontos da grade combinada (~9-14x mais perto
+      de Berry que de GUE). O componente GUE-EXCLUSION (rejeicao do
+      Modelo A) fica CONFIRMADO como achado real, com margem ainda
+      maior do que o relatorio original sugeria. Holdout zeros4
+      permanece SELADO -- a condicao de parada e sobre achados que
+      favorecem formalmente um modelo, o que nao e o caso aqui.
+    next_action: >
+      Nenhuma acao obrigatoria -- teste fechado com veredito honesto,
+      corrigido e confirmado adversarialmente. estimator.py precisa da
+      correcao do round-trip antes de qualquer reuso futuro (ver
+      adversarial/bug_report_block0_fp.py para a correcao minima). Uma
+      tentativa futura legitima exigiria uma janela de L mais proxima
+      do regime hoje provado (Corolario 1.4.3, L<=log^(4/3)T) ou um
+      terceiro modelo concorrente nomeado, definido a priori -- nunca
+      reformular este pre-registro.
+    stop_condition: >
+      [ja cumprido] reformular Modelo A/B ou a regra ternaria apos ver o
+      resultado; abrir o holdout selado sem novo pre-registro; alegar
+      qualquer progresso sobre a Hipotese de Riemann a partir deste
+      teste -- e um teste sobre a variancia local do numero de zeros em
+      altura finita, nao sobre RH; esconder ou suavizar o bug encontrado
+      na reproducao adversarial.
 
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"

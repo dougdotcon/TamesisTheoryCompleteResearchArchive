@@ -1,0 +1,30 @@
+=== IEEE DataPort (DASPS) download verification log ===
+Date (session): 2026-08-22
+
+Step 1: GET https://ieee-dataport.org/open-access/dasps-database
+HTTP_STATUS:200  final_url:https://ieee-dataport.org/open-access/dasps-database
+Result: page itself is reachable (HTTP 200, no anti-bot block, unlike Figshare's HTML page).
+
+Step 2: search rendered page for direct download hrefs (.zip/.mat/.edf/download)
+Result: NONE found. All dataset files (Raw data mat.zip ~26.49MB, Preprocessed
+data mat.zip ~26.49MB, Documents and Code.zip ~33.91KB, DASPS+HAM labels.zip
+~26.55MB, preprocessed_DASPS_dataset.zip ~26.61MB) are served only to
+authenticated sessions ('Open Access dataset files are accessible to all logged
+in users.') The page exposes only a 'Create a free IEEE account' /
+'Log in' pathway (ieee.org/profile/public/createwebaccount/...), no anonymous
+or API download endpoint equivalent to Figshare's api.figshare.com was found.
+
+Step 3: attempted unauthenticated access to plausible download endpoints
+  https://ieee-dataport.org/open-access/dasps-database/download -> HTTP 404
+  https://ieee-dataport.org/sites/default/files/DASPS.zip -> HTTP 404
+
+Conclusion: DASPS download requires an authenticated IEEE DataPort account.
+IEEE account creation requires interactive email verification (and typically
+a CAPTCHA / ToS acceptance step) that cannot be completed by this non-interactive
+agent session -- there is no inbox this session can read to confirm a signup,
+and creating an account using the user's real identity without their explicit,
+in-the-moment participation is out of scope for an unattended operationalization
+step. VERDICT: DASPS real-file download NOT VERIFIED in this session -- reachability
+of the landing page is confirmed (HTTP 200, not anti-bot-blocked), but byte-level
+download/integrity verification (the Figshare-style MD5 check performed for Mumtaz)
+could NOT be attempted because no file is reachable pre-authentication.

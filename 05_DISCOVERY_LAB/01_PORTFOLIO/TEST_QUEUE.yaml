@@ -388,11 +388,47 @@ queue:
       dado real de saida (v_p observado) foi tocado ate este ponto --
       toda a validacao/revalidacao usou dado sintetico dos dois lados.
     next_action: >
-      Nenhuma -- teste fechado. Uma tentativa futura genuinamente nova
-      exigiria implementar a auto-calibracao completa de f_multi de Chae
-      (Eqs. 11-13) ANTES de qualquer ajuste de a0, e so entao reabrir
-      (com um NOVO pre-registro, nao reformulando este) o holdout selado
-      (12.944 sistemas) para o Gate de Replicacao.
+      Estagio 1 (metodologia + validacao sintetica da auto-calibracao de
+      f_multi) concluido -- ver fmulti_stage1_results abaixo. Estagio 2
+      (aplicacao a amostra de descoberta REAL, 30.203 sistemas, ainda NAO
+      o holdout selado) exige autorizacao explicita separada e um NOVO
+      pre-registro proprio (nao reformulando este), mesma disciplina de
+      DISC-DEC-001 -- nao autorizada por esta entrada.
+    fmulti_stage1_results: >
+      2026-08-22 (DISC-DEC-023, retomada como SPARC-FMULTI-STAGE1):
+      pipeline de auto-calibracao completa de f_multi (Chae Eqs. 11-13 +
+      procedimento iterativo do Artigo A/B) implementado e validado
+      inteiramente sobre dado sintetico -- 7 criterios pre-declarados
+      (A1-A4, B1-B3) passaram em 5 cenarios independentes. Validacao A
+      (populacao 100% Newtoniana, f_multi_true=0,00/0,35/0,47): f_multi
+      recuperado dentro de 0,05 nos 3 cenarios, correcao generaliza para
+      todos os 5 bins (nao so o bin-ancora). Validacao B (a0_true=1,2e-10
+      + f_multi_true=0,35/0,47 simultaneos): pipeline SEM correcao repete
+      o modo de falha catastrofico ja visto no dado real desta linha
+      (a0_fit 17x/57x o valor verdadeiro); COM auto-calibracao, erro cai
+      para um residuo de 0,15-0,22 dex (fator 1,4-1,6x) -- grande melhora,
+      mas NAO recuperacao perfeita (1 dos 2 cenarios teve o IC95% por
+      pouco nao conter a0_true), causa raiz ja identificada a priori (
+      modelo simplificado de wobble de fotocentro nao decai corretamente
+      com g_N, herdado sem alteracao de hidden_companion_check_v2.py).
+      Verificacao adversarial independente (2 agentes, DISC-DEC-023):
+      Frente 1 (proveniencia das equacoes de Chae, refetch direto dos
+      e-prints .tex de arXiv:2305.04613/2309.10404) -- SOUND, so' um nit
+      de citacao interna sem efeito em nenhuma formula usada. Frente 2
+      (auditoria adversarial de codigo/circularidade/numeros) -- os 5
+      checks substantivos (circularidade, numeros, ausencia de dado real,
+      logica, sanidade estatistica) passaram limpos; achou 1 problema
+      moderado (METHODOLOGY_ADDENDUM.md alegava ordem temporal
+      escrito-antes-de-rodar que os timestamps contradiziam -- os
+      limiares numericos de fato estavam fixados em codigo antes das
+      execucoes, sem evidencia de ajuste pos-hoc; corrigido via adendo
+      datado) e 1 lacuna de robustez real em fit_a0() (sem filtro de
+      a0<=0, ao contrario de bootstrap_a0_refit() -- corrigido no codigo,
+      nao afetou nenhum numero ja reportado, reexecucao confirmou
+      resultados identicos). Ver
+      02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/{METHODOLOGY_ADDENDUM.md,PROVENANCE_CHAE_EQS.md,RESULTS_SUMMARY_STAGE1.md,ADVERSARIAL_VERIFICATION.md}.
+      Nenhum dado real (descoberta ou holdout) foi tocado -- confirmado
+      por 2 verificacoes independentes.
     final_result: >
       2026-08-18: analise primaria v1 sobre os 30.203 sistemas de
       descoberta produziu delta_obs-newt=[+0,2274;+0,1723;+0,1313;
@@ -2264,22 +2300,68 @@ queue:
       eletrodos). Dados reais ja localizados e verificados por fetch
       (nao apenas citados): Mumtaz et al. (MDD vs. controles saudaveis,
       Figshare); DASPS (ansiedade, IEEE DataPort).
+    operationalization_result: >
+      2026-08-22 (DISC-DEC-025): etapa de operacionalizacao concluida --
+      02_TESTS/COGNITIVE_EEG_SPECTRAL/OPERATIONALIZATION.md. (1) I(X)
+      operacionalizado como entropia espectral de Shannon normalizada do
+      PSD estimado por Welch (Inouye et al. 1991; normalizacao de Vakkuri
+      et al. 2004), media entre canais -- preferida a Lempel-Ziv literal
+      (citada no paper original) por nao exigir um parametro de
+      binarizacao adicional nao-mandatado; uma contradicao interna
+      genuina no texto-fonte (a descricao "1/f^alpha, alpha aumenta" do
+      regime "achatamento") foi identificada e resolvida, com um
+      expoente aperiodico (FOOOF/specparam, Donoghue et al. 2020)
+      definido como estatistica secundaria/exploratoria para o terceiro
+      regime ("viscoso" -- sem dataset real identificado, nao testado).
+      (2) R_lambda/pre-processamento fixados por dataset, verificados
+      empiricamente (nao supostos) via parsing real de headers EDF
+      baixados: Mumtaz = referencia orelhas-ligadas, 256Hz, 19 canais;
+      DASPS = referencia mastoide, 128Hz, 14 canais, filtrado em
+      hardware a 4-45Hz (limitacao explicita: R_lambda de DASPS nao
+      alcanca a banda delta). Construcao de grafo/conectoma
+      deliberadamente NAO exigida para a estatistica primaria (evita
+      escolha arbitraria de estimador de conectividade); variante
+      WPLI+Laplaciano especificada so como checagem de robustez futura
+      opcional. (3) Modelos concorrentes nomeados: Sun et al. 2019 (MDD
+      mostra clustering REDUZIDO/topologia randomizada, direcao OPOSTA a
+      alegacao do paper legado de "atrator rigido"); Qi et al. 2023 (TAG
+      mostra padrao de conectividade misto por banda, nao o "clustering
+      alto uniforme" alegado); mais um nulo amplitude-apenas. (4) Regra
+      de decisao a priori fixada: 2 testes independentes (Mumtaz: t de
+      Welch MDD vs. HC; DASPS: t pareado ansioso vs. calmo), direcoes
+      previstas exatas, confirma/refuta/inconclusivo definidos
+      numericamente, correcao de Bonferroni recomendada. (5) Poder
+      estatistico a priori (statsmodels, t nao-central): Mumtaz
+      (N=34/30) precisa d>=0,71 para 80% de poder; DASPS (N=23 pareado)
+      precisa d>=0,61 -- ambos SUBDIMENSIONADOS para a faixa de efeito
+      pequeno-a-medio mais plausivel, reportado honestamente. (6) Acesso
+      real por download: Mumtaz VERIFICADO genuinamente -- API publica
+      do Figshare (pagina HTML retorna 403, API nao) permitiu baixar 2
+      arquivos reais, MD5 conferido exatamente, formato EDF valido
+      confirmado por parsing de header. DASPS NAO verificado -- pagina
+      alcancavel (sem bloqueio anti-bot) mas arquivos exigem login IEEE
+      DataPort interativo (criacao de conta com verificacao de e-mail)
+      que esta sessao nao-interativa nao pode completar; reportado
+      honestamente como nao verificado, nenhum download fabricado.
+      Nenhum arquivo de dado real grande foi persistido no repositorio
+      (verificado: pasta inteira 140KB, so' logs/metadados).
     next_action: >
-      Operacionalizacao (mesmo tipo de passo que DISC-DEC-004 fez para
-      SPARC-002, ANTES de qualquer pre-registro ou dado real tocado):
-      (1) definir precisamente o observavel espectral (quais
-      autovalores/estatisticas do Laplaciano, qual construcao de grafo
-      a partir do EEG bruto -- coerencia? PLV? em que banda?); (2)
-      nomear modelo(s) concorrente(s) da literatura de grafos clinicos
-      publicada com previsao distinta; (3) fixar limiar quantitativo e
-      regra de decisao a priori; (4) verificar acesso real aos dois
-      datasets (download, nao so citacao) e checar se sao comparaveis
-      (montagem de eletrodos, taxa de amostragem, protocolo). So depois
-      disso um PREREGISTRATION.md pode ser travado.
+      Braco depressao (Mumtaz) pronto para um futuro PREREGISTRATION.md
+      proprio. 2 lacunas nomeadas precisam de decisao explicita da sessao
+      orquestradora antes do lock: (a) acesso DASPS (braco ansiedade)
+      exige signup IEEE DataPort completado por um humano -- fora do
+      escopo de um agente nao-interativo; sem isso, uma linha travada
+      teria que se restringir ao braco depressao sozinho, ou aguardar; (b)
+      duas convencoes defensaveis-mas-nao-resolvidas (alpha de comparacao
+      multipla; resolucao da ambiguidade 1/f no texto-fonte) precisam de
+      aprovacao explicita antes do lock, nao apenas a escolha unilateral
+      do agente de operacionalizacao.
     stop_condition: >
-      tocar qualquer dado real (baixar e computar) antes da
-      operacionalizacao completa e do pre-registro travado; inferir
-      diagnostico clinico a partir de resultado espectral sem validacao
-      -- este e um teste sobre uma alegacao matematica de grafos, nao
-      uma ferramenta de diagnostico; qualquer alegacao medica ou
-      clinica a partir de um resultado exploratorio desta linha.
+      tocar qualquer dado real (baixar e computar o proprio I(X)) antes
+      da operacionalizacao completa [ja cumprida] e do pre-registro
+      travado -- computar I(X) sobre dado real permanece PROIBIDO ate
+      um PREREGISTRATION.md formal; inferir diagnostico clinico a partir
+      de resultado espectral sem validacao -- este e um teste sobre uma
+      alegacao matematica de grafos, nao uma ferramenta de diagnostico;
+      qualquer alegacao medica ou clinica a partir de um resultado
+      exploratorio desta linha.

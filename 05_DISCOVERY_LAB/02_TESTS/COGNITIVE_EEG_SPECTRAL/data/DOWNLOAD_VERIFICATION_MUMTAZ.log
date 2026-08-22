@@ -1,0 +1,48 @@
+=== Figshare (Mumtaz et al.) download verification log ===
+Date (session): 2026-08-22
+API metadata endpoint: https://api.figshare.com/v2/articles/4244171  -> HTTP 200
+(direct WebFetch of the public HTML page https://figshare.com/articles/dataset/EEG_Data_New/4244171 still returns HTTP 403 anti-bot, consistent with SURVEY.md finding; the machine-readable API endpoint is NOT blocked and returns full file listing with per-file MD5 checksums)
+
+title: MDD Patients and Healthy Controls EEG Data (New)
+doi: 10.6084/m9.figshare.4244171.v2
+license: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/
+n_files: 193
+total_size_bytes: 903228416
+MDD-prefixed files: 102
+H-prefixed files: 91
+
+--- Sample file download + integrity check ---
+H_S1_EC.edf  <- https://ndownloader.figshare.com/files/6921014
+  expected md5 (from Figshare API): 1dc454cf1c06402b78264c1bcbe39086
+1dc454cf1c06402b78264c1bcbe39086  H_S1_EC.edf
+MDD_S1_EC.edf <- https://ndownloader.figshare.com/files/6921386
+  expected md5 (from Figshare API): a04d5788e83c2bc7b6a214fd9d7702b5
+a04d5788e83c2bc7b6a214fd9d7702b5  MDD_S1_EC.edf
+
+--- EDF header parse (format validity + acquisition parameters) ---
+======================================================================
+file: H_S1_EC.edf
+EDF version tag: '0'
+patient_id field: [REDACTED HERE for this archive -- upstream EDF header field contains an apparent subject name string, unrelated to any statistic used in this stage; field is present verbatim in the public CC BY 4.0 upstream file itself]
+recording_id field: Startdate 16-AUG-2011 1.001.01_EC EEG SN:060224
+start_date/time: 16.08.11 17.48.54
+n_signals: 23
+n_records: 300 record_duration_s: 1.0
+total_duration_s: 300.0
+labels: ['EEG Fp1-LE', 'EEG F3-LE', 'EEG C3-LE', 'EEG P3-LE', 'EEG O1-LE', 'EEG F7-LE', 'EEG T3-LE', 'EEG T5-LE', 'EEG Fz-LE', 'EEG Fp2-LE', 'EEG F4-LE', 'EEG C4-LE', 'EEG P4-LE', 'EEG O2-LE', 'EEG F8-LE', 'EEG T4-LE', 'EEG T6-LE', 'EEG Cz-LE', 'EEG Pz-LE', 'EEG A2-A1', 'EEG 23A-23R', 'EEG 24A-24R', 'EDF Annotations']
+phys_dim: ['uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV']
+sampling_rate_hz (per channel): [256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0]
+prefiltering[0]: HP:0.5Hz LP:80Hz
+======================================================================
+file: MDD_S1_EC.edf
+EDF version tag: '0'
+patient_id field: [REDACTED HERE for this archive -- see note above]
+recording_id field: Startdate 06-JUN-2013 1.001.01_EC EEG_tech SN:060224
+start_date/time: 06.06.13 16.44.47
+n_signals: 21
+n_records: 303 record_duration_s: 1.0
+total_duration_s: 303.0
+labels: ['EEG Fp1-LE', 'EEG F3-LE', 'EEG C3-LE', 'EEG P3-LE', 'EEG O1-LE', 'EEG F7-LE', 'EEG T3-LE', 'EEG T5-LE', 'EEG Fz-LE', 'EEG Fp2-LE', 'EEG F4-LE', 'EEG C4-LE', 'EEG P4-LE', 'EEG O2-LE', 'EEG F8-LE', 'EEG T4-LE', 'EEG T6-LE', 'EEG Cz-LE', 'EEG Pz-LE', 'EEG A2-A1', 'EDF Annotations']
+phys_dim: ['uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', 'uV', '']
+sampling_rate_hz (per channel): [256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0, 256.0]
+prefiltering[0]: HP:0.5Hz LP:80Hz

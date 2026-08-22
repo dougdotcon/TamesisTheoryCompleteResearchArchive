@@ -47,7 +47,8 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 | Zeros de ζ (RH-REAL) | 12/12 itens do levantamento com disposição final | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); FHK e variância do número fecharam `CLOSED_INCONCLUSIVE`, ambos com componente forte confirmado adversarialmente (exclusão do lado iid ≥8,8σ; exclusão de GUE ingênuo a até 203σ — reprodução adversarial ainda achou e corrigiu um 3º bug real no estimador primário) |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
 | **Função-limite U₁/₂ (ondas 2–5, consolidada)** | 1 teorema + 1 generalização + caso K=2 do Lema Aberto | **Provada, verificada por referee adversarial, publicada como paper + pacote reproduzível; K=2 provado incondicionalmente na onda 5, K≥3 continua aberto** (ver abaixo) |
-| Levantamento arquivo-inteiro de candidatos (Fase 0, além de TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com razão concreta citada; 1 lead imaturo (assinaturas espectrais de EEG cognitivo) promovido a nova linha candidata em etapa de operacionalização, sem dado real ainda |
+| Levantamento arquivo-inteiro de candidatos (Fase 0, além de TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com razão concreta citada; 1 lead imaturo (assinaturas espectrais de EEG cognitivo) promovido a nova linha candidata, operacionalização concluída |
+| Cosmologia SPARC-004 — auto-calibração `f_multi` (Estágio 1) | pipeline completo, 5 cenários sintéticos, verificação adversarial por 2 agentes | Pronto para Estágio 2 (dado real, não holdout) — 7/7 critérios pré-declarados passaram; 2 problemas reais encontrados pela verificação adversarial (1 de disciplina documental, 1 lacuna de robustez em código) corrigidos sem alterar nenhum número já reportado |
 
 **O resultado positivo principal:** a classe de universalidade U₁/₂ (permutação
 aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exata
@@ -99,9 +100,15 @@ E a tabela honesta de **tudo que este laboratório já tentou e não sobreviveu*
 Um levantamento honesto de todo o arquivo Tamesis (não restrito a TRI-RG, 19
 candidatos em 7 áreas) fechou `CLOSED_NULL` — 18/19 rejeitados com razão
 concreta citada — e promoveu o único lead imaturo encontrado (assinaturas
-espectrais de EEG cognitivo, depressão vs. ansiedade) a nova linha candidata
-em etapa de operacionalização, sem qualquer dado real ainda tocado. Ver
-`05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md`.
+espectrais de EEG cognitivo, depressão vs. ansiedade) a nova linha candidata.
+Sua etapa de operacionalização já foi concluída (observável definido como
+entropia espectral de Shannon normalizada, modelo concorrente nomeado,
+poder estatístico calculado, acesso real por download verificado para o
+braço de depressão) — o braço de ansiedade permanece bloqueado por exigir
+login humano num provedor de dados, honestamente reportado como tal; nenhum
+dado real ainda foi computado. Ver
+`05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md` e
+`05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/OPERATIONALIZATION.md`.
 
 ## Visão do laboratório
 

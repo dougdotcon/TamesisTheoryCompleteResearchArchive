@@ -1438,3 +1438,59 @@ decisions:
       - "nenhum dado real (EEG) sera baixado ou computado nesta etapa -- so operacionalizacao (observavel, modelo nulo, regra de decisao)"
       - "stop_condition explicita contra qualquer alegacao medica/clinica a partir de resultado exploratorio"
       - "pre-registro formal exigido antes de qualquer computo real, mesma disciplina de toda a linha DISC-RH-REAL-001/SPARC"
+
+  - decision_id: DISC-DEC-026
+    date: 2026-08-22
+    decision: >
+      Integrar os dois resultados da onda paralela de DISC-DEC-023:
+      (a) SPARC-FMULTI-STAGE1 -- pipeline de auto-calibracao completa de
+      f_multi (Chae 2023 Eqs. 11-13) implementado, validado inteiramente
+      sobre dado sintetico (7/7 criterios pre-declarados passaram em 5
+      cenarios), verificado adversarialmente por 2 agentes independentes
+      (proveniencia das equacoes: SOUND; auditoria de codigo/numeros/
+      circularidade: 2 problemas reais encontrados e corrigidos via
+      adendo datado e patch de codigo minimo, nenhum numero ja reportado
+      alterado). Pipeline pronto para Estagio 2 (dado real de descoberta,
+      ainda NAO holdout selado) -- Estagio 2 nao autorizado por esta
+      decisao, exige pre-registro proprio. (b) DISC-COGNITIVE-EEG-
+      SPECTRAL-001 -- etapa de operacionalizacao concluida: I(X) definido
+      (entropia espectral de Shannon normalizada, Welch), R_lambda fixado
+      e verificado por parsing real de headers EDF, modelos concorrentes
+      nomeados (Sun 2019, Qi 2023), regra de decisao a priori fixada,
+      poder estatistico calculado (ambos os datasets subdimensionados
+      para efeito pequeno-medio), acesso real por download VERIFICADO
+      para Mumtaz (MD5 conferido) e NAO verificado para DASPS (exige
+      signup IEEE humano, honestamente reportado como bloqueado).
+    rationale: >
+      SPARC-FMULTI-STAGE1: a auto-calibracao de f_multi era a precondicao
+      explicitamente nomeada pelo proprio fechamento original de
+      DISC-COSMOLOGY-MOND-SPARC-004 (CLOSED_INCONCLUSIVE) para qualquer
+      tentativa futura genuinamente nova. A verificacao adversarial
+      obrigatoria para infraestrutura que tocara' dado real no futuro
+      (mesmo padrao ja aplicado a M-CLUST e ao estimador de variancia do
+      numero) achou 2 problemas reais -- um de disciplina documental
+      (alegacao de ordem temporal falsa, mas os limiares numericos de
+      fato precederam as execucoes) e um de robustez de codigo (fit_a0
+      sem guarda de positividade, corrigido, reexecucao confirmou
+      resultados identicos aos ja reportados) -- nenhum dos dois muda
+      qualquer numero substantivo ja catalogado. EEG: a operacionalizacao
+      segue o mesmo padrao ja usado para SPARC-002 (DISC-DEC-004) --
+      definir observavel, modelo nulo e regra de decisao ANTES de tocar
+      dado real. O resultado e honesto sobre suas proprias lacunas (acesso
+      DASPS bloqueado por autenticacao que um agente nao pode completar;
+      2 escolhas metodologicas defensaveis mas nao unilateralmente
+      travaveis) em vez de forcar prontidao para pre-registro.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/ (METHODOLOGY_ADDENDUM.md e PROVENANCE_CHAE_EQS.md com adendos datados; ADVERSARIAL_VERIFICATION.md novo; analysis/selfcal_pipeline.py::fit_a0 com guarda de positividade corrigida; results/validation_B_* reexecutado)"
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/ (novo: OPERATIONALIZATION.md + scripts/logs de verificacao de download)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-COSMOLOGY-MOND-SPARC-004: fmulti_stage1_results; DISC-COGNITIVE-EEG-SPECTRAL-001: operationalization_result)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- SPARC-004 permanece CLOSED_INCONCLUSIVE (Estagio 2 e' um teste futuro distinto, nao reabertura); DISC-COGNITIVE-EEG-SPECTRAL-001 permanece CANDIDATE_FORMULATING (operacionalizacao nao e' pre-registro)"
+    untouched_safeguards:
+      - "holdout selado de SPARC-004 (12.944 sistemas) permanece intocado -- Estagio 2 exige pre-registro proprio e autorizacao explicita separada"
+      - "nenhum I(X) computado sobre dado real EEG -- so' verificacao de acesso/formato (parsing de header, checagem MD5), nenhuma estatistica espectral calculada sobre sinal real"
+      - "nenhum arquivo de dado real grande (EDF, catalogo) persistido no repositorio -- verificado, pasta COGNITIVE_EEG_SPECTRAL inteira 140KB"
+      - "correcoes de codigo/documentacao desta decisao sao adendos datados ou patches minimos documentados, nunca reescrita silenciosa -- textos originais preservados"

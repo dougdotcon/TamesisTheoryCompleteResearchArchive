@@ -1936,3 +1936,152 @@ uniforme-em-`c`; a lei distribucional completa (Conjecturas 1–2).
 Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/ATTEMPT.md`,
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/adversarial/REFEREE_REPORT.md`.
+
+**[Ver Estágio 7 abaixo — o item (iii) desta lista ("positividade do
+coeficiente de taxa para `K≥13`") foi fechado: PROVADO para todo
+`K≥2`, onda 9 frente (b), DISC-DEC-042, 2026-08-22.]**
+
+---
+
+## [Extensão, Estágio 7 — 2026-08-22] O coeficiente de taxa `c_K` é estritamente positivo para todo `K≥2`: a taxa é exatamente `Θ(1/n)`, não apenas `O(1/n)`
+
+**Contexto.** O Estágio 6 provou o coeficiente exato de `1/n` de
+`φ_n^{(K)}-φ_K`, incondicionalmente para todo `K≥1`:
+
+`c_K := K[φ_K/4 + F_{K-1}(1,1) - φ_K]`,
+
+com `c_1=0` (consistente com a taxa `Θ(1/n²)` já provada em `K=1`) e
+`c_K` verificado — não provado — estritamente positivo para
+`2≤K≤12`. Se `c_K>0` para todo `K≥13` permanecia honestamente aberto,
+nomeado como o item (iii) da lista "o que permanece aberto" do Estágio
+6. `DISC-DEC-041` autorizou, como frente (b) da onda 9, uma tentativa
+dedicada de fechar exatamente essa questão.
+
+### O fechamento
+
+`k_general_existence_attempt/rate_coefficient_positivity_attempt/ATTEMPT.md`
+prova `c_K>0` para todo `K≥2` — não apenas estende a verificação
+numérica, mas fecha a questão por prova elementar, não-assintótica. A
+ideia central: a expressão de dois ingredientes `c_K` colapsa para um
+único ingrediente, a própria integral de Wallis. Especificamente:
+
+> **Lema 1 (PROVADO, novo — fato autônomo, companheiro de
+> `F_r(1,0)=φ_r` já registrado em `k6_attempt/ATTEMPT.md` §2.3):**
+> `F_{K-1}(1,1) = [(2K+1)φ_K - 1]/(2K)`.
+
+Substituindo no coeficiente `c_K`:
+
+> **Teorema A (PROVADO):** `c_K = [(K+2)φ_K - 2]/4`.
+
+Logo `c_K>0 ⟺ (K+2)φ_K>2`, com **igualdade exata em `K=1`**
+(`v_1:=3φ_1=2`) — explicando estruturalmente, não apenas
+observacionalmente, por que `c_1=0` (a mesma degenerescência que o
+referee da onda 8 nomeou como issue I-4). Como
+`φ_{K+1}/φ_K=(2K+2)/(2K+3)` exatamente, a sequência
+`v_K:=(K+2)φ_K` satisfaz `v_{K+1}/v_K-1=K/[(K+2)(2K+3)]>0` para
+`K≥1` — uma única cancelação algébrica (`2(K+1)(K+3)-(K+2)(2K+3)=K`)
+— logo `v_K` é estritamente crescente a partir de `v_1=2`, dando
+`v_K>2`, i.e. `c_K>0`, para todo `K≥2`. Telescopando o incremento dá
+a forma mais afiada do resultado, em que a positividade não é uma
+desigualdade a provar, mas uma propriedade visível da expressão:
+
+> **Corolário B′ (PROVADO):** `c_K = ¼ Σ_{j=1}^{K-1} j·φ_j/(2j+3)`
+> — uma soma de termos estritamente positivos, vazia (logo `0`)
+> exatamente em `K=1`.
+
+Uma segunda prova independente, via a desigualdade clássica
+`C(2K,K)≤4^K/√(3K+1)` (re-provada pelo mesmo documento), reproduz o
+resultado por uma cancelação distinta (`3K²(K-1)>0` para `K≥2`).
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado rederivou cada item **do zero** — mão e
+código próprio — **antes** de ler o documento-alvo: o Lema 1 por
+quatro rotas numéricas independentes concordando exatamente
+(`K=1..50`); a identidade de cauda binomial re-derivada do teorema
+binomial + simetria de linha; a cancelação central `2(K+1)(K+3)-
+(K+2)(2K+3)=K` e a âncora `v_1=2` verificadas simbolicamente; a
+indução checada por uma **indução literal em código**, partindo só da
+âncora `v=2` e aplicando somente a razão, `K=1..1500`, sem tocar
+`φ_K` de novo; a soma telescópica reproduzindo o exemplo trabalhado
+`c_4=23/210`; todas as 85 células da tabela do documento recomputadas
+independentemente (0 células erradas); `c_K` calculado da definição
+crua (não da forma colapsada) para `K` até `5000`, e uma varredura
+exaustiva `K=0,...,3000` confirmando que o conjunto-solução da
+igualdade exata `(K+2)φ_K=2` é precisamente `{0,1}` — nenhum outro
+`K`. Reconfirmação independente do lado finito-`n`: uma reimplementação
+própria, do zero, da recursão exata `(a,b,r)` mais o Lema da Redução A,
+extraindo `α_1=c_K` exatamente para `K=1,...,9` por ajuste polinomial
+exato em `1/n` validado fora-da-amostra — e o referee foi além,
+**predizendo por conta própria** os coeficientes em `K=10,11,12`
+(`200965/646646`, `106135/312018`, `1779879/4828850`) antes de
+computá-los, confirmados exatamente. `c_6=1093/6006` fica agora
+confirmado por uma **sexta** via independente neste arquivo.
+
+> **Veredito: SOUND.** "Ataquei cada passo do argumento, rederivei
+> independentemente cada identidade que sustenta o argumento antes de
+> ler como o documento a deriva, escrevi cada script de verificação do
+> zero, e não encontrei nenhum erro de nenhum tipo em nenhuma alegação
+> numerada." Zero discrepâncias, zero contraexemplos, zero tentativas de
+> quebra bem-sucedidas — o primeiro documento desta linha em que o
+> referee não encontrou nada que exigisse correção. Quatro notas
+> presentacionais (N-1 a N-4) foram registradas, nenhuma um erro,
+> nenhuma exigindo correção: uma cláusula omitida mas trivial (`v_K>0`,
+> suprida pela própria indução); a palavra "independente" na segunda
+> prova é melhor lida como "uma segunda rota" (ambas as cancelações
+> reduzem à mesma recursão de Wallis subjacente); `K=0` também é caso de
+> igualdade exata (inofensivo, já antecipado pelo próprio documento); o
+> cabeçalho "todos PROVADOS" de §5 é ligeiramente mais forte que a
+> redação mais cuidadosa do Scorecard, que é a que deve valer.
+
+Ver
+`k_general_existence_attempt/rate_coefficient_positivity_attempt/adversarial/REFEREE_REPORT.md`
+para o relatório completo.
+
+### O que isto muda, precisamente
+
+**O item (iii) da lista "o que permanece aberto" do Estágio 6 está
+FECHADO, afirmativamente, para todo `K≥2` uniformemente.** O
+enunciado a registrar:
+
+> **Teorema (taxa exata, todo `K≥1`).** Para todo `K` fixo, `K≥2`:
+> `\displaystyle\lim_{n\to\infty}n(φ_n^{(K)}-φ_K) = c_K =
+> \frac{(K+2)φ_K-2}4 = \frac14\sum_{j=1}^{K-1}\frac{jφ_j}{2j+3} > 0`,
+> logo `φ_n^{(K)}-φ_K=Θ(1/n)` — **não apenas `O(1/n)`**. Em `K=1`,
+> `c_1=0` e `φ_n^{(1)}-φ_1=1/(3n²)` exatamente (fato a montante,
+> Estágio 3), logo a taxa ali é `Θ(1/n²)`. Juntos, estes dois fatos
+> determinam a taxa de ordem líder de `φ_n^{(K)}→φ_K` para **todo**
+> `K≥1`.
+
+**Cautelas de redação (herdadas do próprio referee, que nomeou
+precisamente o mesmo tipo de deslize de quantificador que causou a
+issue I-4 da onda 8):** nunca escrever "`c_K>0` para todo `K≥1`" —
+`K=1` é caso de igualdade EXATA, não uma aproximação, e `K=0`
+igualmente; manter sempre "para todo `K` **fixo**, `K≥2`" na afirmação
+`Θ(1/n)` — nenhuma uniformidade em `K` é provada ou alegada.
+
+**Corolários adicionais (todos PROVADOS):** `c_K` é estritamente
+crescente em `K` (`K≥1`), logo `c_K≥c_2=1/30` para todo `K≥2` (piso
+positivo uniforme); `c_K=√(πK)/8 - 1/2 + O(K^{-1/2}) → ∞` (dado o
+desenvolvimento clássico de Wallis-Stirling, re-derivado
+independentemente pelo referee a precisão de 60 dígitos até
+`K=10^7`, concordando a 7 algarismos significativos).
+
+**O que permanece aberto, sem mudança:** os outros quatro itens do
+Estágio 6 — (i) forma fechada exata todas-as-ordens geral-`K`; (ii)
+taxa de crescimento em `r` das constantes de erro `D_r(b),C_r(b)`;
+(iv) versão localmente-uniforme-em-`c` do Teorema 3; (v) Conjecturas
+1–2 (lei distribucional completa) — nenhum tocado por este
+fechamento. **O Teorema 3 em si é inteiramente inafetado** — nunca
+dependeu desta frente.
+
+**Veredito honesto atualizado do documento inteiro (ao fim do Estágio
+7):** tudo do Estágio 6, mais **a taxa exata de `φ_n^{(K)}→φ_K` agora
+completamente determinada em ordem líder para todo `K≥1`** (Estágio
+7, novo): `Θ(1/n²)` em `K=1`, `Θ(1/n)` para todo `K≥2`, com
+coeficiente exato e crescente `c_K`. Restam abertos: forma fechada
+todas-as-ordens geral-`K`; taxa de crescimento das constantes de erro
+em `r`; versão uniforme-em-`c` do Teorema 3; Conjecturas 1–2. Fontes
+completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/ATTEMPT.md`,
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/adversarial/REFEREE_REPORT.md`.

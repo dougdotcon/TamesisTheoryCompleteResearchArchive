@@ -1,0 +1,43 @@
+====================================================================================================
+B1. exhaustive exact sweep for a counterexample
+====================================================================================================
+   closed form, K=1..3000:  counterexamples to c_K>0 (K>=2): NONE
+                            failures of strict monotonicity: NONE
+   RAW definition, K=1..400: counterexamples / mismatches: NONE
+
+====================================================================================================
+B2. boundary probing around the equality anchor
+====================================================================================================
+   K=0  phi_K=1            v_K=(K+2)phi_K=2             v_K-2=0             c_K=0             c_K==0: True
+   K=1  phi_K=2/3          v_K=(K+2)phi_K=2             v_K-2=0             c_K=0             c_K==0: True
+   K=2  phi_K=8/15         v_K=(K+2)phi_K=32/15         v_K-2=2/15          c_K=1/30          c_K==0: False
+   K=3  phi_K=16/35        v_K=(K+2)phi_K=16/7          v_K-2=2/7           c_K=1/14          c_K==0: False
+   K=4  phi_K=128/315      v_K=(K+2)phi_K=256/105       v_K-2=46/105        c_K=23/210        c_K==0: False
+   K=5  phi_K=256/693      v_K=(K+2)phi_K=256/99        v_K-2=58/99         c_K=29/198        c_K==0: False
+   ALL integers K in 0..3000 with (K+2)phi_K EXACTLY 2: [0, 1]
+   -> the equality is exact rational equality (Fraction ==), not float proximity.
+   note: K=0 is also an exact equality case (c_0 = 0), outside the K>=1 range
+         the document quantifies over; harmless, and consistent with the
+         increment K*phi_K/(2K+3) vanishing at K=0.
+
+====================================================================================================
+B3. literal machine induction using ONLY the recursion the proof uses
+====================================================================================================
+   starting from v_1=2 and applying ONLY v_{K+1}=v_K(1+K/((K+2)(2K+3))):
+   generated sequence == (K+2)phi_K for K=1..1500, and > 2 for K>=2 : True
+
+====================================================================================================
+B4. MY OWN PREDICTIONS: extend the finite-n corroboration to K=10,11,12
+====================================================================================================
+   K=10   alpha_0==phi_K:True    alpha_1==PREDICTED 200965/646646    :True    deg=K+1 (top coef != 0):True    out-of-sample(6 new n):True
+   K=11   alpha_0==phi_K:True    alpha_1==PREDICTED 106135/312018    :True    deg=K+1 (top coef != 0):True    out-of-sample(6 new n):True
+   K=12   alpha_0==phi_K:True    alpha_1==PREDICTED 1779879/4828850  :True    deg=K+1 (top coef != 0):True    out-of-sample(6 new n):True
+   ALL THREE OF MY PREDICTIONS CONFIRMED EXACTLY: True
+
+====================================================================================================
+B5. four genuinely different formulas for c_K must agree exactly
+====================================================================================================
+   raw def == product form == central-binomial form == telescoping sum ==
+   Theorem A, for K=1..300:  disagreements: NONE
+
+VERDICT OF THIS SCRIPT: NO COUNTEREXAMPLE FOUND; every break attempt failed.

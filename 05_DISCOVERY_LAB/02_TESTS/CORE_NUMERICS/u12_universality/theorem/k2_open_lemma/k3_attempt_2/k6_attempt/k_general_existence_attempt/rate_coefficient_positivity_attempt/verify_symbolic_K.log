@@ -1,0 +1,62 @@
+==============================================================================
+verify_symbolic_K.py -- K kept SYMBOLIC throughout
+==============================================================================
+
+PART P -- the PRIMARY route: everything collapses onto phi_K itself.
+  (P1-P6 are the proof as ATTEMPT.md §3-§4 states it; S1-S11 below are
+   the equivalent central-binomial route, kept as a cross-check.)
+
+  [OK  ] P0  phi_K == 4^K / ((2K+1) C(2K,K)),  K symbolic
+  [OK  ] P1  (K+2)4^K/(4(2K+1)C(2K,K)) - 1/2  ==  [(K+2)phi_K - 2]/4,  K symbolic
+  [OK  ] P2  [(K-1)!K!/(2K)!](4^K - C(2K,K))/2  ==  [(2K+1)phi_K - 1]/(2K),  K symbolic
+  [OK  ] P3  phi_{K+1}/phi_K == (2K+2)/(2K+3),  K symbolic
+  [OK  ] P4  v_{K+1}/v_K - 1 == K/((K+2)(2K+3))  > 0 for K>=1,  K symbolic
+  [OK  ] P5  v_1 == 2 exactly (the equality case; c_1 = 0)
+  [OK  ] P6a phi_K == int_0^1 (1-x^2)^K dx  (checked K=0..12 by symbolic integration)  :: mismatches: []
+  [OK  ] P6b phi_K == prod_{j=1}^K 2j/(2j+1) follows from P3 with phi_0 = 1
+  [OK  ] P7a v_{j+1} - v_j == j*phi_j/(2j+3),  j symbolic  (the telescoping increment)
+  [OK  ] P7b c_K == (1/4) sum_{j=1}^{K-1} j*phi_j/(2j+3), exact, K=1..400  :: mismatches: []
+  [OK  ] P7c every term j*phi_j/(2j+3) is strictly positive (phi_j > 0, j >= 1)
+
+PART S -- the equivalent central-binomial route (cross-check)
+
+  [OK  ] S1  prod_{i=1}^{k+1}(K+i) == (K+k+1)!/K!,  K,k symbolic
+  [OK  ] S2  summand == (K-1)!K!/((K-1-k)!(K+k+1)!),  K,k symbolic
+  [OK  ] S3  (2K)!/((K-1-k)!(K+k+1)!) == C(2K,K+k+1),  K,k symbolic
+  [OK  ] S4a C(2K,j) == C(2K,2K-j),  K,j symbolic
+  [OK  ] S4b sum_{j=0}^{2K} C(2K,j) == 4^K  (binomial theorem)
+  [OK  ] S4c assembled: 2*sum_{j=K+1}^{2K}C(2K,j) == 4^K - C(2K,K), K=1..300
+  [OK  ] S5  (3/4)phi_K*(2K)!/((K-1)!K!) == (3/4)4^K K/(2K+1),  K symbolic
+  [OK  ] S6  c_K == (K+2)4^K/(4(2K+1)C(2K,K)) - 1/2,  K symbolic
+  [OK  ] S7  u_{K+1}/u_K == 2(K+1)(K+3)/((K+2)(2K+3)),  K symbolic  :: sympy got 2*(K + 1)*(K + 3)/((K + 2)*(2*K + 3))
+  [OK  ] S8  2(K+1)(K+3) - (K+2)(2K+3) == K   (>0 for K>=1),  K symbolic
+  [OK  ] S9  u_1 == 1  (equivalently c_1 == 0)
+  [OK  ] S9' c_K at K=1 is 0
+
+  S10  asymptotic expansion of c_K as K -> oo, via the classical Wallis ratio:
+       c_K ~ (-32*sqrt(K) + 8*sqrt(pi)*K + 13*sqrt(pi))/(64*sqrt(K))
+  [OK  ] S10a sympy's series agrees with the claimed 3 terms
+       claimed:  sqrt(pi*K)/8 - 1/2 + 13*sqrt(pi)/(64*sqrt(K)) + O(K^-3/2)
+              K            c_K exact       3-term asympt.       |diff|   |diff|*K^{3/2}
+            200       2.658699949378       2.658743286703    4.334e-05         0.122576
+           1000       6.517620274650       6.517624158906    3.884e-06         0.122831
+           5000      15.171517957564      15.171518305127    3.476e-07         0.122882
+          20000      30.835399183780      30.835399227229    4.345e-08         0.122892
+         100000      69.563528714929      69.563528718815    3.886e-09         0.122894
+  [OK  ] S10 |c_K - 3-term asymptotic| * K^{3/2} stays bounded (=> the expansion is right and c_K -> +oo like sqrt(pi K)/8)
+  [OK  ] S11a a_{K+1}/a_K == (2K+1)/(2(K+1)) * sqrt((3K+4)/(3K+1)),  K symbolic
+  [OK  ] S11b 4(K+1)^2(3K+1) - (2K+1)^2(3K+4) == K  (>=0), so a_K non-increasing
+  [OK  ] S11c the lower bound is positive for K>=2:  (4K+2)^2 < (K+2)^2(3K+1) reduces to 3K^2 < 3K^3
+
+  S11  the resulting explicit rigorous lower bound c_K >= (K+2)sqrt(3K+1)/(4(2K+1)) - 1/2 :
+              K        lower bound          c_K exact  bound valid
+              2     0.029150262213     0.033333333333          yes
+              3     0.064692439316     0.071428571429          yes
+             13     0.378410461158     0.396167101471          yes
+             20     0.547716419939     0.569997652645          yes
+            100     1.701037139845     1.751448022598          yes
+           1000     6.357939338657     6.517620274650          yes
+          10000    21.154243422538    21.659273310315          yes
+  [OK  ] S11d lower bound is valid and strictly positive at K=2,3,13,20,100,1000,10000
+
+RESULT:  every symbolic-K step of the positivity proof verified by sympy.

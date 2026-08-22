@@ -1,0 +1,54 @@
+========================================================================================================
+(A) Re-computation of the target document's section 3 table, cell by cell
+========================================================================================================
+  K=1   phi:True   F:True   v:True   c:True   decimal(0.000000000 vs printed 0.000000000):True
+  K=2   phi:True   F:True   v:True   c:True   decimal(0.033333333 vs printed 0.033333333):True
+  K=3   phi:True   F:True   v:True   c:True   decimal(0.071428571 vs printed 0.071428571):True
+  K=4   phi:True   F:True   v:True   c:True   decimal(0.109523810 vs printed 0.109523810):True
+  K=5   phi:True   F:True   v:True   c:True   decimal(0.146464646 vs printed 0.146464646):True
+  K=6   phi:True   F:True   v:True   c:True   decimal(0.181984682 vs printed 0.181984682):True
+  K=7   phi:True   F:True   v:True   c:True   decimal(0.216083916 vs printed 0.216083916):True
+  K=8   phi:True   F:True   v:True   c:True   decimal(0.248845925 vs printed 0.248845925):True
+  K=9   phi:True   F:True   v:True   c:True   decimal(0.280376280 vs printed 0.280376280):True
+  K=10  phi:True   F:True   v:True   c:True   decimal(0.310780551 vs printed 0.310780551):True
+  K=11  phi:True   F:True   v:True   c:True   decimal(0.340156658 vs printed 0.340156658):True
+  K=12  phi:True   F:True   v:True   c:True   decimal(0.368592729 vs printed 0.368592729):True
+  K=13  phi:True   F:True   v:True   c:True   decimal(0.396167101 vs printed 0.396167101):True
+  K=14  phi:True   F:True   v:True   c:True   decimal(0.422949107 vs printed 0.422949107):True
+  K=15  phi:True   F:True   v:True   c:True   decimal(0.449000090 vs printed 0.449000090):True
+  K=16  phi:True   F:True   v:True   c:True   decimal(0.474374424 vs printed 0.474374424):True
+  K=20  phi:True   F:True   v:True   c:True   decimal(0.569997653 vs printed 0.569997653):True
+  BAD CELLS: none -- all 17 rows x 5 entries exact
+
+========================================================================================================
+(B) Independent finite-n corroboration from the RAW (a,b,r) transition rules
+========================================================================================================
+    g(a,b,r) = 1/m + (r/m) h(a+1,b,r-1) + ((m-1-r-b)/m) g(a+1,b,r),  m = n-a
+    h(a,b,r) = 1/n + (r/n) h(a,b+1,r-1) + ((n-1-a-b-r)/n) g(a,b+1,r)
+    psi_n^(K) = g(0,0,K);  psi_n^(K),R = h(0,0,K-1)
+    varphi_n^(K) = (K/n) psi_n^(K),R + (1-K/n) psi_n^(K)     [Reduction Lemma A]
+
+  sanity 1: varphi_n^{(3)} == 16/35 + 1/(14n) + 11/(10n^2) + 23/(35n^3) + 6/(35n^4)
+    n=4..26 exact: True
+  sanity 2: varphi_n^{(1)} - varphi_1 == 1/(3 n^2)  (the K=1 Theta(1/n^2) case)
+    n=2..40 exact: True
+      n=3   varphi_n^(1)=19/27       diff=1/27        n^2*diff=1/3
+      n=5   varphi_n^(1)=17/25       diff=1/75        n^2*diff=1/3
+      n=10  varphi_n^(1)=67/100      diff=1/300       n^2*diff=1/3
+      n=20  varphi_n^(1)=267/400     diff=1/1200      n^2*diff=1/3
+
+  EXACT polynomial-in-1/n fit of varphi_n^{(K)}, validated out of sample:
+    K   D alpha_0                  =phi_K?  alpha_1                  =c_K?    OOS   
+    1   2 2/3                      True     0                        True     True  
+    2   3 8/15                     True     1/30                     True     True  
+    3   4 16/35                    True     1/14                     True     True  
+    4   5 128/315                  True     23/210                   True     True  
+    5   6 256/693                  True     29/198                   True     True  
+    6   7 1024/3003                True     1093/6006                True     True  
+    7   8 2048/6435                True     309/1430                 True     True  
+    8   9 32768/109395             True     10889/43758              True     True  
+    9  10 65536/230945             True     11773/41990              True     True  
+
+  ALL K=1..9: alpha_0==phi_K, alpha_1==c_K, out-of-sample validated: True
+
+OVERALL: PASS

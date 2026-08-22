@@ -2389,3 +2389,83 @@ decisions:
       - "qualquer resultado positivo exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/K6/geral-r/M-CLUST"
       - "Teorema 3 (THEOREM.md Estagio 6) ja e incondicional e nao depende do desfecho da frente (b) desta onda -- a positividade do coeficiente para K>=13 e uma pergunta estritamente mais fina (Theta(1/n) vs. O(1/n) ja provado), nao uma nova ressalva sobre o Lema Aberto ou a conjectura de taxa em si"
       - "phi_CAND permanece a formula de registro de M-CLUST(b) ate que qualquer resultado positivo desta onda seja adversarialmente confirmado e integrado"
+
+  - decision_id: DISC-DEC-042
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado da onda 9 frente (b)
+      `RATE-COEFFICIENT-POSITIVITY-ATTEMPT`: PROVADO que o coeficiente
+      exato de 1/n de phi_n^(K)-phi_K, c_K:=K[phi_K/4+F_{K-1}(1,1)-
+      phi_K] (DISC-DEC-040), e estritamente positivo para TODO K>=2 --
+      nao apenas estendida a verificacao numerica (2<=K<=12), mas
+      fechado por prova elementar, nao-assintotica. Descoberta central:
+      a expressao de dois ingredientes c_K colapsa para um unico
+      ingrediente via um novo Lema 1 (F_{K-1}(1,1)=[(2K+1)phi_K-1]/(2K),
+      fato autonomo, companheiro de F_r(1,0)=phi_r ja conhecido),
+      reduzindo c_K=[(K+2)phi_K-2]/4 -- de onde a positividade e
+      exatamente a questao (K+2)phi_K>2, com IGUALDADE EXATA em K=1
+      (explicando estruturalmente, nao so observacionalmente, por que
+      c_1=0). Um unico argumento de razao monotona
+      (v_{K+1}/v_K-1=K/[(K+2)(2K+3)]>0 para K>=1, ancorado em v_1=2)
+      fecha a positividade para todo K>=2; telescopando da uma soma de
+      termos manifestamente positivos (Corolario B'). Referee hostil
+      dedicado rederivou cada item do zero -- mao e codigo proprios --
+      antes de ler o documento-alvo: identidade de cauda binomial
+      re-derivada do teorema binomial + simetria de linha; cancelacao
+      central e ancora verificadas simbolicamente; inducao checada por
+      inducao literal em codigo (K=1..1500); todas as 85 celulas da
+      tabela recomputadas (0 erradas); varredura exaustiva K=0,...,3000
+      confirmando que o conjunto-solucao da igualdade exata e
+      precisamente {0,1}; reconfirmacao finita-n propria com TRES
+      predicoes do proprio referee (K=10,11,12) confirmadas exatamente
+      antes de serem computadas. VEREDITO: SOUND -- zero discrepancias,
+      zero contraexemplos, zero tentativas de quebra bem-sucedidas, o
+      primeiro documento desta linha sem nenhuma correcao exigida (4
+      notas presentacionais N-1..N-4, nenhuma um erro). c_6=1093/6006
+      confirmado por uma SEXTA via independente. CONSEQUENCIA: item
+      (iii) da lista "o que permanece aberto" de THEOREM.md Estagio 6
+      esta FECHADO -- phi_n^(K)-phi_K=Theta(1/n) exatamente para todo K
+      fixo >=2 (nao apenas O(1/n) ja provado), com Theta(1/n^2) em K=1
+      (fato a montante). Corolarios: c_K estritamente crescente em K,
+      c_K>=c_2=1/30 para todo K>=2, c_K~sqrt(pi*K)/8 -> infinito.
+      Integrado como "Estagio 7" em THEOREM.md. Teorema 3 (Estagio 6)
+      permanece inteiramente inafetado -- nunca dependeu desta frente.
+      Os outros quatro itens abertos do Estagio 6 permanecem
+      exatamente como estavam. Ver
+      02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/
+      (ATTEMPT.md + adversarial/REFEREE_REPORT.md).
+    rationale: >
+      Mesma disciplina de reproducao adversarial obrigatoria aplicada a
+      todo resultado positivo desta linha -- referee dedicado instruido
+      a rederivar cada passo independentemente antes de ler o
+      documento-alvo, fazer tentativas deliberadas de quebra, e
+      produzir predicoes proprias como teste mais forte de que o
+      argumento e real (nao apenas concordancia com numeros ja dados).
+      Verificacao propria adicional antes de integrar: leitura completa
+      do ATTEMPT.md e hand-check pessoal de Lema 1 (K=2), Teorema A
+      (K=1,2), a razao de Wallis, a cancelacao central
+      2(K+1)(K+3)-(K+2)(2K+3)=K, a identidade de cauda binomial, e a
+      cancelacao da segunda rota 3K^2(K-1) -- todas confirmadas por
+      calculo manual antes mesmo de despachar o referee. Escopo de
+      cautelas de redacao herdado explicitamente do proprio referee
+      (nunca "K>=1", sempre "K fixo, K>=2") para evitar repetir o tipo
+      exato de deslize de quantificador que gerou a issue I-4 da onda 8.
+      README.md e traducoes NAO alterados nesta integracao -- verificado
+      que nenhum deles jamais alegou "O(1/n)" vs "Theta(1/n)" ou
+      mencionou a positividade do coeficiente de taxa para K>=13 como
+      gap publico, entao nada la esta desatualizado por este
+      fechamento; o paper tamesis-cycle-survival/ tambem nao referencia
+      esta questao especifica.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/ (integrado, incl. adversarial/)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "MUDANCA DE STATUS: taxa de phi_n^(K)-phi_K de O(1/n) PROVADO (K>=2) para Theta(1/n) PROVADO (K>=2), THEOREM.md Estagio 6 item (iii) fechado"
+      - "novo fato autonomo registrado: Lema 1, F_{K-1}(1,1)=[(2K+1)phi_K-1]/(2K)"
+    untouched_safeguards:
+      - "Teorema 3 (Estagio 6) permanece incondicional e inteiramente inafetado -- nunca dependeu do resultado desta frente"
+      - "os outros quatro itens abertos do Estagio 6 (forma fechada todas-as-ordens, crescimento das constantes de erro em r, versao uniforme-em-c, Conjecturas 1-2) permanecem exatamente como estavam, nenhum tocado"
+      - "cautelas de quantificador (nunca K>=1, sempre K fixo K>=2; K=0,1 sao casos de igualdade EXATA nao aproximacoes) explicitamente carregadas do referee para o texto integrado em THEOREM.md"

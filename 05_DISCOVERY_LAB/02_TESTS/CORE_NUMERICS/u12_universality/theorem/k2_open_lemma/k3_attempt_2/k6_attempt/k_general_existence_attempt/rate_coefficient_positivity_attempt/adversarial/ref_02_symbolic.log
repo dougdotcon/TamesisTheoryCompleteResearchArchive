@@ -1,0 +1,228 @@
+==========================================================================================
+S8: the 'constant in k' claim inside Lemma 1
+==========================================================================================
+  (K-1-k)+(K+k+1) - 2K  simplifies to: 0  -> exact identity: True
+
+==========================================================================================
+S7: binomial row tail, sum_{j=K+1}^{2K} C(2K,j) = (4^K - C(2K,K))/2
+==========================================================================================
+  checked K in 1..60 plus {100,250,501,1000}: failures = 0
+  (row sums = 4^K exactly, row symmetry exact, tail = (4^K - C(2K,K))/2 exactly)
+
+==========================================================================================
+S1: Lemma 1, K SYMBOLIC, via gamma functions
+==========================================================================================
+  F_mine - F_target  simplifies to: 0  -> identity: True
+
+==========================================================================================
+S2: Theorem A one-line algebra (phi symbolic, K symbolic)
+==========================================================================================
+  c_K expanded          : K*phi/4 + phi/2 - 1/2
+  claimed closed form   : K*phi/4 + phi/2 - 1/2
+  difference            : 0  -> identity: True
+
+==========================================================================================
+S3: Wallis ratio phi_{K+1}/phi_K = (2K+2)/(2K+3)
+==========================================================================================
+  phi_{K+1}/phi_K = 2*(K + 1)/(2*K + 3)
+  minus (2K+2)/(2K+3) : 0
+
+==========================================================================================
+S4: THE load-bearing cancellation  2(K+1)(K+3) - (K+2)(2K+3) = K
+==========================================================================================
+  2(K+1)(K+3)   = 2*K**2 + 8*K + 6
+  (K+2)(2K+3)   = 2*K**2 + 7*K + 6
+  difference    = K  -> equals K: True
+
+==========================================================================================
+S5: v_1 = 3 phi_1 = 2 exactly
+==========================================================================================
+  phi_1 = 2/3    3*phi_1 = 2    == 2 exactly: True
+  c_1 = ((1+2)*phi_1 - 2)/4 = 0  -> EXACTLY zero: True
+
+==========================================================================================
+S6: telescoping increment v_{K+1} - v_K = K phi_K/(2K+3)
+==========================================================================================
+  v_{K+1} - v_K = K*phi/(2*K + 3)
+  minus K*phi/(2K+3) : 0  -> identity: True
+
+==========================================================================================
+S9: second proof -- ratio argument for a_K := 4^K/(C(2K,K) sqrt(3K+1))
+==========================================================================================
+  C(2K+2,K+1)/C(2K,K) = 2*(2*K + 1)/(K + 1)  (expect 2(2K+1)/(K+1))
+  check                : 0
+  (a_{K+1}/a_K)^2 numerator  : 12*K**3 + 28*K**2 + 20*K + 4
+  (a_{K+1}/a_K)^2 denominator: 12*K**3 + 28*K**2 + 19*K + 4
+  numerator - denominator    : K  -> equals K: True
+
+==========================================================================================
+S10: the cubic identity  (K+2)^2(3K+1) - (4K+2)^2 = 3K^2(K-1)
+==========================================================================================
+  LHS expanded = 3*K**3 - 3*K**2
+  3K^2(K-1)    = 3*K**3 - 3*K**2
+  difference   = 0  -> identity: True
+
+==========================================================================================
+S9b: is C(2K,K) <= 4^K/sqrt(3K+1) actually TRUE?  exact rational check
+==========================================================================================
+  C(2K,K)^2 (3K+1) <= 16^K for K in 0..200 plus {500,1000,3000}: failures = 0
+  equality cases found at K = [0, 1]
+
+==========================================================================================
+S11: asymptotics of c_K
+==========================================================================================
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 1980, in _eval_nseries
+    coeff, exp = t.leadterm(x)
+                 ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3558, in leadterm
+    l = self.as_leading_term(x, logx=logx, cdir=cdir)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/cache.py", line 72, in wrapper
+    retval = cfunc(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3521, in as_leading_term
+    obj = self._eval_as_leading_term(x, logx=logx, cdir=cdir)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/power.py", line 1664, in _eval_as_leading_term
+    return lt.as_leading_term(x, logx=logx, cdir=cdir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/cache.py", line 72, in wrapper
+    retval = cfunc(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3521, in as_leading_term
+    obj = self._eval_as_leading_term(x, logx=logx, cdir=cdir)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/functions/elementary/exponential.py", line 556, in _eval_as_leading_term
+    raise PoleError("Cannot expand %s around 0" % (self))
+sympy.core.function.PoleError: Cannot expand exp(-log(4)/n) around 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/power.py", line 1520, in _eval_nseries
+    _, m = b.leadterm(x)
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3558, in leadterm
+    l = self.as_leading_term(x, logx=logx, cdir=cdir)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/cache.py", line 72, in wrapper
+    retval = cfunc(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3521, in as_leading_term
+    obj = self._eval_as_leading_term(x, logx=logx, cdir=cdir)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/functions/special/gamma_functions.py", line 215, in _eval_as_leading_term
+    raise PoleError()
+sympy.core.function.PoleError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3063, in series
+    s = self.subs(x, cdir/x).series(x, n=n, dir='+', cdir=1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3092, in series
+    s1 = self._eval_nseries(x, n=n, logx=logx, cdir=cdir)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 2004, in _eval_nseries
+    facs = [t.nseries(x, n=ceiling(n-n0), logx=logx, cdir=cdir) for t in self.args]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 2004, in <listcomp>
+    facs = [t.nseries(x, n=ceiling(n-n0), logx=logx, cdir=cdir) for t in self.args]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3466, in nseries
+    return self._eval_nseries(x, n=n, logx=logx, cdir=cdir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/power.py", line 1522, in _eval_nseries
+    b = b._eval_nseries(x, n=max(2, n), logx=logx, cdir=cdir).removeO()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/functions/special/gamma_functions.py", line 201, in _eval_nseries
+    return super()._eval_nseries(x, n, logx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/function.py", line 690, in _eval_nseries
+    return self._eval_aseries(n, args0, x, logx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/function.py", line 653, in _eval_aseries
+    raise PoleError(filldedent('''
+sympy.core.function.PoleError: 
+Asymptotic expansion of gamma around [oo] is not implemented.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 1980, in _eval_nseries
+    coeff, exp = t.leadterm(x)
+                 ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3564, in leadterm
+    raise ValueError(filldedent("""
+ValueError: 
+cannot compute leadterm(gamma((_k**2 + 1)/_k**2)**(-2), _k). The
+coefficient should have been free of _k but got gamma((_k**2 +
+1)/_k**2)**(-2)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/power.py", line 1520, in _eval_nseries
+    _, m = b.leadterm(x)
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3558, in leadterm
+    l = self.as_leading_term(x, logx=logx, cdir=cdir)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/cache.py", line 72, in wrapper
+    retval = cfunc(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3521, in as_leading_term
+    obj = self._eval_as_leading_term(x, logx=logx, cdir=cdir)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/functions/special/gamma_functions.py", line 215, in _eval_as_leading_term
+    raise PoleError()
+sympy.core.function.PoleError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/adversarial/ref_02_symbolic.py", line 171, in <module>
+    ser = sp.series(sp.gamma(2 * n + 1) / sp.gamma(n + 1) ** 2 * sp.sqrt(sp.pi * n) / 4 ** n,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/series/series.py", line 63, in series
+    return expr.series(x, x0, n, dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3068, in series
+    s = self.subs(x, cdir*x).aseries(x, n=n)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3325, in aseries
+    snew = coeff.aseries(x, n, bound=bound-1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3285, in aseries
+    s = self.subs(x, exp(x)).aseries(x, n, bound, hir).subs(x, log(x))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3307, in aseries
+    s = func.series(k, 0, n)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3092, in series
+    s1 = self._eval_nseries(x, n=n, logx=logx, cdir=cdir)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 2004, in _eval_nseries
+    facs = [t.nseries(x, n=ceiling(n-n0), logx=logx, cdir=cdir) for t in self.args]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/mul.py", line 2004, in <listcomp>
+    facs = [t.nseries(x, n=ceiling(n-n0), logx=logx, cdir=cdir) for t in self.args]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/expr.py", line 3466, in nseries
+    return self._eval_nseries(x, n=n, logx=logx, cdir=cdir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/power.py", line 1522, in _eval_nseries
+    b = b._eval_nseries(x, n=max(2, n), logx=logx, cdir=cdir).removeO()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/functions/special/gamma_functions.py", line 201, in _eval_nseries
+    return super()._eval_nseries(x, n, logx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/function.py", line 690, in _eval_nseries
+    return self._eval_aseries(n, args0, x, logx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sympy/core/function.py", line 653, in _eval_aseries
+    raise PoleError(filldedent('''
+sympy.core.function.PoleError: 
+Asymptotic expansion of gamma around [oo] is not implemented.

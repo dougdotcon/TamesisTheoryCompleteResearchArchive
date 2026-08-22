@@ -1178,3 +1178,40 @@ decisions:
     untouched_safeguards:
       - "criterio de decisao (qual modelo, se algum, e favorecido) sera fixado ANTES de qualquer analise real, exatamente como no sub-teste FHK; o piloto exploratorio nao pre-registra nem trava nada"
       - "nenhuma alegacao sobre a Hipotese de Riemann; a prova condicional de Lugar-Milinovich-Quesada-Herrera citada apenas como apoio a formula de Berry, nao como resultado deste laboratorio"
+
+  - decision_id: DISC-DEC-020
+    date: 2026-08-22
+    decision: >
+      Integrar a frente U-ALPHA-MCLUST-RIGOR (DISC-DEC-018, frente b).
+      Veredito registrado: PARCIALMENTE CORRIGIDO, com o residuo
+      remanescente caracterizado e nao escondido.
+    rationale: >
+      Re-derivacao do zero encontrou 2 erros reais e concretos na
+      formula finito-n original de M-CLUST(b): a taxa c_eff media a
+      densidade nao-condicional de inicios de run em vez da taxa
+      correta condicional-ao-passeio (=c, sem depressao), e o termo de
+      "chain-kill" suposto parcialmente cancelado na verdade amplifica
+      monotonicamente. A formula corrigida (phi_NEW), validada com
+      simulador e sementes proprios em b ate 200, fecha 70-86% do gap
+      identificado pela verificacao adversarial da onda 3, mas deixa
+      um residuo sistematico (ate ~11-13% nos pontos mais extremos)
+      cuja magnitude depende de mais do que a razao rho sozinha --
+      indicando que uma forma fechada completa provavelmente exige uma
+      parametrizacao mais rica do que a reparametrizacao mean-field
+      (taxa, q(s)) usada aqui. A classificacao M-CLUST(b) em U_1/2 no
+      limite n->infinito (valida para todo b fixo) permanece intocada
+      -- este achado e estritamente sobre a taxa de correcao finito-n,
+      nao sobre a classificacao assintotica.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave4_results.mclust_rigor_fix + next_action)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/ (novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/RESULTS_SUMMARY.md (1 paragrafo de adendo datado, resto intocado)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atualizado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- correcao tecnica delimitada dentro da mesma linha ADVERSARIALLY_REVIEWED, nao um novo teste"
+    untouched_safeguards:
+      - "residuo sistematico remanescente documentado explicitamente como nao fechado, nao apresentado como resolvido"
+      - "classificacao assintotica alpha=1/2 de M-CLUST(b) para b fixo, ja provada na onda 3, nao foi tocada nem re-questionada"

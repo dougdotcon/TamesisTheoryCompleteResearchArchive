@@ -2004,16 +2004,35 @@ queue:
         testadas pelo laboratorio (16 TRI-RG + 4 SPARC + 3 RH-REAL + 4
         CORE-NUMERICS onda 1), com aviso final de que sobreviver aos
         testes nao e verdade estabelecida.
+    wave4_results:
+      mclust_rigor_fix: >
+        PARCIALMENTE CORRIGIDO (DISC-DEC-018, frente b). Re-derivacao
+        do zero encontrou 2 erros reais na formula finito-n original
+        de M-CLUST(b): (1) c_eff=c(1-c/n)^b mede a densidade
+        NAO-condicional de inicios de run, nao a taxa correta
+        condicional-ao-passeio (que e simplesmente c, sem depressao);
+        (2) o termo de "chain-kill" suposto parcialmente cancelado na
+        verdade amplifica monotonicamente, sem cancelamento. Formula
+        corrigida (phi_NEW) derivada e validada com simulador e
+        sementes proprios (b em {8,50,100,200}): fecha 70-86% do gap
+        original (ex. b=100,c=400: -45,9% -> -12,6%), mas deixa
+        residuo sistematico nao totalmente explicado, crescente com
+        b*c/n -- caracterizado, nao escondido. A classificacao
+        M-CLUST(b) em U_1/2 no limite n->infinito (para todo b fixo)
+        NAO e afetada. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/
     next_action: >
-      Nenhuma acao obrigatoria na linha U_1/2 -- consolidacao
-      matematica completa (onda 3), com o unico gap real (ponte K>=2)
-      honestamente documentado como problema aberto no proprio
-      THEOREM.md e no paper. Reaberturas futuras legitimas: (a) uma
-      tecnica distinta para o Lema Aberto K>=2 (acoplamento explicito,
-      sugerido mas nao executado em SS7.4); (b) fechar a lacuna de
-      rigor do sombreamento M-CLUST para b grande; (c) so DEPOIS da
-      consolidacao (agora razoavelmente atingida no nucleo, ainda que
-      nao 100%) considerar testar a classe U_alpha em sistemas
-      empiricos reais -- explicitamente adiado ate aqui por decisao do
-      usuario, e so deve ser feito com pre-registro completo, nao como
-      busca de padrao.
+      Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
+      completa (ondas 3-4), com dois gaps reais honestamente
+      documentados e nao escondidos: (a) o Lema Aberto K>=2 da ponte
+      n->infinito no proprio THEOREM.md; (b) o residuo sistematico
+      remanescente na correcao finito-n de M-CLUST(b) para b grande
+      (mclust_rigor/). Reaberturas futuras legitimas: uma tecnica
+      distinta para (a) (acoplamento explicito, sugerido mas nao
+      executado em THEOREM.md SS7.4); uma forma funcional mais rica
+      (alem de reparametrizacao (taxa,q(s)) mean-field) para (b); e so
+      DEPOIS da consolidacao (razoavelmente atingida no nucleo, ainda
+      que nao 100%) considerar testar a classe U_alpha em sistemas
+      empiricos reais -- explicitamente adiado por decisao do usuario,
+      e so deve ser feito com pre-registro completo, nao como busca de
+      padrao.

@@ -142,3 +142,26 @@ c ≳ √n para mecanismos U_1 foi um erro de planejamento desta frente.
   critérios C1–C3 (execução única) + pós-hoc anexado ao log.
 - `posthoc_finiten.py` / `posthoc_finiten.json` — reconciliação
   finito-n pós-hoc (declarada).
+
+## ADENDO (2026-08-22, onda 4, DISC-DEC-018) — correção da correção finito-n de M-CLUST(b)
+
+A verificação adversarial (`adversarial/ADVERSARIAL_VERDICT.md` §3)
+encontrou que a correção finito-n declarada acima para M-CLUST(b)
+(c_eff = c(1−c/n)^b, §3.5 de `DERIVATIONS.md`) é insuficiente para b
+grande (desvio até −27,1% em b=50,c=400). A subpasta
+`mclust_rigor/` (nova, onda 4) re-derivou o mecanismo do zero e
+identificou dois erros reais na fórmula original — a taxa c_eff mede a
+densidade NÃO-condicional de "run starts", não a taxa correta
+condicional-ao-passeio (que é simplesmente c, sem depressão); e o
+termo de "chain-kill" que a redação original supôs parcialmente
+cancelado na verdade amplifica monotonicamente a morte, sem
+cancelamento — propôs uma fórmula corrigida (φ_NEW,
+`mclust_rigor/DERIVATION_MCLUST_FIXED.md` §4) e validou-a com
+simulador e sementes próprios em b∈{8,50,100,200}. Resultado:
+**PARCIALMENTE CORRIGIDO** — a nova fórmula fecha consistentemente
+70–86% do gap identificado (ex.: b=100,c=400: −45,9% → −12,6%), mas
+deixa um resíduo sistemático não totalmente explicado, crescente com
+b·c/n. A classificação M-CLUST(b) ∈ U_{1/2} no limite n→∞ (∀ b fixo)
+**não é afetada** por este achado. Ver `mclust_rigor/` para a
+derivação completa, os dados de validação e a discussão honesta do
+resíduo remanescente.

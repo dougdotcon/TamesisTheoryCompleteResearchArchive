@@ -2022,3 +2022,68 @@ decisions:
       - "nenhuma alegacao passa a incondicional sem o qualificador explicito 'modulo SS4' -- THEOREM.md, ATTEMPT.md (Scorecard corrigido) e este proprio registro mantem a distincao em toda parte"
       - "forma fechada exata todas-as-ordens geral-K permanece NAO TENTADA, honestamente aberta -- nao confundida com a prova condicional da taxa/limite"
       - "os 3 erros de prosa corrigidos (2 cosmeticos, 1 real-mas-contido) documentados via adendo datado, texto original preservado -- nenhuma reescrita silenciosa"
+
+  - decision_id: DISC-DEC-037
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado de MCLUST-AGGREGATION-CLOSURE-ATTEMPT
+      (DISC-DEC-035): PROGRESSO PARCIAL, honestamente caracterizado como
+      tal pelo proprio documento -- a obstrucao de agregacao
+      especificamente nomeada em residual_attempt/ATTEMPT.md SS5 ("como
+      agregar a probabilidade condicional por-alvo sobre o conjunto
+      aleatorio de alvos vivos") foi FECHADA: derivada do zero por um
+      argumento de exposicao sequencial de permutacao uniforme (nao
+      janela deslizante, tecnica diferente do predecessor), dando
+      P(pi(x)=y|x nao-R,y nao-R)=(1-c/n)/N' exato em n finito (a menos de
+      O(b^2/n)), e a formula de agregacao P(pi(x) em Y_live|x nao-R) ~
+      K(t)*(1-c/n)^-(b-1)/n -- validada por simulacao isolada
+      independente, sementes novas (SeedSequence 20260822901-904, nunca
+      reusadas), em escala de producao (n=65536): chi^2=1,93 para 4
+      celulas (esperado ~4, p~0,75, nivel de ruido). Tambem resolveu
+      analiticamente o paradoxo especifico "a soma ingenua da 1" do
+      predecessor: a soma correta da P=(1-c/n)^-(b-1), um terceiro valor
+      -- confusao de normalizacao entre duas probabilidades condicionais
+      distintas, nao uma correlacao de segunda ordem irredutivel. MAS:
+      substituir essa formula validada na integral H(t)/phi da
+      formula-mestre (mesmo padrao estrutural de phi_V4) NAO melhora o
+      ajuste -- piora ligeiramente, confirmado em DUAS validacoes
+      independentes com sementes frescas (chi^2 18 celulas: 81,5->98,2
+      reuso; 73,6->89,9 fresco) e uma terceira checagem qualitativa
+      (coeficiente quadratico de H_true(t)). phi_CAND (ja integrado via
+      DISC-DEC-034) continua sendo a melhor formula disponivel nesta
+      linha -- este documento nao a supera. Diagnostico honesto do
+      motivo (SS7.2, explicitamente rotulado HIPOTESE nao testada, nao
+      derivacao): o pool de candidatos real para pi(x) na massa visitada
+      t deveria excluir TODAS as imagens ja consumidas ao longo de TODA
+      a trajetoria (ordem tn), nao so a janela local de x (ordem b) --
+      nao formalizado nem testado por nova simulacao. Bonus: explicacao
+      estrutural plausivel (nao testada por simulacao isolada) para a
+      assimetria phi_V4/phi_NEW previamente sem explicacao (SS8,
+      argumento de decomposicao de probabilidade total).
+    rationale: >
+      Mesmo padrao de honestidade cientifica ja aplicado por toda a
+      linha U_1/2: um resultado positivo genuino (a obstrucao nomeada
+      FOI fechada, com derivacao de primeiros principios E validacao
+      numerica independente a nivel de ruido) e catalogado com o mesmo
+      rigor que um resultado negativo (a formula resultante NAO melhora
+      o ajuste agregado, confirmado por duas validacoes frescas
+      independentes) -- nenhum dos dois e minimizado ou inflado para
+      caber numa narrativa de sucesso ou fracasso. O documento
+      explicitamente rotula o que fechou (derivado+validado), o que e
+      heuristico (SS7.2, SS8, nomeados como hipotese) e o que permanece
+      aberto (a ponte entre o lema local validado e a integral global),
+      exatamente a disciplina exigida desde a onda 4. phi_CAND permanece
+      a formula de registro; nenhuma reabertura foi forcada para parecer
+      mais completa do que e.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/ (novo)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave7_results.mclust_aggregation_closure_attempt, next_action)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- extensao dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_1/2 no limite n->infinito nao afetada -- so a taxa de correcao finito-n, e mesmo essa nao mudou (phi_CAND continua sendo a formula de registro, nao substituida)"
+      - "residual_attempt/ATTEMPT.md e todos os arquivos existentes preservados sem alteracao -- este e' um anexo novo em subpasta propria, apenas leitura do que ja existia"
+      - "hipoteses nomeadas (SS7.2, SS8) explicitamente rotuladas como nao-provadas, nao promovidas a resultado -- nenhuma reescrita da fórmula de registro phi_CAND baseada em heuristica nao validada"

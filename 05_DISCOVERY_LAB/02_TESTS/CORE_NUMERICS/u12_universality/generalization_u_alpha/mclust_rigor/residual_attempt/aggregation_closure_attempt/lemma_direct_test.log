@@ -1,0 +1,22 @@
+# lemma_direct_test | started 2026-08-22T17:07:11Z
+# tests P(pi(x)=y | x not in R, y not in R) aggregate form,
+# own implementation, SeedSequence(20260822901), fresh (not reused)
+n= 8000 b=100 c= 48.828 rho=0.4579 | sanity P(pi(x) in R|x notin R)=0.006103+-0.000082 (target c/n=0.006104, z=-0.00)
+  P(pi(x) in Y_test|x notin R): emp=0.037738+-0.000201 | pred_exact(1-c/n)/((1-rho)n)=0.037469 (z=+1.34, dev=+0.72%) | pred_leading 1/((1-rho)n)=0.037699 (z=+0.19, dev=+0.10%) | pred_naive 1/n=0.020438 (z=+86.12, dev=+84.64%)
+  wall=0.1s
+n= 8000 b= 50 c= 48.828 rho=0.2637 | sanity P(pi(x) in R|x notin R)=0.006082+-0.000082 (target c/n=0.006104, z=-0.26)
+  P(pi(x) in Y_test|x notin R): emp=0.037247+-0.000200 | pred_exact(1-c/n)/((1-rho)n)=0.037380 (z=-0.67, dev=-0.36%) | pred_leading 1/((1-rho)n)=0.037610 (z=-1.82, dev=-0.96%) | pred_naive 1/n=0.027692 (z=+47.87, dev=+34.50%)
+  wall=0.2s
+n= 8000 b=200 c= 18.311 rho=0.3676 | sanity P(pi(x) in R|x notin R)=0.002294+-0.000050 (target c/n=0.002289, z=0.11)
+  P(pi(x) in Y_test|x notin R): emp=0.037834+-0.000201 | pred_exact(1-c/n)/((1-rho)n)=0.037782 (z=+0.26, dev=+0.14%) | pred_leading 1/((1-rho)n)=0.037868 (z=-0.17, dev=-0.09%) | pred_naive 1/n=0.023947 (z=+69.05, dev=+57.99%)
+  wall=0.3s
+n= 8000 b=300 c= 18.311 rho=0.4971 | sanity P(pi(x) in R|x notin R)=0.002243+-0.000050 (target c/n=0.002289, z=-0.91)
+  P(pi(x) in Y_test|x notin R): emp=0.037581+-0.000200 | pred_exact(1-c/n)/((1-rho)n)=0.038253 (z=-3.35, dev=-1.76%) | pred_leading 1/((1-rho)n)=0.038341 (z=-3.79, dev=-1.98%) | pred_naive 1/n=0.019280 (z=+91.29, dev=+94.92%)
+  wall=0.4s
+n= 8000 b=100 c= 73.242 rho=0.6014 | sanity P(pi(x) in R|x notin R)=0.008896+-0.000099 (target c/n=0.009155, z=-2.62)
+  P(pi(x) in Y_test|x notin R): emp=0.036999+-0.000199 | pred_exact(1-c/n)/((1-rho)n)=0.037457 (z=-2.30, dev=-1.22%) | pred_leading 1/((1-rho)n)=0.037803 (z=-4.04, dev=-2.13%) | pred_naive 1/n=0.015069 (z=+110.22, dev=+145.53%)
+  wall=0.6s
+
+# chi2 across 5 cells: exact-form=18.86  leading-form=34.09  naive-null=34958.23
+# total wall time: 0.6 s
+# saved lemma_direct_test_results.json

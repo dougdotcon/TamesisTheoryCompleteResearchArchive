@@ -2346,6 +2346,37 @@ queue:
         (incondicional) de K geral (condicional). Ver
         02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/
         (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
+      mclust_aggregation_closure_attempt: >
+        Tentativa de fechar o passo de agregacao nomeado em
+        residual_attempt/ATTEMPT.md SS5 CONCLUIDA (DISC-DEC-037,
+        DISC-DEC-035) -- PROGRESSO PARCIAL, honestamente caracterizado
+        como tal pelo proprio documento. A obstrucao especifica ("como
+        agregar a probabilidade condicional por-alvo sobre o conjunto
+        aleatorio de alvos vivos") foi FECHADA: derivada do zero por
+        exposicao sequencial de permutacao uniforme (tecnica diferente
+        da janela deslizante do predecessor), dando a formula exata
+        P(pi(x) em Y_live|x nao-R) ~ K(t)*(1-c/n)^-(b-1)/n -- validada
+        por simulacao isolada independente, sementes novas
+        (SeedSequence 20260822901-904), em escala de producao (n=65536):
+        chi^2=1,93 para 4 celulas (esperado ~4, nivel de ruido). Tambem
+        resolveu analiticamente o paradoxo especifico "a soma ingenua da
+        1" do predecessor (a soma correta da um terceiro valor,
+        P=(1-c/n)^-(b-1) -- confusao de normalizacao, nao correlacao de
+        segunda ordem irredutivel). MAS: substituir essa formula validada
+        na integral H(t)/phi da formula-mestre NAO melhora o ajuste --
+        piora ligeiramente, confirmado em DUAS validacoes independentes
+        com sementes frescas (chi^2 18 celulas: 81,5->98,2 reuso;
+        73,6->89,9 fresco) e uma checagem qualitativa adicional
+        (coeficiente quadratico de H_true(t)). phi_CAND (ja integrado via
+        DISC-DEC-034) continua sendo a melhor formula disponivel --
+        este documento nao a supera. Diagnostico honesto (SS7.2,
+        explicitamente HIPOTESE nao testada): o pool de candidatos real
+        deveria excluir TODAS as imagens ja consumidas ao longo de TODA
+        a trajetoria (ordem tn), nao so a janela local de x (ordem b) --
+        nao formalizado nem testado. Bonus: explicacao estrutural
+        plausivel (nao testada por simulacao isolada) para a assimetria
+        phi_V4/phi_NEW previamente sem explicacao (SS8). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/ATTEMPT.md
     next_action: >
       Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
       substancialmente mais forte apos ondas 6-7: Lema Aberto agora
@@ -2357,16 +2388,21 @@ queue:
       mas permanece EXPLICITAMENTE CONDICIONAL a uma ressalva de
       regularidade que o proprio referee hostil julgou corretamente
       dimensionada (nem otimista nem conservadora demais), nao um
-      fechamento incondicional do Lema Aberto para K geral. O residuo
+      fechamento incondicional do Lema Aberto para K geral (a mesma
+      ressalva tambem descarrega o proprio Lema Aberto condicionalmente,
+      como corolario imediato -- ver THEOREM.md Estagio 5). O residuo
       sistematico de M-CLUST(b) (gap (b) de onda 6) permanece
-      PARCIALMENTE FECHADO (onda 7, mclust_rigor/residual_attempt/):
-      fonte identificada, chi^2 reduzido ~19,5x, mas um residuo real
-      pequeno e um passo analitico (agregacao do hazard elevado sobre
-      alvos vivos) permanecem em aberto -- uma frente de continuacao
-      delimitada ja foi despachada para atacar especificamente esse
-      passo (DISC-DEC-035, aggregation_closure_attempt/), resultado
-      pendente. Reaberturas futuras legitimas: (i) aguardar
-      DISC-DEC-035 para eventual fechamento completo de M-CLUST(b); (ii)
+      PARCIALMENTE FECHADO, agora com uma frente de continuacao
+      concluida (DISC-DEC-037): a obstrucao de agregacao especificamente
+      nomeada FOI fechada por primeiros principios e validacao
+      independente, mas isso NAO se traduziu em melhoria da formula phi
+      integrada -- phi_CAND (DISC-DEC-034) continua sendo a formula de
+      registro, chi^2~74-82 em 18 celulas, residuo pequeno mas real
+      permanece sem explicacao. Reaberturas futuras legitimas: (i) a
+      hipotese nomeada em aggregation_closure_attempt/ATTEMPT.md SS7.2
+      (exclusao de imagens consumidas em escala global tn, nao so a
+      janela local de x de ordem b) -- nao formalizada nem testada,
+      candidato mais promissor para fechar o residuo remanescente; (ii)
       tentar fechar a existencia da expansao assintotica para r geral
       (a ressalva de SS4 de k6_attempt/ATTEMPT.md) por inducao formal ou
       outra via independente -- nenhuma tentada ainda; (iii) a forma

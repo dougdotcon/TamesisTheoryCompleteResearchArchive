@@ -1803,3 +1803,44 @@ decisions:
       - "nenhuma alegacao de bug de codigo no pipeline ja travado -- reproducao bit a bit confirma correcao de implementacao, o problema e' de especificacao de metodo"
       - "nenhuma alegacao H_A/H_B falsificadas -- explicitamente descartado, mesma disciplina de v1/v2"
       - "reaberturas futuras legitimas exigiriam calibracao de f_multi condicional a RUWE (ou covariavel similar), nao mera repeticao deste desenho -- proprio gap documentado no claim"
+
+  - decision_id: DISC-DEC-033
+    date: 2026-08-22
+    decision: >
+      Autorizar onda 7, continuando o modo padrao de operacao
+      multi-linha (DISC-DEC-023): 2 frentes matematicas puras
+      independentes, ambas ja nomeadas como reaberturas legitimas em
+      integracoes anteriores. (a) `K6-OPEN-LEMMA-ATTEMPT` -- tentar as
+      duas rotas concretas ja nomeadas por k3_attempt_2/ATTEMPT.md
+      Sec.7.3 para fechar o Lema Aberto em K geral de uma vez: inducao
+      formal em r sobre a forma da solucao por telescopagem, ou um
+      argumento de funcao geradora em K (nenhum dos dois tentado ate
+      agora). Sucesso fecharia a conjectura de taxa geral-K junto. (b)
+      `MCLUST-RESIDUAL-RIGOR` -- caracterizar/fechar o residuo
+      sistematico remanescente na formula finito-n corrigida de
+      M-CLUST(b) (onda 4, DISC-DEC-018), que cresce com b*c/n e nao foi
+      totalmente explicado pela correcao ja aplicada (fechou 70-86% do
+      gap original, nao 100%).
+    rationale: >
+      Ambas as frentes sao reaberturas explicitamente nomeadas como
+      legitimas pelas proprias integracoes que as descobriram --
+      k3_attempt_2/ATTEMPT.md Sec.7.3 nomeia precisamente as duas rotas
+      matematicas concretas para K geral (nao apenas "mais calculo");
+      mclust_rigor/ ja caracterizou o residuo como real, nao escondido,
+      e nomeado explicitamente como candidato a fechamento futuro
+      (DISC-DEC-018). Nenhuma das duas e busca forcada -- ambas tem
+      escopo, criterio de sucesso, e criterio de "nao consegui fechar"
+      honesto ja embutido no desenho (mesmo padrao de K3-OPEN-LEMMA-ATTEMPT-2,
+      que teve exito onde a onda 5 nao conseguiu). Matematica combinatoria
+      pura, nenhum dado externo, nenhum holdout.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ (novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- ambas exploratorias/tecnicas dentro de linhas ja ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente e' um desfecho aceito e completo, mesmo se so' delimitar mais o problema"
+      - "qualquer resultado positivo (prova nova, formula fechada nova) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3"

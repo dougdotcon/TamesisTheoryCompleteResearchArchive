@@ -1494,3 +1494,56 @@ decisions:
       - "nenhum I(X) computado sobre dado real EEG -- so' verificacao de acesso/formato (parsing de header, checagem MD5), nenhuma estatistica espectral calculada sobre sinal real"
       - "nenhum arquivo de dado real grande (EDF, catalogo) persistido no repositorio -- verificado, pasta COGNITIVE_EEG_SPECTRAL inteira 140KB"
       - "correcoes de codigo/documentacao desta decisao sao adendos datados ou patches minimos documentados, nunca reescrita silenciosa -- textos originais preservados"
+
+  - decision_id: DISC-DEC-027
+    date: 2026-08-22
+    decision: >
+      Autorizar onda paralela seguinte, continuando o modo padrao de
+      operacao multi-linha (`DISC-DEC-023`): 3 frentes independentes,
+      NENHUMA autorizada a travar (commit de lock) nem tocar dado real
+      nesta rodada -- so' redigir rascunho, para revisao explicita da
+      sessao orquestradora antes de qualquer lock. (a)
+      `SPARC-FMULTI-STAGE2-PREREG-DRAFT` -- redigir
+      PREREGISTRATION.md rascunho para aplicar o pipeline de
+      auto-calibracao ja validado (Estagio 1) a` amostra de descoberta
+      REAL (30.203 sistemas, ainda NAO o holdout selado de 12.944), sem
+      travar nem calcular sobre dado real. (b)
+      `EEG-DEPRESSION-PREREG-DRAFT` -- redigir PREREGISTRATION.md
+      rascunho para o braco depressao (Mumtaz) apenas de
+      DISC-COGNITIVE-EEG-SPECTRAL-001 (braco ansiedade/DASPS permanece
+      bloqueado por acesso), resolvendo explicitamente as 2 lacunas
+      nomeadas pela operacionalizacao (alpha de comparacao multipla;
+      ambiguidade 1/f no texto-fonte) com justificativa escrita, sem
+      travar nem baixar/computar dado real. (c) `K3-OPEN-LEMMA-ATTEMPT-2`
+      -- nova tentativa, com tecnica distinta da onda 5 (que so' explorou
+      K>=3 numericamente), de provar ou delimitar o caso K=3 do Lema
+      Aberto de U_1/2 -- matematica combinatoria pura, sem dado externo,
+      falhar honestamente e' um desfecho completo e aceito.
+    rationale: >
+      SPARC-004 Estagio 2 e EEG-depressao sao os proximos passos
+      explicitamente nomeados pelas proprias integracoes anteriores
+      (`DISC-DEC-026`: Estagio 1 "pronto para Estagio 2... exige
+      pre-registro proprio"; operacionalizacao EEG: "braco depressao
+      pronto para um futuro PREREGISTRATION.md"). Dado que ambos vao
+      tocar dado real pela primeira vez sob pipelines novos (mesmo que
+      nao-selado), o risco justifica um passo intermediario extra nao
+      usado nas ondas anteriores desta sessao: o agente redige o
+      pre-registro mas NAO trava (nao faz commit de lock) -- a sessao
+      orquestradora revisa o rascunho, decide sobre as lacunas
+      explicitamente nomeadas, e so' entao executa o lock como passo
+      proprio e auditavel, antes de autorizar o calculo real numa
+      decisao subsequente. K3-OPEN-LEMMA e' matematica pura de baixo
+      risco, mesmo padrao de tentativas anteriores desta linha.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/PREREGISTRATION_STAGE2_DRAFT.md (novo, rascunho, NAO travado)"
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/PREREGISTRATION_DEPRESSION_DRAFT.md (novo, rascunho, NAO travado)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- rascunhos de pre-registro nao sao lock; K3 e' extensao exploratoria dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "nenhum lock (commit) de PREREGISTRATION.md nesta rodada -- travamento e' decisao explicita subsequente da sessao orquestradora, nao do agente"
+      - "nenhum dado real (discovery sample de SPARC-004, EDF de Mumtaz, holdout selado) baixado/computado nesta rodada"
+      - "K3-OPEN-LEMMA: falhar ou permanecer aberto e' um desfecho honesto completo, nao forcar uma prova"

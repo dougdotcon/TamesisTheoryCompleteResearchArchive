@@ -30,24 +30,39 @@ document:
    `L(c)` (Theorem 1), its series and tail asymptotic (Corollaries 4.1,
    4.2), the conditional-`K` mean for every `K` (Wallis integral), the
    `K=1` conditional density, and — on the finite-`n` side — the exact
-   `K=0`, `K=1`, and `K=2` bridge cases (exact rates `1/(3n²)` at `K=1`
-   and `1/(30n)+7/(10n²)+1/(5n³)`, i.e. `Θ(1/n)`, at `K=2` — *not* the
-   `Θ(1/n²)` the `K=0,1` pattern alone would suggest) plus an
-   unconditional, fully `K`-general reduction lemma.
+   `K=0` through `K=5` bridge cases (exact rates `1/(3n²)` at `K=1` and
+   `Θ(1/n)` at `K=2,3` — *not* the `Θ(1/n²)` the `K=0,1` pattern alone
+   would suggest) plus an unconditional, fully `K`-general reduction
+   lemma. `K=1,2` are proved by hand case-analysis; `K=3,4,5` are proved
+   by a completely different, later technique — a `K`-uniform
+   transfer-matrix/Markov-chain method that reduces the whole
+   computation to a mechanical telescoping-sum algorithm — verified
+   independently by a hostile adversarial referee across several layers
+   (own re-derivation by a different solving technique, own brute force
+   including a fresh `n=9` data point, own scripts re-run from scratch)
+   with zero errors found.
 2. **CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every `c`"
    follows from that reduction lemma *only if* an explicitly stated open
-   lemma holds for every `K ≥ 3` (the finite-`n` bridge at fixed `K≥3`;
-   narrowed from `K≥2` once `K=2` was proved — see below). That lemma is
-   neither proved nor disproved here — it is numerically explored
-   (`simulations/finite_n.py`, `K=3` data in the archive source) with an
-   honest caution: the `K=1→K=2` jump in rate (`Θ(1/n²)` to `Θ(1/n)`)
-   shows a clean rate at small `K` does not reliably extrapolate, so no
-   rate for `K≥3` should be assumed.
+   lemma holds for every `K ≥ 6` (the finite-`n` bridge at fixed `K≥6`;
+   narrowed from `K≥3` once `K=3,4,5` were proved — see below). That
+   lemma is neither proved nor disproved here. The obstruction is now
+   precisely named — not "more hand casework," as it was through `K=2`,
+   but that the transfer-matrix recursion has so far only been solved
+   level-by-level in its "level" variable `r` (`r=0,…,5`), not
+   symbolically for general `r`; an induction on `r`, or a
+   generating-function-in-`K` argument, are named as concrete (if
+   unexecuted) candidate routes. Naming a route does **not** make `K≥6`
+   essentially solved — it remains a genuinely open problem. A related
+   numerically-verified-but-unproved conjecture about the general-`K`
+   rate (`lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4`, confirmed exactly for `K=1..5`,
+   CONJECTURED beyond) is stated in `proofs/derivation.md` §6 and is
+   never treated as established.
 3. **CONJECTURED**, numerically supported (Kolmogorov–Smirnov, no
    rejection) but not proved: the full conditional-`K` cyclic-mass
    *density* for `K≥2` (this is a distributional claim, unrelated to and
-   unaffected by the `K=2` bridge/mean result in tier 1 above), and the
-   resulting unconditional distributional law `M(c) =^d min(1, √(E/c))`.
+   unaffected by the `K=2..5` bridge/mean results in tier 1 above), and
+   the resulting unconditional distributional law
+   `M(c) =^d min(1, √(E/c))`.
 
 No claim in this package is upgraded past its status in `proofs/derivation.md`.
 Full source of record (with the complete, longer proofs and the master
@@ -55,8 +70,12 @@ list of every open gap): the archive's internal theorem document,
 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md`,
 plus its Stage 3 extension resolving `K=2`
 (`.../theorem/k2_open_lemma/ATTEMPT.md` and
-`adversarial/REFEREE_REPORT.md`) — neither included in this package;
-this package is meant to stand on its own via `proofs/derivation.md`.
+`adversarial/REFEREE_REPORT.md`) and its Stage 4 extension resolving
+`K=3,4,5`
+(`.../theorem/k2_open_lemma/k3_attempt_2/ATTEMPT.md` and
+`.../k3_attempt_2/adversarial/REFEREE_REPORT.md`) — none included in this
+package; this package is meant to stand on its own via
+`proofs/derivation.md`.
 
 ## Literature priority
 
@@ -133,6 +152,6 @@ this package's own clean-room implementation.
 
 ## Compiling the paper
 
-`paper/cycle-survival.pdf` is already built (7 pages, `pdflatex` +
+`paper/cycle-survival.pdf` is already built (9 pages, `pdflatex` +
 `bibtex`, zero errors, zero undefined references/citations). See
 `paper/COMPILE.md` to rebuild it after editing the `.tex`/`.bib` source.

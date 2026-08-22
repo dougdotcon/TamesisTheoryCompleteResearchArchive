@@ -286,26 +286,87 @@ taken as given. The separate question is whether the *finite* model
   recombined; at `K=2` they very nearly, but not exactly, cancel,
   leaving a small residual `Θ(1/n)` term.
 
-**The exact open gap.** For `K ≥ 3`, `φ_n^{(K)} → φ_K` (the "fixed-`K`
-bridge") is **neither proved nor disproved**. A single reroute disturbs
-exactly one background cycle (tractable, `K=1` above); two reroutes
-already require tracking which cycle(s) they strike and in what order,
-but the case count stays small enough for an explicit closed form
-(`K=2` above). For `K ≥ 3` this case analysis grows combinatorially:
-three or more reroutes can strike the same cycle in any relative order,
-strike different cycles whose severed pieces later re-link, or chase
-each other through freshly explored territory in an order-dependent way
-that has no `K=2` analogue — not resolved here. Exploratory (not
-closed-form, not rate-establishing) exact enumeration at `K=3`, `n` up
-to 8, is qualitatively consistent with `ψ_n^{(3)} → φ_3`, but on that
-small a range is explicitly *not* sufficient to support any rate claim
-(the `K=2` episode above is itself the cautionary example for why not).
+- **`K=3` (PROVED exactly, with an explicit rate — resolved by a
+  genuinely different technique from `K=1,2`).**
+  `ψ_n^{(3)} = 16/35 + 12/(35n) + 5/(28n²) + 3/(70n³)` and
+  `φ_n^{(3)} = 16/35 + 1/(14n) + 11/(10n²) + 23/(35n³) + 6/(35n⁴)`,
+  both exactly, for every `n ≥ 4`. The `K=1,2` proofs above work by hand
+  case-analysis (splitting on where the reroute source(s) land relative
+  to the reference point's own cycle), a method that grows
+  combinatorially with `K` and was explicitly diagnosed, at the end of
+  the `K=2` result, as not extending to `K=3` by more of the same
+  casework. `K=3` is instead proved by a *structurally different*
+  method: the discrete exploration walk underlying the `K=1,2` reduction
+  is reformulated as an explicit, exact **`K`-uniform Markov chain** on
+  a 3-integer state `(a,b,r)` — `a` = points already queried as
+  `π`-images, `b` = points reached by a reroute jump into unexplored
+  territory, `r` = number of the `K` reroute sources not yet reached —
+  whose transition rule is derived once, for general `K`, from the same
+  permutation-exchangeability fact the `K=1,2` proofs already used.
+  Solving the resulting linear recursion level by level in `r` (a
+  standard falling-factorial/hockey-stick telescoping-sum identity,
+  executed symbolically once per level, `r=0,1,2,3`) is a *mechanical*
+  procedure, not a fresh hand argument — and it first reproduces the
+  already-proved `K=1,2` closed forms exactly, as an internal check,
+  before being pushed one level further to close `K=3`. Verified six
+  independent ways (method reproduces `K=1,2`; matches the `K=2`
+  proof's own brute-force log at `n=4..8`; matches a fresh brute-force
+  run at `n=9`, never computed before; matches an independently-coded,
+  non-symbolic direct recursion; the recombined `φ_n^{(3)}` matches a
+  third, independent brute-force enumeration of the raw Definition-4
+  average; 20/20 automated checks pass) and then independently
+  re-derived from scratch by a separate adversarial referee, who solved
+  the same recursion by a different technique (an integrating-factor
+  method instead of the symbolic telescoping sum), substituted every
+  closed form back into the recursion symbolically, re-ran every script
+  including the ~7.5-minute `n=9` brute force, and reported **no error
+  at any layer** (archive record:
+  `.../u12_universality/theorem/k2_open_lemma/k3_attempt_2/ATTEMPT.md`
+  and `adversarial/REFEREE_REPORT.md`). The rate is again `Θ(1/n)`
+  (leading term `1/(14n)`) — the same order as `K=2`, confirming that
+  `K=2`'s jump away from `K=1`'s clean `Θ(1/n²)` was not a fluke.
+- **`K=4`, `K=5` (PROVED exactly, bonus results, same mechanical
+  method).** Because the `K=3` procedure above is uniform in `K`,
+  climbing two further levels of the same recursion costs no new idea,
+  only more arithmetic:
+  `ψ_n^{(4)} = 128/315 + 128/(315n) + 103/(315n²) + 52/(315n³) + 4/(105n⁴)`
+  and `ψ_n^{(5)} = (1024n⁵+1280n⁴+1405n³+1105n²+538n+120)/(2772n⁵)`, both
+  exact and both verified against fresh brute-force enumeration, proving
+  `φ_n^{(K)} → φ_K` unconditionally at `K=4,5` too, via the same
+  reduction identity used at `K=2,3`. Both were also confirmed by the
+  same adversarial referee pass described above.
+- **An exact pattern in the leading correction — CONJECTURED, not
+  proved, for general `K`.** Across all five now-proved closed forms,
+  `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` holds *exactly*, for every
+  one of `K=1,2,3,4,5` individually (five independently-derived closed
+  forms, not a fit to data). This is reported strictly as a
+  **CONJECTURE** for general `K` — no argument here proves it beyond the
+  five values actually computed, and it is never treated as established
+  anywhere in this document.
+
+**The exact open gap, narrowed.** For `K ≥ 6`, `φ_n^{(K)} → φ_K` (the
+"fixed-`K` bridge") is **neither proved nor disproved**. The obstruction
+is now different in *kind* from the one that stopped the `K=1,2`-style
+hand argument at `K=3`: the transfer-matrix procedure itself is already
+uniform in `K` (no new idea was needed between `K=3` and `K=5`, only more
+arithmetic), but its recursion has so far only been solved *level by
+level* in the state variable `r` — symbolically at `r=0,1,…,5`, one
+integer at a time — not for a symbolic `r`. A general-`K` proof would
+need either (i) an induction on `r`, showing the closed form has a
+predicted shape preserved by one more application of the recursion, or
+(ii) a generating-function-in-`K` argument (e.g. summing
+`Σ_K x^K/K!·ψ_n^{(K)}` and finding a governing closed-form
+ODE/PDE in `n`) — neither attempted here. This is a genuine, precisely
+named, and so far unexecuted route — a real difference from the `K≥3`
+gap's earlier state, which had no comparably concrete candidate strategy
+— but naming a route is **not** a proof: `K≥6` remains honestly open,
+not "essentially solved."
 
 Consequently: the full statement "`φ(n,c) → φ_∞(c)` for every `c`" is a
 **conditional proposition** — it follows from the (unconditionally
-proved) mixing reduction *given* the open `K≥3` bridge lemma (narrowed
-from `K≥2`, now that `K=2` is proved), which remains open. It is not a
-theorem in its own right. The empirical control that exists (exact
+proved) mixing reduction *given* the open `K≥6` bridge lemma (narrowed
+from `K≥3`, now that `K=3,4,5` are proved), which remains open. It is not
+a theorem in its own right. The empirical control that exists (exact
 enumeration to small `n`, Monte Carlo to large `n`, both reproduced in
 `simulations/`) is evidence for this conditional statement, not a proof
 of it.
@@ -323,14 +384,21 @@ of it.
    `φ_∞(c)`, proved (Theorem 1); only the full distribution around that
    mean is conjectural.
 
-Neither conjecture is used anywhere above as though it were proved; both
-are numerically supported (Kolmogorov–Smirnov tests, no rejection) and
-neither is claimed as established. The `K≥3` fixed-`K` bridge (§6) is a
-distinct, third kind of open item — a convergence statement between
-two well-defined finite/infinite objects, not a guessed closed form —
-and is not counted as a "Conjecture 3" for that reason. (Note: this is
-unrelated to the general-`K` density Conjecture 1 above, which remains
-open for every `K≥2`, `K=2` included — the `K=2` result resolved in §6
-is about the *mean* `φ_n^{(2)}→φ_2`, not about the full distributional
-law `f_{M_2}(x)`.)
+3. **General-`K` rate of the fixed-`K` bridge**,
+   `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` (§6). Proved as an exact
+   identity individually at `K=1,2,3,4,5`; CONJECTURED, not proved, for
+   general `K`.
+
+Neither density conjecture above (1–2) is used anywhere above as though
+it were proved; both are numerically supported (Kolmogorov–Smirnov
+tests, no rejection) and neither is claimed as established. The general
+rate conjecture (3) is likewise never treated as established beyond the
+five values it was actually verified at. The `K≥6` fixed-`K` bridge (§6)
+is a distinct, fourth kind of open item — a convergence statement
+between two well-defined finite/infinite objects, not a guessed closed
+form or a guessed asymptotic coefficient — and is not counted among
+Conjectures 1–3 for that reason. (Note: this is unrelated to the
+general-`K` density Conjecture 1 above, which remains open for every
+`K≥2` — the `K=2,3,4,5` results resolved in §6 are about the *mean*
+`φ_n^{(K)}→φ_K`, not about the full distributional law `f_{M_K}(x)`.)
 

@@ -42,11 +42,14 @@ conditional on exactly $K$ surviving reroutes. That conditional law's
 mean is proved for every $K$ and coincides, for a structurally different
 microscopic model, with a theorem of Hansen and Jaworski
 \cite{hansenjaworski2014}. The finite-$n\to\infty$ bridge is proved in
-full for $K=0,1,2$ -- with exact rates $O(1/n^2)$ at $K=1$ and, more
-surprisingly, only $\Theta(1/n)$ at $K=2$, not the naively extrapolated
-$O(1/n^2)$; for $K\ge3$ it is reduced, via an unconditionally proved
-mixing lemma, to a single precisely stated open convergence lemma, which
-is not resolved here. Every claim below is labeled by its exact status;
+full for $K=0,1,2,3,4,5$ -- by two structurally different techniques, a
+hand case-analysis at $K=1,2$ and a $K$-uniform transfer-matrix/Markov-chain
+method at $K=3,4,5$ -- with exact rates $O(1/n^2)$ at $K=1$ and
+$\Theta(1/n)$ at $K=2,3$, not the naively extrapolated $O(1/n^2)$; for
+$K\ge6$ it is reduced, via an unconditionally proved mixing lemma, to a
+single precisely stated open convergence lemma, for which a concrete
+(but unexecuted) proof route is now named, but which is not resolved
+here. Every claim below is labeled by its exact status;
 a companion numerical package cross-checks every closed form against
 independent brute-force enumeration, Monte Carlo simulation, and
 quadrature.
@@ -340,35 +343,125 @@ A single reroute disturbs exactly one background $\pi$-cycle (tractable,
 the mechanism behind Proposition~\ref{prop:k1}); two reroutes already
 require tracking whether they strike the same cycle or different ones,
 and in what order, but the case count stays small enough for an explicit
-closed form (Proposition~\ref{prop:k2}). For $K\ge3$ this case analysis
-grows combinatorially: three or more reroutes can strike the same cycle
-in any relative order, strike different cycles whose severed pieces
-later re-link through a further reroute's target, or chase each other
-through freshly explored territory in an order-dependent way that has no
-$K=2$ analogue -- not resolved here.
+closed form (Proposition~\ref{prop:k2}). Extending this hand
+case-analysis literally to $K=3$ does grow combinatorially, exactly as
+expected -- but a structurally different technique closes $K=3$ anyway
+(and, mechanically, $K=4,5$ beyond it): the discrete exploration walk
+behind Propositions~\ref{prop:k1}--\ref{prop:k2} is reformulated as an
+explicit \emph{$K$-uniform} Markov chain on a 3-integer state, whose
+exact transition rule is derived once, for general $K$, from the same
+lazy-revelation fact used above; solving that chain in closed form is
+then a mechanical telescoping-sum computation, not a fresh case analysis
+for each $K$.
 
-\begin{openlemma}[Fixed-$K$ bridge, $K\ge3$]
-\label{ol:k3}
+\begin{proposition}[$K=3$ bridge, proved exactly, by a $K$-uniform transfer-matrix method]
+\label{prop:k3}
+For every $n\ge4$,
+\[
+  \psi_n^{(3)} \;=\; \frac{16}{35}+\frac{12}{35n}+\frac{5}{28n^2}+\frac{3}{70n^3},
+\]
+\[
+  \varphi_n^{(3)} \;=\; \frac{16}{35}+\frac1{14n}+\frac{11}{10n^2}+\frac{23}{35n^3}+\frac6{35n^4},
+\]
+exactly, where $\psi_n^{(3)}$ is the ``generic reference point'' quantity
+of the $K$-general reduction underlying Proposition~\ref{prop:k2}. In
+particular $\varphi_n^{(3)}\to\varphi_3=16/35$ as $n\to\infty$, at rate
+$\Theta(1/n)$ (leading term $1/(14n)$) -- the same order as $K=2$, not
+the $\Theta(1/n^2)$ of $K=1$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Track the forward-orbit exploration of a generic reference point by a
+state $(a,b,r)$: $a$ = points already queried as $\pi$-images (removed
+from the pool of future $\pi$-targets), $b$ = points reached by a reroute
+jump into previously unexplored territory (still eligible $\pi$-targets),
+$r$ = how many of the $K$ reroute sources remain unreached by the walk so
+far. The exact transition rule out of $(a,b,r)$ is elementary -- the same
+permutation-exchangeability fact used in Proposition~\ref{prop:k2} -- and
+is uniform in $K$: only the initial value $r=K$ changes with $K$. Solving
+the resulting linear recursion level by level in $r$ (a standard
+falling-factorial/hockey-stick telescoping identity, executed once per
+level, $r=0,1,2,3$) yields $\psi_n^{(3)}$ in closed form; the same
+weighted-average reduction as Proposition~\ref{prop:k2} (with $K=3$ in
+place of $K=2$) then gives $\varphi_n^{(3)}$. The method first reproduces
+the already-proved $\psi_n^{(1)},\psi_n^{(2)}$ closed forms exactly, as
+an internal check, before being pushed one level further to $K=3$; the
+$K=3$ result is independently confirmed by exact rational brute-force
+enumeration through $n=9$ (a fresh data point, not previously computed)
+and by a separately coded, non-symbolic recursion (archive record:
+\texttt{k2\_open\_lemma/k3\_attempt\_2/ATTEMPT.md}).
+\end{proof}
+
+\textbf{$K=4,5$: further closed forms, same mechanical method.} Because
+the procedure of Proposition~\ref{prop:k3}'s proof is uniform in $K$,
+climbing two further levels of the same recursion costs no new idea,
+only more arithmetic:
+\[
+  \psi_n^{(4)} = \frac{128}{315}+\frac{128}{315n}+\frac{103}{315n^2}+\frac{52}{315n^3}+\frac4{105n^4},
+\]
+\[
+  \psi_n^{(5)} = \frac{1024n^5+1280n^4+1405n^3+1105n^2+538n+120}{2772n^5},
+\]
+both exact, both verified against fresh brute-force enumeration, and
+both proving $\varphi_n^{(K)}\to\varphi_K$ unconditionally at $K=4,5$ via
+the same reduction identity as above. All of $K=3,4,5$ were further
+re-derived, from the primitives up, by a separate adversarial referee who
+solved the recursion by a different technique (an integrating-factor
+method rather than the symbolic telescoping sum), substituted every
+closed form back into the recursion symbolically, re-ran every script
+from scratch, and reported no error at any layer (archive record:
+\texttt{k2\_open\_lemma/k3\_attempt\_2/adversarial/}\allowbreak\texttt{REFEREE\_REPORT.md}).
+
+\begin{conjecture}[General-$K$ rate, numerically verified for $K=1,\dots,5$, \textbf{not proved}]
+\label{conj:rate}
+$\displaystyle\lim_{n\to\infty} n\big(\psi_n^{(K)}-\varphi_K\big) = \frac{K}{4}\varphi_K$
+for every $K\ge1$.
+\end{conjecture}
+
+This holds as an exact identity individually at each of $K=1,2,3,4,5$
+(five independently derived closed forms, not a curve fit), but no
+argument here proves it for general $K$; it is reported strictly as a
+conjecture, exactly as strongly supported and exactly as unproved as
+Conjecture~\ref{conj:densityK}.
+
+The obstruction to closing $K\ge6$ is different in kind from the
+case-count explosion that stops the $K=1,2$-style hand argument at
+$K=3$: the transfer-matrix procedure itself is already uniform in $K$,
+but its recursion has so far only been solved \emph{level by level} in
+the state variable $r$ (symbolically at $r=0,1,\dots,5$, one integer at a
+time), not for a symbolic $r$. A general-$K$ proof would need either an
+induction on $r$, showing the closed form has a predicted shape that is
+preserved by one more level of the recursion, or a
+generating-function-in-$K$ argument -- a genuine, precisely nameable,
+and so far unexecuted route, not merely ``run the same script one more
+time.'' This does \textbf{not} make $K\ge6$ essentially solved; it
+remains a real open problem, now with a concretely named plausible
+strategy rather than no strategy at all.
+
+\begin{openlemma}[Fixed-$K$ bridge, $K\ge6$]
+\label{ol:k6}
 $\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
-fixed integer $K\ge3$. \textbf{Neither proved nor disproved here.}
+fixed integer $K\ge6$. \textbf{Neither proved nor disproved here.}
 \end{openlemma}
 
 \begin{proposition}[Conditional convergence]
 \label{prop:conditional}
 For every fixed $c\ge0$, $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$,
-\textbf{conditional on} Open Lemma~\ref{ol:k3} holding for every
-$K\ge3$.
+\textbf{conditional on} Open Lemma~\ref{ol:k6} holding for every
+$K\ge6$.
 \end{proposition}
 
 This follows immediately from Proposition~\ref{prop:mixing} plus
-Propositions~\ref{prop:k1} and \ref{prop:k2} and the trivial $K=0$ case,
-given the open lemma. It is stated as a conditional proposition, not a
-theorem, because the open lemma is exactly what is missing; the
-empirical control that exists (\S\ref{sec:numerics}) is evidence for,
-not a substitute for, resolving it. (Proposition~\ref{prop:mixing}'s
-hypothesis -- fixed-$K$ convergence for \emph{every} $K\ge0$ -- is now
-discharged unconditionally through $K=2$; the open lemma's scope has
-strictly narrowed from $K\ge2$ to $K\ge3$.)
+Proposition~\ref{prop:k1}, Proposition~\ref{prop:k2}, and
+Proposition~\ref{prop:k3} together with the $K=4,5$ closed forms above,
+plus the trivial $K=0$ case, given the open lemma. It is stated as a
+conditional proposition, not a theorem, because the open lemma is
+exactly what is missing; the empirical control that exists
+(\S\ref{sec:numerics}) is evidence for, not a substitute for, resolving
+it. (Proposition~\ref{prop:mixing}'s hypothesis -- fixed-$K$ convergence
+for \emph{every} $K\ge0$ -- is now discharged unconditionally through
+$K=5$; the open lemma's scope has strictly narrowed from $K\ge3$ to
+$K\ge6$.)
 
 \section{Numerics}
 \label{sec:numerics}
@@ -407,6 +500,15 @@ cross-checks every closed form above:
   \texttt{adversarial/REFEREE\_REPORT.md}); the full exact mixture
   \eqref{eq:mixture} for $n=2,\dots,4$ shows $|\varphi(n,c)-\phiinf(c)|$
   shrinking monotonically in $n$ at fixed $c\in\{0.5,1,2\}$.
+  Proposition~\ref{prop:k3}'s $\psi_n^{(3)}$ and $\varphi_n^{(3)}$, and
+  the $K=4,5$ closed forms of \S\ref{sec:bridge}, were likewise verified
+  outside this package by fresh exact brute-force enumeration (including
+  a new $n=9$, $K=3$ data point never previously computed in the
+  archive) and by a second, independent adversarial referee pass; neither
+  check is reproduced by this package's own scripts, which stop at
+  exact enumeration through the $K=2$ case (archive record:
+  \texttt{k2\_open\_lemma/k3\_attempt\_2/ATTEMPT.md} and
+  \texttt{k2\_open\_lemma/k3\_attempt\_2/adversarial/REFEREE\_REPORT.md}).
 \item \textbf{Monte Carlo at large $n$} (\texttt{simulations/monte\_carlo.py},
   $n=20000$, $300$ trials/cell, seed \texttt{20260822}): all tested
   $c\in\{0.1,0.5,1,2,5,10,30\}$ within $|z|<4$ of $\phiinf(c)$.
@@ -464,21 +566,31 @@ in the searches performed,'' never as ``does not exist'' or ``first.''
 \label{sec:open}
 
 \begin{enumerate}
-\item \textbf{Open Lemma~\ref{ol:k3}} itself: the fixed-$K$ finite-$n$
-  bridge for $K\ge3$ (resolved unconditionally at $K=0,1,2$ by
-  Propositions~\ref{prop:k1}--\ref{prop:k2}). This is the single
-  hypothesis separating Proposition~\ref{prop:conditional} from a full
-  theorem.
-\item \textbf{The rate} of that bridge for $K\ge3$: now known exactly
-  through $K=2$ -- $K=0$ is exact (rate $0$), $K=1$ is exact at rate
-  $1/(3n^2)$, and $K=2$ is exact at rate $1/(30n)+7/(10n^2)+1/(5n^3)$,
-  i.e.\ $\Theta(1/n)$, \emph{not} $\Theta(1/n^2)$
-  (\S\ref{sec:numerics}). The jump from $\Theta(1/n^2)$ at $K=1$ to
-  $\Theta(1/n)$ at $K=2$ is itself a caution against extrapolating any
-  specific rate for $K\ge3$ without further work.
+\item \textbf{Open Lemma~\ref{ol:k6}} itself: the fixed-$K$ finite-$n$
+  bridge for $K\ge6$ (resolved unconditionally at $K=0,1,2,3,4,5$ by
+  Propositions~\ref{prop:k1}--\ref{prop:k3} and the $K=4,5$ closed forms
+  of \S\ref{sec:bridge}). This is the single hypothesis separating
+  Proposition~\ref{prop:conditional} from a full theorem. The
+  obstruction is now precisely named (\S\ref{sec:bridge}): an induction
+  on the recursion's level variable $r$, or a generating-function
+  argument in $K$, neither attempted here -- a concrete route, but not
+  yet a proof.
+\item \textbf{The rate} of that bridge for $K\ge6$: now known exactly
+  through $K=5$ -- $K=0$ is exact (rate $0$), $K=1$ is exact at rate
+  $1/(3n^2)$, and $K=2,3$ are exact at $\Theta(1/n)$
+  (\S\ref{sec:numerics}, Proposition~\ref{prop:k3}).
+  \textbf{Conjecture~\ref{conj:rate}} packages the exact leading
+  coefficient found at every one of $K=1,\dots,5$ into a single
+  general-$K$ formula, but this remains unproved for general $K$; the
+  $K=1\to K=2$ jump from $\Theta(1/n^2)$ to $\Theta(1/n)$ is itself a
+  standing caution against assuming any rate extrapolates without a
+  proof.
 \item \textbf{Conjecture~\ref{conj:densityK}} (general-$K$ density) and
   its Poisson-mixture consequence, the full unconditional law
-  $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$.
+  $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$ -- a
+  distributional claim unrelated to, and unresolved by, the fixed-$K$
+  bridge results above (those concern only the \emph{mean}
+  $\varphi_n^{(K)}\to\varphi_K$, not the full density $f_{M_K}$).
 \item A locally-uniform-in-$c$ (not merely pointwise) version of
   Proposition~\ref{prop:conditional}.
 \item Any second-moment, concentration, or CLT statement for the cyclic

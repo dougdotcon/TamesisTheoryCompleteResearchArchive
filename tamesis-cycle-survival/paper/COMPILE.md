@@ -3,15 +3,18 @@
 **Status: compiled successfully.** `pdflatex` was not available when
 this package was first built; a minimal TeX Live install
 (`texlive-latex-base texlive-latex-recommended texlive-fonts-recommended
-texlive-bibtex-extra`) was added, and `cycle-survival.pdf` (7 pages) was
-produced with the standard `pdflatex` -> `bibtex` -> `pdflatex` ->
-`pdflatex` sequence below: zero errors, zero undefined references, zero
-undefined citations (all 12 bibliography entries resolved). The only
-warnings are harmless `hyperref` "Token not allowed in a PDF string"
-notices from math mode inside section-heading bookmarks -- cosmetic,
-does not affect the visible typeset output. `cycle-survival.pdf` in this
-directory is that build's output; auxiliary files (`.aux`/`.log`/`.bbl`/
-etc.) were removed after the build and are not tracked.
+texlive-bibtex-extra`) was added, and `cycle-survival.pdf` was produced
+with the standard `pdflatex` -> `bibtex` -> `pdflatex` -> `pdflatex`
+sequence below: zero errors, zero undefined references, zero undefined
+citations (all 12 bibliography entries resolved). The only warnings are
+harmless `hyperref` "Token not allowed in a PDF string" notices from
+math mode inside section-heading bookmarks -- cosmetic, does not affect
+the visible typeset output -- plus one pre-existing overfull `\hbox` in
+the size-biasing remark of \S2 (a few points too wide, present since the
+original build), likewise cosmetic. `cycle-survival.pdf` in this
+directory is that build's output (currently 9 pages, after the update
+adding the $K=3,4,5$ bridge results); auxiliary files (`.aux`/`.log`/
+`.bbl`/etc.) were removed after the build and are not tracked.
 
 ## To compile
 

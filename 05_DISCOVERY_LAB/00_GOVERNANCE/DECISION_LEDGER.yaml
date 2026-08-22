@@ -1644,3 +1644,55 @@ decisions:
       - "reexecucao adversarial obrigatoria (AGENTS.md passo 7) antes de qualquer veredito ser catalogado, independentemente de qualquer gatilho da Sec.6 disparar"
       - "camada interpretativa da Sec.5 (vies residual conhecido) permanece ativa -- nenhuma falsificacao de H_A/H_B aceita sem checar a margem contra o fator de vies 1,4-1,6x"
       - "nenhuma alegacao 'Tamesis confirmado' autorizada a partir de um unico teste sem reproducao adversarial"
+
+  - decision_id: DISC-DEC-030
+    date: 2026-08-22
+    decision: >
+      Fechar o braco depressao de DISC-COGNITIVE-EEG-SPECTRAL-001 como
+      CLOSED_REFUTED. Analise primaria (real, sessao EC dos sujeitos
+      Mumtaz disponiveis, N=30 MDD/26 HC apos exclusoes) produziu
+      veredito REFUTA: Ī(X)_MDD=0,7613>Ī(X)_HC=0,6558 (t de Welch
+      t=5,268, p=3,97e-6, d=1,447), direcao OPOSTA a H_Tamesis,
+      interpretavel via modelo concorrente nomeado (Sun et al. 2019).
+      Reproducao adversarial independente (implementacao propria do zero,
+      derivada so' do pre-registro travado, sem ler codigo/resultado
+      primario antes) confirmou todos os numeros de decisao a <1e-9,
+      mesmos 2 sujeitos excluidos por artefato, mesmos 6 arquivos
+      indisponiveis no Figshare, mesmos 2 pares de arquivos duplicados --
+      veredito CONFIRMED. Registrado como DISC-CLAIM-007.
+    rationale: >
+      Este e' o primeiro resultado real desta nova linha (fora dos eixos
+      matematico/cosmologico/RH ja estabelecidos), e um achado
+      estatisticamente muito significativo na direcao OPOSTA a prevista
+      -- exatamente o tipo de resultado "surpreendente" onde a disciplina
+      de reproducao adversarial obrigatoria (AGENTS.md passo 7) mais
+      importa. A reproducao independente nao encontrou nenhum bug:
+      convencao de janela de Welch (periodica vs. simetrica), normalizacao
+      de entropia (log2 sobre bins da banda, nao bins totais da FFT),
+      mascara de rejeicao de artefato compartilhada entre os 19 canais, e
+      ordem de promediacao (janela->canal->sujeito) -- todos convergiram
+      independentemente para a mesma leitura antes mesmo de ler o codigo
+      primario. Duas anomalias reais do dataset publicado (nao desta
+      analise) foram encontradas por AMBOS os agentes independentemente
+      (6 arquivos 404, 2 pares duplicados) e testadas por robustez
+      (checagem de deduplicacao nao muda o veredito) -- reforça a
+      confianca de que sao artefatos genuinos do dataset upstream, nao
+      erros de processamento. O veredito REFUTA e' catalogado com o mesmo
+      peso evidencial que um CONFIRMA teria, seguindo a disciplina
+      permanente do laboratorio de publicar negativos com peso integral.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/RESULTS_PRIMARY.md (novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/adversarial/ (novo, ADVERSARIAL_VERDICT.md + codigo/resultados independentes)"
+      - "05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml (novo DISC-CLAIM-007)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-COGNITIVE-EEG-SPECTRAL-001: status CANDIDATE_FORMULATING -> CLOSED_REFUTED, depression_arm_final_result)"
+      - "FAILED_HYPOTHESES.md (nova secao 6, braco depressao)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-COGNITIVE-EEG-SPECTRAL-001: status CANDIDATE_FORMULATING -> CLOSED_REFUTED (braco depressao); braco ansiedade permanece CANDIDATE_FORMULATING, bloqueado por acesso, sem proxima acao"
+    untouched_safeguards:
+      - "nenhuma alegacao diagnostica/clinica -- reafirmado explicitamente em RESULTS_PRIMARY.md e no registro do claim"
+      - "nenhuma alegacao 'Sun et al. 2019 confirmado' -- apenas consistencia qualitativa de direcao, nao um teste direto daquele artigo"
+      - "braco ansiedade/DASPS permanece inteiramente fora de escopo, nunca tocado"
+      - "resultado catalogado com peso evidencial integral apesar de ser um REFUTA, nao um CONFIRMA -- mesma disciplina de honestidade ja aplicada a toda a linha DISC-RH-REAL-001"

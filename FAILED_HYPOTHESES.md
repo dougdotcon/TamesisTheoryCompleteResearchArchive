@@ -122,6 +122,32 @@ sem condições:
 
 ---
 
+## 6. Linha Cognitiva/EEG — assinatura espectral de depressão (`DISC-COGNITIVE-EEG-SPECTRAL-001`)
+
+Fonte: `05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/RESULTS_PRIMARY.md` e
+`adversarial/ADVERSARIAL_VERDICT.md`.
+
+| Braço | Hipótese testada | Veredito | Por quê |
+|---|---|---|---|
+| Depressão (Mumtaz, MDD N=30 vs. HC N=26) | `PAPER_B` §3.1 ("Entropic Trap"): entropia espectral de Shannon normalizada `Ī(X)` MENOR em MDD que em controles saudáveis | ❌ (`REFUTA`) | Direção OPOSTA à prevista: `Ī(X)_MDD=0,7613 > Ī(X)_HC=0,6558` (t de Welch `t=5,268`, `p=3,97×10⁻⁶`, `d=1,447` — grande, quase o dobro do mínimo detectável de 80% de poder); confirmado por reprodução adversarial independente (implementação própria do zero, mesmos números até <10⁻⁹) — interpretável à luz do modelo concorrente nomeado (Sun et al. 2019: topologia de rede MAIS randomizada em MDD, consistente com entropia espectral maior, não menor) |
+| Ansiedade (DASPS) | — | não testado | acesso ao dado bloqueado por login IEEE DataPort interativo que nenhuma sessão de agente não-interativa pôde completar; fora de escopo do pré-registro travado |
+
+Duas anomalias reais do dataset publicado (não desta análise) foram
+encontradas, documentadas e testadas por robustez: 6/64 arquivos `EC`
+pré-registrados genuinamente indisponíveis no Figshare (HTTP 404
+reproduzível, corroborado pelos próprios metadados da API), e 2 pares de
+arquivos com conteúdo byte-idêntico (erro de proveniência do dataset
+original). O veredito é robusto a ambas — uma checagem de sensibilidade
+com deduplicação confirma a mesma direção e significância
+(`p=1,19×10⁻⁵`). Nenhum desvio de método, estatística, ou critério de
+decisão pré-registrado foi feito. Este NÃO é lido como "topologia
+cognitiva refutada" em sentido amplo, nem como alegação diagnóstica ou
+clínica — é o resultado de um único teste pré-registrado, sobre um
+dataset, numa condição, agora fechado com reprodução adversarial
+completa.
+
+---
+
 ## Aviso final
 
 **Sobreviver aos testes deste laboratório não é o mesmo que verdade

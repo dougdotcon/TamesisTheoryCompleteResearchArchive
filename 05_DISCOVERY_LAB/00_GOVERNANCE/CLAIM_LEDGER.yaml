@@ -436,6 +436,74 @@ claims:
       - peer review formal ou publicacao -- este e um achado computacional interno, nao um artigo revisado
       - "que o bug de assimetria de ruido astrometrico (Secao 5b) invalida a estatistica delta_obs-newt em si -- o conceito permanece correto (Chae 2023), o bug era apenas na geracao do ramo mock, ja corrigido e revalidado antes de qualquer resultado real ser reaceito"
 
+  - claim_id: DISC-CLAIM-007
+    short_name: eeg-spectral-entropy-depression-opposite-direction
+    test_id: DISC-COGNITIVE-EEG-SPECTRAL-001
+    exact_statement: >
+      Braco depressao (Mumtaz et al., MDD N=30 vs. HC N=26 apos regra de
+      rejeicao de artefato -6/64 arquivos EC indisponiveis no Figshare,
+      2 excluidos por artefato). H_Tamesis (PAPER_B Sec.3.1, "Entropic
+      Trap"): entropia espectral de Shannon normalizada Ī(X) (PSD de
+      Welch, R_lambda=[1,40]Hz) MENOR em MDD que em controles saudaveis.
+      Resultado real: DIRECAO OPOSTA -- Ī(X)_MDD=0,761322 (DP=0,059954)
+      > Ī(X)_HC=0,655848 (DP=0,085486). Teste t de Welch (bicaudal,
+      alpha=0,05, sem correcao de comparacoes multiplas, unico teste
+      pre-declarado): t=5,2678, p=3,970e-6. Mann-Whitney companheiro:
+      U=668,0, p=5,136e-6. Cohen's d=1,447 (grande, quase o dobro do
+      minimo detectavel a 80% de poder, d=0,713). Controle de potencia
+      bruta (descritivo, nao decide veredito): direcao OPOSTA a Ī(X)
+      (HC>MDD em potencia bruta), mostrando que o efeito de entropia nao
+      e' um artefato trivial de reescalonamento de amplitude. Veredito
+      REFUTA por PREREGISTRATION.md Sec.6, interpretavel a luz do modelo
+      concorrente nomeado (Sun et al. 2019: topologia de rede MAIS
+      randomizada em MDD, direcao oposta ao "atrator rigido" de PAPER_B,
+      plausivelmente correlacionando com entropia espectral maior, nao
+      menor). Duas anomalias reais do dataset publicado (nao desta
+      analise) documentadas e testadas por robustez: 6/64 arquivos EC
+      pre-registrados genuinamente indisponiveis (HTTP 404 reproduzivel,
+      corroborado por metadados da propria API do Figshare); 2 pares de
+      arquivos com conteudo byte-identico (erro de proveniencia do
+      dataset original, confirmado por MD5 independente em ambos os
+      agentes). Checagem de sensibilidade com deduplicacao confirma o
+      mesmo veredito (N=29/25, t=4,981, p=1,19e-5, d=1,399). Reproducao
+      adversarial independente (implementacao propria do zero -- parser
+      EDF, Welch, entropia, testes -- derivada SOMENTE do pre-registro
+      travado, antes de ler o codigo/resultado primario) confirmou todos
+      os numeros de decisao a <1e-9 de precisao de ponto flutuante, os
+      mesmos 2 sujeitos excluidos, os mesmos 6 arquivos indisponiveis, e
+      os mesmos 2 pares duplicados -- veredito CONFIRMED.
+    evidence_level: preregistered_falsified
+    evidence_level_note: >
+      "Falsificado" refere-se especificamente a H_Tamesis (direcao
+      Ī(X)_MDD<Ī(X)_HC) neste unico teste pre-registrado, nao a Teoria
+      Tamesis como um todo nem a qualquer alegacao clinica/diagnostica
+      sobre depressao -- ver prohibited_claims abaixo e
+      PREREGISTRATION.md Sec.9. O efeito real observado vai na direcao
+      OPOSTA a prevista, com magnitude grande e alta significancia --
+      mesmo padrao ja catalogado em DISC-CLAIM-003 (RH-REAL item 9,
+      hipotese direcional errada, efeito real na direcao oposta).
+    preregistration_path: "02_TESTS/COGNITIVE_EEG_SPECTRAL/PREREGISTRATION.md"
+    preregistration_lock_commit: "3f5f416 (DISC-DEC-028, 2026-08-22)"
+    data_provenance_path: "02_TESTS/COGNITIVE_EEG_SPECTRAL/data/DOWNLOAD_VERIFICATION_MUMTAZ.log"
+    adversarial_review_verdict: CONFIRMED
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies:
+      - "DISC-ARCHIVE-PHASE0-SURVEY-001 (levantamento arquivo-inteiro que identificou o lead de topologia cognitiva EEG, DISC-DEC-025)"
+    known_gaps:
+      - "braco ansiedade (DASPS) nunca testado -- acesso bloqueado por login IEEE DataPort interativo que nenhuma sessao de agente nao-interativa pode completar; exigiria seu proprio pre-registro apos um humano obter o dado real"
+      - "6/64 arquivos EC pre-registrados genuinamente indisponiveis no Figshare (nao um problema desta sessao) -- reduz N de 34/30 nominal para 30/26 apos artefato, ja incorporado honestamente no poder efetivo do teste, nao mascarado"
+      - "2 pares de arquivos duplicados no dataset publicado (erro de proveniencia upstream) -- sem regra de deduplicacao pre-declarada, veredito primario usa todos os dados como estao; checagem de sensibilidade secundaria confirma robustez"
+      - "amostra unica (um hospital, um pais) -- generalizacao a outras populacoes exigiria replicacao em dataset independente, seu proprio pre-registro"
+    counterevidence: []
+    prohibited_claims:
+      - qualquer alegacao diagnostica ou clinica sobre depressao a partir deste resultado -- este e um teste de uma alegacao matematica de teoria espectral de grafos, nao uma ferramenta de diagnostico
+      - "Tamesis confirmado, detectado, ou refutado de forma ampla a partir deste teste isolado -- e o resultado de UM teste pre-registrado sobre UM dataset"
+      - "Sun et al. 2019 confirmado -- o resultado e apenas consistente qualitativamente com a direcao que aquele modelo concorrente sugeriria, nao um teste direto da alegacao especifica daquele artigo"
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - peer review formal ou publicacao -- este e um achado computacional interno, nao um artigo revisado
+
 # Cada claim registrado aqui segue o schema:
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>

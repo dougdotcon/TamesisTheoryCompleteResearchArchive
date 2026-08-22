@@ -1,0 +1,188 @@
+{
+  "adversarial_reproduction_of": "DISC-COGNITIVE-EEG-SPECTRAL-001 (depression arm)",
+  "preregistration_lock": "DISC-DEC-028",
+  "independent_agent": true,
+  "own_implementation": {
+    "edf_parser": "from-scratch, cross-validated against pyedflib (max abs diff 2.8e-13 uV on sample channel)",
+    "welch_psd": "from-scratch, cross-validated against scipy.signal.welch (max abs diff 4.4e-15, max rel diff 1.4e-15 on synthetic noise)",
+    "entropy": "from-scratch per PREREGISTRATION.md Sec.2",
+    "artifact_rejection": "from-scratch per PREREGISTRATION.md Sec.4.5",
+    "welch_ttest": "from-scratch (Welch-Satterthwaite df, incomplete-beta CDF via scipy.special.betainc), cross-validated against scipy.stats.ttest_ind to ~1e-16",
+    "mann_whitney_u": "from-scratch (normal approx with tie + continuity correction), cross-validated against scipy.stats.mannwhitneyu to ~1e-16"
+  },
+  "data_access": {
+    "source": "https://api.figshare.com/v2/articles/4244171 (fetched independently by this agent)",
+    "n_ec_files_in_manifest": 64,
+    "n_downloaded_and_md5_verified": 58,
+    "n_unavailable_404_after_3_retries_each": 6,
+    "unavailable_files": [
+      "H S12 EC.edf",
+      "H S18 EC.edf",
+      "MDD S12 EC.edf",
+      "MDD S16  EC.edf",
+      "MDD S4 EC.edf",
+      "MDD S8 EC.edf"
+    ],
+    "unavailable_corroboration": "independently confirmed via API metadata: exactly these 6 EC files (and only these 6, among all 64) have computed_md5=='' and mimetype=='undefined' in the API listing, vs a real computed_md5/mimetype for every other EC file -- consistent with a genuine upstream Figshare storage gap, not a network fault on this session.",
+    "all_downloaded_md5_matched_api_supplied_md5": true
+  },
+  "duplicate_content_check": {
+    "method": "independent MD5 of self-downloaded bytes, cross-checked against API-supplied MD5 (both agree)",
+    "duplicate_pairs_found": [
+      [
+        "HC_S27",
+        "HC_S30"
+      ],
+      [
+        "MDD_S33",
+        "MDD_S34"
+      ]
+    ],
+    "note": "identical to the two pairs reported by the primary analysis (H_S27==H_S30, MDD_S33==MDD_S34); PREREGISTRATION.md declares no dedup rule, so primary comparison below uses all subjects as pre-registered, with a dedup sensitivity check reported alongside."
+  },
+  "artifact_exclusions": {
+    "n_excluded": 2,
+    "excluded_subjects": [
+      {
+        "subject": "HC_S19",
+        "n_windows_raw": 149,
+        "n_windows_rejected": 113,
+        "reject_frac": 0.7583892617449665
+      },
+      {
+        "subject": "HC_S5",
+        "n_windows_raw": 150,
+        "n_windows_rejected": 150,
+        "reject_frac": 1.0
+      }
+    ]
+  },
+  "n_final": {
+    "MDD": 30,
+    "HC": 26
+  },
+  "I_bar": {
+    "MDD": {
+      "n": 30,
+      "mean": 0.7613215123803535,
+      "sd": 0.0599544843258678
+    },
+    "HC": {
+      "n": 26,
+      "mean": 0.6558480762744361,
+      "sd": 0.08548635477538241
+    }
+  },
+  "raw_band_power_uV2_Sec5_3_control": {
+    "MDD": {
+      "n": 30,
+      "mean": 334.04435374237306,
+      "sd": 263.8152972674442
+    },
+    "HC": {
+      "n": 26,
+      "mean": 386.4900509788417,
+      "sd": 166.9055377339645
+    },
+    "welch_t": {
+      "statistic": -0.9005771562815036,
+      "df": 49.680189105725,
+      "p_value": 0.3721582100339724
+    },
+    "mann_whitney": {
+      "statistic": 268.0,
+      "p_value": 0.04592296793025952
+    },
+    "direction": "HC > MDD",
+    "note": "descriptive/contextual, does not enter the CONFIRMA/REFUTA/INCONCLUSIVO decision (Sec.5.3, Sec.6)"
+  },
+  "primary_test_welch_t": {
+    "statistic": 5.267803241827418,
+    "df": 43.969312424996176,
+    "p_value": 3.969851223084575e-06,
+    "alpha": 0.05,
+    "two_tailed": true,
+    "multiple_comparison_correction": "NONE (Sec.8, deliberate)"
+  },
+  "companion_test_mann_whitney_u": {
+    "statistic": 668.0,
+    "p_value": 5.139891665617569e-06
+  },
+  "effect_size_cohens_d_pooled": 1.4469207347494795,
+  "direction_observed_MDD_lt_HC": false,
+  "verdict": "REFUTA",
+  "secondary_dedup_sensitivity_check": {
+    "n": {
+      "MDD": 29,
+      "HC": 25
+    },
+    "I_bar_mean": {
+      "MDD": 0.7583319921381135,
+      "HC": 0.6558606591593995
+    },
+    "welch_t": {
+      "statistic": 4.980577366434373,
+      "df": 41.02766150290174,
+      "p_value": 1.1921792592906044e-05
+    },
+    "mann_whitney": {
+      "statistic": 615.0,
+      "p_value": 1.2333706964184898e-05
+    },
+    "cohens_d": 1.3985380255830155,
+    "direction_MDD_lt_HC": false
+  },
+  "comparison_to_primary_analysis": {
+    "primary_source": "RESULTS_PRIMARY.md / results/result_primary.json (read only AFTER this independent result was locked)",
+    "welch_t_primary": 5.267803241827417,
+    "welch_t_adversarial": 5.267803241827418,
+    "welch_t_abs_diff": 8.881784197001252e-16,
+    "p_primary": 3.9698512229958e-06,
+    "p_adversarial": 3.969851223084575e-06,
+    "cohens_d_primary": 1.4469207347494795,
+    "cohens_d_adversarial": 1.4469207347494795,
+    "mann_whitney_U_primary": 668.0,
+    "mann_whitney_U_adversarial": 668.0,
+    "n_primary": {
+      "MDD": 30,
+      "HC": 26
+    },
+    "n_adversarial": {
+      "MDD": 30,
+      "HC": 26
+    },
+    "excluded_subjects_primary": [
+      "HC_S5 (100.0%)",
+      "HC_S19 (75.8%)"
+    ],
+    "excluded_subjects_adversarial": [
+      "HC_S19 (75.8%)",
+      "HC_S5 (100.0%)"
+    ],
+    "unavailable_files_primary_count": 6,
+    "unavailable_files_adversarial_count": 6,
+    "duplicate_pairs_primary": [
+      [
+        "H S27 EC.edf",
+        "H S30 EC.edf"
+      ],
+      [
+        "MDD S33 EC.edf",
+        "MDD S34 EC.edf"
+      ]
+    ],
+    "duplicate_pairs_adversarial": [
+      [
+        "HC_S27",
+        "HC_S30"
+      ],
+      [
+        "MDD_S33",
+        "MDD_S34"
+      ]
+    ],
+    "per_subject_Ibar_max_abs_diff": 4.793017050042092e-05,
+    "conclusion": "All group-level decision statistics (t, p, d, U) match to <1e-9 absolute difference; per-subject Ibar(X) values match the primary's published 4-decimal table to within display-rounding error (max abs diff 4.8e-5, i.e. exact agreement once rounding is accounted for). Both independently written codebases (own EDF parser, own Welch PSD, own entropy, own artifact rejection, own t-test/U-test) converge on numerically indistinguishable results.",
+    "per_subject_Ibar_n_compared": 56
+  }
+}

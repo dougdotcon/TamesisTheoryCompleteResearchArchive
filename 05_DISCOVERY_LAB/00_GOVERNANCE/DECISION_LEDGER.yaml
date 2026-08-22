@@ -2469,3 +2469,94 @@ decisions:
       - "Teorema 3 (Estagio 6) permanece incondicional e inteiramente inafetado -- nunca dependeu do resultado desta frente"
       - "os outros quatro itens abertos do Estagio 6 (forma fechada todas-as-ordens, crescimento das constantes de erro em r, versao uniforme-em-c, Conjecturas 1-2) permanecem exatamente como estavam, nenhum tocado"
       - "cautelas de quantificador (nunca K>=1, sempre K fixo K>=2; K=0,1 sao casos de igualdade EXATA nao aproximacoes) explicitamente carregadas do referee para o texto integrado em THEOREM.md"
+
+  - decision_id: DISC-DEC-043
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado da onda 9 frente (a)
+      `MCLUST-X0-ASYMMETRY-ATTEMPT`: REFUTACAO HONESTA da hipotese
+      mandatada por DISC-DEC-039/041, com o residuo relocalizado com
+      precisao inedita. A hipotese de assimetria x0-vs-outros-arc-starts
+      foi formalizada como modelo de duas elevacoes (P0 na base, P1 na
+      integral -- derivacao propria que reproduz phi_CAND/phi_CAND5 a
+      4e-5 no caso simetrico), a assimetria NECESSARIA calculada ANTES
+      de medir (+2,5% a +4,0% nas celulas de rho>=0,37), e entao medida
+      diretamente por estimador Horvitz-Thompson separado por
+      identidade do alvo, 1,46M passeios + 0,76M de replicacao
+      independente, com duas refinacoes metodologicas sobre a medicao
+      do predecessor (x0 condicionado a nao-R; eventos terminais
+      separados por mecanismo). NENHUMA celula mostra a assimetria
+      positiva necessaria; razao agrupada sobre 9 medicoes = 0,983+-
+      0,007, SINAL OPOSTO ao que ajudaria; a unica celula com -3,7 sigma
+      NAO REPLICOU com semente independente (deu +1,0032 na segunda
+      realizacao) -- exatamente o tipo de disciplina de replicacao
+      obrigatoria que este arquivo exige antes de aceitar qualquer
+      celula unica como significativa. Mais decisivo: uma vez medido o
+      nivel comum da elevacao, phi verdadeiro EXIGE que x0 e os demais
+      arc starts carreguem a mesma elevacao a +-1,6%. O formalismo
+      estava correto neste ponto especifico. TRES achados secundarios,
+      todos honestamente rotulados como tais (nao a hipotese mandatada):
+      (i) eps=P(ciclico|x0 em R), posto em ZERO por phi_CAND/CAND5/
+      GLOBAL, na verdade NAO e zero -- 0,36%-2,19% de phi, 12,5-21,7
+      sigma, ESTABELECIDO por medicao direta; (ii) com a elevacao comum
+      E eps MEDIDOS (nao ajustados), a formula-mestre reproduz phi_mc
+      nas 6 celulas de estresse com chi^2=4,28/6 -- a ESTRUTURA da
+      formula esta certa, o residuo inteiro de phi_CAND vive no VALOR
+      de uma constante (excede 1/(1-rho) por +0,9% a +5,6%, crescendo
+      com b, sem forma fechada encontrada -- e deliberadamente nao
+      ajustada, por disciplina); (iii) um controle dedicado em M-U (b=1)
+      mostra que o erro finito-n da propria formula-mestre e O(1/n) e
+      vale ~0,02% em n=65536 -- duas ordens de grandeza menor que o
+      residuo de M-CLUST, refutando pelo proprio controle a suspeita
+      que a propria frente levantou de que o residuo pudesse ser um
+      artefato da formula-mestre em vez de um efeito genuino de b>1.
+      UMA QUARTA descoberta e uma ALEGACAO POSITIVA explicita, ainda NAO
+      integrada: phi_EPS, uma formula candidata derivada a ordem lider
+      (sem parametro livre) a partir dos dois canais de eps, reduz
+      chi^2 de 121,7 para 72,0 numa validacao fresca de 18 celulas
+      (sementes novas) e melhora tambem nas outras 3 grades ja
+      gravadas -- mas NAO fecha o residuo (chi^2=72 contra ~18
+      esperado por ruido) e a propria frente se recusa a declara-la
+      integrada, exigindo verificacao adversarial obrigatoria primeiro
+      (consistente com a disciplina desta linha para qualquer alegacao
+      positiva). phi_CAND permanece a formula de registro; phi_EPS
+      NAO substitui phi_CAND nesta integracao -- fica registrada como
+      achado positivo pendente de revisao adversarial dedicada,
+      despachada separadamente (referee independente autorizado nesta
+      mesma decisao, ver `affected_paths`). A classificacao M-CLUST(b)
+      em U_{1/2} no limite n->infinito permanece completamente
+      intocada. Ver
+      02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/ATTEMPT.md.
+    rationale: >
+      Mesmo padrao de negativo-tambem-informativo aplicado a todas as
+      frentes M-CLUST anteriores (DISC-DEC-039, DISC-DEC-037): a
+      refutacao primaria e autoconsistente, replicada com semente
+      independente (a propria frente descobriu e reportou honestamente
+      que sua celula mais significativa nao replicava, em vez de
+      reportar so a primeira realizacao), cruzada contra dois
+      predecessores (|z|<=0,93 em 12 comparacoes) -- nao exige um
+      referee dedicado separado para ser catalogada, por ser
+      autoverificante da mesma forma que DISC-DEC-039 foi. Os achados
+      (i)-(iii) sao fatos de medicao/localizacao (nao formulas
+      candidatas alegando substituir phi_CAND), catalogados com o
+      mesmo peso epistemico que um resultado positivo, per DISC-DEC-023.
+      phi_EPS, sendo uma alegacao positiva genuina (formula nova,
+      reducao de chi^2), segue a disciplina obrigatoria de reproducao
+      adversarial ja aplicada a K2/K3/K6/geral-r/coeficiente-de-taxa
+      antes de qualquer catalogacao como formula melhorada -- por isso
+      NAO e promovida a formula de registro nesta decisao, apenas
+      registrada como candidata sob revisao.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/ (integrado)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/adversarial/ (novo, referee dedicado para phi_EPS despachado nesta mesma sessao)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de formula de registro -- phi_CAND permanece phi_CAND ate phi_EPS ser adversarialmente confirmada"
+      - "novo fato estabelecido: eps=P(ciclico|x0 em R) NAO e zero (contradiz suposicao expressa de phi_CAND/CAND5/GLOBAL), mas o efeito e pequeno (0,4%-2,2% de phi) e nao muda nenhuma classificacao"
+    untouched_safeguards:
+      - "hipotese mandatada refutada nao promovida a nada alem de refutacao -- nenhuma reformulacao pos-hoc"
+      - "phi_EPS explicitamente NAO catalogada como resultado fechado -- referee adversarial dedicado despachado antes de qualquer promocao a formula de registro"
+      - "M-CLUST(b) em U_{1/2} permanece intocado; nenhuma alegacao de fisica nova ou progresso sobre Problema do Millennium"

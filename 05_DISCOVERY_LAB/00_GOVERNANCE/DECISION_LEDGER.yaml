@@ -1844,3 +1844,56 @@ decisions:
     untouched_safeguards:
       - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente e' um desfecho aceito e completo, mesmo se so' delimitar mais o problema"
       - "qualquer resultado positivo (prova nova, formula fechada nova) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3"
+
+  - decision_id: DISC-DEC-034
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado de MCLUST-RESIDUAL-RIGOR (DISC-DEC-033, frente
+      b): PARCIALMENTE FECHADO o residuo sistematico da correcao
+      finito-n de M-CLUST(b) deixado pela onda 4. Fonte do residuo
+      localizada numa peca especifica da formula-mestre que a onda 4
+      nao tocou -- o termo de hazard de fechamento/crowding (1-t)/(1-s),
+      herdado sem modificacao de M-U -- mais um efeito de amostragem nao
+      contabilizado (x0 uniforme tem probabilidade rho de comecar DENTRO
+      de R, onde a mesma lei de sombreamento ja provada pela onda 4 o
+      torna estruturalmente quase impossivel de fechar ciclicamente).
+      q_CLUST(s)=s/(1-rho), o resultado central da onda 4, foi
+      RECONFIRMADO por medicao direta do mecanismo (simulador de passeio
+      proprio, sementes proprias) -- nao e' a fonte do residuo. Formula
+      candidata phi_CAND=(1-rho)*phi_V4 reduz o qui-quadrado agregado por
+      um fator ~19,5x (532->39 na grade original da onda 4; 1593->82
+      incluindo 3 celulas novas alem de tudo testado antes, ate
+      b*c/n=0,92), validada com sementes nunca antes usadas nesta linha
+      -- mas deixa um residuo pequeno, real, de sinal oposto (~3-4 sigma
+      nos pontos mais extremos), e a derivacao tem uma peca (a agregacao
+      do hazard elevado sobre o conjunto de alvos vivos) nao fechada
+      analiticamente -- nomeada honestamente, nao escondida.
+    rationale: >
+      Mesmo padrao ja usado para a propria correcao da onda 4: um
+      resultado empirico/mecanistico (nao uma prova combinatoria
+      fechada) validado por simulacao propria com sementes novas e
+      grade estendida alem de qualquer coisa testada antes -- nao exige
+      o mesmo protocolo de referee adversarial hostil que resultados de
+      prova formal (K2/K3/K6) recebem, mas exige (e recebeu) validacao
+      independente fora da amostra de calibracao antes de ser aceito. A
+      reducao de qui-quadrado por quase 20x, incluindo em 3 celulas
+      deliberadamente alem do que foi testado antes, e' uma melhoria
+      real e verificada, nao apenas recalibracao nos mesmos dados. O
+      residuo remanescente e a assimetria nao explicada (por que o fator
+      de diluicao so' funciona emparelhado com phi_V4, nao com phi_NEW)
+      sao registrados como limitacoes honestas, nao escondidos. A
+      classificacao M-CLUST(b) em U_1/2 no limite n->infinito (para todo
+      b fixo) permanece completamente intocada -- este documento e'
+      inteiramente sobre a taxa de correcao finito-n.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/ (novo, ATTEMPT.md + scripts/logs/JSON)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave7_results)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- extensao dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_1/2 no limite n->infinito nao afetada -- so a taxa de correcao finito-n"
+      - "DERIVATION_MCLUST_FIXED.md e outros arquivos existentes de mclust_rigor/ preservados sem alteracao -- este e' um anexo novo em subpasta propria"
+      - "residuo remanescente e obstrucao de agregacao nao fechada reportados honestamente como limitacoes, nao escondidos nem minimizados"

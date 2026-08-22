@@ -2274,23 +2274,81 @@ queue:
         original das Etapas 1-3 preservado intacto. Ver
         02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/
         (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
+    wave7_results:
+      mclust_residual_attempt: >
+        RESIDUO SISTEMATICO de M-CLUST(b) (gap (b) acima) PARCIALMENTE
+        FECHADO (DISC-DEC-034, DISC-DEC-033 item b) -- fonte do residuo
+        localizada por medicao direta (simulador de caminhada proprio,
+        do zero, SeedSequence(918302033)): NAO esta em q_CLUST(s)=
+        s/(1-rho) (formula central da onda 4, reconfirmada correta),
+        e sim no termo de risco de fechamento/lotacao (1-t)/(1-s)
+        herdado sem modificacao do mecanismo M-U, combinado com um
+        efeito de amostragem nao contado (x0 uniforme tem probabilidade
+        rho de comecar DENTRO da regiao sombreada R, onde fechamento
+        ciclico e estruturalmente quase impossivel, pelo proprio lema
+        de sombreamento ja provado na onda 4). Duas hipoteses
+        descartadas honestamente (EDO de depleção de R entre cadeias --
+        efeito 1000x pequeno demais; risco ingenuo de pool reduzido --
+        colapsa algebricamente na formula ja refutada phi_OLD). Formula
+        candidata phi_CAND=(1-rho)*phi_V4 com hazard(s)=1/[(1-rho)(1-s)]
+        reduz chi^2 agregado em ~19,5x (532->39 na grade original;
+        1593->82 incluindo 3 celulas de estresse novas ate
+        b*c/n=0,92), com seeds novas nunca reusadas
+        (SeedSequence(720330339)). NAO e fechamento completo: resta um
+        residuo real, pequeno, de sinal oposto (~3-4 sigma nos
+        extremos), um passo analitico nao fechado (agregar o hazard
+        elevado sobre o conjunto aleatorio de alvos vivos -- nomeado
+        precisamente como "a obstrucao matematica concreta" no proprio
+        documento SS5), e uma assimetria nao explicada (o fator de
+        diluicao (1-rho) so funciona pareado com phi_V4, nao com
+        phi_NEW). Classificado honestamente como "PARCIALMENTE FECHADO"
+        pelo proprio autor, nao como fechamento total. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/ATTEMPT.md
+      k6_general_attempt: >
+        Tentativa de estender K=3,4,5 (onda 6) para K>=6 e a conjectura
+        de taxa geral-K DESPACHADA (DISC-DEC-033 item a), documento
+        completo recebido (k6_attempt/ATTEMPT.md): casos K=6,7,8,9,10
+        PROVADOS incondicionalmente pela mesma tecnica de cadeia de
+        Markov/telescopagem da onda 6; alem disso, tomando o limite
+        n->infinito da mesma cadeia (a,b,r) ANTES de resolver (r vira
+        parametro livre de EDO em vez de indice de soma, contornando a
+        obstrucao nomeada na onda 6), derivada uma prova condicional da
+        conjectura de taxa geral-K (lim n(psi_n^(K)-phi_K)=K*phi_K/4
+        para todo K), com ressalva auto-declarada explicitamente: prova
+        o que a expansao DEVE valer SE g_r(m,b) admite expansao
+        assintotica regular de duas parcelas na forma polinomial-em-t
+        assumida para todo r -- a EXISTENCIA dessa expansao para r (ou
+        seja, K) alem dos 11 valores concretamente verificados (K=0..10)
+        nao foi rederivada independentemente de primeiros principios.
+        Referee adversarial hostil dedicado despachado para (a) verificar
+        K=6..10 incondicional e (b) julgar explicitamente se a ressalva
+        esta corretamente dimensionada, conservadora demais, ou otimista
+        demais -- AINDA EM EXECUCAO, resultado pendente de integracao.
+        Nao integrado ao THEOREM.md nem a este next_action ate o
+        veredito do referee retornar.
     next_action: >
       Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
-      substancialmente mais forte apos onda 6: casos K=3,4,5 da ponte
-      n->infinito agora PROVADOS (onda 5 ja provara K=2). Dois gaps
-      reais permanecem, honestamente documentados: (a) K>=6 da ponte
-      n->infinito (estritamente mais estreito que antes) e a conjectura
-      de taxa geral-K (verificada K=1..5, nao provada, obstrucao
-      precisa ja nomeada -- inducao em r ou funcao geradora em K); (b)
-      o residuo sistematico remanescente na correcao finito-n de
-      M-CLUST(b) para b grande (mclust_rigor/). Reaberturas futuras
-      legitimas: tentar a inducao-em-r ou o argumento de funcao
-      geradora nomeados por k3_attempt_2/ATTEMPT.md SS7.3 para fechar K
-      geral de uma vez; forma funcional mais rica para (b); e so DEPOIS
-      da consolidacao (agora mais completa) considerar testar U_alpha
-      (incl. o novo M-WEIB) em sistemas empiricos reais -- explicitamente
-      adiado por decisao do usuario, exige pre-registro completo, nao
-      busca de padrao.
+      substancialmente mais forte apos ondas 6-7: casos K=3,4,5 da ponte
+      n->infinito PROVADOS (onda 6; onda 5 ja provara K=2); K=6..10
+      tambem PROVADOS incondicionalmente e uma prova condicional da
+      conjectura de taxa geral-K derivada (onda 7, k6_attempt/), mas
+      AINDA NAO integrados ao THEOREM.md -- pendente de veredito do
+      referee adversarial em execucao sobre o escopo exato da ressalva
+      de regularidade. O residuo sistematico de M-CLUST(b) (gap (b) de
+      onda 6) agora PARCIALMENTE FECHADO (onda 7,
+      mclust_rigor/residual_attempt/): fonte identificada (termo de
+      risco de fechamento (1-t)/(1-s) + efeito de amostragem em R nao
+      contado), chi^2 reduzido ~19,5x, mas um residuo real pequeno e um
+      passo analitico (agregacao do hazard elevado sobre alvos vivos)
+      permanecem em aberto. Reaberturas futuras legitimas: (i) fechar a
+      agregacao nomeada em residual_attempt/ATTEMPT.md SS5 para
+      completar o fechamento de M-CLUST(b); (ii) apos o referee K>=6
+      retornar, se a ressalva permanecer, tentar fechar a existencia da
+      expansao assintotica para r geral por inducao formal ou outra via
+      independente; (iii) so DEPOIS da consolidacao considerar testar
+      U_alpha (incl. o novo M-WEIB) em sistemas empiricos reais --
+      explicitamente adiado por decisao do usuario, exige pre-registro
+      completo, nao busca de padrao.
 
   - test_id: DISC-ARCHIVE-PHASE0-SURVEY-001
     title: "Busca arquivo-inteira por candidatos genuinamente novos, nao restrita a TRI-RG"

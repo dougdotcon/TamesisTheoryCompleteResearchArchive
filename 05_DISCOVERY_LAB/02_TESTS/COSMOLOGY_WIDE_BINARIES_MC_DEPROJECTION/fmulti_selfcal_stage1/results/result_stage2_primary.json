@@ -1,0 +1,240 @@
+{
+  "test_id": "SPARC-FMULTI-STAGE2",
+  "preregistration_path": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/PREREGISTRATION_STAGE2.md",
+  "decision_id_lock": "DISC-DEC-029",
+  "analysis_script": "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/run_stage2_primary_analysis.py",
+  "run_timestamp_utc": "2026-08-22T15:01:06Z",
+  "section_9_3_self_grep_check": {
+    "file_checked": "/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/run_stage2_primary_analysis.py",
+    "locked_real_data_filenames_occurrences_raw_string_count": {
+      "quality_filtered_sample.parquet": 4,
+      "hwang_eccentricity_subset.parquet": 3,
+      "discovery_holdout_split.json": 6,
+      "catalog.parquet": 6
+    },
+    "catalog_parquet_real_io_use_lines": [],
+    "note": "Ocorrencias esperadas: os 3 nomes de arquivo REAL usados por este Estagio (quality_filtered_sample.parquet, hwang_eccentricity_subset.parquet, discovery_holdout_split.json) aparecem em PATH_x = ... e comentarios/docstrings -- uso autorizado explicitamente pela Secao 2 do pre-registro para este Estagio (ao contrario do Estagio 1, que nao podia tocar nenhum). catalog.parquet (arquivo bruto NAO commitado, mais amplo que quality_filtered_sample.parquet) aparece so' em PROSA (esta docstring/comentarios explicando o que a checagem procura) -- 'catalog_parquet_real_io_use_lines' deve ficar vazio, confirmando que nenhuma linha de I/O real (read_parquet/ open/definicao de _PATH) referencia esse arquivo.",
+    "holdout_dict_key_access_found": false,
+    "pass": true
+  },
+  "n_discovery_used": 30203,
+  "holdout_seal_note": "discovery_holdout_split.json foi aberto SOMENTE para extrair 'discovery_pair_ids' e 'n_discovery' -- as chaves 'holdout_pair_ids' e 'n_holdout' NUNCA foram acessadas neste script, em nenhum ponto (verificado pelo grep 9.3 acima).",
+  "constants": {
+    "G_SI": 6.6743e-11,
+    "MSUN_KG": 1.98892e+30,
+    "AU_M": 149597870700.0,
+    "mas_yr_to_km_s_per_pc": 0.00474047,
+    "c_light_m_s": 299792458.0,
+    "H0_km_s_Mpc": 70.0,
+    "H0_si_s^-1": 2.268308489954634e-18
+  },
+  "a0_A_holographic_bridge": {
+    "formula": "c*H0/(2*pi)",
+    "value_si_m_s2": 1.0822882733201101e-10
+  },
+  "a0_B_mond_emergence": {
+    "formula": "c*H0",
+    "value_si_m_s2": 6.80021777705768e-10
+  },
+  "parameters_section_4_6": {
+    "bin_edges_log10_gN": [
+      -11.7012,
+      -9.1728,
+      -8.4667,
+      -7.9752,
+      -7.5548,
+      -6.5224
+    ],
+    "anchor_bin": 4,
+    "n_mc": 200,
+    "seed_stage2": 20260822,
+    "n_bootstrap_stage2": 2000,
+    "f_lo": 0.0,
+    "f_hi": 0.9,
+    "xtol": 0.0005,
+    "include_wobble": true,
+    "real_gets_astrometric_noise": false,
+    "x0_list": [
+      1.0,
+      5.0
+    ]
+  },
+  "step1_calibrate_f_multi": {
+    "f_multi_calibrated": 0.10366572259293035,
+    "converged_bracket": true,
+    "bracket": {
+      "f_lo": 0.0,
+      "f_hi": 0.9,
+      "delta_anchor_at_f_lo": 0.05388947196031449,
+      "delta_anchor_at_f_hi": -0.7615471684987544
+    },
+    "anchor_bin": 4,
+    "elapsed_seconds": 356.58210015296936
+  },
+  "step2_delta_obs_newt_corrected": {
+    "delta_obs_newt_primary": [
+      0.07771798406427945,
+      0.06568324727787904,
+      0.0486237666419221,
+      0.04174346361601325,
+      -0.0001792341717301582
+    ],
+    "gN_bin_median_si": [
+      1.880655689217257e-10,
+      1.6645464809358465e-09,
+      6.220327165556408e-09,
+      1.7190232822044425e-08,
+      4.8638073055475723e-08
+    ],
+    "n_systems_per_bin": [
+      6042,
+      6040,
+      6040,
+      6039,
+      6042
+    ],
+    "frac_has_multi": 0.10352895407740953,
+    "frac_nonzero_wobble": 0.10352895407740953,
+    "delta_ci95_lo_from_final_result_bootstrap": [
+      0.049473152316510345,
+      0.03994711374549959,
+      0.022308249543099453,
+      0.01635183721608225,
+      -0.025370824555596888
+    ],
+    "delta_ci95_hi_from_final_result_bootstrap": [
+      0.10414145504558202,
+      0.09239870081205528,
+      0.074552880880143,
+      0.06860415751767622,
+      0.02552462897880872
+    ]
+  },
+  "step3_fit_a0": {
+    "a0_fit_x0_1p0_si_m_s2": 6.12469629412745e-11,
+    "a0_fit_x0_5p0_si_m_s2": 6.124648319246344e-11,
+    "relative_disagreement": 7.833022047546332e-06,
+    "converged_to_same_value": true,
+    "a0_fit_used_si_m_s2": 6.12469629412745e-11
+  },
+  "step4_5_bootstrap_a0_refit": {
+    "n_bootstrap": 2000,
+    "seed": 21260821,
+    "source": "calib['final_raw'] (NAO reconstruido manualmente -- DISC-DEC-029)",
+    "ci_x0_1p0": {
+      "n_valid": 2000,
+      "n_bootstrap": 2000,
+      "ci95_lo_si_m_s2": 4.119617401808097e-11,
+      "ci95_hi_si_m_s2": 8.580760014777504e-11
+    },
+    "ci_x0_5p0": {
+      "n_valid": 2000,
+      "n_bootstrap": 2000,
+      "ci95_lo_si_m_s2": 4.0162886426674745e-11,
+      "ci95_hi_si_m_s2": 8.580628600458754e-11
+    },
+    "x0_starting_points_agree": true,
+    "elapsed_seconds": 12.64345383644104
+  },
+  "decision_section5": {
+    "mechanical_layer": {
+      "a0_ci95_used_lo_si_m_s2": 4.119617401808097e-11,
+      "a0_ci95_used_hi_si_m_s2": 8.580760014777504e-11,
+      "a0_A_within_ci95": false,
+      "a0_B_within_ci95": false,
+      "verdict_mechanical": "BOTH_FALSIFIED"
+    },
+    "interpretive_layer": {
+      "applies": true,
+      "bias_factor_range": [
+        1.4,
+        1.6
+      ],
+      "debiased_ci95_lo_si_m_s2": 2.5747608761300605e-11,
+      "debiased_ci95_hi_si_m_s2": 6.129114296269646e-11,
+      "a0_A_within_debiased_ci95": false,
+      "a0_B_within_debiased_ci95": false,
+      "override_applied": false
+    },
+    "verdict_final": "BOTH_FALSIFIED",
+    "verdict_final_reason": "Camada interpretativa nao aplicavel ou nao muda o veredito -- mesmo apos dividir pelo fator de vies residual 1.4-1.6x, a0_A/a0_B nao voltam para dentro do IC (ou o veredito mecanico ja era INCONCLUSIVE)."
+  },
+  "section6_adversarial_triggers": {
+    "trigger1_a0_outside_both_by_1oom": {
+      "fired": false,
+      "log10_ratio_a0fit_to_A0_A": -0.2472583946864482,
+      "log10_ratio_a0fit_to_A0_B": -1.045438263044563
+    },
+    "trigger2_not_converged_or_at_boundary": {
+      "fired": false,
+      "converged_bracket": true,
+      "f_multi_hat": 0.10366572259293035,
+      "f_lo": 0.0,
+      "f_hi": 0.9,
+      "xtol": 0.0005
+    },
+    "trigger3_f_multi_outside_literature_range": {
+      "fired": true,
+      "f_multi_hat": 0.10366572259293035,
+      "literature_range": [
+        0.25,
+        0.47
+      ],
+      "margin_beyond_range": 0.14633427740706967
+    },
+    "trigger4_pattern_inconsistent_with_stage1_signature": {
+      "fired": false,
+      "delta_obs_newt_primary": [
+        0.07771798406427945,
+        0.06568324727787904,
+        0.0486237666419221,
+        0.04174346361601325,
+        -0.0001792341717301582
+      ],
+      "max_abs_delta_dex": 0.07771798406427945,
+      "all_same_sign_across_bins_excluding_near_zero": true,
+      "sign_check_eps_dex": 0.01,
+      "bins_excluded_from_sign_check_as_near_zero": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "magnitude_within_1_order_of_magnitude_of_stage1_range": true,
+      "concentrated_in_low_gN_bin_vs_anchor": true,
+      "stage1_reference_residual_dex_range": [
+        0.15,
+        0.22
+      ]
+    },
+    "trigger5_ci_sensitive_to_bootstrap_choice": {
+      "fired": false,
+      "verdict_mechanical_original": "BOTH_FALSIFIED",
+      "verdict_alt_seed_N2000": "BOTH_FALSIFIED",
+      "ci_alt_seed_N2000": {
+        "n_valid": 2000,
+        "n_bootstrap": 2000,
+        "ci95_lo_si_m_s2": 3.950973614985086e-11,
+        "ci95_hi_si_m_s2": 8.569334800511859e-11
+      },
+      "verdict_reduced_N1000": "BOTH_FALSIFIED",
+      "ci_reduced_N1000": {
+        "n_valid": 1000,
+        "n_bootstrap": 1000,
+        "ci95_lo_si_m_s2": 4.1190526737939045e-11,
+        "ci95_hi_si_m_s2": 8.590888624227882e-11
+      }
+    },
+    "any_trigger_fired": true
+  },
+  "secondary_consistency_check_ruwe": {
+    "description": "Checagem de consistencia SECUNDARIA (Secao 4.1 passo 7 / METHODOLOGY_ADDENDUM.md Secao 2 item 4) -- NAO parte da regra de decisao mecanica ou interpretativa da Secao 5, so' contexto informativo.",
+    "ruwe_flag_threshold": 1.4,
+    "frac_systems_ruwe_flagged": 0.19150415521636924,
+    "frac_has_multi_at_f_multi_hat": 0.10352895407740953
+  },
+  "requires_null_discovery_debunker_pass": true,
+  "requires_null_discovery_debunker_pass_note": "Secao 6, ultimo paragrafo: QUALQUER veredito diferente de 'nenhum sinal detectavel acima do ruido' (isto e', qualquer H_A_FALSIFICADA, H_B_FALSIFICADA, BOTH_FALSIFIED, INCONCLUSIVO, ou suporte a H_A/H_B) deve passar pelo papel de debunker de METHODOLOGY_EXTENSIONS.md Secao 5 antes de ser catalogado -- SEPARADO da reexecucao adversarial padrao do AGENTS.md passo 7. Este resultado NAO passou por essa etapa -- pendente, a ser arranjada pela sessao orquestradora.",
+  "elapsed_seconds": 387.57086157798767
+}

@@ -505,6 +505,102 @@ claims:
       - peer review formal ou publicacao -- este e um achado computacional interno, nao um artigo revisado
 
 # Cada claim registrado aqui segue o schema:
+  - claim_id: DISC-CLAIM-008
+    short_name: sparc004-fmulti-stage2-ruwe-heterogeneity-confounded
+    test_id: DISC-COSMOLOGY-MOND-SPARC-004
+    exact_statement: >
+      SPARC-FMULTI-STAGE2 (etapa de DISC-COSMOLOGY-MOND-SPARC-004,
+      PREREGISTRATION_STAGE2.md, DISC-DEC-029): aplicacao pela primeira
+      vez da auto-calibracao completa de f_multi de Chae (Eqs. 11-13,
+      validada sinteticamente no Estagio 1) a amostra de descoberta
+      REAL (30.203 sistemas, holdout selado de 12.944 nunca tocado).
+      f_multi_hat=0,103666 calibrado (converged_bracket=True, troca de
+      sinal genuina). delta_obs-newt corrigido=[+0,0777;+0,0657;
+      +0,0486;+0,0417;-0,0002]. a0_fit=6,125e-11 m/s2 (IC95% bootstrap
+      [4,1196e-11;8,5808e-11], N=2000, robusto a semente/N alternativos).
+      Veredito mecanico (Secao 5a do pre-registro): a0_A=1,082e-10 e
+      a0_B=6,800e-10 ambos FORA do IC -> BOTH_FALSIFIED. Camada
+      interpretativa obrigatoria (Secao 5b, correcao pelo vies residual
+      1,4-1,6x do Estagio 1): NAO resgata H_A nem H_B -- o vies conhecido
+      atua na direcao de superestimar a0, e a0_fit ja esta ABAIXO de
+      ambos os alvos, entao corrigir o vies afasta ainda mais, nao
+      resgata. Reproducao adversarial independente (driver escrito do
+      zero a partir so' do pre-registro, sem ler o codigo primario
+      antes) confirmou TODOS os numeros a precisao de ponto flutuante
+      (10+ casas), incluindo os 5 gatilhos adversariais (so' o gatilho 3
+      disparou: f_multi_hat=0,10 bem abaixo da faixa observacional da
+      literatura 0,25-0,47) -- veredito de reproducao CONFIRMED. O papel
+      de debunker de descoberta adversarial de nulos (obrigatorio porque
+      o veredito nao e' "nenhum sinal detectavel", METHODOLOGY_EXTENSIONS.md
+      Sec.5) investigou 3 explicacoes convencionais nomeadas pelo agente
+      primario (selecao correlacionada com RUWE nos cortes de qualidade
+      ja aplicados; imperfeicao do modelo de wobble simplificado;
+      variacao amostral/populacional normal na literatura) -- as 3 reais
+      mas quantitativamente INSUFICIENTES sozinhas para explicar a
+      diferenca completa entre f_multi_hat=0,10 e a faixa 0,25-0,47. Uma
+      QUARTA checagem, desenhada e executada pelo proprio debunker (nao
+      tentada pelo agente primario): dividir a amostra por RUWE-alto
+      (max(RUWE1,RUWE2)>1,4, n=5784, 19,15% da amostra) vs. RUWE-baixo
+      (n=24419), aplicando a MESMA correcao unica f_multi_hat=0,1037 aos
+      dois subgrupos separadamente. Achado decisivo: mesmo no bin-ancora
+      (que a auto-calibracao forca a ficar consistente com zero NA MEDIA
+      da amostra inteira), o subgrupo RUWE-alto permanece com excesso de
+      +0,171 dex (IC95% bootstrap [0,126;0,212], inteiramente acima de
+      zero) apos a correcao, enquanto o RUWE-baixo fica levemente negativo
+      (IC excluindo zero por baixo) -- a diferenca RUWE-alto menos
+      RUWE-baixo e' praticamente IDENTICA antes e depois da correcao
+      (+0,237 dex cru vs. +0,238 dex corrigido no bin-ancora). Isto
+      demonstra que o modelo de auto-calibracao de f_multi UNICO
+      (parametro escalar por desenho) esta mal especificado para a
+      heterogeneidade real desta amostra -- o subgrupo minoritario mais
+      contaminado (RUWE-alto) fica sub-corrigido, o majoritario
+      sobre-corrigido, e a media ponderada resultante (delta_obs-newt
+      pooled, portanto a0_fit e seu IC) nao pode ser interpretada como
+      uma medicao limpa.
+    evidence_level: preregistered_inconclusive
+    evidence_level_note: >
+      NAO e preregistered_falsified para H_A nem H_B, apesar do criterio
+      mecanico da Secao 5a produzir BOTH_FALSIFIED sobre o resultado --
+      descartado como veredito valido porque o proprio debunker
+      (obrigatorio por instrucao explicita da Secao 6/ultimo paragrafo do
+      pre-registro para qualquer veredito diferente de "nenhum sinal
+      detectavel") encontrou um confundidor real, estatisticamente
+      robusto (IC bootstrap do subgrupo RUWE-alto no bin-ancora
+      inteiramente acima de zero) e inteiramente convencional (nenhum
+      ingrediente Tamesis necessario) plausivelmente suficiente para
+      produzir o padrao BOTH_FALSIFIED observado sozinho, via
+      heterogeneidade RUWE-correlacionada nao capturada pelo modelo de
+      f_multi unico. Mesmo padrao de decisao ja usado para fechar v1
+      (bug de ruido astrometrico assimetrico, DISC-CLAIM nao registrado
+      separadamente, corrigido antes de v2) e v2/DISC-CLAIM-006
+      (multiplicidade oculta plausivelmente suficiente sozinha) desta
+      mesma linha de teste.
+    preregistration_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/PREREGISTRATION_STAGE2.md"
+    preregistration_lock_commit: "530ce74 (DISC-DEC-029, 2026-08-22)"
+    data_provenance_path: "02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/data/PROVENANCE_HWANG.md"
+    adversarial_review_verdict: METHODOLOGY_FLAW_FOUND
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies:
+      - "DISC-CLAIM-006 (SPARC-004 v2, mesmas H_A/H_B, mesma amostra/cortes/split -- este teste implementa a auto-calibracao completa de f_multi que o proprio fechamento de DISC-CLAIM-006 nomeou como a precondicao explicita para qualquer tentativa futura genuinamente nova)"
+      - "SPARC-FMULTI-STAGE1 (DISC-DEC-026 -- validou sinteticamente o pipeline de auto-calibracao antes desta primeira aplicacao a dado real)"
+    known_gaps:
+      - "modelo de auto-calibracao usa f_multi como parametro escalar unico -- nao captura heterogeneidade RUWE-correlacionada real na amostra; uma tentativa futura poderia calibrar f_multi condicionalmente a RUWE (ou outra covariavel de qualidade astrometrica), ou excluir explicitamente o subgrupo RUWE-alto e reportar separadamente -- exigiria seu proprio pre-registro, nao uma correcao deste"
+      - "causa raiz exata do RUWE alto (companheira oculta genuina vs. outro artefato astrometrico nao-modelado) nao investigada -- ambas as interpretacoes sustentam a mesma conclusao de debunker, distingui-las exigiria dado adicional (espectroscopia de velocidade radial, catalogo de multiplicidade dedicado) fora do escopo desta linha"
+      - "checagem RUWE decisiva do debunker usou N_bootstrap=500 (exploratorio, nao os 2000 pre-registrados) -- suficiente dado o tamanho do efeito (margem ~5x a largura do proprio IC), mas nao no mesmo padrao de precisao da analise principal"
+      - "holdout (12.944 sistemas) nunca foi aberto -- permanece disponivel para uma tentativa futura com calibracao de f_multi condicional a RUWE implementada"
+    counterevidence:
+      - "checagem RUWE do debunker (Secao 2.4 do relatorio adversarial): diferenca RUWE-alto vs. RUWE-baixo praticamente identica antes e depois da correcao de f_multi (+0,237 dex cru vs. +0,238 dex corrigido no bin-ancora), com IC95% do subgrupo RUWE-alto corrigido inteiramente acima de zero -- evidencia direta e nao-ambigua de que o f_multi unico nao corrige adequadamente a heterogeneidade real da amostra"
+    prohibited_claims:
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - Tamesis confirmado, detectado, ou favorecido sobre LambdaCDM/MOND
+        a partir deste teste
+      - "H_A ou H_B falsificadas por este teste -- o criterio mecanico da Secao 5a produz BOTH_FALSIFIED, mas isso e explicitamente descartado como veredito valido pelo proprio debunker obrigatorio da Secao 6 (confundidor RUWE-correlacionado plausivelmente suficiente); nenhuma das duas hipoteses foi genuinamente testada aqui"
+      - que o resultado de DISC-CLAIM-006/SPARC-004 v2 foi replicado, confirmado, ou contradito por este teste -- a auto-calibracao completa tambem nao produziu um veredito valido, por uma razao estrutural diferente (heterogeneidade RUWE nao-modelada, nao multiplicidade oculta agregada)
+      - peer review formal ou publicacao -- este e um achado computacional interno, nao um artigo revisado
+      - "que o pipeline de auto-calibracao de f_multi (analysis/selfcal_pipeline.py) contem um bug de implementacao -- a reproducao adversarial independente confirmou concordancia bit a bit, o problema encontrado e' de especificacao metodologica (parametro escalar unico vs. populacao heterogenea), nao de codigo"
+
 #   claim_id: DISC-CLAIM-NNN
 #   short_name: <slug>
 #   test_id: <id correspondente em 01_PORTFOLIO/TEST_QUEUE.yaml>

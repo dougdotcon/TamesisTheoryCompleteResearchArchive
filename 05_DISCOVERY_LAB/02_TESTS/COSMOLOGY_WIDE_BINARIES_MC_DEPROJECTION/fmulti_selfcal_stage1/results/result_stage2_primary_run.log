@@ -1,0 +1,95 @@
+==============================================================================
+SPARC-FMULTI-STAGE2 -- analise primaria (amostra de descoberta real)
+PREREGISTRATION_STAGE2.md LOCKED, DISC-DEC-029
+==============================================================================
+
+[9.3 self-check] grep deste proprio arquivo pelos 4 nomes de dado real travados + acesso a chaves de holdout...
+    {
+  "file_checked": "/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/run_stage2_primary_analysis.py",
+  "locked_real_data_filenames_occurrences_raw_string_count": {
+    "quality_filtered_sample.parquet": 4,
+    "hwang_eccentricity_subset.parquet": 3,
+    "discovery_holdout_split.json": 6,
+    "catalog.parquet": 6
+  },
+  "catalog_parquet_real_io_use_lines": [],
+  "note": "Ocorrencias esperadas: os 3 nomes de arquivo REAL usados por este Estagio (quality_filtered_sample.parquet, hwang_eccentricity_subset.parquet, discovery_holdout_split.json) aparecem em PATH_x = ... e comentarios/docstrings -- uso autorizado explicitamente pela Secao 2 do pre-registro para este Estagio (ao contrario do Estagio 1, que nao podia tocar nenhum). catalog.parquet (arquivo bruto NAO commitado, mais amplo que quality_filtered_sample.parquet) aparece so' em PROSA (esta docstring/comentarios explicando o que a checagem procura) -- 'catalog_parquet_real_io_use_lines' deve ficar vazio, confirmando que nenhuma linha de I/O real (read_parquet/ open/definicao de _PATH) referencia esse arquivo.",
+  "holdout_dict_key_access_found": false,
+  "pass": true
+}
+
+[1] Carregando amostra de descoberta (30.203 sistemas, holdout NUNCA acessado)...
+    n_discovery carregado = 30203
+
+[2] Construindo colunas de insumo (Secao 2 do pre-registro)...
+    v_p_real: mediana=0.5336 km/s
+    M1_cat mediana=0.6029 Msun, M2_cat mediana=0.3179 Msun
+
+[3] Passo 1 do pre-registro -- calibrate_f_multi(return_raw=True) (n_mc=200, seed=20260822, xtol=0.0005, n_bootstrap_final=2000, anchor_bin=4)...
+    ATENCAO: isto envolve varias avaliacoes completas de run_delta_obs_newt_selfcal (bisseccao brentq) sobre os 30.203 sistemas -- pode levar dezenas de minutos.
+    tempo calibrate_f_multi: 356.6s
+    f_multi_hat = 0.103666
+    converged_bracket = True
+    bracket: {'f_lo': 0.0, 'f_hi': 0.9, 'delta_anchor_at_f_lo': 0.05388947196031449, 'delta_anchor_at_f_hi': -0.7615471684987544}
+
+[4] Passo 2 do pre-registro -- extraindo delta_obs-newt(bin) corrigido de calib['final_result']...
+    delta_obs_newt_primary (corrigido) = ['+0.0777', '+0.0657', '+0.0486', '+0.0417', '-0.0002']
+    gN_bin_median_si = [1.880655689217257e-10, 1.6645464809358465e-09, 6.220327165556408e-09, 1.7190232822044425e-08, 4.8638073055475723e-08]
+    n_systems_per_bin = [6042, 6040, 6040, 6039, 6042]
+    frac_has_multi (no f_multi_hat) = 0.1035
+    frac_nonzero_wobble = 0.1035
+    IC95% delta (bootstrap n=2000, do proprio final_result): lo=['+0.0495', '+0.0399', '+0.0223', '+0.0164', '-0.0254'] hi=['+0.1041', '+0.0924', '+0.0746', '+0.0686', '+0.0255']
+
+[5] Passo 3 do pre-registro -- fit_a0() em 2 pontos de partida...
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/selfcal_pipeline.py:61: RuntimeWarning: invalid value encountered in sqrt
+  return 1.0 / (1.0 - np.exp(-np.sqrt(x)))
+    a0_fit (x0=1.0) = 6.12469629412745e-11
+    a0_fit (x0=5.0) = 6.124648319246344e-11
+    diferenca relativa entre pontos de partida = 7.833022047546332e-06
+    convergiram para o mesmo valor (rel_diff<1e-4)? True
+
+[6] Passo 4-5 do pre-registro -- bootstrap_a0_refit() usando calib['final_raw'] (n_bootstrap=2000, seed=21260821)...
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/selfcal_pipeline.py:86: OptimizeWarning: Covariance of the parameters could not be estimated
+  popt, _ = curve_fit(_model, gN_bin, delta_vals, p0=[x0], maxfev=20000)
+    tempo bootstrap_a0_refit: 12.6s
+    ci['x0=1.0'] = {'n_valid': 2000, 'n_bootstrap': 2000, 'ci95_lo_si_m_s2': 4.119617401808097e-11, 'ci95_hi_si_m_s2': 8.580760014777504e-11}
+    ci['x0=5.0'] = {'n_valid': 2000, 'n_bootstrap': 2000, 'ci95_lo_si_m_s2': 4.0162886426674745e-11, 'ci95_hi_si_m_s2': 8.580628600458754e-11}
+    x0=1.0 e x0=5.0 concordam no IC (tol relativa 5%)? True
+
+[7] Regra de decisao -- camada MECANICA (Secao 5, primeira parte)...
+    IC95% a0 (x0=1.0, refit primario) = [4.119617401808097e-11, 8.580760014777504e-11]
+    a0_A (1.082288e-10) dentro do IC? False
+    a0_B (6.800218e-10) dentro do IC? False
+    Veredito MECANICO (Secao 5, camada 1): BOTH_FALSIFIED
+
+[8] Camada INTERPRETATIVA obrigatoria (Secao 5, segunda parte) -- dividir a0_fit e o IC95% pelo fator de vies residual [1.4, 1.6]x do Estagio 1...
+    IC de-viesado (dividido por 1.4-1.6x) = [2.574761e-11, 6.129114e-11]
+    a0_A dentro do IC de-viesado? False
+    a0_B dentro do IC de-viesado? False
+    Camada interpretativa MUDA o veredito (override)? False
+
+    *** VEREDITO FINAL (mecanico + interpretativo): BOTH_FALSIFIED ***
+    Razao: Camada interpretativa nao aplicavel ou nao muda o veredito -- mesmo apos dividir pelo fator de vies residual 1.4-1.6x, a0_A/a0_B nao voltam para dentro do IC (ou o veredito mecanico ja era INCONCLUSIVE).
+
+[9] Gatilhos adversariais da Secao 6 -- checando cada um explicitamente...
+    [Gatilho 5] Reexecutando bootstrap_a0_refit com semente diferente (mesmo N=2000)...
+    [Gatilho 5] Reexecutando bootstrap_a0_refit com N_bootstrap reduzido (N=1000, mesma semente base)...
+    veredito mecanico original: BOTH_FALSIFIED
+    veredito com semente alternativa: BOTH_FALSIFIED (IC=[3.950973614985086e-11, 8.569334800511859e-11])
+    veredito com N_bootstrap=1000: BOTH_FALSIFIED (IC=[4.1190526737939045e-11, 8.590888624227882e-11])
+    Gatilho 5 (IC sensivel a N_bootstrap/seed)? False
+
+    RESUMO DOS GATILHOS DA SECAO 6:
+    1. a0_fit fora de ambas H_A/H_B por >1 ordem de grandeza: False
+    2. converged_bracket=False ou f_multi_hat na borda do bracket: False
+    3. f_multi_hat fora de 0.25-0.47 (margem>0.1): True
+    4. padrao de delta_obs-newt inconsistente com assinatura Estagio 1: False
+    5. IC sensivel a N_bootstrap/seed: False
+
+[10] Checagem secundaria de consistencia RUWE (Secao 4.1 passo 7, Secao 2 -- informativa, NAO parte da regra de decisao)...
+    fracao de sistemas com RUWE1>1.4 ou RUWE2>1.4: 0.1915
+    (comparar qualitativamente com frac_has_multi=0.1035 no f_multi_hat calibrado -- consistencia, nao correcao primaria)
+
+Tempo total: 387.6s
+
+Resultado completo salvo em /home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/results/result_stage2_primary.json

@@ -1750,3 +1750,56 @@ decisions:
       - "conjectura de taxa geral-K (Kphi_K/4) rotulada CONJECTURADA, nao provada, verificada apenas para K=1..5"
       - "texto original de THEOREM.md (Estagios 1-3) preservado intacto, correcao e' adendo datado, nunca reescrita silenciosa"
       - "nenhuma alegacao de fisica nova ou aplicacao a sistemas empiricos reais -- matematica combinatoria pura"
+
+  - decision_id: DISC-DEC-032
+    date: 2026-08-22
+    decision: >
+      Fechar SPARC-FMULTI-STAGE2 (etapa de DISC-COSMOLOGY-MOND-SPARC-004)
+      como CLOSED_INCONCLUSIVE, rebaixando o veredito mecanico
+      BOTH_FALSIFIED da analise primaria. Reproducao adversarial
+      independente confirmou todos os numeros a precisao de ponto
+      flutuante (driver escrito do zero a partir so' do pre-registro,
+      sem ler codigo primario antes) -- veredito CONFIRMED, nenhum bug
+      de implementacao encontrado. O papel de debunker obrigatorio
+      (METHODOLOGY_EXTENSIONS.md Sec.5, acionado porque o veredito nao
+      e' "nenhum sinal detectavel") investigou 3 explicacoes
+      convencionais nomeadas pelo agente primario (todas reais mas
+      insuficientes sozinhas) e desenhou uma quarta checagem propria,
+      decisiva: dividir a amostra por RUWE (alto vs. baixo) e mostrar
+      que o f_multi unico calibrado deixa o subgrupo RUWE-alto (19% da
+      amostra) com um excesso estatisticamente robusto mesmo no
+      bin-ancora (IC95% bootstrap inteiramente acima de zero) --
+      demonstrando que o modelo de auto-calibracao de f_multi como
+      parametro escalar unico esta mal especificado para a
+      heterogeneidade real da amostra. Registrado como DISC-CLAIM-008.
+    rationale: >
+      Mesmo padrao de decisao ja usado nesta linha de teste em v1 (bug
+      de ruido astrometrico assimetrico) e v2/DISC-CLAIM-006
+      (multiplicidade oculta plausivelmente suficiente sozinha): um
+      veredito mecanico so' e' aceito como falsificacao limpa se
+      sobreviver a busca ativa por um confundidor convencional. Aqui a
+      busca encontrou um -- nao um bug de codigo (a reproducao bit a
+      bit confirma isso), mas uma lacuna de especificacao metodologica
+      genuina: f_multi homogeneo na populacao e' uma premissa do proprio
+      metodo de Chae, e esta amostra real viola essa premissa de forma
+      mensuravel e estatisticamente decisiva. A auto-calibracao de
+      f_multi, precondicao que o proprio fechamento de v2 exigiu para
+      qualquer tentativa futura, foi de fato implementada e validada
+      (Estagio 1) e aplicada corretamente (Estagio 2) -- mas revelou uma
+      limitacao mais profunda do metodo em vez de produzir uma medicao
+      limpa. Isto e' um resultado negativo genuinamente informativo, nao
+      um fracasso de execucao.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/adversarial_stage2/ (novo, ADVERSARIAL_DEBUNKER_REPORT.md + scripts/resultados)"
+      - "05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml (novo DISC-CLAIM-008)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-COSMOLOGY-MOND-SPARC-004: fmulti_stage2_final_result)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-COSMOLOGY-MOND-SPARC-004 permanece CLOSED_INCONCLUSIVE (status ja existente, agora com a tentativa de auto-calibracao completa tambem encerrada no mesmo status)"
+    untouched_safeguards:
+      - "holdout selado de SPARC-004 (12.944 sistemas) permanece intocado -- nunca aberto por nenhum agente desta rodada, confirmado por grep independente em ambos os scripts (primario e adversarial)"
+      - "nenhuma alegacao de bug de codigo no pipeline ja travado -- reproducao bit a bit confirma correcao de implementacao, o problema e' de especificacao de metodo"
+      - "nenhuma alegacao H_A/H_B falsificadas -- explicitamente descartado, mesma disciplina de v1/v2"
+      - "reaberturas futuras legitimas exigiriam calibracao de f_multi condicional a RUWE (ou covariavel similar), nao mera repeticao deste desenho -- proprio gap documentado no claim"

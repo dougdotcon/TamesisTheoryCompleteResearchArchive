@@ -401,14 +401,14 @@ queue:
       (30.203 sistemas) autorizado a partir deste lock; holdout selado
       (12.944 sistemas) permanece linha vermelha explicita, intocado.
     next_action: >
-      Rodar a analise pre-registrada travada (Estagio 2): auto-calibrar
-      f_multi sobre os 30.203 sistemas de descoberta reais, extrair
-      delta_obs-newt corrigido, ajustar a0 e seu IC95% via bootstrap,
-      aplicar a regra de decisao de PREREGISTRATION_STAGE2.md Sec.5
-      (incluindo a camada interpretativa do vies residual), checar os
-      gatilhos adversariais da Sec.6, depois reproducao adversarial
-      independente obrigatoria (AGENTS.md passo 7) antes de catalogar
-      qualquer veredito.
+      Nenhuma obrigatoria -- SPARC-FMULTI-STAGE2 concluido e fechado
+      CLOSED_INCONCLUSIVE (ver fmulti_stage2_final_result abaixo).
+      Reabertura futura legitima exigiria calibrar f_multi
+      condicionalmente a RUWE (ou covariavel de qualidade astrometrica
+      similar) em vez de um parametro escalar unico -- exige seu proprio
+      pre-registro, nao uma correcao deste. Holdout selado (12.944
+      sistemas) permanece intocado, disponivel para essa tentativa
+      futura.
     fmulti_stage1_results: >
       2026-08-22 (DISC-DEC-023, retomada como SPARC-FMULTI-STAGE1):
       pipeline de auto-calibracao completa de f_multi (Chae Eqs. 11-13 +
@@ -444,6 +444,31 @@ queue:
       02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/{METHODOLOGY_ADDENDUM.md,PROVENANCE_CHAE_EQS.md,RESULTS_SUMMARY_STAGE1.md,ADVERSARIAL_VERIFICATION.md}.
       Nenhum dado real (descoberta ou holdout) foi tocado -- confirmado
       por 2 verificacoes independentes.
+    fmulti_stage2_final_result: >
+      2026-08-22 (DISC-DEC-032): SPARC-FMULTI-STAGE2 fechado
+      CLOSED_INCONCLUSIVE. Analise primaria real (30.203 sistemas):
+      f_multi_hat=0,103666 (calibrado, converged_bracket=True),
+      delta_obs-newt corrigido=[+0,0777;+0,0657;+0,0486;+0,0417;
+      -0,0002], a0_fit=6,125e-11 m/s2 (IC95% [4,1196e-11;8,5808e-11],
+      N_bootstrap=2000). Veredito mecanico BOTH_FALSIFIED (a0_A e a0_B
+      ambos fora do IC); camada interpretativa obrigatoria (correcao
+      pelo vies residual do Estagio 1) NAO resgata nenhuma hipotese.
+      Reproducao adversarial independente (driver do zero, so' do
+      pre-registro) confirmou todos os numeros a precisao de ponto
+      flutuante -- CONFIRMED, nenhum bug de codigo. Debunker obrigatorio
+      investigou 3 explicacoes convencionais (todas reais mas
+      insuficientes sozinhas: selecao correlacionada com RUWE nos cortes
+      ja aplicados; imperfeicao do modelo de wobble; variacao normal de
+      literatura) e desenhou uma 4a checagem decisiva: dividir a amostra
+      por RUWE mostra que o subgrupo RUWE-alto (19,15% da amostra)
+      permanece com excesso estatisticamente robusto (+0,171 dex, IC95%
+      [0,126;0,212], inteiramente acima de zero) mesmo no bin-ancora
+      apos a correcao -- o modelo de f_multi escalar unico esta mal
+      especificado para a heterogeneidade real da amostra. Veredito
+      BOTH_FALSIFIED nao aceito. Registrado como DISC-CLAIM-008. Holdout
+      selado (12.944 sistemas) nunca tocado, confirmado por grep
+      independente em ambos os agentes. Ver
+      02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/{RESULTS_PRIMARY_STAGE2.md,adversarial_stage2/ADVERSARIAL_DEBUNKER_REPORT.md}.
     final_result: >
       2026-08-18: analise primaria v1 sobre os 30.203 sistemas de
       descoberta produziu delta_obs-newt=[+0,2274;+0,1723;+0,1313;

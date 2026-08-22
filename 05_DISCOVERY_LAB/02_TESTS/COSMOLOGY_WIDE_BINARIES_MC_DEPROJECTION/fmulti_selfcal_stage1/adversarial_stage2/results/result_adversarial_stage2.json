@@ -1,0 +1,157 @@
+{
+  "test_id": "SPARC-FMULTI-STAGE2",
+  "role": "adversarial_independent_reproduction",
+  "preregistration": "../../PREREGISTRATION_STAGE2.md (DISC-DEC-029)",
+  "params": {
+    "seed_stage2": 20260822,
+    "n_mc": 200,
+    "n_bootstrap": 2000,
+    "anchor_bin": 4,
+    "f_lo": 0.0,
+    "f_hi": 0.9,
+    "xtol": 0.0005,
+    "include_wobble": true
+  },
+  "n_discovery_systems": 30203,
+  "f_multi_hat": 0.10366572259293035,
+  "converged_bracket": true,
+  "bracket": {
+    "f_lo": 0.0,
+    "f_hi": 0.9,
+    "delta_anchor_at_f_lo": 0.05388947196031449,
+    "delta_anchor_at_f_hi": -0.7615471684987544
+  },
+  "delta_obs_newt_corrected": [
+    0.07771798406427945,
+    0.06568324727787904,
+    0.0486237666419221,
+    0.04174346361601325,
+    -0.0001792341717301582
+  ],
+  "gN_bin_median_si": [
+    1.880655689217257e-10,
+    1.6645464809358465e-09,
+    6.220327165556408e-09,
+    1.7190232822044425e-08,
+    4.8638073055475723e-08
+  ],
+  "n_systems_per_bin": [
+    6042,
+    6040,
+    6040,
+    6039,
+    6042
+  ],
+  "frac_has_multi": 0.10352895407740953,
+  "frac_nonzero_wobble": 0.10352895407740953,
+  "a0_fit_x0_1": 6.12469629412745e-11,
+  "a0_fit_x0_5": 6.124648319246344e-11,
+  "a0_fit_x0_agreement": true,
+  "ci95_x0_1": {
+    "n_valid": 2000,
+    "n_bootstrap": 2000,
+    "ci95_lo_si_m_s2": 4.119617401808097e-11,
+    "ci95_hi_si_m_s2": 8.580760014777504e-11
+  },
+  "ci95_x0_5": {
+    "n_valid": 2000,
+    "n_bootstrap": 2000,
+    "ci95_lo_si_m_s2": 4.0162886426674745e-11,
+    "ci95_hi_si_m_s2": 8.580628600458754e-11
+  },
+  "ci95_x0_agreement": true,
+  "decision": {
+    "a0_A_falsified_mechanical": true,
+    "a0_B_falsified_mechanical": true,
+    "mechanical_verdict": "BOTH_FALSIFIED",
+    "bias_correction_layer": {
+      "bias_1.4x": {
+        "factor": 1.4,
+        "a0_fit_corrected": 4.3747830672338934e-11,
+        "ci95_lo_corrected": 2.9425838584343556e-11,
+        "ci95_hi_corrected": 6.129114296269646e-11,
+        "a0_A_rescued": false,
+        "a0_B_rescued": false
+      },
+      "bias_1.6x": {
+        "factor": 1.6,
+        "a0_fit_corrected": 3.827935183829656e-11,
+        "ci95_lo_corrected": 2.5747608761300605e-11,
+        "ci95_hi_corrected": 5.36297500923594e-11,
+        "a0_A_rescued": false,
+        "a0_B_rescued": false
+      }
+    },
+    "bias_layer_rescues_any_hypothesis": false,
+    "final_verdict": "BOTH_FALSIFIED"
+  },
+  "section6_triggers": {
+    "item1_a0_fit_gt_1_order_outside_both": {
+      "fired": false,
+      "log10_distance_to_nearest_target": 0.24725828501009525
+    },
+    "item2_bracket_not_converged_or_at_edge": {
+      "fired": false,
+      "converged_bracket": true,
+      "f_multi_hat": 0.10366572259293035,
+      "near_f_lo": false,
+      "near_f_hi": false
+    },
+    "item3_f_multi_outside_literature_range": {
+      "fired": true,
+      "f_multi_hat": 0.10366572259293035,
+      "literature_range": [
+        0.25,
+        0.47
+      ]
+    },
+    "item4_pattern_inconsistent_with_known_wobble_bias": {
+      "fired": false,
+      "delta_corrected": [
+        0.07771798406427945,
+        0.06568324727787904,
+        0.0486237666419221,
+        0.04174346361601325,
+        -0.0001792341717301582
+      ],
+      "monotonic_declining_with_gN": true,
+      "max_abs_dex": 0.07771798406427945,
+      "magnitude_more_than_1_order_above_022dex": false,
+      "sign_flip_detected": false
+    },
+    "item5_bootstrap_robustness": {
+      "fired": false,
+      "details": {
+        "original": {
+          "seed": 21260821,
+          "n_bootstrap": 2000,
+          "ci95_lo": 4.119617401808097e-11,
+          "ci95_hi": 8.580760014777504e-11,
+          "a0_A_falsified": true,
+          "a0_B_falsified": true
+        },
+        "alt_seed": {
+          "seed": 20274401,
+          "n_bootstrap": 2000,
+          "ci95_lo": 4.118836252386721e-11,
+          "ci95_hi": 8.734875844963923e-11,
+          "a0_A_falsified": true,
+          "a0_B_falsified": true
+        },
+        "n_bootstrap_1000": {
+          "seed": 21260821,
+          "n_bootstrap": 1000,
+          "ci95_lo": 4.1190526737939045e-11,
+          "ci95_hi": 8.590888624227882e-11,
+          "a0_A_falsified": true,
+          "a0_B_falsified": true
+        }
+      }
+    },
+    "any_trigger_1_to_4_fired": true,
+    "any_trigger_1_to_5_fired": true
+  },
+  "a0_A": 1.082288e-10,
+  "a0_B": 6.800218e-10,
+  "runtime_seconds": 389.18777799606323
+}

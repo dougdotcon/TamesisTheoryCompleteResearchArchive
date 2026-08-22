@@ -1,0 +1,38 @@
+[15:10:31] === Reexecucao adversarial independente -- SPARC-FMULTI-STAGE2 ===
+[15:10:31] parametros: SEED_STAGE2=20260822, N_MC=200, N_BOOTSTRAP=2000, anchor_bin=4, xtol=0.0005
+[15:10:32] amostra de descoberta carregada: 30203 sistemas (split seed=20260814); sistemas sem entrada Hwang (e=NaN): 0
+[15:10:32] v_p_real: mediana=0.5336 km/s, min=0.0025, max=4.8305
+[15:10:32] Passo 1: calibrate_f_multi(...) sobre os 30.203 sistemas reais (return_raw=True)
+[15:16:31]   calibrate_f_multi concluido em 358.8s
+[15:16:31]   f_multi_hat=0.1037  converged_bracket=True  bracket={'f_lo': 0.0, 'f_hi': 0.9, 'delta_anchor_at_f_lo': 0.05388947196031449, 'delta_anchor_at_f_hi': -0.7615471684987544}
+[15:16:31] Passo 2: extrair delta_obs-newt(bin) corrigido de calib['final_result']
+[15:16:31]   delta_obs-newt(bin) = [0.07771798406427945, 0.06568324727787904, 0.0486237666419221, 0.04174346361601325, -0.0001792341717301582]
+[15:16:31]   gN_bin_median (SI) = [1.880655689217257e-10, 1.6645464809358465e-09, 6.220327165556408e-09, 1.7190232822044425e-08, 4.8638073055475723e-08]
+[15:16:31]   n_sys_per_bin = [6042, 6040, 6040, 6039, 6042]
+[15:16:31] Passo 3: fit_a0() nos 5 valores corrigidos, x0=1.0 e x0=5.0
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/selfcal_pipeline.py:61: RuntimeWarning: invalid value encountered in sqrt
+  return 1.0 / (1.0 - np.exp(-np.sqrt(x)))
+[15:16:31]   a0_fit(x0=1.0)=6.12469629412745e-11
+[15:16:31]   a0_fit(x0=5.0)=6.124648319246344e-11
+[15:16:31]   convergencia x0=1.0 vs x0=5.0: CONCORDAM (diff log10=0.000003)
+[15:16:31] Passo 4-5: bootstrap_a0_refit() sobre calib['final_raw'] (mesma seed+777 de final_result, SEM reconstrucao manual)
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/selfcal_pipeline.py:86: OptimizeWarning: Covariance of the parameters could not be estimated
+  popt, _ = curve_fit(_model, gN_bin, delta_vals, p0=[x0], maxfev=20000)
+[15:16:43]   bootstrap_a0_refit concluido em 12.5s
+[15:16:43]   IC95%(x0=1.0) = [4.119617401808097e-11, 8.580760014777504e-11] (n_valid=2000/2000)
+[15:16:43]   IC95%(x0=5.0) = [4.0162886426674745e-11, 8.580628600458754e-11] (n_valid=2000/2000)
+[15:16:43]   concordancia dos ICs x0=1.0 vs x0=5.0: SIM
+[15:16:43] Passo 6: regra de decisao Secao 5 (camada mecanica + interpretativa de vies)
+[15:16:43]   veredito mecanico: BOTH_FALSIFIED
+[15:16:43]   camada de vies resgata alguma hipotese?: False
+[15:16:43]   veredito final: BOTH_FALSIFIED
+[15:16:43] Passo 7: gatilhos Secao 6 (itens 1-4; item 5 checado separadamente abaixo)
+[15:16:43]   item1_a0_fit_gt_1_order_outside_both: fired=False
+[15:16:43]   item2_bracket_not_converged_or_at_edge: fired=False
+[15:16:43]   item3_f_multi_outside_literature_range: fired=True
+[15:16:43]   item4_pattern_inconsistent_with_known_wobble_bias: fired=False
+[15:16:43] Checagem extra: robustez do IC a seed/N_bootstrap diferentes (gatilho item 5)
+[15:17:00]   reexecucoes de robustez concluidas em 17.1s
+[15:17:00]   item5 (nao-robusto a seed/N_bootstrap): fired=False
+[15:17:00] resultado escrito em /home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/adversarial_stage2/results/result_adversarial_stage2.json
+[15:17:00] === concluido em 389.2s ===

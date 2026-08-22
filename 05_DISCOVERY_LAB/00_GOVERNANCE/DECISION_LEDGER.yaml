@@ -2145,3 +2145,79 @@ decisions:
       - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente e' um desfecho aceito e completo, mesmo se so' delimitar mais o problema (precedente direto: DISC-DEC-037, que fechou a obstrucao nomeada mas nao melhorou phi_CAND, e foi catalogado com o mesmo rigor de um resultado positivo)"
       - "qualquer resultado positivo (formula nova, prova nova) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/K6/M-CLUST"
       - "phi_CAND permanece a formula de registro de M-CLUST(b) e o Lema Aberto K=0,...,10 permanece a fronteira incondicional ate que qualquer resultado positivo desta onda seja adversarialmente confirmado e integrado"
+
+  - decision_id: DISC-DEC-039
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado da onda 8 frente (a) `MCLUST-GLOBAL-EXCLUSION-
+      ATTEMPT`: NAO-FECHAMENTO HONESTO da hipotese nomeada em
+      aggregation_closure_attempt/ATTEMPT.md SS7.2. Releitura formal de
+      DERIVATIONS.md SS0-1 mostra que a exclusao de escala global t*n que
+      a hipotese propunha como faltante ja esta presente desde a onda 2,
+      incorporada sem alteracao no fator (1-t) da formula-mestre herdada
+      -- nao e uma correcao nova. A unica interacao genuina remanescente
+      entre a janela local (ordem b) e a historia global do passeio e uma
+      correcao de TAMANHO DE POOL de ordem (b-1)/n, formalizada por um
+      argumento de exposicao sequencial estendido (elevacao P e
+      propriedade pura de condicionamento-em-marcas, independente de
+      profundidade de arco) e implementada como phi_GLOBAL -- testada
+      numericamente em +-0,1-0,4% de efeito nas 4 celulas de estresse,
+      parametricamente pequena demais para o residuo de 2-4%. Medicao
+      DIRETA walk-level (simulador proprio do zero, contagem explicita de
+      K(t) e profundidade de arco, estimador Horvitz-Thompson,
+      SeedSequence 20260822910, escala de producao n=65536, cruzado
+      contra phi_mc ja confirmado a <2,1 sigma nas 4 celulas) nao revela
+      lei de profundidade universal/monotonica (3/4 celulas shallow>deep
+      fracamente, 1/4 se inverte). Teste decisivo (SS4): resolvendo o
+      P_necessario que faria a formula bater phi_mc exatamente e
+      comparando contra a elevacao medida, 2 das 4 celulas de estresse
+      (as de MAIOR rho=0,60 e MAIOR b testados) permanecem com uma lacuna
+      de 10,6-11,4% que NENHUMA reponderacao por profundidade da
+      densidade fisicamente mensuravel pode fechar -- nao apenas "nao
+      fechado", ativamente descartado como explicacao suficiente nessas
+      celulas. Validacao final de 18 celulas (sementes novas,
+      SeedSequence 20260822911): chi^2(phi_CAND)=79,95 <
+      chi^2(phi_GLOBAL)=87,65 < chi^2(phi_CAND5)=98,16 -- phi_GLOBAL nao
+      supera phi_CAND, que permanece a formula de registro. Suspeita
+      realocada honestamente para tres pecas nao testadas nesta frente:
+      precisao de q_CLUST(s)=s/(1-rho) especificamente em rho>0,46 (faixa
+      alem do ja confirmado por residual_attempt/ATTEMPT.md SS3.1);
+      possivel assimetria x0-vs-outros-arc-starts nunca testada
+      separadamente; e a aproximacao de Poissonizacao da propria
+      formula-mestre, ja apontada como suspeita mais estrutural por dois
+      documentos predecessores. A classificacao M-CLUST(b) em U_{1/2} no
+      limite n->infinito permanece completamente intocada.
+    rationale: >
+      Mesmo padrao de rigor exigido pela disciplina de negativo-tambem-
+      informativo: o documento nao apenas argumenta analiticamente, mas
+      constroi um segundo simulador independente do zero especificamente
+      para testar se o proprio argumento analitico poderia estar errado
+      (precedente citado explicitamente no proprio documento: argumentos
+      analiticos nesta linha ja erraram antes, ver residual_attempt/
+      ATTEMPT.md SS2), cruza esse simulador contra phi_mc ja confirmado
+      antes de confiar em qualquer numero novo, e desenha um teste
+      decisivo (P_necessario vs. elevacao medida) que isola precisamente
+      se a hipotese, na MELHOR reponderacao possivel, poderia fechar o
+      residuo -- nao apenas se o efeito pontual bate. Mesmo tratamento
+      dado a DISC-DEC-037 (frente irma, tambem PARCIAL/nao-melhora,
+      integrada sem referee adversarial dedicado por ser autoconsistente
+      e cruzada contra resultado ja confirmado): nao e uma alegacao
+      positiva nova sobre o mundo que mudaria o status de nenhum teorema
+      ou formula de registro, apenas delimita mais precisamente onde o
+      residuo NAO esta. Verificacao propria (leitura integral do
+      documento, checagem da consistencia logica do ordenamento chi^2
+      phi_CAND < phi_GLOBAL < phi_CAND5 com a propria construcao alegada
+      de phi_GLOBAL = phi_CAND5 + pequeno deslocamento positivo)
+      realizada antes de integrar; nenhuma bandeira vermelha encontrada.
+    authority: agent_autonomous_within_dec038
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/ (integrado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status de teorema ou formula de registro -- phi_CAND permanece a formula M-CLUST(b) de registro, M-CLUST(b) em U_{1/2} permanece intocado"
+    untouched_safeguards:
+      - "hipotese SS7.2 nao promovida a resultado -- catalogada como descartada com a mesma precisao/peso de um resultado positivo, per DISC-DEC-023/037"
+      - "nenhum arquivo de residual_attempt/ ou aggregation_closure_attempt/ modificado -- apenas leitura, anexo em subpasta propria"
+      - "frente (b) K-GENERAL-EXISTENCE-ATTEMPT permanece sob referee adversarial hostil dedicado, independente do desfecho desta frente, per o mapa de dependencias que impede uma frente ser usada como evidencia da outra"

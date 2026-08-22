@@ -1,0 +1,168 @@
+# Mapa de dependências — linha U₁/₂ (Core Numerics)
+
+**Propósito deste documento.** Depois da onda 7, a linha U₁/₂ tem duas
+frentes matemáticas independentes rodando em paralelo (onda 8,
+`DISC-DEC-038`): (a) a ponte finito-`n` geral-`K` do Lema Aberto/taxa,
+e (b) o resíduo de M-CLUST(b). Um resultado positivo numa frente **não
+implica nada** sobre a outra — elas dependem de objetos matemáticos
+distintos, provados por métodos distintos, sobre mecanismos distintos.
+Este documento existe para tornar essa separação explícita e auditável,
+não deixá-la implícita na cabeça de quem está integrando os resultados.
+Nada aqui é um resultado novo — é a topologia de dependências dos
+resultados já registrados em `theorem/THEOREM.md` e
+`generalization_u_alpha/`, com cada nó apontando para a seção/proposição
+exata que o prova.
+
+---
+
+## 1. Árvore A — o Lema Aberto / a ponte finito → infinito
+
+```mermaid
+flowchart TD
+    D["Definições 1, 3, 4 (§1, §2, §7.2)<br/>M_n(c), L(c), φ_n^(K)"]
+
+    T1["<b>Teorema 1</b> (§3)<br/>φ_∞(c) = ∫₀¹ e^(−ct²) dt<br/>= ½√(π/c)·erf(√c)<br/><b>PROVADO, incondicional</b><br/>— não depende de K nem da ponte —"]
+    L2["<b>Lema 2</b> (§5.2)<br/>φ_K = 4^K(K!)² / (2K+1)!<br/>(integral de Wallis)<br/><b>PROVADO, incondicional, todo K</b>"]
+
+    P3["<b>Proposição 3</b> (§7.2)<br/>redução de mistura<br/><b>PROVADA, incondicional</b><br/>SE ponte-K vale ∀K, ENTÃO<br/>φ(n,c) → φ_∞(c)"]
+
+    D --> T1
+    D --> L2
+    T1 --> P3
+    L2 --> P3
+
+    K0["K=0 — exato p/ todo n (§7.3)<br/>trivial, sem gap"]
+    K1["K=1 — Proposição 4 (§7.3)<br/>exato, taxa 1/(3n²)"]
+    K2["K=2 — Estágio 3, onda 5<br/>referee: 4 camadas, SOUND"]
+    K345["K=3,4,5 — Estágio 4, onda 6<br/>matriz de transferência uniforme em K<br/>referee: técnica diferente, SOUND"]
+    K610["K=6,...,10 — Estágio 5-A, onda 7<br/>mesmo método, 5 degraus a mais<br/>referee: SOUND, 2 bugs cosméticos corrigidos"]
+
+    PBinc["<b>Ponte fixo-K, K=0,...,10</b><br/><b>PROVADA incondicional</b><br/>(11 valores consecutivos)"]
+    K0 --> PBinc
+    K1 --> PBinc
+    K2 --> PBinc
+    K345 --> PBinc
+    K610 --> PBinc
+
+    Hyp["Hipótese de regularidade (§4 de<br/>k6_attempt/ATTEMPT.md)<br/>existência da expansão assintótica<br/>de 2 termos, p/ r além de K=10<br/><b>ÚNICO GAP RESTANTE</b>"]
+
+    KgerCond["Ponte fixo-K + taxa, K geral<br/>Estágio 5-B, onda 7<br/><b>PROVADA, CONDICIONAL</b> à Hipótese<br/>(bridge é corolário elementar da taxa:<br/>limite finito de n(ψ−φ_K) força ψ→φ_K)<br/>referee: ressalva 'corretamente dimensionada'"]
+
+    Hyp -.hipótese de.-> KgerCond
+
+    W8b["<b>Onda 8, frente (b) — EM ANDAMENTO</b><br/>tentativa de provar a Hipótese<br/>(Gronwall discreto / indução em r)"]
+    W8b -."SE fechar".-> Hyp
+
+    PC5["<b>Proposição Condicional 5</b> (§7.5)<br/>φ(n,c) → φ_∞(c), ∀c≥0<br/><b>HOJE: condicional</b> à ponte-K geral"]
+
+    PBinc -->|contribui K=0..10| P3
+    KgerCond -.->|"SE Hipótese fechar:<br/>vira contribuição incondicional"| P3
+    P3 --> PC5
+
+    PC5 -.->|"SE frente (b) fechar:<br/>vira <b>Teorema 3</b>, sem ressalva,<br/>∀c≥0"| Teo3["Teorema 3 (hipotético)<br/>φ(n,c) → ∫₀¹e^(−ct²)dt<br/>incondicional, ∀c≥0"]
+
+    style T1 fill:#e8f0e0,stroke:#2f6b5e
+    style L2 fill:#e8f0e0,stroke:#2f6b5e
+    style P3 fill:#e8f0e0,stroke:#2f6b5e
+    style PBinc fill:#e8f0e0,stroke:#2f6b5e
+    style K0 fill:#e8f0e0,stroke:#2f6b5e
+    style K1 fill:#e8f0e0,stroke:#2f6b5e
+    style K2 fill:#e8f0e0,stroke:#2f6b5e
+    style K345 fill:#e8f0e0,stroke:#2f6b5e
+    style K610 fill:#e8f0e0,stroke:#2f6b5e
+    style Hyp fill:#f5ecd8,stroke:#96702a
+    style KgerCond fill:#f5ecd8,stroke:#96702a
+    style PC5 fill:#f5ecd8,stroke:#96702a
+    style W8b fill:#e3edf3,stroke:#33566f
+    style Teo3 fill:#f0e5e8,stroke:#7a3b4a,stroke-dasharray: 5 5
+```
+
+**Leitura.** Verde = provado incondicionalmente. Âmbar = provado mas
+condicional a uma ressalva nomeada. Azul = tentativa em execução agora.
+Rosa tracejado = o que se tornaria verdadeiro (hipoteticamente) se a
+frente em execução fechar — **não é um resultado, é uma previsão
+condicional de segunda ordem**, não deve ser citada como se já valesse.
+
+**O ponto que este mapa existe para blindar:** a Proposição 3 já está
+provada, sem ressalva nenhuma, desde a §7.2 original (bem antes da onda
+7). Ela não é afetada por nada que aconteça na frente (b). O que a
+frente (b) pode mudar é só um dos dois insumos que entram nela — se a
+Hipótese de regularidade fechar, o insumo "ponte-K para todo K" deixa de
+precisar do qualificador condicional, e a Proposição 3 (inalterada)
+converte isso automaticamente em Teorema. Nenhuma nova prova de
+convergência de mistura seria necessária — ela já existe.
+
+---
+
+## 2. Árvore B — M-CLUST(b), um mecanismo separado
+
+```mermaid
+flowchart TD
+    UA["Generalização U_α (onda 3)<br/>família de mecanismos candidatos<br/>à mesma classe de universalidade"]
+
+    MC["Mecanismo M-CLUST(b)<br/>construção alternativa, não o mecanismo<br/>original do Lema Aberto acima"]
+
+    QC["q_CLUST(s) = s/(1−ρ)<br/><b>PROVADO</b> (onda 4)<br/>reconfirmado por medição direta (onda 7)"]
+
+    RES["Resíduo sistemático na correção<br/>finito-n de M-CLUST(b)"]
+
+    E1["Onda 4: correção parcial<br/>70–86% do gap original fechado"]
+    E2["Onda 7 (DISC-DEC-034):<br/>φ_CAND=(1−ρ)·φ_V4<br/>χ² reduzido ~19,5×<br/>PARCIALMENTE FECHADO"]
+    AGG["Onda 7 (DISC-DEC-037):<br/>obstrução de agregação<br/><b>FECHADA</b> por primeiros princípios<br/>+ validação independente (χ²=1,93)<br/>MAS não melhora φ_CAND — piora"]
+
+    W8a["<b>Onda 8, frente (a) — EM ANDAMENTO</b><br/>hipótese de exclusão global (escala tn)<br/>nomeada em SS7.2, não formalizada"]
+
+    UA --> MC
+    MC --> QC
+    MC --> RES
+    RES --> E1
+    RES --> E2
+    E2 --> AGG
+    AGG -."SE fechar".-> W8a
+
+    style QC fill:#e8f0e0,stroke:#2f6b5e
+    style E1 fill:#f5ecd8,stroke:#96702a
+    style E2 fill:#f5ecd8,stroke:#96702a
+    style AGG fill:#e8f0e0,stroke:#2f6b5e
+    style W8a fill:#e3edf3,stroke:#33566f
+```
+
+**Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
+diferente, dentro do programa mais amplo de generalização U_α. A
+obstrução que a frente (a) ataca (exclusão de escala global `tn`) não
+tem nenhuma relação estrutural com a Hipótese de regularidade que a
+frente (b) ataca (existência da expansão assintótica de duas parcelas
+para `r` geral). São problemas de natureza matemática diferente: um é
+sobre agregação de probabilidade condicional num passeio combinatório
+finito; o outro é sobre existência de uma expansão assintótica de uma
+recursão discreta linear no limite de escala. Não há nenhum lema
+compartilhado entre as duas árvores além de primitivas elementares
+(revelação preguiçosa de permutação uniforme) — e mesmo essa primitiva é
+usada de formas distintas em cada uma.
+
+---
+
+## 3. Regra de uso deste mapa
+
+Antes de integrar qualquer resultado positivo de uma das duas frentes
+da onda 8 ao `THEOREM.md`, `DECISION_LEDGER.yaml` ou `TEST_QUEUE.yaml`,
+checar explicitamente:
+
+1. **Qual nó exato** do mapa acima o resultado preenche.
+2. **Quais nós a jusante** (downstream) mudam de status como
+   consequência direta, provada — não "provavelmente relacionados".
+3. **Confirmar que nenhum nó da outra árvore** é mencionado como
+   evidência, mesmo em linguagem hedged ("isso sugere que...", "é
+   plausível que M-CLUST também..."). Se aparecer, é um sinal de
+   conflação e a integração deve ser reescrita antes de comitar.
+
+Este documento deve ser atualizado (não reescrito por cima — adendo
+datado, mesma disciplina do resto do arquivo) sempre que uma nova aresta
+for provada ou uma nova frente for aberta na linha U₁/₂.
+
+---
+
+*Criado em 2026-08-22, a pedido explícito do usuário, como salvaguarda
+contra o uso inadvertido de um resultado positivo numa frente como
+evidência da outra. Fontes: `theorem/THEOREM.md` §3, §5.2, §7.2–7.5, e
+os adendos "Estágio 3–5"; `generalization_u_alpha/mclust_rigor/`.*

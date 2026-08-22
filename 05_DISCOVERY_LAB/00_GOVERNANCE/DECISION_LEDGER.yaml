@@ -1897,3 +1897,48 @@ decisions:
       - "classificacao M-CLUST(b) em U_1/2 no limite n->infinito nao afetada -- so a taxa de correcao finito-n"
       - "DERIVATION_MCLUST_FIXED.md e outros arquivos existentes de mclust_rigor/ preservados sem alteracao -- este e' um anexo novo em subpasta propria"
       - "residuo remanescente e obstrucao de agregacao nao fechada reportados honestamente como limitacoes, nao escondidos nem minimizados"
+
+  - decision_id: DISC-DEC-035
+    date: 2026-08-22
+    decision: >
+      Autorizar uma frente de continuacao delimitada, em paralelo ao
+      referee de K>=6 da onda 7 (frente a, ainda em execucao, sem
+      duplicar) e seguindo o modo padrao multi-linha (DISC-DEC-023):
+      `MCLUST-AGGREGATION-CLOSURE-ATTEMPT` -- tentar fechar
+      especificamente o passo analitico deixado explicitamente aberto
+      pelo proprio residual_attempt/ATTEMPT.md SS5 ("a obstrucao
+      matematica concreta"): agregar o hazard de fechamento elevado
+      1/[(1-rho)(1-s)] sobre o conjunto ALEATORIO de alvos vivos (nao
+      apenas sobre um alvo fixo y, ja fechado por SS5 via argumento de
+      janela deslizante de Bayes). Sucesso fecharia completamente o
+      residuo de M-CLUST(b) nomeado desde a onda 4; falha honesta
+      (delimitar melhor a obstrucao sem fechar) e' um desfecho aceito.
+    rationale: >
+      Reabertura explicitamente nomeada como legitima pela propria
+      integracao que a descobriu (DISC-DEC-034, item (i) do next_action
+      reescrito de DISC-CORE-NUMERICS-001) -- nao e' busca forcada de
+      candidato novo, e' o proximo passo concreto e ja delimitado de uma
+      linha ja ADVERSARIALLY_REVIEWED. Despachada em paralelo ao referee
+      de K>=6 (ja em execucao) para nao deixar capacidade ociosa
+      enquanto se aguarda seu veredito, consistente com a politica
+      permanente de operacao multi-linha do usuario (DISC-DEC-023):
+      "bater de frente com todas as linhas de pesquisa sempre de uma
+      vez, nao ficar parando uma linha antes de comecar outra". Uma
+      varredura da fila (TEST_QUEUE.yaml) confirma que nenhuma outra
+      linha do portfolio tem acao obrigatoria pendente no momento --
+      todas as demais estao em disposicao final (fechadas ou com
+      holdout selado aguardando reabertura futura por decisao propria do
+      usuario) -- portanto esta e a unica frente adicional genuina e
+      ja delimitada disponivel agora, sem forcar um candidato sem
+      criterio de sucesso claro.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- extensao dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "resultado ja integrado de DISC-DEC-034 (formula candidata, chi^2, residuo remanescente) nao alterado por esta frente -- so o passo de agregacao especifico e atacado"
+      - "qualquer resultado positivo (fechamento da agregacao) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/M-CLUST"
+      - "falha honesta em fechar a obstrucao e' um desfecho completo e aceito, nao um requisito de sucesso"

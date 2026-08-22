@@ -1,0 +1,25 @@
+=== ref_formula.py self-checks ===
+
+[1] H closed form vs direct numerical inner integral
+   b=100 c= 400.0 rho=0.4579 P=1.8445: closed form == numeric inner integral to <1e-10 at 6 values of t   OK
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/adversarial/ref_formula.py:262: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  inner, _ = integrate.quad(
+   b=100 c= 600.0 rho=0.6014 P=2.5086: closed form == numeric inner integral to <1e-10 at 6 values of t   OK
+   b=400 c= 100.0 rho=0.4571 P=1.8419: closed form == numeric inner integral to <1e-10 at 6 values of t   OK
+   b=  8 c= 160.0 rho=0.0384 P=1.0399: closed form == numeric inner integral to <1e-10 at 6 values of t   OK
+
+[2] rho -> 0 must recover phi_U exactly
+   c=  10.0: phi_CAND(n=1e12,b=1)=0.280247390505  phi_U=0.280247390507  diff=-1.78e-12
+   c=  50.0: phi_CAND(n=1e12,b=1)=0.125331413728  phi_U=0.125331413732  diff=-3.48e-12
+   c= 200.0: phi_CAND(n=1e12,b=1)=0.062665706859  phi_U=0.062665706866  diff=-6.61e-12
+   c= 600.0: phi_CAND(n=1e12,b=1)=0.036180062717  phi_U=0.036180062728  diff=-1.12e-11
+
+[3] scipy quad vs mpmath (40 dps), phi_V4 and T
+   b=100 c= 400.0: phi_V4 0.059470557494 vs 0.059470557494 (rel 1.1e-13) | T 0.031573453525 vs 0.031573453525 (rel 1.2e-13)
+   b=300 c= 150.0: phi_V4 0.099814038167 vs 0.099814038167 (rel 3.2e-14) | T 0.048560318764 vs 0.048560318764 (rel 2.9e-14)
+   b=100 c= 600.0: phi_V4 0.056462769005 vs 0.056462769005 (rel 2.8e-14) | T 0.022180845229 vs 0.022180845229 (rel 2.8e-14)
+   b=400 c= 100.0: phi_V4 0.117417960087 vs 0.117417960087 (rel 4.6e-14) | T 0.061109319880 vs 0.061109319880 (rel 4.6e-14)
+   b=200 c=   5.0: phi_V4 0.397509993074 vs 0.397509993074 (rel 5.6e-16) | T 0.294033358431 vs 0.294033358431 (rel 9.4e-16)
+   b=  8 c=  10.0: phi_V4 0.280497423562 vs 0.280497423562 (rel 7.9e-16) | T 0.229957265119 vs 0.229957265119 (rel 4.1e-14)

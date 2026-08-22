@@ -118,7 +118,17 @@ flowchart TD
     E2["Onda 7 (DISC-DEC-034):<br/>φ_CAND=(1−ρ)·φ_V4<br/>χ² reduzido ~19,5×<br/>PARCIALMENTE FECHADO"]
     AGG["Onda 7 (DISC-DEC-037):<br/>obstrução de agregação<br/><b>FECHADA</b> por primeiros princípios<br/>+ validação independente (χ²=1,93)<br/>MAS não melhora φ_CAND — piora"]
 
-    W8a["<b>Onda 8, frente (a) — EM ANDAMENTO</b><br/>hipótese de exclusão global (escala tn)<br/>nomeada em SS7.2, não formalizada"]
+    W8a["Onda 8, frente (a) (DISC-DEC-039):<br/>hipótese de exclusão global (escala tn)<br/><b>NÃO-FECHAMENTO HONESTO</b> — φ_GLOBAL<br/>não supera φ_CAND, descartada nas<br/>2 células de maior ρ/b"]
+
+    W9a["Onda 9, frente (a) (DISC-DEC-043):<br/>hipótese de assimetria x₀-vs-outros<br/><b>REFUTADA</b> — razão agrupada<br/>0,983±0,007, sinal oposto"]
+
+    EPS["Achado secundário (DISC-DEC-043/044):<br/>eps=P(cíclico│x₀∈R) ≠ 0<br/><b>ESTABELECIDO</b> — referee: 190–260σ,<br/>18 células, sem simular passeio"]
+
+    EPSR["<b>φ_EPSR</b> (DISC-DEC-044)<br/>ingredientes medidos, não ajustados<br/><b>NOVA FÓRMULA DE REGISTRO</b><br/>χ²≥φ_EPS em 6/6 grades testadas"]
+
+    EXH["Canal eps <b>EXAURIDO</b><br/>(eps exato: χ² 335,6→183,2;<br/>ganho máximo residual ~1%)"]
+
+    ELEV["Resíduo remanescente de φ_EPSR<br/>localizado em φ(cíclico│x₀∉R)<br/>(nível de elevação, SS5.3/SS5.6)<br/>χ²≈183, sem forma fechada —<br/><b>alvo da próxima frente</b>"]
 
     UA --> MC
     MC --> QC
@@ -126,24 +136,47 @@ flowchart TD
     RES --> E1
     RES --> E2
     E2 --> AGG
-    AGG -."SE fechar".-> W8a
+    AGG --> W8a
+    AGG --> W9a
+    W9a --> EPS
+    EPS --> EPSR
+    EPS --> EXH
+    EPSR --> ELEV
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
     style E2 fill:#f5ecd8,stroke:#96702a
     style AGG fill:#e8f0e0,stroke:#2f6b5e
-    style W8a fill:#e3edf3,stroke:#33566f
+    style W8a fill:#f0e5e8,stroke:#7a3b4a
+    style W9a fill:#f0e5e8,stroke:#7a3b4a
+    style EPS fill:#e8f0e0,stroke:#2f6b5e
+    style EPSR fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
+    style EXH fill:#f0e5e8,stroke:#7a3b4a
+    style ELEV fill:#f5ecd8,stroke:#96702a
 ```
 
+> **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
+> ATUALIZADO (mesma disciplina da Árvore A) para refletir: onda 8
+> frente (a) fechada como não-fechamento honesto; onda 9 frente (a)
+> refutou a hipótese mandatada mas descobriu `eps≠0`; um referee
+> hostil dedicado corrigiu dois erros na derivação original e produziu
+> `φ_EPSR`, agora a fórmula de registro de M-CLUST(b) — a primeira
+> mudança de fórmula de registro desde `DISC-DEC-034`. Rosa = tentativa
+> que não fechou o alvo mandatado (mas pode ter produzido achados
+> secundários genuínos, como aqui). Nenhuma aresta liga esta árvore à
+> Árvore A — permanece um objeto matemático inteiramente separado.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
-diferente, dentro do programa mais amplo de generalização U_α. A
-obstrução que a frente (a) ataca (exclusão de escala global `tn`) não
-tem nenhuma relação estrutural com a Hipótese de regularidade que a
-frente (b) ataca (existência da expansão assintótica de duas parcelas
-para `r` geral). São problemas de natureza matemática diferente: um é
-sobre agregação de probabilidade condicional num passeio combinatório
-finito; o outro é sobre existência de uma expansão assintótica de uma
-recursão discreta linear no limite de escala. Não há nenhum lema
+diferente, dentro do programa mais amplo de generalização U_α. As
+obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de
+escala global `tn`; assimetria x₀-vs-outros-arc-starts) não têm
+nenhuma relação estrutural com a Hipótese de regularidade que a
+frente (b) da onda 8 atacou (existência da expansão assintótica de
+duas parcelas para `r` geral, ver Árvore A). São problemas de natureza
+matemática diferente: um é sobre agregação/exclusão de probabilidade
+condicional num passeio combinatório finito; o outro é sobre
+existência de uma expansão assintótica de uma recursão discreta linear
+no limite de escala. Não há nenhum lema
 compartilhado entre as duas árvores além de primitivas elementares
 (revelação preguiçosa de permutação uniforme) — e mesmo essa primitiva é
 usada de formas distintas em cada uma.

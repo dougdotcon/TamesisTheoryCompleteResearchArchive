@@ -1547,3 +1547,46 @@ decisions:
       - "nenhum lock (commit) de PREREGISTRATION.md nesta rodada -- travamento e' decisao explicita subsequente da sessao orquestradora, nao do agente"
       - "nenhum dado real (discovery sample de SPARC-004, EDF de Mumtaz, holdout selado) baixado/computado nesta rodada"
       - "K3-OPEN-LEMMA: falhar ou permanecer aberto e' um desfecho honesto completo, nao forcar uma prova"
+
+  - decision_id: DISC-DEC-028
+    date: 2026-08-22
+    decision: >
+      Travar (lock) PREREGISTRATION.md do braco depressao de
+      DISC-COGNITIVE-EEG-SPECTRAL-001 (Mumtaz MDD vs. HC), promovido sem
+      alteracao de conteudo matematico/metodologico de
+      PREREGISTRATION_DEPRESSION_DRAFT.md (preservado integralmente como
+      registro de auditoria). Autorizar, a partir deste lock, o download
+      da sessao EC dos 64 sujeitos (nao o dataset completo de 193
+      arquivos/todas as sessoes) e o computo real de I(X) sobre esse
+      dado, seguido de reproducao adversarial obrigatoria (AGENTS.md
+      passo 7).
+    rationale: >
+      Revisao da sessao orquestradora sobre as 2 lacunas explicitamente
+      nomeadas pelo rascunho (DISC-DEC-027(b)): (1) resolucao da
+      ambiguidade 1/f (Sec.2.1) e' bem fundamentada (Voytek et al. 2015,
+      mesmo objeto matematico) e provadamente IRRELEVANTE para a regra
+      de decisao primaria (que depende so' de I(X), nao do expoente
+      aperiodico) -- aprovada. (2) ausencia de correcao de Bonferroni
+      (Sec.8) e' metodologicamente correta: a estatistica primaria e'
+      por desenho UMA media sobre 19 canais, UMA banda, UMA sessao --
+      nao ha familia de comparacoes a corrigir; a alternativa (correcao
+      por-canal/por-banda) pagaria custo de poder por uma protecao
+      contra um risco que o desenho ja elimina por construcao -- aprovada.
+      Os parametros de Welch declarados pela primeira vez neste rascunho
+      (Sec.4.4, detrend/scaling default de biblioteca) sao neutros e de
+      baixo risco -- aprovados sem alteracao. Nenhuma reformulacao de
+      I(X), regra de decisao, ou criterio foi necessaria -- o rascunho
+      e' promovido verbatim.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/PREREGISTRATION.md (novo, LOCKED, promovido do rascunho)"
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/PREREGISTRATION_DEPRESSION_DRAFT.md (preservado sem alteracao, registro de auditoria)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-COGNITIVE-EEG-SPECTRAL-001: braco depressao passa a ter um sub-registro CANDIDATE_LOCKED; braco ansiedade permanece CANDIDATE_FORMULATING (bloqueado por acesso)"
+    untouched_safeguards:
+      - "braco ansiedade/DASPS permanece inteiramente fora de escopo -- proibido explicitamente em PREREGISTRATION.md Sec.9 item 2"
+      - "nenhuma alegacao clinica/diagnostica autorizada -- Sec.9 item 1, reafirmado"
+      - "reexecucao adversarial obrigatoria (AGENTS.md passo 7) antes de qualquer veredito CONFIRMA/REFUTA ser catalogado como final"
+      - "download autorizado restrito a sessao EC dos 64 sujeitos -- nao o dataset completo de 193 arquivos"

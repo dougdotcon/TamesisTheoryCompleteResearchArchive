@@ -42,12 +42,14 @@ conditional on exactly $K$ surviving reroutes. That conditional law's
 mean is proved for every $K$ and coincides, for a structurally different
 microscopic model, with a theorem of Hansen and Jaworski
 \cite{hansenjaworski2014}. The finite-$n\to\infty$ bridge is proved in
-full only for $K=0,1$ (with an exact $O(1/n^2)$ rate at $K=1$); for
-$K\ge2$ it is reduced, via an unconditionally proved mixing lemma, to a
-single precisely stated open convergence lemma, which is not resolved
-here. Every claim below is labeled by its exact status; a companion
-numerical package cross-checks every closed form against independent
-brute-force enumeration, Monte Carlo simulation, and quadrature.
+full for $K=0,1,2$ -- with exact rates $O(1/n^2)$ at $K=1$ and, more
+surprisingly, only $\Theta(1/n)$ at $K=2$, not the naively extrapolated
+$O(1/n^2)$; for $K\ge3$ it is reduced, via an unconditionally proved
+mixing lemma, to a single precisely stated open convergence lemma, which
+is not resolved here. Every claim below is labeled by its exact status;
+a companion numerical package cross-checks every closed form against
+independent brute-force enumeration, Monte Carlo simulation, and
+quadrature.
 \end{abstract}
 
 \section{The model}
@@ -294,36 +296,79 @@ averaging over $L\sim\Unif\{1,\dots,n\}$ and $U$ gives the stated closed
 form.
 \end{proof}
 
-\begin{openlemma}[Fixed-$K$ bridge, $K\ge2$]
-\label{ol:k2}
-$\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
-fixed integer $K\ge2$. \textbf{Neither proved nor disproved here.}
-\end{openlemma}
+\begin{proposition}[$K=2$ bridge, proved exactly]
+\label{prop:k2}
+For every $n\ge3$,
+\[
+  \varphi_n^{(2)} \;=\; \frac{16n^3+n^2+21n+6}{30n^3}
+  \;=\; \frac{8}{15}+\frac1{30n}+\frac{7}{10n^2}+\frac1{5n^3},
+\]
+exactly. In particular $\varphi_n^{(2)}\to\varphi_2=8/15$ as $n\to\infty$,
+at exact rate $\Theta(1/n)$ (leading term $1/(30n)$) -- \emph{not}
+$\Theta(1/n^2)$, the rate the $K=0,1$ pattern alone might suggest.
+\end{proposition}
 
-A single reroute disturbs exactly one background cycle (tractable, the
-mechanism behind Proposition~\ref{prop:k1}); $K\ge2$ reroutes can strike
-the same cycle in either order, or strike different cycles whose severed
-pieces later re-link through a further reroute's target -- a
-combinatorial case analysis not resolved here. Exact enumeration at
-$K=2$ for $n$ up to $8$ shows $\varphi_n^{(2)}$ decreasing monotonically
-toward $\varphi_2=8/15$, but the rescaled deviation
-$n^2(\varphi_n^{(2)}-\varphi_2)$ is \emph{not} settling to a constant
-over the tested range -- so, unlike $K=1$'s clean $O(1/n^2)$ rate, no
-specific rate for $K\ge2$ should be assumed (\S\ref{sec:numerics}).
+\begin{proof}[Proof sketch]
+By exchangeability, split $\varphi_n^{(2)}$ into a weighted average of
+$\psi_n^{(2)}$ (the probability a \emph{generic}, non-rerouted point is
+cyclic) and $\psi_n^{(2),R}$ (the same probability for one of the two
+rerouted points itself): $\varphi_n^{(2)} =
+\tfrac2n\psi_n^{(2),R}+\big(1-\tfrac2n\big)\psi_n^{(2)}$, exact for every
+$n>2$ -- a reduction that holds, in this weighted-average form, for every
+fixed $K$, and by itself already shows that only the generic-point limit
+$\psi_n^{(K)}\to\varphi_K$ is needed to close the fixed-$K$ bridge at any
+$K$ (the rerouted-point term's weight $K/n\to0$ regardless of
+$\psi_n^{(K),R}$'s own behaviour). For $K=2$: tracing the forward orbit
+of a generic reference point as a discrete exploration process and
+case-splitting on whether each of the two rerouted sources lies on the
+reference point's own $\pi$-cycle -- using the classical exact fact that
+a fixed point's $\pi$-cycle length is $\mathrm{Unif}\{1,\dots,n\}$, plus
+the elementary fact that two fixed points of a uniform permutation of
+size $m$ share a cycle with probability exactly $1/2$, independent of
+$m$ -- gives the exact closed form
+$\psi_n^{(2)}=8/15+4/(15n)+1/(15n^2)$; the parallel computation starting
+the walk at a rerouted point itself gives
+$\psi_n^{(2),R}=(5n+2)(n+1)/(12n^2)$. Recombining via the weighted
+average above gives the stated closed form for $\varphi_n^{(2)}$; its
+$1/n$ and $1/n^2$ terms arise from an incomplete cancellation between
+$\psi_n^{(2)}$'s and $\psi_n^{(2),R}$'s own $\Theta(1/n)$ corrections --
+the same mechanism that, at $K=1$, cancels \emph{completely} and
+produces $\varphi_n^{(1)}$'s cleaner $\Theta(1/n^2)$ rate.
+\end{proof}
+
+A single reroute disturbs exactly one background $\pi$-cycle (tractable,
+the mechanism behind Proposition~\ref{prop:k1}); two reroutes already
+require tracking whether they strike the same cycle or different ones,
+and in what order, but the case count stays small enough for an explicit
+closed form (Proposition~\ref{prop:k2}). For $K\ge3$ this case analysis
+grows combinatorially: three or more reroutes can strike the same cycle
+in any relative order, strike different cycles whose severed pieces
+later re-link through a further reroute's target, or chase each other
+through freshly explored territory in an order-dependent way that has no
+$K=2$ analogue -- not resolved here.
+
+\begin{openlemma}[Fixed-$K$ bridge, $K\ge3$]
+\label{ol:k3}
+$\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
+fixed integer $K\ge3$. \textbf{Neither proved nor disproved here.}
+\end{openlemma}
 
 \begin{proposition}[Conditional convergence]
 \label{prop:conditional}
 For every fixed $c\ge0$, $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$,
-\textbf{conditional on} Open Lemma~\ref{ol:k2} holding for every
-$K\ge2$.
+\textbf{conditional on} Open Lemma~\ref{ol:k3} holding for every
+$K\ge3$.
 \end{proposition}
 
 This follows immediately from Proposition~\ref{prop:mixing} plus
-Proposition~\ref{prop:k1} and the trivial $K=0$ case, given the open
-lemma. It is stated as a conditional proposition, not a theorem, because
-the open lemma is exactly what is missing; the empirical control that
-exists (\S\ref{sec:numerics}) is evidence for, not a substitute for,
-resolving it.
+Propositions~\ref{prop:k1} and \ref{prop:k2} and the trivial $K=0$ case,
+given the open lemma. It is stated as a conditional proposition, not a
+theorem, because the open lemma is exactly what is missing; the
+empirical control that exists (\S\ref{sec:numerics}) is evidence for,
+not a substitute for, resolving it. (Proposition~\ref{prop:mixing}'s
+hypothesis -- fixed-$K$ convergence for \emph{every} $K\ge0$ -- is now
+discharged unconditionally through $K=2$; the open lemma's scope has
+strictly narrowed from $K\ge2$ to $K\ge3$.)
 
 \section{Numerics}
 \label{sec:numerics}
@@ -346,9 +391,20 @@ cross-checks every closed form above:
 \item \textbf{Exact finite-$n$ enumeration} (\texttt{simulations/finite\_n.py},
   no sampling): Proposition~\ref{prop:k1}'s closed form
   $\varphi_n^{(1)}=2/3+1/(3n^2)$ verified as an exact rational identity
-  by brute-force enumeration for $n=1,\dots,9$; Open Lemma~\ref{ol:k2}
-  explored at $K=2$ for $n=2,\dots,8$, confirming monotone convergence
-  toward $\varphi_2=8/15$ without a settled rate; the full exact mixture
+  by brute-force enumeration for $n=1,\dots,9$. The same script's raw
+  $K=2$ table ($n=2,\dots,8$) is exactly the data that first showed
+  $\varphi_n^{(2)}$ converging monotonically toward $\varphi_2=8/15$
+  without the rescaled deviation $n^2(\varphi_n^{(2)}-\varphi_2)$ ever
+  settling to a constant -- now understood, via
+  Proposition~\ref{prop:k2}, as an artifact of rescaling by the wrong
+  power of $n$ (the true rate is $\Theta(1/n)$, so $n^2\cdot\text{dev}$
+  necessarily grows without bound, while $n\cdot\text{dev}\to1/30$ only
+  slowly). Proposition~\ref{prop:k2}'s closed form itself was verified,
+  independently of this package, by exact rational brute-force
+  enumeration up to $n=9$ and by an adversarial from-scratch
+  re-derivation (archive record: the theorem directory's
+  \texttt{k2\_open\_lemma/} subfolder, files \texttt{ATTEMPT.md} and
+  \texttt{adversarial/REFEREE\_REPORT.md}); the full exact mixture
   \eqref{eq:mixture} for $n=2,\dots,4$ shows $|\varphi(n,c)-\phiinf(c)|$
   shrinking monotonically in $n$ at fixed $c\in\{0.5,1,2\}$.
 \item \textbf{Monte Carlo at large $n$} (\texttt{simulations/monte\_carlo.py},
@@ -408,13 +464,18 @@ in the searches performed,'' never as ``does not exist'' or ``first.''
 \label{sec:open}
 
 \begin{enumerate}
-\item \textbf{Open Lemma~\ref{ol:k2}} itself: the fixed-$K$ finite-$n$
-  bridge for $K\ge2$. This is the single hypothesis separating
-  Proposition~\ref{prop:conditional} from a full theorem.
-\item \textbf{The rate} of that bridge, once resolved: $K=0$ is exact
-  (rate $0$), $K=1$ is exact at rate $1/(3n^2)$; $K=2$'s rescaled
-  deviation is not observed to settle over $n\le8$ (\S\ref{sec:numerics}).
-  No specific rate for $K\ge2$ should be assumed without further work.
+\item \textbf{Open Lemma~\ref{ol:k3}} itself: the fixed-$K$ finite-$n$
+  bridge for $K\ge3$ (resolved unconditionally at $K=0,1,2$ by
+  Propositions~\ref{prop:k1}--\ref{prop:k2}). This is the single
+  hypothesis separating Proposition~\ref{prop:conditional} from a full
+  theorem.
+\item \textbf{The rate} of that bridge for $K\ge3$: now known exactly
+  through $K=2$ -- $K=0$ is exact (rate $0$), $K=1$ is exact at rate
+  $1/(3n^2)$, and $K=2$ is exact at rate $1/(30n)+7/(10n^2)+1/(5n^3)$,
+  i.e.\ $\Theta(1/n)$, \emph{not} $\Theta(1/n^2)$
+  (\S\ref{sec:numerics}). The jump from $\Theta(1/n^2)$ at $K=1$ to
+  $\Theta(1/n)$ at $K=2$ is itself a caution against extrapolating any
+  specific rate for $K\ge3$ without further work.
 \item \textbf{Conjecture~\ref{conj:densityK}} (general-$K$ density) and
   its Poisson-mixture consequence, the full unconditional law
   $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$.

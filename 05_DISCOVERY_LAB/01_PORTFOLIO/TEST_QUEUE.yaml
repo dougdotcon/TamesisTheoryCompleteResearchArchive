@@ -2117,18 +2117,169 @@ queue:
         M-CLUST(b) em U_1/2 no limite n->infinito (para todo b fixo)
         NAO e afetada. Ver
         02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/
+    wave5_results:
+      k2_open_lemma: >
+        CASO K=2 PROVADO INCONDICIONALMENTE (DISC-DEC-022, frente a) --
+        upgrade real de status, nao apenas tentativa. Lema da Reducao A
+        (geral em K): phi_n^(K) = (K/n)*psi_n^(K,R) + (1-K/n)*psi_n^(K).
+        K=2: psi_n^(2) = 8/15 + 4/(15n) + 1/(15n^2), derivada por
+        analise de casos explicita (lema do co-ciclo, P=1/2 exato).
+        Verificado por referee adversarial hostil em 4 camadas
+        independentes (rederivacao manual, forca bruta ao nivel de
+        caso, ressoma simbolica sympy, forca bruta pura ate n=9) --
+        NENHUM ERRO ENCONTRADO. O referee ainda PROMOVEU um item que a
+        tentativa original so tinha ajustado por interpolacao
+        (psi_n^(2,R)) para derivacao provada do zero, dando a taxa
+        completa phi_n^(2) = 8/15 + 1/(30n) + 7/(10n^2) + 1/(5n^3) --
+        provada incondicionalmente, nao mais "provada modulo item
+        ajustado". Resolve a lacuna 11 do THEOREM.md original para
+        K=2: a taxa verdadeira e Theta(1/n), nao Theta(1/n^2) como a
+        tabela original sugeria (a tabela nunca estabilizou porque
+        media a grandeza errada). K>=3 permanece honestamente ABERTO
+        (numeros ate n=8 sao suporte, nao alegacao de taxa). THEOREM.md
+        corrigido com adendo datado ("Extensao, Estagio 3"), texto
+        original da Etapa 2 preservado intacto. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
+      intermediate_alpha_search: >
+        Mecanismo com alpha em (1/2,1) ENCONTRADO e CONFIRMADO
+        (DISC-DEC-022, frente b), com correcao de enquadramento apos
+        reproducao adversarial. M-WEIB(beta): manter destino uniforme
+        de M-U, variar a TAXA de reroteamento em forma de Weibull
+        Lambda(t)=c*t^beta em vez de q(s). Identidade H(t)=t*Lambda(t)/c
+        (MAIS geral do que alegado -- vale para qualquer perfil Lambda
+        deterministico, achado extra do adversarial). Forma fechada
+        phi_WEIB(c;beta)=int_0^1 e^(-c*t^(1+beta))dt, alpha=1/(1+beta)
+        em (1/2,1) para beta em (0,1). CORRECAO: a alegacao de que o
+        mecanismo estava "genuinamente fora da familia M-q" e FALSA
+        para beta<1 -- o adversarial resolveu a formula-mestre e
+        encontrou q(t)=[(1+beta)t^beta-beta*t^(1+beta)-t]/(1-t),
+        permanecendo em [0,1] para todo beta em (0,1) testado, ou seja
+        M-WEIB(beta<1) E um membro da familia M-q, com este q(t) como
+        realizacao explicita antes desconhecida -- resposta a pergunta
+        original fica MAIS forte (resolvida dentro do arcabouço ja
+        classificado, nao fora dele). Para beta>1 (ex. beta=2, q_min=
+        -0,125) q(t) sai de [0,1] -- so esse lado sai genuinamente de
+        M-q, confirmando por completo o corolario de quebra do piso
+        alpha>=1/2 (unico resultado que precisava estar fora de M-q, e
+        esta). Busca de literatura (15 buscas): nenhum processo nomeado
+        e, por reinterpretacao, um M-q com beta em (0,1) -- achado
+        estrutural: variacao regular natural sempre entra numa TAXA/
+        FUNCAO GERADORA (ilimitada), nunca numa probabilidade
+        condicional limitada com o perfil exigido. MECANISMO_ALPHA_
+        INTERMEDIARIO.md corrigido com adendo datado, texto original
+        preservado. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/intermediate_alpha_search/
+        (+ adversarial/ADVERSARIAL_VERDICT.md)
     next_action: >
       Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
-      completa (ondas 3-4), com dois gaps reais honestamente
-      documentados e nao escondidos: (a) o Lema Aberto K>=2 da ponte
-      n->infinito no proprio THEOREM.md; (b) o residuo sistematico
-      remanescente na correcao finito-n de M-CLUST(b) para b grande
-      (mclust_rigor/). Reaberturas futuras legitimas: uma tecnica
-      distinta para (a) (acoplamento explicito, sugerido mas nao
-      executado em THEOREM.md SS7.4); uma forma funcional mais rica
-      (alem de reparametrizacao (taxa,q(s)) mean-field) para (b); e so
-      DEPOIS da consolidacao (razoavelmente atingida no nucleo, ainda
-      que nao 100%) considerar testar a classe U_alpha em sistemas
-      empiricos reais -- explicitamente adiado por decisao do usuario,
-      e so deve ser feito com pre-registro completo, nao como busca de
+      substancialmente mais forte apos onda 5: caso K=2 da ponte
+      n->infinito agora PROVADO (nao mais aberto); a lacuna
+      "mecanismo intrinseco natural com alpha intermediario" agora
+      RESOLVIDA (dentro de M-q, com q(t) explicito). Dois gaps reais
+      permanecem, honestamente documentados: (a) K>=3 da ponte
+      n->infinito (estritamente mais estreito que antes); (b) o
+      residuo sistematico remanescente na correcao finito-n de
+      M-CLUST(b) para b grande (mclust_rigor/). Reaberturas futuras
+      legitimas: tecnica de acoplamento explicito (THEOREM.md SS7.4,
+      nao executada) ou extensao do metodo de analise de casos do K=2
+      para K=3 (custo combinatorio caracterizado pelo proprio referee);
+      forma funcional mais rica para (b); e so DEPOIS da consolidacao
+      (agora mais completa) considerar testar U_alpha (incl. o novo
+      M-WEIB) em sistemas empiricos reais -- explicitamente adiado por
+      decisao do usuario, exige pre-registro completo, nao busca de
       padrao.
+
+  - test_id: DISC-ARCHIVE-PHASE0-SURVEY-001
+    title: "Busca arquivo-inteira por candidatos genuinamente novos, nao restrita a TRI-RG"
+    domain: levantamento_exploratorio
+    parent_legacy: null
+    status: CLOSED_NULL
+    created_by: DISC-DEC-023
+    existing_assets:
+      - "02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md"
+    description: >
+      19 candidatos considerados em 7 areas do arquivo (particulas,
+      cosmologia, transicao quantico-classica, universalidade,
+      papers fundacionais, RECURSOS_PARA_PESQUISA, 90_LEGACY), cada um
+      checado no codigo/formula fonte (nao so prosa) e contra todas as
+      linhas ja fechadas.
+    result_summary: >
+      18/19 rejeitados com justificativa concreta e citada (file:line).
+      Padroes recorrentes: ajustes de 0 grau de liberdade (razao
+      genero-massa de neutrinos; VEV de Higgs como potencia de Omega;
+      fator de Casimir da tensao de Hubble -- o proprio codigo-fonte
+      documenta escanear constantes candidatas ate bater com a razao
+      ja conhecida, hubble_gap_solver.py:27-30); redundancia com linhas
+      ja fechadas (massa de barions por topologia = mesma falha de
+      knot-quark-mass; rho_Lambda~1/L_H^2 = mesma tautologia ja fechada
+      com rho_crit; bound holografico de superposicoes macroscopicas =
+      mesmo M_c ja mostrado inconsistente em ate 189,7x); matematica/
+      fisica estabelecida vestida de narrativa Tamesis sem alegacao
+      nova (teorema de Bruns 1887, experimento de Tonomura 1986, corte
+      de fita de Mobius 1858); objetos nunca derivados o suficiente
+      para adjudicar (classes U_0 e U_2, ao contrario de U_1/2, nunca
+      chegaram a forma fechada candidata); dado nao-discriminante ou
+      inacessivel (theta CP forte, correcao topologica g-2 do muon,
+      modos-B do CMB, assinatura GW de EMRI, "realce 5x" do JWST --
+      parametro livre testado contra curva explicitamente esquematica,
+      nao real); fora de escopo por desenho (P vs NP -- barrado
+      permanentemente por DISC-DEC-001; Landauer aplicado a morte/
+      reencarnacao -- metafisica).
+      1/19 marcado viable:true mas EXPLICITAMENTE IMATURO: um paper de
+      topologia cognitiva (90_LEGACY/08_COGNITIVE_TOPOLOGY) prevendo
+      assinaturas espectrais distintas do Laplaciano de conectoma EEG
+      para depressao vs. ansiedade -- territorio genuinamente novo,
+      dados publicos reais localizados e verificados por fetch
+      (Mumtaz et al. MDD/HC no Figshare; DASPS ansiedade no IEEE
+      DataPort), modelo concorrente nomeavel (literatura clinica de
+      teoria de grafos publicada) -- mas SEM limiar quantitativo nem
+      regra de decisao pre-declarada como escrito; nao passa na barra
+      para pre-registro sem uma etapa de operacionalizacao propria
+      (mesmo tipo de passo que DISC-DEC-004 fez para SPARC-002).
+    adversarial_verdict: not_applicable_no_positive_finding
+    next_action: >
+      Nenhuma acao obrigatoria nesta frente de busca (fechada). O lead
+      de topologia cognitiva foi promovido a linha propria --
+      ver DISC-COGNITIVE-EEG-SPECTRAL-001 abaixo (DISC-DEC-024).
+    stop_condition: >
+      [ja cumprido] forcar um candidato sem criterio de sucesso claro;
+      tratar "veio vazio" como falha do laboratorio -- e um resultado
+      negativo honesto, catalogado com peso integral, mesmo espirito
+      do fechamento CLOSED_NULL de DISC-TRI-RG-001.
+
+  - test_id: DISC-COGNITIVE-EEG-SPECTRAL-001
+    title: "Assinaturas espectrais de conectoma EEG para depressao vs. ansiedade -- operacionalizacao"
+    domain: neurociencia_computacional
+    parent_legacy: "90_LEGACY/08_COGNITIVE_TOPOLOGY/.../PAPER_B_SPECTRAL_SIGNATURES.md (identificado por DISC-ARCHIVE-PHASE0-SURVEY-001)"
+    status: CANDIDATE_FORMULATING
+    created_by: DISC-DEC-024
+    existing_assets: []
+    description: >
+      Linha nova, genuinamente fora do escopo de qualquer linha ja
+      fechada (nem TRI-RG, nem SPARC, nem RH-REAL, nem CORE-NUMERICS).
+      Hipotese informal do arquivo legado: depressao e ansiedade tem
+      assinaturas distintas no espectro do Laplaciano de conectoma EEG
+      (grafo funcional derivado de coerencia/conectividade entre
+      eletrodos). Dados reais ja localizados e verificados por fetch
+      (nao apenas citados): Mumtaz et al. (MDD vs. controles saudaveis,
+      Figshare); DASPS (ansiedade, IEEE DataPort).
+    next_action: >
+      Operacionalizacao (mesmo tipo de passo que DISC-DEC-004 fez para
+      SPARC-002, ANTES de qualquer pre-registro ou dado real tocado):
+      (1) definir precisamente o observavel espectral (quais
+      autovalores/estatisticas do Laplaciano, qual construcao de grafo
+      a partir do EEG bruto -- coerencia? PLV? em que banda?); (2)
+      nomear modelo(s) concorrente(s) da literatura de grafos clinicos
+      publicada com previsao distinta; (3) fixar limiar quantitativo e
+      regra de decisao a priori; (4) verificar acesso real aos dois
+      datasets (download, nao so citacao) e checar se sao comparaveis
+      (montagem de eletrodos, taxa de amostragem, protocolo). So depois
+      disso um PREREGISTRATION.md pode ser travado.
+    stop_condition: >
+      tocar qualquer dado real (baixar e computar) antes da
+      operacionalizacao completa e do pre-registro travado; inferir
+      diagnostico clinico a partir de resultado espectral sem validacao
+      -- este e um teste sobre uma alegacao matematica de grafos, nao
+      uma ferramenta de diagnostico; qualquer alegacao medica ou
+      clinica a partir de um resultado exploratorio desta linha.

@@ -26,7 +26,7 @@ O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISA
 | Tamesis `M_c v1` | **Hipótese testável** | O valor `M_c = 5.292674126388712e-16 kg` é um parâmetro do modelo, não uma medição. |
 | Evidência física independente | **Ainda não estabelecida** | Não há, neste arquivo, confirmação experimental da ontologia Tamesis. |
 | Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
-| Adjudicação numérica do núcleo | **Consolidação matemática concluída (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com um único gap honestamente aberto. |
+| Adjudicação numérica do núcleo | **Consolidação matemática concluída, gap fechado para K=2 (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com o Lema Aberto agora restrito a `K≥3` (K=0,1,2 provados). |
 
 ### O programa de adjudicação (Discovery Lab, atualizado 2026-08-22)
 
@@ -46,7 +46,8 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 | Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
 | Zeros de ζ (RH-REAL) | 12/12 itens do levantamento com disposição final | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); FHK e variância do número fecharam `CLOSED_INCONCLUSIVE`, ambos com componente forte confirmado adversarialmente (exclusão do lado iid ≥8,8σ; exclusão de GUE ingênuo a até 203σ — reprodução adversarial ainda achou e corrigiu um 3º bug real no estimador primário) |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
-| **Função-limite U₁/₂ (ondas 2–3, consolidada)** | 1 teorema + 1 generalização | **Provada, verificada por referee adversarial, publicada como paper + pacote reproduzível** (ver abaixo) |
+| **Função-limite U₁/₂ (ondas 2–5, consolidada)** | 1 teorema + 1 generalização + caso K=2 do Lema Aberto | **Provada, verificada por referee adversarial, publicada como paper + pacote reproduzível; K=2 provado incondicionalmente na onda 5, K≥3 continua aberto** (ver abaixo) |
+| Levantamento arquivo-inteiro de candidatos (Fase 0, além de TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com razão concreta citada; 1 lead imaturo (assinaturas espectrais de EEG cognitivo) promovido a nova linha candidata em etapa de operacionalização, sem dado real ainda |
 
 **O resultado positivo principal:** a classe de universalidade U₁/₂ (permutação
 aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exata
@@ -61,17 +62,29 @@ confirmado por enumeração exata). Esse resultado é agora um **Teorema provado
 correto do *size-biasing* dos arcos visitados, e foi revisado por um agente
 independente atuando como *referee* hostil — **nenhum erro encontrado**. A
 ponte entre o modelo finito e o objeto-limite está provada de forma exata para
-`K=0,1` (com uma fórmula finita nova, `φ_n^{(1)} = 2/3 + 1/(3n²)`) e reduzida a
-um único **Lema Aberto** preciso para `K≥2`, declarado — não escondido — como o
-gap real do documento. A lei condicional é o caso de parâmetro fixo de
+`K=0,1` (com uma fórmula finita nova, `φ_n^{(1)} = 2/3 + 1/(3n²)`) e, desde a
+onda 5 (2026-08-22), também para `K=2` — `φ_n^{(2)} = 8/15 + 1/(30n) +
+7/(10n²) + 1/(5n³)`, provado incondicionalmente (Lema da Redução A + lema do
+co-ciclo, verificado por *referee* adversarial em 4 camadas independentes, sem
+erros, que ainda promoveu um termo antes apenas ajustado por interpolação a
+derivação do zero). O único **Lema Aberto** que resta, declarado — não
+escondido — como o gap real do documento, agora é estritamente mais estreito:
+`K≥3`. A lei condicional é o caso de parâmetro fixo de
 Hansen & Jaworski (EJC, 2014); a mistura de Poisson com forma fechada `erf`
 não foi encontrada em busca sistemática de literatura (35+ consultas
 registradas), com a ressalva explícita de que isso não equivale a "inédito".
 Uma segunda frente derivou **por que o expoente é exatamente 1/2**: para toda
 uma família paramétrica de mecanismos de perturbação, `α ∈ [1/2, 1]` sempre —
 `α < 1/2` é *provado impossível* (um efeito de aglomeração quadrático que
-persiste mesmo sem qualquer "morte" de ciclicidade). Nenhuma implicação física
-é alegada — é matemática combinatória pura sobre um ensemble específico.
+persiste mesmo sem qualquer "morte" de ciclicidade). A onda 5 também localizou
+e confirmou um mecanismo natural (`M-WEIB(β)`, taxa de Weibull não-homogênea)
+que atinge todo `α ∈ (1/2, 1)` intermediário — a verificação adversarial
+mostrou que, para `β<1`, esse mecanismo é na verdade um membro explícito da
+família `M-q` já classificada (não uma exceção a ela), o que torna a resposta
+mais forte, não mais fraca; para `β>1` o mecanismo genuinamente sai de `M-q`,
+confirmando por completo a quebra do piso `α≥1/2` fora dela. Nenhuma
+implicação física é alegada — é matemática combinatória pura sobre um ensemble
+específico.
 
 **Onde encontrar tudo:** o teorema completo e o *referee report* estão em
 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`; a
@@ -82,6 +95,13 @@ e 49 testes automatizados, está em **[`tamesis-cycle-survival/`](tamesis-cycle-
 E a tabela honesta de **tudo que este laboratório já tentou e não sobreviveu**
 — para que este único resultado positivo seja lido no contexto certo — está em
 **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**.
+
+Um levantamento honesto de todo o arquivo Tamesis (não restrito a TRI-RG, 19
+candidatos em 7 áreas) fechou `CLOSED_NULL` — 18/19 rejeitados com razão
+concreta citada — e promoveu o único lead imaturo encontrado (assinaturas
+espectrais de EEG cognitivo, depressão vs. ansiedade) a nova linha candidata
+em etapa de operacionalização, sem qualquer dado real ainda tocado. Ver
+`05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md`.
 
 ## Visão do laboratório
 

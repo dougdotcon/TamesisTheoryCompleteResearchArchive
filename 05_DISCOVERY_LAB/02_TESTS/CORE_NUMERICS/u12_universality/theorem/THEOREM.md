@@ -1,5 +1,14 @@
 # THEOREM — the u12 limit law φ_∞(c): rigorous core and the n→∞ bridge
 
+> **[Atualização 2026-08-22 — ver "Extensão, Estágio 3" ao final do
+> documento]** O sumário original abaixo (fechado ao fim da Etapa 2)
+> descreve o caso `K=2` como parte do Lema Aberto não-provado. Isso
+> **não é mais exato**: o Estágio 3 (onda 5, `DISC-DEC-022`) prova o
+> caso `K=2` incondicionalmente, verificado por referee adversarial
+> independente sem nenhum erro encontrado. O texto abaixo é preservado
+> intacto como registro histórico da Etapa 2; o estado atual e correto
+> do documento está na seção de extensão ao final.
+
 > **SUMÁRIO EXECUTIVO (documento inteiro, adicionado ao fechar a Etapa
 > 2).** Este documento prova, de forma autocontida a partir de
 > primitivas explicitamente declaradas, cerca de **dez afirmações
@@ -1322,3 +1331,90 @@ applicable) exactly what partial progress exists. Items 1–4 are new to
 Stage 2; items 5–7 restate Stage 1's own residual gaps (old §6, items
 7/10/11) without alteration; items 8–11 are newly identified while
 writing Stage 2 and were not present in Stage 1's gap list.
+
+**[Ver Estágio 3 abaixo — item 11 acima está PARCIALMENTE FECHADO: o
+caso K=2 do Lema Aberto foi provado, wave 5, DISC-DEC-022, 2026-08-22.
+K≥3 permanece aberto exatamente como descrito.]**
+
+---
+
+## [Extensão, Estágio 3 — 2026-08-22] O caso K=2 do Lema Aberto: PROVADO
+
+Onda 5 (`DISC-DEC-022`) autorizou uma tentativa delimitada do Lema
+Aberto de §7.4 usando a estratégia de acoplamento ali esboçada. A
+tentativa (`../k2_open_lemma/ATTEMPT.md`) não executou o acoplamento
+literal, mas encontrou uma rota discreta autocontida que resolve o caso
+`K=2` por completo — verificada por um referee adversarial hostil
+independente (`../k2_open_lemma/adversarial/REFEREE_REPORT.md`), que
+não encontrou nenhum erro e ainda fortaleceu um dos resultados (ver
+abaixo). Este é o registro canônico e resumido; os documentos-fonte tem
+o detalhe completo, incluindo todas as provas passo a passo.
+
+**Resultado 1 — Lema da Redução A (PROVADO, K geral):**
+`φ_n^{(K)} = (K/n)·ψ_n^{(K),R} + (1−K/n)·ψ_n^{(K)}`, reduzindo a ponte
+geral à convergência da quantidade "ponto genérico" `ψ_n^{(K)}` sozinha
+(o termo do "ponto reroteado, ele mesmo" morre por uma cota `O(K/n)→0`
+de graça). Verificado como identidade exata em `n` finito pelo referee,
+contra enumeração de força bruta própria, para `K=1` (`n`=2–10), `K=2`
+(`n`=3–9) e `K=3` (`n`=4–8) — 24/24 casos batendo exatamente.
+
+**Resultado 2 — K=1 rederivado por esta rota (PROVADO, consistência):**
+`ψ_n^{(1)} = 2/3+1/(6n)`, `ψ_n^{(1),R} = 1/2+1/(2n)` — recombinando via
+o Lema A, reproduz exatamente a Proposição 4 (`φ_n^{(1)}=2/3+1/(3n²)`),
+revelando um cancelamento genuíno de termo `O(1/n)` entre as duas
+peças. Confirmado pelo referee por enumeração própria, `n`=2–10.
+
+**Resultado 3 — Lema do co-ciclo (PROVADO):** a probabilidade
+`P=1/2` exata usada na análise de casos do `K=2` foi re-derivada do
+zero pelo referee (`E[(L−1)/(m−1)]=1/2`) e confirmada por força bruta
+para `m`=2–8, zero divergências.
+
+**Resultado 4 — o CASO K=2 (PROVADO, incondicionalmente):**
+`ψ_n^{(2)} = 8/15 + 4/(15n) + 1/(15n²)`, derivada por uma análise de
+casos explícita (três casos sobre se as duas fontes de reroteamento
+caem no próprio ciclo-π do ponto de referência). Verificada pelo
+referee em quatro camadas independentes: rederivação manual de cada
+peso de caso; força bruta ao nível dos casos (120 configurações,
+`n`=3–7, 0 divergências); ressoma simbólica independente via sympy
+(diferença simbólica exatamente 0); força bruta pura a partir da
+definição crua, `n`=3–9 (`n`=9 é um ponto novo, além do alcance
+original). Como `8/15 = φ_2` (a média de Wallis para `K=2`), isto prova
+`φ_n^{(2)}→φ_2` **incondicionalmente** — mais forte do que qualquer
+coisa que este documento estabelecia antes.
+
+**Resultado 5 — a taxa exata bônus, PROMOVIDA de "ajustada" para
+PROVADA:** a peça `ψ_n^{(2),R}` (originalmente encontrada por
+interpolação racional exata e explicitamente rotulada "ajustada, não
+derivada" pela tentativa original) foi **derivada do zero pelo próprio
+referee** — o mesmo método de exploração/conjunto-alvo, aplicado
+começando NO ponto-fonte (não num ponto genérico), reduz exatamente a
+`P_b(m,0)`/`P_c(m,0,k)`. A ressoma simbólica reproduz
+`(n+1)(5n+2)/(12n²)` exatamente (diferença simbólica 0), confirmada ao
+nível de caso (75 configurações, `n`=3–7, 0 divergências), e um teste
+de unicidade do ansatz mostra que o ajuste original era
+sobre-determinado, não arbitrário. Isto **promove** a taxa completa
+
+`φ_n^{(2)} = 8/15 + 1/(30n) + 7/(10n²) + 1/(5n³)`
+
+de "provada condicionalmente a um item ajustado" para **provada
+incondicionalmente** — e resolve o item 11 da lista de lacunas para
+`K=2`: a taxa verdadeira de convergência é **Θ(1/n)**, não Θ(1/n²)
+como a tabela original deste documento (§7.4) sugeria antes de ter a
+forma fechada — a tabela nunca estabilizou porque estava medindo a
+grandeza errada, não porque a convergência fosse anormalmente lenta.
+
+**K≥3: continua honestamente ABERTO.** O custo combinatório do método
+de análise de casos usado para `K=2` cresce com o número de fontes
+sobre o próprio ciclo × sua ordenação × ordem de disparo do resto — o
+referee confirma que a numeração para `K=3` (`n`=4–8) é apenas
+suporte numérico, não uma alegação de taxa, exatamente como a
+tentativa original já havia rotulado. Nenhum item foi inflado.
+
+**Veredito honesto atualizado do documento inteiro:** Teorema 1 +
+corolários (Estágio 1); Lema 2 (Estágio 1); Proposição 3 (Estágio 2);
+Proposição 4 = ponte exata K=0,1 (Estágio 2); **ponte exata K=2,
+incluindo taxa completa (Estágio 3, novo) — agora PROVADA, não mais
+listada como faltante**. Resta como PROPOSIÇÃO CONDICIONAL apenas a
+ponte geral para `K≥3` (Lema Aberto, agora estritamente mais estreito
+do que "K≥2"). Conjecturas 1–2 (§8) inalteradas. Fontes completas:
+`../k2_open_lemma/ATTEMPT.md`, `../k2_open_lemma/adversarial/REFEREE_REPORT.md`.

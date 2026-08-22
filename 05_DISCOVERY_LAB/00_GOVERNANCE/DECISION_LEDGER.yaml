@@ -1348,3 +1348,93 @@ decisions:
     untouched_safeguards:
       - "frente (a) NAO toca o holdout selado de SPARC-004 -- so validacao sintetica; abrir o holdout exigiria um lock formal proprio, decisao futura separada, mesmo precedente de FHK/variancia-do-numero"
       - "frente (b) e busca e relatorio, nao computo sobre dado real -- qualquer candidato encontrado vira uma frente propria futura, com pre-registro proprio"
+
+  - decision_id: DISC-DEC-024
+    date: 2026-08-22
+    decision: >
+      Integrar a onda 5 completa (DISC-DEC-022): caso K=2 do Lema
+      Aberto PROVADO incondicionalmente (verificado por referee
+      adversarial sem nenhum erro, que ainda promoveu um item de
+      "ajustado" para "provado do zero"); mecanismo com alpha
+      intermediario ENCONTRADO e CONFIRMADO, com correcao de
+      enquadramento (M-WEIB para beta<1 e membro da familia M-q ja
+      classificada, nao um escape dela -- resposta mais forte, nao
+      mais fraca). THEOREM.md e MECANISMO_ALPHA_INTERMEDIARIO.md
+      corrigidos com adendos datados, textos originais preservados
+      intactos.
+    rationale: >
+      K=2: Lema da Reducao A (geral em K) + analise de casos explicita
+      (lema do co-ciclo P=1/2) dao psi_n^(2)=8/15+4/(15n)+1/(15n^2)
+      exato, provando phi_n^(2)->phi_2 sem condicionalidade. Referee
+      hostil independente verificou em 4 camadas (rederivacao manual,
+      forca bruta por caso, ressoma simbolica, forca bruta pura ate
+      n=9) -- 0 erros -- e ainda derivou do zero a peca que a tentativa
+      original so tinha ajustado por interpolacao, promovendo a taxa
+      completa phi_n^(2)=8/15+1/(30n)+7/(10n^2)+1/(5n^3) a provada
+      incondicional. Isto resolve honestamente a lacuna 11 do THEOREM.md
+      original PARA K=2 (a taxa e Theta(1/n), nao Theta(1/n^2)); K>=3
+      permanece aberto, agora um problema estritamente mais estreito.
+      Alpha intermediario: M-WEIB(beta) deriva de uma identidade real
+      e mais geral do que alegada (H(t)=t*Lambda(t)/c vale para
+      qualquer perfil de taxa), mas a verificacao adversarial mostrou
+      que, para beta<1 (a regiao que importava), o mecanismo e
+      EQUIVALENTE a um membro explicito da familia M-q ja classificada
+      (q(t) fechado, permanece em [0,1]) -- a alegacao de "fora de
+      M-q" nao se sustenta ai, mas o resultado central (existe um
+      mecanismo natural com alpha em (1/2,1)) fica mais forte por
+      estar dentro do arcabouço ja provado. Para beta>1, o mecanismo
+      genuinamente sai de M-q (q(t) sai de [0,1]), confirmando por
+      completo a quebra do piso alpha>=1/2 la fora.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (adendo datado 'Extensao, Estagio 3'; texto original da Etapa 2 preservado)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/intermediate_alpha_search/MECANISMO_ALPHA_INTERMEDIARIO.md (adendo datado; texto original preservado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave5_results + next_action)"
+      - "tamesis-cycle-survival/ (atualizacao do paper em andamento, agente separado)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- correcoes/extensoes dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "K>=3 permanece explicitamente aberto -- nenhuma alegacao de prova geral"
+      - "textos originais de THEOREM.md e MECANISMO_ALPHA_INTERMEDIARIO.md preservados intactos, correcoes sao adendos datados, nunca reescrita silenciosa"
+      - "nenhuma alegacao de fisica nova ou aplicacao a sistemas empiricos reais -- matematica combinatoria pura"
+
+  - decision_id: DISC-DEC-025
+    date: 2026-08-22
+    decision: >
+      Fechar DISC-ARCHIVE-PHASE0-SURVEY-001 como CLOSED_NULL (18/19
+      candidatos honestamente rejeitados, resultado negativo
+      catalogado com peso integral). Promover o unico lead imaturo
+      (assinaturas espectrais de EEG para depressao vs. ansiedade) a
+      nova linha candidata DISC-COGNITIVE-EEG-SPECTRAL-001, status
+      CANDIDATE_FORMULATING, e autorizar sua etapa de operacionalizacao
+      (nao pre-registro ainda, nao dado real ainda).
+    rationale: >
+      A frente (b) de DISC-DEC-023 completou o mandato: revisou 19
+      candidatos de todo o arquivo (nao restrito a TRI-RG), 7 areas,
+      cada um checado no codigo/formula fonte contra todas as linhas
+      ja fechadas. 18 rejeitados com razao concreta e citada -- mesmos
+      padroes ja conhecidos desta linha (ajuste de 0 grau de liberdade,
+      redundancia com o ja fechado, matematica estabelecida sem
+      alegacao nova, dado inacessivel/nao-discriminante). O unico
+      candidato com dado real verificado e modelo concorrente nomeavel
+      (topologia cognitiva EEG) nao tem observavel nem regra de decisao
+      precisos como escrito -- exatamente a mesma situacao que motivou
+      DISC-DEC-004 para SPARC-002, que exigiu uma etapa de
+      operacionalizacao explicita antes de qualquer pre-registro. Nao
+      autorizada computacao sobre dado real nesta decisao -- apenas a
+      etapa de definir o observavel, o modelo nulo, e a regra de
+      decisao a priori.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (novo test_id DISC-ARCHIVE-PHASE0-SURVEY-001 CLOSED_NULL; novo test_id DISC-COGNITIVE-EEG-SPECTRAL-001 CANDIDATE_FORMULATING)"
+      - "05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/ (novo, etapa de operacionalizacao)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "primeira linha do portfolio fora dos eixos matematico/cosmologico/RH -- dominio neurociencia computacional, testando uma alegacao de grafos/espectro, nao fazendo nem implicando qualquer alegacao clinica ou diagnostica"
+    untouched_safeguards:
+      - "nenhum dado real (EEG) sera baixado ou computado nesta etapa -- so operacionalizacao (observavel, modelo nulo, regra de decisao)"
+      - "stop_condition explicita contra qualquer alegacao medica/clinica a partir de resultado exploratorio"
+      - "pre-registro formal exigido antes de qualquer computo real, mesma disciplina de toda a linha DISC-RH-REAL-001/SPARC"

@@ -256,25 +256,59 @@ taken as given. The separate question is whether the *finite* model
   point and the uniform destination `U`. `simulations/finite_n.py`
   brute-force-verifies this identity exactly (rational arithmetic) for
   `n` up to 9.
+- **`K=2` (PROVED exactly, with an explicit rate — resolved after the
+  package's initial release).**
+  `φ_n^{(2)} = 8/15 + 1/(30n) + 7/(10n²) + 1/(5n³)`, exactly, for every
+  `n ≥ 3`. Proved by a reduction lemma — valid for every fixed `K` —
+  splitting `φ_n^{(K)}` into a weighted average of a "generic point"
+  quantity `ψ_n^{(K)}` and a "rerouted point itself" quantity
+  `ψ_n^{(K),R}`, whose weight `K/n → 0` for fixed `K`; at `K=2` an
+  explicit discrete exploration/case-analysis argument (case-splitting
+  on whether each of the two reroutes lies on the reference point's own
+  `π`-cycle, using the elementary fact that two fixed points of a
+  uniform permutation of size `m` share a cycle with probability
+  exactly `1/2`, independent of `m`) computes both `ψ_n^{(2)} = 8/15 +
+  4/(15n) + 1/(15n²)` and `ψ_n^{(2),R} = (5n+2)(n+1)/(12n²)` in closed
+  form. Both this method and the final closed form were verified by
+  exact rational brute-force enumeration (`n` up to 9) and, separately,
+  by an independent adversarial referee who re-derived every piece from
+  scratch and found no error (archive record:
+  `.../u12_universality/theorem/k2_open_lemma/ATTEMPT.md` and
+  `adversarial/REFEREE_REPORT.md`). **The rate is `Θ(1/n)` (leading
+  term `1/(30n)`), not `Θ(1/n²)`** — this is the correct resolution of
+  what looked, in this package's original `n²`-rescaled table
+  (`simulations/finite_n.py`, `n` up to 7-8), like a rate that simply
+  never settled: it was never going to settle under that rescaling,
+  because the true leading correction is order `1/n`, not `1/n²`. The
+  `K=1 → K=2` jump from a clean `Θ(1/n²)` to `Θ(1/n)` reflects a genuine
+  structural difference, not an error: at `K=1`, `ψ_n^{(1)}`'s and
+  `ψ_n^{(1),R}`'s own `Θ(1/n)` corrections cancel *exactly* when
+  recombined; at `K=2` they very nearly, but not exactly, cancel,
+  leaving a small residual `Θ(1/n)` term.
 
-**The exact open gap.** For `K ≥ 2`, `φ_n^{(K)} → φ_K` (the "fixed-`K`
+**The exact open gap.** For `K ≥ 3`, `φ_n^{(K)} → φ_K` (the "fixed-`K`
 bridge") is **neither proved nor disproved**. A single reroute disturbs
-exactly one background cycle (tractable, §K=1 above); `K ≥ 2` reroutes
-can strike the same cycle in either order or strike different cycles
-whose severed pieces later re-link — a combinatorial explosion not
-resolved here. Exact enumeration at `K=2` (`simulations/finite_n.py`,
-`n` up to 7-8) shows `φ_n^{(2)}` decreasing monotonically toward `φ_2`,
-but the rescaled deviation `n²(φ_n^{(2)}-φ_2)` is *not* settling to a
-constant over the tested range — so, unlike `K=1`'s clean `O(1/n²)`
-rate, **no specific convergence rate for `K≥2` should be assumed**.
+exactly one background cycle (tractable, `K=1` above); two reroutes
+already require tracking which cycle(s) they strike and in what order,
+but the case count stays small enough for an explicit closed form
+(`K=2` above). For `K ≥ 3` this case analysis grows combinatorially:
+three or more reroutes can strike the same cycle in any relative order,
+strike different cycles whose severed pieces later re-link, or chase
+each other through freshly explored territory in an order-dependent way
+that has no `K=2` analogue — not resolved here. Exploratory (not
+closed-form, not rate-establishing) exact enumeration at `K=3`, `n` up
+to 8, is qualitatively consistent with `ψ_n^{(3)} → φ_3`, but on that
+small a range is explicitly *not* sufficient to support any rate claim
+(the `K=2` episode above is itself the cautionary example for why not).
 
 Consequently: the full statement "`φ(n,c) → φ_∞(c)` for every `c`" is a
 **conditional proposition** — it follows from the (unconditionally
-proved) mixing reduction *given* the open `K≥2` bridge lemma, which
-remains open. It is not a theorem in its own right. The empirical
-control that exists (exact enumeration to small `n`, Monte Carlo to
-large `n`, both reproduced in `simulations/`) is evidence for this
-conditional statement, not a proof of it.
+proved) mixing reduction *given* the open `K≥3` bridge lemma (narrowed
+from `K≥2`, now that `K=2` is proved), which remains open. It is not a
+theorem in its own right. The empirical control that exists (exact
+enumeration to small `n`, Monte Carlo to large `n`, both reproduced in
+`simulations/`) is evidence for this conditional statement, not a proof
+of it.
 
 ---
 
@@ -291,8 +325,12 @@ conditional statement, not a proof of it.
 
 Neither conjecture is used anywhere above as though it were proved; both
 are numerically supported (Kolmogorov–Smirnov tests, no rejection) and
-neither is claimed as established. The `K≥2` fixed-`K` bridge (§6) is a
+neither is claimed as established. The `K≥3` fixed-`K` bridge (§6) is a
 distinct, third kind of open item — a convergence statement between
 two well-defined finite/infinite objects, not a guessed closed form —
-and is not counted as a "Conjecture 3" for that reason.
+and is not counted as a "Conjecture 3" for that reason. (Note: this is
+unrelated to the general-`K` density Conjecture 1 above, which remains
+open for every `K≥2`, `K=2` included — the `K=2` result resolved in §6
+is about the *mean* `φ_n^{(2)}→φ_2`, not about the full distributional
+law `f_{M_2}(x)`.)
 

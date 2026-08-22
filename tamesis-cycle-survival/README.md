@@ -30,26 +30,33 @@ document:
    `L(c)` (Theorem 1), its series and tail asymptotic (Corollaries 4.1,
    4.2), the conditional-`K` mean for every `K` (Wallis integral), the
    `K=1` conditional density, and — on the finite-`n` side — the exact
-   `K=0` and `K=1` bridge cases (including an exact rate `O(1/n²)` for
-   `K=1`) plus an unconditional reduction lemma.
+   `K=0`, `K=1`, and `K=2` bridge cases (exact rates `1/(3n²)` at `K=1`
+   and `1/(30n)+7/(10n²)+1/(5n³)`, i.e. `Θ(1/n)`, at `K=2` — *not* the
+   `Θ(1/n²)` the `K=0,1` pattern alone would suggest) plus an
+   unconditional, fully `K`-general reduction lemma.
 2. **CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every `c`"
    follows from that reduction lemma *only if* an explicitly stated open
-   lemma holds for every `K ≥ 2` (the finite-`n` bridge at fixed `K≥2`).
-   That lemma is neither proved nor disproved here — it is numerically
-   explored (`simulations/finite_n.py`) with an honest negative note:
-   the `K=1` case's clean `1/n²` rate does *not* obviously extend to
-   `K=2`.
+   lemma holds for every `K ≥ 3` (the finite-`n` bridge at fixed `K≥3`;
+   narrowed from `K≥2` once `K=2` was proved — see below). That lemma is
+   neither proved nor disproved here — it is numerically explored
+   (`simulations/finite_n.py`, `K=3` data in the archive source) with an
+   honest caution: the `K=1→K=2` jump in rate (`Θ(1/n²)` to `Θ(1/n)`)
+   shows a clean rate at small `K` does not reliably extrapolate, so no
+   rate for `K≥3` should be assumed.
 3. **CONJECTURED**, numerically supported (Kolmogorov–Smirnov, no
    rejection) but not proved: the full conditional-`K` cyclic-mass
-   density for `K≥2`, and the resulting unconditional distributional law
-   `M(c) =^d min(1, √(E/c))`.
+   *density* for `K≥2` (this is a distributional claim, unrelated to and
+   unaffected by the `K=2` bridge/mean result in tier 1 above), and the
+   resulting unconditional distributional law `M(c) =^d min(1, √(E/c))`.
 
 No claim in this package is upgraded past its status in `proofs/derivation.md`.
 Full source of record (with the complete, longer proofs and the master
 list of every open gap): the archive's internal theorem document,
-`05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md`
-(not included in this package; this package is meant to stand on its own
-via `proofs/derivation.md`).
+`05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md`,
+plus its Stage 3 extension resolving `K=2`
+(`.../theorem/k2_open_lemma/ATTEMPT.md` and
+`adversarial/REFEREE_REPORT.md`) — neither included in this package;
+this package is meant to stand on its own via `proofs/derivation.md`.
 
 ## Literature priority
 
@@ -92,9 +99,13 @@ test suite). No other dependencies. Every script is deterministic
 cd tamesis-cycle-survival
 
 # Exact (no-sampling) brute-force enumeration at small n: reproduces
-# Proposition 4 (K=1 closed form, exact for n=1..9), an exact-enumeration
-# table for K=2 (n=2..7, no closed form known -- see proofs/derivation.md
-# section 6), and the full phi(n,c) exact Binomial mixture (n=2..4).
+# Proposition 4 (K=1 closed form, exact for n=1..9), plus a raw
+# exact-enumeration table for K=2 (n=2..7) -- this script itself only
+# prints the raw values, not a comparison to a closed form; the exact
+# K=2 closed form phi_n^(2) = 8/15 + 1/(30n) + 7/(10n^2) + 1/(5n^3) is
+# now proved (see proofs/derivation.md section 6) but was verified
+# independently of this script -- and the full phi(n,c) exact Binomial
+# mixture (n=2..4).
 python3 simulations/finite_n.py
 # -> prints three tables; writes data/finite_n_results.json
 # (slower optional ranges: --max-n-k2 8 takes ~30-60s, --max-n-full 5

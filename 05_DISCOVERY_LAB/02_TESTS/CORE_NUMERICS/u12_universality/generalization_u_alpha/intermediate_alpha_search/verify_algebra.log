@@ -1,0 +1,29 @@
+=== A) master formula re-derivation (general q(s)) ===
+bracket(s,t) = q(s) + (1-q(s))*(t-s)/(1-s) = (s + t*q(s) - t - q(s))/(s - 1)
+check bracket == 1-(1-q)(1-t)/(1-s):  residual = 0 (should be 0)
+=> confirms bracket integrates to exactly H_q(t) of DERIVATIONS.md (1.1)
+
+=== B) q(s)=s: bracket(s,t) simplifies to exactly t (s-independent) ===
+bracket(s,t)|_(q=s) = t  (should be just 't')
+CONFIRMED: bracket(s,t) = t identically for q(s)=s.
+
+=== C) H(t) = t*Lambda(t)/c for q(s)=s and ARBITRARY lambda(s) ===
+c*H(t) = int_0^t lambda(s)*t ds = t*Integral(lam(s), (s, 0, t))  (should be t*Lambda(t) with Lambda(t)=int_0^t lambda)
+=> confirmed: c*H(t) = t * Lambda(t) exactly, for ANY lambda(s), given q(s)=s.
+
+=== D) M-WEIB(beta): Lambda(t) = c*t^beta ===
+H_weib(t) = t*Lambda(t)/c = t**(beta + 1) = t^(1+beta)
+boundary beta->1: H -> t^2 (recovers M-U exactly). Direct substitution: t**2
+boundary beta->0: Lambda(t) -> c (constant, atom at s=0+); H -> t^(1) = t. Direct substitution: t  (recovers M-SELF/M-PREV's H(t)=t exactly)
+
+=== D2) tail exponent via Watson's lemma sanity check (numeric, beta=1/2) ===
+beta=0.25: alpha_predicted=1/(1+beta)=0.800000  quadrature log-log slope (c=50..4000) = 0.800000
+beta=0.5: alpha_predicted=1/(1+beta)=0.666667  quadrature log-log slope (c=50..4000) = 0.666667
+beta=0.75: alpha_predicted=1/(1+beta)=0.571429  quadrature log-log slope (c=50..4000) = 0.571429
+
+=== E) M-CLUST with b/n -> rho fixed (n -> infinity): small-t expansion of H_NEW ===
+H_NEW(t) small-t series (up to t^3) = t**2*(rho*t + 3*rho - 6)/(6*(rho - 1))
+coefficient of t^2: (rho*t + 3*rho - 6)/(6*(rho - 1))   (compare to M-U's coefficient 1 at rho=0)
+coefficient of t^3: 0
+check coeff_t2 at rho=0: 1  (should be 1, matching M-U H~t^2)
+=> leading order remains EXACTLY t^2 (beta=1) for any fixed rho in (0,1); b/n->lambda fixed only RESCALES the U_{1/2} coefficient ((2-rho)/(2(1-rho)) instead of 1), it does NOT produce an intermediate exponent. Ruled out as a source of alpha in (1/2,1).

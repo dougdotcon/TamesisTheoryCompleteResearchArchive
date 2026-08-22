@@ -1,0 +1,35 @@
+My own psi_n^(2),R values:
+  n=3: 17/27
+  n=4: 55/96
+  n=5: 27/50
+  n=6: 14/27
+  n=7: 74/147
+  n=8: 63/128
+  n=9: 235/486
+
+Fit on n=3,4,5 (independent split, opposite of ATTEMPT.md's n=6,7,8):
+  A=25/4, B=35/4, C=5/2
+  i.e. psi_n^(2),R = (25/4 n^2 + 35/4 n + 5/2) / (15 n^2)
+    n=3 [FIT]: predicted=17/27  actual=17/27  match=True
+    n=4 [FIT]: predicted=55/96  actual=55/96  match=True
+    n=5 [FIT]: predicted=27/50  actual=27/50  match=True
+    n=6 [HOLDOUT]: predicted=14/27  actual=14/27  match=True
+    n=7 [HOLDOUT]: predicted=74/147  actual=74/147  match=True
+    n=8 [HOLDOUT]: predicted=63/128  actual=63/128  match=True
+    n=9 [HOLDOUT]: predicted=235/486  actual=235/486  match=True
+  => ALL 6 MATCH (fit-on-{3,4,5} split): True
+
+ATTEMPT.md's claimed (A,B,C) = (25/4, 35/4, 5/2)
+My independently-fit (A,B,C)  = (25/4, 35/4, 5/2)
+Identical? True
+
+Stress test: fit the larger 4-parameter family
+  psi_n^(2),R = (A n^3 + B n^2 + C n + D) / (15 n^3)
+on n=3,4,5,6 and see what it predicts at n=7,8 (holdout).
+  A=25/4, B=35/4, C=5/2, D=0
+    n=7 [HOLDOUT]: predicted=74/147  actual=74/147  match=True
+    n=8 [HOLDOUT]: predicted=63/128  actual=63/128  match=True
+  (if A4==0 and this reduces to the 3-param family, that's a consistency
+   check, not new information; if A4 != 0 but still matches holdout,
+   that would show the 6 points do NOT uniquely pin the n^2-denominator
+   ansatz over the n^3-denominator one.)

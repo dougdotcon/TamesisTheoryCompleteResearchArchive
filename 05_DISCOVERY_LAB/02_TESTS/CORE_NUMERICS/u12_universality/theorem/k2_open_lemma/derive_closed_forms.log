@@ -1,0 +1,51 @@
+======================================================================
+STEP 1: symbolic closed form of psi_n^{(2)} from the case sums
+======================================================================
+case (a) total contribution: 1/3
+case (b) total contribution: (n + 1)*(3*n + 1)/(30*n**2)
+case (c) total contribution: (n + 1)*(3*n + 1)/(30*n**2)
+
+psi_n^{(2)} CLOSED FORM = (8*n**2 + 4*n + 1)/(15*n**2)
+expanded around n=infinity: 8/15 + 4/(15*n) + 1/(15*n**2)
+
+verification against brute force (psi_bruteforce.py, ref=generic):
+  n=3: brute=17/27 closed_form=17/27  match=True
+  n=4: brute=29/48 closed_form=29/48  match=True
+  n=5: brute=221/375 closed_form=221/375  match=True
+  n=6: brute=313/540 closed_form=313/540  match=True
+  n=7: brute=421/735 closed_form=421/735  match=True
+  n=8: brute=109/192 closed_form=109/192  match=True
+ALL MATCH: True
+
+======================================================================
+STEP 2: psi_n^{(2),R} by exact rational interpolation (fit, not derived)
+======================================================================
+fit on n=6,7,8 gives psi_n^{(2),R} = (n + 1)*(5*n + 2)/(12*n**2)
+verification on n=3,4,5 (held out of the fit):
+  n=3: brute=17/27 fit=17/27  match=True
+  n=4: brute=55/96 fit=55/96  match=True
+  n=5: brute=27/50 fit=27/50  match=True
+  n=6: brute=14/27 fit=14/27  match=True
+  n=7: brute=74/147 fit=74/147  match=True
+  n=8: brute=63/128 fit=63/128  match=True
+ALL MATCH (6/6, only 3 free params): True
+
+======================================================================
+STEP 3: recombine to get phi_n^{(2)} and check against THEOREM.md SS7.4 table
+======================================================================
+phi_n^{(2)} CLOSED FORM = (16*n**3 + n**2 + 21*n + 6)/(30*n**3)
+apart (n -> infinity expansion): 8/15 + 1/(30*n) + 7/(10*n**2) + 1/(5*n**3)
+
+phi_n^{(2)} - phi_2 = (n**2 + 21*n + 6)/(30*n**3)
+apart: 1/(30*n) + 7/(10*n**2) + 1/(5*n**3)
+=> leading order is Theta(1/n) [coefficient 1/30], NOT Theta(1/n^2).
+
+verification against THEOREM.md SS7.4's own table (all 7 values, n=2..8):
+  n=2: THEOREM.md=3/4 closed_form=3/4  match=True
+  n=3: THEOREM.md=17/27 closed_form=17/27  match=True
+  n=4: THEOREM.md=113/192 closed_form=113/192  match=True
+  n=5: THEOREM.md=356/625 closed_form=356/625  match=True
+  n=6: THEOREM.md=151/270 closed_form=151/270  match=True
+  n=7: THEOREM.md=569/1029 closed_form=569/1029  match=True
+  n=8: THEOREM.md=281/512 closed_form=281/512  match=True
+ALL MATCH (including n=2, outside the n>K=2 derivation range): True

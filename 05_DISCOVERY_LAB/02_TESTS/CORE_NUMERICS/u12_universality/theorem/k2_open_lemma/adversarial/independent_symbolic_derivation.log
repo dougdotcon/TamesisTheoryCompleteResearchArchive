@@ -1,0 +1,54 @@
+Sum over d (case b), given ell:
+              ⎛   2                      2    ⎞
+ell⋅(ell - 1)⋅⎝ell  - 4⋅ell⋅n - ell + 3⋅n  + n⎠
+───────────────────────────────────────────────
+                 2 ⎛ 2          ⎞              
+              2⋅n ⋅⎝n  - 3⋅n + 2⎠              
+
+Sum over p<q (case c), given ell:
+    ⎛   3        2          2                           ⎞
+ell⋅⎝ell  + 4⋅ell ⋅n - 2⋅ell  - 12⋅ell⋅n - ell + 8⋅n + 2⎠
+─────────────────────────────────────────────────────────
+                      2 ⎛ 2          ⎞                   
+                  12⋅n ⋅⎝n  - 3⋅n + 2⎠                   
+
+Per-ell total P(success | ell), simplified:
+     4         3           3         2  2         2          2           3     ↪
+7⋅ell  - 20⋅ell ⋅n - 14⋅ell  + 30⋅ell ⋅n  + 18⋅ell ⋅n + 5⋅ell  - 24⋅ell⋅n  - 6 ↪
+────────────────────────────────────────────────────────────────────────────── ↪
+                                                     2 ⎛ 2          ⎞          ↪
+                                                 12⋅n ⋅⎝n  - 3⋅n + 2⎠          ↪
+
+↪       2                         4       3
+↪ ⋅ell⋅n  + 2⋅ell⋅n + 2⋅ell + 12⋅n  - 12⋅n 
+↪ ─────────────────────────────────────────
+↪                                          
+↪                                          
+
+psi_n^(2) = (1/n) * sum_{ell=1}^n [...] , fully simplified:
+   2          
+8⋅n  + 4⋅n + 1
+──────────────
+        2     
+    15⋅n      
+   2          
+8⋅n  + 4⋅n + 1
+──────────────
+        2     
+    15⋅n      
+
+Difference from claimed closed form 8/15 + 4/(15n) + 1/(15n^2):
+0
+
+Identically zero (for n>2, symbolically)? True
+
+Numeric spot checks of the symbolic closed form vs the target formula:
+  n=3: symbolic-sum=17/27  target-formula=17/27  equal=True
+  n=4: symbolic-sum=29/48  target-formula=29/48  equal=True
+  n=5: symbolic-sum=221/375  target-formula=221/375  equal=True
+  n=6: symbolic-sum=313/540  target-formula=313/540  equal=True
+  n=7: symbolic-sum=421/735  target-formula=421/735  equal=True
+  n=8: symbolic-sum=109/192  target-formula=109/192  equal=True
+  n=9: symbolic-sum=137/243  target-formula=137/243  equal=True
+  n=10: symbolic-sum=841/1500  target-formula=841/1500  equal=True
+  n=11: symbolic-sum=1013/1815  target-formula=1013/1815  equal=True

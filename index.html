@@ -1,292 +1,441 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Estado congelado da fase computacional Tamesis M_c v1 e condições para início da campanha física.">
-  <title>Tamesis M_c v1 — Computational Freeze</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --ink: #f4f0e8;
-      --muted: #aca99f;
-      --line: rgba(255,255,255,.13);
-      --panel: rgba(18,22,28,.82);
-      --amber: #ffbd59;
-      --cyan: #78dce8;
-      --red: #ff6b6b;
-      --green: #8bd49c;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(120,220,232,.13), transparent 30rem),
-        radial-gradient(circle at 90% 18%, rgba(255,189,89,.11), transparent 25rem),
-        #080b10;
-      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    }
-    a { color: inherit; }
-    .shell { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.15rem 0;
-      border-bottom: 1px solid var(--line);
-      font-size: .82rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    nav strong { color: var(--cyan); }
-    nav div { display: flex; flex-wrap: wrap; gap: 1rem; }
-    nav a { color: var(--muted); text-decoration: none; }
-    nav a:hover { color: var(--ink); }
-    header { padding: clamp(4rem, 9vw, 8rem) 0 4rem; }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      color: var(--amber);
-      font: 700 .76rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before {
-      content: "";
-      width: .55rem;
-      height: .55rem;
-      border-radius: 50%;
-      background: var(--amber);
-      box-shadow: 0 0 1rem var(--amber);
-    }
-    h1 {
-      max-width: 900px;
-      margin: 1.3rem 0 1rem;
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: .92;
-      letter-spacing: -.065em;
-    }
-    .lead {
-      max-width: 770px;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.08rem, 2vw, 1.35rem);
-    }
-    .lead strong { color: var(--ink); }
-    .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-    .button {
-      padding: .75rem 1rem;
-      border: 1px solid var(--line);
-      border-radius: .55rem;
-      background: rgba(255,255,255,.04);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .button.primary { color: #0a0d11; background: var(--amber); border-color: var(--amber); }
-    main { padding-bottom: 5rem; }
-    .status-grid, .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .status, .card {
-      border: 1px solid var(--line);
-      border-radius: .8rem;
-      background: var(--panel);
-      backdrop-filter: blur(14px);
-    }
-    .status { padding: 1.1rem; }
-    .status span {
-      display: block;
-      color: var(--muted);
-      font-size: .74rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .status code { display: block; margin-top: .45rem; color: var(--ink); word-break: break-word; }
-    .status.warning code { color: var(--amber); }
-    .status.negative code { color: var(--red); }
-    section { padding-top: 4.5rem; }
-    h2 { margin: 0 0 .6rem; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing: -.035em; }
-    .section-intro { max-width: 720px; margin: 0 0 1.5rem; color: var(--muted); }
-    .card { padding: 1.4rem; }
-    .card .number {
-      color: var(--cyan);
-      font: 700 .72rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
-      letter-spacing: .08em;
-    }
-    .card h3 { margin: .75rem 0 .45rem; font-size: 1.12rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .94rem; }
-    .card a { display: inline-block; margin-top: 1rem; color: var(--amber); }
-    .boundary {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: .8rem;
-    }
-    .boundary > div { padding: 1.5rem; }
-    .boundary > div + div { border-left: 1px solid var(--line); }
-    .boundary h3 { margin-top: 0; }
-    .boundary ul { margin: 0; padding-left: 1.15rem; color: var(--muted); }
-    .boundary .done h3 { color: var(--green); }
-    .boundary .missing h3 { color: var(--red); }
-    .resume {
-      padding: 1.5rem;
-      border: 1px solid rgba(255,189,89,.45);
-      border-radius: .8rem;
-      background: rgba(255,189,89,.07);
-    }
-    .resume code { color: var(--amber); }
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 2rem 0 3rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .82rem;
-    }
-    @media (max-width: 760px) {
-      .status-grid, .cards, .boundary { grid-template-columns: 1fr; }
-      .boundary > div + div { border-left: 0; border-top: 1px solid var(--line); }
-      nav, footer { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
-    <link rel="stylesheet" href="paper-layout.css">
-</head>
-<body>
-  <div class="shell">
-    <nav aria-label="Navegação principal">
-      <strong>Tamesis Research Archive</strong>
-      <div>
-        <a href="README_PTBR.md">README</a>
-        <a href="PROJECT_FREEZE.md">Freeze</a>
-        <a href="atlas.html">Atlas</a>
-        <a href="README.md">English</a>
-      </div>
-    </nav>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Adjudicação adversarial de um arquivo de pesquisa: como um programa de auto-auditoria fechou 30+ alegações quantitativas e derivou uma função-limite exata para a classe U_1/2.">
+    <title>Adjudicação Adversarial de um Arquivo de Pesquisa: Resultados Negativos Sistemáticos e a Função-Limite Exata da Classe U₁/₂</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.2;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            background-color: #fff;
+        }
+
+        .content-wrapper {
+            column-count: 2;
+            column-gap: 0.8cm;
+            text-align: justify;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h1 {
+            font-size: 15pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+
+        .authors { font-size: 11pt; margin-bottom: 0.2rem; font-weight: bold; }
+        .affiliations { font-size: 9.5pt; font-style: italic; color: #444; margin-bottom: 0.6rem; }
+        .date { font-size: 9pt; color: #666; }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 8pt;
+            letter-spacing: .04em;
+            border: 1px solid #888;
+            padding: 2px 8px;
+            margin-top: 0.5rem;
+            color: #333;
+        }
+
+        .abstract {
+            font-size: 9pt;
+            margin: 1rem auto 0.5rem auto;
+            width: 88%;
+            text-align: justify;
+            border-top: 1px solid #eee;
+            padding: 0.8rem 0 0.4rem;
+        }
+        .abstract strong { font-variant: small-caps; }
+        .resumo {
+            font-size: 9pt;
+            margin: 0 auto 1rem auto;
+            width: 88%;
+            text-align: justify;
+            border-bottom: 1px solid #eee;
+            padding: 0.4rem 0 0.8rem;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 1.1rem 0 0.45rem;
+            text-transform: uppercase;
+            letter-spacing: .02em;
+        }
+        h3 { font-size: 10pt; font-weight: bold; font-style: italic; margin: 0.8rem 0 0.3rem; }
+        p { margin: 0 0 0.55rem; }
+
+        figure {
+            break-inside: avoid;
+            margin: 0.7rem 0;
+            text-align: center;
+        }
+        figure.wide { column-span: all; }
+        figure img { max-width: 100%; height: auto; border: 1px solid #eee; }
+        figcaption { font-size: 8.5pt; text-align: justify; color: #222; margin-top: 0.3rem; }
+        figcaption b { font-variant: small-caps; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5pt;
+            margin: 0.6rem 0;
+            break-inside: avoid;
+        }
+        th, td { border-top: 1px solid #999; padding: 3px 4px; text-align: left; vertical-align: top; }
+        thead th { border-top: 2px solid #000; border-bottom: 1px solid #000; }
+        tbody tr:last-child td { border-bottom: 2px solid #000; }
+        caption { caption-side: top; font-size: 8.5pt; text-align: justify; margin-bottom: 0.25rem; }
+
+        .references { font-size: 8.5pt; }
+        .references ol { padding-left: 1.2rem; margin: 0; }
+        .references li { margin-bottom: 0.3rem; }
+
+        .footer-note {
+            column-span: all;
+            border-top: 1px solid #ccc;
+            margin-top: 1.2rem;
+            padding-top: 0.6rem;
+            font-size: 8pt;
+            color: #555;
+            text-align: justify;
+        }
+        code { font-family: Consolas, 'Courier New', monospace; font-size: 8.5pt; }
+    </style>
+</head>
+
+<body>
     <header>
-      <div class="eyebrow">Computational phase frozen · 2026-07-26</div>
-      <h1>Tamesis M<sub>c</sub> v1</h1>
-      <p class="lead">
-        A hipótese foi transformada em um contrato falsificável e em um protocolo
-        experimental que falha de forma segura. <strong>Ainda não existe evidência física.</strong>
-        O próximo avanço pertence ao laboratório, não a uma nova camada de simulação.
-      </p>
-      <div class="actions">
-        <a class="button primary" href="PROJECT_FREEZE.md">Ler estado científico</a>
-        <a class="button" href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md">Abrir núcleo técnico</a>
-      </div>
+        <h1>Adjudicação Adversarial de um Arquivo de Pesquisa:<br>
+            Resultados Negativos Sistemáticos e a Função-Limite Exata da Classe U<sub>1/2</sub></h1>
+        <div class="authors">Douglas H. M. Fulber</div>
+        <div class="affiliations">Laboratório Tamesis — Programa de Pesquisa Independente<br>
+            Execução assistida por agentes computacionais autônomos sob governança pré-registrada</div>
+        <div class="date">22 de agosto de 2026 — Tamesis Research Archive (CC BY 4.0)</div>
+        <div class="status-badge">PREPRINT — sem revisão por pares; todos os dados, códigos e ledgers de decisão estão no repositório público</div>
     </header>
 
-    <main>
-      <div class="status-grid" aria-label="Estado atual">
-        <div class="status"><span>Software</span><code>frozen_and_ready</code></div>
-        <div class="status warning"><span>Campanha</span><code>HARDWARE_QUALIFICATION_NOT_STARTED</code></div>
-        <div class="status negative"><span>Evidência física</span><code>false</code></div>
-      </div>
+    <div class="abstract">
+        <strong>Abstract.</strong> We report the outcome of a systematic, adversarial adjudication of a large
+        interdisciplinary research archive against real external references (PDG, CODATA, Planck, SPARC, Gaia,
+        Odlyzko). The methodology — pre-registered decision criteria, provenance-tracked reference values, and
+        mandatory independent adversarial reproduction of every positive finding — closed more than thirty
+        quantitative claims. The dominant outcome is negative: a 16-candidate search for a cross-domain
+        time-series invariant closed null; four cosmological tests closed inconclusive after real confounders
+        were demonstrated; and the archive's numerical constant fits (e.g. $\sin^2\theta_W = 3/13$) were
+        refuted at 7.5–82$\sigma$ or shown to be non-identifiable parameter tuning. One claim partially
+        survived: the U$_{1/2}$ universality class of randomly perturbed permutations. Characterizing it, we
+        derive — and adversarially verify by exact enumeration, independent re-derivation, and Monte Carlo at
+        fresh parameter values — a closed form for its limit function, $\varphi_\infty(c) = \int_0^1
+        e^{-ct^2}\,dt = \tfrac{1}{2}\sqrt{\pi/c}\,\operatorname{erf}(\sqrt{c})$, which corrects the archive's
+        original conjecture $(1+c)^{-1/2}$ (excluded analytically at first order: $a_1 = 1/3 \neq 1/2$) and
+        identifies the conditional law as the fixed-parameter case of Hansen &amp; Jaworski (2014), of which our
+        result is the Poisson mixture — a closed form we did not find published. We argue that the negative
+        results, obtained under the same discipline that produced the positive one, are the methodological
+        contribution: the survival funnel is what a self-correcting archive looks like.
+    </div>
+    <div class="resumo">
+        <b>Resumo.</b> Relatamos a adjudicação sistemática e adversarial de um arquivo de pesquisa
+        interdisciplinar contra referências externas reais. A metodologia — critérios de decisão
+        pré-registrados, proveniência de todo valor de referência e reprodução adversarial independente
+        obrigatória para todo achado positivo — fechou mais de trinta alegações quantitativas. O desfecho
+        dominante é negativo; uma alegação sobreviveu parcialmente, e a sua caracterização produziu uma forma
+        fechada derivada e verificada adversarialmente para a função-limite da classe U<sub>1/2</sub>,
+        corrigindo a conjectura original do arquivo. Defendemos que os resultados negativos, obtidos sob a
+        mesma disciplina que produziu o positivo, são a contribuição metodológica central.
+    </div>
 
-      <section>
-        <h2>O que foi realmente alcançado</h2>
-        <p class="section-intro">
-          O resultado é uma infraestrutura de pesquisa rigorosa: não uma confirmação
-          da hipótese, mas uma forma honesta de fazê-la enfrentar dados.
+    <div class="content-wrapper">
+
+        <h2>1. Introdução</h2>
+        <p>
+            Arquivos de pesquisa de longa duração acumulam alegações quantitativas de força epistêmica muito
+            desigual: derivações, ajustes, coincidências numéricas, saídas de simulação e conjecturas
+            convivem lado a lado. O arquivo Tamesis — um programa independente com mais de 280 registros
+            auditados — enfrentou esse problema da forma mais direta possível: submetendo as próprias
+            alegações a um laboratório de adjudicação (o <i>Discovery Lab</i>) desenhado para fechá-las
+            contra dados externos reais, com regras que tornam o resultado negativo tão publicável quanto o
+            positivo.
         </p>
-        <div class="cards">
-          <article class="card">
-            <span class="number">01 · CONTRATO</span>
-            <h3>Hipótese fixa</h3>
-            <p>M<sub>c</sub> = 5.292674126388712 × 10<sup>−16</sup> kg e τ<sub>c</sub> = 2.176246482178091 s, registrados como valores do modelo.</p>
-          </article>
-          <article class="card">
-            <span class="number">02 · AUDITORIA</span>
-            <h3>Limites identificados</h3>
-            <p>Testes sintéticos revelaram degenerescências, contaminação e a necessidade de termometria interna independente.</p>
-          </article>
-          <article class="card">
-            <span class="number">03 · HARDWARE</span>
-            <h3>Demonstrador A v0.6</h3>
-            <p>Q0, A0 e A1 foram especificados com aquisição cega, rastreabilidade e decisões pré-registradas.</p>
-            <a href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md">Ver relatório →</a>
-          </article>
-        </div>
-      </section>
+        <p>
+            Este artigo sintetiza o desfecho completo desse programa até agosto de 2026. Ele tem duas
+            contribuições. A primeira é metodológica: um protocolo executável de adjudicação — pré-registro
+            de critérios antes de qualquer cálculo, proveniência obrigatória de valores de referência
+            (nenhum número digitado de memória), validação sintética antes de dado real, e reprodução
+            adversarial independente para todo achado positivo — que, aplicado com agentes computacionais
+            autônomos, fechou mais de trinta alegações em ciclos de horas, não meses. A segunda é um
+            resultado matemático: a função-limite exata da classe de universalidade U<sub>1/2</sub>,
+            derivada (não ajustada), com verificação adversarial em quatro superfícies independentes.
+        </p>
 
-      <section>
-        <h2>A fronteira epistemológica</h2>
-        <p class="section-intro">Esta separação é parte do resultado e deve permanecer visível.</p>
-        <div class="boundary">
-          <div class="done">
-            <h3>Existe no repositório</h3>
-            <ul>
-              <li>modelo fenomenológico reproduzível;</li>
-              <li>comparações com famílias concorrentes;</li>
-              <li>validação sintética e testes de identificabilidade;</li>
-              <li>requisitos de sensores, plataforma e metrologia;</li>
-              <li>protocolo A0/A1 pronto com limitações.</li>
-            </ul>
-          </div>
-          <div class="missing">
-            <h3>Não existe ainda</h3>
-            <ul>
-              <li>hardware qualificado em Q0;</li>
-              <li>espectros reais de partículas GeV;</li>
-              <li>calibração cega A1 concluída;</li>
-              <li>observação de Γ<sub>T</sub>;</li>
-              <li>evidência sobre M<sub>c</sub> ou a favor de Tamesis.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        <h2>2. Metodologia</h2>
+        <p>
+            O laboratório opera sob uma máquina de estados explícita
+            (<code>CANDIDATE_FORMULATING → … → CLOSED_*</code>), na qual estados terminais negativos
+            (<code>CLOSED_NULL</code>, <code>CLOSED_INCONCLUSIVE</code>) são catalogados com o mesmo peso
+            que replicações positivas. Cinco regras foram invariantes em todos os testes aqui relatados:
+        </p>
+        <p>
+            (i) <b>Critérios antes do cálculo.</b> Cada frente fixa, em nota de metodologia commitada antes
+            de qualquer comparação com dados reais, o que contará como "consistente", "reproduzido" ou
+            "refutado". Correções posteriores são limitadas a um adendo datado e delimitado.
+            (ii) <b>Proveniência total.</b> Valores de referência (PDG, CODATA, Planck) são obtidos por
+            consulta direta à fonte, com URL, data e valor citados; fonte inacessível é reportada como
+            inacessível, nunca substituída de memória.
+            (iii) <b>Validação sintética primeiro.</b> Nenhuma pipeline toca dado real sem antes recuperar
+            um caso com resposta conhecida; quatro dos dezesseis candidatos da linha de invariantes fecharam
+            nessa etapa, sem jamais tocar dado real.
+            (iv) <b>Reprodução adversarial obrigatória.</b> Todo achado positivo é atacado por um agente
+            independente, com implementação própria escrita <i>antes</i> de ler o código original, semente
+            própria e, quando possível, rota matemática distinta.
+            (v) <b>Nenhuma reformulação pós-resultado.</b> Hipóteses e critérios não mudam depois de vistos
+            os dados reais; apenas bugs de implementação demonstrados podem ser corrigidos, com registro.
+        </p>
 
-      <section>
-        <div class="resume">
-          <h2>Quando o projeto deve continuar?</h2>
-          <p>
-            Somente quando houver inventário real de instrumentos, registros de
-            calibração, espectros GeV, séries térmicas, dados A0 ou colaboração
-            laboratorial documentada.
-          </p>
-          <code>PAUSED_PENDING_HARDWARE_AND_METROLOGY</code>
-        </div>
-      </section>
+        <h2>3. Resultados negativos: o funil de sobrevivência</h2>
 
-      <section>
-        <h2>Explore sem confundir as camadas</h2>
-        <div class="cards">
-          <article class="card">
-            <span class="number">CURRENT</span>
-            <h3>Núcleo M<sub>c</sub> v1</h3>
-            <p>Código, dados, contratos e relatórios da linha testável congelada.</p>
-            <a href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md">Abrir →</a>
-          </article>
-          <article class="card">
-            <span class="number">VISUAL</span>
-            <h3>Resultados computacionais</h3>
-            <p>Figuras e animações do modelo. Não são observações experimentais.</p>
-            <a href="02_TAMESIS_MC_V1_OUTPUTS/README.md">Abrir →</a>
-          </article>
-          <article class="card">
-            <span class="number">CONCEPTUAL</span>
-            <h3>Atlas de hipóteses</h3>
-            <p>Mapa exploratório com status epistemológico explícito.</p>
-            <a href="atlas.html">Abrir →</a>
-          </article>
-        </div>
-      </section>
-    </main>
+        <figure class="wide">
+            <img src="ARTIGO_DISCOVERY_LAB/figures/fig4_funnel.png" alt="Funil de sobrevivência do programa empírico">
+            <figcaption><b>Figura 1.</b> O programa empírico completo. Cinza: alegações/candidatos
+                testados por linha; verde: sobreviventes após reprodução adversarial. A linha TRI-RG
+                (busca de invariante cross-domain em séries temporais) fechou <code>CLOSED_NULL</code> com
+                16/16 candidatos sem sobrevivente; as quatro tentativas cosmológicas (SPARC/MOND, binárias
+                largas do Gaia) fecharam inconclusivas após demonstração de confundidores reais; a
+                adjudicação numérica do núcleo refutou seis de sete alegações. Os sobreviventes: dois
+                achados replicados sobre zeros de ζ e a função-limite U<sub>1/2</sub> (Seção 5).</figcaption>
+        </figure>
 
-    <footer>
-      <span>Tamesis Research Archive</span>
-      <span>Preservar a história não equivale a validar suas alegações.</span>
-    </footer>
-  </div>
+        <h3>3.1. Invariantes cross-domain: 16/16 nulos</h3>
+        <p>
+            A linha mais longa do programa testou se existe um par (mapa de coarse-graining, observável
+            $I(X)$), definido uma única vez, capaz de detectar transições de regime documentadas em domínios
+            reais genuinamente distintos (sismologia, EEG, ECG, mercados, geomagnetismo, vulcanologia,
+            hidrologia, epidemiologia). Dezesseis candidatos ao longo de cinco rodadas — de <i>critical
+            slowing down</i> e DFA a entropia de transferência e complexidade de ε-máquinas (CSSR completo)
+            — produziram zero invariantes sobreviventes. Quatro achados brutos com $p&lt;0{,}05$ foram
+            refutados pela reprodução adversarial, que em todos os casos encontrou uma explicação mundana
+            concreta: um nulo ETAS subcrítico, falha de generalização entre sujeitos, um terremoto M6,9
+            dominando a decomposição espectral e um artefato instrumental de baixa frequência eliminado por
+            um filtro passa-alta padrão. A análise retrospectiva revelou que os candidatos colapsam em
+            apenas ~4 eixos matemáticos latentes — persistência/taxa de entropia, taxa de relaxação local,
+            densidade de recorrência via embedding e estatística de cauda — sugerindo que o espaço das
+            estatísticas não-lineares "óbvias" foi efetivamente coberto.
+        </p>
+
+        <h3>3.2. Cosmologia: quatro fechamentos inconclusivos e duas fabricações detectadas</h3>
+        <p>
+            A auditoria descobriu que os dois resultados cosmológicos de manchete do arquivo legado
+            ("EFE CONFIRMED, $p&lt;10^{-6}$" e "MOND DETECTED" em binárias do Gaia) repousavam sobre dados
+            fabricados — curvas de rotação digitadas à mão para galáxias inexistentes no catálogo SPARC real
+            e uma lista de binárias com <code>source_id</code> sequenciais artificiais. Refeitos com dados
+            reais (SPARC 175 galáxias; El-Badry et al. 2021, 43.147 sistemas pós-corte) sob pré-registro,
+            os quatro testes fecharam inconclusivos por razões estruturais demonstradas — diluição por
+            projeção e multiplicidade oculta não resolvida, esta última suficiente sozinha para explicar
+            todo o sinal residual. Nenhum veredito foi aceito contra as salvaguardas pré-registradas.
+        </p>
+
+        <h3>3.3. Adjudicação dos ajustes de constantes</h3>
+        <figure>
+            <img src="ARTIGO_DISCOVERY_LAB/figures/fig3_adjudication.png" alt="Adjudicação de constantes e valores de M_c">
+            <figcaption><b>Figura 2.</b> Esquerda: discrepância em σ (escala log) das alegações de
+                constantes contra PDG/CODATA/Planck 2018, sob o esquema mais favorável a cada alegação.
+                A única barra abaixo de 2σ ($n_s$ do bounce) foi demonstrada não-identificável: o parâmetro
+                ξ foi escaneado até atingir $N&gt;60$, e $n_s = 1-2/N$ segue automaticamente. Direita: os
+                quatro valores mutuamente inconsistentes de $M_c$ no núcleo (vermelho), divergindo em até
+                ~190×, e o valor que a mesma fórmula produziria sob o ramo de $a_0$ favorecido pelos
+                próprios testes do laboratório (verde).</figcaption>
+        </figure>
+        <p>
+            $\sin^2\theta_W = 3/13$, marcado "CONFIRMED, 0,19%" no arquivo, está a 7,5σ da referência PDG
+            no esquema $\overline{\mathrm{MS}}$ — o mais favorável — e o código-fonte contém o valor-alvo
+            <i>hardcoded</i>, configurando ajuste, não previsão. $\alpha^{-1} = \Omega^{1.03}$ é um ajuste
+            de um parâmetro contínuo a um único número (zero graus de liberdade), e sua própria aritmética
+            interna não fecha ($\Omega^{1.033}=136{,}956$). A densidade de energia escura "holográfica"
+            reproduz, por identidade algébrica, a densidade crítica — a razão alegada de 1,46 é exatamente
+            $1/\Omega_\Lambda$. A lei de massas de quarks por comprimento de corda de nós ideais falha na
+            validação leave-one-out (5/6 quarks, erros de até 52×) e fica no percentil 86/70 de um nulo de
+            permutação sobre atribuições alternativas de nós.
+        </p>
+
+        <h2>4. Resultados positivos replicados sobre zeros de ζ</h2>
+        <p>
+            A única linha continuamente aberta produziu dois números replicados sobre os zeros reais de
+            Riemann (tabelas de Odlyzko, três regimes de altura até #10²¹): (i) sequências de gaps grandes
+            consecutivos são <i>menos</i> comuns que sob reordenação aleatória — sinal na direção oposta à
+            hipótese original, reportado como tal e aprovado no gate de replicação em altura independente;
+            (ii) o gap mínimo normalizado entre $N$ zeros escala como $N^{-1/3}$
+            ($\hat\beta = -0{,}3395$, IC95% $[-0{,}387; -0{,}287]$), consistente com GUE e excluindo Poisson
+            ($N^{-1}$) e GOE ($N^{-1/2}$) — confirmação numérica de universalidade já conhecida, catalogada
+            sem alegação de novidade. Um terceiro teste (máximos de $\log|\zeta|$ em intervalos curtos,
+            discriminando a correção $-\tfrac{3}{4}\log\log\log T$ de Fujii–Harper–Keating do
+            $-\tfrac{1}{4}$ do modelo iid) está pré-registrado e em execução; nenhum resultado é reportado
+            aqui. Nenhuma dessas análises constitui progresso sobre a Hipótese de Riemann, e nenhuma
+            alegação nesse sentido é feita.
+        </p>
+
+        <h2>5. O resultado principal: a função-limite exata da classe U<sub>1/2</sub></h2>
+        <p>
+            A única alegação do núcleo que sobreviveu parcialmente à adjudicação foi a classe de
+            universalidade U<sub>1/2</sub>: tome uma permutação uniforme de $[n]$ e redirecione cada ponto,
+            independentemente, com probabilidade $c/n$, para um destino uniforme; seja $\varphi(n,c)$ a
+            fração esperada de pontos em ciclos do grafo funcional resultante. O arquivo alegava, como
+            "teorema", $\varphi_\infty(c) = (1+c)^{-1/2}$. A reprodução adversarial confirmou o expoente de
+            cauda $1/2$ e a distinção decisiva frente às classes concorrentes ($\Delta\mathrm{AIC} &gt;
+            2600$), mas refutou a forma exata: os desvios são sistemáticos e estáveis até $n = 64.000$.
+        </p>
+        <p>
+            A caracterização subsequente <i>derivou</i> a forma correta. Explorando a órbita de um ponto
+            típico no objeto-limite (estrutura de ciclos Poisson–Dirichlet(1) da permutação, redirecionamentos
+            como processo de Poisson de intensidade $c$), a probabilidade de sobrevivência cíclica condicional
+            à massa percorrida $t$ fatoriza como $(1-t)e^{-ct^2}$ — um cancelamento exato no funcional
+            gerador de Poisson é o que torna a forma fechada possível — dando, com zero parâmetros livres:
+        </p>
+        <p>
+            $$\varphi_\infty(c) \;=\; \int_0^1 e^{-ct^2}\,dt \;=\; \frac{1}{2}\sqrt{\frac{\pi}{c}}\,
+            \operatorname{erf}(\sqrt{c}),$$
+        </p>
+        <p>
+            com série inteira $\sum_k \frac{(-c)^k}{k!(2k+1)} = 1 - \tfrac{c}{3} + \tfrac{c^2}{10} - \dots$
+            e cauda $\tfrac{\sqrt{\pi}}{2}c^{-1/2}$. O primeiro coeficiente já decide a questão
+            analiticamente: $a_1 = 1/3$, enquanto a forma original exigiria $1/2$. Condicionada a $K$
+            redirecionamentos sobreviventes, a fração cíclica tem média $4^K (K!)^2/(2K+1)!$ — as integrais
+            de Wallis — e lei $2Kx(1-x^2)^{K-1}$, que identificamos como exatamente o caso de parâmetro fixo
+            do modelo de "permutações corrompidas" de Hansen &amp; Jaworski [4]; nosso resultado é a sua
+            mistura de Poisson, cuja forma fechada erf não encontramos publicada (busca não exaustiva).
+        </p>
+
+        <figure class="wide">
+            <img src="ARTIGO_DISCOVERY_LAB/figures/fig1_phi_limit.png" alt="Função-limite U1/2: forma derivada vs original">
+            <figcaption><b>Figura 3.</b> A função-limite derivada (azul) contra a forma original do arquivo
+                (vermelho tracejado), com Monte Carlo do objeto-limite em grade held-out nunca usada no
+                ajuste (pontos pretos, $N=2\times10^5$/célula) e Monte Carlo adversarial independente em
+                valores de $c$ inéditos, $n = 65.536$ (quadrados verdes). Painel inferior: resíduos em σ
+                contra a forma derivada — 17 células, zero parâmetros ajustados, $\chi^2_{17} = 19{,}90$
+                ($p = 0{,}28$).</figcaption>
+        </figure>
+
+        <figure class="wide">
+            <img src="ARTIGO_DISCOVERY_LAB/figures/fig2_finite_n.png" alt="Convergência exata em n finito e discriminador a1">
+            <figcaption><b>Figura 4.</b> Verificação adversarial por enumeração exata. Esquerda: valor
+                exato de $\mathbb{E}$[fração cíclica] somando sobre <i>todos</i> os $n^n$ mapas ponderados
+                ($n = 4..7$), convergindo monotonicamente às linhas-limite da forma erf (pontilhadas).
+                Direita: o coeficiente de primeira ordem exato segue $a_1(n) = (n^2-1)/(3n^2) \to 1/3$,
+                excluindo analiticamente o valor $1/2$ exigido pela forma original.</figcaption>
+        </figure>
+
+        <p>
+            A verificação adversarial atacou o resultado em quatro superfícies independentes, com números
+            travados antes de ler a derivação original: enumeração exata em $n$ finito (validada contra
+            enumeração tripla de força bruta, diferença $&lt; 3\times10^{-16}$), Monte Carlo em valores de
+            $c$ nunca usados, re-derivação analítica cega — que reproduziu a mesma fórmula por rota própria
+            — e a lei condicional de Wallis. Veredito: confirmado nas quatro; a citação de Hansen–Jaworski
+            foi verificada no PDF original. Permanecem como limitações honestas: a passagem
+            $n$ finito $\to$ contínuo está controlada empiricamente (até $n = 65.536$), não formalizada; e
+            a lei distribucional completa para $K \geq 2$ segue conjectura, ainda que agora com suporte
+            KS adicional.
+        </p>
+
+        <h2>6. Discussão</h2>
+        <p>
+            O contraste central deste programa é deliberado: a mesma disciplina que refutou seis alegações
+            do núcleo e fechou dezesseis candidatos como nulos é a que sustenta o único resultado positivo.
+            Sem os fechamentos negativos, a forma fechada da Seção 5 seria apenas mais uma curva bem
+            ajustada num arquivo cheio delas; com eles, ela é o sobrevivente de um funil que demonstrou,
+            caso a caso, que sabe matar alegações — inclusive as suas próprias. Três lições metodológicas
+            merecem registro. Primeiro, a reprodução adversarial com implementação independente <i>antes</i>
+            da leitura do código original foi o único mecanismo que capturou todos os artefatos (quatro
+            achados $p&lt;0{,}05$ refutados por explicações mundanas concretas). Segundo, a validação
+            sintética obrigatória evitou que quatro candidatos sem identificabilidade consumissem dados
+            reais. Terceiro, a exigência de proveniência transformou disputas de interpretação em questões
+            verificáveis de fonte.
+        </p>
+        <p>
+            <b>O que este artigo não afirma.</b> Nenhum progresso sobre Problemas do Millennium; nenhuma
+            evidência de que o universo seja computacional, holográfico ou simulado; nenhuma detecção de
+            física além do modelo padrão ou de ΛCDM; nenhuma medição de $M_c$ — a fronteira experimental de
+            interferometria de ondas de matéria permanece ~$2\times10^6$ vezes abaixo da escala relevante,
+            como o próprio arquivo registra. O resultado da Seção 5 é matemática combinatória sobre um
+            ensemble específico, e sua conexão com qualquer sistema físico permanece não estabelecida.
+        </p>
+
+        <h2>7. Conclusão</h2>
+        <p>
+            Um arquivo de pesquisa pode ser tratado como objeto experimental: suas alegações enumeradas,
+            seus critérios travados, seus números confrontados com o mundo, e seus erros documentados com o
+            mesmo cuidado que seus acertos. O saldo aqui — dezenas de fechamentos negativos, dois achados
+            replicados sobre zeros de ζ e uma função-limite exata derivada e verificada adversarialmente —
+            é o que um programa auto-corretivo produz quando o resultado negativo é tratado como
+            informação, não como derrota. Todos os ledgers de decisão, notas de metodologia, códigos,
+            dados e vereditos adversariais estão públicos no repositório, commit a commit, na ordem em que
+            aconteceram.
+        </p>
+
+        <h2>Referências</h2>
+        <div class="references">
+            <ol>
+                <li>J. Hansen, J. Jaworski, "Structural transition in random mappings", <i>Electron. J.
+                    Combin.</i> 21(1) (2014), #P1.18.</li>
+                <li>T. Ashton, J. Cantarella, M. Piatek, E. Rawdon, "Knot tightening by constrained
+                    gradient descent", arXiv:1002.1723 (2010).</li>
+                <li>Particle Data Group, <i>Review of Particle Physics</i> (2025), pdg.lbl.gov.</li>
+                <li>Planck Collaboration, "Planck 2018 results. VI. Cosmological parameters",
+                    arXiv:1807.06209.</li>
+                <li>S. S. McGaugh, F. Lelli, J. M. Schombert, "Radial acceleration relation in rotationally
+                    supported galaxies", <i>Phys. Rev. Lett.</i> 117, 201101 (2016).</li>
+                <li>K. El-Badry, H.-W. Rix, T. M. Heintz, "A million binaries from Gaia eDR3",
+                    <i>MNRAS</i> 506, 2269 (2021).</li>
+                <li>K.-H. Chae, "Breakdown of the Newton–Einstein standard gravity at low acceleration in
+                    internal dynamics of wide binary stars", <i>ApJ</i> 952, 128 (2023).</li>
+                <li>A. M. Odlyzko, tabelas de zeros da função zeta de Riemann,
+                    www-users.cse.umn.edu/~odlyzko/zeta_tables/.</li>
+                <li>A. J. Harper, "A note on the maximum of the Riemann zeta function, and log-correlated
+                    random variables", arXiv:1304.0677; Y. Fujii; J. P. Keating e colaboradores, linhagem
+                    FHK para máximos em intervalos curtos, arXiv:1202.4713, arXiv:1612.08575.</li>
+                <li>C. R. Shalizi, K. L. Klinkner, "Blind construction of optimal nonlinear recursive
+                    predictors for discrete sequences", <i>UAI</i> (2004).</li>
+                <li>T. Schreiber, A. Schmitz, "Improved surrogate data for nonlinearity tests",
+                    <i>Phys. Rev. Lett.</i> 77, 635 (1996).</li>
+                <li>D. H. M. Fulber, <i>Tamesis Research Archive</i> — ledgers de governança
+                    (<code>DECISION_LEDGER.yaml</code>, <code>TEST_QUEUE.yaml</code>), notas de metodologia e
+                    vereditos adversariais, 2026. CC BY 4.0.</li>
+            </ol>
+        </div>
+
+        <div class="footer-note">
+            Este preprint sintetiza resultados registrados no repositório público do Tamesis Research
+            Archive. Cada número citado tem um arquivo de resultado, um log e uma nota de metodologia
+            commitados; as figuras são geradas por script determinístico
+            (<code>ARTIGO_DISCOVERY_LAB/figures/make_figures.py</code>) diretamente dos JSONs de resultado,
+            sem valores redigitados. A menção a fontes externas (PDG, CODATA, Planck, Gaia, PhysioNet,
+            Odlyzko) não implica endosso. A execução computacional foi assistida por agentes autônomos
+            operando sob os protocolos de governança descritos na Seção 2; a responsabilidade científica e
+            editorial é do autor. Licença CC BY 4.0.
+        </div>
+
+    </div>
 </body>
+
 </html>

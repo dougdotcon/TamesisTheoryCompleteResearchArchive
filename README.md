@@ -11,7 +11,7 @@
 
 Este repositório preserva a trajetória completa do Laboratório Tamesis, seu ramo experimental atual e suas linhas históricas, matemáticas, físicas, computacionais e cognitivas. O arquivo contém **280 registros auditados**, organizados em **274 dossiês de auditoria**. A auditoria não transforma conjecturas em fatos: ela torna explícito o que é demonstração, modelo, simulação, ajuste, hipótese ou cenário especulativo.
 
-Desde 2026, o arquivo também opera um **laboratório de adjudicação contínua** (`05_DISCOVERY_LAB`): as alegações quantitativas do próprio arquivo são fechadas, uma a uma, contra referências externas reais, com critérios pré-registrados e reprodução adversarial obrigatória. O desfecho — dezenas de fechamentos negativos catalogados com veredito final e um resultado matemático positivo derivado e verificado adversarialmente — está sintetizado no **[artigo científico do laboratório](ARTIGO_DISCOVERY_LAB/index.html)**.
+Desde 2026, o arquivo também opera um **laboratório de adjudicação contínua** (`05_DISCOVERY_LAB`): as alegações quantitativas do próprio arquivo são fechadas, uma a uma, contra referências externas reais, com critérios pré-registrados e reprodução adversarial obrigatória. O desfecho — dezenas de fechamentos negativos catalogados com veredito final e um resultado matemático positivo derivado e verificado adversarialmente — está sintetizado no **[artigo científico do laboratório](index.html)** (página principal do repositório).
 
 ## Leitura rápida
 
@@ -36,7 +36,7 @@ Gaia, Odlyzko), com metodologia fixada antes de cada cálculo, proveniência de
 todo valor de referência e reprodução adversarial obrigatória para achados
 positivos. Registro completo: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` e
 `05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml`. Síntese em formato de
-artigo: **[`ARTIGO_DISCOVERY_LAB/index.html`](ARTIGO_DISCOVERY_LAB/index.html)**.
+artigo: **[`index.html`](index.html)** (página principal do repositório).
 
 **O funil de sobrevivência completo (2026):**
 
@@ -93,7 +93,7 @@ flowchart LR
 
 ## Comece aqui
 
-- **[Artigo científico do Discovery Lab (2026) — adjudicação adversarial e a função-limite U₁/₂](ARTIGO_DISCOVERY_LAB/index.html)**
+- **[Artigo científico do Discovery Lab (2026) — adjudicação adversarial e a função-limite U₁/₂](index.html)** (página principal do repositório)
 - [Relatório final de visão do laboratório](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
 - [Versão HTML para apresentação e PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
 - [Relatório da auditoria dos 280 artigos](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
@@ -175,7 +175,7 @@ O laboratório usa uma linguagem comum para comparar sistemas: **estado, recurso
 - versão HTML/PDF institucional para apresentação acadêmica;
 - preservação de versões históricas sem endossar suas alegações como resultados atuais;
 - **adjudicação adversarial completa das alegações quantitativas do núcleo** (2026): mais de 30 alegações fechadas com critérios pré-registrados, incluindo a detecção e correção de 2 resultados legados baseados em dados fabricados;
-- **um resultado matemático novo, derivado e verificado adversarialmente**: a função-limite exata `φ_∞(c) = ½√(π/c)·erf(√c)` da classe U₁/₂ (ver o [artigo](ARTIGO_DISCOVERY_LAB/index.html));
+- **um resultado matemático novo, derivado e verificado adversarialmente**: a função-limite exata `φ_∞(c) = ½√(π/c)·erf(√c)` da classe U₁/₂ (ver o [artigo](index.html));
 - dois achados replicados sobre os zeros reais da função zeta (anti-clustering de gaps consecutivos; escala GUE do gap mínimo).
 
 ## O que ainda não foi demonstrado
@@ -193,7 +193,8 @@ Essas linhas permanecem como conjecturas, programas de teste ou modelos restrito
 | `02_TAMESIS_MC_V1_OUTPUTS` | Figuras e animações convenientes do ramo `M_c v1`. |
 | `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | Materiais para colaboração e qualificação experimental. |
 | `05_DISCOVERY_LAB` | Laboratório de adjudicação: fila de testes, ledgers de governança, notas de metodologia, resultados e vereditos adversariais. |
-| `ARTIGO_DISCOVERY_LAB` | Artigo científico síntese do programa de adjudicação (HTML + figuras geradas por script dos JSONs de resultado). |
+| `index.html` | **Artigo científico síntese do programa de adjudicação** (página principal; figuras e script gerador em `ARTIGO_DISCOVERY_LAB/figures/`). |
+| `computational_freeze.html` | Página anterior da raiz (estado congelado do Tamesis M_c v1), preservada. |
 | `90_LEGACY` | Ramos históricos, substituídos, especulativos ou sem sustentação atual. |
 | `RECURSOS_PARA_PESQUISA` | Referências e materiais de pesquisa; não são evidência produzida pelo projeto. |
 | `publicar` / `publicados` | Organização editorial de artigos destinados a publicação e já publicados. |

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estado congelado da fase computacional Tamesis M_c v1 e condições para início da campanha física.">
+  <title>Tamesis M_c v1 — Computational Freeze</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f4f0e8;
+      --muted: #aca99f;
+      --line: rgba(255,255,255,.13);
+      --panel: rgba(18,22,28,.82);
+      --amber: #ffbd59;
+      --cyan: #78dce8;
+      --red: #ff6b6b;
+      --green: #8bd49c;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(120,220,232,.13), transparent 30rem),
+        radial-gradient(circle at 90% 18%, rgba(255,189,89,.11), transparent 25rem),
+        #080b10;
+      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    nav strong { color: var(--cyan); }
+    nav div { display: flex; flex-wrap: wrap; gap: 1rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--ink); }
+    header { padding: clamp(4rem, 9vw, 8rem) 0 4rem; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--amber);
+      font: 700 .76rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: .55rem;
+      height: .55rem;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 1rem var(--amber);
+    }
+    h1 {
+      max-width: 900px;
+      margin: 1.3rem 0 1rem;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: .92;
+      letter-spacing: -.065em;
+    }
+    .lead {
+      max-width: 770px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+    }
+    .lead strong { color: var(--ink); }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+    .button {
+      padding: .75rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: .55rem;
+      background: rgba(255,255,255,.04);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .button.primary { color: #0a0d11; background: var(--amber); border-color: var(--amber); }
+    main { padding-bottom: 5rem; }
+    .status-grid, .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .status, .card {
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+    }
+    .status { padding: 1.1rem; }
+    .status span {
+      display: block;
+      color: var(--muted);
+      font-size: .74rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .status code { display: block; margin-top: .45rem; color: var(--ink); word-break: break-word; }
+    .status.warning code { color: var(--amber); }
+    .status.negative code { color: var(--red); }
+    section { padding-top: 4.5rem; }
+    h2 { margin: 0 0 .6rem; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing: -.035em; }
+    .section-intro { max-width: 720px; margin: 0 0 1.5rem; color: var(--muted); }
+    .card { padding: 1.4rem; }
+    .card .number {
+      color: var(--cyan);
+      font: 700 .72rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: .08em;
+    }
+    .card h3 { margin: .75rem 0 .45rem; font-size: 1.12rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .card a { display: inline-block; margin-top: 1rem; color: var(--amber); }
+    .boundary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+    }
+    .boundary > div { padding: 1.5rem; }
+    .boundary > div + div { border-left: 1px solid var(--line); }
+    .boundary h3 { margin-top: 0; }
+    .boundary ul { margin: 0; padding-left: 1.15rem; color: var(--muted); }
+    .boundary .done h3 { color: var(--green); }
+    .boundary .missing h3 { color: var(--red); }
+    .resume {
+      padding: 1.5rem;
+      border: 1px solid rgba(255,189,89,.45);
+      border-radius: .8rem;
+      background: rgba(255,189,89,.07);
+    }
+    .resume code { color: var(--amber); }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    @media (max-width: 760px) {
+      .status-grid, .cards, .boundary { grid-template-columns: 1fr; }
+      .boundary > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      nav, footer { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+    <link rel="stylesheet" href="paper-layout.css">
+</head>
+<body>
+  <div class="shell">
+    <nav aria-label="Navegação principal">
+      <strong>Tamesis Research Archive</strong>
+      <div>
+        <a href="README_PTBR.md">README</a>
+        <a href="PROJECT_FREEZE.md">Freeze</a>
+        <a href="atlas.html">Atlas</a>
+        <a href="README.md">English</a>
+      </div>
+    </nav>
+
+    <header>
+      <div class="eyebrow">Computational phase frozen · 2026-07-26</div>
+      <h1>Tamesis M<sub>c</sub> v1</h1>
+      <p class="lead">
+        A hipótese foi transformada em um contrato falsificável e em um protocolo
+        experimental que falha de forma segura. <strong>Ainda não existe evidência física.</strong>
+        O próximo avanço pertence ao laboratório, não a uma nova camada de simulação.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="PROJECT_FREEZE.md">Ler estado científico</a>
+        <a class="button" href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md">Abrir núcleo técnico</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="status-grid" aria-label="Estado atual">
+        <div class="status"><span>Software</span><code>frozen_and_ready</code></div>
+        <div class="status warning"><span>Campanha</span><code>HARDWARE_QUALIFICATION_NOT_STARTED</code></div>
+        <div class="status negative"><span>Evidência física</span><code>false</code></div>
+      </div>
+
+      <section>
+        <h2>O que foi realmente alcançado</h2>
+        <p class="section-intro">
+          O resultado é uma infraestrutura de pesquisa rigorosa: não uma confirmação
+          da hipótese, mas uma forma honesta de fazê-la enfrentar dados.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <span class="number">01 · CONTRATO</span>
+            <h3>Hipótese fixa</h3>
+            <p>M<sub>c</sub> = 5.292674126388712 × 10<sup>−16</sup> kg e τ<sub>c</sub> = 2.176246482178091 s, registrados como valores do modelo.</p>
+          </article>
+          <article class="card">
+            <span class="number">02 · AUDITORIA</span>
+            <h3>Limites identificados</h3>
+            <p>Testes sintéticos revelaram degenerescências, contaminação e a necessidade de termometria interna independente.</p>
+          </article>
+          <article class="card">
+            <span class="number">03 · HARDWARE</span>
+            <h3>Demonstrador A v0.6</h3>
+            <p>Q0, A0 e A1 foram especificados com aquisição cega, rastreabilidade e decisões pré-registradas.</p>
+            <a href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md">Ver relatório →</a>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>A fronteira epistemológica</h2>
+        <p class="section-intro">Esta separação é parte do resultado e deve permanecer visível.</p>
+        <div class="boundary">
+          <div class="done">
+            <h3>Existe no repositório</h3>
+            <ul>
+              <li>modelo fenomenológico reproduzível;</li>
+              <li>comparações com famílias concorrentes;</li>
+              <li>validação sintética e testes de identificabilidade;</li>
+              <li>requisitos de sensores, plataforma e metrologia;</li>
+              <li>protocolo A0/A1 pronto com limitações.</li>
+            </ul>
+          </div>
+          <div class="missing">
+            <h3>Não existe ainda</h3>
+            <ul>
+              <li>hardware qualificado em Q0;</li>
+              <li>espectros reais de partículas GeV;</li>
+              <li>calibração cega A1 concluída;</li>
+              <li>observação de Γ<sub>T</sub>;</li>
+              <li>evidência sobre M<sub>c</sub> ou a favor de Tamesis.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="resume">
+          <h2>Quando o projeto deve continuar?</h2>
+          <p>
+            Somente quando houver inventário real de instrumentos, registros de
+            calibração, espectros GeV, séries térmicas, dados A0 ou colaboração
+            laboratorial documentada.
+          </p>
+          <code>PAUSED_PENDING_HARDWARE_AND_METROLOGY</code>
+        </div>
+      </section>
+
+      <section>
+        <h2>Explore sem confundir as camadas</h2>
+        <div class="cards">
+          <article class="card">
+            <span class="number">CURRENT</span>
+            <h3>Núcleo M<sub>c</sub> v1</h3>
+            <p>Código, dados, contratos e relatórios da linha testável congelada.</p>
+            <a href="01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md">Abrir →</a>
+          </article>
+          <article class="card">
+            <span class="number">VISUAL</span>
+            <h3>Resultados computacionais</h3>
+            <p>Figuras e animações do modelo. Não são observações experimentais.</p>
+            <a href="02_TAMESIS_MC_V1_OUTPUTS/README.md">Abrir →</a>
+          </article>
+          <article class="card">
+            <span class="number">CONCEPTUAL</span>
+            <h3>Atlas de hipóteses</h3>
+            <p>Mapa exploratório com status epistemológico explícito.</p>
+            <a href="atlas.html">Abrir →</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Tamesis Research Archive</span>
+      <span>Preservar a história não equivale a validar suas alegações.</span>
+    </footer>
+  </div>
+</body>
+</html>

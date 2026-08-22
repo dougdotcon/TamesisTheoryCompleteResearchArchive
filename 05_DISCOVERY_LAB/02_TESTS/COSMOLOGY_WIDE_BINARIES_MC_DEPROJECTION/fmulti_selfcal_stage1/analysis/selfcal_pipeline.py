@@ -427,10 +427,23 @@ def calibrate_f_multi(
     bin_edges: np.ndarray, anchor_bin: int, n_mc: int, seed: int,
     f_lo: float = 0.0, f_hi: float = 0.9, xtol: float = 5e-4,
     include_wobble: bool = True, n_bootstrap_final: int = 400,
+    return_raw: bool = False,
 ) -> dict:
     """Bisseccao (scipy.optimize.brentq) sobre f_multi ate' que
     delta_obs-newt(anchor_bin; f_multi) = 0 -- METHODOLOGY_ADDENDUM.md
     Secao 2, criterio verbatim do Artigo B (PROVENANCE_CHAE_EQS.md Secao 5).
+
+    return_raw=True (adicionado 2026-08-22, revisao do rascunho de
+    PREREGISTRATION_STAGE2_DRAFT.md Secao 4.5/12.4): propaga return_raw=True
+    para a chamada final interna de run_delta_obs_newt_selfcal e inclui seu
+    dict `_raw` no retorno (chave "final_raw"), sob a MESMA seed+777 ja'
+    usada para calcular "final_result" -- elimina a necessidade de um
+    chamador externo reexecutar run_delta_obs_newt_selfcal manualmente com
+    uma seed reconstruida a mao para alimentar bootstrap_a0_refit, e com ela
+    o risco de descasamento de semente entre o ponto central e o IC
+    (identificado como o "ponto de maior risco de erro silencioso" da
+    especificacao do Estagio 2). Comportamento default (return_raw=False)
+    inalterado.
     """
 
     def point_delta_anchor(f_multi):
@@ -459,12 +472,16 @@ def calibrate_f_multi(
         d_mean_pc, pmra_err1, pmra_err2, pmde_err1, pmde_err2,
         f_multi=f_calibrated, bin_edges=bin_edges, n_mc=n_mc, seed=seed + 777,
         include_wobble=include_wobble, n_bootstrap=n_bootstrap_final,
+        return_raw=return_raw,
     )
 
-    return {
+    result = {
         "f_multi_calibrated": f_calibrated,
         "converged_bracket": converged,
         "bracket": {"f_lo": f_lo, "f_hi": f_hi, "delta_anchor_at_f_lo": d_lo, "delta_anchor_at_f_hi": d_hi},
         "anchor_bin": anchor_bin,
         "final_result": final,
     }
+    if return_raw:
+        result["final_raw"] = final.pop("_raw")
+    return result

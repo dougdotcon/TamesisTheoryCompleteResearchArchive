@@ -1590,3 +1590,57 @@ decisions:
       - "nenhuma alegacao clinica/diagnostica autorizada -- Sec.9 item 1, reafirmado"
       - "reexecucao adversarial obrigatoria (AGENTS.md passo 7) antes de qualquer veredito CONFIRMA/REFUTA ser catalogado como final"
       - "download autorizado restrito a sessao EC dos 64 sujeitos -- nao o dataset completo de 193 arquivos"
+
+  - decision_id: DISC-DEC-029
+    date: 2026-08-22
+    decision: >
+      Travar (lock) PREREGISTRATION_STAGE2.md de SPARC-FMULTI-STAGE2
+      (nova etapa de DISC-COSMOLOGY-MOND-SPARC-004), promovido sem
+      alteracao de conteudo metodologico de PREREGISTRATION_STAGE2_DRAFT.md
+      (preservado integralmente como registro de auditoria). Aprovados os
+      4 judgment calls nomeados pelo rascunho (Sec.12): N_MC=200 (mantem
+      convencao ja travada para dado real desta linha), N_bootstrap=2000
+      (topo da faixa recomendada pela verificacao adversarial do Estagio
+      1), SEED_STAGE2=20260822 (coincide com a data efetiva deste lock).
+      O item 12.4 (risco de descasamento de semente entre o ajuste
+      central de a0 e seu bootstrap) recebeu uma correcao de CODIGO, nao
+      so' documental: calibrate_f_multi() em analysis/selfcal_pipeline.py
+      ganhou um parametro aditivo return_raw (default False, inalterado)
+      que elimina inteiramente a necessidade de reconstrucao manual de
+      semente. Checklist completo da Secao 9 do pre-registro (revalidacao
+      sintetica obrigatoria) executado nesta revisao: os 7 criterios
+      A1-A4/B1-B3 confirmados sob N_bootstrap=2000 nos 5 cenarios
+      sinteticos (nao so' o cenario "por pouco" ja' nomeado); a margem
+      "por pouco" da Validacao B (cenario f_multi_true=0,35) permanece
+      estavel sob 5x mais replicas de bootstrap, fortalecendo a leitura
+      de vies genuino pequeno em vez de ruido de estimacao de IC.
+    rationale: >
+      Os 3 primeiros judgment calls sao escolhas defensaveis e de baixo
+      risco ja justificadas pelo proprio rascunho (continuidade de
+      convencao ja travada, topo de uma faixa recomendada, semente
+      documentada). O 4o (descasamento de semente) e' um risco de
+      implementacao real e silencioso -- um segundo agente revisando so'
+      os numeros finais nao o detectaria sem inspecionar sementes
+      internas -- corrigido na origem (codigo aditivo, comportamento
+      default inalterado) em vez de deixado como disciplina manual a
+      seguir, mesmo padrao ja aplicado ao guard de fit_a0() em
+      DISC-DEC-026. A revalidacao completa da Secao 9 (nao so' o item ja'
+      nomeado pela verificacao adversarial do Estagio 1) e' proporcional
+      ao risco: esta e' a primeira vez que este pipeline especifico toca
+      dado real, sob parametros numericos (N_MC, N_bootstrap) diferentes
+      dos usados em toda validacao sintetica anterior.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/PREREGISTRATION_STAGE2.md (novo, LOCKED, promovido do rascunho)"
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/PREREGISTRATION_STAGE2_DRAFT.md (preservado sem alteracao, registro de auditoria)"
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/analysis/selfcal_pipeline.py (calibrate_f_multi ganha parametro aditivo return_raw)"
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/fmulti_selfcal_stage1/results/ (revalidacao sob N_bootstrap=2000, 5 cenarios)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-COSMOLOGY-MOND-SPARC-004: nova etapa SPARC-FMULTI-STAGE2 com pre-registro proprio LOCKED, autorizando calculo sobre a amostra de descoberta real (30.203 sistemas)"
+    untouched_safeguards:
+      - "holdout selado (12.944 sistemas) permanece intocado -- linha vermelha explicita na Sec.8 do pre-registro, nao alterada por este lock"
+      - "reexecucao adversarial obrigatoria (AGENTS.md passo 7) antes de qualquer veredito ser catalogado, independentemente de qualquer gatilho da Sec.6 disparar"
+      - "camada interpretativa da Sec.5 (vies residual conhecido) permanece ativa -- nenhuma falsificacao de H_A/H_B aceita sem checar a margem contra o fator de vies 1,4-1,6x"
+      - "nenhuma alegacao 'Tamesis confirmado' autorizada a partir de um unico teste sem reproducao adversarial"

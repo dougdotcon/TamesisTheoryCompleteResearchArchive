@@ -387,13 +387,28 @@ queue:
       piso de ruido, razao 1,44). Pre-registro travado (LOCKED). Nenhum
       dado real de saida (v_p observado) foi tocado ate este ponto --
       toda a validacao/revalidacao usou dado sintetico dos dois lados.
+    stage2_lock: >
+      2026-08-22 (DISC-DEC-029): PREREGISTRATION_STAGE2.md travado
+      (LOCKED), promovido sem alteracao de conteudo do rascunho
+      PREREGISTRATION_STAGE2_DRAFT.md (preservado como registro de
+      auditoria) apos revisao explicita dos 4 judgment calls nomeados
+      (N_MC=200, N_bootstrap=2000, SEED_STAGE2=20260822 aprovados;
+      risco de descasamento de semente corrigido via parametro aditivo
+      return_raw em calibrate_f_multi(), nao so' documentado). Checklist
+      completo de revalidacao sintetica (Sec.9) reexecutado sob
+      N_bootstrap=2000 nos 5 cenarios -- 7/7 criterios A1-A4/B1-B3
+      continuam passando. Calculo sobre a amostra de descoberta real
+      (30.203 sistemas) autorizado a partir deste lock; holdout selado
+      (12.944 sistemas) permanece linha vermelha explicita, intocado.
     next_action: >
-      Estagio 1 (metodologia + validacao sintetica da auto-calibracao de
-      f_multi) concluido -- ver fmulti_stage1_results abaixo. Estagio 2
-      (aplicacao a amostra de descoberta REAL, 30.203 sistemas, ainda NAO
-      o holdout selado) exige autorizacao explicita separada e um NOVO
-      pre-registro proprio (nao reformulando este), mesma disciplina de
-      DISC-DEC-001 -- nao autorizada por esta entrada.
+      Rodar a analise pre-registrada travada (Estagio 2): auto-calibrar
+      f_multi sobre os 30.203 sistemas de descoberta reais, extrair
+      delta_obs-newt corrigido, ajustar a0 e seu IC95% via bootstrap,
+      aplicar a regra de decisao de PREREGISTRATION_STAGE2.md Sec.5
+      (incluindo a camada interpretativa do vies residual), checar os
+      gatilhos adversariais da Sec.6, depois reproducao adversarial
+      independente obrigatoria (AGENTS.md passo 7) antes de catalogar
+      qualquer veredito.
     fmulti_stage1_results: >
       2026-08-22 (DISC-DEC-023, retomada como SPARC-FMULTI-STAGE1):
       pipeline de auto-calibracao completa de f_multi (Chae Eqs. 11-13 +

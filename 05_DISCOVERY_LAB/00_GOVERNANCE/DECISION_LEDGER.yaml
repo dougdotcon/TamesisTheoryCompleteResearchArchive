@@ -2087,3 +2087,61 @@ decisions:
       - "classificacao M-CLUST(b) em U_1/2 no limite n->infinito nao afetada -- so a taxa de correcao finito-n, e mesmo essa nao mudou (phi_CAND continua sendo a formula de registro, nao substituida)"
       - "residual_attempt/ATTEMPT.md e todos os arquivos existentes preservados sem alteracao -- este e' um anexo novo em subpasta propria, apenas leitura do que ja existia"
       - "hipoteses nomeadas (SS7.2, SS8) explicitamente rotuladas como nao-provadas, nao promovidas a resultado -- nenhuma reescrita da fórmula de registro phi_CAND baseada em heuristica nao validada"
+
+  - decision_id: DISC-DEC-038
+    date: 2026-08-22
+    decision: >
+      Autorizar onda 8, continuando o modo padrao de operacao
+      multi-linha (DISC-DEC-023), com a onda 7 (DISC-DEC-033/034/035/
+      036/037) agora inteiramente fechada em ambas as frentes -- 2
+      frentes matematicas puras independentes, ambas ja nomeadas como
+      reaberturas legitimas e ja delimitadas pelas proprias integracoes
+      que as descobriram. (a) `MCLUST-GLOBAL-EXCLUSION-ATTEMPT` --
+      formalizar e testar a hipotese nomeada em
+      aggregation_closure_attempt/ATTEMPT.md SS7.2: o pool de candidatos
+      real para pi(x) na massa visitada t deveria excluir TODAS as
+      imagens ja consumidas ao longo de TODA a trajetoria (ordem tn), nao
+      so a janela local de x (ordem b) -- interacao entre essa exclusao
+      de escala global e a elevacao-por-R ja derivada (DISC-DEC-037) nao
+      formalizada nem testada; sucesso fecharia o residuo remanescente de
+      phi_CAND (chi^2~74-90 em 18 celulas, contra ~18 esperado por
+      ruido). (b) `K-GENERAL-EXISTENCE-ATTEMPT` -- tentar fechar a
+      ressalva de regularidade de SS4 de k6_attempt/ATTEMPT.md (a
+      EXISTENCIA da expansao assintotica de duas parcelas assumida, para
+      r alem dos 11 valores concretamente verificados) por inducao formal
+      em r sobre a forma da solucao, ou outra via independente de
+      primeiros principios (ex. um argumento de tipo Gronwall discreto
+      uniforme em m,n, ja nomeado como exemplo pelo proprio
+      Hypothesis~ref{hyp:regularity} do pacote standalone) -- nenhuma
+      tentada ate agora; sucesso tornaria o Lema Aberto E a conjectura de
+      taxa geral-K incondicionais para todo K (nao apenas K=0,...,10).
+    rationale: >
+      Ambas as frentes sao reaberturas explicitamente nomeadas como
+      legitimas pelas proprias integracoes que as descobriram --
+      aggregation_closure_attempt/ATTEMPT.md SS7.2 nomeia precisamente a
+      hipotese de exclusao de escala global como candidata mais provavel
+      para fechar o residuo, sem tentar formaliza-la (mandato da frente
+      anterior proibia apresentar mais um ajuste como se fosse
+      derivacao); k6_attempt/ATTEMPT.md SS4 e o proprio referee hostil
+      (REFEREE_REPORT.md, julgamento final) nomeiam precisamente a
+      existencia da expansao assintotica para r geral como a unica
+      lacuna restante, com um exemplo concreto de tecnica candidata
+      (limitante de Gronwall discreto). Nenhuma das duas e busca forcada
+      -- ambas tem escopo, criterio de sucesso, e criterio de "nao
+      consegui fechar" honesto ja embutido no desenho pelas proprias
+      frentes anteriores, mesmo padrao de K3-OPEN-LEMMA-ATTEMPT-2 e
+      K6-OPEN-LEMMA-ATTEMPT, que tiveram exito onde tentativas anteriores
+      nao conseguiram. Matematica combinatoria/assintotica pura, nenhum
+      dado externo, nenhum holdout.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/ (novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- ambas exploratorias/tecnicas dentro de linhas ja ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente e' um desfecho aceito e completo, mesmo se so' delimitar mais o problema (precedente direto: DISC-DEC-037, que fechou a obstrucao nomeada mas nao melhorou phi_CAND, e foi catalogado com o mesmo rigor de um resultado positivo)"
+      - "qualquer resultado positivo (formula nova, prova nova) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/K6/M-CLUST"
+      - "phi_CAND permanece a formula de registro de M-CLUST(b) e o Lema Aberto K=0,...,10 permanece a fronteira incondicional ate que qualquer resultado positivo desta onda seja adversarialmente confirmado e integrado"

@@ -1689,6 +1689,19 @@ incondicional do Lema Aberto para `K` geral. A conjectura de taxa segue
 o mesmo padrão: **incondicional para `K=0,...,10`**, **PROVADA, modulo a
 ressalva de §4, para `K` geral**.
 
+**Por que os dois compartilham exatamente o mesmo status condicional
+(não é uma coincidência de rotulagem).** Um limite finito
+`lim_n n(ψ_n^{(K)}-φ_K)` força elementarmente `ψ_n^{(K)}-φ_K→0` (se a
+diferença não se anulasse, multiplicar por `n→∞` não poderia convergir a
+um valor finito). Logo a prova condicional da taxa (Parte B), exatamente
+como enunciada, já descarrega condicionalmente o Lema Aberto em si —
+como corolário imediato, não como um fato estabelecido separadamente —
+sob a mesma ressalva de §4. É por isso que nenhum dos dois é fechado
+incondicionalmente para `K≥11`, mas também nenhum dos dois fica "mais
+aberto" que o outro: ambos repousam sobre a idêntica, única, hipótese
+precisamente nomeada, com o mesmo status — provados condicionalmente,
+abertos incondicionalmente.
+
 **O que permanece honestamente aberto.** (i) A forma fechada exata,
 todas-as-ordens, geral-`K`, para `ψ_n^{(K)}` (não apenas seu limite e
 sua taxa) — nunca tentada além da escada concreta (§6.2 de

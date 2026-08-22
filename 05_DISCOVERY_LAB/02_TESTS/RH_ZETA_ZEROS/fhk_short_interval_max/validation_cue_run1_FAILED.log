@@ -1,0 +1,45 @@
+RUN 1 FALHOU (preservado; precedente validation_zeta_eval_run1_FAILED.log)
+Causa: TypeError no json.dump final -- np.bool_/np.float64 nao serializaveis.
+Toda a computacao (deterministica, seed 27182818) concluiu; o crash foi
+somente na serializacao. Correcao para frente: casts explicitos; rerun
+identico (mesmo seed reproduz os mesmos numeros).
+---- stdout da rodada 1 ----
+N=7: E[max]=1.8054 sd=0.3796 se=0.0042
+N=8: E[max]=1.8979 sd=0.3898 se=0.0044
+N=9: E[max]=1.9795 sd=0.4073 se=0.0046
+N=10: E[max]=2.0585 sd=0.4161 se=0.0047
+N=11: E[max]=2.1284 sd=0.4289 se=0.0048
+N=12: E[max]=2.1877 sd=0.4444 se=0.0050
+N=13: E[max]=2.2342 sd=0.4479 se=0.0050
+N=14: E[max]=2.2937 sd=0.4517 se=0.0051
+N=15: E[max]=2.3537 sd=0.4604 se=0.0051
+N=16: E[max]=2.3961 sd=0.4662 se=0.0052
+N=17: E[max]=2.4479 sd=0.4717 se=0.0053
+N=18: E[max]=2.4847 sd=0.4834 se=0.0054
+N=19: E[max]=2.5242 sd=0.4805 se=0.0054
+N=20: E[max]=2.5677 sd=0.4887 se=0.0055
+N=21: E[max]=2.6048 sd=0.5056 se=0.0057
+N=22: E[max]=2.6411 sd=0.4911 se=0.0055
+N=23: E[max]=2.6809 sd=0.5085 se=0.0057
+N=64: E[max]=3.5100 se=0.0130
+N=128: E[max]=4.0800 se=0.0141
+N=256: E[max]=4.6504 se=0.0141
+Traceback (most recent call last):
+  File "/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/validate_cue.py", line 180, in <module>
+    main()
+  File "/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/validate_cue.py", line 170, in main
+    json.dump(out, open(HERE / "validation_cue.json", "w"), indent=2)
+  File "/usr/lib/python3.11/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable
+
+[exited with code 1]

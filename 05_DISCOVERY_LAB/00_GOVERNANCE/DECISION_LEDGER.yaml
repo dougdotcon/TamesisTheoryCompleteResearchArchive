@@ -999,3 +999,41 @@ decisions:
       - "frentes B e C tem verificacao adversarial obrigatoria (VB, VC) com numeros/derivacoes travados antes de ler o material original"
       - "o paper e o pacote nao usam a palavra 'novo' ate o veredito da frente A; conjecturas permanecem rotuladas como conjecturas"
       - "nenhum nome de modelo de IA em artefatos do repositorio; autoria cientifica do usuario"
+
+  - decision_id: DISC-DEC-016
+    date: 2026-08-22
+    decision: >
+      Registrar o fechamento de DISC-RH-FHK-SHORT-INTERVAL-MAX-001 --
+      novo test_id criado na fila, status CLOSED_INCONCLUSIVE, com
+      reproducao adversarial obrigatoria (achado de exclusao do lado
+      iid a >=8,8 sigma) CONFIRMADA por implementacao independente a
+      partir apenas do pre-registro travado.
+    rationale: >
+      A regra ternaria travada a priori (H_FHK -3/4 vs H_iid -1/4,
+      curvas calibradas em amostra finita) produziu um veredito
+      honesto e nao-ambiguo: o lado iid/REM e excluido decisivamente
+      (b_hat=-0,5622+-0,0384, z>=8,8 sigma nas 3 variantes), mas a
+      curva CUE canonica tambem e rejeitada (-3,62 sigma) -- portanto
+      NENHUM dos dois dicionarios de altura finita nomeados encaixa, e
+      o veredito formal e INCONCLUSIVE, nao uma confirmacao de FHK. A
+      reproducao adversarial (motor de avaliacao de zeta
+      completamente distinto, validado contra mpmath.siegelz,
+      offsets recomputados das sementes da especificacao, M completo)
+      reproduziu b_hat e todos os z-scores dentro do ruido esperado
+      -- confirmando que o resultado nao depende de um bug ou artefato
+      de implementacao especifico do pipeline primario. O holdout
+      selado (T=10^11) nunca foi tocado por nenhum dos dois agentes.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (novo test_id DISC-RH-FHK-SHORT-INTERVAL-MAX-001; next_action de DISC-RH-REAL-001 atualizado)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atualizado)"
+      - "README.md (tabela de adjudicacao atualizada)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "novo test_id DISC-RH-FHK-SHORT-INTERVAL-MAX-001 criado diretamente em status terminal CLOSED_INCONCLUSIVE (primeira vez nesta linha que um sub-teste nasce e fecha na mesma decisao -- o ciclo completo pre-registro->validacao->analise->adversarial ja estava concluido quando integrado)"
+      - "DISC-RH-REAL-001 (linha guarda-chuva): next_action atualizado -- nenhuma acao obrigatoria pendente"
+    untouched_safeguards:
+      - "holdout T=10^11 permanece selado nos dois pipelines (primario e adversarial) -- nenhum t>2,1e10 avaliado por qualquer um"
+      - "nenhuma alegacao sobre a Hipotese de Riemann feita ou implicada por este fechamento"
+      - "ambiguidade de especificacao encontrada pelo agente adversarial (lei de offset da banda de calibracao descartavel) documentada como licao de processo, nao escondida"

@@ -44,7 +44,7 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 |---|---|---|
 | Invariante cross-domain (TRI-RG) | 16 candidatos, 5 rodadas | `CLOSED_NULL` — 0 sobreviventes; 4 achados `p<0,05` refutados por reprodução adversarial (explicações mundanas demonstradas) |
 | Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
-| Zeros de ζ (RH-REAL, linha aberta) | 8 itens triados, 2 sub-testes completos | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); teste FHK pré-registrado em execução |
+| Zeros de ζ (RH-REAL, linha aberta) | 8 itens triados, 3 sub-testes completos | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); teste FHK (máximos em intervalos curtos) fechado `CLOSED_INCONCLUSIVE` — lado iid excluído a ≥8,8σ, mas curva CUE canônica também rejeitada (-3,62σ); confirmado por reprodução adversarial com motor de ζ independente |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
 | **Função-limite U₁/₂ (onda 2)** | 1 pergunta aberta | **Forma fechada DERIVADA e verificada adversarialmente** (ver abaixo) |
 

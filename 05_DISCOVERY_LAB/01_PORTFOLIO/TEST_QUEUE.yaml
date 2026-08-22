@@ -489,12 +489,21 @@ queue:
       nomeado; pre-registro viavel exige M~2000/altura + altura 10^11
       (~4-5h de computo, separacao projetada ~8 sigma). Ver
       02_TESTS/RH_ZETA_ZEROS/phase0_zeta_eval_triage/TRIAGE_RESULTS.md
+    fhk_short_interval_max_result: >
+      DISC-RH-FHK-SHORT-INTERVAL-MAX-001 concluido e fechado (ver
+      entrada propria da fila abaixo) -- CLOSED_INCONCLUSIVE sob a
+      regra ternaria travada, com o componente de exclusao do lado iid
+      (>=8,8 sigma) confirmado por reproducao adversarial independente
+      (pipeline proprio, motor zeta distinto, offsets recomputados da
+      especificacao).
     next_action: >
-      Onda 2 (DISC-DEC-014): desenhar e TRAVAR o pre-registro do
-      sub-teste FHK item 10 (DISC-RH-FHK-SHORT-INTERVAL-MAX-001)
-      seguindo o plano de poder da triagem, validar pipeline contra
-      ground truth sintetico ANTES do lock, e so entao computar --
-      regra ternaria de decisao, altura de holdout selada.
+      Nenhuma acao obrigatoria. O unico sub-teste desenhado a partir
+      da triagem (item 10, FHK) fechou CLOSED_INCONCLUSIVE com holdout
+      selado (altura 10^11) preservado para um futuro teste que tente
+      dicionarios de altura finita adicionais (nao apenas iid vs CUE
+      canonico). Itens 5 e 6 permanecem despriorizados (ver
+      phase0_zeta_eval_triage acima); itens 1,2,3,4,8,11,12 do
+      levantamento original nunca desenhados como sub-teste.
     stop_condition: >
       pular a fase de filtragem numerica/literatura e ir direto para Lean;
       alegar progresso sobre RH em si a partir de qualquer resultado desta
@@ -761,6 +770,78 @@ queue:
       2026 em si; alegar progresso sobre RH; interpretar o
       REPLICATION_FAILED como contradicao do achado primario -- e
       inconclusivo por falta de poder, nao um resultado oposto.
+
+  - test_id: DISC-RH-FHK-SHORT-INTERVAL-MAX-001
+    title: "Maximos de log|zeta(1/2+it)| em intervalos curtos -- FHK (-3/4) vs iid/REM (-1/4)"
+    domain: matematica_pura
+    parent_legacy: "DISC-RH-REAL-001 (item 10 do levantamento, unico priorizado pela triagem exploratoria de 2026-08-21)"
+    related_tests:
+      - "DISC-RH-REAL-001 (linha guarda-chuva)"
+    status: CLOSED_INCONCLUSIVE
+    existing_assets:
+      - "02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/PREREGISTRATION.md"
+      - "02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/DESIGN.json"
+      - "02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/validate_{iid_null,cue,grid_bias}.py + validation_*.{json,log}"
+      - "02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/run_primary.py, primary_result.json, sanity_checks.py"
+      - "02_TESTS/RH_ZETA_ZEROS/fhk_short_interval_max/adversarial/ (reproducao independente completa)"
+    description: >
+      Hipotese H_FHK (correcao -3/4*logloglogT ao maximo de log|zeta|
+      em intervalos curtos, Fujii/Harper/Keating) vs H_iid (correcao
+      -1/4, modelo log-correlacionado ingenuo/REM) como modelos
+      concorrentes nomeados, regra de decisao ternaria travada a
+      priori. Desenho: 7 alturas T de 10^4 a 10^10, M=15.600 janelas
+      no total, offsets deterministicos das sementes travadas, grid
+      512, estatistica WLS ponderada, calibracao de vies de grade e
+      curvas de referencia iid/CUE calibradas em amostra finita ANTES
+      do lock (validacao sintetica completa: nulo iid, CUE via
+      Mezzadri QR-Haar verificado por fetch do arXiv, correcao de
+      vies de grade por extrapolacao de Richardson). Altura T=10^11
+      (M=600) selada como holdout, nunca avaliada.
+    primary_result: >
+      b_hat = -0,5622 +- 0,0384 (WLS, chi2(5)=10,1). Exclui o lado iid
+      em >=8,8 sigma em todas as 3 variantes calibradas declaradas
+      (-14,8/-18,2/-8,8) -- decisivo. Rejeita tambem a curva CUE
+      canonica calibrada em amostra finita a -3,62 sigma (entre as 2
+      variantes CUE). Descritor assintotico secundario: +4,89 sigma de
+      -3/4, -8,13 sigma de -1/4. Checagens de sanidade (S1/S2) PASS.
+      Veredito formal pela regra ternaria travada:
+      **INCONCLUSIVE -- NEITHER_MODEL** (o dado esta qualitativamente
+      do lado log-correlacionado/anti-iid, mas nenhum dos dois
+      dicionarios de altura finita nomeados e calibrados encaixa
+      exatamente). Holdout T=10^11 permanece SELADO -- nunca avaliado.
+    adversarial_verdict: >
+      CONFIRMADO. Reproducao independente completa a partir SOMENTE de
+      PREREGISTRATION.md/DESIGN.json (motor de avaliacao de zeta
+      distinto -- fase exata via loggamma, vs Stirling+longdouble do
+      pipeline primario; validado contra mpmath.siegelz antes de tocar
+      dado real; offsets recomputados das sementes travadas, M
+      completo sem subamostragem). b_hat=-0,5635+-0,0385 (diff -0,03
+      SE do primario); z_iid=-14,83/-18,15/-8,83 e
+      z_cue=-3,65/+3,01 -- identicos ao primario dentro do ruido;
+      veredito ternario reproduzido exatamente. Medias e desvios por
+      altura concordam a 1e-8 a 1e-13 relativo entre os 2 motores de
+      zeta independentes -- validacao cruzada forte. Unica divergencia
+      (correcao de vies de grade, efeito de segunda ordem) rastreada a
+      uma ambiguidade genuina de especificacao (lei exata dos offsets
+      da banda de calibracao descartavel nao escrita no pre-registro)
+      -- nao muda sinal de nenhum z-score nem o veredito. Ressalva de
+      processo documentada: o resultado primario ficou embutido no
+      proprio PREREGISTRATION.md (adendo), entao o agente adversarial
+      necessariamente viu o alvo antes de rodar -- recomendacao para
+      futuros gates: separar arquivo de especificacao e de resultado.
+    next_action: >
+      Nenhuma acao obrigatoria -- teste fechado com veredito honesto e
+      confirmado adversarialmente. Uma tentativa futura legitima
+      exigiria um dicionario de altura finita adicional (nao apenas
+      iid vs CUE canonico) definido a priori, e so entao poderia
+      considerar abrir o holdout selado (T=10^11) -- nunca reformular
+      este pre-registro.
+    stop_condition: >
+      [ja cumprido] reformular H_FHK/H_iid ou a regra ternaria apos ver
+      o resultado; abrir o holdout selado sem novo pre-registro; alegar
+      qualquer progresso sobre a Hipotese de Riemann a partir deste
+      teste -- e um teste sobre o comportamento de maximos locais de
+      zeta em altura finita, nao sobre RH.
 
   - test_id: DISC-TRI-RG-001
     title: "Busca de invariante cross-domain via lente de renormalizacao/coarse-graining para TRI/TDTR"

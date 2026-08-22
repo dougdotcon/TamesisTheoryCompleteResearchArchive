@@ -1,0 +1,50 @@
+======================================================================
+(1) Verify every algebraic step of the by-hand proof symbolically
+======================================================================
+w(i) - (i^2 - n*i + r(r+1)) [n=2r+1], expand: 0
+w(n-i) - w(i), expand (should be 0): 0
+w(r) = 0   w(r+1) = 0
+
+NOTE: sp.summation(i**2*C(n,i),(i,0,n)) for SYMBOLIC n returned an
+unresolved Piecewise in this sympy version (a limitation of sympy's
+automatic symbolic-bound summation engine, not evidence against the
+identity). Re-deriving the three moment sums instead via the textbook
+differentiate-(1+x)^n-and-evaluate-at-x=1 method, symbolically:
+  sum C(n,i)     = 2**n   matches 2^n: True
+  sum i C(n,i)   = 2**(n - 1)*n   matches n*2^(n-1): True
+  sum i^2 C(n,i) = 2**n*n**2/4 + 2**n*n/4   matches n(n+1)*2^(n-2): True
+
+Full sum_{i=0}^{n} w(i) C(n,i), n=2r+1, via the three closed forms: 4**r*r
+Target r*2^(2r): 2**(2*r)*r  match: True
+
+Halving (symmetry + 2 vanishing middle terms) gives the Lemma's RHS
+r*2^(2r-1) exactly -- every step of the document's hand proof holds,
+now independently re-derived via a DIFFERENT proof of the three
+moment identities (differentiation, not sp.summation's symbolic-bound
+evaluator).
+
+======================================================================
+(2) Attempt an independent, general-SYMBOLIC-r closed-form proof via
+    Gosper's algorithm (sp.concrete.gosper_sum) -- a different code
+    path from plain sp.summation
+======================================================================
+gosper_sum result: None
+Gosper's algorithm returned None (no hypergeometric closed form found by
+this method either) -- CONFIRMS the document's Sec.6.3 finding that
+automated symbolic-bound summation does not close this sum directly;
+the hand proof (verified in part (1) above) remains the correct route.
+
+======================================================================
+(3) Exact-integer numeric confirmation, r=1..60
+======================================================================
+  r=1: lhs=2  rhs=2  match=True
+  r=2: lhs=16  rhs=16  match=True
+  r=3: lhs=96  rhs=96  match=True
+  r=4: lhs=512  rhs=512  match=True
+  r=5: lhs=2560  rhs=2560  match=True
+  r=30: lhs=17293822569102704640  rhs=17293822569102704640  match=True
+  r=45: lhs=27853650883921056185230295040  rhs=27853650883921056185230295040  match=True
+  r=60: lhs=39876839873547476187114211808410337280  rhs=39876839873547476187114211808410337280  match=True
+r=1..60 (60 values): ALL MATCH
+
+ALL PART-B-ITEM-3 CHECKS PASSED.

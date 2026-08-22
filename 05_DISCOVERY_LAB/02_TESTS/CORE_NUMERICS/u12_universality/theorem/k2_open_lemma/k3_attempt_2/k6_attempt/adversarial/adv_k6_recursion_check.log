@@ -1,0 +1,76 @@
+======================================================================
+STEP 1: build the K=6 ladder via markov_transfer.py's build_levels
+        (this module was independently re-derived and found SOUND by
+        the k3_attempt_2 adversarial referee via a DIFFERENT method
+        [integrating factor vs hockey-stick] -- reused here as a
+        validated foundation, not blind trust in THIS document's
+        own extend_frontier.py output).
+======================================================================
+psi_n^(6) via my own build_levels(6) call = (2048*n**6 + 3072*n**5 + 4293*n**4 + 4638*n**3 + 3529*n**2 + 1662*n + 360)/(6006*n**6)
+psi_n^(6) as claimed in ATTEMPT.md               = (2048*n**6 + 3072*n**5 + 4293*n**4 + 4638*n**3 + 3529*n**2 + 1662*n + 360)/(6006*n**6)
+difference (should be 0): 0
+MATCH: my own re-execution of the K=6 ladder reproduces the document's
+claimed closed form exactly.
+
+======================================================================
+STEP 2: substitute EVERY level's closed form back into the EXACT
+        defining recursion (typed fresh from ../ATTEMPT.md Sec.2's
+        Proposition, not imported), symbolic n,b -- the task's
+        explicit request: 'substituting back into the exact
+        recursion', not just 'the solver ran'.
+======================================================================
+  g_0 recursion (r=0): LHS-RHS simplify = 0   OK
+  h_0 recursion (r=0): LHS-RHS simplify = 0   OK
+  g_1 recursion (r=1): LHS-RHS simplify = 0   OK
+  h_1 recursion (r=1): LHS-RHS simplify = 0   OK
+  g_2 recursion (r=2): LHS-RHS simplify = 0   OK
+  h_2 recursion (r=2): LHS-RHS simplify = 0   OK
+  g_3 recursion (r=3): LHS-RHS simplify = 0   OK
+  h_3 recursion (r=3): LHS-RHS simplify = 0   OK
+  g_4 recursion (r=4): LHS-RHS simplify = 0   OK
+  h_4 recursion (r=4): LHS-RHS simplify = 0   OK
+  g_5 recursion (r=5): LHS-RHS simplify = 0   OK
+  h_5 recursion (r=5): LHS-RHS simplify = 0   OK
+  g_6 recursion (r=6): LHS-RHS simplify = 0   OK
+  h_6 recursion (r=6): LHS-RHS simplify = 0   OK
+
+ALL 13 LEVELS (g_0..g_6, h_0..h_6) SATISFY THE EXACT RECURSION: True
+
+======================================================================
+STEP 3: a SECOND, independent memoized exact-Fraction direct recursion
+        (fresh code, NOT markov_direct.py) for K=6, checked against the
+        closed form for n=7..40 (well beyond direct_check_k6.py's n=7..25).
+======================================================================
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 150, in <module>
+    direct = psi_direct_fresh(nv, 6)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 144, in psi_direct_fresh
+    return g(0, 0, K)
+           ^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 130, in g
+    val = F(1, m) + F(r, m) * h(a + 1, bb, r - 1) + F(m - 1 - r - bb, m) * g(a + 1, bb, r)
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 140, in h
+    val = F(1, n) + F(r, n) * h(a, bb + 1, r - 1) + F(n - 1 - a - bb - r, n) * g(a, bb + 1, r)
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 140, in h
+    val = F(1, n) + F(r, n) * h(a, bb + 1, r - 1) + F(n - 1 - a - bb - r, n) * g(a, bb + 1, r)
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 140, in h
+    val = F(1, n) + F(r, n) * h(a, bb + 1, r - 1) + F(n - 1 - a - bb - r, n) * g(a, bb + 1, r)
+                              ^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 130, in g
+    val = F(1, m) + F(r, m) * h(a + 1, bb, r - 1) + F(m - 1 - r - bb, m) * g(a + 1, bb, r)
+                                                                           ^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 130, in g
+    val = F(1, m) + F(r, m) * h(a + 1, bb, r - 1) + F(m - 1 - r - bb, m) * g(a + 1, bb, r)
+                                                                           ^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/adv_k6_recursion_check.py", line 130, in g
+    val = F(1, m) + F(r, m) * h(a + 1, bb, r - 1) + F(m - 1 - r - bb, m) * g(a + 1, bb, r)
+                                                                           ^^^^^^^^^^^^^^^
+  [Previous line repeated 4 more times]
+  File "/usr/lib/python3.11/fractions.py", line 157, in __new__
+    raise ZeroDivisionError('Fraction(%s, 0)' % numerator)
+ZeroDivisionError: Fraction(1, 0)

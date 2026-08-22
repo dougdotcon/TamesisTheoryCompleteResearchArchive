@@ -1,0 +1,31 @@
+======================================================================
+PART (A): full independent re-derivation + recursion check at K=7
+======================================================================
+build_levels(7) took 87.2s
+psi_n^(7) mine     = (16384*n**7 + 28672*n**6 + 48818*n**5 + 67550*n**4 + 70819*n**3 + 52192*n**2 + 23868*n + 5040)/(51480*n**7)
+psi_n^(7) claimed  = (16384*n**7 + 28672*n**6 + 48818*n**5 + 67550*n**4 + 70819*n**3 + 52192*n**2 + 23868*n + 5040)/(51480*n**7)
+difference (should be 0): 0
+
+Substituting all 16 levels (g_0..g_7, h_0..h_7) into the exact recursion:
+  r=0: g_0 OK=True   h_0 OK=True
+  r=1: g_1 OK=True   h_1 OK=True
+  r=2: g_2 OK=True   h_2 OK=True
+  r=3: g_3 OK=True   h_3 OK=True
+  r=4: g_4 OK=True   h_4 OK=True
+  r=5: g_5 OK=True   h_5 OK=True
+  r=6: g_6 OK=True   h_6 OK=True
+  r=7: g_7 OK=True   h_7 OK=True
+ALL 16 LEVELS SATISFY THE EXACT RECURSION: True
+
+======================================================================
+PART (B): internal-consistency check of K=7,8,9,10's claimed closed
+          forms (limit = phi_K, 1/n coefficient = K*phi_K/4), taken
+          directly from ATTEMPT.md Sec.1.1's stated formulas
+======================================================================
+K=7: limit=2048/6435 (phi_7=2048/6435, match=True)   1/n coeff=3584/6435 (K*phi_K/4=3584/6435, match=True)
+K=8: limit=32768/109395 (phi_8=32768/109395, match=True)   1/n coeff=65536/109395 (K*phi_K/4=65536/109395, match=True)
+K=9: limit=65536/230945 (phi_9=65536/230945, match=True)   1/n coeff=147456/230945 (K*phi_K/4=147456/230945, match=True)
+K=10: limit=262144/969969 (phi_10=262144/969969, match=True)   1/n coeff=655360/969969 (K*phi_K/4=655360/969969, match=True)
+ALL LIMIT + RATE CHECKS PASS: True
+
+ALL PART-A-ITEM-3 CHECKS PASSED.

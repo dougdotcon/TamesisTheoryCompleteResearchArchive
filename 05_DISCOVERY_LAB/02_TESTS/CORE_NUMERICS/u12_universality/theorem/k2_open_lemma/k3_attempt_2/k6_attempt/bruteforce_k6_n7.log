@@ -1,0 +1,17 @@
+Fresh, full, raw-definition brute-force run at K=6, n=7 (the minimal case, n=K+1),
+via k6_attempt/fast_bruteforce.py (optimized, parallelized re-implementation of
+../psi_bruteforce_ref.py, cross-validated against the original on five small cases
+first -- see fast_bruteforce_selftest.log):
+
+    python3 fast_bruteforce.py 7 6 4
+
+Exhaustive enumeration: 7! * 7^6 = 5040 * 117649 = 592,912,960 exact (pi, U1,...,U6)
+combinations, no sampling.
+
+    K=6 n=7 psi=355081/823543 = 0.4311626715  time=106.4s
+
+Closed-form prediction (markov_transfer.psi_closed_form(6) evaluated at n=7):
+    (2048*7^6 + 3072*7^5 + 4293*7^4 + 4638*7^3 + 3529*7^2 + 1662*7 + 360) / (6006*7^6)
+    = 355081/823543
+
+MATCH: exact.

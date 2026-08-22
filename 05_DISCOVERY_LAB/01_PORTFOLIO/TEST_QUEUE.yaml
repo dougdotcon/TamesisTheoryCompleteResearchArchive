@@ -2305,50 +2305,76 @@ queue:
         pelo proprio autor, nao como fechamento total. Ver
         02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/ATTEMPT.md
       k6_general_attempt: >
-        Tentativa de estender K=3,4,5 (onda 6) para K>=6 e a conjectura
-        de taxa geral-K DESPACHADA (DISC-DEC-033 item a), documento
-        completo recebido (k6_attempt/ATTEMPT.md): casos K=6,7,8,9,10
-        PROVADOS incondicionalmente pela mesma tecnica de cadeia de
-        Markov/telescopagem da onda 6; alem disso, tomando o limite
-        n->infinito da mesma cadeia (a,b,r) ANTES de resolver (r vira
-        parametro livre de EDO em vez de indice de soma, contornando a
-        obstrucao nomeada na onda 6), derivada uma prova condicional da
-        conjectura de taxa geral-K (lim n(psi_n^(K)-phi_K)=K*phi_K/4
-        para todo K), com ressalva auto-declarada explicitamente: prova
-        o que a expansao DEVE valer SE g_r(m,b) admite expansao
-        assintotica regular de duas parcelas na forma polinomial-em-t
-        assumida para todo r -- a EXISTENCIA dessa expansao para r (ou
-        seja, K) alem dos 11 valores concretamente verificados (K=0..10)
-        nao foi rederivada independentemente de primeiros principios.
-        Referee adversarial hostil dedicado despachado para (a) verificar
-        K=6..10 incondicional e (b) julgar explicitamente se a ressalva
-        esta corretamente dimensionada, conservadora demais, ou otimista
-        demais -- AINDA EM EXECUCAO, resultado pendente de integracao.
-        Nao integrado ao THEOREM.md nem a este next_action ate o
-        veredito do referee retornar.
+        K=6,...,10 do Lema Aberto PROVADOS incondicionalmente
+        (DISC-DEC-036, DISC-DEC-033 item a) -- mesma tecnica de matriz de
+        transferencia da onda 6, subindo mais cinco degraus da mesma
+        escada mecanica; taxa Kphi_K/4 agora CONFIRMADA
+        INCONDICIONALMENTE para K=0,...,10 (11 valores), direto das
+        formas fechadas exatas. Alem disso, tomando o limite n->infinito
+        da mesma cadeia (a,b,r) ANTES de resolver (r vira parametro
+        livre de EDO em vez de indice de soma, contornando a obstrucao
+        nomeada na onda 6), PROVADA a conjectura de taxa geral-K
+        (lim n(psi_n^(K)-phi_K)=K*phi_K/4 para todo K), EXPLICITAMENTE
+        CONDICIONAL a uma ressalva de regularidade precisamente nomeada:
+        a EXISTENCIA da expansao assintotica de duas parcelas assumida,
+        para r alem dos 11 valores concretamente verificados (K=0..10),
+        nao foi rederivada de primeiros principios. Referee adversarial
+        hostil dedicado rederivou do zero (nao re-executou scripts):
+        (a) K=6,7 -- todas as 13 e 16 formas fechadas substituidas de
+        volta na recursao exata, diferenca simbolica=0; forca bruta
+        propria (estrategia numpy diferente da frente), bateu bit a bit
+        em K=6,n=7; K=7,8,9,10 confirmados por consistencia interna --
+        veredito SOUND. Achou e corrigiu (adendo datado, texto original
+        preservado) 2 erros aritmeticos cosmeticos (contagens
+        combinatorias de busca) e 1 erro real-mas-contido (coeficiente
+        de 1/n de phi_n^(6) alegado como 512/1001; correto e' 1093/6006,
+        4 metodos independentes) -- nenhum afeta alegacao PROVADA.
+        (b) ambas EDOs, formas fechadas F_r/G_r, e identidade de soma
+        binomial rederivadas a mao/simbolicamente do zero -- zero erros.
+        JULGAMENTO EXPLICITO DO REFEREE, ADOTADO INTEGRALMENTE: a
+        ressalva esta CORRETAMENTE DIMENSIONADA (nem otimista, nem
+        conservadora demais). Referee foi alem do documento: nomeou uma
+        assimetria nao nomeada (F_r tem argumento de limitacao rigoroso
+        via g_r ser probabilidade; G_r nao tem argumento analogo) e
+        testou-a diretamente em t!=1 (nunca feito antes) -- 45 pontos
+        novos, zero discrepancias, evidencia nova a favor do ansatz.
+        Corrigidos tambem: 3 referencias pendentes a uma "SS2.4" nunca
+        escrita (agora escrita, usando o proprio raciocinio verificado
+        do referee) e 2 linhas do Scorecard sem o qualificador
+        condicional que a linha irma ja tinha. Integrado como "Estagio
+        5" em THEOREM.md, distinguindo precisamente K=0..10
+        (incondicional) de K geral (condicional). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
     next_action: >
       Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
-      substancialmente mais forte apos ondas 6-7: casos K=3,4,5 da ponte
-      n->infinito PROVADOS (onda 6; onda 5 ja provara K=2); K=6..10
-      tambem PROVADOS incondicionalmente e uma prova condicional da
-      conjectura de taxa geral-K derivada (onda 7, k6_attempt/), mas
-      AINDA NAO integrados ao THEOREM.md -- pendente de veredito do
-      referee adversarial em execucao sobre o escopo exato da ressalva
-      de regularidade. O residuo sistematico de M-CLUST(b) (gap (b) de
-      onda 6) agora PARCIALMENTE FECHADO (onda 7,
-      mclust_rigor/residual_attempt/): fonte identificada (termo de
-      risco de fechamento (1-t)/(1-s) + efeito de amostragem em R nao
-      contado), chi^2 reduzido ~19,5x, mas um residuo real pequeno e um
-      passo analitico (agregacao do hazard elevado sobre alvos vivos)
-      permanecem em aberto. Reaberturas futuras legitimas: (i) fechar a
-      agregacao nomeada em residual_attempt/ATTEMPT.md SS5 para
-      completar o fechamento de M-CLUST(b); (ii) apos o referee K>=6
-      retornar, se a ressalva permanecer, tentar fechar a existencia da
-      expansao assintotica para r geral por inducao formal ou outra via
-      independente; (iii) so DEPOIS da consolidacao considerar testar
-      U_alpha (incl. o novo M-WEIB) em sistemas empiricos reais --
-      explicitamente adiado por decisao do usuario, exige pre-registro
-      completo, nao busca de padrao.
+      substancialmente mais forte apos ondas 6-7: Lema Aberto agora
+      PROVADO incondicionalmente para K=0,...,10 (onda 7 estendeu K=3,4,5
+      da onda 6 ate K=10); taxa Kphi_K/4 confirmada incondicionalmente
+      nos mesmos 11 valores. Para K geral (K>=11): PELA PRIMEIRA VEZ
+      existe uma rota de prova completa, adversarialmente verificada como
+      SOUND em cada etapa algebrica, para a conjectura de taxa geral-K --
+      mas permanece EXPLICITAMENTE CONDICIONAL a uma ressalva de
+      regularidade que o proprio referee hostil julgou corretamente
+      dimensionada (nem otimista nem conservadora demais), nao um
+      fechamento incondicional do Lema Aberto para K geral. O residuo
+      sistematico de M-CLUST(b) (gap (b) de onda 6) permanece
+      PARCIALMENTE FECHADO (onda 7, mclust_rigor/residual_attempt/):
+      fonte identificada, chi^2 reduzido ~19,5x, mas um residuo real
+      pequeno e um passo analitico (agregacao do hazard elevado sobre
+      alvos vivos) permanecem em aberto -- uma frente de continuacao
+      delimitada ja foi despachada para atacar especificamente esse
+      passo (DISC-DEC-035, aggregation_closure_attempt/), resultado
+      pendente. Reaberturas futuras legitimas: (i) aguardar
+      DISC-DEC-035 para eventual fechamento completo de M-CLUST(b); (ii)
+      tentar fechar a existencia da expansao assintotica para r geral
+      (a ressalva de SS4 de k6_attempt/ATTEMPT.md) por inducao formal ou
+      outra via independente -- nenhuma tentada ainda; (iii) a forma
+      fechada exata todas-as-ordens geral-K permanece NAO TENTADA (SS6.2
+      de k6_attempt/ATTEMPT.md); (iv) so DEPOIS da consolidacao
+      considerar testar U_alpha (incl. o novo M-WEIB) em sistemas
+      empiricos reais -- explicitamente adiado por decisao do usuario,
+      exige pre-registro completo, nao busca de padrao.
 
   - test_id: DISC-ARCHIVE-PHASE0-SURVEY-001
     title: "Busca arquivo-inteira por candidatos genuinamente novos, nao restrita a TRI-RG"

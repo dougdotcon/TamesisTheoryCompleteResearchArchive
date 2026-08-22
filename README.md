@@ -26,7 +26,7 @@ O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISA
 | Tamesis `M_c v1` | **Hipótese testável** | O valor `M_c = 5.292674126388712e-16 kg` é um parâmetro do modelo, não uma medição. |
 | Evidência física independente | **Ainda não estabelecida** | Não há, neste arquivo, confirmação experimental da ontologia Tamesis. |
 | Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
-| Adjudicação numérica do núcleo | **Consolidação matemática concluída, gap fechado para K=3,4,5 (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com o Lema Aberto agora restrito a `K≥6` (K=0,1,2,3,4,5 provados). |
+| Adjudicação numérica do núcleo | **Consolidação matemática concluída, gap fechado incondicionalmente até K=10 (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com o Lema Aberto agora PROVADO incondicionalmente para K=0,...,10; para K geral existe uma prova condicional da conjectura de taxa (ressalva de regularidade julgada corretamente dimensionada por referee hostil), não um fechamento incondicional. |
 
 ### O programa de adjudicação (Discovery Lab, atualizado 2026-08-22)
 
@@ -46,7 +46,7 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 | Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
 | Zeros de ζ (RH-REAL) | 12/12 itens do levantamento com disposição final | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); FHK e variância do número fecharam `CLOSED_INCONCLUSIVE`, ambos com componente forte confirmado adversarialmente (exclusão do lado iid ≥8,8σ; exclusão de GUE ingênuo a até 203σ — reprodução adversarial ainda achou e corrigiu um 3º bug real no estimador primário) |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
-| **Função-limite U₁/₂ (ondas 2–6, consolidada)** | 1 teorema + 1 generalização + casos K=2,3,4,5 do Lema Aberto | **Provada, verificada por referee adversarial (2 rounds, técnicas distintas), publicada como paper + pacote reproduzível; K=2 provado na onda 5, K=3,4,5 provados na onda 6 por matriz de transferência, K≥6 continua aberto** (ver abaixo) |
+| **Função-limite U₁/₂ (ondas 2–7, consolidada)** | 1 teorema + 1 generalização + casos K=2,...,10 do Lema Aberto + conjectura de taxa geral-K | **Provada, verificada por referee adversarial (3 rounds, técnicas distintas), publicada como paper + pacote reproduzível; K=2 provado na onda 5, K=3,4,5 provados na onda 6, K=6,...,10 provados na onda 7, todos por matriz de transferência; taxa geral-K PROVADA na onda 7 mas explicitamente condicional a uma ressalva de regularidade** (ver abaixo) |
 | Levantamento arquivo-inteiro de candidatos (Fase 0, além de TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com razão concreta citada; 1 lead imaturo (assinaturas espectrais de EEG cognitivo) promovido a nova linha, ver abaixo |
 | Cognição — assinatura espectral EEG em depressão (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 pré-registro travado, N=30 MDD/26 HC | `CLOSED_REFUTED` — entropia espectral **maior**, não menor, em MDD (`d=1,447`, `p=3,97×10⁻⁶`) — direção oposta à hipótese testada, confirmado por reprodução adversarial independente do zero (números batem a <10⁻⁹) |
 | Cosmologia SPARC-004 — auto-calibração `f_multi` (Estágio 1→2) | pipeline validado + aplicado ao dado real de descoberta (30.203 sistemas) | `CLOSED_INCONCLUSIVE` — veredito mecânico `BOTH_FALSIFIED`, mas o debunker obrigatório encontrou um confundidor real: um subgrupo de 19% da amostra (RUWE alto) fica sistematicamente sub-corrigido pelo modelo de `f_multi` escalar único, com excesso estatisticamente robusto mesmo no bin usado como âncora da calibração |
@@ -68,7 +68,7 @@ ponte entre o modelo finito e o objeto-limite está provada de forma exata para
 `K=2` desde a onda 5 (2026-08-22) — `φ_n^{(2)} = 8/15 + 1/(30n) +
 7/(10n²) + 1/(5n³)`, provado incondicionalmente (Lema da Redução A + lema do
 co-ciclo, verificado por *referee* adversarial em 4 camadas independentes, sem
-erros) — e, desde a onda 6 (2026-08-22), também para `K=3,4,5`, por uma
+erros) — desde a onda 6 (2026-08-22), também para `K=3,4,5`, por uma
 técnica genuinamente diferente: uma cadeia de Markov exata e uniforme em `K`
 (estado `(a,b,r)`), resolvida por um algoritmo mecânico de telescopagem em
 vez de análise de casos manual por `K`. `K=3`: `φ_n^{(3)} = 16/35 + 1/(14n)
@@ -76,11 +76,28 @@ vez de análise de casos manual por `K`. `K=3`: `φ_n^{(3)} = 16/35 + 1/(14n)
 `K=4,5` provados pela extensão do mesmo procedimento. Verificado por um
 segundo *referee* hostil, com técnica de resolução distinta da usada na
 derivação original, força bruta própria e reexecução dos scripts originais
-— **nenhum erro encontrado**. Um padrão exato no coeficiente de `1/n` foi
-observado para `K=1..5` e catalogado honestamente como **conjectura**, não
-teorema, com a obstrução precisa para uma prova geral-`K` já nomeada. O
-único **Lema Aberto** que resta, declarado — não escondido — como o gap
-real do documento, agora é estritamente mais estreito: `K≥6`. A lei
+— **nenhum erro encontrado**. E desde a onda 7 (2026-08-22), o mesmo
+procedimento mecânico foi estendido até `K=10` — **`K=6,...,10` também
+PROVADOS incondicionalmente**, verificados por um terceiro *referee* hostil
+(rederivação completa do zero, substituição de todas as formas fechadas na
+recursão exata, força bruta própria com estratégia de otimização diferente,
+batendo bit a bit em dois pontos held-out independentes). A onda 7 também
+foi além: tomando o limite `n→∞` da mesma cadeia `(a,b,r)` **antes** de
+resolver (contornando a obstrução da onda 6), derivou uma **prova completa**
+da conjectura de taxa `lim n(ψ_n^{(K)}-φ_K)=Kφ_K/4` **para todo `K`**,
+explicitamente **condicional** a uma ressalva de regularidade
+precisamente nomeada (a existência da expansão assintótica assumida, para
+`K` além dos 11 valores concretamente verificados). O mesmo referee hostil
+rederivou do zero cada EDO e forma fechada envolvida — **nenhum erro
+encontrado** — e emitiu julgamento explícito sobre o escopo da própria
+ressalva, adotado integralmente: **está corretamente dimensionada**, nem
+otimista nem conservadora demais, reforçado por 45 novos pontos de teste
+empírico (fora do único ponto que o documento original checava) com zero
+discrepâncias encontradas. O único **Lema Aberto** que resta, declarado —
+não escondido — como o gap real do documento, agora está PROVADO
+incondicionalmente até `K=10`; para `K` geral, existe pela primeira vez uma
+rota de prova completa e adversarialmente verificada, mas que permanece
+explicitamente condicional, não um fechamento incondicional. A lei
 condicional é o caso de parâmetro fixo de
 Hansen & Jaworski (EJC, 2014); a mistura de Poisson com forma fechada `erf`
 não foi encontrada em busca sistemática de literatura (35+ consultas

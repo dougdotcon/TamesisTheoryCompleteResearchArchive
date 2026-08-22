@@ -1942,3 +1942,83 @@ decisions:
       - "resultado ja integrado de DISC-DEC-034 (formula candidata, chi^2, residuo remanescente) nao alterado por esta frente -- so o passo de agregacao especifico e atacado"
       - "qualquer resultado positivo (fechamento da agregacao) exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/M-CLUST"
       - "falha honesta em fechar a obstrucao e' um desfecho completo e aceito, nao um requisito de sucesso"
+
+  - decision_id: DISC-DEC-036
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado de K6-OPEN-LEMMA-ATTEMPT (DISC-DEC-033, frente
+      a), apos veredito do referee adversarial hostil independente
+      (k6_attempt/adversarial/REFEREE_REPORT.md). PARTE A: casos K=6,...,10
+      do Lema Aberto PROVADOS incondicionalmente, mesmo metodo de matriz de
+      transferencia uniforme em K do Estagio 4 (onda 6) -- formas fechadas
+      exatas de psi_n^(K), cada uma provando phi_n^(K)->phi_K, mais a
+      conjectura de taxa Kphi_K/4 agora CONFIRMADA INCONDICIONALMENTE para
+      K=0,...,10 (11 valores consecutivos), direto das formas fechadas
+      exatas. Referee re-executou a construcao de K=6,7 do zero, substituiu
+      todas as 13 (K=6) e 16 (K=7) formas fechadas de volta na recursao
+      exata (diferenca simbolica=0 em cada), e escreveu forca bruta propria
+      com estrategia de otimizacao diferente (vetorizacao numpy em vez de
+      multiprocessing), batendo bit a bit em K=6,n=7. Dois erros
+      aritmeticos cosmeticos na prosa (contagens combinatorias de K=6,n=7 e
+      n=8) e um erro real porem contido (coeficiente de 1/n de phi_n^(6)
+      alegado incorretamente como 512/1001; valor verdadeiro 1093/6006,
+      confirmado por 4 metodos) foram corrigidos via adendos datados em
+      k6_attempt/ATTEMPT.md, texto original preservado -- nenhum afeta
+      qualquer alegacao PROVADA. PARTE B: a conjectura de taxa geral-K
+      (lim n(psi_n^(K)-phi_K)=Kphi_K/4 para todo K) esta PROVADA, mas
+      EXPLICITAMENTE CONDICIONAL a uma ressalva de regularidade
+      precisamente nomeada (existencia da expansao assintotica de duas
+      parcelas assumida, para r alem dos 11 valores concretamente
+      verificados) -- via um argumento de limite de escala continuo
+      (EDO em t=m/n, tomada ANTES de resolver, contornando a obstrucao do
+      Estagio 4). Referee rederivou do zero, a mao, ambas as EDOs, as
+      formas fechadas F_r/G_r, e a identidade de soma binomial -- zero
+      erros -- e emitiu julgamento explicito, adotado integralmente: A
+      RESSALVA ESTA CORRETAMENTE DIMENSIONADA, nem otimista nem
+      conservadora demais. O referee foi alem do documento: identificou
+      uma assimetria substantiva nao nomeada (argumento de limitacao
+      rigoroso para F_r via g_r(m,b) ser probabilidade; nenhum argumento
+      analogo para G_r, termo de correcao sem cota a priori) e testou
+      essa assimetria diretamente em t!=1 (nunca feito no documento) --
+      45 pontos novos, zero discrepancias, evidencia nova a favor do
+      ansatz, nao prova para r geral. Dois defeitos de documentacao
+      (tres referencias pendentes a uma "SS2.4" nunca escrita; duas
+      linhas do Scorecard sem o qualificador condicional que a linha
+      irma ja tinha) corrigidos: SS2.4 escrita como adendo datado usando
+      o proprio raciocinio verificado do referee; Scorecard corrigido por
+      nota apontando o qualificador. THEOREM.md ganhou "Estagio 5",
+      distinguindo precisamente K=0,...,10 (incondicional) de K geral
+      (condicional).
+    rationale: >
+      Mesma disciplina ja aplicada a K2 (Estagio 3) e K3,4,5 (Estagio 4):
+      resultado positivo submetido a referee adversarial hostil separado
+      antes de catalogar, com rederivacao independente do zero (nao
+      re-execucao dos scripts da frente) em cada camada algebrica. A
+      diferenca central deste resultado -- pela primeira vez, uma rota de
+      prova COMPLETA para a conjectura de taxa geral-K, previamente listada
+      como conjectura sem rota nomeada -- exige tratamento especialmente
+      cuidadoso da fronteira incondicional/condicional: o proprio documento
+      já era honesto sobre isso (SS4), mas o referee foi instruido
+      explicitamente a julgar se essa fronteira esta correta, otimista
+      demais, ou conservadora demais -- nao apenas confirmar a algebra. O
+      julgamento do referee (correta) e' adotado integralmente, e o
+      THEOREM.md e' escrito para nunca permitir que a parte condicional
+      (Parte B) seja lida isoladamente como incondicional -- exatamente o
+      risco de rotulagem que o proprio referee identificou no Scorecard
+      original do documento-fonte e que foi corrigido antes desta
+      integracao. Os tres erros de prosa encontrados (dois cosmeticos, um
+      real-mas-contido) sao corrigidos na fonte via adendo datado, nao
+      escondidos nem deixados para descoberta futura.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ (ATTEMPT.md corrigido com 5 adendos datados + adversarial/REFEREE_REPORT.md, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (novo 'Estagio 5')"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave7_results.k6_general_attempt, next_action)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- extensao dentro da mesma linha ADVERSARIALLY_REVIEWED"
+    untouched_safeguards:
+      - "nenhuma alegacao passa a incondicional sem o qualificador explicito 'modulo SS4' -- THEOREM.md, ATTEMPT.md (Scorecard corrigido) e este proprio registro mantem a distincao em toda parte"
+      - "forma fechada exata todas-as-ordens geral-K permanece NAO TENTADA, honestamente aberta -- nao confundida com a prova condicional da taxa/limite"
+      - "os 3 erros de prosa corrigidos (2 cosmeticos, 1 real-mas-contido) documentados via adendo datado, texto original preservado -- nenhuma reescrita silenciosa"

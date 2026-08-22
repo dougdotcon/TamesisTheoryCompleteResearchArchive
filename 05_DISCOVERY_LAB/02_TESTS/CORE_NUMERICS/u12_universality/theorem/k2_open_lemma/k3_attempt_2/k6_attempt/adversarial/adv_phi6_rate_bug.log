@@ -1,0 +1,40 @@
+=== Method 1: Lemma-A recombination of the (independently verified,
+    see adv_k6_recursion_check.py) psi_n^(6), psi_n^(6),R matches the
+    document's own claimed phi_n^(6) closed form exactly ===
+Lemma-A recombination: (4096*n**7 + 2186*n**6 + 29676*n**5 + 47655*n**4 + 56117*n**3 + 45424*n**2 + 22428*n + 5040)/(12012*n**7)
+Document's claimed phi_n^(6): (4096*n**7 + 2186*n**6 + 29676*n**5 + 47655*n**4 + 56117*n**3 + 45424*n**2 + 22428*n + 5040)/(12012*n**7)
+difference: 0  (0 => the closed form itself is correct)
+
+=== Method 2: sp.limit-based extraction of the TRUE 1/n coefficient ===
+limit = 1024/3003  (matches claimed phi_6=1024/3003: True)
+TRUE 1/n coefficient (sp.limit) = 1093/6006
+Document's claim: 512/1001 = 512/1001
+Document's claim matches computed value: False   <-- FALSE: mismatch
+6*phi_6/4 = 512/1001
+
+=== Method 3: sp.series-based extraction (independent sympy code path) ===
+Series in x=1/n: 1024/3003 + 1093*x/6006 + O(x**2)
+
+=== Method 4: plain-Python Fraction numerics, n up to 1,000,000
+    (no sympy at all -- eliminates any possibility of a sympy-specific
+    artifact) ===
+  n=1000: n*(phi_n^6 - phi_6) = 0.184459  (converging to 1093/6006=0.181985, NOT 512/1001=0.511489)
+  n=10000: n*(phi_n^6 - phi_6) = 0.182232  (converging to 1093/6006=0.181985, NOT 512/1001=0.511489)
+  n=100000: n*(phi_n^6 - phi_6) = 0.182009  (converging to 1093/6006=0.181985, NOT 512/1001=0.511489)
+  n=1000000: n*(phi_n^6 - phi_6) = 0.181987  (converging to 1093/6006=0.181985, NOT 512/1001=0.511489)
+
+=== CONCLUSION ===
+The exact closed form for phi_n^(6) in ATTEMPT.md Sec.1.2 is CORRECT
+(independently re-derived and confirmed above and in
+adv_k6_recursion_check.py). The document's claim that its 1/n
+coefficient is 512/1001 ("matching 6*phi_6/4 exactly") is WRONG: the
+true 1/n coefficient is 1093/6006, confirmed by FOUR independent
+methods above (Lemma-A algebra, sp.limit, sp.series, plain-Fraction
+numerics extrapolation). This is a factual/arithmetic error in the
+document's narrative claim, isolated to this one sentence in Sec.1.2 --
+it does not affect: (a) the correctness of the phi_n^(6) closed form
+itself, (b) the K=6 Open Lemma proof (phi_n^(6)->phi_6, needs only the
+LIMIT, not the rate), (c) the psi-based rate conjecture (Sec.3.4,
+Sec.5, Scorecard rows 7-8), which was never a claim about phi_n^(K),
+or (d) Sec.5's weaker 'phi_n^(K)-phi_K = Theta(1/n)' order claim (still
+true, since 1093/6006 != 0).

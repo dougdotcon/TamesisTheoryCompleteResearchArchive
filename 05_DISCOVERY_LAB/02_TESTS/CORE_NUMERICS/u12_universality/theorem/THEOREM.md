@@ -1542,3 +1542,180 @@ estreito do que "K≥3"), mais a conjectura de taxa geral-K (§7.2 de
 original) inalteradas. Fontes completas:
 `../k2_open_lemma/k3_attempt_2/ATTEMPT.md`,
 `../k2_open_lemma/k3_attempt_2/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 5 — 2026-08-22] Os casos K=6,...,10 do Lema Aberto: PROVADOS incondicionalmente; a conjectura de taxa geral-K: PROVADA, condicional a uma ressalva de regularidade precisamente nomeada
+
+**Contexto.** O Estágio 4 (acima) provou `K=3,4,5` pelo método uniforme
+de matriz de transferência, deixando `K≥6` honestamente aberto, e
+observou (não provou) o padrão de taxa geral-`K`
+`lim n(ψ_n^{(K)}-φ_K)=Kφ_K/4`, nomeando duas rotas candidatas nunca
+tentadas para fechá-lo: indução formal em `r` sobre a forma da solução
+por telescopagem, ou um argumento de função geradora em `K`. Este
+estágio despacha ambas as frentes autorizadas por `DISC-DEC-033`(a):
+(A) subir a escada mecânica de `K=5` até `K=10` pelo método idêntico do
+Estágio 4; (B) atacar a conjectura de taxa geral-`K` por uma via nova
+— não uma das duas nomeadas literalmente, mas uma reformulação que
+sidesteps a obstrução do Estágio 4 por outro caminho (ver abaixo).
+
+### Parte A — `K=6,...,10`: PROVADOS incondicionalmente, mesmo método do Estágio 4
+
+Subir mais cinco degraus da mesma escada mecânica (`k6_attempt/ATTEMPT.md`
+§1) produz as formas fechadas exatas de `ψ_n^{(K)}` para `K=6,...,10`,
+cada uma provando `φ_n^{(K)}→φ_K` (o Lema Aberto para aquele `K`) pelo
+Lema da Redução A já provado (Estágio 3). Resultado central, `K=6`:
+
+```
+ψ_n^{(6)} = (2048n⁶+3072n⁵+4293n⁴+4638n³+3529n²+1662n+360)/(6006n⁶)
+```
+
+com limite `φ_6=1024/3003`. `K=7,8,9,10` seguem pelo mesmo procedimento
+(formas fechadas completas em `ATTEMPT.md` §1.1), cada uma com o
+limite `n→∞` batendo exatamente com a integral de Wallis `φ_K` e o
+coeficiente de `1/n` batendo exatamente com `Kφ_K/4` — a conjectura de
+taxa, agora confirmada **incondicionalmente** para `K=0,...,10` (11
+valores consecutivos), diretamente das formas fechadas exatas, sem
+nenhum argumento assintótico.
+
+**Verificação adversarial independente
+(`k6_attempt/adversarial/REFEREE_REPORT.md`).** Um referee hostil
+separado re-executou `markov_transfer.build_levels(6)` e `(7)`
+independentemente (não confiando no log da frente), substituiu **todas
+as 13 formas fechadas em `K=6`** e **todas as 16 em `K=7`** de volta na
+recursão exata original — diferença simbólica `=0` em cada uma —, e
+escreveu uma força bruta própria, com estratégia de otimização
+genuinamente diferente da frente (vetorização `numpy` sobre todo o
+espaço de `U`-tuplas em vez de paralelização `multiprocessing` sobre
+permutações), autotestada contra `K=1,2,3` já provados antes de ser
+confiada em `K=6,n=7`: `355081/823543`, batendo bit a bit com a frente
+e com a rederivação algébrica independente do referee — e, num segundo
+ponto held-out independente rodado em segundo plano pelo próprio
+referee, `K=6,n=8` (`10.569.646.080` combinações): `191647/458752`,
+também batendo bit a bit. `K=7,8,9,10`
+foram checados quanto a consistência interna (limite `=φ_K`,
+coeficiente de `1/n` `=Kφ_K/4`), 8/8 confirmações exatas. **Veredito:
+SOUND.**
+
+**Dois erros encontrados e corrigidos por adendo datado (nenhum afeta
+qualquer alegação PROVADA).** (1) Um erro aritmético cosmético na prosa
+descritiva do tamanho do espaço de busca em `K=6,n=7`
+(`592.912.960` deveria ser `592.950.960`) — achado pelo referee,
+confirmado de três formas. (2) Um segundo erro do mesmo tipo em
+`K=6,n=8` (`10.568.983.680` deveria ser `10.569.646.080`) — achado
+pela sessão orquestradora durante a integração, confirmado por
+multiplicação direta. (3) Um erro real, porém contido, na prosa: a
+alegação de que o coeficiente de `1/n` da quantidade *recombinada*
+`φ_n^{(6)}` é `512/1001` — o valor verdadeiro (confirmado por quatro
+métodos independentes pelo referee) é `1093/6006`; a forma fechada em
+si permanece correta, e nenhuma alegação PROVADA depende do valor
+errado (a conjectura de taxa é sempre sobre `ψ_n^{(K)}`, nunca sobre
+`φ_n^{(K)}` combinado, e permanece corretamente escopada em todo o
+resto do documento). Todas as três correções aplicadas como blocos
+datados `[Correção pós-adversarial, 2026-08-22]` em `k6_attempt/ATTEMPT.md`,
+texto original preservado, nada reescrito silenciosamente.
+
+### Parte B — a conjectura de taxa geral-`K`: PROVADA, condicional a uma ressalva de regularidade precisamente nomeada
+
+**O método (novo, `k6_attempt/ATTEMPT.md` §2–§3).** Em vez de resolver
+a recursão exata simbolicamente em `r` (a obstrução nomeada pelo
+Estágio 4), este documento toma o limite de escala `n→∞` da MESMA
+cadeia `(a,b,r)` **antes** de resolver — nesse ponto, `r` deixa de ser
+um índice de somatório e vira um parâmetro livre de uma EDO linear de
+primeira ordem, que pode ser resolvida honestamente para `r` simbólico.
+Isso produz, para `r` simbólico geral: a forma fechada de ordem líder
+`F_r(t,b)` (que rederiva a integral de Wallis `φ_K` por uma rota
+inteiramente nova) e a correção de ordem `O(1/n)`, `G_r(t,b)` — ambas
+provadas como identidades algébricas simbólicas exatas contra suas
+respectivas EDOs (não ajuste de curva), e combinadas dando uma prova
+completa de que a conjectura de taxa `lim n(ψ_n^{(K)}-φ_K)=Kφ_K/4` vale
+para todo `K`, **modulo uma ressalva precisamente nomeada** (§4 de
+`k6_attempt/ATTEMPT.md`): a *existência* da expansão assintótica de
+duas parcelas assumida, para `r` além dos 11 valores concretamente
+verificados (`K=0,...,10`, agora provados incondicionalmente pela Parte
+A), não é rederivada independentemente de primeiros princípios.
+
+**Verificação adversarial independente, incluindo o julgamento central
+sobre o escopo da ressalva.** O mesmo referee hostil rederivou, do
+zero e à mão (antes de ler como o documento deriva), ambas as EDOs, a
+forma fechada de `F_r`/`c_k^{(r)}(b)`, a forma fechada de
+`G_r`/`d_k^{(r)}(b)` (a checagem mais difícil, extraindo a recursão de
+`G_r` de forma independente da EDO em vez de transcrever o script da
+frente), e a identidade de soma binomial de §3.4 — **zero erros
+encontrados** em qualquer etapa, para `r,k,b` simbólicos. O referee foi
+além do que o documento verifica: identificou uma assimetria
+substantiva não nomeada originalmente (o argumento de limitação que
+força a solução particular correta é rigoroso para `F_r`, já que
+`g_r(m,b)∈[0,1]` é uma probabilidade genuína; não há argumento análogo
+para `G_r`, um termo de correção sem cota a priori) e então testou essa
+assimetria diretamente — algo que o documento nunca fazia — checando
+`F_r` e `G_r` contra os dados exatos em `t≠1` (45 pontos novos,
+`r=0,...,5`, `b` simbólico geral): **zero discrepâncias encontradas**,
+evidência nova e não-circular a favor do ansatz na faixa verificável,
+não apenas reconfirmação de álgebra já provada.
+
+**Julgamento explícito e central do referee, adotado integralmente por
+esta integração: a ressalva está corretamente dimensionada — nem
+otimista demais, nem conservadora demais.** Não há base para
+reclassificar os resultados de `F_r`/`G_r`/taxa-geral-`K` como
+incondicionais, nem para tratar a lacuna de existência como mais séria
+do que o próprio §4 já a trata. Dois defeitos de documentação
+adicionais (três referências pendentes a uma "§2.4" que nunca fora
+escrita; duas linhas do Scorecard rotuladas `PROVED` sem o qualificador
+que a linha irmã já carregava) foram corrigidos: `§2.4` foi escrita
+como um adendo datado usando exatamente o raciocínio verificado do
+referee (o argumento de limitação para `F_r`, a assimetria nomeada para
+`G_r`, os 45 pontos de teste empírico), e as duas linhas do Scorecard
+receberam nota de correção apontando para o mesmo qualificador da linha
+7. Nenhuma dessas correções muda qual resultado é catalogado como
+incondicional vs. condicional — apenas torna a fronteira, já
+corretamente traçada pelo documento, também consistente em toda a sua
+prosa.
+
+**O que isto muda, precisamente, no status do Lema Aberto e da
+conjectura de taxa.** Antes deste estágio (fim do Estágio 4): Lema
+Aberto provado incondicionalmente para `K=0,...,5`; `K≥6` sem rota de
+prova nomeada; conjectura de taxa verificada (não provada) para
+`K=1,...,5`. Depois deste estágio: **Lema Aberto provado
+incondicionalmente para `K=0,...,10`** (Parte A); para `K≥11`, existe
+agora — pela primeira vez — uma rota de prova completa e
+adversarialmente verificada como SOUND em cada etapa algébrica, mas que
+permanece **explicitamente condicional** à ressalva de regularidade de
+§4 (Parte B) — um progresso epistêmico real (de "nenhuma rota nomeada"
+para "prova condicional verificada, com a única lacuna restante
+precisamente nomeada, delimitada, e testada empiricamente sem nenhuma
+evidência contrária encontrada"), mas **não** um fechamento
+incondicional do Lema Aberto para `K` geral. A conjectura de taxa segue
+o mesmo padrão: **incondicional para `K=0,...,10`**, **PROVADA, modulo a
+ressalva de §4, para `K` geral**.
+
+**O que permanece honestamente aberto.** (i) A forma fechada exata,
+todas-as-ordens, geral-`K`, para `ψ_n^{(K)}` (não apenas seu limite e
+sua taxa) — nunca tentada além da escada concreta (§6.2 de
+`k6_attempt/ATTEMPT.md`). (ii) A existência da expansão assintótica de
+duas parcelas para `r` além de `K=10` — a ressalva de §4, agora com
+evidência empírica adicional a favor (o teste em `t≠1` do referee) mas
+sem prova de primeiros princípios. (iii) Duas rotas tentadas e
+abandonadas honestamente e registradas (§6.1, §6.3 de
+`k6_attempt/ATTEMPT.md`): soma de função geradora em `K` sobre a
+recursão *exata* (obstrução estrutural nomeada antes de codificar);
+soma simbólica direta via `sympy.summation` na identidade final (não
+termina — o referee tentou independentemente uma segunda via
+automatizada, o algoritmo de Gosper, que também retorna sem fechamento,
+corroborando que a prova à mão do documento é genuinamente necessária,
+não um atalho por preguiça).
+
+**Veredito honesto atualizado do documento inteiro (ao fim do Estágio
+5):** Teorema 1 + corolários, Lema 2 (Estágio 1); Proposição 3,
+Proposição 4 = ponte exata K=0,1 (Estágio 2); ponte exata K=2, taxa
+completa (Estágio 3); ponte exata K=3,4,5, taxa completa para K=3
+(Estágio 4); **ponte exata K=6,...,10, incluindo taxa incondicional
+para K=0,...,10 (Estágio 5, Parte A) — agora PROVADA**; **conjectura de
+taxa geral-K PROVADA, explicitamente condicional à ressalva de
+regularidade de §4 (Estágio 5, Parte B, novo) — não mais uma conjectura
+sem rota de prova, mas também não um teorema incondicional**. Resta
+como PROPOSIÇÃO ABERTA apenas a forma fechada exata geral-`K`
+(todas-as-ordens) e a existência da expansão assintótica para `r>10`
+(a ressalva de §4). Conjecturas 1–2 (§8, texto original) inalteradas.
+Fontes completas: `../k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md`,
+`../k2_open_lemma/k3_attempt_2/k6_attempt/adversarial/REFEREE_REPORT.md`.

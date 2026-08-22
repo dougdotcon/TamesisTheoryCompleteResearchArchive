@@ -1037,3 +1037,55 @@ decisions:
       - "holdout T=10^11 permanece selado nos dois pipelines (primario e adversarial) -- nenhum t>2,1e10 avaliado por qualquer um"
       - "nenhuma alegacao sobre a Hipotese de Riemann feita ou implicada por este fechamento"
       - "ambiguidade de especificacao encontrada pelo agente adversarial (lei de offset da banda de calibracao descartavel) documentada como licao de processo, nao escondida"
+
+  - decision_id: DISC-DEC-017
+    date: 2026-08-22
+    decision: >
+      Integrar a onda 3 completa de DISC-DEC-015 (7 agentes: busca de
+      prioridade, teorema em 2 etapas, referee adversarial,
+      generalizacao U_alpha, verificacao adversarial de U_alpha,
+      pacote standalone tamesis-cycle-survival/ + FAILED_HYPOTHESES.md
+      na raiz). Nenhum erro encontrado pelo referee nem pela
+      verificacao adversarial de U_alpha; status matematico final
+      registrado sem inflar (teorema provado + 1 proposicao
+      condicional + 2 conjecturas, gap K>=2 honestamente aberto).
+    rationale: >
+      Verificacao do integrador antes de registrar: 49/49 testes do
+      pacote standalone rodados e passando; PDF do paper compilado
+      (7 paginas, 0 erros) confirmado em disco; FAILED_HYPOTHESES.md
+      lido por completo (139 linhas, aviso final presente, nenhuma
+      linha suavizada); nenhuma palavra "novel/new" indevida no
+      README/paper do pacote; nenhum nome de modelo de IA em conteudo
+      de artefato (apenas caminhos de scratchpad de sessao em 2
+      scripts internos de verificacao, sem relacao com autoria --
+      nao bloqueante, nao corrigido por ora). O referee adversarial
+      (agente independente, implementacoes proprias, 5 scripts
+      numericos, refetch proprio do PDF Hansen-Jaworski) nao encontrou
+      nenhum erro nas provas rotuladas PROVED, e confirmou que a
+      narrativa do documento sobre o erro de size-biasing e
+      demonstravel (reproduziu a variante quebrada e obteve a cauda
+      errada). A verificacao adversarial de U_alpha confirmou a
+      formula-mestre e a lei do expoente por 3 rotas analiticas
+      proprias e numerica com sementes independentes, e encontrou um
+      achado genuino adicional (lacuna de rigor na correcao finito-n
+      de M-CLUST para b grande), classificado corretamente como
+      PLAUSIBLE (nao REFUTED, ja que nao contradiz a classificacao no
+      limite n->infinito).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001: wave2_results + wave3_results + next_action)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/{priority_search,theorem,generalization_u_alpha}/ (novos diretorios)"
+      - "tamesis-cycle-survival/ (novo pacote standalone na raiz)"
+      - "FAILED_HYPOTHESES.md (nova pagina na raiz)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (status atualizado)"
+      - "README.md (secao U_1/2 atualizada com status final)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "DISC-CORE-NUMERICS-001 permanece ADVERSARIALLY_REVIEWED -- onda 3 e consolidacao matematica da mesma linha, nao um novo teste; nenhuma mudanca de status necessaria"
+      - "programa de consolidacao do usuario (7 passos avaliados em conversa) executado nos passos 1,2,4,6,7; passo 3 ja duplicado nas ondas 1-2; passo 5 permanece explicitamente adiado"
+    untouched_safeguards:
+      - "gap K>=2 (Lema Aberto) permanece aberto e honestamente documentado -- nenhuma pressao para fechar artificialmente"
+      - "nenhuma alegacao de 'novo'/'inedito' feita sem qualificacao -- toda linguagem herda a ressalva exata da frente de prioridade"
+      - "M-INTRA (U_alpha) permanece CONJECTURADO -- tentativa adversarial de reforcar falhou em produzir prova, apenas mais suporte numerico"
+      - "nenhuma alegacao de fisica nova, nenhuma alegacao sobre sistemas empiricos reais -- resultado inteiro e matematica combinatoria pura sobre um ensemble especifico"

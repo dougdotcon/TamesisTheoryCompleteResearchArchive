@@ -26,7 +26,7 @@ O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISA
 | Tamesis `M_c v1` | **Hipótese testável** | O valor `M_c = 5.292674126388712e-16 kg` é um parâmetro do modelo, não uma medição. |
 | Evidência física independente | **Ainda não estabelecida** | Não há, neste arquivo, confirmação experimental da ontologia Tamesis. |
 | Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
-| Adjudicação numérica do núcleo | **Onda 1 concluída (2026-08-21)** | Ver seção "Adjudicação numérica em andamento" abaixo — 3 alegações fechadas negativas com veredito final, 1 parcialmente confirmada por reprodução adversarial. |
+| Adjudicação numérica do núcleo | **Consolidação matemática concluída (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com um único gap honestamente aberto. |
 
 ### O programa de adjudicação (Discovery Lab, atualizado 2026-08-22)
 
@@ -46,7 +46,7 @@ artigo: **[`index.html`](index.html)** (página principal do repositório).
 | Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
 | Zeros de ζ (RH-REAL, linha aberta) | 8 itens triados, 3 sub-testes completos | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); teste FHK (máximos em intervalos curtos) fechado `CLOSED_INCONCLUSIVE` — lado iid excluído a ≥8,8σ, mas curva CUE canônica também rejeitada (-3,62σ); confirmado por reprodução adversarial com motor de ζ independente |
 | Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
-| **Função-limite U₁/₂ (onda 2)** | 1 pergunta aberta | **Forma fechada DERIVADA e verificada adversarialmente** (ver abaixo) |
+| **Função-limite U₁/₂ (ondas 2–3, consolidada)** | 1 teorema + 1 generalização | **Provada, verificada por referee adversarial, publicada como paper + pacote reproduzível** (ver abaixo) |
 
 **O resultado positivo principal:** a classe de universalidade U₁/₂ (permutação
 aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exata
@@ -55,14 +55,33 @@ aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exa
 
 derivada analiticamente (não ajustada), corrigindo a conjectura original do
 arquivo `(1+c)^(-1/2)` (excluída já no 1º coeficiente da série: `a₁ = 1/3 ≠ 1/2`,
-confirmado por enumeração exata). Verificação adversarial independente confirmou
-em 4 superfícies: enumeração exata, Monte Carlo em valores novos de `c`,
-re-derivação analítica cega e a lei condicional de Wallis
-`φ_K = 4^K(K!)²/(2K+1)!` — identificada como o caso de parâmetro fixo de
-Hansen & Jaworski (2014); a mistura de Poisson com forma erf possivelmente é
-nova. Limitações honestas: passagem n→∞ controlada empiricamente (não
-formalizada); lei distribucional para K≥2 segue conjectura. Nenhuma implicação
-física é alegada — é um resultado de matemática combinatória.
+confirmado por enumeração exata). Esse resultado é agora um **Teorema provado**
+(não apenas conjecturado): um documento matemático autocontido
+(`THEOREM.md`) prova a forma fechada em seis passos, incluindo o tratamento
+correto do *size-biasing* dos arcos visitados, e foi revisado por um agente
+independente atuando como *referee* hostil — **nenhum erro encontrado**. A
+ponte entre o modelo finito e o objeto-limite está provada de forma exata para
+`K=0,1` (com uma fórmula finita nova, `φ_n^{(1)} = 2/3 + 1/(3n²)`) e reduzida a
+um único **Lema Aberto** preciso para `K≥2`, declarado — não escondido — como o
+gap real do documento. A lei condicional é o caso de parâmetro fixo de
+Hansen & Jaworski (EJC, 2014); a mistura de Poisson com forma fechada `erf`
+não foi encontrada em busca sistemática de literatura (35+ consultas
+registradas), com a ressalva explícita de que isso não equivale a "inédito".
+Uma segunda frente derivou **por que o expoente é exatamente 1/2**: para toda
+uma família paramétrica de mecanismos de perturbação, `α ∈ [1/2, 1]` sempre —
+`α < 1/2` é *provado impossível* (um efeito de aglomeração quadrático que
+persiste mesmo sem qualquer "morte" de ciclicidade). Nenhuma implicação física
+é alegada — é matemática combinatória pura sobre um ensemble específico.
+
+**Onde encontrar tudo:** o teorema completo e o *referee report* estão em
+`05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`; a
+generalização e sua verificação adversarial em
+`.../generalization_u_alpha/`; um **pacote standalone reproduzível**, com
+paper em LaTeX compilado (PDF), provas autocontidas, simulações *clean-room*
+e 49 testes automatizados, está em **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**.
+E a tabela honesta de **tudo que este laboratório já tentou e não sobreviveu**
+— para que este único resultado positivo seja lido no contexto certo — está em
+**[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**.
 
 ## Visão do laboratório
 
@@ -94,6 +113,8 @@ flowchart LR
 ## Comece aqui
 
 - **[Artigo científico do Discovery Lab (2026) — adjudicação adversarial e a função-limite U₁/₂](index.html)** (página principal do repositório)
+- **[Pacote reproduzível `tamesis-cycle-survival/`](tamesis-cycle-survival/)** — paper LaTeX compilado, provas, simulações e testes automatizados do teorema U₁/₂
+- **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)** — a tabela honesta de toda hipótese testada e não sobrevivente neste laboratório
 - [Relatório final de visão do laboratório](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
 - [Versão HTML para apresentação e PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
 - [Relatório da auditoria dos 280 artigos](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
@@ -194,6 +215,8 @@ Essas linhas permanecem como conjecturas, programas de teste ou modelos restrito
 | `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | Materiais para colaboração e qualificação experimental. |
 | `05_DISCOVERY_LAB` | Laboratório de adjudicação: fila de testes, ledgers de governança, notas de metodologia, resultados e vereditos adversariais. |
 | `index.html` | **Artigo científico síntese do programa de adjudicação** (página principal; figuras e script gerador em `ARTIGO_DISCOVERY_LAB/figures/`). |
+| `tamesis-cycle-survival` | Pacote standalone reproduzível do teorema U₁/₂ — paper LaTeX compilado, provas, simulações clean-room e testes automatizados. |
+| `FAILED_HYPOTHESES.md` | Tabela completa e honesta de toda hipótese/candidato testado pelo Discovery Lab, sobrevivente ou não. |
 | `computational_freeze.html` | Página anterior da raiz (estado congelado do Tamesis M_c v1), preservada. |
 | `90_LEGACY` | Ramos históricos, substituídos, especulativos ou sem sustentação atual. |
 | `RECURSOS_PARA_PESQUISA` | Referências e materiais de pesquisa; não são evidência produzida pelo projeto. |

@@ -1,0 +1,26 @@
+=== Check 4a: independent exact enumeration, K=1, small n ===
+n=2: exact=3/4  =  0.750000   formula(2/3+1/3n^2)=3/4=0.750000   match=True
+n=3: exact=19/27  =  0.703704   formula(2/3+1/3n^2)=19/27=0.703704   match=True
+n=4: exact=11/16  =  0.687500   formula(2/3+1/3n^2)=11/16=0.687500   match=True
+n=5: exact=17/25  =  0.680000   formula(2/3+1/3n^2)=17/25=0.680000   match=True
+n=6: exact=73/108  =  0.675926   formula(2/3+1/3n^2)=73/108=0.675926   match=True
+
+=== Check 4b: Corollary 4.2 tail-bound numerics ===
+c=   1.0  R(c)=1.394028e-01   bound=e^-c/(2c)=1.839397e-01   0<R<bound: True
+c=   5.0  R(c)=6.204202e-04   bound=e^-c/(2c)=6.737947e-04   0<R<bound: True
+c=  10.0  R(c)=2.170313e-06   bound=e^-c/(2c)=2.269996e-06   0<R<bound: True
+c=  30.0  R(c)=1.534813e-15   bound=e^-c/(2c)=1.559604e-15   0<R<bound: True
+c=  80.0  R(c)=0.000000e+00   bound=e^-c/(2c)=1.128032e-37   0<R<bound: False
+
+=== Check 4b-fix: same bound, via exact erf (no quadrature cancellation), higher dps ===
+(the mp.quad-based c=80 line above shows a false R(c)=0 -- that is
+ catastrophic cancellation in MY numerical check, not a flaw in the proof;
+ recomputing analytically via erf at sufficient precision fixes it:)
+c=   80 (dps=60)  R(c)=1.12111e-37   bound=1.12803e-37   0<R<bound: True
+c=  200 (dps=150)  R(c)=3.45116e-90   bound=3.45974e-90   0<R<bound: True
+
+=== Check 4c: Chernoff bound (7.3) sanity, P(Bin(n,c/n)>=M) <= e^-c (ec/M)^M ===
+n=   50 c= 5.0 M= 15   P(X>=M)=7.384e-05   Chernoff_bound=1.535e-03   bound_holds=True
+n=  500 c= 5.0 M= 15   P(X>=M)=2.057e-04   Chernoff_bound=1.535e-03   bound_holds=True
+n= 5000 c= 5.0 M= 15   P(X>=M)=2.241e-04   Chernoff_bound=1.535e-03   bound_holds=True
+n=  200 c=10.0 M= 25   P(X>=M)=2.607e-05   Chernoff_bound=3.681e-04   bound_holds=True

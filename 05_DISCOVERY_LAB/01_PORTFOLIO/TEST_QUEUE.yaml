@@ -1908,9 +1908,112 @@ queue:
         correta. Pergunta aberta legitima: qual E a funcao-limite
         exata? Ver 02_TESTS/CORE_NUMERICS/u12_universality/
         (RESULTS_SUMMARY.md + adversarial/ADVERSARIAL_VERDICT.md)
+    wave2_results:
+      u12_limit_characterization: >
+        FORMA FECHADA DERIVADA (nao ajustada) e CONFIRMADA
+        ADVERSARIALMENTE em 4 superficies independentes:
+        phi_inf(c) = int_0^1 e^(-ct^2)dt = (1/2)sqrt(pi/c)erf(sqrt(c)),
+        zero parametros livres. Serie a1=1/3 (nao 1/2 da forma
+        original) confirmada por enumeracao exata (a1(n)=(n^2-1)/
+        (3n^2) -> 1/3). Lei condicional identificada como o caso de
+        parametro fixo de Hansen & Jaworski (EJC 21(1) 2014, #P1.18,
+        Thm 7(ii)). Adversarial: enumeracao exata, MC em c ineditos,
+        re-derivacao analitica cega, lei de Wallis -- todas
+        CONFIRMADAS, nenhum erro encontrado. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/limit_characterization/
+      fhk_short_interval_max: >
+        Ver entrada propria da fila DISC-RH-FHK-SHORT-INTERVAL-MAX-001
+        (CLOSED_INCONCLUSIVE, DISC-DEC-016).
+    wave3_results:
+      priority_search: >
+        Busca de prioridade em 2 execucoes independentes concordantes
+        (35+22 consultas registradas, incl. vazias/inacessiveis).
+        Veredito por componente: (1) modelo permutacao+reroteamento
+        Bernoulli(c/n) = NAO ENCONTRADO -- linhagem Hansen-Jaworski
+        (Jaworski 1984 em diante) e sempre parametrizada por grau de
+        entrada fixo, nunca por reroteamento independente por ponto;
+        (2) objeto-limite PD(1)+marcas Poisson = pecas classicas,
+        combinacao explicita nao encontrada; (3) lei condicional-K =
+        Thm 7(ii) de Hansen & Jaworski 2014 e a ORIGEM, vizinhanca de
+        citacoes fechada (nenhum sucessor estende); (4) mistura de
+        Poisson com forma fechada erf = NAO ENCONTRADA em busca
+        sistematica (arXiv full-search "corrupted permutation" = 0
+        resultados; 17 citantes de H-J triados) -- candidato mais
+        forte a inedito, com a ressalva explicita de que "nao
+        encontrado nas buscas realizadas" != "novo"/"inedito"; (5)
+        cauda c^(-1/2) = expoente 1/2 e universal na area, o
+        coeficiente exato sqrt(pi)/2 e a unificacao numa forma fechada
+        elementar sao o que e especifico daqui. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/priority_search/PRIORITY_SEARCH.md
+      theorem: >
+        THEOREM.md (1324 linhas, 2 etapas, verificado por referee
+        adversarial hostil independente -- NENHUM ERRO ENCONTRADO,
+        autoclassificacao confirmada precisa). PROVADO: Teorema 1
+        (forma fechada em L(c), incl. tratamento correto do
+        size-biasing -- o referee reproduziu deliberadamente a variante
+        quebrada e confirmou que ela da a cauda errada sqrt(pi/2)c^
+        (-1/2), validando que o documento evitou o erro por construcao,
+        nao por afirmacao); Lema 2 (media de Wallis geral-K, densidade
+        K=1 exata); Proposicao 3 (reducao exata e incondicional da
+        ponte n->infinito a convergencia caso-a-caso em K, via mistura
+        Binomial->Poisson); Proposicao 4 + Corolario 4.3 (formula
+        exata phi_n^(1)=2/3+1/(3n^2), que PROVA -- nao so confirma
+        numericamente -- o padrao a1(n) que a onda 2 so tinha
+        extrapolado de 4 pontos; verificada por enumeracao de forca
+        bruta n=1..7). CONDICIONAL: Proposicao 5 (ponte geral
+        phi(n,c)->phi_inf(c)) depende de um Lema Aberto preciso para
+        K>=2 (enumeracao exata ate n=8 em K=2 mostra que a taxa O(1/n^2)
+        de K=1 NAO se estende obviamente). CONJECTURADO (separado das
+        provas): densidade condicional-K completa para K>=2; lei
+        distribucional incondicional M(c)=d min(1,sqrt(E/c)). CITADO
+        (nao re-derivado): Kingman 1975, Arratia-Barbour-Tavare 2003,
+        Le Cam 1960, Scheffe 1947. 11 lacunas remanescentes listadas
+        (SS9). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md
+        (+ adversarial/REFEREE_REPORT.md)
+      generalization_u_alpha: >
+        Pergunta "por que alpha=1/2" RESPONDIDA por derivacao (rota
+        PGFL generalizada, confirmada por reproducao adversarial
+        independente em 3 rotas analiticas + numerica com sementes
+        proprias): phi_q(c)=int_0^1 e^(-c*H_q(t))dt, H_q(t)=t-(1-t)*
+        int_0^t (1-q(s))/(1-s)ds; para q(s)~a*s^beta,
+        alpha=1/(1+min(beta,1)), e alpha em [1/2,1] para TODA a classe
+        -- alpha<1/2 e IMPOSSIVEL (crowding quadratico dos inicios de
+        arco). 1/2 e duplamente protegido (intercambiabilidade forca
+        beta=1 E o crowding trava em 1/2 mesmo sem morte). alpha=1 e
+        natural e povoada (auto-laco, antecessor, mistura com atomo).
+        Nenhum mecanismo intrinseco natural com alpha em (1/2,1)
+        encontrado (aberto). Achado adversarial GENUINO (nao refuta a
+        classificacao, mas expoe lacuna real de rigor): a correcao
+        finito-n publicada para M-CLUST(b) e insuficiente para b
+        grande (b=50: desvio cresce ate -27,1%) -- classificado
+        PLAUSIBLE, nao REFUTED. M-INTRA (cauda) permanece CONJECTURADO
+        -- criterio de expoente FALHOU no alcance testado mesmo apos
+        extensao adversarial 6,25x. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/RESULTS_SUMMARY.md
+        (+ adversarial/ADVERSARIAL_VERDICT.md)
+      standalone_package: >
+        tamesis-cycle-survival/ criado na raiz do repositorio: paper
+        LaTeX compilado (PDF real, 7 paginas, 0 erros/referencias
+        indefinidas), prova auto-contida, 3 scripts de simulacao
+        clean-room (so numpy/scipy), 49/49 testes de unidade passando
+        (verificado pelo integrador). Status matematico preservado sem
+        inflar (Teorema provado / Proposicao condicional / Conjectura,
+        identico ao THEOREM.md). FAILED_HYPOTHESES.md publicado na
+        raiz -- tabela completa e honesta de todas as hipoteses
+        testadas pelo laboratorio (16 TRI-RG + 4 SPARC + 3 RH-REAL + 4
+        CORE-NUMERICS onda 1), com aviso final de que sobreviver aos
+        testes nao e verdade estabelecida.
     next_action: >
-      Onda 2 (DISC-DEC-014): frente u12-limit-characterization --
-      caracterizar a funcao-limite verdadeira phi_inf(c) do ensemble
-      U_1/2 (analitica + numerica de alta precisao sobre o
-      objeto-limite ja validado adversarialmente). As 3 frentes
-      negativas estao FECHADAS com veredito final.
+      Nenhuma acao obrigatoria na linha U_1/2 -- consolidacao
+      matematica completa (onda 3), com o unico gap real (ponte K>=2)
+      honestamente documentado como problema aberto no proprio
+      THEOREM.md e no paper. Reaberturas futuras legitimas: (a) uma
+      tecnica distinta para o Lema Aberto K>=2 (acoplamento explicito,
+      sugerido mas nao executado em SS7.4); (b) fechar a lacuna de
+      rigor do sombreamento M-CLUST para b grande; (c) so DEPOIS da
+      consolidacao (agora razoavelmente atingida no nucleo, ainda que
+      nao 100%) considerar testar a classe U_alpha em sistemas
+      empiricos reais -- explicitamente adiado ate aqui por decisao do
+      usuario, e so deve ser feito com pre-registro completo, nao como
+      busca de padrao.

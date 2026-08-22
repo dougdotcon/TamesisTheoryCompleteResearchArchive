@@ -1,0 +1,433 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{openlemma}{Open Lemma}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\phiinf}{\varphi_\infty}
+\newcommand{\Unif}{\mathrm{Unif}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\PD}{\mathrm{PD}}
+
+\title{Cycle Survival Under Poisson Perturbation of Random Permutations}
+\author{Douglas H. M. Fulber}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\pi$ be a uniformly random permutation of $[n]=\{1,\dots,n\}$, and
+independently reroute each point $i$, with probability $c/n$, to a
+uniform destination in $[n]$ (leaving $f(i)=\pi(i)$ otherwise). We give
+a closed form for the $n\to\infty$ limit of the expected fraction of
+points left on a cycle of $f$:
+\[
+  \phiinf(c) \;=\; \int_0^1 e^{-c t^2}\,dt \;=\; \tfrac12\sqrt{\pi/c}\,
+  \operatorname{erf}(\sqrt c),
+\]
+proved directly on the explicit $n\to\infty$ limit object (an
+exploration-process argument with an exact cancellation), together with
+its entire-function series, a tail asymptotic with a rigorous
+exponentially-small error bound, and the law of the cyclic mass
+conditional on exactly $K$ surviving reroutes. That conditional law's
+mean is proved for every $K$ and coincides, for a structurally different
+microscopic model, with a theorem of Hansen and Jaworski
+\cite{hansenjaworski2014}. The finite-$n\to\infty$ bridge is proved in
+full only for $K=0,1$ (with an exact $O(1/n^2)$ rate at $K=1$); for
+$K\ge2$ it is reduced, via an unconditionally proved mixing lemma, to a
+single precisely stated open convergence lemma, which is not resolved
+here. Every claim below is labeled by its exact status; a companion
+numerical package cross-checks every closed form against independent
+brute-force enumeration, Monte Carlo simulation, and quadrature.
+\end{abstract}
+
+\section{The model}
+\label{sec:model}
+
+Fix $n\in\mathbb N$ and $c\ge0$. Let $\pi$ be a uniformly random
+permutation of $[n]$. Independently, for each $i\in[n]$ let $\xi_i$ be
+i.i.d.\ Bernoulli with $P(\xi_i=1)=c/n$, and let $U_i$ be i.i.d.\ uniform
+on $[n]$, independent of $\pi$ and of the $\xi$'s. Define the random
+mapping
+\[
+  f(i) = \begin{cases} U_i & \xi_i=1 \quad(\text{``$i$ is rerouted''})\\
+                        \pi(i) & \xi_i=0. \end{cases}
+\]
+A point $i$ is \emph{cyclic} for $f$ iff $f^t(i)=i$ for some $t\ge1$,
+equivalently iff $i$ lies on a directed cycle of the functional digraph
+$i\mapsto f(i)$. The observable of interest is
+\[
+  \varphi(n,c) \;:=\; \frac{1}{n}\,E\big[\#\{i : i \text{ cyclic for } f\}\big]
+  \;=\; P(1 \text{ is cyclic for } f)
+\]
+(the second equality by exchangeability in $i$). $c$ is the expected
+number of rerouted points; $c=0$ recovers a plain uniform permutation,
+so $\varphi(n,0)\equiv1$.
+
+No name for this exact ensemble was located in the random-mapping
+literature (see \S\ref{sec:priority}): the closest studied family --
+Jaworski \cite{jaworski1984}, Jaworski \cite{jaworski1998},
+Hansen--Jaworski \cite{hansenjaworski2002,hansenjaworski2008,hansenjaworski2014}
+-- is parametrized by an in-degree sequence, not by an independently
+corrupted background permutation.
+
+\section{The limit object and the main theorem}
+\label{sec:theorem}
+
+The $n\to\infty$ scaling limit of the cycle structure of a uniform
+random permutation is the Poisson--Dirichlet object $\PD(1)$
+\cite{kingman1975}, with size-biased (``stick-breaking'') representation
+$\mathrm{GEM}(1)$, due to McCloskey (1965) and Patil--Taillie (1977);
+see Pitman \cite{pitman2002}, Ch.~3, for the construction and full
+attribution. Let $L(c)$ be
+this object equipped with an independent rate-$c$ Poisson process of
+marks on $[0,1]$, each carrying an independent uniform destination: an
+unmarked point advances to the next point on its cycle; a marked point
+moves instead to its destination. This can be built explicitly from
+independent $\Exp(1)$ ``closure clocks'' per arc-head raced against the
+mark process, with the identification of this construction as the
+standard exploration representation of $\PD(1)$ under lazy revelation
+cited from \cite{kingman1975,arratiabarbourtavare2003} and used as the
+single external structural input; every computation below is
+self-contained given that one citation. Write
+$\phiinf(c):=P(x_0 \text{ cyclic in } L(c))$ for a uniform reference
+point $x_0$; by Fubini and exchangeability this equals
+$E[\mathrm{Leb}(\text{cyclic set})]$, the natural limit of $\varphi(n,c)$.
+
+\begin{theorem}[Closed form]
+\label{thm:main}
+For every $c\ge0$,
+\[
+  \phiinf(c) \;=\; \int_0^1 e^{-c t^2}\,dt \;=\; \tfrac12\sqrt{\pi/c}\,\operatorname{erf}(\sqrt c),
+\]
+with value $1$ at $c=0$ by continuity.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Reveal the forward orbit of $x_0$ step by step; let $t\in[0,1)$ be the
+traversed fraction of mass. The orbit decomposes into \emph{arcs}
+separated by surviving marks. At traversal level $t$: the
+$\pi$-closure hazard onto a specific open arc-head is $1/(1-t)$ per unit
+mass (the classical fact that the size-biased cycle length of a uniform
+permutation is $\Unif(0,1)$ is the $c=0$, single-arc-head case of this);
+a mark at position $s<t$ kills (lands on visited territory) with
+probability $s$ or survives with probability $1-s$, opening a new
+arc-head with its own closure clock.
+
+Write $T_0\sim\Unif(0,1)$ for $x_0$'s own closure clock (an elementary
+fact about $\Exp(1)$ primitives), independent of the mark process. Fix
+$T_0=t$. For a single surviving mark at $s<t$, the joint probability
+(over its independent survival Bernoulli and its independent closure
+clock) that it neither kills \emph{nor} produces a sibling arc-head that
+closes before $t$ is
+\[
+  \underbrace{(1-s)}_{P(\text{survives})}\cdot\underbrace{\frac{1-t}{1-s}}_{P(\text{sibling closes after } t\mid \text{survives})} \;=\; 1-t,
+\]
+\textbf{independent of $s$} -- the survival factor $(1-s)$ exactly
+cancels the competing-clock tail $(1-t)/(1-s)$. This is the entire
+mechanism behind the closed form. By the Poisson marking/thinning
+theorem, the number of ``failing'' marks in $[0,t)$ is then
+$\mathrm{Poisson}(c\, t\cdot t)=\mathrm{Poisson}(ct^2)$ (rate $c$ on an
+interval of length $t$, constant fail-probability $t$, independent of
+position), so
+\[
+  P(x_0 \text{ cyclic}\mid T_0=t) \;=\; P(\mathrm{Poisson}(ct^2)=0) \;=\; e^{-ct^2}.
+\]
+Integrating over $T_0\sim\Unif(0,1)$ gives $\phiinf(c)=\int_0^1 e^{-ct^2}dt$;
+the closed form follows from $u=\sqrt c\,t$ and the definition of
+$\operatorname{erf}$.
+\end{proof}
+
+\begin{remark}
+A heuristic tail computation that forgets to size-bias ``the arc
+currently being traversed'' -- treating the inter-mark gaps as
+unconditional $\Exp(c)$ rather than accounting for the
+inspection/waiting-time paradox -- lands on $\sqrt{\pi/2}\,c^{-1/2}$
+instead of the correct $(\sqrt\pi/2)\,c^{-1/2}$: a factor $\sqrt2$ error.
+The proof above never forms this quantity: the per-mark probability is
+computed jointly over the pair (survival Bernoulli, closure-clock
+exponential), never as an averaged arc length, so there is no
+size-biased object anywhere in the argument to get wrong.
+\end{remark}
+
+\begin{corollary}[Series]
+\label{cor:series}
+$\phiinf(c) = \sum_{k\ge0} \dfrac{(-c)^k}{k!(2k+1)}$ for every real $c$
+(entire function; proved by the Weierstrass $M$-test justifying
+term-by-term integration of $e^{-ct^2}$'s Taylor series on $[0,1]$).
+First terms: $1-\tfrac{c}{3}+\tfrac{c^2}{10}-\tfrac{c^3}{42}+\cdots$; in
+particular $a_1=1/3$.
+\end{corollary}
+
+\begin{corollary}[Tail asymptotic, with a rigorous error bound]
+\label{cor:tail}
+As $c\to\infty$,
+\[
+  \phiinf(c) \;=\; \frac{\sqrt\pi}{2}\,c^{-1/2} - R(c), \qquad 0 < R(c) < \frac{e^{-c}}{2c} \;\;\forall c>0,
+\]
+so $\phiinf(c) = \tfrac{\sqrt\pi}{2}c^{-1/2}(1+O(e^{-c}))$ -- a pure
+power-law tail up to exponentially small corrections. Proved by one
+integration by parts on the $\operatorname{erf}$ tail integral.
+\end{corollary}
+
+\section{The conditional-$K$ law and the Hansen--Jaworski connection}
+\label{sec:conditionalK}
+
+Condition on exactly $K$ marks rather than $\mathrm{Poisson}(c)$ many.
+
+\begin{lemma}[Mean, proved for every $K$]
+\label{lem:mean}
+\[
+  \varphi_K \;:=\; \int_0^1 (1-t^2)^K\,dt \;=\; \frac{4^K (K!)^2}{(2K+1)!}
+\]
+(a Wallis integral). Checks: $\varphi_0=1$, $\varphi_1=2/3$,
+$\varphi_2=8/15$, $\varphi_3=16/35$. Mixing over $K\sim\mathrm{Poisson}(c)$
+exactly reproduces Theorem~\ref{thm:main}:
+$\sum_K e^{-c}c^K/K!\cdot\varphi_K = \int_0^1 e^{-c}e^{c(1-t^2)}dt = \int_0^1 e^{-ct^2}dt$.
+\end{lemma}
+
+\begin{lemma}[Density at $K=1$, proved]
+\label{lem:density1}
+The cyclic-mass random variable $M_1:=\mathrm{Leb}(\text{cyclic set})$
+has density $f_{M_1}(x)=2x$ on $(0,1)$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+With a single reroute at a uniform position, the size-biased struck
+cycle has length $L\sim\Unif(0,1)$ (classical) and a uniform destination
+$u$. If $u\notin$ the struck cycle (probability $1-L$), the cyclic mass
+is deterministically $1-L$; if $u$ lands in the struck cycle (probability
+$L$), the cyclic mass is $1-L+D$ with $D\mid L\sim\Unif(0,L)$. Summing
+the two branches' contributions to the density of $M_1$ by the standard
+mixture change-of-variables formula gives $x+x=2x$ on $(0,1)$.
+\end{proof}
+
+\begin{conjecture}[General-$K$ density, \textbf{not proved here}]
+\label{conj:densityK}
+$f_{M_K}(x) = 2Kx(1-x^2)^{K-1}$ on $(0,1)$, for $K\ge2$.
+\end{conjecture}
+
+This reduces to Lemma~\ref{lem:density1} at $K=1$; its mean matches
+$\varphi_K$ exactly (proved, by integration by parts -- necessary but
+not sufficient for the density itself to be correct); it is supported by
+Kolmogorov--Smirnov tests at $K=1,2,3$ (no rejection, two independent
+implementations) and by an external theorem for a structurally different
+microscopic model with the same conditional-$K$ limit:
+
+\begin{quote}
+\textbf{Hansen \& Jaworski \cite{hansenjaworski2014}, Theorem 7(ii).} For
+their model $\hat T^r_n$ -- a uniform random mapping with $r$ vertices
+constrained to in-degree $\le1$ and $a=n-r$ vertices allowed in-degree
+$\le2$ -- fixed $a$ and $k=\lfloor xn\rfloor$:
+$\Pr\{\hat X^r_n=k\} \sim \tfrac1n\cdot 2ax(1-x^2)^{a-1}$.
+\end{quote}
+
+Identical functional form, with $a\leftrightarrow K$; the two
+microscopic models are structurally unrelated (their model is a uniform
+draw under an in-degree constraint, with no permutation-plus-reroute
+mechanism). This coincidence of the conditional-$K$ limit law is
+external supporting evidence, not a proof, of Conjecture~\ref{conj:densityK}
+for this ensemble. Literature priority for this specific citation:
+\emph{already known} -- see \S\ref{sec:priority}.
+
+\section{The finite-$n$ bridge}
+\label{sec:bridge}
+
+Theorem~\ref{thm:main} and Lemma~\ref{lem:mean} concern $L(c)$ itself,
+taken as given. Whether $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$ is a
+separate question, only partially resolved.
+
+For every finite $n$, writing $\varphi_n^{(K)}$ for $\varphi(n,c)$
+conditioned on exactly $K$ rerouted points (a purely combinatorial
+quantity, independent of $c$, by exchangeability),
+\begin{equation}
+\label{eq:mixture}
+  \varphi(n,c) \;=\; \sum_{K=0}^n \binom{n}{K}\Big(\frac cn\Big)^{\!K}\Big(1-\frac cn\Big)^{\!n-K}\varphi_n^{(K)}
+\end{equation}
+is an \emph{exact} identity, not an approximation.
+
+\begin{proposition}[Mixing reduction, proved unconditionally]
+\label{prop:mixing}
+If $\varphi_n^{(K)}\to\varphi_K$ for every fixed $K\ge0$, then
+$\varphi(n,c)\to\phiinf(c)$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Split $\varphi(n,c)-\phiinf(c)$ into a term measuring
+$\mathrm{Binomial}(n,c/n)$ vs.\ $\mathrm{Poisson}(c)$ total-variation
+distance (which $\to0$ by Scheffé's lemma \cite{scheffe1947} applied to
+the elementary pointwise Poisson-limit computation -- a quantitative
+rate $d_{TV}\le c^2/n$ is also available via Le Cam's bound
+\cite{lecam1960}, though only the qualitative limit is needed here) and
+a term measuring $\varphi_n^{(K)}-\varphi_K$ averaged over $K$,
+controlled uniformly in $n$ by a Chernoff-type tail bound on
+$\mathrm{Binomial}(n,c/n)$ derived from scratch. Both vanish as
+$n\to\infty$.
+\end{proof}
+
+$K=0$ is trivial and exact for every $n$ ($f=\pi$, a bijection, every
+point cyclic: $\varphi_n^{(0)}=1$).
+
+\begin{proposition}[$K=1$ bridge, proved exactly]
+\label{prop:k1}
+For every $n\ge1$, $\varphi_n^{(1)} = \dfrac23+\dfrac1{3n^2}$, exactly.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Fix the rerouted index; $\pi$ is then an unconditioned uniform
+permutation, and the cycle $C$ containing it has length $L$, exactly
+uniform on $\{1,\dots,n\}$ (a classical exact combinatorial fact, not
+merely a limit). Points outside $C$ remain cyclic regardless of the
+reroute's target $U$. A case split on $U$ inside $C$ (missing $C$
+entirely; landing on the reroute source itself; landing $d$ steps into
+$C$) gives an exact count of cyclic points within $C$ given $L=\ell$;
+averaging over $L\sim\Unif\{1,\dots,n\}$ and $U$ gives the stated closed
+form.
+\end{proof}
+
+\begin{openlemma}[Fixed-$K$ bridge, $K\ge2$]
+\label{ol:k2}
+$\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
+fixed integer $K\ge2$. \textbf{Neither proved nor disproved here.}
+\end{openlemma}
+
+A single reroute disturbs exactly one background cycle (tractable, the
+mechanism behind Proposition~\ref{prop:k1}); $K\ge2$ reroutes can strike
+the same cycle in either order, or strike different cycles whose severed
+pieces later re-link through a further reroute's target -- a
+combinatorial case analysis not resolved here. Exact enumeration at
+$K=2$ for $n$ up to $8$ shows $\varphi_n^{(2)}$ decreasing monotonically
+toward $\varphi_2=8/15$, but the rescaled deviation
+$n^2(\varphi_n^{(2)}-\varphi_2)$ is \emph{not} settling to a constant
+over the tested range -- so, unlike $K=1$'s clean $O(1/n^2)$ rate, no
+specific rate for $K\ge2$ should be assumed (\S\ref{sec:numerics}).
+
+\begin{proposition}[Conditional convergence]
+\label{prop:conditional}
+For every fixed $c\ge0$, $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$,
+\textbf{conditional on} Open Lemma~\ref{ol:k2} holding for every
+$K\ge2$.
+\end{proposition}
+
+This follows immediately from Proposition~\ref{prop:mixing} plus
+Proposition~\ref{prop:k1} and the trivial $K=0$ case, given the open
+lemma. It is stated as a conditional proposition, not a theorem, because
+the open lemma is exactly what is missing; the empirical control that
+exists (\S\ref{sec:numerics}) is evidence for, not a substitute for,
+resolving it.
+
+\section{Numerics}
+\label{sec:numerics}
+
+A companion package (\texttt{tamesis-cycle-survival/}, clean-room
+implementation, \texttt{numpy}/\texttt{scipy} only, fixed seeds)
+cross-checks every closed form above:
+
+\begin{itemize}
+\item \textbf{Series vs.\ closed form vs.\ independent quadrature}
+  (\texttt{simulations/asymptotics.py}): agree to $<10^{-9}$ across
+  $c\in[0.01,10]$ for the series (limited by double-precision
+  catastrophic cancellation of the alternating series beyond
+  $c\!\sim\!15$, a floating-point artifact, not a defect of the series
+  itself) and to $<10^{-8}$ for erf-vs-quadrature up to $c=500$.
+\item \textbf{Tail bound} (Corollary~\ref{cor:tail}): the rigorous bound
+  $0<R(c)<e^{-c}/(2c)$ holds at every tested $c\in\{1,2,5,10,25,50,100,500\}$
+  (at $c\ge50$ the bound is below double-precision resolution for
+  $\phiinf(c)$'s magnitude and $R(c)$ correctly rounds to zero).
+\item \textbf{Exact finite-$n$ enumeration} (\texttt{simulations/finite\_n.py},
+  no sampling): Proposition~\ref{prop:k1}'s closed form
+  $\varphi_n^{(1)}=2/3+1/(3n^2)$ verified as an exact rational identity
+  by brute-force enumeration for $n=1,\dots,9$; Open Lemma~\ref{ol:k2}
+  explored at $K=2$ for $n=2,\dots,8$, confirming monotone convergence
+  toward $\varphi_2=8/15$ without a settled rate; the full exact mixture
+  \eqref{eq:mixture} for $n=2,\dots,4$ shows $|\varphi(n,c)-\phiinf(c)|$
+  shrinking monotonically in $n$ at fixed $c\in\{0.5,1,2\}$.
+\item \textbf{Monte Carlo at large $n$} (\texttt{simulations/monte\_carlo.py},
+  $n=20000$, $300$ trials/cell, seed \texttt{20260822}): all tested
+  $c\in\{0.1,0.5,1,2,5,10,30\}$ within $|z|<4$ of $\phiinf(c)$.
+\item \textbf{Poisson-mixture consistency}: $\sum_K\mathrm{Poisson}(K;c)\,\varphi_K$
+  reproduces $\phiinf(c)$ to $<10^{-8}$ for every tested $c$, confirming
+  Lemma~\ref{lem:mean}'s consistency remark numerically.
+\end{itemize}
+
+A pytest suite of 49 checks (\texttt{tests/test\_formula.py}) runs all
+of the above at small scale in under two seconds; see the package
+\texttt{README.md} for exact reproduction commands for every number in
+this paper.
+
+\section{Literature priority}
+\label{sec:priority}
+
+A dedicated search (22 queries) traced the closest published family --
+Jaworski \cite{jaworski1984,jaworski1998},
+Hansen--Jaworski \cite{hansenjaworski2002,hansenjaworski2006,hansenjaworski2008,hansenjaworski2014}
+-- and reached a verdict per component of this result:
+
+\begin{itemize}
+\item \emph{The model} (\S\ref{sec:model}): not found under this
+  construction; the closest family is parametrized by in-degree
+  sequence, not permutation-plus-independent-reroute.
+\item \emph{The limit object} ($\PD(1)$ + Poisson marks): each
+  ingredient is classical; the specific combination is not built this
+  way in the source literature, which never starts from a permutation.
+\item \emph{The conditional-$K$ law} (\S\ref{sec:conditionalK}):
+  \textbf{already known} -- Hansen \& Jaworski \cite{hansenjaworski2014},
+  Theorem 7(ii), for a structurally different model.
+\item \emph{The Poisson-mixture closed form} (Theorem~\ref{thm:main}):
+  not found; the strongest candidate component of this result for being
+  previously unpublished. The mixture is a question that arises
+  naturally only from the permutation-plus-reroute side (where
+  $\#\text{reroutes}\sim\mathrm{Binomial}(n,c/n)\to\mathrm{Poisson}(c)$
+  is immediate), so its absence from the in-degree-sequence literature
+  is consistent with, not independent evidence against, its being
+  previously unpublished.
+\item \emph{The tail exponent $1/2$}: universal across the whole
+  random-mapping literature (e.g.\ the classical
+  $\#\text{cyclic points}\sim\sqrt{\pi n/2}$ for a uniformly random
+  mapping); the exact coefficient $\sqrt\pi/2$ and the purely
+  exponential correction structure of Corollary~\ref{cor:tail} were not
+  found.
+\end{itemize}
+
+This search is broad but not exhaustive: one classical source (Kolchin,
+\emph{Random Mappings} \cite{kolchin1986}) remains unverified for lack
+of full-text access, and is reported here as inaccessible, not as ruled
+out. Every claim of priority in this paper is qualified as ``not found
+in the searches performed,'' never as ``does not exist'' or ``first.''
+
+\section{Open problems}
+\label{sec:open}
+
+\begin{enumerate}
+\item \textbf{Open Lemma~\ref{ol:k2}} itself: the fixed-$K$ finite-$n$
+  bridge for $K\ge2$. This is the single hypothesis separating
+  Proposition~\ref{prop:conditional} from a full theorem.
+\item \textbf{The rate} of that bridge, once resolved: $K=0$ is exact
+  (rate $0$), $K=1$ is exact at rate $1/(3n^2)$; $K=2$'s rescaled
+  deviation is not observed to settle over $n\le8$ (\S\ref{sec:numerics}).
+  No specific rate for $K\ge2$ should be assumed without further work.
+\item \textbf{Conjecture~\ref{conj:densityK}} (general-$K$ density) and
+  its Poisson-mixture consequence, the full unconditional law
+  $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$.
+\item A locally-uniform-in-$c$ (not merely pointwise) version of
+  Proposition~\ref{prop:conditional}.
+\item Any second-moment, concentration, or CLT statement for the cyclic
+  fraction of either $\varphi(n,c)$ or $L(c)$ -- entirely untouched here.
+\item A first-principles (non-cited) proof of the exploration-process
+  representation of $\PD(1)$ used as the single external input in
+  \S\ref{sec:theorem}.
+\end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{cycle-survival}
+
+\end{document}

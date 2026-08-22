@@ -335,37 +335,85 @@ taken as given. The separate question is whether the *finite* model
   `φ_n^{(K)} → φ_K` unconditionally at `K=4,5` too, via the same
   reduction identity used at `K=2,3`. Both were also confirmed by the
   same adversarial referee pass described above.
-- **An exact pattern in the leading correction — CONJECTURED, not
-  proved, for general `K`.** Across all five now-proved closed forms,
+- **`K=6,…,10` (PROVED exactly, same mechanical method run five further
+  levels).** Running the identical `K`-uniform transfer-matrix procedure
+  five more rungs, past `K=5`, costs no new idea, only more arithmetic:
+  `ψ_n^{(6)} = (2048n⁶+3072n⁵+4293n⁴+4638n³+3529n²+1662n+360)/(6006n⁶)`,
+  proving `φ_n^{(6)} → φ_6 = 1024/3003` unconditionally, via the same
+  reduction identity, for every `n ≥ 7`. The analogous exact closed forms
+  for `K=7,8,9,10` exist by the identical procedure and are each
+  independently verified to have `n→∞` limit exactly `φ_K` (full
+  formulas: archive record
+  `.../u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md`
+  §1.1), extending the fixed-`K` bridge's unconditional resolution
+  through `K=10`. The `K=6` closed form was independently re-verified by
+  a separate hostile adversarial referee, who substituted every one of
+  its 13 constituent closed forms (and, at `K=7`, all 16 of that level's)
+  back into the exact defining recursion with zero symbolic discrepancy
+  in any case, and who matched the formula bit-for-bit against a fresh,
+  independently-coded brute-force enumeration at `K=6,n=7`
+  (`355081/823543`, out of `7!×7^6=592,950,960` exhaustively enumerated
+  combinations) and, as a second held-out point, at `K=6,n=8`
+  (`191647/458752`, out of `8!×8^6=10,569,646,080` combinations).
+- **The general-`K` rate — CONFIRMED unconditionally for `K=0,…,10`;
+  PROVED for every `K`, conditional on one precisely-named regularity
+  hypothesis.** Across all eleven now-proved closed forms,
   `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` holds *exactly*, for every
-  one of `K=1,2,3,4,5` individually (five independently-derived closed
-  forms, not a fit to data). This is reported strictly as a
-  **CONJECTURE** for general `K` — no argument here proves it beyond the
-  five values actually computed, and it is never treated as established
-  anywhere in this document.
+  one of `K=0,1,…,10` individually (eleven independently-derived closed
+  forms, not a fit to data) — this part is **PROVED, unconditionally**,
+  with no hypothesis. Separately, a genuinely new technique proves the
+  identity for **every** `K` at once: take the `n→∞` scaling limit of the
+  same `(a,b,r)` Markov chain *before* solving it in `r` (rather than
+  after, as the concrete ladder above does), turning the exact discrete
+  recursion into a linear ODE in the scaling variable `t=m/n`, with `r`
+  now an ordinary symbolic parameter. Solving this ODE by diagonal
+  coefficient matching gives closed forms, symbolic in `r`, for the
+  leading order `F_r(t,b) := lim_n g_r(nt,b)` and the `O(1/n)` correction
+  `G_r(t,b) := lim_n n[g_r(nt,b)-F_r(t,b)]`; `F_r(1,0)=φ_r` re-derives the
+  Wallis-integral mean by a new route, and `G_r(1,0)=rφ_r/4` — proved by
+  an elementary binomial-sum symmetry identity — is exactly the rate
+  conjecture, for every `K`. **The one honest caveat:** this derivation
+  establishes what `F_r,G_r` *must* equal *if* `g_r(m,b)` admits a
+  regular two-term asymptotic expansion of the specific polynomial-in-`t`
+  shape used throughout, for every `r`; the *existence* of that expansion
+  for `r` beyond the eleven concretely-verified values (`K=0,…,10`) is
+  not independently re-derived here from first principles (e.g. by a
+  discrete-Gronwall-type error bound). Wherever this hypothesis can be
+  checked against an independent, unconditionally proved computation, it
+  holds exactly, with zero exceptions, across all eleven checkable
+  values. An independent hostile adversarial referee re-derived both
+  ODEs by hand, the `F_r`/`G_r` closed forms symbolically for general
+  `r,k,b`, and the binomial-sum identity, finding zero errors, and
+  additionally tested `F_r,G_r` against exact ground truth at `t≠1` (45
+  new data points, `r=0,…,5`, symbolic `b`) — zero discrepancies. Asked
+  explicitly whether the caveat is correctly scoped, too conservative, or
+  too optimistic, the referee's verdict, adopted in full: **it is
+  correctly scoped — neither too optimistic nor too conservative**
+  (archive record: same `k6_attempt/ATTEMPT.md` §2–§4, and
+  `k6_attempt/adversarial/REFEREE_REPORT.md`).
 
-**The exact open gap, narrowed.** For `K ≥ 6`, `φ_n^{(K)} → φ_K` (the
-"fixed-`K` bridge") is **neither proved nor disproved**. The obstruction
-is now different in *kind* from the one that stopped the `K=1,2`-style
-hand argument at `K=3`: the transfer-matrix procedure itself is already
-uniform in `K` (no new idea was needed between `K=3` and `K=5`, only more
-arithmetic), but its recursion has so far only been solved *level by
-level* in the state variable `r` — symbolically at `r=0,1,…,5`, one
-integer at a time — not for a symbolic `r`. A general-`K` proof would
-need either (i) an induction on `r`, showing the closed form has a
-predicted shape preserved by one more application of the recursion, or
-(ii) a generating-function-in-`K` argument (e.g. summing
-`Σ_K x^K/K!·ψ_n^{(K)}` and finding a governing closed-form
-ODE/PDE in `n`) — neither attempted here. This is a genuine, precisely
-named, and so far unexecuted route — a real difference from the `K≥3`
-gap's earlier state, which had no comparably concrete candidate strategy
-— but naming a route is **not** a proof: `K≥6` remains honestly open,
-not "essentially solved."
+**The exact open gap, narrowed further.** For `K ≥ 11`, `φ_n^{(K)} → φ_K`
+(the "fixed-`K` bridge," i.e. the Open Lemma itself) is **neither proved
+nor disproved unconditionally**. A finite limit `lim_n n(ψ_n^{(K)}-φ_K)`
+forces `ψ_n^{(K)}-φ_K→0` as an elementary consequence (if the difference
+did not vanish, multiplying by `n→∞` could not converge to a finite
+value) — so the continuum-scaling-limit technique's conditional proof of
+the associated **rate** for every `K` already conditionally discharges
+the Open Lemma itself too, as an immediate corollary, on the identical
+regularity hypothesis. That hypothesis — existence of the two-term
+asymptotic expansion, for `K` beyond the eleven concretely checked
+values — is not independently established from first principles, so
+nothing here closes the Open Lemma *unconditionally* for `K≥11`; it
+remains open exactly as the rate does (proved conditionally, open
+unconditionally), not resolved by any weaker or stronger margin. The
+exact, all-orders, general-`K` finite-`n` closed form for `ψ_n^{(K)}`
+(of which the two-order continuum expansion is only a truncation) is
+not attempted at all.
 
 Consequently: the full statement "`φ(n,c) → φ_∞(c)` for every `c`" is a
 **conditional proposition** — it follows from the (unconditionally
-proved) mixing reduction *given* the open `K≥6` bridge lemma (narrowed
-from `K≥3`, now that `K=3,4,5` are proved), which remains open. It is not
+proved) mixing reduction *given* the open `K≥11` bridge lemma (narrowed
+from `K≥6`, now that `K=6,…,10` are proved), which remains open. It is not
 a theorem in its own right. The empirical control that exists (exact
 enumeration to small `n`, Monte Carlo to large `n`, both reproduced in
 `simulations/`) is evidence for this conditional statement, not a proof
@@ -384,21 +432,35 @@ of it.
    `φ_∞(c)`, proved (Theorem 1); only the full distribution around that
    mean is conjectural.
 
-3. **General-`K` rate of the fixed-`K` bridge**,
-   `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` (§6). Proved as an exact
-   identity individually at `K=1,2,3,4,5`; CONJECTURED, not proved, for
-   general `K`.
+3. ~~General-`K` rate of the fixed-`K` bridge~~ — **no longer a
+   conjecture.** `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` (§6) is
+   **PROVED, unconditionally**, for `K=0,…,10` (eleven independently
+   derived closed forms), and **PROVED for every `K`, conditional on** the
+   regularity hypothesis named in §6 (existence of a two-term asymptotic
+   expansion, for `K` beyond those eleven values). It is retained here
+   only to record that it is *not* fully unconditional for general `K` —
+   the caveat is real, precisely named, and adversarially judged
+   correctly scoped, but it is a hypothesis, not a proof from first
+   principles, so this item is not promoted to §§1–6's PROVED tier
+   without qualification.
 
 Neither density conjecture above (1–2) is used anywhere above as though
 it were proved; both are numerically supported (Kolmogorov–Smirnov
 tests, no rejection) and neither is claimed as established. The general
-rate conjecture (3) is likewise never treated as established beyond the
-five values it was actually verified at. The `K≥6` fixed-`K` bridge (§6)
-is a distinct, fourth kind of open item — a convergence statement
-between two well-defined finite/infinite objects, not a guessed closed
-form or a guessed asymptotic coefficient — and is not counted among
-Conjectures 1–3 for that reason. (Note: this is unrelated to the
-general-`K` density Conjecture 1 above, which remains open for every
-`K≥2` — the `K=2,3,4,5` results resolved in §6 are about the *mean*
-`φ_n^{(K)}→φ_K`, not about the full distributional law `f_{M_K}(x)`.)
+rate conjecture (3) is likewise never treated as fully unconditional
+beyond the eleven values it was actually verified at without hypothesis.
+The `K≥11` fixed-`K` bridge (§6, the Open Lemma itself) is a distinct,
+fourth kind of open item — a convergence statement between two
+well-defined finite/infinite objects, not a guessed closed form or a
+guessed asymptotic coefficient — and is not counted among Conjectures
+1–3 for that reason; it shares item 3's conditional proof route in
+full, not just for the rate: a finite limit of `n(ψ_n^{(K)}-φ_K)`
+elementarily forces `ψ_n^{(K)}→φ_K`, so item 3's conditional rate proof
+already conditionally discharges the bare convergence too, on the
+identical hypothesis — it is only the *unconditional* resolution that
+remains missing, for the bridge exactly as much as for the rate. (Note: this is
+unrelated to the general-`K` density Conjecture 1 above, which remains
+open for every `K≥2` — the `K=2,…,10` results resolved in §6 are about
+the *mean* `φ_n^{(K)}→φ_K`, not about the full distributional law
+`f_{M_K}(x)`.)
 

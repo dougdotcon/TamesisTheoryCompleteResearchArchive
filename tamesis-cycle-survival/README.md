@@ -23,44 +23,62 @@ Author: Douglas H. M. Fulber.
 
 ## Status (read this before citing anything as "proved")
 
-This package separates three tiers, matching the archive's theorem
+This package separates four tiers, matching the archive's theorem
 document:
 
 1. **PROVED**, self-contained: the closed form on the limit object
    `L(c)` (Theorem 1), its series and tail asymptotic (Corollaries 4.1,
    4.2), the conditional-`K` mean for every `K` (Wallis integral), the
    `K=1` conditional density, and — on the finite-`n` side — the exact
-   `K=0` through `K=5` bridge cases (exact rates `1/(3n²)` at `K=1` and
-   `Θ(1/n)` at `K=2,3` — *not* the `Θ(1/n²)` the `K=0,1` pattern alone
-   would suggest) plus an unconditional, fully `K`-general reduction
-   lemma. `K=1,2` are proved by hand case-analysis; `K=3,4,5` are proved
-   by a completely different, later technique — a `K`-uniform
-   transfer-matrix/Markov-chain method that reduces the whole
-   computation to a mechanical telescoping-sum algorithm — verified
-   independently by a hostile adversarial referee across several layers
-   (own re-derivation by a different solving technique, own brute force
-   including a fresh `n=9` data point, own scripts re-run from scratch)
-   with zero errors found.
-2. **CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every `c`"
-   follows from that reduction lemma *only if* an explicitly stated open
-   lemma holds for every `K ≥ 6` (the finite-`n` bridge at fixed `K≥6`;
-   narrowed from `K≥3` once `K=3,4,5` were proved — see below). That
-   lemma is neither proved nor disproved here. The obstruction is now
-   precisely named — not "more hand casework," as it was through `K=2`,
-   but that the transfer-matrix recursion has so far only been solved
-   level-by-level in its "level" variable `r` (`r=0,…,5`), not
-   symbolically for general `r`; an induction on `r`, or a
-   generating-function-in-`K` argument, are named as concrete (if
-   unexecuted) candidate routes. Naming a route does **not** make `K≥6`
-   essentially solved — it remains a genuinely open problem. A related
-   numerically-verified-but-unproved conjecture about the general-`K`
-   rate (`lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4`, confirmed exactly for `K=1..5`,
-   CONJECTURED beyond) is stated in `proofs/derivation.md` §6 and is
-   never treated as established.
-3. **CONJECTURED**, numerically supported (Kolmogorov–Smirnov, no
+   `K=0` through `K=10` bridge cases (exact rates `1/(3n²)` at `K=1` and
+   `Θ(1/n)` at `K=2,…,10` — *not* the `Θ(1/n²)` the `K=0,1` pattern alone
+   would suggest), the general-`K` rate identity `lim n(ψ_n^{(K)}−φ_K) =
+   Kφ_K/4` confirmed unconditionally at all eleven of `K=0,…,10`, plus an
+   unconditional, fully `K`-general reduction lemma. `K=1,2` are proved
+   by hand case-analysis; `K=3,…,10` are proved by a completely
+   different, later technique — a `K`-uniform transfer-matrix/Markov-chain
+   method that reduces the whole computation to a mechanical
+   telescoping-sum algorithm, run mechanically through ten levels —
+   verified independently by a hostile adversarial referee across
+   several layers (own re-derivation by a different solving technique,
+   own brute force including fresh `n=9` and, at `K=6`, `n=7`/`n=8` data
+   points, own scripts re-run from scratch) with zero errors found.
+2. **PROVED, conditional on one precisely-named regularity hypothesis**:
+   the general-`K` rate `lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4` holds for
+   *every* `K`, not just `K=0,…,10`, by a new continuum scaling-limit
+   technique (take the `n→∞` limit of the same discrete Markov chain
+   *before* solving it in `r`, turning the exact recursion into a linear
+   ODE with `r` as a free symbolic parameter). This produces closed forms
+   `F_r(t,b)` (leading order) and `G_r(t,b)` (`O(1/n)` correction),
+   proved by exact symbolic identities, general `r,k,b` — but the
+   derivation is conditional on the *existence* of the assumed two-term
+   asymptotic expansion, for `K` beyond the eleven concretely-verified
+   values (`K=0,…,10`); that existence question is not independently
+   proved from first principles here. A hostile adversarial referee
+   re-derived every algebraic step by hand (both ODEs, both closed
+   forms, the underlying binomial-sum identity) with zero errors, tested
+   `F_r`/`G_r` against 45 new exact data points at `t≠1` (zero
+   discrepancies), and, asked explicitly to judge the caveat's scope,
+   concluded it is **correctly scoped — neither too optimistic nor too
+   conservative**.
+3. **CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every `c`"
+   follows from the reduction lemma of tier 1 *only if* an explicitly
+   stated open lemma holds for every `K ≥ 11` (the finite-`n` bridge at
+   fixed `K≥11`; narrowed from `K≥6` once `K=6,…,10` were proved — see
+   below). That lemma — the bare convergence `φ_n^{(K)}→φ_K`, as distinct
+   from its rate — is neither proved nor disproved *unconditionally*
+   here. A finite limit of `n(ψ_n^{(K)}−φ_K)` elementarily forces
+   `ψ_n^{(K)}→φ_K`, so tier 2's conditional proof of the rate already
+   conditionally discharges this bridge too, on the identical
+   hypothesis — it shares tier 2's exact status (proved conditionally,
+   open unconditionally), not a weaker one. Naming a proof route for the
+   rate does **not** make `K≥11` essentially solved — the hypothesis
+   itself remains genuinely open for the bridge exactly as much as for
+   the rate.
+4. **CONJECTURED**, numerically supported (Kolmogorov–Smirnov, no
    rejection) but not proved: the full conditional-`K` cyclic-mass
    *density* for `K≥2` (this is a distributional claim, unrelated to and
-   unaffected by the `K=2..5` bridge/mean results in tier 1 above), and
+   unaffected by the `K=2..10` bridge/mean results in tier 1 above), and
    the resulting unconditional distributional law
    `M(c) =^d min(1, √(E/c))`.
 
@@ -70,10 +88,14 @@ list of every open gap): the archive's internal theorem document,
 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md`,
 plus its Stage 3 extension resolving `K=2`
 (`.../theorem/k2_open_lemma/ATTEMPT.md` and
-`adversarial/REFEREE_REPORT.md`) and its Stage 4 extension resolving
+`adversarial/REFEREE_REPORT.md`), its Stage 4 extension resolving
 `K=3,4,5`
 (`.../theorem/k2_open_lemma/k3_attempt_2/ATTEMPT.md` and
-`.../k3_attempt_2/adversarial/REFEREE_REPORT.md`) — none included in this
+`.../k3_attempt_2/adversarial/REFEREE_REPORT.md`), and its Stage 5
+extension resolving `K=6,…,10` unconditionally and proving the
+general-`K` rate conditionally
+(`.../theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md` and
+`.../k6_attempt/adversarial/REFEREE_REPORT.md`) — none included in this
 package; this package is meant to stand on its own via
 `proofs/derivation.md`.
 
@@ -152,6 +174,6 @@ this package's own clean-room implementation.
 
 ## Compiling the paper
 
-`paper/cycle-survival.pdf` is already built (9 pages, `pdflatex` +
+`paper/cycle-survival.pdf` is already built (11 pages, `pdflatex` +
 `bibtex`, zero errors, zero undefined references/citations). See
 `paper/COMPILE.md` to rebuild it after editing the `.tex`/`.bib` source.

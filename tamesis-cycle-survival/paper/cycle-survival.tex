@@ -8,6 +8,7 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{conjecture}{Conjecture}
+\newtheorem{hypothesis}{Hypothesis}
 \newtheorem*{openlemma}{Open Lemma}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -42,14 +43,25 @@ conditional on exactly $K$ surviving reroutes. That conditional law's
 mean is proved for every $K$ and coincides, for a structurally different
 microscopic model, with a theorem of Hansen and Jaworski
 \cite{hansenjaworski2014}. The finite-$n\to\infty$ bridge is proved in
-full for $K=0,1,2,3,4,5$ -- by two structurally different techniques, a
-hand case-analysis at $K=1,2$ and a $K$-uniform transfer-matrix/Markov-chain
-method at $K=3,4,5$ -- with exact rates $O(1/n^2)$ at $K=1$ and
-$\Theta(1/n)$ at $K=2,3$, not the naively extrapolated $O(1/n^2)$; for
-$K\ge6$ it is reduced, via an unconditionally proved mixing lemma, to a
-single precisely stated open convergence lemma, for which a concrete
-(but unexecuted) proof route is now named, but which is not resolved
-here. Every claim below is labeled by its exact status;
+full, unconditionally, for $K=0,1,\dots,10$ -- by two structurally
+different techniques, a hand case-analysis at $K=1,2$ and a $K$-uniform
+transfer-matrix/Markov-chain method, run mechanically through ten
+levels, at $K=3,\dots,10$ -- with exact rates $O(1/n^2)$ at $K=1$ and
+$\Theta(1/n)$ at $K=2,\dots,10$, not the naively extrapolated
+$O(1/n^2)$; the conjectured general-$K$ rate
+$\lim_n n(\psi_n^{(K)}-\varphi_K)=K\varphi_K/4$ is confirmed
+unconditionally at all eleven of these values directly from the exact
+closed forms, and is proved for \emph{every} $K$ by a new continuum
+scaling-limit argument -- though that general-$K$ proof carries one
+explicitly named, adversarially-scrutinized conditional hypothesis (a
+regularity/existence assumption on an asymptotic expansion, found to
+hold without exception at every one of the eleven checkable values);
+for $K\ge11$ the fixed-$K$ bridge itself, $\varphi_n^{(K)}\to\varphi_K$,
+remains open unconditionally (though it is, like the rate, discharged
+conditionally on the same hypothesis, as an immediate corollary of the
+rate proof), via an unconditionally proved mixing lemma reducing the
+full statement to that single precisely stated convergence lemma. Every
+claim below is labeled by its exact status;
 a companion numerical package cross-checks every closed form against
 independent brute-force enumeration, Monte Carlo simulation, and
 quadrature.
@@ -412,56 +424,152 @@ closed form back into the recursion symbolically, re-ran every script
 from scratch, and reported no error at any layer (archive record:
 \texttt{k2\_open\_lemma/k3\_attempt\_2/adversarial/}\allowbreak\texttt{REFEREE\_REPORT.md}).
 
-\begin{conjecture}[General-$K$ rate, numerically verified for $K=1,\dots,5$, \textbf{not proved}]
-\label{conj:rate}
+\textbf{$K=6,\dots,10$: the same mechanical method, run five further
+levels, unconditionally proved.} Running the identical procedure five
+rungs past $K=5$ costs, again, no new idea:
+\[
+  \psi_n^{(6)} \;=\; \frac{2048n^6+3072n^5+4293n^4+4638n^3+3529n^2+1662n+360}{6006n^6},
+\]
+proving $\varphi_n^{(6)}\to\varphi_6=1024/3003$ unconditionally, via the
+same reduction identity, for every $n\ge7$. The analogous exact closed
+forms for $\psi_n^{(7)},\psi_n^{(8)},\psi_n^{(9)},\psi_n^{(10)}$ exist by
+the identical mechanical procedure and are each independently verified
+to have $n\to\infty$ limit exactly $\varphi_K$ (full formulas: archive
+record \texttt{k2\_open\_lemma/k3\_attempt\_2/k6\_attempt/ATTEMPT.md}
+\S1.1), extending the fixed-$K$ bridge's unconditional resolution through
+$K=10$. The $\psi_n^{(6)}$ closed form above was independently
+re-verified by a separate hostile adversarial referee, who substituted
+every one of its 13 constituent closed forms (and, at $K=7$, all 16 of
+that level's) back into the exact defining recursion with zero symbolic
+discrepancy in any case, and who matched the formula bit-for-bit against
+a fresh, independently-coded brute-force enumeration at $K=6,n=7$
+($355081/823543$, out of $7!\times7^6=592{,}950{,}960$ exhaustively
+enumerated combinations) and, as a second held-out point, at $K=6,n=8$
+($191647/458752$, out of $8!\times8^6=10{,}569{,}646{,}080$
+combinations). The rate conjecture below was likewise confirmed exactly
+at each of $K=6,\dots,10$ (same archive record, \S1.1, \S3.4), extending
+the pattern to eleven consecutive values, $K=0,\dots,10$, with zero
+exceptions.
+
+\begin{theorem}[General-$K$ rate, proved conditional on a precisely named regularity hypothesis]
+\label{thm:rate}
 $\displaystyle\lim_{n\to\infty} n\big(\psi_n^{(K)}-\varphi_K\big) = \frac{K}{4}\varphi_K$
-for every $K\ge1$.
-\end{conjecture}
+for every $K\ge0$. This holds \textbf{unconditionally, with no
+hypothesis}, for $K=0,1,\dots,10$, read off directly, as an exact
+identity, from each of the eleven independently derived closed forms
+above (not a curve fit or an extrapolation). For \emph{every} $K$, it is
+\textbf{proved} by the continuum scaling-limit argument sketched below,
+\textbf{conditional on} Hypothesis~\ref{hyp:regularity}.
+\end{theorem}
 
-This holds as an exact identity individually at each of $K=1,2,3,4,5$
-(five independently derived closed forms, not a curve fit), but no
-argument here proves it for general $K$; it is reported strictly as a
-conjecture, exactly as strongly supported and exactly as unproved as
-Conjecture~\ref{conj:densityK}.
+\textbf{Proof sketch (the continuum technique, general $K$).} Reformulate
+the transfer-matrix recursion's state $(a,b,r)$ in the scaling variable
+$t=m/n$ and take the $n\to\infty$ limit \emph{before} solving in $r$ --
+the reverse order from Proposition~\ref{prop:k3} onward, which solves the
+exact recursion level by level in $r$ first and only afterwards lets
+$n\to\infty$. Positing an expansion $g_r(m,b) = F_r(t,b) +
+\tfrac1nG_r(t,b) + O(1/n^2)$ turns the exact discrete recursion into a
+linear first-order ODE in $t$ at each order, with $r$ now an ordinary
+symbolic parameter rather than a summation index -- sidestepping, by
+changing the order of operations, exactly the obstruction named below.
+Solving both ODEs by diagonal coefficient matching gives, for every $r$
+symbolically,
+\[
+  F_r(t,b) = \sum_{k=0}^{r}\frac{r!}{(r-k)!}\cdot\frac{t^k}{\prod_{i=1}^{k+1}(r+b+i)},
+  \qquad
+  G_r(t,b) = \sum_{k=0}^{r-1}\binom{k+2}{2}\frac{r!}{(r-k-1)!}\cdot\frac{t^k}{\prod_{i=1}^{k+2}(r+b+i)},
+\]
+each proved to satisfy its defining recursion by an exact symbolic
+identity check for general $r,k,b$ (not curve-fitting). $F_r(1,0)=
+\varphi_r$ for every $r$ independently re-derives the Wallis-integral
+mean of Lemma~\ref{lem:mean} by an entirely new route; $G_r(1,0)=
+r\varphi_r/4$ for every $r$ -- proved by an elementary binomial-sum
+symmetry identity, $\sum_{i=0}^{r-1}(r{-}i)(r{-}i{+}1)\binom{2r+1}{i} =
+r\cdot2^{2r-1}$ -- is exactly the rate claimed above.
 
-The obstruction to closing $K\ge6$ is different in kind from the
-case-count explosion that stops the $K=1,2$-style hand argument at
-$K=3$: the transfer-matrix procedure itself is already uniform in $K$,
-but its recursion has so far only been solved \emph{level by level} in
-the state variable $r$ (symbolically at $r=0,1,\dots,5$, one integer at a
-time), not for a symbolic $r$. A general-$K$ proof would need either an
-induction on $r$, showing the closed form has a predicted shape that is
-preserved by one more level of the recursion, or a
-generating-function-in-$K$ argument -- a genuine, precisely nameable,
-and so far unexecuted route, not merely ``run the same script one more
-time.'' This does \textbf{not} make $K\ge6$ essentially solved; it
-remains a real open problem, now with a concretely named plausible
-strategy rather than no strategy at all.
+\begin{hypothesis}[The one caveat, stated precisely]
+\label{hyp:regularity}
+For every $r$, $g_r(m,b)$ admits a regular two-term asymptotic expansion
+$F_r(t,b)+\tfrac1nG_r(t,b)+O(1/n^2)$, of the specific polynomial-in-$t$
+shape that the recursion's own algebra forces at each order. The
+\emph{existence} of this expansion, for $r$ beyond the eleven
+concretely computed values $K=0,\dots,10$, is not independently
+re-derived here from first principles (e.g.\ by a discrete-Gronwall-type
+error bound uniform in $m,n$).
+\end{hypothesis}
 
-\begin{openlemma}[Fixed-$K$ bridge, $K\ge6$]
-\label{ol:k6}
+Wherever Hypothesis~\ref{hyp:regularity} can be checked against an
+independent, unconditionally proved computation, it holds exactly, with
+zero exceptions: $F_r$ against the Wallis integral $\varphi_K$ for
+$K=0,\dots,6$ at $b=0$ and against the full exact discrete formula, all
+$b$, for $K\le5$; $G_r$ against the rate for $K=0,\dots,10$ at $b=0$ and
+against the full exact discrete formula, all $b$, for $K\le5$. An
+independent hostile adversarial referee re-derived both ODEs by hand,
+the $F_r$/$G_r$ closed forms symbolically for general $r,k,b$, and the
+binomial-sum identity above, finding zero errors; the referee
+additionally tested $F_r,G_r$ against exact ground truth at $t\ne1$ --
+45 new data points, $r=0,\dots,5$, symbolic $b$, off the single $t=1$
+point this document's own checks are otherwise confined to -- finding
+zero discrepancies (new evidence for the ansatz within the checked
+range, not a proof for general $K$). Asked explicitly to judge whether
+Hypothesis~\ref{hyp:regularity} is correctly scoped, too conservative,
+or too optimistic, the referee's verdict, adopted here in full, is that
+\textbf{it is correctly scoped -- neither too optimistic nor too
+conservative} (archive record:
+\texttt{k2\_open\_lemma/k3\_attempt\_2/k6\_attempt/adversarial/}\allowbreak\texttt{REFEREE\_REPORT.md}).
+
+The induction-on-$r$ route named as a candidate strategy above has thus
+been executed -- not on the exact discrete recursion itself, which
+remains unsolved symbolically in $r$ (see \S\ref{sec:open}), but on its
+$n\to\infty$ scaling limit, taken \emph{before} rather than after
+solving in $r$. This closes the general-$K$ rate question, conditionally.
+
+A finite limit $\lim_n n(\psi_n^{(K)}-\varphi_K)$ forces
+$\psi_n^{(K)}-\varphi_K\to0$ as an elementary, immediate consequence
+(if the difference did not vanish, multiplying by $n\to\infty$ could not
+converge to a finite value). So Theorem~\ref{thm:rate}, exactly as
+proved -- conditional on Hypothesis~\ref{hyp:regularity} -- already
+entails the weaker statement $\psi_n^{(K)}\to\varphi_K$ conditionally,
+for every $K$, as an immediate corollary, not a separately established
+fact. The Open Lemma below is still stated, correctly, as
+\textbf{unconditionally} open for $K\ge11$: Hypothesis~\ref{hyp:regularity}'s
+existence question, for $r$ beyond the eleven concretely checked values,
+is not independently resolved from first principles by anything in this
+document, so nothing here closes the bridge \emph{unconditionally}. But
+it would be inconsistent to credit Theorem~\ref{thm:rate} with a
+conditional proof of the rate while denying that the same hypothesis
+conditionally settles the (logically weaker) bridge too -- so both are
+recorded as resting on the identical, single, precisely named
+hypothesis, with the same status: proved conditionally, open
+unconditionally.
+
+\begin{openlemma}[Fixed-$K$ bridge, $K\ge11$]
+\label{ol:k11}
 $\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
-fixed integer $K\ge6$. \textbf{Neither proved nor disproved here.}
+fixed integer $K\ge11$. \textbf{Not proved or disproved unconditionally
+here}; proved conditional on Hypothesis~\ref{hyp:regularity}, as an
+immediate corollary of Theorem~\ref{thm:rate} above.
 \end{openlemma}
 
 \begin{proposition}[Conditional convergence]
 \label{prop:conditional}
 For every fixed $c\ge0$, $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$,
-\textbf{conditional on} Open Lemma~\ref{ol:k6} holding for every
-$K\ge6$.
+\textbf{conditional on} Open Lemma~\ref{ol:k11} holding for every
+$K\ge11$ -- which Theorem~\ref{thm:rate} already discharges
+conditionally on Hypothesis~\ref{hyp:regularity}, though not
+unconditionally.
 \end{proposition}
 
-This follows immediately from Proposition~\ref{prop:mixing} plus
-Proposition~\ref{prop:k1}, Proposition~\ref{prop:k2}, and
-Proposition~\ref{prop:k3} together with the $K=4,5$ closed forms above,
-plus the trivial $K=0$ case, given the open lemma. It is stated as a
-conditional proposition, not a theorem, because the open lemma is
-exactly what is missing; the empirical control that exists
-(\S\ref{sec:numerics}) is evidence for, not a substitute for, resolving
-it. (Proposition~\ref{prop:mixing}'s hypothesis -- fixed-$K$ convergence
-for \emph{every} $K\ge0$ -- is now discharged unconditionally through
-$K=5$; the open lemma's scope has strictly narrowed from $K\ge3$ to
-$K\ge6$.)
+This follows immediately from Proposition~\ref{prop:mixing} plus the
+unconditionally proved fixed-$K$ bridge for $K=0,\dots,10$
+(Propositions~\ref{prop:k1}--\ref{prop:k3} together with the $K=4,\dots,10$
+closed forms above), given the open lemma. It is stated as a conditional
+proposition, not a theorem, because the open lemma is exactly what is
+missing; the empirical control that exists (\S\ref{sec:numerics}) is
+evidence for, not a substitute for, resolving it. (Proposition~\ref{prop:mixing}'s
+hypothesis -- fixed-$K$ convergence for \emph{every} $K\ge0$ -- is now
+discharged unconditionally through $K=10$; the open lemma's scope has
+strictly narrowed from $K\ge6$ to $K\ge11$.)
 
 \section{Numerics}
 \label{sec:numerics}
@@ -566,25 +674,36 @@ in the searches performed,'' never as ``does not exist'' or ``first.''
 \label{sec:open}
 
 \begin{enumerate}
-\item \textbf{Open Lemma~\ref{ol:k6}} itself: the fixed-$K$ finite-$n$
-  bridge for $K\ge6$ (resolved unconditionally at $K=0,1,2,3,4,5$ by
-  Propositions~\ref{prop:k1}--\ref{prop:k3} and the $K=4,5$ closed forms
-  of \S\ref{sec:bridge}). This is the single hypothesis separating
-  Proposition~\ref{prop:conditional} from a full theorem. The
-  obstruction is now precisely named (\S\ref{sec:bridge}): an induction
-  on the recursion's level variable $r$, or a generating-function
-  argument in $K$, neither attempted here -- a concrete route, but not
-  yet a proof.
-\item \textbf{The rate} of that bridge for $K\ge6$: now known exactly
-  through $K=5$ -- $K=0$ is exact (rate $0$), $K=1$ is exact at rate
-  $1/(3n^2)$, and $K=2,3$ are exact at $\Theta(1/n)$
-  (\S\ref{sec:numerics}, Proposition~\ref{prop:k3}).
-  \textbf{Conjecture~\ref{conj:rate}} packages the exact leading
-  coefficient found at every one of $K=1,\dots,5$ into a single
-  general-$K$ formula, but this remains unproved for general $K$; the
-  $K=1\to K=2$ jump from $\Theta(1/n^2)$ to $\Theta(1/n)$ is itself a
-  standing caution against assuming any rate extrapolates without a
-  proof.
+\item \textbf{Open Lemma~\ref{ol:k11}} itself: the fixed-$K$ finite-$n$
+  bridge for $K\ge11$ (resolved unconditionally at $K=0,1,\dots,10$ by
+  Propositions~\ref{prop:k1}--\ref{prop:k3} and the $K=4,\dots,10$
+  closed forms of \S\ref{sec:bridge}). This is the single hypothesis
+  separating Proposition~\ref{prop:conditional} from a full theorem. A
+  continuum scaling-limit route (\S\ref{sec:bridge}) now gives a
+  complete, adversarially-verified conditional proof of the associated
+  \emph{rate} for every $K$ (Theorem~\ref{thm:rate}), which -- being a
+  finite-limit statement, hence forcing $\psi_n^{(K)}\to\varphi_K$ as an
+  elementary corollary -- conditionally discharges the Open Lemma itself
+  too, on the identical hypothesis. But Hypothesis~\ref{hyp:regularity}
+  -- existence of a two-term asymptotic expansion, for $K$ beyond the
+  eleven concretely checked values -- is not independently established
+  from first principles, so the Open Lemma remains open
+  \emph{unconditionally} for $K\ge11$, exactly as the rate does; the
+  exact all-orders finite-$n$ closed form for general $K$ (of which
+  \S\ref{sec:bridge}'s two-order expansion is only a truncation) is not
+  attempted at all.
+\item \textbf{The rate} of that bridge: now known exactly and
+  unconditionally through $K=10$ -- $K=0$ is exact (rate $0$), $K=1$ is
+  exact at rate $1/(3n^2)$, and $K=2,\dots,10$ are exact at $\Theta(1/n)$
+  (\S\ref{sec:numerics}, Propositions~\ref{prop:k2}--\ref{prop:k3} and
+  the $K=4,\dots,10$ closed forms above).
+  \textbf{Theorem~\ref{thm:rate}} proves the general-$K$ leading
+  coefficient $K\varphi_K/4$ for every $K$, conditional on
+  Hypothesis~\ref{hyp:regularity}; unconditionally, with no hypothesis,
+  it is confirmed only through $K=10$. The $K=1\to K=2$ jump from
+  $\Theta(1/n^2)$ to $\Theta(1/n)$ remains a standing caution against
+  assuming any rate extrapolates without a proof or a verified closed
+  form.
 \item \textbf{Conjecture~\ref{conj:densityK}} (general-$K$ density) and
   its Poisson-mixture consequence, the full unconditional law
   $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$ -- a

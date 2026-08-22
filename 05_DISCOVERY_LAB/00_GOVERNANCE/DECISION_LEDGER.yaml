@@ -1135,3 +1135,46 @@ decisions:
     untouched_safeguards:
       - "frente (a) segue a mesma disciplina de DISC-RH-REAL-001: nenhuma alegacao sobre RH, nenhum pre-registro sem validacao sintetica previa, criterio de decisao fixado antes de qualquer computo real"
       - "frente (b) e correcao tecnica delimitada, nao reformulacao -- a classificacao alpha=1/2 no limite n->infinito ja esta provada e nao muda; o alvo e so a formula de correcao finito-n"
+
+  - decision_id: DISC-DEC-019
+    date: 2026-08-22
+    decision: >
+      Integrar a frente RH-REAL-UNTRIED-ITEMS (DISC-DEC-018) e
+      autorizar o pre-registro completo e travado do sub-teste
+      DISC-RH-NUMBER-VARIANCE-001 (item 12 do levantamento original --
+      variancia do numero / rigidez GUE), seguindo a mesma disciplina
+      da linha inteira: validacao de pipeline contra ground truth
+      sintetico ANTES do lock, modelos concorrentes nomeados (GUE
+      ingenuo vs. formula corrigida por primos de Berry 1988,
+      Nonlinearity 1, 399-407, com apoio na prova condicional de
+      Lugar-Milinovich-Quesada-Herrera 2022, arXiv:2211.14918), regra
+      de decisao ternaria, holdout selado se aplicavel.
+    rationale: >
+      Revisao honesta dos 7 itens nao-tentados do levantamento
+      original: itens 1,2,3,8 sao checagens de ferramental sem
+      pergunta nova (1 e 2 SAO as proprias estatisticas GUE canonicas
+      ja replicadas desde Odlyzko 1987; 3 e teorema incondicional; 8 e
+      resultado assintotico de existencia, mesma forma nao-falsificavel
+      do ja rejeitado item 7); itens 4 e 11 sao um buraco de registro
+      honesto -- o levantamento de 12 itens original nunca foi
+      persistido verbatim, busca exaustiva (grep completo do
+      laboratorio + git log + logs de sessao) nao encontrou o que
+      alegavam, marcados NAO TRIAVEL (nao e veredito sobre o conteudo,
+      e lacuna de proveniencia); item 12 e candidato genuino (estatistica
+      precisa V(L), 2 modelos concorrentes com previsoes fechadas
+      distinguiveis, dado real ja disponivel em zeros1/3/4.txt). Piloto
+      exploratorio (nao pre-registrado, sem criterio a priori, ~22s,
+      execucao unica) mostrou sinal qualitativo favorecendo o modelo
+      de Berry nas 3 alturas independentes -- rotulado EXPLORATORY_ONLY,
+      nao tratado como achado ate pre-registro completo.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (novo test_id DISC-RH-NUMBER-VARIANCE-001, CANDIDATE_FORMULATING; DISC-RH-REAL-001 next_action atualizado)"
+      - "05_DISCOVERY_LAB/02_TESTS/RH_ZETA_ZEROS/number_variance/ (novo, pre-registro completo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "novo sub-teste DISC-RH-NUMBER-VARIANCE-001 criado; itens 4 e 11 do levantamento original marcados permanentemente NAO TRIAVEL (buraco de proveniencia, nao retentar sem reconstrucao documentada da fonte)"
+    untouched_safeguards:
+      - "criterio de decisao (qual modelo, se algum, e favorecido) sera fixado ANTES de qualquer analise real, exatamente como no sub-teste FHK; o piloto exploratorio nao pre-registra nem trava nada"
+      - "nenhuma alegacao sobre a Hipotese de Riemann; a prova condicional de Lugar-Milinovich-Quesada-Herrera citada apenas como apoio a formula de Berry, nao como resultado deste laboratorio"

@@ -1,350 +1,307 @@
-# Laboratório Tamesis — Research Archive
+# Tamesis Discovery Lab — Adversarial Research Archive
 
-[![Auditoria](https://img.shields.io/badge/auditoria-280%2F280%20registros-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Dossiês](https://img.shields.io/badge/dossi%C3%AAs-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Estado](https://img.shields.io/badge/estado-computacional%20congelado-6c757d?style=for-the-badge)](PROJECT_FREEZE.md)
-[![Evidência física](https://img.shields.io/badge/evid%C3%AAncia%20f%C3%ADsica-n%C3%A3o%20estabelecida-b42318?style=for-the-badge)](PROJECT_STATE.json)
-[![Licença](https://img.shields.io/badge/licen%C3%A7a-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
-[![Curadoria](https://img.shields.io/badge/curadoria-Douglas%20H.%20M.%20Fulber-111111?style=for-the-badge)](#governança-autoria-e-responsabilidade)
+[![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+[![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-38-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
+[![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
+[![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
+[![Maintainer](https://img.shields.io/badge/maintainer-Douglas%20H.%20M.%20Fulber-111111?style=for-the-badge)](#governance-authorship-and-responsibility)
 
-> **Um arquivo interdisciplinar para investigar informação, geometria, transições, sistemas complexos e cognição — com hipóteses separadas de evidências.**
+**Languages:** **English** · [Português (BR)](README_PTBR.md) · [日本語](README_JA.md) · [中文（简体）](README_ZH.md) · [Español](README_ES.md)
 
-Este repositório preserva a trajetória completa do Laboratório Tamesis, seu ramo experimental atual e suas linhas históricas, matemáticas, físicas, computacionais e cognitivas. O arquivo contém **280 registros auditados**, organizados em **274 dossiês de auditoria**. A auditoria não transforma conjecturas em fatos: ela torna explícito o que é demonstração, modelo, simulação, ajuste, hipótese ou cenário especulativo.
+> **An interdisciplinary research archive for information, geometry, phase transitions, complex systems, and cognition — with hypotheses kept explicitly separate from evidence.**
 
-Desde 2026, o arquivo também opera um **laboratório de adjudicação contínua** (`05_DISCOVERY_LAB`): as alegações quantitativas do próprio arquivo são fechadas, uma a uma, contra referências externas reais, com critérios pré-registrados e reprodução adversarial obrigatória. O desfecho — dezenas de fechamentos negativos catalogados com veredito final e um resultado matemático positivo derivado e verificado adversarialmente — está sintetizado no **[artigo científico do laboratório](index.html)** (página principal do repositório).
+This repository preserves the complete trajectory of the Tamesis Laboratory: its current experimental branch, and its historical, mathematical, physical, computational, and cognitive research lines. The archive holds **280 audited records**, organized into **274 audit dossiers**. Auditing here does not turn conjecture into fact — it makes explicit what is a proof, a conditional consequence, a numerical fit, a computational illustration, a conjecture, or a speculative scenario.
 
-## Leitura rápida
+Since 2026, the archive has also run a **continuous adjudication laboratory** (`05_DISCOVERY_LAB`): every quantitative claim the archive itself makes is closed out, one at a time, against real external references, under pre-registered criteria and **mandatory adversarial reproduction**. The outcome so far — dozens of catalogued negative closures with a final verdict, and one positive mathematical result independently re-derived and adversarially verified — is synthesized in the **[Discovery Lab paper](index.html)** (the repository's landing page).
 
-O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md) apresenta as perguntas, respostas, impactos, aplicações e novas perguntas produzidas pelo conjunto da pesquisa. Há também uma versão [HTML pronta para impressão em PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html).
+## Quick read
 
-### Estado científico atual
+The institutional report [Final Vision of the Tamesis Laboratory](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md) lays out the questions, answers, impacts, applications, and new questions produced by the research program as a whole. A [print-ready HTML/PDF version](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html) is also available.
 
-| Camada | Estado | Interpretação correta |
+### Current scientific state
+
+| Layer | State | Correct interpretation |
 |---|---|---|
-| Arquivo e metodologia | **Concluído/auditado** | Inventário, classificação de alegações, fontes e critérios de falsificação registrados. |
-| Modelos computacionais | **Congelados para auditoria** | Resultados reproduzíveis devem ser tratados como saídas de modelos, não como constantes medidas. |
-| Tamesis `M_c v1` | **Hipótese testável** | O valor `M_c = 5.292674126388712e-16 kg` é um parâmetro do modelo, não uma medição. |
-| Evidência física independente | **Ainda não estabelecida** | Não há, neste arquivo, confirmação experimental da ontologia Tamesis. |
-| Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
-| Adjudicação numérica do núcleo | **Consolidação matemática concluída, gap fechado incondicionalmente até K=10 (2026-08-22)** | Ver seção abaixo — 3 alegações fechadas negativas com veredito final; a 4ª (U₁/₂) tem núcleo provado, verificado por referee adversarial, com o Lema Aberto agora PROVADO incondicionalmente para K=0,...,10; para K geral existe uma prova condicional da conjectura de taxa (ressalva de regularidade julgada corretamente dimensionada por referee hostil), não um fechamento incondicional. |
+| Archive and methodology | **Complete / audited** | Inventory, claim classification, sources, and falsification criteria are all on record. |
+| Computational models | **Frozen for audit** | Reproducible outputs should be read as model outputs, not measured constants. |
+| Tamesis `M_c v1` | **Testable hypothesis** | The value `M_c = 5.292674126388712e-16 kg` is a model parameter, not a measurement. |
+| Independent physical evidence | **Not yet established** | Nothing in this archive is experimental confirmation of the Tamesis ontology. |
+| Millennium Prize Problems and TOE claims | **Unsolved** | These texts are conjectures, reductions, or restricted-model arguments — not accepted solutions. |
+| Core numerical adjudication | **Mathematical consolidation complete, gap closed unconditionally through K=10 (2026-08-22)** | See below — 3 claims closed negative with a final verdict; the 4th (`U₁/₂`) has a proved core, adversarially refereed, with the Open Lemma now proved unconditionally for `K=0,…,10`; for general `K` a conditional proof of the rate conjecture exists (a regularity caveat judged correctly scoped by a hostile referee), not an unconditional closure. |
 
-### O programa de adjudicação (Discovery Lab, atualizado 2026-08-22)
+### The adjudication program (Discovery Lab, updated 2026-08-22)
 
-O `05_DISCOVERY_LAB` mantém uma adjudicação contínua das alegações quantitativas
-deste arquivo contra referências externas reais (PDG, CODATA, Planck, SPARC,
-Gaia, Odlyzko), com metodologia fixada antes de cada cálculo, proveniência de
-todo valor de referência e reprodução adversarial obrigatória para achados
-positivos. Registro completo: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` e
-`05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml`. Síntese em formato de
-artigo: **[`index.html`](index.html)** (página principal do repositório).
-
-**O funil de sobrevivência completo (2026):**
-
-| Linha | Testado | Desfecho |
-|---|---|---|
-| Invariante cross-domain (TRI-RG) | 16 candidatos, 5 rodadas | `CLOSED_NULL` — 0 sobreviventes; 4 achados `p<0,05` refutados por reprodução adversarial (explicações mundanas demonstradas) |
-| Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
-| Zeros de ζ (RH-REAL) | 12/12 itens do levantamento com disposição final | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); FHK e variância do número fecharam `CLOSED_INCONCLUSIVE`, ambos com componente forte confirmado adversarialmente (exclusão do lado iid ≥8,8σ; exclusão de GUE ingênuo a até 203σ — reprodução adversarial ainda achou e corrigiu um 3º bug real no estimador primário) |
-| Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
-| **Função-limite U₁/₂ (ondas 2–7, consolidada)** | 1 teorema + 1 generalização + casos K=2,...,10 do Lema Aberto + conjectura de taxa geral-K | **Provada, verificada por referee adversarial (3 rounds, técnicas distintas), publicada como paper + pacote reproduzível; K=2 provado na onda 5, K=3,4,5 provados na onda 6, K=6,...,10 provados na onda 7, todos por matriz de transferência; taxa geral-K PROVADA na onda 7 mas explicitamente condicional a uma ressalva de regularidade** (ver abaixo) |
-| Levantamento arquivo-inteiro de candidatos (Fase 0, além de TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com razão concreta citada; 1 lead imaturo (assinaturas espectrais de EEG cognitivo) promovido a nova linha, ver abaixo |
-| Cognição — assinatura espectral EEG em depressão (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 pré-registro travado, N=30 MDD/26 HC | `CLOSED_REFUTED` — entropia espectral **maior**, não menor, em MDD (`d=1,447`, `p=3,97×10⁻⁶`) — direção oposta à hipótese testada, confirmado por reprodução adversarial independente do zero (números batem a <10⁻⁹) |
-| Cosmologia SPARC-004 — auto-calibração `f_multi` (Estágio 1→2) | pipeline validado + aplicado ao dado real de descoberta (30.203 sistemas) | `CLOSED_INCONCLUSIVE` — veredito mecânico `BOTH_FALSIFIED`, mas o debunker obrigatório encontrou um confundidor real: um subgrupo de 19% da amostra (RUWE alto) fica sistematicamente sub-corrigido pelo modelo de `f_multi` escalar único, com excesso estatisticamente robusto mesmo no bin usado como âncora da calibração |
-
-**O resultado positivo principal:** a classe de universalidade U₁/₂ (permutação
-aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exata
-
-> `φ_∞(c) = ∫₀¹ e^(−ct²) dt = ½·√(π/c)·erf(√c)` — zero parâmetros livres,
-
-derivada analiticamente (não ajustada), corrigindo a conjectura original do
-arquivo `(1+c)^(-1/2)` (excluída já no 1º coeficiente da série: `a₁ = 1/3 ≠ 1/2`,
-confirmado por enumeração exata). Esse resultado é agora um **Teorema provado**
-(não apenas conjecturado): um documento matemático autocontido
-(`THEOREM.md`) prova a forma fechada em seis passos, incluindo o tratamento
-correto do *size-biasing* dos arcos visitados, e foi revisado por um agente
-independente atuando como *referee* hostil — **nenhum erro encontrado**. A
-ponte entre o modelo finito e o objeto-limite está provada de forma exata para
-`K=0,1` (com uma fórmula finita nova, `φ_n^{(1)} = 2/3 + 1/(3n²)`), para
-`K=2` desde a onda 5 (2026-08-22) — `φ_n^{(2)} = 8/15 + 1/(30n) +
-7/(10n²) + 1/(5n³)`, provado incondicionalmente (Lema da Redução A + lema do
-co-ciclo, verificado por *referee* adversarial em 4 camadas independentes, sem
-erros) — desde a onda 6 (2026-08-22), também para `K=3,4,5`, por uma
-técnica genuinamente diferente: uma cadeia de Markov exata e uniforme em `K`
-(estado `(a,b,r)`), resolvida por um algoritmo mecânico de telescopagem em
-vez de análise de casos manual por `K`. `K=3`: `φ_n^{(3)} = 16/35 + 1/(14n)
-+ 11/(10n²) + 23/(35n³) + 6/(35n⁴)`, também provada do zero (não ajustada);
-`K=4,5` provados pela extensão do mesmo procedimento. Verificado por um
-segundo *referee* hostil, com técnica de resolução distinta da usada na
-derivação original, força bruta própria e reexecução dos scripts originais
-— **nenhum erro encontrado**. E desde a onda 7 (2026-08-22), o mesmo
-procedimento mecânico foi estendido até `K=10` — **`K=6,...,10` também
-PROVADOS incondicionalmente**, verificados por um terceiro *referee* hostil
-(rederivação completa do zero, substituição de todas as formas fechadas na
-recursão exata, força bruta própria com estratégia de otimização diferente,
-batendo bit a bit em dois pontos held-out independentes). A onda 7 também
-foi além: tomando o limite `n→∞` da mesma cadeia `(a,b,r)` **antes** de
-resolver (contornando a obstrução da onda 6), derivou uma **prova completa**
-da conjectura de taxa `lim n(ψ_n^{(K)}-φ_K)=Kφ_K/4` **para todo `K`**,
-explicitamente **condicional** a uma ressalva de regularidade
-precisamente nomeada (a existência da expansão assintótica assumida, para
-`K` além dos 11 valores concretamente verificados). O mesmo referee hostil
-rederivou do zero cada EDO e forma fechada envolvida — **nenhum erro
-encontrado** — e emitiu julgamento explícito sobre o escopo da própria
-ressalva, adotado integralmente: **está corretamente dimensionada**, nem
-otimista nem conservadora demais, reforçado por 45 novos pontos de teste
-empírico (fora do único ponto que o documento original checava) com zero
-discrepâncias encontradas. O único **Lema Aberto** que resta, declarado —
-não escondido — como o gap real do documento, agora está PROVADO
-incondicionalmente até `K=10`; para `K` geral, existe pela primeira vez uma
-rota de prova completa e adversarialmente verificada, mas que permanece
-explicitamente condicional, não um fechamento incondicional. A lei
-condicional é o caso de parâmetro fixo de
-Hansen & Jaworski (EJC, 2014); a mistura de Poisson com forma fechada `erf`
-não foi encontrada em busca sistemática de literatura (35+ consultas
-registradas), com a ressalva explícita de que isso não equivale a "inédito".
-Uma segunda frente derivou **por que o expoente é exatamente 1/2**: para toda
-uma família paramétrica de mecanismos de perturbação, `α ∈ [1/2, 1]` sempre —
-`α < 1/2` é *provado impossível* (um efeito de aglomeração quadrático que
-persiste mesmo sem qualquer "morte" de ciclicidade). A onda 5 também localizou
-e confirmou um mecanismo natural (`M-WEIB(β)`, taxa de Weibull não-homogênea)
-que atinge todo `α ∈ (1/2, 1)` intermediário — a verificação adversarial
-mostrou que, para `β<1`, esse mecanismo é na verdade um membro explícito da
-família `M-q` já classificada (não uma exceção a ela), o que torna a resposta
-mais forte, não mais fraca; para `β>1` o mecanismo genuinamente sai de `M-q`,
-confirmando por completo a quebra do piso `α≥1/2` fora dela. Nenhuma
-implicação física é alegada — é matemática combinatória pura sobre um ensemble
-específico.
-
-**Onde encontrar tudo:** o teorema completo e o *referee report* estão em
-`05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`; a
-generalização e sua verificação adversarial em
-`.../generalization_u_alpha/`; um **pacote standalone reproduzível**, com
-paper em LaTeX compilado (PDF), provas autocontidas, simulações *clean-room*
-e 49 testes automatizados, está em **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**.
-E a tabela honesta de **tudo que este laboratório já tentou e não sobreviveu**
-— para que este único resultado positivo seja lido no contexto certo — está em
-**[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**.
-
-Um levantamento honesto de todo o arquivo Tamesis (não restrito a TRI-RG, 19
-candidatos em 7 áreas) fechou `CLOSED_NULL` — 18/19 rejeitados com razão
-concreta citada — e promoveu o único lead imaturo encontrado (assinaturas
-espectrais de EEG cognitivo, depressão vs. ansiedade) a nova linha candidata.
-Sua etapa de operacionalização já foi concluída (observável definido como
-entropia espectral de Shannon normalizada, modelo concorrente nomeado,
-poder estatístico calculado, acesso real por download verificado para o
-braço de depressão) — o braço de ansiedade permanece bloqueado por exigir
-login humano num provedor de dados, honestamente reportado como tal; nenhum
-dado real ainda foi computado. Ver
-`05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md` e
-`05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/OPERATIONALIZATION.md`.
-
-## Visão do laboratório
-
-O programa investiga se sistemas sujeitos a recursos finitos podem construir camadas adicionais de organização quando o custo dessa complexidade é compensado pela redução de erro, dissipação, instabilidade ou busca futura. Essa ideia é um **princípio de modelagem**, não uma finalidade atribuída à natureza.
-
-O laboratório conecta quatro níveis:
-
-1. **Matemática:** operadores, espectros, topologia, grafos, universalidade e regularidade.
-2. **Física fundamental:** informação, geometria, holografia, gravidade, partículas e transições quântico-clássicas.
-3. **Sistemas complexos:** termodinâmica, memória, irreversibilidade, redes, estabilidade e controle.
-4. **Vida e cognição:** organismo integrado, cérebro-computador, consciência e ecossistemas cognitivos.
+`05_DISCOVERY_LAB` runs continuous adjudication of this archive's quantitative claims against real external references (PDG, CODATA, Planck, SPARC, Gaia, Odlyzko), with methodology fixed *before* each computation, full provenance for every reference value, and **mandatory adversarial reproduction** for any positive finding. Full record: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` and `05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml`. Paper-format synthesis: **[`index.html`](index.html)** (the repository's landing page).
 
 ```mermaid
 flowchart LR
-    A[Recursos finitos] --> B[Camadas de organização]
-    B --> C[Memória e controle]
-    C --> D[Transições de regime]
-    D --> E[Observáveis e testes]
-    E --> F{Evidência independente?}
-    F -->|sim| G[Resultado publicável]
-    F -->|não| H[Hipótese revisável]
+    R[280 audited<br/>archive records] --> S[Archive-wide<br/>Phase-0 survey<br/>19 candidates, 7 areas]
+    S -->|18/19 rejected,<br/>concrete reason cited| N1[CLOSED_NULL]
+    S -->|1 immature lead<br/>promoted| L13[13 formal<br/>Discovery Lab<br/>test lines]
+    L13 --> C8[8 pre-registered claims<br/>locked + adversarially reviewed]
+    C8 --> V1[1 proved positive result<br/>U&#40;1/2&#41; limit law]
+    C8 --> V2[7 informative negative<br/>results — REFUTED /<br/>INCONCLUSIVE / NULL]
+    style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
+    style N1 fill:#f0e5e8,stroke:#7a3b4a
+```
+
+**The complete survival funnel (2026):**
+
+| Line | Tested | Outcome |
+|---|---|---|
+| Cross-domain invariant (TRI-RG) | 16 candidates, 5 rounds | `CLOSED_NULL` — 0 survivors; 4 `p<0.05` findings refuted by adversarial reproduction (mundane explanations demonstrated) |
+| SPARC/MOND cosmology + Gaia wide binaries | 4 pre-registered tests | 4/4 inconclusive from demonstrated real confounders; 2 legacy headline results discovered to rest on **fabricated data** and redone with real data |
+| Riemann zeta zeros (RH-REAL) | 12/12 survey items, all finally dispositioned | 2 replicated findings (consecutive-gap anti-clustering; `N^(-1/3)` GUE scaling); FHK maxima and number-variance both closed `CLOSED_INCONCLUSIVE`, each with a strong component confirmed adversarially (iid-side exclusion ≥8.8σ; naive-GUE exclusion up to 203σ — adversarial reproduction still found and fixed a 3rd real bug in the primary estimator) |
+| Core quantitative claim adjudication (wave 1) | 7 claims | `M_c` inconsistent (~190× between values); quark/knot mass model fails leave-one-out; `sin²θ_W=3/13` off by 7.5σ with hardcoded tuning; `α⁻¹=Ω^{1.03}` with 0 degrees of freedom; bounce `n_s` unidentifiable; holographic `Λ` ≡ `ρ_crit` by algebraic identity |
+| **`U₁/₂` limit law (waves 2–7, consolidated)** | 1 theorem + 1 generalization + Open Lemma cases `K=2,…,10` + general-`K` rate conjecture | **Proved, adversarially refereed (3 independent rounds, distinct techniques), published as a paper + reproducible package; `K=2` proved in wave 5, `K=3,4,5` in wave 6, `K=6,…,10` in wave 7, all via transfer-matrix method; general-`K` rate PROVED in wave 7, explicitly conditional on a regularity caveat** (see below) |
+| Archive-wide candidate survey (Phase 0, beyond TRI-RG) | 19 candidates, 7 areas | `CLOSED_NULL` — 18/19 rejected with a concrete cited reason; 1 immature lead (cognitive EEG spectral signatures) promoted to a new line, see below |
+| Cognition — EEG spectral signature in depression (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 locked pre-registration, N=30 MDD/26 HC | `CLOSED_REFUTED` — spectral entropy **higher**, not lower, in MDD (`d=1.447`, `p=3.97×10⁻⁶`) — opposite direction to the tested hypothesis, confirmed by an independent from-scratch adversarial reproduction (numbers match to <10⁻⁹) |
+| SPARC-004 cosmology — `f_multi` self-calibration (Stage 1→2) | Pipeline validated + applied to real discovery data (30,203 systems) | `CLOSED_INCONCLUSIVE` — mechanical verdict `BOTH_FALSIFIED`, but the mandatory debunker pass found a real confounder: a 19%-of-sample subgroup (high RUWE) is systematically under-corrected by the single-scalar `f_multi` model, with a statistically robust excess even in the calibration's own anchor bin |
+
+### The headline positive result: an exact closed-form universality law
+
+The `U₁/₂` universality class (random permutation perturbed at rate `c/n` toward a random map) has the exact limit law:
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/phi_infinity_curve.svg" alt="Plot of phi_infinity(c), the exact closed-form limit law of the U(1/2) universality class, from Theorem 1" width="640"></p>
+
+> `φ_∞(c) = ∫₀¹ e^(−ct²) dt = ½·√(π/c)·erf(√c)` — zero free parameters,
+
+derived analytically (not fitted), correcting the archive's original conjecture `(1+c)^(-1/2)` (excluded at the very first series coefficient: `a₁ = 1/3 ≠ 1/2`, confirmed by exact enumeration). This result is now a **proved theorem**, not a conjecture: a self-contained mathematical document (`THEOREM.md`) proves the closed form in six steps, including the correct treatment of the *size-biasing* of visited arcs, and was reviewed by an independent agent acting as a hostile referee — **zero errors found**.
+
+The bridge between the finite model and the limit object is now proved for `K=0,…,10` unconditionally, and the general-`K` rate conjecture is proved conditional on a precisely-named, hostile-referee-scoped regularity hypothesis:
+
+```mermaid
+flowchart LR
+    K01["K=0,1<br/>exact, no gap<br/>waves 1–2"] --> K2["K=2<br/>wave 5<br/>4-layer referee"]
+    K2 --> K345["K=3,4,5<br/>wave 6<br/>K-uniform transfer matrix"]
+    K345 --> K610["K=6,…,10<br/>wave 7<br/>same method, 5 more rungs"]
+    K610 --> Kgen["K general<br/>wave 7: rate PROVED,<br/>conditional on 1 named caveat"]
+    Kgen -.->|"wave 8, running now"| Close["remove the caveat →<br/>unconditional for every K"]
+    style K01 fill:#e8f0e0,stroke:#1f6f5c
+    style K2 fill:#e8f0e0,stroke:#1f6f5c
+    style K345 fill:#e8f0e0,stroke:#1f6f5c
+    style K610 fill:#e8f0e0,stroke:#1f6f5c
+    style Kgen fill:#f5ecd8,stroke:#96702a
+    style Close fill:#e3edf3,stroke:#33566f,stroke-dasharray: 4 4
+```
+
+Each rung above was independently re-derived by a separate hostile-referee agent, using a *different* proof technique than the original derivation, its own brute-force enumeration, and full recursion-substitution checks — **zero errors found at any layer**, across 3 independent referee rounds. `K=6,…,10` was additionally confirmed bit-for-bit against fresh exhaustive enumeration at two held-out points. The one remaining **Open Lemma** — proved unconditionally through `K=10`, proved conditionally for general `K` — is the exact fixed-parameter case of Hansen & Jaworski (EJC, 2014); a Poisson mixture with closed-form `erf` was not found in a systematic literature search (35+ queries logged), with the explicit caveat that this does not equal "novel." A second front derived **why the exponent is exactly 1/2**: across an entire parametric family of perturbation mechanisms, `α ∈ [1/2, 1]` always — `α < 1/2` is *proved impossible* (a quadratic clustering effect that persists even without any cyclicity "death"). Wave 5 also located and confirmed a natural mechanism (`M-WEIB(β)`, non-homogeneous Weibull hazard) that reaches every intermediate `α ∈ (1/2, 1)`. No physical implication is claimed — this is pure combinatorial mathematics on a specific ensemble.
+
+**Where to find everything:** the full theorem and referee reports live in `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`; the generalization and its adversarial verification in `.../generalization_u_alpha/`; a **standalone reproducible package** — compiled LaTeX paper (PDF), self-contained proofs, clean-room simulations, and 49 automated tests — is at **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**. And the honest table of **everything this laboratory has tried and did not survive** — so this one positive result is read in the right context — is in **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**.
+
+An honest survey of the whole Tamesis archive (not restricted to TRI-RG, 19 candidates across 7 areas) closed `CLOSED_NULL` — 18/19 rejected with a concrete cited reason — and promoted the one immature lead found (cognitive EEG spectral signatures, depression vs. anxiety) to a new candidate line. Its operationalization stage is complete (observable defined as normalized Shannon spectral entropy, a named competing model, computed statistical power, verified real data access for the depression arm) — the anxiety arm remains blocked on a data provider requiring human login, honestly reported as such; no real data has been computed there. See `05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/SURVEY.md` and `05_DISCOVERY_LAB/02_TESTS/COGNITIVE_EEG_SPECTRAL/OPERATIONALIZATION.md`.
+
+## Laboratory vision
+
+The program investigates whether systems under finite resources can build additional layers of organization when the cost of that complexity is offset by a reduction in error, dissipation, instability, or future search cost. This is a **modeling principle**, not a purpose attributed to nature.
+
+The laboratory connects four levels:
+
+1. **Mathematics:** operators, spectra, topology, graphs, universality, and regularity.
+2. **Fundamental physics:** information, geometry, holography, gravity, particles, and quantum-to-classical transitions.
+3. **Complex systems:** thermodynamics, memory, irreversibility, networks, stability, and control.
+4. **Life and cognition:** the integrated organism, brain-computer interfaces, consciousness, and cognitive ecosystems.
+
+```mermaid
+flowchart LR
+    A[Finite resources] --> B[Layers of organization]
+    B --> C[Memory and control]
+    C --> D[Regime transitions]
+    D --> E[Observables and tests]
+    E --> F{Independent evidence?}
+    F -->|yes| G[Publishable result]
+    F -->|no| H[Revisable hypothesis]
     H --> B
 ```
 
-![Princípio holográfico: ilustração de uma fronteira informacional e uma realidade 3D emergente](01_TAMESIS_CORE/01_Foundation/assets/holographic_principle.png)
+![Holographic principle: illustration of an informational boundary and an emergent 3D reality](01_TAMESIS_CORE/01_Foundation/assets/holographic_principle.png)
 
-<p align="center"><sub>Figura 1 — Ilustração de trabalho do princípio holográfico. A figura representa uma hipótese de modelagem; não é evidência de que o universo seja holográfico ou simulado.</sub></p>
+<p align="center"><sub>Figure 1 — Working illustration of the holographic principle. This is a modeling hypothesis, not evidence that the universe is holographic or simulated.</sub></p>
 
-## Comece aqui
+## Start here
 
-- **[Artigo científico do Discovery Lab (2026) — adjudicação adversarial e a função-limite U₁/₂](index.html)** (página principal do repositório)
-- **[Pacote reproduzível `tamesis-cycle-survival/`](tamesis-cycle-survival/)** — paper LaTeX compilado, provas, simulações e testes automatizados do teorema U₁/₂
-- **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)** — a tabela honesta de toda hipótese testada e não sobrevivente neste laboratório
-- [Relatório final de visão do laboratório](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
-- [Versão HTML para apresentação e PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
-- [Relatório da auditoria dos 280 artigos](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-- [Protocolo de auditoria rigorosa](PROTOCOLO_AUDITORIA_RIGOROSA_DE_ARTIGOS.md)
-- [Manifesto máquina-legível do inventário](ARTICLE_MANIFEST.csv)
-- [Congelamento e condições de retomada](PROJECT_FREEZE.md)
-- [Estado do projeto em JSON](PROJECT_STATE.json)
-- [Linha do tempo](00_HOME/TIMELINE.md)
-- [Mapa do arquivo](00_HOME/WORKSPACE_MAP.md)
-- [Página inicial navegável](00_HOME/README.md)
-- [Versão em português do README](README_PTBR.md)
-- [Atlas interativo de hipóteses](atlas.html)
+- **[Discovery Lab scientific paper (2026) — adversarial adjudication and the `U₁/₂` limit law](index.html)** (repository landing page)
+- **[`tamesis-cycle-survival/`](tamesis-cycle-survival/) reproducible package** — compiled LaTeX paper, proofs, simulations, and automated tests for the `U₁/₂` theorem
+- **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)** — the honest table of every hypothesis tested and not surviving in this laboratory
+- [Final vision report of the laboratory](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
+- [HTML version for presentation and PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
+- [280-article audit report](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
+- [Rigorous audit protocol](PROTOCOLO_AUDITORIA_RIGOROSA_DE_ARTIGOS.md)
+- [Machine-readable inventory manifest](ARTICLE_MANIFEST.csv)
+- [Freeze status and resumption conditions](PROJECT_FREEZE.md)
+- [Project state in JSON](PROJECT_STATE.json)
+- [Timeline](00_HOME/TIMELINE.md)
+- [Archive map](00_HOME/WORKSPACE_MAP.md)
+- [Navigable home page](00_HOME/README.md)
+- [Interactive hypothesis atlas](atlas.html)
+- [Proof dependency map for the `U₁/₂` line](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)
 
-## As linhas de pesquisa
+## The research lines
 
-| Linha | Pergunta central | Estado atual | Aplicações potenciais |
+| Line | Central question | Current state | Potential applications |
 |---|---|---|---|
-| **A. Fundamentos e arquitetura da realidade** | Informação, geometria ou computação podem gerar espaço-tempo e leis efetivas? | Arquitetura conceitual e modelos candidatos. | Gravidade quântica, geometria informacional, modelagem de redes. |
-| **B. Axiomas e pontes operacionais** | Um conjunto pequeno de axiomas reproduz equações observadas sem ajuste setor a setor? | Fechamento parcial e condicional. | Derivação de modelos, testes de consistência e redução de parâmetros. |
-| **C. TDTR, TRI e irreversibilidade** | Como regimes mudam e por que certas transições são irreversíveis? | Vocabulário, bibliotecas e modelos de transição. | Termodinâmica, dinâmica dissipativa e setas do tempo. |
-| **D. Universalidade** | Sistemas diferentes compartilham invariantes e leis de escala? | **Função-limite exata da classe U₁/₂ derivada e verificada adversarialmente (2026-08)**; busca por invariante cross-domain empírico fechada nula (16/16). | Detecção de transições, análise de falhas e controle adaptativo. |
-| **E. Espectros e Riemann** | Existe um operador cujo espectro realize os zeros da zeta? | Rota matemática legítima; sem prova da Hipótese de Riemann. | Teoria espectral, caos quântico e análise numérica. |
-| **F. Computação, grafos e primos** | Estruturas aritméticas podem ser codificadas em grafos e sistemas computacionais? | Algoritmos e correspondências exploratórias. | Graph learning, análise de redes e algoritmos espectrais. |
-| **G. Cosmologia observacional** | Que observável distingue Tamesis de `ΛCDM`, MOND e modelos concorrentes? | Catálogo de testes; sem substituição empírica demonstrada. | CMB, BAO, supernovas, lentes, SPARC e ondas gravitacionais. |
-| **H. Buracos negros e singularidades** | Como informação e geometria lidam com horizontes e singularidades? | Modelos termodinâmicos/holográficos especulativos. | Informação quântica, gravidade e termodinâmica de horizontes. |
-| **I. Partículas e topologia** | Topologia pode explicar massas, famílias, mistura e acoplamentos? | Mecanismos candidatos e relações numéricas. | Fenomenologia de partículas e testes de precisão. |
-| **J. Limite quântico-clássico** | Quando e por que uma dinâmica quântica se torna clássica? | Hipóteses concorrentes e desenhos experimentais. | Interferometria, optomecânica e metrologia quântica. |
-| **K. Ecossistemas cognitivos** | Como organismos constroem controle, memória e perfis de consciência? | Agenda conceitual e programa empírico. | Neurociência de redes, fisiologia e interfaces cérebro-computador. |
-| **L. Topologia cognitiva e cybernetics híbrida** | Estados cognitivos podem ser classificados por invariantes relacionais/espectrais? | Estrutura teórica e protótipos de controle. | Sistemas humano-máquina e robótica corporificada. |
-| **M. Estabilidade e operadores** | Coercividade, dissipação e margens espectrais detectam regimes patológicos? | Métodos candidatos e teoremas restritos. | Controle de infraestrutura, anomalias e redes adaptativas. |
-| **N. Problemas do Millennium** | Capacidade finita pode implicar teoremas sobre `P vs NP`, RH e EDPs? | Nenhuma solução aceita; argumentos restritos. | Novos lemas matemáticos, não alegações de resolução. |
-| **O. Cosmologias especulativas e engenharia métrica** | Bounces, universos-pai ou métricas modificadas geram observáveis? | Cenários especulativos. | Apenas após solução covariante, estabilidade e causalidade. |
-| **P. Infraestrutura científica** | Como manter pesquisa interdisciplinar reproduzível e honesta? | Inventário e auditoria rastreáveis. | Governança, revisão, preprints e colaboração externa. |
+| **A. Foundations and the architecture of reality** | Can information, geometry, or computation generate spacetime and effective laws? | Conceptual architecture and candidate models. | Quantum gravity, informational geometry, network modeling. |
+| **B. Axioms and operational bridges** | Does a small axiom set reproduce observed equations without per-sector tuning? | Partial, conditional closure. | Model derivation, consistency tests, parameter reduction. |
+| **C. TDTR, TRI, and irreversibility** | How do regimes change, and why are some transitions irreversible? | Vocabulary, libraries, and transition models. | Thermodynamics, dissipative dynamics, arrows of time. |
+| **D. Universality** | Do different systems share invariants and scaling laws? | **Exact limit law of the `U₁/₂` class, derived and adversarially verified (2026-08)**; empirical cross-domain invariant search closed null (16/16). | Transition detection, failure analysis, adaptive control. |
+| **E. Spectra and Riemann** | Does an operator exist whose spectrum realizes the zeta zeros? | Legitimate mathematical route; no proof of the Riemann Hypothesis. | Spectral theory, quantum chaos, numerical analysis. |
+| **F. Computation, graphs, and primes** | Can arithmetic structures be encoded in graphs and computational systems? | Exploratory algorithms and correspondences. | Graph learning, network analysis, spectral algorithms. |
+| **G. Observational cosmology** | What observable distinguishes Tamesis from `ΛCDM`, MOND, and competing models? | Test catalog; no demonstrated empirical replacement. | CMB, BAO, supernovae, lensing, SPARC, gravitational waves. |
+| **H. Black holes and singularities** | How do information and geometry handle horizons and singularities? | Speculative thermodynamic/holographic models. | Quantum information, gravity, horizon thermodynamics. |
+| **I. Particles and topology** | Can topology explain masses, families, mixing, and couplings? | Candidate mechanisms and numerical relations. | Particle phenomenology and precision tests. |
+| **J. Quantum-to-classical limit** | When and why does quantum dynamics become classical? | Competing hypotheses and experimental designs. | Interferometry, optomechanics, quantum metrology. |
+| **K. Cognitive ecosystems** | How do organisms build control, memory, and consciousness profiles? | Conceptual agenda and empirical program. | Network neuroscience, physiology, brain-computer interfaces. |
+| **L. Cognitive topology and hybrid cybernetics** | Can cognitive states be classified by relational/spectral invariants? | Theoretical structure and control prototypes. | Human-machine systems and embodied robotics. |
+| **M. Stability and operators** | Do coercivity, dissipation, and spectral margins detect pathological regimes? | Candidate methods and restricted theorems. | Infrastructure control, anomaly detection, adaptive networks. |
+| **N. Millennium Prize Problems** | Can finite capacity imply theorems about `P vs NP`, RH, or PDEs? | No accepted solution; restricted arguments. | New mathematical lemmas, not resolution claims. |
+| **O. Speculative cosmologies and metric engineering** | Do bounces, parent universes, or modified metrics produce observables? | Speculative scenarios. | Only after a covariant, stable, causal solution. |
+| **P. Scientific infrastructure** | How to keep interdisciplinary research reproducible and honest? | Traceable inventory and audit. | Governance, review, preprints, external collaboration. |
 
-### Potencial de conclusão por linha (estimativa operacional, não uma métrica do arquivo)
+### Completion potential per line (operational estimate, not an archive metric)
 
-A tabela abaixo estima, linha por linha, **quanto da lacuna identificada em cada pergunta central já foi caracterizado** — não a probabilidade de a hipótese estar certa, nem uma métrica calculada pelo laboratório. É uma leitura externa, calibrada contra o estado real documentado em cada linha (`RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md` §6 e `05_DISCOVERY_LAB/`), com uma correção importante em relação à versão original: **a Linha D precisa ser lida em duas partes.** O subconjunto `U₁/₂`, adjudicado rigorosamente pelo Discovery Lab, está muito adiantado; mas a Linha D como um todo — que no relatório original também inclui `U₀`, `U₂`/Lindblad, o atlas geral de classes e as aplicações topológicas — **não** avançou na mesma proporção: o próprio levantamento arquivo-inteiro do laboratório (`DISC-ARCHIVE-PHASE0-SURVEY-001`) registra que `U₀` e `U₂`, ao contrário de `U₁/₂`, nunca chegaram a uma forma fechada candidata. Tratar "Linha D" como 85% resolvida seria exatamente o tipo de conflação que a disciplina deste arquivo existe para evitar.
+The table below estimates, line by line, **how much of the gap named in each central question has already been characterized** — not the probability that the hypothesis is correct, nor a metric computed by the laboratory. It is an external reading, calibrated against the real state documented for each line (`RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md` §6 and `05_DISCOVERY_LAB/`), with one important correction to the original inventory: **Line D must be read in two parts.** The `U₁/₂` subset, rigorously adjudicated by the Discovery Lab, is well advanced; but Line D as a whole — which in the original report also includes `U₀`, `U₂`/Lindblad, the general class atlas, and topological applications — has **not** advanced in the same proportion: the laboratory's own archive-wide survey (`DISC-ARCHIVE-PHASE0-SURVEY-001`) records that `U₀` and `U₂`, unlike `U₁/₂`, never reached a closed-form candidate. Treating "Line D" as 85% resolved would be exactly the kind of conflation this archive's discipline exists to prevent.
 
-| Rank | Linha | Conclusão estimada | Situação | Para fechar |
+| Rank | Line | Estimated completion | Status | To close |
 |---:|---|---:|---|---|
-| 🥇 | **D — U₁/₂** (subconjunto adjudicado, `DISC-CORE-NUMERICS-001`) | **~85%** | 🔥 Ativa — Lema Aberto provado incondicionalmente para `K=0,…,10`, taxa geral-`K` provada condicionalmente | Fechar a ressalva de regularidade geral-`K` **e** o resíduo de M-CLUST — as duas frentes rodando agora (ver [mapa de dependências](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
-| 🥈 | **P — Infraestrutura** | **~90%** | 🔧 Contínua — desde jul/2026 ganhou uma segunda camada: pré-registro + reprodução adversarial obrigatória + ledgers de decisão/claim (`05_DISCOVERY_LAB/00_GOVERNANCE/`) | Versionamento semântico, dados/código abertos, revisão externa |
-| 🥉 | **B — Axiomas** | 35% | 🟡 Potencial | Provar que as pontes preservam simetrias/conservação sem ajuste setor a setor |
-| 4 | **E — Riemann** | 30% | 🟡 Exploratória — desde jul/2026, 12 itens do levantamento `RH-REAL` todos com disposição final; 2 achados replicados (anti-clustering; escala GUE), nenhum sobre RH em si | Operador auto-adjunto cujo espectro realize os zeros, com controle de erro completo |
-| 5 | **M — Estabilidade** | 30% | 🟡 Exploratória | Teorema pequeno, hipóteses completas, benchmark contra Lyapunov/LQR |
-| 6 | **C — Irreversibilidade** | 25% | 🟡 | Monotone não trivial + classe de transição testável |
-| 7 | **F — Grafos/primos** | 25% | 🟡 | Benchmarks e teoremas de correspondência formal |
-| 8 | **J — Quântico-clássico** | 25% | 🟡 | Protocolo cego que separe decoerência, colapso e gravidade |
-| 9 | **L — Topologia cognitiva** | 25% | 🟡 | Invariante definido + confiabilidade interavaliador + dados independentes |
-| 10 | **A — Fundamentos** | 20% | ⚪ | Ação mínima com graus de liberdade, unidades e previsão nova |
-| 11 | **G — Cosmologia** | 20% | ⚪ — desde jul/2026, 4 testes pré-registrados **executados** com dado real (SPARC-001…004), todos `CLOSED_INCONCLUSIVE`; achado honesto de confundidor RUWE, não apenas catálogo de testes pendentes | Observável que distinga Tamesis de `ΛCDM`/MOND e sobreviva fora da amostra |
-| 12 | **I — Partículas** | 20% | ⚪ | Ação gauge completa + renormalização + previsão de collider |
-| 13 | **H — Buracos negros** | 15% | ⚪ | Métrica/tensor de energia + causalidade + observável de horizonte |
-| 14 | **K — Cognição** | 15% | ⚪ — desde jul/2026, 1 hipótese concreta testada e **refutada** adversarialmente (`DISC-COGNITIVE-EEG-SPECTRAL-001`: entropia espectral EEG em depressão, efeito real na direção oposta à prevista); a pergunta ampla (controle/memória/consciência) segue sem modelo único | Reduzir a um fenômeno mensurável com previsão reprodutível |
-| 15 | **O — Cosmologias especulativas** | 10% | ⚪ | Solução covariante consistente antes de qualquer observável |
-| 16 | **N — Millennium** | 5% | 🔴 — nenhuma solução; linha permanentemente fora de escopo para alegações de resolução | Teorema completo e verificável para o problema original, não uma heurística restrita |
+| 🥇 | **D — `U₁/₂`** (adjudicated subset, `DISC-CORE-NUMERICS-001`) | **~85%** | 🔥 Active — Open Lemma proved unconditionally for `K=0,…,10`, general-`K` rate proved conditionally | Close the general-`K` regularity caveat **and** the M-CLUST residual — the two fronts running now (see [dependency map](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
+| 🥈 | **P — Infrastructure** | **~90%** | 🔧 Ongoing — since Jul/2026 gained a second layer: pre-registration + mandatory adversarial reproduction + decision/claim ledgers (`05_DISCOVERY_LAB/00_GOVERNANCE/`) | Semantic versioning, open data/code, external review |
+| 🥉 | **B — Axioms** | 35% | 🟡 Promising | Prove that the bridges preserve symmetries/conservation without per-sector tuning |
+| 4 | **E — Riemann** | 30% | 🟡 Exploratory — since Jul/2026, all 12 items of the `RH-REAL` survey finally dispositioned; 2 replicated findings (anti-clustering; GUE scaling), none about RH itself | Self-adjoint operator whose spectrum realizes the zeros, with full error control |
+| 5 | **M — Stability** | 30% | 🟡 Exploratory | Small theorem, complete hypotheses, benchmark against Lyapunov/LQR |
+| 6 | **C — Irreversibility** | 25% | 🟡 | A non-trivial monotone + a testable transition class |
+| 7 | **F — Graphs/primes** | 25% | 🟡 | Benchmarks and formal correspondence theorems |
+| 8 | **J — Quantum-classical** | 25% | 🟡 | A blind protocol separating decoherence, collapse, and gravity |
+| 9 | **L — Cognitive topology** | 25% | 🟡 | Defined invariant + inter-rater reliability + independent data |
+| 10 | **A — Foundations** | 20% | ⚪ | A minimal action with degrees of freedom, units, and a new prediction |
+| 11 | **G — Cosmology** | 20% | ⚪ — since Jul/2026, 4 pre-registered tests **executed** on real data (SPARC-001…004), all `CLOSED_INCONCLUSIVE`; an honest RUWE-confounder finding, not just a pending test catalog | An observable that distinguishes Tamesis from `ΛCDM`/MOND and survives out-of-sample |
+| 12 | **I — Particles** | 20% | ⚪ | A complete gauge action + renormalization + unitarity + a collider prediction |
+| 13 | **H — Black holes** | 15% | ⚪ | Metric/stress-energy tensor + causality + a horizon observable |
+| 14 | **K — Cognition** | 15% | ⚪ — since Jul/2026, one concrete hypothesis tested and adversarially **refuted** (`DISC-COGNITIVE-EEG-SPECTRAL-001`: EEG spectral entropy in depression, real effect in the opposite direction to that predicted); the broad question (control/memory/consciousness) still lacks a single model | Reduce to one measurable phenomenon with a reproducible prediction |
+| 15 | **O — Speculative cosmologies** | 10% | ⚪ | A consistent covariant solution before any observable |
+| 16 | **N — Millennium** | 5% | 🔴 — no solution; this line is permanently out of scope for resolution claims | A complete, verifiable theorem for the original problem, not a restricted heuristic |
 
-**Como não usar esta tabela.** Um "85%" não significa 85% de chance de a classe `U₁/₂` estar correta, nem que a Linha D esteja perto do fim — significa que, das lacunas explicitamente nomeadas nessa pergunta específica, a maior parte já foi provada ou precisamente caracterizada. Se o critério for "onde concentrar esforço agora", a resposta é a mesma que já orienta o laboratório: a maior parte da capacidade de pesquisa disponível vai para `D — U₁/₂`, dividida exatamente entre as duas frentes já em execução — fechar o resíduo de M-CLUST e remover a ressalva de regularidade geral-`K`.
+**How not to use this table.** An "85%" does not mean an 85% chance that the `U₁/₂` class is correct, nor that Line D is close to done — it means that, of the gaps explicitly named in that specific question, most have already been proved or precisely characterized. If the criterion is "where to put research effort now," the answer is the one already guiding the laboratory: most of the available research capacity goes to `D — U₁/₂`, split exactly between the two fronts already running — closing the M-CLUST residual and removing the general-`K` regularity caveat.
 
-## Um ciclo de pesquisa verificável
+## A verifiable research cycle
 
 ```mermaid
 flowchart TD
-    A[Hipótese] --> B[Definições operacionais]
-    B --> C[Modelo matemático ou computacional]
-    C --> D[Parâmetros, unidades e incertezas]
-    D --> E[Modelo nulo e concorrentes]
-    E --> F[Teste pré-registrado]
-    F --> G{Resultado}
-    G -->|replica e distingue| H[Publicação / atualização do estado]
-    G -->|não distingue| I[Revisão ou abandono]
-    G -->|falha| J[Falsificação documentada]
+    A[Hypothesis] --> B[Operational definitions]
+    B --> C[Mathematical or computational model]
+    C --> D[Parameters, units, and uncertainties]
+    D --> E[Null model and competitors]
+    E --> F[Pre-registered test]
+    F --> G{Result}
+    G -->|replicates and distinguishes| H[Publication / state update]
+    G -->|does not distinguish| I[Revision or abandonment]
+    G -->|fails| J[Documented falsification]
 ```
 
-Esse ciclo é a regra editorial do arquivo. Uma simulação que reproduz uma curva não é automaticamente uma descoberta; uma coincidência numérica não é uma derivação; e uma analogia entre sistemas não é uma identidade física.
+This cycle is the archive's editorial rule. A simulation that reproduces a curve is not automatically a discovery; a numerical coincidence is not a derivation; and an analogy between systems is not a physical identity.
 
-## Núcleo experimental atual: `Tamesis M_c v1`
+## Current experimental core: `Tamesis M_c v1`
 
-O ramo experimental atual está congelado em `frozen_and_ready`, com a qualificação de hardware ainda não iniciada. O Demonstrador A começa pela calibração cega de termometria óptica entre 5 K e 20 K; ele **ainda não mede `M_c`**.
+The current experimental branch is frozen at `frozen_and_ready`, with hardware qualification not yet started. Demonstrator A begins with blind optical thermometry calibration between 5 K and 20 K; it **does not yet measure `M_c`**.
 
-- [README do Tamesis M_c v1](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
-- [Relatório de execução do Demonstrador A v0.6](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md)
-- [Saídas visuais, figuras e animações](02_TAMESIS_MC_V1_OUTPUTS/README.md)
-- [Pacote de colaboração experimental](03_EXPERIMENTAL_COLLABORATION_PACKAGE/README.md)
+- [`Tamesis M_c v1` README](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/README.md)
+- [Demonstrator A v0.6 execution report](01_TAMESIS_CORE/02_Experimental_Validation/Quantum_Classical_Transition/tamesis_mc_v1/reports/DEMONSTRATOR_A_V0_6_EXECUTION_REPORT.md)
+- [Visual outputs, figures, and animations](02_TAMESIS_MC_V1_OUTPUTS/README.md)
+- [Experimental collaboration package](03_EXPERIMENTAL_COLLABORATION_PACKAGE/README.md)
 
-![Mapa de limites da transição quântico-clássica](01_TAMESIS_CORE/01_Foundation/assets/experimental_limits_map.png)
+![Map of the quantum-to-classical transition limits](01_TAMESIS_CORE/01_Foundation/assets/experimental_limits_map.png)
 
-<p align="center"><sub>Figura 2 — Mapa de limites usado como guia de teste. Regiões e marcadores representam hipóteses e dados de referência; não constituem confirmação de uma fronteira universal.</sub></p>
+<p align="center"><sub>Figure 2 — Limit map used as a testing guide. Regions and markers represent hypotheses and reference data; they do not constitute confirmation of a universal boundary.</sub></p>
 
-## Sistemas complexos e transições
+## Complex systems and transitions
 
-![Transição de fase e reorganização entrópica](01_TAMESIS_CORE/01_Foundation/assets/phase_transition.png)
+![Phase transition and entropic reorganization](01_TAMESIS_CORE/01_Foundation/assets/phase_transition.png)
 
-<p align="center"><sub>Figura 3 — Visualização conceitual de compressão, saturação e reorganização. É uma ilustração de modelo, não uma lei empírica geral.</sub></p>
+<p align="center"><sub>Figure 3 — Conceptual visualization of compression, saturation, and reorganization. This is a model illustration, not a general empirical law.</sub></p>
 
-O laboratório usa uma linguagem comum para comparar sistemas: **estado, recursos, acoplamentos, memória, transição, dissipação, estabilidade, observável e critério de falha**. A comparação é metodológica; ela não afirma que uma galáxia, uma célula, um grafo e um cérebro sejam o mesmo tipo de objeto.
+The laboratory uses a common language to compare systems: **state, resources, couplings, memory, transition, dissipation, stability, observable, and failure criterion**. The comparison is methodological — it does not claim that a galaxy, a cell, a graph, and a brain are the same kind of object.
 
-## O que o laboratório já conseguiu
+## What the laboratory has already achieved
 
-- inventário completo de 280 registros e auditoria rastreável;
-- separação explícita entre prova, hipótese, modelo, ajuste, simulação e cenário especulativo;
-- atlas de regimes, transições, operadores, redes e sistemas cognitivos;
-- catálogo de testes observacionais e experimentais com modelos nulos;
-- versão HTML/PDF institucional para apresentação acadêmica;
-- preservação de versões históricas sem endossar suas alegações como resultados atuais;
-- **adjudicação adversarial completa das alegações quantitativas do núcleo** (2026): mais de 30 alegações fechadas com critérios pré-registrados, incluindo a detecção e correção de 2 resultados legados baseados em dados fabricados;
-- **um resultado matemático novo, derivado e verificado adversarialmente**: a função-limite exata `φ_∞(c) = ½√(π/c)·erf(√c)` da classe U₁/₂ (ver o [artigo](index.html));
-- dois achados replicados sobre os zeros reais da função zeta (anti-clustering de gaps consecutivos; escala GUE do gap mínimo).
+- a complete, traceable inventory and audit of 280 records;
+- an explicit separation between proof, hypothesis, model, fit, simulation, and speculative scenario;
+- an atlas of regimes, transitions, operators, networks, and cognitive systems;
+- a catalog of observational and experimental tests with null models;
+- an institutional HTML/PDF version for academic presentation;
+- preservation of historical versions without endorsing their claims as current results;
+- **complete adversarial adjudication of the core's quantitative claims** (2026): 30+ claims closed under pre-registered criteria, including the detection and correction of 2 legacy headline results built on fabricated data;
+- **one new mathematical result, derived and adversarially verified**: the exact closed-form limit law `φ_∞(c) = ½√(π/c)·erf(√c)` of the `U₁/₂` class (see the [paper](index.html));
+- two replicated findings about the real zeros of the Riemann zeta function (consecutive-gap anti-clustering; minimum-gap GUE scaling).
 
-## O que ainda não foi demonstrado
+## What has not yet been demonstrated
 
-O arquivo **não afirma** ter resolvido a Hipótese de Riemann, `P vs NP`, Navier–Stokes, Yang–Mills, Hodge ou Birch–Swinnerton-Dyer. Também não há demonstração aceita de que Tamesis substitua `ΛCDM`, elimine matéria escura/energia escura, faça a consciência causar colapso quântico, viabilize propulsão métrica ou prove que o universo é uma simulação.
+The archive **does not claim** to have solved the Riemann Hypothesis, `P vs NP`, Navier–Stokes, Yang–Mills, Hodge, or Birch–Swinnerton-Dyer. There is likewise no accepted demonstration that Tamesis replaces `ΛCDM`, eliminates dark matter/dark energy, gives consciousness a causal role in quantum collapse, enables metric propulsion, or proves the universe is a simulation.
 
-Essas linhas permanecem como conjecturas, programas de teste ou modelos restritos até que apresentem provas formais, dados independentes, previsões novas e replicação.
+These lines remain conjectures, test programs, or restricted models until they produce formal proofs, independent data, new predictions, and replication.
 
-## Estrutura do repositório
+## Repository structure
 
-| Pasta/arquivo | Função |
+| Folder/file | Function |
 |---|---|
-| `00_HOME` | Orientação, linha do tempo e mapa do arquivo. |
-| `01_TAMESIS_CORE` | Teoria central, modelos, ativos e validação experimental. |
-| `02_TAMESIS_MC_V1_OUTPUTS` | Figuras e animações convenientes do ramo `M_c v1`. |
-| `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | Materiais para colaboração e qualificação experimental. |
-| `05_DISCOVERY_LAB` | Laboratório de adjudicação: fila de testes, ledgers de governança, notas de metodologia, resultados e vereditos adversariais. |
-| `index.html` | **Artigo científico síntese do programa de adjudicação** (página principal; figuras e script gerador em `ARTIGO_DISCOVERY_LAB/figures/`). |
-| `tamesis-cycle-survival` | Pacote standalone reproduzível do teorema U₁/₂ — paper LaTeX compilado, provas, simulações clean-room e testes automatizados. |
-| `FAILED_HYPOTHESES.md` | Tabela completa e honesta de toda hipótese/candidato testado pelo Discovery Lab, sobrevivente ou não. |
-| `computational_freeze.html` | Página anterior da raiz (estado congelado do Tamesis M_c v1), preservada. |
-| `90_LEGACY` | Ramos históricos, substituídos, especulativos ou sem sustentação atual. |
-| `RECURSOS_PARA_PESQUISA` | Referências e materiais de pesquisa; não são evidência produzida pelo projeto. |
-| `publicar` / `publicados` | Organização editorial de artigos destinados a publicação e já publicados. |
-| `ARTICLE_MANIFEST.csv` | Inventário máquina-legível de artigos. |
-| `RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md` | Rastreamento da auditoria artigo a artigo. |
-| `RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html` | Documento institucional pronto para PDF. |
+| `00_HOME` | Orientation, timeline, and archive map. |
+| `01_TAMESIS_CORE` | Core theory, models, assets, and current experimental validation. |
+| `02_TAMESIS_MC_V1_OUTPUTS` | Convenient copies of `M_c v1` branch figures and animations. |
+| `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | Materials for experimental collaboration and qualification. |
+| `05_DISCOVERY_LAB` | Adjudication laboratory: test queue, governance ledgers, methodology notes, results, and adversarial verdicts. |
+| `index.html` | **Synthesis paper of the adjudication program** (landing page; figures and generator script in `ARTIGO_DISCOVERY_LAB/figures/`). |
+| `tamesis-cycle-survival` | Standalone reproducible package for the `U₁/₂` theorem — compiled LaTeX paper, proofs, clean-room simulations, and automated tests. |
+| `FAILED_HYPOTHESES.md` | Complete, honest table of every hypothesis/candidate the Discovery Lab has tested, surviving or not. |
+| `computational_freeze.html` | Previous root landing page (Tamesis `M_c v1` frozen state), preserved. |
+| `90_LEGACY` | Historical, superseded, speculative, or currently unsupported branches. |
+| `RECURSOS_PARA_PESQUISA` | Reference materials; not evidence produced by the project. |
+| `publicar` / `publicados` | Editorial organization of articles intended for and already published. |
+| `ARTICLE_MANIFEST.csv` | Machine-readable inventory of articles. |
+| `RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md` | Article-by-article audit tracking. |
+| `RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html` | PDF-ready institutional document. |
 
-## Governança, autoria e responsabilidade
+## Governance, authorship, and responsibility
 
-**Gestão científica, autoria principal e curadoria deste arquivo:** **Douglas H. M. Fulber**.
+**Scientific direction, primary authorship, and curation of this archive:** **Douglas H. M. Fulber**.
 
-O Laboratório Tamesis é administrado como um programa de pesquisa independente neste repositório. A menção a universidades, laboratórios, autores ou DOIs em documentos históricos não significa endosso institucional, coautoria ou validação externa, salvo quando houver autorização e registro explícitos.
+The Tamesis Laboratory is run as an independent research program within this repository. Mentions of universities, laboratories, authors, or DOIs in historical documents do not imply institutional endorsement, co-authorship, or external validation unless explicit authorization and record exist.
 
-A governança editorial segue estas regras:
+Editorial governance follows these rules:
 
-1. o mantenedor responsável controla a classificação de status, a organização das linhas e a aceitação de alterações estruturais;
-2. contribuições externas são bem-vindas, mas não alteram autoria, proveniência ou estado de evidência sem revisão registrada;
-3. novos resultados devem incluir método, dados/código quando aplicável, incertezas, modelo nulo, limitações e critério de falsificação;
-4. documentos legados permanecem por proveniência e não são automaticamente promovidos a resultados válidos;
-5. qualquer publicação derivada deve citar o laboratório, o autor/curador e a versão específica do arquivo utilizada.
+1. the responsible maintainer controls status classification, line organization, and acceptance of structural changes;
+2. external contributions are welcome but do not alter authorship, provenance, or evidence status without a recorded review;
+3. new results must include method, data/code where applicable, uncertainties, a null model, limitations, and a falsification criterion;
+4. legacy documents remain for provenance and are not automatically promoted to valid results;
+5. any derived publication must cite the laboratory, the author/curator, and the specific archive version used.
 
-Para propor uma colaboração ou correção, abra uma issue/patch documentando: arquivo afetado, justificativa, fontes, impacto na classificação e teste de verificação.
+To propose a collaboration or correction, open an issue/patch documenting: affected file, justification, sources, impact on classification, and a verification test.
 
-## Licença e atribuição
+## License and attribution
 
-O material original deste arquivo é disponibilizado sob [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE), salvo indicação diferente no próprio arquivo ou direitos de terceiros. A licença permite compartilhar e adaptar o material, desde que a atribuição seja preservada e as modificações sejam indicadas.
+Original material in this archive is available under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE), unless stated otherwise in the file itself or subject to third-party rights. The license allows sharing and adapting the material as long as attribution is preserved and modifications are indicated.
 
-Forma recomendada de atribuição:
+Recommended attribution form:
 
-> Douglas H. M. Fulber, Laboratório Tamesis — *Tamesis Research Archive*, versão/commit utilizado, licenciado sob CC BY 4.0: [repositório](.).
+> Douglas H. M. Fulber, Tamesis Laboratory — *Tamesis Research Archive*, version/commit used, licensed under CC BY 4.0: [repository](.).
 
-Ao reutilizar uma figura, preserve a legenda, o caminho do ativo e a indicação de que se trata de uma visualização de modelo quando essa for a classificação registrada. Imagens, dados ou textos de terceiros podem estar sujeitos a condições próprias; a CC BY 4.0 não transfere direitos que o laboratório não possui.
+When reusing a figure, preserve the caption, the asset path, and the indication that it is a model visualization when that is its recorded classification. Third-party images, data, or text may be subject to their own conditions; CC BY 4.0 does not transfer rights the laboratory does not hold.
 
-## Integridade e limites de uso
+## Integrity and limits of use
 
-- Não apresentar conjecturas do arquivo como fatos estabelecidos.
-- Não usar a presença de um DOI como prova de revisão por pares ou validação experimental.
-- Não atribuir endosso institucional a universidades ou grupos citados sem autorização formal.
-- Não ocultar limitações, parâmetros ajustados, resultados negativos ou condições de falha.
-- Não usar o material para aconselhamento médico, jurídico, financeiro ou de segurança sem avaliação profissional independente.
+- Do not present archive conjectures as established facts.
+- Do not use the presence of a DOI as proof of peer review or experimental validation.
+- Do not attribute institutional endorsement to universities or groups cited without formal authorization.
+- Do not hide limitations, fitted parameters, negative results, or failure conditions.
+- Do not use this material for medical, legal, financial, or safety advice without independent professional evaluation.
 
-## Como citar este arquivo
+## How to cite this archive
 
 ```text
-Fulber, Douglas H. M. (2026). Tamesis Research Archive: Laboratório Tamesis — visão, auditoria e programa de pesquisa. CC BY 4.0.
+Fulber, Douglas H. M. (2026). Tamesis Research Archive: Tamesis Laboratory — vision, audit, and research program. CC BY 4.0.
 ```
 
-## Contato e colaboração
+## Contact and collaboration
 
-O ponto de entrada recomendado é uma issue documentada neste repositório. Para apresentação acadêmica, utilize o [relatório institucional em HTML/PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html) e o [relatório completo em Markdown](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md), sempre preservando a classificação de evidência indicada.
+The recommended entry point is a documented issue in this repository. For academic presentation, use the [institutional HTML/PDF report](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html) and the [full Markdown report](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md), always preserving the indicated evidence classification.

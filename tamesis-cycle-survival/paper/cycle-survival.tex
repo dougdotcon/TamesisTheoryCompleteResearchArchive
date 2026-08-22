@@ -12,6 +12,7 @@
 \newtheorem*{openlemma}{Open Lemma}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\newtheorem{addendum}{Addendum}
 
 \newcommand{\phiinf}{\varphi_\infty}
 \newcommand{\Unif}{\mathrm{Unif}}
@@ -20,7 +21,9 @@
 
 \title{Cycle Survival Under Poisson Perturbation of Random Permutations}
 \author{Douglas H. M. Fulber}
-\date{}
+\date{Originally released 2026; the general-$K$ rate, Open
+Lemma~\ref{ol:k11}, and Proposition~\ref{prop:conditional} became
+unconditional on 2026-08-22 -- see the note after the abstract.}
 
 \begin{document}
 \maketitle
@@ -52,20 +55,54 @@ $O(1/n^2)$; the conjectured general-$K$ rate
 $\lim_n n(\psi_n^{(K)}-\varphi_K)=K\varphi_K/4$ is confirmed
 unconditionally at all eleven of these values directly from the exact
 closed forms, and is proved for \emph{every} $K$ by a new continuum
-scaling-limit argument -- though that general-$K$ proof carries one
-explicitly named, adversarially-scrutinized conditional hypothesis (a
-regularity/existence assumption on an asymptotic expansion, found to
-hold without exception at every one of the eleven checkable values);
-for $K\ge11$ the fixed-$K$ bridge itself, $\varphi_n^{(K)}\to\varphi_K$,
-remains open unconditionally (though it is, like the rate, discharged
-conditionally on the same hypothesis, as an immediate corollary of the
-rate proof), via an unconditionally proved mixing lemma reducing the
+scaling-limit argument.\footnote{As of 2026-08-22, this general-$K$
+proof is \textbf{unconditional}: the regularity/existence hypothesis it
+originally carried has since been proved, so the rate, the fixed-$K$
+bridge for every $K$ (in particular $K\ge11$), and the full statement
+$\varphi(n,c)\to\phiinf(c)$ for every $c$ are all now theorems, not
+conditional statements. See the note after this abstract and
+Addenda~\ref{add:closure}, \ref{add:openlemma-closed},
+\ref{add:fullbridge-closed} below for the precise statements and
+citations; the sentence this footnote is attached to, and the rest of
+this abstract, are left exactly as originally written.} At the time of
+that proof, it carried one explicitly named, adversarially-scrutinized
+conditional hypothesis (a regularity/existence assumption on an
+asymptotic expansion, found to hold without exception at every one of
+the eleven checkable values); for $K\ge11$ the fixed-$K$ bridge itself,
+$\varphi_n^{(K)}\to\varphi_K$, was at that time open unconditionally
+(though it was, like the rate, discharged conditionally on the same
+hypothesis, as an immediate corollary of the rate proof), via an
+unconditionally proved mixing lemma reducing the
 full statement to that single precisely stated convergence lemma. Every
 claim below is labeled by its exact status;
 a companion numerical package cross-checks every closed form against
 independent brute-force enumeration, Monte Carlo simulation, and
 quadrature.
 \end{abstract}
+
+\begin{quote}
+\sloppy
+\noindent\textbf{Note added, 2026-08-22.} Hypothesis~\ref{hyp:regularity}
+below -- the sole caveat carried by Theorem~\ref{thm:rate} and Open
+Lemma~\ref{ol:k11} for $K$ beyond the eleven concretely verified values
+-- has since been proved unconditionally, for every $r\ge0$, by a
+discrete-Gronwall induction directly on the exact discrete recursion
+(not an assumption, not a check at more concrete $K$); independently
+re-derived from scratch and stress-tested by a dedicated hostile
+referee, verdict \textbf{SOUND -- WITH NAMED ISSUES} (four issues
+found, none fatal; two required correction and were fixed via dated
+addenda in the source document, following the same discipline used
+here). Consequently Theorem~\ref{thm:rate}, Open Lemma~\ref{ol:k11},
+and Proposition~\ref{prop:conditional} below are all now
+\textbf{unconditional} -- for every $K\ge0$ and every $c\ge0$
+respectively. The original conditional statements below are left
+exactly as written, since they were correct and correctly scoped at the
+time of writing; Addenda~\ref{add:closure}, \ref{add:openlemma-closed},
+and \ref{add:fullbridge-closed}, placed immediately after each, record
+the update and its citation without altering the original text.
+Archive record: \texttt{k2\_open\_lemma/k3\_attempt\_2/k6\_attempt/}\allowbreak\texttt{k\_general\_existence\_attempt/}\allowbreak\texttt{ATTEMPT.md}
+and its \texttt{adversarial/}\allowbreak\texttt{REFEREE\_REPORT.md}.
+\end{quote}
 
 \section{The model}
 \label{sec:model}
@@ -543,6 +580,46 @@ recorded as resting on the identical, single, precisely named
 hypothesis, with the same status: proved conditionally, open
 unconditionally.
 
+\begin{addendum}[Hypothesis~\ref{hyp:regularity} is closed, 2026-08-22]
+\label{add:closure}
+Hypothesis~\ref{hyp:regularity} above is now \textbf{proved},
+unconditionally, for every $r\ge0$: a discrete-Gronwall induction on
+$r$, applied directly to the exact discrete recursion underlying
+$g_r,h_r$ (not an assumption, not a self-consistency check at more
+concrete $K$), shows the residual
+$R_r(m,b,n):=g_r(m,b)-F_r(t,b)-\tfrac1nG_r(t,b)$ is bounded by an
+explicit $D_r(b)/n^2$, uniformly over the entire domain of $m$
+including the recursion's own base-case boundary -- exactly the
+existence question Hypothesis~\ref{hyp:regularity} left open.
+Consequently \textbf{Theorem~\ref{thm:rate} now holds unconditionally,
+with no hypothesis, for every $K\ge0$}, superseding the ``conditional
+on Hypothesis~\ref{hyp:regularity}'' qualification in its statement
+above. Independently re-verified by a dedicated hostile referee (own
+simulator, own closed forms, $477+309$ exact identity checks, symbolic
+verification of the underlying ODEs for fully symbolic $r,k,b$, fresh
+probes at $r=6,7,9,10$ and $n$ up to $10^6$ never touched by the
+original proof); verdict \textbf{SOUND -- WITH NAMED ISSUES} (four
+issues, none fatal, two requiring correction: an exponent typo in the
+bound's written justification, and a downstream $\Theta(1/n)$ overclaim
+at $K=1$ in a related document, both corrected via dated addenda in the
+source, not silently). Archive record:
+\texttt{k\_general\_existence\_attempt/ATTEMPT.md} and
+\texttt{k\_general\_existence\_attempt/adversarial/REFEREE\_REPORT.md}.
+A related, separately-derived fact goes further than the bare rate for
+$\psi_n^{(K)}$: combining this closure with Proposition~\ref{prop:mixing}-style
+reduction gives an \emph{exact} formula for the $1/n$ coefficient of
+$\varphi_n^{(K)}-\varphi_K$ itself, for every $K\ge1$:
+$\varphi_n^{(K)}-\varphi_K = K[\varphi_K/4+F_{K-1}(1,1)-\varphi_K]/n +
+O(1/n^2)$ -- exactly zero at $K=1$ (consistent with
+Proposition~\ref{prop:k1}'s $\Theta(1/n^2)$ rate) and verified strictly
+positive for $2\le K\le12$ (reproducing $1/30$ at $K=2$ and $1/14$ at
+$K=3$ from Propositions~\ref{prop:k2}--\ref{prop:k3} above, and
+$1093/6006$ at $K=6$), but \textbf{not proved positive for $K\ge13$} --
+so $\Theta(1/n)$, as opposed to the now-proved $O(1/n)$, remains
+unconditional only through $K=12$; this narrower question is untouched
+by the closure above and should not be conflated with it.
+\end{addendum}
+
 \begin{openlemma}[Fixed-$K$ bridge, $K\ge11$]
 \label{ol:k11}
 $\displaystyle\lim_{n\to\infty}\varphi_n^{(K)} = \varphi_K$ for every
@@ -550,6 +627,22 @@ fixed integer $K\ge11$. \textbf{Not proved or disproved unconditionally
 here}; proved conditional on Hypothesis~\ref{hyp:regularity}, as an
 immediate corollary of Theorem~\ref{thm:rate} above.
 \end{openlemma}
+
+\begin{addendum}[Open Lemma~\ref{ol:k11} is closed, 2026-08-22]
+\label{add:openlemma-closed}
+By Addendum~\ref{add:closure}, Hypothesis~\ref{hyp:regularity} is
+proved, so Theorem~\ref{thm:rate} holds unconditionally for every $K$;
+since a finite limit of $n(\psi_n^{(K)}-\varphi_K)$ elementarily forces
+$\psi_n^{(K)}-\varphi_K\to0$, Open Lemma~\ref{ol:k11} above is now
+\textbf{PROVED, unconditionally, for every fixed integer $K\ge0$} (not
+just $K\ge11$; combined with the unconditional
+Propositions~\ref{prop:k1}--\ref{prop:k3} and the $K=4,\dots,10$ closed
+forms of \S\ref{sec:bridge}, this resolves the fixed-$K$ bridge for
+\emph{every} $K$). It is no longer an open lemma; the name and label
+are kept for continuity with the rest of this document. The exact,
+all-orders, general-$K$ finite-$n$ closed form for $\psi_n^{(K)}$
+(\S\ref{sec:open}) is untouched by this closure and remains open.
+\end{addendum}
 
 \begin{proposition}[Conditional convergence]
 \label{prop:conditional}
@@ -570,6 +663,27 @@ evidence for, not a substitute for, resolving it. (Proposition~\ref{prop:mixing}
 hypothesis -- fixed-$K$ convergence for \emph{every} $K\ge0$ -- is now
 discharged unconditionally through $K=10$; the open lemma's scope has
 strictly narrowed from $K\ge6$ to $K\ge11$.)
+
+\begin{addendum}[Proposition~\ref{prop:conditional} is now a theorem, 2026-08-22]
+\label{add:fullbridge-closed}
+By Addendum~\ref{add:openlemma-closed}, Open Lemma~\ref{ol:k11} is
+proved unconditionally for every $K$, so Proposition~\ref{prop:mixing}'s
+hypothesis is discharged unconditionally for every fixed $K\ge0$, and
+Proposition~\ref{prop:conditional} above is no longer conditional:
+
+\begin{theorem}[Full bridge, now unconditional]
+\label{thm:fullbridge}
+For every fixed $c\ge0$, $\varphi(n,c)\to\phiinf(c)$ as $n\to\infty$,
+\textbf{unconditionally}, with no unproved hypothesis remaining.
+\end{theorem}
+
+\noindent This is exactly the statement Proposition~\ref{prop:conditional}
+above required the open lemma for; the archive records this promotion
+as ``Proposi\c{c}\~ao Condicional 5'' becoming ``Teorema 3.'' Not
+claimed here: a locally-uniform-in-$c$ (rather than pointwise-in-$c$)
+version of this convergence, which remains open (\S\ref{sec:open}), and
+the exact all-orders closed form for $\psi_n^{(K)}$, likewise untouched.
+\end{addendum}
 
 \section{Numerics}
 \label{sec:numerics}
@@ -691,7 +805,14 @@ in the searches performed,'' never as ``does not exist'' or ``first.''
   \emph{unconditionally} for $K\ge11$, exactly as the rate does; the
   exact all-orders finite-$n$ closed form for general $K$ (of which
   \S\ref{sec:bridge}'s two-order expansion is only a truncation) is not
-  attempted at all.
+  attempted at all. \textbf{[Closed, 2026-08-22 -- see
+  Addenda~\ref{add:closure}--\ref{add:fullbridge-closed}.]}
+  Hypothesis~\ref{hyp:regularity} is now proved unconditionally, so this
+  item is resolved: Open Lemma~\ref{ol:k11} holds for every $K\ge0$, and
+  Proposition~\ref{prop:conditional} is now Theorem~\ref{thm:fullbridge},
+  unconditional. Only the exact all-orders closed form for general $K$
+  named above remains open, untouched by this closure (see the new item
+  below).
 \item \textbf{The rate} of that bridge: now known exactly and
   unconditionally through $K=10$ -- $K=0$ is exact (rate $0$), $K=1$ is
   exact at rate $1/(3n^2)$, and $K=2,\dots,10$ are exact at $\Theta(1/n)$
@@ -703,20 +824,47 @@ in the searches performed,'' never as ``does not exist'' or ``first.''
   it is confirmed only through $K=10$. The $K=1\to K=2$ jump from
   $\Theta(1/n^2)$ to $\Theta(1/n)$ remains a standing caution against
   assuming any rate extrapolates without a proof or a verified closed
-  form.
+  form. \textbf{[Closed, 2026-08-22 -- see Addendum~\ref{add:closure}.]}
+  Theorem~\ref{thm:rate}'s leading coefficient $K\varphi_K/4$ is now
+  proved unconditionally for every $K$, not just through $K=10$; and the
+  \emph{exact} $1/n$ coefficient of $\varphi_n^{(K)}-\varphi_K$ (not
+  merely $\psi_n^{(K)}-\varphi_K$) is now known unconditionally for
+  every $K\ge1$ (Addendum~\ref{add:closure}), reproducing the $K=1$
+  cancellation above as an exact-zero special case rather than a
+  separate observation.
+\item \textbf{Strict positivity, for $K\ge13$,} of the exact $1/n$
+  coefficient of $\varphi_n^{(K)}-\varphi_K$ named in
+  Addendum~\ref{add:closure} -- verified for $2\le K\le12$ but not
+  proved in general. If positive for all $K\ge2$, the rate is exactly
+  $\Theta(1/n)$ there, not merely the now-proved $O(1/n)$; this is a
+  narrower, separate question from the previous item's closure and is
+  not resolved by it.
+\item The growth rate, in $r$, of the error constants $D_r(b), C_r(b)$
+  in the discrete-Gronwall proof of Addendum~\ref{add:closure} -- the
+  recursion defining them is explicit and terminating, but no
+  closed-form or asymptotic growth rate was established; the numerics
+  underlying that proof show the true error is far smaller than the
+  bound in every case checked.
 \item \textbf{Conjecture~\ref{conj:densityK}} (general-$K$ density) and
   its Poisson-mixture consequence, the full unconditional law
   $M(c)\stackrel{d}{=}\min(1,\sqrt{E/c})$, $E\sim\Exp(1)$ -- a
   distributional claim unrelated to, and unresolved by, the fixed-$K$
   bridge results above (those concern only the \emph{mean}
-  $\varphi_n^{(K)}\to\varphi_K$, not the full density $f_{M_K}$).
+  $\varphi_n^{(K)}\to\varphi_K$, not the full density $f_{M_K}$); not
+  affected by the 2026-08-22 closure above.
 \item A locally-uniform-in-$c$ (not merely pointwise) version of
-  Proposition~\ref{prop:conditional}.
+  Theorem~\ref{thm:fullbridge} (formerly Proposition~\ref{prop:conditional},
+  now unconditional -- see Addendum~\ref{add:fullbridge-closed} -- but
+  only pointwise in $c$, not locally uniform).
 \item Any second-moment, concentration, or CLT statement for the cyclic
   fraction of either $\varphi(n,c)$ or $L(c)$ -- entirely untouched here.
 \item A first-principles (non-cited) proof of the exploration-process
   representation of $\PD(1)$ used as the single external input in
   \S\ref{sec:theorem}.
+\item \textbf{The exact, all-orders finite-$n$ closed form} for
+  $\psi_n^{(K)}$ at general $K$ (of which \S\ref{sec:bridge}'s two-order
+  expansion, now unconditional, is only a truncation) -- separate,
+  harder, and explicitly not attempted by any result above.
 \end{enumerate}
 
 \bibliographystyle{plain}

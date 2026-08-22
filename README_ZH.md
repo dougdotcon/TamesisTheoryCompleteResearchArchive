@@ -4,8 +4,8 @@
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-38-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
-[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-40-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/maintainer-Douglas%20H.%20M.%20Fulber-111111?style=for-the-badge)](README.md#governance-authorship-and-responsibility)
@@ -32,7 +32,7 @@
 | Tamesis `M_c v1` | **可检验假设** | 数值 `M_c = 5.292674126388712e-16 kg` 是一个模型参数,而非测量值。 |
 | 独立物理证据 | **尚未确立** | 本档案库中没有任何内容构成对 Tamesis 本体论的实验证实。 |
 | 千禧年大奖难题与万有理论(TOE)主张 | **未解决** | 这些文本是猜想、归约,或受限模型下的论证——并非被公认接受的解答。 |
-| 核心数值裁定 | **数学层面的整合已完成,`K=10` 以内的缺口已无条件地闭合(截至 2026-08-22)** | 详见下文——3 项主张以最终裁决被否定性结案;第 4 项(`U₁/₂`)已有经对抗性同行评审(referee)证明的核心结果,其中开放引理(Open Lemma)现已对 `K=0,…,10` 无条件证明;对于一般的 `K`,速率猜想存在一个条件性证明(其正则性附加条件已被一位敌对评审员判定为界定准确),但尚非无条件的闭合。 |
+| 核心数值裁定 | **数学层面的整合已完成——开放引理现已对每一个 `K` 都得到无条件证明(截至 2026-08-22)** | 详见下文——3 项主张以最终裁决被否定性结案;第 4 项(`U₁/₂`)已有经对抗性同行评审(referee)三轮独立评审确认的核心证明结果,开放引理与速率猜想现已对**每一个** `K≥0`(而不仅仅是 `K=0,…,10`)无条件证明——最后一项被明确指出的正则性附加条件已通过一个离散格朗沃尔(discrete-Gronwall)存在性证明予以闭合,档案库的条件性命题也因此被提升为一条无条件定理(**Teorema 3**)。 |
 
 ### 裁定计划(Discovery Lab,更新于 2026-08-22)
 
@@ -58,7 +58,7 @@ flowchart LR
 | SPARC/MOND 宇宙学 + Gaia 宽双星 | 4 项预先登记的测试 | 4/4 项因证实存在真实的混杂因素(confounder)而无法定论(inconclusive);发现 2 项历史上的头条结果建立在**伪造数据**之上,已用真实数据重新计算 |
 | 黎曼 zeta 函数零点(RH-REAL) | 12/12 项调查内容,全部最终得到处置 | 2 项复现的发现(相邻间距反聚集;`N^(-1/3)` GUE 标度);FHK 极大值与数方差(number-variance)均以 `CLOSED_INCONCLUSIVE` 结案,但各自都有一个强分量经对抗性确认(iid 一侧排除 ≥8.8σ;朴素 GUE 排除高达 203σ——对抗性复现还发现并修复了主估计量中的第 3 个真实缺陷) |
 | 核心定量主张裁定(第 1 轮) | 7 项主张 | `M_c` 不一致(不同数值间相差约 190 倍);夸克/纽结质量模型未通过留一法(leave-one-out)检验;`sin²θ_W=3/13` 偏离 7.5σ,且存在硬编码调参;`α⁻¹=Ω^{1.03}` 自由度为 0;反弹(bounce)模型的 `n_s` 不可辨识;全息 `Λ` 依代数恒等式即等于 `ρ_crit` |
-| **`U₁/₂` 极限律(第 2–7 轮,整合结果)** | 1 项定理 + 1 项推广 + 开放引理在 `K=2,…,10` 情形下的证明 + 一般 `K` 的速率猜想 | **已证明,经对抗性同行评审(3 轮独立评审,采用不同技术),已发表为论文并附可复现的软件包;`K=2` 于第 5 轮证明,`K=3,4,5` 于第 6 轮证明,`K=6,…,10` 于第 7 轮证明,均采用转移矩阵(transfer-matrix)方法;一般 `K` 的速率已于第 7 轮被证明,但明确以一个正则性附加条件为前提**(见下文) |
+| **`U₁/₂` 极限律(第 2–8 轮,整合结果)** | 1 项定理 + 1 项推广 + 开放引理(对每一个 `K≥0`)+ 一般 `K` 的速率猜想,二者均为无条件 | **已证明,经对抗性同行评审(4 轮独立评审,采用不同技术),已发表为论文并附可复现的软件包;`K=2` 于第 5 轮证明,`K=3,4,5` 于第 6 轮证明,`K=6,…,10` 于第 7 轮通过转移矩阵(transfer-matrix)方法证明;一般 `K` 的速率最初于第 7 轮被条件性证明,随后该正则性附加条件本身也在第 8 轮通过一个离散格朗沃尔(discrete-Gronwall)存在性证明被闭合——开放引理与速率猜想现已对每一个 `K` 都得到无条件证明,档案库的条件性命题也因此被提升为一条无条件定理**(见下文) |
 | 全档案库候选项调查(第 0 阶段,超出 TRI-RG 范围) | 19 个候选项,7 个领域 | `CLOSED_NULL`——18/19 项被否决并给出具体理由;1 条不成熟线索(认知 EEG 频谱特征)被提升为新的研究线,见下文 |
 | 认知——抑郁症中的 EEG 频谱特征(Mumtaz,`DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 项已锁定的预先登记,N=30 MDD / 26 HC | `CLOSED_REFUTED`——重度抑郁症(MDD)患者的频谱熵**更高**而非更低(`d=1.447`,`p=3.97×10⁻⁶`)——方向与所测试的假设相反,已由一次独立的、从零开始的对抗性复现所证实(数值吻合至 <10⁻⁹) |
 | SPARC-004 宇宙学——`f_multi` 自校准(第 1→2 阶段) | 流程已验证 + 已应用于真实的发现数据(30,203 个系统) | `CLOSED_INCONCLUSIVE`——机械裁决为 `BOTH_FALSIFIED`,但强制性的证伪复核(debunker pass)发现了一个真实的混杂因素:样本中占 19% 的一个子群体(高 RUWE)被单标量 `f_multi` 模型系统性地欠校正,即使在校准自身的锚定区间(anchor bin)内也存在具有统计学稳健性的过量 |
@@ -73,24 +73,24 @@ flowchart LR
 
 该结果是解析推导得出的(而非拟合所得),修正了档案库最初的猜想 `(1+c)^(-1/2)`(该猜想在级数的第一个系数处即被排除:`a₁ = 1/3 ≠ 1/2`,已通过精确枚举证实)。这一结果现已是一个**已证明的定理**,而非猜想:一份自足的数学文档(`THEOREM.md`)分六个步骤证明了该闭式表达式,其中包括对所访问弧段(arcs)*大小偏倚(size-biasing)*的正确处理,并由一名充当敌对评审员的独立智能体进行了评审——**未发现任何错误**。
 
-有限模型与极限对象之间的桥接,现已对 `K=0,…,10` 完成无条件证明;而一般 `K` 的速率猜想,则在一个被精确命名、且经敌对评审员界定范围的正则性假设的前提下得到证明:
+有限模型与极限对象之间的桥接,现已**对每一个 `K≥0`** 完成无条件证明——对于每一个固定的 `c ≥ 0`,当 `n → ∞` 时 `φ(n,c) → φ_∞(c)`,不再遗留任何未经证明的假设(`THEOREM.md`,"Teorema 3"):
 
 ```mermaid
 flowchart LR
     K01["K=0,1<br/>精确,无缺口<br/>第 1–2 轮"] --> K2["K=2<br/>第 5 轮<br/>四层评审"]
     K2 --> K345["K=3,4,5<br/>第 6 轮<br/>K-一致转移矩阵"]
     K345 --> K610["K=6,…,10<br/>第 7 轮<br/>同一方法,再加 5 级"]
-    K610 --> Kgen["一般 K<br/>第 7 轮:速率已证明,<br/>以 1 项已命名的附加条件为前提"]
-    Kgen -.->|"第 8 轮,目前正在进行"| Close["移除该附加条件 →<br/>对所有 K 均无条件成立"]
+    K610 --> Kgen["一般 K,每一个 K≥0<br/>第 8 轮:离散格朗沃尔<br/>存在性证明,评审判定 SOUND"]
+    Kgen --> Teo3["Teorema 3<br/>φ(n,c) → φ_∞(c),∀c≥0<br/>无条件"]
     style K01 fill:#e8f0e0,stroke:#1f6f5c
     style K2 fill:#e8f0e0,stroke:#1f6f5c
     style K345 fill:#e8f0e0,stroke:#1f6f5c
     style K610 fill:#e8f0e0,stroke:#1f6f5c
-    style Kgen fill:#f5ecd8,stroke:#96702a
-    style Close fill:#e3edf3,stroke:#33566f,stroke-dasharray: 4 4
+    style Kgen fill:#e8f0e0,stroke:#1f6f5c
+    style Teo3 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
 ```
 
-以上每一级都由一名独立的敌对评审智能体重新推导,所用的证明技术与原始推导*不同*,并配有其自有的暴力枚举(brute-force enumeration)与完整的递归代入检验——在 3 轮独立评审中,**任何一层都未发现错误**。`K=6,…,10` 还额外在两个留出(held-out)点处,与全新的穷举枚举逐位(bit-for-bit)核对确认。剩下的唯一一个**开放引理**——在 `K=10` 以内已被无条件证明,对一般 `K` 已被条件性证明——正是 Hansen & Jaworski(EJC, 2014)论文中固定参数情形的精确对应;经系统性文献检索(记录在案的查询超过 35 次)未发现具有闭式 `erf` 表达的泊松混合模型,但需明确说明这并不等同于"新颖(novel)"。另一条研究路线推导出了**指数为何恰好是 1/2**:在整个扰动机制参数化家族中,`α ∈ [1/2, 1]` 始终成立——`α < 1/2` 被*证明是不可能的*(一种二次聚集效应,即使不存在任何循环性的"消亡"也依然存在)。第 5 轮还找到并确认了一种自然机制(`M-WEIB(β)`,非齐次威布尔(Weibull)风险率),它可以达到 `α ∈ (1/2, 1)` 之间的每一个中间值。这里不作任何物理含义上的断言——这纯粹是关于某个特定系综(ensemble)的组合数学结果。
+以上每一级都由一名独立的敌对评审智能体重新推导,所用的证明技术与原始推导*不同*,并配有其自有的暴力枚举(brute-force enumeration)与完整的递归代入检验——在 4 轮独立评审中,**任何一层都未发现错误**。`K=6,…,10` 还额外在两个留出(held-out)点处,与全新的穷举枚举逐位(bit-for-bit)核对确认。最后一级闭合了唯一剩下的、被明确指出的缺口:一名敌对评审员从零开始独立重新推导出一个精确的离散格朗沃尔(discrete-Gronwall)归纳论证,证明了有限 `n` 的两项展开式对*每一个* `K` 都存在,而不仅仅是那 11 个已被具体验证过的取值——裁决为**SOUND,附带若干已命名的问题**(发现 4 个问题,均非致命,已通过带日期的补遗予以修正)。**开放引理**——现已对每一个 `K` 都得到无条件证明——正是 Hansen & Jaworski(EJC, 2014)论文中固定参数情形的精确对应;经系统性文献检索(记录在案的查询超过 35 次)未发现具有闭式 `erf` 表达的泊松混合模型,但需明确说明这并不等同于"新颖(novel)"。另一条研究路线推导出了**指数为何恰好是 1/2**:在整个扰动机制参数化家族中,`α ∈ [1/2, 1]` 始终成立——`α < 1/2` 被*证明是不可能的*(一种二次聚集效应,即使不存在任何循环性的"消亡"也依然存在)。第 5 轮还找到并确认了一种自然机制(`M-WEIB(β)`,非齐次威布尔(Weibull)风险率),它可以达到 `α ∈ (1/2, 1)` 之间的每一个中间值。这里不作任何物理含义上的断言——这纯粹是关于某个特定系综(ensemble)的组合数学结果。
 
 **在哪里能找到全部内容:** 完整的定理与评审报告位于 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`;其推广及对抗性验证位于 `.../generalization_u_alpha/`;一个**独立的可复现软件包**——已编译的 LaTeX 论文(PDF)、自足的证明、洁净室(clean-room)模拟,以及 49 项自动化测试——位于 **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**。而**本实验室所尝试过但未能存活的一切**的诚实清单——以便这一项正面结果能被置于正确的语境中理解——位于 **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**。
 
@@ -168,7 +168,7 @@ flowchart LR
 
 | 排名 | 研究线 | 估计完成度 | 状态 | 待解决事项 |
 |---:|---|---:|---|---|
-| 🥇 | **D —— `U₁/₂`**(已裁定子集,`DISC-CORE-NUMERICS-001`) | **约 85%** | 🔥 活跃中——开放引理已对 `K=0,…,10` 无条件证明,一般 `K` 的速率已条件性证明 | 消除一般 `K` 的正则性附加条件,**以及**解决 M-CLUST 残差问题——这是目前正在进行的两条战线(见[依赖关系图](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
+| 🥇 | **D —— `U₁/₂`**(已裁定子集,`DISC-CORE-NUMERICS-001`) | **约 90%** | ✅ 开放引理与一般 `K` 的速率猜想已**对每一个 `K≥0` 无条件证明**(2026-08-22)——该研究线的核心开放问题已闭合 | 剩余事项,均非核心:一般 `K` 情形下精确的全阶闭式表达式;M-CLUST(b) 残差(一个独立的机制,`PARTIALLY CLOSED`);完整的分布律(猜想 1–2)——见[依赖关系图](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md) |
 | 🥈 | **P —— 基础设施** | **约 90%** | 🔧 持续进行中——自 2026 年 7 月起新增了第二层:预先登记 + 强制性对抗性复现 + 决策/主张台账(`05_DISCOVERY_LAB/00_GOVERNANCE/`) | 语义化版本管理、开放数据/代码、外部评审 |
 | 🥉 | **B —— 公理** | 35% | 🟡 有希望 | 证明桥接在不针对各扇区分别调参的情况下保持对称性/守恒律 |
 | 4 | **E —— 黎曼** | 30% | 🟡 探索性——自 2026 年 7 月起,`RH-REAL` 调查的全部 12 项内容均已最终处置;2 项复现的发现(反聚集;GUE 标度),均未涉及黎曼假设本身 | 一个自伴算子,其谱能实现这些零点,并具备完整的误差控制 |
@@ -185,7 +185,7 @@ flowchart LR
 | 15 | **O —— 推测性宇宙学** | 10% | ⚪ | 在给出任何可观测量之前,先要有一个自洽的协变解 |
 | 16 | **N —— 千禧年** | 5% | 🔴——无解答;本研究线永久性地不在"解决声明"的范围之内 | 针对原始问题的一个完整、可验证的定理,而非受限的启发式论证 |
 
-**本表不应如何使用。** "85%"并不意味着 `U₁/₂` 类正确的概率是 85%,也不意味着研究线 D 已接近完成——它的含义是,在该特定问题中明确指明的各项缺口中,大多数已经被证明或精确地表征。如果评判标准是"当前研究精力应投向何处",答案正是目前已经在指导本实验室的那个答案:大部分可用的研究能力都投向了 `D —— U₁/₂`,并精确地分配在目前正在进行的两条战线之间——解决 M-CLUST 残差问题,以及移除一般 `K` 的正则性附加条件。
+**本表不应如何使用。** "90%"并不意味着 `U₁/₂` 类正确的概率是 90%,也不意味着研究线 D 已接近完成——它的含义是,在该特定问题中明确指明的各项缺口中,大多数已经被证明或精确地表征。作为主研究线最后一项被明确指出的缺口,一般 `K` 的正则性附加条件已于 2026-08-22 闭合(`DISC-DEC-040`);`D —— U₁/₂` 上剩余的研究能力,现已转向独立的 M-CLUST(b) 残差问题(仍处于 `PARTIALLY CLOSED` 状态),以及上文所列真正尚待解决的非核心问题。
 
 ## 一个可验证的研究周期
 

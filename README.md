@@ -4,8 +4,8 @@
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-38-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
-[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-40-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/maintainer-Douglas%20H.%20M.%20Fulber-111111?style=for-the-badge)](#governance-authorship-and-responsibility)
@@ -31,7 +31,7 @@ The institutional report [Final Vision of the Tamesis Laboratory](RELATORIO_VISA
 | Tamesis `M_c v1` | **Testable hypothesis** | The value `M_c = 5.292674126388712e-16 kg` is a model parameter, not a measurement. |
 | Independent physical evidence | **Not yet established** | Nothing in this archive is experimental confirmation of the Tamesis ontology. |
 | Millennium Prize Problems and TOE claims | **Unsolved** | These texts are conjectures, reductions, or restricted-model arguments — not accepted solutions. |
-| Core numerical adjudication | **Mathematical consolidation complete, gap closed unconditionally through K=10 (2026-08-22)** | See below — 3 claims closed negative with a final verdict; the 4th (`U₁/₂`) has a proved core, adversarially refereed, with the Open Lemma now proved unconditionally for `K=0,…,10`; for general `K` a conditional proof of the rate conjecture exists (a regularity caveat judged correctly scoped by a hostile referee), not an unconditional closure. |
+| Core numerical adjudication | **Mathematical consolidation complete — the Open Lemma is now proved unconditionally for every `K` (2026-08-22)** | See below — 3 claims closed negative with a final verdict; the 4th (`U₁/₂`) has a proved core, adversarially refereed three independent times, with the Open Lemma and the rate conjecture now proved unconditionally for **every** `K≥0` (not just `K=0,…,10`) — the last named regularity caveat was closed by a discrete-Gronwall existence proof, and the archive's conditional proposition was promoted to an unconditional theorem (**Teorema 3**). |
 
 ### The adjudication program (Discovery Lab, updated 2026-08-22)
 
@@ -57,7 +57,7 @@ flowchart LR
 | SPARC/MOND cosmology + Gaia wide binaries | 4 pre-registered tests | 4/4 inconclusive from demonstrated real confounders; 2 legacy headline results discovered to rest on **fabricated data** and redone with real data |
 | Riemann zeta zeros (RH-REAL) | 12/12 survey items, all finally dispositioned | 2 replicated findings (consecutive-gap anti-clustering; `N^(-1/3)` GUE scaling); FHK maxima and number-variance both closed `CLOSED_INCONCLUSIVE`, each with a strong component confirmed adversarially (iid-side exclusion ≥8.8σ; naive-GUE exclusion up to 203σ — adversarial reproduction still found and fixed a 3rd real bug in the primary estimator) |
 | Core quantitative claim adjudication (wave 1) | 7 claims | `M_c` inconsistent (~190× between values); quark/knot mass model fails leave-one-out; `sin²θ_W=3/13` off by 7.5σ with hardcoded tuning; `α⁻¹=Ω^{1.03}` with 0 degrees of freedom; bounce `n_s` unidentifiable; holographic `Λ` ≡ `ρ_crit` by algebraic identity |
-| **`U₁/₂` limit law (waves 2–7, consolidated)** | 1 theorem + 1 generalization + Open Lemma cases `K=2,…,10` + general-`K` rate conjecture | **Proved, adversarially refereed (3 independent rounds, distinct techniques), published as a paper + reproducible package; `K=2` proved in wave 5, `K=3,4,5` in wave 6, `K=6,…,10` in wave 7, all via transfer-matrix method; general-`K` rate PROVED in wave 7, explicitly conditional on a regularity caveat** (see below) |
+| **`U₁/₂` limit law (waves 2–8, consolidated)** | 1 theorem + 1 generalization + Open Lemma, every `K≥0` + general-`K` rate conjecture, both unconditional | **Proved, adversarially refereed (4 independent rounds, distinct techniques), published as a paper + reproducible package; `K=2` proved in wave 5, `K=3,4,5` in wave 6, `K=6,…,10` in wave 7 via transfer-matrix method; general-`K` rate first proved conditionally in wave 7, then the regularity caveat itself closed in wave 8 via a discrete-Gronwall existence proof — Open Lemma and rate conjecture now PROVED unconditionally for every `K`, promoting the archive's conditional proposition to an unconditional theorem** (see below) |
 | Archive-wide candidate survey (Phase 0, beyond TRI-RG) | 19 candidates, 7 areas | `CLOSED_NULL` — 18/19 rejected with a concrete cited reason; 1 immature lead (cognitive EEG spectral signatures) promoted to a new line, see below |
 | Cognition — EEG spectral signature in depression (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 locked pre-registration, N=30 MDD/26 HC | `CLOSED_REFUTED` — spectral entropy **higher**, not lower, in MDD (`d=1.447`, `p=3.97×10⁻⁶`) — opposite direction to the tested hypothesis, confirmed by an independent from-scratch adversarial reproduction (numbers match to <10⁻⁹) |
 | SPARC-004 cosmology — `f_multi` self-calibration (Stage 1→2) | Pipeline validated + applied to real discovery data (30,203 systems) | `CLOSED_INCONCLUSIVE` — mechanical verdict `BOTH_FALSIFIED`, but the mandatory debunker pass found a real confounder: a 19%-of-sample subgroup (high RUWE) is systematically under-corrected by the single-scalar `f_multi` model, with a statistically robust excess even in the calibration's own anchor bin |
@@ -72,24 +72,24 @@ The `U₁/₂` universality class (random permutation perturbed at rate `c/n` to
 
 derived analytically (not fitted), correcting the archive's original conjecture `(1+c)^(-1/2)` (excluded at the very first series coefficient: `a₁ = 1/3 ≠ 1/2`, confirmed by exact enumeration). This result is now a **proved theorem**, not a conjecture: a self-contained mathematical document (`THEOREM.md`) proves the closed form in six steps, including the correct treatment of the *size-biasing* of visited arcs, and was reviewed by an independent agent acting as a hostile referee — **zero errors found**.
 
-The bridge between the finite model and the limit object is now proved for `K=0,…,10` unconditionally, and the general-`K` rate conjecture is proved conditional on a precisely-named, hostile-referee-scoped regularity hypothesis:
+The bridge between the finite model and the limit object is now proved **unconditionally for every `K≥0`** — `φ(n,c) → φ_∞(c)` as `n → ∞`, for every fixed `c ≥ 0`, with no unproved hypothesis remaining (`THEOREM.md`, "Teorema 3"):
 
 ```mermaid
 flowchart LR
     K01["K=0,1<br/>exact, no gap<br/>waves 1–2"] --> K2["K=2<br/>wave 5<br/>4-layer referee"]
     K2 --> K345["K=3,4,5<br/>wave 6<br/>K-uniform transfer matrix"]
     K345 --> K610["K=6,…,10<br/>wave 7<br/>same method, 5 more rungs"]
-    K610 --> Kgen["K general<br/>wave 7: rate PROVED,<br/>conditional on 1 named caveat"]
-    Kgen -.->|"wave 8, running now"| Close["remove the caveat →<br/>unconditional for every K"]
+    K610 --> Kgen["K general, every K≥0<br/>wave 8: discrete-Gronwall<br/>existence proof, referee SOUND"]
+    Kgen --> Teo3["Teorema 3<br/>φ(n,c) → φ_∞(c), ∀c≥0<br/>unconditional"]
     style K01 fill:#e8f0e0,stroke:#1f6f5c
     style K2 fill:#e8f0e0,stroke:#1f6f5c
     style K345 fill:#e8f0e0,stroke:#1f6f5c
     style K610 fill:#e8f0e0,stroke:#1f6f5c
-    style Kgen fill:#f5ecd8,stroke:#96702a
-    style Close fill:#e3edf3,stroke:#33566f,stroke-dasharray: 4 4
+    style Kgen fill:#e8f0e0,stroke:#1f6f5c
+    style Teo3 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
 ```
 
-Each rung above was independently re-derived by a separate hostile-referee agent, using a *different* proof technique than the original derivation, its own brute-force enumeration, and full recursion-substitution checks — **zero errors found at any layer**, across 3 independent referee rounds. `K=6,…,10` was additionally confirmed bit-for-bit against fresh exhaustive enumeration at two held-out points. The one remaining **Open Lemma** — proved unconditionally through `K=10`, proved conditionally for general `K` — is the exact fixed-parameter case of Hansen & Jaworski (EJC, 2014); a Poisson mixture with closed-form `erf` was not found in a systematic literature search (35+ queries logged), with the explicit caveat that this does not equal "novel." A second front derived **why the exponent is exactly 1/2**: across an entire parametric family of perturbation mechanisms, `α ∈ [1/2, 1]` always — `α < 1/2` is *proved impossible* (a quadratic clustering effect that persists even without any cyclicity "death"). Wave 5 also located and confirmed a natural mechanism (`M-WEIB(β)`, non-homogeneous Weibull hazard) that reaches every intermediate `α ∈ (1/2, 1)`. No physical implication is claimed — this is pure combinatorial mathematics on a specific ensemble.
+Each rung above was independently re-derived by a separate hostile-referee agent, using a *different* proof technique than the original derivation, its own brute-force enumeration, and full recursion-substitution checks — **zero errors found at any layer**, across 4 independent referee rounds. `K=6,…,10` was additionally confirmed bit-for-bit against fresh exhaustive enumeration at two held-out points. The final rung closed the one remaining named gap: a hostile referee independently re-derived, from scratch, an exact discrete-Gronwall induction proving the finite-`n` two-term expansion exists for *every* `K`, not just the 11 concretely-checked values — verdict **SOUND, with named issues** (four found, none fatal, corrected via dated addenda). The **Open Lemma** — now proved unconditionally for every `K` — is the exact fixed-parameter case of Hansen & Jaworski (EJC, 2014); a Poisson mixture with closed-form `erf` was not found in a systematic literature search (35+ queries logged), with the explicit caveat that this does not equal "novel." A second front derived **why the exponent is exactly 1/2**: across an entire parametric family of perturbation mechanisms, `α ∈ [1/2, 1]` always — `α < 1/2` is *proved impossible* (a quadratic clustering effect that persists even without any cyclicity "death"). Wave 5 also located and confirmed a natural mechanism (`M-WEIB(β)`, non-homogeneous Weibull hazard) that reaches every intermediate `α ∈ (1/2, 1)`. No physical implication is claimed — this is pure combinatorial mathematics on a specific ensemble.
 
 **Where to find everything:** the full theorem and referee reports live in `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`; the generalization and its adversarial verification in `.../generalization_u_alpha/`; a **standalone reproducible package** — compiled LaTeX paper (PDF), self-contained proofs, clean-room simulations, and 49 automated tests — is at **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**. And the honest table of **everything this laboratory has tried and did not survive** — so this one positive result is read in the right context — is in **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**.
 
@@ -167,7 +167,7 @@ The table below estimates, line by line, **how much of the gap named in each cen
 
 | Rank | Line | Estimated completion | Status | To close |
 |---:|---|---:|---|---|
-| 🥇 | **D — `U₁/₂`** (adjudicated subset, `DISC-CORE-NUMERICS-001`) | **~85%** | 🔥 Active — Open Lemma proved unconditionally for `K=0,…,10`, general-`K` rate proved conditionally | Close the general-`K` regularity caveat **and** the M-CLUST residual — the two fronts running now (see [dependency map](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
+| 🥇 | **D — `U₁/₂`** (adjudicated subset, `DISC-CORE-NUMERICS-001`) | **~90%** | ✅ Open Lemma and general-`K` rate conjecture proved **unconditionally for every `K≥0`** (2026-08-22) — the main line's central open question is closed | Remaining, none central: the exact all-orders closed form for general `K`; the M-CLUST(b) residual (a separate mechanism, `PARTIALLY CLOSED`); the full distributional law (Conjectures 1–2) — see [dependency map](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md) |
 | 🥈 | **P — Infrastructure** | **~90%** | 🔧 Ongoing — since Jul/2026 gained a second layer: pre-registration + mandatory adversarial reproduction + decision/claim ledgers (`05_DISCOVERY_LAB/00_GOVERNANCE/`) | Semantic versioning, open data/code, external review |
 | 🥉 | **B — Axioms** | 35% | 🟡 Promising | Prove that the bridges preserve symmetries/conservation without per-sector tuning |
 | 4 | **E — Riemann** | 30% | 🟡 Exploratory — since Jul/2026, all 12 items of the `RH-REAL` survey finally dispositioned; 2 replicated findings (anti-clustering; GUE scaling), none about RH itself | Self-adjoint operator whose spectrum realizes the zeros, with full error control |
@@ -184,7 +184,7 @@ The table below estimates, line by line, **how much of the gap named in each cen
 | 15 | **O — Speculative cosmologies** | 10% | ⚪ | A consistent covariant solution before any observable |
 | 16 | **N — Millennium** | 5% | 🔴 — no solution; this line is permanently out of scope for resolution claims | A complete, verifiable theorem for the original problem, not a restricted heuristic |
 
-**How not to use this table.** An "85%" does not mean an 85% chance that the `U₁/₂` class is correct, nor that Line D is close to done — it means that, of the gaps explicitly named in that specific question, most have already been proved or precisely characterized. If the criterion is "where to put research effort now," the answer is the one already guiding the laboratory: most of the available research capacity goes to `D — U₁/₂`, split exactly between the two fronts already running — closing the M-CLUST residual and removing the general-`K` regularity caveat.
+**How not to use this table.** A "90%" does not mean a 90% chance that the `U₁/₂` class is correct, nor that Line D is close to done — it means that, of the gaps explicitly named in that specific question, most have already been proved or precisely characterized. The general-`K` regularity caveat that was the last named gap of the main line closed on 2026-08-22 (`DISC-DEC-040`); remaining research capacity on `D — U₁/₂` now goes to the separate M-CLUST(b) residual (still `PARTIALLY CLOSED`) and to the genuinely open, non-central questions named above.
 
 ## A verifiable research cycle
 

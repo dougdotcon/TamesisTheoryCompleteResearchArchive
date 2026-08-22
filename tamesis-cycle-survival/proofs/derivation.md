@@ -7,6 +7,27 @@ argument in full so the package does not depend on the archive to be
 read. Status labels (PROVED / CONJECTURED / CITED / OPEN) are preserved
 exactly as in the source — nothing here is upgraded or softened.
 
+> **Addendum, 2026-08-22.** §6 and §7 below originally described the
+> general-`K` rate identity and the fixed-`K` bridge for `K≥11` as
+> resting on one precisely-named, unproved regularity hypothesis (the
+> *existence*, for `r` beyond the eleven concretely-checked `K=0,…,10`,
+> of the two-term asymptotic expansion `g_r(m,b)=F_r(t,b)+\frac1nG_r(t,b)
+> +O(1/n^2)`). That hypothesis has since been proved unconditionally, for
+> every `r≥0`, by a discrete-Gronwall induction directly on the
+> already-proved exact discrete recursion, independently verified by a
+> hostile adversarial referee (verdict: SOUND — WITH NAMED ISSUES, four
+> issues, none fatal, two corrected via dated addenda in the source).
+> §6 and §7 are updated below to state the new unconditional status
+> precisely, each via a dated note placed immediately after the original
+> conditional text (preserved, not deleted) — following the same
+> discipline the closing proof itself uses. Sources:
+> `k_general_existence_attempt/ATTEMPT.md` and its
+> `adversarial/REFEREE_REPORT.md`, both under
+> `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/`;
+> authoritative integrated statement: `THEOREM.md`'s "[Extensão, Estágio
+> 6 — 2026-08-22]" section. See `README.md`'s Status section for the
+> package-level summary.
+
 ## Contents
 
 1. The model
@@ -392,6 +413,34 @@ taken as given. The separate question is whether the *finite* model
   (archive record: same `k6_attempt/ATTEMPT.md` §2–§4, and
   `k6_attempt/adversarial/REFEREE_REPORT.md`).
 
+  > **[Addendum, 2026-08-22 — the caveat above is CLOSED.]** The
+  > regularity hypothesis this paragraph names — existence of the
+  > two-term expansion for every `r`, not just `K=0,…,10` — is now
+  > **PROVED**, unconditionally, for every `r≥0`: a discrete-Gronwall
+  > induction on `r`, applied directly to the exact discrete recursion
+  > (not an assumption, not a check at more concrete `K`), shows the
+  > residual `R_r(m,b,n):=g_r(m,b)-F_r(t,b)-\frac1nG_r(t,b)` is bounded
+  > by an explicit `D_r(b)/n^2`, uniformly over the entire domain of `m`
+  > including the recursion's own base-case boundary. Consequently **the
+  > general-`K` rate identity `lim_n n(ψ_n^{(K)}-φ_K)=Kφ_K/4` above is
+  > now PROVED for every `K≥0`, with no hypothesis** — not merely
+  > "correctly scoped as a conditional claim," as the referee quoted
+  > above judged it, but no longer conditional at all. Independently
+  > re-verified by a second, dedicated hostile referee (own simulator,
+  > own closed forms, 477+309 exact identity checks, symbolic
+  > verification of the underlying ODEs for fully symbolic `r,k,b`, fresh
+  > probes at `r=6,7,9,10` and `n` up to `10^6` never touched by the
+  > original proof); verdict **SOUND — WITH NAMED ISSUES** (four issues,
+  > none fatal, two requiring correction — an exponent typo in the
+  > bound's written justification, and a downstream `Θ(1/n)` overclaim at
+  > `K=1` in the parent document, both corrected via dated addenda in the
+  > source, not silently). Archive record:
+  > `k_general_existence_attempt/ATTEMPT.md` and
+  > `k_general_existence_attempt/adversarial/REFEREE_REPORT.md`. The text
+  > above is left as originally written — the caveat it names was real
+  > and correctly scoped at the time — this note records that it no
+  > longer applies.
+
 **The exact open gap, narrowed further.** For `K ≥ 11`, `φ_n^{(K)} → φ_K`
 (the "fixed-`K` bridge," i.e. the Open Lemma itself) is **neither proved
 nor disproved unconditionally**. A finite limit `lim_n n(ψ_n^{(K)}-φ_K)`
@@ -410,6 +459,36 @@ exact, all-orders, general-`K` finite-`n` closed form for `ψ_n^{(K)}`
 (of which the two-order continuum expansion is only a truncation) is
 not attempted at all.
 
+> **[Addendum, 2026-08-22 — CLOSED for every `K≥0`, including `K≥11`.]**
+> The regularity hypothesis named in the paragraph above is now proved
+> unconditionally (see the addendum after §6's rate discussion, above).
+> Since `lim_n n(ψ_n^{(K)}-φ_K)=Kφ_K/4` is now proved with no hypothesis
+> for every `K`, and a finite limit of `n(ψ_n^{(K)}-φ_K)` elementarily
+> forces `ψ_n^{(K)}-φ_K→0`, the Open Lemma `φ_n^{(K)}→φ_K` is now
+> **PROVED, unconditionally, for every `K≥0`** — not merely
+> conditionally discharged as the paragraph above describes. The exact,
+> all-orders, general-`K` finite-`n` closed form for `ψ_n^{(K)}` remains
+> exactly as open as stated above; this closure does not touch it.
+>
+> A related, separately-derived, now-unconditional fact goes further
+> than the bare rate `Kφ_K/4` for `ψ_n^{(K)}`: combining the closure
+> above with the (already unconditionally proved, every `K`) reduction
+> lemma of §6 gives an **exact** formula for the `1/n` coefficient of
+> `φ_n^{(K)}-φ_K` itself (not just `ψ_n^{(K)}-φ_K`), for every `K≥1`:
+> `φ_n^{(K)}-φ_K = K[φ_K/4 + F_{K-1}(1,1) - φ_K]/n + O(1/n²)`. This
+> coefficient is **exactly zero at `K=1`** (consistent with `φ_n^{(1)}`'s
+> already-proved `Θ(1/n²)` rate above, Proposition/Lemma "`K=1`"), and
+> **verified strictly positive for `2≤K≤12`** (reproducing the
+> already-known `1/30` at `K=2` and `1/14` at `K=3` from the exact
+> closed forms above, and `1093/6006` at `K=6`). Whether it is
+> positive — hence the rate exactly `Θ(1/n)`, not merely the proved
+> `O(1/n)` — for **every** `K≥2`, including `K≥13`, is **not proved**;
+> this is a narrower, separate open question, unaffected by the closure
+> above, and should not be conflated with it. Do not read the closure of
+> the Open Lemma/rate above as establishing `Θ(1/n)` for all `K≥2`; only
+> the exact coefficient formula and the `O(1/n)` bound are unconditional
+> for every `K`.
+
 Consequently: the full statement "`φ(n,c) → φ_∞(c)` for every `c`" is a
 **conditional proposition** — it follows from the (unconditionally
 proved) mixing reduction *given* the open `K≥11` bridge lemma (narrowed
@@ -418,6 +497,19 @@ a theorem in its own right. The empirical control that exists (exact
 enumeration to small `n`, Monte Carlo to large `n`, both reproduced in
 `simulations/`) is evidence for this conditional statement, not a proof
 of it.
+
+> **[Addendum, 2026-08-22.]** The `K≥11` bridge lemma this paragraph
+> makes conditional on is now proved unconditionally (addendum above),
+> so **the full statement "`φ(n,c) → φ_∞(c)` for every `c≥0`" is now a
+> THEOREM, not a conditional proposition** — the archive records this as
+> "Teorema 3" (promoted from "Proposição Condicional 5"), with no
+> unproved hypothesis remaining. The empirical control listed above
+> (exact enumeration, Monte Carlo) now corroborates a proved theorem
+> rather than standing in as evidence for an open conditional statement.
+> Not claimed here: a locally-uniform-in-`c` version of this convergence
+> (pointwise in `c` only, exactly as the original statement was), and
+> the exact all-orders closed form for `ψ_n^{(K)}` — both remain open,
+> untouched by this closure.
 
 ---
 
@@ -433,32 +525,45 @@ of it.
    mean is conjectural.
 
 3. ~~General-`K` rate of the fixed-`K` bridge~~ — **no longer a
-   conjecture.** `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` (§6) is
-   **PROVED, unconditionally**, for `K=0,…,10` (eleven independently
-   derived closed forms), and **PROVED for every `K`, conditional on** the
+   conjecture, and, as of 2026-08-22, no longer conditional either.**
+   `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` (§6) was **PROVED,
+   unconditionally**, for `K=0,…,10` (eleven independently derived
+   closed forms), and **PROVED for every `K`, conditional on** the
    regularity hypothesis named in §6 (existence of a two-term asymptotic
-   expansion, for `K` beyond those eleven values). It is retained here
+   expansion, for `K` beyond those eleven values). ~~It is retained here
    only to record that it is *not* fully unconditional for general `K` —
    the caveat is real, precisely named, and adversarially judged
    correctly scoped, but it is a hypothesis, not a proof from first
    principles, so this item is not promoted to §§1–6's PROVED tier
-   without qualification.
+   without qualification.~~ **[Addendum, 2026-08-22.] That hypothesis is
+   now proved (see §6's addenda above), so this item *is* now promoted:
+   `lim_{n→∞} n(ψ_n^{(K)} − φ_K) = (K/4)·φ_K` is PROVED, unconditionally,
+   for every `K≥0`, with no remaining hypothesis.** (Preserved above,
+   struck through, exactly as originally written — the caveat was real
+   when this item was written, not overcautious.)
 
 Neither density conjecture above (1–2) is used anywhere above as though
 it were proved; both are numerically supported (Kolmogorov–Smirnov
-tests, no rejection) and neither is claimed as established. The general
-rate conjecture (3) is likewise never treated as fully unconditional
-beyond the eleven values it was actually verified at without hypothesis.
-The `K≥11` fixed-`K` bridge (§6, the Open Lemma itself) is a distinct,
+tests, no rejection) and neither is claimed as established, and neither
+is affected by item 3's 2026-08-22 closure (they are distributional
+claims, unrelated to the mean/rate results above). Item 3's general rate
+identity is, as of 2026-08-22, unconditional for every `K` (see above) —
+it is retained numbered as it originally was, rather than merged
+upward into §§1–6, purely to keep this list's history legible; its
+current status is PROVED, not conjectural or conditional.
+The `K≥11` fixed-`K` bridge (§6, the Open Lemma itself) was a distinct,
 fourth kind of open item — a convergence statement between two
 well-defined finite/infinite objects, not a guessed closed form or a
-guessed asymptotic coefficient — and is not counted among Conjectures
-1–3 for that reason; it shares item 3's conditional proof route in
+guessed asymptotic coefficient — and was not counted among Conjectures
+1–3 for that reason; ~~it shares item 3's conditional proof route in
 full, not just for the rate: a finite limit of `n(ψ_n^{(K)}-φ_K)`
 elementarily forces `ψ_n^{(K)}→φ_K`, so item 3's conditional rate proof
 already conditionally discharges the bare convergence too, on the
 identical hypothesis — it is only the *unconditional* resolution that
-remains missing, for the bridge exactly as much as for the rate. (Note: this is
+remains missing, for the bridge exactly as much as for the rate.~~
+**[Addendum, 2026-08-22.] It now shares item 3's unconditional status
+in full: the Open Lemma `φ_n^{(K)}→φ_K` is PROVED, unconditionally, for
+every `K≥0` — see §6's addenda above.** (Note: this is
 unrelated to the general-`K` density Conjecture 1 above, which remains
 open for every `K≥2` — the `K=2,…,10` results resolved in §6 are about
 the *mean* `φ_n^{(K)}→φ_K`, not about the full distributional law

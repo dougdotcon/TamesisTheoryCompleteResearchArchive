@@ -23,17 +23,49 @@ Author: Douglas H. M. Fulber.
 
 ## Status (read this before citing anything as "proved")
 
-This package separates four tiers, matching the archive's theorem
-document:
+> **Addendum, 2026-08-22 — the tier-2/tier-3 regularity caveat is now
+> CLOSED; nothing below is silently rewritten.** The three tiers below
+> were originally written (through the package's Stage-5 extension) with
+> tier 1 unconditional through `K=0,…,10` only, tier 2 conditional on a
+> named regularity hypothesis for general `K`, and tier 3 conditional on
+> tier 2's hypothesis via an open lemma for `K≥11`. That hypothesis — the
+> *existence*, for every `r≥0` (not just the eleven concretely-checked
+> `K=0,…,10`), of the two-term asymptotic expansion
+> `g_r(m,b)=F_r(t,b)+\frac1nG_r(t,b)+O(1/n^2)` the general-`K` proof
+> assumed — has now been proved unconditionally, by a discrete-Gronwall
+> induction on `r` applied directly to the already-proved exact discrete
+> recursion (no assumption, no self-consistency check at more concrete
+> `K` — a genuine first-principles existence proof). It was independently
+> re-derived from scratch and stress-tested by a dedicated hostile
+> referee (own simulator, own closed forms, thousands of exact checks,
+> probe points the original proof never touched, up to `n=10^6`);
+> verdict **SOUND — WITH NAMED ISSUES** (four issues found, none fatal;
+> two required correction and were fixed via dated addenda in the source
+> document itself, following the same discipline used here). As a
+> direct consequence, **tiers 2 and 3 below are now both PROVED,
+> unconditionally, and are folded into tier 1** — the original
+> conditional text is preserved beneath, struck through, exactly as
+> published, so the reasoning for why it was written conditionally
+> remains on record. Sources: `k_general_existence_attempt/ATTEMPT.md`
+> (the proof) and its `adversarial/REFEREE_REPORT.md` (the verification),
+> both under
+> `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/`;
+> the authoritative integrated statement is `THEOREM.md`'s
+> "[Extensão, Estágio 6 — 2026-08-22]" section (Portuguese).
 
-1. **PROVED**, self-contained: the closed form on the limit object
-   `L(c)` (Theorem 1), its series and tail asymptotic (Corollaries 4.1,
-   4.2), the conditional-`K` mean for every `K` (Wallis integral), the
-   `K=1` conditional density, and — on the finite-`n` side — the exact
-   `K=0` through `K=10` bridge cases (exact rates `1/(3n²)` at `K=1` and
-   `Θ(1/n)` at `K=2,…,10` — *not* the `Θ(1/n²)` the `K=0,1` pattern alone
-   would suggest), the general-`K` rate identity `lim n(ψ_n^{(K)}−φ_K) =
-   Kφ_K/4` confirmed unconditionally at all eleven of `K=0,…,10`, plus an
+This package originally separated four tiers; as of 2026-08-22, tiers 2
+and 3 are closed and their content is merged into tier 1 (see the
+addendum above for exactly what changed and why) — they are kept below,
+struck through, as items 2 and 3, purely as a historical record, so only
+tiers 1 and 4 carry live status going forward:
+
+1. **PROVED**, unconditional, self-contained: the closed form on the
+   limit object `L(c)` (Theorem 1), its series and tail asymptotic
+   (Corollaries 4.1, 4.2), the conditional-`K` mean for every `K`
+   (Wallis integral), the `K=1` conditional density, and — on the
+   finite-`n` side — the exact `K=0` through `K=10` bridge cases (exact
+   rates `1/(3n²)` at `K=1` and `Θ(1/n)` at `K=2,…,10` — *not* the
+   `Θ(1/n²)` the `K=0,1` pattern alone would suggest), plus an
    unconditional, fully `K`-general reduction lemma. `K=1,2` are proved
    by hand case-analysis; `K=3,…,10` are proved by a completely
    different, later technique — a `K`-uniform transfer-matrix/Markov-chain
@@ -43,44 +75,76 @@ document:
    several layers (own re-derivation by a different solving technique,
    own brute force including fresh `n=9` and, at `K=6`, `n=7`/`n=8` data
    points, own scripts re-run from scratch) with zero errors found.
-2. **PROVED, conditional on one precisely-named regularity hypothesis**:
-   the general-`K` rate `lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4` holds for
-   *every* `K`, not just `K=0,…,10`, by a new continuum scaling-limit
-   technique (take the `n→∞` limit of the same discrete Markov chain
-   *before* solving it in `r`, turning the exact recursion into a linear
-   ODE with `r` as a free symbolic parameter). This produces closed forms
-   `F_r(t,b)` (leading order) and `G_r(t,b)` (`O(1/n)` correction),
-   proved by exact symbolic identities, general `r,k,b` — but the
-   derivation is conditional on the *existence* of the assumed two-term
-   asymptotic expansion, for `K` beyond the eleven concretely-verified
-   values (`K=0,…,10`); that existence question is not independently
-   proved from first principles here. A hostile adversarial referee
-   re-derived every algebraic step by hand (both ODEs, both closed
-   forms, the underlying binomial-sum identity) with zero errors, tested
-   `F_r`/`G_r` against 45 new exact data points at `t≠1` (zero
-   discrepancies), and, asked explicitly to judge the caveat's scope,
-   concluded it is **correctly scoped — neither too optimistic nor too
-   conservative**.
-3. **CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every `c`"
-   follows from the reduction lemma of tier 1 *only if* an explicitly
-   stated open lemma holds for every `K ≥ 11` (the finite-`n` bridge at
-   fixed `K≥11`; narrowed from `K≥6` once `K=6,…,10` were proved — see
-   below). That lemma — the bare convergence `φ_n^{(K)}→φ_K`, as distinct
-   from its rate — is neither proved nor disproved *unconditionally*
-   here. A finite limit of `n(ψ_n^{(K)}−φ_K)` elementarily forces
-   `ψ_n^{(K)}→φ_K`, so tier 2's conditional proof of the rate already
-   conditionally discharges this bridge too, on the identical
-   hypothesis — it shares tier 2's exact status (proved conditionally,
-   open unconditionally), not a weaker one. Naming a proof route for the
-   rate does **not** make `K≥11` essentially solved — the hypothesis
-   itself remains genuinely open for the bridge exactly as much as for
-   the rate.
+   **As of 2026-08-22 (see addendum above), also unconditional and
+   folded in here:** the general-`K` rate identity
+   `lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4`, now **PROVED for every `K≥0`**, not
+   just the eleven concretely-verified values (which remain, as before,
+   independently confirmed by direct substitution into each of the
+   eleven closed forms, not merely a corollary of the general proof);
+   the general-`K` Open Lemma `φ_n^{(K)}→φ_K`, now **PROVED for every
+   `K≥0`**, closing the bridge for `K≥11` that tier 3 (below) used to
+   leave open; and, as an immediate consequence via the mixing reduction,
+   the full statement **`φ(n,c) → φ_∞(c)` for every fixed `c≥0`, now
+   PROVED unconditionally** (this is exactly the statement tier 3 below
+   used to carry as conditional — see the archive's promotion of
+   "Proposição Condicional 5" to "Teorema 3"). A separate, corrected,
+   now-unconditional exact formula also exists for the `1/n` coefficient
+   of `φ_n^{(K)}-φ_K` for every `K≥1`:
+   `K[φ_K/4 + F_{K-1}(1,1) - φ_K]/n + O(1/n²)` — exactly zero at `K=1`
+   (consistent with its known `Θ(1/n²)` rate) and verified strictly
+   positive for `2≤K≤12` (reproducing the already-known `1/30` at `K=2`,
+   `1/14` at `K=3`, and `1093/6006` at `K=6`), but **not** proved
+   positive for `K≥13` — so `Θ(1/n)` (as opposed to the proved `O(1/n)`)
+   remains unconditional only through `K=12`, an item narrower than, and
+   not resolved by, the closure above.
+2. ~~**PROVED, conditional on one precisely-named regularity
+   hypothesis**: the general-`K` rate `lim n(ψ_n^{(K)}−φ_K) = Kφ_K/4`
+   holds for *every* `K`, not just `K=0,…,10`, by a new continuum
+   scaling-limit technique (take the `n→∞` limit of the same discrete
+   Markov chain *before* solving it in `r`, turning the exact recursion
+   into a linear ODE with `r` as a free symbolic parameter). This
+   produces closed forms `F_r(t,b)` (leading order) and `G_r(t,b)`
+   (`O(1/n)` correction), proved by exact symbolic identities, general
+   `r,k,b` — but the derivation is conditional on the *existence* of the
+   assumed two-term asymptotic expansion, for `K` beyond the eleven
+   concretely-verified values (`K=0,…,10`); that existence question is
+   not independently proved from first principles here. A hostile
+   adversarial referee re-derived every algebraic step by hand (both
+   ODEs, both closed forms, the underlying binomial-sum identity) with
+   zero errors, tested `F_r`/`G_r` against 45 new exact data points at
+   `t≠1` (zero discrepancies), and, asked explicitly to judge the
+   caveat's scope, concluded it is **correctly scoped — neither too
+   optimistic nor too conservative**.~~
+   **[CLOSED, 2026-08-22 — see the addendum at the top of this section.
+   This tier's content is now unconditional and is stated as part of
+   tier 1 above.]** *(Preserved above, struck through, exactly as
+   originally published — this was a genuinely conditional result at
+   the time it was written, correctly labeled as such, and the caveat
+   it carried was real, not overcautious.)*
+3. ~~**CONDITIONAL**: the full statement "`φ(n,c) → φ_∞(c)` for every
+   `c`" follows from the reduction lemma of tier 1 *only if* an
+   explicitly stated open lemma holds for every `K ≥ 11` (the finite-`n`
+   bridge at fixed `K≥11`; narrowed from `K≥6` once `K=6,…,10` were
+   proved — see below). That lemma — the bare convergence
+   `φ_n^{(K)}→φ_K`, as distinct from its rate — is neither proved nor
+   disproved *unconditionally* here. A finite limit of
+   `n(ψ_n^{(K)}−φ_K)` elementarily forces `ψ_n^{(K)}→φ_K`, so tier 2's
+   conditional proof of the rate already conditionally discharges this
+   bridge too, on the identical hypothesis — it shares tier 2's exact
+   status (proved conditionally, open unconditionally), not a weaker
+   one. Naming a proof route for the rate does **not** make `K≥11`
+   essentially solved — the hypothesis itself remains genuinely open for
+   the bridge exactly as much as for the rate.~~
+   **[CLOSED, 2026-08-22 — see the addendum at the top of this section.
+   This tier's content is now unconditional and is stated as part of
+   tier 1 above.]** *(Preserved above, struck through, exactly as
+   originally published, for the same reason as tier 2.)*
 4. **CONJECTURED**, numerically supported (Kolmogorov–Smirnov, no
    rejection) but not proved: the full conditional-`K` cyclic-mass
    *density* for `K≥2` (this is a distributional claim, unrelated to and
-   unaffected by the `K=2..10` bridge/mean results in tier 1 above), and
-   the resulting unconditional distributional law
-   `M(c) =^d min(1, √(E/c))`.
+   unaffected by the `K=2..10` bridge/mean results in tier 1 above, and
+   unaffected by the 2026-08-22 closure above), and the resulting
+   unconditional distributional law `M(c) =^d min(1, √(E/c))`.
 
 No claim in this package is upgraded past its status in `proofs/derivation.md`.
 Full source of record (with the complete, longer proofs and the master
@@ -91,13 +155,26 @@ plus its Stage 3 extension resolving `K=2`
 `adversarial/REFEREE_REPORT.md`), its Stage 4 extension resolving
 `K=3,4,5`
 (`.../theorem/k2_open_lemma/k3_attempt_2/ATTEMPT.md` and
-`.../k3_attempt_2/adversarial/REFEREE_REPORT.md`), and its Stage 5
+`.../k3_attempt_2/adversarial/REFEREE_REPORT.md`), its Stage 5
 extension resolving `K=6,…,10` unconditionally and proving the
 general-`K` rate conditionally
 (`.../theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md` and
-`.../k6_attempt/adversarial/REFEREE_REPORT.md`) — none included in this
-package; this package is meant to stand on its own via
+`.../k6_attempt/adversarial/REFEREE_REPORT.md`), and its Stage 6
+extension (2026-08-22) closing that conditionality unconditionally for
+every `K`
+(`.../k6_attempt/k_general_existence_attempt/ATTEMPT.md` and
+`.../k_general_existence_attempt/adversarial/REFEREE_REPORT.md`) — none
+included in this package; this package is meant to stand on its own via
 `proofs/derivation.md`.
+
+**What remains genuinely open, unaffected by the 2026-08-22 closure:**
+the exact all-orders closed form for `ψ_n^{(K)}` at general `K`; the
+growth rate in `r` of the error constants `D_r(b), C_r(b)` in the new
+existence proof; strict positivity of the `1/n`-coefficient above for
+`K≥13` (item 1 above); a locally-uniform-in-`c` version of the now-proved
+`φ(n,c)→φ_∞(c)` statement; and the full distributional law (tier 4
+above, the general-`K` cyclic-mass density) — none of these was touched
+by this closure.
 
 ## Literature priority
 
@@ -174,6 +251,7 @@ this package's own clean-room implementation.
 
 ## Compiling the paper
 
-`paper/cycle-survival.pdf` is already built (11 pages, `pdflatex` +
-`bibtex`, zero errors, zero undefined references/citations). See
-`paper/COMPILE.md` to rebuild it after editing the `.tex`/`.bib` source.
+`paper/cycle-survival.pdf` is already built (13 pages as of the
+2026-08-22 update, `pdflatex` + `bibtex`, zero errors, zero undefined
+references/citations). See `paper/COMPILE.md` to rebuild it after
+editing the `.tex`/`.bib` source.

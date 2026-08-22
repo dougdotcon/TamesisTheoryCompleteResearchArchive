@@ -12,12 +12,18 @@ math mode inside section-heading bookmarks -- cosmetic, does not affect
 the visible typeset output -- plus one pre-existing overfull `\hbox` in
 the size-biasing remark of \S2 (a few points too wide, present since the
 original build), likewise cosmetic. `cycle-survival.pdf` in this
-directory is that build's output (currently 11 pages, after the update
-adding the $K=6,\dots,10$ bridge results and the conditional general-$K$
-rate theorem, including the corollary that the same conditional proof
-covers the fixed-$K$ bridge itself, not only its rate); auxiliary files
-(`.aux`/`.log`/`.bbl`/etc.) were removed after the build and are not
-tracked.
+directory is that build's output (currently 13 pages, after the
+2026-08-22 update recording that the general-$K$ regularity hypothesis
+(Hypothesis~1) has been proved unconditionally: the general-$K$ rate
+theorem, the $K\ge11$ Open Lemma, and the full bridge
+$\varphi(n,c)\to\varphi_\infty(c)$ statement are all now unconditional,
+recorded via dated `Addendum` environments placed immediately after each
+originally-conditional statement -- the original conditional text is
+preserved verbatim throughout, nothing silently rewritten -- plus two
+new Open Problems items (strict positivity of the rate coefficient for
+`K>=13`; growth rate of the new proof's error constants)); auxiliary
+files (`.aux`/`.log`/`.bbl`/etc.) were removed after the build and are
+not tracked.
 
 ## To compile
 

@@ -1,0 +1,24 @@
+Fresh brute-force run, beyond wave 5's n<=8 range for K=3, run once during this
+attempt via:
+    python3 -c "from psi_bruteforce_ref import psi_n_K; print(psi_n_K(9,3,'generic'))"
+(exhaustive enumeration: 9! * 9^3 = 264,539,520 (pi, U1,U2,U3) combinations, exact
+fractions.Fraction arithmetic throughout)
+
+n=9 K=3 psi_n^(3) = 3385/6804 = 0.49750146972369197   time=448.6s
+
+Closed-form prediction (markov_transfer.psi_closed_form(3) evaluated at n=9):
+    (64*9**3 + 48*9**2 + 25*9 + 6) / (140*9**3) = 50775/102060 = 3385/6804
+    (50775/102060 reduces to 3385/6804 by dividing num/denom by 15)
+
+MATCH: exact (see verify_all.py STEP 3 for the automated re-check; the slow raw
+enumeration itself is not re-run by default in verify_all.py -- pass without
+--skip-slow to redo it, ~7.5 minutes).
+
+This n=9 point was never computed in wave 5 (psi_k3_exploration.log / .py stop at
+n=8, noting "n=9 was not attempted"), so it is a genuinely new, held-out check: the
+closed form derived in this attempt (ATTEMPT.md) predicted this value *before* the
+brute-force run confirmed it (the derivation and the sympy closed-form output at
+n=4..8 were completed and cross-checked first; n=9 was then run purely as an
+additional confirmation, not used in deriving the formula in any way -- unlike
+n=4..8, whose brute-force values were already public knowledge from wave 5's own
+psi_k3_exploration.log before this attempt began).

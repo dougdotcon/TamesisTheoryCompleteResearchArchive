@@ -1,0 +1,50 @@
+======================================================================
+PART A: verify the integrating factor identity P(m) = 1/C(m,j)
+======================================================================
+P(m) computed via sympy.Product, doit(): factorial(-b + m - r_val - 1)/RisingFactorial(b + r_val + 2, -b + m - r_val - 1)
+claimed 1/C(m,j): 1/binomial(m, b + r_val + 1)
+difference simplifies to: 0  -> IDENTITY HOLDS: True
+
+======================================================================
+PART B: build K=3 ladder independently, then verify EACH closed form
+        satisfies the ORIGINAL recursion (typed fresh, not imported)
+======================================================================
+g1(m,b) = (b*n + m + 3*n + 1)/(n*(b + 2)*(b + 3))
+g2(m,b) = (b**2*n**2 + 2*b*m*n + 9*b*n**2 + 2*b*n + 2*m**2 + 10*m*n + 6*m + 20*n**2 + 10*n + 4)/(n**2*(b + 3)*(b + 4)*(b + 5))
+g3(m,b) = (b**3*n**3 + 3*b**2*m*n**2 + 18*b**2*n**3 + 3*b**2*n**2 + 6*b*m**2*n + 39*b*m*n**2 + 18*b*m*n + 107*b*n**3 + 39*b*n**2 + 12*b*n + 6*m**3 + 42*m**2*n + 36*m**2 + 126*m*n**2 + 126*m*n + 66*m + 210*n**3 + 126*n**2 + 84*n + 36)/(n**3*(b + 4)*(b + 5)*(b + 6)*(b + 7))
+
+--- Verifying each closed form satisfies its DEFINING recursion (fresh check) ---
+g0 recursion (r=0, trivial: no h term): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+h0 recursion (r=0): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+g1 recursion (r=1): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+h1 recursion (r=1): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+g2 recursion (r=2): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+h2 recursion (r=2): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+g3 recursion (r=3): LHS-RHS simplifies to 0  -> RECURSION HOLDS: True
+
+ALL RECURSION CHECKS PASS: True
+
+======================================================================
+PART C: cross-check final psi_n^(3), psi_n^(3),R against ATTEMPT.md's claims
+======================================================================
+psi_n^(3)  (my independent derivation) = (64*n**3 + 48*n**2 + 25*n + 6)/(140*n**3)
+target from ATTEMPT.md                = (64*n**3 + 48*n**2 + 25*n + 6)/(140*n**3)
+difference: 0   MATCH: True
+
+psi_n^(3),R (my independent derivation) = (22*n**3 + 39*n**2 + 23*n + 6)/(60*n**3)
+target from ATTEMPT.md                 = (22*n**3 + 39*n**2 + 23*n + 6)/(60*n**3)
+difference: 0   MATCH: True
+
+phi_n^(3) via Lemma A (my independent recombination) = (32*n**4 + 5*n**3 + 77*n**2 + 46*n + 12)/(70*n**4)
+target from ATTEMPT.md                                = (32*n**4 + 5*n**3 + 77*n**2 + 46*n + 12)/(70*n**4)
+difference: 0   MATCH: True
+
+======================================================================
+PART D: cross-check against markov_transfer.py's own (differently coded) output
+======================================================================
+markov_transfer.psi_closed_form(3)          = (64*n**3 + 48*n**2 + 25*n + 6)/(140*n**3)
+my independent psi3, difference: 0  MATCH: True
+markov_transfer.psi_rerouted_closed_form(3) = (22*n**3 + 39*n**2 + 23*n + 6)/(60*n**3)
+my independent psi3R, difference: 0  MATCH: True
+markov_transfer.phi_closed_form(3)          = (32*n**4 + 5*n**3 + 77*n**2 + 46*n + 12)/(70*n**4)
+my independent phi3, difference: 0  MATCH: True

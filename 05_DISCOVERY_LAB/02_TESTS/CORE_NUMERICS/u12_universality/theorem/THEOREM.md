@@ -1,13 +1,15 @@
 # THEOREM — the u12 limit law φ_∞(c): rigorous core and the n→∞ bridge
 
-> **[Atualização 2026-08-22 — ver "Extensão, Estágio 3" ao final do
+> **[Atualização 2026-08-22 — ver "Extensão, Estágio 4" ao final do
 > documento]** O sumário original abaixo (fechado ao fim da Etapa 2)
-> descreve o caso `K=2` como parte do Lema Aberto não-provado. Isso
-> **não é mais exato**: o Estágio 3 (onda 5, `DISC-DEC-022`) prova o
-> caso `K=2` incondicionalmente, verificado por referee adversarial
-> independente sem nenhum erro encontrado. O texto abaixo é preservado
-> intacto como registro histórico da Etapa 2; o estado atual e correto
-> do documento está na seção de extensão ao final.
+> descreve os casos `K=2,3,4,5` como parte do Lema Aberto não-provado.
+> Isso **não é mais exato**: o Estágio 3 (onda 5, `DISC-DEC-022`) prova
+> o caso `K=2` incondicionalmente; o Estágio 4 (`DISC-DEC-031`) prova
+> os casos `K=3,4,5` incondicionalmente por um método de matriz de
+> transferência uniforme em `K`, ambos verificados por referee
+> adversarial independente sem nenhum erro encontrado. O texto abaixo é
+> preservado intacto como registro histórico da Etapa 2; o estado atual
+> e correto do documento está nas seções de extensão ao final.
 
 > **SUMÁRIO EXECUTIVO (documento inteiro, adicionado ao fechar a Etapa
 > 2).** Este documento prova, de forma autocontida a partir de
@@ -1410,11 +1412,133 @@ referee confirma que a numeração para `K=3` (`n`=4–8) é apenas
 suporte numérico, não uma alegação de taxa, exatamente como a
 tentativa original já havia rotulado. Nenhum item foi inflado.
 
-**Veredito honesto atualizado do documento inteiro:** Teorema 1 +
-corolários (Estágio 1); Lema 2 (Estágio 1); Proposição 3 (Estágio 2);
-Proposição 4 = ponte exata K=0,1 (Estágio 2); **ponte exata K=2,
-incluindo taxa completa (Estágio 3, novo) — agora PROVADA, não mais
-listada como faltante**. Resta como PROPOSIÇÃO CONDICIONAL apenas a
-ponte geral para `K≥3` (Lema Aberto, agora estritamente mais estreito
-do que "K≥2"). Conjecturas 1–2 (§8) inalteradas. Fontes completas:
-`../k2_open_lemma/ATTEMPT.md`, `../k2_open_lemma/adversarial/REFEREE_REPORT.md`.
+**Veredito honesto atualizado do documento inteiro (ao fim do Estágio
+3):** Teorema 1 + corolários (Estágio 1); Lema 2 (Estágio 1);
+Proposição 3 (Estágio 2); Proposição 4 = ponte exata K=0,1 (Estágio
+2); **ponte exata K=2, incluindo taxa completa (Estágio 3, novo) —
+agora PROVADA, não mais listada como faltante**. Resta como
+PROPOSIÇÃO CONDICIONAL apenas a ponte geral para `K≥3` (Lema Aberto,
+agora estritamente mais estreito do que "K≥2"). Conjecturas 1–2 (§8)
+inalteradas. Fontes completas: `../k2_open_lemma/ATTEMPT.md`,
+`../k2_open_lemma/adversarial/REFEREE_REPORT.md`.
+
+**[Ver Estágio 4 abaixo — este veredito foi superado: os casos K=3,4,5
+também foram provados, wave 6, DISC-DEC-031, 2026-08-22. K≥6 permanece
+honestamente aberto.]**
+
+---
+
+## [Extensão, Estágio 4 — 2026-08-22] Os casos K=3,4,5 do Lema Aberto: PROVADOS por matriz de transferência uniforme em K
+
+**Contexto.** O Estágio 3 (acima) provou `K=2` por análise de casos
+manual (três casos sobre onde as fontes caem em relação ao próprio
+ciclo do ponto de referência, ligados por um lema do co-ciclo com
+simetria `P=1/2`), deixando `K≥3` honestamente aberto e diagnosticando
+que esse método de análise de casos explode combinatorialmente com
+`K`. Pedido explícito ao próximo agente: tentar uma técnica
+genuinamente diferente, não mais uma rodada de análise de casos manual
+— em particular, uma abordagem de função geradora/matriz de
+transferência através de todo `K` simultaneamente.
+
+**O método (novo, `k2_open_lemma/k3_attempt_2/ATTEMPT.md`).** Em vez
+de dividir em casos manuais sobre "onde as fontes caem", a caminhada de
+exploração discreta (Lema da Redução A, Estágio 3) é reformulada como
+uma **cadeia de Markov explícita, exata, uniforme em `K`**, sobre um
+estado de 3 inteiros `(a,b,r)` — `a` = número de consultas-π já
+feitas (pontos permanentemente removidos do pool de alvos-π futuros),
+`b` = número de pontos alcançados por um salto-U em território
+inexplorado (permanecem no pool de alvos-π futuros — a distinção-chave
+que a análise de casos manual do Estágio 3 não precisou isolar
+explicitamente, mas que se torna necessária em `K` geral), `r` =
+número das `K` fontes ainda não alcançadas. As regras de transição
+exatas são derivadas uma única vez, para `K` geral, do mesmo fato
+elementar de revelação-preguiçosa de permutação já usado no Estágio 3.
+Resolver essa cadeia em forma fechada é então um **algoritmo
+mecânico** (uma recursão linear de primeira ordem resolvida por uma
+identidade padrão de telescopagem fatorial-decrescente/hockey-stick,
+executada simbolicamente) — não uma nova análise de casos manual para
+cada `K`.
+
+**Resultado central — K=3, PROVADO incondicionalmente:**
+
+```
+ψ_n^{(3)} = 16/35 + 12/(35n) + 5/(28n²) + 3/(70n³)   (todo n≥4)
+```
+
+que pelo Lema da Redução A (Estágio 3, já provado geral em `K`) prova
+`φ_n^{(3)} → φ_3 = 16/35` incondicionalmente. A taxa completa também
+foi obtida do zero (não por interpolação/ajuste):
+
+```
+φ_n^{(3)} = 16/35 + 1/(14n) + 11/(10n²) + 23/(35n³) + 6/(35n⁴)   (todo n≥4)
+```
+
+— taxa `Θ(1/n)`, mesmo padrão já encontrado em `K=2` (Estágio 3), não
+o `Θ(1/n²)` ingenuamente esperado a partir de `K=1`.
+
+**Bônus — K=4, K=5, também PROVADOS.** Como o procedimento (não cada
+resultado individual) é uniforme em `K`, subir mais dois degraus da
+mesma escada mecânica produziu, sem nenhuma ideia nova, as formas
+fechadas exatas para `ψ_n^{(4)}` e `ψ_n^{(5)}` — ambas verificadas.
+Um padrão exato foi também observado (não provado) no coeficiente de
+`1/n`: `lim n(ψ_n^{(K)}-φ_K) = Kφ_K/4`, confirmado exatamente para
+`K=1,...,5` — reportado como **CONJECTURA para K geral**, não teorema
+(a obstrução precisa para uma prova geral-em-K está nomeada em
+`ATTEMPT.md` §7.3: seria necessária uma indução em `r` através da
+solução por telescopagem, ou um argumento de função geradora em `K`,
+nenhum dos dois tentado).
+
+**Verificação, seis camadas independentes (`ATTEMPT.md` §6).** O
+método reproduz exatamente as fórmulas já provadas de `K=1,2` do
+Estágio 3, por uma derivação completamente diferente; `ψ_n^{(3)}` bate
+com o log de força bruta do Estágio 3 (`n=4..8`); bate com um ponto de
+força bruta NOVO e independente em `n=9` (nunca computado antes, 264,5
+milhões de combinações exatas); bate com uma recursão direta
+codificada independentemente (`markov_direct.py`, sem álgebra
+simbólica); a fórmula recombinada `φ_n^{(3)}` bate com uma TERCEIRA
+força bruta independente da média bruta da Definição 4 (`n=4..7`, sem
+usar o Lema A ou a máquina de ponto único); 20/20 checagens
+automatizadas passam.
+
+**Verificação adversarial independente (`k3_attempt_2/adversarial/REFEREE_REPORT.md`,
+`DISC-DEC-031`).** Um segundo agente, hostil, re-derivou o modelo e as
+regras de transição do zero a partir das primitivas de revelação
+preguiçosa (não lendo a prova antes de formar sua própria versão),
+resolveu a recursão por uma técnica DIFERENTE (método do fator
+integrante em vez da soma hockey-stick simbólica), substituiu as 7
+formas fechadas de volta na recursão original (diferença simbólica =
+0 em todo nível), recomputou `K=1,2` e confirmou contra as fórmulas já
+provadas do Estágio 3, rodou sua própria força bruta do zero (detector
+de ciclicidade próprio, testado unitariamente, algoritmo diferente do
+da tentativa original) em `n=4..8`, verificou `φ_n^{(3)}` via uma
+força bruta independente da média bruta (`n=4..7`, sem Lema A),
+confirmou `K=4,5` em todo `(K,n)` citado, auditou overclaims (a
+conjectura de taxa geral-K permanece rotulada CONJECTURADA em todo
+lugar, nunca desliza para linguagem de prova), e reexecutou os
+próprios scripts da tentativa original (incluindo a força bruta de
+`n=9` de ~7,5 minutos, reproduzindo `3385/6804` de forma independente).
+**Veredito: SOUND — nenhum erro encontrado em nenhuma camada.**
+
+**K≥6: continua honestamente ABERTO.** A obstrução mudou de natureza
+em relação ao Estágio 3: não é mais "análise de casos manual explode
+combinatorialmente" (o procedimento já é uniforme em `K`) — é que a
+recursão foi resolvida "em `r`" apenas numericamente, um nível de cada
+vez (`r=0,...,5`), não simbolicamente para `r` geral. Uma prova
+geral-em-K exigiria uma indução formal em `r` sobre a forma da solução
+por telescopagem, ou um argumento de função geradora em `K` — nenhum
+dos dois tentado neste documento, mas ambos nomeados como rotas
+concretas plausíveis (diferente da obstrução do Estágio 3, que não
+tinha rota candidata similar).
+
+**Veredito honesto atualizado do documento inteiro (ao fim do Estágio
+4):** Teorema 1 + corolários (Estágio 1); Lema 2 (Estágio 1);
+Proposição 3 (Estágio 2); Proposição 4 = ponte exata K=0,1 (Estágio
+2); ponte exata K=2, taxa completa (Estágio 3); **ponte exata K=3,4,5,
+incluindo taxa completa para K=3 (Estágio 4, novo) — agora PROVADA,
+não mais listada como faltante**. Resta como PROPOSIÇÃO CONDICIONAL
+apenas a ponte geral para `K≥6` (Lema Aberto, agora estritamente mais
+estreito do que "K≥3"), mais a conjectura de taxa geral-K (§7.2 de
+`k3_attempt_2/ATTEMPT.md`, não provada). Conjecturas 1–2 (§8, texto
+original) inalteradas. Fontes completas:
+`../k2_open_lemma/k3_attempt_2/ATTEMPT.md`,
+`../k2_open_lemma/k3_attempt_2/adversarial/REFEREE_REPORT.md`.

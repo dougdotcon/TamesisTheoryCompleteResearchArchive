@@ -1,0 +1,51 @@
+======================================================================
+STEP 1: reproduce ALREADY-PROVED K=1, K=2 closed forms
+======================================================================
+PASS: psi_n^(1) == 2/3+1/(6n)  [ATTEMPT.md SS3, PROVED]
+PASS: psi_n^(2) == 8/15+4/(15n)+1/(15n^2)  [ATTEMPT.md SS4, PROVED]
+
+======================================================================
+STEP 2: K=3 closed form vs wave-5's own brute-force log (n=4..8)
+======================================================================
+psi_n^(3) = (64*n**3 + 48*n**2 + 25*n + 6)/(140*n**3)
+PASS: psi_n^(3) at n=4 matches psi_k3_exploration.log
+PASS: psi_n^(3) at n=5 matches psi_k3_exploration.log
+PASS: psi_n^(3) at n=6 matches psi_k3_exploration.log
+PASS: psi_n^(3) at n=7 matches psi_k3_exploration.log
+PASS: psi_n^(3) at n=8 matches psi_k3_exploration.log
+
+======================================================================
+STEP 3: K=3 closed form vs FRESH brute force at n=9 (beyond wave 5)
+======================================================================
+SKIPPED (--skip-slow). Already run once: n=9 K=3 psi=3385/6804 (448.6s), matches closed form (see ATTEMPT.md).
+
+======================================================================
+STEP 4: K=3 closed form vs independent memoized recursion (n=4..9)
+======================================================================
+PASS: psi_n^(3) at n=4: closed form == direct recursion
+PASS: psi_n^(3) at n=5: closed form == direct recursion
+PASS: psi_n^(3) at n=6: closed form == direct recursion
+PASS: psi_n^(3) at n=7: closed form == direct recursion
+PASS: psi_n^(3) at n=8: closed form == direct recursion
+PASS: psi_n^(3) at n=9: closed form == direct recursion
+
+======================================================================
+STEP 5: full phi_n^(3) (Lemma A) vs independent raw-definition brute force
+======================================================================
+phi_n^(3) = (32*n**4 + 5*n**3 + 77*n**2 + 46*n + 12)/(70*n**4)
+PASS: phi_n^(3) at n=4 matches independent full-definition brute force
+PASS: phi_n^(3) at n=5 matches independent full-definition brute force
+PASS: phi_n^(3) at n=6 matches independent full-definition brute force
+PASS: phi_n^(3) at n=7 matches independent full-definition brute force
+
+======================================================================
+STEP 6: bonus general-K rate pattern (1/n coeff = K*phi_K/4) at K=4,5
+======================================================================
+PASS: psi_n^(4) at n=5 matches brute force (1569/3125)
+PASS: psi_n^(4) at n=6 matches brute force (196/405)
+PASS: psi_n^(5) at n=6 matches brute force (899/1944)
+
+======================================================================
+TOTAL: 20 PASS, 0 FAIL
+======================================================================
+ALL CHECKS PASSED.

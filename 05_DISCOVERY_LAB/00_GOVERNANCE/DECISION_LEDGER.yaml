@@ -1303,3 +1303,48 @@ decisions:
     untouched_safeguards:
       - "frente (a) e uma TENTATIVA delimitada, nao uma exigencia de resultado -- falhar honestamente e um desfecho aceito e completo"
       - "frente (b) segue a mesma disciplina da busca de prioridade original: nenhuma citacao fabricada, buscas registradas incluindo vazias"
+
+  - decision_id: DISC-DEC-023
+    date: 2026-08-22
+    decision: >
+      Adotar explicitamente paralelismo multi-linha como modo padrao
+      de operacao: sempre que mais de uma frente legitima e
+      nao-forcada existir em linhas distintas do portfolio, despachar
+      todas simultaneamente em vez de serializar por linha. Autorizar
+      agora 2 novas frentes paralelas, independentes da onda 5 em
+      andamento (K2-OPEN-LEMMA, U-ALPHA-INTERMEDIATE-SEARCH, e suas
+      verificacoes adversariais): (a) SPARC-FMULTI-STAGE1 -- retomar a
+      linha cosmologica (DISC-COSMOLOGY-MOND-SPARC-004, holdout
+      selado de 12.944 sistemas) implementando a auto-calibracao
+      completa de f_multi de Chae (2023, Eqs. 11-13) e validando
+      contra dado sintetico, SEM tocar o holdout selado nesta etapa
+      (isso exigiria um lock proprio, decisao futura separada); (b)
+      ARCHIVE-WIDE-PHASE0-SURVEY -- nova rodada de busca por
+      candidatos de pesquisa genuinamente falsificaveis em todo o
+      arquivo Tamesis (nao restrita a TRI-RG), mesma disciplina das
+      Fases 0/0.5/0.6/0.8 -- busca e relatorio honesto, sem tocar
+      dado real.
+    rationale: >
+      Pedido explicito do usuario: "bater de frente com todas as
+      linhas de pesquisa sempre de uma vez, nao ficar parando uma
+      linha antes de comecar outra". Duas linhas tinham rota legitima
+      documentada e nunca executada: a reabertura de SPARC-004 exige
+      exatamente essa auto-calibracao (nomeada como precondicao no
+      proprio fechamento original) e nunca foi tentada; uma nova
+      rodada de busca arquivo-inteira (nao restrita a TRI-RG) e
+      genuinamente aberta e nunca foi feita nesse escopo mais amplo.
+      Nenhuma das duas e busca forcada -- ambas tem escopo, criterio
+      de sucesso, e criterio de "nao encontrei nada" honesto ja
+      embutido no desenho.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/COSMOLOGY_WIDE_BINARIES_MC_DEPROJECTION/ (novo estagio, metodologia + validacao sintetica)"
+      - "05_DISCOVERY_LAB/02_TESTS/ARCHIVE_PHASE0_SURVEY/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "modo de operacao multi-linha paralela adotado como padrao explicito, nao apenas para esta onda"
+      - "nenhuma mudanca de status de linha ate a integracao"
+    untouched_safeguards:
+      - "frente (a) NAO toca o holdout selado de SPARC-004 -- so validacao sintetica; abrir o holdout exigiria um lock formal proprio, decisao futura separada, mesmo precedente de FHK/variancia-do-numero"
+      - "frente (b) e busca e relatorio, nao computo sobre dado real -- qualquer candidato encontrado vira uma frente propria futura, com pre-registro proprio"

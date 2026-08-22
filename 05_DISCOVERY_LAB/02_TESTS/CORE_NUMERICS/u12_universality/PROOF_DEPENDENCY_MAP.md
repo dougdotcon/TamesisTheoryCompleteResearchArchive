@@ -44,22 +44,17 @@ flowchart TD
     K345 --> PBinc
     K610 --> PBinc
 
-    Hyp["Hipótese de regularidade (§4 de<br/>k6_attempt/ATTEMPT.md)<br/>existência da expansão assintótica<br/>de 2 termos, p/ r além de K=10<br/><b>ÚNICO GAP RESTANTE</b>"]
+    Hyp["Hipótese de regularidade (§4 de<br/>k6_attempt/ATTEMPT.md)<br/>existência da expansão assintótica<br/>de 2 termos, p/ r além de K=10<br/><b>FECHADA — onda 8 frente (b)</b><br/>k_general_existence_attempt/ATTEMPT.md<br/>referee: SOUND — WITH NAMED ISSUES"]
 
-    KgerCond["Ponte fixo-K + taxa, K geral<br/>Estágio 5-B, onda 7<br/><b>PROVADA, CONDICIONAL</b> à Hipótese<br/>(bridge é corolário elementar da taxa:<br/>limite finito de n(ψ−φ_K) força ψ→φ_K)<br/>referee: ressalva 'corretamente dimensionada'"]
+    KgerInc["Ponte fixo-K + taxa, K geral<br/>Estágio 6, onda 8<br/><b>PROVADA, INCONDICIONAL, ∀K≥0</b><br/>(Hipótese fechada ⇒ corolário direto,<br/>via ψ_n^(K)=g_K(n,0), instância t=1<br/>do Teorema-Alvo geral-r)"]
 
-    Hyp -.hipótese de.-> KgerCond
+    Hyp -->|fecha| KgerInc
 
-    W8b["<b>Onda 8, frente (b) — EM ANDAMENTO</b><br/>tentativa de provar a Hipótese<br/>(Gronwall discreto / indução em r)"]
-    W8b -."SE fechar".-> Hyp
-
-    PC5["<b>Proposição Condicional 5</b> (§7.5)<br/>φ(n,c) → φ_∞(c), ∀c≥0<br/><b>HOJE: condicional</b> à ponte-K geral"]
+    Teo3["<b>Teorema 3</b> (antes Proposição<br/>Condicional 5, §7.5)<br/>φ(n,c) → ∫₀¹e^(−ct²)dt<br/><b>PROVADO, incondicional, ∀c≥0</b>"]
 
     PBinc -->|contribui K=0..10| P3
-    KgerCond -.->|"SE Hipótese fechar:<br/>vira contribuição incondicional"| P3
-    P3 --> PC5
-
-    PC5 -.->|"SE frente (b) fechar:<br/>vira <b>Teorema 3</b>, sem ressalva,<br/>∀c≥0"| Teo3["Teorema 3 (hipotético)<br/>φ(n,c) → ∫₀¹e^(−ct²)dt<br/>incondicional, ∀c≥0"]
+    KgerInc -->|contribui K geral, incondicional| P3
+    P3 --> Teo3
 
     style T1 fill:#e8f0e0,stroke:#2f6b5e
     style L2 fill:#e8f0e0,stroke:#2f6b5e
@@ -70,27 +65,40 @@ flowchart TD
     style K2 fill:#e8f0e0,stroke:#2f6b5e
     style K345 fill:#e8f0e0,stroke:#2f6b5e
     style K610 fill:#e8f0e0,stroke:#2f6b5e
-    style Hyp fill:#f5ecd8,stroke:#96702a
-    style KgerCond fill:#f5ecd8,stroke:#96702a
-    style PC5 fill:#f5ecd8,stroke:#96702a
-    style W8b fill:#e3edf3,stroke:#33566f
-    style Teo3 fill:#f0e5e8,stroke:#7a3b4a,stroke-dasharray: 5 5
+    style Hyp fill:#e8f0e0,stroke:#2f6b5e
+    style KgerInc fill:#e8f0e0,stroke:#2f6b5e
+    style Teo3 fill:#e8f0e0,stroke:#2f6b5e
 ```
 
-**Leitura.** Verde = provado incondicionalmente. Âmbar = provado mas
-condicional a uma ressalva nomeada. Azul = tentativa em execução agora.
-Rosa tracejado = o que se tornaria verdadeiro (hipoteticamente) se a
-frente em execução fechar — **não é um resultado, é uma previsão
-condicional de segunda ordem**, não deve ser citada como se já valesse.
+> **[Adendo datado, 2026-08-22 — DISC-DEC-040.]** O diagrama acima foi
+> ATUALIZADO (não apenas anotado) para refletir o fechamento da Hipótese
+> de regularidade pela onda 8, frente (b) — consistente com a "Regra de
+> uso" (§3 abaixo), que exige manter este mapa vivo, não uma fotografia
+> estática do estado em que foi criado. O estado ANTERIOR (frente (b) em
+> andamento, Hipótese como único gap, Proposição Condicional 5 apenas
+> hipoteticamente promovível) está preservado no histórico git deste
+> arquivo (commit `1baaea0`), não apagado — apenas o diagrama vivo, cujo
+> propósito é sempre refletir o estado atual auditável, foi avançado.
+> Nenhuma aresta foi removida por conveniência: a topologia é idêntica,
+> apenas o status de dois nós (`Hyp`, `KgerInc`) e o nome/cor de um
+> terceiro (`PC5`→`Teo3`) mudaram, exatamente como a "Regra de uso"
+> previa que aconteceria "se a Frente (b) fechar".
 
-**O ponto que este mapa existe para blindar:** a Proposição 3 já está
-provada, sem ressalva nenhuma, desde a §7.2 original (bem antes da onda
-7). Ela não é afetada por nada que aconteça na frente (b). O que a
-frente (b) pode mudar é só um dos dois insumos que entram nela — se a
-Hipótese de regularidade fechar, o insumo "ponte-K para todo K" deixa de
-precisar do qualificador condicional, e a Proposição 3 (inalterada)
-converte isso automaticamente em Teorema. Nenhuma nova prova de
-convergência de mistura seria necessária — ela já existe.
+**Leitura.** Verde = provado incondicionalmente — toda a Árvore A está,
+desde 2026-08-22 (DISC-DEC-040), nesta cor.
+
+**O ponto que este mapa existia para blindar, agora resolvido
+honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
+desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do
+desfecho da frente (b). O que a frente (b) podia mudar era só um dos
+dois insumos que entram nela: com a Hipótese de regularidade fechada
+(referee independente, veredito SOUND — WITH NAMED ISSUES, 4 questões
+nomeadas corrigidas via adendos datados em
+`k_general_existence_attempt/ATTEMPT.md` e `k6_attempt/ATTEMPT.md`), o
+insumo "ponte-K para todo K" deixou de precisar do qualificador
+condicional, e a Proposição 3 (inalterada) converteu isso
+automaticamente em Teorema 3 — nenhuma nova prova de convergência de
+mistura foi necessária, exatamente como este mapa previa.
 
 ---
 

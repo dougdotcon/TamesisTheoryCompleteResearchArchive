@@ -1,0 +1,32 @@
+========================================================================================
+(A) EXHAUSTIVE m-scan (every single m), larger n
+========================================================================================
+  r=3 b=0 n= 200: ALL 197 values of m scanned; max = 0.17878571 at m=200 (t=1.0000); max over m<n = 0.17839286
+  r=3 b=0 n= 400: ALL 397 values of m scanned; max = 0.17867857 at m=400 (t=1.0000); max over m<n = 0.17848214
+  r=2 b=1 n= 200: ALL 197 values of m scanned; max = 0.03333333 at m=4 (t=0.0200); max over m<n = 0.03333333
+  r=5 b=0 n= 120: ALL 115 values of m scanned; max = 0.51018967 at m=120 (t=1.0000); max over m<n = 0.50528043
+  r=4 b=1 n= 150: ALL 145 values of m scanned; max = 0.18709079 at m=150 (t=1.0000); max over m<n = 0.18613788
+
+========================================================================================
+(B) the out-of-domain point in section 6 (a = n-b-r-1)
+========================================================================================
+  r=2 b=0 n=15: a_max=12, coefficient (1-s)-(1+b+r)/n = 0 (must be 0); the referenced g_r(m',b+1) has m'=3, but g_r(.,b+1)'s domain needs m'>=4 -> OUT OF DOMAIN
+  r=3 b=1 n=20: a_max=15, coefficient (1-s)-(1+b+r)/n = 0 (must be 0); the referenced g_r(m',b+1) has m'=5, but g_r(.,b+1)'s domain needs m'>=6 -> OUT OF DOMAIN
+  r=4 b=0 n=18: a_max=13, coefficient (1-s)-(1+b+r)/n = 0 (must be 0); the referenced g_r(m',b+1) has m'=5, but g_r(.,b+1)'s domain needs m'>=6 -> OUT OF DOMAIN
+  r=5 b=2 n=22: a_max=14, coefficient (1-s)-(1+b+r)/n = 0 (must be 0); the referenced g_r(m',b+1) has m'=8, but g_r(.,b+1)'s domain needs m'>=9 -> OUT OF DOMAIN
+  ==> the referenced value is out of domain at exactly this one a, but its
+      coefficient is exactly 0, so the section 6 identity and bound survive.
+      This is the SAME mechanism section 3 uses for g_r -- but section 6 never says so.
+
+========================================================================================
+(C) my chain vs the lineage's own PROVED exact closed forms
+========================================================================================
+  K=6 (k6_attempt/ATTEMPT.md section 1.1's PROVED closed form):
+    n=  7: chain=355081/823543  closed_form=355081/823543  match=True
+    n=  8: chain=191647/458752  closed_form=191647/458752  match=True
+    n=  9: chain=72241/177147  closed_form=72241/177147  match=True
+    n= 12: chain=169417/435456  closed_form=169417/435456  match=True
+    n= 17: chain=9029655443/24161706569  closed_form=9029655443/24161706569  match=True
+    n= 25: chain=1363465819/3759765625  closed_form=1363465819/3759765625  match=True
+  (K=6,n=7 value 355081/823543 was confirmed by exhaustive brute force in the
+   prior referee round; my chain reproduces it from the transition rules alone.)

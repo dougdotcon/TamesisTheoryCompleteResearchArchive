@@ -1,0 +1,75 @@
+==============================================================================
+(a) EXACT TAYLOR FOR POLYNOMIALS -- direct check, no appeal to any theorem
+==============================================================================
+  deg=0: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=1: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=2: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=3: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=4: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=5: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=6: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=7: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  deg=8: remainder with d+1 terms = 0   (with only d terms: nonzero, as expected)
+  ==> exact-Taylor claim (a): CONFIRMED
+
+==============================================================================
+(b),(c) SUBSTITUTION OF THE ANSATZ INTO (*), symbolic b, r = 0..8
+==============================================================================
+  r=0: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in []
+  r=1: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in []
+  r=2: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2]
+  r=3: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3]
+  r=4: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3, 4]
+  r=5: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3, 4, 5]
+  r=6: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3, 4, 5, 6]
+  r=7: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3, 4, 5, 6, 7]
+  r=8: h^(-1) terms: none | h^0 coeff = 0 | h^1 coeff = 0 | h^k (k>=2) present for k in [2, 3, 4, 5, 6, 7, 8]
+
+  ==> (b): h^0 and h^1 brackets vanish IDENTICALLY in t for every r checked,
+      for SYMBOLIC b  <=> Facts 2 and 3 hold as polynomial identities.
+  ==> Delta_r therefore starts at h^2 (see the k-lists above): the powers
+      present are exactly k = 2..r, i.e. Delta_r = sum_{k=2}^{r} h^k q_k(t,b).
+
+==============================================================================
+(b') FACTS 2 AND 3 CHECKED DIRECTLY, as stated in the parent document
+==============================================================================
+  r=0: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=1: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=2: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=3: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=4: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=5: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=6: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=7: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+  r=8: Fact2 LHS-RHS = 0 | Fact3 LHS-RHS = 0
+
+==============================================================================
+(d) BASE CASE: coefficient of g_r(m-1,b) in (*) at m = b+r+1
+==============================================================================
+  rearranged (*) is  m*g_r(m,b) - (m-1-r-b)*g_r(m-1,b) = 1 + r h_(r-1)(n-m+1,b)
+  because  m*[g(m)-g(m-1)] + (1+r+b) g(m-1) = m g(m) - (m-(1+r+b)) g(m-1),
+  and m-(1+r+b) = -b + m - r - 1 = m-1-r-b.  Consistent with the ORIGINAL rule
+  g_r(m,b)=1/m + (r/m)h_(r-1) + ((m-1-r-b)/m) g_r(m-1,b).
+  At m = b+r+1:  coefficient (m-1-r-b) = 0  -> ZERO exactly.
+
+==============================================================================
+(c) CONTRACTION COEFFICIENT FOR THE RESIDUAL
+==============================================================================
+  Residual terms in the substitution:  m[R(m)-R(m-1)] + (1+r+b) R(m-1)
+                                     = m R(m) - (m-1-r-b) R(m-1).
+  So  R(m) = ((m-1-r-b)/m) R(m-1) + (1/m)[ r eps^h_(r-1) - Delta_r ],
+  and ((m-1-r-b)/m) is IDENTICAL to g_r's own recursion's contraction
+  coefficient -- same operator, hence the same telescoping structure.
+
+==============================================================================
+EXTRA: the explicit Delta_r for r=2 and r=3 (symbolic b) -- used later
+==============================================================================
+  r=2:
+    h^2 coefficient q_2(t,b) = 8/((b + 3)*(b + 4)*(b + 5))
+  r=3:
+    h^2 coefficient q_2(t,b) = 12*(2*b + 11*t + 14)/((b + 4)*(b + 5)*(b + 6)*(b + 7))
+    h^3 coefficient q_3(t,b) = -90/((b + 4)*(b + 5)*(b + 6)*(b + 7))
+
+  and at b=0, r=2, the (t-independent) q_2 evaluates to: 2/15
+
+[exited with code 0]

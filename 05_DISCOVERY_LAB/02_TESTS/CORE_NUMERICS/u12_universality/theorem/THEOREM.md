@@ -1732,3 +1732,207 @@ como PROPOSIÇÃO ABERTA apenas a forma fechada exata geral-`K`
 (a ressalva de §4). Conjecturas 1–2 (§8, texto original) inalteradas.
 Fontes completas: `../k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md`,
 `../k2_open_lemma/k3_attempt_2/k6_attempt/adversarial/REFEREE_REPORT.md`.
+
+**[Ver Estágio 6 abaixo — este veredito foi superado: a ressalva de
+regularidade da Parte B foi fechada, onda 8 frente (b), DISC-DEC-040,
+2026-08-22. O Lema Aberto geral-`K` e a conjectura de taxa geral-`K`
+tornam-se incondicionais para todo `K`, e Proposição Condicional 5
+torna-se Teorema 3.]**
+
+---
+
+## [Extensão, Estágio 6 — 2026-08-22] O Lema Aberto geral-`K`: PROVADO INCONDICIONALMENTE para todo `K`; Proposição Condicional 5 → Teorema 3
+
+**Contexto.** O Estágio 5, Parte B, provou a conjectura de taxa geral-`K`
+e, como corolário imediato, o próprio Lema Aberto geral-`K`, mas
+**condicional** a uma ressalva de regularidade precisamente nomeada
+(§4 de `k6_attempt/ATTEMPT.md`): a existência, para `r` além dos 11
+valores concretamente verificados (`K=0,\dots,10`), da expansão
+assintótica de duas parcelas `g_r(m,b)=F_r(t,b)+\frac1nG_r(t,b)+O(1/n^2)`
+assumida pela derivação. `DISC-DEC-038` autorizou, como frente (b) da
+onda 8, uma tentativa dedicada de fechar exatamente essa ressalva — a
+única peça que separava Proposição Condicional 5 (§7.5) de um Teorema 3
+incondicional.
+
+### O fechamento
+
+`k_general_existence_attempt/ATTEMPT.md` prova a existência dessa
+expansão, **para todo `r\ge0` e `b\ge0`**, por indução em `r` cujo passo
+indutivo é um limitante de Gronwall discreto **exato** — não uma
+estimativa assintótica — sobre a recursão discreta exata já provada
+(`../../ATTEMPT.md` §2). Os elementos centrais da prova:
+
+1. **Substituição do ansatz de dois termos na recursão exata**, dando
+   uma identidade exata (não aproximada) para o resíduo `R_r(m):=
+   g_r(m,b)-F_r(t,b)-\frac1nG_r(t,b)`. A expansão de Taylor dos
+   polinômios de grau finito envolvidos é **livre de resto** (identidade
+   algébrica, não estimativa `O(h^{r+1})`), já que um polinômio de grau
+   `d` tem exatamente `d{+}1` termos de Taylor e resto exatamente `0`.
+2. Os colchetes de ordem `h^0` e `h^1` da substituição **anulam-se
+   identicamente em `t`** (não apenas assintoticamente), porque são
+   exatamente as EDOs já provadas do Estágio 5 Parte B (`F_r,G_r` já
+   satisfazem essas EDOs por construção) — logo nenhum tratamento
+   separado de camada-limite é necessário, mesmo no caso-base.
+3. **O coeficiente de contração da recursão do resíduo é exatamente
+   ZERO no próprio caso-base** `m=b{+}r{+}1` — um fato algébrico real
+   sobre a recursão *já provada* de wave 6 (`(m{-}1{-}r{-}b)/m=0` em
+   `m=b{+}r{+}1`), não uma suposição nova. Isso subsome automaticamente
+   o caso-base no mesmo limitante, sem caso especial.
+4. **Fechamento via a mesma identidade de falling-factorial/hockey-stick**
+   que a onda anterior usou para RESOLVER a recursão (`../../ATTEMPT.md`
+   §3), agora reaproveitada para LIMITÁ-la — dando um limitante uniforme
+   `|R_r(m,b,n)|\le D_r(b)/n^2` **sem nenhum fator espúrio `\log n`** (um
+   union bound ingênuo produziria um, como o documento demonstra
+   explicitamente construindo-o e comparando).
+5. O passo análogo para `h_r` (o "outro lado" da recursão acoplada) é
+   pura substituição algébrica, sem Gronwall adicional, porque `h_r` não
+   é uma cadeia em `a`.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado (modelo com maior capacidade de raciocínio,
+dado o peso da alegação) rederivou os seis itens centrais **do zero**
+— simulador próprio, formas fechadas próprias, recursão coeficiente-a-
+coeficiente extraída independentemente da EDO — **antes** de ler como o
+documento-alvo os deriva, e leu o próprio documento e seus scripts
+apenas depois de ter seus próprios resultados prontos. Verificou a
+identidade do resíduo como identidade racional exata em **477 pontos
+concretos, 0 divergências**; a identidade de `h_r` em **309 pontos, 0
+divergências**; os Fatos 2 e 3 (as EDOs) para `r,k,b` **simbólicos**
+via formas fechadas em função gama, **0 divergências em 1200 triplas**;
+a identidade de falling-factorial/hockey-stick simbolicamente e em
+**4764+429+429 casos concretos, 0 divergências**. Rodou numérica nova
+em combinações que o documento-alvo nunca testou (`r=6,7,9,10`;
+`b=2,3,5`; `n` até `10^6`; varreduras exaustivas, não amostradas) —
+convergência limpa em toda parte, nenhum crescimento `\log n`, nenhuma
+explosão de camada-limite. Fez duas **predições próprias** a partir de
+sua rederivação — não apenas checou as do documento — e confirmou
+ambas exatamente: `R_1\equiv0` para todo `m,b,n` (485 avaliações, 0
+resíduos não-nulos) e `R_2(m,0,n)=1/(15n^2)` para todo `m`, não apenas
+no caso-base (220 avaliações, 0 desvios).
+
+> **Veredito: SOUND — WITH NAMED ISSUES.** "O Teorema-Alvo está
+> genuinamente estabelecido. Ataquei cada passo e não consegui quebrar
+> nenhum deles." Quatro questões nomeadas, nenhuma fatal:
+
+- **I-1 (exigia correção).** O expoente exibido na justificativa
+  escrita do limitante de §4 do documento-alvo estava trocado
+  (`h^{j-1}` em vez de `h^j`), o que, tomado literalmente, só
+  estabeleceria `O(1/n)`, não `O(1/n^2)` — um erro de digitação na
+  linha mais central da prova, não um erro conceitual: o fato correto
+  foi verificado independentemente pelo referee (simbolicamente, `b`
+  simbólico, `r=0,\dots,8`) e §3 do próprio documento já enunciava o
+  fato certo em prosa. **Corrigido** via adendo datado em
+  `k_general_existence_attempt/ATTEMPT.md` §4, texto original
+  preservado.
+- **I-2 (nota, sem consequência matemática).** Um ponto fora-de-domínio
+  não mencionado em §6, cujo coeficiente é exatamente `0` — inofensivo,
+  mesmo mecanismo que §3 já usa e explica para `g_r`. Anotado via
+  adendo.
+- **I-3 (cosmético).** Algumas descrições da evidência numérica em §7 /
+  no resumo executivo são mais otimistas que os logs retidos (ex.
+  "entire range" descreve na verdade uma amostra log-espaçada). O
+  referee re-executou as versões exaustivas por conta própria e
+  confirmou os mesmos resultados qualitativos — nenhuma alegação
+  numerada afetada. Anotado via adendo.
+- **I-4 (a jusante, a que importa para a catalogação).** O documento
+  PAI (`k6_attempt/ATTEMPT.md` §5/Scorecard linha 9) carregava a mesma
+  ressalva sobre a alegação `\varphi_n^{(K)}-\varphi_K=\Theta(1/n)`
+  **para todo `K\ge1`** — mas essa alegação é **FALSA em `K=1`**
+  (`\varphi_n^{(1)}-\varphi_1=1/(3n^2)` exatamente, já registrado
+  alhures neste documento). Promover essa linha verbatim a incondicional
+  converteria uma afirmação condicional falsa em incondicional falsa —
+  não é erro do documento-alvo (a ressalva de §4 já cobria essa linha
+  corretamente enquanto condicional), mas passa a importar agora que a
+  ressalva fecha. **Corrigido** em `k6_attempt/ATTEMPT.md` §5 e no
+  Scorecard (adendos datados): a afirmação certa, agora incondicional,
+  é o coeficiente exato
+  `\varphi_n^{(K)}-\varphi_K=K[\varphi_K/4+F_{K-1}(1,1)-\varphi_K]/n+O(1/n^2)`
+  — zero em `K=1`, positivo verificado para `2\le K\le12`
+  (reproduzindo `1/30` em `K=2` e `1/14` em `K=3`, já conhecidos de
+  ondas anteriores por vias independentes, e `1093/6006` em `K=6`,
+  exatamente o valor já confirmado por quatro métodos distintos na
+  correção pós-adversarial do Estágio 5 — uma **quinta** confirmação
+  independente, por uma rota completamente diferente).
+
+Ver `k_general_existence_attempt/adversarial/REFEREE_REPORT.md` para o
+relatório completo (9 scripts independentes, milhares de verificações
+exatas).
+
+### O que isto muda, precisamente
+
+**1. A ressalva de regularidade de `k6_attempt/ATTEMPT.md` §4 está
+FECHADA.** As formas fechadas gerais-`r` `F_r,G_r` (Estágio 5 Parte B)
+e a conjectura de taxa geral-`K` deixam de ser condicionais.
+
+**2. O Lema Aberto de §7.4 (acima) está agora PROVADO PARA TODO
+`K\ge0`, não apenas `K=0,\dots,10`.** `ψ_n^{(K)}=g_K(n,0)` é a instância
+`t=1` do Teorema-Alvo geral-`r` — logo `ψ_n^{(K)}\to F_K(1,0)=φ_K` para
+todo `K`; combinado com o Lema da Redução A (§7.2/Estágio 3, PROVADO,
+`K` geral), `φ_n^{(K)}\to φ_K` para todo `K` fixo. O texto original de
+§7.4 ("*Status:* neither proved nor disproved in this document")
+permanece preservado como registro histórico do estado do documento
+antes deste estágio — este parágrafo é a atualização autorizada de seu
+status.
+
+**3. A conjectura de taxa geral-`K` está agora INCONDICIONAL:**
+`\displaystyle\lim_{n\to\infty}n\big(\psi_n^{(K)}-\varphi_K\big)=\frac{K\varphi_K}4`
+para todo `K\ge0` (não mais "modulo a ressalva de §4" como no Estágio 5
+Parte B).
+
+**4. §9, item 2 (a taxa do `\varphi_n^{(K)}-\varphi_K` para `K\ge2`,
+"fully open" no texto original) está agora respondido com precisão —
+mas não completamente fechado.** A fórmula exata do coeficiente de
+`1/n`, `K[\varphi_K/4+F_{K-1}(1,1)-\varphi_K]`, é agora PROVADA
+incondicional para todo `K\ge1` (corolário direto do item 2 acima mais
+a Lemma de Redução A). Isso já responde a pergunta original de "que
+ordem é a taxa": nunca pior que `O(1/n)`, nunca `\Theta(\log n/n^2)`.
+Mas se esse coeficiente é **estritamente positivo para todo `K\ge2`**
+(o que tornaria a taxa exatamente `\Theta(1/n)`, não apenas `O(1/n)`)
+foi **verificado, não provado**, para `2\le K\le12` — permanece
+genuinamente aberto se a positividade vale para todo `K`, um item novo,
+mais estreito, substituindo o item 2 original.
+
+**5. Proposição Condicional 5 (§7.5) torna-se um teorema incondicional.**
+A Proposição 3 (§7.2) já era incondicionalmente provada; com o Lema
+Aberto agora provado para todo `K\ge0` (item 2 acima), a hipótese que
+Proposição Condicional 5 carregava deixa de existir. O enunciado
+completo:
+
+> **Teorema 3 (antes Proposição Condicional 5).** Para todo `c\ge0`
+> fixo, `\displaystyle\varphi(n,c)\to\varphi_\infty(c)=\int_0^1e^{-ct^2}dt`
+> quando `n\to\infty` — **incondicionalmente**, sem nenhuma hipótese
+> não provada.
+
+Este é exatamente o enunciado que o resumo executivo do topo deste
+documento (e `PROOF_DEPENDENCY_MAP.md`, Árvore A) já citava como o que
+resultaria "se a Frente (b) fechasse" — ela fechou.
+
+**O que permanece genuinamente aberto, sem mudança nenhuma por este
+estágio:** (i) a forma fechada exata, todas-as-ordens, geral-`K`, para
+`\psi_n^{(K)}` (§6.2 de `k6_attempt/ATTEMPT.md` — separada, mais dura,
+não tocada por este fechamento); (ii) a taxa de crescimento em `r` das
+constantes de erro `D_r(b),C_r(b)` do novo documento (nomeada, não
+perseguida — os números observados são muito menores que os limitantes,
+ex. `0,78` observado contra `174` de limitante em `r=6`, mas nenhuma
+forma fechada para o crescimento foi buscada); (iii) a positividade do
+coeficiente de taxa para `K\ge13` (item 4 acima); (iv) a versão
+localmente-uniforme-em-`c` do Teorema 3 (§9 item 4 original — nunca
+tocada por nada neste estágio, gap genuinamente independente);
+(v) Conjecturas 1–2 (§8, a lei distribucional completa) — inalteradas,
+gap genuinamente separado de tudo que fechou aqui. Nenhum destes é
+afetado, positiva ou negativamente, pelo fechamento acima.
+
+**Veredito honesto atualizado do documento inteiro (ao fim do Estágio
+6):** Teorema 1 + corolários, Lema 2 (Estágio 1); Proposição 3, ponte
+exata `K=0,1` (Estágio 2); ponte exata `K=2` (Estágio 3); ponte exata
+`K=3,4,5` (Estágio 4); ponte exata `K=6,\dots,10` (Estágio 5 Parte A);
+**Lema Aberto geral-`K` e conjectura de taxa geral-`K`, agora PROVADOS
+INCONDICIONALMENTE para todo `K\ge0` (Estágio 6, novo)**; **Proposição
+Condicional 5 promovida a Teorema 3, incondicional (Estágio 6, novo)**.
+Restam abertos: a forma fechada todas-as-ordens geral-`K`; a
+positividade do coeficiente de taxa para `K\ge13`; a versão
+uniforme-em-`c`; a lei distribucional completa (Conjecturas 1–2).
+Fontes completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/ATTEMPT.md`,
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/adversarial/REFEREE_REPORT.md`.

@@ -1,0 +1,61 @@
+====================================================================================
+ITEM 2 -- the coefficient-sum lemma
+====================================================================================
+  |p(x)| <= sum|a_k| on x in [0,1]: violations in 12000 random samples = 0
+  is x in [0,1] needed?  p(x)=1+x has ||p||=2 but p(1.5)=2.5 > 2  -> YES, the hypothesis is essential.
+  |p^(j)(x)| <= d! * ||p|| on [0,1]: violations = 0
+
+  WHERE IS IT APPLIED?  ranges of the arguments in this problem:
+    t   = m/n,      m in [b+r+1, n]   ->  t   in ( 0, 1 ]        OK
+    1-t             (Taylor centre of Hhat_{r-1}, K_{r-1})      ->  [0, 1)   OK
+    s   = a/n,      a in [0, n-b-r-1] ->  s   in [ 0, 1 )        OK
+    1-s = (n-a)/n                      ->  ( 0, 1 ]              OK
+    NB  s := (1-t)+h = (n-m+1)/n  is the ARGUMENT of h_{r-1}, but the Taylor
+        expansions in Delta_r are centred at 1-t and evaluated there, so the
+        polynomials are never evaluated outside [0,1].  s itself satisfies
+        s = (n-m+1)/n <= 1 iff m >= 1, and m >= b+r+1 >= 1, so s in (0,1] too.
+
+====================================================================================
+ITEM 3a -- falling-factorial product identity  prod_{i=k+1}^m (i-j)/i = C(k,j)/C(m,j)
+====================================================================================
+  prod_{i=k+1}^m (i-j) = (m-j)!/(k-j)! ,  prod_{i=k+1}^m i = m!/k!
+  so LHS = (m-j)! k! / ((k-j)! m!)
+  and C(k,j)/C(m,j) = [k!/(j!(k-j)!)] * [j!(m-j)!/m!] = k!(m-j)!/((k-j)! m!)
+  symbolic difference (gamma form), simplified: 0
+  numeric: 4764 concrete (j,k,m) triples tested, mismatches = 0
+
+====================================================================================
+ITEM 3b -- (1/k)C(k,j) = (1/j)C(k-1,j-1) and the hockey-stick sum
+====================================================================================
+  (1/k)C(k,j) - (1/j)C(k-1,j-1)  simplify -> 0
+  numeric summand identity: 429 (j,k) pairs, mismatches = 0
+  numeric  sum_(k=j)^m (1/k)C(k,j) = C(m,j)/j : 429 (j,m) pairs, mismatches = 0
+  numeric hockey stick  sum_(l=j-1)^(m-1) C(l,j-1) = C(m,j): mismatches = 0
+
+====================================================================================
+ITEM 3c -- does the CRUDE bound really produce a log n?  (constructed independently)
+====================================================================================
+  crude:   |R(m)| <= sum_{k=j}^{m} 1 * E/(k n^2) = (E/n^2) * (H_m - H_{j-1})
+  exact :  |R(m)| <= (E/n^2) * (1/(C(m,j))) * sum_{k=j}^m C(k,j)/k = E/(j n^2)
+
+    j    m=n   crude factor (H_m-H_(j-1))   exact factor 1/j  crude/exact
+    1     10                     2.928968           1.000000        2.929
+    1    100                     5.187378           1.000000        5.187
+    1   1000                     7.485471           1.000000        7.485
+    1  10000                     9.787606           1.000000        9.788
+    1 100000                    12.090146           1.000000       12.090
+    3     10                     1.428968           0.333333        4.287
+    3    100                     3.687378           0.333333       11.062
+    3   1000                     5.985471           0.333333       17.956
+    3  10000                     8.287606           0.333333       24.863
+    3 100000                    10.590146           0.333333       31.770
+    6     10                     0.645635           0.166667        3.874
+    6    100                     2.904044           0.166667       17.424
+    6   1000                     5.202138           0.166667       31.213
+    6  10000                     7.504273           0.166667       45.026
+    6 100000                     9.806813           0.166667       58.841
+
+  crude factor grows like log n (H_n ~ ln n + gamma);  exact factor is the
+  constant 1/j.  So the document's claim that exact telescoping removes a
+  spurious log n that the crude bound would introduce is CORRECT, not overstated.
+  (check: H_100000 = 12.09015, ln(100000)+gamma = 12.09014)

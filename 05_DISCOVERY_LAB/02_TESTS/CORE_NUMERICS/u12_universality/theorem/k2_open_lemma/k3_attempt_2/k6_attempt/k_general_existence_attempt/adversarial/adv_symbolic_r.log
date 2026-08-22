@@ -1,0 +1,28 @@
+========================================================================================
+FACT 2, symbolic r,k,b
+========================================================================================
+  k>=1 case:  LHS-RHS simplify = 0
+  k=0  case:  (1+r+b)c_0^(r)(b) - 1 = 0
+
+========================================================================================
+FACT 3, symbolic r,k,b -- recursion extracted independently from the ODE
+========================================================================================
+  general k>=1 case:  LHS-RHS simplify = 0
+  k=0 boundary case:  LHS-RHS simplify = 0
+
+  (cross-check the same two recursions numerically over many concrete (r,k,b))
+  numeric: 1200 (r,k,b) triples;  Fact2 mismatches=0  Fact3 mismatches=0
+
+========================================================================================
+SHARP PREDICTION P1:  R_1(m,b,n) == 0 exactly, every m,b,n
+========================================================================================
+  485 exact evaluations, nonzero residuals = 0   -> P1 CONFIRMED
+
+========================================================================================
+SHARP PREDICTION P2:  R_2(m,0,n) == 1/(15 n^2) exactly, EVERY m
+========================================================================================
+  220 exact evaluations, deviations from 1/(15n^2) = 0   -> P2 CONFIRMED
+
+  and the general-b version predicted by the same computation:
+     eps^h_1(a,b,n) = 2/((b+3)(b+4)) / n^2, independent of a:
+  deviations = 0  -> CONFIRMED

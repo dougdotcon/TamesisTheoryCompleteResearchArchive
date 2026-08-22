@@ -729,6 +729,38 @@ conjecture (§2, §3, §5) — proved modulo the expansion's existence for `r>10
 assumption checked and never once violated across every one of the eleven cases where
 independent checking is possible.
 
+> **[Correção pós-adversarial, 2026-08-22 — CAVEAT FECHADO, onda 8 frente (b)
+> `K-GENERAL-EXISTENCE-ATTEMPT`, DISC-DEC-040.]** A existência da expansão
+> assintótica de dois termos, para todo `r`, foi rederivada de primeiros
+> princípios em
+> `k_general_existence_attempt/ATTEMPT.md` — uma indução em `r` cujo passo
+> indutivo é um limitante de Gronwall discreto EXATO sobre a recursão discreta
+> já provada (não uma estimativa assintótica: a substituição de Taylor é
+> livre de resto para os polinômios de grau finito envolvidos, uma identidade,
+> não uma aproximação), com fechamento via a mesma identidade de
+> falling-factorial/hockey-stick que a onda anterior usou para RESOLVER a
+> recursão, agora reaproveitada para LIMITÁ-la. Verificado por um referee
+> hostil dedicado, independente, que rederivou os seis passos do zero (com
+> simulador e formas fechadas próprios, sem importar nenhum arquivo desta
+> linha) ANTES de ler o documento — veredito **SOUND — WITH NAMED ISSUES**,
+> nenhuma delas fatal (uma delas, um erro de expoente na justificativa
+> escrita do limitante de §4 daquele documento, foi corrigida via adendo
+> datado lá; o fato matemático subjacente já estava correto e foi verificado
+> independentemente pelo referee). Ver
+> `k_general_existence_attempt/adversarial/REFEREE_REPORT.md` para o relatório
+> completo (9 scripts independentes, milhares de verificações exatas por
+> `Fraction`/`sympy`, incluindo predições novas do próprio referee — não
+> apenas do documento-alvo — confirmadas exatamente).
+>
+> **Consequência: a ressalva declarada acima (§4) está FECHADA.** A forma
+> geral-`r`/geral-`K` do Lema Aberto e da conjectura de taxa deixam de ser
+> condicionais. Ver §5 abaixo (conjectura de taxa, forma corrigida) e
+> `THEOREM.md` "Estágio 6" para a promoção formal do Lema Aberto geral-`K` a
+> incondicional. **O que continua genuinamente aberto**, sem mudança: a forma
+> fechada exata todas-as-ordens de `ψ_n^{(K)}` para `K` geral (§6.2, não
+> tocada por este fechamento); e a taxa de crescimento em `r` das constantes
+> de erro `D_r(b),C_r(b)` do novo documento (nomeada lá, não perseguida).
+
 ---
 
 ## 5. The rate conjecture, restated standalone
@@ -752,6 +784,42 @@ For quick reference, separated from the derivation:
 directly from the exact discrete closed forms of `../ATTEMPT.md` and this document's
 §1. PROVED for general `K`, modulo §4's stated (and, in every checkable instance,
 verified) regularity assumption, via §2–§3's continuum-ODE argument.
+
+> **[Correção pós-adversarial, 2026-08-22 — issue I-4 do referee hostil dedicado
+> de `k_general_existence_attempt/adversarial/REFEREE_REPORT.md` §A.7, DISC-DEC-040.]**
+> A afirmação `\varphi_n^{(K)}-\varphi_K=\Theta(1/n)` **para todo `K\ge1`** acima
+> está ERRADA em `K=1`: `\varphi_n^{(1)}-\varphi_1=1/(3n^2)` exatamente (verificado
+> pelo referee em cinco valores de `n`, e consistente com o cancelamento total já
+> registrado alhures neste documento para o coeficiente de `1/n` combinado — ver a
+> correção pós-adversarial de §3.4 acima). Isso não é um erro deste documento — a
+> ressalva de §4 já cobria esta linha corretamente enquanto condicional — mas
+> promovê-la verbatim a incondicional (agora que §4 está fechado, ver correção
+> acima) converteria uma afirmação condicional FALSA em uma afirmação incondicional
+> FALSA, um resultado estritamente pior para o arquivo.
+>
+> **Correção: a afirmação certa, agora incondicional para todo `K`, é mais forte e
+> mais precisa do que "`\Theta(1/n)`"** — o próprio Teorema geral-`r` do documento
+> `k_general_existence_attempt/ATTEMPT.md` licencia, via a Lemma de Redução A (onda
+> 5, PROVADA) aplicada a `\varphi_n^{(K)}=(K/n)\psi_n^{(K),R}+(1-K/n)\psi_n^{(K)}` e
+> `\psi_n^{(K),R}=h_{K-1}(0,0)`, o coeficiente EXATO de `1/n`:
+>
+> `\displaystyle \varphi_n^{(K)}-\varphi_K = \frac{K\big[\varphi_K/4+F_{K-1}(1,1)-\varphi_K\big]}n + O(1/n^2)` para todo `K\ge1`,
+>
+> um coeficiente que é **exatamente `0` em `K=1`** (consistente com
+> `\Theta(1/n^2)` ali) e estritamente positivo para `2\le K\le12` (verificado):
+> `1/30` (`K=2`, número já conhecido da onda 5), `1/14` (`K=3`, número já
+> conhecido da onda 6), `23/210` (`K=4`), `29/198` (`K=5`), **`1093/6006`
+> (`K=6`, exatamente o valor que a correção pós-adversarial de §3.4 acima já
+> havia confirmado por quatro métodos independentes, agora recuperado por uma
+> QUINTA via, completamente distinta)**, `309/1430` (`K=7`), `10889/43758`
+> (`K=8`). Três confirmações independentes desta fórmula (`K=2,3,6`) batendo
+> com números já estabelecidos em ondas anteriores é evidência forte de que o
+> Teorema geral-`r` está fazendo trabalho matemático real, não apenas
+> reformulando o que já se sabia. **A afirmação `\Theta(1/n)` deve ser lida,
+> daqui em diante, como escopada a `K\ge2`** (com `K=1` uma exceção exata
+> `\Theta(1/n^2)`), ou, preferencialmente, substituída pela fórmula de
+> coeficiente exato acima, agora incondicional para todo `K\ge1`. Ver
+> `THEOREM.md` "Estágio 6" para a integração formal.
 
 ---
 
@@ -858,6 +926,33 @@ into a product formula, for a symbolic bound, was not something the default
 > Ver também §2.4 (adicionada nesta mesma revisão) para a análise
 > completa do porquê a ressalva é necessária e o que a evidência empírica
 > adicional do referee mostra sobre seu alcance.
+
+> **[Correção pós-adversarial, 2026-08-22 — SEGUNDA ATUALIZAÇÃO, DISC-DEC-040.]**
+> A correção acima (que uniformizou as linhas 5–7 como "modulo §4's caveat")
+> está agora SUPERADA pelo fechamento da própria ressalva (ver correção de §4
+> acima). Estado final desta tabela:
+>
+> - **Linha 5** (`F_r(t,b)`, geral `r`): **PROVED, incondicional.**
+> - **Linha 6** (`G_r(t,b)`, geral `r`): **PROVED, incondicional.**
+> - **Linha 7** (conjectura de taxa `\lim n(\psi_n^{(K)}-\varphi_K)=K\varphi_K/4`,
+>   geral `K`): **PROVED, incondicional, para todo `K\ge0`.**
+> - **Linha 8** (`K=0,\dots,10`): inalterada, subsumida pela linha 7 agora geral.
+> - **Linha 9** (`\varphi_n^{(K)}-\varphi_K=\Theta(1/n)` para todo `K\ge1`):
+>   **SUBSTITUÍDA.** Como escrita é FALSA em `K=1` (ver correção de §5 acima,
+>   issue I-4 do referee de `k_general_existence_attempt/`) — promovê-la
+>   verbatim a incondicional converteria uma afirmação condicional falsa em
+>   incondicional falsa. A afirmação correta e agora incondicional é
+>   `\varphi_n^{(K)}-\varphi_K=K[\varphi_K/4+F_{K-1}(1,1)-\varphi_K]/n+O(1/n^2)`
+>   para todo `K\ge1` — coeficiente exatamente `0` em `K=1`, positivo para
+>   `2\le K\le12` (verificado), reproduzindo `1/30` (`K=2`), `1/14` (`K=3`) e
+>   `1093/6006` (`K=6`), os três já conhecidos de ondas anteriores por vias
+>   independentes.
+> - **Linha 9 do Scorecard de `k_general_existence_attempt/ATTEMPT.md`**
+>   (revisão adversarial daquele documento) também está agora atualizada:
+>   PERFORMED, veredito SOUND — WITH NAMED ISSUES.
+>
+> Ver `k_general_existence_attempt/ATTEMPT.md` (onda 8 frente b, DISC-DEC-040)
+> e `THEOREM.md` "Estágio 6" para a prova e a integração formal.
 
 **Net honest verdict.** The task's two stated goals are both achieved. The concrete-`K`
 frontier moved from `K=5` (wave 6) to `K=10`, by wave 6's own method, with the same

@@ -2414,43 +2414,91 @@ queue:
         M-CLUST(b) em U_{1/2} no limite n->infinito permanece intocado.
         Ver
         02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/ATTEMPT.md
+      k_general_existence_attempt: >
+        Tentativa de fechar a ressalva de regularidade de
+        k6_attempt/ATTEMPT.md SS4 CONCLUIDA (DISC-DEC-040, DISC-DEC-038
+        frente b) -- FECHAMENTO COMPLETO. Existencia da expansao
+        assintotica de dois termos g_r(m,b)=F_r(t,b)+(1/n)G_r(t,b)+
+        O(1/n^2), para TODO r>=0 (nao so os 11 valores K=0,...,10 ja
+        verificados), provada por inducao em r cujo passo indutivo e um
+        limitante de Gronwall discreto EXATO (Taylor livre de resto
+        para os polinomios de grau finito envolvidos, uma identidade,
+        nao uma estimativa assintotica) sobre a recursao discreta exata
+        ja provada. Caso-base automaticamente subsumido: coeficiente de
+        contracao da recursao do residuo e exatamente zero em
+        m=b+r+1, fato algebrico real sobre a recursao JA PROVADA de
+        onda 6, nao suposicao nova. Fechamento via a mesma identidade de
+        falling-factorial/hockey-stick que a onda anterior usou para
+        RESOLVER a recursao, reaproveitada para LIMITA-LA -- limitante
+        uniforme sem fator log(n) espurio. Referee hostil dedicado
+        (modelo de maior capacidade de raciocinio) rederivou os seis
+        passos centrais do zero antes de ler o documento: identidade do
+        residuo em 477 pontos exatos (0 divergencias), identidade de
+        h_r em 309 pontos (0 divergencias), EDOs para r,k,b SIMBOLICOS
+        via formas fechadas em funcao gama (0 divergencias em 1200
+        triplas), e duas predicoes proprias do referee (R_1=0 exato
+        para todo m,b,n; R_2(m,0,n)=1/(15n^2) para todo m) confirmadas
+        exatamente. VEREDITO: SOUND -- WITH NAMED ISSUES, 4 questoes
+        nomeadas, nenhuma fatal, 2 corrigidas via adendo datado (I-1:
+        expoente trocado na justificativa escrita do limitante central,
+        fato subjacente ja correto; I-4: o documento PAI carregava a
+        mesma ressalva sobre uma afirmacao FALSA em K=1 -- corrigida
+        com a formula mais forte que o Teorema agora licencia,
+        phi_n^(K)-phi_K=K[phi_K/4+F_{K-1}(1,1)-phi_K]/n+O(1/n^2), zero
+        em K=1, reproduzindo 1/30 (K=2), 1/14 (K=3), 1093/6006 (K=6) --
+        tres confirmacoes independentes de numeros ja conhecidos, por
+        uma rota totalmente distinta). CONSEQUENCIA PRINCIPAL: Lema
+        Aberto geral-K de THEOREM.md SS7.4 PROVADO INCONDICIONALMENTE
+        PARA TODO K>=0; conjectura de taxa geral-K incondicional para
+        todo K>=0; Proposicao Condicional 5 (SS7.5) promovida a
+        **Teorema 3**: phi(n,c)->integral_0^1 e^(-ct^2)dt para todo
+        c>=0, incondicionalmente. Integrado como "Estagio 6" em
+        THEOREM.md; PROOF_DEPENDENCY_MAP.md Arvore A atualizada (todos
+        os nos agora verdes/incondicionais). Permanece aberto, sem
+        mudanca: forma fechada exata todas-as-ordens geral-K; taxa de
+        crescimento em r das constantes de erro D_r(b),C_r(b);
+        positividade do coeficiente de taxa para K>=13; versao
+        uniforme-em-c do Teorema 3; Conjecturas 1-2 (lei distribucional
+        completa). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
     next_action: >
-      Nenhuma acao obrigatoria na linha U_1/2. Consolidacao matematica
-      substancialmente mais forte apos ondas 6-7: Lema Aberto agora
-      PROVADO incondicionalmente para K=0,...,10 (onda 7 estendeu K=3,4,5
-      da onda 6 ate K=10); taxa Kphi_K/4 confirmada incondicionalmente
-      nos mesmos 11 valores. Para K geral (K>=11): PELA PRIMEIRA VEZ
-      existe uma rota de prova completa, adversarialmente verificada como
-      SOUND em cada etapa algebrica, para a conjectura de taxa geral-K --
-      mas permanece EXPLICITAMENTE CONDICIONAL a uma ressalva de
-      regularidade que o proprio referee hostil julgou corretamente
-      dimensionada (nem otimista nem conservadora demais), nao um
-      fechamento incondicional do Lema Aberto para K geral (a mesma
-      ressalva tambem descarrega o proprio Lema Aberto condicionalmente,
-      como corolario imediato -- ver THEOREM.md Estagio 5). O residuo
-      sistematico de M-CLUST(b) (gap (b) de onda 6) permanece
-      PARCIALMENTE FECHADO, agora com uma frente de continuacao
-      concluida (DISC-DEC-037): a obstrucao de agregacao especificamente
-      nomeada FOI fechada por primeiros principios e validacao
-      independente, mas isso NAO se traduziu em melhoria da formula phi
-      integrada -- phi_CAND (DISC-DEC-034) continua sendo a formula de
-      registro, chi^2~74-82 em 18 celulas, residuo pequeno mas real
-      permanece sem explicacao. Reaberturas futuras legitimas: (i) a
-      hipotese nomeada em aggregation_closure_attempt/ATTEMPT.md SS7.2
-      (exclusao de imagens consumidas em escala global tn, nao so a
-      janela local de x de ordem b) -- nao formalizada nem testada,
-      candidato mais promissor para fechar o residuo remanescente; (ii)
-      tentar fechar a existencia da expansao assintotica para r geral
-      (a ressalva de SS4 de k6_attempt/ATTEMPT.md) por inducao formal ou
-      outra via independente -- nenhuma tentada ainda; (iii) a forma
-      fechada exata todas-as-ordens geral-K permanece NAO TENTADA (SS6.2
-      de k6_attempt/ATTEMPT.md); (iv) so DEPOIS da consolidacao
-      considerar testar U_alpha (incl. o novo M-WEIB) em sistemas
-      empiricos reais -- explicitamente adiado por decisao do usuario,
-      exige pre-registro completo, nao busca de padrao. Mapa de
-      dependencias das duas frentes da onda 8 (a pedido do usuario, para
-      impedir que um resultado positivo numa frente seja usado como
-      evidencia da outra): ver
+      Nenhuma acao obrigatoria na linha U_1/2 -- e a linha atingiu seu
+      resultado mais forte possivel dentro do escopo original do
+      documento. Onda 8 fechou AMBAS as frentes: frente (b)
+      (DISC-DEC-040) fechou a ressalva de regularidade de
+      k6_attempt/ATTEMPT.md SS4 -- o Lema Aberto geral-K esta agora
+      PROVADO INCONDICIONALMENTE PARA TODO K>=0 (nao mais K=0,...,10
+      apenas), a conjectura de taxa geral-K e incondicional para todo
+      K>=0, e a Proposicao Condicional 5 de THEOREM.md SS7.5 foi
+      promovida a **Teorema 3**: para todo c>=0 fixo,
+      phi(n,c)->integral_0^1 e^(-ct^2)dt quando n->infinito,
+      incondicionalmente, sem nenhuma hipotese nao provada. Isto fecha
+      a linha de pesquisa principal do Lema Aberto por completo (ver
+      THEOREM.md "Estagio 6", PROOF_DEPENDENCY_MAP.md Arvore A
+      inteiramente verde). Frente (a) (DISC-DEC-039) fechou como
+      NAO-FECHAMENTO HONESTO -- a hipotese de exclusao global SS7.2
+      descartada como explicacao suficiente do residuo M-CLUST(b) nas
+      celulas de maior rho/b, phi_CAND permanece a formula de registro.
+      O residuo sistematico de M-CLUST(b) permanece PARCIALMENTE
+      FECHADO (Arvore B do mapa de dependencias, objeto matematico
+      inteiramente separado do Lema Aberto, intocado por Teorema 3).
+      Reaberturas futuras legitimas, nenhuma obrigatoria: (i) M-CLUST --
+      precisao de q_CLUST(s)=s/(1-rho) em rho>0,46; assimetria
+      x0-vs-outros-arc-starts; aproximacao de Poissonizacao da propria
+      formula-mestre (as tres suspeitas nomeadas por DISC-DEC-039,
+      nenhuma testada ainda); (ii) forma fechada exata todas-as-ordens
+      geral-K para psi_n^(K) (SS6.2 de k6_attempt/ATTEMPT.md, separada
+      e mais dura, intocada pelo fechamento de Teorema 3); (iii)
+      positividade do coeficiente de taxa phi_n^(K) para K>=13 (item
+      novo, mais estreito, de DISC-DEC-040); (iv) versao
+      localmente-uniforme-em-c do Teorema 3 (nunca tentada); (v)
+      Conjecturas 1-2 de THEOREM.md SS8 (lei distribucional completa,
+      K>=2) -- inalteradas, gap genuinamente separado de tudo que
+      fechou; (vi) so DEPOIS da consolidacao considerar testar U_alpha
+      (incl. M-WEIB) em sistemas empiricos reais -- explicitamente
+      adiado por decisao do usuario, exige pre-registro completo, nao
+      busca de padrao. Mapa de dependencias (atualizado, DISC-DEC-040):
       02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md.
 
   - test_id: DISC-ARCHIVE-PHASE0-SURVEY-001

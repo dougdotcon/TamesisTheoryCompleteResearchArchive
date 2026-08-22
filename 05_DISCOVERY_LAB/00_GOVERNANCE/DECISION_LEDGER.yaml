@@ -2221,3 +2221,113 @@ decisions:
       - "hipotese SS7.2 nao promovida a resultado -- catalogada como descartada com a mesma precisao/peso de um resultado positivo, per DISC-DEC-023/037"
       - "nenhum arquivo de residual_attempt/ ou aggregation_closure_attempt/ modificado -- apenas leitura, anexo em subpasta propria"
       - "frente (b) K-GENERAL-EXISTENCE-ATTEMPT permanece sob referee adversarial hostil dedicado, independente do desfecho desta frente, per o mapa de dependencias que impede uma frente ser usada como evidencia da outra"
+
+  - decision_id: DISC-DEC-040
+    date: 2026-08-22
+    decision: >
+      Integrar o resultado da onda 8 frente (b) `K-GENERAL-EXISTENCE-
+      ATTEMPT`: FECHAMENTO da ressalva de regularidade de
+      k6_attempt/ATTEMPT.md SS4 (existencia da expansao assintotica de
+      dois termos g_r(m,b)=F_r(t,b)+(1/n)G_r(t,b)+O(1/n^2), para r alem
+      dos 11 valores concretamente verificados K=0,...,10). Provada por
+      inducao em r cujo passo indutivo e um limitante de Gronwall
+      discreto EXATO (nao assintotico -- a substituicao de Taylor e
+      livre de resto para os polinomios de grau finito envolvidos, uma
+      identidade) sobre a recursao discreta exata ja provada. O
+      caso-base e automaticamente subsumido porque o coeficiente de
+      contracao da recursao do residuo e exatamente zero em m=b+r+1 --
+      um fato algebrico real sobre a recursao JA PROVADA de onda 6, nao
+      uma suposicao nova. Fechamento via a mesma identidade de
+      falling-factorial/hockey-stick que a onda anterior usou para
+      RESOLVER a recursao, reaproveitada para LIMITA-LA, dando um
+      limitante uniforme sem fator espurio log(n). Referee hostil
+      dedicado (modelo de maior capacidade de raciocinio, dado o peso da
+      alegacao) rederivou os seis passos centrais do zero -- simulador
+      proprio, formas fechadas proprias, recursao de coeficientes
+      extraida independentemente da EDO -- ANTES de ler o documento;
+      verificou a identidade do residuo em 477 pontos exatos (0
+      divergencias), a identidade de h_r em 309 pontos (0 divergencias),
+      as EDOs (Fatos 2-3) para r,k,b SIMBOLICOS via formas fechadas em
+      funcao gama (0 divergencias em 1200 triplas), e fez duas predicoes
+      proprias (R_1=0 exatamente para todo m,b,n; R_2(m,0,n)=1/(15n^2)
+      para todo m) confirmadas exatamente. VEREDITO: SOUND -- WITH NAMED
+      ISSUES, 4 questoes nomeadas, nenhuma fatal. I-1 (exigia correcao):
+      expoente trocado na justificativa escrita do limitante central de
+      SS4 (h^{j-1} em vez de h^j) -- corrigido via adendo datado, o fato
+      matematico subjacente ja estava correto e foi verificado
+      independentemente. I-2: ponto fora-de-dominio nao mencionado em
+      SS6, coeficiente exatamente zero, inofensivo -- anotado via
+      adendo. I-3: descricoes da evidencia numerica mais otimistas que
+      os logs retidos (cosmetico, nenhuma alegacao numerada afetada) --
+      anotado via adendo. I-4 (a jusante, critico para catalogacao): o
+      documento PAI (k6_attempt/ATTEMPT.md) carregava a mesma ressalva
+      sobre "phi_n^(K)-phi_K=Theta(1/n) para todo K>=1", mas essa
+      alegacao e FALSA em K=1 (=1/(3n^2) exatamente, ja registrado
+      alhures) -- promove-la verbatim converteria uma afirmacao
+      condicional falsa em incondicional falsa. Corrigido em
+      k6_attempt/ATTEMPT.md via adendo: a afirmacao certa, agora
+      incondicional, e o coeficiente exato
+      phi_n^(K)-phi_K=K[phi_K/4+F_{K-1}(1,1)-phi_K]/n+O(1/n^2), zero em
+      K=1, positivo verificado para 2<=K<=12 (reproduzindo 1/30 em K=2,
+      1/14 em K=3, e 1093/6006 em K=6 -- uma QUINTA confirmacao
+      independente deste ultimo valor, por uma rota completamente
+      diferente das quatro ja registradas em DISC-DEC-036).
+      CONSEQUENCIA PRINCIPAL: o Lema Aberto geral-K de THEOREM.md SS7.4
+      esta agora PROVADO INCONDICIONALMENTE PARA TODO K>=0 (nao apenas
+      K=0,...,10); a conjectura de taxa geral-K esta incondicional para
+      todo K>=0; e a Proposicao Condicional 5 (SS7.5) e promovida a
+      **Teorema 3**: para todo c>=0 fixo, phi(n,c) -> integral de 0 a 1
+      de e^(-ct^2) dt quando n->infinito, INCONDICIONALMENTE, sem
+      nenhuma hipotese nao provada. Integrado como "Estagio 6" em
+      THEOREM.md. O que permanece genuinamente aberto, sem mudanca:
+      forma fechada exata todas-as-ordens geral-K para psi_n^(K); taxa
+      de crescimento em r das constantes de erro D_r(b),C_r(b); se o
+      coeficiente de taxa e positivo para K>=13 (item novo, mais
+      estreito, substituindo a pergunta original sobre a ordem da taxa);
+      versao localmente-uniforme-em-c do Teorema 3; Conjecturas 1-2 (lei
+      distribucional completa) -- nenhum destes afetado por este
+      fechamento. Ver
+      02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/
+      (ATTEMPT.md + adversarial/REFEREE_REPORT.md), THEOREM.md "Estagio
+      6", e PROOF_DEPENDENCY_MAP.md Arvore A (atualizada, todos os nos
+      agora verdes/incondicionais).
+    rationale: >
+      Disciplina de reproducao adversarial obrigatoria (AGENTS.md passo
+      7) aplicada ao mais alto padrao dado o peso da alegacao -- referee
+      dedicado usando o modelo de maior capacidade de raciocinio
+      disponivel, brief exigindo rederivacao genuinamente independente
+      (nao proofreading) de cada um dos seis passos centrais, numerica
+      fresca em combinacoes nunca testadas pelo documento-alvo, e
+      predicoes proprias do referee (nao apenas checagem das do
+      documento) como teste mais forte de que o argumento e real. As
+      quatro questoes nomeadas foram tratadas com o mesmo rigor da
+      alegacao principal: I-1 e I-2 corrigidas/anotadas no documento-
+      alvo antes de cataloga-lo; I-4, a mais consequente, rastreada ate
+      sua origem no documento pai (nao um erro desta frente) e corrigida
+      la, com a formula mais forte que o proprio Teorema agora licencia,
+      nao apenas um re-escopo defensivo. Verificacao propria adicional
+      antes de integrar: confirmacao de que a formula do coeficiente de
+      taxa do referee reproduz de forma independente tres valores ja
+      conhecidos de ondas anteriores por vias totalmente distintas
+      (1/30, 1/14, 1093/6006), evidencia forte contra um erro sistematico
+      na nova derivacao. Mapa de dependencias (PROOF_DEPENDENCY_MAP.md)
+      atualizado no mesmo commit para que nenhuma leitura futura confunda
+      o estado anterior (condicional) com o atual (incondicional).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/ (integrado, incl. adversarial/)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/ATTEMPT.md (adendos datados: SS4, SS5, Scorecard)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (novo 'Estagio 6')"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore A atualizada)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "MUDANCA DE STATUS MAIOR: Lema Aberto geral-K (THEOREM.md SS7.4) de CONDICIONAL para PROVADO INCONDICIONAL, todo K>=0"
+      - "MUDANCA DE STATUS MAIOR: conjectura de taxa geral-K de CONDICIONAL para PROVADA INCONDICIONAL, todo K>=0"
+      - "MUDANCA DE STATUS MAIOR: Proposicao Condicional 5 (SS7.5) promovida a Teorema 3, incondicional para todo c>=0 -- fecha a linha de pesquisa U_1/2 principal (Lema Aberto) sem nenhuma ressalva remanescente"
+      - "nenhuma alegacao de progresso sobre nenhum Problema do Millennium -- este e um resultado de universalidade combinatoria autocontido, nao relacionado a nenhum problema classificado"
+    untouched_safeguards:
+      - "M-CLUST(b) (Arvore B do mapa de dependencias) permanece um objeto matematico inteiramente separado, intocado por este fechamento -- nenhuma aresta entre as duas arvores existe ou foi criada"
+      - "a forma fechada exata todas-as-ordens geral-K, a positividade do coeficiente de taxa para K>=13, a versao uniforme-em-c do Teorema 3, e as Conjecturas 1-2 (lei distribucional completa) permanecem honestamente abertas, nomeadas explicitamente como tal em THEOREM.md Estagio 6 -- nenhuma delas foi silenciosamente fechada ou insinuada como resolvida"
+      - "texto original de THEOREM.md SS7.4/SS7.5/SS9 preservado intacto como registro historico -- a atualizacao de status e feita via secao 'Estagio 6' adicionada ao final, mesmo padrao dos Estagios 3-5, nunca reescrita silenciosa"

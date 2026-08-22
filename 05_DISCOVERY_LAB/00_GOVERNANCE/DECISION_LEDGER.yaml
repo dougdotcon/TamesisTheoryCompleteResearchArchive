@@ -2331,3 +2331,61 @@ decisions:
       - "M-CLUST(b) (Arvore B do mapa de dependencias) permanece um objeto matematico inteiramente separado, intocado por este fechamento -- nenhuma aresta entre as duas arvores existe ou foi criada"
       - "a forma fechada exata todas-as-ordens geral-K, a positividade do coeficiente de taxa para K>=13, a versao uniforme-em-c do Teorema 3, e as Conjecturas 1-2 (lei distribucional completa) permanecem honestamente abertas, nomeadas explicitamente como tal em THEOREM.md Estagio 6 -- nenhuma delas foi silenciosamente fechada ou insinuada como resolvida"
       - "texto original de THEOREM.md SS7.4/SS7.5/SS9 preservado intacto como registro historico -- a atualizacao de status e feita via secao 'Estagio 6' adicionada ao final, mesmo padrao dos Estagios 3-5, nunca reescrita silenciosa"
+
+  - decision_id: DISC-DEC-041
+    date: 2026-08-22
+    decision: >
+      Autorizar onda 9, continuando o modo padrao de operacao
+      multi-linha (DISC-DEC-023), com a onda 8 (DISC-DEC-038/039/040)
+      agora inteiramente fechada em ambas as frentes -- 2 frentes
+      matematicas puras independentes, ambas reaberturas explicitamente
+      nomeadas como legitimas pelas proprias integracoes que as
+      descobriram. (a) `MCLUST-X0-ASYMMETRY-ATTEMPT` -- testar a
+      hipotese nomeada em DISC-DEC-039: o formalismo de M-CLUST(b)
+      assume que x0 (fixo desde o inicio do passeio, nunca criado por um
+      sorteio de reroteamento) se comporta identicamente aos OUTROS
+      membros de Y_live (todos criados dinamicamente por sobrevivencia
+      de reroteamento) sob a mesma elevacao P -- isso nunca foi testado
+      separadamente; medicao direta (simulador de caminhada, isolando a
+      elevacao medida em x0 especificamente vs. a elevacao medida nos
+      demais arc-starts vivos) pode revelar uma assimetria real que
+      ajudaria a explicar o residuo remanescente de phi_CAND nas celulas
+      de maior rho/b. (b) `RATE-COEFFICIENT-POSITIVITY-ATTEMPT` --
+      tentar provar (ou refutar) que o coeficiente exato de 1/n de
+      phi_n^(K)-phi_K, c_K:=K[phi_K/4+F_{K-1}(1,1)-phi_K] (DISC-DEC-040),
+      e estritamente positivo para todo K>=13 -- verificado apenas para
+      2<=K<=12 ate agora. Como F_r(t,b) ja tem forma fechada simbolica
+      em r (k6_attempt/ATTEMPT.md SS2.3, PROVADA incondicionalmente
+      desde a onda 8), este e um problema de desigualdade sobre uma
+      expressao fechada explicita, nao uma nova questao de existencia --
+      potencialmente tratavel por inducao, analise assintotica em K, ou
+      identidade geradora sobre a forma fechada ja disponivel. Sucesso
+      fecharia o ultimo item nomeado que distingue "PROVADO O(1/n)" de
+      "PROVADO Theta(1/n)" na linha U_1/2.
+    rationale: >
+      Ambas as frentes sao reaberturas explicitamente nomeadas como
+      legitimas pelas proprias integracoes que as descobriram --
+      DISC-DEC-039 nomeia precisamente a assimetria x0-vs-outros-
+      arc-starts como suspeita nao testada; DISC-DEC-040/THEOREM.md
+      Estagio 6 nomeia precisamente a positividade do coeficiente de
+      taxa para K>=13 como item aberto, mais estreito, substituindo a
+      pergunta original sobre a ordem da taxa. Nenhuma das duas e busca
+      forcada -- ambas tem escopo, criterio de sucesso, e criterio de
+      "nao consegui fechar" honesto ja embutido no desenho pelas
+      proprias frentes anteriores. Matematica combinatoria/assintotica
+      pura (frente b) e medicao direta de mecanismo (frente a), nenhum
+      dado externo, nenhum holdout, consistente com o padrao de
+      DISC-DEC-033/035/038.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/ (novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/ (novo)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "nenhuma mudanca de status -- ambas exploratorias/tecnicas dentro de linhas ja com resultado de registro (phi_CAND para M-CLUST; Teorema 3 para o Lema Aberto, ja incondicional independente do desfecho da frente b desta onda)"
+    untouched_safeguards:
+      - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente e um desfecho aceito e completo, mesmo padrao de todas as ondas anteriores"
+      - "qualquer resultado positivo exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a K2/K3/K6/geral-r/M-CLUST"
+      - "Teorema 3 (THEOREM.md Estagio 6) ja e incondicional e nao depende do desfecho da frente (b) desta onda -- a positividade do coeficiente para K>=13 e uma pergunta estritamente mais fina (Theta(1/n) vs. O(1/n) ja provado), nao uma nova ressalva sobre o Lema Aberto ou a conjectura de taxa em si"
+      - "phi_CAND permanece a formula de registro de M-CLUST(b) ate que qualquer resultado positivo desta onda seja adversarialmente confirmado e integrado"

@@ -11,6 +11,8 @@
 
 Este repositório preserva a trajetória completa do Laboratório Tamesis, seu ramo experimental atual e suas linhas históricas, matemáticas, físicas, computacionais e cognitivas. O arquivo contém **280 registros auditados**, organizados em **274 dossiês de auditoria**. A auditoria não transforma conjecturas em fatos: ela torna explícito o que é demonstração, modelo, simulação, ajuste, hipótese ou cenário especulativo.
 
+Desde 2026, o arquivo também opera um **laboratório de adjudicação contínua** (`05_DISCOVERY_LAB`): as alegações quantitativas do próprio arquivo são fechadas, uma a uma, contra referências externas reais, com critérios pré-registrados e reprodução adversarial obrigatória. O desfecho — dezenas de fechamentos negativos catalogados com veredito final e um resultado matemático positivo derivado e verificado adversarialmente — está sintetizado no **[artigo científico do laboratório](ARTIGO_DISCOVERY_LAB/index.html)**.
+
 ## Leitura rápida
 
 O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md) apresenta as perguntas, respostas, impactos, aplicações e novas perguntas produzidas pelo conjunto da pesquisa. Há também uma versão [HTML pronta para impressão em PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html).
@@ -26,26 +28,41 @@ O relatório institucional [Visão final do Laboratório Tamesis](RELATORIO_VISA
 | Problemas do Millennium e TOE | **Não resolvidos** | Os textos são conjecturas, reduções ou modelos restritos; não são soluções aceitas. |
 | Adjudicação numérica do núcleo | **Onda 1 concluída (2026-08-21)** | Ver seção "Adjudicação numérica em andamento" abaixo — 3 alegações fechadas negativas com veredito final, 1 parcialmente confirmada por reprodução adversarial. |
 
-### Adjudicação numérica em andamento (Discovery Lab, atualizado 2026-08-21)
+### O programa de adjudicação (Discovery Lab, atualizado 2026-08-22)
 
 O `05_DISCOVERY_LAB` mantém uma adjudicação contínua das alegações quantitativas
-deste arquivo contra referências externas reais (PDG, CODATA, Planck), com
-metodologia fixada antes de cada cálculo, proveniência de todo valor de
-referência e reprodução adversarial obrigatória para achados positivos.
-Registro completo: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` e
-`05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml` (`DISC-DEC-013`/`-014`).
+deste arquivo contra referências externas reais (PDG, CODATA, Planck, SPARC,
+Gaia, Odlyzko), com metodologia fixada antes de cada cálculo, proveniência de
+todo valor de referência e reprodução adversarial obrigatória para achados
+positivos. Registro completo: `05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml` e
+`05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml`. Síntese em formato de
+artigo: **[`ARTIGO_DISCOVERY_LAB/index.html`](ARTIGO_DISCOVERY_LAB/index.html)**.
 
-| Alegação do núcleo | Veredito (critérios a priori) |
-|---|---|
-| Consistência interna de `M_c` | **Inconsistente.** 4 valores divergem em até ~190×; o valor congelado usa o ramo `a₀=cH₀` desfavorecido pelo próprio teste SPARC-002 do laboratório; fórmula do rascunho PRL dimensionalmente inconsistente. |
-| Massas de quarks via nós (`M∝e^{αL/D}`, "R²>0,99") | **Não sobrevive.** R² real 0,986/0,935; leave-one-out falha em 5/6 quarks; percentil 86/70 no nulo de permutação (limiar 95). |
-| `sin²θ_W=3/13`, `α⁻¹=Ω^{1.03}`, `n_s` do bounce, Λ holográfico | **Nenhuma sobrevive como formulada.** 7,5σ no esquema mais favorável; ajuste com 0 g.l.; tuning de `ξ` confirmado no código; Λ reproduz `ρ_crit` por identidade algébrica (razão ≡ 1/Ω_Λ). |
-| Classe de universalidade U₁/₂ (`φ(c)=(1+c)^{-1/2}`) | **Parcialmente confirmada** (reprodução adversarial independente): expoente de cauda 1/2 e distinção das classes concorrentes CONFIRMADOS; o "teorema" de limite exato REFUTADO (desvios estáveis até n=64.000); o objeto-limite verdadeiro foi identificado e explica todo o dado. Pergunta aberta: qual é a função-limite exata? |
-| Zeros de ζ — triagem itens 5/6/10 (avaliação de `ζ(s)`) | Itens 5 e 6 despriorizados com justificativa concreta; **item 10 (máximos FHK em intervalos curtos) priorizado** — único com pergunta falseável e modelo concorrente nomeado; pré-registro em desenho. |
+**O funil de sobrevivência completo (2026):**
 
-Anteriormente: a linha `DISC-TRI-RG-001` (invariante cross-domain) foi encerrada
-`CLOSED_NULL` após 16/16 candidatos sem sobrevivente, e as linhas SPARC/MOND
-fecharam inconclusivas — ver `05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md`.
+| Linha | Testado | Desfecho |
+|---|---|---|
+| Invariante cross-domain (TRI-RG) | 16 candidatos, 5 rodadas | `CLOSED_NULL` — 0 sobreviventes; 4 achados `p<0,05` refutados por reprodução adversarial (explicações mundanas demonstradas) |
+| Cosmologia SPARC/MOND + binárias Gaia | 4 testes pré-registrados | 4/4 inconclusivos por confundidores reais demonstrados; 2 resultados legados de manchete descobertos como **dados fabricados** e refeitos com dado real |
+| Zeros de ζ (RH-REAL, linha aberta) | 8 itens triados, 2 sub-testes completos | 2 achados replicados (anti-clustering de gaps; escala GUE `N^(-1/3)`); teste FHK pré-registrado em execução |
+| Adjudicação do núcleo (onda 1) | 7 alegações | `M_c` inconsistente (~190× entre valores); quarks/nós reprovado no leave-one-out; `sin²θ_W=3/13` a 7,5σ com tuning hardcoded; `α⁻¹=Ω^{1.03}` com 0 g.l.; `n_s` bounce não-identificável; Λ holográfico ≡ ρ_crit por identidade algébrica |
+| **Função-limite U₁/₂ (onda 2)** | 1 pergunta aberta | **Forma fechada DERIVADA e verificada adversarialmente** (ver abaixo) |
+
+**O resultado positivo principal:** a classe de universalidade U₁/₂ (permutação
+aleatória com perturbação `c/n` para mapa aleatório) tem função-limite exata
+
+> `φ_∞(c) = ∫₀¹ e^(−ct²) dt = ½·√(π/c)·erf(√c)` — zero parâmetros livres,
+
+derivada analiticamente (não ajustada), corrigindo a conjectura original do
+arquivo `(1+c)^(-1/2)` (excluída já no 1º coeficiente da série: `a₁ = 1/3 ≠ 1/2`,
+confirmado por enumeração exata). Verificação adversarial independente confirmou
+em 4 superfícies: enumeração exata, Monte Carlo em valores novos de `c`,
+re-derivação analítica cega e a lei condicional de Wallis
+`φ_K = 4^K(K!)²/(2K+1)!` — identificada como o caso de parâmetro fixo de
+Hansen & Jaworski (2014); a mistura de Poisson com forma erf possivelmente é
+nova. Limitações honestas: passagem n→∞ controlada empiricamente (não
+formalizada); lei distribucional para K≥2 segue conjectura. Nenhuma implicação
+física é alegada — é um resultado de matemática combinatória.
 
 ## Visão do laboratório
 
@@ -76,6 +93,7 @@ flowchart LR
 
 ## Comece aqui
 
+- **[Artigo científico do Discovery Lab (2026) — adjudicação adversarial e a função-limite U₁/₂](ARTIGO_DISCOVERY_LAB/index.html)**
 - [Relatório final de visão do laboratório](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)
 - [Versão HTML para apresentação e PDF](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)
 - [Relatório da auditoria dos 280 artigos](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
@@ -96,7 +114,7 @@ flowchart LR
 | **A. Fundamentos e arquitetura da realidade** | Informação, geometria ou computação podem gerar espaço-tempo e leis efetivas? | Arquitetura conceitual e modelos candidatos. | Gravidade quântica, geometria informacional, modelagem de redes. |
 | **B. Axiomas e pontes operacionais** | Um conjunto pequeno de axiomas reproduz equações observadas sem ajuste setor a setor? | Fechamento parcial e condicional. | Derivação de modelos, testes de consistência e redução de parâmetros. |
 | **C. TDTR, TRI e irreversibilidade** | Como regimes mudam e por que certas transições são irreversíveis? | Vocabulário, bibliotecas e modelos de transição. | Termodinâmica, dinâmica dissipativa e setas do tempo. |
-| **D. Universalidade** | Sistemas diferentes compartilham invariantes e leis de escala? | Classes promissoras em modelos restritos. | Detecção de transições, análise de falhas e controle adaptativo. |
+| **D. Universalidade** | Sistemas diferentes compartilham invariantes e leis de escala? | **Função-limite exata da classe U₁/₂ derivada e verificada adversarialmente (2026-08)**; busca por invariante cross-domain empírico fechada nula (16/16). | Detecção de transições, análise de falhas e controle adaptativo. |
 | **E. Espectros e Riemann** | Existe um operador cujo espectro realize os zeros da zeta? | Rota matemática legítima; sem prova da Hipótese de Riemann. | Teoria espectral, caos quântico e análise numérica. |
 | **F. Computação, grafos e primos** | Estruturas aritméticas podem ser codificadas em grafos e sistemas computacionais? | Algoritmos e correspondências exploratórias. | Graph learning, análise de redes e algoritmos espectrais. |
 | **G. Cosmologia observacional** | Que observável distingue Tamesis de `ΛCDM`, MOND e modelos concorrentes? | Catálogo de testes; sem substituição empírica demonstrada. | CMB, BAO, supernovas, lentes, SPARC e ondas gravitacionais. |
@@ -155,7 +173,10 @@ O laboratório usa uma linguagem comum para comparar sistemas: **estado, recurso
 - atlas de regimes, transições, operadores, redes e sistemas cognitivos;
 - catálogo de testes observacionais e experimentais com modelos nulos;
 - versão HTML/PDF institucional para apresentação acadêmica;
-- preservação de versões históricas sem endossar suas alegações como resultados atuais.
+- preservação de versões históricas sem endossar suas alegações como resultados atuais;
+- **adjudicação adversarial completa das alegações quantitativas do núcleo** (2026): mais de 30 alegações fechadas com critérios pré-registrados, incluindo a detecção e correção de 2 resultados legados baseados em dados fabricados;
+- **um resultado matemático novo, derivado e verificado adversarialmente**: a função-limite exata `φ_∞(c) = ½√(π/c)·erf(√c)` da classe U₁/₂ (ver o [artigo](ARTIGO_DISCOVERY_LAB/index.html));
+- dois achados replicados sobre os zeros reais da função zeta (anti-clustering de gaps consecutivos; escala GUE do gap mínimo).
 
 ## O que ainda não foi demonstrado
 
@@ -171,6 +192,8 @@ Essas linhas permanecem como conjecturas, programas de teste ou modelos restrito
 | `01_TAMESIS_CORE` | Teoria central, modelos, ativos e validação experimental. |
 | `02_TAMESIS_MC_V1_OUTPUTS` | Figuras e animações convenientes do ramo `M_c v1`. |
 | `03_EXPERIMENTAL_COLLABORATION_PACKAGE` | Materiais para colaboração e qualificação experimental. |
+| `05_DISCOVERY_LAB` | Laboratório de adjudicação: fila de testes, ledgers de governança, notas de metodologia, resultados e vereditos adversariais. |
+| `ARTIGO_DISCOVERY_LAB` | Artigo científico síntese do programa de adjudicação (HTML + figuras geradas por script dos JSONs de resultado). |
 | `90_LEGACY` | Ramos históricos, substituídos, especulativos ou sem sustentação atual. |
 | `RECURSOS_PARA_PESQUISA` | Referências e materiais de pesquisa; não são evidência produzida pelo projeto. |
 | `publicar` / `publicados` | Organização editorial de artigos destinados a publicação e já publicados. |

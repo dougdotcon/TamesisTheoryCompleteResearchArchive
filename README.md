@@ -204,6 +204,31 @@ flowchart LR
 | **O. Cosmologias especulativas e engenharia métrica** | Bounces, universos-pai ou métricas modificadas geram observáveis? | Cenários especulativos. | Apenas após solução covariante, estabilidade e causalidade. |
 | **P. Infraestrutura científica** | Como manter pesquisa interdisciplinar reproduzível e honesta? | Inventário e auditoria rastreáveis. | Governança, revisão, preprints e colaboração externa. |
 
+### Potencial de conclusão por linha (estimativa operacional, não uma métrica do arquivo)
+
+A tabela abaixo estima, linha por linha, **quanto da lacuna identificada em cada pergunta central já foi caracterizado** — não a probabilidade de a hipótese estar certa, nem uma métrica calculada pelo laboratório. É uma leitura externa, calibrada contra o estado real documentado em cada linha (`RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md` §6 e `05_DISCOVERY_LAB/`), com uma correção importante em relação à versão original: **a Linha D precisa ser lida em duas partes.** O subconjunto `U₁/₂`, adjudicado rigorosamente pelo Discovery Lab, está muito adiantado; mas a Linha D como um todo — que no relatório original também inclui `U₀`, `U₂`/Lindblad, o atlas geral de classes e as aplicações topológicas — **não** avançou na mesma proporção: o próprio levantamento arquivo-inteiro do laboratório (`DISC-ARCHIVE-PHASE0-SURVEY-001`) registra que `U₀` e `U₂`, ao contrário de `U₁/₂`, nunca chegaram a uma forma fechada candidata. Tratar "Linha D" como 85% resolvida seria exatamente o tipo de conflação que a disciplina deste arquivo existe para evitar.
+
+| Rank | Linha | Conclusão estimada | Situação | Para fechar |
+|---:|---|---:|---|---|
+| 🥇 | **D — U₁/₂** (subconjunto adjudicado, `DISC-CORE-NUMERICS-001`) | **~85%** | 🔥 Ativa — Lema Aberto provado incondicionalmente para `K=0,…,10`, taxa geral-`K` provada condicionalmente | Fechar a ressalva de regularidade geral-`K` **e** o resíduo de M-CLUST — as duas frentes rodando agora (ver [mapa de dependências](05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md)) |
+| 🥈 | **P — Infraestrutura** | **~90%** | 🔧 Contínua — desde jul/2026 ganhou uma segunda camada: pré-registro + reprodução adversarial obrigatória + ledgers de decisão/claim (`05_DISCOVERY_LAB/00_GOVERNANCE/`) | Versionamento semântico, dados/código abertos, revisão externa |
+| 🥉 | **B — Axiomas** | 35% | 🟡 Potencial | Provar que as pontes preservam simetrias/conservação sem ajuste setor a setor |
+| 4 | **E — Riemann** | 30% | 🟡 Exploratória — desde jul/2026, 12 itens do levantamento `RH-REAL` todos com disposição final; 2 achados replicados (anti-clustering; escala GUE), nenhum sobre RH em si | Operador auto-adjunto cujo espectro realize os zeros, com controle de erro completo |
+| 5 | **M — Estabilidade** | 30% | 🟡 Exploratória | Teorema pequeno, hipóteses completas, benchmark contra Lyapunov/LQR |
+| 6 | **C — Irreversibilidade** | 25% | 🟡 | Monotone não trivial + classe de transição testável |
+| 7 | **F — Grafos/primos** | 25% | 🟡 | Benchmarks e teoremas de correspondência formal |
+| 8 | **J — Quântico-clássico** | 25% | 🟡 | Protocolo cego que separe decoerência, colapso e gravidade |
+| 9 | **L — Topologia cognitiva** | 25% | 🟡 | Invariante definido + confiabilidade interavaliador + dados independentes |
+| 10 | **A — Fundamentos** | 20% | ⚪ | Ação mínima com graus de liberdade, unidades e previsão nova |
+| 11 | **G — Cosmologia** | 20% | ⚪ — desde jul/2026, 4 testes pré-registrados **executados** com dado real (SPARC-001…004), todos `CLOSED_INCONCLUSIVE`; achado honesto de confundidor RUWE, não apenas catálogo de testes pendentes | Observável que distinga Tamesis de `ΛCDM`/MOND e sobreviva fora da amostra |
+| 12 | **I — Partículas** | 20% | ⚪ | Ação gauge completa + renormalização + previsão de collider |
+| 13 | **H — Buracos negros** | 15% | ⚪ | Métrica/tensor de energia + causalidade + observável de horizonte |
+| 14 | **K — Cognição** | 15% | ⚪ — desde jul/2026, 1 hipótese concreta testada e **refutada** adversarialmente (`DISC-COGNITIVE-EEG-SPECTRAL-001`: entropia espectral EEG em depressão, efeito real na direção oposta à prevista); a pergunta ampla (controle/memória/consciência) segue sem modelo único | Reduzir a um fenômeno mensurável com previsão reprodutível |
+| 15 | **O — Cosmologias especulativas** | 10% | ⚪ | Solução covariante consistente antes de qualquer observável |
+| 16 | **N — Millennium** | 5% | 🔴 — nenhuma solução; linha permanentemente fora de escopo para alegações de resolução | Teorema completo e verificável para o problema original, não uma heurística restrita |
+
+**Como não usar esta tabela.** Um "85%" não significa 85% de chance de a classe `U₁/₂` estar correta, nem que a Linha D esteja perto do fim — significa que, das lacunas explicitamente nomeadas nessa pergunta específica, a maior parte já foi provada ou precisamente caracterizada. Se o critério for "onde concentrar esforço agora", a resposta é a mesma que já orienta o laboratório: a maior parte da capacidade de pesquisa disponível vai para `D — U₁/₂`, dividida exatamente entre as duas frentes já em execução — fechar o resíduo de M-CLUST e remover a ressalva de regularidade geral-`K`.
+
 ## Um ciclo de pesquisa verificável
 
 ```mermaid

@@ -1,0 +1,163 @@
+PROGRESS.log -- wave 11, front (b), ALL-ORDERS-CLOSED-FORM-ATTEMPT (DISC-DEC-047)
+chronological checkpoint trail; by-hand derivations recorded BEFORE the
+corresponding code was written.
+
+--------------------------------------------------------------------------
+[1] READING, in the mandated order, before any derivation or code.
+    - DECISION_LEDGER.yaml DISC-DEC-047 (mandate, scope, "falhar honestamente
+      (ausencia de padrao) e um desfecho aceito e completo").
+    - THEOREM.md Estagio 6 (item (i) named as open), Estagio 7 (item (i)
+      unchanged), Estagio 8 (the (H_r,L_r) rung, Theorem 1/3/4).
+    - k_general_existence_attempt/ATTEMPT.md in full (exact residual
+      recursion, the exact-finite-Taylor mechanism, the falling-factorial /
+      hockey-stick telescoping, the I-1/I-2/I-3 addenda).
+    - error_constant_growth_attempt/ATTEMPT.md in full; Sec.3.1 (the eps^2
+      matching) and Sec.8.4 ("the one thing a referee should attack first";
+      "the multiplier sequence 1, C(k+2,2), (3k+8)/4 C(k+3,3) is suggestive
+      but three terms is not a pattern") are the direct targets.
+    - its adversarial/REFEREE_REPORT.md Parts 1 (the eps^2 re-derivation),
+      2, 3.3 (Theorem 3'), 4.
+    - k6_attempt/ATTEMPT.md Sec.2.3 / 3.3 (the PROVED c_k, d_k closed forms)
+      and Sec.6.2 (the exact statement of what item (i) asks for).
+    - k3_attempt_2/ATTEMPT.md Sec.2 (the exact transition rules, PROVED) and
+      Sec.3 (the per-K telescoping ALGORITHM -- explicitly not a general-K
+      closed form) and Sec.7.1 (psi_n^(4), psi_n^(5)).
+
+--------------------------------------------------------------------------
+[2] BY HAND, before code: the general-order eps-matching.
+    Rather than doing the eps^3 order as a one-off, I carried the matching at
+    a symbolic order index p, because the shift s = (1-t) + eps is exact and
+    every Taylor expansion involved terminates.  Result (my own derivation,
+    written down before any script existed):
+
+      t (Phi[p])' + (1+r+b) Phi[p]
+        = [p==0]
+        + r     sum_{i=0..p}    (-1)^i/i!     (eta[p-i]_{r-1})^(i)
+        + t     sum_{i=2..p+1}  (-1)^i/i!     (Phi[p+1-i]_r)^(i)
+        + (1+r+b) sum_{i=1..p}  (-1)^(i+1)/i! (Phi[p-i]_r)^(i)
+
+      eta[p]_r(t,b) = [p==1] + r eta[p-1]_{r-1}(t,b+1)
+                       + t Phi[p]_r(t,b+1) - (1+b+r) Phi[p-1]_r(t,b+1)
+
+    Checked by hand that p=0 reproduces Fact 2, p=1 reproduces Fact 3, and
+    p=2 reproduces Estagio 8's boxed H_r ODE and L_r relation
+    character-for-character (it does; see ATTEMPT.md Sec.2.3).  The p=3
+    instance is the mandated (I_r, M_r) pair.
+
+--------------------------------------------------------------------------
+[3] core.py written from scratch (own Poly type, own Ladder, own exact Chain
+    simulator).  SMOKE TESTS, all passing on the first complete run:
+      - order 0 == the PROVED c_k^(r)(b), r<=12, b<=4, all k : 0 mismatches
+      - order 1 == the PROVED d_k^(r)(b) : 0 mismatches
+      - order 2 == the PROVED e_k^(r)(b) : 0 mismatches
+      - F_r(1,0)=varphi_r, G_r(1,0)=r varphi_r/4,
+        H_r(1,0)=r(3r+1)varphi_r/32 - r/12 : 0 mismatches
+      - own simulator == PROVED psi_n^(1), psi_n^(2) : 0 mismatches
+      - own simulator: g_6(7,0) = 355081/823543, the value the wave-7 referee
+        confirmed by exhaustive brute force
+      - Hhat_2(0,0)=11/30, K_2(0,0)=13/20, L_2(0,0)=23/60 AND the brand-new
+        M_2(0,0)=1/10 -- all four match psi_n^(3),R = 11/30 + 13/(20n)
+        + 23/(60n^2) + 1/(10n^3), PROVED elsewhere.  The 1/n^3 coefficient
+        matching was the first independent confirmation of the new rung.
+      - degrees of Phi[p]_8 : 8,7,6,5,4,3,2,1,0  -> deg Phi[p]_r = r-p, and
+        Phi[p]_r == 0 once p > r.  THE SERIES TERMINATES.
+
+--------------------------------------------------------------------------
+[4] explore_multipliers.py.  Stripping the shared falling-factorial and
+    denominator-product structure gives an r,b-INDEPENDENT multiplier M_p(k)
+    (first run p<=6,r<=16,b<=5: 4494 instances, 0 inconsistencies; the retained
+    log is the wider rerun p<=7,r<=18,b<=5: 6264 instances, 0).  Table:
+
+        p\k    0     1     2     3      4      5
+        0      1     1     1     1      1      1
+        1      1     3     6    10     15     21
+        2      2    11    35    85    175    322
+        3      6    50   225   735   1960   4536
+        4     24   274  1624  6769  22449  63273
+        5    120  1764 13132 67284 269325 902055
+
+    Recognised immediately:  column k=0 is p! ; column k=1 is 1, 3, 11, 50,
+    274, 1764 = (p+1)! H_{p+1}.  Those are c(p+1,1) and c(p+2,2), the
+    unsigned Stirling numbers of the first kind.  CONJECTURE:
+
+        M_p(k) = c(k+p+1, k+1)
+
+    which reproduces the three PROVED multipliers exactly, since
+    c(N,N)=1, c(N,N-1)=C(N,2), c(N,N-2)=(3N-1)/4 C(N,3).
+
+--------------------------------------------------------------------------
+[5] THE KEY OBSERVATION, by hand.  If the multiplier is c(j+1,k+1) with
+    j := k+p, then at fixed j the eps/t part of the expansion is
+
+      sum_k c(j+1,k+1) t^k eps^(j-k) = (1/t) sum_M c(j+1,M) t^M eps^(j+1-M)
+                                     = (1/t) * t(t+eps)...(t+j eps)
+                                     = prod_{i=1}^{j} (t + i eps),
+
+    the homogenised rising-factorial generating identity for c(n,m).  And
+    prod_{i=1}^{j}(t + i/n) = (m+j)!/(m! n^j) exactly.  So the whole series
+    RESUMS, and because it terminates at p=r the resummation is EXACT:
+
+      g_r(m,b) = sum_{j=0}^{r} c_j^(r)(b) * (m+j)!/(m! n^j).
+
+    Hand-checked at r=0,1,2 before coding: reproduces g_0=1/(b+1),
+    psi_n^(1)=(4n+1)/(6n), psi_n^(2)=(8n^2+4n+1)/(15n^2) exactly, and
+    psi_n^(3)=(64n^3+48n^2+25n+6)/(140n^3) after one page of arithmetic.
+
+--------------------------------------------------------------------------
+[6] BY HAND: the proof.  Writing A_j := c_j^(r)(b) and P_j(m) := (m+j)!/m!,
+    the two elementary facts P_j(m)-P_j(m-1) = j P_{j-1}(m) and
+    P_j(m-1) = m P_{j-1}(m), together with
+
+        A_j (j+1+r+b) = r A_{j-1}^(r-1)(b+1)     and   (1+r+b) A_0 = 1,
+
+    turn m[ghat_r(m)-ghat_r(m-1)] + (1+r+b) ghat_r(m-1) into exactly
+    1 + (r m/n) ghat_{r-1}(m,b+1), which is 1 + r hhat_{r-1}(n-m+1,b) once
+    hhat is DEFINED as ((n-a+1)/n) ghat_r(n-a+1,b+1).  The source rule is the
+    same identity re-indexed.  Uniqueness of the solution of the transition
+    system is immediate (a+b strictly increases on every call, bounded by n),
+    so no separate base case or boundary layer is needed anywhere.
+
+--------------------------------------------------------------------------
+[7] VERIFICATION RUNS (all exact; logs retained)
+    verify_closed_form.log : 18522 ladder-vs-Conjecture-M checks, 0 mismatches;
+        12305 + 12305 simulator checks of Theorem A / Theorem B, 0 mismatches;
+        psi_n^(1..4) and psi_n^(3),R reproduced.
+    verify_symbolic.log    : S1 (the pivot identity) SYMBOLIC in r,j,b -> 0;
+        S2, S3 symbolic; S4 Stirling generating identity (own implementation,
+        cross-checked against sympy's); S5 the full non-source identity with
+        symbolic m,n,b for r=0..9 -> 0; S6 the source identity, symbolic
+        a,n,b, r=0..9 -> 0; S7 Theorem A => Theorem M; S8 the h-side closed
+        form, 328 symbolic checks -> 0.
+    order_ladder.log       : the mandated I_r / M_r rung verified (2233 + 920
+        checks); the truncation-error-is-exactly-the-tail claim verified at
+        34907 exact points, with 0 cases where a p>r residual was nonzero.
+    cross_checks.log       : 17/17 -- every published exact fact of this
+        lineage reproduced (psi_n^(1..5), psi_n^(3),R, g_6(7,0), varphi_K,
+        K varphi_K/4, Estagio 8 Theorem 3 to r=89 and its b>=1 table, Estagio
+        7's c_K including c_6=1093/6006), plus 61048 exhaustive simulator
+        checks.
+    corollaries.log        : the binomial forms; psi_n^(K) written out for
+        K=0..8 (K=1..5 identical to the published PROVED formulas).
+    dstar_orders.log       : D*^(p)_r(0) closed forms, p<=5, each fitted on
+        the minimum number of points and then confirmed exactly out to r=300.
+
+--------------------------------------------------------------------------
+[8] SELF-CAUGHT ISSUES
+    - First draft of the order-p ODE had the sign of the eta-derivative terms
+      wrong (I wrote (+1)^i/i! from the forward shift, forgetting that
+      d/ds = -d/dt under s = 1-t).  Caught by checking that p=1 must reproduce
+      Fact 3, which it did not until the sign was fixed.  Corrected before any
+      code was written; the corrected form is what appears in [2] above.
+    - The b>=1 closed form for D*^(p)_r(b) was attempted in the same
+      {r^q varphi_r} + {r^q} basis and FAILS out of sample (54-56 failures out
+      of 61).  Reported as OPEN, not forced.  This is the same phenomenon the
+      predecessor reported for its own order-2 constant at b>=1.
+    - The order-3,4,5 closed forms of D*^(p)_r(0) are FITS, verified far out
+      of sample but not proved.  Labelled NUMERICALLY VERIFIED, not PROVED.
+
+--------------------------------------------------------------------------
+[9] SCOPE DISCIPLINE.  No file outside this directory was created, modified or
+    deleted.  No git commit.  No code imported or copied from any sibling or
+    predecessor directory; only mathematical STATEMENTS were re-transcribed,
+    and every one of them is used either as a fixed already-PROVED input (the
+    transition rules) or purely as a cross-check target (the closed forms).

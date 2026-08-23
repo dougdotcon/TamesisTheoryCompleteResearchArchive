@@ -2853,3 +2853,75 @@ decisions:
       - "frente (a) e frente (b) sao tentativas delimitadas, nao exigencias de resultado -- falhar honestamente (nao-uniformidade, ausencia de padrao) e um desfecho aceito e completo"
       - "qualquer resultado positivo exige verificacao adversarial obrigatoria antes de catalogar, mesma disciplina ja aplicada a toda alegacao positiva desta sessao"
       - "Teorema 3, Estagio 7 e Estagio 8 permanecem incondicionais e inafetados ate que qualquer resultado desta onda seja adversarialmente confirmado e integrado"
+
+  - decision_id: DISC-DEC-048
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 11, frente (b)
+      (`ALL-ORDERS-CLOSED-FORM-ATTEMPT`, DISC-DEC-047), apos
+      verificacao adversarial hostil dedicada. FECHA O ITEM (i) DA
+      LISTA DE ITENS ABERTOS DESDE O ESTAGIO 6: forma fechada exata,
+      todas-as-ordens, geral-K, geral-b, geral-m, n finito, para a
+      recursao discreta inteira (Teorema A/B), provada de duas formas
+      independentes -- uma prova elementar autocontida (4 fatos
+      algebricos + inducao bem-fundada, sem usar a maquinaria
+      epsilon) e a identificacao dos multiplicadores F_r/G_r/H_r como
+      numeros de Stirling de primeira especie sem sinal, cuja
+      identidade classica de fatorial ascendente faz a serie epsilon
+      inteira se re-somar exatamente (Teorema M). Como corolario
+      direto, os Teoremas 1-4 dos Estagios 6-8 tornam-se casos
+      particulares de uma unica formula -- nenhum enfraquecido,
+      apenas subsumido. Novas formulas exatas psi_n^(6,7,8) produzidas.
+      Referee hostil re-derivou tudo do zero (215.070 checagens exatas
+      contra simulador proprio das regras (a,b,r) ORIGINAIS, nao a
+      reescrita do documento) e confirmou SOUND o nucleo inteiro, mas
+      encontrou um erro real de natureza negativa: a alegacao de que a
+      forma fechada geral-b falha para b>=1 estava errada -- os
+      numeros reportados (54-56 falhas) sao exatamente os de b=2 e
+      b=3; em b=1 a mesma base representa a resposta EXATAMENTE, e o
+      caso p=2 ja era PROVADO pelo Teorema 3' do referee da onda 10
+      especializado em b=1 -- o documento declarara aberto um caso que
+      seu proprio predecessor citado ja fechara. Corrigido: base
+      funciona em b in {0,1}, refutada por obstrucao estrutural (nao
+      falta de tamanho de base) a partir de b>=2. O referee tambem
+      promoveu duas alegacoes conservadoras a PROVADAS (constantes
+      agudas D*^(p)_r(0) em p=3,4,5, e o coeficiente lider
+      (2p-1)!!/(4^p*p!)), executando a rota de prova que o proprio
+      documento nomeava mas nao executava.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao para correcoes de
+      referee auto-validadas por metodo independente: o referee
+      re-derivou o nucleo inteiro do zero, usando um simulador que
+      implementa as regras de transicao ORIGINAIS (nao a reescrita do
+      documento-alvo), obtendo 215.070 checagens exatas sem nenhuma
+      divergencia -- o padrao mais exaustivo de verificacao aplicado a
+      qualquer resultado desta sessao ate agora. A correcao negativa
+      (b=1 nao falha) e verificada por interpolacao exata a 2p+1
+      pontos com matriz nao-singular confirmada, mais 400 pontos
+      fora-da-amostra sem falha, e o caso p=2 e uma especializacao
+      direta de um teorema ja adversarialmente confirmado
+      (DISC-DEC-046). A sessao orquestradora tambem realizou sua
+      propria verificacao independente antes de despachar o referee
+      (215.070 nao incluidos: forca bruta completa do modelo bruto
+      para n=3,4 confirmando a recursao (j,R)... -- nota: esta
+      verificacao independente foi da frente (a) da mesma onda;
+      para esta frente (b) a sessao verificou a identidade de Stirling
+      c(N,N-3)=C(N,2)C(N,4), as identidades P1/P2 simbolicamente, e o
+      Teorema A/B contra um simulador proprio, 14.236 checagens exatas,
+      0 divergencias, antes de despachar o referee).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/ (integrado, correcoes datadas aplicadas)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 9 anexado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "item (i) da lista de itens abertos desde o Estagio 6 de THEOREM.md FECHADO: forma fechada exata todas-as-ordens geral-K, geral-b, geral-m, n finito, provada (Teorema A/B, Corolario A1)"
+      - "os Teoremas 1-4 e Corolarios dos Estagios 6-8 tornam-se corolarios formais desta forma fechada unica -- nenhum enfraquecido"
+      - "tres novas formulas exatas psi_n^(6,7,8) catalogadas"
+    untouched_safeguards:
+      - "Teorema 3 (Estagio 6, DISC-DEC-040) permanece inteiramente incondicional e inafetado -- nunca dependeu desta frente"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura sobre uma recursao discreta interna a este arquivo"
+      - "forma fechada geral-b das constantes agudas para b>=2 permanece aberta, nomeada explicitamente; nenhuma alegacao uniforme-em-K feita em lugar nenhum"

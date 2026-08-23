@@ -87,6 +87,22 @@ flowchart TD
 **Leitura.** Verde = provado incondicionalmente — toda a Árvore A está,
 desde 2026-08-22 (DISC-DEC-040), nesta cor.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-048, Estágio 9.]** Nenhum nó
+> ou aresta acima muda de status ou cor — o diagrama continua correto
+> como está. O que muda é a *razão* pela qual `K0`, `K1`, `K2`, `K345`,
+> `K610` e `KgerInc` são verdes: em vez de seis provas separadas por
+> seis métodos diferentes (indução direta, matriz de transferência,
+> fechamento da Hipótese de regularidade), a onda 11 frente (b)
+> forneceu uma **forma fechada única, exata, todas-as-ordens**
+> (Teorema A/B de `all_orders_closed_form_attempt/ATTEMPT.md`,
+> adversarialmente confirmada) da qual `ψ_n^{(K)}=g_K(n,0)` para
+> **todo** `K≥0` — incluindo os seis valores/faixas específicos deste
+> diagrama — segue como instância de uma única fórmula fechada, não
+> mais como seis resultados empilhados. `KgerInc` e `Teo3` permanecem
+> exatamente como provados por `DISC-DEC-040`; a nova frente apenas os
+> torna, adicionalmente, corolários formais de um objeto mais forte.
+> Ver `THEOREM.md` "Estágio 9" para o enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

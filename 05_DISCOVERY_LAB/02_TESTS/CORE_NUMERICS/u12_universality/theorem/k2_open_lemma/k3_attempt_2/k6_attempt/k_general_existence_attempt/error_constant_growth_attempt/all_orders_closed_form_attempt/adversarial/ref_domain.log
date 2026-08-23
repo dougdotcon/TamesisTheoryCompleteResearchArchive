@@ -1,0 +1,29 @@
+==========================================================================
+DOMAIN CAVEAT, tested as a strict BICONDITIONAL
+==========================================================================
+  (D1) rule (*)  :   4494 out-of-domain references, ALL with coefficient exactly 0
+                    31465 in-domain references,     NONE with coefficient 0
+  (D2) rule (**) :   4494 out-of-domain references, ALL with coefficient exactly 0
+                    31465 in-domain references,     NONE with coefficient 0
+  n=2..29, all r, all b, every valid state
+  VIOLATIONS: 0
+
+  Note the ASYMMETRY, which is the trap:
+    in (*)  the out-of-domain reference is m-1 = b+r,   one below g_r(.,b)'s min b+r+1
+    in (**) the out-of-domain reference is n-a = b+r+1, one below g_r(.,b+1)'s min b+r+2
+  Both are 'one below the minimum', but for DIFFERENT b, which is why a naive
+  implementation that guards only (*) still diverges on (**).
+
+==========================================================================
+(D3) Theorem B at a=0 evaluates ghat_r(n+1, b+1) -- outside the
+     probabilistic domain.  Is that a defect?
+==========================================================================
+  h_r(0,b) [true probability, raw recursion] == (n+1)/n * ghat_r(n+1, b+1)
+    556 exact checks, 0 mismatches
+  -> NOT a defect: ghat is a POLYNOMIAL expression, the Sec.4.1 identity is a
+     polynomial identity in m valid at every integer, and the raw recursion
+     itself never evaluates g_r out of domain (asserted throughout ref_sim.py).
+
+==========================================================================
+DOMAIN VERDICT: 0 violations -> the caveat's reasoning is SOUND
+==========================================================================

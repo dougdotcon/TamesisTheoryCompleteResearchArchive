@@ -1,0 +1,60 @@
+==========================================================================
+PART A -- the ladder is self-starting; base cases come out right
+==========================================================================
+  Phi^[0]_0 = 1/(b+1); Phi^[p>=1]_0 = 0;
+  Psi^[0]_0 = (1-s)/(b+2); Psi^[1]_0 = 1/(b+2); Psi^[p>=2]_0 = 0.  b=0..3   OK
+  (nothing hard-coded: g_0 = 1/(b+1) EMERGES from the ODE)
+
+==========================================================================
+PART B -- my ladder vs the already-PROVED c_k, d_k, e_k (ground truth)
+==========================================================================
+  c_k^(r)(b) [k6 Sec.2.3, PROVED] : 585 checks
+  d_k^(r)(b) [k6 Sec.3.3, PROVED] : 585 checks
+  e_k^(r)(b) [ecg Thm 1,  PROVED] : 585 checks
+  mismatches: 0
+
+==========================================================================
+PART C -- the MANDATED fourth rung (I_r, M_r) at p=3, and M_2(0,0)
+==========================================================================
+  I_r closed form vs my ODE ladder : 2079 checks
+  M_r closed form vs my ODE ladder : 2079 checks
+  cumulative mismatches: 0
+  I_0 = (Fraction(0, 1),)  I_1 = (Fraction(0, 1),)  I_2 = (Fraction(0, 1),)
+  I_3(t,0) = (Fraction(3, 70),)   (target says 3/70)
+  I_4(t,0) = (Fraction(3, 35), Fraction(5, 63))   (target says 3/35 + 5/63 t)
+  I_5(t,0) = (Fraction(5, 42), Fraction(25, 126), Fraction(25, 308))   (target says 5/42 + 25/126 t + 25/308 t^2)
+  ** M_2(0,0) = 1/10   (must be 1/10, the 1/n^3 coeff of PROVED psi_n^(3),R)
+     Hhat_2(0,0) = 11/30  (must be 11/30)
+     K_2(0,0) = 13/20  (must be 13/20)
+     L_2(0,0) = 23/60  (must be 23/60)
+
+==========================================================================
+PART D -- THEOREM M at all orders p<=8 (incl. p=4,5,6 beyond prior work)
+==========================================================================
+  Theorem M vs my independent ODE ladder: 10098 exact (p,r,b,k) checks
+    per order p: p=0:1122, p=1:1122, p=2:1122, p=3:1122, p=4:1122, p=5:1122, p=6:1122, p=7:1122, p=8:1122
+  cumulative mismatches: 0
+
+==========================================================================
+PART E -- the h-side: Psi^[p]_r = sum_k c(k+p+1,k+1) A_{k+p-1}^(r)(b+1)(1-s)^k
+           and the claimed ASYMMETRIC termination at p = r+1
+==========================================================================
+  h-side closed form: 3960 exact checks
+  termination asymmetry (Psi nonzero AT p=r+1, zero for p>r+1): CONFIRMED
+    r=0: Psi^[1]_0(s,0) = (Fraction(1, 2),)   Psi^[2]_0(s,0) = (Fraction(0, 1),)
+    r=1: Psi^[2]_1(s,0) = (Fraction(1, 6),)   Psi^[3]_1(s,0) = (Fraction(0, 1),)
+    r=2: Psi^[3]_2(s,0) = (Fraction(1, 10),)   Psi^[4]_2(s,0) = (Fraction(0, 1),)
+    r=3: Psi^[4]_3(s,0) = (Fraction(3, 35),)   Psi^[5]_3(s,0) = (Fraction(0, 1),)
+    r=4: Psi^[5]_4(s,0) = (Fraction(2, 21),)   Psi^[6]_4(s,0) = (Fraction(0, 1),)
+  cumulative mismatches: 0
+
+==========================================================================
+PART F -- Corollary A3: D*^(p)_r(b) = Phi^[p]_r(1,b)
+==========================================================================
+  D*^(0)=phi_r, D*^(1)=r phi_r/4, D*^(2)=r(3r+1)/32 phi_r - r/12, r=0..60
+    183 exact agreements, 0 failures
+  D*^(p)_r(b) = sum_{j=p}^r c_j^(r)(b) c(j+1,j+1-p): p<=5, r<=24, b<=3 -> 0 failures
+
+==========================================================================
+LADDER VERDICT: 0 total mismatches
+==========================================================================

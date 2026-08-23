@@ -1,0 +1,79 @@
+==============================================================================
+(A)  the b=1 correction, confirmed against the wave-10 referee's Theorem 3'
+==============================================================================
+  Theorem 3' (transcribed) vs MY D*^(2)_r(b): r<=40, b<=4 -> 0 mismatches
+
+  MY b=1 closed forms, exact out-of-sample test to r=400:
+    p=1: D*^(1)_r(1) = [(r + 1)/4] phi_r + [-1/4]   -> 0 failures over r=0..400
+    p=2: D*^(2)_r(1) = [(r + 1)*(3*r + 8)/32] phi_r + [-(5*r + 6)/24]   -> 0 failures over r=0..400   [== Theorem 3' at b=1: PROVED]
+    p=3: D*^(3)_r(1) = [(r + 1)*(5*r**2 + 39*r + 32)/128] phi_r + [-(r + 1)*(7*r + 12)/48]   -> 0 failures over r=0..400
+    p=4: D*^(4)_r(1) = [(r + 1)*(105*r**3 + 1765*r**2 + 3314*r + 1536)/6144] phi_r + [-(45*r**3 + 229*r**2 + 306*r + 120)/480]   -> 0 failures over r=0..400
+
+  WHY b=1 works and b>=2 does not (structural):
+    Theorem 3' prefactor  Phi_b(r)/phi_r = 2 * prod_{j=1}^{b} (2r+2j)/(2r+j+1)
+      b=0: 2      <- constant, so a polynomial-in-r x phi_r basis suffices
+      b=1: 2      <- constant, so a polynomial-in-r x phi_r basis suffices
+      b=2: (4*r + 8)/(2*r + 3)   <- NOT polynomial in r: basis cannot work
+      b=3: (4*r + 12)/(2*r + 3)   <- NOT polynomial in r: basis cannot work
+      b=4: (8*r**2 + 56*r + 96)/(4*r**2 + 16*r + 15)   <- NOT polynomial in r: basis cannot work
+
+==============================================================================
+(B)  the structure theorem, and the resulting PROOF of the p=3,4,5 forms
+==============================================================================
+  fact 1: E[S^{2k}] (S = sum of N iid +-1) is a polynomial in N of degree k
+    k=0: deg 0 (want 0), 0 failures over N=1..7
+    k=1: deg 1 (want 1), 0 failures over N=1..11
+    k=2: deg 2 (want 2), 0 failures over N=1..15
+    k=3: deg 3 (want 3), 0 failures over N=1..19
+    k=4: deg 4 (want 4), 0 failures over N=1..23
+    k=5: deg 5 (want 5), 0 failures over N=1..27
+    k=6: deg 6 (want 6), 0 failures over N=1..31
+    k=7: deg 7 (want 7), 0 failures over N=1..35
+
+  fact 2: for N = 2r+1, E|S|^{2k+1} = (C(2r,r)/4^r) * W_k(r), W_k polynomial
+    k=0: W_k(r) = 2*r + 1, degree 1, divisible by (2r+1): True
+    k=1: W_k(r) = (2*r + 1)*(4*r + 1), degree 2, divisible by (2r+1): True
+    k=2: W_k(r) = (2*r + 1)*(32*r**2 + 8*r + 1), degree 3, divisible by (2r+1): True
+    k=3: W_k(r) = (2*r + 1)*(384*r**3 - 32*r**2 + 12*r + 1), degree 4, divisible by (2r+1): True
+    k=4: W_k(r) = (2*r + 1)*(6144*r**4 - 4608*r**3 + 1728*r**2 + 16*r + 1), degree 5, divisible by (2r+1): True
+    k=5: W_k(r) = (2*r + 1)*(122880*r**5 - 215040*r**4 + 169728*r**3 - 48064*r**2 + 20*r + 1), degree 6, divisible by (2r+1): True
+    k=6: W_k(r) = (2*r + 1)*(2949120*r**6 - 9093120*r**5 + 12576768*r**4 - 8342016*r**3 + 2174944*r**2 + 24*r + 1), degree 7, divisible by (2r+1): True
+
+  => STRUCTURE: D*^(p)_r(0) = U_p(r) phi_r + V_p(r) with
+       deg U_p <= p                     (even block, fact 1)
+       deg V_p <= 0  at p=1   (odd block, fact 2)
+       deg V_p <= 1  at p=2   (odd block, fact 2)
+       deg V_p <= 2  at p=3   (odd block, fact 2)
+       deg V_p <= 3  at p=4   (odd block, fact 2)
+       deg V_p <= 4  at p=5   (odd block, fact 2)
+       deg V_p <= 5  at p=6   (odd block, fact 2)
+
+  => PROOF BY INTERPOLATION (the form is now known, so matching enough
+     points is a proof, not a fit):
+    p=3: unknowns 7 (degU<=3, degV<=2), interpolation det != 0 (nonsingular)
+          recovered  U_p = r*(5*r**2 + 9*r + 2)/128
+                     V_p = -r**2/12
+          == the DOCUMENT'S printed form: YES -> now PROVED
+          belt-and-braces exact check r=0..400: 0 failures
+    p=4: unknowns 9 (degU<=4, degV<=3), interpolation det != 0 (nonsingular)
+          recovered  U_p = r*(105*r**3 + 610*r**2 + 123*r - 70)/6144
+                     V_p = -r*(3*r + 2)*(5*r - 1)/240
+          == the DOCUMENT'S printed form: YES -> now PROVED
+          belt-and-braces exact check r=0..400: 0 failures
+    p=5: unknowns 11 (degU<=5, degV<=4), interpolation det != 0 (nonsingular)
+          recovered  U_p = r*(189*r**4 + 2590*r**3 + 855*r**2 - 490*r - 72)/24576
+                     V_p = -r**2*(5*r**2 + 9*r - 4)/120
+          == the DOCUMENT'S printed form: YES -> now PROVED
+          belt-and-braces exact check r=0..400: 0 failures
+
+  same upgrade at p=6,7 (never stated by the document):
+    p=6: U_p = r*(693*r**5 + 18585*r**4 + 16177*r**3 - 9913*r**2 - 2830*r + 1864)/196608
+          V_p = -r*(1575*r**4 + 6986*r**3 - 3639*r**2 - 122*r + 240)/60480   [0 failures r=0..250]
+          leading coeff 231/65536 vs (2p-1)!!/(4^p p!) = 231/65536: MATCH
+    p=7: U_p = r*(429*r**6 + 19943*r**5 + 40971*r**4 - 31899*r**3 - 4368*r**2 + 8764*r - 1072)/262144
+          V_p = -r**2*(945*r**4 + 8330*r**3 - 2973*r**2 - 3086*r + 1824)/60480   [0 failures r=0..250]
+          leading coeff 429/262144 vs (2p-1)!!/(4^p p!) = 429/262144: MATCH
+
+==============================================================================
+VERDICT: 0 problems
+==============================================================================

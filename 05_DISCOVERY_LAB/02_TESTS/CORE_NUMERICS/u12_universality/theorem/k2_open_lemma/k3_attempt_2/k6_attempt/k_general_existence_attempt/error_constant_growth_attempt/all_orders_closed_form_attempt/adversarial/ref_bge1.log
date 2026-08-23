@@ -1,0 +1,56 @@
+==============================================================================
+The b>=1 fit, done carefully.  Basis sizes chosen to MATCH the b=0 shape:
+  at b=0, D*^(p) = (degree-p poly in r)*phi_r + (degree-(p-1) poly in r)
+==============================================================================
+  p=0 b=0: EXACT (basis WORKS)
+        D*^(0)_r(0) = [1] phi_r + [0]
+  p=0 b=1: 200/200 out-of-sample FAILURES
+  p=0 b=2: 200/200 out-of-sample FAILURES
+  p=0 b=3: 200/200 out-of-sample FAILURES
+  p=0 b=4: 200/200 out-of-sample FAILURES
+  p=1 b=0: EXACT (basis WORKS)
+        D*^(1)_r(0) = [r/4] phi_r + [0]
+  p=1 b=1: EXACT (basis WORKS)
+        D*^(1)_r(1) = [(r + 1)/4] phi_r + [-1/4]
+  p=1 b=2: 198/198 out-of-sample FAILURES
+  p=1 b=3: 198/198 out-of-sample FAILURES
+  p=1 b=4: 198/198 out-of-sample FAILURES
+  p=2 b=0: EXACT (basis WORKS)
+        D*^(2)_r(0) = [r*(3*r + 1)/32] phi_r + [-r/12]
+  p=2 b=1: EXACT (basis WORKS)
+        D*^(2)_r(1) = [(r + 1)*(3*r + 8)/32] phi_r + [-(5*r + 6)/24]
+  p=2 b=2: 196/196 out-of-sample FAILURES
+  p=2 b=3: 196/196 out-of-sample FAILURES
+  p=2 b=4: 196/196 out-of-sample FAILURES
+  p=3 b=0: EXACT (basis WORKS)
+        D*^(3)_r(0) = [r*(5*r**2 + 9*r + 2)/128] phi_r + [-r**2/12]
+  p=3 b=1: EXACT (basis WORKS)
+        D*^(3)_r(1) = [(r + 1)*(5*r**2 + 39*r + 32)/128] phi_r + [-(r + 1)*(7*r + 12)/48]
+  p=3 b=2: 194/194 out-of-sample FAILURES
+  p=3 b=3: 194/194 out-of-sample FAILURES
+  p=3 b=4: 194/194 out-of-sample FAILURES
+  p=4 b=0: EXACT (basis WORKS)
+        D*^(4)_r(0) = [r*(105*r**3 + 610*r**2 + 123*r - 70)/6144] phi_r + [-r*(3*r + 2)*(5*r - 1)/240]
+  p=4 b=1: EXACT (basis WORKS)
+        D*^(4)_r(1) = [(r + 1)*(105*r**3 + 1765*r**2 + 3314*r + 1536)/6144] phi_r + [-(45*r**3 + 229*r**2 + 306*r + 120)/480]
+  p=4 b=2: 192/192 out-of-sample FAILURES
+  p=4 b=3: 192/192 out-of-sample FAILURES
+  p=4 b=4: 192/192 out-of-sample FAILURES
+
+==============================================================================
+Does a LARGER basis rescue b>=2?  (allow the phi-part degree to grow)
+==============================================================================
+  p=2 b=2: NO fit in this basis up to deg_phi<=8, deg_pol<=7   -> the target's negative claim HOLDS here
+  p=2 b=3: NO fit in this basis up to deg_phi<=8, deg_pol<=7   -> the target's negative claim HOLDS here
+  p=3 b=2: NO fit in this basis up to deg_phi<=9, deg_pol<=8   -> the target's negative claim HOLDS here
+  p=3 b=3: NO fit in this basis up to deg_phi<=9, deg_pol<=8   -> the target's negative claim HOLDS here
+
+==============================================================================
+Structural explanation attempt: is D*^(0)_r(b) itself in the basis?
+==============================================================================
+  b=0: D*^(0)_r(b)/phi_r for r=0..11 = ['1', '1', '1', '1', '1', '1', '1', '1']
+  b=1: D*^(0)_r(b)/phi_r for r=0..11 = ['1/2', '5/8', '11/16', '93/128', '193/256', '793/1024', '1619/2048', '26333/32768']
+  b=2: D*^(0)_r(b)/phi_r for r=0..11 = ['1/3', '9/20', '29/56', '325/576', '843/1408', '4165/6656', '9949/15360', '185517/278528']
+  b=3: D*^(0)_r(b)/phi_r for r=0..11 = ['1/4', '7/20', '185/448', '11/24', '2779/5632', '3473/6656', '44679/81920', '78755/139264']
+  b=4: D*^(0)_r(b)/phi_r for r=0..11 = ['1/5', '2/7', '115/336', '203/528', '7651/18304', '927/2080', '32667/69632', '647515/1323008']
+  b=5: D*^(0)_r(b)/phi_r for r=0..11 = ['1/6', '27/112', '7/24', '2093/6336', '13239/36608', '20655/53248', '85745/208896', '1138335/2646016']

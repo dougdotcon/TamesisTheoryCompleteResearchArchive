@@ -1,0 +1,85 @@
+==============================================================================
+PART 1 -- the mandated fourth rung:  I_r := Phi[3]_r  (order 1/n^3)
+==============================================================================
+  claimed:  [t^k] I_r(t,b) = c(k+4,k+1) * r!/(r-k-3)! / prod_{i=1}^{k+4}(r+b+i)
+  with     c(k+4,k+1) = C(k+4,2)*C(k+4,4) = (k+1)(k+2)(k+3)^2(k+4)^2/48
+  c(k+4,k+1) == C(k+4,2)C(k+4,4) == (k+1)(k+2)(k+3)^2(k+4)^2/48, k=0..29: failures = 0
+  I_r closed form vs the ODE ladder, r=0..21, b=0..6, all k: 2233 checks, 0 mismatches
+  first few I_r(t,0):
+     r=0 : []
+     r=1 : []
+     r=2 : []
+     r=3 : [Fraction(3, 70)]
+     r=4 : [Fraction(3, 35), Fraction(5, 63)]
+     r=5 : [Fraction(5, 42), Fraction(25, 126), Fraction(25, 308)]
+     r=6 : [Fraction(1, 7), Fraction(25, 77), Fraction(75, 308), Fraction(35, 572)]
+     r=7 : [Fraction(7, 44), Fraction(175, 396), Fraction(525, 1144), Fraction(245, 1144), Fraction(49, 1287)]
+
+  and the h-side fourth rung  M_r := Psi[3]_r  (order 1/n^3):
+     M_r(s,b) = sum_k c(k+4,k+1) * r!/(r-k-2)! (1-s)^k / prod_{i=1}^{k+3}(r+b+1+i)
+     920 checks, 0 mismatches
+  M_2(0,0) = 1/10  (PROVED 1/n^3 coefficient of psi_n^(3),R is 1/10)
+
+==============================================================================
+PART 2 -- the multiplier ladder
+==============================================================================
+  order   multiplier M_p(k)          identification
+  1/n^0   1                          c(k+1,k+1)
+  1/n^1   C(k+2,2)                   c(k+2,k+1)
+  1/n^2   (3k+8)/4 * C(k+3,3)        c(k+3,k+1)
+  1/n^3   C(k+4,2) * C(k+4,4)        c(k+4,k+1)   <-- NEW
+  1/n^p   c(k+p+1,k+1)               unsigned Stirling 1st kind
+
+  M_p(k) table (rows p, cols k) -- read off the ladder, then matched:
+   p\k |           0           1           2           3           4           5           6
+     0 |           1           1           1           1           1           1           1
+     1 |           1           3           6          10          15          21          28
+     2 |           2          11          35          85         175         322         546
+     3 |           6          50         225         735        1960        4536        9450
+     4 |          24         274        1624        6769       22449       63273      157773
+     5 |         120        1764       13132       67284      269325      902055     2637558
+     6 |         720       13068      118124      723680     3416930    13339535    44990231
+     7 |        5040      109584     1172700     8409500    45995730   206070150   790943153
+
+==============================================================================
+PART 3 -- the truncation error is EXACTLY the tail (so 0 once p>r)
+     R^(p)_r(m,b,n) := g_r(m,b) - sum_{q=0}^{p-1} Phi[q]_r(t,b)/n^q
+     claim:  R^(p)_r = sum_{q=p}^{r} Phi[q]_r(t,b)/n^q   EXACTLY
+==============================================================================
+  34907 exact checks, 0 mismatches
+  cases with p>r where the residual was NOT exactly 0: 0
+
+  --> in particular the mandated check: the FOUR-term truncation error
+      g_r - F_r - G_r/n - H_r/n^2 - I_r/n^3  is exactly
+      sum_{q>=4} Phi[q]_r/n^q, hence identically 0 for r<=3 and
+      exactly Theta(1/n^4) for r>=4 with constant Phi[4]_r(1,b).
+      Phi[4]_r(1,0) for r=0..8: 0:0, 1:0, 2:0, 3:0, 4:4/105, 5:269/1386, 6:3529/6006, 7:70819/51480, 8:300913/109395
+
+==============================================================================
+PART 4 -- the all-orders sharp residual constants
+     D*^(p)_r(b) := lim_n n^p max_m |R^(p)_r| = Phi[p]_r(1,b)
+     (max at t=1 since every coefficient c(k+p+1,k+1) > 0)
+==============================================================================
+  cross-check p=2, b=0 against Estagio 8 Theorem 3:  r(3r+1)/32 * varphi_r - r/12
+  r=0..39 : failures = 0
+
+  the new p=3, b=0 constants D*^(3)_r(0) = I_r(1,0):
+     r= 0 : 0                        = 0.00000000
+     r= 1 : 0                        = 0.00000000
+     r= 2 : 0                        = 0.00000000
+     r= 3 : 3/70                     = 0.04285714
+     r= 4 : 52/315                   = 0.16507937
+     r= 5 : 1105/2772                = 0.39862915
+     r= 6 : 773/1001                 = 0.77222777
+     r= 7 : 6755/5148                = 1.31216006
+     r= 8 : 223472/109395            = 2.04279903
+     r= 9 : 2759301/923780           = 2.98696768
+     r=10 : 4041085/969969           = 4.16620016
+
+==============================================================================
+PART 5 -- the h-side terminates too:  Psi[p]_r == 0 for p > r+1,
+          and h_r(a,b) = sum_{p=0}^{r+1} Psi[p]_r(s,b)/n^p  EXACTLY
+==============================================================================
+  nonzero Psi[p]_r with p > r+1 (r<=9, b<=3): 0
+  degrees of Psi[p]_6(.,0), p=0..9: [7, 6, 5, 4, 3, 2, 1, 0, -1, -1]
+  3215 exact checks against the simulator, 0 mismatches

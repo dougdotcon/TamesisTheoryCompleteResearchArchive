@@ -2202,3 +2202,133 @@ dependeu desta frente.
 corrigidos por verificação adversarial. Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/ATTEMPT.md`,
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 9 — 2026-08-23]
+
+**Onda 11, frente (b), `DISC-DEC-047`/`DISC-DEC-048`
+(`ALL-ORDERS-CLOSED-FORM-ATTEMPT`).** Alvo: item **(i)** da lista "o
+que permanece aberto" do Estágio 6/7/8 — a forma fechada exata,
+todas-as-ordens, geral-`K`, para a recursão discreta — nomeada
+"separada e mais dura" desde o fechamento do Estágio 6, intocada por
+todas as frentes seguintes.
+
+### O que foi provado
+
+Estendendo o `ε`-matching que produziu `F_r,G_r,H_r` (ordens `1`,
+`1/n`, `1/n²`) a um índice de ordem **simbólico** `p`, obtém-se a EDO
+receptora e a relação-fonte de ordem-`p` geral (não apenas mais um
+degrau, mas a família inteira de uma vez). Lendo os multiplicadores
+resultantes em `p=0,\ldots,8`, antes de qualquer ajuste, eles se
+revelam serem exatamente os **números de Stirling de primeira espécie
+sem sinal**, `c(k{+}p{+}1,k{+}1)` — do que seguem, por identidade
+clássica de fatorial ascendente, a re-soma exata e finita da série
+inteira (a série termina em `p=r`, já que `\deg\Phi^{[p]}_r=r{-}p`):
+
+> **Teorema A (PROVADO, exato, todas-as-ordens, geral-`r`, geral-`b`,
+> `n` finito).** Para todo `n`, todo `r,b\ge0` e todo `m` válido
+> (`b{+}r{+}1\le m\le n`):
+> `\displaystyle g_r(m,b)=\sum_{j=0}^{r}c^{(r)}_j(b)\prod_{i=1}^{j}\Big(\frac mn+\frac in\Big)`,
+> `c^{(r)}_j(b)` os coeficientes **já provados** de `F_r` (ordem `1`).
+>
+> **Teorema B (PROVADO).** `\displaystyle h_r(a,b)=\frac{n{-}a{+}1}n
+> g_r(n{-}a{+}1,b{+}1)` (com uma ressalva de domínio no extremo `a=0`,
+> tratada explicitamente — ver documento fonte).
+>
+> **Corolário A1 (a instância-alvo, item (i)).**
+> `\displaystyle \psi_n^{(K)}=\frac{\varphi_K}{4^K}\sum_{j=0}^{K}\binom{2K{+}1}{K{-}j}\frac{(n{+}j)!}{n!\,n^{j}}` —
+> uma expressão finita, `K{+}1` termos, totalmente explícita, válida
+> para todo `n\ge K{+}1`.
+
+Teorema A admite **prova elementar independente** (quatro fatos
+algébricos simples, P1–P4, mais indução bem-fundada na própria
+recursão discreta), que não usa a maquinaria `ε` em momento algum —
+logo as duas derivações (a maquinaria `ε` que *encontrou* o padrão, e
+a prova elementar que o *fecha*) confirmam-se mutuamente.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado rederivou tudo **do zero**, começando pela
+prova elementar do Teorema A (nomeada pelo próprio documento como o
+lugar mais importante para atacar) antes de ler como o documento a
+deriva: mesmo argumento, cada passo confere. Verificou os quatro fatos
+simbolicamente — incluindo uma identidade por-termo simultaneamente
+simbólica em `r` **e** `j`, estritamente mais forte que a checagem do
+próprio documento — e contra um simulador próprio, do zero, das regras
+`(a,b,r)` **originais** (não a reescrita do documento): **215.070
+checagens exatas, 0 divergências**. Rederivou também a maquinaria `ε`
+de ordem-`p` geral, confirmando os sinais (incluindo o sinal que o
+próprio autor havia inicialmente errado e depois corrigido), a
+identificação de Stirling até `p=8`, e a assimetria de terminação
+`g`/`h` (`p=r` vs `p=r{+}1`), cuja causa estrutural o referee derivou
+independentemente.
+
+O referee encontrou **um erro real, de natureza negativa**: o
+documento alegava que a forma fechada geral-`b` falha para `b\ge1`
+("54–56 falhas de 61 pontos fora-da-amostra"), quando na verdade os
+números reportados são exatamente os de `b=2` e `b=3` — em `b=1` a
+mesma base representa a resposta **exatamente**, e o caso `p=2` já era
+**provado** pelo Teorema 3′ do referee da onda 10
+(`error_constant_growth_attempt/adversarial/REFEREE_REPORT.md` §3.3)
+especializado em `b=1`. O documento havia declarado aberto um caso que
+seu próprio predecessor citado já fechara. Corrigido: a base funciona
+exatamente em `b\in\{0,1\}` (razão estrutural: o prefator de Teorema
+3′ colapsa a uma constante exatamente até `b=1`) e é refutada, por
+obstrução estrutural (não por tamanho de base insuficiente), a partir
+de `b\ge2`, que permanece aberto.
+
+O referee também **promoveu duas alegações** que o documento
+deliberadamente deixara conservadoras: executou a rota de prova
+nomeada mas não realizada para as constantes agudas `D^{*(p)}_r(0)`
+em `p=3,4,5` (via um teorema de estrutura análogo à técnica de
+momentos binomiais par/ímpar de Estágio 8), promovendo-as de
+NUMERICALLY VERIFIED a **PROVADAS**, com duas novas formas em `p=6,7`;
+e provou, em duas linhas a partir desse teorema de estrutura, que o
+coeficiente líder `(2p{-}1)!!/(4^pp!)` (antes apenas caracterizado
+numericamente) é exato.
+
+> **Veredito: SOUND, com uma correção negativa e duas promoções.**
+> "Theorem A survives... The document's central claim is sound, and
+> with it Theorem B, Theorem M, and Corollaries A1/A2/A3." Auditoria de
+> honestidade específica pelo padrão de falha da onda 10 (condicional
+> no scorecard virando incondicional no corpo do texto): **não
+> encontrada** — a estrutura condicional é coerente em todo o
+> documento.
+
+Ver
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/adversarial/REFEREE_REPORT.md`
+para o relatório completo.
+
+### O que isto muda, precisamente
+
+**O item (i) da lista "o que permanece aberto" desde o Estágio 6 está
+FECHADO** — a forma fechada exata, todas-as-ordens, geral-`K`, geral-`b`,
+geral-`m`, finito-`n`, existe e está provada (Teorema A/B, Corolário
+A1). Como corolário imediato, os Teoremas 1–4 e o Corolário 1a–3a de
+`k_general_existence_attempt/ATTEMPT.md` e de
+`error_constant_growth_attempt/ATTEMPT.md` (Estágios 6–8 inteiros)
+tornam-se casos particulares desta forma fechada única — **nenhum
+deles é enfraquecido ou substituído**; a nova forma apenas os subsume.
+Novas fórmulas exatas `ψ_n^{(6)},ψ_n^{(7)},ψ_n^{(8)}` são produzidas
+como subproduto direto.
+
+**O que permanece aberto, sem mudança:** (iv) versão uniforme-em-`c`
+do Teorema 3 (ver Estágio 9 paralelo, se integrado — onda 11 frente
+(a) trata exatamente disto); (v) Conjecturas 1–2 (lei distribucional
+completa, `K≥2`); e, dentro do escopo desta própria frente: a forma
+fechada geral-`b` das constantes agudas `D^{*(p)}_r(b)` para `b\ge2`
+(estrutura da obstrução agora identificada, não apenas negativa);
+qualquer alegação uniforme-em-`K` (explicitamente não tentada em
+nenhum lugar). **O Teorema 3 (Estágio 6) permanece inteiramente
+inafetado** — nunca dependeu desta frente.
+
+**Veredito honesto atualizado (ao fim do Estágio 9):** a linha `U_1/2`
+tem agora uma forma fechada exata, todas-as-ordens, geral-`K`,
+geral-`b`, finito-`n`, para a recursão discreta inteira, da qual todo
+resultado anterior desta linha (Teorema 3, Estágios 5–8) é corolário.
+Restam abertos apenas: a forma fechada das constantes agudas em
+`b\ge2`; uniformidade-em-`c` do Teorema 3 (frente paralela); as
+Conjecturas 1–2 da lei distribucional completa. Fontes completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/ATTEMPT.md`,
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/adversarial/REFEREE_REPORT.md`.

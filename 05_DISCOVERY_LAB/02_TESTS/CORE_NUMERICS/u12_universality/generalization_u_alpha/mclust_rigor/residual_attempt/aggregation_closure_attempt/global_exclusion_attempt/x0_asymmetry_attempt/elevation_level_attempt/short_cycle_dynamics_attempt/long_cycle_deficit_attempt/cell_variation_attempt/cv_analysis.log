@@ -1,0 +1,51 @@
+Loaded 13 cells from cv_grid.log
+
+=== Per-cell table ===
+   id     b      c     rho  dev_own%   z_own   dev_b1%    z_b1   H2share   H2 SEM  defined
+    A   100   1000  0.7851    -8.059   -6.93    -3.319   -2.80    +41.2%   15.9pp     True
+  G1a    25   1000  0.3191    -3.788   -3.20    -1.345   -1.11    +35.5%   33.7pp     True
+  G1b    50   1000  0.5364    -2.373   -1.97    -1.639   -1.36       n/a      n/a    False
+  G1d   200   1000  0.9538   -19.639  -17.34    -2.413   -2.00    +12.3%    6.2pp     True
+  G2a   100    200  0.2633    -8.420   -6.95    -7.407   -6.31    +88.0%   18.8pp     True
+  G2b   100    500  0.5351    -8.063   -7.05    -1.767   -1.45    +21.9%   15.5pp     True
+  G2d   100   2000  0.9549   -20.307  -17.75    -1.263   -1.09     +6.2%    5.7pp     True
+  G3a   335    300  0.7850   -10.810   -8.96    -5.402   -4.56    +50.0%   12.3pp     True
+  G3c    50   2000  0.7877    -5.996   -5.16    -3.410   -2.93    +56.9%   22.3pp     True
+  G3d  1007    100  0.7851   -22.140  -15.54   -10.538   -7.65    +47.6%    6.9pp     True
+    B   400    100  0.4571   -13.373  -11.08    -9.365   -7.56    +70.0%   11.2pp     True
+  G4b    80    500  0.4581    -8.636   -7.59    -5.572   -4.78    +64.5%   16.0pp     True
+  G4c    26   1500  0.4523    -4.266   -3.67    -1.984   -1.70    +46.5%   30.2pp     True
+
+12/13 cells have a defined H2 share (dev_own<0 and |z_own|>=2).
+Excluded (undefined H2 share): G1b (dev_own=-2.37%, z_own=-1.97)
+
+=== Pooled Pearson correlations (H2share vs covariate) ===
+  H2share vs rho       : r=-0.623  t=-2.516  df=10  p=0.0306 **
+  H2share vs log10(c)  : r=-0.549  t=-2.075  df=10  p=0.0648   
+  H2share vs log10(b)  : r=+0.079  t=+0.249  df=10  p=0.8083   
+
+=== Multiple OLS: H2share ~ 1 + rho + log10(c) + log10(b) ===
+  R^2 = 0.6815   n=12
+  intercept : coef=+15.2349  se=7.0916  t=+2.148  df=8  p=0.0639   
+  rho       : coef=+4.3298  se=2.4648  t=+1.757  df=8  p=0.1170   
+  log10(c)  : coef=-3.6985  se=1.7833  t=-2.074  df=8  p=0.0718   
+  log10(b)  : coef=-3.5484  se=1.8062  t=-1.965  df=8  p=0.0851   
+
+=== Sub-group range test (PRIMARY discriminator, SS4.3) ===
+  G1: n=3  range=28.9pp [+12.3%, +41.2%]  -> AMBIGUOUS
+      cells: A=+41.2%, G1a=+35.5%, G1d=+12.3%
+      noise check (delta-method, NOT part of the SS4.3 rule, per SS2's stated use): max(A) vs min(G1d) spread z=+1.70 (within noise at |z|>=2)
+  G2: n=4  range=81.7pp [+6.2%, +88.0%]  -> VARIES SUBSTANTIALLY
+      cells: A=+41.2%, G2a=+88.0%, G2b=+21.9%, G2d=+6.2%
+      noise check (delta-method, NOT part of the SS4.3 rule, per SS2's stated use): max(G2a) vs min(G2d) spread z=+4.16 (exceeds noise at |z|>=2)
+  G3: n=4  range=15.7pp [+41.2%, +56.9%]  -> AMBIGUOUS
+      cells: A=+41.2%, G3a=+50.0%, G3c=+56.9%, G3d=+47.6%
+      noise check (delta-method, NOT part of the SS4.3 rule, per SS2's stated use): max(G3c) vs min(A) spread z=+0.57 (within noise at |z|>=2)
+  G4: n=3  range=23.5pp [+46.5%, +70.0%]  -> AMBIGUOUS
+      cells: B=+70.0%, G4b=+64.5%, G4c=+46.5%
+      noise check (delta-method, NOT part of the SS4.3 rule, per SS2's stated use): max(B) vs min(G4c) spread z=+0.73 (within noise at |z|>=2)
+
+=== Decision (SS4.3 rule, applied mechanically) ===
+  G1(c fixed, b&rho vary)=AMBIGUOUS  G2(b fixed, c&rho vary)=VARIES SUBSTANTIALLY  G3(rho~0.785 fixed)=AMBIGUOUS  G4(rho~0.457 fixed)=AMBIGUOUS
+
+  VERDICT: PARTIAL / MIXED pattern -- no clean single-covariate verdict; see full table.

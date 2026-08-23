@@ -1,0 +1,78 @@
+==============================================================================
+1. REPLICATION CHECK: my recomputed point estimates vs DOC's reported
+==============================================================================
+id      my dev_own%  doc dev_own%   z_diff   my dev_b1%  doc dev_b1%   z_diff   my share%  doc share%
+A            -8.752         -8.06    -0.46       -2.054        -3.32     0.82        23.5        41.2
+G1b          -4.089         -2.37    -1.24       -3.264        -1.64    -1.17        79.8        EXCL
+G1d         -20.009        -19.64    -0.24       -3.470        -2.41    -0.66        17.3        12.3
+G2a          -8.631         -8.42    -0.14       -8.221        -7.41    -0.56        95.2        88.0
+G2d         -22.114        -20.31    -1.29       -1.510        -1.26    -0.18         6.8         6.2
+G3c          -6.173         -6.00    -0.11       -0.895        -3.41     1.59        14.5        56.9
+G3d         -22.148        -22.14    -0.00       -7.793       -10.54     1.40        35.2        47.6
+B           -12.166        -13.37     0.74       -8.751        -9.36     0.36        71.9        70.0
+G4c          -4.506         -4.27    -0.14        0.382        -1.98     1.42        -8.5        46.5
+
+==============================================================================
+2. HYBRID TABLE (my 9 remeasured + doc's 4 not-remeasured cells)
+==============================================================================
+  A      b=   100 c=  1000 rho=0.7851  share=     23.5%  [mine]
+  G1b    b=    50 c=  1000 rho=0.5364  share=     79.8%  [mine]
+  G1d    b=   200 c=  1000 rho=0.9538  share=     17.3%  [mine]
+  G2a    b=   100 c=   200 rho=0.2633  share=     95.2%  [mine]
+  G2d    b=   100 c=  2000 rho=0.9549  share=      6.8%  [mine]
+  G3c    b=    50 c=  2000 rho=0.7877  share=     14.5%  [mine]
+  G3d    b=  1007 c=   100 rho=0.7851  share=     35.2%  [mine]
+  B      b=   400 c=   100 rho=0.4571  share=     71.9%  [mine]
+  G4c    b=    26 c=  1500 rho=0.4523  share=     -8.5%  [mine]
+  G1a    b=    25 c=  1000 rho=0.3191  share=     35.5%  [doc]
+  G2b    b=   100 c=   500 rho=0.5351  share=     21.9%  [doc]
+  G3a    b=   335 c=   300 rho=0.7850  share=     50.0%  [doc]
+  G4b    b=    80 c=   500 rho=0.4581  share=     64.5%  [doc]
+
+  n(defined)=13  (excluded: [])
+
+==============================================================================
+3. HYBRID pooled correlations + Bonferroni + Spearman + leave-one-out
+==============================================================================
+  rho        Pearson r=-0.5311 t=-2.0789 df=11 p=0.0618 (perm p=0.0629)   Spearman r=-0.5165
+  log10(c)   Pearson r=-0.6057 t=-2.5248 df=11 p=0.0282 (perm p=0.0282)   Spearman r=-0.6938
+  log10(b)   Pearson r=+0.2169 t=+0.7369 df=11 p=0.4766 (perm p=0.4766)   Spearman r=+0.1813
+  Bonferroni (m=3) alpha_adj=0.0167  survives=[np.False_, np.False_, np.False_]
+
+  Leave-one-out on rho correlation:
+    drop A     : r=-0.5167 p=0.0855
+    drop G1b   : r=-0.5341 p=0.0737
+    drop G1d   : r=-0.4995 p=0.0983
+    drop G2a   : r=-0.3758 p=0.2287
+    drop G2d   : r=-0.4627 p=0.1299
+    drop G3c   : r=-0.5059 p=0.0933
+    drop G3d   : r=-0.5357 p=0.0726
+    drop B     : r=-0.5004 p=0.0975
+    drop G4c   : r=-0.7284 p=0.0072
+    drop G1a   : r=-0.5920 p=0.0426
+    drop G2b   : r=-0.5607 p=0.0579
+    drop G3a   : r=-0.5697 p=0.0532
+    drop G4b   : r=-0.5058 p=0.0934
+
+  partial r(log10(b),share|rho) = +0.5562
+  partial r(log10(c),share|rho) = -0.5587
+
+==============================================================================
+4. HYBRID sub-group range tests
+==============================================================================
+  G1: members=['A', 'G1a', 'G1b', 'G1d'] range=62.5pp z=+2.84 max=G1b min=G1d
+  G2: members=['A', 'G2a', 'G2b', 'G2d'] range=88.4pp z=+6.32 max=G2a min=G2d
+  G3: members=['A', 'G3a', 'G3c', 'G3d'] range=35.5pp z=+1.67 max=G3a min=G3c
+  G4: members=['B', 'G4b', 'G4c'] range=80.4pp z=+2.78 max=B min=G4c
+
+==============================================================================
+5. Cluster-bootstrap SEM cross-check (G2a, G2d, G1b, A -- own-b condition)
+==============================================================================
+  G2a: delta-method SEM(phi_far)=0.840693(pct scale n/a) ; bootstrap sem(phi_far) vs delta-method sem(phi_far) ratio check below
+      phi_far=0.066609  delta-SEM=0.000613  bootstrap-SEM=0.000615  ratio(boot/delta)=1.0035
+  G2d: delta-method SEM(phi_far)=0.799412(pct scale n/a) ; bootstrap sem(phi_far) vs delta-method sem(phi_far) ratio check below
+      phi_far=0.071575  delta-SEM=0.000735  bootstrap-SEM=0.000709  ratio(boot/delta)=0.9648
+  G1b: delta-method SEM(phi_far)=0.687835(pct scale n/a) ; bootstrap sem(phi_far) vs delta-method sem(phi_far) ratio check below
+      phi_far=0.039176  delta-SEM=0.000281  bootstrap-SEM=0.000282  ratio(boot/delta)=1.0048
+  A: delta-method SEM(phi_far)=0.938217(pct scale n/a) ; bootstrap sem(phi_far) vs delta-method sem(phi_far) ratio check below
+      phi_far=0.054742  delta-SEM=0.000563  bootstrap-SEM=0.000566  ratio(boot/delta)=1.0056

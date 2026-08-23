@@ -239,6 +239,8 @@ flowchart TD
 
     LCDMECH["Onda 13, frente (b) (DISC-DEC-054/056):<br/>deficit de ciclo longo — H1 vs H2<br/>MISTURA: piso independente de b<br/>(H2, presente em b=1, z até −13,9)<br/>+ amplificação secundária real<br/>dependente de b (H1, ~1,8-2,6×,<br/>abaixo do limiar pré-registrado)<br/>referee SOUND WITH NAMED ISSUES"]
 
+    CVCOV["Onda 14, frente (e) (DISC-DEC-057/060):<br/>covariável do H2-share — ρ implicado,<br/>b descartado como driver solo<br/>PARTIAL/MIXED pela regra primária;<br/>referee: correlação de ρ NÃO sobrevive<br/>Bonferroni/Spearman nos dados originais,<br/>MAS fortalece e sobrevive na tabela<br/>triangulada (r=−0,68,p=0,011); G1b<br/>resolvida revela não-monotonicidade<br/>real em ρ — SOUND WITH NAMED ISSUES"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -256,6 +258,7 @@ flowchart TD
     REDB --> SCMECH
     SCMECH --> REDC
     SCMECH --> LCDMECH
+    LCDMECH --> CVCOV
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -272,6 +275,7 @@ flowchart TD
     style SCMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style REDC fill:#f0e5e8,stroke:#7a3b4a
     style LCDMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
+    style CVCOV fill:#f5ecd8,stroke:#96702a,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -371,6 +375,37 @@ flowchart TD
 > do platô de ciclo longo agora mecanisticamente decomposto. Fontes:
 > `short_cycle_dynamics_attempt/long_cycle_deficit_attempt/ATTEMPT.md`
 > e `.../long_cycle_deficit_attempt/adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-057/DISC-DEC-060.]** Onda 14
+> frente (e) (`CELL-VARIATION-ATTEMPT`) atacou uma pergunta diferente
+> sobre o mesmo objeto: não o mecanismo do platô de ciclo longo (`SCMECH`/
+> `LCDMECH` acima), mas **o que explica a variação célula-a-célula do
+> H2-share** medido nessa linha — `ρ`, `c`, ou `b`. Grade de 13 células
+> pré-registrada, regra primária mecânica (faixa 15pp/30pp) dá
+> **PARTIAL/MIXED**: nenhum grupo de `ρ` fixo atinge o corte "FLAT". Mas
+> três checagens secundárias convergem: `ρ` é a única covariável com
+> correlação pooled significativa (`r=−0,623,p=0,031`); `b` é
+> estatisticamente indistinguível de zero (`r=0,08,p=0,81`). Referee
+> hostil confirmou T0 e toda a aritmética exatamente, mas nomeou duas
+> complicações reais: (1) a correlação de `ρ` **não sobrevive** Bonferroni
+> (`m=3`) nem Spearman nos dados originais — mais frágil do que
+> divulgado; (2) a célula `G1b`, honestamente excluída por ambiguidade,
+> revela — ao ser resolvida por triangulação (`N=12.000`, `z=−7,69`) —
+> um compartilhamento **não-monotônico em `ρ`** dentro de `G1`, quebrando
+> qualquer história de covariável única limpa. **Mas**, na tabela
+> triangulada de 13 células do próprio referee, a correlação `ρ` pooled
+> na verdade **fortalece e sobrevive** Bonferroni (`r=−0,680,p=0,011`) —
+> resolver a célula mais fraca do desenho reforça, não enfraquece, a
+> evidência para `ρ`; `b` continua robustamente descartado em toda
+> versão dos dados. Veredito **SOUND WITH NAMED ISSUES**: nenhum erro
+> aritmético encontrado; o enquadramento de honestidade do documento
+> julgado preciso, se algo conservador demais. `φ_REDB` permanece a
+> fórmula de registro; nenhum resultado anterior desta árvore é alterado
+> — este é um resultado *correlacional*, não uma nova fórmula fechada
+> (essa continua sendo o mandato separado de `floor_closed_form_attempt`,
+> onda 14 frente (b), ainda em andamento). Fontes:
+> `long_cycle_deficit_attempt/cell_variation_attempt/ATTEMPT.md` e
+> `.../cell_variation_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

@@ -3859,3 +3859,85 @@ decisions:
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
       - "classificacao M-CLUST(b) em U_{1/2} permanece inteiramente inafetada"
       - "nenhuma alegacao uniforme-em-K ou uniforme-em-p e feita"
+
+  - decision_id: DISC-DEC-060
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 14, frente (e)
+      (`CELL-VARIATION-ATTEMPT`, DISC-DEC-057), apos verificacao
+      adversarial hostil dedicada. A frente investigou o que explica a
+      variacao celula-a-celula do H2-share medido pela linhagem
+      long_cycle_deficit_attempt -- rho, c, ou b -- via uma grade
+      pre-registrada de 13 celulas. RESULTADO original da frente: regra
+      PRIMARIA mecanica (faixa 15pp/30pp) da PARTIAL/MIXED (nenhum grupo
+      de rho fixo atinge o corte FLAT), mas tres checagens secundarias
+      convergem: rho e a unica covariavel com correlacao pooled
+      significativa (r=-0,623,p=0,031); b e estatisticamente
+      indistinguivel de zero (r=0,08,p=0,81). Referee hostil re-simulou 9
+      das 13 celulas do zero (68.000 instancias frescas, seeds
+      confirmadas nao usadas), re-derivou toda a maquinaria estatistica
+      (Pearson/permutacao, Spearman, correlacao parcial, SEM
+      delta-method com validacao por bootstrap de cluster, Bonferroni,
+      Q de Cochran nao usado pela propria frente) sem ler nenhum script
+      da propria frente: T0 confirmado exatamente, toda aritmetica e
+      formula do documento confere exatamente. NOMEOU DUAS COMPLICACOES
+      REAIS: (1) a correlacao de rho NAO sobrevive correcao de Bonferroni
+      (m=3 covariaveis, alpha_adj=0,0167) nem teste de Spearman (p=0,08)
+      nos dados originais do documento -- mais fragil do que ali
+      divulgado; (2) a celula G1b, honestamente excluida por ambiguidade
+      (|z|=1,97 em N=2000), revela ao ser resolvida por triangulacao (3
+      medicoes independentes, N=12.000 combinado, z=-7,69) um
+      compartilhamento H2 de 67,7%+-15,7pp -- o maior (ou empatado) de
+      todo o subgrupo G1, numa rho INTERMEDIARIA, quebrando qualquer
+      historia limpa de monotonicidade-em-rho dentro de G1 (confirmado
+      por dois testes de heterogeneidade independentes, incluindo Q de
+      Cochran p=0,025). MAS na tabela triangulada de 13 celulas do
+      proprio referee, a correlacao rho pooled na verdade FORTALECE e
+      SOBREVIVE Bonferroni (r=-0,680,p=0,011) -- resolver corretamente a
+      celula mais fraca do desenho reforca, nao enfraquece, a evidencia
+      para rho. b continua robustamente descartado como driver
+      independente em toda versao dos dados testada pelo referee
+      (r=0,08-0,22, sempre p>>0,05). Nenhum erro aritmetico, de formula
+      ou de T0 encontrado em lugar algum. Veredito SOUND WITH NAMED
+      ISSUES -- enquadramento de honestidade do proprio documento
+      julgado PRECISO, se algo conservador demais em relacao ao que a
+      re-analise sustenta. Um adendo datado inserido no proprio
+      ATTEMPT.md; novo no CVCOV na Arvore B do mapa de dependencias.
+      Este e um resultado CORRELACIONAL, nao uma nova formula fechada --
+      phi_REDB permanece a formula de registro de M-CLUST(b); o mandato
+      separado de forma fechada (floor_closed_form_attempt, onda 14
+      frente (b)) continua em andamento.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao para achados positivos e
+      mistos: verificacao independente hostil dedicada antes de
+      integracao, com o referee re-simulando em escala maior que a
+      propria frente (68.000 instancias frescas contra as 26.000
+      originais) e re-derivando toda a maquinaria estatistica do zero
+      antes de aplica-la a qualquer dado. A distincao entre "a
+      correlacao original nao sobrevive correcao multipla" e "a
+      correlacao, corretamente medida, sobrevive e fortalece" e mantida
+      com precisao -- exatamente o tipo de nuance esta linhagem tem
+      cuidado consistentemente para nao confundir. O achado da
+      nao-monotonicidade em G1 (uma vez G1b resolvida) e registrado como
+      uma complicacao genuina, nao uma refutacao do lean para rho nem
+      uma promocao a resultado certificado -- b continua descartado, rho
+      continua o candidato mais bem sustentado, mas nao ha historia de
+      covariavel-unica limpa.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/cell_variation_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/.../cell_variation_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/.../cell_variation_attempt/ATTEMPT.md (1 correcao datada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore B, novo no CVCOV + adendo datado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "b confirmado, robustamente, como NAO-driver independente da variacao H2-share celula-a-celula"
+      - "rho identificado como covariavel lider, com correlacao pooled que fortalece (nao enfraquece) sob re-medicao correta da celula mais fraca do desenho -- mas sem historia de covariavel-unica monotonica limpa (G1 nao-monotonico em rho, uma vez G1b resolvida)"
+      - "nenhuma formula fechada nova; phi_REDB permanece formula de registro de M-CLUST(b)"
+    untouched_safeguards:
+      - "resíduo M-CLUST(b) (no RES, Arvore B) permanece PARCIALMENTE FECHADO, sem mudanca de status"
+      - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+      - "SCMECH, LCDMECH e todos os resultados anteriores desta arvore permanecem exatamente como estavam"

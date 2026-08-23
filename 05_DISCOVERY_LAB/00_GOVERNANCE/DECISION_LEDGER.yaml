@@ -3522,3 +3522,83 @@ decisions:
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
       - "Teorema 3 (Estagio 6), taxa c_K (Estagio 7), forma fechada de erro (Estagio 8), forma fechada todas-as-ordens (Estagio 9), Teoremas A/C/D/E (Estagios 10-11) permanecem exatamente como provados, usados aqui apenas por citacao"
       - "prova de Estagio 11 (crescimento geometrico qualitativo de M_K) permanece estritamente mais fraca que este resultado e nao e superada nem tornada redundante por ele"
+
+  - decision_id: DISC-DEC-056
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 13, frente (b)
+      (`LONG-CYCLE-DEFICIT-ATTEMPT`, DISC-DEC-054), apos verificacao
+      adversarial hostil dedicada. Alvo: item 1/SS9 aberto nomeado por
+      short_cycle_dynamics_attempt (DISC-DEC-053) -- o plato negativo
+      persistente (~-10% a -15%) na populacao de ciclos longos (L>b)
+      do M-CLUST(b) -- distinguir se e um vies especifico da estrutura
+      de blocos correlacionados (H1) ou um artefato generico de n
+      finito, tambem presente em M-U puro sem correlacao de bloco
+      (H2). Tres testes pre-registrados: T1 (primario, decisivo) --
+      comparacao pareada em (c,n) entre M-CLUST(b) original e M-U puro
+      (b=1) em tres celulas; T2 (secundario) -- dose-resposta variando
+      b numa celula fixa; T3 (exploratorio) -- teste de um mecanismo
+      causal especifico via sub-binagem por L/n. RESULTADO: T1 favorece
+      H2 -- o deficit reproduz-se em b=1 (correlacao de bloco ZERO) a
+      77-80% da magnitude original em duas das tres celulas (z=-10,21
+      e z=-8,04); a terceira celula (alvo) fica ambigua na propria
+      execucao da frente (z=-2,39, abaixo da barra pre-registrada), mas
+      o referee, com o dobro da amostra, mede z=-3,39, cruzando a
+      barra e classificando-a como PRESENT BUT SMALLER -- fortalecendo
+      a conclusao pro-H2. T2 e MISTO por sua propria regra numerica
+      pre-registrada -- ha uma amplificacao real e reproduzivel
+      dependente de b (~1,8-2,6x entre as duas execucoes independentes)
+      que fica abaixo do limiar pre-registrado de 3x para H1 "limpo".
+      T3 refuta o mecanismo causal especifico proposto (deficit
+      crescendo com L/n) sem afetar o veredito H1-vs-H2. VEREDITO
+      HONESTO: nem H1 puro nem H2 puro e uniforme -- um piso
+      independente de b (H2, dominante, confirmado com z ate -13,9
+      pelo referee) mais uma amplificacao secundaria real dependente de
+      b (H1, sub-limiar) -- nenhuma forma fechada proposta ou
+      garantida pelos testes desta frente. Referee hostil independente
+      replicou T0, T1 (N=5000, 2x) e o veredito qualitativo MISTO de T2
+      (N=2500, 25% acima) do zero, com sementes frescas e codigo de
+      medicao inteiramente proprio (nenhum .py novo desta frente foi
+      lido) -- tudo confirmado, nenhum erro que mude qualquer
+      conclusao. Dois problemas nomeados: a cifra de referencia da
+      celula A (-9,66%) em DERIVATION_PREREG.md estava mal-atribuida
+      (celula errada, grandeza errada) -- coincidentemente proxima do
+      valor correto (-9,7%), sem efeito sobre nenhuma classificacao; e
+      os pontos intermediarios de T2 (b=20,50) mostram mais variancia
+      entre sementes do que os proprios erros-padrao sugerem, tornando
+      as razoes especificas 2,62x/3,10x ilustrativas, nao pontuais-
+      precisas, sem mudar o veredito MISTO de T2. Veredito SOUND WITH
+      NAMED ISSUES.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao: verificacao
+      independente propria da sessao orquestradora (recomputacao a
+      mao da combinacao ponderada por variancia-inversa do proprio
+      documento, confirmando exatamente os numeros relatados) antes de
+      despachar um referee hostil dedicado, que por sua vez re-derivou
+      tudo do zero com escala igual ou maior (N=5000 vs N=2500 em T1;
+      N=2500 vs N=2000 em T2) e codigo de medicao totalmente
+      independente, encontrando dois problemas nomeados genuinos (um
+      erro de citacao na pre-registracao, um problema de precisao
+      estatistico em T2) sem que nenhum deles mudasse qualquer
+      conclusao central -- e ainda descobrindo, de forma independente,
+      um achado positivo que fortalece a conclusao da frente (a
+      resolucao limpa da ambiguidade da celula A a favor de H2 com
+      poder estatistico adequado). Exatamente o tipo de correcao
+      quantitativa precisa que a disciplina de correcao datada existe
+      para capturar.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore B, um no novo + adendo)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "deficit de ciclo longo do M-CLUST(b) decomposto mecanisticamente: piso independente de b (H2, dominante) + amplificacao secundaria dependente de b (H1, sub-limiar, real mas nao fechada)"
+      - "residuo M-CLUST(b) permanece PARCIALMENTE FECHADO, sem mudanca de status -- este componente especifico agora melhor compreendido"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura sobre um mecanismo alternativo interno a este arquivo"
+      - "phi_REDB (DISC-DEC-050) permanece formula de registro, nao alterada por esta frente"
+      - "nenhuma forma fechada nova e proposta ou adotada; nenhuma formula de registro e substituida"

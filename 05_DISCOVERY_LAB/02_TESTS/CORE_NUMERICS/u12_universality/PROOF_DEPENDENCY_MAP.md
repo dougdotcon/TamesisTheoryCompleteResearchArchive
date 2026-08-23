@@ -205,6 +205,8 @@ flowchart TD
 
     REDC["Candidata φ_REDC (mistura de<br/>ciclo curto sobre φ_REDB)<br/><b>REFUTADA</b> — piora 5 de 6 células<br/>(χ² 4,5-8,6×), critério<br/>pré-registrado falha nas duas<br/>condições — φ_REDB permanece<br/>fórmula de registro —<br/><b>NÃO-FECHAMENTO HONESTO</b>"]
 
+    LCDMECH["Onda 13, frente (b) (DISC-DEC-054/056):<br/>deficit de ciclo longo — H1 vs H2<br/>MISTURA: piso independente de b<br/>(H2, presente em b=1, z até −13,9)<br/>+ amplificação secundária real<br/>dependente de b (H1, ~1,8-2,6×,<br/>abaixo do limiar pré-registrado)<br/>referee SOUND WITH NAMED ISSUES"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -221,6 +223,7 @@ flowchart TD
     ELEVMECH --> REDB
     REDB --> SCMECH
     SCMECH --> REDC
+    SCMECH --> LCDMECH
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -236,6 +239,7 @@ flowchart TD
     style REDB fill:#f5ecd8,stroke:#96702a,stroke-width:2px
     style SCMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style REDC fill:#f0e5e8,stroke:#7a3b4a
+    style LCDMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -305,6 +309,36 @@ flowchart TD
 > frente. Fontes:
 > `elevation_level_attempt/short_cycle_dynamics_attempt/ATTEMPT.md` e
 > `.../short_cycle_dynamics_attempt/adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-054/DISC-DEC-056.]** Onda 13
+> frente (b) (`LONG-CYCLE-DEFICIT-ATTEMPT`) atacou o item 1/§9 aberto
+> nomeado pela frente anterior (nó `SCMECH` acima): o platô negativo
+> persistente (~−10% a −15%) para ciclos longos, tentando distinguir
+> se é um viés específico da estrutura de blocos correlacionados do
+> M-CLUST(b) (H1) ou um artefato genérico de `n` finito, também
+> presente em M-U puro (`b=1`, correlação de bloco zero — H2). O teste
+> primário pré-registrado (T1, comparação `(c,n)` pareada) favorece H2:
+> o déficit reproduz-se em `b=1` a `72–81%` da magnitude original em
+> duas de três células, `z` até `−13,9` (referee, `N=5000`); com poder
+> adequado, a terceira célula também se resolve de forma limpa a favor
+> de H2. Mas um teste secundário (T2, dose-resposta em `b`) mostra uma
+> amplificação real, reproduzível e dependente de `b` (`~1,8`–`2,6×`
+> entre execuções independentes) que fica abaixo do limiar
+> pré-registrado para H1 "limpo" — nem H1 puro nem H2 uniforme e puro
+> explicam a figura completa. Veredito honesto: **MISTURA** — um piso
+> independente de `b` (H2, dominante) mais uma amplificação secundária
+> real dependente de `b` (H1, sub-limiar), sem forma fechada proposta.
+> Referee hostil independente replicou T0/T1/T2 do zero com sementes
+> frescas e código de medição totalmente independente, confirmando
+> todas as conclusões centrais; encontrou uma cifra de referência
+> mal-atribuída na pré-registração (sem efeito sobre classificações) e
+> um problema de precisão nos pontos intermediários de T2 (sem mudar o
+> veredito MISTO) — veredito **SOUND WITH NAMED ISSUES**. O resíduo
+> M-CLUST(b) (nó `RES`, topo desta árvore) permanece **PARCIALMENTE
+> FECHADO**, sem mudança de status, mas com este componente específico
+> do platô de ciclo longo agora mecanisticamente decomposto. Fontes:
+> `short_cycle_dynamics_attempt/long_cycle_deficit_attempt/ATTEMPT.md`
+> e `.../long_cycle_deficit_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

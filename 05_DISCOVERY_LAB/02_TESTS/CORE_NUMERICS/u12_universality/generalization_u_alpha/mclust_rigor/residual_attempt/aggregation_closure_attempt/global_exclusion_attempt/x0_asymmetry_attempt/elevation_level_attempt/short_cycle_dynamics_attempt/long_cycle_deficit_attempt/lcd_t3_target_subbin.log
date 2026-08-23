@@ -1,0 +1,25 @@
+lcd_diagnostic.py T3 -- n=65536 b=100 c=1000, N=3000, seed=20260827020, L/n subbins of far tail, edges=[2000, 8192.0, 16384.0, 32768.0, 65536]
+    [300/3000] elapsed=26.2s (87.4ms/instance)
+    [600/3000] elapsed=52.2s (87.0ms/instance)
+    [900/3000] elapsed=79.1s (87.9ms/instance)
+    [1200/3000] elapsed=105.3s (87.8ms/instance)
+    [1500/3000] elapsed=132.3s (88.2ms/instance)
+    [1800/3000] elapsed=158.1s (87.8ms/instance)
+    [2100/3000] elapsed=184.5s (87.8ms/instance)
+    [2400/3000] elapsed=211.5s (88.1ms/instance)
+    [2700/3000] elapsed=238.4s (88.3ms/instance)
+    [3000/3000] elapsed=264.7s (88.2ms/instance)
+
+--- summary ---
+rho: measured 0.78431 +- 0.00025 (n=3000)  vs formula 0.78511
+phi(cyclic | short & untouched) = 1.000000 +- 0.000000 (pts=151314)   [sanity, should be 1.0]
+phi(cyclic | long, x0 in R^c)   = 0.056353 +- 0.000574 (pts=42254237)
+phi(cyclic | x0 in R^c), overall = 0.059728 +- 0.000572 (pts=42405551)
+phi_U(c'') [comparison target]   = 0.059993
+  phi_long - phi_U(c'') = -0.003640  (-6.068% relative)  z=-6.34
+
+--- cycle-length-binned phi(cyclic | x0 in R^c, L in bin), vs phi_U(c'') ---
+  L in (2000,8192]: phi=0.054032+-0.001483  (instances=2256, pts=3995181)  dev=-9.94%  z=-4.02
+  L in (8192,16384]: phi=0.053369+-0.001232  (instances=1503, pts=5303126)  dev=-11.04%  z=-5.38
+  L in (16384,32768]: phi=0.054264+-0.001033  (instances=1370, pts=10438455)  dev=-9.55%  z=-5.55
+  L in (32768,65536]: phi=0.055751+-0.000737  (instances=2097, pts=21309578)  dev=-7.07%  z=-5.75

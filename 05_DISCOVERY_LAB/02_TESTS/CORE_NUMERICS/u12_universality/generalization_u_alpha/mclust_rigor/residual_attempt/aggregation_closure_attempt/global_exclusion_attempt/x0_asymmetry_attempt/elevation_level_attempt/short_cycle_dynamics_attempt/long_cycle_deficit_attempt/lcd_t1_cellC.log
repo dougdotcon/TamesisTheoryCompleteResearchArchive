@@ -1,0 +1,25 @@
+lcd_diagnostic.py T1 cell C -- n=65536 b=1 c=150, N=2500, seed=20260827003, edges=[200, 400, 1000, 4000, inf]
+    [250/2500] elapsed=23.0s (92.1ms/instance)
+    [500/2500] elapsed=45.8s (91.6ms/instance)
+    [750/2500] elapsed=68.0s (90.6ms/instance)
+    [1000/2500] elapsed=90.7s (90.7ms/instance)
+    [1250/2500] elapsed=113.1s (90.4ms/instance)
+    [1500/2500] elapsed=135.6s (90.4ms/instance)
+    [1750/2500] elapsed=157.9s (90.2ms/instance)
+    [2000/2500] elapsed=180.6s (90.3ms/instance)
+    [2250/2500] elapsed=202.9s (90.2ms/instance)
+    [2500/2500] elapsed=225.3s (90.1ms/instance)
+
+--- summary ---
+rho: measured 0.00229 +- 0.00000 (n=2500)  vs formula 0.00229
+phi(cyclic | short & untouched) = 1.000000 +- 0.000000 (pts=2424)   [sanity, should be 1.0]
+phi(cyclic | long, x0 in R^c)   = 0.071925 +- 0.000761 (pts=163462382)
+phi(cyclic | x0 in R^c), overall = 0.071938 +- 0.000761 (pts=163464806)
+phi_U(c'') [comparison target]   = 0.072360
+  phi_long - phi_U(c'') = -0.000436  (-0.602% relative)  z=-0.57
+
+--- cycle-length-binned phi(cyclic | x0 in R^c, L in bin), vs phi_U(c'') ---
+  L in (200,400]: phi=0.522892+-0.012694  (instances=1290, pts=510158)  dev=+622.63%  z=+35.49
+  L in (400,1000]: phi=0.255221+-0.009668  (instances=1507, pts=1487692)  dev=+252.71%  z=+18.91
+  L in (1000,4000]: phi=0.080753+-0.003676  (instances=1891, pts=7629074)  dev=+11.60%  z=+2.28
+  L in (4000,inf]: phi=0.066137+-0.000774  (instances=2500, pts=153338652)  dev=-8.60%  z=-8.04

@@ -1,0 +1,86 @@
+==========================================================================
+1. LEMA 3.1 -- the coupling, re-built and audited
+==========================================================================
+
+Coupling (re-derived independently):  0 <= c < c' <= n.  On one space take
+V_1..V_n iid U(0,1), xi_i := 1{V_i < c/n}, xi'_i := 1{V_i < c'/n}; take ONE
+uniform permutation pi and ONE family U_1..U_n of iid Uniform[n], shared.
+  * marginals: (pi, xi, U) has exactly the Definition-1 law at c, and
+    (pi, xi', U) exactly the law at c'.  [xi_i iid Bern(c/n); xi'_i iid
+    Bern(c'/n); pi and U independent of the V's in both.]
+  * E := {xi_i = xi'_i for all i}.  On E, f(x) = U_x 1{xi_x=1} + pi(x)
+    1{xi_x=0} coincides with f' TERM BY TERM at every x, so f = f' as maps,
+    hence 1{1 cyclic for f} = 1{1 cyclic for f'} pointwise on E.
+  * |phi(n,c)-phi(n,c')| = |E[1_A - 1_A']| <= E|1_A - 1_A'| = P(A tri A')
+    <= P(E^c) <= sum_i P(xi_i != xi'_i) = n * (c'-c)/n = c'-c.
+  * reduction to c' <= n: under Definition 1's q = min(c/n,1), phi(n,.) is
+    constant on [n,inf), so for c <= n < c' the LHS equals |phi(n,c)-phi(n,n)|
+    <= n-c <= c'-c, and for n <= c < c' the LHS is 0.  VALID.
+Verdict on the argument: correct, and the constant 1 is uniform in n.
+
+Exact stress test of |phi(n,c)-phi(n,c')| <= |c-c'| :
+   n=1..8, all 624 pairs on a 13-point q-grid: 0 violations.
+   worst ratio |dphi| / |dc| = 0.287054 (= 5812841/20250000) -- comfortably below 1.
+
+   Sharper: is the TRUE Lipschitz constant <= 1/3 (ATTEMPT 3.2)?
+     n=  2  max grid slope = 0.24937500   1/3 - 1/(3n^2) = 0.25000000
+     n=  4  max grid slope = 0.31090214   1/3 - 1/(3n^2) = 0.31250000
+     n=  8  max grid slope = 0.32456161   1/3 - 1/(3n^2) = 0.32812500
+     n= 16  max grid slope = 0.32457137   1/3 - 1/(3n^2) = 0.33203125
+
+==========================================================================
+2. The non-monotonicity remark of ATTEMPT 3.1(ii)
+==========================================================================
+   pi = (1 2 3);  reroute {1}, U_1=1   -> f = [1, 3, 1]   cyclic points = [1]   count = 1
+   pi = (1 2 3);  reroute {1,2}, U_1=1,U_2=2 -> f = [1, 2, 1]   cyclic points = [1, 2]   count = 2
+   => the document's stated counterexample REPRODUCES exactly:
+      adding one reroute took the cyclic COUNT from 1 to 2.
+
+   BUT note what it does and does not show: 1 is cyclic in BOTH
+   configurations, so this example does not by itself show the
+   *event* {1 cyclic} -- the only functional phi(n,.) depends on --
+   is non-monotone.  Here is a counterexample that does, and that is
+   realisable inside Lema 3.1's own shared-(pi,U) coupling:
+      n=2, pi=id, U_1=2, U_2=1.
+      xi =(1,0): f  = [2, 2]  -> 1 cyclic? False
+      xi'=(1,1): f' = [2, 1]  -> 1 cyclic? True
+      Same pi, same U, xi <= xi' pointwise, and the indicator goes
+      0 -> 1.  So {1 cyclic} is genuinely NOT monotone in xi, and no
+      monotone-coupling proof of monotonicity of phi(n,.) exists.
+      The document's conclusion is right; its example is weaker than
+      its conclusion.  (Nothing downstream depends on either.)
+
+==========================================================================
+3. TEOREMA A -- the two constants and the grid inequality
+==========================================================================
+
+phi_inf(c) = int_0^1 e^{-c t^2} dt.  Differentiation under the integral is
+legitimate (|d/dc e^{-ct^2}| = t^2 e^{-ct^2} <= t^2, integrable, uniformly for
+c >= 0), giving phi_inf'(c) = -int_0^1 t^2 e^{-ct^2} dt, so
+      |phi_inf'(c)| = int_0^1 t^2 e^{-ct^2} dt <= int_0^1 t^2 dt = 1/3
+for every c >= 0, with equality only at c = 0.  CONFIRMED.
+
+   sup_c int_0^1 t^2 e^{-ct^2} dt, sampled:
+     c=0.0      value = 0.333333333333
+     c=0.001    value = 0.333133404743
+     c=1.0      value = 0.18947234582
+     c=5.0      value = 0.0388974362611
+     c=50.0     value = 0.00125331413732
+     1/3 = 0.333333333333   -> sup = 1/3 attained at c=0. OK
+
+   Direct audit of the finite-n inequality
+      omega_n(C) <= max_{0<=i<=M} |Delta_n(iC/M)| + 4C/(3M)
+   (LHS computed on a fine 2001-point grid; both sides in float):
+     n=  60 C=  5 M=  4   omega_n=0.00090484   bound=1.66752248   OK
+     n=  60 C=  5 M= 16   omega_n=0.00090484   bound=0.41756854   OK
+     n= 120 C= 10 M=  8   omega_n=0.00201659   bound=1.66868326   OK
+     n= 200 C= 20 M= 10   omega_n=0.00275212   bound=2.66941879   OK
+     n= 200 C=  2 M=  3   omega_n=0.00031090   bound=0.88919979   OK
+     n= 400 C= 50 M= 25   omega_n=0.00292140   bound=2.66958807   OK
+
+   The grid step is correct: every c in [0,C] lies in some [c_i, c_{i+1}] of
+   width C/M, and Delta_n is (1 + 1/3)-Lipschitz uniformly in n, so
+   |Delta_n(c)| <= |Delta_n(c_i)| + (4/3)(C/M).  (Taking the NEAREST grid
+   point would give 2C/(3M); the stated 4C/(3M) is valid but a factor 2
+   loose.  Harmless.)
+

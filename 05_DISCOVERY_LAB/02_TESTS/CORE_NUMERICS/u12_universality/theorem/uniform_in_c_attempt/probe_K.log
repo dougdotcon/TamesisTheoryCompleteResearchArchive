@@ -1,0 +1,50 @@
+=== probe_K.py ===
+
+--- engine cross-check: multi vs exact Fraction ---
+  OK
+
+--- Estagio-7 check: n (phi_n^(K) - phi_K) -> c_K = [(K+2)phi_K-2]/4 ---
+      K      n=500        n=2000       n=8000        c_K (exact)
+      1    +0.0006667   +0.0001667   +0.0000417   +0.0000000
+      2    +0.0347341   +0.0336834   +0.0334208   +0.0333333
+      3    +0.0736312   +0.0719787   +0.0715661   +0.0714286
+      6    +0.1869416   +0.1832209   +0.1822936   +0.1819847
+     10    +0.3200822   +0.3130954   +0.3113586   +0.3107806
+     20    +0.5927785   +0.5756350   +0.5714034   +0.5699977
+     50    +1.1970707   +1.1366237   +1.1220333   +1.1172145
+
+--- (U)/(U') scan: max over n of  n|phi_n^(K)-phi_K| / K  and  / sqrt(K) ---
+     K    argmax-n   n|d|        n|d|/K     n|d|/sqrt(K)   c_K/sqrt(K)
+      1         2     0.16667    0.16667      0.16667     0.00000
+      2         3     0.28889    0.14444      0.20428     0.02357
+      3         4     0.39018    0.13006      0.22527     0.04124
+      5         6     0.55824    0.11165      0.24965     0.06550
+      8         9     0.76247    0.09531      0.26957     0.08798
+     12        13     0.98615    0.08218      0.28468     0.10640
+     20        21     1.34606    0.06730      0.30099     0.12746
+     32        33     1.77341    0.05542      0.31350     0.14430
+     50        51     2.28672    0.04573      0.32339     0.15800
+     80        81     2.96938    0.03712      0.33199     0.17014
+    128       129     3.83519    0.02996      0.33899     0.18017
+    200       201     4.87043    0.02435      0.34439     0.18800
+    320       321     6.24313    0.01951      0.34900     0.19473
+    512       513     7.98067    0.01559      0.35270     0.20016
+
+--- monotonicity  phi_n^{(K+1)} <= phi_n^{(K)} ?  (exhaustive in K) ---
+  n=5      max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  n=12     max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  n=30     max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  n=80     max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  n=200    max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  n=600    max_K [phi_n^(K+1) - phi_n^(K)] = +0.000e+00  (<=0 means monotone)
+  worst over all n scanned: +0.000e+00
+  exact-Fraction confirmation, n=2..9, all K:
+    n=2 strictly-decreasing-in-K: True
+    n=3 strictly-decreasing-in-K: True
+    n=4 strictly-decreasing-in-K: True
+    n=5 strictly-decreasing-in-K: True
+    n=6 strictly-decreasing-in-K: True
+    n=7 strictly-decreasing-in-K: True
+    n=8 strictly-decreasing-in-K: True
+    n=9 strictly-decreasing-in-K: True
+  exact verdict: monotone in every case

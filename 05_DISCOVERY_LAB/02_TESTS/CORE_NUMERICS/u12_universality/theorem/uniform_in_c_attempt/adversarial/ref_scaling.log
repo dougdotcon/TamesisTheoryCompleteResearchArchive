@@ -1,0 +1,112 @@
+SeedSequence entropy = 141469625505148724570726930541814868012
+
+============================================================================
+0. Precision audit of the float64 engine against exact Fractions
+============================================================================
+   max |exact - float64| over n in {5,10,20,40,80} x 3 q-values: 2.220e-16
+   (backward recursion has all-positive coefficients and values in
+    [0,1], so it is forward-stable; float64 is safe at n=4000.)
+
+============================================================================
+1. Proposicao 7.1 -- phi(n,n) = Q(n)/n, and the sqrt(2) ratio
+============================================================================
+
+Re-derivation of the exact identity: at c=n Definition 1's convention gives
+q = 1, so every point is rerouted and f(i) = U_i with U iid Uniform[n],
+i.e. f is a UNIFORM RANDOM MAPPING.  The orbit of 1 returns to 1 at step j
+iff f(1),...,f^{j-1}(1) are j-1 distinct points other than 1 and f^j(1)=1:
+   P = [prod_{i=1}^{j-1} (n-i)/n] * (1/n).
+Summing over j >= 1 gives (1/n) sum_{m>=0} prod_{i=1}^{m}(1-i/n) = Q(n)/n.
+The events are disjoint (the return time is unique).  CORRECT; verified
+exactly for n = 1..11 in ref_engine.py (11/11).
+
+         n   sqrt(n) phi(n,n)  sqrt(pi/2)-1/(3 sqrt n)
+       100           1.220996                 1.219981
+       400           1.236905                 1.236647
+      1600           1.245046                 1.244981
+      6400           1.249164                 1.249147
+   sqrt(pi/2) = 1.253314     document's table: 1.220996, 1.236905, 1.245046, 1.249164
+   a* = sqrt(pi)(1/sqrt2 - 1/2) = 0.3670872119   (document: 0.3670872119)
+
+============================================================================
+2. The c = gamma n table of ATTEMPT 7.2, recomputed independently
+============================================================================
+   n = 4000 (own float64 (j,R) engine)
+    gamma  sqrt(n) phi(n,gn)  pred sqrt(pi/(2g(2-g)))  ratio phi/phi_inf  pred sqrt(2/(2-g))
+     0.05           4.006055                 4.013818           1.010781            1.012739
+     0.10           2.867677                 2.875300           1.023258            1.025978
+     0.25           1.887647                 1.894833           1.064991            1.069045
+     0.50           1.440789                 1.447203           1.149583            1.154701
+     0.75           1.288754                 1.294417           1.259377            1.264911
+     1.00           1.248070                 1.253314           1.408296            1.414214
+
+   Document's table (n=4000):
+      0.05  4.006055  4.013818  1.010781  1.012739
+      0.10  2.867677  2.875300  1.023258  1.025978
+      0.25  1.887647  1.894833  1.064991  1.069045
+      0.50  1.440789  1.447203  1.149583  1.154701
+      0.75  1.288754  1.294417  1.259377  1.264911
+      1.00  1.248070  1.253314  1.408296  1.414214
+
+============================================================================
+3. Re-derivation of the (7.1) heuristic -- is it internally coherent?
+============================================================================
+
+ With q = gamma fixed and j on scale sqrt(n) (so R ~ gamma j, n-j+R ~ n):
+   return hazard  = gamma/n + (1-gamma)/(n-j+R)         -> 1/n
+   fatal  hazard  = gamma j/n + (1-gamma) R/(n-j+R)     -> gamma(2-gamma) j/n
+ so P(alive at J) ~ exp(-gamma(2-gamma) J^2/(2n)) and
+   phi(n,gamma n) ~ (1/n) int_0^inf exp(-gamma(2-gamma)J^2/(2n)) dJ
+                  = (1/(2n)) sqrt(2 pi n/(gamma(2-gamma)))
+                  = n^{-1/2} sqrt(pi/(2 gamma(2-gamma))).
+ Meanwhile phi_inf(gamma n) ~ (1/2)sqrt(pi/(gamma n)) = n^{-1/2} sqrt(pi/(4 gamma)),
+ so the ratio -> sqrt(4 gamma/(2 gamma(2-gamma))) = sqrt(2/(2-gamma)).
+ Consistency at the two ends: gamma->0 gives 1; gamma=1 gives sqrt2 and
+ sqrt(pi/2) n^{-1/2}, reproducing the PROVED Prop 7.1.  Both check.
+ c_eff = c(1-c/2n): phi_inf(c_eff)/phi_inf(c) ~ (1-gamma/2)^{-1/2}
+                                              = sqrt(2/(2-gamma)).  Consistent.
+ Small-gamma expansion: sqrt(2/(2-gamma)) = 1 + gamma/4 + O(gamma^2), i.e.
+ relative error c/(4n); and from sec 5, e(c)/phi_inf(c) ~ (sqrt(pi c)/8)/
+ (sqrt(pi)/(2 sqrt c)) = c/4, over n.  The two routes agree.  COHERENT.
+
+ What is NOT supplied: concentration of R around gamma j, and a uniform
+ Riemann-sum control of (1/n) sum_J prod(.).  The document says exactly
+ this and labels the family NUMERICALLY CHARACTERIZED.  HONEST.
+
+   Numerical check of the two ingredients the heuristic assumes:
+     gamma=0.25  ratios n=500..4000: 1.057639 1.060960 1.063318 1.064991   -> predicted 1.069045
+     gamma=0.50  ratios n=500..4000: 1.140340 1.144510 1.147476 1.149583   -> predicted 1.154701
+     gamma=1.00  ratios n=500..4000: 1.397625 1.402436 1.405862 1.408296   -> predicted 1.414214
+
+============================================================================
+4. Section 7.3 -- where the global sup sits
+============================================================================
+        n  sup_[0,n]|Delta_n|  argmax c*/n  sqrt(n)*sup
+      125            0.030239        1.000     0.338088
+      250            0.021909        1.000     0.346416
+      500            0.015759        1.000     0.352386
+     1000            0.011278        1.000     0.356650
+     2000            0.008043        1.000     0.359686
+     4000            0.005721        1.000     0.361843
+   Document: 0.030239 0.021909 0.015759 0.011278 0.008043 0.005721,
+             argmax 1.000 throughout, sqrt(n)*sup -> a* = 0.3670872
+
+   And the sup over ALL c >= 0 (phi is constant on [n,inf)):
+     n=  500   lim_{c->inf} Delta_n(c) = phi(n,n) = 0.055392   sqrt(n)*that = 1.238613  (-> sqrt(pi/2)=1.253314)
+     n= 2000   lim_{c->inf} Delta_n(c) = phi(n,n) = 0.027859   sqrt(n)*that = 1.245912  (-> sqrt(pi/2)=1.253314)
+     n= 4000   lim_{c->inf} Delta_n(c) = phi(n,n) = 0.019734   sqrt(n)*that = 1.248070  (-> sqrt(pi/2)=1.253314)
+   -> the GLOBAL sup is ~sqrt(pi/2)/sqrt(n) = 1.2533/sqrt(n), which is
+      3.4x larger than sup over [0,n] (a*/sqrt n).  Both -> 0, so
+      Teorema C survives; the document says exactly this.  CONSISTENT.
+
+============================================================================
+5. Independent Monte Carlo of the RAW Definition-1 model
+============================================================================
+      n      c   MC estimate  +- 2 s.e.   exact chain  ok
+      6    2.0      0.608220   0.002183      0.607563  OK
+     10    3.0      0.512280   0.002235      0.510313  OK
+     12   12.0      0.336490   0.002113      0.336339  OK
+     20    5.0      0.399705   0.002191      0.401613  OK
+     30   30.0      0.218200   0.001847      0.218315  OK
+
+   (seed entropy for this run: 141469625505148724570726930541814868012)

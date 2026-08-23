@@ -1,0 +1,111 @@
+============================================================================
+1. The binomial identity C(n,K)C(n-K,j-K) = C(n,j)C(j,K)
+============================================================================
+   exhaustively verified for 0<=K<=j<=n<=25: 0 failures.
+   (It is the 'choose j of n, then K of those j' double count. EXACT.)
+
+============================================================================
+2. TEOREMA D's exact finite formula, tested against a SYMBOLIC chain
+============================================================================
+   [c^j]phi(n,.) =?= (-1)^j (C(n,j)/n^j) sum_K (-1)^K C(j,K) phi_n^{(K)}
+   n=  2: all 3 Taylor coefficients match exactly: True
+   n=  3: all 4 Taylor coefficients match exactly: True
+   n=  4: all 5 Taylor coefficients match exactly: True
+   n=  5: all 6 Taylor coefficients match exactly: True
+   n=  6: all 7 Taylor coefficients match exactly: True
+   n=  7: all 8 Taylor coefficients match exactly: True
+   n=  8: all 9 Taylor coefficients match exactly: True
+   n=  9: all 10 Taylor coefficients match exactly: True
+   n= 10: all 11 Taylor coefficients match exactly: True
+   n= 11: all 12 Taylor coefficients match exactly: True
+   n= 12: all 13 Taylor coefficients match exactly: True
+   => the identity is EXACT (not asymptotic), confirmed independently of its own proof: True
+
+============================================================================
+3. [c^j]phi_inf = (-1)^j / (j!(2j+1)), and sum_K (-1)^K C(j,K) phi_K
+============================================================================
+   j=0:  sum_K (-1)^K C(j,K) phi_K =          1   1/(2j+1) =          1   OK
+   j=1:  sum_K (-1)^K C(j,K) phi_K =        1/3   1/(2j+1) =        1/3   OK
+   j=2:  sum_K (-1)^K C(j,K) phi_K =        1/5   1/(2j+1) =        1/5   OK
+   j=3:  sum_K (-1)^K C(j,K) phi_K =        1/7   1/(2j+1) =        1/7   OK
+   j=4:  sum_K (-1)^K C(j,K) phi_K =        1/9   1/(2j+1) =        1/9   OK
+   j=5:  sum_K (-1)^K C(j,K) phi_K =       1/11   1/(2j+1) =       1/11   OK
+   j=6:  sum_K (-1)^K C(j,K) phi_K =       1/13   1/(2j+1) =       1/13   OK
+   j=7:  sum_K (-1)^K C(j,K) phi_K =       1/15   1/(2j+1) =       1/15   OK
+   j=8:  sum_K (-1)^K C(j,K) phi_K =       1/17   1/(2j+1) =       1/17   OK
+   (identity: sum_K (-1)^K C(j,K) int_0^1(1-t^2)^K = int_0^1 t^{2j} .)
+
+============================================================================
+4. c_K = [(K+2)phi_K - 2]/4  --  is the citation numerically right?
+============================================================================
+   n(phi_n^{(K)} - phi_K) should tend to c_K for each fixed K:
+   K=0:  0.000000   0.000000   0.000000   0.000000   0.000000   Richardson ->  0.000000   c_K =  0.000000
+   K=1:  0.016667   0.008333   0.004167   0.002083   0.001042   Richardson ->  0.000000   c_K =  0.000000
+   K=2:  0.068833   0.050958   0.042115   0.037716   0.035523   Richardson ->  0.033329   c_K =  0.033333
+   K=3:  0.128093   0.099342   0.085282   0.078329   0.074872   Richardson ->  0.071416   c_K =  0.071429
+   K=6:  0.316038   0.246302   0.213495   0.197582   0.189744   Richardson ->  0.181906   c_K =  0.181985
+   => the cited c_K formula is confirmed. CITATION ACCURATE.
+
+============================================================================
+5. e_j from TEOREMA D's finite alternating sum, and PROP 5.2's closed form
+============================================================================
+   e_j := ((-1)^j/j!)[ sum_K (-1)^K C(j,K) c_K  -  C(j,2) sum_K (-1)^K C(j,K) phi_K ]
+   Closed form claimed: e_j = (-1)^{j+1} (j-1)^2 / (2(2j-1) j!), j>=1; e_0=0.
+   My own symbolic re-derivation (done by hand, reproduced here in sympy):
+     sum_K (-1)^K C(j,K) phi_K = 1/(2j+1)
+     sum_K (-1)^K C(j,K) K phi_K = -2j/((2j-1)(2j+1))
+     => T_j := sum_K (-1)^K C(j,K) c_K = (j-1)/(2(2j+1)(2j-1))   for j>=1
+     => e_j = ((-1)^j/j!)[(j-1)/(2(2j+1)(2j-1)) - j(j-1)/(2(2j+1))]
+            = ((-1)^j/j!) (j-1)(1-j(2j-1)) / (2(2j+1)(2j-1))
+            and 1-j(2j-1) = -(2j+1)(j-1), so
+       e_j = (-1)^{j+1} (j-1)^2 / (2(2j-1) j!).   QED (fully elementary).
+
+   sympy check of the two auxiliary sums, j = 1..10:
+      both closed forms confirmed for j = 1..10.
+
+     j      e_j (Teorema D sum)      e_j (Prop 5.2 form)  match
+     0                        0                        0  OK
+     1                        0                        0  OK
+     2                    -1/12                    -1/12  OK
+     3                     1/15                     1/15  OK
+     4                   -3/112                   -3/112  OK
+     5                    1/135                    1/135  OK
+     6                  -5/3168                  -5/3168  OK
+     7                   1/3640                   1/3640  OK
+     8                -7/172800                -7/172800  OK
+     9                 1/192780                 1/192780  OK
+    10               -1/1702400               -1/1702400  OK
+    11               1/16765056               1/16765056  OK
+    12           -11/2003097600           -11/2003097600  OK
+
+============================================================================
+6. Finite-n convergence n([c^j]phi(n,.) - [c^j]phi_inf) -> e_j
+============================================================================
+   j=2: -0.0831375 -0.0832828 -0.0833205 -0.0833301 -0.0833325 -0.0833331   -> e_j = -0.0833333
+   j=3:  0.0649996  0.0658333  0.0662500  0.0664583  0.0665625  0.0666146   -> e_j =  0.0666667
+   j=4: -0.0245854 -0.0256751 -0.0262278 -0.0265061 -0.0266457 -0.0267157   -> e_j = -0.0267857
+
+============================================================================
+7. PROP 5.2's three representations of e(c) and its landmarks
+============================================================================
+        c      (5.1) integral form        Prop 5.2 integral             power series
+     0.50   -0.0139652886930855099   -0.0139652886930855099   -0.0139652886930855099
+     1.00   -0.0373843859183115025   -0.0373843859183115025   -0.0373843859183115025
+     2.00   -0.0655927134327352574   -0.0655927134327352574   -0.0655927134327352574
+     5.00   0.00643179426154149498   0.00643179426154149498   0.00643179426154149498
+    10.00     0.200754676055894306     0.200754676055894306     0.200754676055894306
+   max pairwise discrepancy over these c: 1.052102468288134998127135966449929426976e-23
+
+   int_0^inf [1-(1+u^2+u^4)e^{-u^2}]/u^2 du = 0.44311346272637900682
+   sqrt(pi)/4                                = 0.44311346272637900682
+   agree to 20 digits: 1.1295e-24
+   minimiser of e:  c = 2.28378152499   e = -0.0669614288696
+                    (document: 2.283781525, -0.06696142887)
+   sign change  :  c_x = 4.83904605495   (document: 4.83904605495)
+   sqrt(pi)/8   = 0.221556731363   (document: 0.2215567314)
+
+   large-c form e(c) = sqrt(pi c)/8 - 1/2 + O(sqrt(c) e^{-c}):
+     c=  25   e(c) =   0.607783656908   sqrt(pi c)/8 - 1/2 =   0.607783656816
+     c= 100   e(c) =    1.71556731363   sqrt(pi c)/8 - 1/2 =    1.71556731363
+     c= 400   e(c) =    3.93113462726   sqrt(pi c)/8 - 1/2 =    3.93113462726
+   -> reproduces the 0.607784 / 1.715567 / 3.931135 of the sec 5.6 table.

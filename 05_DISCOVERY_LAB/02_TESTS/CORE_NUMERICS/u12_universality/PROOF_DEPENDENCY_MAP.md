@@ -103,6 +103,21 @@ desde 2026-08-22 (DISC-DEC-040), nesta cor.
 > torna, adicionalmente, corolários formais de um objeto mais forte.
 > Ver `THEOREM.md` "Estágio 9" para o enunciado completo.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-049, Estágio 10.]** Um novo
+> resultado, `uniform_in_c_attempt/ATTEMPT.md`, adversarialmente
+> confirmado, estabelece que a convergência do nó `Teo3`
+> (`φ(n,c)→φ_∞(c)`) é **uniforme em `c`** — não só em compactos
+> `[0,C]`, mas em todo `[0,\infty)`. Este é um resultado *sobre* `Teo3`
+> (uma propriedade mais forte da mesma convergência), não uma nova
+> aresta de dependência dentro da Árvore A: `Teo3` continua provado
+> exatamente como antes, e a prova de uniformidade não usa nenhum nó
+> deste diagrama — usa apenas `Teo3` (pontual) mais dois lemas
+> elementares novos (acoplamento equi-Lipschitz; limitante de cauda),
+> nenhum dos quais depende de `K` ou da maquinaria `F_r/G_r/H_r`. Por
+> isso o diagrama acima permanece correto e completo como está; o novo
+> resultado vive logicamente "a jusante" de `Teo3`, não dentro da
+> árvore. Ver `THEOREM.md` "Estágio 10" para o enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

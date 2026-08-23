@@ -2314,8 +2314,8 @@ Novas fórmulas exatas `ψ_n^{(6)},ψ_n^{(7)},ψ_n^{(8)}` são produzidas
 como subproduto direto.
 
 **O que permanece aberto, sem mudança:** (iv) versão uniforme-em-`c`
-do Teorema 3 (ver Estágio 9 paralelo, se integrado — onda 11 frente
-(a) trata exatamente disto); (v) Conjecturas 1–2 (lei distribucional
+do Teorema 3 [Ver Estágio 10 abaixo — este item foi fechado] (onda 11
+frente (a) tratou exatamente disto); (v) Conjecturas 1–2 (lei distribucional
 completa, `K≥2`); e, dentro do escopo desta própria frente: a forma
 fechada geral-`b` das constantes agudas `D^{*(p)}_r(b)` para `b\ge2`
 (estrutura da obstrução agora identificada, não apenas negativa);
@@ -2332,3 +2332,129 @@ Restam abertos apenas: a forma fechada das constantes agudas em
 Conjecturas 1–2 da lei distribucional completa. Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/ATTEMPT.md`,
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 10 — 2026-08-23]
+
+**Onda 11, frente (a), `DISC-DEC-047`/`DISC-DEC-049`
+(`UNIFORM-IN-C-TEOREMA-3-ATTEMPT`).** Alvo: item **(iv)** da lista "o
+que permanece aberto" desde o Estágio 6/7/8/9 — a versão
+localmente-uniforme-em-`c` do Teorema 3, nunca tentada, mais a
+pergunta nunca respondida do que acontece quando `c` cresce junto com
+`n`.
+
+### O que foi provado
+
+Teorema 3 (Estágio 6) prova `φ(n,c)→φ_∞(c)` para cada `c\ge0`
+**fixo**, um `c` de cada vez — nada sobre uniformidade. Este front
+fecha a lacuna, e mais:
+
+> **Teorema A (PROVADO, incondicional).** Para todo `C>0` fixo,
+> `\displaystyle\sup_{c\in[0,C]}|φ(n,c)-φ_∞(c)|\xrightarrow[n\to\infty]{}0`.
+>
+> **Teorema C (PROVADO, incondicional).** `\displaystyle\sup_{c\in[0,\infty)}|φ(n,c)-φ_∞(c)|\xrightarrow[n\to\infty]{}0`
+> (sob a convenção `q=\min(c/n,1)` de Definição 1) — mais forte do que
+> o item pedia: não apenas uniforme em compactos, mas em todo o
+> domínio.
+
+Ambos os teoremas descartam inteiramente a maquinaria `F_r/G_r/H_r` —
+apoiam-se em apenas dois lemas elementares novos: um acoplamento de
+`ξ` que dá `|φ(n,c)-φ(n,c')|\le|c-c'|`, uniforme em `n` (Lema 3.1,
+"equi-Lipschitz"), e um limitante de cauda uniforme-em-`n` provado
+diretamente na exploração do passeio (Lema 4.1). O argumento
+"pontual + equicontínuo ⟹ uniforme em compactos" é padrão; o que
+faltava no arquivo era só a equicontinuidade, suprida em uma linha.
+
+Além disso, o perfil de erro de primeira ordem tem forma fechada
+exata:
+
+> **Teorema D (PROVADO, incondicional).** Para todo `j\ge0` fixo,
+> `n([c^j]φ(n,\cdot)-[c^j]φ_∞)\to e_j`, uma soma finita explícita em
+> `c_K` (Estágio 7) e `φ_K` (Wallis). E
+> `\displaystyle e(c)=\sum_j e_jc^j=\tfrac12\int_0^1\frac{1-(1+ct^2+c^2t^4)e^{-ct^2}}{t^2}dt`,
+> com `e(c)\sim\sqrt{πc}/8` para `c` grande — a constante de erro
+> uniforme em `[0,C]` cresce exatamente como `\sqrt C`.
+
+A versão **uniforme** (não apenas coeficiente-a-coeficiente) desse
+perfil, `n\sup_{[0,C]}|Δ_n|\to\sup_{[0,C]}|e|`, e um limitante
+explícito `\sup_{[0,C]}|Δ_n|\le(a\sqrt C+κ_B)/n` permanecem
+condicionais a uma hipótese nomeada — exatamente "a taxa `1/n` do
+Estágio 7, uniforme em `K`", que o próprio Estágio 7 explicitamente
+não afirma. Esta é a única obstrução nomeada a uma taxa totalmente
+explícita.
+
+Sobre `c` crescendo com `n`: em termos **absolutos** nada diverge —
+até o sup global tende a `0`. Em termos **relativos** a lei-limite
+degrada de forma precisamente localizável: para `c=γn`,
+`φ(n,c)/φ_∞(c)\to\sqrt{2/(2-γ)}`, **provado** no extremo `γ=1`
+(`φ(n,n)=Q(n)/n` exatamente, função `Q` de Ramanujan) e caracterizado
+numericamente para `γ\in(0,1)`.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado atacou os dois insumos analíticos novos
+(Lema 3.1, Lema 4.1) e os dois teoremas incondicionais (Teorema A,
+Teorema C) com peso máximo, auditando cada uma das seis etapas do
+Lema 4.1 separadamente (não apenas o limitante final) — nenhum erro
+encontrado em nenhum deles. Confirmou também Teorema D como
+"*airtight*" (testado contra uma recursão simbólica que nunca usa a
+identidade binomial de apoio, 91/91 coeficientes exatos), e
+re-derivou o perfil `e(c)` por uma rota totalmente independente,
+reproduzindo a mesma forma fechada, incluindo o cancelamento exato
+`1-j(2j-1)=-(2j+1)(j-1)`.
+
+**Um achado substantivo, de natureza incomum: o documento nomeava a
+lacuna errada para a razão de Teorema E ser condicional.** O texto
+original afirmava, incorretamente, que a Proposição 6 do Estágio 8
+"prova" a geometricidade dos limitantes melhorados — na verdade
+Estágio 8 prova apenas o limitante, não a geometricidade (sua própria
+tabela de status classifica isso como apenas caracterizado
+numericamente). O rótulo PROVED-MODULO permanece correto, mas a
+lacuna nomeada estava errada: não é a falta de uma constante
+geométrica explícita, é a falta de uma prova escrita da
+geometricidade *qualitativa*. Mais três pequenas imprecisões de
+sumário executivo (qualificadores presentes no corpo do texto que
+sumiam no resumo) foram corrigidas, mais uma dúzia de nits cosméticos.
+O referee também registrou um fortalecimento não solicitado: a
+identidade que explica a constante afiada `a^*` é **exata**
+(`φ_n^{(n-1)}=φ_n^{(n)}=Q(n)/n`), não apenas aproximada como o
+documento original afirmava.
+
+> **Veredito: SPLIT, esmagadoramente positivo.** "The two headline
+> unconditional theorems survive a deliberate attempt to break them...
+> found **no error of any kind**." Nenhuma das correções toca Lema
+> 3.1, Teorema A, Lema 4.1, Corolário 4.2 ou Teorema C.
+
+Ver
+`uniform_in_c_attempt/ATTEMPT.md` e
+`uniform_in_c_attempt/adversarial/REFEREE_REPORT.md` para os
+relatórios completos.
+
+### O que isto muda, precisamente
+
+**O item (iv) da lista "o que permanece aberto" desde o Estágio 6 está
+FECHADO** — e de forma mais forte do que pedido: não apenas
+uniformidade em compactos, mas em todo `[0,\infty)`. A pergunta
+correlata (o que acontece quando `c` cresce com `n`) recebeu resposta
+completa: nenhuma divergência absoluta em lugar nenhum, com
+degradação relativa precisamente localizada e mecanismo identificado.
+
+**O que permanece aberto, sem mudança:** uma taxa explícita para
+Teorema A/C (condicional à hipótese (U'), uniformidade-em-`K` da taxa
+do Estágio 7 — nomeada, não provada); a versão uniforme de Teorema E
+(gap real, agora corretamente nomeado: geometricidade qualitativa de
+`M_K`); a lei de escala `γ\in(0,1)` (caracterizada, não provada); (v)
+Conjecturas 1–2. **O Teorema 3 (Estágio 6) permanece inteiramente
+inafetado** — nunca dependeu desta frente.
+
+**Veredito honesto atualizado (ao fim do Estágio 10):** a linha
+`U_1/2` tem agora convergência uniforme incondicional em todo o
+domínio de `c` (Teoremas A e C), além da forma fechada
+todas-as-ordens geral-`K` do Estágio 9 — os dois itens mais difíceis
+da lista original de itens abertos desde o Estágio 6 estão ambos
+fechados. Resta, como obstrução central e única nomeada para uma taxa
+explícita: uniformidade-em-`K` da taxa `1/n` do Estágio 7. Fontes
+completas:
+`theorem/uniform_in_c_attempt/ATTEMPT.md`,
+`theorem/uniform_in_c_attempt/adversarial/REFEREE_REPORT.md`.

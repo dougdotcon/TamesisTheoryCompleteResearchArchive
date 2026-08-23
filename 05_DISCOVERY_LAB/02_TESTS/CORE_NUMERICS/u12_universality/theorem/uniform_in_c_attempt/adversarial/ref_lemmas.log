@@ -1,0 +1,118 @@
+============================================================================
+0. Reproducing the ATTEMPT 4.1 'C_0-tail values' 0.531/0.259/0.116/...
+============================================================================
+
+The prose gives 'the C_0-tail values 0.531, 0.259, 0.116, 0.053, 0.025 at
+C_0 = 50,200,1e3,5e3,2.5e4, essentially identical at n=1e3,1e4,1e5'.  These
+are NOT omega(C_0) of Corolario 4.2 (which is the deliberately-simplified
+L=log C_0 specialisation).  They are the J-OPTIMISED Lema 4.1 bound at
+q=C_0/n; in the n->infinity limit with J=xn that is
+     h(x) = x/(1-x) + exp(-C_0 x^2/2),   minimised over x in (0,1/2).
+Reproduced here independently:
+
+   C_0=    50   min_x h(x) = 0.5297      omega(C_0) [Cor 4.2] = 0.8112
+   C_0=   200   min_x h(x) = 0.2586      omega(C_0) [Cor 4.2] = 0.4654
+   C_0=  1000   min_x h(x) = 0.1158      omega(C_0) [Cor 4.2] = 0.2361
+   C_0=  5000   min_x h(x) = 0.0533      omega(C_0) [Cor 4.2] = 0.1169
+   C_0= 25000   min_x h(x) = 0.0248      omega(C_0) [Cor 4.2] = 0.0570
+   -> the document's five figures reproduce to the digits printed.
+   The reading is consistent with the surrounding prose ('zero violations of
+   Lema 4.1 ... and the C_0-tail values'), and it is the LEMMA's bound, not
+   the corollary's, so no overclaim; but the sentence is ambiguous enough
+   that a reader could mistake these for omega(C_0), which is ~1.5-2x larger.
+
+============================================================================
+1. LEMA 5.1:  B_n(c) = int_0^1 [(1-ct^2/n)^n - e^{-ct^2}] dt  <= 0
+============================================================================
+
+Re-derivation.  B_n(c) := sum_{K>=0} (b_K(c)-p_K(c)) phi_K, with
+b_K = P(Bin(n,c/n)=K) (supported on K<=n) and p_K = P(Poi(c)=K).
+Lemma 2 gives phi_K = int_0^1 (1-t^2)^K dt, so with z := 1-t^2 in [0,1]:
+   sum_K b_K phi_K = int_0^1 sum_K b_K z^K dt = int_0^1 (1-(c/n)(1-z))^n dt
+                   = int_0^1 (1 - c t^2/n)^n dt        [Bin pgf, finite sum]
+   sum_K p_K phi_K = int_0^1 e^{-c(1-z)} dt = int_0^1 e^{-c t^2} dt
+                                                        [Poi pgf, Tonelli:
+                                                         all terms >= 0]
+Both interchanges are legitimate (finite sum; nonnegative terms).  Sign:
+0 <= ct^2/n <= 1 for c <= n, and 1-u <= e^{-u} for u in [0,1], so
+(1-ct^2/n)^n <= e^{-ct^2} pointwise, whence B_n <= 0.   CORRECT.
+
+   sum-vs-integral agreement, 6 values of n x up to 4 values of c:
+   worst absolute discrepancy = 1.263e-40   (and B_n <= 0 in every cell).  LEMA 5.1 CONFIRMED.
+
+============================================================================
+2. LEMA 6.1:  0 <= e^{-x} - (1-x/n)^n <= (x^2/n) e^{-x},  n>=4, 0<=x<=n
+============================================================================
+
+Re-derivation, both branches:
+ LEFT:  1-u <= e^{-u} with u = x/n in [0,1]; both sides >= 0, so raising to
+        the n-th power preserves it.  CORRECT (needs only x <= n).
+ RIGHT, case x >= sqrt(n):  then x^2/n >= 1, so (x^2/n)e^{-x} >= e^{-x}
+        >= e^{-x} - (1-x/n)^n, since (1-x/n)^n >= 0 (again x <= n).  CORRECT.
+ RIGHT, case x < sqrt(n):  u = x/n < 1/sqrt(n) <= 1/2 for n >= 4.
+        (1-u)^n = exp(n log(1-u)) = exp(-n sum_{k>=1} u^k/k)
+                = e^{-x} exp(-n sum_{k>=2} u^k/k)      [since n u = x]
+        so e^{-x} - (1-u)^n = e^{-x}(1 - exp(-y)) with y = n sum_{k>=2} u^k/k
+        <= e^{-x} y                                    [1-e^{-y} <= y, y>=0]
+        y <= (n/2) sum_{k>=2} u^k = (n/2) u^2/(1-u) <= n u^2  [1-u >= 1/2]
+        n u^2 = x^2/n.                                  CORRECT.
+ The case split is exhaustive and each branch's hypotheses are met.
+ The n >= 4 is used ONLY to get 1-u >= 1/2 in the second branch.  Below I
+ check whether it is actually necessary.
+
+   n=    2   max (lhs/rhs) = 0.651764 at x=1.2620   negative-lhs count = 0   <-- OUTSIDE the lemma's hypothesis n>=4
+   n=    3   max (lhs/rhs) = 0.589929 at x=1.2922   negative-lhs count = 0   <-- OUTSIDE the lemma's hypothesis n>=4
+   n=    4   max (lhs/rhs) = 0.563967 at x=1.3040   negative-lhs count = 0
+   n=    5   max (lhs/rhs) = 0.549651 at x=1.3113   negative-lhs count = 0
+   n=    7   max (lhs/rhs) = 0.534307 at x=1.3177   negative-lhs count = 0
+   n=   10   max (lhs/rhs) = 0.523444 at x=1.3225   negative-lhs count = 0
+   n=   30   max (lhs/rhs) = 0.507538 at x=1.3275   negative-lhs count = 0
+   n=  100   max (lhs/rhs) = 0.502234 at x=1.3250   negative-lhs count = 0
+   n= 1000   max (lhs/rhs) = 0.500221 at x=1.2500   negative-lhs count = 0
+   -> ratio never exceeds ~0.564 for n >= 4, matching the document.
+   n = 2 and n = 3 also pass numerically, so 'n >= 4' is an artefact of the
+   1-u >= 1/2 step, not a real threshold -- harmless (the lemma is only ever
+   applied with n large).
+
+============================================================================
+3. COROLARIO 6.2 and kappa_B = sup_c c^2 I_2(c),  I_2 = int_0^1 t^4 e^{-ct^2}
+============================================================================
+
+   |B_n(c)| = int_0^1 [e^{-ct^2} - (1-ct^2/n)^n] dt
+            <= int_0^1 ((ct^2)^2/n) e^{-ct^2} dt   [Lema 6.1 at x = ct^2,
+                                                    legal since 0<=ct^2<=c<=n]
+            = (c^2/n) I_2(c) <= kappa_B / n.        CORRECT.
+
+   argmax c*   = 4.08675454645      (document: 4.086754546)
+   kappa_B     = 0.280480169024586   (document: 0.280480169025)
+   agreement   : YES
+   (kappa_B is a high-precision NUMERICAL value, not a closed form --
+    the Executive Summary's phrase 'computed exactly here' is loose.)
+
+   Direct check of |B_n(c)| <= c^2 I_2(c)/n <= kappa_B/n :
+     n=   4 c=   1   |B_n|=  0.01365201   c^2 I_2/n=   0.0250672   kappa_B/n= 0.070120042   OK
+     n=   4 c=   4   |B_n|= 0.034691489   c^2 I_2/n= 0.070103129   kappa_B/n= 0.070120042   OK
+     n=  10 c=   1   |B_n|=0.0051807011   c^2 I_2/n=  0.01002688   kappa_B/n= 0.028048017   OK
+     n=  10 c=   5   |B_n|= 0.013549415   c^2 I_2/n=  0.02748859   kappa_B/n= 0.028048017   OK
+     n=  10 c=  10   |B_n|=0.0099872069   c^2 I_2/n= 0.020992449   kappa_B/n= 0.028048017   OK
+     n=  50 c=   1   |B_n|=0.0010091571   c^2 I_2/n= 0.002005376   kappa_B/n=0.0056096034   OK
+     n=  50 c=   5   |B_n|=0.0027441078   c^2 I_2/n=0.0054977181   kappa_B/n=0.0056096034   OK
+     n=  50 c=  20   |B_n|=0.0014709269   c^2 I_2/n= 0.002972495   kappa_B/n=0.0056096034   OK
+     n=  50 c=  50   |B_n|=0.00093029589   c^2 I_2/n=0.0018799712   kappa_B/n=0.0056096034   OK
+     n= 200 c=   1   |B_n|=0.00025107384   c^2 I_2/n=0.00050134399   kappa_B/n=0.0014024008   OK
+     n= 200 c=   5   |B_n|=0.00068695001   c^2 I_2/n=0.0013744295   kappa_B/n=0.0014024008   OK
+     n= 200 c=  20   |B_n|=0.00037059682   c^2 I_2/n=0.00074312376   kappa_B/n=0.0014024008   OK
+     n= 200 c= 200   |B_n|=0.00011719302   c^2 I_2/n=0.0002349964   kappa_B/n=0.0014024008   OK
+
+============================================================================
+4. TEOREMA B's Jensen step
+============================================================================
+
+ |A_n(c)| = |sum_K b_K(c)(phi_n^{(K)}-phi_K)| <= (a/n) E[sqrt(Bin(n,c/n))]
+          <= (a/n) sqrt(E[Bin(n,c/n)]) = (a/n) sqrt(c).
+ sqrt is concave so Jensen goes the right way (E sqrt X <= sqrt E X).
+ CORRECT given (U'_a).  Numerically E sqrt(Bin) vs sqrt(c):
+   n=  100 c=   1   E sqrt(Bin) =   0.7745096513   sqrt(c) =            1.0   OK
+   n=  100 c=  10   E sqrt(Bin) =    3.124847276   sqrt(c) =     3.16227766   OK
+   n=  100 c=  50   E sqrt(Bin) =    7.062144434   sqrt(c) =    7.071067812   OK
+   n= 1000 c= 200   E sqrt(Bin) =    14.13504855   sqrt(c) =    14.14213562   OK

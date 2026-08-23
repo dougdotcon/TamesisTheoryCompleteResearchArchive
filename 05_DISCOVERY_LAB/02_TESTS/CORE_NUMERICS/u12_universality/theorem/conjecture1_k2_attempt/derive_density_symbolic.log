@@ -1,0 +1,28 @@
+======================================================================
+STEP A: joint density of (m1,m2) -- claimed uniform(2) on triangle T
+======================================================================
+f_(L,A)(ell,a) restricted to Same=1, i.e. P(L in dell,Same=1,A in da) density:
+ = 1  on {0<a<ell<1}
+Jacobian det d(ell,a)/d(m1,m2) = 1
+=> f_I(m1,m2) [Case I, same-block contribution to joint density] = 1
+
+f_(L1,L2)(ell,m2) restricted to Same=0, density:
+ = 1  on {0<ell<1, 0<m2<1-ell}
+=> f_II(m1,m2) [Case II, different-block contribution] = 1
+
+TOTAL joint density f_(m1,m2)(m1,m2) = f_I + f_II = 2
+Claimed: constant 2 on triangle T={m1>0,m2>0,m1+m2<1}. Match: True
+Total mass check (should be 1): 1
+P(Same=1) = integral of f_I over T (should be 1/2): 1/2
+P(Same=0) = integral of f_II over T (should be 1/2): 1/2
+
+======================================================================
+STEP B/C: assembling f_{M_2}(x) via the 4-group decomposition
+======================================================================
+Computing Group A's contribution to P(M2<=x) ... (symbolic, exact)
+  check aa=7/10,bb=7/10,s=7/100: symbolic=0.005000 numeric=0.005000
+  check aa=1/2,bb=9/10,s=21/20: symbolic=0.863889 numeric=0.863889
+  check aa=7/10,bb=1/2,s=9/10: symbolic=0.871429 numeric=0.871429
+  check aa=3/5,bb=2/5,s=4/5: symbolic=0.916667 numeric=0.916667
+  check aa=3/10,bb=1/2,s=4/25: symbolic=0.085333 numeric=0.085333
+cdf_sum_uniforms sanity checks done (see values above).

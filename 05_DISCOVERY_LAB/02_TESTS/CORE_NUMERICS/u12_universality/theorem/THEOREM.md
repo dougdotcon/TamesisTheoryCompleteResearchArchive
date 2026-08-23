@@ -1226,6 +1226,12 @@ functional form for a *different* microscopic model's `K`-conditional
 limit — non-trivial supporting evidence via a universality argument,
 not a proof for the u12 ensemble itself (§5.5 states precisely why not).
 
+> **[Extensão, 2026-08-23 — DISC-DEC-057/DISC-DEC-061.]** `K=2` is now
+> **PROVED** (modulo one classical citation at the same rigor level as
+> this document's own §2.3 Proposition 2.4 — see "Estágio 15" below):
+> `f_{M_2}(x)=4x(1-x^2)`, exactly. Conjecture 1 for `K\ge3` remains
+> exactly as open as before — `K\ge3` was explicitly not attempted.
+
 **Conjecture 2 (the full unconditional distributional law).**
 
 `M(c) \overset{d}{=} \min(1,\sqrt{E/c})`,  `E\sim\mathrm{Exp}(1)`, i.e.
@@ -1290,7 +1296,8 @@ rather than duplicated.
    gaps 1–2.
 5. **The general-`K` distributional law** `f_{M_K}(x)=2Kx(1-x^2)^{K-1}`
    for `K\ge2` (Conjecture 1, §8; = old §6 item 7/11). Unproved; proved
-   only at `K=1` (§5.3).
+   only at `K=1` (§5.3) [and now also at `K=2` — see "Estágio 15"
+   below; `K\ge3` remains exactly this open].
 6. **The full unconditional distributional law** `M(c)\overset{d}{=}
    \min(1,\sqrt{E/c})` (Conjecture 2, §8). Unproved; inherits gap 5.
 7. **Proposition 2.4** (§2.3; = old §6 item 10): the explicit
@@ -2910,3 +2917,105 @@ uma linha — um alvo concreto e barato para uma frente futura, não mais
 uma incógnita estrutural. Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/ATTEMPT.md`,
 `.../general_b_dstar_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 15 — 2026-08-23]
+
+**Onda 14, frente (c), `DISC-DEC-057`/`DISC-DEC-061`
+(`CONJECTURE-1-K2-ATTEMPT`).** Alvo: §8 Conjectura 1
+(`f_{M_K}(x)=2Kx(1-x^2)^{K-1}`), provada apenas em `K=1` (§5.3) desde a
+criação deste documento — o item 5 da lista de gaps do §9.
+
+### O que foi provado
+
+> **Teorema (este documento, PROVADO módulo uma citação clássica).**
+> `\displaystyle f_{M_2}(x) = 4x(1-x^2)` em `(0,1)`, exatamente —
+> a instância `K=2` da Conjectura 1.
+
+Método: generaliza a computação whole-space do §5.3 (`K=1`) a `K=2`.
+Duas fontes de reroteamento `x_1,x_2\sim\mathrm{Unif}(0,1)` i.i.d.
+dividem `[0,1]` em duas "massas de região" `(m_1,m_2)` cuja lei
+conjunta é **exatamente uniforme** na triângulo `T=\{m_1,m_2>0,
+m_1+m_2<1\}` (Lema 1) — provado módulo a propriedade clássica de
+amostragem size-biased/residual de `PD(1)` (McCloskey 1965;
+Patil–Taillie 1977; Pitman, *Combinatorial Stochastic Processes*,
+St-Flour 2002, Cap. 3), a **mesma** citação que a Proposição 2.4 deste
+documento já usa sem re-derivação, e adicionalmente apoiada por um
+argumento combinatório finito-`n` autocontido. As `9` combinações de
+onde os dois destinos `u_1,u_2` pousam colapsam em `4` grupos mutuamente
+exclusivos com densidades exatas `f_A(x)=2x^2(1-x)`,
+`f_B(x)=f_C(x)=x(1-x^2)`, `f_D(x)=2x(1-x)`, cuja soma simbólica é
+exatamente `4x(1-x^2)`. Subprodutos: reproduz `E[M_2]=8/15=\varphi_2`
+(já conhecido) e estabelece **novo** `E[M_2^2]=1/3`. A redução `K=1`
+do mesmo método reproduz exatamente `f_{M_1}(x)=2x` (§5.3), confirmando
+o método geral, não apenas a tabela específica de `K=2`.
+
+**O que NÃO foi fechado:** `K\ge3` — não tentado, sem alegação feita.
+A explosão combinatória do número de configurações de destino cresce
+com `K`, ecoando exatamente o mesmo diagnóstico que
+`k2_open_lemma/ATTEMPT.md` dá para seu próprio problema *diferente*
+(a ponte `n\to\infty`) explodir além de `K=2`.
+
+### Verificação adversarial independente
+
+A sessão orquestradora re-derivou, do zero, toda a cadeia
+simbólica/algébrica (as quatro probabilidades de grupo somando a `1`,
+os quatro densidades de grupo via marginalização própria, a soma exata
+a `4x(1-x^2)`, os momentos, e a redução `K=1`) antes de despachar um
+referee hostil dedicado, que re-derivou o restante do zero: o Lema 1
+(via um modelo gerativo genuinamente diferente — simulação de
+permutação discreta que não toca a maquinaria contínua `PD(1)`/
+stick-breaking, três escalas `n=300,1000,3000`, tendência de
+convergência limpa conforme `n\to\infty`); a tabela de mecanismo de `9`
+células (`260.000` testes exatos, `100%` de acerto, incluindo casos-
+limite de colisão de destino e ponto fixo — o nível mais granular já
+testado nesta linha); o enquadramento "mesma citação da Proposição
+2.4" (confirmado ser a mesma jogada metodológica já aceita pelo §5.3
+deste documento); e re-confirmou a densidade agregada a `n=20.000`
+(`2×` a escala da própria frente).
+
+> **Veredito: SOUND WITH NAMED ISSUES (um, menor, não-substantivo) —
+> "ACCEPT for catalogue."** Nenhum erro matemático encontrado em lugar
+> algum. Único achado: uma rotulagem de citação imprecisa dentro da
+> prova do Lema 1 do próprio documento-alvo (uma invocação da mesma
+> propriedade subjacente citada como "Fact A, PROVADO" em vez do fato
+> clássico direto, exatamente como o parágrafo seguinte do mesmo
+> documento já faz corretamente) — sem efeito sobre a validade da prova,
+> confirmado independentemente e corrigido via correção datada.
+
+Ver `theorem/conjecture1_k2_attempt/ATTEMPT.md` e
+`.../conjecture1_k2_attempt/adversarial/REFEREE_REPORT.md` para os
+relatórios completos.
+
+### O que isto muda, precisamente
+
+**Conjectura 1 (§8) está agora PROVADA em `K=2`**, além do `K=1` já
+provado desde §5.3 — a primeira instância `K\ge2` da lei distribucional
+completa a ser fechada. `K\ge3` permanece exatamente tão aberto quanto
+antes; nenhuma tentativa ou alegação é feita para `K\ge3`. Conjectura 2
+(§8, a mistura de Poisson sobre a Conjectura 1) permanece CONJECTURA —
+herda o fechamento de `K=2` como um componente a mais confirmado da
+mistura, mas continua condicional a `K\ge3` para ser totalmente
+fechada. Nenhum resultado anterior é enfraquecido: a classificação
+`U_{1/2}` no limite `n\to\infty`, todos os Teoremas/Estágios anteriores,
+e a própria Conjectura 1 em `K=1` (§5.3) permanecem exatamente como
+estavam.
+
+**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge3`;
+Conjectura 2 em geral (herda o gap acima); a forma fechada geral-`b`
+das constantes agudas para `p\ge5` (Estágio 14); `\sup_K M_K/\sqrt K
+=a^*` (Estágio 13). Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.
+
+**Veredito honesto atualizado (ao fim do Estágio 15):** a linha
+`U_1/2` tem agora a lei distribucional completa provada em `K=1,2`
+(módulo, em ambos os casos, a mesma citação clássica já aceita pela
+Proposição 2.4 do próprio documento) — a primeira extensão de
+Conjectura 1 além do caso base desde sua formulação. `K\ge3` continua
+sem nenhuma tentativa registrada nesta linha; a explosão combinatória
+do número de configurações nomeada por esta e por frentes anteriores
+como a razão estrutural provável permanece a melhor explicação
+disponível para por que o método não se generaliza trivialmente.
+Fontes completas: `theorem/conjecture1_k2_attempt/ATTEMPT.md`,
+`.../conjecture1_k2_attempt/adversarial/REFEREE_REPORT.md`.

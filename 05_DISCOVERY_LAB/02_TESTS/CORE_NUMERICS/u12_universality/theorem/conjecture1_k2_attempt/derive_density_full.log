@@ -1,0 +1,49 @@
+======================================================================
+GROUP D: M2 = 1-m1-m2 deterministic given (m1,m2); prob(D|m1,m2)=1-m1-m2
+Step-A density of (m1,m2) is 2 on T={m1,m2>0,m1+m2<1}.
+======================================================================
+weighted marginal density of L=m1+m2 (group D mass at each ell): 2*ell*(1 - ell)
+=> f_D(x) = 2*x*(1 - x)
+total probability mass of Group D (sanity, direct): 1/3
+total probability mass of Group D (direct double integral): 1/3
+
+======================================================================
+GROUP B: M2 = 1-m2-D1, D1~U(0,m1); prob(B|m1,m2)=m1(1-m2)
+======================================================================
+joint density of (m1,m2,d1) restricted to group B (indep of d1!) = 2 - 2*m2  on {0<d1<m1, (m1,m2) in T}
+=> f_B(x) = -x**3 + x
+
+======================================================================
+GROUP C: M2 = 1-m1-D2, D2~U(0,m2); prob(C|m1,m2)=m2(1-m1)  [mirror of B]
+======================================================================
+=> f_C(x) = -x**3 + x
+
+======================================================================
+GROUP A: M2 = 1-D1-D2, D1~U(0,m1),D2~U(0,m2) indep; prob(A|m1,m2)=2 m1 m2
+======================================================================
+joint density of (m1,m2,d1,d2) restricted to group A = 4  (constant) on {0<d1<m1,0<d2<m2,(m1,m2) in T}
+marginal joint density of (D1,D2)=(d1,d2) within group A = 2*(d1 + d2 - 1)**2  on {d1,d2>0, d1+d2<1}
+marginal density of sigma=D1+D2 within group A, f_sigma(sigma) = 2*sigma*(sigma - 1)**2
+=> f_A(x) = 2*x**2*(1 - x)
+
+======================================================================
+SUMMING ALL FOUR GROUPS
+======================================================================
+f_A(x) = 2*x**2*(1 - x)
+f_B(x) = -x**3 + x
+f_C(x) = -x**3 + x
+f_D(x) = 2*x*(1 - x)
+
+f_{M2}(x) = f_A+f_B+f_C+f_D = 4*x*(1 - x**2)
+Target 4x(1-x^2) = -4*x**3 + 4*x
+Symbolic difference f_M2 - target = 0
+EXACT MATCH: True
+
+======================================================================
+CROSS-CHECKS
+======================================================================
+Total mass integral_0^1 f_M2 dx (should be 1): 1
+Mean integral_0^1 x*f_M2 dx (should be phi_2 = 8/15): 8/15
+phi_2 exact value check: 8/15
+E[M2^2] from derived density: 1/3
+E[M2^2] from target 4x(1-x^2): 1/3

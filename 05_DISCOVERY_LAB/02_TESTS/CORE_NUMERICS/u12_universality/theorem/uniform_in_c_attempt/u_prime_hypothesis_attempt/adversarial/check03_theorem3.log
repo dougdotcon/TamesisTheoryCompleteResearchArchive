@@ -1,0 +1,28 @@
+==============================================================================
+PART A: M_K = Q(K+1) - (K+1) phi_K, exact, K=0..1000
+(orchestrator: K=0..14; target's own T4: K=0..40).
+==============================================================================
+RESULT: 1001 K values checked (K=0..1000), 0 mismatches.
+
+==============================================================================
+PART B: c_K = [(K+2)phi_K-2]/4 >= 0 for all K, equality only K=0,1
+(Estagio 7 of THEOREM.md -- citation used by Theorem 2's proof).
+==============================================================================
+c_K sign pattern (K=0..2000): CONFIRMED (c_0=c_1=0, c_K>0 for K>=2)
+
+==============================================================================
+PART C: phi_n^{(n-1)} = phi_n^{(n)} = Q(n)/n, exact, independently.
+phi_n^{(n)} via a from-scratch BRUTE-FORCE enumeration of the raw
+uniform-random-mapping model (n<=6: exhaustive over all n^n mappings),
+and via Q(n)/n for n up to 30; phi_n^{(n-1)} via mychain.py.
+==============================================================================
+  n=1: brute-force phi(n,n)=1 == Q(n)/n=1  OK
+  n=2: brute-force phi(n,n)=3/4 == Q(n)/n=3/4  OK
+  n=3: brute-force phi(n,n)=17/27 == Q(n)/n=17/27  OK
+  n=4: brute-force phi(n,n)=71/128 == Q(n)/n=71/128  OK
+  n=5: brute-force phi(n,n)=1569/3125 == Q(n)/n=1569/3125  OK
+Brute-force phi(n,n)=Q(n)/n, n=1..5: ALL MATCH
+
+phi_n^{(n-1)} (via mychain.py, n>K=n-1 so within chain's valid domain)
+vs Q(n)/n, n=2..30:
+phi_n^{(n-1)} = Q(n)/n via mychain.py, n=2..30: ALL MATCH

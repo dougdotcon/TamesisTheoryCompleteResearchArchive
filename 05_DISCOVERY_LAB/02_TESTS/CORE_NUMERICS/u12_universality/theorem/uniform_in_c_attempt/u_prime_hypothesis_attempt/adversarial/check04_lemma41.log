@@ -1,0 +1,59 @@
+==============================================================================
+1. Symbolic verification of the two cubic-sign claims (sympy), as
+   identically-zero polynomials in K.
+==============================================================================
+  4(K+1)^3 - K(2K+3)^2 - (3K+4)  simplifies to: 0   OK (identically 0)
+  4(K+1)^2(K+2) - (K+1)(2K+3)^2 - (-(K+1))  simplifies to: 0   OK (identically 0)
+
+==============================================================================
+2. Full symbolic chain: phi_{K+1}/phi_K -> v_{K+1}/v_K -> sign, and same
+   for z_K -- not just the isolated cubic identities.
+==============================================================================
+  v_(K+1)/v_K - 1 = [raw numerator]/[raw denominator], UNREDUCED:
+    raw numerator   = 3*K + 4
+    raw denominator = 4*K**3 + 12*K**2 + 9*K  (manifestly >0 for K>=1)
+    raw numerator - (3K+4) = 0   OK: raw numerator IS exactly 3K+4
+  z_(K+1)/z_K - 1 = [raw numerator]/[raw denominator], UNREDUCED:
+    raw numerator   = -K - 1
+    raw denominator = 4*K**3 + 16*K**2 + 21*K + 9  (manifestly >0 for K>=1)
+    raw numerator - (-(K+1)) = 0   OK: raw numerator IS exactly -(K+1)
+
+  (Sanity: sympy.simplify of each ratio-minus-1, for reference, DOES
+   cancel the common (K+1) factor -- e.g. z_(K+1)/z_K-1 simplifies to
+   -1/(4*K**2 + 12*K + 9) -- which is the SAME fact after
+   cancellation, not a different one; the raw, unreduced form above is
+   what the target document's proof literally claims and is checked.)
+
+  Raw denominators K(2K+3)^2 and (K+1)(2K+3)^2 are manifestly >0 for
+  K>=1, so raw-numerator sign = ratio-minus-1 sign: v strictly
+  increasing (raw numerator 3K+4>0 for K>=1) and z strictly decreasing
+  (raw numerator -(K+1)<0 for K>=1). Confirmed symbolically end-to-end,
+  not merely via the two isolated identity claims in Part 1.
+
+==============================================================================
+3. EXACT Fraction: v_K=K*phi_K^2 strictly increasing, z_K=(K+1)*phi_K^2
+   strictly decreasing, K=1..20000 (orchestrator did not check this at
+   all in exact arithmetic; only the assembled Theorem 4 downstream).
+==============================================================================
+v_K strictly increasing, K=1..20000: CONFIRMED
+z_K strictly decreasing, K=1..20000: CONFIRMED
+Final v_20000 = 0.7853687120, z_20000 = 0.7854079804, pi/4 = 0.7853981634
+
+==============================================================================
+4. mpmath (60 dps, log-gamma, O(1) per K): v_K increasing, z_K
+   decreasing, both -> pi/4, K up to 10^6 (sparse + dense near start).
+==============================================================================
+mpmath dense (K=1..2000): v increasing OK, z decreasing OK
+
+Sparse spot-checks up to K=10^6, showing sandwich width v_K < pi/4 < z_K
+and both converging:
+  K=     3000: v_K=0.785201860206683  z_K=0.785463594160085  (pi/4=0.785398163397448)  gap z-v=0.000261734
+  K=     5000: v_K=0.785280370360441  z_K=0.785437426434513  (pi/4=0.785398163397448)  gap z-v=0.000157056
+  K=    10000: v_K=0.785339262707345  z_K=0.785417796633616  (pi/4=0.785398163397448)  gap z-v=7.85339e-5
+  K=    30000: v_K=0.785378528906956  z_K=0.785404708191253  (pi/4=0.785398163397448)  gap z-v=2.61793e-5
+  K=    50000: v_K=0.785386382591892  z_K=0.785402090319544  (pi/4=0.785398163397448)  gap z-v=1.57077e-5
+  K=   100000: v_K=0.785392272952947  z_K=0.785400126875676  (pi/4=0.785398163397448)  gap z-v=7.85392e-6
+  K=   300000: v_K=0.785396199906676  z_K=0.785398817894009  (pi/4=0.785398163397448)  gap z-v=2.61799e-6
+  K=   500000: v_K=0.785396985301872  z_K=0.785398556095843  (pi/4=0.785398163397448)  gap z-v=1.57079e-6
+  K=  1000000: v_K=0.785397574349243  z_K=0.785398359746817  (pi/4=0.785398163397448)  gap z-v=7.85398e-7
+Sparse spot-checks (K up to 10^6): ALL CONSISTENT

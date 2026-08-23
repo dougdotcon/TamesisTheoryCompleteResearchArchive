@@ -2554,10 +2554,13 @@ cresce com `K`), contra a condição aqui provada, que só exige que
 `K`, apenas não mais rápido que geométrico) — suficiente para a soma
 `\Sigma_K c^K M_K/K!` convergir, insuficiente para um limitante
 explícito uniforme-em-`K`. Este item permanece **aberto, sem
-mudança**.
+mudança**. [Ver Estágio 12 abaixo — este item foi fechado, com
+constante explícita não-nítida, `2026-08-23`.]
 
 **O que permanece aberto, sem mudança:** uma taxa explícita para
-Teorema A/C (condicional à hipótese (U'), ainda não provada); a lei de
+Teorema A/C (condicional à hipótese (U'), ainda não provada) [Ver
+Estágio 12 abaixo — hipótese (U') agora PROVADA, taxa explícita
+incondicional obtida]; a lei de
 escala `γ\in(0,1)` (caracterizada, não provada); a forma fechada
 geral-`b` das constantes agudas em `b\ge2` (Estágio 9); Conjecturas
 1–2. **O Teorema 3 (Estágio 6) permanece inteiramente inafetado** —
@@ -2572,3 +2575,122 @@ central e única nomeada para uma taxa explícita uniforme-em-`K`: a
 hipótese (U'). Fontes completas:
 `uniform_in_c_attempt/mk_geometricity_attempt/ATTEMPT.md`,
 `uniform_in_c_attempt/mk_geometricity_attempt/adversarial/REFEREE_REPORT.md`.
+[Ver Estágio 12 abaixo — hipótese (U') fechada, `2026-08-23`.]
+
+---
+
+## [Extensão, Estágio 12 — 2026-08-23]
+
+**Onda 13, frente (a), `DISC-DEC-054`/`DISC-DEC-055`
+(`U-PRIME-HYPOTHESIS-ATTEMPT`).** Alvo: a única obstrução central
+restante nomeada para uma taxa explícita uniforme-em-`K` — a hipótese
+(U'), deixada aberta pelo Estágio 11.
+
+### O que foi provado
+
+> **Teorema (Hipótese (U'), PROVADA).** Existe `a<\infty` tal que
+> `\displaystyle|φ_n^{(K)}-φ_K| \le \frac{a\sqrt K}n` para **todo**
+> `n\ge1` e todo inteiro `0\le K\le n`, com constante explícita
+> `a = 1+\sqrt{π/2} = 2,253314\ldots`.
+
+A prova combina a forma fechada todas-as-ordens do Estágio 9
+(Corolário A1, `ψ_n^{(K)}=g_K(n,0)`) com uma fórmula-companheira para
+`ψ_n^{(K),R}` derivada aqui, pela primeira vez, do Teorema B de
+Estágio 9 (`h_r(a,b)` avaliado em `a=0`, dentro do "domain caveat" já
+explicitamente sinalizado pela própria fonte primária), via o Lema A
+de redução: (1) uma identidade exata decompõe
+`T(n,K):=n(φ_n^{(K)}-φ_K)` numa combinação não-negativa de termos
+não-crescentes em `n`, provando — para **todo** `K`, não apenas
+numericamente até `K=16384` como o Estágio 10 havia deixado — que o
+supremo sobre `n` é sempre atingido em `n=K{+}1`; (2) nesse ponto, a
+quantidade colapsa, via a identidade exata `φ_n^{(n-1)}=Q(n)/n` já
+estabelecida por correção pós-adversarial em Estágio 10, à forma
+fechada `M_K = Q(K{+}1)-(K{+}1)φ_K`, ligando `M_K` diretamente à
+função `Q` de Ramanujan; (3) dois limitantes-sanduíche elementares
+(`φ_K` entre `\sqrt π/(2\sqrt{K{+}1})` e `\sqrt π/(2\sqrt K)`; `Q(n)\le
+1{+}\sqrt{πn/2}`) fecham a desigualdade com a constante explícita
+acima. A constante **nítida** `a^*=\sqrt π(1/\sqrt2-1/2)=0,3670872\ldots`
+**não** é estabelecida — este teorema prova limitação com uma
+testemunha explícita, não nitidez — e permanece aberta, com o
+ingrediente exato que falta nomeado com precisão (um limitante
+*inferior* correspondente para `Q(n)`, simétrico ao limitante superior
+usado acima).
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado re-derivou cada teorema/lema do zero a
+partir das fontes primárias citadas (nenhum arquivo `.py` da
+frente-alvo foi lido), incluindo um motor Markov `(a,b,r)`
+inteiramente independente (`mychain.py`) construído apenas a partir
+das regras de transição declaradas em `k3_attempt_2/ATTEMPT.md` — não
+de nenhuma forma fechada — usado para checar cada passo algébrico
+independentemente da álgebra fechada. Escala independente muito além
+da própria frente e da sessão orquestradora: Proposição 2.1
+re-derivada simbolicamente (`K=1..14`); decomposição exata (Teorema 1)
+simbólica até `K=25`, exata até `K=300` (2.408 pares); monotonicidade/
+argmax (Teorema 2) em 9.960 pares `(K,n)`; identidade `M_K`
+(Teorema 3) exata até `K=1000`; **o Lema 4.1 (sanduíche de `φ_K`),
+sinalizado como não verificado à mão pela sessão orquestradora, recebeu
+o escrutínio mais intenso** — identidades cúbicas checadas
+simbolicamente como polinômios não-reduzidos, monotonicidade exata até
+`K=20.000` e via `mpmath` até `K=10^6`; a desigualdade final montada
+(Teorema 4) checada com **zero violações** em quatro escalas
+independentes, até `K=10^5` e `n` interior até `100K`.
+
+> **Veredito: SOUND. "ACCEPT for catalogue."** Nenhum erro matemático,
+> lacuna, uso indevido de citação ou alegação excessiva encontrado em
+> lugar algum do documento-alvo. A própria seção de honestidade do
+> documento-alvo (constante nítida `a^*` não estabelecida; ingrediente
+> exato que falta nomeado) foi checada contra a numérica independente
+> do referee e considerada precisa, nem subestimando nem superestimando
+> o que foi provado.
+
+Ver
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/ATTEMPT.md` e
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/adversarial/REFEREE_REPORT.md`
+para os relatórios completos.
+
+### O que isto muda, precisamente
+
+**A hipótese (U') PERDE o rótulo "aberta" e torna-se PROVADA**, com
+constante explícita `a=1{+}\sqrt{π/2}` (não nítida). Via o Teorema B
+de `uniform_in_c_attempt/ATTEMPT.md` §6.2 (já PROVADO ali,
+condicionalmente a (U')), isto dá imediatamente uma **taxa explícita,
+incondicional**, para Teorema A/C: para `n\ge4`, `0\le c\le n`,
+
+`\displaystyle |Δ_n(c)| \le \big[(1{+}\sqrt{π/2})\sqrt c + 0,2805\big]/n`.
+
+Isto fecha "a única obstrução nomeada restante entre Teorema A/C
+(provado, incondicional) e uma taxa totalmente explícita", nomeada
+pelo Estágio 10 e reafirmada pelo Estágio 11. Nenhum resultado anterior
+é enfraquecido: Teorema 3 (Estágio 6), a taxa `c_K` (Estágio 7), a
+forma fechada de erro (Estágio 8), a forma fechada todas-as-ordens
+(Estágio 9), Teoremas A/C/D/E (Estágios 10–11) permanecem exatamente
+como provados, usados aqui apenas por citação. A prova de Estágio 11
+(crescimento geométrico qualitativo de `M_K`) permanece
+**estritamente mais fraca** que este resultado e não é superada nem
+tornada redundante por ele — são obstruções genuinamente diferentes
+que este documento manteve deliberadamente distintas em todo o seu
+histórico.
+
+**O que permanece aberto, sem mudança:** a constante **nítida**
+`a^*=0,3670872\ldots` (este Estágio prova limitação com constante
+explícita `\approx6,16\times` mais frouxa, não nitidez); o segundo fato
+nomeado em Estágio 10/§6.3 — que o limite `K\to\infty` da razão do
+extremo é genuinamente o supremo sobre `K`, não apenas seu limite —
+permanece aberto; a lei de escala `γ\in(0,1)` (caracterizada, não
+provada); a forma fechada geral-`b` das constantes agudas em `b\ge2`
+(Estágio 9); Conjecturas 1–2. O ingrediente exato que fecharia a
+nitidez foi nomeado com precisão pela própria frente: um limitante
+*inferior* para `Q(n)` da forma `Q(n)\ge\sqrt{πn/2}-C`, simétrico ao
+limitante superior usado aqui.
+
+**Veredito honesto atualizado (ao fim do Estágio 12):** a linha `U_1/2`
+tem agora uma taxa de convergência **explícita e incondicional** para
+Teorema A/C — não resta mais nenhuma obstrução central nomeada entre
+"convergência provada" e "taxa explícita provada" nesta linha. Resta,
+como refinamento nomeado e não mais central, tornar essa taxa
+**nítida** (constante `a^*` em vez de `a\approx6,16a^*`). Fontes
+completas:
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/ATTEMPT.md`,
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/adversarial/REFEREE_REPORT.md`.

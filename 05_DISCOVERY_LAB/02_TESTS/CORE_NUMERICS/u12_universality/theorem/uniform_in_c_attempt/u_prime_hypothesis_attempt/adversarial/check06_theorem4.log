@@ -1,0 +1,52 @@
+a = 1+sqrt(pi/2) = 2.2533141373155002512
+
+==============================================================================
+0. n/sqrt(n+1) >= sqrt(n)-1, n=1..200000 (mpmath, 30 dps) -- target's
+   own check: n=1..1e5.
+==============================================================================
+RESULT: n=1..200000, 0 violations.
+
+==============================================================================
+1. EXACT Fraction baseline (both binding cases), K=1..60, to cross-
+   validate the mpmath stages below and rule out mpmath hiding a
+   near-violation.
+==============================================================================
+RESULT: K=1..60, both binding cases, 0 violations. Worst ratio (deviation/bound) = 0.14793025.
+
+Cross-check: exact Fraction vs mpmath (60 dps) M_K at K=10,30,60:
+  K=10: exact=0.87951003143571138824  mpmath=0.87951003143571138824  |diff|=3.5004e-60
+  K=30: exact=1.7084163556644369624  mpmath=1.7084163556644369624  |diff|=2.2092e-59
+  K=60: exact=2.5324079339525481973  mpmath=2.5324079339525481973  |diff|=9.4279e-59
+
+==============================================================================
+2. mpmath (60 dps), both binding cases, K=1..3000 (dense) -- pushes far
+   beyond the target's own K up to 1e5 SPARSE grid by being fully dense
+   over this range.
+==============================================================================
+RESULT: K=1..3000, both binding cases (6000 checks), 0 violations. Worst ratio=0.16027361 at (3000, 'n=K').
+
+==============================================================================
+3. Sparse spot checks, K up to 10^5, both binding cases, using a fast
+   vectorized double-precision Q(n) (numpy) cross-checked against exact
+   Fraction Q(n) at the smallest of these K (K=5000) for consistency.
+==============================================================================
+  K=   4000: ratio(n=K+1)=0.160591  ratio(n=K)=0.160619
+  K=   5000: ratio(n=K+1)=0.160834  ratio(n=K)=0.160857
+  K=   7500: ratio(n=K+1)=0.161212  ratio(n=K)=0.161228
+  K=  10000: ratio(n=K+1)=0.161438  ratio(n=K)=0.161450
+  K=  20000: ratio(n=K+1)=0.161868  ratio(n=K)=0.161874
+  K=  30000: ratio(n=K+1)=0.162058  ratio(n=K)=0.162062
+  K=  50000: ratio(n=K+1)=0.162250  ratio(n=K)=0.162252
+  K=  75000: ratio(n=K+1)=0.162371  ratio(n=K)=0.162372
+  K= 100000: ratio(n=K+1)=0.162443  ratio(n=K)=0.162444
+RESULT: 9 sparse K up to 1e5, 0 violations. Worst ratio=0.162444 at (100000, 'n=K').
+
+Cross-check numpy-double Q(5000) vs exact Fraction Q(5000):
+  exact=88.290830343312  numpy=88.290830343312  |diff|=0.000e+00
+
+==============================================================================
+4. Interior n (not binding endpoints), via closed-form phi_n^{(K)}
+   directly (mpmath), K in {1,5,20,100,500,2000}, several n each,
+   including far interior n=10K, n=100K.
+==============================================================================
+RESULT: interior-n stress test, 0 violations. Worst ratio=0.15964126 at (K,n)=(2000, 2001).

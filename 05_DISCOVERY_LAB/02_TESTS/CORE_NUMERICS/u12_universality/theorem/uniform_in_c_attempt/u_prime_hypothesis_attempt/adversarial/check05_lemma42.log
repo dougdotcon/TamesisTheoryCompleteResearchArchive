@@ -1,0 +1,33 @@
+==============================================================================
+(a) EXACT Q(n) (fractions.Fraction) vs 1+sqrt(pi n/2) (mpmath, 60 dps,
+    used only to evaluate the irrational RHS), n=1..1200.
+    (target's own check: n=1..199 exact-ish + a 'wide grid to n=10^5'
+    without stating exactness there.)
+==============================================================================
+RESULT: n=1..4000, 0 violations. Worst observed ratio Q(n)/(1+sqrt(pi n/2)) = 0.970048166 at n=1200 (not violated, not vacuous).
+
+==============================================================================
+(b) Sanity: 1-x <= e^{-x} (all real x, numeric spot grid) and
+    j(j+1) >= j^2 (exact, all j>=0).
+==============================================================================
+1-x <= e^-x, x in [-5,5) step 0.001 (10000 points): OK
+j(j+1) >= j^2, j=0..99999: OK
+
+==============================================================================
+(c) Wide-range double-precision (numpy, vectorized) spot checks,
+    n up to 10^7 -- numerical stress-testing net only, not a PROVED
+    claim (Lemma 4.2's proof is elementary calculus, not in dispute).
+==============================================================================
+  n=        1: Q(n)~1.000000  RHS~2.253314  ratio=0.443791
+  n=        2: Q(n)~1.500000  RHS~2.772454  ratio=0.541037
+  n=        5: Q(n)~2.510400  RHS~3.802496  ratio=0.660198
+  n=       10: Q(n)~3.660216  RHS~4.963327  ratio=0.737452
+  n=      100: Q(n)~12.209961  RHS~13.533141  ratio=0.902227
+  n=     1000: Q(n)~39.303213  RHS~40.633273  ratio=0.967267
+  n=    10000: Q(n)~124.999122  RHS~126.331414  ratio=0.989454
+  n=   100000: Q(n)~395.999726  RHS~397.332730  ratio=0.996645
+  n=   500000: Q(n)~885.893740  RHS~887.226925  ratio=0.998497
+  n=  1000000: Q(n)~1252.980908  RHS~1254.314137  ratio=0.998937
+  n=  3000000: Q(n)~2170.470491  RHS~2171.803764  ratio=0.999386
+  n= 10000000: Q(n)~3962.993997  RHS~3964.327298  ratio=0.999664
+RESULT: 12 spot points up to n=10^7, 0 violations (double precision, numpy).

@@ -135,6 +135,25 @@ desde 2026-08-22 (DISC-DEC-040), nesta cor.
 > 10 e continuam separados. Ver `THEOREM.md` "Estágio 11" para o
 > enunciado completo.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-055, Estágio 12.]** Um novo
+> resultado, `uniform_in_c_attempt/u_prime_hypothesis_attempt/ATTEMPT.md`,
+> adversarialmente confirmado (SOUND, "ACCEPT for catalogue" — o
+> referee não encontrou nenhum erro em lugar algum e re-verificou tudo
+> a uma escala muito maior que a própria frente), prova a hipótese (U')
+> deixada aberta pelo adendo de Estágio 11 acima: `|φ_n^{(K)}-φ_K|\le
+> a\sqrt K/n` para todo `n\ge1`, `0\le K\le n`, com constante explícita
+> não-nítida `a=1{+}\sqrt{π/2}=2,253314\ldots`. Como o adendo de
+> Estágio 11, este é um resultado *sobre* uma propriedade mais forte da
+> mesma convergência (`Teo3`), não uma nova aresta de dependência
+> dentro da Árvore A — a prova usa a forma fechada todas-as-ordens de
+> Estágio 9 e o Lema A de redução, nenhum novo nó desta árvore. **Isto
+> fecha "uma taxa explícita para Teorema A/C"** — a obstrução central
+> nomeada nos adendos de Estágio 10/11 acima — dando
+> `|Δ_n(c)|\le[(1{+}\sqrt{π/2})\sqrt c+0,2805]/n`, incondicional. A
+> constante **nítida** `a^*=0,3670872\ldots` permanece aberta,
+> distinta e não fechada por este resultado. Ver `THEOREM.md` "Estágio
+> 12" para o enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

@@ -69,6 +69,13 @@
 >    `K` with **no uniformity in `K`**, and that is precisely and only what is
 >    missing for an explicit rate. This is named as the single remaining
 >    obstruction.
+>    **[Correção pós-adversarial, 2026-08-23 — DISC-DEC-055, Estágio 12.]**
+>    (U') está agora **PROVADA**, com constante explícita não-nítida
+>    `a=1{+}\sqrt{π/2}=2,253314\ldots` (não a constante nítida `a^*`
+>    acima, que permanece aberta). Isto dá uma taxa explícita
+>    incondicional para Teorema A/C: `|Δ_n(c)|\le[(1{+}\sqrt{π/2})\sqrt
+>    c+0,2805]/n`. Ver `u_prime_hypothesis_attempt/ATTEMPT.md` e
+>    `THEOREM.md` "Estágio 12" para o enunciado e prova completos.
 > 5. **The `c` growing with `n` question is answered sharply, and the answer
 >    is a genuine partial breakdown.** In **absolute** terms nothing breaks —
 >    even the global sup tends to `0`, at rate `Θ(n^{-1/2})`
@@ -697,6 +704,20 @@ the last one within `1.6\cdot10^{-5}` of it (`extrapolate.log`).
 > archive is explicit (Estágio 7, *Cautelas de redação*) that **no uniformity
 > in `K` is proved or claimed** there. This is the single obstruction between
 > Teorema A/C (soft, unconditional) and a fully explicit rate.
+>
+> **[Correção pós-adversarial, 2026-08-23 — DISC-DEC-055, Estágio 12.]**
+> (U') está agora **PROVADA** — `u_prime_hypothesis_attempt/ATTEMPT.md`,
+> adversarialmente confirmado (SOUND, "ACCEPT for catalogue") — com
+> constante explícita não-nítida `a=1{+}\sqrt{π/2}=2,253314\ldots`, NÃO
+> a constante nítida `a^*=0,3670872\ldots` acima. A prova estabelece
+> como corolário, pela primeira vez para todo `K` (não apenas
+> numericamente até `K=16384`), o fato (i) desta seção — o máximo
+> `\max_n n|φ_n^{(K)}-φ_K|` é sempre atingido em `n=K{+}1`. O fato (ii)
+> — que o limite `K\to\infty` da razão do extremo é genuinamente o
+> supremo sobre `K`, não apenas seu limite — e a nitidez da constante
+> em si permanecem abertos, com o ingrediente exato nomeado (um
+> limitante inferior para a função `Q` de Ramanujan). Ver `THEOREM.md`
+> "Estágio 12" para o enunciado completo.
 
 A related, weaker fact also came out **NUMERICALLY VERIFIED** and would give an
 independent second proof of §4's tail step: `K\mapstoφ_n^{(K)}` is
@@ -830,7 +851,11 @@ proved endpoint, and a quantified profile.
 1. **An explicit rate for Teorema A.** Available only modulo (U') (§6.2–6.3).
    The exact obstruction is named: *uniformity in `K` of Estágio 7's `1/n`
    rate*. Nothing in Estágios 5–8 provides it, and Estágio 7 explicitly
-   disclaims it.
+   disclaims it. **[Correção pós-adversarial, 2026-08-23 — DISC-DEC-055,
+   Estágio 12: (U') está agora PROVADA, com constante explícita
+   não-nítida `a=1{+}\sqrt{π/2}`. Este item passa de "aberto" para
+   "fechado, não-nítido" — ver `u_prime_hypothesis_attempt/ATTEMPT.md` e
+   `THEOREM.md` "Estágio 12".]**
 2. **Teorema E (both the pointwise `n\,Δ_n\to e` and its uniform strengthening)**
    carries the domination gap of §5.6. **[Correção pós-adversarial,
    2026-08-23, F-1: a lacuna não é "um limitante geométrico de constante
@@ -880,7 +905,7 @@ edit `THEOREM.md`.**
 | 13 | The uniform-on-`[0,C]` error constant grows like `\sqrt C`: `\sup_{[0,C]}\|e\|\sim\sqrt{πC}/8` | **PROVED** given item 11 (a statement about `e` alone); its identification *as* the limiting error constant inherits item 12's status |
 | 14 | **Lema 6.1**: `0\le e^{-x}-(1-x/n)^n\le\frac{x^2}ne^{-x}` for `n\ge4`, `0\le x\le n`; `κ_B=\sup c^2I_2(c)=0.280480169025…` | **PROVED**; scanned at `1.4\cdot10^4` points, max ratio `0.564` |
 | 15 | **Teorema B**: `(U'_a)\Rightarrow \sup_{[0,C]}\|Δ_n\|\le(a\sqrt C+κ_B)/n` | **PROVED given (U'_a)**; the bound with `a=1` holds with margin `\ge4` everywhere in the numerical scan |
-| 16 | **(U')**: `\|φ_n^{(K)}-φ_K\|\le a\sqrt K/n` uniformly in `0\le K\le n`, sharp `a^*=\sqrtπ(1/\sqrt2-1/2)=0.3670872…` | **NUMERICALLY CHARACTERIZED** (`K` to `16384`, max over `n` always at `n=K{+}1`, ratio `\to a^*` from below); **OPEN** as a theorem — it is exactly "Estágio 7's rate, uniformly in `K`", which Estágio 7 explicitly does not claim |
+| 16 | **(U')**: `\|φ_n^{(K)}-φ_K\|\le a\sqrt K/n` uniformly in `0\le K\le n`, sharp `a^*=\sqrtπ(1/\sqrt2-1/2)=0.3670872…` | **NUMERICALLY CHARACTERIZED** (`K` to `16384`, max over `n` always at `n=K{+}1`, ratio `\to a^*` from below); **OPEN** as a theorem — it is exactly "Estágio 7's rate, uniformly in `K`", which Estágio 7 explicitly does not claim. **[Correção pós-adversarial, 2026-08-23 — DISC-DEC-055, Estágio 12: PROVADA com constante explícita não-nítida `a=1{+}\sqrt{π/2}=2,253314\ldots` — não `a^*`, que permanece aberta. Ver `u_prime_hypothesis_attempt/ATTEMPT.md`.]** |
 | 17 | `K\mapstoφ_n^{(K)}` is non-increasing | **NUMERICALLY VERIFIED** (exhaustive in `K`; exact `Fraction` for all `K` at `n=2,\dots,9`); not proved, and **not used** in any proof here |
 | 18 | **Proposição 7.1**: `φ(n,n)=Q(n)/n` exactly; `φ(n,n)/φ_∞(n)\to\sqrt2`; `\|φ(n,n)-φ_∞(n)\|\sim a^*n^{-1/2}\to0` | **PROVED** (exact identity here; `Q(n)\sim\sqrt{πn/2}` **CITED**, Knuth TAOCP I §1.2.11.3 / Flajolet–Odlyzko) |
 | 19 | **(7.1)**: for `c=γn`, `φ(n,c)/φ_∞(c)\to\sqrt{2/(2-γ)}`, i.e. `c_{\rm eff}=c(1-c/2n)`; relative error `\approx c/(4n)` | **NUMERICALLY CHARACTERIZED**, mechanism derived, endpoint `γ=1` proved (item 18), and independently cross-derived from item 11's `e(c)\simeq\sqrt{πc}/8`; **not proved** for `γ\in(0,1)` |

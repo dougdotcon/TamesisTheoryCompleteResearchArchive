@@ -1,0 +1,24 @@
+==============================================================================
+PART A: e_k(1,...,j) positivity, from-scratch DP (poly coefficients of
+prod_{i=1}^j (x+i)), j=0..400 (target cited this technique from
+mk_geometricity_attempt without re-deriving it itself for g(j;n)-1;
+re-derived here from scratch as an independent check).
+==============================================================================
+e_k(1,...,j) > 0 for all 1<=k<=j, j=0..400: ALL POSITIVE
+Sanity (value at x=1 equals (j+1)!): OK
+
+==============================================================================
+PART B: exact-Fraction grids for T(n,K), staged for runtime, well beyond
+the orchestrator's K=0..9, n<=K+24 pass in every dimension:
+==============================================================================
+
+Stage B1 (dense, moderate K): K=0..80, n=K+1..K+40 (3,240 pairs)
+[B1] K values: 81, pairs: 3240, neg=0, mono=0, argmax=0
+
+Stage B2 (long-range in n, small/moderate K): K=0..15, n=K+1..K+400
+(6,400 pairs) -- tests the asymptotic tail far beyond any prior check.
+[B2] K values: 16, pairs: 6400, neg=0, mono=0, argmax=0
+
+Stage B3 (sparse, large K): K in {90,100,125,150,175,200,250,300},
+n=K+1..K+40 (320 pairs) -- pushes K far beyond Stage B1's density.
+[B3] K values: 8, pairs: 320, neg=0, mono=0, argmax=0

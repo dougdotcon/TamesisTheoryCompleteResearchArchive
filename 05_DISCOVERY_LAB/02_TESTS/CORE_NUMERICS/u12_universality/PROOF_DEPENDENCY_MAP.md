@@ -241,6 +241,8 @@ flowchart TD
 
     CVCOV["Onda 14, frente (e) (DISC-DEC-057/060):<br/>covariável do H2-share — ρ implicado,<br/>b descartado como driver solo<br/>PARTIAL/MIXED pela regra primária;<br/>referee: correlação de ρ NÃO sobrevive<br/>Bonferroni/Spearman nos dados originais,<br/>MAS fortalece e sobrevive na tabela<br/>triangulada (r=−0,68,p=0,011); G1b<br/>resolvida revela não-monotonicidade<br/>real em ρ — SOUND WITH NAMED ISSUES"]
 
+    FLOORCF["Onda 14, frente (b) (DISC-DEC-057/062):<br/>forma fechada do piso b=1 -- FECHAMENTO<br/>PARCIAL: reducao exata provada (selecao<br/>sobre phi(ell) nao-constante), mecanismo<br/>de reentrada de lacuna provado e validado<br/>por simulacao exata; forma fechada completa<br/>NAO derivada (sistema 2-var acoplado nao-<br/>local); referee 5x+ potencia, mesma<br/>conclusao -- SOUND WITH NAMED ISSUES"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -259,6 +261,7 @@ flowchart TD
     SCMECH --> REDC
     SCMECH --> LCDMECH
     LCDMECH --> CVCOV
+    LCDMECH --> FLOORCF
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -276,6 +279,7 @@ flowchart TD
     style REDC fill:#f0e5e8,stroke:#7a3b4a
     style LCDMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style CVCOV fill:#f5ecd8,stroke:#96702a,stroke-width:2px
+    style FLOORCF fill:#f5ecd8,stroke:#96702a,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -406,6 +410,51 @@ flowchart TD
 > onda 14 frente (b), ainda em andamento). Fontes:
 > `long_cycle_deficit_attempt/cell_variation_attempt/ATTEMPT.md` e
 > `.../cell_variation_attempt/adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-057/DISC-DEC-062.]** Onda 14
+> frente (b) (`FLOOR-CLOSED-FORM-ATTEMPT`) atacou uma terceira pergunta
+> sobre o mesmo objeto (`LCDMECH` acima): não o mecanismo H1/H2 nem a
+> covariável que explica sua variação célula-a-célula, mas **por que o
+> "piso" H2 existe mesmo em `b=1` (M-U puro)** — uma pergunta deixada
+> formalmente aberta pela frente que descobriu a mistura H1/H2.
+> **Fechamento parcial honesto.** Uma redução exata (§1, PROVADA sem
+> simulação) mostra que o desvio existe porque `φ_far` e `φ_U(c)` são
+> médias diferentes, ponderadas de forma diferente, da mesma função
+> não-constante `φ(ℓ)` — um efeito de seleção, não uma falha na
+> derivação de `φ_U(c)`. O candidato mais natural para `φ(ℓ)`
+> (substituição pontual na fórmula-mestra) é refutado decisivamente. Um
+> mecanismo de "reentrada de lacuna" recursivo é provado exatamente
+> (fato combinatório determinístico sobre estrutura de ciclo) e
+> validado por simulação direta de sua forma exata — explica
+> *qualitativamente* por que `φ(ℓ)` atinge um platô em vez de decair. A
+> **forma fechada completa não é derivada**: o sistema exato é um
+> problema acoplado, não-local, de duas variáveis, da mesma ordem de
+> dificuldade que a Conjectura 1 geral-`K` ainda aberta deste arquivo
+> (ver Estágio 15 acima) — uma tentativa numérica limitada não
+> convergiu, divulgada honestamente como falha nomeada, não escondida.
+> A própria frente capturou e **retirou**, dentro do próprio documento,
+> uma alegação mais fina (padrão de sinal não-monotônico bin-a-bin) que
+> não sobreviveu a uma réplica robusta a cluster — uma autocorreção
+> honesta, não deixada para o referee capturar. Referee hostil re-
+> verificou as três alegações empíricas designadas (rejeição do
+> Candidato 1; platô do processo abstrato, construído só a partir da
+> prosa; e a pergunta central sobre existência de qualquer sub-região
+> positiva) a `5×+` a potência estatística da própria frente, com
+> sementes frescas — todas replicaram. Único achado: uma imprecisão de
+> redação em §7 (contagem "7 de 9" células com concordância cruzada,
+> corrigida para refletir que apenas 3 foram diretamente re-checadas, 1
+> concordando — a evidência completa para as 9 células foi na verdade
+> suprida pela própria réplica do referee). Veredito **SOUND WITH NAMED
+> ISSUES, ACCEPT for catalogue**: nenhum erro muda o veredito da
+> frente, e a retirada de T2 foi julgada apropriadamente conservadora,
+> não excessiva. **Nenhuma fórmula nova substitui `φ_REDB`, `φ_U(c)`
+> ou `φ_∞(c)`** — o resíduo M-CLUST(b) (nó `RES`, topo desta árvore)
+> permanece PARCIALMENTE FECHADO, sem mudança de status, mas com o
+> piso H2 agora mecanisticamente compreendido em profundidade adicional
+> (o "porquê" qualitativo provado, o "quanto" quantitativo ainda
+> aberto). Fontes:
+> `long_cycle_deficit_attempt/floor_closed_form_attempt/ATTEMPT.md` e
+> `.../floor_closed_form_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

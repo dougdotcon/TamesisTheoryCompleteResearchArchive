@@ -1,0 +1,28 @@
+M_hat(s) = t0/(c*s*t0 - c + s**2*t0)
+Phi_hat(s) = s*t0/(c*s*t0 - c + s**2*t0)
+roots of denominator (should match s1,s2): [sqrt(c)*sqrt(c*t0 + 4)/(2*sqrt(t0)) - c/2]
+expected s1 = -c/2 + sqrt(c**2 + 4*c/t0)/2  s2 = -c/2 - sqrt(c**2 + 4*c/t0)/2
+root match check (one of these should be exactly 0 for each expected root):
+   0
+   sqrt(c)*sqrt(c*t0 + 4)/sqrt(t0)
+
+Inverse Laplace transform (sympy, symbolic):
+             -c⋅g                                                          
+             ─────     ⎛       __________⎞                                 
+       ____    2       ⎜√c⋅g⋅╲╱ c⋅t₀ + 4 ⎟                                 
+  √c⋅╲╱ t₀ ⋅ℯ     ⋅sinh⎜─────────────────⎟    -c⋅g                         
+                       ⎜        ____     ⎟    ─────     ⎛       __________⎞
+                       ⎝    2⋅╲╱ t₀      ⎠      2       ⎜√c⋅g⋅╲╱ c⋅t₀ + 4 ⎟
+- ──────────────────────────────────────── + ℯ     ⋅cosh⎜─────────────────⎟
+                  __________                            ⎜        ____     ⎟
+                ╲╱ c⋅t₀ + 4                             ⎝    2⋅╲╱ t₀      ⎠
+
+--- Numeric evaluation at c=1000, several t0 (documents the decay,
+    contradicting the plateau established empirically in fcd_t1/t2/t3) ---
+  t0=0.001  Phi_heuristic(t0) = 0.656269
+  t0=0.010  Phi_heuristic(t0) = 0.193533
+  t0=0.050  Phi_heuristic(t0) = 0.050329
+  t0=0.100  Phi_heuristic(t0) = 0.026136
+  t0=0.200  Phi_heuristic(t0) = 0.013325
+  t0=0.500  Phi_heuristic(t0) = 0.005393
+  t0=0.900  Phi_heuristic(t0) = 0.003007

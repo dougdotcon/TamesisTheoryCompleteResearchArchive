@@ -59,6 +59,19 @@
             color: #333;
         }
 
+        .update-note {
+            font-size: 8.5pt;
+            width: 88%;
+            margin: 0.8rem auto 0;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #ccc;
+            border-left: 3px solid #555;
+            background: #fafafa;
+            text-align: justify;
+            color: #333;
+        }
+        .update-note strong { font-variant: small-caps; }
+
         .abstract {
             font-size: 9pt;
             margin: 1rem auto 0.5rem auto;
@@ -137,6 +150,15 @@
         <div class="date">22 de agosto de 2026 — Tamesis Research Archive (CC BY 4.0)</div>
         <div class="status-badge">PREPRINT — sem revisão por pares; todos os dados, códigos e ledgers de decisão estão no repositório público</div>
     </header>
+
+    <p class="update-note">
+        <strong>Nota de atualização (23 de agosto de 2026).</strong> Desde a publicação deste preprint, duas
+        frentes fecharam os itens mais difíceis que a Seção 5 havia deixado em aberto: uma forma fechada exata,
+        em todas as ordens, para a recursão discreta subjacente, e a prova de que a convergência
+        $\varphi(n,c)\to\varphi_\infty(c)$ é uniforme em todo o domínio $c\in[0,\infty)$, não apenas pontual —
+        ambas sob a mesma disciplina de pré-registro e reprodução adversarial obrigatória da Seção 2. Ver Seção
+        5.1.
+    </p>
 
     <div class="abstract">
         <strong>Abstract.</strong> We report the outcome of a systematic, adversarial adjudication of a large
@@ -353,9 +375,68 @@
             $c$ nunca usados, re-derivação analítica cega — que reproduziu a mesma fórmula por rota própria
             — e a lei condicional de Wallis. Veredito: confirmado nas quatro; a citação de Hansen–Jaworski
             foi verificada no PDF original. Permanecem como limitações honestas: a passagem
-            $n$ finito $\to$ contínuo está controlada empiricamente (até $n = 65.536$), não formalizada; e
+            $n$ finito $\to$ contínuo está controlada empiricamente (até $n = 65.536$), não formalizada
+            [ver §5.1 abaixo — item fechado em 23/08/2026]; e
             a lei distribucional completa para $K \geq 2$ segue conjectura, ainda que agora com suporte
             KS adicional.
+        </p>
+
+        <h3>5.1. Extensão pós-publicação (23 de agosto de 2026): forma fechada em todas as ordens e
+            convergência uniforme</h3>
+        <p>
+            Duas frentes subsequentes, sob a mesma disciplina de pré-registro e reprodução adversarial
+            obrigatória da Seção 2, fecharam os dois itens mais difíceis deixados em aberto acima.
+        </p>
+        <p>
+            <b>Forma fechada em todas as ordens.</b> Estendendo a mesma técnica de casamento assintótico que
+            produzira os termos de erro de ordem $1$, $1/n$ e $1/n^2$ a um índice de ordem <i>simbólico</i>,
+            obtém-se uma expressão fechada — não mais uma sequência infinita de correções — para a recursão
+            discreta subjacente, válida em toda ordem, todo $K$, todo $b$ e todo $n$ finito. Os coeficientes
+            resultantes revelaram-se, antes de qualquer ajuste, exatamente os números de Stirling de primeira
+            espécie sem sinal; como estes são os coeficientes de um fatorial ascendente, a série infinita
+            re-soma-se de forma exata e finita (termina após $K+1$ termos). Uma prova elementar independente,
+            sem a maquinaria de casamento assintótico, confirma o mesmo resultado. A reprodução adversarial —
+            215.070 checagens exatas contra um simulador construído do zero a partir das regras originais,
+            zero divergências — confirmou a afirmação central, encontrou um erro real numa alegação negativa
+            secundária (corrigido por adendo datado) e promoveu duas caracterizações antes apenas numéricas a
+            demonstrações.
+        </p>
+        <p>
+            <b>Convergência uniforme.</b> O Teorema 3 acima estabelece $\varphi(n,c)\to\varphi_\infty(c)$
+            apenas para cada $c$ fixo, um de cada vez; a passagem contínua não estava formalizada. Uma frente
+            dedicada provou, incondicionalmente e a partir de apenas dois lemas elementares — um acoplamento
+            Lipschitz uniforme em $n$, e um limitante de cauda uniforme em $n$ — que essa convergência é
+            uniforme não só em intervalos compactos $[0,C]$, mas em todo o domínio $[0,\infty)$, mais forte
+            do que fora pedido. Um perfil de erro de primeira ordem em forma fechada,
+            $$e(c)=\tfrac12\int_0^1\frac{1-(1+ct^2+c^2t^4)e^{-ct^2}}{t^2}\,dt,\qquad
+            e(c)\sim\tfrac{\sqrt{\pi c}}{8}\ (c\text{ grande}),$$
+            foi derivado como subproduto; sua versão uniforme (em oposição a coeficiente-a-coeficiente)
+            permanece condicional a uma única hipótese de regularidade nomeada e não provada. A reprodução
+            adversarial atacou os dois teoremas incondicionais e os dois lemas que os sustentam com peso
+            máximo — auditando cada etapa do limitante de cauda separadamente — e não encontrou erro em
+            nenhum deles; sua única descoberta substantiva foi que o documento original nomeava
+            incorretamente qual lacuna específica mantinha condicional um resultado secundário, corrigido por
+            adendo datado sem afetar os teoremas incondicionais.
+        </p>
+
+        <figure class="wide">
+            <img src="ARTIGO_DISCOVERY_LAB/figures/fig5_uniform_convergence.png"
+                alt="Convergência uniforme em c e crescimento do perfil de erro">
+            <figcaption><b>Figura 5.</b> Esquerda: $n\cdot\sup_{c\in[0,C]}|\varphi(n,c)-\varphi_\infty(c)|$
+                para quatro intervalos $[0,C]$, convergindo (pontilhado) ao limite previsto pelo perfil de
+                erro em forma fechada $\sup_{[0,C]}|e(c)|$ do Teorema D — nenhum parâmetro ajustado, ambas as
+                curvas computadas diretamente do código de verificação do teorema. Direita: o próprio
+                $\sup_{[0,C]}|e(c)|$ contra $C$, crescendo como $\sqrt{C}$ (referência tracejada), confirmando
+                que a constante de erro uniforme diverge lentamente à medida que o intervalo cresce, mesmo com
+                a convergência absoluta $n\to\infty$ preservada em cada ponto.</figcaption>
+        </figure>
+        <p>
+            Nenhuma das duas extensões altera o Teorema 3 ou a classificação da classe U$_{1/2}$ — ambas
+            dependem de $n\to\infty$, preservado exatamente. A limitação honesta remanescente mudou de
+            natureza: já não é a ausência de uma prova de convergência, mas a ausência de uma taxa explícita e
+            uniforme-em-$K$, condicional a uma única hipótese nomeada. Fontes completas, ledgers de decisão e
+            os dois relatórios adversariais independentes: <code>THEOREM.md</code>, "Estágio 9" e "Estágio
+            10", em <code>05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/</code>.
         </p>
 
         <h2>6. Discussão</h2>

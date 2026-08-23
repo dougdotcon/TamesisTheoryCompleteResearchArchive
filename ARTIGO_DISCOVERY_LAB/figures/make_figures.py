@@ -217,9 +217,62 @@ def fig4():
     plt.close(fig)
 
 
+def fig5():
+    """Uniform-in-c convergence (Estagio 10, Teoremas C/D). Computed live by
+    importing the theorem's own verification code (sup_on/sup_e from
+    probe_uniform.py, e_of_c from ecoef.py) -- no numbers typed by hand."""
+    import sys
+    UIC = os.path.join(U12, "theorem/uniform_in_c_attempt")
+    sys.path.insert(0, UIC)
+    from probe_uniform import sup_on, sup_e
+    from ecoef import e_of_c
+
+    Cs_panel_a = [2.0, 10.0, 25.0, 100.0]
+    ns = [200, 800, 3200, 12800]
+    curves = {C: [ns, [ns[i] * sup_on(n, C, npts=81)[0] for i, n in enumerate(ns)]]
+              for C in Cs_panel_a}
+    targets = {C: sup_e(C)[0] for C in Cs_panel_a}
+
+    Cs_panel_b = np.array([1.0, 2.0, 5.0, 10.0, 25.0, 50.0, 100.0])
+    sup_e_vals = np.array([sup_e(float(C))[0] for C in Cs_panel_b])
+
+    sys.path.pop(0)
+
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(6.6, 2.9))
+
+    cmap = [BLUE, GREEN, "#a35b00", RED]
+    for i, C in enumerate(Cs_panel_a):
+        ns_c, vals = curves[C]
+        ax.plot(ns_c, vals, marker="o", ms=4, lw=1.1, color=cmap[i],
+                label=f"C={C:g}")
+        ax.axhline(targets[C], color=cmap[i], lw=0.8, ls=":")
+    ax.set_xscale("log")
+    ax.set_xlabel("n (escala log)")
+    ax.set_ylabel(r"$n\cdot\sup_{c\in[0,C]}|\varphi(n,c)-\varphi_\infty(c)|$")
+    ax.set_title("Convergência uniforme em $[0,C]$\n(pontilhado: limite $\\sup_{[0,C]}|e(c)|$, Teo. D)")
+    ax.legend(fontsize=6.8, frameon=False, loc="upper left")
+
+    ax2.plot(Cs_panel_b, sup_e_vals, marker="s", ms=4.5, lw=1.2, color=BLUE,
+              label=r"$\sup_{[0,C]}|e(c)|$ (forma fechada)")
+    ref = sup_e_vals[-1] / np.sqrt(Cs_panel_b[-1]) * np.sqrt(Cs_panel_b)
+    ax2.plot(Cs_panel_b, ref, color=GRAY, lw=1.0, ls="--",
+              label=r"$\propto\sqrt{C}$ (referência)")
+    ax2.set_xscale("log")
+    ax2.set_yscale("log")
+    ax2.set_xlabel("C (escala log)")
+    ax2.set_ylabel(r"$\sup_{[0,C]}|e(c)|$ (escala log)")
+    ax2.set_title("Crescimento do perfil de erro\ncom o intervalo (Teo. D)")
+    ax2.legend(fontsize=7, frameon=False, loc="upper left")
+
+    fig.tight_layout()
+    fig.savefig(os.path.join(HERE, "fig5_uniform_convergence.png"))
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
     fig3()
     fig4()
+    fig5()
     print("figures written to", HERE)

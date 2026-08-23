@@ -1,0 +1,55 @@
+############################################
+# Part A: symbolic epsilon(x) decomposition #
+############################################
+phi(x) - x^2/(2n) - eps(x) simplifies to: 0 (expect 0)
+n*x*(x+1) - x^2*(n-x) - x*(n+x^2) expands to: 0 (expect 0)
+n*x*(x+1) - x^2*(n-x) fully expanded: n*x + x**3
+
+############################################
+# Part B: the two moment integrals (sympy)  #
+############################################
+int_0^oo x e^{-x^2/2n} dx = n  (claimed: n)
+int_0^oo x^3 e^{-x^2/2n} dx = 2*n**2  (claimed: 2n^2)
+
+############################################
+# Part C: Gaussian integral (sympy)         #
+############################################
+int_0^oo e^{-x^2/2n} dx = sqrt(2)*sqrt(pi)*sqrt(n)/2  (claimed: sqrt(pi n/2))
+sqrt(pi*n/2) = sqrt(2)*sqrt(pi)*sqrt(n)/2
+difference simplifies to: 0
+
+############################################
+# Part D: tail bound Tail(n,T)<=(n/T)e^{-T^2/2n}
+############################################
+checked 45 (n,T) pairs, violations=0, worst ratio exact/bound=(mpf('0.999999960000004799999040000268799903232042577897859493379678682'), 1000000, mpf('5000000.0'))
+
+--- specific claims used in the proof ---
+Tail(n,n)<=e^-n/2 and Tail(n,n/2)<=2e^-n/8 checked for n in the list above, violations=0
+
+############################################
+# Part E: eps(x) <= x/n + x^3/n^2 on [0,n/2]
+############################################
+checked 14007 points across n in the list, [0,n/2], violations=0
+
+############################################
+# Part F: Err(n) <= 3 + 2e^{-n/8} via TRUE quadrature
+############################################
+  n=1: Err(n)=0.393643  bound(3+2e^-n/8)=4.764994  <=5: True
+  n=2: Err(n)=0.662523  bound(3+2e^-n/8)=4.557602  <=5: True
+  n=5: Err(n)=1.043122  bound(3+2e^-n/8)=4.070523  <=5: True
+  n=10: Err(n)=1.210766  bound(3+2e^-n/8)=3.573010  <=5: True
+  n=50: Err(n)=1.368871  bound(3+2e^-n/8)=3.003861  <=5: True
+  n=100: Err(n)=1.406765  bound(3+2e^-n/8)=3.000007  <=5: True
+  n=500: Err(n)=1.458077  bound(3+2e^-n/8)=3.000000  <=5: True
+  n=1000: Err(n)=1.470328  bound(3+2e^-n/8)=3.000000  <=5: True
+  n=5000: Err(n)=1.486716  bound(3+2e^-n/8)=3.000000  <=5: True
+  n=10000: Err(n)=1.490605  bound(3+2e^-n/8)=3.000000  <=5: True
+  n=50000: Err(n)=1.495797  bound(3+2e^-n/8)=3.000000  <=5: True
+violations=0, worst (largest) Err(n) observed = (mpf('1.49579712144102088811427096477615257837837758185644791164827086'), 50000)
+
+############################################
+# Part G: final Q(n) >= sqrt(pi n/2) - 6     #
+############################################
+--- exact Fraction, n up to 4000 (dense-ish sample) ---
+checked 68 n values exactly, violations=0
+worst (smallest) margin = (mpf('5.66831066300827839308847073276908959858954299117086004151742365'), 4000)

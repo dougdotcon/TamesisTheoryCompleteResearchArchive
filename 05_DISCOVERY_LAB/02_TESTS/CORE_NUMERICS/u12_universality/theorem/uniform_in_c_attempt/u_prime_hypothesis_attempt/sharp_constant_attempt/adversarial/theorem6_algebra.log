@@ -1,0 +1,46 @@
+############################################
+# Part A: a* identity                       #
+############################################
+sqrt(pi)(1/sqrt2-1/2) - [sqrt(pi/2)-sqrt(pi)/2] simplifies to: 0 (expect 0)
+a* = 0.367087211862742237558798900735
+
+############################################
+# Part B: symbolic algebra of the lower-bound chain
+############################################
+(sqrt(pi)/(2sqrt(K)))(K+1) - (sqrt(pi)/2)(sqrt(K)+1/sqrt(K)) simplifies to: 0 (expect 0)
+sqrt(pi(K+1)/2) - sqrt(pi/2)*sqrt(K), evaluated at K=1,5,100: [0.519139713590016, 0.267484515640501, 0.0625098210582033] (expect all >=0)
+[sqrt(pi/2)sqrt(K) - (sqrt(pi)/2)(sqrt(K)+1/sqrt(K))] - [a*sqrt(K)-(sqrt(pi)/2)/sqrt(K)] simplifies to: 0 (expect 0)
+[a*sqrt(K)-(sqrt(pi)/2)/sqrt(K)-6]/sqrt(K) - [a*-(sqrt(pi)/2)/K-6/sqrt(K)] simplifies to: 0 (expect 0)
+
+############################################
+# Part C: Observation 0 upper-bound algebra (cited from parent)
+############################################
+(1+a*sqrt(K+1))/sqrt(K) - [1/sqrt(K)+a*sqrt((K+1)/K)] simplifies to: 0 (expect 0)
+limit of 1/sqrt(K)+a*sqrt((K+1)/K) as K->oo: -sqrt(pi)/2 + sqrt(2)*sqrt(pi)/2  (expect a* = 0.3670872119 )
+limit of a*-(sqrt(pi)/2)/K-6/sqrt(K) as K->oo: -sqrt(pi)/2 + sqrt(2)*sqrt(pi)/2  (expect a* = 0.3670872119 )
+
+############################################
+# Part D: numerical two-sided squeeze, independent phi_K/Q(K+1)
+############################################
+a* (mpmath) = 0.367087211862742237558798900734950035104718642243775594208058
+
+--- exact Fraction M_K, K up to 2000 (dense-ish sample), cross-checked vs mpmath ---
+checked 66 K values exactly, violations=0
+worst (smallest) margin rK-lower = (mpf('0.127241893822885430329984683201222169940698792251848082523540819'), 2000)
+worst (smallest) margin upper-rK = (mpf('0.0298177498677919129848717152059861903446200599455502588560274501'), 2000)
+rK at largest tested K=2000: 0.359721913572913907097408621941460344623280945554901536493291  (a*=0.367087211862742237558798900734950035104718642243775594208058)
+
+--- fast mpmath (log-gamma / incremental log-sum), K up to 200000, sparse ---
+  K=1: rK=0.16666667  lower=-6.51913971  upper=1.55063082  gap(a*-rK)=0.20042055
+  K=10: rK=0.27812549  lower=-1.61890208  upper=0.70166934  gap(a*-rK)=0.08896172
+  K=100: rK=0.33549215  lower=-0.24177506  upper=0.46892265  gap(a*-rK)=0.03159506
+  K=1000: rK=0.35672251  lower=0.17646433  upper=0.39889353  gap(a*-rK)=0.01036470
+  K=5000: rK=0.36240852  lower=0.28205715  upper=0.38126606  gap(a*-rK)=0.00467869
+  K=10000: rK=0.36377157  lower=0.30699859  upper=0.37710557  gap(a*-rK)=0.00331564
+  K=30000: rK=0.36516861  lower=0.33241665  upper=0.37286683  gap(a*-rK)=0.00191860
+  K=50000: rK=0.36560004  lower=0.34023667  upper=0.37156302  gap(a*-rK)=0.00148717
+  K=80000: rK=0.36591091  lower=0.34586293  upper=0.37062504  gap(a*-rK)=0.00117630
+  K=100000: rK=0.36603489  lower=0.34810468  upper=0.37025132  gap(a*-rK)=0.00105232
+  K=150000: rK=0.36622773  lower=0.35158937  upper=0.36967042  gap(a*-rK)=0.00085948
+  K=200000: rK=0.36634274  lower=0.35366637  upper=0.36932420  gap(a*-rK)=0.00074447
+violations=0

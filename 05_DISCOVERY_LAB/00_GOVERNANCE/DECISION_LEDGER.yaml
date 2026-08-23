@@ -3692,3 +3692,86 @@ decisions:
       - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo, em todas as cinco frentes"
       - "todos os resultados ja integrados (Estagios 1-12, phi_REDB, DISC-DEC-050 a 056) permanecem exatamente como estao ate que uma frente desta onda produza um achado positivo adversarialmente verificado que os supere"
+
+  - decision_id: DISC-DEC-058
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 14, frente (a)
+      (`SHARP-CONSTANT-U-PRIME-ATTEMPT`, DISC-DEC-057), apos verificacao
+      adversarial hostil dedicada. A frente atacou os dois ingredientes
+      exatos deixados abertos por DISC-DEC-055 (Estagio 12) para a
+      constante NITIDA da hipotese (U'): um limitante inferior para a
+      funcao Q de Ramanujan, e monotonicidade de M_K/sqrt(K) em K
+      (equivalente a sup_K=lim_K). RESULTADO: peca 1 FECHADA -- provado
+      Q(n)>=sqrt(pi*n/2)-6 para todo n>=1, via a rota elementar ja
+      nomeada (-ln(1-x)<=x/(1-x)), com uma comparacao termo-a-termo sem
+      truncamento que evita um trade-off desfavoravel que uma primeira
+      tentativa em papel encontrou (descartada, registrada no
+      pre-registro). Combinado com Teorema 3 e o Lema 4.1 ja provados
+      de Estagio 12, isto eleva o limsup_K M_K/sqrt(K)<=a* ja implicito
+      no Estagio 12 a um LIMITE EXATO:
+      lim_{K->infinito} M_K/sqrt(K) = a* = sqrt(pi)(1/sqrt(2)-1/2) =
+      0,3670872... -- a primeira confirmacao rigorosa de que a
+      constante numericamente conjecturada e genuinamente o valor
+      assintotico correto, nao apenas um limitante superior sobre ele.
+      Peca 2 NAO fechada -- monotonicidade de M_K/sqrt(K) tentada por
+      duas rotas (uma recursao exata para Q(n), refutada por
+      contraexemplo explicito Q(3)=17/9; um limitante pontual direto,
+      que exigiria limitantes de Q(n) e phi_K ambos precisos a
+      O(1/sqrt(K)) para todo K finito, mais delicado que a ferramenta
+      elementar disponivel) -- relatada honestamente como nao fechada,
+      com evidencia numerica exata forte (K ate 3000, nunca atinge a*)
+      rotulada heuristica, nao prova. A CONSTANTE EFETIVAMENTE PROVADA
+      NA HIPOTESE (U') CONTINUA SENDO a=1+sqrt(pi/2)~=2,2533, NAO a*
+      -- a*=lim, nao (ainda) sup, e a hipotese (U') exige um limitante
+      UNIFORME em K. Referee hostil re-derivou cada passo algebrico do
+      zero (incluindo os dois passos sinalizados como nao verificados
+      a mao pela sessao orquestradora -- a decomposicao de epsilon(x)
+      e o limitante de Err(n)), sem encontrar nenhum erro, e foi alem
+      do exigido: derivou independentemente Err(n)->3/2 quando
+      n->infinito (nao presente no documento-alvo), confirmando a folga
+      do limitante usado. Verificacao numerica independente alcancou
+      n,K ate 10^6 -- ZERO violacoes, margem convergindo
+      monotonicamente ao valor exato 17/3 (Teorema 5), r_K nunca
+      atingindo a* em nenhum dos ~1.500 valores de K testados ate 10^6.
+      Veredito SOUND, "ACCEPT for catalogue", unico achado uma
+      inconsistencia cosmetica na propria contagem de pontos do
+      documento-alvo, sem efeito matematico. Integrado como "Estagio
+      13" em THEOREM.md, com pointers datados em Estagio 12 e em
+      `u_prime_hypothesis_attempt/ATTEMPT.md` (SS7, Established/
+      Heuristic/Open) e um adendo na Arvore A do mapa de dependencias.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao para achados positivos:
+      verificacao independente propria da sessao orquestradora
+      (re-derivacao completa de Lemma 5.1, Theorem 5 e Theorem 6 via
+      script proprio, confirmando cada passo antes de despachar o
+      referee) antes de despachar um referee hostil dedicado, que por
+      sua vez excedeu a propria verificacao da sessao orquestradora em
+      escala (n,K ate 10^6, contra 3000 na propria frente) e produziu
+      um resultado analitico novo nao presente no documento-alvo
+      (Err(n)->3/2) como subproduto do proprio processo de tentar
+      quebra-lo. A distincao entre "limite exato" (agora provado) e
+      "supremo exato" (ainda aberto) e precisamente o tipo de nuance
+      matematica que esta linhagem tem cuidado consistentemente para
+      nao confundir -- fechar uma NAO fecha automaticamente a outra, e
+      a integracao presente evita exatamente esse erro, mantendo
+      a=1+sqrt(pi/2) como a constante efetivamente provada na hipotese
+      (U') apesar do avanco genuino na compreensao de a*.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 13 anexado, pointers em Estagio 12)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/ATTEMPT.md (2 correcoes datadas)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore A, adendo datado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "lim_{K->infinito} M_K/sqrt(K) = a* PROVADO exatamente -- primeira confirmacao rigorosa de que a constante numericamente conjecturada e o valor assintotico correto"
+      - "constante efetivamente provada na hipotese (U') permanece a=1+sqrt(pi/2), NAO a* -- sup_K M_K/sqrt(K)=a* permanece aberto, ingrediente exato nomeado com mais precisao"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+      - "hipotese (U') com constante nao-nitida a=1+sqrt(pi/2) (Estagio 12, DISC-DEC-055) permanece exatamente como provada, nao alterada nem superada por esta frente"
+      - "Teoremas 3/E (Estagios 10-11) permanecem exatamente como provados, usados aqui apenas por citacao"

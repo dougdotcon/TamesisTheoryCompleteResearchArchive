@@ -154,6 +154,24 @@ desde 2026-08-22 (DISC-DEC-040), nesta cor.
 > distinta e não fechada por este resultado. Ver `THEOREM.md` "Estágio
 > 12" para o enunciado completo.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-058, Estágio 13.]** Um novo
+> resultado, `.../u_prime_hypothesis_attempt/sharp_constant_attempt/ATTEMPT.md`,
+> adversarialmente confirmado (SOUND, "ACCEPT for catalogue" —
+> verificado independentemente até `n,K=10^6`, nenhum erro encontrado),
+> prova um limitante inferior `Q(n)\ge\sqrt{πn/2}-6` para a função `Q`
+> de Ramanujan e, combinando-o com Teorema 3 e o Lema 4.1 já provados
+> de Estágio 12, prova `\lim_{K\to\infty}M_K/\sqrt K=a^*`
+> **exatamente** — a primeira confirmação rigorosa de que a constante
+> nítida `a^*` é genuinamente o valor assintótico correto, não apenas
+> um limitante superior sobre ele. Como os adendos anteriores, este é
+> um resultado sobre uma propriedade mais forte da mesma convergência,
+> não uma nova aresta desta árvore. **Isto NÃO fecha a hipótese (U')
+> com a constante nítida `a^*`** — a monotonicidade de `M_K/\sqrt K`
+> em `K` (equivalente a `\sup_K=\lim_K`) permanece aberta, tentada por
+> duas rotas e não fechada; a constante efetivamente provada na
+> hipótese (U') continua sendo `a=1{+}\sqrt{π/2}` (Estágio 12,
+> inalterado). Ver `THEOREM.md` "Estágio 13" para o enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

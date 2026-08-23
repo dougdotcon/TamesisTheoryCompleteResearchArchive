@@ -2683,7 +2683,10 @@ provada); a forma fechada geral-`b` das constantes agudas em `b\ge2`
 (Estágio 9); Conjecturas 1–2. O ingrediente exato que fecharia a
 nitidez foi nomeado com precisão pela própria frente: um limitante
 *inferior* para `Q(n)` da forma `Q(n)\ge\sqrt{πn/2}-C`, simétrico ao
-limitante superior usado aqui.
+limitante superior usado aqui. [Ver Estágio 13 abaixo — o limitante
+inferior de `Q(n)` foi provado e o LIMITE `\lim_K M_K/\sqrt K=a^*` está
+agora exato; o SUPREMO `\sup_K M_K/\sqrt K=a^*` continua aberto,
+`2026-08-23`.]
 
 **Veredito honesto atualizado (ao fim do Estágio 12):** a linha `U_1/2`
 tem agora uma taxa de convergência **explícita e incondicional** para
@@ -2694,3 +2697,110 @@ como refinamento nomeado e não mais central, tornar essa taxa
 completas:
 `uniform_in_c_attempt/u_prime_hypothesis_attempt/ATTEMPT.md`,
 `uniform_in_c_attempt/u_prime_hypothesis_attempt/adversarial/REFEREE_REPORT.md`.
+[Ver Estágio 13 abaixo — progresso parcial na nitidez, `2026-08-23`.]
+
+---
+
+## [Extensão, Estágio 13 — 2026-08-23]
+
+**Onda 14, frente (a), `DISC-DEC-057`/`DISC-DEC-058`
+(`SHARP-CONSTANT-U-PRIME-ATTEMPT`).** Alvo: a constante nítida
+`a^*=\sqrt π(1/\sqrt2-1/2)=0,3670872\ldots` deixada aberta pelo
+Estágio 12 — o ingrediente exato nomeado ali (um limitante inferior
+para a função `Q` de Ramanujan) e um segundo fato separado
+(monotonicidade de `M_K/\sqrt K` em `K`, equivalente a `\sup_K=\lim_K`).
+
+### O que foi provado
+
+> **Teorema (limitante inferior de `Q(n)`, PROVADO).**
+> `\displaystyle Q(n) \ge \sqrt{\frac{πn}2} - 6` para todo `n\ge1`.
+
+> **Teorema (o limite exato, PROVADO).**
+> `\displaystyle \lim_{K\to\infty}\frac{M_K}{\sqrt K} = a^*`.
+
+A prova do primeiro usa a rota elementar já nomeada pela decisão
+autorizadora (`-\ln(1{-}x)\le x/(1{-}x)`, o dual logarítmico da
+desigualdade `1{-}x\le e^{-x}` já usada pelo Estágio 12), mas com uma
+comparação termo-a-termo sem truncamento (evitando um trade-off
+desfavorável que uma primeira tentativa em papel encontrou, registrado
+e descartado no pré-registro). Combinado com o Teorema 3 e o Lema 4.1
+do Estágio 12 (ambos citados, inalterados), o segundo teorema
+**eleva** o `\limsup_{K\to\infty}M_K/\sqrt K\le a^*` já implícito na
+prova do Estágio 12 a um limite exato — a primeira identificação
+exata da constante assintótica líder, não apenas um limitante superior
+sobre ela.
+
+**O que NÃO foi fechado:** monotonicidade de `M_K/\sqrt K` em `K`
+(equivalente a `\sup_K=\lim_K`) — tentada por duas rotas distintas
+(uma recursão exata para `Q(n)`, refutada por contraexemplo explícito
+`Q(3)=17/9\ne1{+}\tfrac23Q(2)=2`; e um limitante pontual direto
+`M_K\le a^*\sqrt K`, que exigiria limitantes superior de `Q(n)` e
+inferior de `φ_K` ambos precisos a `O(1/\sqrt K)` para todo `K` finito
+— mais delicado que qualquer ferramenta elementar disponível) —
+nenhuma das duas fecha. Evidência numérica exata forte (`K` até
+`3000`, estritamente crescente, nunca atinge `a^*`) é relatada
+honestamente como heurística, não prova.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado re-derivou cada passo algébrico do zero —
+incluindo os dois passos explicitamente sinalizados como não
+verificados à mão (a decomposição de `ε(x)` e o limitante de
+`\mathrm{Err}(n)`) — e não encontrou nenhum erro. Foi além do exigido:
+derivou independentemente o limite `\mathrm{Err}(n)\to3/2` quando
+`n\to\infty` (não presente no documento-alvo), confirmando que a folga
+do limitante `\le5` usado é de fator `\approx2`, não arbitrária. A
+verificação numérica independente alcançou `n,K` até `10^6` — sem
+nenhuma violação em lugar algum, a margem convergindo monotonicamente
+ao valor exato `17/3` (Teorema 5) e a razão `M_K/\sqrt K` nunca
+atingindo `a^*` em nenhum dos aproximadamente `1.500` valores de `K`
+testados até `10^6`.
+
+> **Veredito: SOUND. "ACCEPT for catalogue."** Nenhum erro matemático
+> encontrado em lugar algum. Único achado: uma inconsistência interna
+> cosmética entre a contagem de pontos numéricos relatada no texto e na
+> seção de arquivos do documento-alvo — sem efeito sobre nenhuma
+> alegação matemática, confirmado diretamente pelo referee.
+
+Ver
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/ATTEMPT.md`
+e
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/adversarial/REFEREE_REPORT.md`
+para os relatórios completos.
+
+### O que isto muda, precisamente
+
+**O limite `\lim_{K\to\infty}M_K/\sqrt K=a^*` está agora PROVADO,
+exatamente** — a primeira confirmação rigorosa de que a constante
+numericamente conjecturada `a^*` é genuinamente a constante assintótica
+correta, não apenas um limitante superior sobre ela. **Isto NÃO
+prova a hipótese (U') com a constante nítida `a^*`** — a constante
+explícita provada na hipótese (U') permanece `a=1{+}\sqrt{π/2}\approx
+2,2533` (Estágio 12, inalterado), pois o fato que faltava para a
+nitidez uniforme-em-`K` (`\sup_K=\lim_K`) continua aberto. Nenhum
+resultado anterior é enfraquecido: Teoremas 3/E (Estágios 10–11), a
+hipótese (U') com constante não-nítida (Estágio 12), e todos os
+resultados anteriores permanecem exatamente como provados.
+
+**O que permanece aberto, sem mudança:** `\sup_K M_K/\sqrt K=a^*`
+(equivalente a monotonicidade de `M_K/\sqrt K` em `K`) — o ingrediente
+exato que falta agora nomeado com ainda mais precisão: limitantes de
+`Q(n)` (superior) e `φ_K` (inferior) ambos precisos a `O(1/\sqrt K)`
+para **todo** `K` finito, não apenas assintoticamente. A constante
+usada na hipótese (U') como efetivamente provada continua sendo
+`a=1{+}\sqrt{π/2}`, não `a^*`. A lei de escala `γ\in(0,1)`
+(caracterizada, não provada); Conjecturas 1–2; a forma fechada
+geral-`b` das constantes agudas em `b\ge2` (Estágio 9) permanecem
+inalterados.
+
+**Veredito honesto atualizado (ao fim do Estágio 13):** a linha
+`U_1/2` tem agora, além da taxa explícita incondicional (Estágio 12),
+a identificação exata da constante assintótica líder `a^*` como
+verdadeiro valor-limite (não apenas cota superior) — um refinamento
+genuíno, mas que ainda não se traduz num limitante uniforme-em-`K` com
+essa constante nítida. O único ingrediente nomeado que fecharia esse
+último passo é um limitante inferior de `Q(n)` de precisão
+`O(1/\sqrt K)` para todo `K`, não apenas assintótico — um alvo
+concreto para uma frente futura. Fontes completas:
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/ATTEMPT.md`,
+`uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/adversarial/REFEREE_REPORT.md`.

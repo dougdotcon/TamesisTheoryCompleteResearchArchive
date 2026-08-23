@@ -1,0 +1,21 @@
+=== Part 0: elementary inequality -ln(1-x) <= x/(1-x) ===
+checked 1000 points in [0,0.999], violations=0
+checked 29 points approaching x->1, violations=0
+
+=== Part 1: termwise P_j >= h(j) (exact P_j vs mpmath h(j), 60dps) ===
+checked 14491 (n,j) pairs across n in [1, 2, 3, 5, 10, 20, 50, 100, 300, 1000, 3000, 10000], violations=0
+worst (smallest) margin P_j-h(j) = (mpf('0.0'), 1, 0)
+
+=== Part 1b: termwise P_j >= h(j), large n, mpmath log-sum (stress test) ===
+  n=50000 done, cumulative checked=50000, violations so far=0
+  n=300000 done, cumulative checked=350000, violations so far=0
+  n=1000000 done, cumulative checked=1350000, violations so far=0
+large-n stress test: checked 1350000 (n,j) pairs, violations=0
+worst (smallest) margin (large-n) = (mpf('0.0'), 50000, 0)
+
+=== Part 2: h(x) strictly decreasing on [0,n) ===
+checked 10000 points across several n, monotonicity violations=0
+
+=== Part 2b: symbolic check that phi'(x) numerator > 0 on [0,n) ===
+phi'(x) - claimed_phi'(x) simplifies to: 0  (should be 0)
+claimed numerator (2x+1)(n-x)+x(x+1) expanded: 2*n*x + n - x**2

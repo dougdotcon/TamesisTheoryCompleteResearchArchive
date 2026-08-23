@@ -377,6 +377,15 @@ zero violations (redundant with Theorem 2's monotonicity, checked anyway).
   — it was not attempted, to avoid rushing a second, more delicate
   asymptotic derivation and risking an error in either; it is named here as
   the precise, concrete next step, not left vague.
+  **[Correção pós-adversarial, 2026-08-23 — DISC-DEC-058, Estágio 13.]**
+  O limitante inferior `Q(n)\ge\sqrt{πn/2}-6` foi PROVADO
+  (`sharp_constant_attempt/ATTEMPT.md`, adversarialmente confirmado SOUND,
+  "ACCEPT for catalogue", verificado independentemente até `n,K=10^6`),
+  dando `\lim_{K\to\infty}M_K/\sqrt K=a^*` **exato**. A monotonicidade de
+  `M_K/\sqrt K` (fato (ii)/`\sup_K=\lim_K`) permanece aberta, tentada por
+  duas rotas e não fechada. A constante efetivamente provada na hipótese
+  (U') permanece `a=1{+}\sqrt{π/2}`, não `a^*`. Ver `THEOREM.md` "Estágio
+  13" para o enunciado completo.
 
 ---
 
@@ -396,7 +405,11 @@ Proposição 7.1 (§5, §6); the classical Wallis/Stirling limit `Kφ_K^2\to\pi/
 
 **Heuristic / numerically suggestive, not proved (inherited, unchanged):**
 the sharp constant `a^*` as the true supremum of `M_K/\sqrt K` over `K`
-(§7); monotonicity of `M_K/\sqrt K` in `K`.
+(§7); monotonicity of `M_K/\sqrt K` in `K`. **[Correção pós-adversarial,
+2026-08-23 — DISC-DEC-058: `a^*` como valor-LIMITE (não supremo) está
+agora PROVADO — ver `sharp_constant_attempt/ATTEMPT.md`. A monotonicidade
+(equivalente a `\sup_K=\lim_K`) permanece heurística/não provada,
+inalterada.]**
 
 **Open:** the sharp constant in (U'); fact (ii) of §6.3; the lower-bound
 route to both, named precisely in §7.

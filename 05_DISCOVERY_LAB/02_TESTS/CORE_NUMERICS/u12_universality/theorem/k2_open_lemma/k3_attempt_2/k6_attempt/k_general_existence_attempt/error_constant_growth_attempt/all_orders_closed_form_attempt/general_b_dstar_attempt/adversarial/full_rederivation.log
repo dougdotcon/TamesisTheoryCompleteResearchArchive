@@ -1,0 +1,26 @@
+======================================================================
+STEP 1: c_j^{(r)}(b)=P_b*C(N,r-j) rewrite + extension-for-free
+verify_extension_terms_vanish(p_max=10,r_max=40): 1870 checks, 0 failures
+verify_step1(p_max=6,r_max=40,b_max=15): 4592 checks, 0 failures
+======================================================================
+Q_p(u) interpolation, out-of-sample (own Stirling table)
+verify_Qp_out_of_sample(p_max=6, extra=25): 175 checks, 0 failures
+======================================================================
+Central moments mu_2, mu_4, mu_6, mu_8 (own cumulant-gen-fn derivation)
+  mu_0(N) = 1
+  mu_2(N) = N/4
+  mu_4(N) = 3*N**2/16 - N/8
+  mu_6(N) = 15*N**3/64 - 15*N**2/32 + N/4
+  mu_8(N) = 105*N**4/256 - 105*N**3/64 + 147*N**2/64 - 17*N/16
+verify_moments_direct(N_max=25): 130 checks, 0 failures
+======================================================================
+Odd-part collapse Pcollapse(power,r,b): recursion vs brute force
+verify_Pcollapse(power_max=13,r_max=25,b_max=15): 2912 checks, 0 failures
+======================================================================
+Odd-part collapse vs document's printed intermediate formulas (sec 3.4)
+k=1 (S_1) collapse matches document's '-1/2' claim: True
+k=2 (S_3) collapse matches document's beta^2+4r claim: True
+k=3 (S_5) collapse matches document's printed bracket: True
+k=4 (S_7) collapse matches document's printed bracket: True
+======================================================================
+TOTAL FAILURES: 0

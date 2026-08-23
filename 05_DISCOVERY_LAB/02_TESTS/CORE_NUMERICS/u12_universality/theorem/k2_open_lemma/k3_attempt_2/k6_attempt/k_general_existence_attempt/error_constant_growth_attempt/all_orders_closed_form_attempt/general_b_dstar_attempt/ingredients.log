@@ -1,0 +1,23 @@
+=== Q_p(u) for p=0..4 (interpolated on 2p+1 pts, extended-checked) ===
+Q_0(u) = 1
+Q_1(u) = u**2/2 + u/2
+Q_2(u) = u**4/8 + u**3/12 - u**2/8 - u/12
+Q_3(u) = u**6/48 - u**5/48 - u**4/16 + u**3/48 + u**2/24
+Q_4(u) = u**8/384 - u**7/96 - u**6/576 + u**5/30 - 5*u**4/1152 - u**3/32 + u**2/288 + u/120
+
+=== central moments mu_2, mu_4, mu_6, mu_8 (symbolic derivation) ===
+mu_2(n) = n/4
+mu_4(n) = 3*n**2/16 - n/8
+mu_6(n) = 15*n**3/64 - 15*n**2/32 + n/4
+mu_8(n) = 105*n**4/256 - 105*n**3/64 + 147*n**2/64 - 17*n/16
+Numeric verification, N<=20: OK
+
+=== odd partial-sum identities I1,I3 (re-derived), I5,I7 (NEW) ===
+Exhaustive verification (S1,S3: N<=60; S5: N<=39; S7: N<=34), all m: OK
+
+=== prefactor-collapse family, k=0,1,2,3 ===
+Numeric (b<=10, r<=20): OK
+Symbolic (general r,b): OK
+
+=== General-k collapse family (proved above by factorial cancellation), k=0..6 ===
+Numeric (b<=8, r<=15): OK

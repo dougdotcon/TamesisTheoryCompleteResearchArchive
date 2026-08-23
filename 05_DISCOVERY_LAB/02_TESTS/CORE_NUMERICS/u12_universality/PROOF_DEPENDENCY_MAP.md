@@ -172,6 +172,20 @@ desde 2026-08-22 (DISC-DEC-040), nesta cor.
 > hipótese (U') continua sendo `a=1{+}\sqrt{π/2}` (Estágio 12,
 > inalterado). Ver `THEOREM.md` "Estágio 13" para o enunciado completo.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-059, Estágio 14.]** Um novo
+> resultado, `.../all_orders_closed_form_attempt/general_b_dstar_attempt/ATTEMPT.md`,
+> adversarialmente confirmado (SOUND, "ACCEPT" — 165.888 checagens
+> exatas independentes, 0 divergências), fecha o item nomeado aberto
+> pelo adendo de Estágio 9 acima (`D^{*(p)}_r(b)` para `b\ge2`) para
+> `p=1,2,3,4` — Teorema D1 (`p=1`) e três fórmulas irmãs, todo `b\ge0`.
+> Como os adendos de Estágio 10–13, este é um resultado sobre uma
+> propriedade mais forte da mesma forma fechada (Teorema A/B/Corolário
+> A3 de Estágio 9), não uma nova aresta desta árvore — nenhum nó ou
+> aresta acima muda de status ou cor. `p\ge5` permanece aberto (o único
+> obstáculo nomeado foi identificado pelo referee como mecanicamente
+> removível, mas a montagem explícita não foi executada). Ver
+> `THEOREM.md` "Estágio 14" para o enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

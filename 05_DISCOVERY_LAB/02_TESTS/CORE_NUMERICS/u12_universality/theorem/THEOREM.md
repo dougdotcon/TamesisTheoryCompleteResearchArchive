@@ -2318,7 +2318,8 @@ do Teorema 3 [Ver Estágio 10 abaixo — este item foi fechado] (onda 11
 frente (a) tratou exatamente disto); (v) Conjecturas 1–2 (lei distribucional
 completa, `K≥2`); e, dentro do escopo desta própria frente: a forma
 fechada geral-`b` das constantes agudas `D^{*(p)}_r(b)` para `b\ge2`
-(estrutura da obstrução agora identificada, não apenas negativa);
+[Ver Estágio 14 abaixo — fechado para `p=1,2,3,4`; `p\ge5`
+permanece aberto] (estrutura da obstrução agora identificada, não apenas negativa);
 qualquer alegação uniforme-em-`K` (explicitamente não tentada em
 nenhum lugar). **O Teorema 3 (Estágio 6) permanece inteiramente
 inafetado** — nunca dependeu desta frente.
@@ -2791,7 +2792,8 @@ usada na hipótese (U') como efetivamente provada continua sendo
 `a=1{+}\sqrt{π/2}`, não `a^*`. A lei de escala `γ\in(0,1)`
 (caracterizada, não provada); Conjecturas 1–2; a forma fechada
 geral-`b` das constantes agudas em `b\ge2` (Estágio 9) permanecem
-inalterados.
+inalterados [Ver Estágio 14 abaixo — fechado para `p=1,2,3,4`;
+`p\ge5` permanece aberto].
 
 **Veredito honesto atualizado (ao fim do Estágio 13):** a linha
 `U_1/2` tem agora, além da taxa explícita incondicional (Estágio 12),
@@ -2804,3 +2806,107 @@ essa constante nítida. O único ingrediente nomeado que fecharia esse
 concreto para uma frente futura. Fontes completas:
 `uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/ATTEMPT.md`,
 `uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 14 — 2026-08-23]
+
+**Onda 14, frente (d), `DISC-DEC-057`/`DISC-DEC-059`
+(`GENERAL-B-DSTAR-ATTEMPT`).** Alvo: o item deixado nomeadamente
+aberto pelo Estágio 9 — a forma fechada geral-`b` das constantes
+agudas `D^{*(p)}_r(b)` para `b\ge2` (Corolário A3 de
+`all_orders_closed_form_attempt/ATTEMPT.md`, tomado aqui como insumo
+fixo, já provado, não re-derivado).
+
+### O que foi provado
+
+Estendendo a rota de colapso de prefator no estilo Teorema 3′ (já
+provada para `p=2` pelo referee da onda 10) a `p` simbólico, usando
+quatro ingredientes (grau/anulamento de `Q_p(u)`; os momentos centrais
+de `\mathrm{Bin}(N,\tfrac12)`; duas identidades novas `I5,I7` via soma
+por partes de Abel; e uma família de colapso geral-`k` do prefator):
+
+> **Teorema D1 (PROVADO).** `\displaystyle D^{*(1)}_r(b)` tem forma
+> fechada exata para todo `b\ge0`, reduzindo caractere-por-caractere às
+> fórmulas já provadas em `b\in\{0,1\}`.
+
+> **`D^{*(2)}_r(b)`, `D^{*(3)}_r(b)`, `D^{*(4)}_r(b)` (PROVADOS, todo
+> `b\ge0`).** O caso `p=2` é uma re-derivação independente do já
+> provado Teorema 3′ (confere exatamente); `p=3,4` são formas novas.
+
+O mecanismo é integralmente `p`-uniforme (nenhum passo usa fato
+específico de `p` além do grau/anulamento de `Q_p`), fechando quatro
+valores de `p` simultaneamente com um único método.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado re-derivou a rota inteira do zero — a partir
+apenas do Corolário A3, sem ler nenhum script do próprio documento —
+com sua própria tabela de Stirling, sua própria soma-por-partes de
+Abel, sua própria extração de momentos centrais via função geradora de
+cumulantes, e sua própria montagem final: **165.888 checagens exatas,
+0 divergências**, em escala superior à do próprio documento em todos
+os quatro valores de `p` (`24` valores distintos de `b\ge2` testados
+para `p=3,4`, não apenas o único ponto `b=2` que a sessão orquestradora
+já havia sinalizado como fino antes de despachar o referee).
+
+O referee foi além do exigido: o documento-alvo classificava como
+**OPEN** (item 11 do seu scorecard) se o padrão de cancelamento de
+`I5,I7` generaliza para `I9,I11,\ldots` (i.e., para `p\ge5`). O referee
+mostrou que esse cancelamento é, na verdade, uma consequência de uma
+linha só de um fato binomial de paridade —
+`(w-1)^n-(w+1)^n=-2\sum_{t\text{ ímpar}}\binom nt w^{n-t}`, válido para
+**todo** expoente par `n`, não apenas os dois casos `n=4,6` usados pelo
+documento — verificada simbolicamente até `n=40` e numericamente (força
+bruta, sem recursão) até `k=11`. Isto torna a obstrução nomeada no item
+11 **removível por um argumento mecânico**, não uma nova ideia em
+aberto — mas o referee **não** executou a montagem completa para
+`p\ge5` (nenhum `Q_5,Q_6,\ldots`, nenhum momento `\mu_{10},\mu_{12}`,
+nenhuma fórmula `D^{*(p\ge5)}_r(b)` foi produzida), então `p\ge5`
+continua honestamente **não fechado**, apenas com seu único obstáculo
+nomeado agora identificado como removível.
+
+> **Veredito: SOUND. "ACCEPT."** Nenhum erro encontrado em lugar
+> algum — nem nas quatro fórmulas montadas, nem nas cinco instâncias
+> concretas impressas, nem na correção de um erro auto-relatado no
+> próprio documento (verificado como genuinamente corrigido, sem
+> reintrodução silenciosa). O único achado é uma sub-alegação (item 11
+> descrito como "OPEN" quando sua obstrução nomeada é removível),
+> registrada para benefício de uma frente futura, não uma falha exigindo
+> correção.
+
+Ver
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/ATTEMPT.md`
+e
+`.../general_b_dstar_attempt/adversarial/REFEREE_REPORT.md` para os
+relatórios completos.
+
+### O que isto muda, precisamente
+
+**O item nomeado aberto pelo Estágio 9 — forma fechada geral-`b` das
+constantes agudas `D^{*(p)}_r(b)` para `b\ge2` — está agora FECHADO
+para `p=1,2,3,4`, todo `b\ge0`** (Teorema D1 e as três fórmulas
+irmãs). Nenhum resultado anterior é enfraquecido: Corolário A3,
+Teorema 3′, e todas as fórmulas de calibração `b\in\{0,1\}` já
+provadas permanecem exatamente como estavam, agora casos particulares
+das novas formas fechadas.
+
+**O que permanece aberto, sem mudança:** a forma fechada geral-`b`
+para `p\ge5` — o único obstáculo nomeado (o padrão de cancelamento de
+`I_{2k+1}`) foi identificado pelo referee como mecanicamente removível,
+mas a montagem explícita para `p\ge5` não foi executada em lugar
+algum, nesta frente ou pelo referee; permanece um alvo concreto,
+agora mais barato, para uma frente futura. A soma da faixa (`strip
+sum`) continua sendo deixada como soma explícita de `b` termos, por
+desenho, não uma limitação. Nenhuma alegação uniforme-em-`K` ou
+uniforme-em-`p` é feita.
+
+**Veredito honesto atualizado (ao fim do Estágio 14):** a linha
+`U_1/2` tem agora forma fechada geral-`b` provada para as quatro
+constantes agudas mais usadas (`p=1,2,3,4`), fechando o item nomeado
+pelo Estágio 9 nesse escopo; `p\ge5` permanece aberto, mas com seu
+único obstáculo identificado e mostrado removível por um argumento de
+uma linha — um alvo concreto e barato para uma frente futura, não mais
+uma incógnita estrutural. Fontes completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/ATTEMPT.md`,
+`.../general_b_dstar_attempt/adversarial/REFEREE_REPORT.md`.

@@ -1,0 +1,39 @@
+sc_diagnostic.py T1 -- cell n=65536 b=100 c=1000, N=2500, seed=20260825901
+    [250/2500] elapsed=23.2s (92.7ms/instance)
+    [500/2500] elapsed=47.4s (94.8ms/instance)
+    [750/2500] elapsed=72.1s (96.1ms/instance)
+    [1000/2500] elapsed=97.0s (97.0ms/instance)
+    [1250/2500] elapsed=120.4s (96.3ms/instance)
+    [1500/2500] elapsed=144.2s (96.1ms/instance)
+    [1750/2500] elapsed=167.6s (95.7ms/instance)
+    [2000/2500] elapsed=190.6s (95.3ms/instance)
+    [2250/2500] elapsed=214.2s (95.2ms/instance)
+    [2500/2500] elapsed=237.5s (95.0ms/instance)
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/sc_diagnostic.py:111: RuntimeWarning: Mean of empty slice
+  return x.mean(), x.std(ddof=1) / np.sqrt(len(x)), len(x)
+/usr/local/lib/python3.11/dist-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/usr/local/lib/python3.11/dist-packages/numpy/_core/_methods.py:219: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/usr/local/lib/python3.11/dist-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/usr/local/lib/python3.11/dist-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+--- summary ---
+rho: measured 0.78501 +- 0.00028 (n=2500)  vs formula 0.78511
+phi(cyclic | short & untouched)  = 1.000000 +- 0.000000 (n_instances_with_data=2453, total short-untouched pts=128504)   [must be 1.0 -- sanity check]
+phi(cyclic | long, x0 in R^c)     = 0.054957 +- 0.000611 (total long-Rc pts=35094988)
+phi(cyclic | x0 in R^c), overall  = 0.058426 +- 0.000606 (total Rc pts=35223492)
+phi_U(c'')  [phi_REDB's conditional]         = 0.059993
+  phi_long - phi_U(c'') = -0.005036  (-8.395% relative)  z=-8.25
+  phi_Rc(all) - phi_U(c'') = -0.001567  (-2.612% relative)  z=-2.59
+w_short: formula=0.003590  measured=0.003648
+touched-short-cycle points seen (sanity, should be x0 in R not R^c): 125458
+
+--- cycle-length-binned phi(cyclic | x0 in R^c, L in bin), vs phi_U(c'') ---
+  L in (100,100]: insufficient data (pts=0)
+  L in (100,200]: phi=0.220579+-0.013759  (instances=829, pts=52943)  dev=+267.67%  z=+11.67
+  L in (200,500]: phi=0.053398+-0.004878  (instances=1331, pts=160974)  dev=-10.99%  z=-1.35
+  L in (500,2000]: phi=0.045927+-0.002553  (instances=1839, pts=786448)  dev=-23.45%  z=-5.51
+  L in (2000,inf]: phi=0.054198+-0.000616  (instances=2500, pts=34094623)  dev=-9.66%  z=-9.41

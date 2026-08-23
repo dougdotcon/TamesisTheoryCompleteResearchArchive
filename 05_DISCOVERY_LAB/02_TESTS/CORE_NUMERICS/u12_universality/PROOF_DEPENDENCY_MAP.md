@@ -182,6 +182,10 @@ flowchart TD
 
     REDB["φ_REDB (onda 10, correção do<br/>referee SS11 sobre φ_RED)<br/><b>NOVA FÓRMULA DE REGISTRO</b><br/>χ² teste-de-redução 334,6→101,4<br/>MAS resíduo real em c/n extremo<br/>(b=100,c=1000: z≈−10) —<br/><b>PARCIALMENTE FECHADO</b>"]
 
+    SCMECH["Onda 12, frente (b) (DISC-DEC-053):<br/>estrutura L-dependente do resíduo<br/>IDENTIFICADA e CONFIRMADA —<br/>excesso grande perto de L=b (até<br/>+874%, referee), platô negativo<br/>persistente p/ L longo (~−10 a −15%)<br/>— o pequeno resíduo agregado é<br/>quase-cancelamento de dois efeitos<br/>bem maiores, nenhum modelado"]
+
+    REDC["Candidata φ_REDC (mistura de<br/>ciclo curto sobre φ_REDB)<br/><b>REFUTADA</b> — piora 5 de 6 células<br/>(χ² 4,5-8,6×), critério<br/>pré-registrado falha nas duas<br/>condições — φ_REDB permanece<br/>fórmula de registro —<br/><b>NÃO-FECHAMENTO HONESTO</b>"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -196,6 +200,8 @@ flowchart TD
     EPSR --> ELEV
     ELEV --> ELEVMECH
     ELEVMECH --> REDB
+    REDB --> SCMECH
+    SCMECH --> REDC
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -209,6 +215,8 @@ flowchart TD
     style ELEV fill:#f5ecd8,stroke:#96702a
     style ELEVMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style REDB fill:#f5ecd8,stroke:#96702a,stroke-width:2px
+    style SCMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
+    style REDC fill:#f0e5e8,stroke:#7a3b4a
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -252,6 +260,32 @@ flowchart TD
 > estabeleceram para esta linha. Fontes:
 > `generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/ATTEMPT.md`
 > e `.../adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-053.]** Onda 12 frente (b)
+> (`MCLUST-SHORT-CYCLE-DYNAMICS-ATTEMPT`) atacou diretamente o resíduo
+> que `φ_REDB` deixou aberto na célula mais extrema (`b=100,c=1000`,
+> nó `REDB` acima). Produziu dois resultados distintos, coloridos
+> separadamente. **`SCMECH`** (verde — mecanismo confirmado
+> independentemente, inclusive mais fortemente do que a própria frente
+> relatou no pico perto de `L=b`): o pequeno resíduo agregado que esta
+> linhagem persegue desde a onda 7 é, na verdade, o quase-cancelamento
+> de dois efeitos muito maiores — um excesso positivo grande para
+> ciclos-π de comprimento pouco acima de `b` (o referee mediu até
+> +874%, contra os +267,7% relatados originalmente — uma correção
+> datada foi aplicada ao `ATTEMPT.md` desta frente), e um platô
+> negativo persistente (~−10% a −15%) para ciclos longos — nenhum dos
+> dois modelado por nenhuma fórmula desta linhagem. **`REDC`** (rosa —
+> tentativa que não fechou o alvo mandatado): a candidata `φ_REDC`,
+> construída a partir do mecanismo de ciclo curto isolado, foi
+> refutada — piora 5 das 6 células testadas (incluindo a célula-alvo
+> que deveria corrigir), confirmado independentemente pelo referee em
+> ambas as condições do critério pré-registrado. `φ_REDB` permanece a
+> fórmula de registro; o resíduo M-CLUST(b) permanece **PARCIALMENTE
+> FECHADO**, sem mudança de status — mas agora com o mecanismo do
+> resíduo genuinamente mais bem compreendido do que antes desta
+> frente. Fontes:
+> `elevation_level_attempt/short_cycle_dynamics_attempt/ATTEMPT.md` e
+> `.../short_cycle_dynamics_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

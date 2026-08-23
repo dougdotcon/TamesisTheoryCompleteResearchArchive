@@ -1,0 +1,28 @@
+sc_engine.py selftest
+
+(a) rho_measured vs 1-(1-c/n)^b, 30 instances per cell
+  n= 32768 b=   8 c=   40  rho_formula=0.00972  rho_meas=0.01025+-0.00032  z=+1.65  OK
+  n= 65536 b=  50 c=  400  rho_formula=0.26370  rho_meas=0.26310+-0.00227  z=-0.26  OK
+  n= 65536 b= 100 c=  400  rho_formula=0.45786  rho_meas=0.45628+-0.00300  z=-0.52  OK
+  n= 65536 b= 100 c=  600  rho_formula=0.60138  rho_meas=0.60099+-0.00331  z=-0.12  OK
+  n= 65536 b= 100 c= 1000  rho_formula=0.78511  rho_meas=0.78813+-0.00204  z=+1.47  OK
+  n= 65536 b= 200 c=  150  rho_formula=0.36763  rho_meas=0.37047+-0.00381  z=+0.74  OK
+  n= 65536 b= 400 c=  100  rho_formula=0.45709  rho_meas=0.44814+-0.00583  z=-1.54  OK
+  n= 65536 b= 400 c=  300  rho_formula=0.84043  rho_meas=0.83784+-0.00372  z=-0.69  OK
+
+(b) R^c subseteq U_rem -- always (0 violations required)
+  40 instances checked, violations=0  OK
+
+(c) untouched cycle length<=b is exactly a cycle of f (0 violations)
+  2389 short-cycle points examined, violations=0  OK
+
+(d) touched short (L<=b) cycle has zero run starts (0 violations)
+  38 touched short cycles examined, violations=0  OK
+
+(e) cyclic_mask_peeling vs brute-force orbit-following, small n
+  200 random small functional graphs, mismatches=0  OK
+
+(timing) one instance at n=65536, b=100, c=1000
+  build_instance: 0.0027s   cyclic_mask_peeling: 0.0636s   pi_cycle_lengths: 0.0380s   phi_this_instance=0.02338
+
+ALL SELFTESTS PASSED

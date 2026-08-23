@@ -1,0 +1,36 @@
+=== adv_formula.py selfcheck ===
+(1) phi_U closed form vs scipy.integrate.quad, several c:
+  c=0        quad=1.000000000000 closed=1.000000000000 rel_err=0.000e+00
+  c=0.001    quad=0.999666766643 closed=0.999666766643 rel_err=2.221e-16
+  c=0.5      quad=0.855624391892 closed=0.855624391892 rel_err=3.893e-16
+  c=1        quad=0.746824132812 closed=0.746824132812 rel_err=2.973e-16
+  c=5        quad=0.395712309611 closed=0.395712309611 rel_err=0.000e+00
+  c=20       quad=0.198166364830 closed=0.198166364830 rel_err=1.401e-16
+  c=100      quad=0.088622692545 closed=0.088622692545 rel_err=1.566e-16
+  c=1000     quad=0.028024956082 closed=0.028024956082 rel_err=0.000e+00
+  max relative error: 3.893e-16 OK
+(2) target cell b=100,c=1000,n=65536: rho=0.785112, c''=218.217320
+(3) phi_REDB (full) at the 6-cell grid:
+  b=50,c=400,n=65536: rho=0.2637 phi_REDB_full=0.038216 phi_REDB_cond=0.051786
+  b=100,c=400,n=65536: rho=0.4579 phi_REDB_full=0.032893 phi_REDB_cond=0.060349
+  b=100,c=600,n=65536: rho=0.6014 phi_REDB_full=0.023267 phi_REDB_cond=0.057545
+  b=200,c=150,n=65536: rho=0.3676 phi_REDB_full=0.057681 phi_REDB_cond=0.091086
+  b=400,c=100,n=65536: rho=0.4571 phi_REDB_full=0.065432 phi_REDB_cond=0.120354
+  b=100,c=1000,n=65536: rho=0.7851 phi_REDB_full=0.013839 phi_REDB_cond=0.060873
+(4) target cell: S_untouched=0.00077313, P(Rc)_exact=0.215333, w_short=0.3590% (ATTEMPT.md claims ~0.359%)
+    OK, matches claimed order of magnitude
+(5) phi_REDC vs phi_REDB, 6-cell grid (ATTEMPT.md claims +1.6%..+6.4% above, uniformly):
+  b=50,c=400,n=65536: phi_REDB=0.038216 phi_REDC=0.038619 dev=+1.05%
+  b=100,c=400,n=65536: phi_REDB=0.032893 phi_REDC=0.033790 dev=+2.73%
+  b=100,c=600,n=65536: phi_REDB=0.023267 phi_REDC=0.024025 dev=+3.26%
+  b=200,c=150,n=65536: phi_REDB=0.057681 phi_REDC=0.059827 dev=+3.72%
+  b=400,c=100,n=65536: phi_REDB=0.065432 phi_REDC=0.069505 dev=+6.23%
+  b=100,c=1000,n=65536: phi_REDB=0.013839 phi_REDC=0.014402 dev=+4.07%
+   all 6 cells phi_REDC > phi_REDB: True  (range +1.05% .. +6.23%)
+(6) target cell conditional: phi_cond_C=0.063368 phi_U(c'')=0.059993 dev=+5.63% (ATTEMPT.md claims +5.6%)
+(7) n->infinity check, fixed b=100,c=400: phi_REDB, phi_REDC -> phi_U(c)
+  n=2^16: |phi_REDB-phi_U(c)|=1.142e-02 |phi_REDC-phi_U(c)|=1.052e-02
+  n=2^18: |phi_REDB-phi_U(c)|=3.217e-03 |phi_REDC-phi_U(c)|=2.940e-03
+  n=2^20: |phi_REDB-phi_U(c)|=8.288e-04 |phi_REDC-phi_U(c)|=7.555e-04
+  n=2^22: |phi_REDB-phi_U(c)|=2.088e-04 |phi_REDC-phi_U(c)|=1.902e-04
+  n=2^24: |phi_REDB-phi_U(c)|=5.229e-05 |phi_REDC-phi_U(c)|=4.763e-05

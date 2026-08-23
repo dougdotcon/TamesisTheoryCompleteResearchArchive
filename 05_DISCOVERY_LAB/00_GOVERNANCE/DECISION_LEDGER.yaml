@@ -3261,3 +3261,90 @@ decisions:
       - "Teorema 3 (Estagio 6), a taxa c_K (Estagio 7), a forma fechada de erro (Estagio 8), a forma fechada todas-as-ordens (Estagio 9), Teoremas A/C/D (Estagio 10) permanecem exatamente como provados -- usados aqui apenas por citacao, nenhum enfraquecido"
       - "hipotese (U') / taxa explicita para Teorema A/C permanece aberta, sem mudanca -- explicitamente NAO fechada por este resultado, obstrucao distinta e mais forte"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria/assintotica pura sobre uma recursao discreta interna a este arquivo"
+
+  - decision_id: DISC-DEC-053
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 12, frente (b)
+      (`MCLUST-SHORT-CYCLE-DYNAMICS-ATTEMPT`, DISC-DEC-051), apos
+      verificacao adversarial hostil dedicada. Alvo: fechar o residuo
+      real que phi_REDB (DISC-DEC-050) deixou aberto na celula mais
+      extrema testada (b=100,c=1000,n=65536, rho=0,785, z~-10 no teste
+      de reducao). VEREDITO: NAO-FECHAMENTO HONESTO, com um avanco
+      genuino de mecanismo. O mecanismo de absorcao de ciclo curto
+      nomeado pelo referee de DISC-DEC-050 foi confirmado a precisao
+      de maquina, exatamente e de forma mais forte que o exigido: todo
+      ciclo-pi de comprimento L, nao apenas L<=b, que esta inteiramente
+      intocado por todo seed e deterministicamente um ciclo de f. O
+      diagnostico que expos isso tambem revelou uma estrutura muito
+      mais rica que uma correcao de dois estados pode capturar: o
+      pequeno residuo agregado (1-3%) que esta linhagem persegue desde
+      a onda 7 e, na verdade, o quase-cancelamento de dois efeitos bem
+      maiores e opostos em sinal -- um excesso positivo grande para
+      ciclos de comprimento pouco acima de b (referee, medindo de
+      forma independente com duas sementes frescas: +796% a +874% na
+      celula-alvo, contra os +267,7% originalmente relatados pela
+      propria frente -- uma discrepancia real, rastreada pelo referee
+      a um efeito de selecao por condicionamento em x0 pertencer a R^c
+      que o modelo original subestimava), e um plato negativo
+      persistente (~-10% a -15%) para ciclos longos, nao explicado por
+      nenhuma formula desta linhagem. A candidata pre-registrada
+      phi_REDC, construida somando o mecanismo de ciclo curto isolado
+      a phi_REDB, foi REFUTADA -- piora 5 das 6 celulas testadas
+      (incluindo a propria celula-alvo, cujo |z| piora em vez de
+      melhorar), confirmado independentemente pelo referee em ambas as
+      condicoes do criterio pre-registrado (chi^2 pooled degrada
+      4,45-4,81x no teste do referee, 8,6x no teste original -- mesma
+      direcao). Referee hostil re-derivou o mecanismo do zero a escala
+      2,2x maior que a propria frente (2.653.644 pontos de ciclo
+      curto, incluindo duas celulas de borda deliberadamente
+      adversariais, zero violacoes), confirmou a forma qualitativa da
+      estrutura L-dependente de forma ainda mais forte no pico perto
+      de L=b, e confirmou a refutacao de phi_REDC de forma
+      independente -- veredito SOUND WITH NAMED ISSUES. phi_REDB
+      permanece a formula de registro; o residuo M-CLUST(b) permanece
+      PARCIALMENTE FECHADO, sem mudanca de status, mas com o mecanismo
+      do residuo genuinamente mais bem compreendido. Tres correcoes
+      datadas aplicadas em `short_cycle_dynamics_attempt/ATTEMPT.md`
+      (as estimativas pontuais especificas dos bins proximos a b nao
+      sao reproduziveis -- subestimadas por ~2-3x, nao superestimadas
+      como o texto original supunha; a anomalia do bin (500,2000] nao
+      replicou como caracteristica isolada em tres remedicoes
+      independentes), preservando o original. `PROOF_DEPENDENCY_MAP.md`
+      (Arvore B) ganhou dois nos novos (SCMECH, verde, mecanismo
+      confirmado; REDC, rosa, tentativa refutada) e um adendo datado.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao: mesmo um "nao-
+      fechamento honesto" do alvo mandatado pode conter alegacoes
+      positivas genuinas (o mecanismo de ciclo curto estendido a
+      qualquer L, a estrutura L-dependente nao-monotonica) que exigem
+      a mesma verificacao adversarial obrigatoria que qualquer achado
+      positivo desta linha -- nao apenas os "sucessos" completos.
+      Sessao orquestradora tambem fez verificacao independente propria
+      (spot-check da distribuicao de comprimento de ciclo e da
+      alegacao ciclo-intocado-implica-f-ciclico) antes de despachar o
+      referee. O achado do referee de que as estimativas pontuais dos
+      bins proximos a b estao SUBESTIMADAS (nao superestimadas) por um
+      fator real e rastreavel a um mecanismo especifico (selecao por
+      condicionamento em R^c) e exatamente o tipo de correcao
+      quantitativa precisa que a disciplina de correcao datada existe
+      para capturar -- sem ameacar o veredito central da frente, ja
+      que esses numeros especificos ja eram tratados como ilustrativos,
+      nunca adotados como formula, pela propria frente antes mesmo da
+      revisao adversarial.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore B, dois nos novos + adendo)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "mecanismo de absorcao de ciclo curto estendido a qualquer L (nao so L<=b) IDENTIFICADO e CONFIRMADO independentemente"
+      - "residuo agregado de M-CLUST(b) explicado como quase-cancelamento de dois efeitos maiores e opostos, nenhum modelado por formula alguma -- reformula o entendimento do que fechar este residuo exigiria"
+      - "candidata phi_REDC REFUTADA -- phi_REDB permanece formula de registro, residuo M-CLUST(b) permanece PARCIALMENTE FECHADO"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura sobre um mecanismo alternativo interno a este arquivo"
+      - "phi_REDB (DISC-DEC-050) nao e alterada nem declarada superada por esta frente"

@@ -2444,7 +2444,8 @@ degradação relativa precisamente localizada e mecanismo identificado.
 Teorema A/C (condicional à hipótese (U'), uniformidade-em-`K` da taxa
 do Estágio 7 — nomeada, não provada); a versão uniforme de Teorema E
 (gap real, agora corretamente nomeado: geometricidade qualitativa de
-`M_K`); a lei de escala `γ\in(0,1)` (caracterizada, não provada); (v)
+`M_K`) [Ver Estágio 11 abaixo — este item foi fechado]; a lei de escala
+`γ\in(0,1)` (caracterizada, não provada); (v)
 Conjecturas 1–2. **O Teorema 3 (Estágio 6) permanece inteiramente
 inafetado** — nunca dependeu desta frente.
 
@@ -2458,3 +2459,116 @@ explícita: uniformidade-em-`K` da taxa `1/n` do Estágio 7. Fontes
 completas:
 `theorem/uniform_in_c_attempt/ATTEMPT.md`,
 `theorem/uniform_in_c_attempt/adversarial/REFEREE_REPORT.md`.
+
+## [Extensão, Estágio 11 — 2026-08-23]
+
+**Onda 12, frente (a), `DISC-DEC-051`/`DISC-DEC-052`
+(`MK-QUALITATIVE-GEOMETRICITY-ATTEMPT`).** Alvo: a única obstrução
+nomeada restante para tornar Teorema E (Estágio 10) incondicional —
+uma prova escrita de que `M_K := sup_{n≥K+1}|n(φ_n^{(K)}-φ_K)|` cresce
+no máximo geometricamente em `K` (qualquer taxa `λ` serve, o valor
+exato é irrelevante).
+
+### O que foi provado
+
+> **Teorema (crescimento geométrico qualitativo de `M_K`, PROVADO).**
+> `M_K \le φ_K(K{+}1)e^{K/2}+K = O(K(\sqrt e)^K)`. Em particular
+> `\Sigma_K c^K M_K/K! < \infty` para todo `c\ge0` — exatamente o que
+> Teorema E precisa para tomar o limite termo-a-termo por convergência
+> dominada.
+
+A prova (Rota A) NÃO segue a rota originalmente esboçada pelo referee
+de Estágio 10 (desenrolar a recursão da Proposição 6 de Estágio 8) —
+essa rota foi verificada até onde vai (seus passos algébricos (a) e
+(b) checam), mas exigiria um limitante geométrico geral-`b` para
+`A_r(b),B_r(b)` que não está estabelecido em lugar nenhum do arquivo
+(marcado como item aberto separado, NÃO tentado aqui). Em vez disso, a
+frente encontrou uma rota mais direta usando um ingrediente que não
+existia quando Estágio 8/10 foram escritos: a forma fechada
+todas-as-ordens do Estágio 9 (`ψ_n^{(K)}`, Corolário A1, já PROVADA
+incondicionalmente). Três passos elementares: (1) `n(ψ_n^{(K)}-φ_K)`
+decompõe-se numa soma não-negativa de termos que são, cada um,
+não-crescentes em `n` (positividade de polinômios simétricos
+elementares), logo o supremo sobre `n` é atingido exatamente em
+`n=K+1`; (2) em `n=K+1`, a desigualdade `1+x\le e^x` termo-a-termo dá
+um limitante geométrico cru; (3) o Lema A de redução (já PROVADO,
+Estágio 3) conecta `ψ_n^{(K)}` a `φ_n^{(K)}`, usando apenas que ambas
+as quantidades envolvidas são probabilidades (logo em `[0,1]`, por
+definição). Nenhum passo usa `D_r(b)`, `A_r(b)`, `B_r(b)` ou a
+Proposição 6.
+
+**Achado colateral, informativo, não parte da prova:** a taxa
+verdadeira de `M_K` parece ser `Θ(\sqrt K)`, não geométrica — a mesma
+ordem do limite já-provado `Kφ_K/4` (Estágio 6). O limitante cru é
+válido mas extremamente frouxo (razão `>10^{19}` já em `K=300`),
+espelhando o mesmo padrão que Estágio 8 encontrou para `D_r(b)` vs
+`D*_r(b)`. Não provado, não reivindicado.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado re-derivou cada um dos cinco passos da Rota
+A do zero, a partir das afirmações matemáticas apenas (nenhum arquivo
+`.py` da frente-alvo foi lido), e checou cada citação contra as
+próprias fontes primárias (não contra a transcrição da frente-alvo):
+o Corolário A1 reproduz quatro fórmulas fechadas independentemente
+derivadas (`ψ_n^{(1)},\dots,ψ_n^{(4)}`, de dois métodos de derivação
+diferentes); o argumento de monotonicidade (o passo mais crítico,
+atacado com mais força) foi re-derivado do zero e testado
+exaustivamente muito além da faixa da própria frente (50.399 + 24.430
+pares exatos, 0 violações, argmax correto em 70/70 `K` testados); o
+limitante geométrico cru e a identidade da meia-soma binomial
+subjacente foram confirmados exatos até `K=400`; a propriedade
+`ψ_n^{(K)},ψ_n^{(K),R}\in[0,1]` foi confirmada como genuinamente
+definicional na fonte primária do Lema A (não uma suposição não
+justificada da frente-alvo); e o diagnóstico de que a Rota B
+(Proposição 6) permanece genuinamente aberta (não apenas não
+explorada) foi confirmado contra as próprias tabelas de status das
+fontes primárias.
+
+> **Veredito: SOUND. "ACCEPT for catalogue."** "No error, gap, or
+> unjustified step was found anywhere in Steps 1–5." Único achado: uma
+> imprecisão de citação (paráfrase, não erro matemático) na lista de
+> fontes lidas da frente-alvo — sem efeito sobre nenhuma alegação.
+
+Ver
+`uniform_in_c_attempt/mk_geometricity_attempt/ATTEMPT.md` e
+`uniform_in_c_attempt/mk_geometricity_attempt/adversarial/REFEREE_REPORT.md`
+para os relatórios completos.
+
+### O que isto muda, precisamente
+
+**Teorema E (Estágio 10, §5.6 de `uniform_in_c_attempt/ATTEMPT.md`)
+PERDE o rótulo PROVED-MODULO e torna-se PROVADO, incondicional, em
+ambas as versões** (pontual `n\,Δ_n(c)\to e(c)` e uniforme
+`n\sup_{[0,C]}|Δ_n|\to\sup_{[0,C]}|e|`). Nenhum resultado anterior é
+enfraquecido: Teorema 3 (Estágio 6), a taxa `c_K` (Estágio 7), a forma
+fechada de erro (Estágio 8), a forma fechada todas-as-ordens
+(Estágio 9), e Teoremas A/C/D (Estágio 10) permanecem exatamente como
+provados, usados aqui apenas por citação.
+
+**Isto NÃO fecha a hipótese (U') nem "uma taxa explícita para Teorema
+A/C"** — obstrução genuinamente diferente e mais forte, que exige
+`|φ_n^{(K)}-φ_K|\le a\sqrt K/n` UNIFORME em `K` (um limitante que NÃO
+cresce com `K`), contra a condição aqui provada, que só exige que
+`M_K` cresça no máximo geometricamente (um limitante que CRESCE com
+`K`, apenas não mais rápido que geométrico) — suficiente para a soma
+`\Sigma_K c^K M_K/K!` convergir, insuficiente para um limitante
+explícito uniforme-em-`K`. Este item permanece **aberto, sem
+mudança**.
+
+**O que permanece aberto, sem mudança:** uma taxa explícita para
+Teorema A/C (condicional à hipótese (U'), ainda não provada); a lei de
+escala `γ\in(0,1)` (caracterizada, não provada); a forma fechada
+geral-`b` das constantes agudas em `b\ge2` (Estágio 9); Conjecturas
+1–2. **O Teorema 3 (Estágio 6) permanece inteiramente inafetado** —
+nunca dependeu desta frente.
+
+**Veredito honesto atualizado (ao fim do Estágio 11):** a linha
+`U_1/2` tem agora, além da forma fechada todas-as-ordens (Estágio 9) e
+da convergência uniforme incondicional (Estágio 10), o próprio perfil
+de erro (Teorema D/E) inteiramente incondicional — não resta mais
+nenhuma alegação "PROVED-MODULO" nesta linha. Resta, como obstrução
+central e única nomeada para uma taxa explícita uniforme-em-`K`: a
+hipótese (U'). Fontes completas:
+`uniform_in_c_attempt/mk_geometricity_attempt/ATTEMPT.md`,
+`uniform_in_c_attempt/mk_geometricity_attempt/adversarial/REFEREE_REPORT.md`.

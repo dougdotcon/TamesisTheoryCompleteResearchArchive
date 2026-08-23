@@ -1,0 +1,46 @@
+=== (i) Ratio test: the bound B(K):=phi_K(K+1)e^{K/2}+K grows like O((sqrt e)^K) ===
+sqrt(e) = 1.6487212707001281468486507878141635716537761007101
+Last 10 ratios B(K)/B(K-1), K=290..299: [1.6515590009422971, 1.6515492660186533, 1.6515395976585898, 1.6515299951817297, 1.6515204579169365, 1.6515109852021588, 1.6515015763842769, 1.651492230818952, 1.6514829478704802, 1.6514737269116475]
+Converging to sqrt(e)? max deviation in last 10: 0.0028377302421688953
+
+=== (ii)(a) Ratio test for sum_K c^K B(K)/K! at several c ===
+c=0.5: term(K)/term(K-1) at K=200 = 0.00413208 (should be << 1, confirming eventual geometric decay of the terms)
+c=1.0: term(K)/term(K-1) at K=200 = 0.00826416 (should be << 1, confirming eventual geometric decay of the terms)
+c=2.0: term(K)/term(K-1) at K=200 = 0.0165283 (should be << 1, confirming eventual geometric decay of the terms)
+c=5.0: term(K)/term(K-1) at K=200 = 0.0413208 (should be << 1, confirming eventual geometric decay of the terms)
+c=10.0: term(K)/term(K-1) at K=200 = 0.0826416 (should be << 1, confirming eventual geometric decay of the terms)
+c=50.0: term(K)/term(K-1) at K=200 = 0.413208 (should be << 1, confirming eventual geometric decay of the terms)
+
+=== (ii)(b) Direct partial sums of sum_K c^K B(K)/K! ===
+c=0.5: partial sum up to K=51 = 3.68520969551, last term = 2.17733e-70 (negligible -> converged)
+c=1.0: partial sum up to K=51 = 10.3954095978, last term = 4.90292e-55 (negligible -> converged)
+c=2.0: partial sum up to K=51 = 64.8852467513, last term = 1.10404e-39 (negligible -> converged)
+c=5.0: partial sum up to K=72 = 11006.3708191, last term = 1.13083e-37 (negligible -> converged)
+c=10.0: partial sum up to K=98 = 53849171.6471, last term = 1.78637e-34 (negligible -> converged)
+
+=== (iii) Does M_K / the domination requirement match Teorema E's stated need? ===
+
+Primary source, uniform_in_c_attempt/ATTEMPT.md Section 5.6 (read directly),
+states the requirement as:
+
+  "a bound |n(phi_n^{(K)}-phi_K)| <= M_K for every valid n, with
+   sum_K c^K M_K / K! < infinity  (using b_K(c) <= c^K/K!, already proved)."
+
+and Section 1 of the target document restates M_K's precise definition as:
+
+  M_K := sup_{n>=K+1} |n(phi_n^{(K)}-phi_K)|
+
+This is EXACTLY the quantity the target document's Theorem bounds
+(Section 2, "Theorem (qualitative geometric growth of M_K, PROVED)"):
+
+  M_K <= phi_K(K+1)e^{K/2}+K = O(K (sqrt e)^K)
+
+and Section 2.5 draws exactly the consequence
+sum_K c^K M_K/K! < infinity for every c>=0 that Section 5.6 names as
+sufficient. The match is definitional identity, not mere resemblance:
+both documents define M_K as the sup over n>=K+1 of |n(phi_n^{(K)}-phi_K)|,
+and both state the exact same series-convergence requirement
+sum_K c^K M_K/K! < infinity. No approximation or reinterpretation occurs.
+
+OVERALL: chain (i)-(iii) verified; ratio test confirms convergence of the
+dominating series for every finite c, matching Teorema E's stated requirement exactly.

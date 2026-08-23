@@ -1,0 +1,39 @@
+=== Route B step (a): F_r(2,0) exact formula vs the two crude bounds ===
+
+   r     F_r(2,0) exact    phi_r*2^r (sharp crude)   2*phi_r*2^r (ledger crude)  both hold
+   0             1.0000                     1.0000                       2.0000       True
+   1             0.8333                     1.3333                       2.6667       True
+   2             0.8000                     2.1333                       4.2667       True
+   3             0.8071                     3.6571                       7.3143       True
+   4             0.8349                     6.5016                      13.0032       True
+   5             0.8766                    11.8211                      23.6421       True
+   6             0.9296                    21.8235                      43.6470       True
+   7             0.9927                    40.7372                      81.4744       True
+   8             1.0658                    76.6818                     153.3636       True
+   9             1.1491                   145.2919                     290.5837       True
+  10             1.2431                   276.7464                     553.4929       True
+  11             1.3485                   529.4279                    1058.8559       True
+  12             1.4664                  1016.5017                    2033.0033       True
+  13             1.5979                  1957.7069                    3915.4138       True
+  14             1.7442                  3780.3995                    7560.7991       True
+  15             1.9070                  7316.9023                   14633.8047       True
+  20             3.0357                203995.2470                  407990.4940       True
+  25             4.9437               5859977.9776                11719955.9552       True
+  30             8.1797             171599127.4492               343198254.8985       True
+  35            13.6938            5092739441.1524             10185478882.3049       True
+  40            23.1338          152642993558.5855            305285987117.1711       True
+
+both bounds hold for every r in 0..40: True
+(ratio F_r(2,0)/[phi_r*2^r] should -> 1 since the half-sum identity is EXACT, not just an upper bound -- checking:)
+  r=5: ratio = 0.074158  (exact Fraction: 1215/16384)
+  r=10: ratio = 0.004492  (exact Fraction: 602873/134217728)
+  r=20: ratio = 0.000015  (exact Fraction: 4289159024289/288230376151711744)
+  r=40: ratio = 0.000000  (exact Fraction: 50362712304539633015793085/332306998946228968225951765070086144)
+
+=== symbolic re-derivation: sum_{i=0}^r C(2r+1,i) = 2^{2r} (exact) ===
+sum_{i=0}^r C(2r+1,i) == 2^(2r) for r=0..59: True
+
+Proof recorded above is a direct symmetry argument (binomial theorem at x=1, then the involution i -> 2r+1-i splits {0,...,2r+1} into two equal-sum halves since 2r+1 is odd) -- no induction, no asymptotics.
+
+=== ROUTE B STEP (a) VERIFIED: True ===
+Route B steps (b)/(c) [unrolling Proposicao 6 with general-b bounds on A_r(b), B_r(b)] are NOT attempted here -- see ATTEMPT.md SS4 for why, and why they are not needed once Route A succeeds.

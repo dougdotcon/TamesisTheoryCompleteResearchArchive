@@ -3177,3 +3177,87 @@ decisions:
       - "nenhuma frente toca Teorema 3 (Estagio 6), Teoremas A/C (Estagio 10) ou a forma fechada todas-as-ordens (Estagio 9) -- todos permanecem incondicionais e inafetados"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria/assintotica pura sobre objetos internos a este arquivo"
       - "ambas as frentes sao pesquisa aberta -- podem legitimamente nao fechar o alvo, e um nao-fechamento honesto e um resultado valido, nao uma falha"
+
+  - decision_id: DISC-DEC-052
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 12, frente (a)
+      (`MK-QUALITATIVE-GEOMETRICITY-ATTEMPT`, DISC-DEC-051), apos
+      verificacao adversarial hostil dedicada. O alvo era a unica
+      obstrucao nomeada restante para Teorema E (Estagio 10) ser
+      incondicional: uma prova escrita de que M_K :=
+      sup_{n>=K+1}|n(phi_n^(K)-phi_K)| cresce no maximo
+      geometricamente em K. A rota originalmente esbocada pelo referee
+      de Estagio 10 (desenrolar a recursao da Proposicao 6 de Estagio
+      8) foi verificada ate onde vai (seus passos algebricos checam),
+      mas exigiria um limitante geometrico geral-b para A_r(b),B_r(b)
+      que nao esta estabelecido em lugar nenhum do arquivo -- essa
+      rota permanece OPEN, nao foi forcada. Em vez disso, a frente
+      encontrou uma rota mais direta usando a forma fechada
+      todas-as-ordens do Estagio 9 (Corolario A1, ja PROVADA
+      incondicionalmente): tres passos elementares (monotonicidade via
+      positividade de polinomios simetricos elementares, localizando o
+      supremo em n=K+1; um limitante geometrico cru via 1+x<=e^x; e o
+      Lema A de reducao, ja provado, conectando psi_n^(K) a phi_n^(K)
+      usando apenas que ambas sao probabilidades) provam M_K <=
+      phi_K(K+1)e^(K/2)+K = O(K*(raiz de e)^K) -- geometrico,
+      incondicional, sem usar D_r(b), A_r(b), B_r(b) ou a Proposicao 6
+      em momento algum. Referee hostil dedicado re-derivou cada um dos
+      cinco passos do zero (nenhum arquivo .py da frente-alvo lido),
+      checou cada citacao contra as proprias fontes primarias (nao a
+      transcricao da frente-alvo), testou o passo mais critico
+      (monotonicidade) exaustivamente muito alem da faixa da propria
+      frente (50.399+24.430 pares exatos contra 18.299+7.960, 0
+      violacoes, argmax correto em 70/70 K testados) -- veredito SOUND,
+      "ACCEPT for catalogue", unico achado uma imprecisao de citacao
+      sem efeito matematico. Teorema E PERDE o rotulo PROVED-MODULO e
+      torna-se PROVADO, incondicional, em ambas as versoes (pontual e
+      uniforme). Isto NAO fecha a hipotese (U') nem "uma taxa
+      explicita para Teorema A/C" -- obstrucao genuinamente diferente
+      e mais forte (exige limitante UNIFORME em K, nao apenas
+      crescimento geometrico em K), que permanece aberta sem mudanca.
+      Correcoes datadas aplicadas em `uniform_in_c_attempt/ATTEMPT.md`
+      (5 pontos: sumario executivo, SS5.6, item 2 da lista "does not
+      close", linha do scorecard, preservando o original); "Estagio
+      11" anexado a THEOREM.md, com ponteiro datado no Estagio 10.
+      `PROOF_DEPENDENCY_MAP.md` (Arvore A) ganhou um adendo datado
+      (resultado downstream de Teo3, nenhuma aresta nova). README.md
+      NAO alterado -- verificado que sua mencao a "taxa de convergencia
+      explicita (condicional a uma hipotese de uniformidade nomeada e
+      nao provada)" refere-se especificamente a hipotese (U'), que
+      permanece aberta sem mudanca; nao ha mencao a Teorema E no README
+      a corrigir.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao: o referee atacou o
+      passo mais critico (a monotonicidade, nomeado pela propria
+      frente-alvo como o lugar certo para atacar primeiro) com
+      re-derivacao independente do zero e grade exaustiva muito alem
+      da faixa testada pela frente-alvo, e nao encontrou nenhum erro
+      que a afetasse. A sessao orquestradora tambem fez verificacao
+      independente propria (script de spot-check, confirmando
+      monotonicidade, argmax em n=K+1, o limitante geometrico cru, e a
+      identidade da meia-soma binomial) antes de despachar o referee.
+      Cuidado especial foi tomado para NAO confundir esta obstrucao
+      (geometricidade qualitativa de M_K, agora fechada) com a
+      hipotese (U') / "taxa explicita para Teorema A/C" (obstrucao
+      distinta e mais forte, ainda aberta) -- confirmado por leitura
+      direta de ambos os textos-fonte antes de escrever qualquer
+      correcao, especificamente para evitar overclaim por conflacao de
+      dois itens nomeados separadamente desde o proprio Estagio 10.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/mk_geometricity_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/mk_geometricity_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/ATTEMPT.md (5 correcoes datadas aplicadas)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 11 anexado, ponteiro em Estagio 10)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore A, adendo datado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Teorema E (Estagio 10) PROVADO incondicional em ambas as versoes -- perde o rotulo PROVED-MODULO"
+      - "geometricidade qualitativa de M_K PROVADA (crescimento no maximo O(K*(raiz de e)^K))"
+    untouched_safeguards:
+      - "Teorema 3 (Estagio 6), a taxa c_K (Estagio 7), a forma fechada de erro (Estagio 8), a forma fechada todas-as-ordens (Estagio 9), Teoremas A/C/D (Estagio 10) permanecem exatamente como provados -- usados aqui apenas por citacao, nenhum enfraquecido"
+      - "hipotese (U') / taxa explicita para Teorema A/C permanece aberta, sem mudanca -- explicitamente NAO fechada por este resultado, obstrucao distinta e mais forte"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria/assintotica pura sobre uma recursao discreta interna a este arquivo"

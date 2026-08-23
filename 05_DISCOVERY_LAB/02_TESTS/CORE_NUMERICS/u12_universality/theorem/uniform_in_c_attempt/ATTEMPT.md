@@ -36,7 +36,9 @@
 >    third is an exact Binomial-vs-Poisson identity proved here. The
 >    **coefficient-wise** version (each `c`-Taylor coefficient) is **PROVED**
 >    unconditionally (§5.4); the **uniform** version needs one named
->    interchange-of-limits step (§5.6) and is **PROVED-MODULO** that.
+>    interchange-of-limits step (§5.6) and is **PROVED-MODULO** that
+>    [ver adendo em §5.6 abaixo — este gap foi fechado em 2026-08-23,
+>    Teorema E agora incondicional].
 >    `e(c) = -c²/12 + c³/15 - …` near `0` and
 >    `e(c) = \sqrt{πc}/8 - ½ + O(\sqrt c\,e^{-c})` at large `c` — so the
 >    uniform-on-`[0,C]` error constant **grows exactly like `√C`**, answering
@@ -550,7 +552,35 @@ has proved qualitatively but not with an explicit constant.
 > fechar essa lacuna a partir de ingredientes já provados do Estágio 8 —
 > ver `adversarial/REFEREE_REPORT.md` §6.2, nota construtiva — que, se
 > bem-sucedida, tornaria Teorema E incondicional.) Corrigido aqui e no
-> Scorecard (item 12) e nas seções §8/§10 abaixo. It is nevertheless
+> Scorecard (item 12) e nas seções §8/§10 abaixo.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-052, GAP FECHADO.]** A rota
+> construtiva mencionada acima foi tentada (onda 12, frente (a),
+> `mk_geometricity_attempt/ATTEMPT.md`) — mas não pela rota Proposição-6
+> literalmente sugerida (que exigiria um limitante geométrico geral-`b`
+> para `A_r(b),B_r(b)` ainda não estabelecido em nenhum lugar do
+> arquivo, e permanece OPEN como questão separada). Uma rota mais direta,
+> usando a forma fechada todas-as-ordens do Estágio 9 (`ψ_n^{(K)}`,
+> Corolário A1) mais o Lema A de redução, prova
+> `M_K \le φ_K(K{+}1)e^{K/2}+K = O(K(\sqrt e)^K)` — geométrico,
+> qualquer `λ` serve, exatamente o que falta acima — de forma totalmente
+> elementar e incondicional. Verificado adversarialmente, veredito
+> **SOUND**, "ACCEPT for catalogue"
+> (`mk_geometricity_attempt/adversarial/REFEREE_REPORT.md`). **Teorema E
+> PERDE o rótulo PROVED-MODULO e torna-se PROVADO, incondicional, em
+> ambas as versões (pontual e uniforme).** Isto NÃO fecha a hipótese
+> (U') nem "uma taxa explícita para Teorema A/C" (§6.3 abaixo,
+> item 16) — são obstruções genuinamente diferentes: (U') exige
+> `|φ_n^{(K)}-φ_K|\le a\sqrt K/n` UNIFORME em `K` (um limitante que NÃO
+> cresce com `K`), enquanto o resultado aqui só precisa que `M_K` cresça
+> no máximo geometricamente em `K` (um limitante que CRESCE com `K`,
+> apenas não mais rápido que geométrico) — uma condição estritamente
+> mais fraca, suficiente para a soma `\Sigma_K c^K M_K/K!` convergir mas
+> insuficiente para um limitante explícito uniforme-em-`K`. Ver
+> `THEOREM.md` "Estágio 11" para o enunciado completo e
+> `mk_geometricity_attempt/ATTEMPT.md` para a prova.
+
+It is nevertheless
 
 **NUMERICALLY VERIFIED to high accuracy** (`probe_pointwise.log`,
 `probe_uniform.log`): at `c=0.5,1,2,5,10,25,60`, `n\,Δ_n(c)` agrees with `e(c)`
@@ -806,7 +836,11 @@ proved endpoint, and a quantified profile.
    2026-08-23, F-1: a lacuna não é "um limitante geométrico de constante
    explícita" — Estágio 8 Prop. 6 prova o limitante, não a geometricidade
    qualitativa de `M_K`, que é o que de fato falta; ver a correção completa
-   em §5.6 acima.]**
+   em §5.6 acima.]** **[Adendo datado, 2026-08-23, DISC-DEC-052: este item
+   FECHADO — a geometricidade qualitativa de `M_K` foi provada
+   (`mk_geometricity_attempt/ATTEMPT.md`, onda 12, SOUND adversarialmente).
+   Teorema E é agora incondicional, ambas as versões. Ver o adendo completo
+   em §5.6 acima e `THEOREM.md` "Estágio 11".]**
 3. **The `γ\in(0,1)` scaling law (7.1)** is characterized, not proved (§7.2).
 4. **`\sqrt n\sup_{[0,n]}|Δ_n|\to a^*`** and the `a^*` value: numerics +
    heuristic, not proved.
@@ -842,7 +876,7 @@ edit `THEOREM.md`.**
 | 9 | **Teorema D**: `n([c^j]φ(n,\cdot)-[c^j]φ_∞)\to e_j`, with `e_j` given by a finite `c_K`/`φ_K` alternating sum | **PROVED**, unconditional given Estágio 6/7; no interchange of limits (finite sums) |
 | 10 | `e_j=[c^j]e(c)` for `j=0,\dots,8`, both computed exactly and independently | **PROVED** for those `j` by exact symbolic/rational agreement; `e_0=e_1=0` cross-checks `THEOREM.md` Cor. 4.3 |
 | 11 | **Proposição 5.2**: `e_j=(-1)^{j+1}\frac{(j-1)^2}{2(2j-1)j!}`; `e(c)=\frac12\int_0^1\frac{1-(1+ct^2+c^2t^4)e^{-ct^2}}{t^2}dt`; `e(c)=\frac{\sqrt{πc}}8-\frac12+O(\sqrt c\,e^{-c})` | **PROVED** (resummation + three Gamma integrals); coefficient identity additionally machine-checked symbolically `j=1,\dots,11`; `\int_0^\infty=\sqrtπ/4` to 20 digits |
-| 12 | **Teorema E**: `n\,Δ_n(c)\to e(c)` and `n\sup_{[0,C]}\|Δ_n\|\to\sup_{[0,C]}\|e\|` | **PROVED-MODULO-[an explicit-constant geometric bound on `D_r(b)`]** (§5.6); **NUMERICALLY VERIFIED** to 4–5 digits at `n=10^5`, 7 values of `c` and 7 values of `C`, argmax location included — **[Correção pós-adversarial, 2026-08-23, F-1: o rótulo PROVED-MODULO está correto, mas a lacuna nomeada está errada — não é a constante explícita do limitante geométrico que falta, é a prova escrita da geometricidade *qualitativa* de `M_K` (Estágio 8 Prop. 6 prova apenas o limitante, não a geometricidade). Ver §5.6.]** |
+| 12 | **Teorema E**: `n\,Δ_n(c)\to e(c)` and `n\sup_{[0,C]}\|Δ_n\|\to\sup_{[0,C]}\|e\|` | **PROVED-MODULO-[an explicit-constant geometric bound on `D_r(b)`]** (§5.6); **NUMERICALLY VERIFIED** to 4–5 digits at `n=10^5`, 7 values of `c` and 7 values of `C`, argmax location included — **[Correção pós-adversarial, 2026-08-23, F-1: o rótulo PROVED-MODULO está correto, mas a lacuna nomeada está errada — não é a constante explícita do limitante geométrico que falta, é a prova escrita da geometricidade *qualitativa* de `M_K` (Estágio 8 Prop. 6 prova apenas o limitante, não a geometricidade). Ver §5.6.]** **[Adendo datado, 2026-08-23, DISC-DEC-052: status atualizado para PROVADO, incondicional — a geometricidade qualitativa de `M_K` foi provada e verificada adversarialmente (`mk_geometricity_attempt/`, onda 12). Ver §5.6.]** |
 | 13 | The uniform-on-`[0,C]` error constant grows like `\sqrt C`: `\sup_{[0,C]}\|e\|\sim\sqrt{πC}/8` | **PROVED** given item 11 (a statement about `e` alone); its identification *as* the limiting error constant inherits item 12's status |
 | 14 | **Lema 6.1**: `0\le e^{-x}-(1-x/n)^n\le\frac{x^2}ne^{-x}` for `n\ge4`, `0\le x\le n`; `κ_B=\sup c^2I_2(c)=0.280480169025…` | **PROVED**; scanned at `1.4\cdot10^4` points, max ratio `0.564` |
 | 15 | **Teorema B**: `(U'_a)\Rightarrow \sup_{[0,C]}\|Δ_n\|\le(a\sqrt C+κ_B)/n` | **PROVED given (U'_a)**; the bound with `a=1` holds with margin `\ge4` everywhere in the numerical scan |

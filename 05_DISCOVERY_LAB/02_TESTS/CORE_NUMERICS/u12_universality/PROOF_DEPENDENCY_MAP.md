@@ -118,6 +118,23 @@ desde 2026-08-22 (DISC-DEC-040), nesta cor.
 > resultado vive logicamente "a jusante" de `Teo3`, não dentro da
 > árvore. Ver `THEOREM.md` "Estágio 10" para o enunciado completo.
 
+> **[Adendo datado, 2026-08-23 — DISC-DEC-052, Estágio 11.]** Um novo
+> resultado, `uniform_in_c_attempt/mk_geometricity_attempt/ATTEMPT.md`,
+> adversarialmente confirmado (SOUND, "ACCEPT for catalogue"), prova
+> que `M_K` cresce no máximo geometricamente em `K`, fechando a única
+> obstrução nomeada para "Teorema E" (a versão uniforme do perfil de
+> erro de `Teo3`) ser incondicional — Teorema E perde o rótulo
+> PROVED-MODULO. Exatamente como o adendo de Estágio 10 acima: este é
+> um resultado *sobre* uma propriedade mais forte da mesma convergência
+> (`Teo3`), não uma nova aresta de dependência dentro da Árvore A — a
+> prova usa apenas a forma fechada todas-as-ordens (nó implícito de
+> Estágio 9, já refletido acima) e o Lema A de redução, nenhum novo nó
+> desta árvore. **Isto NÃO fecha "uma taxa explícita para Teorema A/C"**
+> (hipótese (U'), uma obstrução distinta e mais forte, que continua sem
+> prova) — os dois itens tinham sido nomeados separadamente em Estágio
+> 10 e continuam separados. Ver `THEOREM.md` "Estágio 11" para o
+> enunciado completo.
+
 **O ponto que este mapa existia para blindar, agora resolvido
 honestamente:** a Proposição 3 já estava provada, sem ressalva nenhuma,
 desde a §7.2 original (bem antes da onda 7) — ela nunca dependeu do

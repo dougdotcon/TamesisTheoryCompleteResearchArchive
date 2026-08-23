@@ -1,6 +1,15 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-23 (`DISC-DEC-046`: integração da onda
+**Última atualização:** 2026-08-23 (`DISC-DEC-047`: autorização da
+onda 11, em paralelo ao referee ainda pendente da onda 10 frente (a) —
+2 frentes matemáticas puras na linha U₁/₂, ambas reaberturas
+nomeadas como legítimas por decisões anteriores: (a)
+`UNIFORM-IN-C-TEOREMA-3-ATTEMPT`, tentando estabelecer se a
+convergência do Teorema 3 é uniforme em `c` sobre compactos; (b)
+`ALL-ORDERS-CLOSED-FORM-ATTEMPT`, buscando um quarto ponto de dados na
+sequência de multiplicadores da escada `F_r/G_r/H_r` para testar se há
+um padrão fechado geral-ordem. Ambas em andamento. Anterior:
+`DISC-DEC-046`: integração da onda
 10 frente (b) — `K-GENERAL-ERROR-CONSTANT-GROWTH-ATTEMPT` CONCLUÍDA e
 INTEGRADA, com correção pós-adversarial. Estendendo o `ε`-matching que
 produziu `F_r`/`G_r` mais uma ordem, forma fechada exata de `H_r(t,b)`

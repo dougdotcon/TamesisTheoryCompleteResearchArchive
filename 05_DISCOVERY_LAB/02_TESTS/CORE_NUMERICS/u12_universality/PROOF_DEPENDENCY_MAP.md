@@ -161,6 +161,10 @@ flowchart TD
 
     ELEV["Resíduo remanescente de φ_EPSR<br/>localizado em φ(cíclico│x₀∉R)<br/>(nível de elevação, SS5.3/SS5.6)<br/>χ²≈183, sem forma fechada —<br/><b>alvo da próxima frente</b>"]
 
+    ELEVMECH["Onda 10, frente (a) (DISC-DEC-050):<br/>mecanismo da elevação IDENTIFICADO<br/>λ(t) derivada, não é constante<br/><b>CONFIRMADO</b> pelo referee com<br/>simulador próprio (χ²=1925/67 bins,<br/>hazard=1/pool a ≈0,2%, 0 falhas<br/>de auditoria em 5,9×10⁸ passos)"]
+
+    REDB["φ_REDB (onda 10, correção do<br/>referee SS11 sobre φ_RED)<br/><b>NOVA FÓRMULA DE REGISTRO</b><br/>χ² teste-de-redução 334,6→101,4<br/>MAS resíduo real em c/n extremo<br/>(b=100,c=1000: z≈−10) —<br/><b>PARCIALMENTE FECHADO</b>"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -173,6 +177,8 @@ flowchart TD
     EPS --> EPSR
     EPS --> EXH
     EPSR --> ELEV
+    ELEV --> ELEVMECH
+    ELEVMECH --> REDB
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -184,6 +190,8 @@ flowchart TD
     style EPSR fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style EXH fill:#f0e5e8,stroke:#7a3b4a
     style ELEV fill:#f5ecd8,stroke:#96702a
+    style ELEVMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
+    style REDB fill:#f5ecd8,stroke:#96702a,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -196,6 +204,37 @@ flowchart TD
 > que não fechou o alvo mandatado (mas pode ter produzido achados
 > secundários genuínos, como aqui). Nenhuma aresta liga esta árvore à
 > Árvore A — permanece um objeto matemático inteiramente separado.
+
+> **[Adendo datado, 2026-08-23 — DISC-DEC-050.]** Onda 10 frente (a)
+> (`MCLUST-ELEVATION-LEVEL-ATTEMPT`) atacou exatamente o nó `ELEV`
+> acima e produziu dois resultados distintos, coloridos separadamente
+> porque têm status muito diferentes. **`ELEVMECH`** (verde — mecanismo
+> plenamente confirmado): a elevação de fechamento não é a constante
+> `P_lead=1/(1−ρ)` que toda fórmula anterior da linhagem assumia — é
+> uma função `λ(t)` da massa percorrida, derivada da mecânica exata do
+> passeio (o pool de imagens `U_rem` encolhe à mesma taxa em que é
+> consumido). Isto foi medido diretamente ao nível do mecanismo (sem
+> nenhuma fórmula `φ` envolvida) e **reproduzido de forma independente
+> pelo referee com seu próprio simulador e sementes próprias**
+> (χ²=1925/67 bins contra elevação constante; hazard=1/pool confirmado
+> a ≈0,2% por célula; zero falhas de auditoria em 5,9×10⁸ passos
+> normais). **`REDB`** (âmbar — melhoria parcial, não fechamento): a
+> candidata original desta frente, `φ_RED`, usava uma redução
+> `M-CLUST(b)|x₀∉R ≡ M-U(c(1−ρ),(1−ρ)n)` que o referee refutou a 7,5×
+> a precisão (χ² pooled 334,6, 6 células completas); a correção do
+> próprio referee (`φ_REDB`, argumento `c''=c(1−c/n)^{b−1}` em vez de
+> `c(1−ρ)`) reduz o χ² pooled para 101,4 e passa em 5 das 6 células
+> testadas — mas a sexta célula, a mais extrema já testada nesta linha
+> (`b=100,c=1000,ρ=0,785`), sozinha responde por ~96% do χ² restante,
+> com desvio de 1,2–1,3% (`z≈−10`), maior que a correção `O(c/n)`
+> esperada. `φ_REDB` é a nova fórmula de registro de M-CLUST(b),
+> substituindo `φ_EPSR` — mas o resíduo do nó `RES` (topo desta árvore)
+> **não está fechado**: fica registrado como um resíduo real e ainda
+> não modelado nos parâmetros extremos, exatamente o mesmo padrão de
+> fechamento parcial que `E2` (onda 7) e `AGG` (onda 7) já
+> estabeleceram para esta linha. Fontes:
+> `generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/ATTEMPT.md`
+> e `.../adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

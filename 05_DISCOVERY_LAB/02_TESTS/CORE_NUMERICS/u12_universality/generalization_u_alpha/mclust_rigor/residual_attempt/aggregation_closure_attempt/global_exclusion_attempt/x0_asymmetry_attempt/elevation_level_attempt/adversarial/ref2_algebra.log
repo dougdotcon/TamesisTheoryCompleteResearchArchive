@@ -1,0 +1,106 @@
+==============================================================================
+ref2_algebra.py  --  adversarial re-derivation of ATTEMPT.md algebra
+==============================================================================
+
+## 1. Section 2 densities -- symbolic identity check
+   (1-c/n)^(b-1) - (1-rho)/(1-c/n)  simplifies to: 0
+
+## 2. Section 4 direct algebraic check  H(t) = t^2/A
+   (1-q(s))/(A-s) simplifies to: 1/A
+   H(t) = t - (A-t)*Int  = t**2/A    (expect t**2/A)
+   difference from t^2/A: 0
+   integrand of phi_cond: exp(-c*t**2/A)/A
+   Int_0^A ... dt  - Int_0^1 exp(-cA u^2) du  = 0
+
+## 3. Section 6.3  --  delta correction
+   (1-q_delta(u))/(1-u) = -delta*u + 1    (expect 1 - delta*u)
+   H_delta(t) = -delta*t**3/2 + delta*t**2/2 + t**2
+   H_delta - [t^2 + (delta/2) t^2 (1-t)] = 0
+
+## 4. closed forms phi_U(c) and T_U(c)
+   phi_U(c') = sqrt(pi)*erf(sqrt(cp))/(2*sqrt(cp))
+   T_U(c')   = -1/(2*cp) + exp(-cp)/(2*cp) + sqrt(pi)*erf(sqrt(cp))/(2*sqrt(cp))
+   T_U - [phi_U - (1-exp(-c'))/(2c')] = 0
+
+## 5. closed form vs quadrature (mpmath, 50 dps)
+   c'=    0.5000  |phiU_cf-quad|=0.000e+00  |TU_cf-quad|=0.000e+00
+   c'=    5.0000  |phiU_cf-quad|=6.682e-52  |TU_cf-quad|=6.682e-52
+   c'=   29.4700  |phiU_cf-quad|=0.000e+00  |TU_cf-quad|=0.000e+00
+   c'=  216.8400  |phiU_cf-quad|=0.000e+00  |TU_cf-quad|=0.000e+00
+   c'= 1000.0000  |phiU_cf-quad|=0.000e+00  |TU_cf-quad|=0.000e+00
+
+## 6. phi_RED: the two printed forms of (5.1) agree?
+   b=   8 c=   10 n= 32768  phi_RED=0.2799758006  |form1-form2|=0.000e+00
+   b= 100 c=  400 n= 65536  phi_RED=0.0329927913  |form1-form2|=0.000e+00
+   b= 100 c=  600 n= 65536  phi_RED=0.0233713246  |form1-form2|=0.000e+00
+   b= 800 c=  100 n= 65536  phi_RED=0.0483735645  |form1-form2|=0.000e+00
+   b= 100 c= 1000 n= 65536  phi_RED=0.0139339704  |form1-form2|=2.088e-53
+
+## 7. n -> infinity at fixed (b,c):  phi_RED -> phi_U(c) ?
+   n=2^16  phi_RED=0.032992791289   phi_U(c)=0.044311346273   diff=-1.132e-02
+   n=2^20  phi_RED=0.043490796112   phi_U(c)=0.044311346273   diff=-8.206e-04
+   n=2^24  phi_RED=0.044259581869   phi_U(c)=0.044311346273   diff=-5.176e-05
+   n=2^28  phi_RED=0.044308109112   phi_U(c)=0.044311346273   diff=-3.237e-06
+   n=2^32  phi_RED=0.044311143943   phi_U(c)=0.044311346273   diff=-2.023e-07
+
+## 8. referee's matching analysis of the reduction (4.1)
+   M-CLUST(b) at (c,n) conditioned on x0 notin R:
+     world  |R^c|   = n(1-c/n)^b      pool |U_rem| = n(1-c/n)^(b-1)
+     reroute rate per normal step = |R cap U_rem|/|U_rem| = c/n  (exact)
+   M-U at (C,N): world = N-C, pool = N, rate = C/N
+
+   convention                        world err       pool err       rate err
+   b=50 c=400 n=65536  rho=0.2637  world=48254.48 pool=48550.81 rate=0.00610352
+      (4.1) N=(1-rho)n,C=c(1-rho)  world  -294.5220  pool  -296.3306  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -1.7976  pool    -1.8087  rate -1.044e-53
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +1.044e-53
+   b=100 c=400 n=65536  rho=0.4579  world=35530.01 pool=35748.20 rate=0.00610352
+      (4.1) N=(1-rho)n,C=c(1-rho)  world  -216.8580  pool  -218.1897  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -1.3236  pool    -1.3317  rate +1.044e-53
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +0.000e+00
+   b=100 c=600 n=65536  rho=0.6014  world=26124.03 pool=26365.41 rate=0.00915527
+      (4.1) N=(1-rho)n,C=c(1-rho)  world  -239.1726  pool  -241.3826  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -2.1897  pool    -2.2099  rate +0.000e+00
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +0.000e+00
+   b=200 c=150 n=65536  rho=0.3676  world=41442.68 pool=41537.75 rate=0.00228882
+      (4.1) N=(1-rho)n,C=c(1-rho)  world   -94.8548  pool   -95.0724  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -0.2171  pool    -0.2176  rate +0.000e+00
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +0.000e+00
+   b=300 c=150 n=65536  rho=0.4971  world=32955.79 pool=33031.40 rate=0.00228882
+      (4.1) N=(1-rho)n,C=c(1-rho)  world   -75.4298  pool   -75.6029  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -0.1726  pool    -0.1730  rate -5.220e-54
+      REF  N=n(1-c/n)^(b-1)        world    -0.0000  pool    +0.0000  rate +0.000e+00
+   b=400 c=100 n=65536  rho=0.4571  world=35579.94 pool=35634.31 rate=0.00152588
+      (4.1) N=(1-rho)n,C=c(1-rho)  world   -54.2907  pool   -54.3736  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -0.0828  pool    -0.0830  rate -2.610e-54
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +0.000e+00
+   b=100 c=1000 n=65536  rho=0.7851  world=14082.87 pool=14301.09 rate=0.0152588
+      (4.1) N=(1-rho)n,C=c(1-rho)  world  -214.8876  pool  -218.2173  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -3.2789  pool    -3.3297  rate +0.000e+00
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +2.088e-53
+   b=800 c=100 n=65536  rho=0.7053  world=19316.59 pool=19346.11 rate=0.00152588
+      (4.1) N=(1-rho)n,C=c(1-rho)  world   -29.4748  pool   -29.5198  rate +0.000e+00
+      alt  N=(1-rho)(n+c)          world    -0.0450  pool    -0.0450  rate +0.000e+00
+      REF  N=n(1-c/n)^(b-1)        world    +0.0000  pool    +0.0000  rate +0.000e+00
+
+## 9. effect of c' -> c'' = c(1-c/n)^(b-1) on phi_U (relative)
+   b=   8 c=   40 n= 32768  c/n=0.00122  c'=  39.6110 c''=  39.6595  dphi/phi=-0.0611%
+   b=  50 c=  400 n= 65536  c/n=0.00610  c'= 294.5220 c''= 296.3306  dphi/phi=-0.3056%
+   b= 100 c=  400 n= 65536  c/n=0.00610  c'= 216.8580 c''= 218.1897  dphi/phi=-0.3056%
+   b= 100 c=  600 n= 65536  c/n=0.00916  c'= 239.1726 c''= 241.3826  dphi/phi=-0.4588%
+   b= 300 c=  150 n= 65536  c/n=0.00229  c'=  75.4298 c''=  75.6029  dphi/phi=-0.1145%
+   b= 400 c=  100 n= 65536  c/n=0.00153  c'=  54.2907 c''=  54.3736  dphi/phi=-0.0763%
+   b= 200 c=  600 n= 65536  c/n=0.00916  c'=  95.3392 c''=  96.2202  dphi/phi=-0.4588%
+   b= 800 c=  100 n= 65536  c/n=0.00153  c'=  29.4748 c''=  29.5198  dphi/phi=-0.0763%
+   b= 100 c= 1000 n= 65536  c/n=0.01526  c'= 214.8876 c''= 218.2173  dphi/phi=-0.7659%
+   b= 400 c=  300 n= 65536  c/n=0.00458  c'=  47.8717 c''=  48.0918  dphi/phi=-0.2291%
+   b= 200 c=  800 n=131072  c/n=0.00610  c'= 235.1369 c''= 236.5809  dphi/phi=-0.3056%
+   b= 400 c=  400 n=131072  c/n=0.00305  c'= 117.7890 c''= 118.1496  dphi/phi=-0.1527%
+
+## 10. lambda(t) anchors
+   b= 100 c=  600  lambda(0)=2.4856808633  P_exact=2.4856808633  diff=0.00e+00   P_lead=2.5086482238
+   b= 400 c=  100  lambda(0)=1.8391263586  P_exact=1.8391263586  diff=0.00e+00   P_lead=1.8419369314
+   b=   8 c=  160  lambda(0)=1.0172579666  P_exact=1.0172579666  diff=0.00e+00   P_lead=1.0197475847
+
+## 11. growth rate  d ln lambda/dt |_0
+   d ln lambda/dt|0 = (1 - A)/A  with A=1-rho -> -rho/(rho - 1)

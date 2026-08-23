@@ -1,0 +1,128 @@
+==============================================================================
+ref2_tables.py -- arithmetic audit of ATTEMPT.md tables
+==============================================================================
+
+## A. section 9 (T4) -- rho, bc/n, dev%/z consistency, and the referee's
+##    own independent evaluation of the four formulas
+
+   cell                         rho      bc/n | per-formula checks
+   n= 32768 b=   8 c=   10 rho=0.0024 |
+   n= 32768 b=   8 c=   40 rho=0.0097 |
+   n= 32768 b=   8 c=  160 rho=0.0384 |
+   n= 65536 b=  50 c=   10 rho=0.0076 |
+   n= 65536 b=  50 c=   50 rho=0.0374 |
+   n= 65536 b=  50 c=  150 rho=0.1083 |
+   n= 65536 b=  50 c=  400 rho=0.2637 |
+   n= 65536 b= 100 c=   10 rho=0.0151 |
+   n= 65536 b= 100 c=   50 rho=0.0735 |
+   n= 65536 b= 100 c=  150 rho=0.2048 |
+   n= 65536 b= 100 c=  400 rho=0.4579 |
+   n= 65536 b= 100 c=  600 rho=0.6014 |
+   n= 65536 b= 200 c=    5 rho=0.0151 |
+   n= 65536 b= 200 c=   20 rho=0.0592 |
+   n= 65536 b= 200 c=   60 rho=0.1674 |
+   n= 65536 b= 200 c=  150 rho=0.3676 |
+   n= 65536 b= 300 c=  150 rho=0.4971 |
+   n= 65536 b= 400 c=  100 rho=0.4571 |
+   n= 65536 b= 200 c=  600 rho=0.8411 |
+   n= 65536 b= 800 c=  100 rho=0.7053 |
+   n= 65536 b= 100 c= 1000 rho=0.7851 |
+   n= 65536 b= 400 c=  300 rho=0.8404 |
+   n=131072 b= 200 c=  800 rho=0.7061 |
+   n=131072 b= 400 c=  400 rho=0.7055 |
+
+   rho / bc/n mismatches   : 0
+   z-vs-(dev,sem) mismatches: 0  (tolerance 6% of z, floor 0.02)
+   referee's own formula value vs the value implied by (phi_mc,dev%): 0 cells beyond 3e-4 relative
+
+   chi2 recomputed from the printed z, standard 18 cells:
+      CAND      324.72   (printed 324.66)
+      EPSR      181.47   (printed 181.5)
+      RED        30.21   (printed 30.2)
+      RED2       26.95   (printed 26.97)
+   chi2 recomputed from the printed z, all 24 cells:
+      CAND     1932.10   (printed 1931.87)
+      EPSR      602.73   (printed 602.62)
+      RED        64.78   (printed 64.79)
+      RED2       40.67   (printed 40.71)
+   'formula BELOW the MC mean' counts (dev%%>0), 24 cells:
+      CAND  23/24   (printed 23/24)
+      EPSR  20/24   (printed 20/24)
+      RED   11/24   (printed 11/24)
+      RED2  15/24   (printed 15/24)
+
+## B. section 10 -- the seven-grid pooled table
+   cells          132   (printed 132)
+   chi2 CAND     2923.30   (printed 2923.29)
+   chi2 EPSR     1149.83   (printed 1149.82)
+   chi2 RED       183.34   (printed 183.33)
+   chi2 RED2      160.11   (printed 160.1)
+   below CAND     115/132  (printed 115/132)
+   below EPSR     108/132  (printed 108/132)
+   below RED       75/132  (printed 75/132)
+   'standard grids only' (126 cells) =  pooled - (fresh24 - fresh18):
+      CAND     1316.16   (printed 1316.08)
+      EPSR      728.68   (printed 728.7)
+      RED       148.76   (printed 148.74)
+      RED2      146.35   (printed 146.36)
+   sign test on 75/132: z = 1.567 (printed '1.5 sigma')
+   sign test on 115/132: z = 8.53 -> p ~ 7.3e-18 (printed 1e-17)
+   sign test on 108/132: z = 7.31 -> p ~ 1.3e-13 (printed 1e-13)
+
+## B2. section 10 median/max |dev%| on the 24-cell fresh grid only
+   CAND  median|dev| = 1.543  max|dev| = 8.253  (the printed table is over all 132 cells, so only max is directly comparable: printed max 8.253)
+   EPSR  median|dev| = 0.861  max|dev| = 6.404  (the printed table is over all 132 cells, so only max is directly comparable: printed max 6.404)
+   RED   median|dev| = 0.371  max|dev| = 1.217  (the printed table is over all 132 cells, so only max is directly comparable: printed max 2.168)
+   RED2  median|dev| = 0.232  max|dev| = 1.320  (the printed table is over all 132 cells, so only max is directly comparable: printed max 2.186)
+
+## C. section 7.3 -- pooled chi2 of the per-bin elevation
+   bins  56   (printed 56)
+   chi2 vs constant P_lead = 2473.4   (printed 2473.4)
+   chi2 vs lambda(t) (3.1) = 50.9   (printed 50.9)
+
+## D. section 7.2 -- ratio table: z consistency and the claimed scatter
+   z mismatches: 0
+   scatter about the mean (ddof=1) = 0.00181 ; rms about 1.0 = 0.00170 ; mean sem = 0.00119
+   -> scatter/sem = 1.52 (about mean) or 1.42 (about 1); the document states 'scatter across cells (0.0022) is about 1.8x the quoted sems'
+
+## E. section 8 -- chi2 = sum z^2, and the z of the continuum column
+   chi2 vs measured M-U (n'=(1-rho)n)      = 3.83  (printed 3.83)
+   chi2 vs measured M-U (n'=(1-rho)(n+c))  = 3.95  (printed 3.93)
+   chi2 vs continuum phi_U(c(1-rho))       = 5.44  (printed 5.47)
+
+   continuum column: printed phi_U(c(1-rho)) vs the referee's own value,
+   and the z that follows from the M-CLUST sem alone:
+      b= 50 c= 400  printed cont 0.051640  referee 0.051640  (rel -3.43e-07)  z_from_sem +0.12  printed z +0.12
+      b=100 c= 400  printed cont 0.060181  referee 0.060181  (rel -5.01e-06)  z_from_sem +0.59  printed z +0.59
+      b=100 c= 600  printed cont 0.057305  referee 0.057305  (rel -7.64e-06)  z_from_sem -2.09  printed z -2.08
+      b=200 c= 150  printed cont 0.090995  referee 0.090995  (rel -4.99e-06)  z_from_sem +0.46  printed z +0.46
+      b=300 c= 150  printed cont 0.102041  referee 0.102041  (rel -3.04e-06)  z_from_sem -0.60  printed z -0.59
+      b=400 c= 100  printed cont 0.120277  referee 0.120277  (rel -6.19e-07)  z_from_sem -0.44  printed z -0.44
+
+   the two 'measured M-U' columns use a COMBINED sem that the document
+   does not print (the M-U sems are absent), so those z cannot be
+   audited from the table alone; implied sem_diff:
+      b= 50 c= 400  implied sem_diff(A) = 0.000189  (M-CLUST sem alone = 0.000133)
+      b=100 c= 400  implied sem_diff(A) = 0.000221  (M-CLUST sem alone = 0.000157)
+      b=100 c= 600  implied sem_diff(A) = 0.000213  (M-CLUST sem alone = 0.000152)
+      b=200 c= 150  implied sem_diff(A) = 0.000367  (M-CLUST sem alone = 0.000237)
+      b=400 c= 100  implied sem_diff(A) = 0.000443  (M-CLUST sem alone = 0.000313)
+
+## F. section 7.1 -- does the printed 'lambda model (3.1)' column fall
+##    inside the lambda(t) range of its own printed mass bin?
+##    (a value OUTSIDE that range proves the column is NOT the closed
+##     form (3.1) but the per-step EMPIRICAL pool ratio sum(we)/sum(wm))
+   b=100 c=600 n=65536  (P_lead=2.5086, lambda(0)=2.4857)
+      bin [0.000,0.005]  printed 2.4951   lambda range [2.4857,2.5037]  inside
+      bin [0.005,0.010]  printed 2.5122   lambda range [2.5037,2.5221]  inside
+      bin [0.010,0.020]  printed 2.5362   lambda range [2.5221,2.5604]  inside
+      bin [0.020,0.035]  printed 2.5721   lambda range [2.5604,2.6216]  inside
+      bin [0.035,0.060]  printed 2.6174   lambda range [2.6216,2.7353]  inside
+      bin [0.060,0.100]  printed 2.6684   lambda range [2.7353,2.9552]  **OUTSIDE**
+   b=400 c=100 n=65536  (P_lead=1.8419, lambda(0)=1.8391)
+      bin [0.000,0.005]  printed 1.8481   lambda range [1.8391,1.8469]  inside
+      bin [0.010,0.020]  printed 1.8667   lambda range [1.8548,1.8710]  inside
+      bin [0.035,0.060]  printed 1.9101   lambda range [1.8965,1.9425]  inside
+      bin [0.060,0.100]  printed 1.9434   lambda range [1.9425,2.0270]  inside
+      bin [0.100,0.180]  printed 1.9797   lambda range [2.0270,2.2513]  **OUTSIDE**
+      bin [0.180,1.000]  printed 2.0400   lambda range [2.2513,11.0772]  **OUTSIDE**

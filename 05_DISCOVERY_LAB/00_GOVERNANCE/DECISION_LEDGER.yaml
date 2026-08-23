@@ -2994,3 +2994,120 @@ decisions:
       - "Teorema 3 (Estagio 6, DISC-DEC-040) permanece inteiramente incondicional e inafetado -- nunca dependeu desta frente"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria/analitica pura sobre uma recursao discreta interna a este arquivo"
       - "taxa explicita para Teorema A/C permanece condicional a hipotese (U'), nomeada explicitamente como a unica obstrucao; lei de escala gamma em (0,1) permanece caracterizada, nao provada; Conjecturas 1-2 permanecem abertas"
+
+  - decision_id: DISC-DEC-050
+    date: 2026-08-23
+    decision: >
+      Integrar o resultado da onda 10, frente (a)
+      (`MCLUST-ELEVATION-LEVEL-ATTEMPT`, DISC-DEC-045), apos
+      verificacao adversarial hostil dedicada -- concluida em duas
+      etapas: um referee independente escreveu um relatorio quase
+      completo mas deixou dois placeholders de template vazios (o
+      veredito de topo e a tabela do teste de reducao) e 2 das 6
+      celulas do teste de reducao inacabadas (cortadas no meio da
+      execucao); a sessao orquestradora despachou um segundo agente
+      para terminar exatamente esse trabalho pre-registrado e
+      pre-semeado (nao uma nova revisao) antes de aceitar qualquer
+      conclusao. VEREDITO CINDIDO. (A) O MECANISMO da elevacao --
+      a elevacao de fechamento nao e a constante P_lead=1/(1-rho) que
+      toda formula anterior da linhagem assumia, e sim uma funcao
+      lambda(t) da massa percorrida, porque o pool de imagens U_rem
+      encolhe na mesma taxa em que e consumido -- foi CONFIRMADO de
+      forma independente e decisiva: o referee reproduziu a refutacao
+      da elevacao constante com simulador proprio, sementes proprias
+      e um grid de bins diferente (chi^2=1925/67 bins contra elevacao
+      constante, confirmando o chi^2=2473/56 do documento-alvo) e
+      confirmou o mecanismo hazard=1/pool a ~0,2% por celula, com zero
+      falhas de auditoria em 5,91e8 passos normais do passeio. Esta e
+      a evidencia mais forte de toda a frente e nao depende de nenhuma
+      formula phi. (B) A REDUCAO M-CLUST(b)|x0 nao em R = M-U(c(1-rho),
+      (1-rho)n), como literalmente declarada pelo documento-alvo (eq.
+      4.1) e usada para construir a formula candidata phi_RED, foi
+      REFUTADA por um re-teste a 7,5x a precisao do alvo (300.000/
+      400.000 instancias contra 40.000), agora completo nas 6 celulas
+      pre-registradas: chi^2 pooled = 334,6 contra M-U medido,
+      discrepancia crescendo com rho e c/n -- exatamente o criterio de
+      refutacao que o proprio documento pre-registrou para este teste.
+      O erro esta nos PARAMETROS da reducao (c'=c(1-rho) subestima o
+      "mundo" e o "pool de imagem" em ~c(1-rho) pontos), nao no
+      mecanismo. (C) A CORRECAO do proprio referee (SS11) -- trocar
+      c'=c(1-rho) por c''=c(1-c/n)^(b-1) = c/P_exact (a constante de
+      agregacao ja estabelecida na onda 8), dando a formula corrigida
+      phi_REDB -- melhora substancialmente: chi^2 pooled do teste de
+      reducao cai de 334,6 para 101,4 (~3,3x), com 5 das 6 celulas a
+      |z|<=1,5. MAS a correcao nao fecha o residuo por completo: a
+      sexta celula, a mais extrema ja testada nesta linha (b=100,
+      c=1000, rho=0,785, o maior c/n do grid), sozinha fornece ~96% do
+      chi^2 pooled restante de phi_REDB, com desvio de 1,2-1,3%
+      (z~-10) -- maior que a correcao O(c/n) de ~0,77% estimada para
+      essa celula, indicando um residuo real e ainda nao modelado nos
+      parametros mais extremos (consistente com o efeito O(b^2*c/n^2)
+      de ciclos-pi curtos que o proprio referee identificou como uma
+      segunda imprecisao do documento, SS3.2). O referee tambem
+      encontrou e corrigiu tres erros adicionais no documento-alvo:
+      a afirmacao de "duas densidades exatas" na SS2 nao e exata
+      (erro relativo O(b^2*c/n^2), ate +1,17% nas celulas extremas);
+      a alegacao "reducao exata linha por linha exceto na lei de
+      morte" na SS6.3 e falsa (a linha do pool de imagem tambem e
+      inexata, na mesma ordem); e a coluna impressa "lambda model
+      (3.1)" nas tabelas da SS7.1 esta rotulada incorretamente (e a
+      razao do pool medido passo-a-passo, nao a forma fechada 3.1 --
+      visivel nos proprios numeros impressos, que caem fora do
+      intervalo que a forma fechada permite dentro do proprio bin).
+      A sessao orquestradora aplicou 6 correcoes datadas em
+      `elevation_level_attempt/ATTEMPT.md` (preservando o original,
+      nunca reescrevendo por cima): SS2 (densidades nao-exatas), SS5
+      (phi_RED superseded por phi_REDB, com a formula completa), SS6.3
+      (linha do pool de imagem tambem inexata), SS7 (rotulo da coluna
+      "lambda model 3.1"), SS12 (veredito, apontando as 5 conclusoes
+      corrigidas), SS13 (scorecard, 3 linhas substituidas por uma
+      tabela de correcao). `phi_REDB` -- nao `phi_RED` como
+      originalmente declarado -- e adotada como a NOVA formula de
+      registro de M-CLUST(b), substituindo `phi_EPSR` (DISC-DEC-044).
+      `PROOF_DEPENDENCY_MAP.md` (Arvore B) ganha dois nos novos
+      (ELEVMECH, verde, mecanismo confirmado; REDB, ambar, melhoria
+      parcial) e um adendo datado explicando por que tem cores
+      diferentes.
+    rationale: >
+      A revisao adversarial mandatoria desta linha (M-CLUST(b) residual,
+      DISC-DEC-033) exige reproducao independente completa antes de
+      qualquer catalogacao -- e a primeira tentativa de relatorio,
+      embora cientificamente completa em quase todos os pontos (SS1-4,
+      SS6-10 do relatorio), estava genuinamente incompleta: dois
+      placeholders de template vazios e 2 de 6 celulas do teste central
+      (T3, "the central negative finding" nas proprias palavras do
+      referee) inacabadas. Tratar esse relatorio como "recebido e
+      processado" teria violado a disciplina de honestidade do
+      laboratorio tao seriamente quanto aceitar um resultado positivo
+      sem nenhuma revisao adversarial. A sessao orquestradora, ao
+      inves de aceitar o relatorio parcial ou redespachar uma revisao
+      inteiramente nova (redundante -- 90% do trabalho ja estava
+      completo e correto), despachou um agente para terminar
+      exatamente o computo pre-registrado e pre-semeado que faltava
+      (mesmas sementes SeedSequence(20260824920+indice), mesma
+      contagem de instancias, nenhuma reducao de escopo para economizar
+      tempo) e escrever apenas os dois placeholders, usando somente
+      dados agora completos e conclusoes ja argumentadas no corpo do
+      relatorio -- nao uma nova analise. O resultado dessa conclusao
+      (a sexta celula, mais extrema, refutando mesmo phi_REDB) e
+      precisamente o tipo de achado negativo que esta disciplina existe
+      para preservar: o agente que completou o relatorio sinalizou-o
+      explicitamente ao inves de suaviza-lo, e a integracao aqui faz o
+      mesmo -- phi_REDB e adotada como melhoria real e verificada, nao
+      como fechamento completo.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/ATTEMPT.md (integrado, 6 correcoes datadas aplicadas)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/adversarial/ (referee hostil, completado em duas etapas)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore B, dois nos novos + adendo)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "mecanismo da elevacao de fechamento M-CLUST(b) IDENTIFICADO e CONFIRMADO independentemente: lambda(t), funcao da massa percorrida, nao constante"
+      - "phi_REDB adotada como nova formula de registro de M-CLUST(b), substituindo phi_EPSR (DISC-DEC-044) -- chi^2 do teste de reducao 334,6->101,4"
+      - "residuo M-CLUST(b) permanece PARCIALMENTE FECHADO, nao fechado: celula extrema b=100,c=1000 refuta mesmo phi_REDB (z~-10), residuo real registrado como item aberto"
+    untouched_safeguards:
+      - "classificacao M-CLUST(b) em U_{1/2} no limite n->infinito permanece inteiramente inafetada -- phi_REDB -> phi_U(c) exatamente como phi_RED e phi_EPSR antes dela"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura sobre um mecanismo alternativo interno a este arquivo"
+      - "wave 4's q_CLUST(s)=s/(1-rho) e taxa de encontro c permanecem usadas sem contradicao; refutacao da onda 4 do c_eff da onda 3 permanece valida (SS9.2 do referee)"

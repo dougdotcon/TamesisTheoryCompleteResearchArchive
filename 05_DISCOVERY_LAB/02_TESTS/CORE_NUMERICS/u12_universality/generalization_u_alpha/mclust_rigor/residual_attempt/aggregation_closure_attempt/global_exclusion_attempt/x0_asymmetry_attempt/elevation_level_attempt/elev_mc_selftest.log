@@ -1,0 +1,21 @@
+== cyclic set: squaring vs peeling vs brute force (n small) ==
+  [ok ] 300 random small maps agree on all three algorithms
+== R: forward block painting vs backward membership test ==
+  [ok ] n=4096 b=1 c=50.0: 0 mismatches / 30
+  [ok ] n=4096 b=8 c=40.0: 0 mismatches / 30
+  [ok ] n=8192 b=50 c=150.0: 0 mismatches / 30
+  [ok ] n=8192 b=200 c=60.0: 0 mismatches / 30
+== densities: |R|/n vs rho, run starts vs rho_start, |U_rem|/n vs (1-c/n)^(b-1) ==
+  b= 100 c=   400: rho 0.458687+-0.000869 vs 0.457855 (z=+0.96) | rho_start 3.3037e-03+-6.3e-06 vs 3.3090e-03 (z=-0.83) | |U_rem|/n 0.544638+-0.000865 vs 0.545474 (z=-0.97)
+  b= 300 c=   150: rho 0.498916+-0.001580 vs 0.497134 (z=+1.13) | rho_start 1.1478e-03+-3.7e-06 vs 1.1510e-03 (z=-0.86) | |U_rem|/n 0.502234+-0.001578 vs 0.504019 (z=-1.13)
+  b= 400 c=   100: rho 0.459307+-0.001883 vs 0.457093 (z=+1.18) | rho_start 8.2832e-04+-3.3e-06 vs 8.2841e-04 (z=-0.03) | |U_rem|/n 0.541523+-0.001881 vs 0.543736 (z=-1.18)
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/elev_mc.py:271: RuntimeWarning: invalid value encountered in scalar divide
+  f" | |U_rem|/n {acc[2]:.6f}+-{sem[2]:.6f} vs {pu:.6f} (z={(acc[2]-pu)/sem[2]:+.2f})")
+  b=   1 c=    50: rho 0.000756+-0.000006 vs 0.000763 (z=-1.28) | rho_start 7.5516e-04+-5.6e-06 vs 7.6236e-04 (z=-1.29) | |U_rem|/n 1.000000+-0.000000 vs 1.000000 (z=+nan)
+/home/user/TamesisTheoryCompleteResearchArchive/05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/elev_mc.py:273: RuntimeWarning: invalid value encountered in scalar divide
+  z = (acc[i] - want) / sem[i]
+== shadowing: x notin R  =>  pi(x) notin R\RunStarts, and pi(x) in U_rem ==
+  [ok ] b=100 c=400.0: pi(R^c) subset of U_rem and meets R only at run starts
+  [ok ] b=300 c=150.0: pi(R^c) subset of U_rem and meets R only at run starts
+
+SELFTEST: PASS

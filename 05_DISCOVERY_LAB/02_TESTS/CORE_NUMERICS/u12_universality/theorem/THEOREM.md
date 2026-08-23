@@ -2085,3 +2085,120 @@ em `r`; versão uniforme-em-`c` do Teorema 3; Conjecturas 1–2. Fontes
 completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/ATTEMPT.md`,
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/rate_coefficient_positivity_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 8 — 2026-08-23]
+
+**Onda 10, frente (b), `DISC-DEC-045`/`DISC-DEC-046`
+(`K-GENERAL-ERROR-CONSTANT-GROWTH-ATTEMPT`).** Alvo: item **(ii)** da
+lista "o que permanece aberto" do Estágio 6/7 — a taxa de crescimento
+em `r` das constantes de erro `D_r(b),C_r(b)` da prova de existência
+geral-`K` (Estágio 6), nomeada mas não perseguida ali, com a folga
+observada entre limitante provado e valor real já flagrante (`0,78`
+observado contra `174` de limitante em `r=6`).
+
+### O que foi provado
+
+Estendendo o mesmo `ε`-matching que produziu `F_r` (ordem `1`) e `G_r`
+(ordem `1/n`) mais uma ordem, obtém-se o par `(H_r,L_r)` (ordem
+`1/n²`), com `H_r(t,b)` em forma fechada exata:
+
+> **Teorema 1:** `\displaystyle H_r(t,b) =
+> \sum_{k=0}^{r-2}\frac{(3k+8)(k+1)(k+2)(k+3)}{24}\cdot\frac{r!}{(r-k-2)!}\cdot\frac{t^k}{\prod_{i=1}^{k+3}(r+b+i)}`,
+> todo coeficiente positivo, logo `\max_{[0,1]}|H_r|=H_r(1,b)=:D^*_r(b)`
+> a todo `n` (grade inclui `t=1` sempre — nenhum argumento de
+> densidade necessário).
+
+O resíduo de três termos existe e é `O(1/n^3)` uniformemente (mesmo
+argumento discreto-Gronwall do Estágio 6/7, uma ordem acima — o único
+insumo novo é o bracket de ordem `h^2` anular-se, que **é** a EDO de
+`H_r`), logo `D^*_r(b)=\lim_n\max_m n^2|R_r|` de fato. Em `b=0`:
+
+> **Teorema 3:** `\displaystyle D^*_r(0) = \frac{r(3r+1)}{32}\varphi_r
+> - \frac r{12}` exatamente, `\varphi_r=4^r(r!)^2/(2r{+}1)!`.
+> `D^*_0(0)=D^*_1(0)=0` exatamente — a razão estrutural de `R_1≡0`
+> (mesmo sabor de degenerescência de `c_1=0` no Estágio 7).
+
+Para `b≥1`, o referee hostil desta frente derivou uma forma fechada
+exata **para todo `b`** (Teorema 3′, não reproduzida aqui por
+extensão — ver `adversarial/REFEREE_REPORT.md` Parte 3.3), da qual
+segue algebricamente, sem estimativa assintótica:
+
+> **Teorema 4 (taxa de crescimento, corrigido, todo `b` fixo):**
+> `\displaystyle D^*_r(b) = \frac{3\sqrt\pi}{64}r^{3/2} -
+> \frac{(3b{+}2)r}{24} + \frac{\sqrt\pi}{48}\Big[\tfrac{45}{16}\beta^2
+> -\tfrac{15}{16}\beta-\tfrac{63}{32}\Big]r^{1/2} + O(1)`, `\beta:=b{+}1`
+> — em particular `D^*_r(b)=\Theta(r^{3/2})` com constante líder
+> `3\sqrt\pi/64=0{,}0830837742611961\ldots`, **a mesma para todo `b`
+> fixo, agora PROVADA incondicionalmente** (não apenas
+> "PROVED-MODULO" — item (ii) do Estágio 6/7 estava certo em desconfiar
+> que faltava rigor ali, e o referee fechou exatamente esse buraco).
+
+O limitante já publicado (Estágio 6) é, em contraste, **fatorial**:
+`D_r(b),C_r(b)` crescem com `D_r/D_{r-1}\approx r`
+(`7{,}1\times10^{30}` contra o valor real `11{,}13` em `r=30`). A
+folga decompõe-se em dois mecanismos localizados e separadamente
+tratáveis: um fator `1/n` descartado no §6 do documento de existência
+geral-`K`, corrigível por uma mudança de uma linha usando a própria
+hipótese padrão `n≥b{+}r{+}1` do teorema, tornando o limitante
+geométrico em vez de fatorial (**Proposição 6, PROVADA e rigorosa**,
+taxa medida `≈1{,}24` em `r=45`); e um custo de norma-soma-de-coeficientes
+de `Θ((9/8)^r)` (**Lema 7, PROVADO**), não removido.
+
+### Correção pós-adversarial nos termos subordinados
+
+O referee hostil desta frente (agente independente, re-derivação
+completa do zero — próprio `ε`-matching, próprio simulador, próprias
+identidades binomiais — antes de ler o documento-alvo) confirmou **sem
+ressalva** o núcleo inteiro: a EDO de `H_r`, a relação `L_r`, o
+Teorema 1, o Teorema 2 (existência de três termos), o Teorema 3, os
+Corolários 1a/2a/3a, o Lema 7 e a Proposição 6 — todos re-derivados
+independentemente e reproduzidos exatamente (milhares de checagens
+exatas, `0` divergências; ver `adversarial/REFEREE_REPORT.md` Partes
+1–5). Mas encontrou **dois erros reais nos termos subordinados do
+Teorema 4 conforme originalmente publicados** neste documento: o
+coeficiente do termo `r^{1/2}` a `b=0` estava com sinal e magnitude
+errados (`+\sqrt\pi/128` publicado; correto `-\sqrt\pi/512` — os
+próprios números do documento já refutavam o sinal publicado), e o
+termo linear a `b≥1` fora tratado como `b`-independente (`-r/12`)
+quando na verdade é `-(3b{+}2)r/24`, um erro `Θ(br)`. **A conclusão
+`Θ(r^{3/2})` com constante líder `3\sqrt\pi/64` sobrevive intacta e é
+agora, graças à forma fechada geral-`b` do próprio referee, PROVADA
+sem condição** — o enunciado acima já incorpora as duas correções.
+Ambas foram verificadas de forma independente pela sessão
+orquestradora (soma vetorizada em ponto flutuante da fórmula do
+Teorema 1, `r` até `2\times10^7`) antes da integração. Correções
+datadas equivalentes foram registradas no próprio
+`error_constant_growth_attempt/ATTEMPT.md`.
+
+### O que isto muda, precisamente
+
+**O item (ii) da lista "o que permanece aberto" do Estágio 6/7 está
+FECHADO.** A taxa de crescimento em `r` das constantes de erro tem
+agora forma fechada exata a `b=0` e todo `b`, taxa assintótica exata
+`Θ(r^{3/2})` com constante líder `b`-independente provada
+incondicionalmente, e a origem precisa da folga entre o limitante
+publicado (fatorial) e o valor verdadeiro está identificada em dois
+mecanismos nomeados, um deles corrigido rigorosamente (Proposição 6).
+
+**O que permanece aberto, sem mudança:** os demais itens do Estágio
+6/7 — (i) forma fechada exata todas-as-ordens geral-`K`; (iv) versão
+uniforme-em-`c` do Teorema 3; (v) Conjecturas 1–2 — mais, dentro do
+escopo desta própria frente: um limitante rigoroso polinomial-em-`r`
+(a Proposição 6 chega a geométrico, não polinomial — dois obstáculos
+nomeados no próprio documento); se `S_r(b)/D^*_r(b)` é limitado
+(caracterizado numericamente como crescente até `r=150`, não provado
+limitado); a taxa exata do limitante melhorado `D'_r(b)` (medida
+`≈1{,}24` decrescendo, convergência para `9/8` plausível não provada).
+**O Teorema 3 (Estágio 6) permanece inteiramente inafetado** — nunca
+dependeu desta frente.
+
+**Veredito honesto atualizado (ao fim do Estágio 8):** tudo do Estágio
+6/7, mais **a taxa exata de crescimento das constantes de erro
+`D_r(b),C_r(b)` agora completamente determinada**: forma fechada em
+`b=0` e geral-`b`, `Θ(r^{3/2})` provado incondicionalmente para todo
+`b` fixo, com os dois erros do Teorema 4 originalmente publicado
+corrigidos por verificação adversarial. Fontes completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/ATTEMPT.md`,
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/adversarial/REFEREE_REPORT.md`.

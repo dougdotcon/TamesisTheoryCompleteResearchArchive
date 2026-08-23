@@ -1,0 +1,69 @@
+==============================================================================
+STEP 7  residual audit points
+==============================================================================
+
+(7a) Sec 5.1's displayed combination '4A_3 - A_1 = -2r(2r+1)C(2r,r)',
+     read with A_p := sum_{i<=r}(N-2i)^p C(N,i) as the two lines above define:
+      r= 2  4A_3-A_1 = 1050             -2r(2r+1)C(2r,r) = -120             equal=False
+      r= 3  4A_3-A_1 = 7140             -2r(2r+1)C(2r,r) = -840             equal=False
+      r= 5  4A_3-A_1 = 230076           -2r(2r+1)C(2r,r) = -27720           equal=False
+      r=10  4A_3-A_1 = 632419788        -2r(2r+1)C(2r,r) = -77597520        equal=False
+     read with A_p := sum_{i<=r} v^p C(N,i)  (v = i - N/2), it IS correct:
+      r= 2  4a_3-a_1 = -120             equal=True
+      r= 3  4a_3-a_1 = -840             equal=True
+      r= 5  4a_3-a_1 = -27720           equal=True
+      r=10  4a_3-a_1 = -77597520        equal=True
+
+(7b) Sec 5.2's stated Stirling mechanism: 'the factor 2^{b+1} in 2^N exactly
+     cancels the 2^{-(b+1)} in the prefactor r!(r+b)!/(2r+b+1)!'.
+     The prefactor contains NO power of 2.  The real cancellation is
+       rho_b(r) := 2^b [(r+b)!/r!] [(2r+1)!/(2r+b+1)!] = prod_j (2r+2j)/(2r+j+1) -> 1
+        b=1 r=10      rho_b(r)=1.0000000000   1+b(b-1)/(4r)=1.0000000000
+        b=1 r=1000    rho_b(r)=1.0000000000   1+b(b-1)/(4r)=1.0000000000
+        b=1 r=100000  rho_b(r)=1.0000000000   1+b(b-1)/(4r)=1.0000000000
+        b=2 r=10      rho_b(r)=1.0434782609   1+b(b-1)/(4r)=1.0500000000
+        b=2 r=1000    rho_b(r)=1.0004992511   1+b(b-1)/(4r)=1.0005000000
+        b=2 r=100000  rho_b(r)=1.0000049999   1+b(b-1)/(4r)=1.0000050000
+        b=3 r=10      rho_b(r)=1.1304347826   1+b(b-1)/(4r)=1.1500000000
+        b=3 r=1000    rho_b(r)=1.0014977534   1+b(b-1)/(4r)=1.0015000000
+        b=3 r=100000  rho_b(r)=1.0000149998   1+b(b-1)/(4r)=1.0000150000
+        b=5 r=10      rho_b(r)=1.4608695652   1+b(b-1)/(4r)=1.5000000000
+        b=5 r=1000    rho_b(r)=1.0049962463   1+b(b-1)/(4r)=1.0050000000
+        b=5 r=100000  rho_b(r)=1.0000499996   1+b(b-1)/(4r)=1.0000500000
+
+(7c) Corollary 1a says H_r(.,b) is 'strictly increasing on [0,1]'.
+      H_0(t,0) = ['0']   -> CONSTANT (not strictly increasing)
+      H_1(t,0) = ['0']   -> CONSTANT (not strictly increasing)
+      H_2(t,0) = ['1/15']   -> CONSTANT (not strictly increasing)
+      H_3(t,0) = ['1/10', '11/140']   -> strictly increasing
+     max_{[0,1]}|H_r| = H_r(1,b) still holds in every case (coefficients >= 0).
+
+(7d) executive-summary item 4 says F_r(2,b)/F_r(1,b) = Theta((9/8)^r) for general b;
+     Sec 6.2 derives it only at b=0.  Measured:
+      b=0 :  r=20 ratio=1.127264  r=30 ratio=1.125564  r=40 ratio=1.125150   (9/8 = 1.125)
+      b=1 :  r=20 ratio=1.124345  r=30 ratio=1.123706  r=40 ratio=1.123867   (9/8 = 1.125)
+      b=2 :  r=20 ratio=1.121088  r=30 ratio=1.121620  r=40 ratio=1.122429   (9/8 = 1.125)
+      b=3 :  r=20 ratio=1.117566  r=30 ratio=1.119328  r=40 ratio=1.120841   (9/8 = 1.125)
+
+(7e) the sixth cross-check, straight from MY simulator: h_2(0,0) vs
+     11/30 + 13/(20n) + 23/(60n^2) + 1/(10n^3)
+      n= 5  h_2(0,0)=641/1250           want=641/1250           match=True
+      n= 6  h_2(0,0)=35/72              want=35/72              match=True
+      n= 8  h_2(0,0)=465/1024           want=465/1024           match=True
+      n=11  h_2(0,0)=571/1331           want=571/1331           match=True
+      n=17  h_2(0,0)=19959/49130        want=19959/49130        match=True
+
+(7f) Sec 4 item 2 lists only F_r,G_r,Hhat_r,K_r as the polynomials of bounded
+     degree; the 3-term argument also needs H_r and L_r.  Degrees:
+      r=0  deg F=0 deg G=0 deg H=0 deg Hhat=1 deg K=0 deg L=0
+      r=1  deg F=1 deg G=0 deg H=0 deg Hhat=2 deg K=1 deg L=0
+      r=2  deg F=2 deg G=1 deg H=0 deg Hhat=3 deg K=2 deg L=1
+      r=3  deg F=3 deg G=2 deg H=1 deg Hhat=4 deg K=3 deg L=2
+      r=4  deg F=4 deg G=3 deg H=2 deg Hhat=5 deg K=4 deg L=3
+      r=5  deg F=5 deg G=4 deg H=3 deg Hhat=6 deg K=5 deg L=4
+      r=6  deg F=6 deg G=5 deg H=4 deg Hhat=7 deg K=6 deg L=5
+
+(7g) Theorem 2's C^(3) recursion uses coefficient 1 on D^(3)_r(b+1) where the
+     predecessor's Sec 6 used 2.  Both are finite, so Theorem 2 stands either
+     way; the 1 is justified by the target's own Sec 6.1 ([0,1] not <=2),
+     but Sec 4 calls the recursion 'identical', which it is not.

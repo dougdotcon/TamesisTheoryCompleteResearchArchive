@@ -1,0 +1,30 @@
+==========================================================================================
+V1.  Closed form vs ODE-solved H_r, exact rationals, r=0..45, b=0..8,
+     every coefficient index k (including k out of range, where both must be 0).
+==========================================================================================
+  checks: 10143   mismatches: 0
+  ALL EXACT.  (Note k=r-1 and k=r are included: FF(r,k+2)=0 there, and the
+   ODE solution's coefficient is 0 there too -- the closed form self-truncates.)
+
+==========================================================================================
+V1b. Degree check: deg H_r = r-2 for r>=2, H_0=H_1=0.
+==========================================================================================
+  all degrees as predicted: True
+
+==========================================================================================
+V2.  SYMBOLIC b.  Re-run the whole (F,G,Hhat,K,H,L) ladder with b a sympy
+     Symbol, and compare H_r(t,b) to the closed form as a rational function.
+==========================================================================================
+  r= 0 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 1 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 2 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 3 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 4 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 5 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 6 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 7 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 8 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r= 9 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r=10 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  r=11 : simplify( H_r(t,b) - closed_form ) == 0  ->  True
+  symbolic-b verification, r=0..11 : True

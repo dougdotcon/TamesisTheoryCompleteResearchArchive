@@ -1,0 +1,249 @@
+# PROGRESS.log -- error_constant_growth_attempt (wave 10, front (b), DISC-DEC-045)
+# Target: the TRUE growth rate in r of the residual error constants of the
+# discrete-Gronwall existence proof (THEOREM.md Estagio 6/7 open item (ii)).
+
+2026-08-22T00:00Z  Mandatory reading completed, in order:
+  - DECISION_LEDGER.yaml DISC-DEC-045 (mandate; front (b) = K-GENERAL-ERROR-CONSTANT-GROWTH-ATTEMPT)
+  - THEOREM.md [Extensao, Estagio 6] + [Extensao, Estagio 7] in full; item (ii) is my target
+  - k_general_existence_attempt/ATTEMPT.md in full (SS3 residual recursion, SS4 A_r(b),
+    SS5 D_r(b)=E_r(b)/(r+b+1) with E_r(b)=r*C_{r-1}(b)+A_r(b), SS6 C_r(b)=B_r(b)+r*C_{r-1}(b+1)+2*D_r(b+1),
+    SS7 numerics, SS8 item 1 = "no growth rate established")
+  - adversarial/REFEREE_REPORT.md SSA.5 (independent constants table + explicit remark that
+    D_r(b) is "very loose at larger r (174 vs an observed 0.78 at r=6)")
+  - k6_attempt/ATTEMPT.md SS2.2/SS2.3 (F_r closed form, leading ODE), SS3.1/SS3.3
+    (G_r ODE, K_r relation, d_k^{(r)}(b) closed form)
+  - k3_attempt_2/ATTEMPT.md SS2 (the exact (a,b,r) transition rules, PROVED)
+
+2026-08-22T00:05Z  KEY STRUCTURAL OBSERVATION made before writing any code.
+  The predecessor's own numerics + the referee's exhaustive scan both report the
+  worst case of n^2|R_r(m,b,n)| at t=m/n=1. At t=1,b=0, g_r(n,0)=psi_n^{(K)}.
+  Known exact: psi_n^{(1)}=(4n+1)/(6n) -> R_1==0; psi_n^{(2)}=(8n^2+4n+1)/(15n^2)
+  -> R_2 == 1/(15 n^2). So the TRUE constant is the 1/n^2 coefficient of the
+  three-term expansion. => Strategy: derive the THIRD-order term H_r(t,b) (and
+  L_r(s,b) for h_r) by pushing the same eps-matching one order, define
+  D*_r(b):=max_{t in [0,1]}|H_r(t,b)|, and study ITS growth in r. H_r's ladder is a
+  single chain H_r(.,b) <- H_{r-1}(.,b+1) <- ... <- H_0(.,b+r)=0, so large r is cheap.
+
+2026-08-22T00:06Z  By-hand derivation of the eps^2 matching (recorded here before coding):
+  g_r(m-1,b) = F + eps(G-F') + eps^2(H-G'+F''/2) + O(eps^3)
+  m[g_r(m)-g_r(m-1)] = tF' + eps*t(G'-F''/2) + eps^2*t(H'-G''/2+F'''/6) + O(eps^3)
+  h_{r-1}(n-m+1,b) at s=(1-t)+eps:
+     Hhat_{r-1} + eps[Hhat'_{r-1}+K_{r-1}] + eps^2[Hhat''_{r-1}/2+K'_{r-1}+L_{r-1}] + O(eps^3)
+  => eps^0 = Fact 2 (checks), eps^1 = Fact 3 (checks -- rearranges exactly to the
+     documented G_r ODE, so the derivation scheme is validated one order down), and
+  => H_r ODE:  t H_r' + (1+r+b) H_r
+        = r[ Hhat''_{r-1}(1-t,b)/2 + K'_{r-1}(1-t,b) + L_{r-1}(1-t,b) ]
+          + (t/2)G_r'' - (t/6)F_r''' + (1+r+b)[ G_r' - F_r''/2 ]
+  => L_r relation (eps^2 of the source step, no ODE):
+        L_r(s,b) = r K_{r-1}(s,b+1) + (1-s) H_r(1-s,b+1) - (1+b+r) G_r(1-s,b+1)
+  Base: H_0==0, L_0==0 (exact, from g_0=1/(b+1) and h_0=(n-a+1)/(n(b+2))).
+
+2026-08-22T00:20Z  core.py written from scratch (own Poly class over fractions.Fraction;
+  F_r,G_r,Hhat_r,K_r re-transcribed from their stated PROVED closed forms; NEW H_r,L_r
+  from my eps^2 matching; own exact Chain simulator of the (a,b,r) rules).
+  Smoke tests: F_r(1,0)==phi_r r=0..12 exact; G_r(1,0)==r*phi_r/4 r=0..12 exact.
+  *** H_1 == 0 identically and H_2(t,0) == 1/15 (constant in t) ***  -- these
+  reproduce, from the NEW eps^2 system alone, the two exact facts the target doc
+  found empirically (R_1==0; R_2(m,0,n)=1/(15n^2) for all m) and the wave-8 referee
+  independently re-predicted.  Strong independent confirmation the eps^2 derivation
+  is right.
+
+2026-08-22T00:35Z  validate_third_order.py run (log retained).
+  STEP 0: my Chain reproduces wave-5's PROVED psi_n^{(1)}=(4n+1)/(6n) (n=2..8),
+    psi_n^{(2)}=(8n^2+4n+1)/(15n^2) (n=3..8), and the brute-forced g_6(7,0)=355081/823543.
+  STEP 1: exhaustive over EVERY valid m, n=40..320, 9 (r,b) pairs:
+    max_m n^2|R_r| decreases monotonically toward max_t|H_r(t,b)|, argmax at t=1
+    for every r>=3.  e.g. r=6,b=0: 0.7345 -> 0.7245 -> 0.7196 -> 0.7172, limit H_6(1,0)=0.714785.
+    (The referee's quoted 0.783381 at r=6 was a finite-n value; the limit is 0.7148.)
+  STEP 2: n^3 max_m|R_r - H_r/n^2| STABILISES (r=4,b=0: .16603/.16556/.16532/.16520/.16514;
+    r=5,b=0: .40351/.40106/.39984/.39924/.39893) => R_r - H_r/n^2 = O(1/n^3). DECISIVE.
+  STEP 3: same for the h-side with L_r; stabilises, worst case always at s=0.
+  STEP 4: exact-identity checks: R_1==0 (1134/1134), R_2(m,0,n)==1/(15n^2) (377/377),
+    and my NEW general prediction R_2(m,b,n)==H_2(t,b)/n^2 for b=0..3 (966/966, 0 failures).
+  CONCLUSION: the asymptotically tight constant is  D*_r(b) := max_{t in [0,1]}|H_r(t,b)|,
+  and empirically = H_r(1,b) (all H_r coefficients seen so far are positive).
+
+2026-08-22T00:50Z  growth_true.py to r=40 (exact, ~9s).  H_r(.,b) has ALL-NONNEGATIVE
+  coefficients for b=0..3, r<=40 => D*_r(b) = H_r(1,b).  log-log slope of D*_r(0)
+  drifts DOWN: 2.159 (r=2..6), 1.816 (5..10), 1.688 (10..20), 1.619 (20..40).
+  Looks like it is heading to 3/2, not 2.  Need a closed form to settle it.
+
+2026-08-22T01:05Z  *** PATTERN FOUND BY HAND from the exact H_r(t,b) coefficients. ***
+  Writing H_r(t,b) = sum_k e_k^{(r)}(b) t^k, the data for r=2..6, b=0..4 fits
+      e_k^{(r)}(b) = P(k) * [ r!/(r-k-2)! ] / prod_{i=1}^{k+3} (r+b+i),   0<=k<=r-2
+  with P(k) = 2, 11, 35, 85, 175 for k=0,1,2,3,4.  Ratios P(k)/C(k+4,4) =
+  2, 11/5, 7/3, 17/7, 5/2 = 3 - 4/(k+4) exactly  =>  P(k) = C(k+4,4)(3k+8)/(k+4)
+                                                        = (3k+8)(k+1)(k+2)(k+3)/24.
+  This SLOTS INTO the already-PROVED family:
+      c_k^{(r)}(b) = 1            * [r!/(r-k)!]   / prod_{i=1}^{k+1}(r+b+i)
+      d_k^{(r)}(b) = C(k+2,2)     * [r!/(r-k-1)!] / prod_{i=1}^{k+2}(r+b+i)
+      e_k^{(r)}(b) = (3k+8)C(k+3,3)/4 * [r!/(r-k-2)!] / prod_{i=1}^{k+3}(r+b+i)   <- NEW
+  Verification of the conjecture is the next step (must not be left as a fit).
+
+2026-08-22T01:15Z  BY-HAND ASYMPTOTICS from the conjectured closed form (b=0).
+  With i:=r-k-2, N:=2r+b+1:  H_r(1,b) = [r!(r+b)!/N!] * sum_{i=0}^{r} w(i) C(N,i),
+  w(i):=P(r-2-i) = u(u+1)(u-1)(3u+2)/24, u:=r-i  (w vanishes at u=0,1, so the sum
+  may be extended from i<=r-2 to i<=r free of charge).  At b=0, N=2r+1 and i<=r is
+  EXACTLY half the range; split w = sym + antisym under i <-> N-i:
+     w(i)+w(N-i) = u^2(u+1)^2/4,  so sym(i) = (v^2-1/4)^2/8, v := i-N/2
+     antisym(i)  = v^3/6 - v/24
+  Binomial central moments of Bin(N,1/2) (mu2=N/4, mu4=N(3N-2)/16) give
+     sum_{i=0}^{N} sym(i) C(N,i) = 2^N (3N-1)(N-1)/128 = 4^r * r(3r+1)/16,
+  half of which is 4^r r(3r+1)/32; the antisymmetric half-sum is O(4^r r^{3/2}),
+  subleading.  With (r!)^2/(2r+1)! = phi_r/4^r and phi_r ~ (1/2)sqrt(pi/r):
+     ***  D*_r(0) = H_r(1,0) ~ (3/32) r^2 phi_r ~ (3 sqrt(pi)/64) r^{3/2}  ***
+     3 sqrt(pi)/64 = 0.0830838...
+  Same Stirling computation for general fixed b gives the SAME leading constant
+  (the 2^{b+1} in 2^N cancels the 2^{b+1} in the prefactor) => b-independent.
+  CHECK against the exact numbers, fitting D*_r(0)/r^{3/2} = 0.0830838 - c/sqrt(r):
+     r=10 pred 0.056561 vs exact 0.056441 ; r=20 pred 0.064327 vs 0.064291 ;
+     r=30 pred 0.06777 vs 0.067760 ; r=40 pred 0.069825 vs 0.069825 (c fit at r=40).
+  Four-figure agreement across a factor of 4 in r.  TRUE GROWTH IS Theta(r^{3/2}).
+
+2026-08-22T01:40Z  verify_closed_form.py: V1 = 10143 exact-rational checks (r=0..45,
+  b=0..8, every k including out-of-range) -- 0 mismatches.  V1b degrees all r-2.
+  V2 = SYMBOLIC b: the whole ladder rerun in sympy with b a Symbol, r=0..11,
+  simplify(H_r(t,b) - closed_form) == 0 in all 12 cases.
+
+2026-08-22T01:55Z  verify_ek_recursion.py (methodology copied in SPIRIT from
+  k6_attempt/verify_dk_recursion.py, code written from scratch):
+  STAGE A (is my hand-derived coefficient recursion really the ODE?) 6601 exact
+    checks r=0..40, b=0..6, all k -> 0 mismatches.
+  STAGE B2 (does the closed form satisfy it?) 6601 exact checks -> 0 mismatches.
+  STAGE B1 (SYMBOLIC r,k,b, gamma closed forms, no looping): general k>=1 case
+    and the k=0 boundary case BOTH simplify to 0.
+  => e_k^{(r)}(b) closed form established to the same standard k6_attempt used
+     for d_k^{(r)}(b) (conjecture from data, then symbolic-(r,k,b) verification
+     of the defining recursion + base case H_0==0).  CONDITIONAL only on the
+     H_r ODE, i.e. on the three-term expansion existing.
+
+2026-08-22T02:15Z  *** EXACT CLOSED FORM FOR THE TIGHT CONSTANT AT b=0. ***
+  Carrying the binomial computation through (all by hand, then checked):
+    D_1(r) := sum_{i=0}^{r}(N-2i)  C(N,i) = (2r+1)C(2r,r)             [N=2r+1]
+    D_3(r) := sum_{i=0}^{r}(N-2i)^3C(N,i) = (2r+1)(4r+1)C(2r,r)
+      (found from exact data r=1..12: D_3/C(2r,r) = 15,45,91,153,231,325,435,561,
+       703,861,1035,1225 -- second differences constant 16 => 8r^2+6r+1=(2r+1)(4r+1))
+    24w = 3v^4 + 4v^3 - (3/2)v^2 - v + 3/16 ,  v = i - N/2
+    even half-sum  = 4^r * 3r(3r+1)/4 ;  odd part 4A_3 - A_1 = -2r(2r+1)C(2r,r)
+    => S = 4^r r(3r+1)/32 - r(2r+1)C(2r,r)/12
+    and C(2r,r)/4^r = 1/((2r+1)phi_r), so the second term is exactly r/12.
+  ***  D*_r(0) = H_r(1,0) = r(3r+1) phi_r / 32  -  r/12  ***
+  VERIFIED EXACTLY for r=0..59 against the ODE-solved H_r.  Immediate consequences:
+    - r=0 and r=1 give EXACTLY 0 (1*4*phi_1/32 = (4/32)(2/3) = 1/12), which is the
+      structural explanation of the target doc's observed "R_1 == 0 identically".
+      Same flavour as Estagio 7's c_1=0 exact-equality degeneracy.
+    - r=2: 2*7*(8/15)/32 - 1/6 = 7/30 - 5/30 = 1/15, the observed 1/(15n^2).
+  Since phi_r ~ (1/2)sqrt(pi/r):  D*_r(0) = (3 sqrt(pi)/64) r^{3/2} - r/12 + O(r^{1/2}).
+  The empirical correction coefficient fitted earlier (0.08386) is 1/12=0.083333. QED-ish.
+
+2026-08-22T02:20Z  All coefficients e_k^{(r)}(b) > 0 for 0<=k<=r-2 is now IMMEDIATE
+  from the closed form (P(k)>0, FF(r,k+2)>0, denominators >0).  So H_r(.,b) is
+  increasing on [0,1] and max_{[0,1]}|H_r| = H_r(1,b) -- no longer an observation.
+  General b: Z(r,b) := (r(3r+1)/32)F_r(1,b) - H_r(1,b) is r/12 at b=0 but NOT a
+  clean rational at b>=1 (b=1: 5/96, 61/480, 963/4480, ...).  Expected: b=0 is the
+  only case where {i<=r} is EXACTLY half the range of C(2r+b+1, .).  Leading
+  asymptotic is b-independent by Stirling (the 2^{b+1} in 2^N cancels the 2^{-(b+1)}
+  in the prefactor r!(r+b)!/(2r+b+1)!); numerics: H_r(1,1)/H_r(1,0) = 0.671 (r=10),
+  0.742 (r=20), 0.803 (r=40) -> 1.  To be confirmed at much larger r.
+
+2026-08-22T02:50Z  asymptotics.py (log retained).  PART 1: closed form exact r=0..80.
+  PART 2: the two binomial identities exact (r=1..119) plus the 24w identity and the
+  even-moment identity.  PART 3 (mpmath dps=60, cross-checked vs exact to 7.5e-61):
+    local log-log slope of D*_r(b) on 30000..100000 = 1.5022 (b=0), 1.5054 (b=1),
+    1.5087 (b=2), 1.5119 (b=3)  -> 3/2 for every b.
+    D*_r(0)/r^{3/2} at r=1e5 = 0.0828202 vs 3sqrt(pi)/64 = 0.0830838.
+    D*_r(b)/D*_r(0) at r=1e5 = 0.99526 (b=1), 0.99055 (b=2), 0.98586 (b=3) -> 1.
+    D*_r(0) / [(3sqrt(pi)/64)r^{3/2} - r/12] = 0.9999996 at r=1e5.
+  PART 4: sup over ALL n<=60 and ALL m of n^2|R_r| exceeds D*_r(b) by only
+    0% (r=2), 6% (r=3), 11% (r=4), 14% (r=5), 17% (r=6), 20% (r=7); always
+    attained at the SMALLEST n (n=b+r+1, m=n).
+
+2026-08-22T03:05Z  loose_bound.py: my from-scratch A_r(b),B_r(b),D_r(b),C_r(b)
+  REPRODUCE THE WAVE-8 REFEREE'S TABLE EXACTLY (all 6 rows of A/D/C at b=0, plus
+  4 spot checks at b=2,1,5,3).  Growth of the PROVED bound at b=0:
+    D_r/D_{r-1} = 4.74, 4.15, 4.51, 5.20, 6.04, ... 14.55 (r=16) ... 29.28 (r=30)
+    i.e. ~ r  =>  the proved bound is FACTORIAL, ~ r! .  D_30(0) = 7.1e30 against
+    the true D*_30(0) = 11.13 -- a gap of 6.4e29, not a constant factor.
+
+2026-08-22T03:20Z  gap_diagnosis.py: the gap decomposes into TWO independent,
+  separately-quantified mechanisms.
+  (G1) SS6 bounds (r/n)eps^h_{r-1} by r C_{r-1}(b+1)/n^2, DISCARDING the 1/n.
+       Since the theorem's own hypothesis is n >= b+r+1, that factor is worth
+       r/n <= r/(b+r+1) < 1.  Keeping it (plus noting (n-1-a-b-r)/n in [0,1], so
+       the "2" in front of D_r(b+1) can be 1) is a ONE-LINE rigorous fix and
+       turns FACTORIAL into EXPONENTIAL: D'_r(0)/D'_{r-1}(0) -> ~1.26.
+       At r=30: original 7.09e30, improved 9.9e3, true 11.13.
+  (G2) SS4's coefficient-sum norm.  PROVED EXACTLY here: because s->1-s makes all
+       contributions to a given coefficient share the sign (-1)^j,
+           ||F_r(1-.,b)|| = F_r(2,b),  ||G_r(1-.,b)|| = G_r(2,b),
+           ||Hhat_r(.,b)|| = 2 F_r(2,b+1)      (r=0..24, b=0..3, exact)
+       and F_r(2,0)/F_r(1,0) = Theta((9/8)^r) -- ratio-in-r measured 1.125012 at
+       r=60, and F_r(2,0)/[phi_r (9/8)^r] -> 1.5.  Mechanism: F_r(2,0) =
+       (phi_r/4^r) sum_{i<=r} 2^{r-i}C(2r+1,i) whose summand peaks at i=(2r-1)/3,
+       INSIDE the summation range, so the restricted sum is already the full
+       (3/2)^{2r+1}2^r.  So each use of the coefficient-sum norm costs (9/8)^r.
+
+2026-08-22T03:45Z  third_order_existence.py: the SAME discrete-Gronwall argument one
+  order up.  Delta^(3)_r has vanishing h^0, h^1 AND h^2 coefficients (r=0..24,
+  b=0..4, exact -- h^2 vanishing IS the new H_r ODE), so Delta^(3)_r = O(h^3);
+  the induction closes with finite A3_r,B3_r,D3_r,C3_r; and the resulting bounds
+  |R^(3)_r| <= D3_r(b)/n^3, |eps^(3)_r| <= C3_r(b)/n^3 hold with ZERO violations on
+  exhaustive exact data (all m, all a, all n <= 90, r=1..6, b=0,1).
+  => n^2 R_r(m,b,n) -> H_r(t,b) UNIFORMLY, with explicit rate D3_r(b)/n.
+  Since t=1 is always in the grid and all e_k>0, max_m n^2|R_r| -> H_r(1,b) exactly.
+
+2026-08-22T04:00Z  cross_checks.py -- FIVE independent exact confirmations of
+  D*_r(0) = r(3r+1)phi_r/32 - r/12, against the 1/n^2 coefficient of the already
+  PROVED exact psi_n^{(K)} closed forms derived by wave 5 / wave 6 by a COMPLETELY
+  DIFFERENT method (exact telescoping-sum ladder), each itself brute-force verified:
+     K=1: 0        K=2: 1/15     K=3: 5/28     K=4: 103/315    K=5: 1405/2772
+  plus X1b: the same coefficients re-extracted from MY OWN exact chain by exact
+  rational interpolation in 1/n, out-of-sample validated, r=1..7, all matching.
+  A SIXTH confirmation on the h-side (cross_checks_h_side.log): my new L_r relation
+  gives Hhat_2(0,0)=11/30, K_2(0,0)=13/20, L_2(0,0)=23/60, exactly the three leading
+  coefficients of the PROVED psi_n^{(3),R} = 11/30+13/(20n)+23/(60n^2)+1/(10n^3).
+
+2026-08-22T04:20Z  finite_n_sup.py + sup_large_r: the sup over ALL valid n is always
+  attained at the MINIMAL state (n=m=b+r+1) -- verified by exhaustive scan for
+  r=2..22, b=0,1.  S_r(0)/D*_r(0) = 1.106 (r=4), 1.366 (r=20), 1.502 (r=60),
+  1.573 (r=130), 1.579 (r=140): increasing, increments ~ 1/sqrt(r); fitting
+  S/D* = a - c/sqrt(r) on r=60,130 gives a ~ 1.725 (predicts 1.5521 at r=100 vs
+  actual 1.55133).  S_r(0)/r^{3/2} = 0.1200 at r=140, same fit gives ~0.142.
+  So S_r(0) is ALSO Theta(r^{3/2}) empirically, with a constant ~1.7x larger --
+  NUMERICALLY CHARACTERIZED, not proved (I cannot prove S_r/D*_r bounded).
+
+2026-08-22T04:40Z  Verified quoted ratios: D_r/D_{r-1} = 14.55 (r=16), 18.46 (r=20),
+  28.32 (r=30); C_r/C_{r-1} = 15.47 / 19.40 / 29.28.  ATTEMPT.md corrected where the
+  C-ratio had been quoted as if it were the D-ratio (self-caught, no claim affected).
+
+2026-08-22T04:45Z  ATTEMPT.md written.  Added an explicit no-circularity paragraph to
+  SS3.1: H_r, L_r are DEFINED as the unique polynomial solutions of the eps^2 system
+  (finite, computable, no limit referenced); SS4 then DERIVES the O(1/n^3) residual
+  bound from the exact discrete recursion -- same assumption-free structure the
+  predecessor's SS1 insists on for R_r, one order up.
+
+2026-08-22T04:50Z  Reproducibility smoke test: all 10 scripts run clean at reduced
+  parameters (full-parameter logs retained separately).  git status --porcelain over
+  the WHOLE repository shows exactly two untracked directories -- this one and wave 10
+  front (a)'s -- and ZERO modified files.  No git commit made.  THEOREM.md,
+  DECISION_LEDGER.yaml, TEST_QUEUE.yaml, DISCOVERY_LAB_STATE.md, README*.md,
+  PROOF_DEPENDENCY_MAP.md, tamesis-cycle-survival/ and every predecessor
+  ATTEMPT.md / REFEREE_REPORT.md untouched.
+
+=== FINAL VERDICT (front (b), DISC-DEC-045, open item (ii)) ===
+  TRUE constant      D*_r(b) = lim_n max_m n^2|R_r| = H_r(1,b)
+                     = r(3r+1)phi_r/32 - r/12   EXACTLY at b=0
+                     = (3 sqrt(pi)/64) r^{3/2} - r/12 + O(sqrt r)   =>  Theta(r^{3/2}),
+                     leading constant b-independent.        PROVED (mod. adversarial review)
+  FINITE-n sup       S_r(b) = Theta(r^{3/2}) too, constant ~1.7x larger.
+                                                            NUMERICALLY CHARACTERIZED
+  PUBLISHED bound    D_r(b), C_r(b) ~ r!  (FACTORIAL).       NUMERICALLY CHARACTERIZED
+  GAP MECHANISMS     (G1) discarded 1/n in SS6 -> factorial; one-line rigorous fix
+                          gives a geometric bound instead.   PROVED
+                     (G2) coefficient-sum norm costs (9/8)^r; ||F_r(1-.,b)||=F_r(2,b)
+                          exactly.                            PROVED (Lemma 7)
+  STILL OPEN         a polynomial-in-r rigorous bound; closed form for D*_r(b), b>=1;
+                     boundedness of S_r/D*_r; the exact rate of the improved bound.
+  REQUIRED NEXT      mandatory adversarial reproduction, focused on the eps^2 matching
+                     of SS3.1, BEFORE any integration into THEOREM.md.  NOT catalogued
+                     by this document.

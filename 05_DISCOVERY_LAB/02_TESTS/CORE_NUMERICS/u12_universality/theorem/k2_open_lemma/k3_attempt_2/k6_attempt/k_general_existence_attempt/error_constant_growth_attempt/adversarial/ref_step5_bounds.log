@@ -1,0 +1,66 @@
+==============================================================================
+STEP 5  Sec 6 mechanisms, Lemma 7, Proposition 6, S_r.  R=30
+==============================================================================
+
+(5a) LEMMA 7, exact:
+   496 exact checks (r=0..30, b=0..3), 0 failures
+   (the H_r case is my own extension: H_r also has nonneg coefficients)
+
+(5b) the (9/8)^r factor:
+      r   F_r(2,0)/F_r(1,0)     ratio in r     /(9/8)^r      3/2 ?
+      10           4.599556       1.135878       1.416416
+      20          15.603870       1.127264       1.479728
+      30          51.182305       1.125564       1.494666
+   check F_r(2,0) = (phi_r/4^r) sum_i 2^{r-i} C(2r+1,i) :
+      r=0..25 : True
+   peak of 2^{-i}C(2r+1,i) at i=(2r-1)/3, strictly inside [0,r] : True
+
+(5c) PROPOSITION 6 -- original vs improved bound, both from my own A,B
+      r    D*_r(0) true      D'_r(0) improved     D_r(0) original    D/D'   
+       6           0.7148                8.977                174.1       19.4
+      10            1.785                47.46            5.048e+05   1.06e+04
+      16            3.972                305.9            1.529e+12      5e+09
+      20             5.75                889.3            1.264e+17   1.42e+14
+      30            11.13                 9895            7.086e+30   7.16e+26
+
+      r   D_r/D_{r-1}  C_r/C_{r-1}   D'_r/D'_{r-1}  C'_r/C'_{r-1}
+       6       5.1989       5.9297        1.71788        1.58777
+      10       8.7993       9.6639        1.44316        1.40556
+      16      14.5536      15.4728        1.32715        1.31492
+      20      18.4591      19.3962        1.29527        1.28817
+      30      28.3215      29.2817        1.25937        1.25670
+
+   A_r(0), B_r(0) growth ratios (target: 1.1945 and 1.1594 at r=40):
+      r=20  A ratio=1.2675  B ratio=1.1673
+      r=30  A ratio=1.2182  B ratio=1.1622
+
+   Prop 6 hypothesis edge cases:
+      r/n <= r/(b+r+1) whenever n>=b+r+1 : trivially true; at r=0 both are 0.
+      the level-(r-1),b+1 hypothesis needs n >= (b+1)+(r-1)+1 = b+r+1  -> SAME range: OK
+      (n-a-1-b-r)/n in [0,1] over every valid (n,a,b,r) with n>=b+r+1 : True
+      at a = n-b-r-1 (h_r's own top boundary) it is EXACTLY 0, which is what
+      makes the out-of-domain reference g_r(b+r+1,b+1) harmless (issue I-2).
+
+(5d) S_r(b) := sup over all valid m and all n>=b+r+1 of n^2|R_r(m,b,n)|
+     claim: attained at n = m = b+r+1.
+   r=2 b=0 : S=0.066667 at (n,m)=(3, 3) ; value at minimal state=0.066667 ; match=True
+   r=3 b=0 : S=0.189286 at (n,m)=(4, 4) ; value at minimal state=0.189286 ; match=True
+   r=4 b=0 : S=0.361524 at (n,m)=(5, 5) ; value at minimal state=0.361524 ; match=True
+   r=5 b=0 : S=0.578884 at (n,m)=(6, 6) ; value at minimal state=0.578884 ; match=True
+   r=6 b=0 : S=0.837927 at (n,m)=(7, 7) ; value at minimal state=0.837927 ; match=True
+   r=7 b=0 : S=1.135902 at (n,m)=(8, 8) ; value at minimal state=1.135902 ; match=True
+   r=8 b=0 : S=1.470543 at (n,m)=(9, 9) ; value at minimal state=1.470543 ; match=True
+   r=2 b=1 : S=0.033333 at (n,m)=(4, 4) ; value at minimal state=0.033333 ; match=True
+   r=3 b=1 : S=0.100714 at (n,m)=(5, 5) ; value at minimal state=0.100714 ; match=True
+   r=4 b=1 : S=0.201587 at (n,m)=(6, 6) ; value at minimal state=0.201587 ; match=True
+   r=5 b=1 : S=0.335001 at (n,m)=(7, 7) ; value at minimal state=0.335001 ; match=True
+   r=6 b=1 : S=0.499905 at (n,m)=(8, 8) ; value at minimal state=0.499905 ; match=True
+   r=7 b=1 : S=0.695255 at (n,m)=(9, 9) ; value at minimal state=0.695255 ; match=True
+   r=8 b=1 : S=0.920057 at (n,m)=(10, 10) ; value at minimal state=0.920057 ; match=True
+
+   S_r(0)/D*_r(0) at the minimal state (target: 1.1056/1.3634/1.5017 at r=4/20/60):
+      r= 4  S_r(0)=0.361524  D*_r(0)=0.326984  ratio=1.1056  S/r^1.5=0.0452
+      r= 8  S_r(0)=1.470543  D*_r(0)=1.205448  ratio=1.2199  S/r^1.5=0.0650
+      r=12  S_r(0)=3.141298  D*_r(0)=2.443350  ratio=1.2857  S/r^1.5=0.0756
+      r=20  S_r(0)=7.840001  D*_r(0)=5.750363  ratio=1.3634  S/r^1.5=0.0877
+      r=30  S_r(0)=15.804119  D*_r(0)=11.134144  ratio=1.4194  S/r^1.5=0.0962

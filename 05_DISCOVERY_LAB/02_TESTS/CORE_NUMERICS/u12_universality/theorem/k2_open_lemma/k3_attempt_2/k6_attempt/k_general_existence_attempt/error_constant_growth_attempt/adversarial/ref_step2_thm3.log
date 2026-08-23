@@ -1,0 +1,34 @@
+==============================================================================
+STEP 2  Theorem 3, re-derived independently.  R=80
+==============================================================================
+
+(2c) my two GENERAL boundary identities (exact, brute-forced):
+   I1  sum_{i<=m}(n-2i)C(n,i) = (m+1)C(n,m+1)          : 7260 checks, 0 fail
+   I3  sum_{i<=m}(n-2i)^3C(n,i) = (n-2m)^2(m+1)C(n,m+1)
+                                  + 4 n m C(n-1,m)      : 7260 checks, 0 fail
+
+   their b=0 specialisations (n=2r+1, m=r), the two the target uses:
+      sum (N-2i)  C(N,i) = (2r+1)C(2r,r)         : r=1..159, 0 fail
+      sum (N-2i)^3C(N,i) = (2r+1)(4r+1)C(2r,r)   : r=1..159, 0 fail
+
+(2b) 24w(i) = [3v^4 - (3/2)v^2 + 3/16] + [4v^3 - v] at b=0, v=i-N/2:
+   1830 checks, 0 fail
+
+(2d) sum_{i=0}^{N}[3v^4-(3/2)v^2+3/16]C(N,i) = 2^N*3(3N-1)(N-1)/16,
+     half-range value = 4^r * 3r(3r+1)/4 :
+   120 checks, 0 fail
+
+(2a)/(Thm 3) against MY OWN ODE-solved H_r(1,0):
+   half-sum representation vs my H_r(1,0):  r=0..45, 0 mismatches
+   Theorem 3 closed form vs my H_r(1,0):    r=0..45, 0 mismatches
+   table r=0..7: [(0, '0'), (1, '0'), (2, '1/15'), (3, '5/28'), (4, '103/315'), (5, '1405/2772'), (6, '1431/2002'), (7, '2219/2340')]
+   (target's own table: 0, 0, 1/15, 5/28, 103/315, 1405/2772, 1431/2002, 2219/2340)
+   Theorem 3 vs half-sum representation, r=0..80: 0 mismatches
+
+(Cor 3a) D*_0(0) = 0 ;  D*_1(0) = 0   (exact cancellation 1/12 - 1/12)
+         3*phi_1 = 2 ;  r(3r+1)/32*phi_1 = 1/12 ; r/12 = 1/12
+
+b>=1 residual  r(3r+1)/32*F_r(1,b) - H_r(1,b)  (target quotes 5/96, 61/480, 963/4480 at b=1):
+   b=0 : ['1/6', '1/4', '1/3', '5/12']
+   b=1 : ['61/480', '963/4480', '523/1680', '1147/2772']
+   b=2 : ['57/560', '743/4032', '863/3080', '995/2574']

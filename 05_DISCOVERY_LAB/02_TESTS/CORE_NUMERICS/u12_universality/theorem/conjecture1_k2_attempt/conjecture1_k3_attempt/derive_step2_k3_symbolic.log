@@ -1,0 +1,39 @@
+==============================================================================
+K=3 STEP B/C/D -- shape-by-shape density derivation
+==============================================================================
+
+f_T1a(x) = 3*x*(x - 1)**2*(2*x + 1)
+f_T1b(x) = 3*x**2*(x - 1)**2*(x + 2)/2
+f_T1c(x) = x**3*(x - 1)**2
+f_T2a(x) = 3*x**2*(x - 1)**2*(x + 2)/2
+f_T2b(x) = 3*x**3*(x - 1)**2/2
+f_T3(x) = x**3*(x - 1)**2/2
+
+--- Cross-check against by-hand derivations in ATTEMPT.md ---
+f_T3 matches hand derivation x^3(1-x)^2/2  OK
+hand_T2a = 3*x**5/2 - 9*x**3/2 + 3*x**2, code f_T2a = 3*x**5/2 - 9*x**3/2 + 3*x**2
+f_T2a matches hand derivation (3/2)x^2(1-x)^2(2+x)  OK
+
+Sum of the 6 non-T0 shape densities = 6*x**5 - 15*x**3 + 6*x**2 + 3*x
+
+--- T0 (no cycle) ---
+P_T0(m1,m2,m3) = -m1 - m2 - m3 + 1
+P_T0 (brute-force 16-term sum over the T0-classified raw configs) = -m1 - m2 - m3 + 1
+MATCHES the complement formula exactly -- P_T0 confirmed by two independent routes.
+
+f_L^(T0)(ell) [density of L=m1+m2+m3 weighted by P_T0] = 3*ell**2*(1 - ell)
+f_T0(x) = f_L^(T0)(1-x) = 3*x**3 - 6*x**2 + 3*x
+
+==============================================================================
+f_M3(x) = f_T0 + f_T1a + f_T1b + f_T1c + f_T2a + f_T2b + f_T3
+        = 6*x**5 - 12*x**3 + 6*x
+
+Target 6x(1-x^2)^2 = 6*x**5 - 12*x**3 + 6*x
+
+DIFFERENCE (f_M3 - target) = 0
+
+*** EXACT MATCH. f_M3(x) = 6x(1-x^2)^2, symbolically confirmed. ***
+
+--- Normalization / mean sanity checks ---
+integral_0^1 f_M3(x) dx = 1  (must be 1)
+integral_0^1 x*f_M3(x) dx = 16/35  (compare to phi_3, THEOREM.md Sec 5.2 Wallis integral)

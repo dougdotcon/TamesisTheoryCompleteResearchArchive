@@ -4262,3 +4262,90 @@ decisions:
       - "Corolario A3, Teorema 3', Teorema D1 e as formulas do Estagio 14 permanecem exatamente como provados, agora casos particulares do algoritmo geral"
       - "nenhuma formula elementar unica p-livre e alegada ou provada; Q_p(u) tem grau genuino 2p"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-065
+    date: 2026-08-24
+    decision: >
+      Integrar o resultado da onda 15, frente (b)
+      (`CONJECTURE-1-K3-ATTEMPT`, DISC-DEC-063), apos verificacao
+      adversarial hostil dedicada com brief explicitamente reforcado
+      dado o resultado surpreendente. A frente atacou §8 Conjectura 1
+      (f_{M_K}(x)=2Kx(1-x^2)^{K-1}) em K=3, apos K=1 (fundacao) e K=2
+      (Estagio 15, onda 14 frente c) ja provados. O dispatch foi feito
+      com a expectativa EXPLICITA, compartilhada por duas frentes
+      anteriores nesta linhagem, de que a explosao combinatoria do
+      numero de configuracoes de destino impediria o fechamento em
+      K=3 -- um nao-fechamento honesto era o resultado esperado e
+      plenamente aceitavel. RESULTADO: fechamento completo e
+      inesperado. f_{M_3}(x)=6x(1-x^2)^2, PROVADO modulo a mesma
+      citacao classica de PD(1) ja usada em K=1,2, aplicada
+      recursivamente (duas vezes, a segunda uma instancia direta da
+      representacao GEM(1)/stick-breaking em multiplos passos). Lema 1
+      generalizado a K=3 via split em 5 padroes por particionamento em
+      co-blocos de {x_1,x_2,x_3}; peca nova de maquinaria ("gaps
+      rotulados" seguem Dirichlet(1,1,1)) verificada por dois
+      argumentos independentes. As 64 configuracoes brutas de destino
+      colapsam, via "fora-do-ciclo contribui massa ciclica nova
+      exatamente zero," em apenas 7 formas mutuamente exclusivas
+      (T0=16,T1a=24,T1b=9,T1c=2,T2a=9,T2b=3,T3=1, soma 64), cujas
+      densidades condicionais fechadas somam simbolicamente a
+      6x(1-x^2)^2. Novos momentos E[M_3]=16/35=phi_3, E[M_3^2]=1/4,
+      E[M_3^3]=16/105. Reducao K=2 do mesmo metodo reproduz
+      4x(1-x^2)^2 exatamente. Tres bugs auto-capturados-e-corrigidos
+      no processo (classificacao de ciclos, formula de posicao
+      discreta, miscount na reducao K=2) -- nenhum sobrevive a versao
+      final. K>=4 explicitamente NAO tentado (§7), com apenas
+      discussao informal post hoc de por que K=3 funcionou. Sessao
+      orquestradora re-derivou do zero a classificacao 64->7 e 2 das 7
+      densidades de forma (T3, T1c, caso topologicamente novo do
+      3-ciclo) antes de despachar um referee hostil dedicado, briefado
+      explicitamente para cacar ativamente a falha que explicaria a
+      surpresa. Referee re-derivou do zero: Lema 1 completo incluindo
+      a peca nova (Dirichlet(1,1,1) rotulado, 2 metodos independentes)
+      e o uso duplo da citacao recursiva (confirmado legitimo); as 7
+      densidades de forma (nao apenas as 2 pre-checadas) via
+      integracao simbolica 3D exata mais Monte Carlo continuo
+      independente de 8.000.000 amostras com terceira implementacao de
+      classificacao, KS-testando todas as 7 formas fechadas (p de 0.17
+      a 0.84, nenhuma rejeicao); checagem de mecanismo discreto
+      reconstruida inteiramente do zero (26.000 testes, 0
+      divergencias, todas as 64 celulas brutas atingidas, n=30
+      estressando colisoes/pontos-fixos a quase 10% cada); e reducao
+      K=2 (R2, 4.000.000 amostras, 4 grupos batendo). Veredito SOUND,
+      "ACCEPT for catalogue", nenhum erro matematico encontrado em
+      lugar algum; unico achado uma lacuna de exposicao menor
+      nao-substantiva (subcaso sutil do argumento "fora-do-ciclo
+      contribui zero" nao detalhado explicitamente no esboco de prova,
+      verificado a mao pelo referee e confirmado valido -- nota de
+      completude de rigor, nao um erro). Integrado como "Estagio 17"
+      em THEOREM.md, com pointers datados em Estagio 15.
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao: verificacao
+      independente propria da sessao orquestradora ANTES do dispatch
+      do referee, seguida por um referee hostil dedicado que nunca le
+      o codigo da propria frente. Dado o resultado contrariar uma
+      expectativa de dispatch compartilhada por duas frentes
+      anteriores, o brief do referee foi explicitamente reforcado para
+      caçar a falha explicativa da surpresa, nao apenas confirmar
+      numeros -- e o proprio referee cobriu as 7 formas de destino
+      (nao apenas as 2 pre-checadas), superando o minimo do mandato.
+      A distincao entre "K=3 provado" e "K>=4 tratavel" e mantida com
+      precisao: a discussao informal post hoc do documento-alvo sobre
+      por que K=3 funcionou e explicitamente nomeada, por ele mesmo e
+      por este ledger, como nao sendo uma previsao de tratabilidade
+      continua, evitando qualquer extrapolacao nao-provada.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 17 anexado, pointers em Estagio 15)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave15_results.conjecture1_k3_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Conjectura 1 (§8) PROVADA em K=1,2,3 -- fechamento inesperado, alem da expectativa de nao-fechamento de duas frentes anteriores"
+      - "K>=4 permanece exatamente tao aberto quanto K>=3 estava antes; nenhuma tentativa ou alegacao feita"
+    untouched_safeguards:
+      - "nenhuma extrapolacao de tratabilidade alem de K=3 e alegada por nenhum documento desta linhagem; a discussao 'por que K=3 funcionou' e explicitamente informal/post hoc, nao uma prova"
+      - "Conjectura 2 (mistura de Poisson) permanece CONJECTURA, condicional a K>=4 para fechamento total"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

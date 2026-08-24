@@ -1,0 +1,24 @@
+Sanity: integral of each f_shape over (0,1) should equal its target probability:
+  T0: integral(f_T0)=1/4  target P=1/4  match=True
+  T1a: integral(f_T1a)=9/20  target P=9/20  match=True
+  T1b: integral(f_T1b)=1/8  target P=1/8  match=True
+  T1c: integral(f_T1c)=1/60  target P=1/60  match=True
+  T2a: integral(f_T2a)=1/8  target P=1/8  match=True
+  T2b: integral(f_T2b)=1/40  target P=1/40  match=True
+  T3: integral(f_T3)=1/120  target P=1/120  match=True
+
+Sum of all 7 densities, compare to 6x(1-x^2)^2:
+ total  = 6*x**5 - 12*x**3 + 6*x
+ target = 6*x**5 - 12*x**3 + 6*x
+ diff simplifies to: 0
+
+======================================================================
+KS tests: independent MC samples (per shape) vs document's closed-form conditional density
+======================================================================
+  T0: n= 1998121  KS D=0.00070  p=0.2853   mean_emp=0.400119  mean_exact=0.400000
+  T1a: n= 3603070  KS D=0.00059  p=0.1673   mean_emp=0.444594  mean_exact=0.444444
+  T1b: n=  998863  KS D=0.00104  p=0.2266   mean_emp=0.514188  mean_exact=0.514286
+  T1c: n=  133387  KS D=0.00197  p=0.6807   mean_emp=0.571661  mean_exact=0.571429
+  T2a: n= 1000313  KS D=0.00062  p=0.8368   mean_emp=0.514331  mean_exact=0.514286
+  T2b: n=  199565  KS D=0.00225  p=0.2663   mean_emp=0.571785  mean_exact=0.571429
+  T3: n=   66681  KS D=0.00253  p=0.7869   mean_emp=0.570940  mean_exact=0.571429

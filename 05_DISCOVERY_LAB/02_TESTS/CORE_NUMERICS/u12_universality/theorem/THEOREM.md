@@ -2958,6 +2958,12 @@ com `K`, ecoando exatamente o mesmo diagnóstico que
 `k2_open_lemma/ATTEMPT.md` dá para seu próprio problema *diferente*
 (a ponte `n\to\infty`) explodir além de `K=2`.
 
+> [Correção pós-adversarial, 2026-08-24 — `DISC-DEC-065`] `K=3`
+> **foi** tentado na onda 15 e fechou por completo, inesperadamente —
+> a explosão combinatória diagnosticada acima não se materializou.
+> [Ver Estágio 17 abaixo para a prova completa e sua verificação
+> adversarial.]
+
 ### Verificação adversarial independente
 
 A sessão orquestradora re-derivou, do zero, toda a cadeia
@@ -3009,6 +3015,10 @@ das constantes agudas para `p\ge5` (Estágio 14); `\sup_K M_K/\sqrt K
 =a^*` (Estágio 13). Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
 
+> [Correção pós-adversarial, 2026-08-24 — `DISC-DEC-065`] Conjectura 1
+> em `K=3` não está mais aberta — fechada na onda 15. [Ver Estágio 17
+> abaixo.] `K\ge4` permanece aberto, sem nenhuma tentativa registrada.
+
 **Veredito honesto atualizado (ao fim do Estágio 15):** a linha
 `U_1/2` tem agora a lei distribucional completa provada em `K=1,2`
 (módulo, em ambos os casos, a mesma citação clássica já aceita pela
@@ -3020,6 +3030,11 @@ como a razão estrutural provável permanece a melhor explicação
 disponível para por que o método não se generaliza trivialmente.
 Fontes completas: `theorem/conjecture1_k2_attempt/ATTEMPT.md`,
 `.../conjecture1_k2_attempt/adversarial/REFEREE_REPORT.md`.
+
+> [Correção pós-adversarial, 2026-08-24 — `DISC-DEC-065`] Este
+> "veredito honesto" descrevia o estado ao fim do Estágio 15. `K=3`
+> fechou na onda 15 (Estágio 17), inesperadamente. [Ver Estágio 17
+> abaixo.]
 
 ---
 
@@ -3127,3 +3142,138 @@ aberto apenas por não ter sido executado, não por incerteza
 matemática. Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/ATTEMPT.md`,
 `.../general_p_dstar_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 17 — 2026-08-24]
+
+**Onda 15, frente (b), `DISC-DEC-063`/`DISC-DEC-065`
+(`CONJECTURE-1-K3-ATTEMPT`).** Alvo: §8 Conjectura 1
+(`f_{M_K}(x)=2Kx(1-x^2)^{K-1}`), provada em `K=1` (§5.3) e `K=2`
+(Estágio 15) — este documento tenta `K=3`. Dispatch feito com a
+expectativa explícita, compartilhada por duas frentes anteriores
+nesta linhagem, de que a explosão combinatória do número de
+configurações de destino impediria o fechamento em `K=3`; um
+não-fechamento honesto era o resultado esperado e plenamente aceitável.
+
+### O que foi provado
+
+> **Teorema (este documento, PROVADO módulo uma citação clássica).**
+> `\displaystyle f_{M_3}(x) = 6x(1-x^2)^2` em `(0,1)`, exatamente —
+> a instância `K=3` da Conjectura 1.
+
+Método: generaliza o mesmo método whole-space de `K=1,2` a `K=3`.
+Três fontes de reroteamento `x_1,x_2,x_3\sim\mathrm{Unif}(0,1)` i.i.d.
+dividem `[0,1]` em três "massas de região" `(m_1,m_2,m_3)` cuja lei
+conjunta é **exatamente uniforme** (densidade `3!=6`) no simplex
+`\Delta=\{m_1,m_2,m_3>0,\ m_1+m_2+m_3<1\}` (Lema 1, generalizado a
+`K=3` via um split de casos em `5` padrões pelo particionamento em
+co-blocos de `\{x_1,x_2,x_3\}`), provado módulo a mesma propriedade
+clássica de amostragem size-biased/residual de `PD(1)` já usada em
+`K=1,2`, aplicada recursivamente (duas vezes, a segunda uma instância
+direta da representação GEM(1)/stick-breaking em múltiplos passos, não
+uma extrapolação), mais uma peça de maquinaria genuinamente nova —
+os "gaps rotulados" seguem `\mathrm{Dirichlet}(1,1,1)`, verificada por
+dois argumentos independentes (simetria/exchangeability geral e
+mudança-de-variáveis explícita por ordenação cíclica). As `64`
+combinações brutas de onde os três destinos `u_1,u_2,u_3` pousam
+colapsam, via o fato-chave "nós fora-do-ciclo contribuem massa cíclica
+nova exatamente zero, independentemente do alvo," em apenas `7` formas
+mutuamente exclusivas (`T0=16, T1a=24, T1b=9, T1c=2, T2a=9, T2b=3,
+T3=1`, soma `64`), com probabilidades-alvo exatas `9/20, 1/8, 1/60,
+1/8, 1/40, 1/120, 1/4` (soma `1`) e densidades condicionais fechadas
+cuja soma simbólica é exatamente `6x(1-x^2)^2`. Subprodutos: novos
+momentos `E[M_3]=16/35=\varphi_3`, `E[M_3^2]=1/4`, `E[M_3^3]=16/105`.
+A redução `K=2` do mesmo método reproduz exatamente `f_{M_2}(x)=
+4x(1-x^2)` (Estágio 15), confirmando o método geral. O documento
+autodivulga três bugs autocapturados-e-corrigidos no processo (um bug
+de classificação de ciclos, um bug na fórmula de posição discreta, um
+miscount na checagem de redução `K=2`) — nenhum sobrevive à versão
+final.
+
+**O que NÃO foi fechado:** `K\ge4` — explicitamente não tentado, sem
+alegação feita (§7 do documento-alvo). O documento oferece apenas uma
+discussão informal, *post hoc*, de por que `K=3` funcionou apesar da
+expectativa de explosão (o colapso `64\to7` via "fora-do-ciclo
+contribui zero" é mais forte do que a contagem bruta `4^K` sugeria) —
+explicitamente não uma prova de que a mesma tratabilidade persiste
+além de `K=3`.
+
+### Verificação adversarial independente
+
+A sessão orquestradora re-derivou, do zero, a classificação
+`64\to7` e re-derivou simbolicamente duas das sete densidades de forma
+(`T3`, `T1c`, incluindo o caso topologicamente novo do 3-ciclo) antes
+de despachar um referee hostil dedicado, briefado explicitamente para
+caçar ativamente a falha que explicaria a surpresa, não apenas
+verificar alguns números. O referee re-derivou do zero: o Lema 1
+completo, incluindo a peça genuinamente nova (`\mathrm{Dirichlet}
+(1,1,1)` rotulado, verificada por dois métodos independentes) e o uso
+duplo da citação recursiva (confirmado ser uma instância legítima da
+representação GEM(1) em múltiplos passos); as **sete** densidades de
+forma (não apenas as duas pré-checadas) via integração simbólica 3D
+exata mais um Monte Carlo contínuo independente de `8.000.000`
+amostras com uma terceira implementação de classificação, testando
+todas as sete formas fechadas via KS (`p` de `0.17` a `0.84`, nenhuma
+rejeição); a checagem de mecanismo discreto, reconstruída inteiramente
+do zero (`26.000` testes, `0` divergências, todas as `64` células
+brutas atingidas, com `n=30` estressando deliberadamente colisões e
+pontos fixos a quase `10\%` cada); e a redução `K=2` (R2, `4.000.000`
+amostras, todos os `4` grupos batendo).
+
+> **Veredito: SOUND — "ACCEPT for catalogue."** Nenhum erro
+> matemático encontrado em lugar algum. Único achado: uma lacuna de
+> exposição menor, não-substantiva — o esboço de prova de "fora-do-
+> ciclo contribui zero" no documento-alvo não detalha explicitamente
+> um subcaso sutil (um redirecionamento fora-do-ciclo pousando dentro
+> de um arco já periódico); o referee verificou à mão que a alegação
+> permanece válida mesmo nesse subcaso — não é um erro, é uma nota de
+> completude de rigor, sem efeito sobre o veredito. A surpresa se
+> resolve exatamente como o próprio documento explica: a explosão
+> bruta `4^K` diagnosticada por duas frentes anteriores nunca ocorre
+> de fato, porque "fora-do-ciclo contribui zero" colapsa a contagem ao
+> número (bem menor, ainda que crescente) de estruturas de ciclo em
+> `K` itens rotulados, e esse número menor ainda é tratável em `K=3`.
+
+Ver
+`theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/ATTEMPT.md` e
+`.../conjecture1_k3_attempt/adversarial/REFEREE_REPORT.md` para os
+relatórios completos.
+
+### O que isto muda, precisamente
+
+**Conjectura 1 (§8) está agora PROVADA em `K=1,2,3`** — um fechamento
+inesperado, além da expectativa de dispatch de não-fechamento por
+explosão combinatória compartilhada por duas frentes anteriores nesta
+linhagem. `K\ge4` permanece exatamente tão aberto quanto `K\ge3`
+estava antes deste estágio; nenhuma tentativa ou alegação é feita para
+`K\ge4`, e a discussão informal de por que `K=3` funcionou
+explicitamente não se estende a uma previsão de tratabilidade além
+dele. Conjectura 2 (§8, a mistura de Poisson sobre a Conjectura 1)
+permanece CONJECTURA — herda o fechamento de `K=3` como mais um
+componente confirmado da mistura, mas continua condicional a `K\ge4`
+para ser totalmente fechada. Nenhum resultado anterior é enfraquecido:
+a classificação `U_{1/2}` no limite `n\to\infty`, todos os Teoremas/
+Estágios anteriores, e a própria Conjectura 1 em `K=1,2` permanecem
+exatamente como estavam.
+
+**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge4`;
+Conjectura 2 em geral (herda o gap acima); a forma fechada geral-`b`
+das constantes agudas para `p>10` (Estágio 16); `\sup_K M_K/\sqrt K
+=a^*` (Estágio 13); a forma fechada completa do piso `H2` em `b=1`
+(onda 14, frente (b), diagnosticada como mesma dificuldade que
+Conjectura 1 geral-`K`). Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.
+
+**Veredito honesto atualizado (ao fim do Estágio 17):** a linha
+`U_1/2` tem agora a lei distribucional completa provada em `K=1,2,3`
+(módulo, em todos os casos, a mesma citação clássica já aceita pela
+Proposição 2.4 do próprio documento, aplicada recursivamente para
+`K=3`) — um fechamento inesperado que contraria o diagnóstico de
+explosão combinatória de duas frentes anteriores. `K\ge4` continua
+sem nenhuma tentativa registrada nesta linha; a discussão informal
+*post hoc* de por que `K=3` funcionou é explicitamente não uma prova
+de tratabilidade contínua, e nenhuma extrapolação além de `K=3` é
+alegada por nenhum documento desta linhagem. Fontes completas:
+`theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/ATTEMPT.md`,
+`.../conjecture1_k3_attempt/adversarial/REFEREE_REPORT.md`.

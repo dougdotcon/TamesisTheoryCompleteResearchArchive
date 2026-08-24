@@ -1,0 +1,22 @@
+--- Brute-force shape classification for N=2 (3^2=9 raw configs) ---
+{((1,),): 2, ((1,), (2,)): 1, ((1, 2),): 1, ((2,),): 2, (): 3} total = 9
+Confirms 4 shapes: T0(no cycle, 3 configs), self-at-1(2), self-at-2(2),
+both-self(1), 2cycle(1) -- 3+2+2+1+1=9. NOTE: 'self-at-1' and 'self-at-2'
+are symmetric sub-types of ONE shape ('single self-loop, other node NOT
+self-looping'), combined via symmetry_mult=2 below; 'both-self' is a
+SEPARATE shape (missed in the first hand-attempt, see module docstring).
+
+f_self(single self-loop, other off) = 2*x*(1 - x**2)
+f_2cyc (the 2-cycle)                = x**2*(1 - x)
+f_bothself (both self-loop)         = x**2*(1 - x)
+f_T0 (no cycle)                     = 2*x*(1 - x)
+
+[first, INCOMPLETE attempt] sum without 'both-self' = -3*x**3 - x**2 + 4*x
+  diff vs target 4x(1-x^2) = x**2*(x - 1)  <-- NONZERO, caught the missing shape
+
+[corrected, complete] sum = -4*x**3 + 4*x
+target 4x(1-x^2) = -4*x**3 + 4*x
+diff = 0
+
+*** MATCH. This front's general method, applied to N=2, exactly reproduces ***
+*** conjecture1_k2_attempt/ATTEMPT.md's already-proved f_M2(x)=4x(1-x^2).  ***

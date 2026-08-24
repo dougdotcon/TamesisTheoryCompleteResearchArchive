@@ -1,0 +1,52 @@
+==============================================================================
+LEMMA 1 AT K=3 -- symbolic derivation, 5 co-block patterns
+==============================================================================
+
+--- Pattern 1: AllSame ---
+P(AllSame | ell1) = ell1**2   [x2,x3 independent, each lands in B1 w.p. ell1]
+Given AllSame: x1 at 0, x2=Y2~Unif(0,ell1), x3=Y3~Unif(0,ell1) iid (positions
+within B1). Standard 'labeled uniform spacings' fact: the 3 gaps ending at
+the 3 marked points (in flow-forward order) are jointly ~ ell1*Dirichlet(1,1,1),
+i.e. joint density of (m1,m2) [m3=ell1-m1-m2] is 2/ell1**2 on {m1,m2>0,
+m1+m2<ell1}. We verify this labeled-spacings fact by direct integration over
+(Y2,Y3) below, for the specific case relevant here (one point fixed at 0).
+  order 0<Y2<Y3<ell1: (m1,m2,m3) = (ell1 - y3, y2, -y2 + y3)
+    Jacobian d(m1,m2)/d(Y2,Y3) = [[0, -1], [1, 0]], det = 1
+    density of (m1,m2) on this branch = ell1**(-2)
+  order 0<Y3<Y2<ell1: (m1,m2,m3) = (ell1 - y2, y2 - y3, y3)
+    Jacobian d(m1,m2)/d(Y2,Y3) = [[-1, 0], [1, -1]], det = 1
+    density of (m1,m2) on this branch = ell1**(-2)
+  Sum over both branches (each covers disjoint region, same target simplex): 2/ell1**2
+  CONFIRMED: density of (m1,m2) given ell1, AllSame = 2/ell1**2 on {m1,m2>0,m1+m2<ell1}
+
+Joint density of (ell1,m1,m2) [AllSame branch] = P(ell1)*P(AllSame|ell1)*f(m1,m2|.) = 1 * ell1**2 * (2/ell1**2) = 2
+Region: 0<m1,m2, m1+m2<ell1<1. Change vars (ell1,m1,m2)->(m1,m2,m3=ell1-m1-m2),
+Jacobian = 1 (triangular). New region: m1,m2,m3>0, m1+m2+m3<1  =  Delta.
+=> Pattern 1 (AllSame) contributes CONSTANT density 2 on all of Delta.
+
+--- Pattern 2: {1,2}same block, 3 different block ---
+Joint density of (ell1, m1[=mm1], m3[=L3]) = 1 * ell1(1-ell1) * (1/ell1) * (1/(1-ell1)) = 1
+Region: 0<m1<ell1<1, 0<m3<1-ell1. Change vars (ell1,m1,m3)->(m1,m2=ell1-m1,m3),
+Jacobian = 1. New region: m1,m2,m3>0, m1+m2+m3<1 = Delta.
+=> Pattern 2 contributes CONSTANT density 1 on all of Delta.
+By the identical computation with (2<->3) relabeled: Pattern 3 ({1,3}same,2diff)
+and Pattern 4 ({2,3}same,1diff) each ALSO contribute constant density 1 on Delta
+(verified by the code's own symmetry: relabeling m1<->m1 with roles of the
+'own block' source and the 'separate block' source swapped changes nothing in
+the algebra above, since it never used which of {2,3} the labels attach to).
+
+--- Pattern 5: AllDiff (three separate blocks) ---
+Joint density of (ell1,L2,L3) [AllDiff] = 1 * [(1-ell1)*(1/(1-ell1))] * (1-ell1-L2) * (1/(1-ell1-L2)) = 1
+Region: 0<ell1<1, 0<L2<1-ell1, 0<L3<1-ell1-L2  =  exactly Delta (m1=ell1,m2=L2,m3=L3).
+=> Pattern 5 (AllDiff) contributes CONSTANT density 1 on all of Delta.
+
+==============================================================================
+TOTAL density on Delta = AllSame(2) + 3x[exactly-two-same](1 each) + AllDiff(1) = 6
+MATCHES the target: (m1,m2,m3) uniform on Delta, density 6.  QED (Lemma 1, K=3),
+modulo the same PD(1) residual/size-biased-sampling citation K=2's Lemma 1 uses,
+applied recursively (identical citation, no new or weaker link).
+
+--- Self-consistency: probabilities of the 5 patterns sum to 1 ---
+P(AllSame)=E[ell1^2]=1/3, P(each two-same pattern)=E[ell1(1-ell1)]=1/6 (x3), P(AllDiff)=vol(Delta)=1/6
+Sum = 1  (must equal 1)
+CONFIRMED: pattern probabilities sum to 1 exactly.

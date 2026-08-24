@@ -43,7 +43,7 @@ flowchart LR
     S -->|18/19 rejected,<br/>concrete reason cited| N1[CLOSED_NULL]
     S -->|1 immature lead<br/>promoted| L13[13 formal<br/>Discovery Lab<br/>test lines]
     L13 --> C8[8 pre-registered claims<br/>locked + adversarially reviewed]
-    C8 --> V1[1 proved positive result<br/>U&#40;1/2&#41; limit law]
+    C8 --> V1["1 proved positive result<br/>U(1/2) limit law"]
     C8 --> V2[7 informative negative<br/>results — REFUTED /<br/>INCONCLUSIVE / NULL]
     style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
     style N1 fill:#f0e5e8,stroke:#7a3b4a

@@ -44,7 +44,7 @@ flowchart LR
     S -->|18/19件が却下、<br/>具体的な理由を明示| N1[CLOSED_NULL]
     S -->|未成熟なリードを<br/>1件昇格| L13[正式な<br/>Discovery Lab<br/>テストライン13件]
     L13 --> C8[事前登録済みの<br/>主張8件<br/>ロック済み+敵対的レビュー済み]
-    C8 --> V1[証明済みの肯定的結果1件<br/>U&#40;1/2&#41;極限法則]
+    C8 --> V1["証明済みの肯定的結果1件<br/>U(1/2)極限法則"]
     C8 --> V2[有益な否定的<br/>結果7件 — REFUTED /<br/>INCONCLUSIVE / NULL]
     style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
     style N1 fill:#f0e5e8,stroke:#7a3b4a

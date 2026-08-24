@@ -44,7 +44,7 @@ flowchart LR
     S -->|18/19 被否决,<br/>并给出具体理由| N1[CLOSED_NULL]
     S -->|1 条不成熟线索<br/>被提升| L13[13 条正式的<br/>Discovery Lab<br/>测试线]
     L13 --> C8[8 项预先登记的主张<br/>已锁定 + 经对抗性评审]
-    C8 --> V1[1 项已证明的正面结果<br/>U&#40;1/2&#41; 极限律]
+    C8 --> V1["1 项已证明的正面结果<br/>U(1/2) 极限律"]
     C8 --> V2[7 项具有信息量的负面<br/>结果——REFUTED /<br/>INCONCLUSIVE / NULL]
     style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
     style N1 fill:#f0e5e8,stroke:#7a3b4a

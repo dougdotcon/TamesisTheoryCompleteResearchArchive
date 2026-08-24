@@ -44,7 +44,7 @@ flowchart LR
     S -->|18/19 rechazados,<br/>con motivo concreto citado| N1[CLOSED_NULL]
     S -->|1 pista inmadura<br/>promovida| L13[13 líneas de prueba<br/>formales del<br/>Discovery Lab]
     L13 --> C8[8 afirmaciones preregistradas<br/>cerradas + revisadas adversarialmente]
-    C8 --> V1[1 resultado positivo probado<br/>ley límite U&#40;1/2&#41;]
+    C8 --> V1["1 resultado positivo probado<br/>ley límite U(1/2)"]
     C8 --> V2[7 resultados negativos<br/>informativos — REFUTADO /<br/>INCONCLUSO / NULO]
     style V1 fill:#e8f0e0,stroke:#1f6f5c,stroke-width:2px
     style N1 fill:#f0e5e8,stroke:#7a3b4a

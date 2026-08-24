@@ -1,0 +1,42 @@
+--- Q_p(u) via Newton's identities vs direct e_p(1..u), p=0..6 ---
+p=0: degree=0 (expected 0), Q_p(u)=1
+p=1: degree=2 (expected 2), Q_p(u)=u**2/2 + u/2
+p=2: degree=4 (expected 4), Q_p(u)=u**4/8 + u**3/12 - u**2/8 - u/12
+p=3: degree=6 (expected 6), Q_p(u)=u**6/48 - u**5/48 - u**4/16 + u**3/48 + u**2/24
+p=4: degree=8 (expected 8), Q_p(u)=u**8/384 - u**7/96 - u**6/576 + u**5/30 - 5*u**4/1152 - u**3/32 + u**2/288 + u/120
+p=5: degree=10 (expected 10), Q_p(u)=u**10/3840 - 5*u**9/2304 + 5*u**8/1152 + 31*u**7/5760 - 229*u**6/11520 - 5*u**5/2304 + u**4/36 - u**3/960 - u**2/80
+p=6: degree=12 (expected 12), Q_p(u)=u**12/46080 - 7*u**11/23040 + 13*u**10/9216 - 331*u**9/207360 - 83*u**8/15360 + 6043*u**7/483840 + 89*u**6/15360 - 1723*u**5/69120 - 13*u**4/11520 + 949*u**3/51840 - u**2/1440 - u/252
+Q_p total checks=189, fails=0
+--- cross-check vs parent-document-printed Q_1..Q_4 ---
+p=0: matches parent printed formula exactly: True
+p=1: matches parent printed formula exactly: True
+p=2: matches parent printed formula exactly: True
+p=3: matches parent printed formula exactly: True
+p=4: matches parent printed formula exactly: True
+--- central moments mu_2l(N) via cumulant GF vs direct sum, l=1..5 ---
+mu_2(N) = N/4
+  l=1: checked N=2..22, fails so far=0
+mu_4(N) = N*(3*N - 2)/16
+  l=2: checked N=4..22, fails so far=0
+mu_6(N) = N*(15*N**2 - 30*N + 16)/64
+  l=3: checked N=6..22, fails so far=0
+mu_8(N) = N*(105*N**3 - 420*N**2 + 588*N - 272)/256
+  l=4: checked N=8..22, fails so far=0
+mu_10(N) = N*(945*N**4 - 6300*N**3 + 16380*N**2 - 18960*N + 7936)/1024
+  l=5: checked N=10..22, fails so far=0
+central moments total checks=85, fails=0
+--- cross-check vs parent-document-printed mu_2,4,6,8 ---
+l=1 (mu_2): matches parent printed formula exactly: True
+l=2 (mu_4): matches parent printed formula exactly: True
+l=3 (mu_6): matches parent printed formula exactly: True
+l=4 (mu_8): matches parent printed formula exactly: True
+--- spot-check of referee's general-k odd-power identity, powers=(1, 3, 5, 7, 9, 11, 13, 15) ---
+referee-identity spot-check: 3780 checks, fails=0
+
+=== ingredients.py summary ===
+Q_p Newton-identity vs direct e_p: fails=0
+Q_p vs parent printed: fails=0
+central moments vs direct sum: fails=0
+central moments vs parent printed: fails=0
+referee general-k odd-power identity spot-check: fails=0
+ALL INGREDIENT CHECKS PASSED

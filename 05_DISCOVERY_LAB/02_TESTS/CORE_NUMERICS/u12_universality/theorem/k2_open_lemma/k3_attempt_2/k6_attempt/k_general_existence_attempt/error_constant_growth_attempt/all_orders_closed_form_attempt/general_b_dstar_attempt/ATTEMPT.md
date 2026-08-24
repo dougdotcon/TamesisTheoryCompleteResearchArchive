@@ -535,6 +535,19 @@ predicted the right answer should look like.
 > no `\mu_{10},\mu_{12},\ldots`, no assembled `D^{*(p\ge5)}_r(b)`), so
 > `p\ge5` remains honestly **not proved** — only its single named
 > obstacle is now known to be removable. See `THEOREM.md` "Estágio 14."
+
+> **[Correção pós-adversarial, 2026-08-24 — DISC-DEC-064.]** Wave 15
+> front (a) (`general_p_dstar_closure_attempt/ATTEMPT.md`) executed the
+> full assembly for `p=1,\ldots,10`: `26,710` exact checks, `0`
+> mismatches, reducing character-for-character to every PROVED
+> `b\in\{0,1\}` formula and independently re-deriving the five `b\ge2`
+> instances this document only numerically verified. Its hostile
+> referee went further and proved, by induction (using only `(E2)` and
+> the `S_{2k-1}` recursion cited above), that the general-`k` machine
+> is correct for **every** `k`, not merely the values checked — closing
+> the underlying mechanism analytically, not just numerically. `p>10`
+> remains open, but only as an unexecuted computation, not a
+> mathematical uncertainty. See `THEOREM.md` "Estágio 16."
 | 12 | The strip sum reduces to a single closed-form (non-summed) expression for general `b` | **OPEN** — left as an explicit `b`-term sum by design; an unpromoted empirical pattern is noted but not claimed (§6 item 2) |
 | 13 | Independent adversarial re-verification | **NOT PERFORMED** — required before integration (§7) |
 

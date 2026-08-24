@@ -2903,7 +2903,8 @@ para `p\ge5` — o único obstáculo nomeado (o padrão de cancelamento de
 `I_{2k+1}`) foi identificado pelo referee como mecanicamente removível,
 mas a montagem explícita para `p\ge5` não foi executada em lugar
 algum, nesta frente ou pelo referee; permanece um alvo concreto,
-agora mais barato, para uma frente futura. A soma da faixa (`strip
+agora mais barato, para uma frente futura [Ver Estágio 16 abaixo — a
+montagem foi executada para `p=1,\ldots,10`]. A soma da faixa (`strip
 sum`) continua sendo deixada como soma explícita de `b` termos, por
 desenho, não uma limitação. Nenhuma alegação uniforme-em-`K` ou
 uniforme-em-`p` é feita.
@@ -3019,3 +3020,110 @@ como a razão estrutural provável permanece a melhor explicação
 disponível para por que o método não se generaliza trivialmente.
 Fontes completas: `theorem/conjecture1_k2_attempt/ATTEMPT.md`,
 `.../conjecture1_k2_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 16 — 2026-08-24]
+
+**Onda 15, frente (a), `DISC-DEC-063`
+(`GENERAL-P-DSTAR-CLOSURE-ATTEMPT`).** Alvo: item 11 do scorecard de
+`general_b_dstar_attempt/ATTEMPT.md` — a forma fechada geral-`p` das
+constantes agudas `D^{*(p)}_r(b)`, `p\ge5`, cuja obstrução nomeada
+(padrão de cancelamento de `I_{2k+1}`) o referee da onda 14 já havia
+mostrado ser mecanicamente removível (Estágio 14), sem executar a
+montagem completa.
+
+### O que foi provado
+
+A montagem mecânica foi executada: os quatro ingredientes do
+Estágio 14 (grau/anulamento de `Q_p(u)`; momentos centrais de
+`\mathrm{Bin}(N,\tfrac12)`; a identidade de paridade binomial já
+citada; o colapso geral-`k` do prefator) foram implementados como
+algoritmos parametrizados por `p` — não ajustados caso a caso — via
+identidades de Newton (`Q_p`) e uma extração por função geradora de
+cumulantes (momentos), e rodados para `p=1,\ldots,10` (o dobro do
+mínimo `p=5,6` do mandato).
+
+> **Teorema (este documento, PROVADO dado os ingredientes já citados).**
+> Para todo `p=1,\ldots,10` e todo `b\ge0`, `D^{*(p)}_r(b)` tem forma
+> fechada exata, produzida por um único algoritmo geral-`p`.
+
+`26.710` checagens exatas contra Corolário A3 (tabela de Stirling
+própria), `0` divergências; reduz caractere-por-caractere às seis
+fórmulas já provadas em `b\in\{0,1\}` e re-deriva de forma
+independente as cinco instâncias `b\ge2` que o documento-pai só havia
+verificado numericamente. Novas formas fechadas para `p=5,6,7` são
+produzidas e impressas.
+
+### Verificação adversarial independente
+
+Um referee hostil dedicado re-verificou cada peça com métodos
+deliberadamente diferentes dos do próprio documento (rota de
+interpolação de Lagrange para `Q_p` e momentos, em vez de identidades
+de Newton/função geradora de cumulantes; tabela de Stirling e
+implementação de Corolário A3 próprias), sem ler nenhum script da
+própria frente: `18.653` checagens independentes, `0` divergências,
+incluindo uma extensão de escala para `p=5,6` até `r=200,b=30`
+(igualando a escala máxima do documento-pai, `2,5×` além da escala do
+próprio documento desta frente) e re-verificação dedicada dos casos de
+contorno do erro auto-capturado da frente (`i=1`, `i=b` na fórmula de
+peso da faixa).
+
+O referee foi além do exigido: construiu uma **prova indutiva**
+(usando apenas `(E2)` — uma identidade elementar de uma linha — e a
+recursão de `S_{2k-1}` já citada do Estágio 14) de que a máquina
+`H_k(r,b)` deste documento é correta para **todo** `k`, não apenas os
+valores testados numericamente — fechando analiticamente, não apenas
+numericamente, a lacuna que o próprio documento nomeou como seu maior
+risco (cobertura direta de força bruta parando em `k=7`; a montagem
+para `p=9,10` precisa de `k` até `9,10`).
+
+> **Veredito: SOUND. "ACCEPT for catalogue."** Nenhum erro encontrado
+> em lugar algum — nem na aritmética, nem na tabela de calibração, nem
+> no enquadramento de honestidade. Único achado uma nuance de redação
+> não-substantiva (dois limites de `k` diferentes, referindo-se a
+> coisas diferentes, cada um individualmente correto), já tornada
+> irrelevante pela prova indutiva do próprio referee.
+
+Ver
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/ATTEMPT.md`
+e
+`.../general_p_dstar_closure_attempt/adversarial/REFEREE_REPORT.md`
+para os relatórios completos.
+
+### O que isto muda, precisamente
+
+**O item 11 do scorecard de `general_b_dstar_attempt/ATTEMPT.md` está
+agora FECHADO para `p=1,\ldots,10`, todo `b\ge0`** — a forma fechada
+geral-`b` das constantes agudas `D^{*(p)}_r(b)`, deixada aberta pelo
+Estágio 9 para `b\ge2` e parcialmente fechada pelo Estágio 14 apenas
+até `p=4`, agora se estende a dez valores de `p`. Adicionalmente, a
+prova indutiva do referee estabelece que a máquina de colapso
+`I_{2k+1}` subjacente é correta **para todo `k`**, não apenas os
+valores usados até `p=10` — fortalecendo a confiança de que estender
+a `p>10` é uma questão puramente computacional (custo de
+`sympy.cancel`/interpolação), não uma incerteza matemática residual,
+embora nenhuma montagem além de `p=10` tenha sido executada. Nenhum
+resultado anterior é enfraquecido: Corolário A3, Teorema 3′, o
+Teorema D1 e as fórmulas do Estágio 14 permanecem exatamente como
+provados, agora casos particulares do algoritmo geral.
+
+**O que permanece aberto, sem mudança:** `p>10` — nenhuma montagem
+explícita foi executada além de `p=10`, apesar da máquina subjacente
+estar agora provada correta para todo `k` (a barreira restante é de
+custo computacional de interpolação/cancelamento simbólico, não de
+correção matemática). A soma da faixa continua sendo deixada como
+soma explícita de `b` termos, por desenho. Nenhuma alegação uniforme-
+em-`K` ou de uma fórmula elementar única `p`-livre é feita — o próprio
+documento nomeia explicitamente que `Q_p(u)` tem grau `2p` genuíno e
+não há evidência de forma elementar uniforme em `p`.
+
+**Veredito honesto atualizado (ao fim do Estágio 16):** a linha
+`U_1/2` tem agora forma fechada geral-`b` provada para dez valores de
+`p` (`1,\ldots,10`), com a maquinaria subjacente (`H_k`) agora provada
+correta para todo `k` por indução — fechando o item 11 do Estágio 14
+em escopo bem além do mínimo mandatado (`p=5,6`). `p>10` permanece
+aberto apenas por não ter sido executado, não por incerteza
+matemática. Fontes completas:
+`k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/ATTEMPT.md`,
+`.../general_p_dstar_closure_attempt/adversarial/REFEREE_REPORT.md`.

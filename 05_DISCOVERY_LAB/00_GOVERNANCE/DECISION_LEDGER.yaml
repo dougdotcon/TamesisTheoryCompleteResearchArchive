@@ -4186,3 +4186,79 @@ decisions:
       - "nenhum resultado ja integrado (Estagios 1-15, DISC-DEC-058 a 062) e alterado por esta autorizacao"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
       - "ambas as frentes exigem verificacao adversarial hostil obrigatoria antes de qualquer integracao"
+
+  - decision_id: DISC-DEC-064
+    date: 2026-08-24
+    decision: >
+      Integrar o resultado da onda 15, frente (a)
+      (`GENERAL-P-DSTAR-CLOSURE-ATTEMPT`, DISC-DEC-063), apos
+      verificacao adversarial hostil dedicada. A frente atacou o item
+      11 do scorecard de `general_b_dstar_attempt/ATTEMPT.md` -- forma
+      fechada geral-p das constantes agudas D*(p)_r(b), p>=5 -- cuja
+      obstrucao nomeada (padrao de cancelamento de I_{2k+1}) o referee
+      da onda 14 ja havia mostrado ser mecanicamente removivel
+      (Estagio 14), sem executar a montagem completa. RESULTADO:
+      montagem executada para p=1,...,10 (o dobro do minimo p=5,6 do
+      mandato) -- Q_p(u) via identidades de Newton, momentos centrais
+      via funcao geradora de cumulantes, ambos implementados como
+      algoritmos gerais em p, nao ajustados caso a caso. 26.710
+      checagens exatas contra Corolario A3 (tabela de Stirling
+      propria), 0 divergencias; reduz caractere-por-caractere as seis
+      formulas ja provadas em b in {0,1} e re-deriva de forma
+      independente as cinco instancias b>=2 que o documento-pai so
+      havia verificado numericamente. Novas formas fechadas para
+      p=5,6,7 produzidas. Um bug auto-capturado e corrigido (mesma
+      classe do bug auto-capturado pelo documento-pai). Referee hostil
+      re-verificou cada peca com metodos deliberadamente diferentes
+      (interpolacao de Lagrange em vez de identidades de Newton/funcao
+      geradora de cumulantes; tabela de Stirling e implementacao de
+      Corolario A3 proprias), sem ler nenhum script da propria frente:
+      18.653 checagens independentes, 0 divergencias, incluindo
+      extensao de escala para p=5,6 ate r=200,b=30 (igualando a escala
+      maxima do documento-pai) e re-verificacao dedicada dos casos de
+      contorno do erro auto-capturado (i=1, i=b). O referee foi alem do
+      exigido: construiu uma PROVA INDUTIVA (usando apenas uma
+      identidade elementar de uma linha e a recursao de S_{2k-1} ja
+      citada do Estagio 14) de que a maquina H_k(r,b) e correta para
+      TODO k, nao apenas os valores testados numericamente -- fechando
+      analiticamente, nao apenas numericamente, a lacuna que o proprio
+      documento nomeou como seu maior risco. Veredito SOUND, "ACCEPT
+      for catalogue", nenhum erro encontrado em lugar algum; unico
+      achado uma nuance de redacao nao-substantiva, ja tornada
+      irrelevante pela prova indutiva do referee. Integrado como
+      "Estagio 16" em THEOREM.md, com pointer datado em Estagio 14;
+      correcao datada em `general_b_dstar_attempt/ATTEMPT.md` (item 11
+      do scorecard).
+    rationale: >
+      Mesmo padrao ja estabelecido nesta sessao: verificacao
+      independente propria da sessao orquestradora (re-derivacao do
+      zero de Q_p via identidades de Newton, momentos centrais via
+      soma direta, a identidade (E2), a recursao de S_{2k-1} em
+      k=5,6,7, e a formula montada completa de D*(5)_r(1) contra uma
+      tabela de Stirling propria) antes de despachar um referee hostil
+      dedicado, que concentrou seu esforco exatamente nas lacunas
+      nomeadas pelo proprio documento (k=9,10; a completude da correcao
+      do bug; a extensao de escala) em vez de duplicar verificacoes ja
+      feitas. A distincao entre "algoritmo geral-p provado para
+      p=1..10" e "formula elementar unica p-livre" (que nao existe e
+      nao e alegada) e mantida com precisao, seguindo exatamente a
+      mesma convencao ja usada para o colapso geral-k do prefator e a
+      identidade de paridade geral-k da onda 14 -- ambas ja rotuladas
+      PROVADAS apesar de serem parametrizadas por um inteiro, nao
+      formulas livres desse inteiro.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 16 anexado, pointer em Estagio 14)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/ATTEMPT.md (1 correcao datada)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (DISC-CORE-NUMERICS-001)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "D*(p)_r(b) PROVADO para p=1,...,10, todo b>=0 -- fecha o item 11 do scorecard de general_b_dstar_attempt/ATTEMPT.md nesse escopo"
+      - "maquina H_k(r,b) provada correta para TODO k por inducao (referee) -- p>10 permanece aberto apenas por nao ter sido executado, nao por incerteza matematica"
+    untouched_safeguards:
+      - "Corolario A3, Teorema 3', Teorema D1 e as formulas do Estagio 14 permanecem exatamente como provados, agora casos particulares do algoritmo geral"
+      - "nenhuma formula elementar unica p-livre e alegada ou provada; Q_p(u) tem grau genuino 2p"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

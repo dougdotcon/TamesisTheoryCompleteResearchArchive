@@ -285,6 +285,18 @@ starting node*) never referenced `K=3` specifically — it is `K`-independent
 — so it is expected, and independently confirmed below (§3.1), to carry
 over verbatim.
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-069`, nota
+> cosmética §9 do referee] O esboço acima herda a exposição
+> comprimida de `K=3` para o subcaso mais sutil — um
+> redirecionamento fora-de-ciclo pousando *dentro* de um arco já
+> periódico. Esse subcaso está traçado explicitamente na correção
+> pós-adversarial do documento `K=3`
+> (`conjecture1_k3_attempt/ATTEMPT.md`, §3, `DISC-DEC-065`); o
+> argumento é `K`-independente e vale aqui verbatim, e a checagem de
+> mecanismo de 110.000 trials do referee (incluindo a escala `n=12`
+> saturada de colisões/pontos-fixos) o confirma exaustivamente em
+> `K=4`. Não é um erro; nota de completude de exposição.
+
 **Exhaustive brute-force classification** (`enumerate_destination_combinatorics_k4.py`,
 exact functional-graph cycle detection, not by hand) of all 625 raw
 configurations, by `(r_{\text{on}}:=|\text{on-cycle set}|,\ \text{cycle
@@ -670,6 +682,22 @@ document's own explicit non-attempt/open-question framing for the next
 `K`. Ready for the standing adversarial-referee requirement this archive
 applies to every positive finding before any catalog update to
 `THEOREM.md` itself.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-069`] Revisão
+> adversarial concluída: veredito **SOUND — ACCEPT for catalogue.**
+> Nenhum erro matemático encontrado em lugar algum. O referee
+> reconstruiu tudo do zero por rotas distintas — os 15 padrões do
+> Lema 1 individualmente, o fato de espaçamentos `n=4` por duas rotas,
+> `W_C=1−Q` por enumeração própria até `n_off=4`, uma superfície nova
+> de momentos exatos sobre as 625 configurações brutas SEM a
+> maquinaria de colapso, mecanismo discreto do zero (110.000 trials,
+> 0 divergências, incluindo escala de estresse `n=12`), Monte Carlo
+> contínuo de 8M com testes por tipo-de-ciclo que nenhuma frente
+> havia rodado, e simulação discreta bruta em `n=40000` (escala nunca
+> rodada pela frente) — descartando explicitamente a hipótese de erro
+> sistemático herdado na linhagem. Único achado: a nota cosmética
+> tratada no adendo do §3 acima. Integrado como "Estágio 20" em
+> `THEOREM.md`. Ver `adversarial/REFEREE_REPORT.md`.
 
 ---
 

@@ -1240,6 +1240,14 @@ not a proof for the u12 ensemble itself (§5.5 states precisely why not).
 > `K\ge4` está sob revisão adversarial (onda 16); nenhum resultado é
 > afirmado aqui até o veredito.
 
+> **[Extensão, 2026-08-25 — DISC-DEC-066/DISC-DEC-069.]** `K=4` is
+> now **PROVED** as well (same citation, applied recursively up to
+> three times — see "Estágio 20" below): `f_{M_4}(x)=8x(1-x^2)^3`,
+> exactly — the SECOND consecutive unexpected closure in this line.
+> Conjecture 1 is now proved at `K=1,2,3,4`; `K\ge5` remains open,
+> explicitly not attempted (a concrete lead — the general
+> weighted-forest identity `W(n)=1-Q` — is named for a future front).
+
 **Conjecture 2 (the full unconditional distributional law).**
 
 `M(c) \overset{d}{=} \min(1,\sqrt{E/c})`,  `E\sim\mathrm{Exp}(1)`, i.e.
@@ -3173,7 +3181,13 @@ não há evidência de forma elementar uniforme em `p`.
 correta para todo `k` por indução — fechando o item 11 do Estágio 14
 em escopo bem além do mínimo mandatado (`p=5,6`). `p>10` permanece
 aberto apenas por não ter sido executado, não por incerteza
-matemática. Fontes completas:
+matemática.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-070`] A montagem
+> foi executada e verificada também para `p=11,\ldots,20` na onda 16.
+> [Ver Estágio 21 abaixo.] `p>20` permanece aberto apenas por escopo.
+
+Fontes completas:
 `k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/ATTEMPT.md`,
 `.../general_p_dstar_closure_attempt/adversarial/REFEREE_REPORT.md`.
 
@@ -3291,10 +3305,13 @@ a classificação `U_{1/2}` no limite `n\to\infty`, todos os Teoremas/
 Estágios anteriores, e a própria Conjectura 1 em `K=1,2` permanecem
 exatamente como estavam.
 
-**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge4`;
-Conjectura 2 em geral (herda o gap acima); a forma fechada geral-`b`
-das constantes agudas para `p>10` (Estágio 16); `\sup_K M_K/\sqrt K
-=a^*` (Estágio 13); a forma fechada completa do piso `H2` em `b=1`
+**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge4`
+[Ver Estágio 20 abaixo — `K=4` PROVADO em 2026-08-25; `K\ge5`
+permanece aberto]; Conjectura 2 em geral (herda o gap acima); a forma
+fechada geral-`b` das constantes agudas para `p>10` (Estágio 16)
+[Ver Estágio 21 abaixo — estendida a `p=1,\ldots,20` em 2026-08-25];
+`\sup_K M_K/\sqrt K=a^*` (Estágio 13) [Ver Estágio 19 abaixo —
+PROVADO em 2026-08-25]; a forma fechada completa do piso `H2` em `b=1`
 (onda 14, frente (b), diagnosticada como mesma dificuldade que
 Conjectura 1 geral-`K`). Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
@@ -3546,3 +3563,191 @@ segue apenas numericamente sugerida); Conjecturas 1 (`K\ge4`, sob
 revisão na onda 16) e 2; `p>20`; o piso `H2` em `b=1`; a lei de
 escala `\gamma\in(0,1)`. Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 20 — 2026-08-25]
+
+**Onda 16, frente (a), `DISC-DEC-066`/`DISC-DEC-069`
+(`CONJECTURE-1-K4-ATTEMPT`).** Alvo: §8 Conjectura 1 em `K=4`, após
+`K=1,2,3` provados (§5.3, Estágios 15 e 17). Dispatch feito com risco
+declarado incerto — o próprio documento de `K=3` nomeia a
+continuidade da tratabilidade como "pergunta genuinamente nova, não
+respondida" — e não-fechamento honesto plenamente aceitável.
+
+### O que foi provado
+
+> **Teorema (este documento, PROVADO módulo uma citação clássica).**
+> `\displaystyle f_{M_4}(x) = 8x(1-x^2)^3` em `(0,1)`, exatamente —
+> a instância `K=4` da Conjectura 1. **Segundo fechamento inesperado
+> consecutivo nesta linha.**
+
+Método: o mesmo whole-space de `K=1,2,3`, com três ingredientes novos
+tratados explicitamente: (i) o Lema 1 generaliza via os `Bell(4)=15`
+padrões de co-blocos, agrupados em 5 formas por tipo de partição —
+cada padrão contribui a constante `\prod_j(b_j-1)!`, e uma observação
+nova e elementar (a bijeção clássica partição-com-ordem-cíclica ↔
+permutações) força `\sum\prod(b_j-1)!=K!=24` ANTES de qualquer
+derivação probabilística; (ii) o fato de espaçamentos rotulados
+`n=4` (`\mathrm{Dirichlet}(1,1,1,1)`), provado inline; (iii) a mesma
+citação `PD(1)`, aplicada recursivamente até **três** vezes (um peel a
+mais que `K=3`). As `5^4=625` configurações brutas de destino colapsam
+em **12 tipos de forma** (`\sum_{s\le4}p(s)=12`, previsão
+pré-registrada ANTES da enumeração), e o peso fora-de-ciclo
+`W_C(Q)=1-Q` é verificado por enumeração simbólica bruta para todo
+`n_{\mathrm{off}}\le4` — incluindo `n_{\mathrm{off}}=3`, o caso que
+excede o máximo de `K=3` e não podia ser herdado. Soma simbólica
+exata: `8x(1-x^2)^3`. Subprodutos: `E[M_4]=128/315=\varphi_4`,
+`E[M_4^2]=1/5` (consistente com o `1/(K{+}1)` do Estágio 18),
+`E[M_4^3]=128/1155`. Dois bugs auto-capturados divulgados (confusão
+de escala residual-vs-absoluta na forma `3+1`, capturada pela checagem
+pré-registrada de densidade constante; pitfall de `sympify` com
+símbolo fresco no script de comparação da redução `K=3`). A redução
+do método geral a `K=3` e `K=2` reproduz os resultados já revisados
+grupo a grupo.
+
+### Verificação adversarial independente
+
+A sessão orquestradora re-verificou antes do despacho, com código
+próprio: a classificação `625\to12` (contagens por `r_{\mathrm{on}}` e
+constância de `N(r,n_{\mathrm{off}})`), `W_C=1-Q` por enumeração
+própria até `n_{\mathrm{off}}=3`, a identidade de partições
+(`2,6,24`), e as cinco densidades por grupo via marginalização própria
+(fórmula integral re-derivada de primeiros princípios), com
+probabilidades `1/5,2/5,2/7,1/10,1/70` e soma exata. O referee hostil
+— briefado para caçar um possível **erro sistemático herdado por toda
+a linhagem** — reconstruiu tudo por rotas ainda diferentes: os 15
+padrões do Lema 1 individualmente (mais forte que o agrupamento por
+exchangeability do documento); o fato `n=4` por duas rotas; uma
+superfície nova de momentos exatos `p=0..8` sobre as 625 configurações
+brutas SEM nenhuma maquinaria de colapso (45 momentos por grupo + 9
+totais, todos exatos); mecanismo discreto do zero com oráculo
+validado (110.000 trials, 0 divergências, todas as 625 células em
+todas as escalas, incluindo `n=12` com 43% de colisões); Monte Carlo
+contínuo de 8M com KS por grupo E por tipo-de-ciclo (teste que
+nenhuma frente havia rodado — a independência de `\sigma` verificada
+distribucionalmente); e simulação discreta bruta com ground truth por
+pointer-doubling em `n=10000/20000/40000` — a última uma escala nunca
+rodada pela frente, e a mais limpa (KS `p=0{,}97`). **O erro
+sistemático procurado não existe em nenhuma superfície alcançável.**
+
+> **Veredito: SOUND — "ACCEPT for catalogue."** Nenhum erro
+> matemático encontrado em lugar algum. Único achado: uma nota
+> cosmética herdada (a exposição comprimida do subcaso
+> "redirecionamento dentro de arco periódico", já traçado
+> explicitamente na correção pós-adversarial de `K=3`) — tratada por
+> adendo datado. A surpresa dupla se dissolve por razão estrutural
+> identificada: as três juntas do método (`\prod(b_j-1)!` somando a
+> `K!` por bijeção; densidade dependendo só de `r_{\mathrm{on}}`;
+> `W=1-Q` via a identidade de florestas ponderadas degenerando em
+> `E+Q=1`) não têm conteúdo específico de `K` nos intervalos
+> verificados.
+
+Ver `theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/conjecture1_k4_attempt/ATTEMPT.md`
+e `.../conjecture1_k4_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**Conjectura 1 (§8) está agora PROVADA em `K=1,2,3,4`.** `K\ge5`
+permanece aberto e explicitamente não tentado — mas com uma pista
+concreta e bem posta nomeada para uma frente futura: provar a
+identidade geral de florestas ponderadas `W(n)=1-Q` para todo `n`
+(o que fecharia o único ingrediente genuinamente novo por `K` de uma
+vez, em vez de um `K` por vez; o probe do referee registra ainda que
+a fórmula geral do documento em `K=5` soma a `10x(1-x^2)^4`, e que
+`W=1-Q` já está verificado em `n_{\mathrm{off}}=4` — restando o Lema 1
+em `K=5` e `W` em `n_{\mathrm{off}}=5`). Conjectura 2 herda `K=4`
+como mais um componente confirmado, permanecendo CONJECTURA. Nenhum
+resultado anterior é enfraquecido.
+
+**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge5`;
+Conjectura 2 em geral; a exploração conjunta de `p\ge2` pontos
+(Estágio 18); a re-montagem do Estágio 12 com `a^*` (Estágio 19);
+`p>20` de `D^{*(p)}_r(b)` [Ver Estágio 21 abaixo]; o piso `H2` em
+`b=1` (sob revisão na onda 16); a lei de escala `\gamma\in(0,1)`.
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 21 — 2026-08-25]
+
+**Onda 16, frente (c), `DISC-DEC-066`/`DISC-DEC-070`
+(`GENERAL-P-DSTAR-EXTENSION-ATTEMPT`).** Alvo: estender a montagem
+geral-`p` de `D^{*(p)}_r(b)` (Estágio 16, `p=1,\ldots,10`) até
+`p=20` — frente de execução, risco baixo por desenho, já que a
+máquina `H_k(r,b)` fora provada correta para todo `k` pela indução do
+referee da onda 15.
+
+### O que foi executado e verificado
+
+> **Resultado: o alvo completo do mandato, `p=11,\ldots,20`, fechado
+> — `62.310` checagens exatas contra ground truth independente
+> (Corolário A3, tabela de Stirling própria), `0` divergências, a
+> `r\le200, b\le30` uniformemente para todos os dez novos `p`** — a
+> maior escala já usada nesta linhagem, sem redução conforme `p`
+> cresce.
+
+Método idêntico ao Estágio 16 em conteúdo matemático; a única
+engenharia nova são extrações mais rápidas (validadas cruzado,
+caractere por caractere, contra as rotas lentas originais antes de
+qualquer uso) dos mesmos dois objetos geradores: os momentos centrais
+via a recorrência clássica de exponenciação de séries de potências
+(mesma classe algorítmica das identidades de Newton), e `H_k` via
+avaliação-e-interpolação exata. Novas formas fechadas impressas para
+todo `p=11,\ldots,20` em `b=0,1` (mais instâncias `b=2,3`),
+confirmando a persistência do padrão de denominador `(2r+3)`. Um bug
+latente auto-capturado e divulgado (`sp.nsimplify` corrompendo
+racionais exatos grandes — herdado de código dormante, nunca
+exercitado, do documento-pai; capturado por uma varredura de
+calibração falhando ruidosamente; a rota de verificação de produção
+nunca o tocou).
+
+### Verificação adversarial independente
+
+A sessão orquestradora verificou antes do despacho, com Corolário A3
+próprio: as formas impressas de `p=11` (`b=0,1,2`) em `123` pontos
+incluindo a região de anulamento `r<p`. O referee hostil (sem ler
+nenhum script da frente): re-derivou a recorrência de momentos e a
+checou contra somatório binomial direto para **todo** `l=1..20`
+(rota que a frente não usou); construiu uma **terceira rota** para
+`H_k` (fatoração fechada `S_{2k-1}=A_k\cdot C(N,m{+}1)` derivada da
+recursão aceita, sem interpolação alguma); **provou a cota de grau**
+`\deg_r H_{2k-1}=k-1` (coeficiente líder `4^{k-1}(k-1)!`,
+independente de `b`) — o único fato que a frente admitia como
+empírico — e provou que o self-check da interpolação é determinístico
+(um grau sub-estimado é capturado por qualquer ponto held-out;
+`36/36` em testes de ajuste deliberadamente errado); replicou o grid
+**inteiro** de `62.310` pontos com pipeline próprio sem `sympy` na
+varredura, `0` divergências, mais um push de escala a `r=300` em
+`p=15,20`; verificou as `26` formas impressas por duas vias; e
+confirmou a divulgação do bug caractere por caractere. Total:
+`75.899` checagens exatas, `0` divergências.
+
+> **Veredito: SOUND — "ACCEPT for catalogue."** Dois achados menores
+> apenas de documentação (uma contagem sub-declarada no tally do
+> ground truth; um rótulo de scorecard comprimindo a então-empírica
+> cota de grau — agora irrelevante, pois o referee a provou).
+> Condições de integração atendidas: a prova da cota de grau entra no
+> catálogo como PROVED, citada ao referee.
+
+Ver `.../general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/ATTEMPT.md`
+e `.../general_p_dstar_extension_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**`D^{*(p)}_r(b)` está agora executado e verificado para
+`p=1,\ldots,20`, todo `b\ge0`** — dobrando o alcance do Estágio 16 —
+com a cota de grau `\deg_r H_{2k-1}(r,b)=k-1` agora **PROVADA**
+(referee), removendo o último fato empírico da maquinaria. `p>20`
+permanece aberto apenas por escopo: os próprios tempos das rotas
+rápidas (sub-segundo em `p=20`) sugerem, sem provar, tratabilidade
+continuada. Nenhum resultado anterior é enfraquecido.
+
+**O que permanece aberto, sem mudança:** `p>20` (por escopo);
+nenhuma fórmula elementar única livre-em-`p` é alegada (grau genuíno
+`2p` de `Q_p`); Conjectura 1 `K\ge5`; Conjectura 2; a exploração
+conjunta (Estágio 18); a re-montagem nítida do Estágio 12 (Estágio
+19); o piso `H2` em `b=1`; `\gamma\in(0,1)`. Nenhuma alegação de
+progresso em Millennium Problem; matemática combinatória pura
+interna a este arquivo.

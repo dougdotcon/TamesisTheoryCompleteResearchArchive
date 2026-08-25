@@ -1,0 +1,37 @@
+========================================================================
+Check A — independent discrete-permutation MC of Lemma 1 (K=4)
+========================================================================
+n=300, trials=15000:
+  E[m_i]=[0.2027 0.1981 0.1997 0.202 ]  (target 0.2, |z|max=1.96)
+  E[m1^2]=0.06844 (target 1/15=0.06667)   Cov(m1,m2)=-0.006842 (target -1/150=-0.006667)
+  KS L vs t^4: D=0.01471 p=0.0030
+  KS pooled m_i vs Beta(1,4): D=0.01327 p=0.0000
+  KS m1+m2 vs Beta(2,3): D=0.00771 p=0.3334
+  exchangeability KS(m1,m2): p=0.086   KS(m1,m4): p=0.785
+n=1000, trials=10000:
+  E[m_i]=[0.1998 0.1975 0.2032 0.1985]  (target 0.2, |z|max=1.93)
+  E[m1^2]=0.06699 (target 1/15=0.06667)   Cov(m1,m2)=-0.006458 (target -1/150=-0.006667)
+  KS L vs t^4: D=0.00730 p=0.6573
+  KS pooled m_i vs Beta(1,4): D=0.00480 p=0.3148
+  KS m1+m2 vs Beta(2,3): D=0.01113 p=0.1662
+  exchangeability KS(m1,m2): p=0.664   KS(m1,m4): p=0.376
+n=5000, trials=6000:
+  E[m_i]=[0.201  0.1972 0.2042 0.2006]  (target 0.2, |z|max=1.94)
+  E[m1^2]=0.06742 (target 1/15=0.06667)   Cov(m1,m2)=-0.006881 (target -1/150=-0.006667)
+  KS L vs t^4: D=0.01012 p=0.5665
+  KS pooled m_i vs Beta(1,4): D=0.00475 p=0.6484
+  KS m1+m2 vs Beta(2,3): D=0.01108 p=0.4502
+  exchangeability KS(m1,m2): p=0.120   KS(m1,m4): p=0.795
+
+========================================================================
+Check B — discrete mechanism check (from scratch), 3 scales
+========================================================================
+n=12, trials=30000: mismatches=0/30000  cells hit=625/625  collisions=12861  fixed-points=8871  (oracle cross-check on 3000 trials: OK)
+n=25, trials=60000: mismatches=0/60000  cells hit=625/625  collisions=13184  fixed-points=9112
+n=150, trials=20000: mismatches=0/20000  cells hit=625/625  collisions=785  fixed-points=525
+
+TOTAL mismatches: 0 / 110000
+Check B: PASS — the (D+1)-points mechanism prediction is exact per configuration,
+including the n=12 stress scale (dense collisions/fixed points), all scales.
+
+results written to indep_discrete_checks_k4_results.json

@@ -488,6 +488,26 @@ algorithm and identical cited ingredients, extracted via faster
 | 10 | A single symbolic-in-`p` elementary formula | **NOT CLAIMED, believed not to exist in elementary form** — unchanged from the closure attempt |
 | 11 | Independent adversarial re-verification of this document | **NOT PERFORMED** — out of scope for this front, reserved for the orchestrating session |
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-070`] Revisão
+> adversarial concluída: veredito **SOUND — ACCEPT for catalogue**,
+> `75.899` checagens independentes do referee, `0` divergências,
+> incluindo replicação integral do grid de `62.310` pontos por
+> pipeline próprio sem `sympy` e push de escala a `r=300` em
+> `p=15,20`. Três atualizações a este documento: **(i)** a cota de
+> grau `\deg_r H_{2k-1}(r,b)=k-1` (§2.2), aqui empírica, foi
+> **PROVADA pelo referee** (coeficiente líder `4^{k-1}(k-1)!`,
+> independente de `b`, via a fatoração `S_{2k-1}=A_k\cdot C(N,m+1)`
+> derivada da recursão aceita) — a linha 2 do scorecard deve ser lida
+> como PROVED sem ressalva empírica, com crédito ao referee; **(ii)**
+> o tally "1044+120=1164" do §3 sub-conta as checagens do próprio
+> `ground_truth.log` (omite a linha de calibração `b=1`) — a contagem
+> é um sub-relato, na direção segura; **(iii)** o self-check da
+> interpolação foi provado determinístico pelo referee (um grau
+> sub-estimado é capturado por qualquer ponto held-out; `36/36` em
+> testes de ajuste deliberadamente errado), respondendo à pergunta
+> que o §6 deixara ao referee. Integrado como "Estágio 21" em
+> `THEOREM.md`. Ver `adversarial/REFEREE_REPORT.md`.
+
 **Net honest verdict.** The mandate's full target (`p=11,\dots,20`) was
 reached, at the largest verification scale used anywhere in this lineage,
 uniformly across all ten new values — not a shrinking-scale fallback. This

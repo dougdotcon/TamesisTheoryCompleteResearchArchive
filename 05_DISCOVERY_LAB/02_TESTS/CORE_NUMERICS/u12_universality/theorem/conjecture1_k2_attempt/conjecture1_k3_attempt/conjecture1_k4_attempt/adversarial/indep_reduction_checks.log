@@ -1,0 +1,44 @@
+========================================================================
+K=3 reduction — my general method vs the established K=3 groups
+========================================================================
+r=0: my general method = 3*x**3 - 6*x**2 + 3*x
+      established K=3   = 3*x**3 - 6*x**2 + 3*x  MATCH=True
+      K=4 doc Sec.5 row = 3*x**3 - 6*x**2 + 3*x  MATCH=True
+r=1: my general method = 6*x**4 - 9*x**3 + 3*x
+      established K=3   = 6*x**4 - 9*x**3 + 3*x  MATCH=True
+      K=4 doc Sec.5 row = 6*x**4 - 9*x**3 + 3*x  MATCH=True
+r=2: my general method = 3*x**5 - 9*x**3 + 6*x**2
+      established K=3   = 3*x**5 - 9*x**3 + 6*x**2  MATCH=True
+      K=4 doc Sec.5 row = 3*x**5 - 9*x**3 + 6*x**2  MATCH=True
+r=3: my general method = 3*x**5 - 6*x**4 + 3*x**3
+      established K=3   = 3*x**5 - 6*x**4 + 3*x**3  MATCH=True
+      K=4 doc Sec.5 row = 3*x**5 - 6*x**4 + 3*x**3  MATCH=True
+sum = 6*x**5 - 12*x**3 + 6*x = 6x(1-x^2)^2  MATCH
+K=3 raw per-r counts: {0: 16, 1: 24, 2: 18, 3: 6} (K=3 doc: T0=16; r=1:24; r=2: 9+9=18; r=3: 2+3+1=6)
+7 shape types at K=3 confirmed: [(0, ()), (1, (1,)), (2, (1, 1)), (2, (2,)), (3, (1, 1, 1)), (3, (2, 1)), (3, (3,))]
+
+========================================================================
+K=2 reduction — my general method vs the established K=2 groups
+========================================================================
+r=0: my general method = -2*x**2 + 2*x   established = -2*x**2 + 2*x   MATCH=True
+r=1: my general method = -2*x**3 + 2*x   established = -2*x**3 + 2*x   MATCH=True
+r=2: my general method = -2*x**3 + 2*x**2   established = -2*x**3 + 2*x**2   MATCH=True
+sum = -4*x**3 + 4*x = 4x(1-x^2)  MATCH
+
+========================================================================
+K=5 spot extension (NOT claimed by the document; referee probe)
+========================================================================
+sum over r=0..5 of my general formula at K=5: 10*x**9 - 40*x**7 + 60*x**5 - 40*x**3 + 10*x
+10x(1-x^2)^4 = 10*x**9 - 40*x**7 + 60*x**5 - 40*x**3 + 10*x
+equal: True
+(consistent with Conjecture 1 at K=5 — contingent on W=1-Q at n_off=4, verified, and Lemma 1 at K=5, NOT verified here; recorded as a probe only, no claim.)
+
+========================================================================
+sympify fresh-symbol pitfall — confirming the document's Sec.5 bug
+========================================================================
+x (positive=True) is xs (no assumptions)?  False   x == xs? False
+simplify(direct - sympified) = 3*x**3 - 6*x**2 + 3*x - 3*x**3 + 6*x**2 - 3*x  (nonzero iff the pitfall is real)
+srepr distinct: Symbol('x', positive=True)  vs  Symbol('x')
+CONFIRMED: sympify('...') creates a distinct Symbol('x') without the positive=True assumption; the difference does not cancel — exactly the false-MISMATCH failure mode the document reports having caught and fixed.  (My comparisons above never use sympify-of-strings.)
+
+ALL REDUCTION CHECKS PASS

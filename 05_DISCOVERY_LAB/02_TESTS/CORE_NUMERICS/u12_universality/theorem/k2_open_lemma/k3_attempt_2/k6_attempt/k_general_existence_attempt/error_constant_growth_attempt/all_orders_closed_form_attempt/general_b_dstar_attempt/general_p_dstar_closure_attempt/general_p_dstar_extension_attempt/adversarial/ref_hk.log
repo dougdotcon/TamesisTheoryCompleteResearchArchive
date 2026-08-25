@@ -1,0 +1,11 @@
+--- built A_k(N,m) polynomials, k=1..20, in 80.27s ---
+B_1(N,m) = 1    (expect 1, i.e. H_1 = 1)
+H_3(r,b) = b**2 + 2*b + 4*r + 1    (expect (b+1)^2 + 4r, closure attempt's k=2 bracket * -8)
+A_k-route vs brute-force P_b*S_(2k-1)(N,r): k=1..20, r in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 20, 30, 50], b in [0, 1, 2, 3, 5, 8, 13, 30]: 2720 checks, fails=0 (0.2s)
+--- degree/leading-coefficient check, b symbolic ---
+for every k=1..20: (r+1) | A_k(2r+b+1, r), deg_r H_(2k-1) = k-1, leading coeff = 4^(k-1) (k-1)!  (b symbolic) -- OK
+--- wrong-degree-guess stress test (under-guess by one) ---
+  k=5, b=3: degree-(k-2) fit through k-1 nodes: 12/12 held-out points disagree (theory says: all of them must)
+  k=12, b=3: degree-(k-2) fit through k-1 nodes: 12/12 held-out points disagree (theory says: all of them must)
+  k=20, b=3: degree-(k-2) fit through k-1 nodes: 12/12 held-out points disagree (theory says: all of them must)
+ALL REFEREE H_k CHECKS PASSED

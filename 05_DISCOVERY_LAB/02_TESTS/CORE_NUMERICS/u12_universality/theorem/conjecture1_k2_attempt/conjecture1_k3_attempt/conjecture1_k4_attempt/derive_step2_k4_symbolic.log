@@ -1,0 +1,90 @@
+==============================================================================
+PART A -- the on-cycle discrete-choice-times-position-density
+cancellation, re-verified at K=4 (identical mechanism to K=2/K=3)
+==============================================================================
+
+For an on-cycle node j targeting region pi(j) (mass m_{pi(j)}), the raw
+discrete probability of THIS target (m_{pi(j)}) times the density of the
+position P_j within it (1/m_{pi(j)}) cancels EXACTLY to 1, for any pi(j).
+This is K-independent (a 1-line algebra fact about a single node), so it
+is not re-derived per K -- but IS the reason the on-cycle part of the
+formula (the x^r * (1-x-Q)^(r-1)/(r-1)! factor) needs no dependence on the
+specific permutation pi, only on r=|C|, exactly as found at K=3.
+
+m_j * (1/m_j) = 1  (confirmed, generic in m_j)
+
+==============================================================================
+PART B -- brute-force symbolic off-cycle weight W_C(m1,...,m4),
+for every n_off in {0,1,2,3,4} needed at K=4 (n_off=3 is NEW,
+exceeding K=3's maximum of n_off=2 -- the crux check)
+==============================================================================
+n_off=0: W = 1 (trivial, no off-cycle nodes)
+
+n_off=1 (on=[1, 2, 3], off=[4]):
+  raw W_C(m1,m2,m3,m4) = 1 - m4
+  candidate closed form 1-Q (Q=sum of off masses) = 1-(m4)
+  w - candidate = 0
+  CONFIRMED: W_C depends ONLY on Q, and equals exactly 1-Q (matches K=3's n_off=2 finding, now also verified at n_off=1).
+
+n_off=2 (on=[1, 2], off=[3, 4]):
+  raw W_C(m1,m2,m3,m4) = -m3 - m4 + 1
+  candidate closed form 1-Q (Q=sum of off masses) = 1-(m3+m4)
+  w - candidate = 0
+  CONFIRMED: W_C depends ONLY on Q, and equals exactly 1-Q (matches K=3's n_off=2 finding, now also verified at n_off=2).
+
+n_off=3 (on=[1], off=[2, 3, 4]):
+  raw W_C(m1,m2,m3,m4) = -m2 - m3 - m4 + 1
+  candidate closed form 1-Q (Q=sum of off masses) = 1-(m2+m3+m4)
+  w - candidate = 0
+  CONFIRMED: W_C depends ONLY on Q, and equals exactly 1-Q (matches K=3's n_off=2 finding, now also verified at n_off=3).
+
+n_off=4 (on=[], off=[1, 2, 3, 4]):
+  raw W_C(m1,m2,m3,m4) = -m1 - m2 - m3 - m4 + 1
+
+==============================================================================
+PART C -- assembling f_shape(x) for r=1,2,3,4 via the general formula
+==============================================================================
+r=1 (n_off=3): C(4,1)=4, f_single(x) [one subset, all internal perms summed] = -3*x**5 + 8*x**4 - 6*x**3 + x
+  f_r=1_total(x) [all C(4,1)=4 subsets] = -12*x**5 + 32*x**4 - 24*x**3 + 4*x
+r=2 (n_off=2): C(4,2)=6, f_single(x) [one subset, all internal perms summed] = -2*x**6 + 4*x**5 - 4*x**3 + 2*x**2
+  f_r=2_total(x) [all C(4,2)=6 subsets] = -12*x**6 + 24*x**5 - 24*x**3 + 12*x**2
+r=3 (n_off=1): C(4,3)=4, f_single(x) [one subset, all internal perms summed] = -x**7 + 6*x**5 - 8*x**4 + 3*x**3
+  f_r=3_total(x) [all C(4,3)=4 subsets] = -4*x**7 + 24*x**5 - 32*x**4 + 12*x**3
+r=4 (n_off=0): C(4,4)=1, f_single(x) [one subset, all internal perms summed] = -4*x**7 + 12*x**6 - 12*x**5 + 4*x**4
+  f_r=4_total(x) [all C(4,4)=1 subsets] = -4*x**7 + 12*x**6 - 12*x**5 + 4*x**4
+
+==============================================================================
+PART D -- T0 (r=0, no cycle at all)
+==============================================================================
+Computed via the complement-probability route (as K=3's own script
+does): P_T0(m1,...,m4) = 1 - sum of the other shapes' target-level
+probabilities, cross-checked against a literal 625-term brute-force
+sum over the SAME raw classification enumerate_destination_
+combinatorics_k4.py already validated.
+P_T0 (brute-force 625-term sum, 4 ops) computed.
+f_T0(x) = -4*x**4 + 12*x**3 - 12*x**2 + 4*x
+
+==============================================================================
+GRAND TOTAL
+==============================================================================
+f_M4(x) = f_(r=0) + f_(r=1) + f_(r=2) + f_(r=3) + f_(r=4)
+        = -8*x**7 + 24*x**5 - 24*x**3 + 8*x
+
+Target 8x(1-x^2)^3 = -8*x**7 + 24*x**5 - 24*x**3 + 8*x
+
+DIFFERENCE (f_M4 - target) = 0
+
+*** EXACT MATCH. f_M4(x) = 8x(1-x^2)^3, symbolically confirmed. ***
+
+--- Normalization / mean sanity checks ---
+integral_0^1 f_M4(x) dx = 1  (must be 1)
+integral_0^1 x*f_M4(x) dx = 128/315  (compare to phi_4, THEOREM.md Sec 5.2 Wallis integral, K=4)
+integral_0^1 x^2*f_M4(x) dx = 1/5  (E[M_4^2], new)
+integral_0^1 x^3*f_M4(x) dx = 128/1155  (E[M_4^3], new)
+
+--- Per-shape probability cross-check ---
+  P(r_on=0) = integral f_(r=0) dx = 1/5
+  P(r_on=1) = integral f_(r=1) dx = 2/5
+  P(r_on=2) = integral f_(r=2) dx = 2/7
+  P(r_on=3) = integral f_(r=3) dx = 1/10
+  P(r_on=4) = integral f_(r=4) dx = 1/70

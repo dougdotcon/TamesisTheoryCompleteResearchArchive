@@ -1,0 +1,73 @@
+--- Q_p(u) via Newton's identities vs direct e_p(1..u), p=0..8 ---
+Q_p total checks=225, fails=0
+--- Q_p(u) timing, p=1..20 (confirms this ingredient needs no speed-up) ---
+  Q_1: 0.000s, degree=2
+  Q_2: 0.000s, degree=4
+  Q_3: 0.000s, degree=6
+  Q_4: 0.000s, degree=8
+  Q_5: 0.000s, degree=10
+  Q_6: 0.000s, degree=12
+  Q_7: 0.000s, degree=14
+  Q_8: 0.000s, degree=16
+  Q_9: 0.043s, degree=18
+  Q_10: 0.052s, degree=20
+  Q_11: 0.061s, degree=22
+  Q_12: 0.080s, degree=24
+  Q_13: 0.102s, degree=26
+  Q_14: 0.121s, degree=28
+  Q_15: 0.149s, degree=30
+  Q_16: 0.165s, degree=32
+  Q_17: 0.183s, degree=34
+  Q_18: 0.205s, degree=36
+  Q_19: 0.243s, degree=38
+  Q_20: 0.275s, degree=40
+total Q_p(1..20) time: 1.72s
+
+--- fast (power-series recurrence) vs slow (sympy series) central moments, l=1..10 ---
+  l=1 (mu_2): match=True
+  l=2 (mu_4): match=True
+  l=3 (mu_6): match=True
+  l=4 (mu_8): match=True
+  l=5 (mu_10): match=True
+  l=6 (mu_12): match=True
+  l=7 (mu_14): match=True
+  l=8 (mu_16): match=True
+  l=9 (mu_18): match=True
+  l=10 (mu_20): match=True
+--- fast central moments vs DIRECT binomial summation, l=1..8 ---
+direct-sum cross-check: 72 checks, fails=0
+--- cross-check vs parent-document-printed mu_2,4,6,8 (character-for-character) ---
+l=1 (mu_2): matches parent printed formula exactly: True
+l=2 (mu_4): matches parent printed formula exactly: True
+l=3 (mu_6): matches parent printed formula exactly: True
+l=4 (mu_8): matches parent printed formula exactly: True
+
+--- central moments, FAST route, timing l=1..20 ---
+  mu_2: 0.0000s, degree=1
+  mu_4: 0.0000s, degree=2
+  mu_6: 0.0000s, degree=3
+  mu_8: 0.0000s, degree=4
+  mu_10: 0.0012s, degree=5
+  mu_12: 0.0016s, degree=6
+  mu_14: 0.0019s, degree=7
+  mu_16: 0.0007s, degree=8
+  mu_18: 0.0007s, degree=9
+  mu_20: 0.0001s, degree=10
+  mu_22: 0.0048s, degree=11
+  mu_24: 0.0094s, degree=12
+  mu_26: 0.0060s, degree=13
+  mu_28: 0.0069s, degree=14
+  mu_30: 0.0073s, degree=15
+  mu_32: 0.0084s, degree=16
+  mu_34: 0.0223s, degree=17
+  mu_36: 0.0120s, degree=18
+  mu_38: 0.0130s, degree=19
+  mu_40: 0.0153s, degree=20
+total fast-route mu(1..20) time: 0.132s
+
+=== ingredients_ext.py summary ===
+Q_p Newton-identity vs direct e_p: fails=0
+central moments fast vs slow (l=1..10): fails=0
+central moments fast vs direct sum: fails=0/72
+central moments fast vs parent printed (l=1..4): fails=0
+ALL INGREDIENT CHECKS PASSED (total fails=0)

@@ -1,0 +1,20 @@
+Running marching-indexer self-test first (decoupled W=0 case)...
+[self-test] max|Phi_marched(0,g) - exp(-c g)| over g in [0,0.05] (decoupled W=0 case) = 6.94e-18  (should be ~0, up to O(h) discretization)
+[self-test] PASSED (marching indexer correctly reproduces the pure-race limit)
+
+Grid: G_MAX=0.4 S_MAX=0.5 h=0.002  (c*h=2.0)
+  iter   0: max|dPhi(s=0,.)|=1.313e-03  max|dPsi(s=0,.)|=1.313e-03
+  iter  10: max|dPhi(s=0,.)|=1.114e-03  max|dPsi(s=0,.)|=1.114e-03
+  iter  20: max|dPhi(s=0,.)|=7.454e-04  max|dPsi(s=0,.)|=7.454e-04
+  iter  30: max|dPhi(s=0,.)|=3.918e-04  max|dPsi(s=0,.)|=3.918e-04
+  iter  40: max|dPhi(s=0,.)|=1.609e-04  max|dPsi(s=0,.)|=1.609e-04
+  iter  50: max|dPhi(s=0,.)|=5.135e-05  max|dPsi(s=0,.)|=5.136e-05
+  iter  60: max|dPhi(s=0,.)|=1.266e-05  max|dPsi(s=0,.)|=1.267e-05
+  iter  70: max|dPhi(s=0,.)|=2.399e-06  max|dPsi(s=0,.)|=2.406e-06
+  iter  79: max|dPhi(s=0,.)|=4.263e-07  max|dPsi(s=0,.)|=4.282e-07
+elapsed: 0.3s
+
+Phi(0, t0) at the T3 comparison points (T3 reference values are CITED from the already-archived fcd_t3.log, not re-derived here -- this run does not simulate anything, it only solves the PDE system numerically):
+  t0=0.01  solver Phi(0,t0)=0.03197   T3 (cited)=0.03832   diff=-0.00635
+  t0=0.09  solver Phi(0,t0)=0.03195   T3 (cited)=0.03832   diff=-0.00637
+  t0=0.37  solver Phi(0,t0)=0.03195   T3 (cited)=0.03885   diff=-0.00690

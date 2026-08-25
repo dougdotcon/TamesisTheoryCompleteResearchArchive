@@ -1,0 +1,26 @@
+=== T5a: exact rational-arithmetic (no float trust) proof that LHS(1) < 1/3 ===
+LHS(1) exact closed form (sympy.simplify): sqrt(pi)*(17/11 - sqrt(2))
+  = sqrt(pi)*(17/11 - sqrt(2)), confirmed by direct expansion
+14143^2=200024449 > 2*10000^2=200000000  =>  sqrt(2)<1.4143 : True
+14142^2=199996164 < 2*10000^2=200000000  =>  sqrt(2)>1.4142 : True
+17725^2=314175625 > pi*10000^2 (using classical pi<3.1416, so 3.1416*10^8=314160000)  =>  sqrt(pi)<1.7725 : True
+astar_hi (rational upper bound on a*) = 2076661/5656800 = 0.3671087894215811  (true a*=0.36708721862742237558... so astar_hi is a genuine upper bound)
+total_hi (rational upper bound on LHS(1)) = 48257687251/207416000000 = 0.23266135327554288
+Is total_hi < 1/3 ?  48257687251/207416000000 < 1/3  =>  True
+CONFIRMED: LHS(1) < 1/3, via pure rational arithmetic (no float/mpmath trust anywhere in T5a).
+
+=== T5b: LHS(K) monotone decreasing + LHS(K)<=LHS(1)<1/3, wide mpmath check ===
+LHS(1)=0.232618585859342  vs 1/3=0.333333333333333
+K in {1..200} dense + sparse to 1e6 (206 points): monotonicity violations=0
+
+=== T5c: fully assembled elementary bound M_bound(K) < a*sqrt(K), mpmath, K to 1e6 ===
+K in dense 1..600 + sparse to 1e6 (611 points): violations=0
+worst (largest, closest-to-failing) diff at K=1: -0.1007147475
+
+=== T5d: EXACT (Fraction) M_K < a*sqrt(K) -- the actual quantity, not a surrogate ===
+K in dense 1..800 + sparse to 3000 (806 points, EXACT Fraction M_K and phi_K): violations=0
+worst (largest, closest-to-failing) diff at K=1: -0.2004205452  (K=1: M_1=1/6 exactly, a*=0.367087..., diff=1/6-a*~=-0.2004, matches the archive's own r_1=0.16667 figure)
+
+=== T5e: maximally paranoid re-check -- EXACT Q(n) (not the elementary surrogate) combined with Lemma 4.1's cited z_K bound ===
+K in dense 1..400 + sparse to 2000 (405 points, EXACT Q(n) + cited Lemma4.1 z_K bound): violations=0
+worst (largest, closest-to-failing) diff at K=1: -0.1204013492

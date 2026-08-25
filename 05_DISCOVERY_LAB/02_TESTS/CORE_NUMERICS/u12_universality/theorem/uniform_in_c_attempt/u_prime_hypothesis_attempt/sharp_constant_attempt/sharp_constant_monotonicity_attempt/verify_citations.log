@@ -1,0 +1,22 @@
+=== T1: Robbins (1955) bound on n! ===
+n=1..2000 dense + 7 sparse points to n=1e6: violations=0
+
+=== T2: FGKP95 Theorem 7 -- theta(n) bound, two independent computations ===
+T2a: theta_from_definition_exact (Fraction partial sum) vs theta_via_gammainc, small n
+n=   0  theta_def=0.5  theta_gammainc=0.5  diff=0.0
+n=   1  theta_def=0.359140914229523  theta_gammainc=0.359140914229523  diff=0.0
+n=   2  theta_def=0.347264024732663  theta_gammainc=0.347264024732663  diff=0.0
+n=   3  theta_def=0.342837435909741  theta_gammainc=0.342837435909741  diff=1.6705e-50
+n=   5  theta_def=0.339132654769471  theta_gammainc=0.339132654769471  diff=5.3455e-51
+n=  10  theta_def=0.336266273809731  theta_gammainc=0.336266273809731  diff=2.8064e-50
+n=  20  theta_def=0.334807529639219  theta_gammainc=0.334807529639219  diff=1.9311e-49
+n=  50  theta_def=0.333924782244213  theta_gammainc=0.333924782244213  diff=2.6059e-49
+n= 100  theta_def=0.333629345568621  theta_gammainc=0.333629345568621  diff=2.7436e-48
+n= 200  theta_def=0.333481410700036  theta_gammainc=0.333481410700036  diff=2.1424e-47
+largest cross-method diff (n=0..200 sample): 2.1424e-47 (floating-point-level agreement)
+
+T2b: FGKP95 Theorem 7 bound theta(n) in [1/3+4/(135(n+8/45)), 1/3+4/(135(n+2/21))]
+n=0..1000 dense + sparse to n=1e6 (1010 points total): violations=0
+
+=== T3: new identity Q(n) = (n! e^n)/(2 n^n) - theta(n), exact Q(n) vs exact theta(n) ===
+n in dense small sample: violations=0 (identity confirmed to >=30 digits at every point tested)

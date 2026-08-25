@@ -1,0 +1,38 @@
+======================================================================
+Grid-refinement sequence (small domain G_MAX=0.05, S_MAX=0.10, target t0=0.03)
+======================================================================
+  h=0.00100000  Phi(0,0.03)=0.031875  iters=79  last_change=8.50e-09  elapsed=0.0s
+  h=0.00050000  Phi(0,0.03)=0.033903  iters=100  last_change=8.19e-09  elapsed=0.1s
+  h=0.00025000  Phi(0,0.03)=0.035542  iters=113  last_change=7.19e-09  elapsed=0.5s
+  h=0.00012500  Phi(0,0.03)=0.036554  iters=120  last_change=7.14e-09  elapsed=2.0s
+  h=0.00006250  Phi(0,0.03)=0.037114  iters=123  last_change=8.91e-09  elapsed=12.7s
+  h=0.00003125  Phi(0,0.03)=0.037408  iters=125  last_change=8.47e-09  elapsed=71.1s
+
+Successive differences: ['0.00203', '0.00164', '0.00101', '0.00056', '0.00029']
+Successive ratios (->0.5 expected for clean 1st-order h-convergence once past the ~1/c boundary-layer scale): ['0.808', '0.618', '0.553', '0.525']
+
+Richardson extrapolation (finest two points, h=6.25e-05,3.13e-05):
+  assuming exact ratio 0.5 (pure 1st order):        L = 0.03770
+  using the OBSERVED ratio 0.525:                    L = 0.03773
+  reported estimate (midpoint of the two): L ~= 0.03772  (spread between methods: 0.00003 -- treated as an INFORMAL uncertainty band, not a rigorous error bound)
+
+======================================================================
+S_MAX truncation sensitivity (fixed h=0.001, original big domain)
+======================================================================
+  S_MAX=0.5  Phi(0,0.09)=0.032178
+  S_MAX=0.7  Phi(0,0.09)=0.032178
+  S_MAX=0.9  Phi(0,0.09)=0.032178
+
+======================================================================
+Comparison against CITED (not re-derived) Monte Carlo references
+======================================================================
+
+ vs. this front's own T3 (fcd_t3.log):
+    t0=0.09  MC=0.03832+-0.00096   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=+0.63
+    t0=0.37  MC=0.03885+-0.00097   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=+1.17
+    t0=0.03  MC=0.03812+-0.00096   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=+0.42
+
+ vs. referee's independent T3 replication:
+    t0=0.09  MC=0.03744+-0.00042   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=-0.66
+    t0=0.37  MC=0.03701+-0.00042   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=-1.68
+    t0=0.01  MC=0.03770+-0.00043   PDE-Richardson estimate=0.03772   z=(MC-PDE)/SE=-0.04

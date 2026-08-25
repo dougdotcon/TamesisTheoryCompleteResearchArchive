@@ -1,0 +1,92 @@
+======================================================================
+PART A -- symbolic (sympy) cross-check of the coefficient recursion
+======================================================================
+
+Phi-equation, coefficient of g^1 (should give a2 in terms of a1,b1):
+  -c*s*b1(s) + c*a0(s) - c*a1(s) + c*b1(s) - 2*a2(s) + Derivative(a1(s), s) = 0
+  -> a2(s) solved from this single equation: -c*s*b1(s)/2 + c*a0(s)/2 - c*a1(s)/2 + c*b1(s)/2 + Derivative(a1(s), s)/2
+  -> hand-recursion formula for a2(s):            -c*((s - 1)*b1(s) - a0(s))/2 - c*a1(s)/2 + Derivative(a1(s), s)/2
+  -> difference (should simplify to 0):            0
+
+Psi-equation, coefficient of g^1 (should give the b1 ODE):
+  -c*s*b1(s) + c*a0(s) + Derivative(b1(s), s) = 0
+
+(These confirm the hand recursion below reproduces exactly what
+ matching powers of g in the STATED PDE system gives -- no transcription
+ error in the recursion used for parts B/C.)
+
+Extending the symbolic check to k=2 (needed for a3(0)/b2(s) below):
+  a3(s) [from g^2 coeff of Phi-eq]: -c*s*b2(s)/3 + c*a1(s)/6 - c*a2(s)/3 - c*b1(s)/3 + c*b2(s)/3 + Derivative(a2(s), s)/3
+  a3(s) [from general hand recursion, k=2]: -c*(2*(s - 1)*b2(s) - a1(s) + 2*b1(s))/6 - c*a2(s)/3 + Derivative(a2(s), s)/3
+  difference (should be 0): 0
+  b2'(s) [from g^2 coeff of Psi-eq]:  c*(2*s*b2(s) - a1(s) + 2*b1(s))/2
+  b2'(s) [from general hand recursion, k=2]: c*(2*s*b2(s) - a1(s) + 2*b1(s))/2
+  difference (should be 0): 0
+
+======================================================================
+PART B -- k=1 (Psi) exact closed form: Mills-ratio / erfcx solution
+======================================================================
+
+erfcx'(x) - [2x erfcx(x) - 2/sqrt(pi)] simplifies to: 0  (should be 0)
+
+Direct substitution: b1'(s) - c*s*b1(s) for the candidate closed form:
+  -c  (target: -c)
+  difference from target -c: 0  (should be 0 -- EXACT closed-form check)
+
+======================================================================
+PART C -- numeric recursion for a2(0), a3(0) at c=1000, and the
+           resulting truncated series for Phi(0,t0)
+======================================================================
+
+a0 = 1.0
+a1 = -1000.0
+b1(0) = psi1(0) = sqrt(pi*c/2) = 39.633273
+a2(0) = (c/2)(c+1+psi1(0)) = 520316.636488
+
+b2(0) (one numerical quadrature; quad abs-err est 1.84e-08) = -20816.63648803
+a2'(0) = -519816.636488
+w2(0)  = a1/2 + b2(0) - psi1(0) = -21356.269761
+a3(0) = [a2'(0) - c*a2(0) + c*w2(0)] / 3 = -180730907.628508
+
+======================================================================
+PART C.1 -- independent cross-checks of a2'(0) and b2(0), before
+            trusting a3(0) (two DIFFERENT numerical methods each)
+======================================================================
+
+a2'(0) analytic (via psi1_prime)   = -519816.636488
+a2'(0) central finite-difference   = -519816.636719  (h=1e-06)
+  relative difference: 4.44e-10
+  ODE-shooting b2(0) with s_far=0.1: -20785.081735
+  ODE-shooting b2(0) with s_far=0.12: -20813.663904
+  ODE-shooting b2(0) with s_far=0.15: -20816.594330
+  ODE-shooting b2(0) with s_far=0.2: -20816.636483
+
+Quadrature-based b2(0) (Part C, above): -20816.636488
+(If shooting disagrees with the quadrature value as s_far grows, that
+ signals the 'bounded at infinity' boundary condition is numerically
+ delicate -- exp(c*s^2/2) blowup means shooting backward from a
+ not-large-enough s_far is itself a poor approximation to the true
+ s->infinity limit; the quadrature form is analytically exact for
+ s_far->infinity and does not suffer this specific finite-cutoff
+ bias, so it -- not the shooting value -- is treated as ground truth
+ below, with the shooting run reported only as a rough sanity check.)
+
+--- Series so far for Phi(0,t0) = a0 + a1 t0 + a2(0) t0^2 + a3(0) t0^3 + ... ---
+  a0        = 1.0
+  a1        = -1000.0
+  a2(0)     = 520316.6365   (vs pure-exponential c^2/2 = 500000.0000; excess = 20316.6365, entirely from psi1(0)=sqrt(pi c/2))
+  a3(0)     = -180730907.6285   (vs pure-exponential -c^3/6 = -166666666.6667; excess = -14064240.9618)
+
+Saving coefficients to series_coeffs.json for use by f03.
+{
+  "c": 1000.0,
+  "a0": 1.0,
+  "a1": -1000.0,
+  "a2_0": 520316.6364880301,
+  "a3_0": -180730907.6285081,
+  "psi1_0": 39.633272976060105,
+  "b2_0": -20816.636488030057,
+  "b2_0_quad_err": 1.839686444805519e-08,
+  "pure_exp_a2": 500000.0,
+  "pure_exp_a3": -166666666.66666666
+}

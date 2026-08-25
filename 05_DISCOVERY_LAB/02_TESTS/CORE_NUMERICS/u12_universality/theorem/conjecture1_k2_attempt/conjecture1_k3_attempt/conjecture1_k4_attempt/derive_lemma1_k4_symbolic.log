@@ -1,0 +1,141 @@
+==============================================================================
+PART 0 -- the general (b-1)! block fact and the K! identity
+==============================================================================
+
+Claim (checked below at K=4, and used as the organizing principle): for a
+co-block set-partition of {1,...,K} into blocks of sizes b_1,...,b_r, the
+joint density contribution of (m_1,...,m_K) restricted to that exact
+co-block pattern is CONSTANT on Delta_K, equal to prod_j (b_j - 1)!.
+
+This is not a coincidence: choosing a set-partition of {1,...,K} into
+blocks, together independently choosing a CYCLIC ORDERING within each block
+(there are exactly (b-1)! distinct cyclic orderings of b labeled items), is
+EXACTLY the standard bijection between (set partition + per-block cyclic
+order) and PERMUTATIONS of {1,...,K} (each permutation's disjoint-cycle
+decomposition IS such a pair, and vice versa). Hence
+
+    sum over all set-partitions of {1,...,K}  of  prod_j (b_j-1)!
+  = sum over all permutations of {1,...,K} of 1
+  = K!
+
+which is exactly Lemma 1's claimed total density. This identity is checked
+directly (by brute-force enumeration of set partitions, not assumed) for
+K=2,3,4 below, BEFORE any probabilistic derivation, as a sanity check that
+does not by itself prove Lemma 1 (it is a bookkeeping identity, not a
+probability statement) but predicts, before running the peeling
+derivations, exactly what total they must sum to.
+
+K=2: 2 set partitions (Bell(2)), sum of prod(b_j-1)! = 2  (target K!=2)
+K=3: 5 set partitions (Bell(3)), sum of prod(b_j-1)! = 6  (target K!=6)
+K=4: 15 set partitions (Bell(4)), sum of prod(b_j-1)! = 24  (target K!=24)
+CONFIRMED at K=2,3,4: the set-partition identity predicts totals 2, 6, 24 respectively -- matching K=2/K=3's already-established results (2,6) and predicting 24 for this document's K=4 target, PROVIDED each set-partition's own probabilistic contribution really does equal prod(b_j-1)! (a genuine claim about THIS construction, checked by explicit peeling below -- the identity above is pure combinatorics, not yet a proof of Lemma 1).
+
+==============================================================================
+PART 1 -- labeled circular spacings are Dirichlet, proved inline
+         for n=2 (K=2 self-check), n=3 (K=3 self-check), n=4 (NEW)
+==============================================================================
+j=1 free points [n=2 (K=2 self-check)]: computed density = 1/ell1, target j!/ell1^j = 1/ell1
+j=2 free points [n=3 (K=3 self-check)]: computed density = 2/ell1**2, target j!/ell1^j = 2/ell1**2
+j=3 free points [n=4 (NEW, needed for K=4)]: computed density = 6/ell1**3, target j!/ell1^j = 6/ell1**3
+CONFIRMED at n=2,3 (matches already-established K=2/K=3 constants 1, 2) and NEW at n=4: circular spacing density among 4 co-located points (anchor + 3 free) is 3!/ell^3 = 6/ell^3, proved inline by direct integration over all 6 orderings (not merely cited).
+
+==============================================================================
+PART 2 -- the 5 K=4 shapes, via explicit sequential peeling
+==============================================================================
+
+--- Shape '4' (AllSame): all four sources share one block ---
+P(AllSame | ell1) = ell1**3 [x2,x3,x4 each independently land in B1
+w.p. ell1]. Given AllSame: apply the n=4 circular-spacing fact
+(Part 1, j=3) to (x1 anchor, x2,x3,x4 free within (0,ell1)):
+joint density of (ell1,m1,m2,m3) [m4=ell1-m1-m2-m3 determined] = 1 * ell1**3 * (6/ell1**3) = 6
+Change vars (ell1,m1,m2,m3) -> (m1,m2,m3,m4=ell1-m1-m2-m3), Jacobian=1 (triangular): region -> Delta_4.
+=> Shape '4' contributes CONSTANT density 6 on Delta_4 (matches Part 0's prediction (4-1)!=6). Multiplicity (number of such set partitions) = 1. Contribution to total: 1*6 = 6.
+
+--- Shape '3+1', route A: anchor x1 in the 3-block ({1,2,3}together,{4}diff) ---
+P(x2,x3 in B1 | ell1) = ell1**2. Given: n=3 circular-spacing fact
+(Part 1, j=2, the SAME fact K=3's own AllSame pattern used) gives
+joint density of (m1,m2) [m3=ell1-m1-m2] given ell1 = 2/ell1**2.
+joint density of (ell1,m1,m2,m4) [m3=ell1-m1-m2] = 1 * ell1**2 * (2/ell1**2) * (1/(1-ell1)) = -2/(ell1 - 1)
+This is NOT yet constant in this raw form -- but note it does not
+depend on ell1 at all (the ell1**2 and 2/ell1**2 cancel exactly, 
+leaving 2 * 1/(1-ell1), which STILL has ell1-dependence via the
+residual density -- this is expected: L4's OWN density 1/(1-ell1) is
+literally uniform on (0,1-ell1), i.e. as a function of (ell1,m4) it
+is the constant 1 on {0<m4<1-ell1}, matching K=2/K=3's identical
+'Different blocks' computation -- the apparent '1/(1-ell1)' factor
+above is a slight over-simplification of notation; redo precisely:
+Correct joint density of (ell1,m1,m2,m4) [m3=ell1-m1-m2] = 1 * ell1**2 * (2/ell1**2) * 1 = 2
+Change vars (ell1,m1,m2,m4)->(m1,m2,m3=ell1-m1-m2,m4), Jacobian=1: region -> Delta_4.
+=> Shape '3+1' route A contributes CONSTANT density 2 on Delta_4 (matches Part 0's prediction (3-1)!*(1-1)!=2*1=2).
+
+--- Shape '3+1', route B: anchor x1 is the singleton ({2,3,4}together,{1}diff) -- independent cross-check ---
+f(ell1)=1. Joint(ell1,ell2) [ell2 = length of x2's OWN separate
+block, via the residual property] = 1 on {0<ell2<1-ell1} -- the
+same 'Different blocks' computation as K=2's Lemma 1.
+
+[FIRST ATTEMPT -- kept and reported, not silently discarded.]
+P(x3 lands in x2's block B2 | ell1,ell2) -- WRONG version: treated
+as a probability RELATIVE TO THE RESCALED RESIDUAL, i.e. ell2/(1-ell1),
+by analogy with how Fact A itself is invoked on a RESCALED residual.
+joint density [WRONG] = 1(ell1,ell2 joint) * (ell2/(1-ell1))**2 * (2/ell2**2) = 2/(ell1 - 1)**2
+This DEPENDS on ell1 (not constant) -- FAILS the required constant-on-Delta_4 check. Diagnosed: x3,x4 are Unif(0,1) on the
+WHOLE unit interval, not on the rescaled residual -- their
+probability of landing in B2 (an ABSOLUTE subset of [0,1] of
+measure ell2) is simply ell2, not ell2/(1-ell1). The '/(1-ell1)'
+conflates the residual-RESCALING used for peeling ell2's OWN
+density (via Fact A on the rescaled residual) with the SEPARATE,
+already-absolute question of whether x3,x4 land in a specific
+fixed-measure subset of [0,1] -- those are different quantities.
+
+[CORRECTED version.]
+joint density [CORRECT] = 1 * (ell2)**2 * (2/ell2**2) = 2
+CONSTANT = 2, matching route A exactly -- the exchangeability claim
+(that it does not matter whether the anchor is inside or outside
+the size-3 block) is confirmed by INDEPENDENT DIRECT COMPUTATION,
+not merely asserted by a symmetry argument.
+
+--- Shape '2+2': two disjoint pairs ({1,2}together,{3,4}together) ---
+x1,x2 pair: P(x2 in B1|ell1)=ell1, n=2 spacing gives 1/ell1 -> 
+  joint(ell1,m1,m2)[m1+m2=ell1] = ell1*(1/ell1) = 1 (K=2's own Same case).
+x3 avoids B1: joint(ell1,ell3) = 1 (residual property, as always).
+x4 joins x3's block B3 (ABSOLUTE prob = ell3, not ell3/(1-ell1)):
+joint(ell1,ell3,m3,m4)[m3+m4=ell3] contribution = 1 * ell3 * (1/ell3) = 1
+=> Shape '2+2' route contributes CONSTANT density 1 on Delta_4 (matches Part 0's prediction (2-1)!*(2-1)!=1*1=1). Multiplicity (number of ways to pair 4 elements into 2 unordered pairs) = 3. Contribution to total: 3*1 = 3.
+
+--- Shape '2+1+1': one pair + two singletons ({1,2}together,{3}diff,{4}diff) ---
+x1,x2 pair: joint(ell1,m1,m2)[m1+m2=ell1] = 1 (as above).
+x3 avoids B1: joint(ell1,ell3)=1 (residual property, peel #2).
+x4 avoids B1 AND B3: joint(ell1,ell3,ell4)=1 (residual property
+applied a SECOND time, to the residual-of-the-residual -- exactly
+the move K=3's own AllDiff pattern needed once; here needed once
+as well since there is only one MORE singleton after x3, m4=ell4).
+(each residual peel: (1-L_used)*(1/(1-L_used)) = 1, confirmed =1 symbolically, generic in L_used.)
+=> Shape '2+1+1' route contributes CONSTANT density 1 on Delta_4 (matches Part 0's prediction (2-1)!*(1-1)!*(1-1)!=1*1*1=1). Multiplicity (choose the pair, C(4,2)) = 6. Contribution to total: 6*1 = 6.
+
+--- Shape '1+1+1+1' (AllDiff): four separate blocks ---
+Three sequential residual peels (ell1 -> ell2 -> ell3 -> ell4, 
+each via the SAME P(avoid)*density(residual)=1 cancellation), 
+m_i = ell_i for i=1..4, no internal spacing needed (each block 
+has exactly one source, trivial (1-1)!=1 spacing).
+=> Shape '1+1+1+1' route contributes CONSTANT density 1 on Delta_4 (matches Part 0's prediction (1-1)!^4=1). Multiplicity = 1. Contribution to total: 1*1 = 1.
+
+==============================================================================
+PART 3 -- total and pattern-probability self-consistency
+==============================================================================
+  Shape 4 (AllSame): multiplicity 1 x constant density 6 = 6
+  Shape 3+1: multiplicity 4 x constant density 2 = 8
+  Shape 2+2: multiplicity 3 x constant density 1 = 3
+  Shape 2+1+1: multiplicity 6 x constant density 1 = 6
+  Shape 1+1+1+1 (AllDiff): multiplicity 1 x constant density 1 = 1
+  TOTAL density on Delta_4 = 24
+MATCHES the target: (m1,m2,m3,m4) uniform on Delta_4, density 24. QED (Lemma 1, K=4), modulo the same PD(1) residual/size-biased-sampling citation K=2/K=3's Lemma 1 use, applied recursively (up to THREE sequential peels, one more than K=3's maximum of two, for the '1+1+1+1' pattern) -- not a new or weaker citation, the same self-similar property iterated one additional time.
+
+--- Self-consistency: probabilities of the 5 shapes sum to 1 ---
+P(shape) = (multiplicity * constant_density) / 24 (since total density integrates to 24*Vol(Delta_4)=24/4!=1):
+  P(4 (AllSame)) = 1*6/24 = 1/4
+  P(3+1) = 4*2/24 = 1/3
+  P(2+2) = 3*1/24 = 1/8
+  P(2+1+1) = 6*1/24 = 1/4
+  P(1+1+1+1 (AllDiff)) = 1*1/24 = 1/24
+Sum = 1  (must equal 1)
+CONFIRMED: pattern probabilities sum to 1 exactly.

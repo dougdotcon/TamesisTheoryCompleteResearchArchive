@@ -4349,3 +4349,81 @@ decisions:
       - "nenhuma extrapolacao de tratabilidade alem de K=3 e alegada por nenhum documento desta linhagem; a discussao 'por que K=3 funcionou' e explicitamente informal/post hoc, nao uma prova"
       - "Conjectura 2 (mistura de Poisson) permanece CONJECTURA, condicional a K>=4 para fechamento total"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-066
+    date: 2026-08-24
+    decision: >
+      A pedido explicito do usuario ("Precisamos bater de frente em
+      todos os caminhos que temos abertos para continuar"), autorizar a
+      onda 16: 5 frentes matematicas puras independentes, uma para cada
+      item genuinamente aberto e nomeado com precisao no "veredito
+      honesto atualizado" do Estagio 17 de THEOREM.md (a lista-mestra
+      de itens abertos do arquivo neste momento), replicando a
+      estrutura de 5 frentes ja usada na onda 14 (DISC-DEC-057):
+      (a) `CONJECTURE-1-K4-ATTEMPT` -- estende o metodo whole-space
+      (K=1,2,3 ja provados) a K=4; risco incerto -- o proprio documento
+      de K=3 nomeia isto como pergunta genuinamente nova, nao
+      extrapolavel do fechamento de K=3; nao-fechamento honesto e
+      resultado aceitavel. Seeds 20260850000+/referee 20260851000+.
+      (b) `SHARP-CONSTANT-A-STAR-MONOTONICITY-ATTEMPT` -- terceira
+      tentativa de fechar sup_K M_K/sqrt(K)=a* (Estagio 13), apos duas
+      rotas ja refutadas/insuficientes (recursao exata para Q(n),
+      refutada por contraexemplo Q(3); limitante pontual direto,
+      exigindo precisao O(1/sqrt(K)) simultanea de Q(n) e phi_K para
+      todo K finito); ingrediente exato ja nomeado com precisao pelo
+      proprio Estagio 13; risco alto, nao-fechamento honesto aceitavel.
+      Seeds 20260852000+/referee 20260853000+.
+      (c) `GENERAL-P-DSTAR-EXTENSION-ATTEMPT` -- estende a montagem de
+      D*(p)_r(b) (Estagio 16, maquina H_k ja provada correta para TODO
+      k por inducao do referee da onda 15) de p=1,...,10 para p mais
+      alto (ate onde for computacionalmente tratavel, meta p=11,...,20);
+      risco baixo -- barreira e puramente de execucao/custo simbolico,
+      nao matematica, mas a extensao em si nao foi tentada. Seeds
+      20260854000+/referee 20260855000+.
+      (d) `FLOOR-H2-B1-FULL-CLOSURE-ATTEMPT` -- retoma o piso H2 em b=1
+      (onda 14 frente b, PARCIALMENTE FECHADO -- reducao exata e
+      mecanismo de reentrada de lacuna ja PROVADOS, mas a forma fechada
+      completa nao derivada por ser um sistema 2-var acoplado
+      nao-local); tenta fechar a forma fechada completa; diagnosticado
+      pela propria sessao como mesma classe de dificuldade que
+      Conjectura 1 geral-K; risco alto, nao-fechamento honesto
+      aceitavel. Seeds 20260856000+/referee 20260857000+.
+      (e) `CONJECTURE-2-DIRECT-ATTEMPT` -- tenta uma prova direta da lei
+      distribucional incondicional completa (Conjectura 2, a mistura de
+      Poisson(c) sobre a Conjectura 1) por uma rota estrutural que NAO
+      passe por provar Conjectura 1 caso-a-caso para todo K (que exigiria
+      infinitos casos); se nenhuma rota direta genuina existir, reportar
+      isso honestamente em vez de forcar um resultado. Risco mais alto
+      de todas as 5 frentes -- natureza exploratoria, nao-fechamento
+      honesto plenamente aceitavel. Seeds 20260858000+/referee
+      20260859000+.
+    rationale: >
+      Segue exatamente o mesmo padrao ja estabelecido e validado 14
+      vezes nesta sessao: cada frente ataca um item que ja esta aberto
+      e nomeado com precisao em algum documento existente do arquivo
+      (nunca uma direcao nova inventada ad-hoc), com seeds frescos
+      confirmados livres por grep antes do dispatch, disciplina de
+      pre-registro/honestidade identica as ondas anteriores, e
+      verificacao independente propria da sessao orquestradora seguida
+      por referee hostil dedicado (que nunca le o codigo da propria
+      frente) antes de qualquer integracao. Nao-fechamento honesto e
+      declarado explicitamente como resultado aceitavel em todas as 5
+      frentes, com enfase adicional nas frentes (b), (d) e (e) --
+      historicamente as mais dificeis (duas rotas ja falharam em (b);
+      sistema acoplado nao-local em (d); natureza exploratoria em (e)).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/conjecture1_k4_attempt/ (nova frente)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/sharp_constant_monotonicity_attempt/ (nova frente)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/ (nova frente)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/ (nova frente)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture2_direct_attempt/ (nova frente)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave16_results, a ser preenchido apos integracao de cada frente)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Nenhuma ainda -- esta decisao apenas autoriza e despacha; resultados serao integrados individualmente, cada um com seu proprio decision_id subsequente"
+    untouched_safeguards:
+      - "todos os resultados anteriores (Estagios 1-17, Arvores A/B do mapa de dependencias) permanecem exatamente como estavam -- nenhuma frente desta onda toca codigo ou provas ja aceitas"
+      - "nao-fechamento honesto permanece resultado plenamente aceitavel e catalogavel em todas as 5 frentes"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

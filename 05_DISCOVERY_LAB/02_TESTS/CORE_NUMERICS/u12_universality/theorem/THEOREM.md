@@ -2698,6 +2698,11 @@ incondicional**, para Teorema A/C: para `n\ge4`, `0\le c\le n`,
 
 `\displaystyle |Δ_n(c)| \le \big[(1{+}\sqrt{π/2})\sqrt c + 0,2805\big]/n`.
 
+> [Ver Estágio 22 abaixo — 2026-08-25: a mesma montagem, re-executada
+> com a constante nítida `a^*` do Estágio 19, dá o **Teorema R**:
+> `|Δ_n(c)| \le [a^*\sqrt c + 0{,}2805]/n`, estrito em `(0,n]`, mesma
+> constante aditiva (independência estrutural da metade `B_n`).]
+
 Isto fecha "a única obstrução nomeada restante entre Teorema A/C
 (provado, incondicional) e uma taxa totalmente explícita", nomeada
 pelo Estágio 10 e reafirmada pelo Estágio 11. Nenhum resultado anterior
@@ -3507,7 +3512,9 @@ hipótese (U') vale com a constante nítida `a^*` em todos os casos
 NÃO foi executada nem verificada por ninguém — a montagem do Estágio
 12 precisa ser re-percorrida com a nova constante antes de qualquer
 taxa nítida ser afirmada; item nomeado como próximo passo trivial-mas-
-não-executado.
+não-executado. [Ver Estágio 22 abaixo — executado em 25/08/2026, onda
+17 frente (b): todos os passos sobrevivem verbatim, constante aditiva
+inalterada.]
 
 ### Verificação adversarial independente
 
@@ -3556,7 +3563,8 @@ citação.
 
 **O que permanece aberto:** a re-execução da montagem do Estágio 12
 com `a^*` no lugar de `a` (para uma taxa explícita nítida em `c`) —
-não executada; monotonicidade literal termo-a-termo de `M_K/\sqrt K`
+não executada [Ver Estágio 22 abaixo — executada e fechada em
+25/08/2026]; monotonicidade literal termo-a-termo de `M_K/\sqrt K`
 (o documento prova `\sup=\lim`, que era o que se pedia — as duas
 formulações não são logicamente idênticas, e a monotonicidade em si
 segue apenas numericamente sugerida); Conjecturas 1 (`K\ge4`, sob
@@ -3662,7 +3670,8 @@ resultado anterior é enfraquecido.
 
 **O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge5`;
 Conjectura 2 em geral; a exploração conjunta de `p\ge2` pontos
-(Estágio 18); a re-montagem do Estágio 12 com `a^*` (Estágio 19);
+(Estágio 18); a re-montagem do Estágio 12 com `a^*` (Estágio 19)
+[Ver Estágio 22 abaixo — fechada em 25/08/2026];
 `p>20` de `D^{*(p)}_r(b)` [Ver Estágio 21 abaixo]; o piso `H2` em
 `b=1` (sob revisão na onda 16); a lei de escala `\gamma\in(0,1)`.
 Nenhuma alegação de progresso em Millennium Problem; matemática
@@ -3748,6 +3757,109 @@ continuada. Nenhum resultado anterior é enfraquecido.
 nenhuma fórmula elementar única livre-em-`p` é alegada (grau genuíno
 `2p` de `Q_p`); Conjectura 1 `K\ge5`; Conjectura 2; a exploração
 conjunta (Estágio 18); a re-montagem nítida do Estágio 12 (Estágio
-19); o piso `H2` em `b=1`; `\gamma\in(0,1)`. Nenhuma alegação de
+19) [Ver Estágio 22 abaixo — fechada em 25/08/2026]; o piso `H2` em
+`b=1`; `\gamma\in(0,1)`. Nenhuma alegação de
 progresso em Millennium Problem; matemática combinatória pura
 interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 22 — 2026-08-25]
+
+**Contexto.** O Estágio 19 fechou `\sup_K M_K/\sqrt K = a^*` e elevou a
+hipótese (U') à constante nítida `a^*` em todos os casos `0\le K\le n`,
+mas deixou explicitamente NÃO executada a substituição mecânica de
+`a=1+\sqrt{\pi/2}` por `a^*` na taxa explícita do Estágio 12 — "a
+montagem do Estágio 12 precisa ser re-percorrida com a nova constante
+antes de qualquer taxa nítida ser afirmada". A onda 17, frente (b)
+(`SHARP-RATE-REASSEMBLY-ATTEMPT`, DISC-DEC-072/073) executou exatamente
+isso, sob a disciplina integral da linhagem (engine re-derivado da
+prosa, nenhum script de frente anterior aberto, aritmética racional
+certificada em toda checagem de carga; sem aleatoriedade — seeds
+reservados não usados).
+
+**Resultado central.**
+
+> **Teorema R (PROVADO).** Para todo inteiro `n\ge4` e todo real
+> `0\le c\le n`:
+>
+> `\displaystyle \big|φ(n,c)-φ_∞(c)\big| \;\le\; \frac{a^*\sqrt c + κ_B}{n},
+> \qquad a^*=\sqrt π\Big(\frac1{\sqrt2}-\frac12\Big)=0{,}36708721\ldots,
+> \quad κ_B=\sup_{c\ge0}c^2I_2(c)=0{,}28048017\ldots,`
+>
+> com desigualdade **estrita** para todo `c\in(0,n]`; forma-sup
+> `\sup_{[0,C]}|Δ_n|\le(a^*\sqrt C+κ_B)/n` para `C\le n`; forma decimal
+> `|Δ_n(c)| \le [0{,}3670873\sqrt c + 0{,}2805]/n`.
+
+Três fatos estruturais sustentam a substituição, todos verificados
+pelo referee contra a prosa-fonte: (i) a constante `a` entrava na prova
+antiga em **exatamente um passo** (inserção de (U') na metade `A_n`
+antes de Jensen), como caixa-preta sobre todo o suporte binomial
+`0\le K\le n` — exatamente o que a (U') nítida do Estágio 19 fornece
+(caso genérico via `M_K<a^*\sqrt K`; contorno `K=n` via o §8 do referee
+do Estágio 19; `K=0` trivial; o caso `K=n-1` é coberto pelo caso
+genérico em `n=K+1`); (ii) a constante aditiva `κ_B` é fabricada
+inteiramente na metade `B_n` (mistura Binomial→Poisson), que nunca
+referencia (U') nem `a` — logo **κ\* = κ_B, inalterada**, por
+independência estrutural, não por coincidência aritmética; (iii) a
+estritividade sobrevive inclusive em `c=n`, onde a Binomial degenera na
+massa pontual em `K=n` e a (U') nítida é estrita. Novidade adicional: o
+primeiro bracket **certificado em aritmética racional pura** para a
+constante aditiva, `κ_B\in(0{,}28048,\ 0{,}2805)` (branch-and-bound de
+1.525 folhas + cota de cauda gaussiana), elevando o que o referee da
+onda 11 (F-9) apontara como avaliação em nível de float; valor de
+exibição `0{,}280480169024586` em `c^*=4{,}08675454645254`.
+
+**Nitidez (avaliação honesta, sem teorema de otimalidade).** Ao longo
+da linha de contorno `c=n`, `n\,Δ_n(n) = a^*\sqrt n - \tfrac13 + o(1)`
+(via as cotas bilaterais de `Q(n)` dos Estágios 13/19 + Corolário 4.2),
+logo a razão `LHS/RHS → 1`: `a^*` é a melhor constante multiplicativa
+possível para um bound desta forma — o coeficiente de `\sqrt c` melhora
+por fator exato `a/a^* = 6{,}1384` sobre o Estágio 12. No interior, o
+bound excede o perfil exato `|e(c)|` pelo fator assintótico
+`4(\sqrt2-1)=1{,}657` (era ~10,8) — `κ_B` NÃO é alegada ótima.
+
+**Verificação.** Frente: 2.594 células certificadas da desigualdade
+final, 0 violações (`n\le1024` interior incluindo `c\in\{n,n-\tfrac14,
+n-\tfrac12,n-1\}`; linha `c=n` a `n=30.000`); engine validado contra
+enumeração bruta da Definição 4 (19/19) + 18 âncoras; (U') nítida
+re-verificada em ~1.490 pontos certificados. Spot-check da sessão antes
+do despacho: `κ_B` e argmax reproduzidos em todos os dígitos; 404
+células independentes na linha `c=n` via `φ(n,n)=Q(n)/n`, 0 violações;
+razões de justeza 0,847/0,949/0,970 reproduzidas; aproximação a
+`-1/3` confirmada. Referee hostil dedicado (relatório em
+`.../sharp_rate_reassembly_attempt/adversarial/REFEREE_REPORT.md`):
+re-derivou o traço da montagem contra a prosa-fonte, re-certificou
+`κ_B` com branch-and-bound próprio (mesma contagem de folhas, mesma
+folga mínima `1{,}79\cdot10^{-8}`), replicou a desigualdade em 1.060
+células certificadas com 0 violações **empurrando a linha de contorno a
+`n=50.000`**, e re-derivou do zero a álgebra do caso `K=n` do Estágio
+19. **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue**, com
+duas questões, nenhuma tocando teorema algum: **R-1** (menor,
+obrigatória) — a estatística impressa "pior razão 0,970" não era o
+máximo da própria grade da frente; o máximo verdadeiro é ≈0,9904 em
+`(30000,30000)` (0,9926 em `(50000,50000)` do referee), erro na direção
+segura, corrigido por adendo datado; **O-1** (nit, herdado do Estágio
+12) — o domínio impresso do Fact 4.1 diz `n>c` enquanto o uso é em
+`0\le c\le n`; a instância `c=n` é verdadeira pela convenção
+`q=c/n\wedge1` da Definição 1 e é exatamente o uso já aceito da
+Proposição 7.1/Lema 5.1, verificada por força bruta.
+
+### O que isto muda, precisamente
+
+**O item "trivial-mas-não-executado" do Estágio 19 está EXECUTADO e
+FECHADO: a taxa explícita incondicional de Teorema A/C vale agora com a
+constante nítida.** O Estágio 12 permanece exatamente como provado (o
+Teorema R o substitui como melhor taxa disponível, sem invalidá-lo).
+Nenhum resultado anterior é enfraquecido.
+
+**O que permanece aberto, sem mudança:** uma constante aditiva de ordem
+inferior casada (fechar o gap `κ_B+\tfrac13` no contorno, ou o fator
+`4(\sqrt2-1)` no interior — um bound interpolando ao perfil exato
+`e(c)`); `n\in\{2,3\}` (herdado, F-13: numérico apenas); monotonicidade
+literal termo-a-termo de `M_K/\sqrt K` (herdado do Estágio 19);
+Conjecturas 1 (`K\ge5`, sob revisão na onda 17) e 2; a exploração
+conjunta (Estágio 18); `p>20`; o piso `H2` em `b=1`; a lei de escala
+`\gamma\in(0,1)` (sob revisão na onda 17). Nenhuma alegação de
+progresso em Millennium Problem; matemática combinatória pura interna
+a este arquivo.

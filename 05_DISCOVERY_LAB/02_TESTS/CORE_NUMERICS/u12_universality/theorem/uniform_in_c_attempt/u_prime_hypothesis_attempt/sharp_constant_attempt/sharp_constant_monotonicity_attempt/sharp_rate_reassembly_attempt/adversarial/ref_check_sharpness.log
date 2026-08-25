@@ -1,0 +1,22 @@
+== R5a: constants ==
+  a* = 0.367087211863  (target 0.3670872119...)
+  a*_hi = 0.3670872119 < 0.3670873 : True
+  a/a* = 6.1383619  (target 6.1384)
+  a*/(sqrt(pi)/8) = 1.6568542; 4(sqrt2-1) = 1.6568542  (target 1.6569)
+  full-bound old/sharp at c=0.5: 3.4697 (target 3.47)
+== R5b: T5 excerpt rows (exact-driven) ==
+  c=1: n|D|=0.036106 (target 0.036106) sharp=0.6475674 (t 0.647567) old=2.533794 (t 2.533794)
+  c=10: n|D|=0.219808 (target 0.219808) sharp=1.441312 (t 1.441312) old=7.406085 (t 7.406085)
+  c=100: n|D|=2.181324 (target 2.181324) sharp=3.951352 (t 3.951352) old=22.81362 (t 22.813622)
+  c=256: n|D|=5.546475 (target 5.546475) sharp=6.153876 (t 6.153876) old=36.33351 (t 36.333506)
+  elapsed 3s
+== R5c/R5d: tightness along c=n ==
+      n     n|Delta_n(n)|      ratio to (a*sqrt n+kB)   n*Delta - (a*sqrt n - 1/3)
+     100        3.347691      0.847227              +0.010153
+    1000       11.278257      0.948646              +0.003273
+    3000       19.774758      0.969984              +0.001897
+   10000       36.376429      0.983434              +0.001041
+   30000       63.248639      0.990398              +0.000602
+  target quoted 0.847 / 0.949 / 0.970 at n=100/1000/3000: 0.847 / 0.949 / 0.970
+  NOTE: at the target's own T4c cells n=10000 and n=30000 the ratio is 0.9834 and 0.9904 > 0.9700 -- see REFEREE_REPORT.md finding on the 'max LHS/RHS = 0.970' claim.
+== R5 SUMMARY: 22 checks, 0 failures, elapsed 6s ==

@@ -4829,3 +4829,59 @@ decisions:
       - "nao-fechamento honesto e desfecho aceitavel em todas as frentes"
       - "nenhuma frente pode tocar formulas de registro; phi_REDB, phi_U(c), phi_infinity(c) intocadas ate integracao formal"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-073
+    date: 2026-08-25
+    decision: >
+      Integrar o resultado da onda 17, frente (b)
+      (`SHARP-RATE-REASSEMBLY-ATTEMPT`, DISC-DEC-072), apos
+      verificacao adversarial hostil dedicada. RESULTADO: o item
+      "trivial-mas-nao-executado" nomeado pelo Estagio 19 esta
+      EXECUTADO e FECHADO -- Teorema R:
+      |phi(n,c)-phi_inf(c)| <= [a*sqrt(c)+kappa_B]/n para todo n>=4,
+      0<=c<=n, ESTRITO em (0,n], com kappa_B INALTERADA (0.2805) por
+      independencia estrutural (a constante aditiva vive inteiramente
+      na metade B_n, que nunca referencia (U') nem a) e agora
+      certificada em aritmetica racional pura:
+      kappa_B in (0.28048, 0.2805) (branch-and-bound 1525 folhas),
+      elevando o apontamento F-9 do referee da onda 11. A constante
+      antiga entrava na prova em exatamente um passo (Jensen na
+      metade A), como caixa-preta sobre todo o suporte binomial --
+      exatamente o que a (U') nitida fornece; estritividade sobrevive
+      em c=n. Bound assintoticamente justo na linha c=n (razao->1):
+      a* e a melhor constante multiplicativa para esta forma;
+      melhoria de fator 6.1384 no coeficiente de sqrt(c). Frente:
+      2594 celulas certificadas, 0 violacoes. Spot-check da sessao:
+      kappa_B/argmax em todos os digitos; 404 celulas independentes
+      na linha c=n via Q(n)/n, 0 violacoes; razoes de justeza
+      reproduzidas. Referee (engine proprio validado por forca bruta
+      da Definicao 4; kappa_B re-certificada com mesma contagem de
+      folhas; algebra K=n do Estagio 19 re-derivada do zero): 1060
+      celulas certificadas, 0 violacoes, linha de contorno empurrada
+      a n=50000. Veredito SOUND WITH NAMED ISSUES, "ACCEPT for
+      catalogue": R-1 (menor, obrigatoria) -- estatistica "pior razao
+      0.970" nao era o maximo da propria grade (verdadeiro ~0.9904 em
+      (30000,30000)), erro na direcao segura, corrigido por adendo
+      datado; O-1 (nit, herdado) -- dominio impresso do Fact 4.1
+      (n>c) vs uso em 0<=c<=n, instancia c=n verdadeira e ja aceita.
+      Integrado como "Estagio 22" em THEOREM.md, pointers datados nos
+      Estagios 12, 19 e 21.
+    rationale: >
+      Mesmo padrao das integracoes anteriores; risco baixo por
+      desenho confirmado -- nenhum passo da montagem antiga precisou
+      de reparo. Onda 17: 1/5 frentes integradas.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/sharp_constant_monotonicity_attempt/sharp_rate_reassembly_attempt/ (nova frente, integrada; 2 adendos datados)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/uniform_in_c_attempt/u_prime_hypothesis_attempt/sharp_constant_attempt/sharp_constant_monotonicity_attempt/sharp_rate_reassembly_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 22 anexado; pointers nos Estagios 12/19/21)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave17_results.sharp_rate_reassembly_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "taxa explicita incondicional de Teorema A/C agora com constante nitida a* (Teorema R, Estagio 22)"
+      - "kappa_B certificada em (0.28048, 0.2805) por aritmetica racional pura"
+    untouched_safeguards:
+      - "kappa_B NAO alegada otima; teorema de otimalidade de a* NAO alegado (caracterizacao numerica + argumento assintotico)"
+      - "n in {2,3} permanece numerico apenas (F-13 herdado)"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

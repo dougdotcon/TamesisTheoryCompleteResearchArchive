@@ -65,6 +65,20 @@
 >    genuinely the best possible multiplicative constant in this shape
 >    of bound. One self-caught bug in this front's own checking code
 >    disclosed (§8); it affected only a diagnostic, never the theorem.
+>
+> > **[Post-adversarial correction, 2026-08-25 — DISC-DEC-073, R-1
+> > (minor, mandatory).]** The statistic "worst observed
+> > `LHS/RHS = 0.970` at `(3000,3000)`" is WRONG as a maximum over this
+> > document's own 2 594-cell grid: the T4c certified-truncated cells
+> > at `n = 5000, 10⁴, 3·10⁴` have ratios `0.9767, 0.9834, 0.9904`
+> > (referee, independently certified), so the true worst over this
+> > grid is **≈0.9904 at `(30000,30000)`** — and `0.9926` at the
+> > referee's added `(50000,50000)`. The `0.970` was the max over the
+> > exact-`Q` cells (`n≤3000`) only; the ratio tracker did not cover
+> > the truncated-bracket cells. Error in the SAFE direction (every
+> > ratio `<1`; the asymptotic-tightness claim of §6 is strengthened,
+> > not weakened); no theorem affected. Same correction applies to the
+> > T4-total row of §7.
 
 ---
 
@@ -121,6 +135,17 @@ the Estágio 12/13/19 referees (three independent SOUND verdicts, the
 `K=n` case closed constructively by the Estágio 19 referee itself and
 re-verified by the orchestrating session, per the dated addendum in
 `sharp_constant_monotonicity_attempt/ATTEMPT.md` §6).
+
+> **[Post-adversarial note, 2026-08-25 — DISC-DEC-073, O-1 (nit,
+> inherited).]** I1 is used here on `0≤c≤n`, while `THEOREM.md`'s
+> printed Fact 4.1 restricts to `n>c`. The endpoint `c=n` is covered by
+> Definition 1's own `q = c/n ∧ 1` convention (the Binomial degenerates
+> to the point mass at `K=n`), and is exactly the already-accepted
+> Proposição 7.1 / Lema 5.1 instantiation — verified exactly by the
+> referee, including by raw brute force from Definition 4 at `n=4,5`
+> and via `φ(n,n)=Q(n)/n` for `n=4..12`. A citation-domain nit
+> inherited from Estágio 12's own accepted usage, not introduced by
+> this front.
 
 ---
 

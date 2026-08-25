@@ -4,7 +4,7 @@
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-40-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-66-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -95,6 +95,14 @@ flowchart LR
 **全阶闭式表达式(2026-08-23)。** 上文中的每一级——`K=0,…,10`、一般 `K` 情形下的桥接、有限 `n` 的误差常数——现在都成为了同一个精确公式的推论。将同样的渐近展开技术推广到一个*符号化*的阶数指标后发现,每一阶的系数恰好就是无符号第一类斯特林数(unsigned Stirling numbers of the first kind);又因为这些数恰好是上升阶乘幂(rising factorial)的系数,整个无穷级数展开式便得以重新求和——不是渐近意义上的,而是精确且有限的(该式在 `K+1` 项后即终止)。其结果是:对于每一个 `n`、`K` 以及偏移参数,都存在一个有限的、完全显式的表达式来描述这一底层递归式,并配有一个不依赖任何展开机制的独立初等证明。一轮专门的敌对评审从零开始,针对其自建的从零搭建的模拟器,重新推导了这两个证明(215,070 次精确核对,零不一致),确认了这一标志性结论,并在一个次要的否定性论断中发现了一个真实错误(已通过带日期的补遗予以修正),此外还有两个原文档刻意保留为未证明的保守标注,也均被评审员直接证明。参见 `THEOREM.md` 中的 "Estágio 9" 一节。
 
 **参数范围全域内的一致收敛(2026-08-23)。** 上述定理只表明,对每一个固定的 `c`,`φ(n,c) → φ_∞(c)` 逐一成立。另一条研究战线对这一缺口的弥合比要求的更为彻底:该收敛不仅在紧致(compact)范围 `[0,C]` 内一致,而且在*整个*半直线 `[0,∞)` 上也一致成立,二者均由两条简短的初等引理无条件证明得到——一个利普希茨(Lipschitz)耦合,以及一个关于 `n` 一致的尾部界(uniform-in-`n` tail bound)——完全不需要用到上文的任何机制。作为额外收获,精确的一阶误差剖面也以闭式表达式的形式被导出。一轮敌对评审对这两条新引理与两个无条件定理发起了最猛烈的攻击,结果均未发现任何错误;其唯一一项实质性发现,纠正了一个次要的、本已属于条件性结果中究竟哪个具体缺口仍未闭合的说法——这使得档案库自身对该缺口的说明变得更准确,而非更不准确。参见 `THEOREM.md` 中的 "Estágio 10" 一节。
+
+**猜想1——完整的分布律,现已在 K=1、2、3 得证(2026-08-24)。** 除了上文的均值 `φ_∞(c)` 之外,档案库还猜想了在恰好经历 `K` 次改道的条件下,循环质量的*完整密度*:`f_{M_K}(x) = 2Kx(1-x²)^(K-1)`。`K=2` 已在第14轮研究中闭合;`K=3` 在第15轮研究中出人意料地闭合——这与此前两条研究战线关于目标配置组合会在 `K=2` 之后发生爆炸性增长的诊断相悖。相反,一个结构性事实("离环重定向对新增循环质量的贡献恰好为零")使得原始配置数在 `K=3` 时同样坍缩为数量少且可处理的循环形状。每一个实例都经过独立的敌对评审验证,未发现任何数学错误:
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/conjecture1_densities.svg" alt="猜想1在K=1、2、3处已证明的密度f_M_K(x)图像" width="620"></p>
+
+**最优常数问题——极限已证明,上确界仍未解决。** `THEOREM.md` 还精确证明了 `lim_{K→∞} M_K/√K = a* ≈ 0.367`(Estágio 13)——这是首次严格确认数值猜想的最优常数确实就是正确的渐近值。而 `sup_K M_K/√K` 是否等于这一同一极限(即 `M_K/√K` 在任何有限的 `K` 处是否都不超过 `a*`)仍未解决——已有两条路径失败,第三次尝试正在进行中(第16轮研究,战线b):
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/sharp_constant_astar.svg" alt="M_K除以K的平方根趋近但尚未被证明受最优常数a-star限制的图像" width="620"></p>
 
 **在哪里能找到全部内容:** 完整的定理与评审报告位于 `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/`;其推广及对抗性验证位于 `.../generalization_u_alpha/`;一个**独立的可复现软件包**——已编译的 LaTeX 论文(PDF)、自足的证明、洁净室(clean-room)模拟,以及 49 项自动化测试——位于 **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)**。而**本实验室所尝试过但未能存活的一切**的诚实清单——以便这一项正面结果能被置于正确的语境中理解——位于 **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)**。
 

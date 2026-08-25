@@ -4,7 +4,7 @@
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-40-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-66-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -95,6 +95,14 @@ flowchart LR
 **全次数にわたる閉形式(2026-08-23)。** 上記のすべての段 ― `K=0,…,10`、`K` 一般への橋渡し、有限 `n` の誤差定数 ― は、今や単一の厳密な公式の系となった。同じ漸近展開の手法を*記号的な*次数指数へと拡張したところ、各次数の係数がまさに符号なし第一種スターリング数であることが明らかになった。これらはちょうど上昇階乗冪の係数と一致するため、無限級数展開全体が ― 漸近的にではなく、厳密かつ有限の形で(`K+1` 項で終わる)― 再総和されることになる。この結果は、すべての `n`、`K`、およびオフセットパラメータについて、根底にある再帰式を表す単一の有限かつ完全に明示的な式であり、展開の仕組みを一切必要としない独立した初等的証明も付されている。専任の敵対的査読ラウンドが、独自にゼロから構築したシミュレータに対して両方の証明をゼロから再導出し(215,070件の厳密な照合、不一致ゼロ)、この見出しの主張を確認するとともに、二次的な否定的主張における実際の誤りを1件発見し(日付入りの補遺により訂正済み)、さらに元の文書が意図的に未証明のまま残していた2つの保守的なラベルについても、査読者自身がそれらを完全に証明した。詳細は `THEOREM.md` の「Estágio 9」を参照。
 
 **パラメータ範囲全体における一様収束(2026-08-23)。** 上記の定理は、固定された各 `c` について `φ(n,c) → φ_∞(c)` であることを述べているに過ぎない ― 一度に1つの `c` についてのみである。別の研究戦線が、要求されていた以上に徹底的にこのギャップを解消した:収束はコンパクトな範囲 `[0,C]` だけでなく、*半直線全体* `[0,∞)` において一様であり、いずれも上記の仕組みを一切必要としない2つの短い初等補題 ― リプシッツ結合(Lipschitz coupling)と `n` に一様なテイル評価(uniform-in-`n` tail bound)― から無条件に証明された。おまけとして、厳密な一次誤差プロファイルも閉形式で導出された。敵対的査読ラウンドは、2つの新しい補題と2つの無条件定理を最も強く攻撃したが、いずれにも誤りは見つからなかった。唯一の実質的な発見は、既に条件付きである二次的な結果においてどの具体的なギャップが未解決のままかを訂正するものであり、そのギャップに関するアーカイブ自身の記述を、より不正確にではなくむしろより正確にした。詳細は `THEOREM.md` の「Estágio 10」を参照。
+
+**予想1 ― 完全な分布法則、K=1, 2, 3で証明済み(2026-08-24)。** 上記の平均 `φ_∞(c)` に加えて、本アーカイブはちょうど `K` 回の迂回を条件とする巡回質量の*完全な密度*を予想している:`f_{M_K}(x) = 2Kx(1-x²)^(K-1)`。`K=2` はウェーブ14で決着し、`K=3` はウェーブ15で予想外に決着した ― これは、目的地の組み合わせが `K=2` を超えると爆発的に増加するという、それ以前の2つの研究戦線による診断に反する結果である。代わりに、「サイクル外のリダイレクトは新たな巡回質量への寄与が正確にゼロである」という構造的事実により、生の配置数が `K=3` においても小規模で扱いやすいサイクル形状の数へと収束した。各インスタンスは独立した敵対的査読者によって検証され、数学的な誤りは一切見つかっていない:
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/conjecture1_densities.svg" alt="K=1, 2, 3について証明された予想1の密度f_M_K(x)のグラフ" width="620"></p>
+
+**最良定数の問題 ― 極限は証明済み、上限は未解決。** `THEOREM.md` は `lim_{K→∞} M_K/√K = a* ≈ 0.367` も厳密に証明している(Estágio 13)― 数値的に予想されていた最良定数が真に正しい漸近値であることの初めての厳密な確認である。`sup_K M_K/√K` がこの同じ極限に等しいかどうか(すなわち、`M_K/√K` がどの有限の `K` においても `a*` を超えないかどうか)は未解決のままである ― 既に2つのルートが失敗しており、現在3回目の試み(ウェーブ16、フロントb)が進行中である:
+
+<p align="center"><img src="05_DISCOVERY_LAB/assets/sharp_constant_astar.svg" alt="Kの平方根に対するM_Kが最良定数a-starに近づいているが、それに抑えられることはまだ証明されていないグラフ" width="620"></p>
 
 **すべての所在:** 定理全文と査読報告書は `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/` にある。一般化とその敵対的検証は `.../generalization_u_alpha/` にある。**独立した再現可能パッケージ** ― コンパイル済みLaTeX論文(PDF)、自己完結した証明、クリーンルームシミュレーション、49件の自動テスト ― は **[`tamesis-cycle-survival/`](tamesis-cycle-survival/)** にある。そして、この一つの肯定的結果を正しい文脈で読めるようにするための、**この研究室が試みて生き残らなかったすべて**の正直な一覧表は **[`FAILED_HYPOTHESES.md`](FAILED_HYPOTHESES.md)** にある。
 

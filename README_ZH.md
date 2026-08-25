@@ -19,6 +19,8 @@
 
 自 2026 年起,该档案库还运行着一个**持续裁定实验室**(`05_DISCOVERY_LAB`):档案库自身提出的每一项定量主张,都会依据预先登记(pre-registered)的标准,并结合真实的外部参考数据,逐一地、以**强制性的对抗性复现(adversarial reproduction)**方式予以裁定并结案。迄今为止的结果——数十项已编目、附有最终裁决的否定性结案,以及一项经独立重新推导并对抗性验证的正面数学结果——综合呈现于**[Discovery Lab 论文](index.html)**(本仓库的首页)之中。
 
+<p align="center"><img src="05_DISCOVERY_LAB/assets/governance_velocity.svg" alt="DECISION_LEDGER.yaml中记录的治理决策累计数量随时间变化图,展示实验室的持续活动" width="600"></p>
+
 ## 快速阅读
 
 机构报告[Tamesis 实验室最终愿景](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)阐述了整个研究计划所提出的问题、答案、影响、应用及新问题。同时也提供了[适合打印的 HTML/PDF 版本](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)。

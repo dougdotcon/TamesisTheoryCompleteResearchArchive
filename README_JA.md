@@ -19,6 +19,8 @@
 
 2026年以降、アーカイブは**継続的な判定ラボ**(`05_DISCOVERY_LAB`)も運営している。ここでは、アーカイブ自身が行うすべての定量的な主張が、事前登録された基準と**必須の敵対的再現**のもとで、実際の外部参照データと照合されて一つずつ決着させられる。これまでの成果 ― 最終判定付きで一覧化された数十件の否定的クロージャと、独立に再導出され敵対的に検証された1件の肯定的な数学的結果 ― は**[Discovery Labの論文](index.html)**(本リポジトリのランディングページ)にまとめられている。
 
+<p align="center"><img src="05_DISCOVERY_LAB/assets/governance_velocity.svg" alt="DECISION_LEDGER.yamlに記録されたガバナンス決定の累積件数の推移。ラボの継続的な活動を示す" width="600"></p>
+
 ## クイックリード
 
 制度報告書『[Tamesis Laboratoryの最終ビジョン](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md)』は、研究プログラム全体が生み出した問い、答え、影響、応用、そして新たな問いを提示している。[印刷用HTML/PDF版](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html)も利用可能である。

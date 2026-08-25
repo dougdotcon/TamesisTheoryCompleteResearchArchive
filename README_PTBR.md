@@ -19,6 +19,8 @@ Este repositório preserva a trajetória completa do Laboratório Tamesis: seu r
 
 Desde 2026, o arquivo também mantém um **laboratório de adjudicação contínua** (`05_DISCOVERY_LAB`): cada afirmação quantitativa feita pelo próprio arquivo é encerrada, uma de cada vez, em confronto com referências externas reais, sob critérios pré-registrados e **reprodução adversarial obrigatória**. O resultado até agora — dezenas de encerramentos negativos catalogados com veredito final, e um resultado matemático positivo re-derivado de forma independente e verificado adversarialmente — está sintetizado no **[artigo do Discovery Lab](index.html)** (a página inicial do repositório).
 
+<p align="center"><img src="05_DISCOVERY_LAB/assets/governance_velocity.svg" alt="Contagem cumulativa de decisões de governança registradas em DECISION_LEDGER.yaml ao longo do tempo, mostrando atividade contínua do laboratório" width="600"></p>
+
 ## Leitura rápida
 
 O relatório institucional [Visão Final do Laboratório Tamesis](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md) apresenta as perguntas, respostas, impactos, aplicações e novas perguntas produzidas pelo programa de pesquisa como um todo. Uma [versão HTML/PDF pronta para impressão](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html) também está disponível.

@@ -22,19 +22,27 @@ from mpmath import (mp, mpf, mpmathify, sqrt, pi, e, log, exp, erfc, fabs,
 mp.dps = 120
 
 
-def load_values():
-    vals = {}
+def load_values(min_digits=95):
+    best = {}
     for fn in ('r03_plateau_values_ladder.json',
-               'r03_plateau_values_smallc.json',
-               'r03b_borel_values.json'):
+               'r03_plateau_values_fixmid.json',
+               'r03_plateau_values_c100deep.json',
+               'r03_plateau_values_c40deep.json',
+               'r03_plateau_values_c10mid.json',
+               'r03_plateau_values_control.json'):
         try:
             with open(fn) as f:
                 for r in json.load(f):
-                    if 'plateau' in r and r.get('stable_digits', 0) >= 95:
-                        vals.setdefault(r['c'], mpmathify(r['plateau']))
+                    sd = r.get('stable_digits', 0)
+                    c = r['c']
+                    if not isinstance(c, int):
+                        continue
+                    if 'plateau' in r and sd >= min_digits and \
+                            sd > best.get(c, (None, -1))[1]:
+                        best[c] = (mpmathify(r['plateau']), sd)
         except FileNotFoundError:
             pass
-    return vals
+    return {c: v[0] for c, v in best.items()}
 
 
 def erfcx(x):

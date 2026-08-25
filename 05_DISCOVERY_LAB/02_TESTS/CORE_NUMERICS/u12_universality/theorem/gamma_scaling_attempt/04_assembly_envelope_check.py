@@ -7,17 +7,18 @@ End-to-end numerical certificate of the ASSEMBLED sandwich of ATTEMPT.md SS5
 verbatim:
 
   beta   = gamma(2-gamma)/2,   a_gam = gamma(1-ln2)/2,  G_n = (1/2) sqrt(pi n / beta)
-  K      = ceil( sqrt( (4/beta) n ln n ) )        [requires K <= min(n/2, n^{2/3})]
+  K      = ceil( sqrt( (4/beta) n ln n ) )        [requires K <= n/2]
   delta  = exp(gamma K/(2n)) - 1
+  omega  = K^3/(4 n^2)
   J32    = (Gamma(5/4)/2) (n/beta)^{5/4} + 2 (3n/(4beta))^{3/4} e^{-3/4}
   J3     = n^2/(2 beta^2) + 2 (3n/(2beta))^{3/2} e^{-3/2}
   rho    = e^{-a_gam (K+1)}/(1-e^{-a_gam}) + e^{-gamma K^2/(4n)} (1 + 2n/(gamma K))
   T      = (n/(2 beta K)) e^{-beta K^2 / n}
 
-  U  = (1+delta) [ G_n + (e^{1/4}/(sqrt(2) n)) J32 ] + rho
+  U  = (1+delta) [ G_n + (e^{omega}/(sqrt(2) n)) J32 ] + rho
   Lo = G_n - 1 - T - (1+delta) J3 / n^2
 
-  CLAIM (Theorem 1'):  Lo <= n phi(n, gamma n) <= U   whenever K <= min(n/2, n^{2/3}).
+  CLAIM (Theorem 1'):  Lo <= n phi(n, gamma n) <= U   whenever K <= n/2.
 
 Also checks:
   (S)  the scalar Hoeffding inequality used in Lemma 4:
@@ -84,13 +85,14 @@ def envelope(n, g):
     a_g = g * (1 - log(2)) / 2.0
     G = 0.5 * sqrt(pi * n / beta)
     K = ceil(sqrt((4.0 / beta) * n * log(n)))
-    ok = (K <= n / 2) and (K <= n ** (2.0 / 3.0))
+    ok = (K <= n / 2)
+    omega = K ** 3 / (4.0 * n * n)
     delta = exp(g * K / (2.0 * n)) - 1.0
     J32 = (Gamma(1.25) / 2.0) * (n / beta) ** 1.25 + 2.0 * (3.0 * n / (4 * beta)) ** 0.75 * exp(-0.75)
     J3 = n * n / (2 * beta * beta) + 2.0 * (3.0 * n / (2 * beta)) ** 1.5 * exp(-1.5)
     rho = exp(-a_g * (K + 1)) / (1 - exp(-a_g)) + exp(-g * K * K / (4.0 * n)) * (1 + 2.0 * n / (g * K))
     T = (n / (2 * beta * K)) * exp(-beta * K * K / n)
-    U = (1 + delta) * (G + (exp(0.25) / (sqrt(2) * n)) * J32) + rho
+    U = (1 + delta) * (G + (exp(omega) / (sqrt(2) * n)) * J32) + rho
     Lo = G - 1 - T - (1 + delta) * J3 / (n * n)
     return G, K, ok, U, Lo
 
@@ -113,7 +115,7 @@ def main():
                 all_ok &= holds
             logp(f"{g:>6} {n:>7} {K:>6} {str(ok):>5} {Lo/G:>9.5f} {npv/G:>9.5f} "
                  f"{U/G:>9.5f} {str(holds):>6} {Theta:>9.5f} {abs(npv/G-1):>10.6f} {tb:>9.1e}")
-    logp(f"  All sandwich checks hold (where side condition K<=min(n/2,n^(2/3)) met): {all_ok}")
+    logp(f"  All sandwich checks hold (where side condition K<=n/2 met): {all_ok}")
 
     # ---------- scalar Hoeffding ----------
     logp("\n[S] scalar Hoeffding: g e^(l(1-g)) + (1-g) e^(-l g) <= e^(l^2/8)")

@@ -56,18 +56,30 @@ JOBS = {
         (163840, 2000, 360, [230, 260, 290]),
         (655360, 2000, 360, [230, 260, 290]),
     ],
-    # small-c direct: c=100 deep (Gaussian peak 1e183), plus cheap
-    # moderate-ct0 direct references used to cross-validate the Borel engine
-    # on FUNCTION VALUES (same t0, so approach error cancels in comparison)
-    'smallc': [
-        (100, 3800, 440, [230, 260, 290]),
-        (40,  1700, 220, [120]),
-        (10,  1700, 220, [60]),
-        (1,   3600, 300, [30]),
-    ],
     # roundoff control
     'control': [
         (1000, 2000, 440, [230, 260, 290]),
+    ],
+    # ---- corrected-sizing jobs (empirical rule measured from the c=1000
+    # and c=160 first-pass runs: log(max|term|) ~= ct0 + 0.92*(ct0)^2/c,
+    # i.e. the cancellation content is ~e^{c t0^2} not ~e^{c t0^2/2};
+    # K from 2*alpha*X2' (X2'=0.92*(ct0max)^2/c) with 10-20% safety) ----
+    'fixmid': [
+        (640, 2400, 420, [230, 260, 290]),
+        (250, 3300, 480, [230, 260, 290]),
+        (160, 4700, 560, [230, 260, 290]),
+    ],
+    'c100deep': [
+        (100, 7400, 690, [230, 260, 290]),
+    ],
+    'c40deep': [
+        (40, 16000, 1200, [230, 260, 290]),
+    ],
+    'c10mid': [
+        (10, 11400, 800, [100, 110, 120]),
+    ],
+    'c1small': [
+        (1, 7200, 480, [25, 30]),
     ],
 }
 

@@ -23,26 +23,34 @@ from mpmath import mp, mpf, mpmathify, sqrt, pi, fabs, log10, nstr, matrix, lu_s
 
 mp.dps = 130
 
-LADDER = [10, 40, 160, 640, 2560, 10240, 40960, 163840, 655360]
+LADDER = [40, 100, 160, 250, 640, 1000, 2560, 10240, 40960, 163840, 655360]
+HOLDOUT = [1, 10]          # lower-precision values: used as prediction tests
 
 
-def load_values():
-    vals = {}
-    meta = {}
+def load_values(min_digits=95):
+    """best (highest stable_digits) entry per c across all result files"""
+    best = {}
     for fn in ('r03_plateau_values_ladder.json',
-               'r03_plateau_values_smallc.json',
-               'r03_plateau_values_control.json',
-               'r03b_borel_values.json'):
+               'r03_plateau_values_fixmid.json',
+               'r03_plateau_values_c100deep.json',
+               'r03_plateau_values_c40deep.json',
+               'r03_plateau_values_c10mid.json',
+               'r03_plateau_values_c1small.json',
+               'r03_plateau_values_control.json'):
         try:
             with open(fn) as f:
                 for r in json.load(f):
-                    if 'plateau' in r and r.get('stable_digits', 0) >= 95:
-                        c = r['c']
-                        if c not in vals:
-                            vals[c] = mpmathify(r['plateau'])
-                            meta[c] = (fn, r['stable_digits'])
+                    sd = r.get('stable_digits', 0)
+                    c = r['c']
+                    if not isinstance(c, int):
+                        continue
+                    if 'plateau' in r and sd >= min_digits and \
+                            sd > best.get(c, (None, None, -1))[2]:
+                        best[c] = (mpmathify(r['plateau']), fn, sd)
         except FileNotFoundError:
             pass
+    vals = {c: v[0] for c, v in best.items()}
+    meta = {c: (v[1], v[2]) for c, v in best.items()}
     return vals, meta
 
 
@@ -97,16 +105,45 @@ def main():
     # most-different subset fit
     print("coefficient stability (agreement across subset fits):")
     dmain = fits['all']
-    for j in range(min(6, len(dmain))):
+    trusted = []
+    for j in range(len(dmain)):
         spread = max(fabs(dmain[j] - fits[n][j])
                      for n in fits if n != 'all' and j < len(fits[n]))
         digs = int(-log10(spread / max(fabs(dmain[j]), mpf('1e-30')))) \
             if spread > 0 else 99
-        print(f"  d{j} = {nstr(dmain[j], 32)}   stable to ~{digs} digits")
+        trusted.append(digs)
+        if j < 7:
+            print(f"  d{j} = {nstr(dmain[j], 32)}   stable to ~{digs} digits")
+    print()
+
+    # --- checks of the DERIVED asymptotic coefficients ---
+    print("derived-coefficient checks:")
+    print(f"  d0 - 1              = {nstr(dmain[0] - 1, 8)}"
+          f"   [derived: 0]")
+    d1_pred = -2 * sqrt(2 / pi)
+    print(f"  d1 - (-2*sqrt(2/pi)) = {nstr(dmain[1] - d1_pred, 8)}"
+          f"   [derived prediction: d1 = -2 sqrt(2/pi) = {nstr(d1_pred, 20)}]")
+    d2_pred = mpf(7) / 2
+    print(f"  d2 - 7/2             = {nstr(dmain[2] - d2_pred, 8)}"
+          f"   [derived prediction: d2 = 7/2]")
+    print(f"  next (undetermined) coefficient: d3 = {nstr(dmain[3], 20)}")
+    print()
+
+    # --- holdout prediction tests at lower-precision c values ---
+    for c in HOLDOUT:
+        if c in vals:
+            epsh = 1 / sqrt(mpf(c))
+            yh = vals[c] * sqrt(2 * mpf(c) / pi)
+            pred = sum(dmain[j] * epsh ** j for j in range(len(dmain)))
+            print(f"  holdout c={c}: y_measured = {nstr(yh, 15)}  "
+                  f"y_fit_extrapolated = {nstr(pred, 15)}  "
+                  f"rel.diff = {nstr(fabs(pred - yh) / yh, 4)}")
     out = {
         'ladder_c': avail,
         'd_coeffs': [nstr(dmain[j], 40) for j in range(len(dmain))],
+        'trusted_digits': trusted,
         'd0_minus_1': nstr(dmain[0] - 1, 10),
+        'd1_minus_pred': nstr(dmain[1] - d1_pred, 10),
     }
     with open('r04_fit_results.json', 'w') as f:
         json.dump(out, f, indent=1)

@@ -1,0 +1,42 @@
+V1: exact reduction W = Psi - eps*Psi_x
+  W - (Psi - eps Psi_x) == 0: OK
+V2: scaled mode-E equation from dPsi/ds = c[Psi - W]
+  Psi_x = (x+y)Psi - I (exact, all c): OK
+V3: Watson expansion of the renewal kernel on generic polynomial G
+  kernel expansion exact to O(eps^2): OK
+V4: R' = xR - 1 and R -> 0
+  R' - (xR - 1) == 0: OK
+  R(inf) = 0: OK
+V5: int_0^inf e^{-x^2/2} R dx = 1
+  integral == 1: OK
+V6: inner layer p=(1-e^{-z})R solves p_x = xp - (1-e^{-z}); delta=R
+  p_x - (x p - (1-e^{-z})) == 0: OK
+  p(x,0) == 0: OK
+  delta == R: OK
+V7: psi2(0) = -2
+  psi2(0) == -2: OK
+  psi2' - (X psi2 + 2R) == 0: OK
+  psi2(0) == -2 (closed form): OK
+  psi2(inf) == 0 (bounded branch): OK
+V8: y-independent psi solves the nonlocal outer equation identically
+  (x+y)psi - y*psi + h == x*psi + h == psi': OK
+V9: third order -- inner Phi correction and integrated source B(z)
+  int_0^z e^{-w} p1(z-w)/R dw == 1 - e^{-z} - z e^{-z}: OK
+  B(z) == z - 2 + 2e^{-z} + z e^{-z}: OK
+V10: order-eps^2 inner equation p2_x = x p2 + z p1 - R B(z)
+  source == 2R[1-(1+z)e^{-z}]: OK
+  p2_x - (x p2 + 2R m) == 0: OK
+  p2(x,0) == 0: OK
+  p2 -> psi2 as z->inf (matching): OK
+V11: delta2 = int_0^inf (psi2 - p2) dz = 2 psi2, and h3 = 7 R'
+  delta2 == 2 psi2: OK
+  h3 == 7 R' == 7(xR - 1): OK
+V12: psi3(0) = -int_0^inf e^{-s^2/2} 7R' ds = (7/2) sqrt(pi/2)
+  psi3(0) == (7/2)sqrt(pi/2): OK
+V13: extraction telescoping (1+eps D+eps^2 D^2+...)(1-eps D)Psi = Psi
+  telescopes to O(eps^4): OK
+
+Assembled result:
+  Pi(c) = sqrt(pi/(2c)) - 2/c + (7/2)*sqrt(pi/2)*c^{-3/2} + O(c^-2)
+  y(eps) := Pi*sqrt(2c/pi) = 1 - 2*sqrt(2/pi)*eps + (7/2)*eps^2 + O(eps^3)
+ALL: PASS

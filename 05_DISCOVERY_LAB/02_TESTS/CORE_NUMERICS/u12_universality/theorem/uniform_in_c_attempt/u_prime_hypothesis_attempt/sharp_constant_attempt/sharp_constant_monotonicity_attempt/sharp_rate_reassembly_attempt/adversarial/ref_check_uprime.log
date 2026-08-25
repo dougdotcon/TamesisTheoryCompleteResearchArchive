@@ -1,0 +1,21 @@
+== R2a: M_K identity, exact, K=1..300 ==
+  300/300 exact, mismatches=0, elapsed 5s
+== R2b: 0 <= M_K < a* sqrt(K), certified, K=1..1000 + sparse to 5000 ==
+  1007 pts, violations=0, max certified ratio 0.987255 at K=5000, elapsed 62s
+== R2c: interior-n monotonicity and 0<=T<=M_K (spot grid) ==
+  63 cells, violations=0
+== R2d: boundary K=n: |Q(n)-n phi_n| < a* sqrt(n) ==
+  exact anchors: n=1 -> 1/3, n=2 -> 13/30
+  n=5000: |Q-n.phi_n| <= 25.631389 < 25.956986 : True
+  n=10000: |Q-n.phi_n| <= 36.380860 < 36.708721 : True
+  n=30000: |Q-n.phi_n| <= 63.251197 < 63.581370 : True
+  n=50000: |Q-n.phi_n| <= 81.752311 < 82.083196 : True
+  610 boundary pts, violations=0, worst exact ratio 0.980289 at n=2000, elapsed 69s
+== R2e: re-derived Estagio-19 referee par.8 algebra, certified ==
+  c_hi = 0.557051112, 3*c_hi^2 = 0.930917823 < 1 : True
+  a*_lo*sqrt(67)_lo = 3.004738 > 3 : True
+  a*_hi*sqrt(66)_hi = 2.982231 (info: <3 confirms threshold)
+  (1-x/2)^2(1+x)-1 == x^2(x-3)/4 symbolically: True
+  upper-side chain Q-n.phi_n < a*sqrt(n)-1/3+c/sqrt(n), 6 pts, violations=0
+  Q(n) >= sqrt(pi n/2)-6 spot check, 7 pts, violations=0
+== R2 SUMMARY: 11 checks, 0 failures, elapsed 71s ==

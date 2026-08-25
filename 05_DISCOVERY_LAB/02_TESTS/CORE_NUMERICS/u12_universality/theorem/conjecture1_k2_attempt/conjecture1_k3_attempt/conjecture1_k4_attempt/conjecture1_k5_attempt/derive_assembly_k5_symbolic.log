@@ -1,0 +1,75 @@
+========================================================================
+Part A: K=5 per-r densities, integral route vs unified closed form
+  r=0: f_r(x) = 5*x*(x - 1)**4
+PASS K=5 r=0: integral route == unified closed form
+  r=1: f_r(x) = 5*x*(x - 1)**4*(4*x + 1)
+PASS K=5 r=1: integral route == unified closed form
+  r=2: f_r(x) = 10*x**2*(x - 1)**4*(3*x + 2)
+PASS K=5 r=2: integral route == unified closed form
+  r=3: f_r(x) = 10*x**3*(x - 1)**4*(2*x + 3)
+PASS K=5 r=3: integral route == unified closed form
+  r=4: f_r(x) = 5*x**4*(x - 1)**4*(x + 4)
+PASS K=5 r=4: integral route == unified closed form
+  r=5: f_r(x) = 5*x**5*(x - 1)**4
+PASS K=5 r=5: integral route == unified closed form
+PASS K=5 r=0: matches registered factored form
+PASS K=5 r=1: matches registered factored form
+PASS K=5 r=2: matches registered factored form
+PASS K=5 r=3: matches registered factored form
+PASS K=5 r=4: matches registered factored form
+PASS K=5 r=5: matches registered factored form
+========================================================================
+Part B: symbolic sum
+  sum   = 10*x**9 - 40*x**7 + 60*x**5 - 40*x**3 + 10*x
+  target= 10*x**9 - 40*x**7 + 60*x**5 - 40*x**3 + 10*x
+PASS f_M5(x) == 10x(1-x^2)^4 exactly
+========================================================================
+Part C: probabilities and moments (exact)
+  P(r_on=0) = 1/6
+PASS P(r_on=0) == registered 1/6
+  P(r_on=1) = 5/14
+PASS P(r_on=1) == registered 5/14
+  P(r_on=2) = 25/84
+PASS P(r_on=2) == registered 25/84
+  P(r_on=3) = 5/36
+PASS P(r_on=3) == registered 5/36
+  P(r_on=4) = 1/28
+PASS P(r_on=4) == registered 1/28
+  P(r_on=5) = 1/252
+PASS P(r_on=5) == registered 1/252
+PASS probabilities sum to 1
+  int f = 1, E[M5] = 256/693, E[M5^2] = 1/6, E[M5^3] = 256/3003
+PASS normalization = 1
+PASS E[M5] = 256/693
+PASS E[M5] equals THEOREM.md 5.2 Wallis value 256/693
+PASS E[M5^2] = 1/6 (the 1/(K+1) pattern of Estagio 18)
+PASS E[M5^3] = 256/3003
+========================================================================
+Part D: reduction checks against the published K=1..4 group densities
+PASS K=1: unified formula reproduces published groups r=0..1
+PASS K=1: sum == 2Kx(1-x^2)^(K-1)
+PASS K=2: unified formula reproduces published groups r=0..2
+PASS K=2: sum == 2Kx(1-x^2)^(K-1)
+PASS K=3: unified formula reproduces published groups r=0..3
+PASS K=3: sum == 2Kx(1-x^2)^(K-1)
+PASS K=4: unified formula reproduces published groups r=0..4
+PASS K=4: sum == 2Kx(1-x^2)^(K-1)
+========================================================================
+Part E: general-K sum and the two binomial identities of the proof
+PASS K=1: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=2: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=3: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=4: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=5: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=6: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=7: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=8: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=9: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=10: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=11: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS K=12: sum_r f_r == 2Kx(1-x^2)^(K-1)
+PASS Sum C(K,r) x^r = (1+x)^K (symbolic K, x in (0,1) branch)
+PASS Sum r C(K,r) x^r = K x (1+x)^(K-1) (symbolic K, x in (0,1) branch)
+PASS Sum (K-r) C(K,r) x^r = K(1+x)^(K-1) (symbolic K, derived)
+========================================================================
+ALL CHECKS PASSED

@@ -1,0 +1,28 @@
+=== 01_validate_exact_formula.py ===
+Deterministic exact-arithmetic validation; NO randomness used anywhere.
+
+[V1] Lemma 1 vs brute-force enumeration of Definition 1 (exact, poly in q)
+  n=3: degree-3 polynomials in q agree coefficient-by-coefficient: True   (0.0s)
+    n=3 coefficients (Lemma 1):    ['1', '-8/9', '2/3', '-4/27']
+    n=3 coefficients (bruteforce): ['1', '-8/9', '2/3', '-4/27']
+  n=4: degree-4 polynomials in q agree coefficient-by-coefficient: True   (0.0s)
+  n=5: degree-5 polynomials in q agree coefficient-by-coefficient: True   (2.6s)
+  V1 PASS: True
+
+[V2] q=1 endpoint vs Ramanujan Q(n)/n, exact, n=1..400
+  V2 PASS: True  (phi(n,n) = Q(n)/n exactly, n=1..400)
+
+[V3] Mixture inversion vs archive closed forms for phi_n^(K) (exact)
+  n=6: phi_n^(0)==1:True  phi_n^(1) matches Estagio-3 form:True  phi_n^(2) matches:True  phi_n^(3) matches Estagio-4 form:True  phi_n^(n)==Q(n)/n:True
+  n=7: phi_n^(0)==1:True  phi_n^(1) matches Estagio-3 form:True  phi_n^(2) matches:True  phi_n^(3) matches Estagio-4 form:True  phi_n^(n)==Q(n)/n:True
+  n=8: phi_n^(0)==1:True  phi_n^(1) matches Estagio-3 form:True  phi_n^(2) matches:True  phi_n^(3) matches Estagio-4 form:True  phi_n^(n)==Q(n)/n:True
+  n=9: phi_n^(0)==1:True  phi_n^(1) matches Estagio-3 form:True  phi_n^(2) matches:True  phi_n^(3) matches Estagio-4 form:True  phi_n^(n)==Q(n)/n:True
+  n=10: phi_n^(0)==1:True  phi_n^(1) matches Estagio-3 form:True  phi_n^(2) matches:True  phi_n^(3) matches Estagio-4 form:True  phi_n^(n)==Q(n)/n:True
+  V3 PASS: True
+
+[V4] float64 evaluator roundoff control vs exact Fractions
+  n=50, gamma=1/2: exact=0.196826455231581 float64=0.196826455231581 rel.err=4.23e-16 (<1e-11: True)  (0.0s)
+  n=200, gamma=3/10: exact=0.121896726832265 float64=0.121896726832265 rel.err=3.42e-16 (<1e-11: True)  (0.8s)
+  V4 PASS: True
+
+Total time: 10.2s

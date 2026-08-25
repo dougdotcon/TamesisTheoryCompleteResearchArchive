@@ -1,0 +1,28 @@
+=== 03_highprec_spotcheck.py ===  (mpmath dps=40; no randomness)
+
+[H1] mpmath full sum vs float64 pipeline at n=4096
+  n=4096, gamma=0.3: mp=0.0273131015180365449  float64=2.731310151803657e-02  rel.diff=8.89e-16  (82s)
+  n=4096, gamma=0.7: mp=0.0204389958050157757  float64=2.043899580501575e-02  rel.diff=1.36e-15  (80s)
+
+[H2] phi_inf(c) two ways + Corollary 4.2 envelope
+  c=26214.4: closed-form=0.005473624234763602 quad=0.005473624234763602 |diff|=0.0;  |phi_inf - lead|=0.0 <= e^-c/(2c)=3.24e-11390: True
+  c=32768.0: closed-form=0.004895758348888673 quad=0.004895758348888673 |diff|=8.97e-44;  |phi_inf - lead|=0.0 <= e^-c/(2c)=1.67e-14236: True
+  c=235929.6: closed-form=0.001824541411587867 quad=0.001824541411587867 |diff|=2.24e-44;  |phi_inf - lead|=0.0 <= e^-c/(2c)=2.53e-102469: True
+
+[H3] Gaussian-sum vs integral: |sum - (1/2)sqrt(pi n/beta)| <= 1
+  gamma=0.1, n=256: sum=45.5047972132 integral=46.0047972132 diff=-0.5 (|.|<=1: True)
+  gamma=0.1, n=65536: sum=735.576755411 integral=736.076755411 diff=-0.5 (|.|<=1: True)
+  gamma=0.5, n=256: sum=22.6552401459 integral=23.1552401459 diff=-0.5 (|.|<=1: True)
+  gamma=0.5, n=65536: sum=369.983842334 integral=370.483842334 diff=-0.5 (|.|<=1: True)
+  gamma=0.9, n=256: sum=19.6540496384 integral=20.1540496384 diff=-0.5 (|.|<=1: True)
+  gamma=0.9, n=65536: sum=321.964794215 integral=322.464794215 diff=-0.5 (|.|<=1: True)
+  gamma=1.0, n=256: sum=19.553026197 integral=20.053026197 diff=-0.5 (|.|<=1: True)
+  gamma=1.0, n=65536: sum=320.348419153 integral=320.848419153 diff=-0.5 (|.|<=1: True)
+
+[H4] gamma=1 anchor: R(n,1)=(Q(n)/n)/phi_inf(n) -> sqrt(2)
+  n=1000: R=1.40243620048  R-sqrt2=-0.01178  sqrt(n)*(R-sqrt2)=-0.372433
+  n=10000: R=1.41046405021  R-sqrt2=-0.00375  sqrt(n)*(R-sqrt2)=-0.374951
+  n=100000: R=1.41302532375  R-sqrt2=-0.001188  sqrt(n)*(R-sqrt2)=-0.375754
+  n=200000: R=1.41337310708  R-sqrt2=-0.0008405  sqrt(n)*(R-sqrt2)=-0.375863
+
+Total time: 162.7s

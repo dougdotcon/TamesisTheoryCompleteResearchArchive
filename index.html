@@ -160,6 +160,18 @@
         5.1.
     </p>
 
+    <p class="update-note">
+        <strong>Nota de atualização (24 de agosto de 2026).</strong> Sete estágios adicionais (ondas 12–15 do
+        laboratório, <code>THEOREM.md</code> "Estágio 11" a "Estágio 17") fecharam, sob a mesma disciplina:
+        uma <em>taxa de convergência explícita e incondicional</em> — eliminando a última hipótese condicional
+        nomeada na Seção 5.1; o limite exato $\lim_{K\to\infty} M_K/\sqrt{K} = a^*$ da constante nítida; formas
+        fechadas gerais para as constantes de erro $D^{*(p)}_r(b)$ até $p=10$, com a maquinaria subjacente
+        provada correta para todo $k$ por indução; e a lei distribucional condicional da Seção 5, antes
+        conjectural para todo $K\ge2$, agora <em>provada em $K=2$ e — inesperadamente — em $K=3$</em>. Ver
+        Seção 5.2. Uma sexta onda de cinco frentes paralelas ataca, neste momento, todos os itens que
+        permanecem abertos; nenhum resultado dela é reportado aqui.
+    </p>
+
     <div class="abstract">
         <strong>Abstract.</strong> We report the outcome of a systematic, adversarial adjudication of a large
         interdisciplinary research archive against real external references (PDG, CODATA, Planck, SPARC, Gaia,
@@ -378,7 +390,8 @@
             $n$ finito $\to$ contínuo está controlada empiricamente (até $n = 65.536$), não formalizada
             [ver §5.1 abaixo — item fechado em 23/08/2026]; e
             a lei distribucional completa para $K \geq 2$ segue conjectura, ainda que agora com suporte
-            KS adicional.
+            KS adicional [ver §5.2 abaixo — instâncias $K=2$ e $K=3$ provadas em 23–24/08/2026; $K\ge4$
+            permanece aberto].
         </p>
 
         <h3>5.1. Extensão pós-publicação (23 de agosto de 2026): forma fechada em todas as ordens e
@@ -434,9 +447,94 @@
             Nenhuma das duas extensões altera o Teorema 3 ou a classificação da classe U$_{1/2}$ — ambas
             dependem de $n\to\infty$, preservado exatamente. A limitação honesta remanescente mudou de
             natureza: já não é a ausência de uma prova de convergência, mas a ausência de uma taxa explícita e
-            uniforme-em-$K$, condicional a uma única hipótese nomeada. Fontes completas, ledgers de decisão e
+            uniforme-em-$K$, condicional a uma única hipótese nomeada [ver §5.2 abaixo — hipótese provada e
+            taxa explícita incondicional obtida em 23/08/2026]. Fontes completas, ledgers de decisão e
             os dois relatórios adversariais independentes: <code>THEOREM.md</code>, "Estágio 9" e "Estágio
             10", em <code>05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/</code>.
+        </p>
+
+        <h3>5.2. Extensões subsequentes (23–24 de agosto de 2026): taxa explícita incondicional, a
+            constante nítida no limite, formas fechadas gerais e a lei condicional em $K=1,2,3$</h3>
+        <p>
+            Sete estágios adicionais (<code>THEOREM.md</code>, "Estágio 11" a "Estágio 17"), cada um sob a
+            mesma disciplina da Seção 2 — verificação independente da sessão orquestradora <i>antes</i> do
+            despacho de um referee hostil dedicado que nunca lê o código da frente-alvo — fecharam, em ordem:
+        </p>
+        <p>
+            <b>Taxa explícita e incondicional (Estágios 11–12).</b> O crescimento geométrico qualitativo de
+            $M_K$ foi provado por rota alternativa via a forma fechada em todas as ordens (removendo o rótulo
+            condicional do perfil de erro uniforme), e em seguida a própria hipótese de regularidade nomeada
+            na Seção 5.1 — (U′), $|\varphi_n^{(K)}-\varphi_K| \le a\sqrt{K}/n$ uniforme em $0\le K\le n$ —
+            foi <i>provada</i>, com constante explícita não-nítida $a = 1+\sqrt{\pi/2} \approx 2{,}2533$,
+            dando a taxa incondicional
+            $$\bigl|\varphi(n,c)-\varphi_\infty(c)\bigr| \;\le\; \frac{(1+\sqrt{\pi/2})\sqrt{c} + 0{,}2805}{n}.$$
+            O referee re-derivou tudo do zero das fontes primárias, construiu um motor de Markov independente
+            e checou a desigualdade final com zero violações até $K=10^5$.
+        </p>
+        <p>
+            <b>A constante nítida no limite (Estágio 13).</b> Um limitante inferior elementar para a função
+            $Q$ de Ramanujan, $Q(n) \ge \sqrt{\pi n/2} - 6$, elevou o limitante superior implícito da prova
+            anterior a um limite exato: $\lim_{K\to\infty} M_K/\sqrt{K} = a^* = \sqrt{\pi}(1/\sqrt{2}-1/2) =
+            0{,}3670872\ldots$ — a primeira confirmação rigorosa de que a constante nítida numericamente
+            conjecturada é o valor assintótico correto. O <i>supremo</i> $\sup_K M_K/\sqrt{K} = a^*$
+            (equivalente a monotonicidade) permanece aberto: duas rotas foram tentadas e falharam, ambas
+            documentadas com o contraexemplo ou a obstrução exata que as matou.
+        </p>
+        <figure class="wide">
+            <img src="05_DISCOVERY_LAB/assets/sharp_constant_astar.svg"
+                alt="M_K sobre raiz de K se aproximando da constante nítida a*, com o limite provado e o supremo aberto">
+            <figcaption><b>Figura 6.</b> A questão da constante nítida. A razão exata $M_K/\sqrt{K}$
+                (computada de $Q(n)$ e $\varphi_K$, ambos objetos provados, sem nenhuma simulação) contra o
+                limite $a^*$ provado no Estágio 13 (tracejado). A curva estritamente crescente que nunca
+                atinge $a^*$ até $K=600$ é evidência numérica/heurística apenas, não prova — o enquadramento
+                honesto do próprio arquivo; fechar o supremo é o alvo da terceira tentativa em execução
+                (onda 16). Gerada por <code>05_DISCOVERY_LAB/assets/make_assets.py</code>.</figcaption>
+        </figure>
+        <p>
+            <b>Formas fechadas gerais para as constantes de erro (Estágios 14 e 16).</b> A forma fechada
+            geral-$b$ das constantes agudas $D^{*(p)}_r(b)$, deixada aberta pelo Estágio 9, foi provada
+            primeiro para $p=1,\ldots,4$ (165.888 checagens exatas do referee, zero divergências) e depois
+            estendida a $p=1,\ldots,10$ — $Q_p(u)$ via identidades de Newton e momentos centrais via função
+            geradora de cumulantes, ambos algoritmos gerais em $p$, não ajustados caso a caso; 26.710
+            checagens exatas da frente mais 18.653 do referee por métodos deliberadamente diferentes
+            (interpolação de Lagrange), zero divergências em ambas. O referee foi além do mandato e construiu
+            uma <i>prova indutiva</i> de que a máquina $H_k(r,b)$ subjacente é correta para <i>todo</i> $k$ —
+            de modo que $p&gt;10$ permanece aberto apenas por custo computacional de execução simbólica, não
+            por incerteza matemática residual.
+        </p>
+        <p>
+            <b>A lei distribucional condicional, agora provada em $K=1,2,3$ (Estágios 15 e 17).</b> A última
+            limitação nomeada na Seção 5 — a lei $f_{M_K}(x) = 2Kx(1-x^2)^{K-1}$ conjectural para todo
+            $K\ge2$ — foi fechada em suas duas primeiras instâncias: $f_{M_2}(x)=4x(1-x^2)$ (onda 14) e, ao
+            contrário da expectativa explícita de não-fechamento por explosão combinatória registrada no
+            próprio despacho, $f_{M_3}(x)=6x(1-x^2)^2$ (onda 15). O mecanismo que impediu a explosão: nós
+            fora-de-ciclo do grafo de redirecionamentos contribuem massa cíclica nova exatamente zero,
+            independentemente do alvo, colapsando as $4^K$ configurações brutas de destino ao número (bem
+            menor) de estruturas de ciclo em $K$ itens rotulados — $64 \to 7$ formas em $K=3$. Cada instância
+            é provada módulo a mesma citação clássica de amostragem size-biased/residual de
+            Poisson–Dirichlet(1) já usada pelo caso base $K=1$, e cada uma passou por referee hostil dedicado
+            (para $K=3$, briefado explicitamente para caçar a falha que explicaria a surpresa: re-derivação
+            completa das 7 formas, $8\times10^6$ amostras de Monte Carlo independente, 26.000 testes de
+            mecanismo discreto, zero erros matemáticos encontrados). $K\ge4$ permanece aberto e explicitamente
+            não tentado; a mistura de Poisson completa (a "Conjectura 2" do arquivo) permanece conjectura.
+        </p>
+        <figure class="wide">
+            <img src="05_DISCOVERY_LAB/assets/conjecture1_densities.svg"
+                alt="As três instâncias provadas da lei condicional f_M_K para K=1,2,3">
+            <figcaption><b>Figura 7.</b> As três instâncias provadas da lei distribucional condicional
+                $f_{M_K}(x) = 2Kx(1-x^2)^{K-1}$ — $K=1$ (caso base, §5.3 de <code>THEOREM.md</code>), $K=2$
+                (Estágio 15) e $K=3$ (Estágio 17, fechamento inesperado). Curvas traçadas diretamente das
+                formas fechadas provadas, sem simulação nem ajuste. Gerada por
+                <code>05_DISCOVERY_LAB/assets/make_assets.py</code>.</figcaption>
+        </figure>
+        <p>
+            <b>O que permanece aberto ao fim do Estágio 17</b> — e é, neste momento, alvo de uma sexta onda
+            de cinco frentes paralelas cujos resultados não são reportados aqui: Conjectura 1 para $K\ge4$;
+            a Conjectura 2 em geral; $\sup_K M_K/\sqrt{K} = a^*$; $D^{*(p)}_r(b)$ para $p&gt;10$ (barreira
+            puramente computacional); e a forma fechada completa do piso de ciclos longos do modelo M-CLUST
+            em $b=1$ (linha separada, parcialmente fechada). Fontes completas: <code>THEOREM.md</code>,
+            Estágios 11–17, e os relatórios <code>adversarial/REFEREE_REPORT.md</code> de cada frente, em
+            <code>05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/</code>.
         </p>
 
         <h2>6. Discussão</h2>
@@ -508,9 +606,10 @@
         <div class="footer-note">
             Este preprint sintetiza resultados registrados no repositório público do Tamesis Research
             Archive. Cada número citado tem um arquivo de resultado, um log e uma nota de metodologia
-            commitados; as figuras são geradas por script determinístico
+            commitados; as Figuras 1–5 são geradas por script determinístico
             (<code>ARTIGO_DISCOVERY_LAB/figures/make_figures.py</code>) diretamente dos JSONs de resultado,
-            sem valores redigitados. A menção a fontes externas (PDG, CODATA, Planck, Gaia, PhysioNet,
+            e as Figuras 6–7 por <code>05_DISCOVERY_LAB/assets/make_assets.py</code> diretamente das formas
+            fechadas provadas em <code>THEOREM.md</code>, sem valores redigitados. A menção a fontes externas (PDG, CODATA, Planck, Gaia, PhysioNet,
             Odlyzko) não implica endosso. A execução computacional foi assistida por agentes autônomos
             operando sob os protocolos de governança descritos na Seção 2; a responsabilidade científica e
             editorial é do autor. Licença CC BY 4.0.

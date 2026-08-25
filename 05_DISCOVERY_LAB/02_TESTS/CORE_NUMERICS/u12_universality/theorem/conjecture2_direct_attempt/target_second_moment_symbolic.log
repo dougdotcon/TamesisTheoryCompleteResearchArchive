@@ -1,0 +1,28 @@
+======================================================================
+Route A: E[M(c)^2] directly from M(c) = min(1, sqrt(E/c)), E~Exp(1)
+======================================================================
+term1 = int_0^c (e/c)e^-e de = (-c + exp(c) - 1)*exp(-c)/c
+term2 = int_c^oo e^-e de     = exp(-c)
+E[M(c)^2] (route A)          = (exp(c) - 1)*exp(-c)/c
+Candidate closed form (1-e^-c)/c matches route A exactly: True  (diff = 0 )
+
+======================================================================
+Route B: E[M(c)^2] via the K-mixture definition of Conjecture 2
+  (M(c) := M_K, K~Poisson(c) independent; use Conjecture 1's
+   f_{M_K}(x) = 2Kx(1-x^2)^{K-1} -- CONJECTURED for K>=2, PROVED
+   K=1,2,3 -- to get E[M_K^2] for each K, then Poisson-mix.)
+======================================================================
+E[M_K^2] (from Conjecture 1's density, symbolic in K) = 1/(Kint + 1)
+K=0 special case: M_0 = 1 a.s. => E[M_0^2] = 1 (not covered by the K>=1 formula above)
+Simplified E[M_K^2] as function of K: 1/(Kint + 1)
+Poisson-mixture sum (route B), closed form: (exp(c) - 1)*exp(-c)/c
+Matches (1-e^-c)/c exactly: True  (diff = 0 )
+
+======================================================================
+Numeric cross-check at a few c values (both routes vs target, floats)
+======================================================================
+c=  0.50  routeA=0.7869386806  routeB=0.7869386806  target=(1-e^-c)/c=0.7869386806
+c=  1.00  routeA=0.6321205588  routeB=0.6321205588  target=(1-e^-c)/c=0.6321205588
+c=  2.00  routeA=0.4323323584  routeB=0.4323323584  target=(1-e^-c)/c=0.4323323584
+c=  5.00  routeA=0.1986524106  routeB=0.1986524106  target=(1-e^-c)/c=0.1986524106
+c= 10.00  routeA=0.0999954600  routeB=0.0999954600  target=(1-e^-c)/c=0.0999954600

@@ -1,0 +1,51 @@
+========================================================================
+PART A: Lemma 1a -- unit-Jacobian ordering cells, b=2..6
+========================================================================
+  b=2: all 1=(b-1)! ordering cells unimodular -> density sum = 1/ell^1  PASS
+  b=3: all 2=(b-1)! ordering cells unimodular -> density sum = 2/ell^2  PASS
+  b=4: all 6=(b-1)! ordering cells unimodular -> density sum = 6/ell^3  PASS
+  b=5: all 24=(b-1)! ordering cells unimodular -> density sum = 24/ell^4  PASS
+  b=6: all 120=(b-1)! ordering cells unimodular -> density sum = 120/ell^5  PASS
+  moment cross-route (b=2,3,4): labeled-gap mixed moments vs Dirichlet
+    b=2 E[G^(2,)] = 1/3 vs Dirichlet 1/3: PASS
+    b=3 E[G^(2, 0)] = 1/6 vs Dirichlet 1/6: PASS
+    b=3 E[G^(1, 1)] = 1/12 vs Dirichlet 1/12: PASS
+    b=4 E[G^(2, 0, 0)] = 1/10 vs Dirichlet 1/10: PASS
+    b=4 E[G^(1, 1, 0)] = 1/20 vs Dirichlet 1/20: PASS
+
+========================================================================
+PART A2: fresh-seed MC of labeled circular gaps, b=2..6 (N=400000 each)
+========================================================================
+  b=2 label=anchor: mean=0.50016 (target 0.50000) KS p=0.6072 PASS
+  b=2 label=free1: mean=0.49984 (target 0.50000) KS p=0.6072 PASS
+  b=3 label=anchor: mean=0.33322 (target 0.33333) KS p=0.7293 PASS
+  b=3 label=free1: mean=0.33342 (target 0.33333) KS p=0.7832 PASS
+  b=4 label=anchor: mean=0.24998 (target 0.25000) KS p=0.7744 PASS
+  b=4 label=free1: mean=0.24991 (target 0.25000) KS p=0.5348 PASS
+  b=5 label=anchor: mean=0.20022 (target 0.20000) KS p=0.3505 PASS
+  b=5 label=free1: mean=0.20013 (target 0.20000) KS p=0.2608 PASS
+  b=6 label=anchor: mean=0.16645 (target 0.16667) KS p=0.5171 PASS
+  b=6 label=free1: mean=0.16693 (target 0.16667) KS p=0.1846 PASS
+
+========================================================================
+PART B: telescoping peel, ALL set partitions, K=2..6
+========================================================================
+  K=2: all 2 patterns telescope to prod(b_j-1)! PASS
+  K=3: all 5 patterns telescope to prod(b_j-1)! PASS
+  K=4: all 15 patterns telescope to prod(b_j-1)! PASS
+  K=5: all 52 patterns telescope to prod(b_j-1)! PASS
+  K=6: all 203 patterns telescope to prod(b_j-1)! PASS
+
+========================================================================
+PART C: sum over set partitions of prod (b_j-1)! = K!, K=1..8
+========================================================================
+  K=1: sum = 1  K! = 1  PASS
+  K=2: sum = 2  K! = 2  PASS
+  K=3: sum = 6  K! = 6  PASS
+  K=4: sum = 24  K! = 24  PASS
+  K=5: sum = 120  K! = 120  PASS
+  K=6: sum = 720  K! = 720  PASS
+  K=7: sum = 5040  K! = 5040  PASS
+  K=8: sum = 40320  K! = 40320  PASS
+
+OVERALL: ALL PASS

@@ -120,13 +120,19 @@ def main():
     print("derived-coefficient checks:")
     print(f"  d0 - 1              = {nstr(dmain[0] - 1, 8)}"
           f"   [derived: 0]")
-    d1_pred = -2 * sqrt(2 / pi)
-    print(f"  d1 - (-2*sqrt(2/pi)) = {nstr(dmain[1] - d1_pred, 8)}"
-          f"   [derived prediction: d1 = -2 sqrt(2/pi) = {nstr(d1_pred, 20)}]")
-    d2_pred = mpf(7) / 2
-    print(f"  d2 - 7/2             = {nstr(dmain[2] - d2_pred, 8)}"
-          f"   [derived prediction: d2 = 7/2]")
-    print(f"  next (undetermined) coefficient: d3 = {nstr(dmain[3], 20)}")
+    u = sqrt(2 / pi)
+    preds = [
+        ('d0', mpf(1), 'derived'),
+        ('d1', -2 * u, 'derived  [-2 sqrt(2/pi)]'),
+        ('d2', mpf(7) / 2, 'derived  [7/2]'),
+        ('d3', -mpf(34) / 3 * u, 'derived  [-(34/3) sqrt(2/pi)]'),
+        ('d4', mpf(209) / 8, 'CONJECTURED (gamma-pattern) [209/8]'),
+        ('d5', -mpf(1546) / 15 * u, 'CONJECTURED [-(1546/15) sqrt(2/pi)]'),
+    ]
+    for j, (name, pred, tag) in enumerate(preds):
+        if j < len(dmain):
+            print(f"  {name} - pred = {nstr(dmain[j] - pred, 8):>14}"
+                  f"   pred = {nstr(pred, 22):>26}   {tag}")
     print()
 
     # --- holdout prediction tests at lower-precision c values ---

@@ -188,8 +188,91 @@ pol = sp.Poly(dd, eps)
 report("telescopes to O(eps^4)",
        all(sp.simplify(pol.coeff_monomial(eps**k)) == 0 for k in range(4)))
 
+print("V14: R-derivative closure  R^{(n+1)} = x R^{(n)} + n R^{(n-1)}")
+ok = True
+for n in range(1, 7):
+    lhs = sp.diff(R, x, n + 1)
+    rhs = x * sp.diff(R, x, n) + n * sp.diff(R, x, n - 1)
+    ok &= (sp.simplify(lhs - rhs) == 0)
+report("closure holds n=1..6", ok)
+report("psi2 == 2 R'", sp.simplify((2 * x * R - 2) - 2 * sp.diff(R, x)) == 0)
+psi3 = sp.Rational(7, 2) * ((1 + x**2) * R - x)
+report("psi3 == (7/2) R''",
+       sp.simplify(psi3 - sp.Rational(7, 2) * sp.diff(R, x, 2)) == 0)
+report("psi3' - (x psi3 + 7R') == 0",
+       sp.simplify(sp.diff(psi3, x) - x * psi3 - 7 * sp.diff(R, x)) == 0)
+
+print("V15: fourth order -- inner Phi at eps^2 and the p3 layer")
+w = sp.Symbol('w', positive=True)
+# A1(z) = int_0^z e^{-w}(w-1)(1-e^{-(z-w)}) dw == -(z^2/2) e^{-z}
+A1 = sp.integrate(sp.exp(-w) * (w - 1) * (1 - sp.exp(-(z - w))), (w, 0, z))
+report("A1 == -(z^2/2)e^{-z}", sp.simplify(A1 + z**2 / 2 * sp.exp(-z)) == 0)
+# A2(z) = int_0^z e^{-w} m(z-w) dw == 1 - (1+z+z^2/2) e^{-z} =: g2(z)
+mzw = 1 - (1 + (z - w)) * sp.exp(-(z - w))
+A2 = sp.integrate(sp.exp(-w) * mzw, (w, 0, z))
+g2 = 1 - (1 + z + z**2 / 2) * sp.exp(-z)
+report("A2 == g2", sp.simplify(A2 - g2) == 0)
+# C(x,z) = int_0^z Phi2 = -R' g2 + psi2 g3 with g3 = z - 3 + e^{-z}(3+2z+z^2/2)
+g3 = z - 3 + sp.exp(-z) * (3 + 2 * z + z**2 / 2)
+Phi2 = -sp.Symbol('Rp') * sp.Rational(1, 2) * z**2 * sp.exp(-z) \
+    + sp.Symbol('psi2s') * (1 - (1 + z + z**2 / 2) * sp.exp(-z))
+Cz = sp.integrate(Phi2, (z, 0, z))
+Cclaim = -sp.Symbol('Rp') * g2 + sp.Symbol('psi2s') * g3
+report("C == -R' g2 + psi2 g3", sp.simplify(Cz - Cclaim) == 0)
+# inner source collapse: z*m(z) - g3(z) == 3 g2(z)
+mz = 1 - (1 + z) * sp.exp(-z)
+report("z m - g3 == 3 g2", sp.simplify(z * mz - g3 - 3 * g2) == 0)
+# p3 = g2(z) psi3(x) solves p3_x = x p3 + psi2*(z m - g3) + R' g2, given
+# 3 psi2 + R' == 7 R' - 4R' ... i.e. source total (3 psi2 + R') g2 = 7R' g2:
+report("3 psi2 + R' == 7 R'",
+       sp.simplify(3 * (2 * x * R - 2) + sp.diff(R, x)
+                   - 7 * sp.diff(R, x)) == 0)
+p3 = g2 * psi3
+src3 = (2 * x * R - 2) * (z * mz - g3) + sp.diff(R, x) * g2
+report("p3_x - (x p3 + src3) == 0",
+       sp.simplify(sp.diff(p3, x) - x * p3 - src3) == 0)
+report("p3(x,0) == 0", sp.simplify(p3.subs(z, 0)) == 0)
+
+print("V16: delta3 == 3 psi3 and h4 == 17 R''")
+d3int = sp.integrate(psi3 - p3, (z, 0, sp.oo))
+report("delta3 == 3 psi3", sp.simplify(d3int - 3 * psi3) == 0)
+h4 = 3 * psi3 + psi3 + sp.diff(2 * sp.diff(R, x), x) + sp.diff(R, x, 2)
+report("h4 = 4psi3 + psi2' + psi1'' == 17 R''",
+       sp.simplify(h4 - 17 * sp.diff(R, x, 2)) == 0)
+
+print("V17: psi4 = (17/3) R''' ; psi4(0) = -34/3 (two ways)")
+psi4 = sp.Rational(17, 3) * sp.diff(R, x, 3)
+report("psi4' - (x psi4 + 17R'') == 0",
+       sp.simplify(sp.diff(psi4, x) - x * psi4 - 17 * sp.diff(R, x, 2)) == 0)
+report("psi4(0) == -34/3 (closed form)",
+       sp.simplify(psi4.subs(x, 0) + sp.Rational(34, 3)) == 0)
+val4 = -sp.integrate(sp.exp(-sig**2 / 2)
+                     * 17 * sp.diff(Rs, sig, 2), (sig, 0, sp.oo))
+report("psi4(0) == -34/3 (integral)",
+       sp.simplify(val4 + sp.Rational(34, 3)) == 0)
+
+print("V18: all-orders gamma-recursion (closed-form asymptotic series)")
+# psi_n = gamma_n R^{(n-1)};  gamma_{n+1} = [(n+1)gamma_n + sum_{j<n}gamma_j]/n
+gam = {1: sp.Integer(1)}
+for n in range(1, 8):
+    H = (n + 1) * gam[n] + sum(gam[j] for j in range(1, n))
+    gam[n + 1] = sp.nsimplify(H / n)
+report("gamma = 1, 2, 7/2, 17/3, 209/24, 773/60, ...",
+       [gam[i] for i in range(1, 7)] == [1, 2, sp.Rational(7, 2),
+                                         sp.Rational(17, 3),
+                                         sp.Rational(209, 24),
+                                         sp.Rational(773, 60)])
+# R^{(n)}(0): R(0)=sqrt(pi/2), R'(0)=-1, R^{(n+1)}(0)=n R^{(n-1)}(0)
+print("   -> Pi(c) ~ sum_n gamma_n R^(n-1)(0) c^{-n/2}:")
+print("      = sqrt(pi/(2c)) - 2/c + (7/2)sqrt(pi/2) c^{-3/2} - (34/3) c^{-2}")
+print("        + (209/8) sqrt(pi/2) c^{-5/2} - (1546/15) c^{-3} + ...")
+print("      [derived through c^{-2}; gamma-pattern conjectured beyond,")
+print("       tested numerically in r04]")
+
 print()
 print("Assembled result:")
-print("  Pi(c) = sqrt(pi/(2c)) - 2/c + (7/2)*sqrt(pi/2)*c^{-3/2} + O(c^-2)")
-print("  y(eps) := Pi*sqrt(2c/pi) = 1 - 2*sqrt(2/pi)*eps + (7/2)*eps^2 + O(eps^3)")
+print("  Pi(c) = sqrt(pi/(2c)) - 2/c + (7/2)*sqrt(pi/2)*c^{-3/2}"
+      " - (34/3)/c^2 + O(c^{-5/2})")
+print("  y(eps) := Pi*sqrt(2c/pi) = 1 - 2*sqrt(2/pi)*eps + (7/2)*eps^2"
+      " - (34/3)*sqrt(2/pi)*eps^3 + O(eps^4)")
 print(f"ALL: {'PASS' if ok_all else 'FAIL'}")

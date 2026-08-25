@@ -27,7 +27,7 @@ REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 
 # ----------------------------------------------------------------------
 # Figure 1: Conjecture 1's proved density instances (THEOREM.md §5.3, §8,
-# Estágios 15 and 17): f_{M_K}(x) = 2K x (1-x^2)^(K-1), K = 1, 2, 3.
+# Estágios 15, 17 and 20): f_{M_K}(x) = 2K x (1-x^2)^(K-1), K = 1, 2, 3, 4.
 # ----------------------------------------------------------------------
 def fig_conjecture1():
     def f_MK(x, K):
@@ -35,13 +35,14 @@ def fig_conjecture1():
 
     x = np.linspace(0, 1, 2000)
     fig, ax = plt.subplots(figsize=(7.5, 5.2), dpi=200)
-    colors = {1: "#1f6f5c", 2: "#2f8f6a", 3: "#8c5a1f"}
+    colors = {1: "#1f6f5c", 2: "#2f8f6a", 3: "#8c5a1f", 4: "#5b3a8c"}
     labels = {
         1: r"K=1:  $f_{M_1}(x)=2x$  (base case, §5.3)",
         2: r"K=2:  $f_{M_2}(x)=4x(1-x^2)$  (Estágio 15, 2026-08-23)",
         3: r"K=3:  $f_{M_3}(x)=6x(1-x^2)^2$  (Estágio 17, 2026-08-24)",
+        4: r"K=4:  $f_{M_4}(x)=8x(1-x^2)^3$  (Estágio 20, 2026-08-25)",
     }
-    for K in (1, 2, 3):
+    for K in (1, 2, 3, 4):
         ax.plot(x, f_MK(x, K), color=colors[K], linewidth=2.4, label=labels[K])
         ax.fill_between(x, f_MK(x, K), color=colors[K], alpha=0.06)
     ax.set_xlim(0, 1)
@@ -50,7 +51,7 @@ def fig_conjecture1():
     ax.set_ylabel(r"$f_{M_K}(x)$", fontsize=12)
     ax.set_title(
         "Conjecture 1 — the general-K distributional law\n"
-        r"$f_{M_K}(x) = 2Kx(1-x^2)^{K-1}$ — PROVED at K=1, 2, 3",
+        r"$f_{M_K}(x) = 2Kx(1-x^2)^{K-1}$ — PROVED at K=1, 2, 3, 4",
         fontsize=12.5,
     )
     ax.legend(loc="upper left", fontsize=9.5, frameon=False)
@@ -58,8 +59,9 @@ def fig_conjecture1():
     ax.grid(alpha=0.15)
     fig.text(
         0.5, -0.02,
-        "u12_universality/theorem/THEOREM.md, §§5.3 and 8, Estágios 15-17 — each instance PROVED modulo the same\n"
-        "classical PD(1) residual/size-biased citation (McCloskey 1965; Patil-Taillie 1977), each independently hostile-refereed.",
+        "u12_universality/theorem/THEOREM.md, §§5.3 and 8, Estágios 15-20 — each instance PROVED modulo the same\n"
+        "classical PD(1) residual/size-biased citation (McCloskey 1965; Patil-Taillie 1977), each independently hostile-refereed.\n"
+        "K≥5 remains open; the weighted-forest identity of Estágio 20 is the named candidate route.",
         ha="center", fontsize=7.8, color="#555555",
     )
     fig.tight_layout()
@@ -96,13 +98,13 @@ def fig_sharp_constant():
     ax.plot(Ks, vals, color="#1f6f5c", linewidth=1.8,
             label=r"$M_K/\sqrt{K}$  (exact, computed from $Q(n)$ and $\varphi_K$)")
     ax.axhline(a_star, color="#8c5a1f", linewidth=1.6, linestyle="--",
-               label=r"$a^*=\sqrt{\pi}(1/\sqrt{2}-1/2)\approx%.7f$  —  $\lim_{K\to\infty}M_K/\sqrt{K}=a^*$ (PROVED, Estágio 13)" % a_star)
+               label=r"$a^*=\sqrt{\pi}(1/\sqrt{2}-1/2)\approx%.7f$  —  $\sup_K M_K/\sqrt{K}=\lim_{K\to\infty}M_K/\sqrt{K}=a^*$ (PROVED)" % a_star)
     ax.set_xlim(1, Ks[-1])
     ax.set_xlabel("K", fontsize=12)
     ax.set_ylabel(r"$M_K/\sqrt{K}$", fontsize=12)
     ax.set_title(
-        "The sharp-constant question: does $\\sup_K M_K/\\sqrt{K} = a^*$?\n"
-        "Limit is PROVED (Estágio 13); the supremum/monotonicity is OPEN (wave 16, front b)",
+        "The sharp constant: $\\sup_K M_K/\\sqrt{K} = a^*$ — PROVED (Estágio 19, 2026-08-25)\n"
+        "$M_K < a^*\\sqrt{K}$ strictly for every $K\\geq 1$; the curve approaches but never touches the dashed line",
         fontsize=11.8,
     )
     ax.legend(loc="lower right", fontsize=8.8, frameon=False)
@@ -110,9 +112,9 @@ def fig_sharp_constant():
     ax.grid(alpha=0.15)
     fig.text(
         0.5, -0.03,
-        "Curve strictly increasing and never reaching a* up to K=600 is numerical/heuristic evidence only, not a proof —\n"
-        "this archive's own honest framing (THEOREM.md Estágio 13). The gap between this limit and the non-sharp constant\n"
-        "a=1+sqrt(pi/2)≈%.4f actually proved in hypothesis (U') is exactly what wave 16 front (b) is attempting to close."
+        "Limit proved in Estágio 13; the supremum closed on the third attempt (Estágio 19) via Robbins 1955 +\n"
+        "FGKP95 Theorem 7 + the classical identity Q(n)=n!e^n/(2n^n)-theta(n). Hypothesis (U') now carries the sharp a*\n"
+        "(replacing the non-sharp a=1+sqrt(pi/2)≈%.4f); the explicit sharp rate in c (Estágio 12 re-assembly) remains the named next step."
         % a_nonsharp,
         ha="center", fontsize=7.6, color="#555555",
     )

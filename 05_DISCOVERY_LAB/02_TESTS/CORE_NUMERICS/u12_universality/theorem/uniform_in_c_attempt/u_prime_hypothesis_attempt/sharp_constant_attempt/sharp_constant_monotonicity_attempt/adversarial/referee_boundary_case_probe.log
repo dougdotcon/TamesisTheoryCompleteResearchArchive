@@ -1,0 +1,64 @@
+==============================================================================
+(P0) The size of the actual index-conversion loss
+     loss(n) := (sqrt(pi)/2)(sqrt(n) - n/sqrt(n+1))  --  claimed by the
+     target to be 'O(1)-losing'; in fact  loss(n) <= (sqrt(pi)/4)/sqrt(n):
+==============================================================================
+  Lemma R1: (1-x/2)^2 (1+x) - 1 = x**3/4 - 3*x**2/4 = x^2(x-3)/4 <= 0 for 0<=x<=3,
+  so 1/sqrt(1+x) >= 1-x/2 there; with x=1/n:  n/sqrt(n+1) >= sqrt(n)-1/(2 sqrt(n)).
+   n=       1: loss =      0.25957   (sqrt(pi)/4)/sqrt(n) =      0.44311   loss<=cap: True
+   n=       2: loss =      0.22999   (sqrt(pi)/4)/sqrt(n) =      0.31333   loss<=cap: True
+   n=       5: loss =      0.17266   (sqrt(pi)/4)/sqrt(n) =      0.19817   loss<=cap: True
+   n=      10: loss =      0.13042   (sqrt(pi)/4)/sqrt(n) =      0.14012   loss<=cap: True
+   n=     100: loss =     0.043982   (sqrt(pi)/4)/sqrt(n) =     0.044311   loss<=cap: True
+   n=   10000: loss =    0.0044308   (sqrt(pi)/4)/sqrt(n) =    0.0044311   loss<=cap: True
+   n= 1000000: loss =   0.00044311   (sqrt(pi)/4)/sqrt(n) =   0.00044311   loss<=cap: True
+  -> the conversion loss decays like 1/sqrt(n); it is NOT O(1).  (The
+     parent's crude n/sqrt(n+1) >= sqrt(n)-1 was O(1)-lossy, but nothing
+     forces that choice.)
+
+==============================================================================
+(P1) UPPER SIDE for n >= 3:  Q(n) - n phi_n < a* sqrt(n).
+     Q(n) < sqrt(pi n/2) - 1/3 + (1/11)sqrt(pi/(2n))          [Theorem 1]
+     n phi_n > (sqrt(pi)/2)(sqrt(n) - 1/(2 sqrt(n)))          [z-bound + R1]
+     => Q(n)-n phi_n < a* sqrt(n) - 1/3 + c/sqrt(n),
+        c := (1/11)sqrt(pi/2) + sqrt(pi)/4.
+     Need c/sqrt(n) <= 1/3 for n>=3, i.e. 9 c^2 <= 3:
+==============================================================================
+  certified c <= 0.557051112;  3 c^2 = 0.930917823 < 1: True
+  => c < 1/sqrt(3), so c/sqrt(n) <= c/sqrt(3) < 1/3 for every n>=3.  QED
+
+==============================================================================
+(P2) LOWER SIDE for n >= 67:  n phi_n - Q(n) < a* sqrt(n).
+     n phi_n < (sqrt(pi)/2) sqrt(n)                            [v-bound]
+     Q(n) >= sqrt(pi n/2) - 6            [Theorem 5, sharp_constant_attempt,
+                                          adversarially ACCEPTED]
+     => n phi_n - Q(n) < 6 - a* sqrt(n) <= a* sqrt(n)  iff  a* sqrt(n) >= 3.
+     Certified check that a* sqrt(67) > 3:
+==============================================================================
+  a*_lo = 0.3670872119;  a*_lo * sqrt_lo(67) = 3.004738 > 3: True
+  => for n>=67 the lower side closes;  n=1..66 handled exactly below.
+
+==============================================================================
+(P3) EXACT FINITE CHECKS (certified rational): |Q(n) - n phi_n| < a* sqrt(n)
+     for n = 1..80  (covers upper-side n=1,2 and lower-side n=1..66)
+==============================================================================
+  n=1..80: violations: NONE (all certified)
+  spot values: Q(1)-phi_1 = 1/3 (=1/3 < a*: True);  Q(2)-2 phi_2 = 13/30 (=13/30 < a* sqrt(2) ~ 0.519)
+
+==============================================================================
+(P4) CONSEQUENCE (referee observation, NOT a claim of the target document):
+     combining P1-P3 with the target's own Theorem 2 (generic case, K<=n-1,
+     via M_K -- verified in Part 3) and the trivial K=0 case (M_0=0), the
+     FULL sharp-constant upgrade of hypothesis (U'),
+         |phi_n^{(K)} - phi_K| <= a* sqrt(K)/n   for all 0<=K<=n,
+     follows from results already in the archive plus this half-page
+     argument.  Section 6's assessment that the boundary case 'would need
+     a genuinely separate derivation' therefore stands, in the weak sense
+     that a separate (short) argument is needed -- but its stated REASON
+     ('O(1)-losing conversion') is quantitatively wrong (P0), and the
+     described difficulty is overstated: the derivation is elementary and
+     uses no tool beyond what the archive has already accepted.
+     (K=0 sanity: M_0 = Q(1) - phi_0 = 0, trivially fine.)
+==============================================================================
+
+PART-4 RESULT: ALL CHECKS PASSED (0 failures)

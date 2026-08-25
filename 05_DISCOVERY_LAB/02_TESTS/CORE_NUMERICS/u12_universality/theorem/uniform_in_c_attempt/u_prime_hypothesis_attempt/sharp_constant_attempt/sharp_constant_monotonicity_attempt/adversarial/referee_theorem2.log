@@ -1,0 +1,78 @@
+==============================================================================
+(A) ASSEMBLY RE-DERIVED (symbolic)
+==============================================================================
+  sqrt(pi/2) - sqrt(pi)/2 - a*  == 0   (the identity used in the display)
+  sqrt(pi(K+1)/2) - (sqrt(pi)/2)sqrt(K+1) - a*sqrt(K+1)  == 0
+  [RHS - a*sqrt(K)] - [LHS(K) - 1/3]  == 0   (the 'it remains to show' rewrite)
+  LHS(1) - sqrt(pi)(17/11 - sqrt(2))  == 0   (closed form confirmed)
+
+  Monotonicity of LHS(K) (referee re-derivation): sqrt(K+1)-sqrt(K) =
+  1/(sqrt(K+1)+sqrt(K)), denominator strictly increasing => term strictly
+  decreasing; sqrt(pi/(2(K+1))) strictly decreasing. Sum of two strictly
+  decreasing positive terms is strictly decreasing => LHS(K) <= LHS(1).
+  d/dK[sqrt(K+1)-sqrt(K)] = 1/(2*sqrt(K + 1)) - 1/(2*sqrt(K))  (= (sqrt(K)-sqrt(K+1))/(2 sqrt(K K+1)) < 0)
+  numeric scan K=1..2000 + sparse to 10^6: strict-decrease/'<1/3' violations: none
+
+  Subtraction-step audit: Q(K+1) < UB (strict, Thm 1) and (K+1)phi_K > LB
+  (strict, Lemma 4.1 z-bound) => M_K = Q(K+1) - (K+1)phi_K < UB - LB, strict.
+  Direction of both citations checked against the parent documents' texts:
+  Theorem 3 gives equality M_K = Q(K+1)-(K+1)phi_K; z-bound (K+1)phi_K^2 >
+  pi/4 => (K+1)phi_K > (sqrt(pi)/2)sqrt(K+1) after multiplying by (K+1) and
+  taking positive square roots -- rearrangement re-derived and correct.
+
+==============================================================================
+(B) LHS(1) < 1/3 -- REFEREE'S OWN RATIONAL PROOF (own integers, not the
+    document's).  LHS(1) = sqrt(pi)(17/11 - sqrt(2)).
+==============================================================================
+  141421356^2 = 19999999932878736 < 2*10^16 = 20000000000000000: True   => sqrt(2) > 141421356/10^8
+  17724539^2 * 10^2 = 31415928276252100 > 31415926535897933: True   => sqrt(pi) < sqrt(PI_HI) < 17724539/10^7
+  17/11 - sqrt2_lo = 36091271/275000000 = 0.131240985 > 0: True
+  LHS(1) < (17724539/10^7) * (36091271/275000000) = 639701140399069/2750000000000000 = 0.232618597
+  3 * 639701140399069 = 1919103421197207 < 2750000000000000: True   =>  LHS(1) < 1/3.   QED (pure integers)
+
+==============================================================================
+(C) THE DOCUMENT'S OWN RATIONAL CHAIN, integer by integer
+==============================================================================
+  14142^2 = 199996164: True
+  199996164 < 2*10^8: True
+  14143^2 = 200024449: True
+  200024449 > 2*10^8: True
+  17725^2 = 314175625: True
+  314175625 > 3.1416e8: True
+  pi < 3.1416: True
+  (17725/10^4)(10^4/14142 - 1/2) == 2076661/5656800: True
+  2076661/5656800 really >= a* (referee-certified): True
+  (2076661/5656800)(4143/10^4) + 17725/220000 == 48257687251/207416000000: True
+  3 * 48257687251 < 207416000000: True
+  document's rational value = 0.232661 (doc says ~0.232661);
+  true LHS(1) = 0.23261859 -- upper bound valid and direction-sound at every substitution.
+
+==============================================================================
+(D) ASSEMBLED ELEMENTARY BOUND, certified rational:
+    Q_ub(K+1) - (sqrt(pi)/2)sqrt(K+1) < a* sqrt(K)
+    [Q_ub(n) = sqrt(pi n/2) - 1/3 + (1/11)sqrt(pi/(2n))]
+==============================================================================
+  606 points (dense K=1..600 + sparse to 10^5): violations: NONE (certified)
+  smallest gap 0.100715 at K=1 (document's T5c reports worst margin -0.1007 at K=1)
+
+==============================================================================
+(E) MAIN EXACT CHECK: exact-Fraction M_K vs certified rational lower bound
+    on a* sqrt(K); dense K=1..1000 + sparse to K=10000
+==============================================================================
+  1010 points, violations: NONE -- M_K < a* sqrt(K) certified at every point
+  M_1 = 1/6 (document says 1/6 exactly): True
+  margin a*sqrt(K)-M_K at K=1:     0.200421  (doc: 0.2004)
+  margin at K=1000:  0.327761
+  margin at K=10000: 0.331564   (-> 1/3 from below, as the
+  gap a*-r_K ~ 1/(3 sqrt(K)) implies; smallest margin 0.200421 at K=1)
+  r_10000 = M_10000/sqrt(10000) = 0.36377157  vs  a* = 0.36708721  (approach from below)
+
+==============================================================================
+(F) T5e ANALOG (isolating the z_K citation + algebra from Theorem 1):
+    exact Q(K+1) - (sqrt(pi)/2)sqrt(K+1)  <  a* sqrt(K), certified rational
+==============================================================================
+  407 points (dense K=1..400 + sparse to 3000): violations: NONE (certified)
+
+==============================================================================
+PART-3 RESULT: ALL CHECKS PASSED (0 failures)
+==============================================================================

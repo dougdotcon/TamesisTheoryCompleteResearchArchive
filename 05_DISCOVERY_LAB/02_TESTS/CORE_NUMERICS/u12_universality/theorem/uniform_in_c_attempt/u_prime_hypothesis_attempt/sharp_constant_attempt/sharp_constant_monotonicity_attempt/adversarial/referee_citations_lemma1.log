@@ -1,0 +1,123 @@
+==============================================================================
+(R) ROBBINS 1955  --  correct statement:
+    sqrt(2 pi n) (n/e)^n e^{1/(12n+1)} < n! < sqrt(2 pi n) (n/e)^n e^{1/(12n)}
+    equivalently  1/(12n+1) < d(n) < 1/(12n),
+    d(n) := ln n! - (1/2)ln(2 pi n) - n ln n + n.
+==============================================================================
+  checked 2006 values of n (dense 1..2000 + sparse to 10^8): 0 violations
+  smallest lower margin d-1/(12n+1): 6.94444e-19 at n=100000000
+  smallest upper margin 1/(12n)-d : 2.77778e-27 at n=100000000
+
+(R') The citation AS PRINTED in ATTEMPT.md Section 2, i.e. WITHOUT the
+     (n/e)^n factor:   sqrt(2 pi n) e^{1/(12n+1)} < n! < sqrt(2 pi n) e^{1/(12n)}
+   n=1: printed-lower=2.7070558  n!=1  printed-upper=2.7244644  -> FALSE
+   n=2: printed-lower=3.6895781  n!=2  printed-upper=3.6957326  -> FALSE
+   n=3: printed-lower=4.4605483  n!=6  printed-upper=4.4638984  -> FALSE
+   n=4: printed-lower=5.116619  n!=24  printed-upper=5.1187949  -> FALSE
+   n=5: printed-lower=5.6976336  n!=120  printed-upper=5.6991906  -> FALSE
+   n=6: printed-lower=6.224648  n!=720  printed-upper=6.2258324  -> FALSE
+   n=7: printed-lower=6.7103983  n!=5040  printed-upper=6.7113382  -> FALSE
+   n=8: printed-lower=7.1632843  n!=40320  printed-upper=7.1640536  -> FALSE
+   n=9: printed-lower=7.589192  n!=362880  printed-upper=7.5898367  -> FALSE
+   n=10: printed-lower=7.9924356  n!=3628800  printed-upper=7.992986  -> FALSE
+   => the printed display is FALSE at n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] (and, for n>=3, the
+      'bounds' are astronomically far below n! -- the display as printed is
+      not Robbins' theorem; the form actually USED in Theorem 1's proof,
+      A(n) = n! e^n / n^n < sqrt(2 pi n) e^{1/(12n)}, IS the correct Robbins
+      upper bound (verified above at scale).
+
+==============================================================================
+(F) FGKP95 THEOREM 7.  theta(n) defined by
+    (1/2)e^n = sum_{m=0}^{n-1} n^m/m!  +  theta(n) n^n/n! ,
+    claim: theta(n) = 1/3 + 4/(135(n+k(n))),  k(n) in [2/21, 8/45], all n>=0,
+    i.e. 1/3 + 4/(135(n+8/45)) <= theta(n) <= 1/3 + 4/(135(n+2/21)).
+==============================================================================
+
+(F1) dense n=0..600 + strided to n=2000: theta via own defining sum
+     (exact Fraction partial sums), FGKP bounds checked; also cross-checked
+     against the incomplete-gamma route at every 20th point.
+   741 values checked, 0 violations of the FGKP two-sided bound
+   worst |theta_def - theta_gamma| over cross-checked points: 8.141e-77
+   theta(0) = 0.5  (exact value 1/2; FGKP lower bound at n=0 is
+   1/3+4/(135*(8/45)) = 1/3+1/6 = 1/2 -- equality, i.e. k(0)=8/45 attained: |theta(0)-1/2| = 0.0)
+
+(F2) k(n) := 4/(135(theta(n)-1/3)) - n  on the dense grid:
+   out-of-[2/21,8/45] points: none
+   monotone-decrease violations: none
+   k(1)    = 0.148097907697   (8/45 = 0.177777777778)
+   k(2000) = 0.0952743736468  (2/21 = 0.0952380952381)
+
+(F3) sparse large n: theta via truncated defining sum AND incomplete gamma,
+     FGKP bounds checked at both:
+   n=    5000: |t_sum - t_gamma|=5.69e-77  bounds hold: True  k(n)-2/21=1.4512e-5
+   n=   10000: |t_sum - t_gamma|=2.88e-77  bounds hold: True  k(n)-2/21=7.25613e-6
+   n=   30000: |t_sum - t_gamma|=2.46e-76  bounds hold: True  k(n)-2/21=2.41873e-6
+   n=  100000: |t_sum - t_gamma|=1.17e-76  bounds hold: True  k(n)-2/21=7.25622e-7
+   n=  300000: |t_sum - t_gamma|=1.33e-75  bounds hold: True  k(n)-2/21=2.41874e-7
+   n= 1000000: |t_sum - t_gamma|=9.54e-75  bounds hold: True  k(n)-2/21=7.25623e-8
+
+(F4) internal consistency: theta(n) ~ 1/3 + 4/(135 n) - 8/(2835 n^2) - ...
+     (classical; printed in FGKP95 itself as D_10(n)=2 theta(n) expansion).
+     k(inf)=2/21 <=> second-order coefficient -4*(2/21)/135 = -8/2835.
+     -8/2835 = -0.002821869489
+     n=   100: (theta - 1/3 - 4/135n)*n^2 = -0.002840610082
+     n=  1000: (theta - 1/3 - 4/135n)*n^2 = -0.002823750022
+     n= 10000: (theta - 1/3 - 4/135n)*n^2 = -0.002822057606
+     n=100000: (theta - 1/3 - 4/135n)*n^2 = -0.002821888301
+     -> converges to -8/2835, confirming the k(inf)=2/21 half of the citation;
+        k(0)=8/45 <=> theta(0)=1/2 exactly (F1), the other endpoint.
+
+==============================================================================
+(L) LEMMA 1:  Q(n) = n! e^n/(2 n^n) - theta(n).
+    Referee re-derivation:  Q(n) = sum_{j=0}^{n-1} prod_{i=1}^j (1-i/n),
+    term_j = (n-1)!/((n-1-j)! n^j);  m := n-1-j  gives
+       Q(n) = ((n-1)!/n^{n-1}) sum_{m=0}^{n-1} n^m/m!  =  (n!/n^n) S(n),
+    S(n) := sum_{m=0}^{n-1} n^m/m!  [= FGKP95 eq. (1.4) verbatim].
+    With S(n) = e^n/2 - theta(n) n^n/n!  (the theta definition) this IS the
+    stated identity.  Both steps checked below.
+==============================================================================
+
+(L1) EXACT rational check  Q(n) == (n!/n^n) * S(n),  n = 1..400:
+   exact-equality failures: none (400/400 exact)
+
+(L2) transcendental form  Q(n) = n!e^n/(2n^n) - theta(n)  to >=50 digits,
+     theta from its own defining sum (exact partial sums), sample n:
+   worst |Q(n) - (n!e^n/(2n^n) - theta(n))| over the sample: 2.203e-76
+
+(L3) the document's PRINTED intermediates, checked with exact Fractions.
+     Printed:  Q(n) = sum_{k=1}^n n!/(k! n^{n-k})  =  (n!/n^n)(G(n)-1),
+     G(n) := sum_{k=0}^n n^k/k!.   Referee claim: both displays are FALSE for
+     n>=2; printed_value - Q(n) = 1 - n!/n^n exactly (a factor-n/k per-term
+     slip: the k-substitution shifted the index but not the summand).
+     n |   Q(n) exact |  printed sum |     difference | 1 - n!/n^n
+   ---------------------------------------------------------------
+     1 |            1 |            1 |              0 |              0 (match)
+     2 |          3/2 |            2 |            1/2 |            1/2 (match)
+     3 |         17/9 |          8/3 |            7/9 |            7/9 (match)
+     4 |        71/32 |         25/8 |          29/32 |          29/32 (match)
+     5 |     1569/625 |      434/125 |        601/625 |        601/625 (match)
+     6 |      899/324 |       203/54 |        319/324 |        319/324 (match)
+     7 | 355081/117649 |  67430/16807 |  116929/117649 |  116929/117649 (match)
+     8 | 425331/131072 |  69511/16384 |  130757/131072 |  130757/131072 (match)
+     9 | 16541017/4782969 | 2368834/531441 | 4778489/4782969 | 4778489/4782969 (match)
+    10 | 5719087/1562500 | 364051/78125 | 1561933/1562500 | 1561933/1562500 (match)
+    11 | 99920609601/25937424601 | 11441309582/2357947691 | 25933795801/25937424601 | 25933795801/25937424601 (match)
+    12 | 144619817/35831808 | 15037475/2985984 | 35829883/35831808 | 35829883/35831808 (match)
+   printed display equals Q(n) ONLY at n=1; for every n>=2 it differs by
+   exactly 1 - n!/n^n != 0.  Algebraic characterization holds at every n tested: True
+   The claimed cancellation ('the +-1 and +-n!/n^n terms cancel exactly')
+   does NOT follow from the printed intermediates; it follows from the
+   corrected ones (S(n) in place of G(n)-1), under which the final identity
+   is TRUE -- as (L1)+(L2) verify, and as FGKP95's own (1.4) + D(n)=2 theta(n)
+   state classically (so 'new elementary identity' also overstates novelty).
+
+(L4) sanity: the two anchor values quoted in ATTEMPT.md Section 2:
+   Q(2) = 3/2  (claimed 3/2);   Q(3) = 17/9  (claimed 17/9)
+
+==============================================================================
+PART-1 RESULT: ALL CHECKS PASSED (0 failures)
+  (note: 'passed' refers to the referee checks; the two documented findings --
+   the mis-printed Robbins display and the broken Lemma-1 intermediates --
+   are findings about the DOCUMENT'S TEXT, demonstrated above, while the
+   underlying cited theorems and the final Lemma-1 identity are all TRUE.)
+==============================================================================

@@ -2716,7 +2716,8 @@ nitidez foi nomeado com precisão pela própria frente: um limitante
 limitante superior usado aqui. [Ver Estágio 13 abaixo — o limitante
 inferior de `Q(n)` foi provado e o LIMITE `\lim_K M_K/\sqrt K=a^*` está
 agora exato; o SUPREMO `\sup_K M_K/\sqrt K=a^*` continua aberto,
-`2026-08-23`.]
+`2026-08-23`.] [Ver Estágio 19 abaixo — o SUPREMO também está agora
+PROVADO: `\sup_K M_K/\sqrt K=a^*` exatamente, `2026-08-25`.]
 
 **Veredito honesto atualizado (ao fim do Estágio 12):** a linha `U_1/2`
 tem agora uma taxa de convergência **explícita e incondicional** para
@@ -2818,7 +2819,18 @@ exato que falta agora nomeado com ainda mais precisão: limitantes de
 `Q(n)` (superior) e `φ_K` (inferior) ambos precisos a `O(1/\sqrt K)`
 para **todo** `K` finito, não apenas assintoticamente. A constante
 usada na hipótese (U') como efetivamente provada continua sendo
-`a=1{+}\sqrt{π/2}`, não `a^*`. A lei de escala `γ\in(0,1)`
+`a=1{+}\sqrt{π/2}`, não `a^*`.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-068`] O supremo
+> está agora PROVADO: `\sup_K M_K/\sqrt K=a^*` exatamente, na
+> terceira tentativa (onda 16), via um limitante superior
+> não-assintótico de `Q(n)` construído de duas citações clássicas —
+> com a precisão de que o diagnóstico acima estava meio certo: só o
+> lado `Q(n)` precisava de afiação; o `z_K`-bound do Lema 4.1, usado
+> sem modificação, já bastava do outro lado. A hipótese (U') fica com
+> a constante nítida `a^*` em todos os casos (caso de contorno `K=n`
+> fechado pelo referee da própria frente, verificado pela sessão).
+> [Ver Estágio 19 abaixo.] A lei de escala `γ\in(0,1)`
 (caracterizada, não provada); Conjecturas 1–2; a forma fechada
 geral-`b` das constantes agudas em `b\ge2` (Estágio 9) permanecem
 inalterados [Ver Estágio 14 abaixo — fechado para `p=1,2,3,4`;
@@ -3417,3 +3429,120 @@ Conjectura 1 para `K\ge4` (sob revisão adversarial na própria onda
 (caracterizada, não provada, sem frente ativa). Nenhuma alegação de
 progresso em Millennium Problem; matemática combinatória pura interna
 a este arquivo.
+
+---
+
+## [Extensão, Estágio 19 — 2026-08-25]
+
+**Onda 16, frente (b), `DISC-DEC-066`/`DISC-DEC-068`
+(`SHARP-CONSTANT-A-STAR-MONOTONICITY-ATTEMPT`).** Alvo: o supremo
+`\sup_K M_K/\sqrt K = a^*` — o gap mais difícil nomeado pelo Estágio
+13, na **terceira tentativa** (duas rotas anteriores documentadas como
+falhas: a recursão exata de `Q(n)`, refutada por contraexemplo; o
+limitante pontual direto por afiação from-scratch de ambos os lados,
+julgado delicado demais).
+
+### O que foi provado
+
+> **Teorema (este documento, PROVADO).** `M_K < a^*\sqrt K`,
+> estritamente, para **todo** inteiro `K\ge1`.
+
+> **Corolário (fecha o gap do Estágio 13).**
+> `\displaystyle \sup_K \frac{M_K}{\sqrt K} = a^*` **exatamente** —
+> e o supremo é aproximado mas nunca atingido em nenhum `K` finito
+> (todo passo da cadeia é estrito), confirmando como teorema a
+> observação numérica das duas frentes anteriores.
+
+Rota, genuinamente diferente das duas que falharam: duas citações
+clássicas reais — o limite de Stirling explícito de Robbins (1955) e
+o Teorema 7 de Flajolet–Grabner–Kirschenhofer–Prodinger (1995, "On
+Ramanujan's `Q`-function", J. Comput. Appl. Math. 58: `θ(n)=\tfrac13+
+\tfrac4{135(n+k(n))}` com `k(n)\in[\tfrac2{21},\tfrac8{45}]` para
+TODO `n\ge0`, resolvendo uma conjectura da primeira carta de Ramanujan
+a Hardy, 1913) — combinadas com a identidade elementar clássica
+`Q(n)=\tfrac{n!e^n}{2n^n}-θ(n)` (eq. (1.4) do próprio FGKP95; ver
+correção S-1) para produzir um limitante superior **não-assintótico**
+totalmente explícito:
+`Q(n) < \sqrt{\pi n/2} - \tfrac13 + \tfrac1{11}\sqrt{\pi/(2n)}`
+(Teorema 1). O outro lado precisou de **zero trabalho novo**: o
+`z_K`-bound do Lema 4.1, exatamente como já provado, basta —
+corrigindo com precisão o diagnóstico da tentativa anterior de que
+ambos os lados precisavam de afiação. O passo final numericamente
+decisivo (`\mathrm{LHS}(1)<1/3`) é provado por aritmética racional
+pura, sem confiança em ponto flutuante.
+
+**Consequência imediata para a hipótese (U'):** o caso genérico
+(`1\le K\le n-1`) da hipótese (U') sobe imediatamente para a constante
+nítida: `|φ_n^{(K)}-φ_K| < a^*\sqrt K/n`. O caso de contorno `K=n`,
+explicitamente NÃO tentado pela frente (que o nomeou como próximo
+alvo), foi **fechado pelo próprio referee** (§8 do relatório): a
+conversão de índice perde apenas `O(1/\sqrt n)` — não `O(1)` como a
+frente diagnosticara — e um argumento de meia página com ferramentas
+já aceitas (lado superior `n\ge3` via `3c^2<1`; lado inferior `n\ge67`
+via Teorema 5; resto finito `n\le80` verificado exato) fecha
+`|Q(n)-nφ_n|<a^*\sqrt n` para todo `n\ge1`. A sessão orquestradora
+re-verificou o argumento do referee independentemente (álgebra à mão;
+`0` violações em verificação racional certificada, `n=1..300`;
+âncoras exatas `1/3` em `n=1` e `13/30` em `n=2`). **Com isso, a
+hipótese (U') vale com a constante nítida `a^*` em todos os casos
+`0\le K\le n`.** A substituição mecânica de `a=1+\sqrt{\pi/2}` por
+`a^*` na taxa explícita do Estágio 12 (`|Δ_n(c)|\le[a\sqrt c+0{,}2805]/n`)
+NÃO foi executada nem verificada por ninguém — a montagem do Estágio
+12 precisa ser re-percorrida com a nova constante antes de qualquer
+taxa nítida ser afirmada; item nomeado como próximo passo trivial-mas-
+não-executado.
+
+### Verificação adversarial independente
+
+A sessão orquestradora fez seu próprio spot-check antes do despacho
+(identidade final do Lema 1 exata em `n=1..300` — encontrando,
+independentemente, o mesmo typo de índice que o referee depois nomeou
+como E-2; limites de `θ(n)`; Teorema 1; o passo racional final por
+intervalos próprios; `M_K<a^*\sqrt K` com cota racional certificada).
+O referee hostil dedicado então: **buscou e leu o PDF primário do
+FGKP95** (arquivo do INRIA Algorithms Project), confirmando o Teorema
+7 palavra por palavra (enunciado, numeração, "for all integers
+`n\ge0`", estrutura da prova `n\ge116` + verificação exaustiva,
+detalhes de proveniência); verificou Robbins na forma usada em 2.006
+pontos até `n=10^8`; auditou o Lema 1 caractere por caractere
+(encontrando E-1/E-2); re-derivou toda a cadeia dos Teoremas 1–2
+incluindo a borda `n=1`; re-provou o final racional com inteiros
+próprios E re-verificou os inteiros do documento um a um; e empurrou
+a verificação exata de `M_K<a^*\sqrt K` a `K=10.000` (3× a
+profundidade da frente), zero violações em ~5.000 pontos combinados.
+
+> **Veredito: SOUND WITH NAMED ISSUES — "ACCEPT for catalogue"**, com
+> dois erratas obrigatórios e três notas, nenhum invalidando teorema
+> algum: **E-1** — a exibição da citação de Robbins omite `(n/e)^n` e
+> é falsa como impressa (a forma USADA na prova é a correta); **E-2**
+> — dois intermediários impressos da prova do Lema 1 são falsos
+> (deslize de índice na substituição `k:=n-j`; a identidade FINAL é
+> verdadeira e foi re-provada duas vezes); **S-1** — a identidade é
+> clássica (FGKP95 eq. (1.4)), não nova; **S-2** — o diagnóstico do
+> caso de contorno estava quantitativamente errado na direção segura,
+> e o referee o fechou construtivamente; **N-1** — conflação
+> cosmética `v_n`/`z_n`. Todos corrigidos via adendos datados no
+> documento-alvo.
+
+Ver `.../sharp_constant_monotonicity_attempt/ATTEMPT.md` e
+`.../sharp_constant_monotonicity_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**O gap do Estágio 13 está FECHADO: `\sup_K M_K/\sqrt K=a^*`,
+exatamente.** A hipótese (U') vale agora com a constante nítida `a^*`
+para todos os `0\le K\le n` (caso genérico pela frente; caso de
+contorno pelo referee, verificado pela sessão; `K=0` trivial).
+Nenhum resultado anterior é enfraquecido: Estágios 12–13, Lema 4.1,
+Teoremas 3/5/6 permanecem exatamente como provados, usados por
+citação.
+
+**O que permanece aberto:** a re-execução da montagem do Estágio 12
+com `a^*` no lugar de `a` (para uma taxa explícita nítida em `c`) —
+não executada; monotonicidade literal termo-a-termo de `M_K/\sqrt K`
+(o documento prova `\sup=\lim`, que era o que se pedia — as duas
+formulações não são logicamente idênticas, e a monotonicidade em si
+segue apenas numericamente sugerida); Conjecturas 1 (`K\ge4`, sob
+revisão na onda 16) e 2; `p>20`; o piso `H2` em `b=1`; a lei de
+escala `\gamma\in(0,1)`. Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.

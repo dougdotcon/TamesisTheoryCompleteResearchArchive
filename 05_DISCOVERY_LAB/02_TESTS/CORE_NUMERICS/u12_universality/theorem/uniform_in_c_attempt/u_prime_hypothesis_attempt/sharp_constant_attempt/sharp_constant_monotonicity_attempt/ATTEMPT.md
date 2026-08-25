@@ -105,6 +105,18 @@ already `=a^*` by Theorem 6), it suffices to prove the **upper** half:
 > (1955), 26–29. A completely standard, extremely widely cited explicit
 > two-sided refinement of Stirling's formula.]
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-068`, Erratum E-1
+> do referee] A exibição acima **omite o fator `(n/e)^n`** e é falsa
+> como impressa em todo `n` (em `n=1`: `2{,}707<1` é falso). O
+> enunciado correto de Robbins é
+> `\sqrt{2\pi n}\,(n/e)^n e^{1/(12n+1)} < n! < \sqrt{2\pi n}\,(n/e)^n e^{1/(12n)}`.
+> A forma efetivamente USADA na prova do Teorema 1 —
+> `A(n)=n!e^n/n^n < \sqrt{2\pi n}\,e^{1/(12n)}` — é exatamente o
+> limitante superior de Robbins correto (multiplicado por `e^n/n^n`) e
+> foi verificada pelo referee em 2.006 pontos até `n=10^8`, zero
+> violações. Erro de transcrição na exibição, sem consequência em
+> nenhum passo de prova.
+
 > **Citation 2 (Flajolet, Grabner, Kirschenhofer, Prodinger, 1995, Theorem
 > 7).** Define `θ(n)` for every integer `n\ge0` by
 > `\displaystyle \frac12e^n = 1+n+\frac{n^2}{2!}+\cdots+\frac{n^{n-1}}{(n{-}1)!}+θ(n)\frac{n^n}{n!}`.
@@ -132,6 +144,14 @@ match the archive's own already-computed values exactly, `T3` below.)
 > **Lemma 1 (new elementary identity, PROVED, every `n\ge1`).**
 > `\displaystyle Q(n) = \frac{n!\,e^n}{2n^n} - θ(n)`.
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-068`, nota S-1 do
+> referee] "New elementary identity" superestima a novidade: a
+> identidade é **clássica** — é exatamente a eq. (1.4) do próprio
+> FGKP95 combinada com `θ(n)=\tfrac12(R(n)-Q(n))`, `Q+R=n!e^n/n^n`,
+> exibida na introdução do artigo citado (`D(n)=2θ(n)`). Nova apenas
+> para este arquivo. O rótulo correto: identidade elementar
+> (re-derivação de fato clássico), PROVED.
+
 *Proof.* `Q(n)=\sum_{j=0}^{n-1}\prod_{i=1}^j(1-i/n)`; writing
 `\prod_{i=1}^j(1-i/n)=\prod_{i=1}^j\frac{n-i}n=\frac{(n-1)(n-2)\cdots(n-j)}{n^j}`
 and substituting `k:=n-j` (`k` runs `n` down to `1` as `j` runs `0` to
@@ -146,6 +166,25 @@ exact `Q(n)` (`Fraction`) vs. `θ(n)` computed from **its own** defining
 partial sum (exact `Fraction`, independent of `Q(n)`'s definition) plugged
 into the identity — agreement to `\ge30` digits at every `n` tested, zero
 violations.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-068`, Erratum E-2
+> do referee; o mesmo defeito foi encontrado, de forma independente,
+> pelo spot-check da sessão orquestradora antes do despacho] **Dois
+> passos intermediários impressos acima são falsos** — a substituição
+> `k:=n-j` deslocou o índice mas não o somando (deslize de fator
+> `n/k` por termo): `Q(n)\ne\sum_{k=1}^n n!/(k!\,n^{n-k})` e
+> `Q(n)\ne(n!/n^n)(G(n)-1)` para todo `n\ge2` (o valor impresso
+> difere de `Q(n)` por exatamente `1-n!/n^n`; ex.: `Q(2)=3/2` mas a
+> soma impressa dá `2`). A cadeia correta é:
+> `Q(n)=(n!/n^n)\sum_{m=0}^{n-1}n^m/m! = (n!/n^n)\,S(n)
+> = (n!/n^n)\big(G(n)-n^n/n!\big)`,
+> e daí, com `G(n)=\tfrac12e^n+(1-θ(n))n^n/n!`:
+> `Q(n)=n!e^n/(2n^n)+1-θ(n)-1 = n!e^n/(2n^n)-θ(n)`. **A identidade
+> final do enunciado é VERDADEIRA** (re-derivada independentemente
+> pela sessão e pelo referee; verificada exatamente, 400/400 em forma
+> racional) — apenas a derivação impressa estava quebrada como
+> escrita, e a parentética "cancelam exatamente" vale para a cadeia
+> corrigida, não para a impressa.
 
 Both citations were **independently checked against exact `Fraction`
 computations before use** (`verify_citations.py`): Citation 1, zero
@@ -335,6 +374,29 @@ rushed. Consequently, hypothesis (U')'s **officially proved, uniform-over-all-
 is separately closed with the sharp constant too — this document closes the
 `\sup_K M_K/\sqrt K=a^*` gap exactly as asked, not the (related but distinct,
 and larger-scope) full upgrade of (U') itself.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-068`, notas S-2 e
+> N-1 do referee] Dois reparos neste parágrafo. **(N-1, cosmético)** a
+> parentética empareha a desigualdade de conversão
+> `n/\sqrt{n+1}\ge\sqrt n-1` com o "`v_n`-bound"; no Teorema 4 do
+> documento-pai, essa desigualdade acompanha o `z_n`-bound (lado
+> superior), enquanto o `v_n`-bound serve ao lado inferior. **(S-2,
+> substantivo, na direção segura)** o diagnóstico "O(1)-losing
+> conversion" está quantitativamente **errado**: a conversão exata
+> `nφ_n=(n{+}1)φ_n\cdot n/(n{+}1)` combinada com o elementar
+> `1/\sqrt{1+x}\ge1-x/2` (válido pois `(1-x/2)^2(1+x)-1=x^2(x-3)/4\le0`
+> em `[0,3]`) perde apenas `\le(\sqrt\pi/4)/\sqrt n = O(1/\sqrt n)`.
+> De fato, **o referee fechou o caso de contorno com a constante
+> nítida** usando somente ferramentas já aceitas pelo arquivo (seu
+> §8: lado superior para `n\ge3` via `3c^2<1` com
+> `c=\tfrac1{11}\sqrt{\pi/2}+\sqrt\pi/4`; lado inferior para `n\ge67`
+> via Teorema 5; resto finito `n=1,\ldots,80` verificado exato) — e a
+> sessão orquestradora re-verificou o argumento independentemente
+> (álgebra à mão + `|Q(n)-nφ_n|<a^*\sqrt n` com aritmética racional
+> certificada, `0` violações em `n=1..300`, âncoras exatas `1/3` e
+> `13/30`). Com isso, a hipótese (U') fica com a constante nítida
+> `a^*` **em todos os casos** (`0\le K\le n`) — catalogado no Estágio
+> 19 de `THEOREM.md`, com o crédito do caso de contorno ao referee.
 
 One further precision, for the record: this document proves `\sup_K=\lim_K`
 directly (the equivalent formulation the task names), not literal

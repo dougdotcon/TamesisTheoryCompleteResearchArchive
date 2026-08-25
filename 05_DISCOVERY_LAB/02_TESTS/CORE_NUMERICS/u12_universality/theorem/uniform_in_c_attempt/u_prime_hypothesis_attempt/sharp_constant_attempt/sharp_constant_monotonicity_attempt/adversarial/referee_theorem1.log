@@ -1,0 +1,51 @@
+pi bracket sanity vs mpmath(60dps): True
+
+==============================================================================
+(A) THE PROOF CHAIN, STEP BY STEP (referee re-derivation)
+==============================================================================
+ 1. Lemma 1 (independently re-proved, Part 1):  Q(n) = A(n)/2 - theta(n),
+    A(n) = n! e^n / n^n.
+ 2. Robbins (correct form, Part 1):  A(n) < sqrt(2 pi n) e^{1/(12n)},
+    STRICT for every n>=1  =>  A(n)/2 < sqrt(pi n/2) e^{1/(12n)}.
+ 3. FGKP95 lower bound: theta(n) >= 1/3 + 4/(135(n+8/45)) > 1/3, STRICT.
+ 4. e^x <= 1/(1-x) on [0,1): equivalent to 1-x <= e^{-x} (true for all real
+    x, strict for x != 0); x = 1/(12n) in (0, 1/12] subset [0,1) for n>=1. OK
+ 5. e^{1/(12n)} <= 12n/(12n-1) = 1 + 1/(12n-1); 12n-1 >= 11n <=> n >= 1,
+    equality exactly at n=1;  sqrt(pi n/2)/(12n-1) <= sqrt(pi n/2)/(11n)
+    = (1/11) sqrt(pi/(2n)).   All steps valid for EVERY n>=1; the strict
+    steps 2-3 make the assembled bound strict at every n>=1.
+    Domain notes: step 4 needs x<1 (true, x<=1/12); step 5's division by
+    12n-1 needs 12n-1>0 (true).  n=1 edge: x=1/12, 12n-1=11=11n (equality),
+    all inequalities remain valid.
+    sympy: sqrt(pi n/2)/(11n) - (1/11)sqrt(pi/(2n)) == 0;  12n/(12n-1) - (1+1/(12n-1)) == 0
+
+==============================================================================
+(B) CERTIFIED-RATIONAL VERIFICATION,  Q(n) < RHS  (exact Fraction vs
+    rational lower bound of RHS; verdict involves NO floating point)
+==============================================================================
+  809 points (dense 1..800 + sparse to 12000), violations: NONE -- Q(n) < RHS certified at every point
+  margin at n=1:      0.0339185   (target document reports 0.0339)
+  margin at n=12000:  8.91411e-5
+  smallest margin:    8.91411e-5 at n=12000
+  n=1 edge exact: Q(1) = 1; certified rational RHS lower bound = 1.033918 > 1: True
+
+==============================================================================
+(C) DEEP MARGIN SCAN to n = 10^6 (mpmath 60dps; Q(n) summed directly from
+    its own product definition, truncated when P_j < 10^-50 -- certified
+    tail < n * 10^-50 <= 10^-44, far below every observed margin)
+==============================================================================
+  n=   10000: margin = 9.79066e-5  (predicted ~(1/132)sqrt(pi/2n) = 9.4948e-5)  positive: True
+  n=   30000: margin = 5.58051e-5  (predicted ~(1/132)sqrt(pi/2n) = 5.48183e-5)  positive: True
+  n=  100000: margin = 3.03214e-5  (predicted ~(1/132)sqrt(pi/2n) = 3.00252e-5)  positive: True
+  n=  300000: margin = 1.74338e-5  (predicted ~(1/132)sqrt(pi/2n) = 1.73351e-5)  positive: True
+  n= 1000000: margin = 9.52443e-6  (predicted ~(1/132)sqrt(pi/2n) = 9.4948e-6)  positive: True
+  -> margin -> 0+ like (1/132)sqrt(pi/(2n)) (the 1/11 in the bound vs the
+     classical next-order 1/12), consistent with the document's own report
+     (0.0000979 at n=10^4) and with strict positivity at every n -- the
+     bound is proved by a chain of everywhere-valid inequalities, so the
+     shrinking margin is expected and harmless.
+  cross-validation Q_direct vs exact Fraction at n=2000: |diff| = 1.772e-50
+
+==============================================================================
+PART-2 RESULT: ALL CHECKS PASSED (0 failures)
+==============================================================================

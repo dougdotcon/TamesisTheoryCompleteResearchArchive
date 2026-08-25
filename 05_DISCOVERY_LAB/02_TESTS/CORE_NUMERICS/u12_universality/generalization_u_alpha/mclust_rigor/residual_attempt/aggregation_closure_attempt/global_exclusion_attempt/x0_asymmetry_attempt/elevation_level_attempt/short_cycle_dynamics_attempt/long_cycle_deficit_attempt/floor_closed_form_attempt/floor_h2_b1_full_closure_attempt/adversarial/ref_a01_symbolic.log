@@ -1,0 +1,60 @@
+========================================================================
+PART A: independent re-derivation of the recursion (match powers of g)
+========================================================================
+order g^0:  my a1 = -c   (front: a1 = -c)   diff = 0
+order g^1:  a_2: (mine - front's recursion) simplifies to: 0
+order g^2:  a_3: (mine - front's recursion) simplifies to: 0
+order g^3:  a_4: (mine - front's recursion) simplifies to: 0
+Psi order g^1:  b_1': (mine - front's recursion) simplifies to: 0
+Psi order g^2:  b_2': (mine - front's recursion) simplifies to: 0
+Psi order g^3:  b_3': (mine - front's recursion) simplifies to: 0
+PART A RESULT: recursion as stated in SS1 matches my independent derivation: PASS
+
+========================================================================
+PART B: psi1 closed form (front's k=1 claim)
+========================================================================
+b1' - c s b1 + c  with b1=sqrt(pi c/2)*erfcx(s sqrt(c/2)):  0
+limit s->oo of psi1 (c=1000): 0  (bounded branch confirmed)
+psi1(0) at c=1000 = 39.6332729761   (front: 39.633)
+a2(0)  at c=1000 = 520316.636488   (front: 520316.636488)
+
+========================================================================
+PART C: REFEREE FINDING -- b2 (and hence a3) is CLOSED FORM;
+        the front's 'needs one numerical quadrature' claim is wrong
+========================================================================
+b2' - c s b2 - (c^2/2 + c psi1)  with closed-form b2:  0
+limit s->oo of b2_closed (c=1000): 0  (bounded branch confirmed)
+b2(0) exact = -sqrt(2)*sqrt(pi)*c**(3/2)/4 - c  =  -c - (c/2)*sqrt(pi c/2)
+b2(0) at c=1000 = -20816.636488   (front's quadrature: -20816.636488)
+cross-check closed-form b2(s) vs direct quadrature of the front's
+stated integral representation (c=1000):
+  s= 0.00: quad=   -20816.636488  closed=   -20816.636488  reldiff=1.75e-16
+  s= 0.01: quad=   -16349.356834  closed=   -16349.356834  reldiff=2.23e-16
+  s= 0.03: quad=   -11014.008501  closed=   -11014.008501  reldiff=8.26e-16
+  s= 0.05: quad=    -8086.951615  closed=    -8086.951615  reldiff=2.25e-16
+  s= 0.08: quad=    -5660.309057  closed=    -5660.309057  reldiff=8.03e-16
+a3(0) via recursion minus my closed form: 0
+a3(0) exact closed form = -(c^3/2 + 5c^2/2 + (c^2+3c/2)sqrt(pi c/2))/3
+a3(0) at c=1000 = -180730907.6285   (front's quadrature-supported: -180730907.6285)
+
+========================================================================
+PART D: the WHOLE hierarchy stays closed-form -- family
+        {P(s) + Q(s)*erfcx(s*sqrt(c/2))}, demonstrated at k=3,4
+========================================================================
+family solver b1: A=0, B=sqrt(2)*sqrt(pi)*sqrt(c)/2   (expect A=0, B=sqrt(pi c/2))
+family solver b2: A=-c, B=sqrt(2)*sqrt(pi)*c**(3/2)*(2*s - 1)/4
+b3 closed form:  b3(s) = [c**2*(8 - 7*s)/12]
+                + [sqrt(2)*sqrt(pi)*c**(3/2)*(7*c*s**2 - 8*c*s + 2*c + 7)/24] * erfcx(s*sqrt(c/2))
+b3' - c s b3 - (-c a2/3 + c b2)  with closed-form b3:  0
+limit s->oo of b3 (c=1000): 0  (bounded)
+b3(0): closed form = 7295331.571913   quadrature = 7295331.571913   reldiff = 1.28e-16
+a4(0) at c=1000 (exact closed form, via family) = 47146963944.1379
+
+PART D CONCLUSION (referee): the recursion maps the family
+  {P(s)+Q(s)*erfcx(s*sqrt(c/2))} to itself at EVERY order:
+  (i)  d/ds keeps the family (erfcx' = c s erfcx - sqrt(2c/pi));
+  (ii) poly-multiplication keeps it;
+  (iii) the bounded solution of b' - c s b = A + B*erfcx stays in it
+        (unique solvability shown constructively by family_solve_b).
+  Hence EVERY a_k(s), b_k(s) is EXACT CLOSED FORM -- no quadrature
+  layer is ever needed, contradicting ATTEMPT.md SS2.3/SS5(1).

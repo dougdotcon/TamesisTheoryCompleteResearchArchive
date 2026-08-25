@@ -76,6 +76,26 @@ not just numerically, consistent with SS5's PDEs).
 **unaffected**: nothing here proposes a replacement for it, or for any
 formula of record in this lineage. See SS7 for the full scorecard.
 
+> **[Post-adversarial integration note, 2026-08-25 — DISC-DEC-071.]**
+> The dedicated hostile referee (`adversarial/REFEREE_REPORT.md`, fresh
+> seeds 20260857000–2, front scripts never opened) returned **SOUND WITH
+> NAMED ISSUES — ACCEPT for catalogue**, with two mandatory corrections
+> (N1, N2) and one minor note (N3), all applied below as dated notes.
+> Every POSITIVE claim in this document replicated independently at
+> equal-or-higher power. Both mandatory corrections run in the direction
+> of this front having UNDERSOLD its own method: the coefficient
+> hierarchy is exact closed form at every order (no quadrature layer —
+> SS2.3 note), and the small-`t0` series in fact converges across the
+> entire plateau, yielding the sharpest characterization of the target
+> this lineage has, `Phi(0,t0>=0.02) = 0.0377616` (SS2.4 note). The
+> orchestrating session independently verified both referee-derived
+> results before cataloguing (sympy ODE checks of `b2`/`b3`/`a3`/`a4` —
+> all residuals exactly 0; an independently re-built `(P,Q)`-family
+> series implementation to order 200 reproducing `0.0377615983` and
+> every table value to all printed digits). Catalogued as node `FLOORH2`
+> under `FLOORCF` in `PROOF_DEPENDENCY_MAP.md` Árvore B; `phi_REDB`
+> unchanged.
+
 ---
 
 ## 0. Setup and provenance
@@ -198,6 +218,12 @@ attributable to `psi1(0) = sqrt(pi c/2) = 39.633`, i.e. is a genuine,
 closed-form-quantified signature of the recursive re-entry mechanism
 already visible at second order.
 
+> **[Post-adversarial correction, 2026-08-25 — DISC-DEC-071, N3
+> (minor).]** "Entirely attributable to `psi1(0)`" is 97.5% right:
+> exactly `500` of the `20316.6` excess comes from the `w_1` re-entry
+> constant (the `+1` in `c+1`), not from `psi1`. The *mechanism*
+> attribution (re-entry) stands.
+
 ### 2.3 `k=3`: `a_3(0)` — exact up to one numerical quadrature (both layers
 cross-checked by two independent methods each)
 
@@ -217,6 +243,29 @@ numerical quadrature). At `c=1000, s=0`: `b_2(0) = -20816.636488`
   shooting backward from a finite cutoff `s_far`, `scipy.integrate.solve_ivp`,
   `Radau`) — converges to `-20816.636483` as `s_far` grows, matching the
   quadrature value `-20816.636488` to 5 significant figures.
+
+> **[Post-adversarial correction, 2026-08-25 — DISC-DEC-071, N1
+> (mandatory).]** This section's characterization of `b_2` as "a genuine
+> NEW integral" — "the 'double special function' layer where the
+> recursion stops being expressible in named elementary/standard special
+> functions and needs one numerical quadrature" — is **FALSE**, refuted
+> by the referee in the direction of this front having undersold itself.
+> The integrand's exponentials cancel identically
+> (`e^{-c sigma^2/2} * psi1(sigma) == sqrt(pi c/2) * erfc(sigma
+> sqrt(c/2))`), making the integral elementary:
+> `b_2(s) = -c - (c/2)sqrt(pi c/2)(1-2s) erfcx(s sqrt(c/2))`, and
+> `a_3(0) = -(c^3/2 + 5c^2/2 + (c^2+3c/2)sqrt(pi c/2))/3` exactly —
+> both reproducing this section's quadrature values to all printed
+> digits. More strongly, the referee PROVED by induction that EVERY
+> coefficient `a_k(s)`, `b_k(s)` lies in the closed family
+> `{P(s) + Q(s) erfcx(s sqrt(c/2)) : P,Q polynomials}` (constructive
+> bounded-branch solve, no quadrature at any order), exhibiting
+> `b_3(s)` and `a_4(0) = 47,146,963,944.14` in closed form. The `k=2/3`
+> tier is therefore EXACT, not "quadrature-supported". Session-verified
+> before cataloguing: all four closed forms re-checked symbolically
+> (sympy, ODE residuals exactly 0) and the family solve re-derived and
+> re-implemented independently. See `adversarial/REFEREE_REPORT.md`
+> §1–§2.
 
 ### 2.4 Validation against a fresh, high-powered Monte Carlo
 
@@ -272,7 +321,35 @@ It is a genuine closed form for a genuinely restricted sub-case (per the
 mandate's explicitly-acceptable weaker-result menu), not a step toward
 computing the original target quantity.
 
----
+> **[Post-adversarial correction, 2026-08-25 — DISC-DEC-071, N2
+> (mandatory).]** The scope-limit paragraph above — and SS5(1)'s
+> "wrong expansion point / radius of convergence `c*t0 ~ 0.5-0.7`"
+> obstruction — is **FALSE**. What this section measured at 3 terms is
+> TRUNCATION error, not a radius of convergence: with exact
+> coefficients (available at every order, per the N1 note), the same
+> series CONVERGES across the entire practically relevant range
+> (referee: verified to `c*t0 = 90`, coefficient ratios still
+> decreasing at order 500 — entire-function-like behavior), reproduces
+> the plateau, and yields the sharpest characterization of the target
+> this lineage has: **`Phi(0,t0) = 0.0377616` for every `t0 >= 0.02`**
+> (approach `~e^{-c t0}`), `Phi(0,0.01) = 0.0377932` — consistent with
+> all six MC references cited in SS3.4, with the parent's full 12-row
+> `fcd_t3.log` (the one old noisy `t0=0.0003` point aside, exactly the
+> point SS2.4's honest-process note already adjudicated), and with both
+> PDE solvers. The expansion point is not wrong; the SS2 result is, in
+> fact, the whole step — pushed to high order it computes
+> `phi_abstract(t0)` everywhere to arbitrary precision. The claimed
+> validity window and breakdown of the 3-TERM truncation are confirmed
+> as real, correctly-located properties of the truncation (referee's
+> fresh MC: +4.7/+13.6/+57.8 at `c*t0 = 0.5/0.7/1.0`). Session-verified
+> before cataloguing: an independently re-built `(P,Q)`-family series
+> to order 200 reproduces `0.0377615983`, the `e^{-ct0}` plateau
+> approach (`S(0.02)-S(0.03) = 1.16e-9`), and every referee table value
+> to all printed digits, with `|z| <= 1.3` against the accepted MC
+> references. What genuinely remains open is a closed-form RESUMMATION
+> (the plateau constant `0.0377616` has no identified closed form) and
+> the abstract-vs-real ~30% gap (SS0), unchanged. See
+> `adversarial/REFEREE_REPORT.md` §2.
 
 ## 3. A corrected, validated numerical solver for the FULL range (the
 practically relevant result)
@@ -433,6 +510,23 @@ precisely as this front could determine:
    (`x=s*sqrt(c), y=g*sqrt(c)`) was sketched by hand during this front's
    work but not carried through to a checked result, and is reported here
    ONLY as a plausible next avenue, not a finding.
+
+   > **[Post-adversarial correction, 2026-08-25 — DISC-DEC-071.]**
+   > Obstruction 1 is refuted in both parts (see the N1/N2 notes in
+   > SS2.3/SS2.4): the hierarchy IS expressible in closed form at every
+   > order (family `{P + Q*erfcx}`, referee induction), and the measured
+   > "radius" was 3-term truncation error — the series converges across
+   > the whole plateau and computes the target to arbitrary precision.
+   > The TRUE residual gap replacing this obstruction: no closed-form
+   > RESUMMATION of the convergent series was found — the plateau
+   > constant `0.0377616` remains unidentified as a named constant.
+   > Obstruction 2 stands as an observation, with the referee supplying
+   > the candidate mundane resolution its item (a)/(b) asks for:
+   > boundary layer (`g <~ 1/c`) + `g`-flat plateau is *automatically*
+   > near-rank-2, and with the layer removed the surface is rank-1 at
+   > 99.99998% — so (b) resolves as "expected to persist, sharpening
+   > with `c`", not a coincidence of this regime. Obstruction 3 stands
+   > unchanged.
 2. **The separability tension (SS3.4) is a real, unresolved finding, not
    just a caveat.** The governing PDE/integral system is provably coupled
    and nonlocal (the `Avg_g[Phi(s,.)]` term genuinely reaches across
@@ -520,6 +614,21 @@ adversarial verification before any integration into governance**, per this
 lineage's standing discipline; per the mandate, no `adversarial/`
 subdirectory was created and no referee was dispatched by this front
 itself.
+
+> **[Post-adversarial correction, 2026-08-25 — DISC-DEC-071.]**
+> Scorecard adjustments mandated by the referee (see SS2.3/SS2.4/SS5
+> notes): row 1's obstruction analysis is superseded — both named
+> obstructions are refuted, and the residual gap is the missing
+> closed-form RESUMMATION (plateau constant `0.0377616` unidentified)
+> plus the abstract-vs-real gap; row 2's tier upgrades from "k=2/3
+> numerically exact via quadrature" to EXACT closed form at every order
+> (family `{P + Q*erfcx}`), and its honest scope limit is refuted — the
+> series reaches the full range and computes the target everywhere.
+> Rows 3–6 stand as written (row 3's `0.0377` is sharpened to
+> `0.0377616` by the referee's exact series, session-verified). Overall
+> tier remains **genuine partial closure** — for reasons partly
+> stronger than the ones originally given. Verdict: SOUND WITH NAMED
+> ISSUES, ACCEPT for catalogue.
 
 ---
 

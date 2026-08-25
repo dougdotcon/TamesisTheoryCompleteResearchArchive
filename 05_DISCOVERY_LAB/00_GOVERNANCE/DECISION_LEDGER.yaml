@@ -4690,3 +4690,74 @@ decisions:
     untouched_safeguards:
       - "p>20 aberto apenas por escopo; nenhuma formula elementar unica p-livre alegada"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-071
+    date: 2026-08-25
+    decision: >
+      Integrar o resultado da onda 16, frente (d)
+      (`FLOOR-H2-B1-FULL-CLOSURE-ATTEMPT`, DISC-DEC-066), apos
+      verificacao adversarial hostil dedicada. Frente de risco alto
+      (sistema (Phi,Psi) acoplado 2-var do piso H2 em b=1, mesma
+      classe de dificuldade diagnosticada da Conjectura 1 geral-K);
+      linha M-CLUST(b), logo integrada como no `FLOORH2` (filho de
+      `FLOORCF`) na Arvore B de PROOF_DEPENDENCY_MAP.md, NAO como
+      Estagio de THEOREM.md. RESULTADO: FECHAMENTO PARCIAL
+      FORTALECIDO. A frente entregou (i) o regime small-t0 exato
+      (recursao provada simbolicamente; psi1(s)=sqrt(pi*c/2)*
+      erfcx(s*sqrt(c/2)); a2 exato todo s; a3 via quadratura
+      dupla-checada; validacao MC fresca N=500k com janela e
+      breakdown do truncamento a 3 termos), (ii) solver numerico
+      corrigido/auto-testado/convergente para a faixa inteira
+      (Richardson Phi(0,t0>~0.01)~=0.0377, |z|<1.7 contra 6
+      referencias MC), (iii) achado de separabilidade near-rank-2, e
+      3 bugs auto-capturados divulgados. Referee (sementes frescas
+      20260857000-2; scripts da frente jamais abertos; MC 1M; solver
+      PDE independente de outra familia, razoes 0.250; serie exata a
+      ordem 500 em 300 digitos): TODAS as alegacoes positivas
+      replicam; as DUAS alegacoes negativas centrais REFUTADAS na
+      direcao de a frente ter subestimado o proprio metodo -- N1:
+      todo coeficiente esta na familia fechada {P+Q*erfcx} (inducao
+      construtiva, sem quadratura; b2, b3, a3(0), a4(0) exibidos
+      exatos); N2: o "raio c*t0~0.5-0.7" era erro de truncamento; a
+      serie com coeficientes exatos converge no plato inteiro
+      (c*t0=90) e da Phi(0,t0>=0.02)=0.0377616 (aproximacao
+      ~e^{-c*t0}), consistente com fcd_t3.log integral, ambos os
+      solvers e 4 MCs frescos. Tensao de separabilidade resolvida de
+      forma majoritariamente mundana (camada de contorno + plato =>
+      near-rank-2; sem a camada, rank-1 a 99.99998%). SPOT-CHECK DA
+      SESSAO sobre os resultados novos do referee (regra
+      verificar-antes-de-catalogar): checagens simbolicas sympy das 4
+      formas fechadas (residuos exatamente 0) + implementacao
+      independente da familia (P,Q) ate ordem 200 (mecanismo de
+      resolucao re-derivado do zero) reproduzindo 0.0377615983,
+      S(0.002)=0.15850015 e todos os valores tabulados, |z|<=1.3
+      contra MC aceito. Veredito SOUND WITH NAMED ISSUES, "ACCEPT for
+      catalogue" com correcoes obrigatorias N1/N2 (+N3 menor), todas
+      aplicadas como adendos datados. phi_REDB INALTERADA; residuo
+      M-CLUST(b) permanece PARCIALMENTE FECHADO. Restam: ressomacao
+      em forma fechada (constante do plato 0.0377616 nao identificada
+      como constante nomeada) e o gap abstrato-vs-real ~30%. ONDA 16
+      FECHADA -- 5/5 frentes integradas (DISC-DEC-066 a 071).
+    rationale: >
+      Mesmo padrao das integracoes anteriores, com a regra
+      verificar-antes-de-catalogar aplicada aos resultados derivados
+      pelo proprio referee (como no caso de contorno K=n de
+      DISC-DEC-068). Caso notavel de correcao adversarial em
+      UNDERSELLING: nenhum numero da frente estava errado; a analise
+      de obstrucao estava.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/ (nova frente, integrada; 6 adendos datados)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (no FLOORH2 + adendo datado na Arvore B)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave16_results.floor_h2_b1_full_closure_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "sub-problema abstrato de FLOORCF caracterizado com precisao arbitraria: serie exata convergente em toda a faixa, Phi(0,t0>=0.02)=0.0377616"
+      - "familia fechada {P+Q*erfcx} PROVADA para todos os coeficientes (referee) -- remove a obstrucao de quadratura"
+      - "ONDA 16 FECHADA -- 5/5 frentes integradas"
+    untouched_safeguards:
+      - "phi_REDB permanece a formula de registro de M-CLUST(b); nenhum status de no muda alem do novo FLOORH2"
+      - "gap abstrato-vs-real ~30% permanece aberto e fora de escopo; nenhuma alegacao sobre o engine real"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

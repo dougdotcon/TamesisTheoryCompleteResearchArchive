@@ -243,6 +243,8 @@ flowchart TD
 
     FLOORCF["Onda 14, frente (b) (DISC-DEC-057/062):<br/>forma fechada do piso b=1 -- FECHAMENTO<br/>PARCIAL: reducao exata provada (selecao<br/>sobre phi(ell) nao-constante), mecanismo<br/>de reentrada de lacuna provado e validado<br/>por simulacao exata; forma fechada completa<br/>NAO derivada (sistema 2-var acoplado nao-<br/>local); referee 5x+ potencia, mesma<br/>conclusao -- SOUND WITH NAMED ISSUES"]
 
+    FLOORH2["Onda 16, frente (d) (DISC-DEC-066/071):<br/>sistema (Phi,Psi) do piso b=1 -- FECHAMENTO<br/>PARCIAL FORTALECIDO: TODOS os coeficientes<br/>da serie small-t0 em forma fechada exata<br/>(familia P+Q*erfcx, inducao do referee);<br/>serie converge no platô inteiro:<br/>Phi(0,t0>=0.02)=0.0377616 (2 solvers +<br/>4 MCs + serie exata ordem 500);<br/>resummation fechada NAO achada (constante<br/>do platô nao identificada); gap abstrato-<br/>vs-real ~30% intocado; phi_REDB inalterada<br/>-- SOUND WITH NAMED ISSUES"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -262,6 +264,7 @@ flowchart TD
     SCMECH --> LCDMECH
     LCDMECH --> CVCOV
     LCDMECH --> FLOORCF
+    FLOORCF --> FLOORH2
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -280,6 +283,7 @@ flowchart TD
     style LCDMECH fill:#e8f0e0,stroke:#2f6b5e,stroke-width:2px
     style CVCOV fill:#f5ecd8,stroke:#96702a,stroke-width:2px
     style FLOORCF fill:#f5ecd8,stroke:#96702a,stroke-width:2px
+    style FLOORH2 fill:#f5ecd8,stroke:#96702a,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -455,6 +459,56 @@ flowchart TD
 > aberto). Fontes:
 > `long_cycle_deficit_attempt/floor_closed_form_attempt/ATTEMPT.md` e
 > `.../floor_closed_form_attempt/adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-25 — DISC-DEC-066/DISC-DEC-071.]** Onda 16
+> frente (d) (`FLOOR-H2-B1-FULL-CLOSURE-ATTEMPT`, novo nó `FLOORH2`
+> acima) atacou exatamente o que `FLOORCF` deixou aberto: a forma
+> fechada completa do sistema acoplado 2-var `(Φ,Ψ)` do piso `b=1`.
+> **Fechamento parcial fortalecido** — e o caso mais claro desta
+> linhagem de uma frente que *subestimou o próprio método*. A frente
+> entregou: (i) o regime small-`t0` exato (recursão provada
+> simbolicamente; `psi1(s)=√(πc/2)·erfcx(s√(c/2))` provado; `a₂` exato;
+> `a₃` via quadratura dupla-checada); (ii) um solver numérico corrigido,
+> auto-testado e convergente para a faixa inteira (Richardson
+> `Φ(0,t0≳0.01)≈0,0377`, validado contra 6 referências MC
+> independentes); (iii) o achado de separabilidade (superfície
+> near-rank-2 de equações provadamente acopladas); e 3 bugs
+> auto-capturados divulgados. O referee hostil dedicado replicou TODAS
+> as alegações positivas do zero (sementes frescas 20260857000–2,
+> scripts da frente jamais abertos; MC até 1M walkers; solver PDE
+> independente de outra família de discretização, razões de refinamento
+> 0,250 limpas) — e **refutou as duas alegações NEGATIVAS centrais, nas
+> duas direções que fortalecem o registro**: **N1** — a "camada de
+> quadratura por ordem" é falsa: TODO coeficiente `a_k(s)`, `b_k(s)`
+> está na família fechada `{P(s)+Q(s)·erfcx(s√(c/2))}` (indução
+> construtiva, sem quadratura; `b₂`, `b₃`, `a₃(0)`, `a₄(0)` exibidos em
+> forma fechada exata); **N2** — o "ponto de expansão errado / raio
+> `c·t0~0,5–0,7`" é falso: o que a frente mediu foi erro de TRUNCAMENTO
+> a 3 termos; com coeficientes exatos a série converge no platô inteiro
+> (verificado a `c·t0=90`, razões ainda caindo na ordem 500) e dá a
+> caracterização mais nítida que esta linhagem tem do alvo:
+> **`Φ(0,t0)=0,0377616` para todo `t0≥0,02`** (aproximação `~e^{−ct0}`),
+> consistente com as 12 linhas do `fcd_t3.log` ancestral, ambos os
+> solvers e 4 MCs frescos. A sessão orquestradora verificou os dois
+> resultados novos do referee antes de catalogar (checagens simbólicas
+> sympy com resíduos exatamente 0; implementação independente da
+> família `(P,Q)` até ordem 200 reproduzindo `0,0377615983` e todos os
+> valores tabulados). O que resta aberto de verdade: a RESSOMAÇÃO em
+> forma fechada (a constante do platô `0,0377616` não foi identificada
+> como constante nomeada), e o gap abstrato-vs-real `~30%` (fora do
+> escopo da frente, honestamente delimitado). A "tensão" de
+> separabilidade resolve-se de forma majoritariamente mundana (camada
+> de contorno `g≲1/c` + platô ⇒ near-rank-2; removida a camada, a
+> superfície é rank-1 a 99,99998%). Veredito **SOUND WITH NAMED
+> ISSUES, ACCEPT for catalogue** com correções obrigatórias N1/N2 (+N3
+> menor), todas aplicadas como adendos datados. `φ_REDB` permanece a
+> fórmula de registro; o resíduo M-CLUST(b) (nó `RES`) permanece
+> **PARCIALMENTE FECHADO** — mas o sub-problema abstrato `FLOORCF`
+> agora está caracterizado com precisão arbitrária, faltando apenas o
+> nome da constante. **ONDA 16 FECHADA — 5/5 frentes integradas**
+> (DISC-DEC-066 a 071). Fontes:
+> `floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/ATTEMPT.md`
+> e `.../floor_h2_b1_full_closure_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

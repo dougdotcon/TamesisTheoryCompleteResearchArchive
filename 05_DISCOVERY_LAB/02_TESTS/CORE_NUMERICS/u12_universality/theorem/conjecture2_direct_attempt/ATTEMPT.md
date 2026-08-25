@@ -214,6 +214,21 @@ previously-unrecorded closed form (`E[M(c)^2]=(1-e^{-c})/c`, and the
 per-`K` fact `E[M_K^2]=1/(K+1)`) that gives Route 1 a concrete, checkable
 target.
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-067`, Issue 1 do
+> referee] Onde o sumário executivo diz "a bonus exact fact ... for
+> every `K`" e as tabelas dos §7/§9 rotulam as duas formas fechadas
+> como "PROVED (symbolic, new)", leia-se: **PROVED como computações
+> sobre a lei conjecturada (alvos)**. Como afirmações sobre o modelo,
+> são incondicionais apenas para `K∈\{0,1,2,3\}` (via as densidades já
+> provadas — âncoras re-verificadas pelo referee: `1/2, 1/3, 1/4`);
+> para `K\ge4`, e para `E[M(c)^2]=(1-e^{-c})/c` como afirmação sobre o
+> verdadeiro `M(c)`, são exatamente tão conjecturais quanto as
+> Conjecturas 1–2. O corpo do texto (§3.1 acima, §8) já afirmava isso
+> corretamente; esta correção propaga o qualificador aos rótulos de
+> tabela e ao sumário. Nota adicional: as instâncias `K\le3` são
+> âncoras incondicionais explícitas — `E[M_2^2]=1/3` e `E[M_3^2]=1/4`
+> já constam dos documentos K=2/K=3 desta linhagem.
+
 ### 3.2 The block-structure reduction (PROVED, elementary)
 
 By exchangeability/rotation-invariance of the underlying PD(1) +
@@ -528,6 +543,35 @@ not record. A master/generator equation closing on the marginal law of
 `M(c)` alone, via a simple "add one mark, see how `M` changes" analysis,
 therefore does not follow the route this section set out to check.
 
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-067`, Issues 2–3
+> do referee, ambos reparados pelo próprio referee] Dois degraus entre
+> o certificado exibido e as alegações PROVED acima não estavam
+> explícitos no texto original; ambos são curtos e foram verificados:
+> **(Issue 2, ponte finito→contínuo)** a alegação PROVED refere-se ao
+> acoplamento contínuo do §4.1, enquanto o certificado do §4.2 é uma
+> computação exata do modelo finito `n=6`. A ponte: sob o acoplamento
+> do §4.1, com probabilidade positiva exatamente uma marca chega até
+> `c_1`, num ponto `x` de um bloco `C` de comprimento `L>0` com destino
+> fora de `C` (logo `M(c_1)=1-L`, todo `C` morto), e exatamente uma
+> marca adicional chega em `(c_1,c_2]` num ponto `y\in C` com destino
+> `z` no arco *à frente*, estritamente entre `x` e `y` (evento de
+> probabilidade positiva, pois esse arco tem comprimento positivo
+> q.c.); então a trajetória de `z` alcança `y` antes de `x`, fechando
+> `y\to z\to\cdots\to y` — um ciclo novo de massa positiva, sem
+> destruir nada anteriormente cíclico (apenas a aresta de saída de
+> `y`, que já estava morto, mudou) — logo `M(c_2)>M(c_1)` com
+> probabilidade positiva. **(Issue 3, direção determinística em `M`)**
+> as duas transições exibidas (queda a partir de `M=1`; subida a
+> partir de `M=1/2`) são, sozinhas, consistentes com uma *função* de
+> direção em `M`; a refutação exige ambas as direções a partir de UM
+> mesmo estado. O scan exaustivo do referee sobre os 30 segundos
+> reroutes possíveis a partir da própria configuração `K=1` deste
+> documento fecha isso: 9 aumentam a contagem cíclica, 7 diminuem
+> (p.ex. `5\to4` dá contagem 2, contra o `3\to2` exibido que dá 5),
+> 14 não mudam — ambas as direções a partir de uma única configuração,
+> logo de um único valor de `M`. Ver
+> `adversarial/ref_counterexample.log`.
+
 **What this does NOT show:** it does not show `\{M(c)\}` fails to be
 Markov with respect to some *richer* state (the full reroute
 configuration certainly *is* Markov in `c`, trivially — that state
@@ -581,7 +625,17 @@ determined by the *entire* configuration of the reroute process, and no
 proper summary of it smaller than "the whole configuration" — not the
 pair `(x_1,x_2)`'s joint status, not the scalar `M(c)`, not the count
 `K` alone — carries enough information to predict its own future
-evolution or its own multi-point correlations.** This is genuinely
+evolution or its own multi-point correlations.**
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-067`, Issue 4 do
+> referee] A frase em negrito acima deve ser lida como **diagnóstico
+> heurístico**, não como fato estabelecido: é um negativo universal
+> sem rótulo, e o que está de fato demonstrado é que três resumos
+> *específicos* (o escalar `M`, o status conjunto do par, a contagem
+> `K`) falham para os propósitos *específicos* examinados (e, para
+> `M`, estritamente apenas via as formas reparadas nos Issues 2–3).
+> O restante desta seção e o §3.3 ("not a proof of impossibility")
+> já carregavam o registro correto. This is genuinely
 `K`-free in origin (it is not "the K-by-K case analysis is
 combinatorially large"; it would appear even for the Poisson(`c`)
 process directly, with `K` never mentioned) — but it is a **different**
@@ -707,6 +761,18 @@ outcome, reported with everything that was actually established along
 the way. Ready for the standing adversarial-referee requirement this
 archive applies to every front before any integration into
 `THEOREM.md`.
+
+> [Correção pós-adversarial, 2026-08-25 — `DISC-DEC-067`] Revisão
+> adversarial concluída: veredito **SOUND WITH NAMED ISSUES (quatro,
+> todos menores) — ACCEPT for catalogue** no tier reivindicado.
+> Nenhum erro em nenhuma computação exata/PROVED; os quatro achados
+> (rótulo de tabela sem o qualificador de condicionalidade; duas
+> lacunas de nível de prova no escopo do §4, ambas reparadas pelo
+> próprio referee; uma frase super-assertiva no §6) estão corrigidos
+> pelos adendos datados acima. Nas linhas "PROVED (symbolic, new)"
+> das tabelas dos §7/§9, aplicar o qualificador do Issue 1 (ver
+> correção no §3.1). Integrado como "Estágio 18" em `THEOREM.md`.
+> Ver `adversarial/REFEREE_REPORT.md`.
 
 ---
 

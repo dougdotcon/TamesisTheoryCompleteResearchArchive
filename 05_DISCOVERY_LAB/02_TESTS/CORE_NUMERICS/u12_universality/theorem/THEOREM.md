@@ -1232,6 +1232,14 @@ not a proof for the u12 ensemble itself (§5.5 states precisely why not).
 > `f_{M_2}(x)=4x(1-x^2)`, exactly. Conjecture 1 for `K\ge3` remains
 > exactly as open as before — `K\ge3` was explicitly not attempted.
 
+> **[Extensão, 2026-08-25 — DISC-DEC-065/DISC-DEC-067.]** `K=3` is
+> also now **PROVED** (same citation, applied recursively — see
+> "Estágio 17" below): `f_{M_3}(x)=6x(1-x^2)^2`, exactly. [Esta nota
+> deveria ter sido inserida na integração do Estágio 17 e foi
+> adicionada na integração seguinte, ao ser notada a omissão.]
+> `K\ge4` está sob revisão adversarial (onda 16); nenhum resultado é
+> afirmado aqui até o veredito.
+
 **Conjecture 2 (the full unconditional distributional law).**
 
 `M(c) \overset{d}{=} \min(1,\sqrt{E/c})`,  `E\sim\mathrm{Exp}(1)`, i.e.
@@ -1246,6 +1254,20 @@ components of the mixture are exact). Support: KS test at Poisson
 `c=1` against the atom+continuous mixture, no rejection (atom `z=+0.33`,
 continuous part `p=0.171`,
 `../limit_characterization/supplementary_distribution.json`).
+
+> **[Extensão, 2026-08-25 — DISC-DEC-066/DISC-DEC-067.]** Uma rota
+> **direta** (não caso-a-caso em `K`) para esta conjectura foi
+> tentada e NÃO fechou — não-fechamento honesto, com progresso parcial
+> catalogado (ver "Estágio 18" abaixo): a arquitetura do método dos
+> momentos está montada e correta-se-completada; o alvo
+> `E[M(c)^2]=(1-e^{-c})/c` (com `E[M_K^2]=1/(K+1)`, incondicional
+> apenas em `K\le3` via as densidades provadas; alvo conjectural no
+> geral) está registrado; a redução por blocos do caso `p=2` está
+> provada; e a rota de acoplamento Poissonization-em-`c` está
+> **refutada** como caminho para uma equação-mestra no escalar `M(c)`
+> (contraexemplo exato: adicionar um reroute pode AUMENTAR a massa
+> cíclica). O passo genuinamente difícil — uma exploração conjunta de
+> dois pontos de referência — está precisamente localizado e aberto.
 
 **On the Open Lemma of §7.4 — a deliberate non-inclusion here.** The
 `n\to\infty` fixed-`K` bridge for `K\ge2` (§7.4) is **not** listed as a
@@ -3277,3 +3299,121 @@ de tratabilidade contínua, e nenhuma extrapolação além de `K=3` é
 alegada por nenhum documento desta linhagem. Fontes completas:
 `theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/ATTEMPT.md`,
 `.../conjecture1_k3_attempt/adversarial/REFEREE_REPORT.md`.
+
+---
+
+## [Extensão, Estágio 18 — 2026-08-25]
+
+**Onda 16, frente (e), `DISC-DEC-066`/`DISC-DEC-067`
+(`CONJECTURE-2-DIRECT-ATTEMPT`).** Alvo: §8 Conjectura 2 (a lei
+distribucional incondicional completa, `M(c)\overset{d}{=}
+\min(1,\sqrt{E/c})`), por uma rota **direta** — que não passe por
+provar a Conjectura 1 caso-a-caso para todo `K` (infactível em
+princípio: "todo `K`" não é uma lista finita). Frente despachada como
+a de maior risco da onda, com não-fechamento honesto pré-declarado
+plenamente aceitável.
+
+### O que aconteceu
+
+> **Não-fechamento honesto, com progresso parcial estrutural provado
+> e uma refutação rigorosa de rota.** Nenhuma prova direta, completa
+> ou parcial, da Conjectura 2 é alegada.
+
+O que ficou estabelecido, no tier de cada alegação:
+
+**(i) A arquitetura do método dos momentos (PROVADA como
+correta-se-completada).** `M(c)\in[0,1]` q.c., logo sua lei é
+determinada pela sequência de momentos (problema de momentos de
+Hausdorff, determinado em suporte compacto — citação clássica); e
+cada momento reduz, pelo mesmo dispositivo Fubini/exchangeability que
+o Teorema 1 já usa para a média, a uma probabilidade cíclica conjunta
+de `p` pontos que nunca fixa `K`. Se completada para todo `p`, seria
+uma prova direta integral. O referee registrou como bônus o momento
+geral-`p` da lei conjecturada:
+`E[\min(1,\sqrt{E/c})^p]=e^{-c}+\gamma(p/2{+}1,c)/c^{p/2}`.
+
+**(ii) Novos alvos em forma fechada (PROVADOS como computações sobre
+a lei conjecturada — alvos, não evidência).**
+`E[M(c)^2]=(1-e^{-c})/c` e `E[M_K^2]=1/(K{+}1)` — incondicionais
+apenas em `K\le3` (âncoras via as densidades já provadas: `1/2, 1/3,
+1/4`, re-verificadas pelo referee); conjecturais no geral, exatamente
+como as Conjecturas 1–2. Não constavam em nenhum lugar deste
+documento antes.
+
+**(iii) A redução por estrutura de blocos do caso `p=2` (PROVADA,
+elementar).** `P(\text{mesmo bloco})=1/2`; densidades condicionais
+exatas nos dois casos — cada fato cruzado contra enumeração exata
+finita (`n=2,\ldots,7` pela frente; estendida a `n=8` pelo referee,
+que ainda a fortaleceu: toda célula das tabelas discretas vale
+exatamente `(n-2)!`).
+
+**(iv) O certificado de bloco intacto (PROVADO).** Limite inferior
+exato `e^{-ct}` dentro do caso difícil, com verificação de
+zero-violações por simulação (frente e referee, seeds distintos).
+
+**(v) Refutação da rota Poissonization-em-`c` (PROVADA, com os dois
+reparos do referee incorporados).** Sob o acoplamento natural em que
+marcas só são adicionadas conforme `c` cresce, `\{M(c)\}` NÃO é
+monótono por trajetória — contraexemplo exato (`n=6`: adicionar um
+segundo reroute AUMENTA a contagem cíclica de `3` para `5`, ao fechar
+um 2-ciclo novo em território morto) — e o scan exaustivo do referee
+(9 subidas / 7 descidas / 14 neutras a partir de UMA mesma
+configuração) fecha também a refutação de qualquer função de direção
+determinística em `M`. Uma equação-mestra fechando no escalar `M(c)`
+está descartada por essa via.
+
+**(vi) A obstrução, localizada com precisão (ABERTA).** O passo
+genuinamente difícil — já em `p=2` — é que o dispositivo de exploração
+de um ponto (Definição 3) abstrai exatamente a informação de destino
+físico que uma exploração *conjunta* de dois pontos precisa; uma
+re-derivação a partir da Definição 2 é o sub-problema preciso, bem
+posto e não resolvido. O documento nota (como pista, não alegação)
+que essa mesma peça nova — uma exploração conjunta não-marginalizada —
+é plausivelmente a chave comum tanto para a rota direta da Conjectura
+2 quanto para o caso geral-`K` da Conjectura 1.
+
+### Verificação adversarial independente
+
+Referee hostil dedicado, sem ler nenhum script da frente: re-derivou
+as duas formas fechadas por duas rotas simbólicas cada; re-enumerou as
+checagens discretas do zero até `n=8` (fortalecendo-as); re-verificou
+o certificado de bloco intacto com seeds frescos (0 violações em 6.519
+trials intactos, `c=1` e `c=4`); verificou o contraexemplo à mão e por
+dois algoritmos independentes; reproduziu os padrões exploratórios de
+`g(\ell)`/`\rho(\ell)`; e auditou a disciplina de rotulagem
+honesta linha a linha.
+
+> **Veredito: SOUND WITH NAMED ISSUES (quatro, todos menores) —
+> "ACCEPT for catalogue" no tier reivindicado.** Nenhum erro em
+> nenhuma computação exata/PROVED. Os quatro achados — um qualificador
+> de condicionalidade ausente nos rótulos de tabela; duas lacunas de
+> nível de prova no escopo do §4 (ponte finito→contínuo; ambas as
+> direções a partir de um só estado), ambas reparadas pelo próprio
+> referee; e uma frase super-assertiva no §6 — foram corrigidos por
+> adendos datados no documento-alvo.
+
+Ver `theorem/conjecture2_direct_attempt/ATTEMPT.md` e
+`.../conjecture2_direct_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**A Conjectura 2 permanece CONJECTURA — nada muda em seu status.**
+O que muda: (a) a rota direta tem agora uma arquitetura precisa e
+correta-se-completada (momentos), com o caso `p=2` reduzido à sua
+metade fácil e a metade difícil localizada com exatidão; (b) a rota
+alternativa mais natural (equação-mestra via Poissonization-em-`c`
+no escalar `M(c)`) está **descartada por refutação rigorosa**, não
+por impressão; (c) dois alvos de momento em forma fechada estão
+registrados para qualquer tentativa futura testar contra; (d) uma
+pista estrutural unificadora (a exploração conjunta como chave comum
+às duas conjecturas) está nomeada. Nenhum resultado anterior é
+tocado.
+
+**O que permanece aberto, sem mudança:** Conjectura 2 em geral; a
+exploração conjunta de `p\ge2` pontos (o novo sub-problema nomeado);
+Conjectura 1 para `K\ge4` (sob revisão adversarial na própria onda
+16); `\sup_K M_K/\sqrt K=a^*` (idem); `p>20` de `D^{*(p)}_r(b)`
+(idem); o piso `H2` em `b=1` (idem); a lei de escala `\gamma\in(0,1)`
+(caracterizada, não provada, sem frente ativa). Nenhuma alegação de
+progresso em Millennium Problem; matemática combinatória pura interna
+a este arquivo.

@@ -1,0 +1,70 @@
+==============================================================================
+SECTION 1: K=0 trivial check
+==============================================================================
+n=2 K=0: P(both)=1/1 = 1.000000 P(same)=1/2 = 0.500000 P(diff)=1/2 = 0.500000
+n=3 K=0: P(both)=1/1 = 1.000000 P(same)=1/2 = 0.500000 P(diff)=1/2 = 0.500000
+n=4 K=0: P(both)=1/1 = 1.000000 P(same)=1/2 = 0.500000 P(diff)=1/2 = 0.500000
+n=5 K=0: P(both)=1/1 = 1.000000 P(same)=1/2 = 0.500000 P(diff)=1/2 = 0.500000
+K=0: P(both)=1 exactly, P(same)=P(diff)=1/2 exactly, for all tested n. Matches document Sec 3.1 and Theorem J's Corollary.
+
+==============================================================================
+SECTION 2: K=1 sub-case isolation (R fixed), independent re-derivation
+==============================================================================
+n=3 Case(a) r=2 (r not in {0,1}): brute=5/9 = 0.555556  hand-formula V_a(n)=(3n+1)/(6n)=5/9 = 0.555556  MATCH=True
+n=3 Case(b) r=0 (r IS query point 0): brute=4/9 = 0.444444  hand-formula V_b(n)=(n+1)/(3n)=4/9 = 0.444444  MATCH=True
+n=3 Case(c) r=1 (r IS query point 1, symmetric check): brute=4/9 = 0.444444  MATCH V_b(n)=True
+n=4 Case(a) r=2 (r not in {0,1}): brute=13/24 = 0.541667  hand-formula V_a(n)=(3n+1)/(6n)=13/24 = 0.541667  MATCH=True
+n=4 Case(b) r=0 (r IS query point 0): brute=5/12 = 0.416667  hand-formula V_b(n)=(n+1)/(3n)=5/12 = 0.416667  MATCH=True
+n=4 Case(c) r=1 (r IS query point 1, symmetric check): brute=5/12 = 0.416667  MATCH V_b(n)=True
+n=5 Case(a) r=2 (r not in {0,1}): brute=8/15 = 0.533333  hand-formula V_a(n)=(3n+1)/(6n)=8/15 = 0.533333  MATCH=True
+n=5 Case(b) r=0 (r IS query point 0): brute=2/5 = 0.400000  hand-formula V_b(n)=(n+1)/(3n)=2/5 = 0.400000  MATCH=True
+n=5 Case(c) r=1 (r IS query point 1, symmetric check): brute=2/5 = 0.400000  MATCH V_b(n)=True
+n=6 Case(a) r=2 (r not in {0,1}): brute=19/36 = 0.527778  hand-formula V_a(n)=(3n+1)/(6n)=19/36 = 0.527778  MATCH=True
+n=6 Case(b) r=0 (r IS query point 0): brute=7/18 = 0.388889  hand-formula V_b(n)=(n+1)/(3n)=7/18 = 0.388889  MATCH=True
+n=6 Case(c) r=1 (r IS query point 1, symmetric check): brute=7/18 = 0.388889  MATCH V_b(n)=True
+
+==============================================================================
+SECTION 3: False-start reproduction at n=3
+==============================================================================
+V_a(3) [the false-start value, i.e. treating Case(a) as if it were the WHOLE unconditional answer] = 5/9 = 0.555556
+Confirmed: the false-start value IS exactly 5/9 at n=3, matching the document's self-disclosure. This is Case(a)'s CONDITIONAL value only, wrongly reported as unconditional in the document's disclosed first attempt.
+
+==============================================================================
+SECTION 4: K=1 full closed form, R averaged (genuine Definition 4)
+==============================================================================
+n=2: brute(R averaged)=1/2 = 0.500000  my-reassembly=(n-2)/n*Va+2/n*Vb=1/2 = 0.500000  document-closed-form=(3n^2-n+2)/(6n^2)=1/2 = 0.500000  ALL MATCH=True
+n=3: brute(R averaged)=13/27 = 0.481481  my-reassembly=(n-2)/n*Va+2/n*Vb=13/27 = 0.481481  document-closed-form=(3n^2-n+2)/(6n^2)=13/27 = 0.481481  ALL MATCH=True
+n=4: brute(R averaged)=23/48 = 0.479167  my-reassembly=(n-2)/n*Va+2/n*Vb=23/48 = 0.479167  document-closed-form=(3n^2-n+2)/(6n^2)=23/48 = 0.479167  ALL MATCH=True
+n=5: brute(R averaged)=12/25 = 0.480000  my-reassembly=(n-2)/n*Va+2/n*Vb=12/25 = 0.480000  document-closed-form=(3n^2-n+2)/(6n^2)=12/25 = 0.480000  ALL MATCH=True
+n=6: brute(R averaged)=13/27 = 0.481481  my-reassembly=(n-2)/n*Va+2/n*Vb=13/27 = 0.481481  document-closed-form=(3n^2-n+2)/(6n^2)=13/27 = 0.481481  ALL MATCH=True
+n=7: brute(R averaged)=71/147 = 0.482993  my-reassembly=(n-2)/n*Va+2/n*Vb=71/147 = 0.482993  document-closed-form=(3n^2-n+2)/(6n^2)=71/147 = 0.482993  ALL MATCH=True
+Theorem J's Corollary (P(same)=P(diff)=P(both)/2 EXACTLY, every n) independently re-confirmed by our own harness at K=1, n=2..7.
+
+==============================================================================
+SECTION 5: Rate check
+==============================================================================
+n=10: n*(P_n^(1)(both)-1/2) = -2/15 = -0.133333  (exact = -1/6 + 1/(3n) -> -1/6 as n->infty)
+n=100: n*(P_n^(1)(both)-1/2) = -49/300 = -0.163333  (exact = -1/6 + 1/(3n) -> -1/6 as n->infty)
+n=1000: n*(P_n^(1)(both)-1/2) = -499/3000 = -0.166333  (exact = -1/6 + 1/(3n) -> -1/6 as n->infty)
+n=1000000: n*(P_n^(1)(both)-1/2) = -499999/3000000 = -0.166666  (exact = -1/6 + 1/(3n) -> -1/6 as n->infty)
+Confirmed: n*(P-1/2) = -1/6 + 1/(3n) exactly, algebra is correct, limit is exactly -1/6.
+
+==============================================================================
+SECTION 6: K=2 exact enumeration, spot-checking document's table
+==============================================================================
+n=3 K=2: brute=10/27 = 0.370370  document table value=10/27 = 0.370370  MATCH=True  [0.0s, 162 configs enumerated]
+n=4 K=2: brute=49/144 = 0.340278  document table value=49/144 = 0.340278  MATCH=True  [0.0s, 2304 configs enumerated]
+n=5 K=2: brute=33/100 = 0.330000  document table value=33/100 = 0.330000  MATCH=True  [0.1s, 30000 configs enumerated]
+n=6 K=2: brute=44/135 = 0.325926  document table value=44/135 = 0.325926  MATCH=True  [0.8s, 388800 configs enumerated]
+n=7 K=2: brute=143/441 = 0.324263  document table value=143/441 = 0.324263  MATCH=True  [12.1s, 5186160 configs enumerated]
+
+==============================================================================
+SECTION 7: K=3 exact enumeration, spot-checking document's table
+==============================================================================
+n=4 K=3: brute=19/64 = 0.296875  document table value=19/64 = 0.296875  MATCH=True  [0.0s, 6144 configs enumerated]
+n=5 K=3: brute=3383/12500 = 0.270640  document table value=3383/12500 = 0.270640  MATCH=True  [0.3s, 150000 configs enumerated]
+n=6 K=3: brute=233/900 = 0.258889  document table value=233/900 = 0.258889  MATCH=True  [7.1s, 3110400 configs enumerated]
+
+==============================================================================
+ALL CHECKS PASSED. Total wall time: 21.2s
+==============================================================================

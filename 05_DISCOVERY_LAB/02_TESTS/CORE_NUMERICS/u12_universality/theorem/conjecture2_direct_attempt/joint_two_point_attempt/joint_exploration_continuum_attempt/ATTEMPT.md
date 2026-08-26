@@ -363,6 +363,28 @@ to converge at rate `\Theta(1/n)`, not faster, **for every `K\ge0`**
 (the `K=0` case is exact with zero error at every `n`, a degenerate
 boundary case, not a counterexample to this expectation for `K\ge1`).
 
+> **[Correção pós-adversarial, 2026-08-26 — DISC-DEC-081.]** O referee
+> hostil (`adversarial/REFEREE_REPORT.md` §5) encontrou e confirmou que
+> a frase acima — "dominating whatever `O(1/n^2)` behavior Case (a)
+> alone would have shown" — está **errada**, contradita pela própria
+> fórmula de `V_a(n)` do documento: `V_a(n)=(3n+1)/(6n)=\tfrac12+\tfrac1{6n}`
+> já tem desvio `\Theta(1/n)` explícito e exato, não `\Theta(1/n^2)`.
+> Decomposição correta (via `(n-2)/n\cdot V_a(n) =
+> \tfrac12-\tfrac5{6n}-\tfrac1{3n^2}` e `\tfrac2n\cdot V_b(n)`-ponderado
+> com coeficiente `+2/3`): os dois termos `O(1/n)` **cancelam
+> parcialmente** (`-5/6+2/3=-1/6`) para dar a taxa `-1/6` corretamente
+> relatada — Casos (a) e (b)/(c) contribuem individualmente em
+> `O(1/n)`; nenhum é desprezível, e não compõem como "base `O(1/n^2)`
+> mais perturbação `O(1/n)`". Este erro está confinado à narrativa
+> causal explicativa desta seção; **não afeta** a Proposição K1, a
+> reassemblagem, nem o valor da taxa `-1/6` em si, todos independentemente
+> confirmados corretos pelo referee. Diagnóstico correto provável
+> (oferecido pelo referee como observação, não como resultado provado):
+> a taxa mais lenta é um efeito posicional conjunto de dois pontos já
+> presente dentro do próprio Caso (a) (via o termo `E[\min(j,k)]/n`, sem
+> análogo no problema marginal de um ponto), não algo atribuível
+> exclusivamente à colisão fonte-do-reroute/ponto-de-consulta.
+
 ---
 
 ## 4. `K\ge2`: not closed, precisely why, and what the numbers show

@@ -4309,7 +4309,10 @@ conjunta de `p\ge2` pontos como ferramenta geral (o Teorema J resolve
 apenas a peça condicional "split dado ambos cíclicos", não a lei
 conjunta completa); a versão contínua-nativa do Teorema J a partir da
 Definição 3 (tentada em §6.3, não completada — mesma obstrução do
-Estágio 18 §3.3); `p>20` de `D^{*(p)}_r(b)`; o piso `H2` em `b=1`
+Estágio 18 §3.3) [Ver Estágio 28 abaixo — 2026-08-26: progresso parcial
+genuíno via transferência (não construção contínua direta), fechando
+`K=0,1` incondicionalmente; `K\ge2` continua ABERTO]; `p>20` de
+`D^{*(p)}_r(b)`; o piso `H2` em `b=1`
 (sob revisão na onda 17); a constante do platô de DISC-DEC-071 (sob
 revisão na onda 17). Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
@@ -4539,3 +4542,113 @@ na onda 18); a versão contínua-nativa do Teorema J (sob revisão na
 onda 18); o piso `H2` em `b=1`; a constante do platô de DISC-DEC-071.
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 28 — 2026-08-26]
+
+**Onda 18, frente (c), `DISC-DEC-078`/`DISC-DEC-081`
+(`JOINT-EXPLORATION-CONTINUUM-ATTEMPT`).** Alvo: completar a versão
+contínua-nativa (Definição 3) do Teorema J — tentada em §6.3 do
+Estágio 25 e explicitamente não completada ali, mesma obstrução
+diagnosticada no Estágio 18 §3.3 (o dispositivo de exploração de um
+ponto abstrai exatamente a informação de destino físico que uma
+versão contínua do Teorema J precisaria).
+
+### O que aconteceu
+
+> **Não-fechamento honesto do mandato completo** (uma construção
+> contínua-nativa direta a partir da Definição 3, para todo `K`),
+> combinado com um **bypass genuíno via transferência**: em vez de
+> resolver a obstrução de construção contínua, a frente mostrou que ela
+> pode ser evitada inteiramente para `K=0,1`, explorando que o
+> Corolário do Teorema J (Estágio 25) é uma identidade algébrica exata
+> em `n` finito, não apenas assintótica.
+
+**Proposição R (PROVADA, redução elementar).** Como o Corolário do
+Teorema J vale exatamente em todo `n` finito, se
+`P_n^{(K)}(\text{ambos cíclicos})\to\tau_K` então automaticamente
+`P_n^{(K)}(\text{mesmo ciclo})\to\tau_K/2` — contornando inteiramente a
+obstrução de construção contínua-nativa, em vez de resolvê-la.
+
+**`K=0` trivial. `K=1` (Proposição K1, PROVADA, nova).** Forma fechada
+exata `P_n^{(1)}(\text{0,1 ambos cíclicos}) = (3n^2-n+2)/(6n^2)`,
+derivada por uma análise de dois casos (fonte do reroute disjunta
+de/coincidente com um ponto de consulta) que generaliza o método da
+Proposição 4 de `THEOREM.md` — com um falso começo autodetectado e
+disclosurado (a derivação inicial omitiu o caso coincidente, dando o
+valor errado `5/9` em vez do correto `13/27` em `n=3`).
+
+**Combinado: novo teorema contínuo POR TRANSFERÊNCIA em `K=0,1`:**
+`P(\text{mesmo ciclo final} \mid K \text{ marcas}) = 1/(2(K+1))`.
+`K\ge2` honestamente deixado aberto, como um problema mais estreito e
+estruturalmente distinto da obstrução original de construção do zero.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee
+(`spotcheck_k1_second_moment.py`): enumeração exaustiva independente
+por força bruta da Definição 4 em `K=1` para `n=2,\ldots,6`, confirmando
+exatamente a fórmula `(3n^2-n+2)/(6n^2)` em todo `n`.
+
+Referee hostil dedicado (`.../joint_exploration_continuum_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script da frente:
+re-derivou a Proposição R à mão, confirmando-a genuinamente tão simples
+quanto reivindicada, sem caso de borda em `K=0` ou `n` pequeno;
+re-derivou do zero a forma fechada `K=1` (reproduzindo
+independentemente `V_a(n)=(3n+1)/(6n)` e `V_b(n)=(n+1)/(3n)` de forma
+exata), depois cruzou contra enumeração fresca por força bruta
+(`n=2,\ldots,7`) — todos os valores batem exatamente, incluindo
+sub-casos com `R` mantido fixo; confirmou o falso começo (`5/9` em
+`n=3` de fato errado, `13/27` correto); confirmou a taxa
+`n(P-\tfrac12)\to-\tfrac16`; verificou de forma independente todos os 8
+valores da tabela de spot-check `K=2,3` (`n=3,\ldots,7` para `K=2`,
+`n=4,\ldots,6` para `K=3`), incluindo a célula mandatada `n=6,K=2:
+44/135`; estressou o diagnóstico de "por que `K\ge2` não fecha" tentando
+ele mesmo ajustar a forma fechada `K=2` verdadeira (um ajuste de 4
+parâmetros a partir de 4 pontos exatos ainda falha em prever o 5º),
+corroborando o diagnóstico de dificuldade da frente.
+
+> **Um erro genuíno, precisamente localizado.** A narrativa causal do
+> §3.3 alegava que "o Caso (a) sozinho mostraria comportamento
+> `O(1/n^2)`" — **falso**, contradito pela própria fórmula de `V_a(n)`
+> do documento, que já tem desvio `\Theta(1/n)` explícito. Os dois
+> termos `O(1/n)` (Caso (a): coeficiente `-5/6`; Caso (b)/(c):
+> coeficiente `+2/3`) cancelam parcialmente para dar a taxa `-1/6`
+> corretamente relatada — não compõem como "base `O(1/n^2)` mais
+> perturbação `O(1/n)`". Confinado à prosa explicativa; **não afeta**
+> a Proposição K1, a reassemblagem, nem o valor da taxa `-1/6` em si.
+> Corrigido por adendo datado em ATTEMPT.md §3.3.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue**, no
+> tier reivindicado. Nenhum outro erro encontrado; a honestidade do
+> diagnóstico de não-fechamento `K\ge2` (§4/§5) foi verificada como
+> precisa, sem contrabando de informação de destino escondida.
+
+Ver
+`.../conjecture2_direct_attempt/joint_two_point_attempt/joint_exploration_continuum_attempt/ATTEMPT.md`
+e `.../joint_exploration_continuum_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**Um novo teorema contínuo — `P(\text{mesmo ciclo} \mid K \text{
+marcas}) = 1/(2(K+1))` — está catalogado para `K=0,1`, obtido por
+transferência da identidade exata do Corolário do Teorema J
+(Estágio 25), não por construção contínua direta.** A obstrução de
+construção contínua-nativa da Definição 3, diagnosticada nos Estágios
+18/25, **permanece intocada em si mesma** — esta frente a contornou
+para `K=0,1`, não a resolveu. Nenhum resultado anterior é
+enfraquecido; a correção do §3.3 afeta apenas a narrativa causal
+explicativa desta própria frente, não nenhum resultado catalogado
+anteriormente.
+
+**O que permanece aberto, com precisão:** a construção contínua-nativa
+direta da Definição 3 em si (a obstrução original dos Estágios 18/25,
+intocada); o bypass por transferência para `K\ge2` (um problema mais
+estreito, estruturalmente distinto, honestamente não perseguido além
+de `K=1`); `C(\gamma)` para `\gamma\in(0,1)` (Estágio 26); a ponte
+distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágio 27); `p>20` de
+`D^{*(p)}_r(b)` (sob revisão na onda 18); o piso `H2` em `b=1`; a
+constante do platô de DISC-DEC-071. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

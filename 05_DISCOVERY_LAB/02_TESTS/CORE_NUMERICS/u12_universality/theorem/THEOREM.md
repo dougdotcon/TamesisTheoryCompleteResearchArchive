@@ -4864,7 +4864,8 @@ enfraquecido.
 
 **O que permanece aberto, com precisão:** a Lacuna 1 (controle de resto
 de Taylor + MGF estilo Hoeffding sobre a quantidade transcendental
-`\delta(M)`); a Lacuna 3 restrita à contribuição da Lacuna 1; `C(\gamma)`
+`\delta(M)`) [Ver Estágio 33 abaixo — DATE: 2026-08-26]; a Lacuna 3
+restrita à contribuição da Lacuna 1; `C(\gamma)`
 para `\gamma\in(0,1)` em si, portanto ainda inteiramente ABERTO; a
 janela intermediária do Estágio 23; a exploração conjunta (Estágio 18,
 com `K=2` agora fechado — Estágio 31); `p>20` de `D^{*(p)}_r(b)`; a
@@ -5081,9 +5082,123 @@ resultado anterior é enfraquecido; nenhum ingrediente matemático novo.
 **O que permanece aberto, com precisão:** `p>80` em escala completa
 (apenas por não-executado); a ausência de uma única fórmula elementar
 simbólica em `p` livre; `K\ge3` da exploração conjunta (Estágio 31);
-`C(\gamma)` para `\gamma\in(0,1)` (Estágios 26/30); a ponte
+`C(\gamma)` para `\gamma\in(0,1)` (Estágios 26/30
+[Ver Estágio 33 abaixo — DATE: 2026-08-26]); a ponte
 distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a
 construção contínua-nativa direta do Teorema J (Estágio 28); o piso
 `H2` em `b=1`; a constante do platô de DISC-DEC-071. Nenhuma alegação
 de progresso em Millennium Problem; matemática combinatória pura
 interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 33 — 2026-08-26]
+
+**Onda 20, frente (a), `DISC-DEC-088`/`DISC-DEC-089`
+(`GAMMA-GAP1-MGF-ATTEMPT`).** Alvo: a Lacuna 1 do Estágio 26 §5
+(controle de resto de Taylor + MGF estilo Hoeffding sobre a quantidade
+transcendental `\delta(M)`), o único obstáculo nomeado remanescente
+para `C(\gamma)` para `\gamma\in(0,1)` após o fechamento da Lacuna 2
+(Estágio 30).
+
+### O que aconteceu
+
+> **A Lacuna 1 NÃO está fechada.** Isto é um FECHAMENTO PARCIAL
+> honesto, de caráter diferente do da Lacuna 2: onde a Lacuna 2 tinha
+> resposta exata em forma fechada, a Lacuna 1 não tem — o objeto de
+> estudo é genuinamente transcendental. A frente entrega: (i) um novo
+> fato algébrico exato — `x(D):=\delta(D)+\tau(M)/2` é um **polinômio
+> cúbico exato** em `D:=M-\gamma k`, com coeficientes `c_0,\ldots,c_3`
+> em forma fechada (não isolado anteriormente nesta linhagem); (ii) um
+> novo **Lema Bulk/Tail** rigoroso, reduzindo a Lacuna 1 a limitar duas
+> quantidades escalares determinísticas `g(\Theta_K),g(K)` conforme
+> `n\to\infty`, via monotonicidade + a desigualdade de Hoeffding (já
+> citação clássica desta linhagem); (iii) assintótica de ordem
+> dominante (não uma desigualdade totalmente explícita-em-constante)
+> mostrando que o limitante resultante de fato se anula; (iv)
+> confirmação numérica direta, via soma exata da pmf Binomial
+> (`mpmath` dps=50, sem atalhos), de que a quantidade-alvo literal da
+> Lacuna 1 encolhe monotonicamente em `n`, em 6 valores de `\gamma`
+> amostrados.
+
+**O que isto NÃO fecha.** `C(\gamma)` para `\gamma\in(0,1)` permanece
+**ABERTO**. Falta converter a assintótica de ordem dominante em uma
+desigualdade `n\ge n_0(\gamma)` totalmente explícita e uniforme em
+`\gamma\in(0,1)` como contínuo (verificado apenas em 6 pontos amostrais
+mais os dois limites de contorno), e fixar a constante literal `\kappa_0`
+da truncagem `K\sim\sqrt{n\ln n}` citada da onda 17 (uma substituição de
+constante, não uma lacuna estrutural). A Lacuna 3 permanece com sua
+contribuição da Lacuna 1 intocada, ainda que a forma do Lema Bulk/Tail
+já seja uniforme em `k\le K` por construção — tornando visível, mas não
+executando, a forma de um futuro fechamento da Lacuna 3.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: re-derivação
+simbólica independente (sympy, substituição de `\tau(m)` cúbica exata
+com `M=\gamma k+D` e extração de coeficientes via `Poly`) de todos os
+quatro coeficientes `c_0,\ldots,c_3` do polinômio cúbico `x(D)`,
+confirmando exatidão contra as fórmulas declaradas pela frente, sem
+nunca ler nenhum script da frente.
+
+Referee hostil dedicado (`.../gamma_gap1_mgf_attempt/adversarial/`
+`REFEREE_REPORT.md`), sem ler nenhum script de nenhuma frente da
+linhagem: re-derivou a identidade cúbica de `x(D)` por duas rotas
+simbólicas independentes (substituição direta + `Poly`, e montagem à
+mão via `\tau,\tau',\tau''` em `m=\gamma k`), confirmando exatidão da
+forma "derivative-based"; re-verificou a lógica de prova do Lema
+Bulk/Tail passo a passo e a checou numericamente (pmf exata, `mpmath`
+dps=50) em pontos amostrais e numa varredura completa `k=1,\ldots,K`;
+re-derivou a álgebra da assintótica de ordem dominante do §3.3 de
+forma independente, confirmando ajuste numérico do expoente `\lambda`
+a `4,3\%$–$5,3\%` do previsto (a frente reporta `\sim6\%`); reconstruiu
+a tabela de `W_{\mathrm{bound}}(n,\gamma)$` da §4 do zero (pmf exata,
+`mpmath` dps=50), batendo os valores publicados a `<1\%` em todos os 18
+pontos testados, com `R_k^{\mathrm{exact}}\le R_k^{\mathrm{Gap1}}` sem
+violações.
+
+> **Três achados nomeados, nenhum alterando o veredito de não-fechamento.**
+> (1, MODERADO) O Lema Bulk/Tail, tal como usado em §3.3, depende
+> implicitamente de `|c_i(k)|` ser não-decrescente em `k` — fato não
+> declarado e não literalmente verdadeiro termo-a-termo (o referee
+> encontrou `c_1(k)` mudando de sinal para `\gamma` próximo de `1`); a
+> checagem mais profunda do referee (os dois fatos que a prova
+> realmente precisa, comparando contra os coeficientes de `K`) não
+> encontrou nenhuma falha em nenhum caso testado. (2, BAIXO) A "forma
+> algébrica fechada" alternativa de `c_0` em §2 carrega um fator
+> espúrio extra de `\gamma` em cinco dos seus seis termos — a forma
+> "derivative-based", efetivamente usada em toda a numérica da frente,
+> permanece exata. (3, BAIXO) A §1 alega que uma checagem de
+> equivalência "was checked in Section 2", quando na verdade a §2 não a
+> aborda — a própria §5.4 da frente já disclosurava honestamente que
+> essa checagem não foi feita, contradizendo a §1. Todos os três
+> corrigidos por adendos datados em `ATTEMPT.md`.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.**
+
+Ver
+`.../gamma_second_order_gap_closure_attempt/gamma_gap1_mgf_attempt/ATTEMPT.md`
+e `.../gamma_gap1_mgf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**A Lacuna 1 do Estágio 26 §5 permanece ABERTA**, mas com uma
+estratégia de prova concreta, estruturalmente sólida e
+numericamente validada — não mais "nenhuma tentativa, dificuldade
+transcendental" (avaliação do próprio Estágio 30), mas "estratégia
+concreta, rigor parcial forte, forte suporte numérico, não totalmente
+montada". `C(\gamma)` para `\gamma\in(0,1)` permanece inteiramente
+ABERTO. Nenhum resultado anterior é enfraquecido.
+
+**O que permanece aberto, com precisão:** a Lacuna 1 em si (converter
+a assintótica de ordem dominante em desigualdade explícita uniforme em
+`\gamma\in(0,1)`, fixar `\kappa_0`); `C(\gamma)` para `\gamma\in(0,1)`;
+a Lacuna 3 restrita à contribuição da Lacuna 1; a janela intermediária
+do Estágio 23; a exploração conjunta para `K\ge3` (Estágio 31); `p>80`
+de `D^{*(p)}_r(b)` (Estágio 32); a ponte distribucional
+`M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a construção
+contínua-nativa direta do Teorema J (Estágio 28); o piso `H2` em `b=1`;
+a constante do platô de DISC-DEC-071; `H1`/`H2` da lei assintótica do
+platô M-CLUST(b) (`PROOF_DEPENDENCY_MAP.md`, nó `PLATRESUM`). Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

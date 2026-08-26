@@ -1,0 +1,44 @@
+==========================================================================================
+Rebuilding ATTEMPT.md Section 4's table from scratch, mpmath dps=50, exact pmf
+==========================================================================================
+
+n=500: K = round(1.5*sqrt(n*ln n)) = 84
+  gamma= 0.10: W_bound(computed)=2.766268e-01  W_bound(reported)=2.766000e-01  ratio=1.0001  W_exact=3.647352e-02  R_exact<=R_gap1 violations=0/84  [0.2s]
+  gamma= 0.30: W_bound(computed)=1.170615e-01  W_bound(reported)=1.171000e-01  ratio=0.9997  W_exact=1.520108e-02  R_exact<=R_gap1 violations=0/84  [0.2s]
+  gamma= 0.50: W_bound(computed)=2.084779e-02  W_bound(reported)=2.085000e-02  ratio=0.9999  W_exact=5.008691e-03  R_exact<=R_gap1 violations=0/84  [0.2s]
+  gamma= 0.70: W_bound(computed)=2.837119e-03  W_bound(reported)=2.837000e-03  ratio=1.0000  W_exact=1.425894e-03  R_exact<=R_gap1 violations=0/84  [0.2s]
+  gamma= 0.90: W_bound(computed)=6.255428e-04  W_bound(reported)=6.255000e-04  ratio=1.0001  W_exact=4.839458e-04  R_exact<=R_gap1 violations=0/84  [0.2s]
+  gamma= 0.99: W_bound(computed)=5.930503e-04  W_bound(reported)=5.931000e-04  ratio=0.9999  W_exact=4.646509e-04  R_exact<=R_gap1 violations=0/84  [0.2s]
+
+n=2000: K = round(1.5*sqrt(n*ln n)) = 185
+  gamma= 0.10: W_bound(computed)=2.145559e-01  W_bound(reported)=2.146000e-01  ratio=0.9998  W_exact=2.698047e-02  R_exact<=R_gap1 violations=0/185  [0.8s]
+  gamma= 0.30: W_bound(computed)=7.207400e-02  W_bound(reported)=7.210000e-02  ratio=0.9996  W_exact=9.757451e-03  R_exact<=R_gap1 violations=0/185  [0.8s]
+  gamma= 0.50: W_bound(computed)=1.188771e-02  W_bound(reported)=1.189000e-02  ratio=0.9998  W_exact=2.743576e-03  R_exact<=R_gap1 violations=0/185  [0.7s]
+  gamma= 0.70: W_bound(computed)=1.372152e-03  W_bound(reported)=1.372000e-03  ratio=1.0001  W_exact=6.609469e-04  R_exact<=R_gap1 violations=0/185  [0.7s]
+  gamma= 0.90: W_bound(computed)=1.762870e-04  W_bound(reported)=1.763000e-04  ratio=0.9999  W_exact=1.510199e-04  R_exact<=R_gap1 violations=0/185  [0.7s]
+  gamma= 0.99: W_bound(computed)=1.520082e-04  W_bound(reported)=1.520000e-04  ratio=1.0001  W_exact=1.323343e-04  R_exact<=R_gap1 violations=0/185  [0.7s]
+
+==========================================================================================
+Monotone-decrease-in-n check (n=500 -> n=2000), computed values
+==========================================================================================
+  gamma= 0.10: W_bound(500)=2.766268e-01 -> W_bound(2000)=2.145559e-01  decreasing: True
+  gamma= 0.30: W_bound(500)=1.170615e-01 -> W_bound(2000)=7.207400e-02  decreasing: True
+  gamma= 0.50: W_bound(500)=2.084779e-02 -> W_bound(2000)=1.188771e-02  decreasing: True
+  gamma= 0.70: W_bound(500)=2.837119e-03 -> W_bound(2000)=1.372152e-03  decreasing: True
+  gamma= 0.90: W_bound(500)=6.255428e-04 -> W_bound(2000)=1.762870e-04  decreasing: True
+  gamma= 0.99: W_bound(500)=5.930503e-04 -> W_bound(2000)=1.520082e-04  decreasing: True
+
+Interpretation: exact numeric agreement with ATTEMPT.md's printed table to
+4 significant figures is NOT expected here, because the prose does not
+pin down whether K is computed via round(), floor(), or int() of
+1.5*sqrt(n*ln n) (a difference of +/-1 in K shifts the sum by one term's
+weighted contribution) -- this is a minor documentation gap (K's rounding
+convention is left unstated), not a mathematical error, and this script's
+own choice (round()) is disclosed above. What matters, and is checked
+here directly against ground truth (not against the target's own
+numbers): (i) order-of-magnitude / ratio-to-reported match (ratio should
+be close to 1, not off by orders of magnitude); (ii) the qualitative
+claims -- R_k^exact <= R_k^Gap1 pointwise (zero violations expected, per
+the elementary Lagrange-remainder inequality), and W_bound decreasing
+monotonically from n=500 to n=2000 at every tested gamma.
+

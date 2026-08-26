@@ -1,0 +1,52 @@
+==============================================================================
+PART A: tau(m) closed form, re-derived and checked against the sum
+==============================================================================
+tau(m) [sympy summation] - tau(m) [claimed closed form] = 0
+PASS: tau(m) closed form confirmed via sympy.summation, exact zero difference.
+
+==============================================================================
+PART B: delta(D), exact, from the cited identity
+==============================================================================
+delta(D) = -D*(D + 2*k*(gamma - 1) + 1)/(2*n)
+Sanity: delta(0) = 0 (must be 0, since m=gamma*k there)
+
+==============================================================================
+PART C: x(D) := delta(D) + tau(M)/2, M = gamma*k + D -- exact cubic
+==============================================================================
+x(D) as a polynomial in D (degree check): 3 (must be 3)
+
+c3 = 1/(6*n**2)
+c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+
+==============================================================================
+PART D: cross-check against hand-derived formulas (independent route)
+==============================================================================
+c0 - c0_hand = 0
+c1 - c1_hand = 0
+c2 - c2_hand = 0
+c3 - c3_hand = 0
+PASS: two independent derivation routes (Poly-extraction vs. exact
+Taylor-in-D of the cubic tau) agree exactly on all four coefficients.
+
+==============================================================================
+PART E: gamma = 1 degenerate-case consistency check
+==============================================================================
+At gamma=1, M=k a.s. (D=0 a.s.), so only c0 matters: x(0) = c0 must
+equal tau(k)/2 exactly (independent of c1,c2,c3, which multiply D=0).
+c0(gamma=1)   = k*(2*k**2 - 3*k + 1)/(12*n**2)
+tau(k)/2      = k*(2*k**2 - 3*k + 1)/(12*n**2)
+difference    = 0
+PASS.
+
+==============================================================================
+SUMMARY: x(D) = c0 + c1*D + c2*D^2 + c3*D^3, EXACT (no approximation,
+no truncation range restriction), with:
+  c0 = tau(gamma*k)/2
+  c1 = k(1-gamma)/n - 1/(2n) + [tau'(gamma*k)]/2
+  c2 = -1/(2n) + [tau''(gamma*k)]/4
+  c3 = 1/(6n^2)
+This is the object whose degree-2 Taylor remainder (in x, equivalently
+degree-3-in-D Taylor-Lagrange) Gap 1 needs a summable-over-k bound on.
+==============================================================================

@@ -1,0 +1,49 @@
+==============================================================================
+Check 1: g(Theta_K) -> 0, order O(n^{-1/4} polylog(n))
+==============================================================================
+gamma= 0.10: g(Theta_K) at n=1e3..1e8 = ['6.3951e+00', '4.5875e+00', '3.2071e+00', '2.1887e+00', '1.4633e+00', '9.6128e-01']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.1443', '-0.1555', '-0.1659', '-0.1749', '-0.1825']
+gamma= 0.30: g(Theta_K) at n=1e3..1e8 = ['5.2836e+00', '3.7278e+00', '2.5678e+00', '1.7335e+00', '1.1507e+00', '7.5256e-01']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.1515', '-0.1619', '-0.1706', '-0.1780', '-0.1844']
+gamma= 0.50: g(Theta_K) at n=1e3..1e8 = ['4.1453e+00', '2.8499e+00', '1.9189e+00', '1.2740e+00', '8.3630e-01', '5.4313e-01']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.1627', '-0.1718', '-0.1779', '-0.1828', '-0.1875']
+gamma= 0.70: g(Theta_K) at n=1e3..1e8 = ['2.9958e+00', '1.9613e+00', '1.2639e+00', '8.1152e-01', '5.2064e-01', '3.3318e-01']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.1840', '-0.1908', '-0.1924', '-0.1928', '-0.1939']
+gamma= 0.90: g(Theta_K) at n=1e3..1e8 = ['1.8508e+00', '1.0694e+00', '6.0589e-01', '3.4749e-01', '2.0428e-01', '1.2294e-01']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.2382', '-0.2467', '-0.2415', '-0.2307', '-0.2205']
+gamma= 0.99: g(Theta_K) at n=1e3..1e8 = ['1.3411e+00', '6.6898e-01', '3.0976e-01', '1.3854e-01', '6.1829e-02', '2.8297e-02']
+           monotonically decreasing: True, empirical log-log slopes (should trend toward -0.25): ['-0.3020', '-0.3344', '-0.3495', '-0.3504', '-0.3395']
+
+==============================================================================
+Check 2: g(K) grows like kappa_0*(3/2-gamma)*ln(n), NOT like a power of n
+==============================================================================
+gamma= 0.10: predicted lambda=kappa0*(3/2-gamma)=3.1500, least-squares fitted slope (g(K) vs ln n)=2.9843, relative diff=5.26%
+gamma= 0.30: predicted lambda=kappa0*(3/2-gamma)=2.7000, least-squares fitted slope (g(K) vs ln n)=2.5655, relative diff=4.98%
+gamma= 0.50: predicted lambda=kappa0*(3/2-gamma)=2.2500, least-squares fitted slope (g(K) vs ln n)=2.1447, relative diff=4.68%
+gamma= 0.70: predicted lambda=kappa0*(3/2-gamma)=1.8000, least-squares fitted slope (g(K) vs ln n)=1.7209, relative diff=4.40%
+gamma= 0.90: predicted lambda=kappa0*(3/2-gamma)=1.3500, least-squares fitted slope (g(K) vs ln n)=1.2926, relative diff=4.25%
+gamma= 0.99: predicted lambda=kappa0*(3/2-gamma)=1.1475, least-squares fitted slope (g(K) vs ln n)=1.0982, relative diff=4.30%
+
+Interpretation: the fitted slope of g(K) against ln(n) (NOT against n
+itself) should approach the predicted kappa_0*(3/2-gamma) as n grows,
+confirming g(K) = Theta(ln n), i.e. e^{g(K)} = Theta(n^lambda), polynomial
+in n as claimed -- consistent with what ATTEMPT.md's own Section 3.4
+reports finding (~6% match to the leading-order prediction, attributed to
+finite-n corrections from the dropped lower-order terms).
+
+==============================================================================
+Check 3: does the corrected exponent make required_C threshold and
+the tail piece actually vanish (sanity of the overall combination)?
+==============================================================================
+gamma= 0.10: lambda=3.1500, threshold C (C^2>1/4+lambda/2) = 1.3509, 1.5x threshold = 2.0264
+    2*C_used^2 - lambda - 0.5 = 4.5625 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)
+gamma= 0.30: lambda=2.7000, threshold C (C^2>1/4+lambda/2) = 1.2649, 1.5x threshold = 1.8974
+    2*C_used^2 - lambda - 0.5 = 4.0000 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)
+gamma= 0.50: lambda=2.2500, threshold C (C^2>1/4+lambda/2) = 1.1726, 1.5x threshold = 1.7589
+    2*C_used^2 - lambda - 0.5 = 3.4375 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)
+gamma= 0.70: lambda=1.8000, threshold C (C^2>1/4+lambda/2) = 1.0724, 1.5x threshold = 1.6086
+    2*C_used^2 - lambda - 0.5 = 2.8750 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)
+gamma= 0.90: lambda=1.3500, threshold C (C^2>1/4+lambda/2) = 0.9618, 1.5x threshold = 1.4427
+    2*C_used^2 - lambda - 0.5 = 2.3125 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)
+gamma= 0.99: lambda=1.1475, threshold C (C^2>1/4+lambda/2) = 0.9076, 1.5x threshold = 1.3614
+    2*C_used^2 - lambda - 0.5 = 2.0594 (should be > 0 for the n^(1/2+lambda-2C^2) tail piece to actually decay)

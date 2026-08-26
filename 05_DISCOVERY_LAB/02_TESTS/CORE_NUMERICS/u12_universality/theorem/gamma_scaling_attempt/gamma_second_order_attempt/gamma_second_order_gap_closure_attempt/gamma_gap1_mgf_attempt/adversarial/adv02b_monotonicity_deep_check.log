@@ -1,0 +1,29 @@
+n=2000, gamma=0.9, K=60, C=1.5:
+  g_K(Theta_K) [at k=K] = 3.555868e-01, g_K(K) [at k=K] = 1.085471e+00
+  bulk fact g_k(Theta_k) <= g_K(Theta_K): 0 failures out of 60 tested k values
+  tail fact g_k(K) <= g_K(K): 0 failures out of 60 tested k values
+
+n=8000, gamma=0.99, K=120, C=1.5:
+  g_K(Theta_K) [at k=K] = 1.607378e-01, g_K(K) [at k=K] = 9.195230e-01
+  bulk fact g_k(Theta_k) <= g_K(Theta_K): 0 failures out of 120 tested k values
+  tail fact g_k(K) <= g_K(K): 0 failures out of 120 tested k values
+
+n=32000, gamma=0.99, K=240, C=1.5:
+  g_K(Theta_K) [at k=K] = 9.427974e-02, g_K(K) [at k=K] = 9.187898e-01
+  bulk fact g_k(Theta_k) <= g_K(Theta_K): 0 failures out of 240 tested k values
+  tail fact g_k(K) <= g_K(K): 0 failures out of 240 tested k values
+
+n=500, gamma=0.99, K=30, C=1.5:
+  g_K(Theta_K) [at k=K] = 4.503503e-01, g_K(K) [at k=K] = 9.467526e-01
+  bulk fact g_k(Theta_k) <= g_K(Theta_K): 0 failures out of 30 tested k values
+  tail fact g_k(K) <= g_K(K): 0 failures out of 30 tested k values
+
+If zero failures everywhere above: despite the coefficient
+non-monotonicity found in adv02 (c1(k) dipping through zero near
+gamma~1), the two facts the Bulk/Tail Lemma's proof actually needs
+still hold empirically across the full tested ranges -- the
+coefficient dip is too small in magnitude to ever flip the final
+inequality (other coefficients, esp. c0 and c2, dominate). This
+would mean the exposition gap (unstated monotonicity-in-k) is a
+genuine gap in the WRITTEN PROOF (an unjustified step), but the
+underlying claim itself is not found to be false in the tested range.

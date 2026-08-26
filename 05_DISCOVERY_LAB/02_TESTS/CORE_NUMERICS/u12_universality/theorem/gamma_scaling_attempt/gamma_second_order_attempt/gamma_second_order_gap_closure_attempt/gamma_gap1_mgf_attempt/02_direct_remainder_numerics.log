@@ -1,0 +1,82 @@
+============================================================================================
+Part 1: pointwise sanity -- R_exact(k) <= R_bound(k) always (Lagrange remainder,
+elementary calculus; a bug check, not a claim requiring its own proof).
+============================================================================================
+k=    1 n=    50 gamma=0.5: Z=1.0 R_exact=2.6058e-9 R_bound=2.61069e-9 R_exact<=R_bound: True
+k=    5 n=   100 gamma=0.5: Z=1.0 R_exact=4.33133e-6 R_bound=5.19803e-6 R_exact<=R_bound: True
+k=   50 n=  1000 gamma=0.5: Z=1.0 R_exact=1.20981e-5 R_bound=0.000219277 R_exact<=R_bound: True
+k=  200 n= 10000 gamma=0.3: Z=1.0 R_exact=8.98806e-6 R_bound=0.00023841 R_exact<=R_bound: True
+k=   10 n=   500 gamma=0.9: Z=1.0 R_exact=6.97907e-9 R_bound=7.09949e-9 R_exact<=R_bound: True
+k=    3 n=   200 gamma=0.99: Z=1.0 R_exact=6.85329e-12 R_bound=6.8835e-12 R_exact<=R_bound: True
+ALL POINTWISE CHECKS PASS: True
+
+============================================================================================
+Part 2: W_exact(n,gamma) and W_bound(n,gamma) := Sigma_k e^{-s(k)} R_*(k),
+k<=K~1.5*sqrt(n ln n), as n grows -- Gap 1 needs W_bound -> 0.
+============================================================================================
+gamma=0.1 n=   500 K=   84 W_exact=0.036473517 W_bound=0.27662685 max(R_exact/R_bound)=0.9999 min_Z=1.0 [0.5s]
+gamma=0.1 n=  2000 K=  185 W_exact=0.026980469 W_bound=0.21455594 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.7s]
+gamma=0.1 n=  8000 K=  403 W_exact=0.018777477 W_bound=0.16698662 max(R_exact/R_bound)=1.0 min_Z=1.0 [6.3s]
+gamma=0.1 n= 32000 K=  865 W_exact=0.012122867 W_bound=0.12710183 max(R_exact/R_bound)=1.0 min_Z=1.0 [23.1s]
+gamma=0.3 n=   500 K=   84 W_exact=0.015201075 W_bound=0.11706151 max(R_exact/R_bound)=0.9998 min_Z=1.0 [0.4s]
+gamma=0.3 n=  2000 K=  185 W_exact=0.0097574513 W_bound=0.072074001 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.8s]
+gamma=0.3 n=  8000 K=  403 W_exact=0.0057069801 W_bound=0.045274493 max(R_exact/R_bound)=1.0 min_Z=1.0 [8.0s]
+gamma=0.3 n= 32000 K=  865 W_exact=0.0031210506 W_bound=0.029055137 max(R_exact/R_bound)=1.0 min_Z=1.0 [33.0s]
+gamma=0.5 n=   500 K=   84 W_exact=0.0050086906 W_bound=0.020847795 max(R_exact/R_bound)=0.9998 min_Z=1.0 [0.4s]
+gamma=0.5 n=  2000 K=  185 W_exact=0.0027435756 W_bound=0.011887712 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.8s]
+gamma=0.5 n=  8000 K=  403 W_exact=0.0014257649 W_bound=0.0071675127 max(R_exact/R_bound)=1.0 min_Z=1.0 [9.3s]
+gamma=0.5 n= 32000 K=  865 W_exact=0.00072176695 W_bound=0.0045476 max(R_exact/R_bound)=1.0 min_Z=1.0 [36.0s]
+gamma=0.7 n=   500 K=   84 W_exact=0.0014258943 W_bound=0.0028371195 max(R_exact/R_bound)=0.9998 min_Z=1.0 [0.4s]
+gamma=0.7 n=  2000 K=  185 W_exact=0.00066094686 W_bound=0.0013721517 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.8s]
+gamma=0.7 n=  8000 K=  403 W_exact=0.00030802587 W_bound=0.00074598573 max(R_exact/R_bound)=1.0 min_Z=1.0 [8.0s]
+gamma=0.7 n= 32000 K=  865 W_exact=0.00014657531 W_bound=0.00044924749 max(R_exact/R_bound)=1.0 min_Z=1.0 [32.9s]
+gamma=0.9 n=   500 K=   84 W_exact=0.00048394577 W_bound=0.0006255428 max(R_exact/R_bound)=0.9999 min_Z=1.0 [0.4s]
+gamma=0.9 n=  2000 K=  185 W_exact=0.00015101995 W_bound=0.00017628704 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.6s]
+gamma=0.9 n=  8000 K=  403 W_exact=4.6583904e-5 W_bound=5.1524506e-5 max(R_exact/R_bound)=1.0 min_Z=1.0 [6.1s]
+gamma=0.9 n= 32000 K=  865 W_exact=1.5193524e-5 W_bound=1.6686579e-5 max(R_exact/R_bound)=1.0 min_Z=1.0 [21.9s]
+gamma=0.99 n=   500 K=   84 W_exact=0.00046465094 W_bound=0.00059305028 max(R_exact/R_bound)=1.0 min_Z=1.0 [0.4s]
+gamma=0.99 n=  2000 K=  185 W_exact=0.00013233433 W_bound=0.00015200821 max(R_exact/R_bound)=1.0 min_Z=1.0 [1.1s]
+gamma=0.99 n=  8000 K=  403 W_exact=3.5158751e-5 W_bound=3.7880214e-5 max(R_exact/R_bound)=1.0 min_Z=1.0 [3.2s]
+gamma=0.99 n= 32000 K=  865 W_exact=9.0135184e-6 W_bound=9.3679808e-6 max(R_exact/R_bound)=1.0 min_Z=1.0 [9.7s]
+
+Total Part 2 wall time: 209.7s
+
+============================================================================================
+Part 3: empirical decay-rate fit of W_bound(n,gamma) under n -> 4n
+(log-ratio / log(4); e.g. -0.25 matches this front's analytic
+n^{-1/4}*polylog(n) prediction; -0.5 would match the same rate as
+Lemma D0's / Lemma G2's own O(n^{-1/2}) error terms elsewhere in
+this lineage -- either would suffice for Sigma_k e^{-s(k)}R_bound(k)=o(1))
+============================================================================================
+
+gamma=0.1:
+  n 500->2000: W_bound ratio=0.77562 (fit rate -0.1833) | W_exact ratio=0.73973 (fit rate -0.2175)
+  n 2000->8000: W_bound ratio=0.77829 (fit rate -0.1808) | W_exact ratio=0.69597 (fit rate -0.2615)
+  n 8000->32000: W_bound ratio=0.76115 (fit rate -0.1969) | W_exact ratio=0.64561 (fit rate -0.3156)
+
+gamma=0.3:
+  n 500->2000: W_bound ratio=0.61569 (fit rate -0.3499) | W_exact ratio=0.64189 (fit rate -0.3198)
+  n 2000->8000: W_bound ratio=0.62817 (fit rate -0.3354) | W_exact ratio=0.58488 (fit rate -0.3869)
+  n 8000->32000: W_bound ratio=0.64176 (fit rate -0.3200) | W_exact ratio=0.54688 (fit rate -0.4353)
+
+gamma=0.5:
+  n 500->2000: W_bound ratio=0.57021 (fit rate -0.4052) | W_exact ratio=0.54776 (fit rate -0.4342)
+  n 2000->8000: W_bound ratio=0.60293 (fit rate -0.3650) | W_exact ratio=0.51967 (fit rate -0.4722)
+  n 8000->32000: W_bound ratio=0.63447 (fit rate -0.3282) | W_exact ratio=0.50623 (fit rate -0.4911)
+
+gamma=0.7:
+  n 500->2000: W_bound ratio=0.48364 (fit rate -0.5240) | W_exact ratio=0.46353 (fit rate -0.5546)
+  n 2000->8000: W_bound ratio=0.54366 (fit rate -0.4396) | W_exact ratio=0.46604 (fit rate -0.5507)
+  n 8000->32000: W_bound ratio=0.60222 (fit rate -0.3658) | W_exact ratio=0.47585 (fit rate -0.5357)
+
+gamma=0.9:
+  n 500->2000: W_bound ratio=0.28181 (fit rate -0.9136) | W_exact ratio=0.31206 (fit rate -0.8401)
+  n 2000->8000: W_bound ratio=0.29228 (fit rate -0.8873) | W_exact ratio=0.30846 (fit rate -0.8484)
+  n 8000->32000: W_bound ratio=0.32386 (fit rate -0.8133) | W_exact ratio=0.32615 (fit rate -0.8082)
+
+gamma=0.99:
+  n 500->2000: W_bound ratio=0.25632 (fit rate -0.9820) | W_exact ratio=0.2848 (fit rate -0.9060)
+  n 2000->8000: W_bound ratio=0.2492 (fit rate -1.0023) | W_exact ratio=0.26568 (fit rate -0.9561)
+  n 8000->32000: W_bound ratio=0.24731 (fit rate -1.0078) | W_exact ratio=0.25637 (fit rate -0.9819)
+
+Done.

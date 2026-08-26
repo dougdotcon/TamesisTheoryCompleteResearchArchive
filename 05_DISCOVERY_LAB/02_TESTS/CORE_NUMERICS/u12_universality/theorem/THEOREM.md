@@ -4754,7 +4754,10 @@ maquinaria já provada.
 
 **O que permanece aberto, com precisão:** `p>40` em escala completa
 (apenas por não-executado, a incursão `p=41,\ldots,60` é exploratória
-em escala reduzida, não uma verificação completa); a ausência de uma
+em escala reduzida, não uma verificação completa) [Ver Estágio 32
+abaixo — 2026-08-26: `p=41,\ldots,80` FECHADO em escala completa
+`r\le200,b\le30`; `p>80` continua aberto apenas por não-executado]; a
+ausência de uma
 única fórmula elementar simbólica em `p` livre (`Q_p(u)` tem grau
 genuíno `2p`); a soma em faixa `\mathrm{Strip}_p` continua sendo uma
 soma explícita de `b` termos, por desenho; `C(\gamma)` para
@@ -4990,7 +4993,97 @@ distribucional (Estágio 27) e do bypass por transferência (Estágio
 o CDF completo em `K=2` (não apenas o segundo momento); o problema
 geral (iii) da exploração conjunta (Estágio 18); a construção
 contínua-nativa direta da Definição 3 em si (intocada); `C(\gamma)`
-para `\gamma\in(0,1)` (Estágios 26/30); `p>20` de `D^{*(p)}_r(b)`; o
+para `\gamma\in(0,1)` (Estágios 26/30); `p>80` de `D^{*(p)}_r(b)`
+(Estágio 32); o
 piso `H2` em `b=1`; a constante do platô de DISC-DEC-071. Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 32 — 2026-08-26]
+
+**Onda 19, frente (c), `DISC-DEC-083`/`DISC-DEC-087`
+(`GENERAL-P-DSTAR-EXTENSION3-ATTEMPT`).** Alvo: estender a montagem em
+forma fechada geral-`p` para as constantes de erro exatas
+`D^{*(p)}_r(b)` de `p=1,\ldots,40` (já provada e executada até a onda
+18, `DISC-DEC-082`) para `p=41,\ldots,80` — em ESCALA COMPLETA
+(`r\le200,b\le30`, mesma escala-teto usada desde a onda 16), tanto
+confirmando em escala completa a incursão exploratória em escala
+reduzida da onda 18 (`p=41,\ldots,60`) quanto estendendo além dela
+(`p=61,\ldots,80`).
+
+### O que aconteceu
+
+> **Mandato completo alcançado em escala completa.** Todos os 40
+> novos valores de `p` fechados em `r\le200,b\le30`, sem nenhum
+> ingrediente matemático novo — toda a montagem é entrada já provada
+> das ondas 15/16/18.
+
+**Verificação exaustiva da própria frente:** `261\,274` checagens
+exatas `Fraction`, `0` divergências, incluindo `249\,240` checagens
+exaustivas em escala completa (`p=41,\ldots,80`, `r=0,\ldots,200`,
+`b=0,\ldots,30`), mais autotestes de ingredientes, checagens de formas
+impressas, e um teste de estresse aleatorizado (`400` checagens, seed
+`20260884000`, `r\le400,b\le60`). `Q_p(-1)=0` reconfirmado para todo
+`p=41,\ldots,80`. Uma reparametrização bivariada `(x,y)` da recursão
+`A_k` citada foi necessária por engenharia de escala (o rebuild
+ingênuo por `(p,b)` da máquina `H_k` era computacionalmente inviável
+nesta escala) — verificada contra três rotas alternativas
+independentes.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: computação
+independente da soma direta de Corolário A3 (números de Stirling,
+implementação própria) em vários `(p,r,b)` com `p` até `80`,
+`r=200`, `b=30` — confirmando que a quantidade-alvo é computável na
+escala reivindicada, sem nunca ler nenhum script da frente.
+
+Referee hostil dedicado (`.../general_p_dstar_extension3_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: reconstruiu cada ingrediente por rota
+deliberadamente diferente (Stirling de segunda espécie + identidade do
+taco de hóquei para `Q_p`, em vez de Bernoulli/Faulhaber; soma direta
+fechada para `H_{2k-1}` em vez da recursão bivariada da frente).
+**Total: `163\,008` checagens exatas `Fraction`, `0` divergências**,
+incluindo uma varredura de fronteira batendo exatamente a escala
+completa reivindicada em três `p` representativos (`41,60,80`,
+`r\le200,b\le30`, incluindo a célula mais extrema `p=80,r=200,b=30`).
+Verificou especificamente, por implementação independente da recursão
+`A_k` original não-reparametrizada, que a reparametrização bivariada
+da frente é matematicamente inerte (mera relabeling), não um atalho
+não verificado. Confirmou a alegação de "nenhum ingrediente novo".
+
+> **Um achado nomeado, menor, apenas de narrativa (não matemático).**
+> A própria frente disclosurou (§5.1) um erro de raciocínio em seu
+> próprio autoteste (assumiu Teorema 3 = `D^{*(1)}_r(0)`, quando na
+> verdade é `D^{*(2)}_r(0)`) — o referee confirmou a substância
+> matematicamente relevante desta disclosure (`40/40` correspondências
+> contra `D^{*(2)}_r(0)`), mas encontrou que o **ponto de início da
+> divergência** declarado (`r=12`) está incorreto — a divergência real
+> começa em `r=1`, não `r=12` (a contagem total de `39` falhas está
+> correta). Sem efeito em nenhuma implementação ou checagem numérica.
+> Corrigido por adendo datado em `ATTEMPT.md` §5.1.
+
+> **Veredito: SOUND — ACCEPT for catalogue.**
+
+Ver
+`theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/general_p_dstar_extension2_attempt/general_p_dstar_extension3_attempt/ATTEMPT.md`
+e `.../general_p_dstar_extension3_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**`D^{*(p)}_r(b)` está agora FECHADO para `p=1,\ldots,80`** (ondas
+15/16/18/19 combinadas), em escala completa `r\le200,b\le30`. Nenhum
+resultado anterior é enfraquecido; nenhum ingrediente matemático novo.
+
+**O que permanece aberto, com precisão:** `p>80` em escala completa
+(apenas por não-executado); a ausência de uma única fórmula elementar
+simbólica em `p` livre; `K\ge3` da exploração conjunta (Estágio 31);
+`C(\gamma)` para `\gamma\in(0,1)` (Estágios 26/30); a ponte
+distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a
+construção contínua-nativa direta do Teorema J (Estágio 28); o piso
+`H2` em `b=1`; a constante do platô de DISC-DEC-071. Nenhuma alegação
+de progresso em Millennium Problem; matemática combinatória pura
+interna a este arquivo.

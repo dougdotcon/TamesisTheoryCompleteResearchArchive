@@ -5803,3 +5803,66 @@ decisions:
     untouched_safeguards:
       - "K>=3 permanece NAO fechado em ambos os Estagios 27 e 28, agora com diagnostico estrutural concreto"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-087
+    date: 2026-08-26
+    decision: >
+      Integrar o resultado da onda 19, frente (c)
+      (`GENERAL-P-DSTAR-EXTENSION3-ATTEMPT`, DISC-DEC-083), apos
+      verificacao adversarial hostil dedicada. FECHANDO A ONDA 19
+      (4/4 frentes). RESULTADO: mandato completo alcancado em escala
+      completa -- D^{*(p)}_r(b) fechado para p=41,...,80 em
+      r<=200,b<=30 (mesma escala-teto desde a onda 16), tanto
+      confirmando em escala completa a incursao exploratoria em escala
+      reduzida da onda 18 (p=41..60) quanto estendendo alem dela
+      (p=61..80). Nenhum ingrediente matematico novo. Verificacao
+      exaustiva da propria frente: 261274 checagens exatas, 0
+      divergencias, incluindo 249240 checagens exaustivas em escala
+      completa. Uma reparametrizacao bivariada (x,y) da recursao A_k
+      citada foi necessaria por engenharia de escala (o rebuild
+      ingenuo por (p,b) da maquina H_k era computacionalmente
+      inviavel). Referee hostil dedicado, sem ler nenhum script da
+      linhagem: reconstruiu cada ingrediente por rota deliberadamente
+      diferente (Stirling de segunda especie para Q_p; soma direta
+      fechada para H_{2k-1} em vez da recursao bivariada da frente).
+      Total 163008 checagens exatas, 0 divergencias, incluindo
+      varredura de fronteira batendo exatamente a escala completa
+      reivindicada (p=41,60,80, r<=200,b<=30, incluindo a celula mais
+      extrema p=80,r=200,b=30). Verificou que a reparametrizacao
+      bivariada e matematicamente inerte (mera relabeling), nao um
+      atalho nao verificado. Confirmou "nenhum ingrediente novo".
+      ACHADO NOMEADO, menor, apenas de narrativa: a propria frente
+      disclosurou um erro de raciocinio em seu proprio autoteste
+      (Teorema 3 = D^{*(1)}_r(0) em vez de D^{*(2)}_r(0)) -- o referee
+      confirmou a substancia matematicamente relevante (40/40 contra
+      D^{*(2)}_r(0)) mas encontrou que o ponto de inicio da divergencia
+      declarado (r=12) esta incorreto -- a divergencia real comeca em
+      r=1, nao r=12 (contagem total de 39 falhas correta). Sem efeito
+      em nenhuma implementacao ou checagem numerica. Corrigido por
+      adendo datado em ATTEMPT.md SS5.1. Veredito SOUND, "ACCEPT for
+      catalogue". Integrado como novo THEOREM.md Estagio 32, com
+      ponteiro datado inserido no fechamento "o que permanece aberto"
+      do Estagio 29. **ONDA 19 FECHADA -- 4/4 frentes integradas**
+      (DISC-DEC-084 a 087).
+    rationale: >
+      Mesmo padrao das integracoes anteriores desta linhagem. Frente
+      de baixo risco, mecanica, sem novo ingrediente matematico --
+      integrada apos verificacao adversarial completa e independente.
+      O unico achado do referee foi de narrativa (ponto de inicio de
+      uma divergencia numa disclosure de bug), nao um erro matematico
+      -- corrigido antes de catalogar, seguindo a disciplina padrao
+      desta linhagem de nunca reescrever silenciosamente uma
+      disclosure de processo, mesmo quando o detalhe e menor.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/general_p_dstar_extension2_attempt/general_p_dstar_extension3_attempt/ATTEMPT.md (nova frente, ja commitada em snapshot; integrada agora; adendo datado aplicado SS5.1)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/general_p_dstar_extension2_attempt/general_p_dstar_extension3_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (novo Estagio 32; ponteiro datado inserido no Estagio 29)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave19_results.general_p_dstar_extension3_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "D^{*(p)}_r(b) fechado para p=1,...,80 em escala completa (ondas 15/16/18/19 combinadas)"
+    untouched_safeguards:
+      - "p>80 em escala completa permanece aberto apenas por nao-executado"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

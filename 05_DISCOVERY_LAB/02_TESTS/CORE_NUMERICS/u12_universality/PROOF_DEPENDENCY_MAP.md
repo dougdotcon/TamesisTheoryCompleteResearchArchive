@@ -646,6 +646,64 @@ flowchart TD
 > `.../plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/ATTEMPT.md`
 > e `.../mclust_plateau_abstract_real_gap_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-26 — DISC-DEC-088/DISC-DEC-091.]** Onda 20
+> frente (c) (`MCLUST-H1-VALIDITY-ATTEMPT`) atacou `H1` (validade
+> uniforme da decomposição assintótica casada outer/inner), um dos dois
+> gaps heurísticos nomeados por `PLATRESUM` (o outro, `H2`, intocado,
+> conforme escopo do mandato).
+>
+> **Não-fechamento honesto de `H1`, com redução teórica genuína e
+> evidência numérica extensa.** (1) Um novo **Lema de Concentração de
+> Watson** (rigoroso, elementar), a partir da identidade exata de
+> renovação `(E2)` já estabelecida na linhagem: sob uma hipótese
+> `(U1)` precisamente declarada (convergência localmente uniforme de
+> `W(x,g)` conforme `g\to\infty`), `Π(c) = (1/eps)\int_0^\infty
+> e^{-v/eps}W_\infty(v)\,dv` EXATAMENTE, sem nenhuma aproximação
+> adicional neste passo. Isto reduz `H1` a exatamente `(U1)` +
+> `(U2)` (uma expansão assintótica de Poincaré uniforme em `x` para
+> `W_\infty`, incluindo a escala de camada de contorno `x=O(eps)`) —
+> nenhuma das duas provada, mas o "black box" monolítico de `H1` fica
+> decomposto em duas condições menores e verificáveis. (2) Uma segunda
+> EDO exata para o perfil do platô `F(x)`, `F'(x)-xF(x)=-C(x)`, nova ao
+> registro, consistente com a equação de ordem líder já estabelecida.
+> (3) Uma grade de uniformidade numérica extensa (`6` valores de `c`
+> `\times` `7` de `x`, mais um teste de estresse até `x=20`, `s=1,41`,
+> além do domínio físico presumido `s\le1`) mostra a razão de
+> aproximação convergindo a `1` conforme `eps\to0`, MONOTONICAMENTE
+> MAIS PRÓXIMA (não mais distante) conforme `x` cresce, em ambas as
+> ordens testadas — o oposto qualitativo do que uma falha genuína de
+> uniformidade produziria. Um artefato numérico de convergência,
+> auto-capturado e corrigido pela própria frente (S3), foi
+> transparentemente disclosurado.
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem: re-derivou
+> o Lema de Concentração de Watson do zero (análise real elementar,
+> nenhuma lacuna encontrada); confirmou `\psi_3(0)=(7/2)\sqrt{\pi/2}` e
+> `\psi_4(0)=-34/3` a 60 dígitos (`mpmath`); reconstruiu do zero uma
+> recursão `(P,Q)`-family geral-`s`, reproduzindo os 7 âncoras
+> publicadas, os valores `resid3` (`4,058004...`, `4,174649...`) dígito
+> a dígito, e — mais decisivamente — duas linhas inteiras (`x=0`,
+> `x=8`) da tabela de extrapolação `eps\to0` da própria frente a TODOS
+> os 8 dígitos decimais publicados, em ambas as ordens, via uma
+> implementação e dimensionamento (`K,dps`) inteiramente independentes;
+> reproduziu de forma independente o auto-artefato numérico S3 e sua
+> correção (`ratio≈0,983`). Dois achados nomeados, ambos de severidade
+> NEGLIGÍVEL/cosmética (nenhum erro matemático): uma redundância lógica
+> menor num parágrafo da EDO de `F(x)`; e uma frase que reivindica
+> equivalência onde apenas suficiência é de fato estabelecida (já
+> amplamente ressalvada no texto). Nenhum dos dois afeta qualquer
+> conclusão numérica ou o veredito de não-fechamento.
+>
+> Veredito **SOUND — ACCEPT for catalogue**. `H1` permanece ABERTO;
+> `phi_REDB` e toda fórmula de registro: intocadas. O que resta aberto:
+> `(U1)` e `(U2)` em si (exigiriam um argumento tipo princípio do
+> máximo/estimativa de energia sobre o sistema de EDP exato); a EDO de
+> `F(x)` não verificada numericamente além de checagem de ordem líder;
+> conteúdo não-perturbativo (trans-série) inteiramente não testado; `H2`
+> intocado. Fontes:
+> `.../plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/mclust_h1_validity_attempt/ATTEMPT.md`
+> e `.../mclust_h1_validity_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

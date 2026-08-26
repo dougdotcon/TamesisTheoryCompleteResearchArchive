@@ -4648,7 +4648,109 @@ intocada); o bypass por transferência para `K\ge2` (um problema mais
 estreito, estruturalmente distinto, honestamente não perseguido além
 de `K=1`); `C(\gamma)` para `\gamma\in(0,1)` (Estágio 26); a ponte
 distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágio 27); `p>20` de
-`D^{*(p)}_r(b)` (sob revisão na onda 18); o piso `H2` em `b=1`; a
+`D^{*(p)}_r(b)` (sob revisão na onda 18) [Ver Estágio 29 abaixo —
+2026-08-26: `p=21,\ldots,40` FECHADO em escala completa, mais evidência
+exploratória em escala reduzida para `p=41,\ldots,60`; `p>60` continua
+aberto apenas por não-executado]; o piso `H2` em `b=1`; a
 constante do platô de DISC-DEC-071. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+---
+
+## [Extensão, Estágio 29 — 2026-08-26]
+
+**Onda 18, frente (a), `DISC-DEC-078`/`DISC-DEC-082`
+(`GENERAL-P-DSTAR-EXTENSION2-ATTEMPT`).** Alvo: estender a montagem em
+forma fechada geral-`p` para as constantes de erro exatas
+`D^{*(p)}_r(b)` (já provada e executada para `p=1,\ldots,10` na onda 15
+e `p=11,\ldots,20` na onda 16, referee-aprovada `DISC-DEC-070`) para
+`p>20` — item aberto apenas por não-executado, não por incerteza
+matemática, risco baixo.
+
+### O que aconteceu
+
+> **Fechamento completo do alvo, e além dele.** O mandato pedia pelo
+> menos `p=21,\ldots,30`; a frente fechou `p=21,\ldots,40` em escala
+> completa (a mesma escala-teto `r\le200,b\le30` usada pela onda 16),
+> mais uma incursão exploratória honestamente rotulada em escala
+> reduzida até `p=60`. Nenhum ingrediente matemático novo é usado ou
+> alegado — toda a montagem é entrada já provada, citada das ondas
+> 15/16.
+
+**Verificação exaustiva:** `124\,620` checagens exatas contra uma
+verdade fundamental independente (Corolário A3, implementação própria
+de números de Stirling), `0` divergências, `p=21,\ldots,40`,
+`r=0,\ldots,200`, `b=0,\ldots,30` — igualando o teto de escala da onda
+16 para um intervalo duas vezes mais largo. Mais uma incursão exaustiva
+em escala reduzida até `p=41,\ldots,60` (`13\,420` checagens, `0`
+divergências) e um teste de estresse aleatorizado (seed reservada
+`20260870000`) alcançando `r` até `400` e `b` até `60` (`400`
+checagens, `0` divergências). Total: `138\,040` checagens exaustivas +
+`400` aleatorizadas, `0` divergências em lugar nenhum. Novas formas
+fechadas, antes desconhecidas, impressas para `p=21,\ldots,40` em
+`b=0,1` (limpo sem denominador, justificado por um fato descoberto e
+verificado durante a derivação: `Q_p(-1)=0` para todo `p\ge1`).
+
+### Verificação adversarial independente
+
+Referee hostil dedicado (`.../general_p_dstar_extension2_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: reconstruiu cada ingrediente do zero por uma rota
+deliberadamente **diferente** da própria frente — `Q_p(u)` via números
+de Stirling de segunda espécie + identidade do taco de hóquei (em vez
+da rota Bernoulli/Faulhaber da frente), momentos centrais via
+recorrência log/exp em série de potências independente, e a máquina
+`H_{2k-1}(r,b)` via a recursão `a_k^{(d)}` citada da fatoração/limite
+de grau já provados pelo referee da onda 16. **Total: `86\,112`
+checagens exatas `Fraction`, `0` divergências**, incluindo uma
+varredura exaustiva completa `p=21,\ldots,40`, `r=0,\ldots,150`,
+`b=0,\ldots,25` (`78\,520` checagens — grade reduzida frente ao
+`r\le200,b\le30` da frente, disclosurado explicitamente como limitação
+de desempenho da própria implementação do referee, não uma
+discrepância encontrada), mais teste de estresse aleatorizado na seed
+reservada do próprio referee (`20260871000`) alcançando `r\le300,
+b\le40, p\le60` (`500` checagens, `0` falhas), checagens estruturais
+(`Q_p(-1)=0` para `p=1,\ldots,60`; limite de grau até `k=45`; `r<p`
+forçado a zero pela fórmula completa) e um spot-check manual da forma
+fechada impressa `p=21,b=0` da própria frente contra a verdade
+fundamental em 5 valores concretos de `r` (5/5 exatos). Confirmou a
+alegação de "nenhum ingrediente matemático novo" como precisa — todo
+fato não-trivial usado remonta à onda 15 (`DISC-DEC-063`) ou ao
+referee da onda 16 (`DISC-DEC-070`), verificado por comparação direta.
+Disclosure do referee: um bug real no próprio código do referee (fator
+de 2 faltando na recursão `a_k^{(d)}`), capturado imediatamente pelo
+próprio teste de limite de grau falhando com um diagnóstico limpo;
+sem impacto em nenhum número final reportado.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum erro encontrado em
+> lugar nenhum. Ambos os bugs autodisclosurados pela própria frente
+> (um off-by-one de Faulhaber; um deslize de indexação em teste
+> próprio) foram reproduzidos independentemente a partir de seus
+> mecanismos descritos e confirmados matematicamente exatos e
+> imateriais.
+
+Ver
+`theorem/k2_open_lemma/k3_attempt_2/k6_attempt/k_general_existence_attempt/error_constant_growth_attempt/all_orders_closed_form_attempt/general_b_dstar_attempt/general_p_dstar_closure_attempt/general_p_dstar_extension_attempt/general_p_dstar_extension2_attempt/ATTEMPT.md`
+e `.../general_p_dstar_extension2_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**`D^{*(p)}_r(b)` está agora FECHADO para `p=1,\ldots,40`** (ondas
+15/16/18 combinadas), em escala completa `r\le200,b\le30`, com
+evidência exploratória adicional em escala reduzida até `p=60`.
+Nenhum resultado anterior é enfraquecido; nenhum ingrediente
+matemático novo foi introduzido — apenas execução em escala maior da
+maquinaria já provada.
+
+**O que permanece aberto, com precisão:** `p>40` em escala completa
+(apenas por não-executado, a incursão `p=41,\ldots,60` é exploratória
+em escala reduzida, não uma verificação completa); a ausência de uma
+única fórmula elementar simbólica em `p` livre (`Q_p(u)` tem grau
+genuíno `2p`); a soma em faixa `\mathrm{Strip}_p` continua sendo uma
+soma explícita de `b` termos, por desenho; `C(\gamma)` para
+`\gamma\in(0,1)` (Estágio 26); a ponte distribucional `M_n(c)\to_dM(c)`
+para `K\ge2` (Estágio 27); a construção contínua-nativa do Teorema J
+(Estágio 28); o piso `H2` em `b=1`; a constante do platô de
+DISC-DEC-071. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.

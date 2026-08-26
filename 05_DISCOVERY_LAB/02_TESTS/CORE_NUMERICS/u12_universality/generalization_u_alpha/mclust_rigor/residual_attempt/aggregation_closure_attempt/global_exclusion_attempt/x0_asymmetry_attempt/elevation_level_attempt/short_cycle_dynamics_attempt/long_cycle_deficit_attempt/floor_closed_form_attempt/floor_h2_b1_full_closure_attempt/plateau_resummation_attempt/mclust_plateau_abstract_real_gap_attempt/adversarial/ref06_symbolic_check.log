@@ -1,0 +1,41 @@
+=== (1) R'(x) = x*R(x) - 1 ===
+R'(x) - (x*R(x)-1) simplifies to: 0
+PASS
+
+=== (2) Closure identity R^{(n+1)} = x*R^{(n)} + n*R^{(n-1)}, n=1..6 ===
+  n=1: residual simplifies to 0  ->  PASS
+  n=2: residual simplifies to 0  ->  PASS
+  n=3: residual simplifies to 0  ->  PASS
+  n=4: residual simplifies to 0  ->  PASS
+  n=5: residual simplifies to 0  ->  PASS
+  n=6: residual simplifies to 0  ->  PASS
+ALL PASS
+
+=== (3) psi_n(0) = gamma_n * R^{(n-1)}(0), n=1..4, matched to established psi_n(0) ===
+  R^{(0)}(0) = sqrt(2)*sqrt(pi)/2
+  R^{(1)}(0) = -1
+  R^{(2)}(0) = sqrt(2)*sqrt(pi)/2
+  R^{(3)}(0) = -2
+  R^{(4)}(0) = 3*sqrt(2)*sqrt(pi)/2
+  R^{(5)}(0) = -8
+  n=1: psi_n(0)=sqrt(2)*sqrt(pi)/2, R^(0)(0)=sqrt(2)*sqrt(pi)/2, recovered gamma_n=1, established gamma_n=1, match=True
+  n=2: psi_n(0)=-2, R^(1)(0)=-1, recovered gamma_n=2, established gamma_n=2, match=True
+  n=3: psi_n(0)=7*sqrt(2)*sqrt(pi)/4, R^(2)(0)=sqrt(2)*sqrt(pi)/2, recovered gamma_n=7/2, established gamma_n=7/2, match=True
+  n=4: psi_n(0)=-34/3, R^(3)(0)=-2, recovered gamma_n=17/3, established gamma_n=17/3, match=True
+ALL 4/4 MATCH
+
+=== (4) gamma_5=209/24  <=>  d4=209/8 ===
+  R^(4)(0) = 3*sqrt(2)*sqrt(pi)/2
+  psi5(0) = gamma_5 * R^(4)(0) = 209*sqrt(2)*sqrt(pi)/16
+  d4 predicted from gamma_5 via d4 = sqrt(2/pi)*psi5(0) = 209/8
+  d4 conjectured (record) = 209/8
+  EXACT MATCH: True
+
+  Cross-check d0..d3 via the same mapping:
+    d0: predicted=1  established=1  match=True
+    d1: predicted=-2*sqrt(2)/sqrt(pi)  established=-2*sqrt(2)/sqrt(pi)  match=True
+    d2: predicted=7/2  established=7/2  match=True
+    d3: predicted=-34*sqrt(2)/(3*sqrt(pi))  established=-34*sqrt(2)/(3*sqrt(pi))  match=True
+  ALL d0..d3 CONSISTENT WITH THE psi-BOOKKEEPING MAPPING
+
+ALL SYMBOLIC CHECKS PASSED.

@@ -575,6 +575,77 @@ flowchart TD
 > `.../floor_h2_b1_full_closure_attempt/plateau_resummation_attempt/ATTEMPT.md`
 > e `.../plateau_resummation_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-26 — DISC-DEC-083/DISC-DEC-085.]** Onda 19
+> frente (d) (`MCLUST-PLATEAU-ABSTRACT-REAL-GAP-ATTEMPT`) atacou os dois
+> itens que `PLATRESUM` deixou mais próximos de alcançáveis: (1) o gap
+> abstrato-vs-real `~30%`; (2) um novo empurrão estrutural sobre a
+> ressomação em forma fechada, especificamente o quinto termo
+> assintótico "conjecturado, não derivado".
+>
+> **Objetivo 1 (gap abstrato-vs-real): diagnóstico afiado, não
+> fechado.** Usando o valor abstrato agora EXATO (`Π(1000)=
+> 0,0377615983...`) contra as tabelas em bin já vetadas do motor real,
+> o gap composto resolvido por bin é **média 38,8%, faixa
+> [35,8%, 43,2%]** — mais preciso que o "~30%" original — e
+> **aproximadamente CONSTANTE** em toda a faixa de `t0` (correlação de
+> Pearson `r=0,33`), não concentrado em nenhum regime. Usando um fato
+> estrutural lido diretamente das EDPs que governam o processo (`s+g`
+> é exatamente CONSERVADO em "modo G" e só cresce em excursões de
+> "modo E") e um argumento de magnitude (`1/n`, `1/√n`, `√(c/n)`, todos
+> ordens de magnitude pequenos demais frente ao gap `O(1)` observado em
+> `n=65536`), a frente **enfraquece** as duas hipóteses nomeadas
+> anteriormente (fronteira `s+g≤1`; efeito finito-`n` evanescente) como
+> explicação primária, sem propor substituto. Referee hostil confirmou
+> a aritmética exatamente e a leitura estrutural das EDPs, mas
+> encontrou que o argumento de magnitude testa apenas três taxas e não
+> é exaustivo — `(c/n)^{1/4}` chega muito mais perto do gap observado
+> com prefator pequeno (`~1,10×`), candidato não descartado por esta
+> frente (corrigido por adendo datado em `ATTEMPT.md` §A.4). Também
+> encontrado: um rótulo impreciso ("3 bins mais à direita" em vez de
+> "os 3 bins que a checagem de robustez-de-cluster ancestral cobriu",
+> posições 5/8/9, não 7/8/9) — sem efeito em nenhum número (corrigido
+> por adendo datado em `ATTEMPT.md` §A.2/§A.3).
+>
+> **Objetivo 2 (quinto termo da ressomação): confirmação numérica
+> substancialmente fortalecida, ainda CONJECTURADA, não derivada.** Uma
+> implementação fresca e independente da recursão `(P,Q)` reproduz os 6
+> âncoras publicadas exatamente, depois computa `Π(c)` em 11 valores de
+> `c` de `100` a `655360` (range `6553×`, mais largo que qualquer
+> frente ancestral, alcançando `c=100`, inacessível ao método de soma
+> direta de ambas as ancestrais). Via um método de "isolamento de
+> resíduo" (subtraindo as formas fechadas já EXATAS `d0..d3` antes de
+> ajustar `d4,d5`, em vez de um ajuste polinomial simultâneo cego):
+> `d4=26,1246` vs. o conjecturado `209/8=26,125` (`~5` dígitos
+> significativos, acima dos `~2,6` da frente ancestral) e
+> `d5=-82,017` vs. o conjecturado `-(1546/15)√(2/π)=-82,2353...`
+> (`~2,6` dígitos, acima de "não significativamente restringido"). Uma
+> re-derivação simbólica independente confirma a identidade de
+> fechamento `R^{(n+1)}=x·R^{(n)}+n·R^{(n-1)}` e a contabilidade
+> `γ_n` para `n=1..4`, e que `γ_5=209/24` é aritmeticamente
+> equivalente a `d4=209/8`. H1/H2 permanecem inteiramente abertos, não
+> tentados.
+>
+> Referee hostil dedicado, sem ler nenhum script de nenhuma frente da
+> linhagem: re-implementou a recursão `(P,Q)` do zero e reproduziu
+> **todos os 11 valores da grade de `Π(c)` da frente, dígito a dígito**
+> (incluindo `Π(100)`, confirmando de forma independente que `c=100` é
+> de fato alcançável); ajuste independente de resíduo deu
+> `d4=26,12464` e `d5=-82,01744`, batendo com os valores da frente a
+> `4×10^{-5}`/`4×10^{-4}`; confirmou a derivação simbólica
+> independentemente. Veredito **SOUND WITH NAMED ISSUES — ACCEPT for
+> catalogue**, em ambos os tiers exatamente reivindicados ("diagnóstico
+> afiado, não fechado" / "confirmação numérica fortalecida, não nova
+> derivação"), condicional às duas correções (N1 sobre completude do
+> argumento de magnitude; N2 sobre precisão de citação de bins) —
+> ambas aplicadas como adendos datados; nenhum número reportado foi
+> afetado por nenhuma das duas. `φ_REDB`, `Φ_U(c)`, `Φ_∞(c)` e toda
+> fórmula de registro: intocadas. O que resta aberto: o gap
+> abstrato-vs-real em si (nenhuma explicação primária identificada); a
+> ressomação em forma fechada propriamente dita; H1/H2; `γ_n` para
+> `n≥6`. Fontes:
+> `.../plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/ATTEMPT.md`
+> e `.../mclust_plateau_abstract_real_gap_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

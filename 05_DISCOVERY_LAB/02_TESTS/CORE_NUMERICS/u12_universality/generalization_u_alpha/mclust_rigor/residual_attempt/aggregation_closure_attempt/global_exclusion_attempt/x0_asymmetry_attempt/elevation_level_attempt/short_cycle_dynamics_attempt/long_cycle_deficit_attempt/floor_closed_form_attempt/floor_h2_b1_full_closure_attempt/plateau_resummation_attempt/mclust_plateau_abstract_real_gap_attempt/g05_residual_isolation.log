@@ -1,0 +1,54 @@
+d0 (exact)  = 1.0
+d1 (exact)  = -1.5957691216057307118   [= -2*sqrt(2/pi)]
+d2 (exact)  = 3.5   [= 7/2]
+d3 (exact)  = -9.0426916890991407   [= -(34/3)*sqrt(2/pi)]
+
+         c          eps                 y(eps)              R4(c)
+       100     0.100000   0.868375704932575473      19.9530878225
+       250     0.063246   0.911136355369125961      21.8310252019
+       640     0.039528   0.941888705158953009      23.2546739234
+      1000     0.031623   0.952775168556529546       23.774016095
+      2560     0.019764   0.969761971550559477      24.6009882978
+      6400     0.012500   0.980582713207712097      25.1385851495
+     16000     0.007906   0.987598718919866869      25.4917483726
+     40960     0.004941   0.992199584589099577      25.7253311795
+    100000     0.003162   0.994988451587709969      25.8676945102
+    250000     0.002000   0.996822389830641139      25.9616320799
+    655360     0.001235   0.998034126309687759      26.0238394208
+
+R4(c) should -> d4 as c->infty (eps->0); R4(c) ~= d4 + d5*eps + O(eps^2).
+Conjectured (record, UNPROVEN): d4 = 209/8 = 26.125
+Conjectured (record, UNPROVEN): d5 = -(1546/15)*sqrt(2/pi) = -82.23530207
+
+R4 at largest c=655360 (eps=0.00124): 26.0238394207956
+   vs conjectured d4=209/8: diff = -0.101161  (-0.3872% )
+
+Linear fit R4(eps) = d4 + d5*eps  (all 11 points, least squares):
+   d4_fit = 25.9606473346605
+   d5_fit = -62.7637775994679
+   d4_fit vs conjectured 209/8=26.125: diff=-0.164353 (-0.6291%)
+   d5_fit vs conjectured -82.23530207: diff=19.4715 (-23.68%)
+
+Same linear fit, restricted to the 5 LARGEST-c points (c>=16000):
+   d4_fit = 26.1209686890727
+   d5_fit = -79.7430019241996
+   d4_fit vs conjectured: diff=-0.00403131 (-0.01543%)
+
+Same linear fit, restricted to the 4 SMALLEST-c points (c<=1000):
+   d4_fit = 25.4640094950762
+   d5_fit = -55.6459597846818
+
+Cross-subset stability of d4 (this front's own diagnostic, analogous
+to the ancestor front's own cross-subset check for its d0..d6 fit):
+   all-11-point fit:      d4 = 25.96064733
+   5-largest-c fit:       d4 = 26.12096869
+   4-smallest-c fit:      d4 = 25.4640095
+   spread across the 3 subsets = 0.656959
+   d5_fit (5-largest-c) vs conjectured: diff=2.4923 (-3.031%)
+
+Quadratic fit R4(eps) = d4 + d5*eps + d6*eps^2  (7 largest-c points, exact 3x3 solve):
+   d4 = 26.1246412796399   vs 209/8=26.125: diff=-0.00035872 (-0.001373%)
+   d5 = -82.0174404823314   vs conjectured=-82.23530207: diff=0.217862 (-0.2649%)
+   d6 = 249.382690760321   (no prediction on record to compare against)
+
+Saved g05_residual_results.json

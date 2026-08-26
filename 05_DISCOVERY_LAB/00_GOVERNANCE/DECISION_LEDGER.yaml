@@ -4952,3 +4952,99 @@ decisions:
       - "taxa n^{-1/2} e termo de segunda ordem para gamma em (0,1) permanecem CONJECTURADOS, nao provados; nao promovidos ao scorecard principal"
       - "janela intermediaria n^eps <= c_n <= n^{2/3}/log nomeada como residuo explicitamente nao fechado"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-075
+    date: 2026-08-26
+    decision: >
+      Integrar o resultado da onda 17, frente (a)
+      (`CONJECTURE-1-K5-GENERAL-ATTEMPT`, DISC-DEC-072), apos
+      verificacao adversarial hostil REFORCADA dedicada. RESULTADO: o
+      maior fechamento desta linha U_{1/2} ate agora. O mandato
+      explicito da frente era a instancia K=5 da Conjectura 1; o
+      objetivo de estica declarado no despacho -- um argumento
+      K-uniforme fechando todo K de uma vez -- foi ALCANCADO. Todo
+      ingrediente per-K da linha K=1,2,3,4 (Estagios 15/17/20) foi
+      generalizado para K simbolico: Lema 1a para todo tamanho de
+      bloco; a cascata telescopica (§2.2) para todo padrao de
+      particao via um unico passo indutivo; a formula do mecanismo de
+      destino sem divisao por casos; e a identidade geral de florestas
+      ponderadas W(n)=e(e+Q)^{n-1} PROVADA para todo n via bijecao de
+      Pruefer -- a pista nomeada pelo proprio Estagio 20, agora
+      fechada de uma vez em vez de um n por K. TEOREMA (geral-K):
+      f_{M_K}(x)=2Kx(1-x^2)^{K-1} para todo K>=1, PROVADO, condicional
+      a mesma citacao classica unica PD(1) (McCloskey 1965;
+      Patil-Taillie 1977; Pitman 2002 Cap. 3) ja usada em K=1..4,
+      aplicada recursivamente ate K-1 vezes para cada K fixo -- nunca
+      de forma nao-limitada para um unico K. COROLARIO: a Conjectura 2
+      (§8, a mistura de Poisson sobre a Conjectura 1) tambem esta
+      agora PROVADA, no mesmo patamar, via a algebra de mistura de
+      Poisson (ja citada em §5.1) mais aditividade contavel --
+      P(M(c)<=x)=1-e^{-c*x^2} exatamente, fechando os dois alvos de
+      momento que o Estagio 18 havia deixado condicionais/
+      incondicionais so em K<=3: E[M(c)^2]=(1-e^{-c})/c e
+      E[M_K^2]=1/(K+1) agora exatos para TODO K. Esta e uma rota
+      INDIRETA -- a rota direta do Estagio 18 permanece exatamente
+      como estava, obstrucao nao removida. Referee REFORCADO
+      (briefing explicito para atacar a independencia do residuo na
+      cascata telescopica, o ponto de maior risco no salto per-K ->
+      geral-K): reconstruiu do zero, sem abrir nenhum script da
+      frente ou de tentativas anteriores; provou a cascata
+      telescopica simbolicamente para QUALQUER sequencia de tamanhos
+      de bloco (cobrindo todo padrao de todo K de uma vez, nao so os
+      de K=5); confirmou a independencia conjunta do residuo como
+      definicional a representacao stick-breaking GEM(1), nenhuma
+      falha no salto per-K -> geral-K; re-verificou
+      sum(prod(b_j-1)!)=K! por enumeracao direta K=1..9; re-derivou a
+      forma fechada por r a mao (evitando deliberadamente o padrao
+      sympy.Sum(...).doit() em K simbolico que travou uma tentativa
+      anterior de referee); fechamento da soma binomial K=1..15; Lema
+      3 (Pruefer) como identidade polinomial exata por forca bruta
+      n=1..7 (um passo alem tanto da propria frente quanto de uma
+      tentativa anterior travada); mecanismo discreto K=5, 300.000
+      trials, 0 discrepancias, cobertura completa 7.776 celulas em 3
+      escalas; ALEM DO ESCOPO da propria frente -- classificacao
+      exaustiva fresca e MC de receita continua em K=6 (117.649 mapas
+      brutos, 30 tipos de forma; MC N=800k, KS p=0.55, casando
+      E[M_6^2]=1/7). Quatro bugs encontrados e corrigidos, todos no
+      PROPRIO codigo de verificacao do referee (ordem de integracao
+      errada; formula de Dirichlet de referencia errada; soma sobre
+      ciclo mal-indexada; erro de sinal descartando o termo OUT),
+      todos disclosurados, nenhum no documento-alvo. Veredito SOUND,
+      "ACCEPT for catalogue", nenhum achado novo alem dos tres ja
+      auto-disclosurados pela propria frente em seu §6. SPOT-CHECK DA
+      SESSAO (turno anterior a este): reconstrucao independente das 7
+      secoes de prova, incluindo cascata telescopica propria K=2,3 e
+      identidade de florestas n=1..5, nenhuma discrepancia. Integrado
+      como "Estagio 24" em THEOREM.md, pointers datados nos Estagios
+      15 (secao original Conjectura 1)/18/20/23, incluindo nota
+      explicita de reconciliacao com a frente (c) da mesma onda (cujos
+      alvos "ABERTOS" registrados eram precisos no momento em que
+      rodou, anteriores ao retorno deste referee -- sem tensao real,
+      apenas sobreposicao cronologica). Onda 17: 3/5 integradas.
+    rationale: >
+      Mesmo padrao das integracoes anteriores, com escrutinio
+      reforcado proporcional ao peso do resultado: e o maior
+      fechamento ja alegado nesta linha (Conjectura 1 para TODO K, mais
+      Conjectura 2 como corolario), entao a sessao despachou um
+      referee especificamente briefado para atacar o ponto de maior
+      risco do argumento (a passagem per-K -> geral-K via
+      independencia do residuo), em vez do referee padrao usado para
+      instancias pontuais de K.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/conjecture1_k4_attempt/conjecture1_k5_attempt/ (nova frente, integrada)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/conjecture1_k4_attempt/conjecture1_k5_attempt/adversarial/ (referee hostil reforcado, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 24 anexado; pointers datados nos Estagios 15/18/20/23)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave17_results.conjecture1_k5_general_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Conjectura 1 (§8) PROVADA para TODO K>=1, condicional a citacao PD(1) unica; nenhum K permanece aberto"
+      - "Conjectura 2 (§8) PROVADA como corolario indireto, mesmo patamar condicional"
+      - "identidade geral de florestas ponderadas W(n)=e(e+Q)^{n-1} PROVADA para todo n (Lema 3, Pruefer)"
+      - "E[M_K^2]=1/(K+1) e E[M(c)^2]=(1-e^{-c})/c agora exatos e incondicionais para todo K (alvos do Estagio 18)"
+    untouched_safeguards:
+      - "a rota DIRETA da Conjectura 2 (arquitetura de momentos do Estagio 18) permanece exatamente como estava; obstrucao nao removida"
+      - "a maquinaria de exploracao conjunta de p>=2 pontos (Estagio 18) permanece seu proprio problema aberto"
+      - "a ponte n->infinito para a DISTRIBUICAO de M(c) (distinta da media, ja fechada) permanece nao endereçada"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

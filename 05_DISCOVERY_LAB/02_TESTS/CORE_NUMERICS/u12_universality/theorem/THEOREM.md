@@ -1248,6 +1248,15 @@ not a proof for the u12 ensemble itself (§5.5 states precisely why not).
 > explicitly not attempted (a concrete lead — the general
 > weighted-forest identity `W(n)=1-Q` — is named for a future front).
 
+> **[Extensão, 2026-08-26 — DISC-DEC-075.]** Conjecture 1 is now
+> **PROVED for every `K\ge1`** — see "Estágio 24" below. The general
+> weighted-forest identity `W(n)=e(e+Q)^{n-1}` named just above (the
+> Estágio-20 lead) is proved for all `n` via Prüfer, closing the last
+> per-`K` ingredient at once instead of one `K` at a time; the same
+> single `PD(1)` citation as `K=1..4` is applied recursively, up to
+> `K-1` times, for each fixed `K`. `f_{M_K}(x)=2Kx(1-x^2)^{K-1}` for
+> **all** `K\ge1`, unconditionally.
+
 **Conjecture 2 (the full unconditional distributional law).**
 
 `M(c) \overset{d}{=} \min(1,\sqrt{E/c})`,  `E\sim\mathrm{Exp}(1)`, i.e.
@@ -1276,6 +1285,18 @@ continuous part `p=0.171`,
 > (contraexemplo exato: adicionar um reroute pode AUMENTAR a massa
 > cíclica). O passo genuinamente difícil — uma exploração conjunta de
 > dois pontos de referência — está precisamente localizado e aberto.
+
+> **[Extensão, 2026-08-26 — DISC-DEC-075.]** Conjecture 2 is now
+> **PROVED, at the same modulo-citation tier as Conjecture 1** — see
+> "Estágio 24" below. Not via the direct route above (which remains
+> exactly as it stood: partial architecture proved, obstruction
+> precisely located, still open on its own terms) but as an
+> **indirect corollary**: Conjecture 1 general-`K` plus §5.1's already-
+> cited Poisson-mixture conditioning fact and countable additivity give
+> `P(M(c)\le x)=1-e^{-cx^2}` in three lines. Both closed-form targets
+> named just above are now exact and unconditional:
+> `E[M(c)^2]=(1-e^{-c})/c` and `E[M_K^2]=1/(K+1)` for **every** `K`,
+> not only `K\le3`. The "Status: CONJECTURE" line above is superseded.
 
 **On the Open Lemma of §7.4 — a deliberate non-inclusion here.** The
 `n\to\infty` fixed-`K` bridge for `K\ge2` (§7.4) is **not** listed as a
@@ -3445,14 +3466,18 @@ pista estrutural unificadora (a exploração conjunta como chave comum
 às duas conjecturas) está nomeada. Nenhum resultado anterior é
 tocado.
 
-**O que permanece aberto, sem mudança:** Conjectura 2 em geral; a
-exploração conjunta de `p\ge2` pontos (o novo sub-problema nomeado);
-Conjectura 1 para `K\ge4` (sob revisão adversarial na própria onda
-16); `\sup_K M_K/\sqrt K=a^*` (idem); `p>20` de `D^{*(p)}_r(b)`
-(idem); o piso `H2` em `b=1` (idem); a lei de escala `\gamma\in(0,1)`
-(caracterizada, não provada, sem frente ativa). Nenhuma alegação de
-progresso em Millennium Problem; matemática combinatória pura interna
-a este arquivo.
+**O que permanece aberto, sem mudança:** Conjectura 2 em geral
+[Ver Estágio 24 abaixo — 2026-08-26: PROVADA como corolário indireto,
+não pela rota direta desta frente, que permanece exatamente como
+registrado acima]; a exploração conjunta de `p\ge2` pontos (o novo
+sub-problema nomeado — permanece seu próprio problema aberto, mesmo
+após o fechamento indireto); Conjectura 1 para `K\ge4` (sob revisão
+adversarial na própria onda 16) [Ver Estágio 24 abaixo — fechada para
+todo `K` em 2026-08-26]; `\sup_K M_K/\sqrt K=a^*` (idem); `p>20` de
+`D^{*(p)}_r(b)` (idem); o piso `H2` em `b=1` (idem); a lei de escala
+`\gamma\in(0,1)` (caracterizada, não provada, sem frente ativa).
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.
 
 ---
 
@@ -3670,9 +3695,11 @@ em `K=5` e `W` em `n_{\mathrm{off}}=5`). Conjectura 2 herda `K=4`
 como mais um componente confirmado, permanecendo CONJECTURA. Nenhum
 resultado anterior é enfraquecido.
 
-**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge5`;
-Conjectura 2 em geral; a exploração conjunta de `p\ge2` pontos
-(Estágio 18); a re-montagem do Estágio 12 com `a^*` (Estágio 19)
+**O que permanece aberto, sem mudança:** Conjectura 1 para `K\ge5`
+[Ver Estágio 24 abaixo — fechada para todo `K` em 2026-08-26];
+Conjectura 2 em geral [Ver Estágio 24 abaixo — fechada como corolário
+em 2026-08-26]; a exploração conjunta de `p\ge2` pontos (Estágio 18);
+a re-montagem do Estágio 12 com `a^*` (Estágio 19)
 [Ver Estágio 22 abaixo — fechada em 25/08/2026];
 `p>20` de `D^{*(p)}_r(b)` [Ver Estágio 21 abaixo]; o piso `H2` em
 `b=1` (sob revisão na onda 16); a lei de escala `\gamma\in(0,1)`.
@@ -3971,7 +3998,186 @@ Edgeworth da expansão do §7.3; a janela intermediária `n^\epsilon \le
 c_n \le n^{2/3}/\log` entre o regime `c` fixo do Estágio 10 e o
 regime `\gamma_n\ge n^{-1/3}\ln n` do Corolário 2 — nomeada aqui como
 o resíduo natural, explicitamente não fechada. Conjectura 1 (`K\ge5`)
-e 2; a exploração conjunta (Estágio 18); `p>20`; o piso `H2` em
+e 2 [Ver Estágio 24 abaixo — ambas fechadas em 2026-08-26]; a
+exploração conjunta (Estágio 18, permanece aberta em si mesma mesmo
+após o fechamento indireto da Conjectura 2); `p>20`; o piso `H2` em
 `b=1`; a constante do platô de DISC-DEC-071 (sob revisão na onda 17).
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 24 — 2026-08-26]
+
+**Onda 17, frente (a), `DISC-DEC-072`/`DISC-DEC-075`
+(`CONJECTURE-1-K5-GENERAL-ATTEMPT`).** Alvo: §8 Conjectura 1 em
+`K=5` (o mandato explícito da frente), mais um objetivo de estica
+("stretch goal") declarado no despacho: se possível, um argumento
+`K`-uniforme fechando a Conjectura 1 para **todo** `K\ge1` de uma vez,
+em vez de mais uma instância pontual.
+
+### O que aconteceu
+
+> **O objetivo de estica foi alcançado.** Todo ingrediente da linha
+> `K=1,2,3,4` que antes era provado caso a caso foi generalizado para
+> `K` simbólico, e a Conjectura 1 está agora **PROVADA para todo
+> `K\ge1`**, condicional à mesma citação clássica única de toda a
+> linha. Como corolário imediato (não parte do mandato original, mas
+> observado e sinalizado pela própria frente para decisão desta
+> sessão), a **Conjectura 2 também está agora PROVADA**, no mesmo
+> patamar.
+
+**Teorema (geral-`K`).** Para todo inteiro `K\ge1`,
+`f_{M_K}(x)=2Kx(1-x^2)^{K-1}` em `(0,1)` — PROVADO, condicional à
+propriedade `PD(1)` de residual/size-biasing (McCloskey 1965;
+Patil–Taillie 1977; Pitman 2002 Cap. 3), aplicada recursivamente até
+`K-1` vezes para cada `K` fixo — a mesma citação única já usada em
+`K=1,2,3,4`, aplicada o número de vezes que a construção exige, nunca
+de forma não-limitada ou "no infinito" para um único `K`. Em
+particular `f_{M_5}(x)=10x(1-x^2)^4`, a instância explicitamente
+mandatada pela onda.
+
+Cada ingrediente per-`K` da linha anterior foi generalizado para `K`
+simbólico: o Lema 1a (espaçamentos circulares rotulados) para todo
+tamanho de bloco `b`; a "cascata telescópica" (§2.2) para todo padrão
+de partição, com um único passo indutivo sobre peels em vez de um
+argumento por `K`; a fórmula do mecanismo de destino (§3.1) sem
+divisão por casos; e — a peça nomeada como pista pelo próprio
+Estágio 20 — a identidade geral de florestas ponderadas
+`W(n)=e(e+Q)^{n-1}` provada para **todo** `n` via a bijeção de Prüfer,
+fechando de uma vez o único ingrediente que antes exigia um `n` por
+`K`. A soma sobre `r` fecha pelo teorema binomial, com `K` simbólico,
+reproduzindo exatamente `f_{M_K}(x)=2Kx(1-x^2)^{K-1}`.
+
+**Corolário: Conjectura 2.** `THEOREM.md` §8 Conjectura 2 é, por sua
+própria definição, a mistura de Poisson(`c`) da Conjectura 1 sobre
+`K`. Combinando o Teorema geral-`K` acima com a citação de Kingman já
+usada em §5.1 (condicionar o modelo incondicional em `\mathcal N=K`
+reproduz exatamente o modelo `K`-condicional) e aditividade contável:
+
+`P(M(c)\le x) = \sum_{K\ge0} e^{-c}\frac{c^K}{K!}[1-(1-x^2)^K]
+ = 1-e^{-c}e^{c(1-x^2)} = 1-e^{-cx^2}`,
+
+com átomo `P(M(c)=1)=e^{-c}` — exatamente
+`M(c)\overset{d}{=}\min(1,\sqrt{E/c})`, `E\sim\mathrm{Exp}(1)`, no
+mesmo patamar PROVADO-condicional-à-citação do Teorema. Consistência:
+`E[M(c)]=\varphi_\infty(c)` reproduz o Teorema 1; e
+`E[M(c)^2]=(1-e^{-c})/c`, com `E[M_K^2]=1/(K+1)` para **todo** `K` —
+os dois alvos que o Estágio 18 havia registrado e deixado
+condicionais/incondicionais apenas em `K\le3` estão agora exatos e
+incondicionais para todo `K`. Esta é uma rota **indireta** — através
+da Conjectura 1 geral-`K`, não da arquitetura de momentos direta do
+Estágio 18, que permanece exatamente como estava (obstrução
+localizada, não removida).
+
+Também provados como subprodutos, novos além de `K\le4`:
+`E[M_K]=\varphi_K`, `E[M_K^2]=1/(K+1)` para todo `K`; a instância
+`E[M_5^3]=256/3003`.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee reforçado
+(feito em turno anterior a este, já registrado nas notas internas):
+verificação independente das 7 seções de prova do documento,
+incluindo reconstrução própria da cascata telescópica para `K=2,3` e
+da identidade de florestas para `n=1,\ldots,5` — nenhuma discrepância
+encontrada.
+
+Dado o peso do resultado — o maior alegado nesta linha `U_{1/2}` até
+agora — a sessão despachou um **referee reforçado**, com briefing
+explícito para atacar a passagem do per-`K` para o geral-`K`
+(especificamente: a independência do resíduo na cascata telescópica,
+citada como o ponto de maior risco de um salto ilegítimo). O referee
+reconstruiu do zero, sem abrir nenhum script da frente:
+
+- O Lema 1 geral (a densidade `K!` no simplex `\Delta_K`) foi
+  re-derivado à mão, e a "cascata telescópica" foi provada
+  **simbolicamente para qualquer sequência de tamanhos de bloco**,
+  cobrindo de uma vez todo padrão de todo `K`, não apenas os padrões
+  de `K=5`.
+- A independência conjunta (não apenas marginal) do resíduo em
+  relação a `\ell_1,\ldots,\ell_{j-1}` foi confirmada como definicional
+  à representação stick-breaking `GEM(1)`, o mesmo dispositivo já
+  aceito em `K=1,2,3,4` — nenhuma falha encontrada no salto per-`K`
+  para geral-`K`.
+- A identidade `\sum\prod(b_j-1)!=K!` foi re-verificada por enumeração
+  direta `K=1,\ldots,9`.
+- A fórmula fechada por `r`, re-derivada à mão (deliberadamente
+  evitando o padrão `sympy.Sum(...).doit()` em `K` simbólico que havia
+  travado uma tentativa anterior de referee); fechamento da soma
+  binomial verificado `K=1,\ldots,15`.
+- O Lema 3 (identidade de florestas ponderadas, Prüfer) verificado
+  como identidade polinomial exata por força bruta `n=1,\ldots,7` — um
+  passo além tanto da própria frente (`n=1,\ldots,6`) quanto de uma
+  tentativa anterior travada (`n=1,\ldots,7`, confirmando).
+- O mecanismo discreto verificado em `K=5` com 300.000 trials, 0
+  discrepâncias, cobertura completa das 7.776 células em 3 escalas.
+- **Além do escopo da própria frente:** classificação exaustiva fresca
+  e MC de receita contínua em `K=6` (117.649 mapas brutos, 30 tipos de
+  forma; MC de receita `N=800\text{k}`, KS `p=0{,}55`, casando
+  `E[M_6^2]=1/7`).
+- Quatro bugs encontrados e corrigidos — todos no **próprio** código
+  de verificação do referee (ordem de integração errada; fórmula de
+  Dirichlet de referência errada; soma sobre ciclo mal-indexada; erro
+  de sinal descartando o termo de massa OUT), todos disclosurados; após
+  as correções, as quatro rotas reproduzem exatamente as alegações do
+  documento-alvo. Nenhum erro no documento-alvo em si.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** "The general-`K` claim
+> survives at its claimed tier: PROVED for every `K\ge1`, modulo the
+> single classical PD(1) size-biased/residual citation... Conjecture 2
+> (§4.6) also survives at the same tier: it follows as an exact
+> corollary of the general-K theorem via the Poisson mixture algebra,
+> which I re-derived by hand and confirms exactly." Nenhum novo achado
+> além dos três itens já auto-disclosurados pela própria frente em seu
+> §6 (artefato `Piecewise` do sympy em um harness de checagem, não em
+> nenhuma derivação; dois p-valores isolados abaixo de `0{,}01`
+> resolvidos por um follow-up pré-declarado com poder maior; uma frase
+> de pré-registro otimista demais sobre cobertura em `n=12`).
+
+Ver `theorem/conjecture1_k2_attempt/conjecture1_k3_attempt/`
+`conjecture1_k4_attempt/conjecture1_k5_attempt/ATTEMPT.md` e
+`.../conjecture1_k5_attempt/adversarial/REFEREE_REPORT.md`.
+
+### Reconciliação com a frente (c) da mesma onda
+
+A frente (c) (`JOINT-TWO-POINT-EXPLORATION-ATTEMPT`, integrada
+separadamente) registrou seus alvos `E[M(c)^2]=(1-e^{-c})/c` e
+`E[M_K^2]=1/(K+1)` como **ABERTOS**, com base no estado de
+`THEOREM.md` no momento em que essa frente rodou — momento anterior ao
+retorno do referee reforçado desta frente. Essa caracterização estava
+correta **no momento em que foi escrita**; está agora superada por
+este Estágio, que fecha ambos os alvos incondicionalmente para todo
+`K`. Isto não invalida o resultado genuíno da frente (c) (o Teorema J
+de restrição cíclica uniforme e seu corolário `P(\text{mesmo
+ciclo})=P(\text{ciclo diferente})=\frac12 P(\text{ambos cíclicos})`
+exatos, em `n,K` finitos) — apenas sua nota de contexto sobre o que
+permanecia aberto no momento do despacho, e a própria frente (c) já
+havia notado explicitamente (§6.2) que não existe atalho de "split é
+50/50" para fechar `E[M_K^2]` sem resolver a Conjectura 1 geral-`K`
+em si — exatamente o que esta frente independentemente fechou por
+outra rota. Nenhuma tensão real entre os dois resultados; a
+sobreposição é apenas cronológica.
+
+### O que isto muda, precisamente
+
+**Conjectura 1 (§8) está agora PROVADA para TODO `K\ge1`.** Nenhum `K`
+permanece aberto. **Conjectura 2 (§8) está agora PROVADA**, como
+corolário indireto, no mesmo patamar. Ambas condicionais à mesma
+citação `PD(1)` única já aceita em toda a linha `K=1,\ldots,4` — nenhum
+novo ingrediente de confiança é pedido além do que este arquivo já
+aceita desde o Estágio 3. Nenhum resultado anterior é enfraquecido;
+os Estágios 3–20 permanecem exatamente como provados, agora como
+instâncias `K=1,\ldots,4` de um teorema estritamente mais geral.
+
+**O que permanece aberto, com precisão:** a ponte `n\to\infty` para a
+*distribuição* de `M(c)` (distinta da média, já fechada pelo Teorema
+1/Estágio 22) — não endereçada aqui, por ser um tipo de alegação
+diferente, exatamente como `THEOREM.md` §8 já separa; a exploração
+conjunta de `p\ge2` pontos como maquinário independente (Estágio 18 —
+permanece seu próprio problema aberto, mesmo com seus dois alvos de
+momento agora fechados por outra rota); `p>20` de `D^{*(p)}_r(b)`
+(Estágio 21); o piso `H2` em `b=1` (sob revisão na onda 17); a
+constante do platô de DISC-DEC-071 (sob revisão na onda 17). Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

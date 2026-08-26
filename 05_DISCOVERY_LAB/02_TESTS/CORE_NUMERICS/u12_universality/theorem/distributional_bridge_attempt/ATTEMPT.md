@@ -165,6 +165,19 @@ This is a straightforward but genuinely new upgrade of Fact 4.1 (which
 only ever tracked expectations) to full conditional laws; no new
 probabilistic content beyond what Definition 4 already licenses.
 
+> **[Nota pós-adversarial, 2026-08-26 — DISC-DEC-080.]** O referee
+> hostil identificou o passo acima ("as random variables... has the same
+> law as `M_n^{(K)}`") como o único gap implícito do documento — Definição
+> 4 licencia a independência de qual `K`-subconjunto é fixado apenas para
+> a *média*, não explicitamente para a lei completa — e o fechou de forma
+> independente com um argumento de conjugação explícito (para
+> `S,S'`-subconjuntos ligados por uma bijeção `σ`, conjugar toda a
+> construção é medida-preservante e `σ∘f∘σ⁻¹=f'` identicamente, logo
+> `#cyclic(f)=#cyclic(f')` identicamente, não apenas em distribuição).
+> Nenhum erro foi encontrado; a Proposição D0 permanece PROVADA, agora com
+> esse passo verificado com rigor extra. Ver
+> `adversarial/REFEREE_REPORT.md` §1.
+
 ### 2.2 Continuum side (CITED from Estágio 24, restated)
 
 `THEOREM.md` Estágio 24 already proves, as a corollary of the general-`K`

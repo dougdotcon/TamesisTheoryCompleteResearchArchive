@@ -4181,7 +4181,11 @@ instâncias `K=1,\ldots,4` de um teorema estritamente mais geral.
 **O que permanece aberto, com precisão:** a ponte `n\to\infty` para a
 *distribuição* de `M(c)` (distinta da média, já fechada pelo Teorema
 1/Estágio 22) — não endereçada aqui, por ser um tipo de alegação
-diferente, exatamente como `THEOREM.md` §8 já separa; a exploração
+diferente, exatamente como `THEOREM.md` §8 já separa [Ver Estágio 27
+abaixo — 2026-08-26: progresso parcial genuíno (a redução a
+convergência de CDF ponto-a-ponto em `K` fixo é agora PROVADA
+incondicionalmente, junto com o fechamento completo em `K=0,1`), mas a
+ponte completa para `K\ge2` continua ABERTA]; a exploração
 conjunta de `p\ge2` pontos como maquinário independente (Estágio 18 —
 permanece seu próprio problema aberto, mesmo com seus dois alvos de
 momento agora fechados por outra rota); `p>20` de `D^{*(p)}_r(b)`
@@ -4429,3 +4433,109 @@ Teorema J (sob revisão na onda 18); a ponte distribucional `M_n(c)\to_d
 M(c)` (sob revisão na onda 18); o piso `H2` em `b=1`; a constante do
 platô de DISC-DEC-071. Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 27 — 2026-08-26]
+
+**Onda 18, frente (d), `DISC-DEC-078`/`DISC-DEC-080`
+(`DISTRIBUTIONAL-BRIDGE-ATTEMPT`).** Alvo: a ponte `n\to\infty` para a
+**distribuição** completa de `M(c)` (`M_n(c)\to_d M(c)`), distinta da
+média já fechada pelo Teorema 1/Estágio 22 — questão nomeada como
+aberta e de tipo distinto desde o Estágio 6 (§8), nunca atacada
+diretamente por nenhuma frente anterior.
+
+### O que aconteceu
+
+> **Não-fechamento honesto do mandato completo** (a ponte de
+> distribuição para todo `K`), combinado com o fechamento incondicional
+> do caso `K=0,1` e de toda a maquinaria de redução que o generaliza,
+> mais um resultado de segundo momento inteiramente novo nesta
+> linhagem.
+
+**Proposição D0 (PROVADA).** Identidade exata de mistura de CDFs em
+`n` finito: `F_n(x) = \sum_{K=0}^nP(\mathrm{Bin}(n,c/n)=K)\,F_n^{(K)}(x)`
+— um upgrade genuíno do Fato 4.1 (que só rastreava médias) para leis
+condicionais completas.
+
+**Lema R (PROVADO).** Re-derivação completa, em nível de CDF, do
+argumento de mistura de Poisson da Proposição 3 (Scheffé + Chernoff),
+reduzindo o alvo `M_n(c)\to_dM(c)` a convergência de CDF em `K` fixo,
+para todo `K`.
+
+**`K=0` trivial; `K=1` (Proposição D1, PROVADA, o centro do
+resultado).** Forma fechada exata em `n` finito,
+`P(M_n^{(1)}\le k/n) = k(k+1)/n^2`, obtida estendendo a divisão de
+casos da Proposição 4 (`THEOREM.md`) da média para a lei completa —
+com corolários dando taxa uniforme de convergência de CDF `O(1/n)`
+(Corolário D1.1) e um segundo momento exato,
+`E[(M_n^{(1)})^2]=\tfrac12+\tfrac1{2n^2}`, à taxa `O(n^{-2})` (Corolário
+D1.2 — "o primeiro resultado de segundo momento/flutuação nesta
+linhagem"), mais convergência de variância (D1.3).
+
+**Lema P2 (PROVADO).** Redução geral-`K` da convergência do segundo
+momento a um único escalar `P_{nn}(n,K)`, via identidade exata de
+exchangeability — o análogo em dois pontos do Lema de Redução A
+geral-`K` de `THEOREM.md`.
+
+`K\ge2` honestamente aberto (tanto a ponte completa de CDF quanto
+mesmo apenas `P_{nn}(n,K)\to1/(K+1)`), com diagnóstico preciso: a
+maquinaria marginal existente é estruturalmente incapaz de uma
+resposta conjunta em dois pontos — a mesma obstrução que os Estágios
+18/25 já diagnosticaram para uma quantidade contínua relacionada, mas
+distinta (`E[M_K^2]`, fechada por outra rota no Estágio 24).
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee
+(`spotcheck_distributional_k1.py`): enumeração exaustiva independente
+por força bruta confirmando `P(M_n^{(1)}\le k/n)=k(k+1)/n^2` exatamente
+para `n=2,\ldots,6`.
+
+Referee hostil dedicado (`.../distributional_bridge_attempt/adversarial/`
+`REFEREE_REPORT.md`, 362 linhas), sem ler nenhum script da frente:
+re-derivou a Proposição D0 e, além disso, fechou de forma independente
+o único gap implícito do documento — que a lei *completa* de
+`M_n^{(K)}` (não apenas a média) independe de qual `K`-subconjunto é
+fixado — via um argumento de conjugação explícito (`σ∘f∘σ⁻¹=f'`
+identicamente, logo contagem de pontos cíclicos é invariante por
+conjugação, não apenas em distribuição); verificou o Lema R
+checando explicitamente se alguma propriedade específica de CDF
+(monotonicidade etc.) era contrabandeada onde o argumento original de
+médias não licenciaria — não encontrou nenhuma; re-derivou a
+Proposição D1 do zero, antes de ler a versão do documento, e
+confirmou por enumeração exaustiva independente (`n=2,\ldots,9`,
+aritmética `Fraction` exata, `0/63` discrepâncias); refez toda a
+álgebra dos Corolários D1.1–D1.3 e do Lema P2 à mão, confirmando por
+força bruta em 11 células (`K=1,2,3`); avaliou o diagnóstico de
+não-fechamento de `K\ge2` como preciso, nem superestimado nem
+subestimado; reproduziu as tabelas numéricas da §7 exatamente.
+
+> **Veredito: SOUND — ACCEPT for catalogue**, exatamente no tier
+> reivindicado. Nenhum bug encontrado em lugar nenhum da matemática do
+> documento; nenhuma superalegação e nenhuma subalegação desnecessária.
+
+Ver `theorem/distributional_bridge_attempt/ATTEMPT.md` e
+`.../distributional_bridge_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**Duas peças novas e genuínas estão catalogadas: a Proposição D0
+(mistura de CDFs exata) e o fechamento completo `K=0,1` da ponte
+distribucional (Proposição D1 e seus três corolários), mais o Lema P2
+(redução geral-`K` do segundo momento).** O mandato completo — a ponte
+`M_n(c)\to_dM(c)` para todo `K`, e mesmo `P_{nn}(n,K)\to1/(K+1)` para
+`K\ge2` — permanece **NÃO FECHADO**, mas agora com a maquinaria de
+redução (Lema R, Lema P2) provada incondicionalmente, isolando com
+precisão o que falta: apenas o caso `K\ge2` da própria Proposição
+D1/análoga. Nenhum resultado anterior é enfraquecido.
+
+**O que permanece aberto, com precisão:** a ponte distribucional
+completa e `P_{nn}(n,K)\to1/(K+1)` para `K\ge2` — precisaria de uma
+generalização da Proposição D1 análoga à obstrução já diagnosticada
+para a exploração conjunta (Estágios 18/25); `C(\gamma)` para
+`\gamma\in(0,1)` (Estágio 26); `p>20` de `D^{*(p)}_r(b)` (sob revisão
+na onda 18); a versão contínua-nativa do Teorema J (sob revisão na
+onda 18); o piso `H2` em `b=1`; a constante do platô de DISC-DEC-071.
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.

@@ -225,39 +225,35 @@ involved at all, a maximally independent check.
 | 7 | 246,960 | 541/1470 | 541/1470 | ✓ | 421/735 | 421/735 | ✓ | 1/2 | 0.58s |
 | 8 | 2,580,480 | 349/960 | 349/960 | ✓ | 109/192 | 109/192 | ✓ | 1/2 | 6.43s |
 | 9 | 29,393,280 | 175/486 | 175/486 | ✓ | 137/243 | 137/243 | ✓ | 1/2 | 77.89s |
-| 10 | see §4.3 (pushed further, background job) | | | | | | | | |
+| 10 | 362,880,000 | 134/375 | 134/375 | ✓ | 841/1500 | 841/1500 | ✓ | 1/2 | 1000.05s |
 
-**6/6 exact rational matches** for `P_nn(n,2)` and **6/6** for the
+**7/7 exact rational matches** for `P_nn(n,2)` and **7/7** for the
 marginal `ψ_n^{(2)}` cross-check against `THEOREM.md`'s already-proved
-formula, `n=4,…,9`, fully reproducing (independently) every value in the
-target document's own §4.1 table, plus `n=9` (29.4M exact
-configurations, ~78s). **`P(same|both)=1/2` exactly at every single `n`
-tested** — an independent, direct confirmation of Theorem J's Corollary
-(Estágio 25, cited by the target) inside this exact model, not merely a
-citation taken on faith.
+formula, `n=4,…,10`, fully reproducing (independently) every value in the
+target document's own §4.1 table (`n=4,…,9`), plus two genuinely new data
+points beyond any table in this lineage: `n=9` (29.4M exact
+configurations, ~78s) and `n=10` (362.9M exact configurations, ~1000s,
+run to completion as a "push further" bonus past the mandate's `n=4,…,9`
+minimum — see §4.3). **`P(same|both)=1/2` exactly at every single `n`
+tested, `n=4,…,10`** — an independent, direct confirmation of Theorem J's
+Corollary (Estágio 25, cited by the target) inside this exact model, not
+merely a citation taken on faith.
 
-### 4.3 Pushed further: `n=10` (attempted, not completed — disclosed honestly)
+### 4.3 Pushed further: `n=10` (direct full brute force, completed)
 
-The mandate's minimum requirement (`n=4,…,9`) is already met in full,
-exactly, by §4.2's table (6/6 matches) and independently by §4.1's
-Lemma-1/2-based re-derivation (`n=4,…,12`, 9/9 matches, including `n=10`
-*algebraically* via the independently-verified Lemma 1/2 machinery — see
-§4.1's table, which already covers `n=10` by that separate, non-brute-force
-route). As a genuine "push further" bonus, a **direct, full Definition-4
-brute force at `n=10`** (`10!·10²=362{,}880{,}000` exact configurations)
-was launched in the background (`brute_k2_ref.py 10`). It was still
-running, having processed roughly 10 million perm×target configurations
-per 2 seconds of CPU time consistent with the `n=9` timing, when this
-report had to be finalized within the session's time budget (n=10 is
-~12.3× the work of `n=9`, which itself took 78s — an expected total of
-~16 minutes single-threaded, longer here due to CPU contention with the
-other checks run concurrently). **This specific `n=10` full brute-force
-run did not complete in time and its result is not reported here** — per
-the mandate's explicit instruction not to report unfinished computations
-as complete. This does not weaken the verdict: `n=10` is independently
-already confirmed via the completely different, non-brute-force route of
-§4.1 (Lemma 1 + Lemma 2 re-derivation, exact match), and the mandate's
-own minimum bar (`n=4..9`, direct brute force) is fully met by §4.2.
+The mandate's minimum requirement (`n=4,…,9`) was already met in full,
+exactly, by §4.2's table and independently by §4.1's Lemma-1/2-based
+re-derivation (`n=4,…,12`, 9/9 matches, which had already predicted
+`P_nn(10,2)=134/375` by that structurally different route). As a genuine
+"push further" bonus, a **direct, full Definition-4 brute force at
+`n=10`** (`10!·10²=362{,}880{,}000` exact configurations, no Lemma 1/2
+machinery involved at all) was run to completion in the background
+(`brute_k2_ref.py 10`, `brute_k2_ref_n10.log`, wall time `1000.05s`≈16.7
+min) and is now folded into §4.2's table above: **exact match**,
+`P_nn(10,2)=134/375`, `ψ_{10}^{(2)}=841/1500`, `P(same|both)=1/2` — all
+three confirming Proposition NN2, the marginal cross-check, and Theorem
+J's Corollary continue to hold exactly at `n=10`, matching the
+independently-derived prediction from §4.1 exactly and in advance.
 
 ### 4.4 Corollary NN2.0 (rate), checked against the brute-force data
 
@@ -278,7 +274,7 @@ mandate's citation tier — but its *statement* was read in full, §6.2 of
 that document) gives `E[(M_n^{(2)})²]→1/3`, matching Estágio 24's
 continuum value. **Separately**, this referee's own brute force (§4.2)
 independently reproduces `THEOREM.md`'s already-proved marginal formula
-`ψ_n^{(2)}=8/15+4/(15n)+1/(15n²)` exactly at `n=4,…,9` — the requested
+`ψ_n^{(2)}=8/15+4/(15n)+1/(15n²)` exactly at `n=4,…,10` — the requested
 "does `P_nn(n,2)` correctly relate to `ψ_n^{(2)}`" cross-check. `P_nn` and
 `ψ_n^{(2)}` are genuinely *different* quantities (a pairwise joint
 probability vs. a single-point marginal) computed from the *same*
@@ -305,7 +301,7 @@ no error found.
 1/2` exactly at every finite `n,K`) was independently confirmed, not
 merely trusted**, directly inside this referee's own K=2 brute-force
 enumeration (§4.2's table, "`P(same|both)`" column): **exactly `1/2` at
-every one of `n=4,…,9`**, computed by the referee's own same-cycle
+every one of `n=4,…,10`**, computed by the referee's own same-cycle
 detection (walking `f` forward from one query point and checking whether
 the other is encountered before returning), independent of any code from
 the `joint_two_point_attempt` front where Theorem J was originally proved.
@@ -469,10 +465,10 @@ the target document.
 |---|---|---|---|
 | 1 | Lemma 1 (Marked-Point Gap Structure, general `m`) | own derivation + brute force, `m=2,3`, `n≤7` | **CONFIRMED**, 11/11 |
 | 2 | Lemma 2 (Two-Source Redirect Structure, R1–R5) | own construction (both topologies), `n=2..9` | **CONFIRMED**, 240/240 |
-| 3 | Proposition NN2 closed form | (a) own re-derivation from Lemma1+2, `n=4..12` (incl. `n=10` algebraically); (b) independent full-model brute force, `n=4..9` (`n=10` direct brute force launched but did not finish in time, §4.3 — disclosed, not required) | **CONFIRMED**, 9/9 and 6/6 |
+| 3 | Proposition NN2 closed form | (a) own re-derivation from Lemma1+2, `n=4..12`; (b) independent full-model brute force, `n=4..10` (§4.2–4.3) | **CONFIRMED**, 9/9 and 7/7 |
 | 4 | Corollary NN2.0 (rate `7/30`) | algebra + brute-force trend | **CONFIRMED** |
 | 5 | Corollary NN2.1 (`E[(M_n^{(2)})^2]→1/3`) | algebra (Lemma P2 cited) + independent marginal `ψ_n^{(2)}` cross-check | **CONFIRMED** |
-| 6 | Corollary NN2.2 (`→1/6`) | algebra + independent Theorem J Corollary re-verification (`P(same\|both)=1/2` exactly, `n=4..9`) | **CONFIRMED** |
+| 6 | Corollary NN2.2 (`→1/6`) | algebra + independent Theorem J Corollary re-verification (`P(same\|both)=1/2` exactly, `n=4..10`) | **CONFIRMED** |
 | 7 | Lemma 3 (Overlap-Reduction) | algebra | **CONFIRMED** |
 | 8 | Corollary NN2.3 / Estágio 28 table reproduction | independent brute force, all 4 values | **CONFIRMED**, 4/4 |
 | 9 | K=3 non-closure diagnosis (honest, not premature) | explicit stress test, flat-formula falsification | **CONFIRMED genuine** |

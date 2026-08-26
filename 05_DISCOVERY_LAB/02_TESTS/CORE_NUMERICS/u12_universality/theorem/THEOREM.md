@@ -4942,10 +4942,13 @@ força bruta do Lema 1 (`m=2,3`, `n\le7`, 11/11 células) e do Lema 2
 independentemente dos Lemas 1+2 (não a partir da fórmula da frente) —
 correspondência exata `n=4,\ldots,12` (9/9); enumeração exaustiva
 totalmente independente do modelo completo `K=2` da Definição 4 —
-correspondência exata `n=4,\ldots,9` (6/6), incluindo uma nova
-execução de 29,4 milhões de configurações em `n=9`; confirmou
+correspondência exata `n=4,\ldots,10` (7/7), incluindo uma execução de
+29,4 milhões de configurações em `n=9` e, além do pedido mínimo do
+mandato, uma execução de 362.880.000 configurações exatas em `n=10`
+(`P_{nn}(10,2)=134/375`, batendo exatamente com a predição
+independente da rota Lema 1+2); confirmou
 independentemente o Corolário do Teorema J (`P(\text{mesmo}\mid
-\text{ambos})=1/2`) em cada `n=4,\ldots,9` dentro de sua própria
+\text{ambos})=1/2`) em cada `n=4,\ldots,10` dentro de sua própria
 enumeração, não por confiança cega; reproduziu por força bruta
 independente os 4 valores da tabela do Estágio 28 (o mandato pedia
 `\ge2`); construiu explicitamente uma topologia `K=3` e mostrou que a

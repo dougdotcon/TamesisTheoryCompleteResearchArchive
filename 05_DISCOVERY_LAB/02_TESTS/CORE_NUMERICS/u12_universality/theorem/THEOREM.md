@@ -4430,7 +4430,10 @@ tecnicamente correta — apenas mais precisamente diagnosticada agora.
 **O que permanece aberto, com precisão:** `C(\gamma)` para
 `\gamma\in(0,1)` em si — precisaria de uma das três lacunas técnicas
 do §5 (nomeadas com precisão, mesma classe de citação já aceita no
-arquivo); a janela intermediária do Estágio 23; `p>20` de
+arquivo) [Ver Estágio 30 abaixo — 2026-08-26: a Lacuna 2 está agora
+FECHADA rigorosamente (e em forma mais forte que a pedida); restam
+as Lacunas 1 e 3, com a Lacuna 1 identificada como a mais dura das
+duas]; a janela intermediária do Estágio 23; `p>20` de
 `D^{*(p)}_r(b)` (sob revisão na onda 18); a versão contínua-nativa do
 Teorema J (sob revisão na onda 18); a ponte distribucional `M_n(c)\to_d
 M(c)` (sob revisão na onda 18); o piso `H2` em `b=1`; a constante do
@@ -4749,7 +4752,113 @@ em escala reduzida, não uma verificação completa); a ausência de uma
 única fórmula elementar simbólica em `p` livre (`Q_p(u)` tem grau
 genuíno `2p`); a soma em faixa `\mathrm{Strip}_p` continua sendo uma
 soma explícita de `b` termos, por desenho; `C(\gamma)` para
-`\gamma\in(0,1)` (Estágio 26); a ponte distribucional `M_n(c)\to_dM(c)`
+`\gamma\in(0,1)` (Estágio 26, com a Lacuna 2 agora fechada — Estágio
+30); a ponte distribucional `M_n(c)\to_dM(c)`
+para `K\ge2` (Estágio 27); a construção contínua-nativa do Teorema J
+(Estágio 28); o piso `H2` em `b=1`; a constante do platô de
+DISC-DEC-071. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 30 — 2026-08-26]
+
+**Onda 19, frente (b), `DISC-DEC-083`/`DISC-DEC-084`
+(`GAMMA-SECOND-ORDER-GAP-CLOSURE-ATTEMPT`).** Alvo: o Estágio 26 §5
+nomeou três lacunas técnicas precisas entre a heurística de cumulantes
+do §4 e uma prova rigorosa de `C(\gamma)` para `\gamma\in(0,1)`. Esta
+frente ataca uma delas.
+
+### O que aconteceu
+
+> **Lacuna 2 ("a correção de flutuação de `M` em `\tau`") está FECHADA,
+> rigorosamente, em forma mais forte que a pedida.** A frente anterior
+> pediu um limitante `E_M[\tau(M)] = \tau(\gamma k) + O(n^{-3/4})`,
+> uniforme para `k\le K\sim\sqrt{n\ln n}`, chamando-o de "computação
+> curta e mecânica... não realizada". Esta frente a realiza por
+> completo: `\tau(m)` é um **polinômio cúbico exato** em `m` (álgebra
+> elementar), então `E_M[\tau(M)]-\tau(\gamma k)` tem valor **exato em
+> forma fechada** — sem resto de Taylor, sem aproximação, válido para
+> **todo** `1\le k\le n` (não apenas `k\le K`):
+> `\Delta\tau(k) = \dfrac{-k^2\gamma(1-\gamma)^2+\tfrac16k\gamma(1-\gamma)(5-4\gamma)}{n^2}`,
+> e a soma ponderada que de fato importa para `E(\gamma)`,
+> `\Sigma_ke^{-s(k)}|\Delta\tau(k)|`, é provada (via um novo corolário —
+> Lema G2 — da identidade de soma de Poisson já PROVADA da frente
+> anterior, obtido por diferenciação em `a`) igual a `O(n^{-1/2})\to0`
+> — mais forte que o `O(n^{-3/4})` pontual pedido: a ordem pontual real
+> é `O(k^2/n^2)`, e a contribuição somada, que é o que de fato importa,
+> é `O(n^{-1/2})`.
+
+**Lema G2 (esta frente; PROVADO, corolário elementar da ferramenta de
+soma de Poisson do Lema D0).**
+`\Sigma_{k=1}^\infty k^2e^{-ak^2} = \tfrac{\sqrt\pi}4a^{-3/2} +
+O(a^{-5/2}e^{-\pi^2/a})` quando `a\to0^+`, obtido diferenciando a
+identidade de soma de Poisson do Lema D0 em relação a `a` (justificado
+por convergência uniforme de ambas as séries em subintervalos compactos
+de `a`, confirmado pelo referee via teste-M de Weierstrass).
+
+**O que isto NÃO fecha.** `C(\gamma)` para `\gamma\in(0,1)` permanece
+**ABERTO**. A Lacuna 1 (controle de resto de Taylor sobre
+`E_M[e^{-\delta(M)-\tau(M)/2}]`, envolvendo a quantidade transcendental
+`\delta`, exigindo maquinaria de controle de MGF estilo Hoeffding) está
+intocada e é agora, por eliminação e por comparação direta de
+dificuldade, o obstáculo dominante remanescente. A Lacuna 3
+(uniformidade sobre toda a faixa de truncamento) está **parcialmente**
+pré-descarregada — a peça de `\tau` fechada aqui já vale na faixa
+completa `1\le k\le n`, mas a contribuição da Lacuna 1 para a Lacuna 3
+permanece intocada.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: re-derivação
+independente da forma fechada de `\tau(m)` e de `\Delta\tau(k)` via
+sympy (identidade geral em `k,n,\gamma` e verificação separada via soma
+da pmf Binomial para `k=1,\ldots,6`) — ambas batendo exatamente com o
+enunciado da frente; confirmação numérica independente do Lema G2
+(mpmath dps=50) em `a\in\{0.1,0.01,0.001\}`, diferença absoluta
+`\sim10^{-40}$–$10^{-48}`.
+
+Referee hostil dedicado (`.../gamma_second_order_gap_closure_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: re-derivou `\tau(m)` e `\Delta\tau(k)` à mão antes
+de qualquer código; confirmou que a diferenciação da identidade de
+Poisson é de fato justificada (teste-M de Weierstrass, convergência
+uniforme de ambas as séries); reproduziu a tabela de razões
+`W_n/W_{10n}` da frente **dígito a dígito** (`3.154462, 3.149726,
+\ldots, 2.258223`); verificou explicitamente se a Lacuna 2, tal como
+enunciada pela frente antecessora, exige uniformidade em `\gamma` além
+de `k` — concluiu que não, e que a convergência mais lenta em
+`\gamma=0.99` (disclosurada honestamente pela própria frente) não é um
+defeito, apenas um fato pontual-em-`\gamma`, não um requisito
+violado; avaliou a lógica de "pré-descarregamento parcial" da Lacuna 3
+como estruturalmente sólida. Disclosure do referee: dois bugs no
+próprio código do referee (um símbolo livre não substituído; vazamento
+de float ao misturar inteiros Python com expressões sympy), ambos
+capturados e corrigidos antes de qualquer conclusão.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum erro matemático,
+> uso indevido de citação ou superalegação encontrado.
+
+Ver
+`.../gamma_second_order_attempt/gamma_second_order_gap_closure_attempt/ATTEMPT.md`
+e `.../gamma_second_order_gap_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**A Lacuna 2 do Estágio 26 §5 está catalogada como FECHADA.** O número
+de lacunas técnicas nomeadas entre a heurística do §4 e uma prova
+completa de `C(\gamma)` cai de três para duas (Lacuna 1, Lacuna 3), com
+a Lacuna 3 parcialmente pré-descarregada para a peça fechada aqui, e a
+Lacuna 1 identificada — com razão concreta, não apenas por eliminação —
+como a mais dura das duas remanescentes. Nenhum resultado anterior é
+enfraquecido.
+
+**O que permanece aberto, com precisão:** a Lacuna 1 (controle de resto
+de Taylor + MGF estilo Hoeffding sobre a quantidade transcendental
+`\delta(M)`); a Lacuna 3 restrita à contribuição da Lacuna 1; `C(\gamma)`
+para `\gamma\in(0,1)` em si, portanto ainda inteiramente ABERTO; a
+janela intermediária do Estágio 23; a exploração conjunta (Estágio 18);
+`p>20` de `D^{*(p)}_r(b)`; a ponte distribucional `M_n(c)\to_dM(c)`
 para `K\ge2` (Estágio 27); a construção contínua-nativa do Teorema J
 (Estágio 28); o piso `H2` em `b=1`; a constante do platô de
 DISC-DEC-071. Nenhuma alegação de progresso em Millennium Problem;

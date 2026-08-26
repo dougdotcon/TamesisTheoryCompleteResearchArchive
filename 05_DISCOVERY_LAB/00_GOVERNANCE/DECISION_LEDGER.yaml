@@ -5599,3 +5599,67 @@ decisions:
     untouched_safeguards:
       - "nenhum resultado catalogado ate verificacao adversarial + integracao um-a-um"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-084
+    date: 2026-08-26
+    decision: >
+      Integrar o resultado da onda 19, frente (b)
+      (`GAMMA-SECOND-ORDER-GAP-CLOSURE-ATTEMPT`, DISC-DEC-083), apos
+      verificacao adversarial hostil dedicada. RESULTADO: a Lacuna 2 do
+      Estagio 26 SS5 ("a correcao de flutuacao de M em tau") esta FECHADA,
+      rigorosamente, em forma mais forte que a pedida. A frente anterior
+      pediu um limitante E_M[tau(M)] = tau(gamma*k) + O(n^{-3/4}),
+      uniforme para k<=K~sqrt(n*ln(n)); esta frente mostra que tau(m) e
+      um polinomio cubico EXATO em m, entao Delta_tau(k):=E_M[tau(M)]-
+      tau(gamma*k) tem VALOR EXATO em forma fechada -- sem resto de
+      Taylor, sem aproximacao, valido para TODO 1<=k<=n (nao apenas
+      k<=K): Delta_tau(k) = [-k^2*gamma*(1-gamma)^2 +
+      (1/6)*k*gamma*(1-gamma)*(5-4*gamma)]/n^2. A soma ponderada que de
+      fato importa para E(gamma), Sigma_k e^{-s(k)}|Delta_tau(k)|, e
+      provada (via novo corolario -- Lema G2 -- da identidade de soma de
+      Poisson ja PROVADA do Lema D0, obtido por diferenciacao em a)
+      igual a O(n^{-1/2})->0 -- mais forte que o O(n^{-3/4}) pontual
+      pedido. Isto NAO fecha C(gamma) para gamma em (0,1): a Lacuna 1
+      (controle de resto de Taylor + MGF estilo Hoeffding sobre a
+      quantidade transcendental delta(M)) permanece intocada e e agora,
+      por eliminacao e por comparacao direta de dificuldade, o obstaculo
+      dominante remanescente; a Lacuna 3 esta parcialmente
+      pre-descarregada (a peca de tau fechada aqui ja vale na faixa
+      completa 1<=k<=n). Referee hostil dedicado, sem ler nenhum script
+      de nenhuma frente da linhagem: re-derivou tau(m) e Delta_tau(k) a
+      mao antes de qualquer codigo; confirmou que a diferenciacao da
+      identidade de Poisson e de fato justificada (teste-M de
+      Weierstrass); reproduziu a tabela de razoes W_n/W_10n da frente
+      digito a digito; verificou explicitamente se a Lacuna 2 exige
+      uniformidade em gamma alem de k -- concluiu que nao, e que a
+      convergencia mais lenta em gamma=0.99 (disclosurada honestamente
+      pela propria frente) nao e um defeito; avaliou a logica de
+      "pre-descarregamento parcial" da Lacuna 3 como estruturalmente
+      solida. Disclosure do referee: dois bugs no proprio codigo do
+      referee (simbolo livre nao substituido; vazamento de float ao
+      misturar inteiros Python com expressoes sympy), ambos capturados
+      e corrigidos antes de qualquer conclusao. Veredito SOUND, "ACCEPT
+      for catalogue", nenhum erro matematico encontrado. Integrado
+      como novo THEOREM.md Estagio 30, com ponteiro datado inserido no
+      fechamento "o que permanece aberto" do Estagio 26.
+    rationale: >
+      Mesmo padrao das integracoes anteriores desta linhagem. Fechamento
+      rigoroso e limpo de um sub-item nomeado com precisao (Lacuna 2),
+      sem nenhuma correcao necessaria -- o referee nao encontrou nenhum
+      erro matematico no documento-alvo, apenas em seu proprio codigo de
+      verificacao, corrigido antes de reportar.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/gamma_second_order_gap_closure_attempt/ATTEMPT.md (nova frente, ja commitada em snapshot; integrada agora)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/gamma_second_order_gap_closure_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (novo Estagio 30; ponteiro datado inserido no Estagio 26)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave19_results.gamma_second_order_gap_closure_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Lema tau-fluct (forma fechada exata de Delta_tau(k), toda a faixa 1<=k<=n) catalogado, PROVADO"
+      - "Lema G2 (forma fechada de Sigma k^2*e^{-a*k^2}, corolario do Lema D0) catalogado, PROVADO"
+      - "Lacuna 2 do Estagio 26 SS5 catalogada como FECHADA"
+    untouched_safeguards:
+      - "C(gamma) para gamma em (0,1) permanece NAO provado; a Lacuna 1 permanece o obstaculo dominante"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

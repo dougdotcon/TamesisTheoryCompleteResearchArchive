@@ -1,0 +1,60 @@
+==========================================================================================
+W_n(gamma) := sum_k e^{-s(k)} |Delta_tau(k)|  --  direct summation, growth under n -> 10n
+Predicted order: Theta(n^{-1/2}); successive ratio under n -> 10n should -> sqrt(10) = 3.162278
+==========================================================================================
+gamma=0.10: W_n = n=1000: 3.862308e-02, n=10000: 1.224395e-02, n=100000: 3.874886e-03   ratios(W_n/W_10n) = 3.154462, 3.159822
+gamma=0.30: W_n = n=1000: 1.590405e-02, n=10000: 5.049344e-03, n=100000: 1.598726e-03   ratios(W_n/W_10n) = 3.149726, 3.158356
+gamma=0.50: W_n = n=1000: 7.570921e-03, n=10000: 2.406419e-03, n=100000: 7.621862e-04   ratios(W_n/W_10n) = 3.146136, 3.157258
+gamma=0.70: W_n = n=1000: 2.844345e-03, n=10000: 9.064184e-04, n=100000: 2.873185e-04   ratios(W_n/W_10n) = 3.138005, 3.154751
+gamma=0.90: W_n = n=1000: 3.489353e-04, n=10000: 1.132087e-04, n=100000: 3.608202e-05   ratios(W_n/W_10n) = 3.082230, 3.137538
+gamma=0.99: W_n = n=1000: 2.438521e-06, n=10000: 1.079841e-06, n=100000: 3.762318e-07   ratios(W_n/W_10n) = 2.258223, 2.870148
+
+==========================================================================================
+Leading-order closed-form check of W_n(gamma) against the analytic prediction
+  W_n ~ [gamma(1-gamma)^2 (sqrt(pi)/4) beta^{-3/2}] n^{-1/2}   (leading k^2 term dominates)
+==========================================================================================
+gamma=0.10: W_n(n=1e5) direct = 3.874886e-03   leading-order prediction = 3.876275e-03   ratio = 0.999642
+gamma=0.30: W_n(n=1e5) direct = 1.598726e-03   leading-order prediction = 1.599639e-03   ratio = 0.999429
+gamma=0.50: W_n(n=1e5) direct = 7.621862e-04   leading-order prediction = 7.627427e-04   ratio = 0.999270
+gamma=0.70: W_n(n=1e5) direct = 2.873185e-04   leading-order prediction = 2.876328e-04   ratio = 0.998907
+gamma=0.90: W_n(n=1e5) direct = 3.608202e-05   leading-order prediction = 3.621176e-05   ratio = 0.996417
+gamma=0.99: W_n(n=1e5) direct = 3.762318e-07   leading-order prediction = 3.924283e-07   ratio = 0.958727
+
+==========================================================================================
+Signed correction Corr_n(gamma) := sum_k e^{-s(k)} * (-Delta_tau(k)/2)
+(this is exactly the term that must vanish for the tau(M)->tau(gamma k)
+ substitution used in Sec.4 of the predecessor ATTEMPT.md to be justified)
+==========================================================================================
+  gamma=0.10 n=    1000: Corr_n = 1.931154e-02
+  gamma=0.10 n=   10000: Corr_n = 6.121976e-03
+  gamma=0.10 n=  100000: Corr_n = 1.937443e-03
+  gamma=0.10 n= 1000000: Corr_n = 6.128235e-04
+
+  gamma=0.30 n=    1000: Corr_n = 7.952024e-03
+  gamma=0.30 n=   10000: Corr_n = 2.524672e-03
+  gamma=0.30 n=  100000: Corr_n = 7.993628e-04
+  gamma=0.30 n= 1000000: Corr_n = 2.528795e-04
+
+  gamma=0.50 n=    1000: Corr_n = 3.785460e-03
+  gamma=0.50 n=   10000: Corr_n = 1.203209e-03
+  gamma=0.50 n=  100000: Corr_n = 3.810931e-04
+  gamma=0.50 n= 1000000: Corr_n = 1.205724e-04
+
+  gamma=0.70 n=    1000: Corr_n = 1.422159e-03
+  gamma=0.70 n=   10000: Corr_n = 4.532091e-04
+  gamma=0.70 n=  100000: Corr_n = 1.436593e-04
+  gamma=0.70 n= 1000000: Corr_n = 4.546305e-05
+
+  gamma=0.90 n=    1000: Corr_n = 1.744497e-04
+  gamma=0.90 n=   10000: Corr_n = 5.660418e-05
+  gamma=0.90 n=  100000: Corr_n = 1.804101e-05
+  gamma=0.90 n= 1000000: Corr_n = 5.719104e-06
+
+  gamma=0.99 n=    1000: Corr_n = 1.136824e-06
+  gamma=0.99 n=   10000: Corr_n = 5.390656e-07
+  gamma=0.99 n=  100000: Corr_n = 1.881073e-07
+  gamma=0.99 n= 1000000: Corr_n = 6.123878e-08
+
+If Corr_n -> 0 as n grows (at the Theta(n^{-1/2}) rate shown above), Gap 2 is closed:
+substituting tau(gamma k) for the exact E_M[tau(M)] contributes exactly 0 to the
+n->infty limit defining E(gamma), rigorously (not just 'expected negligible').

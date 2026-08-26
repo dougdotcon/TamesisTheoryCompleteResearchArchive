@@ -1,0 +1,47 @@
+=== Bound check: e^{-s(k)} <= e^{-beta k^2/n} * e^{gamma/2} for all k<=n ===
+Violations of e^-s(k) <= e^-(beta k^2/n) e^(gamma/2) across gamma in {0.1,0.5,0.9,0.99}, k=1..500: 0
+
+=== W_n(gamma) := Sum_k e^{-s(k)} |Delta-tau(k)|, direct summation, no shortcuts ===
+gamma=0.1    W_1000=0.03862308365  W_10000=0.01224395105  W_100000=0.003874886086
+gamma=0.3    W_1000=0.01590404897  W_10000=0.005049344423  W_100000=0.00159872564
+gamma=0.5    W_1000=0.007570920611  W_10000=0.002406418503  W_100000=0.0007621861853
+gamma=0.7    W_1000=0.00284434511  W_10000=0.0009064183979  W_100000=0.0002873185374
+gamma=0.9    W_1000=0.0003489353359  W_10000=0.0001132087148  W_100000=3.608201964e-5
+gamma=0.99   W_1000=2.438521092e-6  W_10000=1.079840834e-6  W_100000=3.762317506e-7
+
+=== Ratio test: W_n / W_{10n} should -> sqrt(10) = 3.16227766... if O(n^{-1/2}) ===
+sqrt(10) = 3.16227766
+gamma=0.1    W_1000/W_10000=3.1544624  W_10000/W_100000=3.1598222
+gamma=0.3    W_1000/W_10000=3.1497255  W_10000/W_100000=3.1583558
+gamma=0.5    W_1000/W_10000=3.1461363  W_10000/W_100000=3.1572581
+gamma=0.7    W_1000/W_10000=3.1380046  W_10000/W_100000=3.1547508
+gamma=0.9    W_1000/W_10000=3.0822303  W_10000/W_100000=3.1375382
+gamma=0.99   W_1000/W_10000=2.2582227  W_10000/W_100000=2.8701481
+
+=== Signed sum (the actual correction quantity) -> should shrink toward 0 ===
+gamma=0.1    Corr_n at n=1e3,1e4,1e5,1e6: 0.019311542, 0.0061219755, 0.001937443, 0.00061282345
+gamma=0.3    Corr_n at n=1e3,1e4,1e5,1e6: 0.0079520245, 0.0025246722, 0.00079936282, 0.00025287951
+gamma=0.5    Corr_n at n=1e3,1e4,1e5,1e6: 0.0037854603, 0.0012032093, 0.00038109309, 0.00012057242
+gamma=0.7    Corr_n at n=1e3,1e4,1e5,1e6: 0.0014221586, 0.00045320906, 0.00014365927, 4.5463047e-5
+gamma=0.9    Corr_n at n=1e3,1e4,1e5,1e6: 0.00017444967, 5.6604177e-5, 1.8041008e-5, 5.7191042e-6
+gamma=0.99   Corr_n at n=1e3,1e4,1e5,1e6: 1.1368236e-6, 5.3906559e-7, 1.881073e-7, 6.1238776e-8
+
+=== Leading-order closed-form cross-check of W_n's magnitude (no summation, from Lemma G2 + known sums) ===
+gamma=0.1   n=1000    leading-term-estimate=0.040750156  actual W_n=0.038623084  ratio=0.947802
+gamma=0.1   n=10000   leading-term-estimate=0.012886331  actual W_n=0.012243951  ratio=0.95015
+gamma=0.1   n=100000  leading-term-estimate=0.0040750156  actual W_n=0.0038748861  ratio=0.950889
+gamma=0.3   n=1000    leading-term-estimate=0.018585155  actual W_n=0.015904049  ratio=0.855739
+gamma=0.3   n=10000   leading-term-estimate=0.005877142  actual W_n=0.0050493444  ratio=0.85915
+gamma=0.3   n=100000  leading-term-estimate=0.0018585155  actual W_n=0.0015987256  ratio=0.860216
+gamma=0.5   n=1000    leading-term-estimate=0.0097938101  actual W_n=0.0075709206  ratio=0.773031
+gamma=0.5   n=10000   leading-term-estimate=0.0030970747  actual W_n=0.0024064185  ratio=0.776997
+gamma=0.5   n=100000  leading-term-estimate=0.00097938101  actual W_n=0.00076218619  ratio=0.778233
+gamma=0.7   n=1000    leading-term-estimate=0.0040817036  actual W_n=0.0028443451  ratio=0.696852
+gamma=0.7   n=10000   leading-term-estimate=0.001290748  actual W_n=0.0009064184  ratio=0.702243
+gamma=0.7   n=100000  leading-term-estimate=0.00040817036  actual W_n=0.00028731854  ratio=0.703918
+gamma=0.9   n=1000    leading-term-estimate=0.00056791347  actual W_n=0.00034893534  ratio=0.614416
+gamma=0.9   n=10000   leading-term-estimate=0.00017959001  actual W_n=0.00011320871  ratio=0.630373
+gamma=0.9   n=100000  leading-term-estimate=5.6791347e-5  actual W_n=3.608202e-5  ratio=0.635344
+gamma=0.99  n=1000    leading-term-estimate=6.4377788e-6  actual W_n=2.4385211e-6  ratio=0.378783
+gamma=0.99  n=10000   leading-term-estimate=2.0358044e-6  actual W_n=1.0798408e-6  ratio=0.530425
+gamma=0.99  n=100000  leading-term-estimate=6.4377788e-7  actual W_n=3.7623175e-7  ratio=0.584412

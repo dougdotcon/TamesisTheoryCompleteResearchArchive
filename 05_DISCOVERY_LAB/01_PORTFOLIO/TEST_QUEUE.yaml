@@ -3150,6 +3150,16 @@ queue:
       MCLUST-PLATEAU-ABSTRACT-REAL-GAP-ATTEMPT (o gap abstrato-vs-real
       de ~30% do piso H2/plato M-CLUST, DISC-DEC-071/077, mecanismo
       separado Arvore B, risco moderado). Ver wave19_results abaixo.
+      ATUALIZACAO (DISC-DEC-084): onda 19 frente (b)
+      (GAMMA-SECOND-ORDER-GAP-CLOSURE-ATTEMPT) CONCLUIDA e INTEGRADA.
+      Lacuna 2 do Estagio 26 SS5 FECHADA rigorosamente, em forma mais
+      forte que a pedida: Delta_tau(k) tem forma fechada exata para
+      toda a faixa 1<=k<=n (Lema tau-fluct), e a soma ponderada e
+      O(n^{-1/2})->0 (Lema G2, corolario do Lema D0). C(gamma) para
+      gamma em (0,1) permanece NAO fechado -- a Lacuna 1 (controle de
+      MGF sobre quantidade transcendental) e agora o obstaculo
+      dominante. Veredito SOUND, ACCEPT for catalogue. Integrado como
+      Estagio 30 em THEOREM.md.
     wave17_results:
       conjecture1_k5_attempt: >
         CONCLUIDA e INTEGRADA (DISC-DEC-075) apos referee REFORCADO.
@@ -3315,13 +3325,31 @@ queue:
         aceitavel mesmo que apenas K=2 (nao geral-K) seja alcancado.
         Seeds 20260880000+/referee 20260881000+.
       gamma_second_order_gap_closure_attempt: >
-        DESPACHADA (DISC-DEC-083). Ataca uma das tres lacunas tecnicas
-        nomeadas com precisao no SS5 de
-        gamma_second_order_attempt/ATTEMPT.md (Estagio 26), na
-        tentativa de tornar rigorosa a expansao heuristica de
-        cumulantes do SS4 e assim provar C(gamma) para gamma em (0,1)
-        (Estagio 23 provou apenas gamma=1). Risco alto, nao-fechamento
-        honesto aceitavel. Seeds 20260882000+/referee 20260883000+.
+        CONCLUIDA e INTEGRADA (DISC-DEC-084). A Lacuna 2 do SS5 de
+        gamma_second_order_attempt/ATTEMPT.md (Estagio 26) -- "a
+        correcao de flutuacao de M em tau" -- esta FECHADA,
+        rigorosamente, em forma mais forte que a pedida. tau(m) e um
+        polinomio cubico EXATO em m, entao
+        Delta_tau(k):=E_M[tau(M)]-tau(gamma*k) tem forma fechada exata
+        para TODO 1<=k<=n (nao apenas k<=K):
+        Delta_tau(k)=[-k^2*gamma*(1-gamma)^2+(1/6)*k*gamma*(1-gamma)*
+        (5-4*gamma)]/n^2 (Lema tau-fluct). A soma ponderada
+        Sigma_k e^{-s(k)}|Delta_tau(k)| e O(n^{-1/2})->0 (Lema G2,
+        novo corolario, por diferenciacao, da identidade de soma de
+        Poisson ja PROVADA do Lema D0) -- mais forte que o O(n^{-3/4})
+        pontual pedido. NAO fecha C(gamma) para gamma em (0,1): a
+        Lacuna 1 (controle de MGF estilo Hoeffding sobre quantidade
+        transcendental) permanece o obstaculo dominante; a Lacuna 3
+        parcialmente pre-descarregada. Referee hostil dedicado, sem
+        ler nenhum script da linhagem: re-derivou tudo a mao,
+        reproduziu a tabela de razoes W_n/W_10n digito a digito,
+        confirmou que a diferenciacao da identidade de Poisson e
+        justificada (teste-M de Weierstrass), disclosurou 2 bugs no
+        proprio codigo (corrigidos antes de concluir). Veredito SOUND,
+        ACCEPT for catalogue, nenhum erro matematico encontrado.
+        Integrado como "Estagio 30" em THEOREM.md. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/gamma_second_order_gap_closure_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
       general_p_dstar_extension3_attempt: >
         DESPACHADA (DISC-DEC-083). Estende D^{*(p)}_r(b) para
         p=41,...,80 em escala completa (r<=200,b<=30), confirmando em

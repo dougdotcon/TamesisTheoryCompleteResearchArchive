@@ -1,0 +1,46 @@
+======================================================================
+(A) tau(m) closed form
+======================================================================
+sympy closed-form of sum_{i=1}^m ((k-i)/n)^2 : m*(6*k**2 - 6*k*m - 6*k + 2*m**2 + 3*m + 1)/(6*n**2)
+claimed cubic form                            : m*(6*k**2 - 6*k*m - 6*k + 2*m**2 + 3*m + 1)/(6*n**2)
+difference (should be exactly 0): 0
+PASS: tau(m) cubic closed form confirmed symbolically, exact for all m,k,n.
+
+======================================================================
+(B) Binomial raw moments via factorial moments vs direct pmf sum
+======================================================================
+k=1: E[M]-formula=0, E[M^2]-formula=0, E[M^3]-formula=0
+k=2: E[M]-formula=0, E[M^2]-formula=0, E[M^3]-formula=0
+k=3: E[M]-formula=0, E[M^2]-formula=0, E[M^3]-formula=0
+k=4: E[M]-formula=0, E[M^2]-formula=0, E[M^3]-formula=0
+k=5: E[M]-formula=0, E[M^2]-formula=0, E[M^3]-formula=0
+PASS: classical Binomial raw-moment formulas confirmed at k=1..5.
+
+======================================================================
+(C) Delta_tau(k) exact closed form: two independent derivations
+======================================================================
+Delta_tau (route 1, moment substitution)      : -gamma*k*(gamma - 1)*(6*gamma*k - 4*gamma - 6*k + 5)/(6*n**2)
+Delta_tau (claimed closed form)                : -gamma*k*(gamma - 1)*(6*gamma*k - 4*gamma - 6*k + 5)/(6*n**2)
+difference (should be exactly 0): 0
+PASS: route 1 (moment substitution) confirmed.
+
+route 2: direct pmf summation, concrete k
+  k=1: direct-pmf Delta_tau - claimed = 0
+  k=2: direct-pmf Delta_tau - claimed = 0
+  k=3: direct-pmf Delta_tau - claimed = 0
+  k=4: direct-pmf Delta_tau - claimed = 0
+  k=5: direct-pmf Delta_tau - claimed = 0
+  k=6: direct-pmf Delta_tau - claimed = 0
+PASS: route 2 (direct pmf summation, k=1..6) confirmed independently.
+
+======================================================================
+(D) Consistency: exact Delta_tau == exact 3rd-order Taylor of the
+    cubic tau(m) about m=gamma*k (no remainder, since tau is cubic)
+======================================================================
+tau''(gamma k): 2*gamma*k - 2*k + 1
+tau'''(gamma k) (constant): 2
+3rd-order Taylor (exact, no remainder) reconstruction: -gamma*k*(gamma - 1)*(6*gamma*k - 4*gamma - 6*k + 5)/(6*n**2)
+difference vs claimed Delta_tau (should be exactly 0): 0
+PASS: exact algebra matches exact 3rd-order Taylor reconstruction.
+
+ALL SYMBOLIC CHECKS (A)-(D) PASSED.

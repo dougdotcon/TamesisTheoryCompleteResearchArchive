@@ -1,0 +1,32 @@
+=== K=0 sanity: both cyclic always (trivial identity, all n) ===
+n=2 K=0: P(both cyclic) = 1  (configs=2)  target=1  match=True
+n=3 K=0: P(both cyclic) = 1  (configs=6)  target=1  match=True
+n=4 K=0: P(both cyclic) = 1  (configs=24)  target=1  match=True
+n=5 K=0: P(both cyclic) = 1  (configs=120)  target=1  match=True
+
+=== K=1: brute force vs CORRECTED hand-derived closed form ===
+closed form: (3n^2 - n + 2)/(6n^2) = 1/2 - 1/(6n) + 1/(3n^2)
+n=2 K=1: brute=1/2  closed_form=1/2  match=True  n*(val-1/2)=0  (configs=8)
+n=3 K=1: brute=13/27  closed_form=13/27  match=True  n*(val-1/2)=-1/18  (configs=54)
+n=4 K=1: brute=23/48  closed_form=23/48  match=True  n*(val-1/2)=-1/12  (configs=384)
+n=5 K=1: brute=12/25  closed_form=12/25  match=True  n*(val-1/2)=-1/10  (configs=3000)
+n=6 K=1: brute=13/27  closed_form=13/27  match=True  n*(val-1/2)=-1/9  (configs=25920)
+n=7 K=1: brute=71/147  closed_form=71/147  match=True  n*(val-1/2)=-5/42  (configs=246960)
+n*(val-1/2) -> -1/6 as n->oo (exact, since val=1/2-1/(6n)+1/(3n^2) => n*(val-1/2) = -1/6 + 1/(3n) -> -1/6)
+
+=== K=2: brute force only (small n, factorial cost) ===
+n=3 K=2: P(both cyclic) = 10/27 = 0.370370  n*(val-1/3)=1/9=0.111111  (configs=162)
+n=4 K=2: P(both cyclic) = 49/144 = 0.340278  n*(val-1/3)=1/36=0.027778  (configs=2304)
+n=5 K=2: P(both cyclic) = 33/100 = 0.330000  n*(val-1/3)=-1/60=-0.016667  (configs=30000)
+n=6 K=2: P(both cyclic) = 44/135 = 0.325926  n*(val-1/3)=-2/45=-0.044444  (configs=388800)
+n=7 K=2: P(both cyclic) = 143/441 = 0.324263  n*(val-1/3)=-4/63=-0.063492  (configs=5186160)
+
+=== K=3: brute force only (small n, factorial cost) ===
+n=4 K=3: P(both cyclic) = 19/64 = 0.296875  n*(val-1/4)=3/16=0.187500  (configs=6144)
+n=5 K=3: P(both cyclic) = 3383/12500 = 0.270640  n*(val-1/4)=129/1250=0.103200  (configs=150000)
+n=6 K=3: P(both cyclic) = 233/900 = 0.258889  n*(val-1/4)=4/75=0.053333  (configs=3110400)
+
+=== Attempt exact rational-function fit for K=2 from 5 data points ===
+Fit (using first 3 exact data points, ansatz 1/3+a/n+b/n^2+c/n^3): {a: -11/72, b: 37/72, c: 5/6}
+  n=6: predicted=845/2592  actual=44/135  match=False
+  n=7: predicted=2003/6174  actual=143/441  match=False

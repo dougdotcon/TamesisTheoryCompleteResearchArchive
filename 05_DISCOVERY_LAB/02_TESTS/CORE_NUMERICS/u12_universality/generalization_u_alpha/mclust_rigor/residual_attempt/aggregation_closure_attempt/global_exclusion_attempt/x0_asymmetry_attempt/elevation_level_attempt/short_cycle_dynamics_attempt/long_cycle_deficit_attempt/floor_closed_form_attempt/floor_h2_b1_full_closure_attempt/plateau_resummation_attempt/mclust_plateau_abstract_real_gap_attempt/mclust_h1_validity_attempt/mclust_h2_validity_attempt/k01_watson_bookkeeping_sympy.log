@@ -1,0 +1,74 @@
+==============================================================================
+STEP 0: moment-integral / Taylor-coefficient cancellation check
+==============================================================================
+  m=0: (1/eps) int e^-v/eps v^m dv = 1  => /m! = 1  (expect eps_s**0)
+  m=1: (1/eps) int e^-v/eps v^m dv = eps_s  => /m! = eps_s  (expect eps_s**1)
+  m=2: (1/eps) int e^-v/eps v^m dv = 2*eps_s**2  => /m! = eps_s**2  (expect eps_s**2)
+  m=3: (1/eps) int e^-v/eps v^m dv = 6*eps_s**3  => /m! = eps_s**3  (expect eps_s**3)
+  m=4: (1/eps) int e^-v/eps v^m dv = 24*eps_s**4  => /m! = eps_s**4  (expect eps_s**4)
+  m=5: (1/eps) int e^-v/eps v^m dv = 120*eps_s**5  => /m! = eps_s**5  (expect eps_s**5)
+PASS: (1/eps)*int_0^inf e^{-v/eps} v^m/m! dv = eps^m exactly, all m=0..5.
+      => Phi = sum_m eps^m * (d/dx - d/dy)^m W(x,y), NO extra 1/m!.
+
+==============================================================================
+STEP 1: order-1 base case, re-derived directly from the required
+reading's own explicit psi1 equation (independent sanity check)
+==============================================================================
+  d/dy[psi1_x] - d/dy[(x+y)*psi1 - 1 - int_0^y psi1 dy']  (as an
+  expression in psi1, psi1_y, using FTC for the integral term):
+   = -(x + y)*Derivative(psi1(x, y), y) + Derivative(psi1(x, y), x, y)
+  psi1_xy - (x+y)*psi1_y  (should be the SAME expression as above) = 0
+PASS: (psi1_y)_x = (x+y)*psi1_y identically -- HOMOGENEOUS, matches
+      the required reading's stated n=1 result, re-derived fresh.
+
+==============================================================================
+STEP 2: general order-n Watson bookkeeping, n = 1..6, inductive
+==============================================================================
+  n=1: f_n = psi_n - phi_n  simplifies to:  0
+       => f_1 == 0 identically: chi_1's ODE is HOMOGENEOUS
+          => chi_1 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_1 IS y-independent. Proceeding with psi_1 now treated as Function(x) only.
+  n=2: f_n = psi_n - phi_n  simplifies to:  0
+       => f_2 == 0 identically: chi_2's ODE is HOMOGENEOUS
+          => chi_2 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_2 IS y-independent. Proceeding with psi_2 now treated as Function(x) only.
+  n=3: f_n = psi_n - phi_n  simplifies to:  0
+       => f_3 == 0 identically: chi_3's ODE is HOMOGENEOUS
+          => chi_3 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_3 IS y-independent. Proceeding with psi_3 now treated as Function(x) only.
+  n=4: f_n = psi_n - phi_n  simplifies to:  0
+       => f_4 == 0 identically: chi_4's ODE is HOMOGENEOUS
+          => chi_4 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_4 IS y-independent. Proceeding with psi_4 now treated as Function(x) only.
+  n=5: f_n = psi_n - phi_n  simplifies to:  0
+       => f_5 == 0 identically: chi_5's ODE is HOMOGENEOUS
+          => chi_5 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_5 IS y-independent. Proceeding with psi_5 now treated as Function(x) only.
+  n=6: f_n = psi_n - phi_n  simplifies to:  0
+       => f_6 == 0 identically: chi_6's ODE is HOMOGENEOUS
+          => chi_6 == 0 by the Growth-Exclusion Lemma (k02)
+          => psi_6 IS y-independent. Proceeding with psi_6 now treated as Function(x) only.
+
+ALL 6 tested orders PASS: f_n == 0 for n = 1..6.
+Every order's y-derivative equation is homogeneous given the
+previous orders are y-independent -- clean mechanical induction,
+consistent with (and independently confirming) the general
+telescoping-sum proof for ALL n given in ATTEMPT.md Section 3.2.
+
+==============================================================================
+STEP 3: general-n telescoping identity, symbolic check with an
+explicit finite sum (n up to 8), NOT relying on Step 2's per-n
+re-derivation -- direct algebraic identity check
+==============================================================================
+  n=2: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=3: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=4: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=5: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=6: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=7: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=8: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+  n=9: sum_(m=1)^(n-1) omega_(n-m)^(m)(x) - psi_(n-1)'(x) = 0
+PASS: telescoping identity holds exactly for n=2..9 (abstract,
+      symbol-independent of any specific psi_k closed form).
+
+ALL STEPS PASS.

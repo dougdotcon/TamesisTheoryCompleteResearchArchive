@@ -1,0 +1,38 @@
+======================================================================
+Independent construction and check of f_n = psi_n - phi_n = 0
+(fresh script, own variable/loop structure, from prose recursion only)
+======================================================================
+n=2: PASS (f_n == 0)
+n=3: PASS (f_n == 0)
+n=4: PASS (f_n == 0)
+n=5: PASS (f_n == 0)
+n=6: PASS (f_n == 0)
+n=7: PASS (f_n == 0)
+
+ALL n=2..7 PASS: True
+
+======================================================================
+Focused re-run at the two orders explicitly requested (n=4, n=5),
+printing the full intermediate build for audit.
+======================================================================
+
+--- n=4 ---
+omega_k for k=1..n:
+  omega_1 = psi1(x)
+  omega_2 = psi2(x) - Derivative(psi1(x), x)
+  omega_3 = psi3(x) - Derivative(psi2(x), x)
+  omega_4 = psi4(x, y) - Derivative(psi3(x), x)
+phi_4 (raw, expanded) = psi4(x, y)
+f_4 = psi_4 - phi_4 (simplified) = 0
+
+--- n=5 ---
+omega_k for k=1..n:
+  omega_1 = psi1(x)
+  omega_2 = psi2(x) - Derivative(psi1(x), x)
+  omega_3 = psi3(x) - Derivative(psi2(x), x)
+  omega_4 = psi4(x) - Derivative(psi3(x), x)
+  omega_5 = psi5(x, y) - Derivative(psi4(x), x)
+phi_5 (raw, expanded) = psi5(x, y)
+f_5 = psi_5 - phi_5 (simplified) = 0
+
+ALL FOCUSED n=4,5 CHECKS PASSED (independent script, matches by-hand re-derivation).

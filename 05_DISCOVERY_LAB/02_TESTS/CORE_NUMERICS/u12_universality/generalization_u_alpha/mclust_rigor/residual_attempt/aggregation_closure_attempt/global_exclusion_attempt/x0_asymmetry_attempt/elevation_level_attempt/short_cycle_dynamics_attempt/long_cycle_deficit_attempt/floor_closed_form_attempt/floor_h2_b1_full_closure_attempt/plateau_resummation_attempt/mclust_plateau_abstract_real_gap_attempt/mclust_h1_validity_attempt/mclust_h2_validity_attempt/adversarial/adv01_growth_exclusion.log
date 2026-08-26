@@ -1,0 +1,50 @@
+======================================================================
+PART A: e^{x^2/2+xy} solves the homogeneous ODE u_x = (x+y) u
+======================================================================
+u_x - (x+y)*u = 0
+PASS: homogeneous solution verified symbolically, exact.
+
+======================================================================
+PART B: u_p solves u_x - (x+y) u = f(x) for an ABSTRACT f
+======================================================================
+Sub-check B1: Leibniz rule confirmed on a concrete decaying f(t)=t
+I(x,y) [f=t] = (-sqrt(2)*pi*x*(1 + y/x)*exp(x**2*(1 + y/x)**2/2)*erf(sqrt(2)*x*(1 + y/x)/2)/2 + sqrt(2)*pi*x*(1 + y/x)*exp(x**2*(1 + y/x)**2/2)/2)*exp(-x*(x/2 + y))/(sqrt(pi)*(1 + y/x)) + 2*(sqrt(2)*sqrt(pi)*x**3*(1 + y/x)**3*(sqrt(pi)*erf(sqrt(2)*x*(1 + y/x)/2)/4 + sqrt(2)*exp(-x**2*(1 + y/x)**2/2)/(4*x*(1 + y/x)))*exp(x**2*(1 + y/x)**2/2) - sqrt(2)*pi*x**3*(1 + y/x)**3*exp(x**2*(1 + y/x)**2/2)/4)*exp(-x*(x/2 + y))/(sqrt(pi)*x**2*(1 + y/x)**2)
+dI/dx (direct diff of closed form) - (-e^{-(x^2/2+xy)} f(x)) = 0
+PASS: Leibniz rule confirmed exactly on concrete f=t.
+
+Sub-check B2: general abstract-f argument, symbolic manipulation
+u_p_x - (x+y) u_p  [after substituting Leibniz value of dI/dx] = f(x)
+PASS: u_p solves the inhomogeneous ODE exactly, for abstract f, given only
+      the Leibniz-rule fact dI/dx = -e^{-(x^2/2+xy)} f(x).
+
+======================================================================
+PART C: uniqueness argument + y=0,f=-1 special case reduces to R(x)
+======================================================================
+lim_{x->inf} e^{x^2/2+xy} for symbolic y>=0: oo
+PASS: growth mode diverges as x->inf for every y>=0 (symbolic, general y).
+
+y=0, f=-1 special case:
+u_p(x,0) [f=-1] = sqrt(2)*sqrt(pi)*exp(x**2/2)*erfc(sqrt(2)*x/2)/2
+u_p(x,0) - sqrt(pi/2) erfcx(x/sqrt2) [as e^{x^2/2} erfc(x/sqrt2)] = 0
+PASS: y=0,f=-1 special case is EXACTLY R(x), matching the record's closed form.
+
+int_x^inf e^{-t^2/2} dt (sympy) = sqrt(2)*sqrt(pi)*erfc(sqrt(2)*x/2)/2
+PASS: consistent with erfc definition.
+
+======================================================================
+PART D: numerical illustration of growth-mode blow-up (independent grid/size)
+======================================================================
+   x |                   R(x) |      R(x)+1.0e-25·e^(x²/2) | relative blow-up
+   0 |          1.25331413732 |              1.25331413732 | 7.97885e-26
+   5 |         0.192808104715 |             0.192808104715 | 1.39173e-19
+   9 |         0.109787282578 |             0.109787321387 | 3.53488e-7
+  11 |        0.0901756755011 |              18.9186944244 | 208.798
+  13 |        0.0764757610162 |             498750932663.0 | 6.52169e+12
+  14 |        0.0710695805389 |          3.63797094761e+17 | 5.11889e+18
+  16 |         0.062258665995 |          3.88770840599e+30 | 6.24445e+31
+
+Qualitative check: blow-up should be increasing/eventually dominant.
+Blow-up grows dramatically over the grid (independent confirmation): True
+PASS: independent numerical illustration confirms qualitative claim (different grid/admixture).
+
+ALL PART A-D CHECKS PASSED.

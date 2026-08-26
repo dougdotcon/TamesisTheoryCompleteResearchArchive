@@ -704,6 +704,75 @@ flowchart TD
 > `.../plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/mclust_h1_validity_attempt/ATTEMPT.md`
 > e `.../mclust_h1_validity_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-26 — DISC-DEC-093/DISC-DEC-095.]** Onda 21
+> frente (d) (`MCLUST-H2-VALIDITY-ATTEMPT`) atacou `H2` (unicidade da
+> solução limitada `y`-independente em cada ordem), o segundo gap
+> heurístico nomeado por `PLATRESUM`, companheiro de `H1` (onda 20
+> frente c, adendo acima) — escopo explicitamente restrito a `H2`,
+> deixando `H1` intocado.
+>
+> **`H2`, como gap heurístico INDEPENDENTE de `H1`, essencialmente SE
+> DISSOLVE — mas não é provado incondicionalmente.** Dois pilares: (1)
+> um novo **Lema de Exclusão de Crescimento** (elementar, rigoroso,
+> totalmente geral): para a EDO linear `u_x(x,y)-(x+y)u(x,y)=f(x)`, o
+> modo homogêneo `e^{x^2/2+xy}` diverge para TODO `y\ge0` quando
+> `x\to\infty`, logo a solução limitada existe (fórmula fechada via
+> regra de Leibniz, para `f` de crescimento subgaussiano) e é ÚNICA —
+> isto é exatamente o mecanismo que `H2` nomeia, agora demonstrado sem
+> restrição à família específica `{P(s)+Q(s)\,\mathrm{erfcx}(\cdot)}`
+> usada no resto da linhagem, e ilustrado numericamente (uma admissão de
+> `10^{-30}` do modo excluído contamina a solução por `20` ordens de
+> magnitude até `x=15`). (2) Uma **identidade de telescopagem geral**
+> (todas as ordens `n`, não caso-a-caso), a partir da identidade exata
+> `\Psi_{xy}=\Psi+(x+y)\Psi_y-\Phi` combinada com uma generalização,
+> aqui construída pela primeira vez, do operador de Watson do registro
+> a TODAS as ordens (`\Phi\sim\sum_m\epsilon^m(d/dx-d/dy)^m W`, com
+> normalização de coeficiente exatamente `1`, sem `1/m!` residual —
+> verificada separadamente antes de ser usada), provando que a condição
+> `H2` de "`y`-independência" se propaga automaticamente de cada ordem
+> resolvida para a próxima, DADA a validade da contabilidade de
+> Watson/Taylor de `H1` até aquela ordem — verificada mecanicamente em
+> `sympy`, `n=1..6`, e algebricamente em geral, `n=2..9`.
+>
+> **O que isto significa, precisamente:** o conteúdo heurístico total
+> da linhagem se estreita de "dois gaps nomeados separados (`H1`,
+> `H2`)" para "um gap (`H1`) mais um corolário elementar (esta redução
+> de `H2`)" — `H2` não carrega nenhum risco heurístico INDEPENDENTE de
+> `H1`. `H1` em si (`(U1)`+`(U2)` do adendo de onda 20 acima) permanece
+> inteiramente ABERTO e intocado por este resultado. Uma hipótese
+> adicional de suavidade ordinária (`\Psi_{xy}=\Psi_{yx}`) permanece
+> como premissa padrão não verificada a partir do sistema de EDP exato.
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem: re-derivou
+> o Lema de Exclusão de Crescimento do zero (solução homogênea, solução
+> particular via Leibniz em `f` concreto e abstrato, unicidade,
+> redução ao caso `y=0,f=-1`) — tudo confirmado; re-derivou a
+> normalização do integral de momento (o crux do achado auto-capturado
+> S2 da frente) de forma independente via substituição e fórmula Gama;
+> re-derivou a identidade de telescopagem geral inteiramente à mão a
+> partir da recursão em prosa, sem lacunas, e verificou-a
+> simbolicamente em `n=2..7` (frente reivindicou `n=2..9`); re-derivou
+> a fórmula de `\phi_n` do operador de Watson, `n=1..6`; re-verificou a
+> cota `R(x)\le1/x` e os valores físicos de borda `\psi_1..\psi_4` em
+> `c=1000,4000,8000` (rota numérica diferente da frente) — todos os `12`
+> valores batem. Um achado nomeado (R1), severidade BAIXA/completude de
+> documentação (não erro matemático): o passo indutivo (§3.3) invoca o
+> caso homogêneo do Lema de Exclusão de Crescimento sem nomear
+> explicitamente, como hipótese distinta da suavidade ordinária já
+> citada, que `\chi_n:=\partial_y\psi_n` (não apenas `\psi_n`) precisa
+> ser conhecido como limitado quando `x\to\infty` antes de o lema poder
+> concluir `\chi_n=0`; muito provavelmente já subsumido pela
+> contabilidade de Watson/Taylor mais ampla que o próprio `H1`
+> pressupõe, mas logicamente distinto da suavidade citada — corrigido
+> via nota datada na `ATTEMPT.md` da frente (não como correção, por não
+> ser erro matemático).
+>
+> Veredito **SOUND WITH NAMED ISSUES — ACCEPT for catalogue, exatamente
+> no nível reivindicado**. `H1` permanece ABERTO e intocado; `H2` está
+> reduzido a corolário de `H1`, não provado incondicionalmente. Fontes:
+> `.../mclust_h1_validity_attempt/mclust_h2_validity_attempt/ATTEMPT.md`
+> e `.../mclust_h2_validity_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

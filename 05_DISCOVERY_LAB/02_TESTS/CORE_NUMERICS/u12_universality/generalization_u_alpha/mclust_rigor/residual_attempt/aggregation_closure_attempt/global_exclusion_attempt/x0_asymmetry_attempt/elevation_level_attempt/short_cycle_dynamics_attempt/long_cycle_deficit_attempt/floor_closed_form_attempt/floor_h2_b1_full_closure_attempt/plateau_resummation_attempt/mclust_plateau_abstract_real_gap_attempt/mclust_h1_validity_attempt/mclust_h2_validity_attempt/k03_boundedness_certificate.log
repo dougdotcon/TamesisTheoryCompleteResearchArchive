@@ -1,0 +1,96 @@
+==============================================================================
+PART 0: cross-check R(x) [substitution formula] against an
+independent erfc-based reference formula, dps=60, x up to 200
+(this check is what CAUGHT the S1 issue documented in the module
+docstring, in an earlier version of this script -- kept here as a
+permanent, standing validation, not removed after the fix)
+==============================================================================
+  x=         1.3: R(x)_sub=0.56486712896961613993  R(x)_erfc=0.56486712896961613993  reldiff=1.377e-61
+  x=          20: R(x)_sub=0.049875925981836783658  R(x)_erfc=0.049875925981836783658  reldiff=2.632e-60
+  x=  31.6227766: R(x)_sub=0.031591248224039865102  R(x)_erfc=0.031591248224039865102  reldiff=1.754e-59
+  x=  89.4427191: R(x)_sub=0.011178942868763129479  R(x)_erfc=0.011178942868763129479  reldiff=2.185e-59
+  x=         200: R(x)_sub=0.00499987500937382833  R(x)_erfc=0.00499987500937382833  reldiff=9.69e-58
+PASS: substitution formula matches erfc reference to >=50 digits,
+      x up to 200 -- trusted for Parts 1-3 below.
+
+==============================================================================
+PART 1: proved analytic bound R(x) <= 1/x for x>0, verified numerically
+==============================================================================
+
+  Proof: for t>=x>0, t/x >= 1, so e^{-t^2/2} <= (t/x)*e^{-t^2/2}.
+  Integrating: int_x^inf e^{-t^2/2} dt <= (1/x) int_x^inf t*e^{-t^2/2} dt
+                                        = (1/x) * [-e^{-t^2/2}]_x^inf = e^{-x^2/2}/x.
+  Multiplying by e^{x^2/2}: R(x) = e^{x^2/2} int_x^inf e^{-t^2/2}dt <= 1/x.  QED.
+
+         x                   R(x)                    1/x   R(x)<=1/x?
+    1.0000        0.6556795424188                    1.0         True
+    2.0000       0.42136922928805                    0.5         True
+    5.0000       0.19280810471532                    0.2         True
+   10.0000      0.099028596471732                    0.1         True
+   20.0000      0.049875925981837                   0.05         True
+   31.6228       0.03159124822404      0.031622776603368         True
+   50.0000      0.019992009580854                   0.02         True
+   89.4427      0.011178942868763      0.011180339887498         True
+  200.0000     0.0049998750093738                  0.005         True
+PASS (checked, x=31.62=sqrt(1000) and x=89.44=sqrt(8000) included --
+      exactly the physical-edge x=sqrt(c) values used in Part 3 below).
+  R(0) = sqrt(pi/2) = 1.2533141373155002512  (the global max of R on [0,inf),
+  since R is monotonically decreasing -- R'=xR-1<=x*(1/x)-1=0 for x>0,
+  R'(0)=-1<0 -- so sup_{x>=0} R(x) = R(0) = sqrt(pi/2), finite.)
+
+==============================================================================
+PART 2: numerical boundedness certificate for R, R', R'', R'''
+(the sources needed at n=1..4, per required reading + k02's own
+psi3 formula) -- grid search + tail values, dps=60
+==============================================================================
+  sup on grid x in {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0, 12.0, 20.0, 31.6227766, 50.0, 89.4427191, 200.0, 400.0}:
+    sup |R(x)|    = 1.25331413732   (attained at x=0, = R(0))
+    sup |R'(x)|   = 1.0
+    sup |R''(x)|  = 1.25331413732
+    sup |R'''(x)| = 2.0
+  tail check at x=1000 (should be small, confirming decay, not a
+  grid-stopping artifact):
+    x=1000.0: R=0.000999999  R'=-9.99997e-7  R''=1.99999e-9  R'''=-5.99994e-12
+PASS: all four functions numerically bounded and decaying on the
+      whole tested range -- the sub-Gaussian growth hypothesis Part B
+      of k02's Growth-Exclusion Lemma needs, for n=1..4, is satisfied.
+
+==============================================================================
+PART 3: behaviour of psi1..psi4 AT THE TRUE PHYSICAL EDGE x=sqrt(c)
+(s=1), for the c-grid the sibling H1 front used -- does the
+boundedness-at-x=infinity selection stay sensible at the boundary
+that actually matters for finite c, not just formally as x->inf?
+==============================================================================
+       c    x=sqrt(c)        psi1=R(x)       psi2=2xR-2          psi3(x)          psi4(x)
+     200    14.142136    0.07036229989  -0.009853624351   0.002403288684 -0.0008096059183
+     500     22.36068    0.04463244819  -0.003976236699  0.0006186964855 -0.0001333357857
+    1000    31.622777    0.03159124822  -0.001994029792  0.0002200411488  -3.366352774e-5
+    2000     44.72136    0.02234951616 -0.0009985037369   7.802846844e-5  -8.457721795e-6
+    4000    63.245553    0.01580743841 -0.0004996254679   2.762850227e-5  -2.119701404e-6
+    8000    89.442719    0.01117894287 -0.0002499063085   9.775467174e-6  -5.305868078e-7
+
+  Monotonicity check: |psi_n(sqrt(c))| strictly DECREASING as c grows,
+  for each n=1..4 (the qualitative signature of a well-behaved,
+  decaying profile -- the OPPOSITE of what growth-mode leakage near
+  the true boundary would look like):
+    psi1: ['0.0703623', '0.0446324', '0.0315912', '0.0223495', '0.0158074', '0.0111789']  strictly decreasing: True
+    psi2: ['0.00985362', '0.00397624', '0.00199403', '0.000998504', '0.000499625', '0.000249906']  strictly decreasing: True
+    psi3: ['0.00240329', '0.000618696', '0.000220041', '7.80285e-5', '2.76285e-5', '9.77547e-6']  strictly decreasing: True
+    psi4: ['0.000809606', '0.000133336', '3.36635e-5', '8.45772e-6', '2.1197e-6', '5.30587e-7']  strictly decreasing: True
+
+  Reading: all four profiles are small and SMOOTHLY DECREASING in
+  magnitude as c grows (x=sqrt(c) grows), exactly as the boundedness-
+  at-infinity selection predicts -- no sign whatsoever of the excluded
+  e^{x^2/2}-type growth mode reasserting itself near the true physical
+  edge s=1, for any of the four orders with an established closed
+  form. This is consistent with (though does not independently
+  replace) the sibling mclust_h1_validity_attempt front's own,
+  much larger, uniformity grid (6 c-values x 7 x-values, x up to 8 in
+  the main grid and up to 20 -- s up to 1.41, PAST s=1 -- in its
+  stress test), which found the SAME qualitative absence of
+  degradation using a completely different (direct series-summation)
+  method. Two independent computations, by two different fronts, on
+  two different aspects (this front: the outer-limit closed-form
+  profiles; the H1 front: the full finite-t0 series), agree.
+
+ALL PARTS PASS.

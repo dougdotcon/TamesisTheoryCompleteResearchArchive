@@ -1,0 +1,70 @@
+==============================================================================
+PART A: homogeneous solution phi_h(x,y) = e^(x^2/2+xy) solves
+        phi_h_x = (x+y)*phi_h  exactly
+==============================================================================
+  phi_h_x - (x+y)*phi_h = 0
+PASS.
+
+==============================================================================
+PART B: bounded-branch variation-of-parameters formula solves
+        u_x - (x+y)*u = f(x)  exactly, for generic f
+==============================================================================
+  u_p_x - (x+y)*u_p - f(x)  (using Leibniz dI/dx=-e^-(x^2/2+xy) f(x)) = 0
+PASS: the bounded-branch formula solves the inhomogeneous ODE exactly.
+
+  Special case y=0, f(x)=-1: recovers the required reading's own R(x).
+  R(1.3) via direct formula        = 0.564867128969616139930325679361479724113233024478740552563249
+  u_p(1.3,0) via general B formula = 0.564867128969616139930325679361479724113233024478740552563249  (f=-1 case)
+PASS: matches to 50+ digits (trivially -- same formula -- kept as an
+      explicit sanity check that the sign convention is the one used
+      throughout this front, matching the required reading's R(x)).
+
+==============================================================================
+PART C: uniqueness -- the two-line elementary proof
+==============================================================================
+
+  Claim: if u1(.,y), u2(.,y) both solve u_x-(x+y)u=f(x) on [x0,inf) and
+  both are bounded there, then u1 == u2.
+
+  Proof: d := u1-u2 solves the HOMOGENEOUS equation d_x=(x+y)*d, so by
+  Part A, d(x,y) = C(y)*e^{x^2/2+xy} for some C(y). If d is bounded on
+  [x0,inf) (difference of two bounded functions), and phi_h(x,y) =
+  e^{x^2/2+xy} -> +infinity as x->infinity for EVERY y>=0 (the x^2/2
+  term alone already forces this, regardless of the sign or size of the
+  xy term), boundedness forces C(y)=0 for every y. Hence d==0. QED.
+
+  This is the FULLY GENERAL, order-independent, completely rigorous
+  content of H2's "growth excluded by boundedness" phrase -- it holds
+  for ANY order n's chi_n equation (once shown homogeneous, per k01),
+  and does not depend on the specific family {P(s)+Q(s)erfcx(...)} that
+  the required reading's remark "(proved only within fields where...)"
+  seemed to restrict it to. The family-restriction in the ancestor's H2
+  statement is NOT needed for this uniqueness argument itself -- it
+  would only be needed to separately establish EXISTENCE of a bounded
+  solution (via Part B's explicit formula, which converges whenever f
+  has at most sub-Gaussian growth, true at every order tested in k01,
+  since every f_n encountered there is either identically 0 or built
+  from R(x) and finitely many of its derivatives, all bounded).
+
+==============================================================================
+PART D: numerical illustration -- adding a tiny homogeneous
+admixture to the bounded branch causes catastrophic blow-up
+==============================================================================
+       x      R(x) [bounded branch]        R(x)+1e-30*phi_h(x)     rel. blow-up
+     0.0              1.25331413732              1.25331413732    7.9788456e-31
+     2.0             0.421369229288             0.421369229288    1.7535823e-29
+     5.0             0.192808104715             0.192808104715    1.3917324e-24
+     8.0             0.123131963258             0.123131963258    6.4128727e-16
+    10.0            0.0990285964717            0.0990286016564      5.235564e-8
+    12.0            0.0827662865014              18.6694837393         224.5687
+    15.0            0.0663742358233          7.21322059685e+18    1.0867501e+20
+
+  Reading: R(x) itself decays like ~1/x for large x (its true
+  asymptotic behaviour, R(x) ~ 1/x - 1/x^3 + ...), staying bounded
+  and small; the SAME size (1e-30, chosen tiny at x=0) admixture of
+  the excluded mode phi_h(x)=e^{x^2/2} overtakes it completely by
+  x~12-15 and diverges -- exactly the mechanism that makes
+  'boundedness excludes the homogeneous mode' the CORRECT and
+  UNIQUE selection principle, not merely a convenient simplification.
+
+ALL PARTS PASS.

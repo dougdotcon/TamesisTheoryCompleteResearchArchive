@@ -1,0 +1,27 @@
+Step 1: W = Psi - eps*Psi_x, per-order coefficients w_n (eps^n):
+  w_1 = psi1(x, y)   (expected omega_1 = psi_1 - d(psi_0)/dx)   match=True
+  w_2 = psi2(x, y) - Derivative(psi1(x, y), x)   (expected omega_2 = psi_2 - d(psi_1)/dx)   match=True
+  w_3 = psi3(x, y) - Derivative(psi2(x, y), x)   (expected omega_3 = psi_3 - d(psi_2)/dx)   match=True
+  w_4 = psi4(x, y) - Derivative(psi3(x, y), x)   (expected omega_4 = psi_4 - d(psi_3)/dx)   match=True
+  w_5 = psi5(x, y) - Derivative(psi4(x, y), x)   (expected omega_5 = psi_5 - d(psi_4)/dx)   match=True
+  w_6 = psi6(x, y) - Derivative(psi5(x, y), x)   (expected omega_6 = psi_6 - d(psi_5)/dx)   match=True
+PASS: W's eps^n coefficient is exactly omega_n = psi_n - psi_{n-1}' at every order,
+      independently confirming omega_0 = 0 (since psi_0 = psi_{-1} := 0).
+
+Step 2: Phi ~ sum_m eps^m (d/dx-d/dy)^m W, collect coefficient phi_n of eps^n
+        and compare against the CLAIMED formula phi_n = sum_{m=0}^{n-1} (d/dx-d/dy)^m[omega_{n-m}]
+
+Self-test: coeff() extraction (post sp.expand fix) is eps-free at m=2 probe -- OK.
+
+n=1: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+n=2: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+n=3: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+n=4: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+n=5: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+n=6: direct-from-operator-series phi_n vs claimed-formula phi_n   match=True
+
+PASS (n=1..6): the claimed formula
+  phi_n = sum_{m=0}^{n-1} (d/dx-d/dy)^m [omega_{n-m}]
+is EXACTLY the eps^n coefficient of Phi ~ sum_m eps^m (d/dx-d/dy)^m W combined with
+W = Psi - eps*Psi_x -- independently re-derived from the stated inputs, matching
+ATTEMPT.md Section 3.1's formula exactly, at every order tested.

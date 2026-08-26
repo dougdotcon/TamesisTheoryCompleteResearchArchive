@@ -1,0 +1,74 @@
+======================================================================
+PART A: independent proof and numerical check of R(x) <= 1/x, x>0
+======================================================================
+
+Re-derivation (from scratch): For t >= x > 0,  t/x >= 1, so
+    e^{-t^2/2} <= (t/x) e^{-t^2/2}.
+Integrating both sides over t in [x, infinity):
+    int_x^inf e^{-t^2/2} dt <= (1/x) int_x^inf t e^{-t^2/2} dt = (1/x) e^{-x^2/2}
+(since d/dt[-e^{-t^2/2}] = t e^{-t^2/2}, so int_x^inf t e^{-t^2/2}dt = e^{-x^2/2} exactly).
+Multiply both sides by e^{x^2/2}:
+    R(x) = e^{x^2/2} int_x^inf e^{-t^2/2} dt <= 1/x.   QED (elementary, x>0).
+
+         x |                       R(x) |                        1/x | R(x)<=1/x?
+       0.5 |       0.876364456453692347 |                        2.0 | True
+         1 |       0.655679542418798472 |                        1.0 | True
+         2 |       0.421369229288054473 |                        0.5 | True
+         5 |       0.192808104715315765 |                        0.2 | True
+        10 |      0.0990285964717319214 |                        0.1 | True
+        20 |      0.0498759259818367837 |                       0.05 | True
+31.622776601683793 |      0.0315912482223610988 |      0.0316227766016837941 | True
+        50 |      0.0199920095808535673 |                       0.02 | True
+89.44271909999159 |      0.0111789428687641801 |      0.0111803398874989479 | True
+       150 |     0.00666637040986776679 |     0.00666666666666666667 | True
+       200 |     0.00499987500937382833 |                      0.005 | True
+
+PASS: R(x) <= 1/x confirmed numerically (independent erfc-based route) at all test x,
+      including x=sqrt(1000)=31.62 and x=sqrt(8000)=89.44, the physical-edge values
+      relevant to Part B below.
+
+======================================================================
+PART B: independent physical-edge (x=sqrt(c)) spot check, psi1..psi4
+======================================================================
+Sanity check at x=0 against record's own closed forms:
+psi1(0) = 1.253314137315500251207883  expect sqrt(pi/2) = 1.253314137315500251207883
+psi2(0) = -2.0  expect -2
+psi3(0) = 4.386599480604250879227589  expect (7/2)sqrt(pi/2) = 4.386599480604250879227589
+psi4(0) = -11.33333333333333333333333  expect -34/3 = -11.33333333333333333333333
+PASS: all four x=0 sanity checks match the record's closed forms to >=30 digits.
+
+Physical-edge spot check at x=sqrt(c), c in {1000, 4000, 8000}
+(chosen as 3 of the front's own 6-value c-grid {200,500,1000,2000,4000,8000})
+
+     c |    x=sqrt(c) | quantity |                 ours |   front (ATTEMPT.md) | rel diff
+  1000 |   31.6227766 |   psi1 |   0.0315912482223611 |          0.031591248 | 7.039e-9  OK
+  1000 |   31.6227766 |   psi2 | -0.00199402979186948 |        -0.0019940298 | 4.077e-9  OK
+  1000 |   31.6227766 |   psi3 | 0.000220041148830505 |        0.00022004115 | 5.315e-9  OK
+  1000 |   31.6227766 |   psi4 | -3.36635277400186e-5 |          -3.36635e-5 | 8.24e-7  OK
+  4000 |   63.2455532 |   psi1 |   0.0158074384147027 |          0.015807438 | 2.623e-8  OK
+  4000 |   63.2455532 |   psi2 | -0.000499625467931528 |        -0.0004996255 | 6.419e-8  OK
+  4000 |   63.2455532 |   psi3 |  2.76285022727855e-5 |         2.7628502e-5 | 9.873e-9  OK
+  4000 |   63.2455532 |   psi4 | -2.11970140361982e-6 |           -2.1197e-6 | 6.622e-7  OK
+  8000 |   89.4427191 |   psi1 |   0.0111789428687642 |          0.011178943 | 1.174e-8  OK
+  8000 |   89.4427191 |   psi2 | -0.000249906308542538 |        -0.0002499063 | 3.418e-8  OK
+  8000 |   89.4427191 |   psi3 |  9.77546717402615e-6 |         9.7754672e-6 | 2.657e-9  OK
+  8000 |   89.4427191 |   psi4 | -5.30586807776901e-7 |           -5.3059e-7 | 6.016e-6  OK
+
+PASS: all 12 spot-checked values (3 c-values x 4 profiles) match ATTEMPT.md's
+      Section 5.2 table to within the precision the front itself printed,
+      via an INDEPENDENT implementation (own erfc-based R, own substituted-quad
+      psi3, own derivative-recursion R''').
+
+======================================================================
+Monotone-decrease-in-magnitude check across the 3 tested c values
+(front's own claim: all four columns strictly decreasing in magnitude as c grows)
+======================================================================
+psi1: values at c=[1000, 4000, 8000] -> magnitudes ['0.0315912', '0.0158074', '0.0111789']  decreasing=True
+psi2: values at c=[1000, 4000, 8000] -> magnitudes ['0.00199403', '0.000499625', '0.000249906']  decreasing=True
+psi3: values at c=[1000, 4000, 8000] -> magnitudes ['0.000220041', '2.76285e-5', '9.77547e-6']  decreasing=True
+psi4: values at c=[1000, 4000, 8000] -> magnitudes ['3.36635e-5', '2.1197e-6', '5.3059e-7']  decreasing=True
+
+PASS: monotone decrease in magnitude confirmed on this 3-point subset (consistent
+      with, not a full replacement for, the front's own full 6-point check).
+
+ALL PART A-B NUMERICAL CHECKS PASSED.

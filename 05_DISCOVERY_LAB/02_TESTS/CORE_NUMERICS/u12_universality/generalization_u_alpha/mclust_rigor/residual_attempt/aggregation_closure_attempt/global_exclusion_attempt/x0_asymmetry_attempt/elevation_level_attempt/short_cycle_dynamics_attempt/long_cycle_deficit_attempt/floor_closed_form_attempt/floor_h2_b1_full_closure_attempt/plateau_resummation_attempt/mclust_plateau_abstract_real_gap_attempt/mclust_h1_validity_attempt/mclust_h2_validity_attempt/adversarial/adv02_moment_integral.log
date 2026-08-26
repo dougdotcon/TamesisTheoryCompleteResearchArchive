@@ -1,0 +1,40 @@
+======================================================================
+Symbolic check, m = 0..8, exact integration
+======================================================================
+m=0: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = 1   [expected eps^0]   PASS
+m=1: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps   [expected eps^1]   PASS
+m=2: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**2   [expected eps^2]   PASS
+m=3: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**3   [expected eps^3]   PASS
+m=4: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**4   [expected eps^4]   PASS
+m=5: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**5   [expected eps^5]   PASS
+m=6: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**6   [expected eps^6]   PASS
+m=7: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**7   [expected eps^7]   PASS
+m=8: (1/eps)*int_0^inf e^(-v/eps) v^m/m! dv = eps**8   [expected eps^8]   PASS
+
+All m=0..8 cases PASS: coefficient is exactly eps^m, no leftover 1/m!.
+
+======================================================================
+General symbolic m via the Gamma-function moment formula
+======================================================================
+int_0^inf e^{-v/eps} v^m dv  [via v=eps*u substitution] = eps*eps**m*gamma(m + 1)
+difference from eps^(m+1)*Gamma(m+1): 0
+PASS: raw moment = eps^(m+1) * m! (Gamma(m+1)), general m.
+
+Dividing by m! (Taylor coefficient) and by eps (the (1/eps) kernel prefactor):
+(1/eps) * int_0^inf e^{-v/eps} v^m/m! dv = eps**m
+PASS: general-m symbolic derivation confirms coefficient EXACTLY eps^m; no 1/m! survives.
+
+======================================================================
+Cross-check against the WRONG (self-caught, early-draft) claim
+======================================================================
+Early draft: Phi ~ sum_m eps^m/m! (d/dx-d/dy)^m W  -- i.e. would need
+  (1/eps) int_0^inf e^{-v/eps} v^m dv = eps^m  (NO 1/m! in the moment)
+Actual value of (1/eps)*int_0^inf e^{-v/eps} v^m dv = eps**m*gamma(m + 1)  = m! * eps^m
+This is m!*eps^m, NOT eps^m -- confirms the early draft's un-divided moment
+integral is off by a factor of m!, exactly matching what the front's S2
+says it caught (an extra/missing 1/m! mismatch). If the Taylor 1/m! is
+correctly included in the SOURCE term (v^m/m!, i.e. the m-th Taylor term
+of W(x+v,y-v) in v), the two m!'s cancel and coefficient 1 survives.
+This is exactly the correct account: PASS.
+
+ALL MOMENT-INTEGRAL NORMALIZATION CHECKS PASSED.

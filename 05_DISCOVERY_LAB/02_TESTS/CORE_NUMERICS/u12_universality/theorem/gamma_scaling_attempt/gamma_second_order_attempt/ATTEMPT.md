@@ -32,10 +32,12 @@ as a **CONJECTURE** (7-digit numerical match, not a proof).
 > 2. **Splitting `S_n` in two, one half is fully closed.**
 >    `S_n = Σ_ke^{-s(k)} + Σ_k[A_k−e^{-s(k)}]`. The first sum is
 >    **PROVED in closed form**, for *every* `γ∈(0,1]` (not just
->    `γ=1`): `Σ_{k=1}^ne^{-s(k)} = G_n + D_0(γ) + O(√n\,e^{-cn})`,
+>    `γ=1`): `Σ_{k=1}^ne^{-s(k)} = G_n + D_0(γ) + Θ(n^{-1/2})`
+>    [correção pós-adversarial de 2026-08-26, ver §3 abaixo — o erro é
+>    polinomial, não exponencial],
 >    `D_0(γ)=(γ−1)/(2(2−γ))`, via Poisson summation / the Jacobi theta
->    transformation — an elementary, fully rigorous, exponentially
->    precise tool never previously used in this line (Lemma D0 of this
+>    transformation — an elementary, fully rigorous tool never
+>    previously used in this line (Lemma D0 of this
 >    front, §3). This piece is genuinely new and generalizes past
 >    `γ=1`; the wave-17 front never isolated it.
 > 3. **The second half — where all the difficulty lives — is not
@@ -191,6 +193,34 @@ residual randomness). Then
 > where
 > `D_0(γ) := \dfrac{γ}{4β} − \dfrac12 = \dfrac{1}{2(2−γ)} − \dfrac12 =
 > \dfrac{γ−1}{2(2−γ)}`.
+
+> **[Correção pós-adversarial, 2026-08-26 — DISC-DEC-079.]** O referee
+> hostil (`adversarial/REFEREE_REPORT.md`, §B) confirmou o valor fechado
+> `D_0(γ)=(γ−1)/(2(2−γ))` por uma rota independente (completar o
+> quadrado antes da soma de Poisson), mas mostrou que o **termo de erro
+> enunciado acima está errado**: o erro declarado
+> `O(\sqrt n\,e^{-cn})` (exponencialmente pequeno) é falso. O erro real
+> é `Θ(n^{-1/2})` — polinomialmente pequeno, não exponencial — com
+> coeficiente líder explícito `(γ²√π)/(32β^{3/2})`, derivado
+> independentemente pelo referee e confirmado numericamente (mpmath,
+> `γ∈{0.1,…,1.0}`, `n` até 32000, correspondência a 3–4 dígitos
+> significativos). Esse `Θ(n^{-1/2})` já era visível nos próprios §3/§6.1
+> deste documento (ver linhas 224–227 abaixo e §6.1: razão de erros
+> sucessivos convergindo para `√10` sob `n↦10n`, a assinatura de um erro
+> `O(n^{-1/2})`, não exponencial) — mas nunca foi reconciliado com o
+> enunciado formal do Lema, que herdou por engano a forma exponencial
+> típica de somas de Poisson "puras" sem levar em conta que o termo
+> `O(k²/n²)` da expansão linear (linhas 207, 213–215 abaixo) já introduz
+> um erro polinomial dominante. **Enunciado corrigido:**
+> `S_n^{(0)} = G_n + D_0(γ) + Θ(n^{-1/2})`, com coeficiente líder
+> `(γ²√π)/(32β^{3/2})`; o valor de `D_0(γ)` em si não muda. Toda
+> linguagem de "precisão exponencial" associada a este lema no restante
+> do documento (por exemplo, a caracterização em §3 abaixo) deve ser lida
+> como corrigida por este adendo. Este é o único achado do referee;
+> nenhuma outra correção foi necessária (Lema E, o casamento simbólico
+> de §4, e a reprodução numérica de §6 foram todos confirmados sem
+> ressalvas). Ver DECISION_LEDGER.yaml DISC-DEC-079 para o registro
+> completo.
 
 *Proof.* `e^{-s(k)} = e^{-βk²/n}\,e^{γk/(2n)}` exactly (§2 of the
 wave-17 front). **Quadratic part.** By the Jacobi theta / Poisson
@@ -550,7 +580,7 @@ finer.
 |---|---|
 | Lemma 1 (`nφ(n,c)=Σ_kA_k`) | **PROVED** (wave-17 front); independently re-verified here (§1) |
 | Lemma E (equivalence: `C(γ)` conjecture `⟺` `S_n=G_n+D(γ)+o(1)`) | **PROVED** (this front, §2; elementary, from cited results) |
-| `D_0(γ)=(γ-1)/(2(2-γ))` (deterministic half of `S_n`'s expansion) | **PROVED**, all `γ∈(0,1]` (this front, §3; new — via Poisson summation, not previously used in this line) |
+| `D_0(γ)=(γ-1)/(2(2-γ))` (deterministic half of `S_n`'s expansion) | **PROVED**, all `γ∈(0,1]` (this front, §3; new — via Poisson summation, not previously used in this line); error term corrected post-adversarial from `O(√n\,e^{-cn})` to `Θ(n^{-1/2})` (2026-08-26, see §3 blockquote) — value of `D_0(γ)` itself unaffected |
 | `E(γ)=D(γ)-D_0(γ)` closed form matches a from-scratch cumulant-expansion heuristic derivation, symbolically exactly | **derived heuristically, matches exactly (sympy-checked)** — NOT proved (this front, §4) |
 | **`C(γ)` for `γ∈(0,1)` (the mandate)** | **NOT PROVED** — honest non-closure, with the obstruction localized to three named, same-citation-tier technical lemmas (§5) |
 | `C(1)=-2/(3√π)` | **PROVED** (wave-17 front, via cited Robbins 1955 + FGKP95); re-confirmed consistent here via `D_0(1)=0`, `E(1)=D(1)=-1/3` (§6.4) |

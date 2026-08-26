@@ -1,0 +1,33 @@
+=== Step 1: reduce the document's E_heuristic formula from its own stated pieces ===
+E_heuristic(gamma), reduced from raw pieces: (-3*gamma**2 + 7*gamma - 6)/(6*(gamma**2 - 4*gamma + 4))
+Document's claimed closed form:             (-3*gamma**2 + 7*gamma - 6)/(6*(gamma - 2)**2)
+Difference (raw pieces vs claimed closed form), should be 0: 0
+
+=== Step 2: independently recompute E(gamma) := D(gamma) - D0(gamma) ===
+D(gamma)  = (-gamma**2 + 8*gamma/3 - 2)/(2 - gamma)**2
+D0(gamma) = (gamma - 1)/(4 - 2*gamma)
+E(gamma) = D(gamma)-D0(gamma), simplified: (-3*gamma**2 + 7*gamma - 6)/(6*(gamma**2 - 4*gamma + 4))
+
+=== Step 3: the central claim -- do the heuristic and the target match EXACTLY? ===
+E_heuristic(gamma) - E(gamma) simplifies to: 0
+(sanity, using the RAW un-simplified heuristic pieces directly): 0
+
+=== Step 4: numeric spot-check at several points (rational and irrational) ===
+gamma=0.100000: E_heuristic=-0.24607571560480147738  E_target=-0.24607571560480147738  diff=0
+gamma=0.333333: E_heuristic=-0.24000000000000000000  E_target=-0.24000000000000000000  diff=0
+gamma=0.500000: E_heuristic=-0.24074074074074074074  E_target=-0.24074074074074074074  diff=0
+gamma=0.900000: E_heuristic=-0.29338842975206611570  E_target=-0.29338842975206611570  diff=0
+gamma=0.707107: E_heuristic=-0.25427673235673712535  E_target=-0.25427673235673712535  diff=0E-139
+gamma=0.785398: E_heuristic=-0.26580257883642430494  E_target=-0.26580257883642430494  diff=0E-139
+
+=== Step 5: internal-consistency check of the order-counting claims in Sec 4 ===
+Checking the two cited Gaussian-moment asymptotics used to go from Q(k;n,gamma) to E(gamma):
+  Sum_k k e^{-beta k^2/n} ~ n/(2 beta)   [[from wave-17 Lemma 5(c), cited]]
+  Sum_k k^3 e^{-beta k^2/n} ~ n^2/(2 beta^2)
+  int_0^inf x e^{-b x^2} dx = 1/(2*b)  (with b=beta/n, this is n/(2 beta) -- check: 0 )
+  int_0^inf x^3 e^{-b x^2} dx = 1/(2*b**2)  (with b=beta/n, this is n^2/(2 beta^2) -- check: 0 )
+
+Rebuilding E(gamma)_approx from Q(k;n,gamma) summed against these moments, from scratch
+Rebuilt E(gamma) from first principles (own derivation, not copying doc's coef grouping): (-3*gamma**2 + 7*gamma - 6)/(6*(gamma**2 - 4*gamma + 4))
+Matches document's E_heur_raw?  diff = 0
+Matches E_target (D-D0)?        diff = 0

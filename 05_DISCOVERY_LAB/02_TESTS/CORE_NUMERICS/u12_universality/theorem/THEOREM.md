@@ -3998,7 +3998,11 @@ esta pergunta específica, um fato verificado, não presumido).
 **O que permanece aberto, com precisão:** uma taxa `n^{-1/2}` e um
 termo de segunda ordem **provados** (não apenas conjecturados) para
 `\gamma\in(0,1)` — precisaria de uma versão rigorosa em nível de
-Edgeworth da expansão do §7.3; a janela intermediária `n^\epsilon \le
+Edgeworth da expansão do §7.3 [Ver Estágio 26 abaixo — 2026-08-26:
+progresso parcial genuíno (Lema E e a metade determinística `D_0(γ)`
+agora PROVADOS incondicionalmente para todo `γ`), mas `C(γ)` em si
+para `γ\in(0,1)` continua ABERTO — apenas a metade "difícil" resta,
+agora precisamente isolada]; a janela intermediária `n^\epsilon \le
 c_n \le n^{2/3}/\log` entre o regime `c` fixo do Estágio 10 e o
 regime `\gamma_n\ge n^{-1/3}\ln n` do Corolário 2 — nomeada aqui como
 o resíduo natural, explicitamente não fechada. Conjectura 1 (`K\ge5`)
@@ -4304,4 +4308,124 @@ Definição 3 (tentada em §6.3, não completada — mesma obstrução do
 Estágio 18 §3.3); `p>20` de `D^{*(p)}_r(b)`; o piso `H2` em `b=1`
 (sob revisão na onda 17); a constante do platô de DISC-DEC-071 (sob
 revisão na onda 17). Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 26 — 2026-08-26]
+
+**Onda 18, frente (b), `DISC-DEC-078`/`DISC-DEC-079`
+(`GAMMA-SECOND-ORDER-ATTEMPT`).** Alvo: o item deixado explicitamente
+aberto pelo Estágio 23 — uma prova rigorosa (não apenas uma
+extrapolação de Richardson que casa numericamente) do termo de segunda
+ordem `C(\gamma)` para `\gamma\in(0,1)`, com `C(1)=-2/(3\sqrt\pi)` já
+provado servindo de âncora de contorno.
+
+### O que aconteceu
+
+> **Não-fechamento honesto do mandato central**, combinado com
+> progresso parcial genuíno e novo: a decomposição do problema em duas
+> metades, uma das quais é agora provada incondicionalmente para todo
+> `\gamma`, isolando com precisão onde a dificuldade remanescente vive.
+
+**Lema E (PROVADO).** Equivalência elementar entre a conjectura
+`C(\gamma)` e uma afirmação sobre a soma exata
+`S_n:=n\varphi(n,\gamma n)=\sum_kA_k` (com `A_k` os termos de
+Definição 1/§2 já provados na linhagem): `C(\gamma)` vale se e somente
+se `S_n=G_n+D(\gamma)+o(1)` para a constante `D(\gamma)` associada.
+Prova por álgebra direta a partir de resultados já citados no arquivo,
+sem nenhum ingrediente novo além do que já está aceito.
+
+**Lema D0 (PROVADO, novo, generaliza além de `\gamma=1`).** Separando
+`A_k = e^{-s(k)} + [A_k-e^{-s(k)}]` (a "metade determinística" contra
+o resíduo), a primeira metade tem forma fechada exata para **todo**
+`\gamma\in(0,1]`: `S_n^{(0)}:=\sum_{k=1}^ne^{-s(k)} = G_n + D_0(\gamma)
++ \Theta(n^{-1/2})`, `D_0(\gamma)=(\gamma-1)/(2(2-\gamma))`, via soma
+de Poisson / transformação theta de Jacobi — uma ferramenta elementar
+nunca antes usada nesta linhagem. **Correção pós-adversarial
+(2026-08-26):** o termo de erro originalmente enunciado pela frente,
+`O(\sqrt n\,e^{-cn})` (exponencialmente pequeno), estava **errado**; o
+referee hostil derivou de forma independente e confirmou
+numericamente (mpmath, `n` até 32000) que o erro correto é
+`\Theta(n^{-1/2})` — polinomialmente pequeno, com coeficiente líder
+explícito `(\gamma^2\sqrt\pi)/(32\beta^{3/2})` — já visível nos
+próprios dados numéricos da frente (razão de erros sucessivos
+`\to\sqrt{10}` sob `n\mapsto10n`), mas nunca reconciliado com o
+enunciado formal do lema. O **valor** de `D_0(\gamma)` não muda; ver
+adendo datado em
+`.../gamma_second_order_attempt/ATTEMPT.md` §3.
+
+**§4 (heurística, NÃO provada, evidência forte).** Uma segunda derivação
+independente, estruturalmente diferente (expansão termo-a-termo de
+cumulantes, não "Taylor da razão inteira"), reproduz
+`E(\gamma):=D(\gamma)-D_0(\gamma)` **exatamente, simbolicamente** (zero
+discrepância, checado por sympy) — a mesma função racional que a onda
+17 já havia conjecturado via extrapolação de Richardson. Duas rotas
+independentes convergindo para a mesma forma fechada exata é evidência
+forte de que a conjectura é verdadeira, mas não constitui prova: a
+troca de ordem limite/soma na derivação heurística não foi
+justificada rigorosamente.
+
+**§5 (diagnóstico honesto do que falta).** Três lacunas técnicas
+nomeadas com precisão para fechar `E(\gamma)` rigorosamente — nenhuma
+delas exige uma nova citação externa além do que este arquivo já
+aceita — avaliadas pelo referee como precisas, com uma adição
+sugerida (não crítica).
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee
+(`spotcheck_gamma_second_order.py`): confirmação numérica direta de
+`D_0(\gamma)` via soma `mpmath` em vários `\gamma,n`, com a taxa de
+convergência correta `O(n^{-1/2})` já visível antes mesmo do referee
+apontar o erro no enunciado formal; confirmação simbólica via sympy de
+que `D(\gamma)-D_0(\gamma)` (derivado do Lema E) coincide exatamente
+com `E_{\text{heurística}}(\gamma)` do §4 (diferença simplifica a
+zero); `D(1)=E(1)=-1/3` batendo com a âncora clássica em `\gamma=1`.
+
+Referee hostil dedicado (`.../gamma_second_order_attempt/adversarial/`
+`REFEREE_REPORT.md`, 372 linhas): confirmou o Lema E são por duas
+rotas algébricas independentes (nenhum erro); re-derivou o valor
+fechado de `D_0(\gamma)` por um método distinto do da frente
+("completar o quadrado antes da soma de Poisson") — valor confirmado,
+mas **encontrou que o termo de erro enunciado no Lema D0 estava
+errado** (ver acima); re-confirmou o casamento simbólico do §4 por três
+rotas, incluindo pontos `\gamma` irracionais; avaliou o diagnóstico de
+lacunas do §5 como preciso, com uma adição sugerida; reproduziu a
+numérica do §6 a `\le4{,}2\times10^{-7}`/`\le5\times10^{-11}`.
+
+> **Veredito: SOUND WITH ONE NAMED ISSUE — ACCEPT for catalogue**, no
+> tier efetivamente reivindicado (não-fechamento honesto do mandato,
+> mais duas peças genuinamente provadas), condicional à correção do
+> termo de erro do Lema D0 — aplicada nesta integração (ver adendo
+> datado no `ATTEMPT.md` da frente). Nenhum outro erro encontrado;
+> Lema E, o casamento simbólico do §4 e a numérica do §6 confirmados
+> sem ressalvas.
+
+Ver
+`.../gamma_scaling_attempt/gamma_second_order_attempt/ATTEMPT.md` e
+`.../gamma_second_order_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**Duas peças novas e genuínas estão catalogadas: o Lema E (equivalência)
+e o Lema D0 (metade determinística de `S_n`, forma fechada para todo
+`\gamma`, com taxa de erro `\Theta(n^{-1/2})` corrigida).** O mandato
+central — `C(\gamma)` provado para `\gamma\in(0,1)` — permanece
+**NÃO FECHADO**, mas a dificuldade remanescente está agora precisamente
+isolada na "metade difícil" `E(\gamma)`, com duas derivações
+independentes (Estágio 19/Robbins-FGKP95 em `\gamma=1`, mais a
+heurística de cumulantes do §4 aqui) apontando para a mesma forma
+fechada. Nenhum resultado anterior é enfraquecido; a caracterização
+"CONJECTURADO para `\gamma\in(0,1)`" do Estágio 23 permanece
+tecnicamente correta — apenas mais precisamente diagnosticada agora.
+
+**O que permanece aberto, com precisão:** `C(\gamma)` para
+`\gamma\in(0,1)` em si — precisaria de uma das três lacunas técnicas
+do §5 (nomeadas com precisão, mesma classe de citação já aceita no
+arquivo); a janela intermediária do Estágio 23; `p>20` de
+`D^{*(p)}_r(b)` (sob revisão na onda 18); a versão contínua-nativa do
+Teorema J (sob revisão na onda 18); a ponte distribucional `M_n(c)\to_d
+M(c)` (sob revisão na onda 18); o piso `H2` em `b=1`; a constante do
+platô de DISC-DEC-071. Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.

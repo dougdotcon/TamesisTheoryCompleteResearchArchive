@@ -5265,3 +5265,68 @@ decisions:
     untouched_safeguards:
       - "nenhum resultado catalogado ate verificacao adversarial + integracao um-a-um"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-079
+    date: 2026-08-26
+    decision: >
+      Integrar o resultado da onda 18, frente (b)
+      (`GAMMA-SECOND-ORDER-ATTEMPT`, DISC-DEC-078), apos verificacao
+      adversarial hostil dedicada. RESULTADO: nao-fechamento honesto do
+      mandato central (C(gamma) provado rigorosamente para gamma em
+      (0,1), alem do ja provado gamma=1) -- COM duas pecas novas e
+      genuinas provadas incondicionalmente: Lema E (equivalencia
+      elementar entre a conjectura C(gamma) e uma afirmacao sobre a
+      soma exata S_n=n*phi(n,gamma*n)), e Lema D0 (a "metade
+      deterministica" de S_n tem forma fechada exata para todo gamma em
+      (0,1], D_0(gamma)=(gamma-1)/(2(2-gamma)), via soma de Poisson /
+      transformacao theta de Jacobi -- ferramenta nova nesta linhagem).
+      Uma segunda derivacao heuristica independente (expansao de
+      cumulantes, SS4) do "hard half" E(gamma):=D(gamma)-D_0(gamma)
+      casa exatamente, simbolicamente, com a forma racional ja
+      conjecturada pela onda 17 -- evidencia forte, nao prova. Tres
+      lacunas tecnicas nomeadas com precisao em SS5, nenhuma exigindo
+      nova citacao externa. Referee hostil dedicado, sem ler nenhum
+      script da frente: confirmou o Lema E por duas rotas algebricas
+      independentes (nenhum erro); re-derivou D_0(gamma) por um metodo
+      distinto ("completar o quadrado antes da soma de Poisson") --
+      valor confirmado -- mas encontrou que o termo de erro ENUNCIADO
+      no Lema D0, O(sqrt(n)*e^(-cn)) (exponencialmente pequeno), estava
+      ERRADO: o erro real e Theta(n^(-1/2)) (polinomialmente pequeno),
+      com coeficiente lider explicito (gamma^2*sqrt(pi))/(32*beta^(3/2)),
+      derivado independentemente e confirmado numericamente (mpmath, n
+      ate 32000, correspondencia a 3-4 digitos significativos) -- ja
+      implicitamente visivel nos proprios dados numericos SS3/SS6.1 da
+      frente (razao de erros sucessivos -> sqrt(10) sob n->10n) mas
+      nunca reconciliado com o enunciado formal do lema. O VALOR de
+      D_0(gamma) nao muda. Re-confirmou o casamento simbolico de SS4
+      por tres rotas incluindo gamma irracionais; avaliou o diagnostico
+      de SS5 como preciso; reproduziu a numerica de SS6 a
+      <=4.2e-7/<=5e-11. Veredito SOUND WITH ONE NAMED ISSUE, "ACCEPT
+      for catalogue" no tier reivindicado, condicional a correcao do
+      termo de erro -- aplicada nesta integracao como adendo datado
+      diretamente no enunciado do Lema D0, no resumo do abstract, e na
+      tabela SS8 de `gamma_second_order_attempt/ATTEMPT.md` (nunca
+      reescrita silenciosamente). Integrado como novo THEOREM.md
+      Estagio 26, com ponteiro datado inserido no fechamento "o que
+      permanece aberto" do Estagio 23.
+    rationale: >
+      Mesmo padrao das integracoes anteriores. A verificacao
+      independente do referee encontrou um erro matematico real (o
+      termo de erro do Lema D0), nao-letal ao resultado central nem ao
+      valor de D_0(gamma), mas exigindo correcao antes de catalogar --
+      aplicado como adendo datado, nunca silenciosamente, seguindo a
+      disciplina padrao desta linhagem.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/ATTEMPT.md (adendo datado, correcao do termo de erro do Lema D0)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (novo Estagio 26; ponteiro datado inserido no Estagio 23)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave18_results.gamma_second_order_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "Lema E (equivalencia C(gamma) <=> S_n=G_n+D(gamma)+o(1)) catalogado, PROVADO"
+      - "Lema D0 (forma fechada da metade deterministica de S_n para todo gamma em (0,1]) catalogado, PROVADO, com termo de erro corrigido de O(sqrt(n)*e^(-cn)) para Theta(n^(-1/2))"
+    untouched_safeguards:
+      - "C(gamma) para gamma em (0,1) permanece NAO provado; apenas a metade deterministica D_0(gamma) e a equivalencia (Lema E) sao provadas"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

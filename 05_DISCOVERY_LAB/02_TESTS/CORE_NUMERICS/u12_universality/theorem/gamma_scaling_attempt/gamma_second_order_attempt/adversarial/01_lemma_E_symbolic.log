@@ -1,0 +1,33 @@
+=== 1. (G_n/n)/L_n = T(gamma) exactly? ===
+Symbolic (beta abstract): sqrt(g)/sqrt(beta)  [expect sqrt(g)/sqrt(beta)]
+(G_n/n)/L_n with beta substituted: sqrt(2)/sqrt(2 - g)
+Difference from T(gamma), symbolic simplify: -sqrt(2)*sqrt(-1/(g - 2)) + sqrt(2)/sqrt(2 - g)
+Difference evaluated numerically at g=0.1..0.9: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+=== 2. D/G_n = 2 D sqrt(beta/(pi n)) ? (beta abstract) ===
+Difference (should be 0): 0
+
+=== 3. T(gamma)*sqrt(beta/pi) = sqrt(gamma/pi) ? (beta = g(2-g)/2, 0<g<=1 so 2-g>0) ===
+Symbolic difference: sqrt(g)*(sqrt(-1/(g - 2))*sqrt(2 - g) - 1)/sqrt(pi)
+Numeric difference at g=0.1..0.9,1.0: [0j, 0j, 0j, 0j, 0j, 0j, 0j, 0j, 0j, 0j]
+
+=== 4. sqrt(n)*L_n is n-independent? ===
+sqrt(n)*L_n = sqrt(pi)/(2*sqrt(g))  (must have NO n left -- this is (sqrt(pi)/2)/sqrt(g))
+Confirmed n-independent. (Earlier hand-check mistakenly used n*L_n instead of sqrt(n)*L_n -- n*L_n is NOT constant, it is Theta(sqrt(n)); sqrt(n)*L_n IS the n-independent quantity used implicitly by the proof's D-normalization. This distinction is worth stating explicitly since it's easy to get backwards.)
+
+=== 5. Independent alternate derivation of forward direction ===
+(D/n)/L_n = 2*D*sqrt(g)/(sqrt(pi)*sqrt(n))
+sqrt(n)*(D/n)/L_n = 2*D*sqrt(g)/sqrt(pi)  (claimed to equal (2/sqrt(pi))*sqrt(g)*D)
+Difference (should be 0): 0
+-> Forward direction confirmed via a route that never uses G_n or beta explicitly, only L_n's own n-scaling -- genuinely independent of the document's own algebraic path.
+
+=== 6. D-equiv: solve D(gamma) from wave-17's conjectured C(gamma) ===
+D(gamma) implied by C(gamma): (-gamma**2 + 8*gamma/3 - 2)/(gamma - 2)**2
+D-equiv claimed in document:   (-gamma**2 + 8*gamma/3 - 2)/(2 - gamma)**2
+Difference (should be 0): 0
+
+At gamma=1: D(1) = -1/3  (document claims -1/3)
+At gamma=1: C(1) = -2/(3*sqrt(pi))  (document/wave17 claims -2/(3 sqrt(pi)))
+
+=== VERDICT ===
+Checks 1,2,3,5,6 all reduce to symbolic zero (or numeric zero to float precision for the branch-cut-affected check 3) => Lemma E's stated algebra, including the D-equiv reduction, is CORRECT as elementary asymptotic algebra, verified via TWO independent routes (the document's G_n/D-over-G_n route, and this script's direct L_n-scaling route in check 5).

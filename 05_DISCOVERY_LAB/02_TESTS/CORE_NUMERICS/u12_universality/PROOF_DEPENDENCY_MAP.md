@@ -245,6 +245,8 @@ flowchart TD
 
     FLOORH2["Onda 16, frente (d) (DISC-DEC-066/071):<br/>sistema (Phi,Psi) do piso b=1 -- FECHAMENTO<br/>PARCIAL FORTALECIDO: TODOS os coeficientes<br/>da serie small-t0 em forma fechada exata<br/>(familia P+Q*erfcx, inducao do referee);<br/>serie converge no platô inteiro:<br/>Phi(0,t0>=0.02)=0.0377616 (2 solvers +<br/>4 MCs + serie exata ordem 500);<br/>resummation fechada NAO achada (constante<br/>do platô nao identificada); gap abstrato-<br/>vs-real ~30% intocado; phi_REDB inalterada<br/>-- SOUND WITH NAMED ISSUES"]
 
+    PLATRESUM["Onda 17, frente (d) (DISC-DEC-072/077):<br/>ressomacao da constante do plato<br/>NAO-FECHAMENTO HONESTO do alvo estrito<br/>(nenhuma forma fechada para Pi(c) achada)<br/>COM lei assintotica de 4 termos genuina:<br/>Pi(c)=sqrt(pi/2c)-2/c+(7/2)sqrt(pi/2)c^-3/2<br/>-(34/3)c^-2+O(c^-5/2), DERIVADA (heuristica,<br/>n&lt;=4) + CONFIRMADA numericamente a<br/>&gt;=110 digitos em 5 valores de c (1024x<br/>range); referee reproduziu tudo do zero,<br/>achou e corrigiu 1 erro real (nao-letal)<br/>em SS7.3 do documento -- SOUND WITH<br/>NAMED ISSUES"]
+
     UA --> MC
     MC --> QC
     MC --> RES
@@ -265,6 +267,7 @@ flowchart TD
     LCDMECH --> CVCOV
     LCDMECH --> FLOORCF
     FLOORCF --> FLOORH2
+    FLOORH2 --> PLATRESUM
 
     style QC fill:#e8f0e0,stroke:#2f6b5e
     style E1 fill:#f5ecd8,stroke:#96702a
@@ -284,6 +287,7 @@ flowchart TD
     style CVCOV fill:#f5ecd8,stroke:#96702a,stroke-width:2px
     style FLOORCF fill:#f5ecd8,stroke:#96702a,stroke-width:2px
     style FLOORH2 fill:#f5ecd8,stroke:#96702a,stroke-width:2px
+    style PLATRESUM fill:#f5ecd8,stroke:#96702a,stroke-width:2px
 ```
 
 > **[Adendo datado, 2026-08-22 — DISC-DEC-039/043/044.]** Diagrama
@@ -509,6 +513,67 @@ flowchart TD
 > (DISC-DEC-066 a 071). Fontes:
 > `floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/ATTEMPT.md`
 > e `.../floor_h2_b1_full_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+> **[Adendo datado, 2026-08-26 — DISC-DEC-072/DISC-DEC-077.]** Onda 17
+> frente (d) (`PLATEAU-RESUMMATION-ATTEMPT`, novo nó `PLATRESUM` acima)
+> atacou exatamente o que `FLOORH2` deixou aberto: identificar a
+> constante do platô `Φ(0,t0≥0,02)=0,0377616` como constante/forma
+> nomeada, via função geradora sobre a família `{P+Q·erfcx}`.
+> **Não-fechamento honesto do alvo estrito** — nenhuma forma fechada
+> exata para `Π(c)` a `c` finito foi encontrada; busca inversa-simbólica
+> (PSLQ/`mpmath.identify`) não achou relação a até 100 dígitos em 4
+> valores de `c`, após a própria frente corrigir um bug metodológico
+> real na configuração PSLQ herdada (uma base trivial `1/c` fabricando
+> "relações" espúrias). **COM uma lei assintótica de quatro termos
+> genuinamente nova** — a primeira afirmação em forma fechada sobre a
+> constante do platô nesta linhagem:
+>
+> `Π(c) = √(π/2c) − 2/c + (7/2)√(π/2)·c^{−3/2} − (34/3)·c^{−2} + O(c^{−5/2})`
+>
+> derivada por assintótica casada (Watson/matched-layer), com todo passo
+> algébrico verificado por máquina até 4ª ordem (18 grupos de
+> verificação, todos PASS), rotulada honestamente **DERIVADA
+> (heurística) + CONFIRMADA (numericamente)**, não PROVADA — dois gaps
+> heurísticos nomeados (H1: validade uniforme da decomposição
+> outer/inner; H2: unicidade da solução limitada por ordem). Confirmada
+> numericamente contra `Π(c)` computado a **≥110 dígitos significativos
+> em 5 valores de `c`** (`640` a `655360`, range `1024×`), reproduzindo
+> os quatro coeficientes derivados a `~12, 9, 6, 4` dígitos
+> respectivamente via ajuste polinomial exato sem parâmetros livres, mais
+> um holdout independente fora-da-amostra em `c=250`. Um quinto termo
+> conjecturado (extrapolação do padrão `gamma_n`) é reportado como
+> conjectura nomeada, não resultado. Dois achados estruturais adicionais:
+> `Φ(0,·)` é inteira de ordem 2 em `t0`, o que torna a ressomação de
+> Borel simples analiticamente válida mas numérica e estruturalmente
+> inútil (tentativa fracassada disclosurada); e o perfil do platô em `s`
+> é assintoticamente o mesmo formato `erfcx` do coeficiente `k=1`,
+> conectando este resultado à tensão "near-rank-2" da onda 16.
+>
+> Referee hostil dedicado, sem ler nenhum script da frente: re-derivou a
+> recursão `(P,Q)` à mão a partir da EDP de §0; recomputou `Π(c)` do
+> zero nos mesmos 5 valores de `c` a ~113 dígitos estáveis, batendo
+> exatamente com os dígitos citados pela frente em todos eles (incluindo
+> o valor mandatado `Π(1000)`); re-derivou a ordem líder e a segunda
+> ordem da assintótica; reproduziu o diagnóstico do "muro de custo" de
+> ordem 2 de forma independente; e **encontrou e corrigiu um erro
+> matemático real, não-letal**, no §7.3 do documento-alvo — a
+> justificativa declarada para excluir a família de candidato de um
+> único termo `erfcx` estava incorreta (comparava a expressão não
+> reescalada contra a quantidade-alvo reescalada); a exclusão em si
+> permanece correta, pela mesma via `d1≠0` do item anterior, não por uma
+> razão diferente como o documento alegava — corrigido por adendo datado
+> em `ATTEMPT.md` §7.3. Veredito **SOUND WITH NAMED ISSUES, "ACCEPT for
+> catalogue" no tier reivindicado** (não-fechamento + lei assintótica
+> derivada-heuristicamente e confirmada numericamente — não uma prova,
+> não uma forma fechada). `φ_REDB` e toda fórmula de registro:
+> intocadas. O que resta aberto: a ressomação em forma fechada
+> propriamente dita (ainda não achada); os dois gaps heurísticos H1/H2
+> não fechados rigorosamente; o quinto termo conjecturado não provado; a
+> faixa `c<250`, inacessível ao método de soma direta por custo
+> computacional; e o gap abstrato-vs-real `~30%`, honestamente fora de
+> escopo. **ONDA 17: 5/5 frentes integradas.** Fontes:
+> `.../floor_h2_b1_full_closure_attempt/plateau_resummation_attempt/ATTEMPT.md`
+> e `.../plateau_resummation_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As

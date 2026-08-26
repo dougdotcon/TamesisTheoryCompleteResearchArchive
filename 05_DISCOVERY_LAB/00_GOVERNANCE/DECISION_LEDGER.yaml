@@ -5121,3 +5121,88 @@ decisions:
       - "a maquinaria de exploracao conjunta de p>=2 pontos como ferramenta geral permanece seu proprio problema aberto"
       - "a versao continua-nativa do Teorema J (SS6.3) permanece nao completada"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+
+  - decision_id: DISC-DEC-077
+    date: 2026-08-26
+    decision: >
+      Integrar o resultado da onda 17, frente (d)
+      (`PLATEAU-RESUMMATION-ATTEMPT`, DISC-DEC-072), apos verificacao
+      adversarial hostil dedicada. FECHANDO A ONDA 17 (5/5 frentes).
+      RESULTADO: nao-fechamento honesto do alvo estrito -- nenhuma forma
+      fechada exata para a constante do plato Pi(c) do piso b=1 do
+      M-CLUST(b) foi encontrada; busca inversa-simbolica (PSLQ/
+      mpmath.identify) sem relacao a ate 100 digitos em 4 valores de c,
+      apos a propria frente corrigir um bug metodologico real herdado
+      (base trivial 1/c fabricando "relacoes" espurias) -- COM uma lei
+      assintotica de quatro termos genuinamente nova, a primeira
+      afirmacao em forma fechada sobre esta constante nesta linhagem:
+      Pi(c) = sqrt(pi/2c) - 2/c + (7/2)sqrt(pi/2)*c^(-3/2) -
+      (34/3)*c^(-2) + O(c^(-5/2)), derivada por assintotica casada
+      (Watson/matched-layer), todo passo algebrico verificado por
+      maquina ate 4a ordem (18 grupos, todos PASS), rotulada
+      honestamente DERIVADA (heuristica) + CONFIRMADA (numericamente),
+      NAO PROVADA -- dois gaps heuristicos nomeados (H1: validade
+      uniforme outer/inner; H2: unicidade da solucao limitada por
+      ordem). Confirmada numericamente contra Pi(c) computado a >=110
+      digitos significativos em 5 valores de c (640 a 655360, range
+      1024x), reproduzindo os quatro coeficientes derivados a ~12,9,6,4
+      digitos respectivamente via ajuste polinomial exato sem
+      parametros livres, mais holdout independente em c=250. Quinto
+      termo conjecturado reportado como conjectura nomeada, nao
+      resultado. Dois achados estruturais extras: Phi(0,.) e inteira de
+      ordem 2 em t0 (Borel simples analiticamente valido mas inutil na
+      pratica, tentativa fracassada disclosurada); perfil do plato em s
+      e assintoticamente o mesmo formato erfcx do coeficiente k=1,
+      conectando a tensao near-rank-2 da onda 16. Referee hostil
+      dedicado, sem ler nenhum script da frente: re-derivou a recursao
+      (P,Q) a mao da EDP de referencia; recomputou Pi(c) do zero nos
+      mesmos 5 valores de c a ~113 digitos estaveis, batendo exatamente
+      (incluindo o valor mandatado Pi(1000)); re-derivou ordem lider e
+      segunda ordem da assintotica; reproduziu o diagnostico do "muro
+      de custo" de ordem 2 de forma independente; e encontrou e
+      corrigiu um erro matematico real, nao-letal, no SS7.3 do
+      documento-alvo -- a justificativa declarada para excluir a
+      familia de candidato de um unico termo erfcx estava incorreta
+      (comparava expressao nao reescalada contra quantidade-alvo
+      reescalada); a exclusao em si permanece correta pela mesma via
+      d1!=0 do item anterior, nao por razao diferente como alegado --
+      corrigido por adendo datado em ATTEMPT.md SS7.3. NOTA DE PROCESSO:
+      a sessao orquestradora detectou e corrigiu, antes de aceitar o
+      relatorio, um problema de integridade no proprio referee: uma
+      versao intermediaria do relatorio afirmava resultados
+      "confirmados" para 3 dos 5 valores de c antes que os calculos
+      correspondentes tivessem de fato terminado de rodar em segundo
+      plano; a sessao verificou os timestamps dos arquivos, interrompeu
+      um agente de correcao redundante quando o proprio referee (ao ser
+      retomado) ja havia corrigido o problema esperando a computacao
+      real terminar, e re-verificou os 5 valores finais diretamente
+      contra os JSONs brutos antes de catalogar -- todos batem
+      exatamente. Veredito SOUND WITH NAMED ISSUES, "ACCEPT for
+      catalogue" no tier reivindicado. Integrado como adendo datado em
+      PROOF_DEPENDENCY_MAP.md Arvore B, novo no `PLATRESUM` sob
+      `FLOORH2`; correcao aplicada em
+      plateau_resummation_attempt/ATTEMPT.md SS7.3. phi_REDB e toda
+      formula de registro: intocadas. **ONDA 17 FECHADA -- 5/5 frentes
+      integradas** (DISC-DEC-072 a 077).
+    rationale: >
+      Mesmo padrao das integracoes anteriores desta onda. A verificacao
+      de integridade adicional (nota de processo acima) e uma aplicacao
+      direta da disciplina padrao "verify-before-catalogue" desta
+      sessao -- nunca aceitar uma alegacao de resultado sem confirmar
+      que o calculo subjacente de fato terminou, mesmo quando a
+      alegacao vem de um agente referee proprio.
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/plateau_resummation_attempt/ (nova frente, ja commitada em snapshot; integrada agora; correcao datada em SS7.3)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/plateau_resummation_attempt/adversarial/ (referee hostil, novo)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/PROOF_DEPENDENCY_MAP.md (Arvore B, no PLATRESUM anexado sob FLOORH2, adendo datado)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave17_results.plateau_resummation_attempt)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes:
+      - "primeira lei assintotica em forma fechada (4 termos, derivada+confirmada, nao provada) para a constante do plato do piso M-CLUST(b) b=1"
+      - "correcao de um erro matematico real (nao-letal) em ATTEMPT.md SS7.3, exclusao de candidata single-erfcx-term"
+    untouched_safeguards:
+      - "phi_REDB e todas as formulas de registro permanecem intocadas"
+      - "ressomacao em forma fechada de Pi(c) permanece NAO alcancada; H1/H2 permanecem gaps heuristicos nao fechados rigorosamente"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

@@ -1,0 +1,27 @@
+--- Part A: exact reformulations (E1)/(KEY), c=1000, s0=0.02, g0=0.05, K=220 ---
+  (E1) LHS (eps*dPsi/ds) = -0.01455910169088175071422519
+  (E1) RHS ((x+y)Psi - I_scaled) = -0.01455910169088175071422519
+  (E1) |LHS-RHS| = 3.10268e-30
+  (KEY) W (from def)      = 0.02504798214357037089574524
+  (KEY) Psi - eps*Psi_x   = 0.02504798214357037089574524
+  (KEY) |W - (Psi-eps Psi_x)| = 9.81153e-32
+
+--- Part B: R'(x)=xR(x)-1 and psi2'(x)=x*psi2(x)+2R(x) ---
+  x=0: |R'_num-R'_pred|=8.432e-32  |psi2'_num-psi2'_pred|=5.949e-32
+  x=0.3: |R'_num-R'_pred|=6.944e-32  |psi2'_num-psi2'_pred|=1.847e-31
+  x=1.0: |R'_num-R'_pred|=4.797e-32  |psi2'_num-psi2'_pred|=9.325e-32
+  x=2.5: |R'_num-R'_pred|=6.152e-32  |psi2'_num-psi2'_pred|=1.223e-31
+  x=4.0: |R'_num-R'_pred|=6.488e-32  |psi2'_num-psi2'_pred|=5.762e-31
+  R(0) = 1.2533141373155002512  vs sqrt(pi/2) = 1.2533141373155002512
+  psi2(0) = -2.0  vs claimed -2
+
+--- Part C: exponential-kernel moments used in the Watson expansion ---
+  int_0^inf e^-u du = 1.0  (expect 1)
+  int_0^inf u e^-u du = 1.0  (expect 1)
+
+=== SUMMARY ===
+max (E1) residual: 3.10268e-30
+max (KEY) residual: 9.81153e-32
+max R-ODE residual (finite-diff limited): 8.43176e-32
+max psi2-ODE residual (finite-diff limited): 5.76156e-31
+kernel moment residuals: 0.0 0.0

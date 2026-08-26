@@ -734,6 +734,26 @@ predictions against independently-computed `Pi(c)` values, no bare
   for two DIFFERENT reasons, stated separately above, to avoid
   perpetuating a loose argument into the record.)
 
+  > **[Correção pós-adversarial, 2026-08-26 — `DISC-DEC-077`.]** O
+  > referee hostil mostrou que a correção acima ainda não havia
+  > "aterrissado" por completo: tomando `Pi_candidate(c) :=
+  > A*erfcx(lambda*sqrt(c))` literalmente e reescalando exatamente como
+  > `y := Pi(c)*sqrt(2c/pi)` é definido no resto do documento, o termo
+  > `eps^0` de `y_candidate` NÃO é identicamente zero — é possível
+  > escolher `A` de modo que `d0=1` seja igualado exatamente (verificado
+  > numericamente pelo referee em `c=1e2,\ldots,1e12`). O que de fato
+  > exclui esta família é o mesmo mecanismo do item anterior: seu termo
+  > `eps^1` (`d1`) é identicamente zero, contradizendo o `d1\ne0`
+  > independentemente confirmado (§4.4/§5) — ou seja, `y_candidate` é um
+  > subconjunto próprio de "par em `eps`", não uma família excluída "por
+  > uma razão diferente" via `d0`. A conclusão prática (esta família está
+  > excluída) permanece **inalterada** — segue imediatamente do `d1\ne0`
+  > já estabelecido no item anterior — apenas a justificativa deste item
+  > (a alegação de "não precisa de nenhum coeficiente além de `d0`" e de
+  > "duas razões DIFERENTES") estava incorreta e é retirada por esta
+  > nota. Nenhum outro resultado deste documento depende deste item.
+  > Fonte: `adversarial/REFEREE_REPORT.md` §6.
+
 ### 7.4 What this section does and does not establish
 
 **Established**: no relation among the tested natural constants/special

@@ -5194,7 +5194,8 @@ ABERTO. Nenhum resultado anterior é enfraquecido.
 a assintótica de ordem dominante em desigualdade explícita uniforme em
 `\gamma\in(0,1)`, fixar `\kappa_0`); `C(\gamma)` para `\gamma\in(0,1)`;
 a Lacuna 3 restrita à contribuição da Lacuna 1; a janela intermediária
-do Estágio 23; a exploração conjunta para `K\ge3` (Estágio 31); `p>80`
+do Estágio 23 [Ver Estágio 34 abaixo — DATE: 2026-08-26]; a exploração
+conjunta para `K\ge3` (Estágio 31); `p>80`
 de `D^{*(p)}_r(b)` (Estágio 32); a ponte distribucional
 `M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a construção
 contínua-nativa direta do Teorema J (Estágio 28); o piso `H2` em `b=1`;
@@ -5202,3 +5203,122 @@ a constante do platô de DISC-DEC-071; `H1`/`H2` da lei assintótica do
 platô M-CLUST(b) (`PROOF_DEPENDENCY_MAP.md`, nó `PLATRESUM`). Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 34 — 2026-08-26]
+
+**Onda 20, frente (d), `DISC-DEC-088`/`DISC-DEC-090`
+(`GAMMA-INTERMEDIATE-WINDOW-ATTEMPT`).** Alvo: a janela intermediária
+`n^\epsilon\le c_n\le n^{2/3}/\log n`, entre o regime `c` fixo do
+Estágio 10 e o regime `\gamma_n\ge n^{-1/3}\ln n` do Corolário 2
+(Estágio 23), nomeada como resíduo aberto desde a onda 17, nunca
+atacada por nenhuma frente dedicada até agora.
+
+### O que aconteceu
+
+> **FECHAMENTO COMPLETO da janela nomeada**, por combinação direta e
+> elementar de dois resultados JÁ PROVADOS do arquivo — Teorema R
+> (Estágio 22) e Corolário 4.2 (Estágio 6) — sem nenhuma maquinaria
+> nova. **Teorema W (esta frente, PROVADO).** Para todo inteiro `n\ge4`
+> e todo real `1\le c\le n`,
+> `|\varphi(n,c)/\varphi_\infty(c)-1|\le B(n,c):=(a^*\sqrt c+\kappa_B)/
+> \big(n[(\sqrt\pi/2)c^{-1/2}-e^{-c}/(2c)]\big)`. Consequentemente, para
+> todo `\epsilon\in(0,2/3)` fixo e toda sequência `c_n` com
+> `n^\epsilon\le c_n\le n^{2/3}/\log n`,
+> `\varphi(n,c_n)/\varphi_\infty(c_n)\to1`, com taxa explícita não
+> assintótica `O(n^{-1/3}/\log n)` na aresta mais dura (superior) e
+> mais rápida em todo o resto da janela.
+
+**Bônus honesto, além do mandato:** o mesmo argumento dá
+`B(n,c_n)\to0$` para **qualquer** sequência com `c_n\to\infty` e
+`c_n=o(n)` — sem nenhuma restrição de taxa mínima de crescimento de
+`c_n` — subsumindo estritamente a metade `\gamma_n\to0` do Corolário 2
+(que exigia a hipótese extra `\gamma_n n^{1/3}/\ln n\to\infty`) por um
+argumento bem mais curto. **Isto NÃO toca, enfraquece ou reprova** a
+metade `\gamma_n\to\gamma^*\in(0,1]` do Corolário 2, que exige a
+maquinaria mais fina e dá estritamente mais (o limite não-trivial exato
+`\sqrt{2/(2-\gamma^*)}`, taxa `O(n^{-1/4})` provada, termo de segunda
+ordem conjecturado) — território genuinamente diferente e mais duro,
+não atacado por esta frente.
+
+**Diagnóstico chave.** A frente predecessora (`gamma_scaling_attempt`)
+já havia considerado e rejeitado corretamente esta rota via Teorema R —
+mas apenas no regime de `\gamma` FIXO `>0` (`c=\gamma n`), onde
+`\varphi_\infty(\gamma n)=\Theta(n^{-1/2})` torna o limitante `O(1/n)`
+absoluto de Teorema R vazio em termos relativos. Essa diagnose é
+correta para `\gamma` fixo `>0` e permanece correta — mas o predecessor
+não verificou separadamente se a mesma rota é vazia no regime
+`\gamma_n\to0`. Não é: `\varphi_\infty(c_n)` é, ali, maior que
+`\Theta(n^{-1/2})` (pois `c_n=o(n)`), tornando a divisão do limitante
+absoluto de Teorema R genuinamente evanescente em termos relativos —
+exatamente o mecanismo explorado por este resultado.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: (i) confirmação
+direta, contra o texto de `THEOREM.md`, de que Teorema R (Estágio 22) e
+Corolário 4.2 (Estágio 6) são citados com exatidão pela frente
+(constantes, domínios de validade, forma da desigualdade); (ii)
+implementação própria e independente (mpmath dps=50) da fórmula
+soma-dupla exata de `\varphi(n,c)$` (Lema 1, citado, não re-lido de
+nenhum script), confirmando Teorema R (0 violações) e a desigualdade
+combinada do Teorema W (0 violações em 15 pontos, `n=4..300`,
+`\epsilon\in\{0,1;0,3;0,5\}`) — o processo de checagem numérica em
+`n=1000` foi encerrado por lentidão (`O(n^2)` em precisão dps=50) após
+já ter acumulado evidência suficiente nos pontos menores.
+
+Referee hostil dedicado (`.../gamma_intermediate_window_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: re-derivou a montagem algébrica do Teorema W à mão
+e confirmou computacionalmente; confirmou as duas citações exatas
+contra `THEOREM.md`; re-derivou independentemente a não-vacuidade e
+disjunção da janela; re-derivou as taxas assintóticas em ambas as
+arestas; re-derivou o "bônus" **do zero, algebricamente** (não apenas
+re-citando) e o testou numericamente com uma sequência deliberadamente
+lenta, `c_n=\log n$` — que falha provadamente a hipótese do Corolário 2
+mas satisfaz a hipótese do bônus — confirmando `\to1` exatamente como
+alegado; confirmou, por contraste, que para `\gamma` fixo `>0` o
+limitante converge a uma constante NÃO-nula (não a zero), validando a
+diagnose do predecessor sem disputa; reconstruiu um motor `\varphi(n,c)`
+independente do zero e reproduziu os números específicos publicados
+pela frente em `n=3000` dígito a dígito.
+
+> **Dois achados nomeados, ambos MENORES e apenas apresentacionais
+> (nenhum erro matemático).** (1) A caixa do veredito afirmava
+> `\epsilon\in(0,1)`, inconsistente com a própria §0 do documento, que
+> deriva corretamente `\epsilon\in(0,2/3)` para não-vacuidade genuína —
+> corrigido. (2) Um limiar numérico auxiliar reportado para `\epsilon=0,5`
+> (`n\gtrsim10^{12}`) reflete um artefato de grade de teste esparsa; a
+> travessia real fica entre `10^7` e `10^8` — corrigido, sem afetar
+> nenhum teorema.
+
+> **Veredito: SOUND WITH NAMED ISSUES (ambos menores, apresentacionais)
+> — a alegação de FECHAMENTO COMPLETO e a generalização bônus
+> permanecem de pé.**
+
+Ver
+`.../gamma_scaling_attempt/gamma_intermediate_window_attempt/ATTEMPT.md`
+e `.../gamma_intermediate_window_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**A janela intermediária nomeada desde a onda 17 (`n^\epsilon\le c_n\le
+n^{2/3}/\log n`) está FECHADA**, por combinação de dois resultados já
+provados, sem nenhum ingrediente matemático novo. Como corolário
+honesto (bônus, não alvo original), a metade `\gamma_n\to0` do Corolário
+2 (Estágio 23) está estritamente fortalecida — a hipótese de taxa
+mínima `\gamma_n n^{1/3}/\ln n\to\infty$` deixa de ser necessária para a
+conclusão `\to1`; a metade `\gamma_n\to\gamma^*\in(0,1]` do Corolário 2
+permanece inteiramente intocada e mais forte onde se aplica. Nenhum
+resultado anterior é enfraquecido.
+
+**O que permanece aberto, com precisão:** a Lacuna 1 do Estágio 26/33
+(`C(\gamma)` para `\gamma\in(0,1)`, ainda ABERTO); a exploração conjunta
+para `K\ge3` (Estágio 31); `p>80` de `D^{*(p)}_r(b)` (Estágio 32); a
+ponte distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a
+construção contínua-nativa direta do Teorema J (Estágio 28); o piso
+`H2` em `b=1`; a constante do platô de DISC-DEC-071; `H1`/`H2` da lei
+assintótica do platô M-CLUST(b). Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

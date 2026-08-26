@@ -1,0 +1,59 @@
+=== (a) Sanity: phi(n,0) = 1 exactly ===
+n=1: phi(n,0) = 1.0  ==1 exactly: True
+n=5: phi(n,0) = 1.0  ==1 exactly: True
+n=20: phi(n,0) = 1.0  ==1 exactly: True
+n=100: phi(n,0) = 1.0  ==1 exactly: True
+
+=== (b) Teorema R pointwise re-check ===
+|phi(n,c) - phi_infty(c)| <= (a* sqrt(c) + kappa_B)/n  ?
+n=   30 alpha=0.15 c=    1.6656  |phi-phi_inf|=0.001381445607  bound= 0.02514181671  OK=True
+n=   30 alpha=0.35 c=    3.2885  |phi-phi_inf|=0.0003561154983  bound= 0.03153933159  OK=True
+n=   30 alpha=0.55 c=    6.4926  |phi-phi_inf|=0.005638363979  bound=   0.040528581  OK=True
+n=   30 alpha=0.65 c=    9.1228  |phi-phi_inf|= 0.01092335387  bound= 0.04630833591  OK=True
+n=  100 alpha=0.15 c=    1.9953  |phi-phi_inf|=0.0005872164807  bound=0.007990244689  OK=True
+n=  100 alpha=0.35 c=    5.0119  |phi-phi_inf|=0.0002799236321  bound= 0.01102305901  OK=True
+n=  100 alpha=0.55 c=   12.5893  |phi-phi_inf|=0.003528573937  bound= 0.01582974578  OK=True
+n=  100 alpha=0.65 c=   19.9526  |phi-phi_inf|= 0.00612785688  bound= 0.01920218344  OK=True
+n=  300 alpha=0.15 c=    2.3527  |phi-phi_inf|=0.0002138093211  bound=0.002811860934  OK=True
+n=  300 alpha=0.35 c=    7.3619  |phi-phi_inf|=0.0003790330384  bound=0.004255046911  OK=True
+n=  300 alpha=0.55 c=   23.0365  |phi-phi_inf|=0.002035801767  bound=0.006807950571  OK=True
+n=  300 alpha=0.65 c=   40.7501  |phi-phi_inf|=0.003392208306  bound=0.008746103788  OK=True
+n= 1000 alpha=0.15 c=    2.8184  |phi-phi_inf|=6.165501818e-5  bound=0.0008967674863  OK=True
+n= 1000 alpha=0.35 c=   11.2202  |phi-phi_inf|=0.0002477495437  bound=0.001510115291  OK=True
+n= 1000 alpha=0.55 c=   44.6684  |phi-phi_inf|=0.001014677363  bound=0.002733905053  OK=True
+n= 1000 alpha=0.65 c=   89.1251  |phi-phi_inf|=0.001680999464  bound=0.003746026749  OK=True
+
+Total tested=16, violations=0
+
+=== (c) Ratio phi(n,c)/phi_infty(c) -> 1 trend (window-representative alpha) ===
+-- alpha=0.15 --
+   n=   30  c=   1.6655903  ratio=0.9978415261
+   n=  100  c=   1.9952623  ratio=0.9990191689
+   n=  300  c=   2.3527089  ratio=0.9996184738
+   n= 1000  c=   2.8183829  ratio=0.9998811143
+   n= 2000  c=   3.1271917  ratio=0.9999431422
+
+-- alpha=0.35 --
+   n=   30  c=   3.2884591  ratio=0.9992637045
+   n=  100  c=   5.0118723  ratio=1.000708217
+   n=  300  c=   7.3619428  ratio=1.0011606
+   n= 1000  c=   11.220185  ratio=1.000936416
+   n= 2000  c=   14.300805  ratio=1.00072885
+
+-- alpha=0.55 --
+   n=   30  c=   6.4925707  ratio=1.016216342
+   n=  100  c=   12.589254  ratio=1.014127148
+   n=  300  c=    23.03651  ratio=1.011025515
+   n= 1000  c=   44.668359  ratio=1.007652142
+   n= 2000  c=   65.398306  ratio=1.006023278
+
+=== (d) Bonus claim stress test: c_n = log(n) (NOT covered by Corolario 2) ===
+Corolario 2 needs gamma_n n^(1/3)/ln n -> infinity;
+for c_n=log(n): gamma_n = log(n)/n, so gamma_n n^(1/3)/ln n = n^(1/3)/n = n^(-2/3) -> 0.
+Corolario 2's hypothesis genuinely FAILS here -- this sequence is only reachable
+by the bonus claim (c_n -> infinity, c_n = o(n), no rate restriction).
+n=   30  c=log(n)= 3.4011974  ratio=0.9995880894  |ratio-1|=0.00041191063  TheoremW_bound=0.067102303  within_bound=True
+n=  100  c=log(n)= 4.6051702  ratio=1.000237491  |ratio-1|=0.00023749143  TheoremW_bound=0.025935631  within_bound=True
+n=  300  c=log(n)= 5.7037825  ratio=1.000389491  |ratio-1|=0.00038949065  TheoremW_bound=0.010403168  within_bound=True
+n= 1000  c=log(n)= 6.9077553  ratio=1.000259543  |ratio-1|=0.00025954268  TheoremW_bound=0.0036939507  within_bound=True
+n= 3000  c=log(n)= 8.0063676  ratio=1.000137221  |ratio-1|=0.00013722148  TheoremW_bound=0.0014040696  within_bound=True

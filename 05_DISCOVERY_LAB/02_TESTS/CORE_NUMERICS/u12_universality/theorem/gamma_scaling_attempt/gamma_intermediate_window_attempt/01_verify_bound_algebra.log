@@ -1,0 +1,89 @@
+a_star (exact, high precision): 0.36708721186274223755879890073495003510471864224378
+
+==============================================================================
+Sanity: window is nonempty (lower edge < upper edge) for eps < 2/3,
+large n.
+==============================================================================
+eps=0.10 n=1000            lower=n^eps=         1.9952623 upper=n^(2/3)/ln n=         14.476483 nonempty=True
+eps=0.10 n=1000000         lower=n^eps=         3.9810717 upper=n^(2/3)/ln n=         723.82414 nonempty=True
+eps=0.10 n=1000000000000   lower=n^eps=         15.848932 upper=n^(2/3)/ln n=         3619120.7 nonempty=True
+eps=0.30 n=1000            lower=n^eps=         7.9432823 upper=n^(2/3)/ln n=         14.476483 nonempty=True
+eps=0.30 n=1000000         lower=n^eps=         63.095734 upper=n^(2/3)/ln n=         723.82414 nonempty=True
+eps=0.30 n=1000000000000   lower=n^eps=         3981.0717 upper=n^(2/3)/ln n=         3619120.7 nonempty=True
+eps=0.50 n=1000            lower=n^eps=         31.622777 upper=n^(2/3)/ln n=         14.476483 nonempty=False
+eps=0.50 n=1000000         lower=n^eps=            1000.0 upper=n^(2/3)/ln n=         723.82414 nonempty=False
+eps=0.50 n=1000000000000   lower=n^eps=         1000000.0 upper=n^(2/3)/ln n=         3619120.7 nonempty=True
+eps=0.60 n=1000            lower=n^eps=         63.095734 upper=n^(2/3)/ln n=         14.476483 nonempty=False
+eps=0.60 n=1000000         lower=n^eps=         3981.0717 upper=n^(2/3)/ln n=         723.82414 nonempty=False
+eps=0.60 n=1000000000000   lower=n^eps=        15848932.0 upper=n^(2/3)/ln n=         3619120.7 nonempty=False
+
+==============================================================================
+Main check: relative-error bound at the WORST (upper) window edge
+c_n = n^(2/3) / ln(n), across many scales of n.
+==============================================================================
+         n       c_n=n^2/3/ln n          c_n/n      RelErrBound
+     1e+02            4.6782955       0.046783      0.026287793
+     1e+03            14.476483      0.0144765     0.0072006152
+     1e+04             50.39541     0.00503954     0.0023121366
+     1e+06            723.82414    0.000723824    0.00030833323
+     1e+09            48254.942     4.82549e-5     2.0057384e-5
+     1e+12            3619120.7     3.61912e-6     1.4996914e-6
+     1e+15         2.8952965e+8      2.8953e-7     1.1993252e-7
+     1e+20        4.6782955e+11      4.6783e-9     1.9378161e-9
+     1e+30        1.4476483e+18    1.44765e-12    5.9963569e-13
+     1e+50        1.8713182e+31    1.87132e-19    7.7512556e-20
+    1e+100        2.0158164e+64    2.01582e-36     8.349787e-37
+    1e+300       1.4476483e+197   1.44765e-103   5.9963569e-104
+-> monotonically decreasing towards 0, confirmed for n up to 10^300.
+
+==============================================================================
+Asymptotic-order check: RelErrBound(n, n^(2/3)/ln n)
+   should equal  (2*a_star/sqrt(pi)) * n^(-1/3)/ln(n) * (1+o(1))
+==============================================================================
+leading constant 2*a_star/sqrt(pi) = 0.41421356237309504880168872420969807856967187537695
+         n      RelErrBound     leading term ratio(bound/leading)
+n=1e4          0.0023121366     0.0020874462            1.1076389
+n=1e6         0.00030833323    0.00029981777            1.0284021
+n=1e9          2.0057384e-5     1.9987852e-5            1.0034787
+n=1e12         1.4996914e-6     1.4990889e-6            1.0004019
+n=1e20         1.9378161e-9     1.9378134e-9            1.0000014
+n=1e50        7.7512556e-20    7.7512538e-20            1.0000002
+n=1e100        8.349787e-37     8.349785e-37            1.0000002
+n=1e300      5.9963569e-104   5.9963555e-104            1.0000002
+n=1e1000      8.349787e-338    8.349785e-338            1.0000002
+-> ratio -> 1, confirming the analytically predicted leading order.
+
+==============================================================================
+Check at the LOWER window edge c_n = n^eps, several eps in (0,1),
+confirming an even faster decay there.
+==============================================================================
+--- eps = 0.1 ---
+  n=1e+02      c_n=n^eps=       1.5848932 RelErrBound=0.01161653994
+  n=1e+06      c_n=n^eps=       3.9810717 RelErrBound=2.292635958e-6
+  n=1e+12      c_n=n^eps=       15.848932 RelErrBound=7.824894698e-12
+  n=1e+30      c_n=n^eps=          1000.0 RelErrBound=4.242225981e-28
+  n=1e+100     c_n=n^eps=         1.0e+10 RelErrBound=4.142168269e-91
+--- eps = 0.3 ---
+  n=1e+02      c_n=n^eps=       3.9810717 RelErrBound=0.02292635958
+  n=1e+06      c_n=n^eps=       63.095734 RelErrBound=2.864924634e-5
+  n=1e+12      c_n=n^eps=       3981.0717 RelErrBound=1.668984743e-9
+  n=1e+30      c_n=n^eps=          1.0e+9 RelErrBound=4.142236708e-22
+  n=1e+100     c_n=n^eps=         1.0e+30 RelErrBound=4.142136618e-71
+--- eps = 0.5 ---
+  n=1e+02      c_n=n^eps=            10.0 RelErrBound=0.05143071906
+  n=1e+06      c_n=n^eps=          1000.0 RelErrBound=0.0004242225981
+  n=1e+12      c_n=n^eps=       1000000.0 RelErrBound=4.145301722e-7
+  n=1e+30      c_n=n^eps=         1.0e+15 RelErrBound=4.142136718e-16
+  n=1e+100     c_n=n^eps=         1.0e+50 RelErrBound=4.142136618e-51
+
+==============================================================================
+Non-vacuousness check: find, for eps=0.3, the smallest power-of-ten n
+at which the bound at the upper window edge first drops below 0.5,
+0.1, and 0.01 -- i.e. how large n must actually be in practice for
+the asymptotic closure to be numerically meaningful (honesty check).
+==============================================================================
+  bound < 0.5  first at n = 10^1  (bound=0.135615)
+  bound < 0.1  first at n = 10^2  (bound=0.0262878)
+  bound < 0.01  first at n = 10^3  (bound=0.00720062)
+
+ALL CHECKS PASSED.

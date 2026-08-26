@@ -5997,3 +5997,61 @@ decisions:
     untouched_safeguards:
       - "correcoes aplicadas como adendos datados, nunca reescrita silenciosa"
       - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"
+  - decision_id: DISC-DEC-090
+    date: 2026-08-26
+    decision: >
+      Integracao da onda 20 frente (d) -- GAMMA-INTERMEDIATE-WINDOW-ATTEMPT.
+      FECHAMENTO COMPLETO da janela intermediaria n^epsilon<=c_n<=
+      n^(2/3)/log(n), nomeada como residuo aberto desde a onda 17: Teorema
+      W (esta frente, PROVADO) -- |phi(n,c)/phi_inf(c)-1|<=B(n,c) via
+      combinacao direta e elementar de Teorema R (Estagio 22) e Corolario
+      4.2 (Estagio 6), sem nenhuma maquinaria nova. Para todo epsilon em
+      (0,2/3) fixo e toda sequencia c_n na janela, phi(n,c_n)/phi_inf(c_n)
+      -> 1, taxa explicita O(n^{-1/3}/log n) na aresta mais dura. Bonus
+      honesto: o mesmo argumento fecha B(n,c_n)->0 para qualquer c_n->inf
+      com c_n=o(n), sem hipotese de taxa minima -- subsumindo estritamente
+      a metade gamma_n->0 do Corolario 2 (Estagio 23), sem tocar a metade
+      gamma_n->gamma*>0 (mais forte, intocada). Diagnostico: a rota via
+      Teorema R ja fora rejeitada corretamente pelo predecessor apenas no
+      regime gamma fixo>0 (vazia ali); esta frente mostra que a mesma rota
+      NAO e vazia no regime gamma_n->0, onde phi_inf(c_n) e maior que
+      Theta(n^{-1/2}). Spot-check da sessao: citacoes de Teorema R/
+      Corolario 4.2 confirmadas exatas contra THEOREM.md; engine propria
+      independente (mpmath dps=50) confirmou Teorema R (0 violacoes) e o
+      Teorema W combinado (0 violacoes, 15 pontos, n=4..300). Referee
+      hostil dedicado: re-derivou a montagem algebrica a mao, confirmou
+      as citacoes, re-derivou a nao-vacuidade/disjuncao da janela e as
+      taxas assintoticas em ambas as arestas, re-derivou o "bonus" do
+      zero algebricamente e o testou numericamente com c_n=log(n)
+      (sequencia que falha provadamente a hipotese do Corolario 2 mas
+      satisfaz a do bonus), confirmou por contraste que gamma fixo>0
+      converge a uma constante NAO-nula (validando a diagnose do
+      predecessor), reconstruiu um motor phi(n,c) independente e
+      reproduziu numeros publicados digito a digito em n=3000. Dois
+      achados nomeados, ambos MENORES e apresentacionais (faixa epsilon
+      da caixa de veredito inconsistente com a propria SS0; um limiar
+      numerico auxiliar refletindo grade de teste esparsa), nenhum
+      afetando nenhum teorema, ambos corrigidos por adendos datados.
+      Veredito SOUND WITH NAMED ISSUES -- a alegacao de FECHAMENTO
+      COMPLETO e a generalizacao bonus permanecem de pe. Integrado como
+      "Estagio 34" em THEOREM.md, com ponteiro datado no Estagio 30.
+    rationale: >
+      Fechamento honesto e detalhado de um resultado inesperadamente
+      forte (fechamento completo onde apenas nao-fechamento honesto era
+      esperado como aceitavel pelo mandato original), seguindo a
+      disciplina padrao de integracao (spot-check da sessao antes do
+      referee -- especialmente rigoroso dado o quao forte a alegacao e --
+      correcoes datadas aplicadas diretamente em ATTEMPT.md, nunca
+      reescrita silenciosa).
+    authority: user_explicit_direction
+    affected_paths:
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md (Estagio 34 + ponteiro no Estagio 30)"
+      - "05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_intermediate_window_attempt/ATTEMPT.md (2 correcoes datadas)"
+      - "05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml (wave20_results.gamma_intermediate_window_attempt: DESPACHADA -> CONCLUIDA e INTEGRADA)"
+      - "05_DISCOVERY_LAB/DISCOVERY_LAB_STATE.md (header + tabela de governanca)"
+    reversibility: reversible
+    wildcard: false
+    governance_changes: []
+    untouched_safeguards:
+      - "correcoes aplicadas como adendos datados, nunca reescrita silenciosa"
+      - "nenhuma alegacao de progresso em Millennium Problem; matematica combinatoria pura interna a este arquivo"

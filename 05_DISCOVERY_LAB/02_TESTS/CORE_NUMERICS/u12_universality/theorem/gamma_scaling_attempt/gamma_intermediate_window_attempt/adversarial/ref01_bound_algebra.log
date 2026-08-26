@@ -1,0 +1,72 @@
+=== (1) a* recomputation ===
+a* = 0.3670872118627422375587989007349500351047
+ATTEMPT.md claims a* = 0.36708721186...  matches to shown digits: True
+
+kappa_B bracket (cited from THEOREM.md Estagio 22): 0.28048 < kappa_B < 0.2805
+Using kappa_B = 0.2805 (conservative upper end, matches ATTEMPT.md's 'kappa_B<0.2805' usage)
+
+=== (2) L(c) crossover to positivity, independent bisection ===
+crossover c* (independent bisection) = 0.209396914612444
+ATTEMPT.md claims c*=0.2094 -- match: True
+
+=== (3) L(c) > 0 for all c >= 1 ===
+min L(c) sampled over c in [1, 1000]: (mpf('999.72999999999999999999999999999999999999999999999967'), mpf('0.028028740217365369477736162865737365380267807796114448'))  (should be well above 0)
+L(1) exactly: 0.70228720486703685285
+
+=== (4a) Upper edge c_n = n^(2/3)/log(n): decay and leading order ===
+leading constant (2 a*/sqrt(pi)) = 0.414213562373095
+n=10^1  c_n=       2.01582  B=  0.1356145512  B/leading=1.624168182  decreasing_so_far=True
+n=10^2  c_n=        4.6783  B=  0.0262877882  B/leading=1.356569609  decreasing_so_far=True
+n=10^3  c_n=       14.4765  B=0.007200613793  B/leading=1.200831708  decreasing_so_far=True
+n=10^4  c_n=       50.3954  B= 0.00231213608  B/leading=1.107638619  decreasing_so_far=True
+n=10^6  c_n=       723.824  B=0.0003083331624  B/leading=1.028401879  decreasing_so_far=True
+n=10^9  c_n=       48254.9  B=2.005737946e-5  B/leading=1.003478506  decreasing_so_far=True
+n=10^12  c_n=    3.61912e+6  B=1.499690999e-6  B/leading=1.000401663  decreasing_so_far=True
+n=10^20  c_n=    4.6783e+11  B=1.937815605e-9  B/leading=1.000001117  decreasing_so_far=True
+n=10^50  c_n=   1.87132e+31  B=7.751253759e-20  B/leading=1.0  decreasing_so_far=True
+n=10^100  c_n=   2.01582e+64  B=8.349784995e-37  B/leading=1.0  decreasing_so_far=True
+n=10^200  c_n=   4.6783e+130  B=1.93781344e-70  B/leading=1.0  decreasing_so_far=True
+n=10^300  c_n=  1.44765e+197  B=5.996355482e-104  B/leading=1.0  decreasing_so_far=True
+
+=== (4b) Lower edge c_n = n^eps for eps in {0.1,0.3,0.5}: decay rate O(n^(eps-1)) ===
+-- eps=0.1 --
+   n=10^2  c_n= 1.5848932  B=0.0116165382  B/leading=1.7695075
+   n=10^4  c_n= 2.5118864  B=0.0001587944938  B/leading=1.5261989
+   n=10^8  c_n= 6.3095734  B=3.409941989e-8  B/leading=1.3047361
+   n=10^16  c_n= 39.810717  B=1.848718427e-15  B/leading=1.1211054
+   n=10^32  c_n= 1584.8932  B=6.690847595e-30  B/leading=1.0191939
+   n=10^64  c_n= 2511886.4  B=1.040959062e-58  B/leading=1.0004821
+
+-- eps=0.3 --
+   n=10^2  c_n= 3.9810717  B=0.0229263556  B/leading=1.390307
+   n=10^4  c_n= 15.848932  B=0.0007824893122  B/leading=1.1919392
+   n=10^8  c_n= 251.18864  B=1.090620938e-6  B/leading=1.0482129
+   n=10^16  c_n= 63095.734  B=2.621461274e-12  B/leading=1.003042
+   n=10^32  c_n=3.9810717e+9  B=1.649033864e-23  B/leading=1.0000121
+   n=10^64  c_n=1.5848932e+19  B=6.564842554e-46  B/leading=1.0
+
+-- eps=0.5 --
+   n=10^2  c_n=      10.0  B=0.05143070911  B/leading=1.2416472
+   n=10^4  c_n=     100.0  B=0.00445864598  B/leading=1.0764124
+   n=10^8  c_n=   10000.0  B=4.173786659e-5  B/leading=1.0076412
+   n=10^16  c_n=    1.0e+8  B=4.142452134e-9  B/leading=1.0000764
+   n=10^32  c_n=   1.0e+16  B=4.142135655e-17  B/leading=1.0
+   n=10^64  c_n=   1.0e+32  B=4.142135624e-33  B/leading=1.0
+
+=== (5) Window non-emptiness: n^eps <= n^(2/3)/log(n) ? ===
+eps=0.1      first nonempty at n~10^1
+eps=0.3      first nonempty at n~10^1
+eps=0.5      first nonempty at n~10^8
+eps=0.6      first nonempty at n~10^27
+eps=0.65     first nonempty at n~10^153
+eps=0.6667   NOT nonempty up to n=10^400
+eps=0.7      NOT nonempty up to n=10^400
+eps=0.9      NOT nonempty up to n=10^400
+
+=== (5b) Disjointness from Corolario 2's threshold order n^(2/3) log n ===
+n=3.0: window upper edge=1.8933739  Corolario-2 threshold order=2.2852056  upper_edge < threshold: True
+n=2.71828: window upper edge=1.947734  Corolario-2 threshold order=1.947734  upper_edge < threshold: False
+n=10.0: window upper edge=2.0158164  Corolario-2 threshold order=10.687653  upper_edge < threshold: True
+n=100.0: window upper edge=4.6782955  Corolario-2 threshold order=99.215384  upper_edge < threshold: True
+n=1.0e+6: window upper edge=723.82414  Corolario-2 threshold order=138155.11  upper_edge < threshold: True
+(at n=e both sides equal log(n)=1: 1/1 vs 1*1 -- boundary case, ATTEMPT.md claims 'n>e')

@@ -22,6 +22,9 @@ from mpmath import (mp, mpf, mpmathify, sqrt, pi, e, log, exp, erfc, fabs,
 mp.dps = 120
 
 
+LOW_DIGIT_FLOOR = {250: 40}
+
+
 def load_values(min_digits=95):
     best = {}
     for fn in ('r03_plateau_values_ladder.json',
@@ -37,7 +40,8 @@ def load_values(min_digits=95):
                     c = r['c']
                     if not isinstance(c, int):
                         continue
-                    if 'plateau' in r and sd >= min_digits and \
+                    thresh = LOW_DIGIT_FLOOR.get(c, min_digits)
+                    if 'plateau' in r and sd >= thresh and \
                             sd > best.get(c, (None, -1))[1]:
                         best[c] = (mpmathify(r['plateau']), sd)
         except FileNotFoundError:
@@ -88,26 +92,42 @@ def main():
     print("(i) full-constant identification attempts (hypothesis generation)")
     print("=" * 72)
     for c in sorted(vals):
-        if c not in (10, 100, 250, 1000):
+        if c not in (250, 1000, 2560, 655360):
             continue
         P = vals[c]
         cc = mpf(c)
-        digs = 100
+        digs = 40 if c == 250 else 100
         print(f"c={c}:  Pi = {nstr(P, 30)}...")
         try_identify(P, digs, f"Pi({c})",
                      ['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)'])
         try_identify(P * sqrt(2 * cc / pi), digs, f"Pi({c})*sqrt(2c/pi)",
                      ['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)'])
-        # erfcx-family bases at the natural special points of this problem
+        # erfcx-family bases at the natural special points of this problem.
+        # SELF-CAUGHT BUG (this front, 2026-08-26): the original version of
+        # this test included '1/c' (or, below, bare 'c') as an explicit PSLQ
+        # basis vector alongside the constant '1'. For any specific integer
+        # c <= maxcoeff, PSLQ then immediately recovers the TRIVIAL identity
+        # c*(1/c) - 1 = 0 -- a fact about the basis construction, not about
+        # Pi -- and, having found *a* relation, never searches further for
+        # one that actually involves Pi. (Symptom that exposed it: c=250,
+        # 1000, 2560 -- all <= the maxcoeff=1e4 used -- each returned the
+        # exact trivial relation with Pi's own coefficient equal to 0; only
+        # c=655360, whose trivial coefficient exceeds maxcoeff, correctly
+        # fell through to "NO RELATION".) Fixed by dropping 'c'/'1/c' as
+        # bare PSLQ basis vectors -- they carry no information about Pi by
+        # themselves. The genuine erfcx-family/log-space searches below use
+        # only quantities that are honestly irrational functions of c.
         E1 = erfcx(sqrt(cc / 2))          # E(s=1)
         Ehalf = erfcx(sqrt(cc / 8))       # E(s=1/2)
         rtc = sqrt(pi * cc / 2)
-        try_pslq([P, mpf(1), E1, rtc * E1, 1 / rtc, mpf(1) / cc, Ehalf],
-                 ['Pi', '1', 'E(1)', 'rt*E(1)', '1/rt', '1/c', 'E(1/2)'],
+        try_pslq([P, mpf(1), E1, rtc * E1, 1 / rtc, Ehalf],
+                 ['Pi', '1', 'E(1)', 'rt*E(1)', '1/rt', 'E(1/2)'],
                  f"Pi({c}) vs erfcx family", digs, maxcoeff=10**4)
-        # log-space: Pi = A * c^p * e^{qc} test -> ln Pi vs {1, ln c, c}
-        try_pslq([log(P), mpf(1), log(cc), cc, log(pi)],
-                 ['ln Pi', '1', 'ln c', 'c', 'ln pi'],
+        # log-space: Pi = A * c^p * pi^q test -> ln Pi vs {1, ln c, ln pi}
+        # ('c' itself dropped for the reason above -- 'ln c' is not a bare
+        # rational/integer and is safe to include)
+        try_pslq([log(P), mpf(1), log(cc), log(pi)],
+                 ['ln Pi', '1', 'ln c', 'ln pi'],
                  f"ln Pi({c})", digs, maxcoeff=10**3)
         print()
 
@@ -145,7 +165,7 @@ def main():
     print("(iii) cross-c EXCLUSION tests of simple closed-form families")
     print("=" * 72)
     # family A: Pi = alpha/sqrt(c) + beta/c  (solve on 2 c's, test on others)
-    need = [1000, 40960, 655360, 10]
+    need = [1000, 40960, 655360, 250]
     if all(c in vals for c in need):
         c1, c2 = mpf(1000), mpf(40960)
         # solve
@@ -154,13 +174,14 @@ def main():
         det = a11 * a22 - a12 * a21
         al = (vals[1000] * a22 - vals[40960] * a12) / det
         be = (a11 * vals[40960] - a21 * vals[1000]) / det
-        for ctest in (655360, 10):
+        for ctest in (655360, 250):
             pred = al / sqrt(mpf(ctest)) + be / mpf(ctest)
             got = vals[ctest]
+            tol = mpf('1e-30') if ctest == 655360 else mpf('1e-30')
             print(f"  family Pi=a/sqrt(c)+b/c (fit@1000,40960):"
                   f" test c={ctest}: rel.mismatch = "
                   f"{nstr(fabs(pred - got) / got, 4)}  -> "
-                  f"{'EXCLUDED' if fabs(pred-got)/got > mpf('1e-90') else 'consistent'}")
+                  f"{'EXCLUDED' if fabs(pred-got)/got > tol else 'consistent'}")
     # family B: 3-term expansion exactly terminating
     need = [1000, 40960, 655360, 2560]
     if all(c in vals for c in need):

@@ -1,0 +1,47 @@
+========================================================================
+(i) full-constant identification attempts (hypothesis generation)
+========================================================================
+c=250:  Pi = 0.0722226317815141619643797100975...
+  identify[Pi(250)] (at 40 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  identify[Pi(250)*sqrt(2c/pi)] (at 40 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  pslq[Pi(250) vs erfcx family]: NO RELATION (maxcoeff<=10000, 40 digits)
+  pslq[ln Pi(250)]: NO RELATION (maxcoeff<=1000, 40 digits)
+
+c=1000:  Pi = 0.0377615983402126188243712025906...
+  identify[Pi(1000)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  identify[Pi(1000)*sqrt(2c/pi)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  pslq[Pi(1000) vs erfcx family]: NO RELATION (maxcoeff<=10000, 100 digits)
+  pslq[ln Pi(1000)]: NO RELATION (maxcoeff<=1000, 100 digits)
+
+c=2560:  Pi = 0.024021775587665976409147760796...
+  identify[Pi(2560)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  identify[Pi(2560)*sqrt(2c/pi)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  pslq[Pi(2560) vs erfcx family]: NO RELATION (maxcoeff<=10000, 100 digits)
+  pslq[ln Pi(2560)]: NO RELATION (maxcoeff<=1000, 100 digits)
+
+c=655360:  Pi = 0.00154513120966623087599938579635...
+  identify[Pi(655360)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  identify[Pi(655360)*sqrt(2c/pi)] (at 100 digits, bases=['sqrt(2)', 'sqrt(pi)', 'pi', 'log(2)', 'exp(1)']): NO MATCH
+  pslq[Pi(655360) vs erfcx family]: NO RELATION (maxcoeff<=10000, 100 digits)
+  pslq[ln Pi(655360)]: NO RELATION (maxcoeff<=1000, 100 digits)
+
+========================================================================
+(ii) eps-expansion coefficients d1, d2, ... (from r04)
+========================================================================
+d1 = -1.595769   (~5 digits)
+   too few digits; skipping identification
+d2 = 3.5   (~3 digits)
+   too few digits; skipping identification
+d3 = -9.04   (~1 digits)
+   too few digits; skipping identification
+d4 = 26.0   (~0 digits)
+   too few digits; skipping identification
+d5 = -79.0   (~0 digits)
+   too few digits; skipping identification
+========================================================================
+(iii) cross-c EXCLUSION tests of simple closed-form families
+========================================================================
+  family Pi=a/sqrt(c)+b/c (fit@1000,40960): test c=655360: rel.mismatch = 0.0003596  -> EXCLUDED
+  family Pi=a/sqrt(c)+b/c (fit@1000,40960): test c=250: rel.mismatch = 0.005583  -> EXCLUDED
+  family Pi=a/sqrt(c)+b/c+g/c^1.5 (fit@1000,40960,655360): test c=2560: rel.mismatch = 2.59e-5  -> EXCLUDED
+  family 'even in eps' (rational in 1/c; A*erfcx(l sqrt(c)); ...): d1 = -1.59576911756 != 0 -> EXCLUDED

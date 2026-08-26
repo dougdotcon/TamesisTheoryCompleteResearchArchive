@@ -24,7 +24,21 @@ from mpmath import mp, mpf, mpmathify, sqrt, pi, fabs, log10, nstr, matrix, lu_s
 mp.dps = 130
 
 LADDER = [40, 100, 160, 250, 640, 1000, 2560, 10240, 40960, 163840, 655360]
-HOLDOUT = [1, 10]          # lower-precision values: used as prediction tests
+HOLDOUT = [250]          # lower-precision values: used as prediction tests only
+# NOTE (honest, self-checked by this front on 2026-08-26): c=40,100,160,10,1
+# direct-summation attempts by the predecessor instance never completed
+# (empty logs / no result json) -- confirmed by this front to be a genuine
+# cost wall, not a stray crash: the required K scales like the recursion's
+# O(K^2) descending-solve cost times an O(dps) mpf-arithmetic cost, and K
+# itself barely shrinks with a lower target-digit count (the "+1" term in
+# the alpha-sizing formula dominates over the digit term at these c), so
+# c=40 (K=16000,dps=1200) is estimated (by direct scaling off the c=1000
+# ladder point's measured 163.5s at K=2000,dps=360) at roughly
+# (16000/2000)^2 * (1200/360) ~= 64*3.3 ~= 213x -> ~9.7 HOURS wall time --
+# correctly out of budget per the mandate's anti-stall instruction. c=250
+# (46 stable digits, 736s) is the practical floor for this method; it is
+# used below ONLY as a holdout consistency check, never as a fit input.
+LOW_DIGIT_FLOOR = {250: 40}   # allow c=250 in even at only 40 stable digits
 
 
 def load_values(min_digits=95):
@@ -44,7 +58,8 @@ def load_values(min_digits=95):
                     c = r['c']
                     if not isinstance(c, int):
                         continue
-                    if 'plateau' in r and sd >= min_digits and \
+                    thresh = LOW_DIGIT_FLOOR.get(c, min_digits)
+                    if 'plateau' in r and sd >= thresh and \
                             sd > best.get(c, (None, None, -1))[2]:
                         best[c] = (mpmathify(r['plateau']), fn, sd)
         except FileNotFoundError:
@@ -79,7 +94,7 @@ def main():
               f"   (y-1)*sqrt(c) = {nstr((y - 1) * sqrt(mpf(c)), 12)}")
     print()
 
-    avail = [c for c in LADDER if c in vals]
+    avail = [c for c in LADDER if c in vals and c not in HOLDOUT]
     if len(avail) < 5:
         print("not enough ladder points yet")
         return
@@ -107,8 +122,15 @@ def main():
     dmain = fits['all']
     trusted = []
     for j in range(len(dmain)):
-        spread = max(fabs(dmain[j] - fits[n][j])
-                     for n in fits if n != 'all' and j < len(fits[n]))
+        others = [fabs(dmain[j] - fits[n][j])
+                  for n in fits if n != 'all' and j < len(fits[n])]
+        if not others:
+            trusted.append(0)
+            if j < 7:
+                print(f"  d{j} = {nstr(dmain[j], 32)}   stable to ~0 digits"
+                      f" (no cross-subset comparator at this order)")
+            continue
+        spread = max(others)
         digs = int(-log10(spread / max(fabs(dmain[j]), mpf('1e-30')))) \
             if spread > 0 else 99
         trusted.append(digs)
@@ -149,7 +171,9 @@ def main():
         'd_coeffs': [nstr(dmain[j], 40) for j in range(len(dmain))],
         'trusted_digits': trusted,
         'd0_minus_1': nstr(dmain[0] - 1, 10),
-        'd1_minus_pred': nstr(dmain[1] - d1_pred, 10),
+        'd1_minus_pred': nstr(dmain[1] - preds[1][1], 10) if len(dmain) > 1 else None,
+        'd2_minus_pred': nstr(dmain[2] - preds[2][1], 10) if len(dmain) > 2 else None,
+        'd3_minus_pred': nstr(dmain[3] - preds[3][1], 10) if len(dmain) > 3 else None,
     }
     with open('r04_fit_results.json', 'w') as f:
         json.dump(out, f, indent=1)

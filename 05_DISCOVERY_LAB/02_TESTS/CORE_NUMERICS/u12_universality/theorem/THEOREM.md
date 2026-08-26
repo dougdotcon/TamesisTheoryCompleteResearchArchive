@@ -5435,9 +5435,132 @@ em `K=0,1,2,3`. Nenhum resultado anterior é enfraquecido.
 `M_n^{(3)}` (Estágio 27's Proposição D1, estilo geral, ainda não
 estendida a K=3); a lei conjunta de dois pontos para `K` geral (método
 flagrado como plausivelmente generalizável, não tentado); a Lacuna 1
-do Estágio 26/33/30 (`C(\gamma)` para `\gamma\in(0,1)`); `p>80` de
+do Estágio 26/33/30 (`C(\gamma)` para `\gamma\in(0,1)`)
+[Ver Estágio 36 abaixo — DATE: 2026-08-26]; `p>80` de
 `D^{*(p)}_r(b)` (Estágio 32); a construção contínua-nativa direta do
 Teorema J (Estágio 28); o piso `H2` em `b=1`; a constante do platô de
+DISC-DEC-071; `H1`/`H2` da lei assintótica do platô M-CLUST(b).
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 36 — 2026-08-26]
+
+**Onda 21, frente (a), `DISC-DEC-093`/`DISC-DEC-094`
+(`GAMMA-GAP1-CONTINUATION-ATTEMPT`).** Alvo: continuar o fechamento
+parcial da Lacuna 1 do Estágio 33, atacando os três itens que aquele
+Estágio deixou precisamente nomeados em aberto (converter a
+assintótica de ordem dominante numa desigualdade explícita
+`n\ge n_0(\gamma)` uniforme em `\gamma`; fixar a constante `\kappa_0`
+da truncagem).
+
+### O que aconteceu
+
+> **Achado principal: uma CORREÇÃO a uma afirmação já integrada do
+> Estágio 33.** Lendo a prova do Teorema 2 da própria frente da onda
+> 17 (`gamma_scaling_attempt/ATTEMPT.md` §5), a truncagem exata é
+> `K:=⌈√((4/β)n\ln n)⌉`, `β:=γ(2-γ)/2`, dando
+> `\kappa_0(\gamma)=4/\beta=8/(\gamma(2-\gamma))` — uma FUNÇÃO de
+> `\gamma`, não a constante ilustrativa `2,25` usada por Estágio 33.
+> Consequentemente `\lambda(\gamma)=\kappa_0(\gamma)(3/2-\gamma)=
+> 4(3-2\gamma)/(\gamma(2-\gamma))` é contínua mas NÃO LIMITADA em
+> `(0,1)` (diverge conforme `\gamma\to0^+`) — refutando diretamente a
+> afirmação do predecessor de que `\lambda` era "limitada em `(0,1)`".
+> **A substituição corretamente escopada é PROVADA** (álgebra exata,
+> não apenas amostragem numérica: `\lambda(\gamma)` é estritamente
+> decrescente em `(0,1)`, sem raiz real do numerador de `\lambda'` no
+> intervalo): um único `C(\gamma_0)` funciona uniformemente em todo
+> compacto `[\gamma_0,1)\subset(0,1)`, `\gamma_0>0` fixo — o mesmo
+> padrão "uniforme em compactos" já usado alhures nesta linhagem
+> (Corolário 1 da onda 17) — mas nenhum `C` único funciona no intervalo
+> aberto `(0,1)` inteiro simultaneamente.
+>
+> **Segundo achado: uma desigualdade explícita `\forall n\ge n_0(\gamma)`
+> foi de fato construída** (o item 1 do Estágio 33), fechando a lacuna
+> LÓGICA (assintótica → explícita) — mas não a lacuna PRÁTICA: usando
+> constantes elementares deliberadamente cruas (desigualdade
+> triangular, `\ln n\le2\sqrt n`), o limiar `n_0(\gamma)` resultante é
+> astronomicamente grande (`\sim10^{21}` em `\gamma=0,99` até
+> `\sim10^{85}` em `\gamma=0,01`), muitas ordens de magnitude além de
+> qualquer `n` numericamente alcançável nesta linhagem. Verificado sem
+> oscilação espúria em mais de 60 décadas além de cada `n_0(\gamma)`
+> certificado.
+
+**O que isto NÃO fecha.** A Lacuna 1 permanece ABERTA; `C(\gamma)`
+para `\gamma\in(0,1)` permanece inteiramente ABERTO. Constantes mais
+afiadas (uma técnica de controle de cauda diferente, não-Hoeffding, ou
+rastreamento de cancelamento exato em vez de pior-caso) seriam
+necessárias para um `n_0(\gamma)` numericamente útil — não tentado
+aqui.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: confirmação
+direta, lendo `gamma_scaling_attempt/ATTEMPT.md` pessoalmente, de que
+a fórmula de truncagem `K:=⌈√((4/β)n\ln n)⌉`, `β:=γ(2-γ)/2` é citada
+com exatidão; re-derivação independente da álgebra
+`\kappa_0(\gamma)=8/(\gamma(2-\gamma))` e
+`\lambda(\gamma)=4(3-2\gamma)/(\gamma(2-\gamma))`, confirmando
+`\lambda(1)=4` e a divergência conforme `\gamma\to0`, antes de
+despachar o referee.
+
+Referee hostil dedicado (`.../gamma_gap1_continuation_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: leu a fonte primária (`gamma_scaling_attempt/
+ATTEMPT.md`) pessoalmente e confirmou a citação exata e o contexto;
+re-derivou `\kappa_0(\gamma)` e `\lambda(\gamma)` do zero (sympy,
+diferença simbólica exatamente zero); confirmou a monotonicidade
+estrita de `\lambda` de duas formas independentes (`sympy.solve` +
+varredura numérica de 19.999 pontos); reconstruiu inteiramente da
+prosa (sem nunca consultar os scripts da frente) a construção
+explícita completa (limitantes de coeficiente, `\hat G(n,\gamma)`,
+`K\le K_{\max}`, `W(n,\gamma,C)`, e a tabela `n_0(\gamma)`),
+confirmando os 8 valores de `n_1(\gamma)` reportados como inteiros
+EXATOS e os 8 valores de `\log_{10}n_0(\gamma)` a `<0,004` de
+diferença.
+
+> **Um achado nomeado, BAIXA severidade, puramente narrativo/cosmético
+> (não afeta nenhum resultado de carga).** Uma frase descritiva na §4
+> afirmava um "fator de folga" `\hat\lambda/\lambda` "entre `3`
+> (`\gamma=1`) e `\approx4,67` (`\gamma\to0`)"; o valor correto em
+> `\gamma=1` é `6`, não `3` (a razão é crescente em `\gamma`, o oposto
+> do que a frase sugeria). O número `3` nunca é usado em nenhuma
+> fórmula posterior — `C_0(\gamma)`, `\hat G(n,\gamma)` e toda a
+> tabela `n_0(\gamma)` usam `\hat\lambda(\gamma)` diretamente,
+> re-verificados corretos pelo referee. Corrigido por adendo datado em
+> `ATTEMPT.md`.
+
+> **Veredito: SOUND WITH ONE NAMED ISSUE (BAIXA) — ACCEPT for
+> catalogue.** A alegação central de correção — que a afirmação de
+> limitação do Estágio 33/predecessor está errada — foi CONFIRMADA
+> além de dúvida razoável.
+
+Ver
+`.../gamma_gap1_mgf_attempt/gamma_gap1_continuation_attempt/ATTEMPT.md`
+e `.../gamma_gap1_continuation_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**Uma afirmação real do predecessor imediato (Estágio 33's fonte,
+`gamma_gap1_mgf_attempt/ATTEMPT.md` §5 item 2) foi corrigida por
+adendo datado**: `\lambda(\gamma)` não é limitada em `(0,1)` como
+alegado — é não-limitada, com a substituição corretamente escopada
+(uniforme em compactos) agora provada rigorosamente. Além disso, o
+item 1 do Estágio 33 (desigualdade explícita) está agora tecnicamente
+satisfeito, embora não numericamente útil dado o tamanho de
+`n_0(\gamma)`. `C(\gamma)` para `\gamma\in(0,1)` permanece inteiramente
+ABERTO. Nenhum resultado numérico anterior é enfraquecido — a correção
+afeta apenas uma afirmação qualitativa sobre a forma da desigualdade,
+não nenhum número catalogado.
+
+**O que permanece aberto, com precisão:** a Lacuna 1 em si (um
+`n_0(\gamma)` numericamente útil exigiria constantes mais afiadas ou
+uma técnica de controle de cauda diferente); `C(\gamma)` para
+`\gamma\in(0,1)`; a CDF completa de `M_n^{(3)}` (Estágio 35); a lei
+conjunta de dois pontos para `K` geral; `p>80` de `D^{*(p)}_r(b)`
+(Estágio 32); a construção contínua-nativa direta do Teorema J
+(Estágio 28); o piso `H2` em `b=1`; a constante do platô de
 DISC-DEC-071; `H1`/`H2` da lei assintótica do platô M-CLUST(b).
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.

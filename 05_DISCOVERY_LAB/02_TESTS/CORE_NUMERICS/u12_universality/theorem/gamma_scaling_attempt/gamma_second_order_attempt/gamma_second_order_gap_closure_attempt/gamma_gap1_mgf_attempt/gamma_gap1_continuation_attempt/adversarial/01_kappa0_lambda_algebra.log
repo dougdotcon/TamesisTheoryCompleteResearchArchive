@@ -1,0 +1,40 @@
+kappa_0(gamma) = -8/(gamma*(gamma - 2))
+kappa_0 - claimed 8/(gamma*(2-gamma)) simplifies to: 0
+  kappa_0(1) = 8 = 8.000000
+  kappa_0(1/2) = 32/3 = 10.666667
+  kappa_0(1/10) = 800/19 = 42.105263
+  kappa_0(1/100) = 42*2**(323/542)*3**(89/542)*5**(12/271)*7**(222/271) = 402.010050
+lim_{gamma->0+} kappa_0(gamma) = oo
+
+lambda(gamma) = kappa_0(gamma)*(3/2-gamma) simplifies to: 4*(2*gamma - 3)/(gamma*(gamma - 2))
+lambda - claimed 4(3-2*gamma)/(gamma*(2-gamma)) simplifies to: 0
+
+lambda(1) = 4
+lim_{gamma->0+} lambda(gamma) = oo
+  lambda(9/10) = 4.848485
+  lambda(1/2) = 10.666667
+  lambda(1/10) = 58.947368
+  lambda(1/100) = 598.994975
+  lambda(1/1000) = 5998.999500
+
+lambda'(gamma) simplifies to: 8*(-gamma**2 + 3*gamma - 3)/(gamma**2*(gamma**2 - 4*gamma + 4))
+numerator of lambda': -8*gamma**2 + 24*gamma - 24
+denominator of lambda': gamma**4 - 4*gamma**3 + 4*gamma**2
+  den(1/100) = 0.000396  (must be >0)
+  den(1/2) = 0.562500  (must be >0)
+  den(99/100) = 0.999800  (must be >0)
+roots of numerator of lambda': []
+real roots strictly inside (0,1): []
+
+Fine scan of numerator sign over 19999 points in (0,1): signs seen = {-1}
+zero-crossings found (should be empty): []
+
+Claimed numerator form -8*g^2+24*g-24 at g=1/2: -14
+Our derived numerator at g=1/2: -14
+Sign check: our numerator at 1/2 is negative
+
+ALL CHECKS PASSED: kappa_0(gamma)=8/(gamma(2-gamma)) confirmed;
+lambda(gamma)=4(3-2*gamma)/(gamma(2-gamma)) confirmed continuous,
+unbounded as gamma->0+, lambda(1)=4, and strictly DECREASING on (0,1)
+(numerator of lambda' has no real root in (0,1) and is negative
+throughout, confirmed both by sp.solve and by a 19999-point scan).

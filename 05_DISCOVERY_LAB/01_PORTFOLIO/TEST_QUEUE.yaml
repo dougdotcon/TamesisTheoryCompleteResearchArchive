@@ -3260,6 +3260,19 @@ queue:
       MCLUST-H2-VALIDITY-ATTEMPT (H2, companheiro de H1 atacado na
       onda 20, Arvore B, risco moderado-alto). Ver wave21_results
       abaixo.
+      ATUALIZACAO (DISC-DEC-094): onda 21 frente (a)
+      (GAMMA-GAP1-CONTINUATION-ATTEMPT) CONCLUIDA e INTEGRADA. Achado
+      principal: CORRECAO a uma afirmacao ja integrada (fonte do
+      Estagio 33): kappa_0 nao e constante, e sim kappa_0(gamma)=
+      8/(gamma(2-gamma)), tornando lambda(gamma) NAO LIMITADA em (0,1)
+      (nao limitada como alegado). Substituicao corretamente escopada
+      PROVADA (uniforme em compactos [gamma_0,1)). Desigualdade
+      explicita forall n>=n_0(gamma) construida, mas n_0(gamma)
+      astronomicamente grande (~10^21 a ~10^85). Lacuna 1 permanece
+      ABERTA; C(gamma) permanece ABERTO. Referee: confirmou a correcao
+      central alem de duvida razoavel; 1 achado BAIXA/cosmetico
+      corrigido por adendo. Veredito SOUND WITH ONE NAMED ISSUE,
+      ACCEPT. Integrado como Estagio 36 em THEOREM.md.
     wave17_results:
       conjecture1_k5_attempt: >
         CONCLUIDA e INTEGRADA (DISC-DEC-075) apos referee REFORCADO.
@@ -3413,28 +3426,46 @@ queue:
         (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
     wave21_results:
       gamma_gap1_continuation_attempt: >
-        DESPACHADA (DISC-DEC-093). Continua o fechamento parcial da
-        Lacuna 1 do Estagio 33: converter a assintotica de ordem
-        dominante do Lema Bulk/Tail (`g(\Theta_K)`, `g(K)`) numa
-        desigualdade explicita `n\ge n_0(\gamma)`, uniforme em
-        `\gamma\in(0,1)` como continuum (nao apenas nos 6 pontos
-        amostrais + limites de contorno ja verificados), e fixar a
-        constante `\kappa_0` da truncagem `K\sim\sqrt{n\ln n}` (citada,
-        nao pinada, pela frente anterior). O proprio Estagio 33 nomeou
-        esta tarefa como "comparavel em escopo ao fechamento inteiro da
-        Lacuna 2 do Estagio 30, nao tentado aqui". Alto risco, alto
-        valor estrategico -- se bem-sucedida, fecha C(gamma) para todo
-        gamma em (0,1) por completo. Nao-fechamento honesto e
-        aceitavel. Deve ler THEOREM.md Estagio 26 (Lacuna 1 original),
-        Estagio 30 (fechamento da Lacuna 2, precedente metodologico
-        mais proximo) e Estagio 33 em inteiro (Lema Bulk/Tail, SS3.3
-        assintotica de ordem dominante, SS5 o que resta) e o ATTEMPT.md
-        do gamma_gap1_mgf_attempt por inteiro, em prosa. Nao deve
-        abrir/ler/importar nenhum .py de nenhuma frente da linhagem.
-        Nova subpasta propria dentro de gamma_gap1_mgf_attempt/. Seeds
-        reservados 20260900000-20260900999 (frente) /
-        20260901000-20260901999 (referee), confirmados nao-usados por
-        grep antes desta reserva.
+        CONCLUIDA e INTEGRADA (DISC-DEC-094). Achado principal: CORRECAO
+        a uma afirmacao ja integrada (fonte do Estagio 33,
+        gamma_gap1_mgf_attempt/ATTEMPT.md SS5 item 2). Lendo a prova do
+        Teorema 2 da propria frente da onda 17, a truncagem exata e
+        K:=ceil(sqrt((4/beta)n ln n)), beta:=gamma(2-gamma)/2, dando
+        kappa_0(gamma)=4/beta=8/(gamma(2-gamma)) -- uma FUNCAO de gamma,
+        nao a constante ilustrativa 2,25. Consequentemente
+        lambda(gamma)=kappa_0(gamma)(3/2-gamma)=4(3-2gamma)/(gamma(2-gamma))
+        e continua mas NAO LIMITADA em (0,1), refutando diretamente a
+        afirmacao do predecessor. Substituicao corretamente escopada
+        PROVADA (algebra exata: lambda estritamente decrescente em
+        (0,1)): um unico C(gamma_0) funciona uniformemente em todo
+        compacto [gamma_0,1), mas nenhum C unico funciona no intervalo
+        aberto (0,1) inteiro. Segundo achado: uma desigualdade explicita
+        forall n>=n_0(gamma) foi construida (item 1 do Estagio 33),
+        fechando a lacuna LOGICA mas nao a PRATICA -- n_0(gamma)
+        astronomicamente grande (~10^21 em gamma=0,99 ate ~10^85 em
+        gamma=0,01), usando constantes elementares deliberadamente
+        cruas. A Lacuna 1 permanece ABERTA; C(gamma) para gamma em (0,1)
+        permanece inteiramente ABERTO. Spot-check da sessao: confirmacao
+        direta da formula de truncagem da onda 17 e re-derivacao
+        independente da algebra kappa_0/lambda antes do despacho do
+        referee. Referee hostil dedicado: leu a fonte primaria
+        pessoalmente e confirmou a citacao exata; re-derivou kappa_0 e
+        lambda do zero (sympy, diferenca simbolica exatamente zero);
+        confirmou a monotonicidade estrita de lambda de duas formas
+        independentes; reconstruiu inteiramente da prosa a construcao
+        explicita completa, confirmando os 8 valores de n_1(gamma) como
+        inteiros EXATOS e os 8 valores de log10(n_0(gamma)) a <0,004 de
+        diferenca. Um achado nomeado, BAIXA severidade/cosmetico (um
+        "fator de folga" descrito incorretamente, nunca usado em nenhuma
+        formula posterior), corrigido por adendo datado. Veredito SOUND
+        WITH ONE NAMED ISSUE (BAIXA) -- ACCEPT for catalogue; a alegacao
+        central de correcao foi CONFIRMADA alem de duvida razoavel.
+        Integrado como "Estagio 36" em THEOREM.md, com correcao datada
+        aplicada ao SS5 do Estagio 33's fonte e pointer datado no Estagio
+        33. Seeds 20260900000+ (frente)/referee 20260901000+, nenhum
+        fora da reserva (ambos deterministicos, seeds nao usados). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/gamma_scaling_attempt/gamma_second_order_attempt/gamma_second_order_gap_closure_attempt/gamma_gap1_mgf_attempt/gamma_gap1_continuation_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
       k3_full_cdf_attempt: >
         DESPACHADA (DISC-DEC-093). Estende o fechamento K=3 do Estagio
         35 (apenas segundo momento/mesmo ciclo) para a CDF completa de

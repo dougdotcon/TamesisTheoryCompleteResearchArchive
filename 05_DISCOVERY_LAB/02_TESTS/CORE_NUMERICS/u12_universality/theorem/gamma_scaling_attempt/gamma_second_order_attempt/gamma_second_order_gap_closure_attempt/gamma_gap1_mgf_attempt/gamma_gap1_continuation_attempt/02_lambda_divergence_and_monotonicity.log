@@ -1,0 +1,81 @@
+lambda(gamma) = kappa_0(gamma) * (3/2 - gamma), fully substituted:
+4⋅(2⋅γ - 3)
+───────────
+ γ⋅(γ - 2) 
+
+Combined single fraction:
+4⋅(2⋅γ - 3)
+───────────
+ γ⋅(γ - 2) 
+
+lambda(gamma=1)    = 4   (Gap-1 front's own asserted lower endpoint 'kappa_0 at gamma=1' -- NOTE: with the correct kappa_0(1)=8, this endpoint value is 4, not the front's illustrative kappa_0=2.25.)
+lambda(gamma=0.9    ) = 4.8485
+lambda(gamma=0.5    ) = 10.6667
+lambda(gamma=0.3    ) = 18.8235
+lambda(gamma=0.1    ) = 58.9474
+lambda(gamma=0.01   ) = 598.9950
+lambda(gamma=0.001  ) = 5998.9995
+
+lim_{gamma->0+} lambda(gamma) = oo
+
+==============================================================================
+VERDICT on Gap-1 front's Section 5 item 2 claim of boundedness on (0,1):
+==============================================================================
+REFUTED. lambda(gamma) is continuous and finite at every fixed gamma in
+(0,1) (it is a ratio of polynomials with no pole inside the open interval,
+only at the boundary gamma=0), but it is UNBOUNDED as gamma -> 0+: the
+claimed upper bound '(3/2)*kappa_0' silently assumed kappa_0 constant.
+The actual sup over (0,1) is +infinity, attained only in the gamma->0 limit.
+
+------------------------------------------------------------------------------
+Monotonicity of lambda(gamma) on (0,1) (needed for compact-uniformity):
+------------------------------------------------------------------------------
+
+d(lambda)/d(gamma), simplified:
+  ⎛   2          ⎞
+8⋅⎝- γ  + 3⋅γ - 3⎠
+──────────────────
+ 2 ⎛ 2          ⎞ 
+γ ⋅⎝γ  - 4⋅γ + 4⎠ 
+
+Numerator of lambda'(gamma) (expanded): -8*gamma**2 + 24*gamma - 24
+Denominator of lambda'(gamma) (expanded): gamma**4 - 4*gamma**3 + 4*gamma**2
+
+Denominator strictly positive for gamma in (0,1) (sampled at 99 points, p/100 for p=1..99): True
+Numerator strictly negative for gamma in (0,1) (sampled at 99 points): True
+
+Roots of the numerator (exact, via sympy.solve): []
+Roots of the numerator lying strictly inside (0,1): []
+
+Since the numerator has no root in (0,1), it has constant sign there.
+Numerator at gamma=1/2: -14 (negative => numerator < 0 throughout (0,1))
+
+=> lambda'(gamma) < 0 for ALL gamma in (0,1): lambda is strictly
+   DECREASING on (0,1) -- a fully rigorous, exact-algebra fact (not a
+   numerical sample check), confirming the earlier numeric evidence.
+
+==============================================================================
+CONSEQUENCE for 'uniformity in gamma as a continuum' (mandate item 2):
+==============================================================================
+
+Since lambda(gamma) is exact-algebra-PROVED strictly decreasing on (0,1) with
+lambda(1)=4 and lambda(gamma)->infinity as gamma->0+:
+
+  * NO single gamma-independent split constant C works for ALL gamma in the
+    open interval (0,1) simultaneously, because the Bulk/Tail Lemma's tail
+    piece requires (script 04/05 below) C^2 > 1/4 + (explicit multiple of)
+    lambda(gamma)/2, and the right-hand side is unbounded as gamma->0.
+    This refutes the Gap-1 front's own suggested resolution of mandate item 2.
+
+  * On any COMPACT sub-interval [gamma_0, 1) subset (0,1), gamma_0 > 0 fixed,
+    lambda is bounded above by its value at the left endpoint, lambda(gamma_0)
+    (by the monotonicity just proved), so a SINGLE C = C(gamma_0) DOES work
+    uniformly for all gamma in [gamma_0, 1) -- this is provable and is exactly
+    the same "uniform on compacts of (0,1]" pattern already established
+    elsewhere in this lineage for the first-order law (wave-17 Corollary 1).
+
+This is a precise, rigorous diagnosis (not a numerical guess): the mandate's
+"uniformity over gamma in (0,1) as a continuum" is TRUE in the compact-subset
+sense standard in this lineage, and FALSE in the literal single-constant-for-
+the-whole-open-interval sense the predecessor's phrasing suggested.
+

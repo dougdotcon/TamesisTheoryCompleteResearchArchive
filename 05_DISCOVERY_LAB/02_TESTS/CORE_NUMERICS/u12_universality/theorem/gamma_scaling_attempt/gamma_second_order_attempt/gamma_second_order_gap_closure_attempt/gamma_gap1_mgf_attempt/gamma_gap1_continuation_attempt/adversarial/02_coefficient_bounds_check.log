@@ -1,0 +1,31 @@
+tau(m) = k**2*m/n**2 - k*m**2/n**2 - k*m/n**2 + m**3/(3*n**2) + m**2/(2*n**2) + m/(6*n**2)
+tau(0) = 0
+degree of x(D) in D: 3
+
+Fresh (route A: direct substitution + Poly) coefficients:
+c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c3 = 1/(6*n**2)
+
+Route B (derivative-based, cited formula) coefficients:
+c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c1 = (gamma**2*k**2/2 - gamma*k**2 + gamma*k/2 + k**2/2 - k/2 - n*(2*k*(gamma - 1) + 1)/2 + 1/12)/n**2
+c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c3 = 1/(6*n**2)
+
+Cross-check route A vs route B (should be exactly zero):
+  c0: diff = 0
+  c1: diff = 0
+  c2: diff = 0
+  c3: diff = 0
+
+Spot check c0(gamma=1/2,k=10,n=100) = 51/4000 = 0.01275
+
+=== Cubic structure of x(D) independently CONFIRMED (route A vs B, exact zero diff). ===
+
+Total pointwise inequality checks: 1836
+Violations found: 0
+
+=== ALL coefficient bounds (|c0|,|c1|,|c2| <= claimed; c3 exact) ===
+=== independently CONFIRMED over 1836 exact-rational checks. ===

@@ -1,0 +1,33 @@
+Our own assembled g(K) upper bound, expanded:
+  -K**3*gamma/(2*n**2) + 23*K**3/(6*n**2) - K**2*gamma/n + 7*K**2/(4*n) + 11*K**2/(6*n**2) + 3*K/(4*n)
+
+Target's claimed Ghat(n,gamma) [with K_max -> K symbol], expanded:
+  -K**3*gamma/(2*n**2) + 23*K**3/(6*n**2) - K**2*gamma/n + 7*K**2/(4*n) + 11*K**2/(6*n**2) + 3*K/(4*n)
+
+Difference (should be exactly 0): 0
+=== (A) Ghat(n,gamma) formula independently CONFIRMED as the exact ===
+=== algebraic consequence of substituting k=K_max into the Step-3 bounds. ===
+
+--- (B) K <= K_max(n,gamma) := 4*sqrt(n*ln(n)/beta), all n>=3 ---
+Checked 70 (n,gamma) points; violations: 0
+=== (B) K <= K_max CONFIRMED over the tested grid (n up to 1e80). ===
+
+Worst-case y at n=3, beta=1/2 (gamma=1): 5.134851013226638
+y>=1 holds at the worst case (n=3,beta=1/2) hence for all n>=3, all gamma in (0,1]
+=> ceil(y) <= y+1 <= 2y (elementary, since y>=1) => K <= 4*sqrt(n ln n/beta) = K_max.
+
+--- (C) leading asymptotic Ghat(n,gamma) ~ lambdahat(gamma)*ln(n) ---
+lim_{n->infty} Ghat(n,gamma)/ln(n) = 8*(4*gamma - 7)/(gamma*(gamma - 2))
+Claimed lambdahat(gamma) = 16*(7/4-gamma)/beta = 8*(4*gamma - 7)/(gamma*(gamma - 2))
+Difference (should be 0): 0
+=== (C) lambdahat(gamma) = 16*(7/4-gamma)/beta CONFIRMED as exact leading asymptotic of Ghat. ===
+
+Spot values (gamma, lambdahat, C0, C=1.2*C0):
+  gamma=0.99: lambdahat=24.3224  C0=3.5230  C=4.2275
+  gamma=0.90: lambdahat=27.4747  C0=3.7400  C=4.4880
+  gamma=0.70: lambdahat=36.9231  C0=4.3257  C=5.1908
+  gamma=0.50: lambdahat=53.3333  C0=5.1881  C=6.2258
+  gamma=0.30: lambdahat=90.9804  C0=6.7631  C=8.1158
+  gamma=0.10: lambdahat=277.8947  C0=11.7982  C=14.1578
+  gamma=0.05: lambdahat=557.9487  C0=16.7100  C=20.0520
+  gamma=0.01: lambdahat=2797.9899  C0=37.4065  C=44.8878

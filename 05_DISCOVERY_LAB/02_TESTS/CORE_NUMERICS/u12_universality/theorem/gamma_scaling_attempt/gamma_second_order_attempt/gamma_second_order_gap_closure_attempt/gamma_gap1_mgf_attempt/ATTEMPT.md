@@ -500,6 +500,28 @@ this front's contribution:
    strongly suggests uniformity holds with a single `γ`-independent `C`
    (say, `C` calibrated to the worst case `γ\to0`), but this was not
    proved as a `\forall γ` statement here.
+   **[Correção pós-adversarial, 2026-08-26 — DISC-DEC-094, achado da
+   onda 21 frente (a), `GAMMA-GAP1-CONTINUATION-ATTEMPT`, confirmado
+   pelo referee hostil daquela frente.] Esta afirmação está ERRADA: ela
+   assume implicitamente que `κ_0` é uma constante independente de
+   `γ`. Não é. Lendo a prova do Teorema 2 da própria frente da onda 17
+   (`gamma_scaling_attempt/ATTEMPT.md` §5), a truncagem exata é
+   `K:=⌈√((4/β)n\ln n)⌉`, `β:=γ(2-γ)/2`, dando
+   `κ_0(γ)=4/β=8/(γ(2-γ))` — uma FUNÇÃO de `γ`, não um número — que
+   diverge a `+∞` conforme `γ\to0^+` (é `8`, não `2,25`, em `γ=1`).
+   Consequentemente `λ(γ)=κ_0(γ)(3/2-γ)=4(3-2γ)/(γ(2-γ))` é contínua
+   mas NÃO LIMITADA em `(0,1)` — o oposto exato do que esta frase
+   afirma. A frente da onda 21 provou (álgebra exata, não apenas
+   amostragem numérica) que `λ(γ)` é estritamente decrescente em
+   `(0,1)`, dando a substituição corretamente escopada: um único
+   `C(γ_0)` funciona uniformemente em todo compacto `[γ_0,1)⊂(0,1)`,
+   `γ_0>0` fixo — o mesmo padrão "uniforme em compactos" já usado
+   alhures nesta linhagem (Corolário 1 da própria frente da onda 17) —
+   mas NENHUM `C` único funciona no intervalo aberto `(0,1)` inteiro
+   simultaneamente, ao contrário do que esta frase sugeria. Este erro
+   não afetou nenhum resultado numérico já catalogado desta frente
+   (Estágio 33): a tabela `W_{\mathrm{bound}}(n,\gamma)` da §4 usa
+   valores pontuais de `γ`, não depende da afirmação de limitação.]**
 3. **Pin down `κ_0`, the actual constant in the wave-17 front's own
    `K\sim\sqrt{n\ln n}` truncation**, rather than the illustrative
    `κ_0=2.25` used for concreteness in scripts `02`/`03`. The Bulk/Tail

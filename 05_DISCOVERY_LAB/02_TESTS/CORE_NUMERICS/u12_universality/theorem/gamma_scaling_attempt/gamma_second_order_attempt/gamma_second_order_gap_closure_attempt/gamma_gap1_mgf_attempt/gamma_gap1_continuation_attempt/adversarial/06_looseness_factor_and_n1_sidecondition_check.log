@@ -1,0 +1,27 @@
+(A) Check of the target's claimed 'looseness factor lambdahat/lambda
+    between 3 (gamma=1) and ~4.67 (gamma->0)', Sec.4 Step 3 narrative:
+  gamma=0.0001: lambda=59998.999950  lambdahat=279997.999900  ratio=4.666711
+  gamma=0.0100: lambda=598.994975  lambdahat=2797.989950  ratio=4.671141
+  gamma=0.1000: lambda=58.947368  lambdahat=277.894737  ratio=4.714286
+  gamma=0.5000: lambda=10.666667  lambdahat=53.333333  ratio=5.000000
+  gamma=0.9000: lambda=4.848485  lambdahat=27.474747  ratio=5.666667
+  gamma=0.9900: lambda=4.080408  lambdahat=24.322432  ratio=5.960784
+  gamma=0.9999: lambda=4.000800  lambdahat=24.003200  ratio=5.999600
+  gamma=1.0000: lambda=4.000000  lambdahat=24.000000  ratio=6.000000
+
+=> True ratio at gamma=1 is 6.0 (NOT 3, as the ATTEMPT.md text states);
+   true ratio as gamma->0+ is 14/3=4.6667 (this part IS correctly
+   stated). True range is approx [4.667, 6.0], INCREASING in gamma,
+   not 'between 3 (gamma=1) and ~4.67 (gamma->0)' (which implies the
+   opposite direction) as the document states.
+   NOTE: this ratio is a purely descriptive number; lambdahat(gamma)
+   itself (independently confirmed exact in script 03) is what is
+   actually used downstream to build C0(gamma), C(gamma), Ghat, and
+   the whole n_0(gamma) table -- all independently confirmed correct
+   in scripts 03-04 regardless of this one narrative slip.
+
+(B) Side-condition check: is K_max(n_1(gamma),gamma) <= n_1(gamma)/2 ?
+  gamma=0.99: n1=65550  K_max(n1)=4823.47  n1/2=32775.00  K_max<=n1/2? True
+  gamma=0.50: n1=116509  K_max(n1)=7615.18  n1/2=58254.50  K_max<=n1/2? True
+  gamma=0.10: n1=1815402  K_max(n1)=66381.03  n1/2=907701.00  K_max<=n1/2? True
+  gamma=0.01: n1=165490771  K_max(n1)=2244123.21  n1/2=82745385.50  K_max<=n1/2? True

@@ -1,0 +1,89 @@
+==============================================================================
+PART (a): explicit threshold C_0(gamma), tightened leading constant
+==============================================================================
+
+Ghat(n,gamma) ~ lambda_hat(gamma) ln(n) for large n (script 04 Step 3),
+lambda_hat(gamma) := 16(7/4-gamma)/beta(gamma). The tail piece of W scales
+like n^{-2C^2 + lambda_hat(gamma) + 1/2} (the +1/2 from Gn_bound~sqrt(n)).
+Vanishing requires C^2 > 1/4 + lambda_hat(gamma)/2, i.e.
+
+    C_0(gamma) := sqrt(1/4 + lambda_hat(gamma)/2).
+
+   gamma       beta   lambda_hat   C_0(gamma)
+    0.99   0.499950      24.3224       3.5230
+     0.9   0.495000      27.4747       3.7400
+     0.7   0.455000      36.9231       4.3257
+     0.5   0.375000      53.3333       5.1881
+     0.3   0.255000      90.9804       6.7631
+     0.1   0.095000     277.8947      11.7982
+    0.05   0.048750     557.9487      16.7100
+    0.01   0.009950    2797.9899      37.4065
+   0.001   0.000999   27997.9990     118.3184
+
+==============================================================================
+PART (b): pick C(gamma):=1.2*C_0(gamma); find explicit n_0(gamma) via
+          direct search (log-domain, avoids overflow) where log W<=0
+==============================================================================
+gamma=0.99   C=   4.2275  n_1(gamma)=65550           n_0(gamma) [logW crosses 0] ~ 10^20.789
+gamma=0.9    C=   4.4880  n_1(gamma)=66867           n_0(gamma) [logW crosses 0] ~ 10^36.829
+gamma=0.7    C=   5.1908  n_1(gamma)=79141           n_0(gamma) [logW crosses 0] ~ 10^45.024
+gamma=0.5    C=   6.2258  n_1(gamma)=116509          n_0(gamma) [logW crosses 0] ~ 10^50.276
+gamma=0.3    C=   8.1158  n_1(gamma)=251965          n_0(gamma) [logW crosses 0] ~ 10^55.950
+gamma=0.1    C=  14.1578  n_1(gamma)=1815402         n_0(gamma) [logW crosses 0] ~ 10^65.948
+gamma=0.05   C=  20.0520  n_1(gamma)=6893991         n_0(gamma) [logW crosses 0] ~ 10^71.783
+gamma=0.01   C=  44.8878  n_1(gamma)=165490771       n_0(gamma) [logW crosses 0] ~ 10^84.881
+
+Verification: logW just above and just below the found n_0 crossover:
+  gamma=0.99: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.9: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.7: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.5: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.3: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.1: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.05: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+  gamma=0.01: logW(0.999*n0)=0.0002  logW(1.001*n0)=-0.0002  (expect positive then negative)
+
+==============================================================================
+PART (b'): monotone decay of W beyond n_0(gamma) (log-domain, several
+           further decades of n)
+==============================================================================
+  gamma=0.99: logW at n0*[1,10,100,1000,10000] = [0.0, -0.41, -0.824, -1.242, -1.666]
+    monotonically non-increasing: True
+  gamma=0.9: logW at n0*[1,10,100,1000,10000] = [0.0, -0.475, -0.953, -1.433, -1.916]
+    monotonically non-increasing: True
+  gamma=0.7: logW at n0*[1,10,100,1000,10000] = [-0.0, -0.493, -0.988, -1.485, -1.983]
+    monotonically non-increasing: True
+  gamma=0.5: logW at n0*[1,10,100,1000,10000] = [0.0, -0.502, -1.005, -1.51, -2.016]
+    monotonically non-increasing: True
+  gamma=0.3: logW at n0*[1,10,100,1000,10000] = [-0.0, -0.509, -1.02, -1.531, -2.044]
+    monotonically non-increasing: True
+  gamma=0.1: logW at n0*[1,10,100,1000,10000] = [-0.0, -0.519, -1.039, -1.56, -2.082]
+    monotonically non-increasing: True
+  gamma=0.05: logW at n0*[1,10,100,1000,10000] = [-0.0, -0.524, -1.048, -1.573, -2.099]
+    monotonically non-increasing: True
+  gamma=0.01: logW at n0*[1,10,100,1000,10000] = [-0.0, -0.532, -1.064, -1.597, -2.13]
+    monotonically non-increasing: True
+
+==============================================================================
+PART (c): compact-uniformity -- single C works on [gamma_0, 1)
+==============================================================================
+
+lambda_hat(gamma) = 16(7/4-gamma)/beta(gamma) is a decreasing function of
+gamma on (0,1) (both the (7/4-gamma) numerator decreases and 1/beta(gamma)
+decreases as gamma increases toward 1 -- checked directly below), hence so
+is C_0(gamma). For any fixed gamma_0 in (0,1), the single constant
+C(gamma_0) := 1.2*C_0(gamma_0) suffices for every gamma in [gamma_0,1)
+simultaneously (since C_0(gamma)<=C_0(gamma_0) there and Ghat/GhatTheta's own
+n_1(gamma) threshold is also controlled by beta(gamma)>=beta(gamma_0), so the
+crossover n_0(gamma) for the WHOLE compact range is bounded by n_0(gamma_0),
+computed above) -- the honest, correctly-scoped uniformity statement.
+
+lambda_hat(gamma) numerically confirmed monotonically non-increasing in gamma across (0,1) (400-point grid): True
+gamma_0=0.5: single C(gamma_0)=1.2*C_0(gamma_0)=6.2258 works for all gamma in [0.5,1) since C_0(gamma)<=C_0(gamma_0)=5.1881 there,
+  with the same single explicit n_0(gamma_0) ~ 10^50.276 certified above covering the whole range.
+gamma_0=0.1: single C(gamma_0)=1.2*C_0(gamma_0)=14.1578 works for all gamma in [0.1,1) since C_0(gamma)<=C_0(gamma_0)=11.7982 there,
+  with the same single explicit n_0(gamma_0) ~ 10^65.948 certified above covering the whole range.
+gamma_0=0.01: single C(gamma_0)=1.2*C_0(gamma_0)=44.8878 works for all gamma in [0.01,1) since C_0(gamma)<=C_0(gamma_0)=37.4065 there,
+  with the same single explicit n_0(gamma_0) ~ 10^84.881 certified above covering the whole range.
+
+Done.

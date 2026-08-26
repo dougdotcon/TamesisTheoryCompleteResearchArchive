@@ -1,0 +1,64 @@
+==============================================================================
+PART A: fresh symbolic re-derivation of x(D) = delta(D) + tau(M)/2
+==============================================================================
+
+tau(m) closed form (sympy.summation):
+  ⎛   2                    2          ⎞
+m⋅⎝6⋅k  - 6⋅k⋅(m + 1) + 2⋅m  + 3⋅m + 1⎠
+───────────────────────────────────────
+                    2                  
+                 6⋅n                   
+
+delta(D) (cited exact identity):
+-D⋅(D + 2⋅k⋅(γ - 1) + 1) 
+─────────────────────────
+           2⋅n           
+
+x(D) expanded as a polynomial in D (ascending powers):
+  c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+  c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+  c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+  c3 = 1/(6*n**2)
+
+Degree of x(D) in D: 3 (expect exactly 3 -- confirms exact cubic, no higher-order terms, since tau is exactly cubic in m and its 4th derivative is identically 0)
+
+------------------------------------------------------------------------------
+Cross-check against gamma_gap1_mgf_attempt/ATTEMPT.md Section 2's
+adversarially-CORRECTED closed forms (prose, quoted verbatim, not code):
+------------------------------------------------------------------------------
+  c0: fresh - predecessor(corrected) = 0  ->  MATCH: True
+  c1: fresh - predecessor(corrected) = 0  ->  MATCH: True
+  c2: fresh - predecessor(corrected) = 0  ->  MATCH: True
+  c3: fresh - predecessor(corrected) = 0  ->  MATCH: True
+
+All four coefficients match the adversarially-corrected predecessor forms exactly: True
+
+Numeric spot check (gamma=1/2, k=10, n=100): c0 = 51/4000 (referee's confirmed correct value: 51/4000 = 51/4000)
+
+==============================================================================
+PART B: pinning down kappa_0(gamma), the EXACT wave-17 truncation constant
+==============================================================================
+
+Wave-17 front's own truncation (gamma_scaling_attempt/ATTEMPT.md Section 5, quoted verbatim):
+  K := ceil( sqrt( (4/beta) * n * ln(n) ) ),  beta := gamma*(2-gamma)/2
+
+Hence K^2 = (4/beta) n ln n + O(sqrt(n ln n))  (ceiling correction),
+i.e. in the Gap-1 front's own notation 'K^2 = kappa_0 * n * ln n':
+
+  kappa_0(gamma) = 4/beta = -8/(gamma*(gamma - 2))
+
+kappa_0(gamma=1)      = 8
+kappa_0(gamma=0.5)    = 32/3
+kappa_0(gamma=0.1)    = 800/19 = 42.1053
+kappa_0(gamma=0.01)   = 402.0101
+
+lim_{gamma->0+} kappa_0(gamma) = oo
+
+*** CENTRAL FINDING ***
+kappa_0 is NOT a gamma-independent constant. The illustrative value
+kappa_0=2.25 used by the Gap-1 front (Estagio 33) for concreteness is
+neither the correct value at any single gamma (kappa_0(1)=8, not 2.25),
+nor a valid stand-in for a gamma-independent constant, since the true
+kappa_0(gamma) = 8/(gamma(2-gamma)) diverges as gamma -> 0+.
+
+Done.

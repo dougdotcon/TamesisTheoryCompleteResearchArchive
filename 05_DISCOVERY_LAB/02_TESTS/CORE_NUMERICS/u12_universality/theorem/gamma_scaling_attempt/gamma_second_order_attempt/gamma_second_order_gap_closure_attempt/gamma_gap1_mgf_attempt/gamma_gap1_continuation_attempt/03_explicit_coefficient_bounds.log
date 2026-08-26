@@ -1,0 +1,34 @@
+Derivation of the cancellation-preserving c1, c2 bounds:
+
+c1 = (1/n^2)[ (g^2 k^2)/2 - g k^2 - g k n + (g k)/2 + k^2/2 + k n - k/2 - n/2 + 1/12 ]
+   = (1/n^2)[ (g^2 k^2)/2 - g k^2 + (g k)/2 + k^2/2 - k/2 - n/2 + 1/12  +  k n (1-g) ]
+Bounding the first six terms by triangle inequality (0<g<=1, so g^2<=g<=1):
+  |(g^2k^2)/2 - g k^2 + (gk)/2 + k^2/2 - k/2 - n/2 + 1/12|
+     <= k^2/2 + k^2 + k/2 + k^2/2 + k/2 + n/2 + 1/12 = 2k^2 + k + n/2 + 1/12
+so |c1| <= [2k^2 + k + n/2 + 1/12 + kn(1-g)] / n^2
+         = 2k^2/n^2 + k/n^2 + 1/(2n) + 1/(12n^2) + (1-g)k/n
+        <= 2k^2/n^2 + (1-g)k/n + k/n^2 + 3/(4n)
+(using 1/(2n)+1/(12n^2) <= 3/(4n) for n>=1: at n=1, 0.5+0.0833=0.583<=0.75).
+
+c2 = (2 g k - 2k - 2n + 1)/(4n^2) = [ -2k(1-g) - 2n + 1 ] / (4n^2)
+   |c2| <= [2k(1-g) + 2n + 1] / (4n^2) = (1-g)k/(2n^2) + 1/(2n) + 1/(4n^2)
+        <= (1-g)k/(2n^2) + 3/(4n)   (same n>=1 bundling as above).
+
+Total pointwise inequality checks: 1920
+Grid: n in [10, 30, 100, 316, 1000, 3162, 10000, 31623, 100000]
+      gamma in [0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0.99, 0.999]
+      k sampled across [1, floor(n/2)] at several points per n
+
+Violations found: 0
+Zero violations -- the three explicit cancellation-preserving bounds
+  |c0| <= (7/6) k^3/n^2 + (5/6) k^2/n^2
+  |c1| <= 2 k^2/n^2 + (1-gamma) k/n + k/n^2 + 3/(4n)
+  |c2| <= (1-gamma) k/(2n^2) + 3/(4n)
+hold at every tested (k,n,gamma) point with 1<=k<=floor(n/2).
+
+Worst-case (true/bound) tightness ratio observed per coefficient:
+  max(|c0|/bound_c0) over grid = 0.142851 (must be <= 1 for validity)
+  max(|c1|/bound_c1) over grid = 0.989950 (must be <= 1 for validity)
+  max(|c2|/bound_c2) over grid = 0.749371 (must be <= 1 for validity)
+
+All three bounds numerically CONFIRMED valid (0 violations, 1920 checks) on the tested grid.

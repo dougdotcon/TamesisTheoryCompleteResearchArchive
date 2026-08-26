@@ -3471,7 +3471,11 @@ tocado.
 não pela rota direta desta frente, que permanece exatamente como
 registrado acima]; a exploração conjunta de `p\ge2` pontos (o novo
 sub-problema nomeado — permanece seu próprio problema aberto, mesmo
-após o fechamento indireto); Conjectura 1 para `K\ge4` (sob revisão
+após o fechamento indireto) [Ver Estágio 25 abaixo — 2026-08-26: um
+primeiro resultado genuíno nesta linha, o Teorema J de restrição
+cíclica uniforme, provado; não fecha os alvos de momento (já fechados
+por outra rota no Estágio 24), mas é progresso real na maquinaria de
+exploração conjunta em si]; Conjectura 1 para `K\ge4` (sob revisão
 adversarial na própria onda 16) [Ver Estágio 24 abaixo — fechada para
 todo `K` em 2026-08-26]; `\sup_K M_K/\sqrt K=a^*` (idem); `p>20` de
 `D^{*(p)}_r(b)` (idem); o piso `H2` em `b=1` (idem); a lei de escala
@@ -4181,3 +4185,123 @@ momento agora fechados por outra rota); `p>20` de `D^{*(p)}_r(b)`
 constante do platô de DISC-DEC-071 (sob revisão na onda 17). Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 25 — 2026-08-26]
+
+**Onda 17, frente (c), `DISC-DEC-072`/`DISC-DEC-076`
+(`JOINT-TWO-POINT-EXPLORATION-ATTEMPT`).** Alvo: a obstrução localizada
+pelo Estágio 18 — a lei conjunta da exploração em dois pontos. Alvos
+numerados no despacho, em ordem de valor: (1) `E[M(c)^2]=(1-e^{-c})/c`
+incondicional; (2) `E[M_K^2]=1/(K+1)` incondicional para todo `K`; (3)
+qualquer estrutura rigorosa parcial da lei conjunta de dois pontos.
+
+### O que aconteceu
+
+> **Não-fechamento honesto dos alvos (1) e (2) — que, no momento em que
+> esta frente rodou, ainda estavam abertos em `THEOREM.md` — combinado
+> com um novo teorema genuíno e completo sobre a estrutura em si (alvo
+> 3).** Nenhum atalho de "split é 50/50" para os alvos de momento é
+> alegado; a própria frente já havia diagnosticado (§6.2) que fechar
+> `E[M_K^2]` exige resolver a Conjectura 1 geral-`K` em si — exatamente
+> o que o Estágio 24 fechou, por outra rota, no mesmo dia.
+
+**Teorema J (Teorema da Restrição Cíclica Uniforme, PROVADO).** No
+modelo condicional-`K` finito da Definição 4 (`THEOREM.md` §7.2),
+condicional ao conjunto cíclico final realizado `C(f)=c` (qualquer
+subconjunto com `|c|=m\ge2`), a restrição `f|_c` é **exatamente
+uniformemente distribuída** sobre todas as `m!` bijeções de `c` — para
+todo `n,K`, não apenas assintoticamente. Prova elementar, bijetiva:
+**Lema J1** (invariância por pós-composição — `\kappa\circ f
+\overset{d}{=} f` para qualquer bijeção fixa `\kappa`, uma identidade
+algébrica pontual mais um argumento de invariância de lei, sem nenhuma
+probabilidade condicional envolvida na primeira parte); **Lema J2**
+(uma bijeção de troca explícita, para `\rho'=\rho\circ(x\,y)` com
+`\kappa:=(\rho(x)\,\rho(y))`, entre `\{C(h)=c,h|_c=\rho\}` e
+`\{C(h)=c,h|_c=\rho'\}` — a parte de maior risco: `\kappa` tem suporte
+inteiramente contido em `c` por construção, logo nunca alcança nem é
+alcançada por estrutura fora de `c`, o que preserva `C(g)=c`
+exatamente, verificado por indução completa sobre a cauda da órbita
+pré-`c`).
+
+**Corolário (PROVADO).** `P(\text{dois pontos fixos no mesmo ciclo
+final}\mid\text{ambos cíclicos}) = 1/2` **exatamente**, para todo
+`n\ge2` finito e todo `0\le K\le n` — um fortalecimento estrito do
+Lema B1 do Estágio 18 (que só concernia a permutação `\pi` de fundo
+incondicional, não o grafo funcional rerouted de fato, condicional a
+ambos os pontos sobreviverem).
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: enumeração
+exaustiva independente e fresca em `(n,K)\in\{(3,1),(4,1),(4,2),(5,2),
+(3,3),(4,4)\}` — confirmando tanto a uniformidade de restrição quanto
+o split 50/50 exatos, mais uma re-verificação separada do fato
+clássico `P(\text{mesmo ciclo})=1/2`. Zero discrepâncias.
+
+Referee hostil dedicado, sem ler nenhum script da frente: re-derivou
+os Lemas J1 e J2 à mão, atacando com peso máximo o passo de maior
+risco nomeado no despacho (`|c|=2`; se `\kappa` pode alcançar estrutura
+fora de `c`; se a troca pode silenciosamente mudar quais pontos
+terminam cíclicos) — nenhuma falha encontrada em nenhum dos três.
+Reconstruiu o motor computacional do zero: o fato clássico
+`P(\text{mesmo ciclo})=1/2` re-verificado `m=2,\ldots,9` (frente:
+até `7`) mais checagem todos-os-pares em `m=4,5,6`; enumeração
+exaustiva da Definição 4 em **33 células `(n,K)`** (frente: 21),
+incluindo quatro tipos de célula nunca testados pela frente
+(`K=0` inteiro; `K=6,7`, incluindo o contorno `K=n=7`) — **33/33
+verificações de sanidade de peso, 33/33 do corolário, 33/33 da
+uniformidade de restrição do Teorema J, zero violações**; mais uma
+re-implementação "ingênua" totalmente independente (sem nenhum atalho
+de reponderação) em 12 células, batendo exatamente com o método
+otimizado — incluindo confirmar que a coincidência `n=4,K=3` e
+`n=4,K=4` ambos `P_{\text{both}}=19/64` é genuína, não um bug.
+
+> **Veredito: SOUND — ACCEPT for catalogue**, no tier reivindicado
+> (PROVADO, elementar, autocontido). Nenhum erro matemático encontrado
+> no Teorema J, no Corolário, ou nos dois lemas subjacentes. Um achado
+> cosmético (framing de um conjunto gerador desnecessário no §2.2, não
+> afeta a prova). Disclosure do referee: um quase-incidente de processo
+> (execução concorrente duplicada no run exaustivo principal, detectada
+> via `ps aux` antes de confiar no log, ambos processos mortos, re-run
+> limpo único — nenhum dado corrompido chegou ao relatório final);
+> nenhum bug matemático/lógico encontrado no código do próprio referee.
+
+Ver `theorem/conjecture2_direct_attempt/joint_two_point_attempt/ATTEMPT.md`
+e `.../joint_two_point_attempt/adversarial/REFEREE_REPORT.md`.
+
+### Reconciliação com a frente (a) da mesma onda
+
+Esta frente registrou os alvos (1)/(2) como abertos com base no estado
+de `THEOREM.md` no momento em que rodou — anterior ao retorno do
+referee reforçado da frente (a) (Estágio 24, integrado no mesmo dia).
+Essa caracterização era precisa **no momento em que foi escrita**; está
+agora superada pelo Estágio 24, que fecha ambos os alvos
+incondicionalmente para todo `K`, por uma rota inteiramente diferente
+(a Conjectura 1 geral-`K`, não a exploração conjunta). Isto não
+invalida o resultado desta frente — o Teorema J é uma peça estrutural
+genuína e nova, e a própria frente já havia notado (§6.2) que não
+existe atalho do split para o alvo de momento, exatamente o que se
+confirmou: os dois fechamentos são de fato independentes, não
+concorrentes.
+
+### O que isto muda, precisamente
+
+**Um novo teorema exato — Teorema J e seu Corolário — está catalogado,
+fortalecendo estritamente o Lema B1 do Estágio 18 para o regime
+condicional de fato (não apenas o pano de fundo `\pi`).** Os alvos de
+momento (1)/(2) que esta frente mirava permanecem, quanto a esta
+frente, não fechados por sua própria rota — mas já fechados pelo
+Estágio 24, por outra rota, no mesmo dia. Nenhum resultado anterior é
+enfraquecido.
+
+**O que permanece aberto, sem mudança:** a maquinaria de exploração
+conjunta de `p\ge2` pontos como ferramenta geral (o Teorema J resolve
+apenas a peça condicional "split dado ambos cíclicos", não a lei
+conjunta completa); a versão contínua-nativa do Teorema J a partir da
+Definição 3 (tentada em §6.3, não completada — mesma obstrução do
+Estágio 18 §3.3); `p>20` de `D^{*(p)}_r(b)`; o piso `H2` em `b=1`
+(sob revisão na onda 17); a constante do platô de DISC-DEC-071 (sob
+revisão na onda 17). Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.

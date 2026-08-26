@@ -2427,7 +2427,9 @@ até o sup global tende a `0`. Em termos **relativos** a lei-limite
 degrada de forma precisamente localizável: para `c=γn`,
 `φ(n,c)/φ_∞(c)\to\sqrt{2/(2-γ)}`, **provado** no extremo `γ=1`
 (`φ(n,n)=Q(n)/n` exatamente, função `Q` de Ramanujan) e caracterizado
-numericamente para `γ\in(0,1)`.
+numericamente para `γ\in(0,1)`. [Ver Estágio 23 abaixo — 2026-08-26:
+provado para todo `γ\in(0,1]`, com uniformidade em compactos e o
+limite `γ_n\to0`.]
 
 ### Verificação adversarial independente
 
@@ -3860,6 +3862,116 @@ inferior casada (fechar o gap `κ_B+\tfrac13` no contorno, ou o fator
 literal termo-a-termo de `M_K/\sqrt K` (herdado do Estágio 19);
 Conjecturas 1 (`K\ge5`, sob revisão na onda 17) e 2; a exploração
 conjunta (Estágio 18); `p>20`; o piso `H2` em `b=1`; a lei de escala
-`\gamma\in(0,1)` (sob revisão na onda 17). Nenhuma alegação de
+`\gamma\in(0,1)` (sob revisão na onda 17) [Ver Estágio 23 abaixo —
+FECHADA em 2026-08-26]. Nenhuma alegação de
 progresso em Millennium Problem; matemática combinatória pura interna
 a este arquivo.
+
+---
+
+## [Extensão, Estágio 23 — 2026-08-26]
+
+**Contexto.** Primeiro ataque dedicado ao item aberto desde os
+Estágios 10–13: a lei de escala `\gamma\in(0,1)`, para `c=\gamma n`
+com `\gamma` fixo, `\varphi(n,\gamma n)/\varphi_\infty(\gamma n) \to
+\sqrt{2/(2-\gamma)}` — provada apenas no extremo `\gamma=1`
+(`\varphi(n,n)=Q(n)/n` exatamente), caracterizada apenas
+numericamente para `\gamma\in(0,1)`, sem frente dedicada até a onda
+17 (`GAMMA-SCALING-LAW-ATTEMPT`, DISC-DEC-072).
+
+**Resultado central.**
+
+> **Teorema 2 (PROVADO).** Para todo `\gamma\in(0,1]` fixo,
+> `\displaystyle \lim_{n\to\infty}
+> \frac{\varphi(n,\gamma n)}{\varphi_\infty(\gamma n)} =
+> \sqrt{\frac2{2-\gamma}}`, com taxa explícita `O_\gamma(n^{-1/4})`
+> via um sanduíche de dois lados em `n` finito (Teorema 1', abaixo).
+
+**Ambos os alvos-bônus também alcançados**: uniformidade em compactos
+`[\gamma_0,1]\subset(0,1]` (Corolário 1); e o limite `\gamma_n\to0`
+com `\gamma_n n^{1/3}/\ln n\to\infty` fazendo a razão `\to1` — a lei
+degrada continuamente para "sem degradação", exatamente como prediz
+`\sqrt{2/(2-\gamma)}\to1` (Corolário 2). O extremo `\gamma=1`
+(`\to\sqrt2`) é re-obtido de forma independente (Corolário 3).
+
+O motor da prova **não** é a maquinaria dos Estágios 9/12/22 — a taxa
+`|\Delta_n(c)|\le[a\sqrt c+\kappa_B]/n` é, como o próprio despacho
+pré-diagnosticou, estruturalmente fraca demais aqui: em `c=\gamma n`
+ela dá erro `O(1)` **relativo** contra `\varphi_\infty(\gamma n) =
+\Theta(n^{-1/2})`. Em vez disso, o Estágio 23 deriva do zero, direto
+da Definição 1, uma **nova fórmula soma-dupla exata em `n` finito**
+para `\varphi(n,c)` (Lema 1) — da qual a identidade
+`\varphi(n,n)=Q(n)/n` (correção pós-adversarial do Estágio 10) é o
+caso particular `q=1` de uma linha — e realiza uma análise de
+Laplace/gaussiana dessa fórmula no regime `c=\gamma n`, com todos os
+termos de erro explícitos (Lema 2: sanduíche de produto; Lema 3:
+decaimento a priori via Chernoff; Lema 4: substituição gaussiana via
+o lema de Hoeffding, clássico, citado; Lema 5: comparação
+soma-integral). Todos os ingredientes são elementares; as únicas
+citações são clássicas (Hoeffding) ou resultados já provados do
+próprio arquivo (Teorema 1/Corolário 4.2 para `\varphi_\infty`).
+
+**Bônus além do mandato**: um termo de segunda ordem em forma
+fechada, `\sqrt n(\text{razão}-\sqrt{2/(2-\gamma)}) \to C(\gamma) =
+-\frac2{3\sqrt\pi}\sqrt\gamma\,\frac{6-8\gamma+3\gamma^2}{(2-\gamma)^2}`,
+**PROVADO em `\gamma=1`** (reduz a `-2/(3\sqrt\pi)`, via Robbins 1955
++ FGKP95, já verificados na linhagem do Estágio 19) e
+**CONJECTURADO para `\gamma\in(0,1)`** (extrapolação de Richardson
+casa com a forma fechada a 7 dígitos significativos em 11 valores de
+`\gamma`; a troca de ordem expansão↔soma não foi feita rigorosamente
+— rotulado honestamente como não provado, nunca promovido ao
+scorecard principal).
+
+**Verificação.** Frente: fórmula do Lema 1 validada 4 formas
+independentes (força bruta de `n=3,4,5`; endpoint `q=1` contra `Q(n)/n`
+até `n=400`; inversão da identidade de mistura recuperando
+`\varphi_n^{(K)}` já provados; roundoff float64 vs. exato); sanduíche
+do Teorema 1' certificado em 30/30 pontos de grade; auditorias de
+desigualdade com zero violações; grade `\gamma\times n` até `n=2^{18}`
+reproduzindo o alvo com precisão crescente. Referee hostil dedicado
+(relatório em `.../gamma_scaling_attempt/adversarial/REFEREE_REPORT.md`):
+re-derivou o Lema 1 à mão a partir da Definição 1 antes de escrever
+qualquer código — confirmação independente, não apenas leitura;
+confirmou a identidade algébrica central `(G_n/n)/L_n =
+\sqrt{2/(2-\gamma)}` exatamente à mão; reconstruiu todo o motor
+numérico do zero (nunca abriu os scripts da frente nem de uma
+instância anterior travada do próprio referee) — força bruta exata
+em `n=3,4,5` contra o Lema 1 (0 divergências); reproduziu a tabela
+`\gamma\times n` impressa dígito a dígito; auditou ~154.000
+desigualdades pontuais dos Lemas 2–4 (encontrou e corrigiu um bug de
+underflow no próprio script de diagnóstico, disclosurado, 0
+violações após a correção); replicou a extrapolação de Richardson do
+termo de segunda ordem. Veredito: **SOUND — ACCEPT for catalogue**,
+no nível exatamente reivindicado (prova completa do mandato, não
+parcial); nenhum erro matemático, uso indevido de citação ou
+superalegação encontrado. **Spot-check da sessão** antes de
+catalogar: fórmula do Lema 1 confirmada por força bruta própria
+(`n=3,4`); identidade algébrica central confirmada simbolicamente;
+`\varphi(n,n)=Q(n)/n` confirmada exata `n=1..7`; `C(1)=-2/(3\sqrt\pi)`
+exato; a tabela `\gamma\times n=2^{18}` reproduzida a `\sim10^{-11}`
+em todos os 6 valores de `\gamma` — após a sessão encontrar e
+corrigir um bug de underflow catastrófico no seu **próprio** script
+de verificação (`(1-q)^k` subestourando para `0.0` em float64 antes
+da recursão binomial alcançar a moda), da mesma classe do bug que o
+próprio referee já havia documentado e corrigido em seu `av04`.
+
+### O que isto muda, precisamente
+
+**O item aberto desde os Estágios 10–13 está FECHADO para todo
+`\gamma\in(0,1]`, incluindo ambos os alvos-bônus de uniformidade e do
+limite `\gamma_n\to0`.** Nenhum resultado anterior é enfraquecido —
+os Estágios 9/12/22 permanecem exatamente como provados, apenas não
+usados aqui (diagnosticados como estruturalmente insuficientes para
+esta pergunta específica, um fato verificado, não presumido).
+
+**O que permanece aberto, com precisão:** uma taxa `n^{-1/2}` e um
+termo de segunda ordem **provados** (não apenas conjecturados) para
+`\gamma\in(0,1)` — precisaria de uma versão rigorosa em nível de
+Edgeworth da expansão do §7.3; a janela intermediária `n^\epsilon \le
+c_n \le n^{2/3}/\log` entre o regime `c` fixo do Estágio 10 e o
+regime `\gamma_n\ge n^{-1/3}\ln n` do Corolário 2 — nomeada aqui como
+o resíduo natural, explicitamente não fechada. Conjectura 1 (`K\ge5`)
+e 2; a exploração conjunta (Estágio 18); `p>20`; o piso `H2` em
+`b=1`; a constante do platô de DISC-DEC-071 (sob revisão na onda 17).
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.

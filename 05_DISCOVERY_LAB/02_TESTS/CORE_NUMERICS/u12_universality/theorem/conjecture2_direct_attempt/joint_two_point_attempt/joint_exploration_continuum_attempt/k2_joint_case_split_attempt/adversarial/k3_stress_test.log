@@ -1,0 +1,20 @@
+n=10, p=4 (arc_A interior positions 1..3), q+r fixed = 4, O=2
+Testing whether P(e_i cyclic) depends on the (q,r) SPLIT, or only on q+r (naive flat guess).
+
+  (q,r)=(1,3): P(e_i cyclic) for i=1..3 -> ['73/500 (0.14600)', '73/250 (0.29200)', '219/500 (0.43800)']
+  (q,r)=(2,2): P(e_i cyclic) for i=1..3 -> ['37/250 (0.14800)', '37/125 (0.29600)', '111/250 (0.44400)']
+  (q,r)=(3,1): P(e_i cyclic) for i=1..3 -> ['73/500 (0.14600)', '73/250 (0.29200)', '219/500 (0.43800)']
+
+RESULT: P(e_i cyclic) DIFFERS across (q,r) splits with q+r fixed
+        -> confirms the naive flat/aggregate extrapolation of the K=2 formula is WRONG at K=3: the finer per-arc structure (not just a sum) genuinely matters, supporting the target document's diagnosis that K=3 requires new machinery (tracking the arcs individually / the induced functional graph on arcs), not just bigger bookkeeping on the same K=2-style flat table.
+
+Naive candidate formula i*(n+q+r)/n^2 vs actual, per split:
+  (q,r)=(1,3) i=1: naive=7/50 (0.14000) actual=73/500 (0.14600) -> MISMATCH
+  (q,r)=(1,3) i=2: naive=7/25 (0.28000) actual=73/250 (0.29200) -> MISMATCH
+  (q,r)=(1,3) i=3: naive=21/50 (0.42000) actual=219/500 (0.43800) -> MISMATCH
+  (q,r)=(2,2) i=1: naive=7/50 (0.14000) actual=37/250 (0.14800) -> MISMATCH
+  (q,r)=(2,2) i=2: naive=7/25 (0.28000) actual=37/125 (0.29600) -> MISMATCH
+  (q,r)=(2,2) i=3: naive=21/50 (0.42000) actual=111/250 (0.44400) -> MISMATCH
+  (q,r)=(3,1) i=1: naive=7/50 (0.14000) actual=73/500 (0.14600) -> MISMATCH
+  (q,r)=(3,1) i=2: naive=7/25 (0.28000) actual=73/250 (0.29200) -> MISMATCH
+  (q,r)=(3,1) i=3: naive=21/50 (0.42000) actual=219/500 (0.43800) -> MISMATCH

@@ -4537,7 +4537,10 @@ precisão o que falta: apenas o caso `K\ge2` da própria Proposição
 D1/análoga. Nenhum resultado anterior é enfraquecido.
 
 **O que permanece aberto, com precisão:** a ponte distribucional
-completa e `P_{nn}(n,K)\to1/(K+1)` para `K\ge2` — precisaria de uma
+completa e `P_{nn}(n,K)\to1/(K+1)` para `K\ge2` [Ver Estágio 31 abaixo
+— 2026-08-26: `K=2` FECHADO (`P_{nn}(n,2)\to1/3`, PROVADO); `K\ge3`
+continua ABERTO, agora com obstrução estruturalmente diagnosticada] —
+precisaria de uma
 generalização da Proposição D1 análoga à obstrução já diagnosticada
 para a exploração conjunta (Estágios 18/25); `C(\gamma)` para
 `\gamma\in(0,1)` (Estágio 26); `p>20` de `D^{*(p)}_r(b)` (sob revisão
@@ -4647,7 +4650,10 @@ anteriormente.
 
 **O que permanece aberto, com precisão:** a construção contínua-nativa
 direta da Definição 3 em si (a obstrução original dos Estágios 18/25,
-intocada); o bypass por transferência para `K\ge2` (um problema mais
+intocada); o bypass por transferência para `K\ge2` [Ver Estágio 31
+abaixo — 2026-08-26: `K=2` FECHADO via transferência
+(`P(\text{mesmo ciclo}\mid K=2)\to1/6`, PROVADO); `K\ge3` continua
+ABERTO] (um problema mais
 estreito, estruturalmente distinto, honestamente não perseguido além
 de `K=1`); `C(\gamma)` para `\gamma\in(0,1)` (Estágio 26); a ponte
 distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágio 27); `p>20` de
@@ -4857,9 +4863,131 @@ enfraquecido.
 de Taylor + MGF estilo Hoeffding sobre a quantidade transcendental
 `\delta(M)`); a Lacuna 3 restrita à contribuição da Lacuna 1; `C(\gamma)`
 para `\gamma\in(0,1)` em si, portanto ainda inteiramente ABERTO; a
-janela intermediária do Estágio 23; a exploração conjunta (Estágio 18);
-`p>20` de `D^{*(p)}_r(b)`; a ponte distribucional `M_n(c)\to_dM(c)`
-para `K\ge2` (Estágio 27); a construção contínua-nativa do Teorema J
-(Estágio 28); o piso `H2` em `b=1`; a constante do platô de
+janela intermediária do Estágio 23; a exploração conjunta (Estágio 18,
+com `K=2` agora fechado — Estágio 31); `p>20` de `D^{*(p)}_r(b)`; a
+ponte distribucional `M_n(c)\to_dM(c)`
+para `K\ge2` (Estágio 27, com `K=2` agora fechado — Estágio 31); a
+construção contínua-nativa do Teorema J
+(Estágio 28, com o bypass por transferência em `K=2` agora fechado —
+Estágio 31); o piso `H2` em `b=1`; a constante do platô de
 DISC-DEC-071. Nenhuma alegação de progresso em Millennium Problem;
 matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 31 — 2026-08-26]
+
+**Onda 19, frente (a), `DISC-DEC-083`/`DISC-DEC-086`
+(`K2-JOINT-CASE-SPLIT-ATTEMPT`).** Alvo: generalizar o método de
+caso-split de Proposição D1 (Estágio 27)/Proposição K1 (Estágio 28) de
+`K=1` para `K=2` — a obstrução nomeada, de forma independente, como
+bloqueador em QUATRO integrações distintas (o problema geral do
+Estágio 18, o `P_{nn}(n,2)` da ponte distribucional do Estágio 27, o
+bypass por transferência `K=2` do Estágio 28, e a exploração conjunta
+em si), tornando esta a frente de maior valor estratégico da onda 19.
+
+### O que aconteceu
+
+> **`K=2` FECHADO, para o alvo escalar do segundo momento.** A frente
+> generalizou o método de caso-split de um ponto para dois pontos
+> marcados via duas novas lemas: o **Lema da Estrutura de Lacunas de
+> Pontos Marcados** (para `m` pontos marcados numa permutação uniforme,
+> a permutação contraída sobre eles é uniforme em `S_m`, e os tamanhos
+> das lacunas entre eles são composições uniformes — generaliza o
+> Passo 1 da Proposição 4 de `m=1` para `m` geral) e o **Lema da
+> Estrutura de Redirecionamento de Duas Fontes** (uma análise completa
+> de 9 casos de onde os dois alvos de reroute pousam em relação a dois
+> arcos de ciclo).
+
+**Proposição NN2 (PROVADA).** Forma fechada exata:
+`P_{nn}(n,2) = \dfrac{10n^2+7n+2}{30n^2} = \dfrac13+\dfrac7{30n}+\dfrac1{15n^2}`,
+para todo `n\ge4` — fechando o alvo de segundo momento `K=2` do
+Estágio 27 (`E[(M_n^{(2)})^2]\to\tfrac13`).
+
+**Corolário NN2.2 (PROVADO, quase de graça).** Via o Corolário já
+PROVADO do Teorema J (Estágio 25, identidade exata em todo `n` finito,
+não apenas assintótica): `P(\text{mesmo ciclo final}\mid K=2
+\text{ marcas})\to\tfrac16` — estendendo o Teorema por transferência do
+Estágio 28 de `K=0,1` para `K=2`, confirmando a hipótese do próprio
+despacho de que (i) quase entrega (ii) de graça.
+
+**Lema bônus (PROVADO).** A convenção de `n` finito diferente do
+Estágio 28 converge para os mesmos limites; a tabela `K=2` já reportada
+pelo Estágio 28 (`49/144, 33/100, 44/135, 143/441`) é reproduzida
+exatamente por um script novo, independente.
+
+**`K=3` honestamente diagnosticado como mais duro.** Requer rastrear um
+grafo funcional nos próprios arcos (não apenas uma tabela `3\times3`
+fixa), agravado pela necessidade de rastrear duas posições de
+consulta simultaneamente, diferente do problema marginal `K\ge3`. O
+CDF completo em `K=2` (não apenas o segundo momento) e o alvo geral
+(iii) permanecem abertos, com ferramentas parciais reutilizáveis
+(Lemas 1–2) nomeadas explicitamente.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: enumeração
+exaustiva independente por força bruta do próprio Definição 4 em
+`K=2` (todas as `n!\cdot n^2` configurações, aritmética exata),
+confirmando `P_{nn}(n,2)=(10n^2+7n+2)/(30n^2)` exatamente em
+`n=4,5,6,7` — sem nunca ler nenhum script da frente.
+
+Referee hostil dedicado (`.../k2_joint_case_split_attempt/adversarial/`
+`REFEREE_REPORT.md`), sem ler nenhum script de nenhuma frente da
+linhagem: re-derivou os dois novos lemas do zero, antes de ler a
+prova da frente de perto (para evitar ancoragem) — confirmação por
+força bruta do Lema 1 (`m=2,3`, `n\le7`, 11/11 células) e do Lema 2
+(construindo ambas as topologias de permutação explicitamente,
+240/240 células, zero divergências); re-derivou a Proposição NN2
+independentemente dos Lemas 1+2 (não a partir da fórmula da frente) —
+correspondência exata `n=4,\ldots,12` (9/9); enumeração exaustiva
+totalmente independente do modelo completo `K=2` da Definição 4 —
+correspondência exata `n=4,\ldots,9` (6/6), incluindo uma nova
+execução de 29,4 milhões de configurações em `n=9`; confirmou
+independentemente o Corolário do Teorema J (`P(\text{mesmo}\mid
+\text{ambos})=1/2`) em cada `n=4,\ldots,9` dentro de sua própria
+enumeração, não por confiança cega; reproduziu por força bruta
+independente os 4 valores da tabela do Estágio 28 (o mandato pedia
+`\ge2`); construiu explicitamente uma topologia `K=3` e mostrou que a
+extensão "plana" ingênua da fórmula `K=2` falha (a probabilidade
+depende da divisão individual do comprimento dos arcos, não apenas da
+soma) — confirmando concretamente o diagnóstico da própria frente de
+que `K=3` precisa de maquinaria genuinamente nova, não uma rendição
+prematura. Único achado: uma inconsistência puramente cosmética de
+prosa em §3.1 (rótulos de fonte trocados numa observação lateral,
+relativa à própria convenção do documento) — verificada por construção
+independente que as fórmulas reais estão corretas em ambas as
+topologias; nenhuma prova é afetada.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum bug encontrado na
+> matemática do documento-alvo; nenhum bug encontrado no próprio
+> código de verificação do referee.
+
+Ver
+`.../conjecture2_direct_attempt/joint_two_point_attempt/joint_exploration_continuum_attempt/k2_joint_case_split_attempt/ATTEMPT.md`
+e `.../k2_joint_case_split_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**`P_{nn}(n,2)\to\tfrac13` está agora PROVADO** — fechando `K=2` do
+Estágio 27, e, por transferência via o Corolário do Teorema J,
+também `K=2` do bypass do Estágio 28
+(`P(\text{mesmo ciclo}\mid K=2)\to\tfrac16`). O item nomeado, de forma
+independente, como bloqueador em quatro integrações distintas
+(Estágios 18, 25, 27, 28) está agora resolvido para `K=2`
+especificamente — a maior alavancagem estratégica de uma única frente
+nesta onda. `K\ge3` permanece aberto, agora com um diagnóstico
+estrutural concreto (não apenas uma afirmação de dificuldade) do
+porquê o método de caso-split não se estende diretamente. Nenhum
+resultado anterior é enfraquecido.
+
+**O que permanece aberto, com precisão:** `K\ge3` da ponte
+distribucional (Estágio 27) e do bypass por transferência (Estágio
+28) — diagnóstico estrutural agora disponível, mas nenhuma solução;
+o CDF completo em `K=2` (não apenas o segundo momento); o problema
+geral (iii) da exploração conjunta (Estágio 18); a construção
+contínua-nativa direta da Definição 3 em si (intocada); `C(\gamma)`
+para `\gamma\in(0,1)` (Estágios 26/30); `p>20` de `D^{*(p)}_r(b)`; o
+piso `H2` em `b=1`; a constante do platô de DISC-DEC-071. Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

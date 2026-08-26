@@ -4990,7 +4990,9 @@ resultado anterior é enfraquecido.
 
 **O que permanece aberto, com precisão:** `K\ge3` da ponte
 distribucional (Estágio 27) e do bypass por transferência (Estágio
-28) — diagnóstico estrutural agora disponível, mas nenhuma solução;
+28) — diagnóstico estrutural agora disponível, mas nenhuma solução
+[Ver Estágio 35 abaixo — DATE: 2026-08-26, K=3 especificamente
+fechado];
 o CDF completo em `K=2` (não apenas o segundo momento); o problema
 geral (iii) da exploração conjunta (Estágio 18); a construção
 contínua-nativa direta da Definição 3 em si (intocada); `C(\gamma)`
@@ -5315,10 +5317,127 @@ resultado anterior é enfraquecido.
 
 **O que permanece aberto, com precisão:** a Lacuna 1 do Estágio 26/33
 (`C(\gamma)` para `\gamma\in(0,1)`, ainda ABERTO); a exploração conjunta
-para `K\ge3` (Estágio 31); `p>80` de `D^{*(p)}_r(b)` (Estágio 32); a
+para `K\ge3` (Estágio 31) [Ver Estágio 35 abaixo — DATE: 2026-08-26];
+`p>80` de `D^{*(p)}_r(b)` (Estágio 32); a
 ponte distribucional `M_n(c)\to_dM(c)` para `K\ge2` (Estágios 27/31); a
 construção contínua-nativa direta do Teorema J (Estágio 28); o piso
 `H2` em `b=1`; a constante do platô de DISC-DEC-071; `H1`/`H2` da lei
 assintótica do platô M-CLUST(b). Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+---
+
+## [Extensão, Estágio 35 — 2026-08-26]
+
+**Onda 20, frente (b), `DISC-DEC-088`/`DISC-DEC-092`
+(`K3-JOINT-STRUCTURAL-ATTEMPT`).** Alvo: tentar `K=3` da exploração
+conjunta, generalizando o método de caso-split de K=2 (Estágio 31), que
+diagnosticou precisamente que `K=3` exige rastrear um grafo funcional
+de reroteamento nos próprios arcos marcados — obstrução genuinamente
+mais dura que a tabela plana `3\times3` de `K=2`.
+
+### O que aconteceu
+
+> **`K=3` FECHADO para os alvos escalares de segundo momento/mesmo
+> ciclo** — resultado surpreendente e de alto valor: o Estágio 31 havia
+> diagnosticado `K=3` como estruturalmente muito mais difícil, e o
+> mandato da onda 20 tratava não-fechamento honesto como plenamente
+> aceitável. Esta frente fechou completa e corretamente, identificando
+> duas simplificações genuínas que respondem diretamente ao diagnóstico
+> do Estágio 31, em vez de contorná-lo: (i) **Reindexação por
+> Fonte-Governante** (corolário novo do Lema 1 do Estágio 31,
+> re-verificado fresco em `m=3`): por exchangeability, a topologia
+> `\sigma` se marginaliza inteiramente, tornando o problema tratável;
+> (ii) **Lema 4 (Unicidade do Predecessor-de-Ciclo)**: o conjunto
+> cíclico de cada arco depende apenas do único predecessor-de-ciclo no
+> grafo funcional de 3 nós, sendo qualquer outra fonte incidente
+> provadamente inerte — isto colapsa a tabela de 64 células diagnosticada
+> pelo Estágio 31 em regras fechadas lineares/bilineares.
+>
+> **Proposição NN3 (PROVADA, derivação simbólica exata, sympy,
+> aritmética `Rational`):**
+> `P_{nn}(n,3) = (35n^3+38n^2+23n+6)/(140n^3) = 1/4+19/(70n)+23/(140n^2)+3/(70n^3)`,
+> para todo `n\ge6` (na verdade já válida em `n=5`, achado do referee,
+> não um defeito). **Corolário NN3.1** (PROVADO): `E[(M_n^{(3)})^2]\to
+> 1/4`, fechando o item K=3 de segundo momento nomeado desde o Estágio
+> 27/18. **Corolário NN3.2** (PROVADO): `P(\text{mesmo ciclo}\mid K=3)
+> \to1/8`, estendendo o teorema de transferência por continuum dos
+> Estágios 28/31 (`1/(2(K+1))`) para `K=3`, confirmando o padrão
+> `1/2,1/4,1/6,1/8` em `K=0,1,2,3`.
+
+**O que isto NÃO fecha.** A CDF completa de `M_n^{(3)}` (estilo
+Proposição D1, não apenas o segundo momento) permanece ABERTA — Lemas
+4/5 dão apenas a lei conjunta par-a-par, não a distribuição de contagem
+completa. A lei conjunta de dois pontos para `K` geral também permanece
+ABERTA — os dois mecanismos novos (reindexação por fonte-governante;
+redução por predecessor-de-ciclo) são estruturalmente gerais (nada na
+prova do Lema 4 é específico de exatamente 3 fontes), sugerindo — como
+uma pista precisamente delimitada, não uma alegação — que possam
+generalizar, mas isto não foi tentado.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: implementação
+independente e fresca (força bruta exata, `Fraction`, construída
+apenas da Definição 4, sem ler nenhum script da frente) do modelo
+completo K=3 em `n=6`, confirmando `P_{nn}(6,3)=3/10` exatamente,
+batendo com a Proposição NN3.
+
+Referee hostil dedicado (`.../k3_joint_structural_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: re-verificou exaustivamente o Lema 1 em `m=3` e a
+Reindexação por Fonte-Governante (`n=4..7`, zero divergências);
+verificou o Lema 4 em duas camadas — nível-fonte (exaustivo sobre as
+64 funções `dest`, zero exceções em 78 instâncias cíclicas) e
+nível-posição (simulação de grafo funcional totalmente independente,
+`45\,424` configurações, `29\,280` com aresta extra genuinamente
+inerte, zero divergências); re-derivou o Lema 5 simbolicamente por
+análise de casos própria e cruzou contra enumeração exata; **atacou a
+Proposição NN3 por três rotas independentes**: (a) força bruta crua do
+modelo completo da Definição 4, `n=5,\ldots,9`, incluindo uma
+enumeração completa em `n=9` (`264\,539\,520` configurações, `~102s`),
+`5/5` correspondências exatas; (b) montagem de modelo reduzido própria
+(não copiada da frente), `n=5,\ldots,30,40`, `27/27` correspondências;
+(c) derivação simbólica tripla-soma totalmente independente,
+algebricamente idêntica à forma fechada reivindicada. Re-testou
+diretamente com dados brutos frescos (não apenas citação) a alegação
+"mesmo ciclo = 1/2" do Teorema J em `K=3` especificamente
+(`n=6,7,8`, exatamente `1/2` em todos). Confirmou a honestidade da §8
+(CDF completa e lei geral-K corretamente escopadas como abertas).
+
+> **Um achado nomeado, negligível/cosmético (nenhum erro matemático).**
+> A prosa da §3.3 chama o índice menor `i` (em `i<i'`, mesmo arco) de
+> "o marginal do ponto mais próximo da cauda" — pela própria convenção
+> da frente (posição `L_s`, o índice máximo, é a cauda), `i` está na
+> verdade MAIS LONGE da cauda, não mais perto. A fórmula em si e seu
+> uso permanecem corretos (re-verificados independentemente); apenas o
+> rótulo descritivo está invertido — mesma classe de deslize cosmético
+> já encontrada pelo referee da frente K=2 predecessora. Corrigido por
+> nota datada (não correção) em `ATTEMPT.md` §3.3.
+
+> **Veredito: SOUND — ACCEPT for catalogue**, no tier reivindicado.
+
+Ver
+`.../conjecture2_direct_attempt/joint_two_point_attempt/joint_exploration_continuum_attempt/k2_joint_case_split_attempt/k3_joint_structural_attempt/ATTEMPT.md`
+e `.../k3_joint_structural_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+**`K=3` da exploração conjunta está FECHADO para os alvos escalares de
+segundo momento/mesmo ciclo** — resposta direta e não-contornada ao
+diagnóstico estrutural do Estágio 31, via dois novos mecanismos
+(reindexação por fonte-governante; redução por predecessor-de-ciclo).
+O padrão de transferência por continuum `1/(2(K+1))` agora confirmado
+em `K=0,1,2,3`. Nenhum resultado anterior é enfraquecido.
+
+**O que permanece aberto, com precisão:** a CDF completa de
+`M_n^{(3)}` (Estágio 27's Proposição D1, estilo geral, ainda não
+estendida a K=3); a lei conjunta de dois pontos para `K` geral (método
+flagrado como plausivelmente generalizável, não tentado); a Lacuna 1
+do Estágio 26/33/30 (`C(\gamma)` para `\gamma\in(0,1)`); `p>80` de
+`D^{*(p)}_r(b)` (Estágio 32); a construção contínua-nativa direta do
+Teorema J (Estágio 28); o piso `H2` em `b=1`; a constante do platô de
+DISC-DEC-071; `H1`/`H2` da lei assintótica do platô M-CLUST(b).
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.

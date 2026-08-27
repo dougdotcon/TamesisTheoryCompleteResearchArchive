@@ -1,0 +1,100 @@
+
+==============================================================================
+A. Growth-Exclusion Lemma -- from-scratch re-derivation
+==============================================================================
+A1. d/dx[e^{x^2/2+xy}] - (x+y)e^{x^2/2+xy} = 0  -> PASS
+A2. Particular solution, Leibniz-rule construction, two sources:
+  case f(x)=1: u_p = sqrt(2)*sqrt(pi)*(erf(sqrt(2)*(x + y)/2) - 1)*exp((x + y)**2/2)/2
+    ODE residual u_p_x-(x+y)u_p-f = 0  -> PASS
+  case f(x)=x: u_p = -sqrt(2)*sqrt(pi)*y*exp(x**2/2 + x*y + y**2/2)*erf(sqrt(2)*(x + y)/2)/2 + sqrt(2)*sqrt(pi)*y*exp(x**2/2 + x*y + y**2/2)/2 - 1
+    ODE residual u_p_x-(x+y)u_p-f = 0  -> PASS
+
+==============================================================================
+A3. Independent cross-check: dsolve on the abstract linear ODE
+==============================================================================
+General solution (sympy dsolve, f=1): Eq(u(x), C1*exp(x*(x/2 + y0)) + sqrt(2)*sqrt(pi)*exp(x**2/2 + x*y0 + y0**2/2)*erf(sqrt(2)*(x + y0)/2)/2)
+(Used only as an independent generation route; A1+A2 already give
+ a complete existence+structure proof not relying on dsolve.)
+
+==============================================================================
+B. (BB-Psi') derivation: exponent simplification under t=x+u
+==============================================================================
+Full exponent [x^2/2+xy] - [(x+u)^2/2+(x+u)y] , expanded: -u**2/2 - u*x - u*y
+Claimed target form -u^2/2-u(x+y): -u**2/2 - u*(x + y)
+Difference: 0  -> PASS
+
+==============================================================================
+C. Oscillation-bound ODE identity (target Sec 5.1) -- own re-derivation
+==============================================================================
+(E1) at y1: Eq(Derivative(Psi(x, y1), x), (x + y1)*Psi(x, y1) - I(x, y1))
+(E1) at y2: Eq(Derivative(Psi(x, y2), x), (x + y2)*Psi(x, y2) - I(x, y2))
+
+delta_x(x) [raw, y2 substituted by y1+h]:
+h⋅Ψ(x, h + y₁) - x⋅Ψ(x, y₁) + x⋅Ψ(x, h + y₁) - y₁⋅Ψ(x, y₁) + y₁⋅Ψ(x, h + y₁) + ↪
+
+↪  I(x, y₁) - I(x, h + y₁)
+
+delta_x(x) [with y2=y1+h] minus target's claimed RHS
+[(x+y1)*delta + h*Psi(x,y2) - (I(x,y2)-I(x,y1))]:
+0
+-> PASS (own re-derivation matches target's Sec5.1 identity exactly)
+
+==============================================================================
+D. Sign-consistency check: target Sec5.1's delta(x) formula vs the Lemma
+==============================================================================
+Independent integrating-factor re-derivation of the Lemma's sign:
+ ODE: u'(x) - (x+Y)u(x) = f(x).
+ Integrating factor mu(x) = exp(-(x^2/2+xY)) satisfies
+ d/dx[mu*u] = mu*f(x).  Integrate x to X->infinity, use u bounded
+ and mu(X)->0 (since -(X^2/2+XY)->-infinity for Y>=0):
+   0 - mu(x)u(x) = int_x^inf mu(t) f(t) dt
+   u(x) = -exp(x^2/2+xY) * int_x^inf exp(-(t^2/2+tY)) f(t) dt
+ ==> the leading MINUS sign is forced, confirmed independently of
+ the Leibniz-rule proof in Part A/B.
+
+CONCLUSION: target's Sec5.1 formula
+  delta(x) = int_0^inf e^{-u^2/2-u(x+y1)} f(x+u) du
+is missing the leading minus sign relative to a correct application
+of the Growth-Exclusion Lemma (as independently re-derived here AND
+as the target's OWN Sec2.1 correctly applies it to (E1) itself).
+SEVERITY ASSESSMENT: since the very next step takes |delta(x)| and
+bounds |f(x+u)|, |-Z|=|Z| for any Z, so the missing sign does NOT
+propagate to the final oscillation bound (star-star) -- it is a
+self-contained, non-consequential algebra slip in Sec5.1's exposed
+intermediate formula. Flagged as LOW severity.
+
+==============================================================================
+E. Shift identity: int_0^inf e^{-u^2/2-uz} du = sqrt(pi/2)*erfcx(z/sqrt2)
+==============================================================================
+Completing the square check (-u^2/2-uz) - (-(u+z)^2/2+z^2/2) = 0  -> PASS
+Direct sympy evaluation of int_0^inf e^{-u^2/2-uz}du = sqrt(2)*sqrt(pi)*exp(zz**2/2)*erfc(sqrt(2)*zz/2)/2
+Claimed closed form  sqrt(pi/2)*e^{z^2/2}*erfc(z/sqrt2)      = sqrt(2)*sqrt(pi)*exp(zz**2/2)*erfc(sqrt(2)*zz/2)/2
+Difference: 0  -> PASS
+(Note: sqrt(pi/2)*e^{z^2/2}*erfc(z/sqrt2) IS erfcx(z/sqrt2)*sqrt(pi/2)
+ by definition erfcx(w):=e^{w^2}erfc(w), w=z/sqrt2, w^2=z^2/2 -- matches
+ the record's own R(z)=sqrt(pi/2)*erfcx(z/sqrt2) exactly.)
+
+==============================================================================
+F. Lipschitz-chain (target Sec 8.2) -- step-by-step confirmation
+==============================================================================
+Step1: |Delta I(x,y)| <= y*||DeltaPhi||  -- elementary, |int_0^y g dy'|<=y*sup|g| always. PASS (definitional).
+Step2: from (BB-Psi'), |DeltaPsi(x,y)| = |int_0^inf e^{-u^2/2-u(x+y)} DeltaI(x+u,y) du|
+       <= int_0^inf e^{-u^2/2-u(x+y)} |DeltaI(x+u,y)| du <= y*||DeltaPhi|| * R(x+y).  PASS (triangle ineq + step1, R(x+y) is exactly the shift-identity value).
+Step3: given R(z)<=1/z (proved separately, v02 + hand proof below),
+       y*R(x+y) <= y/(x+y).  PASS (direct substitution z=x+y).
+Step4: y/(x+y)<=1 for x>=0,y>0  <=>  0<=x.  Always true given x>=0.  PASS.
+
+Full chain CONFIRMED: |DeltaPsi(x,y)| <= y*||DeltaPhi||*R(x+y) <= (y/(x+y))*||DeltaPhi|| <= ||DeltaPhi||.
+Lipschitz constant <= 1 for the Phi->Psi sub-map (Sec 8.2 of target) -- ALGEBRA CONFIRMED, step by step.
+
+==============================================================================
+F2. Analytic proof R(z) <= 1/z for z>0 (own re-derivation)
+==============================================================================
+R(z) = e^{z^2/2} int_z^inf e^{-t^2/2} dt.
+For t>=z>0: t/z >= 1, so e^{-t^2/2} <= (t/z) e^{-t^2/2}.
+Integrate: int_z^inf e^{-t^2/2}dt <= (1/z) int_z^inf t e^{-t^2/2}dt = (1/z) e^{-z^2/2}
+ [since d/dt(-e^{-t^2/2}) = t e^{-t^2/2}, so int_z^inf t e^{-t^2/2}dt = e^{-z^2/2}]
+Hence R(z) = e^{z^2/2}*int_z^inf e^{-t^2/2}dt <= e^{z^2/2}*e^{-z^2/2}/z = 1/z.  QED, matches target's/lineage's cited fact.
+sympy check d/dt(-e^{-t^2/2}) - t*e^{-t^2/2} = 0  -> PASS
+
+ALL SYMBOLIC CHECKS COMPLETE.

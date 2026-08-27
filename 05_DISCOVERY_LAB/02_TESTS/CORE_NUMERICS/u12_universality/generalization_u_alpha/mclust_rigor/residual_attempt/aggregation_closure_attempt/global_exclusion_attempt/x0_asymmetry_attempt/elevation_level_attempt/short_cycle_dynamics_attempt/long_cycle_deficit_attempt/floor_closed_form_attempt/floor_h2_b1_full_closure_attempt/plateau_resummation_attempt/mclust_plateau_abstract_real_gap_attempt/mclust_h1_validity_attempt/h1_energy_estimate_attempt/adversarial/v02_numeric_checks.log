@@ -1,0 +1,106 @@
+==============================================================================
+E. Shift identity numeric check: direct quadrature vs sqrt(pi/2)*erfcx(z/sqrt2)
+==============================================================================
+  z=  0.10  quad=1.1592623996187363287  closed=1.1592623996187363287  reldiff=0.0
+  z=  0.30  quad=1.0018374009921557396  closed=1.0018374009921557396  reldiff=0.0
+  z=  1.00  quad=0.65567954241879847154  closed=0.65567954241879847154  reldiff=0.0
+  z=  2.00  quad=0.42136922928805447322  closed=0.42136922928805447322  reldiff=1.58576e-51
+  z=  5.00  quad=0.19280810471531576488  closed=0.19280810471531576488  reldiff=1.73279e-51
+  z= 10.00  quad=0.099028596471731921395  closed=0.099028596471731921395  reldiff=5.06059e-51
+  z= 20.00  quad=0.049875925981836783658  closed=0.049875925981836783658  reldiff=1.00478e-50
+  z= 50.00  quad=0.019992009580853567311  closed=0.019992009580853567311  reldiff=1.60012e-48
+
+==============================================================================
+F2. Numeric check R(z) <= 1/z for z>0
+==============================================================================
+  z=  0.10  R(z)=1.15926239961874  1/z=10.0  R(z)<=1/z: True   margin=8.84074
+  z=  0.30  R(z)=1.00183740099216  1/z=3.33333333333333  R(z)<=1/z: True   margin=2.3315
+  z=  1.00  R(z)=0.655679542418798  1/z=1.0  R(z)<=1/z: True   margin=0.34432
+  z=  2.00  R(z)=0.421369229288054  1/z=0.5  R(z)<=1/z: True   margin=0.0786308
+  z=  5.00  R(z)=0.192808104715316  1/z=0.2  R(z)<=1/z: True   margin=0.0071919
+  z= 10.00  R(z)=0.0990285964717319  1/z=0.1  R(z)<=1/z: True   margin=0.000971404
+  z= 20.00  R(z)=0.0498759259818368  1/z=0.05  R(z)<=1/z: True   margin=0.000124074
+  z= 50.00  R(z)=0.0199920095808536  1/z=0.02  R(z)<=1/z: True   margin=7.99042e-6
+ALL PASS (R(z)<=1/z, z>0)
+
+==============================================================================
+G. Tightness regime investigation for Sec 8.2's Lipschitz<=1 claim
+   Actual bounded quantity is y*R(x+y) (the Lipschitz ratio's own
+   sup, BEFORE the further relaxation R(z)<=1/z to get y/(x+y)).
+==============================================================================
+
+G1. y*R(y) [i.e. x=0] as y grows -- does it approach 1?
+  y=    0.10   y*R(y) = 0.115926239961874   1-y*R(y)=0.88407376  
+  y=    0.50   y*R(y) = 0.438182228226846   1-y*R(y)=0.56181777  increasing
+  y=    1.00   y*R(y) = 0.655679542418798   1-y*R(y)=0.34432046  increasing
+  y=    2.00   y*R(y) = 0.842738458576109   1-y*R(y)=0.15726154  increasing
+  y=    5.00   y*R(y) = 0.964040523576579   1-y*R(y)=0.035959476  increasing
+  y=   10.00   y*R(y) = 0.990285964717319   1-y*R(y)=0.0097140353  increasing
+  y=   20.00   y*R(y) = 0.997518519636736   1-y*R(y)=0.0024814804  increasing
+  y=   50.00   y*R(y) = 0.999600479042678   1-y*R(y)=0.00039952096  increasing
+  y=  100.00   y*R(y) = 0.99990002998501   1-y*R(y)=9.9970015e-5  increasing
+  y=  500.00   y*R(y) = 0.999996000047999   1-y*R(y)=3.999952e-6  increasing
+  y= 1000.00   y*R(y) = 0.999999000003   1-y*R(y)=9.99997e-7  increasing
+
+G2. For FIXED, moderate y (y=1), does y*R(x+y) approach 1 as x->0+ ?
+    (this is the regime the target's text literally cites: 'x->0, any fixed y>0')
+  x=   2.000  y*R(x+y) = 0.304590298710103   (target claims this -> 1 as x->0)
+  x=   1.000  y*R(x+y) = 0.421369229288054   (target claims this -> 1 as x->0)
+  x=   0.500  y*R(x+y) = 0.515815638217963   (target claims this -> 1 as x->0)
+  x=   0.200  y*R(x+y) = 0.592574323793003   (target claims this -> 1 as x->0)
+  x=   0.100  y*R(x+y) = 0.622743654868834   (target claims this -> 1 as x->0)
+  x=   0.050  y*R(x+y) = 0.638845000915587   (target claims this -> 1 as x->0)
+  x=   0.010  y*R(x+y) = 0.65225184314813   (target claims this -> 1 as x->0)
+  x=   0.001  y*R(x+y) = 0.655335377577903   (target claims this -> 1 as x->0)
+  x=   0.000  y*R(x+y) = 0.655679542418798   (target claims this -> 1 as x->0)
+  ==> At y=1 fixed, even at x=0 exactly, y*R(y)=0.6556795424, NOT close to 1.
+      The quantity does NOT saturate toward 1 merely by sending x->0 at fixed,
+      moderate y. (Monotonic decrease in x is visible above, consistent with R
+      being a decreasing function -- so the SUP over x of y*R(x+y), for fixed y,
+      IS attained at x=0, but that value itself is far from 1 unless y is ALSO large.)
+
+G3. Repeat G2 at a LARGE fixed y (y=100) -- does saturation appear only here?
+  x=   2.000  y*R(x+y) = 0.980297951788165
+  x=   1.000  y*R(x+y) = 0.990001979416187
+  x=   0.500  y*R(x+y) = 0.994926389992604
+  x=   0.200  y*R(x+y) = 0.997904619310954
+  x=   0.100  y*R(x+y) = 0.998901328237561
+  x=   0.050  y*R(x+y) = 0.999400429635363
+  x=   0.010  y*R(x+y) = 0.999800069963027
+  x=   0.001  y*R(x+y) = 0.999890033083451
+  x=   0.000  y*R(x+y) = 0.99990002998501
+  ==> At y=100 (large), y*R(x+y) is already close to 1 for ALL tested x (including x=0),
+      confirming saturation toward 1 is driven by y->inf (the SUM x+y->inf), not by x->0.
+
+G4. Direct evaluation of sup_x y*R(x+y) at fixed y (monotonicity check):
+    R is a strictly decreasing function of its argument (R'=zR-1<0 whenever zR<1,
+    true since R(z)<=1/z<... -- confirmed numerically: R(x+y) decreases as x increases
+    at fixed y, so y*R(x+y) is maximized at x=0 for EVERY fixed y -- verified above,
+    G2/G3 both show monotonic decrease in x).
+
+==============================================================================
+CONCLUSION (own finding, Part G):
+==============================================================================
+
+The quantity actually being bounded in Sec8.2 (y*R(x+y), before the further
+relaxation to y/(x+y) via R(z)<=1/z) is DECREASING in x for every fixed y
+(confirmed G2/G3), so its supremum over x IS attained at x=0 for each fixed
+y -- but that supremum value, y*R(y), is close to 1 ONLY when y itself is
+large (G1: y*R(y) -> 1 as y->infinity; at y=1, y*R(y) is only ~0.66, far
+from 1). Genuine saturation of the TRUE Lipschitz ratio toward 1 therefore
+requires y -> infinity (with x fixed, e.g. x=0) -- NOT "x->0" for an
+arbitrary FIXED, finite y, as the target's Sec8.2 parenthetical literally
+states ("essentially TIGHT (saturated as x->0), y/(x+y)->1 as x->0, any
+fixed y>0"). That parenthetical is a true statement about the FURTHER-
+RELAXED bound y/(x+y) (which indeed ->1 as x->0 for ANY fixed y, since
+R(z)<=1/z is dropped) but is not by itself evidence that the operator's
+TRUE norm approaches 1 -- the true quantity y*R(x+y) requires the SUM
+x+y to be large, i.e. y->infinity is the operative regime, with x->0
+being at most a co-incidental/optimal choice of x at each fixed y, not
+the mechanism producing near-1 values.  The document's overall CONCLUSION
+(Lipschitz constant is exactly 1, sup not attained, no strict contraction
+by this bounding route) remains CORRECT -- confirmed independently here,
+since sup_{x,y} y*R(x+y) = sup_z z*R(z) = 1 (approached, not attained, as
+z=x+y->infinity) -- but the specific justification offered for "tightness"
+in the text names the wrong asymptotic regime.
+

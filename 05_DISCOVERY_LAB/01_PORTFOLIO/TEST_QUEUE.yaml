@@ -3328,6 +3328,25 @@ queue:
       Referee: SOUND, ACCEPT, achado-bandeira fortalecido com prova
       mais forte. Integrado como Estagio 37 em THEOREM.md. Onda 22:
       2/4 frentes concluidas.
+      ATUALIZACAO (DISC-DEC-099): onda 22 frente (a)
+      (PNN-GENERAL-K-EGF-ATTEMPT) revisao adversarial CONCLUIDA;
+      integracao em THEOREM.md ADIADA por ordem de dependencia
+      (sucessora direta de general_k_joint_attempt, onda 21 frente c,
+      ainda nao integrada). Certificado rigoroso de nao-fechamento via
+      algoritmo de Gosper para forma fechada geral-K; colapso do
+      integral duplo com bonus P_same==P_disjoint; K=7,8 novos.
+      Referee: SOUND WITH NAMED ISSUES (2 BAIXA, cosmeticos), ambos
+      corrigidos.
+      ATUALIZACAO (DISC-DEC-100): onda 22 frente (b)
+      (H1-ENERGY-ESTIMATE-ATTEMPT) CONCLUIDA e INTEGRADA. Ataque
+      direto a (U1)/(U2) via estimativa de energia/contracao --
+      nao-fechamento honesto, com nova identidade exata para Psi e
+      novo limitante de oscilacao global rigorosamente provado. (U1),
+      (U2), H1 permanecem ABERTOS. Referee: SOUND WITH NAMED ISSUES (1
+      MODERADA + 2 BAIXA), todos corrigidos, nenhum afeta o veredito.
+      Integrado como adendo datado em PROOF_DEPENDENCY_MAP.md. Onda
+      22: 3/4 frentes concluidas (apenas a integracao final de (a)
+      permanece, apos onda 21 frente c).
     wave17_results:
       conjecture1_k5_attempt: >
         CONCLUIDA e INTEGRADA (DISC-DEC-075) apos referee REFORCADO.
@@ -3481,49 +3500,63 @@ queue:
         (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
     wave22_results:
       pnn_general_k_egf_attempt: >
-        DESPACHADA (DISC-DEC-096). Empurra a identidade elementar
-        Sum_k k! e_k(x) = integral_0^infinity e^{-lambda}
-        Prod(1+x_j lambda) dlambda (ja presente em
-        general_k_joint_attempt SS4.2, ligada pela pesquisa externa a
-        teoria classica de polinomios de torre/rook polynomials,
-        Riordan-Kaplansky) pela soma de composicao completa (SS5.1
-        daquele front), buscando forma fechada K-uniforme de
-        P_nn(n,K) -- a questao aberta mais concreta nomeada por
-        general_k_joint_attempt SS8.1/SS8.2. Bonus: c_1(K) em K=7,8
-        com o algoritmo ja provado geral-K, dado bruto, sem ajuste de
-        padrao. Risco moderado, alto valor potencial. Nao-fechamento
-        honesto aceitavel. Deve ler general_k_joint_attempt/ATTEMPT.md
-        (ainda pendente de referee proprio, onda 21 frente c -- lido
-        como prosa do predecessor direto) e Estagio 35 do THEOREM.md
-        por inteiro. Nao deve abrir/ler/importar nenhum .py de nenhuma
-        frente da linhagem. Seeds reservados
-        20260910000-20260910999 (frente) /
-        20260911000-20260911999 (referee), confirmados nao-usados por
-        grep antes desta reserva.
+        REVISAO ADVERSARIAL CONCLUIDA (DISC-DEC-099); INTEGRACAO EM
+        THEOREM.md ADIADA (ordem de dependencia -- sucessora direta de
+        general_k_joint_attempt, onda 21 frente c, ainda nao integrada
+        ela propria). Achados: (1) colapso do integral duplo de
+        P_disjoint para integral unico, mais bonus -- identidade
+        combinatoria P_same==P_disjoint (PROVADA, verificada
+        independentemente pela sessao via sympy do zero); (2)
+        algoritmo geral-K muito mais rapido via mu_r(n,K)=C(n+r,K+r)
+        (PROVADA, verificada independentemente pela sessao via
+        enumeracao direta), reproduzindo K=1..6 em ~1s, K=7,8 novos;
+        (3) certificado RIGOROSO de nao-fechamento via algoritmo de
+        Gosper -- a soma sobre r com K simbolico PROVADA sem
+        antidiferenca de termo hipergeometrico; fallback e uma funcao
+        hipergeometrica terminante que hyperexpand nao reduz. Referee
+        hostil: rodou o proprio gosper_sum/gosper_term (K simbolico +
+        13 K concretos, todos None), controles positivos, leu o
+        codigo-fonte do sympy para confirmar que None e certificado
+        genuino. Veredito SOUND WITH NAMED ISSUES (2 achados BAIXA,
+        ambos cosmeticos -- etiqueta "3F_2" deveria ser "3F_1"; erro
+        de arredondamento 1.035->1.034 numa celula de tabela). Ambos
+        corrigidos por nota datada na ATTEMPT.md da frente. Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/theorem/conjecture2_direct_attempt/joint_two_point_attempt/joint_exploration_continuum_attempt/k2_joint_case_split_attempt/k3_joint_structural_attempt/general_k_joint_attempt/pnn_general_k_egf_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
       h1_energy_estimate_attempt: >
-        DESPACHADA (DISC-DEC-096). Tenta um argumento tipo principio
-        do maximo/estimativa de energia ou ponto fixo/contracao sobre
-        o sistema de EDP exato (E1)/(E2)/(KEY) para provar (U1)
-        (convergencia localmente uniforme de W(x,g) quando
-        g->infinito) e/ou (U2) (expansao assintotica de Poincare
-        uniforme para W_infinito, incluindo a escala de camada de
-        contorno x=O(eps)) -- as duas condicoes as quais H1 foi
-        reduzido (onda 20 frente c). Pesquisa externa confirmou que
-        este e o estilo de argumento padrao da literatura (Wasow,
-        Olver, Lagerstrom) para este tipo de gap -- sem atalho pronto,
-        mas direcao metodologicamente confirmada correta. Se
-        bem-sucedida, fecharia H1 (e H2, ja reduzido a corolario de H1
-        na onda 21 frente d) pela primeira vez de forma totalmente
-        rigorosa. Alto risco, altissimo valor potencial.
-        Nao-fechamento honesto aceitavel. Deve ler
-        PROOF_DEPENDENCY_MAP.md (Arvore B, no PLATRESUM, todos os
-        adendos datados) e mclust_h1_validity_attempt/ATTEMPT.md +
-        mclust_h1_validity_attempt/mclust_h2_validity_attempt/ATTEMPT.md
-        por inteiro. Nao deve abrir/ler/importar nenhum .py de nenhuma
-        frente da linhagem. Seeds reservados
-        20260912000-20260912999 (frente) /
-        20260913000-20260913999 (referee), confirmados nao-usados por
-        grep antes desta reserva.
+        CONCLUIDA e INTEGRADA (DISC-DEC-100). Atacou (U1)/(U2) via
+        estimativa de energia sobre a EDP exata e contracao sobre
+        (E2). Nao-fechamento honesto, com conteudo novo genuino: (1)
+        nova identidade exata de renovacao para Psi (aplicando o Lema
+        de Exclusao de Crescimento a (E1) EXATA pela primeira vez),
+        verificada simbolica e numericamente (23-37 digitos); (2) novo
+        limitante de oscilacao GLOBAL em x, rigorosamente provado
+        (condicional a (B)), mais forte que o exigido por (U1); (3)
+        diagnostico preciso de duas razoes pelas quais isto nao fecha
+        (U1) (degradacao linear em h; expansao Watson/Laplace cega a
+        conteudo exponencial); (4) novo experimento numerico da taxa
+        de aproximacao g->infinito em x geral; (5) Lipschitz <=1 (nao
+        <1) no angulo de contracao, obstrucao identificada
+        exatamente. Sessao verificou independentemente a algebra
+        central a mao mais a identidade de deslocamento via mpmath
+        antes do referee. Referee hostil: re-derivou tudo do zero,
+        solucionador de serie proprio validado 7/7 contra ancoras
+        publicadas, confirmou (BB-Psi') em 2 pontos independentes
+        (8-10 digitos), limitante de oscilacao nunca violado em 3
+        triplas proprias. Veredito SOUND WITH NAMED ISSUES (ACCEPT for
+        catalogue). 3 achados: N1 (MODERADA) conexao alegada com
+        obstrucao de Borel do predecessor identifica o limite errado
+        (mesmo y->infinito, nao eps->0) e superestima a analogia --
+        nao afeta nenhum numero ou o veredito; N2 (BAIXA) sinal de
+        menos ausente, sem consequencia; N3 (BAIXA) regime assintotico
+        impreciso para quase-igualdade do Lipschitz, conclusao
+        permanece correta. Todos os tres corrigidos por nota/correcao
+        datada na ATTEMPT.md da frente. (U1), (U2), H1 permanecem
+        ABERTOS. Integrado como adendo datado em
+        PROOF_DEPENDENCY_MAP.md (no PLATRESUM, Arvore B, apos o adendo
+        de H2). Ver
+        02_TESTS/CORE_NUMERICS/u12_universality/generalization_u_alpha/mclust_rigor/residual_attempt/aggregation_closure_attempt/global_exclusion_attempt/x0_asymmetry_attempt/elevation_level_attempt/short_cycle_dynamics_attempt/long_cycle_deficit_attempt/floor_closed_form_attempt/floor_h2_b1_full_closure_attempt/plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/mclust_h1_validity_attempt/h1_energy_estimate_attempt/
+        (ATTEMPT.md + adversarial/REFEREE_REPORT.md)
       gamma_gap1_sharper_tail_attempt: >
         CONCLUIDA e INTEGRADA (DISC-DEC-098). Achado principal: melhoria
         parcial genuina no n_0(gamma), NAO fechamento -- substitui

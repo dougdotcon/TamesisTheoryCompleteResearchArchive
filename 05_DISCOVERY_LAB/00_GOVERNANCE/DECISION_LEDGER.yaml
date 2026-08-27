@@ -6581,3 +6581,128 @@ decisions:
       substituida -- os limitantes de coeficiente |c_i(k)| e a montagem
       hat-G/hat-G_Theta permanecem inalterados do predecessor. Nenhum
       arquivo fora do escopo listado foi modificado.
+
+
+  - id: DISC-DEC-099
+    date: 2026-08-27
+    decision: >
+      Revisao adversarial da onda 22 frente (a) -- PNN-GENERAL-K-EGF-
+      ATTEMPT -- CONCLUIDA (integracao completa em THEOREM.md adiada,
+      ver escopo). Achados principais da propria frente: (1) colapso
+      do integral duplo de P_disjoint(s,s') para um integral unico,
+      mais um bonus -- identidade combinatoria elementar
+      P_same(s,s')==P_disjoint(s,s') (PROVADA); (2) algoritmo geral-K
+      muito mais rapido via identidade de funcao geratriz ordinaria
+      mu_r(n,K)=C(n+r,K+r), reproduzindo K=1..6 em ~1s (vs ~166s do
+      predecessor) e produzindo K=7,8 novos; (3) certificado RIGOROSO
+      de nao-fechamento via algoritmo de Gosper (nao apenas "sympy
+      desistiu") -- a soma remanescente sobre r, com K simbolico, e
+      PROVADA nao ter antidiferenca de termo hipergeometrico; o
+      fallback e uma funcao hipergeometrica terminante que
+      hyperexpand nao reduz. Sessao verificou independentemente, antes
+      do despacho do referee, as duas alegacoes mais surpreendentes
+      (P_same==P_disjoint via sympy do zero; mu_r(n,K)=C(n+r,K+r) via
+      enumeracao direta de composicoes) -- ambas conferem exatamente.
+      Referee hostil dedicado, com foco extra no certificado de Gosper
+      por ser o achado mais consequente: confirmou K=7/K=8 via
+      segunda rota de codigo independente; re-derivou a decomposicao
+      Peca A/B/C/D do zero; re-derivou a formula de momento simbolica
+      em (n,K,r); rodou o proprio gosper_sum/gosper_term (nao apenas
+      confiou no relato da frente) com K simbolico E em 13 valores de
+      K concretos (K=3..15), todos None; rodou controles positivos
+      confirmando que o proprio harness detecta somabilidade quando
+      presente; leu o codigo-fonte do sympy para confirmar que None
+      aqui e um certificado genuino de nao-existencia (nao um timeout
+      ou heuristica). Veredito SOUND WITH NAMED ISSUES (2 achados,
+      ambos BAIXA severidade, ambos cosmeticos): (1) a etiqueta
+      "3F_2" usada em todo o documento esta incorreta -- a lista de
+      parametros de fato usada (3 superiores, 1 inferior) e uma 3F_1
+      por contagem direta e pela propria classificacao de objeto do
+      sympy; (2) um erro de arredondamento de um digito na coluna
+      "ratio to K-1" para K=7 (1.035 impresso, valor exato arredonda
+      para 1.034). Nenhum dos dois afeta o valor de nenhuma formula,
+      o certificado de Gosper, ou o veredito de nao-fechamento.
+      Ambos corrigidos por adendo datado na ATTEMPT.md da frente.
+      Integracao completa como novo Estagio em THEOREM.md ADIADA:
+      esta frente e sucessora direta de GENERAL-K-JOINT-ATTEMPT (onda
+      21 frente c), que ainda nao foi ela propria integrada (referee
+      proprio ainda em processamento) -- a ordem de dependencia exige
+      integrar aquela frente primeiro. Nenhum arquivo de governanca
+      alem deste ledger tocado por esta decisao.
+    scope: >
+      Arquivos afetados: DECISION_LEDGER.yaml (este arquivo),
+      .../general_k_joint_attempt/pnn_general_k_egf_attempt/ATTEMPT.md
+      (2 correcoes datadas), e o diretorio adversarial/ do referee
+      (ja escrito pela propria frente/referee, apenas revisado aqui).
+      THEOREM.md, PROOF_DEPENDENCY_MAP.md, TEST_QUEUE.yaml,
+      DISCOVERY_LAB_STATE.md: a integracao completa (incluindo um
+      novo Estagio) fica pendente ate a onda 21 frente (c) ser
+      integrada primeiro.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio. Nenhuma formula de
+      registro anterior alterada. THEOREM.md nao editado por esta
+      decisao (integracao adiada por ordem de dependencia).
+  - id: DISC-DEC-100
+    date: 2026-08-27
+    decision: >
+      Integracao da onda 22 frente (b) -- H1-ENERGY-ESTIMATE-ATTEMPT
+      CONCLUIDA e INTEGRADA. Atacou diretamente (U1) e (U2), as duas
+      condicoes precisas as quais H1 foi reduzido (onda 20 frente c),
+      via argumento tipo estimativa de energia/principio do maximo
+      sobre o sistema de EDP exato, e argumento de ponto-fixo/
+      contracao sobre a identidade de renovacao exata (E2).
+      Nao-fechamento honesto de (U1)/(U2), com conteudo novo genuino:
+      (1) nova identidade exata de renovacao para Psi (aplicando o
+      Lema de Exclusao de Crescimento, ja integrado onda 21 frente d,
+      diretamente a equacao EXATA (E1), pela primeira vez nesta
+      linhagem), verificada simbolica e numericamente (23-37 digitos
+      de concordancia entre duas rotas independentes); (2) novo
+      limitante de oscilacao GLOBAL em x, rigorosamente provado
+      (condicional a hipotese padrao de limitacao (B)), mais forte
+      num aspecto que o que (U1) exige; (3) diagnostico preciso de
+      duas razoes independentes pelas quais isto nao fecha (U1)
+      (degradacao linear em h causando divergencia tipo serie
+      harmonica na telescopagem; expansao de Watson/Laplace em 1/y
+      estruturalmente cega a conteudo exponencial); (4) novo
+      experimento numerico medindo a taxa de aproximacao g->infinito
+      em x geral (nao apenas x=0); (5) angulo de contracao com
+      constante de Lipschitz <=1 (nao <1), obstrucao identificada
+      exatamente. Sessao verificou independentemente, antes do
+      despacho do referee, a algebra central (a identidade exata para
+      Psi via substituicao t=x+u, e a derivacao do limitante de
+      oscilacao) a mao, mais a identidade de deslocamento subjacente
+      via mpmath. Referee hostil dedicado: re-derivou o Lema de
+      Exclusao de Crescimento por duas rotas independentes; re-derivou
+      a identidade (BB-Psi') do zero; construiu solucionador de serie
+      proprio, validado 7/7 contra ancoras publicadas, confirmando
+      (BB-Psi') em 2 pontos escolhidos independentemente (8-10
+      digitos); confirmou o limitante de oscilacao nunca violado em 3
+      triplas proprias; confirmou cada passo da cadeia de Lipschitz.
+      Veredito SOUND -- WITH NAMED ISSUES (ACCEPT for catalogue). 3
+      achados nomeados: N1 (MODERADA) a conexao alegada com a
+      obstrucao de resoma de Borel do predecessor identifica o limite
+      errado (mesmo limite y->infinito, nao eps->0 como afirmado) e
+      superestima a analogia -- nao afeta nenhum numero ou o veredito;
+      N2 (BAIXA) sinal de menos ausente numa formula intermediaria,
+      sem consequencia; N3 (BAIXA) regime assintotico impreciso para a
+      quase-igualdade do limitante de Lipschitz, conclusao permanece
+      correta. Todos os tres corrigidos por adendo datado na
+      ATTEMPT.md da frente. Integrado como adendo datado em
+      PROOF_DEPENDENCY_MAP.md (no PLATRESUM, Arvore B, apos o adendo
+      de H2). (U1), (U2) e H1 permanecem ABERTOS. Onda 22: 3/4 frentes
+      concluidas (a com revisao adversarial completa mas integracao em
+      THEOREM.md adiada; apenas a integracao final de a permanece).
+    scope: >
+      Arquivos afetados: PROOF_DEPENDENCY_MAP.md (novo adendo datado
+      no PLATRESUM), DECISION_LEDGER.yaml (este arquivo),
+      TEST_QUEUE.yaml, DISCOVERY_LAB_STATE.md,
+      .../mclust_h1_validity_attempt/h1_energy_estimate_attempt/ATTEMPT.md
+      (3 correcoes datadas), e o novo diretorio de frente completo
+      (incluindo adversarial/REFEREE_REPORT.md). Nao afeta a Arvore A
+      (u1/2) do THEOREM.md nem nenhum resultado de onda anterior.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio. H1, (U1), (U2)
+      permanecem abertos e intocados. phi_REDB, Phi_U(c), Phi_infinity(c)
+      e a lei assintotica de 4 termos: intocadas. Arvore A (u1/2) do
+      THEOREM.md: intocada. Nenhum arquivo fora do escopo listado foi
+      modificado.

@@ -773,6 +773,77 @@ flowchart TD
 > `.../mclust_h1_validity_attempt/mclust_h2_validity_attempt/ATTEMPT.md`
 > e `.../mclust_h2_validity_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-27 — DISC-DEC-096/DISC-DEC-100.]** Onda 22
+> frente (b) (`H1-ENERGY-ESTIMATE-ATTEMPT`) atacou diretamente `(U1)` e
+> `(U2)`, as duas condições precisas às quais `H1` foi reduzido (onda
+> 20 frente c), via um argumento tipo estimativa de energia/princípio
+> do máximo sobre o sistema de EDP exato, e um argumento de
+> ponto-fixo/contração sobre a identidade de renovação exata `(E2)`.
+>
+> **Não-fechamento honesto de `(U1)`/`(U2)`, com conteúdo novo
+> genuíno.** (1) Uma nova **identidade exata de renovação para `Ψ`**:
+> aplicando o Lema de Exclusão de Crescimento (já integrado, onda 21
+> frente d) diretamente à equação `(E1)` EXATA (não expandida em
+> `ε`) — pela primeira vez nesta linhagem — dá
+> `Ψ(x,y)=∫_0^∞e^{-u²/2-u(x+y)}I(x+u,y)\,du`, condicional apenas à
+> hipótese de limitação padrão `(B)` já usada em toda a linhagem.
+> Verificada simbolicamente (duas rotas independentes) e
+> numericamente (23-37 dígitos de concordância entre duas rotas de
+> cálculo estruturalmente independentes). (2) Um novo **limitante de
+> oscilação GLOBAL em `x`**, rigorosamente provado (condicional a
+> `(B)`):
+> `\sup_{x\ge0}|Ψ(x,y_2)-Ψ(x,y_1)|\le(y_2-y_1)K/y_1` — mais forte, num
+> aspecto, que o que `(U1)` exige (global, não apenas local).
+> Verificado numericamente: nunca violado, porém frouxo por um fator
+> de `~10²` a `~10³`. (3) **Diagnóstico preciso de por que isto NÃO
+> fecha `(U1)`**, de duas formas independentes: (a) o limitante
+> degrada linearmente no tamanho do passo `h`, então a telescopagem
+> ingênua sobre passos ilimitados diverge (soma tipo série harmônica);
+> (b) uma expansão de Watson/Laplace em `1/y` da identidade exata
+> recupera apenas conteúdo ALGÉBRICO (lei de potência) em `y`,
+> estruturalmente cega ao conteúdo exponencial genuíno que os dados
+> numéricos mostram. (4) Um **novo experimento numérico**: a taxa de
+> aproximação `g\to\infty` medida em `x` geral (não apenas `x=0`,
+> único ponto testado por qualquer frente anterior) — consistente com
+> aproximação exponencial em todo `x` testado, mas com velocidade de
+> convergência mensuravelmente mais lenta em `x` maior — sugestivo,
+> não decisivo. (5) O **ângulo de contração** (`Φ\mapsto Ψ`) tem
+> constante de Lipschitz `\le1`, NÃO `<1` — não é contração por esta
+> rota; a obstrução é identificada exatamente (o núcleo `R(z)\sim1/z`
+> apenas iguala, sem superar, o crescimento linear em `y` da fonte
+> `I`). A reformulação Volterra-em-`y` de `(E2)` é nomeada como a
+> avenida mais promissora, inteiramente não explorada.
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem:
+> re-derivou o Lema de Exclusão de Crescimento por duas rotas
+> independentes (Leibniz e fator integrante); re-derivou a identidade
+> `(BB-Ψ')` do zero, confirmando a álgebra exata; construiu um
+> solucionador de série `(P,Q)`-family geral-`s` inteiramente próprio,
+> validado 7/7 contra as âncoras publicadas, e confirmou `(BB-Ψ')` em
+> 2 pontos `(s,g)` escolhidos independentemente via quadratura própria
+> (8-10 dígitos de concordância); re-derivou a identidade-chave do
+> limitante de oscilação do zero (confere exatamente) e confirmou o
+> limitante nunca violado em 3 triplas `(y_1,y_2,x)` próprias;
+> confirmou cada passo da cadeia de Lipschitz. Três achados nomeados:
+> (N1, MODERADA) a conexão alegada com a obstrução de resoma de Borel
+> de `plateau_resummation_attempt` identifica o limite errado (é o
+> MESMO limite `y\to\infty`, não `ε\to0` como afirmado) e superestima
+> a profundidade da analogia — não afeta nenhum número ou o veredito;
+> (N2, BAIXA) um sinal de menos ausente numa fórmula intermediária,
+> sem consequência (o próximo passo toma valor absoluto); (N3, BAIXA)
+> o regime assintótico citado para a "quase-igualdade" do limitante de
+> Lipschitz está impreciso (a saturação genuína exige `y\to\infty`,
+> não `x\to0` em `y` fixo) — a conclusão (constante `\le1`, não `<1`)
+> permanece correta. Todos os três corrigidos por adendo datado na
+> `ATTEMPT.md` da frente.
+>
+> Veredito **SOUND — WITH NAMED ISSUES (ACCEPT for catalogue)**. `(U1)`
+> e `(U2)` permanecem ABERTOS; `H1` permanece ABERTO. `phi_REDB`,
+> `Phi_U(c)`, `Phi_infinity(c)` e a lei assintótica de 4 termos:
+> intocadas. Fontes:
+> `.../mclust_h1_validity_attempt/h1_energy_estimate_attempt/ATTEMPT.md`
+> e `.../h1_energy_estimate_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

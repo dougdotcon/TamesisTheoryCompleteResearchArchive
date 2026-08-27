@@ -1,0 +1,44 @@
+Reduced-model assembly (fresh implementation) vs ground-truth brute force
+==============================================================================
+K=1, n=3: reduced-model = 5/9   brute-force = 5/9   match=True
+K=1, n=4: reduced-model = 13/24   brute-force = 13/24   match=True
+K=1, n=5: reduced-model = 8/15   brute-force = 8/15   match=True
+K=1, n=6: reduced-model = 19/36   brute-force = 19/36   match=True
+K=2, n=4: reduced-model = 19/48   brute-force = 19/48   match=True
+K=2, n=5: reduced-model = 287/750   brute-force = 287/750   match=True
+K=2, n=6: reduced-model = 101/270   brute-force = 101/270   match=True
+K=3, n=5: reduced-model = 389/1250   brute-force = 389/1250   match=True
+K=3, n=6: reduced-model = 3/10   brute-force = 3/10   match=True
+K=3, n=7: reduced-model = 7017/24010   brute-force = 7017/24010   match=True
+==============================================================================
+ALL MATCH true Definition-4 brute force (K=1,2,3): True
+
+Cross-check against predecessor's own true-brute-force table, K=4,5
+(general_k_joint_attempt/ATTEMPT.md sec 6.2) -- independent re-derivation,
+not read from their code, built from the math description only:
+  K=4,n=6: mine=209/810  predecessor-reported=209/810  match=True  (0.0s)
+  K=4,n=7: mine=12535/50421  predecessor-reported=12535/50421  match=True  (0.0s)
+  K=4,n=8: mine=25999/107520  predecessor-reported=25999/107520  match=True  (0.0s)
+  K=5,n=7: mine=78077/352947  predecessor-reported=78077/352947  match=True  (0.0s)
+
+Cross-check against Propositions NN4, NN5, NN6 (predecessor, PROVED),
+many n per K, well beyond the K=4-6 brute-force overlap points:
+  K=4,n=6: mine=209/810  NN4=209/810  match=True  (0.0s)
+  K=4,n=7: mine=12535/50421  NN4=12535/50421  match=True  (0.0s)
+  K=4,n=8: mine=25999/107520  NN4=25999/107520  match=True  (0.0s)
+  K=4,n=10: mine=20357/87500  NN4=20357/87500  match=True  (0.1s)
+  K=4,n=12: mine=1543/6804  NN4=1543/6804  match=True  (0.4s)
+  K=4,n=15: mine=391733/1771875  NN4=391733/1771875  match=True  (1.0s)
+  K=4,n=20: mine=64669/300000  NN4=64669/300000  match=True  (4.4s)
+  K=5,n=7: mine=78077/352947  NN5=78077/352947  match=True  (0.0s)
+  K=5,n=8: mine=73369/344064  NN5=73369/344064  match=True  (0.1s)
+  K=5,n=10: mine=42563/210000  NN5=42563/210000  match=True  (0.5s)
+  K=5,n=12: mine=1408339/7185024  NN5=1408339/7185024  match=True  (1.4s)
+  K=5,n=15: mine=2217511/11694375  NN5=2217511/11694375  match=True  (5.7s)
+  K=6,n=8: mine=89035/458752  NN6=89035/458752  match=True  (0.1s)
+  K=6,n=9: mine=132691/708588  NN6=132691/708588  match=True  (0.4s)
+  K=6,n=10: mine=95567/525000  NN6=95567/525000  match=True  (1.1s)
+  K=6,n=12: mine=278699/1596672  NN6=278699/1596672  match=True  (4.7s)
+  K=6,n=15: mine=169741723/1013512500  NN6=169741723/1013512500  match=True  (26.4s)
+
+GRAND TOTAL -- ALL CHECKS IN THIS SCRIPT MATCH: True

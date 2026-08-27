@@ -1,0 +1,24 @@
+--- homogeneous solution check: d/dx[e^{x^2/2+xy}] = (x+y) e^{x^2/2+xy} ---
+  residual = 0
+  PASS 
+
+--- case f(t) = 1 ---
+  u_p(x,y) = sqrt(2)*sqrt(pi)*(erf(sqrt(2)*(x + y)/2) - 1)*exp(x**2/2 + x*y + y**2/2)/2
+  residual (u_p_x - (x+y) u_p - f) = 0
+  PASS 
+
+--- case f(t) = t ---
+  u_p(x,y) = sqrt(2)*sqrt(pi)*y*(1 - erf(sqrt(2)*(x + y)/2))*exp(x*(x + 2*y)/2 + y**2/2)/2 - 1
+  residual (u_p_x - (x+y) u_p - f) = 0
+  PASS 
+
+--- shift identity: int_0^inf e^{-u^2/2-u(x+y)} du = R(x+y), R(z):=e^{z^2/2} int_z^inf e^{-s^2/2} ds ---
+  int_0^inf e^{-u^2/2-uz} du  = sqrt(2)*sqrt(pi)*exp(z**2/2)*erfc(sqrt(2)*z/2)/2
+  R(z) [record's own closed form] = sqrt(2)*sqrt(pi)*exp(z**2/2)*erfc(sqrt(2)*z/2)/2
+  difference = 0
+  PASS 
+
+    numeric z=0.5: lhs=0.876364456453692 rhs=0.876364456453692 reldiff=1.26685e-16
+    numeric z=2.0: lhs=0.421369229288054 rhs=0.421369229288054 reldiff=0.0
+    numeric z=5.0: lhs=0.192808104715316 rhs=0.192808104715316 reldiff=5.75818e-16
+ALL PASS

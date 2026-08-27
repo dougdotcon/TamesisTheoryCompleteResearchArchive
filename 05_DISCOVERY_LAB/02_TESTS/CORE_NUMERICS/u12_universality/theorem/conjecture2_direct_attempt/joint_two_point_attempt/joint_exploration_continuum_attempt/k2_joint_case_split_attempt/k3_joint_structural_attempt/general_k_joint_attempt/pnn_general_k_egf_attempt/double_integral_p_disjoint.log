@@ -1,0 +1,62 @@
+==============================================================================
+PART 1: P_same == P_disjoint as pure algebraic sums (identity)?
+==============================================================================
+
+--- m = |M| = 0 ---
+  Sum_S (|S|+1)! Prod x            = 1
+  Sum_{S1,S2 disjoint} |S1|!|S2|! Prod = 1
+  IDENTICAL? True
+  single integral int s*e^-s*Prod(1+x_u*s) ds = 1  matches P_same sum? True
+  double integral (genuine 2-D Laplace) = 1  matches P_disjoint sum? True
+
+--- m = |M| = 1 ---
+  Sum_S (|S|+1)! Prod x            = 2*x0 + 1
+  Sum_{S1,S2 disjoint} |S1|!|S2|! Prod = 2*x0 + 1
+  IDENTICAL? True
+  single integral int s*e^-s*Prod(1+x_u*s) ds = 2*x0 + 1  matches P_same sum? True
+  double integral (genuine 2-D Laplace) = 2*x0 + 1  matches P_disjoint sum? True
+
+--- m = |M| = 2 ---
+  Sum_S (|S|+1)! Prod x            = 6*x0*x1 + 2*x0 + 2*x1 + 1
+  Sum_{S1,S2 disjoint} |S1|!|S2|! Prod = 6*x0*x1 + 2*x0 + 2*x1 + 1
+  IDENTICAL? True
+  single integral int s*e^-s*Prod(1+x_u*s) ds = 6*x0*x1 + 2*x0 + 2*x1 + 1  matches P_same sum? True
+  double integral (genuine 2-D Laplace) = 6*x0*x1 + 2*x0 + 2*x1 + 1  matches P_disjoint sum? True
+
+--- m = |M| = 3 ---
+  Sum_S (|S|+1)! Prod x            = 24*x0*x1*x2 + 6*x0*x1 + 6*x0*x2 + 2*x0 + 6*x1*x2 + 2*x1 + 2*x2 + 1
+  Sum_{S1,S2 disjoint} |S1|!|S2|! Prod = 24*x0*x1*x2 + 6*x0*x1 + 6*x0*x2 + 2*x0 + 6*x1*x2 + 2*x1 + 2*x2 + 1
+  IDENTICAL? True
+  single integral int s*e^-s*Prod(1+x_u*s) ds = 24*x0*x1*x2 + 6*x0*x1 + 6*x0*x2 + 2*x0 + 6*x1*x2 + 2*x1 + 2*x2 + 1  matches P_same sum? True
+  double integral (genuine 2-D Laplace) = 24*x0*x1*x2 + 6*x0*x1 + 6*x0*x2 + 2*x0 + 6*x1*x2 + 2*x1 + 2*x2 + 1  matches P_disjoint sum? True
+
+--- m = |M| = 4 ---
+  Sum_S (|S|+1)! Prod x            = 120*x0*x1*x2*x3 + 24*x0*x1*x2 + 24*x0*x1*x3 + 6*x0*x1 + 24*x0*x2*x3 + 6*x0*x2 + 6*x0*x3 + 2*x0 + 24*x1*x2*x3 + 6*x1*x2 + 6*x1*x3 + 2*x1 + 6*x2*x3 + 2*x2 + 2*x3 + 1
+  Sum_{S1,S2 disjoint} |S1|!|S2|! Prod = 120*x0*x1*x2*x3 + 24*x0*x1*x2 + 24*x0*x1*x3 + 6*x0*x1 + 24*x0*x2*x3 + 6*x0*x2 + 6*x0*x3 + 2*x0 + 24*x1*x2*x3 + 6*x1*x2 + 6*x1*x3 + 2*x1 + 6*x2*x3 + 2*x2 + 2*x3 + 1
+  IDENTICAL? True
+  single integral int s*e^-s*Prod(1+x_u*s) ds = 120*x0*x1*x2*x3 + 24*x0*x1*x2 + 24*x0*x1*x3 + 6*x0*x1 + 24*x0*x2*x3 + 6*x0*x2 + 6*x0*x3 + 2*x0 + 24*x1*x2*x3 + 6*x1*x2 + 6*x1*x3 + 2*x1 + 6*x2*x3 + 2*x2 + 2*x3 + 1  matches P_same sum? True
+  (double integral skipped at this m for time; collapsed single-integral form
+   matches P_disjoint sum directly? True)
+
+==============================================================================
+ALL CHECKS PASSED: True
+==============================================================================
+
+PART 2: explicit change-of-variables collapse (double -> single),
+independent of PART 1's brute-force anchor, m=0..3:
+  m=0: int s*e^-s*Prod(1+x_u s) ds = 1   direct disjoint sum = 1   match=True
+  m=1: int s*e^-s*Prod(1+x_u s) ds = 2*y0 + 1   direct disjoint sum = 2*y0 + 1   match=True
+  m=2: int s*e^-s*Prod(1+x_u s) ds = 6*y0*y1 + 2*y0 + 2*y1 + 1   direct disjoint sum = 6*y0*y1 + 2*y0 + 2*y1 + 1   match=True
+  m=3: int s*e^-s*Prod(1+x_u s) ds = 24*y0*y1*y2 + 6*y0*y1 + 6*y0*y2 + 2*y0 + 6*y1*y2 + 2*y1 + 2*y2 + 1   direct disjoint sum = 24*y0*y1*y2 + 6*y0*y1 + 6*y0*y2 + 2*y0 + 6*y1*y2 + 2*y1 + 2*y2 + 1   match=True
+
+PART 3: cross-check against K=3 (M size 1) -- the concrete case
+named in the mandate, tying back to Proposition NN3's own K=3
+derivation (k3_joint_structural_attempt front, PROVED, cited).
+For K=3, M = {the third source}, |M|=1, x_M =: c:
+  P_same(s,s') [K=3] = x_s x_s' * (2*c + 1)
+  P_disjoint(s,s') [K=3] = x_s x_s' * (2*c + 1)  (same, per identity above)
+  => P_{s,s'}(K=3) = x_s x_s' * (2 + 4c) = 4*c*x_s*x_sp + 2*x_s*x_sp
+  This exact per-(s,s') formula is used (via the full T(L) assembly
+  in symbolic_pnn_via_composition_gf.py) to reproduce Proposition NN3
+  (P_nn(n,3) = (35n^3+38n^2+23n+6)/(140n^3)) exactly -- see that
+  script's own verification output for the end-to-end confirmation.

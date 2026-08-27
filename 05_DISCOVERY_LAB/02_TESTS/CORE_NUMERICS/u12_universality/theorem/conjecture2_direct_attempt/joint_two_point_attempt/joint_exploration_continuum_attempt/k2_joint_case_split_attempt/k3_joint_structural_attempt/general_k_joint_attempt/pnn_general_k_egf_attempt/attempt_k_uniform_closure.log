@@ -1,0 +1,78 @@
+==============================================================================
+Attempting K-uniform closure of T(L)'s r-sums via Gosper's algorithm
+(the rigorous decision procedure), and via hyperexpand on the
+equivalent terminating-pFq representation.
+==============================================================================
+
+NOTE (self-caught, disclosed): an early version of this script's
+piece_D construction used a 1/4 prefactor copied hastily from the
+cross-arc position-sum coefficient (L_s-1)/2*(L_s'-1)/2, forgetting
+that P_{s,s'} itself already carries a factor of 2 (from the
+P_same==P_disjoint collapse in double_integral_p_disjoint.py). This
+was caught by a piece-by-piece numeric comparison against
+reduced_model_direct_assembly.py's direct T(L) computation (every
+cell off by EXACTLY 2x), before any Proposition below was finalized.
+The corrected 1/2 factor is used throughout this script and
+symbolic_pnn_via_composition_gf.py (both already re-verified there).
+==============================================================================
+--- Piece B (outside-arc): r-summand (K,n,r symbolic) ---
+  summand = 2*n**(-r - 1)*gamma(K)*gamma(n + r + 2)/(gamma(K - r)*gamma(-K + n - 1)*gamma(K + r + 4))
+  term ratio T(r+1)/T(r) = -(-K + r + 1)*(n + r + 2)/(n*(K + r + 4))   (rational in r => genuine hypergeometric term)
+  gosper_sum(...): None   (0.052s)
+  => Gosper's algorithm has PROVED no hypergeometric-term antidifference
+     exists for this summand: a rigorous certificate of non-closure in the
+     'ratio of Gamma functions' sense, not merely 'sympy could not find one'.
+
+--- Piece C (same-arc): r-summand (K,n,r symbolic) ---
+  summand = 2*n**(-r - 1)*gamma(K)*gamma(n + r + 2)/(gamma(K - r)*gamma(-K + n - 1)*gamma(K + r + 4))
+  term ratio T(r+1)/T(r) = -(-K + r + 1)*(n + r + 2)/(n*(K + r + 4))   (rational in r => genuine hypergeometric term)
+  gosper_sum(...): None   (0.037s)
+  => Gosper's algorithm has PROVED no hypergeometric-term antidifference
+     exists for this summand: a rigorous certificate of non-closure in the
+     'ratio of Gamma functions' sense, not merely 'sympy could not find one'.
+
+--- Piece D (cross-arc): r-summand (K,n,r symbolic) ---
+  summand = 2*n**(-r - 2)*(r + 1)*gamma(K - 1)*gamma(n + r + 3)/(gamma(-K + n - 1)*gamma(K - r - 1)*gamma(K + r + 5))
+  term ratio T(r+1)/T(r) = -(r + 2)*(-K + r + 2)*(n + r + 3)/(n*(r + 1)*(K + r + 5))   (rational in r => genuine hypergeometric term)
+  gosper_sum(...): None   (0.122s)
+  => Gosper's algorithm has PROVED no hypergeometric-term antidifference
+     exists for this summand: a rigorous certificate of non-closure in the
+     'ratio of Gamma functions' sense, not merely 'sympy could not find one'.
+
+==============================================================================
+Curiosity (verified separately, see ATTEMPT.md sec 7.3): pieces B
+and C -- outside-arc and same-arc -- are IDENTICAL as functions of
+(n,K), not just their totals but term-by-term in r:
+==============================================================================
+  summand_B - summand_C = 0   (identically zero: True)
+
+==============================================================================
+Terminating-hypergeometric-function representation and hyperexpand
+(Piece B, representative case -- Piece C is identical per above,
+Piece D has an analogous structure with a 3-term-ratio product)
+==============================================================================
+Numeric sanity anchor at K=6, n=10:
+  T(0) = 11
+  ratio(r) = -(-K + r + 1)*(n + r + 2)/(n*(K + r + 4))
+  predicted via T0 * 3F2(1-K, n+2, 1; K+4; -1/n) = 22.092800000000000000
+  direct finite sum over r=0..K-1                = 22.092800000000000000
+  exact match: True
+
+Attempting sp.hyperexpand on the general (K,n symbolic) 3F2 form...
+  hyperexpand result (0.18s): hyper((1, n + 2, 1 - K), (K + 4,), exp_polar(I*pi)/n)
+  still contains an unevaluated hyper(...): True
+
+==============================================================================
+CONCLUSION (see ATTEMPT.md sec 7 for the full discussion):
+Every piece of T(L)'s r-sum is a genuine, verified, terminating
+hypergeometric SERIES in r -- it therefore trivially equals a
+terminating 3F2(...) hypergeometric FUNCTION value, a legitimate
+'closed form involving a special function' per the mandate's own
+named fallback outcome. But Gosper's algorithm PROVES it has no
+hypergeometric-term antidifference (elementary Gamma-ratio form),
+and sp.hyperexpand independently fails to reduce the 3F2 to an
+elementary expression for symbolic K,n -- so the obstruction is
+REAL, PRECISELY LOCATED (in this specific r-summation step, one
+level up from the predecessor's own subset-sum term-count growth),
+and certified by two independent algorithms, not merely 'sympy
+gave up'.

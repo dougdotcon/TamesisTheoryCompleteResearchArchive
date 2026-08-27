@@ -1,0 +1,56 @@
+==============================================================================
+Deriving full closed forms for K=7, K=8 via the general-K GF/moment
+algorithm (symbolic_pnn_via_composition_gf.py)
+==============================================================================
+K=7 (1.88s): P_nn(n,7) = (6435*n**7 + 17548*n**6 + 35958*n**5 + 55460*n**4 + 62565*n**3 + 48628*n**2 + 23148*n + 5040)/(51480*n**7)
+K=8 (1.91s): P_nn(n,8) = (24310*n**8 + 76627*n**7 + 186527*n**6 + 353609*n**5 + 513865*n**4 + 552592*n**3 + 412892*n**2 + 190224*n + 40320)/(218790*n**8)
+
+==============================================================================
+Independent verification route (a): reduced_model_direct_assembly.py
+(a completely different, direct-enumeration code path) at several
+concrete n
+==============================================================================
+  K=7, n=9: direct=3313213/19131876  formula=3313213/19131876  match=True  (0.5s)
+  K=7, n=11: direct=6276145277/38584598580  formula=6276145277/38584598580  match=True  (5.1s)
+  K=7, n=13: direct=251784238691/1615146827580  formula=251784238691/1615146827580  match=True  (26.5s)
+  K=7, n=16: direct=128962322407/863691079680  formula=128962322407/863691079680  match=True  (177.3s)
+  K=8, n=10: direct=1100657/7031250  formula=1100657/7031250  match=True  (1.8s)
+  K=8, n=12: direct=9070177/61585920  formula=9070177/61585920  match=True  (20.9s)
+
+Route (a) -- ALL MATCH: True
+
+See monte_carlo_k7_k8.py for independent route (b) -- large-n Monte
+Carlo triangulation (own log: monte_carlo_k7_k8.log).
+
+==============================================================================
+Extracting c_0(K) and c_1(K) (coefficients of 1/n^0 and 1/n^1) from
+the verified closed forms, K=7,8, extending the predecessor's table
+==============================================================================
+
+  K    c_0=1/(K+1)      c_1 (exact)    c_1 (decimal)  source
+------------------------------------------------------------------------------
+  1            1/2              1/6          0.16667  predecessor (Estagio 27/31/35, cited)
+  2            1/3             7/30          0.23333  predecessor (Estagio 27/31/35, cited)
+  3            1/4            19/70          0.27143  predecessor (Estagio 27/31/35, cited)
+  4            1/5          187/630          0.29683  predecessor (Estagio 27/31/35, cited)
+  5            1/6         437/1386          0.31530  predecessor (Estagio 27/31/35, cited)
+  6            1/7        1979/6006          0.32950  predecessor (Estagio 27/31/35, cited)
+  7            1/8       4387/12870          0.34087  THIS FRONT (new)   [c_0 == 1/(K+1) sanity check: True]
+  8            1/9     76627/218790          0.35023  THIS FRONT (new)   [c_0 == 1/(K+1) sanity check: True]
+
+==============================================================================
+RAW DATA TABLE, c_1(K), K=1..8 -- extended, no pattern proposed or fit
+(successive ratios shown only as already-reported context, per the
+ predecessor's own table, not as a new fitting exercise):
+==============================================================================
+  K=1: c_1 = 1/6 = 0.16667
+  K=2: c_1 = 7/30 = 0.23333   ratio to K-1: 1.4000
+  K=3: c_1 = 19/70 = 0.27143   ratio to K-1: 1.1633
+  K=4: c_1 = 187/630 = 0.29683   ratio to K-1: 1.0936
+  K=5: c_1 = 437/1386 = 0.31530   ratio to K-1: 1.0622
+  K=6: c_1 = 1979/6006 = 0.32950   ratio to K-1: 1.0451
+  K=7: c_1 = 4387/12870 = 0.34087   ratio to K-1: 1.0345
+  K=8: c_1 = 76627/218790 = 0.35023   ratio to K-1: 1.0275
+
+No closed form or fit is proposed for c_1(K) as a function of K.
+Reported as raw data only, per the mandate.

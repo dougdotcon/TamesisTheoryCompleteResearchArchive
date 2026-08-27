@@ -1,0 +1,99 @@
+======================================================================
+STEP 1: term ratio T(r+1)/T(r), confirm genuinely rational in r
+======================================================================
+Piece B/C ratio: -(-K + r + 1)*(n + r + 2)/(n*(K + r + 4))   rational_function(r): True
+Piece D   ratio: -(r + 2)*(-K + r + 2)*(n + r + 3)/(n*(r + 1)*(K + r + 5))   rational_function(r): True
+Diff from target's own quoted ratios (Sec 5.3, copied verbatim): 0 0
+
+======================================================================
+STEP 2: hypersimp(summand, r) -- which None-branch would be operative?
+======================================================================
+hypersimp(Piece B/C summand, r) [K,n symbolic] = -(-K + r + 1)*(n + r + 2)/(n*(K + r + 4))
+hypersimp(Piece D   summand, r) [K,n symbolic] = -(r + 2)*(-K + r + 2)*(n + r + 3)/(n*(r + 1)*(K + r + 5))
+Both recognized as genuine hypergeometric terms by sympy's own test: True
+=> any later gosper_term/gosper_sum None therefore comes from branch (b)
+   (genuine non-summability), NOT branch (a) (not a hypergeometric term).
+
+======================================================================
+STEP 3: gosper_term / gosper_sum directly, K symbolic
+======================================================================
+Piece B/C: gosper_term = None  (0.036s)   gosper_sum(bound=(r, 0, K - 1)) = None  (0.035s)
+Piece D: gosper_term = None  (0.107s)   gosper_sum(bound=(r, 0, K - 2)) = None  (0.102s)
+
+======================================================================
+STEP 4: TRIANGULATION -- gosper_sum at MANY CONCRETE integer K (n kept
+symbolic). If the symbolic-K None were an artifact of sympy mishandling
+a symbolic PARAMETER, concrete-K runs would plausibly behave differently.
+======================================================================
+K= 3: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 4: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 5: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 6: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 7: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 8: gosper_sum(B/C)=None   gosper_sum(D)=None
+K= 9: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=10: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=11: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=12: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=13: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=14: gosper_sum(B/C)=None   gosper_sum(D)=None
+K=15: gosper_sum(B/C)=None   gosper_sum(D)=None
+
+All concrete K=3..15 give None for B/C: True   for D: True
+
+======================================================================
+STEP 5: POSITIVE CONTROLS -- confirm this exact harness DOES detect
+summability when genuinely present (rules out a trivially-broken
+harness that just always returns None)
+======================================================================
+Control A: sum_r (r+1), r=0..K-1  -> gosper_sum=K*(K + 1)/2  expected=K*(K + 1)/2  MATCH=True
+Control B: sum_r 1/((r+1)(r+2)), r=0..K-1 -> gosper_sum=K/(K + 1)  expected=K/(K + 1)  MATCH=True
+Control C: gosper.py's own docstring example, symbolic bound r=0..K-1 -> (-factorial(K - 1) + 2*factorial(2*K - 1))/factorial(2*K - 1)
+(Control C confirms the harness finds closed forms for Gamma/factorial-
+ heavy summands with a genuinely FREE symbolic upper bound, structurally
+ the same setup as our K-symbolic runs above -- so the None results
+ above are not an artifact of 'symbolic bound variable' handling either.)
+
+======================================================================
+STEP 6: the terminating hypergeometric-function fallback (Sec 5.4)
+======================================================================
+Checking the exact closed-form VALUE of sum_{r=0}^{K-1} summandBC(r)
+against candidate hyper(...) objects, at 4 concrete (K,n) pairs:
+  K=6 n=10: direct sum S=13808/625  candidate(as literally printed)=22.092800000000000000  S(float)=22.092800000000000000  MATCH: True
+  K=5 n=9: direct sum S=359206/19683  candidate(as literally printed)=18.249555453945028705  S(float)=18.249555453945028705  MATCH: True
+  K=7 n=12: direct sum S=4258351/41472  candidate(as literally printed)=102.68014564043209877  S(float)=102.68014564043209877  MATCH: True
+  K=4 n=8: direct sum S=7527/512  candidate(as literally printed)=14.701171875000000000  S(float)=14.701171875000000000  MATCH: True
+
+Value of target's fallback formula confirmed exact at 4/4 points: True
+
+Checking target's own TYPE LABEL for this fallback ('3F2'):
+  sympy's own classification of the parameter list target literally
+  prints ((1-K, n+2, 1) upper; (K+4) lower) :
+ ┌─  ⎛1, n + 2, 1 - K │ -1 ⎞
+ ├─  ⎜                │ ───⎟
+3╵ 1 ⎝     K + 4      │  n ⎠
+  LaTeX form sympy itself generates: {{}_{3}F_{1}\left(\begin{matrix} 1, n + 2, 1 - K \\ K + 4 \end{matrix}\middle| {- \frac{1}{n}} \right)}
+  ap (upper) count: 3   bq (lower) count: 1
+  ==> This is a 3F1 by direct parameter count and by sympy's own
+      object classification (pFq with p=3,q=1) -- NOT a 3F2 (which
+      would need 2 lower parameters). The VALUE is independently
+      confirmed correct above; only the 'F2' label is a naming slip.
+
+Attempting hyperexpand on the symbolic-(K,n) fallback (target's own
+claim: it does NOT reduce to anything elementary):
+  hyperexpand result contains an unevaluated hyper(...) term: True
+
+======================================================================
+SUMMARY
+======================================================================
+- Term ratios: rational in r, match target's Sec 5.3 exactly.            [CONFIRMED]
+- hypersimp: both summands recognized as genuine hypergeometric terms.   [CONFIRMED]
+- gosper_term/gosper_sum: None, K symbolic AND at 13 concrete K values.  [CONFIRMED]
+- Positive controls: harness correctly finds closed forms when they     [CONFIRMED]
+  exist, including with a symbolic bound variable structurally like K.
+- 3F2 fallback VALUE: exact match at 4 concrete (K,n) points.            [CONFIRMED]
+- hyperexpand: fails to reduce the symbolic-(K,n) fallback further.      [CONFIRMED]
+- NAMED ISSUE (LOW): target's Sec 5.4 labels the fallback '3F2', but
+  the literally-printed parameter list (3 upper, 1 lower) is a 3F1 by
+  sympy's own classification and by standard convention -- a naming
+  slip, not a value error (the VALUE is exactly correct as shown above).

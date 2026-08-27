@@ -1,0 +1,36 @@
+======================================================================
+Piece A/B/C/D independently re-derived via r-sum/moment route
+Checked against ALREADY-PROVED Proposition NN3 (K=3), NN4 (K=4)
+======================================================================
+K=3: my r-sum-route P_nn(n,3) - known closed form  simplifies to: 0
+   MATCH: True
+K=4: my r-sum-route P_nn(n,4) - known closed form  simplifies to: 0
+   MATCH: True
+
+Also evaluating the r-sum-route P_nn(n,K) at several concrete n, K=3,4,5,
+(K=5 has no already-proved closed form cited in this file, so this is a
+display/sanity step only -- 01_reduced_model_independent.py's independent tuple-
+enumeration route already cross-validated K=5).
+  K=3 n=6: r-sum-route P_nn = 3/10
+  K=3 n=9: r-sum-route P_nn = 4801/17010
+  K=4 n=7: r-sum-route P_nn = 12535/50421
+  K=4 n=10: r-sum-route P_nn = 20357/87500
+  K=5 n=8: r-sum-route P_nn = 73369/344064
+  K=5 n=11: r-sum-route P_nn = 2467868/12400927
+
+======================================================================
+BONUS UNIFICATION CHECK: does the r-sum/moment-machinery route
+(this file, totally separate code path from 01_reduced_model_
+independent.py's literal tuple/role-pair brute force) ALSO
+reproduce the target's NEW K=7, K=8 closed forms symbolically?
+(Sec 2.3's own Piece A/B/C/D decomposition, re-derived here from
+ first principles, is what the target's fast algorithm actually
+ uses for K=7,8 -- this checks that decomposition's correctness
+ directly and symbolically, not just its final numeric outputs.)
+======================================================================
+K=7: r-sum-route P_nn(n,7) (took 8.83s) minus target's closed form simplifies to: 0   MATCH: True
+K=8: r-sum-route P_nn(n,8) (took 10.78s) minus target's closed form simplifies to: 0   MATCH: True
+
+ALL K=7/K=8 r-sum-route MATCHES: True
+
+DONE.

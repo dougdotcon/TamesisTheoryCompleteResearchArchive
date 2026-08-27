@@ -1,0 +1,26 @@
+==============================================================================
+Independent numerical check of (BB-Psi') / (BB-Psi'-unscaled)
+Own series solver (v03), own test points, own quadrature strategy.
+==============================================================================
+
+--- Test point: c=1000.0, K=260, s0=0.03, g0=0.07  (own point 1) ---
+  K-convergence check: Psi at K=260 vs K=300: reldiff=1.08384e-23
+  LHS  Psi(s0,g0) [direct series]      = 0.0206193210660027783071438427597
+  RHS  renewal integral [own quadrature] = 0.0206193205229798398764582793222
+  relative difference = 2.63356e-8
+
+--- Test point: c=1000.0, K=260, s0=0.15, g0=0.06  (own point 2) ---
+  K-convergence check: Psi at K=260 vs K=300: reldiff=0.0
+  LHS  Psi(s0,g0) [direct series]      = 0.0063256141880134521032211351806
+  RHS  renewal integral [own quadrature] = 0.00632561418628267663255446683879
+  relative difference = 2.73614e-10
+
+==============================================================================
+SUMMARY
+==============================================================================
+Worst relative difference across 2 independently-chosen
+(s,g) points: 2.63356e-8
+(Two structurally different computational routes -- Psi's own b_k-ODE
+ series vs. a numerical quadrature of the exact renewal-kernel transform
+ of Phi's a_k-series -- agree to many digits: this corroborates the new
+ identity (BB-Psi') independently of the target front's own e02 check.)

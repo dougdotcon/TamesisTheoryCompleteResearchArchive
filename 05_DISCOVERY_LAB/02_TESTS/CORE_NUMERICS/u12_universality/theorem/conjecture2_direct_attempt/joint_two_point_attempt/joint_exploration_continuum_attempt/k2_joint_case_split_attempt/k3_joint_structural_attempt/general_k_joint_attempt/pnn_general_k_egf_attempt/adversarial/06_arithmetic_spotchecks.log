@@ -1,0 +1,29 @@
+======================================================================
+Check 1: c_0(K) = 1/(K+1) exactly, read off the K=7,K=8 closed forms'
+leading coefficient ratio (numerator leading term / denominator)
+======================================================================
+c_0(7) = 6435/51480 = 1/8  (expect 1/8): True
+c_0(8) = 24310/218790 = 1/9  (expect 1/9): True
+
+======================================================================
+Check 2: c_1(K) matches the 1/n coefficient of the quoted closed forms
+======================================================================
+c_1(7) from polynomial coeff = 4387/12870 = 4387/12870, claimed = 4387/12870, MATCH: True
+c_1(8) from polynomial coeff = 76627/218790, claimed = 76627/218790, MATCH: True
+
+======================================================================
+Check 3: Sec 4 bonus table -- decimal values and 'ratio to K-1' column
+======================================================================
+K=1: c1=1/6 decimal=0.16667  claimed=0.16667  OK
+K=2: c1=7/30 decimal=0.23333  claimed=0.23333  OK   ratio_to_K-1(exact)=1.400000 rounded=1.4  claimed=1.4  OK
+K=3: c1=19/70 decimal=0.27143  claimed=0.27143  OK   ratio_to_K-1(exact)=1.163265 rounded=1.163  claimed=1.163  OK
+K=4: c1=187/630 decimal=0.29683  claimed=0.29683  OK   ratio_to_K-1(exact)=1.093567 rounded=1.094  claimed=1.094  OK
+K=5: c1=437/1386 decimal=0.3153  claimed=0.3153  OK   ratio_to_K-1(exact)=1.062227 rounded=1.062  claimed=1.062  OK
+K=6: c1=1979/6006 decimal=0.3295  claimed=0.3295  OK   ratio_to_K-1(exact)=1.045062 rounded=1.045  claimed=1.045  OK
+K=7: c1=4387/12870 decimal=0.34087  claimed=0.34087  OK   ratio_to_K-1(exact)=1.034496 rounded=1.034  claimed=1.035  *** MISMATCH (rounding slip) ***
+K=8: c1=76627/218790 decimal=0.35023  claimed=0.35023  OK   ratio_to_K-1(exact)=1.027461 rounded=1.027  claimed=1.027  OK
+
+ALL Sec-4-table arithmetic checks pass: False
+(See REFEREE_REPORT.md 'Named issues' -- expected one LOW-severity
+ rounding slip at K=7's ratio-to-K-1 column: true value rounds to
+ 1.034, table prints 1.035.)

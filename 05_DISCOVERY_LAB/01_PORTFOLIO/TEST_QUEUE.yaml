@@ -4520,9 +4520,61 @@ queue:
     domain: geofisica_computacional
     parent_legacy: null
     related_tests: []
-    status: CANDIDATE_LOCKED
+    status: ADVERSARIALLY_REVIEWED
     existing_assets:
       - "02_TESTS/SCHUMANN_RESONANCE/PREREGISTRATION.md"
+      - "02_TESTS/SCHUMANN_RESONANCE/RESULTS_PRIMARY.md"
+      - "02_TESTS/SCHUMANN_RESONANCE/data/PROVENANCE.md"
+      - "02_TESTS/SCHUMANN_RESONANCE/adversarial/REFEREE_REPORT.md"
+    result_summary: >
+      2026-08-27 (DISC-DEC-104): NAO DISTINGUE, nos 6/6 pares
+      canal x segmento (2014-01-15, 2014-04-15, 2014-07-15 x NS, EW).
+      Dado real (Zenodo, estacao ELF Sierra Nevada, subconjunto de 3 dias
+      via HTTP Range requests, 240,8 MB de 26,7 GB); taxa de amostragem
+      real confirmada em 144/144 arquivos (256,0164 Hz, nao os 256 Hz
+      nominais); ordem de bytes little-endian determinada de forma
+      solida e nao-circular (estatisticas de amplitude + autocorrelacao
+      lag-1, esta ultima adicionada pelo referee como criterio
+      independente). Em todos os 6 casos existe um morro espectral largo
+      real perto de 7,8-8,0 Hz (confirmado por metodo independente de
+      extrapolacao de fundo em lei de potencia pelo referee), mas a
+      proeminencia (1,22x-1,44x) fica abaixo do limiar travado de 3x --
+      SUPORTA nao se aplica em nenhum caso, sob nenhuma leitura textual.
+      A classificacao entre NAO DISTINGUE e FALSIFICA depende de uma
+      ambiguidade textual genuina no proprio pre-registro (nao um erro
+      de nenhum agente); tanto a frente quanto o referee (leitura
+      independente) pendem para NAO DISTINGUE como mais fiel ao texto,
+      mas o referee nomeou um problema real de desenho: sob a leitura
+      adotada, o ramo FALSIFICA fica quase inatingivel sob medias
+      pesadas de Welch (registrado para julgamento futuro, sem
+      reformular o criterio retroativamente). Reproducao adversarial
+      bit-a-bit identica nos 6 casos (codigo proprio do zero, re-download
+      independente de 2 arquivos brutos confirmando CRC32/SHA256
+      identicos aos locais). Veredito adversarial SOUND WITH NAMED
+      ISSUES: 1 achado BAIXA (faixa de razao de harmonicos "2-15x" na
+      prosa nao batia com o proprio JSON, real "2,31x-18,43x"), 1
+      achado MODERADA (checagem de harmonicos usava metodo mais fraco
+      que o do pico primario e nao mencionava uma feicao de
+      interferencia de banda estreita mais forte perto de 15,1-15,2 Hz,
+      nao relacionada a Schumann, fora da banda de busca travada e sem
+      efeito no criterio), 1 nota informativa de robustez (caso limitrofe
+      unico fora da banda migra para dentro sob janela nao-travada de
+      32s -- reforca, nao enfraquece, a leitura "nao distingue"). Todos
+      corrigidos/anotados por adendo datado em RESULTS_PRIMARY.md.
+      Registrado como DISC-CLAIM-010.
+    adversarial_verdict: SOUND_WITH_NAMED_ISSUES
+    next_action: >
+      Nenhuma pendente. Promocao ao Gate de Replicacao considerada e
+      explicitamente NAO perseguida: resultado ja e NAO DISTINGUE (nao
+      um achado positivo/forte que justifique o custo da segunda
+      barreira), e a fonte de dado (estacao unica) nao suporta uma
+      generalizacao mais ampla sem uma segunda estacao independente, que
+      exigiria um novo pre-registro, nao uma extensao deste. Termina
+      aqui como achado catalogado.
+    stop_condition: >
+      [historico, ja cumprido] tocar dado real antes do pre-registro
+      travado; usar dado embutido/fabricado; qualquer alegacao de
+      conexao neural/telepatia a partir deste teste.
     origin: >
       DISC-DEC-101, a partir de documento fornecido pelo usuario
       (2026-08-27) sobre "Serial Experiments Lain" (item 1 -- Protocolo
@@ -4544,18 +4596,10 @@ queue:
       eletromagnetico/geofisico (ex. estacoes INTERMAGNET, GCI/HeartMath,
       ou equivalente), verificada por fetch direto, com formato e
       cadencia suficientes para um pre-registro real com tolerancia
-      numerica explicita.
-    next_action: >
-      Aguardar retorno da Fase 0. Se fonte real verificada com poder
-      estatistico suficiente: escrever PREREGISTRATION.md, travar,
-      commitar, so entao tocar no dado. Se nenhuma fonte adequada for
-      localizada: fechar como CLOSED_OUT_OF_DOMAIN, resultado igualmente
-      valido.
-    stop_condition: >
-      tocar qualquer dado real antes do pre-registro travado e
-      commitado; usar dado embutido/fabricado no lugar de download real
-      que falhou; qualquer alegacao de conexao neural/telepatia a partir
-      deste teste, mesmo que o pico espectral seja confirmado.
+      numerica explicita. CONCLUIDA -- fonte real localizada e verificada
+      (Zenodo, estacao ELF Sierra Nevada); pre-registro travado
+      (DISC-DEC-102); execucao e revisao adversarial concluidas
+      (DISC-DEC-104, ver result_summary acima).
 
   - test_id: DISC-IIT-PHI-REPRO-001
     title: "Reproducao via PyPhi de um valor de Phi (IIT) publicado para uma rede booleana pequena e canonica"

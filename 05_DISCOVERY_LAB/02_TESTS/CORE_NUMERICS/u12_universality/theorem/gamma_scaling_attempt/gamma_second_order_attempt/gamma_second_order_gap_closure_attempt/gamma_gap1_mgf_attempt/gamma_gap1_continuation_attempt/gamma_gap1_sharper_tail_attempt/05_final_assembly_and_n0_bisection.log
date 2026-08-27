@@ -1,0 +1,54 @@
+====================================================================================================
+CALIBRATION CHECK: does this front's OWN Hoeffding re-implementation
+reproduce the continuation front's published C(gamma) and n_0(gamma)?
+====================================================================================================
+gamma= 0.99: this-front C= 4.2275 (published    4.23)  this-front log10(n0)=  20.79 (published   20.79)  diff=-0.001 decades
+gamma=  0.9: this-front C= 4.4880 (published    4.49)  this-front log10(n0)=  36.83 (published   36.83)  diff=-0.001 decades
+gamma=  0.7: this-front C= 5.1908 (published    5.19)  this-front log10(n0)=  45.02 (published   45.02)  diff=+0.004 decades
+gamma=  0.5: this-front C= 6.2258 (published    6.23)  this-front log10(n0)=  50.28 (published   50.28)  diff=-0.004 decades
+gamma=  0.3: this-front C= 8.1158 (published    8.12)  this-front log10(n0)=  55.95 (published   55.95)  diff=+0.000 decades
+gamma=  0.1: this-front C=14.1578 (published   14.16)  this-front log10(n0)=  65.95 (published   65.95)  diff=-0.002 decades
+gamma= 0.05: this-front C=20.0520 (published   20.05)  this-front log10(n0)=  71.78 (published   71.78)  diff=+0.003 decades
+gamma= 0.01: this-front C=44.8878 (published   44.89)  this-front log10(n0)=  84.88 (published   84.88)  diff=+0.001 decades
+
+max |diff| across all 8 points: 0.004 decades -- calibration PASSED (machinery independently reproduces the cited construction)
+
+====================================================================================================
+MAIN RESULT: OLD (Hoeffding) vs NEW (Bernstein, slack a=0.05) n_0(gamma)
+====================================================================================================
+ gamma |    C0_H     C_H  log10 n0_H (=OLD) |    C0_B     C_B  log10 n0_B (=NEW) |  improvement
+  0.99 |   3.523   4.228              20.79 |   0.710   0.852              17.72 |        +3.07
+   0.9 |   3.740   4.488              36.83 |   2.272   2.726              33.64 |        +3.19
+   0.7 |   4.326   5.191              45.02 |   4.014   4.817              44.57 |        +0.46
+   0.5 |   5.188   6.226              50.28 |   5.253   6.303              50.35 |        -0.07
+   0.3 |   6.763   8.116              55.95 |   6.276   7.531              55.51 |        +0.44
+   0.1 |  11.798  14.158              65.95 |   7.167   8.600              63.06 |        +2.89
+  0.05 |  16.710  20.052              71.78 |   7.374   8.849              67.08 |        +4.70
+  0.01 |  37.406  44.888              84.88 |   7.536   9.044              75.79 |        +9.09
+
+====================================================================================================
+Side-condition sanity at each NEW crossover: small-k term included
+correctly (logsumexp), k2 << Kmax (large-k Bernstein regime genuinely
+covers essentially all of [1,K])
+====================================================================================================
+gamma= 0.99: k2=5.261e+07  Kmax=2.607e+10  k2/Kmax=2.018e-03  log_bulk+tail=-3.176  log_smallk=-0.043  total(should be ~0)=-0.0000
+gamma=  0.9: k2=1.024e+07  Kmax=3.31e+18  k2/Kmax=3.092e-12  log_bulk+tail=-0.000  log_smallk=-121.175  total(should be ~0)=-0.0000
+gamma=  0.7: k2=4.703e+06  Kmax=1.155e+24  k2/Kmax=4.073e-18  log_bulk+tail=-0.000  log_smallk=-201.461  total(should be ~0)=-0.0000
+gamma=  0.5: k2=3.275e+06  Kmax=1.052e+27  k2/Kmax=3.113e-21  log_bulk+tail=-0.000  log_smallk=-243.414  total(should be ~0)=-0.0000
+gamma=  0.3: k2=1.432e+07  Kmax=5.086e+29  k2/Kmax=2.815e-23  log_bulk+tail=-0.000  log_smallk=-268.278  total(should be ~0)=-0.0000
+gamma=  0.1: k2=1.909e+08  Kmax=5.288e+33  k2/Kmax=3.611e-26  log_bulk+tail=-0.000  log_smallk=-301.908  total(should be ~0)=-0.0000
+gamma= 0.05: k2=8.601e+08  Kmax=7.793e+35  k2/Kmax=1.104e-27  log_bulk+tail=-0.000  log_smallk=-319.054  total(should be ~0)=-0.0000
+gamma= 0.01: k2=2.537e+10  Kmax=4.18e+40  k2/Kmax=6.071e-31  log_bulk+tail=-0.000  log_smallk=-355.498  total(should be ~0)=-0.0000
+
+====================================================================================================
+SUMMARY TABLE (decades of n_0(gamma), OLD vs NEW, side by side)
+====================================================================================================
+ gamma |  OLD log10 n0 (Hoeffding, predecessor) |  NEW log10 n0 (Bernstein, this front) | decades saved
+  0.99 |                                  20.79 |                                 17.72 |          3.07
+   0.9 |                                  36.83 |                                 33.64 |          3.19
+   0.7 |                                  45.02 |                                 44.57 |          0.46
+   0.5 |                                  50.28 |                                 50.35 |         -0.07
+   0.3 |                                  55.95 |                                 55.51 |          0.44
+   0.1 |                                  65.95 |                                 63.06 |          2.89
+  0.05 |                                  71.78 |                                 67.08 |          4.70
+  0.01 |                                  84.88 |                                 75.79 |          9.09

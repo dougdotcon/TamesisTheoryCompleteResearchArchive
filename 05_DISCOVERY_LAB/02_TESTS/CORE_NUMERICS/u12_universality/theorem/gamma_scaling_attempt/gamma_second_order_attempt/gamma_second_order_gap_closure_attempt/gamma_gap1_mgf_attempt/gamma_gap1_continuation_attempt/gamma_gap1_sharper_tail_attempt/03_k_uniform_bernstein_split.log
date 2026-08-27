@@ -1,0 +1,32 @@
+==============================================================================
+PART A: sufficient condition (2/3)*M*Theta_k <= a*k*sigma^2 holds for
+every k >= k_2(n,gamma,C,a) (checked right at and above the threshold)
+==============================================================================
+failures (must be 0): 0
+
+==============================================================================
+PART B: clean k-uniform bound vs EXACT tail prob, k just above k_2,
+moderate n (exact pmf summation is only tractable at moderate n/k)
+==============================================================================
+checked=84 violations=0
+
+==============================================================================
+PART C: s(k) global minimum, justifying e^{-s(k)}<=e^{1/2} for the
+small-k crude union bound (elementary calculus, exact)
+==============================================================================
+min_k s(k) [calculus, k*=gamma/(4*beta)] = gamma/(8*n*(gamma - 2))
+claimed closed form -gamma^2/(16*beta*n): -gamma/(8*n*(2 - gamma))
+difference (must be 0): 0
+=> min_k s(k) = -gamma^2/(16*beta*n), an O(1/n) quantity, hence
+   e^{-s(k)} <= e^{gamma^2/(16*beta*n)} <= e^{1/2} for any n with
+   gamma^2/(16*beta*n) <= 1/2, true for all n>=1 in practice here.
+
+==============================================================================
+PART D: k_2(n,gamma,C,a=0.05) vs K_max(n,gamma), at the scale this
+front's n_0(gamma) construction (script 05) actually needs
+==============================================================================
+gamma=0.99: n=10^18  k2=5.324e+07  Kmax=3.642e+10  k2/Kmax=1.462e-03
+gamma=0.5: n=10^51  k2=3.314e+06  Kmax=2.238e+27  k2/Kmax=1.481e-21
+gamma=0.01: n=10^76  k2=2.52e+10  Kmax=5.305e+40  k2/Kmax=4.750e-31
+
+All Part A/B/C/D checks passed.

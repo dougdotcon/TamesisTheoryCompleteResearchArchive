@@ -1,0 +1,38 @@
+==========================================================================================
+PART A: no-oscillation check, Bernstein construction (this front),
+n_0(gamma) through 40 decades beyond, half-decade grid
+==========================================================================================
+gamma= 0.99: n0_log10=  17.72  increasing_found=False  max_increase=0  (decades checked: 80)
+gamma=  0.9: n0_log10=  33.64  increasing_found=False  max_increase=0  (decades checked: 80)
+gamma=  0.5: n0_log10=  50.35  increasing_found=False  max_increase=0  (decades checked: 80)
+gamma=  0.1: n0_log10=  63.06  increasing_found=False  max_increase=0  (decades checked: 80)
+gamma= 0.01: n0_log10=  75.79  increasing_found=False  max_increase=0  (decades checked: 80)
+
+==========================================================================================
+PART B: same check, Hoeffding reproduction (sanity, should also pass)
+==========================================================================================
+gamma= 0.99: n0_log10=  20.79  increasing_found=False  (decades checked: 80)
+gamma=  0.9: n0_log10=  36.83  increasing_found=False  (decades checked: 80)
+gamma=  0.5: n0_log10=  50.28  increasing_found=False  (decades checked: 80)
+gamma=  0.1: n0_log10=  65.95  increasing_found=False  (decades checked: 80)
+gamma= 0.01: n0_log10=  84.88  increasing_found=False  (decades checked: 80)
+
+==========================================================================================
+PART C: k2/Kmax ratio strictly shrinks for n > n0 (tightest case,
+gamma=0.99, where the small-k term was found to be non-negligible AT
+the crossover in script 05 -- confirming the side condition only
+gets safer further into the regime where the bound is actually used)
+==========================================================================================
+n0+ 0 decades (log10n= 17.72): k2/Kmax=2.0183e-03  total_logW=-0.0000
+n0+ 1 decades (log10n= 18.72): k2/Kmax=6.5600e-04  total_logW=-3.6880
+n0+ 2 decades (log10n= 19.72): k2/Kmax=2.1291e-04  total_logW=-4.2462
+n0+ 3 decades (log10n= 20.72): k2/Kmax=6.9016e-05  total_logW=-4.7072
+n0+ 5 decades (log10n= 22.72): k2/Kmax=7.2271e-06  total_logW=-5.5776
+n0+10 decades (log10n= 27.72): k2/Kmax=2.5244e-08  total_logW=-7.7394
+n0+20 decades (log10n= 37.72): k2/Kmax=2.9448e-13  total_logW=-12.3424
+n0+40 decades (log10n= 57.72): k2/Kmax=3.6428e-23  total_logW=-22.2600
+
+k2/Kmax monotonically non-increasing across all checked points: True
+
+All Part A/B/C checks passed: no spurious oscillation found anywhere;
+the crossovers reported in script 05 are genuine, durable thresholds.

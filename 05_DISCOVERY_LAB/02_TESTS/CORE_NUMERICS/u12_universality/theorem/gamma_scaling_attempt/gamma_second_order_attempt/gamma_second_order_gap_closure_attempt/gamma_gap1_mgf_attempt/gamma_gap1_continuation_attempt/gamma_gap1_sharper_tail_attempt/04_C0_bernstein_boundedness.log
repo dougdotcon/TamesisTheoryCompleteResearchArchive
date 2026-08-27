@@ -1,0 +1,69 @@
+beta(gamma)        = gamma*(2 - gamma)/2
+kappa_0(gamma)      = -8/(gamma*(gamma - 2))
+lambda(gamma)       = 4*(2*gamma - 3)/(gamma*(gamma - 2))   (continuation front, Estagio 36; UNBOUNDED as gamma->0)
+hat-lambda(gamma)   = 8*(4*gamma - 7)/(gamma*(gamma - 2))   (continuation front Step 3; growth rate of the EXPLICIT hat-G)
+
+C0_Hoeffding(gamma)^2  = 1/4 + hat-lambda/2          = (gamma**2 + 62*gamma - 112)/(4*gamma*(gamma - 2))
+C0_Bernstein(gamma,a)^2 = (2+a)*sigma^2*(hat-lambda+1/2) = -(a + 2)*(gamma - 1)*(gamma*(gamma - 2) + 64*gamma - 112)/(2*gamma - 4)
+
+==============================================================================
+Sanity check: reproduces the continuation front's own published C(gamma)
+==============================================================================
+gamma=0.99: 1.2*C0_Hoeffding = 4.2275  (continuation's published C(gamma) = 4.23)
+gamma=0.01: 1.2*C0_Hoeffding = 44.8878  (continuation's published C(gamma) = 44.89)
+
+==============================================================================
+C0_Hoeffding(gamma)^2 DIVERGES as gamma->0+ (baseline, already known)
+==============================================================================
+lim_{gamma->0+} C0_Hoeffding^2 = oo
+
+==============================================================================
+C0_Bernstein(gamma,a)^2 is BOUNDED on (0,1) for EVERY fixed a>0 -- the
+key new structural finding of this front (exact algebra, not sampling)
+==============================================================================
+a=0.05  : lim_{gamma->0+} C0_Bernstein^2 = 287/5 = 57.400  (FINITE)   lim_{gamma->1-} = 0
+a=0.1   : lim_{gamma->0+} C0_Bernstein^2 = 294/5 = 58.800  (FINITE)   lim_{gamma->1-} = 0
+a=0.2   : lim_{gamma->0+} C0_Bernstein^2 = 308/5 = 61.600  (FINITE)   lim_{gamma->1-} = 0
+a=1.0   : lim_{gamma->0+} C0_Bernstein^2 = 84 = 84.000  (FINITE)   lim_{gamma->1-} = 0
+a=2.0   : lim_{gamma->0+} C0_Bernstein^2 = 112 = 112.000  (FINITE)   lim_{gamma->1-} = 0
+
+General closed form of the boundary value as a function of a:
+  lim_{gamma->0+} C0_Bernstein(gamma,a)^2 = 28*a + 56   (finite for every a>0)
+
+==============================================================================
+Exact-algebra proof that C0_Bernstein(gamma,a)^2 is monotone DECREASING
+on (0,1) for every fixed a>0 (hence sup = the gamma->0+ boundary value
+above, attained only in the limit; inf = 0 at gamma->1-)
+==============================================================================
+f(gamma) := C0_Bernstein(gamma,a=1)^2 = 3*(-gamma**3 - 61*gamma**2 + 174*gamma - 112)/(2*(gamma - 2))
+f'(gamma) numerator = -6*gamma**3 - 165*gamma**2 + 732*gamma - 708
+real roots of the numerator: [-31.49286842752316, 1.5076914046281147, 2.4851770228950447]
+real roots inside (0,1): []  (must be empty)
+numerator at gamma=1/2 (representative interior point): -384.0  (sign is then constant throughout (0,1), since no root exists there)
+=> f'(gamma) < 0 throughout (0,1): C0_Bernstein(gamma,a)^2 is exact-algebra-
+   proved STRICTLY DECREASING on (0,1), for every fixed a>0 (the (2+a)
+   prefactor scales f but does not move the roots of f').
+
+==============================================================================
+Concrete table: C0_Hoeffding vs C0_Bernstein(a=0.05), the value used in
+this front's final n_0(gamma) construction (script 05)
+==============================================================================
+  gamma |  C0_Hoeffding |  C0_Bernstein(a=0.05) | ratio C0B/C0H
+   0.99 |        3.5230 |                0.7098 |        0.2015
+   0.90 |        3.7400 |                2.2719 |        0.6075
+   0.70 |        4.3257 |                4.0138 |        0.9279
+   0.50 |        5.1881 |                5.2526 |        1.0124
+   0.30 |        6.7631 |                6.2755 |        0.9279
+   0.10 |       11.7982 |                7.1669 |        0.6075
+   0.05 |       16.7100 |                7.3742 |        0.4413
+   0.01 |       37.4065 |                7.5363 |        0.2015
+
+Dense numeric scan confirming the exact-algebra sup, a=0.05:
+numeric sup over 19999-point grid: 57.39698 at gamma=0.00005
+exact-algebra predicted sup (gamma->0+): 57.40000
+
+CONCLUSION: unlike lambda(gamma)/hat-lambda(gamma) alone (Hoeffding route,
+provably unbounded, continuation front Estagio 36), C0_Bernstein(gamma,a)^2
+is exact-algebra-proved BOUNDED and MONOTONE on the entire open interval
+(0,1) for every fixed a>0. A SINGLE gamma-independent C now suffices for
+the ENTIRE open interval (0,1), not just compact subsets [gamma_0,1).

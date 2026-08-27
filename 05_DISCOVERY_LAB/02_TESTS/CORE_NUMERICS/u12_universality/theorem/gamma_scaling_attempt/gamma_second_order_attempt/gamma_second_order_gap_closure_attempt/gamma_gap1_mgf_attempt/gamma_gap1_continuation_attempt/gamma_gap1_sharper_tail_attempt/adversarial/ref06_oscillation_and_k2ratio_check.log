@@ -1,0 +1,33 @@
+ gamma   own OLD   pub OLD   own NEW  claim NEW  own saved  claim saved   match?
+  0.99    20.789    20.790    17.716     17.720      3.073        3.070      YES
+   0.9    36.829    36.830    33.641     33.640      3.188        3.190      YES
+   0.7    45.024    45.020    44.568     44.570      0.456        0.460      YES
+   0.5    50.276    50.280    50.349     50.350     -0.073       -0.070      YES
+   0.3    55.950    55.950    55.508     55.510      0.442        0.440      YES
+   0.1    65.948    65.950    63.059     63.060      2.889        2.890      YES
+  0.05    71.783    71.780    67.078     67.080      4.705        4.700      YES
+  0.01    84.882    84.880    75.794     75.790      9.087        9.090      YES
+
+Points where referee's own reconstruction confirms claimed decades-saved to <0.3: 8/8
+=== (a) k2/K_max shrinking check at gamma=0.99 ===
+  n0+  0 decades (log10 n=17.72): k2/K_max = 2.010094e-03
+  n0+ 10 decades (log10 n=27.72): k2/K_max = 2.514092e-08
+  n0+ 20 decades (log10 n=37.72): k2/K_max = 2.932718e-13
+  n0+ 30 decades (log10 n=47.72): k2/K_max = 3.298638e-18
+  n0+ 40 decades (log10 n=57.72): k2/K_max = 3.627836e-23
+
+Target's claim: 2.0e-3 at n0, 3.6e-23 forty decades beyond -- compare above.
+
+=== (b) No spurious oscillation check: log W monotone decreasing ===
+    (Hoeffding and Bernstein, 5 representative gamma, fine grid from n0 to
+     +40 decades beyond, half-decade steps)
+
+  gamma= 0.99: Hoeffding increasing_found=False   Bernstein increasing_found=False
+  gamma=  0.9: Hoeffding increasing_found=False   Bernstein increasing_found=False
+  gamma=  0.5: Hoeffding increasing_found=False   Bernstein increasing_found=False
+  gamma=  0.1: Hoeffding increasing_found=False   Bernstein increasing_found=False
+  gamma= 0.01: Hoeffding increasing_found=False   Bernstein increasing_found=False
+
+(increasing_found=False at every gamma for both constructions confirms no
+ spurious oscillation over the searched range, matching the target's own
+ claim in section 6.)

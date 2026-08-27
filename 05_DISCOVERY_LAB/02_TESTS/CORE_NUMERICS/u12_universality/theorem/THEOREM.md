@@ -5556,7 +5556,9 @@ não nenhum número catalogado.
 
 **O que permanece aberto, com precisão:** a Lacuna 1 em si (um
 `n_0(\gamma)` numericamente útil exigiria constantes mais afiadas ou
-uma técnica de controle de cauda diferente); `C(\gamma)` para
+uma técnica de controle de cauda diferente [Ver Estágio 37 abaixo —
+DATA: 2026-08-27, melhoria parcial via desigualdade de Bernstein]);
+`C(\gamma)` para
 `\gamma\in(0,1)`; a CDF completa de `M_n^{(3)}` (Estágio 35); a lei
 conjunta de dois pontos para `K` geral; `p>80` de `D^{*(p)}_r(b)`
 (Estágio 32); a construção contínua-nativa direta do Teorema J
@@ -5564,3 +5566,146 @@ conjunta de dois pontos para `K` geral; `p>80` de `D^{*(p)}_r(b)`
 DISC-DEC-071; `H1`/`H2` da lei assintótica do platô M-CLUST(b).
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 37 — 2026-08-27]
+
+**Onda 22, frente (c), `DISC-DEC-096`/`DISC-DEC-098`
+(`GAMMA-GAP1-SHARPER-TAIL-ATTEMPT`).** Alvo: exatamente o item nomeado
+como o mais difícil do relatório "Mapa da Fronteira" — encontrar uma
+técnica de controle de cauda genuinamente mais afiada que Hoeffding
+para a desigualdade do Lema Bulk/Tail (Estágio 33/36), visando tornar
+`n_0(\gamma)` numericamente útil.
+
+### O que aconteceu
+
+> **Achado principal: melhoria parcial genuína, não fechamento.** A
+> frente substitui a desigualdade de Hoeffding (cega à variância) por
+> uma desigualdade de Bernstein (sensível à variância), derivada do
+> zero e verificada de forma independente contra a cauda Binomial
+> EXATA (`mpmath` dps=50, zero violações). Como o denominador de
+> Bernstein não cancela a dependência em `k` da mesma forma limpa que
+> Hoeffding, a frente constrói um dispositivo de "parâmetro de folga"
+> `a>0` que recupera um limitante `k`-uniforme
+> `2n^{-C^2/((2+a)\sigma^2)}` para `k\ge k_2(n,\gamma,C,a)=O(\ln n)`.
+>
+> **Achado-bandeira (álgebra exata, não amostragem numérica):**
+> `C0_{\mathrm{Bernstein}}(\gamma,a)^2:=(2+a)\sigma^2(\gamma)
+> (\hat\lambda(\gamma)+1/2)` é PROVADO estritamente decrescente e
+> LIMITADO em todo o intervalo aberto `(0,1)`, para todo `a>0` fixo —
+> ao contrário de `\hat\lambda(\gamma)`/`\lambda(\gamma)` isolado
+> (a quantidade da rota Hoeffding, provada NÃO LIMITADA conforme
+> `\gamma\to0^+` no Estágio 36) — com
+> `\sup_{\gamma\in(0,1)}C0_{\mathrm{Bernstein}}^2=\lim_{\gamma\to0^+}
+> =28a+56`, uma forma fechada finita para todo `a>0`. O mecanismo não é
+> coincidência: `\hat\lambda(\gamma)\sim28/\gamma` diverge, mas a
+> variância verdadeira `\sigma^2(\gamma)=\gamma(1-\gamma)\sim\gamma`
+> encolhe exatamente na taxa recíproca, então o produto
+> `\sigma^2(\gamma)\hat\lambda(\gamma)\to28` permanece finito. **Um
+> único `C` `\gamma`-independente agora basta para todo o intervalo
+> aberto `(0,1)` simultaneamente** — não apenas em compactos
+> `[\gamma_0,1)` como sob Hoeffding — um bônus genuíno além do pedido
+> literal (que era sobre `n_0(\gamma)`, não uniformidade).
+>
+> **Resultado numérico líquido:** redução genuína em `n_0(\gamma)` em
+> 7 dos 8 pontos `\gamma` testados (os mesmos 8 do Estágio 36),
+> variando de `0.44`–`3.19` décadas em `\gamma` moderado até **`9.09`
+> décadas (fator `\sim10^9`) em `\gamma=0.01`**, crescendo
+> sistematicamente conforme `\gamma\to0` ou `\gamma\to1` — exatamente
+> onde a construção de Hoeffding era mais fraca. Em `\gamma=0.5`,
+> perda negligível de `0.07` décadas (compreendida, estrutural:
+> `\sigma^2(1/2)=1/4` é exatamente o pior caso que Hoeffding já
+> assume para todo `\gamma`, então uma desigualdade sensível à
+> variância não pode superá-la ali). `n_0(\gamma)` permanece
+> **astronomicamente grande** (`10^{18}`–`10^{76}` nos pontos
+> testados) — a frente não alega o contrário.
+
+**O que isto NÃO fecha.** A Lacuna 1 permanece ABERTA; `C(\gamma)`
+para `\gamma\in(0,1)` permanece inteiramente ABERTO. Os limitantes de
+coeficiente `|c_i(k)|` e a montagem `\hat G`/`\hat G_\Theta` continuam
+INALTERADOS do predecessor — a mesma folga de desigualdade triangular
+permanece. O ângulo 2 do mandato (rastreamento de cancelamento exato
+nos próprios limitantes de coeficiente) e o ângulo 3 (uma decomposição
+fundamentalmente diferente) não foram tentados. O limite ideal
+`a\to0^+` (`C0_{\mathrm{Bernstein}}^2\to2\sigma^2(\gamma)
+(\hat\lambda(\gamma)+1/2)`, ainda estritamente melhor que Hoeffding
+para todo `\gamma\ne1/2`, igual exatamente em `\gamma=1/2`) não foi
+perseguido — a frente usou `a=0.05` fixo.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: re-derivação
+simbólica independente (`sympy`) de
+`C0_{\mathrm{Bernstein}}(\gamma,a)^2` a partir das definições do
+predecessor (`\sigma^2(\gamma)=\gamma(1-\gamma)`,
+`\beta(\gamma)=\gamma(2-\gamma)/2`,
+`\hat\lambda(\gamma):=16(7/4-\gamma)/\beta(\gamma)`), confirmando
+independentemente: monotonicidade estritamente decrescente em `(0,1)`
+para múltiplos valores de `a` testados (derivada sempre `\le0`, sem
+raiz real do numerador em `(0,1)`); limite `28a+56` conforme
+`\gamma\to0^+`; limite `0` conforme `\gamma\to1^-`. Verificação
+independente adicional de Bernstein contra a cauda Binomial exata
+(`mpmath` dps=50, 60 checagens, zero violações) antes de despachar o
+referee.
+
+Referee hostil dedicado (`.../gamma_gap1_sharper_tail_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script de nenhuma
+frente da linhagem: re-derivou Bernstein do zero e verificou contra a
+cauda Binomial exata (352 checagens, zero violações); re-derivou a
+construção de parâmetro de folga e `k_2(n,\gamma,C,a)` (à mão e via
+`sympy.solve`, correspondência exata); confirmou o achado-bandeira com
+uma prova estrutural MAIS FORTE que a da própria frente (mostrando que
+o sinal da derivada de `C0_{\mathrm{Bernstein}}^2` é idêntico ao sinal
+de `f'(\gamma)` para TODO `a>0` simultaneamente, não apenas em `a`
+amostrados) — e provou, como achado extra, uma alegação que a frente
+declarou mas não provou (`C0_{\mathrm{Hoeffding}}^2-
+C0_{\mathrm{Bernstein}}(\gamma,0^+)^2=(\gamma-1/2)^2(2\hat\lambda(
+\gamma)+1)\ge0`, com igualdade sse `\gamma=1/2`); reconstruiu
+inteiramente da prosa a montagem completa de `n_0(\gamma)` e reproduziu
+a tabela publicada da frente nos 8 pontos `\gamma` (não apenas 2-3), a
+`\le0.005`–`0.03` décadas — incluindo um auto-diagnóstico transparente
+de um artefato na própria reconstrução do referee (não um erro da
+frente) no termo residual de `k` pequeno em `\gamma=0.99`, corrigido e
+documentado.
+
+> **Dois achados nomeados, ambos severidade BAIXA.** (1) Um artefato de
+> modelagem do próprio processo de reconstrução do referee (não um erro
+> da frente) — documentado no relatório do referee, sem necessidade de
+> correção na `ATTEMPT.md` da frente. (2) Uma frase em §5 descrevendo os
+> ganhos em `\gamma=0.7`/`0.3` como redigida de forma confusa
+> ("simétrico por construção" e "não simétrico" na mesma oração) —
+> conteúdo numérico correto, apenas clareza de redação. Corrigido por
+> nota datada (não correção) na `ATTEMPT.md` da frente.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum erro matemático,
+> algébrico ou lógico encontrado. O achado-bandeira foi confirmado sem
+> qualificação, e fortalecido pela prova estrutural do referee.
+
+Ver
+`.../gamma_gap1_continuation_attempt/gamma_gap1_sharper_tail_attempt/ATTEMPT.md`
+e
+`.../gamma_gap1_sharper_tail_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro é substituída. `C(\gamma)` para
+`\gamma\in(0,1)` permanece inteiramente ABERTO — este Estágio não
+fecha a Lacuna 1, apenas demonstra que sua constante-líder pode ser
+melhorada substancialmente (até `\sim10^9\times` em `\gamma\to0`) por
+uma técnica de cauda mais afiada, e que a uniformidade em todo
+`(0,1)` (não apenas compactos) é alcançável por essa mesma rota — um
+resultado estrutural genuíno, mesmo sem fechar `C(\gamma)`.
+
+**O que permanece aberto, com precisão:** `C(\gamma)` para
+`\gamma\in(0,1)`; um `n_0(\gamma)` numericamente útil (ainda
+`10^{18}`–`10^{76}`, mesmo após esta melhoria); o ângulo 2
+(rastreamento de cancelamento exato nos limitantes de coeficiente) e o
+ângulo 3 (decomposição fundamentalmente diferente) do mandato original,
+nenhum tentado; o limite ideal `a\to0^+` não perseguido; a cota de
+Chernoff/entropia relativa exata (mais afiada que Bernstein, mas sem
+forma algébrica fechada simples) considerada mas não perseguida. Todos
+os demais itens em aberto listados no Estágio 36 permanecem
+inalterados por este Estágio. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

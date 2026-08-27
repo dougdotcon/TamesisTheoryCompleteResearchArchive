@@ -1,0 +1,34 @@
+=== Part A: calculus fact e^u - 1 - u <= (u^2/2)/(1-u/3), 0<=u<3 ===
+  points tested: 499, violations: 0
+  worst (smallest) margin rhs-lhs: 0.000000000018079423721569766543419661274478728371798274671705
+  Termwise power-series check: 2*3^(j-2) <= j! for j=2..40
+  termwise check all j=2..40: PASS
+
+=== Part B: Bernstein bound vs EXACT Binomial tail (mpmath pmf sum) ===
+  checks performed: 352
+  violations (exact > bound): 0
+  worst exact/bound ratio observed: 0.553779
+
+=== Part C: Bernstein vs Hoeffding, pointwise across gamma ===
+  fixed k=200, t=30.0
+     gamma        Bernstein        Hoeffding       Bern/Hoeff
+      0.01     7.087310e-17     2.468196e-04     2.871453e-13
+      0.05     1.035400e-10     2.468196e-04     4.194966e-07
+      0.10     1.155550e-07     2.468196e-04     4.681758e-04
+      0.25     9.079986e-05     2.468196e-04     3.678794e-01
+      0.40     4.807390e-04     2.468196e-04     1.947734e+00
+      0.49     5.660730e-04     2.468196e-04     2.293469e+00
+      0.50     5.593859e-04     2.468196e-04     2.266375e+00
+      0.51     5.660730e-04     2.468196e-04     2.293469e+00
+      0.60     4.807390e-04     2.468196e-04     1.947734e+00
+      0.75     9.079986e-05     2.468196e-04     3.678794e-01
+      0.90     1.155550e-07     2.468196e-04     4.681758e-04
+      0.95     1.035400e-10     2.468196e-04     4.194966e-07
+      0.99     7.087310e-17     2.468196e-04     2.871453e-13
+  Bernstein/Hoeffding ratio AT gamma=0.5: 2.26638 (finite, Bernstein looser)
+  min ratio away from 0.5 (most extreme sharpening): 2.87145e-13
+
+=== SUMMARY ===
+Part A (calculus fact): PASS
+Part B (Bernstein vs exact pmf, zero violations required): PASS
+Part C (Bernstein vs Hoeffding qualitative comparison): done

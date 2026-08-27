@@ -1,0 +1,36 @@
+gamma=0.99, a=0.05
+C0_Bernstein = 0.709768, C = 1.2*C0 = 0.851722
+
+--- target's claimed n0: log10(n)=17.72 ---
+  K_max = 2.617800e+10
+  k2    = 5.262023e+07   k2/K_max = 2.010094e-03
+  Ghat(n,gamma) = 992.399424
+  Ghat_Theta(n,gamma,C) = 0.000516
+  sigma^2(0.99) = 0.009900  (very small -- close to gamma=1)
+  tail_exponent (Bernstein) = -C^2/((2+a)sigma^2) = -35.7443
+  log(bulk+tail term) [natural log] = -3.1785
+  g(k2) [small-k term argument]     = 0.030281
+  log(small-k term) [natural log]   = 6.0254
+  combined log(W) = 6.0255   (want <=0 for n0)
+  DOMINANT term: small-k
+
+--- referee's own n0: log10(n)=19.51 ---
+  K_max = 2.156916e+11
+  k2    = 5.793571e+07   k2/K_max = 2.686044e-04
+  Ghat(n,gamma) = 1092.647240
+  Ghat_Theta(n,gamma,C) = 0.000188
+  sigma^2(0.99) = 0.009900  (very small -- close to gamma=1)
+  tail_exponent (Bernstein) = -C^2/((2+a)sigma^2) = -35.7443
+  log(bulk+tail term) [natural log] = -4.1471
+  g(k2) [small-k term argument]     = 0.003951
+  log(small-k term) [natural log]   = -0.0146
+  combined log(W) = 0.0014   (want <=0 for n0)
+  DOMINANT term: small-k
+
+=== Comparison with target document's own disclosed numbers (ATTEMPT.md section 8 item 3) ===
+Target claims, AT ITS OWN n0(0.99)~10^17.72:
+  log(small-k term) ~ -0.04
+  log(bulk+tail term) ~ -3.18
+  i.e. small-k term is only ~e^3.14 ~ 23x smaller than bulk+tail, non-negligible
+
+Referee's own reconstruction AT THE TARGET'S CLAIMED n0=10^17.72 finds instead:

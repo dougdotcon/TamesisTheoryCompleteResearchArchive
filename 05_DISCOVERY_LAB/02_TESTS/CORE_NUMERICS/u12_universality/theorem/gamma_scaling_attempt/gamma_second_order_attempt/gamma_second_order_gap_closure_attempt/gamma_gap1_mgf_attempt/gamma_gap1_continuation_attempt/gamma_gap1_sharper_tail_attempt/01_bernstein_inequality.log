@@ -1,0 +1,29 @@
+==============================================================================
+PART A: elementary calculus fact  e^u-1-u <= (u^2/2)/(1-u/3), 0<=u<3
+==============================================================================
+checked 299 points in (0,3); max violation (lhs>rhs, should be 0): 0.0
+
+==============================================================================
+PART B: Bernstein bound is a valid upper bound on the EXACT tail prob
+==============================================================================
+checked=88 violations=0
+worst (exact tail)/(Bernstein bound) ratio (must be <=1): 0.029136068645667454202249807564147118926277299704089
+
+==============================================================================
+PART C: Bernstein vs Hoeffding bound, fixed (k,t), across gamma
+(illustrates that Bernstein is dramatically sharper away from gamma=1/2,
+ and matches/loses only very near gamma=1/2 where sigma^2=1/4 is exactly
+ the value Hoeffding implicitly assumes for every gamma)
+==============================================================================
+gamma= 0.01: bernstein=   2.4675e-436  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=1.23375e-328
+gamma= 0.05: bernstein=  1.58045e-277  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=7.90223e-170
+gamma=  0.1: bernstein=  4.61118e-197  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=2.30559e-89
+gamma=  0.3: bernstein=  7.92097e-110  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=0.0396049
+gamma=  0.5: bernstein=   3.75845e-98  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=1.87923e+10
+gamma=  0.7: bernstein=  7.92097e-110  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=0.0396049
+gamma=  0.9: bernstein=  4.61118e-197  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=2.30559e-89
+gamma= 0.99: bernstein=   2.4675e-436  hoeffding=      2.0e-108  ratio(Bernstein/Hoeffding)=1.23375e-328
+
+All checks passed. Bernstein's inequality (derived from scratch above)
+is confirmed valid against exact Binomial tails with zero violations,
+and is confirmed dramatically sharper than Hoeffding away from gamma=1/2.

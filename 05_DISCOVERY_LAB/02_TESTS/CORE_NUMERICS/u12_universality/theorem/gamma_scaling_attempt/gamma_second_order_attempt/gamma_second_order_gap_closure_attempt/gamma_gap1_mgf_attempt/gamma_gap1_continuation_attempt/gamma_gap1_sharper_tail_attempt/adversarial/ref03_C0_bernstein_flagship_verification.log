@@ -1,0 +1,103 @@
+=== Setup: definitions re-derived from prose, sanity-printed ===
+sigma^2(gamma) = gamma*(1 - gamma)
+beta(gamma)    = gamma*(2 - gamma)/2
+lambda_hat(gamma) simplified = 8*(4*gamma - 7)/(gamma*(gamma - 2))
+lambda_tight(gamma) simplified = 4*(2*gamma - 3)/(gamma*(gamma - 2))
+kappa0(gamma) = -8/(gamma*(gamma - 2))
+
+Check lambda_hat(gamma) == 8*(7-4*gamma)/(gamma*(2-gamma))? diff = 0
+
+=== Check 1: sigma^2(gamma)*lambda_hat(gamma) -> ? as gamma->0+ ===
+sigma^2(gamma)*lambda_hat(gamma) simplified = 8*(-4*gamma**2 + 11*gamma - 7)/(gamma - 2)
+lim_{gamma->0+} sigma^2*lambda_hat = 28
+CONFIRMED: sigma^2(gamma)*lambda_hat(gamma) -> 28 as gamma->0+.
+
+[extra probe, not itself a document claim] sigma^2*lambda_tight -> 6 as gamma->0+
+
+=== Checks 2-4: C0_Bernstein(gamma,a)^2 -- strict monotone decrease, limits ===
+C0_Bernstein(gamma,a)^2 = -(a + 2)*(gamma - 1)*(gamma*(gamma - 2) + 64*gamma - 112)/(2*gamma - 4)
+
+d/dgamma C0_Bernstein^2 (simplified) = (a + 2)*((gamma - 2)*(-gamma*(gamma - 2) - 64*gamma - 2*(gamma - 1)*(gamma + 31) + 112) + (gamma - 1)*(gamma*(gamma - 2) + 64*gamma - 112))/(2*(gamma - 2)**2)
+
+Numerator of the derivative (as polynomial in gamma, a symbolic):
+  -2*a*gamma**3 - 55*a*gamma**2 + 244*a*gamma - 236*a - 4*gamma**3 - 110*gamma**2 + 488*gamma - 472
+Denominator (as polynomial in gamma):
+  2*gamma**2 - 8*gamma + 8
+
+Denominator positivity check on (0,1) [sample points]:
+  gamma=0.0100: den = 39601/5000  (positive: True)
+  gamma=0.1000: den = 361/50  (positive: True)
+  gamma=0.5000: den = 9/2  (positive: True)
+  gamma=0.9000: den = 121/50  (positive: True)
+  gamma=0.9900: den = 10201/5000  (positive: True)
+Denominator positive at all sample points: True
+
+=== Numerator root analysis (own independent method) ===
+Numerator as a polynomial in gamma (coefficients may involve a):
+  gamma^0 coeff: -236*a - 472
+  gamma^1 coeff: 244*a + 488
+  gamma^2 coeff: -55*a - 110
+  gamma^3 coeff: -2*a - 4
+
+  a=  0.0100: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-257.2800 -> OK (no root in (0,1), negative at midpoint)
+  a=  0.0500: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-262.4000 -> OK (no root in (0,1), negative at midpoint)
+  a=  0.1000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-268.8000 -> OK (no root in (0,1), negative at midpoint)
+  a=  0.2500: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-288.0000 -> OK (no root in (0,1), negative at midpoint)
+  a=  0.5000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-320.0000 -> OK (no root in (0,1), negative at midpoint)
+  a=  1.0000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-384.0000 -> OK (no root in (0,1), negative at midpoint)
+  a=  2.0000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-512.0000 -> OK (no root in (0,1), negative at midpoint)
+  a=  5.0000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-896.0000 -> OK (no root in (0,1), negative at midpoint)
+  a= 10.0000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-1536.0000 -> OK (no root in (0,1), negative at midpoint)
+  a=100.0000: real roots=[-31.4929, 1.50769, 2.48518], roots in (0,1)=[], numerator(1/2)=-13056.0000 -> OK (no root in (0,1), negative at midpoint)
+
+Strict monotone-decrease check across representative a values: PASS
+
+=== Extra check: is (2+a) merely an overall positive prefactor? ===
+f(gamma) := sigma^2*(lambda_hat+1/2) = (-gamma**3 - 61*gamma**2 + 174*gamma - 112)/(2*(gamma - 2))
+f'(gamma) = (-gamma**3 - 55*gamma**2/2 + 122*gamma - 118)/(gamma**2 - 4*gamma + 4)
+f'(gamma) numerator real roots: [-31.4929, 1.50769, 2.48518]
+roots in (0,1): []
+f'(gamma) numerator at gamma=1/2: -128 (negative => f decreasing there)
+STRUCTURAL CONFIRMATION -- since C0_Bernstein^2=(2+a)*f(gamma) and (2+a)>0 for
+  every a>0, monotonicity of C0_Bernstein^2 in gamma is EQUIVALENT, for every
+  a>0 simultaneously, to monotonicity of f(gamma) alone (a-independent question).
+  f(gamma) is exact-algebra strictly decreasing on (0,1): PASS
+  ==> this proves the 'for every a>0' universal claim in ONE shot, not just at
+      10 sample a-values -- a strictly stronger check than the target's own a-by-a table.
+
+=== Checks 3-4: limits as gamma->0+ and gamma->1- ===
+lim_{gamma->0+} C0_Bernstein(gamma,a)^2 = 28*a + 56
+lim_{gamma->1-} C0_Bernstein(gamma,a)^2 = 0
+Difference from claimed 28a+56: 0
+CONFIRMED: lim_{gamma->0+} = 28a+56 EXACTLY; lim_{gamma->1-} = 0 EXACTLY.
+
+=== Check 5: independent dense numeric scan (mpmath, not sympy) ===
+  a=0.0500: numeric max over 49999 pts = 57.398791 at gamma=0.000020, claimed sup(=lim gamma->0)=57.400000, rel.err=2.107e-05, monotone-decreasing over scan: True
+  a=0.5000: numeric max over 49999 pts = 69.998525 at gamma=0.000020, claimed sup(=lim gamma->0)=70.000000, rel.err=2.107e-05, monotone-decreasing over scan: True
+  a=1.0000: numeric max over 49999 pts = 83.998230 at gamma=0.000020, claimed sup(=lim gamma->0)=84.000000, rel.err=2.107e-05, monotone-decreasing over scan: True
+  a=5.0000: numeric max over 49999 pts = 195.995870 at gamma=0.000020, claimed sup(=lim gamma->0)=196.000000, rel.err=2.107e-05, monotone-decreasing over scan: True
+Dense numeric scan overall: PASS
+
+=== Check 6: contrast -- C0_Hoeffding(gamma)^2 := 1/4 + lambda_hat(gamma)/2 ===
+lim_{gamma->0+} C0_Hoeffding(gamma)^2 = oo
+CONFIRMED: C0_Hoeffding(gamma)^2 diverges (+infinity) as gamma->0+, consistent
+  with Estagio 36 / predecessor's finding that the analogous Hoeffding-route
+  quantity is UNBOUNDED on (0,1). Bernstein's variance-weighting is what
+  converts this divergence into the finite limit 28a+56 confirmed above.
+
+[independent re-confirmation, own derivation] lim_{gamma->0+} lambda(gamma) (Estagio 36's own tight quantity) = oo
+
+=== Check 7: a=0.05 sup value spot check ===
+28*0.05+56 = 57.4
+
+=== FINAL SUMMARY ===
+1. sigma^2*lambda_hat -> 28 as gamma->0+ : CONFIRMED (exact symbolic limit)
+2. C0_Bernstein^2 strictly decreasing on (0,1) for EVERY a>0 simultaneously:
+   CONFIRMED via structural factorization (2+a)*f(gamma), f(gamma) proved
+   strictly decreasing by exact-algebra root analysis: PASS
+   (also independently spot-checked at 10 representative a values: PASS)
+3. lim_{gamma->0+} C0_Bernstein^2 = 28a+56 : CONFIRMED (exact symbolic limit)
+4. lim_{gamma->1-} C0_Bernstein^2 = 0 : CONFIRMED (exact symbolic limit)
+5. Dense independent numeric scan (50000 pts, 4 values of a): PASS
+6. Hoeffding-route contrast (built from lambda_hat) diverges as gamma->0+: CONFIRMED
+7. sup at a=0.05 is 57.4: CONFIRMED

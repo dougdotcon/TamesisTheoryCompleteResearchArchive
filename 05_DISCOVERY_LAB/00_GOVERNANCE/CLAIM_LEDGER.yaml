@@ -636,3 +636,43 @@ claims:
 #       01_TAMESIS_CORE que motivou a hipotese
 #     - peer review formal ou publicacao -- este e um achado computacional
 #       interno, nao um artigo revisado
+
+
+  - claim_id: DISC-CLAIM-009
+    short_name: iit-phi-abc-network-pyphi-reproduction-confirmed
+    test_id: DISC-IIT-PHI-REPRO-001
+    exact_statement: >
+      PyPhi 1.2.0 (versao oficial mais recente do pacote de referencia do
+      proprio grupo de Tononi), aplicado a rede booleana de 3 nos
+      A=OR(B,C), B=AND(A,C), C=XOR(A,B) no estado (1,0,0) (Figura 4 de
+      Oizumi, Albantakis & Tononi 2014, PLoS Comput Biol
+      10(5):e1003588), computa Phi=1,916666, reproduzindo o valor
+      publicado 1,916665 (citado em prosa por Mayner et al. 2018, PLoS
+      Comput Biol 14(7):e1006343) dentro da tolerancia pre-registrada
+      1e-4, com particao de informacao minima identica (corte causal
+      {A,B}->{C}). Reproduzido de forma bit-identica (16 digitos
+      significativos) por um agente adversarial totalmente independente
+      (ambiente/instalacao/script proprios, 2 versoes de Python, 8
+      reexecucoes).
+    evidence_level: preregistered_confirmed
+    preregistration_path: "02_TESTS/IIT_PHI_REPRODUCTION/PREREGISTRATION.md"
+    preregistration_lock_commit: "ec42b65"
+    data_provenance_path: null
+    adversarial_review_verdict: SOUND_WITH_NAMED_ISSUES
+    replication_status: NOT_SUBMITTED
+    replication_gate_report_path: null
+    promoted_to_formal_lab: false
+    dependencies: []
+    known_gaps:
+      - "corroboracao secundaria opcional (rede FG, Figura 16) tem direcao de corte MIP nao-deterministica sob avaliacao paralela em caso de empate de particoes -- nao afeta o criterio travado primario, que foi confirmado unicamente determinado"
+      - "e uma checagem de reprodutibilidade computacional de uma metrica definida, nao um teste de nenhuma alegacao sobre consciencia real (biologica, de rede, ou sintetica)"
+    counterevidence: []
+    prohibited_claims:
+      - qualquer alegacao de que Phi>0 implica consciencia em qualquer sentido, para qualquer sistema
+      - qualquer alegacao sobre sistemas biologicos reais (cerebros, neuronios) a partir deste teste
+      - qualquer alegacao teorica especifica do arcabouco Tamesis
+      - qualquer Problema do Millennium resolvido, aproximado, ou alcancavel
+      - >-
+        "IIT confirmada" ou qualquer linguagem categorica sobre a teoria
+        como um todo -- o resultado correto e reportado como reproducao
+        computacional de um exemplo canonico especifico, ja publicado

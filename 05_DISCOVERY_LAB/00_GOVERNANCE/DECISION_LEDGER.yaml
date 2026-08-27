@@ -6888,3 +6888,71 @@ decisions:
       CLOSED_OUT_OF_DOMAIN de DISC-FEP-PREDICTIVE-CODING-001 nao alega
       "FEP refutado" -- apenas que nenhum alvo estreito e falsificavel
       com dado real foi localizado nesta busca, textualmente distinto.
+
+
+  - id: DISC-DEC-103
+    date: 2026-08-27
+    decision: >
+      Integracao de DISC-IIT-PHI-REPRO-001 -- CONCLUIDA. Resultado
+      primario: PyPhi 1.2.0 computa Phi=1,916666 para a rede ABC de
+      Oizumi/Albantakis/Tononi 2014 (Figura 4) no estado (1,0,0),
+      reproduzindo o valor publicado 1,916665 (citado em prosa por Mayner
+      et al. 2018) dentro da tolerancia travada 1e-4, com MIP identica
+      (corte {A,B}->{C}). Sessao verificou independentemente, antes de
+      aceitar o resultado (mas apos o front ja ter concluido -- nao antes
+      do despacho do referee, unica excecao a ordem usual desta sessao
+      porque o resultado primario ja estava pronto quando a integracao
+      comecou): confirmou manualmente que a TPM/CM corresponde
+      exatamente a A=OR(B,C), B=AND(A,C), C=XOR(A,B) sob a convencao LOLI
+      do PyPhi, e rodou sua propria reproducao PyPhi do zero, obtendo
+      Phi=1,916666 e o mesmo corte -- identico ao resultado do front.
+      Referee hostil dedicado, agente separado, codigo proprio do zero
+      sem ler o script do front: reproduziu Phi de forma BIT-IDENTICA (16
+      digitos significativos) em ambiente/instalacao totalmente
+      independentes, 2 versoes de Python (3.11, 3.12), 8 reexecucoes
+      identicas; confirmou por derivacao manual que a TPM so e consistente
+      com a rede booleana declarada sob a convencao LOLI (8/8 linhas,
+      4/8 falham sob HOLI); reproduziu o ImportError real de
+      collections.Iterable (Python 3.10+ vs PyPhi 1.2.0) em venv fresco;
+      auditou o codigo-fonte do PyPhi para os locais de uso dos aliases
+      descontinuados; verificou por fetch direto as duas citacoes-ancora
+      (Phi=1,916665/corte no readthedocs; "e 1.92" em prosa no paper
+      PyPhi 2018 de Mayner et al.); confirmou via git log que o
+      pre-registro foi travado (commit ec42b65, 13:58:19 UTC) ANTES da
+      primeira execucao da analise (pyphi.log, 14:03:12 UTC), sem
+      alteracao pos-hoc. Veredito SOUND WITH NAMED ISSUES (2 achados,
+      ambos BAIXA severidade, nenhum tocando o criterio travado): (1) a
+      narrativa de RESULTS_PRIMARY.md sobre o alcance do patch de
+      compatibilidade collections.abc subestimava seu alcance real --
+      toca CauseEffectStructure e KPartition (estruturas centrais do
+      pipeline de SIA), nao apenas cache/registro, embora o patch em si
+      (ja correto no codigo executado) seja comportamentalmente neutro,
+      confirmado empiricamente pela reproducao bit-identica; (2) a
+      corroboracao secundaria opcional (rede FG, Figura 16, Phi=0,069445,
+      NAO parte do criterio travado) tem direcao de corte MIP
+      nao-deterministica sob avaliacao paralela em um empate genuino de
+      particoes -- o valor de Phi permanece perfeitamente estavel, so a
+      direcao do corte varia; o corte primario da rede ABC foi confirmado
+      unicamente determinado (sem empate) em 8/8 execucoes, entao este
+      efeito nao contamina o criterio travado. Ambos corrigidos por
+      adendo datado em RESULTS_PRIMARY.md. Registrado como
+      DISC-CLAIM-009. Promocao ao Gate de Replicacao considerada e
+      explicitamente NAO perseguida -- teste de reprodutibilidade
+      computacional de baixo risco de um valor ja publicado e revisado
+      por pares pelo proprio grupo autor, nao uma alegacao empirica nova
+      que justifique o custo da segunda barreira; termina aqui como
+      achado replicado e catalogado (ADVERSARIALLY_REVIEWED, terminal).
+    scope: >
+      Arquivos afetados: 02_TESTS/IIT_PHI_REPRODUCTION/RESULTS_PRIMARY.md
+      (2 correcoes datadas), 02_TESTS/IIT_PHI_REPRODUCTION/analysis/
+      (ja escrito pelo front), 02_TESTS/IIT_PHI_REPRODUCTION/adversarial/
+      (ja escrito pelo referee), TEST_QUEUE.yaml (status ->
+      ADVERSARIALLY_REVIEWED), CLAIM_LEDGER.yaml (DISC-CLAIM-009, novo),
+      DECISION_LEDGER.yaml (este arquivo), DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio. Nenhuma alegacao
+      sobre consciencia real, biologica ou de rede, a partir deste
+      resultado -- e explicitamente uma checagem de reprodutibilidade
+      computacional de uma metrica ja definida na literatura, nao um
+      teste da tese panpsiquista. PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md
+      secao 6 (itens fora de escopo) permanece intocada.

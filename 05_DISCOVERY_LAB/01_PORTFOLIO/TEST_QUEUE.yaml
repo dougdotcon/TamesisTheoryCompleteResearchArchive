@@ -4563,9 +4563,52 @@ queue:
     parent_legacy: null
     related_tests:
       - "02_TESTS/COGNITIVE_EEG_SPECTRAL (mesmo genero de checagem -- claim cognitiva contra dado/referencia real, mesma disciplina de pre-registro)"
-    status: CANDIDATE_LOCKED
+    status: ADVERSARIALLY_REVIEWED
     existing_assets:
       - "02_TESTS/IIT_PHI_REPRODUCTION/PREREGISTRATION.md"
+      - "02_TESTS/IIT_PHI_REPRODUCTION/RESULTS_PRIMARY.md"
+      - "02_TESTS/IIT_PHI_REPRODUCTION/analysis/"
+      - "02_TESTS/IIT_PHI_REPRODUCTION/adversarial/REFEREE_REPORT.md"
+    result_summary: >
+      2026-08-27 (DISC-DEC-103): CONFIRMED. PyPhi 1.2.0 reproduz o valor
+      de Phi publicado (1,916665, citado em prosa por Mayner et al. 2018)
+      para a rede ABC de Oizumi/Albantakis/Tononi 2014: Phi computado
+      1,916666 (|diff|=1e-6, dentro da tolerancia travada 1e-4), MIP
+      identica (corte {A,B}->{C}). Reproduzido de forma bit-identica por
+      um referee hostil totalmente independente (venv novo, script
+      proprio do zero, 2 versoes de Python, 8 reexecucoes, todas
+      identicas) -- nao apenas dentro da tolerancia, os 16 digitos
+      significativos batem exatamente entre agente original e referee.
+      Veredito adversarial: SOUND WITH NAMED ISSUES, 2 achados BAIXA
+      severidade, nenhum tocando o criterio travado: (1) narrativa do
+      patch de compatibilidade collections.abc (necessario por
+      incompatibilidade real Python 3.10+/PyPhi 1.2.0) subestimava seu
+      alcance -- toca estruturas centrais do pipeline de SIA
+      (CauseEffectStructure, KPartition), nao apenas cache/registro,
+      embora comportamentalmente neutro (confirmado empiricamente); (2) a
+      corroboracao secundaria opcional (rede FG, Figura 16) tem Phi
+      perfeitamente estavel mas direcao de corte MIP nao-deterministica
+      (empate genuino entre duas particoes sob avaliacao paralela) -- nao
+      afeta o criterio travado, cujo corte primario foi confirmado
+      unicamente determinado em 8/8 execucoes. Ambos corrigidos por
+      adendo datado em RESULTS_PRIMARY.md. Registrado como
+      DISC-CLAIM-009.
+    adversarial_verdict: SOUND_WITH_NAMED_ISSUES
+    next_action: >
+      Nenhuma pendente. Promocao ao Gate de Replicacao
+      (03_REPLICATION_GATE) considerada e explicitamente NAO perseguida:
+      este e um teste de reprodutibilidade computacional de baixo risco
+      de um valor ja publicado e revisado por pares pelo proprio grupo
+      autor, nao uma alegacao empirica nova -- a segunda barreira, mais
+      cara, do Gate e reservada para candidatos fortes o suficiente para
+      custear replicacao completa (RESEARCH_PIPELINE.md), nao um passo
+      automatico para todo item ADVERSARIALLY_REVIEWED. Termina aqui como
+      achado replicado e catalogado.
+    stop_condition: >
+      [historico, ja cumprido] rodar PyPhi sobre a rede-alvo antes do
+      pre-registro travado; inventar ou assumir de memoria um valor de
+      Phi publicado sem citacao verificada; qualquer alegacao sobre
+      consciencia real (humana, animal, ou de rede) a partir deste teste.
     origin: >
       DISC-DEC-101, a partir de documento fornecido pelo usuario
       (2026-08-27) sobre camadas de realidade/consciencia (item B --

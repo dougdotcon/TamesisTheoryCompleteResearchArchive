@@ -2,9 +2,9 @@
 
 [![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-16%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-93-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-105-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -43,7 +43,7 @@ The institutional report [Final Vision of the Tamesis Laboratory](RELATORIO_VISA
 flowchart LR
     R[280 audited<br/>archive records] --> S[Archive-wide<br/>Phase-0 survey<br/>19 candidates, 7 areas]
     S -->|18/19 rejected,<br/>concrete reason cited| N1[CLOSED_NULL]
-    S -->|1 immature lead<br/>promoted| L13[13 formal<br/>Discovery Lab<br/>test lines]
+    S -->|1 immature lead<br/>promoted| L13[16 formal<br/>Discovery Lab<br/>test lines]
     L13 --> C8[8 pre-registered claims<br/>locked + adversarially reviewed]
     C8 --> V1["1 proved positive result<br/>U(1/2) limit law"]
     C8 --> V2[7 informative negative<br/>results — REFUTED /<br/>INCONCLUSIVE / NULL]
@@ -63,6 +63,12 @@ flowchart LR
 | Archive-wide candidate survey (Phase 0, beyond TRI-RG) | 19 candidates, 7 areas | `CLOSED_NULL` — 18/19 rejected with a concrete cited reason; 1 immature lead (cognitive EEG spectral signatures) promoted to a new line, see below |
 | Cognition — EEG spectral signature in depression (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 locked pre-registration, N=30 MDD/26 HC | `CLOSED_REFUTED` — spectral entropy **higher**, not lower, in MDD (`d=1.447`, `p=3.97×10⁻⁶`) — opposite direction to the tested hypothesis, confirmed by an independent from-scratch adversarial reproduction (numbers match to <10⁻⁹) |
 | SPARC-004 cosmology — `f_multi` self-calibration (Stage 1→2) | Pipeline validated + applied to real discovery data (30,203 systems) | `CLOSED_INCONCLUSIVE` — mechanical verdict `BOTH_FALSIFIED`, but the mandatory debunker pass found a real confounder: a 19%-of-sample subgroup (high RUWE) is systematically under-corrected by the single-scalar `f_multi` model, with a statistically robust excess even in the calibration's own anchor bin |
+| Schumann resonance spectral peak (`DISC-SCHUMANN-RESONANCE-001`) | Real ELF magnetometer data, Sierra Nevada station (Zenodo), 3 days × 2 channels, 6/6 cases | `NÃO DISTINGUE` — a genuine broad spectral hump exists at the expected location (7.8–8.0 Hz) in every case, but prominence (1.22×–1.44×) falls short of the pre-registered 3× threshold; bit-for-bit adversarial reproduction, no neural-connection claim made or possible |
+| IIT/Φ reproducibility — canonical ABC network (`DISC-IIT-PHI-REPRO-001`) | PyPhi reproduction of Oizumi, Albantakis & Tononi (2014) Figure 4 network | `CONFIRMED` — Φ=1.916666 vs. published 1.916665, bit-identical to 16 significant digits across two fully independent installations; a reproducibility check of a defined metric, not a test of any consciousness claim |
+| Free Energy Principle — falsifiable-target survey (`DISC-FEP-PREDICTIVE-CODING-001`) | Phase-0 literature survey, 4 candidates examined to primary-source depth | `CLOSED_OUT_OF_DOMAIN` — no target satisfying all three requirements (closed-form prediction, named external competitor, public dataset) was found; one paper under review concedes in its own text that the principle "can arguably describe any observed biological data" |
+| Non-classical logic in Lean4 — Priest's LP (paraconsistent) | 6 files, 876 lines, 12 meta-theorems, `lake build` clean | Explosion, modus ponens, and disjunctive syllogism proved **invalid** under LP (paraconsistency's central result); classical-recapture collapse theorem proved as a genuine two-way `iff`; adversarially reviewed, one documentation-only correction applied |
+
+These four lines open a companion program applying the same discipline to claims from philosophy of mind, cognitive science, geophysics, and formal logic — see **[`PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md`](PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md)** for the full item-by-item mapping, including what was deliberately excluded as non-falsifiable (panpsychism as fact, "God as thermodynamic equilibrium," the Simulation Argument as a testable proposition, and others) and why.
 
 ### The headline positive result: an exact closed-form universality law
 

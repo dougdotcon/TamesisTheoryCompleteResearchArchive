@@ -2,9 +2,9 @@
 
 [![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-16%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-93-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-105-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -44,7 +44,7 @@
 flowchart LR
     R[監査済み<br/>アーカイブ記録280件] --> S[アーカイブ全体の<br/>フェーズ0調査<br/>候補19件、7分野]
     S -->|18/19件が却下、<br/>具体的な理由を明示| N1[CLOSED_NULL]
-    S -->|未成熟なリードを<br/>1件昇格| L13[正式な<br/>Discovery Lab<br/>テストライン13件]
+    S -->|未成熟なリードを<br/>1件昇格| L13[正式な<br/>Discovery Lab<br/>テストライン16件]
     L13 --> C8[事前登録済みの<br/>主張8件<br/>ロック済み+敵対的レビュー済み]
     C8 --> V1["証明済みの肯定的結果1件<br/>U(1/2)極限法則"]
     C8 --> V2[有益な否定的<br/>結果7件 — REFUTED /<br/>INCONCLUSIVE / NULL]
@@ -64,6 +64,12 @@ flowchart LR
 | アーカイブ全体の候補調査(フェーズ0、TRI-RGを超えて) | 候補19件、7分野 | `CLOSED_NULL` ― 18/19件が具体的な理由とともに却下。未成熟なリード1件(認知EEGスペクトルシグネチャ)が新規ラインに昇格、下記参照 |
 | 認知 ― うつ病におけるEEGスペクトルシグネチャ(Mumtaz、`DISC-COGNITIVE-EEG-SPECTRAL-001`) | ロック済み事前登録1件、N=30(MDD)/26(HC) | `CLOSED_REFUTED` ― スペクトルエントロピーはMDDにおいて低いのではなく**高い**(`d=1.447`、`p=3.97×10⁻⁶`)― 検証された仮説とは逆方向であり、ゼロから独立に行われた敵対的再現によって確認された(数値は<10⁻⁹の精度で一致) |
 | SPARC-004宇宙論 ― `f_multi` 自己較正(ステージ1→2) | パイプライン検証済み+実発見データ(30,203系)に適用 | `CLOSED_INCONCLUSIVE` ― 機械的判定は `BOTH_FALSIFIED` だが、必須のデバンカー(反証)パスにより実在する交絡因子が発見された:サンプルの19%を占めるサブグループ(高RUWE)が単一スカラーの `f_multi` モデルによって系統的に補正不足となっており、較正自身のアンカー・ビンにおいてすら統計的に頑健な超過が見られる |
+| シューマン共鳴のスペクトルピーク (`DISC-SCHUMANN-RESONANCE-001`) | 実際のELF磁力計データ、シエラネバダ観測所(Zenodo)、3日間×2チャンネル、6/6ケース | `判別不能`(NÃO DISTINGUE) ― 期待される位置(7.8–8.0 Hz)にすべてのケースで実際の広いスペクトルの盛り上がりが存在するが、卓越度(1.22×–1.44×)は事前登録された3倍の閾値に届かない;ビット単位で一致する敵対的再現、神経接続に関する主張は一切行われていないし不可能 |
+| IIT/Φ再現性 ― 標準ABCネットワーク (`DISC-IIT-PHI-REPRO-001`) | Oizumi, Albantakis & Tononi (2014) 図4のネットワークのPyPhiによる再現 | `確認済み`(CONFIRMED) ― Φ=1.916666、公表値1.916665との差は完全に独立した2つのインストール間で有効数字16桁までビット単位で一致;これは定義済み指標の再現性チェックであり、意識に関するいかなる主張の検証でもない |
+| 自由エネルギー原理 ― 反証可能な対象の探索 (`DISC-FEP-PREDICTIVE-CODING-001`) | フェーズ0の文献調査、一次資料レベルまで検討した4つの候補 | `対象外として終了`(CLOSED_OUT_OF_DOMAIN) ― 3つの要件(閉形式の予測、名指しされた外部の競合モデル、公開データセット)をすべて満たす対象は見つからなかった;検討した論文の1つは、その本文中で自由エネルギー原理が「観測されたいかなる生物学的データも説明しうる」と認めている |
+| Lean4における非古典論理 ― プリーストのLP(矛盾許容論理) | 6ファイル、876行、12のメタ定理、`lake build`はクリーン | 爆発律、モーダスポネンス、選言三段論法がLPのもとで無効であることが証明された(矛盾許容性の中心的な結果);古典論理への還元定理が真の双方向`iff`として証明された;敵対的レビュー済み、ドキュメントのみの修正を1件適用 |
+
+これら4件のラインは、心の哲学、認知科学、地球物理学、形式論理学の主張に同じ規律を適用する姉妹プログラムの端緒である ― 項目ごとの完全な対応表は**[`PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md`](PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md)**を参照。反証不可能であるとして意図的に除外された対象(事実としての汎心論、「神が熱力学的平衡である」という主張、検証可能な命題としてのシミュレーション仮説、その他)とその理由も、そこに記載されている。
 
 ### 目玉となる肯定的結果:厳密な閉形式の普遍性法則
 

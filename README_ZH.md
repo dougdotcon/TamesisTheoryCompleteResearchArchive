@@ -2,9 +2,9 @@
 
 [![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-16%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-93-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-105-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -44,7 +44,7 @@
 flowchart LR
     R[280 份经审计的<br/>档案记录] --> S[全档案库范围的<br/>第 0 阶段调查<br/>19 个候选项,7 个领域]
     S -->|18/19 被否决,<br/>并给出具体理由| N1[CLOSED_NULL]
-    S -->|1 条不成熟线索<br/>被提升| L13[13 条正式的<br/>Discovery Lab<br/>测试线]
+    S -->|1 条不成熟线索<br/>被提升| L13[16 条正式的<br/>Discovery Lab<br/>测试线]
     L13 --> C8[8 项预先登记的主张<br/>已锁定 + 经对抗性评审]
     C8 --> V1["1 项已证明的正面结果<br/>U(1/2) 极限律"]
     C8 --> V2[7 项具有信息量的负面<br/>结果——REFUTED /<br/>INCONCLUSIVE / NULL]
@@ -64,6 +64,12 @@ flowchart LR
 | 全档案库候选项调查(第 0 阶段,超出 TRI-RG 范围) | 19 个候选项,7 个领域 | `CLOSED_NULL`——18/19 项被否决并给出具体理由;1 条不成熟线索(认知 EEG 频谱特征)被提升为新的研究线,见下文 |
 | 认知——抑郁症中的 EEG 频谱特征(Mumtaz,`DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 项已锁定的预先登记,N=30 MDD / 26 HC | `CLOSED_REFUTED`——重度抑郁症(MDD)患者的频谱熵**更高**而非更低(`d=1.447`,`p=3.97×10⁻⁶`)——方向与所测试的假设相反,已由一次独立的、从零开始的对抗性复现所证实(数值吻合至 <10⁻⁹) |
 | SPARC-004 宇宙学——`f_multi` 自校准(第 1→2 阶段) | 流程已验证 + 已应用于真实的发现数据(30,203 个系统) | `CLOSED_INCONCLUSIVE`——机械裁决为 `BOTH_FALSIFIED`,但强制性的证伪复核(debunker pass)发现了一个真实的混杂因素:样本中占 19% 的一个子群体(高 RUWE)被单标量 `f_multi` 模型系统性地欠校正,即使在校准自身的锚定区间(anchor bin)内也存在具有统计学稳健性的过量 |
+| 舒曼共振频谱峰值(`DISC-SCHUMANN-RESONANCE-001`) | 真实 ELF 磁力计数据,塞拉内华达观测站(Zenodo),3 天 × 2 个通道,6/6 个案例 | `无法区分`(NÃO DISTINGUE)——在所有案例中,预期位置(7.8–8.0 Hz)都存在真实的宽频谱隆起,但其显著度(1.22×–1.44×)未达到预注册的 3 倍阈值;逐位对抗性复现一致,未作出也不可能作出任何神经连接方面的主张 |
+| IIT/Φ 可复现性——标准 ABC 网络(`DISC-IIT-PHI-REPRO-001`) | 通过 PyPhi 复现 Oizumi、Albantakis 与 Tononi(2014 年)论文图 4 中的网络 | `已确认`(CONFIRMED)——计算得 Φ=1.916666,与已发表值 1.916665 相比,在两次完全独立的安装中,16 位有效数字逐位一致;这是对一个已定义指标的可复现性检验,而非对任何意识主张的检验 |
+| 自由能原理——可证伪目标的搜索(`DISC-FEP-PREDICTIVE-CODING-001`) | 第 0 阶段文献调研,对 4 个候选目标进行了追溯至一手文献层面的审查 | `因超出领域而关闭`(CLOSED_OUT_OF_DOMAIN)——未找到同时满足三项要求(封闭形式的预测、明确指定的外部竞争模型、公开数据集)的目标;被审查的论文之一在正文中承认该原理"可以说能够解释任何观测到的生物学数据" |
+| Lean4 中的非经典逻辑——Priest 的 LP(次协调逻辑) | 6 个文件,876 行代码,12 条元定理,`lake build` 干净通过 | 证明了爆炸律、肯定前件式(modus ponens)与选言三段论在 LP 下均无效(这是次协调性的核心结果);证明了经典逻辑还原定理是真正的双向 `iff`;已经过对抗性审查,仅应用了一处文档性修正 |
+
+这五条研究线开启了一项配套研究计划,将同样的方法论用于检验心灵哲学、认知科学、地球物理学与形式逻辑领域的主张——完整的逐项映射,包括哪些内容因不可证伪而被刻意排除在外(泛心论作为事实、"上帝是一种热力学平衡"的说法、作为可检验命题的模拟论证,以及其他若干项)及其原因,详见 **[`PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md`](PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md)**。
 
 ### 头号正面结果:一条精确的闭式(closed-form)普适律
 

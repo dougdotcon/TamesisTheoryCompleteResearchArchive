@@ -2,9 +2,9 @@
 
 [![Audit](https://img.shields.io/badge/audit-280%2F280%20records-0b6e4f?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
 [![Dossiers](https://img.shields.io/badge/dossiers-274-245269?style=for-the-badge)](RELATORIO_PROGRESSO_AUDITORIA_ARTIGOS.md)
-[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-13%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
+[![Discovery Lab](https://img.shields.io/badge/discovery%20lab-16%20test%20lines-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/01_PORTFOLIO/TEST_QUEUE.yaml)
 [![Registered claims](https://img.shields.io/badge/registered%20claims-8-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/CLAIM_LEDGER.yaml)
-[![Decision ledger](https://img.shields.io/badge/governance%20decisions-93-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
+[![Decision ledger](https://img.shields.io/badge/governance%20decisions-105-1f6f5c?style=for-the-badge)](05_DISCOVERY_LAB/00_GOVERNANCE/DECISION_LEDGER.yaml)
 [![Proved result](https://img.shields.io/badge/U(1%2F2)%20limit%20law-closed--form%20%C2%B7%20unconditional%20%C2%B7%20adversarially%20verified-8c5a1f?style=for-the-badge)](tamesis-cycle-survival/)
 [![Physical evidence](https://img.shields.io/badge/independent%20physical%20evidence-not%20established-b42318?style=for-the-badge)](PROJECT_STATE.json)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-8a2be2?style=for-the-badge)](LICENSE)
@@ -44,7 +44,7 @@ O relatório institucional [Visão Final do Laboratório Tamesis](RELATORIO_VISA
 flowchart LR
     R[280 registros<br/>auditados do arquivo] --> S[Levantamento Fase 0<br/>de todo o arquivo<br/>19 candidatos, 7 áreas]
     S -->|18/19 rejeitados,<br/>motivo concreto citado| N1[CLOSED_NULL]
-    S -->|1 pista imatura<br/>promovida| L13[13 linhas formais<br/>de teste do<br/>Discovery Lab]
+    S -->|1 pista imatura<br/>promovida| L13[16 linhas formais<br/>de teste do<br/>Discovery Lab]
     L13 --> C8[8 afirmações pré-registradas<br/>travadas + revisadas adversarialmente]
     C8 --> V1["1 resultado positivo provado<br/>lei limite U(1/2)"]
     C8 --> V2[7 resultados negativos<br/>informativos — REFUTADO /<br/>INCONCLUSIVO / NULO]
@@ -64,6 +64,12 @@ flowchart LR
 | Levantamento de candidatos em todo o arquivo (Fase 0, além do TRI-RG) | 19 candidatos, 7 áreas | `CLOSED_NULL` — 18/19 rejeitados com motivo concreto citado; 1 pista imatura (assinaturas espectrais de EEG cognitivo) promovida a uma nova linha, ver abaixo |
 | Cognição — assinatura espectral de EEG na depressão (Mumtaz, `DISC-COGNITIVE-EEG-SPECTRAL-001`) | 1 pré-registro travado, N=30 MDD/26 HC | `CLOSED_REFUTED` — entropia espectral **maior**, não menor, em pacientes com MDD (`d=1.447`, `p=3.97×10⁻⁶`) — direção oposta à hipótese testada, confirmada por uma reprodução adversarial independente feita do zero (números coincidem a <10⁻⁹) |
 | Cosmologia SPARC-004 — autocalibração de `f_multi` (Estágio 1→2) | Pipeline validado + aplicado a dados reais de descoberta (30,203 sistemas) | `CLOSED_INCONCLUSIVE` — veredito mecânico `BOTH_FALSIFIED`, mas a etapa obrigatória de refutação (debunker) encontrou um fator de confusão real: um subgrupo de 19% da amostra (RUWE alto) é sistematicamente subcorrigido pelo modelo de `f_multi` de escalar único, com um excesso estatisticamente robusto mesmo no próprio bin de ancoragem da calibração |
+| Pico espectral da ressonância de Schumann (`DISC-SCHUMANN-RESONANCE-001`) | Dado real de magnetômetro ELF, estação Sierra Nevada (Zenodo), 3 dias × 2 canais, 6/6 casos | `NÃO DISTINGUE` — existe um morro espectral largo genuíno na localização esperada (7,8–8,0 Hz) em todos os casos, mas a proeminência (1,22×–1,44×) fica abaixo do limiar pré-registrado de 3×; reprodução adversarial bit-a-bit, nenhuma alegação de conexão neural feita ou possível |
+| Reprodutibilidade de IIT/Φ — rede canônica ABC (`DISC-IIT-PHI-REPRO-001`) | Reprodução via PyPhi da rede da Figura 4 de Oizumi, Albantakis & Tononi (2014) | `CONFIRMED` — Φ=1,916666 vs. valor publicado 1,916665, idêntico bit a bit em 16 dígitos significativos entre duas instalações totalmente independentes; checagem de reprodutibilidade de uma métrica definida, não teste de nenhuma alegação sobre consciência |
+| Princípio da Energia Livre — busca de alvo falseável (`DISC-FEP-PREDICTIVE-CODING-001`) | Levantamento de literatura em Fase 0, 4 candidatos examinados a nível de fonte primária | `CLOSED_OUT_OF_DOMAIN` — nenhum alvo satisfazendo os três requisitos (previsão fechada, modelo concorrente externo nomeado, dataset público) foi encontrado; um dos artigos revisados admite no próprio texto que o princípio "pode descrever qualquer dado biológico observado" |
+| Lógica não-clássica em Lean4 — Priest's LP (paraconsistente) | 6 arquivos, 876 linhas, 12 metateoremas, `lake build` limpo | Explosão, modus ponens e silogismo disjuntivo provados **inválidos** sob LP (o resultado central da paraconsistência); teorema de colapso clássico provado como um `iff` genuíno de duas vias; revisado adversarialmente, uma correção apenas de documentação aplicada |
+
+Essas quatro linhas abrem um programa complementar que aplica a mesma disciplina a afirmações da filosofia da mente, ciência cognitiva, geofísica e lógica formal — ver **[`PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md`](PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md)** para o mapeamento completo item a item, incluindo o que foi deliberadamente excluído por não ser falseável (panpsiquismo como fato, "Deus como equilíbrio termodinâmico", o Argumento da Simulação como proposição testável, e outros) e o porquê.
 
 ### O resultado positivo de destaque: uma lei de universalidade exata em forma fechada
 

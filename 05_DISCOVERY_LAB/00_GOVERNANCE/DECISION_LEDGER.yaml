@@ -7022,3 +7022,68 @@ decisions:
       conexao neural/telepatia via ressonancia de Schumann, explicitamente
       fora de escopo desde o pre-registro. PROGRAMA_CONSCIENCIA_LOGICA_E_REALIDADE.md
       secao 6 permanece intocada.
+
+
+  - id: DISC-DEC-105
+    date: 2026-08-27
+    decision: >
+      Integracao da linha formal exploratoria de logica nao-classica em
+      Lean4 (Priest's LP, mandato DISC-DEC-102) -- CONCLUIDA. Frente
+      escreveu 6 arquivos Lean (876 linhas) em
+      04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/ExternalLines/
+      NonclassicalLogicLP/, formalizando a semantica de 3 valores
+      {T,B,F} de Priest (negacao=involucao, conjuncao=min, disjuncao=max,
+      condicional material DERIVADO nao-primitivo a->b:=~a|b,
+      designados D={T,B}) e 12 metateoremas (LEM retido; explosao, modus
+      ponens, e silogismo disjuntivo INVALIDOS -- o resultado central de
+      paraconsistencia, com testemunha compartilhada v(a)=B,v(b)=F;
+      teorema de colapso classico sob valuacoes B-livres). Sessao
+      verificou independentemente antes do despacho do referee: rodou
+      seu proprio `lake build` do zero (8831 jobs, identico ao relatado
+      pela frente), confirmou zero sorry/admit/native_decide via grep
+      proprio, e recompilou o modulo Audit.lean isoladamente confirmando
+      que os axiomas de cada teorema-chave sao exatamente [propext,
+      Classical.choice, Quot.sound]. Referee hostil dedicado: checou
+      cada ENUNCIADO de teorema (nao so que compila) contra Priest 1979/
+      SEP; verificou a mao os tres testemunhos de invalidade; confirmou
+      o iff de colapso genuinamente quantificado sobre Atom/Gamma/phi
+      arbitrarios (nao especializado); reconstruiu parte da prova numa
+      instancia Lean independente do zero. Veredito SOUND WITH NAMED
+      ISSUES -- 1 achado MODERADO (nao 0): o docstring de
+      valid_implies_cvalid alegava, sem sustentacao, que "a reciproca
+      falha" (CValid phi -> Valid phi); o referee, via busca de
+      literatura + busca de forca bruta sobre 300k+ formulas + prova
+      Lean independente parcial, nao encontrou nenhum contraexemplo e
+      corroborou o fato padrao da literatura de que LP e a logica
+      classica tem exatamente as mesmas formulas validas (Valid phi <->
+      CValid phi deveria valer como iff completo) -- a alegacao era
+      nao-sustentada e provavelmente falsa, mas nao corrompia nenhum
+      teorema provado (valid_implies_cvalid permanece verdadeiro e
+      corretamente demonstrado). Corrigido diretamente no arquivo Lean
+      via adendo datado no docstring (nao apenas em documentacao
+      externa), com re-build confirmando que a correcao nao introduziu
+      nenhum erro de sintaxe. Nenhum problema encontrado nas tabelas-
+      verdade, nos 30 celulas auditadas, na contagem de linhas/arquivos
+      dos documentos de governanca, ou no unico import adicionado a
+      TamesisLab.lean. Overshoot honesto de linhas ja relatado pela
+      frente (876 vs. estimativa 450-700) mantido sem alteracao.
+    scope: >
+      Arquivos afetados:
+      04_FORMAL_RESEARCH_LAB/05_FORMAL/lean/TamesisLab/ExternalLines/
+      NonclassicalLogicLP/CollapseTheorem.lean (1 correcao datada de
+      docstring, re-build confirmado),
+      04_FORMAL_RESEARCH_LAB/11_EXTERNAL_LINES/NONCLASSICAL_LOGIC_LP/
+      RESULTS.md (nota de revisao adversarial), DECISION_LEDGER.yaml
+      (este arquivo, 05_DISCOVERY_LAB), DISCOVERY_LAB_STATE.md.
+      04_FORMAL_RESEARCH_LAB/00_GOVERNANCE/ e /01_PORTFOLIO/
+      permanecem intocados, confirmado por git status vazio nesses
+      diretorios (verificado pela sessao e pelo referee
+      independentemente) -- esta linha continua rastreada apenas em
+      05_DISCOVERY_LAB, decisao explicita de DISC-DEC-102.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio. Nenhuma alegacao
+      metafisica sobre logica classica ser "errada" ou LP ser "melhor"
+      -- e uma exploracao formal pura de um sistema logico alternativo
+      bem definido, com resultados matematicos precisos (o que
+      sobrevive/quebra sob LP), nao uma tese filosofica. 04_FORMAL_RESEARCH_LAB
+      00_GOVERNANCE/ e 01_PORTFOLIO/ intocados.

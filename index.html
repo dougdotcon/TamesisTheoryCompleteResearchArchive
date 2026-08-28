@@ -424,6 +424,33 @@
         <code>PLATRESUM</code>.
     </p>
 
+    <p class="update-note">
+        <strong>Nota de atualização (28 de agosto de 2026, onda 24).</strong> Duas frentes fecharam a
+        última lacuna pequena da série de CDFs em forma fechada e certificaram, rigorosamente, onde a
+        construção natural geral-$K$ trava. A frente (a) estendeu o método um nível além de $K=3$:
+        <strong>Proposição D4</strong>, uma única fórmula racional fechada para $P(M_n^{(4)}\le k/n)$ em
+        todo $n\ge4$ e todo inteiro $0\le k\le n-1$, via quatro regimes combinatórios (um a mais que
+        $K=3$) colapsando por identidade simbólica exata numa única fórmula; corolários incluem uma
+        fórmula completa nova, em todas as ordens, da média finita-$n$ e a recuperação exata dos momentos
+        contínuos já provados ($1/5$, $128/1155$). A série de CDFs fechadas em $K$ pequeno está agora
+        completa para <strong>$K=0,1,2,3,4$</strong>; só $K\ge5$ permanece aberto ao nível de fórmula
+        fechada. Ver <code>THEOREM.md</code>, "Estágio 43". A frente (b), atacando diretamente a CDF
+        fechada em $(n,K)$ geral, obteve um certificado rigoroso de não-existência para essa construção
+        natural, diagnosticando com precisão onde ela falha: reorganizando a decomposição do Estágio 41
+        por tamanho de subconjunto $r$, a Camada 1 fecha simbolicamente em $(n,K,r)$, mas a Camada 2 (a
+        soma interna truncada) exige uma antidiferença hipergeométrica indefinida genuína — exatamente o
+        que o algoritmo de Gosper decide — e <code>gosper_term</code>, rodado no somando da Camada 2 com
+        $K$ totalmente simbólico, termina e retorna <code>None</code>: um certificado formal de que
+        nenhuma antidiferença hipergeométrica-em-termos existe ali para $K$ simbólico, ainda que o MESMO
+        somando seja Gosper-somável em todo $K$ concreto testado ($K=3,\ldots,7$). É um diagnóstico
+        preciso de não-fechamento, não um fechamento — nenhuma fórmula fechada em $(n,K)$ foi encontrada
+        ou descartada por qualquer outra via, e a CDF fechada geral-$K$ para $K\ge5$ permanece aberta.
+        Ambas as frentes: referee hostil dedicado, SOUND WITH NAMED ISSUES — ACCEPT for catalogue;
+        achados nomeados (transcrição; enquadramento de ineditismo) corrigidos por adendos datados,
+        nenhum afetando o conteúdo matemático. Nenhuma alegação de progresso em Problema do Milênio;
+        matemática combinatória pura interna a este arquivo. Ver <code>THEOREM.md</code>, "Estágio 44".
+    </p>
+
     <div class="abstract">
         <strong>Abstract.</strong> We report the outcome of a systematic, adversarial adjudication of a large
         interdisciplinary research archive against real external references (PDG, CODATA, Planck, SPARC, Gaia,
@@ -1233,6 +1260,38 @@
             alegação específica, corrigida por adendo datado (<code>DISC-DEC-113</code>).
         </p>
         <p>
+            <b>Onda 24 — a série de CDFs em $K$ pequeno completa-se em $K=4$, e um diagnóstico de
+            não-existência certificado por Gosper para a construção natural geral-$K$ (Estágios
+            43–44).</b> A frente (a) estendeu o mesmo método um nível além de $K=3$: <b>Proposição
+            D4</b>, uma única fórmula racional fechada para $P(M_n^{(4)}\le k/n)$ em todo $n\ge4$ e todo
+            inteiro $0\le k\le n-1$, via quatro regimes combinatórios (um a mais que $K=3$) colapsando por
+            identidade simbólica exata numa única fórmula; corolários incluem uma fórmula completa nova,
+            em todas as ordens, da média finita-$n$, e a recuperação exata dos momentos contínuos já
+            provados ($1/5$, $128/1155$). A série de CDFs fechadas em $K$ pequeno está agora completa
+            para $K=0,1,2,3,4$; só $K\ge5$ permanece aberto ao nível de fórmula fechada (Estágio 43). A
+            frente (b), atacando diretamente a CDF fechada em $(n,K)$ geral, obteve um certificado
+            rigoroso de não-existência para essa construção natural — não uma fórmula, e não uma prova de
+            que nenhuma fórmula exista por qualquer outra via. Reorganizando a decomposição do Estágio 41
+            por tamanho de subconjunto $r$: a Camada 1 (marginalização das fontes intocadas) fecha
+            simbolicamente em $(n,K,r)$ de uma vez, uma convolução tipo Vandermonde genuína; a Camada 2 (a
+            soma interna, truncada externamente por $k$) exige uma antidiferença hipergeométrica
+            indefinida genuína — exatamente o que o algoritmo de Gosper decide, não uma heurística. Rodado
+            no somando da Camada 2 com $K$ totalmente simbólico, <code>gosper_term</code> termina e
+            retorna <code>None</code>: certificado formal de que nenhuma antidiferença
+            hipergeométrica-em-termos existe ali para $K$ simbólico — ainda que o MESMO somando seja
+            Gosper-somável em todo $K$ concreto testado ($K=3,\ldots,7$), confirmando que o harness
+            detecta Gosper-somabilidade quando ela existe. A obstrução é assim relocalizada uma camada
+            mais funda que a do Estágio 39 (que vivia na montagem final, após todo nível inferior já ter
+            fechado): aqui já dentro de um único bloco $S_r(n,K,k)$, antes mesmo da montagem externa em
+            $r$ ser tentada. Ambas as frentes: referee hostil dedicado — re-derivação independente do zero
+            do somando da Camada 2, rodando <code>gosper_term</code> simbólico até o fim e obtendo o mesmo
+            <code>None</code>; SOUND WITH NAMED ISSUES — ACCEPT for catalogue em ambas; achados nomeados
+            (uma expressão intermediária transcrita incorretamente na Seção 4.3; um enquadramento de
+            "bônus estrutural" superestimado) corrigidos por adendos datados, nenhum afetando o
+            certificado central de não-existência nem a Proposição D4. Ver <code>THEOREM.md</code>,
+            "Estágio 43" e "Estágio 44".
+        </p>
+        <p>
             Com este fechamento, nenhum valor de $K$ permanece aberto na Conjectura 1, e a Conjectura 2
             está provada como corolário. Permanece aberto: a Lacuna 1 do termo de segunda ordem
             $C(\gamma)$ da lei de escala (agora com estratégia de prova concreta, um $n_0(\gamma)$
@@ -1244,12 +1303,16 @@
             apenas não encontrada) como não existente na classe Gosper-somável para a construção natural
             usada, com $K\ge9$ não tentado; a ponte $n\to\infty$ para a <em>distribuição</em> completa de
             $M(c)$ ao nível de CDF (o alvo de segundo momento reduzido $P_{nn}(n,K)\to1/(K+1)$ está
-            fechado em $K=0,1,2,3$; a CDF completa está agora fechada em $K=0,1$ (Estágio 27) e também em
-            $K=2$ e $K=3$ (Proposição D2, Estágio 42; Proposição D3, Estágio 40) — a CDF completa em forma
-            fechada está portanto completa para todo $K=0,1,2,3$, e só o caso geral $K\ge4$ permanece
-            aberto ao nível de fórmula fechada, embora o Teorema de Decomposição Completa da Contagem de
-            Ciclos e a Proposição S — a maquinaria subjacente — estejam agora provados genuinamente
-            $K$-livres para todo $K\ge0$, Estágio 41); a construção contínua-nativa direta do
+            fechado em $K=0,1,2,3$; a CDF completa está agora fechada em $K=0,1$ (Estágio 27), $K=2$ e
+            $K=3$ (Proposição D2, Estágio 42; Proposição D3, Estágio 40) e $K=4$ (Proposição D4, Estágio
+            43) — a CDF completa em forma fechada está portanto completa para todo $K=0,1,2,3,4$, e só o
+            caso geral $K\ge5$ permanece aberto ao nível de fórmula fechada, embora o Teorema de
+            Decomposição Completa da Contagem de Ciclos e a Proposição S — a maquinaria subjacente —
+            estejam agora provados genuinamente $K$-livres para todo $K\ge0$ (Estágio 41), e a própria
+            construção natural geral-$K$ para a CDF carregue agora um certificado de não-existência via
+            Gosper — $K$ simbólico não admite antidiferença hipergeométrica-em-termos nessa formulação
+            específica, um diagnóstico preciso de onde a construção falha, não um fechamento (Estágio 44);
+            a construção contínua-nativa direta do
             Teorema J (Estágio 28, intocada); $p&gt;80$
             de $D^{*(p)}_r(b)$ (Estágio 32); o piso $H2$ em $b=1$; a constante do platô de
             <code>DISC-DEC-071</code>; e, na linha separada M-CLUST(b), o gap abstrato-vs-real (agora
@@ -1260,7 +1323,7 @@
             obstrução alegada; $H1$/$(U1)$/$(U2)$ seguem abertos, não afetados, <code>DISC-DEC-113</code>)
             e $H2$ (intocado) da lei assintótica do platô. A janela intermediária entre os regimes de $c$
             fixo e $\gamma_n\to0$, aberta desde a onda 17, está <b>FECHADA</b> (Estágio 34). Fontes
-            completas: <code>THEOREM.md</code>, Estágios 23–42, e os relatórios
+            completas: <code>THEOREM.md</code>, Estágios 23–44, e os relatórios
             <code>adversarial/REFEREE_REPORT.md</code> de cada frente. Nenhuma alegação de progresso em
             qualquer Problema do Milênio; matemática combinatória pura interna a este arquivo.
         </p>

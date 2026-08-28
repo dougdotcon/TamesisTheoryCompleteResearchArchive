@@ -1,0 +1,105 @@
+# Checklist — Integration + the required Stage 1 benchmark
+
+Source: `ROADMAP.md` §1 Stage 1 ("Required validation before Stage 1
+counts as done") and §3 ("Why `U₁/₂` is the required first benchmark,
+not an example"). This is the acceptance gate for the whole MVP, not
+just one more module — **do not mark Stage 1 done in `GOAL.md` until
+every box below is checked and the tests actually pass when run.**
+
+Depends on Modules 1–5 all being complete (their own checklists fully
+checked off, their own tests green).
+
+## Integration
+
+- [ ] `src/tamesis_discovery_engine/__init__.py` exposes a small
+      `DiscoveryEngine` facade wiring `Registry`, `Runner`, `Reproducer`,
+      `AdversarialReviewer`, and `Ledger` together, all sharing one
+      `data/` directory root passed at construction. Each module's
+      major event (claim created, claim advanced, run completed,
+      reproduction completed, review run, verdict recorded) appends one
+      entry to the shared `Ledger` — wire this here, inside the facade,
+      not by modifying Modules 1–4's own internals to import `Ledger`
+      directly (keep the modules independently testable in isolation,
+      as their own checklists already verified).
+- [ ] `tests/test_integration.py`: a claim driven through the **entire**
+      state machine via the `DiscoveryEngine` facade
+      (`DRAFT→...→CONFIRMED` or a deliberately `REFUTED`/`INCONCLUSIVE`
+      path) and the `Ledger` ends up with one entry per major event, in
+      the correct order, chain-verifiable.
+
+## The required benchmark — reproduce `U₁/₂` end-to-end, no hand-holding
+
+This is not optional and not a formality. Per `ROADMAP.md` §3: *"If a
+candidate Discovery Engine cannot re-derive what this archive's own
+manual pipeline already proved and adversarially confirmed, it has no
+business being pointed at an unproven hypothesis."*
+
+- [ ] `benchmarks/u12_hypothesis.py`: an **independent** implementation
+      of the `u12` permutation-with-reroutes ensemble (Definitions 1–4
+      in `THEOREM.md` — read the definitions directly from
+      `05_DISCOVERY_LAB/02_TESTS/CORE_NUMERICS/u12_universality/theorem/THEOREM.md`
+      to get them right, but do **not** import any code from
+      `05_DISCOVERY_LAB`, and do **not** hardcode `THEOREM.md`'s stated
+      closed-form answers as the computation itself — only as the
+      comparison target of an assertion at the very end). Must include:
+      1. A brute-force / exact-enumeration function for small `n`
+         computing the exact CDF of `M_n^{(0)}` (or `M_n` generally),
+         used to sanity-check the closed form directly against ground
+         truth for `n` small enough to enumerate exhaustively.
+      2. A Monte Carlo simulator for larger `n`, used to check
+         convergence of the empirical distribution toward `φ_∞(c)` as
+         `n→∞` for fixed `c`.
+      3. The closed form itself, `φ_∞(c) = ½·√(π/c)·erf(√c)`, coded
+         directly from the formula (this is fine to hardcode — it's the
+         *target*, not the computation being validated).
+- [ ] `tests/test_u12_end_to_end.py` drives the full claim lifecycle
+      through `DiscoveryEngine`:
+      1. `register()` a claim whose `statement` is the bare `U₁/₂`
+         hypothesis (`φ_∞(c) = ½·√(π/c)·erf(√c)` as `n→∞`).
+      2. `advance()` to `PRE_REGISTERED` with a declared threshold
+         (e.g. "empirical CDF within `1e-2` of `φ_∞(c)` for `n≥N`" and
+         "brute-force exact CDF within `1e-9` of `φ_∞(c)`'s finite-`n`
+         correction term for small `n`").
+      3. `advance()` to `LOCKED`, `run()` the test plan calling into
+         `benchmarks/u12_hypothesis.py`'s brute-force + Monte Carlo
+         functions (not pre-computed numbers).
+      4. `reproduce()` with a second, independently-written
+         implementation of at least the brute-force check (e.g. a
+         different enumeration order/algorithm for the same
+         combinatorial definition).
+      5. `review()` then `record_verdict()`.
+      6. **Assert**, at the end, that the computed values from step 3
+         match the closed forms cited in `THEOREM.md`:
+         - `φ_∞(c)` (brute-force/MC vs. the formula) — required.
+         - The `M_K` distribution for at least one `K≥1` case (e.g.
+           `K=1`, `f_{M_1}` — check the exact closed form actually
+           cited in `THEOREM.md`) — required per `ROADMAP.md` §3 item 2.
+         - At least one finite-`n` correction term, compared against the
+           value stated in `THEOREM.md` for that `n` — required per
+           `ROADMAP.md` §3 item 3.
+         - The `γ=c/n` scaling regime: run the simulator at fixed `γ`
+           across a few growing `n`, confirm `φ(n,γn)/φ_∞(γn) →
+           √(2/(2-γ))` in the right direction — required per
+           `ROADMAP.md` §3 item 4.
+- [ ] If **any** of the four required checks cannot be made to pass
+      honestly (not adjusted by loosening tolerance until it passes),
+      that failure is recorded explicitly in this checklist and in
+      `GOAL.md` as an open gap — **do not silently drop a failing
+      check or claim Stage 1 complete with an unmet requirement.**
+
+## Acceptance
+
+- [ ] `pytest 06_DISCOVERY_ENGINE/tests/ -v` — full suite, zero
+      failures, zero skips (a "skip" on the benchmark test specifically
+      is not acceptable; it must actually run and assert).
+- [ ] `benchmarks/u12_hypothesis.py` contains no `import` from
+      `05_DISCOVERY_LAB` anywhere (grep to confirm) and no numeric
+      literal that is one of `THEOREM.md`'s stated results used as
+      anything other than an assertion target (spot check a few
+      literals by hand).
+- [ ] A short adversarial review pass (separate from Module 4's own
+      unit tests — this is a review of the *engine's own honesty*, done
+      by a reviewer who did not write the benchmark code) confirms the
+      benchmark genuinely recomputes its answers rather than smuggling
+      in the known result. This is the hostile-review step for the
+      whole Stage 1 deliverable, not just its individual modules.

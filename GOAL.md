@@ -49,10 +49,18 @@ level up to the tool that would run the claims.
 
 ## Log (most recent first)
 
+- **2026-08-28** — Dispatched Workflow `wf_08fb6d89-64d` (task id `wvhhspt82`) to build Stage 1:
+  Module 1 (Hypothesis Registry) first, then Modules 2 (Experiment Runner) + 5 (Decision Ledger)
+  in parallel, then Module 3 (Reproduction Engine), then Module 4 (Adversarial Reviewer) — in
+  that dependency order, since each module imports the previous ones' APIs — then integration
+  (a `DiscoveryEngine` facade + the required `U₁/₂` end-to-end benchmark, independently
+  recomputed, not hand-held from `05_DISCOVERY_LAB`), then a hostile review pass over the whole
+  engine, then a fix pass over confirmed findings. Running in background; will integrate the
+  result (verify tests myself, check off checklist items, update this file, commit, push) once
+  it completes.
 - **2026-08-28** — Scaffolded `06_DISCOVERY_ENGINE/` (src/tests/benchmarks/data dirs), wrote this
-  file and 6 per-module checklists (`CHECKLIST_01`..`CHECKLIST_05` + `CHECKLIST_00_INTEGRATION_AND_VALIDATION.md`).
-  Dispatching a Workflow to build all 5 modules in parallel, then integrate, then run a
-  hostile adversarial review pass on the engine itself before it is trusted with anything.
+  file and 6 per-module checklists (`CHECKLIST_01`..`CHECKLIST_05` + `CHECKLIST_00_INTEGRATION_AND_VALIDATION.md`)
+  plus `06_DISCOVERY_ENGINE/README.md`.
 
 ---
 

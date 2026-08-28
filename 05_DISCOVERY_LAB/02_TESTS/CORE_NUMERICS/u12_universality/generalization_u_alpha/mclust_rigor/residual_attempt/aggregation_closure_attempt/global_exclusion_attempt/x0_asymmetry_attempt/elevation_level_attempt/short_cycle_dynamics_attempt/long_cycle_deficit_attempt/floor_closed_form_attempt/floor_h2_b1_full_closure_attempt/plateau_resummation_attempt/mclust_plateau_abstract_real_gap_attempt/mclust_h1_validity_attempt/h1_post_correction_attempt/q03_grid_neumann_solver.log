@@ -1,0 +1,74 @@
+==============================================================================
+Fresh grid Neumann/Picard solver -- reproducing Sec 6.2/6.3/6.4
+==============================================================================
+
+----- c=100 -----
+  c=100, eps=0.100000, h=0.1, Ny=61, Nu=61, Nx=1491 (array size 90,951)
+  done in 0.23s, final core width Nx=51
+  y= 0.5: published = ['0.207', '0.076', '0.044', '0.031', '0.025']
+          this front = ['0.2067', '0.0760', '0.0442', '0.0314', '0.0247']
+          max rel diff (first 5 ratios) = 0.0118
+  y= 1.0: published = ['0.552', '0.197', '0.105', '0.068', '0.049']
+          this front = ['0.5516', '0.1970', '0.1052', '0.0678', '0.0490']
+          max rel diff (first 5 ratios) = 0.0023
+  y= 2.0: published = ['1.124', '0.432', '0.238', '0.154', '0.109']
+          this front = ['1.1244', '0.4323', '0.2379', '0.1536', '0.1089']
+          max rel diff (first 5 ratios) = 0.0028
+  y= 3.0: published = ['1.550', '0.622', '0.352', '0.232', '0.166']
+          this front = ['1.5502', '0.6218', '0.3522', '0.2319', '0.1665']
+          max rel diff (first 5 ratios) = 0.0029
+  y= 4.0: published = ['1.879', '0.775', '0.448', '0.299', '0.217']
+          this front = ['1.8792', '0.7748', '0.4475', '0.2991', '0.2172']
+          max rel diff (first 5 ratios) = 0.0011
+  y= 5.0: published = ['2.143', '0.901', '0.528', '0.357', '0.261']
+          this front = ['2.1431', '0.9011', '0.5280', '0.3568', '0.2615']
+          max rel diff (first 5 ratios) = 0.0018
+  y= 6.0: published = ['2.362', '1.008', '0.597', '0.407', '0.300']
+          this front = ['2.3615', '1.0079', '0.5969', '0.4069', '0.3003']
+          max rel diff (first 5 ratios) = 0.0009
+  n_cross(y) comparison (threshold ratio<0.5, this front's full
+  computed sequence vs predecessor's published Sec 6.4 values):
+    y= 0.5: published n_cross= 2   this front's n_cross=2
+    y= 1.0: published n_cross= 2   this front's n_cross=3  <-- differs, see Sec 5.3 disclosure
+    y= 2.0: published n_cross= 3   this front's n_cross=3
+    y= 3.0: published n_cross= 4   this front's n_cross=4
+    y= 4.0: published n_cross= 4   this front's n_cross=4
+    y= 5.0: published n_cross= 5   this front's n_cross=5
+    y= 6.0: published n_cross= 5   this front's n_cross=5
+
+----- c=1000 -----
+  c=1000, eps=0.031623, h=0.1, Ny=61, Nu=61, Nx=1491 (array size 90,951)
+  done in 0.20s, final core width Nx=51
+  y= 1.0: published = ['1.112', '0.447', '0.258', '0.175', '0.130']
+          this front = ['1.1125', '0.4468', '0.2580', '0.1749', '0.1301']
+          max rel diff (first 5 ratios) = 0.0010
+  y= 3.0: published = ['2.659', '1.121', '0.663', '0.454', '0.338']
+          this front = ['2.6593', '1.1207', '0.6631', '0.4541', '0.3376']
+          max rel diff (first 5 ratios) = 0.0011
+  y= 6.0: published = ['3.937', '1.728', '1.049', '0.732', '0.552']
+          this front = ['3.9373', '1.7281', '1.0494', '0.7320', '0.5519']
+          max rel diff (first 5 ratios) = 0.0004
+  n_cross(y) comparison (threshold ratio<0.5, this front's full
+  computed sequence vs predecessor's published Sec 6.4 values):
+    y= 0.5: published n_cross= 2   this front's n_cross=3  <-- differs, see Sec 5.3 disclosure
+    y= 1.0: published n_cross= 3   this front's n_cross=3
+    y= 2.0: published n_cross= 4   this front's n_cross=4
+    y= 3.0: published n_cross= 5   this front's n_cross=5
+    y= 4.0: published n_cross= 6   this front's n_cross=6
+    y= 5.0: published n_cross= 6   this front's n_cross=6
+    y= 6.0: published n_cross= 7   this front's n_cross=7
+
+==============================================================================
+Fine y-grid (step 0.5) n_cross(y) measurement and linear-fit slope,
+this front's own independent replication -- compared against the
+predecessor's own published fit (0.500y+2.200 at c=100,
+0.771y+2.467 at c=1000, ATTEMPT.md Sec 6.4)
+==============================================================================
+c=100: n_cross measured (0.5-step y-grid) = [2, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5]
+  this front's fit:      n_cross ~ 0.4895*y + 2.2424
+  predecessor's fit:     n_cross ~ 0.5000*y + 2.2000
+  slope rel. diff: 0.0210
+c=1000: n_cross measured (0.5-step y-grid) = [3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7]
+  this front's fit:      n_cross ~ 0.7552*y + 2.7121
+  predecessor's fit:     n_cross ~ 0.7710*y + 2.4670
+  slope rel. diff: 0.0204

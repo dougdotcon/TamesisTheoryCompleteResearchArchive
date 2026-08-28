@@ -913,6 +913,55 @@ flowchart TD
 > `.../mclust_h1_validity_attempt/h1_volterra_attempt/ATTEMPT.md`
 > e `.../h1_volterra_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-28 — `DISC-DEC-115`.]** Onda 24 frente (c)
+> (`MCLUST-H1-POST-CORRECTION-ATTEMPT`) reatacou `(U1)`/`(U2)` a
+> partir do limitante corrigido da onda 23 (`DISC-DEC-113`,
+> `\|K(y,t)\|\le\sqrt{\pi/2}+\varepsilon` uniforme) — uma rota
+> genuinamente indisponível antes da correção.
+>
+> **Progresso rigoroso genuíno, ainda sem fechar `(U1)`/`(U2)`.** Com
+> o limitante corrigido (constante, não crescendo em `y`), o teorema
+> clássico de quase-nilpotência de Volterra agora se aplica
+> incondicionalmente ao sistema valorado em `X=C_b([0,\infty))` —
+> PROVANDO (não apenas confirmando numericamente) que a série de
+> Neumann/Picard converge, localmente uniforme em `y` em todo
+> compacto `[0,Y]`, para todo `y` finito. Isto atualiza o status da
+> frente anterior de "confirmado numericamente... não provado
+> analiticamente" para PROVADO. Um limitante RIGOROSO e explícito
+> para o comprimento de aquecimento foi derivado,
+> `n_{\mathrm{cross,rig}}(y):=\lceil e\sqrt{\pi/2}\,y\rceil+1`
+> (via a desigualdade elementar `n!\ge(n/e)^n`), linear em `y`,
+> dominando corretamente todos os valores medidos empiricamente por
+> um fator de `~5-7\times` — respondendo diretamente o item 4 da
+> Seção 11 da frente anterior. **Diagnóstico preciso de por que
+> `(U1)`/`(U2)` NÃO fecham:** o resultado rigoroso controla
+> convergência na ORDEM `n` para `y` FIXO, não o comportamento do
+> valor resomado quando `y\to\infty` — nenhum truncamento fixo dá uma
+> aproximação uniformemente boa em todo `y`. Um obstáculo estrutural
+> adicional identificado (não atacado): `K(y,t)` não é invariante por
+> translação em `(y,t)`.
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem: um
+> terceiro solver de grade independente reproduzindo as tabelas
+> publicadas a 3-4 dígitos significativos; re-derivação independente
+> da prova elementar de `h_\varepsilon(z)\le\sqrt{\pi/2}` (confirmando
+> que a hipótese `\varepsilon<\sqrt{\pi/2}` é genuinamente necessária,
+> testando valores fora do regime deste arquivo onde o limitante
+> provadamente falha); confirmação da extensão Banach-valorada do
+> teorema clássico; re-derivação de `n_{\mathrm{cross,rig}}(y)` do
+> zero, 14/14 pontos; confirmação da falha de invariância por
+> translação por computação direta. Três achados BAIXA (uma
+> inconsistência interna de contagem na própria `ATTEMPT.md` da
+> frente, corrigida por nota datada; uma imprecisão descritiva menor;
+> uma restabelecida parcial de um fato clássico já citado, transparente
+> não escondida) — nenhum afeta qualquer alegação central.
+>
+> Veredito **SOUND — ACCEPT for catalogue**. `H1` permanece ABERTO;
+> `phi_REDB`, `Phi_U(c)`, `Phi_infinity(c)` e a lei assintótica de 4
+> termos: intocadas. Fontes:
+> `.../mclust_h1_validity_attempt/h1_post_correction_attempt/ATTEMPT.md`
+> e `.../h1_post_correction_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

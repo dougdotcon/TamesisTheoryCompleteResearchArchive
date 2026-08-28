@@ -1,0 +1,75 @@
+=== Check 1: R(0) two routes ===
+  R(0) via erfcx closed form  = 1.253314137315500251207882642405522626503493370305
+  R(0) via raw tail integral  = 1.253314137315500251207882642405522626503493370305
+  sqrt(pi/2)                  = 1.253314137315500251207882642405522626503493370305
+  max abs diff                = 0.0
+  PASS
+
+=== Check 2: R strictly decreasing on a fine grid [0,50] ===
+  strictly decreasing over 1001 points on [0,50]: True
+  PASS
+
+=== Check 3: R(z) <= 1/z for z>0, fine grid + a few large z ===
+  z=    0.01: R(z)=1.24337647e+00  1/z=1.00000000e+02  R<=1/z: True
+  z=     0.1: R(z)=1.15926240e+00  1/z=1.00000000e+01  R<=1/z: True
+  z=     0.5: R(z)=8.76364456e-01  1/z=2.00000000e+00  R<=1/z: True
+  z=       1: R(z)=6.55679542e-01  1/z=1.00000000e+00  R<=1/z: True
+  z=       2: R(z)=4.21369229e-01  1/z=5.00000000e-01  R<=1/z: True
+  z=       5: R(z)=1.92808105e-01  1/z=2.00000000e-01  R<=1/z: True
+  z=      10: R(z)=9.90285965e-02  1/z=1.00000000e-01  R<=1/z: True
+  z=      50: R(z)=1.99920096e-02  1/z=2.00000000e-02  R<=1/z: True
+  z=     100: R(z)=9.99900030e-03  1/z=1.00000000e-02  R<=1/z: True
+  z=    1000: R(z)=9.99999000e-04  1/z=1.00000000e-03  R<=1/z: True
+  z=   10000: R(z)=9.99999990e-05  1/z=1.00000000e-04  R<=1/z: True
+  PASS
+
+=== Check 4: numerical maximization of h_eps(z) over [0,500], fine grid,
+             multiple eps (including eps>sqrt(pi/2), out of archive range) ===
+  eps=0.010000 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=0.100000 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=0.031623 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=0.500000 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=1.000000 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=1.253314 (archive-relevant, eps<=sqrt(pi/2): True): max h_eps = 1.2533141373 at z=0.0000  (sqrt(pi/2)=1.2533141373)
+  eps=1.500000 (archive-relevant, eps<=sqrt(pi/2): False): max h_eps = 1.4979940081 at z=500.0000  (sqrt(pi/2)=1.2533141373)
+  eps=2.000000 (archive-relevant, eps<=sqrt(pi/2): False): max h_eps = 1.9979920081 at z=500.0000  (sqrt(pi/2)=1.2533141373)
+  eps=5.000000 (archive-relevant, eps<=sqrt(pi/2): False): max h_eps = 4.9979800082 at z=500.0000  (sqrt(pi/2)=1.2533141373)
+  eps=10.000000 (archive-relevant, eps<=sqrt(pi/2): False): max h_eps = 9.9979600085 at z=500.0000  (sqrt(pi/2)=1.2533141373)
+
+Reading: for eps <= sqrt(pi/2) (all archive-relevant eps=1/sqrt(c), c>=1),
+the max is at z=0 and equals sqrt(pi/2), confirming the two-case proof's
+conclusion on the relevant domain. For eps > sqrt(pi/2) (eps=1.5,2,5,10,
+OUTSIDE this lineage's regime), the max can exceed sqrt(pi/2) -- confirming
+the proof's 'eps<=sqrt(pi/2)' hypothesis is NOT vacuous: it is genuinely
+load-bearing for eps>sqrt(pi/2), where Case 2's final step 'eps<=sqrt(pi/2)'
+would fail and the bound sqrt(pi/2) would NOT hold globally.
+
+=== Check 5: boundary point z0=1/eps -- exact zero, no case-boundary gap ===
+  eps=0.1: z0=1/eps=10.000000, h_eps(z0) = 0.0 (should be exactly 0)
+  eps=0.03162277660168379: z0=1/eps=31.622777, h_eps(z0) = 0.0 (should be exactly 0)
+  eps=0.5: z0=1/eps=2.000000, h_eps(z0) = 0.0 (should be exactly 0)
+  eps=1.0: z0=1/eps=1.000000, h_eps(z0) = 0.0 (should be exactly 0)
+  PASS -- z0 correctly lies in the closure of both cases with no
+  boundary contradiction (both case-arguments give valid, if slack,
+  bounds exactly at z=z0; the proof's case split at z0 is a partition
+  of [0,inf) that double-covers only the single point z0, harmlessly).
+
+=== Check 6: eps=1/sqrt(c) for c>=1 always satisfies eps<sqrt(pi/2) ===
+  sqrt(pi/2) = 1.2533141373155003
+  eps at c=1:    1.0   (< sqrt(pi/2)? True)
+  eps at c=1.5:  0.816497   (< sqrt(pi/2)? True)
+  eps at c=2:    0.707107   (< sqrt(pi/2)? True)
+  eps at c=100:  0.100000
+  eps at c=1000: 0.031623
+  Since eps=1/sqrt(c) is strictly decreasing in c, and c=1 gives eps=1
+  < sqrt(pi/2)=1.253314, EVERY c>=1 gives eps<sqrt(pi/2) strictly.
+  So the front's claimed hypothesis range '0<eps<=sqrt(pi/2)' is even
+  slightly more generous than what the archive ever actually needs
+  (archive needs eps<1<=sqrt(pi/2), i.e. a STRICT subset) -- the stated
+  hypothesis is safe and not tight to the point of fragility for c=1.
+  PASS
+
+=== Check 7: high-precision sup confirmation (mpmath dps=50) ===
+  eps=0.1: grid-max h_eps=1.253314137315500 at z=0.0000  (sqrt(pi/2)=1.253314137315500)
+  eps=0.03162277660168379: grid-max h_eps=1.253314137315500 at z=0.0000  (sqrt(pi/2)=1.253314137315500)
+  PASS -- confirms sup attained at z=0 exactly, matching sqrt(pi/2).

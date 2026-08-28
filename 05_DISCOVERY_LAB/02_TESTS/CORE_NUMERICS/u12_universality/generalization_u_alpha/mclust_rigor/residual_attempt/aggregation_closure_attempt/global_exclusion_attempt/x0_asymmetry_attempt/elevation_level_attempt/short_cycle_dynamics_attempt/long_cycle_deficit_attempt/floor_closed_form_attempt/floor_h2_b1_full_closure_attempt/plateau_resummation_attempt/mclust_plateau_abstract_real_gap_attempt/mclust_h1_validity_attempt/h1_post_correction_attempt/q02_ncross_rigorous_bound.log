@@ -1,0 +1,111 @@
+==============================================================================
+Step 1 -- elementary proof that n! >= (n/e)^n for n>=1
+==============================================================================
+
+Proof: e^n = sum_{k=0}^infty n^k/k! >= n^n/n!  (keep only the k=n term of
+the series for e^n, all terms of a sum of positive numbers are >= any
+single term). Rearranging: n! >= n^n / e^n = (n/e)^n.  QED (elementary).
+
+  n=   1: n! = 1.000000e+00   (n/e)^n = 3.678794e-01   n! >= (n/e)^n: True
+  n=   2: n! = 2.000000e+00   (n/e)^n = 5.413411e-01   n! >= (n/e)^n: True
+  n=   5: n! = 1.200000e+02   (n/e)^n = 2.105608e+01   n! >= (n/e)^n: True
+  n=  10: n! = 3.628800e+06   (n/e)^n = 4.539993e+05   n! >= (n/e)^n: True
+  n=  50: n! = 3.041409e+64   (n/e)^n = 1.713074e+63   n! >= (n/e)^n: True
+  n= 100: n! = 9.332622e+157   (n/e)^n = 3.720076e+156   n! >= (n/e)^n: True
+
+==============================================================================
+Step 2 -- the rigorous kernel bound M, and the resulting term bound
+==============================================================================
+
+From p01: ||K(y,t)|| <= M := sqrt(pi/2) + eps, uniformly in x,y,t
+(0<=t<=y), on the FULL unrestricted x-domain.
+
+Classical Volterra n-fold iterated-kernel bound (simplex volume argument,
+re-derived/re-stated in the required reading, unconditional given only
+that M is finite):
+
+    ||K^{(n)}(y)||  <=  (M*y)^n / n!
+
+Combined with n! >= (n/e)^n:
+
+    ||K^{(n)}(y)||  <=  (M*y*e/n)^n                                  (*)
+
+which is:
+  - < 1              whenever  n > M*y*e
+  - < delta (0<delta<1)  whenever  (M*y*e/n)^n < delta, a sufficient
+    (not tightest) condition being  n >= ceil(M*y*e / (1 - ln(delta)))
+    is NOT needed for the leading-order claim; the SIMPLEST sufficient
+    threshold, used throughout this front, is just:
+
+        n_cross_rigorous(y) := ceil(M * e * y) + 1                    (**)
+
+    which guarantees (M*y)^n/n! < 1 for every n >= n_cross_rigorous(y)
+    (from n > M*y*e already sufficient via (*)), and in fact then
+    DECREASING super-exponentially in n beyond that point (standard
+    ratio-test argument: term(n+1)/term(n) = M*y/(n+1) < 1 once
+    n+1 > M*y, so the sequence (My)^n/n! is eventually strictly
+    decreasing, in fact geometrically-then-faster, once n exceeds M*y).
+
+sqrt(pi/2) = 1.25331413731550025120788264241
+e          = 2.71828182845904523536028747135
+e*sqrt(pi/2) = 3.40686104481554891873219190051   <-- the LEADING-ORDER slope (eps->0) of the
+                                    rigorous linear-in-y upper bound on n_cross(y)
+
+==============================================================================
+Step 3 -- rigorous n_cross(y) table, both c values used by the
+predecessor front (c=100, eps=0.1;  c=1000, eps=1/sqrt(1000))
+==============================================================================
+c=100, eps=0.100000, M=sqrt(pi/2)+eps=1.353314
+   y= 0.5:  n_cross_rigorous =   3   [(My)^n/n! at n=3: 5.164e-02,  at n=2: 2.289e-01]
+   y= 1.0:  n_cross_rigorous =   5   [(My)^n/n! at n=5: 3.783e-02,  at n=4: 1.398e-01]
+   y= 2.0:  n_cross_rigorous =   9   [(My)^n/n! at n=9: 2.148e-02,  at n=8: 7.143e-02]
+   y= 3.0:  n_cross_rigorous =  13   [(My)^n/n! at n=13: 1.308e-02,  at n=12: 4.187e-02]
+   y= 4.0:  n_cross_rigorous =  16   [(My)^n/n! at n=16: 2.598e-02,  at n=15: 7.680e-02]
+   y= 5.0:  n_cross_rigorous =  20   [(My)^n/n! at n=20: 1.664e-02,  at n=19: 4.919e-02]
+   y= 6.0:  n_cross_rigorous =  24   [(My)^n/n! at n=24: 1.088e-02,  at n=23: 3.215e-02]
+
+c=1000, eps=0.031623, M=sqrt(pi/2)+eps=1.284937
+   y= 0.5:  n_cross_rigorous =   3   [(My)^n/n! at n=3: 4.420e-02,  at n=2: 2.064e-01]
+   y= 1.0:  n_cross_rigorous =   5   [(My)^n/n! at n=5: 2.919e-02,  at n=4: 1.136e-01]
+   y= 2.0:  n_cross_rigorous =   8   [(My)^n/n! at n=8: 4.718e-02,  at n=7: 1.469e-01]
+   y= 3.0:  n_cross_rigorous =  12   [(My)^n/n! at n=12: 2.248e-02,  at n=11: 6.996e-02]
+   y= 4.0:  n_cross_rigorous =  15   [(My)^n/n! at n=15: 3.529e-02,  at n=14: 1.030e-01]
+   y= 5.0:  n_cross_rigorous =  19   [(My)^n/n! at n=19: 1.837e-02,  at n=18: 5.432e-02]
+   y= 6.0:  n_cross_rigorous =  22   [(My)^n/n! at n=22: 2.910e-02,  at n=21: 8.305e-02]
+
+==============================================================================
+Step 4 -- comparison against the predecessor's PUBLISHED empirical
+n_cross(y) table (h1_volterra_attempt/ATTEMPT.md Sec 6.4, transcribed
+as plain text -- not read from any script)
+==============================================================================
+c=100:
+      y   empirical n_cross (predecessor, Sec 6.4)    rigorous UPPER bound (this front)   slack (rigorous - empirical)
+    0.5                                          2                                    3                              1
+    1.0                                          2                                    5                              3
+    2.0                                          3                                    9                              6
+    3.0                                          4                                   13                              9
+    4.0                                          4                                   16                             12
+    5.0                                          5                                   20                             15
+    6.0                                          5                                   24                             19
+
+c=1000:
+      y   empirical n_cross (predecessor, Sec 6.4)    rigorous UPPER bound (this front)   slack (rigorous - empirical)
+    0.5                                          2                                    3                              1
+    1.0                                          3                                    5                              2
+    2.0                                          4                                    8                              4
+    3.0                                          5                                   12                              7
+    4.0                                          6                                   15                              9
+    5.0                                          6                                   19                             13
+    6.0                                          7                                   22                             15
+
+Reading: the empirical n_cross(y) values (predecessor's own,
+threshold ratio<0.5) fall COMFORTABLY below the rigorous upper bound
+derived here from first principles via the CORRECTED, constant kernel
+bound M=sqrt(pi/2)+eps -- as expected for a worst-case, crude
+sup-norm bound (which discards all sign/cancellation structure the
+true iterated kernel has). Both are LINEAR in y (matching
+qualitatively), but the rigorous slope (e*M ~ 3.4-3.5) is roughly
+5-7x the empirically measured slope (~0.5-0.77) -- an honest,
+quantified gap, consistent with (and now quantified far more
+precisely than) the predecessor's own honest observation that the
+crude bound over-predicts the true growth rate.

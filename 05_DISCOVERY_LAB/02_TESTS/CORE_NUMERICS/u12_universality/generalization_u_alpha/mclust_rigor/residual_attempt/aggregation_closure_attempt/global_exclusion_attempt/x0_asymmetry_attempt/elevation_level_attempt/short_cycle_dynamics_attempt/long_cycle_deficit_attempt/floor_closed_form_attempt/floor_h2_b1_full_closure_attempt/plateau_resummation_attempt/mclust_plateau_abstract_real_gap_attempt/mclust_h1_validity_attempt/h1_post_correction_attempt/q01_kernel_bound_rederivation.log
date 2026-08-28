@@ -1,0 +1,90 @@
+==============================================================================
+PART 1 -- symbolic re-derivation of the x'+w = x+y cancellation
+==============================================================================
+x' + w - (x+y) simplifies to: 0
+PASS: x'+w = x+y identically, independent of w.
+
+Full symbolic check of the composite-operator kernel exponent:
+exponent_raw - exponent_claimed simplifies to: 0
+PASS: the exponent depends on (x,y) only through x+y, confirmed symbolically.
+
+==============================================================================
+PART 2 -- elementary (non-numerical) proof that h_eps(z) <= sqrt(pi/2)
+==============================================================================
+
+Definitions used (from the required reading, established there):
+  R(z) := sqrt(pi/2) * erfcx(z/sqrt(2))   [ = psi1(z) ]
+  R(0) = sqrt(pi/2)                        (exact, standard erfcx(0)=1)
+  R strictly decreasing on [0,infinity)     (established fact, record)
+  R(z) <= 1/z  for z > 0                    (established fact, record)
+
+Claim: h_eps(z) := |1 - eps*z| * R(z)  satisfies  h_eps(z) <= sqrt(pi/2) for
+ALL z >= 0, ALL eps > 0, attained (only) at z=0.
+
+Proof (elementary, split at z0 := 1/eps):
+
+  Case A, 0 <= z <= 1/eps:
+    |1-eps*z| = 1-eps*z <= 1        (since eps*z <= 1 on this range)
+    R(z) <= R(0) = sqrt(pi/2)        (R decreasing)
+    => h_eps(z) = (1-eps*z)*R(z) <= 1 * sqrt(pi/2) = sqrt(pi/2).
+
+  Case B, z >= 1/eps > 0:
+    |1-eps*z| = eps*z - 1 <= eps*z
+    R(z) <= 1/z                      (established fact, valid since z>0)
+    => h_eps(z) <= (eps*z)*(1/z) = eps.
+    Since eps = 1/z0 and we are told (WLOG, this lineage's regime c>=1,
+    i.e. eps<=1) that eps <= sqrt(pi/2) whenever eps <= 1.2533..., which
+    holds for every eps<=1 (i.e. c>=1) -- so on Case B, h_eps(z) <= eps <=
+    sqrt(pi/2) as well, for eps<=sqrt(pi/2).
+
+  Combining: h_eps(z) <= sqrt(pi/2) for every z>=0, for every eps in
+  (0, sqrt(pi/2)] -- in particular for every eps=1/sqrt(c), c>=1 (the
+  only regime relevant to this lineage, since c is a positive-integer-like
+  scale parameter and eps=1/sqrt(c) <= 1 <= sqrt(pi/2) for c>=1).
+
+  Sharpness: at z=0, |1-0|*R(0) = R(0) = sqrt(pi/2) exactly, matching the
+  Case A bound exactly -- so sqrt(pi/2) is not merely an upper bound, it
+  IS the global supremum, attained at z=0.
+QED (elementary; no numerical search of any kind was used in this proof).
+
+Numerical sanity check of the elementary proof (NOT how the bound was
+derived -- confirms it after the fact):
+  R(0) via closed form                = 1.253314137315500251207882642405522626503493370305
+  R(0) via direct integral definition  = 1.253314137315500251207882642405522626503493370305
+  (these should match to full mp.dps precision)
+
+  eps=0.100000: scanned max(h_eps) = 1.253314137315500251207882642405522626503493370305  at z~0.000   (sqrt(pi/2)=1.253314137315500251207882642405522626503493370305, diff=0.0)
+  eps=0.031623: scanned max(h_eps) = 1.253314137315500251207882642405522626503493370305  at z~0.000   (sqrt(pi/2)=1.253314137315500251207882642405522626503493370305, diff=0.0)
+  eps=0.500000: scanned max(h_eps) = 1.253314137315500251207882642405522626503493370305  at z~0.000   (sqrt(pi/2)=1.253314137315500251207882642405522626503493370305, diff=0.0)
+  eps=1.000000: scanned max(h_eps) = 1.253314137315500251207882642405522626503493370305  at z~0.000   (sqrt(pi/2)=1.253314137315500251207882642405522626503493370305, diff=0.0)
+
+Scanned maxima all <= sqrt(pi/2) (up to grid resolution near z=0),
+consistent with the elementary proof above; the true max is exactly
+at z=0 (grid cannot land closer than the grid step, hence tiny gap).
+
+==============================================================================
+PART 3 -- does sup_{z>=y} h_eps(z) grow with y?  (independent scan)
+==============================================================================
+eps = 0.100000  (c = 100.000)
+   y=     0.0:  sup_{z>=y} h_eps(z)  ~  1.25331413731550025120788264241
+   y=     1.0:  sup_{z>=y} h_eps(z)  ~  0.590111588176918624389484107658
+   y=     5.0:  sup_{z>=y} h_eps(z)  ~  0.0975296594949108606872828124001
+   y=    20.0:  sup_{z>=y} h_eps(z)  ~  0.097617926943675343877417347375
+   y=   100.0:  sup_{z>=y} h_eps(z)  ~  0.0979992077694455563095403572403
+   y=  1000.0:  sup_{z>=y} h_eps(z)  ~  0.099285612598551120327959913985
+   y= 10000.0:  sup_{z>=y} h_eps(z)  ~  0.0999038443055961052017079505714
+
+eps = 0.031623  (c = 1000.000)
+   y=     0.0:  sup_{z>=y} h_eps(z)  ~  1.25331413731550025120788264241
+   y=     1.0:  sup_{z>=y} h_eps(z)  ~  0.634945134726594555004239758996
+   y=     5.0:  sup_{z>=y} h_eps(z)  ~  0.162322466603283334727777723224
+   y=    20.0:  sup_{z>=y} h_eps(z)  ~  0.0292410913493934923845167088188
+   y=   100.0:  sup_{z>=y} h_eps(z)  ~  0.0296222579861746621506199787535
+   y=  1000.0:  sup_{z>=y} h_eps(z)  ~  0.0309084240915042662607099447901
+   y= 10000.0:  sup_{z>=y} h_eps(z)  ~  0.0315266215394779058003145304525
+
+Reading: at every eps tested, sup_{z>=y} h_eps(z) does NOT grow with
+y -- it is of order eps for y large, consistent with h_eps(z)->eps as
+z->infinity (since R(z)~1/z, |1-eps z|~eps z for large z). No growth
+in y anywhere. Independently confirms (does not merely trust) the
+qualitative finding of DISC-DEC-113 / the referee report's Finding H1.

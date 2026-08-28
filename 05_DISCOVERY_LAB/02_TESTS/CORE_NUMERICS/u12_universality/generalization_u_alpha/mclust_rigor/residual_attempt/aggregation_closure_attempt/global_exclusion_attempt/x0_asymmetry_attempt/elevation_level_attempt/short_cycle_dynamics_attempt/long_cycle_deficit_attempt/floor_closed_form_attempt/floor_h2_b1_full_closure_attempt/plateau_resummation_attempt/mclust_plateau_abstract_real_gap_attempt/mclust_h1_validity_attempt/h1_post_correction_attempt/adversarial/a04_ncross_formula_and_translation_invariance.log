@@ -1,0 +1,109 @@
+======================================================================
+PART A: n! >= (n/e)^n, re-derived and checked
+======================================================================
+Proof: e^n = sum_{k=0}^inf n^k/k! >= n^n/n! (single term k=n, all
+terms of the sum being positive). Rearranging: n! >= n^n/e^n = (n/e)^n.
+  n=   1: n! = 1.0   (n/e)^n = 0.36787944   n!>=(n/e)^n: True
+  n=   2: n! = 2.0   (n/e)^n = 0.54134113   n!>=(n/e)^n: True
+  n=   5: n! = 120.0   (n/e)^n = 21.056084   n!>=(n/e)^n: True
+  n=  10: n! = 3628800.0   (n/e)^n = 453999.3   n!>=(n/e)^n: True
+  n=  20: n! = 2.432902e+18   (n/e)^n = 2.1612762e+17   n!>=(n/e)^n: True
+  n=  50: n! = 3.0414093e+64   (n/e)^n = 1.713074e+63   n!>=(n/e)^n: True
+  n= 100: n! = 9.3326215e+157   (n/e)^n = 3.720076e+156   n!>=(n/e)^n: True
+  n= 500: n! = 1.2201368e+1134   (n/e)^n = 2.1765128e+1132   n!>=(n/e)^n: True
+
+======================================================================
+PART B: n_cross_rigorous(y) := ceil(M*e*y)+1, re-derived from scratch
+======================================================================
+Claim: (My)^n/n! <= (My*e/n)^n  [via n!>=(n/e)^n]  < 1  iff  My*e/n < 1
+  iff  n > M*y*e.  So n_cross_rigorous(y) := ceil(M*y*e)+1 guarantees
+  n >= n_cross_rigorous(y)  =>  n > M*y*e  =>  (My)^n/n! < 1.  Re-derived.
+
+Leading-order (eps->0) slope: e*sqrt(pi/2) = 3.40686  (target claims 3.40686...)
+
+Reproduction of target's Sec 4.3 table (rigorous bound column):
+c=100:  M=1.3533
+   y=0.5: mine=3  target=3  match=True
+   y=1.0: mine=5  target=5  match=True
+   y=2.0: mine=9  target=9  match=True
+   y=3.0: mine=13  target=13  match=True
+   y=4.0: mine=16  target=16  match=True
+   y=5.0: mine=20  target=20  match=True
+   y=6.0: mine=24  target=24  match=True
+c=1000: M=1.2849
+   y=0.5: mine=3  target=3  match=True
+   y=1.0: mine=5  target=5  match=True
+   y=2.0: mine=8  target=8  match=True
+   y=3.0: mine=12  target=12  match=True
+   y=4.0: mine=15  target=15  match=True
+   y=5.0: mine=19  target=19  match=True
+   y=6.0: mine=22  target=22  match=True
+
+All match: True
+
+Also verify strict inequality/monotone-decrease claim: term(n+1)/term(n)
+= My/(n+1); once n+1 > My, ratio < 1 and is itself decreasing in n
+(since My/(n+1) shrinks as n grows) -- so once (My)^n/n!<1 is first
+achieved, the SEQUENCE (My)^n/n! is thereafter strictly decreasing,
+confirmed symbolically (ratio formula is a decreasing function of n
+for n+1>My>0, trivial calculus) and numerically below:
+  y=3.0, M=1.353: terms n=13..18: ['1.308e-02', '3.792e-03', '1.026e-03', '2.604e-04', '6.220e-05', '1.403e-05']
+    strictly decreasing: True
+  y=6.0, M=1.285: terms n=22..27: ['2.910e-02', '9.756e-03', '3.134e-03', '9.665e-04', '2.866e-04', '8.183e-05']
+    strictly decreasing: True
+
+======================================================================
+PART C: is K(y,t) translation-invariant in (y,t), i.e. a function of
+(y-t) alone?  Direct test on a concrete test function f(x)=1.
+======================================================================
+K(y,t) = M_y o K_A^raw(y,t) + K_B(y-t)
+  K_B(h) = int_0^h e^{-v/eps} S_v dv          -- manifestly depends on h=y-t ONLY
+  M_y o K_A^raw(y,t) acting on f=1, at x=0:
+    (K_A^raw(y,t)[1])(0) = int_t^y e^{-(y-w)/eps} * (T_w[1])(0-(y-w)) ... 
+  -- easier: use the CLOSED bound-derivation's own reduction (Sec 2 of the
+  target, re-derived independently in a01): the exact identity gives
+    (K_A^raw(y,t)[1])(x) <= eps*R(x+y)  with equality structure
+  and more precisely, from Sec 4.1 of h1_volterra_attempt (cited, re-derived
+  in a01/a05): (S_{y-w}T_w[1])(x) = int_0^inf e^{-u^2/2-u(x+y)} du = R(x+y)
+  (independent of w!), so
+    (K_A^raw(y,t)[1])(x) = R(x+y) * int_t^y e^{-(y-w)/eps} dw
+                          = R(x+y) * eps*(1-e^{-(y-t)/eps})
+  and  (M_y K_A^raw(y,t)[1])(x) = [(1-eps(x+y))/eps] * R(x+y) * eps*(1-e^{-(y-t)/eps})
+                                = (1-eps(x+y))*R(x+y) * (1-e^{-(y-t)/eps})
+
+This factors as [function of (x,y) ONLY] * [function of (y-t) ONLY].
+Since the SECOND factor depends only on h:=y-t, but the FIRST factor,
+(1-eps(x+y))*R(x+y), depends on y directly (not merely on y-t), the
+full expression is translation-invariant in (y,t) ONLY IF x is allowed
+to co-vary with y -- but x is an INDEPENDENT coordinate (the Banach-
+space index), so at FIXED x, K(y,t)[1](x) genuinely depends on y and
+t separately (through y alone, in the first factor), not merely on h=y-t.
+
+Direct numerical check: fix x=0, h=y-t=1.0, vary y (=t+1) and confirm
+(M_y K_A^raw(y,t)[1])(0) is NOT constant as y varies at fixed h:
+  (eps=0.1, x=0, h=y-t=1.0 fixed)
+    y=   1.0, t=   0.0, y-t=1.0: (M_y K_A^raw(y,t)[1])(0) = 0.59008480
+    y=   2.0, t=   1.0, y-t=1.0: (M_y K_A^raw(y,t)[1])(0) = 0.33708008
+    y=   5.0, t=   4.0, y-t=1.0: (M_y K_A^raw(y,t)[1])(0) = 0.09639968
+    y=  10.0, t=   9.0, y-t=1.0: (M_y K_A^raw(y,t)[1])(0) = 0.00000000
+    y=  50.0, t=  49.0, y-t=1.0: (M_y K_A^raw(y,t)[1])(0) = -0.07996441
+
+CONCLUSION: the value visibly changes as y grows at FIXED h=y-t -- K(y,t)
+is NOT translation-invariant in (y,t); confirms the target's Claim 4
+by direct, independent computation (not merely restating the target's
+own structural argument).
+
+Also check: is there an OBVIOUS reformulation that restores translation
+invariance (e.g. a substitution absorbing the y-dependence)? The first
+factor (1-eps(x+y))*R(x+y) depends on the SUM x+y, i.e. it IS translation-
+invariant along characteristics x+y=const (matching the x+y-conservation
+structural fact already established in the required reading) -- but x
+and y are independently-varying coordinates of the Banach-space-valued
+problem (x indexes the FUNCTION SPACE, y is the Volterra 'time'), so
+fixing x and varying y necessarily moves x+y too. No reparametrization
+that holds x fixed (as the Banach-space evaluation point) can remove
+this: translation invariance in (y,t) would require the kernel to
+depend on (y-t) ALONE for every fixed x, which the x+y-dependence of
+the first factor directly rules out. The target's identification of
+this obstacle appears CORRECT and not resolvable by a missed change of
+variables at fixed x.

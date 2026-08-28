@@ -1,6 +1,17 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-114`: onda 24 autorizada
+**Última atualização:** 2026-08-28 (`DISC-DEC-115`: onda 24 frente (c)
+`MCLUST-H1-POST-CORRECTION-ATTEMPT` integrada no
+`PROOF_DEPENDENCY_MAP.md` (nó `PLATRESUM`) — usando o limitante
+corrigido da `DISC-DEC-113`, PROVOU (não apenas confirmou
+numericamente) que a série de Neumann/Picard converge, localmente
+uniforme em `y`, para todo `y` finito, mais um limitante rigoroso
+explícito para o comprimento de aquecimento `n_cross(y)`, linear em
+`y`. `(U1)`/`(U2)`/`H1` permanecem ABERTOS — diagnóstico preciso de
+por que (controla ordem `n` para `y` fixo, não o limite `y→∞`).
+Referee hostil: SOUND — ACCEPT for catalogue, nenhum erro matemático,
+apenas 3 achados BAIXA.
+Anterior: `DISC-DEC-114`: onda 24 autorizada
 — 3 frentes paralelas grounded no que a onda 23 acabou de desbloquear:
 (a) `K4-FULL-CDF-ATTEMPT`, estendendo o padrão D1/D2/D3 para `K=4`
 usando o Teorema de Decomposição Completa/Proposição S agora

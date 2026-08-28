@@ -7558,3 +7558,59 @@ decisions:
       (incluindo, para (c), o limitante CORRIGIDO da onda 23, nao o
       original refutado), e a escopar honestamente PROVADO vs OPEN vs
       NOT ATTEMPTED, seguindo a disciplina padrao desta trilha.
+
+  - id: DISC-DEC-115
+    date: 2026-08-28
+    decision: >
+      Onda 24 frente (c) MCLUST-H1-POST-CORRECTION-ATTEMPT integrada no
+      PROOF_DEPENDENCY_MAP.md (nó PLATRESUM). Usando o limitante
+      corrigido da onda 23 (DISC-DEC-113, ||K(y,t)||<=sqrt(pi/2)+eps
+      uniforme), esta frente PROVOU (nao apenas confirmou
+      numericamente) que a serie de Neumann/Picard converge, localmente
+      uniforme em y em todo compacto [0,Y], para todo y finito --
+      atualizando o status do predecessor de "confirmado
+      numericamente" para PROVADO. Tambem derivou um limitante
+      RIGOROSO e explicito para o "comprimento de aquecimento"
+      n_cross(y), linear em y com inclinacao e*sqrt(pi/2)~=3.407, via
+      a desigualdade elementar n!>=(n/e)^n -- respondendo diretamente
+      o item 4 da Secao 11 do predecessor ("uma derivacao rigorosa da
+      taxa de crescimento de n_cross(y) ... nao foi tentada"). O
+      limitante rigoroso domina corretamente todos os valores medidos
+      empiricamente (por um fator de ~5-7x, como esperado para um
+      limitante de pior caso). Diagnostico preciso de por que
+      (U1)/(U2) NAO fecham: o resultado rigoroso controla convergencia
+      na ORDEM n para y FIXO, nao o comportamento do valor resomado
+      quando y->infinito -- nenhum truncamento fixo da uma aproximacao
+      uniformemente boa em todo y. Um obstaculo estrutural adicional
+      identificado (nao atacado): K(y,t) nao e invariante por
+      translacao em (y,t). Referee hostil dedicado: SOUND -- ACCEPT
+      for catalogue, nenhum erro matematico. Confirmou a prova
+      elementar do limitante h_eps(z)<=sqrt(pi/2) (incluindo por que
+      a hipotese eps<sqrt(pi/2) e genuinamente necessaria, testando
+      valores de eps fora do regime do arquivo onde o limitante
+      provadamente falha); confirmou a extensao Banach-valorada do
+      teorema classico de Volterra; reproduziu n_cross_rigorous(y) do
+      zero, 14/14 pontos; confirmou a falha de invariancia por
+      translacao por computacao direta; terceiro solver de grade
+      independente reproduzindo as tabelas publicadas a 3-4 digitos
+      significativos. Tres achados BAIXA: (L1) inconsistencia interna
+      de contagem na propria ATTEMPT.md da frente ("11/14... 3/14"
+      deveria ser "12/14... 2/14", apenas 2 pontos realmente
+      divergem, nao 3) -- corrigido por nota datada; (L2) imprecisao
+      descritiva menor sobre a inclinacao numerica observada; (L3)
+      "teorema genuinamente novo" restabelece parcialmente um fato
+      classico ja citado pelo predecessor -- transparente, nao
+      escondido. Nenhum dos tres afeta qualquer alegacao central.
+    scope: >
+      Arquivos afetados: PROOF_DEPENDENCY_MAP.md (novo adendo datado
+      sob PLATRESUM); .../h1_post_correction_attempt/ATTEMPT.md (1
+      nota datada, Secao 5.3/10, corrigindo contagem 11/14->12/14);
+      DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- M-CLUST(b) e um
+      mecanismo separado, tambem interno. Nenhuma formula de registro
+      anterior alterada (phi_REDB, Phi_U(c), Phi_infinity(c), lei
+      assintotica de 4 termos: intocadas). H1/(U1)/(U2) permanecem
+      ABERTOS -- o resultado, embora genuinamente novo e rigoroso, e
+      precisamente diagnosticado como insuficiente para fechar H1,
+      nao apresentado como fechamento parcial indevido.

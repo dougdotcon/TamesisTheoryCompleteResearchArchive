@@ -1,0 +1,79 @@
+======================================================================
+PART A: successive-difference ratio spot-check
+======================================================================
+c=100, y=0.5: this referee's ratios (n=2..6) = [np.float64(0.2067), np.float64(0.076), np.float64(0.0442), np.float64(0.0314), np.float64(0.0247)]
+c=100, y=1.0: this referee's ratios (n=2..6) = [np.float64(0.5516), np.float64(0.197), np.float64(0.1052), np.float64(0.0678), np.float64(0.049)]
+c=100, y=2.0: this referee's ratios (n=2..6) = [np.float64(1.1244), np.float64(0.4323), np.float64(0.2379), np.float64(0.1536), np.float64(0.1089)]
+
+Published (h1_volterra_attempt Sec 6.2, transcribed as plain text):
+  c=100, y=0.5: [0.207, 0.076, 0.044, 0.031, 0.025]
+  c=100, y=1.0: [0.552, 0.197, 0.105, 0.068, 0.049]
+  c=100, y=2.0: [1.124, 0.432, 0.238, 0.154, 0.109]
+
+c=1000, y=1.0: this referee's ratios (n=2..6) = [np.float64(1.1125), np.float64(0.4468), np.float64(0.258), np.float64(0.1749), np.float64(0.1301)]
+Published (h1_volterra_attempt Sec 6.3): [1.112, 0.447, 0.258, 0.175, 0.130]
+  (elapsed so far: 0.3s)
+
+======================================================================
+PART B: n_cross(y) fine grid, c=100 and c=1000, y=0.5..6.0 step 0.5
+======================================================================
+  (c=100 solve done, elapsed 0.7s)
+  (c=1000 solve done, elapsed 1.2s)
+
+c=100, eps=0.100000, M=sqrt(pi/2)+eps=1.353314:
+     y  n_cross (this ref.)   n_cross_rigorous   dominates?
+   0.5                    2                  3         True
+   1.0                    3                  5         True
+   1.5                    3                  7         True
+   2.0                    3                  9         True
+   2.5                    4                 11         True
+   3.0                    4                 13         True
+   3.5                    4                 14         True
+   4.0                    4                 16         True
+   4.5                    4                 18         True
+   5.0                    5                 20         True
+   5.5                    5                 22         True
+   6.0                    5                 24         True
+
+c=1000, eps=0.031623, M=sqrt(pi/2)+eps=1.284937:
+     y  n_cross (this ref.)   n_cross_rigorous   dominates?
+   0.5                    3                  3         True
+   1.0                    3                  5         True
+   1.5                    4                  7         True
+   2.0                    4                  8         True
+   2.5                    5                 10         True
+   3.0                    5                 12         True
+   3.5                    6                 14         True
+   4.0                    6                 15         True
+   4.5                    6                 17         True
+   5.0                    6                 19         True
+   5.5                    7                 21         True
+   6.0                    7                 22         True
+
+Total elapsed: 1.2s
+
+======================================================================
+PART C: comparison against predecessor's/target's published integer-y table
+======================================================================
+
+c=100:
+     y   predecessor pub.   this referee   match?
+   0.5                  2              2     True
+   1.0                  2              3    False
+   2.0                  3              3     True
+   3.0                  4              4     True
+   4.0                  4              4     True
+   5.0                  5              5     True
+   6.0                  5              5     True
+  exact matches: 6/7
+
+c=1000:
+     y   predecessor pub.   this referee   match?
+   0.5                  2              3    False
+   1.0                  3              3     True
+   2.0                  4              4     True
+   3.0                  5              5     True
+   4.0                  6              6     True
+   5.0                  6              6     True
+   6.0                  7              7     True
+  exact matches: 6/7

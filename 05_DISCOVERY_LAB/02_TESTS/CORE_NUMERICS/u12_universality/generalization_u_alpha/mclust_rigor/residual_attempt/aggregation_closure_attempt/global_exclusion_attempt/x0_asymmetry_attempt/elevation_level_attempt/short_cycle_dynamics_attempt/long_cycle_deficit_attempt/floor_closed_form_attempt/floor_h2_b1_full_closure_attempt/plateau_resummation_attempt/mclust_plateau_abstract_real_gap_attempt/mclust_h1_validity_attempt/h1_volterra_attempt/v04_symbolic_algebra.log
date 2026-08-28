@@ -1,0 +1,15 @@
+Check A: W (via KEY+E1 substitution) - (1-eps(x+y))Psi - eps*I  simplifies to: 0
+  PASS: W = (1 - eps*(x+y))*Psi + eps*I   is an exact algebraic consequence of (E1)+(KEY).
+
+Check B: (x+v)+(y-v) - (x+y) simplifies to: 0
+  PASS: x+y is exactly invariant along the (E2) shift (x,y)->(x+v,y-v).
+  => the coefficient (1-eps(x'+y')) at the shifted point (x+v,y-v) equals
+     (1-eps(x+y)) at the ORIGINAL point -- a CONSTANT w.r.t. the integration
+     variable v -- hence can be pulled outside the v-integral in (E2), giving (E2').
+
+Check C (structural, by inspection -- linearity of integration):
+  (1/eps) * int_0^y e^{-v/eps} * [(1-eps*xi)*Psi(x+v,y-v) + eps*I(x+v,y-v)] dv
+  = [(1-eps*xi)/eps] * int_0^y e^{-v/eps} Psi(x+v,y-v) dv   +   int_0^y e^{-v/eps} I(x+v,y-v) dv
+  = [(1-eps*(x+y))/eps] * A(x,y)  +  B(x,y)                         (E2')
+  -- valid because (1-eps*xi) does not depend on the integration variable v
+     (Check B), so it is a legitimate constant-factor pull-out, not an approximation.

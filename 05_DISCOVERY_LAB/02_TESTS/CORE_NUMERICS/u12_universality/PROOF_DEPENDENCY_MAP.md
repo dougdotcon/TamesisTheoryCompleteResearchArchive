@@ -844,6 +844,75 @@ flowchart TD
 > `.../mclust_h1_validity_attempt/h1_energy_estimate_attempt/ATTEMPT.md`
 > e `.../h1_energy_estimate_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-28 — `DISC-DEC-113`.]** Onda 23 frente (c)
+> (`MCLUST-H1-VOLTERRA-ATTEMPT`) atacou `(U1)`/`(U2)` pela via
+> Volterra-em-`y` da identidade de renovação exata `(E2)`, nomeada
+> pela frente anterior como "a avenida mais promissora, inteiramente
+> não explorada."
+>
+> **Não-fechamento honesto de `(U1)`/`(U2)`, com conteúdo novo
+> genuíno, e uma correção real aplicada pós-adversarial.** A frente
+> derivou uma nova identidade algébrica livre de derivada para `W`
+> (`W=(1-\varepsilon(x+y))\Psi+\varepsilon I`, via substituição direta
+> de `(E1)` em `(KEY)`, resolvendo a "perda de derivada" nomeada pela
+> frente anterior); uma reformulação exata `(E2')`, "constante
+> retirada", explorando a invariância `x+y` ao longo do deslocamento
+> de convolução de `(E2)`; e identificou corretamente que o sistema
+> fechado é uma equação de Volterra linear valorada em espaço de
+> Banach em `y` (não a versão escalar de domínio compacto clássica).
+> Construiu também uma nova iteração de Neumann/Picard em grade,
+> independente, mostrando numericamente que a série real (não
+> linearizada) converge em todo `y` testado, com uma estrutura de
+> duas fases (aquecimento, depois decaimento super-geométrico) cujo
+> comprimento de aquecimento cresce aproximadamente linear em `y`.
+>
+> **Porém, a alegação central da frente — que a limitação do núcleo
+> completo "depende inteiramente" de um operador de multiplicação
+> `M_y` não-limitado, isolando "o conteúdo real da obstrução" — estava
+> ERRADA**, um erro real (não apenas overclaiming), encontrado pelo
+> referee hostil e reconfirmado independentemente pela sessão
+> orquestradora: a frente nunca limitou o operador COMPOSTO
+> `M_y\circ K_A^{\mathrm{raw}}(y,t)` que de fato aparece no núcleo —
+> apenas o `M_y` isolado, e `\|AB\|\le\|A\|\|B\|` nada diz quando
+> `\|A\|=\infty`. Explorando um cancelamento exato
+> (`x'+w=x+y`, independente de `w`) que a própria álgebra da frente
+> produz mas nunca usa, o operador composto satisfaz o limitante mais
+> afiado `\|M_yK_A^{\mathrm{raw}}(y,t)\|\le h_\varepsilon(x+y)`,
+> `h_\varepsilon(z):=|1-\varepsilon z|R(z)`, que é **globalmente
+> limitado por `\sqrt{\pi/2}`** (atingido em `z=0`) e **não cresce em
+> `y`** — o oposto exato do que a frente alegou. O núcleo completo
+> `K(y,t)` é, portanto, limitado por `\sqrt{\pi/2}+\varepsilon`
+> **uniformemente**, incluindo no domínio `x` irrestrito. Isto NÃO
+> afeta o veredito geral de não-fechamento de `H1`/`(U1)`/`(U2)`
+> (permanecem ABERTOS) nem as demais seções da frente (álgebra,
+> estrutura de Volterra, numérica de Neumann/Picard) — apenas
+> invalida o mecanismo de diagnóstico específico alegado como
+> contribuição central da Parte C, e a alegação relacionada de que
+> duas rotas independentes (esta e a Lipschitz `<=1` da frente
+> anterior) convergiam no mesmo mecanismo (apenas a rota Lipschitz
+> permanece válida). Correção datada aplicada diretamente na
+> `ATTEMPT.md` da frente (Seções "VERDICT UP FRONT", 4.4, 4.6, 10).
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem:
+> confirmou a álgebra da Seção 2 e a reformulação `(E2')` da Seção 3
+> palavra por palavra contra o texto original das frentes citadas;
+> confirmou o teorema clássico de quase-nilpotência de Volterra da
+> Seção 3.4 corretamente enunciado; confirmou os limitantes
+> individuais (isolados) de `K_B` e `K_A^{\mathrm{raw}}` da Seção 4.2-4.3
+> corretos; reproduziu independentemente as tabelas numéricas da
+> Seção 6 a 3-4 dígitos significativos via solver de grade próprio;
+> e encontrou o erro acima (achado H1, ALTA) por computação direta
+> em duas rotas independentes (forma fechada + quadratura dupla
+> bruta), que a sessão orquestradora reconfirmou por conta própria
+> antes de aceitar a correção.
+>
+> Veredito **NEEDS REVISION** (não uma rejeição da contribuição da
+> frente como um todo — uma correção à Seção 4 especificamente). `H1`
+> permanece ABERTO; `phi_REDB`, `Phi_U(c)`, `Phi_infinity(c)` e a lei
+> assintótica de 4 termos: intocadas. Fontes:
+> `.../mclust_h1_validity_attempt/h1_volterra_attempt/ATTEMPT.md`
+> e `.../h1_volterra_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

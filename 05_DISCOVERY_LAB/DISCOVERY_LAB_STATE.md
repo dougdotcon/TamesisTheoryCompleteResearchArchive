@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-112`: onda 23 frente (a)
+**Última atualização:** 2026-08-28 (`DISC-DEC-113`: onda 23 frente (c)
+`MCLUST-H1-VOLTERRA-ATTEMPT` integrada no `PROOF_DEPENDENCY_MAP.md`
+(nó `PLATRESUM`, M-CLUST(b), objeto separado do `THEOREM.md`).
+Não-fechamento honesto de `(U1)`/`(U2)`, com conteúdo novo genuíno
+(identidade `W` livre de derivada; reformulação `(E2')`; estrutura de
+Volterra valorada em Banach; nova iteração numérica de Neumann/Picard)
+— mas a alegação central da Seção 4 (obstrução isolada a um operador
+`M_y` não-limitado) estava **errada**: o referee hostil encontrou que
+o operador COMPOSTO relevante é, na verdade, limitado uniformemente
+por `sqrt(pi/2)`, não crescendo em `y` — o oposto do alegado. Sessão
+orquestradora reconfirmou este achado independentemente antes de
+aceitar. Correção datada real (não nota) aplicada em 4 pontos da
+`ATTEMPT.md` da frente. `H1`/`(U1)`/`(U2)` permanecem ABERTOS,
+inalterados por esta correção. Veredito do referee: NEEDS REVISION
+(correção pontual, não rejeição da contribuição).
+Anterior: `DISC-DEC-112`: onda 23 frente (a)
 `K2-FULL-CDF-ATTEMPT` integrada como Estágio 42 — Proposição D2
 PROVADA, CDF completa fechada de `M_n^{(2)}` em regime único (mais
 simples que `K=3`), fechando a lacuna final de CDFs completas em `K`

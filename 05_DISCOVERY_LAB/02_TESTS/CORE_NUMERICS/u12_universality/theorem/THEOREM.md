@@ -5846,3 +5846,155 @@ de precisão (Estágio 27 → Estágio 28 para a fórmula base `K=1`)
 aplicada como nota datada no `ATTEMPT.md` da frente, ver abaixo.
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.
+
+
+## [Extensão, Estágio 39 — 2026-08-28]
+
+**Onda 22, frente (a), `DISC-DEC-096`/`DISC-DEC-099`
+(`PNN-GENERAL-K-EGF-ATTEMPT`).** Alvo: sucessora direta do Estágio 38
+(`GENERAL-K-JOINT-ATTEMPT`) — usar a representação
+integral/função-geratriz-exponencial para (1) colapsar o integral
+duplo de `P_{\mathrm{disjoint}}(s,s')` sinalizado como "a questão
+aberta mais concreta" pelo predecessor, (2) empurrar essa mesma ideia
+através da soma de composição completa em busca de uma fórmula
+fechada única válida para `K` simbólico. Integração ao `THEOREM.md`
+estava explicitamente ADIADA desde `DISC-DEC-099` (revisão adversarial
+já concluída naquela decisão) até o Estágio 38 ser integrado primeiro,
+por ordem de dependência — agora desbloqueada.
+
+### O que aconteceu
+
+> **Achado principal: fechamento completo do item 1 do mandato, mais
+> um algoritmo geral-`K` genuinamente mais rápido, mais uma
+> obstrução nova e mais precisamente localizada e certificada por
+> prova negativa rigorosa — não um fracasso vago de `sympy`.**
+>
+> **Item 1 (PROVADO, completo):** o integral duplo de
+> `P_{\mathrm{disjoint}}(s,s')` colapsa para um **único** integral —
+> mais um achado-bônus: `P_{\mathrm{same}}(s,s')` e
+> `P_{\mathrm{disjoint}}(s,s')` são IDÊNTICOS como funções algébricas
+> de `x_M` (identidade combinatória elementar, prova por contagem
+> direta de pares ordenados `(S_1,S_2)` por tamanho do conjunto ativo
+> `S=S_1\cup S_2`). Consequência:
+> `P_{s,s'}=2x_sx_{s'}\int_0^\infty s\,e^{-s}\prod_{u\in M}(1+x_us)\,ds`
+> — um único integral, não a transformada genuinamente bivariada que o
+> mandato antecipava poder ser necessária.
+>
+> **Item 2 (PROVADO, para cada `K` concreto):** a soma de composição
+> externa também colapsa via identidade de função-geratriz ordinária,
+> `\mu_r(n,K)=\binom{n+r}{K+r}` exatamente, produzindo um algoritmo
+> geral-`K` muito mais rápido — reproduz `K=1,\ldots,6` em `\sim1$s`
+> (contra `\sim166$s` do predecessor via soma simbólica aninhada) e
+> estende a dois resultados genuinamente novos, **`K=7` e `K=8`**,
+> cada um reconfirmado independentemente por dois caminhos distintos
+> (enumeração direta lenta e simulação Monte Carlo).
+>
+> **Item 3 (obstrução nova, CERTIFICADA rigorosamente, não apenas
+> observada):** o empurrão simbólico-em-`K` foi tentado concretamente
+> — cada tipo de momento que `T(L)` precisa foi re-derivado como
+> expressão fechada explícita em `(n,K,r)` simultaneamente. O
+> obstáculo remanescente é uma única soma finita sobre `r` de `0` a
+> `K-1`, com `K` em si o limite superior simbólico. O algoritmo de
+> Gosper — o procedimento de decisão real para se um termo
+> hipergeométrico tem antidiferença de termo hipergeométrico, não uma
+> heurística — retorna `None` nos três tipos de somando distintos, um
+> certificado formal de que nenhuma forma fechada elementar existe no
+> sentido de razão-de-função-Gama. A soma É expressável, trivialmente,
+> como uma função hipergeométrica terminante `\,_3F_1(1-K,n+2,1;K+4;
+> -1/n)` (verificada numericamente, correspondência exata) — uma
+> "forma fechada envolvendo função especial" legítima, exatamente como
+> o mandato antecipava como possível resultado — mas
+> `sympy.hyperexpand` não a reduz a nada elementar para `(n,K)`
+> simbólicos. Esta é uma obstrução nova, um nível acima da do
+> predecessor (que vivia na contagem de termos da soma de subconjunto)
+> — aqui vive no próprio passo de soma-em-`r` de um pipeline
+> geral-`K`-uniforme e muito mais rápido.
+>
+> **Bônus (§4):** `c_1(K)` computado em `K=7,8`, estendendo a tabela
+> do predecessor, dados brutos apenas, nenhum padrão proposto:
+> `c_1(7)=4387/12870\approx0{,}34087`, `c_1(8)=76627/218790\approx
+> 0{,}35023`.
+
+**O que isto NÃO fecha.** Nenhuma fórmula elementar única
+`P_{nn}(n,K)=F(n,K)` para `K` simbólico — não meramente "não
+encontrada", mas certificada não existir na classe elementar/
+Gosper-somável para os blocos naturais construídos por esta frente,
+no ponto preciso onde a obstrução agora vive (a soma-em-`r` da
+maquinaria de soma de composição, de outro modo totalmente uniforme
+em `K` e rápida). Nenhuma alegação sobre o padrão de `c_1(K)` em `K`.
+Nenhuma alegação sobre `K\ge9`. Nenhuma alegação sobre a CDF completa
+de `M_n^{(K)}`, `K\ge2` (pré-existente, intocada por esta frente).
+
+### Verificação adversarial independente
+
+Já concluída e registrada em `DISC-DEC-099` (2026-08-27), antes deste
+Estágio — resumo para o registro: **spot-check da sessão** antes do
+despacho do referee, verificando independentemente as duas alegações
+mais surpreendentes (`P_{\mathrm{same}}\equiv P_{\mathrm{disjoint}}`
+via `sympy` do zero; `\mu_r(n,K)=\binom{n+r}{K+r}` via enumeração
+direta de composições) — ambas conferem exatamente.
+
+Referee hostil dedicado (`.../pnn_general_k_egf_attempt/adversarial/`
+`REFEREE_REPORT.md`), com foco extra no certificado de Gosper por ser
+o achado mais consequente, sem ler nenhum script desta frente ou de
+qualquer front ancestral/irmão desta linhagem: confirmou `K=7`/`K=8`
+via segunda rota de código independente (5/5 correspondências
+exatas); re-derivou a decomposição Peça A/B/C/D do zero; re-derivou a
+fórmula de momento simbólica em `(n,K,r)` por rota estruturalmente
+diferente (função-geratriz-ordinária via polinômios de Euler); rodou
+o próprio `gosper_sum`/`gosper_term` (não apenas confiou no relato da
+frente) com `K` simbólico E em 13 valores de `K` concretos
+(`K=3,\ldots,15`), todos `None`; rodou controles positivos
+confirmando que o próprio harness detecta somabilidade quando
+presente; leu o código-fonte do `sympy` para confirmar que `None`
+aqui é um certificado genuíno de não-existência, não um timeout ou
+heurística.
+
+> **Dois achados nomeados, ambos severidade BAIXA, ambos cosméticos.**
+> (1) A etiqueta `\,_3F_2` usada em todo o documento está incorreta —
+> a lista de parâmetros de fato usada (3 superiores, 1 inferior) é
+> uma `\,_3F_1` por contagem direta e pela própria classificação de
+> objeto do `sympy`. (2) Um erro de arredondamento de um dígito na
+> coluna "ratio to `K-1`" para `K=7` (`1{,}035` impresso, valor exato
+> arredonda para `1{,}034`). Nenhum dos dois afeta o valor de nenhuma
+> fórmula, o certificado de Gosper, ou o veredito de não-fechamento.
+> Ambos corrigidos por adendo datado na `ATTEMPT.md` da frente
+> (2026-08-27, sob `DISC-DEC-099`).
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Toda
+> alegação matemática re-verificada de forma independente confere
+> exatamente, incluindo a alegação mais nova e mais consequente da
+> frente (o certificado de não-fechamento via Gosper).
+
+Ver
+`.../general_k_joint_attempt/pnn_general_k_egf_attempt/ATTEMPT.md`
+e
+`.../pnn_general_k_egf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. O integral duplo
+de `P_{\mathrm{disjoint}}(s,s')`, sinalizado como a questão aberta
+mais concreta ao final do Estágio 38, fecha completamente (item 1,
+com o bônus `P_{\mathrm{same}}\equiv P_{\mathrm{disjoint}}`). A
+soma de composição colapsa para um algoritmo geral-`K` muito mais
+rápido (item 2), produzindo `P_{nn}(n,7)` e `P_{nn}(n,8)` como novos
+resultados concretos, ambos verificados independentemente por dois
+caminhos. A obstrução restante para uma fórmula fechada única em `K`
+(deixada aberta pelo Estágio 38) é agora precisamente relocalizada —
+não mais na contagem de termos da soma de subconjunto (já resolvida
+por esta frente), mas na própria soma finita sobre `r` de tamanho
+`K`, com não-existência de forma fechada elementar CERTIFICADA por
+Gosper, não apenas observada.
+
+**O que permanece aberto, com precisão:** uma fórmula fechada
+elementar única `P_{nn}(n,K)=F(n,K)` para `K` simbólico — certificada
+não existir na classe Gosper-somável para a construção natural desta
+frente, mas sem alegação de impossibilidade absoluta (uma
+reorganização diferente da mesma combinatória poderia, em princípio,
+evitar esta soma-em-`r` específica; nenhuma foi encontrada aqui, nem
+alegada como descartada); um padrão ou fórmula fechada para `c_1(K)`;
+`K\ge9`; a CDF completa de `M_n^{(K)}`, `K\ge2` (pré-existente,
+inalterada por este Estágio). Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

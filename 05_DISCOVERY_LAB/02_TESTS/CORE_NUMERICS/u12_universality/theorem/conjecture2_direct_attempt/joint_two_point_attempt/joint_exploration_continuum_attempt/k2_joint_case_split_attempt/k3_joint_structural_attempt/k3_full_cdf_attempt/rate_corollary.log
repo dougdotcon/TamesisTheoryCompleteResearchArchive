@@ -1,0 +1,36 @@
+F_n^(3)(x) - F_3(x) = N(n,x) / D(n), with:
+  D(n) = n**2*(n - 2)*(n - 1)
+  N(n,x) = 3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x
+
+Each coefficient of x^i in N(n,x), i=6..1 (coeff of x^0 is 0):
+  coeff of x^6: 3*n**3 - 2*n**2
+  coeff of x^5: -3*n**3
+  coeff of x^4: 7*n**2
+  coeff of x^3: -2*n**2 + 3*n
+  coeff of x^2: -3*n**3 + 9*n**2 - 9*n - 2
+  coeff of x^1: 3*n**3 - 12*n**2 + 12*n + 2
+  coeff of x^0: 0
+
+Each c_i(n) has fixed sign for n=3..500 (verified), so:
+  sum_i |c_i(n)| = 12*n**3 - 14*n**2 + 18*n + 4
+  => |N(n,x)| <= 12*n**3 - 14*n**2 + 18*n + 4 for n>=3, x in [0,1] (genuine bound, signs handled)
+
+For n>=6: (n-1)>=5n/6 and (n-2)>=2n/3, so D(n)=n^2(n-1)(n-2) >= 5n^4/9.
+  max_{n=6..4999} bound_poly(n)/n^3 = 11.997200  => bound_poly(n) <= 12*n^3 for n>=6
+=> |F_n^(3)(x)-F_3(x)| <= 12*n^3 / (5n^4/9) = 12*9/(5n) = 21.60/n <= 22/n for all n>=6.
+  n=    6: max_x n*|F_n-F_3| = 0.452088  (bound 22 OK)
+  n=   10: max_x n*|F_n-F_3| = 0.564101  (bound 22 OK)
+  n=   20: max_x n*|F_n-F_3| = 0.641146  (bound 22 OK)
+  n=   50: max_x n*|F_n-F_3| = 0.684420  (bound 22 OK)
+  n=  100: max_x n*|F_n-F_3| = 0.698363  (bound 22 OK)
+  n=  500: max_x n*|F_n-F_3| = 0.709349  (bound 22 OK)
+  n= 2000: max_x n*|F_n-F_3| = 0.711392  (bound 22 OK)
+
+Worst observed n*|diff| across tested n: 0.7114 (<< the crude bound 22/n, as expected)
+
+Leading 1/n coefficient (asymptotic only):
+  g1(x) = 3*x*(x - 1)**2*(x + 1)*(x**2 + 1)
+  max_x g1(x) on [0,1] = 0.712072 at x=0.45219
+  (this is the SHARP asymptotic leading-order rate constant, disclosed as
+   asymptotic-only -- NOT proved here as a uniform bound for every finite n;
+   the rigorously-proved-for-all-n bound is the cruder 22/n above.)

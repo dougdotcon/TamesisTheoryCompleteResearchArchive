@@ -1,0 +1,23 @@
+Raw 64-case symbolic sum complete. Enumerated subsets found: [(), (0,), (0, 1), (0, 1, 2), (0, 2), (1,), (1, 2), (2,)]
+  P(S=[]) [64-case symbolic] = -p0 - p1 - p2 + 1
+  P(S=[0]) [64-case symbolic] = p0*(-p1 - p2 + 1)
+  P(S=[1]) [64-case symbolic] = p1*(-p0 - p2 + 1)
+  P(S=[2]) [64-case symbolic] = p2*(-p0 - p1 + 1)
+  P(S=[0, 1]) [64-case symbolic] = 2*p0*p1*(1 - p2)
+  P(S=[0, 2]) [64-case symbolic] = 2*p0*p2*(1 - p1)
+  P(S=[1, 2]) [64-case symbolic] = 2*p1*p2*(1 - p0)
+  P(S=[0, 1, 2]) [64-case symbolic] = 6*p0*p1*p2
+
+Sanity: sum of all 8 P(S=A) - 1 = 0  (OK, equals 0)
+
+--- Comparing against ATTEMPT.md Sec 2.2 'Proposicao S' claims ---
+P(S=empty): derived=-p0 - p1 - p2 + 1  claimed(pD)=-p0 - p1 - p2 + 1  diff=0
+P(S={0}): derived=p0*(-p1 - p2 + 1)  claimed=p_s(p_s+pD)=p0*(-p1 - p2 + 1)  diff=0
+P(S={1}): derived=p1*(-p0 - p2 + 1)  claimed=p_s(p_s+pD)=p1*(-p0 - p2 + 1)  diff=0
+P(S={2}): derived=p2*(-p0 - p1 + 1)  claimed=p_s(p_s+pD)=p2*(-p0 - p1 + 1)  diff=0
+P(S={0,1}): derived=2*p0*p1*(1 - p2)  claimed=2 p_s p_t (1-p_u)=2*p0*p1*(1 - p2)  diff=0
+P(S={0,2}): derived=2*p0*p2*(1 - p1)  claimed=2 p_s p_t (1-p_u)=2*p0*p2*(1 - p1)  diff=0
+P(S={1,2}): derived=2*p1*p2*(1 - p0)  claimed=2 p_s p_t (1-p_u)=2*p1*p2*(1 - p0)  diff=0
+P(S={0,1,2}): derived=6*p0*p1*p2  claimed=6 p0 p1 p2=6*p0*p1*p2  diff=0
+
+ALL 8 Proposicao-S FORMULAS CONFIRMED by independent 64-case symbolic sum (zero symbolic discrepancy).

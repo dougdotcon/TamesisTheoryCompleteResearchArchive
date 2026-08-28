@@ -1,0 +1,59 @@
+F_3(x) independently re-derived by integrating THEOREM.md's cited density 6x(1-x^2)^2:  F_3(x) = x**6 - 3*x**4 + 3*x**2
+vs. ATTEMPT.md's stated F_3(x)=1-(1-x^2)^3: difference = 0  (OK)
+
+F_n^(3)(x) - F_3(x) = N(n,x)/D(n).
+Denominator D(n) matches n^2(n-1)(n-2) up to constant factor 1 (should be a nonzero rational constant).
+
+N(n,x) (independently derived) has deg_x=6, deg_n=3
+  c_0(n) = 0
+  c_1(n) = 3*n**3 - 12*n**2 + 12*n + 2
+  c_2(n) = -3*n**3 + 9*n**2 - 9*n - 2
+  c_3(n) = -2*n**2 + 3*n
+  c_4(n) = 7*n**2
+  c_5(n) = -3*n**3
+  c_6(n) = 3*n**3 - 2*n**2
+
+Sign check of each c_i(n) for integer n=3..200 (then symbolic confirmation via the polynomial's roots):
+  c_0(n): signs seen over n=3..200 = {0}, real roots >=3: []
+  c_1(n): signs seen over n=3..200 = {1}, real roots >=3: []
+  c_2(n): signs seen over n=3..200 = {-1}, real roots >=3: []
+  c_3(n): signs seen over n=3..200 = {-1}, real roots >=3: []
+  c_4(n): signs seen over n=3..200 = {1}, real roots >=3: []
+  c_5(n): signs seen over n=3..200 = {-1}, real roots >=3: []
+  c_6(n): signs seen over n=3..200 = {1}, real roots >=3: []
+All coefficients have a fixed sign for n>=3 (ignoring isolated zeros): True
+
+sum_i |c_i(n)| (independently derived, exact for n>=3) = 12*n**3 - 14*n**2 + 18*n + 4
+ATTEMPT.md's claimed bound: 12n^3-14n^2+18n+4
+claimed_bound - sum|c_i(n)| = 0
+Exact match (claimed bound == our derived sum|c_i(n)|): True
+Claimed bound dominates true sum|c_i(n)| for n=3..2000: True
+
+==============================================================================
+Elementary inequality chain: (n-1)>=5n/6, (n-2)>=2n/3 for n>=6
+==============================================================================
+(n-1)>=5n/6  <=>  6 <= n
+(n-2)>=2n/3  <=>  6 <= n
+Both hold for every integer n=6..2000: True
+D(n)=n^2(n-1)(n-2) >= 5n^4/9 for every integer n=6..2000: True
+
+==============================================================================
+Final bound: |F_n^(3)(x)-F_3(x)| <= 22/n for n>=6, x in [0,1]
+==============================================================================
+9*(12n^3-14n^2+18n+4) <= 110n^3 for n=6..2000 (i.e. the claimed bound chain implies <=22/n): True
+Numeric check of |F_n^(3)(x)-F_3(x)|<=22/n over n=6..2000 (dense n-grid plus x-grid of 401 points): HOLDS
+Worst observed n*|F_n-F_3| = 0.711391 at (n,x)=(2000, 0.4525)  (ATTEMPT.md reports ~0.71 as the worst observed value)
+
+==============================================================================
+Leading-order 1/n term of the series expansion
+==============================================================================
+Series of F_n^(3)(x)-F_3(x) around n=oo (independent sympy sp.series): 3*x**6/n - 3*x**5/n - 3*x**2/n + 3*x/n + 7*x**6/n**2 - 9*x**5/n**2 + 7*x**4/n**2 - 2*x**3/n**2 - 3*x/n**2
+g_1(x) (independently derived, = lim_n n*(F_n^(3)(x)-F_3(x))) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+ATTEMPT.md's claimed g_1(x) = 3x(x-1)^2(x+1)(x^2+1) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+difference = 0  (OK)
+max_{x in [0,1]} g_1(x) (independent dense numeric search, 100001 points) = 0.712072 at x=0.4522  (ATTEMPT.md claims ~0.712 at x~0.452)
+
+==============================================================================
+SUMMARY
+==============================================================================
+Overall Corollary D3.5 check: ALL CONFIRMED

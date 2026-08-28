@@ -5998,3 +5998,123 @@ alegada como descartada); um padrão ou fórmula fechada para `c_1(K)`;
 inalterada por este Estágio). Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+
+## [Extensão, Estágio 40 — 2026-08-28]
+
+**Onda 21, frente (b), `DISC-DEC-093`/`DISC-DEC-106`
+(`K3-FULL-CDF-ATTEMPT`, v2).** Alvo: estender o fechamento do segundo
+momento de `M_n^{(3)}` (Estágio 35, Proposição NN3) para a CDF
+completa `P(M_n^{(3)}\le k/n)` em forma fechada, no estilo de
+Proposição D1 (Estágio 27, `K=1`). Redespachada do zero após a
+frente v1 ter estagnado sem retorno verificável (`DISC-DEC-106`); a
+v2 é uma tentativa nova, não uma continuação — a tentativa abandonada
+original foi preservada (não deletada) para auditoria.
+
+### O que aconteceu
+
+> **Achado principal: fechamento completo do mandato, excedendo a
+> ambição original.** Um novo **Teorema de Decomposição Completa da
+> Contagem de Ciclos** (PROVADO) fortalece o Lema 4/5 do Estágio 35 de
+> uma afirmação par-a-par para a **lei conjunta completa** da contagem
+> `T:=\#\{\text{pontos cíclicos de }f\}` (`M_n^{(3)}=T/n`):
+> `T=O+\sum_{s\in S}V_s`, onde `S\subseteq\{0,1,2\}` é o conjunto
+> aleatório de fontes cíclicas e, dado `S`, os `V_s` são
+> **mutuamente independentes**, `V_s\sim\mathrm{Uniforme}\{1,\ldots,
+> L_s\}`. A lei de `S` é dada por quatro fórmulas fechadas novas
+> (Proposição S). Disto segue uma CDF condicional fechada dada
+> `(L_0,L_1,L_2)`, e — o resultado principal — **Proposição D3**: para
+> todo `n\ge3` e todo inteiro `0\le k\le n-1`,
+> `P(M_n^{(3)}\le k/n)=k(k+1)[k^4-4k^3-(3n^2-9n-5)k^2+(3n^2-11n-2)k+
+> (3n^4-12n^3+12n^2+2n)]/[n^4(n-1)(n-2)]` — uma única fórmula fechada,
+> uniforme em `n`, exatamente na ambição de Proposição D1. Provada por
+> derivação simbólica completa, sem lacunas, em três regimes
+> combinatórios distintos (`0\le k\le n-3`; `k=n-2`; `k=n-1`), cada um
+> derivado e verificado independentemente por `sp.summation`.
+>
+> **Corolários (todos PROVADOS):** `P(M_n^{(3)}=1)=6/n^3`
+> (prova direta elementar); recuperação simbólica exata, com **zero
+> resto simbólico**, da já-provada média finita-`n` `\varphi_n^{(3)}`
+> (Estágio 4); limites de segundo/terceiro momento coincidindo com os
+> já-provados valores contínuos `1/4` e `16/105` (Estágio 17/18); um
+> limitante de convergência uniforme `O(1/n)`.
+
+**O que isto NÃO fecha.** A CDF completa geral-`K` (`K\ge4`) não foi
+tentada por esta frente (fora do escopo do mandato) — permanece
+aberta; o método (destinos governantes i.i.d., dicotomia
+cíclico/não-cíclico) parece estruturalmente generalizável, mas isto é
+uma pista não verificada, não uma alegação. A constante do limitante
+de taxa de Corolário D3.5 não é otimizada (`22/n`, com termo
+assintótico líder `\approx0{,}712/n` honestamente relatado como não
+provado como limitante uniforme).
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: brute force
+independente do zero (modelo Definição 4 literal, contagem exata via
+`Fraction`), confirmando Proposição D3 exatamente em `n=3,4,5`, todo
+`k` — correspondência exata em todos os casos.
+
+Referee hostil dedicado (`.../k3_full_cdf_attempt/adversarial/`
+`REFEREE_REPORT.md`), sem ler nenhum script deste front ou de
+qualquer front da linhagem: brute force verdadeiro estendido até
+`n=9` (superando até o próprio alcance testado pela frente); soma
+simbólica independente sobre os `4^3=64` casos brutos confirmando as
+quatro fórmulas de Proposição S; montagem de modelo reduzido
+independente confirmando o Teorema de Decomposição e a CDF
+condicional; re-soma simbólica independente confirmando a recuperação
+de média com zero resto; verificação estrutural do particionamento
+dos três regimes (sem lacunas nem sobreposições) e dos valores de
+fronteira; auditoria completa da cadeia de desigualdades do
+Corolário D3.5.
+
+> **Dois achados nomeados.** (1) **BAIXA, informacional:** a fórmula
+> da média do Estágio 4 é enunciada em `THEOREM.md` apenas para
+> `n\ge4`; o referee constatou que ela (e a Proposição D3) também vale
+> exatamente em `n=3` — não é um erro. (2) **MODERADO, sinalizado por
+> metadados apenas (sem leitura de conteúdo, por mandato):** o
+> diretório da tentativa abandonada continha arquivos cujos nomes
+> (`symbolic_D3_derivation.py`, `P_D3_closed_form.txt`) pareciam
+> potencialmente contradizer a alegação da §10 de que "nenhuma CDF em
+> forma fechada" estava presente ali — sinalizado para a sessão
+> orquestradora resolver com acesso de leitura irrestrito.
+
+**Resolução do achado #2 pela sessão orquestradora:** os arquivos
+sinalizados contêm **fórmulas de ponto único** `P(T=n{-}2)` e
+`P(T=n{-}3)` (não uma CDF em função de `k`, não o estilo Proposição
+D1) — confirmando que a §10 original está correta. Verificação
+adicional contra brute force fresco (`n=6,7,8`) mostrou que a fórmula
+`P(D=2)` da tentativa abandonada está correta, mas a fórmula `P(D=3)`
+está **errada** (`19n^2{-}105n{+}160` impresso vs. o valor correto
+`19n^2{-}108n{+}160`) — consistente com a tentativa anterior ter sido
+corretamente abandonada em meio ao trabalho, não silenciosamente
+completa. Nota datada registrada em `k3_full_cdf_attempt/ATTEMPT.md`
+§10.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Nenhum
+> erro matemático encontrado em nenhuma parte do documento.
+
+Ver
+`.../k3_joint_structural_attempt/k3_full_cdf_attempt/ATTEMPT.md`
+e
+`.../k3_full_cdf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. `M_n^{(3)}`'s CDF
+completa entra no catálogo como resultado fechado e provado — a
+primeira CDF completa fechada nesta linhagem além de `K=0,1`
+(Estágio 27). O Teorema de Decomposição Completa da Contagem de
+Ciclos é um resultado estrutural novo e genuinamente mais forte que o
+Lema 4/5 do Estágio 35 (lei conjunta completa, não apenas par-a-par).
+
+**O que permanece aberto, com precisão:** a CDF completa geral-`K`
+(`K\ge4`) — não tentada por esta frente; uma constante mais afiada
+para o limitante de convergência uniforme de Corolário D3.5 (o termo
+assintótico líder `\approx0{,}712/n` é conhecido mas não provado como
+limitante uniforme finito-`n`); todos os demais itens abertos
+catalogados nos Estágios 38/39 (a fórmula fechada única em `K` para o
+segundo momento, certificada não existir na classe Gosper-somável, é
+uma questão distinta desta CDF completa a `K=3` fixo). Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

@@ -1,0 +1,36 @@
+==============================================================================
+REGIME (i): 0 <= k <= n-3
+==============================================================================
+Derived F(k) [regime i] = k*(k + 1)*(k**4 - 4*k**3 - 3*k**2*n**2 + 9*k**2*n + 5*k**2 + 3*k*n**2 - 11*k*n - 2*k + 3*n**4 - 12*n**3 + 12*n**2 + 2*n)/(n**4*(n - 2)*(n - 1))
+  Cross-checking S0..S3 (regime i) against direct numeric sums:
+    n=10 k=3: S1 OK, S2 OK, S3 OK
+    n=12 k=5: S1 OK, S2 OK, S3 OK
+    n=9 k=2: S1 OK, S2 OK, S3 OK
+    n=15 k=7: S1 OK, S2 OK, S3 OK
+  All S0..S3 pieces independently confirmed.
+
+F_derived(regime i) - F_conjectured = 0
+REGIME (i): PROVED -- exact symbolic match.
+
+==============================================================================
+REGIME (ii): k = n-2
+==============================================================================
+Derived F(n-2) = (n**4 - 42*n + 72)/n**4
+F_conjectured(n-2) = (n**4 - 42*n + 72)/n**4
+difference = 0
+REGIME (ii): PROVED -- exact symbolic match.
+
+==============================================================================
+REGIME (iii): k = n-1
+==============================================================================
+Derived F(n-1) = 1 - 6/n**3
+F_conjectured(n-1) = 1 - 6/n**3
+difference = 0
+REGIME (iii): PROVED -- exact symbolic match.
+(cross-check: 1-F(n-1) = 6/n**3 = 6/n^3, matching the elementary
+ direct proof of Corollary D3.1 in ATTEMPT.md.)
+
+==============================================================================
+ALL THREE REGIMES PROVED. Proposicao D3 holds for every n>=3,
+0<=k<=n-1 -- a complete, gap-free symbolic derivation.
+==============================================================================

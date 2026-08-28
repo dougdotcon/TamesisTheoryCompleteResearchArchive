@@ -1,0 +1,29 @@
+Symbolic verification of P(S=A), raw 64-case enumeration vs formula:
+  S=[]           raw=-p0 - p1 - p2 + 1                   formula=-p0 - p1 - p2 + 1                   diff=0  OK
+  S=[0]          raw=-p0*p1 - p0*p2 + p0                 formula=-p0*p1 - p0*p2 + p0                 diff=0  OK
+  S=[1]          raw=-p0*p1 - p1*p2 + p1                 formula=-p0*p1 - p1*p2 + p1                 diff=0  OK
+  S=[2]          raw=-p0*p2 - p1*p2 + p2                 formula=-p0*p2 - p1*p2 + p2                 diff=0  OK
+  S=[0, 1]       raw=-2*p0*p1*p2 + 2*p0*p1               formula=-2*p0*p1*p2 + 2*p0*p1               diff=0  OK
+  S=[0, 2]       raw=-2*p0*p1*p2 + 2*p0*p2               formula=-2*p0*p1*p2 + 2*p0*p2               diff=0  OK
+  S=[1, 2]       raw=-2*p0*p1*p2 + 2*p1*p2               formula=-2*p0*p1*p2 + 2*p1*p2               diff=0  OK
+  S=[0, 1, 2]    raw=6*p0*p1*p2                          formula=6*p0*p1*p2                          diff=0  OK
+  sum of all P(S=A) - 1 = 0  (should be 0)
+  ALL P(S=A) FORMULAS PROVED (exact symbolic match to raw 64-case definition).
+
+Decomposition theorem check, GIVEN (L0,L1,L2): reduced (position-
+level, Definition-4-direct) model vs. decomposition-based model:
+  L=(2,3,4) n=12: MATCH
+  L=(1,1,1) n=6: MATCH
+  L=(5,2,3) n=15: MATCH
+  L=(1,5,1) n=10: MATCH
+  L=(3,3,3) n=20: MATCH
+  L=(7,1,2) n=25: MATCH
+  Decomposition theorem CONFIRMED given L (exact match on every pmf value).
+
+Full (unconditional-in-L) decomposition-based model vs fresh true
+brute force of Definition 4 itself (independent, exhaustive):
+  n=6: MATCH (against n!*n^3 = 155520 true configs)
+  n=7: MATCH (against n!*n^3 = 1728720 true configs)
+  Full decomposition CONFIRMED against independent true brute force.
+
+ALL CHECKS PASSED: the Full Cycle-Count Decomposition Theorem holds.

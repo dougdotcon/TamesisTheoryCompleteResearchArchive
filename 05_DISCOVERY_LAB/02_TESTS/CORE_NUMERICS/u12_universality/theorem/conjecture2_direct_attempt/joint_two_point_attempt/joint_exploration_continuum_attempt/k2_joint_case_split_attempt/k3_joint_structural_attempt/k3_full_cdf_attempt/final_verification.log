@@ -1,0 +1,33 @@
+Corollary D3.1 (elementary, hand-provable): P(T=n) = 6/n^3 exactly.
+  1 - F(n-1) = 6/n**3
+  matches 6/n^3 exactly, for all n (symbolic). PASSED.
+
+(A) Proposicao D3 vs fresh true brute force (Definition 4, n=3..8):
+  n=3 (162 exact configs): ALL MATCH
+  n=4 (1536 exact configs): ALL MATCH
+  n=5 (15000 exact configs): ALL MATCH
+  n=6 (155520 exact configs): ALL MATCH
+  n=7 (1728720 exact configs): ALL MATCH
+  n=8 (20643840 exact configs): ALL MATCH
+  (A) PASSED: zero discrepancies against full exhaustive enumeration.
+
+(B) Proposicao D3 vs O(n^3) exact reference engine, n=6..40, every k:
+  (B) PASSED: 805 exact (n,k) pairs, zero discrepancies.
+
+(C) Symbolic recovery of independently-established moments:
+  (C1) phi_n^(3) derived from D3   = 16/35 + 1/(14*n) + 11/(10*n**2) + 23/(35*n**3) + 6/(35*n**4)
+       phi_n^(3) cited (THEOREM.md) = 16/35 + 1/(14*n) + 11/(10*n**2) + 23/(35*n**3) + 6/(35*n**4)
+       difference = 0
+       (C1) PASSED: EXACT symbolic match, for all n, to the already-proved mean.
+
+  (C2) E[(M_n^(3))^2] derived from D3 = 1/4 + 9/(140*n) + 167/(140*n**2) + 21/(20*n**3) + 71/(70*n**4) + 12/(35*n**5)
+       limit as n->oo = 1/4  (must equal 1/4, Corollary NN3.1 / Estagio 18)
+       (C2) PASSED.
+
+  (C3) E[(M_n^(3))^3] derived from D3 = 16/105 + 1/(20*n) + 487/(420*n**2) + 33/(28*n**3) + 97/(60*n**4) + 73/(70*n**5) + 12/(35*n**6)
+       limit as n->oo = 16/105  (must equal 16/105, continuum f_M3, THEOREM.md)
+       (C3) PASSED.
+
+==============================================================================
+ALL FINAL VERIFICATION CHECKS PASSED.
+==============================================================================

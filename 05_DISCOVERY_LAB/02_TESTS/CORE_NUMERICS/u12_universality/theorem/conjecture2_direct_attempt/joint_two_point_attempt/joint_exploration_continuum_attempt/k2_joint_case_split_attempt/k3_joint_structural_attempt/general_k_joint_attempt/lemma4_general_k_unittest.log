@@ -1,0 +1,20 @@
+=== Lemma 4 general-K verification (fresh, from scratch) ===
+K=1: node-level check over (K+1)^K=2 destination functions: 2 checked, 1 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+K=2: node-level check over (K+1)^K=9 destination functions: 9 checked, 8 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+K=3: node-level check over (K+1)^K=64 destination functions: 64 checked, 78 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+K=4: node-level check over (K+1)^K=625 destination functions: 625 checked, 944 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+K=5: node-level check over (K+1)^K=7776 destination functions: 7776 checked, 13800 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+K=6: node-level check over (K+1)^K=117649 destination functions: 117649 checked, 237432 cyclic-node instances, 0 assertion failures (uniqueness of cycle-predecessor holds).
+
+=== Position-level check (direct graph traversal, small K, small L) ===
+K=1, L=(3,): 2 full-graph configurations checked (all landing-position sweeps), 0 had a genuinely extra (non-predecessor) incoming edge into a cyclic arc -- confirmed inert in every case (0 assertion failures).
+K=2, L=(2, 3): 24 full-graph configurations checked (all landing-position sweeps), 8 had a genuinely extra (non-predecessor) incoming edge into a cyclic arc -- confirmed inert in every case (0 assertion failures).
+K=3, L=(2, 2, 3): 342 full-graph configurations checked (all landing-position sweeps), 192 had a genuinely extra (non-predecessor) incoming edge into a cyclic arc -- confirmed inert in every case (0 assertion failures).
+K=4, L=(2, 2, 2, 3): 6560 full-graph configurations checked (all landing-position sweeps), 5008 had a genuinely extra (non-predecessor) incoming edge into a cyclic arc -- confirmed inert in every case (0 assertion failures).
+K=5, L=(2, 2, 2, 2, 2): 161050 full-graph configurations checked (all landing-position sweeps), 152000 had a genuinely extra (non-predecessor) incoming edge into a cyclic arc -- confirmed inert in every case (0 assertion failures).
+
+ALL CHECKS PASSED: Lemma 4 (Cycle-Predecessor Uniqueness) and its
+inertness-of-other-incoming-edges corollary hold for every K tested,
+1..6 (node-level) and 1..5 (position-level, small arcs) -- consistent
+with it being a fact about functional graphs on ANY finite node set
+with an absorbing DEAD state, not specific to K=3.

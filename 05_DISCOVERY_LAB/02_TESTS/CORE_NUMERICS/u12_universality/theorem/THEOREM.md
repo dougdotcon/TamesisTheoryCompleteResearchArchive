@@ -5709,3 +5709,140 @@ os demais itens em aberto listados no Estágio 36 permanecem
 inalterados por este Estágio. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+
+## [Extensão, Estágio 38 — 2026-08-28]
+
+**Onda 21, frente (c), `DISC-DEC-093`/`DISC-DEC-106`
+(`GENERAL-K-JOINT-ATTEMPT`, v2).** Alvo: generalizar de `K=3` para `K`
+geral o método de caso-split (Reindexação por Fonte-Governante +
+Lema 4 do Estágio 35) que fechou `P_{nn}(n,3)`, e determinar até onde a
+generalização é prova genuína versus padrão numericamente verificado.
+Redespachada do zero após a frente v1 ter estagnado por tempo
+indeterminado sem retorno verificável (`DISC-DEC-106`); a v2 reaproveita
+o `ATTEMPT.md` já existente e já lido/spot-checado pela sessão
+antes da compactação de contexto, despachando apenas um novo referee
+hostil sobre ele.
+
+### O que aconteceu
+
+> **Achado principal: fechamento parcial genuíno, com não-fechamento
+> precisamente diagnosticado — não uma extrapolação de padrão.**
+> Mecanismo 1 (Reindexação por Fonte-Governante) e Mecanismo 2
+> (Lema 4, Unicidade do Predecessor de Ciclo) são PROVADOS para `K`
+> geral — literalmente a mesma prova de `K=3` com `3` substituído por
+> `K`, sem uso do valor específico `3` em nenhum passo lógico
+> (exchangeability de `K` variáveis aleatórias simétricas sob
+> relabeling, para o Mecanismo 1; um fato padrão sobre grafos
+> funcionais em qualquer conjunto finito de nós mais um estado
+> absorvente, para o Mecanismo 2). Um novo **Lema 5 análogo para `K`
+> geral** é PROVADO — fórmulas fechadas de ponto único/arco-cruzado
+> `P_0(s)`, `P_{\mathrm{same}}`, `P_{\mathrm{disjoint}}`, derivadas por
+> soma-ciclo/inclusão simbólica completa em `K`. O algoritmo de
+> montagem (soma sobre composições de `n-K` em `K+1` partes) é PROVADO
+> **correto como algoritmo** para `K` geral (self-consistency-checado
+> contra `K=1,2,3` já provados nos Estágios 27/28/35).
+>
+> **Proposições NN4, NN5, NN6 (novas formas fechadas concretas,
+> PROVADAS):**
+> `P_{nn}(n,4)=(126n^4+187n^3+177n^2+98n+24)/(630n^4)`, mais NN5 e NN6
+> analogamente — todas derivadas por soma simbólica completa em `K`
+> (não conjecturadas-e-checadas), cross-checadas por brute force
+> verdadeiro até 165M (NN4) e 84,7M (NN5) configurações exaustivas.
+>
+> **Não-fechamento diagnosticado com precisão (§8), não um fracasso de
+> método:** uma única fórmula fechada-em-`K` para `P_{nn}(n,K)`
+> permanece ABERTA — a causa identificada é crescimento do número de
+> termos na soma simbólica com `K`, não uma barreira estrutural do
+> método (que continua válido, apenas cada `K` concreto exige nova
+> execução simbólica). Coeficiente de taxa `c_1(K)` reportado como
+> dados brutos (§8.3), sem alegação de padrão — a frente cita
+> explicitamente seu próprio quase-erro anterior de ajuste de padrão
+> prematuro como a razão da cautela aqui. `K\ge7` não tentado, com
+> razão concreta declarada (orçamento computacional, não parede
+> matemática).
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: brute force
+independente do zero
+(`/tmp/.../spotcheck_pnn_k4.py`), confirmando `P_{nn}(n=6,K=4)=209/810`
+exatamente, coincidindo com a Proposição NN4.
+
+Referee hostil dedicado (`.../general_k_joint_attempt/adversarial/`
+`REFEREE_REPORT.md`), sem ler nenhum script deste front ou de qualquer
+front irmão/ancestral desta linhagem antes de escrever e rodar seus
+próprios: quatro rotas de verificação largamente independentes,
+construídas inteiramente do zero a partir apenas da prosa de
+`ATTEMPT.md` e das Definições/Estágios anteriores citados —
+
+1. **Brute force verdadeiro** do modelo literal da Definição 4,
+   `K=1,\ldots,5`, incluindo os dois maiores casos desta linhagem em
+   `K\ge4`: `K=4,n=8` (165.150.720 configurações exatas, confirma
+   `P_{nn}(8,4)=25999/107520`) e `K=5,n=7` (84.707.280 configurações
+   exatas, confirma `P_{nn}(7,5)=78077/352947`). Zero divergências.
+2. **Checagem de fórmula ao nível de nó** do Mecanismo 3, reimplementada
+   do zero a partir da prosa apenas, alcançando `K=1,\ldots,7` — um
+   valor de `K` além do que a própria frente testou a nível de nó
+   (que para em `K=6`). Zero divergências.
+3. **Checagem ao nível de posição** da alegação "landing-uniform"
+   (§4.1), `K=1,\ldots,4`, contra travessia direta do grafo funcional
+   completo. Zero divergências.
+4. **Montagem `K`-fold independente**, alcançando `K=6` (onde brute
+   force verdadeiro é astronomicamente inviável para ambas as partes) —
+   confirmando as Proposições NN1–NN6 a `K+5` ou mais pontos
+   independentes por `K` (um polinômio de grau `K` não pode concordar
+   com um genuinamente diferente em mais de `K` pontos). **Primeira
+   confirmação independente conhecida da Proposição NN6 por qualquer
+   rota que não a da própria frente.** Zero divergências.
+5. **Corolário do Teorema J** (`P(\mathrm{mesmo\ ciclo}\mid\mathrm{ambos\
+   cíclicos})=1/2` exatamente) reconfirmado em dados brutos frescos,
+   `K=1,\ldots,4`. Zero divergências.
+
+> **Um achado, severidade BAIXA, precisão de citação apenas.** A
+> tabela de self-consistency §5.2 cita a fórmula base `K=1`
+> `P_{nn}(n,1)=\tfrac12+\tfrac1{6n}` como "(Estágio 27)" — mas o
+> Estágio 27 apenas *enuncia* esta fórmula como padrão
+> numericamente-verificado (`n=3,\ldots,9`), explicitamente rotulado lá
+> como não-provado para `n` geral; a prova real (uma derivação
+> case-split completa) aparece um estágio depois, no Estágio 28, como
+> `V_a(n)` — algebricamente idêntico a `\tfrac12+\tfrac1{6n}`. O valor
+> em si está correto (reconfirmado pelo próprio brute force do referee
+> em `n=3,4,5`) e de fato é provado em algum lugar do arquivo, apenas
+> não no local citado. Nenhum outro achado — todas as demais citações,
+> fórmulas e alegações verificadas conferem exatamente.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue, no tier
+> alegado.** Nenhum erro matemático encontrado. Toda proposição,
+> corolário e mecanismo alegado PROVADO foi re-derivado e confirmado
+> exatamente por rota independente; todo item alegado ABERTO ou NÃO
+> TENTADO é, na inspeção, genuinamente aberto/não tentado — sem
+> overclaiming, sem alegação de progresso em Millennium Problem.
+
+Ver
+`.../k3_joint_structural_attempt/general_k_joint_attempt/ATTEMPT.md`
+e
+`.../general_k_joint_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. As Proposições
+NN4, NN5, NN6 entram no catálogo como novas fórmulas fechadas
+provadas, generalizando o fechamento `K=3` do Estágio 35 para
+`K=4,5,6`. O método (Mecanismos 1+2+Lema-5-análogo+montagem) é agora
+estabelecido como genuinamente `K`-livre em sua lógica de prova — não
+apenas verificado ponto a ponto — o que abre caminho para qualquer `K`
+concreto futuro ser fechado por execução do mesmo método, sem
+necessidade de reprovar a estrutura geral.
+
+**O que permanece aberto, com precisão:** uma fórmula fechada única
+válida para `K` geral (não apenas o algoritmo, que já é geral); um
+padrão ou fórmula fechada para o coeficiente de taxa `c_1(K)` (seis
+pontos apenas, nenhum padrão evidente por inspeção, tentativa
+deliberadamente não feita); `K\ge7` (nenhum polinômio fechado alegado
+para nenhum `K\ge7`, apenas o método suportado por checagem
+independente ao nível de nó do próprio referee). Correção de citação
+de precisão (Estágio 27 → Estágio 28 para a fórmula base `K=1`)
+aplicada como nota datada no `ATTEMPT.md` da frente, ver abaixo.
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.

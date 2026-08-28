@@ -1,0 +1,22 @@
+==============================================================================
+General-K Proposition S check: P(S=A) = |A|! prod_A p_a (pD + sum_A p_a)
+(p_D substituted as 1-sum(p_0..p_{K-1}) throughout -- see docstring
+ of check_symbolic for why this substitution is essential, not a
+ simplification of convenience)
+==============================================================================
+K=0: all 1 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=1 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+K=1: all 2 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=2 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+K=2: all 4 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=9 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+K=3: all 8 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=64 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+K=4: all 16 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=625 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+K=5: all 32 subsets A checked symbolically (p_D=1-sum(p) substituted throughout) against raw (K+1)^K=7776 enumeration -> ALL MATCH; sum_A P(S=A) = 1 [OK]
+
+Concrete generic-rational extension (K=6,7; (K+1)^K raw cases,
+normalized weights, exact Rational arithmetic):
+K=6 (concrete generic rationals): all 64 subsets A checked against raw (K+1)^K=117649 enumeration -> ALL MATCH; sum_A P(S=A)=1 [OK]
+K=7 (concrete generic rationals): all 128 subsets A checked against raw (K+1)^K=2097152 enumeration -> ALL MATCH; sum_A P(S=A)=1 [OK]
+
+Negative control (documents that normalization is essential):
+[negative control, K=3, p_D left UNNORMALIZED/free] P(S={0}) raw - formula = p0*(p0**2 + p0*p1 + p0*p2 + 2*p0*pD - p0 + p1*pD + p2*pD + pD**2 - pD)  (expected: NONZERO in general -- confirms normalization is essential, not an oversight)
+
+ALL CHECKS PASSED

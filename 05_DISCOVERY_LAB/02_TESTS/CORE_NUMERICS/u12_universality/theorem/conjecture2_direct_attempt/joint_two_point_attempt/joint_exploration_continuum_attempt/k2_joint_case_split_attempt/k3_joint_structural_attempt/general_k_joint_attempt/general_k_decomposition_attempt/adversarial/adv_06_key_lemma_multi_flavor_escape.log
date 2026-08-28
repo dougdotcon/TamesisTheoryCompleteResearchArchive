@@ -1,0 +1,24 @@
+==============================================================================
+Key Lemma R(B)=q_B, MULTI-FLAVOR escape stress test (E>=2 distinct
+escape flavors, not just one bundled DEAD/A-escape target) --
+this specifically targets the Key Lemma's strongest claim: R(B)
+'regardless of how the escape weight is internally distributed
+among the individual escape flavors' (ATTEMPT.md Section 2.3)
+==============================================================================
+
+--- Negative control (unnormalized, should correctly FAIL) ---
+[m=2,E=2 unnormalized] m=2, E=2, UNNORMALIZED (no constraint sum p+sum e=1): R(B)-(1-P_B) = nonzero, as expected
+[m=3,E=2 unnormalized] m=3, E=2, UNNORMALIZED (no constraint sum p+sum e=1): R(B)-(1-P_B) = nonzero, as expected
+Negative control behaves as expected: True
+
+--- Main check (correctly normalized) ---
+[m=1,E=1 (baseline, single flavor)] m=1 (|B|), E=1 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=1,E=2] m=1 (|B|), E=2 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=2,E=1] m=2 (|B|), E=1 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=2,E=2] m=2 (|B|), E=2 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=2,E=3] m=2 (|B|), E=3 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=3,E=2] m=3 (|B|), E=2 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=3,E=3] m=3 (|B|), E=3 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+[m=4,E=2] m=4 (|B|), E=2 (# escape flavors), TRUE normalization (last flavor = (1-P_B)-sum(other flavors)): R(B) - (1-P_B) = 0  [OK]; alternate split (different flavor dependent): R_alt - (1-P_B) = 0  [OK]
+
+OVERALL: ALL PASS

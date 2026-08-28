@@ -6118,3 +6118,124 @@ segundo momento, certificada não existir na classe Gosper-somável, é
 uma questão distinta desta CDF completa a `K=3` fixo). Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+
+## [Extensão, Estágio 41 — 2026-08-28]
+
+**Onda 23, frente (b), `DISC-DEC-110`
+(`GENERAL-K-DECOMPOSITION-ATTEMPT`).** Alvo: generalizar o Teorema de
+Decomposição Completa da Contagem de Ciclos e a Proposição S do
+Estágio 40 (`K=3`) para `K` geral — a pista explicitamente sinalizada
+mas não verificada pelo próprio Estágio 40 ("parece estruturalmente
+generalizável... mas isto é uma pista não verificada, não uma
+alegação"). Diferente dos Estágios 38/39 (que generalizaram uma
+quantidade mais fraca — o segundo momento par-a-par `P_nn(n,K)`), esta
+frente ataca a lei conjunta *completa* de `T`.
+
+### O que aconteceu
+
+> **Achado principal: fechamento completo do mandato primário, com uma
+> unificação genuína como bônus.** A **Proposição S, `K` geral**
+> (PROVADA, nova) é uma única fórmula fechada, livre de `K` e livre de
+> `|A|`, para a lei inteira de `S`:
+> `P(S=A)=|A|!\cdot\prod_{a\in A}p_a\cdot(p_D+\sum_{a\in A}p_a)`, para
+> todo `K\ge0` e todo `A\subseteq\{0,\ldots,K-1\}`. Esta única fórmula
+> **reproduz exatamente as quatro fórmulas separadas do Estágio 40**
+> como casos especiais `|A|=0,1,2,3` — o Estágio 40 nunca percebeu que
+> eram uma única fórmula.
+>
+> **O cerne da prova:** um Lema-Chave novo — para qualquer conjunto
+> finito `B` com pesos `p_b` e peso de escape combinado
+> `q_B:=1-\sum_{b\in B}p_b`, a probabilidade de que NENHUM nó de `B`
+> esteja em um ciclo é exatamente `q_B`, independentemente de como o
+> peso de escape se distribui internamente entre os "sabores" de
+> escape e independentemente de `|B|` — provado por indução forte em
+> `|B|`, via uma identidade algébrica nova
+> `(1-P_B)F(B)+G(B)=1`, ela mesma provada via representação de integral
+> exponencial e integração por partes. Isto generaliza — e, aplicado a
+> `B=\{0,1,2\}`, `A=\emptyset`, reproduz exatamente — o único fato que
+> o próprio Estágio 40 provou apenas por "soma simbólica direta sobre
+> os 64 casos" (suas próprias palavras), nunca por argumento de mão.
+>
+> **O Teorema de Decomposição Completa da Contagem de Ciclos, `K`
+> geral** (PROVADO): `T=O+\sum_{s\in S}V_s`, `(V_s)_{s\in S}`
+> mutuamente independentes dado `S`, `V_s\sim\mathrm{Uniforme}\{1,
+> \ldots,L_s\}` — provado para todo `K`, literalmente pelo mesmo
+> argumento de `K=3` com `3` substituído por `K`, apoiando-se
+> inteiramente em fatos já provados para `K` geral (Lema 4 do
+> Estágio 38; o fato "posição-de-aterrissagem-uniforme" de
+> `general_k_joint_attempt` §4.1) — confirmando a pista do próprio
+> mandato do Estágio 40.
+
+**O que isto NÃO fecha.** Uma única fórmula fechada em `(n,K)` para a
+CDF (o análogo geral-`K` da Proposição D3 do Estágio 40) não foi
+tentada além de uma pequena demonstração de que a maquinaria
+algorítmica funciona — correta e deliberadamente fora do escopo
+primário do mandato, espelhando a experiência dos Estágios 38/39 de
+que o método generalizar-se de forma limpa não implica que uma fórmula
+fechada única em `K` seja fácil de extrair.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: verificação
+simbólica independente em `K=4` (pesos livres `p_0,\ldots,p_3`,
+`p_D=1-\sum p_i`), comparando a Proposição S contra uma enumeração
+bruta da tabela de destinos `(K+1)^K` — correspondência exata para
+todo subconjunto `A`.
+
+Referee hostil dedicado (`.../general_k_decomposition_attempt/`
+`adversarial/REFEREE_REPORT.md`), sem ler nenhum script desta frente
+ou de qualquer front da linhagem: re-derivou a identidade algébrica
+crucial `(1-P_B)F(B)+G(B)=1` de quatro formas independentes (soma de
+subconjunto bruta até `|B|=8`; re-derivação independente da identidade
+de log-derivada; duas rotas independentes para o passo de integração
+por partes; verificação com pesos racionais aleatórios, incluindo
+negativos/`>1`, até `|B|=12`, confirmando ser uma identidade
+polinomial pura); percorreu a lógica da indução linha por linha;
+testou a forma mais forte do Lema-Chave (independência de múltiplos
+"sabores" de escape distinguíveis — algo que os próprios testes do
+documento nunca exercitam diretamente) com um modelo bruto
+multi-sabor genuinamente diferente, incluindo um controle negativo
+deliberado (não-normalizado) que corretamente falhou primeiro; rodou
+enumeração simbólica bruta `(K+1)^K` em `K=0,\ldots,5` mais valores
+racionais concretos em `K=6,7`; construiu um brute force verdadeiro de
+Definição 4 totalmente independente (reconstrução própria de arcos a
+partir da estrutura de ciclos de `\pi`) em 11 células `(n,K)` até
+`(7,3)` — uma célula além do próprio alcance da frente; verificou a
+liberdade-em-`K` do Teorema de Decomposição, incluindo a independência
+CONJUNTA completa (não apenas marginal) de `(V_s)`, via um modelo
+posição-nível fresco em `K=4,5,6`; confirmou a recuperação exata das
+quatro fórmulas do Estágio 40; verificou ambas as citações (Lema 4 do
+Estágio 38; fato posição-uniforme de `general_k_joint_attempt` §4.1)
+contra seus textos-fonte.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum erro matemático
+> encontrado em nenhuma parte do documento. Dois achados, ambos BAIXA
+> severidade, puramente informacionais (nenhum defeito).
+
+Ver
+`.../general_k_joint_attempt/general_k_decomposition_attempt/ATTEMPT.md`
+e
+`.../general_k_decomposition_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. A Proposição S e o
+Teorema de Decomposição Completa da Contagem de Ciclos entram no
+catálogo como resultados PROVADOS para todo `K`, com provas livres de
+`K` — não meramente verificados em muitos `K` concretos. Isto é
+estritamente mais forte, no sentido específico que o mandato
+perguntou, que os fechamentos geral-`K` do segundo momento dos
+Estágios 38/39 (a lei conjunta inteira de `S` e `T`, não apenas um
+escalar par-a-par). A Proposição S também revela, como bônus, que as
+quatro fórmulas separadas do Estágio 40 eram sempre uma única fórmula.
+
+**O que permanece aberto, com precisão:** uma fórmula fechada única em
+`(n,K)` para a CDF não-condicional geral-`K` (o análogo geral do
+Estágio 40 §4) — a CDF *condicional* dada `L` é fechada e correta para
+qualquer `K` (demonstrado), mas somar isso sobre o simplex de
+composição `K`-dimensional em forma algébrica fechada não foi
+tentado; nenhum padrão ou fórmula fechada para coeficientes de
+taxa/momento como função de `K`; nenhum exame do comportamento
+`K\to\infty`. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.

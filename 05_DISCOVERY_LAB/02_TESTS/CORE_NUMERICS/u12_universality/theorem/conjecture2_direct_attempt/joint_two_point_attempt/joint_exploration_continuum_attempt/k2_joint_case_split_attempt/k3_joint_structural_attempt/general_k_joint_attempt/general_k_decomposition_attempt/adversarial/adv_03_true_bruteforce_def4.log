@@ -1,0 +1,58 @@
+==============================================================================
+SELF-CAUGHT BUG DISCLOSURE (this referee's own script, not the front's):
+An earlier version of this script's arc-reconstruction walked FORWARD
+via pi from each source s (s, pi(s), pi(pi(s)), ...) to build ARC(s).
+This is backward: per ATTEMPT.md Section 1.2, position L_s (the LAST
+position of ARC(s)) is the source itself, i.e. ARC(s) consists of s's
+pi-PREDECESSORS, not successors. The forward-walk bug misattributed
+points between arcs and produced spurious T != O+sum V_s 'failures'
+at (n=4,K=2): 44/384 configs failing bookkeeping under the buggy
+version, ALL 384 passing after the fix (walk pi^{-1} backward from s
+instead). This was a bug in this adversarial script, not evidence
+against the theorem -- caught and fixed before drawing any
+conclusion, exactly the discipline the front itself models.
+==============================================================================
+
+==============================================================================
+TRUE brute force of Definition 4's literal model (genuine pi, genuine U),
+own arc-reconstruction from pi's cycle structure, checking BOTH:
+  (1) deterministic identity T = O + sum_{s in S} V_s in every config, and
+  (2) unconditional P(S=A) via two independent routes (raw enumeration vs
+      Proposition S formula averaged over the TRUE brute-force arc-length
+      distribution, recomputed from scratch, not cited)
+==============================================================================
+--- (n=4, K=1) ---
+  total configs = n!*n^K = 96, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 2 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 96 configs
+--- (n=5, K=1) ---
+  total configs = n!*n^K = 600, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 2 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 600 configs
+--- (n=6, K=1) ---
+  total configs = n!*n^K = 4320, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 2 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 4320 configs
+--- (n=4, K=2) ---
+  total configs = n!*n^K = 384, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 4 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 384 configs
+--- (n=5, K=2) ---
+  total configs = n!*n^K = 3000, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 4 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 3000 configs
+--- (n=4, K=3) ---
+  total configs = n!*n^K = 1536, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 8 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 1536 configs
+--- (n=6, K=3) ---
+  total configs = n!*n^K = 155520, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 8 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 155520 configs
+--- (n=5, K=4) ---
+  total configs = n!*n^K = 75000, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 16 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 75000 configs
+--- (n=7, K=2) ---
+  total configs = n!*n^K = 246960, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 4 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 246960 configs
+--- (n=7, K=3) ---
+  total configs = n!*n^K = 1728720, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 8 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 1728720 configs
+--- (n=6, K=4) ---
+  total configs = n!*n^K = 933120, bookkeeping failures (T != O+sum V_s) = 0
+  ALL 16 subsets A match EXACTLY (empirical == Proposition S prediction), bookkeeping identity holds in all 933120 configs
+
+OVERALL: ALL CELLS PASS

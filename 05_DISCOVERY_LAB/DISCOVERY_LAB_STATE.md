@@ -1,6 +1,15 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-110`: onda 23 autorizada
+**Última atualização:** 2026-08-28 (`DISC-DEC-111`: onda 23 frente (b)
+`GENERAL-K-DECOMPOSITION-ATTEMPT` integrada como Estágio 41 —
+Proposição S geral-K PROVADA (fórmula fechada única, livre de K,
+unificando as quatro fórmulas separadas do Estágio 40); Teorema de
+Decomposição Completa da Contagem de Ciclos, K geral, PROVADO
+(confirmando a pista do próprio Estágio 40). Referee hostil: SOUND —
+ACCEPT for catalogue, nenhum erro matemático, apenas 2 achados BAIXA
+informacionais. CDF fechada geral-K permanece aberta, fora do escopo
+primário deste mandato.
+Anterior: `DISC-DEC-110`: onda 23 autorizada
 — 3 frentes paralelas, cada uma grounded diretamente no texto dos
 resultados recém-integrados: (a) `K2-FULL-CDF-ATTEMPT`, estendendo o
 método do Estágio 40 para `K=2`, fechando a última lacuna pequena de

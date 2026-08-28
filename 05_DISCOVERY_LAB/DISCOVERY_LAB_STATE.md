@@ -1,6 +1,19 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-109`: onda 21 frente (b)
+**Última atualização:** 2026-08-28 (`DISC-DEC-110`: onda 23 autorizada
+— 3 frentes paralelas, cada uma grounded diretamente no texto dos
+resultados recém-integrados: (a) `K2-FULL-CDF-ATTEMPT`, estendendo o
+método do Estágio 40 para `K=2`, fechando a última lacuna pequena de
+CDF completa; (b) `GENERAL-K-DECOMPOSITION-ATTEMPT`, tentando
+generalizar o Teorema de Decomposição Completa do Estágio 40 para `K`
+geral — a pista explicitamente sinalizada mas não verificada pelo
+próprio Estágio 40, o maior prêmio disponível na linha atual; (c)
+`MCLUST-H1-VOLTERRA-ATTEMPT`, atacando `(U1)`/`(U2)` pela rota
+Volterra-em-`y` nomeada como "mais promissora, inteiramente não
+explorada" no adendo mais recente sobre este nó. Seeds
+`20260923000-20260925999`, um bloco por frente, grep-confirmados
+não-usados.
+Anterior: `DISC-DEC-109`: onda 21 frente (b)
 `K3-FULL-CDF-ATTEMPT` v2 integrada em `THEOREM.md` como Estágio 40 —
 excede a ambição original do mandato: novo Teorema de Decomposição
 Completa da Contagem de Ciclos PROVADO (lei conjunta completa de `T`,

@@ -20,6 +20,10 @@ Since 2026, the archive has also run a **continuous adjudication laboratory** (`
 
 <p align="center"><img src="05_DISCOVERY_LAB/assets/governance_velocity.svg" alt="Cumulative count of governance decisions logged in DECISION_LEDGER.yaml over time, showing continuous laboratory activity" width="600"></p>
 
+## Roadmap: from research archive to discovery infrastructure
+
+**[`ROADMAP.md`](ROADMAP.md)** lays out a proposed — not committed, not built — future direction: packaging this archive's actual strongest asset (the pre-registration → adversarial-review → decision-ledger methodology that produced the `U₁/₂` result below) as reusable discovery infrastructure, with `U₁/₂` kept permanently as its required first benchmark. Five staged milestones, from a 5-module MVP through a full product suite to a unified architecture; explicit non-goals carried over from this archive's own anti-overclaiming discipline. Read it as a prioritization argument, not a claim about what exists today.
+
 ## Quick read
 
 The institutional report [Final Vision of the Tamesis Laboratory](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.md) lays out the questions, answers, impacts, applications, and new questions produced by the research program as a whole. A [print-ready HTML/PDF version](RELATORIO_VISAO_FINAL_LABORATORIO_TAMESIS.html) is also available.

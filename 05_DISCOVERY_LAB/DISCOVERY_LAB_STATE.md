@@ -1,6 +1,19 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-115`: onda 24 frente (c)
+**Última atualização:** 2026-08-28 (`DISC-DEC-116`: onda 24 frente (a)
+`K4-FULL-CDF-ATTEMPT` integrada como Estágio 43 — Proposição D4
+PROVADA, CDF completa fechada de `M_n^{(4)}`, exigindo quatro regimes
+combinatórios (um a mais que `K=3`) que colapsam por identidade
+simbólica exata numa única fórmula racional. CDFs completas fechadas
+em `K` pequeno agora completas para `K=0,1,2,3,4`. Corolários: nova
+fórmula completa todas-as-ordens da média finita-`n` `φ_n^{(4)}`;
+limites de 2º/3º momento; limitante de convergência uniforme `7248/n`.
+Referee hostil: SOUND WITH NAMED ISSUES — ACCEPT for catalogue, nenhum
+erro de alta severidade; um achado MODERADO (a própria frente alegou
+falsamente que `E[M_4^3]=128/1155` era inédito — já estava no Estágio
+20 — corrigido por blockquote datado) e três achados BAIXA
+procedimentais.
+Anterior: `DISC-DEC-115`: onda 24 frente (c)
 `MCLUST-H1-POST-CORRECTION-ATTEMPT` integrada no
 `PROOF_DEPENDENCY_MAP.md` (nó `PLATRESUM`) — usando o limitante
 corrigido da `DISC-DEC-113`, PROVOU (não apenas confirmou

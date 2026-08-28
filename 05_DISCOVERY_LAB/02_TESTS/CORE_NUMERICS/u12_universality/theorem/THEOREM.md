@@ -6330,3 +6330,113 @@ uniforme de Corolário D2.5; todos os demais itens em aberto
 catalogados nos Estágios 38-41. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+## [Extensão, Estágio 43 — 2026-08-28]
+
+**Onda 24, frente (a), `DISC-DEC-114`
+(`K4-FULL-CDF-ATTEMPT`).** Alvo: estender a série de CDFs completas
+fechadas — `K=0,1` (Estágio 27), `K=2` (Estágio 42), `K=3` (Estágio
+40) — para `K=4`, citando (sem re-derivar) o Teorema de Decomposição
+Completa da Contagem de Ciclos geral-`K` e a Proposição S (Estágio 41,
+PROVADOS para todo `K`).
+
+### O que aconteceu
+
+> **Achado principal: fechamento completo, quatro regimes combinatórios
+> colapsando em uma única fórmula.** A Proposição S e o Teorema de
+> Decomposição, instanciados em `K=4`, foram re-verificados (não
+> re-derivados). O resultado principal — **Proposição D4** — é uma
+> única fórmula fechada, para todo `n\ge4` e todo inteiro
+> `0\le k\le n-1`:
+> `P(M_n^{(4)}\le k/n)=k(k+1)\,Q(n,k)\,/\,[n^5(n-1)(n-2)(n-3)]`, com
+> `Q(n,k)=-k^6+9k^5+(4n^2-18n-31)k^4+(-16n^2+80n+51)k^3+
+> (-6n^4+42n^3-55n^2-120n-40)k^2+(6n^4-50n^3+97n^2+70n+12)k+
+> 4n^6-30n^5+74n^4-52n^3-30n^2-12n` (e `=1` para `k=n`, trivial).
+> Derivada por generalização do "shift trick" do Estágio 40 mais um
+> nível — os padrões de tamanho `<4` deixam `4-|A|` arcos livres que
+> devem eles próprios ser compostos, uma complicação genuinamente nova
+> ausente em `K=3`. A prova exige **quatro** regimes combinatórios
+> (`0\le k\le n-4`; `k=n-3`; `k=n-2`; `k=n-1`) — um a mais que `K=3` —
+> cada um derivado e verificado independentemente, depois mostrados,
+> por identidade simbólica exata (não checagem numérica), colapsando
+> na mesma fórmula única acima.
+>
+> **Corolários (todos PROVADOS):** prova direta elementar de
+> `P(M_n^{(4)}=1)=24/n^4` (D4.1); **fórmula completa nova, todas as
+> ordens**, da média finita-`n`
+> `\varphi_n^{(4)}=128/315+23/(210n)+482/(315n^2)+99/(70n^3)+
+> 7/(9n^4)+4/(21n^5)` (D4.2) — nenhuma fórmula desse tipo existia
+> antes desta frente; reproduz exatamente os dois âncoras já
+> registrados (`\varphi_4=128/315`, taxa líder `c_4=23/210`); limites
+> de segundo/terceiro momento coincidindo com `1/5` e `128/1155`
+> (D4.3–D4.4; o segundo já estava registrado no Estágio 20 como
+> subproduto — ver correção abaixo); limitante de convergência
+> uniforme `|F_n^{(4)}(x)-F_4(x)|\le7248/n` para `n\ge6`, `x\in[0,1]`
+> (D4.5, constante crua, não otimizada; constante assintótica mais
+> afiada `\approx0{,}7087/n` divulgada honestamente como não provada
+> uniforme).
+
+**Correção aplicada (achado F1 do referee, severidade MODERADA):** a
+frente original alegou, na sua própria `ATTEMPT.md` §6.3, que
+`E[M_4^3]=128/1155` "não está separadamente declarado em nenhum lugar
+de `THEOREM.md` para `K=4`". Isto é falso — o Estágio 20 (linhas
+3639–3641) já declara exatamente esse valor como subproduto de sua
+própria derivação de `K=4`; a lista de leitura da frente citou o
+Estágio 24 mas omitiu o Estágio 20. Corrigido por blockquote datado na
+própria `ATTEMPT.md`, §6.3. **Não afeta a correção matemática de D4.4**
+nem da checagem cruzada `K=5` (ambas independentemente reconfirmadas
+pelo referee via identidade distinta) — apenas o enquadramento de
+novidade estava errado; o valor `128/1155` em si está correto e agora
+tem duas derivações independentes concordantes.
+
+**O que isto NÃO fecha.** A CDF completa geral-`K` para `K\ge5`
+permanece sem fórmula fechada explícita (tratada, para não-existência
+de forma fechada uniforme, pela frente irmã desta mesma onda — ver
+Estágio 44 se/quando integrado); a constante assintótica mais afiada
+do limitante de convergência de D4.5 não foi provada como limitante
+uniforme finito-`n`.
+
+### Verificação adversarial independente
+
+Referee hostil dedicado
+(`.../k4_full_cdf_attempt/adversarial/REFEREE_REPORT.md`): brute force
+verdadeiro e independente de Definição 4, `n=4$–$9` (aritmética
+`Fraction` exata, duas rotas de enumeração cruzadas independentemente
+— um passo além do próprio alcance da frente, que parou em `n=8`;
+`n=9`: `99{,}2` milhões de configurações em `94`s); re-verificação
+independente da Proposição S em `K=4` via construção posição-nível
+explícita, `14` configurações incluindo `8` casos degenerados de
+fronteira (`16` subconjuntos, correspondência exata em todos os
+casos); confirmação da independência/uniformidade condicional
+`V_s|S` do Teorema de Decomposição em `36` células testadas; partição
+de regimes, continuidade de fronteira, monotonicidade e range
+`[0,1]` confirmados exatamente (`n=4$–$40`, zero violações — o
+"colapso em uma fórmula" é exato, não aproximado); fórmula da média
+(Corolário D4.2) re-derivada independentemente via `sp.summation`,
+correspondência exata; fórmulas completas finito-`n` de D4.3/D4.4
+re-derivadas via identidade diferente, correspondência exata,
+checagem cruzada `K=5` (`256/3003`) confirmada correta; limitante de
+taxa de D4.5 re-derivado do zero, reproduz exatamente a constante
+`7248/n`; termo líder e seu máximo numérico (`\approx0{,}7087` em
+`x\approx0{,}3699`) confirmados.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Nenhum
+> erro matemático de alta severidade. Um achado MODERADO (F1, corrigido
+> acima); três achados BAIXA, todos procedimentais/informacionais
+> (`git status` somente-leitura divulgado pela própria frente;
+> `git branch` inadvertido do próprio referee, somente-leitura, sem
+> comandos git adicionais; notação `L_s`/`O` ambígua na primeira
+> leitura, sem defeito real uma vez entendida a convenção).
+
+Ver
+`.../general_k_joint_attempt/k4_full_cdf_attempt/ATTEMPT.md`
+e
+`.../k4_full_cdf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. `M_n^{(4)}`'s CDF
+completa entra no catálogo como resultado fechado e provado — as CDFs
+completas fechadas em `K` pequeno estão agora completas para
+`K=0,1,2,3,4`. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.

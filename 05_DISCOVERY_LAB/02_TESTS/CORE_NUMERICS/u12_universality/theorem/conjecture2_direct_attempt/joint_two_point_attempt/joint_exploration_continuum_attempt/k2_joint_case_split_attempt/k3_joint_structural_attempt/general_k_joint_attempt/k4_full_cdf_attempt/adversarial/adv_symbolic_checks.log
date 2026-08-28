@@ -1,0 +1,76 @@
+==============================================================================
+(c) REGIME BOUNDARY / RANGE / MONOTONICITY CHECKS
+==============================================================================
+1 - F(n-1) [should be 24/n^4, matching D4.1 and ATTEMPT.md's own regime (iv) '1-24/n^4']:
+    = 24/n**4
+    matches 24/n^4 exactly: True
+
+F(n-3) - [quoted regime(ii) value] = 0  (should be 0)
+F(n-2) - [quoted regime(iii) value] = 0  (should be 0)
+F(n-1) - [quoted regime(iv) value]  = 0  (should be 0)
+
+F(0) = 0  (should be 0)
+
+Numeric monotonicity + [0,1]-range spot-check (exact Fractions), n=4..40:
+  n=4..40, monotonicity+range violations found: 0
+
+==============================================================================
+(d) INDEPENDENT RE-DERIVATION OF COROLLARY D4.2's MEAN FORMULA
+==============================================================================
+phi_n^(4) = 1 - (1/n) sum_{k=0}^{n-1} F(k), computed independently via sp.summation:
+    = 128/315 + 23/(210*n) + 482/(315*n**2) + 99/(70*n**3) + 7/(9*n**4) + 4/(21*n**5)
+
+Claimed D4.2 formula: 128/315 + 23/(210*n) + 482/(315*n**2) + 99/(70*n**3) + 7/(9*n**4) + 4/(21*n**5)
+Independent-minus-claimed difference (should be 0): 0
+
+constant term (n->oo limit) = 128/315  (cited target phi_4=128/315, Estagio 20/24)
+coefficient of 1/n           = 23/210  (cited target c_4=23/210, Estagio 7)
+  MATCH constant: True
+  MATCH 1/n coeff: True
+
+==============================================================================
+(e) INDEPENDENT MOMENT RE-DERIVATION FROM THE CITED CONTINUUM DENSITY, AND K=5 CROSS-CHECK
+==============================================================================
+  E[M_4^3] via int_0^1 x^3 * 2*4*x*(1-x^2)^3 dx = 128/1155   [K=4 (Corollary D4.4's own claimed limit)]
+  E[M_5^3] via int_0^1 x^3 * 2*5*x*(1-x^2)^4 dx = 256/3003   [K=5 (THEOREM.md Estagio 24's own stated instance)]
+
+  D4.4 claims E[M_4^3] -> 128/1155 : True
+    independently computed E[M_4^3] = 128/1155  (claimed 128/1155): True
+    independently computed E[M_5^3] = 256/3003  (THEOREM.md Estagio 24's own stated K=5 instance, 256/3003): True
+    general formula K!2^K/prod(2j+5) at K=4: 128/1155 (matches independent integral: True)
+    general formula K!2^K/prod(2j+5) at K=5: 256/3003 (matches independent integral and Estagio-24 citation: True)
+
+  E[M_4^2] and phi_4 sanity (should be 1/5 and 128/315):
+    E[M_4^2] = 1/5  (cited 1/(K+1)=1/5): True
+    E[M_4]   = 128/315  (cited phi_4=128/315): True
+
+==============================================================================
+(BONUS) INDEPENDENT RE-DERIVATION OF THE FULL FINITE-n D4.3/D4.4 FORMULAS (not just their limits), via a DIFFERENT identity (Abel/survival-function summation) from the one used for D4.2 above
+==============================================================================
+  E[(M_n^4)^2] independent = 1/5 + 19/(210*n) + 3/(2*n**2) + 61/(30*n**3) + 199/(70*n**4) + 209/(105*n**5) + 4/(7*n**6)
+    diff vs claimed D4.3 full finite-n formula: 0
+  E[(M_n^4)^3] independent = 128/1155 + 5/(77*n) + 9113/(6930*n**2) + 4813/(2310*n**3) + 5659/(1386*n**4) + 719/(154*n**5) + 1049/(315*n**6) + 236/(231*n**7)
+    diff vs claimed D4.4 full finite-n formula: 0
+
+==============================================================================
+(f) COROLLARY D4.5 RATE-BOUND VERIFICATION
+==============================================================================
+F_n^(4)(x) - F_4(x), exact (sp.cancel), as a single rational function:
+  denominator = n**3*(n - 3)*(n - 2)*(n - 1)
+  denominator matches claimed n^3(n-1)(n-2)(n-3): True
+
+  Sum of |coefficient-of-n^j| over all (i,j) [our own bound on |N(n,x)| for x in [0,1]] = 906
+  n^3(n-1)(n-2)(n-3) - n^6/8 = n**3*(7*n**3 - 48*n**2 + 88*n - 48)/8
+  n^3(n-1)(n-2)(n-3) >= n^6/8 holds for n=6..59 (spot scan): True
+
+  Resulting bound: |F_n^(4)(x)-F_4(x)| <= [906] / (n^6/8) = 7248/n  for n>=6, x in [0,1]
+  Claimed bound in ATTEMPT.md: 7248/n
+  Our own bound <= claimed bound (i.e. claimed bound is valid, possibly not tight): True
+
+  Dense numeric scan n in {6..10000}, x-grid step 0.001: worst observed |gap|/(7248/n) = 0.000098
+  Any bound violation found: None
+
+  Leading-order term g_1(x) [our own lim n(F_n-F_4)]: -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+  Claimed g_1(x) in ATTEMPT.md section 6.4: -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+  diff: 0
+  numeric max of g_1(x) on [0,1]: 0.708718 at x=0.3699 (claimed ~0.7087 at x~0.3699)

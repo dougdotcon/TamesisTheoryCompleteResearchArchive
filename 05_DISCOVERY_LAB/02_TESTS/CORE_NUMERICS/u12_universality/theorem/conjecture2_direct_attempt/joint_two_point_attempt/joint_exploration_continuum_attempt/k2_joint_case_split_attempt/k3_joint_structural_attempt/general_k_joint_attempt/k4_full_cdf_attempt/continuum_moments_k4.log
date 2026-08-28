@@ -1,0 +1,25 @@
+Continuum density (CITED, Estagio 24, general K):
+  f_{M_K}(x) = 2*K*x*(1 - x**2)**(K - 1)
+
+E[M_K^1] (general K, symbolic) = sqrt(pi)*gamma(K + 1)/(2*gamma(K + 3/2))
+E[M_K^2] (general K, symbolic) = 1/(K + 1)
+E[M_K^3] (general K, symbolic) = 3*sqrt(pi)*gamma(K + 1)/(4*gamma(K + 5/2))
+
+==============================================================================
+Specializing to K=4:
+==============================================================================
+f_{M_4}(x) = 8x(1-x^2)^3 = -8*x**7 + 24*x**5 - 24*x**3 + 8*x
+phi_4      = E[M_4]   = 128/315   (cited target: 128/315, Estagio 4/24)
+E[M_4^2]            = 1/5   (cited target: 1/5 = 1/(K+1), Estagio 24)
+E[M_4^3]            = 128/1155   (NOT separately stated in THEOREM.md for K=4;
+                                  derived here directly from the cited density)
+
+All three match the expected/derived targets exactly.
+
+==============================================================================
+Self-consistency cross-check: does this script's own K=5 value
+match THEOREM.md Estagio 24's explicitly-stated E[M_5^3]=256/3003?
+==============================================================================
+E[M_5^3] = 256/3003   (cited: 256/3003, Estagio 24)
+MATCH -- confirms this script's elementary-integration route against
+an independently-stated value already on record in THEOREM.md.

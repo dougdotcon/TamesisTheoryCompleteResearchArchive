@@ -1,0 +1,58 @@
+==============================================================================
+(A) Proposicao D4 vs fresh true brute force of Definition 4, K=4
+==============================================================================
+  n=4: configs=6144, k=0..3 checked, mismatches=0  OK  (elapsed 0.0s)
+  n=5: configs=75000, k=0..4 checked, mismatches=0  OK  (elapsed 0.1s)
+  n=6: configs=933120, k=0..5 checked, mismatches=0  OK  (elapsed 1.5s)
+  n=7: configs=12101040, k=0..6 checked, mismatches=0  OK  (elapsed 21.6s)
+  n=8: configs=165150720, k=0..7 checked, mismatches=0  OK  (elapsed 306.7s)
+Total: 30 exact rational comparisons, 0 mismatches.
+
+==============================================================================
+(B) Proposicao D4 vs independent O(n^4) reference engine
+==============================================================================
+  n=4: every k checked (4 values)
+  n=5: every k checked (5 values)
+  n=6: every k checked (6 values)
+  n=7: every k checked (7 values)
+  n=8: every k checked (8 values)
+  n=9: every k checked (9 values)
+  n=10: every k checked (10 values)
+  n=11: every k checked (11 values)
+  n=12: every k checked (12 values)
+  n=13: every k checked (13 values)
+  n=14: every k checked (14 values)
+  n=15: every k checked (15 values)
+  n=16: every k checked (16 values)
+  n=17: every k checked (17 values)
+  n=18: every k checked (18 values)
+  n=19: every k checked (19 values)
+  n=20: every k checked (20 values)
+  n=22: every 3rd k checked
+  n=25: every 3rd k checked
+  n=28: every 3rd k checked
+  n=30: every 3rd k checked
+Total exact comparisons: 241, mismatches: 0 (elapsed 226.5s)
+
+==============================================================================
+(C) Exact symbolic recovery of mean and moment limits (D4.2-D4.4)
+==============================================================================
+phi_n^(4) [D4.2, NEW full finite-n formula, derived from D4] =
+  128/315 + 23/(210*n) + 482/(315*n**2) + 99/(70*n**3) + 7/(9*n**4) + 4/(21*n**5)
+  constant term (n->oo limit) = 128/315   (cited target: 128/315, Estagio 4/24)
+  coefficient of 1/n          = 23/210   (cited target: 23/210, Estagio 6/7)
+  MATCH
+
+E[(M_n^(4))^2] [D4.3] = 1/5 + 19/(210*n) + 3/(2*n**2) + 61/(30*n**3) + 199/(70*n**4) + 209/(105*n**5) + 4/(7*n**6)
+  limit n->oo = 1/5   (cited target: 1/5 = 1/(K+1), Estagio 24)
+  MATCH
+
+E[(M_n^(4))^3] [D4.4] = 128/1155 + 5/(77*n) + 9113/(6930*n**2) + 4813/(2310*n**3) + 5659/(1386*n**4) + 719/(154*n**5) + 1049/(315*n**6) + 236/(231*n**7)
+  limit n->oo = 128/1155   (target: 128/1155, derived here directly from the
+   CITED general-K continuum density f_{M_K}(x)=2Kx(1-x^2)^(K-1),
+   Estagio 24, by elementary integration -- see ATTEMPT.md Section 6.3)
+  MATCH
+
+==============================================================================
+FINAL: (A) brute force PASS | (B) O(n^4) engine PASS | (C) moments PASS
+==============================================================================

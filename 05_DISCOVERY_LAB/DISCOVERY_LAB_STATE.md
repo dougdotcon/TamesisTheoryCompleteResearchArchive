@@ -1,6 +1,22 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-27 (`DISC-DEC-105`: integração da linha
+**Última atualização:** 2026-08-27 (`DISC-DEC-106`: onda 21 frentes (b)
+`K3-FULL-CDF-ATTEMPT` e (c) `GENERAL-K-JOINT-ATTEMPT` declaradas
+ABANDONADAS por estagnação (despachadas há muito tempo, nunca
+retornaram, identificadores de processo perdidos na compactação de
+contexto desta sessão — única forma honesta de tratar algo que não se
+pode mais verificar) e REDESPACHADAS, a pedido explícito do usuário
+após ser avisado da limitação de visibilidade. Tratamento assimétrico
+disclosurado: (b) nunca produziu `ATTEMPT.md` — redespachada por
+INTEIRO do zero, mesmo mandato original, seeds `20260920000+`. (c) JÁ
+TINHA `ATTEMPT.md` completo e já spot-checado pela sessão antes da
+compactação — matemática preservada (não redespachada, para não
+desperdiçar trabalho real e já verificado), apenas um NOVO referee
+hostil despachado sobre o resultado já existente, seed `20260922000+`.
+Diretórios antigos preservados (renomeados com sufixo `_ABANDONED_*`,
+não deletados). Onda 22 frente (a) continua com integração adiada até
+esta nova rodada de (c) concluir.
+Anterior: `DISC-DEC-105`: integração da linha
 formal de lógica não-clássica em Lean4 (Priest's LP) — CONCLUÍDA. 6
 arquivos Lean, 876 linhas, formalizando a semântica de 3 valores
 {T,B,F}, condicional material DERIVADO (`a→b:=¬a∨b`), e 12 metateoremas

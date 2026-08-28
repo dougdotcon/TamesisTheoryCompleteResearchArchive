@@ -1,0 +1,34 @@
+F_n^(2)(x) - F_2(x) [exact, x=k/n substituted directly into D2]:
+  gap = x*(-n*x**3 - n*x + 2*n + x - 3)/(n*(n - 1))
+
+  numerator N(n,x)   = -n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x
+  denominator D(n)   = n**2 - n
+
+  Laurent series in 1/n (fixed x): (-x**4 - x**2 + 2*x)/n + (-x**4 - x)/n**2
+  leading term coefficient g1(x) := lim n*(F_n-F_2) = x*(-x**3 - x + 2)
+
+  critical points of g1(x) on (0,1): [(-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3) - 1/(6*(-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)), -1/(6*(-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)) + (-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3), -1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3)]
+  g1 values at endpoints/critical points: [((-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3) - 1/(6*(-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)), 0.710726576062222), (-1/(6*(-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)) + (-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3), 0), (-1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3), 0)]
+  max |g1(x)| on [0,1] ~= 0.710726576062222
+
+--- Rigorous finite-n uniform bound ---
+  sum over n-degree coefficients of (sum |x-coeffs|) = 8
+
+  Numerator N(n,x) coefficients by power of n (highest degree first):
+    n^1: coeff(x) = -x**4 - x**2 + 2*x   crude sup-bound on [0,1] <= 4
+    n^0: coeff(x) = x**2 - 3*x   crude sup-bound on [0,1] <= 4
+
+  => |N(n,x)| <= 4*n + 4 for all x in [0,1], n>=1 (crude bound, each x-coefficient bounded by sum of |coeffs|)
+  D(n) = n**2 - n = n(n-1)
+
+  Elementary rigorous bound: for n>=2, (n-1)>=n/2, so D(n)=n(n-1)>=n^2/2.
+  Combined with |N(n,x)|<=4n+4 (proved above, coefficient-sum method), for n>=2:
+    |F_n^(2)(x)-F_2(x)| <= (4n+4)/(n^2/2) = 8/n + 8/n^2 <= 12/n
+  (using 8/n^2<=4/n for n>=2) -- a genuine, rigorously proved, uniform O(1/n) bound for every n>=2, x in [0,1].
+
+  Numerically observed sup_n,x [n * |F_n^(2)(x)-F_2(x)|] ~= 2.000000 at (n,x)~=(2, np.float64(1.0))
+  (compare to max|g1(x)|~=0.710727 -- the asymptotic leading-order sup)
+  Proved crude uniform bound is 12/n (i.e. n*gap<=12) -- observed worst case 2.0000 is comfortably inside it, and consistent with the tight asymptotic constant ~0.7107.
+
+  Direct check that 12/n bound holds (n=2..3000, dense x grid):
+  max observed |gap|/(12/n) ratio = 0.1667 (<=1 means bound holds)

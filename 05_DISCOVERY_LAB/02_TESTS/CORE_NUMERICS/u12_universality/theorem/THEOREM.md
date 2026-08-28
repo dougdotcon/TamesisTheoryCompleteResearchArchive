@@ -6239,3 +6239,94 @@ tentado; nenhum padrão ou fórmula fechada para coeficientes de
 taxa/momento como função de `K`; nenhum exame do comportamento
 `K\to\infty`. Nenhuma alegação de progresso em Millennium Problem;
 matemática combinatória pura interna a este arquivo.
+
+
+## [Extensão, Estágio 42 — 2026-08-28]
+
+**Onda 23, frente (a), `DISC-DEC-110`
+(`K2-FULL-CDF-ATTEMPT`).** Alvo: estender o método do Teorema de
+Decomposição Completa da Contagem de Ciclos (Estágio 40, `K=3`) para
+`K=2`, fechando a última lacuna pequena de CDF completa (`K=0,1`
+fechados no Estágio 27; `K=3` fechado no Estágio 40; `K=2` nunca
+atacado por uma frente dedicada, apesar de seu segundo momento já
+fechado desde a Proposição NN2).
+
+### O que aconteceu
+
+> **Achado principal: fechamento completo, e estruturalmente mais
+> simples que `K=3`.** A Proposição S para `K=2` e o Teorema de
+> Decomposição Completa da Contagem de Ciclos para `K=2` são PROVADOS,
+> pela mesma via do Estágio 40. O resultado principal — **Proposição
+> D2** — é uma única fórmula fechada, para todo `n\ge2` e todo inteiro
+> `0\le k\le n-1`:
+> `P(M_n^{(2)}\le k/n)=k(k+1)(2n^2-3n+k-k^2)/[n^3(n-1)]`.
+> Diferente de `K=3` (que exigiu três regimes combinatórios distintos
+> — Estágio 40 §4.3), esta frente encontrou que **um único regime**
+> basta: a fórmula derivada da soma simbólica genérica já vale
+> exatamente na fronteira `k=n-1`, confirmado por uma verificação
+> simbólica de resto zero, sem necessidade de um segundo caso.
+>
+> **Corolários (todos PROVADOS):** `P(M_n^{(2)}=1)=2/n^2` (prova
+> direta elementar); recuperação simbólica exata, com **zero resto
+> simbólico**, da já-provada média finita-`n` `\varphi_n^{(2)}`
+> (Estágio 3); limites de segundo/terceiro momento coincidindo com os
+> já-provados valores contínuos `1/3` e `8/35`; um limitante de
+> convergência uniforme `|F_n^{(2)}(x)-F_2(x)|\le12/n` para todo
+> `n\ge2`.
+
+**O que isto NÃO fecha.** A CDF completa geral-`K` (`K\ge4`) não foi
+tentada por esta frente — tratada separadamente pela frente irmã desta
+mesma onda (ver Estágio 41); a constante assintótica mais afiada do
+limitante de convergência (`\approx0{,}167/n`, correspondendo ao
+`12/n` observado numericamente como o pior caso real) não foi provada
+como limitante uniforme finito-`n` mais apertado.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes de despachar o referee: brute force
+independente do zero do modelo Definição 4 literal, confirmando
+Proposição D2 exatamente em `n=2,3,4,5,6`, todo `k` — correspondência
+exata em todos os casos.
+
+Referee hostil dedicado (`.../k2_full_cdf_attempt/adversarial/`
+`REFEREE_REPORT.md`), sem ler nenhum script desta frente ou de
+qualquer front da linhagem: brute force verdadeiro estendido até
+`n=10` (54 comparações, `n=10` sozinho `\approx11` minutos, `362
+{,}880{,}000` configurações exatas); re-derivação independente da
+Proposição S via a tabela de destinos bruta de 9 casos (sympy, zero
+discrepância simbólica); modelo reduzido posição-nível independente
+(840 comparações racionais exatas, `n=2,\ldots,200`, zero
+divergências); re-derivação simbólica totalmente independente da
+Proposição D2 usando uma ordem de soma diferente da "shift trick" da
+própria frente (zero diferença simbólica); confirmação independente,
+simbólica e numérica, de que a fronteira `k=n-1` não exige regime
+separado; recuperação de média com zero resto simbólico contra o
+Estágio 3 (relido diretamente, não apenas confiado na transcrição da
+frente); auditoria completa da cadeia de desigualdades do
+Corolário D2.5.
+
+> **Veredito: SOUND — ACCEPT for catalogue.** Nenhum erro matemático
+> encontrado. Dois achados, ambos BAIXA severidade, puramente
+> informacionais (clareza de redação sobre a origem de um valor
+> contínuo citado; confirmação de uma comparação entre frentes).
+
+Ver
+`.../k2_joint_case_split_attempt/k2_full_cdf_attempt/ATTEMPT.md`
+e
+`.../k2_full_cdf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. `M_n^{(2)}`'s CDF
+completa entra no catálogo como resultado fechado e provado, fechando
+a lacuna final entre `K=0,1` (Estágio 27) e `K=3` (Estágio 40) — as
+CDFs completas fechadas em `K` pequeno estão agora completas para
+`K=0,1,2,3`; apenas `K\ge4` permanece sem CDF completa fechada (ver
+Estágio 41 para o estado geral-`K` do problema mais amplo).
+
+**O que permanece aberto, com precisão:** a CDF completa geral-`K`
+(`K\ge4`); uma constante mais afiada para o limitante de convergência
+uniforme de Corolário D2.5; todos os demais itens em aberto
+catalogados nos Estágios 38-41. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

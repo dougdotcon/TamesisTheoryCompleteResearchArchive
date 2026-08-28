@@ -1,0 +1,28 @@
+Step 1: PairAgg(m,t) closed form (shift trick)
+  PairAgg(m,t) = t*(3*m*t - 3*m - 2*t**2 + 3*t - 1)/6
+  OK: closed form matches direct O(m) recomputation for m=2..13, all valid t.
+
+Step 2: S1(t,m,O,n) closed form (elementary arithmetic split)
+  S1(t,m,O,n) = t*(6*O*m - 3*O*t - 3*O + 3*m**2 - 3*m - t**2 + 1)/(6*n**2)
+  OK: closed form matches direct recomputation for several n, all valid (O,t).
+
+Step 3: Contribution(O) assembled
+  Contribution(O) = (O*k**2 - 2*O*k*n - O*k + O*n - k**3 + k**2*n + k**2 + k*n**2 - 2*k*n)/n**2
+
+Regime (i) 0<=k<=n-2:
+  F(k) = -k*(k + 1)*(k**2 - k - 2*n**2 + 3*n)/(n**3*(n - 1))
+
+Regime (ii) k=n-1:
+  F(n-1) = (n**2 - 2)/n**2
+
+Sanity: regime(i) formula at k=n-2: (n**3 - 10*n + 12)/n**3
+
+======================================================================
+SINGLE CLOSED FORM CANDIDATE (regime i, 0<=k<=n-2):
+  P(M_n^(2) <= k/n) = -k*(k + 1)*(k**2 - k - 2*n**2 + 3*n)/(n**3*(n - 1))
+
+Boundary check (k=n-1):
+  P(M_n^(2) <= (n-1)/n) = (n**2 - 2)/n**2
+
+F_generic(k=n-1) - F_boundary = 0
+=> The regime-(i) formula ALSO holds at k=n-1: ONE single closed form covers every 0<=k<=n-1.

@@ -1,0 +1,68 @@
+======================================================================
+Corollary D2.1: P(T=n) = 1 - F(n-1) should equal 2/n^2
+======================================================================
+  1 - F(n-1) = 2/n**2
+  claimed 2/n^2 = 2/n**2
+  diff = 0   OK
+
+======================================================================
+Corollary D2.2: mean recovery.
+  phi_n^(2) = 1 - (1/n) * sum_{k=0}^{n-1} F(k)   [standard identity
+  for a nonnegative integer r.v. T<=n, phi := E[T]/n = E[M_n^(2)]]
+======================================================================
+  sum_{k=0}^{n-1} F(k) = (14*n**3 - n**2 - 21*n - 6)/(30*n**2)
+  phi_n^(2) [derived from D2] = 8/15 + 1/(30*n) + 7/(10*n**2) + 1/(5*n**3)
+  phi_n^(2) [THEOREM.md Estagio 3, independently re-read] = 8/15 + 1/(30*n) + 7/(10*n**2) + 1/(5*n**3)
+  diff = 0   OK -- zero symbolic remainder confirmed
+
+======================================================================
+Corollary D2.3/D2.4: second/third moment n->oo limits.
+  E[(M_n^(2))^r] = 1 - r/n^r * sum_{k=0}^{n-1} k^(r-1) * (n - F(k)
+  -- easier: use E[X^r] for X=T via the tail-sum identity in terms
+  of M = T/n directly: E[M^r] = sum_{k=0}^{n-1} [(k+1)/n)^r -
+  (k/n)^r] * (1-F(k)) + 1^r * ... -- instead we just integrate
+  numerically-symbolically via the direct pmf: pmf(k) = F(k)-F(k-1)
+  for k=1..n, F(-1):=0, and E[M^r] = sum_k (k/n)^r * pmf(k).
+======================================================================
+  pmf(k) [for 1<=k<=n-1] = D2(k)-D2(k-1) = -2*k*(2*k**2 - 3*k - 2*n**2 + 3*n + 1)/(n**3*(n - 1))
+  E[(M_n^(2))^2] [derived] = (10*n**4 + n**3 + 26*n**2 + 11*n + 6)/(30*n**4)
+  limit as n->oo = 1/3   OK (matches 1/3, Estagio 15/24)
+  E[(M_n^(2))^3] [derived] = (48*n**5 + 6*n**4 + 202*n**3 + 97*n**2 + 69*n + 6)/(210*n**5)
+  limit as n->oo = 8/35
+  continuum E[M_2^3] = int_0^1 x^3 * 4x(1-x^2) dx [independently integrated from THEOREM.md Estagio 15's density] = 8/35
+  diff (finite-n limit vs continuum) = 0   OK
+
+======================================================================
+Corollary D2.5: uniform convergence rate |F_n(x)-F_2(x)| <= 12/n
+======================================================================
+  Continuum CDF F_2(x) = 1-(1-x^2)^2 = -x**4 + 2*x**2  [from f_M2=4x(1-x^2), independently integrated]
+  F_2(x) via direct integration of the density = -x**4 + 2*x**2, diff vs 2x^2-x^4 form = 0
+  F_n^(2)(x) - F_2(x) [k:=xn substituted into D2, sp.cancel] = (-n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x)/(n**2 - n)
+  numerator N(n,x) = -n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x
+  denominator = n**2 - n
+  claimed N(n,x) = -n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x, diff = 0   OK
+  claimed denominator n(n-1) = n*(n - 1), diff = 0   OK
+  N(n,x) as a polynomial in n: coeffs (n^1, n^0) = [-x**4 - x**2 + 2*x, x**2 - 3*x]
+    coeff of n^1 (as poly in x) = -x**4 - x**2 + 2*x
+    coeff of n^0 (as poly in x) = x**2 - 3*x
+  max|coeff_n1(x)| on [0,1] = -1/(3*(1/4 + sqrt(87)/36)**(1/3)) - (-(1/4 + sqrt(87)/36)**(1/3) + 1/(6*(1/4 + sqrt(87)/36)**(1/3)))**2 - (-(1/4 + sqrt(87)/36)**(1/3) + 1/(6*(1/4 + sqrt(87)/36)**(1/3)))**4 + 2*(1/4 + sqrt(87)/36)**(1/3) (exact, via calculus)
+  max|coeff_n0(x)| on [0,1] = 2 (exact, via calculus)
+  ATTEMPT.md's crude coefficient-sum bound claims both are <= 4 -- checking directly:
+    max_n1 <= 4 ? True   max_n0 <= 4 ? True
+  => |N(n,x)| <= max_n1*n + max_n0 <= 4n + 4 for n>=1, x in [0,1] -- CONFIRMED (independently, via exact calculus, not just the coefficient-sum heuristic).
+
+  n(n-1) - n^2/2 = nn*(nn - 2)/2 = n(n-2)/2 -- >=0 for n>=2? checking n=2..20:
+    OK for n=2..20 (and n(n-2)/2>=0 for all integer n>=2, trivially)
+  (4n+4)/(n^2/2) = 8/nn + 8/nn**2
+  (8/n+8/n^2) - 12/n = -4/n + 8/n^2 = 4*(2 - nn)/nn**2
+  need -4/n+8/n^2 <= 0  <=>  n>=2 (equality at n=2) -- checking:
+    OK for n=2..20 (n=2 gives exact equality -4/2+8/4=-2+2=0, confirming the bound is tight there, not slack)
+
+  Full inequality chain independently verified: for n>=2, x in [0,1]:
+    |F_n(x)-F_2(x)| = |N(n,x)|/(n(n-1)) <= (4n+4)/(n(n-1)) <= (4n+4)/(n^2/2) = 8/n+8/n^2 <= 12/n.
+
+  Numeric sanity scan: n=2..50, x on a dense grid, direct |gap| vs 12/n bound:
+  worst observed |gap|/(12/n) ratio over the grid = 0.1667 (<=1 required; comfortably inside)
+  No violation found. Corollary D2.5's bound holds on the scan.
+
+ALL CHECKS PASSED.

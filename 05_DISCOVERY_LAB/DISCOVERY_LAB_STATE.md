@@ -1,6 +1,13 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-111`: onda 23 frente (b)
+**Última atualização:** 2026-08-28 (`DISC-DEC-112`: onda 23 frente (a)
+`K2-FULL-CDF-ATTEMPT` integrada como Estágio 42 — Proposição D2
+PROVADA, CDF completa fechada de `M_n^{(2)}` em regime único (mais
+simples que `K=3`), fechando a lacuna final de CDFs completas em `K`
+pequeno (`K=0,1,2,3` agora completos). Referee hostil: SOUND — ACCEPT
+for catalogue, nenhum erro matemático, brute force estendido até
+`n=10`.
+Anterior: `DISC-DEC-111`: onda 23 frente (b)
 `GENERAL-K-DECOMPOSITION-ATTEMPT` integrada como Estágio 41 —
 Proposição S geral-K PROVADA (fórmula fechada única, livre de K,
 unificando as quatro fórmulas separadas do Estágio 40); Teorema de

@@ -1,0 +1,55 @@
+self_test_paircount: 20000/20000 random cases OK (fast closed-form paircount matches slow O(A) loop)
+=== Spot-check: independent position-level model vs the paircount-based conditional-CDF FORMULA (ATTEMPT.md Sec 3) ===
+  n=6 L0=2 L1=3: all k checked (OK)
+  n=7 L0=3 L1=2: all k checked (OK)
+  n=8 L0=4 L1=3: all k checked (OK)
+  n=9 L0=5 L1=2: all k checked (OK)
+  n=10 L0=3 L1=4: all k checked (OK)
+  n=5 L0=1 L1=3: all k checked (OK)
+  n=5 L0=3 L1=1: all k checked (OK)
+  n=12 L0=6 L1=5: all k checked (OK)
+Total comparisons: 70
+VERDICT: MATCH
+
+=== Independent O(n^3)-ish reference engine (position-level model, simplex-averaged) vs Proposicao D2 closed form ===
+  n=2: every k in 0..1 checked, ALL MATCH  [boundary k=n-1: OK, value=1/2]
+  n=3: every k in 0..2 checked, ALL MATCH  [boundary k=n-1: OK, value=7/9]
+  n=4: every k in 0..3 checked, ALL MATCH  [boundary k=n-1: OK, value=7/8]
+  n=5: every k in 0..4 checked, ALL MATCH  [boundary k=n-1: OK, value=23/25]
+  n=6: every k in 0..5 checked, ALL MATCH  [boundary k=n-1: OK, value=17/18]
+  n=7: every k in 0..6 checked, ALL MATCH  [boundary k=n-1: OK, value=47/49]
+  n=8: every k in 0..7 checked, ALL MATCH  [boundary k=n-1: OK, value=31/32]
+  n=9: every k in 0..8 checked, ALL MATCH  [boundary k=n-1: OK, value=79/81]
+  n=10: every k in 0..9 checked, ALL MATCH  [boundary k=n-1: OK, value=49/50]
+  n=11: every k in 0..10 checked, ALL MATCH  [boundary k=n-1: OK, value=119/121]
+  n=12: every k in 0..11 checked, ALL MATCH  [boundary k=n-1: OK, value=71/72]
+  n=13: every k in 0..12 checked, ALL MATCH  [boundary k=n-1: OK, value=167/169]
+  n=14: every k in 0..13 checked, ALL MATCH  [boundary k=n-1: OK, value=97/98]
+  n=15: every k in 0..14 checked, ALL MATCH  [boundary k=n-1: OK, value=223/225]
+  n=16: every k in 0..15 checked, ALL MATCH  [boundary k=n-1: OK, value=127/128]
+  n=17: every k in 0..16 checked, ALL MATCH  [boundary k=n-1: OK, value=287/289]
+  n=18: every k in 0..17 checked, ALL MATCH  [boundary k=n-1: OK, value=161/162]
+  n=19: every k in 0..18 checked, ALL MATCH  [boundary k=n-1: OK, value=359/361]
+  n=20: every k in 0..19 checked, ALL MATCH  [boundary k=n-1: OK, value=199/200]
+  n=21: every k in 0..20 checked, ALL MATCH  [boundary k=n-1: OK, value=439/441]
+  n=22: every k in 0..21 checked, ALL MATCH  [boundary k=n-1: OK, value=241/242]
+  n=23: every k in 0..22 checked, ALL MATCH  [boundary k=n-1: OK, value=527/529]
+  n=24: every k in 0..23 checked, ALL MATCH  [boundary k=n-1: OK, value=287/288]
+  n=25: every k in 0..24 checked, ALL MATCH  [boundary k=n-1: OK, value=623/625]
+  n=28: every k in 0..27 checked, ALL MATCH  [boundary k=n-1: OK, value=391/392]
+  n=30: every k in 0..29 checked, ALL MATCH  [boundary k=n-1: OK, value=449/450]
+Total comparisons: 382
+VERDICT: ALL MATCH
+
+=== Second-layer check: validated conditional-CDF formula, simplex-averaged directly, vs Proposicao D2 (larger n) ===
+  n=40: every k in 0..39 checked, ALL MATCH
+  n=60: every k in 0..59 checked, ALL MATCH
+  n=80: every k in 0..79 checked, ALL MATCH
+  n=100: every k in 0..99 checked, ALL MATCH
+  n=130: every k in 0..129 checked, ALL MATCH
+  n=160: every k in 0..159 checked, ALL MATCH
+  n=200: every k in 0..199 checked, ALL MATCH
+Total comparisons: 770
+VERDICT: ALL MATCH
+
+OVERALL VERDICT: SOUND

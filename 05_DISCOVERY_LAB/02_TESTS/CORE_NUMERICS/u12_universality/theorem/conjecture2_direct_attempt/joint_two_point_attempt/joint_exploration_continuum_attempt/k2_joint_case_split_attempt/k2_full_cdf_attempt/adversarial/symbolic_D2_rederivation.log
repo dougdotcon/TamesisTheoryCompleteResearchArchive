@@ -1,0 +1,51 @@
+======================================================================
+Step 1: PairAgg(m,t) := sum_{L0=1}^{m-1} paircount(L0, m-L0, t)
+Independent derivation via raw (L0,v,w) triple-sum order swap
+(NOT the front's s=v+w 'shift trick').
+======================================================================
+  Derived PairAgg(m,t) = t*(3*m*t - 3*m - 2*t**2 + 3*t - 1)/6
+  Claimed (ATTEMPT.md Sec 4.1) PairAgg(m,t) = t*(3*m*t - 3*m - 2*t**2 + 3*t - 1)/6
+  diff = 0   OK
+
+  Numeric cross-check of derived PairAgg formula vs direct O(m) double loop, m=2..25, all valid t:
+  348 numeric comparisons, ALL MATCH
+
+======================================================================
+Step 2: S1(t,m,O,n) := sum_{L0=1}^{m-1} (L0+O)/n^2 * clip(t,0,L0)
+Independent derivation via direct split at L0=t (clip=min(t,L0)
+since t>=0), summing each piece with sympy directly.
+======================================================================
+  Derived S1(t,m,O,n) = t*(6*O*m - 3*O*t - 3*O + 3*m**2 - 3*m - t**2 + 1)/(6*n**2)
+  Claimed (ATTEMPT.md Sec 4.1) S1(t,m,O,n) = t*(6*O*m - 3*O*t - 3*O + 3*m**2 - 3*m - t**2 + 1)/(6*n**2)
+  diff = 0   OK
+
+  Numeric cross-check of derived S1 formula vs direct O(m) loop, several (n,O), all valid (m,t):
+  306 numeric comparisons, ALL MATCH
+
+======================================================================
+Step 3: is t <= m-1 always true in the range used (so Step 2's split is well-posed with no further sub-casing)?
+======================================================================
+  (m-1) - t = -k + n - 1  (independent of O, as expected)
+  This is >= 0 exactly when k <= n-1, which is the assumed domain -- CONFIRMED, t<=m-1 holds unconditionally in-domain.
+
+======================================================================
+Step 4: assemble Contribution(O) and sum over O -- regime (i), 0<=k<=n-2, O=0..k.
+======================================================================
+  Contribution(O) [before the O<=k Iverson bracket -- trivially true throughout this regime's O range] = (k*n**2 + k*(O*k - O - k**2 + k) + n*(-2*O*k + O + k**2 - 2*k))/n**2
+  F_regime_i(k) [derived, INDEPENDENT summation order] = -k*(k + 1)*(k**2 - k - 2*n**2 + 3*n)/(n**3*(n - 1))
+  Claimed regime-(i) formula (ATTEMPT.md Sec 4.2) = -k*(k + 1)*(k**2 - k - 2*n**2 + 3*n)/(n**3*(n - 1))
+  diff = 0   OK
+  vs Proposicao D2's headline formula = k*(k + 1)*(-k**2 + k + 2*n**2 - 3*n)/(n**3*(n - 1))
+  diff = 0   OK
+
+======================================================================
+Step 5: independently derive regime (ii) (k=n-1, O=0..n-2) FROM SCRATCH (not by substituting into regime (i)'s already-derived formula) and compare to regime (i) evaluated at k=n-1.
+======================================================================
+  F_regime_ii (independently derived, O summed 0..n-2 directly) = 1 - 2/n**2
+  Claimed regime-(ii) formula = (n**2 - 2)/n**2
+  diff = 0   OK
+  F_regime_i(k=n-1) = 1 - 2/n**2
+  F_regime_ii (independently derived) = 1 - 2/n**2
+  diff = 0   OK -- single formula genuinely covers k=n-1 too
+
+ALL STEPS PASSED: Proposicao D2's closed form is independently re-derived from raw first principles (different summation order than the front's own 'shift trick'), and the single-regime (no separate k=n-1 boundary case) claim is independently confirmed by deriving regime (ii) from scratch, not merely by substituting into regime (i)'s own formula.

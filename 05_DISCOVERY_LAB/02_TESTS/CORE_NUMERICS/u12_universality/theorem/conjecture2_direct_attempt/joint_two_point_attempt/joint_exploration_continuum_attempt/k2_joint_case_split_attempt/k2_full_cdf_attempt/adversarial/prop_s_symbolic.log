@@ -1,0 +1,20 @@
+Raw 9-case trace (dest(0), dest(1)) -> S:
+  dest(0)=0, dest(1)=0  ->  S=[0]   weight=p0**2
+  dest(0)=0, dest(1)=1  ->  S=[0, 1]   weight=p0*p1
+  dest(0)=0, dest(1)=D  ->  S=[0]   weight=p0*pD
+  dest(0)=1, dest(1)=0  ->  S=[0, 1]   weight=p0*p1
+  dest(0)=1, dest(1)=1  ->  S=[1]   weight=p1**2
+  dest(0)=1, dest(1)=D  ->  S={}   weight=p1*pD
+  dest(0)=D, dest(1)=0  ->  S={}   weight=p0*pD
+  dest(0)=D, dest(1)=1  ->  S=[1]   weight=p1*pD
+  dest(0)=D, dest(1)=D  ->  S={}   weight=pD**2
+
+Aggregated P(S=A), raw sum vs claimed closed form (ATTEMPT.md Sec 2.1):
+  S={}: raw_sum=pD*(p0 + p1 + pD)  claimed=pD  diff(after pD=1-p0-p1)=0  OK
+  S=[0]: raw_sum=p0*(p0 + pD)  claimed=p0**2 + p0*pD  diff(after pD=1-p0-p1)=0  OK
+  S=[1]: raw_sum=p1*(p1 + pD)  claimed=p1**2 + p1*pD  diff(after pD=1-p0-p1)=0  OK
+  S=[0, 1]: raw_sum=2*p0*p1  claimed=2*p0*p1  diff(after pD=1-p0-p1)=0  OK
+
+  sum of all 4 P(S=.) (raw) = p0**2 + 2*p0*p1 + 2*p0*pD + p1**2 + 2*p1*pD + pD**2  (should be (p0+p1+pD)^2 = 1 on the simplex): after pD=1-p0-p1 -> 1
+
+VERDICT: Proposicao S (K=2) INDEPENDENTLY CONFIRMED, 0 discrepancies

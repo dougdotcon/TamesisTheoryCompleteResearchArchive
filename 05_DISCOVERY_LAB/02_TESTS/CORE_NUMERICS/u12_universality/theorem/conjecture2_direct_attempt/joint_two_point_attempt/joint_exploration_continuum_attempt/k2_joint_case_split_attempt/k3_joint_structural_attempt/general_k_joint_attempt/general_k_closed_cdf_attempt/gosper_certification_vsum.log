@@ -1,0 +1,51 @@
+======================================================================
+PART A: positive controls (confirms the harness detects
+Gosper-summability, including symbolic binomial degrees, when present)
+----------------------------------------------------------------------
+  control1 C(V,r), symbolic r: gosper_term = (V - r)/(r + 1)  [0.13s]
+  control1 definite sum(V,0,K), symbolic r AND K: gosper_sum = (K + 1)*binomial(K, r)/(r + 1)  [0.02s]
+  control2 C(V,K), symbolic K: gosper_term = (-K + V)/(K + 1)  [0.03s]
+  control3 C(V+r-1,K-1)*V, symbolic K,r: gosper_term = (V/(K + 1) - r/(K**2 + K))*(-K + V + r)/V  [0.06s]
+  control4 (negative) 1/V: gosper_term = None  [0.01s]  (expected None)
+  Positive controls all found closures: True
+======================================================================
+
+PART B: concrete K, symbolic r -- gosper_term SUCCEEDS every time
+----------------------------------------------------------------------
+  K=3: gosper_term(V) is-not-None = True   [11.26s]
+  K=4: gosper_term(V) is-not-None = True   [22.10s]
+  K=5: gosper_term(V) is-not-None = True   [13.02s]
+  K=6: gosper_term(V) is-not-None = True   [11.54s]
+  K=7: gosper_term(V) is-not-None = True   [13.09s]
+  All concrete K in {3,4,5,6,7} Gosper-summable (symbolic r): True
+
+  Extracting actual gosper_sum closed forms for K=3,4 and verifying
+  numerically against the true truncated V-sum (several n,O,r,t):
+  K=3: gosper_sum(V,r,t) obtained in 10.91s
+     n=12 O=1 r=2 t=6: direct=3264 closed=3264 OK
+     n=10 O=0 r=1 t=5: direct=470 closed=470 OK
+     n=14 O=2 r=3 t=8: direct=18424 closed=18424 OK
+     n=9 O=0 r=2 t=4: direct=734 closed=734 OK
+     n=11 O=3 r=1 t=7: direct=364 closed=364 OK
+  K=4: gosper_sum(V,r,t) obtained in 21.25s
+     n=12 O=1 r=2 t=6: direct=5186 closed=5186 OK
+     n=10 O=0 r=1 t=5: direct=682 closed=682 OK
+     n=14 O=2 r=3 t=8: direct=29686 closed=29686 OK
+     n=9 O=0 r=2 t=4: direct=932 closed=932 OK
+     n=11 O=3 r=1 t=7: direct=392 closed=392 OK
+  gosper_sum closed forms verified (K=3,4): True
+======================================================================
+
+PART C -- THE CERTIFICATE: K itself left symbolic (together with
+r, n, O all symbolic). This call is genuinely slow (Gosper's
+algorithm must certify non-existence, not just fail to find a
+witness quickly) -- reported honestly, timed exactly.
+----------------------------------------------------------------------
+  term(V) = (K*O + K*V - K*r - O*r - V*r + n*r + r**2)*binomial(V - 1, V - r)*factorial(-O - V + n + r - 1)/(factorial(K)*factorial(-K - O - V + n + r))
+  gosper_term(term, V) with K SYMBOLIC -> None   [313.11s]
+  Certified non-existence (result is None): True
+======================================================================
+SUMMARY: positive controls sound = True; concrete-K (3..7) all
+Gosper-summable & verified = True; symbolic-K certificate obtained
+(None, in 313.1s) = True.
+This is the main obstruction-location result of this front.

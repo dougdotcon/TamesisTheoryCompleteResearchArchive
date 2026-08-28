@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-116`: onda 24 frente (a)
+**Última atualização:** 2026-08-28 (`DISC-DEC-117`: onda 24 frente (b)
+`GENERAL-K-CLOSED-CDF-ATTEMPT` integrada como Estágio 44 — não-fechamento
+certificado por Gosper para a CDF fechada geral-`K`, localizado um nível
+mais fundo (dentro do bloco `S_r`, Camada 2) que a obstrução análoga do
+Estágio 39 (que vivia só na montagem externa). `gosper_term` com `K`
+simbólico terminou e retornou `None` em `313,1`s — certificado formal;
+Gosper-somável em todo `K` concreto testado (`K=3-7`). Reorganização por
+`r` verificada `96/96` contra D1/D2/D3; Camada 1 fecha completamente,
+simbólica em `(n,K,r)` (convolução Vandermonde, nova). Referee hostil:
+SOUND WITH NAMED ISSUES — ACCEPT for catalogue, certificado central
+independentemente reconfirmado do zero pelo referee; dois achados
+MODERADOS corrigidos (expressão impressa incorreta na Seção 4.3 — erro
+de transcrição, não de cálculo; comparação de regimes com o Estágio 40
+superestimada) e dois BAIXA informacionais. CDF fechada geral-`K` para
+`K\ge5` permanece ABERTA.
+Anterior: `DISC-DEC-116`: onda 24 frente (a)
 `K4-FULL-CDF-ATTEMPT` integrada como Estágio 43 — Proposição D4
 PROVADA, CDF completa fechada de `M_n^{(4)}`, exigindo quatro regimes
 combinatórios (um a mais que `K=3`) que colapsam por identidade

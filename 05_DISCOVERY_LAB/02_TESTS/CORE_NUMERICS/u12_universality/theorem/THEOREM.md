@@ -6440,3 +6440,119 @@ completa entra no catálogo como resultado fechado e provado — as CDFs
 completas fechadas em `K` pequeno estão agora completas para
 `K=0,1,2,3,4`. Nenhuma alegação de progresso em Millennium Problem;
 matemática combinatória pura interna a este arquivo.
+
+## [Extensão, Estágio 44 — 2026-08-28]
+
+**Onda 24, frente (b), `DISC-DEC-114`
+(`GENERAL-K-CLOSED-CDF-ATTEMPT`).** Alvo: a questão mais difícil
+deixada em aberto pelo Estágio 41 — uma fórmula fechada em `(n,K)` para
+a CDF geral-`K`, aceitando fechamento OU certificado de não-existência
+OU diagnóstico preciso como resultado honesto, com técnicas
+Gosper/EGF do Estágio 39 como referência.
+
+### O que aconteceu
+
+> **Resultado: não-fechamento certificado por Gosper, localizado um
+> nível mais fundo que a obstrução análoga do Estágio 39.** A
+> reorganização por tamanho de subconjunto `r` (citando, sem
+> re-derivar, a Proposição S e o Teorema de Decomposição geral-`K` do
+> Estágio 41) colapsa a soma sobre `2^K` subconjuntos numa soma sobre
+> `r=0,\ldots,K`, verificada contra as três CDFs completas já provadas
+> — D1 (`K=1`), D2 (`K=2`), D3 (`K=3`) — em `96/96` correspondências
+> exatas. Dentro desse bloco, a **Camada 1** (marginalização das
+> `K-r` fontes intocadas) fecha completamente, simbólica em `(n,K,r)`
+> simultaneamente — uma convolução tipo Vandermonde genuína, provada e
+> nova. A **Camada 2** (a soma sobre o total do subconjunto `V`,
+> truncada em `t=k-O`) **NÃO** fecha da mesma forma, porque seu limite
+> superior é externamente imposto por `k`, não o ponto onde o próprio
+> suporte combinatório do somando termina — exigindo uma
+> antidiferença hipergeométrica indefinida genuína, exatamente o que o
+> algoritmo de Gosper decide. `gosper_term`, rodado no somando da
+> Camada 2 com `K` (junto com `r,n,O`) totalmente simbólico, terminou e
+> retornou `None` em `313{,}1` segundos — um certificado formal de que
+> nenhuma antidiferença hipergeométrica-em-termos existe para este
+> somando quando `K` é símbolo livre. Controles positivos e negativos
+> (incluindo graus binomiais simbólicos) confirmam que o harness
+> genuinamente detecta Gosper-somabilidade quando ela existe; em
+> contraste, o MESMO somando é Gosper-somável em todo `K` CONCRETO
+> testado (`K=3,4,5,6,7`).
+>
+> **Comparação precisa com o Estágio 39:** a obstrução certificada do
+> Estágio 39 (para `P_nn(n,K)`) vivia na montagem FINAL, após todo
+> nível inferior já ter fechado simbólico em `(n,K,r)`. Aqui, o mesmo
+> estilo de obstrução aparece **uma camada antes**: já dentro de um
+> único bloco `S_r(n,K,k)` (a soma-`V` da Camada 2), antes mesmo da
+> montagem externa sobre `r` ser tentada — a estrutura extra de "qual
+> célula de rede" que a CDF exige (ausente nas somas de momento puras
+> de `P_nn`) empurra o ponto de não-fechamento um nível mais fundo.
+
+**Correções aplicadas (achados M1 e M2 do referee, ambos severidade
+MODERADA):**
+- **M1:** a expressão impressa na Seção 4.3 Parte C, apresentada como
+  "a expressão exata que o sympy simplificou o somando para", **não**
+  é algebricamente igual a `C(V-1,r-1)*InnerJ(V,O)` como o documento
+  afirmava — erro de transcrição para o markdown, não erro de cálculo
+  (fingerprints de tempo de execução quase idênticos entre a re-derivação
+  independente do referee e a desta frente). O referee re-derivou o
+  somando da Camada 2 do zero e rodou `gosper_term` simbólico
+  independentemente (`325{,}59`s), obtendo o mesmo `None` — **a
+  alegação central de não-existência para `K` simbólico permanece
+  confirmada**, apenas a expressão intermediária impressa estava errada.
+- **M2:** a alegação de um "bônus estrutural genuíno" — "nenhum
+  regime necessário" nesta reformulação, comparada favoravelmente às
+  três regimes do Estágio 40 para `K=3` — **superestimava** o que foi
+  alcançado: a ausência de regimes aqui é consequência automática de
+  exchangeability numa fórmula de MONTAGEM que ainda não fecha nada,
+  não um resultado fechado que evitou regimes onde o Estágio 40
+  precisou deles (o próprio referee mostrou que fechar simbolicamente
+  só a Camada 2 já produz `Piecewise`). Não afeta a correção da
+  verificação `96/96` nem do certificado Gosper.
+
+Ambas corrigidas por blockquotes datados na própria `ATTEMPT.md` (Seção
+4.3 e Seção 2/sumário executivo). Dois achados adicionais BAIXA,
+informacionais, sem defeito.
+
+**O que isto NÃO fecha.** Nenhuma fórmula fechada em `(n,K)` para a CDF
+geral-`K` foi encontrada; o certificado Gosper prova apenas que ESTA
+formulação específica (soma indefinida em `V` do somando da Camada 2)
+não tem antidiferença hipergeométrica-em-termos — não que nenhuma
+fórmula fechada exista por qualquer outra organização do cálculo
+(exatamente a mesma ressalva honesta que o Estágio 39 já carregava). A
+Camada 3 (soma em `O`) e a montagem externa em `r` nunca foram
+tentadas, já que a Camada 2 já não fecha para `K` simbólico.
+
+### Verificação adversarial independente
+
+Referee hostil dedicado
+(`.../general_k_closed_cdf_attempt/adversarial/REFEREE_REPORT.md`):
+re-derivação independente do zero do somando da Camada 2, rodando
+`gosper_term` simbólico até o fim (`325{,}59`s, compatível com os
+`313{,}1`/`319{,}0`s da frente) e obtendo o mesmo `None` — a
+confirmação mais consequente; controles positivos em `K=3\ldots7`
+concretos e extração `gosper_sum` (`K=3,4`) verificados contra 8
+configurações de brute force frescas; achados M1 e M2 (acima); dois
+achados BAIXA (a alegação da Seção 5.5 de que a soma-`V` "trivialmente
+é" uma função hipergeométrica ignora a distinção soma-parcial vs.
+soma-completa da própria Seção 4.2; observação informacional de que as
+fórmulas `r<K` e `r=K` da Camada 1 coincidem exatamente quando a
+fórmula `r<K` é avaliada em `r=K`, uma unificação não notada pelo
+documento, não um erro).
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Nenhum
+> erro de alta severidade; o certificado central de não-existência para
+> `K` simbólico foi independentemente reproduzido do zero pelo referee.
+
+Ver
+`.../general_k_joint_attempt/general_k_closed_cdf_attempt/ATTEMPT.md`
+e
+`.../general_k_closed_cdf_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída ou fechada por este
+Estágio. A CDF completa geral-`K` (`K\ge5`) permanece sem fórmula
+fechada explícita — agora com um diagnóstico preciso e rigoroso de
+ONDE e POR QUE a via natural (Estágio 41 + Gosper) trava: um nível
+dentro do bloco `S_r`, não apenas na montagem externa. Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

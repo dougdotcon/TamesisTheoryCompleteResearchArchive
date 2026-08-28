@@ -1,0 +1,22 @@
+Layer 2 truncation demonstration: naive Vandermonde formula vs the
+true truncated V-sum, across the FULL range of t (=k-O).
+======================================================================
+n=12 K=5 r=2 O=0  naive-untruncated-formula value = 10296
+  (natural bound of V's support: V <= 9)
+   t= 2: true VSum =   1584   does NOT match naive formula (genuine partial sum)
+   t= 3: true VSum =   3852   does NOT match naive formula (genuine partial sum)
+   t= 4: true VSum =   6120   does NOT match naive formula (genuine partial sum)
+   t= 5: true VSum =   7968   does NOT match naive formula (genuine partial sum)
+   t= 6: true VSum =   9228   does NOT match naive formula (genuine partial sum)
+   t= 7: true VSum =   9930   does NOT match naive formula (genuine partial sum)
+   t= 8: true VSum =  10224   does NOT match naive formula (genuine partial sum)
+   t= 9: true VSum =  10296   MATCHES naive formula
+   t=10: true VSum =  10296   MATCHES naive formula
+   t=11: true VSum =  10296   MATCHES naive formula
+======================================================================
+Confirmed: naive untruncated formula disagrees with the true
+truncated V-sum for every t below the natural bound (True), and agrees exactly once t reaches/exceeds
+the natural bound (first exact match at t=9).
+This is the precise, demonstrated reason Layer 2 needs a genuinely
+different (INDEFINITE-summation / Gosper) treatment -- see
+gosper_certification_vsum.py.

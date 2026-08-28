@@ -7664,3 +7664,55 @@ decisions:
       fechada geral (tratado separadamente pela frente irma desta
       mesma onda, DISC-DEC-114 frente (b), ainda pendente de
       integracao no momento desta decisao).
+
+  - id: DISC-DEC-117
+    date: 2026-08-28
+    decision: >
+      Onda 24 frente (b) GENERAL-K-CLOSED-CDF-ATTEMPT integrada como
+      Estagio 44 em THEOREM.md. Alvo: formula fechada em (n,K) para a
+      CDF geral-K, aceitando fechamento OU certificado de nao-existencia
+      OU diagnostico preciso. Resultado: nao-fechamento certificado por
+      Gosper, localizado um nivel mais fundo que a obstrucao analoga do
+      Estagio 39. Reorganizacao por tamanho de subconjunto r (citando
+      Estagio 41) verificada 96/96 contra D1/D2/D3. Camada 1
+      (marginalizacao das K-r fontes intocadas) fecha completamente,
+      simbolica em (n,K,r) -- convolucao Vandermonde, nova. Camada 2 (
+      soma truncada em V) NAO fecha -- gosper_term no somando com K
+      simbolico terminou e retornou None em 313.1s, certificado formal
+      de nao-existencia de antidiferenca hipergeometrica-em-termos.
+      Controles positivos/negativos confirmam o harness; Gosper-somavel
+      em todo K concreto testado (K=3-7). Camadas 3 e montagem externa
+      em r nunca tentadas, ja que Camada 2 nao fecha para K simbolico.
+      Spot-check da sessao antes do despacho: independente do zero,
+      confirmou o setup (D1/D2/D3 exatos apos correcao de um bug no
+      proprio script da sessao), a formula fechada InnerJ da Camada 1 em
+      4 configuracoes, e os controles positivo/negativo do harness
+      Gosper. Referee hostil dedicado: SOUND WITH NAMED ISSUES -- ACCEPT
+      for catalogue. Re-derivou o somando da Camada 2 do zero e rodou
+      gosper_term simbolico independentemente (325.59s), obtendo o mesmo
+      None -- confirmacao mais consequente, a alegacao central permanece
+      valida. Dois achados MODERADOS: (M1) a expressao impressa na Secao
+      4.3 Parte C nao e algebricamente igual a C(V-1,r-1)*InnerJ(V,O)
+      como o documento afirmava -- erro de transcricao para o markdown,
+      nao de calculo (fingerprints de tempo quase identicos); nao afeta
+      o certificado central, independentemente reconfirmado. (M2) a
+      alegacao de "nenhum regime necessario" nesta reformulacao,
+      comparada favoravelmente as tres regimes do Estagio 40 para K=3,
+      superestimava o alcancado -- ausencia de regimes e consequencia
+      automatica de exchangeability numa formula de montagem que ainda
+      nao fecha nada, nao um resultado fechado que evitou regimes;
+      fechar simbolicamente so a Camada 2 ja produz Piecewise. Dois
+      achados BAIXA, informacionais, sem defeito.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 44, ~85 linhas);
+      .../general_k_closed_cdf_attempt/ATTEMPT.md (2 correcoes datadas:
+      Secao 4.3 Parte C corrigindo a expressao impressa; Secao 2/sumario
+      executivo corrigindo a comparacao de regimes com o Estagio 40);
+      DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhuma formula de
+      registro anterior alterada ou fechada por esta decisao. CDF
+      fechada geral-K para K>=5 permanece ABERTA, corretamente
+      catalogada como tal -- este Estagio adiciona um diagnostico
+      preciso de onde a via natural trava, nao um fechamento.

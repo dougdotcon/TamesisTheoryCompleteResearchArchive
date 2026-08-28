@@ -1,0 +1,44 @@
+======================================================================
+Step 1: hypersimp() success/failure on each form
+(hypersimp is gosper_term's FIRST internal step -- if it fails,
+ gosper_term returns None IMMEDIATELY, which is NOT a genuine
+ Gosper non-existence certificate, just a recognition failure)
+======================================================================
+  Form 1 (sum-of-two-binomials, un-combined):
+    hypersimp -> FAILED (None)  (0.032s)
+  Form 2 (single fraction, algebraically correct):
+    hypersimp -> SUCCEEDED  (0.657s)
+  Form 3 (target's literally-printed formula):
+    hypersimp -> SUCCEEDED  (1.149s)
+
+======================================================================
+Step 2: gosper_term on Form 1 with K fully symbolic -- reproduces
+        the FAST, SPURIOUS None (a hypersimp recognition failure,
+        NOT a genuine Gosper certificate)
+======================================================================
+  Form 1, K symbolic: gosper_term -> None   (0.015s)
+  (contrast with Form 2 / single_frac, K symbolic: None after
+   325.59s -- see script5_part_c_symbolicK_full_run.log -- a
+   GENUINE run of the full Gosper decision procedure)
+
+======================================================================
+Step 3: timing fingerprint at concrete K=3 (Form 2 vs Form 3)
+======================================================================
+  Form 2 (correct) at K=3: None=False  (12.22s)
+  -- target document's own reported K=3 timing: 11.3s
+  -- this referee's Form 2 timing: 12.22s (close match)
+
+  Form 3 (target's literally-printed formula) at K=3 was ALSO
+  tried by this referee: it did NOT complete within 7+ minutes
+  (process killed to reclaim compute) -- wildly inconsistent
+  with the target's own reported 11.3s figure for what it calls
+  the same computation.
+
+CONCLUSION: the timing fingerprint (Form 2 matches the target's
+own reported numbers closely at every concrete K tried, AND at
+the ~5-minute symbolic-K run; Form 3, the literally-printed
+formula, does not) strongly indicates the target's ACTUAL script
+used Form 2 (or an equivalent well-conditioned single-fraction
+form), and that the printed 'exact expression' in Section 4.3
+Part C is a TRANSCRIPTION ERROR into the markdown, not a
+computational error in the underlying certificate.

@@ -1,0 +1,61 @@
+======================================================================
+PART 0: term(V) re-derivation and comparison with the target's
+        OWN printed 'exact expression' (ATTEMPT.md Sec 4.3, Part C)
+======================================================================
+my_term_sum_form - single_frac (should be 0): 0
+my_term_sum_form - doc_term_as_printed (target's printed formula): (r*binomial(-O - V + n + r - 1, K) + (O + V)*binomial(-O - V + n + r - 1, K - 1))*binomial(V - 1, r - 1) - (K*O + K*V - K*r - O*r - V*r + n*r + r**2)*binomial(V - 1, V - r)*binomial(V - 1, r - 1)*factorial(-K - O - V + n + r - 1)/(factorial(K)*factorial(-K - O - V + n + r))
+  -> nonzero means the target document's printed 'exact expression'
+     does NOT algebraically equal C(V-1,r-1)*InnerJ(V,O) as claimed
+     immediately above it in the same section.
+  numeric check at {n: 20, K: 5, r: 2, V: 6, O: 3}:
+   my_term_sum_form  = 30195  (=InnerJ*C(V-1,r-1), matches raw sum)
+   single_frac        = 30195  (should match the line above)
+   doc_term_as_printed= 305/192  (target's printed formula -- MISMATCH)
+
+======================================================================
+PART A: positive / negative harness controls (independently run)
+======================================================================
+  C(V,r), symbolic r: (V - r)/(r + 1)  (0.022s)
+  C(V,K), symbolic K: (-K + V)/(K + 1)  (0.020s)
+  C(V+r-1,K-1)*V, symbolic K,r: (V/(K + 1) - r/(K**2 + K))*(-K + V + r)/V  (0.042s)
+  1/V (negative control): None  (0.004s)
+  definite sum_(V=0)^K C(V,r), r&K both symbolic: (K*binomial(K, r) + r*binomial(0, r) + binomial(K, r))/(r + 1)  (0.070s)
+
+======================================================================
+PART B: concrete K=3..7, symbolic r -- gosper_term on the CORRECT
+        single-fraction term
+======================================================================
+  K=3: gosper_term -> None=False   (11.51s)
+  K=4: gosper_term -> None=False   (18.20s)
+  K=5: gosper_term -> None=False   (11.67s)
+  K=6: gosper_term -> None=False   (11.94s)
+  K=7: gosper_term -> None=False   (12.11s)
+
+======================================================================
+PART C: THE CERTIFICATE -- K,r,n,O all symbolic
+        (this call takes ~5 minutes; see
+        docB_singlefrac_symbolicK.log in this directory for the
+        actual timed run used in the referee report: None after
+        325.59s)
+======================================================================
+  [not re-run inline here to keep this script's own runtime
+   reasonable when read/re-executed; see the .log file]
+
+======================================================================
+PART D: gosper_sum closed-form extraction, K=3 and K=4, numeric
+        verification against a from-scratch brute truncated
+        V-sum at configurations chosen independently of the
+        target's own
+======================================================================
+  K=3: gosper_sum extracted in 10.65s
+    n=14 O=2 r=1 t=6: brute=1440 closed=1440 match=True
+    n=14 O=2 r=2 t=7: brute=6104 closed=6104 match=True
+    n=20 O=3 r=2 t=9: brute=34074 closed=34074 match=True
+    n=11 O=0 r=1 t=5: brute=675 closed=675 match=True
+    n=16 O=1 r=3 t=8: brute=43232 closed=43232 match=True
+  K=3 ALL MATCH: True
+  K=4: gosper_sum extracted in 20.95s
+    n=15 O=1 r=1 t=7: brute=5649 closed=5649 match=True
+    n=18 O=2 r=2 t=8: brute=58296 closed=58296 match=True
+    n=15 O=0 r=3 t=7: brute=71322 closed=71322 match=True
+  K=4 ALL MATCH: True

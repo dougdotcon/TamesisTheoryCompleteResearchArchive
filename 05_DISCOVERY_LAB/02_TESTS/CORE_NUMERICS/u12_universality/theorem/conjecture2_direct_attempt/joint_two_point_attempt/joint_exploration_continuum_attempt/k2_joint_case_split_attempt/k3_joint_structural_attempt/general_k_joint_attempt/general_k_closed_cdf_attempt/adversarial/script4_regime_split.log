@@ -1,0 +1,30 @@
+======================================================================
+(I) literal claim: exchangeability-reduced S_r reorganization
+    (via closed Layer-1 InnerJ + raw O,V double loop -- NOT a
+    closed-form-in-n, just the reorganized sum) matches D3
+    at EVERY k=0..n for several n, K=3 -- no case-split logic
+    anywhere in cdf_via_layer1's own code.
+======================================================================
+ALL k=0..n MATCH, single uniform code path, K=3: True
+(This confirms the reorganization ITSELF needs no case analysis
+ to be numerically correct -- but note this is a claim about an
+ un-collapsed double sum over O,V, not a closed rational
+ function of n, so it is not testing the same kind of
+ 'regime' Estagio 40 needed -- see part (II) below.)
+
+======================================================================
+(II) Attempting the SAME symbolic-in-n closure Estagio 40 did,
+     via this front's own Layer-1-based S_r, concrete K=3,
+     r=0,1,2,3 -- does sp.summation's OWN attempt to close the
+     O-sum (Layer 3, 'NOT ATTEMPTED' per the target's Section
+     5.2) hit the same k-vs-(n-3) boundary structure, i.e. is
+     a regime split latent in the very layer this front never
+     reached?
+======================================================================
+r=0: V forced to 0 (no touched sources) -- Layer 2 trivial, skip sp.summation.
+--- r=1: attempting sp.summation over V (Layer 2), symbolic O,n,k ---
+  Layer-2 V-sum (symbolic O,n,k) closed via sp.summation:
+    Piecewise(((O - n)*(-2*O - n + 2)*(O - n + 1)/6, Eq(k, n)), ((-O**4 + 2*O**3*n - 2*O**3 + O**2 - 2*O*n**3 + 6*O*n**2 - 6*O*n + 2*O + k**4 - 2*k**3*n + 2*k**3 - k**2 + 2*k*n**3 - 6*k*n**2 + 6*k*n - 2*k)/12, True))
+--- r=2: attempting sp.summation over V (Layer 2), symbolic O,n,k ---
+  Layer-2 V-sum (symbolic O,n,k) closed via sp.summation:
+    Piecewise((O**3/6 - O**2/2 - O*n**2/2 + O*n/2 + O/3 + n**3/3 - n/3, Eq(k, n)), (O**5/120 - O**3*n**2/12 + O**3*n/12 - O**3/24 + O**2*n**3/6 - O**2*n**2/4 + O**2*n/12 - O*k**4/24 + O*k**3/12 + O*k**2*n**2/4 - O*k**2*n/4 + O*k**2/24 - O*k*n**3/3 + O*k*n**2/4 + O*k*n/12 - O*k/12 + O*n**3/6 - O*n**2/6 + O/30 + k**5/30 - k**4/12 - k**3*n**2/6 + k**3*n/6 + k**2*n**3/6 - k**2*n/6 + k**2/12 - k*n**3/6 + k*n**2/6 - k/30, True))

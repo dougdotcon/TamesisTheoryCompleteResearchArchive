@@ -1,6 +1,20 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-113`: onda 23 frente (c)
+**Última atualização:** 2026-08-28 (`DISC-DEC-114`: onda 24 autorizada
+— 3 frentes paralelas grounded no que a onda 23 acabou de desbloquear:
+(a) `K4-FULL-CDF-ATTEMPT`, estendendo o padrão D1/D2/D3 para `K=4`
+usando o Teorema de Decomposição Completa/Proposição S agora
+livres-de-K (Estágio 41); (b) `GENERAL-K-CLOSED-CDF-ATTEMPT`, atacando
+a questão mais difícil deixada aberta pelo Estágio 41 — uma fórmula
+fechada em `(n,K)` para a CDF geral-K, com técnicas Gosper/EGF do
+Estágio 39 como referência, aceitando fechamento OU certificado de
+não-existência OU diagnóstico preciso como resultado honesto; (c)
+`MCLUST-H1-POST-CORRECTION-ATTEMPT`, reatacando `(U1)`/`(U2)` com o
+limitante corrigido e genuinamente favorável da onda 23 frente (c)
+(`DISC-DEC-113`) como novo ponto de partida — uma rota indisponível
+antes da correção. Seeds `20260926000-20260928999`, um bloco por
+frente, grep-confirmados não-usados.
+Anterior: `DISC-DEC-113`: onda 23 frente (c)
 `MCLUST-H1-VOLTERRA-ATTEMPT` integrada no `PROOF_DEPENDENCY_MAP.md`
 (nó `PLATRESUM`, M-CLUST(b), objeto separado do `THEOREM.md`).
 Não-fechamento honesto de `(U1)`/`(U2)`, com conteúdo novo genuíno

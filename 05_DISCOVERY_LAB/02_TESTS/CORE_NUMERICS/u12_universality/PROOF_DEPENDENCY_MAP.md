@@ -1025,6 +1025,88 @@ flowchart TD
 > `.../mclust_h1_validity_attempt/h1_post_correction_attempt/ATTEMPT.md`
 > e `.../h1_post_correction_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-122`.]** Onda 25 frente (c)
+> (`H1-TRANSLATION-STRUCTURE-ATTEMPT`, sexta onda consecutiva nesta
+> sub-linhagem, ondas 20-25) atacou especificamente o obstáculo nomeado
+> mas não atacado por `DISC-DEC-115`: `K(y,t)` não é invariante por
+> translação em `(y,t)`.
+>
+> **A falha de invariância é localizada e caracterizada com exatidão.**
+> `K_B(h)` é, por construção, exatamente invariante por translação (só
+> depende de `h=y-t`); `M_y K_A^{\mathrm{raw}}(y,t)` é a fonte INTEIRA
+> da não-invariância, via uma nova identidade exata de conjugação
+> exponencial (tipo Esscher) para a família `\{T_w\}`,
+> `T_w=M_{e^{wx}}\circ T_0\circ M_{e^{-w\cdot}}`, e uma nova redução a
+> integral única de `K_A^{\mathrm{raw}}`, expondo que seu núcleo depende
+> da coordenada ABSOLUTA `z:=x+y`, não apenas do tempo decorrido `h`.
+>
+> **Nenhum dos dois disjuntos da pergunta ingênua está certo.**
+> `K_B(h)` não decai (trivial, por construção); `M_y
+> K_A^{\mathrm{raw}}(y,t)` também não se anula quando `y\to\infty`
+> (assenta num limite não-nulo de ordem `\varepsilon`, consistente com o
+> fato de norma-operador já estabelecido em `DISC-DEC-113/115`). Mas sua
+> SOMA é um cancelamento quase-total delicado — confirmado numericamente
+> decair como `O(1/y)` (inclinação log-log `-0{,}994` a `-0{,}999`, 12/12
+> combinações de parâmetros).
+>
+> **Resultado central: uma nova assíntota líder em forma fechada para o
+> núcleo inteiro**, provada (condicional à hipótese padrão `(B)` mais
+> uma nova hipótese auxiliar de regularidade tipo-Lipschitz `(C)`) e
+> confirmada numericamente ao erro relativo `3{,}2\times10^{-8}` (pior
+> caso, extrapolação de Richardson, 6 combinações `(x,h,\varepsilon,f)`):
+> ```
+> K(y,t) f(x) = [f(x) - e^{-h/\varepsilon} f(x+h)] / (x+y) + O(1/(x+y)^2)
+> ```
+> confirmada também uniforme quando `h` cresce PROPORCIONALMENTE a `y`
+> (`h=y/2` até `y=3000`, erro relativo `2{,}8\times10^{-7}`) — condição
+> necessária para o uso abaixo, já que a integral de auto-mediação
+> percorre todo `t\in[0,y]` simultaneamente.
+>
+> **Uma nova reformulação de `(U1)`, consequência rigorosa da forma
+> fechada acima aplicada à equação de Volterra exata já estabelecida**:
+> a identidade de "auto-mediação" `\Phi_y(x)-A(y)/(x+y)\to0`
+> (`A(y):=\int_0^y\Phi_t(x)\,dt`) é derivada de forma INCONDICIONAL
+> (dadas `(B)`, `(C)` e uniformidade-em-`t` do termo de erro) — logo
+> `(U1)` é equivalente à convergência da média de Cesàro `A(y)/(x+y)`
+> em si, com a identidade de auto-mediação servindo de ponte
+> rigorosamente provada para essa reformulação (enquadramento corrigido
+> por nota datada após achado do referee — ver abaixo). O ingrediente
+> Tauberiano preciso que faltaria para fechar `(U1)` a partir daí é
+> nomeado com exatidão, não atacado: um limitante de oscilação sobre o
+> próprio `\Phi` (não `\Psi`, para o qual `(star-star)` já existe) na
+> forma de PASSO RELATIVO que o teorema Tauberiano clássico exige, mais
+> verificação formal de que as hipóteses desse teorema clássico se
+> transferem a este cenário de EDP a duas variáveis.
+>
+> Referee hostil dedicado, sem ler nenhum script da linhagem antes de
+> re-derivar à mão as quatro alegações centrais (identidade de
+> conjugação, redução a integral única, assíntota em forma fechada —
+> incluindo o coeficiente intermediário exato `c(z)`, antes disputado —
+> e a reformulação de auto-mediação): todas **confirmadas**. Resolveu
+> DEFINITIVAMENTE, como artefato de quadratura numérica (não falha da
+> assíntota), a discrepância `y=3000,h=1500` sinalizada explicitamente
+> pela sessão orquestradora antes do despacho deste referee — o erro
+> relativo verdadeiro ali é `\approx3\times10^{-4}` (consistente com
+> `O(1/y)`), não os `99{,}6\%` do check `scipy` rápido original;
+> root-causou o próprio artefato (reproduzindo o `scipy.integrate.quad`
+> ingênuo e mostrando que ele erra o pico fino da integral interna por
+> `\approx6` ordens de magnitude). Reconstruiu de forma independente
+> ambos os bugs autocapturados, confirmando-os genuínos e corretamente
+> corrigidos. Dois achados BAIXA (F1: enquadramento impreciso de
+> "equivalente" na Seção 6.1; F2: o resumo executivo atribui incorretamente
+> o mecanismo de captura do Bug 1 — erro de prosa, não de assert — ao
+> Bug 2) — nenhum afeta qualquer alegação matemática central; ambos
+> corrigidos por notas datadas na própria `ATTEMPT.md` da frente.
+>
+> Veredito **SOUND WITH NAMED ISSUES — ACCEPT for catalogue**. `H1`,
+> `(U1)`, `(U2)` permanecem ABERTOS; `phi_REDB`, `Phi_U(c)`,
+> `Phi_infinity(c)` e a lei assintótica de 4 termos: intocadas.
+> Nenhum limitante de norma-operador é reivindicado ou superado — a
+> forma fechada acima é pontual-em-`f` fixo, não uma alegação de norma
+> de operador (Seção 4.4 da frente). Fontes:
+> `.../mclust_h1_validity_attempt/h1_translation_structure_attempt/ATTEMPT.md`
+> e `.../h1_translation_structure_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

@@ -1,0 +1,53 @@
+==============================================================================
+PART 1 -- exact exponential-conjugation identity for {T_w}
+==============================================================================
+log(K_T(x,y0;w) / [e^{wx} K_T(x,y0;0) e^{-w y0}]) simplifies to:
+  0
+  => IDENTICALLY ZERO. Conjugation identity CONFIRMED (exact, symbolic).
+
+Operator form: T_w = M_{e^{wx}} o T_0 o M_{e^{-w.}}
+i.e. (T_w f)(x) = e^{wx} * (T_0[e^{-w(.)} f])(x)  -- verified directly below.
+
+Pointwise-in-u integrand check, LHS - RHS simplifies to: 0
+  => IDENTICALLY ZERO. Operator identity T_w = M_(e^{wx}) T_0 M_(e^{-w.}) CONFIRMED.
+
+==============================================================================
+PART 2 -- the x'+w=x+y cancellation inside K_A^raw (independent re-derivation)
+==============================================================================
+[-u^2/2 - u(x'+w)] - [-u^2/2 - u(x+y)]  with x'=x+y-w, simplifies to:
+  0
+  => IDENTICALLY ZERO. x'+w = x+y, INDEPENDENT of w. Re-confirmed independently.
+
+==============================================================================
+PART 3 -- NEW single-integral reduction of K_A^raw(y,t)
+==============================================================================
+
+Consequence of Part 2: (S_{y-w} T_w f)(x) = int_0^inf e^{-u^2/2-u(x+y)} f(x+y-w+u) du
+                                            (weight depends on x+y ONLY, not on w)
+
+Substituting h' := y-w (h' ranges 0..y-t as w ranges t..y; dw=-dh'):
+
+  K_A^raw(y,t) f (x)
+    = int_0^{y-t} e^{-h'/eps} [ int_0^inf e^{-u^2/2-u(x+y)} f(x+h'+u) du ] dh'
+
+Further substituting s := h'+u (s = x''-x, the landing offset), for fixed s
+the inner h' ranges over [0, min(h,s)] with u=s-h'>=0, h:=y-t:
+
+  K_A^raw(y,t) f (x) = int_0^inf f(x+s) * kappa_A(s; h, z) ds,   z := x+y
+
+  kappa_A(s; h, z) := int_0^{min(h,s)} e^{-h'/eps} e^{-(s-h')^2/2 - (s-h')z} dh'
+
+This kernel kappa_A depends on x ONLY through z=x+y (not through x and t
+separately) -- the precise, minimal statement of "K(y,t) is not a function
+of (y-t) alone": the weight's dependence on the ABSOLUTE coordinate x+y is
+what breaks translation invariance, since a genuine convolution kernel
+kappa(s;h) would depend on h=y-t and s only, never on x+y itself.
+
+By contrast, kappa_B(s;h) := e^{-s/eps} 1_{[0,h]}(s) (from K_B(h)) depends
+ONLY on s and h -- K_B alone IS an exact convolution / translation-invariant
+kernel. K_A (equivalently M_y o K_A^raw) is the entire source of
+non-invariance in K(y,t) = M_y K_A^raw(y,t) + K_B(y-t).
+
+Numerical cross-check of this reduction against the raw (w,u) double
+integral is performed independently in s01b_reduction_numeric_check.py
+(kept separate so this file remains pure exact symbolic algebra).

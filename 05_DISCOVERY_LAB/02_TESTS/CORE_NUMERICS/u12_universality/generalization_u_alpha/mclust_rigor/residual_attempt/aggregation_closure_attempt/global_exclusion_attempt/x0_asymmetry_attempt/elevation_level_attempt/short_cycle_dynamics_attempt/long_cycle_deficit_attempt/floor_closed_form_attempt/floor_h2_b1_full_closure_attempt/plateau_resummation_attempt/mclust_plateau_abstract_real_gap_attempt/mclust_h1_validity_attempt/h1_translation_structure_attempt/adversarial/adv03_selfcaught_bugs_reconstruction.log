@@ -1,0 +1,70 @@
+==============================================================================
+BUG 1 RECONSTRUCTION (Sec 4.2): sign/vanishing-term claim about c(z)
+==============================================================================
+R(z) Mills-ratio series coefficients c_0..c_5 = [1, -1, 3, -15, 105, -945]
+
+Correct series: c(z) = -1 + (1/eps)/z + (1)/z^2 + ...
+
+Wrong prose claim (as described): 1/z coefficient = -1/eps, 1/z^2 coefficient = 0
+Actual sympy-derived series:       1/z coefficient = 1/eps, 1/z^2 coefficient = 1
+
+Is the wrong prose claim's sign actually wrong (disagrees with the correct series)? True
+Is the wrong prose claim's 'z^-2 term vanishes' actually wrong (zm2 != 0)? True
+
+=> CONFIRMED genuine: the described WRONG prose (negative sign, vanishing
+   z^-2 term) is indeed contradicted by the correct sympy-derived series;
+   the CORRECTED claim (+1/(eps*z), and +1/z^2, not 0) matches the correct
+   series exactly, and independently matches this referee's own by-hand
+   derivation (REFEREE_REPORT.md). Bug 1 is a genuine, correctly-diagnosed,
+   correctly-fixed error (prose-only, as claimed -- the underlying
+   computation was never wrong).
+
+==============================================================================
+BUG 2 RECONSTRUCTION (Sec 4.3): (1-eps*z)/eps leading-order scaling slip
+==============================================================================
+
+Two candidate leading-order behaviors of (1-eps*z)/eps as z->infinity
+(eps FIXED), tested against each other:
+  CORRECT:  (1-eps*z)/eps = 1/eps - z  ~  -z         (the FIXED constant
+            1/eps is dominated by the UNBOUNDED -z term)          = -1/delta
+  WRONG:    an earlier draft claimed (1-eps*z)/eps ~ -1/(eps*delta) = -z/eps
+            (an extra, spurious 1/eps factor)
+
+  Using CORRECT (-1/delta): KB coefficient at order delta^1 = 0
+  Using WRONG (-1/(eps*delta)): KB coefficient at order delta^1 = (eps - 1)/eps**2
+
+=> CONFIRMED genuine: the WRONG scaling leaves a NONZERO, dimensionally-inconsistent
+   KB coefficient ((eps - 1)/eps**2) -- exactly matching ATTEMPT.md's own
+   description ('KB_coeff = 1/eps - 1/eps**2, manifestly nonzero and
+   dimensionally inconsistent in eps-power'). The CORRECTED scaling gives
+   an EXACT 0, matching this referee's own independent by-hand derivation
+   (REFEREE_REPORT.md) of the same cancellation via the B0/eps - B1
+   integration-by-parts route.
+
+Final corrected leading-order result (delta^1 = 1/z term, KB terms
+removed since they cancel): delta*fx - delta*fxh*exp(-h/eps)
+Matches the claimed closed form K(y,t)f(x) ~ [f(x)-e^{-h/eps}f(x+h)]/z
+(here in delta=1/z units): delta*(fx - e^{-h/eps}*fxh).
+
+==============================================================================
+SUMMARY
+==============================================================================
+
+Both self-disclosed bugs are GENUINE (independently reconstructed and
+confirmed, not taken on faith), CORRECTLY DIAGNOSED (the described wrong
+version really does produce the described inconsistent/nonzero result), and
+CORRECTLY FIXED (the corrected version matches both the target's own final
+formula and this referee's own fully independent by-hand re-derivation).
+
+One documentation-precision note (see REFEREE_REPORT.md for full
+discussion): the front's own executive summary states both bugs were
+"caught by the front's OWN symbolic verification scripts failing their own
+assertions" -- true for Bug 2 (s05's own `assert ... == 0` genuinely fails
+on the wrong version, confirmed above), but Bug 1 (s02) is described in
+Sec 4.2 itself as a PROSE-only error caught by noticing the commentary
+contradicted the script's own already-correct printed series (the
+corroborating `assert` statements were added AFTER the fix, not the
+mechanism that caught it) -- a minor inaccuracy in how the executive
+summary characterizes the catch-mechanism for Bug 1 specifically, not in
+the mathematical content of either bug or its fix.
+

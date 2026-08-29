@@ -1,0 +1,20 @@
+h = y/2 (elapsed time GROWS proportionally with y -- 'far' kernel regime,
+t near the START of [0,y]), x=0, eps=0.1, f=1/(1+x).
+Prediction: z*K(y,t)f(x) -> f(x)-e^{-h/eps}f(x+h) = f(0)-0 = 1.0 (since
+h=y/2 -> eps*h -> inf, e^{-h/eps} underflows to 0 for any y tested here).
+
+         y      h=y/2      z=x+y     z*K(y,t)f(x)    predicted    rel.err
+      10.0        5.0       10.0     0.9156333394          1.0    0.08437
+      30.0       15.0       30.0     0.9705536732          1.0    0.02945
+     100.0       50.0      100.0     0.9909960903          1.0   0.009004
+     300.0      150.0      300.0     0.9969810119          1.0   0.003019
+    1000.0      500.0     1000.0     0.9990923918          1.0  0.0009076
+    3000.0     1500.0     3000.0       0.99969728          1.0  0.0003027
+
+Richardson extrapolation (last 2 pts): 0.9999997242 vs predicted 1.0, rel.err=2.758e-7
+
+=> Same ~1/z convergence rate and same leading coefficient as the FIXED-h
+   cases in s06 -- the closed form appears UNIFORM in h across the full
+   range tested (h from O(1) up to h=y/2), supporting (not proving to full
+   rigor) the uniformity-in-t needed for the self-averaging argument of
+   ATTEMPT.md Sec 6.

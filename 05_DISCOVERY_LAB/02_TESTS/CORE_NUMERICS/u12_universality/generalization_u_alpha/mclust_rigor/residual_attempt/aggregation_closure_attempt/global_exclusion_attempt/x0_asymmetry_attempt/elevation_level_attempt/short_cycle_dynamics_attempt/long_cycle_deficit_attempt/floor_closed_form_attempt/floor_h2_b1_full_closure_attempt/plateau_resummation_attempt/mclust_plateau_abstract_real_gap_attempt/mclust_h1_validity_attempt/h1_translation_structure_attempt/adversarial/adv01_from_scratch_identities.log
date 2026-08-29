@@ -1,0 +1,94 @@
+==============================================================================
+CHECK 1 -- exponential-conjugation identity T_w = M_(e^{wx}) T_0 M_(e^{-w.})
+==============================================================================
+
+Original definition (h1_post_correction_attempt/ATTEMPT.md Sec 0, cited
+verbatim, NOT altered here):
+
+  (T_w f)(x) := int_0^inf e^{-u^2/2 - u(x+w)} f(x+u) du
+
+Claim to check: (T_w f)(x) == e^{wx} * (T_0[e^{-w(.)} f])(x), where
+(T_0 g)(x) = int_0^inf e^{-u^2/2 - u x} g(x+u) du and (M_(e^{-w.})f)(x'):=
+e^{-w x'} f(x').
+
+Pointwise-in-u integrand check (sufficient, since both sides are the SAME
+integration variable u over the SAME domain [0,inf) -- if the integrands
+agree identically for every u, the integrals agree):
+
+LHS integrand - RHS integrand, simplified: 0
+=> IDENTICAL (0), for every u. The exponential-conjugation identity is a
+   GENUINE, exact algebraic consequence of the ORIGINAL T_w definition --
+   not a silent redefinition. CONFIRMED independently.
+
+==============================================================================
+CHECK 2 -- the x'+w = x+y cancellation (independent re-derivation)
+==============================================================================
+(x + y - w) + w - (x+y) simplifies to: 0
+=> CONFIRMED exactly 0, independent of w: x'+w = x+y.
+
+==============================================================================
+CHECK 3 -- single-integral reduction of K_A^raw via h' := y-w substitution
+==============================================================================
+
+Raw definition (cited, h1_post_correction_attempt/ATTEMPT.md Sec 0):
+
+  K_A^raw(y,t) f(x) := int_t^y e^{-(y-w)/eps} (S_{y-w} T_w f)(x) dw
+
+(S_{y-w} T_w f)(x) = (T_w f)(x + y - w) = (T_w f)(x')  with x' = x+y-w (as above)
+                    = int_0^inf e^{-u^2/2 - u(x'+w)} f(x'+u) du
+                    = int_0^inf e^{-u^2/2 - u(x+y)} f(x+y-w+u) du     [Check 2]
+
+So (exact, before any substitution):
+
+  K_A^raw(y,t) f(x) = int_t^y e^{-(y-w)/eps}
+                         [ int_0^inf e^{-u^2/2-u(x+y)} f(x+y-w+u) du ] dw
+
+Substitute h' := y - w  (dh' = -dw; w=t -> h'=y-t=:h; w=y -> h'=0):
+
+  K_A^raw(y,t) f(x) = int_0^h e^{-h'/eps}
+                         [ int_0^inf e^{-u^2/2-u(x+y)} f(x+h'+u) du ] dh'
+
+Checked below symbolically: the substituted-variable outer integrand,
+expressed as a function of h', matches the target's claimed formula
+EXACTLY, by direct symbolic substitution (not numerically approximated).
+
+Argument inside f(...) [minus the +u part], before substitution (x+y-w) with w=y-h': h' + x
+Target's claimed argument (x+h'): h' + x
+=> MATCH. The single-integral reduction is a correct, exact change of
+   variables (w -> h'=y-w) applied to the raw double-integral
+   definition -- re-derived here independently, not copied.
+
+Outer weight e^{-(y-w)/eps} with w=y-h', simplified: exp(-h'/eps)
+Target's claimed outer weight e^{-h'/eps}: exp(-h'/eps)
+=> MATCH (bounds w in [t,y] <-> h' in [0,h] under h'=y-w, standard).
+
+==============================================================================
+CHECK 4 -- K_B(h) depends on (y,t) only through h=y-t (trivial, by
+           inspection of its own definition -- confirmed directly)
+==============================================================================
+
+K_B(h) := int_0^h e^{-v/eps} S_v dv,  (S_v f)(x) = f(x+v)
+
+This expression's only free parameters are h and eps; y and t do not appear
+except through h=y-t. Trivially translation-invariant: K_B evaluated at
+(y+a, t+a) for any real shift a has h=(y+a)-(t+a)=y-t unchanged, hence
+IDENTICAL operator. No algebra needed beyond this inspection; confirmed
+formally below by substituting y->y+a, t->t+a and checking h is invariant.
+
+h(y+a,t+a) - h(y,t) simplifies to 0 for all a: CONFIRMED, K_B trivially
+translation-invariant, exactly as claimed.
+
+==============================================================================
+ALL FOUR CHECKS PASS. Summary:
+==============================================================================
+
+1. T_w = M_(e^{wx}) T_0 M_(e^{-w.})  -- GENUINE consequence of the ORIGINAL
+   T_w definition (h1_post_correction_attempt Sec 0), re-derived from
+   scratch. Not a redefinition.
+2. x'+w = x+y cancellation -- re-confirmed independently.
+3. K_A^raw single-integral reduction -- re-derived independently via the
+   h'=y-w substitution applied directly to the raw double-integral
+   definition; matches the target's claimed formula exactly.
+4. K_B(h) exact translation-invariance -- confirmed trivially from its own
+   definition.
+

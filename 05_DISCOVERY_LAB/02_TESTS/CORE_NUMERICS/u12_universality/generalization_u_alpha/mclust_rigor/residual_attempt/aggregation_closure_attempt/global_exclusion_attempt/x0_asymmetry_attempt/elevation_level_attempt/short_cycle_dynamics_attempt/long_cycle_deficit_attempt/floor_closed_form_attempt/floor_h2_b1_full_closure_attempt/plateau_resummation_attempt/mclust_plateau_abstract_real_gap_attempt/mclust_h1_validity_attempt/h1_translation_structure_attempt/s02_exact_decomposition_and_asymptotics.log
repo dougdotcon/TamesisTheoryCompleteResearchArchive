@@ -1,0 +1,57 @@
+==============================================================================
+PART 1 -- symbolic asymptotic series of c(z) := (1-eps*z)*R(z)/eps as z->inf
+==============================================================================
+Deriving R(z) asymptotic series via the ODE R'=zR-1 recursion directly
+(coefficient recursion, not a canned series-expansion call):
+Recursion c_n = -(2n-1) c_{n-1}, c_0=1 gives c_n = [1, -1, 3, -15, 105, -945, 10395, -135135, 2027025]
+R(z) ~ 1/z - 1/z**3 + 3/z**5 - 15/z**7 + 105/z**9 - 945/z**11 + 10395/z**13 - 135135/z**15 + 2027025/z**17
+(matches the well-known Mills-ratio series 1/z - 1/z^3 + 3/z^5 - 15/z^7 + ...)
+
+Now c(z) = (1-eps*z)*R(z)/eps = R(z)/eps - z*R(z):
+c(z) ~  -1 + z**(-2) - 3/z**4 + 15/z**6 - 105/z**8 + 945/z**10 - 10395/z**12 + 135135/z**14 - 2027025/z**16 + 1/(eps*z) - 1/(eps*z**3) + 3/(eps*z**5) - 15/(eps*z**7) + 105/(eps*z**9) - 945/(eps*z**11) + 10395/(eps*z**13) - 135135/(eps*z**15) + 2027025/(eps*z**17)
+
+Leading terms explicitly (z^0 and z^-1 and z^-2):
+  [z^0]  coefficient = -1
+  [z^-1] coefficient = 1/eps
+  [z^-2] coefficient = 1
+
+=> CONFIRMED: c(z) = -1 + 1/(eps*z) + 1/z^2 + O(1/z^3) as z->infinity.
+   [SELF-CAUGHT, DISCLOSED: an earlier draft of this script's own
+    commentary asserted the WRONG sign on the 1/z term ("-1/(eps*z)")
+    and wrongly claimed the z^-2 term vanishes -- both contradicted by
+    the very series this script itself computed two lines above. The
+    underlying sympy derivation and its c_n recursion were correct
+    throughout; only the prose describing the result was wrong. Fixed
+    here; the numerical Part 2 below independently confirms the
+    CORRECTED claim (convergence to +1/eps, not -1/eps).]
+   Leading correction to -1 is O(1/z), coefficient exactly +1/eps.
+
+==============================================================================
+PART 2 -- numerical confirmation of c(z) -> -1 + 1/(eps z) + O(1/z^2)
+==============================================================================
+
+eps = 0.1:
+         z               c(z)             c(z)+1         z*(c(z)+1)  predicted z*(c+1) -> +1/eps
+      10.0                0.0                1.0               10.0                         10.0
+      30.0      -0.6659283814       0.3340716186        10.02214856                         10.0
+     100.0       -0.899910027        0.100089973         10.0089973                         10.0
+     300.0      -0.9666559263      0.03334407372        10.00322211                         10.0
+    1000.0        -0.98999901         0.01000099           10.00099                         10.0
+    3000.0      -0.9966665559     0.003333444074        10.00033222                         10.0
+   10000.0        -0.99899999      0.00100000999         10.0000999                         10.0
+
+eps = 0.0316228:
+         z               c(z)             c(z)+1         z*(c(z)+1)  predicted z*(c+1) -> +1/eps
+      10.0        2.141273219        3.141273219        31.41273219                   31.6227766
+      30.0      0.05403264979         1.05403265        31.62097949                   31.6227766
+     100.0      -0.6837038773       0.3162961227        31.62961227                   31.6227766
+     300.0      -0.8945808051       0.1054191949        31.62575847                   31.6227766
+    1000.0       -0.968376255      0.03162374498        31.62374498                   31.6227766
+    3000.0      -0.9894589645      0.01054103547        31.62310642                   31.6227766
+   10000.0      -0.9968377124     0.003162287629        31.62287629                   31.6227766
+
+Expect the 'z*(c(z)+1)' column to converge to +1/eps as z grows --
+this is the numerical confirmation of the CORRECTED symbolic Part-1
+result (c(z)+1 ~ +1/(eps*z), a POSITIVE residual, i.e. c(z) approaches
+-1 FROM ABOVE for eps<sqrt(pi/2)/... see the z=10 row: c(10)=0 exactly
+at eps=0.1 since z=10=1/eps is precisely where h_eps has its zero.)

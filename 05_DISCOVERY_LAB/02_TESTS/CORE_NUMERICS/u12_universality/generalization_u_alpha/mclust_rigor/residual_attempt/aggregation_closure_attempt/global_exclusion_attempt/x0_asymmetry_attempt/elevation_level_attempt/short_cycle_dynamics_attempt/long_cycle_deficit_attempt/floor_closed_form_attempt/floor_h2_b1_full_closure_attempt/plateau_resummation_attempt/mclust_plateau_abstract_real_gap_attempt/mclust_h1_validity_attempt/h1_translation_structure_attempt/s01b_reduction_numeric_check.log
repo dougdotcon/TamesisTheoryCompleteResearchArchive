@@ -1,0 +1,21 @@
+Cross-check: RAW (w,u) double integral  vs  REDUCED (h',u) double integral
+for K_A^raw(y,t) f (x), independent quadrature routes.
+
+f=1/(1+x)        x= 0.00 y= 1.00 t= 0.30 eps=0.10000 raw= 0.0431144255699 reduced= 0.0431144255699 rel_err= 3.57998e-19  PASS
+f=1/(1+x)        x= 0.50 y= 2.00 t= 0.50 eps=0.10000 raw= 0.0188525518625 reduced= 0.0188525518625 rel_err=         0.0  PASS
+f=1/(1+x)        x= 1.00 y= 5.00 t= 1.00 eps=0.03162 raw=0.00235558266022 reduced=0.00235558266022 rel_err=         0.0  PASS
+f=1/(1+x)        x= 0.00 y=10.00 t= 9.00 eps=0.03162 raw=0.00279215022834 reduced=0.00279215022834 rel_err=         0.0  PASS
+f=1/(1+x)        x= 2.00 y= 3.00 t= 0.00 eps=0.10000 raw=0.00588819168265 reduced=0.00588819168265 rel_err=         0.0  PASS
+f=exp(-x/3)      x= 0.00 y= 1.00 t= 0.30 eps=0.10000 raw= 0.0537803440639 reduced= 0.0537803440639 rel_err= 4.14513e-19  PASS
+f=exp(-x/3)      x= 0.50 y= 2.00 t= 0.50 eps=0.10000 raw= 0.0261830911623 reduced= 0.0261830911623 rel_err=         0.0  PASS
+f=exp(-x/3)      x= 1.00 y= 5.00 t= 1.00 eps=0.03162 raw=0.00345800474972 reduced=0.00345800474972 rel_err=         0.0  PASS
+f=exp(-x/3)      x= 0.00 y=10.00 t= 9.00 eps=0.03162 raw=0.00300074768597 reduced=0.00300074768597 rel_err=         0.0  PASS
+f=exp(-x/3)      x= 2.00 y= 3.00 t= 0.00 eps=0.10000 raw=0.00901813912341 reduced=0.00901813912341 rel_err=         0.0  PASS
+
+10/10 PASS (rel_err < 1e-15). Worst relative error: 4.14513e-19
+
+=> s01's single-integral reduction of K_A^raw is CONFIRMED numerically
+   against the original (w,u) double-integral definition, to full
+   working precision, at every point/function tested. This is a pure
+   change-of-variables identity (expected to match to machine/working
+   precision, not merely approximately) -- confirms no algebra slip.

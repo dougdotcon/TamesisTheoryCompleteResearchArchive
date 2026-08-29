@@ -7946,3 +7946,73 @@ decisions:
       registro anterior alterada -- apenas uma frase de PROSA
       nao-provada no Estagio 42 estava numericamente errada, corrigida.
       Proposicao D2 (formula fechada) permanece intocada e correta.
+
+  - id: DISC-DEC-122
+    date: 2026-08-29
+    decision: >
+      Onda 25 frente (c) H1-TRANSLATION-STRUCTURE-ATTEMPT integrada
+      como adendo datado em PROOF_DEPENDENCY_MAP.md (no PLATRESUM,
+      cadeia H1, apos o adendo DISC-DEC-115). Sexta onda consecutiva
+      (ondas 20-25) atacando o mesmo gap (U1)/(U2)/H1. Localizou e
+      caracterizou com exatidao a falha de invariancia por translacao
+      de K(y,t): K_B e exatamente invariante; M_y*K_A^raw e a fonte
+      inteira, via nova identidade exata de conjugacao exponencial
+      T_w=M_(e^wx) T_0 M_(e^-w.) e nova reducao a integral unica
+      expondo dependencia na coordenada absoluta z=x+y. Nem K_B nem
+      M_y*K_A^raw se anulam quando y->infinito, mas sua SOMA e um
+      cancelamento quase-total, O(1/y) confirmado (12/12 combinacoes).
+      Resultado central: nova assintota lider em forma fechada,
+      K(y,t)f(x)=[f(x)-e^{-h/eps}f(x+h)]/(x+y)+O(1/(x+y)^2), provada
+      condicional a (B)+(C) nova, confirmada numericamente a 3.2e-8
+      (extrapolacao de Richardson, 6 casos), confirmada uniforme com h
+      crescendo proporcionalmente a y (h=y/2 ate y=3000). Nova
+      reformulacao rigorosa de (U1) via identidade de auto-mediacao
+      Phi_y(x)-A(y)/(x+y)->0 (incondicional dadas as hipoteses);
+      ingrediente Tauberiano preciso nomeado (limitante de oscilacao
+      sobre o proprio Phi, forma de passo relativo) mas nao atacado.
+      (U1)/(U2)/H1 permanecem ABERTOS. Dois bugs auto-capturados
+      divulgados (erro de sinal de prosa em c(z); erro de escala num
+      fator 1/eps espurio), ambos corrigidos em scripts proprios com
+      antes/depois visivel.
+
+      A sessao orquestradora havia sinalizado explicitamente ao referee
+      hostil, antes do despacho, uma aparente quebra numerica (erro
+      relativo ~99.6%) no ponto y=3000,h=1500 encontrada em sua propria
+      reimplementacao scipy independente da assintota -- pedindo
+      resolucao via mpmath de alta precisao em vez de scipy simples.
+
+      Referee hostil dedicado: SOUND WITH NAMED ISSUES -- ACCEPT for
+      catalogue. Re-derivou a mao, do zero, antes de abrir qualquer
+      script da frente, as quatro alegacoes centrais (identidade de
+      conjugacao, reducao a integral unica, assintota em forma fechada
+      incluindo o coeficiente intermediario exato c(z), e a
+      reformulacao de auto-mediacao) -- todas confirmadas. Resolveu
+      DEFINITIVAMENTE a discrepancia sinalizada como artefato de
+      quadratura numerica, nao falha real: erro relativo verdadeiro em
+      y=3000,h=1500 e ~3.0e-4 (consistente com O(1/y)), nao 99.6%;
+      root-causou o proprio artefato scipy (pico fino da integral
+      interna perdido por ~6 ordens de magnitude). Reconstruiu
+      independentemente ambos os bugs auto-capturados, confirmando-os
+      genuinos e corretamente corrigidos. Dois achados BAIXA (F1:
+      enquadramento impreciso de "(U1) equivalente" na Secao 6.1 --
+      correto seria "equivalente a convergencia de Cesaro", com a
+      auto-mediacao como ponte provada; F2: resumo executivo atribui
+      incorretamente ao Bug 1 um mecanismo de captura -- assert
+      falhando -- que so se aplica ao Bug 2, ja que o Bug 1 foi erro de
+      prosa apenas) -- nenhum afeta qualquer alegacao matematica
+      central, ambos corrigidos por notas datadas na propria
+      ATTEMPT.md da frente.
+    scope: >
+      Arquivos afetados: PROOF_DEPENDENCY_MAP.md (novo adendo datado no
+      PLATRESUM, cadeia H1, ~50 linhas); .../h1_translation_structure_
+      attempt/ATTEMPT.md (2 notas datadas, Secoes 6.1 e "two self-caught
+      bugs"); DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo, Arvore B / M-CLUST(b),
+      separada da linha principal U1/2 em THEOREM.md. Nenhuma formula
+      de registro anterior alterada. H1/(U1)/(U2) permanecem ABERTOS --
+      este adendo e um diagnostico mais afiado e uma nova reformulacao,
+      nao um fechamento. Onda 25 agora integrada em sua totalidade (4/4
+      frentes: d=DISC-DEC-119, b=DISC-DEC-120, a=DISC-DEC-121,
+      c=DISC-DEC-122).

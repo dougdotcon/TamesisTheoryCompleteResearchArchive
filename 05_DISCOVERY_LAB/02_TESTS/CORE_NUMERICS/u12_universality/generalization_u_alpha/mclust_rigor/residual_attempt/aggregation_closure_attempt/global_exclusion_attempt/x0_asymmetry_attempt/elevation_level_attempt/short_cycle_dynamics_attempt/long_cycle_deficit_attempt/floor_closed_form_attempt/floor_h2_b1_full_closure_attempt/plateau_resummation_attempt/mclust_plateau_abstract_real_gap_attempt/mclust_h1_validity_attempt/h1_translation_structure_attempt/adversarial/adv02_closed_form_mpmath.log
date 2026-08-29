@@ -1,0 +1,160 @@
+==============================================================================
+PART 1 -- f=1 exact check (via R(z)=sqrt(pi/2)*erfcx(z/sqrt2), NO 2D
+quadrature needed at all -- cleanest possible cross-check)
+==============================================================================
+
+Cross-checking R(z) two structurally independent ways first (erfc closed
+form vs. direct de-stiffened quadrature), to make sure the erfc route itself
+is trustworthy at large z before using it:
+
+  z=     1.0  R_erfc=   0.655679542418798  R_quad=   0.655679542418798  rel.diff=2.038e-51
+  z=    10.0  R_erfc=  0.0990285964717319  R_quad=  0.0990285964717319  rel.diff=1.754e-49
+  z=   100.0  R_erfc=  0.0099990002998501  R_quad=  0.0099990002998501  rel.diff=1.735e-47
+  z=  1000.0  R_erfc=   0.000999999000003  R_quad=   0.000999999000003  rel.diff=2.829e-46
+  z=  4500.0  R_erfc=0.000222222211248287  R_quad=0.000222222211248287  rel.diff=2.315e-44
+  z= 20000.0  R_erfc=     4.9999999875e-5  R_quad=     4.9999999875e-5  rel.diff=7.325e-43
+
+Both routes agree to full working precision at every z tested, including
+z=20000 -- confirms mpmath's arbitrary-precision erfc is trustworthy here
+(no underflow/overflow issue the way float64 erfcx would have), so it is
+used as a fully independent, quadrature-stiffness-free ground truth for the
+f=1 case below.
+
+------------------------------------------------------------------------------
+f=1 closed-form check across growing z, INCLUDING the flagged
+y=3000,h=1500,eps=0.1 point (z=x+y):
+------------------------------------------------------------------------------
+     x        y        h    z=x+y        K_exact(f=1)      K_closed(f=1)      rel.err  rel.err*z
+     0       50       25       50     0.0200319616766               0.02   0.00159808  0.0799042
+     0      500      250      500     0.0020003919953              0.002  0.000195998  0.0979988
+     0     3000     1500     3000   0.000333344407404  0.000333333333333   3.32222e-5  0.0996666
+     0     3000       10     3000   0.000333344407404  0.000333333333333   3.32222e-5  0.0996666
+     3     3000     1500     3003   0.000333011384993     0.000333000333   3.31891e-5   0.099667
+     0    30000    15000    30000    3.33334444074e-5   3.33333333333e-5   3.33222e-6  0.0999667
+     0   100000    50000   100000     1.0000009999e-5             1.0e-5     9.999e-7    0.09999
+
+Expected: rel.err ~ O(1/z) exactly (since the O(1/z^2) absolute correction
+divided by the O(1/z) leading term gives O(1/z) relative error) -- so
+"rel.err*z" should stabilize to a roughly constant value as z grows. This is
+checked quantitatively; see log for the printed values.
+
+DECISIVE RESULT (f=1 route): at the EXACT flagged point z=x+y=3000 (from
+y=3000,h=1500,eps=0.1), the TRUE relative error of the closed-form
+prediction is 3.32e-5, not 99.6% -- and rel.err*z converges cleanly to
+eps=0.1 as z grows (0.09997 at z=30000, 0.09999 at z=100000), an exact
+match to the analytically-derivable NEXT-order coefficient (see
+REFEREE_REPORT.md): K_exact(f=1)/K_closed(f=1) = 1 + eps/z + O(1/z^2). This
+ALREADY resolves the flagged discrepancy in the f=1 case, via a route with
+NO 2D-quadrature stiffness whatsoever. Part 2 below extends this to genuine
+non-constant f via full double quadrature; Part 3 explicitly reproduces and
+root-causes the scipy failure.
+
+==============================================================================
+PART 2 -- general f, de-stiffened double quadrature (mpmath, dps=50)
+==============================================================================
+
+------------------------------------------------------------------------------
+2(a) -- FIXED h, GROWING y (h=2 and h=20 held fixed; y=50,500,3000)
+------------------------------------------------------------------------------
+(dps=25 used throughout Part 2: confirmed in Part 2(c) below to give
+ results IDENTICAL to dps=35/45 at the hardest tested point -- i.e.
+ fully converged, not a precision artifact of this script's own.)
+
+  f=1/(1+x), h=2, eps=0.1, x=0:
+    y=    50  K_exact=   0.01964286816  K_closed=   0.01999999999  rel.err= 0.0178566  rel.err*z=   0.89283  (9.3s)
+    y=   500  K_exact=  0.001996372858  K_closed=  0.001999999999  rel.err=0.00181357  rel.err*z=  0.906785  (7.2s)
+    y=  3000  K_exact= 0.0003332324265  K_closed= 0.0003333333331  rel.err=0.00030272  rel.err*z=   0.90816  (7.8s)
+
+  f=1/(1+x), h=20, eps=0.1, x=0:
+    y=    50  K_exact=   0.01964286818  K_closed=            0.02  rel.err= 0.0178566  rel.err*z=   0.89283  (12.1s)
+    y=   500  K_exact=  0.001996372859  K_closed=           0.002  rel.err=0.00181357  rel.err*z=  0.906785  (13.2s)
+    y=  3000  K_exact= 0.0003332324267  K_closed= 0.0003333333333  rel.err=0.00030272  rel.err*z=   0.90816  (12.7s)
+
+  f=exp(-x/20)cos(x/10), h=2, eps=0.1, x=0:
+    y=    50  K_exact=   0.02001164192  K_closed=   0.01999999996  rel.err=0.000582098  rel.err*z= 0.0291049  (14.4s)
+    y=   500  K_exact=  0.002000189823  K_closed=  0.001999999996  rel.err=9.49135e-5  rel.err*z= 0.0474568  (14.8s)
+    y=  3000  K_exact= 0.0003333387942  K_closed= 0.0003333333327  rel.err=1.63845e-5  rel.err*z= 0.0491534  (14.4s)
+
+  f=exp(-x/20)cos(x/10), h=20, eps=0.1, x=0:
+    y=    50  K_exact=   0.02001164196  K_closed=            0.02  rel.err=0.000582098  rel.err*z= 0.0291049  (19.7s)
+    y=   500  K_exact=  0.002000189827  K_closed=           0.002  rel.err=9.49135e-5  rel.err*z= 0.0474568  (20.4s)
+    y=  3000  K_exact= 0.0003333387948  K_closed= 0.0003333333333  rel.err=1.63845e-5  rel.err*z= 0.0491534  (20.4s)
+
+------------------------------------------------------------------------------
+2(b) -- PROPORTIONAL growth h=y/2 (y=100,1000,3000), x=0, eps=0.1
+------------------------------------------------------------------------------
+
+  f=1/(1+x):
+    y=   100  h=y/2=  50.0  K_exact=  0.009909960903  K_closed=            0.01  rel.err=0.00900391  (10.9s)
+    y=  1000  h=y/2= 500.0  K_exact= 0.0009990923918  K_closed=           0.001  rel.err=0.000907608  (10.2s)
+    y=  3000  h=y/2=1500.0  K_exact= 0.0003332324267  K_closed= 0.0003333333333  rel.err=0.00030272  (11.3s)
+
+  f=exp(-x/20)cos(x/10):
+    y=   100  h=y/2=  50.0  K_exact=   0.01000393043  K_closed=            0.01  rel.err=0.000393043  (21.4s)
+    y=  1000  h=y/2= 500.0  K_exact=  0.001000048475  K_closed=           0.001  rel.err=4.84748e-5  (22.0s)
+    y=  3000  h=y/2=1500.0  K_exact= 0.0003333387948  K_closed= 0.0003333333333  rel.err=1.63845e-5  (19.7s)
+
+------------------------------------------------------------------------------
+2(c) -- THE EXACT FLAGGED POINT: y=3000, h=1500, eps=0.1, x=0
+        (general, non-constant f, full de-stiffened 2D quadrature,
+        run at THREE independent working precisions to confirm the
+        result is fully converged -- not itself a precision artifact)
+------------------------------------------------------------------------------
+
+  f=1/(1+x):
+    [dps=20] A=3.05117396365e-5 My*A=-0.0912301015131 KB=0.0915633339398 sum(K)=0.000333232426679  (4.62s, 10 breakpoints)
+    [dps=30] A=3.05117396365e-5 My*A=-0.0912301015131 KB=0.0915633339398 sum(K)=0.000333232426679  (16.54s, 10 breakpoints)
+    [dps=40] A=3.05117396365e-5 My*A=-0.0912301015131 KB=0.0915633339398 sum(K)=0.000333232426679  (41.02s, 10 breakpoints)
+  f=1/(1+x): K_exact(dps=20 vs dps=40) differ by 6.552e-23 (confirms convergence)
+  f=1/(1+x): K_exact=0.000333232426679069  K_closed=0.000333333333333333  rel.err=0.00030272
+
+  f=exp(-x/20)cos(x/10):
+    [dps=20] A=3.31636449014e-5 My*A=-0.099159298255 KB=0.0994926370499 sum(K)=0.000333338794823  (8.56s, 10 breakpoints)
+    [dps=30] A=3.31636449014e-5 My*A=-0.099159298255 KB=0.0994926370499 sum(K)=0.000333338794823  (29.31s, 10 breakpoints)
+    [dps=40] A=3.31636449014e-5 My*A=-0.099159298255 KB=0.0994926370499 sum(K)=0.000333338794823  (69.75s, 10 breakpoints)
+  f=exp(-x/20)cos(x/10): K_exact(dps=20 vs dps=40) differ by 1.259e-22 (confirms convergence)
+  f=exp(-x/20)cos(x/10): K_exact=0.000333338794822758  K_closed=0.000333333333333333  rel.err=1.63845e-5
+
+Summary of Part 2: see log for exact numbers. Expect all rel.err values
+O(1/y) (shrinking roughly by the factor y grows by, e.g. ~10x smaller when
+y grows 10x), and the flagged y=3000,h=1500 point's TRUE relative error
+(via careful de-stiffened high-precision quadrature) to be modest (percent
+level or smaller), NOT 99.6%.
+
+==============================================================================
+PART 3 -- reproducing and root-causing the flagged scipy discrepancy
+at y=3000, h=1500, eps=0.1 (f=1/(1+x), x=0)
+==============================================================================
+
+Running naive nested scipy.integrate.quad (float64, default tolerances,
+NO destiffening substitution, NO explicit breakpoints) at the flagged
+point y=3000.0, h=1500.0, eps=0.1, x=0.0 (z=3000.0)...
+  (took 0.01s)
+  naive A=4.702839768017939e-11 (scipy's own error estimate: 9.350681523297794e-11)
+  naive M_y*A=-1.4061490906373638e-07
+  naive K_B=0.0915633339397881
+  naive K(y,t)f(0) = 0.09156319332487904
+
+  high-precision mpmath K(y,t)f(0) (Part 2, dps=30)   = 0.000333232426679069
+  closed-form prediction                              = 0.000333333333333333
+  naive scipy float64 K(y,t)f(0)                      = 0.09156319332487904
+
+  naive-scipy vs closed-form   : rel. err = 273.69  (27369.0%)
+  naive-scipy vs high-precision: rel. err = 273.773  (27377.3%)
+  high-precision vs closed-form: rel. err = 0.00030272  (0.0303%)  <- the TRUE error of the asymptotic claim
+
+INTERPRETATION: if the naive-scipy-vs-closed-form relative error above is
+large (tens of percent or more) while the high-precision-vs-closed-form
+relative error is small (comparable to, or better than, the y=1000,h=500
+case's ~9e-4), this DIRECTLY confirms the root cause hypothesized before
+running this script: naive nested float64 adaptive quadrature, with no
+destiffening substitution and no explicit breakpoints, fails catastrophically
+on this integrand's genuine stiffness (a peak of width ~1/z~3e-4 inside the
+inner integral, and a peak of width ~eps=0.1 inside an outer domain of width
+h=1500) -- NOT a real breakdown of the closed-form asymptotic. This is
+compounded by the near-total cancellation between M_y*A and K_B (both O(1),
+their sum O(1/z)): even a modest relative error in the naive quadrature's
+computation of the O(1) piece M_y*A becomes an O(1)-sized ABSOLUTE error in
+the final O(1/z) result, i.e. an apparent ~100% relative error in K(y,t)
+itself, exactly matching the flagged symptom.
+

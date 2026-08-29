@@ -1,6 +1,25 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-121`: onda 25 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-122`: onda 25 frente (c)
+`H1-TRANSLATION-STRUCTURE-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — sexta onda
+consecutiva (ondas 20-25) neste gap. Localizou e caracterizou com
+exatidão a falha de invariância por translação de `K(y,t)` (`K_B`
+invariante; `M_y K_A^{\mathrm{raw}}` é a fonte inteira, via nova
+identidade de conjugação exponencial). Resultado central: nova
+assíntota líder em forma fechada,
+`K(y,t)f(x)=[f(x)-e^{-h/\varepsilon}f(x+h)]/(x+y)+O(1/(x+y)^2)`,
+provada condicional a `(B)+(C)`, confirmada numericamente a
+`3{,}2\times10^{-8}`. Nova reformulação rigorosa de `(U1)` via
+identidade de auto-mediação (Cesàro), incondicional; ingrediente
+Tauberiano preciso nomeado, não atacado. `(U1)`/`(U2)`/`H1`
+permanecem ABERTOS. Referee hostil: SOUND WITH NAMED ISSUES, resolveu
+definitivamente uma discrepância numérica de `99,6%` sinalizada pela
+própria sessão antes do despacho como artefato de quadratura `scipy`
+(erro real `\approx3\times10^{-4}`, `O(1/y)`, root-causado); dois
+achados BAIXA (enquadramento de prosa), corrigidos por notas datadas.
+**Onda 25 agora integrada em sua totalidade (4/4 frentes).**
+Anterior: `DISC-DEC-121`: onda 25 frente (a)
 `D-SHARP-RATE-CONSTANTS-ATTEMPT` integrada como Estágio 46 —
 fechamento COMPLETO em `K=2` na constante exata ótima
 `M_2\approx0{,}7107/n` (`n\ge4`, ~16,9× mais apertada que a crua

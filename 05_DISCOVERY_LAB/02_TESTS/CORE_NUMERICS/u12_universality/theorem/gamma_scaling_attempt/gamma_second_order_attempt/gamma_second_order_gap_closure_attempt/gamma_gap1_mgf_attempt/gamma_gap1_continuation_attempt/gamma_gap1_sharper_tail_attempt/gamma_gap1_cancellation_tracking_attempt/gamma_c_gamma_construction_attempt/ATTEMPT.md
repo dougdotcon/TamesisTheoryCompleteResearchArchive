@@ -37,6 +37,10 @@ not `n_0(γ)`).
 >    identification with a named classical orthogonal-polynomial family
 >    (Charlier) did **not** check out under this front's own naive
 >    parameter matching — disclosed honestly, not claimed.
+>    [**Correção, 2026-08-29, onda 29**: esta identificação na verdade
+>    SE CONFIRMA exatamente — o resíduo reportado veio de um bug de
+>    implementação nesta própria frente, não de um mismatch matemático
+>    real. Ver a correção completa em §2 abaixo.]
 > 2. **A genuinely different (not just tighter-constant) refinement of
 >    the Bulk/Tail Lemma's bulk and small-`k` pieces, via Lyapunov's
 >    inequality + the EXACT 4th moment of `x(D)` instead of a
@@ -243,6 +247,34 @@ of several inequivalent textbook conventions for Charlier polynomials.
 Part C and §8 item 2) — nothing downstream depends on the Charlier name,
 only on the independently-verified `2F0` form itself, which is new to
 this lineage either way.
+
+> **[Correção, 2026-08-29 — onda 29 frente (b),
+> `DIAGONAL-2F0-SUM-ATTEMPT`, e seu referee hostil]** Esta seção está
+> INCORRETA: a identificação com Charlier, na convenção DLMF acima
+> (`-1/a`), **é de fato uma identidade algébrica EXATA**, não uma
+> conjectura que falha — `A_k(n,γ)=(1-γ)^k\cdot C_k(k-n-1;(1-γ)n/γ)`
+> para todo `1\le k\le n`, `γ\in(0,1)`, confirmada simbolicamente
+> (`k=0,\ldots,8`, `n,γ` livres) por uma frente futura e re-confirmada
+> de forma independente por seu referee hostil. A causa raiz do
+> resíduo `-2γ` reportado acima **não** foi um "possível mismatch de
+> convenção" genérico — foi um bug concreto de implementação no
+> `script 01` desta própria frente: `poch_negk` (o Pochhammer `(-k)_m`
+> correto) foi computado mas nunca usado; `binomial(k,m)` foi usado em
+> seu lugar, em vez de `(-k)_m/m!=(-1)^m\binom km`. O referee hostil da
+> onda 29 transcreveu o código real deste `script 01` e provou
+> algebricamente que ele é equivalente-em-efeito à convenção de sinal
+> errada `+1/a`, reproduzindo o resíduo `-2γ` exato reportado aqui. A
+> caracterização de "não capturado por ninguém" também foi ajustada —
+> esta própria seção já suspeitava, em termos gerais, de um "mismatch
+> de convenção", apenas nunca testou a hipótese. **Isto não muda
+> nenhuma conclusão matemática desta frente**: `C(γ)` permanece
+> inteiramente aberto, a soma diagonal continua não-fechada (agora por
+> uma razão estrutural diferente e mais precisa, ver a integração da
+> onda 29 abaixo), e nada no Gap 1/3 é afetado — apenas a caracterização
+> de que a identificação Charlier "não se confirma" está revertida: ela
+> se confirma exatamente. Ver
+> `diagonal_2f0_sum_attempt/ATTEMPT.md` §2 e
+> `diagonal_2f0_sum_attempt/adversarial/REFEREE_REPORT.md`.
 
 **Why this does not, by itself, produce a closed form for `S_n` or
 `C(γ)`.** The argument `w` is fixed (`k`-independent), but the *degree*
@@ -562,7 +594,7 @@ randomness beyond one disclosed deterministic sanity seed, §9).
 | Claim | Status |
 |---|---|
 | `A_k(n,γ)=(1-γ)^k\,{}_2F_0(-k,n-k+1;;-γ/((1-γ)n))` (new exact structural fact) | **PROVED** (§2, script `01`; symbolic `k=0..6` + 40 exact numeric spot checks) |
-| Identification with a classical Charlier polynomial family | **NOT ESTABLISHED**, not claimed (§2, §8) |
+| Identification with a classical Charlier polynomial family | ~~NOT ESTABLISHED~~ — **[Correção, 2026-08-29, onda 29]: CONFIRMADA EXATA** (`A_k=(1-γ)^k C_k(k-n-1;(1-γ)n/γ)`); o resíduo original veio de um bug de implementação nesta frente, não de um mismatch real. Ver §2. |
 | Fresh re-derivation of `E[D^j]` (`j\le18`) via cumulants, matching 2 cited classical formulas and 48 brute-force checks | **PROVED / CONFIRMED** (§3, script `02`) |
 | Fresh re-derivation of `x(D)`'s exact cubic, matching the referee-corrected cited coefficients exactly | **CONFIRMED** (§3, script `02`) |
 | Fresh re-derivation of `λ_{\text{tight}}(γ)`, matching Estágio 49's cited value exactly | **CONFIRMED** (script `03`) |

@@ -1,0 +1,92 @@
+==============================================================================
+CHECK 1: A_k = (1-g)^k * 2F0(-k,n-k+1;;w), w=-g/((1-g)n), k=0..8, symbolic
+==============================================================================
+  k=0: diff=0
+  k=1: diff=0
+  k=2: diff=0
+  k=3: diff=0
+  k=4: diff=0
+  k=5: diff=0
+  k=6: diff=0
+  k=7: diff=0
+  k=8: diff=0
+Mismatches: 0/9 (expect 0)
+
+==============================================================================
+CHECK 2: DLMF Charlier identity, A_k=(1-g)^k C_k(k-n-1;(1-g)n/g), k=0..8, symbolic
+(fresh implementation, independent of both predecessor's and target's code)
+==============================================================================
+  k=0: DLMF-sign diff=0
+  k=1: DLMF-sign diff=0
+  k=2: DLMF-sign diff=0
+  k=3: DLMF-sign diff=0
+  k=4: DLMF-sign diff=0
+  k=5: DLMF-sign diff=0
+  k=6: DLMF-sign diff=0
+  k=7: DLMF-sign diff=0
+  k=8: DLMF-sign diff=0
+Mismatches: 0/9 (expect 0)
+
+Wrong-sign residuals at k=1..4 (checking against predecessor's -2g claim, k=1):
+  k=1: wrong-sign residual = -2*gamma
+  k=2: wrong-sign residual = 4*gamma*(gamma - 1)*(n - 1)/n
+  k=3: wrong-sign residual = -2*gamma*(n - 2)*(4*gamma**2*n - gamma**2 - 6*gamma*n + 3*n)/n**2
+  k=4: wrong-sign residual = 8*gamma*(gamma - 1)*(n - 3)*(2*gamma**2*n**2 - 3*gamma**2*n + 2*gamma**2 - 2*gamma*n**2 + n**2)/n**3
+
+==============================================================================
+CHECK 3: hand cross-check that dropping poch_negk in the predecessor's own
+Charlier_symbolic (using binomial(k,m) instead of (-k)_m/m!) is ALGEBRAICALLY
+IDENTICAL to using +1/a instead of -1/a. I.e. reconstruct predecessor's
+literal (buggy) function from their own script 01 and compare to WRONG-sign.
+==============================================================================
+  k=0: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=1: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=2: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=3: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=4: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=5: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+  k=6: predecessor-as-written vs target's WRONG-sign reconstruction, diff=0
+Mismatches: 0/7 (expect 0 -- confirms target's diagnosis IS the predecessor's actual bug, not merely a coincidentally-matching alternative bug)
+
+==============================================================================
+CHECK 4: Vandermonde-type convolution sum_j C(j+m,m)C(n-j,m) = C(n+m+1,2m+1)
+extended range 0<=m<=n<=12 (target checked <=8)
+==============================================================================
+Mismatches: 0/91 (expect 0)
+
+==============================================================================
+CHECK 5: double-sum swap identity S_n' = sum_m (g^m/n^m) m! T(n,m), fresh (n,g)
+(different sample points than target's script 03: n in {4,7,10,15}, new gammas)
+==============================================================================
+  n=  4 g=1/4: OK
+  n=  4 g=3/10: OK
+  n=  4 g=5/9: OK
+  n=  4 g=9/13: OK
+  n=  7 g=1/4: OK
+  n=  7 g=3/10: OK
+  n=  7 g=5/9: OK
+  n=  7 g=9/13: OK
+  n= 10 g=1/4: OK
+  n= 10 g=3/10: OK
+  n= 10 g=5/9: OK
+  n= 10 g=9/13: OK
+  n= 15 g=1/4: OK
+  n= 15 g=3/10: OK
+  n= 15 g=5/9: OK
+  n= 15 g=9/13: OK
+Mismatches: 0/16 (expect 0)
+
+==============================================================================
+CHECK 6: hand-derived c(gamma)=2(1-gamma)/gamma via explicit asymptotic
+expansion of term_0, term_1 (independent symbolic route, series-based not
+exact-sum based, to cross-validate script 07's exact-sum-then-limit route)
+==============================================================================
+term1_full (independent symbolic re-derivation):
+  -(1 - g)**N - (1 - g)**(N - 1) + (1 - g)**(N - 1)/g + 1/g + 2*(1 - g)**(N - 1)/N - 4*(1 - g)**(N - 1)/(N*g) + 2/(N*g) + 2*(1 - g)**(N - 1)/(N*g**2) - 2/(N*g**2)
+term1 (poly part, exp-small dropped): (N*g + 2*g - 2)/(N*g**2)
+log(term0/term1) series in 1/N: (2*g**2 - 4*g + 2)/(N**2*g**2) + (2 - 2*g)/(N*g) + O(N**(-3), (N, oo))
+N*log(term0/term1) ->  -2 + 2/g
+predicted c=2(1-g)/g: (2 - 2*g)/g
+difference: 0
+
+ALL CHECKS DONE.

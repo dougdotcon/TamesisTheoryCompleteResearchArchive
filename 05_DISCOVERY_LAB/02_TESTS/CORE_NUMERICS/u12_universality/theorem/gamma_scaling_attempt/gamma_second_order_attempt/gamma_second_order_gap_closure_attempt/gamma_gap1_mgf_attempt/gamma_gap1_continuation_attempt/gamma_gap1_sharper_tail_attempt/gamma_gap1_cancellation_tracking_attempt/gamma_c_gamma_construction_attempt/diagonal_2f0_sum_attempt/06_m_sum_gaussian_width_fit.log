@@ -1,0 +1,28 @@
+=== Part 0: mpmath term_m vs exact-Fraction term_m (script 04), n=50, gamma=1/2 ===
+  m=0: exact-Fraction=2.0000000000  mpmath=2.0000000000  OK
+  m=1: exact-Fraction=1.9200000000  mpmath=1.9200000000  OK
+  m=2: exact-Fraction=1.7344000000  mpmath=1.7344000000  OK
+  m=3: exact-Fraction=1.4741760000  mpmath=1.4741760000  OK
+  m=4: exact-Fraction=1.1790720000  mpmath=1.1790720000  OK
+  m=5: exact-Fraction=0.8875991040  mpmath=0.8875991040  OK
+Part 0 mismatches: 0 / 6
+
+=== Fitting the local decay rate: -log(term_m/term_{m-1}) ~ c*m/n for small m ===
+ gamma      n    m    -log(ratio)*n/m  (should stabilize to a constant 'c' as n grows)
+1/   2    400  m=1,2,3:  2.00502  2.50558  2.67319
+1/   2   1600  m=1,2,3:  2.00125  2.50140  2.66832
+1/   2   6400  m=1,2,3:  2.00031  2.50035  2.66708
+1/   5    400  m=1,2,3:  8.08108  8.57937  8.74319
+1/   5   1600  m=1,2,3:  8.02007  8.52008  8.68678
+1/   5   6400  m=1,2,3:  8.00500  8.50503  8.67175
+7/  10    400  m=1,2,3:  0.85806  1.35868  1.52638
+7/  10   1600  m=1,2,3:  0.85737  1.35753  1.52445
+7/  10   6400  m=1,2,3:  0.85720  1.35724  1.52397
+
+=== Comparison: is c consistent with beta = gamma(2-gamma)/2 (the ORIGINAL A_k profile's own width constant), or with something else? ===
+  gamma=1/2: beta=0.375000  2*beta=0.750000  fitted c (at n=6400, m=1)=2.000313  ratio c/beta=5.3342  ratio c/(2beta)=2.6671
+  gamma=1/5: beta=0.180000  2*beta=0.360000  fitted c (at n=6400, m=1)=8.005004  ratio c/beta=44.4722  ratio c/(2beta)=22.2361
+  gamma=7/10: beta=0.455000  2*beta=0.910000  fitted c (at n=6400, m=1)=0.857200  ratio c/beta=1.8840  ratio c/(2beta)=0.9420
+
+=== SUMMARY ===
+term_m has a genuine O(sqrt(n))-scale Gaussian envelope: the local decay rate c := -log(term_m/term_{m-1})*n/m stabilizes (in n) to an O(1), gamma-dependent constant as n grows, at fixed small m -- i.e. term_m ~ exp(-c m^2/(2n)) for m=O(sqrt(n)), the SAME scaling order (sqrt(n)) as the original A_k ~ exp(-beta k^2/n) profile. The swap does not reduce the characteristic scale of the sum -- see fitted c vs beta above.

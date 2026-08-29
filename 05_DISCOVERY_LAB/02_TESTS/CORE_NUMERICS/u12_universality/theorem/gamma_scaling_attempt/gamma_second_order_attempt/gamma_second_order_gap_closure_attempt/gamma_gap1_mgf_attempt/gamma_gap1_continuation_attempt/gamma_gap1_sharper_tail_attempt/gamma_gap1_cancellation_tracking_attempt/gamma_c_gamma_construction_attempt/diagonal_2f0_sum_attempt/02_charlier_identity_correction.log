@@ -1,0 +1,26 @@
+=== Part A: correct DLMF-convention Charlier identification, symbolic n,gamma, k=0..6 ===
+  k=0: OK (exact match)  diff=0
+  k=1: OK (exact match)  diff=0
+  k=2: OK (exact match)  diff=0
+  k=3: OK (exact match)  diff=0
+  k=4: OK (exact match)  diff=0
+  k=5: OK (exact match)  diff=0
+  k=6: OK (exact match)  diff=0
+Part A mismatches: 0 / 7  (0 expected: the DLMF-convention identification is an exact identity)
+
+=== Part B: diagnosing the predecessor's claimed '-2*gamma at k=1' residual ===
+  A_1 (direct, ground truth)           = 1
+  (1-gamma)*C_1(x;a) [DLMF -1/a sign]   = 1   (residual vs A_1: 0)
+  (1-gamma)*C_1(x;a) [WRONG +1/a sign]  = 1 - 2*gamma   (residual vs A_1: -2*gamma)
+
+=== Part C: same diagnosis at k=2 (to rule out a k=1 coincidence) ===
+  A_2 (direct, ground truth)            = (gamma**2 - 2*gamma + n)/n
+  (1-gamma)^2*C_2(x;a) [DLMF sign]       = (gamma**2 - 2*gamma + n)/n   (residual: 0)
+  (1-gamma)^2*C_2(x;a) [WRONG sign]      = 4*gamma**2 - 3*gamma**2/n - 4*gamma + 2*gamma/n + 1   (residual: 4*gamma*(gamma*n - gamma - n + 1)/n)
+
+=== Part D: numeric exact-Fraction cross-check of the DLMF identification, fresh points ===
+Part D: 0 mismatches / 50 exact spot checks (seed 20260943002)
+
+=== SUMMARY ===
+The DLMF-convention Charlier identification A_k = (1-gamma)^k C_k(k-n-1; (1-gamma)n/gamma) is CONFIRMED as an EXACT algebraic identity (0 mismatches, symbolic k=0..6 + 50 numeric spot checks).
+The predecessor's reported '-2*gamma at k=1 residual, ruling out Charlier' is REPRODUCED EXACTLY by using the WRONG sign convention (+1/a instead of DLMF's -1/a) inside the 2F0 -- see Part B/C above -- strongly suggesting a sign-convention bug in the predecessor's own Charlier implementation, not a genuine mathematical non-identification.

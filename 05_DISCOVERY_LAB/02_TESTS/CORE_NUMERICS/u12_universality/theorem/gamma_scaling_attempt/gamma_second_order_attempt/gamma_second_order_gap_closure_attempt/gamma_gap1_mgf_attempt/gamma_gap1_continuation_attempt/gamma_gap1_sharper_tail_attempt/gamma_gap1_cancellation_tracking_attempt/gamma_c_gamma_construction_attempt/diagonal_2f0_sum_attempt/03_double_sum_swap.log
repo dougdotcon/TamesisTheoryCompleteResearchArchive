@@ -1,0 +1,73 @@
+=== Part A: double-sum swap reproduces S_n' = S_n + 1 exactly ===
+  n=  3 gamma=1/3: S_n'(direct)=806/243  S_n'(swap)=806/243  OK
+  n=  3 gamma=2/5: S_n'(direct)=3628/1125  S_n'(swap)=3628/1125  OK
+  n=  3 gamma=1/2: S_n'(direct)=28/9  S_n'(swap)=28/9  OK
+  n=  3 gamma=3/7: S_n'(direct)=1094/343  S_n'(swap)=1094/343  OK
+  n=  5 gamma=1/3: S_n'(direct)=646654/151875  S_n'(swap)=646654/151875  OK
+  n=  5 gamma=2/5: S_n'(direct)=7955078/1953125  S_n'(swap)=7955078/1953125  OK
+  n=  5 gamma=1/2: S_n'(direct)=19311/5000  S_n'(swap)=19311/5000  OK
+  n=  5 gamma=3/7: S_n'(direct)=42073182/10504375  S_n'(swap)=42073182/10504375  OK
+  n=  8 gamma=1/3: S_n'(direct)=4571328067/859963392  S_n'(swap)=4571328067/859963392  OK
+  n=  8 gamma=2/5: S_n'(direct)=1005639617/200000000  S_n'(swap)=1005639617/200000000  OK
+  n=  8 gamma=1/2: S_n'(direct)=158427123/33554432  S_n'(swap)=158427123/33554432  OK
+  n=  8 gamma=3/7: S_n'(direct)=531876046005/107943428096  S_n'(swap)=531876046005/107943428096  OK
+  n= 12 gamma=1/3: S_n'(direct)=121965115945169/19042491875328  S_n'(swap)=121965115945169/19042491875328  OK
+  n= 12 gamma=2/5: S_n'(direct)=3218165252036/533935546875  S_n'(swap)=3218165252036/533935546875  OK
+  n= 12 gamma=1/2: S_n'(direct)=827259357065/146767085568  S_n'(swap)=827259357065/146767085568  OK
+  n= 12 gamma=3/7: S_n'(direct)=1337455200071771/226775649501184  S_n'(swap)=1337455200071771/226775649501184  OK
+Part A mismatches: 0 / 16
+
+=== Part B: T(n,m)|weight=1 = C(n+m+1, 2m+1), symbolic + numeric ===
+Part B (unweighted Vandermonde identity) mismatches: 0 over all 0<=m<=n<=8 (44 cases)
+
+=== Part C: general-gamma T(n,m) vs Tinf(n,m) (extend j-sum to infinity) ===
+Tinf(n,m) := [y^m] (1+y)^{n+m+1} / (y+gamma)^{m+1}, via sympy series
+     n    m    gamma            T_exact              T_inf      rel.err
+    20    1 1/    2          72.000046          72.000000    6.358e-07
+    20    1 1/    5         306.917529         300.000000    2.254e-02
+    20    1 3/    4          34.370370          34.370370    2.665e-13
+    20    3 1/    2        9856.025848        9856.000000    2.623e-06
+    20    3 1/    5       69138.862966        2500.000000    9.638e-01
+    20    3 3/    4        2943.239140        2943.239140    5.907e-13
+    20    6 1/    2      655001.135742      655104.000000    1.570e-04
+    20    6 1/    5     4940692.696605 44371875000.000000    8.980e+03
+    20    6 3/    4      144708.885855      144708.885856    6.463e-12
+    60    1 1/    2         232.000000         232.000000    0.000e+00
+    60    1 1/    5        1300.002145        1300.000000    1.650e-06
+    60    1 3/    4         105.481481         105.481481    0.000e+00
+    60    3 1/    2      446976.000000      446976.000000    0.000e+00
+    60    3 1/    5     9277565.468210     9277500.000000    7.057e-06
+    60    3 3/    4      101143.294010      101143.294010    0.000e+00
+    60    6 1/    2  3166693376.000000  3166693376.000000    0.000e+00
+    60    6 1/    5 250791888399.827789 250899687500.000000    4.298e-04
+    60    6 3/    4   296778157.518867   296778157.518867    0.000e+00
+   150    1 1/    2         592.000000         592.000000    0.000e+00
+   150    1 1/    5        3550.000000        3550.000000    2.562e-15
+   150    1 3/    4         265.481481         265.481481    0.000e+00
+   150    3 1/    2     8138496.000000     8138496.000000    0.000e+00
+   150    3 1/    5   248302500.000001   248302500.000000    4.801e-15
+   150    3 3/    4     1696434.158208     1696434.158208    0.000e+00
+   150    6 1/    2 1381090097408.000000 1381090097408.000000    0.000e+00
+   150    6 1/    5 359190973203115.062500 359190973203125.000000    2.767e-14
+   150    6 3/    4 97545343928.157898 97545343928.157898    0.000e+00
+
+=== Part C2: does the relative error shrink as n grows at fixed m, gamma (consistent with an exponentially-small-in-n tail)? ===
+  gamma=1/2, m=2:
+    n=  10: rel.err=2.508719e-03
+    n=  20: rel.err=1.125200e-06
+    n=  40: rel.err=7.055721e-13
+    n=  80: rel.err=0.000000e+00
+    n= 160: rel.err=0.000000e+00
+    n= 320: rel.err=0.000000e+00
+  gamma=1/5, m=2:
+    n=  10: rel.err=6.091870e+00
+    n=  20: rel.err=1.103583e-01
+    n=  40: rel.err=3.950149e-04
+    n=  80: rel.err=2.752852e-08
+    n= 160: rel.err=3.415191e-16
+    n= 320: rel.err=0.000000e+00
+
+=== SUMMARY ===
+Part A (double-sum swap identity): 0 mismatches / 16 (expect 0)
+Part B (unweighted Vandermonde convolution T(n,m)=C(n+m+1,2m+1)): 0 mismatches (expect 0) -- NEW exact identity for this lineage
+Part C: extend-to-infinity approximation Tinf(n,m) tracks T_exact(n,m) with relative error shrinking as n grows at fixed m (see Part C2) -- consistent with the claimed exponentially-small-in-(n-m) tail.

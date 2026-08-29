@@ -1,6 +1,29 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-134`: onda 29 autorizada —
+**Última atualização:** 2026-08-29 (`DISC-DEC-135`: onda 29 frente (b)
+`DIAGONAL-2F0-SUM-ATTEMPT` integrada como Estágio 52 em `THEOREM.md`.
+`C(γ)` permanece inteiramente ABERTO; a soma diagonal permanece
+não-fechada — mas com uma **correção real ao registro do Estágio 51**:
+a identificação Charlier de `A_k(n,γ)`, relatada ali como "achado
+negativo honesto", é na verdade uma identidade EXATA (confirmada na
+convenção DLMF); o resíduo `-2γ` reportado veio de um bug de
+implementação concreto no script do Estágio 51 (identificado com
+precisão pelo referee hostil desta onda, que transcreveu o código real
+e provou sua equivalência-em-efeito à convenção de sinal errada). A
+rota natural para explorar a identificação corrigida (função geratriz
+de Charlier + extração de coeficiente) encontra uma parede
+fatorial-divergente ESTRUTURAL; uma segunda rota independente (troca
+de ordem de soma, nova identidade PROVADA, mais uma identidade
+tipo-Vandermonde nova a esta linhagem) mostra que a soma trocada tem a
+MESMA escala `\Theta(\sqrt n)` do perfil original — não é um atalho.
+Referee hostil: **SOUND — ACCEPT**, dois achados cosméticos apenas
+(figura de prosa, caracterização levemente ajustada), ambos corrigidos.
+**Onda 29 agora com 1/3 frentes integradas; frentes (a) e (c) acabaram
+de retornar com resultados substanciais — front (c) fechou K=5
+completamente (M_5 exato encontrado); front (a) provou (U)
+condicionalmente e reduziu (C') — ambas aguardando spot-check e
+referee.**
+Anterior: `DISC-DEC-134`: onda 29 autorizada —
 3 frentes após survey de portfolio dedicado. Frente (a): 10ª onda
 consecutiva no gap H1/M-CLUST(b), mas com alvo qualitativamente
 diferente das 9 anteriores — ataque direto às duas hipóteses

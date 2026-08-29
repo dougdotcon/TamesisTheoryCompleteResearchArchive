@@ -1,0 +1,32 @@
+==============================================================================
+Independent Richardson check, gamma=0.5, DIFFERENT n's than target's script05
+(target used n=1600,3200; here: n=1000,4000, 3-point n=1000,2000,4000 too)
+==============================================================================
+target T(gamma) = 1.154700538379251529018298
+C(gamma) closed form = -0.3250640803270932931362523
+  n=  500  R=1.1403402910  sqrt(n)*(R-T)=-0.321105
+  n= 1000  R=1.1445098079  sqrt(n)*(R-T)=-0.322259
+  n= 2000  R=1.1474762927  sqrt(n)*(R-T)=-0.323078
+
+  2-pt Richardson (n=1000,2000): C_extrap = -0.325055
+  C(gamma) closed form           = -0.325064
+  |diff| = 0.000009
+
+==============================================================================
+Independent fitted local rate c(n,gamma) at n=6400, m=1 (fresh mpmath code)
+==============================================================================
+  gamma=1/2: fitted c(n=6400,m=1) = 2.000313   predicted 2(1-g)/g = 2.000000
+  gamma=1/5: fitted c(n=6400,m=1) = 8.005004   predicted 2(1-g)/g = 8.000000
+  gamma=7/10: fitted c(n=6400,m=1) = 0.857200   predicted 2(1-g)/g = 0.857143
+
+==============================================================================
+Independent truncation-error check T(n,m) vs T_inf(n,m) at n=20,m=6,gamma=0.2
+(fresh mpmath-based coefficient extraction via high-order Taylor series,
+ NOT sympy.series like the target's script03 -- different method entirely)
+==============================================================================
+  T_exact(20,6,0.2) = 4940692.696605
+  T_inf  (20,6,0.2) = 44371875000.000000
+  relative error = 8.979902e+03  (target claimed approx 9e3 = 9000)
+  Sanity (m<<n): T_exact(100,3,0.2)=61552500.029101  T_inf=61552500.000000  relerr=4.728e-10
+
+DONE.

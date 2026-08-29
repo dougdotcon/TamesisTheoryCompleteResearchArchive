@@ -8755,3 +8755,64 @@ decisions:
       mesma disciplina (spot-check independente da sessao antes do
       despacho do referee, referee hostil dedicado, correcoes/notas
       datadas honestas).
+
+  - id: DISC-DEC-135
+    date: 2026-08-29
+    decision: >
+      Onda 29 frente (b) DIAGONAL-2F0-SUM-ATTEMPT integrada como
+      Estagio 52 em THEOREM.md. C(gamma) permanece inteiramente
+      ABERTO; a soma diagonal permanece nao-fechada -- mas com um
+      diagnostico estrutural mais preciso, e uma CORRECAO REAL ao
+      registro do Estagio 51 (onda 28 frente b). Achado principal:
+      a identificacao com a familia classica de polinomios de Charlier,
+      que o Estagio 51 relatou como "achado negativo honesto e
+      genuino" (residuo exato -2*gamma em k=1), esta na verdade
+      INVERTIDA -- na convencao DLMF, A_k(n,gamma)=(1-gamma)^k *
+      C_k(k-n-1;(1-gamma)n/gamma) e EXATA, uma pura substituicao
+      algebrica. A causa do residuo -2*gamma foi identificada com
+      precisao: um bug de implementacao concreto no proprio script do
+      Estagio 51 (Pochhammer (-k)_m computado mas nunca usado,
+      binomial(k,m) usado em seu lugar). Por que a identificacao
+      corrigida ainda nao desbloqueia a soma diagonal: a rota natural
+      via funcao geratriz exponencial de Charlier + extracao de
+      coeficiente de Cauchy encontra uma parede fatorial-divergente
+      ESTRUTURAL (tipo Borel) -- diagnosticado, nao apenas
+      nao-encontrado. Uma segunda rota independente (troca de ordem de
+      soma) produziu uma nova identidade exata (PROVADA) mais uma
+      identidade tipo-Vandermonde nova a esta linhagem, mas mostrou
+      que a soma trocada tem a MESMA escala Theta(sqrt(n)) que o
+      perfil original (taxa de decaimento local exata c(gamma)=
+      2(1-gamma)/gamma, PROVADA) -- nao e um atalho.
+      Spot-check da sessao antes do despacho: reverificacao
+      independente via sympy da identidade DLMF-Charlier (k=0..6),
+      da identidade tipo-Vandermonde (0<=m<=n<=8), e da identidade da
+      soma trocada -- zero discrepancia.
+      Referee hostil dedicado: SOUND -- ACCEPT for catalogue, dois
+      achados cosmeticos apenas. Re-derivou tudo do zero, estendeu a
+      verificacao alem do proprio alcance da frente (2F0/Charlier ate
+      k=8; Vandermonde ate m,n<=12); transcreveu o codigo real e
+      buguado do Estagio 51 e provou algebricamente sua equivalencia-
+      em-efeito a convencao de sinal errada -- confirmando a causa
+      raiz do bug, nao uma coincidencia. Achado (1): figura de prosa
+      "~0.2%" difere ~1.8x do dado real do script (0.11%). Achado
+      (2): caracterizacao "nem a frente nem seu referee capturaram"
+      levemente ajustada -- a prosa do Estagio 51 ja suspeitava, em
+      termos gerais, de mismatch de convencao, sem testar a hipotese.
+      Ambos corrigidos por correcoes datadas.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 52, ~90 linhas, mais
+      dois pointers "[Ver Estagio 52 abaixo]" inseridos no texto do
+      Estagio 51); .../gamma_c_gamma_construction_attempt/ATTEMPT.md
+      (Estagio 51, frente predecessora -- 3 correcoes datadas: VERDICT,
+      Secao 2 principal, scorecard, corrigindo o achado negativo
+      Charlier); .../diagonal_2f0_sum_attempt/ATTEMPT.md (2 correcoes
+      datadas -- caracterizacao "ninguem capturou", figura de prosa
+      0.2%); DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. C(gamma) permanece
+      inteiramente ABERTO. Gap 1 e Gap 3 permanecem exatamente como o
+      Estagio 51 os deixou. n_0(gamma)/lambda_tight(gamma) dos Estagios
+      49/51 permanecem intocados -- esta correcao afeta apenas a
+      caracterizacao da identificacao Charlier, nao nenhum resultado
+      quantitativo previamente registrado.

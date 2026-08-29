@@ -7230,7 +7230,10 @@ apontado explicitamente pelo Estágio 49 como o alvo natural remanescente
 >    para uma frente futura. Uma tentativa de identificação com a
 >    família clássica de polinômios de Charlier não se confirmou sob o
 >    pareamento natural de parâmetros (resíduo exato `-2γ$` em `k=1`,
->    não-zero) — divulgado honestamente, não forçado.
+>    não-zero) — divulgado honestamente, não forçado. [Ver Estágio 52
+>    abaixo — 2026-08-29: esta identificação na verdade SE CONFIRMA
+>    exatamente; o resíduo veio de um bug de implementação nesta
+>    própria frente, não de um mismatch matemático real.]
 > 2. **Um refinamento genuinamente diferente (não apenas constante mais
 >    apertada) do Lema Bulk/Tail, via desigualdade de Lyapunov + o 4º
 >    momento EXATO**, em vez de um limitante determinístico de pior-caso
@@ -7282,7 +7285,10 @@ apontado explicitamente pelo Estágio 49 como o alvo natural remanescente
 > repetido em três lugares (resumo executivo, §5, scorecard) — corrigido
 > por três correções datadas na própria `ATTEMPT.md` da frente. A
 > identificação com Charlier confirmada como um achado negativo honesto
-> e genuíno.
+> e genuíno. [Ver Estágio 52 abaixo — 2026-08-29: este "achado negativo"
+> foi ele próprio revertido — a identificação Charlier é, na verdade,
+> uma identidade exata; nem esta frente nem seu referee capturaram um
+> bug de implementação concreto nesta própria frente.]
 >
 > **Sobre o enquadramento autocrítico da frente**: o referee confirma
 > que ele se sustenta como preciso — a frente distingue corretamente um
@@ -7323,3 +7329,129 @@ diferente (não baseada em momento/cumulante) para `C(γ)` em si — não
 mais um sexto aperto de `n_0(γ)`. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória/assintótica pura interna a
 este arquivo.
+
+---
+
+## [Extensão, Estágio 52 — 2026-08-29]
+
+**Onda 29, frente (b), `DISC-DEC-134` (`DIAGONAL-2F0-SUM-ATTEMPT`).**
+Alvo: fechar a soma hipergeométrica de "parâmetro-diagonal" que o
+Estágio 51 nomeou como a pista mais promissora não-explorada para
+`C(γ)`, `\Sigma_k(1-γ)^k{}_2F_0(-k,n-k+1;;-γ/((1-γ)n))`, ou,
+alternativamente, uma técnica genuinamente diferente para `C(γ)` em
+si.
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO; a soma diagonal continua
+> não-fechada — mas com um diagnóstico estrutural mais preciso, e uma
+> correção real ao registro do Estágio 51.**
+>
+> **Correção ao registro (achado principal desta frente).** A
+> identificação com a família clássica de polinômios de Charlier, que
+> o Estágio 51 relatou como um "achado negativo honesto e genuíno"
+> (resíduo exato `-2γ` em `k=1`, não-zero), está na verdade INVERTIDA:
+> na convenção DLMF (`C_n(x;a):={}_2F_0(-n,-x;;-1/a)`), a identidade
+> `A_k(n,γ)=(1-γ)^k\cdot C_k(k-n-1;(1-γ)n/γ)` é EXATA — uma pura
+> substituição algébrica (o `{}_2F_0` é manifestamente simétrico em
+> seus dois parâmetros superiores), não uma conjectura numérica.
+> A causa do resíduo `-2γ` reportado pelo Estágio 51 foi identificada
+> com precisão: um bug de implementação no próprio script daquela
+> frente (o Pochhammer `(-k)_m` correto foi computado mas nunca usado;
+> `\binom km` foi usado em seu lugar). O referee hostil desta onda
+> transcreveu o código real do Estágio 51 e provou algebricamente que
+> ele é equivalente-em-efeito à convenção de sinal errada, reproduzindo
+> o resíduo `-2γ` exato. Corrigido por correção datada em ambas as
+> `ATTEMPT.md` (Estágio 51 e desta frente).
+>
+> **Por que a identificação corrigida ainda não desbloqueia a soma
+> diagonal.** `S_n(γ)`, em linguagem Charlier, é
+> `\Sigma_{k=1}^n(1-γ)^kC_k(k-(n+1);a)`, `a=(1-γ)n/γ` fixo — uma soma
+> "anti-diagonal" genuína (grau `k` e ponto de avaliação `x_k=k-(n+1)`
+> crescendo juntos à mesma taxa). A rota natural seguinte — expressar
+> `C_k(x_k;a)` via a função geratriz exponencial de Charlier e extração
+> de coeficiente de Cauchy — foi tentada e encontra uma parede
+> ESTRUTURAL, não apenas prática: como `x_k` é linear em `k`, a extração
+> produz `\Sigma_kk!\,z(t)^k`, uma série fatorialmente divergente
+> (tipo Borel, não elementarmente somável) — a mesma parede de
+> crescimento fatorial que torna `{}_2F_0` divergente em geral,
+> evitada apenas dentro de cada `A_k` porque a soma interna sobre `m`
+> termina em `m=k`; a soma externa sobre `k` não tem tal proteção.
+> Registrado como um beco sem saída genuíno para esta técnica
+> específica, não uma prova de que nenhuma técnica via Charlier possa
+> funcionar.
+>
+> **Uma segunda rota independente (não usa Charlier): troca de ordem
+> de soma.** Uma nova identidade exata,
+> `S_n'=\Sigma_{m=0}^n(γ^m/n^m)\,m!\,T(n,m)`,
+> `T(n,m):=\Sigma_{j=0}^{n-m}\binom{j+m}m\binom{n-j}m(1-γ)^j`, foi
+> provada (PROVADA, verificação exata). No caso combinatório puro
+> (peso `\equiv1`), `T` colapsa via convolução binomial tipo
+> Vandermonde, `\Sigma_j\binom{j+m}m\binom{n-j}m=\binom{n+m+1}{2m+1}` —
+> uma identidade exata nova a esta linhagem. **Mas o `m`-soma trocado
+> tem exatamente a MESMA escala característica `\Theta(\sqrt n)` que o
+> perfil `A_k` original**, apenas com uma constante diferente — a taxa
+> de decaimento local exata `c(γ)=2(1-γ)/γ` foi provada (formas fechadas
+> exatas para `\text{term}_0`, `\text{term}_1`, limite de função
+> racional), confirmando que a troca redistribui a massa da soma, não
+> meramente a re-rotula. **Consequência prática: um tratamento
+> assintótico rigoroso desta soma trocada exigiria um trabalho de
+> profundidade comparável à maquinaria de momento/cumulante já usada e
+> considerada insuficiente por cinco frentes anteriores — esta
+> reformulação não é um atalho.**
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da identidade DLMF-Charlier (`k=0,\ldots,6`,
+> `n,γ` livres), da identidade tipo-Vandermonde (`0\le m\le n\le8`), e
+> da identidade da soma trocada `S_n'` (múltiplos `n,γ` racionais) —
+> zero discrepância em todos os casos.
+>
+> Referee hostil dedicado: re-derivou toda a matemática central do zero
+> a partir de definições primárias (não os scripts da frente),
+> estendendo a verificação além do próprio alcance testado pela frente
+> em vários pontos (identidade `2F0`/Charlier até `k=8`; identidade
+> tipo-Vandermonde até `m,n\le12`); transcreveu o código real e buguado
+> do Estágio 51 e provou algebricamente sua equivalência-em-efeito à
+> convenção de sinal errada — confirmando que a causa do bug é a
+> identificada, não uma coincidência; re-derivou a taxa de decaimento
+> `c(γ)` de forma independente e reproduziu os ajustes numéricos
+> citados; reproduziu a extrapolação de Richardson e a concordância com
+> `C(0{,}5)` (`6\times10^{-6}`) por uma rota independente. Dois achados
+> reais, ambos de severidade BAIXA: (1) uma figura de prosa
+> ("`\approx0{,}2\%`") difere `\approx1{,}8\times` do próprio dado do
+> script da frente ("`0{,}11\%`"), corrigido por correção datada; (2) a
+> caracterização "nem a frente predecessora nem seu referee capturaram"
+> o bug foi levemente ajustada — a prosa do Estágio 51 já suspeitava,
+> em termos gerais, de um "mismatch de convenção", apenas nunca testou
+> a hipótese; corrigido por correção datada.
+>
+> **Veredito: SOUND — ACCEPT for catalogue** (dois achados cosméticos,
+> nenhum afetando a correção). `C(γ)` permanece inteiramente ABERTO; a
+> soma diagonal permanece não-fechada, agora com dois becos sem saída
+> estruturalmente diagnosticados (parede fatorial via Charlier-EGF;
+> mesma escala `\Theta(\sqrt n)` via troca de soma) em vez de um único
+> caminho não-tentado. Gap 1 e Gap 3 permanecem exatamente como o
+> Estágio 51 os deixou.
+
+Ver
+`.../gamma_c_gamma_construction_attempt/diagonal_2f0_sum_attempt/ATTEMPT.md`
+e
+`.../diagonal_2f0_sum_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+O registro do Estágio 51 é corrigido: a identificação Charlier de
+`A_k(n,γ)` é agora conhecida como uma identidade exata, não um achado
+negativo — mas isto não muda nenhuma conclusão matemática (o `2F0`
+continua sendo o fato estrutural central; `C(γ)` continua não
+construído). O que muda de fato é o diagnóstico: a pista mais
+promissora nomeada pelo Estágio 51 (a soma diagonal) agora tem DOIS
+becos sem saída estruturalmente identificados, não apenas um caminho
+não-tentado — reduzindo, mas não eliminando, o espaço de técnicas
+razoáveis para uma futura frente. A Rota 2 do mandato (uma técnica
+bypassing inteiramente a maquinaria `A_k`/`2F0`) permanece
+inteiramente não-tentada e é o candidato mais claro para uma futura
+frente nesta linha, dado que agora duas rotas dentro da maquinaria
+`A_k`/`2F0` foram exploradas e ambas encontraram paredes estruturais
+genuínas. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.

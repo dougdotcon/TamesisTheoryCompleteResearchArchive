@@ -1,0 +1,21 @@
+=== Swap-route computation of S_n (independent of the direct k-sum) ===
+gamma=0.5, several n; comparing R(n) := phi(n,gamma n)/phi_inf(gamma n) to target T(gamma)=sqrt(2/(2-gamma)), and sqrt(n)*(R-target) to C(gamma).
+
+target T(gamma) = 1.154700538379251529018297561003914911295
+C(gamma) closed form = -0.3250640803270932931362523451317185594988
+
+     n                S_n        phi(n,gn)           R(n)     R-target  sqrt(n)*(R-t)
+   200          20.066943     0.1003347127   1.1321559951  -2.2545e-02      -0.318828
+   400          28.542186     0.0713554658   1.1386684891  -1.6032e-02      -0.320641
+   800          40.529589     0.0506619864   1.1433186008  -1.1382e-02      -0.321930
+  1600          57.483475     0.0359271717   1.1466294256  -8.0711e-03      -0.322845
+  3200          81.460698     0.0254564682   1.1489819366  -5.7186e-03      -0.323493
+
+Richardson extrapolation (model x_n = C + b/sqrt(n)), using last two n:
+  C_extrap (swap-route, n=1600,3200) = -0.325058
+  C(gamma) closed form              = -0.325064
+  |diff| = 0.000006
+
+=== Cross-check vs a fresh, independent DIRECT k-sum evaluator (same script, different loop -- sanity that S_n itself is computed correctly) ===
+  n=50: S_n(direct k-sum)=9.8413227616  S_n(swap m-sum)=9.8413227616  diff=3.437e-32
+  n=100: S_n(direct k-sum)=14.0756221498  S_n(swap m-sum)=14.0756221498  diff=5.799e-31

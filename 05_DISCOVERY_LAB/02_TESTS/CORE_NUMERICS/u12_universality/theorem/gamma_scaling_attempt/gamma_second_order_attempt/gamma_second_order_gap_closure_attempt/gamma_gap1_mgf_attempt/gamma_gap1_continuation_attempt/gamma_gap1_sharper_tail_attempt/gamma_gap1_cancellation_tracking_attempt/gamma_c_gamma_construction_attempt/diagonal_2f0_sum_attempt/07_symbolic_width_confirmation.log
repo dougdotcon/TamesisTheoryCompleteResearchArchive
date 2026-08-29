@@ -1,0 +1,18 @@
+term_0(n,gamma) = (1 - (1 - gamma)**(n + 1))/gamma
+term_1(n,gamma) = -(1 - gamma)**n - (1 - gamma)**(n - 1) + 2*(1 - gamma)**(n - 1)/n + (1 - gamma)**(n - 1)/gamma + 1/gamma - 4*(1 - gamma)**(n - 1)/(gamma*n) + 2/(gamma*n) + 2*(1 - gamma)**(n - 1)/(gamma**2*n) - 2/(gamma**2*n)
+
+=== Sanity: numeric spot check vs script 06's mpmath term_m, n=50, gamma=1/2 ===
+  term_0(50, 1/2) = 2.0000000000  (script 06 mpmath value: 2.0000000000)
+  term_1(50, 1/2) = 1.9200000000  (script 06 mpmath value: 1.9200000000)
+
+=== log-ratio * n, large-n limit (symbolic) ===
+(sympy's gruntz algorithm cannot decide sign(log(1-gamma)) on its own since 0<gamma<1 is only known 'morally', not declared -- so we drop the exponentially small (1-gamma)^n / (1-gamma)^(n-1) terms explicitly first, which is legitimate for any FIXED gamma in (0,1) as n->infinity, then let sympy take the resulting purely-rational-in-n limit unassisted.)
+  term_1(n,gamma), exponentially small terms dropped -> (gamma*n + 2*gamma - 2)/(gamma**2*n)
+  n*log(term_0/term_1) -> -2 + 2/gamma  as n -> infinity
+  predicted c = 2(1-gamma)/gamma = (2 - 2*gamma)/gamma
+  difference (should simplify to 0): 0
+
+=== Numeric evaluation of the limit at 3 sample gamma, cross-checking script 06 ===
+  gamma=1/2: limit=2.000000  predicted 2(1-g)/g=2.000000  (script 06 fitted values converged to ~2.000)
+  gamma=1/5: limit=8.000000  predicted 2(1-g)/g=8.000000  (script 06 fitted values converged to ~8.000)
+  gamma=7/10: limit=0.857143  predicted 2(1-g)/g=0.857143  (script 06 fitted values converged to ~0.857)

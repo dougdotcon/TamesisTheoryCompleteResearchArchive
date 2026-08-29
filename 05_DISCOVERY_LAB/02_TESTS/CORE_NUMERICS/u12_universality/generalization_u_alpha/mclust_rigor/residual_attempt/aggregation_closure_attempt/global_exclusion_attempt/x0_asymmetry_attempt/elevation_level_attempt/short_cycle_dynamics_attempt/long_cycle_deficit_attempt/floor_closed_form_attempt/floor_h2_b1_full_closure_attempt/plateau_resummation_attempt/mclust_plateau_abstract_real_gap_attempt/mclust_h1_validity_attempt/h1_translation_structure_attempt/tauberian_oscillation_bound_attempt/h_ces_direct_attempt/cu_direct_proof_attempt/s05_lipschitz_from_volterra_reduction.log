@@ -1,0 +1,142 @@
+==============================================================================
+PART 1 -- exact symbolic derivation of d/dx[K(y,t)f](x)
+==============================================================================
+
+Working from the RAW operator definitions (cited record facts):
+  K_A^raw(y,t)f(x) = int_0^h e^{-h'/eps} Theta~_h'(x) dh'
+  Theta~_h'(x)     = int_0^inf e^{-u^2/2-u(x+y)} f(x+h'+u) du
+  K_B(h)f(x)       = int_0^h e^{-v/eps} f(x+v) dv
+  M_y              = (1-eps*(x+y))/eps
+  K(y,t)f(x)       = M_y*K_A^raw(y,t)f(x) + K_B(h)f(x)
+
+Differentiate Theta~_h'(x) in x (product/chain rule under the integral,
+Leibniz -- valid for f,f' bounded, dominated convergence applies since
+the Gaussian-times-exponential kernel decays super-exponentially):
+
+d/dx[e^{-u^2/2-u(x+y)} f(x+hp+u)] = -u*f(hp + u + x)*exp(-u**2/2 - u*(x + y)) + exp(-u**2/2 - u*(x + y))*Subs(Derivative(f(_xi_1), _xi_1), _xi_1, hp + u + x)
+matches [e^{-u^2/2-uz} f'(x+hp+u)] - [u*e^{-u^2/2-uz} f(x+hp+u)]? residual = 0  (must be 0)
+
+CONFIRMED. So:
+  d/dx[Theta~_h'(x)] = Theta_h'[f'](z) - Theta~_{h',1}[f](z)
+    Theta_h'[f'](z)     := int_0^inf e^{-u^2/2-uz} f'(x+h'+u) du    [same
+                            operator, applied to f' instead of f]
+    Theta~_{h',1}[f](z) := int_0^inf u*e^{-u^2/2-uz} f(x+h'+u) du   [a NEW
+                            "first-moment" operator]
+
+Integrating over h' with the SAME e^{-h'/eps} weight and using
+d/dx[K_B(h)f(x)] = K_B(h)[f'](x)  (pure shift operator, standard, exact):
+
+  d/dx[K_A^raw(y,t)f(x)] = K_A^raw(y,t)[f'](x) - N(y,t)f(x)
+    N(y,t)f(x) := int_0^h e^{-h'/eps} Theta~_{h',1}[f](z) dh'
+
+  d/dx[M_y] = -1  (since z=x+y, dM_y/dx = -eps/eps = -1)
+
+  d/dx[K(y,t)f](x) = (d/dx M_y)*K_A^raw(y,t)f(x) + M_y*d/dx[K_A^raw(y,t)f(x)]
+                       + K_B(h)[f'](x)
+                    = -K_A^raw(y,t)f(x) + M_y*[K_A^raw(y,t)[f'](x) - N(y,t)f(x)]
+                       + K_B(h)[f'](x)
+                    = [M_y*K_A^raw(y,t)[f'](x) + K_B(h)[f'](x)]
+                       - K_A^raw(y,t)f(x) - M_y*N(y,t)f(x)
+                    = K(y,t)[f'](x) - K_A^raw(y,t)f(x) - M_y*N(y,t)f(x)      (DX-K)
+
+==============================================================================
+PART 2 -- rigorous O(1/z) bound on the correction term, using (B)+(C')
+(no strengthening beyond (C') needed for THIS specific identity)
+==============================================================================
+
+Piece 1: K_A^raw(y,t)f(x) = R(z)*K_B(h)f(x) + int_0^h e^{-h'/eps} rho(h',z) dh'
+  [wave-25 exact decomposition, cited, re-derived independently in this
+  front's own s02/s03]. Bound each term rigorously:
+    |R(z)*K_B(h)f(x)| <= R(z)*M_Phi*eps <= (1/z)*M_Phi*eps      (G1, (B))
+    |int_0^h e^{-h'/eps} rho(h',z) dh'| <= L1*sigma(z)*eps <= L1*eps/z^2  (G2,(C'))
+  => |K_A^raw(y,t)f(x)| <= M_Phi*eps/z + L1*eps/z^2  = O(1/z)      [RIGOROUS]
+
+Piece 2: N(y,t)f(x) = int_0^h e^{-h'/eps} [int_0^inf u*e^{-u^2/2-uz}f(x+h'+u)du] dh'
+  Bound the inner integral crudely via (B) alone (|f|<=M_Phi):
+    |int_0^inf u*e^{-u^2/2-uz}f(x+h'+u)du| <= M_Phi*int_0^inf u*e^{-u^2/2-uz}du
+                                              = M_Phi*sigma(z) <= M_Phi/z^2   (G2)
+  => |N(y,t)f(x)| <= M_Phi*sigma(z)*eps <= M_Phi*eps/z^2           [RIGOROUS]
+
+  => |M_y*N(y,t)f(x)| <= |(1-eps*z)/eps|*M_Phi*eps/z^2 <= (1+eps*z)*M_Phi/z^2
+                        = M_Phi/z^2 + eps*M_Phi/z  = O(1/z)        [RIGOROUS]
+
+TOTAL: |K_A^raw(y,t)f(x) + M_y*N(y,t)f(x)| <= (M_Phi*eps + eps*M_Phi)/z
+                                                + O(1/z^2) terms
+                                             =  D2(x,eps)/z    for z>=1,
+  D2(x,eps) := 2*M_Phi*eps + L1*eps + M_Phi   [explicit, y/t-independent]
+
+       z    M_Phi*eps/z     L1*eps/z^2    M_Phi*eps/z^2    eps*M_Phi/z   [all -> 0 as z grows]
+       2   2.500000e-01   1.250000e-01     1.250000e-01   2.500000e-01
+       5   1.000000e-01   2.000000e-02     2.000000e-02   1.000000e-01
+      10   5.000000e-02   5.000000e-03     5.000000e-03   5.000000e-02
+      50   1.000000e-02   2.000000e-04     2.000000e-04   1.000000e-02
+     100   5.000000e-03   5.000000e-05     5.000000e-05   5.000000e-03
+    1000   5.000000e-04   5.000000e-07     5.000000e-07   5.000000e-04
+
+==============================================================================
+PART 3 -- direct numerical confirmation of identity (DX-K) and its
+O(1/z) correction bound, fresh raw-kernel implementation
+==============================================================================
+     z     d/dx[Kf] numeric            K[fp]           diff     z*|diff|
+   5.0         0.0292486718     0.0369254661  -7.676794e-03     0.038384
+  10.0         0.0206411892     0.0224024302  -1.761241e-03     0.017612
+  30.0         0.0081622971     0.0083232667  -1.609696e-04     0.004829
+  60.0         0.0042168877     0.0042542359  -3.734811e-05     0.002241
+
+sup(z*|d/dx[Kf]-K[fp]|) observed: 0.038384  -- BOUNDED, consistent with
+the rigorous O(1/z) bound on the correction term derived in Part 2 above.
+
+==============================================================================
+PART 4 -- honest assembly and scope: what (C') reduces to
+==============================================================================
+
+Integrating identity (DX-K) over t in [0,y] (formally, assuming Phi_t in
+C^1(x) for each t -- itself an unverified regularity input, flagged
+honestly, not smuggled) and using g_y'(x)=0 (g_y(x)=e^{-y/eps} is CONSTANT
+in x):
+
+  Phi_y'(x) = int_0^y K(y,t)[Phi_t'](x) dt + int_0^y [correction(y,t,x)] dt
+
+  |correction(y,t,x)| <= D2(x,eps)/z,  z=x+y CONSTANT in t (Part 2)
+  => |int_0^y correction dt| <= y*D2(x,eps)/z <= D2(x,eps)     [bounded,
+     using y<=z for x>=0 -- exactly the SAME y/z<=1 fact this whole
+     sub-lineage uses throughout]
+
+So Phi_y' SATISFIES THE SAME VOLTERRA EQUATION, WITH THE SAME KERNEL
+K(y,t), AS Phi_y ITSELF -- driven by a genuinely BOUNDED (not growing)
+forcing term (<=D2(x,eps), y-independent), rather than the crude,
+divergent bound a naive Gronwall argument on the operator norm
+||K(y,t)||<=sqrt(pi/2)+eps (DISC-DEC-113, cited) alone would give
+(sqrt(pi/2)~1.2533>1, so a naive Gronwall bound EXPONENTIATES -- exactly
+the SAME failure mode wave 26's route (a) hit, and the SAME reason a raw
+operator-norm argument was abandoned throughout this lineage in favor of
+the pointwise-in-f closed form).
+
+HONEST CONCLUSION -- this is a genuine, precise REDUCTION, NOT a proof:
+  Phi_y solves (VOLTERRA-Phi) with forcing g_y(x)=e^{-y/eps} (bounded, in
+    fact ->0) and is ASSUMED bounded uniformly in y -- this is hypothesis
+    (B) itself, STANDING and UNPROVED throughout all 29 waves of this
+    lineage (no front, including this one, has derived (B) from first
+    principles).
+  Phi_y' solves the SAME (VOLTERRA-Phi)-TYPE equation (same kernel K(y,t))
+    with a DIFFERENT bounded (not vanishing, but uniformly bounded by
+    D2(x,eps)) forcing term.
+
+If the Volterra solution operator for THIS kernel is "uniformly stable"
+-- i.e. maps ANY uniformly-bounded forcing sequence to a uniformly (in y)
+bounded solution -- then (C') follows IMMEDIATELY from this reduction,
+with an EXPLICIT constant L1 built from D2(x,eps) and M_Phi. This
+stability property is EXACTLY what would need to be shown to prove (B)
+itself rigorously (rather than assume it) -- so this front's contribution
+is to show that **(C') is, up to this new and explicit reduction, no
+harder than (B) itself** -- a precise, useful narrowing (this lineage now
+knows exactly which single "uniform Volterra stability" fact would supply
+BOTH (B) [rigorously] and (C') at once), but NOT a proof, since neither
+this front nor any predecessor establishes that stability fact for THIS
+specific kernel. This is reported here as a genuine PARTIAL result and
+NAMED OBSTRUCTION (not a numerically-untested guess): the naive
+Gronwall/operator-norm route provably fails (exponentiates, mirroring
+wave 26 route (a)'s exact failure mode) and a sharper "same-kernel"
+argument is required, of a difficulty this lineage has never resolved
+even for (B).
+

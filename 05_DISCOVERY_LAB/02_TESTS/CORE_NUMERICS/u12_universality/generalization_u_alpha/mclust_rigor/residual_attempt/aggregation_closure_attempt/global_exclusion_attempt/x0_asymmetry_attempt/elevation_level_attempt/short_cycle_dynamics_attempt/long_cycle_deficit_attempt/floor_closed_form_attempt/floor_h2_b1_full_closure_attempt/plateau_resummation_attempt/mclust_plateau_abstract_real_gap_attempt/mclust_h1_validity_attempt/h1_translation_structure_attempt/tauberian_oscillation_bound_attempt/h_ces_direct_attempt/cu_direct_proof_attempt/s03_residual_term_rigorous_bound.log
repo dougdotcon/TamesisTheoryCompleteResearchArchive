@@ -1,0 +1,117 @@
+==============================================================================
+PART 1 -- exact representation of rho via f', and the E(h',z) split
+==============================================================================
+
+For f absolutely continuous (in particular for f Lipschitz, hyp (C')),
+f(x+h'+u) - f(x+h') = int_0^u f'(x+h'+s) ds  exactly (Lebesgue FTC).
+Substituting into rho(h',z) and swapping order of integration (Fubini,
+valid since f' in L^infty and the Gaussian-times-exponential kernel is
+absolutely integrable):
+
+  rho(h',z) = int_0^inf f'(x+h'+u) [int_u^inf e^{-w^2/2-wz} dw] du       (a)
+            = int_0^inf f'(x+h'+u) * e^{-u^2/2-uz} * R(u+z) du           (b)
+  [substituting w=u+v in the inner integral: int_u^inf e^{-w^2/2-wz}dw
+   = e^{-u^2/2-uz} int_0^inf e^{-v^2/2-v(u+z)} dv = e^{-u^2/2-uz}*R(u+z)]
+
+exponent identity check: -(u+s)^2/2-(u+s)z - [-u^2/2-uz-s^2/2-s(u+z)] = 0  (must be 0)
+CONFIRMED: int_u^inf e^{-w^2/2-wz} dw = e^{-u^2/2-uz} * R(u+z).
+
+Now define Q_u(z) := e^{-u^2/2-uz}*R(u+z) [the 'tail kernel'] so that
+  rho(h',z) = int_0^inf f'(x+h'+u) * Q_u(z) du.
+Its total mass: int_0^inf Q_u(z) du = int_0^inf u*e^{-u^2/2-uz}du = 1-z*R(z) = sigma(z)
+[Fubini re-derivation, independent of s01's direct route]:
+  int_0^inf [int_u^inf e^{-w^2/2-wz}dw] du = int_0^inf w*e^{-w^2/2-wz} dw = sigma(z)  (s01 Part1)
+CONSISTENT with s01/s02's sigma(z) definition -- independent re-derivation confirms
+  rho(h',z) - f'(x+h')*sigma(z) = int_0^inf [f'(x+h'+u)-f'(x+h')] * Q_u(z) du = E(h',z).
+
+==============================================================================
+PART 2 -- rigorous bound on E(h',z) under (C'') [f' Lipschitz-L2, t-uniform]
+==============================================================================
+
+|f'(x+h'+u)-f'(x+h')| <= L2*u  (hyp (C'')). Since Q_u(z) = e^{-u^2/2-uz}*R(u+z) >= 0
+(a genuine probability-type weight, confirmed positive by inspection: both
+factors are manifestly positive for u,z>0):
+
+  |E(h',z)| <= L2 * int_0^inf u*Q_u(z) du = L2 * int_0^inf u * e^{-u^2/2-uz}*R(u+z) du
+
+We bound this LAST integral using ONLY R(w)<=1/w (s01 G1 upper bound,
+cited, established fact of record) applied at w=u+z>=z:
+  R(u+z) <= 1/(u+z) <= 1/z    for all u>=0, z>0   (trivial, u+z>=z)
+so:
+  |E(h',z)| <= (L2/z) * int_0^inf u*e^{-u^2/2-uz} du = (L2/z)*sigma(z)  <= (L2/z)*(1/z^2) = L2/z^3
+
+-- an INDEPENDENT re-derivation of the SAME O(1/z^3) order as s01's G3-based
+route (Part 3 below cross-checks the two constants), via a cleaner,
+single-inequality argument (R(w)<=1/w applied pointwise) that avoids
+even needing s01's second Gordon lemma (G3) -- a useful independent check.
+
+Q_u(z) = e^{-u^2/2-uz}*R(u+z): product of e^{-u^2/2-uz}>0 and R(.)>0 (R is an integral of a positive integrand) -- positive for all u,z>=0. Confirmed by construction.
+
+==============================================================================
+PART 3 -- two independent bounds on E(h',z), cross-checked numerically
+==============================================================================
+       z   route A: L2/(z(1+z^2))   route B: (L2/z)*sigma(z)  ratio A/B
+       2         1.0000000000e-01           7.8630770712e-02     1.2718
+       5         7.6923076923e-03           7.1918952847e-03     1.0696
+      10         9.9009900990e-04           9.7140352827e-04     1.0192
+      50         7.9968012795e-06           7.9904191464e-06     1.0008
+     100         9.9990001000e-07           9.9970014990e-07     1.0002
+    1000         9.9999900000e-10           9.9999700001e-10     1.0000
+(both routes agree to within a small constant factor -- both are
+ legitimate rigorous O(1/z^3) bounds on |E(h',z)|, independent derivations)
+
+==============================================================================
+PART 4 -- direct numerical confirmation of |E(h',z)| = O(1/z^3) on a
+concrete C^{1,1} test function, fresh mpmath double-integral quadrature
+==============================================================================
+ h prime        z     |E(h prime,z)|      z^3*|E|
+    0.00     5.00       2.419939e-03     0.302492
+    0.00    10.00       3.713441e-04     0.371344
+    0.00    30.00       1.488258e-05     0.401830
+    0.00   100.00       4.061836e-07     0.406184
+    0.30     5.00       1.819441e-03     0.227430
+    0.30    10.00       2.924876e-04     0.292488
+    0.30    30.00       1.227730e-05     0.331487
+    0.30   100.00       3.418031e-07     0.341803
+    1.00     5.00       2.968836e-04     0.037110
+    1.00    10.00       5.912519e-05     0.059125
+    1.00    30.00       2.893010e-06     0.078111
+    1.00   100.00       8.510198e-08     0.085102
+    3.00     5.00       4.077660e-04     0.050971
+    3.00    10.00       6.165362e-05     0.061654
+    3.00    30.00       2.472847e-06     0.066767
+    3.00   100.00       6.781906e-08     0.067819
+
+sup(z^3*|E(h',z)|) observed over this grid: 0.406184  -- BOUNDED, not blowing up,
+consistent with the rigorous O(1/z^3), UNIFORM-in-h' claim proved above (Part 2).
+
+==============================================================================
+PART 5 -- assembled final theorem: (U), rigorously, conditional on (C'')
+==============================================================================
+
+Combining s02 (Parts 2-3: the value-only piece is O(1/z^2) using (B) alone)
+with this script's Part 2-3 (the residual Efull piece is O(1/z^2) after
+the (1-eps*z)/eps~-z amplification, using (C'')):
+
+  |(1-eps*z)/eps * Efull|
+    <= |1-eps*z|/eps * eps * sup_h' |E(h',z)|         [since int_0^h e^{-h'/eps}dh'<=eps]
+    <= (1+eps*z) * L2/(z*(1+z^2))                     [Part 2 route A bound, uniform in h']
+    =  L2/(z*(1+z^2)) + eps*L2/(1+z^2)
+    <= L2*(1+eps)/z^2                                 for z>=1  (elementary, since 1/(z(1+z^2))<=1/z^3<=1/z^2)
+
+THEOREM (this front, conditional): given hypothesis (B) [Phi_t bounded by
+M_Phi, t-uniform, standing] and hypothesis (C'') [Phi_t' Lipschitz with
+constant L2, t-uniform -- i.e. Phi_t in C^{1,1}, t-uniformly -- a genuine
+strengthening of (C') as literally named in this sub-lineage's record],
+for all z=x+y >= 1 (eps fixed) and ALL h' in [0,h], h in [0,y] (i.e.
+UNIFORMLY across the entire family {Phi_t}_{t in [0,y]}, exactly the
+regime DISC-DEC-132/wave-26's hypothesis (U) needs):
+
+  |K(y,t)f(x) - [f(x)-e^{-h/eps}f(x+h)]/z|  <=  D(x,eps)/z^2
+
+  D(x,eps) := M_Phi*eps*(1+1/eps^2+1/eps) + 2*M_Phi/eps + L2*(1+eps)
+
+with NO dependence on h, h', or t in D(x,eps) or in the z-threshold --
+this IS hypothesis (U), PROVED (not merely numerically tested), for the
+REAL system, conditional on (B)+(C'').
+

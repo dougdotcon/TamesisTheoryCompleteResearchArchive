@@ -1,0 +1,78 @@
+==============================================================================
+PART 1 -- re-derive rho(h',z) = int_0^inf f'(x+h'+u)*Q_u(z) du via IBP
+==============================================================================
+rho(h',z) := int_0^inf e^{-u^2/2-uz} [f(x+h'+u)-f(x+h')] du
+For f absolutely continuous: f(x+h'+u)-f(x+h') = int_0^u f'(x+h'+s) ds
+(Lebesgue FTC, valid for f Lipschitz -- hyp (C')). Substituting and
+swapping order of integration (Fubini, f' bounded, kernel abs. integrable):
+
+  rho(h',z) = int_0^inf f'(x+h'+u) [int_u^inf e^{-w^2/2-wz} dw] du
+
+Exponent identity -(u+s)^2/2-(u+s)z - [-u^2/2-uz-s^2/2-s(u+z)] = 0
+CONFIRMED: int_u^inf e^{-w^2/2-wz} dw = e^{-u^2/2-uz}*R(u+z) =: Q_u(z)
+=> rho(h',z) = int_0^inf f'(x+h'+u) * Q_u(z) du.   [matches target Sec 3.3]
+
+==============================================================================
+PART 2 -- is int_0^inf u*Q_u(z) du EXACTLY R''(z)/2 (Route A's basis)?
+==============================================================================
+Independent derivation via double-integral swap (fresh, not in any
+target script): Q_u(z) = int_u^inf e^{-w^2/2-wz} dw, so
+  int_0^inf u*Q_u(z) du = int_0^inf u*[int_u^inf e^{-w^2/2-wz}dw] du
+    = int_0^inf e^{-w^2/2-wz} [int_0^w u du] dw   (swap: u in [0,w] for fixed w)
+    = int_0^inf e^{-w^2/2-wz} * (w^2/2) dw
+    = (1/2) * int_0^inf w^2 e^{-w^2/2-wz} dw
+    = R''(z)/2       [since R''(z) = int_0^inf u^2 e^{-u^2/2-uz} du,
+      confirmed by direct double differentiation under the integral]
+
+This is an EXACT algebraic identity, not a bound -- verified numerically
+to full mpmath precision below (NOT shown or derived anywhere in the
+target's own s01/s02/s03):
+
+     z         int u*Q_u du             R''(z)/2    reldiff
+     1 1.55679542418798e-01 1.55679542418798e-01   0.00e+00
+     2 5.34230732201362e-02 5.34230732201362e-02   0.00e+00
+     5 6.50536129910494e-03 6.50536129910494e-03   0.00e+00
+    10 9.44121822462030e-04 9.44121822462030e-04   0.00e+00
+    50 7.98085738592260e-06 7.98085738592260e-06   4.39e-41
+   100 9.99400449580472e-07 9.99400449580472e-07   0.00e+00
+CONFIRMED EXACT: int u*Q_u(z) du = R''(z)/2, to full precision. Route A's
+core claim is mathematically TRUE (an exact identity, not merely a bound).
+
+==============================================================================
+PART 3 -- Route B (genuinely derived in target's s03 Part 2): a
+DIFFERENT, cruder pointwise majorization
+==============================================================================
+Route B bounds the SAME exact quantity int u*Q_u(z)du via R(u+z)<=1/z
+(pointwise, u>=0 => u+z>=z), giving int u*Q_u(z)du <= (1/z)*sigma(z)
+-- a genuine UPPER BOUND (not exact), via a DIFFERENT technique (pointwise
+majorization of R, not a double-integral swap identity for R''):
+
+     z    exact: int u*Q_u du    Route B bound (1/z)sigma(z)    A<=B?
+     1       1.5567954242e-01               3.4432045758e-01     True
+     2       5.3423073220e-02               7.8630770712e-02     True
+     5       6.5053612991e-03               7.1918952847e-03     True
+    10       9.4412182246e-04               9.7140352827e-04     True
+    50       7.9808573859e-06               7.9904191464e-06     True
+   100       9.9940044958e-07               9.9970014990e-07     True
+
+Both G2 (used by Route B: R(z)>=z/(1+z^2) => sigma<=1/(1+z^2)) and G3
+(used by Route A: R(z)<=1/z => R''(z)<=2/(z(1+z^2))) use OPPOSITE
+directions of the G1 bracket, yet both final bounds collapse to the
+SAME formula L2/(z(1+z^2)) -- not a coincidence: R''(z) and sigma(z)
+are algebraically linked (R''(z) = [1-sigma(z)(1+z^2)]/z, verified below),
+but they are genuinely DIFFERENT quantities, and Route A computes an
+EXACT value for one (R''(z)/2) while Route B only bounds a RELATED
+but distinct quantity via a cruder pointwise argument.
+
+Algebraic link R''(z) = [1-sigma(z)(1+z^2)]/z re-derived (from
+R''=(1+z^2)*w1(z), w1=R-z/(1+z^2), R=(1-sigma)/z -- elementary algebra):
+  R''(z) via w1 = (-sigma*z**2 - sigma + 1)/z  -- matches [1-sigma(1+z^2)]/z ? True
+
+VERDICT on item (b): the 'two independent bounding routes' ARE genuinely
+mathematically independent (different techniques, opposite G1
+directions), and Route A's underlying claim is TRUE and exact -- but
+Route A's derivation (the double-integral swap giving R''(z)/2 exactly)
+is NEVER shown in the target's own s01/s02/s03 scripts; it is only
+asserted via prose. This is a genuine, LOW-severity documentation gap
+(the substantive claim survives independent re-derivation here), not a
+mathematical error.

@@ -1,0 +1,22 @@
+==============================================================================
+SANITY CHECK -- reproduce h1_translation_structure_attempt's published
+Sec 5.4 cross-check value: x=0,eps=0.1,f=1/(1+x),h=y/2,y=10
+published: z*K(y,t)f(0) = 0.9156333394
+==============================================================================
+fresh implementation: z*K(y,t)f(0) = 0.9156333394
+published value:                     0.9156333394
+abs diff: 2.119e-12
+CONFIRMED (matches to the precision the published value was quoted at).
+
+==============================================================================
+MAIN TEST -- z^2*[K(y,t)f(x) - target] for a SMOOTH vs a KINKED f,
+same regime as h_ces_direct_attempt's s03 stress test: x=0,eps=0.5,
+h=z/2 (i.e. y=z, t=y-h=z/2), z swept from 20 to 2000
+==============================================================================
+      z     z^2*err smooth       z^2*err kink    z*err smooth      z*err kink
+     20          -0.621852          -0.606401       -0.031093       -0.030320
+     50          -0.630762          -0.579425       -0.012615       -0.011589
+    100          -0.634480          -0.571157       -0.006345       -0.005712
+Terminated
+
+[exited with code 143]

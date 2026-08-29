@@ -1338,6 +1338,100 @@ flowchart TD
 > e
 > `.../h_ces_direct_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-134`.]** Onda 29 frente (a)
+> (`CU-DIRECT-PROOF-ATTEMPT`), **décima onda consecutiva** (20-29) neste
+> gap, primeira a atacar `(C')`/`(U)` diretamente como afirmações
+> concretas de regularidade/resto sobre o `\Phi`/`\Psi` real, em vez de
+> arquitetura abstrata de convergência.
+>
+> **`(U)` está PROVADO — condicional a `(B)` + `(C'')`, uma nova
+> hipótese, ligeira e mais fraca que a `(C')` literal desta linhagem
+> (`\Phi_t'` Lipschitz com constante `t`-uniforme, i.e. `\Phi_t\in
+> C^{1,1}`, `t`-uniformemente).** Motor técnico novo: uma desigualdade
+> tipo-Gordon rigorosa, NÃO-ASSINTÓTICA, para a razão de Mills
+> `R(z)` (`R'=zR-1`), obtida via um argumento de comparação com fator
+> integrante — substituindo, pela primeira vez nesta linhagem, a série
+> assintótica formal (sem resto controlado) que todo ancestral usava.
+> Isto dá um limitante de duas vias, EXATO para todo `z>0`
+> (`z/(1+z^2)\le R(z)\le1/z`), e permite mostrar que AMBOS os
+> coeficientes da expansão exata do núcleo em forma fechada são
+> `O(1/z^2)` usando apenas `(B)` — sem nenhuma propriedade de
+> regularidade de `f`. A peça residual restante exige `(C'')`
+> especificamente, dando `|E(h',z)|\le L_2/z^3`, uniformemente em `h'`.
+> Montagem final: `|K(y,t)f(x)-[f(x)-e^{-h/\varepsilon}f(x+h)]/z|\le
+> D(x,\varepsilon)/z^2` — exatamente a forma que `(U)` exige.
+>
+> **Investigação de nitidez, decisiva mas de dois gumes**: um kink NÃO
+> alinhado adversarialmente com a escala de concentração do núcleo
+> (`u\sim1/z`) não degrada; um kink alinhado adversarialmente MOSTRA
+> degradação pontual genuína (`z^2|E|\to` constante não-nula em vez de
+> `z^3|E|\to`constante) — confirmando que `(C'')` é genuinamente
+> necessária no NÍVEL PONTUAL da técnica de prova específica deste
+> front. Mas a quantidade AGREGADA que de fato entra no resto final,
+> `E_{\text{full}}:=\int_0^he^{-h'/\varepsilon}E(h',z)\,dh'`,
+> "autocura" e recupera a taxa `O(1/z^3)` mesmo sem `(C'')`, no mesmo
+> teste adversarial — um efeito de "camada-limite autocurativa" deixado
+> honestamente ABERTO: permanece indeterminado se um argumento mais
+> afiado (ciente da camada-limite, não apenas sup-então-integra)
+> poderia estabelecer `(U)` sob `(C')` sozinha.
+>
+> **`(C')` é reduzido — não provado — a uma questão precisa de
+> estabilidade do resolvente de Volterra.** Uma nova identidade exata
+> mostra que `\Phi_y'` satisfaz a MESMA equação de Volterra, com o
+> MESMO núcleo `K(y,t)`, que `\Phi_y` em si, dirigida por uma força
+> RIGOROSAMENTE limitada `O(1/z)` (usando apenas `(B)`+`(C')`, nenhuma
+> hipótese nova) — o "medo" (um mecanismo de "perda de derivada" igual
+> ao que travou a rota (a) da onda 26) NÃO se materializa. `(C')`
+> portanto segue SE o resolvente de Volterra deste núcleo específico
+> for "uniformemente estável" — precisamente, e apenas, o MESMO tipo de
+> fato que precisaria ser mostrado para provar `(B)` em si rigorosamente
+> (nunca derivado do zero por nenhuma das 29 ondas desta linhagem). Uma
+> alternativa ingênua via Gronwall na norma-de-operador crua é
+> verificada e falha (explode exponencialmente sobre o domínio Volterra
+> crescente).
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da EDO de Gordon-Mills (`w_1'=z\,w_1-2/(1+
+> z^2)^2` a partir de `R'=zR-1`), de que a forma fechada integral
+> resolve essa EDO (via TFC), das identidades algébricas de reagrupamento
+> da Seção 3.2, e da identidade de derivada-sob-integral da Seção 5.1 —
+> zero discrepância em todos os casos.
+>
+> Referee hostil dedicado: re-derivou todo o motor técnico do zero,
+> incluindo o limitante superior mais afiado da Seção 2 (`s01b`),
+> re-derivou os limites de resto da Seção 3.3 de forma independente
+> (confirmando a "Rota A", que a própria frente nunca de fato derivou
+> em código — ver correção abaixo), reproduziu digitalmente as três
+> alegações numéricas delicadas da Seção 4 (incluindo os números
+> específicos `z^2|E|\to0{,}2208`, `z^3|E_{\text{full}}|\to0{,}936`) com
+> código próprio do zero, confirmando que o fenômeno de autocura é
+> genuíno, não um artefato; re-derivou a identidade `(DX-K)` completa da
+> Seção 5 (não apenas a peça pontual) e verificou-a numericamente a
+> `\sim15` dígitos. Rodou um teste numérico end-to-end adicional (17
+> combinações de parâmetros, computando `K(y,t)f(x)` diretamente das
+> definições cruas) — todos satisfazem o limitante `D(x,\varepsilon)/z^2`
+> com margem confortável. Três achados reais, todos de severidade BAIXA:
+> (1) a "Rota A" do limitante residual (Seção 3.3) nunca foi de fato
+> derivada nos scripts da frente, apenas afirmada — o referee a
+> re-derivou e confirmou verdadeira; (2) o diagnóstico "`\sqrt{\pi/2}
+> \approx1{,}2533>1`, logo Gronwall exponencia" é impreciso — Gronwall
+> sobre um domínio Volterra crescente falha para QUALQUER limitante
+> constante, não apenas `>1`; (3) "o mesmo modo de falha exato que a
+> rota (a) da onda 26" superestima uma analogia real mas mais frouxa.
+> Todos corrigidos por correções datadas na própria `ATTEMPT.md` da
+> frente; nenhum afeta `(U)` provado nem a redução de `(C')`.
+>
+> Veredito **SOUND WITH THREE NAMED ISSUES, ALL LOW SEVERITY — ACCEPT
+> for catalogue**. `H1`, `(U1)`, `(U2)` permanecem formalmente ABERTOS
+> — `(C')` em si e `(B)` não estão provados para o `\Phi` real — mas
+> pela primeira vez nesta subcadeia de 10 ondas, um resultado
+> genuinamente incondicional (não apenas testado numericamente) foi
+> estabelecido: `(U)` é agora um TEOREMA (condicional a `(B)`+`(C'')`),
+> e `(C')` está reduzido a uma única questão de estabilidade nomeada
+> com precisão máxima, idêntica em dificuldade a `(B)` em si. Fontes:
+> `.../h_ces_direct_attempt/cu_direct_proof_attempt/ATTEMPT.md` e
+> `.../cu_direct_proof_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

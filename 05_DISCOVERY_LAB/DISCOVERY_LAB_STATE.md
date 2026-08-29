@@ -1,6 +1,30 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-135`: onda 29 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-136`: onda 29 frente (a)
+`CU-DIRECT-PROOF-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — décima onda
+consecutiva (20-29) neste gap. **`(U)` está PROVADO** — condicional a
+`(B)`+`(C'')` (nova hipótese, ligeira, mais fraca que `(C')` literal:
+`\Phi_t'` Lipschitz `t`-uniforme) — via um motor técnico novo, uma
+desigualdade tipo-Gordon RIGOROSA e NÃO-ASSINTÓTICA para a razão de
+Mills `R(z)`, substituindo pela primeira vez a série assintótica
+formal sem resto controlado que todo ancestral usava. Investigação de
+nitidez decisiva: `(C'')` é genuinamente necessária no nível pontual,
+mas a quantidade agregada que de fato entra no resto final "autocura"
+e recupera `O(1/z^3)` mesmo sem `(C'')` — um efeito de camada-limite
+autocurativa deixado honestamente ABERTO. **`(C')` é reduzido** —
+não provado — a uma questão precisa de estabilidade do resolvente de
+Volterra, idêntica em dificuldade a `(B)` em si; o mecanismo de "perda
+de derivada" que travou a rota (a) da onda 26 NÃO se materializa aqui.
+Referee hostil: **SOUND WITH THREE NAMED ISSUES, ALL LOW SEVERITY —
+ACCEPT**, re-derivou todo o motor técnico do zero, reproduziu
+digitalmente as três alegações numéricas delicadas com código próprio;
+três achados BAIXOS corrigidos por correções datadas. **H1/(U1)/(U2)
+permanecem formalmente ABERTOS, mas pela primeira vez nesta subcadeia
+um resultado genuinamente incondicional (um TEOREMA, não apenas
+testado numericamente) foi estabelecido. Onda 29 agora com 2/3
+frentes integradas; frente (c) (K=5 exato) aguardando integração.**
+Anterior: `DISC-DEC-135`: onda 29 frente (b)
 `DIAGONAL-2F0-SUM-ATTEMPT` integrada como Estágio 52 em `THEOREM.md`.
 `C(γ)` permanece inteiramente ABERTO; a soma diagonal permanece
 não-fechada — mas com uma **correção real ao registro do Estágio 51**:

@@ -1,0 +1,108 @@
+==============================================================================
+PART 1 -- exact symbolic assembly (R(z) kept exact via sigma(z))
+==============================================================================
+1+c(z) [with R(z)=(1-sigma)/z] = (eps*sigma*z - sigma + 1)/(eps*z)
+coeff(KB)     = -(-eps**2*sigma*z + eps*sigma*z**2 + eps*sigma - eps - sigma*z)/(eps**2*z)
+coeff(F2-F1)  = -sigma*(eps*z - 1)/eps
+
+==============================================================================
+PART 2 -- rigorous O(1/z^2) bound on coeff(F2-F1) - (-1/z)
+==============================================================================
+coeff(F2-F1)-(-1/z) - [(1-sigma*z^2)/z + sigma/eps] = 0  (must be 0)
+CONFIRMED: coeff(F2-F1) - (-1/z) = (1-sigma*z^2)/z + sigma/eps
+
+From s01b (Gordon bracket, exact, non-asymptotic):
+  1/(1+z^2) <= 1-z^2*sigma(z) <= 3/(z^2+3)      for all z>0
+  0 <= sigma(z) <= 1/(1+z^2)  <= 1/z^2                        (s01 G2)
+
+=> |(1-sigma*z^2)/z| <= 3/(z(z^2+3)) = O(1/z^3)
+=> |sigma/eps|        <= 1/(eps*(1+z^2)) = O(1/(eps*z^2))
+=> |coeff(F2-F1)-(-1/z)| <= 3/(z(z^2+3)) + 1/(eps*(1+z^2))
+   = O(1/(eps*z^2))   [RIGOROUS, uses ONLY R(z)'s own properties --
+     NO Lipschitz/C^1 regularity of f needed for this piece.]
+
+       z    eps   |coeff(F2-F1)+1/z|    bound 3/(z(z2+3))+1/(eps(1+z2))
+       2   0.05         3.330708e+00                       4.214286e+00
+       2    0.1         1.758092e+00                       2.214286e+00
+       2      1         3.427385e-01                       4.142857e-01
+       5   0.05         7.393921e-01                       7.906593e-01
+       5    0.1         3.797974e-01                       4.060440e-01
+       5      1         5.616209e-02                       5.989011e-02
+      10   0.05         1.971404e-01                       2.009324e-01
+      10    0.1         1.000000e-01                       1.019225e-01
+      10      1         1.257368e-02                       1.281361e-02
+      50   0.05         8.014371e-03                       8.020773e-03
+      50    0.1         4.019162e-03                       4.022372e-03
+      50      1         4.234731e-04                       4.238113e-04
+     100   0.05         2.002399e-03                       2.002799e-03
+     100    0.1         1.002699e-03                       1.002899e-03
+     100      1         1.029685e-04                       1.029891e-04
+    1000   0.05         2.000294e-05                       2.000298e-05
+    1000    0.1         1.000297e-05                       1.000299e-05
+    1000      1         1.002997e-06                       1.002999e-06
+   1e+04   0.05         2.000030e-07                       2.000030e-07
+   1e+04    0.1         1.000030e-07                       1.000030e-07
+   1e+04      1         1.000300e-08                       1.000300e-08
+worst actual/bound ratio observed: 1.000000  (must be <=1)
+
+==============================================================================
+PART 3 -- rigorous O(1/z^2) bound on coeff(KB)
+==============================================================================
+coeff(KB) - [(1-sigma*z^2)/(eps*z) + sigma*(1+1/eps^2-1/(eps*z))] = 0  (must be 0)
+CONFIRMED regrouping. Using the SAME two rigorous bounds as Part 2:
+  |(1-sigma*z^2)/(eps*z)|            <= 3/(eps*z*(z^2+3))         = O(1/(eps*z^3))
+  |sigma*(1+1/eps^2-1/(eps*z))|      <= [1/(1+z^2)]*(1+1/eps^2+1/eps) = O(1/z^2)  (eps fixed)
+=> |coeff(KB)| = O(1/z^2)  [again RIGOROUS, again NO Lipschitz/C^1 needed]
+
+       z    eps      |coeff(KB)|          crude bound
+       2    0.1     1.695188e+01         2.434286e+01
+       2      1     4.213692e-01         8.142857e-01
+       5    0.1     3.762014e+00         4.483516e+00
+       5      1     8.492968e-02         1.368132e-01
+      10    0.1     1.000000e+00         1.128136e+00
+      10      1     2.131631e-02         3.261559e-02
+      50    0.1     4.051123e-02         4.462196e-02
+      50      1     8.150036e-04         1.223491e-03
+     100    0.1     1.011696e-02         1.112888e-02
+     100      1     2.019388e-04         3.029691e-04
+    1000    0.1     1.010197e-04         1.110299e-04
+    1000      1     2.001994e-06         3.002997e-06
+
+==============================================================================
+PART 4 -- SUMMARY: where does f's regularity actually enter (U)?
+==============================================================================
+
+The two pieces bounded above (Parts 2-3) show that the "value-only" part
+of the closed form (built from F1=f(x), F2=e^{-h/eps}f(x+h), KB=K_B(h)f(x)
+-- i.e. the part of K(y,t)f(x) surviving the IBP identity applied to
+rho's LEADING term f'(x+h')*sigma(z)) matches [f(x)-e^{-h/eps}f(x+h)]/z
+to a RIGOROUS O(1/z^2) using ONLY hypothesis (B). This alone is a genuine
+strengthening over every ancestor front's treatment of THIS piece (they
+used a formal Mills-ratio SERIES for c(z), with no rigorous remainder
+bound; here it is a fully explicit, provable double inequality).
+
+What remains is the residual Efull := int_0^h e^{-h'/eps} E(h',z) dh',
+E(h',z) := rho(h',z) - f'(x+h')*sigma(z)  [the part of the Watson-lemma
+remainder BEYOND its leading linear-in-u term], multiplied by the
+UNBOUNDED prefactor (1-eps*z)/eps ~ -z/eps for large z. This is where
+f's regularity genuinely enters (verified quantitatively in s03):
+
+  * under (C') ALONE (f Lipschitz-L1, t-uniform): the only bound
+    available is |E(h',z)| <= 2*L1*sigma(z) = O(1/z^2) [same ORDER as
+    rho itself -- no cancellation of its own leading term is available
+    without more structure], so |(1-eps z)/eps * Efull| = O(1/z) --
+    INSUFFICIENT to reach the target O(1/z^2).
+
+  * under (C')+(C'') (f' ALSO Lipschitz-L2, t-uniform -- i.e. f in
+    C^{1,1}, t-uniformly): |E(h',z)| <= (L2/2)*R''(z) <= L2/z^3 (s01
+    G3, rigorous), giving |(1-eps z)/eps * Efull| = O(1/z^2) --
+    SUFFICIENT.
+
+CONCLUSION: this front's rigorous route proves (U) conditional on (B) +
+(C')+(C'') -- i.e. conditional on a MILD but genuine strengthening of
+(C') as literally named in this lineage's record (Lipschitz continuity
+of Phi_t(.), t-uniform) to ALSO include Lipschitz continuity of Phi_t'(.)
+(t-uniform), i.e. Phi_t in C^{1,1} uniformly in t. This is verified
+quantitatively (both symbolically and via a concrete kink-function
+numerical stress test) in s03/s04.
+

@@ -1,0 +1,79 @@
+==============================================================================
+PART A: FULL numerical verification of (DX-K), every term computed
+independently from ITS OWN raw definition
+==============================================================================
+     z     h   eps       LHS d/dx[Kf]    RHS=K[fp]-Araw-My*N     abs diff   z*|corr|
+   5.0  1.00  0.50       0.0328504904           0.0328504904    2.030e-16    0.03415
+  10.0  2.00  0.50       0.0208785122           0.0208785122    3.485e-15    0.01752
+  30.0  1.00  0.50       0.0085781827           0.0085781827    2.672e-15    0.00394
+  20.0  0.50  0.10       0.0001797335           0.0001797335    3.370e-15    0.01051
+
+The full (DX-K) identity holds to ~15 significant digits (limited by
+the finite-difference step delta=1e-6, as expected) -- CONFIRMED, with
+N(y,t)f(x) computed DIRECTLY from its own double-integral definition,
+not inferred as 'whatever makes the difference small'.
+
+==============================================================================
+PART B: examine the Gronwall/wave-26-route-(a) comparison (Sec 5.3)
+==============================================================================
+
+Claim in ATTEMPT.md Sec 5.3: 'A naive alternative (Gronwall's inequality on
+the crude operator norm ||K(y,t)||<=sqrt(pi/2)+eps) is checked and confirmed
+to FAIL: sqrt(pi/2)~1.2533>1, so Gronwall's bound EXPONENTIATES rather than
+staying bounded -- the identical failure mode as wave 26's route (a).'
+
+Numeric check of sqrt(pi/2):
+  sqrt(pi/2) = 1.25331413731550025120788264241  (matches the claimed ~1.2533)
+
+
+STANDARD Gronwall's lemma for u(y) <= a + int_0^y C*u(t) dt (C a POSITIVE
+CONSTANT bound on the kernel) gives u(y) <= a*exp(C*y) -- for ANY C>0, not
+only C>1. This is checked below via the closed-form Gronwall solution for
+several C values, INCLUDING C<1:
+
+  C=0.3000: Gronwall bound at y=1,10,50,200 -> [1.3498588075760032, 20.085536923187668, 3269017.3724721107, 1.1420073898156842e+26]
+  C=0.9000: Gronwall bound at y=1,10,50,200 -> [2.45960311115695, 8103.083927575384, 3.4934271057485095e+19, 1.4893842007818383e+78]
+  C=1.2533: Gronwall bound at y=1,10,50,200 -> [3.501880115061536, 277340.1471821985, 1.6408304558027195e+27, 7.24861166932489e+108]
+
+FINDING: for EVERY tested C (including C=0.3 < 1), the Gronwall bound
+a*exp(C*y) diverges to infinity as y->infinity -- exponential blow-up is
+NOT contingent on C exceeding 1; it happens for ANY fixed positive C, since
+the domain of integration [0,y] itself grows with y (this is the standard
+behavior of Gronwall's lemma applied to a Volterra memory-integral with a
+CONSTANT kernel bound, as opposed to an ODE u'=Ku where the sign of K
+matters). This is ALSO consistent with this lineage's own already-recorded
+fact (DISC-DEC-115): the Picard/Neumann series for (VOLTERRA-Phi) converges
+at each FIXED y via FACTORIAL suppression from the iterated-integral
+simplex volume (y^n/n!), NOT because ||K||<1 -- convergence would hold even
+for a considerably larger crude bound than sqrt(pi/2)+eps.
+
+CONCLUSION: the target's own SUBSTANTIVE point in Sec 5.3 -- that naively
+applying Gronwall to the crude, CONSTANT operator-norm bound over the
+GROWING domain [0,y] fails to give a useful (y-uniform) estimate for
+Phi_y'(x) -- is CORRECT. But the specific diagnosis offered ('because
+sqrt(pi/2)~1.2533>1') is not quite the right explanation: the SAME failure
+(unbounded exp(C*y) estimate) would occur for ANY fixed C>0, so the
+threshold '1' is not actually significant here. This is a LOW-severity
+conceptual imprecision, not a computational error, and does not undermine
+the correct conclusion that the naive Gronwall route fails.
+
+Separately: is this 'the identical failure mode as wave 26's route (a)'?
+Wave 26's route (a) failure (its own Sec 2.2, re-read in full for this
+comparison) was that M_{y2}=1/eps-z2 -> -infinity is an INDIVIDUALLY
+UNBOUNDED coefficient multiplying Delta_Psi(x) (which (**) only bounds by
+O(Delta/y1)), with NO cancellation partner -- causing a SPECIFIC PRODUCT
+TERM to grow without bound as y2->infinity at fixed delta (a direct,
+algebraic divergence). The target's Gronwall failure here is a DIFFERENT
+mechanism: a classical differential-inequality argument (Gronwall's lemma)
+applied to a BOUNDED constant kernel bound over a domain of growing LENGTH,
+which yields an exponentially-growing A PRIORI ESTIMATE via general
+Gronwall theory -- not a direct algebraic blow-up of a specific unbounded
+coefficient. Both are instances of 'a naive/crude bound fails for a
+y-to-infinity argument in this system', but the PRECISE mechanisms differ
+(unbounded-coefficient-with-no-cancellation-partner vs.
+constant-kernel-bound-exponentiates-via-Gronwall-over-a-growing-domain).
+Calling them 'the identical failure mode' somewhat overstates the parallel;
+'the same underlying moral -- crude bounds are not the right currency for
+y->infinity arguments here, the sharper closed-form/cancellation-aware
+route is needed instead' would be a more precise characterization.
+

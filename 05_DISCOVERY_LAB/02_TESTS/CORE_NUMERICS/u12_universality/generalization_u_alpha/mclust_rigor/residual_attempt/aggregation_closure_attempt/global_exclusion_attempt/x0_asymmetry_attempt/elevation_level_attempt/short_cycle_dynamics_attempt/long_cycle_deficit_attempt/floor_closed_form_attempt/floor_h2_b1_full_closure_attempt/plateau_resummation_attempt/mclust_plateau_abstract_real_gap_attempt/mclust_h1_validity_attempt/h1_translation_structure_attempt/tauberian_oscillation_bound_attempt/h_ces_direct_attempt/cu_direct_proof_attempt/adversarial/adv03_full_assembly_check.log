@@ -1,0 +1,30 @@
+       z      h    eps     x       |K-target|            D/z^2      ratio   OK?
+    5.00   0.50   0.10  0.00     1.143447e-02     2.849248e-01     0.0401  True
+   20.00   0.50   0.10  0.00     8.332901e-04     1.780780e-02     0.0468  True
+  100.00   0.50   0.10  0.00     3.354245e-05     7.123120e-04     0.0471  True
+    5.00   2.00   0.10  0.00     1.146954e-02     2.849248e-01     0.0403  True
+   20.00   2.00   0.10  0.00     8.369037e-04     1.780780e-02     0.0470  True
+  100.00   2.00   0.10  0.00     3.370164e-05     7.123120e-04     0.0473  True
+    5.00   0.50   0.50  0.00     1.104065e-02     9.278400e-02     0.1190  True
+   20.00   0.50   0.50  0.00     7.145993e-04     5.799000e-03     0.1232  True
+  100.00   0.50   0.50  0.00     2.752477e-05     2.319600e-04     0.1187  True
+    5.00   2.00   0.50  0.00     1.397704e-02     9.278400e-02     0.1506  True
+   20.00   2.00   0.50  0.00     9.849293e-04     5.799000e-03     0.1698  True
+   10.00   0.50   0.10  1.00     2.249776e-06     7.123120e-02     0.0000  True
+   50.00   2.00   0.10  1.00     1.594511e-05     2.849248e-03     0.0056  True
+   10.00   0.50   0.50  1.00     8.423863e-04     2.319600e-02     0.0363  True
+   50.00   2.00   0.50  1.00     4.355013e-05     9.278400e-04     0.0469  True
+  500.00   2.00   0.10  0.00     1.346777e-06     2.849248e-05     0.0473  True
+   30.00   0.10   0.05  0.02     3.206892e-04     1.493573e-02     0.0215  True
+
+ALL CASES SATISFY |K(y,t)f(x) - target| <= D(x,eps)/z^2 : True
+
+VERDICT on item (c): CONFIRMED. Computing K(y,t)f(x) directly from the
+RAW operator definitions (not the target's own derived intermediate
+quantities) for a concrete C^infty test function with measured M_Phi,
+L2, the claimed D(x,eps)/z^2 bound holds in every one of 17 tested
+(x,eps,h,z) combinations spanning x in {0,0.02,1}, eps in {0.05,0.1,0.5},
+h from 0.1 to 2.0, z from 5 to 500 -- with comfortable (not razor-thin,
+not absurdly loose) margins (ratio typically 0.02-0.17). The chain of
+inequalities in Sec 3.2+3.3 genuinely composes as claimed, including
+correct handling of the (1-eps*z)/eps prefactor.

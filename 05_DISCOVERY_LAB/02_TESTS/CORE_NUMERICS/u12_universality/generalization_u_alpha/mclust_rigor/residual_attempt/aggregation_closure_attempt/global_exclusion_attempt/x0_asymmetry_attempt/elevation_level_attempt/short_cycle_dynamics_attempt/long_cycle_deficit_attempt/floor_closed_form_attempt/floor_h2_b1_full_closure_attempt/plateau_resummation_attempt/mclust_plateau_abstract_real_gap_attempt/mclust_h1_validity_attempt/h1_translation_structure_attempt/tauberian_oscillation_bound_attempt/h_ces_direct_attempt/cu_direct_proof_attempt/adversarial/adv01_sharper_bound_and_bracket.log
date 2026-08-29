@@ -1,0 +1,67 @@
+==============================================================================
+STEP 1: R'=zR-1 (re-derive from the raw integral definition, fresh)
+==============================================================================
+IBP check residual: 0
+Confirmed R'=zR-1.
+
+==============================================================================
+STEP 2: ODE for w4(z):=v(z)-R(z), v(z):=(z^2+2)/(z(z^2+3))
+==============================================================================
+v(z) = (z**2 + 2)/(z*(z**2 + 3))
+forcing := z*v(z) - 1 - v'(z) = 6/(z**2*(z**2 + 3)**2)
+(w4' = z*w4 - forcing; need forcing>0 for all z>0 for w4>=0 via
+ integrating factor, i.e. R(z)<=v(z))
+
+==============================================================================
+STEP 3: RIGOROUS (exact, not spot-checked) sign proof of 'forcing'
+==============================================================================
+forcing = num/den, num = 6 , den = z**2*(z**2 + 3)**2
+=> forcing = 6/(z^2*(z^2+3)^2) EXACTLY -- a manifestly positive
+   rational function for ALL z>0 (constant numerator 6>0, and the
+   denominator z^2*(z^2+3)^2 is a product of squares, strictly
+   positive for z>0). This proves the sign for EVERY z>0 at once,
+   not merely at 8 sampled points (target's own s01b Part 1 check).
+  z=   0.001: forcing = 6.666662e+05  (>0, confirmed)
+  z=     0.1: forcing = 6.622443e+01  (>0, confirmed)
+  z=       1: forcing = 3.750000e-01  (>0, confirmed)
+  z=      10: forcing = 5.655575e-06  (>0, confirmed)
+  z=    1000: forcing = 5.999964e-18  (>0, confirmed)
+
+By the SAME integrating-factor argument as s01's w1 (fresh here):
+  w4(z) = e^{z^2/2} * int_z^inf 6*e^{-s^2/2}/(s^2(s^2+3)^2) ds  >= 0
+hence R(z) <= v(z) for ALL z>0.   [PROVED, exact]
+
+==============================================================================
+STEP 4: numeric cross-check of R(z)<=v(z), wide range
+==============================================================================
+All R(z)<=v(z) checks passed: True
+
+==============================================================================
+STEP 5: the two-sided bracket needed in Sec 3.2:
+  1/(1+z^2) <= 1 - z^2*sigma(z) <= 3/(z^2+3)
+==============================================================================
+sigma(z) in [ 1/(z**2 + 3) , 1/(z**2 + 1) ]
+=> 1-z^2*sigma(z) in [ 1/(z**2 + 1) , 3/(z**2 + 3) ]
+Matches target's claimed bracket [1/(1+z^2), 3/(z^2+3)]? lower: True  upper: True
+
+Numeric cross-check across a wide z grid:
+  z=     0.001: 1-z^2*sigma=0.9999990013  in [0.999999,0.99999967]  ok=True
+  z=      0.01: 1-z^2*sigma=0.9999012434  in [0.99990001,0.99996667]  ok=True
+  z=       0.1: 1-z^2*sigma=0.9911592624  in [0.99009901,0.99667774]  ok=True
+  z=       0.5: 1-z^2*sigma=0.8595455571  in [0.8,0.92307692]  ok=True
+  z=         1: 1-z^2*sigma=0.6556795424  in [0.5,0.75]  ok=True
+  z=         2: 1-z^2*sigma=0.3709538343  in [0.2,0.42857143]  ok=True
+  z=         5: 1-z^2*sigma=0.1010130894  in [0.038461538,0.10714286]  ok=True
+  z=        10: 1-z^2*sigma=0.02859647173  in [0.0099009901,0.029126214]  ok=True
+  z=        50: 1-z^2*sigma=0.001197606696  in [0.00039984006,0.0011985617]  ok=True
+  z=       100: 1-z^2*sigma=0.0002998501049  in [9.9990001e-05,0.00029991003]  ok=True
+  z=      1000: 1-z^2*sigma=2.999985e-06  in [9.99999e-07,2.999991e-06]  ok=True
+  z=     1e+05: 1-z^2*sigma=2.999999998e-10  in [1e-10,3e-10]  ok=True
+
+VERDICT on item (a): CONFIRMED. The sharper upper bound R(z)<=v(z) is
+genuinely provable via the identical integrating-factor technique as
+the lower bound (in fact provable EXACTLY, not just spot-checked --
+the forcing term is an EXACT positive rational function 6/(z^2(z^2+3)^2)
+for every z>0), and it DOES give the two-sided bracket
+1/(1+z^2) <= 1-z^2*sigma(z) <= 3/(z^2+3) needed in Sec 3.2, confirmed
+both algebraically (exact match) and numerically (13-point grid).

@@ -1,0 +1,35 @@
+==============================================================================
+EXPERIMENT 1 (reproduce s04c): adversarially-aligned pointwise E, a0=0.1
+==============================================================================
+       z           hp              |E|     z^2|E|       z^3|E|
+      20     0.050000     7.316400e-04     0.2927         5.85
+      50     0.080000     1.001130e-04     0.2503        12.51
+     150     0.093333     1.025292e-05     0.2307        34.60
+     500     0.098000     8.949122e-07     0.2237       111.86
+    1500     0.099333     9.854617e-08     0.2217       332.59
+    5000     0.099800     8.841126e-09     0.2210      1105.14
+   15000     0.099933     9.814570e-10     0.2208      3312.42
+
+z^2|E| ->  0.22082783461362068   (target's own published value: 0.2208)
+z^3|E| at z=15000 ->  3312.41751920431   (target's own published value: 3312.42)
+MATCH CONFIRMED to published precision.
+
+==============================================================================
+EXPERIMENT 2 (reproduce s04d): aggregate Efull, boundary-layer
+self-healing, SAME a0=0.1, eps=0.5, x=0
+==============================================================================
+      z          |Efull|   z^2|Efull|   z^3|Efull|
+     10     6.684807e-04      0.06685      0.66848
+     30     3.336281e-05      0.03003      0.90080
+     80     1.825706e-06      0.01168      0.93476
+    200     1.169900e-07      0.00468      0.93592
+    500     7.490396e-09      0.00187      0.93630
+
+z^3|Efull| ->  0.9362995495511993   (target's own published value: 0.936)
+MATCH CONFIRMED to published precision.
+
+VERDICT on item (d), part 1: the target's SPECIFIC published numbers
+for both the pointwise-degradation (s04c) and aggregate-self-healing
+(s04d) experiments are independently reproduced here, FRESH CODE, to
+full agreement -- these are genuine, correctly-computed findings, not
+errors or artifacts of the target's own implementation.

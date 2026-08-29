@@ -1,0 +1,115 @@
+==============================================================================
+PART 1 -- candidate sharper upper bound v(z) := (z^2+2)/(z(z^2+3))
+==============================================================================
+v(z) = (z**2 + 2)/(z*(z**2 + 3))
+v'(z) = (-z**4 - 3*z**2 - 6)/(z**2*(z**4 + 6*z**2 + 9))
+z*v(z) - 1 - v'(z) = 6/(z**2*(z**2 + 3)**2)
+
+As in s01: define w4(z):=v(z)-R(z). Then w4' = v'-R' = v'-(zR-1)
+  = v'-z(v-w4)+1 = z*w4 + (1 - z*v + v') = z*w4 - forcing
+so w4' = z*w4 - forcing_term, forcing_term := -(z*v-1-v') computed above
+forcing_term (i.e. RHS constant driving the ODE, matching s01's -2/(1+z^2)^2 role) = -6/(z**2*(z**2 + 3)**2)
+
+Sign of forcing_term for z>0: this is -6/(z**2*(z**2 + 3)**2) -- check numerically it is NEGATIVE for all z>0 (so the SAME
+integrating-factor argument as s01 gives w4(z)=e^{z^2/2}*int_z^inf
+[-forcing_term(s)]*e^{-s^2/2} ds >= 0, i.e. R(z)<=v(z)):
+  z=    0.01: forcing_term = -6.666222e+03  (must be < 0)
+  z=     0.1: forcing_term = -6.622443e+01  (must be < 0)
+  z=     0.5: forcing_term = -2.272189e+00  (must be < 0)
+  z=       1: forcing_term = -3.750000e-01  (must be < 0)
+  z=       2: forcing_term = -3.061224e-02  (must be < 0)
+  z=       5: forcing_term = -3.061224e-04  (must be < 0)
+  z=      10: forcing_term = -5.655575e-06  (must be < 0)
+  z=     100: forcing_term = -5.996402e-12  (must be < 0)
+
+CONFIRMED forcing_term < 0 for all tested z>0. By the identical
+integrating-factor argument as s01 Part 2 (w4'=z*w4 - forcing_term,
+-forcing_term>0, w4(z)->0 as z->inf):
+  w4(z) = e^{z^2/2} * int_z^inf  [-forcing_term(s)] * e^{-s^2/2} ds  >= 0
+hence R(z) <= v(z) = (z^2+2)/(z(z^2+3))  for ALL z>0.   [PROVED]
+
+==============================================================================
+PART 2 -- numerical confirmation of R(z) <= v(z), wide range of z
+==============================================================================
+         z                   R(z)                   v(z)    R<=v?
+     0.001      1.252314763639392      666.6667777777408     True
+      0.01      1.243376471249035      66.66777774074197     True
+       0.1      1.159262399618736      6.677740863787376     True
+       0.5     0.8763644564536923      1.384615384615385     True
+         1     0.6556795424187984                   0.75     True
+         2     0.4213692292880545     0.4285714285714285     True
+         5     0.1928081047153158     0.1928571428571429     True
+        10    0.09902859647173193    0.09902912621359224     True
+        50    0.01999200958085357    0.01999200958849381     True
+       100   0.009999000299850106   0.009999000299910027     True
+      1000  0.0009999990000029999  0.0009999990000029999     True
+     1e+05        9.999999999e-06        9.999999999e-06     True
+All confirmed.
+
+==============================================================================
+PART 3 -- consequence: sigma(z) >= 1 - z*v(z), and its EXACT closed form
+==============================================================================
+1 - z*v(z) = 1/(z**2 + 3)
+
+=> sigma(z) := 1-z*R(z)  is bracketed EXACTLY (no series) by:
+     1 - z*v(z)  <=  sigma(z)  <=  1/(1+z^2)          for all z>0
+   with  1-z*v(z) = 1/(z**2 + 3)
+
+Large-z expansion of the EXACT rational lower bound (sanity check only,
+the bound itself above is exact/non-asymptotic): z**(-2) + O(z**(-4), (z, oo))
+
+z*sigma(z) is bracketed EXACTLY by:
+  lower: z/(z**2 + 3)
+  upper: z/(z**2 + 1)
+
+1 - z*sigma(z) is therefore bracketed EXACTLY by:
+  [1 - z*(z/(1+z^2))]  <=  1-z*sigma(z)  <=  [1 - z*(1-z*v(z))]
+  lower = (z**2 - z + 1)/(z**2 + 1)
+  upper = (z**2 - z + 3)/(z**2 + 3)
+
+=> |1/z - z*sigma(z)| = |1-z*sigma(z)|/z  is bracketed by these two
+   EXACT rational functions divided by z; both are O(1/z^2) as z->inf
+   (verified next), giving a FULLY RIGOROUS, non-asymptotic O(1/z^2)
+   bound on |coeff(F2-F1) - (-1/z)|'s dominant piece (s02 Part 2).
+
+(1-z*sigma)/z bracketed by:
+  lower/z = (z**2 - z + 1)/(z*(z**2 + 1))
+  upper/z = (z**2 - z + 3)/(z*(z**2 + 3))
+  lower/z large-z series: -1/z**2 + 1/z + O(z**(-4), (z, oo))
+  upper/z large-z series: -1/z**2 + 1/z + O(z**(-4), (z, oo))
+
+==============================================================================
+PART 4 -- SELF-CAUGHT BUG, disclosed (not fixed in place here -- see
+ATTEMPT.md 'Self-caught issues' section for the full account; the
+CORRECT derivation of the quantity actually needed was redone from
+scratch, independently, in s02_exact_closed_form_assembly.py)
+==============================================================================
+
+An earlier version of this Part attempted to bound |1 - z*sigma(z)| by
+C0/z^2 using the SAME 'hi'/'lo' brackets from Part 3 above (which bound
+1-z*sigma(z), NOT 1-z^2*sigma(z)). This is a WRONG target: as z->infinity,
+sigma(z)->0, so z*sigma(z)->0 too (NOT ->1), meaning 1-z*sigma(z)->1 --
+an O(1) quantity, NOT O(1/z^2) -- so hi(z)*z^2 grows like z^2, unboundedly,
+and the closing 'assert sup_hi_z2 <= C0' FAILED immediately on first run
+(sup_hi_z2 printed as ~1e16 over the test grid -- a screaming, unmissable
+signal of a conceptual mislabeling, not a near-miss numerical issue).
+
+CAUGHT: by the assertion failing outright (not a subtle discrepancy) on
+this script's own first run, before any conclusion was drawn from it.
+
+DIAGNOSIS: the quantity this front's actual closed-form assembly needs
+bounded by O(1/z^2) is 1 - z^2*sigma(z) (verified in
+s02_exact_closed_form_assembly.py, Part 2 -- NOT 1-z*sigma(z), which this
+Part 4 exploration mistakenly targeted, a copy-paste-style mislabeling
+from Part 3's z*sigma(z) bracket above).
+
+FIX: this broken exploration is not salvaged in place -- instead, Part 2
+of s02_exact_closed_form_assembly.py independently re-derives, via a
+DIFFERENT (and correct) route, the exact rigorous bracket on
+1-z^2*sigma(z) (using the v(z):=(z^2+2)/(z(z^2+3)) upper bound on R(z)
+proved in Parts 1-3 of THIS script, which are themselves unaffected by
+this bug and independently numerically confirmed above), verified there
+with sympy symbolic algebra plus a clean numeric cross-check with zero
+assertion failures. This script's own Parts 1-3 (the R(z)<=v(z) proof
+itself) are NOT affected by this bug and are correct as verified above.
+

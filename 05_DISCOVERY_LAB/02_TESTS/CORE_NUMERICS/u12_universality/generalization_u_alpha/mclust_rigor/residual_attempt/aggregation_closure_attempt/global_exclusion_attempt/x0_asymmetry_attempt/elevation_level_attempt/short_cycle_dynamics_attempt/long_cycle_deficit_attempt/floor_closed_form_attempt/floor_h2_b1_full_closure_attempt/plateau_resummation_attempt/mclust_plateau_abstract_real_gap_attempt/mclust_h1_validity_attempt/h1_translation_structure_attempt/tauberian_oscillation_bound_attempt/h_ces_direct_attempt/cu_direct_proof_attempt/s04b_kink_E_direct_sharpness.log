@@ -1,0 +1,22 @@
+f_kink'(1) [right-diff] = -0.5500000000, [left-diff] = -0.5500000000  (should agree: away from kink)
+
+      z       |E| smooth    z^2|E|s    z^3|E|s           |E| kink    z^2|E|k    z^3|E|k
+     10     2.924876e-04     0.0292     0.2925       2.072292e-04     0.0207     0.2072
+     30     1.227730e-05     0.0110     0.3315       8.768230e-06     0.0079     0.2367
+    100     3.418031e-07     0.0034     0.3418       2.461769e-07     0.0025     0.2462
+    300     1.275136e-08     0.0011     0.3443       9.212657e-09     0.0008     0.2487
+   1000     3.451024e-10     0.0003     0.3451       2.496243e-10     0.0002     0.2496
+   3000     1.279001e-11     0.0001     0.3453       9.254627e-12     0.0001     0.2499
+  10000     3.454095e-13     0.0000     0.3454       2.499625e-13     0.0000     0.2500
+  30000     1.279378e-14     0.0000     0.3454       9.258796e-15     0.0000     0.2500
+
+z^3*|E| trend, smooth f (should CONVERGE to a constant, per s03's rigorous O(1/z^3)):
+  [0.29249, 0.33149, 0.3418, 0.34429, 0.3451, 0.34533, 0.34541, 0.34543]
+z^3*|E| trend, kink f   (per s02's crude fallback, expect this to GROW,
+ not converge, if (C') alone genuinely fails to deliver O(1/z^3)):
+  [0.20723, 0.23674, 0.24618, 0.24874, 0.24962, 0.24987, 0.24996, 0.24999]
+
+z^2*|E| trend, kink f (should CONVERGE to a nonzero constant if the true
+ rate for the kink case is exactly O(1/z^2), confirming s02's crude
+ bound is SHARP, not merely a loose unproven upper bound):
+  [0.020723, 0.007891, 0.002462, 0.000829, 0.00025, 8.3e-05, 2.5e-05, 8e-06]

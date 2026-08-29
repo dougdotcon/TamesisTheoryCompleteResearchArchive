@@ -1,0 +1,111 @@
+==============================================================================
+PART 1 -- symbolic setup: R satisfies R'=zR-1, R(0)=sqrt(pi/2)
+==============================================================================
+d/dz[e^{-u^2/2-uz}] = -u*exp(-u**2/2 - u*z)  (= -u * integrand, as expected)
+d/du[-e^{-u^2/2-uz}] - (u+z)e^{-u^2/2-uz} = 0  (must be 0)
+=> int_0^inf u*e^{-u^2/2-uz} du = 1 - z*R(z) = -R'(z)   [EXACT identity, confirmed]
+
+==============================================================================
+PART 2 -- Gordon-type lower bound: R(z) >= z/(1+z^2) for all z>0
+==============================================================================
+v(z) := z/(1+z^2);  v'(z) = (1 - z**2)/(z**4 + 2*z**2 + 1)
+z*v(z) - 1 - v'(z) = -2/(z**4 + 2*z**2 + 1)  (claimed: -2/(1+z^2)^2)
+CONFIRMED: w1(z):=R(z)-v(z) satisfies w1'(z) = z*w1(z) - 2/(1+z^2)^2
+  [since R'=zR-1 and w1'=R'-v'=zR-1-v' = z(w1+v)-1-v' = z*w1 + (zv-1-v')]
+
+Candidate w1(z)=e^{z^2/2}*Iz(z) satisfies w1'=z*w1-2/(1+z^2)^2? residual = 0  (must be 0)
+CONFIRMED: the integrating-factor closed form is an exact solution.
+Since e^{z^2/2}*Iz(z) -> 0 as z->inf (both factors controlled; matches
+the boundary condition w1(z)->0), and the integrand 2e^{-s^2/2}/(1+s^2)^2
+is manifestly POSITIVE for all s, Iz(z)=int_z^inf(...)ds > 0 for every
+finite z, hence w1(z) = e^{z^2/2}*Iz(z) > 0 for ALL z > 0 (and =0 only
+in the z->inf limit). This is a fully elementary, non-asymptotic proof.
+
+==============================================================================
+PART 3 -- numerical confirmation of (G1): z/(1+z^2) <= R(z) <= 1/z
+==============================================================================
+         z           R(z) [erfcx]     R(z) [direct quad]     rel.diff    lower z/(1+z^2)      upper 1/z  G1 holds?
+     0.001      1.252314763639392      1.252314763639392     0.00e+00        0.000999999           1000       True
+      0.01      1.243376471249035      1.243376471249035     2.15e-51       0.0099990001            100       True
+       0.1      1.159262399618736      1.159262399618736     0.00e+00      0.09900990099             10       True
+       0.5     0.8763644564536923     0.8763644564536923     1.52e-51                0.4              2       True
+         1     0.6556795424187984     0.6556795424187984     2.04e-51                0.5              1       True
+         2     0.4213692292880545     0.4213692292880545     3.17e-51                0.4            0.5       True
+         5     0.1928081047153158     0.1928081047153158     3.47e-50       0.1923076923            0.2       True
+        10    0.09902859647173193    0.09902859647173193     1.42e-49      0.09900990099            0.1       True
+        50    0.01999200958085357    0.01999200958085357     3.47e-48       0.0199920032           0.02       True
+       100   0.009999000299850106   0.009999000299850106     1.39e-47       0.0099990001           0.01       True
+      1000  0.0009999990000029999  0.0009999990000029999     6.44e-47        0.000999999          0.001       True
+     1e+04  9.999999900000004e-05  9.999999900000004e-05     1.48e-43      9.9999999e-05         0.0001       True
+     1e+06      9.99999999999e-07      9.99999999999e-07     1.86e-39              1e-06          1e-06       True
+
+All G1 checks passed: True
+
+==============================================================================
+PART 4 -- consequence (G2): 0 <= sigma(z) := 1-z*R(z) <= 1/(1+z^2) <= 1/z^2
+==============================================================================
+1 - z*v(z) - 1/(1+z^2) = 0  (must be 0)
+CONFIRMED (G2) algebraically, given (G1).
+
+         z     sigma(z)=1-zR(z)      1/(1+z^2)          1/z^2  G2 holds?
+     0.001     0.99874768523636       0.999999        1000000       True
+      0.01     0.98756623528751     0.99990001          10000       True
+       0.1     0.88407376003813     0.99009901            100       True
+       0.5     0.56181777177315            0.8              4       True
+         1      0.3443204575812            0.5              1       True
+         2     0.15726154142389            0.2           0.25       True
+         5    0.035959476423421    0.038461538           0.04       True
+        10   0.0097140352826808   0.0099009901           0.01       True
+        50  0.00039952095732163  0.00039984006         0.0004       True
+       100  9.9970014989509e-05  9.9990001e-05         0.0001       True
+      1000    9.99997000015e-07    9.99999e-07          1e-06       True
+     1e+04        9.9999997e-09  9.9999999e-09          1e-08       True
+     1e+06    9.99999999997e-13          1e-12          1e-12       True
+
+==============================================================================
+PART 5 -- second-derivative bound (G3): 0<=R''(z)<=2R(z)/(1+z^2)<=2/(z(1+z^2))<=2/z^3
+==============================================================================
+R''(z) = R(z) + z*R'(z) [via R'=zR-1] = z*(z*R(z) - 1) + R(z)
+R(z)*(1+z^2) - z  matches? residual = 0
+d/ds[1/(1+s^2)^2] = -4*s/(s**2 + 1)**3  (negative for s>0 => decreasing, confirms sup-at-s=z step)
+
+Algebraic chain: R''(z) = (1+z^2)*w1(z) <= (1+z^2)*2R(z)/(1+z^2)^2 = 2R(z)/(1+z^2)
+                        <= 2*(1/z)/(1+z^2) = 2/(z(1+z^2)) <= 2/z^3
+
+         z     Rpp(z) [ODE] Rpp(z) [direct u^2 quad]    reldiff    2R(z)/(1+z^2)   2/(z(1+z^2))        2/z^3   G3 ok?
+     0.001      1.251316016              1.251316016   2.14e-51      2.504627023       1999.998        2e+09     True
+      0.01      1.233500809              1.233500809   0.00e+00      2.486504292         199.98        2e+06     True
+       0.1      1.070855024              1.070855024   0.00e+00      2.295569108       19.80198         2000     True
+       0.5     0.5954555706             0.5954555706   2.24e-51       1.40218313            3.2           16     True
+         1     0.3113590848             0.3113590848   6.44e-51     0.6556795424              1            2     True
+         2     0.1068461464             0.1068461464   7.19e-50     0.1685476917            0.2         0.25     True
+         5     0.0130107226             0.0130107226   1.36e-47    0.01483139267    0.015384615        0.016     True
+        10   0.001888243645           0.001888243645   7.52e-46   0.001960962306    0.001980198        0.002     True
+        50  1.596171477e-05          1.596171477e-05   1.09e-41  1.598721278e-05  1.5993603e-05      1.6e-05     True
+       100  1.998800899e-06          1.998800899e-06   6.94e-40    1.9996001e-06     1.9998e-06        2e-06     True
+      1000     1.999988e-09             1.999988e-09   3.22e-35     1.999996e-09   1.999998e-09        2e-09     True
+     1e+04   1.99999988e-12           1.99999988e-12   7.42e-28   1.99999996e-12          2e-12        2e-12     True
+     1e+06            2e-18                    2e-18   9.28e-16            2e-18          2e-18        2e-18     True
+
+All G3 checks passed: True
+
+==============================================================================
+SUMMARY -- fully rigorous, non-asymptotic bounds established:
+==============================================================================
+
+ (G1)  z/(1+z^2) <= R(z) <= 1/z                       for all z>0  [PROVED]
+ (G2)  0 <= sigma(z):=1-zR(z) <= 1/(1+z^2) <= 1/z^2                [PROVED]
+ (G3)  0 <= R''(z) <= 2R(z)/(1+z^2) <= 2/(z(1+z^2)) <= 2/z^3       [PROVED]
+
+These are ELEMENTARY, EXACT-CONSTANT, non-asymptotic bounds (an
+integrating-factor comparison argument on the defining ODE R'=zR-1),
+independently re-derived and cross-checked here (both against a symbolic
+ODE-substitution route AND an independent direct mpmath quadrature of the
+raw definitions of R, R', R''). They do NOT depend on the formal Mills-
+ratio asymptotic SERIES (1/z-1/z^3+3/z^5-...) that every ancestor front in
+this sub-lineage used only formally/numerically -- these bounds hold for
+EVERY z>0, including small z where that series is not even convergent-
+useful. This lemma is the technical engine for s02's rigorous bound on the
+Watson's-lemma remainder rho(h',z), and hence for a genuine partial PROOF
+of hypothesis (U), Sec 2 of ATTEMPT.md.
+

@@ -6836,7 +6836,9 @@ argumento `K`-livre — não via mais uma fórmula fechada caso-a-caso.
 > discrepância), uma redução parcial a uma sequência combinatória pura
 > `W(r,t)` com formas fechadas já achadas e verificadas em `t=1,2`
 > (mas não além), e testes Kolmogorov–Smirnov sem padrão de rejeição
-> até `K=20`. Combinando o Teorema A com a Reivindicação B (mais um
+> até `K=20`. [Ver Estágio 50 abaixo — 2026-08-29: `W(r,t)` fechada
+> para `t` livre e a Reivindicação B PROVADA para todo `K\ge1`.]
+> Combinando o Teorema A com a Reivindicação B (mais um
 > lema elementar do limitante de Lipschitz de `F_K`, `\Lambda_K\le
 > 2\sqrt K`), o Teorema Principal, **condicional à Reivindicação B**:
 > ```
@@ -6847,6 +6849,8 @@ argumento `K`-livre — não via mais uma fórmula fechada caso-a-caso.
 > scorecard) — nunca alega a taxa `K`-livre incondicionalmente para
 > `K\ge2`, apesar da evidência numérica muito forte para a Reivindicação
 > B ser exatamente o tipo de coisa que tentaria uma superalegação.
+> [Ver Estágio 50 abaixo — o Teorema Principal é agora INCONDICIONAL
+> para todo `K\ge1`.]
 >
 > **Spot-check da sessão** antes do despacho do referee: re-verificação
 > independente via `sympy` de 9 células da tabela de momentos, da
@@ -7088,3 +7092,107 @@ continuar esta linha teria como alvo natural a própria construção de
 `C(γ)`, não mais apertar `n_0(γ)`. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória/assintótica pura interna
 a este arquivo.
+
+---
+
+## [Extensão, Estágio 50 — 2026-08-29]
+
+**Onda 27, frente (b), `DISC-DEC-127` (`W-RT-CLOSED-FORM-ATTEMPT`).**
+Alvo: a Reivindicação B (`M_K'\overset d=M_K`) do Estágio 47 — provada
+ali apenas em `K=1`, deixada honestamente ABERTA para `K\ge2` (embora
+fortemente evidenciada, `35/35` momentos exatos batendo). Mandato:
+tentar fechar via a sequência combinatória `W(r,t)` — encontrada em
+Estágio 47 apenas em `t=1,2` — buscando uma forma fechada geral em `t`
+livre, e então fechar a soma `K`-simbólica resultante.
+
+### O que aconteceu
+
+> **Reivindicação B fechada — PROVADA para TODO `K\ge1`.** Forma
+> fechada geral, derivada (não apenas ajustada por padrão numérico):
+> ```
+> W(r,t) = (t+2r+1)\,(t+r)!,\quad\text{todo }t\ge1,\ r\ge0
+> ```
+> — generaliza as fórmulas do Estágio 47 restritas a `t=1,2`
+> (`W(r,1)=2(r+1)^2r!`, `W(r,2)=r!(r+1)(r+2)(2r+3)`) para `t` livre,
+> via expansão monomial completa da Proposição S (termo "all-diagonal"
+> mais `r` termos "doubled-at-`b`") contra a expansão multinomial do
+> momento condicional, somada sobre composições. A identidade de
+> redução `E[(M_K')^t]=K!\sum_{r=0}^KC(K,r)W(r,t)/(K+t+r+1)!` (Estágio
+> 47, §5.3) é re-derivada do zero (argumento de intercambiabilidade
+> tornado preciso) e re-verificada, `48/48` células frescas. A soma
+> `K`-simbólica resultante não fecha pelo método literal do mandato
+> (`sympy.summation`/Gosper — fecha para `t` par, retorna `None`
+> certificado para `t` ímpar/simbólico; um "3-way Gosper discrepancy"
+> auto-divulgado é genuíno, reproduzido de forma independente, e
+> confirmado como não-propagante), mas fecha por uma rota elementar
+> diferente — integral Beta mais integração por partes, à mão — dando
+> ```
+> S(K,t) := \sum_{r=0}^KC(K,r)\frac{W(r,t)}{(K+t+r+1)!} =
+>   \frac{\Gamma(t/2+1)}{\Gamma(K+t/2+1)},\quad\text{todo }K\ge1,\ t\ge1
+> ```
+> o que dá `E[(M_K')^t]=E[M_K^t]` para todo `K\ge1` e todo inteiro
+> positivo `t` — determinação de momento de Hausdorff em suporte
+> compacto `[0,1]` (Stone–Weierstrass) fecha a Reivindicação B.
+> Combinada com o Teorema A (incondicional, Estágio 47), o Teorema
+> Principal:
+> ```
+> \sup_x|F_n^{(K)}(x)-F_K(x)| \le 8K^2/n,\quad n\ge K+1,\ \text{todo }K\ge1
+> ```
+> **agora vale INCONDICIONALMENTE** — não mais dependente da
+> Reivindicação B evidenciada-mas-não-provada.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da fórmula `W(r,t)` (`30` células), da
+> identidade de soma `K`-simbólica (`30` células), e de
+> `E[(M_K')^t]=E[M_K^t]` (`60` células, `K=1,\ldots,10`,
+> `t=1,\ldots,6`) — zero discrepância em `120` células.
+>
+> Referee hostil dedicado: re-derivou cada passo não-trivial do zero,
+> independentemente do código da frente e do predecessor, rodando
+> `500+` células frescas em cinco scripts próprios; confirmou o passo
+> mais crítico (a identidade de integração por partes que cancela os
+> termos `μ_{t+1}`) para `K` e `t` genuinamente simbólicos
+> simultaneamente (não apenas amostrados); estendeu a checagem
+> concreta-`K` de `K=1..8` (frente) para `K=1..25`; reproduziu a
+> discrepância Gosper de 3 vias de forma independente e confirmou sua
+> não-propagação via álgebra Gamma direta; verificou a lógica de
+> determinação de momento (nem sub- nem super-alegada); confirmou
+> ausência de circularidade entre o Teorema A e a Reivindicação B.
+> **Dois achados reais, ambos cosméticos/expositivos, nenhum afetando
+> a correção**: (1) a derivação exibida na Seção 3.3 omite um fator
+> `t!` numa linha (o "bracket" da soma sobre composições) e o reinsere
+> sem explicação duas linhas depois — a cadeia, seguida literalmente,
+> não se conecta algebricamente nesse ponto, embora a fórmula final em
+> caixa esteja correta (confirmada `3` formas independentes,
+> reproduzido `48/56` células com o fator ausente divergindo para
+> `t\ge2`); corrigido por blockquote datado na própria `ATTEMPT.md` da
+> frente, com a derivação corrigida explicitada linha a linha. (2) uma
+> tensão de baixa severidade sobre se a frente rodou um `git status
+> --porcelain` somente-leitura — moot de qualquer forma (`git status`
+> não altera nenhum arquivo rastreado por construção); registrada por
+> nota datada.
+>
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** A
+> Reivindicação B está PROVADA (não mais apenas evidenciada) para todo
+> `K\ge1`. O Teorema Principal `8K^2/n` (Estágio 47) é agora
+> INCONDICIONAL. Nenhum outro resultado do arquivo é afetado.
+
+Ver
+`.../distributional_bridge_attempt/k_free_convergence_bridge_attempt/w_rt_closed_form_attempt/ATTEMPT.md`
+e
+`.../w_rt_closed_form_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+O Teorema Principal do Estágio 47 (`sup_x|F_n^{(K)}(x)-F_K(x)|\le
+8K^2/n`, `n\ge K+1`, todo `K\ge1`) deixa de ser condicional à
+Reivindicação B e passa a valer incondicionalmente — a ponte
+distribucional completa `K`-livre com taxa explícita está, portanto,
+totalmente fechada, do Teorema A (acoplamento, incondicional desde o
+Estágio 47) até o Teorema Principal (agora também incondicional). Isto
+não introduz nenhuma alegação nova além do que o próprio Estágio 47 já
+havia formulado condicionalmente; apenas remove a condição. Nenhum
+outro item aberto do arquivo (`C(γ)`, Conjecturas 1–2 em suas formas
+mais gerais, a construção contínua-nativa da Definição 3 para `K\ge3`,
+o gap M-CLUST H1) é tocado. Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória pura interna a este arquivo.

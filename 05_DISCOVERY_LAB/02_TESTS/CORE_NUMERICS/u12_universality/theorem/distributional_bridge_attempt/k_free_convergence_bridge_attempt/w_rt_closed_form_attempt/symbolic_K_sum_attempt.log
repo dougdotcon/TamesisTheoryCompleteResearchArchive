@@ -1,0 +1,74 @@
+==============================================================================
+Part 1: sympy.summation(S(K,t), (r,0,K)) for fixed small t, symbolic K
+==============================================================================
+t=1: sympy.summation = (K**2 + 4*K*hyper((3, 1 - K), (K + 4,), -1) + 5*K + 6)/factorial(K + 3)
+       DOES NOT close (residual hyper(...) term)
+t=2: sympy.summation = 12*factorial(K)*hyper((4, 1 - K), (K + 5,), -1)/(factorial(K - 1)*factorial(K + 4)) + 3*sqrt(pi)*gamma(K + 4)/(4*factorial(K + 3)*gamma(K + 5/2))
+       DOES NOT close (residual hyper(...) term)
+t=3: sympy.summation = 2*(K**3 + 12*K**2 + 24*K*hyper((5, 1 - K), (K + 6,), -1) + 47*K + 60)/factorial(K + 5)
+       DOES NOT close (residual hyper(...) term)
+t=4: sympy.summation = 240*factorial(K)*hyper((6, 1 - K), (K + 7,), -1)/(factorial(K - 1)*factorial(K + 6)) + 15*sqrt(pi)*gamma(K + 6)/(8*factorial(K + 5)*gamma(K + 7/2))
+       DOES NOT close (residual hyper(...) term)
+t=5: sympy.summation = 6*(K**4 + 22*K**3 + 179*K**2 + 240*K*hyper((7, 1 - K), (K + 8,), -1) + 638*K + 840)/factorial(K + 7)
+       DOES NOT close (residual hyper(...) term)
+t=6: sympy.summation = 10080*factorial(K)*hyper((8, 1 - K), (K + 9,), -1)/(factorial(K - 1)*factorial(K + 8)) + 105*sqrt(pi)*gamma(K + 8)/(16*factorial(K + 7)*gamma(K + 9/2))
+       DOES NOT close (residual hyper(...) term)
+
+==============================================================================
+Part 2: gosper_sum directly on S(K,t)'s summand -- fixed t, symbolic K
+(gosper_sum is a COMPLETE decision procedure for indefinite
+ hypergeometric summation: None here is a genuine certificate that
+ no hypergeometric-term antidifference exists for that summand,
+ not merely 'sympy could not find one'.)
+==============================================================================
+t=1 (odd ): gosper_sum = None
+t=2 (even): gosper_sum = 1/factorial(K + 1)
+t=3 (odd ): gosper_sum = None
+t=4 (even): gosper_sum = 2/factorial(K + 2)
+t=5 (odd ): gosper_sum = None
+t=6 (even): gosper_sum = 6/factorial(K + 3)
+t=7 (odd ): gosper_sum = None
+t=8 (even): gosper_sum = 24/factorial(K + 4)
+
+gosper_sum, symbolic t (both K and t symbolic):
+  result = None
+
+==============================================================================
+Part 3 (SELF-CAUGHT DISCREPANCY -- disclosed per archive convention)
+Attempting the K-recursion (t+2K)S(K,t)=2S(K-1,t) via Gosper-summing
+the difference h(r), in TWO syntactically different but
+mathematically identical forms.
+==============================================================================
+Form A1 (sp.binomial objects, NOT pre-simplified):  gosper_sum = None
+Form A2 (sp.binomial objects, sp.simplify() FIRST): gosper_sum = 0
+Form B  (explicit factorial ratios, together()):    gosper_sum = None
+
+CONFIRMED DISCREPANCY: Form A2 (sp.binomial, pre-simplified) returns
+0; Form A1 (same expression, NOT pre-simplified) and Form B (explicit
+factorial ratios) both return None, for what is provably the SAME
+mathematical quantity in all three cases. The '0' is therefore a
+spurious artifact of sp.simplify()'s effect on how gosper_sum
+processes sp.binomial(K-1,r) at the r=K boundary (where C(K-1,K)=0
+combinatorially) -- NOT a certified proof. VERDICT: this
+Gosper-differencing route to the K-recursion is NOT used as a proof
+anywhere in this front's actual argument (see
+beta_integral_proof_verification.py for the real, elementary-calculus
+proof, found and cross-checked independently of this discrepancy and
+not relying on gosper_sum at all).
+
+==============================================================================
+SUMMARY
+==============================================================================
+- sympy.summation / gosper_sum applied DIRECTLY to S(K,t)'s own summand
+  (Parts 1-2 above) CLOSES for every even t tested (t=2,4,6,8), giving
+  clean rational-in-K closed forms, and FAILS (certified non-existence
+  of a hypergeometric antidifference) for every odd t tested (1,3,5,7)
+  and for symbolic t.
+- The Gosper-differencing route to a K-recursion (Part 3) produced an
+  outright inconsistency between two equivalent formulations and is
+  therefore NOT trusted or used as a proof step anywhere in this front.
+- The actual general closed form for S(K,t), valid for ALL t (not just
+  even t), was instead found via elementary calculus -- see
+  beta_integral_proof_verification.py. That derivation does not invoke
+  gosper_sum, sympy.summation, or any other black-box summation
+  algorithm at all; every step is checked directly.

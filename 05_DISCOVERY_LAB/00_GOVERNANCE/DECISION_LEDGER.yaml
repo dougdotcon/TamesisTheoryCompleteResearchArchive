@@ -8423,3 +8423,61 @@ decisions:
       Estagio 36 permanece correto como limitante mais frouxo, apenas
       superado. C(gamma) permanece inteiramente ABERTO -- este Estagio
       e uma reducao quantificada de n_0(gamma), nao um fechamento.
+
+  - id: DISC-DEC-129
+    date: 2026-08-29
+    decision: >
+      Onda 27 frente (b) W-RT-CLOSED-FORM-ATTEMPT integrada como Estagio
+      50 em THEOREM.md. Reivindicacao B (M_K'=_d M_K, Estagio 47) fechada
+      -- PROVADA para todo K>=1 (antes: provada apenas em K=1, evidenciada
+      mas nao provada para K>=2). Forma fechada geral W(r,t)=
+      (t+2r+1)(t+r)! derivada (nao apenas ajustada por padrao) para t
+      livre, generalizando as formulas do Estagio 47 restritas a t=1,2.
+      Identidade de reducao re-derivada do zero e re-verificada, 48/48
+      celulas frescas. Soma K-simbolica nao fecha pelo metodo literal do
+      mandato (sympy.summation/Gosper -- fecha para t par, None
+      certificado para t impar/simbolico; discrepancia Gosper de 3 vias
+      auto-divulgada, genuina, nao-propagante), mas fecha por rota
+      elementar diferente -- integral Beta mais integracao por partes a
+      mao -- dando S(K,t)=Gamma(t/2+1)/Gamma(K+t/2+1) para todo K>=1,
+      t>=1. Determinacao de momento de Hausdorff em suporte compacto
+      fecha a Reivindicacao B. Teorema Principal do Estagio 47
+      (sup_x|F_n^K(x)-F_K(x)|<=8K^2/n, n>=K+1, todo K>=1) e agora
+      INCONDICIONAL.
+      Spot-check da sessao antes do despacho: reverificacao independente
+      via sympy da formula W(r,t) (30 celulas), da identidade de soma
+      K-simbolica (30 celulas), e de E[(M_K')^t]=E[M_K^t] (60 celulas,
+      K=1..10, t=1..6) -- zero discrepancia em 120 celulas.
+      Referee hostil dedicado: SOUND WITH NAMED ISSUES -- ACCEPT for
+      catalogue. Rederivou cada passo nao-trivial do zero, 500+ celulas
+      frescas em cinco scripts proprios; confirmou o passo mais critico
+      (integracao por partes cancelando termos mu_{t+1}) para K e t
+      genuinamente simbolicos simultaneamente; estendeu checagem
+      concreta-K de K=1..8 para K=1..25; reproduziu a discrepancia
+      Gosper de 3 vias de forma independente e confirmou nao-propagacao;
+      confirmou ausencia de circularidade entre Teorema A e Reivindicacao
+      B. Dois achados reais, ambos cosmeticos/expositivos, nenhum
+      afetando a correcao: (1) a derivacao exibida na Secao 3.3 omite um
+      fator t! numa linha e o reinsere sem explicacao duas linhas depois
+      -- a cadeia, seguida literalmente, nao se conecta algebricamente
+      nesse ponto, embora a formula final em caixa esteja correta
+      (confirmada 3 formas independentes); corrigido por blockquote
+      datado com a derivacao corrigida explicitada linha a linha. (2)
+      tensao de baixa severidade sobre um possivel git status
+      --porcelain somente-leitura -- moot de qualquer forma; registrada
+      por nota datada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 50, ~70 linhas, mais
+      dois pointers "[Ver Estagio 50 abaixo]" inseridos no texto do
+      Estagio 47); .../w_rt_closed_form_attempt/ATTEMPT.md (1 correcao
+      datada na Secao 3.3, corrigindo a cadeia algebrica do fator t!; 1
+      nota datada na Secao 13, sobre a tensao git status); 
+      DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhum resultado de
+      registro anterior invalidado -- o Teorema A do Estagio 47
+      permanece incondicional e intocado; apenas a condicionalidade do
+      Teorema Principal e removida. Nenhum outro item aberto do arquivo
+      (C(gamma), Conjecturas 1-2 gerais, construcao continua-nativa para
+      K>=3, gap M-CLUST H1) e tocado por esta integracao.

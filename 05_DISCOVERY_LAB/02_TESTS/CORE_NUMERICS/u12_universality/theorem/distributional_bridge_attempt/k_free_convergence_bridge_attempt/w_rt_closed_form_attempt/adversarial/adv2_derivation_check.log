@@ -1,0 +1,106 @@
+==============================================================================
+Part 1: per-composition exact contributions, symbolically checked
+claim: all-diagonal term contributes EXACTLY r!*t!*(kD+1) per
+composition; doubled-at-b term contributes EXACTLY r!*t!*(k_b+2).
+(This is the referee's OWN re-derivation, done independently of
+ the target's write-up, and checked here against direct
+ per-composition monomial evaluation -- not assumed.)
+==============================================================================
+  (kD+1)!/kD! symbolic simplify = kD + 1  [should be kD+1]
+  (ka+1)!/(ka!*(ka+1)) symbolic simplify = 1  [should be 1]
+  (kb+2)!/(kb!*(kb+1)) symbolic simplify = ka + 2  [should be kb+2]
+
+==============================================================================
+Part 2: brute-force per-composition check, r=3, t=4 (all compositions)
+comparing referee's formula r!*t!*(kD+1) / r!*t!*(kb+2) against the
+EXACT per-term value computed directly from the raw monomial coeff
+and factorial product (no shortcut).
+==============================================================================
+r=3, t=4: all per-composition claims match exact computation: True
+
+==============================================================================
+Part 3: summing the corrected per-composition formula over all N
+compositions (N=C(t+r,r)), using the symmetry fact
+sum_compositions(k_D) = sum_compositions(k_a) = t*N/(r+1),
+and comparing to the closed form (t+2r+1)(t+r)! AND to the
+target's literally-WRITTEN intermediate bracket formula
+  r! * [(tN/(r+1)+N) + r*(tN/(r+1)+2N)]     <-- AS WRITTEN, no t!
+to show this written formula is off by a factor of t! whenever
+t!>1, while the CORRECTED version (with an extra explicit t!
+factor, matching the r!*t!*(...) per-composition finding above)
+matches exactly.
+==============================================================================
+t=1 r=0: as-written=2 corrected=2 closed=2 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=1: as-written=8 corrected=8 closed=8 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=2: as-written=36 corrected=36 closed=36 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=3: as-written=192 corrected=192 closed=192 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=4: as-written=1200 corrected=1200 closed=1200 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=5: as-written=8640 corrected=8640 closed=8640 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=6: as-written=70560 corrected=70560 closed=70560 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=1 r=7: as-written=645120 corrected=645120 closed=645120 [written OK, corrected OK]  (t=1, t!=1, cannot distinguish)
+t=2 r=0: as-written=3 corrected=6 closed=6 [written WRONG, corrected OK]
+t=2 r=1: as-written=15 corrected=30 closed=30 [written WRONG, corrected OK]
+t=2 r=2: as-written=84 corrected=168 closed=168 [written WRONG, corrected OK]
+t=2 r=3: as-written=540 corrected=1080 closed=1080 [written WRONG, corrected OK]
+t=2 r=4: as-written=3960 corrected=7920 closed=7920 [written WRONG, corrected OK]
+t=2 r=5: as-written=32760 corrected=65520 closed=65520 [written WRONG, corrected OK]
+t=2 r=6: as-written=302400 corrected=604800 closed=604800 [written WRONG, corrected OK]
+t=2 r=7: as-written=3084480 corrected=6168960 closed=6168960 [written WRONG, corrected OK]
+t=3 r=0: as-written=4 corrected=24 closed=24 [written WRONG, corrected OK]
+t=3 r=1: as-written=24 corrected=144 closed=144 [written WRONG, corrected OK]
+t=3 r=2: as-written=160 corrected=960 closed=960 [written WRONG, corrected OK]
+t=3 r=3: as-written=1200 corrected=7200 closed=7200 [written WRONG, corrected OK]
+t=3 r=4: as-written=10080 corrected=60480 closed=60480 [written WRONG, corrected OK]
+t=3 r=5: as-written=94080 corrected=564480 closed=564480 [written WRONG, corrected OK]
+t=3 r=6: as-written=967680 corrected=5806080 closed=5806080 [written WRONG, corrected OK]
+t=3 r=7: as-written=10886400 corrected=65318400 closed=65318400 [written WRONG, corrected OK]
+t=4 r=0: as-written=5 corrected=120 closed=120 [written WRONG, corrected OK]
+t=4 r=1: as-written=35 corrected=840 closed=840 [written WRONG, corrected OK]
+t=4 r=2: as-written=270 corrected=6480 closed=6480 [written WRONG, corrected OK]
+t=4 r=3: as-written=2310 corrected=55440 closed=55440 [written WRONG, corrected OK]
+t=4 r=4: as-written=21840 corrected=524160 closed=524160 [written WRONG, corrected OK]
+t=4 r=5: as-written=226800 corrected=5443200 closed=5443200 [written WRONG, corrected OK]
+t=4 r=6: as-written=2570400 corrected=61689600 closed=61689600 [written WRONG, corrected OK]
+t=4 r=7: as-written=31600800 corrected=758419200 closed=758419200 [written WRONG, corrected OK]
+t=5 r=0: as-written=6 corrected=720 closed=720 [written WRONG, corrected OK]
+t=5 r=1: as-written=48 corrected=5760 closed=5760 [written WRONG, corrected OK]
+t=5 r=2: as-written=420 corrected=50400 closed=50400 [written WRONG, corrected OK]
+t=5 r=3: as-written=4032 corrected=483840 closed=483840 [written WRONG, corrected OK]
+t=5 r=4: as-written=42336 corrected=5080320 closed=5080320 [written WRONG, corrected OK]
+t=5 r=5: as-written=483840 corrected=58060800 closed=58060800 [written WRONG, corrected OK]
+t=5 r=6: as-written=5987520 corrected=718502400 closed=718502400 [written WRONG, corrected OK]
+t=5 r=7: as-written=79833600 corrected=9580032000 closed=9580032000 [written WRONG, corrected OK]
+t=6 r=0: as-written=7 corrected=5040 closed=5040 [written WRONG, corrected OK]
+t=6 r=1: as-written=63 corrected=45360 closed=45360 [written WRONG, corrected OK]
+t=6 r=2: as-written=616 corrected=443520 closed=443520 [written WRONG, corrected OK]
+t=6 r=3: as-written=6552 corrected=4717440 closed=4717440 [written WRONG, corrected OK]
+t=6 r=4: as-written=75600 corrected=54432000 closed=54432000 [written WRONG, corrected OK]
+t=6 r=5: as-written=942480 corrected=678585600 closed=678585600 [written WRONG, corrected OK]
+t=6 r=6: as-written=12640320 corrected=9101030400 closed=9101030400 [written WRONG, corrected OK]
+t=6 r=7: as-written=181621440 corrected=130767436800 closed=130767436800 [written WRONG, corrected OK]
+t=7 r=0: as-written=8 corrected=40320 closed=40320 [written WRONG, corrected OK]
+t=7 r=1: as-written=80 corrected=403200 closed=403200 [written WRONG, corrected OK]
+t=7 r=2: as-written=864 corrected=4354560 closed=4354560 [written WRONG, corrected OK]
+t=7 r=3: as-written=10080 corrected=50803200 closed=50803200 [written WRONG, corrected OK]
+t=7 r=4: as-written=126720 corrected=638668800 closed=638668800 [written WRONG, corrected OK]
+t=7 r=5: as-written=1710720 corrected=8622028800 closed=8622028800 [written WRONG, corrected OK]
+t=7 r=6: as-written=24710400 corrected=124540416000 closed=124540416000 [written WRONG, corrected OK]
+t=7 r=7: as-written=380540160 corrected=1917922406400 closed=1917922406400 [written WRONG, corrected OK]
+
+Cells where the literally-WRITTEN bracket formula (no t!) disagrees with the closed form: 48/56
+Cells where the CORRECTED formula (extra t! reinstated) matches: 56/56
+
+CONCLUSION: the target ATTEMPT.md Section 3.3's intermediate
+'Summing over all N compositions' display formula, taken literally,
+is off by a missing factor of t! (confirmed: disagrees with the true
+W(r,t) for every t>=2 tested). The FINAL boxed closed form
+(t+2r+1)(t+r)! is nonetheless CORRECT -- the very next equation in
+the same box silently reinserts the missing t! (via an unexplained
+'*t!' multiplied into N's own definition) and lands on the right
+answer. This is a genuine exposition/rigor gap in Section 3.3 (a
+dropped-then-silently-reinstated factor of t! in the middle of the
+displayed derivation) -- but the CONCLUSION is independently correct,
+confirmed here (a) by full re-derivation with the factor correctly
+tracked throughout (Parts 1-3 above), and (b) by all 110 direct
+numeric cells in adv1_W_fresh_definition.py, and (c) by the target's
+own 99+32 cells. Does NOT affect the validity of Result 1 itself.

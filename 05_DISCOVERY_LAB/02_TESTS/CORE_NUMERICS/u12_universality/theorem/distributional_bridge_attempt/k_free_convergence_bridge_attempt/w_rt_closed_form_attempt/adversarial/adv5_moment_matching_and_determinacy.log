@@ -1,0 +1,135 @@
+==============================================================================
+Part A: fresh Fraction cross-check, K=11..20, t=7..12 (disjoint
+sample from target's own K<=150/t<=40 sweep and the orchestrator's
+60-cell spot-check) -- E[(M_K')^t] via W(r,t)-reduction (own code)
+vs E[M_K^t] via the Gamma-function formula (sympy exact) AND,
+for odd t, a THIRD, fully independent, non-sympy elementary Beta-
+integral route.
+==============================================================================
+K=11 t= 7: E[(M_K')^t]=524288/378098955 E[M_K^t]_gamma=524288/378098955 [OK]
+K=11 t= 8: E[(M_K')^t]=1/1365 E[M_K^t]_gamma=1/1365 [OK] E[M_K^t]_beta(3rd route)=1/1365 [OK]
+K=11 t= 9: E[(M_K')^t]=524288/1302340845 E[M_K^t]_gamma=524288/1302340845 [OK]
+K=11 t=10: E[(M_K')^t]=1/4368 E[M_K^t]_gamma=1/4368 [OK] E[M_K^t]_beta(3rd route)=1/4368 [OK]
+K=11 t=11: E[(M_K')^t]=524288/3907022535 E[M_K^t]_gamma=524288/3907022535 [OK]
+K=11 t=12: E[(M_K')^t]=1/12376 E[M_K^t]_gamma=1/12376 [OK] E[M_K^t]_beta(3rd route)=1/12376 [OK]
+K=12 t= 7: E[(M_K')^t]=4194304/3907022535 E[M_K^t]_gamma=4194304/3907022535 [OK]
+K=12 t= 8: E[(M_K')^t]=1/1820 E[M_K^t]_gamma=1/1820 [OK] E[M_K^t]_beta(3rd route)=1/1820 [OK]
+K=12 t= 9: E[(M_K')^t]=4194304/14325749295 E[M_K^t]_gamma=4194304/14325749295 [OK]
+K=12 t=10: E[(M_K')^t]=1/6188 E[M_K^t]_gamma=1/6188 [OK] E[M_K^t]_beta(3rd route)=1/6188 [OK]
+K=12 t=11: E[(M_K')^t]=4194304/45581929575 E[M_K^t]_gamma=4194304/45581929575 [OK]
+K=12 t=12: E[(M_K')^t]=1/18564 E[M_K^t]_gamma=1/18564 [OK] E[M_K^t]_beta(3rd route)=1/18564 [OK]
+K=13 t= 7: E[(M_K')^t]=8388608/9917826435 E[M_K^t]_gamma=8388608/9917826435 [OK]
+K=13 t= 8: E[(M_K')^t]=1/2380 E[M_K^t]_gamma=1/2380 [OK] E[M_K^t]_beta(3rd route)=1/2380 [OK]
+K=13 t= 9: E[(M_K')^t]=8388608/38569325025 E[M_K^t]_gamma=8388608/38569325025 [OK]
+K=13 t=10: E[(M_K')^t]=1/8568 E[M_K^t]_gamma=1/8568 [OK] E[M_K^t]_beta(3rd route)=1/8568 [OK]
+K=13 t=11: E[(M_K')^t]=8388608/129733184175 E[M_K^t]_gamma=8388608/129733184175 [OK]
+K=13 t=12: E[(M_K')^t]=1/27132 E[M_K^t]_gamma=1/27132 [OK] E[M_K^t]_beta(3rd route)=1/27132 [OK]
+K=14 t= 7: E[(M_K')^t]=33554432/49589132175 E[M_K^t]_gamma=33554432/49589132175 [OK]
+K=14 t= 8: E[(M_K')^t]=1/3060 E[M_K^t]_gamma=1/3060 [OK] E[M_K^t]_beta(3rd route)=1/3060 [OK]
+K=14 t= 9: E[(M_K')^t]=33554432/203866432275 E[M_K^t]_gamma=33554432/203866432275 [OK]
+K=14 t=10: E[(M_K')^t]=1/11628 E[M_K^t]_gamma=1/11628 [OK] E[M_K^t]_beta(3rd route)=1/11628 [OK]
+K=14 t=11: E[(M_K')^t]=33554432/722799168975 E[M_K^t]_gamma=33554432/722799168975 [OK]
+K=14 t=12: E[(M_K')^t]=1/38760 E[M_K^t]_gamma=1/38760 [OK] E[M_K^t]_beta(3rd route)=1/38760 [OK]
+K=15 t= 7: E[(M_K')^t]=67108864/122319859365 E[M_K^t]_gamma=67108864/122319859365 [OK]
+K=15 t= 8: E[(M_K')^t]=1/3876 E[M_K^t]_gamma=1/3876 [OK] E[M_K^t]_beta(3rd route)=1/3876 [OK]
+K=15 t= 9: E[(M_K')^t]=67108864/530052723915 E[M_K^t]_gamma=67108864/530052723915 [OK]
+K=15 t=10: E[(M_K')^t]=1/15504 E[M_K^t]_gamma=1/15504 [OK] E[M_K^t]_beta(3rd route)=1/15504 [OK]
+K=15 t=11: E[(M_K')^t]=67108864/1975651061865 E[M_K^t]_gamma=67108864/1975651061865 [OK]
+K=15 t=12: E[(M_K')^t]=1/54264 E[M_K^t]_gamma=1/54264 [OK] E[M_K^t]_beta(3rd route)=1/54264 [OK]
+K=16 t= 7: E[(M_K')^t]=2147483648/4770474515235 E[M_K^t]_gamma=2147483648/4770474515235 [OK]
+K=16 t= 8: E[(M_K')^t]=1/4845 E[M_K^t]_gamma=1/4845 [OK] E[M_K^t]_beta(3rd route)=1/4845 [OK]
+K=16 t= 9: E[(M_K')^t]=2147483648/21732161680515 E[M_K^t]_gamma=2147483648/21732161680515 [OK]
+K=16 t=10: E[(M_K')^t]=1/20349 E[M_K^t]_gamma=1/20349 [OK] E[M_K^t]_beta(3rd route)=1/20349 [OK]
+K=16 t=11: E[(M_K')^t]=2147483648/84952995660195 E[M_K^t]_gamma=2147483648/84952995660195 [OK]
+K=16 t=12: E[(M_K')^t]=1/74613 E[M_K^t]_gamma=1/74613 [OK] E[M_K^t]_beta(3rd route)=1/74613 [OK]
+K=17 t= 7: E[(M_K')^t]=4294967296/11505262066155 E[M_K^t]_gamma=4294967296/11505262066155 [OK]
+K=17 t= 8: E[(M_K')^t]=1/5985 E[M_K^t]_gamma=1/5985 [OK] E[M_K^t]_beta(3rd route)=1/5985 [OK]
+K=17 t= 9: E[(M_K')^t]=4294967296/54969585427185 E[M_K^t]_gamma=4294967296/54969585427185 [OK]
+K=17 t=10: E[(M_K')^t]=1/26334 E[M_K^t]_gamma=1/26334 [OK] E[M_K^t]_beta(3rd route)=1/26334 [OK]
+K=17 t=11: E[(M_K')^t]=4294967296/224875576747575 E[M_K^t]_gamma=4294967296/224875576747575 [OK]
+K=17 t=12: E[(M_K')^t]=1/100947 E[M_K^t]_gamma=1/100947 [OK] E[M_K^t]_beta(3rd route)=1/100947 [OK]
+K=18 t= 7: E[(M_K')^t]=17179869184/54969585427185 E[M_K^t]_gamma=17179869184/54969585427185 [OK]
+K=18 t= 8: E[(M_K')^t]=1/7315 E[M_K^t]_gamma=1/7315 [OK] E[M_K^t]_beta(3rd route)=1/7315 [OK]
+K=18 t= 9: E[(M_K')^t]=17179869184/274847927135925 E[M_K^t]_gamma=17179869184/274847927135925 [OK]
+K=18 t=10: E[(M_K')^t]=1/33649 E[M_K^t]_gamma=1/33649 [OK] E[M_K^t]_beta(3rd route)=1/33649 [OK]
+K=18 t=11: E[(M_K')^t]=17179869184/1174350234126225 E[M_K^t]_gamma=17179869184/1174350234126225 [OK]
+K=18 t=12: E[(M_K')^t]=1/134596 E[M_K^t]_gamma=1/134596 [OK] E[M_K^t]_beta(3rd route)=1/134596 [OK]
+K=19 t= 7: E[(M_K')^t]=34359738368/130191123380175 E[M_K^t]_gamma=34359738368/130191123380175 [OK]
+K=19 t= 8: E[(M_K')^t]=1/8855 E[M_K^t]_gamma=1/8855 [OK] E[M_K^t]_beta(3rd route)=1/8855 [OK]
+K=19 t= 9: E[(M_K')^t]=34359738368/679886977652025 E[M_K^t]_gamma=34359738368/679886977652025 [OK]
+K=19 t=10: E[(M_K')^t]=1/42504 E[M_K^t]_gamma=1/42504 [OK] E[M_K^t]_beta(3rd route)=1/42504 [OK]
+K=19 t=11: E[(M_K')^t]=34359738368/3028587445904475 E[M_K^t]_gamma=34359738368/3028587445904475 [OK]
+K=19 t=12: E[(M_K')^t]=1/177100 E[M_K^t]_gamma=1/177100 [OK] E[M_K^t]_beta(3rd route)=1/177100 [OK]
+K=20 t= 7: E[(M_K')^t]=274877906944/1223796559773645 E[M_K^t]_gamma=274877906944/1223796559773645 [OK]
+K=20 t= 8: E[(M_K')^t]=1/10626 E[M_K^t]_gamma=1/10626 [OK] E[M_K^t]_beta(3rd route)=1/10626 [OK]
+K=20 t= 9: E[(M_K')^t]=274877906944/6662892380989845 E[M_K^t]_gamma=274877906944/6662892380989845 [OK]
+K=20 t=10: E[(M_K')^t]=1/53130 E[M_K^t]_gamma=1/53130 [OK] E[M_K^t]_beta(3rd route)=1/53130 [OK]
+K=20 t=11: E[(M_K')^t]=274877906944/30891591948225645 E[M_K^t]_gamma=274877906944/30891591948225645 [OK]
+K=20 t=12: E[(M_K')^t]=1/230230 E[M_K^t]_gamma=1/230230 [OK] E[M_K^t]_beta(3rd route)=1/230230 [OK]
+
+Tested 60 fresh (K,t) cells (K=11..20, t=7..12), disjoint from
+previously-tested ranges.
+ALL MATCH
+
+==============================================================================
+Part C: independent re-derivation of E[M_K^t] = K! Gamma(t/2+1)/
+Gamma(K+t/2+1) from f_K(x)=2Kx(1-x^2)^(K-1) via u=x^2 substitution,
+wide sweep K=1..30, t=2..16 (even t, exact Fraction arithmetic,
+even-t route only, since that route is exact without sympy)
+==============================================================================
+Tested 240 (K,t) cells, odd t=1..15, K=1..30, elementary-Beta vs Gamma-formula route.
+ALL MATCH -- E[M_K^t] formula independently re-confirmed by a route
+using no Gamma function evaluation at all (pure rational Beta integral).
+
+==============================================================================
+Part B: the moment-determinacy step -- precise statement of what is
+invoked and why it applies (not a numeric check; classical theorems
+are not verified by sampling, but misapplication IS checkable)
+==============================================================================
+
+Claim invoked (target ATTEMPT.md Section 6, 'classical Hausdorff/Stone-
+Weierstrass moment-determinacy fact'): if X, Y are random variables
+supported on a common COMPACT interval [0,1], and E[X^t] = E[Y^t] for
+EVERY POSITIVE INTEGER t = 1, 2, 3, ..., then X =_d Y.
+
+This is exactly the classical Hausdorff moment problem's determinacy
+theorem for compactly-supported distributions:
+  - On a COMPACT support, the moment problem is ALWAYS determinate
+    (unlike the general Stieltjes/Hamburger moment problems on [0,infty)
+    or (-infty,infty), which can fail to be determinate without extra
+    conditions such as Carleman's condition). This determinacy on compact
+    support does NOT require any extra growth condition on the moments --
+    boundedness of the support alone suffices, because:
+      (i) by Weierstrass approximation, polynomials are dense in
+          C([0,1]) (sup norm);
+      (ii) matching E[X^t]=E[Y^t] for every integer t>=1 (together with
+          E[X^0]=E[Y^0]=1, trivial) means E[p(X)]=E[p(Y)] for EVERY
+          polynomial p, by linearity;
+      (iii) hence, by (i)+(ii) and a standard approximation argument,
+          E[f(X)]=E[f(Y)] for every f in C([0,1]);
+      (iv) (iii) for every continuous f implies X and Y induce the same
+          Borel probability measure on [0,1] (a continuous-test-function
+          class rich enough to separate measures, by a standard
+          Riesz-representation/portmanteau argument), i.e. X =_d Y.
+  - This is indeed the CORRECT theorem to invoke here: M_K' and M_K are
+    BOTH supported on [0,1] (M_K' = p_D + sum V_s' is a sum of a convex
+    combination of [0,1]-valued nonnegative pieces bounded by 1 by
+    construction; M_K has the explicit density 2Kx(1-x^2)^{K-1} on
+    [0,1]), and the target/this front establishes moment matching for
+    EVERY POSITIVE INTEGER t (Section 5.5/6 of ATTEMPT.md, via the
+    Gamma-function closed form specialized to integer t) -- exactly the
+    hypothesis the compact-support determinacy theorem needs. No stronger
+    claim (e.g. "matching only finitely many t suffices", or "matching
+    real/non-integer t was needed for determinacy") is made anywhere in
+    the target document -- the half-integer-t checks (Section 5.6) are
+    explicitly framed as EXTRA supporting evidence for the closed-form
+    IDENTITY S(K,t), not as part of the determinacy argument itself
+    (determinacy only needs, and only uses, integer t>=1).
+  - CONCLUSION: the target's invocation of moment-determinacy is
+    CORRECT and not overclaimed: it matches moments literally for EVERY
+    positive integer t (not a finite sample -- the Gamma-function closed
+    form, proved for every real t>-1 in Section 5.5, gives every integer-t
+    moment as a special case, all at once, not merely at "the sampled
+    values"), on a compact support, which is precisely and exactly the
+    hypothesis of the classical, standard theorem it cites.
+

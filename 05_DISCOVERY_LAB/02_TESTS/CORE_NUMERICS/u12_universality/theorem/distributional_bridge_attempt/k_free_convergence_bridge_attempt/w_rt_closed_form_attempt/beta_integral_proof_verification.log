@@ -1,0 +1,81 @@
+==============================================================================
+Step A: Sum_r C(K,r)(t+2r+1)x^r == (1+x)^(K-1)[(t+1)(1+x)+2Kx]
+(binomial theorem + derivative identity), symbolic t, K=1..8
+==============================================================================
+  K=1: diff = 0  [OK]
+  K=2: diff = 0  [OK]
+  K=3: diff = 0  [OK]
+  K=4: diff = 0  [OK]
+  K=5: diff = 0  [OK]
+  K=6: diff = 0  [OK]
+  K=7: diff = 0  [OK]
+  K=8: diff = 0  [OK]
+
+==============================================================================
+Step B: S(K,t) [termwise def] == (1/K!) int_0^1 x^t(1-x)^K P_K(x,t) dx
+(Beta-integral substitution + direct sympy symbolic integration,
+ symbolic t, K=1..8 -- this is a FULLY independent computation of
+ S(K,t): sympy integrates from scratch, no reference to the
+ termwise factorial-ratio sum at all)
+==============================================================================
+  K=1: diff = 0  [OK]
+  K=2: diff = 0  [OK]
+  K=3: diff = 0  [OK]
+  K=4: diff = 0  [OK]
+  K=5: diff = 0  [OK]
+  K=6: diff = 0  [OK]
+  K=7: diff = 0  [OK]
+  K=8: diff = 0  [OK]
+
+==============================================================================
+Step C: the integral == Gamma(t/2+1)/Gamma(K+t/2+1), symbolic t, K=1..8
+(this is the FINAL closed form -- verified via sympy's OWN symbolic
+ integration engine reaching it directly from the Beta-integral
+ form, an independent check of the by-hand integration-by-parts
+ argument in this module's docstring)
+==============================================================================
+  K=1: diff = 0  [OK]
+  K=2: diff = 0  [OK]
+  K=3: diff = 0  [OK]
+  K=4: diff = 0  [OK]
+  K=5: diff = 0  [OK]
+  K=6: diff = 0  [OK]
+  K=7: diff = 0  [OK]
+  K=8: diff = 0  [OK]
+
+==============================================================================
+Step D: the integration-by-parts identity itself, checked directly
+(t+1) int_0^1 x^t(1-x^2)^K dx  ==  2K int_0^1 x^{t+2}(1-x^2)^{K-1} dx
+symbolic t, K=1..8
+==============================================================================
+  K=1: diff = 0  [OK]
+  K=2: diff = 0  [OK]
+  K=3: diff = 0  [OK]
+  K=4: diff = 0  [OK]
+  K=5: diff = 0  [OK]
+  K=6: diff = 0  [OK]
+  K=7: diff = 0  [OK]
+  K=8: diff = 0  [OK]
+
+ALL SYMBOLIC STEPS A-D PASS (K=1..8, t left as a free positive symbol)
+
+==============================================================================
+Large-scale exact-Fraction check (no sympy): S(K,t) == 2^K/prod_{j=1}^K(t+2j)
+t=1..40 (all parities), K=1..150
+==============================================================================
+Tested 6000 (K,t) cells exactly (Fraction arithmetic).
+ALL MATCH
+
+==============================================================================
+Exact half-integer-t check (sympy Rational/Gamma, exact symbolic
+equality, NOT numeric approximation): t in {1/2,3/2,5/2,-1/2,7/2},
+K=0..15
+==============================================================================
+ALL 80 CELLS MATCH EXACTLY (5 half-integer t values x K=0..15)
+
+==============================================================================
+FINAL VERDICT
+==============================================================================
+S(K,t) = Gamma(t/2+1)/Gamma(K+t/2+1) for all K>=0, all real t>-1:
+PROVED (Steps A-D, elementary calculus) and cross-checked exactly
+across 6000 integer-(K,t) Fraction cells plus 80 half-integer-t cells.

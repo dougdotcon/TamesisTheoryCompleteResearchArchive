@@ -1,6 +1,25 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-128`: onda 27 frente (c)
+**Última atualização:** 2026-08-29 (`DISC-DEC-129`: onda 27 frente (b)
+`W-RT-CLOSED-FORM-ATTEMPT` integrada como Estágio 50 — Reivindicação B
+(`M_K'\overset d=M_K`, Estágio 47) fechada, PROVADA para todo `K\ge1`
+(antes: provada só em `K=1`). Forma fechada geral `W(r,t)=(t+2r+1)(t+r)!`
+derivada para `t` livre (generaliza `t=1,2` do Estágio 47); identidade de
+redução re-verificada, `48/48` células. Soma `K`-simbólica fecha por rota
+elementar (integral Beta + integração por partes), não pelo método
+literal do mandato (Gosper certifica não-existência para `t` ímpar/
+simbólico): `S(K,t)=\Gamma(t/2+1)/\Gamma(K+t/2+1)`, todo `K\ge1,t\ge1`.
+Determinação de momento de Hausdorff fecha a Reivindicação B; o Teorema
+Principal do Estágio 47 (`8K^2/n`) é agora **INCONDICIONAL** para todo
+`K\ge1`. Referee hostil: SOUND WITH NAMED ISSUES — ACCEPT, `500+` células
+frescas em cinco scripts próprios, confirmou o passo mais crítico
+(integração por partes) para `K,t` genuinamente simbólicos; dois achados
+reais, ambos cosméticos/expositivos (fator `t!` omitido-e-reinserido na
+derivação exibida da Seção 3.3, corrigido por correção datada; tensão de
+baixa severidade sobre um possível `git status --porcelain`, nota
+datada) — nenhum afeta a correção do resultado final. **Onda 27 agora
+com 2/3 frentes integradas; frente (a) ainda com referee em andamento.**
+Anterior: `DISC-DEC-128`: onda 27 frente (c)
 `GAMMA-GAP1-CANCELLATION-TRACKING-ATTEMPT` integrada como Estágio 49 —
 redução substancial de `n_0(γ)` via rastreamento exato de cancelamento:
 `\lambda_{\text{tight}}(γ)=\max(4,4(1-γ)^2/(γ(2-γ)))`, PROVADO por

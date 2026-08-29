@@ -1,0 +1,49 @@
+==============================================================================
+Reproduction A: mandate's literal Step 2 (gosper_sum on S(K,t) summand,
+symbolic K), independently, for t=1..8 and symbolic t
+==============================================================================
+  t=1 (odd): gosper_sum = None
+  t=2 (even): gosper_sum = 1/gamma(K + 2)
+  t=3 (odd): gosper_sum = None
+  t=4 (even): gosper_sum = 2/gamma(K + 3)
+  t=5 (odd): gosper_sum = None
+  t=6 (even): gosper_sum = 6/gamma(K + 4)
+  t=7 (odd): gosper_sum = None
+  t=8 (even): gosper_sum = 24/gamma(K + 5)
+  t symbolic: gosper_sum = None
+
+==============================================================================
+Reproduction B: the self-caught Gosper-differencing discrepancy,
+independently coded (fresh variable order / helper functions),
+testing three syntactically different but mathematically IDENTICAL
+formulations of h(r) := (t+2K)*a(K,r,t) - 2*a(K-1,r,t)
+==============================================================================
+Form 1 (sp.binomial, raw, NOT simplified first):        gosper_sum = None
+Form 2 (sp.binomial, sp.simplify() applied first):      gosper_sum = 0
+Form 3 (explicit factorial ratios, sp.together()):      gosper_sum = None
+Form 4 (sp.binomial, sp.expand() applied first, extra): gosper_sum = None
+
+Distinct results across the 4 forms: {'0', 'None'}
+
+DISCREPANCY INDEPENDENTLY CONFIRMED: sp.simplify()-then-gosper_sum
+(Form 2) returns 0 while the mathematically identical raw form
+(Form 1) and the explicit-factorial form (Form 3) both return None.
+This exactly reproduces the target's self-disclosed finding
+(ATTEMPT.md Section 5.4 / symbolic_K_sum_attempt.log 'Part 3'),
+via completely independently-written code -- confirming this is a
+genuine sympy/Gosper subtlety (simplify() changes the syntactic form
+fed to gosper_sum enough to flip its verdict at this specific
+removable-singularity boundary term), not a mischaracterization or
+a copy-paste artifact.
+
+==============================================================================
+Reproduction C: does the SPURIOUS '0' from Form 2 propagate into any
+actual usage anywhere else? Sanity check: verify the (t+2K)S(K,t)=
+2S(K-1,t) recursion this Gosper-differencing attempt was TRYING to
+prove, by DIRECT symbolic substitution of the known-correct closed
+forms (NOT via Gosper at all) -- confirms the recursion itself is
+true (as it must be, since S(K,t)=Gamma(t/2+1)/Gamma(K+t/2+1) really
+does satisfy it), independent of whether Gosper can certify it.
+==============================================================================
+  (t+2K)*S(K,t) - 2*S(K-1,t), symbolic K,t, via Gamma function directly: 0
+  Recursion holds identically (Gamma-function identity, no Gosper needed): True

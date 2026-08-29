@@ -1,0 +1,40 @@
+=== Part 1: closed-form check for W(r,1), W(r,2), r=0..8 ===
+r= 0  W(r,1)=           2 formula=           2 match=True   W(r,2)=             6 formula=             6 match=True
+r= 1  W(r,1)=           8 formula=           8 match=True   W(r,2)=            30 formula=            30 match=True
+r= 2  W(r,1)=          36 formula=          36 match=True   W(r,2)=           168 formula=           168 match=True
+r= 3  W(r,1)=         192 formula=         192 match=True   W(r,2)=          1080 formula=          1080 match=True
+r= 4  W(r,1)=        1200 formula=        1200 match=True   W(r,2)=          7920 formula=          7920 match=True
+r= 5  W(r,1)=        8640 formula=        8640 match=True   W(r,2)=         65520 formula=         65520 match=True
+r= 6  W(r,1)=       70560 formula=       70560 match=True   W(r,2)=        604800 formula=        604800 match=True
+r= 7  W(r,1)=      645120 formula=      645120 match=True   W(r,2)=       6168960 formula=       6168960 match=True
+r= 8  W(r,1)=     6531840 formula=     6531840 match=True   W(r,2)=      68947200 formula=      68947200 match=True
+ALL W(r,1)/W(r,2) CLOSED FORMS MATCH: True
+
+=== Part 2: identity E[(M_K')^t] = K! sum_r C(K,r) W(r,t)/(K+t+r+1)! ===
+    checked against independent sympy target-density integration, K=1..6, t=1..3
+K=1 t=1  W-based=             2/3  target=             2/3  match=True
+K=1 t=2  W-based=             1/2  target=             1/2  match=True
+K=1 t=3  W-based=             2/5  target=             2/5  match=True
+K=2 t=1  W-based=            8/15  target=            8/15  match=True
+K=2 t=2  W-based=             1/3  target=             1/3  match=True
+K=2 t=3  W-based=            8/35  target=            8/35  match=True
+K=3 t=1  W-based=           16/35  target=           16/35  match=True
+K=3 t=2  W-based=             1/4  target=             1/4  match=True
+K=3 t=3  W-based=          16/105  target=          16/105  match=True
+K=4 t=1  W-based=         128/315  target=         128/315  match=True
+K=4 t=2  W-based=             1/5  target=             1/5  match=True
+K=4 t=3  W-based=        128/1155  target=        128/1155  match=True
+K=5 t=1  W-based=         256/693  target=         256/693  match=True
+K=5 t=2  W-based=             1/6  target=             1/6  match=True
+K=5 t=3  W-based=        256/3003  target=        256/3003  match=True
+K=6 t=1  W-based=       1024/3003  target=       1024/3003  match=True
+K=6 t=2  W-based=             1/7  target=             1/7  match=True
+K=6 t=3  W-based=      1024/15015  target=      1024/15015  match=True
+ALL IDENTITY CHECKS MATCH: True
+
+=== Part 3: symmetry check -- W(r,t) same for ANY subset of size r, not just {0,...,r-1} ===
+A=(1, 3) (r=2) t=2  W(prefix subset)=168  W(this subset)=168  match=True
+A=(2, 4, 0) (r=3) t=3  W(prefix subset)=7200  W(this subset)=7200  match=True
+A=(4,) (r=1) t=1  W(prefix subset)=8  W(this subset)=8  match=True
+A=(0, 1, 2, 3) (r=4) t=2  W(prefix subset)=7920  W(this subset)=7920  match=True
+SYMMETRY-IN-SUBSET-CHOICE CHECKS MATCH: True

@@ -1,0 +1,38 @@
+=== Part 1: critical point of f_K(x) = 2Kx(1-x^2)^(K-1) ===
+K=   1  x*_solve=1.00000000  x*_claimed=1.00000000  match=True   Lambda_direct=2.000000  Lambda_formula=2.000000  match=True   2sqrt(K)=2.000000  Lambda<=2sqrtK: True
+K=   2  x*_solve=0.57735027  x*_claimed=0.57735027  match=True   Lambda_direct=1.539601  Lambda_formula=1.539601  match=True   2sqrt(K)=2.828427  Lambda<=2sqrtK: True
+K=   3  x*_solve=0.44721360  x*_claimed=0.44721360  match=True   Lambda_direct=1.717300  Lambda_formula=1.717300  match=True   2sqrt(K)=3.464102  Lambda<=2sqrtK: True
+K=   5  x*_solve=0.33333333  x*_claimed=0.33333333  match=True   Lambda_direct=2.080984  Lambda_formula=2.080984  match=True   2sqrt(K)=4.472136  Lambda<=2sqrtK: True
+K=  10  x*_solve=0.22941573  x*_claimed=0.22941573  match=True   Lambda_direct=2.820482  Lambda_formula=2.820482  match=True   2sqrt(K)=6.324555  Lambda<=2sqrtK: True
+K=  20  x*_solve=0.16012815  x*_claimed=0.16012815  match=True   Lambda_direct=3.910106  Lambda_formula=3.910106  match=True   2sqrt(K)=8.944272  Lambda<=2sqrtK: True
+K=  50  x*_solve=0.10050378  x*_claimed=0.10050378  match=True   Lambda_direct=6.111328  Lambda_formula=6.111328  match=True   2sqrt(K)=14.142136  Lambda<=2sqrtK: True
+K= 100  x*_solve=0.07088812  x*_claimed=0.07088812  match=True   Lambda_direct=8.609992  Lambda_formula=8.609992  match=True   2sqrt(K)=20.000000  Lambda<=2sqrtK: True
+ALL Lipschitz-lemma checks pass: True
+
+=== Part 1b: is x* really a MAXIMUM (not min/inflection)? Check f'' sign / direct grid scan ===
+K=  1  grid-argmax x=0.999995 (claimed x*=1.000000)  grid-max f=1.999990 (claimed Lambda=2.000000)  match=True
+K=  2  grid-argmax x=0.577350 (claimed x*=0.577350)  grid-max f=1.539601 (claimed Lambda=1.539601)  match=True
+K=  3  grid-argmax x=0.447215 (claimed x*=0.447214)  grid-max f=1.717300 (claimed Lambda=1.717300)  match=True
+K=  5  grid-argmax x=0.333335 (claimed x*=0.333333)  grid-max f=2.080984 (claimed Lambda=2.080984)  match=True
+K= 10  grid-argmax x=0.229415 (claimed x*=0.229416)  grid-max f=2.820482 (claimed Lambda=2.820482)  match=True
+K= 20  grid-argmax x=0.160130 (claimed x*=0.160128)  grid-max f=3.910106 (claimed Lambda=3.910106)  match=True
+Grid-scan confirms x* is the true global max on [0,1]: True
+
+=== Part 2: final assembled arithmetic bound delta(K,n)+Lambda_K*eps(K,n) <= 8K^2/n ===
+K=    1  [delta_coef + Lambda_K*eps_coef] =         7.0000   [with Lambda<=2sqrtK relaxation] =         7.0000   8K^2 =          8   exact<=8K^2: True   relaxed<=8K^2: True
+K=    2  [delta_coef + Lambda_K*eps_coef] =        12.6980   [with Lambda<=2sqrtK relaxation] =        19.1421   8K^2 =         32   exact<=8K^2: True   relaxed<=8K^2: True
+K=    3  [delta_coef + Lambda_K*eps_coef] =        24.0211   [with Lambda<=2sqrtK relaxation] =        36.2487   8K^2 =         72   exact<=8K^2: True   relaxed<=8K^2: True
+K=    5  [delta_coef + Lambda_K*eps_coef] =        57.8908   [with Lambda<=2sqrtK relaxation] =        84.1935   8K^2 =        200   exact<=8K^2: True   relaxed<=8K^2: True
+K=   10  [delta_coef + Lambda_K*eps_coef] =       204.2301   [with Lambda<=2sqrtK relaxation] =       277.8157   8K^2 =        800   exact<=8K^2: True   relaxed<=8K^2: True
+K=   50  [delta_coef + Lambda_K*eps_coef] =      4342.2441   [with Lambda<=2sqrtK relaxation] =      5153.3557   8K^2 =      20000   exact<=8K^2: True   relaxed<=8K^2: True
+K=  100  [delta_coef + Lambda_K*eps_coef] =     16680.6083   [with Lambda<=2sqrtK relaxation] =     18970.0000   8K^2 =      80000   exact<=8K^2: True   relaxed<=8K^2: True
+K= 1000  [delta_coef + Lambda_K*eps_coef] =   1553797.2419   [with Lambda<=2sqrtK relaxation] =   1626054.3520   8K^2 =    8000000   exact<=8K^2: True   relaxed<=8K^2: True
+ALL final-arithmetic checks pass (both exact Lambda_K and the 2sqrt(K) relaxation): True
+
+=== Part 2b: symbolic re-derivation of the final inequality's algebra ===
+K=   1  bracket(exact)=      7.0000  7.5K^2=      7.50  8K^2=         8  bracket<=8K^2: True
+K=   2  bracket(exact)=     19.1421  7.5K^2=     30.00  8K^2=        32  bracket<=8K^2: True
+K=   3  bracket(exact)=     36.2487  7.5K^2=     67.50  8K^2=        72  bracket<=8K^2: True
+K=   5  bracket(exact)=     84.1935  7.5K^2=    187.50  8K^2=       200  bracket<=8K^2: True
+K=  10  bracket(exact)=    277.8157  7.5K^2=    750.00  8K^2=       800  bracket<=8K^2: True
+K= 100  bracket(exact)=  18970.0000  7.5K^2=  75000.00  8K^2=     80000  bracket<=8K^2: True

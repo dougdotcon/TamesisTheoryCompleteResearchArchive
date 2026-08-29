@@ -1,6 +1,24 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-122`: onda 25 frente (c)
+**Última atualização:** 2026-08-29 (`DISC-DEC-124`: onda 26 frente (a)
+`K-FREE-CONVERGENCE-BRIDGE-ATTEMPT` integrada como Estágio 47 —
+**Teorema A**: fechamento COMPLETO incondicional, `K`-livre, com taxa
+explícita — acoplamento `M_n^{(K)}` vs. um novo objeto contínuo `M_K'`
+(limite contínuo literal da maquinaria `K`-livre do Estágio 41), dando
+`sup_x|F_n^{(K)}(x)-F_{M_K'}(x)|\le\delta(K,n)+\Lambda\varepsilon(K,n)`,
+constante POLINOMIAL em `K` (evita o blowup `2^K` nomeado como risco).
+**Reivindicação B** (`M_K'=_dM_K`): PROVADA em `K=1`, NÃO PROVADA para
+`K\ge2` mas fortemente evidenciada (35/35 momentos exatos batendo,
+KS sem rejeição até `K=20`). Teorema Principal, condicional à
+Reivindicação B: `sup_x|F_n^{(K)}(x)-F_K(x)|\le8K^2/n`. Referee
+hostil: SOUND WITH NAMED ISSUES, re-derivou tudo do zero, ~235.000
+trials Monte Carlo frescos zero violações; um achado real mas
+não-crítico (identidade falsa numa observação lateral já abandonada,
+corrigida por correção datada) — não afeta o Teorema A.
+Anterior: `DISC-DEC-123`: onda 26 autorizada — 3 frentes paralelas
+(K-free convergence bridge; exact algebraic closure K=3/K=4; Tauberian
+oscillation bound M-CLUST H1, 7ª onda consecutiva).
+Anterior: `DISC-DEC-122`: onda 25 frente (c)
 `H1-TRANSLATION-STRUCTURE-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — sexta onda
 consecutiva (ondas 20-25) neste gap. Localizou e caracterizou com

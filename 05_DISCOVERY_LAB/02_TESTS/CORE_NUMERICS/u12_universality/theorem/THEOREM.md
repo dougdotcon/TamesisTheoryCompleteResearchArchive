@@ -6790,3 +6790,109 @@ anteriores. Um erro numérico real no Estágio 42 foi encontrado e
 corrigido (ver blockquote datado no Estágio 42). Nenhuma alegação de
 progresso em Millennium Problem; matemática combinatória pura interna
 a este arquivo.
+
+## [Extensão, Estágio 47 — 2026-08-29]
+
+**Onda 26, frente (a), `DISC-DEC-123` (`K-FREE-CONVERGENCE-BRIDGE-ATTEMPT`).**
+Alvo: o Lema R (PROVADO, §8) reduz a ponte distribucional completa
+`M_n(c)\to_dM(c)` a convergência de CDF `F_n^{(K)}(x)\to F_K(x)` em `K`
+fixo, para todo `K` — provada até então apenas pontualmente em
+`K=0,1,2,3,4` via fórmulas fechadas individuais cada vez mais
+complexas (Estágios 27, 40, 42, 43). Mandato: provar convergência,
+idealmente com taxa explícita, para TODO `K\ge0` simultaneamente, via
+argumento `K`-livre — não via mais uma fórmula fechada caso-a-caso.
+
+### O que aconteceu
+
+> **Teorema A: fechamento COMPLETO e incondicional, `K`-livre, com taxa
+> explícita — um acoplamento entre `M_n^{(K)}` e um novo objeto
+> contínuo `M_K'`.** `M_K'` é o limite contínuo literal, `n\to\infty`,
+> da própria maquinaria `K`-livre do Estágio 41 (simplex de
+> comprimentos de arco `\mathrm{Dirichlet}(1,\ldots,1)`, Proposição S
+> aplicada verbatim a pesos contínuos, posições intra-arco contínuas
+> uniformes). Construindo `M_n^{(K)}` e `M_K'` a partir da MESMA fonte
+> de aleatoriedade (`2K` variáveis `\mathrm{Uniform}(0,1)`
+> compartilhadas — arredondamento por teto para o lado discreto,
+> estatísticas de ordem diretas para o lado contínuo), um argumento de
+> acoplamento inteiramente elementar (nenhuma desigualdade de
+> concentração; um lema de que "ordenação é `1`-Lipschitz em
+> `\ell^\infty`" evita que o erro se acumule sobre os `K` passos; um
+> limitante de "zona de descasamento" `K^2/n` via união simples, não
+> `2^K`) prova, incondicionalmente:
+> ```
+> \sup_x|F_n^{(K)}(x)-F_{M_K'}(x)| \le \delta(K,n)+\Lambda\,\varepsilon(K,n),
+>   \delta(K,n):=(3K^2-K)/(2n),\ \varepsilon(K,n):=(2K+1)/n
+> ```
+> — uma constante POLINOMIAL em `K`, não exponencial, exatamente o
+> risco que o mandato havia nomeado e que este argumento evita ao
+> acoplar o vetor `\mathrm{dest}` primitivo diretamente, nunca somando
+> sobre os `2^K` subconjuntos da Proposição S.
+>
+> **Reivindicação B (`M_K'\overset d=M_K`): PROVADA em `K=1`
+> (redução exata a um resultado já provado no arquivo por método
+> independente); NÃO PROVADA para `K\ge2`, mas fortemente evidenciada**
+> — `35/35` momentos racionais exatos batendo (`K=1,\ldots,7`,
+> `t=1,\ldots,5`, duas rotas computacionais independentes, zero
+> discrepância), uma redução parcial a uma sequência combinatória pura
+> `W(r,t)` com formas fechadas já achadas e verificadas em `t=1,2`
+> (mas não além), e testes Kolmogorov–Smirnov sem padrão de rejeição
+> até `K=20`. Combinando o Teorema A com a Reivindicação B (mais um
+> lema elementar do limitante de Lipschitz de `F_K`, `\Lambda_K\le
+> 2\sqrt K`), o Teorema Principal, **condicional à Reivindicação B**:
+> ```
+> \sup_x|F_n^{(K)}(x)-F_K(x)| \le 8K^2/n,\quad n\ge K+1,\ \text{todo }K\ge1
+> ```
+> — a forma exata pedida pelo mandato. O documento rotula esta
+> condicionalidade honestamente em todo lugar (resumo executivo, §6,
+> scorecard) — nunca alega a taxa `K`-livre incondicionalmente para
+> `K\ge2`, apesar da evidência numérica muito forte para a Reivindicação
+> B ser exatamente o tipo de coisa que tentaria uma superalegação.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` de 9 células da tabela de momentos, da
+> identidade `\varphi_K=4^K(K!)^2/(2K+1)!` contra `E[M_K]`, e da fórmula
+> `\Lambda_K` — todas confirmadas.
+>
+> Referee hostil dedicado: re-derivou o Teorema A inteiro à mão a
+> partir das definições cruas antes de ler qualquer script da frente,
+> incluindo o ponto crucial de "nenhuma acumulação sobre `t`"; rodou
+> `~235.000` trials Monte Carlo frescos (zero violações do limitante
+> determinístico) mais uma checagem exata de pmf completa (não só
+> média) contra a Definição 4 literal até `K=3`; reproduziu
+> independentemente os `35` casamentos exatos de momentos, as formas
+> fechadas de `W(r,1)`, `W(r,2)`, e a aritmética final `8K^2`; confirmou
+> os valores `E[T]/n` citados contra `THEOREM.md` por força bruta
+> fresca. Um achado real mas não-crítico: uma observação lateral
+> abandonada na Seção 7 item 3 (uma tentativa de prova via transformada
+> de Laplace, explicitamente rotulada "attempted and abandoned" por
+> outro motivo) continha uma identidade falsa (`1-M_K\overset
+> d=\max(U_i)`); a forma correta é `1-M_K^2\overset d=\max(U_i)`,
+> confirmada pelo referee e reconfirmada pela sessão orquestradora —
+> corrigido por blockquote datado na própria `ATTEMPT.md` da frente;
+> não afeta o Teorema A nem qualquer resultado provado ou evidenciado.
+>
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.**
+> `\varphi_n^{(K)}` (Estágio 46 e anteriores) e todo resultado prévio
+> permanecem intocados; este Estágio é aditivo.
+
+Ver
+`.../theorem/distributional_bridge_attempt/k_free_convergence_bridge_attempt/ATTEMPT.md`
+e
+`.../k_free_convergence_bridge_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+A ponte distribucional completa `M_n(c)\to_dM(c)` agora tem, pela
+primeira vez, uma rota `K`-livre com taxa explícita — `8K^2/n` —
+condicional apenas à Reivindicação B (evidenciada, não provada, para
+`K\ge2`). O Teorema A em si (o acoplamento) é incondicional e vale
+independentemente de qualquer coisa sobre `M_K`. Isto não substitui
+nem enfraquece nenhuma fórmula fechada individual já provada
+(Proposições D0–D4); oferece uma rota alternativa, genuinamente nova,
+que evita ter que encontrar uma fórmula fechada para cada `K`. O único
+item remanescente para fechar totalmente o mandato original é a
+Reivindicação B para `K\ge2` — precisamente diagnosticado (§5.3 da
+`ATTEMPT.md`) como redutível a uma única questão de sequência
+combinatória, não uma obstrução estrutural do tipo Gosper. Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

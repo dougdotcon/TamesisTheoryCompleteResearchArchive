@@ -1,0 +1,34 @@
+Cross-check: E_via_W(K,t) vs E_MKprime_power(K,t) (both exact routes)
+K=1 t=1: via_W=2/3 direct=2/3 OK
+K=1 t=2: via_W=1/2 direct=1/2 OK
+K=1 t=3: via_W=2/5 direct=2/5 OK
+K=2 t=1: via_W=8/15 direct=8/15 OK
+K=2 t=2: via_W=1/3 direct=1/3 OK
+K=2 t=3: via_W=8/35 direct=8/35 OK
+K=3 t=1: via_W=16/35 direct=16/35 OK
+K=3 t=2: via_W=1/4 direct=1/4 OK
+K=3 t=3: via_W=16/105 direct=16/105 OK
+K=4 t=1: via_W=128/315 direct=128/315 OK
+K=4 t=2: via_W=1/5 direct=1/5 OK
+K=4 t=3: via_W=128/1155 direct=128/1155 OK
+K=5 t=1: via_W=256/693 direct=256/693 OK
+K=5 t=2: via_W=1/6 direct=1/6 OK
+K=5 t=3: via_W=256/3003 direct=256/3003 OK
+ALL OK
+
+W(r,t) table:
+t=1: [Fraction(2, 1), Fraction(8, 1), Fraction(36, 1), Fraction(192, 1), Fraction(1200, 1), Fraction(8640, 1), Fraction(70560, 1), Fraction(645120, 1)]
+t=2: [Fraction(6, 1), Fraction(30, 1), Fraction(168, 1), Fraction(1080, 1), Fraction(7920, 1), Fraction(65520, 1), Fraction(604800, 1), Fraction(6168960, 1)]
+t=3: [Fraction(24, 1), Fraction(144, 1), Fraction(960, 1), Fraction(7200, 1), Fraction(60480, 1), Fraction(564480, 1), Fraction(5806080, 1), Fraction(65318400, 1)]
+t=4: [Fraction(120, 1), Fraction(840, 1), Fraction(6480, 1), Fraction(55440, 1), Fraction(524160, 1), Fraction(5443200, 1), Fraction(61689600, 1), Fraction(758419200, 1)]
+
+Trying to recognize W(r,1) and W(r,2) as closed forms in r via sympy rational_interpolate / ratsimp of ratios
+t=1 raw values: [Fraction(2, 1), Fraction(8, 1), Fraction(36, 1), Fraction(192, 1), Fraction(1200, 1), Fraction(8640, 1), Fraction(70560, 1), Fraction(645120, 1), Fraction(6531840, 1)]
+  W(r,t)/r! = [2, 8, 18, 32, 50, 72, 98, 128, 162]
+  W(r+1,t)/W(r,t) = [4, 9/2, 16/3, 25/4, 36/5, 49/6, 64/7, 81/8]
+t=2 raw values: [Fraction(6, 1), Fraction(30, 1), Fraction(168, 1), Fraction(1080, 1), Fraction(7920, 1), Fraction(65520, 1), Fraction(604800, 1), Fraction(6168960, 1), Fraction(68947200, 1)]
+  W(r,t)/r! = [6, 30, 84, 180, 330, 546, 840, 1224, 1710]
+  W(r+1,t)/W(r,t) = [5, 28/5, 45/7, 22/3, 91/11, 120/13, 51/5, 190/17]
+t=3 raw values: [Fraction(24, 1), Fraction(144, 1), Fraction(960, 1), Fraction(7200, 1), Fraction(60480, 1), Fraction(564480, 1), Fraction(5806080, 1), Fraction(65318400, 1), Fraction(798336000, 1)]
+  W(r,t)/r! = [24, 144, 480, 1200, 2520, 4704, 8064, 12960, 19800]
+  W(r+1,t)/W(r,t) = [6, 20/3, 15/2, 42/5, 28/3, 72/7, 45/4, 110/9]

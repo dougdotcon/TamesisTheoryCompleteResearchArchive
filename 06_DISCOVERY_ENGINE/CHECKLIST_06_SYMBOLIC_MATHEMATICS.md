@@ -18,16 +18,16 @@ that does nothing new.
 
 ## Design
 
-- [ ] `VerificationResult` dataclass: `holds: bool`, `method: str` (e.g.
+- [x] `VerificationResult` dataclass: `holds: bool`, `method: str` (e.g.
       `"symbolic_simplify"`, `"numeric_spot_check"`), `detail: str` (the
       simplified difference, or the first failing substitution).
-- [ ] `verify_identity(lhs, rhs, free_symbols=None) -> VerificationResult`:
+- [x] `verify_identity(lhs, rhs, free_symbols=None) -> VerificationResult`:
       uses `sympy.simplify(lhs - rhs)` (or `.equals()` where applicable)
       to decide if two `sympy` expressions are identically equal. Must
       handle the case where `simplify` cannot decide (report `holds=False`
       with `method="symbolic_simplify_inconclusive"` — never silently
       treat "couldn't simplify" as "holds").
-- [ ] `verify_numeric_spot_check(lhs, rhs, substitutions: list[dict],
+- [x] `verify_numeric_spot_check(lhs, rhs, substitutions: list[dict],
       tolerance=1e-9) -> VerificationResult`: evaluates both sides
       numerically at each given substitution and checks agreement within
       `tolerance`. This is the **genuinely different** verification route
@@ -35,7 +35,7 @@ that does nothing new.
       numeric check is not the same proof technique as symbolic
       simplification, satisfying the "second, independent implementation"
       spirit of Module 3's own checklist.
-- [ ] `make_symbolic_identity_test_plan(name, lhs, rhs, free_symbols=None)
+- [x] `make_symbolic_identity_test_plan(name, lhs, rhs, free_symbols=None)
       -> TestPlan`: returns a `TestPlan` (Module 2's type) whose callable
       runs `verify_identity` and returns a dict result compatible with
       `Runner.run()` — this is the actual "wired into the Hypothesis
@@ -44,20 +44,20 @@ that does nothing new.
 
 ## Tests (must all pass)
 
-- [ ] `verify_identity` confirms a true identity (e.g.
+- [x] `verify_identity` confirms a true identity (e.g.
       `(x+1)**2 == x**2 + 2*x + 1`) with `holds=True`.
-- [ ] `verify_identity` correctly rejects a false "identity" (e.g.
+- [x] `verify_identity` correctly rejects a false "identity" (e.g.
       `(x+1)**2 == x**2 + 2*x + 2`) with `holds=False` and a nonzero
       `detail`.
-- [ ] `verify_numeric_spot_check` confirms the same true identity at
+- [x] `verify_numeric_spot_check` confirms the same true identity at
       several substitutions, and correctly flags the false one at the
       substitution where it first diverges.
-- [ ] A claim driven through `Runner.lock()`/`Runner.run()` using a
+- [x] A claim driven through `Runner.lock()`/`Runner.run()` using a
       `TestPlan` from `make_symbolic_identity_test_plan` produces a
       `RunRecord` whose result reflects the identity's truth value —
       i.e. this module genuinely integrates with Stage 1's `Runner`, not
       just its own standalone functions.
-- [ ] Reproducing a true-identity claim via `verify_numeric_spot_check`
+- [x] Reproducing a true-identity claim via `verify_numeric_spot_check`
       as the "second implementation" (Module 3's `Reproducer`) yields a
       match; reproducing a claim whose original symbolic check was WRONG
       (a deliberately buggy `verify_identity` call, e.g. a typo'd `rhs`)
@@ -66,8 +66,8 @@ that does nothing new.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_symbolic.py -v` passes with zero failures.
-- [ ] `verify_identity` never returns `holds=True` for an identity
+- [x] `pytest tests/test_symbolic.py -v` passes with zero failures.
+- [x] `verify_identity` never returns `holds=True` for an identity
       `sympy.simplify` could not actually confirm — grep the
       implementation to confirm there is no fallback that defaults to
       `True` on an inconclusive simplify.

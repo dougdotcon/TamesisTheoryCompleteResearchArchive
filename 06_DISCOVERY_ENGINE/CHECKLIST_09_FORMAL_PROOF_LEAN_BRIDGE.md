@@ -32,12 +32,12 @@ environment — do not assume.
 
 ## Design
 
-- [ ] `LeanFormalizationResult` dataclass: `compiled: bool`,
+- [x] `LeanFormalizationResult` dataclass: `compiled: bool`,
       `stdout: str`, `stderr: str`, `duration_seconds: float`,
       `lean_file_path: str`.
-- [ ] `LeanBridge(scratch_dir=...)`: manages the isolated scratch project
+- [x] `LeanBridge(scratch_dir=...)`: manages the isolated scratch project
       described above (created on first use if absent).
-- [ ] `LeanBridge.formalize(claim_id, lean_source: str, theorem_name: str)
+- [x] `LeanBridge.formalize(claim_id, lean_source: str, theorem_name: str)
       -> LeanFormalizationResult`. **Enforced precondition:** raises
       unless the claim (looked up via Stage 1's `Registry`) is in state
       `CONFIRMED` — this is the literal ROADMAP.md requirement ("a
@@ -51,43 +51,51 @@ environment — do not assume.
       returns the result. A failing compile is reported honestly in
       `compiled=False` with the real compiler output — never swallowed,
       never silently retried with a "fixed" version of the source.
-- [ ] Record the outcome via Stage 1's `Ledger` (one entry per
+- [x] Record the outcome via Stage 1's `Ledger` (one entry per
       `formalize()` call, decision_type e.g. `"LEAN_FORMALIZE"`,
       summarizing compiled/failed) — this module does not invent its own
       persistence for outcomes; it reuses Stage 1's existing ledger.
 
 ## Tests (must all pass)
 
-- [ ] Formalizing a trivial, genuinely true statement (e.g.
+- [x] Formalizing a trivial, genuinely true statement (e.g.
       `theorem <name> : (1:Nat) + 1 = 2 := by decide`, or an equally
       minimal true fact requiring no `Mathlib` import) against a
       `CONFIRMED` claim succeeds: `compiled=True`.
-- [ ] Formalizing a deliberately false statement (e.g.
+- [x] Formalizing a deliberately false statement (e.g.
       `theorem <name> : (1:Nat) + 1 = 3 := by decide`) against a
       `CONFIRMED` claim fails to compile: `compiled=False`, and
       `stderr`/`stdout` contains the real Lean error, not a
       generic/fabricated message.
-- [ ] Formalizing a malformed (syntactically invalid) Lean source also
+- [x] Formalizing a malformed (syntactically invalid) Lean source also
       fails to compile with `compiled=False`, distinctly from the
       false-but-well-formed case (both must be `False`, but confirm the
       module doesn't crash/raise an unhandled exception on syntax
       errors — a compile failure is an expected, handled outcome, not a
       bug).
-- [ ] Attempting `formalize()` on a claim in any state other than
+- [x] Attempting `formalize()` on a claim in any state other than
       `CONFIRMED` (e.g. `DRAFT`, `RESULT`, `REFUTED`) raises, without
       invoking the Lean compiler at all.
-- [ ] A successful `formalize()` call appends exactly one `Ledger` entry
+- [x] A successful `formalize()` call appends exactly one `Ledger` entry
       for that claim; a failed one still appends an entry (recording the
       failure honestly), not silently skipping the ledger on failure.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_lean_bridge.py -v` passes with zero failures.
+- [x] `pytest tests/test_lean_bridge.py -v` passes with zero failures.
       (These tests genuinely shell out to the `lean`/`lake` binary — they
       will be slower than the rest of the suite; that's expected, not a
       bug. If a single compile takes long enough to make the test suite
       impractically slow, say so honestly in this checklist and in the
-      module docstring rather than skip the test.)
-- [ ] `grep -rn "04_FORMAL_RESEARCH_LAB" src/tamesis_discovery_engine/lean_bridge.py`
+      module docstring rather than skip the test.) Verified: 13/13 passed
+      in 2.79s standalone (page cache already warm from the pre-flight
+      probe); the one genuinely slow cost is a one-time ~18s `lean`
+      cold-start the very first time any process invokes it in a fresh
+      environment, not a per-compile cost — see the module docstring's
+      "Timing" section. Not impractically slow.
+- [x] `grep -rn "04_FORMAL_RESEARCH_LAB" src/tamesis_discovery_engine/lean_bridge.py`
       finds no path ever opened for writing — read-only references (if
       any, e.g. citing it in a docstring) are fine; write access is not.
+      Verified: the only two hits are both prose inside the module
+      docstring (lines 18 and 45), neither is ever passed to `open`,
+      `write_text`, `subprocess.run`, or any other write/execute call.

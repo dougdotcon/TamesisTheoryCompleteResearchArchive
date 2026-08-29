@@ -20,22 +20,22 @@ as a tested invariant yet.
 
 ## Design
 
-- [ ] `AtlasEntry` dataclass: `domain` (free text, e.g. `"TRI-RG"`,
+- [x] `AtlasEntry` dataclass: `domain` (free text, e.g. `"TRI-RG"`,
       `"u12_universality"`), `invariant_name`, `value` (float or a
       short formula string — support both, document the convention
       chosen), `source_claim_id`, `verdict` (pulled from the claim's
       terminal state at registration time — `CONFIRMED`/`REFUTED`/
       `INCONCLUSIVE`/`NULL`), `registered_at`.
-- [ ] `Atlas.register(domain, invariant_name, value, source_claim_id) ->
+- [x] `Atlas.register(domain, invariant_name, value, source_claim_id) ->
       AtlasEntry`. **Enforced precondition:** raises unless the claim
       (via Stage 1's `Registry`) is in one of the four terminal states —
       this is the "only catalogue disposed items" discipline. The
       `verdict` field is read from the claim itself, never passed in
       separately (so it can't drift from the claim's actual recorded
       outcome).
-- [ ] `Atlas.search(domain=None, invariant_name=None) -> list[AtlasEntry]`:
+- [x] `Atlas.search(domain=None, invariant_name=None) -> list[AtlasEntry]`:
       filter by either/both/neither.
-- [ ] `Atlas.find_near_duplicates(domain, invariant_name, value,
+- [x] `Atlas.find_near_duplicates(domain, invariant_name, value,
       tolerance) -> list[AtlasEntry]`: within the same `domain`, find
       existing entries whose `value` is within `tolerance` of the given
       one — regardless of `invariant_name` (two different-sounding
@@ -47,24 +47,24 @@ as a tested invariant yet.
 
 ## Tests (must all pass)
 
-- [ ] Registering against a claim in a terminal state succeeds and
+- [x] Registering against a claim in a terminal state succeeds and
       `verdict` matches that claim's actual state.
-- [ ] Registering against a claim in a non-terminal state (e.g. `RESULT`,
+- [x] Registering against a claim in a non-terminal state (e.g. `RESULT`,
       `ADVERSARIAL_REVIEW`) raises, without creating an entry.
-- [ ] `search(domain=...)`, `search(invariant_name=...)`, and both
+- [x] `search(domain=...)`, `search(invariant_name=...)`, and both
       together filter correctly against a small fixture set spanning two
       domains.
-- [ ] `find_near_duplicates` finds an entry within tolerance and does
+- [x] `find_near_duplicates` finds an entry within tolerance and does
       NOT find one just outside tolerance (test both sides of the
       boundary), and correctly scopes the search to the given `domain`
       only (an identical value in a different domain is not a
       duplicate).
-- [ ] Persistence round-trip: entries survive a fresh `Atlas` instance
+- [x] Persistence round-trip: entries survive a fresh `Atlas` instance
       pointed at the same data directory.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_atlas.py -v` passes with zero failures.
-- [ ] `Atlas.register` cannot be called with a fabricated `verdict`
+- [x] `pytest tests/test_atlas.py -v` passes with zero failures.
+- [x] `Atlas.register` cannot be called with a fabricated `verdict`
       argument — confirm its signature has no such parameter (the
       verdict must only ever come from reading the claim itself).

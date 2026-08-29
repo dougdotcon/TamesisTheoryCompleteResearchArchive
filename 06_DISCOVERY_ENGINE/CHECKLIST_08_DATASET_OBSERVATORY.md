@@ -19,24 +19,24 @@ wired up.
 
 ## Design
 
-- [ ] `Dataset` dataclass: `name`, `version`, `source_citation` (free
+- [x] `Dataset` dataclass: `name`, `version`, `source_citation` (free
       text — where this data notionally came from), `checksum` (sha256
       hex of the ingested content), `ingested_at`, `size_bytes`.
-- [ ] `DatasetRegistry.ingest(name, version, source_citation,
+- [x] `DatasetRegistry.ingest(name, version, source_citation,
       content: bytes) -> Dataset`: computes the checksum, persists the
       content under `data/datasets/{name}/{version}/` plus a metadata
       JSON, returns the `Dataset` record. Re-ingesting the same
       `(name, version)` with **different** content must raise (a
       version is immutable once ingested — silently overwriting it would
       break every claim that already cited it as provenance).
-- [ ] `DatasetRegistry.get(name, version=None) -> Dataset`: `version=None`
+- [x] `DatasetRegistry.get(name, version=None) -> Dataset`: `version=None`
       returns the latest ingested version for that name (by
       `ingested_at`).
-- [ ] `DatasetRegistry.verify_integrity(name, version) -> bool`:
+- [x] `DatasetRegistry.verify_integrity(name, version) -> bool`:
       recomputes the checksum of the persisted content and compares to
       the recorded one — detects on-disk corruption/tampering, mirroring
       the same tamper-evidence spirit as Stage 1's Ledger.
-- [ ] `DatasetRegistry.record_usage(claim_id, name, version)`: appends a
+- [x] `DatasetRegistry.record_usage(claim_id, name, version)`: appends a
       provenance record ("claim X declares it used dataset Y@version").
       `DatasetRegistry.used_by(name, version) -> list[claim_id]` and
       `DatasetRegistry.datasets_used_by(claim_id) -> list[Dataset]` are
@@ -44,21 +44,21 @@ wired up.
 
 ## Tests (must all pass)
 
-- [ ] Ingesting a dataset, then `get()` in a fresh `DatasetRegistry`
+- [x] Ingesting a dataset, then `get()` in a fresh `DatasetRegistry`
       instance returns identical metadata (persistence round-trip).
-- [ ] Re-ingesting the same `(name, version)` with the same content is a
+- [x] Re-ingesting the same `(name, version)` with the same content is a
       no-op (or returns the existing record) — re-ingesting with
       **different** content raises.
-- [ ] `verify_integrity` returns `True` untouched, and `False` after the
+- [x] `verify_integrity` returns `True` untouched, and `False` after the
       persisted content file is directly modified on disk.
-- [ ] `get(name)` with no version returns the most recently ingested
+- [x] `get(name)` with no version returns the most recently ingested
       version when multiple versions exist.
-- [ ] `record_usage`/`used_by`/`datasets_used_by` round-trip correctly
+- [x] `record_usage`/`used_by`/`datasets_used_by` round-trip correctly
       for a claim that used two different datasets.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_observatory.py -v` passes with zero failures.
-- [ ] No network call anywhere in this module — grep for `requests`,
+- [x] `pytest tests/test_observatory.py -v` passes with zero failures.
+- [x] No network call anywhere in this module — grep for `requests`,
       `urllib`, `httpx`, `socket` to confirm; all tests use in-memory
       synthetic byte content.

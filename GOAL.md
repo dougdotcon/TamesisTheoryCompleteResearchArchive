@@ -41,7 +41,7 @@ level up to the tool that would run the claims.
 | Stage | Scope | Status | Checklist |
 |---|---|---|---|
 | **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
-| Stage 2 — Expansion | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | 🔧 **IN PROGRESS** — checklists written, build dispatched (2026-08-29) | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md` |
+| **Stage 2 — Expansion** | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 142/142 tests pass; hostile review verdict SOUND, zero findings; Lean bridge genuinely compiles/rejects real Lean source, never touches `04_FORMAL_RESEARCH_LAB/` | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md`, all boxes checked |
 | Stage 3 — Product suite | 8 named products | ⏸ Not started — blocked on Stage 2 | not yet created |
 | Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
 
@@ -49,6 +49,23 @@ level up to the tool that would run the claims.
 
 ## Log (most recent first)
 
+- **2026-08-29** — Stage 2 build completed and independently verified. Workflow
+  `wf_90a151d3-ff5` ran 7 agents (5 module builds in true parallel, 1 integration,
+  1 hostile review) with zero errors and — unlike Stage 1 — zero findings, so no
+  fix pass was needed. Result: 142/142 tests pass (78 from Stage 1, unmodified and
+  still green, plus 64 new). Notable: the Lean Bridge module (`lean_bridge.py`)
+  genuinely shells out to the real `lean` compiler — verified by the reviewer and
+  independently re-confirmed by me (a true statement compiles, a false one fails
+  with the actual Lean error message, a non-`CONFIRMED` claim raises without ever
+  invoking the compiler) — and never writes into `04_FORMAL_RESEARCH_LAB/` (grepped
+  clean, and `git status` on that directory confirms it is untouched). The Dataset
+  Observatory has zero network-call machinery (grepped clean), as scoped. The
+  Symbolic Mathematics module's numeric-spot-check route caught a deliberately
+  wrong symbolic claim as a genuine `MISMATCH` during its own build, proving its
+  two verification methods are actually independent, not the same check twice.
+  All 6 Stage 2 checklists now fully checked off with evidence. **Stage 2 is
+  done.** Next: reassess Stage 3 (the 8-product suite) per the roadmap's own
+  dependency rule, now that both Stage 1 and Stage 2 are real and load-bearing.
 - **2026-08-29** — Wrote 6 detailed Stage 2 checklists (`CHECKLIST_06_SYMBOLIC_MATHEMATICS.md`,
   `CHECKLIST_07_MONTE_CARLO_LAB.md`, `CHECKLIST_08_DATASET_OBSERVATORY.md`,
   `CHECKLIST_09_FORMAL_PROOF_LEAN_BRIDGE.md`, `CHECKLIST_10_UNIVERSALITY_ATLAS.md`,

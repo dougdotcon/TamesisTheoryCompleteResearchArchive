@@ -16,15 +16,15 @@ discipline structurally easy to follow, not just possible.
 
 ## Design
 
-- [ ] `MonteCarloResult` dataclass: `estimate: float`, `stderr: float`,
+- [x] `MonteCarloResult` dataclass: `estimate: float`, `stderr: float`,
       `n_trials: int`, `seed: int`.
-- [ ] `run_estimator(fn, n_trials, seed) -> MonteCarloResult`: runs `fn`
+- [x] `run_estimator(fn, n_trials, seed) -> MonteCarloResult`: runs `fn`
       (a callable taking a seeded `numpy.random.Generator` and returning
       one scalar sample) `n_trials` times, returns the sample
       mean/standard-error. Must use an injected/seeded RNG (`np.random.
       default_rng(seed)`), never an unseeded global RNG — reproducibility
       is the whole point.
-- [ ] `triangulate(estimators: list[tuple[str, callable]], n_trials, seed,
+- [x] `triangulate(estimators: list[tuple[str, callable]], n_trials, seed,
       tolerance) -> TriangulationResult`: runs 2+ **independently
       implemented** estimators for the same quantity (e.g. two different
       sampling schemes) and checks their point estimates agree within
@@ -32,7 +32,7 @@ discipline structurally easy to follow, not just possible.
       naive point comparison that would be flaky by construction).
       `TriangulationResult` reports each estimator's result and whether
       they triangulate (`agrees: bool`).
-- [ ] `convergence_check(fn, sample_sizes: list[int], target, tolerance,
+- [x] `convergence_check(fn, sample_sizes: list[int], target, tolerance,
       seed) -> ConvergenceResult`: runs `run_estimator` at each size in
       `sample_sizes` (increasing), confirms the error against `target`
       is non-increasing (allowing minor MC noise via a declared slack)
@@ -42,26 +42,26 @@ discipline structurally easy to follow, not just possible.
 
 ## Tests (must all pass)
 
-- [ ] `run_estimator` on a synthetic estimator with known ground truth
+- [x] `run_estimator` on a synthetic estimator with known ground truth
       (e.g. estimating `pi` via random points in the unit square) with a
       fixed seed is **exactly reproducible** across two separate calls
       with the same seed, and its estimate is within a few stderrs of
       the true value at a reasonably large `n_trials`.
-- [ ] `triangulate` with two independently-coded estimators of the same
+- [x] `triangulate` with two independently-coded estimators of the same
       known quantity (different sampling schemes, same target) reports
       `agrees=True`.
-- [ ] `triangulate` with one estimator deliberately biased (e.g. samples
+- [x] `triangulate` with one estimator deliberately biased (e.g. samples
       from the wrong distribution) reports `agrees=False`, and the
       report identifies which estimator diverged.
-- [ ] `convergence_check` on a consistent estimator with growing sample
+- [x] `convergence_check` on a consistent estimator with growing sample
       sizes shows decreasing error and reports `converged=True`; on a
       biased/inconsistent estimator (error does not shrink with `n`) it
       reports `converged=False`.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_montecarlo.py -v` passes with zero failures.
-- [ ] No function in this module uses `np.random` without an explicit,
+- [x] `pytest tests/test_montecarlo.py -v` passes with zero failures.
+- [x] No function in this module uses `np.random` without an explicit,
       caller-supplied seed — grep to confirm (this is the guard against
       silently-flaky tests downstream, in any module that later builds
       on this one).

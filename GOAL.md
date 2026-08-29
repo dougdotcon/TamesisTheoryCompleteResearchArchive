@@ -43,7 +43,7 @@ level up to the tool that would run the claims.
 | **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
 | **Stage 2 — Expansion** | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 142/142 tests pass; hostile review verdict SOUND, zero findings; Lean bridge genuinely compiles/rejects real Lean source, never touches `04_FORMAL_RESEARCH_LAB/` | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md`, all boxes checked |
 | **Stage 3 — Product suite** | 8 named products | 🔧 **PARTIALLY DONE** — 4/8 already covered (Stage 1/2), Stage 3a's 2 tractable new products ✅ built+tested+reviewed (2026-08-29), 2/8 (Simulation Lab, Observatory live-feed) honestly deferred — see scoping note below | `06_DISCOVERY_ENGINE/CHECKLIST_11_HYPOTHESIS_ENGINE.md`, `CHECKLIST_12_MATHEMATICAL_DISCOVERY_ENGINE.md`, `CHECKLIST_00C_STAGE3A_INTEGRATION.md`, all boxes checked |
-| Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
+| **Stage 4 — Tamesis OS** | Unified architecture | ⏸ **Blocked on a decision, not on effort** — see note below | n/a |
 
 ---
 
@@ -77,6 +77,41 @@ candidates on its own). Simulation Lab and the live-feed half of
 Observatory remain **catalogued as open**, not silently dropped — the
 same honest-non-closure discipline this archive already applies to
 mathematical results, applied here to software scope.
+
+---
+
+## Stage 4 feasibility note (2026-08-29)
+
+Everything built so far (Stages 1, 2, 3a) shares one property: it is a
+self-contained Python package, testable with nothing more than `pytest`
+in this sandbox, with no persistent external service, no network
+dependency, and no infrastructure decision baked in. That is what made
+independent verification (by both the hostile-review agents and this
+orchestrating session) actually possible and honest at every step.
+
+`ROADMAP.md` §1 Stage 4 is different in kind, not just degree: a
+"unified architecture" with three labs sharing a common substrate, and
+a named candidate stack — PostgreSQL, FastAPI, Celery, Redis, Docker —
+that the roadmap itself calls **"unevaluated... None of this is
+committed."** Actually standing that up means running persistent
+services, opening network ports, and making real infrastructure and
+technology choices that were explicitly left open, not deferred by
+accident. Picking a stack unilaterally and deploying it goes beyond
+"build the next tractable module the same way as the last eleven" — it
+is a different class of decision, and this build has otherwise been
+careful to make only decisions that could be independently verified and
+reversed cheaply if wrong.
+
+**This is not a refusal, and Stage 4 is not abandoned** — it is
+correctly reported as blocked on a decision (which stack, whether to run
+persistent infrastructure at all in a session like this one, whether a
+lighter-weight architecture would serve the same purpose) rather than on
+remaining effort. Continuing the same autonomous-scope-call pattern used
+for Stages 1–3a would mean guessing at infrastructure commitments the
+roadmap's own author explicitly declined to make — the wrong place to
+apply "make the reasonable call and keep going." Flagging it here,
+concretely, is the honest alternative to either quietly skipping it or
+building something nobody asked for.
 
 ---
 

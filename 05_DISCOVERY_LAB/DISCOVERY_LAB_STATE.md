@@ -1,6 +1,22 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-136`: onda 29 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-137`: onda 29 frente (c)
+`K5-EXACT-CLOSURE-ATTEMPT` integrada como Estágio 53 em `THEOREM.md`.
+`K=5` FECHADO no tier exato — `M_5\approx0{,}6968`, raiz exata de um
+quártico irredutível, `|F_n^{(5)}(x)-F_5(x)|\le M_5/n` para todo
+`n\ge7`, mesmo padrão `n_0=K+2` de `K=2,3,4`, sem nenhuma "ruga"
+estilo-`K=4`. Trabalho genuinamente novo: derivar a Proposição D5 do
+zero (nenhuma CDF fechada para `K=5` concreto existia antes desta
+frente), auto-validada e confirmada contra `26/26` casamentos exatos
+de enumeração exaustiva (`n=5,\ldots,8`). Referee hostil: **SOUND —
+ACCEPT**, re-derivou a Proposição D5 com pipeline próprio, confirmou
+todos os limiares de eliminação por resultante a cada dígito; um
+achado BAIXO puramente expositivo (cofatores menores não descartados
+explicitamente, confirmado que não escondem raiz maior), corrigido
+por nota datada. A série exata de constantes de taxa finito-`n` agora
+se estende a `K=0,\ldots,5`. **Onda 29 agora com 3/3 frentes
+integradas — fechamento completo.**
+Anterior: `DISC-DEC-136`: onda 29 frente (a)
 `CU-DIRECT-PROOF-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — décima onda
 consecutiva (20-29) neste gap. **`(U)` está PROVADO** — condicional a

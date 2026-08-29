@@ -1,0 +1,74 @@
+======================================================================
+STEP 1: g5(x) extraction
+======================================================================
+deg_n Num5 = 9   deg_n Dn5 = 10
+g5(x) = 10*x**10 - 15*x**9 - 20*x**8 + 40*x**7 - 30*x**5 + 20*x**4 - 10*x**2 + 5*x
+Claimed factorization diff: 0
+g5 factorization CONFIRMED (independent).
+
+Sign check g5(x)>=0 on [0,1]: factor 2x^2-x+1 discriminant = -7 (negative => always positive)
+g5(x) >= 0 sampled densely on [0,1]. PASSED.
+g5(0)=g5(1)=0 CONFIRMED.
+
+======================================================================
+STEP 2: g5'(x) factorization, x5*, M5, minimal polynomial
+======================================================================
+g5'(x) factored (independent) = 5*(x - 1)**3*(x + 1)**2*(20*x**4 - 7*x**3 + x**2 + 3*x - 1)
+Claimed g5' factorization diff: 0
+g5' factorization CONFIRMED (independent).
+Interior quartic 20x^4-7x^3+x^2+3x-1 irreducible over Q: True
+All real roots of g5'(x): [-1.00000000000000, -1.00000000000000, -0.509167962464232, 0.309430603103057, 1.00000000000000, 1.00000000000000, 1.00000000000000]
+x5* = 0.309430603103057048428294338496
+M5  = 0.696803198946355211196876665384
+minimal polynomial of M5 (independent sp.minimal_polynomial call):
+  1024000000000*t**4 - 887007704239*t**3 - 7821482127360*t**2 + 14635525734400*t - 6341787648000
+Irreducible over Q: CONFIRMED.
+Diff vs target's claimed minimal polynomial: 0
+Minimal polynomial of M5 MATCHES target's claim EXACTLY (independent).
+
+mpmath cross-check (zero sympy symbolic machinery, 50 dps):
+  x5* (mpmath) = 0.30943060310305704842829433849615063336207421634856
+  M5  (mpmath) = 0.6968031989463552111968766653834790009004772802181
+  M5  (sympy)  = 0.69680319894635521119687666538347900090047728021810
+  mpmath and sympy M5 AGREE to 40+ digits. PASSED.
+
+======================================================================
+STEP 3: boundary threshold n0_boundary (h5(n,1) = M5 crossing)
+======================================================================
+h5(n,1) = 120/((n - 4)*(n - 3)*(n - 2)*(n - 1))
+real roots of boundary-crossing equation: [-1.2961979658945123566, 6.2961979658945123566]
+n0_boundary = 6.2961979658945123566
+CONFIRMED: 6 < n0_boundary < 7 (matches claimed ~6.2962).
+
+======================================================================
+STEP 4: interior resultant elimination -- UPPER bound (target m=M5)
+======================================================================
+Res_x(F1,F2) computed in 4.6s, degree in n: 180  degree in m: 9
+Res_m(R, minpoly(M5)) computed in 1.4s
+factor_list computed in 133.0s
+  factor deg: 1  mult: 316
+  factor deg: 3  mult: 4
+  factor deg: 388  mult: 1
+real_roots computed in 142.2s, count=32
+Largest real root (upper interior threshold): 4.1433247158401868693
+CONFIRMED: interior upper threshold < boundary threshold n0_boundary.
+
+======================================================================
+STEP 5: interior resultant elimination -- LOWER bound (target m=-M5)
+======================================================================
+Res_m(R, minpoly(-M5)) computed in 1.5s
+factor_list computed in 177.3s
+  factor deg: 1  mult: 316
+  factor deg: 3  mult: 4
+  factor deg: 392  mult: 1
+real_roots computed in 133.6s, count=30
+Largest real root (lower interior threshold): 4.3806034572679090712
+CONFIRMED: interior lower threshold < boundary threshold n0_boundary too.
+=> NO K=4-style 'wrinkle' possible: neither interior threshold exceeds
+   the boundary threshold, so the boundary term alone pins n0, and
+   there is no out-of-domain-branch inflation issue to diagnose here.
+
+======================================================================
+FINAL: n0 = max(boundary, upper_interior, lower_interior) = 6.2961979658945123566
+       => smallest integer n0 with the theorem's domain = 7
+======================================================================

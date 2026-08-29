@@ -7455,3 +7455,85 @@ frente nesta linha, dado que agora duas rotas dentro da maquinaria
 `A_k`/`2F0` foram exploradas e ambas encontraram paredes estruturais
 genuínas. Nenhuma alegação de progresso em Millennium Problem;
 matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 53 — 2026-08-29]
+
+**Onda 29, frente (c), `DISC-DEC-134` (`K5-EXACT-CLOSURE-ATTEMPT`).**
+Alvo: estender o método de eliminação por resultante do Estágio 48
+(que fechou `K=2,3,4` no tier exato) para `K=5`.
+
+### O que aconteceu
+
+> **`K=5` FECHADO no tier exato — nenhuma obstrução algébrica nova.**
+> `M_5 := 0{,}69680319894635521119687666538347900090047728\ldots`, raiz
+> exata (a única no intervalo `(0,1)`) do quártico irredutível
+> `1024000000000t^4-887007704239t^3-7821482127360t^2+
+> 14635525734400t-6341787648000`. O limitante
+> `|F_n^{(5)}(x)-F_5(x)|\le M_5/n` vale EXATAMENTE para todo `n\ge7`,
+> `x\in[0,1]$` — mesmo padrão de `n_0=K+2` que `K=2,3,4` (`n_0=4,5,6,7`).
+>
+> `g_5(x)=5x(x-1)^4(x+1)^3(2x^2-x+1)` (grau `10=2K`, exatamente o
+> padrão); `g_5'(x)=5(x-1)^3(x+1)^2(20x^4-7x^3+x^2+3x-1)` fatora-se
+> LIMPAMENTE — o quártico interior `20t^4-7t^3+t^2+3t-1` é irredutível
+> sobre `\mathbb Q`, mesmo padrão de `K=3,4`. O trabalho genuinamente
+> novo desta frente não foi a eliminação por resultante em si (que
+> fechou pelo mesmo método, sem nenhuma "ruga" estilo-`K=4`), mas
+> descobrir que nenhuma CDF fechada para `K=5` existia em lugar nenhum
+> do arquivo (os Estágios 44/45 certificaram apenas não-existência para
+> `K` simbólico, deixando `K` concreto aberto) — esta frente derivou a
+> Proposição D5 do zero, instanciando a maquinaria geral-`K` já citada
+> (Proposição S, Teorema da Decomposição, fórmula `InnerJ` de Camada-1)
+> em `K=5`, auto-validada ao reproduzir exatamente D1–D4 antes de
+> confiar nela, e confirmada independentemente contra uma enumeração
+> exaustiva fresca da Definição 4 em `n=5,6,7,8` (`26/26` casamentos
+> exatos, incluindo um `n=8` com `1.321.205.760` configurações, rodado
+> duas vezes de forma independente).
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da fatoração de `g_5`, da fatoração de
+> `g_5'`, da irredutibilidade do quártico interior, da seleção da raiz
+> em `(0,1)`, e do polinômio mínimo de `M_5` (avaliado em `M_5` a
+> `\sim23` dígitos) — zero discrepância.
+>
+> Referee hostil dedicado: re-derivou a Proposição D5 do zero a partir
+> da maquinaria geral-`K` citada (não os scripts da frente), escrevendo
+> seu próprio pipeline que reproduz D1–D4 exatamente (checagem
+> genuína, não circular) e casa com D5 desta frente sem diferença
+> simbólica; confirmou `g_5`, `g_5'`, `M_5` e seu quártico mínimo de
+> forma independente; re-derivou a construção completa de eliminação
+> por resultante ponta a ponta (limiar de fronteira, limiares internos
+> superior/inferior) — todos batendo a cada dígito mostrado; foi além
+> do próprio documento da frente e verificou que os cofatores MENORES
+> de `S(n)` não escondem uma raiz real maior (não descartado
+> explicitamente pela frente, ao contrário do documento predecessor de
+> `K=4`) — confirmado que não escondem. Um achado real, de severidade
+> BAIXA, puramente expositivo (Finding F1): a omissão de checar
+> explicitamente os cofatores menores, corrigida por nota datada.
+> Nenhum erro de correção foi encontrado em nenhuma alegação —
+> Proposição D5, `g_5`, `M_5` e seu polinômio mínimo, ambos os
+> limiares de eliminação por resultante, o limiar de fronteira, o
+> `n_0=7` final, e o diagnóstico "sem ruga estilo-`K=4`" — todos
+> sobrevivem à reconstrução independente.
+>
+> **Veredito: SOUND — ACCEPT for catalogue** (um achado expositivo,
+> nenhum de correção). A série de constantes de taxa finito-`n` exatas
+> agora se estende a `K=0,\ldots,5`.
+
+Ver
+`.../sharp_rate_constants_attempt/exact_algebraic_closure_attempt/k5_exact_closure_attempt/ATTEMPT.md`
+e
+`.../exact_algebraic_closure_attempt/k5_exact_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+A série exata de constantes de taxa finito-`n`, já em `K=0,\ldots,4`
+desde o Estágio 48, agora inclui `K=5`: `M_5\approx0{,}6968`, `n_0=7`,
+sem nenhuma ruga que exigisse um patch exaustivo por-`n` (ao contrário
+de `K=4`). Isto confirma que o método de eliminação por resultante
+generaliza de forma robusta pelo menos até `K=5`, e que a obstrução do
+Estágio 46 era mesmo específica ao método antigo (um problema de
+sinal), não uma barreira algébrica genuína em `K` crescente. Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

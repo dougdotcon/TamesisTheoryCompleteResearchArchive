@@ -1,0 +1,124 @@
+======================================================================
+STEP 1: D5(n,k), this front's own derivation (cited from
+        d5_derivation.py -- transcribed here, not re-run)
+======================================================================
+D5(n,k) = k(k+1)*Bracket5(n,k) / [n^6(n-1)(n-2)(n-3)(n-4)]
+1 - D5(n,n-1) [=P(T=n)] = 120/n**5
+Matches predicted K!/n^K = 5!/n^5 = 120/n^5 exactly. PASSED.
+
+======================================================================
+STEP 2: g5(x), critical point, exact M5
+======================================================================
+deg_n N5(n,x): 9    deg_n D5(n): 10
+g5(x) [our derivation] = 10*x**10 - 15*x**9 - 20*x**8 + 40*x**7 - 30*x**5 + 20*x**4 - 10*x**2 + 5*x
+g5(x) [factored] = 5x(x-1)^4(x+1)^3(2x^2-x+1)   MATCH. PASSED.
+g5'(x) factored: 5*(x - 1)**3*(x + 1)**2*(20*x**4 - 7*x**3 + x**2 + 3*x - 1)
+x5* = 0.309430603103057048428294338496
+M5  = 0.696803198946355211196876665384
+minimal polynomial of x5*: 20*t**4 - 7*t**3 + t**2 + 3*t - 1  (degree 4 )
+minimal polynomial of M5 : 1024000000000*t**4 - 887007704239*t**3 - 7821482127360*t**2 + 14635525734400*t - 6341787648000  (degree 4 )
+
+NOTE: g5' factors CLEANLY as 5(x-1)^3(x+1)^2(20x^4-7x^3+x^2+3x-1) --
+again reducing to an IRREDUCIBLE QUARTIC after stripping trivial
+roots x=+-1, exactly the K=3,4 pattern. No new Galois obstruction
+appears at K=5.
+
+Matches mpmath-independent M5 (k5_mpmath_crosscheck.py) to 25+ digits. PASSED.
+
+======================================================================
+STEP 3: boundary values h5(n,0), h5(n,1) -- exact closed forms
+======================================================================
+h5(n,0) = 0
+h5(n,1) = 120/((n - 4)*(n - 3)*(n - 2)*(n - 1))
+h5(n,1) is POSITIVE for n>4 (matches K=3's sign, unlike K=4's
+negative boundary) -> the UPPER bound is the delicate boundary
+direction; the LOWER bound is trivial at x=1 for all n>4.
+n0_boundary (h5(n,1)=M5 crossing) = 6.2961979658945123566
+Confirmed: 6 < n0_boundary < 7 -> h5(n,1) < M5 exactly for every
+integer n >= 7 (h5(6,1)=1 > M5 confirms n=6 genuinely fails).
+h5(6,1) = 1   (violates upper bound, n=6 excluded)
+h5(7,1) = 1/3  = 0.33333333333333333333    M5 = 0.69680319894635521120
+h5(7,1) < M5  CONFIRMED (exact).
+
+======================================================================
+STEP 4: interior critical points, UPPER bound (target m=M5)
+======================================================================
+elapsed Res_x(F1,F2): 3.62 s
+elapsed Res_m(R, minpoly_M5): 1.39 s
+elapsed factor_list: 126.12 s
+  factor degree: 1  mult: 316
+  factor degree: 3  mult: 4
+  factor degree: 388  mult: 1
+elapsed real_roots: 159.52 s   (#roots: 32 )
+largest real root (upper-bound interior threshold): 4.1433247158401868693
+Confirmed: < 5 (comfortably below the boundary threshold ~6.30).
+Since 'no real x at all' certainly implies 'no real x in [0,1]',
+this rigorously rules out an interior [0,1] critical point
+achieving h5=M5 for every real n greater than this threshold.
+
+======================================================================
+STEP 5: combine -- exact closure, UPPER bound (explicit IVT)
+======================================================================
+a(n):=max_x h5(n,x) is continuous in real n>4 (Berge's maximum
+theorem: max of a jointly continuous function over the compact
+set x in [0,1]).
+a(7) = max_x h5(7,x) = 0.3333333333333333333333333  at x* = 1.00000000000000
+a(7) < M5  CONFIRMED (exact).
+
+EXPLICIT IVT ARGUMENT (stated completely, from the start):
+For real n > n0_upper := max(n0_boundary, max_root_upper), a(n)
+never equals M5 (boundary: STEP 3, valid for n>n0_boundary=6.30;
+interior: STEP 4, valid for n>max_root_upper). a(n) is continuous
+on this connected interval, and a(7) < M5 at one point of it.
+By the Intermediate Value Theorem, a CONTINUOUS function that is
+NEVER EQUAL to M5 on a connected interval, and is < M5 at one
+point of that interval, is < M5 at EVERY point of that interval
+(if it were >= M5 anywhere else, continuity + never-equal would
+force it to cross M5 somewhere in between, a contradiction).
+Hence a(n) < M5 for ALL real n > n0_upper, in particular for
+every integer n in the claimed domain.
+
+>>> UPPER-BOUND THEOREM (K=5, EXACT): for all integer n>=7 and
+>>> x in [0,1]:  n*Delta_n(x) <= M5,  M5 = 0.696803198946355211196876665384
+
+======================================================================
+STEP 6: interior critical points, LOWER bound (target m=-M5)
+======================================================================
+elapsed Res_m(R, minpoly(-M5)): 1.95 s
+elapsed factor_list: 186.87 s
+  factor degree: 1  mult: 316
+  factor degree: 3  mult: 4
+  factor degree: 392  mult: 1
+elapsed real_roots: 139.06 s  (#roots: 30 )
+largest real root (lower-bound interior threshold): 4.3806034572679090712
+Confirmed: < 5 (comfortably below the boundary threshold ~6.30 and
+below the domain start n=7 -- NO exhaustive per-n patch needed,
+unlike K=4's Step 7 wrinkle).
+
+======================================================================
+STEP 7: combine -- exact closure, LOWER bound (explicit IVT)
+======================================================================
+min_x h5(7,x) = -0.1712100333266171573806384  at x* = 0.615663044136357
+min_x h5(7,x) > -M5  CONFIRMED (exact).
+
+SAME explicit IVT argument as STEP 5, mirrored: b(n):=min_x h5(n,x)
+is continuous in real n>4 (Berge); h5(n,1)=120/[(n-1)(n-2)(n-3)(n-4)]
+>0>-M5 for all n>4 (boundary, trivial in this direction); interior
+threshold from STEP 6 rules out any interior critical value=-M5 for
+real n greater than max_root_lower. b(n) never equals -M5 on the
+connected interval n>max(4,max_root_lower), and b(7)>-M5 at one
+point of it -> by IVT, b(n) > -M5 for ALL real n in that interval,
+in particular every integer n>=7.
+
+>>> LOWER-BOUND THEOREM (K=5, EXACT): for all integer n>=7 and
+>>> x in [0,1]:  n*Delta_n(x) >= -M5.
+
+======================================================================
+FINAL THEOREM (K=5, EXACT CLOSURE):
+for all integer n>=7 and x in [0,1]:
+   |F_n^{(5)}(x) - F_5(x)| <= M5/n,
+   M5 = 0.6968031989463552111968766653834790009005
+   (exact real root of 1024000000000*t**4 - 887007704239*t**3 - 7821482127360*t**2 + 14635525734400*t - 6341787648000 )
+Matches K=2,3,4's tier of closure (exact constant, not a
+near-sharp inflated one).
+======================================================================

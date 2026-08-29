@@ -1,0 +1,38 @@
+======================================================================
+SELF-VALIDATION: reproduce D1, D2, D3, D4 EXACTLY (symbolic)
+======================================================================
+K=1 vs Proposicao D1 (Estagio 27): EXACT MATCH.
+K=2 vs Proposicao D2 (Estagio 42): EXACT MATCH.
+K=3 vs Proposicao D3 (Estagio 40): EXACT MATCH.
+K=4 vs Proposicao D4 (Estagio 43): EXACT MATCH.
+
+All four validations passed in 4.34s total.
+Pipeline (InnerJ / S_r / final assembly), including BOTH the
+r<K and r=K InnerJ branches (both exercised at every K tested,
+even K=1), is now trusted for K=5.
+
+======================================================================
+PROPOSICAO D5 (K=5, this front's own derivation)
+======================================================================
+    S_0(n,5,k) computed in 0.11s
+    S_1(n,5,k) computed in 0.54s
+    S_2(n,5,k) computed in 0.86s
+    S_3(n,5,k) computed in 0.76s
+    S_4(n,5,k) computed in 1.93s
+    S_5(n,5,k) computed in 0.81s
+
+Total elapsed for K=5: 5.15s
+
+D5(n,k) = 
+ NUM = k**10 - 15*k**9 - 5*k**8*n**2 + 30*k**8*n + 90*k**8 + 40*k**7*n**2 - 260*k**7*n - 270*k**7 + 10*k**6*n**4 - 100*k**6*n**3 + 145*k**6*n**2 + 810*k**6*n + 393*k**6 - 30*k**5*n**4 + 340*k**5*n**3 - 875*k**5*n**2 - 974*k**5*n - 135*k**5 - 10*k**4*n**6 + 120*k**4*n**5 - 475*k**4*n**4 + 450*k**4*n**3 + 910*k**4*n**2 - 60*k**4*n - 340*k**4 - 20*k**3*n**5 + 200*k**3*n**4 - 640*k**3*n**3 + 475*k**3*n**2 + 1090*k**3*n + 420*k**3 + 5*k**2*n**8 - 60*k**2*n**7 + 275*k**2*n**6 - 630*k**2*n**5 + 825*k**2*n**4 - 350*k**2*n**3 - 1050*k**2*n**2 - 780*k**2*n - 144*k**2 + 5*k*n**8 - 60*k*n**7 + 265*k*n**6 - 490*k*n**5 + 190*k*n**4 + 300*k*n**3 + 360*k*n**2 + 144*k*n
+ DEN = 120*n**5*binomial(n, 5)
+
+Sanity checks:
+  1 - D5(n,n-1) [=P(T=n)] = 120/n**5
+  matches predicted K!/n^K = 5!/n^5 = 120/n^5.  PASSED.
+  D5(n,0) = D5(n,-1) = 0 (structural k(k+1) factor).  PASSED.
+  D5(n,.) monotonic non-decreasing in k, n=5..10.  PASSED.
+
+DONE. Proposicao D5 derived and self-consistency-checked.
+Independent cross-check against fresh brute-force Definition 4
+(n=5,6,7, every k): see bruteforce_crosscheck_D5.py/.log.

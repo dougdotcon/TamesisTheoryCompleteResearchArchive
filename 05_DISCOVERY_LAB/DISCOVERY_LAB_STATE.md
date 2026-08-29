@@ -1,6 +1,23 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-150`: onda 33 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-151`: onda 34 autorizada
+— 1 frente única (não 2-3, evitando preenchimento por número), após
+survey de portfolio dedicado que reconfirmou (quarta vez consecutiva,
+ondas 31-34): toda linha fora de `u12_universality` permanece
+formalmente fechada; `H1`/M-CLUST(b) permanece corretamente
+descansado. Frente `GAMMA-CROSSOVER-MATCHED-ASYMPTOTICS-ATTEMPT` —
+ataca o "somatório de crossover" que a frente (b) da onda 33 isolou
+precisamente mas não resolveu:
+`crossover(n,γ):=Σ_{m=0}^n[term_m(n,γ)-T_prof(m/√n,γ)]`, provado
+`O(1)` (não `o(1)`), via um argumento genuíno de assintótica casada
+entre a região mesoscala externa (agora totalmente caracterizada,
+Estágios 56-59) e a região interna `m=O(1)` fixo, governada por uma
+taxa local diferente `c(γ)`. Não é o item 4 completo (montagem
+conjunta com resto `o(1)` sobre todo o domínio, ainda "profundidade
+comparável a fechar o Gap 1"), mas a peça específica que os itens 1-3
+não conseguiram alcançar por construção. Bloco de seed reservado:
+`20260954000-20260954999`, grep-confirmado sem uso.
+Anterior: `DISC-DEC-150`: onda 33 frente (b)
 `GAMMA-OUTER-SUM-POISSON-ATTEMPT` integrada como Estágio 59 em
 `THEOREM.md`. `C(γ)` continua inteiramente ABERTO. Nova correção
 fechada via soma de Poisson para o hiato soma-discreta-vs-integral-

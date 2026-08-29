@@ -1184,6 +1184,75 @@ flowchart TD
 > e
 > `.../tauberian_oscillation_bound_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-127`.]** Onda 27 frente (a)
+> (`H1-U2-BOUNDARY-LAYER-ATTEMPT`), **primeiro ataque dedicado a `(U2)`
+> especificamente** neste gap — uma rotação deliberada da sessão
+> orquestradora, dado que 7 ondas consecutivas (20-26) haviam mirado
+> `(U1)` por 5 técnicas distintas sem tocar `(U2)`. Alvo: o enunciado
+> clássico de camada-limite/assintótica-casada de `(U2)`
+> (`\Psi(x,g)\to F(x)` uniformemente em `x` quando `g\to\infty`,
+> derivado diretamente da integral de Watson `(STAR)`, não assumido).
+>
+> **Progresso real, mas `(U2)` permanece ABERTO.** Duas contribuições
+> novas: (1) uma forma fechada nova para a expansão "externa"
+> (outer) do próprio `W_inf(x;\varepsilon)`,
+> `\chi_n(x)=(\gamma_n-\gamma_{n-1})R^{(n-1)}(x)` (`n=1,\ldots,4`),
+> PROVADA simbolicamente a partir de conteúdo já estabelecido no
+> registro (a relação `(W\text{-}F)`, generalizando as ODEs de `\psi_n`
+> do registro — antes válidas só em `x=0` — para todo `x`), e
+> auto-consistentemente re-verificada ao re-derivar a lei publicada de
+> 4 termos exatamente por esta rota; (2) diagnóstico estrutural de que a
+> camada-limite "interna" (inner) em `x=\varepsilon u` é *degenerada* —
+> nenhuma equação/forma funcional interna genuinamente nova é
+> necessária, o casamento é automático — **condicional** ao resto dos
+> coeficientes externos permanecer uniforme quando `x\to0`, mostrado
+> (§3.3 da `ATTEMPT.md`) ser um caso especial/limite da MESMA obstrução
+> de taxa uniforme que impediu as 7 ondas anteriores de `(U1)`. Uma
+> maquinaria numérica nova, independentemente validada, testou pela
+> primeira vez `x` encolhendo NA MESMA taxa que `\varepsilon` — nenhum
+> sinal de comportamento não-uniforme encontrado em nenhum ponto
+> testado, em duas ordens sucessivas, mais confirmação numérica bônus da
+> hipótese (ii) e suporte especulativo-mas-consistente para o
+> `\gamma_5=209/24` conjecturado pelo registro.
+>
+> Referee hostil dedicado: re-derivou todo o conteúdo simbólico
+> (itens 1-3 do mandato) do zero via `sympy` fresco antes de ler
+> qualquer script da frente — resíduos literalmente `0`; confirmou o
+> argumento de limitação/unicidade citando o Lema de Exclusão de
+> Crescimento como legítimo (é exatamente o caso `y=0` do lema);
+> avaliou o diagnóstico de degenerescência da camada-limite (item 4)
+> como matematicamente sólido — a inteireza de cada `\chi_n(x)` implica
+> genuinamente regularidade ordem-a-ordem em `x=O(\varepsilon)`, e,
+> diferente de uma camada tipo Prandtl clássica, não há condição de
+> contorno independente em `x=0` neste sistema que pudesse forçar um
+> perfil interno distinto — nenhum fenômeno de camada interna perdido
+> foi encontrado; reimplementou a numérica de forma independente e
+> reproduziu todas as 7 âncoras, a hipótese (ii), a grade `resid5`
+> completa, a checagem de sanidade em ordem 4, e a comparação
+> especulativa de ordem 5 — batendo com as tabelas publicadas da frente
+> ao dígito, em muitos casos (`\Pi(1000)` a 34 dígitos; os `reldiff`s de
+> ordem 5 a 4 algarismos significativos). Achou zero problemas —
+> **nenhum achado nomeado, nem cosmético**, o único deste tipo neste
+> gap desde o início da cadeia `H1`. Um bug auto-capturado pelo próprio
+> referee (não da frente): uma primeira versão de sua reimplementação
+> numérica tinha contaminação de precisão dupla nativa
+> (`-c/(k+1)` calculado em `float` puro em vez de `mpmath`), capturada
+> via validação cruzada contra uma implementação simbólica-exata
+> independente, corrigida antes de qualquer conclusão — não reflete o
+> trabalho da frente (o script da própria frente já se protegia
+> corretamente contra exatamente essa armadilha).
+>
+> Veredito **SOUND — ACCEPT for catalogue** (sem achados nomeados). `H1`,
+> `(U1)`, `(U2)` permanecem ABERTOS; a maior lacuna remanescente é
+> exatamente a mesma que resistiu a 7 ondas prévias de `(U1)` — uma
+> estimativa de taxa de convergência uniforme-em-`x` para
+> `\Psi(x,g)\to F(x)` a partir do sistema EDP exato, não tentada aqui.
+> `phi_REDB`, `Phi_U(c)`, `Phi_infinity(c)` e a lei assintótica de 4
+> termos: intocadas. Fontes:
+> `.../mclust_h1_validity_attempt/h1_u2_boundary_layer_attempt/ATTEMPT.md`
+> e
+> `.../h1_u2_boundary_layer_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

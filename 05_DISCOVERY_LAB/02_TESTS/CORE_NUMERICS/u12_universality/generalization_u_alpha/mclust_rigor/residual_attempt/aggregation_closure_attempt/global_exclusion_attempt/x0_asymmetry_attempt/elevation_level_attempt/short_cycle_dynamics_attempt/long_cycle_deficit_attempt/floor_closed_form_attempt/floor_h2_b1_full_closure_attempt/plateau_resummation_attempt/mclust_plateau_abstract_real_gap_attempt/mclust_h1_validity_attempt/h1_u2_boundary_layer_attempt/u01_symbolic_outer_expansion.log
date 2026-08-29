@@ -1,0 +1,160 @@
+==============================================================================
+PART 1 -- CLAIM A: psi_n(x) = gamma_n * R^{(n-1)}(x) solves the
+          record's own psi_n ODEs, for general x, n=1..4
+==============================================================================
+
+Cross-check: Rder(n) built via the closure identity R^{(k+1)}=x
+R^{(k)}+k R^{(k-1)} matches direct repeated differentiation of
+R'=xR-1 (independent route), n=0..5:
+  n=0: Rder=R(x)   direct-diff=R(x)   MATCH=True
+  n=1: Rder=x*R(x) - 1   direct-diff=x*R(x) - 1   MATCH=True
+  n=2: Rder=x**2*R(x) - x + R(x)   direct-diff=x**2*R(x) - x + R(x)   MATCH=True
+  n=3: Rder=x**3*R(x) - x**2 + 3*x*R(x) - 2   direct-diff=x**3*R(x) - x**2 + 3*x*R(x) - 2   MATCH=True
+  n=4: Rder=x**4*R(x) - x**3 + 6*x**2*R(x) - 5*x + 3*R(x)   direct-diff=x**4*R(x) - x**3 + 6*x**2*R(x) - 5*x + 3*R(x)   MATCH=True
+  n=5: Rder=x**5*R(x) - x**4 + 10*x**3*R(x) - 9*x**2 + 15*x*R(x) - 8   direct-diff=x**5*R(x) - x**4 + 10*x**3*R(x) - 9*x**2 + 15*x*R(x) - 8   MATCH=True
+
+All 6 orders match -- Rder(n) is a verified, independent
+representation of R^{(n)}(x) in terms of R(x), x alone.
+
+Checking psi_n(x) := gamma_n * R^{(n-1)}(x) against the record's
+own stated ODEs, general x:
+  psi_1 := gamma_1 * R = R(x)   (base case, matches record directly)
+  psi_2 candidate = 2*x*R(x) - 2
+    psi_2' - x*psi_2 - 2R = 0   ODE satisfied: True
+  psi_3 candidate = 7*x**2*R(x)/2 - 7*x/2 + 7*R(x)/2
+    psi_3' - x*psi_3 - 7R' = 0   ODE satisfied: True
+  psi_4 candidate = 17*x**3*R(x)/3 - 17*x**2/3 + 17*x*R(x) - 34/3
+    psi_4' - x*psi_4 - 17R'' = 0   ODE satisfied: True
+
+All four candidates SOLVE the record's own stated psi_n ODEs
+identically in x (not just at x=0). This generalizes the record's
+x=0-only closed form psi_n(0)=gamma_n R^{(n-1)}(0) to all x.
+
+Boundedness as x->infinity (selects this among the ODE's two-
+parameter family, since the homogeneous mode A*e^{x^2/2} diverges
+for any A!=0 -- record's own H2/Growth-Exclusion Lemma,
+mclust_h2_validity_attempt, cited not re-derived): each R^{(k)}(x)
+is a bounded, decaying combination of R and lower R-derivatives
+(R(x)->0 as x->infinity is the record's own stated boundary
+condition pinning R itself); by induction on the same closure
+identity, R^{(k)}(x) -> 0 as x->infinity for every k>=1 too (each
+R^{(k)} is a combination of the PARTICULAR bounded branch, not the
+divergent homogeneous mode -- consistent with, not re-proving,
+record's stated R(inf)=0 plus the closure identity's linear, non-
+resonant structure). So psi_n(x)=gamma_n R^{(n-1)}(x) is bounded,
+hence (by H2, cited) IS the record's psi_n, not merely a solution.
+
+Sanity check at x=0 against the record's own published values:
+  psi_1(0) = R(0)
+  psi_2(0) = -2
+  psi_3(0) = 7*R(0)/2
+  psi_4(0) = -34/3
+Evaluated with R(0)=sqrt(pi/2):
+  psi_1(0) = sqrt(2)*sqrt(pi)/2   (record: sqrt(pi c/2)/sqrt(c) -> R(0), matches b_1)
+  psi_2(0) = -2   (record: -2, EXACT MATCH: True)
+  psi_3(0) = 7*sqrt(2)*sqrt(pi)/4   (record: (7/2)sqrt(pi/2), EXACT MATCH: True)
+  psi_4(0) = -34/3   (record: -34/3, EXACT MATCH: True)
+
+==============================================================================
+PART 2 -- the W-F relation and the derived outer expansion of W_inf
+==============================================================================
+
+W_inf(x;eps) := lim_{g->infinity} W(x,g;eps)
+              = F(x;eps) - eps * F'(x;eps)      [this front's ATTEMPT.md
+                Section 2, from W = Psi - eps Psi_x (KEY, record) plus
+                hypotheses (ii)/(iii) of mclust_h1_validity_attempt SS2.3:
+                lim_g Psi(x,g) = F(x), lim_g Psi_x(x,g) = F'(x)]
+
+F(x;eps) = sum_{n>=1} eps^n psi_n(x)             [outer expansion of F,
+                                                    ALREADY established,
+                                                    plateau_resummation_
+                                                    attempt SS4, cited not
+                                                    re-derived]
+
+=> W_inf(x;eps) = sum_n eps^n psi_n(x) - eps * sum_n eps^n psi_n'(x)
+                 = sum_n eps^n [psi_n(x) - psi_{n-1}(x)']    (psi_0 := 0)
+                 =: sum_n eps^n chi_n(x)
+
+Computed chi_n(x) = psi_n(x) - psi_{n-1}'(x), n=1..4:
+  chi_1(x) = R(x)
+  chi_2(x) = x*R(x) - 1
+  chi_3(x) = 3*x**2*R(x)/2 - 3*x/2 + 3*R(x)/2
+  chi_4(x) = 13*x**3*R(x)/6 - 13*x**2/6 + 13*x*R(x)/2 - 13/3
+
+Expressing each chi_n via Rder(n-1) to confirm the clean pattern
+chi_n(x) = (gamma_n - gamma_{n-1}) * R^{(n-1)}(x):
+  n=1: (gamma_1-gamma_0) = 1, predicted = R(x), chi_n - predicted = 0, MATCH=True
+  n=2: (gamma_2-gamma_1) = 1, predicted = x*R(x) - 1, chi_n - predicted = 0, MATCH=True
+  n=3: (gamma_3-gamma_2) = 3/2, predicted = 3*x**2*R(x)/2 - 3*x/2 + 3*R(x)/2, chi_n - predicted = 0, MATCH=True
+  n=4: (gamma_4-gamma_3) = 13/6, predicted = 13*x**3*R(x)/6 - 13*x**2/6 + 13*x*R(x)/2 - 13/3, chi_n - predicted = 0, MATCH=True
+
+CONFIRMED: chi_n(x) = (gamma_n - gamma_{n-1}) R^{(n-1)}(x) exactly,
+for n=1..4, i.e.
+  chi_1 = R(x),  chi_2 = R'(x),  chi_3 = (3/2) R''(x),  chi_4 = (13/6) R'''(x)
+This is this front's derived 'outer expansion' for W_inf(x;eps),
+new to the record (W_inf's own eps-coefficients were never before
+written down explicitly, only inferred to exist via (U2)).
+
+==============================================================================
+PART 3 -- self-consistency check: re-derive the PUBLISHED 4-term
+          law for Pi(c) via W_inf + classical Watson's lemma at x=0
+==============================================================================
+
+Pi(c) = (1/eps) int_0^infty e^{-v/eps} W_inf(v;eps) dv     (STAR, Watson-
+                                                              concentration
+                                                              lemma, this
+                                                              front's SS2.1
+                                                              citation of
+                                                              mclust_h1_
+                                                              validity_
+                                                              attempt SS2.1)
+
+Substituting W_inf(v;eps) = sum_n eps^n chi_n(v) and applying CLASSICAL
+Watson's lemma term-by-term to each chi_n(v) = (gamma_n-gamma_{n-1})
+R^{(n-1)}(v) (each an entire function, admitting a convergent Taylor
+series at v=0 -- the textbook hypothesis of Watson's lemma):
+
+  int_0^infty e^{-v/eps} f(v) dv  ~  sum_{m>=0} eps^{m+1} f^{(m)}(0)
+
+gives, collecting by TOTAL power of eps (this is exactly the arithmetic
+the boundary-layer analysis of Section 5 of this front's ATTEMPT.md
+performs by hand -- reproduced here symbolically as an independent check):
+
+R^{(k)}(0) via the closure identity at x=0 (R^{(k+1)}(0)=k R^{(k-1)}(0)):
+  R^{(0)}(0) = R(0)
+  R^{(1)}(0) = -1
+  R^{(2)}(0) = R(0)
+  R^{(3)}(0) = -2
+  R^{(4)}(0) = 3*R(0)
+  R^{(5)}(0) = -8
+
+Collecting by total eps power N (Watson's lemma applied to
+chi_n(v)=(gamma_n-gamma_{n-1})R^{(n-1)}(v) contributes, at order
+eps^{n+m+1} i.e. total power N=n+m+... wait tracked below symbolically):
+  order eps^1 coefficient of Pi(c) = R(0)   (telescoping check: gamma_1*R^(0)(0) = R(0))
+  order eps^2 coefficient of Pi(c) = -2   (telescoping check: gamma_2*R^(1)(0) = -2)
+  order eps^3 coefficient of Pi(c) = 7*R(0)/2   (telescoping check: gamma_3*R^(2)(0) = 7*R(0)/2)
+  order eps^4 coefficient of Pi(c) = -34/3   (telescoping check: gamma_4*R^(3)(0) = -34/3)
+
+TELESCOPES EXACTLY to gamma_N * R^{(N-1)}(0) at every order N=1..4 --
+i.e. this alternate W_inf-based route reproduces, order by order,
+EXACTLY the record's OWN psi_N(0)=gamma_N R^{(N-1)}(0) rule applied
+directly to Pi(c)=F(0;eps) -- a nontrivial internal consistency
+check (the two routes -- direct outer expansion of F, vs this
+front's W_inf route recombined through Watson's lemma -- must agree
+because they are the SAME underlying heuristic content organized
+two different ways; this confirms no arithmetic slip in the W-F
+relation or the chi_n bookkeeping above).
+
+Numeric form of the 4-term law reproduced via this route:
+  d_1 (this route) = sqrt(2)*sqrt(pi)/2   (record's published d_1 = sqrt(2)*sqrt(pi)/2)   MATCH=True
+  d_2 (this route) = -2   (record's published d_2 = -2)   MATCH=True
+  d_3 (this route) = 7*sqrt(2)*sqrt(pi)/4   (record's published d_3 = 7*sqrt(2)*sqrt(pi)/4)   MATCH=True
+  d_4 (this route) = -34/3   (record's published d_4 = -34/3)   MATCH=True
+
+ALL FOUR COEFFICIENTS MATCH THE RECORD'S PUBLISHED 4-TERM LAW
+EXACTLY, via this front's independently-derived W_inf route.
+
+Done. See ATTEMPT.md for the honest scope of what this does and
+does NOT establish (this is a consistency check on a heuristic
+recombination, not a new proof of the 4-term law or of (U2)).

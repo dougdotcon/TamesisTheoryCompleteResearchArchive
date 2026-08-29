@@ -1,0 +1,135 @@
+==============================================================================
+ADV01 — independent symbolic check of items 1, 2, 3
+==============================================================================
+
+--- Part A: R^{(k)}(x) via two independent constructions ---
+
+Method A, R^(1) = x*R + (-1)  [expect x*R - 1]  OK
+k=0:  method A = (1, 0)   method B = (1, 0)   match=True
+k=1:  method A = (x, -1)   method B = (x, -1)   match=True
+k=2:  method A = (x**2 + 1, -x)   method B = (x**2 + 1, -x)   match=True
+k=3:  method A = (x**3 + 3*x, -x**2 - 2)   method B = (x**3 + 3*x, -x**2 - 2)   match=True
+k=4:  method A = (x**4 + 6*x**2 + 3, -x**3 - 5*x)   method B = (x**4 + 6*x**2 + 3, -x**3 - 5*x)   match=True
+k=5:  method A = (x**5 + 10*x**3 + 15*x, -x**4 - 9*x**2 - 8)   method B = (x**5 + 10*x**3 + 15*x, -x**4 - 9*x**2 - 8)   match=True
+k=6:  method A = (x**6 + 15*x**4 + 45*x**2 + 15, -x**5 - 14*x**3 - 33*x)   method B = (x**6 + 15*x**4 + 45*x**2 + 15, -x**5 - 14*x**3 - 33*x)   match=True
+k=7:  method A = (x**7 + 21*x**5 + 105*x**3 + 105*x, -x**6 - 20*x**4 - 87*x**2 - 48)   method B = (x**7 + 21*x**5 + 105*x**3 + 105*x, -x**6 - 20*x**4 - 87*x**2 - 48)   match=True
+k=8:  method A = (x**8 + 28*x**6 + 210*x**4 + 420*x**2 + 105, -x**7 - 27*x**5 - 185*x**3 - 279*x)   method B = (x**8 + 28*x**6 + 210*x**4 + 420*x**2 + 105, -x**7 - 27*x**5 - 185*x**3 - 279*x)   match=True
+
+=> R^(k) constructions A (pure differentiation) and B (closure identity) AGREE EXACTLY for k=0..8. [PASS]
+
+--- Part B (item 1): psi_n(x) = gamma_n * R^{(n-1)}(x) exact-ODE check ---
+
+n=1: psi_1(x) = 1 * R^(0)(x) = (1) * R + (0)
+       residual (psi_n' - x*psi_n - source_n) = (0, 0)   PASS (exact 0)
+n=2: psi_2(x) = 2 * R^(1)(x) = (2*x) * R + (-2)
+       residual (psi_n' - x*psi_n - source_n) = (0, 0)   PASS (exact 0)
+n=3: psi_3(x) = 7/2 * R^(2)(x) = (7*x**2/2 + 7/2) * R + (-7*x/2)
+       residual (psi_n' - x*psi_n - source_n) = (0, 0)   PASS (exact 0)
+n=4: psi_4(x) = 17/3 * R^(3)(x) = (17*x**3/3 + 17*x) * R + (-17*x**2/3 - 34/3)
+       residual (psi_n' - x*psi_n - source_n) = (0, 0)   PASS (exact 0)
+
+=> All four candidates psi_n(x) = gamma_n R^{(n-1)}(x), n=1..4, solve their
+   stated ODEs EXACTLY and IDENTICALLY IN x (not just at x=0). [PASS]
+
+--- Sanity: psi_n(0) against record's published values ---
+
+n=1: psi_1(0) computed = 1.2533141373155002512   published = 1.2533141373155002512   reldiff = 0.0
+n=2: psi_2(0) computed = -2.0   published = -2.0   reldiff = 0.0
+n=3: psi_3(0) computed = 4.3865994806042508792   published = 4.3865994806042508792   reldiff = 0.0
+n=4: psi_4(0) computed = -11.333333333333333333   published = -11.333333333333333333   reldiff = 0.0
+=> All match published psi_n(0) to full precision. [PASS]
+
+--- Part C (item 1): boundedness/uniqueness reasoning check ---
+
+The general solution of psi_n' - x*psi_n = source_n(x) is
+   psi_n(x) = [particular solution] + A * exp(x^2/2)
+for arbitrary constant A (verified: d/dx[A*exp(x^2/2)] = A*x*exp(x^2/2) 
+= x * [A*exp(x^2/2)], i.e. exp(x^2/2) solves the homogeneous equation
+u' = x*u exactly -- this is the y=0 case of the Growth-Exclusion Lemma's
+homogeneous mode e^{x^2/2+xy} (mclust_h2_validity_attempt Sec 2.1).
+Direct symbolic check: d/dx[exp(x^2/2)] - x*exp(x^2/2) = 0  PASS
+
+Boundedness of the candidate gamma_n*R^{(n-1)}(x) as x->infinity:
+R(x) -> 0 as x->infinity is the record's own established fact (R(inf)=0,
+erfcx(z)~1/(z*sqrt(pi)) for large z). We independently verify, via mpmath,
+that R(x) and R^{(1)}, R^{(2)}, R^{(3)} ALL decay (not blow up) as x grows,
+confirming the candidate genuinely sits in the bounded/decaying branch that
+the Growth-Exclusion Lemma selects as unique -- not merely a formal claim.
+  x=  0: R,R',R'',R''' = ['1.2533141', '-1.0', '1.2533141', '-2.0']
+  x=  5: R,R',R'',R''' = ['0.1928081', '-0.035959476', '0.013010723', '-0.0068653399']
+  x= 10: R,R',R'',R''' = ['0.099028596', '-0.0097140353', '0.0018882436', '-0.00054563412']
+  x= 20: R,R',R'',R''' = ['0.049875926', '-0.0024814804', '0.00024631872', '-3.6586396e-5']
+  x= 40: R,R',R'',R''' = ['0.024984404', '-0.00062383177', '3.1133359e-5', '-2.329197e-6']
+=> R^{(0..3)}(x) all -> 0 as x -> infinity (numerically confirmed, no blow-up);
+   the diverging homogeneous branch exp(x^2/2) is excluded by the Growth-
+   Exclusion Lemma's uniqueness half (verified above, y=0 case) since it is
+   the ONLY way the general solution can fail to be bounded. Selecting
+   gamma_n*R^{(n-1)}(x) as the unique bounded solution is therefore SOUND,
+   correctly citing (not needing to re-derive) mclust_h2_validity_attempt's
+   Growth-Exclusion Lemma. [CONFIRMED]
+
+--- Part D (item 2): chi_n(x) := psi_n(x) - psi_{n-1}'(x) ---
+
+n=1: direct chi_1 = psi_1 - psi_0' = (1, 0)
+       claimed (gamma_1-gamma_0)*R^(0) = (1, 0)   PASS (identical)
+n=2: direct chi_2 = psi_2 - psi_1' = (x, -1)
+       claimed (gamma_2-gamma_1)*R^(1) = (x, -1)   PASS (identical)
+n=3: direct chi_3 = psi_3 - psi_2' = (3*x**2/2 + 3/2, -3*x/2)
+       claimed (gamma_3-gamma_2)*R^(2) = (3*x**2/2 + 3/2, -3*x/2)   PASS (identical)
+n=4: direct chi_4 = psi_4 - psi_3' = (13*x*(x**2 + 3)/6, -13*x**2/6 - 13/3)
+       claimed (gamma_4-gamma_3)*R^(3) = (13*x*(x**2 + 3)/6, -13*x**2/6 - 13/3)   PASS (identical)
+
+Explicit closed forms quoted by the target (Sec 2.2):
+n=2: chi_2 explicit claim vs (gamma_n-gamma_{n-1})*R^(1) form: PASS
+n=3: chi_3 explicit claim vs (gamma_n-gamma_{n-1})*R^(2) form: PASS
+n=4: chi_4 explicit claim vs (gamma_n-gamma_{n-1})*R^(3) form: PASS
+
+=> chi_n(x) = (gamma_n - gamma_{n-1}) * R^{(n-1)}(x) VERIFIED EXACTLY, n=1..4,
+   including all three explicit closed forms quoted in the target's Sec 2.2.
+   [PASS]
+
+--- Part E (item 3): explicit double-index Watson's-lemma re-derivation ---
+
+Standard Watson's lemma: for g(v) smooth at v=0,
+   int_0^inf e^{-v/eps} g(v) dv  ~  sum_{j>=0} g^{(j)}(0) * eps^{j+1}
+(since int_0^inf e^{-v/eps} v^j dv = eps^{j+1} * j!, and g's j-th Taylor
+coefficient is g^{(j)}(0)/j!, the j! cancels).
+
+Applying this to g(v) = chi_n(v) = (gamma_n-gamma_{n-1})*R^{(n-1)}(v) gives
+   int_0^inf e^{-v/eps} chi_n(v) dv ~ sum_{j>=0} (gamma_n-gamma_{n-1}) *
+                                       R^{(n-1+j)}(0) * eps^{j+1}
+
+Pi(c) = (1/eps) * int_0^inf e^{-v/eps} * sum_n eps^n chi_n(v) dv
+      = sum_n eps^{n-1} * sum_j (gamma_n-gamma_{n-1}) R^{(n-1+j)}(0) eps^{j+1}
+      = sum_n sum_j eps^{n+j} (gamma_n-gamma_{n-1}) R^{(n-1+j)}(0)
+
+Collect coefficient of eps^N (N = n+j, j = N-n >= 0, so n=1..N):
+   coeff(eps^N) = sum_{n=1}^N (gamma_n-gamma_{n-1}) * R^{(n-1+(N-n))}(0)
+                = sum_{n=1}^N (gamma_n-gamma_{n-1}) * R^{(N-1)}(0)
+   [the exponent n-1+(N-n) = N-1 is INDEPENDENT OF n -- this is exactly
+    why R^{(N-1)}(0) factors out of the n-sum in the target's Sec 2.3]
+                = R^{(N-1)}(0) * sum_{n=1}^N (gamma_n-gamma_{n-1})
+                = R^{(N-1)}(0) * (gamma_N - gamma_0) = gamma_N * R^{(N-1)}(0)
+   [telescoping sum, gamma_0:=0 -- confirmed trivial but exact]
+
+Mechanical check, N=1..4 (published Pi(c) 4-term-law coefficients, i.e.
+Pi(c) = sum_N eps^N * [this coefficient]):
+
+N=1: double-sum route = sqrt(2)*sqrt(pi)/2   published = sqrt(2)*sqrt(pi)/2   diff = 0   PASS (exact 0)
+N=2: double-sum route = -2   published = -2   diff = 0   PASS (exact 0)
+N=3: double-sum route = 7*sqrt(2)*sqrt(pi)/4   published = 7*sqrt(2)*sqrt(pi)/4   diff = 0   PASS (exact 0)
+N=4: double-sum route = -34/3   published = -34/3   diff = 0   PASS (exact 0)
+
+=> Independent re-derivation (via the FULL double-index Watson's-lemma
+   bookkeeping, not merely asserting the telescoping identity) reproduces
+   the record's published 4-term law EXACTLY, symbolically, at every one
+   of N=1..4. This confirms the target's compressed Sec 2.3 presentation
+   (which asserts, rather than shows step-by-step, that R^{(N-1)}(0) factors
+   out of the n-sum) is mathematically CORRECT -- the missing intermediate
+   step (why R^{(n-1+j)}(0) = R^{(N-1)}(0) independent of n) checks out
+   exactly. [PASS, item 3 confirmed via independent route]
+
+==============================================================================
+ADV01 SUMMARY: items 1, 2, 3 all independently confirmed. No discrepancy
+found anywhere in this script's fresh symbolic re-derivation.
+==============================================================================

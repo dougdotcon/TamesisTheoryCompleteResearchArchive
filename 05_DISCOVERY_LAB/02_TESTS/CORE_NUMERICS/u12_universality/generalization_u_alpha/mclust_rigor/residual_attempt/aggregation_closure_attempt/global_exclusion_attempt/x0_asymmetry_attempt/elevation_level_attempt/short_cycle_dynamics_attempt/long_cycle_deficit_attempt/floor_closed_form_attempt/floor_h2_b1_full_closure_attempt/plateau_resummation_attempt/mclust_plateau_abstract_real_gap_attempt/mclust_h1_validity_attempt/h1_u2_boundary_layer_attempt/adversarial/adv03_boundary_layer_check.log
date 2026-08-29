@@ -1,0 +1,108 @@
+==============================================================================
+ADV03 -- independent boundary-layer resid5 check (item 5)
+==============================================================================
+
+--- Anchor validation (7/7, c=1000) ---
+
+  a_2(0): got=520316.63648803  published=520316.63648803  reldiff=1.06e-16  PASS
+  a_3(0): got=-180730907.628508  published=-180730907.628508  reldiff=3.69e-16  PASS
+  a_4(0): got=47146963944.1379  published=47146963944.14  reldiff=4.48e-14  PASS
+  b_1(0): got=39.6332729760601  published=39.6332729760601  reldiff=0.0  PASS
+  b_2(0): got=-20816.6364880301  published=-20816.6364880301  reldiff=2.16e-15  PASS
+  Phi(0,0.002): got=0.158500145747308  published=0.1585001457473  reldiff=5.35e-14  PASS
+  Pi(1000) [ct0=80]: got=0.037761598340212618824371202590577055
+                     published=0.037761598340212618824371202590577048
+                     reldiff=1.869e-34  PASS  (two-t0 [60 vs 80] reldiff=9.468e-26)
+
+=> Anchor validation: 7/7 PASS.
+
+--- Boundary-layer resid5 sweep (independent reimplementation) ---
+
+c in {1000,4000,16000,64000}, x=eps*u for u in {0,1,2,4}, plus bridge x=1.
+K=400, dps=300 throughout (own sizing, chosen after the c=1000 anchor
+test above showed clean 30-digit convergence at ct0=80 with this budget).
+
+c=1000:
+  built c=1000 K=400 dps=300 in 7.91s
+    bridge_x1  x0=       1.0  two-t0 reldiff=2.41e-27  hyp(ii) reldiff=4.54e-34  resid5=1.577322635  resid4_reldiff=0.06102
+    u=0        x0=       0.0  two-t0 reldiff=1.45e-27  hyp(ii) reldiff=1.89e-34  resid5=10.47588167  resid4_reldiff=0.07645
+    u=1        x0= 0.0316228  two-t0 reldiff=1.48e-27  hyp(ii) reldiff=1.96e-34  resid5=9.802298924  resid4_reldiff=0.0759
+    u=2        x0= 0.0632456  two-t0 reldiff=1.51e-27  hyp(ii) reldiff=2.03e-34  resid5=9.17629285  resid4_reldiff=0.07535
+    u=4        x0=  0.126491  two-t0 reldiff=1.57e-27  hyp(ii) reldiff=2.17e-34  resid5=8.052774001  resid4_reldiff=0.07427
+c=4000:
+  built c=4000 K=400 dps=300 in 8.07s
+    bridge_x1  x0=       1.0  two-t0 reldiff=3.99e-27  hyp(ii) reldiff=1.08e-33  resid5=1.633187228  resid4_reldiff=0.03159
+    u=0        x0=       0.0  two-t0 reldiff=2.78e-27  hyp(ii) reldiff=4.28e-34  resid5=10.93349394  resid4_reldiff=0.03989
+    u=1        x0= 0.0158114  two-t0 reldiff=2.81e-27  hyp(ii) reldiff=4.36e-34  resid5=10.57404646  resid4_reldiff=0.03974
+    u=2        x0= 0.0316228  two-t0 reldiff=2.83e-27  hyp(ii) reldiff=4.44e-34  resid5=10.22761473  resid4_reldiff=0.03959
+    u=4        x0= 0.0632456  two-t0 reldiff=2.87e-27  hyp(ii) reldiff=4.61e-34  resid5=9.571776819  resid4_reldiff=0.0393
+c=16000:
+  built c=16000 K=400 dps=300 in 8.86s
+    bridge_x1  x0=       1.0  two-t0 reldiff=5.64e-27  hyp(ii) reldiff=2.56e-33  resid5=1.662783262  resid4_reldiff=0.01608
+    u=0        x0=       0.0  two-t0 reldiff=4.54e-27  hyp(ii) reldiff=1.07e-33  resid5=11.17888001  resid4_reldiff=0.02039
+    u=1        x0=0.00790569  two-t0 reldiff=4.55e-27  hyp(ii) reldiff=1.08e-33  resid5=10.99301119  resid4_reldiff=0.02036
+    u=2        x0= 0.0158114  two-t0 reldiff=4.56e-27  hyp(ii) reldiff=1.09e-33  resid5=10.81055087  resid4_reldiff=0.02032
+    u=4        x0= 0.0316228  two-t0 reldiff=4.58e-27  hyp(ii) reldiff=1.11e-33  resid5=10.45558591  resid4_reldiff=0.02024
+c=64000:
+  built c=64000 K=400 dps=300 in 7.15s
+    bridge_x1  x0=       1.0  two-t0 reldiff=6.93e-27  hyp(ii) reldiff=5.84e-33  resid5=1.678028873  resid4_reldiff=0.008114
+    u=0        x0=       0.0  two-t0 reldiff=6.16e-27  hyp(ii) reldiff=2.64e-33  resid5=11.30609731  resid4_reldiff=0.01031
+    u=1        x0=0.00395285  two-t0 reldiff=6.16e-27  hyp(ii) reldiff=2.65e-33  resid5=11.21156047  resid4_reldiff=0.0103
+    u=2        x0=0.00790569  two-t0 reldiff=6.16e-27  hyp(ii) reldiff=2.66e-33  resid5=11.11789608  resid4_reldiff=0.01029
+    u=4        x0= 0.0158114  two-t0 reldiff=6.17e-27  hyp(ii) reldiff=2.68e-33  resid5=10.93314976  resid4_reldiff=0.01027
+
+--- Summary: resid5 across the grid (boundedness check) ---
+
+       c |    bridge_x1 |          u=0 |          u=1 |          u=2 |          u=4
+    1000 |      1.57732 |      10.4759 |       9.8023 |      9.17629 |      8.05277
+    4000 |      1.63319 |      10.9335 |       10.574 |      10.2276 |      9.57178
+   16000 |      1.66278 |      11.1789 |       10.993 |      10.8106 |      10.4556
+   64000 |      1.67803 |      11.3061 |      11.2116 |      11.1179 |      10.9331
+
+Checking: resid5 is O(1) (bounded, no blow-up) at every point, and
+its magnitude trend across the c-ladder (eps shrinking 8x) is examined
+for monotone convergence (no divergence signal):
+
+  bridge_x1: values=['1.57732', '1.63319', '1.66278', '1.67803']
+    bounded(<100)=True  successive-diffs=['0.05586', '0.0296', '0.01525']  diffs shrinking=True
+  u=0: values=['10.4759', '10.9335', '11.1789', '11.3061']
+    bounded(<100)=True  successive-diffs=['0.4576', '0.2454', '0.1272']  diffs shrinking=True
+  u=1: values=['9.8023', '10.574', '10.993', '11.2116']
+    bounded(<100)=True  successive-diffs=['0.7717', '0.419', '0.2185']  diffs shrinking=True
+  u=2: values=['9.17629', '10.2276', '10.8106', '11.1179']
+    bounded(<100)=True  successive-diffs=['1.051', '0.5829', '0.3073']  diffs shrinking=True
+  u=4: values=['8.05277', '9.57178', '10.4556', '10.9331']
+    bounded(<100)=True  successive-diffs=['1.519', '0.8838', '0.4776']  diffs shrinking=True
+
+--- Order-4 sanity check summary (known gamma_4, non-speculative) ---
+
+  c=1000 bridge_x1: resid4_reldiff=0.06102
+  c=1000 u=0: resid4_reldiff=0.07645
+  c=1000 u=4: resid4_reldiff=0.07427
+  c=4000 bridge_x1: resid4_reldiff=0.03159
+  c=4000 u=0: resid4_reldiff=0.03989
+  c=4000 u=4: resid4_reldiff=0.0393
+  c=16000 bridge_x1: resid4_reldiff=0.01608
+  c=16000 u=0: resid4_reldiff=0.02039
+  c=16000 u=4: resid4_reldiff=0.02024
+  c=64000 bridge_x1: resid4_reldiff=0.008114
+  c=64000 u=0: resid4_reldiff=0.01031
+  c=64000 u=4: resid4_reldiff=0.01027
+
+--- Speculative order-5 comparison (Richardson extrap. vs conjectured gamma_5=209/24) ---
+
+Two-point Richardson: L = 2*resid5(eps_min) - resid5(2*eps_min), using the
+c=16000/c=64000 pair (eps ratio exactly 2), matching the target's own primary pair.
+
+  bridge_x1: L=1.69327448529  chi_5(speculative)=1.69358608191  reldiff=-0.0184%
+  u=0: L=11.4333146065  chi_5(speculative)=11.436491503  reldiff=-0.02778%
+  u=1: L=11.4301097501  chi_5(speculative)=11.436491503  reldiff=-0.0558%
+  u=2: L=11.425241279  chi_5(speculative)=11.436491503  reldiff=-0.09837%
+  u=4: L=11.4107136038  chi_5(speculative)=11.436491503  reldiff=-0.2254%
+
+==============================================================================
+ADV03 SUMMARY: anchors reproduced; resid5 stays bounded and converges
+cleanly (no non-uniformity signal) across the full tested (c,u) grid,
+independently confirming the target's Sec 5.3 main result and Sec 5.4
+order-4 sanity check, via a fresh, independently-debugged implementation.
+==============================================================================

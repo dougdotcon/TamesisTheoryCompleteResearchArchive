@@ -1,6 +1,26 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-129`: onda 27 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-130`: onda 27 frente (a)
+`H1-U2-BOUNDARY-LAYER-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **primeiro ataque
+dedicado a `(U2)` especificamente** neste gap, após 7 ondas consecutivas
+(20-26) mirando `(U1)`. `(U2)` permanece ABERTO, mas com progresso real:
+forma fechada nova para a expansão externa de `W_inf(x;\varepsilon)`,
+`\chi_n(x)=(\gamma_n-\gamma_{n-1})R^{(n-1)}(x)`, PROVADA simbolicamente
+(generaliza as ODEs de `\psi_n` do registro de `x=0` para todo `x`);
+diagnóstico de que a camada-limite interna em `x=\varepsilon u` é
+degenerada — casamento automático — condicional ao resto externo
+permanecer uniforme quando `x\to0`, mostrado ser caso especial da MESMA
+obstrução de taxa uniforme que impediu as 7 ondas anteriores de `(U1)`.
+Maquinaria numérica nova testou pela primeira vez `x` encolhendo na
+mesma taxa que `\varepsilon` — nenhum sinal de não-uniformidade
+encontrado. Referee hostil: **SOUND — ACCEPT, sem nenhum achado
+nomeado** (nem cosmético) — o único veredito deste tipo na cadeia `H1`
+desde seu início; re-derivou todo o conteúdo simbólico do zero
+(resíduos literalmente `0`), reimplementou a numérica de forma
+independente batendo ao dígito. **Onda 27 agora com 3/3 frentes
+integradas — fechamento completo.**
+Anterior: `DISC-DEC-129`: onda 27 frente (b)
 `W-RT-CLOSED-FORM-ATTEMPT` integrada como Estágio 50 — Reivindicação B
 (`M_K'\overset d=M_K`, Estágio 47) fechada, PROVADA para todo `K\ge1`
 (antes: provada só em `K=1`). Forma fechada geral `W(r,t)=(t+2r+1)(t+r)!`

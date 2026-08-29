@@ -1,6 +1,23 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-130`: onda 27 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-131`: onda 28 autorizada —
+2 frentes deliberadamente diversificadas após survey de portfolio
+dedicado. Frente (a): ataque DIRETO a `(H-ces)` (convergência
+Cesàro-`(C,1)` da média corrente `A(y)/(x+y)` para o `Φ` exato do
+sistema) — necessária E suficiente para `(U1)` dado a auto-mediação já
+incondicional (onda 26, `DISC-DEC-125`), alvo genuinamente novo e mais
+estreito que `(U1)`, nunca atacado diretamente nas 8 ondas prévias
+(20-27). Frente (b): construção de `C(γ)` em si (não mais um aperto de
+`n_0(γ)`) — a linha mais dormente do arquivo antes da onda 27, agora
+nomeada explicitamente como alvo natural remanescente. Decisão de
+portfolio explícita: apenas UMA frente no gap `H1`/M-CLUST(b) (já 8
+ondas consecutivas) — o survey recomendou não despachar uma 9ª onda
+consecutiva tocando o mesmo gap em dois slots; um candidato de CDF
+geral-`K` (`K\ge5`) foi rejeitado por já ter dois certificados Gosper de
+não-existência fechando a rota literal. Nenhuma edição de conteúdo
+matemático ainda — apenas autorização; as duas frentes serão
+despachadas como agentes de pesquisa separados.
+Anterior: `DISC-DEC-130`: onda 27 frente (a)
 `H1-U2-BOUNDARY-LAYER-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **primeiro ataque
 dedicado a `(U2)` especificamente** neste gap, após 7 ondas consecutivas

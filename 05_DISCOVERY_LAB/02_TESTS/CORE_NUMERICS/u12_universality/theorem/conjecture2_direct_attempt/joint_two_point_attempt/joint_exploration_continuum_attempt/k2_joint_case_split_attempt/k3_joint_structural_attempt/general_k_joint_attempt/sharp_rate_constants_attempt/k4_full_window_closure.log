@@ -1,0 +1,60 @@
+==============================================================================
+k4_full_window_closure.py -- final near-sharp K=4 closure
+==============================================================================
+M4_exact = 0.7087183934093216141786607091322793863974
+B_max=1.63387988313152  Bb_max=0.500000000000000  C_max=0  Dd_max=12.0000000000000  E_max=0.0518602727707217
+
+N0 = 1000
+C4 = M4_exact + B_max/N0 + Bb_max/N0^2 + 2*Dd_max/(N0-2) + 3*E_max/(N0-3)
+   = 0.7345569184500456912259247911642612891263
+C4 / M4_exact = 1.0364580985635587833
+Crude constant on record (Corollary D4.5): 7248
+Improvement factor vs crude: 9867.172738x
+
+[Part I] Monotonicity of bound_analytic(n)
+  d/dn [correction terms] = (-24*nn**3*(nn - 3)**2 + nn**3*(nn - 2)**2*(-882*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**4 - 47*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2) - 648*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**6 + 243*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**7 + 16*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**2 + 10 + 300*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**3 + 1080*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)**5)*CRootOf(972*x**7 - 2268*x**6 + 3240*x**5 - 2205*x**4 + 600*x**3 + 24*x**2 - 47*x + 5, 2)/6 + 2*nn*(nn - 3)**2*(nn - 2)**2*(-16380 - (20 - sqrt(127))**3 + 60*(20 - sqrt(127))**2 + 819*sqrt(127))/3969 - (nn - 3)**2*(nn - 2)**2)/(nn**3*(nn - 3)**2*(nn - 2)**2)
+  B_max>=0, Bb_max>=0, Dd_max>0, E_max>=0 (all confirmed in k4_sharp_rate.py) => every individual term B_max/n, Bb_max/n^2, 2Dd_max/(n-2), 3E_max/(n-3) is non-increasing in n for n>3 => bound_analytic(n) is non-increasing on n>3. PROVED symbolically (structure of derivative), not merely sampled.
+
+[Part II] EXHAUSTIVE exact per-n check, n=6..999 (994 values)
+    ...progress: n=200, elapsed=87.5s, worst_ratio_so_far=0.950099
+    ...progress: n=400, elapsed=178.5s, worst_ratio_so_far=0.957479
+    ...progress: n=600, elapsed=268.3s, worst_ratio_so_far=0.959931
+    ...progress: n=800, elapsed=360.4s, worst_ratio_so_far=0.961156
+
+  Elapsed: 451.6s for 994 exact per-n checks
+  Violations found: 0
+  Worst ratio = 0.96188727 at n=999  (must be <=1)
+
+  Spot values:
+    n=    6: n*sup|Delta_n(x)| = 0.40000000   ratio to C4 = 0.544546
+    n=    7: n*sup|Delta_n(x)| = 0.37350677   ratio to C4 = 0.508479
+    n=    8: n*sup|Delta_n(x)| = 0.41608478   ratio to C4 = 0.566443
+    n=    9: n*sup|Delta_n(x)| = 0.44965048   ratio to C4 = 0.612138
+    n=   10: n*sup|Delta_n(x)| = 0.47660953   ratio to C4 = 0.648839
+    n=   20: n*sup|Delta_n(x)| = 0.59626702   ratio to C4 = 0.811737
+    n=   50: n*sup|Delta_n(x)| = 0.66485402   ratio to C4 = 0.905109
+    n=  100: n*sup|Delta_n(x)| = 0.68698405   ratio to C4 = 0.935236
+    n=  200: n*sup|Delta_n(x)| = 0.69790146   ratio to C4 = 0.950099
+    n=  300: n*sup|Delta_n(x)| = 0.70151834   ratio to C4 = 0.955022
+    n=  400: n*sup|Delta_n(x)| = 0.70332257   ratio to C4 = 0.957479
+    n=  500: n*sup|Delta_n(x)| = 0.70440376   ratio to C4 = 0.958951
+    n=  600: n*sup|Delta_n(x)| = 0.70512400   ratio to C4 = 0.959931
+    n=  700: n*sup|Delta_n(x)| = 0.70563817   ratio to C4 = 0.960631
+    n=  800: n*sup|Delta_n(x)| = 0.70602365   ratio to C4 = 0.961156
+    n=  900: n*sup|Delta_n(x)| = 0.70632338   ratio to C4 = 0.961564
+    n=  999: n*sup|Delta_n(x)| = 0.70656095   ratio to C4 = 0.961887
+
+  PASS: exhaustive window check confirms n*sup_x|Delta_n(x)| <= C4 for EVERY n in [6, 999].
+
+==============================================================================
+FINAL THEOREM (K=4, PROVED)
+==============================================================================
+For all n>=6 and all x in [0,1]:
+  |Delta_n(x)| = |F_n^(4)(x) - F_4(x)| <= C4/n,
+  C4 = 0.734556918450045691225924791164
+     (3.6458% above the pure asymptotic-leading constant M4_exact = 0.708718393409322)
+  vs. the crude constant 7248 on record (Corollary D4.5) -- a 9867.17x tightening.
+
+Boundary values n=4,5 (outside n>=6 domain, same restriction as archive's own crude Corollary D4.5):
+  n=4: exact sup_x|Delta_n(x)| = |Delta_4(1)| = -1  (trivially <= 7248/4 = 1812)
+  n=5: exact sup_x|Delta_n(x)| = |Delta_5(1)| = -1/5  (trivially <= 7248/5 = 7248/5)

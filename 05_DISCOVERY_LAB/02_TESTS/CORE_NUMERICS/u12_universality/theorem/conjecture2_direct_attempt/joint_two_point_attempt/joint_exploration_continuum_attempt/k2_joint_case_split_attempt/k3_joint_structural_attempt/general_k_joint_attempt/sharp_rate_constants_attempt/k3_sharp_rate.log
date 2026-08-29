@@ -1,0 +1,129 @@
+==============================================================================
+k3_sharp_rate.py -- K=3 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) = N(n,x)/D(n)
+  N(n,x) = 3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x
+  D(n) = n**4 - 3*n**3 + 2*n**2 = n^2(n-1)(n-2)
+  Delta_n(1) (extrapolation artifact, x=1 outside proved domain k<=n-1) = 6/(n*(n**2 - 3*n + 2))
+
+[Step 2] N(n,x) has degree 3 in n (D(n) has degree 4) => leading term of Delta_n(x) is g3(x)/n
+  g3(x) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  cited (K3 ATTEMPT.md Sec 5.5) leading term = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  match: True
+
+[Step 3] sup_{x in [0,1]} g3(x), via Poly.real_roots
+  g3'(x) = 18*x**5 - 15*x**4 - 6*x + 3
+  real roots of g3' in [0,1]: [0.45219215045425892654, 1.0000000000000000000]
+  g3 at candidates: [(0, 0), (1.000000000, 0), (0.4521921505, 0.71207155813802780842), (1.000000000, 0)]
+  => x3* = 0.45219215045425892654, M3_exact = g3(x3*) = 0.71207155813802780842
+  (cited 'approx 0.712 at x approx 0.452' -- MATCHES)
+  g3(x)>=0 sampled on [0,1] (0.005 grid, 201 pts): True
+
+  Rigorous sign proof: g3(x) - 3x(x-1)^2(x+1)(x^2+1) = 0 (expect 0)
+  For x in [0,1]: x>=0, (x-1)^2>=0, (x+1)>=1>0, (x^2+1)>=1>0 => g3(x)=3*[all factors]>=0 identically -- PROVED, not sampled.
+
+==============================================================================
+[Step 4] Partial-fraction decomposition of Delta_n(x) in n
+==============================================================================
+  Delta_n(x) = -x*(x + 1)*(x**4 - 4*x**3 + 11*x**2 - 10*x + 5)/(n - 1) + x*(2*x - 1)*(2*x + 1)*(2*x**3 - 3*x**2 + 4*x - 1)/(2*(n - 2)) + 3*x*(x**2 - 4*x + 5)/(2*n) - x*(x - 1)/n**2
+
+  apart_list raw structure: (1, Poly(0, n, domain='ZZ[x]'), [(Poly(_w**2 - 3*_w + 2, _w, domain='ZZ[x]'), Lambda(_a, _a*(5*x**6 - 9*x**5 + 14*x**4 + x**3/2 - 7*x**2 + 11*x/2) - 6*x**6 + 12*x**5 - 21*x**4 - 3*x**3/2 + 12*x**2 - 21*x/2), Lambda(_a, -_a + n), 1), (Poly(_w, _w, domain='ZZ[x]'), Lambda(_a, -x**2 + x), Lambda(_a, -_a + n), 2), (Poly(_w, _w, domain='ZZ[x]'), Lambda(_a, 3*x**3/2 - 6*x**2 + 15*x/2), Lambda(_a, -_a + n), 1)])
+
+  Solving for A(x),B(x),C(x),Dd(x) in Delta_n(x)=A/n+B/n^2+C/(n-1)+Dd/(n-2):
+    A(x) = 3*x**3/2 - 6*x**2 + 15*x/2
+    B(x) = -x**2 + x
+    C(x) = -x**6 + 3*x**5 - 7*x**4 - x**3 + 5*x**2 - 5*x
+    Dd(x) = 4*x**6 - 6*x**5 + 7*x**4 - x**3/2 - 2*x**2 + x/2
+  Reconstruction check (recon - Delta_n(x)): 0 (expect 0)
+
+  A(x)+C(x)+Dd(x) - g3(x) = 0  (expect 0, confirms leading order)
+  => n*Delta_n(x) = g3(x) + B(x)/n + C(x)/(n-1) + 2*Dd(x)/(n-2)
+
+  Sign / extremal analysis of B(x), C(x), Dd(x) on [0,1]:
+    B(x): min=0 at x=0, max=0.250000000000000 at x=0.5000000000
+    C(x): min=-6.00000000000000 at x=1.000000000, max=0 at x=0
+    Dd(x): min=-0.0184953641423598 at x=0.4177008742, max=3.00000000000000 at x=1.000000000
+
+  B(x) in [0, 0.2500000000]  (sign-definite >=0: True)
+  C(x) in [-6.000000000, 0]  (sign-definite <=0: True)
+  Dd(x) in [-0.01849536414, 3.000000000]  (NOT sign-definite)
+
+[checkpoint saved] k3_sharp_rate_step1234.log
+
+==============================================================================
+[Step 5] Analytic (all-n) two-sided bound via independent term extremal bounding
+==============================================================================
+  UB(n) = M3 + 1/4/n + 0/(n-1) + 6/(n-2)
+       = M3 + (1/4)/n + 6/(n-2)   [C_max=0 drops out]
+  LB(n) = -6/(n-1) + -4*CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2)**2 - 12*CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2)**5 - CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2)**3 + 8*CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2)**6 + CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2) + 14*CRootOf(48*x**5 - 60*x**4 + 56*x**3 - 3*x**2 - 8*x + 1, 2)**4/(n-2)
+       = -6/(n-1) + (tiny negative)/(n-2)
+
+  n*Delta_n(x) in [LB(n), UB(n)] for ALL x in [0,1], ALL n>=3 (by independent term bounding -- valid, not necessarily tight)
+  => |Delta_n(x)| <= max(UB(n), -LB(n)) / n =: bound_analytic(n)/n
+    n=   3: UB=6.795405  LB=-3.036991  bound_analytic=6.795405
+    n=   4: UB=3.774572  LB=-2.018495  bound_analytic=3.774572
+    n=   5: UB=2.762072  LB=-1.512330  bound_analytic=2.762072
+    n=   6: UB=2.253738  LB=-1.209248  bound_analytic=2.253738
+    n=  10: UB=1.487072  LB=-0.671291  bound_analytic=1.487072
+    n=  15: UB=1.190277  LB=-0.431417  bound_analytic=1.190277
+    n=  20: UB=1.057905  LB=-0.317845  bound_analytic=1.057905
+    n=  30: UB=0.934691  LB=-0.208218  bound_analytic=0.934691
+    n=  50: UB=0.842072  LB=-0.123220  bound_analytic=0.842072
+    n= 100: UB=0.775796  LB=-0.060984  bound_analytic=0.775796
+    n= 200: UB=0.743625  LB=-0.030338  bound_analytic=0.743625
+
+  Monotonicity: UB(n) and -LB(n) are both decreasing in n for n>=3 (each term B_max/n, 6/(n-2), 6/(n-1) is a decreasing function of n on n>=3) => bound_analytic(n) is decreasing in n.
+  => for any N0, sup_{n>=N0} bound_analytic(n) = bound_analytic(N0), so |Delta_n(x)| <= bound_analytic(N0)/n holds for ALL n>=N0.
+
+==============================================================================
+[Step 6] EXACT per-n sup_x|Delta_n(x)| via calculus (real_roots)
+==============================================================================
+    n=   3: x*=   1.0000000  Delta_n(x*)=   1.000000000  n*|Delta_n(x*)|=3.00000000
+    n=   4: x*=   1.0000000  Delta_n(x*)=  0.2500000000  n*|Delta_n(x*)|=1.00000000
+    n=   5: x*=   1.0000000  Delta_n(x*)=  0.1000000000  n*|Delta_n(x*)|=0.50000000
+    n=   6: x*=  0.37115584  Delta_n(x*)= 0.07534795425  n*|Delta_n(x*)|=0.45208773
+    n=   7: x*=  0.38671247  Delta_n(x*)= 0.07045977763  n*|Delta_n(x*)|=0.49321844
+    n=   8: x*=  0.39721048  Delta_n(x*)= 0.06540938941  n*|Delta_n(x*)|=0.52327512
+    n=   9: x*=  0.40477976  Delta_n(x*)= 0.06068241430  n*|Delta_n(x*)|=0.54614173
+    n=  10: x*=  0.41050117  Delta_n(x*)= 0.05641008828  n*|Delta_n(x*)|=0.56410088
+    n=  11: x*=  0.41498091  Delta_n(x*)= 0.05259725611  n*|Delta_n(x*)|=0.57856982
+    n=  12: x*=  0.41858546  Delta_n(x*)= 0.04920594032  n*|Delta_n(x*)|=0.59047128
+    n=  13: x*=  0.42154956  Delta_n(x*)= 0.04618696682  n*|Delta_n(x*)|=0.60043057
+    n=  14: x*=  0.42403065  Delta_n(x*)= 0.04349184793  n*|Delta_n(x*)|=0.60888587
+    n=  15: x*=  0.42613833  Delta_n(x*)= 0.04107687724  n*|Delta_n(x*)|=0.61615316
+    n=  16: x*=  0.42795128  Delta_n(x*)= 0.03890411800  n*|Delta_n(x*)|=0.62246589
+    n=  17: x*=  0.42952746  Delta_n(x*)= 0.03694118979  n*|Delta_n(x*)|=0.62800023
+    n=  18: x*=  0.43091055  Delta_n(x*)= 0.03516064302  n*|Delta_n(x*)|=0.63289157
+    n=  19: x*=  0.43213407  Delta_n(x*)= 0.03353924710  n*|Delta_n(x*)|=0.63724569
+    n=  20: x*=  0.43322420  Delta_n(x*)= 0.03205731948  n*|Delta_n(x*)|=0.64114639
+    n=  21: x*=  0.43420166  Delta_n(x*)= 0.03069813863  n*|Delta_n(x*)|=0.64466091
+    n=  22: x*=  0.43508310  Delta_n(x*)= 0.02944744782  n*|Delta_n(x*)|=0.64784385
+    n=  23: x*=  0.43588203  Delta_n(x*)= 0.02829304286  n*|Delta_n(x*)|=0.65073999
+    n=  24: x*=  0.43660954  Delta_n(x*)= 0.02722443246  n*|Delta_n(x*)|=0.65338638
+    n=  25: x*=  0.43727481  Delta_n(x*)= 0.02623255915  n*|Delta_n(x*)|=0.65581398
+    n=  26: x*=  0.43788552  Delta_n(x*)= 0.02530957022  n*|Delta_n(x*)|=0.65804883
+    n=  27: x*=  0.43844811  Delta_n(x*)= 0.02444862917  n*|Delta_n(x*)|=0.66011299
+    n=  28: x*=  0.43896807  Delta_n(x*)= 0.02364376033  n*|Delta_n(x*)|=0.66202529
+    n=  29: x*=  0.43945008  Delta_n(x*)= 0.02288972024  n*|Delta_n(x*)|=0.66380189
+    n=  30: x*=  0.43989814  Delta_n(x*)= 0.02218189082  n*|Delta_n(x*)|=0.66545672
+    n=  31: x*=  0.44031572  Delta_n(x*)= 0.02151619032  n*|Delta_n(x*)|=0.66700190
+    n=  32: x*=  0.44070584  Delta_n(x*)= 0.02088899875  n*|Delta_n(x*)|=0.66844796
+    n=  33: x*=  0.44107112  Delta_n(x*)= 0.02029709519  n*|Delta_n(x*)|=0.66980414
+    n=  34: x*=  0.44141387  Delta_n(x*)= 0.01973760496  n*|Delta_n(x*)|=0.67107857
+    n=  35: x*=  0.44173609  Delta_n(x*)= 0.01920795474  n*|Delta_n(x*)|=0.67227842
+    n=  36: x*=  0.44203960  Delta_n(x*)= 0.01870583448  n*|Delta_n(x*)|=0.67341004
+    n=  37: x*=  0.44232597  Delta_n(x*)= 0.01822916491  n*|Delta_n(x*)|=0.67447910
+    n=  38: x*=  0.44259661  Delta_n(x*)= 0.01777606958  n*|Delta_n(x*)|=0.67549064
+    n=  39: x*=  0.44285280  Delta_n(x*)= 0.01734485098  n*|Delta_n(x*)|=0.67644919
+    n=  40: x*=  0.44309565  Delta_n(x*)= 0.01693396979  n*|Delta_n(x*)|=0.67735879
+    n=  50: x*=  0.44497263  Delta_n(x*)= 0.01368839792  n*|Delta_n(x*)|=0.68441990
+    n=  60: x*=  0.44620731  Delta_n(x*)= 0.01148490216  n*|Delta_n(x*)|=0.68909413
+    n=  80: x*=  0.44773247  Delta_n(x*)=0.008686247524  n*|Delta_n(x*)|=0.69489980
+    n= 100: x*=  0.44863810  Delta_n(x*)=0.006983634948  n*|Delta_n(x*)|=0.69836349
+    n= 150: x*=  0.44983479  Delta_n(x*)=0.004686392399  n*|Delta_n(x*)|=0.70295886
+    n= 200: x*=  0.45042858  Delta_n(x*)=0.003526233826  n*|Delta_n(x*)|=0.70524677
+    n= 300: x*=  0.45101938  Delta_n(x*)=0.002358427244  n*|Delta_n(x*)|=0.70752817
+    n= 500: x*=  0.45148989  Delta_n(x*)=0.001418697263  n*|Delta_n(x*)|=0.70934863
+
+  M3_exact = 0.712071558138028 (target asymptotic constant)

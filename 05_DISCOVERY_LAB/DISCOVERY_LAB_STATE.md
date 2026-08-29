@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-120`: onda 25 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-121`: onda 25 frente (a)
+`D-SHARP-RATE-CONSTANTS-ATTEMPT` integrada como Estágio 46 —
+fechamento COMPLETO em `K=2` na constante exata ótima
+`M_2\approx0{,}7107/n` (`n\ge4`, ~16,9× mais apertada que a crua
+`12/n`); fechamento quase-afiado em `K=3` (`C_3=1{,}0088\times M_3`,
+`n\ge6`) e `K=4` (`C_4=1{,}0365\times M_4`, `n\ge6`). **Correção real
+a um Estágio já publicado**: esta frente encontrou que o Estágio 42
+citava incorretamente a constante líder de `K=2` como `\approx0{,}167/n`
+— o valor correto é `\approx0{,}7107/n` (`>4\times` maior); origem
+traçada com exatidão a `|\Delta_4(1)|=1/6`, o valor de fronteira
+finito-`n=4`, conflado com a constante `n\to\infty`. Corrigido por
+blockquote datado no Estágio 42. Referee hostil: SOUND WITH NAMED
+ISSUES, confirmou independentemente o erro e sua origem; um achado
+MODERADO (alegação imprecisa sobre um script já corrigido, nenhum
+resultado corrompido), corrigido por nota datada.
+Anterior: `DISC-DEC-120`: onda 25 frente (b)
 `GENERAL-K-CDF-ALTERNATE-ROUTE-ATTEMPT` integrada como Estágio 45 —
 identidade de colapso nova (`InnerJ(V,O)` depende só de `W:=V+O`,
 colapsando a soma dupla numa única soma via hockey-stick) e um SEGUNDO

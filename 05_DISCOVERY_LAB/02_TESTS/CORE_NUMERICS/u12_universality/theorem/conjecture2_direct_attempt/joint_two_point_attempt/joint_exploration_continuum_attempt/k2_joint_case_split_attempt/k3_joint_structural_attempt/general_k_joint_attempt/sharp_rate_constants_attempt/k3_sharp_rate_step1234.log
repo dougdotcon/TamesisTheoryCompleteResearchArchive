@@ -1,0 +1,50 @@
+==============================================================================
+k3_sharp_rate.py -- K=3 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) = N(n,x)/D(n)
+  N(n,x) = 3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x
+  D(n) = n**4 - 3*n**3 + 2*n**2 = n^2(n-1)(n-2)
+  Delta_n(1) (extrapolation artifact, x=1 outside proved domain k<=n-1) = 6/(n*(n**2 - 3*n + 2))
+
+[Step 2] N(n,x) has degree 3 in n (D(n) has degree 4) => leading term of Delta_n(x) is g3(x)/n
+  g3(x) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  cited (K3 ATTEMPT.md Sec 5.5) leading term = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  match: True
+
+[Step 3] sup_{x in [0,1]} g3(x), via Poly.real_roots
+  g3'(x) = 18*x**5 - 15*x**4 - 6*x + 3
+  real roots of g3' in [0,1]: [0.45219215045425892654, 1.0000000000000000000]
+  g3 at candidates: [(0, 0), (1.000000000, 0), (0.4521921505, 0.71207155813802780842), (1.000000000, 0)]
+  => x3* = 0.45219215045425892654, M3_exact = g3(x3*) = 0.71207155813802780842
+  (cited 'approx 0.712 at x approx 0.452' -- MATCHES)
+  g3(x)>=0 sampled on [0,1] (0.005 grid, 201 pts): True
+
+  Rigorous sign proof: g3(x) - 3x(x-1)^2(x+1)(x^2+1) = 0 (expect 0)
+  For x in [0,1]: x>=0, (x-1)^2>=0, (x+1)>=1>0, (x^2+1)>=1>0 => g3(x)=3*[all factors]>=0 identically -- PROVED, not sampled.
+
+==============================================================================
+[Step 4] Partial-fraction decomposition of Delta_n(x) in n
+==============================================================================
+  Delta_n(x) = -x*(x + 1)*(x**4 - 4*x**3 + 11*x**2 - 10*x + 5)/(n - 1) + x*(2*x - 1)*(2*x + 1)*(2*x**3 - 3*x**2 + 4*x - 1)/(2*(n - 2)) + 3*x*(x**2 - 4*x + 5)/(2*n) - x*(x - 1)/n**2
+
+  apart_list raw structure: (1, Poly(0, n, domain='ZZ[x]'), [(Poly(_w**2 - 3*_w + 2, _w, domain='ZZ[x]'), Lambda(_a, _a*(5*x**6 - 9*x**5 + 14*x**4 + x**3/2 - 7*x**2 + 11*x/2) - 6*x**6 + 12*x**5 - 21*x**4 - 3*x**3/2 + 12*x**2 - 21*x/2), Lambda(_a, -_a + n), 1), (Poly(_w, _w, domain='ZZ[x]'), Lambda(_a, -x**2 + x), Lambda(_a, -_a + n), 2), (Poly(_w, _w, domain='ZZ[x]'), Lambda(_a, 3*x**3/2 - 6*x**2 + 15*x/2), Lambda(_a, -_a + n), 1)])
+
+  Solving for A(x),B(x),C(x),Dd(x) in Delta_n(x)=A/n+B/n^2+C/(n-1)+Dd/(n-2):
+    A(x) = 3*x**3/2 - 6*x**2 + 15*x/2
+    B(x) = -x**2 + x
+    C(x) = -x**6 + 3*x**5 - 7*x**4 - x**3 + 5*x**2 - 5*x
+    Dd(x) = 4*x**6 - 6*x**5 + 7*x**4 - x**3/2 - 2*x**2 + x/2
+  Reconstruction check (recon - Delta_n(x)): 0 (expect 0)
+
+  A(x)+C(x)+Dd(x) - g3(x) = 0  (expect 0, confirms leading order)
+  => n*Delta_n(x) = g3(x) + B(x)/n + C(x)/(n-1) + 2*Dd(x)/(n-2)
+
+  Sign / extremal analysis of B(x), C(x), Dd(x) on [0,1]:
+    B(x): min=0 at x=0, max=0.250000000000000 at x=0.5000000000
+    C(x): min=-6.00000000000000 at x=1.000000000, max=0 at x=0
+    Dd(x): min=-0.0184953641423598 at x=0.4177008742, max=3.00000000000000 at x=1.000000000
+
+  B(x) in [0, 0.2500000000]  (sign-definite >=0: True)
+  C(x) in [-6.000000000, 0]  (sign-definite <=0: True)
+  Dd(x) in [-0.01849536414, 3.000000000]  (NOT sign-definite)

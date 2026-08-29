@@ -1,0 +1,56 @@
+den: n**3*(n - 3)*(n - 2)*(n - 1)
+
+======================================================================
+(a) leading term g_4(x) as n -> infinity, derived independently
+======================================================================
+lim n*Delta4_n(x) = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+claimed g_4(x) = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+difference: 0
+
+======================================================================
+(b) M_4 = max_[0,1] g_4(x) -- front disclosed no clean closed factorization;
+    use Poly(...).real_roots() on g4', matching front's own honest method
+======================================================================
+g4'(x) = -48*x**7 + 56*x**6 + 36*x**5 - 60*x**4 + 24*x**3 - 12*x + 4
+real roots of g4'=0: [-1.000000000000000000000000, -0.5870158390562157668731957, 0.3698865661008833257799272, 1.000000000000000000000000, 1.000000000000000000000000]
+interior critical points in (0,1): [CRootOf(12*x**4 - 2*x**3 + x**2 + 2*x - 1, 1)]
+all candidate (value, x) pairs: [(0.708718393409321614178660709132, 0.369886566100883325779927219256), (0, 0), (0, 1.00000000000000000000000000000)]
+M_4 = 0.708718393409321614178660709132 at x* = 0.369886566100883325779927219256
+front's claimed M_4 = 0.708718393409321614180000000000 diff= -1.33929086774331542684154674122e-21
+front's claimed x*  = 0.369886566100883325780000000000 diff= -7.27807441939358481841395133688e-23
+independent dense-grid (200000 points) argmax: x~0.369885, value~0.7087183934
+real roots of g4(x)=0: [-1, -1, 0, 1, 1, 1]  (only endpoints expected)
+interior roots of g4=0 (should be none, if g4>=0 throughout): []
+dense sign spot-check g4(x)>=0 for x in {0,0.001,...,1}: True
+
+======================================================================
+(c) exhaustive-window spot-check: >=15 scattered n in [6,999]
+     compute EXACT sup_x n*|Delta4_n(x)| per n, confirm <= C_4
+======================================================================
+Using front's claimed C_4 = 0.734556918450045691225900000000
+testing 21 n values: [6, 7, 8, 10, 13, 20, 29, 45, 63, 90, 130, 180, 250, 333, 420, 555, 650, 777, 888, 950, 999]
+  n=   6: worst x*~1.000000  sup|Delta_n|=0.0666666667  n*sup=0.4000000000  ratio to C4=0.54454596  [OK]
+  n=   7: worst x*~0.262112  sup|Delta_n|=0.0533581097  n*sup=0.3735067678  ratio to C4=0.50847900  [OK]
+  n=   8: worst x*~0.280446  sup|Delta_n|=0.0520105969  n*sup=0.4160847754  ratio to C4=0.56644321  [OK]
+  n=  10: worst x*~0.303912  sup|Delta_n|=0.0476609530  n*sup=0.4766095301  ratio to C4=0.64883948  [OK]
+  n=  13: worst x*~0.322943  sup|Delta_n|=0.0409538841  n*sup=0.5324004937  ratio to C4=0.72479134  [OK]
+  n=  20: worst x*~0.341999  sup|Delta_n|=0.0298133509  n*sup=0.5962670178  ratio to C4=0.81173698  [OK]
+  n=  29: worst x*~0.351594  sup|Delta_n|=0.0217977321  n*sup=0.6321342314  ratio to C4=0.86056535  [OK]
+  n=  45: worst x*~0.358541  sup|Delta_n|=0.0146640877  n*sup=0.6598839456  ratio to C4=0.89834284  [OK]
+  n=  63: worst x*~0.361938  sup|Delta_n|=0.0106989544  n*sup=0.6740341271  ratio to C4=0.91760640  [OK]
+  n=  90: worst x*~0.364402  sup|Delta_n|=0.0076060495  n*sup=0.6845444548  ratio to C4=0.93191479  [OK]
+  n= 130: worst x*~0.366128  sup|Delta_n|=0.0053233481  n*sup=0.6920352488  ratio to C4=0.94211249  [OK]
+  n= 180: worst x*~0.367189  sup|Delta_n|=0.0038705186  n*sup=0.6966933506  ratio to C4=0.94845387  [OK]
+  n= 250: worst x*~0.367953  sup|Delta_n|=0.0028002917  n*sup=0.7000729285  ratio to C4=0.95305471  [OK]
+  n= 333: worst x*~0.368439  sup|Delta_n|=0.0021088104  n*sup=0.7022338636  ratio to C4=0.95599653  [OK]
+  n= 420: worst x*~0.368741  sup|Delta_n|=0.0016751907  n*sup=0.7035800891  ratio to C4=0.95782923  [OK]
+  n= 555: worst x*~0.369021  sup|Delta_n|=0.0012699677  n*sup=0.7048320637  ratio to C4=0.95953363  [OK]
+  n= 650: worst x*~0.369148  sup|Delta_n|=0.0010852321  n*sup=0.7054008881  ratio to C4=0.96030800  [OK]
+  n= 777: worst x*~0.369269  sup|Delta_n|=0.0009085506  n*sup=0.7059437888  ratio to C4=0.96104709  [OK]
+  n= 888: worst x*~0.369347  sup|Delta_n|=0.0007953727  n*sup=0.7062909824  ratio to C4=0.96151975  [OK]
+  n= 950: worst x*~0.369382  sup|Delta_n|=0.0007436311  n*sup=0.7064495601  ratio to C4=0.96173563  [OK]
+  n= 999: worst x*~0.369407  sup|Delta_n|=0.0007072682  n*sup=0.7065609492  ratio to C4=0.96188727  [OK]
+
+Elapsed: 8.2s
+Violations found: 0 / 21
+Max ratio observed: 0.96188727 (approaches M4/C4=0.96482434)

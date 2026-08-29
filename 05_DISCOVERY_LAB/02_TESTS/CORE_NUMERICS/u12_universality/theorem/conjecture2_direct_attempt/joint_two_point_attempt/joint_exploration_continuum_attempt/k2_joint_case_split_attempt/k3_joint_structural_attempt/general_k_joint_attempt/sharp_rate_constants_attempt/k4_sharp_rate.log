@@ -1,0 +1,43 @@
+==============================================================================
+k4_sharp_rate.py -- K=4 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) = N(n,x)/D(n)
+  D(n) = n**6 - 6*n**5 + 11*n**4 - 6*n**3 = n^3(n-1)(n-2)(n-3)
+  Delta_n(1) (extrapolation artifact) = -24/(n*(n**3 - 6*n**2 + 11*n - 6))
+
+[Step 2] N(n,x) has degree 5 in n; D(n) has degree 6 => leading term of Delta_n(x) is g4(x)/n
+  g4(x) = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+  cited (K4 ATTEMPT.md Sec 6.4) leading term = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+  match: True
+
+[Step 3] sup_{x in [0,1]} g4(x), via Poly.real_roots
+  g4'(x) = -48*x**7 + 56*x**6 + 36*x**5 - 60*x**4 + 24*x**3 - 12*x + 4
+  real roots of g4' in [0,1]: [0.36988656610088332578, 1.0000000000000000000, 1.0000000000000000000]
+  g4 at candidates: [(0, 0), (1.000000000, 0), (0.3698865661, 0.70871839340932161418), (1.000000000, 0), (1.000000000, 0)]
+  => x4* = 0.36988656610088332578, M4_exact = g4(x4*) = 0.70871839340932161418
+  (cited 'approx 0.7087 at x approx 0.3699' -- MATCHES)
+  g4(x)>=0 sampled on [0,1] (0.005 grid, 201 pts): True
+  (Numerically confirmed; unlike K2/K3 this g4 does not have a clean hand-factorization found -- treated as a PROVED-by-exact-calculus fact via the real_roots endpoint/critical-point enumeration above: g4(0)=g4(1)=0, single interior max, no other real roots in (0,1) other than the argmax's neighbourhood, so g4's only sign changes in [0,1] would show up as additional roots of g4 itself -- checked below.)
+  roots of g4(x)=0 in [0,1]: [0, 1.00000000000000, 1.00000000000000, 1.00000000000000] (only the two endpoints => g4 does not change sign inside (0,1) => g4>=0 throughout, PROVED via exact root-count, not just sampled)
+
+==============================================================================
+[Step 4] Partial-fraction decomposition of Delta_n(x) in n
+==============================================================================
+  Delta_n(x) = A/n + B/n^2 + Bb/n^3 + C/(n-1) + Dd/(n-2) + E/(n-3), with:
+    A(x)  = -11*x**4/6 + 152*x**3/9 - 605*x**2/18 + 203*x/9
+    B(x)  = 14*x**3/3 - 40*x**2/3 + 26*x/3
+    Bb(x) = -2*x**2 + 2*x
+    C(x)  = -x**8/2 + 4*x**7 - 18*x**6 + 35*x**5 - 32*x**4 - 22*x**3 + 89*x**2/2 - 23*x
+    Dd(x) = 8*x**8 - 32*x**7 + 84*x**6 - 96*x**5 + 113*x**4/2 + 6*x**3 - 39*x**2/2 + 5*x
+    E(x)  = -27*x**8/2 + 36*x**7 - 60*x**6 + 49*x**5 - 50*x**4/3 - 8*x**3/9 + 47*x**2/18 - 5*x/9
+  Reconstruction check: 0 (expect 0)
+  A+C+Dd+E - g4 = 0  (expect 0, confirms leading order)
+  => n*Delta_n(x) = g4(x) + B(x)/n + Bb(x)/n^2 + C(x)/(n-1) + 2*Dd(x)/(n-2) + 3*E(x)/(n-3)
+
+  Sign / extremal analysis of B,Bb,C,Dd,E on [0,1]:
+    B(x): min=0 at x=0, max=1.63387988313152 at x=0.4157415395
+    Bb(x): min=0 at x=0, max=0.500000000000000 at x=0.5000000000
+    C(x): min=-12.0000000000000 at x=1.000000000, max=0 at x=0
+    Dd(x): min=-0.0174109670931082 at x=0.4636812936, max=12.0000000000000 at x=1.000000000
+    E(x): min=-4.00000000000000 at x=1.000000000, max=0.0518602727707217 at x=0.5599494088

@@ -1,0 +1,25 @@
+==============================================================================
+k3_sharp_rate.py -- K=3 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) (cancelled) = (3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x)/(n**4 - 3*n**3 + 2*n**2)
+  numerator N(n,x) = 3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x
+  denominator D(n) = n**2*(n - 2)*(n - 1)
+
+  Cited denominator form (K3 ATTEMPT.md Sec 5.5): n^2(n-1)(n-2) = n**4 - 3*n**3 + 2*n**2
+  Our denominator expanded: n**4 - 3*n**3 + 2*n**2
+  Match: True
+
+[Step 2] N(n,x) has degree 3 in n
+  coeff of n^3: 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  coeff of n^2: -2*x**6 + 7*x**4 - 2*x**3 + 9*x**2 - 12*x
+  coeff of n^1: 3*x**3 - 9*x**2 + 12*x
+  coeff of n^0: -2*x**2 + 2*x
+  reconstruction check: 0  (expect 0)
+
+  Leading coefficient (of n^3): g_top(x) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  Cited leading term (ATTEMPT.md Sec 5.5) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+
+  D(n) degree in n = 4
+  For Delta_n(x) ~ (leading)/n we need N(n,x) degree = D(n)_degree - 1 = 3
+  g_top(x) - cited_lead simplifies to: 0  (expect 0 if deg==D_degree-1 and they match)

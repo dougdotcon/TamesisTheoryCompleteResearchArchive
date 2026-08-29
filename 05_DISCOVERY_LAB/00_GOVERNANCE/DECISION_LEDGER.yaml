@@ -7884,3 +7884,65 @@ decisions:
       permanece ABERTA -- este Estagio adiciona um segundo certificado
       Gosper independente e um diagnostico mais afiado, nao um
       fechamento.
+
+  - id: DISC-DEC-121
+    date: 2026-08-29
+    decision: >
+      Onda 25 frente (a) D-SHARP-RATE-CONSTANTS-ATTEMPT integrada como
+      Estagio 46 em THEOREM.md. Alvo: provar, para K=2,3,4, que as
+      constantes assintoticas lider ja conhecidas numericamente para os
+      limitantes de convergencia uniforme das CDFs completas (D2.5,
+      D3.5, D4.5) sao limitantes uniformes finito-n rigorosos. K=2:
+      fechamento COMPLETO na constante exata otima M_2=
+      0.71072657606222 (=g_1 no ponto critico, raiz de 2t^3+t-1=0),
+      valido para todo n>=4, prova por argumento de sinal elementar --
+      substitui a constante crua 12/n por uma ~16.9x mais apertada, na
+      otima exata. K=3: fechamento quase-afiado C_3=1.0088*M_3, n>=6,
+      via limitante analitico de cauda + checagem exaustiva n=6..999 --
+      ~30.6x mais apertada que a crua. K=4: fechamento quase-afiado
+      C_4=1.0365*M_4, n>=6, mesmo metodo -- ~9867x mais apertada.
+      Fechamento exato em M_3/M_4 nao alcancado (obstrucao estrutural,
+      nenhuma forma fechada limpa do ponto critico de g_4 encontrada),
+      divulgado honestamente. CORRECAO REAL a um Estagio ja publicado:
+      esta frente encontrou que a prosa do Estagio 42 citava
+      incorretamente a constante lider de K=2 como ~0.167/n -- o valor
+      correto e ~0.7107/n (>4x maior). Origem tracada com exatidao:
+      2/(4*3)=1/6~0.167 e exatamente o valor de fronteira finito-n=4,
+      |Delta_4(1)|=1/6, nao a constante assintotica n->infinito.
+      Corrigido por blockquote datado no proprio Estagio 42. Dois bugs
+      auto-capturados divulgados: sp.solve() descartando silenciosamente
+      uma raiz real generica (is_real=None para forma radical aninhada,
+      corrigido via Poly.real_roots()); um auxiliar Monte Carlo com
+      TypeError inicial cuja correcao ingenua teria produzido lixo por
+      cancelamento catastrofico, evitado via aritmetica racional exata.
+      Spot-check da sessao antes do despacho: confirmou independentemente
+      x_2^* como raiz de 2t^3+t-1=0 e M_2=g_1(x_2^*)=0.71072657606222
+      (distincao raiz-vs-valor explicitamente verificada); confirmou
+      M_3=0.71207155813802 via a mesma tecnica na forma fatorada citada.
+      Referee hostil dedicado: SOUND WITH NAMED ISSUES -- ACCEPT for
+      catalogue. Re-derivou tudo do zero (Poly.real_roots, nao solve()),
+      batendo a 20+ digitos; varredura independente de 21 n em [6,999]
+      contra formulas exatas D3/D4, zero violacoes; re-derivacao
+      independente de C_3/C_4 via metodo de coeficientes indeterminados
+      distinto; CONFIRMOU independentemente o erro do Estagio 42 (leu a
+      linha exata, confirmou 0.7107 correto, confirmou a identidade
+      |Delta_4(1)|=1/6 como origem precisa) -- achado bonus: o mesmo
+      erro se propagou para o texto de mandato de DISC-DEC-118 neste
+      proprio ledger (registro historico, nao corrigido
+      retroativamente). Um achado MODERADO (F1): a prosa da frente
+      alegava falsamente que k2_sharp_rate.py tambem fora trocado para
+      real_roots() "por consistencia" -- nao corrompe nenhum resultado
+      (cubica de K=2 tem raiz real unica em todo caso testado) --
+      corrigido por nota datada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 46, ~95 linhas; mais
+      correcao datada no Estagio 42 existente, ~20 linhas);
+      .../sharp_rate_constants_attempt/ATTEMPT.md (1 nota datada,
+      esclarecendo o achado F1); DECISION_LEDGER.yaml (este arquivo);
+      DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhuma FORMULA de
+      registro anterior alterada -- apenas uma frase de PROSA
+      nao-provada no Estagio 42 estava numericamente errada, corrigida.
+      Proposicao D2 (formula fechada) permanece intocada e correta.

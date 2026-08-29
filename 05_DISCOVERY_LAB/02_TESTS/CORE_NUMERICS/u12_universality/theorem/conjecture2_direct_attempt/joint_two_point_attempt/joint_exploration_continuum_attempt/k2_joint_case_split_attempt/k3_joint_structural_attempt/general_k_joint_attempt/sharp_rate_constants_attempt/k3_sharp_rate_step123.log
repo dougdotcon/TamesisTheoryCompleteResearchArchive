@@ -1,0 +1,21 @@
+==============================================================================
+k3_sharp_rate.py -- K=3 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) = N(n,x)/D(n)
+  N(n,x) = 3*n**3*x**6 - 3*n**3*x**5 - 3*n**3*x**2 + 3*n**3*x - 2*n**2*x**6 + 7*n**2*x**4 - 2*n**2*x**3 + 9*n**2*x**2 - 12*n**2*x + 3*n*x**3 - 9*n*x**2 + 12*n*x - 2*x**2 + 2*x
+  D(n) = n**4 - 3*n**3 + 2*n**2 = n^2(n-1)(n-2)
+  Delta_n(1) (extrapolation artifact, x=1 outside proved domain k<=n-1) = 6/(n*(n**2 - 3*n + 2))
+
+[Step 2] N(n,x) has degree 3 in n (D(n) has degree 4) => leading term of Delta_n(x) is g3(x)/n
+  g3(x) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  cited (K3 ATTEMPT.md Sec 5.5) leading term = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+  match: True
+
+[Step 3] sup_{x in [0,1]} g3(x), via Poly.real_roots
+  g3'(x) = 18*x**5 - 15*x**4 - 6*x + 3
+  real roots of g3' in [0,1]: [0.45219215045425892654, 1.0000000000000000000]
+  g3 at candidates: [(0, 0), (1.000000000, 0), (0.4521921505, 0.71207155813802780842), (1.000000000, 0)]
+  => x3* = 0.45219215045425892654, M3_exact = g3(x3*) = 0.71207155813802780842
+  (cited 'approx 0.712 at x approx 0.452' -- MATCHES)
+  g3(x)>=0 sampled on [0,1] (0.005 grid, 201 pts): True

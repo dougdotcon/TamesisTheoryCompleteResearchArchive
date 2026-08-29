@@ -1,0 +1,57 @@
+==============================================================================
+k3_full_window_closure.py -- final near-sharp K=3 closure
+==============================================================================
+M3_exact = 0.7120715581380278084191032342070331825470
+x3_star  = 0.4521921504542589265386504047894669677416
+
+N0 = 1000
+C3 = M3_exact + 1/4/1000 + 6/998 = 0.7183335821861240008038727732851894951722
+C3 / M3_exact = 1.0087940937628102299  (margin over pure asymptotic constant)
+Crude constant on record (Corollary D3.5): 22
+Improvement factor vs crude: 30.62643951x
+
+[Part I] Monotonicity of bound_analytic(n) = M3_exact + (1/4)/n + 6/(n-2)
+  d/dn [ (1/4)/n + 6/(n-2) ] = -6/(nn - 2)**2 - 1/(4*nn**2)
+  Both terms of d/dn are manifestly negative for n>2 (-1/(4n^2) and -6/(n-2)^2) => bound_analytic(n) strictly decreasing on n>2. PROVED symbolically (not sampled).
+
+[Part II] EXHAUSTIVE exact per-n check, n=6..999 (994 values)
+  (verifying n*sup_x|Delta_n(x)| <= C3 for EVERY such n, via exact calculus)
+
+  Elapsed: 190.0s for 994 exact per-n checks
+  Violations of n*sup|Delta_n(x)| <= C3 found: 0
+  Worst ratio [n*sup|Delta_n(x)|]/C3 = 0.98938698 at n=999  (must be <=1)
+
+  Spot values from the exhaustive scan:
+    n=    6: n*sup|Delta_n(x)| = 0.45208773   ratio to C3 = 0.629356
+    n=    7: n*sup|Delta_n(x)| = 0.49321844   ratio to C3 = 0.686615
+    n=    8: n*sup|Delta_n(x)| = 0.52327512   ratio to C3 = 0.728457
+    n=    9: n*sup|Delta_n(x)| = 0.54614173   ratio to C3 = 0.760290
+    n=   10: n*sup|Delta_n(x)| = 0.56410088   ratio to C3 = 0.785291
+    n=   20: n*sup|Delta_n(x)| = 0.64114639   ratio to C3 = 0.892547
+    n=   50: n*sup|Delta_n(x)| = 0.68441990   ratio to C3 = 0.952788
+    n=  100: n*sup|Delta_n(x)| = 0.69836349   ratio to C3 = 0.972199
+    n=  200: n*sup|Delta_n(x)| = 0.70524677   ratio to C3 = 0.981782
+    n=  300: n*sup|Delta_n(x)| = 0.70752817   ratio to C3 = 0.984958
+    n=  400: n*sup|Delta_n(x)| = 0.70866645   ratio to C3 = 0.986542
+    n=  500: n*sup|Delta_n(x)| = 0.70934863   ratio to C3 = 0.987492
+    n=  600: n*sup|Delta_n(x)| = 0.70980310   ratio to C3 = 0.988125
+    n=  700: n*sup|Delta_n(x)| = 0.71012756   ratio to C3 = 0.988576
+    n=  800: n*sup|Delta_n(x)| = 0.71037082   ratio to C3 = 0.988915
+    n=  900: n*sup|Delta_n(x)| = 0.71055997   ratio to C3 = 0.989178
+    n=  999: n*sup|Delta_n(x)| = 0.71070989   ratio to C3 = 0.989387
+
+  PASS: exhaustive window check confirms n*sup_x|Delta_n(x)| <= C3 for EVERY n in [6, 999].
+
+==============================================================================
+FINAL THEOREM (K=3, PROVED)
+==============================================================================
+For all n>=6 and all x in [0,1]:
+  |Delta_n(x)| = |F_n^(3)(x) - F_3(x)| <= C3/n,
+  C3 = 0.718333582186124000803872773285
+     (0.8794% above the pure asymptotic-leading constant M3_exact = 0.712071558138028)
+  vs. the crude constant 22 on record (Corollary D3.5) -- a 30.63x tightening.
+
+Boundary values n=3,4,5 (outside this theorem's n>=6 domain, same domain restriction as the archive's own crude Corollary D3.5):
+  n=3: exact sup_x|Delta_n(x)| = |Delta_3(1)| = 1  (trivially <= 22/3 = 22/3)
+  n=4: exact sup_x|Delta_n(x)| = |Delta_4(1)| = 1/4  (trivially <= 22/4 = 11/2)
+  n=5: exact sup_x|Delta_n(x)| = |Delta_5(1)| = 1/10  (trivially <= 22/5 = 22/5)

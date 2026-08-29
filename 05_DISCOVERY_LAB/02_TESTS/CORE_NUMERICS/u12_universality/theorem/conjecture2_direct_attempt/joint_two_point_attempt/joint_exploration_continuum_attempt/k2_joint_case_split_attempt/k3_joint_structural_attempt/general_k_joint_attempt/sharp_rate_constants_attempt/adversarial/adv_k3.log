@@ -1,0 +1,52 @@
+Delta3_n(x) [independent] numerator/denominator:
+den: n**2*(n - 2)*(n - 1)
+
+======================================================================
+(a) leading term g_3(x) as n -> infinity, derived independently
+======================================================================
+lim n*Delta3_n(x) = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+claimed factored form expands to: 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+difference from independently-derived limit: 0
+
+======================================================================
+(b) M_3 = max_[0,1] g_3(x) via Poly(...).real_roots()
+======================================================================
+real roots of g3'(x)=0: [-0.71515575184734387662, 0.45219215045425892654, 1.0000000000000000000]
+interior roots (0,1): [CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)]
+M_3 = 0.712071558138027808419103234207  at x* = 0.452192150454258926538650404789
+front's claimed M_3 = 0.712071558138027808420000000000 diff= -8.96765792991642712733935472295e-22
+front's claimed x*  = 0.452192150454258926540000000000 diff= -1.34959521052526831355501338492e-21
+g3(x)=3x(x-1)^2(x+1)(x^2+1): each factor sign on [0,1]: x>=0, (x-1)^2>=0, (x+1)>0, (x^2+1)>0 => g3>=0 on [0,1]. Confirmed by construction.
+
+======================================================================
+(c) exhaustive-window spot-check: >=15 scattered n in [6,999]
+     compute EXACT sup_x n*|Delta3_n(x)| per n (own critical-point calc)
+     confirm <= C_3 for each
+======================================================================
+Using front's claimed C_3 = 0.718333582186124000800000000000
+testing 21 n values: [6, 7, 8, 10, 13, 20, 29, 45, 63, 90, 130, 180, 250, 333, 420, 555, 650, 777, 888, 950, 999]
+  n=   6: worst x*~0.371156  sup|Delta_n|=0.0753479542  n*sup=0.4520877255  ratio to C3=0.62935624  [OK]
+  n=   7: worst x*~0.386712  sup|Delta_n|=0.0704597776  n*sup=0.4932184434  ratio to C3=0.68661476  [OK]
+  n=   8: worst x*~0.397210  sup|Delta_n|=0.0654093894  n*sup=0.5232751152  ratio to C3=0.72845698  [OK]
+  n=  10: worst x*~0.410501  sup|Delta_n|=0.0564100883  n*sup=0.5641008828  ratio to C3=0.78529098  [OK]
+  n=  13: worst x*~0.421550  sup|Delta_n|=0.0461869668  n*sup=0.6004305686  ratio to C3=0.83586593  [OK]
+  n=  20: worst x*~0.433224  sup|Delta_n|=0.0320573195  n*sup=0.6411463897  ratio to C3=0.89254687  [OK]
+  n=  29: worst x*~0.439450  sup|Delta_n|=0.0228897202  n*sup=0.6638018869  ratio to C3=0.92408583  [OK]
+  n=  45: worst x*~0.444142  sup|Delta_n|=0.0151397559  n*sup=0.6812890152  ratio to C3=0.94842985  [OK]
+  n=  63: worst x*~0.446499  sup|Delta_n|=0.0109556055  n*sup=0.6902031460  ratio to C3=0.96083931  [OK]
+  n=  90: worst x*~0.448236  sup|Delta_n|=0.0077425100  n*sup=0.6968258963  ratio to C3=0.97005892  [OK]
+  n= 130: worst x*~0.449468  sup|Delta_n|=0.0053965206  n*sup=0.7015476817  ratio to C3=0.97663217  [OK]
+  n= 180: worst x*~0.450231  sup|Delta_n|=0.0039138047  n*sup=0.7044848528  ratio to C3=0.98072103  [OK]
+  n= 250: worst x*~0.450783  sup|Delta_n|=0.0028264656  n*sup=0.7066163887  ratio to C3=0.98368837  [OK]
+  n= 333: worst x*~0.451136  sup|Delta_n|=0.0021260648  n*sup=0.7079795738  ratio to C3=0.98558607  [OK]
+  n= 420: worst x*~0.451356  sup|Delta_n|=0.0016876879  n*sup=0.7088289234  ratio to C3=0.98676846  [OK]
+  n= 555: worst x*~0.451560  sup|Delta_n|=0.0012785926  n*sup=0.7096188865  ratio to C3=0.98786818  [OK]
+  n= 650: worst x*~0.451652  sup|Delta_n|=0.0010922736  n*sup=0.7099778251  ratio to C3=0.98836786  [OK]
+  n= 777: worst x*~0.451741  sup|Delta_n|=0.0009141833  n*sup=0.7103204203  ratio to C3=0.98884479  [OK]
+  n= 888: worst x*~0.451797  sup|Delta_n|=0.0008001571  n*sup=0.7105395231  ratio to C3=0.98914981  [OK]
+  n= 950: worst x*~0.451823  sup|Delta_n|=0.0007480417  n*sup=0.7106395985  ratio to C3=0.98928912  [OK]
+  n= 999: worst x*~0.451841  sup|Delta_n|=0.0007114213  n*sup=0.7107098948  ratio to C3=0.98938698  [OK]
+
+Elapsed: 3.5s
+Violations found: 0 / 21
+Max ratio observed (n*sup/C3): 0.98938698  (approaches M3/C3=0.99128257 as n->large)

@@ -6277,9 +6277,28 @@ fechado desde a Proposição NN2).
 **O que isto NÃO fecha.** A CDF completa geral-`K` (`K\ge4`) não foi
 tentada por esta frente — tratada separadamente pela frente irmã desta
 mesma onda (ver Estágio 41); a constante assintótica mais afiada do
-limitante de convergência (`\approx0{,}167/n`, correspondendo ao
-`12/n` observado numericamente como o pior caso real) não foi provada
-como limitante uniforme finito-`n` mais apertado.
+limitante de convergência não foi provada como limitante uniforme
+finito-`n` mais apertado (ver Estágio 46 para o fechamento posterior
+desta lacuna).
+
+> **Correção (2026-08-29, achado do referee hostil dedicado da onda 25
+> frente (a), severidade ALTA — valor numérico incorreto num Estágio
+> já publicado):** a frase original acima citava a constante
+> assintótica mais afiada como `\approx0{,}167/n`. Este valor está
+> **errado** — o valor correto, provado exatamente no Estágio 46, é
+> `M_2\approx0{,}71072657606222/n` (mais de `4\times` maior). Origem do
+> erro, traçada com exatidão pela frente da onda 25: `2/(4\cdot3)=
+> 1/6\approx0{,}167` é exatamente o valor de fronteira finito-`n=4`,
+> `|\Delta_4(1)|=1/6` (verificado: identidade exata, não coincidência
+> numérica) — não a constante assintótica `n\to\infty`. Uma conflação
+> fácil de cometer num resumo, já que ambos eram descritos como "mais
+> afiados" no contexto. **Não afeta a correção da Proposição D2 nem de
+> nenhuma fórmula fechada registrada** — apenas esta frase de prosa
+> sobre uma constante não-provada estava numericamente errada. O
+> mesmo valor errado também havia se propagado para o texto de mandato
+> de `DISC-DEC-118` em `DECISION_LEDGER.yaml` (registro histórico,
+> não corrigido retroativamente, mas superado por esta correção e por
+> `DISC-DEC-121`).
 
 ### Verificação adversarial independente
 
@@ -6653,5 +6672,121 @@ distintas (Estágio 44 e este Estágio), reforçando que a obstrução é
 robusta à reorganização do cálculo, mais um diagnóstico novo (dois
 parâmetros simbólicos simultâneos como a verdadeira fonte da
 obstrução) para orientar tentativas futuras. Nenhuma alegação de
+progresso em Millennium Problem; matemática combinatória pura interna
+a este arquivo.
+
+## [Extensão, Estágio 46 — 2026-08-29]
+
+**Onda 25, frente (a), `DISC-DEC-118` (`D-SHARP-RATE-CONSTANTS-ATTEMPT`).**
+Alvo: provar, para `K=2,3,4`, que as constantes assintóticas líder já
+conhecidas numericamente para os limitantes de convergência uniforme
+das CDFs completas (Corolários D2.5, D3.5 — Estágio 40, D4.5 — Estágio
+43) são de fato limitantes uniformes finito-`n` rigorosos, substituindo
+as constantes cruas então provadas.
+
+### O que aconteceu
+
+> **Fechamento completo em `K=2`; fechamento quase-afiado, honesto, em
+> `K=3,4`.** Para `K=2`: `|F_n^{(2)}(x)-F_2(x)|\le M_2/n` para TODO
+> `n\ge4` e todo `x\in[0,1]`, onde `M_2:=\max_{[0,1]}g_1(x)`,
+> `g_1(x)=2x-x^2-x^4` é o termo líder de `n\Delta_n(x)` quando
+> `n\to\infty`, e `M_2=g_1(x_2^*)=0{,}71072657606222\ldots` — o VALOR
+> da função no ponto crítico `x_2^*\approx0{,}5898` (raiz de
+> `2t^3+t-1=0` em `(0,1)`), não a raiz em si. Prova por argumento de
+> sinal elementar: `n\Delta_n(x)=g_1(x)+p(x)/(n-1)\le g_1(x)\le M_2`,
+> e `2/(n-1)\le M_2\iff n\ge1+2/M_2=3{,}814\ldots`, i.e. `n\ge4`
+> exatamente — substitui a constante crua `12/n` (Estágio 42) por uma
+> constante `\approx16{,}9\times` mais apertada, na constante EXATA
+> ótima, não apenas próxima dela.
+>
+> Para `K=3`: `|F_n^{(3)}(x)-F_3(x)|\le C_3/n` para `n\ge6`, com
+> `C_3=0{,}71833358218612\ldots` — `0{,}879\%` acima da constante
+> puramente assintótica `M_3=0{,}71207155813802\ldots`
+> (`g_3(x)=3x(x-1)^2(x+1)(x^2+1)`) — provado via um limitante analítico
+> de cauda mais uma checagem exaustiva exata de todo `n` inteiro de `6`
+> a `999`. Substitui a constante crua do Estágio 40 por uma
+> `\approx30{,}6\times` mais apertada.
+>
+> Para `K=4`: `|F_n^{(4)}(x)-F_4(x)|\le C_4/n` para `n\ge6`, com
+> `C_4=0{,}73455691845004\ldots` — `3{,}65\%` acima de
+> `M_4=0{,}70871839340932\ldots` —, mesmo método. Substitui `7248/n`
+> (Estágio 43) por uma constante `\approx9867\times` mais apertada.
+>
+> **O que NÃO foi alcançado, honestamente:** fechamento exatamente na
+> constante pura `M_3`/`M_4` (apenas `C_3=1{,}0088\times M_3` e
+> `C_4=1{,}0365\times M_4` foram provados) — a obstrução é estrutural
+> (o front não encontrou uma forma fechada limpa para o ponto crítico
+> de `g_4`, ao contrário de `g_1,g_3`), não uma lacuna de esforço.
+
+**Correção real encontrada e aplicada num Estágio já publicado
+(ver blockquote datado no Estágio 42, seção "O que isto NÃO fecha"):**
+esta frente encontrou que a prosa do Estágio 42 citava incorretamente
+a constante assintótica mais afiada de `K=2` como `\approx0{,}167/n` —
+o valor correto, provado aqui, é `\approx0{,}7107/n` (`>4\times`
+maior). Origem traçada com exatidão: `2/(4\cdot3)=1/6\approx0{,}167`
+é exatamente o valor de fronteira finito-`n=4`, `|\Delta_4(1)|=1/6`,
+não a constante assintótica `n\to\infty` — uma conflação fácil de
+cometer, já que ambas eram descritas como "mais afiadas" no contexto.
+Não afeta a Proposição D2 nem nenhuma fórmula fechada registrada.
+
+**Dois bugs auto-capturados, divulgados:** `sp.solve()` descartou
+silenciosamente uma raiz real genuína de um polinômio de grau 5 (seu
+atributo `.is_real` era `None`, não `True`, para formas radicais
+aninhadas) — corrigido trocando para `Poly(...).real_roots()` em todos
+os scripts de `K=3,4`; um auxiliar de Monte Carlo inicialmente
+esqueceu de substituir `n` (erro imediato), e a correção ingênua
+baseada em ponto flutuante teria produzido lixo por cancelamento
+catastrófico em `n=10^6` para `K=4` — evitado usando aritmética
+racional exata.
+
+### Verificação adversarial independente
+
+**Spot-check da sessão** antes do despacho: confirmação independente,
+via `Poly(...).real_roots()`, de que `x_2^*` é a raiz de `2t^3+t-1=0`
+(`\approx0{,}5898`) e que `M_2=g_1(x_2^*)=0{,}71072657606222\ldots`
+(distinção raiz-vs-valor-da-função verificada explicitamente, evitando
+o mesmo erro de leitura que gerou o erro do Estágio 42); confirmação
+independente de `M_3=0{,}71207155813802\ldots` via a mesma técnica,
+aplicada à forma fatorada `g_3(x)=3x(x-1)^2(x+1)(x^2+1)` citada.
+
+Referee hostil dedicado (`.../sharp_rate_constants_attempt/adversarial/REFEREE_REPORT.md`):
+re-derivou `\Delta_n(x)`, os termos líderes `g_1,g_3,g_4`, e
+`M_2,M_3,M_4` do zero via `Poly(...).real_roots()`, batendo a `20+`
+dígitos significativos; varredura independente de `21` valores de `n`
+espalhados em `[6,999]` contra as fórmulas exatas D3/D4, zero
+violações; re-derivação independente de `C_3`/`C_4` via um método de
+coeficientes indeterminados distinto, reconstruindo os valores a
+`21-24` dígitos de concordância; **confirmou de forma independente o
+erro do Estágio 42** — leu a linha exata (`0{,}167/n` com vírgula
+LaTeX-escapada), confirmou `0{,}7107` como correto via derivação
+própria, e confirmou a identidade exata `|\Delta_4(1)|=1/6` como
+origem precisa do erro (não coincidência numérica) — e notou, como
+achado bônus, que o mesmo valor errado havia se propagado para o texto
+de mandato de `DISC-DEC-118` em `DECISION_LEDGER.yaml` (registro
+histórico, não corrigido retroativamente).
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Nenhum
+> erro matemático em nenhuma constante ou limitante provado. Um achado
+> MODERADO (F1): a prosa da própria frente alegava que
+> `k2_sharp_rate.py` também havia sido trocado para `real_roots()` "por
+> consistência" — falso, esse script continua usando `sp.solve()` +
+> filtragem `.is_real`, mas isto não corrompe nenhum resultado (a
+> cúbica de `K=2` tem raiz real única, verificada pelo referee em todo
+> caso testado) — corrigido por nota datada. Dois achados
+> BAIXA/informacionais, sem defeito.
+
+Ver
+`.../general_k_joint_attempt/sharp_rate_constants_attempt/ATTEMPT.md`
+e
+`.../sharp_rate_constants_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Corolário D2.5 (Estágio 42) agora tem constante EXATA ótima provada
+(`M_2`, não apenas crua). Corolários D3.5 (Estágio 40) e D4.5 (Estágio
+43) têm constantes quase-afiadas provadas (`C_3=1{,}0088\times M_3`,
+`C_4=1{,}0365\times M_4`), substituindo as constantes cruas
+anteriores. Um erro numérico real no Estágio 42 foi encontrado e
+corrigido (ver blockquote datado no Estágio 42). Nenhuma alegação de
 progresso em Millennium Problem; matemática combinatória pura interna
 a este arquivo.

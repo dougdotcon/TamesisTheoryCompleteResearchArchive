@@ -1,0 +1,39 @@
+remainder (n*Delta3-g3) together: x*(3*n**3*x**5 - 3*n**3*x**4 - 3*n**3*x + 3*n**3 - 2*n**2*x**5 + 7*n**2*x**3 - 2*n**2*x**2 + 9*n**2*x - 12*n**2 - 3*n*x**5*(n**2 - 3*n + 2) + 3*n*x**4*(n**2 - 3*n + 2) + 3*n*x**2 + 3*n*x*(n**2 - 3*n + 2) - 9*n*x - 3*n*(n**2 - 3*n + 2) + 12*n - 2*x + 2)/(n*(n**2 - 3*n + 2))
+
+sp.apart(n*Delta3_n(x), n) =
+                                     ⎛ 4      3       2           ⎞            ↪
+   6      5      2         x⋅(x + 1)⋅⎝x  - 4⋅x  + 11⋅x  - 10⋅x + 5⎠   x⋅(2⋅x - ↪
+3⋅x  - 3⋅x  - 3⋅x  + 3⋅x - ──────────────────────────────────────── + ──────── ↪
+                                            n - 1                              ↪
+
+↪               ⎛   3      2          ⎞            
+↪  1)⋅(2⋅x + 1)⋅⎝2⋅x  - 3⋅x  + 4⋅x - 1⎠   x⋅(x - 1)
+↪ ───────────────────────────────────── - ─────────
+↪             n - 2                           n    
+
+Solved B(x),C(x),D(x) via independent undetermined-coefficients ansatz:
+[{Bx: -x**2 + x, Cx: -x**6 + 3*x**5 - 7*x**4 - x**3 + 5*x**2 - 5*x, Dx: 4*x**6 - 6*x**5 + 7*x**4 - x**3/2 - 2*x**2 + x/2}]
+
+B(x) = -x**2 + x
+C(x) = -x**6 + 3*x**5 - 7*x**4 - x**3 + 5*x**2 - 5*x
+D(x) = 4*x**6 - 6*x**5 + 7*x**4 - x**3/2 - 2*x**2 + x/2
+
+B - B_claimed: 0
+C - C_claimed: 0
+
+reconstructed - nDelta3 (expect 0): 0
+
+=== ranges of B, C, D on [0,1] via real_roots ===
+B(x): max=0.25000000000000000000 at x=0.5000000000   min=0 at x=0
+C(x): max=0 at x=0   min=-6.0000000000000000000 at x=1.000000000
+D(x): max=3.0000000000000000000 at x=1.000000000   min=-0.018495364142359827424 at x=0.4177008742
+
+Bmax=0.25000000000000000000  (claimed 1/4=0.2500000000)
+Cmax=0  (claimed 0)
+Dmax=3.0000000000000000000  (claimed 3)
+
+M3 = 0.7120715581380278084191032342070331825470
+C3 (reconstructed from independently-derived Bmax,Cmax,Dmax) at N0=1000: 0.718333582186124000803874324870
+front's claimed C3:                                                    0.71833358218612400080...
+
+d/dn[Bmax/n + 2Dmax/(n-2)] = -6.0/(nn - 2)**2 - 0.25/nn**2  -- both terms negative for n>2 given Bmax,Dmax>0 => non-increasing, confirmed structurally.

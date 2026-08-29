@@ -1,0 +1,124 @@
+==============================================================================
+k2_sharp_rate.py -- K=2 sharp rate-constant attempt
+==============================================================================
+
+[Step 1] Delta_n(x) (cancelled) = (-n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x)/(n**2 - n)
+  numerator N(n,x) = -n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x
+  denominator D(n) = n*(n - 1)
+
+  Cross-check against K2_full_cdf_attempt/ATTEMPT.md Sec 5.5 cited form:
+    cited Delta = (-n*x**4 - n*x**2 + 2*n*x + x**2 - 3*x)/(n*(n - 1))
+    (own_derivation - cited) simplifies to: 0  (expect 0)
+
+[Step 2] N(n,x) as polynomial in n has degree 1
+  N(n,x) = n*g1(x) + g0(x)
+  g1(x) = -x**4 - x**2 + 2*x
+  g0(x) = x**2 - 3*x
+
+  => Delta_n(x) = g1(x)/(n-1) + g0(x)/[n(n-1)]
+
+  n*Delta_n(x) - g1(x) = p(x)/(n-1),  p(x) = g1(x)+g0(x) = -x**4 - x
+  => Delta_n(x) = g1(x)/n + p(x)/[n(n-1)]
+
+[Step 3] sup_{x in [0,1]} g1(x), via calculus
+  g1'(x) = -4*x**3 - 2*x + 2
+  critical points (all roots): [(-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3) - 1/(6*(-1/2 - sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)), -1/(6*(-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3)) + (-1/2 + sqrt(3)*I/2)*(1/4 + sqrt(87)/36)**(1/3), -1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3)]
+  real critical points: [-1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3)]
+  g1 at candidates: [('0', 0), ('1', 0), ('-1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3)', 0.71072657606222206206)]
+  => argmax x* = -1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3) = 0.58975451230145838428, g1(x*) = -1/(3*(1/4 + sqrt(87)/36)**(1/3)) - (-1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3))**2 - (-1/(6*(1/4 + sqrt(87)/36)**(1/3)) + (1/4 + sqrt(87)/36)**(1/3))**4 + 2*(1/4 + sqrt(87)/36)**(1/3) = 0.71072657606222206206
+
+  g1(x) on [0,1]: g1(0)=0, g1(1)=0, g1(1/2)=11/16
+  g1(x)>=0 sampled on [0,1] (0.05 grid): True
+
+  p(x) = -x**4 - x: p(0)=0, p(1)=-2
+  p'(x)=-4*x**3 - 1, critical points: []
+  p(x)<=0 sampled on [0,1]: True
+  p(x) range sample min ~ -2.00000000000000 (expect p(1)=-2 to be the min)
+
+[Step 4] Exact sup_x |Delta_n(x)| for concrete small n (calculus, not grid)
+  n=  2: x*=   1.00000  Delta_n(x*)=  -1.000000000  n*|Delta_n(x*)|=2.00000000000000
+  n=  3: x*=   1.00000  Delta_n(x*)= -0.3333333333  n*|Delta_n(x*)|=1.00000000000000
+  n=  4: x*=   1.00000  Delta_n(x*)= -0.1666666667  n*|Delta_n(x*)|=0.666666666666667
+  n=  5: x*=  0.521148  Delta_n(x*)=  0.1096417591  n*|Delta_n(x*)|=0.548208795531383
+  n=  6: x*=  0.534178  Delta_n(x*)= 0.09641122729  n*|Delta_n(x*)|=0.578467363736329
+  n=  7: x*=  0.543030  Delta_n(x*)= 0.08560367827  n*|Delta_n(x*)|=0.599225747887271
+  n=  8: x*=  0.549442  Delta_n(x*)= 0.07679386954  n*|Delta_n(x*)|=0.614350956357684
+  n=  9: x*=  0.554302  Delta_n(x*)= 0.06954024123  n*|Delta_n(x*)|=0.625862171084454
+  n= 10: x*=  0.558115  Delta_n(x*)= 0.06349165511  n*|Delta_n(x*)|=0.634916551088873
+  n= 11: x*=  0.561186  Delta_n(x*)= 0.05838407886  n*|Delta_n(x*)|=0.642224867441206
+  n= 12: x*=  0.563712  Delta_n(x*)= 0.05402065167  n*|Delta_n(x*)|=0.648247820050117
+  n= 13: x*=  0.565828  Delta_n(x*)= 0.05025362517  n*|Delta_n(x*)|=0.653297127149660
+  n= 14: x*=  0.567626  Delta_n(x*)= 0.04697080322  n*|Delta_n(x*)|=0.657591245105613
+  n= 15: x*=  0.569172  Delta_n(x*)= 0.04408585473  n*|Delta_n(x*)|=0.661287820880008
+  n= 16: x*=  0.570516  Delta_n(x*)= 0.04153146718  n*|Delta_n(x*)|=0.664503474859808
+  n= 17: x*=  0.571695  Delta_n(x*)= 0.03925449013  n*|Delta_n(x*)|=0.667326332253893
+  n= 18: x*=  0.572737  Delta_n(x*)= 0.03721245698  n*|Delta_n(x*)|=0.669824225599422
+  n= 19: x*=  0.573666  Delta_n(x*)= 0.03537106411  n*|Delta_n(x*)|=0.672050218054950
+  n= 20: x*=  0.574499  Delta_n(x*)= 0.03370232079  n*|Delta_n(x*)|=0.674046415765784
+  n= 21: x*=  0.575250  Delta_n(x*)= 0.03218317416  n*|Delta_n(x*)|=0.675846657278804
+  n= 22: x*=  0.575930  Delta_n(x*)= 0.03079447490  n*|Delta_n(x*)|=0.677478447856434
+  n= 23: x*=  0.576549  Delta_n(x*)= 0.02952019022  n*|Delta_n(x*)|=0.678964374981162
+  n= 24: x*=  0.577116  Delta_n(x*)= 0.02834679835  n*|Delta_n(x*)|=0.680323160451474
+  n= 25: x*=  0.577635  Delta_n(x*)= 0.02726281814  n*|Delta_n(x*)|=0.681570453454542
+  n= 26: x*=  0.578114  Delta_n(x*)= 0.02625843985  n*|Delta_n(x*)|=0.682719436084095
+  n= 27: x*=  0.578556  Delta_n(x*)= 0.02532523300  n*|Delta_n(x*)|=0.683781291089870
+  n= 28: x*=  0.578966  Delta_n(x*)= 0.02445591311  n*|Delta_n(x*)|=0.684765567092818
+  n= 29: x*=  0.579347  Delta_n(x*)= 0.02364415402  n*|Delta_n(x*)|=0.685680466564677
+  n= 30: x*=  0.579702  Delta_n(x*)= 0.02288443583  n*|Delta_n(x*)|=0.686533074979526
+  n= 31: x*=  0.580033  Delta_n(x*)= 0.02217192080  n*|Delta_n(x*)|=0.687329544696142
+  n= 32: x*=  0.580343  Delta_n(x*)= 0.02150235136  n*|Delta_n(x*)|=0.688075243672246
+  n= 33: x*=  0.580634  Delta_n(x*)= 0.02087196596  n*|Delta_n(x*)|=0.688774876615400
+  n= 34: x*=  0.580908  Delta_n(x*)= 0.02027742895  n*|Delta_n(x*)|=0.689432584352201
+  n= 35: x*=  0.581166  Delta_n(x*)= 0.01971577217  n*|Delta_n(x*)|=0.690052025851753
+  n= 36: x*=  0.581409  Delta_n(x*)= 0.01918434573  n*|Delta_n(x*)|=0.690636446336072
+  n= 37: x*=  0.581639  Delta_n(x*)= 0.01868077660  n*|Delta_n(x*)|=0.691188734155080
+  n= 38: x*=  0.581856  Delta_n(x*)= 0.01820293338  n*|Delta_n(x*)|=0.691711468530628
+  n= 39: x*=  0.582062  Delta_n(x*)= 0.01774889641  n*|Delta_n(x*)|=0.692206959835263
+  n= 40: x*=  0.582258  Delta_n(x*)= 0.01731693209  n*|Delta_n(x*)|=0.692677283732965
+
+[Step 5] Behaviour of n*sup_x|Delta_n(x)| vs n; identify N0 where interior critical point (near x*~0.589) dominates and the sequence
+  settles into a bound close to M2_exact.
+  M2_exact (sup g1) = 0.710726576062222 at x*=0.589754512301458
+  n*sup|Delta_n| sequence (n=2..40): [2.0, 1.0, 0.6666666669771075, 0.5482087954878807, 0.5784673634916544, 0.5992257483303547, 0.6143509559333324, 0.6258621709421277, 0.6349165514111519, 0.6422248678281903, 0.6482478203251958, 0.653297127224505, 0.6575912451371551, 0.6612878208979964, 0.6645034747198224, 0.6673263320699334, 0.6698242258280516, 0.6720502180978656, 0.674046415835619, 0.6758466577157378, 0.6774784475564957, 0.6789643745869398, 0.6803231602534652, 0.681570453569293, 0.6827194364741445, 0.6837812913581729, 0.6847655670717359, 0.6856804667040706, 0.6865330748260021, 0.687329544685781, 0.6880752434954047, 0.6887748762965202, 0.6894325846806169, 0.6900520259514451, 0.6906364466995001, 0.6911887340247631, 0.6917114686220884, 0.6922069601714611, 0.6926772836595774]
+  smallest N0 s.t. n*sup|Delta_n(x)| <= M2_exact+0.001 for all n in [N0,40] (sampled): 4
+  smallest N0 s.t. n*sup|Delta_n(x)| <= M2_exact+0.005 for all n in [N0,40] (sampled): 4
+  smallest N0 s.t. n*sup|Delta_n(x)| <= M2_exact+0.01 for all n in [N0,40] (sampled): 4
+  smallest N0 s.t. n*sup|Delta_n(x)| <= M2_exact+0.02 for all n in [N0,40] (sampled): 4
+  smallest N0 s.t. n*sup|Delta_n(x)| <= M2_exact+0.05 for all n in [N0,40] (sampled): 4
+
+==============================================================================
+[Step 6] FULL CLOSURE attempt: elementary sign argument
+==============================================================================
+  g1(x) - x*(2-x-x^3) = 0  (expect 0)
+  h(x):=2-x-x^3, h'(x)=-3*x**2 - 1  (negative on [0,1] since -1-3x^2<0)
+  h(1) = 0  (expect 0)  => h(x)>=0 on [0,1] => g1(x)>=0
+  g1''(x) = -12*x**2 - 2  (manifestly negative for all real x => g1' strictly decreasing => at most one root)
+  g1'(0)=2 (>0),  g1'(1)=-4 (<0)  => exactly one root in (0,1), by IVT + strict monotonicity
+  p(x)=-x^4-x, p'(x)=-4*x**3 - 1  (manifestly negative for x>=0)
+  => p strictly decreasing on [0,1] => min_[0,1] p(x) = p(1) = -2
+
+  Combining: for all n>=2, x in [0,1]:
+    M2_exact/... UPPER: n*Delta_n(x) <= g1(x) <= M2_exact = 0.71072657606222206206
+    LOWER: n*Delta_n(x) >= -2/(n-1)
+  => |Delta_n(x)| <= max(M2_exact, 2/(n-1))/n for all n>=2, x in [0,1].
+
+  Crossover: 2/(n-1) = M2_exact at n = [3.81402168901716]
+  n_cross = 3.81402168901716  => for integer n, 2/(n-1)<=M2_exact holds iff n >= 4
+  N0 = 4
+    n=3: 2/(n-1) = 1 = 1.000000000   vs M2_exact = 0.7107265761   2/(n-1)<=M2_exact: False
+    n=4: 2/(n-1) = 2/3 = 0.6666666667   vs M2_exact = 0.7107265761   2/(n-1)<=M2_exact: True
+    n=5: 2/(n-1) = 1/2 = 0.5000000000   vs M2_exact = 0.7107265761   2/(n-1)<=M2_exact: True
+
+  ==> THEOREM (K=2, PROVED): for all n>=4 and all x in [0,1]:
+        |Delta_n(x)| = |F_n^(2)(x)-F_2(x)| <= M2_exact/n
+      where M2_exact = max_x g1(x) is the EXACT real root value 0.71072657606222206206 (root of 2t^3+t-1=0, i.e. g1'(t)=0)
+      This constant is SHARP: n*Delta_n(x*(n)) -> M2_exact as n->infinity (Step 4 table), so no smaller universal constant works for all large n.
+
+  Double-check x2_star satisfies 2x^3+x-1=0: 0 (expect 0)
+
+==============================================================================
+[Step 7] Dense numeric grid double-check of final bound (float, sanity only -- proof is Step 6, exact)
+==============================================================================
+  Grid scan n in [2,200]U{500,1000,5000,20000}, x on 2001-pt grid per n:
+  worst observed |Delta_n(x)| / bound ratio = 1.0000000000 at (n,x)=(2, 1.0)  (must be <=1)
+  PASS: no violation found on grid.

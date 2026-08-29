@@ -1,0 +1,94 @@
+==========================================================================================
+STEP 1: an algebraic simplification of (KEY), substituting (E1)
+==========================================================================================
+W = Psi - eps*Psi_x, substituting Psi_x=(x+y)Psi-I:
+  W = I*eps - Psi*eps*x - Psi*eps*y + Psi
+
+[check] W - eps*(M_y*Psi + I) = 0  (should be 0)
+-> PASS: W(x,y) = eps*[M_y*Psi(x,y) + I(x,y)]  -- exact algebraic
+   identity, a new (to this front) simplification combining (KEY)
+   and (E1); NOT independently a new fact (both inputs are already
+   record facts), just a re-packaging.
+
+==========================================================================================
+STEP 2: why this does NOT let (star-star) [on Psi] control W's
+oscillation without EXTRA information
+==========================================================================================
+
+Delta_W(x) := W(x,y2) - W(x,y1)
+            = eps*[M_y2*Psi(x,y2) - M_y1*Psi(x,y1)]  +  eps*[I(x,y2)-I(x,y1)]
+
+Expand the first bracket (M_y2 = M_y1 - Delta, Delta:=y2-y1, since M_y=1/eps-z
+and z2=z1+Delta):
+
+[check] M_y2*Psi2 - M_y1*Psi1  ==  M_y2*(Psi2-Psi1) + (M_y2-M_y1)*Psi1 ? residual=0
+
+M_y2 - M_y1 = y1 - y2  (exactly -(y2-y1), a CONTROLLED, O(Delta)
+  quantity -- this part is FINE, poses no obstruction.)
+
+BUT M_y2 itself = 1/eps - z2  ->  -infinity as y2->infinity (UNBOUNDED,
+linearly in z2) -- so 'M_y2*(Psi2-Psi1)' is a product of an UNBOUNDED
+(in y2) quantity M_y2 and the OSCILLATION we are trying to bound.
+(star-star) bounds |Psi2-Psi1| by O(Delta/y1) -- multiplying by
+|M_y2|~O(z2)~O(y2) gives O(Delta*y2/y1), which for Delta=delta*y1 is
+O(delta*y2) -- LINEARLY GROWING in y2, NOT vanishing. The naive
+product bound is USELESS here (this is exactly the same 'M_y is
+individually unbounded' fact that h1_translation_structure_attempt's
+whole Part A/B was built to show gets RESCUED only by an EXACT
+cancellation against the OTHER piece of the kernel (K_B) -- a
+cancellation specific to the Phi Volterra equation's own kernel
+structure, which is NOT available here: M_y2*(Psi2-Psi1) has no
+companion term to cancel against inside (KEY) alone.
+
+The eps*[I(x,y2)-I(x,y1)] term: I(x,y2)-I(x,y1) = int_{y1}^{y2}
+Phi(x,y')dy' + [does NOT reduce further without knowing Phi's own
+behavior on [y1,y2] -- circular if the goal IS to bound Phi's
+oscillation]. Bounded crudely by Delta*M_Phi (fine, O(delta*y1),
+i.e. O(delta) after normalizing by z ~ y1 in a LATER step -- but
+this crude bound is exactly as strong as what route (b) already
+gets directly, with none of route (a)'s extra apparatus.
+
+==========================================================================================
+STEP 3: the DIRECT route via (KEY) alone (not via E1-substitution)
+hits the SAME wall from a different angle: needs d/dx of Delta_Psi
+==========================================================================================
+
+W = Psi - eps*Psi_x  directly (no E1 substitution):
+  Delta_W(x) = Delta_Psi(x) - eps * d/dx[Delta_Psi(x)]
+
+(star-star) bounds sup_x|Delta_Psi(x)| -- a SUP-NORM bound on Delta_Psi
+ITSELF, not on its x-DERIVATIVE. Bounding d/dx[Delta_Psi(x)] would need a
+SEPARATE oscillation-type bound on Psi_x(x,y2)-Psi_x(x,y1), which is NOT
+part of (star-star) and is not derived anywhere in the required reading
+(h1_energy_estimate_attempt Sec 8.4 names exactly this "derivative loss"
+as the reason its OWN contraction-mapping route via (BB-Psi') does not
+close either -- differentiating an identity in x requires control of the
+x-derivative of the difference, not merely the difference itself). This
+front's own algebra above confirms, via the (E1)-substituted route, that
+even AVOIDING an explicit Psi_x term does not avoid the underlying
+obstruction -- it resurfaces as the unbounded-M_y-times-oscillation term
+in Step 2. Two syntactically different routes into the SAME wall.
+
+==========================================================================================
+CONCLUSION
+==========================================================================================
+
+Route (a) -- transferring (star-star) from Psi to Phi via (KEY)/(E2) or the
+algebraically-equivalent (E1)-substituted form -- does NOT close the gap.
+Both forms of the attempt reduce to needing EITHER an oscillation bound on
+Psi_x (not available) OR a bound on M_y*(Psi2-Psi1) that requires exactly
+the kind of exact, structure-specific cancellation
+h1_translation_structure_attempt found for the Phi-Volterra kernel
+K(y,t)=M_y*K_A^raw+K_B specifically -- a cancellation NOT available for the
+raw (KEY) identity applied directly to Psi (there is no "K_B-like"
+companion term here to cancel M_y*Delta_Psi against). Route (a) is,
+precisely, a DEAD END -- confirming and sharpening (not merely repeating)
+h1_energy_estimate_attempt Sec 8.4's general "derivative loss" diagnosis
+into the SPECIFIC obstruction for THIS route (an unbounded M_y multiplying
+an O(Delta/y1) oscillation, rather than an abstractly-named derivative-loss
+issue). Route (b) (this front's s01/s02/main document), which works
+DIRECTLY off the ALREADY-CANCELLATION-AWARE closed-form kernel for
+K(y,t) rather than re-deriving a fresh cancellation for W, is the only one
+of the two mandate-named routes that succeeds (with the caveats named
+throughout this front's other scripts and the main document).
+

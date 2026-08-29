@@ -1,0 +1,47 @@
+======================================================================
+Check 1: KEY-substitution identity W = eps*(M_y*Psi + I)
+======================================================================
+W_direct - W_claimed = 0
+PASS: W = eps*(M_y*Psi+I) confirmed exactly.
+
+======================================================================
+Check 2: M_{y2} - M_{y1} = -(y2-y1)
+======================================================================
+M_y2 - M_y1 = y1 - y2  ; -(y2-y1) = y1 - y2
+PASS.
+
+======================================================================
+Check 3: full M_{y2}Psi(y2)-M_{y1}Psi(y1) splitting identity
+======================================================================
+lhs-rhs = 0
+PASS: splitting identity is exact algebra (trivially, by construction).
+
+======================================================================
+Check 4: T1's A_t coefficient  1/z2 - 1/z1 = -Delta/(z1*z2)
+======================================================================
+1/z2-1/z1 = -Delta/((x + y1)*(Delta + x + y1))  ; claimed -Delta/(z1 z2) = -Delta/((x + y1)*(Delta + x + y1))
+PASS.
+
+======================================================================
+Check 5: T2 dominance ratio (Delta/z2)/(Delta/z2^2) = z2
+======================================================================
+ratio = x + y2
+PASS: O(1/z) term dominates O(1/z^2) as z2->infinity (ratio->infinity).
+
+======================================================================
+Check 6: single-integral reduction of K_A^raw, re-derived from
+the RAW (w,u) double-integral definitions (Sec 0), from scratch
+======================================================================
+x' + w  (x':=x+y-w) simplifies to: x + y  expected x+y
+PASS: exponent x'+w = x+y identically, independent of w.
+=> (T_w f)(x+y-w) integrand exponent depends on z:=x+y only, not w or t
+   separately -- confirms the single-integral reduction's premise.
+
+======================================================================
+Check 7: Watson's-lemma IBP identity used to assemble the closed form
+int_0^h e^{-h'/eps} f'(x+h') dh' = e^{-h/eps}f(x+h) - f(x) + (1/eps)K_B(h)f(x)
+======================================================================
+On F(h')=h'^3+sin(h'): LHS - RHS = 0
+PASS: exact IBP identity confirmed on a concrete nontrivial function.
+
+ALL CHECKS PASSED.

@@ -1,0 +1,65 @@
+============================================================================================
+PART 1: g(t) := sin(log(1+t)) is bounded and slowly-oscillating
+(relative-step sense) -- verified symbolically/analytically
+============================================================================================
+g(t) = sin(log(t + 1))
+|g(t)| <= 1 for all t>=0: trivial (sin is bounded).  (H-bdd) HOLDS.
+
+g(y(1+delta_frac)) - g(y), series in delta_frac (fixed y), to O(delta_frac^2):
+δ_frac⋅y⋅cos(log(y + 1))
+────────────────────────
+         y + 1          
+
+leading coefficient (d/d(delta_frac) at 0) as y->infinity: does NOT
+simplify to a constant (it is cos(log(1+y)) * y/(1+y), itself bounded
+by 1 in absolute value for ALL y) -- so |g(s)-g(y)| <= delta_frac + o(delta_frac)
+UNIFORMLY in y, for ALL y>=0 (no exceptional points, unlike a
+piecewise-constant construction with boundaries). This IS the exact
+(H-osc) relative-step condition, genuinely satisfied for ALL y, not
+just asymptotically or on a subsequence.
+
+Numerical confirmation at several y, delta_frac=0.01,0.05,0.1:
+  y=    10: delta=0.01: |g(s)-g(y)|=0.00669 (<=delta? YES) | delta=0.05: |g(s)-g(y)|=0.03337 (<=delta? YES) | delta=0.1: |g(s)-g(y)|=0.06652 (<=delta? YES)
+  y=   100: delta=0.01: |g(s)-g(y)|=0.00091 (<=delta? YES) | delta=0.05: |g(s)-g(y)|=0.00353 (<=delta? YES) | delta=0.1: |g(s)-g(y)|=0.00472 (<=delta? YES)
+  y=  1000: delta=0.01: |g(s)-g(y)|=0.00803 (<=delta? YES) | delta=0.05: |g(s)-g(y)|=0.03880 (<=delta? YES) | delta=0.1: |g(s)-g(y)|=0.07442 (<=delta? YES)
+  y= 10000: delta=0.01: |g(s)-g(y)|=0.00973 (<=delta? YES) | delta=0.05: |g(s)-g(y)|=0.04790 (<=delta? YES) | delta=0.1: |g(s)-g(y)|=0.09394 (<=delta? YES)
+
+============================================================================================
+PART 2: g's own Cesaro mean, (1/y) int_0^y g(t) dt, computed EXACTLY
+============================================================================================
+Substituting t=e^u-1 (dt=e^u du): int sin(u)*e^u du = -sqrt(2)*exp(u)*cos(u + pi/4)/2
+
+int_0^Y g(t) dt = -sqrt(2)*(Y + 1)*cos(log(Y + 1) + pi/4)/2 + 1/2
+
+Cesaro mean (1/Y) int_0^Y g(t) dt = (-sqrt(2)*(Y + 1)*cos(log(Y + 1) + pi/4) + 1)/(2*Y)
+
+[check] d/dY[int_0^Y g dt] - g(Y) = 0  (should be 0)
+-> PASS: exact antiderivative confirmed by direct differentiation.
+
+============================================================================================
+PART 3: NEITHER g(Y) NOR its Cesaro mean converges as Y->infinity
+(both oscillate with the SAME non-vanishing amplitude)
+============================================================================================
+Cesaro mean - (1/2)(sin(log(1+Y))-cos(log(1+Y)))  ->  AccumBounds(sqrt(2)*AccumBounds(-1/2, 1/2) - 1, sqrt(2)*AccumBounds(-1/2, 1/2) + 1)  as Y->inf
+(i.e. the Cesaro mean is asymptotically (1/2)(sin(log(1+Y))-cos(log(1+Y))),
+ an oscillation of amplitude sqrt(2)/2, NOT a convergent sequence.)
+
+         Y         g(Y)    Cesaro mean
+     1e+01     0.677014       0.827141
+     1e+02    -0.995273      -0.448570
+     1e+03     0.585559      -0.112148
+     1e+04     0.212700       0.595018
+     1e+05    -0.869127      -0.681860
+     1e+06     0.948713       0.316289
+     1e+07    -0.398731       0.259169
+     1e+08    -0.415848      -0.662641
+
+Both columns keep oscillating without settling, no matter how large Y
+gets -- CONFIRMING that (H-bdd)+(H-osc) alone, without an independently
+established (H-ces), do NOT imply convergence. The relative-step
+oscillation bound this front derives for Phi (s01/s02) is therefore
+NOT, by itself, sufficient input to the classical Tauberian theorem --
+Cesaro convergence of A(y)/(x+y) must ALSO be established, separately,
+and is NOT addressed by (i) or by the self-averaging identity (which
+only says Phi_y(x) and A(y)/(x+y) differ by o(1) -- it does not, and
+cannot, say anything about whether A(y)/(x+y) itself has a limit).

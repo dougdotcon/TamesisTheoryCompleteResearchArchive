@@ -1,0 +1,95 @@
+========================================================================
+(a) Boundedness: trivial, |sin(log(1+t))| <= 1 for all t>=0.
+========================================================================
+Confirmed by inspection (sin is bounded by 1 everywhere).
+
+========================================================================
+(b) EXACT (non-asymptotic) relative-step oscillation bound
+========================================================================
+
+Claim (independently derived, NOT copied from the target's first-order-
+Taylor argument): for g(t):=sin(log(1+t)), and ANY y>=0, s with
+0<=s-y<=delta*y (0<=delta<1):
+
+  |g(s)-g(y)| <= log(1+delta) <= delta      for ALL y>=0 (Y=0 suffices)
+
+Proof: |sin A - sin B| = |2 cos((A+B)/2) sin((A-B)/2)| <= |A-B|
+  (using |cos|<=1, |sin(w)|<=|w|). With A=log(1+s), B=log(1+y):
+  |A-B| = |log((1+s)/(1+y))| = log(1+ (s-y)/(1+y))  [s>=y so (1+s)/(1+y)>=1]
+       <= log(1 + delta*y/(1+y)) <= log(1+delta)    [since y/(1+y)<1]
+  and log(1+delta) <= delta for delta>=0 (standard elementary inequality).
+QED. This is STRICTLY sharper and fully rigorous (no O(delta^2) remainder
+to separately control, unlike a first-order Taylor argument) -- it holds
+for ALL delta in [0,1), not just asymptotically small delta, and for
+EVERY y>=0, not merely y>=Y for some threshold.
+
+y=           0 delta=  0.5000  |g(s)-g(y)|=         0.0  bound_log(1+d)=  0.405465  OK
+y=           0 delta=  0.1000  |g(s)-g(y)|=         0.0  bound_log(1+d)= 0.0953102  OK
+y=           0 delta=  0.0100  |g(s)-g(y)|=         0.0  bound_log(1+d)=0.00995033  OK
+y=           0 delta=  0.0010  |g(s)-g(y)|=         0.0  bound_log(1+d)= 0.0009995  OK
+y=           1 delta=  0.5000  |g(s)-g(y)|=    0.154388  bound_log(1+d)=  0.405465  OK
+y=           1 delta=  0.1000  |g(s)-g(y)|=    0.036756  bound_log(1+d)= 0.0953102  OK
+y=           1 delta=  0.0100  |g(s)-g(y)|=  0.00382865  bound_log(1+d)=0.00995033  OK
+y=           1 delta=  0.0010  |g(s)-g(y)|= 0.000384443  bound_log(1+d)= 0.0009995  OK
+y=          10 delta=  0.5000  |g(s)-g(y)|=    0.316327  bound_log(1+d)=  0.405465  OK
+y=          10 delta=  0.1000  |g(s)-g(y)|=   0.0665182  bound_log(1+d)= 0.0953102  OK
+y=          10 delta=  0.0100  |g(s)-g(y)|=  0.00668804  bound_log(1+d)=0.00995033  OK
+y=          10 delta=  0.0010  |g(s)-g(y)|= 0.000669039  bound_log(1+d)= 0.0009995  OK
+y=        1000 delta=  0.5000  |g(s)-g(y)|=    0.272101  bound_log(1+d)=  0.405465  OK
+y=        1000 delta=  0.1000  |g(s)-g(y)|=   0.0744185  bound_log(1+d)= 0.0953102  OK
+y=        1000 delta=  0.0100  |g(s)-g(y)|=  0.00802895  bound_log(1+d)=0.00995033  OK
+y=        1000 delta=  0.0010  |g(s)-g(y)|= 0.000809124  bound_log(1+d)= 0.0009995  OK
+y=       1e+07 delta=  0.5000  |g(s)-g(y)|=    0.329404  bound_log(1+d)=  0.405465  OK
+y=       1e+07 delta=  0.1000  |g(s)-g(y)|=    0.085464  bound_log(1+d)= 0.0953102  OK
+y=       1e+07 delta=  0.0100  |g(s)-g(y)|=  0.00910524  bound_log(1+d)=0.00995033  OK
+y=       1e+07 delta=  0.0010  |g(s)-g(y)|=  0.00091641  bound_log(1+d)= 0.0009995  OK
+
+worst-case |g(s)-g(y)|/delta observed across grid: 0.91641  (<=1 confirms the sharp elementary bound holds; the target's own claim
+'bounded by 1 in absolute value for ALL y>=0' is CONFIRMED, and shown to
+follow from an exact, not merely first-order, argument.
+
+========================================================================
+(c)+(d) Exact closed form for int_0^Y g(t)dt via t=e^u-1, sympy,
+independently re-derived from scratch
+========================================================================
+sympy: int sin(u) e^u du = -sqrt(2)*exp(u)*cos(u + pi/4)/2
+d/du[antideriv - (sin(u)-cos(u))e^u/2] = 0  (0 expected if same up to constant)
+antideriv - claimed (should be a t-independent constant, sympy may fold it in): 0
+
+int_0^Y g(t) dt (exact, sympy, via t=e^u-1 substitution and definite eval) =
+                ⎛             π⎞    
+  √2⋅(Y + 1)⋅cos⎜log(Y + 1) + ─⎟    
+                ⎝             4⎠   1
+- ────────────────────────────── + ─
+                2                  2
+
+Difference vs target's stated closed form (-sqrt(2)*(Y+1)*cos(log(Y+1)+pi/4)/2 + 1/2):
+ -> 0
+PASS: my independent sympy re-derivation EXACTLY matches the target's
+claimed closed form for int_0^Y g(t) dt.
+
+d/dY[int_0^Y g dt] - g(Y) = 0  (0 expected)
+PASS: closed form differentiates back to g(Y) exactly.
+
+========================================================================
+(c) Independent NUMERICAL confirmation via DIRECT quadrature
+(not the closed form), up to Y=1e8, of continued oscillation
+========================================================================
+           Y         g(Y)    Cesaro(direct quad)    Cesaro(closed form)   match?
+          10     0.677014           0.8271412624           0.8271412624     True
+         100    -0.995273          -0.4485697870          -0.4485697870     True
+        1000     0.585559          -0.1121479316          -0.1121479316     True
+       1e+04     0.212700           0.5950183553           0.5950183553     True
+       1e+05    -0.869127          -0.6818596810          -0.6818596810     True
+       1e+06     0.948713           0.3162887724           0.3162887724     True
+       1e+07    -0.398731           0.2591686651           0.2591686651     True
+       1e+08    -0.415848          -0.6626410962          -0.6626410962     True
+
+Amplitude check: predicted asymptotic amplitude of Cesaro-mean
+oscillation is sqrt(2)/2 = 0.7071067811865476
+observed range of Cesaro means across Y=10..1e8: -0.6818596810054532 to 0.8271412624184402
+
+NO monotone trend toward a single limit across 8 orders of magnitude in Y
+-- confirms BOTH g(Y) and its Cesaro mean keep oscillating without
+converging, matching the target's claim exactly, via an independent
+direct-quadrature computation (not the closed form, not the target's numbers).

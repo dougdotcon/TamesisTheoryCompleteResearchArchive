@@ -1,6 +1,25 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-124`: onda 26 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-125`: onda 26 frente (c)
+`TAUBERIAN-OSCILLATION-BOUND-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **sétima onda
+consecutiva** (ondas 20-26) neste gap. Rota (a) confirmada beco sem
+saída; Rota (b) provou condicionalmente
+`|\Phi_{y_2}(x)-\Phi_{y_1}(x)|\le C_1\delta+C_2/y_1` (forma de passo
+relativo exigida pelo teorema Tauberiano). **Achado mais afiado**: o
+teorema Tauberiano clássico precisa de TRÊS hipóteses, não duas —
+convergência de Cesàro (`H-ces`) é um item logicamente independente,
+não estabelecido em lugar nenhum, demonstrado via contraexemplo
+elaborado `g(t)=\sin(\log(1+t))`. `(U1)`/`(U2)`/`H1` permanecem
+ABERTOS. Referee hostil: SOUND WITH NAMED ISSUES, achado MODERADO
+construtivo do próprio referee — dado a ponte de auto-mediação já
+provada, `(H-ces)` sozinha é necessária e suficiente para `(U1)`,
+tornando `OSC-PHI` desnecessário como degrau intermediário.
+Recomendação: uma 8ª onda deveria atacar `(H-ces)` diretamente, ou
+rotacionar para um ângulo diferente dado 7 ondas consecutivas.
+**Onda 26 com 2/3 frentes integradas; frente (b) com referee em
+andamento.**
+Anterior: `DISC-DEC-124`: onda 26 frente (a)
 `K-FREE-CONVERGENCE-BRIDGE-ATTEMPT` integrada como Estágio 47 —
 **Teorema A**: fechamento COMPLETO incondicional, `K`-livre, com taxa
 explícita — acoplamento `M_n^{(K)}` vs. um novo objeto contínuo `M_K'`

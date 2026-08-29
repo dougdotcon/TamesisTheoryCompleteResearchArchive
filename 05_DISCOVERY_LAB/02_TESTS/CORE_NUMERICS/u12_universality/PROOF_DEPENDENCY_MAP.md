@@ -1107,6 +1107,83 @@ flowchart TD
 > `.../mclust_h1_validity_attempt/h1_translation_structure_attempt/ATTEMPT.md`
 > e `.../h1_translation_structure_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-125`.]** Onda 26 frente (c)
+> (`TAUBERIAN-OSCILLATION-BOUND-ATTEMPT`), **sétima onda consecutiva**
+> (ondas 20-26) neste gap, atacou os dois ingredientes que
+> `DISC-DEC-122` havia nomeado para fechar `(U1)` via o teorema
+> Tauberiano clássico aplicado à identidade de auto-mediação.
+>
+> **Rota (a)** (transferir o limitante de oscilação `(star-star)` de
+> `\Psi` para `\Phi` via `(E2)`/`(KEY)`): **beco sem saída confirmado**
+> — o coeficiente `M_y\sim-z` é não-limitado e não tem parceiro de
+> cancelamento dentro de `(KEY)` isoladamente (ao contrário do núcleo
+> `K(y,t)` completo, onde tal cancelamento é exatamente o que
+> `h1_translation_structure_attempt` explorou).
+>
+> **Rota (b)** (derivar o limitante diretamente da assíntota em forma
+> fechada de `DISC-DEC-122`): **sucedeu, condicionalmente**. Via uma
+> decomposição exata `T0`/`T1`/`T2` da diferença de Volterra
+> `\Phi_{y_2}(x)-\Phi_{y_1}(x)`, provou `|\Phi_{y_2}(x)-\Phi_{y_1}(x)|
+> \le C_1\delta+C_2/y_1` para `y_2-y_1=\delta y_1` — exatamente a forma
+> de passo relativo que o teorema clássico exige — condicional a duas
+> novas hipóteses, `(C')` (regularidade Lipschitz uniforme em `t`) e
+> `(U)` (precisão uniforme do resto `O(1/z^2)` da assíntota, incluindo
+> o regime `h/y\to1` nunca testado por nenhum ancestral), `(U)`
+> confirmada numericamente em três varreduras independentes.
+>
+> **Achado mais afiado: o teorema Tauberiano clássico precisa de TRÊS
+> hipóteses, não duas.** `DISC-DEC-122`/`DISC-DEC-123` nomearam apenas
+> o limitante de oscilação (`H-osc`) e uma verificação geral de
+> "transferência de hipóteses" (`H-transfer`) — mas o teorema clássico
+> também exige, como item logicamente independente,
+> `\mathrm{Cesàro}\text{-}(C,1)` convergência (`H-ces`) da própria
+> média corrente `A(y)/(x+y)`. A identidade de auto-mediação
+> incondicional só diz que `\Phi_y` e sua média de Cesàro diferem por
+> `o(1)` — não diz que nenhuma das duas converge. Demonstrado via um
+> contraexemplo elaborado, `g(t):=\sin(\log(1+t))`: limitado,
+> satisfazendo a condição EXATA de oscilação relativa para todo
+> `y\ge0`, mas nem `g(Y)` nem sua média de Cesàro (forma fechada exata,
+> `-\sqrt2(Y+1)\cos(\log(Y+1)+\pi/4)/2+1/2`, derivada por `\int t=e^u-1`)
+> convergem — oscilam indefinidamente até `Y=10^8`/`10^{20}`.
+> `(H\text{-}ces)` permanece, portanto, um requisito genuinamente em
+> aberto e não estabelecido em nenhum lugar deste registro.
+>
+> Referee hostil dedicado: re-derivou toda a decomposição `T0/T1/T2` à
+> mão a partir do zero, antes de ler qualquer script; re-implementou o
+> núcleo de forma independente e reproduziu os valores numéricos da
+> hipótese `(U)` dígito a dígito, incluindo a varredura combinada de
+> transição no regime `h/y\to1`; re-derivou e confirmou o contraexemplo
+> `\sin(\log(1+t))` de forma independente (incluindo um limitante ainda
+> mais afiado e rigoroso para sua oscilação relativa) e sua não-
+> convergência via quadratura numérica direta até `Y=10^8`; confirmou
+> que a cláusula de "cautela extrema" do mandato foi honrada — o
+> documento nunca alega `(U1)` fechado em lugar nenhum. Dois achados:
+> um BAIXA (enquadramento impreciso de qual termo é "o problema" na
+> Rota (a) — ambos os termos falham na mesma ordem, não apenas um);
+> um MODERADO, construtivo — um corolário mais afiado do próprio
+> achado desta frente: dado que a ponte de auto-mediação já está
+> provada incondicionalmente, `(H-ces)` sozinha é necessária E
+> suficiente para `(U1)` via desigualdade triangular elementar,
+> tornando `(H-osc)`/`(OSC-PHI)` — o resultado técnico central desta
+> própria frente — logicamente desnecessário como degrau intermediário
+> para fechar `(U1)` especificamente (não invalida `(OSC-PHI)` como
+> resultado matemático novo sobre `K(y,t)` em si). Ambos corrigidos/
+> creditados por notas datadas na `ATTEMPT.md` da própria frente.
+>
+> **Recomendação explícita da frente, endossada pelo referee**: uma
+> oitava onda que queira continuar esta linha Tauberiana deveria atacar
+> `(H-ces)` diretamente (não `(H-osc)`, agora resolvido) — ou a sessão
+> orquestradora pode legitimamente julgar, dado sete ondas consecutivas
+> neste exato gap, que um ângulo fundamentalmente diferente sobre
+> `H1`/`(U1)`/`(U2)` é melhor uso de uma nona onda.
+>
+> Veredito **SOUND WITH NAMED ISSUES — ACCEPT for catalogue**. `H1`,
+> `(U1)`, `(U2)` permanecem ABERTOS; `phi_REDB`, `Phi_U(c)`,
+> `Phi_infinity(c)` e a lei assintótica de 4 termos: intocadas. Fontes:
+> `.../h1_translation_structure_attempt/tauberian_oscillation_bound_attempt/ATTEMPT.md`
+> e
+> `.../tauberian_oscillation_bound_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

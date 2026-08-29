@@ -1,0 +1,135 @@
+==============================================================================
+STEP 1: elementary algebraic identities used throughout
+==============================================================================
+[check] 1/z2 - 1/z1  ==  -Delta/(z1*z2)  identically?  residual = 0   -> PASS
+
+==============================================================================
+STEP 2: the T0 / T1 / T2 split of Phi_{y2}(x) - Phi_{y1}(x)
+==============================================================================
+
+Phi_{y2}(x) - Phi_{y1}(x)
+  = [g_{y2}(x) - g_{y1}(x)]                                    =: T0
+  + int_0^{y1} [K(y2,t) - K(y1,t)] Phi_t(x) dt                  =: T1
+  + int_{y1}^{y2} K(y2,t) Phi_t(x) dt                           =: T2
+
+(exact rearrangement of (VOLTERRA-Phi) at y1 and y2, splitting the y2
+integral's [0,y1] part off from its [y1,y2] tail -- no approximation yet.)
+
+==============================================================================
+STEP 3: bounding T0 (trivial)
+==============================================================================
+
+|T0| = |e^{-y2/eps} - e^{-y1/eps}| <= e^{-y1/eps}   (both terms positive,
+  y2>y1 so e^{-y2/eps}<e^{-y1/eps}, and e^{-y1/eps}-e^{-y2/eps} <= e^{-y1/eps})
+-> 0 as y1 -> infinity, for ANY fixed eps>0, REGARDLESS of Delta.
+
+==============================================================================
+STEP 4: bounding T2 via the CLOSED FORM (not the crude operator norm)
+==============================================================================
+
+For t in [y1,y2], h:=y2-t in [0,Delta], z:=x+y2=z2 is CONSTANT (independent
+of t, since it involves y2 not t). Applying the closed form pointwise (each
+Phi_t assumed to satisfy hypothesis (C), see caveat below):
+
+  K(y2,t) Phi_t(x) = [Phi_t(x) - e^{-h/eps} Phi_t(x+h)] / z2 + O(1/z2^2)
+
+Bracket is bounded by 2*M_Phi (M_Phi:=sup|Phi|, hypothesis (B)), so:
+
+  |T2| <= Delta * 2*M_Phi / z2  +  Delta * O(1/z2^2)
+        = O(Delta/z2)          [dominant term, since Delta/z2^2 << Delta/z2]
+
+[check] (Delta/z2) / (Delta/z2^2) = z2 -> unbounded as z2 grows, confirming Delta/z2 IS the dominant (larger) of the two terms.
+        symbolic ratio = x + y2
+
+Substituting Delta = delta*y1 (relative step), z2 ~ y1 (1+delta) for
+delta<1 so y1/z2 is bounded below by 1/2:
+  |T2| = O(Delta/z2) = O(delta*y1 / y1) = O(delta),  UNIFORMLY in y1.
+
+==============================================================================
+STEP 5: bounding T1 -- the harder integral over the FULL history [0,y1]
+==============================================================================
+
+For t in [0,y1], write h1:=y1-t in [0,y1] (ranges over the FULL history,
+including h1 as large as y1 itself -- t near 0), h2:=y2-t=h1+Delta,
+z1:=x+y1, z2:=x+y2=z1+Delta (CONSTANT in t on this range too).
+
+Using the closed form for BOTH K(y2,t) and K(y1,t):
+
+  K(y2,t)Phi_t(x) - K(y1,t)Phi_t(x)
+    = Phi_t(x)*[1/z2 - 1/z1]
+      - [ e^{-h2/eps}Phi_t(x+h2)/z2 - e^{-h1/eps}Phi_t(x+h1)/z1 ]
+      + O(1/z1^2) + O(1/z2^2)
+    =: A_t - B_t + (error)
+
+So T1 = int_0^{y1} A_t dt  -  int_0^{y1} B_t dt  +  y1*O(1/z1^2)   [*]
+
+[*] uses the (NOT independently proved to full rigor -- flagged, see main
+    document Sec on hypothesis (C')) assumption that the O(1/z^2) remainder
+    is UNIFORM over t in [0,y1], i.e. uniform as h1 ranges all the way up to
+    y1 itself (h1/y1 -> 1), not merely for h1 up to ~y1/2 as the ONLY range
+    h1_translation_structure_attempt numerically tested (Sec 5.4 there).
+
+--- Sub-term int_0^{y1} A_t dt ---
+
+A_t = Phi_t(x)*[1/z2-1/z1] = -Phi_t(x)*Delta/(z1*z2)   (constant coefficient
+  in t, using Step 1's identity)
+
+int_0^{y1} A_t dt = -Delta/(z1*z2) * A(y1),   A(y1):=int_0^{y1} Phi_t(x) dt
+
+|A(y1)| <= y1*M_Phi (hypothesis (B)), so:
+
+  |int A_t dt| <= Delta*y1*M_Phi/(z1*z2) = O(Delta/z1)  [z1~z2~y1]
+                = O(delta*y1/y1) = O(delta)             [Delta=delta*y1]
+
+--- Sub-term int_0^{y1} B_t dt (the exponentially-localized piece) ---
+
+Substitute h1 as integration variable (dh1=-dt):
+
+  int_0^{y1} B_t dt
+   = int_0^{y1} [ e^{-(h1+Delta)/eps} Phi_{y1-h1}(x+h1+Delta) / z2
+                - e^{-h1/eps}         Phi_{y1-h1}(x+h1)         / z1 ] dh1
+
+CRUDE bound (uses ONLY boundedness (B), no smoothness needed -- avoids the
+h1-uniformity worry above for THIS sub-term specifically):
+
+  |int_0^{y1} e^{-h1/eps} Phi_{y1-h1}(x+h1) dh1|
+    <= M_Phi * int_0^{y1} e^{-h1/eps} dh1 = M_Phi*eps*(1-e^{-y1/eps}) <= M_Phi*eps
+
+  |int_0^{y1} e^{-(h1+Delta)/eps} Phi_{y1-h1}(x+h1+Delta) dh1|
+    <= M_Phi * eps * e^{-Delta/eps} * (1-e^{-y1/eps}) <= M_Phi*eps
+
+so:  |int_0^{y1} B_t dt| <= M_Phi*eps*(1/z1 + 1/z2) = O(eps/y1)
+
+-- vanishes as y1->infinity at FIXED eps, with NO delta-dependence at all.
+
+--- Assembling T1 ---
+
+|T1| <= |int A_t dt| + |int B_t dt| + y1*O(1/z1^2)
+      = O(delta) + O(eps/y1) + O(1/y1)
+      = O(delta) + O(1/y1)          [combining the two O(1/y1)-type terms]
+
+==============================================================================
+STEP 6: FINAL BOUND
+==============================================================================
+
+|Phi_{y2}(x) - Phi_{y1}(x)| <= |T0|+|T1|+|T2|
+   = O(e^{-y1/eps}) + [O(delta)+O(1/y1)] + O(delta)
+   = C1(x,eps)*delta + C2(x,eps)/y1                                  (OSC-PHI)
+
+for y2-y1 = delta*y1 (0<delta<1), for SOME constants C1,C2 depending on
+x, eps, M_Phi, C_K:=sqrt(pi/2)+eps (the DISC-DEC-113/115 operator bound,
+used implicitly through the closed-form coefficients), but NOT on y1 or
+delta themselves.
+
+This is EXACTLY the relative-step "slowly oscillating" form the classical
+continuous Tauberian theorem needs: for every epsilon>0, choose delta small
+enough that C1*delta < epsilon/2, then Y large enough that C2/Y < epsilon/2;
+then y1>=Y and 0<=y2-y1<=delta*y1 imply |Phi_{y2}(x)-Phi_{y1}(x)| < epsilon.
+
+Two hypotheses this derivation NEEDS, beyond (B) [standing]:
+ (C') a Lipschitz-type regularity bound on Phi_t(.), UNIFORM in t
+      (not just for one fixed f as in the predecessor's (C))
+ (U)  the closed-form kernel's O(1/z^2) remainder is uniform in h
+      over the FULL range h in [0,y], including h/y -> 1 (t -> 0),
+      not only h growing proportionally with y as tested up to h=y/2
+      by the predecessor -- THIS is numerically tested fresh in s02.

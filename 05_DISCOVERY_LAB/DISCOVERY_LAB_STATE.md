@@ -1,6 +1,23 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-133`: onda 28 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-134`: onda 29 autorizada —
+3 frentes após survey de portfolio dedicado. Frente (a): 10ª onda
+consecutiva no gap H1/M-CLUST(b), mas com alvo qualitativamente
+diferente das 9 anteriores — ataque direto às duas hipóteses
+sharply-diagnosticadas pela onda 28 (`DISC-DEC-132`), `(C')` e `(U)`,
+que juntas fecham `(H-ces)→(U1)→H1` sem nenhum aparato Tauberiano.
+Frente (b): fechamento da soma hipergeométrica de "parâmetro-diagonal"
+nomeada pelo Estágio 51 como a pista mais promissora para `C(γ)`, ou
+uma técnica genuinamente diferente para `C(γ)` em si. Frente (c):
+estender o método de eliminação por resultante do Estágio 48 (K=2,3,4
+já fechados no tier exato) para `K=5` — diversificação deliberada,
+método recém-provado e generalizável, dando à onda uma chance mais
+alta de um fechamento genuíno. Itens verificados como já fechados e
+explicitamente não re-atacados: Conjecturas 1–2, a ponte distribucional
+`K`-livre. Nenhuma edição de conteúdo matemático ainda — apenas
+autorização; as três frentes serão despachadas como agentes de
+pesquisa separados.
+Anterior: `DISC-DEC-133`: onda 28 frente (b)
 `GAMMA-C-GAMMA-CONSTRUCTION-ATTEMPT` integrada como Estágio 51 em
 `THEOREM.md`. `C(γ)` NÃO foi construído — permanece inteiramente
 ABERTO, honestamente relatado pela própria frente. Três contribuições

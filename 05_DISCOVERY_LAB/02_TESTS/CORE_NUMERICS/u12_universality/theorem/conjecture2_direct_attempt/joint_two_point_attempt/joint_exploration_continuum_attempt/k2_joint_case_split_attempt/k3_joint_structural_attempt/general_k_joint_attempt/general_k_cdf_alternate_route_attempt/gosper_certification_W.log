@@ -1,0 +1,55 @@
+======================================================================
+PART A: positive/negative controls (harness soundness)
+----------------------------------------------------------------------
+  control1 C(W,r), symbolic r: gosper_term = True  [0.12s]
+  control2 C(W,K), symbolic K (binomial degree): gosper_term = True  [0.02s]
+  control3 C(n-W+r-1,K-1)*W, symbolic K,r (structurally close to real term): gosper_term = True  [0.08s]
+  control4 (negative) 1/W: gosper_term = None  [0.01s]  (expected None)
+  Positive controls all found closures: True
+======================================================================
+
+PART B: concrete K, symbolic r -- expect SUCCESS every time
+----------------------------------------------------------------------
+  K=1: gosper_term is-not-None = True   [0.20s]
+  K=2: gosper_term is-not-None = True   [1.55s]
+  K=3: gosper_term is-not-None = True   [1.68s]
+  K=4: gosper_term is-not-None = True   [1.91s]
+  K=5: gosper_term is-not-None = True   [2.18s]
+  K=6: gosper_term is-not-None = True   [2.76s]
+  K=7: gosper_term is-not-None = True   [2.87s]
+  All concrete K in 1..7 Gosper-summable: True
+
+  Extracting gosper_sum closed forms for K=1,2 and verifying
+  numerically against the true (single-sum) S_r at several (n,r,k):
+  K=1: gosper_sum(W,r,t) obtained in 0.19s
+     n=10 r=1 k=5: direct=150 closed=150 OK
+     n=11 r=1 k=7: direct=308 closed=308 OK
+  K=2: gosper_sum(W,r,t) obtained in 1.30s
+     n=12 r=2 k=6: direct=3360 closed=3360 OK
+     n=10 r=1 k=5: direct=590 closed=590 OK
+     n=9 r=2 k=4: direct=585 closed=585 OK
+     n=11 r=1 k=7: direct=1218 closed=1218 OK
+  gosper_sum closed forms verified (K=1,2): True
+======================================================================
+
+PART C -- THE CERTIFICATE: K symbolic (with r, n symbolic too).
+----------------------------------------------------------------------
+  term(W) = (K*W - K*r - W*r + n*r + r**2)*binomial(W, r)*factorial(-W + n + r - 1)/(factorial(K)*factorial(-K - W + n + r))
+  hypersimp(term, W) recognized as hypergeometric: True  [0.32s]
+  ratio = (W + 1)*(K + W - n - r)*(-K*r + K*(W + 1) + n*r + r**2 - r*(W + 1))/((W - r + 1)*(W - n - r + 1)*(K*W - K*r - W*r + n*r + r**2))
+  ratio.is_rational_function(W) = True
+  gosper_term(term, W) with K SYMBOLIC -> None   [13.19s]
+  Certified non-existence (None, AND hypersimp genuinely recognized
+  the term as hypergeometric first -- i.e. this is NOT a fast
+  recognition-failure bailout): True
+======================================================================
+SUMMARY: controls sound = True; concrete K (1..7) all Gosper-summable
+& K=1,2 closed forms verified = True; symbolic-K certificate
+(None, genuine, in 13.19s) = True.
+
+This is a SECOND, INDEPENDENT Gosper-certified non-existence result,
+obtained on a structurally SIMPLER object (one fewer free parameter,
+O eliminated algebraically) than Estagio 44's own certificate --
+confirming the obstruction is not an artifact of the nested
+O-then-V summation order, and survives even after an exact
+combinatorial identity removes an entire summation layer.

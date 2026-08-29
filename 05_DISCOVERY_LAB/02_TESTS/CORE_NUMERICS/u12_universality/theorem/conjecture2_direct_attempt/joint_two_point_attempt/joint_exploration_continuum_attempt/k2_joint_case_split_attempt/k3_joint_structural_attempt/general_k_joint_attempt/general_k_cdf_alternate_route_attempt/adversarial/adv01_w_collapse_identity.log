@@ -1,0 +1,99 @@
+======================================================================
+PART 1: W-collapse identity -- symbolic (sympy exact)
+======================================================================
+r<K: InnerJ(V,W-V) - InnerJ_W(W) simplifies to: 0
+r<K: d/dV[InnerJ(V,W-V)] simplifies to: 0
+r=K: InnerJ(V,W-V) - InnerJ_W(W) simplifies to: 0
+r=K: d/dV[InnerJ(V,W-V)] simplifies to: 0
+PART 1: PASSED (both r<K and r=K, symbolic)
+
+======================================================================
+PART 1b: numeric spot-check, multiple (V,O) splits of the same W
+======================================================================
+n=19 K=3 r=1 W=9 splits=[7, 3, 0, 6, 8] values={525} OK
+n=16 K=4 r=2 W=11 splits=[1, 9, 8, 11, 3] values={250} OK
+n=26 K=6 r=0 W=19 splits=[13, 11, 7, 8, 9] values={114} OK
+n=30 K=6 r=5 W=10 splits=[10, 1, 0, 7, 2] values={1098020} OK
+n=17 K=5 r=5 W=5 splits=[0, 4, 1, 5, 2] values={30940} OK
+n=9 K=6 r=0 W=2 splits=[0, 1, 2] values={12} OK
+n=25 K=2 r=2 W=16 splits=[11, 10, 12, 2, 14] values={250} OK
+n=17 K=5 r=3 W=10 splits=[10, 0, 8, 1, 3] values={1638} OK
+n=15 K=6 r=3 W=7 splits=[0, 5, 1, 6, 2] values={2394} OK
+n=16 K=1 r=1 W=1 splits=[0, 1] values={16} OK
+n=15 K=4 r=1 W=2 splits=[0, 1, 2] values={1287} OK
+n=23 K=5 r=5 W=14 splits=[3, 13, 7, 8, 9] values={16445} OK
+n=13 K=1 r=0 W=7 splits=[3, 1, 0, 2, 6] values={7} OK
+n=29 K=2 r=2 W=20 splits=[16, 13, 8, 4, 0] values={290} OK
+n=23 K=4 r=1 W=19 splits=[1, 8, 14, 11, 19] values={77} OK
+n=25 K=2 r=1 W=5 splits=[5, 4, 1, 0, 3] values={290} OK
+n=10 K=1 r=1 W=7 splits=[2, 4, 7, 5, 1] values={10} OK
+n=26 K=1 r=0 W=9 splits=[1, 5, 3, 4, 0] values={9} OK
+n=24 K=6 r=3 W=20 splits=[19, 10, 11, 0, 16] values={123} OK
+n=8 K=1 r=1 W=6 splits=[4, 3, 2, 1, 5] values={8} OK
+PART 1b: PASSED
+
+======================================================================
+PART 2: hockey-stick identity sum_{V=r}^{W} C(V-1,r-1) = C(W,r)
+======================================================================
+Generic symbolic r: sp.summation(...) - C(W,r) simplifies to: 0
+
+PART 2b: r=0 boundary -- genuine subtlety found and resolved
+----------------------------------------------------------------------
+Term-by-term check with sympy's OWN binomial convention (C(n,k)=0 for
+k<0), which is what a literal/naive re-implementation would use:
+  W=0: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+  W=1: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+  W=2: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+  W=3: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+  W=4: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+  W=5: term-by-term(r=0)=0  C(W,0)=1  MISMATCH (naive convention)
+
+FINDING: under the naive/literal convention C(n,-1):=0 (sympy's and
+math.comb's own default), the hockey-stick identity as literally
+stated FAILS at r=0 for every W>0 -- the symbolic 'simplifies to 0'
+verdict above is a statement for GENERIC (nonzero) r; substituting
+r=0 into the sum's own symbolic closed form W*C(W-1,r-1)/r gives an
+indeterminate 0/0, not a value that visibly matches C(W,0)=1 by
+direct term-by-term summation under the naive convention.
+
+RESOLUTION (confirmed by reading the target's OWN code, per the task
+mandate's item 4/5 style cross-check -- reference_Sr_double_sum.py
+line 64 and InnerJ_direct's own r=0 branch, and w_collapse_identity.py's
+use of math.comb(W,r) which is correctly 1 at r=0): the target's own
+scripts special-case C(V-1,r-1) at r=0 to the correct combinatorial
+meaning -- 'number of compositions of V into 0 positive parts' = the
+Kronecker delta [V=0], NOT the naive binomial-function value. Python's
+math.comb(V-1,-1) does not even accept a negative second argument (it
+raises ValueError), so this special-casing is a REQUIRED, deliberate
+choice in their code, not an accidental omission -- and it is the
+mathematically correct choice, verified below.
+
+======================================================================
+PART 3: original double sum vs. collapsed single sum, exact integers
+======================================================================
+Total cells: 810
+
+3a) Using the NAIVE convention (cV=math.comb(V-1,r-1) attempted -- but
+    since math.comb rejects negative k, we substitute the sympy-style
+    'return 0' stand-in for r=0 to demonstrate the naive mismatch):
+    Naive-convention mismatches: 145 / 810  (breakdown by r: {0: 145})
+    -- all at r=0, exactly as PART 2b predicts; this confirms the
+    'C(V-1,r-1)' notation in the ATTEMPT.md/Estagio-44 prose is NOT
+    safe to interpret via a literal binomial-function call at r=0;
+    it requires the Kronecker-delta reading used in the target's own
+    code.
+
+3b) Using the CORRECT (combinatorially meaningful, and target's own)
+    convention cV(V,0):=[V=0]:
+    Mismatches: 0 / 810
+    PART 3 (correct convention): PASSED
+
+======================================================================
+OVERALL VERDICT
+======================================================================
+W-collapse identity (Claim 1): CONFIRMED, symbolic + numeric, r<K and r=K.
+Hockey-stick + overall collapse (Claim 2): CONFIRMED for the
+combinatorially-correct convention, which the target's own code uses
+correctly. A LOW-severity documentation-clarity finding is raised:
+the ATTEMPT.md prose does not spell out that C(V-1,r-1) needs this
+r=0 boundary convention, even though its own code handles it correctly.

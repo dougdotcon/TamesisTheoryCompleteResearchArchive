@@ -1,0 +1,52 @@
+Raw (unsimplified) term(W):
+(W*binomial(-W + n + r - 1, K - 1) + r*binomial(-W + n + r - 1, K))*binomial(W, r)
+
+======================================================================
+SANITY CHECK: does the self-disclosed hypersimp pitfall reproduce
+(a spurious FAST None from calling gosper_term on the UNSIMPLIFIED term)?
+======================================================================
+gosper_term(raw term) = None  [0.040s]
+(A fast None here, with no hypersimp recognition check, would be a
+spurious non-certificate -- exactly the pitfall the target discloses
+hitting once and fixing. Reproduced independently above.)
+
+Simplified term(W):
+(K*W - K*r - W*r + n*r + r**2)*binomial(W, r)*factorial(-W + n + r - 1)/(factorial(K)*factorial(-K - W + n + r))
+
+hypersimp(term, W) = (W + 1)*(K + W - n - r)*(-K*r + K*(W + 1) + n*r + r**2 - r*(W + 1))/((W - r + 1)*(W - n - r + 1)*(K*W - K*r - W*r + n*r + r**2))
+ratio.is_rational_function(W) = True
+Term genuinely recognized as hypergeometric: True
+
+======================================================================
+PART A: concrete K positive controls (K=1,2), symbolic r
+======================================================================
+  K=1: gosper_term -> FOUND  [0.174s]
+  K=2: gosper_term -> FOUND  [1.392s]
+
+======================================================================
+PART A2: concrete K=3..7 positive controls, symbolic r
+======================================================================
+  K=3: gosper_term -> FOUND  [1.344s]
+  K=4: gosper_term -> FOUND  [1.655s]
+  K=5: gosper_term -> FOUND  [1.458s]
+  K=6: gosper_term -> FOUND  [1.760s]
+  K=7: gosper_term -> FOUND  [2.044s]
+
+======================================================================
+PART B (THE CERTIFICATE): K fully symbolic (together with r,n)
+======================================================================
+gosper_term(term, W), K symbolic -> None
+Elapsed: 11.19s
+
+Target's claimed timings: 13.19s / 12.17s / 11.69s across three
+independent runs. This referee's independent run (own from-scratch
+term construction): 11.19s -- consistent, same order of
+magnitude, same result (None).
+
+======================================================================
+SUMMARY
+======================================================================
+Raw-term pitfall reproduced: True (spurious fast None, see above)
+Simplified term recognized as hypergeometric: True
+Concrete K positive controls (1-7): all FOUND (see Part A/A2 above)
+Symbolic-K certificate: None in 11.19s -- GENUINE (hypersimp succeeded first, algorithm ran to completion)

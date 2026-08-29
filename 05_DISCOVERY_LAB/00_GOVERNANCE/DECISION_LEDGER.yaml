@@ -7826,3 +7826,61 @@ decisions:
       explicacao primaria identificada -- este Estagio elimina uma
       classe de candidatos, nao fecha o gap. phi_REDB, Phi_U(c),
       Phi_infinity(c): intocadas.
+
+  - id: DISC-DEC-120
+    date: 2026-08-29
+    decision: >
+      Onda 25 frente (b) GENERAL-K-CDF-ALTERNATE-ROUTE-ATTEMPT integrada
+      como Estagio 45 em THEOREM.md. Alvo: reatacar a CDF fechada
+      geral-K por uma organizacao do calculo diferente da Camada-2 ja
+      certificada Gosper-nao-somavel (Estagio 44). Resultado: uma
+      identidade de colapso genuina e nova -- InnerJ(V,O) depende de
+      (V,O) somente atraves da soma W:=V+O, permitindo colapsar a soma
+      dupla original numa unica soma univariada via hockey-stick,
+      S_r(n,K,k)=sum_{W=r}^{k} C(W,r)*InnerJ(W), com o parametro O
+      eliminado algebricamente. Verificada contra a construcao original
+      em 768 celulas, zero discrepancias. Segundo certificado Gosper
+      independente: o somando colapsado e Gosper-somavel em todo K=1..7
+      concreto; com K simbolico, gosper_term termina e retorna None em
+      13.19s -- ~25x mais rapido que os 313.1s do Estagio 44 no objeto
+      nao-colapsado, um parametro livre a menos -- demonstrando que a
+      obstrucao nao e artefato da ordem de truncamento do Estagio 44.
+      Checagens complementares novas (Camada 3/montagem externa e via
+      geradora-de-funcoes, nunca tentadas pelo Estagio 44): nenhuma
+      reducao elementar hyperexpand; troca de ordem falha mesmo em K
+      concreto; exploracao GF eliminando K mostra que a obstrucao se
+      move de K para r -- diagnostico mais afiado: a verdadeira
+      obstrucao e ter DOIS parametros simbolicos simultaneos, nao K
+      especificamente. sympy.holonomic investigado e corretamente
+      descartado como nao-aplicavel aqui, divulgado sem superalegacao.
+      Nenhuma formula fechada encontrada (tier (a) nao alcancado).
+      Spot-check da sessao antes do despacho: confirmou independentemente
+      via sympy que InnerJ(V,O) depende so de W (derivada parcial zero,
+      20 configuracoes numericas) e a identidade hockey-stick
+      (sp.summation, diferenca zero). Referee hostil dedicado: SOUND
+      WITH NAMED ISSUES -- ACCEPT for catalogue. Reconstruiu a
+      identidade W-colapso e o colapso hockey-stick do zero (768 + 810
+      celulas independentes, zero discrepancias sob a convencao
+      correta); reproduziu o segundo certificado Gosper independentemente
+      (None em 11.19s e 12.40s, confirmando o ganho de velocidade);
+      confirmou a guarda hypersimp como codigo real; confirmou os
+      diagnosticos de funcao geradora independentemente. Um achado
+      BAIXA (F1): a prosa da propria frente nao divulgava que a
+      verificacao generica-em-r da identidade hockey-stick deixa uma
+      fronteira 0/0 indeterminada em r=0, tratada corretamente pelo
+      proprio codigo (convencao delta de Kronecker) mas nao documentada
+      -- nenhum numero errado, apenas lacuna de clareza documental,
+      corrigida por nota datada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 45, ~85 linhas);
+      .../general_k_cdf_alternate_route_attempt/ATTEMPT.md (1 nota
+      datada, Secao 3.2, esclarecendo o escopo da verificacao
+      hockey-stick em r=0); DECISION_LEDGER.yaml (este arquivo);
+      DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhuma formula de
+      registro anterior alterada. CDF fechada geral-K para K>=5
+      permanece ABERTA -- este Estagio adiciona um segundo certificado
+      Gosper independente e um diagnostico mais afiado, nao um
+      fechamento.

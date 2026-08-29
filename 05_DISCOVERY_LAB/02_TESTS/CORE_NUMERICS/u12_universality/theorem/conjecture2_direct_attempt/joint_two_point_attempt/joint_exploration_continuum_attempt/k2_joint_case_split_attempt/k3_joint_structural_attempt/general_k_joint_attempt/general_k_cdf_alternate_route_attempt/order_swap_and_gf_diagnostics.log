@@ -1,0 +1,83 @@
+DIAGNOSTIC 1: order-swap control -- sum over r FIRST (fixed W)
+----------------------------------------------------------------------
+  Concrete K, r as the summation variable:
+    K=1: hypersimp recognizes term = True; gosper_term(in r) = None   [0.42s]
+    K=2: hypersimp recognizes term = True; gosper_term(in r) = None   [3.74s]
+    K=3: hypersimp recognizes term = True; gosper_term(in r) = None   [4.22s]
+    K=4: hypersimp recognizes term = True; gosper_term(in r) = None   [4.37s]
+    K=5: hypersimp recognizes term = True; gosper_term(in r) = None   [4.37s]
+  Any concrete K succeeded via r-first order: False
+  (Contrast: W-first order (gosper_certification_W.py) succeeds
+  at EVERY concrete K=1..7 tested. r-first fails already at every
+  concrete K tried here -- a strictly worse order, confirming
+  W-first is the structurally correct organization to attempt.)
+
+Sub-step: proving the OGF identity sum_K InnerJ(W;K) x^K =
+(W*x+r)*(1+x)^(n-W+r-1), by the binomial theorem, symbolically.
+----------------------------------------------------------------------
+  sp.summation(C(M,K)*x^K, K=0..M) - (1+x)^M = Piecewise((0, xg <= 1), (-(xg + 1)**M + Sum(xg**Kp*binomial(M, Kp), (Kp, 0, M)), True))
+  NOTE (self-disclosed): sp.summation's symbolic-M result carries a
+  Piecewise convergence condition (|x|<=1) that is a cosmetic
+  artifact of sympy's default hypergeometric-series summation
+  machinery -- NOT a genuine restriction, since the sum is finite
+  (M a nonnegative integer, no convergence question can arise).
+  Proper verification: check the identity holds for EVERY concrete
+  M as an exact polynomial identity in x (this is literally Newton's
+  Binomial Theorem for nonnegative integer exponents, elementary):
+  Verified as an exact polynomial identity in x for M=0..11: True
+  (This IS the OGF identity used, with M := n-W+r-1, applied twice --
+  once for the C(.,K-1) piece via the standard index shift, once
+  directly for the C(.,K) piece.)
+  PROVED (elementary Binomial Theorem, concrete-M spot-checked): True
+
+  Direct numeric check of the InnerJ OGF identity itself (not just
+  the abstract binomial theorem), via COEFFICIENT EXTRACTION:
+  [x^K] (W*x+r)*(1+x)^(n-W+r-1) ?= InnerJ_true(W;n,K,r), for every
+  K in its valid range r<=K<=n-W+r, at several concrete (n,W,r).
+
+  (Self-disclosed bug in an earlier draft of this exact check: a
+  first attempt compared a TRUNCATED SUM sum_{K=r}^{Kmax}
+  InnerJ_true(K)*x^K against the FULL closed-form polynomial
+  (W*x+r)*(1+x)^(n-W+r-1) directly -- but that polynomial's low-order
+  x^0,...,x^{r-1} coefficients are generically NONZERO (they come
+  from the same algebraic formula continued to K<r, where it is not
+  combinatorially meaningful as InnerJ), so a sum starting at K=r
+  necessarily disagreed with the full polynomial by exactly that
+  missing low-order part -- a verification-range bug, not an error
+  in the underlying identity. Fixed below by comparing COEFFICIENTS
+  one K at a time, which is well-defined and correct for every
+  K>=r regardless of what happens for K<r.)
+  InnerJ OGF identity verified via coefficient extraction (many n,W,r,K): True
+
+DIAGNOSTIC 2: generating-function-in-K (mandate avenue (b))
+----------------------------------------------------------------------
+  K eliminated (folded into GF marker x). r CONCRETE, x & n symbolic:
+    r=0: gosper_term = FOUND   [0.02s]
+    r=1: gosper_term = FOUND   [0.06s]
+    r=2: gosper_term = FOUND   [0.09s]
+    r=3: gosper_term = FOUND   [0.13s]
+    r=4: gosper_term = FOUND   [0.21s]
+    r=5: gosper_term = FOUND   [0.27s]
+  All concrete r (0..5) Gosper-summable with K eliminated via GF: True
+
+  r ALSO symbolic (x, n, r all free -- K is entirely gone from this term):
+    hypersimp recognizes term as hypergeometric: True
+    gosper_term(term, W), r symbolic -> None   [0.07s]
+    Genuine certificate (hypersimp succeeded, algorithm ran, None returned): True
+
+======================================================================
+SUMMARY
+  Diagnostic 1 (r-first order fails even at concrete K): True
+  OGF-in-K identity proved (elementary + numeric): True
+  Diagnostic 2 (GF-marked W-sum succeeds for r CONCRETE): True
+  Diagnostic 2 (GF-marked W-sum fails once r is ALSO symbolic, genuine): True
+
+Interpretation: folding K into a generating-function marker x removes
+K's own symbolic-degree-binomial obstruction cleanly, but the SAME
+kind of obstruction reappears on r once r is also left symbolic. The
+obstruction is not specifically 'about K' -- it is about having TWO
+simultaneous free 'family-size' parameters (K and r) each entering a
+binomial coefficient's DEGREE while also coupling to the summation
+variable. This is a sharper structural diagnosis than either Estagio
+39's or Estagio 44's own (each of which only ever had ONE such
+parameter -- K alone -- left symbolic at the point of certification).

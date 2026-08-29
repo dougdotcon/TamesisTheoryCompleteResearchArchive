@@ -1,0 +1,20 @@
+======================================================================
+Negative-result sanity check: direct call, no reindexing
+======================================================================
+eval_sum_hyper(term, (W, r, k)) directly -> None  [0.040s]
+(No hyper() branch this way -- confirms the reindexing below is a
+genuine technical necessity to invoke this sympy code path, not
+evidence of anything being hand-waved.)
+
+======================================================================
+Reindexed call: W = r + i, sum over i = 0..k-r (matches target exactly)
+======================================================================
+term(i), K symbolic: (K*i - i*r + n*r)*binomial(i + r, r)*factorial(-i + n - 1)/(factorial(K)*factorial(-K - i + n))
+eval_sum_hyper obtained a result in 2.34s
+Closed-form branch contains hyper()/pFq objects: True
+
+hyperexpand applied [0.35s]: still contains hyper(): True
+
+======================================================================
+SUMMARY: CONFIRMED. Target's claimed timings: eval_sum_hyper ~2.01s, hyperexpand ~0.33s.
+This referee's independent run: eval_sum_hyper 2.34s, hyperexpand 0.35s -- consistent, same conclusion (does NOT reduce to elementary form for K symbolic).

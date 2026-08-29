@@ -1,0 +1,39 @@
+Concrete-K sanity check first (K=3): does eval_sum_hyper produce
+a genuine closed form consistent with the Gosper result?
+----------------------------------------------------------------------
+  eval_sum_hyper (K=3) RAISED an internal sympy exception:
+  ValueError: Non-suitable parameters.   [0.38s]
+  DISCLOSED (not this front's bug): this is a known sympy
+  hyperexpand internal limitation ('Non-suitable parameters',
+  raised inside sympy/simplify/hyperexpand.py's devise_plan)
+  that occurs on some CONCRETE-K instances of this exact
+  term, even though the underlying sum unquestionably has a
+  closed form there (Section 4's gosper_sum found and verified
+  it independently for K=1,2 by a completely different code
+  path). This does not affect the symbolic-K test below, which
+  uses a structurally different (more parameters symbolic)
+  hyperexpand call path and does not raise.
+
+K SYMBOLIC: constructing the terminating-hypergeometric-function
+representation via eval_sum_hyper (the same object gosper_term
+certified has no ELEMENTARY hypergeometric-TERM antidifference --
+this checks the weaker, broader question of whether the sum, as a
+terminating SPECIAL FUNCTION, itself reduces further).
+----------------------------------------------------------------------
+  term(i), K symbolic: (K*i - i*r + n*r)*binomial(i + r, r)*factorial(-i + n - 1)/(factorial(K)*factorial(-K - i + n))
+  eval_sum_hyper obtained a result in 2.01s
+  Closed-form branch (contains hyper()):
+  n*r*factorial(n - 1)*hyper((r + 1, K - n, -K/(-K + r) - n*r/(-K + r) + r/(-K + r)), (1 - n, -n*r/(-K + r)), 1)/(factorial(K)*factorial(-K + n)) - (K*k - K*r + K - k*r + n*r + r**2 - r)*binomial(k + 1, r)*factorial(-k + n + r - 2)*hyper((1, k + 2, K + k - n - r + 1, K*k/(K - r) - K*r/(K - r) + 2*K/(K - r) - k*r/(K - r) + n*r/(K - r) + r**2/(K - r) - 2*r/(K - r)), (k - r + 2, k - n - r + 2, K*k/(K - r) - K*r/(K - r) + K/(K - r) - k*r/(K - r) + n*r/(K - r) + r**2/(K - r) - r/(K - r)), 1)/(factorial(K)*factorial(-K - k + n + r - 1))
+  Contains unevaluated hyper()/pFq objects: True
+
+  Applying hyperexpand() to test reduction to elementary form:
+  [0.33s] hyperexpand still contains hyper(): True
+
+  CONCLUSION: the terminating hypergeometric-function
+  representation exists (a legitimate 'closed form involving
+  special functions', exactly as Estagio 39's mandate
+  anticipated as a possible outcome) but sympy.hyperexpand
+  does NOT reduce it to anything elementary for (n,K,r,k)
+  symbolic -- the SAME conclusion Estagio 39 reached for its
+  own analogous object, now independently confirmed for
+  THIS front's collapsed single-sum object too.

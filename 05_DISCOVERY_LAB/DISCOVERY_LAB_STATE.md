@@ -1,6 +1,19 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-119`: onda 25 frente (d)
+**Última atualização:** 2026-08-29 (`DISC-DEC-120`: onda 25 frente (b)
+`GENERAL-K-CDF-ALTERNATE-ROUTE-ATTEMPT` integrada como Estágio 45 —
+identidade de colapso nova (`InnerJ(V,O)` depende só de `W:=V+O`,
+colapsando a soma dupla numa única soma via hockey-stick) e um SEGUNDO
+certificado Gosper independente, `~25×` mais rápido, num objeto
+estruturalmente mais simples que o Estágio 44 (um parâmetro livre a
+menos) — reforçando que a obstrução da CDF fechada geral-`K` é robusta
+à reorganização do cálculo. Diagnóstico novo: a obstrução real é ter
+DOIS parâmetros simbólicos simultâneos, não `K` especificamente
+(via exploração de função geradora eliminando `K`). Nenhuma fórmula
+fechada encontrada; `K\ge5` permanece ABERTO. Referee hostil: SOUND
+WITH NAMED ISSUES, um achado BAIXA (lacuna de documentação em `r=0`,
+nenhum número errado, corrigido por nota datada).
+Anterior: `DISC-DEC-119`: onda 25 frente (d)
 `MCLUST-GAP-RATE-CANDIDATE-ATTEMPT` integrada — testou `(c/n)^{1/4}`
 (deixado explicitamente não-testado por N1) junto de vizinhos `1/3`,
 `1/5` contra os dados em bin do gap abstrato-vs-real M-CLUST(b).

@@ -1,0 +1,30 @@
+======================================================================
+(a) OGF identity: derived from scratch via two binomial-theorem uses
+======================================================================
+Binomial theorem sum_K C(M,K)x^K = (1+x)^M spot-checked M=3,5,8: OK
+(Wx+r)(1+x)^M - [Wx(1+x)^M + r(1+x)^M] = 0  (trivial algebra, should be 0)
+
+Coefficient-extraction cross-check against InnerJ (own implementation):
+All coefficient-extraction checks passed: True
+
+======================================================================
+(b) Diagnostic 1 spot-check: r-first summation order, concrete K=1
+======================================================================
+K=1, summing over r (fixed W): hypersimp recognized=True, gosper_term=None  [0.41s]
+CONFIRMED: r-first order fails Gosper already at concrete K=1 (genuine, hypersimp recognized the term first) -- matches the target's claim that this order is strictly worse than the W-first order.
+
+======================================================================
+(c) Diagnostic 2 spot-check: GF-marked term, r concrete vs symbolic
+======================================================================
+  r=0 (concrete): gosper_term = FOUND  [0.03s]
+  r=2 (concrete): gosper_term = FOUND  [0.09s]
+  r symbolic: hypersimp recognized=True, gosper_term = None  [0.06s]
+CONFIRMED: GF-marked (K eliminated) term IS Gosper-summable for r
+concrete but genuinely fails (hypersimp-confirmed) once r is ALSO left
+symbolic -- matches the target's 'obstruction moves from K to r' claim.
+
+======================================================================
+sympy.holonomic API sanity check (Section 6.3's disclosure)
+======================================================================
+Public API of sympy.holonomic: ['DifferentialOperator', 'DifferentialOperators', 'HolonomicFunction', 'HolonomicSequence', 'RecurrenceOperator', 'RecurrenceOperators', 'expr_to_holonomic', 'from_hyper', 'from_meijerg', 'holonomic', 'holonomicerrors', 'recurrence']
+Matches the target's description: HolonomicFunction, DifferentialOperator(s), RecurrenceOperator(s), from_hyper, from_meijerg, expr_to_holonomic -- all operate on an ALREADY-GIVEN operator/expression, none is a decision procedure that takes an unevaluated finite sum with free symbolic parameters (K,r) and decides holonomicity uniformly in them (that would require Zeilberger's algorithm / creative telescoping, absent from sympy).

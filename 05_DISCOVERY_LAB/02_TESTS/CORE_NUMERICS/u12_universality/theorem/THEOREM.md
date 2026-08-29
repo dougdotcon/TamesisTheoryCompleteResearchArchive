@@ -6556,3 +6556,102 @@ ONDE e POR QUE a via natural (Estágio 41 + Gosper) trava: um nível
 dentro do bloco `S_r`, não apenas na montagem externa. Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+## [Extensão, Estágio 45 — 2026-08-29]
+
+**Onda 25, frente (b), `DISC-DEC-118`
+(`GENERAL-K-CDF-ALTERNATE-ROUTE-ATTEMPT`).** Alvo: reatacar a CDF
+fechada geral-`K` por uma organização do cálculo DIFERENTE da Camada-2
+já certificada Gosper-não-somável (Estágio 44), roteando ao redor da
+obstrução em vez de repeti-la.
+
+### O que aconteceu
+
+> **Uma identidade de colapso genuína (nova), e um segundo certificado
+> Gosper independente — em um nível estruturalmente MAIS simples,
+> ~25× mais rápido — não fecha, mas fecha o círculo do diagnóstico.**
+> O Estágio 44 trunca `S_r(n,K,k)` em dois passos separados (`O\le k`
+> externo, depois `V\le k-O` interno). Esta frente prova um fato novo
+> — que o Estágio 44 nunca usou —: a forma fechada citada `InnerJ(V,O)`
+> depende de `(V,O)` **somente através da soma** `W:=V+O`, não de como
+> `W` se divide entre eles. Com isto, o truncamento em `k` pode ser
+> aplicado **uma única vez**, sobre a variável combinada `W`, em vez de
+> duas: somando `C(V-1,r-1)` sobre a divisão-`O` implícita, para `W`
+> fixo, colapsa via a identidade clássica hockey-stick
+> `\sum_{V=r}^{W}C(V-1,r-1)=C(W,r)` numa identidade nova e
+> estruturalmente mais simples:
+> `S_r(n,K,k)=\sum_{W=r}^{k}C(W,r)\cdot\mathrm{InnerJ}(W)` — uma única
+> soma univariada, com o parâmetro `O` eliminado algebricamente, um
+> símbolo livre a menos que a própria Camada 2 do Estágio 44. Verificada
+> contra a construção original de soma dupla do Estágio 44 (re-implementada
+> do zero) em `768` células `(n,K,r,k)`, zero discrepâncias.
+>
+> **O segundo certificado Gosper.** O somando colapsado `C(W,r)\cdot
+> \mathrm{InnerJ}(W)` É Gosper-somável em todo `K=1,\ldots,7` concreto
+> testado; com `K` (junto com `r,n`) totalmente simbólico,
+> `gosper_term` roda o algoritmo genuíno até o fim (com uma checagem
+> explícita `hypersimp`, documentada, guardando contra o mesmo pitfall
+> de "`None` rápido espúrio" que o Estágio 44 já havia guardado) e
+> retorna `None` em `13{,}19`s — um certificado de não-existência
+> genuíno e reproduzível, num objeto estruturalmente mais simples
+> (um parâmetro livre a menos), `~25\times` mais rápido de obter que
+> os `313{,}1`s do Estágio 44 na soma dupla não-colapsada — demonstrando
+> que a obstrução NÃO é um artefato da ordem de truncamento em dois
+> passos do Estágio 44, e sobrevive mesmo depois de uma identidade
+> exata eliminar uma camada de soma inteira.
+>
+> **Checagem complementar nova (Camada 3/montagem externa e via
+> geradora-de-funções, nunca tentadas pelo Estágio 44).** Espelhando o
+> fallback do Estágio 39: nenhuma redução elementar via `hyperexpand`
+> encontrada; um controle de troca de ordem mostra que a ordem
+> alternativa de soma falha mesmo em `K` concreto; uma exploração via
+> função geradora ordinária eliminando `K` mostra que a obstrução se
+> move de `K` para `r`, não desaparece — o achado mais afiado: a
+> verdadeira obstrução é ter **dois** parâmetros simbólicos de
+> "tamanho de família" simultâneos, não `K` especificamente.
+> `sympy.holonomic` investigado honestamente e corretamente descartado
+> como não-aplicável para um certificado de classe mais ampla que
+> Gosper aqui (divulgado, sem superalegação).
+
+**O que isto NÃO fecha.** Nenhuma fórmula fechada encontrada (tier (a)
+não alcançado). O certificado permanece de classe Gosper, não uma
+classe holonômica/P-recursiva mais ampla.
+
+### Verificação adversarial independente
+
+Referee hostil dedicado (`.../general_k_cdf_alternate_route_attempt/adversarial/REFEREE_REPORT.md`):
+reconstruiu a identidade `W`-colapso e o colapso hockey-stick do zero,
+confirmando ambos simbólica e numericamente (768 configurações
+próprias, mais 810 células numa reimplementação independente do zero);
+reproduziu o segundo certificado Gosper independentemente (`None` em
+`11{,}19`s e `12{,}40`s em duas rodadas), confirmando o ganho de
+velocidade `~25\times`; confirmou a guarda `hypersimp` como código real,
+corretamente posicionada; confirmou independentemente os diagnósticos
+de função geradora; confirmou a divulgação honesta sobre
+`sympy.holonomic`.
+
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** Um
+> achado BAIXA (F1): a prosa da própria frente não divulgava que a
+> verificação genérica-em-`r` da identidade hockey-stick deixa uma
+> fronteira `0/0` indeterminada em `r=0`, tratada corretamente pelo
+> próprio código da frente (convenção delta de Kronecker) mas não
+> documentada na prosa — nenhum número reportado estava errado, apenas
+> uma lacuna de clareza documental, corrigida por nota datada na
+> própria `ATTEMPT.md`, Seção 3.2.
+
+Ver
+`.../general_k_joint_attempt/general_k_cdf_alternate_route_attempt/ATTEMPT.md`
+e
+`.../general_k_cdf_alternate_route_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Nenhuma fórmula de registro anterior é substituída. A CDF completa
+geral-`K` (`K\ge5`) permanece sem fórmula fechada — agora com DOIS
+certificados Gosper independentes, em duas formulações estruturalmente
+distintas (Estágio 44 e este Estágio), reforçando que a obstrução é
+robusta à reorganização do cálculo, mais um diagnóstico novo (dois
+parâmetros simbólicos simultâneos como a verdadeira fonte da
+obstrução) para orientar tentativas futuras. Nenhuma alegação de
+progresso em Millennium Problem; matemática combinatória pura interna
+a este arquivo.

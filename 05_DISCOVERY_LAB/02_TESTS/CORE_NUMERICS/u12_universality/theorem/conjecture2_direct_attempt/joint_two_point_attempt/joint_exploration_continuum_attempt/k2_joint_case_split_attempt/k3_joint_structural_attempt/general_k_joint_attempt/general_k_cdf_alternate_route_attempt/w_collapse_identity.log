@@ -1,0 +1,22 @@
+PART 1: InnerJ(V,O) depends on (V,O) only through W:=V+O
+----------------------------------------------------------------------
+  r<K case: InnerJ(V, W-V) - InnerJ_W(W) simplifies to: 0
+  r=K case: InnerJ(V, W-V) - InnerJ_W(W) simplifies to: 0
+  PROVED (symbolic, exact): True
+
+PART 2: hockey-stick collapse sum_{O=0}^{W-r} C(W-O-1,r-1) = C(W,r)
+----------------------------------------------------------------------
+  sp.summation(C(V-1,r-1), V=r..W) - C(W,r) = 0
+  PROVED (symbolic, sp.summation, exact): True
+
+PART 3: numeric verification of S_r = sum_W C(W,r)*InnerJ(W)
+        against reference_Sr_double_sum.Sr_double_sum
+----------------------------------------------------------------------
+  Total cases tested: 768; mismatches: 0
+  W-collapse identity verified numerically: True
+
+======================================================================
+SUMMARY: W-dependence proof = True, hockey-stick proof = True, numeric verification (many n,K,r,k) = True.
+This establishes the NEW identity S_r(n,K,k) = sum_{W=r}^{k} C(W,r)*InnerJ(W)
+as a genuine, proved, doubly-verified structural simplification of Estagio 44's
+nested Camada-2/Camada-3 double sum -- the core new result of this front.

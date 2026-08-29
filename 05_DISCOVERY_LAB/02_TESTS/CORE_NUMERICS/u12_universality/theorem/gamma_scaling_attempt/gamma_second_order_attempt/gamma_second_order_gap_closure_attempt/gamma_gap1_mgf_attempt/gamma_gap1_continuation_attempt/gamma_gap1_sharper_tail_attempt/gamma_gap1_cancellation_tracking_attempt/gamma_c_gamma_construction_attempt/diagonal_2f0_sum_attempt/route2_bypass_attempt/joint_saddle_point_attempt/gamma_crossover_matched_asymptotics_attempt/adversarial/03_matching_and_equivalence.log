@@ -1,0 +1,67 @@
+==============================================================================
+PART (a): Section 4 matching claims, independent bivariate approach
+==============================================================================
+A_m(g)/n at m=lambda*sqrt(n): lambda**2/(2*gamma) + 3*lambda/(2*gamma*sqn) - lambda**2/gamma**2 - lambda/(gamma**2*sqn)
+Same expr with sqn=1/u (u=1/sqrt(n)):  lambda**2/(2*gamma) + 3*lambda*u/(2*gamma) - lambda**2/gamma**2 - lambda*u/gamma**2
+  u^0 term (O(1) in n): lambda**2/(2*gamma) - lambda**2/gamma**2
+  u^1 term (O(1/sqrt(n))): 3*lambda/(2*gamma) - lambda/gamma**2
+
+CLAIM 1: inner lambda^2 coeff = (gamma - 2)/(2*gamma**2), T_prof's own = 1/(2*gamma) - 1/gamma**2
+  difference = 0
+  CONFIRMED (independent route).
+
+CLAIM 2: inner lambda^1 coeff = (3*gamma - 2)/(2*gamma**2), T_prof(0)*Delta_lin = (3*gamma - 2)/(2*gamma**2)
+  difference = 0
+  CONFIRMED (independent route).
+
+==============================================================================
+PART (b): Section 6 logical-equivalence algebra, BOTH directions
+          spelled out explicitly (front's script only shows forward)
+==============================================================================
+Forward: IF S_n=G_n+D (i.e. Lemma-E's hypothesis with this D) THEN cross -> D + 1 - 1/(2*gamma)
+  = D + 1 - 1/(2g) = the predecessor's cited conjectural target.  MATCHES.
+
+Backward: IF cross -> D+1-1/(2g) THEN S_n' -> D + G_n + 1
+  => S_n = S_n'-1 -> D + G_n  = G_n + D.  MATCHES Lemma-E's hypothesis exactly.
+
+Both directions check out as PURE algebra, given:
+  (1) S_n'=1+S_n  (cited identity -- independently re-verified from
+      PRIMARY combinatorial definitions in Part (c) below, not just
+      quoted),
+  (2) the predecessor's decomposition S_n'-G_n-1/(2g) = cross + o(1)
+      with the o(1) term independently shown -> 0 (predecessor,
+      Poisson-summation + exact-decomposition confirmation, cited),
+  (3) Lemma E itself (PROVED, both directions, Estagio 26 / re-
+      confirmed by an independent referee in gamma_second_order_
+      attempt/adversarial/REFEREE_REPORT.md).
+So the front's claimed 'crossover -> D(g)+1-1/(2g) IFF C(g)' is a
+VALID, non-overstated logical consequence -- REFEREE CONFIRMS.
+
+==============================================================================
+PART (c): independent re-verification, from PRIMARY definitions, of
+          S_n'(gamma) = 1 + S_n(gamma)
+==============================================================================
+A_k(n,g) := sum_{mm=0}^{k} C(k,mm) g^mm (1-g)^(k-mm) * P_{k,mm},
+P_{k,mm} := prod_{i=1}^{mm} (1 - (k-i)/n)   [empty product = 1 for mm=0]
+S_n(g) := sum_{k=1}^{n} A_k(n,g)
+
+term_m(n,g) := (g/n)^m * m! * T(n,m),
+T(n,m) := sum_{j=0}^{n-m} C(j+m,m)*C(n-j,m)*(1-g)^j
+S_n'(g) := sum_{m=0}^{n} term_m(n,g)
+
+  n=3 g=1/3: S_n'=806/243  1+S_n=806/243  match=True
+  n=3 g=2/5: S_n'=3628/1125  1+S_n=3628/1125  match=True
+  n=3 g=3/7: S_n'=1094/343  1+S_n=1094/343  match=True
+  n=4 g=1/3: S_n'=3301/864  1+S_n=3301/864  match=True
+  n=4 g=2/5: S_n'=92/25  1+S_n=92/25  match=True
+  n=4 g=3/7: S_n'=278695/76832  1+S_n=278695/76832  match=True
+  n=5 g=1/3: S_n'=646654/151875  1+S_n=646654/151875  match=True
+  n=5 g=2/5: S_n'=7955078/1953125  1+S_n=7955078/1953125  match=True
+  n=5 g=3/7: S_n'=42073182/10504375  1+S_n=42073182/10504375  match=True
+  n=6 g=1/3: S_n'=1097219/236196  1+S_n=1097219/236196  match=True
+  n=6 g=2/5: S_n'=1119217/253125  1+S_n=1119217/253125  match=True
+  n=6 g=3/7: S_n'=2042903/470596  1+S_n=2042903/470596  match=True
+
+12/12 exact matches. mismatches=0
+CONFIRMED (independently, from PRIMARY definitions, exact rational
+arithmetic): S_n'(gamma) = 1 + S_n(gamma) holds at every point tested.

@@ -1,6 +1,22 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-151`: onda 34 autorizada
+**Última atualização:** 2026-08-29 (`DISC-DEC-152`: onda 34 (frente
+única) `GAMMA-CROSSOVER-MATCHED-ASYMPTOTICS-ATTEMPT` integrada como
+Estágio 60 em `THEOREM.md`. `C(γ)` continua inteiramente ABERTO. Nova
+forma fechada para a assintótica interna (`m=O(1)` fixo) de `term_m`,
+`term_m(n,γ)=1/γ+A_m(γ)/n+O(1/n^2)`, `A_m(γ)=m(m+3)/(2γ)-m(m+1)/γ²`,
+via lema de Watson ordinário — reproduz `c(γ)` já-provado do zero como
+checagem não-circular. Checagem de assintóticas casadas bem-sucedida
+em duas ordens contra a maquinaria mesoscala existente (Estágios
+56-58). **Achado central: prova-se que
+`crossover(n,γ)→D(γ)+1-1/(2γ)` é logicamente EQUIVALENTE a `C(γ)` em
+si mesmo** — resolver o somatório de crossover constituiria uma prova
+de `C(γ)`; casagem local é necessária mas não suficiente. Referee
+confirmou a equivalência correta em AMBAS as direções. Dois achados de
+severidade BAIXA (transcrição numérica; enquadramento de novidade
+levemente superestimado), ambos corrigidos por correção/nota datada.
+**Onda 34 completa — 1/1 frente integrada.**
+Anterior: `DISC-DEC-151`: onda 34 autorizada
 — 1 frente única (não 2-3, evitando preenchimento por número), após
 survey de portfolio dedicado que reconfirmou (quarta vez consecutiva,
 ondas 31-34): toda linha fora de `u12_universality` permanece

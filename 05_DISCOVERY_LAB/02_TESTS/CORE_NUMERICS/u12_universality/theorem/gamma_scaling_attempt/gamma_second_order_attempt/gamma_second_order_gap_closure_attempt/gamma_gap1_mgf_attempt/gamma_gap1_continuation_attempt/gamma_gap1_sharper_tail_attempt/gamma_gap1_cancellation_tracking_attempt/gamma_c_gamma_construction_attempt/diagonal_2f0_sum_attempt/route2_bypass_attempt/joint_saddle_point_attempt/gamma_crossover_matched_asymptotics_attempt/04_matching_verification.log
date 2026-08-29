@@ -1,0 +1,74 @@
+==============================================================================
+SETUP: recall the closed forms (cited or derived) needed
+==============================================================================
+A_m(gamma) [this front, script 02]      = m*(m + 3)/(2*gamma) - m*(m + 1)/gamma**2
+T_prof(lambda,gamma) [Estagio 56, cited] = exp(-lambda**2*(2 - gamma)/(2*gamma))/gamma
+Delta_total(lambda,gamma)*sqrt(n) [Estagios 57+58, cited] = -lambda**3/6 + 3*lambda/2 - lambda/gamma
+
+==============================================================================
+STEP 1: substitute m = lambda*sqrt(n) into A_m(gamma)/n, expand in
+        the TWO independent small parameters (lambda fixed small,
+        1/sqrt(n) -> 0), and separate the two orders
+==============================================================================
+A_m(gamma)/n, with m=lambda*sqrt(n):
+  lambda**2/(2*gamma) + 3*lambda/(2*gamma*sqrtn) - lambda**2/gamma**2 - lambda/(gamma**2*sqrtn)
+
+O(1) [sqrtn-independent] piece  (should match T_prof's O(lambda^2)):
+  (gamma*lambda**2 - 2*lambda**2)/(2*gamma**2)
+O(1/sqrtn) piece, x sqrtn (should match T_prof(0)*[linear coeff of Delta_total]):
+  lambda*(3*gamma - 2)/(2*gamma**2)
+
+==============================================================================
+STEP 2: CLAIM 1 -- match against T_prof's own small-lambda Taylor
+        coefficient of lambda^2
+==============================================================================
+T_prof(lambda,gamma) Taylor series to O(lambda^4): lambda**2*(1/(2*gamma) - 1/gamma**2) + 1/gamma
+  constant term (lambda^0): 1/gamma   (expect 1/gamma)
+  lambda^2 coefficient:     1/(2*gamma) - 1/gamma**2
+Inner piece, lambda^2 factored out: (gamma - 2)/(2*gamma**2)
+
+CLAIM 1 check: [inner lambda^2 coeff] - [T_prof's own lambda^2 Taylor coeff] = 0
+CLAIM 1 CONFIRMED EXACTLY: the inner expansion's leading (lambda^2)
+behavior matches T_prof's own small-lambda Taylor expansion exactly.
+
+==============================================================================
+STEP 3: CLAIM 2 -- match against T_prof(0,gamma) times Delta_total's
+        own linear-in-lambda coefficient as lambda -> 0
+==============================================================================
+Delta_total(lambda,gamma)*sqrt(n), Taylor to O(lambda^2): lambda*(3/2 - 1/gamma)
+  linear-in-lambda coefficient: 3/2 - 1/gamma
+
+T_prof(0,gamma) * [Delta_total's bare linear coeff] = (3*gamma - 2)/(2*gamma**2)
+Inner expansion's own O(1/sqrtn) piece, lambda factored out = (3*gamma - 2)/(2*gamma**2)
+
+CLAIM 2 check: difference = 0
+CLAIM 2 CONFIRMED EXACTLY: the inner expansion's NEXT (O(1/sqrt(n)),
+linear-in-m) correction matches T_prof(0)*Delta_total's own linear-
+in-lambda behavior exactly.
+
+==============================================================================
+STEP 4: numeric spot-check of both claims at concrete (gamma) values
+        (purely as an independent sanity check of the symbolic algebra
+        above -- no new content, deterministic, no randomness)
+==============================================================================
+  gamma=0.2: CLAIM1 diff=0.0   CLAIM2 diff=0.000e+00
+  gamma=0.37: CLAIM1 diff=1.06911e-50   CLAIM2 diff=0.000e+00
+  gamma=0.5: CLAIM1 diff=0.0   CLAIM2 diff=0.000e+00
+  gamma=0.63: CLAIM1 diff=2.67276e-51   CLAIM2 diff=0.000e+00
+  gamma=0.8: CLAIM1 diff=2.67276e-51   CLAIM2 diff=0.000e+00
+  gamma=0.95: CLAIM1 diff=1.33638e-51   CLAIM2 diff=0.000e+00
+
+ALL MATCHING CHECKS (CLAIMS 1-2) PASSED SYMBOLICALLY AND NUMERICALLY.
+
+INTERPRETATION (stated precisely, not overclaimed): this confirms
+that the two independently-derived asymptotic regimes -- the INNER
+expansion (m=O(1) fixed, this front) and the OUTER expansion
+(m=Theta(sqrt(n)), Estagios 56-58) -- are mutually consistent when
+formally extended toward their common overlap region (1<<m<<sqrt(n),
+i.e. lambda->0 as m,n->infinity together). This is a genuine, non-
+trivial, non-circular cross-check (much like Estagio 56's own
+G_n-coefficient-reproduction check) -- but it does NOT by itself
+compute crossover(n,gamma)'s limiting value; see ATTEMPT.md Section
+5/6 for why not, and script 05 for an honest, explicitly-informal
+numerical exploration of where the crossover sum's O(1) mass
+actually accumulates.

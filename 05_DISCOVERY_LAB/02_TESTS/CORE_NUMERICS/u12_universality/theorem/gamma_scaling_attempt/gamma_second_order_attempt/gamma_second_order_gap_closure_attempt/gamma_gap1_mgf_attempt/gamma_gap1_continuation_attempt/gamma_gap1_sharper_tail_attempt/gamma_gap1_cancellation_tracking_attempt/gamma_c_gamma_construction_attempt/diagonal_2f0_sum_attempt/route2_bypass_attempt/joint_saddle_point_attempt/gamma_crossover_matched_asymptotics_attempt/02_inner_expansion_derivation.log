@@ -1,0 +1,79 @@
+==============================================================================
+STEP 1: exact expansion of the Watson's-lemma integrand at fixed m,
+        substituting t = s/n, to O(1/n) beyond leading order
+==============================================================================
+(n-m)*ln(1-gamma*t), t=s/n, expanded in eps=1/n (kept to O(eps)):
+  -epsilon*gamma**2*s**2/2 + epsilon*gamma*m*s - gamma*s
+  O(eps^0) piece: -gamma*s   (expect -gamma*s)
+  O(eps^1) piece: -gamma**2*s**2/2 + gamma*m*s   (expect gamma*m*s - gamma**2*s**2/2)
+
+(1-t)^m expanded in eps: -epsilon*m*s + 1   (expect 1 - m*s*eps)
+
+(1-gamma*t)^(n-m) ~ exp(-gamma*s) * [1 + eps*(-gamma**2*s**2/2 + gamma*m*s)]
+
+Combined [ (1-t)^m ] x [ correction factor ], to O(eps):
+  epsilon*(-gamma**2*s**2/2 + gamma*m*s - m*s) + 1
+  O(eps) coefficient (multiplies s^m * exp(-gamma*s)): -gamma**2*s**2/2 + gamma*m*s - m*s
+  MATCHES hand-derivation exactly: m*(gamma-1)*s - gamma^2*s^2/2
+
+==============================================================================
+STEP 2: integrate term-by-term (exact Gamma-function moments),
+        I(n,m,gamma) ~ eps^(m+1) * [ m!/gamma^(m+1)
+                          + eps*( ... ) ]
+==============================================================================
+Leading moment integral (coefficient of eps^(m+1)):      gamma**(-m - 1)*factorial(m)
+O(eps) correction integral (coefficient of eps^(m+2)):   gamma**(-m - 2)*(gamma*m - 2*gamma - 2*m)*gamma(m + 2)/2
+
+B1(m,gamma) := I_correction / I_leading = m**2/2 - m/2 - 1 - m**2/gamma - m/gamma
+Hand-derivation predicts:                 m**2/2 - m/2 - 1 - m**2/gamma - m/gamma
+MATCHES.
+
+==============================================================================
+STEP 3: exact expansion of the binomial/factorial prefactor
+        C(n+m+1,2m+1)/B(m+1,m+1), fixed m, n -> infinity
+==============================================================================
+Sum_{k=-m+1}^{m+1} k = 2m+1, confirmed for m=0..5 (general arithmetic-series fact).
+(n+m+1)!/(n-m)! ~ n^(2m+1) * [1 + (2*m + 1)/n + O(1/n^2)]
+
+==============================================================================
+STEP 4: assemble term_m(n,gamma) = (gamma^m/n^m)*m!*T(n,m) to O(1/n)
+==============================================================================
+(2m+1) + B1(m,gamma) = m**2/2 + 3*m/2 - m**2/gamma - m/gamma
+
+*** A_m(gamma) := gamma-scaled O(1/n) coefficient of term_m ***
+    A_m(gamma) = m**2/(2*gamma) + 3*m/(2*gamma) - m**2/gamma**2 - m/gamma**2
+    A_m(gamma) factored = m*(gamma*m + 3*gamma - 2*m - 2)/(2*gamma**2)
+
+Claimed closed form: m(m+3)/(2*gamma) - m(m+1)/gamma^2
+Difference (should be 0): 0
+EXACT MATCH.
+
+==============================================================================
+STEP 5: two non-circular validation checks
+==============================================================================
+A_0(gamma) = 0   (expect exactly 0, since term_0->1/gamma EXPONENTIALLY, no O(1/n) term)
+  CONFIRMED: A_0 = 0 exactly.
+
+A_1(gamma) = 2*(gamma - 1)/gamma**2
+-gamma*A_1(gamma) = -2 + 2/gamma
+c(gamma) (cited, PROVED, re-verified script 01 Part D) = (2 - 2*gamma)/gamma
+Difference (should be 0): 0
+  CONFIRMED: -gamma*A_1(gamma) = c(gamma) EXACTLY.
+  (Reasoning: term_1/term_0 = [1/gamma+A_1/n]/[1/gamma+A_0/n] = 1+gamma*A_1/n+O(1/n^2)
+   since A_0=0, so c(n,gamma):=-n*log(term_1/term_0) -> -gamma*A_1(gamma) = c(gamma).)
+
+A_2, A_3, A_4 for reference:
+  A_2(gamma) = (5*gamma - 6)/gamma**2
+  A_3(gamma) = 3*(3*gamma - 4)/gamma**2
+  A_4(gamma) = 2*(7*gamma - 10)/gamma**2
+
+ALL STEP 1-5 SYMBOLIC DERIVATIONS AND CHECKS PASSED.
+
+NOTE (disclosed): this derivation is a FORMAL asymptotic expansion
+(Watson's lemma to next order, extending the integration domain
+s in [0,n] to s in [0,infinity) with an error that is standard-
+Watson's-lemma exponentially small in n, not derived here with an
+explicit rigorous remainder bound) -- matching the level of rigor
+this lineage's own T_prof/Delta/Delta_m derivations (Estagios
+56-58) were held to. It is checked extensively against exact
+high-precision numerics in script 03.

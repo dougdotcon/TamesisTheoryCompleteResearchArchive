@@ -8261,3 +8261,144 @@ diagnóstico original de 4 itens estão agora completados; apenas o item
 permanece intocado. Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória/assintótica pura interna a este
 arquivo.
+
+## [Extensão, Estágio 60 — 2026-08-29]
+
+**Onda 34 (frente única), `DISC-DEC-151` (`GAMMA-CROSSOVER-MATCHED-
+ASYMPTOTICS-ATTEMPT`).** Alvo: o "somatório de crossover"
+`crossover(n,γ):=Σ_{m=0}^n[term_m(n,γ)-T_prof(m/√n,γ)]`, isolado mas
+não resolvido pelo predecessor imediato (Estágio 59), via a técnica
+clássica de assintóticas casadas: caracterizar a região interna
+(`m=O(1)` fixo) e o limite `λ:=m/√n\to0` da região externa, tentar
+casá-las numa região de sobreposição, e ou derivar/limitar o limite do
+somatório de crossover ou diagnosticar precisamente por que a
+casagem sozinha não consegue.
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — como antecipado.** Esta
+> frente deriva uma nova forma fechada, genuína, para a assintótica
+> INTERNA (`m=O(1)` fixo, `n\to\infty`) de `term_m(n,γ)`, via lema de
+> Watson ordinário (não de ponto de sela) — um limite genuinamente
+> mais fácil que o regime mesoscala `m=\Theta(\sqrt n)` que todo
+> predecessor (Estágios 56-58) usou, já que o pico da integral interna
+> não se afia em `m` fixo:
+>
+> **`term_m(n,γ) = 1/γ + A_m(γ)/n + O(1/n^2)`, `m=O(1)` fixo,
+> `\;A_m(γ) = \dfrac{m(m+3)}{2γ} - \dfrac{m(m+1)}{γ^2}`.**
+>
+> **Duas checagens de validação não-circulares, ambas EXATAS
+> simbolicamente**: `A_0(γ)=0` identicamente (batendo com o fato
+> já-CITADO de que `term_0\to1/γ` EXPONENCIALMENTE, não a taxa
+> `O(1/n)`); e `-γ\,A_1(γ) = c(γ) = 2(1-γ)/γ` EXATAMENTE — esta nova
+> fórmula reproduz a taxa local já-PROVADA (Estágio 52) em `m=1`, do
+> zero, com zero insumo da própria derivação de `c(γ)`.
+>
+> **Confirmado numericamente** contra avaliação direta de alta
+> precisão da fórmula exata de `term_m`, em `m=0,1,2,3,5`,
+> `γ\in\{0{,}3,0{,}5,0{,}8\}`, `n` até `10^{12}`.
+>
+> **Uma checagem genuína de assintóticas casadas, bem-sucedida em duas
+> ordens.** Substituindo `m=λ\sqrt n` na nova expansão interna e
+> tomando formalmente `λ\to0` (a região de sobreposição
+> `1\ll m\ll\sqrt n`), sua peça de ordem `O(λ^2)` é provada
+> (simbolicamente, exata) igual ao próprio coeficiente de Taylor de
+> `T_prof` em `λ` pequeno; e sua peça de ordem `O(λ/\sqrt n)` é provada
+> igual a `T_prof(0,γ)` vezes o coeficiente linear-em-`λ` da correção
+> combinada já-PROVADA `Δ_{\mathrm{total}}:=Δ+Δ_m` (Estágios 57+58) —
+> uma checagem cruzada genuína, não-circular, entre duas rotas
+> completamente diferentes.
+>
+> **O achado mais preciso da frente: uma diagnose lógica, exata, não
+> vaga, de por que este sucesso de casagem NÃO resolve o limite de
+> `crossover(n,γ)`.** Combinando a decomposição exata já-PROVADA do
+> predecessor (`S_n'-G_n-1/(2γ)=crossover(n,γ)+o(1)`) com a
+> equivalência citada do Lema E (`C(γ)\iff S_n=G_n+D(γ)+o(1)`),
+> substituição elementar (verificada como identidade simbólica exata)
+> dá: **`crossover(n,γ)\to D(γ)+1-1/(2γ)` é logicamente EQUIVALENTE a
+> `C(γ)` em si mesmo valer.** Qualquer argumento que resolvesse
+> `crossover(n,γ)` em forma fechada, batendo com o alvo citado do
+> predecessor, CONSTITUIRIA uma prova de `C(γ)` — via a cadeia de
+> decomposição já-PROVADA, sem suposição adicional. Casagem, neste
+> problema, é evidência necessária de consistência interna de todo o
+> aparato — e esta frente adiciona uma peça real, verificada, dela —
+> mas é demonstravelmente NÃO suficiente para determinar o valor do
+> somatório de crossover.
+>
+> **Uma exploração numérica honesta, explicitamente informal**, de
+> onde a massa `O(1)` de `crossover(n,γ)` de fato se acumula: em
+> `n=800,γ=0{,}5`, um corte `M\sim n^{0{,}5}` (a própria escala
+> mesoscala) captura apenas `\sim73\%` do total, enquanto
+> `M\sim2$–$3\sqrt n` captura essencialmente tudo (`>99{,}9\%`).
+>
+> **Dois achados de severidade BAIXA (nenhum afetando corretude):** (1)
+> um deslize de transcrição numérica na prosa do VEREDITO (razões
+> citadas incorretamente para um exemplo, os valores exatos do próprio
+> log da frente são ligeiramente diferentes) — correção; (2) o
+> enquadramento da equivalência lógica como "o achado mais afiado,
+> novo, desta frente" superestima levemente sua novidade — o alvo
+> conjectural já havia sido construído pelo predecessor via exatamente
+> esta mesma rota Lema-E-mais-decomposição; tornar a equivalência
+> bidirecional totalmente explícita é uma contribuição legítima e útil,
+> mas mais próxima de desempacotar uma consequência já implícita do que
+> um diagnóstico novo independente — nota.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente via sympy de ambas as checagens de `A_m(γ)` (`A_0=0`,
+> `-γA_1=c(γ)`, exatas); teste numérico `mpmath` fresco (dps=60, não
+> lendo os scripts da frente) confirmando `n\cdot(term_m-1/γ)\to
+> A_m(γ)` em `m\in\{1,2,3\}`, `γ\in\{0{,}3,0{,}5,0{,}8\}`, `n` até
+> `10^8` — zero discrepância.
+>
+> Referee hostil dedicado: re-derivou a fórmula `A_m(γ)` do zero por
+> rota simbólica estruturalmente diferente (expansão de expoente
+> combinado único; prefator via `RisingFactorial`+Taylor em vez do
+> argumento de série aritmética à mão da própria frente) — confirmação
+> exata, incluindo a tabela `A_2,A_3,A_4`; confirmou os números da
+> Seção 3 via dois avaliadores que a frente nunca usou (um avaliador
+> ₂F₁-terminante EXATO, zero erro de quadratura, e uma quadratura
+> simples estruturalmente diferente empurrada até `n=10^9`); re-derivou
+> as duas checagens de casagem da Seção 4 via técnica de expansão
+> bivariada diferente; **traçou "Lema E" até sua fonte original exata**
+> (`gamma_second_order_attempt/ATTEMPT.md` Seção 2, onda 18) e confirmou
+> que a citação é precisa, e verificou independentemente AMBAS as
+> direções da equivalência (o próprio script da frente mostra apenas a
+> direção direta) e re-verificou de definições combinatórias PRIMÁRIAS
+> — não apenas citação — o fato não-trivial `S_n'(γ)=1+S_n(γ)` (12/12
+> correspondências exatas em aritmética racional); confirmou os quatro
+> problemas auto-capturados como genuinamente corrigidos lendo os
+> scripts `.py` finais diretamente. **A equivalência lógica está
+> matematicamente correta em ambas as direções.**
+>
+> **Veredito: SOUND WITH ISSUES, ambos de severidade BAIXA — ACCEPT for
+> catalogue.** `C(γ)` permanece inteiramente ABERTO. A contribuição
+> desta frente é uma nova forma fechada genuína para um regime
+> (`m=O(1)` fixo) que nenhuma frente anterior nesta sub-linhagem havia
+> derivado; uma validação real de assintóticas casadas ligando esse
+> resultado à maquinaria mesoscala existente; e uma razão precisa,
+> comprovável — não uma reafirmação de "isto é difícil" — de por que a
+> resolução exata do somatório de crossover é, num sentido específico e
+> verificável, exatamente tão difícil quanto `C(γ)` em si.
+
+Ver
+`.../joint_saddle_point_attempt/gamma_crossover_matched_asymptotics_attempt/ATTEMPT.md`
+e
+`.../joint_saddle_point_attempt/gamma_crossover_matched_asymptotics_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado. O que muda é que a peça restante
+para fechar `C(γ)` por esta rota — o limite do somatório de crossover —
+agora tem uma caracterização PRECISA de sua própria dificuldade: não é
+mais um resto residual indiferenciado, mas uma quantidade
+logicamente EQUIVALENTE a `C(γ)` em si, com uma nova assintótica de
+região interna (útil para futuros trabalhos) e uma checagem de
+consistência bem-sucedida entre regiões que confirma toda a maquinaria
+construída nos Estágios 56-59 está mutuamente coerente. O item 4 do
+diagnóstico original do Estágio 56 — a montagem conjunta de duas
+variáveis — permanece a única via genuinamente aberta, agora com
+diagnóstico mais nítido do porquê nenhum refinamento puramente local da
+casagem pode substituí-lo. Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória/assintótica pura interna a este
+arquivo.

@@ -1,0 +1,63 @@
+==============================================================================
+Independent re-derivation of term_m(n,gamma) inner (m fixed) expansion
+==============================================================================
+
+Combined log-integrand, expanded in eps=1/n to O(eps):
+  -epsilon*g**2*s**2/2 + epsilon*g*m*s - epsilon*m*s - g*s
+  O(eps^0): -g*s  (expect -g*s)
+  O(eps^1): -g**2*s**2/2 + g*m*s - m*s
+
+Integrand ~ s^m*exp(-g*s)*(1 + eps*(-g**2*s**2/2 + g*m*s - m*s) + O(eps^2))
+
+c1(s) as polynomial in s: -g**2*s**2/2 + g*m*s - m*s
+I_correction (coefficient of eps^(m+2) after integrating termwise) = g**(-m - 2)*(g*m - 2*g - 2*m)*gamma(m + 2)/2
+
+B1(m,g) [Path A] = m**2/2 - m/2 - 1 - m**2/g - m/g
+Front's claimed B1 formula: m**2/2 - m/2 - 1 - m**2/g - m/g
+Difference (should be 0): 0
+MATCH (Path A, single-exponentiation route, agrees with front's B1).
+
+==============================================================================
+Prefactor (n+m+1)!/(n-m)! / n^(2m+1) -> 1 + c/n + O(1/n^2): sympy's
+OWN series-at-infinity on the exact Gamma-function ratio (not the
+front's by-hand arithmetic-series-sum argument)
+==============================================================================
+  m=0: ratio(1/n) series to O(eps) = epsn + 1
+         -> 1/n coefficient = 1  (expect 1)
+  m=1: ratio(1/n) series to O(eps) = 3*epsn + 1
+         -> 1/n coefficient = 3  (expect 3)
+  m=2: ratio(1/n) series to O(eps) = 5*epsn + 1
+         -> 1/n coefficient = 5  (expect 5)
+  m=3: ratio(1/n) series to O(eps) = 7*epsn + 1
+         -> 1/n coefficient = 7  (expect 7)
+  m=4: ratio(1/n) series to O(eps) = 9*epsn + 1
+         -> 1/n coefficient = 9  (expect 9)
+CONFIRMED for m=0..4 via an independent sympy route (Gamma-function
+asymptotic series, not the front's by-hand telescoping argument):
+(n+m+1)!/(n-m)! ~ n^(2m+1)*(1+(2m+1)/n+O(1/n^2)).
+
+==============================================================================
+Assembling term_m(n,g) = (g^m/n^m)*m!*T(n,m), T(n,m) = prefactor*I/(m!)^2
+==============================================================================
+A_m(g) [independent re-derivation] = m**2/(2*g) + 3*m/(2*g) - m**2/g**2 - m/g**2
+Front's claimed closed form:        m**2/(2*g) + 3*m/(2*g) - m**2/g**2 - m/g**2
+Difference (should be 0): 0
+EXACT MATCH -- A_m(gamma) = m(m+3)/(2*gamma) - m(m+1)/gamma^2 independently confirmed.
+
+==============================================================================
+Two non-circular validation checks, independently re-run
+==============================================================================
+A_0(g) = 0  (expect 0)
+A_1(g) = 2*(g - 1)/g**2
+-g*A_1(g) = -2 + 2/g
+c(g) cited = (2 - 2*g)/g
+Difference (should be 0): 0
+CONFIRMED: -g*A_1(g) = c(g) exactly, independently re-derived.
+
+A_2, A_3, A_4 (independent re-derivation, for cross-reference against
+the front's own table):
+  A_2(g) = (5*g - 6)/g**2
+  A_3(g) = 3*(3*g - 4)/g**2
+  A_4(g) = 2*(7*g - 10)/g**2
+
+ALL INDEPENDENT RE-DERIVATION CHECKS PASSED.

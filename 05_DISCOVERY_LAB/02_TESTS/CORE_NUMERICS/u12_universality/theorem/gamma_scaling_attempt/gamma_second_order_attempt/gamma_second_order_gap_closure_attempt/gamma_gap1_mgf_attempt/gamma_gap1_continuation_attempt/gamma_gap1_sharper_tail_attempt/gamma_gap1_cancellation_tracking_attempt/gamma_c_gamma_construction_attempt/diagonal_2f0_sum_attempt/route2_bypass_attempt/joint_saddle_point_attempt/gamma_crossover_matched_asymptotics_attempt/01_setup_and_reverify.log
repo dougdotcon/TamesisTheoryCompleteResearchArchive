@@ -1,0 +1,46 @@
+==============================================================================
+PART A: primary double-sum T(n,m) vs cited Beta-integral T(n,m)
+==============================================================================
+Checked 136 (n,m,gamma) triples, exact symbolic equality throughout.
+Max |primary - beta| (should be exactly 0): 0
+
+==============================================================================
+PART B: term_0(n,gamma) closed form and its exact limit 1/gamma
+==============================================================================
+term_0 from Beta-integral machinery: (1 - (1 - gamma)**(n + 1))/gamma
+cited closed form:                  (1 - (1 - gamma)**(n + 1))/gamma
+difference (should be 0):           0
+Exact symbolic small-n spot checks: 0 mismatches out of 9.
+Numeric (mpmath dps=60) large-n spot checks: 0 mismatches out of 9 (tolerance 1e-45).
+lim_{n->infty} term_0(n,gamma=3/7) = 7/3  (expect 7/3)
+(General-gamma exact limit for gamma in (0,1): (1-gamma)^(n+1) -> 0 geometrically since |1-gamma|<1; the concrete check above plus the large-n numerics elsewhere confirm this is not gamma-specific.)
+
+==============================================================================
+PART C: T_prof(0,gamma) = 1/gamma cross-consistency
+==============================================================================
+T_prof(0,gamma) = 1/gamma  (expect 1/gamma, matches term_0's limit)
+
+==============================================================================
+PART D: c(gamma) = 2(1-gamma)/gamma re-derivation from primary term_0/term_1
+==============================================================================
+         n  gamma     c(n,gamma) numeric   c(gamma) predicted
+     10000    0.3          4.66775589444        4.66666666667
+   1000000    0.3          4.66667755559        4.66666666667
+ 100000000    0.3          4.66666677556        4.66666666667
+     10000    0.5          2.00020002667                  2.0
+   1000000    0.5               2.000002                  2.0
+ 100000000    0.5             2.00000002                  2.0
+     10000    0.8         0.500012500417                  0.5
+   1000000    0.8            0.500000125                  0.5
+ 100000000    0.8          0.50000000125                  0.5
+
+==============================================================================
+PART E: Delta_total = Delta + Delta_m pole cancellation (cited, re-verified)
+==============================================================================
+Delta (Estagio 57, x sqrt(n))   = 1/(12*lambda)
+Delta_m (Estagio 58, x sqrt(n)) = -lambda**3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+Delta_total = Delta + Delta_m   = lambda*(gamma*(9 - lambda**2) - 6)/(6*gamma)
+Expected (pole-free)            = -lambda**3/6 + 3*lambda/2 - lambda/gamma
+Pole -1/(12*lambda) cancels exactly against +1/(12*lambda): CONFIRMED (re-verified).
+
+ALL PART A-E CHECKS PASSED.

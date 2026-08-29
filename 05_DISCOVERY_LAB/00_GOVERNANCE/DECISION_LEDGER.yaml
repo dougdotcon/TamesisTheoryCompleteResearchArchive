@@ -9879,3 +9879,60 @@ decisions:
       (U1), (U2), (C'), (U), (B), (H-ces), C(gamma) permanecem
       exatamente como registrados ate que a frente retorne e seja
       integrada com a mesma disciplina.
+
+  - id: DISC-DEC-152
+    date: 2026-08-29
+    decision: >
+      Onda 34 (frente unica) GAMMA-CROSSOVER-MATCHED-ASYMPTOTICS-ATTEMPT
+      integrada como Estagio 60 em THEOREM.md. C(gamma) continua
+      inteiramente ABERTO. Alvo: o "somatorio de crossover"
+      crossover(n,gamma):=Sum_{m=0}^n[term_m(n,gamma)-T_prof(m/sqrt(n),
+      gamma)], isolado mas nao resolvido pelo Estagio 59, via
+      assintoticas casadas. Nova forma fechada para a assintotica
+      interna (m=O(1) fixo): term_m(n,gamma)=1/gamma+A_m(gamma)/n+
+      O(1/n^2), A_m(gamma)=m(m+3)/(2*gamma)-m(m+1)/gamma^2, derivada
+      via lema de Watson ordinario (nao ponto de sela) -- um limite
+      genuinamente mais facil que o regime mesoscala de todo
+      predecessor. Duas checagens nao-circulares exatas: A_0=0
+      (batendo term_0->1/gamma exponencial); -gamma*A_1=c(gamma)=
+      2(1-gamma)/gamma (reproduzindo a taxa local ja-provada do
+      Estagio 52 do zero). Checagem de casagem bem-sucedida em duas
+      ordens contra a maquinaria mesoscala ja-provada (T_prof,
+      Delta_total). Achado central: combinando a decomposicao exata do
+      predecessor com a equivalencia do Lema E, prova-se que
+      crossover(n,gamma)->D(gamma)+1-1/(2*gamma) e logicamente
+      EQUIVALENTE a C(gamma) em si -- resolver o somatorio de crossover
+      constituiria uma prova de C(gamma). Casagem local e necessaria
+      mas nao suficiente.
+      Dois achados de severidade BAIXA (nenhum afetando corretude): (1)
+      deslize de transcricao numerica na prosa do veredito, corrigido;
+      (2) enquadramento da equivalencia como "achado mais afiado, novo"
+      superestima levemente a novidade -- o alvo conjectural ja havia
+      sido construido pelo predecessor via a mesma rota -- nota.
+      Spot-check da sessao antes do despacho: reverificacao independente
+      via sympy de ambas as checagens de A_m(gamma); teste numerico
+      mpmath fresco confirmando n*(term_m-1/gamma)->A_m(gamma) em
+      m=1,2,3, gamma=0.3,0.5,0.8, n ate 1e8 -- zero discrepancia.
+      Referee hostil dedicado: re-derivou A_m(gamma) do zero por rota
+      simbolica estruturalmente diferente; confirmou numeros via dois
+      avaliadores nunca usados pela frente (2F1-terminante exato e
+      quadratura simples ate n=1e9); re-derivou as checagens de casagem
+      via tecnica bivariada diferente; tracou "Lema E" ate sua fonte
+      original exata (onda 18) e verificou AMBAS as direcoes da
+      equivalencia (a propria frente so mostrou a direta) mais a
+      re-verificacao de S_n'=1+S_n de definicoes primarias; confirmou
+      os quatro problemas auto-capturados genuinamente corrigidos.
+      Onda 34 completa -- 1/1 frente integrada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 60, ~85 linhas);
+      .../joint_saddle_point_attempt/gamma_crossover_matched_asymptotics_attempt/ATTEMPT.md
+      (1 correcao datada + 1 nota datada); DECISION_LEDGER.yaml (este
+      arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria/assintotica pura interna a este arquivo. Nenhum
+      resultado de registro anterior invalidado -- Estagios 52, 54, 56,
+      57, 58, 59 permanecem exatamente como registrados; C(gamma)
+      permanece nao construido, nao limitado, nao caracterizado como
+      serie convergente com resto provado, exatamente como todo
+      predecessor desde o Estagio 26.

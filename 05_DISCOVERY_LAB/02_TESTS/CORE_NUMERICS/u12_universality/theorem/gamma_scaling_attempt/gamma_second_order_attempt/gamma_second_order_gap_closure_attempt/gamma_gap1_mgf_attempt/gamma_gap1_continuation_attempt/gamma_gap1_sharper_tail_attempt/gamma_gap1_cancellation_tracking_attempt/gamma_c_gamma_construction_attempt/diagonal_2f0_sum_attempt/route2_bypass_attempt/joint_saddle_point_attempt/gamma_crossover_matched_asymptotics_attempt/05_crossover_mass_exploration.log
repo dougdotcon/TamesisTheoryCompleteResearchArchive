@@ -1,0 +1,64 @@
+====================================================================================================
+PART A: fresh sanity check of crossover(n,gamma) trend, FRESH n grid
+====================================================================================================
+(compare qualitatively against the predecessor's own PROSE-reported
+ trend at gamma=0.5: approx -0.383 (n=20) drifting to approx -0.406
+ (n=1600) -- reproduced here from an independently-written evaluator,
+ NOT the predecessor's script, at a DIFFERENT/FRESH n grid.)
+
+     n  gamma     crossover(n,gamma)  cutoff M used
+    30    0.5            -0.38757525             30
+    90    0.5            -0.39581727             90
+   270    0.5            -0.40067081            151
+   810    0.5            -0.40405936            247
+
+====================================================================================================
+PART B: partial-sum-by-cutoff exploration (informal, exploratory)
+====================================================================================================
+For n=800, gamma=0.5: partial_crossover(n,gamma,M) at M=c*n^theta,
+theta in {0(fixed-ish small), 0.25, 0.5, 0.75, 1.0(full range)}.
+
+Full crossover(n=800,gamma=0.5) [cutoff M=246, tail beyond verified negligible by construction of M] = -0.4039628907
+
+ theta      M    partial_crossover   fraction of full
+ 0.000      5       -0.01849406616          0.0457816
+ 0.150      2      -0.003753373067         0.00929138
+ 0.250      5       -0.01849406616          0.0457816
+ 0.375     12       -0.08824379073           0.218445
+ 0.500     28        -0.2962548358           0.733371
+ 0.625     65         -0.403706161           0.999364
+ 0.750    150        -0.4039628907                1.0
+ 1.000    246        -0.4039628907                1.0
+
+INTERPRETATION (informal, exploratory, disclosed as such): if the
+fraction-of-full column were already close to 1 at theta well below
+0.5 (i.e. an m-cutoff genuinely growing slower than sqrt(n)), that
+would suggest the crossover sum's mass is dominated by a sub-
+mesoscale region a sharper 'deep inner' analysis might reach; if
+instead the fraction keeps changing substantially all the way to
+theta=1 (full mesoscale range), that supports this front's Section 6
+diagnosis that no cutoff short of the full range captures the
+crossover sum's value -- i.e. a genuinely GLOBAL, not two-regime-
+local, resummation (item 4 of Estagio 56's diagnosis) is needed.
+See ATTEMPT.md Section 6 for the actual printed numbers and verdict.
+
+====================================================================================================
+PART C: crossover(n,gamma)'s limit = D(gamma)+1-1/(2*gamma) is
+        LOGICALLY EQUIVALENT to C(gamma) itself (elementary algebra)
+====================================================================================================
+IF C(gamma) holds (S_n'=1+G_n+D(gamma)+o(1)), THEN crossover(n,gamma) -> D_gamma + 1 - 1/(2*gamma)
+Predecessor's cited conjectural target: D(gamma)+1-1/(2*gamma)
+Difference (should be 0): 0
+
+CONFIRMED (elementary algebra, exact): crossover(n,gamma) -> 
+D(gamma)+1-1/(2*gamma) is not an INDEPENDENT fact still to be found by
+more matched-asymptotics work -- it is, by the PROVED exact
+decomposition above, LOGICALLY EQUIVALENT to C(gamma) itself (S_n=
+G_n+D(gamma)+o(1)) holding. Any argument that rigorously computed
+crossover(n,gamma)'s closed-form limit and confirmed it equals the
+cited target would, by this same equivalence, CONSTITUTE a proof of
+C(gamma) -- clearly outside a single front's scope, and exactly why
+a 'local' inner/outer matching argument (script 04), which only
+certifies CONSISTENCY of two asymptotic pictures in their common
+region of validity, cannot by itself resolve it. See ATTEMPT.md
+Section 6 for the full discussion.

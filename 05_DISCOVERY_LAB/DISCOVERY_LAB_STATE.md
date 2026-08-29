@@ -1,6 +1,22 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-147`: onda 32 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-148`: onda 33 autorizada
+— 2 frentes, ambas em `C(γ)`, NENHUMA no gap `H1`/M-CLUST(b). Decisão
+estratégica explícita, com evidência: 13 ondas consecutivas (20-32)
+naquele gap já esgotaram seis famílias de técnica distintas
+(Tauberiana/auto-média, resolvente-Volterra norma-de-operador, prova
+direta `(C')`/`(U)`, auto-cura de camada limite, limitantes afiados,
+princípio do máximo na EDP direta); os dois ângulos remanescentes
+nominais (variante Poincaré/decaimento-de-oscilação, forma fechada do
+vazamento anti-causal) não são genuinamente novos — a própria frente 32
+(a) recomenda explicitamente descansar o gap e realocar o orçamento de
+onda. Frente (a) `GAMMA-STIRLING-MFACT-UNIFORM-ATTEMPT` — ataca o item
+2 do diagnóstico do Estágio 56/57 (correção de Stirling para `m!` no
+perfil `T_prof` completo). Frente (b) `GAMMA-OUTER-SUM-POISSON-ATTEMPT`
+— ataca o item 3 (Euler-Maclaurin/Poisson na soma externa em `m`).
+Blocos de seed reservados: `20260952000-20260952999` (frente a),
+`20260953000-20260953999` (frente b), grep-confirmados sem uso.
+Anterior: `DISC-DEC-147`: onda 32 frente (a)
 `CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT` integrada como adendo
 datado em `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia H1) —
 `(B)`/`(C')` NÃO provados, resultado NEGATIVO honesto com quatro

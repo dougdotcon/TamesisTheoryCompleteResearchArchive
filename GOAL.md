@@ -42,8 +42,41 @@ level up to the tool that would run the claims.
 |---|---|---|---|
 | **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
 | **Stage 2 — Expansion** | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 142/142 tests pass; hostile review verdict SOUND, zero findings; Lean bridge genuinely compiles/rejects real Lean source, never touches `04_FORMAL_RESEARCH_LAB/` | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md`, all boxes checked |
-| Stage 3 — Product suite | 8 named products | ⏸ Not started — blocked on Stage 2 | not yet created |
+| **Stage 3 — Product suite** | 8 named products | 🔧 **PARTIALLY IN PROGRESS** — see scoping note below | `06_DISCOVERY_ENGINE/CHECKLIST_11_HYPOTHESIS_ENGINE.md`, `CHECKLIST_12_MATHEMATICAL_DISCOVERY_ENGINE.md` |
 | Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
+
+---
+
+## Stage 3 scoping note (2026-08-29, autonomous decision)
+
+`ROADMAP.md` §1 Stage 3 names 8 "products." Building 8 separately-branded
+systems from scratch would mostly be re-labeling work already done, or
+would require faking capabilities this environment cannot honestly
+support. Mapping each against what already exists:
+
+| Product | Status | Reasoning |
+|---|---|---|
+| Tamesis Discovery Lab | **Already covered** | = the `DiscoveryEngine` facade (Stage 1) |
+| Tamesis Adversarial Reviewer | **Already covered** | = Module 4 (`adversarial.py`) |
+| Tamesis Universality Atlas | **Already covered** | = Module 10 (`atlas.py`), literal name match |
+| Tamesis Scientific Ledger | **Already covered** | = Module 5 (`ledger.py`) + the facade tying claim→run→reproduction→review→verdict together |
+| Tamesis Hypothesis Engine | **New, tractable** | needs a structured-spec builder/validator on top of Module 1 — see `CHECKLIST_11` |
+| Tamesis Mathematical Discovery Engine | **New, tractable** | needs an orchestration pipeline over Modules 6+7 (enumerate→symbolic→MC→asymptotic-fit) — see `CHECKLIST_12` |
+| Tamesis Simulation Lab | **Deferred, honestly** | `ROADMAP.md` itself says "no direct precedent in this archive yet" — a real visual agent-based/network simulation environment is a GUI/interactive-tool undertaking, not a backend module a test suite can validate the way everything above was validated. Not attempting a hollow stub. |
+| Tamesis Observatory | **Deferred, honestly** | requires live external data feeds (Gaia, SPARC, Planck, LIGO, CERN, EEG...) — Module 8 (Dataset Observatory) explicitly scoped real network fetches OUT for Stage 2 to avoid flaky, credential-dependent tests, and that reasoning still applies. Building this for real needs network access and API credentials this build should not assume. |
+
+So **Stage 3a** = build the two new-but-tractable modules
+(`hypothesis_engine.py`, `mathematical_discovery_engine.py`), each with
+an honestly-scoped design (no NLP "understand a vague claim" magic in
+the Hypothesis Engine — it's a structured-authoring + validation helper
+a human/agent fills in explicitly; no AI proof-search in the
+Mathematical Discovery Engine — it's a deterministic pipeline that tests
+a **given list** of candidate closed forms against enumeration/symbolic/
+MC evidence and reports which survive, not a system that invents
+candidates on its own). Simulation Lab and the live-feed half of
+Observatory remain **catalogued as open**, not silently dropped — the
+same honest-non-closure discipline this archive already applies to
+mathematical results, applied here to software scope.
 
 ---
 

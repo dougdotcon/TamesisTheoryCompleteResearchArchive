@@ -1,0 +1,32 @@
+c=1000, n=65536, c/n=0.0152587891
+Nearest 'nice' fractions bracketing candidate exponents: 1/2=0.5, 1/3=0.3333, 1/4=0.25, 1/5=0.2
+
+--- T1 (absolute-ell bins, NOT cluster-corrected) (n_bins=6, mean gap=40.8533%) ---
+1/n (p_equiv n/a)                        rate=  0.0015%  A_fit=26773.6405  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1:  0.0015%  RMS(A=1,pp)= 41.482  r(resid_fit,t0)=+0.0211
+1/sqrt(n) (p_equiv n/a)                  rate=  0.3906%  A_fit=104.5845  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1:  0.3906%  RMS(A=1,pp)= 41.098  r(resid_fit,t0)=+0.0211
+(c/n)^(1/2)  [sqrt(c/n)]                 rate= 12.3526%  A_fit= 3.3073  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1: 12.3526%  RMS(A=1,pp)= 29.396  r(resid_fit,t0)=+0.0211
+(c/n)^(1/3)  [NEW, neighbor]             rate= 24.8031%  A_fit= 1.6471  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1: 24.8031%  RMS(A=1,pp)= 17.591  r(resid_fit,t0)=+0.0211
+(c/n)^(1/4)  [NEW, referee N1 target]    rate= 35.1463%  A_fit= 1.1624  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1: 35.1463%  RMS(A=1,pp)=  9.188  r(resid_fit,t0)=+0.0211
+(c/n)^(1/5)  [NEW, neighbor]             rate= 43.3216%  A_fit= 0.9430  RMS(fit,pp)= 7.201  max|resid_fit|(pp)=14.133  pred@A=1: 43.3216%  RMS(A=1,pp)=  7.612  r(resid_fit,t0)=+0.0211
+
+--- T2 composite (relative L/n bins, cluster-robust where applicable) (n_bins=9, mean gap=38.7756%) ---
+1/n (p_equiv n/a)                        rate=  0.0015%  A_fit=25411.9481  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1:  0.0015%  RMS(A=1,pp)= 38.845  r(resid_fit,t0)=+0.3301
+1/sqrt(n) (p_equiv n/a)                  rate=  0.3906%  A_fit=99.2654  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1:  0.3906%  RMS(A=1,pp)= 38.457  r(resid_fit,t0)=+0.3301
+(c/n)^(1/2)  [sqrt(c/n)]                 rate= 12.3526%  A_fit= 3.1390  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1: 12.3526%  RMS(A=1,pp)= 26.527  r(resid_fit,t0)=+0.3301
+(c/n)^(1/3)  [NEW, neighbor]             rate= 24.8031%  A_fit= 1.5633  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1: 24.8031%  RMS(A=1,pp)= 14.168  r(resid_fit,t0)=+0.3301
+(c/n)^(1/4)  [NEW, referee N1 target]    rate= 35.1463%  A_fit= 1.1033  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1: 35.1463%  RMS(A=1,pp)=  4.321  r(resid_fit,t0)=+0.3301
+(c/n)^(1/5)  [NEW, neighbor]             rate= 43.3216%  A_fit= 0.8951  RMS(fit,pp)= 2.345  max|resid_fit|(pp)= 4.424  pred@A=1: 43.3216%  RMS(A=1,pp)=  5.115  r(resid_fit,t0)=+0.3301
+
+=== Exact-unit-prefactor exponent p* (solves (c/n)^p = mean_gap) ===
+T1: mean_gap=40.8533%  p* (unit-prefactor exponent) = 0.214025  (1/p* = 4.6723)
+T2_composite: mean_gap=38.7756%  p* (unit-prefactor exponent) = 0.226505  (1/p* = 4.4149)
+
+=== Degeneracy check: residual_i (fitted-A model) vs (gap_i - mean(gap)) ===
+T1 p=0.3333: max|model_resid - (gap-mean)| = 7.11e-15 pp (IDENTICAL (as predicted))
+T1 p=0.2500: max|model_resid - (gap-mean)| = 0.00e+00 pp (IDENTICAL (as predicted))
+T1 p=0.2000: max|model_resid - (gap-mean)| = 0.00e+00 pp (IDENTICAL (as predicted))
+T2_composite p=0.3333: max|model_resid - (gap-mean)| = 7.11e-15 pp (IDENTICAL (as predicted))
+T2_composite p=0.2500: max|model_resid - (gap-mean)| = 7.11e-15 pp (IDENTICAL (as predicted))
+T2_composite p=0.2000: max|model_resid - (gap-mean)| = 0.00e+00 pp (IDENTICAL (as predicted))
+
+Saved r02_fit_results.json

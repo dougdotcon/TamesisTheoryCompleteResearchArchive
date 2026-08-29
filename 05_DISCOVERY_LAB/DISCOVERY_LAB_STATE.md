@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-118`: onda 25 autorizada
+**Última atualização:** 2026-08-29 (`DISC-DEC-119`: onda 25 frente (d)
+`MCLUST-GAP-RATE-CANDIDATE-ATTEMPT` integrada — testou `(c/n)^{1/4}`
+(deixado explicitamente não-testado por N1) junto de vizinhos `1/3`,
+`1/5` contra os dados em bin do gap abstrato-vs-real M-CLUST(b).
+Resultado: eliminação RIGOROSA (não apenas empírica) de toda a classe
+lei-de-potência-simples — fato estrutural novo: `c=1000,n=65536` são
+constantes fixas em toda tabela de bin, logo `(c/n)^p` é um número
+fixo para qualquer `p`, tornando a classe cega-à-forma por construção
+— mais diagnóstico de que a proximidade de N1 a `1/4` (prefator
+`~1,10×`) é provavelmente coincidência de calibração num único ponto
+(`p^*` exato varia `~6%` entre tabelas). Barra de precisão pré-declarada
+falhada pelos três expoentes. Gap abstrato-vs-real em si permanece SEM
+explicação primária. Referee hostil: SOUND, nenhum erro, nenhum
+achado — reconstruiu todos os números do zero antes de abrir os
+scripts da frente.
+Anterior: `DISC-DEC-118`: onda 25 autorizada
 — 4 frentes paralelas, grounded numa pesquisa de portfolio dedicada
 (agente somente-leitura) que auditou todo o estado aberto pós
 `DISC-DEC-117`. Correção de framing: `H2` (M-CLUST) já foi dissolvido

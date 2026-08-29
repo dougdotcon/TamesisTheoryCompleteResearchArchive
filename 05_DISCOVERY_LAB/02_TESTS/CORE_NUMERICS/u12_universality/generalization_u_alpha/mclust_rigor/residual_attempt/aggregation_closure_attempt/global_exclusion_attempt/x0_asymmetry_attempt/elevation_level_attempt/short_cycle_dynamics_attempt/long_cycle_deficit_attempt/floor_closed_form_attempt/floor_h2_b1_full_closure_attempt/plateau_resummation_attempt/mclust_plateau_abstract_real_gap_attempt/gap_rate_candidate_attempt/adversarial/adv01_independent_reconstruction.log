@@ -1,0 +1,47 @@
+c/n = 0.0152587890625
+exact-fraction cross-check: 1000/65536 = 0.0152587890625, 125/8192 = 0.0152587890625
+(c/n)^(1/2) = 12.352647%
+(c/n)^(1/3) = 24.803141%
+(c/n)^(1/4) = 35.146333%
+(c/n)^(1/5) = 43.321553%
+1/n            = 0.001526%
+1/sqrt(n)      = 0.390625%
+
+=== T1 ===  n_bins=6  mean(gap)=40.8533%
+  p=1/3: rate=24.8031%  A*=164.7103  |A*-1|=163.7103  RMS_resid=7.2007pp  max|resid|=14.1333pp  natural(A=1)_RMS=17.5914pp  (max diff vs (gap-mean): 0.00e+00)
+  p=1/4: rate=35.1463%  A*=116.2378  |A*-1|=115.2378  RMS_resid=7.2007pp  max|resid|=14.1333pp  natural(A=1)_RMS=9.1880pp  (max diff vs (gap-mean): 0.00e+00)
+  p=1/5: rate=43.3216%  A*=94.3026  |A*-1|=93.3026  RMS_resid=7.2007pp  max|resid|=14.1333pp  natural(A=1)_RMS=7.6120pp  (max diff vs (gap-mean): 0.00e+00)
+
+=== T2-composite ===  n_bins=9  mean(gap)=38.7756%
+  p=1/3: rate=24.8031%  A*=156.3332  |A*-1|=155.3332  RMS_resid=2.3454pp  max|resid|=4.4244pp  natural(A=1)_RMS=14.1679pp  (max diff vs (gap-mean): 0.00e+00)
+  p=1/4: rate=35.1463%  A*=110.3260  |A*-1|=109.3260  RMS_resid=2.3454pp  max|resid|=4.4244pp  natural(A=1)_RMS=4.3211pp  (max diff vs (gap-mean): 0.00e+00)
+  p=1/5: rate=43.3216%  A*=89.5064  |A*-1|=88.5064  RMS_resid=2.3454pp  max|resid|=4.4244pp  natural(A=1)_RMS=5.1153pp  (max diff vs (gap-mean): 0.00e+00)
+
+p* (T1) = 0.214025  1/p* = 4.6723   check: (c/n)^p* *100 = 40.8533% (should == 40.8533%)
+p* (T2) = 0.226505  1/p* = 4.4149   check: (c/n)^p* *100 = 38.7756% (should == 38.7756%)
+
+Pearson r(gap,t0):  T1 = 0.0211   T2-composite = 0.3301
+
+=== Exploratory n_eff(t0)=n(1-t0) extension ===
+  n_eff, p=1/3, T1: A=1.3888  RMS_resid=10.532pp  max|resid|=16.361pp  R^2(vs flat mean)=-1.139
+  n_eff, p=1/3, T2-composite: A=1.0155  RMS_resid=12.091pp  max|resid|=26.177pp  R^2(vs flat mean)=-25.578
+  n_eff, p=1/4, T1: A=1.0326  RMS_resid=9.218pp  max|resid|=13.005pp  R^2(vs flat mean)=-0.639
+  n_eff, p=1/4, T2-composite: A=0.8237  RMS_resid=8.959pp  max|resid|=20.554pp  R^2(vs flat mean)=-13.591
+  n_eff, p=1/5, T1: A=0.8615  RMS_resid=8.556pp  max|resid|=11.209pp  R^2(vs flat mean)=-0.412
+  n_eff, p=1/5, T2-composite: A=0.7186  RMS_resid=7.123pp  max|resid|=16.832pp  R^2(vs flat mean)=-8.223
+  n_eff, p=1/4, T2-composite (spot check refit): A=0.8237  RMS_resid=8.959pp  max|resid|=20.554pp  R^2(vs flat mean)=-13.591
+
+Spot check T2 last bin (t0=0.938), p=1/4:
+  n_eff = n*(1-t0) = 4063.23
+  raw rate_eff (unscaled) = 70.4340%
+  fitted A = 0.8237
+  predicted = A * rate_eff = 58.0141%  (target claims '58.0%')
+  observed = 37.46%
+  miss = observed - predicted = -20.5541pp  (target claims '-20.55pp miss')
+
+=== Transcription cross-check (Decimal, independent of target's r01) ===
+  T1: max |recomputed - published| = 0.004671pp
+  T2: max |recomputed - published| = 0.004865pp
+  OVERALL max discrepancy = 0.004865pp  (target claims '0.0049pp')
+
+Done. Saved adv01_results.json

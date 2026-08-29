@@ -645,6 +645,69 @@ flowchart TD
 > `n≥6`. Fontes:
 > `.../plateau_resummation_attempt/mclust_plateau_abstract_real_gap_attempt/ATTEMPT.md`
 > e `.../mclust_plateau_abstract_real_gap_attempt/adversarial/REFEREE_REPORT.md`.
+>
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-119`.]** Onda 25 frente (d)
+> (`MCLUST-GAP-RATE-CANDIDATE-ATTEMPT`) testou diretamente o candidato
+> de taxa `(c/n)^{1/4}` que o achado N1 acima deixou explicitamente
+> não-testado, junto de vizinhos `(c/n)^{1/3}` e `(c/n)^{1/5}`, para
+> exaustão da classe lei-de-potência-simples.
+>
+> **Eliminação rigorosa da classe (não apenas empírica), mais um
+> diagnóstico afiado de por que a "proximidade" de N1 é provavelmente
+> coincidência.** Fato estrutural estabelecido pela primeira vez aqui:
+> `c=1000` e `n=65536` são CONSTANTES fixas em toda tabela de bin desta
+> linhagem — apenas `t0=L/n` varia bin a bin. Consequentemente
+> `(c/n)^p`, para QUALQUER expoente `p`, é um único número fixo em
+> todo bin, tornando a classe inteira estruturalmente cega-à-forma por
+> construção: ajustar um prefator reduz-se exatamente a ajustar a
+> média amostral, e os resíduos por bin são IDÊNTICOS para `p=1/3,1/4,
+> 1/5` (confirmado numericamente a `<10^{-9}`). Nenhum expoente nesta
+> família pode jamais explicar a tendência observada em `t0` (correlação
+> fraca `r=0,33` na tabela T2-composta robusta-a-cluster) — isto é
+> demonstrável pela própria estrutura dos dados, não apenas um
+> quase-acerto empírico. Na única dimensão em que os candidatos PODEM
+> diferir (magnitude): prefator de melhor ajuste `1,5633×` (`p=1/3`),
+> `1,1033×` (`p=1/4`, reproduzindo essencialmente o `~1,10×` do
+> referee de N1), `0,8951×` (`p=1/5`) — ou seja, `p=1/5` está tão
+> próximo de um prefator "natural" quanto `p=1/4`, apenas do lado
+> oposto. Resolvendo exatamente o expoente que dá prefator `1`:
+> `p^*=0,2265` (T2) e `p^*=0,2140` (T1) — um número genérico que NÃO
+> coincide com `1/4` nem `1/5` especificamente, e que varia `~6%` entre
+> as duas tabelas da mesma quantidade — evidência de que a proximidade
+> de N1 a `1/4` é coincidência de calibração num único ponto, não
+> confirmação de uma lei de taxa genuína. Barra de precisão declarada
+> ANTES do ajuste (`≤3` pontos percentuais por bin, prefator dentro de
+> `25%` da unidade): falhada pelos três expoentes (resíduo máximo
+> `4,42pp` em T2, `14,13pp` em T1). Extensão exploratória (além do
+> mandato literal, claramente rotulada): substituir `n` fixo por
+> `n_{\mathrm{eff}}(t0)=n(1-t0)`, motivado pela fronteira `s+g\le1` já
+> discutida acima, NÃO resgata a forma — piora decisivamente o ajuste
+> (`R^2` fortemente negativo em ambas as tabelas), corroborando de
+> forma independente o próprio ceticismo da frente-mãe quanto à
+> hipótese de fronteira.
+>
+> Referee hostil dedicado, sem ler nenhum script da frente antes de
+> reconstruir tudo do zero: re-transcreveu as tabelas T1/T2 diretamente
+> das fontes citadas e re-derivou à mão TODOS os números centrais
+> (prefatores, resíduos RMS/máximo, `p^*` exato, correlações de
+> Pearson, a discrepância de checagem-cruzada de transcrição, e a
+> tabela exploratória `n_{\mathrm{eff}}`) — todos batendo exatamente;
+> confirmou o fato estrutural `c=1000,n=65536` fixo diretamente nas
+> fontes primárias; confirmou ausência de `git`/aleatoriedade de código
+> e que os `.log` são genuínos (re-execução byte-a-byte idêntica);
+> investigou e resolveu uma anomalia (arquivos datados de 2026-08-29
+> num diretório irmão — pertencem à frente (c) desta mesma onda 25,
+> autorizada separadamente, não violação de escopo).
+>
+> Veredito **SOUND**. Nenhum erro encontrado; nenhum achado. Este
+> Estágio NÃO fecha o gap abstrato-vs-real — ele elimina rigorosamente
+> uma classe inteira de candidatos e demonstra que o candidato mais
+> promissor de N1 provavelmente não era mais que uma coincidência de
+> calibração; o gap em si permanece sem explicação primária
+> identificada. `φ_REDB`, `Φ_U(c)`, `Φ_infinity(c)` e toda fórmula de
+> registro: intocadas. Fontes:
+> `.../mclust_plateau_abstract_real_gap_attempt/gap_rate_candidate_attempt/ATTEMPT.md`
+> e `.../gap_rate_candidate_attempt/adversarial/REFEREE_REPORT.md`.
 
 > **[Adendo datado, 2026-08-26 — DISC-DEC-088/DISC-DEC-091.]** Onda 20
 > frente (c) (`MCLUST-H1-VALIDITY-ATTEMPT`) atacou `H1` (validade

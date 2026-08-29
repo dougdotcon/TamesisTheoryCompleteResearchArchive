@@ -1,0 +1,45 @@
+======================================================================
+Independent re-derivation of x(D) via sympy.diff (Taylor coeffs)
+======================================================================
+c0 (via sympy.diff): gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c0 diff - cited: 0
+c1 diff - cited: 0
+c2 diff - cited: 0
+c3 diff - cited: 0
+ALL FOUR MATCH via sympy.diff route (third independent method).
+
+======================================================================
+Independent E[x(D)^4] via sympy.stats.Binomial (fourth route)
+======================================================================
+(numeric substitution at several (k,n,gamma) since sympy.stats
+ symbolic-k Binomial moments of a POLYNOMIAL argument in M can be
+ slow/unsupported symbolically; numeric k lets stats.E do exact
+ rational summation over the pmf, an independent computational
+ engine from the target's manual cumulant-recursion substitution.)
+  k=3 n=50 gamma=1/10: E[x^4] (sympy.stats) = 71945384389/250000000000000000
+  k=3 n=50 gamma=3/10: E[x^4] (sympy.stats) = 177220818189/250000000000000000
+  k=3 n=50 gamma=7/10: E[x^4] (sympy.stats) = 100560421213/250000000000000000
+  k=3 n=50 gamma=9/10: E[x^4] (sympy.stats) = 5107713957/250000000000000000
+  k=3 n=500 gamma=1/10: E[x^4] (sympy.stats) = 413885438965567/15625000000000000000000000
+  k=3 n=500 gamma=3/10: E[x^4] (sympy.stats) = 136432919513943/1953125000000000000000000
+  k=3 n=500 gamma=7/10: E[x^4] (sympy.stats) = 317894873075213/7812500000000000000000000
+  k=3 n=500 gamma=9/10: E[x^4] (sympy.stats) = 33180301797363/15625000000000000000000000
+  k=7 n=50 gamma=1/10: E[x^4] (sympy.stats) = 13110253641335753/78125000000000000000
+  k=7 n=50 gamma=3/10: E[x^4] (sympy.stats) = 27460769502951477/78125000000000000000
+  k=7 n=50 gamma=7/10: E[x^4] (sympy.stats) = 3755574465649853/78125000000000000000
+  k=7 n=50 gamma=9/10: E[x^4] (sympy.stats) = 58847144647977/78125000000000000000
+  k=7 n=500 gamma=1/10: E[x^4] (sympy.stats) = 6548798067732689027/488281250000000000000000000
+  k=7 n=500 gamma=3/10: E[x^4] (sympy.stats) = 253202138082160382619/7812500000000000000000000000
+  k=7 n=500 gamma=7/10: E[x^4] (sympy.stats) = 45737130691054153841/7812500000000000000000000000
+  k=7 n=500 gamma=9/10: E[x^4] (sympy.stats) = 233873499232512027/1953125000000000000000000000
+  k=12 n=50 gamma=1/10: E[x^4] (sympy.stats) = 1457863976910894598913/195312500000000000000000
+  k=12 n=50 gamma=3/10: E[x^4] (sympy.stats) = 2665180083216208290273/195312500000000000000000
+  k=12 n=50 gamma=7/10: E[x^4] (sympy.stats) = 175068910306900028993/195312500000000000000000
+  k=12 n=50 gamma=9/10: E[x^4] (sympy.stats) = 17471646863232673473/195312500000000000000000
+  k=12 n=500 gamma=1/10: E[x^4] (sympy.stats) = 9650319509414043612604913/19531250000000000000000000000000
+  k=12 n=500 gamma=3/10: E[x^4] (sympy.stats) = 21281962413031865475432273/19531250000000000000000000000000
+  k=12 n=500 gamma=7/10: E[x^4] (sympy.stats) = 2173684688729259103586993/19531250000000000000000000000000
+  k=12 n=500 gamma=9/10: E[x^4] (sympy.stats) = 25640109442111814167473/19531250000000000000000000000000
+
+24 sympy.stats.Binomial-based E[x(D)^4] evaluations completed
+(saved for comparison against target's script 03/04 values in adv03).

@@ -1,0 +1,77 @@
+==============================================================================
+SCRIPT 01 -- exact hypergeometric/Charlier structure of A_k(n,gamma)
+==============================================================================
+
+--- Part A: P_{k,m} as an exact Pochhammer/rising-factorial ratio ---
+P_{k,m} product-form vs Pochhammer-form: 539 checks, 0 mismatches (n=3..13, all valid k,m)
+
+--- Part B: A_k(n,gamma) as a terminating 2F0 in w=-gamma/((1-gamma)n) ---
+  k=0: symbolic difference simplifies to: 0
+  k=1: symbolic difference simplifies to: 0
+  k=2: symbolic difference simplifies to: 0
+  k=3: symbolic difference simplifies to: 0
+  k=4: symbolic difference simplifies to: 0
+  k=5: symbolic difference simplifies to: 0
+  k=6: symbolic difference simplifies to: 0
+2F0 packaging vs direct Lemma-1 sum: k=0..6, 0 mismatches (symbolic, exact)
+
+  Numeric spot-check (exact Fraction), various (n,k,gamma):
+  40 random exact-Fraction spot checks, 0 mismatches (post-fix; see Self-caught issues in ATTEMPT.md for the pre-fix float-leak bug)
+
+--- Part C: identification with Charlier polynomials C_k(x;a) ---
+  Standard definition (classical, e.g. Koekoek-Lesky-Swarttouw):
+    C_k(x;a) := 2F0(-k,-x;;-1/a) = sum_{m=0}^k C(k,m) (-x)_m (-1/a)^m
+  This front's 2F0 has second upper parameter b=n-k+1 and argument
+  w=-gamma/((1-gamma)n). Matching -x=b=n-k+1  =>  x=k-n-1,
+  and -1/a=w  =>  a=(1-gamma)n/gamma. So the CLAIM is:
+    A_k(n,gamma) = (1-gamma)^k * C_k(k-n-1 ; (1-gamma)n/gamma)
+  Verified directly (not via a citation) by expanding the classical
+  C_k(x;a) definition symbolically at x=k-n-1, a=(1-gamma)n/gamma and
+  comparing term-by-term against Part B's already-verified 2F0 form.
+  k=0: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: 0
+  k=1: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: -2*gamma
+  k=2: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: 4*gamma*(gamma*n - gamma - n + 1)/n
+  k=3: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: -8*gamma**3 + 18*gamma**3/n - 4*gamma**3/n**2 + 12*gamma**2 - 24*gamma**2/n - 6*gamma + 12*gamma/n
+  k=4: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: 16*gamma**4 - 72*gamma**4/n + 88*gamma**4/n**2 - 48*gamma**4/n**3 - 32*gamma**3 + 120*gamma**3/n - 88*gamma**3/n**2 + 48*gamma**3/n**3 + 24*gamma**2 - 72*gamma**2/n - 8*gamma + 24*gamma/n
+  k=5: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: -32*gamma**5 + 240*gamma**5/n - 590*gamma**5/n**2 + 580*gamma**5/n**3 - 48*gamma**5/n**4 + 80*gamma**4 - 520*gamma**4/n + 1040*gamma**4/n**2 - 960*gamma**4/n**3 - 80*gamma**3 + 420*gamma**3/n - 520*gamma**3/n**2 + 480*gamma**3/n**3 + 40*gamma**2 - 160*gamma**2/n - 10*gamma + 40*gamma/n
+  k=6: (1-g)^k C_k(k-n-1;(1-g)n/g) - A_k^direct simplifies to: 64*gamma**6 - 720*gamma**6/n + 2900*gamma**6/n**2 - 5100*gamma**6/n**3 + 3288*gamma**6/n**4 - 1440*gamma**6/n**5 - 192*gamma**5 + 1920*gamma**5/n - 6660*gamma**5/n**2 + 9900*gamma**5/n**3 - 3288*gamma**5/n**4 + 1440*gamma**5/n**5 + 240*gamma**4 - 2040*gamma**4/n + 5640*gamma**4/n**2 - 7200*gamma**4/n**3 - 160*gamma**3 + 1080*gamma**3/n - 1880*gamma**3/n**2 + 2400*gamma**3/n**3 + 60*gamma**2 - 300*gamma**2/n - 12*gamma + 60*gamma/n
+Charlier identification (naive parameter matching): k=0..6, 6/7 mismatches
+  --> NOT claimed as a result of this front (see script's inline
+      comment / ATTEMPT.md Self-caught issues): the naive parameter
+      matching to the textbook Charlier convention does not check
+      out past k=0. Nothing downstream depends on this named-family
+      identification -- only on the independently-verified 2F0 form
+      of Part B, which stands fully verified regardless.
+
+--- Part D: what this DOES and DOES NOT buy (honest scope note) ---
+
+This establishes, for the FIRST time in this lineage (no ancestor
+ATTEMPT.md mentions 2F0, or any hypergeometric/orthogonal-polynomial
+identification), that A_k(n,gamma) is EXACTLY (not asymptotically) a
+terminating 2F0(-k, n-k+1; ; -gamma/((1-gamma)n)) hypergeometric
+polynomial, times (1-gamma)^k -- a genuine new exact structural fact
+(Part B, fully verified). The FURTHER claim that this is literally a
+textbook Charlier polynomial (Part C) did NOT check out under this
+front's own naive parameter matching and is explicitly NOT claimed.
+
+Either way, it does NOT, by itself, give a closed form for
+S_n = sum_k A_k or for C(gamma). Note the argument w=-gamma/((1-gamma)n)
+is FIXED (independent of k) -- only the degree k and the second upper
+parameter b=n-k+1 move with the summation index -- so summing
+2F0(-k,n-k+1;;w) over k=1..n is a "diagonal-parameter" sum of a
+hypergeometric family at fixed argument but drifting degree/parameter,
+which is not a standard closed textbook identity either (the classical
+Charlier generating function sum_k C_k(x;a) t^k/k! = e^t(1-t/a)^x, even
+if the Part-C identification had checked out, holds for FIXED x,a -- it
+would not directly apply here since the analogous x=k-n-1 moves with
+k). Script 02 uses this exact 2F0 representation only as a numerically
+EXACT (no exponential-sandwich approximation at all) evaluator of A_k,
+pushed to larger n/higher precision than any ancestor's pmf-based
+evaluator, and as the basis for an exact-moment (rather than
+deterministic-worst-case) refinement of the Bulk/Tail Lemma's bulk term
+in script 03.
+
+
+PARTS A, B FULLY VERIFIED (0 mismatches). Part C (Charlier-family
+naming) NOT established and NOT claimed -- see disclosure above.
+Summary: 539 Pochhammer-ratio checks (0 mismatches), 0 symbolic-2F0 mismatches (of 7, PASSED), 40 random exact spot checks (0 mismatches, PASSED), 6 Charlier-ID mismatches (of 7, NOT claimed/used further).

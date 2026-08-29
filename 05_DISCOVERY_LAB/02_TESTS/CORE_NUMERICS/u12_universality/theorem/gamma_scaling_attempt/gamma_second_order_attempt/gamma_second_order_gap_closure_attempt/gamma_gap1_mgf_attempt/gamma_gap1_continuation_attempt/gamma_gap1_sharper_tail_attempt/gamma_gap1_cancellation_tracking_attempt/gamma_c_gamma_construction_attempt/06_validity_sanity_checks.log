@@ -1,0 +1,56 @@
+==============================================================================
+SCRIPT 06 -- hard sanity checks on the hybrid bound
+==============================================================================
+
+--- Check (A): R_k^exact vs pointwise Lyapunov bound R_k^bound ---
+  (moderate k,n so direct pmf summation is feasible)
+    OK k= 10 n=  1000 gamma=0.2: R_exact=    1.97094e-7  R_bound=    2.63021e-7  ratio(bound/exact)=1.3345
+    OK k= 10 n=  1000 gamma=0.5: R_exact=    1.26131e-7  R_bound=    2.10111e-7  ratio(bound/exact)=1.66581
+    OK k= 10 n=  1000 gamma=0.8: R_exact=    8.93427e-9  R_bound=    2.08339e-8  ratio(bound/exact)=2.33191
+    OK k= 10 n= 20000 gamma=0.2: R_exact=   2.40727e-11  R_bound=   3.17289e-11  ratio(bound/exact)=1.31804
+    OK k= 10 n= 20000 gamma=0.5: R_exact=   1.55826e-11  R_bound=   2.55677e-11  ratio(bound/exact)=1.64079
+    OK k= 10 n= 20000 gamma=0.8: R_exact=    1.1501e-12  R_bound=   2.57451e-12  ratio(bound/exact)=2.2385
+    OK k= 30 n=  1000 gamma=0.2: R_exact=     3.9007e-5  R_bound=     6.5524e-5  ratio(bound/exact)=1.6798
+    OK k= 30 n=  1000 gamma=0.5: R_exact=    1.95266e-5  R_bound=    3.74828e-5  ratio(bound/exact)=1.91958
+    OK k= 30 n=  1000 gamma=0.8: R_exact=    7.57513e-7  R_bound=    2.00693e-6  ratio(bound/exact)=2.64937
+    OK k= 30 n= 20000 gamma=0.2: R_exact=     4.3287e-9  R_bound=    6.08692e-9  ratio(bound/exact)=1.40618
+    OK k= 30 n= 20000 gamma=0.5: R_exact=    2.28483e-9  R_bound=    3.52447e-9  ratio(bound/exact)=1.54255
+    OK k= 30 n= 20000 gamma=0.8: R_exact=   1.06501e-10  R_bound=   2.06621e-10  ratio(bound/exact)=1.94009
+    OK k= 80 n=  1000 gamma=0.2: R_exact=    0.00542601  R_bound=     0.0400252  ratio(bound/exact)=7.37654
+    OK k= 80 n=  1000 gamma=0.5: R_exact=    0.00252537  R_bound=     0.0266385  ratio(bound/exact)=10.5483
+    OK k= 80 n=  1000 gamma=0.8: R_exact=   0.000213109  R_bound=    0.00465354  ratio(bound/exact)=21.8365
+    OK k= 80 n= 20000 gamma=0.2: R_exact=     3.9195e-7  R_bound=    6.01015e-7  ratio(bound/exact)=1.5334
+    OK k= 80 n= 20000 gamma=0.5: R_exact=    1.92345e-7  R_bound=    3.11744e-7  ratio(bound/exact)=1.62075
+    OK k= 80 n= 20000 gamma=0.8: R_exact=    7.03303e-9  R_bound=    1.33706e-8  ratio(bound/exact)=1.90112
+  TOTAL: 18 checks, 0 violations
+
+--- Check (B): bulk-restricted R_k^exact vs bulk_term_new bound ---
+    OK k= 20 n=  5000 gamma=0.3 Theta=13.704: restricted_exact=4.419e-8 bound=6.30602e-8
+    OK k= 20 n=  5000 gamma=0.6 Theta=13.704: restricted_exact=1.24228e-8 bound=2.12409e-8
+    OK k= 20 n= 50000 gamma=0.3 Theta=15.446: restricted_exact=4.37036e-11 bound=6.18612e-11
+    OK k= 20 n= 50000 gamma=0.6 Theta=15.446: restricted_exact=1.24076e-11 bound=2.07903e-11
+    OK k= 60 n=  5000 gamma=0.3 Theta=23.736: restricted_exact=7.1688e-6 bound=1.15673e-5
+    OK k= 60 n=  5000 gamma=0.6 Theta=23.736: restricted_exact=1.68714e-6 bound=2.89706e-6
+    OK k= 60 n= 50000 gamma=0.3 Theta=26.753: restricted_exact=6.77296e-9 bound=9.77017e-9
+    OK k= 60 n= 50000 gamma=0.6 Theta=26.753: restricted_exact=1.65991e-9 bound=2.57478e-9
+  TOTAL: 8 checks, 0 violations
+
+--- Check (C): term-by-term breakdown at the found n_0(gamma) ---
+  gamma=0.99  n0=10^15.4377  K=8.827e+8  k2=6.492e+6
+      G_n*bulk=    2.11434e-7  G_n*tail=      0.181943  small_k=      0.818057  TOTAL=       1.0  [binding: small_k]
+  gamma=0.90  n0=10^13.0971  K=5.521e+7  k2=6.649e+5
+      G_n*bulk=    0.00344501  G_n*tail=    6.19055e-7  small_k=      0.996554  TOTAL=       1.0  [binding: small_k]
+  gamma=0.70  n0=10^12.2765  K=2.167e+7  k2=2.671e+5
+      G_n*bulk=      0.621616  G_n*tail=    3.17119e-6  small_k=       0.37838  TOTAL=       1.0  [binding: bulk]
+  gamma=0.50  n0=10^16.4628  K=3.426e+9  k2=3.009e+5
+      G_n*bulk=           1.0  G_n*tail=   9.32111e-10  small_k=   1.32333e-13  TOTAL=       1.0  [binding: bulk]
+  gamma=0.30  n0=10^20.394  K=4.272e+11  k2=4.437e+5
+      G_n*bulk=           1.0  G_n*tail=   4.14188e-13  small_k=   1.01518e-24  TOTAL=       1.0  [binding: bulk]
+  gamma=0.10  n0=10^24.9985  K=1.554e+14  k2=4.511e+6
+      G_n*bulk=           1.0  G_n*tail=   1.91592e-36  small_k=   7.00551e-31  TOTAL=       1.0  [binding: bulk]
+  gamma=0.05  n0=10^27.1186  K=2.595e+15  k2=1.834e+7
+      G_n*bulk=           1.0  G_n*tail=   1.16092e-10  small_k=   7.76574e-33  TOTAL=       1.0  [binding: bulk]
+  gamma=0.01  n0=10^31.4117  K=8.662e+17  k2=5.364e+8
+      G_n*bulk=           1.0  G_n*tail=  3.42199e-112  small_k=   2.40657e-35  TOTAL=       1.0  [binding: bulk]
+
+All sanity checks complete.

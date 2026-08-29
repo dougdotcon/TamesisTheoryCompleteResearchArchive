@@ -1,6 +1,27 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-132`: onda 28 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-133`: onda 28 frente (b)
+`GAMMA-C-GAMMA-CONSTRUCTION-ATTEMPT` integrada como Estágio 51 em
+`THEOREM.md`. `C(γ)` NÃO foi construído — permanece inteiramente
+ABERTO, honestamente relatado pela própria frente. Três contribuições
+parciais: (1) novo fato estrutural exato PROVADO, `A_k(n,γ)=
+(1-γ)^k\cdot{}_2F_0(-k,n-k+1;;-γ/((1-γ)n))`, um polinômio
+hipergeométrico que termina, nunca notado nesta linhagem; (2)
+refinamento genuinamente diferente do Lema Bulk/Tail via Lyapunov +
+4º momento exato, removendo uma ineficiência NÃO-LIMITADA
+`\sim(\ln n)^{1{,}5}` (não apenas constante fixa como os 4 fronts
+anteriores) — `n_0(γ)` reduzido por mais `3{,}46`–`29{,}76` décadas vs.
+Estágio 49, permanece `10^{10{,}2}`–`10^{31{,}4}`; auto-avaliação
+honesta: "mesmo tipo de contribuição que o Estágio 49 disse para
+superar"; (3) evidência para `E_heuristic(γ)` via Taylor de ordem 6.
+Referee hostil: **SOUND WITH NAMED ISSUES — ACCEPT**, confirmou tudo
+independentemente (identidade `2F0`, Lyapunov, expoente `(\ln
+n)^{1{,}5}` via regressão de 8 pontos); um achado real MODERADO — a
+alegação "ordem-6 comparável a ou menor que o resíduo de ordem-2"
+estava INVERTIDA (deslocamento excede o resíduo em `1{,}3`–`3{,}7\times`),
+corrigido em 3 lugares por correções datadas. **Onda 28 agora com 2/2
+frentes integradas — fechamento completo.**
+Anterior: `DISC-DEC-132`: onda 28 frente (a)
 `H-CES-DIRECT-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **nona onda
 consecutiva** (20-28) neste gap, primeira a atacar `(H-ces)`

@@ -7196,3 +7196,130 @@ outro item aberto do arquivo (`C(γ)`, Conjecturas 1–2 em suas formas
 mais gerais, a construção contínua-nativa da Definição 3 para `K\ge3`,
 o gap M-CLUST H1) é tocado. Nenhuma alegação de progresso em Millennium
 Problem; matemática combinatória pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 51 — 2026-08-29]
+
+**Onda 28, frente (b), `DISC-DEC-131` (`GAMMA-C-GAMMA-CONSTRUCTION-
+ATTEMPT`).** Alvo: `C(γ)` em si, o termo de segunda-ordem da lei de
+escala `γ` para `γ\in(0,1)`, nomeado aberto desde o Estágio 26 e
+apontado explicitamente pelo Estágio 49 como o alvo natural remanescente
+— não mais um aperto de `n_0(γ)`.
+
+### O que aconteceu
+
+> **`C(γ)` NÃO foi construído — permanece inteiramente ABERTO.** A
+> própria frente relata isto com honestidade logo de início, e não
+> entrega o pedido central do mandato. O que entrega, genuína e
+> independentemente verificado, é três contribuições parciais, nenhuma
+> das quais, individual ou combinada, fecha o Gap 1, o Gap 3, ou `C(γ)`
+> em si:
+>
+> 1. **Novo fato estrutural exato (PROVADO).** `A_k(n,γ)` (o bloco de
+>    construção do próprio `THEOREM.md`, `n\varphi(n,γn)=\Sigma_kA_k`)
+>    é, exatamente, um polinômio hipergeométrico `{}_2F_0` que termina:
+>    `A_k(n,γ)=(1-γ)^k\cdot{}_2F_0(-k,\,n-k+1;\,;\,-γ/((1-γ)n))` — nunca
+>    notado nesta linhagem antes (todo ancestral trabalha inteiramente
+>    pela rota do sanduíche exponencial `\sigma_k(m)/\tau(m)`). Não
+>    produz, por si só, uma forma fechada para `S_n=\Sigma_kA_k` ou
+>    `C(γ)` — a soma `\Sigma_k(1-γ)^k{}_2F_0(-k,n-k+1;;w)` é uma soma
+>    de "parâmetro-diagonal" (grau e segundo parâmetro superior ambos
+>    variam com `k`, argumento fixo), não uma identidade clássica de
+>    função geratriz — permanece a pista mais promissora não-explorada
+>    para uma frente futura. Uma tentativa de identificação com a
+>    família clássica de polinômios de Charlier não se confirmou sob o
+>    pareamento natural de parâmetros (resíduo exato `-2γ$` em `k=1`,
+>    não-zero) — divulgado honestamente, não forçado.
+> 2. **Um refinamento genuinamente diferente (não apenas constante mais
+>    apertada) do Lema Bulk/Tail, via desigualdade de Lyapunov + o 4º
+>    momento EXATO**, em vez de um limitante determinístico de pior-caso
+>    avaliado no raio bulk (o mecanismo usado pelos quatro fronts
+>    anteriores de aperto de `n_0(γ)`, Estágios 33/36/37/49). Este
+>    mecanismo remove uma ineficiência NÃO-LIMITADA — `\sim(\ln
+>    n)^{1{,}5}` — não apenas uma constante multiplicativa fixa (que é
+>    tudo que todo front anterior removeu). Resultado: `n_0(γ)` reduzido
+>    por mais `3{,}46`–`29{,}76` décadas em relação à já-apertada tabela
+>    do Estágio 49, a maior redução de qualquer front nesta subcadeia —
+>    `n_0(γ)` permanece `10^{10{,}2}`–`10^{31{,}4}`, ainda
+>    astronomicamente inútil numericamente. **Esta é exatamente o
+>    MESMO TIPO de contribuição que o Estágio 49 disse explicitamente
+>    que uma "nona frente" deveria superar, não repetir** — a própria
+>    avaliação honesta da frente é que ela chegou mais perto de "décima
+>    frente de aperto de `n_0`" do que da frente de construção que o
+>    mandato pediu, mesmo que a técnica subjacente (baseada em momento,
+>    não em probabilidade de cauda) seja nova em espécie.
+> 3. **Nova evidência, não prova, para a conjectura padrão
+>    `E_{\text{heuristic}}(γ)`** — mas com uma correção importante (ver
+>    abaixo). A expansão Taylor/cumulante exata de `E_M[e^{-x(D)}]` foi
+>    computada até ordem 6 — quatro ordens além da heurística de ordem 2
+>    do Estágio 26 §4.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da identidade `A_k={}_2F_0(\ldots)`,
+> simbólica em `n,γ`, `k=0,\ldots,6` — zero discrepância, coincidindo
+> exatamente com a faixa que a própria frente verificou.
+>
+> Referee hostil dedicado: re-derivou toda a matemática central do zero
+> (não os scripts da frente) em seis scripts próprios — confirmou a
+> identidade `2F0` exatamente; re-derivou a maquinaria de
+> cumulantes/momentos por quatro rotas independentes; confirmou a
+> desigualdade de Lyapunov como matematicamente válida e corretamente
+> aplicada, re-checou em 10 pontos `(k,n,γ)` frescos além da própria
+> grade da frente (0 violações), e confirmou o expoente `(\ln
+> n)^{1{,}5}$` via uma regressão completa de 8 pontos (`1{,}499`, contra
+> o ajuste de 2 pontos da própria frente de `1{,}499$` — reforça a
+> alegação); reagrupou a tabela final `n_0(γ)$` do zero e a reconferiu
+> por bisseção em `γ=0{,}5,0{,}9,0{,}01$` (a `<5\times10^{-5}$`
+> décadas). **Um achado real, de severidade MODERADA**: a alegação de
+> que o deslocamento de ordem-6 é "comparável a, ou menor que" o
+> resíduo de ordem-2 está de fato INVERTIDA — o deslocamento EXCEDE o
+> resíduo em `1{,}3\times$`–`3{,}7\times$` nos três `γ$` testados, e a
+> truncagem de ordem-6 fica de fato mais LONGE de
+> `E_{\text{heuristic}}(γ)$` que a de ordem-2 nos três casos — não
+> refuta `E_{\text{heuristic}}(γ)$` (que continua sendo apenas
+> conjecturada), mas remove a garantia originalmente alegada. Achado
+> repetido em três lugares (resumo executivo, §5, scorecard) — corrigido
+> por três correções datadas na própria `ATTEMPT.md` da frente. A
+> identificação com Charlier confirmada como um achado negativo honesto
+> e genuíno.
+>
+> **Sobre o enquadramento autocrítico da frente**: o referee confirma
+> que ele se sustenta como preciso — a frente distingue corretamente um
+> mecanismo genuinamente novo (baseado em momento, removendo uma
+> ineficiência não-limitada — confirmado independentemente) do fato de
+> que o resultado ainda é "mais aperto de `n_0$`, `C(γ)$` intocado" —
+> exatamente o que o Estágio 49 disse para superar. Nem superalegado
+> nem subalegado.
+>
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** `C(γ)`
+> permanece inteiramente ABERTO; o Gap 1 permanece NÃO fechado; o Gap 3
+> permanece intocado.
+
+Ver
+`.../gamma_gap1_cancellation_tracking_attempt/gamma_c_gamma_construction_attempt/ATTEMPT.md`
+e
+`.../gamma_c_gamma_construction_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua sem nenhuma forma fechada, limitante provado (superior
+ou inferior), ou caracterização como série convergente com resto
+provado — exatamente como o Estágio 26 o deixou. `n_0(γ)` (Estágio 49)
+é reduzido ainda mais, por `3{,}46`–`29{,}76` décadas, via um
+mecanismo genuinamente novo (Lyapunov/4º-momento, removendo uma
+ineficiência não-limitada) — mas permanece `10^{10{,}2}`–`10^{31{,}4}`,
+sem utilidade numérica. Um novo fato estrutural exato (`A_k` como
+`{}_2F_0` que termina) é registrado como conhecimento novo desta
+linhagem, com a obstrução precisa para usá-lo (a soma de
+"parâmetro-diagonal") nomeada como o alvo mais promissor para uma
+futura frente. Dado que esta é agora a QUINTA frente consecutiva desta
+subcadeia (Estágios 33/36/37/49/51) cujo resultado principal é um
+aperto de `n_0(γ)` em vez da construção de `C(γ)` pedida desde o
+Estágio 26, uma futura frente que queira continuar esta linha deveria
+fortemente considerar OU (a) fechar a soma de parâmetro-diagonal do §2
+desta frente diretamente, OU (b) uma técnica fundamentalmente
+diferente (não baseada em momento/cumulante) para `C(γ)` em si — não
+mais um sexto aperto de `n_0(γ)`. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória/assintótica pura interna a
+este arquivo.

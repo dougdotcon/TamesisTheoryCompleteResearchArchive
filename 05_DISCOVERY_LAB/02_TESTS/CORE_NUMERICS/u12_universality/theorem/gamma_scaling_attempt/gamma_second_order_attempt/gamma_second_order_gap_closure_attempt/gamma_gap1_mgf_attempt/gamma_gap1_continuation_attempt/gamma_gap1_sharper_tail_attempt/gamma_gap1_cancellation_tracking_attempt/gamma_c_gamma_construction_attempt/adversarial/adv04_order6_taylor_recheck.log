@@ -1,0 +1,27 @@
+======================================================================
+Fresh, independent re-derivation of x(D) and D's moments up to order 18
+======================================================================
+mu_4 (fresh) = 3*gamma**4*k**2 - 6*gamma**4*k - 6*gamma**3*k**2 + 12*gamma**3*k + 3*gamma**2*k**2 - 7*gamma**2*k + gamma*k
+Consistency vs cited classical mu_4: 0
+
+Computing E[x(D)^j], j=0..6 (fresh, independent implementation)...
+  done in 38.2s
+
+--- gamma=0.5: independent re-run of E_n^(2), E_n^(6) at n=4096,16384 ---
+  n=4096: E_n^(2)=-0.2287073976  E_n^(6)=-0.2306615245
+  n=16384: E_n^(2)=-0.2347117482  E_n^(6)=-0.2356654573
+  Richardson extrap: order-2=-0.2407160987  order-6=-0.2406693901  E_heuristic=-0.2407407407
+  |order2-Eh|=2.4642e-5  |order6-Eh|=7.13507e-5  |order6-order2|=4.67086e-5
+
+======================================================================
+Checking the target's own headline interpretive claim (Sec.5):
+"the four extra exact orders shift the extrapolated limit by only
+ 4e-5-8e-5 -- comparable to, or smaller than, the residual gap
+ already present at order 2" -- verified via pure arithmetic on the
+ target's OWN reported numbers (08_higher_order_taylor_check.log):
+======================================================================
+  gamma=0.3: order-2 residual |o2-Eh|=6.408e-5   shift |o6-o2|=8.407e-5   ratio shift/order2-residual=1.312   SHIFT EXCEEDS order-2 residual
+  gamma=0.5: order-2 residual |o2-Eh|=2.464e-5   shift |o6-o2|=4.671e-5   ratio shift/order2-residual=1.895   SHIFT EXCEEDS order-2 residual
+  gamma=0.7: order-2 residual |o2-Eh|=9.826e-6   shift |o6-o2|=3.613e-5   ratio shift/order2-residual=3.677   SHIFT EXCEEDS order-2 residual
+
+[exited with code 0]

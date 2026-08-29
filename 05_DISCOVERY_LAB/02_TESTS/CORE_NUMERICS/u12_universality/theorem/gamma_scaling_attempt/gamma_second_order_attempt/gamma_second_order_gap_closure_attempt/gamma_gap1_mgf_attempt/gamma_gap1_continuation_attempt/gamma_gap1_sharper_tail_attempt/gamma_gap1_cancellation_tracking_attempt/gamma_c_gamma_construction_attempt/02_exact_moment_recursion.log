@@ -1,0 +1,39 @@
+==============================================================================
+SCRIPT 02 -- exact Binomial central moments of D via cumulants
+==============================================================================
+
+--- Part A: single-Bernoulli(gamma) cumulants (fresh series expansion) ---
+  computed in 0.65s
+  kappa_tilde_1 = gamma   (must be gamma, the mean)
+  kappa_tilde_2 = -gamma**2 + gamma   (must be gamma(1-gamma), the variance)
+
+--- Part B: cumulants and central moments of D=M-gamma*k ---
+  moment recursion computed in 2.04s, orders 0..18
+
+  mu_2 = E[D^2] = -gamma**2*k + gamma*k
+  mu_3 = E[D^3] = 2*gamma**3*k - 3*gamma**2*k + gamma*k
+  mu_4 = E[D^4] = 3*gamma**4*k**2 - 6*gamma**4*k - 6*gamma**3*k**2 + 12*gamma**3*k + 3*gamma**2*k**2 - 7*gamma**2*k + gamma*k
+
+  Cross-check vs cited classical mu_3: difference = 0
+  Cross-check vs cited classical mu_4: difference = 0
+  BOTH cross-checks PASSED (exact zero symbolic difference).
+
+--- Part C: brute-force pmf cross-check (small k, exact Fraction) ---
+  48 brute-force moment checks (k<=8, order in {2,3,4,6}), 0 mismatches
+
+--- Part D: fresh re-derivation of x(D) = delta(D) + tau(M)/2 ---
+  tau(m) (fresh, sympy.summation) = k**2*m/n**2 - k*m**2/n**2 - k*m/n**2 + m**3/(3*n**2) + m**2/(2*n**2) + m/(6*n**2)
+
+  c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+  c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+  c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+  c3 = 1/(6*n**2)
+  c0: fresh - cited(referee-corrected) = 0
+  c1: fresh - cited(referee-corrected) = 0
+  c2: fresh - cited(referee-corrected) = 0
+  c3: fresh - cited(referee-corrected) = 0
+  ALL FOUR COEFFICIENTS match the referee-corrected cited forms exactly.
+
+Saved central moments (order 0..18) and x(D) coefficients to moment_data.pkl
+
+ALL CHECKS PASSED.

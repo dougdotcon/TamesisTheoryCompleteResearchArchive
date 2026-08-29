@@ -1,0 +1,45 @@
+==============================================================================
+SCRIPT 08 -- order-6 vs order-2 Taylor truncation of E_M[e^{-x(D)}]
+==============================================================================
+
+Computing E[x(D)^j] for j=0..6 exactly (moment substitution)...
+  j=0: done in 0.0s, 1 terms
+  j=1: done in 0.0s, 11 terms
+  j=2: done in 0.1s, 67 terms
+  j=3: done in 0.8s, 198 terms
+  j=4: done in 2.6s, 441 terms
+  j=5: done in 7.4s, 823 terms
+  j=6: done in 20.0s, 1384 terms
+Total: 31.0s
+
+Building T_2-1 and T_6-1 (exact rational functions of k,n,gamma)...
+
+--- Comparing order-2 (Estagio 26's own order) vs order-6 (this front) ---
+    Richardson-extrapolated limit (2-point, model x_n = x + c/sqrt(n)) vs E_heuristic(gamma)
+  gamma=0.3 n=  1024: E_n^(2)=-0.1797951231  E_n^(6)=-0.1999190561
+  gamma=0.3 n=  4096: E_n^(2)=-0.210011753  E_n^(6)=-0.2199512329
+  gamma=0.3 n= 16384: E_n^(2)=-0.225216051  E_n^(6)=-0.2301437561
+    Richardson extrap (n=4096,16384): order-2 -> -0.2404203489  order-6 -> -0.2403362793   E_heuristic=-0.2404844291
+    |order-2 - E_heuristic| = 6.40801e-5   |order-6 - E_heuristic| = 0.00014815
+    |order-6 - order-2|    = 8.40697e-5
+
+  gamma=0.5 n=  1024: E_n^(2)=-0.2167721713  E_n^(6)=-0.2208526233
+  gamma=0.5 n=  4096: E_n^(2)=-0.2287073976  E_n^(6)=-0.2306615245
+  gamma=0.5 n= 16384: E_n^(2)=-0.2347117482  E_n^(6)=-0.2356654573
+    Richardson extrap (n=4096,16384): order-2 -> -0.2407160987  order-6 -> -0.2406693901   E_heuristic=-0.2407407407
+    |order-2 - E_heuristic| = 2.4642e-5   |order-6 - E_heuristic| = 7.13507e-5
+    |order-6 - order-2|    = 4.67086e-5
+
+  gamma=0.7 n=  1024: E_n^(2)=-0.2396083646  E_n^(6)=-0.2406098744
+  gamma=0.7 n=  4096: E_n^(2)=-0.2465104606  E_n^(6)=-0.2469423871
+  gamma=0.7 n= 16384: E_n^(2)=-0.2499761556  E_n^(6)=-0.2501740553
+    Richardson extrap (n=4096,16384): order-2 -> -0.2534418507  order-6 -> -0.2534057236   E_heuristic=-0.2534516765
+    |order-2 - E_heuristic| = 9.82584e-6   |order-6 - E_heuristic| = 4.5953e-5
+    |order-6 - order-2|    = 3.61271e-5
+
+Interpretation: if |order-6 - order-2| is itself small (comparable to or
+smaller than the residual |order-2 - E_heuristic|), the four extra exact
+orders included here do not materially shift the extrapolated limit --
+consistent with (not a proof of) Estagio 26's truncation being adequate
+at the order that determines E(gamma). A LARGE |order-6-order-2| would be
+an important red flag this script is designed to catch honestly.

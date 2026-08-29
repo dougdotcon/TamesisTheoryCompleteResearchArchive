@@ -1,0 +1,40 @@
+==============================================================================
+SCRIPT 04 -- numeric comparison: H_Theta^3 (predecessor) vs
+            (E[x(D)^4])^{3/4} (this front), at K=K_real(n,gamma)
+==============================================================================
+
+--- H_Theta^3 (predecessor, deterministic worst-case) vs
+    (E[x(D)^4])^{3/4} (this front, Lyapunov/exact-4th-moment), same K_real, C=1.05 ---
+ gamma        n        H_Theta^3     (E[x^4])^(3/4)   ratio old/new
+  0.99 1.0e+100      8.99346e-71        4.99263e-77      1.80135e+6
+  0.90 1.0e+100      9.19708e-68        1.39947e-72         65718.4
+  0.70 1.0e+100      3.00158e-66         1.6279e-70         18438.3
+  0.50 1.0e+100       2.1471e-65        1.51255e-69         14195.2
+  0.30 1.0e+100      1.40311e-64        7.60972e-69         18438.3
+  0.10 1.0e+100      2.75018e-63         4.1848e-68         65718.4
+  0.05 1.0e+100      1.45124e-62          8.467e-68        171400.0
+  0.01 1.0e+100      5.86564e-61        3.25625e-67      1.80135e+6
+
+--- Full table (all n tested), gamma=0.5 (representative) ---
+  n=10^10: H_Theta^3=0.12342997  (E[x^4])^0.75=0.00027417604  ratio=450.18511
+  n=10^20: H_Theta^3=5.1374757e-8  (E[x^4])^0.75=4.0460256e-11  ratio=1269.7586
+  n=10^30: H_Theta^3=7.431153e-15  (E[x^4])^0.75=3.1859116e-18  ratio=2332.5045
+  n=10^40: H_Theta^3=6.9115641e-22  (E[x^4])^0.75=1.9246239e-25  ratio=3591.1245
+  n=10^50: H_Theta^3=5.0464838e-29  (E[x^4])^0.75=1.0055262e-32  ratio=5018.7491
+  n=10^60: H_Theta^3=3.1616847e-36  (E[x^4])^0.75=4.7923796e-40  ratio=6597.317
+  n=10^80: H_Theta^3=9.2990551e-51  (E[x^4])^0.75=9.1551058e-55  ratio=10157.234
+  n=10^100: H_Theta^3=2.1470955e-65  (E[x^4])^0.75=1.512554e-69  ratio=14195.166
+
+--- Does the ratio (old/new) GROW with n, as the analytic estimate
+    predicts (order (ln n)^1.5, unbounded)? Check via fitted exponent
+    of ratio vs ln(ln(n)) [since predicted ratio ~ C^3 (ln n)^1.5]. ---
+  gamma=0.99: ratio(n=1.0e+10)=15.502  ratio(n=1.0e+100)=1.8013e+6  fitted ln-ln exponent=5.065 [predicted ~1.5]
+  gamma=0.90: ratio(n=1.0e+10)=1066.8  ratio(n=1.0e+100)=65718.0  fitted ln-ln exponent=1.79 [predicted ~1.5]
+  gamma=0.70: ratio(n=1.0e+10)=569.42  ratio(n=1.0e+100)=18438.0  fitted ln-ln exponent=1.51 [predicted ~1.5]
+  gamma=0.50: ratio(n=1.0e+10)=450.19  ratio(n=1.0e+100)=14195.0  fitted ln-ln exponent=1.499 [predicted ~1.5]
+  gamma=0.30: ratio(n=1.0e+10)=585.84  ratio(n=1.0e+100)=18438.0  fitted ln-ln exponent=1.498 [predicted ~1.5]
+  gamma=0.10: ratio(n=1.0e+10)=2076.1  ratio(n=1.0e+100)=65718.0  fitted ln-ln exponent=1.5 [predicted ~1.5]
+  gamma=0.05: ratio(n=1.0e+10)=5384.6  ratio(n=1.0e+100)=1.714e+5  fitted ln-ln exponent=1.503 [predicted ~1.5]
+  gamma=0.01: ratio(n=1.0e+10)=55440.0  ratio(n=1.0e+100)=1.8013e+6  fitted ln-ln exponent=1.512 [predicted ~1.5]
+
+Done. See log for the full quantitative comparison.

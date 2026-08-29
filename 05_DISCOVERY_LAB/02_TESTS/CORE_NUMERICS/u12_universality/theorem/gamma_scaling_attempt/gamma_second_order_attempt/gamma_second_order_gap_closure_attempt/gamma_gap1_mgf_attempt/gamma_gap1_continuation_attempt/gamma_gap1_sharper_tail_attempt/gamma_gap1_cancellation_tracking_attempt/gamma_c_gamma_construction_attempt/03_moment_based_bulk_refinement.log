@@ -1,0 +1,31 @@
+==============================================================================
+SCRIPT 03 -- Lyapunov/exact-4th-moment refinement of the BULK term
+==============================================================================
+
+--- Part A: exact E[x(D)^4] via moment substitution ---
+  computed in 2.92s (degree-12-in-D substitution)
+  E[x(D)^4] has 441 terms after expansion (not printed in full -- huge rational function of k,n,gamma)
+
+  Sanity check gamma=1: E[x(D)^4]|_{gamma=1} = k**4*(16*k**8 - 96*k**7 + 248*k**6 - 360*k**5 + 321*k**4 - 180*k**3 + 62*k**2 - 12*k + 1)/(20736*n**8)
+                          c0|_{gamma=1}^4       = k**4*(2*k**2 - 3*k + 1)**4/(20736*n**8)
+  difference: 0
+  PASSED (degenerate gamma=1 case confirms the moment substitution is correct).
+
+--- Part B: brute-force pmf cross-check of E[x(D)^4] ---
+  k=2 n=5 gamma=3/10: brute=17789511/78125000000  sym=17789511/78125000000  match=True
+  k=3 n=10 gamma=1/10: brute=102744255493/400000000000000  sym=102744255493/400000000000000  match=True
+  k=4 n=9 gamma=7/10: brute=20555362447249/10761680250000000  sym=20555362447249/10761680250000000  match=True
+  k=5 n=20 gamma=1/2: brute=725986927/655360000000  sym=725986927/655360000000  match=True
+  k=3 n=7 gamma=1/5: brute=276076901941/180150031250000  sym=276076901941/180150031250000  match=True
+  5 brute-force E[x(D)^4] checks, 0 mismatches
+
+--- Part C: fresh re-derivation of lambda_tight(gamma) (cited technique) ---
+  lim x_K(D_max)/ln(n) = 4*(-gamma**2 + 2*gamma - 1)/(gamma*(gamma - 2))   [expect 4(1-gamma)^2/(gamma(2-gamma))]
+  lim x_K(D_min)/ln(n) = -4   [expect -4, gamma-independent]
+  difference from Estagio-49-cited value (Dmax): 0
+  difference from Estagio-49-cited value (Dmin): 0
+  Fresh re-derivation MATCHES Estagio 49's cited lambda_tight(gamma) exactly.
+
+  lambda_tight(gamma) = max(4, 4(1-gamma)^2/(gamma(2-gamma)))  [cited, re-confirmed]
+
+Script 03 Part A-C: ALL CHECKS PASSED.

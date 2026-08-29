@@ -1,0 +1,44 @@
+h(gamma) = sigma^2(gamma)*(lambda_tight_pieceB(gamma)+1/2) =
+   3       2           
+7⋅γ  - 21⋅γ  + 22⋅γ - 8
+───────────────────────
+       2⋅(γ - 2)       
+
+C0_tight_B(gamma,a) - (2+a)*h(gamma) = 0  (confirms exact a-factorization)
+
+h'(gamma) =
+    3       2            
+14⋅γ  - 63⋅γ  + 84⋅γ - 36
+─────────────────────────
+      ⎛ 2          ⎞     
+    2⋅⎝γ  - 4⋅γ + 4⎠     
+
+Numerator of h'(gamma) (as a polynomial in gamma):
+    3       2            
+14⋅γ  - 63⋅γ  + 84⋅γ - 36
+Denominator (factored): 2*(gamma - 2)**2
+
+Degree of numerator polynomial: 3
+All real roots of numerator (exact, sympy.real_roots):
+   CRootOf(14*x**3 - 63*x**2 + 84*x - 36, 0)  ~=  2.530493615
+
+gamma* = 0.292893218813452
+Real roots of h'(gamma)'s numerator strictly inside (0, gamma*): []
+
+h'(gamma=0.1) = -3.90803324099723  (sign: negative)
+
+=== CONCLUSION ===
+FULL SYMBOLIC PROOF: numerator of h'(gamma) has ZERO real roots in (0,gamma*).
+Combined with the sign at gamma=0.1 (negative) and continuity/no-root-in-interval,
+h'(gamma) < 0 throughout (0,gamma*) is a RIGOROUS, closed-form fact -- for ALL a>0
+simultaneously (since the a-dependence factors out as a positive overall scalar).
+This STRENGTHENS the target's claim from 'dense sign-sampling at 5 values of a'
+to a genuine closed-form symbolic proof valid for every a>0 at once.
+
+--- Independent numerical re-check (scipy + dense grid) ---
+Dense grid (2,000,000 pts) on (0,gamma*): number of locally-increasing steps = 0
+
+Global-ish minimize(-h) result: gamma*_found=1.00000428163e-09, h_max_found=1.9999999955
+h at gamma->0+ (limit) = 2  vs found max 2
+If the found maximizer is essentially at the gamma->0 boundary (not interior), this
+confirms NO spurious interior local maximum exists on (0,gamma*).

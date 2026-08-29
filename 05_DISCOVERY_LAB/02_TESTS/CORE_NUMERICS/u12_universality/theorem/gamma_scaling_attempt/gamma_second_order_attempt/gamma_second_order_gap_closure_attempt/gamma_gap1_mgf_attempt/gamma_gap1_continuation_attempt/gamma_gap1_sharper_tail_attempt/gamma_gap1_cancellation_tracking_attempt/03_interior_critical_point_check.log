@@ -1,0 +1,47 @@
+x_K'(D) = (D**2/2 + D*(2*K*gamma - 2*K - 2*n + 1)/2 + K**2*gamma**2/2 - K**2*gamma + K**2/2 - K*gamma*n + K*gamma/2 + K*n - K/2 - n/2 + 1/12)/n**2
+
+Two exact critical-point roots (function of K, n, gamma):
+  D* = -K*gamma + K + n - sqrt(36*n**2 + 3)/6 - 1/2
+  D* = -K*gamma + K + n + sqrt(36*n**2 + 3)/6 - 1/2
+
+==============================================================================
+Which root is O(K) (i.e. potentially inside [-gamma*K,(1-gamma)*K])
+and which is O(n) (far outside the support for large n)?
+==============================================================================
+Root 0: D*/K -> sqrt(2)*(-sqrt(2)*gamma*sqrt(-1/(gamma - 2)) + sqrt(2)*sqrt(-1/(gamma - 2)))/(2*sqrt(-1/(gamma - 2))) as n->infty (gamma symbolic)
+Root 1: D*/K -> oo*sign(1/sqrt(-1/(gamma - 2))) as n->infty (gamma symbolic)
+
+==============================================================================
+Evaluate the 'small' root (the one that stays O(K)) at several gamma,
+check numerically whether it falls inside (D_min,D_max) = 
+(-gamma*K, (1-gamma)*K), and if so, compare x_K there to the two
+endpoint values -- at ASTRONOMICALLY large, representative finite n
+(mpmath, high precision, exact c_i(K,n,gamma) -- no leading-order
+shortcut in this numeric check).
+==============================================================================
+gamma=0.01  n=1e30  #interior_crit_in_range=1  |x|@endpoints=1.360863e+04  |x|@interior=1.360863e+04  interior_dominates=True
+gamma=0.01  n=1e60  #interior_crit_in_range=1  |x|@endpoints=2.721725e+04  |x|@interior=2.721725e+04  interior_dominates=True
+gamma=0.01  n=1e100  #interior_crit_in_range=0  |x|@endpoints=4.536208e+04  |x|@interior=0.000000e+00  interior_dominates=False
+gamma=0.05  n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.557641e+03  |x|@interior=2.557641e+03  interior_dominates=True
+gamma=0.05  n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.115281e+03  |x|@interior=5.115281e+03  interior_dominates=True
+gamma=0.05  n=1e100  #interior_crit_in_range=1  |x|@endpoints=8.525469e+03  |x|@interior=8.525469e+03  interior_dominates=False
+gamma=0.1   n=1e30  #interior_crit_in_range=1  |x|@endpoints=1.177954e+03  |x|@interior=1.177954e+03  interior_dominates=True
+gamma=0.1   n=1e60  #interior_crit_in_range=1  |x|@endpoints=2.355908e+03  |x|@interior=2.355908e+03  interior_dominates=True
+gamma=0.1   n=1e100  #interior_crit_in_range=0  |x|@endpoints=3.926514e+03  |x|@interior=0.000000e+00  interior_dominates=False
+gamma=0.3   n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.763102e+02  |x|@interior=2.654745e+02  interior_dominates=False
+gamma=0.3   n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.526204e+02  |x|@interior=5.309490e+02  interior_dominates=False
+gamma=0.3   n=1e100  #interior_crit_in_range=0  |x|@endpoints=9.210340e+02  |x|@interior=0.000000e+00  interior_dominates=False
+gamma=0.5   n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.763102e+02  |x|@interior=9.210340e+01  interior_dominates=False
+gamma=0.5   n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.526204e+02  |x|@interior=1.842068e+02  interior_dominates=False
+gamma=0.5   n=1e100  #interior_crit_in_range=1  |x|@endpoints=9.210340e+02  |x|@interior=3.070113e+02  interior_dominates=False
+gamma=0.7   n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.763102e+02  |x|@interior=2.732738e+01  interior_dominates=False
+gamma=0.7   n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.526204e+02  |x|@interior=5.465477e+01  interior_dominates=False
+gamma=0.7   n=1e100  #interior_crit_in_range=1  |x|@endpoints=9.210340e+02  |x|@interior=9.109128e+01  interior_dominates=False
+gamma=0.9   n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.763102e+02  |x|@interior=2.791012e+00  interior_dominates=False
+gamma=0.9   n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.526204e+02  |x|@interior=5.582024e+00  interior_dominates=False
+gamma=0.9   n=1e100  #interior_crit_in_range=1  |x|@endpoints=9.210340e+02  |x|@interior=9.303374e+00  interior_dominates=False
+gamma=0.99  n=1e30  #interior_crit_in_range=1  |x|@endpoints=2.763102e+02  |x|@interior=2.763378e-02  interior_dominates=False
+gamma=0.99  n=1e60  #interior_crit_in_range=1  |x|@endpoints=5.526204e+02  |x|@interior=5.526757e-02  interior_dominates=False
+gamma=0.99  n=1e100  #interior_crit_in_range=1  |x|@endpoints=9.210340e+02  |x|@interior=9.211261e-02  interior_dominates=False
+
+Interior critical point strictly dominates the endpoints in 6/24 tested (gamma,n) combinations.

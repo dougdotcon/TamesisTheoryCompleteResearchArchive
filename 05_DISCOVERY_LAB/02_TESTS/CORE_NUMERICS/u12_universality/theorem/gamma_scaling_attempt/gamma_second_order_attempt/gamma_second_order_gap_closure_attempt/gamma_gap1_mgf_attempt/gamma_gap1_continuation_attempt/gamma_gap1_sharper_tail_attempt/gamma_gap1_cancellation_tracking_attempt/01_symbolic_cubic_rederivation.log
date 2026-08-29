@@ -1,0 +1,61 @@
+==============================================================================
+PART A -- tau(m) closed form, fresh sympy.summation
+==============================================================================
+tau(m) = k**2*m/n**2 - k*m**2/n**2 - k*m/n**2 + m**3/(3*n**2) + m**2/(2*n**2) + m/(6*n**2)
+degree in m: 3
+brute-force tau(m) check: 40 random (k,n,m) triples, 0 mismatches
+
+==============================================================================
+PART B -- x(D) := delta(D) + tau(gamma*k+D)/2, exact cubic in D
+==============================================================================
+degree in D: 3
+c0 (route 1, direct Poly extraction) = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c1 (route 1) = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+c2 (route 1) = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c3 (route 1) = 1/(6*n**2)
+
+------------------------------------------------------------------------------
+Route 2: derivative-based hand assembly (tau, tau', tau'' at m=gamma*k)
+------------------------------------------------------------------------------
+c0 (route 2, derivative-based) = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c1 (route 2) = (gamma**2*k**2/2 - gamma*k**2 + gamma*k/2 + k**2/2 - k/2 - n*(2*k*(gamma - 1) + 1)/2 + 1/12)/n**2
+c2 (route 2) = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c3 (route 2) = 1/(6*n**2)
+
+------------------------------------------------------------------------------
+Cross-check route 1 vs route 2 (must be exactly zero difference)
+------------------------------------------------------------------------------
+diff c0: 0
+diff c1: 0
+diff c2: 0
+diff c3: 0
+
+==============================================================================
+PART C -- cross-check against grandparent's adversarially-corrected c_i
+==============================================================================
+diff vs grandparent c0: 0
+diff vs grandparent c1: 0
+diff vs grandparent c2: 0
+diff vs grandparent c3: 0
+
+Numeric spot check at the referee's own test point gamma=1/2,k=10,n=100:
+c0(1/2,10,100) = 51/4000  (expected 51/4000 = 51/4000 )
+
+ALL CHECKS PASSED. Working c_i (route 1 == route 2 == grandparent's
+corrected forms, exact zero symbolic difference in all cases).
+
+==============================================================================
+PART D -- exact (not crude) support of D = M - gamma*k
+==============================================================================
+M ~ Bin(k,gamma) so M in [0,k] exactly (integer-valued, but the
+*range* of the real number D=M-gamma*k is exactly the closed
+interval [-gamma*k, (1-gamma)*k] -- attained at M=0 and M=k
+respectively. This is EXACT, not a bound -- it is what M's own
+definition as a Binomial count directly gives, requiring no
+further argument.
+
+Contrast with the Bulk/Tail Lemma's existing crude tail-region use
+of |D| <= k (i.e. the symmetric interval [-k,k]), which is a valid
+but strictly looser superset whenever gamma != 1/2 -- e.g. gamma=0.01
+gives true D in [-0.01k, 0.99k], NOT [-k,k]; gamma=0.99 gives true D
+in [-0.99k, 0.01k], NOT [-k,k]. This asymmetry is exploited in script 02.

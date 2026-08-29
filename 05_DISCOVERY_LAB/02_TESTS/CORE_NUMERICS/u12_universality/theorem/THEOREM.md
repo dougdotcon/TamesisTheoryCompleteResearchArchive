@@ -6991,3 +6991,100 @@ não apenas quase-afiado; apenas `K\ge5` permanece fora do escopo desta
 linha (a CDF fechada geral-`K` em si continua aberta, Estágios 44/45).
 Nenhuma alegação de progresso em Millennium Problem; matemática
 combinatória pura interna a este arquivo.
+
+## [Extensão, Estágio 49 — 2026-08-29]
+
+**Onda 27, frente (c), `DISC-DEC-127` (`GAMMA-GAP1-CANCELLATION-TRACKING-ATTEMPT`).**
+Alvo: `C(γ)`, o termo de segundo-ordem da lei de escala `γ` para
+`γ\in(0,1)` — a linha nomeada mais dormente do arquivo fora do gap
+M-CLUST H1 (5 ondas consecutivas, 22-26, sem tocar). Mandato: tentar
+uma de duas rotas já nomeadas e não tentadas — (i) rastreamento exato
+de cancelamento nos limitantes de coeficiente, ou (ii) uma decomposição
+Bulk/Tail fundamentalmente diferente.
+
+### O que aconteceu
+
+> **Redução substancial de `n_0(γ)`, com fatores de melhoria
+> precisamente quantificados — `C(γ)` em si permanece inteiramente
+> aberto.** Rota (i) escolhida. Observação central nova: `M\sim
+> \mathrm{Bin}(k,γ)` satisfaz `M\in[0,k]` EXATAMENTE, logo `D:=M-γk`
+> tem suporte exato `[-γk,(1-γ)k]` — não o `[-k,k]` simétrico e mais
+> frouxo que toda frente ancestral usou. Como `x(D)` é um cúbico com
+> coeficientes explícitos, o máximo exato de `|x_K(D)|` no suporte
+> VERDADEIRO é localizável por cálculo elementar (raízes exatas da
+> derivada quadrática), sem desigualdade triangular. Isto dá
+> ```
+> \lambda_{\text{tight}}(γ) := \max(4,\ 4(1-γ)^2/(γ(2-γ)))
+> ```
+> (PROVADO, álgebra exata, `sympy.limit`) — o limite no extremo
+> `D_{\min}=-γK` é `-4` EXATAMENTE, um fato universal e
+> γ-independente que nenhum limitante de valor-absoluto poderia
+> enxergar. `\lambda_{\text{tight}}(γ)` é estritamente menor que o
+> `\lambda(γ)=4(3-2γ)/(γ(2-γ))` do Estágio 36 em todo `γ\in(0,1)`
+> (`2{,}67\times` menor em `γ=1/2`, `3{,}04\times` menor em
+> `γ=0{,}01`). Combinado com a construção Bernstein-com-folga
+> (Estágio 37, re-derivada do zero), o novo supremo é
+> `\sup_γC_{0,\text{tight}}^2=2a+4`, contra o `28a+56` do Estágio 37 —
+> **exatamente `14\times` menor, uniformemente em `a`** (identidade
+> algébrica exata, `28a+56=14(2a+4)`). Uma segunda correção
+> independente (`K_{\text{real}}`, uma cota mais justa da truncagem)
+> se empilha multiplicativamente.
+>
+> **Resultado numérico final:** `n_0(γ)` reduzido genuinamente nos `8`
+> pontos testados — `2{,}30` a `16{,}21` décadas vs. a própria melhor
+> tabela (Bernstein) da frente sharper_tail; `5{,}37` a `23{,}71`
+> décadas vs. a tabela Hoeffding original. `n_0(γ)` permanece
+> `10^{15{,}4}`–`10^{61{,}2}` — astronomicamente grande, muito além de
+> qualquer `n` numericamente alcançável — **nenhum fechamento é
+> alegado**. Um bug auto-capturado e divulgado (resíduo de `k` pequeno
+> inicialmente limitado pela escala errada de `k`) está documentado na
+> própria `ATTEMPT.md`, Seção 8.
+>
+> **Spot-check da sessão** antes do despacho: reverificação
+> independente via `mpmath` de alta precisão (`n` até `10^{200}`,
+> `5` valores de `γ`) confirmando exatamente os dois limites
+> assintóticos centrais, mais confirmação simbólica da comparação
+> `\lambda_{\text{tight}}` vs. `\lambda_{36}` e da razão exata `14\times`.
+>
+> Referee hostil dedicado: SOUND WITH NAMED ISSUES — ACCEPT for
+> catalogue. Re-derivou cada alegação com carga probatória do zero
+> (incluindo uma prova simbólica completa dos dois limites, mais forte
+> que o exigido pelo mandato, contornando uma limitação conhecida do
+> algoritmo Gruntz do `sympy` para símbolos de sinal irrestrito); achou
+> uma prova fechada para a peça de monotonicidade que a própria frente
+> só havia confirmado por amostragem densa de sinal (não uma falha —
+> apenas uma prova mais forte do mesmo fato, sem contraexemplo
+> encontrado); reproduziu a tabela `n_0(γ)` de forma totalmente
+> independente. **Um achado real MODERADO**: o intervalo "décadas
+> economizadas vs. Bernstein" estava mal-rotulado em três lugares
+> proeminentes (veredito, §5, scorecard de §11) como `2{,}30`–`23{,}71`
+> ou `2{,}30`–`14{,}86` — o valor correto, lido diretamente da própria
+> tabela de §9 (cujo texto prosaico já o afirmava corretamente), é
+> `2{,}30`–`16{,}21` (máximo em `γ=0{,}3`, não `γ=0{,}01`) — `23{,}71`
+> pertence à coluna vs.-Hoeffding, não vs.-Bernstein. Não afeta nenhuma
+> prova, nenhuma linha da tabela `n_0(γ)`, nem as constantes
+> `\lambda_{\text{tight}}`/`C_0`. Corrigido por correção datada (e duas
+> notas-irmãs) na própria `ATTEMPT.md` da frente.
+>
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.** `C(γ)`
+> permanece inteiramente ABERTO.
+
+Ver
+`.../gamma_gap1_sharper_tail_attempt/gamma_gap1_cancellation_tracking_attempt/ATTEMPT.md`
+e
+`.../gamma_gap1_cancellation_tracking_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+O limitante da constante de oscilação `\lambda(γ)$ do Estágio 36 é
+substituído por um `\lambda_{\text{tight}}(γ)` estritamente mais
+apertado e agora EXATO (não apenas uma correção de sinal como o
+Estágio 36 fez), reduzindo `n_0(γ)` por `2{,}3` a `23{,}7` ordens de
+grandeza dependendo do ponto de comparação e de `γ`. Isto NÃO fecha
+`C(γ)` — o termo de segundo-ordem em si permanece inteiramente
+indeterminado, e `n_0(γ)` continua muitas ordens de grandeza além de
+qualquer valor numericamente útil. Uma nona frente que queira
+continuar esta linha teria como alvo natural a própria construção de
+`C(γ)`, não mais apertar `n_0(γ)`. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória/assintótica pura interna
+a este arquivo.

@@ -1,0 +1,26 @@
+=== Part (a): reproducing the self-caught bug's qualitative effect ===
+(gamma=0.5, C=1.595, a=0.05 -- the target's own reported working point)
+  log10(n)     logW (FIXED, H_k2)      logW (BUGGY, H_K)
+        10                10.6806               115.0177
+        20                 6.7726               209.8936
+        30                 2.5310               303.6188
+        35                 0.2308               350.2871
+        40                -2.1467               396.8730
+        44                -4.0919               434.0956
+        50                -7.0664               489.8689
+        60               -12.1391               582.7016
+        70               -17.3175               675.4216
+
+Expectation per target's §8 disclosure: the FIXED version should decay
+(logW decreasing, eventually crossing below 0), while the BUGGY version
+should NOT decay properly (should grow or stay large/positive, 'no sign
+of a crossing... up to n=10^44').
+
+
+=== Part (b): no-spurious-oscillation check beyond n0, my own assembly ===
+
+gamma=0.5, C=1.595: scanning log10(n) from n0-2 to n0+20 decades
+  increasing_found = False  (False = clean monotone decay, matches target's own claim)
+
+gamma=0.01, C=2.022: scanning log10(n) from n0-2 to n0+20 decades
+  increasing_found = False  (False = clean monotone decay, matches target's own claim)

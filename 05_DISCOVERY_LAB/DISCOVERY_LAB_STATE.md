@@ -1,6 +1,25 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-126`: onda 26 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-128`: onda 27 frente (c)
+`GAMMA-GAP1-CANCELLATION-TRACKING-ATTEMPT` integrada como Estágio 49 —
+redução substancial de `n_0(γ)` via rastreamento exato de cancelamento:
+`\lambda_{\text{tight}}(γ)=\max(4,4(1-γ)^2/(γ(2-γ)))`, PROVADO por
+álgebra exata (o suporte VERDADEIRO, assimétrico, de `D=M-γk`, nunca
+usado por nenhuma frente ancestral), estritamente mais apertado que o
+`\lambda(γ)` do Estágio 36. Combinado com Bernstein-com-folga, novo
+supremo `2a+4` vs. `28a+56` — exatamente `14\times` menor,
+uniformemente em `a`. `n_0(γ)` reduzido `2{,}30`–`16{,}21` décadas vs.
+tabela Bernstein, `5{,}37`–`23{,}71` décadas vs. Hoeffding original;
+permanece `10^{15{,}4}`–`10^{61{,}2}`, astronomicamente grande —
+**`C(γ)` em si permanece inteiramente ABERTO**, nenhum fechamento
+alegado. Referee hostil: SOUND WITH NAMED ISSUES, re-derivou tudo do
+zero incluindo prova mais forte que o exigido para um dos pontos;
+achado real MODERADO (intervalo "décadas vs. Bernstein" mal-rotulado
+em 3 lugares, corrigido: `2{,}30`–`16{,}21`, não `2{,}30`–`23{,}71` nem
+`2{,}30`–`14{,}86`) — não afeta nenhuma prova nem a tabela `n_0(γ)`.
+Onda 27 agora com 2/3 frentes integradas; frentes (a) e (b) ainda
+pendentes.
+Anterior: `DISC-DEC-126`: onda 26 frente (b)
 `EXACT-ALGEBRAIC-CLOSURE-ATTEMPT` integrada como Estágio 48 —
 fechamento EXATO completo (não apenas quase-afiado) para `K=3`
 (`n\ge5`, alargando de `n\ge6`) e `K=4` (`n\ge6`), mesmo tier de `K=2`:

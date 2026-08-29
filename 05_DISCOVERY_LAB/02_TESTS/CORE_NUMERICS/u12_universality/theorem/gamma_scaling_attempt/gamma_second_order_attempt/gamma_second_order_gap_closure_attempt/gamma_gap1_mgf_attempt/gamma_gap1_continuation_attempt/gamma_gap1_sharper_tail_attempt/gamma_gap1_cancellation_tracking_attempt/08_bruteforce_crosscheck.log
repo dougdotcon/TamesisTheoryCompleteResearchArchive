@@ -1,0 +1,39 @@
+==============================================================================
+PART A -- closed-form (endpoints+critical-points) vs brute-force
+fine-grid scan (200,000 points), moderate n
+==============================================================================
+  gamma=0.01  n=1000         closed_form=2.133641e+03  brute(20k pts)=2.133641e+03  rel_diff=8.21e-15
+  gamma=0.01  n=100000       closed_form=2.434172e+03  brute(20k pts)=2.434172e+03  rel_diff=5.14e-10
+  gamma=0.01  n=100000000    closed_form=3.639592e+03  brute(20k pts)=3.639592e+03  rel_diff=3.43e-13
+  gamma=0.1   n=1000         closed_form=1.442056e+02  brute(20k pts)=1.442056e+02  rel_diff=6.09e-10
+  gamma=0.1   n=100000       closed_form=2.019771e+02  brute(20k pts)=2.019771e+02  rel_diff=5.71e-10
+  gamma=0.1   n=100000000    closed_form=3.144821e+02  brute(20k pts)=3.144821e+02  rel_diff=3.97e-12
+  gamma=0.3   n=1000         closed_form=3.256543e+01  brute(20k pts)=3.256543e+01  rel_diff=3.50e-10
+  gamma=0.3   n=100000       closed_form=4.606700e+01  brute(20k pts)=4.606700e+01  rel_diff=0.00e+00
+  gamma=0.3   n=100000000    closed_form=7.368333e+01  brute(20k pts)=7.368333e+01  rel_diff=0.00e+00
+  gamma=0.5   n=1000         closed_form=2.776687e+01  brute(20k pts)=2.776687e+01  rel_diff=0.00e+00
+  gamma=0.5   n=100000       closed_form=4.606922e+01  brute(20k pts)=4.606922e+01  rel_diff=0.00e+00
+  gamma=0.5   n=100000000    closed_form=7.368342e+01  brute(20k pts)=7.368342e+01  rel_diff=0.00e+00
+  gamma=0.7   n=1000         closed_form=2.776913e+01  brute(20k pts)=2.776913e+01  rel_diff=0.00e+00
+  gamma=0.7   n=100000       closed_form=4.606952e+01  brute(20k pts)=4.606952e+01  rel_diff=0.00e+00
+  gamma=0.7   n=100000000    closed_form=7.368344e+01  brute(20k pts)=7.368344e+01  rel_diff=0.00e+00
+  gamma=0.9   n=1000         closed_form=2.775865e+01  brute(20k pts)=2.775865e+01  rel_diff=0.00e+00
+  gamma=0.9   n=100000       closed_form=4.606817e+01  brute(20k pts)=4.606817e+01  rel_diff=0.00e+00
+  gamma=0.9   n=100000000    closed_form=7.368338e+01  brute(20k pts)=7.368338e+01  rel_diff=0.00e+00
+  gamma=0.99  n=1000         closed_form=2.774972e+01  brute(20k pts)=2.774972e+01  rel_diff=0.00e+00
+  gamma=0.99  n=100000       closed_form=4.606703e+01  brute(20k pts)=4.606703e+01  rel_diff=0.00e+00
+  gamma=0.99  n=100000000    closed_form=7.368334e+01  brute(20k pts)=7.368334e+01  rel_diff=0.00e+00
+
+Worst relative difference across all tests: 6.09e-10
+(brute force with a finite grid can only ever find <= the true max,
+so brute > closed_form would indicate a real bug; brute < closed_form
+by a small amount is expected discretization slack, not a problem.)
+
+==============================================================================
+PART B -- ground-truth check: R_k^exact via DIRECT Binomial pmf sum
+vs the Bulk/Tail-style bound using H_exact, moderate (k,n,gamma)
+==============================================================================
+  k=20 n=1000 gamma=0.3: R_k^exact=5.808518e-06  R_k^bound(H_exact)=1.785457e-04  R_exact<=bound: True
+  k=50 n=5000 gamma=0.5: R_k^exact=1.501895e-06  R_k^bound(H_exact)=1.269721e-03  R_exact<=bound: True
+  k=15 n=800 gamma=0.9: R_k^exact=7.558186e-09  R_k^bound(H_exact)=4.248961e-04  R_exact<=bound: True
+  k=10 n=500 gamma=0.05: R_k^exact=4.516884e-07  R_k^bound(H_exact)=9.814440e-05  R_exact<=bound: True

@@ -1,0 +1,24 @@
+tau(m) closed form:
+  ⎛   2                    2          ⎞
+m⋅⎝6⋅k  - 6⋅k⋅m - 6⋅k + 2⋅m  + 3⋅m + 1⎠
+───────────────────────────────────────
+                    2                  
+                 6⋅n                   
+
+Degree in D: 3
+
+My independently re-derived coefficients:
+c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+c3 = 1/(6*n**2)
+
+Difference (mine - target), should be exactly 0 each:
+diff c0 = 0
+diff c1 = 0
+diff c2 = 0
+diff c3 = 0
+
+ALL FOUR COEFFICIENTS MATCH TARGET'S §2 TRANSCRIPTION EXACTLY: True
+
+Numeric spot check c0(gamma=1/2,k=10,n=100) = 51/4000 == 51/4000? True

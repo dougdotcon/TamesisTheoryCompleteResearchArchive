@@ -1,0 +1,29 @@
+======================================================================
+Part 1: naive sp.limit() attempt (expected to fail on sign ambiguity)
+======================================================================
+Symbolic limit at D_max FAILED (as anticipated by the task): Result depends on the sign of sign((gamma - 1)**2)
+Symbolic limit at D_min FAILED (as anticipated by the task): Result depends on the sign of sign(-4*gamma**2 + 12*gamma - 8)
+
+======================================================================
+Part 2: FULL symbolic proof via .factor() before .limit() -- resolves
+the sign ambiguity without needing numeric fallback, for GENERIC
+positive gamma (no upper bound gamma<1 even needed).
+======================================================================
+lim x_K(D_max)/ln(n)  [generic gamma>0]  = 4*(-gamma**2 + 2*gamma - 1)/(gamma*(gamma - 2))
+Target's claimed formula 4(1-gamma)^2/(gamma(2-gamma)) = 4*(1 - gamma)**2/(gamma*(2 - gamma))
+Exact symbolic difference: 0  <- should be 0
+
+lim x_K(D_min)/ln(n)  [generic gamma>0]  = -4
+Target's claimed value: -4
+Exact symbolic difference: 0  <- should be 0
+
+======================================================================
+CONCLUSION
+======================================================================
+Both limits confirmed by FULL symbolic proof (not just sampled rational
+gamma values), for generic positive gamma -- stronger than the task's
+own fallback suggestion (which anticipated needing pure numerics).
+See adv03_numeric_crosscheck.py for an independent high-precision
+(mpmath, n up to 10^200) numeric cross-check using the TRUE integer
+ceiling K (not the idealized real-valued surrogate used here), across
+5 gamma values, for additional confidence.

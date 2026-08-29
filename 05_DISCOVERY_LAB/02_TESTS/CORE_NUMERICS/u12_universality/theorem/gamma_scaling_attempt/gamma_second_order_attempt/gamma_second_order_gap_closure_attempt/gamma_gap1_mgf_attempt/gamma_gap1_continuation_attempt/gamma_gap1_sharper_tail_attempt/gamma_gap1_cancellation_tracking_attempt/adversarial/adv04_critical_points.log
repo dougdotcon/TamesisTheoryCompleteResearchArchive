@@ -1,0 +1,20 @@
+Number of roots found: 2
+root[0] = -gamma*k + k + n - sqrt(36*n**2 + 3)/6 - 1/2
+root[1] = -gamma*k + k + n + sqrt(36*n**2 + 3)/6 - 1/2
+
+Roots with k replaced by symbolic K:
+root[0] = -K*gamma + K + n - sqrt(36*n**2 + 3)/6 - 1/2
+root[1] = -K*gamma + K + n + sqrt(36*n**2 + 3)/6 - 1/2
+
+Checking which of the two roots matches the target's closed form D*...
+root[0] - target_Dstar = 0
+root[1] - target_Dstar = sqrt(36*n**2 + 3)/3
+
+Direct verification x_K'(D*) = 0 (substitute target's D* into xprime_K):
+xprime_K(D*) = 0
+
+Series of sqrt(36n^2+3)/6 as n->oo: 1/(24*n) + n + O(n**(-3), (n, oo))
+
+D* - D_max (target's closed form) = n - sqrt(36*n**2 + 3)/6 - 1/2
+As n->oo this should be exactly -1/2 + O(1/n); series in n:
+-1/(24*n) - 1/2 + O(n**(-2), (n, oo))

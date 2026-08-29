@@ -1,0 +1,30 @@
+gamma* = 1 - sqrt(2)/2 = 0.292893218813452
+
+=== Part 1: lambda_tight(gamma) < lambda(gamma) for every gamma in (0,1), full symbolic proof ===
+lambda_true - 4 = 4*(-gamma**2 + 4*gamma - 3)/(gamma*(gamma - 2))
+  numerator (factored): -4*(gamma - 3)*(gamma - 1)    denominator (factored): gamma*(gamma - 2)
+  For gamma in (0,1): (1-gamma)>0, (3-gamma)>0 so numerator's sign is manifest;
+  gamma*(gamma-2) < 0 throughout (0,2). Ratio is POSITIVE throughout (0,1) => lambda_true > 4 always.
+
+(3-2*gamma) - (1-gamma)^2 = 2 - gamma**2  (= 2-gamma^2, strictly positive on (0,1))
+Full symbolic lambda_true - lambda_tight(pieceB) = 4*(gamma**2 - 2)/(gamma*(gamma - 2))  (strictly positive on (0,1) since numerator/denominator both have known, matching signs)
+
+=> lambda_tight(gamma) < lambda(gamma) CONFIRMED for every gamma in (0,1), full symbolic proof.
+
+=== Part 2: specific ratio checks ===
+gamma=1/2: lambda_tight=4.000000000, lambda=10.66666667, ratio(lambda/lambda_tight)=2.666666667  (target claims ~2.67x smaller)
+gamma=1/100: lambda_tight=197.0050251, lambda=598.9949749, ratio(lambda/lambda_tight)=3.040506071  (target claims ~3.04x smaller)
+
+=== Part 3: WHY lambda(gamma) is loose -- re-deriving it from the crude,
+triangle-inequality-summed bound g(K) = |c1(K)|*K + |c2(K)|*K^2 (symmetric D=K) ===
+Sign check across 30 random gamma in (0,1), n=1e8: c1(K)>0 and c2(K)<0 always? True  bad cases: []
+
+lim_{n->oo} (|c1(K)|*K + |c2(K)|*K^2)/ln(n) = 4*(2*gamma - 3)/(gamma*(gamma - 2))
+Estagio 36's lambda(gamma) = 4(3-2*gamma)/(gamma*(2-gamma))
+Exact symbolic difference: 0  <- should be 0
+
+=> CONFIRMED: lambda(gamma) is exactly the leading order of the crude,
+triangle-inequality-summed |c1|K+|c2|K^2 bound at the SYMMETRIC point D=K --
+the target's diagnosis of why lambda(gamma), despite being labeled the
+'true leading constant' by predecessors, still carries triangle-inequality
+slack, is independently confirmed accurate.

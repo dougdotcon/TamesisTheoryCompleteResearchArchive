@@ -1,0 +1,54 @@
+c0,c1,c2,c3 re-derived (matches script 01):
+ c0 = gamma*k*(2*gamma**2*k**2 - 6*gamma*k**2 + 3*gamma*k + 6*k**2 - 6*k + 1)/(12*n**2)
+ c1 = (gamma**2*k**2/2 - gamma*k**2 - gamma*k*n + gamma*k/2 + k**2/2 + k*n - k/2 - n/2 + 1/12)/n**2
+ c2 = (2*gamma*k - 2*k - 2*n + 1)/(4*n**2)
+ c3 = 1/(6*n**2)
+
+==============================================================================
+PART A -- the TRUE ideal leading constant lambda(gamma) (Estagio 36,
+re-derived independently here as a cross-check)
+==============================================================================
+lambda(gamma) = 4*(2*gamma - 3)/(gamma*(gamma - 2))
+lambda(1)   = 4  (expect 4)
+lambda(1/2) = 32/3  (expect 32/3 ~ 10.667)
+
+==============================================================================
+PART B -- the CURRENT crude bound's hat_lambda(gamma) (continuation/
+sharper_tail fronts), re-derived independently as a cross-check
+==============================================================================
+hat_lambda(gamma) = 8*(4*gamma - 7)/(gamma*(gamma - 2))
+hat_lambda(1) = 24  (expect 24)
+hat_lambda/lambda at gamma=1: 6  (expect 6)
+hat_lambda/lambda as gamma->0: 14/3  (expect 14/3 ~ 4.667)
+
+==============================================================================
+PART C -- THIS FRONT's lambda_tight(gamma): exact max of the signed
+cubic over the TRUE asymmetric support, TRUE (uninflated) K
+==============================================================================
+x_K(D_max) [D=(1-gamma)K] = K*(2*K**2 + 6*K*gamma**2*n - 12*K*gamma*n + 6*K*n - 3*K + 6*gamma*n - 6*n + 1)/(12*n**2)
+x_K(D_min) [D=-gamma*K]   = K*gamma*(K*gamma - 2*K + 1)/(2*n)
+
+lim_{n->infty} x_K(D_max)/ln(n) = 4*(-gamma**2 + 2*gamma - 1)/(gamma*(gamma - 2))
+lim_{n->infty} x_K(D_min)/ln(n) = -4
+
+lambda_tight(gamma) candidate := max(|lim_plus|, |lim_minus|) =
+  Max(4, 4*Abs((gamma**2 - 2*gamma + 1)/(gamma - 2))/gamma)
+
+Evaluate lambda_tight at sample gamma:
+  gamma=0.01: lim_plus=39204/199=197.0050  lim_minus=-4.0000  |max|=197.0050   [true lambda=598.9950, old hat_lambda=2797.9899]
+  gamma=0.10: lim_plus=324/19=17.0526  lim_minus=-4.0000  |max|=17.0526   [true lambda=58.9474, old hat_lambda=277.8947]
+  gamma=0.30: lim_plus=196/51=3.8431  lim_minus=-4.0000  |max|=4.0000   [true lambda=18.8235, old hat_lambda=90.9804]
+  gamma=0.50: lim_plus=4/3=1.3333  lim_minus=-4.0000  |max|=4.0000   [true lambda=10.6667, old hat_lambda=53.3333]
+  gamma=0.70: lim_plus=36/91=0.3956  lim_minus=-4.0000  |max|=4.0000   [true lambda=7.0330, old hat_lambda=36.9231]
+  gamma=0.90: lim_plus=4/99=0.0404  lim_minus=-4.0000  |max|=4.0000   [true lambda=4.8485, old hat_lambda=27.4747]
+  gamma=0.99: lim_plus=4/9999=0.0004  lim_minus=-4.0000  |max|=4.0000   [true lambda=4.0804, old hat_lambda=24.3224]
+
+==============================================================================
+PART D -- symbolic simplification of lim_plus, lim_minus as closed
+forms in gamma (not just numeric samples)
+==============================================================================
+lim_plus(gamma)  simplified = 4*(-gamma**2 + 2*gamma - 1)/(gamma*(gamma - 2))
+lim_minus(gamma) simplified = -4
+
+lim_plus / lambda_true  = (-gamma**2 + 2*gamma - 1)/(2*gamma - 3)
+lim_minus / lambda_true = gamma*(2 - gamma)/(2*gamma - 3)

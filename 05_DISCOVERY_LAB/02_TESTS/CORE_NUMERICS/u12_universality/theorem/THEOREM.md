@@ -7675,3 +7675,140 @@ promissor identificado nesta linhagem até agora para quem tentar a
 análise conjunta de duas variáveis. Nenhuma alegação de progresso em
 Millennium Problem; matemática combinatória pura interna a este
 arquivo.
+
+---
+
+## [Extensão, Estágio 55 — 2026-08-29]
+
+**Onda 30, frente (b), `DISC-DEC-138` (`K6-EXACT-CLOSURE-ATTEMPT`).**
+Alvo: estender o método de eliminação por resultante do Estágio 53
+(que fechou `K=5`) para `K=6`, sexto sucesso mecânico consecutivo do
+mesmo método após `K=2,3,4,5`.
+
+### O que aconteceu
+
+> **`K=6` FECHADO no tier exato.** `M_6:=
+> 0{,}67967830129138512967160338683005533\ldots`, raiz exata (a única em
+> `(0,1)`) do quártico irredutível
+> `35429400000000000t^4+17921731935293824t^3-248044660324924125t^2+
+> 350950285900800000t-137134080000000000`. O limitante
+> `|F_n^{(6)}(x)-F_6(x)|\le M_6/n` vale EXATAMENTE para todo `n\ge8`,
+> `x\in[0,1]` — mesmo padrão `n_0=K+2` de `K=2,3,4,5` (`n_0=4,5,6,7`).
+>
+> `g_6(x)=-3x(x-1)^5(x+1)^4(5x^2-3x+2)` (grau `12=2K`, padrão exato);
+> `g_6'(x)=-6(x-1)^4(x+1)^3(30x^4-14x^3+x^2+4x-1)` fatora-se
+> LIMPAMENTE — o quártico interior `30t^4-14t^3+t^2+4t-1` é irredutível
+> sobre `\mathbb Q`, mesmo padrão de `K=3,4,5`: nenhuma obstrução
+> algébrica (Galois) nova em `K=6`.
+>
+> **Uma ruga genuína, encontrada e resolvida (não apenas prevista).**
+> `h_6(n,1)=-720/[(n-1)\cdots(n-5)]` é negativo para `n>5` — mesmo
+> sinal de `K=4`, oposto de `K=3,5` — então o limitante INFERIOR é a
+> direção delicada em `x=1`. Exatamente análogo à própria "ruga" de
+> limitante inferior do `K=4` (Estágio 48, `n\approx64{,}77`), o
+> polinômio resultante do alvo inferior `S_2(n)` tem uma raiz real
+> GENUÍNA e CONFIRMADA (não espúria — verificada por avaliação de sinal
+> exata em inteiros consecutivos, não meramente suspeitada) estritamente
+> entre `n=34` e `n=35` — menor em magnitude que a de `K=4`
+> (`\approx34{,}77` vs `\approx64{,}77`), mesmo fenômeno qualitativo.
+> Resolvido pelo mesmo tipo de correção que `K=4` já usou: um patch
+> exato por-inteiro, `n=8,\ldots,42`, confirmando
+> `-M_6\le h_6(n,x)\le M_6` exatamente em cada um dos `35` inteiros,
+> combinado com um limitante rigoroso (nenhuma raiz real de `S_2(n)`
+> excede `35`) e um argumento explícito de continuidade+TVI para o
+> restante `n>35` real. Nenhum resultado é enfraquecido por isto — a
+> constante é exatamente `M_6`, o domínio é exatamente `n\ge8`.
+>
+> **Um obstáculo computacional genuíno, distinto da matemática, e
+> totalmente revelado.** A continuação direta da receita de `K=2,\ldots,5`
+> (`sp.factor_list` seguido de `Poly.real_roots()`) não terminou em
+> tempo prático para os polinômios resultantes de grau `1052`/`1056`
+> desta frente — três variantes tentadas, cada uma `>4`–`>17` minutos
+> sem terminar. Esta frente adotou uma técnica exata diferente: um
+> "certificado de deslocamento" (regra de sinais de Descartes após um
+> deslocamento de Taylor, via `sympy`'s `Poly.shift(B)`) — se todo
+> coeficiente de `P(y+B)` compartilha um sinal, `P` não tem raiz real
+> excedendo `B`. Prova um limitante rigoroso sobre TODA raiz real do
+> polinômio inteiro sem isolar raízes, em frações de segundo em vez de
+> minutos. Isto também resolve preventivamente, por construção, o
+> Finding F1 do referee de `K=5` (a preocupação de que um cofator menor
+> pudesse esconder uma raiz maior não pode surgir, já que o certificado
+> nunca fatora o polinômio).
+>
+> Nenhuma CDF fechada para `K=6` existia em lugar nenhum do arquivo
+> antes desta frente; a Proposição D6 foi derivada do zero,
+> instanciando a maquinaria geral-`K` já citada, auto-validada
+> reproduzindo D1–D5 exatamente, e confirmada contra enumeração
+> exaustiva fresca da Definição 4 em `n=6,7` (`13/13` casamentos
+> exatos). Um bônus honestamente NÃO completou: a checagem exaustiva em
+> `n=8` (`10,57` bilhões de configurações, `\approx8\times` a de `K=5`)
+> não terminou no orçamento computacional disponível (`0/32` blocos) —
+> revelado honestamente, sem enfraquecer o teorema, cujo domínio
+> `n\ge8` repousa no argumento algébrico exato, independente de força
+> bruta.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da fatoração de `g_6`, da fatoração de
+> `g_6'`, da irredutibilidade do quártico interior, da seleção da raiz
+> em `(0,1)`, do polinômio mínimo de `M_6`, e da identidade de
+> sanidade estrutural `D6(n,n-1)=1-720/n^6` (verificada como identidade
+> simbólica exata usando o polinômio `Bracket6(n,k)` completo) — zero
+> discrepância em todos os casos.
+>
+> Referee hostil dedicado: re-derivou a Proposição D6 do zero a partir
+> da maquinaria geral-`K` citada (não os scripts da frente, capturando
+> seu próprio bug de transcrição no processo — uma suposição errada
+> sobre o tratamento de `r=0`, o que por sua vez confirma que o caso
+> especial `r=0` explícito desta frente é matematicamente necessário);
+> reproduziu a força bruta em `n=6` com um detector de pontos cíclicos
+> estruturalmente diferente, casamento exato dígito a dígito; **o item
+> de maior prioridade** — re-reconstruiu do zero `g_6`, `M_6`, `R(n,m)`,
+> `S(n)` (grau 1052), `S_2(n)` (grau 1056), confirmou que `Poly.shift(B)`
+> genuinamente computa `P(y+B)`, confirmou `S(y+8)` de sinal uniforme,
+> confirmou que `S_2(y+8)` corretamente NÃO é de sinal uniforme (a ruga
+> é real, não fabricada), e confirmou `S_2(y+35)` de sinal uniforme;
+> reproduziu independentemente a mudança de sinal genuína de `S_2(n)`
+> entre `n=34` e `n=35` por avaliação inteira direta; verificou por
+> amostragem o patch exato por-inteiro em `n=8,20,34,35,42,50,100`
+> (incluindo os dois pontos mais adversariais ladeando a mudança de
+> sinal) — zero violações; confirmou independentemente `h_6(7,1)=-1<-M_6`,
+> logo `n=7` genuinamente viola, fixando `n_0=8` como o limiar mínimo
+> real, não apenas suficiente. Seis achados reais, todos NOTA
+> (nenhuma correção): uma figura de tempo citada da fonte errada
+> (`100,7`s vs `104,7`s no log realmente citado, ambos genuínos); uma
+> alegação de "dry run validado" não apoiada por nenhum log no próprio
+> diretório da frente — fechada independentemente pelo próprio referee,
+> que executou o dry run e confirmou a alegação subjacente verdadeira;
+> uma descrição imprecisa de onde vive a correção do crash em `n=5`
+> (na invocação do script, não no próprio código); a magnitude de
+> `\sim1800` dígitos descreve um valor avaliado, não coeficientes brutos
+> (que chegam a `\sim543` dígitos); uma referência pendente a um
+> arquivo `n8_crosscheck_k6.py` inexistente; e um enquadramento
+> "sugestivo, não provado" do padrão de sinal alternado que subestima
+> uma fórmula geral já citada pelo próprio predecessor. Todos corrigidos
+> por nota datada na `ATTEMPT.md` da própria frente.
+>
+> **Veredito: SOUND WITH ISSUES, todas BAIXAS — ACCEPT for catalogue**
+> (seis achados cosméticos/expositivos, nenhum de correção). A série de
+> constantes de taxa finito-`n` exatas agora se estende a
+> `K=0,\ldots,6`. `K\ge7` permanece não-tentado.
+
+Ver
+`.../sharp_rate_constants_attempt/exact_algebraic_closure_attempt/k5_exact_closure_attempt/k6_exact_closure_attempt/ATTEMPT.md`
+e
+`.../k5_exact_closure_attempt/k6_exact_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+A série exata de constantes de taxa finito-`n`, já em `K=0,\ldots,5`
+desde o Estágio 53, agora inclui `K=6`: `M_6\approx0{,}6797`, `n_0=8`,
+com uma ruga de limitante inferior confirmada e totalmente resolvida
+(mesmo padrão de `K=4`) — o primeiro `K` desde `K=4` a exigir o patch
+por-inteiro. Isto confirma que o método de eliminação por resultante
+generaliza de forma robusta pelo menos até `K=6`, embora agora exija
+uma técnica computacional nova (o certificado de deslocamento) além do
+`factor_list`+`real_roots()` original, cujo desempenho degrada em
+`K=6` de forma que a frente atribui ao tamanho dos coeficientes
+inteiros, não ao grau ou à estrutura de multiplicidade. Nenhuma
+alegação de progresso em Millennium Problem; matemática combinatória
+pura interna a este arquivo.

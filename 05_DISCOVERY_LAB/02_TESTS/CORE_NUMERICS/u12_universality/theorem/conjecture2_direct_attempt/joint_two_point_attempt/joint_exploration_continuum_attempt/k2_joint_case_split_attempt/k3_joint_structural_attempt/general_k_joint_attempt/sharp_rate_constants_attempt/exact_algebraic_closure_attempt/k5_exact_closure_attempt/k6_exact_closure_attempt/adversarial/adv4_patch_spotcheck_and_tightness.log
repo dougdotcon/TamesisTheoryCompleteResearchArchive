@@ -1,0 +1,26 @@
+M6 = 0.679678301291385129671603386830
+
+==============================================================================
+(1) REFEREE-CHOSEN spot-check of the exact per-integer-n patch
+==============================================================================
+  n=   8: max_x h6 = 0.243225115519361042239169464946  (<=M6: True)   min_x h6 = -0.304814611024104092332330415361  (>=-M6: True)   OK=True
+  n=  20: max_x h6 = 0.486639685947187006980298300782  (<=M6: True)   min_x h6 = -0.00753952186060978627882861234826  (>=-M6: True)   OK=True
+  n=  34: max_x h6 = 0.564972652570038765952293302247  (<=M6: True)   min_x h6 = -0.000472144315610147970828509815556  (>=-M6: True)   OK=True
+  n=  35: max_x h6 = 0.568225893094488540694319317582  (<=M6: True)   min_x h6 = -0.000405733760824339672570701951487  (>=-M6: True)   OK=True
+  n=  42: max_x h6 = 0.586714651704494707582411876061  (<=M6: True)   min_x h6 = -0.000156766806198765313116611166805  (>=-M6: True)   OK=True
+  n=  50: max_x h6 = 0.601558211321023279263035367730  (<=M6: True)   min_x h6 = -0.0000634251511351703127444377516242  (>=-M6: True)   OK=True
+  n= 100: max_x h6 = 0.640635175340976615604965045209  (<=M6: True)   min_x h6 = -0.00000180836611853060711892726731727  (>=-M6: True)   OK=True
+
+ALL referee-chosen n OK: True
+CONFIRMED (independent spot-check, including the two most adversarially-interesting points n=34,35 straddling the confirmed S2(n) sign change -- no violation found there, exactly as the target's own full n=8..42 sweep claims).
+
+==============================================================================
+(2) n_0=8 TIGHTNESS: does n=7 genuinely violate the lower bound?
+==============================================================================
+h6(7,1) [exact, referee's own independent evaluation] = -1
+CONFIRMED: h6(7,1) = -1 exactly.
+-M6 = -0.679678301291385129671603386830
+CONFIRMED: h6(7,1) = -1 < -M6 ~= -0.6797, so n=7 GENUINELY VIOLATES the lower bound -M6 <= h6(n,x). n_0=8 is confirmed to be the true minimal integer threshold (not merely an upper bound on sufficiency), independently reproduced.
+
+(context) at n=7: max_x h6(7,x) = 0.19674312325581730742 (achieved at x=0.1134425106), min_x h6(7,x) = -1.0000000000000000000 (achieved at x=1.000000000)
+Confirms the minimum at n=7 is achieved exactly at the boundary x=1 (matching h6(7,1)), consistent with the general pattern that the boundary term, not an interior critical point, drives the K=6 lower-bound violation just below the domain.

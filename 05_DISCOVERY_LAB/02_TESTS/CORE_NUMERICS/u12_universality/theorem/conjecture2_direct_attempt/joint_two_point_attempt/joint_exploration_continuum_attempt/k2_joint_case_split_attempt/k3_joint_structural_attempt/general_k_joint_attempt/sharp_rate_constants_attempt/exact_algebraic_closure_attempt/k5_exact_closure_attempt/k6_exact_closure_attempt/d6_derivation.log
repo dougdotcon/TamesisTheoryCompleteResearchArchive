@@ -1,0 +1,52 @@
+==============================================================================
+SELF-VALIDATION: reproduce D1, D2, D3, D4, D5 EXACTLY (symbolic)
+==============================================================================
+K=1 vs Proposicao D1 (Estagio 27): EXACT MATCH (diff=0).
+K=2 vs Proposicao D2 (Estagio 42): EXACT MATCH (diff=0).
+K=3 vs Proposicao D3 (Estagio 40): EXACT MATCH (diff=0).
+K=4 vs Proposicao D4 (Estagio 43): EXACT MATCH (diff=0).
+K=5 vs Proposicao D5 (Estagio 53, predecessor front, cited): EXACT MATCH (diff=0).
+  (spot-check of the cited D5 formula itself, via this front's own independent re-derivation of it from the general machinery -- not blind trust.)
+
+All five validations passed in 10.76s total.
+Pipeline (InnerJ / S_r / final assembly), including BOTH the
+r<K and r=K InnerJ branches and the r=0 edge case, is now
+trusted for K=6.
+
+==============================================================================
+PROPOSICAO D6 (K=6, this front's own derivation)
+==============================================================================
+    S_0(n,6,k) done in 0.33s
+    S_1(n,6,k) done in 0.97s
+    S_2(n,6,k) done in 1.11s
+    S_3(n,6,k) done in 1.79s
+    S_4(n,6,k) done in 1.70s
+    S_5(n,6,k) done in 3.37s
+    S_6(n,6,k) done in 1.85s
+
+Total elapsed for K=6: 11.49s
+
+D6(n,k) NUM =
+-k**12 + 24*k**11 + 6*k**10*n**2 - 45*k**10*n - 245*k**10 - 90*k**9*n**2 + 715*k**9*n + 1380*k**9 - 15*k**8*n**4 + 195*k**8*n**3 - 105*k**8*n**2 - 4620*k**8*n - 4623*k**8 + 120*k**7*n**4 - 1680*k**7*n**3 + 4350*k**7*n**2 + 15354*k**7*n + 9072*k**7 + 20*k**6*n**6 - 330*k**6*n**5 + 1510*k**6*n**4 + 1725*k**6*n**3 - 18082*k**6*n**2 - 26481*k**6*n - 8735*k**6 - 60*k**5*n**6 + 1110*k**5*n**5 - 6600*k**5*n**4 + 8241*k**5*n**3 + 28380*k**5*n**2 + 17115*k**5*n - 780*k**5 - 15*k**4*n**8 + 270*k**4*n**7 - 1810*k**4*n**6 + 4875*k**4*n**5 - 365*k**4*n**4 - 15750*k**4*n**3 - 8095*k**4*n**2 + 14010*k**4*n + 10724*k**4 - 40*k**3*n**7 + 630*k**3*n**6 - 3620*k**3*n**5 + 8340*k**3*n**4 + 135*k**3*n**3 - 25200*k**3*n**2 - 30304*k**3*n - 9696*k**3 + 6*k**2*n**10 - 105*k**2*n**9 + 735*k**2*n**8 - 2685*k**2*n**7 + 5744*k**2*n**6 - 7065*k**2*n**5 - 1130*k**2*n**4 + 13830*k**2*n**3 + 26276*k**2*n**2 + 17136*k**2*n + 2880*k**2 + 6*k*n**10 - 105*k*n**9 + 720*k*n**8 - 2375*k*n**7 + 3384*k*n**6 - 10*k*n**5 - 1860*k*n**4 - 6696*k*n**3 - 7440*k*n**2 - 2880*k*n
+
+D6(n,k) DEN = 720*n**6*binomial(n, 6)
+
+Sanity checks:
+  1 - D6(n,n-1) [=P(T=n)] = 720/n**6
+  matches predicted K!/n^K = 6!/n^6 = 720/n^6.  PASSED.
+  D6(n,0) = D6(n,-1) = 0 (structural k(k+1) factor).  PASSED.
+  D6(n,.) monotonic non-decreasing in k, n=6..10,12.  PASSED.
+
+Structural pattern check:
+  denominator = n^(K+1)(n-1)...(n-(K-1)) pattern at K=6: n^7(n-1)(n-2)(n-3)(n-4)(n-5) expected.
+  denominator PASSED.
+  full numerator degree in k = 12 (predicted 2K = 12, matching D3/D4/D5's own num degree 2K pattern before factoring out k(k+1)).
+  Bracket6 = D6-numerator / [k(k+1)], degree in k = 10 (predicted 2K-2 = 10, matching D3/D4/D5's Bracket_K pattern).
+
+D6(n,k) = k(k+1)*Bracket6(n,k) / [n^7(n-1)(n-2)(n-3)(n-4)(n-5)]
+Bracket6(n,k) =
+-k**10 + 25*k**9 + 6*k**8*n**2 - 45*k**8*n - 270*k**8 - 96*k**7*n**2 + 760*k**7*n + 1650*k**7 - 15*k**6*n**4 + 195*k**6*n**3 - 9*k**6*n**2 - 5380*k**6*n - 6273*k**6 + 135*k**5*n**4 - 1875*k**5*n**3 + 4359*k**5*n**2 + 20734*k**5*n + 15345*k**5 + 20*k**4*n**6 - 330*k**4*n**5 + 1375*k**4*n**4 + 3600*k**4*n**3 - 22441*k**4*n**2 - 47215*k**4*n - 24080*k**4 - 80*k**3*n**6 + 1440*k**3*n**5 - 7975*k**3*n**4 + 4641*k**3*n**3 + 50821*k**3*n**2 + 64330*k**3*n + 23300*k**3 - 15*k**2*n**8 + 270*k**2*n**7 - 1730*k**2*n**6 + 3435*k**2*n**5 + 7610*k**2*n**4 - 20391*k**2*n**3 - 58916*k**2*n**2 - 50320*k**2*n - 12576*k**2 + 15*k*n**8 - 310*k*n**7 + 2360*k*n**6 - 7055*k*n**5 + 730*k*n**4 + 20526*k*n**3 + 33716*k*n**2 + 20016*k*n + 2880*k + 6*n**10 - 105*n**9 + 720*n**8 - 2375*n**7 + 3384*n**6 - 10*n**5 - 1860*n**4 - 6696*n**3 - 7440*n**2 - 2880*n
+
+DONE. Proposicao D6 derived and self-consistency-checked.
+Independent cross-check against fresh brute-force Definition 4:
+see bruteforce_definition4_k6.py/.log.

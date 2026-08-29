@@ -1,0 +1,23 @@
+==========================================================================
+Negative control: n=6,7 (BELOW claimed domain n>=8) -- expect
+genuine violations of |h6(n,x)|<=M6:
+==========================================================================
+  n=6: max(|h6|-M6) over grid = 5.320322 at x=1.0000   VIOLATION (expected)
+  n=7: max(|h6|-M6) over grid = 0.320322 at x=1.0000   VIOLATION (expected)
+    h6(7,1) = -1.000000   -M6 = -0.679678   (should violate: h6(7,1) < -M6)
+
+==========================================================================
+Claimed domain: integer sweep n=8..2000, geometric sweep
+n=2000..10^6 (200 points), 4001-point x-grid per n. Expect
+ZERO violations anywhere.
+==========================================================================
+
+Total violations in claimed domain (n>=8): 0
+Closest approach to the bound: max(|h6|-M6) = -0.0000047824 at n=1000000, x=0.2600
+(negative means the bound holds strictly at this point; should
+approach 0 from below as n->infinity, since g6(x6*)=M6 exactly)
+
+ZERO violations confirmed across the full claimed domain. PASSED.
+
+h6(1000000, x6*) = 0.6796744065   M6 = 0.6796783013   ratio = 0.99999427
+(should approach 1 from below as n->infinity)

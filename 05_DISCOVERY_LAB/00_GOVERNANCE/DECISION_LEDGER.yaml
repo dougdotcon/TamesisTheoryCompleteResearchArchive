@@ -9136,3 +9136,70 @@ decisions:
       (U1), (U2), (C'), (B) permanecem exatamente como registrados --
       formalmente ABERTOS -- ate que futuras frentes retornem e sejam
       integradas com a mesma disciplina.
+
+  - id: DISC-DEC-141
+    date: 2026-08-29
+    decision: >
+      Onda 30 frente (b) K6-EXACT-CLOSURE-ATTEMPT integrada como
+      Estagio 55 em THEOREM.md. K=6 FECHADO no tier exato.
+      M_6=0.67967830129138512967160338683005533..., raiz exata do
+      quartico irredutivel 35429400000000000t^4+17921731935293824t^3-
+      248044660324924125t^2+350950285900800000t-137134080000000000.
+      |F_n^(6)(x)-F_6(x)|<=M_6/n exatamente para todo n>=8, mesmo
+      padrao n_0=K+2 de K=2,3,4,5. g_6 e g_6' fatoram-se limpamente --
+      quartico interior irredutivel, mesmo padrao de K=3,4,5, nenhuma
+      obstrucao de Galois nova.
+      Uma ruga genuina de limitante inferior foi encontrada e resolvida
+      (K=4-style): S_2(n) tem raiz real confirmada entre n=34 e n=35,
+      resolvida por patch exato por-inteiro (n=8..42) + limitante
+      rigoroso + continuidade+TVI. Um obstaculo computacional genuino
+      e revelado: a receita factor_list+real_roots de K=2..5 nao
+      terminou em tempo pratico nos polinomios resultantes de grau
+      1052/1056 desta frente (tres variantes, cada uma >4-17 minutos);
+      resolvido com uma tecnica nova, o "certificado de deslocamento"
+      (regra de sinais de Descartes apos deslocamento de Taylor via
+      Poly.shift), que prova limitantes sobre toda raiz real do
+      polinomio inteiro sem isolar raizes, em fracoes de segundo --
+      resolvendo tambem, por construcao, o Finding F1 do referee de K=5.
+      Proposicao D6 derivada do zero, auto-validada reproduzindo D1-D5
+      exatamente, confirmada contra enumeracao exaustiva fresca em
+      n=6,7 (13/13). Bonus n=8 (10.57 bilhoes de configuracoes)
+      honestamente nao completou (0/32 blocos) -- nao enfraquece o
+      teorema, cujo dominio repousa no argumento algebrico exato.
+      Spot-check da sessao antes do despacho: reverificacao independente
+      via sympy da fatoracao de g_6/g_6', irredutibilidade do quartico,
+      selecao da raiz, polinomio minimo de M_6, e a identidade de
+      sanidade D6(n,n-1)=1-720/n^6 (identidade simbolica exata) -- zero
+      discrepancia.
+      Referee hostil dedicado: SOUND WITH ISSUES, todas BAIXAS. Re-derivou
+      D6 do zero (capturando seu proprio bug de transcricao, confirmando
+      o caso r=0 explicito da frente e necessario); reproduziu a forca
+      bruta em n=6 com detector estruturalmente diferente; item de maior
+      prioridade -- reconstruiu do zero g_6, M_6, R(n,m), S(n) (grau
+      1052), S_2(n) (grau 1056), confirmou ambos os resultados do
+      certificado de deslocamento (S(y+8) sinal uniforme; S_2(y+8) NAO
+      uniforme, confirmando a ruga genuina; S_2(y+35) uniforme);
+      reproduziu a mudanca de sinal entre n=34 e n=35; verificou por
+      amostragem o patch em 7 valores incluindo os dois mais
+      adversariais; confirmou h_6(7,1)=-1<-M_6, fixando n_0=8 como
+      minimo real. Seis achados NOTA (nenhuma correcao): figura de tempo
+      citada da fonte errada; alegacao de dry-run nao apoiada por log
+      proprio -- fechada independentemente pelo referee; descricao
+      imprecisa de onde vive a correcao do crash n=5; magnitude de
+      digitos descreve valor avaliado nao coeficientes brutos;
+      referencia pendente a arquivo inexistente; enquadramento
+      "sugestivo, nao provado" subestima formula geral ja citada pelo
+      predecessor. Todos corrigidos por nota datada.
+      Onda 30 completa -- 3/3 frentes integradas.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 55, ~95 linhas);
+      .../k5_exact_closure_attempt/k6_exact_closure_attempt/ATTEMPT.md
+      (6 notas datadas); DECISION_LEDGER.yaml (este arquivo);
+      DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhum resultado de
+      registro anterior invalidado -- K=0,1,2,3,4,5 (Estagios 46,48,53)
+      permanecem exatamente como registrados; a serie exata de
+      constantes de taxa finito-n agora se estende a K=0,...,6. K>=7
+      permanece nao-tentado.

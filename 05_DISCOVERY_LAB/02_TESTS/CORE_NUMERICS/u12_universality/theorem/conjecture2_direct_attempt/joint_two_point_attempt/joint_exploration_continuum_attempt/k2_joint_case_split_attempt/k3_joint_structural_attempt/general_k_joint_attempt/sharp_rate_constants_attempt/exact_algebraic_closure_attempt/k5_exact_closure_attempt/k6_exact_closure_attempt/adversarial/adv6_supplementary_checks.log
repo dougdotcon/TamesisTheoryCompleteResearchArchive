@@ -1,0 +1,33 @@
+==============================================================================
+(A) Poly.shift(B) semantics sanity check (toy examples)
+==============================================================================
+P(n)=n**3 - 2*n + 5  P.shift(3)=n**3 + 9*n**2 + 25*n + 26  expected P(n+3)=n**3 + 9*n**2 + 25*n + 26  match=True
+
+Ptoy = (n-5)(n-2) = n**2 - 7*n + 10  (known largest real root: 5)
+  shift(2): coeffs=[1, -3, 0]  signs={1, -1}  uniform=False  (expect uniform for B>=5, mixed for B<5)
+  shift(4): coeffs=[1, 1, -2]  signs={1, -1}  uniform=False  (expect uniform for B>=5, mixed for B<5)
+  shift(5): coeffs=[1, 3, 0]  signs={1}  uniform=True  (expect uniform for B>=5, mixed for B<5)
+  shift(6): coeffs=[1, 5, 4]  signs={1}  uniform=True  (expect uniform for B>=5, mixed for B<5)
+CONFIRMED: shift-certificate correctly distinguishes B<root (mixed signs, inconclusive) from B>=root (uniform signs, proved no root exceeds B), exactly the behaviour the target's method relies on.
+
+==============================================================================
+(B) Boundary threshold: confirm 7.2786... is the genuine max across
+    BOTH candidate branches the target's own script considers
+==============================================================================
+roots on the h6(n,1)=-M6 branch (relevant one): [-0.26086702740282958574, 7.2785814371274209883]
+roots on the h6(n,1)=+M6 branch (other one):     [-1.2785814371274209883, 6.2608670274028295857]
+
+max candidate > 5 across BOTH branches = 7.2785814371274209883
+largest candidate from the OTHER (h6=+M6) branch alone = 6.2608670274028295857
+CONFIRMED: the relevant branch (h6(n,1)=-M6) genuinely dominates -- picking it was not an arbitrary/lucky simplification; the other branch's own largest root (6.2609...) is strictly smaller.
+
+==============================================================================
+(C) Coefficient/evaluated-value magnitude check
+==============================================================================
+Max digit count among S2(n)'s OWN stored coefficients: 543
+  S2(30) EVALUATED VALUE digit count: 1847
+  S2(34) EVALUATED VALUE digit count: 1905
+  S2(35) EVALUATED VALUE digit count: 1918
+  S2(36) EVALUATED VALUE digit count: 1932
+
+CONFIRMS: the '~1800 decimal digits' figure in ATTEMPT.md Sec 7 issue #5 refers to EVALUATED VALUES of S2(n) at specific large integers (Sec 5.2's sign-evaluation step), not to the polynomial's own raw stored coefficients (which top out ~540-545 digits). The magnitude claimed is accurate; the word 'coefficients' is a loose description of what is actually an evaluated value -- a wording precision note, not a numerical error.

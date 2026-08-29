@@ -1,0 +1,39 @@
+Cross-checking g6_expanded vs g6_factored at several points:
+  x=+0.00  expanded=0.0  factored=0.0  diff=0.0
+  x=+0.10  expanded=0.453881614725  factored=0.453881614725  diff=3.341e-51
+  x=+0.20  expanded=0.65229815808  factored=0.65229815808  diff=1.3364e-51
+  x=+0.30  expanded=0.669634494165  factored=0.669634494165  diff=1.3364e-51
+  x=+0.50  expanded=0.415283203125  factored=0.415283203125  diff=0.0
+  x=+0.70  expanded=0.100158800805  factored=0.100158800805  diff=9.5217e-51
+  x=+0.90  expanded=0.001178753445  factored=0.001178753445  diff=2.2609e-50
+  x=+1.00  expanded=0.0  factored=0.0  diff=0.0
+  x=-0.50  expanded=-3.381591796875  factored=-3.381591796875  diff=0.0
+  x=+2.00  expanded=-7776.0  factored=-7776.0  diff=0.0
+Max diff = 2.260887492e-50 -- forms agree. PASSED.
+
+Cross-checking g6p_factored against numerical derivative of g6_factored:
+  x=0.10  analytic=3.1490083746  numeric=3.1490083746  diff=1.6037e-50
+  x=0.30  analytic=-0.490574721  numeric=-0.490574721  diff=3.341e-51
+  x=0.60  analytic=-1.6508780544  numeric=-1.6508780544  diff=1.0691e-50
+  x=0.90  analytic=-0.0530351598  numeric=-0.0530351598  diff=2.5057e-52
+Max diff = 1.603658826e-50 -- derivative confirmed. PASSED.
+
+======================================================================
+Dense scan on [0,1] to bracket the maximum, then Newton polish
+on g6'(x)=0 (mpmath.findroot), at 50 decimal digits:
+======================================================================
+dense-scan argmax: x~=0.260360  g6~=0.6796783013
+
+x6* (mpmath, 50 dps) = 0.260361724006714924841723628422656737985009135
+M6  (mpmath, 50 dps) = 0.679678301291385129671603386830055333224986386
+
+|x6*_mpmath - x6*_sympy| = 2.015e-36
+|M6_mpmath  - M6_sympy | = 3.225e-36
+Matches the sympy-derived values to 30+ digits. PASSED.
+
+Also confirm this is genuinely a MAXIMUM on [0,1] (not just a
+critical point), by evaluating g6 at a fine grid and confirming
+nothing exceeds M6:
+max(g6(x) - M6) over the scan = -2.02572571e-11 (should be ~0 at x=x6*, negative elsewhere)
+PASSED -- M6 is confirmed (to scan resolution + Newton polish) the
+global maximum of g6 on [0,1].

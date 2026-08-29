@@ -1,6 +1,30 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-140`: onda 30 frente (c)
+**Última atualização:** 2026-08-29 (`DISC-DEC-141`: onda 30 frente (b)
+`K6-EXACT-CLOSURE-ATTEMPT` integrada como Estágio 55 em `THEOREM.md`.
+`K=6` FECHADO no tier exato: `M_6\approx0{,}6797`, raiz exata de um
+quártico irredutível, `|F_n^{(6)}(x)-F_6(x)|\le M_6/n` para todo
+`n\ge8`, mesmo padrão `n_0=K+2` de `K=2,\ldots,5`. `g_6`/`g_6'` fatoram-
+se limpamente — sem obstrução de Galois nova. Uma ruga genuína de
+limitante inferior (estilo-`K=4`) foi encontrada e resolvida via patch
+exato por-inteiro (`n=8,\ldots,42`). Um obstáculo computacional
+genuíno foi revelado e resolvido: a receita `factor_list`+`real_roots`
+de `K=2,\ldots,5` não terminou em tempo prático nos polinômios
+resultantes de grau `1052`/`1056` desta frente; resolvido com uma
+técnica nova, o "certificado de deslocamento" (regra de sinais de
+Descartes após deslocamento de Taylor), que também resolve
+preventivamente o Finding F1 do referee de `K=5`. Proposição D6
+derivada do zero, auto-validada reproduzindo D1–D5 exatamente. Um
+bônus (`n=8` exaustivo, `10,57` bilhões de configurações)
+honestamente não completou — não enfraquece o teorema. Referee
+hostil: **SOUND WITH ISSUES, todas BAIXAS** — reconstruiu do zero o
+certificado de deslocamento inteiro (`R(n,m)`, `S(n)` grau `1052`,
+`S_2(n)` grau `1056`), confirmando ambos os resultados e a ruga
+genuína; seis achados NOTA (nenhuma correção), todos corrigidos por
+nota datada. **Onda 30 COMPLETA — 3/3 frentes integradas**
+(`C(γ)` via Rota 2, Estágio 54; boundary-layer self-heal, adendo
+`PROOF_DEPENDENCY_MAP.md`; `K=6`, Estágio 55).
+Anterior: `DISC-DEC-140`: onda 30 frente (c)
 `BOUNDARY-LAYER-SELFHEAL-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`), 11ª onda
 consecutiva (20-30) neste gap. Ataca precisamente a pergunta deixada

@@ -1,6 +1,35 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-139`: onda 30 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-140`: onda 30 frente (c)
+`BOUNDARY-LAYER-SELFHEAL-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`), 11ª onda
+consecutiva (20-30) neste gap. Ataca precisamente a pergunta deixada
+ABERTA por `DISC-DEC-136` — se um argumento ciente-de-camada-limite
+poderia estabelecer `(U)` sob `(C')` sozinha. **Resolvido na direção
+POSITIVA**: `(U)` agora está PROVADO condicional a `(B)`+`(C')`
+APENAS — `(C'')` não é mais necessária em lugar nenhum. Rota nova
+evita formar a diferença pontual de `f'` que o predecessor precisava:
+troca a ordem das integrações `h'`/`u` primeiro (Fubini), reduzindo
+tudo a `|\Gamma_u(h)-\Gamma(h)|\le3L_1u`, provada via forma fechada
+envolvendo APENAS valores de `f`. Dá `|E_{\text{full}}(z)|\le3L_1/z^3`
+para todo `z>0`, sem depender da regularidade de `f'`. Testado em
+kink adversarial do predecessor (reproduzido exatamente), 4 kinks
+simultâneos, e 8 kinks com espaçamento geometricamente decrescente
+até `z=2500` — sem sinal de violação. Referee hostil dedicado:
+**SOUND WITH ISSUES, todas BAIXAS** — confirmou independentemente por
+que a fortificação é genuína (integrar via TFC antes de comparar não
+perde informação que diferenciar antes perde), re-derivou tudo à mão,
+estress-testou com 60 tentativas aleatórias próprias e testou o
+teorema contra operadores de núcleo crus em `h=y` (caso máximo que os
+próprios testes da frente nunca alcançam) — zero violações em ambos.
+Três notas datadas (nenhuma correção): ambiguidade sobre autoria da
+identidade `R''(z)/2`; numéricos nunca testam `h` perto de `y`
+(fechado independentemente pelo referee); termo `L_1` carrega fator
+`1/\varepsilon` extra vs. o `L_2` do predecessor (correto, mas não
+uniformemente mais afiado). **Onda 30 agora com 2/3 frentes
+integradas** — frente (b) `K6-EXACT-CLOSURE-ATTEMPT` reativada para
+finalizar seções pendentes, ainda em andamento.
+Anterior: `DISC-DEC-139`: onda 30 frente (a)
 `ROUTE2-BYPASS-ATTEMPT` integrada como Estágio 54 em `THEOREM.md`.
 `C(γ)` continua inteiramente ABERTO, mas a frente perseguiu
 genuinamente a "Rota 2" (bypass total da maquinaria `A_k`/`2F0`/

@@ -1,0 +1,64 @@
+==============================================================================
+PART 1: R''(z) = (1+z^2)R(z) - z, from R'=zR-1
+==============================================================================
+d/dz[z*R(z)-1] = z*Derivative(R(z), z) + R(z)
+substituting R'(z)=z*R(z)-1: R''(z) = z**2*R(z) - z + R(z)
+claimed closed form: R''(z) = (1+z^2)*R(z) - z
+residual (Rpp_closed - claimed): 0
+Part 1: PASS (R''(z) = (1+z^2)*R(z) - z, exact symbolic identity)
+
+==============================================================================
+PART 2: Q_u(z) := int_u^inf e^{-w^2/2-wz} dw satisfies
+        d/du Q_u(z) = -e^{-u^2/2-uz}, and matches e^{-u^2/2-uz}*R(u+z)
+==============================================================================
+Route 1 (direct FTC on the tail integral): d/du Q_u(z) = -exp(-u**2/2 - u*z)
+Route 2 (product rule, R'(u+z) supplied via the ODE by hand):
+  d/du Q_u(z) = -exp(-u**2/2)*exp(-u*z)
+residual (Route2 - Route1): 0
+Part 2: PASS -- both representations of Q_u(z) give the SAME
+  derivative -e^{-u^2/2-uz}; confirms Q_u(z)=int_u^inf e^{-w^2/2-wz}dw
+  = e^{-u^2/2-uz}*R(u+z) are the SAME function (up to a constant,
+  pinned by matching value at u->infinity, both ->0).
+
+==============================================================================
+PART 3: Fubini/order-swap identity
+  int_0^inf u*[int_u^inf g(w)dw] du = int_0^inf g(w)*w^2/2 dw
+  (verified on a CONCRETE g, independent sanity check of the SWAP
+   TECHNIQUE this front's Step 5 applies to g(w)=e^{-w^2/2-wz})
+==============================================================================
+g(w) = exp(-w);  int_u^inf g(w)dw = exp(-u)
+LHS = int_0^inf u*(int_u^inf g dw) du = 1
+RHS = int_0^inf g(w)*w^2/2 dw          = 1
+residual: 0
+second test g(w)=w*exp(-w^2): LHS=1/4, RHS=1/4, residual=0
+Part 3: PASS on two independent test functions -- the order-swap
+  (Tonelli, both integrands nonnegative) technique is confirmed sound.
+
+==============================================================================
+PART 4: elementary IBP/FTC identity
+  int_0^h e^{-h'/eps} phi'(h') dh'
+    = e^{-h/eps}*phi(h) - phi(0) + (1/eps)*int_0^h e^{-h'/eps}phi(h')dh'
+  (verified on a concrete non-trivial phi, fresh, own choice of phi)
+==============================================================================
+phi(hp) = hp**2*exp(-hp/3) + cos(hp)
+phi'(hp) = -hp**2*exp(-hp/3)/3 + 2*hp*exp(-hp/3) - sin(hp)
+residual (LHS - RHS), simplified: 0
+Part 4: PASS -- exact symbolic identity on a fresh concrete phi.
+
+==============================================================================
+PART 5: R''(z) <= 2/z^3 for all z>0, via an elementary substitution
+  (self-contained alternative to the predecessor's Gordon-type
+   integrating-factor bound -- independent route to the one bound
+   this front's new proof actually needs)
+==============================================================================
+after w=s/z substitution, integrand becomes: s**2*exp(-s**2/(2*z**2) - s)/z**3
+residual vs expected form (s^2/z^3)*exp(-s^2/(2z^2))*exp(-s): 0
+int_0^inf s^2*exp(-s) ds = 2  (= Gamma(3) = 2!)
+Part 5: PASS -- R''(z) = (1/z^3)*int_0^inf s^2*exp(-s^2/(2z^2))*exp(-s)ds
+  <= (1/z^3)*int_0^inf s^2*exp(-s)ds = 2/z^3, for EVERY z>0, via the
+  elementary bound exp(-s^2/(2z^2))<=1 -- no ODE comparison-function
+  machinery needed for this specific bound.
+
+==============================================================================
+ALL 5 PARTS PASSED. Zero discrepancies.
+==============================================================================

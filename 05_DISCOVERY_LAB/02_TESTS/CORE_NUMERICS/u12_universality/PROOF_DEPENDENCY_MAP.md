@@ -1432,6 +1432,102 @@ flowchart TD
 > `.../h_ces_direct_attempt/cu_direct_proof_attempt/ATTEMPT.md` e
 > `.../cu_direct_proof_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-140`.]** Onda 30 frente (c)
+> (`BOUNDARY-LAYER-SELFHEAL-ATTEMPT`), décima primeira onda consecutiva
+> (20-30) neste gap, ataca precisamente a pergunta que o adendo de
+> `DISC-DEC-134` acima deixou honestamente ABERTA: se um argumento
+> ciente-de-camada-limite poderia estabelecer `(U)` sob `(C')` sozinha
+> (sem `(C'')`).
+>
+> **Resolvido na direção POSITIVA — `(U)` agora está PROVADO condicional
+> a `(B)`+`(C')` ALONE; `(C'')` não é necessária em lugar nenhum.** Esta
+> é uma genuína fortificação do teorema imediatamente predecessor, não
+> uma reformulação. A rota nova evita inteiramente formar a diferença
+> pontual de `f'` que o predecessor precisava (`E(h',z)`, cuja
+> degradação pontual sob um kink adversarialmente alinhado o predecessor
+> mostrou ser genuína, exigindo `(C'')`): em vez disso, troca a ORDEM das
+> integrações `h'` e `u` PRIMEIRO (Fubini), reduzindo tudo a uma única
+> desigualdade limpa, `|\Gamma_u(h)-\Gamma(h)|\le3L_1u`, provada via uma
+> forma fechada envolvendo APENAS valores de `f` (identidade TFC/IBP,
+> válida para qualquer `f` Lipschitz — absolutamente contínua — sem
+> nenhuma suposição sobre `f'` além do que Lipschitz já garante) e três
+> aplicações da desigualdade triangular contra a constante de Lipschitz
+> de `f`. Combinado com `\int_0^\infty u\,Q_u(z)\,du=R''(z)/2\le2/z^3`
+> (re-derivado aqui, via `R''(z)=(1+z^2)R(z)-z` e uma substituição
+> elementar `w=s/z`, sem maquinaria de comparação de EDO), dá
+> `|E_{\text{full}}(z)|\le3L_1/z^3` para TODO `z>0` — exatamente a taxa
+> que `(U)` exige, sem NENHUMA dependência da regularidade de `f'`.
+> Montado com a peça `(B)`-só já estabelecida e referee-verificada do
+> predecessor: `D(x,\varepsilon):=M_\Phi\varepsilon(1+1/\varepsilon^2+
+> 1/\varepsilon)+2M_\Phi/\varepsilon+3L_1(1+\varepsilon)/\varepsilon` —
+> forma IDÊNTICA ao teorema do predecessor, com `L_2` (a constante
+> Lipschitz-`f'` só-de-`(C'')`) substituída por `L_1` (a constante
+> Lipschitz-`f` de `(C')`).
+>
+> **Testes numéricos decisivos, além do teste de função única do
+> predecessor.** O novo limitante é confirmado, com margem confortável,
+> no kink adversarial publicado do predecessor (reprodução exata,
+> `z^3|E_{\text{full}}|\to0{,}936`); uma nova construção de quatro kinks
+> simultâneos; e uma nova construção de oito kinks com espaçamento
+> geometricamente decrescente acumulando em um ponto, empurrada até
+> `z=2500` (onde a janela de ressonância do próprio núcleo, `\sim1/z`, já
+> é menor que o menor espaçamento no aglomerado) — `z^3|E_{\text{full}}|`
+> estabiliza limpamente perto de `1{,}5`, dentro do limitante provado de
+> `3{,}0`, sem nenhum sinal de violação.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente via `sympy` da identidade TFC/IBP da Seção 2.1 (verificada
+> simbólica e numericamente com função-teste concreta), da identidade de
+> três termos do lema central da Seção 3.2 (verificada a 30 dígitos com
+> função-teste não-trivial), de `R''(z)=(1+z^2)R(z)-z`, da identidade de
+> troca de Tonelli `\int u\,Q_u(z)\,du=\int g(w)w^2/2\,dw`, e de
+> `R''(z)\le2/z^3` (via a representação integral EXATA da razão de Mills,
+> confirmando também que o limitante mais fraco `1/z^3` FALHA em `z\ge3`
+> — validando que a constante `2` é necessária, não frouxa) — zero
+> discrepância em todos os casos.
+>
+> Referee hostil dedicado: confirmou de forma independente, em suas
+> próprias palavras, POR QUE a fortificação é genuína (não um truque
+> numérico) — diferenciar `f'` e depois comparar perde informação que
+> integrar via TFC e depois comparar não perde; re-derivou à mão toda a
+> Seção 2.1-3.4; estress-testou o lema central com 60 tentativas
+> aleatórias próprias de funções Lipschitz de 1-12 kinks (zero
+> violações); testou o teorema completo contra os operadores de núcleo
+> CRUS (não as fórmulas intermediárias da própria frente), incluindo em
+> `h=y` (`t=0`, o caso de `h` máximo que os próprios testes numéricos da
+> frente nunca alcançam) — zero violações; reproduziu os três testes
+> numéricos da Seção 4 com código totalmente independente, incluindo o
+> estress-teste de oito kinks até `z=2500` (`1{,}5296` contra `1{,}5310`
+> da própria frente, `\sim0{,}1\%` de concordância); confirmou que os dois
+> problemas auto-capturados (Seção 5) foram genuinamente corrigidos no
+> código, não apenas narrados. Três achados reais, todos NOTA (nenhuma
+> correção — nenhum erro algébrico, nenhum passo de desigualdade
+> injustificado, nenhuma alegação numérica que falhou ao reproduzir):
+> (1) o texto original sobre `\int u\,Q_u(z)\,du=R''(z)/2` era
+> ambíguo — a identidade foi de fato derivada em código pelo referee do
+> predecessor (`adv02_rho_and_E_routes.py`), apenas não nos scripts da
+> própria frente predecessora; (2) os testes numéricos da Seção 4 nunca
+> testam `h` próximo de `y` (o alcance completo que o próprio teorema
+> reivindica) — uma escolha deliberada de eficiência com justificativa
+> analítica correta (o lema central não depende de `h`), fechada
+> independentemente pelo referee via o teste de núcleo cru em `h=y`
+> acima; (3) o termo `L_1` do `D(x,\varepsilon)` desta frente carrega um
+> fator `1/\varepsilon` extra que o termo `L_2` análogo do predecessor
+> não tem — confirmado algebricamente correto (o cancelamento acontece
+> mais cedo na rota desta frente), mas significa que este novo limitante
+> NÃO é uniformemente mais afiado que o do predecessor em todo regime de
+> `(L_1,L_2,\varepsilon)`. Todos os três corrigidos por nota datada na
+> própria `ATTEMPT.md` da frente.
+>
+> Veredito **SOUND WITH ISSUES, TODAS DE SEVERIDADE BAIXA — ACCEPT for
+> catalogue**. `H1`, `(U1)`, `(U2)`, `(H-ces)` permanecem formalmente
+> ABERTOS — `(C')` em si e `(B)` não estão provados para o `\Phi` real —
+> mas o hiato remanescente agora é estritamente mais curto: `(U)` não
+> precisa mais de `(C'')` em lugar nenhum, apenas de `(B)`+`(C')`. Fontes:
+> `.../cu_direct_proof_attempt/boundary_layer_selfheal_attempt/ATTEMPT.md`
+> e
+> `.../boundary_layer_selfheal_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

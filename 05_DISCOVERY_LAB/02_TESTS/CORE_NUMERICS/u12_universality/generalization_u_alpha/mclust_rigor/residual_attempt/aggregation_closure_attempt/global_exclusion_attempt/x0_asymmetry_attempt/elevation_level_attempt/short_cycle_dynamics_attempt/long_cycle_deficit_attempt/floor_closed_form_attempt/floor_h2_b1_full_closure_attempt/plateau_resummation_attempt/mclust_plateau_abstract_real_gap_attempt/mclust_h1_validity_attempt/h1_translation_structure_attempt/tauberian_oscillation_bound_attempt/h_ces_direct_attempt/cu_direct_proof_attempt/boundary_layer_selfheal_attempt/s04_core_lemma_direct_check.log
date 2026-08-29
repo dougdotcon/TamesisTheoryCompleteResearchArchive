@@ -1,0 +1,34 @@
+==============================================================================
+PART A: closed-form IDENTITY check on a SMOOTH G (G' unambiguous)
+        G(a) = sin(2*a) + a/(1+a^2)
+==============================================================================
+  h=0.30 u=0.05 eps=0.20  closed_form=-0.0140604504  via_Gprime=-0.0140604504  absdiff=1.233e-32
+  h=2.00 u=0.50 eps=0.50  closed_form=-0.8900220155  via_Gprime=-0.8900220155  absdiff=9.861e-32
+  h=5.00 u=1.50 eps=0.10  closed_form=-0.4951907837  via_Gprime=-0.4951907837  absdiff=9.861e-32
+  h=0.10 u=3.00 eps=1.00  closed_form=-0.1040101780  via_Gprime=-0.1040101780  absdiff=1.233e-31
+PASS: the f-values-only closed form for Gamma_u(h)-Gamma(h) matches
+      the direct G'-based computation to > 20 digits at every case.
+
+==============================================================================
+PART B: the INEQUALITY |Gamma_u(h)-Gamma(h)| <= 3*L1*u, via the
+        f-values-only closed form (valid whether or not G' exists
+        everywhere), on a SMOOTH G (L1=sup|G'_smooth|) AND on a
+        KINKED (non-C^1, still L1-Lipschitz) G
+==============================================================================
+  smooth G: using L1 = 3.030000 (sampled sup|G'| + 1% margin)
+  kinked G: L1 = 1.500000 (exact, by construction)
+  h= 0.50 u= 0.001  |diff|_smooth=7.8291e-04 bound=9.0900e-03 ratio=0.0861  |  |diff|_kinked=1.8931e-04 bound=4.5000e-03 ratio=0.0421
+  h= 0.50 u= 0.010  |diff|_smooth=7.9774e-03 bound=9.0900e-02 ratio=0.0878  |  |diff|_kinked=1.9468e-03 bound=4.5000e-02 ratio=0.0433
+  h= 0.50 u= 0.100  |diff|_smooth=9.3614e-02 bound=9.0900e-01 ratio=0.1030  |  |diff|_kinked=2.5177e-02 bound=4.5000e-01 ratio=0.0559
+  h= 0.50 u= 1.000  |diff|_smooth=1.2983e+00 bound=9.0900e+00 ratio=0.1428  |  |diff|_kinked=1.2947e-01 bound=4.5000e+00 ratio=0.0288
+  h= 0.50 u= 5.000  |diff|_smooth=1.1650e+00 bound=4.5450e+01 ratio=0.0256  |  |diff|_kinked=4.8007e-01 bound=2.2500e+01 ratio=0.0213
+  h= 2.00 u= 0.050  |diff|_smooth=7.5771e-02 bound=4.5450e-01 ratio=0.1667  |  |diff|_kinked=1.1016e-02 bound=2.2500e-01 ratio=0.0490
+  h= 2.00 u= 2.000  |diff|_smooth=7.7716e-01 bound=1.8180e+01 ratio=0.0427  |  |diff|_kinked=6.7870e-01 bound=9.0000e+00 ratio=0.0754
+  h= 0.05 u= 0.300  |diff|_smooth=3.1867e-02 bound=2.7270e+00 ratio=0.0117  |  |diff|_kinked=9.1117e-03 bound=1.3500e+00 ratio=0.0067
+  h= 7.00 u= 0.500  |diff|_smooth=8.7941e-01 bound=4.5450e+00 ratio=0.1935  |  |diff|_kinked=1.6479e-01 bound=2.2500e+00 ratio=0.0732
+
+  worst-case ratio (smooth G): 0.1935
+  worst-case ratio (kinked G): 0.0754
+PASS: |Gamma_u(h)-Gamma(h)| <= 3*L1*u holds at EVERY tested (h,u)
+      for both a smooth and a genuinely kinked (non-C^1) Lipschitz
+      G -- confirms the core lemma is not an accident of smoothness.

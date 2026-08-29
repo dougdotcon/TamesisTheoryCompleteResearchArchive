@@ -1,0 +1,49 @@
+==============================================================================
+(F1) SANITY CROSS-CHECK against the predecessor's own published
+     number (cu_direct_proof_attempt/ATTEMPT.md Sec 4.3):
+     z^3|E_full| -> 0.936  (a0=0.1, eps=0.5, x=0, f_kink two-sided)
+==============================================================================
+  z=    10  |Efull|=  6.684807e-04  z^3|Efull|=  0.668481  bound(3*L1)=3.9000  OK
+  z=    30  |Efull|=  3.336281e-05  z^3|Efull|=  0.900796  bound(3*L1)=3.9000  OK
+  z=    80  |Efull|=  1.825706e-06  z^3|Efull|=  0.934761  bound(3*L1)=3.9000  OK
+  z=   200  |Efull|=  1.169900e-07  z^3|Efull|=  0.935920  bound(3*L1)=3.9000  OK
+  z=   500  |Efull|=  7.490396e-09  z^3|Efull|=  0.936300  bound(3*L1)=3.9000  OK
+  final z^3|Efull| = 0.9363 vs predecessor's published 0.936
+PASS: matches predecessor's number; bound respected everywhere.
+
+==============================================================================
+(F2) FOUR simultaneous kinks: f(a)=sum_i 0.25|a-a_i|,
+     a_i in {0.08, 0.22, 0.55, 1.1}, L1=1.0 -- tests whether
+     MULTIPLE kinks defeat the bound (per this front's proof:
+     should NOT -- bound is kink-count-independent)
+==============================================================================
+  z=    10  |Efull|=  8.175123e-04  z^2|Efull|=  0.081751  z^3|Efull|=  0.817512  bound=3.0000  OK
+  z=    40  |Efull|=  1.555908e-05  z^2|Efull|=  0.024895  z^3|Efull|=  0.995781  bound=3.0000  OK
+  z=   150  |Efull|=  2.911902e-07  z^2|Efull|=  0.006552  z^3|Efull|=  0.982767  bound=3.0000  OK
+  z=   600  |Efull|=  4.505347e-09  z^2|Efull|=  0.001622  z^3|Efull|=  0.973155  bound=3.0000  OK
+PASS: four simultaneous kinks respect |Efull|<=3*L1/z^3 at every
+      tested z -- consistent with the proof's kink-count-blindness.
+
+==============================================================================
+(F3) EIGHT kinks with GEOMETRICALLY SHRINKING spacing accumulating
+     toward a=0 (a_i=0.6*0.55^i, i=0..7) -- most adversarial FIXED
+     construction attempted here; as z grows the resonant window
+     (width ~1/z near u~0) sweeps through the densest part of this
+     accumulation
+==============================================================================
+  kink locations: [0.6, 0.33, 0.1815, 0.099825, 0.05490375, 0.0301970625, 0.016608384375, 0.00913461140625]
+  gaps: [0.27, 0.1485, 0.081675, 0.04492125, 0.0247066875, 0.013588678125, 0.00747377296875]
+  z=    10  |Efull|=  7.385109e-04  z^2|Efull|=  0.073851  z^3|Efull|=  0.738511  bound=3.0000  OK
+  z=    40  |Efull|=  1.836812e-05  z^2|Efull|=  0.029389  z^3|Efull|=  1.175559  bound=3.0000  OK
+  z=   150  |Efull|=  4.331769e-07  z^2|Efull|=  0.009746  z^3|Efull|=  1.461972  bound=3.0000  OK
+  z=   600  |Efull|=  7.101170e-09  z^2|Efull|=  0.002556  z^3|Efull|=  1.533853  bound=3.0000  OK
+  z=  2500  |Efull|=  9.798642e-11  z^2|Efull|=  0.000612  z^3|Efull|=  1.531038  bound=3.0000  OK
+PASS: geometrically-accumulating 8-kink construction respects
+      |Efull|<=3*L1/z^3 at every tested z, including z=2500 where
+      the resonant window (~1/z=0.0004) is deep inside the
+      accumulation's finest gaps.
+
+SUMMARY (raw values, python floats):
+  F1_z3Efull: [0.6684806930843707, 0.9007959417965611, 0.9347613444079597, 0.9359202454872708, 0.9362995500587978]
+  F2_z3Efull: [0.8175122939251691, 0.9957811362689688, 0.9827668296921829, 0.9731548753567711]
+  F3_z3Efull: [0.7385109397652965, 1.1755593988374675, 1.4619719595818301, 1.5338528116018335, 1.5310378275191767]

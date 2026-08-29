@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-152`: onda 34 (frente
+**Última atualização:** 2026-08-29 (`DISC-DEC-153`: NENHUMA onda 35 de
+matemática autorizada — decisão EXPLÍCITA de não-despacho, não uma
+omissão. Survey de portfolio dedicado constatou que AMBOS os fios
+matemáticos vivos de `u12_universality` estão agora corretamente
+descansados, pelo mesmo padrão já aplicado ao gap `H1` em
+`DISC-DEC-148`: `H1`/M-CLUST(b) descansado desde a onda 32; `C(γ)`
+descansado porque o Estágio 60 (onda 34) provou que a rota do
+somatório de crossover — o alvo incremental de todo o sub-linhagem
+Estágios 56-60 — é logicamente equivalente a `C(γ)` em si, tornando
+qualquer extensão local dela mais uma checagem de auto-consistência,
+não progresso genuíno. Quinta pesquisa consecutiva (ondas 31-34 mais
+esta) reconfirma toda linha fora de `u12_universality` formalmente
+fechada. Nenhum bloco de seed reservado neste ciclo. `06_DISCOVERY_
+ENGINE/` seguirá como trilha paralela de software, fora do
+`DECISION_LEDGER.yaml`, se houver trabalho pendente ali.
+Anterior: `DISC-DEC-152`: onda 34 (frente
 única) `GAMMA-CROSSOVER-MATCHED-ASYMPTOTICS-ATTEMPT` integrada como
 Estágio 60 em `THEOREM.md`. `C(γ)` continua inteiramente ABERTO. Nova
 forma fechada para a assintótica interna (`m=O(1)` fixo) de `term_m`,

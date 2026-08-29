@@ -41,7 +41,7 @@ level up to the tool that would run the claims.
 | Stage | Scope | Status | Checklist |
 |---|---|---|---|
 | **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
-| Stage 2 — Expansion | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ⏸ Not started — blocked on Stage 1 validation passing | not yet created |
+| Stage 2 — Expansion | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | 🔧 **IN PROGRESS** — checklists written, build dispatched (2026-08-29) | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md` |
 | Stage 3 — Product suite | 8 named products | ⏸ Not started — blocked on Stage 2 | not yet created |
 | Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
 
@@ -49,6 +49,21 @@ level up to the tool that would run the claims.
 
 ## Log (most recent first)
 
+- **2026-08-29** — Wrote 6 detailed Stage 2 checklists (`CHECKLIST_06_SYMBOLIC_MATHEMATICS.md`,
+  `CHECKLIST_07_MONTE_CARLO_LAB.md`, `CHECKLIST_08_DATASET_OBSERVATORY.md`,
+  `CHECKLIST_09_FORMAL_PROOF_LEAN_BRIDGE.md`, `CHECKLIST_10_UNIVERSALITY_ATLAS.md`,
+  `CHECKLIST_00B_STAGE2_INTEGRATION.md`) and dispatched Workflow `wf_90a151d3-ff5`
+  (task id `woshusnq7`) to build all 5 modules in true parallel (unlike Stage 1's
+  chain, these only depend on Stage 1's already-finished `Registry`, not on each
+  other), then integrate into the existing `DiscoveryEngine` facade with a hard
+  regression requirement (Stage 1's own tests must still pass unmodified), then a
+  hostile review pass, then fixes. Notable scope calls made while writing these
+  checklists: the Dataset Observatory does **not** fetch real external data over
+  the network (out of scope for Stage 2, to avoid flaky network-dependent tests —
+  disclosed explicitly, not silently narrowed); the Lean bridge is given a hard,
+  non-negotiable boundary never to write into `04_FORMAL_RESEARCH_LAB/` (the
+  archive's own real, governed formalization line) — it manages a fully separate
+  scratch Lean project instead. Running in background.
 - **2026-08-29** — Stage 1 build completed and independently verified. Workflow
   `wf_08fb6d89-64d` ran 8 agents (5 module builds, 1 integration, 1 hostile review,
   1 fix) with zero errors. Result: 78/78 tests pass (`06_DISCOVERY_ENGINE/tests/`,

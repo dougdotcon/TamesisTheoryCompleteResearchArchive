@@ -1,6 +1,27 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-144`: onda 31 frente (a)
+**Última atualização:** 2026-08-29 (`DISC-DEC-145`: onda 32 autorizada
+— 2 frentes, após survey de portfolio dedicado que reconfirmou: toda
+linha fora de `u12_universality` permanece formalmente fechada
+(nenhuma linha nova ficou viva desde a onda 31). Frente (a)
+`CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT` — ataca `(B)`/`(C')` via
+um argumento de princípio do máximo diretamente na EDP original,
+explorando a estrutura de média `Avg_g[Phi]` de `W`; é a própria
+recomendação #1 da Seção 10 da frente predecessora, e a única classe
+de técnica genuinamente nova restante para `(C')`/`(B)` em si, agora
+que a via de norma de operador/majorante foi provada estruturalmente
+fechada (`DISC-DEC-144`). Frente (b)
+`GAMMA-C-GAMMA-UNIFORM-WATSON-REMAINDER-ATTEMPT` — ataca o item 1 do
+próprio diagnóstico da Seção 7 da frente predecessora: um resto de
+Watson uniforme (não apenas de ordem dominante) para a integral
+interna em `t`, escopo deliberadamente restrito (o programa conjunto
+completo de 4 itens foi descrito pela própria frente como
+"profundidade comparável a fechar o Gap 1 diretamente"). `K\ge7` e
+revivificação de linhas dormentes fora de `u12_universality`
+explicitamente NÃO despachados. Blocos de seed reservados:
+`20260950000-20260950999` (frente a), `20260951000-20260951999`
+(frente b), grep-confirmados sem uso.
+Anterior: `DISC-DEC-144`: onda 31 frente (a)
 `CPRIME-VOLTERRA-RESOLVENT-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia H1). Primeira frente
 desta subcadeia (12 ondas, 20-31) a atacar `(C')` DIRETAMENTE: novo

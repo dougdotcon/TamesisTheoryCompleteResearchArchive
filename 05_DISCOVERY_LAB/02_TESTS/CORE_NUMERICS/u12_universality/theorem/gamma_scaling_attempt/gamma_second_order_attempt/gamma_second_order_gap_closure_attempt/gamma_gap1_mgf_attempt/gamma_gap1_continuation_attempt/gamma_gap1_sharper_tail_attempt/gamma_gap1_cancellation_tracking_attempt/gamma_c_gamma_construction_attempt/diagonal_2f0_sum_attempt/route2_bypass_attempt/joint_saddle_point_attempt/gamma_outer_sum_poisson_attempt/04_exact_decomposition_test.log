@@ -1,0 +1,161 @@
+==============================================================================
+PART A: exact-decomposition test -- S_n'(gamma) - G_n(gamma) - 1/(2*gamma)
+        vs sum_{m=0}^M [term_m(n,gamma) - T_prof(m/sqrt(n),gamma)]
+==============================================================================
+
+--- gamma = 0.3 ---
+    n          S_n_prime         G_n+1/(2g)        LHS gap  RHS crossover-sum   |mismatch|  predicted bound  M_used
+   20       8.4213311288       9.5152242381    -1.09389311        -1.09389311    2.453e-27        4.091e-24      20
+   50      12.9760180542      14.0763258031    -1.10030775        -1.10030775    2.334e-60        1.000e-45      50
+  100      18.1125660830      19.2165749218    -1.10400884        -1.10400884    3.112e-60        1.000e-45     100
+  200      25.3793453665      26.4859849395    -1.10663957        -1.10663957    7.312e-60        1.000e-45     133
+  400      35.6579769303      36.7664831769    -1.10850625        -1.10850625    3.143e-59        1.000e-45     180
+  800      50.1954739123      51.3053032123    -1.10982930        -1.10982930    2.334e-60        1.000e-45     246
+ 1600      70.7551667037      71.8662996872    -1.11113298        -1.11113298    5.118e-59        1.000e-45     340
+
+--- gamma = 0.5 ---
+    n          S_n_prime         G_n+1/(2g)        LHS gap  RHS crossover-sum   |mismatch|  predicted bound  M_used
+   20       7.0888052526       7.4720863752    -0.38328112        -0.38328112    9.000e-15        9.358e-13      20
+   50      10.8413227616      11.2332670795    -0.39194432        -0.39194432    2.711e-34        2.679e-32      50
+  100      15.0756221498      15.4720250912    -0.39640294        -0.39640294    6.456e-60        1.000e-45     100
+  200      21.0669425329      21.4665341589    -0.39959163        -0.39959163    7.024e-59        1.000e-45     133
+  400      29.5421863143      29.9440501823    -0.40186387        -0.40186387    1.187e-53        1.000e-45     180
+  800      41.5294936267      41.9330683179    -0.40357469        -0.40357469    6.903e-50        1.001e-45     246
+ 1600      58.4819937974      58.8881003647    -0.40610657        -0.40610657    1.911e-47        1.086e-45     340
+
+--- gamma = 0.8 ---
+    n          S_n_prime         G_n+1/(2g)        LHS gap  RHS crossover-sum   |mismatch|  predicted bound  M_used
+   20       6.3927413226       6.3455702054     0.04717112         0.04717122    1.022e-07        1.912e-06      20
+   50       9.7087175647       9.6700156820     0.03870188         0.03870188    1.804e-17        3.235e-16      50
+  100      13.4508608302      13.4165838493     0.03427698         0.03427698    9.474e-34        1.674e-32     100
+  200      18.7461146902      18.7150313640     0.03108333         0.03108333    1.121e-29        9.716e-29     133
+  400      26.2369511390      26.2081676987     0.02878344         0.02878344    5.302e-27        2.585e-26     180
+  800      36.8314189703      36.8050627279     0.02635624         0.02635624    4.842e-25        1.435e-24     246
+ 1600      51.8158397544      51.7913353973     0.02450436         0.02450436    9.648e-24        1.830e-23     340
+
+Decomposition identity CONFIRMED at every (n,gamma) point tested: the
+mismatch between the LHS gap S_n'-G_n-1/(2*gamma) and the RHS crossover
+sum is, at every point, well within the analytically-predicted bound on
+the neglected pieces (T_prof tail beyond the summation cutoff, plus the
+Poisson k>=1 remainder) -- both provably exponentially small in n per
+scripts 02/03. This is genuine numerical confirmation of script 02's
+algebra applied to the TRUE discrete sum, not merely the T_prof proxy
+tested in script 03.
+
+==============================================================================
+PART B: does the crossover sum trend to a finite constant as n grows?
+        (this is the genuinely OPEN piece -- see self-caught issues /
+        Sec 7 of ATTEMPT.md)
+==============================================================================
+
+gamma=0.3: crossover-sum trend vs n:
+  n=   20: crossover = -1.09389311
+  n=   50: crossover = -1.10030775
+  n=  100: crossover = -1.10400884
+  n=  200: crossover = -1.10663957
+  n=  400: crossover = -1.10850625
+  n=  800: crossover = -1.10982930
+  n= 1600: crossover = -1.11113298
+  [CONTEXT ONLY, E(gamma) is OPEN/conjectural, cited not proved]
+  D_0(gamma) [PROVED] = -0.20588235
+  E_heuristic(gamma) [CONJECTURED, cited] = -0.24048443
+  => D(gamma)+1 [conjectural target for S_n'-G_n] = 0.55363322
+  => implied target for crossover-sum = D(gamma)+1-1/(2*gamma) = -1.11303345
+  crossover-sum at largest n tested (n=1600) = -1.11113298  (still moving toward / away from conjectural target: diff = 0.00190047)
+
+gamma=0.5: crossover-sum trend vs n:
+  n=   20: crossover = -0.38328112
+  n=   50: crossover = -0.39194432
+  n=  100: crossover = -0.39640294
+  n=  200: crossover = -0.39959163
+  n=  400: crossover = -0.40186387
+  n=  800: crossover = -0.40357469
+  n= 1600: crossover = -0.40610657
+  [CONTEXT ONLY, E(gamma) is OPEN/conjectural, cited not proved]
+  D_0(gamma) [PROVED] = -0.16666667
+  E_heuristic(gamma) [CONJECTURED, cited] = -0.24074074
+  => D(gamma)+1 [conjectural target for S_n'-G_n] = 0.59259259
+  => implied target for crossover-sum = D(gamma)+1-1/(2*gamma) = -0.40740741
+  crossover-sum at largest n tested (n=1600) = -0.40610657  (still moving toward / away from conjectural target: diff = 0.00130084)
+
+gamma=0.8: crossover-sum trend vs n:
+  n=   20: crossover = 0.04717122
+  n=   50: crossover = 0.03870188
+  n=  100: crossover = 0.03427698
+  n=  200: crossover = 0.03108333
+  n=  400: crossover = 0.02878344
+  n=  800: crossover = 0.02635624
+  n= 1600: crossover = 0.02450436
+  [CONTEXT ONLY, E(gamma) is OPEN/conjectural, cited not proved]
+  D_0(gamma) [PROVED] = -0.08333333
+  E_heuristic(gamma) [CONJECTURED, cited] = -0.26851852
+  => D(gamma)+1 [conjectural target for S_n'-G_n] = 0.64814815
+  => implied target for crossover-sum = D(gamma)+1-1/(2*gamma) = 0.02314815
+  crossover-sum at largest n tested (n=1600) = 0.02450436  (still moving toward / away from conjectural target: diff = 0.00135621)
+
+==============================================================================
+PART C: convergence RATE of the crossover-sum toward the conjectural
+        target -- an unplanned, additional observation (not required by
+        the mandate, reported honestly as a numerical curiosity/lead for
+        a future front, NOT as a proved result)
+==============================================================================
+
+gamma=0.3: |crossover(n) - conjectural_target| vs n (doubling steps):
+  n=   20: |diff| = 0.01914034
+  n=   50: |diff| = 0.01272570
+  n=  100: |diff| = 0.00902461
+  n=  200: |diff| = 0.00639388
+  n=  400: |diff| = 0.00452720
+  n=  800: |diff| = 0.00320415
+  n= 1600: |diff| = 0.00190047
+  ratios of |diff| at successive DOUBLING n (100->200->400->800->1600):
+    n=100->200: ratio = 0.70849  (1/sqrt(2) = 0.70711)
+    n=200->400: ratio = 0.70805  (1/sqrt(2) = 0.70711)
+    n=400->800: ratio = 0.70775  (1/sqrt(2) = 0.70711)
+    n=800->1600: ratio = 0.59313  (1/sqrt(2) = 0.70711)
+  [If this ratio -> 1/sqrt(2) cleanly, it is SUGGESTIVE (not proved, and
+   contingent on the still-CONJECTURAL E_heuristic target) that the
+   crossover-sum itself approaches its limit at rate O(1/sqrt(n)) --
+   the same generic rate this archive's Gap-1 machinery repeatedly
+   finds elsewhere. This is an UNPLANNED bonus observation, flagged
+   explicitly as conjecture-dependent, not a new proved fact.]
+
+gamma=0.5: |crossover(n) - conjectural_target| vs n (doubling steps):
+  n=   20: |diff| = 0.02412628
+  n=   50: |diff| = 0.01546309
+  n=  100: |diff| = 0.01100447
+  n=  200: |diff| = 0.00781578
+  n=  400: |diff| = 0.00554354
+  n=  800: |diff| = 0.00383272
+  n= 1600: |diff| = 0.00130084
+  ratios of |diff| at successive DOUBLING n (100->200->400->800->1600):
+    n=100->200: ratio = 0.71024  (1/sqrt(2) = 0.70711)
+    n=200->400: ratio = 0.70928  (1/sqrt(2) = 0.70711)
+    n=400->800: ratio = 0.69138  (1/sqrt(2) = 0.70711)
+    n=800->1600: ratio = 0.33940  (1/sqrt(2) = 0.70711)
+  [If this ratio -> 1/sqrt(2) cleanly, it is SUGGESTIVE (not proved, and
+   contingent on the still-CONJECTURAL E_heuristic target) that the
+   crossover-sum itself approaches its limit at rate O(1/sqrt(n)) --
+   the same generic rate this archive's Gap-1 machinery repeatedly
+   finds elsewhere. This is an UNPLANNED bonus observation, flagged
+   explicitly as conjecture-dependent, not a new proved fact.]
+
+gamma=0.8: |crossover(n) - conjectural_target| vs n (doubling steps):
+  n=   20: |diff| = 0.02402307
+  n=   50: |diff| = 0.01555373
+  n=  100: |diff| = 0.01112883
+  n=  200: |diff| = 0.00793518
+  n=  400: |diff| = 0.00563529
+  n=  800: |diff| = 0.00320809
+  n= 1600: |diff| = 0.00135621
+  ratios of |diff| at successive DOUBLING n (100->200->400->800->1600):
+    n=100->200: ratio = 0.71303  (1/sqrt(2) = 0.70711)
+    n=200->400: ratio = 0.71017  (1/sqrt(2) = 0.70711)
+    n=400->800: ratio = 0.56929  (1/sqrt(2) = 0.70711)
+    n=800->1600: ratio = 0.42275  (1/sqrt(2) = 0.70711)
+  [If this ratio -> 1/sqrt(2) cleanly, it is SUGGESTIVE (not proved, and
+   contingent on the still-CONJECTURAL E_heuristic target) that the
+   crossover-sum itself approaches its limit at rate O(1/sqrt(n)) --
+   the same generic rate this archive's Gap-1 machinery repeatedly
+   finds elsewhere. This is an UNPLANNED bonus observation, flagged
+   explicitly as conjecture-dependent, not a new proved fact.]

@@ -1,0 +1,70 @@
+==============================================================================
+PART A: verify the classical Stirling series against sympy's own
+        loggamma asymptotic expansion (external-fact cross-check)
+==============================================================================
+sympy's own loggamma(z+1) asymptotic series (x=1/z -> 0, order 6):
+  z*log(z) - z + log(z)/2 + log(2)/2 + log(pi)/2 + 1/(12*z) - 1/(360*z**3) + 1/(1260*z**5)
+Classical Stirling series (external fact, leading + 1/(12z) - 1/(360z^3) + 1/(1260z^5)):
+  z*log(z) - z + log(z)/2 + log(2)/2 + log(pi)/2 + 1/(12*z) - 1/(360*z**3) + 1/(1260*z**5)
+Difference (should be O(1/z^7), i.e. the two agree to displayed order): 0
+Numeric check at z=37: loggamma(38)=99.330612454787426929326086684692383873740930017507
+  Stirling(leading+3 corr terms) = 99.330612454787433193020310007538037630638911338356
+  abs diff = 6.264e-15  (expected ~ 1/(1188*z^7) ~ next omitted term)
+  next omitted term 1/(1188 z^7) ~ 8.867e-15
+CONFIRMED: classical Stirling series matches sympy's own asymptotic
+expansion and matches loggamma numerically to the expected order.
+
+==============================================================================
+PART B: the 'naive' per-factor Stirling correction to F(n,m,gamma)
+        at FIXED, finite (n,m) -- NOT yet the mesoscale correction
+==============================================================================
+
+F(n,m,gamma) = (gamma/n)^m * Gamma(n+m+2)/(Gamma(n-m+1)*Gamma(m+1))
+
+Write, for each of z1:=n+m+1, z2:=n-m, z3:=m (the three arguments
+whose (z+1)-factorial Stirling's series applies to):
+
+  ln Gamma(z_i+1) = S0(z_i) + C(z_i),
+  S0(z) := z ln z - z + (1/2) ln(2 pi z)        [leading Stirling, "Stirling0"]
+  C(z)  := 1/(12 z) - 1/(360 z^3) + ...          [classical correction series]
+
+so
+
+  ln F = m ln(gamma/n) + S0(z1) - S0(z2) - S0(z3) + [C(z1) - C(z2) - C(z3)]
+       =: ln F_stirling0(n,m,gamma)  +  delta_naive(n,m,gamma)
+
+delta_naive(n,m,gamma) := C(z1) - C(z2) - C(z3)
+                          = 1/(12 z1) - 1/(12 z2) - 1/(12 z3) + O(1/z^3)
+                          = 1/(12(n+m+1)) - 1/(12(n-m)) - 1/(12 m) + O(...)
+
+This delta_naive is a well-defined, EXACT (given the classical Stirling
+external fact), finite-(n,m) correction with NO series-in-1/sqrt(n) taken
+yet. It is verified here numerically: F(n,m,gamma) / [F_stirling0 * exp(delta_naive)]
+-> 1 as (z1,z2,z3) grow, at fixed and at mesoscale (n,m).
+
+         n      m  gamma | exact-stirling0 (should ->0) | delta_naive - (exact-stirling0)
+     10000     30    0.5 | -2.777726e-03 | resid=-3.263e-11
+   1000000    300    0.5 | -2.777777e-04 | resid=-3.266e-16
+     10000     30    0.2 | -2.777726e-03 | resid=-3.263e-11
+     10000     30    0.8 | -2.777726e-03 | resid=-3.263e-11
+ 100000000   3000    0.5 | -2.777778e-05 | resid=-3.266e-21
+    100000    100    0.3 | -8.333322e-04 | resid=-7.936e-14
+
+Worst residual after including delta_naive (2 correction terms per z): 3.263e-11
+(expected to shrink like the next Stirling term ~ 1/(360 m^3) at the
+ smallest z=m argument -- confirmed order of magnitude below)
+  1/(360*m^3) at m=30: 1.029e-07
+
+CONCLUSION of script 02: delta_naive(n,m,gamma) = 1/(12(n+m+1))
+  - 1/(12(n-m)) - 1/(12 m) + O(z^-3) is the exact, finite-(n,m)
+  correction turning the crude Stirling0 approximation of F into a
+  high-accuracy one. At the MESOSCALE m=lambda*sqrt(n), the first two
+  terms are O(1/n) while the third, -1/(12 m) = -1/(12 lambda sqrt(n)),
+  is O(1/sqrt(n)) -- i.e. delta_naive's DOMINANT mesoscale piece is
+  exactly -1/(12 lambda sqrt(n)). This is NOT yet the full Delta_m
+  this front needs (see Sec 3/script 03 in ATTEMPT.md): delta_naive
+  measures Stirling0-vs-exact accuracy at FIXED finite (n,m); the
+  object needed to correct T_prof itself is F's own deviation, at
+  mesoscale n->infty, from whatever closed form F_leading(n,m,gamma)
+  reproduces T_prof/I_leading in that SAME limit -- a genuinely
+  different (larger) quantity, derived next.

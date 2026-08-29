@@ -1,0 +1,119 @@
+==============================================================================
+PART A: Euler-Maclaurin vs Poisson summation -- assessment and choice
+==============================================================================
+
+The outer sum is S_n' = sum_{m=0}^n term_m(n,gamma), and its mesoscale
+proxy is sum_{m=0}^infty phi_n(m), phi_n(x) := T_prof(x/sqrt(n),gamma).
+
+Two classical tools apply to a sum-vs-integral gap:
+
+  (i) EULER-MACLAURIN: sum_{m=a}^{b} f(m) = int_a^b f(x)dx + (f(a)+f(b))/2
+      + sum_{k=1}^{K} B_{2k}/(2k)! [f^{(2k-1)}(b) - f^{(2k-1)}(a)] + R_K.
+      Its natural strength is exactly a HALF-LINE (or finite-interval) sum
+      with a genuine ENDPOINT -- which is precisely this problem's shape:
+      T_prof(lambda,gamma) is MAXIMIZED AT THE BOUNDARY lambda=0 (m=0), not
+      at an interior stationary point (verified: T_prof'(lambda,gamma) =
+      -(2-gamma)/gamma * lambda * T_prof(lambda,gamma), which is 0 only at
+      lambda=0 on the domain lambda>=0, and T_prof is monotonically
+      DECREASING for lambda>0). So the outer sum is, in the language of
+      Laplace-type sum asymptotics, an "edge sum", not an "interior saddle
+      sum" -- exactly the case Euler-Maclaurin's boundary-term formula was
+      built for.
+
+  (ii) POISSON SUMMATION: sum_{m in Z} f(m) = sum_{k in Z} f_hat(k). Its
+      natural strength is a sum over the WHOLE lattice Z of a function whose
+      Fourier transform decays fast -- most powerful when f extends smoothly
+      and (here) EVENLY across the origin, turning a half-line sum into a
+      whole-line sum via symmetry.
+
+  DECISION (this front's assessment): use BOTH, but make POISSON SUMMATION
+  the PRIMARY, load-bearing tool, with Euler-Maclaurin as a secondary
+  cross-check for the leading boundary term only.  Reason: phi_n(x) is an
+  ENTIRE, actual Gaussian function (not merely "smooth enough for the EM
+  remainder integral to converge") -- its closed-form Fourier transform is
+  itself an explicit Gaussian, so Poisson summation converts the sum-vs-
+  integral gap into an EXPLICIT, EXPONENTIALLY-decaying-in-n series with a
+  computable rate, strictly stronger than any finite-order Euler-Maclaurin
+  truncation could offer for this specific summand (whose EM remainder R_K
+  after truncating at order K is only bounded by a generic derivative-growth
+  estimate, not a closed exponential rate, unless K is itself taken to
+  infinity in a way that -- for a Gaussian -- is exactly equivalent to
+  redoing the Poisson computation). Because phi_n is EVEN, Poisson summation
+  ALSO reproduces Euler-Maclaurin's boundary term f(0)/2 exactly (Part C
+  below), giving a clean cross-check between the two tools before trusting
+  either.
+
+==============================================================================
+PART B: phi_n(x) is even in x; ALL odd-order derivatives vanish at x=0
+==============================================================================
+phi_n(x) = T_prof(x/sqrt(n), gamma) = exp(-x**2*(2 - gamma)/(2*gamma*n))/gamma
+Evenness check: phi_n(x) - phi_n(-x), symbolically simplified = 0  (PASS if 0)
+
+Direct symbolic differentiation, orders 1 through 7, evaluated at x=0:
+  d^1/dx^1 phi_n |_(x=0) = 0   [odd order]
+  d^2/dx^2 phi_n |_(x=0) = (gamma - 2)/(gamma**2*n)   [even order]
+  d^3/dx^3 phi_n |_(x=0) = 0   [odd order]
+  d^4/dx^4 phi_n |_(x=0) = 3*(gamma - 2)**2/(gamma**3*n**2)   [even order]
+  d^5/dx^5 phi_n |_(x=0) = 0   [odd order]
+  d^6/dx^6 phi_n |_(x=0) = 15*(gamma - 2)**3/(gamma**4*n**3)   [even order]
+  d^7/dx^7 phi_n |_(x=0) = 0   [odd order]
+
+CONCLUSION: phi_n^(2k-1)(0) = 0 EXACTLY for all k=1,...,7 (and, by the
+elementary fact that an even analytic function has a Taylor series in
+x^2 only, for ALL k -- this is not a numerical coincidence truncated at
+order 7, it is an algebraic identity for every order, confirmed here up
+to a comfortably large finite order as a concrete sanity check, not the
+full proof, which is the one-line evenness argument above).
+
+==============================================================================
+PART C: Poisson summation -- explicit closed form and remainder rate
+==============================================================================
+
+CITED external classical fact (Poisson summation formula, NOT re-derived):
+for f Schwartz-class, sum_{m in Z} f(m) = sum_{k in Z} f_hat(k), f_hat(k) :=
+int_{-inf}^{inf} f(x) e^{-2*pi*i*k*x} dx.
+
+CITED external classical fact (Fourier transform of a Gaussian, textbook):
+for a>0, the function f(x)=e^{-a x^2} has f_hat(k) = sqrt(pi/a) e^{-pi^2 k^2/a}.
+
+SPECIFIC APPLICATION to phi_n(x) = (1/gamma) e^{-alpha x^2 / n}, derived here:
+
+phi_n_hat(k) [a = alpha/n substituted into textbook Gaussian FT] = sqrt(2)*sqrt(pi)*sqrt(n)*exp(2*pi**2*gamma*k**2*n/(gamma - 2))/(sqrt(gamma)*sqrt(2 - gamma))
+2 * int_0^oo phi_n(x) dx [via textbook Gaussian formula route] = sqrt(2)*sqrt(pi)*sqrt(n)/(sqrt(gamma)*sqrt(2 - gamma))
+(should equal phi_n_hat(0), since phi_n_hat(0) = int_{-inf}^{inf} phi_n dx)
+ratio phi_n_hat(0) / (2*int_0^oo phi_n dx) [PASS if 1] = 1
+
+
+Derivation of the half-line boundary correction (algebra, this front):
+
+  sum_{m in Z} phi_n(m) = phi_n(0) + 2*sum_{m=1}^infty phi_n(m)     (i, evenness)
+  sum_{m=0}^infty phi_n(m) = phi_n(0) + sum_{m=1}^infty phi_n(m)    (ii, definition)
+
+  From (i): sum_{m=1}^infty phi_n(m) = (sum_{m in Z}phi_n(m) - phi_n(0)) / 2
+  Substituting into (ii):
+  sum_{m=0}^infty phi_n(m) = phi_n(0)/2 + (1/2) sum_{m in Z} phi_n(m)
+                             = phi_n(0)/2 + (1/2) sum_{k in Z} phi_n_hat(k)   [Poisson]
+                             = phi_n(0)/2 + (1/2) phi_n_hat(0) + sum_{k=1}^infty phi_n_hat(k)
+                                                                    [phi_n_hat even in k too]
+                             = phi_n(0)/2 + int_0^oo phi_n(x)dx + sum_{k>=1} phi_n_hat(k)
+
+Boundary term phi_n(0)/2 = 1/(2*gamma)   [= 1/(2*gamma), independent of n]
+Dominant (k=1) remainder term phi_n_hat(1) = sqrt(2)*sqrt(pi)*sqrt(n)*exp(2*pi**2*gamma*n/(gamma - 2))/(sqrt(gamma)*sqrt(2 - gamma))
+Rate constant c(gamma) := pi^2/alpha, alpha=(2-gamma)/(2*gamma)  [n-INDEPENDENT] = -2*pi**2*gamma/(gamma - 2)
+  i.e. c(gamma) = 2*pi^2*gamma/(2-gamma); dominant remainder ~ sqrt(n) * exp(-c(gamma)*n).
+
+>>> NEW CLOSED-FORM RESULT (this front): <<<
+sum_{m=0}^infty T_prof(m/sqrt(n),gamma) = sqrt(n) * int_0^infty T_prof(lambda,gamma) dlambda
+                                          + 1/(2*gamma)
+                                          + O( sqrt(n) * exp(-pi^2 * n / alpha) ),
+   alpha = (2-gamma)/(2*gamma),  i.e. rate pi^2 * 2*gamma/(2-gamma) = 2*pi^2*gamma/(2-gamma).
+
+Since sqrt(n)*int_0^infty T_prof dlambda = G_n EXACTLY (Estagio 56 finding 3, cited,
+re-verified script 01), this is precisely:
+
+  sum_{m=0}^infty T_prof(m/sqrt(n),gamma) = G_n(gamma) + 1/(2*gamma) + O(exp(-c(gamma) n)),
+  c(gamma) := 2*pi^2*gamma / (2-gamma).
+
+Change-of-variable cross-check: int_0^oo phi_n(x)dx  = sqrt(2)*sqrt(pi)*sqrt(n)/(2*sqrt(gamma)*sqrt(2 - gamma))
+                                 sqrt(n)*int_0^oo T_prof(lambda,gamma)dlambda = sqrt(2)*sqrt(pi)*sqrt(n)/(2*sqrt(gamma)*sqrt(2 - gamma))
+ratio [PASS if 1] = 1

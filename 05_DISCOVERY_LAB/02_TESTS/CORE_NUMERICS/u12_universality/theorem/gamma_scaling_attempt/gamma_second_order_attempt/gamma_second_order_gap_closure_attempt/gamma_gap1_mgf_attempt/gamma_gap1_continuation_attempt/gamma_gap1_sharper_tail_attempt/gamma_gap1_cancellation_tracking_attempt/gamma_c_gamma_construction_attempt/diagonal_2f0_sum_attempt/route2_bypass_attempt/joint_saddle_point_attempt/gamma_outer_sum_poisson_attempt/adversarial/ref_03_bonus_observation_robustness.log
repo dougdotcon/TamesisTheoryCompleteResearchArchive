@@ -1,0 +1,79 @@
+==============================================================================
+Independent reproduction of the crossover-sum-vs-conjectural-target
+1/sqrt(2) doubling-ratio check, at FRESH gamma values (0.35, 0.7),
+disjoint from both the front's own grid (0.3,0.5,0.8) and this referee's
+own script 02 grid (0.25,0.6,0.9). Primary double-sum T(n,m), no
+quadrature, no front code read.
+==============================================================================
+
+--- gamma = 0.35 ---
+  n=  100 (M= 100): crossover = -0.8557062064  [0.2s]
+  n=  200 (M= 133): crossover = -0.8585177006  [0.6s]
+  n=  400 (M= 180): crossover = -0.8605145170  [3.9s]
+  n=  800 (M= 246): crossover = -0.8619307177  [16.9s]
+  n= 1600 (M= 340): crossover = -0.8629341851  [55.3s]
+
+--- gamma = 0.7 ---
+  n=  100 (M= 100): crossover = -0.0716510075  [0.2s]
+  n=  200 (M= 133): crossover = -0.0749515969  [0.7s]
+  n=  400 (M= 180): crossover = -0.0773151056  [3.8s]
+  n=  800 (M= 246): crossover = -0.0790011578  [15.9s]
+  n= 1600 (M= 340): crossover = -0.0802007625  [50.9s]
+
+Total wall time: 148.4s
+
+==============================================================================
+Doubling-ratio analysis vs the conjectural target D(gamma)+1-1/(2*gamma)
+==============================================================================
+
+gamma=0.35: target_residual (conjectural) = -0.8653635926
+  n=  100: |crossover-target| = 0.0096573862
+  n=  200: |crossover-target| = 0.0068458920
+  n=  400: |crossover-target| = 0.0048490757
+  n=  800: |crossover-target| = 0.0034328750
+  n= 1600: |crossover-target| = 0.0024294076
+  doubling ratios (100->200->400->800->1600):
+    n=100->200: ratio = 0.70888  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=200->400: ratio = 0.70832  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=400->800: ratio = 0.70794  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=800->1600: ratio = 0.70769  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+
+gamma=0.7: target_residual (conjectural) = -0.0831220062
+  n=  100: |crossover-target| = 0.0114709987
+  n=  200: |crossover-target| = 0.0081704093
+  n=  400: |crossover-target| = 0.0058069006
+  n=  800: |crossover-target| = 0.0041208484
+  n= 1600: |crossover-target| = 0.0029212437
+  doubling ratios (100->200->400->800->1600):
+    n=100->200: ratio = 0.71227  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=200->400: ratio = 0.71072  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=400->800: ratio = 0.70965  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+    n=800->1600: ratio = 0.70889  (1/sqrt2=0.70711)  <-- CLOSE TO 1/SQRT2
+
+==============================================================================
+CROSS-CHECK: re-examine the front's OWN reported ratios (from its own
+04_exact_decomposition_test.log, transcribed here for direct comparison,
+not recomputed) against its OWN prose claim in ATTEMPT.md Sec 4 Part C:
+'the ratio at successive doublings sitting at 0.708-0.713 ... for THREE
+consecutive doublings (100->200->400->800) at all three gamma tested'
+==============================================================================
+ gamma   100->200   200->400   400->800  800->1600
+   0.3    0.70849    0.70805    0.70775    0.59313
+   0.5    0.71024    0.70928    0.69138    0.33940
+   0.8    0.71303    0.71017    0.56929    0.42275
+
+Min/max of the FIRST THREE doubling ratios (100->200,200->400,400->800),
+across all three gamma the front itself tested:
+  min = 0.56929, max = 0.71303
+  Front's claimed range: 0.708-0.713.
+  ACTUAL range spanned by the front's own printed data (transcribed
+  directly from 04_exact_decomposition_test.log, not altered): 0.56929-0.71303
+  ==> The front's OWN claimed range (0.708-0.713) does NOT bound its OWN
+      printed data for all 'three consecutive doublings': at gamma=0.5 the
+      400->800 ratio is 0.69138 (below the claimed 0.708 floor), and at
+      gamma=0.8 the 400->800 ratio is 0.56929 -- essentially already in the
+      'departure' regime the front's text reserves for the FINAL doubling
+      only (800->1600). This is a genuine, independently-verifiable
+      overclaim in the document's own characterization of its own data,
+      not a recomputation discrepancy (the transcribed numbers ARE the
+      front's own script 04 log output).

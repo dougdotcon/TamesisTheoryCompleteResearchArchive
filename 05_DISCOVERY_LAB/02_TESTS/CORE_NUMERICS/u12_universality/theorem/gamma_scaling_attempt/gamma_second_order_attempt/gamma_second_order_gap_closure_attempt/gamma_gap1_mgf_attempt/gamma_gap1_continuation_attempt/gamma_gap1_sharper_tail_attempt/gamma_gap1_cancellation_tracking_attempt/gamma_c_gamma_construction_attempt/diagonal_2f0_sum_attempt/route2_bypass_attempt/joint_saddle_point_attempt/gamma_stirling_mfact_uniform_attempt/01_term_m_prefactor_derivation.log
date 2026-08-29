@@ -1,0 +1,29 @@
+==============================================================================
+PART A: symbolic exact identity  term_m = F * I
+==============================================================================
+term_m prefactor (from cited T(n,m), B(m+1,m+1)) simplifies to:
+  (gamma/n)**m*gamma(m + n + 2)/(gamma(m + 1)*gamma(-m + n + 1))
+Claimed F(n,m,gamma):
+  (gamma/n)**m*factorial(m + n + 1)/(factorial(m)*factorial(-m + n))
+Symbolic difference (should be exactly 0): 0
+CONFIRMED: term_m(n,gamma) = F(n,m,gamma) * I(n,m,gamma) exactly, with
+  F(n,m,gamma) = (gamma/n)^m * (n+m+1)! / ( (n-m)! * m! )
+The (2m+1)! factors from binom(n+m+1,2m+1) and 1/B(m+1,m+1) cancel exactly.
+
+==============================================================================
+PART B: numeric cross-check via exact Fraction arithmetic
+==============================================================================
+152 exact-Fraction (n,m,gamma) triples checked, n in [3,37], m<=6,
+  gamma in {1/4,2/7,1/2,5/6}: max |term_m_prefactor - F| = 0
+CONFIRMED exactly (Fraction arithmetic, zero tolerance): 0 mismatches.
+
+==============================================================================
+PART C: sanity checks on F alone
+==============================================================================
+F(n,0,gamma) simplifies to: n + 1  (expected: n+1)
+term_0(n,gamma) = F(n,0,gamma)*I(n,0,gamma) simplifies to: (1 - (1 - gamma)**(n + 1))/gamma
+Expected (cited sanity fact): (1 - (1 - gamma)**(n + 1))/gamma
+CONFIRMED: m=0 composition matches the cited sanity limit exactly.
+
+All Part A/B/C checks passed. F(n,m,gamma) established as the exact
+factorial/binomial-prefactor object this front's Delta_m will approximate.

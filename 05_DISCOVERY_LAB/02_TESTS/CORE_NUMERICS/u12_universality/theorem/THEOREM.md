@@ -8047,3 +8047,217 @@ da soma externa, e a montagem conjunta de ambos com um resto `o(1)`
 explícito — é agora precisamente três itens nomeados, não quatro. Nenhuma
 alegação de progresso em Millennium Problem; matemática
 combinatória/assintótica pura interna a este arquivo.
+
+## [Extensão, Estágio 58 — 2026-08-29]
+
+**Onda 33, frente (a), `DISC-DEC-148` (`GAMMA-STIRLING-MFACT-UNIFORM-
+ATTEMPT`).** Alvo: item 2 do diagnóstico do Estágio 56/57 — a correção
+tipo Stirling correspondente para as peças `m!`/prefixo-binomial de
+`term_m(n,γ)` (os fatores FORA da integral interna em `t`, já corrigida
+pela frente predecessora direta, Estágio 57), de modo que, combinada com
+o `Δ(n,m,γ)` já citado, o perfil mesoscala COMPLETO `T_prof(λ,γ)` seja
+elevado de "assintótico de ordem líder" para "ordem líder mais uma
+correção de próxima ordem explícita, fechada, uniformemente verificada".
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — como o mandato antecipou.** Uma
+> nova identidade algébrica exata, derivada aqui do zero: `term_m(n,γ)=
+> F(n,m,γ)\cdot I(n,m,γ)`, `F(n,m,γ):=(γ/n)^m\,(n+m+1)!/[(n-m)!\,m!]` —
+> os fatores `(2m+1)!` de `B(m+1,m+1)` e `\binom{n+m+1}{2m+1}` cancelam-se
+> exatamente. Construindo o resíduo exato, finito-`(n,m)`,
+> `B(n,m,γ):=\ln F+\ln I_{\mathrm{leading}}-\ln T_{\mathrm{prof}}` e
+> expandindo em `ε:=1/\sqrt n` na mesoscala `m=λ\sqrt n`, os coeficientes
+> de `ε^{-4}` até `ε^0` se anulam TODOS exatamente (uma reconfirmação
+> genuína, não-trivial, de que `T_prof` é de fato o limite correto de
+> `F\cdot I_{\mathrm{leading}}`), e o termo sobrevivente líder é a nova
+> forma fechada
+>
+> **`Δ_m(n,m,γ):=K(λ,γ)/\sqrt n`,
+> `\;K(λ,γ)=\dfrac{3λ}2-\dfrac{λ^3}6-\dfrac1{12λ}-\dfrac λγ`.**
+>
+> **Um fato limpo, verificado, previamente desconhecido**: o polo
+> `-1/(12λ)` de `Δ_m` quando `λ\to0` cancela-se EXATAMENTE, simbolicamente,
+> contra o polo `+1/(12λ)` do `Δ(n,m,γ)` já citado do Estágio 57, dando
+> `Δ_{\mathrm{total}}=Δ_m+Δ=(3λ/2-λ^3/6-λ/γ)/\sqrt n`, livre de polo em
+> `λ`, ao contrário de qualquer peça isolada. Confirmado como efeito
+> numericamente real (não apenas curiosidade algébrica): a correção
+> combinada atinge precisão limpa `O(n^{-1})` mesmo em `λ` tão pequeno
+> quanto `0{,}05`. Um limite genuíno permanece: o termo `-λ/γ` não é
+> cancelado por nada, então `Δ_{\mathrm{total}}` exige `γ` limitado longe
+> de `0` (confirmado, não apenas afirmado).
+>
+> **Um autocaptura metodológica com carga real (divulgada, não
+> escondida)**: uma versão inicial do teste numérico central usava o `λ`
+> NOMINAL-alvo (não o `λ=m/\sqrt n` REAL implicado por arredondar `m` a
+> inteiro) dentro de `T_prof`, `Δ`, `Δ_m` — um artefato de contabilidade
+> `O(1/\sqrt n)` que mascarava a taxa de convergência verdadeira
+> `O(n^{-1})` em cerca de metade dos valores de `n` testados (um padrão
+> par/ímpar de potência-de-10 diagnosticável). Encontrado, diagnosticado
+> e corrigido antes de finalizar o documento.
+>
+> **Confirmação numérica central**: quadratura de alta precisão direta do
+> `term_m` exato, inclinação log-log `-0{,}500\to-0{,}500` (não corrigido/
+> `Δ`-apenas) melhorando para uma `-1{,}000` limpa (correção combinada
+> desta frente) em todos os 9 pontos `(λ,γ)` testados, empurrado até
+> `n=10^{12}`.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente à mão de `F(n,m,γ)` a partir das definições primárias
+> citadas (confirmando o cancelamento exato de `(2m+1)!`); teste numérico
+> `mpmath` fresco (não lendo os scripts da frente) confirmando
+> `B\cdot\sqrt n\to K(λ,γ)` a três pontos `(λ,γ)` frescos, com a diferença
+> encolhendo por um fator de `~10` a cada aumento de `100\times` em `n` —
+> exatamente o comportamento residual `O(1/\sqrt n)` esperado além do
+> termo líder reivindicado — zero discrepância.
+>
+> Referee hostil dedicado: re-derivou a fatoração `F` do zero (sympy
+> exato + 200 triplas fracionárias exatas frescas); re-derivou `K(λ,γ)` e
+> confirmou o anulamento de todos os termos `ε^{-4}` a `ε^0` por um
+> método genuinamente diferente (ajuste de curva Vandermonde numérico
+> puro, dps=150, sem `sympy.series`/`limit`) — coeficientes de ordem
+> inferior `~10^{-40}` (efetivamente zero), coeficiente líder batendo com
+> `K` a `<5\times10^{-25}` relativo; confirmou o cancelamento de polo
+> simbolicamente (reproduzindo de forma independente o mesmo obstáculo
+> computacional de timeout que a própria frente já havia divulgado);
+> reproduziu a demonstração numérica central "antes/depois" com grade
+> própria fresca até `n=10^{10}`; leu os scripts `.py` finais e confirmou
+> que o bug de arredondamento de `λ` foi genuinamente corrigido, não
+> apenas narrado; confirmou o limite `γ\to0` simbolicamente e
+> numericamente. **Zero erros matemáticos, numéricos ou de contabilidade
+> encontrados após esforço adversarial genuíno.** Um achado de
+> severidade BAIXA (processo): a frente divulgou ter executado um
+> `git status --porcelain` de leitura, uma violação técnica da instrução
+> "nenhum comando git" do seu próprio mandato — confirmado pelo referee,
+> via `git log`/`git status`/`git diff --stat`, como tendo efeito real
+> zero (nenhum commit, nenhuma mudança staged/modificada).
+>
+> **Veredito: SOUND — ACCEPT for catalogue.** `C(γ)` permanece
+> inteiramente ABERTO. Item 2 do diagnóstico do Estágio 56/57 está
+> completado; item 3 (soma externa, atacado em paralelo pela frente
+> irmã da onda 33) e item 4 (montagem conjunta) permanecem intocados.
+
+Ver
+`.../joint_saddle_point_attempt/gamma_stirling_mfact_uniform_attempt/ATTEMPT.md`
+e
+`.../joint_saddle_point_attempt/gamma_stirling_mfact_uniform_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado. O que muda é que o perfil mesoscala
+COMPLETO `T_prof(λ,γ)` — não apenas a integral interna em `t` (Estágio
+57) — agora tem uma correção de próxima ordem em forma fechada, livre de
+polo (uma vez combinada com o `Δ` de Estágio 57), com confirmação
+numérica de precisão `O(n^{-1})`. O hiato remanescente para
+`D(γ)`/`C(γ)` é agora dois itens nomeados (soma externa; montagem
+conjunta), não três. Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória/assintótica pura interna a este
+arquivo.
+
+## [Extensão, Estágio 59 — 2026-08-29]
+
+**Onda 33, frente (b), `DISC-DEC-148` (`GAMMA-OUTER-SUM-POISSON-
+ATTEMPT`).** Alvo: item 3 do diagnóstico do Estágio 56/57 — um
+tratamento tipo Euler–Maclaurin/Poisson da própria soma externa em `m`,
+quantificando o hiato entre a soma discreta `S_n'(γ)=\Sigma_m
+\mathrm{term}_m(n,γ)` e a integral contínua `G_n(γ)=\sqrt n\int
+T_{\mathrm{prof}}(λ,γ)\,dλ` que ela já é conhecida por aproximar em
+ordem líder (Estágio 56).
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — como o mandato antecipou.** Uma
+> nova correção fechada (até um resto explícito, rigorosamente
+> exponencialmente pequeno em `n`) para o hiato soma-discreta-vs-
+> integral-contínua é derivada via soma de Poisson: como
+> `T_{\mathrm{prof}}(λ,γ)` é uma função gaussiana par, entire, em `λ`
+> (provado diretamente, não apenas afirmado), a soma de Poisson dá, em
+> forma fechada,
+>
+> **`\Sigma_{m=0}^\infty T_{\mathrm{prof}}(m/\sqrt n,γ) = G_n(γ) +
+> \dfrac1{2γ} + O\big(\sqrt n\,e^{-c(γ)n}\big)`, `\;c(γ)=
+> 2π^2γ/(2-γ)`.**
+>
+> O novo termo `1/(2γ)` é exatamente a correção de borda trapezoidal
+> clássica de Euler–Maclaurin `\phi(0)/2` para uma "soma de borda" cujo
+> máximo fica no limite `m=0` do domínio (`T_prof` é decrescente para
+> `λ>0`, não de pico interior) — mecanismo genuinamente diferente das
+> correções das frentes irmãs (não uma correção por-termo ao somando,
+> mas uma correção ao PRÓPRIO ATO de somar sobre a rede de inteiros).
+>
+> **Confirmado simbolicamente**: derivadas ímpares de `T_prof` anulam-se
+> exatamente em `λ=0`; a transformada de Fourier da gaussiana bate
+> exatamente com a identidade de soma de Poisson.
+>
+> **Confirmado numericamente de duas formas independentes**: (i) contra
+> a soma-proxy `T_prof` sozinha, resíduo decaindo com inclinação log-log
+> convergindo para a taxa prevista `-c(γ)`, decaimento genuinamente
+> EXPONENCIAL, não as taxas de lei de potência `O(n^{-1/2})`/`O(n^{-1})`
+> das frentes irmãs; (ii) contra a soma discreta VERDADEIRA `S_n'(γ)`,
+> via uma decomposição exata isolando um "somatório de crossover"
+> residual `O(1)` (não `o(1)`) — `1/(2γ)` sozinho não explica todo o
+> hiato empírico `S_n'-G_n`, mas isola precisamente essa peça remanescente
+> como uma soma discreta específica, bem definida, diretamente
+> computável, em vez de deixar todo o hiato como uma incógnita
+> indiferenciada.
+>
+> **Uma observação numérica bônus não-planejada, explicitamente marcada
+> como dependente-de-conjectura, corrigida pelo referee (severidade
+> MODERADA)**: a alegação de que a razão de duplicação do somatório de
+> crossover fica em `0{,}708`-`0{,}713` (perto de `1/\sqrt2`) "para três
+> duplicações consecutivas... nos três `γ` testados" não é sustentada
+> pelos próprios dados registrados da frente: em `γ=0{,}5` a razão
+> `400\to800` é `0{,}691` (abaixo do piso reivindicado), e em `γ=0{,}8` é
+> `0{,}569` (já em território de "afastamento" na SEGUNDA duplicação, não
+> na terceira como alegado). O padrão `1/\sqrt2` limpo vale apenas para
+> UMA duplicação em `γ=0{,}8`, duas em `γ=0{,}5`, três em `γ=0{,}3` — o
+> ponto de afastamento é ele próprio dependente de `γ`. Corrigido por
+> correção datada; a seção inteira já era explicitamente divulgada como
+> "NÃO um fato provado ou mesmo confiantemente conjecturado", e a
+> correção não afeta o mandato real desta frente (a fórmula fechada de
+> soma de Poisson da Seção 2, confirmada correta).
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente via `mpmath` fresco (dps=60) da fórmula de soma de Poisson
+> completa (integral + `1/(2γ)` + primeiros 5 termos de correção de
+> Fourier) contra a soma direta, batendo a ~60 dígitos decimais em 3
+> pontos `(n,γ)` frescos.
+>
+> Referee hostil dedicado: re-derivou a fórmula geral de soma de Poisson
+> por caminho algébrico diferente, confirmada numericamente em 16 pontos
+> `(n,γ)` frescos (`γ` disjunto da própria grade da frente); confirmou a
+> paridade de `T_prof` em toda a reta real; confirmou a identidade de
+> decomposição exata para a soma discreta VERDADEIRA em 18 pontos
+> frescos via a definição de soma-dupla primária (nenhuma quadratura);
+> encontrou o achado de correção acima. Dois achados adicionais de
+> severidade BAIXA/expositiva (nenhum afetando resultado numérico).
+>
+> **Veredito: SOUND WITH ISSUES, uma correção (moderada, confinada a uma
+> seção já divulgada como não-rigorosa) — ACCEPT for catalogue.** `C(γ)`
+> permanece inteiramente ABERTO. Item 3 do diagnóstico do Estágio 56/57
+> está completado para a soma-proxy `T_prof`; item 4 (montagem conjunta)
+> permanece intocado.
+
+Ver
+`.../joint_saddle_point_attempt/gamma_outer_sum_poisson_attempt/ATTEMPT.md`
+e
+`.../joint_saddle_point_attempt/gamma_outer_sum_poisson_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado. O que muda é que o hiato entre a
+soma discreta externa em `m` e sua aproximação contínua `G_n(γ)` agora
+tem uma correção de próxima ordem em forma fechada (`1/(2γ)`) com um
+resto rigorosamente exponencialmente pequeno, e o "somatório de
+crossover" residual — a peça que ainda falta para fechar totalmente o
+hiato `S_n'-G_n` — está agora precisamente isolado como um objeto
+específico e diretamente computável, acoplado aos itens 1-2 (já
+fechados pelas duas frentes anteriores) exatamente como o próprio
+Estágio 56 antecipou. Combinando os Estágios 57-59: itens 1, 2 e 3 do
+diagnóstico original de 4 itens estão agora completados; apenas o item
+4 (montagem conjunta de duas variáveis com resto `o(1)` explícito)
+permanece intocado. Nenhuma alegação de progresso em Millennium
+Problem; matemática combinatória/assintótica pura interna a este
+arquivo.

@@ -1,0 +1,19 @@
+Expanding A, g'''(t*), g''''(t*) SEPARATELY at mesoscale (fast, each
+should terminate quickly, matching predecessor's own disclosed timing):
+  [A] leading terms in eps (elapsed 0.6s): gamma**2*lambda/epsilon - 2*gamma*lambda/epsilon + 4*lambda/epsilon + gamma**2/epsilon**2 + 2*gamma/epsilon**2 + gamma**2/(epsilon**3*lambda)
+  [g'''(t*)] leading terms in eps (elapsed 0.4s): -4*gamma**3*lambda/epsilon - 12*gamma*lambda/epsilon + 12*lambda/epsilon - 2*gamma**3/epsilon**2 - 6*gamma**2/epsilon**2 + 12*gamma/epsilon**2 + 6*gamma**2/(epsilon**3*lambda) + 2*gamma**3/(epsilon**4*lambda**2)
+  [g''''(t*)] leading terms in eps (elapsed 0.6s): -18*gamma**4*lambda/epsilon - 12*gamma**2*lambda/epsilon + 96*gamma*lambda/epsilon - 96*lambda/epsilon - 6*gamma**4/epsilon**2 + 72*gamma**2/epsilon**2 - 96*gamma/epsilon**2 + 24*gamma**3/(epsilon**3*lambda) - 60*gamma**2/(epsilon**3*lambda) - 24*gamma**3/(epsilon**4*lambda**2) - 6*gamma**4/(epsilon**5*lambda**3)
+
+Combining algebraically: Delta_pred = g''''/(8A^2) + 5(g''')^2/(24A^3)
+  Delta_pred (leading, combined): epsilon/(12*lambda)
+  coefficient of eps^1: 1/(12*lambda)  (expected: 1/(12*lambda))
+CONFIRMED (fast independent route, separate-then-combine): Delta_pred ~ [1/(12*lambda)]/sqrt(n).
+
+Pole-cancellation re-check:
+  K + Delta_pred_coeff = lambda*(gamma*(9 - lambda**2) - 6)/(6*gamma)   (claimed: -lambda**3/6 + 3*lambda/2 - lambda/gamma )
+  symbolic difference: 0
+  limit as lambda->0: 0
+CONFIRMED: pole cancellation holds, independently re-derived via a
+computationally distinct (separate-expand-then-combine) route after
+the naive single-series approach independently hit the same 250s+
+wall the predecessor front itself disclosed.

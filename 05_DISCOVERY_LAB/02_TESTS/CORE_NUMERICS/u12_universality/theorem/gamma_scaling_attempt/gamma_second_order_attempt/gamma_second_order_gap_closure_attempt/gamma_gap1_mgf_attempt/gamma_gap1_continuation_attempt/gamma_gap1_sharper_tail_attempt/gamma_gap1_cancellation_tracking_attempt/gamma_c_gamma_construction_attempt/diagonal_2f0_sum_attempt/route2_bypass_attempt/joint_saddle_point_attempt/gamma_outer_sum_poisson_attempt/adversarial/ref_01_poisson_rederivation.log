@@ -1,0 +1,94 @@
+==============================================================================
+PART A: independent symbolic re-derivation of the Poisson closed form
+==============================================================================
+phi_n(x) := T_prof(x/sqrt(n), gamma) = exp(x**2*(gamma - 2)/(2*gamma*n))/gamma
+int_{-inf}^{inf} phi_n(x) dx [full-line Gaussian, cited] = sqrt(2)*sqrt(pi)*sqrt(n)/(sqrt(gamma)*sqrt(2 - gamma))
+int_0^{inf} phi_n(x) dx = (by evenness, Part B) half of that = sqrt(2)*sqrt(pi)*sqrt(n)/(2*sqrt(gamma)*sqrt(2 - gamma))
+phi_n_hat(k) = sqrt(2)*sqrt(pi)*sqrt(n)*exp(2*pi**2*gamma*k**2*n/(gamma - 2))/(sqrt(gamma)*sqrt(2 - gamma))
+Consistency check phi_n_hat(0) / (full-line integral) [PASS if 1] = 1
+Boundary term phi_n(0)/2 = 1/(2*gamma)  [claimed: 1/(2*gamma)]
+Rate constant c(gamma) := pi^2/alpha = -2*pi**2*gamma/(gamma - 2)  [claimed: 2*pi^2*gamma/(2-gamma)]
+
+Independent re-derivation CONFIRMS the front's closed form exactly:
+  sum_{m=0}^inf phi_n(m) = int_0^inf phi_n dx + 1/(2*gamma)
+                            + sum_{k=1}^inf phi_n_hat(k),
+  phi_n_hat(k) = (1/gamma) sqrt(pi n / alpha) exp(-pi^2 k^2 n / alpha),
+  dominant k=1 term ~ (1/gamma) sqrt(pi n/alpha) exp(-c(gamma) n),
+  c(gamma) = 2 pi^2 gamma / (2-gamma).
+
+==============================================================================
+PART B: evenness of T_prof(lambda,gamma) on ALL of R -- independent check
+==============================================================================
+
+T_prof(lambda,gamma) = (1/gamma) exp[-((2-gamma)/(2*gamma)) * lambda^2] is,
+AS A CLOSED-FORM EXPRESSION, manifestly a function of lambda ONLY through
+lambda^2 -- so T_prof(-lambda,gamma) = T_prof(lambda,gamma) is an immediate
+algebraic consequence, not requiring any delicate branch-cut or domain
+argument.  This is checked below both by direct symbolic substitution and
+by confirming there is no hidden sqrt(lambda) / lambda^(odd) / log(lambda)
+dependence anywhere in the closed form (which WOULD make lambda -> -lambda
+ill-defined or multivalued).
+
+Using a symbol declared REAL (not positive) -- genuinely testing lambda<0:
+T_prof(lambda,gamma) - T_prof(-lambda,gamma), simplified = 0
+Taylor series of T_prof in lambda about 0, odd-power coefficients (orders 1,3,...,11):
+  [0, 0, 0, 0, 0, 0]
+All odd coefficients vanish -- confirms T_prof is entire and even on ALL of R,
+not merely 'even by symmetry of the formula' but genuinely single-valued and
+analytic for lambda<0 too (no sqrt/log/lambda^(non-integer) term present).
+
+Subtlety check: does extending phi_n from {physical m=0,1,2,...} to all of
+Z via the CLOSED-FORM T_prof (not the actual combinatorial term_m, which
+has no meaning for m<0) introduce any inconsistency?
+
+NO -- the Poisson-summation manipulation operates ENTIRELY on the analytic
+proxy phi_n(x) = T_prof(x/sqrt(n),gamma), which by construction (an explicit
+elementary Gaussian formula) is defined and Schwartz-class for ALL real x,
+with no reference to the combinatorial meaning of term_m(n,gamma) at
+negative-integer m (which is genuinely undefined / meaningless). This is a
+purely ANALYTIC extension of a closed-form function, not a claim that
+'term_{-1}(n,gamma)' means anything combinatorially. The front's own
+decomposition (Part C above) never evaluates phi_n at a negative integer and
+attaches combinatorial meaning to it -- phi_n(-m) for m>0 is used only as an
+intermediate bookkeeping device inside the identity
+sum_{m in Z} phi_n(m) = phi_n(0) + 2 sum_{m=1}^inf phi_n(m), which is valid
+purely because phi_n(-m)=phi_n(m) as ANALYTIC values of the SAME closed-form
+function, regardless of whether "term_{-m}" would mean anything. No
+subtlety or gap found here.
+
+
+==============================================================================
+PART C: numeric confirmation at FRESH (n,gamma) points (disjoint from the
+        front's own script 03 grid: gamma in {0.2,0.5,0.8}, n in
+        {1,2,3,4,6,8,10,13,16,20,30})
+==============================================================================
+  gamma    n   dps                   direct_sum           closed_form(+corr)       |diff| residual_alone   ratio_to_fhat1
+  0.150    5    48   8.65691640792106120728e+00   8.65691640792106120728e+00    1.368e-48   3.560845e-03       1.00000000
+  0.150   11    52   1.12242018514797123885e+01   1.12242018514797123885e+01    3.341e-52   3.566942e-07       1.00000000
+  0.150   17    56   1.31429696244808926764e+01   1.31429696244808926764e+01    2.039e-56   2.994717e-11       1.00000000
+  0.150   25    62   1.52292646795598578535e+01   1.52292646795598578535e+01    1.945e-62   9.987961e-17       1.00000000
+  --> gamma=0.15: empirical log-residual slope = -1.561209, predicted -c(gamma) = -1.600476, ratio = 0.975465
+  0.450    5    57   4.46673157870875936482e+00   4.46673157870875936482e+00    1.912e-57   2.413589e-12       1.00000000
+  0.450   11    72   6.08830059812051516133e+00   6.08830059812051516133e+00    5.660e-73   4.177411e-27       1.00000000
+  0.450   17    87   7.29856952767035416230e+00   7.29856952767035416230e+00    2.011e-87   6.059933e-42       1.00000000
+  0.450   25   107   8.61450658334368668534e+00   8.61450658334368668534e+00   1.363e-107   9.027971e-62       1.00000000
+  --> gamma=0.45: empirical log-residual slope = -5.691471, predicted -c(gamma) = -5.730738, ratio = 0.993148
+  0.650    5    65   3.76095375448253577133e+00   3.76095375448253577133e+00    4.748e-66   1.377653e-20       1.00000000
+  0.650   11    90   5.20667306463746371037e+00   5.20667306463746371037e+00    9.818e-91   3.507333e-45       1.00000000
+  0.650   17   115   6.28569538251749992952e+00   6.28569538251749992952e+00   1.015e-115   7.483955e-70       1.00000000
+  0.650   25   148   7.45892673410232021070e+00   7.45892673410232021070e+00   7.821e-149  8.657212e-103       1.00000000
+  --> gamma=0.65: empirical log-residual slope = -9.464797, predicted -c(gamma) = -9.504063, ratio = 0.995868
+  0.950    5    83   3.33232109924604102957e+00   3.33232109924604102957e+00    1.235e-83   9.293423e-39       1.00000000
+  0.950   11   130   4.68829425609691430310e+00   4.68829425609691430310e+00   9.017e-131   4.001803e-85       1.00000000
+  0.950   17   176   5.70033392964291252270e+00   5.70033392964291252270e+00   2.369e-176  1.444283e-131       1.00000000
+  0.950   25   238   6.80073440735002865409e+00   6.80073440735002865409e+00   1.536e-238  1.562750e-193       1.00000000
+  --> gamma=0.95: empirical log-residual slope = -17.820017, predicted -c(gamma) = -17.859284, ratio = 0.997801
+
+CONCLUSION Part C: at every one of 16 FRESH (gamma,n) points (gamma disjoint
+from the front's own script 03 grid), the closed form (continuum integral +
+1/(2*gamma) + first 6 Fourier corrections) reproduces the direct high-precision
+summation to within the requested tolerance, and the residual-alone (direct
+sum minus continuum minus boundary term) tracks the predicted exponential
+rate c(gamma) with slope ratio close to 1 in every case. The Poisson-summation
+closed form is INDEPENDENTLY RE-CONFIRMED.
+Slope ratios (should -> 1): [0.9754654444163475, 0.9931480069988764, 0.9958684012424986, 0.9978013129419145]

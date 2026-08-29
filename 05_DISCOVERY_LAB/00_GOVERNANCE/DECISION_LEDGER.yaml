@@ -9701,3 +9701,118 @@ decisions:
       (U1), (U2), (C'), (U), (B), (H-ces), C(gamma) permanecem
       exatamente como registrados ate que as frentes retornem e sejam
       integradas com a mesma disciplina.
+
+  - id: DISC-DEC-149
+    date: 2026-08-29
+    decision: >
+      Onda 33 frente (a) GAMMA-STIRLING-MFACT-UNIFORM-ATTEMPT integrada
+      como Estagio 58 em THEOREM.md. C(gamma) continua inteiramente
+      ABERTO. Alvo: item 2 do diagnostico do Estagio 56/57 -- a correcao
+      tipo Stirling para as pecas m!/prefixo-binomial de term_m(n,gamma).
+      Nova identidade algebrica exata term_m=F*I,
+      F(n,m,gamma)=(gamma/n)^m*(n+m+1)!/[(n-m)!*m!], derivada do zero.
+      Nova forma fechada Delta_m(n,m,gamma)=K(lambda,gamma)/sqrt(n),
+      K=3*lambda/2-lambda^3/6-1/(12*lambda)-lambda/gamma, confirmada por
+      duas rotas simbolicas independentes e mpmath sem maquinaria de
+      serie ate n=10^12. Achado limpo: o polo -1/(12*lambda) de Delta_m
+      cancela exatamente contra o polo +1/(12*lambda) do Delta ja citado
+      do Estagio 57, dando Delta_total livre de polo em lambda. Um
+      limite genuino permanece: o termo -lambda/gamma exige gamma
+      limitado longe de 0. Autocaptura metodologica divulgada (bug de
+      arredondamento de lambda nominal vs real, mascarando a taxa
+      O(n^-1) verdadeira em metade dos pontos testados) -- encontrado e
+      corrigido antes de finalizar. Confirmacao numerica central:
+      inclinacao log-log -0.500->-0.500 (nao corrigido) melhorando para
+      -1.000 limpo (correcao combinada) em 9 pontos ate n=10^12.
+      Spot-check da sessao antes do despacho: re-derivacao independente
+      a mao de F(n,m,gamma) das definicoes primarias; teste numerico
+      mpmath fresco confirmando B*sqrt(n)->K(lambda,gamma) com residuo
+      encolhendo por fator ~10 a cada aumento de 100x em n -- zero
+      discrepancia.
+      Referee hostil dedicado: re-derivou a fatoracao F do zero (sympy
+      exato + 200 triplas fracionarias frescas); confirmou o anulamento
+      de todos os termos ate ordem zero por metodo genuinamente
+      diferente (ajuste de curva Vandermonde numerico puro, dps=150);
+      confirmou o cancelamento de polo simbolicamente; reproduziu a
+      demonstracao numerica antes/depois com grade propria fresca ate
+      n=10^10; leu os scripts .py finais e confirmou que o bug de
+      arredondamento foi genuinamente corrigido; confirmou o limite
+      gamma->0. Zero erros matematicos, numericos ou de contabilidade
+      encontrados apos esforco adversarial genuino. Um achado de
+      severidade BAIXA (processo, nao matematico): a frente divulgou ter
+      executado um git status --porcelain de leitura, violacao tecnica
+      da instrucao "nenhum comando git" -- confirmado pelo referee como
+      tendo efeito real zero no repositorio.
+      Onda 33 agora com 1/2 frentes integradas -- frente (b)
+      GAMMA-OUTER-SUM-POISSON-ATTEMPT tambem retornou, integrada nesta
+      mesma sessao logo apos esta entrada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 58, ~85 linhas);
+      DECISION_LEDGER.yaml (este arquivo); DISCOVERY_LAB_STATE.md.
+      Nenhuma edicao na propria ATTEMPT.md da frente (zero correcoes
+      necessarias -- veredito SOUND sem achados matematicos).
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria/assintotica pura interna a este arquivo. Nenhum
+      resultado de registro anterior invalidado -- Estagios 54, 56, 57
+      permanecem exatamente como registrados; C(gamma) permanece nao
+      construido, nao limitado, nao caracterizado como serie
+      convergente com resto provado.
+
+  - id: DISC-DEC-150
+    date: 2026-08-29
+    decision: >
+      Onda 33 frente (b) GAMMA-OUTER-SUM-POISSON-ATTEMPT integrada como
+      Estagio 59 em THEOREM.md. C(gamma) continua inteiramente ABERTO.
+      Alvo: item 3 do diagnostico do Estagio 56/57 -- tratamento tipo
+      Euler-Maclaurin/Poisson da soma externa em m. Nova correcao
+      fechada via soma de Poisson (T_prof e gaussiana par, entire, em
+      lambda -- provado, nao apenas afirmado):
+      Sum_{m=0}^inf T_prof(m/sqrt(n),gamma) = G_n(gamma) + 1/(2*gamma) +
+      O(sqrt(n)*e^(-c(gamma)*n)), c(gamma)=2*pi^2*gamma/(2-gamma). O novo
+      termo 1/(2*gamma) e a correcao de borda trapezoidal classica de
+      Euler-Maclaurin para uma "soma de borda" cujo maximo fica no
+      limite m=0, mecanismo genuinamente diferente das correcoes das
+      frentes irmas. Confirmado simbolicamente (paridade de T_prof,
+      transformada de Fourier da gaussiana) e numericamente de duas
+      formas: contra a soma-proxy T_prof (decaimento exponencial
+      genuino, nao lei de potencia) e contra a soma discreta VERDADEIRA
+      S_n'(gamma) (decomposicao exata isolando um "somatorio de
+      crossover" residual O(1), nao o(1), precisamente isolado mas nao
+      resolvido).
+      Um achado real de correcao (severidade MODERADA, confinado a uma
+      secao ja divulgada como nao-rigorosa): a alegacao de que a razao
+      de duplicacao do somatorio de crossover fica em 0.708-0.713 "para
+      tres duplicacoes consecutivas... nos tres gamma testados" nao e
+      sustentada pelos proprios dados da frente -- em gamma=0.5 a razao
+      400->800 e 0.691 (abaixo do piso), em gamma=0.8 e 0.569 (ja
+      afastado na segunda duplicacao, nao na terceira). O ponto de
+      afastamento e ele proprio dependente de gamma. Corrigido por
+      correcao datada; a secao inteira ja era explicitamente divulgada
+      como "NAO um fato provado ou mesmo confiantemente conjecturado",
+      e a correcao nao afeta o mandato real da frente (a formula fechada
+      de soma de Poisson, confirmada correta).
+      Spot-check da sessao antes do despacho: re-derivacao independente
+      via mpmath fresco (dps=60) da formula de soma de Poisson completa
+      contra a soma direta, batendo a ~60 digitos decimais em 3 pontos
+      (n,gamma) frescos.
+      Referee hostil dedicado: re-derivou a formula geral de soma de
+      Poisson por caminho algebrico diferente, confirmada em 16 pontos
+      (n,gamma) frescos; confirmou a paridade de T_prof; confirmou a
+      identidade de decomposicao exata para a soma discreta VERDADEIRA
+      em 18 pontos frescos via definicao de soma-dupla primaria (nenhuma
+      quadratura); encontrou o achado de correcao acima. Dois achados
+      adicionais de severidade BAIXA/expositiva.
+      Onda 33 completa -- 2/2 frentes integradas.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 59, ~75 linhas);
+      .../joint_saddle_point_attempt/gamma_outer_sum_poisson_attempt/ATTEMPT.md
+      (1 correcao datada); DECISION_LEDGER.yaml (este arquivo);
+      DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria/assintotica pura interna a este arquivo. Nenhum
+      resultado de registro anterior invalidado -- Estagios 54, 56, 57,
+      58 permanecem exatamente como registrados; C(gamma) permanece nao
+      construido, nao limitado, nao caracterizado como serie
+      convergente com resto provado.

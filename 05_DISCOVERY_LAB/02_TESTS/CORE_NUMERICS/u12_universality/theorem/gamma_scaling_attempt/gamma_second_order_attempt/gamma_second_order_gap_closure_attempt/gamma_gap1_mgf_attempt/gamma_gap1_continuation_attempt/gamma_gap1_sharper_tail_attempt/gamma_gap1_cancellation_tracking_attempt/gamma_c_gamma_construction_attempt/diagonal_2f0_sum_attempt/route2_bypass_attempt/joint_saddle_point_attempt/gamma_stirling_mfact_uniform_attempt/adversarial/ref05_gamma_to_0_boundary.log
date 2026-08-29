@@ -1,0 +1,32 @@
+==========================================================================================
+PART A: symbolic gamma->0 behavior of K(lambda,gamma)
+==========================================================================================
+lim_{gamma->0+} K(lambda,gamma) = -oo  (lambda fixed, positive)
+CONFIRMED: unbounded (diverges to -infinity for lambda>0) as gamma->0+,
+independently re-derived by direct sympy.limit on the closed form.
+
+ln T_prof(lambda,gamma) = -ln(gamma) - ((2-gamma)/(2*gamma))*lambda^2
+  -> already blows up at LEADING order (eps^0) as gamma->0; this is
+     a property of T_prof itself (cited, Estagio 56), not of K. The
+     eps^1-order K(lambda,gamma)'s own -lambda/gamma term is an
+     ADDITIONAL, separate divergence on top of that, with no other
+     gamma-dependent piece anywhere in K, Delta, or T_prof's OWN
+     eps^1-order structure to offset it.
+
+==========================================================================================
+PART B: independent numeric curve-fit re-confirmation at FRESH small
+gamma values (0.15, 0.08, 0.04, 0.02 -- overlapping the front's own
+gamma=0.02 stress point only at the smallest value, as a direct check)
+==========================================================================================
+lambda fixed = 1.0
+  gamma=0.15: fitted K=-5.416666667  claimed K=-5.416666667  rel.err=3.694e-25  (-lambda/gamma piece = -6.6666667)
+  gamma=0.08: fitted K=-11.25  claimed K=-11.25  rel.err=1.337e-24  (-lambda/gamma piece = -12.5)
+  gamma=0.04: fitted K=-23.75  claimed K=-23.75  rel.err=5.414e-24  (-lambda/gamma piece = -25.0)
+  gamma=0.02: fitted K=-48.75  claimed K=-48.75  rel.err=2.178e-23  (-lambda/gamma piece = -50.0)
+
+CONFIRMED: the fitted leading coefficient tracks the closed-form
+K(lambda,gamma) cleanly down to gamma=0.02 (matching the front's own
+stress point), growing in magnitude ~1/gamma exactly as the closed
+form predicts -- an independent numeric re-confirmation of the
+gamma->0 boundary claim, via curve-fitting rather than trusting the
+front's own script 05 at face value.

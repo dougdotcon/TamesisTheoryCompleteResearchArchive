@@ -1,0 +1,14 @@
+Delta_m coefficient K(lambda,gamma)      = -lambda**3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+predecessor Delta coefficient (CITED)    = 1/(12*lambda)
+SUM (Delta_m + Delta) coefficient        = lambda*(gamma*(9 - lambda**2) - 6)/(6*gamma)
+Factored: -lambda*(gamma*lambda**2 - 9*gamma + 6)/(6*gamma)
+lambda=1, gamma=0.5: K=-0.750000, total=-0.666667, check = 3*lam/2 - lam^3/6 - lam/gamma = -0.666667
+lambda=2, gamma=0.3: K=-5.041667, total=-5.000000, check = 3*lam/2 - lam^3/6 - lam/gamma = -5.000000
+lambda=0.5, gamma=0.8: K=-0.062500, total=0.104167, check = 3*lam/2 - lam^3/6 - lam/gamma = 0.104167
+
+Confirmed: the +1/(12*lambda) and -1/(12*lambda) pieces of Delta_m and
+the predecessor's Delta cancel EXACTLY and symbolically -- a genuine,
+checkable algebraic fact, not a coincidence of rounding.
+
+Delta_total(lambda,gamma) := Delta_m + Delta
+                            = (3*lambda/2 - lambda^3/6 - lambda/gamma) / sqrt(n)

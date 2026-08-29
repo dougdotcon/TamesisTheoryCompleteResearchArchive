@@ -1,0 +1,42 @@
+==============================================================================
+PART A: T(n,m) Beta-integral closed form vs direct double-sum definition
+==============================================================================
+Checked 150 (n,m,gamma) triples, n in [6,30], m in [0,5], 5 gamma values.
+Max relative error, direct double-sum vs Beta-integral closed form: 1.0414668481411906818260672534169880466060286992911e-50
+FACT (A) re-verified: PASS (closed form matches primary combinatorial definition).
+
+==============================================================================
+PART B: term_m(n,gamma) = (gamma^m/n^m) m! T(n,m); term_0 exact limit
+==============================================================================
+term_0(n,gamma) direct-sum vs claimed closed form (1-(1-g)^(n+1))/g, and limit 1/g:
+  gamma=0.3, n=50: T0_direct=3.333333291369, T0_closed=3.333333291369, rel_err=1.604e-51
+  gamma=0.3, n=500: T0_direct=3.333333333333, T0_closed=3.333333333333, rel_err=1.283e-50
+  gamma=0.3, n=5000: T0_direct=3.333333333333, T0_closed=3.333333333333, rel_err=1.283e-50
+  gamma=0.3: T0(n=5000)=3.333333333333333 vs 1/gamma=3.333333333333333, diff=0.000e+00
+  gamma=0.5, n=50: T0_direct=2.000000000000, T0_closed=2.000000000000, rel_err=0.000e+00
+  gamma=0.5, n=500: T0_direct=2.000000000000, T0_closed=2.000000000000, rel_err=0.000e+00
+  gamma=0.5, n=5000: T0_direct=2.000000000000, T0_closed=2.000000000000, rel_err=0.000e+00
+  gamma=0.5: T0(n=5000)=2.000000000000000 vs 1/gamma=2.000000000000000, diff=0.000e+00
+  gamma=0.8, n=50: T0_direct=1.250000000000, T0_closed=1.250000000000, rel_err=8.553e-51
+  gamma=0.8, n=500: T0_direct=1.250000000000, T0_closed=1.250000000000, rel_err=1.069e-50
+  gamma=0.8, n=5000: T0_direct=1.250000000000, T0_closed=1.250000000000, rel_err=1.069e-50
+  gamma=0.8: T0(n=5000)=1.250000000000000 vs 1/gamma=1.250000000000000, diff=0.000e+00
+FACT (C) re-verified: PASS (term_0 -> 1/gamma exactly, exponentially fast).
+
+==============================================================================
+PART D: T_prof(lambda,gamma) closed form -- symbolic re-derivation sanity
+==============================================================================
+T_prof(lambda,gamma) [cited, Estagio 56 finding 2] = exp(-lambda**2*(2 - gamma)/(2*gamma))/gamma
+T_prof(0,gamma) = 1/gamma  (matches term_0 limit 1/gamma: PASS)
+int_0^oo T_prof dlambda [via textbook Gaussian formula, a>0 fresh symbol] = sqrt(2)*sqrt(pi)/(2*sqrt(gamma)*sqrt(2 - gamma))
+target (1/2) sqrt(pi/beta), beta=gamma(2-gamma)/2 = sqrt(2)*sqrt(pi)*sqrt(-1/(gamma - 2))/(2*sqrt(gamma))
+ratio (integral_val / target), force-simplified = 1  (PASS if == 1)
+FACT (D) re-verified via textbook substitution route: PASS (ratio == 1 exactly).
+Independent mpmath numeric cross-check (dps 50), 6 rational gamma:
+  gamma=0.142857: int=2.433247592652666, target=2.433247592652666, rel_err=0.000e+00
+  gamma=0.333333: int=1.681497364919379, target=1.681497364919379, rel_err=1.590e-51
+  gamma=0.500000: int=1.447202509116535, target=1.447202509116535, rel_err=0.000e+00
+  gamma=0.666667: int=1.329340388179137, target=1.329340388179137, rel_err=0.000e+00
+  gamma=0.800000: int=1.279158384933111, target=1.279158384933111, rel_err=0.000e+00
+  gamma=0.900000: int=1.259628102401054, target=1.259628102401054, rel_err=2.122e-51
+FACT (D) numeric cross-check: PASS at all 6 points.

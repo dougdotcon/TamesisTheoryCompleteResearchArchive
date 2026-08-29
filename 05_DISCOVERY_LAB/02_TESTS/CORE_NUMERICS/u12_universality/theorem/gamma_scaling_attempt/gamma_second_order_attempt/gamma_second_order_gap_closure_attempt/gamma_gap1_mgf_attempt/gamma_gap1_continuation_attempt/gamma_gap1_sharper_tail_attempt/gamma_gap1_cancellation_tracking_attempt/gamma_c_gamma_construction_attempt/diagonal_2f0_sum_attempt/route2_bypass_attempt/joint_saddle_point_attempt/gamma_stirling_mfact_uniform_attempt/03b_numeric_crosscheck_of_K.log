@@ -1,0 +1,58 @@
+==========================================================================================
+Numeric check: sqrt(n) * B(n,m,gamma) -> K(lambda,gamma) as n->infty
+==========================================================================================
+
+--- lambda=0.3, gamma=0.5  (K_predicted = -0.43227778) ---
+  n=        10,000  m=        30  sqrt(n)*B = -0.42291217
+  n=     1,000,000  m=       300  sqrt(n)*B = -0.43133940
+  n=   100,000,000  m=     3,000  sqrt(n)*B = -0.43218392
+  n=10,000,000,000  m=    30,000  sqrt(n)*B = -0.43226839
+  n=1,000,000,000,000  m=   300,000  sqrt(n)*B = -0.43227684
+  -> at largest n, sqrt(n)*B = -0.43227684 vs K_predicted = -0.43227778  (rel diff 2.171e-06)
+
+--- lambda=1.0, gamma=0.5  (K_predicted = -0.75000000) ---
+  n=        10,000  m=       100  sqrt(n)*B = -0.73993410
+  n=     1,000,000  m=     1,000  sqrt(n)*B = -0.74899938
+  n=   100,000,000  m=    10,000  sqrt(n)*B = -0.74989999
+  n=10,000,000,000  m=   100,000  sqrt(n)*B = -0.74999000
+  n=1,000,000,000,000  m= 1,000,000  sqrt(n)*B = -0.74999900
+  -> at largest n, sqrt(n)*B = -0.74999900 vs K_predicted = -0.75000000  (rel diff 1.333e-06)
+
+--- lambda=2.0, gamma=0.5  (K_predicted = -2.37500000) ---
+  n=        10,000  m=       200  sqrt(n)*B = -2.27396960
+  n=     1,000,000  m=     2,000  sqrt(n)*B = -2.36498931
+  n=   100,000,000  m=    20,000  sqrt(n)*B = -2.37399989
+  n=10,000,000,000  m=   200,000  sqrt(n)*B = -2.37490000
+  n=1,000,000,000,000  m= 2,000,000  sqrt(n)*B = -2.37499000
+  -> at largest n, sqrt(n)*B = -2.37499000 vs K_predicted = -2.37500000  (rel diff 4.211e-06)
+
+--- lambda=0.5, gamma=0.2  (K_predicted = -1.93750000) ---
+  n=        10,000  m=        50  sqrt(n)*B = -1.94788212
+  n=     1,000,000  m=       500  sqrt(n)*B = -1.93860255
+  n=   100,000,000  m=     5,000  sqrt(n)*B = -1.93761087
+  n=10,000,000,000  m=    50,000  sqrt(n)*B = -1.93751109
+  n=1,000,000,000,000  m=   500,000  sqrt(n)*B = -1.93750111
+  -> at largest n, sqrt(n)*B = -1.93750111 vs K_predicted = -1.93750000  (rel diff 5.726e-07)
+
+--- lambda=1.5, gamma=0.8  (K_predicted = -0.24305556) ---
+  n=        10,000  m=       150  sqrt(n)*B = -0.23133963
+  n=     1,000,000  m=     1,500  sqrt(n)*B = -0.24187230
+  n=   100,000,000  m=    15,000  sqrt(n)*B = -0.24293711
+  n=10,000,000,000  m=   150,000  sqrt(n)*B = -0.24304371
+  n=1,000,000,000,000  m= 1,500,000  sqrt(n)*B = -0.24305437
+  -> at largest n, sqrt(n)*B = -0.24305437 vs K_predicted = -0.24305556  (rel diff 4.874e-06)
+
+--- lambda=3.0, gamma=0.3  (K_predicted = -10.02777778) ---
+  n=        10,000  m=       300  sqrt(n)*B = -4.92120889
+  n=     1,000,000  m=     3,000  sqrt(n)*B = -9.51645315
+  n=   100,000,000  m=    30,000  sqrt(n)*B = -9.97667417
+  n=10,000,000,000  m=   300,000  sqrt(n)*B = -10.02266774
+  n=1,000,000,000,000  m= 3,000,000  sqrt(n)*B = -10.02726678
+  -> at largest n, sqrt(n)*B = -10.02726678 vs K_predicted = -10.02777778  (rel diff 5.096e-05)
+
+==========================================================================================
+Worst relative discrepancy across all 6 (lambda,gamma) points at n=10^12: 5.096e-05
+CONFIRMED (independent mpmath route, no sympy series machinery):
+K(lambda,gamma) = -lambda^3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+matches the direct high-precision numeric evaluation of
+B(n,m,gamma) = ln F + ln I_leading - ln T_prof at every point tested.

@@ -1,0 +1,38 @@
+==========================================================================================
+PART A: explicit coefficient extraction at orders eps^-4 .. eps^1,
+via sympy.series with as_leading_term / coeff extraction (not just
+visual inspection of a truncated printout)
+==========================================================================================
+Full series object (repr, to catch any O() or log(eps) residue):
+  (-gamma*lambda**2 + 2*lambda**2)/(2*gamma) - 2*lambda**2/gamma + lambda**2*(2 - gamma)/(2*gamma) + log(2*pi) - log(2) - log(pi) - log(gamma) - log(1/gamma) + lambda**2 + epsilon*(-2*lambda**3/3 + 3*lambda/2 - 1/(12*lambda) + lambda**3/gamma - lambda*(-gamma*lambda**2 + 2*lambda**2)/(2*gamma) - lambda/gamma) + O(epsilon**2)
+
+Expanded polynomial-in-eps part: -epsilon*lambda**3/6 + 3*epsilon*lambda/2 - epsilon/(12*lambda) - epsilon*lambda/gamma
+  coefficient of eps^-4: 0
+  coefficient of eps^-3: 0
+  coefficient of eps^-2: 0
+  coefficient of eps^-1: 0
+  coefficient of eps^0: 0
+  coefficient of eps^1: -lambda**3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+
+CONFIRMED: coefficients of eps^-4, eps^-3, eps^-2, eps^-1, and eps^0
+are ALL exactly 0 (symbolic, exact) -- B(n,m,gamma) genuinely starts
+at eps^1, matching (and non-trivially re-confirming) the already-cited
+fact that T_prof(lambda,gamma) IS the correct leading-order limit,
+via a route (this front's own F+I_leading construction) independent
+of however the original T_prof derivation was internally organized.
+
+==========================================================================================
+PART B: independent re-derivation of K(lambda,gamma) via sympy.limit
+(coefficient-by-order extraction), NOT via .series() -- a genuinely
+different code path, matching this lineage's own cross-check discipline
+==========================================================================================
+K(lambda,gamma) via sympy.limit(B/eps, eps->0):
+  -lambda**3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+K(lambda,gamma) from series() coefficient extraction (Part A):
+  -lambda**3/6 + 3*lambda/2 - 1/(12*lambda) - lambda/gamma
+Symbolic difference (should be exactly 0): 0
+CONFIRMED: sympy.limit (independent code path) and sympy.series
+(Part A) give IDENTICAL K(lambda,gamma), matching the expected
+closed form 3*lambda/2 - lambda^3/6 - 1/(12*lambda) - lambda/gamma.
+Difference from the claimed closed form: 0
+EXACT MATCH to the claimed closed form K(lambda,gamma) confirmed.

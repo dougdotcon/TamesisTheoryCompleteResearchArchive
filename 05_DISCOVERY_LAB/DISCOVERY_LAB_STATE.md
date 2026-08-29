@@ -1,6 +1,28 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-148`: onda 33 autorizada
+**Última atualização:** 2026-08-29 (`DISC-DEC-150`: onda 33 frente (b)
+`GAMMA-OUTER-SUM-POISSON-ATTEMPT` integrada como Estágio 59 em
+`THEOREM.md`. `C(γ)` continua inteiramente ABERTO. Nova correção
+fechada via soma de Poisson para o hiato soma-discreta-vs-integral-
+contínua da soma externa em `m`: `Σ T_prof(m/√n,γ) = G_n(γ) + 1/(2γ) +
+O(√n·e^{-c(γ)n})`, mecanismo genuinamente diferente das duas correções
+anteriores (uma correção de borda ao ATO de somar, não ao somando).
+Confirmado contra a soma discreta VERDADEIRA via decomposição exata
+isolando um "somatório de crossover" residual, precisamente isolado
+mas não resolvido. Um achado de correção MODERADO (a alegação de razão
+de duplicação `1/√2` não sustentada por 2 dos 3 `γ` testados — confinado
+a uma seção já divulgada como não-rigorosa), corrigido por correção
+datada. **Onda 33 completa — 2/2 frentes integradas.**
+Anterior: `DISC-DEC-149`: onda 33 frente (a)
+`GAMMA-STIRLING-MFACT-UNIFORM-ATTEMPT` integrada como Estágio 58 em
+`THEOREM.md`. Nova forma fechada `Δ_m(n,m,γ)=K(λ,γ)/√n` para as peças
+`m!`/prefixo-binomial de `term_m`, cujo polo `1/(12λ)` cancela
+exatamente contra o polo do `Δ` do Estágio 57, dando uma correção
+combinada livre de polo com precisão `O(n^{-1})` confirmada até
+`n=10^{12}`. **SOUND, zero erros matemáticos encontrados** — único
+achado (severidade BAIXA) foi um processo, não matemático (um comando
+`git status` de leitura, efeito real zero, auto-divulgado).
+Anterior: `DISC-DEC-148`: onda 33 autorizada
 — 2 frentes, ambas em `C(γ)`, NENHUMA no gap `H1`/M-CLUST(b). Decisão
 estratégica explícita, com evidência: 13 ondas consecutivas (20-32)
 naquele gap já esgotaram seis famílias de técnica distintas

@@ -1,0 +1,61 @@
+==============================================================================
+PART A: sum_{m=0}^infty T_prof(m/sqrt(n),gamma) vs predicted closed form,
+        across n and gamma; residual should shrink like exp(-c(gamma) n).
+        Working precision (dps) is set PER (gamma,n) point, generously
+        above c(gamma)*n/ln(10), so the residual is resolved cleanly and
+        not merely reporting round-off noise at the working precision.
+==============================================================================
+
+gamma = 0.2, predicted rate c(gamma) = 2*pi^2*gamma/(2-gamma) = 2.193245
+   n   dps         residual    log(residual)   -c*n (predicted)   ratio log/pred
+   1    40       4.6669e-01           -0.762             -2.193          0.34747
+   2    41       7.3523e-02           -2.610             -4.386          0.59504
+   3    42       1.0045e-02           -4.601             -6.580          0.69922
+   4    43       1.2939e-03           -6.650             -8.773          0.75802
+   6    45       1.9721e-05          -10.834            -13.159          0.82327
+   8    47       2.8338e-07          -15.076            -17.546          0.85926
+  10    49       3.9427e-09          -19.351            -21.932          0.88232
+  13    52       6.2406e-12          -25.800            -28.512          0.90487
+  16    55       9.6110e-15          -32.276            -35.092          0.91975
+
+gamma = 0.5, predicted rate c(gamma) = 2*pi^2*gamma/(2-gamma) = 6.579736
+   n   dps         residual    log(residual)   -c*n (predicted)   ratio log/pred
+   1    42       4.0181e-03           -5.517             -6.580          0.83848
+   2    45       7.8884e-06          -11.750            -13.159          0.89290
+   3    48       1.3412e-08          -18.127            -19.739          0.91833
+   4    51       2.1499e-11          -24.563            -26.319          0.93328
+   6    57       5.0743e-17          -37.520            -39.478          0.95039
+   8    62       1.1292e-22          -50.535            -52.638          0.96006
+  10    68       2.4329e-28          -63.583            -65.797          0.96635
+  13    77       7.4211e-37          -83.191            -85.537          0.97258
+  16    85       2.2026e-45         -102.827           -105.276          0.97674
+
+gamma = 0.8, predicted rate c(gamma) = 2*pi^2*gamma/(2-gamma) = 13.159473
+   n   dps         residual    log(residual)   -c*n (predicted)   ratio log/pred
+   1    45       4.9302e-06          -12.220            -13.159          0.92862
+   2    51       1.3437e-11          -25.033            -26.319          0.95114
+   3    57       3.1714e-17          -37.990            -39.478          0.96229
+   4    62       7.0573e-23          -51.005            -52.638          0.96899
+   6    74       3.2101e-34          -77.122            -78.957          0.97676
+   8    85       1.3766e-45         -103.297           -105.276          0.98120
+  10    97       5.7160e-57         -129.504           -131.595          0.98411
+  13   114       4.6645e-74         -168.851           -171.073          0.98701
+  16   131       3.7037e-91         -208.226           -210.552          0.98895
+
+==============================================================================
+PART B: fit the empirical log-residual slope vs n (least squares over all
+        points) and compare to the predicted -c(gamma)
+==============================================================================
+gamma=0.2: least-squares slope over n=[1, 2, 3, 4, 6, 8, 10, 13, 16] = -2.110295, predicted -c(gamma) = -2.193245, ratio = 0.962179
+gamma=0.5: least-squares slope over n=[1, 2, 3, 4, 6, 8, 10, 13, 16] = -6.496747, predicted -c(gamma) = -6.579736, ratio = 0.987387
+gamma=0.8: least-squares slope over n=[1, 2, 3, 4, 6, 8, 10, 13, 16] = -13.076483, predicted -c(gamma) = -13.159473, ratio = 0.993694
+
+==============================================================================
+PART C: push n further (with matching precision) to confirm the residual
+        keeps tracking exp(-c(gamma) n) precisely -- not merely 'small'
+        but genuinely EXPONENTIALLY small (contrast with the O(n^-1/2)/
+        O(n^-1) POWER-LAW scale of the other two fronts' corrections)
+==============================================================================
+gamma=0.5, n=10 (dps=68): |residual|=2.432920e-28, predicted magnitude exp(-c*n)=2.658083e-29, ratio=9.152912
+gamma=0.5, n=20 (dps=97): |residual|=9.145580e-57, predicted magnitude exp(-c*n)=7.065403e-58, ratio=12.944173
+gamma=0.5, n=30 (dps=125): |residual|=2.977319e-85, predicted magnitude exp(-c*n)=1.878042e-86, ratio=15.853309

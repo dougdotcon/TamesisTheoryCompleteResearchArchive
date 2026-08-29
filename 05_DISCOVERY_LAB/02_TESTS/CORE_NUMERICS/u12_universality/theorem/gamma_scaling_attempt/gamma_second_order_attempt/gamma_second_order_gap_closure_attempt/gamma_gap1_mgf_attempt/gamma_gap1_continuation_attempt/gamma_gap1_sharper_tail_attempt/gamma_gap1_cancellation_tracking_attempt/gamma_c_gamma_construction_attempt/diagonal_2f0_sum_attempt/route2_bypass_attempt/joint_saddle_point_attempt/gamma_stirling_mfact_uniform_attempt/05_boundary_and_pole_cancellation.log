@@ -1,0 +1,77 @@
+====================================================================================================
+PART A: symbolic 1/(12*lambda) pole cancellation -- does the COMBINED
+Delta_total = Delta_m + Delta stay finite as lambda -> 0, even though
+each individual piece has a 1/(12*lambda) pole?
+====================================================================================================
+  lambda=    1.0: Delta_m coeff K=     -0.750000  Delta coeff (predecessor)=      0.083333  SUM (Delta_total coeff)= -0.666667
+  lambda=    0.3: Delta_m coeff K=     -0.432278  Delta coeff (predecessor)=      0.277778  SUM (Delta_total coeff)= -0.154500
+  lambda=    0.1: Delta_m coeff K=     -0.883500  Delta coeff (predecessor)=      0.833333  SUM (Delta_total coeff)= -0.050167
+  lambda=   0.05: Delta_m coeff K=     -1.691688  Delta coeff (predecessor)=      1.666667  SUM (Delta_total coeff)= -0.025021
+  lambda=   0.01: Delta_m coeff K=     -8.338333  Delta coeff (predecessor)=      8.333333  SUM (Delta_total coeff)= -0.005000
+  lambda=  0.001: Delta_m coeff K=    -83.333833  Delta coeff (predecessor)=     83.333333  SUM (Delta_total coeff)= -0.000500
+
+CONFIRMED: the individual 1/(12*lambda) poles of Delta_m and Delta both
+blow up as lambda->0, but their SUM -- the coefficient of the combined
+correction Delta_total := Delta_m + Delta -- stays perfectly finite and
+approaches 0 linearly in lambda (3*lambda/2 - lambda^3/6 - lambda/gamma
+-> 0 as lambda -> 0). This does NOT mean the combined correction is
+'uniform all the way to lambda=0': the underlying MESOSCALE ASYMPTOTIC
+EXPANSION itself (m=lambda*sqrt(n) with m->infty required for Stirling
+to apply to m!, and t*~lambda/(gamma*sqrt(n))->0 assumed small-t*) still
+requires lambda bounded away from 0 as a matter of which regime is being
+expanded around -- see Part B below for a direct numerical check of
+whether this pole-cancellation is a numerically real effect or just an
+algebraic curiosity that doesn't survive contact with the ACTUAL,
+un-expanded term_m.
+
+====================================================================================================
+PART B: numeric test at DELIBERATELY small lambda (0.05, matching the
+predecessor's own boundary-failure check) and DELIBERATELY extreme
+gamma (0.02, 0.98) and large lambda (5.0, 8.0), matching the referee's
+own fresh stress-test range for the predecessor front
+====================================================================================================
+
+--- lambda~0.05, gamma=0.5 ---
+  n=     1000000  m=      50  lambda_actual=0.050000  Delta= 1.666e-03  Delta_m=-1.692e-03  |err_leading|=2.502e-05  |err_combined|=9.984e-07
+  n=   100000000  m=     500  lambda_actual=0.050000  Delta= 1.667e-04  Delta_m=-1.692e-04  |err_leading|=2.502e-06  |err_combined|=9.984e-09
+  n= 10000000000  m=    5000  lambda_actual=0.050000  Delta= 1.667e-05  Delta_m=-1.692e-05  |err_leading|=2.502e-07  |err_combined|=9.984e-11
+
+--- lambda~0.1, gamma=0.5 ---
+  n=     1000000  m=     100  lambda_actual=0.100000  Delta= 8.323e-04  Delta_m=-8.835e-04  |err_leading|=5.017e-05  |err_combined|=9.938e-07
+  n=   100000000  m=    1000  lambda_actual=0.100000  Delta= 8.332e-05  Delta_m=-8.835e-05  |err_leading|=5.017e-06  |err_combined|=9.938e-09
+  n= 10000000000  m=   10000  lambda_actual=0.100000  Delta= 8.333e-06  Delta_m=-8.835e-06  |err_leading|=5.017e-07  |err_combined|=9.938e-11
+
+--- lambda~0.25, gamma=0.5 ---
+  n=     1000000  m=     250  lambda_actual=0.250000  Delta= 3.323e-04  Delta_m=-4.609e-04  |err_leading|=1.276e-04  |err_combined|=9.641e-07
+  n=   100000000  m=    2500  lambda_actual=0.250000  Delta= 3.332e-05  Delta_m=-4.609e-05  |err_leading|=1.276e-05  |err_combined|=9.642e-09
+  n= 10000000000  m=   25000  lambda_actual=0.250000  Delta= 3.333e-06  Delta_m=-4.609e-06  |err_leading|=1.276e-06  |err_combined|=9.642e-11
+
+--- lambda~5.0, gamma=0.5 ---
+  n=     1000000  m=    5000  lambda_actual=5.000000  Delta= 1.567e-05  Delta_m=-2.335e-02  |err_leading|=2.262e-02  |err_combined|=7.279e-04
+  n=   100000000  m=   50000  lambda_actual=5.000000  Delta= 1.657e-06  Delta_m=-2.335e-03  |err_leading|=2.326e-03  |err_combined|=7.237e-06
+  n= 10000000000  m=  500000  lambda_actual=5.000000  Delta= 1.666e-07  Delta_m=-2.335e-04  |err_leading|=2.333e-04  |err_combined|=7.233e-08
+
+--- lambda~8.0, gamma=0.3 ---
+  n=     1000000  m=    8000  lambda_actual=8.000000  Delta= 9.380e-06  Delta_m=-1.000e-01  |err_leading|=6.965e-02  |err_combined|=3.373e-02
+  n=   100000000  m=   80000  lambda_actual=8.000000  Delta= 1.032e-06  Delta_m=-1.000e-02  |err_leading|=9.675e-03  |err_combined|=3.286e-04
+  n= 10000000000  m=  800000  lambda_actual=8.000000  Delta= 1.041e-07  Delta_m=-1.000e-03  |err_leading|=9.967e-04  |err_combined|=3.283e-06
+
+--- lambda~1.0, gamma=0.02 ---
+  n=     1000000  m=    1000  lambda_actual=1.000000  Delta= 7.976e-05  Delta_m=-4.875e-02  |err_leading|=1.062e-02  |err_combined|=3.999e-02
+  n=   100000000  m=   10000  lambda_actual=1.000000  Delta= 8.321e-06  Delta_m=-4.875e-03  |err_leading|=4.476e-03  |err_combined|=3.922e-04
+  n= 10000000000  m=  100000  lambda_actual=1.000000  Delta= 8.332e-07  Delta_m=-4.875e-04  |err_leading|=4.827e-04  |err_combined|=3.920e-06
+
+--- lambda~1.0, gamma=0.98 ---
+  n=     1000000  m=    1000  lambda_actual=1.000000  Delta= 8.233e-05  Delta_m= 2.296e-04  |err_leading|=3.131e-04  |err_combined|=1.214e-06
+  n=   100000000  m=   10000  lambda_actual=1.000000  Delta= 8.323e-06  Delta_m= 2.296e-05  |err_leading|=3.129e-05  |err_combined|=1.215e-08
+  n= 10000000000  m=  100000  lambda_actual=1.000000  Delta= 8.332e-07  Delta_m= 2.296e-06  |err_leading|=3.129e-06  |err_combined|=1.215e-10
+
+====================================================================================================
+PART C: interior sanity spot-check -- gamma=0.8, lambda=1.0 predicts
+K(1,0.8)=0 EXACTLY (Delta_m vanishes, so Delta alone should already
+match the combined correction's accuracy at this one special point)
+====================================================================================================
+K(1, 0.8) = 0.0  (expected exactly 0)
+CONFIRMED exactly zero (symbolic-numeric, dps 60).
+  n=     1000000: |err_Delta-only|=1.143039e-06  |err_Delta+Deltam|=1.143039e-06  (should match closely, since Delta_m=6.939e-20 ~ 0 here)
+  n=  1000000000: |err_Delta-only|=1.106831e-09  |err_Delta+Deltam|=1.144065e-09  (should match closely, since Delta_m=-3.723e-11 ~ 0 here)

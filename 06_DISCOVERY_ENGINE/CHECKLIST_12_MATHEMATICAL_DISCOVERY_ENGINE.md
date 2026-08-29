@@ -25,7 +25,7 @@ human/agent job, exactly as it is in `05_DISCOVERY_LAB` today.
 
 ## Design
 
-- [ ] `CandidateResult` dataclass: `candidate_name`, `enumeration_match:
+- [x] `CandidateResult` dataclass: `candidate_name`, `enumeration_match:
       Optional[bool]` (`None` if no enumerator was supplied), `symbolic_match:
       Optional[bool]`, `mc_triangulates: Optional[bool]`,
       `asymptotic_fit_residual: Optional[float]`, `verdict:
@@ -34,7 +34,12 @@ human/agent job, exactly as it is in `05_DISCOVERY_LAB` today.
       `SURVIVES` only if every stage that ran agreed; `INCONCLUSIVE` if
       no stage produced a clear result either way — never silently
       default to `SURVIVES` when nothing was actually checked).
-- [ ] `MathDiscoveryPipeline.run_candidate(candidate_name, candidate_expr,
+      Implemented in `mathematical_discovery_engine.py`; also carries an
+      additive `details: Dict[str, str]` field (per-stage evidence
+      strings) beyond the checklist's minimum field list, to make the
+      "with the evidence"/stage-attribution requirement below concrete
+      rather than relying only on which boolean happens to be `False`.
+- [x] `MathDiscoveryPipeline.run_candidate(candidate_name, candidate_expr,
       free_symbols, enumerator=None, mc_estimators=None,
       asymptotic_target=None, tolerance=1e-6) -> CandidateResult`:
       1. If `enumerator` is given (a callable `n -> exact_value` plus a
@@ -54,7 +59,15 @@ human/agent job, exactly as it is in `05_DISCOVERY_LAB` today.
          residual.
       5. Assembles the `CandidateResult`, deriving `verdict` from the
          rule above.
-- [ ] `MathDiscoveryPipeline.run(candidates: list[tuple[name, expr]],
+      Implemented with one documented signature extension: the checklist's
+      own step 2 requires a second expression ("the target") for the
+      identity check that its literal parameter list omits, so
+      `run_candidate` adds an explicit `symbolic_target=None` parameter
+      (inserted right after `free_symbols`) carrying it — see the
+      module docstring's "Designed signatures" section for the full
+      rationale, and `Enumerator`/`MonteCarloCheck`/`AsymptoticCheck` for
+      the designed-and-documented shapes of the other open parameters.
+- [x] `MathDiscoveryPipeline.run(candidates: list[tuple[name, expr]],
       **shared_kwargs) -> list[CandidateResult]`: runs `run_candidate`
       for each supplied candidate against the same shared setup
       (enumerator/mc_estimators/asymptotic_target), returning all
@@ -63,35 +76,35 @@ human/agent job, exactly as it is in `05_DISCOVERY_LAB` today.
 
 ## Tests (must all pass)
 
-- [ ] A single true candidate (e.g. the real closed form for a toy
+- [x] A single true candidate (e.g. the real closed form for a toy
       combinatorial quantity you define for the test, small enough to
       brute-force exactly) run through all four stages reports
       `verdict="SURVIVES"` with every populated field agreeing.
-- [ ] A deliberately wrong candidate (differs from the true value at
+- [x] A deliberately wrong candidate (differs from the true value at
       some tested `n`) is caught and reports `verdict="REFUTED"`, and
       the specific stage(s) that caught it are visible in the result
       (not just a bare boolean with no attribution).
-- [ ] Running `run_candidate` with NO enumerator/mc/asymptotic args
+- [x] Running `run_candidate` with NO enumerator/mc/asymptotic args
       supplied (only a symbolic identity check) still produces a
       correct `SURVIVES`/`REFUTED` from that one stage, and does not
       crash on the unpopulated optional fields (`enumeration_match` etc.
       stay `None`, not a fabricated `True`).
-- [ ] `run()` with 3 candidates (2 true-equivalent forms, 1 wrong) run
+- [x] `run()` with 3 candidates (2 true-equivalent forms, 1 wrong) run
       against the same toy problem correctly separates them — the 2
       correct ones `SURVIVES`, the wrong one `REFUTED`.
-- [ ] The toy problem's enumerator and Monte Carlo estimator are written
+- [x] The toy problem's enumerator and Monte Carlo estimator are written
       independently of each other (not one derived by copy-pasting the
       other) — this is the same "genuinely independent evidence, not the
       same check twice" discipline as the rest of this engine.
 
 ## Acceptance
 
-- [ ] `pytest tests/test_mathematical_discovery_engine.py -v` passes
+- [x] `pytest tests/test_mathematical_discovery_engine.py -v` passes
       with zero failures.
-- [ ] `run_candidate`/`run` never fabricate a `SURVIVES` verdict for a
+- [x] `run_candidate`/`run` never fabricate a `SURVIVES` verdict for a
       candidate where zero stages actually ran (confirm the
       all-stages-`None` case reports `INCONCLUSIVE`, covered by a
       dedicated test, not just asserted in prose here).
-- [ ] This module imports `symbolic.py` and `montecarlo.py` rather than
+- [x] This module imports `symbolic.py` and `montecarlo.py` rather than
       re-implementing their logic — grep to confirm no duplicated
       `sympy.simplify`/RNG-estimator code exists in this file.

@@ -42,7 +42,7 @@ level up to the tool that would run the claims.
 |---|---|---|---|
 | **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
 | **Stage 2 — Expansion** | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 142/142 tests pass; hostile review verdict SOUND, zero findings; Lean bridge genuinely compiles/rejects real Lean source, never touches `04_FORMAL_RESEARCH_LAB/` | `06_DISCOVERY_ENGINE/CHECKLIST_06..10_*.md`, `CHECKLIST_00B_STAGE2_INTEGRATION.md`, all boxes checked |
-| **Stage 3 — Product suite** | 8 named products | 🔧 **PARTIALLY IN PROGRESS** — see scoping note below | `06_DISCOVERY_ENGINE/CHECKLIST_11_HYPOTHESIS_ENGINE.md`, `CHECKLIST_12_MATHEMATICAL_DISCOVERY_ENGINE.md` |
+| **Stage 3 — Product suite** | 8 named products | 🔧 **PARTIALLY DONE** — 4/8 already covered (Stage 1/2), Stage 3a's 2 tractable new products ✅ built+tested+reviewed (2026-08-29), 2/8 (Simulation Lab, Observatory live-feed) honestly deferred — see scoping note below | `06_DISCOVERY_ENGINE/CHECKLIST_11_HYPOTHESIS_ENGINE.md`, `CHECKLIST_12_MATHEMATICAL_DISCOVERY_ENGINE.md`, `CHECKLIST_00C_STAGE3A_INTEGRATION.md`, all boxes checked |
 | Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
 
 ---
@@ -82,6 +82,29 @@ mathematical results, applied here to software scope.
 
 ## Log (most recent first)
 
+- **2026-08-29** — Stage 3a build completed and independently verified. Workflow
+  `wf_bc0881ff-856` ran 6 agents (2 module builds in parallel, 1 integration, 1
+  hostile review, 2 fixes) with zero errors. Result: 175/175 tests pass (142 from
+  Stages 1+2, unmodified and still green, plus 33 new). The hostile reviewer found
+  one real HIGH-severity issue: the Hypothesis Engine's own "Scope honesty
+  constraint" claimed pre-registration was "impossible" without a complete spec —
+  false. `Registry.advance()`/`DiscoveryEngine.advance()`, pre-existing public
+  methods Stage 1's own tests already use, bypass `HypothesisEngine.pre_register()`
+  entirely. Rather than bolting a cross-cutting validation hook onto Stage 1's
+  generic state machine (which nothing else asked for), the fix corrected the false
+  claim to accurately describe the real, tested behavior and pinned it down with
+  two new regression tests — the same "correção," not silent patch-and-claim-fixed,
+  discipline this archive applies to its own mathematical mistakes. A second LOW
+  finding (a bare `TypeError` leaking instead of the documented
+  `IncompleteSpecError` when a spec's key is deleted rather than emptied) was
+  genuinely fixed. **Orchestrating session independently re-verified**: re-ran the
+  full suite (175/175), reproduced the bypass myself in a throwaway script
+  (confirmed it still exists and is now honestly documented, not silently claimed
+  closed), and reproduced the `TypeError`→`IncompleteSpecError` fix directly. All 3
+  Stage 3a checklists now fully checked off. **Stage 3a is done.** Stage 3 overall
+  is now 4/8 products already covered by Stages 1-2, 2/8 covered by Stage 3a, 2/8
+  (Simulation Lab, Observatory's live-feed half) honestly catalogued as deferred —
+  see the Stage 3 scoping note above.
 - **2026-08-29** — Stage 2 build completed and independently verified. Workflow
   `wf_90a151d3-ff5` ran 7 agents (5 module builds in true parallel, 1 integration,
   1 hostile review) with zero errors and — unlike Stage 1 — zero findings, so no

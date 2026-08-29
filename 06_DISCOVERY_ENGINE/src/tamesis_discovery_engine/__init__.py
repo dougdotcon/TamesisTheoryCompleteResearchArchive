@@ -62,6 +62,36 @@ already appends its own ``LEAN_FORMALIZE`` entry to the same shared
 :attr:`registry` rather than accepting one as an argument — both already
 carry Stage 1's honesty discipline on their own, so wrapping them again here
 would only duplicate it.
+
+Stage 3a extension (``CHECKLIST_00C_STAGE3A_INTEGRATION.md``): two further
+modules — the Hypothesis Engine (11) and the Mathematical Discovery Engine
+(12) — are exposed as :attr:`hypothesis_engine` and :attr:`math_discovery`.
+Both are, by design (see each module's own "Scope honesty constraint"),
+entirely stateless: every :class:`~tamesis_discovery_engine.hypothesis_engine.HypothesisEngine`
+method takes the caller's :class:`~tamesis_discovery_engine.registry.Registry`
+explicitly rather than holding one, and every
+:class:`~tamesis_discovery_engine.mathematical_discovery_engine.MathDiscoveryPipeline`
+method is a pure function of its arguments. So there is no ``data_dir`` of
+their own to point at ``data_dir`` the way Stage 1/2's stateful modules are,
+and "sharing the same data_dir/registry where applicable" amounts to: the
+facade constructs one instance of each (mirroring Modules 6/7's "nothing to
+construct, so construct the trivial stateless thing" precedent) and callers
+reach :attr:`hypothesis_engine`'s methods with :attr:`registry` explicitly
+(e.g. ``engine.hypothesis_engine.draft(engine.registry, ...)``), the exact
+same way ``HypothesisEngine.draft`` is called with any other registry.
+:attr:`math_discovery` needs no registry at all — it never touches a
+``Claim`` — so nothing further is shared with it. Like Stage 2's five
+modules, neither gets a facade wrapper method: :meth:`HypothesisEngine.draft`/
+:meth:`~tamesis_discovery_engine.hypothesis_engine.HypothesisEngine.pre_register`
+already enforce their own falsifiable-spec-completeness precondition
+directly against the registry they are given, and
+:meth:`~tamesis_discovery_engine.mathematical_discovery_engine.MathDiscoveryPipeline.run_candidate`/
+:meth:`~tamesis_discovery_engine.mathematical_discovery_engine.MathDiscoveryPipeline.run`
+have no claim or ledger to record against in the first place — a claim
+drafted through :attr:`hypothesis_engine` re-enters Stage 1's existing
+``lock``/``run``/``reproduce``/``review``/``record_verdict`` facade methods
+exactly like any other claim once it reaches ``DRAFT``, and those already
+append their own ledger entries.
 """
 
 from __future__ import annotations
@@ -74,8 +104,10 @@ from . import montecarlo, symbolic
 from .adversarial import DEFAULT_INSTABILITY_TOLERANCE, AdversarialReviewer, ReviewVerdict
 from .atlas import Atlas
 from .claim import Claim, ClaimState
+from .hypothesis_engine import HypothesisEngine
 from .lean_bridge import LeanBridge
 from .ledger import DecisionType, Ledger
+from .mathematical_discovery_engine import MathDiscoveryPipeline
 from .observatory import DatasetRegistry
 from .registry import Registry
 from .reproduction import ReproductionPlan, ReproductionRecord, Reproducer
@@ -127,6 +159,16 @@ class DiscoveryEngine:
     disposed/terminal claim for :meth:`~tamesis_discovery_engine.atlas.Atlas.register`)
     directly against :attr:`registry`, so there is nothing for a wrapper here
     to add.
+
+    Stage 3a's two modules are exposed the same "nothing for a wrapper to
+    add" way: :attr:`hypothesis_engine` is a
+    :class:`~tamesis_discovery_engine.hypothesis_engine.HypothesisEngine`
+    (stateless — every method takes the caller's registry explicitly, so
+    call it as ``engine.hypothesis_engine.draft(engine.registry, ...)``);
+    :attr:`math_discovery` is a
+    :class:`~tamesis_discovery_engine.mathematical_discovery_engine.MathDiscoveryPipeline`
+    (stateless — every method is a pure function of its arguments and
+    touches no claim/registry at all).
     """
 
     def __init__(self, data_dir: Optional[Path | str] = None, clock: Optional[Clock] = None):
@@ -150,6 +192,9 @@ class DiscoveryEngine:
         self.lean_bridge = LeanBridge(
             self.registry, self.ledger, scratch_dir=self.data_dir.parent / "lean_scratch"
         )
+
+        self.hypothesis_engine = HypothesisEngine()
+        self.math_discovery = MathDiscoveryPipeline()
 
     def register(self, title: str, statement: str, metadata: Optional[Dict] = None) -> Claim:
         claim = self.registry.create(title, statement, metadata=metadata)

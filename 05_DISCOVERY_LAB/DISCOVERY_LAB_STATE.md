@@ -1,6 +1,21 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-137`: onda 29 frente (c)
+**Última atualização:** 2026-08-29 (`DISC-DEC-138`: onda 30 autorizada —
+3 frentes após survey de portfolio dedicado, mantendo o padrão
+diversificado que tornou a onda 29 forte. Frente (a): `C(γ)` via "Rota
+2" — técnica que evita inteiramente a maquinaria `A_k`/`2F0` (Estágio
+52 fechou ambas as rotas internas dela). Frente (b): estender o
+método de eliminação por resultante para `K=6` (quinto sucesso
+mecânico consecutivo do mesmo método após `K=2,3,4,5`). Frente (c): o
+quebra-cabeça de "autocura de camada-limite" especificamente — se um
+argumento ciente-de-camada-limite pode provar `(U)` a partir de `(C')`
+sozinha — deliberadamente NÃO a questão de equivalência `(C')`=`(B)`
+em si, adiada até que uma técnica genuinamente nova apareça. Apenas
+UMA frente toca H1/M-CLUST(b) (estreitamente escopada, caráter novo);
+duas frentes inteiramente diversificadas. Nenhuma edição de conteúdo
+matemático ainda — apenas autorização; as três frentes serão
+despachadas como agentes de pesquisa separados.
+Anterior: `DISC-DEC-137`: onda 29 frente (c)
 `K5-EXACT-CLOSURE-ATTEMPT` integrada como Estágio 53 em `THEOREM.md`.
 `K=5` FECHADO no tier exato — `M_5\approx0{,}6968`, raiz exata de um
 quártico irredutível, `|F_n^{(5)}(x)-F_5(x)|\le M_5/n` para todo

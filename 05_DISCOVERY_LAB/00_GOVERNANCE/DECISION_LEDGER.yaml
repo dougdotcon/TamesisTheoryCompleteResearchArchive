@@ -8217,3 +8217,60 @@ decisions:
       desnecessidade logica de OSC-PHI), nao um fechamento. Onda 26
       agora com 2/3 frentes integradas (a=DISC-DEC-124, c=DISC-DEC-125);
       frente (b) ainda com referee em andamento.
+
+  - id: DISC-DEC-126
+    date: 2026-08-29
+    decision: >
+      Onda 26 frente (b) EXACT-ALGEBRAIC-CLOSURE-ATTEMPT integrada como
+      Estagio 48 em THEOREM.md. Fechamento EXATO completo (nao apenas
+      quase-afiado) para K=3 (n>=5, alargando de n>=6) e K=4 (n>=6),
+      mesmo tier de K=2: |F_n^{(3)}(x)-F_3(x)|<=M_3/n,
+      |F_n^{(4)}(x)-F_4(x)|<=M_4/n, com M_3, M_4 as mesmas constantes
+      exatas ja citadas (nao provadas) no Estagio 46. Metodo: eliminacao
+      por resultante exata (Res_x entre a equacao de ponto critico e
+      h(n,x)=m, depois eliminando m contra o polinomio minimo do proprio
+      M_K via Poly.real_roots(), nao sp.solve()) tratando h(n,x)-M_K como
+      objeto de duas variaveis, em vez do metodo "soma de supremos" do
+      Estagio 46 (comprovadamente frouxo). Diagnostico central do
+      mandato confirmado: g_3'/g_4' fatoram-se limpamente em quarticos
+      irredutiveis (nenhuma obstrucao de Galois) -- a obstrucao real do
+      Estagio 46 era um problema de sinal no termo de correcao lider,
+      nao solubilidade por radicais.
+      Spot-check da sessao antes do despacho: enumeracao exaustiva
+      propria (reimplementacao independente da Definicao 4) para K=3
+      (n=5,6) e K=4 (n=6), confirmando |h(n,x)|<=M_K exatamente nos
+      valores-fronteira reivindicados.
+      Referee hostil dedicado: SOUND WITH NAMED ISSUES -- ACCEPT for
+      catalogue. Reconstruiu tudo a partir das formulas D3/D4 do
+      THEOREM.md, nunca confiando na transcricao da frente; bateu M_3,
+      M_4 e ambos os quarticos minimos a precisao total; reproduziu os
+      limiares de eliminacao por resultante e a fatoracao grau-444 de
+      K=4; refez a checagem exaustiva n=6..64 do zero. Investigou com
+      particular cuidado a "ruga" auto-divulgada do limitante inferior
+      de K=4 e encontrou dois achados MODERADOS reais: (F1) a explicacao
+      da frente para o limiar espurio n~64,77 estava factualmente
+      errada sobre qual valor o ramo fora-de-dominio atinge (o proprio
+      -M_4, nao um "conjugado" +2,898 -- conclusao pratica permanece
+      correta); (F2) o texto original nao fechava explicitamente n>=65
+      via continuidade+IVT (ao contrario do limitante superior, que
+      ancora em a(6)) -- o referee reconstruiu e fechou esta lacuna de
+      forma independente e rigorosa. Um achado BAIXA (F3): rotulo
+      trocado de qual margem numerica pertence a qual limitante. O
+      TEOREMA em si permanece verdadeiro em todos os casos,
+      reconfirmado independentemente pelo referee -- os achados sao
+      sobre exposicao/mecanismo do texto, nao a matematica final.
+      Corrigidas por duas correcoes datadas (F1, F2) e uma nota datada
+      (F3) na propria ATTEMPT.md da frente.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 48, ~70 linhas);
+      .../sharp_rate_constants_attempt/exact_algebraic_closure_attempt/ATTEMPT.md
+      (2 correcoes datadas F1/F2, 1 nota datada F3); DECISION_LEDGER.yaml
+      (este arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria pura interna a este arquivo. Nenhuma formula de
+      registro anterior invalidada -- Estagio 46 (C_3, C_4
+      quase-afiados) permanece correto como limitante mais frouxo,
+      apenas superado por este fechamento mais afiado. Onda 26 agora
+      integrada em sua totalidade (3/3 frentes: a=DISC-DEC-124,
+      c=DISC-DEC-125, b=DISC-DEC-126).

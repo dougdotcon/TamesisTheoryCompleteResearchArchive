@@ -1,6 +1,25 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-125`: onda 26 frente (c)
+**Última atualização:** 2026-08-29 (`DISC-DEC-126`: onda 26 frente (b)
+`EXACT-ALGEBRAIC-CLOSURE-ATTEMPT` integrada como Estágio 48 —
+fechamento EXATO completo (não apenas quase-afiado) para `K=3`
+(`n\ge5`, alargando de `n\ge6`) e `K=4` (`n\ge6`), mesmo tier de `K=2`:
+`M_3\approx0{,}7107/n`, `M_4\approx0{,}7087/n`, as mesmas constantes já
+citadas (não provadas) no Estágio 46. Método: eliminação por
+resultante exata, tratando `h(n,x)-M_K` como objeto de duas variáveis,
+em vez da "soma de supremos" do Estágio 46. Diagnóstico central
+confirmado: `g_3'`/`g_4'` fatoram-se limpamente em quárticos
+irredutíveis (nenhuma obstrução de Galois) — a obstrução real era um
+problema de sinal, não solubilidade por radicais. **Série de
+constantes de taxa finito-`n` para `K=0,\ldots,4` agora inteiramente
+no tier exato.** Referee hostil: SOUND WITH NAMED ISSUES, investigou
+com cuidado a "ruga" auto-divulgada do limitante inferior de `K=4` e
+encontrou dois achados MODERADOS reais (mecanismo mal-explicado; uma
+lacuna de continuidade/IVT não escrita) — o TEOREMA em si permanece
+verdadeiro em todos os casos, reconfirmado independentemente; ambos
+corrigidos por correções datadas. **Onda 26 agora integrada em sua
+totalidade (3/3 frentes).**
+Anterior: `DISC-DEC-125`: onda 26 frente (c)
 `TAUBERIAN-OSCILLATION-BOUND-ATTEMPT` integrada como adendo datado em
 `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **sétima onda
 consecutiva** (ondas 20-26) neste gap. Rota (a) confirmada beco sem

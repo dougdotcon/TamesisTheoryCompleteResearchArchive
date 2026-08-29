@@ -1,0 +1,135 @@
+======================================================================
+STEP 1: transcription cross-check
+======================================================================
+deg_n N(n,x): 7    deg_n D(n): 8
+g_4(x) [our derivation] = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+g_4(x) [cited]          = -6*x**8 + 8*x**7 + 6*x**6 - 12*x**5 + 6*x**4 - 6*x**2 + 4*x
+MATCH. Cross-check PASSED.
+
+======================================================================
+STEP 2: exact M_4 (algebraic number, no radical form used)
+======================================================================
+g4'(x) factored: -4*(x - 1)**2*(x + 1)*(12*x**4 - 2*x**3 + x**2 + 2*x - 1)
+x4* = 0.369886566100883325779927219256
+M4  = 0.708718393409321614178660709132
+minimal polynomial of x4*: 12*t**4 - 2*t**3 + t**2 + 2*t - 1  (degree 4 )
+minimal polynomial of M4 : 35831808*t**4 - 49852544*t**3 - 220711113*t**2 + 556322688*t - 274710528  (degree 4 )
+
+NOTE: g4' factors CLEANLY as -4(x-1)^2(x+1)(12x^4-2x^3+x^2+2x-1) --
+contrary to the 'no clean closed form' framing this front was
+asked to test, x4* IS the root of a clean, fully-factored-out
+quartic (same algebraic tier as K=3's x3*), hence in principle
+Ferrari-radical-expressible. The earlier obstruction language was
+imprecise; see ATTEMPT.md Sec.6 for the full discussion.
+
+Matches cited M4=0.70871839340932161418... to 20+ digits. PASSED.
+
+======================================================================
+STEP 3: boundary values h4(n,0), h4(n,1) -- exact closed forms
+======================================================================
+h4(n,0) = 0
+h4(n,1) = -24/((n - 3)*(n - 2)*(n - 1))
+h4(n,1) is NEGATIVE for n>3 (numerator -24) -> trivially < M4 for
+the UPPER bound direction; the LOWER bound (h4(n,1) >= -M4) needs
+an explicit threshold, computed next.
+n0_lower_boundary (h4(n,1)=-M4 crossing) = 5.3382816427241673112
+Confirmed: 5 < n0_lower_boundary < 6 -> h4(n,1) > -M4 exactly for
+every integer n >= 6.
+h4(6,1) = -2/5 = -0.40000000000000000000    -M4 = -0.70871839340932161418
+h4(6,1) > -M4  CONFIRMED (exact).
+|Delta_4(1)| = -1  (outside n>=6 domain, trivial)
+|Delta_5(1)| = -1/5  (outside n>=6 domain, trivial)
+
+======================================================================
+STEP 4: interior critical points, UPPER bound (target m=M4)
+======================================================================
+elapsed Res_x(F1,F2): 0.7 s  (deg_n= 112  deg_m= 7 )
+elapsed Res_m(R, minpoly_M4): 0.36 s  (degree 444 )
+elapsed factor_list: 7.27 s
+  factor degree: 1  mult: 220
+  factor degree: 2  mult: 4
+  factor degree: 216  mult: 1
+elapsed real_roots (EXACT, on the genuinely irreducible factor): 7.36 s   (#roots: 12 )
+distinct real roots (n at which SOME real x -- not necessarily in
+[0,1] -- makes an interior critical point of h4(n,.) hit M4 or one
+of its 3 algebraic conjugates):
+    -69.961169402670029581
+    -1.6895452419124306165
+    -1.5008565181786269507
+    0.31477866889473899198
+    0.33662321189480489586
+    1.8741616460281280490
+    1.9898467767218041232
+    2.0776984792356464784
+    2.9194176904726404128
+    3.0313758218997029971
+    3.1018339003063933279
+    3.2243805173995860158
+largest real root: 3.2243805173995860158
+Confirmed: < 4. Since 'no real x at all' certainly implies 'no real
+x in [0,1]', this rigorously rules out an interior [0,1] critical
+point achieving h4=M4 for every real n > 4, in particular n>=6.
+
+======================================================================
+STEP 5: combine -- exact closure, UPPER bound
+======================================================================
+a(6) = max_x h4(6,x) = 0.3185665615586197789578765  at x* = 0.236343896248764
+a(6) < M4  CONFIRMED (exact).
+
+a(n):=max_x h4(n,x) is continuous on real n>3 (max of a jointly
+continuous function over compact x in [0,1]). For n>4 it never
+equals M4 (boundary: STEP 3; interior: STEP 4). a(6)<M4 (above).
+By IVT, a(n) < M4 for ALL real n>4, in particular every integer
+n>=6.
+
+>>> UPPER-BOUND THEOREM (K=4, EXACT): for all integer n>=6 and
+>>> x in [0,1]:  n*Delta_n(x) <= M4,  M4 = 0.708718393409321614178660709132
+
+======================================================================
+STEP 6: interior critical points, LOWER bound (target m=-M4)
+======================================================================
+elapsed Res_m(R, minpoly(-M4)): 0.36 s
+elapsed factor_list: 8.03 s
+  factor degree: 1  mult: 220
+  factor degree: 2  mult: 4
+  factor degree: 220  mult: 1
+elapsed real_roots: 44.43 s  (#roots: 14 )
+distinct real roots: [-18.056607723685266798, -1.8330037280827594669, -1.6098587383168899669, -0.42497285348025026891, 0.32742023976875211207, 0.35281275321698872764, 1.9828975350400884094, 1.9937879178407374721, 2.1809674725091008677, 2.9615258368324682643, 3.0413452194835540188, 3.1023631884388285634, 3.1139118259829256789, 64.768366227610798420]
+largest real root: 64.768366227610798420
+
+WRINKLE (disclosed honestly, see ATTEMPT.md Sec.5.4 for the full
+account): this threshold is much larger than K=3's analogue
+(~65 instead of ~3-6). Direct check shows why: this root does NOT
+correspond to an x in [0,1] (it is the OTHER real root of -M4's
+minimal quartic, +2.8979..., achieved at x=-0.957, outside [0,1] --
+a genuine value of the unrestricted-x elimination, correctly
+excluded from our domain of interest but not by this computation
+alone). The 'no unrestricted-x solution beyond this threshold'
+conclusion is still fully valid and sufficient logically (a bigger
+domain having no solution implies the [0,1]-restricted domain has
+none either) -- it is just not TIGHT. We patch the resulting gap
+(n=6.. 64 ) with an exact exhaustive per-integer-n check.
+
+======================================================================
+STEP 7: exhaustive exact patch, n=6..64 (closes the gap left by
+        STEP 6's loose -- but valid -- threshold)
+======================================================================
+checked n=6..64 (59 integers), elapsed 49.6s, violations=0
+worst margin: (0.0341346693581287858686718686958, 64, 0.6745837240511928283099888, -0.0001007277580519251592757674)
+
+>>> LOWER-BOUND THEOREM (K=4, EXACT): for all integer n>=6 and
+>>> x in [0,1]:  n*Delta_n(x) >= -M4.
+Proof = boundary (STEP 3) + interior unrestricted-x threshold
+(STEP 6, n> 64.8 ) + exhaustive exact patch for the
+remaining finite window n=6..64 (STEP 7, zero violations, all exact).
+
+======================================================================
+FINAL THEOREM (K=4, EXACT CLOSURE):
+for all integer n>=6 and x in [0,1]:
+   |F_n^{(4)}(x) - F_4(x)| <= M4/n,
+   M4 = 0.7087183934093216141786607091322793863974
+   (exact real root of 35831808*t**4 - 49852544*t**3 - 220711113*t**2 + 556322688*t - 274710528 )
+This matches K=2's and this front's K=3 tier of closure (exact
+constant, not a 1.0365x-inflated near-sharp one), at the SAME
+domain (n>=6) predecessor already used.
+======================================================================

@@ -1,0 +1,125 @@
+======================================================================
+STEP 1: transcription cross-check
+======================================================================
+deg_n N(n,x): 5    deg_n D(n): 6
+g_3(x) [leading coeff of N, our derivation] = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+g_3(x) [cited ATTEMPT.md Sec.4, factored]    = 3*x**6 - 3*x**5 - 3*x**2 + 3*x
+MATCH (zero symbolic difference). Cross-check PASSED.
+
+======================================================================
+STEP 2: exact M_3 (algebraic number, no radical form used)
+======================================================================
+g3'(x) factored: 3*(x - 1)*(6*x**4 + x**3 + x**2 + x - 1)
+real roots of g3': [CRootOf(6*x**4 + x**3 + x**2 + x - 1, 0), CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1), 1]
+x3* = 0.452192150454258926538650404789
+M3  = 0.712071558138027808419103234207
+minimal polynomial of x3*: 6*t**4 + t**3 + t**2 + t - 1  (degree 4 )
+minimal polynomial of M3 : 15552*t**4 - 3355*t**3 - 42192*t**2 + 181440*t - 110592  (degree 4 )
+
+NOTE: both x3* and M3 are roots of QUARTICS, hence in principle
+expressible via Ferrari's radical formula (messy, not attempted --
+unnecessary, since CRootOf/minimal_polynomial IS an exact
+representation). This already shows the earlier 'no clean closed
+form (radical) for the critical point' framing is not, by itself,
+a Galois-theoretic obstruction at K=3: a degree-4 algebraic number
+is always radical-solvable in principle.
+
+Matches cited M3=0.71207155813802780842... to 20+ digits. PASSED.
+
+======================================================================
+STEP 3: boundary values h(n,0), h(n,1) -- exact closed forms
+======================================================================
+h(n,0) = 0
+h(n,1) = 6/((n - 2)*(n - 1))
+threshold equation (n-1)(n-2)*M3 - 6 = 0: -3*n**2*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**2 - 3*n**2*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**5 + 3*n**2*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**6 + 3*n**2*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1) - 9*n*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1) - 9*n*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**6 + 9*n*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**5 + 9*n*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**2 - 6 - 6*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**2 - 6*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**5 + 6*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)**6 + 6*CRootOf(6*x**4 + x**3 + x**2 + x - 1, 1)
+roots (numeric): [-1.4455253252736720260, 4.4455253252736720260]
+n0_boundary (upper-bound x=1 crossing) = 4.4455253252736720260
+Confirmed: 4 < n0_boundary < 5  ->  h(n,1) < M3 exactly for every
+integer n >= 5 (exact rational-vs-algebraic comparison, verified
+below at n=5).
+h(5,1) = 1/2  =  0.50000000000000000000    M3 = 0.71207155813802780842
+h(5,1) < M3  CONFIRMED (exact).
+|Delta_3(1)| = 1  (outside n>=5 domain, trivial)
+|Delta_4(1)| = 1/4  (outside n>=5 domain, trivial)
+
+======================================================================
+STEP 4: interior critical points -- resultant elimination
+======================================================================
+elapsed Res_x(F1,F2): 0.063 s
+elapsed Res_m(R, minpoly_M3): 0.087 s
+degree of S(n): 236
+elapsed real_roots(S): 0.537 s   (#roots incl. mult: 158 )
+distinct real roots of S(n) [n at which SOME interior critical point of
+h(n,.) achieves ANY of the 4 conjugate values of M3's minimal quartic]:
+    -0.98021248846252062423
+    -0.14726384939336307169
+    -0.13589151053064307714
+    -0.13138561662272061102
+    -0.050238971157175076716
+    0
+    0.44443541828170743070
+    0.44570598595938945003
+    0.66666666666666666667
+    0.72125607720675491400
+    0.72126410484940621366
+    1.9731864535269750055
+    1.9746996124933373447
+    2.0176610899304313103
+    2.0755199080109737546
+    2.1668622539065549252
+largest real root: 2.1668622539065549252
+Confirmed: NO real n > ~2.17 has an interior critical point of h(n,.)
+achieving h=M3 (or any of its 3 algebraic conjugates). In particular
+this rules out h(n,x*)=M3 at any interior x*, for every real n>3,
+hence for every integer n>=5.
+
+======================================================================
+STEP 5: combine (a)+(b)+(c) -- exact closure, upper bound
+======================================================================
+a(n) := max_x h(n,x) is continuous on real n>2 (max of a jointly
+continuous function over the compact set x in [0,1]).
+For n>3 (hence for all integer n>=5): a(n) never equals M3, because
+  - boundary x=0: h(n,0)=0 != M3 (M3>0);
+  - boundary x=1: h(n,1)=6/[(n-1)(n-2)] < M3 for n>n0_boundary(<5);
+  - interior: STEP 4 rules out any interior critical value = M3 for
+    real n>~2.17.
+Since a(n) is continuous, never equal to M3 on (n0_boundary,infinity),
+and a(6) < M3 (checked below, exact), by the Intermediate Value
+Theorem a(n) < M3 for ALL real n > n0_boundary, in particular for
+every integer n>=5.
+a(6) = max_x h(6,x) = 0.4520877254732390178230291  at x* = 0.371155841697152
+a(6) < M3  CONFIRMED (exact).
+
+>>> UPPER-BOUND THEOREM (K=3, EXACT): for all integer n>=5 and
+>>> x in [0,1]:  n*Delta_n(x) <= M3,  M3 = 0.712071558138027808419103234207
+
+======================================================================
+STEP 6: lower bound h(n,x) >= -M3 (target m=0 this time)
+======================================================================
+Res_x(dN/dx, N) [factored] = -n**30*(3*n - 2)*(3*n**3 - 12*n**2 + 12*n + 2)**2*(5971968*n**16 - 123918336*n**15 + 1098676224*n**14 - 5531279616*n**13 + 17556493392*n**12 - 36617307792*n**11 + 50266282245*n**10 - 43406141808*n**9 + 20152732958*n**8 - 1715003016*n**7 - 2268719035*n**6 + 518406552*n**5 + 120725624*n**4 - 27357600*n**3 - 3515184*n**2 + 565248*n + 65536)
+elapsed real_roots: 0.012 s
+distinct real roots: [-0.15031548574792770622, -0.14490771794375737142, -0.13450080028550277793, 0, 0.44544708413456466646, 0.66666666666666666667, 0.72126243643909074303, 1.9468031251484927552, 5.9681846046308027719]
+largest real root: 5.9681846046308027719
+Confirmed: for real n> 5.9681846046308027719 (hence every integer n>=6),
+N(n,x) has NO interior double root in x, i.e. h(n,.) never touches 0
+except at the trivial boundary x=0 -- combined with h(n,0)=0 and
+h(n,1)=6/[(n-1)(n-2)]>0, and continuity/IVT exactly as in Step 5,
+this gives h(n,x) >= 0 > -M3 for every integer n>=6.
+n=5: min_x h(5,x) = -0.008896011412252697770870337  at x= 0.815915483215585
+min_x h(5,x) > -M3  CONFIRMED (exact).
+
+>>> LOWER-BOUND THEOREM (K=3, EXACT): for all integer n>=5 and
+>>> x in [0,1]:  n*Delta_n(x) >= -M3.
+
+======================================================================
+FINAL THEOREM (K=3, EXACT CLOSURE):
+for all integer n>=5 and x in [0,1]:
+   |F_n^{(3)}(x) - F_3(x)| <= M3/n,
+   M3 = 0.7120715581380278084191032342070331825470
+   (exact real root of 15552*t^4-3355*t^3-42192*t^2+181440*t-110592,
+    equivalently g_3 evaluated at the exact interior critical point,
+    a root of 6*t^4+t^3+t^2+t-1)
+This matches K=2's tier of closure (exact constant, not a
+1.0088x-inflated near-sharp one), and slightly widens the domain
+from predecessor's n>=6 to n>=5.
+======================================================================

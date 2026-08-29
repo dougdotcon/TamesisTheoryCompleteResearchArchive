@@ -1,0 +1,10 @@
+(run under `timeout 30`: process did not complete within 30s, exit
+status 124 -- i.e. Poly.count_roots(inf=6) on the same degree-216
+polynomial that real_roots() completed in 6.55s (see
+adv14_timing_spotcheck.log) did not finish in 30s. No stdout was
+produced before the timeout killed the process. This qualitatively
+corroborates the target's own claim (Sec 5.1) that count_roots with a
+semi-infinite-interval query is dramatically slower than full
+real_roots() on the same polynomial in this SymPy version -- though
+this referee did not wait out the target's own reported 115-590s
+per-attempt runtimes to fully reproduce the exact timing.)

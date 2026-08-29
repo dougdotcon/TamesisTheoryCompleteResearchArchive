@@ -1,0 +1,28 @@
+--- K=3 dense float grid, n in [4.5, 1e7], proved domain n>=5 --- (elapsed 0.6s)
+  [whole scanned range, n>=4.5, INCLUDING n below the proved domain]
+    max h found: 0.7120714118 at (np.float64(10000000.0), np.float64(0.45225))   M=0.7120715581
+    min h found: -0.0196011641 at (np.float64(4.5), np.float64(0.7875))   -M=-0.7120715581   (below-domain excursions here are EXPECTED, not a bug)
+  [restricted to the PROVED domain n>=5]
+    max h found: 0.7120714118   M=0.7120715581   [OK]
+    min h found: -0.0088959471   -M=-0.7120715581   [OK]
+--- K=4 dense float grid, n in [4.2, 1e7], proved domain n>=6 --- (elapsed 0.8s)
+  [whole scanned range, n>=4.2, INCLUDING n below the proved domain]
+    max h found: 0.7087181164 at (np.float64(10000000.0), np.float64(0.37))   M=0.7087183934
+    min h found: -2.8409090909 at (np.float64(4.2), np.float64(1.0))   -M=-0.7087183934   (below-domain excursions here are EXPECTED, not a bug)
+  [restricted to the PROVED domain n>=6]
+    max h found: 0.7087181164   M=0.7087183934   [OK]
+    min h found: -0.4000000000   -M=-0.7087183934   [OK]
+
+--- K=4 exact-per-n spot table (confirms min always at x=1 boundary) ---
+  n=    6  max=0.31856656  min=-0.40000000 at x=1.00000  (boundary h(n,1)=-0.40000000)
+  n=    7  max=0.37350677  min=-0.20000000 at x=1.00000  (boundary h(n,1)=-0.20000000)
+  n=    8  max=0.41608478  min=-0.11428571 at x=1.00000  (boundary h(n,1)=-0.11428571)
+  n=   10  max=0.47660953  min=-0.04761905 at x=1.00000  (boundary h(n,1)=-0.04761905)
+  n=   15  max=0.55693766  min=-0.01098901 at x=1.00000  (boundary h(n,1)=-0.01098901)
+  n=   20  max=0.59626702  min=-0.00412797 at x=1.00000  (boundary h(n,1)=-0.00412797)
+  n=   50  max=0.66485402  min=-0.00021711 at x=1.00000  (boundary h(n,1)=-0.00021711)
+  n=  100  max=0.68698405  min=-0.00002550 at x=1.00000  (boundary h(n,1)=-0.00002550)
+  n=  500  max=0.70440376  min=-0.00000019 at x=1.00000  (boundary h(n,1)=-0.00000019)
+  n=  999  max=0.70656095  min=-0.00000002 at x=1.00000  (boundary h(n,1)=-0.00000002)
+
+SUMMARY: ALL CHECKS PASSED, zero violations

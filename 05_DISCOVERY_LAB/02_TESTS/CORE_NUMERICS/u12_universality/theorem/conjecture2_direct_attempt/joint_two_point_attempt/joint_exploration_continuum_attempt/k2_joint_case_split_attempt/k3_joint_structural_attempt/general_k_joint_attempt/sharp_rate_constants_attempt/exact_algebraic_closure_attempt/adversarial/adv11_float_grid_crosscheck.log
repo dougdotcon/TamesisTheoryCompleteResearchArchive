@@ -1,0 +1,20 @@
+======================================================================
+K=3 float-grid cross-check, n=5..2000 (integer) + geometric to 1e5
+======================================================================
+n values tested: 2003, violations: 0
+worst ratio max|h3|/M3 = 0.9999808921780311 at n=100000
+
+======================================================================
+K=4 float-grid cross-check, n=6..2000 (integer) + geometric to 1e5
+======================================================================
+n values tested: 2002, violations: 0
+worst ratio max|h4|/M4 = 0.9999695241291031 at n=100000
+
+Note: for very large n (>~1e4-1e5), float64 catastrophic cancellation
+(computing a ~1/n-scale quantity as a difference of ~n^6-n^8-scale terms)
+starts eroding precision -- consistent with predecessor/target's own
+disclosed finding about needing exact rational arithmetic for n up to 1e6+.
+This script deliberately stays in a range (<=1e5) where float64's ~15-16
+significant digits are still enough to be a meaningful (not misleading)
+cross-check; it is a sanity net, not a load-bearing proof step, matching
+both fronts' own stated role for this kind of check.

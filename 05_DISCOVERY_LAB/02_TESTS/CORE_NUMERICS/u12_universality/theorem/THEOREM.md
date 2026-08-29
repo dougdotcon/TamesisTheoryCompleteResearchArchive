@@ -6896,3 +6896,98 @@ Reivindicação B para `K\ge2` — precisamente diagnosticado (§5.3 da
 combinatória, não uma obstrução estrutural do tipo Gosper. Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+## [Extensão, Estágio 48 — 2026-08-29]
+
+**Onda 26, frente (b), `DISC-DEC-123` (`EXACT-ALGEBRAIC-CLOSURE-ATTEMPT`).**
+Alvo: o Estágio 46 (onda 25) fechou `K=3,4` apenas quase-afiado
+(`C_3=1{,}0088\times M_3`, `C_4=1{,}0365\times M_4`, não exato),
+citando "nenhuma forma fechada limpa para o ponto crítico de `g_4`"
+como obstrução. Mandato: tentar uma rota de número algébrico exato
+(não radical) para fechar `K=3,4` na mesma constante ótima exata que
+`K=2` já alcançou.
+
+### O que aconteceu
+
+> **Fechamento EXATO completo, `K=3` (`n\ge5`, alargando o domínio
+> de `n\ge6`) e `K=4` (`n\ge6`), no mesmo tier de `K=2`.** Em vez do
+> método "soma de supremos" do Estágio 46 (comprovadamente frouxo),
+> esta frente tratou `h(n,x):=n\Delta_n(x)-M_K` como objeto genuíno de
+> duas variáveis e eliminou `x` via `\mathrm{Res}_x` entre a equação de
+> ponto crítico e `h(n,x)=m`, depois eliminou `m` contra o polinômio
+> mínimo do próprio `M_K` (obtido via `Poly.real_roots()`, não
+> `sp.solve()`, seguindo o precedente de bug do Estágio 46) — dando um
+> polinômio único `S(n)` cujas raízes reais exatas limitam TODO `n`
+> onde um ponto crítico interior poderia atingir `M_K` exatamente.
+> Combinado com verificação exata de fronteira e um argumento de
+> continuidade + Teorema do Valor Intermediário, isto fecha o
+> limitante na constante EXATA:
+> ```
+> |F_n^{(3)}(x)-F_3(x)|\le M_3/n,\ n\ge5;\quad
+> |F_n^{(4)}(x)-F_4(x)|\le M_4/n,\ n\ge6
+> ```
+> `M_3=0{,}71207155813802780842\ldots` (raiz de um quártico
+> irredutível), `M_4=0{,}70871839340932161418\ldots` (idem) — os
+> mesmos valores já citados no Estágio 46, agora provados exatos, não
+> apenas quase-afiados.
+>
+> **Diagnóstico central do mandato, confirmado**: `g_3'(x)` e `g_4'(x)`
+> fatoram-se LIMPAMENTE num quártico irredutível (nenhuma obstrução de
+> Galois a uma forma radical) — a real obstrução do Estágio 46 era um
+> problema de sinal no termo de correção líder quebrando sua
+> desigualdade pontual "soma de supremos", um obstáculo de otimização
+> em duas variáveis genuinamente diferente, não de solubilidade por
+> radicais.
+>
+> **Spot-check da sessão** antes do despacho: enumeração exaustiva
+> própria (do zero, reimplementação independente da Definição 4) para
+> `K=3` (`n=5,6`) e `K=4` (`n=6`), confirmando `|h(n,x)|\le M_K$
+> exatamente nos valores-fronteira de `n` reivindicados.
+>
+> Referee hostil dedicado: reconstruiu toda alegação a partir das
+> próprias fórmulas D3/D4 do `THEOREM.md`, nunca confiando na
+> transcrição da frente; bateu `M_3`, `M_4` e ambos os quárticos
+> mínimos a precisão total; reproduziu os limiares de eliminação por
+> resultante (`2{,}1669`, `5{,}968` para `K=3`; a fatoração
+> grau-`444`→`n^k\cdot(6n^2-11n+6)^4\cdot B(n)$, `B` grau-`216`
+> irredutível, maior raiz `3{,}2244`, para `K=4`); refez a checagem
+> exaustiva `n=6,\ldots,64` do zero (zero violações); cross-checou por
+> grade de ponto flutuante até `n=10^5`. Investigou com particular
+> cuidado a "ruga" auto-divulgada do limitante inferior de `K=4`
+> (§4.5) e encontrou dois achados MODERADOS reais ali: (F1) a
+> explicação da frente para o limiar espúrio `n\approx64{,}77` estava
+> factualmente errada sobre QUAL valor o ramo fora-de-domínio atinge
+> (o próprio `-M_4`, não um "conjugado" `+2{,}898`, embora a conclusão
+> prática permaneça correta); (F2) o texto original não fechava
+> explicitamente `n\ge65` via continuidade+IVT (ao contrário do
+> limitante superior, que ancora explicitamente em `a(6)`) — o referee
+> reconstruiu e fechou esta lacuna de forma independente e rigorosa
+> (checagem direta em `n=65,70,100,1000` mais `g_4\ge0$ em `[0,1]`).
+> Um achado BAIXA (F3): rótulo trocado de qual margem numérica
+> pertence a qual limitante. **O TEOREMA em si permanece verdadeiro em
+> todos os casos**, reconfirmado independentemente pelo referee; os
+> achados são sobre a exposição/mecanismo do texto, não sobre a
+> matemática final. Corrigidos por duas correções datadas (F1, F2) e
+> uma nota datada (F3) na própria `ATTEMPT.md` da frente.
+>
+> **Veredito: SOUND WITH NAMED ISSUES — ACCEPT for catalogue.**
+
+Ver
+`.../sharp_rate_constants_attempt/exact_algebraic_closure_attempt/ATTEMPT.md`
+e
+`.../exact_algebraic_closure_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+Corolários D3.5 e D4.5 (Estágios 40, 43) agora têm constantes EXATAS
+ótimas provadas (`M_3`, `M_4`), substituindo as constantes
+quase-afiadas do Estágio 46 (`C_3=1{,}0088\times M_3`,
+`C_4=1{,}0365\times M_4`) — que permanecem corretas como limitantes
+mais frouxos, apenas superadas por este fechamento mais afiado. `K=3`
+agora vale a partir de `n\ge5` (antes `n\ge6`). Junto ao fechamento já
+completo de `K=2` (Estágio 46), a série de constantes de taxa
+finito-`n` para `K=0,\ldots,4` está agora INTEIRAMENTE no tier exato,
+não apenas quase-afiado; apenas `K\ge5` permanece fora do escopo desta
+linha (a CDF fechada geral-`K` em si continua aberta, Estágios 44/45).
+Nenhuma alegação de progresso em Millennium Problem; matemática
+combinatória pura interna a este arquivo.

@@ -1,6 +1,27 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-28 (`DISC-DEC-117`: onda 24 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-118`: onda 25 autorizada
+— 4 frentes paralelas, grounded numa pesquisa de portfolio dedicada
+(agente somente-leitura) que auditou todo o estado aberto pós
+`DISC-DEC-117`. Correção de framing: `H2` (M-CLUST) já foi dissolvido
+como gap independente desde `DISC-DEC-093/095` — não recebe frente
+própria. (a) `D-SHARP-RATE-CONSTANTS-ATTEMPT`: provar as constantes
+assintóticas líder já conhecidas numericamente (`≈0,167/n`,
+`≈0,712/n`, `≈0,7087/n`) como limitantes uniformes finito-`n`
+rigorosos para D2.5/D3.5/D4.5. (b) `GENERAL-K-CDF-ALTERNATE-ROUTE-ATTEMPT`:
+reatacar a CDF fechada geral-`K` por uma organização diferente da
+Camada-2 já certificada Gosper-não-somável (Estágio 44) — Camada 3 +
+montagem externa em `r`, ou via EGF. (c) `H1-TRANSLATION-STRUCTURE-ATTEMPT`:
+usar a convergência Neumann/Picard agora PROVADA (`DISC-DEC-115`) para
+atacar o gap `y→∞` remanescente via a não-invariância por translação
+de `K(y,t)`, ainda não explorada — sexta onda consecutiva nesta linha,
+risco de retorno marginal decrescente sinalizado honestamente. (d)
+`MCLUST-GAP-RATE-CANDIDATE-ATTEMPT`: testar `(c/n)^{1/4}` e vizinhos
+contra os dados em bin já existentes, candidato identificado mas nunca
+testado pela correção N1 de `DISC-DEC-085`. Seeds
+`20260929000-20260932999`, um bloco por frente, grep-confirmados
+não-usados.
+Anterior: `DISC-DEC-117`: onda 24 frente (b)
 `GENERAL-K-CLOSED-CDF-ATTEMPT` integrada como Estágio 44 — não-fechamento
 certificado por Gosper para a CDF fechada geral-`K`, localizado um nível
 mais fundo (dentro do bloco `S_r`, Camada 2) que a obstrução análoga do

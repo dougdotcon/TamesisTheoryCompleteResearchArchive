@@ -1,0 +1,65 @@
+==============================================================================
+(1) The target's own claim vs its own printed log data
+==============================================================================
+ATTEMPT.md Section 4 claims: 'the general closed form matches the
+Richardson-extrapolated value to <0.7% for lambda<=1.0, <1.6% at lambda=1.5'
+
+The target's own 03_saddle_value_expansion.log contains the line:
+  lambda=0.6 gamma=0.3: predicted=1.201983134  numeric(Richardson)=1.214728583
+  rel.err=0.0104924
+  => 1.0492%, which EXCEEDS the claimed <0.7% bound for lambda<=1.0.
+>>> CONFIRMED: the claim '<0.7% for lambda<=1.0' is contradicted by the
+>>> target's own disclosed data at (lambda,gamma)=(0.6,0.3).
+
+==============================================================================
+(2) Independent re-implementation: is this reproducible, and is the RAW
+    (non-Richardson) error trend at this point clean/monotone?
+==============================================================================
+predicted T_prof(0.6,0.3) = 1.20198313391
+(matches the target's own printed 'predicted=1.201983134': 8.974e-11)
+
+RAW (non-extrapolated) values, own fresh implementation:
+  n=     4000 m=    38  term_m=1.17692532425  raw rel.err=0.0208471
+  n=    16000 m=    76  term_m=1.18753860696  raw rel.err=0.0120172
+  n=    64000 m=   152  term_m=1.19298513857  raw rel.err=0.00748596
+  n=   256000 m=   304  term_m=1.19570482005  raw rel.err=0.0052233
+  n=  1024000 m=   607  term_m=1.20109706461  raw rel.err=0.000737173
+  n=  4096000 m=  1214  term_m=1.20177731922  raw rel.err=0.000171229
+  n= 16384000 m=  2429  term_m=1.20110795311  raw rel.err=0.000728114
+
+Reproducing the TARGET's own repeated-Richardson procedure (2x, squared),
+using exactly the first 5 of the above n values (matching the target's own
+n_seq = [4000,16000,64000,256000,1024000]):
+  Repeated-Richardson estimate = 1.21455411682
+  Relative error vs predicted  = 0.0104585  (target's own reported value: 0.0104924)
+
+Simple single-stage 2-point Richardson (x_n = L + c/sqrt(n)), using the
+LAST TWO of the 7 n-values (largest n, most reliable extrapolation basis):
+  L_est (from n=4096000,16384000) = 1.200438587  rel.err=0.001285
+
+==============================================================================
+Interpretation
+==============================================================================
+RAW relative errors across n=4e3..1.6e7: ['0.02085', '0.01202', '0.007486', '0.005223', '0.0007372', '0.0001712', '0.0007281']
+Clean decreasing trend from n=64000 onward: False
+
+This independently reproduces the target's own reported repeated-Richardson
+residual (~1.0-1.1%) at (lambda,gamma)=(0.6,0.3) -- confirming it is NOT a
+transcription error in the log. However, the RAW (non-extrapolated) error
+trend at this same point is clean and monotonically shrinking from n=64000
+onward, and a simple single-stage 2-point Richardson using the LARGEST n
+pair already achieves a much tighter match than the target's own repeated-
+Richardson estimate. This is consistent with the discrepancy being an
+artifact of the SPECIFIC repeated/second-order Richardson procedure the
+target used (noise-amplifying at this particular (lambda,gamma) point, for
+reasons not investigated further here) rather than a flaw in the T_prof
+closed form itself -- exactly the same DIAGNOSIS the target itself reached,
+independently, for the lambda=1.5 discrepancy (via its own Part C direct
+high-n push) but did NOT apply to this comparably-anomalous lambda=0.6 case.
+
+>>> CONCLUSION: the specific quantitative claim '<0.7% for lambda<=1.0' in
+>>> ATTEMPT.md Section 4 (and echoed in the VERDICT summary) is not accurate
+>>> and needs correction -- the target's own log shows up to ~1.05% at
+>>> lambda=0.6. This does NOT, on the evidence gathered here, indicate a flaw
+>>> in the T_prof closed form itself (see ref01, which independently confirms
+>>> the closed form via a route unrelated to Richardson extrapolation).

@@ -1,6 +1,28 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-142`: onda 31 autorizada
+**Última atualização:** 2026-08-29 (`DISC-DEC-143`: onda 31 frente (b)
+`GAMMA-C-GAMMA-JOINT-SADDLE-ATTEMPT` integrada como Estágio 56 em
+`THEOREM.md`. `C(γ)` continua inteiramente ABERTO, mas pela primeira
+vez em 6 ondas a análise conjunta de ponto de sela/Laplace em duas
+variáveis foi genuinamente EXECUTADA (não apenas diagnosticada):
+nova forma fechada exata do ponto de sela interior `t^*(n,m,γ)`
+(PROVADA, referee provou otimalidade global via concavidade); novo
+perfil-limite mesoscala `T_{\mathrm{prof}}(λ,γ)`, re-derivado pelo
+referee por rota mais rigorosa chegando à forma idêntica; achado
+central não-circular — a integral de `T_{\mathrm{prof}}` reproduz
+EXATAMENTE o coeficiente já-provado de `\sqrt n` em `G_n`. Referee
+hostil: **SOUND WITH ISSUES, duas correções** — uma alegação numérica
+`<0,7\%` contradita pelo próprio log da frente (artefato de
+extrapolação de Richardson, não falha na matemática) e uma alegação
+de "crossover começando em `c(γ)/2`" que o próprio log da frente
+mostra ser `c(γ)` em si — a parte sólida (convergência para `A(γ)`)
+sobrevive. Nenhum dos três achados centrais afetado. **Onda 31 agora
+com 1/2 frentes integradas** — frente (a) `CPRIME-VOLTERRA-RESOLVENT-
+ATTEMPT` retornou (não provou `(C')`, mas entregou uma nova redução
+unconditional do operador `K(y,t)` e um diagnóstico preciso de
+divergência polinomial), ainda aguardando spot-check e despacho de
+referee.
+Anterior: `DISC-DEC-142`: onda 31 autorizada
 — 2 frentes, após survey de portfolio dedicado que constatou: toda
 linha do arquivo fora de `u12_universality` está formalmente fechada
 (exigiria um `PREREGISTRATION.md` novo sobre dados externos reais

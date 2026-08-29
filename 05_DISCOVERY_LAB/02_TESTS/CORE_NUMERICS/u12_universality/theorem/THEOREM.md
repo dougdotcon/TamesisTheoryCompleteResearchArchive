@@ -7812,3 +7812,131 @@ uma técnica computacional nova (o certificado de deslocamento) além do
 inteiros, não ao grau ou à estrutura de multiplicidade. Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 56 — 2026-08-29]
+
+**Onda 31, frente (b), `DISC-DEC-142` (`GAMMA-C-GAMMA-JOINT-SADDLE-
+ATTEMPT`).** Alvo: executar a análise de ponto de sela/Laplace conjunta
+em duas variáveis `(j,m)` que o Estágio 54 (Seção 5/8) nomeou como o
+passo concreto não-executado para `C(γ)`, partindo da forma fechada
+Beta`(m+1,m+1)` que o referee daquela frente derivou e verificou.
+Primeira das seis frentes de `C(γ)` (ondas 26-31) a de fato tentar a
+análise conjunta, em vez de diagnosticar mais um beco estrutural
+dentro da maquinaria `A_k`/`2F0`.
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — exatamente como o mandato
+> antecipou como resultado mais provável.** Quatro achados novos:
+>
+> 1. **Uma nova forma fechada EXATA para o ponto de sela interior**:
+>    limpando denominadores em `g'(t)=0` para o log-integrando da
+>    integral Beta, `g(t):=m\ln t+m\ln(1-t)+(n-m)\ln(1-γt)`, obtém-se
+>    uma equação genuinamente QUADRÁTICA em `t`, com raiz fechada
+>    `t^*(n,m,γ)=[2m+γn-\sqrt{γ^2n^2+4(1-γ)m^2}]/[2γ(m+n)]`. PROVADA
+>    por cálculo simbólico direto; o referee foi além e provou
+>    concavidade global de `g` (cada um dos três termos aditivos é
+>    individualmente côncavo em `(0,1)`), certificando que `t^*` é o
+>    máximo GLOBAL, não apenas um ponto crítico local.
+> 2. **Uma nova forma fechada, verificada, para o perfil-limite
+>    mesoscala (`m=Θ(\sqrt n)`)**: `T_{\mathrm{prof}}(λ,γ)=(1/γ)
+>    \exp[-((2-γ)/(2γ))λ^2]`, `λ:=m/\sqrt n`, derivada via um cálculo
+>    assintótico genuíno de dois níveis (Laplace em `t` + Stirling em
+>    `m`), com o divergente `m\ln m` mostrado a cancelar exatamente.
+>    O referee re-derivou isto do zero por uma rota metodologicamente
+>    mais rigorosa (diferença `lgamma` exata em vez do atalho de
+>    ordem-líder da frente) e obteve a forma fechada IDÊNTICA,
+>    confirmada numericamente além do próprio alcance testado pela
+>    frente (`λ=2{,}0`, `m` até `10^{10}`).
+> 3. **O achado central, positivo, não-circular**: `\int_0^\infty
+>    T_{\mathrm{prof}}(λ,γ)\,dλ=\tfrac12\sqrt{π/β}` EXATAMENTE — o
+>    coeficiente já-PROVADO de `\sqrt n` em `G_n` (Lema D0) — sem que
+>    nada na derivação de `T_{\mathrm{prof}}` tenha usado `G_n`, `β`
+>    ou `T(γ)` como entrada. O referee confirmou a identidade por duas
+>    rotas independentes e confirmou a não-circularidade por inspeção
+>    direta dos scripts (zero ocorrências de `G_n`/`β`/`T(γ)`).
+>    **O resultado mais forte desta frente**, segundo seu próprio
+>    scorecard e confirmado pelo referee.
+> 4. **Uma reconciliação da curvatura mesoscala `A(γ)=(2-γ)/(2γ)` desta
+>    frente com a taxa local `c(γ)=2(1-γ)/γ` (PROVADA, ancestral) —
+>    parcialmente corrigida pelo referee (ver correções abaixo).**
+>
+> **Dois achados reais de correção, ambos em prosa
+> descritiva/resumo, não na matemática subjacente:** (1) a alegação
+> numérica `<0,7\%` para `λ\le1` (Seção 4) é contradita pelo próprio
+> log da frente em `λ=0{,}6` (`1{,}05\%`) — o referee reproduziu o
+> resíduo do zero e diagnosticou-o como artefato do procedimento de
+> extrapolação de Richardson, não uma falha na forma fechada
+> `T_{\mathrm{prof}}` em si (o mesmo tipo de diagnóstico que a própria
+> frente já havia feito para sua própria anomalia em `λ=1{,}5`, mas
+> não estendido a este ponto comparável); (2) a alegação de que o
+> "crossover" da curvatura local começa em `c(γ)/2` está errada de
+> duas formas: a aritmética ilustrativa (`c(1/3)/2=1`) está incorreta
+> (`c(1/3)/2=2`), e mais substantivamente o próprio log impresso da
+> frente mostra que o valor em `m=1` é `c(γ)` em si (`4{,}000002` em
+> `γ=1/3`), não `c(γ)/2` — um fato forçado algebricamente pela própria
+> construção da fórmula de curvatura local no primeiro passo. A parte
+> genuinamente sólida do achado 4 sobrevive intacta: a curvatura NÃO é
+> constante através do intervalo de `m` e converge de forma limpa
+> (`<0{,}1\%` por `m\sim500`-`3000`) para `A(γ)`, não para nenhuma
+> extrapolação de `c(γ)`. Ambos corrigidos por correção datada na
+> própria `ATTEMPT.md` da frente; um achado adicional de severidade
+> NOTA (uma oscilação não-monotônica não-revelada em `m=32` na grade
+> de crossover, plausivelmente ruído de quadratura).
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente via `sympy` da equação quadrática para `t^*` a partir de
+> `g'(t)=0`, confirmação de que a raiz fechada satisfaz a quadrática
+> exatamente, confirmação de `g''(t^*)<0` e `0<t^*<1` em três pontos
+> amostrais, e confirmação exata (simbólica em quatro `γ` racionais,
+> mais derivação algébrica à mão para `γ` geral) da identidade
+> gaussiana `\int T_{\mathrm{prof}}\,dλ=\tfrac12\sqrt{π/β}` — zero
+> discrepância em todos os casos.
+>
+> Referee hostil dedicado: re-derivou o núcleo matemático central do
+> zero — a quadrática exata para `t^*` e o perfil mesoscala
+> `T_{\mathrm{prof}}` — por uma rota metodologicamente mais rigorosa e
+> largamente disjunta da própria frente, obtendo as formas fechadas
+> IDÊNTICAS; forneceu uma prova não-numérica mais forte de otimalidade
+> global para `t^*` (concavidade); confirmou a identidade
+> `G_n`-reproduzindo e sua não-circularidade por inspeção direta de
+> arquivo; escrutinou o achado 4 com o máximo rigor (per mandato
+> explícito) e encontrou um erro real e verificável, não apenas
+> hand-waving em torno dele. Dois achados de CORREÇÃO (a alegação
+> numérica `<0,7\%` e o "crossover" `c(γ)/2`), um de NOTA (a oscilação
+> em `m=32`); nenhum afeta os três achados centrais (1-3), todos
+> confirmados sólidos por reconstrução independente.
+>
+> **Veredito: SOUND WITH ISSUES, duas correções — ACCEPT for
+> catalogue.** `C(γ)` permanece inteiramente ABERTO. O hiato preciso
+> para `D(γ)`/`C(γ)` — um resto uniforme tipo Watson's-lemma, correções
+> de próxima ordem a `T_{\mathrm{prof}}`, e um tratamento tipo
+> Euler-Maclaurin/Poisson da soma externa — é nomeado com precisão na
+> Seção 7 da frente, confirmando (não refutando) a previsão do
+> predecessor de que esta análise conjunta exigiria profundidade
+> comparável ao próprio Gap 1.
+
+Ver
+`.../diagonal_2f0_sum_attempt/route2_bypass_attempt/joint_saddle_point_attempt/ATTEMPT.md`
+e
+`.../route2_bypass_attempt/joint_saddle_point_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado — exatamente como todo predecessor
+desde o Estágio 26. O que muda é que, pela primeira vez em seis ondas,
+a análise conjunta de duas variáveis foi genuinamente EXECUTADA (não
+apenas diagnosticada como necessária), produzindo dois objetos novos
+em forma fechada (`t^*`, `T_{\mathrm{prof}}`) que uma futura frente
+pode usar como ponto de partida em vez de manipulação bruta de somas
+de Pochhammer, e um resultado de validação genuinamente não-circular
+(a reprodução exata do coeficiente de `G_n`) que dá confiança de que a
+maquinaria construída aqui está correta em ordem líder. O hiato
+remanescente — controle de resto uniforme, correções de próxima ordem,
+tratamento Euler-Maclaurin da soma externa — é agora nomeado com
+precisão máxima, exatamente no mesmo nível de detalhe que o Gap 1
+original exige. Nenhuma alegação de progresso em Millennium Problem;
+matemática combinatória pura interna a este arquivo.

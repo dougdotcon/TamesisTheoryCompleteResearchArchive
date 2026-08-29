@@ -1,0 +1,124 @@
+==============================================================================
+Part A: symbolic confirmation that Int_0^inf T_prof(lambda,gamma) dlambda
+        EXACTLY equals the G_n coefficient (1/2) sqrt(pi/beta)
+==============================================================================
+Int_0^inf T_prof(lambda,gamma) d(lambda) [sympy raw, Piecewise since
+gamma's domain wasn't pinned to (0,1) inside the integrand itself]:
+  Piecewise((sqrt(2)*sqrt(pi)/(2*sqrt(gamma)*sqrt(2 - gamma)), Abs(arg(2 - gamma)) <= pi/2), (Integral(exp(-lambda**2*(2 - gamma)/(2*gamma))/gamma, (lambda, 0, oo)), True))
+First (gamma in (0,2)-valid) branch, extracted directly: sqrt(2)*sqrt(pi)/(2*sqrt(gamma)*sqrt(2 - gamma))
+(1/2) sqrt(pi/beta), beta=gamma(2-gamma)/2, substituted = sqrt(2)*sqrt(pi)/(2*sqrt(gamma)*sqrt(2 - gamma))
+Difference (symbolic): 0
+
+Independent numeric cross-check (rational gamma in (0,1), sympy N()):
+  gamma=1/7: integral=2.433247592652666  target=2.433247592652666  diff=0.000e+00
+  gamma=1/3: integral=1.681497364919379  target=1.681497364919379  diff=0.000e+00
+  gamma=2/5: integral=1.566642671644375  target=1.566642671644375  diff=0.000e+00
+  gamma=1/2: integral=1.447202509116535  target=1.447202509116535  diff=0.000e+00
+  gamma=3/4: integral=1.294417275037133  target=1.294417275037133  diff=0.000e+00
+  gamma=9/10: integral=1.259628102401054  target=1.259628102401054  diff=0.000e+00
+
+>>> CONFIRMED, symbolically, exactly: Int_0^inf T_prof(lambda,gamma) dlambda
+>>>   = (1/2) sqrt(pi/beta) = the EXACT, already-PROVED coefficient of
+>>>   sqrt(n) in G_n = (1/2) sqrt(pi n/beta).
+>>> This is a genuine, unforced, parameter-free cross-check: nothing in the
+>>> derivation of T_prof (script 03) used G_n or beta as an input.
+
+==============================================================================
+Part B: numerical check that S_n' - G_n stays bounded as n grows
+        (necessary condition for S_n = G_n + D(gamma) + o(1))
+==============================================================================
+(Using the exact double-sum-swap route, script 01's own independently
+ re-derived identity, for a direct, ancestor-independent numeric check.)
+
+gamma=1/3:  known D(gamma) = -0.44, target S_n'-G_n -> D(gamma)+1 = 0.56
+    n=  50: S_n'=12.46331043  G_n=11.88998189  S_n'-G_n=0.57332854
+    n= 100: S_n'=17.3844306  G_n=16.81497365  S_n'-G_n=0.56945695
+    n= 200: S_n'=24.34666635  G_n=23.77996379  S_n'-G_n=0.56670256
+    n= 400: S_n'=34.19469423  G_n=33.6299473  S_n'-G_n=0.56474694
+
+gamma=1/2:  known D(gamma) = -0.4074074074, target S_n'-G_n -> D(gamma)+1 = 0.5925925926
+    n=  50: S_n'=10.84132276  G_n=10.23326708  S_n'-G_n=0.60805568
+    n= 100: S_n'=15.07562215  G_n=14.47202509  S_n'-G_n=0.60359706
+    n= 200: S_n'=21.06694253  G_n=20.46653416  S_n'-G_n=0.60040837
+    n= 400: S_n'=29.5421863  G_n=28.94405018  S_n'-G_n=0.59813612
+
+gamma=2/3:  known D(gamma) = -0.375, target S_n'-G_n -> D(gamma)+1 = 0.625
+    n=  50: S_n'=10.04096597  G_n=9.39985603  S_n'-G_n=0.64110994
+    n= 100: S_n'=13.92990711  G_n=13.29340388  S_n'-G_n=0.63650323
+    n= 200: S_n'=19.43290173  G_n=18.79971206  S_n'-G_n=0.63318967
+    n= 400: S_n'=27.21762646  G_n=26.58680776  S_n'-G_n=0.63081869
+
+Interpretation: the residual S_n'-G_n should be converging toward the
+constant D(gamma)+1 (slowly, at the O(n^-1/2) rate this whole sub-lineage
+has documented since Lemma D0) as n grows -- consistent with (not a proof
+of) the target asymptotic. This uses exact rational arithmetic up to
+n=400 (script 01's route); pushing further exactly is combinatorially
+expensive (the double sum has O(n^2) terms of growing bit-length) -- a
+resource, not mathematical, limitation, matching this lineage's own
+convention of disclosing such limits rather than silently stopping.
+
+==============================================================================
+Part C: precise diagnosis of what remains for the O(1) constant D(gamma)
+==============================================================================
+
+What THIS FRONT established (Parts A-B, scripts 01-03), precisely:
+  (1) T(n,m) = Beta-integral closed form (script 01) -- re-verified, not
+      new to this front (referee's own extension of the predecessor).
+  (2) The INNER saddle t*(n,m,gamma), EXACT closed form (script 02) --
+      new. g''(t*)<0 confirmed; t* ~ m/(gamma n) leading order confirmed.
+  (3) The MESOSCALE limit profile T_prof(lambda,gamma) = (1/gamma) *
+      exp(-((2-gamma)/(2 gamma)) lambda^2), lambda=m/sqrt(n) -- new,
+      derived via Laplace/Stirling and independently confirmed numerically
+      (script 03, <0.1%-2% relative error depending on lambda, tightening
+      as n grows, and shown NOT to be extrapolation noise at the one
+      point checked most carefully).
+  (4) Int_0^inf T_prof(lambda,gamma) dlambda = (1/2) sqrt(pi/beta) EXACTLY
+      -- reproduces the ALREADY-PROVED leading sqrt(n) coefficient of
+      S_n, via a route that never used that fact as an input. (Part A.)
+
+What this front did NOT establish -- the precise gap to D(gamma):
+  (a) A UNIFORM error bound on the inner Laplace approximation (step 3),
+      valid uniformly over m=O(sqrt n) with an EXPLICIT, summable
+      remainder -- what was used is a leading-order Laplace/Watson
+      approximation with relative error checked to shrink numerically,
+      not bounded analytically. The direct analogue of Gap 1's own
+      "uniform Taylor-remainder-with-moments bound" requirement
+      (gamma_second_order_attempt/ATTEMPT.md Section 5), now for the
+      Beta-tilted-moment integral instead of the Binomial MGF.
+  (b) The NEXT-ORDER (O(1/sqrt n)) correction to T_prof itself -- i.e.
+      T_prof_1(lambda,gamma) in T_prof(lambda,gamma) + T_prof_1(lambda,gamma)/
+      sqrt(n) + o(1/sqrt(n)) -- requires carrying the Laplace/Watson
+      expansion (script 02-03's g(t*) computation) one order further:
+      the next term in Watson's lemma (involving g'''(t*), g''''(t*),
+      not just g''(t*)), PLUS the next Stirling correction to m! and to
+      (n+m+1)!/(n-m)!, PLUS the (2m+1)/n and m^3/n^2 terms this front's
+      own script 03 working notes explicitly dropped as o(1) at leading
+      order (script 03 header) -- each of these individually o(1) at
+      FIXED lambda, but their SUM, integrated against the O(sqrt n)-many
+      terms of the outer sum, contributes at the SAME O(1) order as
+      D(gamma) itself (exactly the mechanism that made Lemma D0's own
+      correction term, `gamma_second_order_attempt/ATTEMPT.md` Section 3,
+      delicate -- an O(k^2/n^2) term that looked negligible pointwise but
+      summed to a genuine O(n^-1/2) correction).
+  (c) An Euler-Maclaurin / Poisson-summation treatment of
+      sum_m T_prof(m/sqrt(n),gamma) (continuum-limit correction, replacing
+      Part A's leading-order integral with a discrete sum plus the
+      O(1)-order boundary/lattice corrections) -- the direct analogue of
+      what Lemma D0 (`gamma_second_order_attempt/ATTEMPT.md` Section 3)
+      did for the ORIGINAL k-sum, now needed a SECOND time, for the
+      swapped m-sum, and coupled to (b) since the summand itself is only
+      known to the precision of (b).
+  (d) Combining (b) and (c) into a single, jointly-controlled two-
+      variable (t,m) asymptotic with an EXPLICIT o(1) remainder -- the
+      literal target the dispatching mandate names.
+
+None of (a)-(d) was completed by this front. This matches the mandate's
+own risk disclosure precisely: getting THIS FAR (a verified, closed-form
+mesoscale profile whose leading-order sum reproduces a known PROVED fact
+exactly) required a genuine two-level Laplace/Stirling derivation; going
+the remaining distance to an O(1) constant requires AT LEAST two more
+independent orders of asymptotic control (inner Watson's-lemma next
+order; outer Euler-Maclaurin next order), each individually comparable in
+technical weight to what Gap 1's six prior fronts have found insufficient
+time/technique to close in one pass.
+

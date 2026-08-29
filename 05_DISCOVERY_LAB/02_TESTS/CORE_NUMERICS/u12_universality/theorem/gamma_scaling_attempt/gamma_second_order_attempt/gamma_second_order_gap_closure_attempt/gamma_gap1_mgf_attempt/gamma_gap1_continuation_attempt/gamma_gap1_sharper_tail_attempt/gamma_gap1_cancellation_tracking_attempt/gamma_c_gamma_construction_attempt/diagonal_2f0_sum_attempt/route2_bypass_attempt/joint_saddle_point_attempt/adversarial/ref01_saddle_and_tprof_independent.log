@@ -1,0 +1,54 @@
+==============================================================================
+PART 1: independent symbolic re-derivation of the quadratic for t*
+==============================================================================
+g'(t) numerator, as poly in t, coefficients (t^2,t^1,t^0): (gamma*m + gamma*n, -gamma*n - 2*m, m)
+MATCHES the target's claimed quadratic gamma(m+n)t^2-(2m+gamma n)t+m=0 exactly.
+Discriminant and closed-form root MATCH the target's claim exactly (symbolic).
+
+Independent proof that t* is the GLOBAL max (not just a local one),
+via concavity of each additive term of g(t) on (0,1), gamma in (0,1),
+0<=m<=n -- a stronger, non-numerical argument the target did not use:
+  d2/dt2 [m ln t]        = -m/t**2  (< 0 for t>0, m>0)
+  d2/dt2 [m ln(1-t)]     = -m/(t - 1)**2  (< 0 for t<1, m>0)
+  d2/dt2 [(n-m)ln(1-gt)] = gamma**2*(m - n)/(gamma*t - 1)**2  (< 0 for n>m, 0<t<1/gamma, gamma<1<1/gamma)
+  => g(t) is a sum of three functions each strictly concave on (0,1)
+     whenever 0<m<n and gamma in (0,1) => g is globally strictly concave
+     => g' is strictly decreasing => AT MOST ONE root of g'(t)=0 in (0,1)
+     => the t* found above (once confirmed 0<t*<1) is automatically the
+        GLOBAL maximizer, not merely a local one satisfying g''(t*)<0.
+     This is a genuine strengthening of the target's own verification,
+     independent of any numerical golden-section search.
+
+==============================================================================
+PART 2: independent re-derivation of T_prof(lambda,gamma), using the
+        EXACT lgamma difference (not the target's (2m+1)ln(n) shortcut)
+        for the ln[(n+m+1)!/(n-m)!] piece -- a strictly more rigorous
+        route than script 03's own derivation.
+==============================================================================
+Constant term of ln(term_m) as m->infty at fixed lambda (via EXACT lgamma,
+independently derived, not copied):
+  lambda**2/2 - log(gamma) - lambda**2/gamma
+
+Difference from the target's claimed ln(T_prof) = -log(gamma) -
+(2-gamma)/(2 gamma) lambda^2 : 0
+>>> INDEPENDENTLY CONFIRMED, via a strictly more rigorous route (exact
+>>> lgamma instead of the target's leading-order binomial-shift shortcut):
+>>> T_prof(lambda,gamma) = (1/gamma) exp[-(2-gamma)/(2 gamma) lambda^2].
+
+==============================================================================
+PART 3: independent HIGH-PRECISION NUMERIC confirmation of Part 2's limit,
+        via mpmath (no sympy series machinery at all -- direct evaluation
+        of the exact asymptotic combination at growing m, using mp.loggamma)
+==============================================================================
+lambda=0.3 gamma=0.3: at m=1e10, |asymptotic - claimed| = 1.6635e-11
+lambda=0.6 gamma=0.5: at m=1e10, |asymptotic - claimed| = 2.016e-11
+lambda=1.0 gamma=0.8: at m=1e10, |asymptotic - claimed| = 8.33333e-12
+lambda=1.5 gamma=0.3: at m=1e10, |asymptotic - claimed| = 4.96875e-10
+lambda=2.0 gamma=0.6: at m=1e10, |asymptotic - claimed| = 3.33333e-10
+lambda=0.6 gamma=0.3: at m=1e10, |asymptotic - claimed| = 6.816e-11
+
+CONFIRMED at m=1e10, all 6 (lambda,gamma) points (including lambda=2.0,
+beyond the target's own tested range): the exact-lgamma asymptotic
+combination converges cleanly to the claimed closed form.
+
+No randomness used anywhere in this script.

@@ -1,0 +1,52 @@
+==============================================================================
+(1) Arithmetic check of the target's own illustrative example
+    ('gamma=1/3: c(gamma)/2=1, A(gamma)=2.5', ATTEMPT.md Section 6)
+==============================================================================
+c(1/3) = 2(1-gamma)/gamma = 4 = 4.0
+c(1/3)/2 = 2 = 2.0
+A(1/3) = (2-gamma)/(2 gamma) = 5/2 = 2.5
+
+TARGET CLAIMS (ATTEMPT.md Section 6, and echoed in VERDICT item 4's
+framing): 'c(gamma)/2=1, A(gamma)=2.5' at gamma=1/3.
+ACTUAL VALUE: c(1/3)/2 = 2.0, NOT 1.
+>>> CONFIRMED: this specific illustrative number in ATTEMPT.md Section 6
+>>> is arithmetically WRONG. Correct value is c(1/3)/2 = 2, not 1.
+    (A(gamma)=2.5 is itself correctly stated.)
+
+==============================================================================
+(2) Does the target's own script 05 data actually show the crossover
+    'starting at c(gamma)/2' near m=O(1), as claimed?
+==============================================================================
+gamma=1/3: c(gamma)=4.0  c(gamma)/2=2.0  A(gamma)=2.5
+Independently re-computed 'local curvature' at the FIRST step (m=0->1),
+i.e. -n*log(term_1/term_0)/(1^2-0^2) [same formula as script 05 Part B]:
+   = 4.000002
+
+Compare to c(gamma)     = 4.0   <- MATCHES (as expected: dm^2=1
+                                                 at the first step makes this
+                                                 formula algebraically IDENTICAL
+                                                 to Part A's rate formula)
+Compare to c(gamma)/2   = 2.0   <- the target's CLAIMED near-origin value
+Compare to A(gamma)     = 2.5
+
+Relative distance of the actual m=1 value from c(gamma):     5.0e-7
+Relative distance of the actual m=1 value from c(gamma)/2:   1.0
+
+>>> CONFIRMED: the target's own printed data (reproduced independently here)
+>>> shows the crossover's near-origin (m=1) value equals c(gamma) itself
+>>> (matching to 1e-6), NOT c(gamma)/2 as claimed in ATTEMPT.md Section 6 and
+>>> the VERDICT's framing of item 4. This is a direct algebraic consequence
+>>> (dm^2=1 at the very first step), not a numerical coincidence, and it is
+>>> visible directly in the target's OWN log (05_local_rate_crossover.log,
+>>> line for m=1: 'local curvature ... = 4.000002' at gamma=1/3, matching
+>>> c(1/3)=4.0, not c(1/3)/2=2.0).
+
+The genuinely solid part of claim 4 -- that the curvature is NOT constant
+across the m-range, and that it converges cleanly to A(gamma) (not c(gamma)/2)
+by m~500-3000 -- is NOT undermined by this finding, and is independently
+reconfirmed via claim 1/2 above (A(gamma) is exactly the T_prof curvature).
+Only the specific claimed NEAR-ORIGIN VALUE 'c(gamma)/2' is unsupported by
+the target's own data and has no evident valid derivation anywhere in the
+document (neither the exact m=1 value, which is c(gamma), nor the naively-
+invalid mesoscale-formula-at-m=1 value, which Section 8 item 4 itself
+correctly identifies as A(gamma), equals c(gamma)/2).

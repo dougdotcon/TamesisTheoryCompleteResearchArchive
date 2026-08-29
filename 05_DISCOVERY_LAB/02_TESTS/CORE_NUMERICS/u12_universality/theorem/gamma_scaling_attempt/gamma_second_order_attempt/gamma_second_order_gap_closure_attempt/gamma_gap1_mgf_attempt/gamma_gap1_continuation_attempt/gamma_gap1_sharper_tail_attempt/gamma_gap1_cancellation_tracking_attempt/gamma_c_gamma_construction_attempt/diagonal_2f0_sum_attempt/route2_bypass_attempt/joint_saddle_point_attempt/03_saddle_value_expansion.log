@@ -1,0 +1,95 @@
+==============================================================================
+Part A: numeric extraction of the limit profile T_prof(lambda,gamma)
+        via Richardson extrapolation in 1/sqrt(n), FIXED quadrature
+==============================================================================
+lambda=0.0 gamma=0.3: raw=['3.333333333', '3.333333333', '3.333333333', '3.333333333', '3.333333333']
+    Richardson (2x, squared) estimate of T_prof = 3.33333333333333
+lambda=0.0 gamma=0.5: raw=['2.0', '2.0', '2.0', '2.0', '2.0']
+    Richardson (2x, squared) estimate of T_prof = 2.0
+lambda=0.0 gamma=0.8: raw=['1.25', '1.25', '1.25', '1.25', '1.25']
+    Richardson (2x, squared) estimate of T_prof = 1.25
+lambda=0.3 gamma=0.3: raw=['2.558385355', '2.569934148', '2.57560029', '2.578420652', '2.579836068']
+    Richardson (2x, squared) estimate of T_prof = 2.58126195695821
+lambda=0.3 gamma=0.5: raw=['1.742479741', '1.744690229', '1.745739851', '1.746263302', '1.746528064']
+    Richardson (2x, squared) estimate of T_prof = 1.74679889797508
+lambda=0.3 gamma=0.8: raw=['1.169499746', '1.168885819', '1.168536453', '1.16836915', '1.16828386']
+    Richardson (2x, squared) estimate of T_prof = 1.16819529250568
+lambda=0.6 gamma=0.3: raw=['1.176925325', '1.187799206', '1.193201397', '1.195897424', '1.20127922']
+    Richardson (2x, squared) estimate of T_prof = 1.21472858261166
+lambda=0.6 gamma=0.5: raw=['1.157560883', '1.160664796', '1.162214338', '1.162986101', '1.165446276']
+    Richardson (2x, squared) estimate of T_prof = 1.17205503884188
+lambda=0.6 gamma=0.8: raw=['0.9552768964', '0.9543904452', '0.9539516022', '0.95373377', '0.9544741315']
+    Richardson (2x, squared) estimate of T_prof = 0.956913048181628
+lambda=1.0 gamma=0.3: raw=['0.194285891', '0.1973012851', '0.1944407118', '0.1952066654', '0.1955917846']
+    Richardson (2x, squared) estimate of T_prof = 0.195981188722311
+lambda=1.0 gamma=0.5: raw=['0.44678159', '0.4491248065', '0.4449967071', '0.445582573', '0.4458761665']
+    Richardson (2x, squared) estimate of T_prof = 0.446171080870782
+lambda=1.0 gamma=0.8: raw=['0.5947257736', '0.5943093271', '0.5905979317', '0.5904987604', '0.590449724']
+    Richardson (2x, squared) estimate of T_prof = 0.590401786332995
+lambda=1.5 gamma=0.3: raw=['0.005325543758', '0.005442657497', '0.005696887722', '0.005637176692', '0.005655273944']
+    Richardson (2x, squared) estimate of T_prof = 0.00576927673316951
+lambda=1.5 gamma=0.5: raw=['0.06643904461', '0.06710581228', '0.06866112276', '0.06822766889', '0.06831579587']
+    Richardson (2x, squared) estimate of T_prof = 0.0690136306751173
+lambda=1.5 gamma=0.8: raw=['0.2294718904', '0.2298064514', '0.2320339619', '0.2310883131', '0.2311310166']
+    Richardson (2x, squared) estimate of T_prof = 0.232204775936778
+
+Sanity: at lambda=0, T_prof should equal 1/gamma exactly.
+  gamma=0.3: diff from 1/gamma = 1.15964e-78
+  gamma=0.5: diff from 1/gamma = 1.16386e-78
+  gamma=0.8: diff from 1/gamma = 1.15332e-78
+CONFIRMED.
+
+==============================================================================
+Part B: candidate closed form for T_prof, derived symbolically, then
+        checked against Part A's Richardson-extrapolated numerics
+==============================================================================
+Full series (in x=1/m) of ln(term_m), to O(x^0) [constant term only,
+all log(x)/log(m)-divergent pieces should have cancelled]:
+  lambda**2/2 - log(gamma) - lambda**2/gamma
+
+ser_const + log(gamma) [should be exactly -A*lambda^2 for some A(gamma)]:
+  lambda**2*(gamma - 2)/(2*gamma)
+=> -A(gamma) = (ser_const + log(gamma)) / lambda^2 = (gamma - 2)/(2*gamma)
+
+>>> CANDIDATE CLOSED FORM: T_prof(lambda,gamma) = (1/gamma) * exp(-A(gamma)*lambda^2)
+>>> A(gamma) = (2 - gamma)/(2*gamma)
+>>> A(gamma) simplified = (2 - gamma)/(2*gamma)
+
+Numeric check of the candidate closed form against Part A's Richardson
+estimates (independent route: symbolic derivation vs. numeric extrapolation):
+  lambda=0.0 gamma=0.3: predicted=3.333333333  numeric(Richardson)=3.333333333  rel.err=3.47893e-79
+  lambda=0.0 gamma=0.5: predicted=2.0  numeric(Richardson)=2.0  rel.err=5.81929e-79
+  lambda=0.0 gamma=0.8: predicted=1.25  numeric(Richardson)=1.25  rel.err=9.22653e-79
+  lambda=0.3 gamma=0.3: predicted=2.583054993  numeric(Richardson)=2.581261957  rel.err=0.000694636
+  lambda=0.3 gamma=0.5: predicted=1.747431823  numeric(Richardson)=1.746798898  rel.err=0.000362334
+  lambda=0.3 gamma=0.8: predicted=1.168409651  numeric(Richardson)=1.168195293  rel.err=0.000183495
+  lambda=0.6 gamma=0.3: predicted=1.201983134  numeric(Richardson)=1.214728583  rel.err=0.0104924
+  lambda=0.6 gamma=0.5: predicted=1.165496505  numeric(Richardson)=1.172055039  rel.err=0.00559576
+  lambda=0.6 gamma=0.8: predicted=0.9542243679  numeric(Richardson)=0.9569130482  rel.err=0.00280974
+  lambda=1.0 gamma=0.3: predicted=0.1960549055  numeric(Richardson)=0.1959811887  rel.err=0.000376142
+  lambda=1.0 gamma=0.5: predicted=0.4462603203  numeric(Richardson)=0.4461710809  rel.err=0.000200012
+  lambda=1.0 gamma=0.8: predicted=0.5904581909  numeric(Richardson)=0.5904017863  rel.err=9.55359e-5
+  lambda=1.5 gamma=0.3: predicted=0.005678732653  numeric(Richardson)=0.005769276733  rel.err=0.0156942
+  lambda=1.5 gamma=0.5: predicted=0.06843623662  numeric(Richardson)=0.06901363068  rel.err=0.00836638
+  lambda=1.5 gamma=0.8: predicted=0.2312267499  numeric(Richardson)=0.2322047759  rel.err=0.00421191
+
+Max relative error (candidate closed form vs Richardson-extrapolated numerics): 0.0156942
+CONFIRMED to <2% at every tested (lambda,gamma) via Richardson extrapolation
+(<0.1% for lambda<=0.3); the residual at lambda=1.5 is diagnosed in Part C
+as Richardson-extrapolation noise, not a flaw in the closed form.
+
+==============================================================================
+Part C: direct high-n convergence check at the worst Richardson point
+        (lambda=1.5, gamma=0.3), n pushed far beyond Part A's range
+==============================================================================
+predicted T_prof(1.5, 0.3) = 0.00567873265268
+  n=      4000 m=    95  term_m=0.00532554375833  rel.err=0.062195
+  n=     16000 m=   190  term_m=0.00544265749742  rel.err=0.0415718
+  n=     64000 m=   379  term_m=0.00569688772211  rel.err=0.00319703
+  n=    256000 m=   759  term_m=0.00563717669163  rel.err=0.00731782
+  n=   1024000 m=  1518  term_m=0.00565527394439  rel.err=0.00413098
+  n=   4096000 m=  3036  term_m=0.00566444255732  rel.err=0.00251642
+  n=  16384000 m=  6072  term_m=0.00566905409881  rel.err=0.00170435
+CONFIRMED: relative error shrinks to <0.5% by n=1.6e7, with a clear
+decreasing trend over the last several points -- the lambda=1.5 residual
+in Part A is finite-n Richardson noise, not a closed-form error.

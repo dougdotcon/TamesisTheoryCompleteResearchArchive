@@ -1,0 +1,70 @@
+==============================================================================
+Part A: exact closed form for the critical point of g(t)
+==============================================================================
+g'(t) = -gamma*(-m + n)/(-gamma*t + 1) - m/(1 - t) + m/t
+Numerator of g'(t) (cleared denominators), as polynomial in t:
+  Poly((gamma*m + gamma*n)*t**2 + (-gamma*n - 2*m)*t + m, t, domain='ZZ[m,n,gamma]')
+Coefficients (t^2, t^1, t^0): [gamma*m + gamma*n, -gamma*n - 2*m, m]
+
+Claimed by hand-derivation:
+  a2 = gamma*(m+n)      -- check: True
+  a1 = -(2m+gamma n)    -- check: True
+  a0 = m                -- check: True
+Hand-derivation of the quadratic g_s*(m+n) t^2 - (2m+g_s n) t + m = 0 CONFIRMED symbolically.
+
+Discriminant (sympy-expanded): gamma**2*n**2 - 4*gamma*m**2 + 4*m**2
+Claimed closed form: gamma^2 n^2 + 4(1-gamma) m^2 -- check: True
+
+t*_minus (candidate) = (gamma*n + 2*m - sqrt(gamma**2*n**2 - 4*gamma*m**2 + 4*m**2))/(2*gamma*(m + n))
+t*_minus at m=0: 0 (should be 0)
+Claimed t* == derived t*_minus: True
+
+>>> EXACT CLOSED FORM (this front, new, PROVED by direct calculus):
+>>> t*(n,m,gamma) = [2m + gamma n - sqrt(gamma^2 n^2 + 4(1-gamma) m^2)] / [2 gamma (m+n)]
+
+==============================================================================
+Part B: numerical verification of t* against brute-force maximization
+        of the integrand, plus g''(t*) < 0 check
+==============================================================================
+Checked 18 (n,m,gamma) points: closed-form t* vs golden-section maximization of g(t).
+Max |t*_closed_form - t*_numeric_argmax| = 1.60327e-26
+CONFIRMED: t* is genuinely the argmax (g''(t*)<0 at every point tested too).
+
+==============================================================================
+Part C: leading-order scaling t* ~ m/(gamma n) as n->infty, m=lambda*sqrt(n)
+==============================================================================
+  lambda=0.3, gamma=0.3:
+    n=       10000 m=    30  t*=0.009900304  leading m/(gamma n)=0.01  rel.dev=0.0099696
+    n=     1000000 m=   300  t*=0.0009990003  leading m/(gamma n)=0.001  rel.dev=0.0009997
+    n=   100000000 m=  3000  t*=9.999e-5  leading m/(gamma n)=0.0001  rel.dev=9.9997e-5
+    n= 10000000000 m= 30000  t*=9.9999e-6  leading m/(gamma n)=1.0e-5  rel.dev=9.99997e-6
+  lambda=0.3, gamma=0.6:
+    n=       10000 m=    30  t*=0.0049750749  leading m/(gamma n)=0.005  rel.dev=0.00498502
+    n=     1000000 m=   300  t*=0.00049975007  leading m/(gamma n)=0.0005  rel.dev=0.00049985
+    n=   100000000 m=  3000  t*=4.99975e-5  leading m/(gamma n)=5.0e-5  rel.dev=4.99985e-5
+    n= 10000000000 m= 30000  t*=4.999975e-6  leading m/(gamma n)=5.0e-6  rel.dev=4.99999e-6
+  lambda=0.7, gamma=0.3:
+    n=       10000 m=    70  t*=0.022792818  leading m/(gamma n)=0.023333333  rel.dev=0.023165
+    n=     1000000 m=   700  t*=0.0023278927  leading m/(gamma n)=0.0023333333  rel.dev=0.00233169
+    n=   100000000 m=  7000  t*=0.00023327889  leading m/(gamma n)=0.00023333333  rel.dev=0.000233317
+    n= 10000000000 m= 70000  t*=2.3332789e-5  leading m/(gamma n)=2.3333333e-5  rel.dev=2.33332e-5
+  lambda=0.7, gamma=0.6:
+    n=       10000 m=    70  t*=0.011531505  leading m/(gamma n)=0.011666667  rel.dev=0.0115853
+    n=     1000000 m=   700  t*=0.0011653065  leading m/(gamma n)=0.0011666667  rel.dev=0.00116585
+    n=   100000000 m=  7000  t*=0.00011665306  leading m/(gamma n)=0.00011666667  rel.dev=0.000116659
+    n= 10000000000 m= 70000  t*=1.1666531e-5  leading m/(gamma n)=1.1666667e-5  rel.dev=1.16666e-5
+  lambda=1.5, gamma=0.3:
+    n=       10000 m=   150  t*=0.047539953  leading m/(gamma n)=0.05  rel.dev=0.0492009
+    n=     1000000 m=  1500  t*=0.0049750377  leading m/(gamma n)=0.005  rel.dev=0.00499245
+    n=   100000000 m= 15000  t*=0.00049975004  leading m/(gamma n)=0.0005  rel.dev=0.000499925
+    n= 10000000000 m=150000  t*=4.99975e-5  leading m/(gamma n)=5.0e-5  rel.dev=4.99992e-5
+  lambda=1.5, gamma=0.6:
+    n=       10000 m=   150  t*=0.024384298  leading m/(gamma n)=0.025  rel.dev=0.0246281
+    n=     1000000 m=  1500  t*=0.0024937594  leading m/(gamma n)=0.0025  rel.dev=0.00249625
+    n=   100000000 m= 15000  t*=0.00024993751  leading m/(gamma n)=0.00025  rel.dev=0.000249963
+    n= 10000000000 m=150000  t*=2.4999375e-5  leading m/(gamma n)=2.5e-5  rel.dev=2.49996e-5
+
+CONFIRMED: t*(n,m,gamma) -> m/(gamma n) as n->infty at fixed lambda=m/sqrt(n),
+with monotonically shrinking relative deviation at every (lambda,gamma) tested.
+
+No randomness used in this script (sympy symbolic + deterministic mpmath).

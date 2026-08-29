@@ -1,0 +1,47 @@
+==============================================================================
+s01: bounded-variation / Cauchy-criterion derivation -- symbolic checks
+==============================================================================
+
+--- Check 1: d/dy[A(y)/(x+y)] = e(y)/(x+y), exact quotient rule ---
+d/dy[A(y)/(x+y)]  (raw sympy) = Derivative(A(y), y)/(x + y) - A(y)/(x + y)**2
+together form                = ((x + y)*Derivative(A(y), y) - A(y))/(x + y)**2
+[PASS] quotient rule matches (A'(y)*(x+y)-A(y))/(x+y)^2  -- residual=0
+[PASS] (Phi*(x+y)-A_y)/(x+y)^2 == e(y)/(x+y) with e(y):=Phi-A_y/(x+y)  -- residual=0
+
+--- Check 2: y/(x+y)^2 <= 1/(x+y), for x>=0, y>0 ---
+rhs - lhs simplifies to: x/(x + y)**2
+[PASS] rhs-lhs == x/(x+y)^2 exactly  -- got x/(x + y)**2
+[PASS] numeric sweep (64 points, x>=0 only, relative tolerance)  -- 0 violations
+
+--- Check 3: int_y^infinity dy'/(x+y')^2 = 1/(x+y), exact ---
+int_y^infinity dy'/(x+y')^2 = 1/(x + y)
+[PASS] tail integral equals 1/(x+y) exactly  -- got 1/(x + y)
+
+--- Check 4: J(y):=int_0^y e^{-(y-t)/eps} Phi_t(x+y-t) dt, and its bound ---
+Extremal J(y) (Phi_t==M_Phi const): M_Phi*eps - M_Phi*eps*exp(-y/eps)
+[PASS] extremal J(y) == M_Phi*eps*(1-e^{-y/eps}) exactly  -- got M_Phi*eps - M_Phi*eps*exp(-y/eps)
+[PASS] M_Phi*eps*(1-e^{-y/eps}) - M_Phi*eps == -M_Phi*eps*e^{-y/eps} (<=0)  -- got -M_Phi*eps*exp(-y/eps)
+[PASS] denominator 1+x+y-t at t=y equals 1+x (>=1 for x>=0)  -- got x + 1
+  => |cos(t)/(1+x+y-t)| <= 1/(1+x) <= 1 for all t in [0,y], x>=0
+  => |Phi_concrete(t)| <= M_Phi pointwise, so |J(y)| <= M_Phi*eps by the
+     SAME extremal-case integral computed in (a) via monotonicity of
+     integration under a pointwise absolute-value majorant.
+[PASS] (b) qualitative bound mechanism confirmed (pointwise majorant argument)
+
+--- Check 5: assembly of the final bound, symbolic bookkeeping ---
+Assembled bound on |e(y)|: D/(x + y) + M_Phi*eps/(x + y) + exp(-y/eps)
+Bound on |d/dy[A(y)/(x+y)]| for y large: (D + M_Phi*eps + 1)/(x + y)**2
+int_y^infinity C/(x+y')^2 dy' = C/(x + y)
+[PASS] tail of C/(x+y')^2 equals C/(x+y), finite for every y -- CONFIRMS absolute integrability of d/dy[A(y)/(x+y)] on [Y0,infinity)  -- got C/(x + y)
+
+==============================================================================
+ALL CHECKS PASSED.
+Conclusion (algebraic, not yet a claim about the real Phi): GIVEN a
+uniform bound |e(y)| <= C(x,eps)/(x+y) for y>=Y0 (hypotheses (B),
+(C'),(U)), the derivative of h(y):=A(y)/(x+y) is bounded by
+C(x,eps)/(x+y)^2, which is exactly, in closed form, absolutely
+integrable on [Y0,infinity) with tail C(x,eps)/(x+y) -> 0. By the
+Cauchy criterion for improper integrals, h(y) converges as y->infinity
+-- this is (H-ces). See ATTEMPT.md Sec 3 for the full prose argument
+and citation of which hypotheses feed C(x,eps).
+==============================================================================

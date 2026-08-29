@@ -1,0 +1,69 @@
+==============================================================================
+PART A -- Positive example: e(y) := D/(x+y) exactly
+==============================================================================
+d/dy[h0 - D/(x+y) + D/(x+Y0)] - D/(x+y)^2 = 0  (expect 0)
+PASS: closed form's derivative matches h'(y)=e(y)/(x+y)=D/(x+y)^2 exactly
+      (i.e. e(y)=D/(x+y) as the target defines it, consistent with the
+      Sec 2.2 quotient-rule identity d/dy[A(y)/(x+y)]=e(y)/(x+y)).
+h_closed(Y0) - h0 = 0 (expect 0, boundary condition holds)
+lim_{y->infty} h(y) = (D + Y0*h0 + h0*x)/(Y0 + x) = h0 + D/(x+Y0)
+Concrete instance x=1,D=2,Y0=1,h(Y0)=0.3: predicted L = 13/10 = 1.3
+
+Independent mpmath quadrature check (integrating h' from Y0 to Y, NOT
+using the sympy closed form, then comparing):
+  Y=         2: quad-based h=0.633333333333  closed-form h=0.633333333333  |diff|=0.000e+00  gap-to-L=6.667e-01
+  Y=         5: quad-based h=0.966666666667  closed-form h=0.966666666667  |diff|=1.336e-51  gap-to-L=3.333e-01
+  Y=        10: quad-based h=1.118181818182  closed-form h=1.118181818182  |diff|=0.000e+00  gap-to-L=1.818e-01
+  Y=       100: quad-based h=1.280198019802  closed-form h=1.280198019802  |diff|=0.000e+00  gap-to-L=1.980e-02
+  Y=      1000: quad-based h=1.298001998002  closed-form h=1.298001998002  |diff|=0.000e+00  gap-to-L=1.998e-03
+  Y=  10000000: quad-based h=1.299999800000  closed-form h=1.299999800000  |diff|=1.930e-48  gap-to-L=2.000e-07
+PASS: independent quadrature matches the closed form to <1e-25,
+      and approaches L=1.3 as Y grows -- matches target's claims
+      ('match to <1e-30', 'gap 2e-7 at Y=1e7') within the precision
+      class used (mpmath dps=50 vs their reported <1e-30) -- consistent,
+      not contradicted; exact digit-for-digit match not attempted here.
+
+==============================================================================
+PART B -- Sharpness example: h(y) := sin(log(log(x+y+3)))
+==============================================================================
+h'(y) = cos(log(log(x + y + 3)))/((x + y + 3)*log(x + y + 3))
+h'(y) - cos(log(log(w)))/(w*log(w)): residual = 0 (expect 0)
+PASS: h'(y) formula confirmed exactly, independently.
+e(y) = z*h'(y) = (x + y)*cos(log(log(x + y + 3)))/((x + y + 3)*log(x + y + 3))
+lim z/w as y->infty: 1 (=1, so z~w, e(y)~cos(loglogw)/logw)
+lim 1/log(w) as y->infty: 0 (=0, confirms e(y) is o(1))
+lim [1/log(w)]/[1/w] as y->infty: oo (expect oo)
+PASS: confirms O(1/log z) is strictly WEAKER than O(1/z).
+Antiderivative of 1/(w*log(w)) dw = log(log(w))
+lim_{w->infty} log(log(w)) = oo (expect oo -- diverges)
+PASS: confirms h' is NOT absolutely integrable (majorant's antiderivative diverges).
+
+Constructive non-convergent subsequence check:
+Claim: for target v in {-1,0,1}, theta=asin(v)+2*pi*k (or supplementary),
+y_k := e^(e^theta) - 3 - x gives h(y_k) = sin(theta+2*pi*k) = v EXACTLY.
+  Target v=0, base theta0=0.000000
+    k=1: theta=6.283185  y_k=3.6397462e+232  h(y_k)=2.02139147507137e-51  |h(y_k)-v|=2.02139e-51
+    k=2: theta=12.566371  y_k=3.2581701e+124534  h(y_k)=4.04278295014273e-51  |h(y_k)-v|=4.04278e-51
+    k=3: theta=18.849556  y_k=3.3288101e+66687192  h(y_k)=1.67552332655829e-50  |h(y_k)-v|=1.67552e-50
+  Target v=1, base theta0=1.570796
+    k=0: theta=1.570796  y_k=119.79022  h(y_k)=1.0  |h(y_k)-v|=0.0
+    k=1: theta=7.853982  y_k=5.367502e+1118  h(y_k)=1.0  |h(y_k)-v|=0.0
+    k=2: theta=14.137167  y_k=2.8695237e+599070  h(y_k)=1.0  |h(y_k)-v|=0.0
+    k=3: theta=20.420352  y_k=1.6925951e+320797231  h(y_k)=1.0  |h(y_k)-v|=0.0
+  Target v=-1, base theta0=-1.570796
+    k=1: theta=4.712389  y_k=2.2115509e+48  h(y_k)=-1.0  |h(y_k)-v|=0.0
+    k=2: theta=10.995574  y_k=1.5198406e+25888  h(y_k)=-1.0  |h(y_k)-v|=0.0
+    k=3: theta=17.278760  y_k=2.1357732e+13862905  h(y_k)=-1.0  |h(y_k)-v|=0.0
+PASS: constructive subsequence hits -1, 0, +1 EXACTLY (to <1e-30),
+      confirming h(y) does NOT converge -- independently reproduced.
+
+Relative-step oscillation check for h(y) (sanity, not in the target's
+own explicit claims for THIS function, but useful to confirm h is
+plausible as a genuine 'slowly oscillating in the o(1) sense' example,
+i.e. that nothing here contradicts the unconditional self-averaging
+identity e(y)->0):
+  y=10          : e(y)=0.176408  (bounded, ->0 slowly as predicted)
+  y=100         : e(y)=0.007795  (bounded, ->0 slowly as predicted)
+  y=1000        : e(y)=-0.051130  (bounded, ->0 slowly as predicted)
+  y=1000000.0   : e(y)=-0.062965  (bounded, ->0 slowly as predicted)
+  y=1000000000000.0: e(y)=-0.035624  (bounded, ->0 slowly as predicted)

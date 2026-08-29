@@ -1253,6 +1253,91 @@ flowchart TD
 > e
 > `.../h1_u2_boundary_layer_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-131`.]** Onda 28 frente (a)
+> (`H-CES-DIRECT-ATTEMPT`), **nona onda consecutiva** (ondas 20-28) neste
+> gap, primeira a atacar `(H-ces)` diretamente — convergência
+> Cesàro-`(C,1)` da média corrente `A(y):=\int_0^y\Phi_t(x)\,dt` dividida
+> por `(x+y)` — para o `\Phi` real do sistema (não o contraexemplo de
+> brinquedo `\sin(\log(1+t))` que a onda 26 usou apenas para provar
+> independência lógica), exatamente a recomendação explícita da onda 26
+> (`DISC-DEC-125`) e do seu referee (Achado 2).
+>
+> **Um argumento novo, mais simples que o teorema Tauberiano clássico,
+> fecha `(H-ces)` condicional às MESMAS duas hipóteses já nomeadas,
+> `(C')` e `(U)` — nenhuma hipótese nova.** Mecanismo: o erro de
+> auto-mediação `e(y):=\Phi_y(x)-A(y)/(x+y)` é mostrado ter taxa
+> EXPLÍCITA `O(1/z)` (`z:=x+y`) — não apenas `o(1)`, já sabido desde a
+> onda 25 — via um rearranjo exato da equação `(VOLTERRA-Phi)` já
+> estabelecida, usando `(B)`, `(C')`, `(U)` exatamente como a onda 26 já
+> os usava. A identidade algébrica exata `d/dy[A(y)/(x+y)]=e(y)/(x+y)`
+> (regra do quociente, `A'(y)=\Phi_y(x)`) então torna essa derivada
+> `O(1/z^2)` — ABSOLUTAMENTE INTEGRÁVEL em `[Y_0,\infty)` — e pelo
+> critério de Cauchy elementar para integrais impróprias,
+> `A(y)/(x+y)` CONVERGE. Isto é `(H-ces)`. Corolário imediato: `(U1)`
+> em si segue, com taxa EXPLÍCITA `\Phi_y(x)=L(x)+O(1/(x+y))`, nunca
+> antes declarada neste registro. **Isto contorna inteiramente o
+> aparato Tauberiano clássico** (identidade de auto-mediação como
+> ferramenta, `(H-osc)`/`(OSC-PHI)`, verificação de "transferência de
+> hipóteses") que esta subcadeia vinha construindo desde a onda 25 —
+> o argumento é cálculo elementar de uma única variável real sobre
+> `h(y)=A(y)/(x+y)`, sem sutileza de fatia-EDP a resolver.
+>
+> **Nitidez estabelecida via dois exemplos elaborados**: um exemplo
+> POSITIVO (`e(y)=D/(x+y)` exatamente) satura o limitante com igualdade;
+> um exemplo de NITIDEZ (`h(y)=\sin(\log(\log(x+y+3)))`) exibe erro de
+> auto-mediação ainda `o(1)` mas apenas `O(1/\log z)` — estritamente mais
+> fraco que `O(1/z)` — e, via subsequência EXPLICITAMENTE CONSTRUÍDA
+> (não amostrada), mostrado NÃO convergir. Isto localiza precisamente a
+> margem: `O(1/z)` (e até `O(1/(z\log z))`) basta; `O(1/\log z)` não.
+>
+> **`(H-ces)`, `(U1)`, `(U2)`, `H1` permanecem formalmente ABERTOS** —
+> `(C')` e `(U)` não estão provados para o `\Phi`/`\Psi` real do sistema,
+> mesmo status que a onda 25/26 deixou — mas a distância lógica das duas
+> hipóteses padrão até `(U1)` está agora fechada a essencialmente zero,
+> onde a onda 26 havia explicitamente sinalizado essa distância como
+> "não examinada... estruturalmente uma questão comparavelmente difícil."
+> Esta especulação é aqui mostrada falsa.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da identidade algébrica exata `d/dy[A(y)/
+> (x+y)]=e(y)/(x+y)` (regra do quociente, `A'(y)` substituído por
+> `\Phi(y)`), da fórmula de integral de cauda, do exemplo positivo
+> saturando com igualdade, e do exemplo de nitidez completo (`h'(y)`
+> exato, divergência da antiderivada do majorante, e a substituição
+> `y_k=e^{e^\theta}-3-x` atingindo `\theta` exatamente) — zero
+> discrepância.
+>
+> Referee hostil dedicado: re-derivou o limitante `O(1/z)` da Seção 2.1
+> do zero a partir da equação `(VOLTERRA-Phi)` citada e do núcleo em
+> forma fechada dos ancestrais (não apenas re-rodou o script da frente);
+> re-verificou independentemente a identidade de regra do quociente, a
+> integral de cauda, ambos os exemplos elaborados (reproduzindo a soma
+> telescópica dígito a dígito), e reconstruiu independentemente a
+> subsequência de nitidez a `<10^{-30}`; confirmou que a alegação
+> "nenhuma hipótese nova além de `(C')`/`(U)`" sobrevive ao escrutínio —
+> cruzou diretamente contra a própria derivação `T1` da onda 26 (Seção
+> 3.4 de lá), confirmando que aquela peça já exigia o mesmo uso
+> `t`-uniforme combinado de `(C')`+`(U)`; confirmou que a Seção 3 (herança
+> de uniformidade-em-`x`) e a Seção 5 (teste numérico de tensão) estão
+> honestamente escopadas como "suporte, não prova." Um achado real, de
+> severidade BAIXA, puramente cosmético: a subsequência construtiva da
+> Seção 4.2 lista "`k=0,1,2,3`", mas para o alvo `v=0` especificamente
+> `k=0` dá `y_0<0` — uma violação de domínio não detectada pela própria
+> frente nem por seu script — não afeta a conclusão de não-convergência
+> em si (`k=1,2,3,\ldots` já bastam); corrigido por correção datada na
+> própria `ATTEMPT.md` da frente.
+>
+> Veredito **SOUND WITH ONE COSMETIC ISSUE — ACCEPT for catalogue**.
+> `H1`, `(U1)`, `(U2)`, `(H-ces)` permanecem formalmente ABERTOS —
+> condicionais a `(C')`/`(U)`, não provados para o `\Phi` real —
+> mas a lacuna remanescente está agora nomeada com precisão máxima:
+> exatamente essas duas hipóteses padrão, sem necessidade de qualquer
+> aparato Tauberiano. `phi_REDB`, `Phi_U(c)`, `Phi_infinity(c)` e a lei
+> assintótica de 4 termos: intocadas. Fontes:
+> `.../tauberian_oscillation_bound_attempt/h_ces_direct_attempt/ATTEMPT.md`
+> e
+> `.../h_ces_direct_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

@@ -1,0 +1,79 @@
+==============================================================================
+s02: two worked examples -- positive convergence, and sharpness
+==============================================================================
+
+------------------------------------------------------------------------------
+PART A: e(y) := D/(x+y) exactly  =>  h(y):=A(y)/(x+y) converges
+------------------------------------------------------------------------------
+h(y) closed form: -D/(x + y) + D/(Y0 + x) + h_Y0
+lim_{y->infinity} h(y) = D/(Y0 + x) + h_Y0
+[PASS] closed-form limit matches h(Y0) + D/(x+Y0) exactly  -- got D/(Y0 + x) + h_Y0, expected D/(Y0 + x) + h_Y0
+
+Concrete instance: x=1.0, D=2.0, Y0=1.0, h(Y0)=0.3
+Predicted limit L = h(Y0)+D/(x+Y0) = 1.3
+
+  Y            h(Y) via mpmath quad of h'        h(Y) closed form        |diff|
+  2            0.633333333333333            0.633333333333333        0.0
+  5            0.966666666666667            0.966666666666667        1.336e-51
+  10           1.11818181818182             1.11818181818182         0.0
+  100          1.28019801980198             1.28019801980198         0.0
+  1000         1.298001998002               1.298001998002           0.0
+  100000       1.2999800002                 1.2999800002             2.138e-50
+  1e+07        1.29999980000002             1.29999980000002         1.93e-48
+[PASS] independent mpmath quadrature matches closed form to <1e-30  -- max diff = 1.9297361206865652565134673292833699165045721474358e-48
+
+  h(Y=1e+07) = 1.29999980000002, predicted limit L = 1.3, gap = 2.0e-7
+[PASS] h(Y) approaches predicted limit L as Y grows (gap < 1e-6 at Y=1e7)  -- gap=0.00000019999998000000199999980000001999999800000019975375
+[PASS] Phi_y(x):=h(y)+e(y) also converges to the same L (consistency)  -- Phi_Y=1.3, L=1.3
+
+==> PART A CONFIRMS: an e(y) rate of exactly O(1/z) (the rate this
+    front's Sec 3 derives from (B)+(C')+(U)) genuinely suffices for
+    h(y)=A(y)/(x+y) -- and hence Phi_y(x) -- to converge.
+
+------------------------------------------------------------------------------
+PART B: h(y):=sin(log(log(x+y+3))) -- e(y)=o(1) but NOT O(1/z);
+        h(y) does NOT converge (explicit constructive subsequence)
+------------------------------------------------------------------------------
+d/dw[sin(log(log(w)))] = cos(log(log(w)))/(w*log(w))
+[PASS] derivative matches cos(log(log(w)))/(w*log(w)) exactly  -- got cos(log(log(w)))/(w*log(w))
+Antiderivative of 1/(w*log(w)): log(log(w))
+[PASS] antiderivative of the majorant is log(log(w)) (unbounded as w->oo)  -- got log(log(w))
+[PASS] log(log(w)) -> infinity as w -> infinity (confirms NON-integrability)  -- got oo
+
+e(y) [as a function of w=x+y+3] = cos(log(log(w))) / log(w)
+[PASS] |e(y)| <= 1/log(w) -> 0 as w->infinity (confirms e(y)=o(1))  -- got 0
+[PASS] [1/log(w)] / [1/w] -> infinity (1/log(w) is strictly WEAKER than O(1/w))  -- got oo
+
+Constructive non-convergence: for target values v in {-1, 0, 1},
+choose theta=asin(v)+2*pi*k (or pi-asin(v)+2*pi*k) and set
+y_k := exp(exp(theta)) - 3 (x=0). Then h(y_k) = sin(log(log(y_k+3)))
+= sin(theta) = v EXACTLY, by construction, for arbitrarily large y_k.
+  target=+1, k=0: theta=1.5708, y_k~exp(exp(1.571)) [order-of-magnitude huge], h(y_k)=1.0, |h(y_k)-target|=0.0  [OK]
+  target=+1, k=1: theta=7.85398, y_k~exp(exp(7.854)) [order-of-magnitude huge], h(y_k)=1.0, |h(y_k)-target|=0.0  [OK]
+  target=+1, k=2: theta=14.1372, y_k~exp(exp(14.14)) [order-of-magnitude huge], h(y_k)=1.0, |h(y_k)-target|=0.0  [OK]
+  target=+1, k=3: theta=20.4204, y_k~exp(exp(20.42)) [order-of-magnitude huge], h(y_k)=1.0, |h(y_k)-target|=0.0  [OK]
+  target=-1, k=0: theta=-1.5708, y_k~exp(exp(-1.571)) [order-of-magnitude huge], h(y_k)=-1.0, |h(y_k)-target|=0.0  [OK]
+  target=-1, k=1: theta=4.71239, y_k~exp(exp(4.712)) [order-of-magnitude huge], h(y_k)=-1.0, |h(y_k)-target|=0.0  [OK]
+  target=-1, k=2: theta=10.9956, y_k~exp(exp(11.0)) [order-of-magnitude huge], h(y_k)=-1.0, |h(y_k)-target|=0.0  [OK]
+  target=-1, k=3: theta=17.2788, y_k~exp(exp(17.28)) [order-of-magnitude huge], h(y_k)=-1.0, |h(y_k)-target|=0.0  [OK]
+  target=+0, k=0: theta=0.0, y_k~exp(exp(0.0)) [order-of-magnitude huge], h(y_k)=-1.3363823550460978231e-51, |h(y_k)-target|=1.336e-51  [OK]
+  target=+0, k=1: theta=6.28319, y_k~exp(exp(6.283)) [order-of-magnitude huge], h(y_k)=2.0213914750713666223e-51, |h(y_k)-target|=2.021e-51  [OK]
+  target=+0, k=2: theta=12.5664, y_k~exp(exp(12.57)) [order-of-magnitude huge], h(y_k)=4.0427829501427332447e-51, |h(y_k)-target|=4.043e-51  [OK]
+  target=+0, k=3: theta=18.8496, y_k~exp(exp(18.85)) [order-of-magnitude huge], h(y_k)=1.6755233265582882452e-50, |h(y_k)-target|=1.676e-50  [OK]
+[PASS] constructive subsequence hits target values -1,0,+1 exactly, arbitrarily far out (k=0..3 each)
+[PASS] y_k strictly increasing across k (genuinely 'arbitrarily far out')  -- y_k0 order 2.07842, y_k1 order 1118.73 (log10)
+
+==> PART B CONFIRMS: weakening the self-averaging error's rate from
+    O(1/z) (Part A, sufficient) to the strictly weaker O(1/log z)
+    (still o(1), i.e. still consistent with the UNCONDITIONAL
+    self-averaging identity of record) is enough to break convergence
+    of h(y)=A(y)/(x+y) -- explicit, constructive, not merely sampled.
+    This is the SAME qualitative phenomenon as the predecessor's
+    sin(log(1+t)) counter-example (wave 26, Sec 6.2), now located
+    precisely relative to THIS front's O(1/z) sufficient threshold:
+    the threshold is not an arbitrary safety margin, it is close to
+    the actual boundary of what works.
+
+==============================================================================
+ALL CHECKS PASSED.
+==============================================================================

@@ -1,0 +1,70 @@
+==============================================================================
+PART 1 -- exact rearrangement of (VOLTERRA-Phi) under the closed form
+==============================================================================
+Check A: e^-(y-t)/eps == e^-h/eps|_{h=y-t}  -> residual 0 (expect 0)
+Check B: x+y-t == x+h|_{h=y-t}               -> residual 0 (expect 0)
+PASS: J(y)'s definition in terms of t is algebraically IDENTICAL to
+      substituting h=y-t into the closed-form kernel's second term.
+      No hidden approximation in this relabeling step.
+
+==============================================================================
+PART 2 -- |J(y)/z| <= M_Phi*eps/z from (B) ALONE (no (C') needed)
+==============================================================================
+J(y) with Phi_t == M_Phi (extremal, saturates |Phi|<=M_Phi):
+  J(y) = M_Phi*eps - M_Phi*eps*exp(-y/eps)
+  matches M_Phi*eps*(1-e^-y/eps) exactly? residual = 0 (expect 0)
+
+Numeric spot checks, J(y)<=M_Phi*eps for the extremal case:
+  y=     0.001, eps=0.1, M_Phi=1.0: J=0.0009950166  bound=0.1000000000  PASS
+  y=       1.0, eps=0.1, M_Phi=1.0: J=0.0999954600  bound=0.1000000000  PASS
+  y=      50.0, eps=0.1, M_Phi=2.5: J=0.2500000000  bound=0.2500000000  PASS
+  y=    1000.0, eps=5.0, M_Phi=0.7: J=3.5000000000  bound=3.5000000000  PASS
+  y=  100000.0, eps=0.01, M_Phi=3.0: J=0.0300000000  bound=0.0300000000  PASS
+
+Concrete non-constant Phi_t(u) := M_Phi*cos(t)/(1+u):
+  |Phi_t(u)| <= M_Phi trivially, so (B) is satisfied with the same M_Phi.
+  Majorant argument: |cos(t)/(1+x+y-t)| <= 1 for x+y-t>=0 (x,y,t>=0,t<=y)
+  => |J_concrete(y)| <= J_extremal(y) = M_Phi*eps*(1-e^-y/eps) <= M_Phi*eps
+  PASS: the SAME bound applies via pointwise absolute-value majorant,
+        using ONLY (B) -- confirms (C') is genuinely not needed here.
+
+==============================================================================
+PART 3 -- integrating a pointwise-in-t remainder bound over [0,y]
+==============================================================================
+Claim under test: IF |rho(t)| <= D/z^2 for EVERY t in [0,y] (D, z
+t-independent -- z=x+y depends only on y, not t; D uniform in t is
+exactly hypothesis (C')+(U) as WAVE 26 already defined them), THEN
+  |E_W(y)| = |int_0^y rho(t) dt| <= y*D/z^2.
+This is the triangle inequality for integrals -- an elementary,
+hypothesis-free consequence given the POINTWISE bound. No STRONGER
+form of (C')/(U) is needed than 'uniform in t with t-independent D' --
+exactly wave 26's own definition of (C')/(U), not a silently
+strengthened version of it.
+  int_0^y (D/z^2) dt = D*y/z**2  (matches y*D/z^2 claimed in ATTEMPT.md)
+  y*D/z^2 - D/z = D*(y-z)/z^2 = D*(-x)/z^2  -> nonpositive iff x>=0
+  symbolic residual form: D*(y - z)/z**2
+
+==============================================================================
+PART 4 -- assembling (QUANT-E): |e(y)| <= C(x,eps)/z
+==============================================================================
+|e(y)| <= |g_y(x)| + |J(y)/z| + |E_W(y)|
+        <= e^-y/eps + M_Phi*eps/z + D/z
+For y large enough that e^-y/eps <= 1/z (true eventually: exponential
+decay beats 1/z for any fixed eps, as y,z->infinity together):
+  |e(y)| <= 1/z + M_Phi*eps/z + D/z = (1+M_Phi*eps+D)/z = C(x,eps)/z
+This is EXACTLY the target's (QUANT-E), re-derived independently.
+
+Numerically confirm e^-y/eps <= 1/z eventually, e.g. eps=0.1, x=0:
+  y=  10: e^-y/eps=3.720e-44  1/z=1.000e-01  holds=True
+  y=  30: e^-y/eps=5.148e-131  1/z=3.333e-02  holds=True
+  y=  60: e^-y/eps=2.650e-261  1/z=1.667e-02  holds=True
+  y= 100: e^-y/eps=0.000e+00  1/z=1.000e-02  holds=True
+  y= 200: e^-y/eps=0.000e+00  1/z=5.000e-03  holds=True
+
+ALL PART 1-4 CHECKS PASSED.
+CONCLUSION: Sec 2.1's bound on e(y) is correctly derived from (B)
+alone for the g_y and J(y) pieces, and needs EXACTLY the t-uniform
+pointwise remainder bound that (C')+(U) (as wave 26 itself defined
+them: (C') = Lipschitz UNIFORM in t; (U) = O(1/z^2) remainder uniform
+over the FULL h in [0,y] range) already supply for wave 26's own T1
+integral. No silently-stronger hypothesis is smuggled in.

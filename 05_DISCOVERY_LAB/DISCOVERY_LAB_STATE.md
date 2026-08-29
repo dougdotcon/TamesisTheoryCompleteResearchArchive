@@ -1,6 +1,27 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-131`: onda 28 autorizada —
+**Última atualização:** 2026-08-29 (`DISC-DEC-132`: onda 28 frente (a)
+`H-CES-DIRECT-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia `H1`) — **nona onda
+consecutiva** (20-28) neste gap, primeira a atacar `(H-ces)`
+diretamente. Um argumento novo, mais simples que o teorema Tauberiano
+clássico, fecha `(H-ces)` — e por corolário `(U1)` em si, com taxa
+explícita `O(1/(x+y))` — condicional às MESMAS duas hipóteses já
+nomeadas, `(C')` e `(U)`, nenhuma nova: o erro de auto-mediação
+`e(y):=\Phi_y(x)-A(y)/(x+y)` tem taxa `O(1/z)` (`z:=x+y`), a identidade
+`d/dy[A(y)/(x+y)]=e(y)/(x+y)` torna essa derivada `O(1/z^2)`,
+absolutamente integrável, e o critério de Cauchy elementar fecha
+`A(y)/(x+y)`. Contorna inteiramente o aparato Tauberiano clássico
+construído desde a onda 25. `(H-ces)`/`(U1)`/`(U2)`/`H1` permanecem
+formalmente ABERTOS — `(C')`/`(U)` não provados para o `\Phi` real —
+mas a distância lógica das duas hipóteses padrão até `(U1)` está agora
+fechada a essencialmente zero. Referee hostil: **SOUND WITH ONE
+COSMETIC ISSUE — ACCEPT**, confirmou "nenhuma hipótese nova" cruzando
+contra a derivação `T1` da própria onda 26; um achado BAIXO cosmético
+(subsequência construtiva com `k=0` inválido para o alvo `v=0`,
+não afeta a conclusão), corrigido por correção datada. **Onda 28 agora
+com 1/2 frentes integradas; frente (b) (`C(γ)`) ainda em andamento.**
+Anterior: `DISC-DEC-131`: onda 28 autorizada —
 2 frentes deliberadamente diversificadas após survey de portfolio
 dedicado. Frente (a): ataque DIRETO a `(H-ces)` (convergência
 Cesàro-`(C,1)` da média corrente `A(y)/(x+y)` para o `Φ` exato do

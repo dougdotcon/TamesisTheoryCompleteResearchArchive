@@ -1,0 +1,48 @@
+==============================================================================
+s04: explicit asymptotic law for A(y)/(x+y), and a discrete
+     telescoping-sum cross-check of the Cauchy-criterion argument
+==============================================================================
+
+--- Part 1: A(y)/(x+y) = L(x) + O(1/(x+y)), explicit rate ---
+[PASS] tail bound int_y^infinity C/(x+y')^2 dy' = C/(x+y), re-derived here independently of s01 (fresh sympy call)  -- got C/(x + y)
+Explicit asymptotic law (derived): A(y)/(x+y) = L(x) + R(y),
+  |R(y)| <= C(x,eps)/(x+y)   [C(x,eps) := 1 + M_Phi*eps + D(x,eps),
+                              the same constant assembled in s01 Check 5]
+[PASS] s02 Part A's exact example saturates |R(y)|<=C/(x+y) with equality (R(y)=-D/(x+y), so |R(y)|=D/(x+y) exactly, C=D achieved)  -- got D/(x + y)
+
+--- Part 2: the rate transfers to Phi_y(x) = L(x) + O(1/(x+y)) ---
+[PASS] triangle-inequality assembly: |e(y)|+|R(y)| <= C1/z+C2/z = (C1+C2)/z, exact algebra  -- residual=0
+  => Phi_y(x) = L(x) + O(1/(x+y))  [an EXPLICIT convergence rate for
+     (U1) itself, conditional on the same hypotheses (B),(C'),(U)]
+
+--- Part 3: discrete telescoping-sum cross-check (independent route) ---
+[PASS] finite sub-interval bound int_{Y_n}^{Y_{n+1}} C/(x+y')^2 dy' matches C*(1/(x+Y_n)-1/(x+Y_{n+1})) exactly  -- got 2**n*C*Y0/((2**n*Y0 + x)*(2**(n + 1)*Y0 + x))
+[PASS] telescoping sum sum_{n=0}^{N-1} C*(1/(x+Y_n)-1/(x+Y_{n+1})) = C*(1/(x+Y0)-1/(x+Y0*2^N)) exactly (sympy Sum, closed form)  -- got C*Y0*(2**N - 1)/((Y0 + x)*(2**N*Y0 + x)), expected C*(-1/(2**N*Y0 + x) + 1/(Y0 + x))
+[PASS] as N->infinity, the telescoped partial sum -> C/(x+Y0), FINITE (confirms {h(Y_n)} is a Cauchy sequence: absolutely convergent increments)  -- got C/(Y0 + x)
+
+  Numeric instance: x=1, D=2, Y0=1 (matches s02 Part A exactly)
+  n    Y_n              |h(Y_{n+1})-h(Y_n)|      running sum
+  0    1.0              0.3333333333             0.333333333333
+  1    2.0              0.2666666667             0.6
+  2    4.0              0.1777777778             0.777777777778
+  3    8.0              0.1045751634             0.882352941176
+  4    16.0             0.05704099822            0.939393939394
+  5    32.0             0.02983682984            0.969230769231
+  6    64.0             0.0152653548             0.984496124031
+  7    128.0            0.007721774802           0.992217898833
+  8    256.0            0.00388346569            0.996101364522
+  9    512.0            0.001947415965           0.998048780488
+  10   1024.0           0.0009751336166          0.999023914104
+
+  running sum after 11 terms: 0.999023914104
+  predicted asymptotic total C/(x+Y0) = D/(x+Y0) = 1.0
+[PASS] numeric running sum of |increments| stays bounded, converging toward the predicted C/(x+Y0) (Cauchy criterion satisfied concretely)  -- running_sum=0.99902391410444119082479258174719375305026842362128, predicted=1.0
+
+==============================================================================
+ALL CHECKS PASSED.
+Two INDEPENDENT arguments (continuous improper-integral/Cauchy-
+criterion, s01/ATTEMPT.md Sec 3; and discrete telescoping-sum,
+this script) agree: a uniform O(1/z) bound on the self-averaging
+error e(y) suffices for A(y)/(x+y) to converge, WITH an explicit
+O(1/z) RATE, and the same rate transfers to Phi_y(x) itself.
+==============================================================================

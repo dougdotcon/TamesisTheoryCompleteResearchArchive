@@ -1,0 +1,55 @@
+==============================================================================
+(a) Quotient-rule identity
+==============================================================================
+d/dy[A(y)/(x+y)] = Derivative(A(y), y)/(x + y) - A(y)/(x + y)**2
+Matches manual quotient rule [A'(y)(x+y)-A(y)]/(x+y)^2? residual=0
+d/dy[A(y)/(x+y)]|_{A'->Phi_y} - e(y)/(x+y): residual = 0
+PASS: exact quotient-rule identity confirmed independently.
+
+==============================================================================
+(b) Tail-integral formula
+==============================================================================
+int_Y0^infty C/(x+y)^2 dy = C/(Y0 + x)
+matches C/(x+Y0)? residual = 0
+PASS.
+
+==============================================================================
+(c) Cauchy criterion mechanics -- absolute integrability => Cauchy
+==============================================================================
+Standard real-analysis fact (not something to 'verify' symbolically,
+but let's sanity check the FTC identity h(Y2)-h(Y1)=int_{Y1}^{Y2}h'(y)dy
+underlying it, plus that the tail bound gives a genuine Cauchy tail):
+This is the fundamental theorem of calculus, standard and not in
+dispute; the target invokes it correctly as 'standard'.
+int_{Y1}^{Y2} C/(x+y)^2 dy = C*(-Y1 + Y2)/((Y1 + x)*(Y2 + x))
+As Y1,Y2 -> infinity (with Y2>Y1), this tail -> 0: standard Cauchy tail.
+PASS (mechanics confirmed, standard fact correctly invoked).
+
+==============================================================================
+(d) Telescoping-sum cross-check (Sec 2.3), independently reconstructed
+==============================================================================
+Per-interval bound: C*(1/(x+Y_n) - 1/(x+Y_{n+1}))
+Sum_{n=0}^{N-1} of that = C*Y0*(2**N - 1)/((Y0 + x)*(2**N*Y0 + x))
+Matches C*(1/(x+Y0) - 1/(x+Y0*2^N))? residual = 0
+PASS: telescoping identity confirmed independently via sympy Sum.
+As N->infinity: C/(Y0 + x)  (matches claimed limit C/(x+Y0))
+PASS: telescoping sum limit matches the continuous-integral tail
+      bound C/(x+Y0) EXACTLY -- the two 'structurally different
+      routes' (continuous Cauchy-criterion vs discrete telescoping)
+      are algebraically forced to agree here (both reduce to the
+      same antiderivative-difference fact), which is expected and
+      not circular: it's confirming the ARITHMETIC bookkeeping in
+      each of the two independently-written derivations is correct,
+      not an independent NEW proof of convergence.
+
+==============================================================================
+(e) Step 2 triangle-inequality rate-transfer (Sec 3)
+==============================================================================
+Phi_y(x) - L(x) = [e(y)] + [A(y)/(x+y) - L(x)]
+|Phi_y(x)-L(x)| <= |e(y)| + |A(y)/(x+y)-L(x)| <= C(x,eps)/z + C(x,eps)/z
+                 = 2*C(x,eps)/z
+This is O(1/(x+y)) as claimed (same ORDER, constant is 2C not C --
+ATTEMPT.md's Sec 3 states 'Phi_y(x) = L(x) + O(1/(x+y))' using O(.)
+notation, which correctly absorbs the factor of 2; it does NOT claim
+the tighter constant C(x,eps) itself carries through unchanged --
+checking this precisely against the prose next.

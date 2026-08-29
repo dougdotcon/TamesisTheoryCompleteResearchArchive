@@ -1,0 +1,61 @@
+======================================================================
+Solving the majorant Volterra equation with the RIGOROUS s04 kernel
+bound, for several eps, checking whether M(y) stays bounded as
+y grows (which would be a genuine PROOF of (B), via the comparison
+principle, if it holds for ALL y -- this script checks a finite
+range deterministically; see ATTEMPT.md Sec 4 for the honest
+discussion of what a finite-range numerical check does/doesn't show).
+======================================================================
+
+eps=0.10:
+  M(y= 10) = 0.09774283555
+  M(y= 30) = 0.0983186526
+  M(y= 60) = 0.09850598282
+  M(y=100) = 0.09862576222
+  M(y=150) = 0.09871733553
+
+eps=0.30:
+  M(y= 10) = 0.216370245
+  M(y= 30) = 0.2313444541
+  M(y= 60) = 0.2412118934
+  M(y=100) = 0.2487866355
+  M(y=150) = 0.2549884004
+
+eps=0.50:
+  M(y= 10) = 0.4794264488
+  M(y= 30) = 0.6144966089
+  M(y= 60) = 0.722035297
+  M(y=100) = 0.8142294052
+  M(y=150) = 0.8961616459
+
+eps=0.80:
+  M(y= 10) = 2.447902783
+  M(y= 30) = 7.373669936
+  M(y= 60) = 15.92766176
+  M(y=100) = 28.64974716
+  M(y=150) = 45.98652548
+
+eps=1.00:
+  M(y= 10) = 11.70254114
+  M(y= 30) = 216.5146961
+  M(y= 60) = 2972.374361
+  M(y=100) = 30844.5131
+  M(y=150) = 250563.8135
+
+eps=1.20:
+  M(y= 10) = 76.01548381
+  M(y= 30) = 51751.67466
+  M(y= 60) = 198941573.0
+  M(y=100) = 4.833300762e+12
+  M(y=150) = 8.082321807e+17
+
+======================================================================
+Growth-rate check: is M(y) still increasing at y=150, or has it
+visibly plateaued (bounded) over the tested range?
+======================================================================
+  eps=0.10: M(100)=0.0986258, M(150)=0.0987173, ratio=1.00093
+  eps=0.30: M(100)=0.248787, M(150)=0.254988, ratio=1.02493
+  eps=0.50: M(100)=0.814229, M(150)=0.896162, ratio=1.10063
+  eps=0.80: M(100)=28.6497, M(150)=45.9865, ratio=1.60513
+  eps=1.00: M(100)=30844.5, M(150)=250564.0, ratio=8.12345
+  eps=1.20: M(100)=4.8333e+12, M(150)=8.08232e+17, ratio=167222.0

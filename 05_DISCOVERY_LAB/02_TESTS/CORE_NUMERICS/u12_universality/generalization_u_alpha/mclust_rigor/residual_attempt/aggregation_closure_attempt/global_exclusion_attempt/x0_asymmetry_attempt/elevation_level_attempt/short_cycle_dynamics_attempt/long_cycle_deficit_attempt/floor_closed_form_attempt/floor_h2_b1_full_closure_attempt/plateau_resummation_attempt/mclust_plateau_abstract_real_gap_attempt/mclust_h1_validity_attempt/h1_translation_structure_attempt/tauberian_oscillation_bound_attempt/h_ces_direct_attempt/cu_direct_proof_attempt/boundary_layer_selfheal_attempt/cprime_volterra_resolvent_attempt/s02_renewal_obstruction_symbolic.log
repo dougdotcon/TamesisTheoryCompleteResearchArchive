@@ -1,0 +1,61 @@
+======================================================================
+Part 1: Laplace transform of k(h) = c*(1-exp(-h/eps))
+======================================================================
+k_hat(s) [sympy, from scratch] = c/(s*(eps*s + 1))
+k_hat(s) [direct int_0^inf e^{-sh}k(h)dh] = c/(s*(eps*s + 1))
+Two independent routes (sp.laplace_transform vs direct integration) AGREE -- residual 0. PASS
+k_hat(s) = c / (eps*s*(s+1/eps))   [equivalently c/(s*(eps*s+1))] -- residual 0. PASS
+
+NOTE: an earlier hand-derivation in this front's own scratch work
+guessed k_hat(s) = c/(s*(s+1/eps)) (missing the 1/eps prefactor) --
+this FIRST version of this exact script asserted that wrong formula
+and sympy's own computation caught it immediately via an outright
+AssertionError on first run. See Sec 5 of ATTEMPT.md for the full,
+disclosed account. The corrected formula above is what is used
+throughout the rest of this front.
+
+======================================================================
+Part 2: characteristic equation k_hat(s) = 1, solved exactly
+======================================================================
+c/(eps*s*(s+1/eps)) = 1  <=>  c = eps*s*(s+1/eps) = eps*s^2 + s
+                       <=>  s^2 + s/eps - c/eps = 0
+Quadratic form: Eq(-c/eps + s**2 + s/eps, 0)
+Roots (sympy, under the declared c,eps,s>0 assumptions): [(sqrt(4*c*eps + 1) - 1)/(2*eps)]
+s_+ = (sqrt(4*c*eps + 1) - 1)/(2*eps)
+Matches the by-hand quadratic-formula root (sqrt(1+4c*eps)-1)/(2*eps) -- residual 0. PASS
+
+======================================================================
+Part 3: s_+(c,eps) > 0 strictly, for EVERY c>0, eps>0 (general proof)
+======================================================================
+sqrt(1/eps^2+4c/eps) > 1/eps  <=>  (1/eps^2+4c/eps) - 1/eps^2 > 0
+difference = 4*c/eps  = 4c/eps, manifestly > 0 for all c>0, eps>0.
+GENERAL PROOF (all c>0, eps>0): s_+(c,eps) > 0 strictly. Residual-check 0. PASS
+
+Concrete evaluations for this front's two cases:
+  c=eps  (||K_B(h)|| alone, s01 Part1, EXACT): s_+ = (sqrt(4*eps**2 + 1) - 1)/(2*eps)
+  c=2*eps (large-z envelope of full ||K(y,t)||, s03): s_+ = (sqrt(8*eps**2 + 1) - 1)/(2*eps)
+
+Closed form for c=eps specifically: s_+ = (sqrt(4*eps**2 + 1) - 1)/(2*eps)
+    eps=0.100  ->  s_+ = 0.099020
+    eps=0.500  ->  s_+ = 0.414214
+    eps=1.000  ->  s_+ = 0.618034
+    eps=1.200  ->  s_+ = 0.666667
+
+======================================================================
+Part 4: independent cross-check via the equivalent 2nd-order ODE
+        (Leibniz differentiation done via sympy, not by hand)
+======================================================================
+Boundary term at t=y: 0  (k(0)=0, so this vanishes)
+=> M'(y) = int_0^y d/dy[k(y-t)] M(t) dt =: J(y)   (first derivative, via Leibniz)
+d/dy[k(y-t)] = c*exp((t - y)/eps)/eps
+Boundary term of J at t=y (for the SECOND differentiation): c*M(y)/eps
+d/dy[dk/dy(y-t)] * M(t) integrand-derivative: -c*M(t)*exp((t - y)/eps)/eps**2
+
+So M''(y) = boundary2  -  (1/eps)*M'(y),  boundary2 = (c/eps)*M(y)
+  ODE: Eq(M'', M*c/eps - M'/eps)    i.e.   M'' + M'/eps - (c/eps)*M = 0
+Characteristic polynomial of this ODE: s^2 + s/eps - c/eps = 0
+MATCHES Part 2's characteristic polynomial EXACTLY -- residual 0. PASS
+Two fully independent derivations (Laplace transform vs 2nd-order
+ODE reduction via Leibniz differentiation) agree perfectly.
+
+ALL PART 1-4 CHECKS PASSED (after the disclosed Part-1 self-correction).

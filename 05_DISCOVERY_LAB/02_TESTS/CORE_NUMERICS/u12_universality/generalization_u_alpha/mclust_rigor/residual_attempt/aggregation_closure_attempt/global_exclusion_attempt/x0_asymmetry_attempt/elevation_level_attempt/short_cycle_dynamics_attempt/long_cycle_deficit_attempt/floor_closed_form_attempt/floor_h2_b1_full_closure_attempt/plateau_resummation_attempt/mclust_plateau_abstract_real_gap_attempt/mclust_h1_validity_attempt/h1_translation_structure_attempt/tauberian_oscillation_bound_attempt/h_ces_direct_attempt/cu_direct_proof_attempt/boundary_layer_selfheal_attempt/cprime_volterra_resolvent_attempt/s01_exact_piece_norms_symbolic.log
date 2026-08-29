@@ -1,0 +1,67 @@
+======================================================================
+Part 1: K_B(h)[1](x) exact value
+======================================================================
+K_B(h)[1](x) = eps - eps*exp(-h/eps)
+MATCHES eps*(1-exp(-h/eps)) -- residual 0. PASS
+Positivity of the kernel e^{-v/eps}>=0 on [0,h] means this IS the
+operator sup-norm of K_B(h) (attained exactly at f=+1), not merely
+a bound on it -- standard fact for positive integral operators on
+C_b: ||A|| = sup_x |A[1](x)| when A has a nonnegative kernel.
+
+======================================================================
+Part 2: T_w[1](x') exact value, from T_w's raw definition
+======================================================================
+T_w[1](x') = int_0^inf e^{-u^2/2-u*(x'+w)} du =: R(x'+w)   (by R's own definition)
+i.e. T_w[1](x') = R( w + xprime )  -- definitional, not an assertion needing proof beyond R's def.
+
+======================================================================
+Part 3: the collapse identity x' + w = x + y = z
+======================================================================
+x' + w  with x'=x+v, w=y-v  ->   x + y
+Equals x+y = z identically in v -- residual 0. PASS
+(This is why T_{y-v} applied at the point x+v, for ANY v, always
+ sees Gaussian-tilt parameter exactly z = x+y, independent of v.)
+
+======================================================================
+Part 4: K_A^raw(y,t)[1](x) exact value, from the raw definition
+======================================================================
+K_A^raw(y,t)[1](x) = Rz*eps - Rz*eps*exp(-h/eps)
+MATCHES R(z)*eps*(1-exp(-h/eps)) -- residual 0. PASS
+Since T_w has a nonnegative kernel (Gaussian-tilt e^{-u^2/2-u(.)}>=0)
+and the v-integral weight e^{-v/eps}>=0 too, K_A^raw(y,t) is itself
+a positive operator -- so this IS its exact operator norm, not a bound.
+
+======================================================================
+Part 5: ||M_y K_A^raw(y,t)|| exact value (M_y is a SCALAR)
+======================================================================
+M_y * K_A^raw(y,t)[1](x) = R_z*(1 - exp(h/eps))*(eps*z - 1)*exp(-h/eps)
+||M_y K_A^raw(y,t)|| = |M_y| * ||K_A^raw(y,t)|| 
+  = |(1-eps*z)/eps| * R(z) * eps * (1-exp(-h/eps))
+  = |1-eps*z| * R(z) * (1-exp(-h/eps))        (eps cancels exactly)
+Cancellation eps*|M_y| = |1-eps*z| confirmed symbolically -- residual 0. PASS
+
+======================================================================
+Part 6: K(y,t)[1](x) exact value (both pieces combined)
+======================================================================
+K(y,t)[1](x) = (1-exp(-h/eps)) * [ (1-eps*z)*R(z) + eps ]
+Bracket (1-eps*z)*R(z) + eps  ==  R(z) + eps*sigma(z)   [sigma:=1-z*R(z)] -- residual 0. PASS
+
+=> K(y,t)[1](x) = (1-exp(-h/eps)) * [ R(z) + eps*sigma(z) ]   EXACTLY
+
+Cross-check against the ALREADY-CITED closed form (cu_direct_proof_
+attempt Sec 3.1, wave 30 Sec 3.1): for f=1, f'=0 identically, so
+rho(h',z)=0 and E_full(z)=0 in that decomposition, and the leading
+term [f(x)-e^{-h/eps}f(x+h)]/z = (1-e^{-h/eps})/z exactly.
+Since R(z)=(1-sigma(z))/z, R(z)+eps*sigma(z) = 1/z + sigma(z)*(eps-1/z),
+Rewriting R(z)=(1-sigma)/z and simplifying:
+R(z)+eps*sigma(z) == 1/z + sigma(z)*(eps-1/z)  -- residual 0. PASS
+so K(y,t)[1](x) = (1-e^{-h/eps})/z + (1-e^{-h/eps})*sigma(z)*(eps-1/z),
+matching leading term (1-e^{-h/eps})/z EXACTLY plus a remainder of
+size O(sigma(z))=O(1/z^2) (already established via (G2) in the
+predecessor -- consistent, NOT new content; recorded here purely as
+an independent cross-check that this front's own from-scratch raw-
+operator computation reproduces the cited closed form on this
+trivial test case, before using the SAME raw-operator machinery to
+derive genuinely new content in s02/s03 below.
+
+ALL PART 1-6 SYMBOLIC CHECKS PASSED. Zero residual in every assertion.

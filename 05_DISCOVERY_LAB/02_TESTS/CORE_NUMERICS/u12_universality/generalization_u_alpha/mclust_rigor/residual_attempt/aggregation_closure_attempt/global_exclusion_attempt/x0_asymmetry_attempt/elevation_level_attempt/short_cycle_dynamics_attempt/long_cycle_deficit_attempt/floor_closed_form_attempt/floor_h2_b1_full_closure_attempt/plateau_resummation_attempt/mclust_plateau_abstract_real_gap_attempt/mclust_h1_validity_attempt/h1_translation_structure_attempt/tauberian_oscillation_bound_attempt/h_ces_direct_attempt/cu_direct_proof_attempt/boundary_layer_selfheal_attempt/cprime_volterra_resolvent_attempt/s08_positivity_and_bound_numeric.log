@@ -1,0 +1,30 @@
+======================================================================
+Check A: D(s) >= 0 on [0,h], for a grid of (eps,z,h) with z>1/eps
+======================================================================
+63 pointwise checks, D(s)>=0 in every case. PASS
+
+======================================================================
+Check B: negative lobe (s>h) magnitude vs the eps*e^{-h/eps} bound
+======================================================================
+  eps=0.3, z=10.0, h=6.00: |neg lobe|=1.97054e-10, bound=6.18346e-10, ratio=0.3187
+  eps=0.3, z=30.0, h=18.00: |neg lobe|=2.90831e-28, bound=2.62695e-27, ratio=0.1107
+  eps=0.5, z=10.0, h=6.00: |neg lobe|=5.92385e-7, bound=3.07211e-6, ratio=0.1928
+  eps=0.5, z=30.0, h=18.00: |neg lobe|=7.70425e-18, bound=1.15976e-16, ratio=0.06643
+  eps=1.0, z=10.0, h=6.00: |neg lobe|=0.000240013, bound=0.00247875, ratio=0.09683
+  eps=1.0, z=30.0, h=18.00: |neg lobe|=5.05925e-10, bound=1.523e-8, ratio=0.03322
+6 checks, negative lobe always negative and within the eps*e^-h/eps bound. PASS
+
+======================================================================
+Check C: full ||K(y,t)|| bound (int|D|) vs the sharp formula, and vs
+the archive's own crude constant sqrt(pi/2)+eps
+======================================================================
+  eps=0.3, z=h=10.0: ||K|| (numeric)=0.10194281, sharp bound=0.10194281, crude bound=1.553, rel.diff=3.563e-15
+  eps=0.3, z=h=30.0: ||K|| (numeric)=0.033628647, sharp bound=0.033628647, crude bound=1.553, rel.diff=6.786e-21
+  eps=0.3, z=h=60.0: ||K|| (numeric)=0.016745305, sharp bound=0.016745305, crude bound=1.553, rel.diff=1.688e-25
+  eps=0.5, z=h=10.0: ||K|| (numeric)=0.10388561, sharp bound=0.10388561, crude bound=1.753, rel.diff=6.094e-9
+  eps=0.5, z=h=30.0: ||K|| (numeric)=0.033850133, sharp bound=0.033850133, crude bound=1.753, rel.diff=1.18e-20
+  eps=0.5, z=h=60.0: ||K|| (numeric)=0.016800814, sharp bound=0.016800814, crude bound=1.753, rel.diff=1.442e-25
+6 checks: true operator norm matches the sharp bound (to quadrature
+precision) and is always far below the crude sqrt(pi/2)+eps constant. PASS
+
+ALL s08 CHECKS PASSED.

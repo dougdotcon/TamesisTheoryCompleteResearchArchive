@@ -1,0 +1,36 @@
+======================================================================
+Cross-check: fresh density-based signed integral vs s01's exact
+closed form K(y,t)[1](x) = (1-e^{-h/eps})*[R(z)+eps*sigma(z)]
+======================================================================
+x=0.0, y=6.0, t=0.0: h=6.0, z=6.0
+  fresh density-integral (signed): 0.175243601466
+  s01 exact closed form:           0.175243601466
+  relative error: 1.20837e-21
+  PASS (independent cross-check of this script's own density formula)
+x=1.0, y=9.0, t=2.0: h=7.0, z=10.0
+  fresh density-integral (signed): 0.103885527729
+  s01 exact closed form:           0.103885527729
+  relative error: 1.01919e-21
+  PASS (independent cross-check of this script's own density formula)
+
+======================================================================
+Main experiment: does ||K(y,t)|| (unsigned/operator-norm integral)
+decay with h, or saturate, while the SIGNED integral -> 0 ?
+Fixed x=0, t=0 (so h=y=z, the maximal-h / h=y case).
+======================================================================
+   z=h=y |    signed (K[1]) |   unsigned (||K||) |   2*eps*(1-e^-h/eps)
+       5 |       0.21077827 |          0.2107935 |            0.9999546
+      10 |       0.10388561 |         0.10388561 |                  1.0
+      20 |      0.051116666 |        0.051116666 |                  1.0
+      40 |       0.02529632 |         0.02529632 |                  1.0
+      60 |      0.016800814 |        0.016800814 |                  1.0
+      90 |      0.011171445 |        0.011171445 |                  1.0
+
+Interpretation printed to ATTEMPT.md Sec 4 (not asserted here as a
+proof either way -- this is disclosed as exploratory numerical
+evidence, deterministic quadrature, no randomness).
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-TamesisTheoryCompleteResearchArchive/e9ab1ff0-e9f9-5b73-816d-aec417acf7b1/scratchpad/s03_true_operator_norm_numeric.py", line 137, in <module>
+    assert unsigned_last > mp.mpf('0.1') * eps, "unsigned (operator norm) collapsed unexpectedly"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unsigned (operator norm) collapsed unexpectedly

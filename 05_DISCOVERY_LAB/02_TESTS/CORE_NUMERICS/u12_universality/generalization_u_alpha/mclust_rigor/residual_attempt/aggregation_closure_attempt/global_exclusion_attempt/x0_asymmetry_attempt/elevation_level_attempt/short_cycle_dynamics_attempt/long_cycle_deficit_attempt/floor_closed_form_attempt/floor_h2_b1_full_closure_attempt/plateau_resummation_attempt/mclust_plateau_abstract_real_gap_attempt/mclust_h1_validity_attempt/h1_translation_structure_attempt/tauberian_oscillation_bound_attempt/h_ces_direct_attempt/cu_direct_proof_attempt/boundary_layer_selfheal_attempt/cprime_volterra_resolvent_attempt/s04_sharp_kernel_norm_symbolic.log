@@ -1,0 +1,60 @@
+======================================================================
+Part 1: D_KAraw(s) closed form for s<=h, via substitution u=s-v
+======================================================================
+Integrand after v = s-u substitution: exp(-u**2/2 - u*z - s/eps + u/eps)
+Exponent identity: -v/eps-(s-v)^2/2-(s-v)z |_{v=s-u}  ==  -s/eps-u^2/2-u*(z-1/eps)
+residual 0. PASS
+
+=> D_KAraw(s) = e^{-s/eps} * int_0^s e^{-u^2/2-u*w} du,  w:=z-1/eps   (for s<=h)
+
+======================================================================
+Part 2: D(s) = e^{-s/eps}*[1 - w*int_0^s e^{-u^2/2-uw}du], via M_y=-w
+======================================================================
+M_y + w = 0, i.e. M_y = -w exactly -- residual 0. PASS
+D(s) [s<=h] = D_KB(s) + M_y*D_KAraw(s)
+            = e^{-s/eps} + (-w)*e^{-s/eps}*int_0^s e^{-u^2/2-uw}du
+            = e^{-s/eps} * [1 - w*int_0^s e^{-u^2/2-uw}du]      -- as claimed
+
+======================================================================
+Part 3: negative lobe, s > h -- closed form and bound
+======================================================================
+Same exponent identity applies (v=s-u substitution is s,h-independent)
+=> D_KAraw(s) [s>h] = e^{-s/eps} * int_{s-h}^{s} e^{-u^2/2-u*w} du
+=> D(s) [s>h] = -w * e^{-s/eps} * int_{s-h}^{s} e^{-u^2/2-uw} du  <= 0
+
+Bound: int_{s-h}^{s}(...) <= int_0^inf(...) = R(w) [subinterval of [0,inf)]
+|D(s)| <= w*R(w)*e^{-s/eps} = (1-sigma(w))*e^{-s/eps} <= e^{-s/eps}
+int_h^inf |D(s)| ds <= int_h^inf e^{-s/eps} ds = eps*e^{-h/eps}
+Direct symbolic check: int_h^inf e^{-s/eps} ds = eps*exp(-h/eps) = eps*e^{-h/eps}  -- confirmed
+residual 0. PASS
+
+======================================================================
+Part 4: assembled corollary bound, symbolic bookkeeping
+======================================================================
+||K(y,t)|| <= (1-e^{-h/eps})*(R(z)+eps*sigma(z)) + eps*e^{-h/eps}
+           <=  R(z) + eps*sigma(z) + eps*e^{-h/eps}   (dropping the (1-e^..)<=1 factor,
+                                                        a slightly looser but cleaner form)
+Difference (loose - sharp) = (Rz + eps*sigmaz)*exp(-h/eps)  -- check it is >=0 (loose is indeed an upper bound on sharp)
+Confirmed algebraically: loose_bound - sharp_bound = (R(z)+eps*sigma(z))*e^{-h/eps} >= 0. PASS
+
+======================================================================
+Part 5: integrated (over t, i.e. over h in [0,y]) row-sum bound
+======================================================================
+int_0^y ||K(y,t)||_bound dh = (Rz*eps + eps**2*sigmaz - eps**2 + (-Rz*eps - eps**2*sigmaz + eps**2 + y*(Rz + eps*sigmaz))*exp(y/eps))*exp(-y/eps)
+Compare to hand-derived form (Rz+eps*sigmaz)*(y-eps(1-e^-y/eps)) + eps^2*(1-e^-y/eps):
+difference = 0
+residual 0. PASS
+
+Since (y - eps(1-e^-y/eps)) <= y and (1-e^-y/eps) <= 1:
+  int_0^y ||K(y,t)||_bound dh  <=  (R(z)+eps*sigma(z))*y  +  eps^2
+Using (G1) R(z)<=1/z, (G2) sigma(z)<=1/z^2, and y<=z:
+  <=  y/z + eps*y/z^2 + eps^2  <=  1 + eps/z + eps^2   (using y/z<=1, y/z^2<=1/z)
+
+=> int_0^y ||K(y,t)|| dt  <=  1 + eps/z + eps^2   for z > 1/eps  (UNCONDITIONAL)
+   the 'excess' over the critical threshold 1 needed for a one-shot
+   contraction argument is exactly eps/z + eps^2 -- vanishing as z->infinity
+   IF eps could be taken ->0 too, but for FIXED eps>0 this stays >0
+   (excess -> eps^2 as z->infinity) -- see ATTEMPT.md Sec 4 for the
+   full honest discussion of what this does and does not establish.
+
+ALL PART 1-5 CHECKS PASSED.

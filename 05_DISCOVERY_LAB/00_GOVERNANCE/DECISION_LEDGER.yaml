@@ -9344,3 +9344,83 @@ decisions:
       construido, nao limitado, nao caracterizado como serie
       convergente com resto provado, exatamente como todo predecessor
       desde o Estagio 26.
+
+  - id: DISC-DEC-144
+    date: 2026-08-29
+    decision: >
+      Onda 31 frente (a) CPRIME-VOLTERRA-RESOLVENT-ATTEMPT integrada
+      como adendo datado em PROOF_DEPENDENCY_MAP.md (M-CLUST(b), cadeia
+      H1), decima segunda onda consecutiva (20-31) neste gap -- e a
+      primeira frente desta subcadeia a atacar (C') DIRETAMENTE, nao
+      (U) sob (C') como premissa: a estabilidade uniforme do resolvente
+      de Volterra K(y,t) a que DISC-DEC-134 reduziu (C').
+      Resultado central: novo teorema INCONDICIONAL sobre a norma de
+      operador VERDADEIRA ||K(y,t)||, via densidade integral com sinal
+      explicita D(s). Teorema A: D(s)>=0 em [0,h], incondicional, via
+      w:=z-1/eps e o colchete (G2) ja provado w*R(w)=1-sigma(w)<=1.
+      Teorema B: lobulo negativo para s>h exponencialmente pequeno,
+      int_h^inf|D(s)|ds<=eps*e^(-h/eps). Ambos confirmados corretos
+      pelo spot-check da sessao e pelo referee hostil.
+      Erro real encontrado pelo referee no passo de MONTAGEM (corolario
+      SHARP, combinando A+B): coeficiente original eps no termo de
+      cauda e*(-h/eps) deveria ser 2*eps -- causa raiz e conflacao de
+      int_0^h D(s)ds com K(y,t)[1](x) (ja estabelecido), quando a
+      identidade exata e int_0^h D(s)ds=K(y,t)[1](x)+int_h^inf|D(s)|ds,
+      entao a massa do lobulo negativo entra duas vezes. O proprio
+      "problema auto-capturado" da frente (Secao 7 Issue 3) tinha isso
+      exatamente ao contrario -- acreditava estar corrigindo uma
+      estimativa 2*eps superestimada para eps, quando a estimativa
+      2*eps descartada estava mais proxima do correto. Referee achou
+      contraexemplo numerico a dps=50 (eps=0.2,z=8.0,h=0.8: violacao de
+      0.101%), confirmado por duas rotas independentes; teste proprio
+      da frente (s08) nunca capturou por sempre usar h:=z, tornando o
+      erro invisivel.
+      Propagacao a jusante corrigida via correcoes datadas na propria
+      ATTEMPT.md: massa integrada de nucleo (eps^2 -> 2*eps^2); B(z)
+      da Secao 5.1 (eps-A(z) -> 2*eps-A(z)); expoente de crescimento
+      das Secoes 5.2-5.3 (eps^2/(1-eps^2) -> 2*eps^2/(1-2*eps^2));
+      transicao qualitativa afiada (eps=1 -> eps=1/sqrt(2)~=0.7071).
+      Crucialmente, o proprio referee declarou explicitamente que esta
+      correcao FORTALECE, nao enfraquece, a conclusao honesta da
+      Secao 6: nenhuma tecnica baseada em norma de operador/majorante,
+      por mais afiada, pode estabelecer a estabilidade uniforme que a
+      reducao exige -- a obstrucao VERDADEIRA e pior (cresce mais
+      rapido, explode mais cedo) que o originalmente relatado. Dois
+      achados adicionais de NOTA (paragrafo geral da Secao 2.2 excede
+      levemente o resultado especifico provado; linguagem "por mais
+      afiada" da Secao 6 cobre tecnicamente so as construcoes
+      realmente tentadas).
+      Spot-check da sessao antes do despacho: verificacao sympy/mpmath
+      em oito partes (formula exata de ||K_B(h)||, transformada de
+      Laplace, raiz Malthusiana, monotonicidade do Teorema A, sinal de
+      D(s) em tres pontos, massa integrada da Secao 4, ambas relacoes
+      de EDO N'=M e P'=M-P/eps, integral de cauda do Teorema B) -- zero
+      discrepancia no que foi checado; o spot-check cobriu as pecas
+      individuais mas nao re-derivou o passo de montagem final, onde o
+      referee achou o erro.
+      Referee hostil dedicado: SOUND WITH A MODERATE, HONESTLY-
+      STRENGTHENING CORRECTION. Re-derivou Teoremas A e B do zero das
+      definicoes cruas a 20-40 digitos significativos; achou o erro de
+      coeficiente via contraexemplo numerico reproduzido por duas
+      rotas; forneceu tabela numerica corrigida completa para o
+      expoente de crescimento; confirmou que a maquinaria de EDO de s07
+      esta corretamente implementada (erro e inteiramente a montante);
+      confirmou independentemente a alegacao ">100x mais afiado" em
+      eps=0.5,z=60 (nao afetada pelo erro).
+      Onda 31 completa -- 2/2 frentes integradas.
+    scope: >
+      Arquivos afetados: PROOF_DEPENDENCY_MAP.md (novo adendo datado,
+      Arvore B, cadeia M-CLUST(b)/H1, ~90 linhas);
+      .../boundary_layer_selfheal_attempt/cprime_volterra_resolvent_attempt/ATTEMPT.md
+      (4 correcoes datadas); DECISION_LEDGER.yaml (este arquivo);
+      DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica pura
+      interna a este arquivo. Nenhum resultado de registro anterior
+      invalidado -- os Teoremas A e B (novos, incondicionais) permanecem
+      corretos; apenas o coeficiente do corolario de montagem (SHARP) e
+      suas consequencias numericas foram corrigidos, e a correcao
+      fortalece a conclusao negativa da frente. H1, (U1), (U2),
+      (H-ces), (C'), (B) permanecem exatamente como registrados --
+      formalmente ABERTOS -- ate que futuras frentes retornem e sejam
+      integradas com a mesma disciplina.

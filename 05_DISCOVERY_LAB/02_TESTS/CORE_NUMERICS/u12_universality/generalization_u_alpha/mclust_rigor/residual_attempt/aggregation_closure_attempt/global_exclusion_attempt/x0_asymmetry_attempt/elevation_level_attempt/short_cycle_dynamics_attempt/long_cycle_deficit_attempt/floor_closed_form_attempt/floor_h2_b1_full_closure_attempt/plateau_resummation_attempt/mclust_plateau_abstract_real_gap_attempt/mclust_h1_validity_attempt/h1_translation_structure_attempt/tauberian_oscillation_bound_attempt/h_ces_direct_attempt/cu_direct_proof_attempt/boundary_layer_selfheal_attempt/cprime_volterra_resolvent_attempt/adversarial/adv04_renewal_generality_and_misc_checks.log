@@ -1,0 +1,45 @@
+==========================================================================================
+Part 1: s_+(c,eps) > 0 for every c,eps>0 (renewal/Malthusian root positivity)
+==========================================================================================
+Confirmed s_+ > 0 and k_hat(s_+)=1 exactly, for all 20 tested (c,eps) pairs.
+This IS a fully general, unconditional elementary algebraic fact for the
+SPECIFIC parametric family k(h)=c*(1-e^{-h/eps}) -- confirmed correct.
+
+==========================================================================================
+Part 2 (NOTA): does the CONCLUSION's broader claim (any non-decaying
+saturating envelope, not just this family) hold for a DIFFERENT shape?
+==========================================================================================
+Testing k(h) = c*(1 - 1/(1+h/eps))  [algebraic, SLOWER approach to
+saturation than the exponential family, same c, same eps]
+M(y) at y=5.00,10.00,15.00: 17.7800,405.9588,9272.8083
+Growth ratios over equal y-increments: 22.8323, 22.8417
+(roughly constant ratio across equal increments is consistent with
+ continued exponential-type growth for this different saturating shape
+ too -- SUPPORTS the broader qualitative claim as plausible, but this
+ is a spot-check on ONE alternative shape, not a general proof; the
+ target's Sec 2.2 'Conclusion' paragraph technically only rigorously
+ covers the specific exponential-saturation family it computes with.
+ This is a NOTA -- a wording/scope precision issue, not an error.)
+
+==========================================================================================
+Part 3: sup-over-x nota -- is the (corrected) bound worse for SMALLER x?
+==========================================================================================
+  x=0.0: z=20.0, A(z)=0.050869  (larger A(z) = worse/larger bound)
+  x=0.5: z=20.5, A(z)=0.049610  (larger A(z) = worse/larger bound)
+  x=1.0: z=21.0, A(z)=0.048413  (larger A(z) = worse/larger bound)
+  x=3.0: z=23.0, A(z)=0.044148  (larger A(z) = worse/larger bound)
+Confirms A(z) DECREASING in z, i.e. INCREASING as x decreases toward 0 --
+so x=0 is the worst case for fixed y, and the target's own numerics (fixed
+x=1 throughout Sec 3-5) do not probe the worst case over x. The target's
+own Sec 8 item 7 discloses this as 'not independently verified across x' --
+an honest, correctly-scoped disclosure (NOTA, not a correcao).
+
+==========================================================================================
+Part 4: 'more than two orders of magnitude sharper' claim, eps=0.5, z=h=60
+==========================================================================================
+TRUE ||K(y,t)|| (direct quadrature) = 0.016801
+crude archive bound sqrt(pi/2)+eps    = 1.753314
+ratio (sharpness factor)              = 104.36x
+CONFIRMED: this specific claim (>100x sharper at eps=0.5,z=60) is accurate --
+this regime has h/eps=120, so the adv02 coefficient bug (relevant only at
+MODERATE h/eps, roughly 2-6) is invisible here; the claim holds as stated.

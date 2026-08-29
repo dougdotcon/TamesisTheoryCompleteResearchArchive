@@ -1,0 +1,125 @@
+======================================================================
+Part 1: refinement/convergence study exposing the fixed-grid issue
+======================================================================
+eps=0.5, target M(y=30.0), refining dy:
+  n=    60  dy=0.50000  dy/eps=1.0000   M(30)=0.49655060
+  n=   300  dy=0.10000  dy/eps=0.2000   M(30)=0.73969910
+  n=  1500  dy=0.02000  dy/eps=0.0400   M(30)=0.83430373
+  n=  7500  dy=0.00400  dy/eps=0.0080   M(30)=0.85629351
+  n= 30000  dy=0.00100  dy/eps=0.0020   M(30)=0.86054465
+  successive differences: ['0.24315', '0.09460', '0.02199', '0.00425']
+  Differences shrink monotonically -- genuine convergence, confirms
+  s05 (dy=0.25) and s06 (dy=1.0, 2.0) were significantly
+  under-resolved at eps=0.5. Finest grid here (dy/eps=0.002) gives
+  M(30) = 0.860545 as the trustworthy reference value.
+
+======================================================================
+Part 2: ODE reformulation -- symbolic decomposition + cross-check
+======================================================================
+K_bound(h,z) = A(z)+B(z)*e^{-h/eps}, A:=R(z)+eps*sigma(z), B:=eps-A
+residual 0. PASS
+
+ODE reformulation: M(30) = 0.86197090
+Finest trapezoid (dy=0.001): M(30) = 0.86054465
+relative difference: 1.66e-03
+PASS -- ODE reformulation agrees with the properly-converged fine
+trapezoid grid to <3e-3 (consistent with Richardson-extrapolating
+the trapezoid's own residual discretization error), independently
+validating this script's own method (used for everything below).
+
+======================================================================
+Part 3: eps-sweep, moderate y (replaces s05's role, now reliable)
+======================================================================
+
+eps=0.10:
+  M(y= 10) = 7.018254e-02
+  M(y= 30) = 7.117243e-02
+  M(y= 60) = 7.168837e-02
+  M(y=100) = 7.206059e-02
+  M(y=150) = 7.235587e-02
+  ratio M(150)/M(100) = 1.0041
+
+eps=0.30:
+  M(y= 10) = 2.337573e-01
+  M(y= 30) = 2.598428e-01
+  M(y= 60) = 2.779245e-01
+  M(y=100) = 2.921545e-01
+  M(y=150) = 3.040136e-01
+  ratio M(150)/M(100) = 1.0406
+
+eps=0.50:
+  M(y= 10) = 6.111828e-01
+  M(y= 30) = 8.619709e-01
+  M(y= 60) = 1.079200e+00
+  M(y=100) = 1.276200e+00
+  M(y=150) = 1.458952e+00
+  ratio M(150)/M(100) = 1.1432
+
+eps=0.80:
+  M(y= 10) = 4.530202e+00
+  M(y= 30) = 2.097241e+01
+  M(y= 60) = 6.333064e+01
+  M(y=100) = 1.487589e+02
+  M(y=150) = 2.974567e+02
+  ratio M(150)/M(100) = 1.9996
+
+eps=1.00:
+  M(y= 10) = 3.278166e+01
+  M(y= 30) = 2.279148e+03
+  M(y= 60) = 1.706446e+05
+  M(y=100) = 1.326273e+07
+  M(y=150) = 1.054628e+09
+  ratio M(150)/M(100) = 79.5182
+
+eps=1.20:
+  M(y= 10) = 3.538643e+02
+  M(y= 30) = 3.415960e+06
+  M(y= 60) = 8.013009e+11
+  M(y=100) = 5.467213e+18
+  M(y=150) = 1.200134e+27
+  ratio M(150)/M(100) = 219514820.5281
+
+======================================================================
+Part 4: large-y growth-exponent check (replaces s06's role, now
+properly resolved)
+======================================================================
+
+eps=0.3: heuristic-predicted exponent eps^2/(1-eps^2) = 0.09890
+    y=   1000: M = 3.665534e-01
+    y=   3000: M = 4.085975e-01
+    y=  10000: M = 4.602552e-01
+    y=  30000: M = 5.130782e-01
+    y= 100000: M = 5.779574e-01
+    y= 200000: M = 6.189674e-01
+  fitted log-log slope (y in [10000,200000]): 0.09890
+  relative error vs heuristic prediction: 0.000
+
+eps=0.5: heuristic-predicted exponent eps^2/(1-eps^2) = 0.33333
+    y=   1000: M = 2.739594e+00
+    y=   3000: M = 3.950107e+00
+    y=  10000: M = 5.900115e+00
+    y=  30000: M = 8.509208e+00
+    y= 100000: M = 1.271095e+01
+    y= 200000: M = 1.601476e+01
+  fitted log-log slope (y in [10000,200000]): 0.33333
+  relative error vs heuristic prediction: 0.000
+
+eps=0.7: heuristic-predicted exponent eps^2/(1-eps^2) = 0.96078
+    y=   1000: M = 1.417175e+02
+    y=   3000: M = 4.066212e+02
+    y=  10000: M = 1.292225e+03
+    y=  30000: M = 3.712651e+03
+    y= 100000: M = 1.180416e+04
+    y= 200000: M = 2.297499e+04
+  fitted log-log slope (y in [10000,200000]): 0.96075
+  relative error vs heuristic prediction: 0.000
+
+Interpretation (reported honestly in ATTEMPT.md Sec 4, not as a
+closure claim): M(y) continues to grow (does not plateau) out to
+y=200000 for every eps in {0.3,0.5,0.7} tested -- this front's own
+sharp kernel bound does NOT establish a finite uniform majorant via
+this comparison route, for any eps tested. The growth is far slower
+than the naive exponential-Gronwall picture (a genuine, precisely
+quantified improvement), and its fitted exponent is the right order
+of magnitude as (but does not tightly match) this front's own
+admittedly-informal 'slowly-varying M' heuristic prediction.

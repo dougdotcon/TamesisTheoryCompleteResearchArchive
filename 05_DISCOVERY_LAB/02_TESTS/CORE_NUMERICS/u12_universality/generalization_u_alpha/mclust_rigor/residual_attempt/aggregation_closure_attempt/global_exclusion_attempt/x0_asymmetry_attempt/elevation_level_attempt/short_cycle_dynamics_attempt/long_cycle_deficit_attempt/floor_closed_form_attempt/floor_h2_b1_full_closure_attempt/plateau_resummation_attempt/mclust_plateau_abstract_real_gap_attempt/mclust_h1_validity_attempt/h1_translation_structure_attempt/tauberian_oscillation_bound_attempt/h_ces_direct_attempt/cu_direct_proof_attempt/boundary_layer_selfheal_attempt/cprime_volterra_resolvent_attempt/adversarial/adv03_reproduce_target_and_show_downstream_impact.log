@@ -1,0 +1,40 @@
+==========================================================================================
+PART 1: fresh independent reproduction of the target's OWN (coeff=1) s07 numbers
+==========================================================================================
+eps=0.3: this referee's FRESH reproduction, target's own (coeff=1) B(z): fitted exponent=0.09890  vs target's published heuristic eps^2/(1-eps^2)=0.09890   -> MATCHES (target numbers reproduce correctly)
+eps=0.5: this referee's FRESH reproduction, target's own (coeff=1) B(z): fitted exponent=0.33333  vs target's published heuristic eps^2/(1-eps^2)=0.33333   -> MATCHES (target numbers reproduce correctly)
+eps=0.7: this referee's FRESH reproduction, target's own (coeff=1) B(z): fitted exponent=0.96075  vs target's published heuristic eps^2/(1-eps^2)=0.96078   -> MATCHES (target numbers reproduce correctly)
+
+==========================================================================================
+PART 2: impact of the adv02 coefficient fix (B(z) := 2*eps - A(z), not eps-A(z))
+==========================================================================================
+eps=0.300 (1/sqrt2=0.7071): fitted exponent=0.21951  vs corrected-formula 2eps^2/(1-2eps^2)=0.21951
+eps=0.500 (1/sqrt2=0.7071): fitted exponent=0.99997  vs corrected-formula 2eps^2/(1-2eps^2)=1.00000
+eps=0.600 (1/sqrt2=0.7071): fitted exponent=2.57103  vs corrected-formula 2eps^2/(1-2eps^2)=2.57143
+eps=0.650 (1/sqrt2=0.7071): fitted exponent=5.44811  vs corrected-formula 2eps^2/(1-2eps^2)=5.45161
+eps=0.680 (1/sqrt2=0.7071): fitted exponent=12.25966  vs corrected-formula 2eps^2/(1-2eps^2)=12.29787
+eps=0.700 (1/sqrt2=0.7071): fitted exponent=46.90666  vs corrected-formula 2eps^2/(1-2eps^2)=49.00000
+eps=0.705 (1/sqrt2=0.7071): fitted exponent=123.77469  vs corrected-formula 2eps^2/(1-2eps^2)=167.06723
+eps=0.710 (1/sqrt2=0.7071): NON-FINITE / EXPLOSIVE (ODE blew up)
+eps=0.720 (1/sqrt2=0.7071): NON-FINITE / EXPLOSIVE (ODE blew up)
+eps=0.750 (1/sqrt2=0.7071): NON-FINITE / EXPLOSIVE (ODE blew up)
+eps=0.800 (1/sqrt2=0.7071): NON-FINITE / EXPLOSIVE (ODE blew up)
+eps=0.900 (1/sqrt2=0.7071): NON-FINITE / EXPLOSIVE (ODE blew up)
+
+==========================================================================================
+SUMMARY
+==========================================================================================
+Target's claimed exponent formula: eps^2/(1-eps^2), transition at eps=1
+This referee's CORRECTED exponent (from the coefficient-2 fix, adv02):
+  2*eps^2/(1-2*eps^2), with the corresponding transition to explosive
+  growth at eps=1/sqrt(2) = 0.70711 -- CONFIRMED numerically above (the
+  corrected ODE integration becomes non-finite once eps exceeds ~0.707,
+  not ~1 as the target's own Sec 5.3 claims).
+
+This means BOTH of Sec 5's headline quantitative findings (the exponent
+formula, and the 'sharp qualitative transition at eps=1') are INCORRECT
+as literally stated -- though the corrected obstruction is STRICTLY WORSE
+(diverges faster, transitions earlier) than what the target reports, so
+Sec 6's qualitative negative conclusion is, if anything, reinforced.
+
+[exited with code 0]

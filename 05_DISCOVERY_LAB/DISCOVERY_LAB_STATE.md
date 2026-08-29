@@ -1,6 +1,28 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-143`: onda 31 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-144`: onda 31 frente (a)
+`CPRIME-VOLTERRA-RESOLVENT-ATTEMPT` integrada como adendo datado em
+`PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia H1). Primeira frente
+desta subcadeia (12 ondas, 20-31) a atacar `(C')` DIRETAMENTE: novo
+teorema INCONDICIONAL sobre a norma de operador verdadeira
+`||K(y,t)||` via densidade com sinal `D(s)` — Teorema A (`D(s)\ge0`
+em `[0,h]`) e Teorema B (lóbulo negativo exponencialmente pequeno),
+ambos confirmados corretos. Referee achou erro real (severidade
+moderada) no passo de MONTAGEM (corolário SHARP): coeficiente
+`\varepsilon` deveria ser `2\varepsilon` no termo de cauda — a massa
+do lóbulo negativo entra duas vezes em `||K(y,t)||`, não uma; o
+próprio "problema auto-capturado" da frente tinha isso ao contrário.
+Propagou correções para a massa integrada de núcleo (`\varepsilon^2
+\to2\varepsilon^2`), `B(z)` (`\varepsilon-A(z)\to2\varepsilon-A(z)`),
+o expoente de crescimento (`\varepsilon^2/(1-\varepsilon^2)\to
+2\varepsilon^2/(1-2\varepsilon^2)`) e a transição afiada
+(`\varepsilon=1\to\varepsilon=1/\sqrt2\approx0{,}7071`). **O próprio
+referee declarou que a correção FORTALECE, não enfraquece, a
+conclusão da frente**: a obstrução verdadeira ao fechamento de
+`(C')`/`(B)` via norma de operador é pior que o relatado. `H1`,
+`(U1)`, `(U2)`, `(C')`, `(B)` permanecem formalmente ABERTOS. **Onda
+31 completa — 2/2 frentes integradas.**
+Anterior: `DISC-DEC-143`: onda 31 frente (b)
 `GAMMA-C-GAMMA-JOINT-SADDLE-ATTEMPT` integrada como Estágio 56 em
 `THEOREM.md`. `C(γ)` continua inteiramente ABERTO, mas pela primeira
 vez em 6 ondas a análise conjunta de ponto de sela/Laplace em duas
@@ -16,12 +38,7 @@ hostil: **SOUND WITH ISSUES, duas correções** — uma alegação numérica
 extrapolação de Richardson, não falha na matemática) e uma alegação
 de "crossover começando em `c(γ)/2`" que o próprio log da frente
 mostra ser `c(γ)` em si — a parte sólida (convergência para `A(γ)`)
-sobrevive. Nenhum dos três achados centrais afetado. **Onda 31 agora
-com 1/2 frentes integradas** — frente (a) `CPRIME-VOLTERRA-RESOLVENT-
-ATTEMPT` retornou (não provou `(C')`, mas entregou uma nova redução
-unconditional do operador `K(y,t)` e um diagnóstico preciso de
-divergência polinomial), ainda aguardando spot-check e despacho de
-referee.
+sobrevive. Nenhum dos três achados centrais afetado.
 Anterior: `DISC-DEC-142`: onda 31 autorizada
 — 2 frentes, após survey de portfolio dedicado que constatou: toda
 linha do arquivo fora de `u12_universality` está formalmente fechada

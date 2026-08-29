@@ -1528,6 +1528,98 @@ flowchart TD
 > e
 > `.../boundary_layer_selfheal_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-144`.]** Onda 31 frente (a)
+> (`CPRIME-VOLTERRA-RESOLVENT-ATTEMPT`), despachada sob
+> `.../boundary_layer_selfheal_attempt/`, é a primeira frente nesta
+> subcadeia (12 ondas consecutivas, 20-31) a atacar `(C')` DIRETAMENTE —
+> não `(U)` sob `(C')` como premissa, mas a própria questão de
+> estabilidade uniforme do resolvente de Volterra `K(y,t)` que
+> `DISC-DEC-134` reduziu `(C')` a.
+>
+> **Resultado central: um novo teorema INCONDICIONAL (sem depender de
+> `(C')`) sobre a norma de operador VERDADEIRA `||K(y,t)||`**, via uma
+> densidade integral com sinal explícita `D(s)`. **Teorema A** (§3.2):
+> `D(s)\ge0` em `[0,h]`, incondicional, via a mudança `w:=z-1/\varepsilon`
+> e o colchete `(G2)` já provado `w\cdot R(w)=1-\sigma(w)\le1`. **Teorema
+> B** (§3.3): o lóbulo negativo para `s>h` é exponencialmente pequeno,
+> `\int_h^\infty|D(s)|\,ds\le\varepsilon\,e^{-h/\varepsilon}`. Ambos
+> confirmados corretos de forma independente pelo spot-check da própria
+> sessão e pelo referee hostil (re-derivados das definições cruas, 20-40
+> dígitos significativos).
+>
+> **Um erro real foi encontrado pelo referee no passo de MONTAGEM
+> (§3.4, o corolário `(SHARP)` que combina os Teoremas A e B num
+> limitante para `||K(y,t)||`), de severidade moderada** — a fórmula
+> original tinha coeficiente `\varepsilon` no termo de cauda
+> `e^{-h/\varepsilon}`; o coeficiente correto é `2\varepsilon`. A causa
+> raiz: `(1-e^{-h/\varepsilon})(R(z)+\varepsilon\sigma(z))` é na verdade
+> `K(y,t)[1](x)` (já estabelecido em §3.1), NÃO `\int_0^hD(s)\,ds` como a
+> frente implicitamente assumiu — a identidade exata é
+> `\int_0^hD(s)\,ds=K(y,t)[1](x)+\int_h^\infty|D(s)|\,ds`, de modo que a
+> massa do lóbulo negativo entra em `||K(y,t)||` DUAS vezes. O próprio
+> "problema auto-capturado" da frente (§7, Issue 3) tinha isso
+> EXATAMENTE ao contrário: acreditava estar corrigindo uma estimativa
+> `2\varepsilon` superestimada para `\varepsilon`, quando na verdade a
+> estimativa `2\varepsilon` descartada estava mais próxima do correto.
+> Referee encontrou um contraexemplo numérico a `dps=50`
+> (`\varepsilon=0{,}2,z=8{,}0,h=0{,}8`: violação de `0{,}101\%`),
+> confirmado por duas rotas de cálculo independentes; o teste próprio da
+> frente (`s08`, §3.4) nunca capturou isso porque sempre usou `h:=z`,
+> dando `e^{-h/\varepsilon}` astronomicamente pequeno e tornando o erro
+> de coeficiente numericamente invisível em todo teste que a frente
+> realmente executou.
+>
+> **Propagação a jusante, toda corrigida por correções datadas na
+> própria `ATTEMPT.md` da frente**: o limitante de massa integrada de
+> núcleo da §4 (`1+\varepsilon/z+\varepsilon^2\to
+> 1+\varepsilon/z+2\varepsilon^2`); a definição `B(z)` da §5.1
+> (`\varepsilon-A(z)\to2\varepsilon-A(z)`); a lei de crescimento do
+> expoente das §5.2-5.3
+> (`\varepsilon^2/(1-\varepsilon^2)\to2\varepsilon^2/(1-2\varepsilon^2)`,
+> tabela numérica corrigida fornecida pelo referee); e a transição
+> qualitativa afiada, que passa de `\varepsilon=1` para
+> `\varepsilon=1/\sqrt2\approx0{,}7071` (o referee confirmou
+> numericamente que a EDO corrigida deixa de ser finita logo acima de
+> `0{,}707`).
+>
+> **Crucialmente — declarado explicitamente pelo próprio referee — esta
+> correção FORTALECE, não enfraquece, a conclusão honesta da frente na
+> §6**: nenhuma técnica baseada em norma de operador/majorante, por mais
+> afiada, pode estabelecer a estabilidade uniforme que a redução exige
+> para fechar `(C')`/`(B)`. A obstrução VERDADEIRA é pior (cresce mais
+> rápido, explode mais cedo) do que o originalmente relatado. Dois
+> achados adicionais de severidade baixa, ambos NOTA: (1) o parágrafo
+> geral de "Conclusão" da §2.2 excede levemente o resultado específico
+> provado para a família de renovação; (2) a linguagem "por mais afiada"
+> da §6 cobre tecnicamente apenas as construções de majorante realmente
+> tentadas. A maquinaria de EDO de `s07` foi confirmada corretamente
+> implementada pelo referee (o erro é inteiramente a montante, no valor
+> de `B(z)` alimentado a ela); a alegação numérica ">100x mais afiado"
+> em `\varepsilon=0{,}5,z=60` foi confirmada independentemente precisa
+> (não afetada pelo erro, já que `h/\varepsilon` é grande ali).
+>
+> **Spot-check da sessão** antes do despacho do referee: verificação
+> `sympy`/`mpmath` em oito partes das alegações da frente (fórmula exata
+> de `||K_B(h)||`, transformada de Laplace, raiz Malthusiana,
+> monotonicidade do Teorema A, checagens numéricas de sinal de `D(s)`
+> em três pontos, correspondência simbólica exata da massa integrada da
+> §4, ambas as relações de EDO `N'=M` e `P'=M-P/\varepsilon`, e a peça
+> de integral de cauda do Teorema B) — zero discrepância em tudo que foi
+> checado; o spot-check cobriu corretamente as peças individuais
+> (Teoremas A e B) mas não re-derivou independentemente o passo de
+> montagem final, exatamente onde o referee encontrou o erro.
+>
+> Veredito **SOUND WITH A MODERATE, HONESTLY-STRENGTHENING CORRECTION —
+> ACCEPT for catalogue**. `H1`, `(U1)`, `(U2)`, `(H-ces)`, `(C')`, `(B)`
+> permanecem formalmente ABERTOS. O ganho real desta frente não é
+> fechar `(C')` — é a primeira demonstração incondicional e rigorosa,
+> nesta subcadeia inteira, de que a via de ataque via norma de
+> operador/majorante do resolvente está estruturalmente fechada, com a
+> margem exata (corrigida) até onde ela falha. Fontes:
+> `.../boundary_layer_selfheal_attempt/cprime_volterra_resolvent_attempt/ATTEMPT.md`
+> e
+> `.../cprime_volterra_resolvent_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

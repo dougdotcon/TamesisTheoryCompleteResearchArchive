@@ -1,0 +1,38 @@
+======================================================================
+Cross-check against s05's mpmath solve (same eps, same Y, same grid)
+======================================================================
+  eps=0.5, y=10: M(y) [numpy/double] = 0.479426
+  eps=0.5, y=30: M(y) [numpy/double] = 0.614497
+  eps=0.5, y=60: M(y) [numpy/double] = 0.722035
+  eps=0.5, y=100: M(y) [numpy/double] = 0.814229
+  eps=0.5, y=150: M(y) [numpy/double] = 0.896162
+Compare to s05_majorant_volterra_numeric.log (mpmath, dps=25):
+  eps=0.50: M(10)=0.4794264488, M(30)=0.6144966089, M(60)=0.722035297,
+            M(100)=0.8142294052, M(150)=0.8961616459
+(agreement to displayed double precision confirms this script's own
+ independent numpy implementation faithfully reproduces s05's mpmath
+ computation before trusting it at much larger scale below.)
+
+======================================================================
+Large-scale growth-exponent fit: log(M) vs log(z), large-y tail
+======================================================================
+
+eps=0.3: predicted exponent p(eps)=eps^2/(1-eps^2) = 0.09890
+  fitted log-log slope over y in [4000,8000]: 0.01122
+  M(y=4000) = 2.872350e-01,  M(y=8000) = 2.894776e-01
+  relative error (fitted vs predicted exponent): 0.887
+
+eps=0.5: predicted exponent p(eps)=eps^2/(1-eps^2) = 0.33333
+  fitted log-log slope over y in [4000,8000]: 0.08490
+  M(y=4000) = 6.161598e-01,  M(y=8000) = 6.535009e-01
+  relative error (fitted vs predicted exponent): 0.745
+
+eps=0.7: predicted exponent p(eps)=eps^2/(1-eps^2) = 0.96078
+  fitted log-log slope over y in [4000,8000]: 0.28307
+  M(y=4000) = 3.349269e+00,  M(y=8000) = 4.075169e+00
+  relative error (fitted vs predicted exponent): 0.705
+
+(Heuristic-prediction agreement is reported descriptively in
+ ATTEMPT.md Sec 4 -- NOT asserted as a proof-grade identity, since
+ the exponent formula itself was derived via an admittedly informal
+ 'slowly-varying M' approximation, disclosed as such.)

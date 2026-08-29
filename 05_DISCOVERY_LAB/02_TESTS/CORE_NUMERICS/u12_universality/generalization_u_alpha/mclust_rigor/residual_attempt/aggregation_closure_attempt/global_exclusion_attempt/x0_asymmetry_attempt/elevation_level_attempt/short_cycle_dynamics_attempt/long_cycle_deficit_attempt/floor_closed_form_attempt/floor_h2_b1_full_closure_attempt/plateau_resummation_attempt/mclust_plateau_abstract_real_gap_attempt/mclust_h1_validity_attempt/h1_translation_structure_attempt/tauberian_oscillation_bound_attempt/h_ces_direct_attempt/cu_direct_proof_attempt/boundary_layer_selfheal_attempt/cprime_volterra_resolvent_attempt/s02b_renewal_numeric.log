@@ -1,0 +1,33 @@
+======================================================================
+Direct Volterra-quadrature solve of the renewal majorant equation,
+cross-checked against the closed-form Malthusian rate s_+(c,eps)
+======================================================================
+
+eps=0.500, c=eps: predicted s_+ = 0.41421356
+  M(y) at y=22.50: 9.522242e+03
+  M(y) at y=30.00: 2.127696e+05
+  empirical growth rate (log-slope over last quarter): 0.41421062
+  relative error vs predicted s_+: 7.113e-06
+  PASS: empirical exponential growth rate matches closed-form s_+ to <1e-3.
+
+eps=1.000, c=eps: predicted s_+ = 0.61803399
+  M(y) at y=22.50: 7.918836e+05
+  M(y) at y=30.00: 8.160463e+07
+  empirical growth rate (log-slope over last quarter): 0.61803026
+  relative error vs predicted s_+: 6.030e-06
+  PASS: empirical exponential growth rate matches closed-form s_+ to <1e-3.
+
+======================================================================
+Sanity check: M(y) genuinely EXCEEDS any fixed bound as y grows
+(i.e. is NOT merely a slow transient) -- confirms the majorant is
+truly unbounded, not just 'looks big at moderate y'.
+======================================================================
+  y= 5: M(y) = 6.7680e+00
+  y=10: M(y) = 5.3673e+01
+  y=20: M(y) = 3.3755e+03
+  y=30: M(y) = 2.1229e+05
+  y=40: M(y) = 1.3351e+07
+  M(y) grows by >100x from y=10 to y=40 -- confirms genuine unbounded
+  exponential growth, not a bounded transient. PASS
+
+ALL s02b NUMERICAL CHECKS PASSED.

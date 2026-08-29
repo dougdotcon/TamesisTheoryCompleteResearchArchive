@@ -1,0 +1,46 @@
+Test point: eps=0.2, z=8.0, h=0.8  (w=z-1/eps=3.0)
+
+==========================================================================================
+Step 1: the EXACT identity ||K(y,t)|| = K(y,t)[1](x) + 2*int_h^inf|D|ds
+==========================================================================================
+int_0^h D(s)ds                          = 0.125706797189495800183671135604
+K(y,t)[1](x) exact formula               = 0.123810838612309689972672649306
+int_h^inf|D(s)|ds (= tail_exact)          = 0.00189595857718611021099848629809
+K(y,t)[1](x) + tail_exact                 = 0.125706797189495800183671135604
+  (should equal int_0^h D(s)ds above -- confirms the EXACT identity)
+  CONFIRMED, residual < 1e-25
+
+TRUE ||K(y,t)|| (unified |D(s)| integral) = 0.127602755766681910394669621902
+K(y,t)[1](x) + 2*tail_exact                = 0.127602755766681910394669621902
+  CONFIRMED MATCH -- the exact identity ||K|| = K[1] + 2*tail is verified. PASS
+
+==========================================================================================
+Step 2: Theorem B's own bound still holds (Theorem B is NOT broken)
+==========================================================================================
+Theorem B bound eps*e^-h/eps = 0.00366312777774683605874360425465
+actual tail_exact            = 0.00189595857718611021099848629809
+tail_exact <= bound: CONFIRMED, Theorem B itself is correct.
+
+==========================================================================================
+Step 3: the target's coefficient-1 (SHARP) formula IS VIOLATED here
+==========================================================================================
+Target's (SHARP), coefficient 1  = 0.12747396639005652603141625356
+TRUE ||K(y,t)||                   = 0.127602755766681910394669621902
+Corrected (SHARP), coefficient 2 = 0.131137094167803362090159857815
+
+>>> VIOLATION CONFIRMED: TRUE exceeds target's (SHARP) by 0.0001287893766 (relative 0.00101032) <<<
+Corrected coefficient-2 bound holds here (as it must, being an exact
+algebraic consequence of Theorem B alone, valid unconditionally, not
+merely checked at this one point).
+
+==========================================================================================
+Step 4: broad numerical sweep (mpmath, dps=30) for further violations
+==========================================================================================
+Tested 48 (eps,w,h/eps) triples: 2 violations of the target's
+coefficient-1 (SHARP) formula found. Worst TRUE/SHARP ratio = 1.00101 at (eps,w,h/eps)=('0.2', '3.0', '4.0').
+
+CONCLUSION: the target's (SHARP) formula (Sec 3.4) is mathematically
+INCORRECT as an unconditional bound -- it requires coefficient 2, not 1,
+on the eps*e^{-h/eps} tail term. Theorem A and Theorem B (adv01) remain
+correct; the error is specifically in how Sec 3.4 assembles them. See
+adv03 for the propagated impact on Sec 4-5's downstream numerics.

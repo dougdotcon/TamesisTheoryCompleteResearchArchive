@@ -1620,6 +1620,91 @@ flowchart TD
 > e
 > `.../cprime_volterra_resolvent_attempt/adversarial/REFEREE_REPORT.md`.
 
+> **[Adendo datado, 2026-08-29 — `DISC-DEC-147`.]** Onda 32 frente (a)
+> (`CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT`), decima terceira onda
+> consecutiva (20-32) neste gap, e a primeira a atacar `(B)`/`(C')` via um
+> argumento de principio do maximo diretamente na EDP ORIGINAL,
+> ds Phi/ds - dPhi/dg = c[Phi-W], W = g*Avg_g[Phi] + (1-s-g)*Psi,
+> explorando que W envolve uma MEDIA de Phi, nao Phi pontualmente -- a
+> literal recomendacao #1 da frente predecessora (DISC-DEC-144, Secao 10).
+>
+> **`(B)` e `(C')` NAO sao provados. Resultado NEGATIVO honesto, com
+> quatro subprodutos positivos genuinos.** (1) Uma nova identidade
+> algebrica exata: o coeficiente de auto-consistencia `(1-s-g)` da EDP
+> original E EXATAMENTE `eps*M_y`, o MESMO escalar de operador de
+> multiplicacao que governou a estrutura do nucleo de Volterra `K(y,t)`
+> desde `DISC-DEC-113` -- mostrando que a estrutura de media que o
+> mandato pediu para explorar nao e independente da maquinaria ja
+> construida, e sim sua propria fonte algebrica, vista do outro lado da
+> mesma mudanca de variaveis. (2) Um novo teorema incondicional (TEOREMA
+> 1): o nucleo de `(E2)` tem peso total exatamente `1`, entao `Phi(x,y)`
+> e uma combinacao convexa exata do valor de fronteira `1` e dos valores
+> de `W` ao longo do caminho caracteristico -- um principio do maximo
+> genuino, nunca empacotado assim no registro. (3) Uma prova direta por
+> algebra (nao apenas observada numericamente) de que o limitante bruto
+> `T(M):=max(1,(1-s)*M)` satisfaz `T(M)<=M` para todo `M>=1` -- entao
+> nenhum valor finito de `M_Phi` pode jamais ser excluido por esta rota
+> sozinha, por mais iterada que seja. (4) Um novo corolario `M_Psi<=M_Phi`
+> e uma caracterizacao quantitativa da nao-causalidade de `Psi` em `x`
+> (`Psi(x,y)` depende de `Phi` em pontos `x'>=x`, potencialmente `z`
+> MAIOR) -- encontrado via um erro genuinamente auto-capturado (uma
+> conjectura de limitante local ingenua refutada numericamente, corrigida,
+> e depois posteriormente provada rigorosamente pelo proprio referee a
+> partir da definicao de `(BB-Psi')`). Uma segunda confirmacao
+> independente da obstrucao ja-nomeada de "perda de derivada" foi tambem
+> derivada diretamente no lado da EDP (diferenciacao de `(E2)`+`KEY`
+> exige `Psi_xx`, que via `(E1)` reduz de volta a `Phi_x` -- um loop
+> auto-referencial confirmado por duas rotas de derivacao independentes).
+>
+> **Dois achados reais de correcao, ambos de severidade MODERADA (ambos
+> em prosa/enquadramento, nao invalidando nenhuma identidade algebrica
+> individual):** (1) a alegacao de que a identidade-ponte da Secao 2
+> explica POR QUE o argumento de principio do maximo da Secao 3 falha
+> esta sobre-reivindicada -- a prova de nao-contracao da Secao 3.3 vale
+> mesmo restrita ao regime SEGURO `s+g<=1`, ou seja, antes de qualquer
+> inversao de sinal de `M_y` ocorrer; a causa real e o fato mais
+> elementar e logicamente independente de que a constante de Lipschitz
+> `Phi->Psi` (`DISC-DEC-100`) e exatamente `1`. Os dois resultados
+> negativos sao independentes, nao um "afiando" o outro por herenca
+> causal. (2) A faixa numerica reivindicada para a fracao de vazamento
+> anti-causal, "19%-73%", esta numericamente errada e auto-contradita na
+> mesma frase ("ainda ~1% em z=100"); a grade completa de 18 pontos da
+> propria frente da a faixa verdadeira ~0,5%-73%. Ambos corrigidos por
+> correcao datada na propria `ATTEMPT.md` da frente; uma nota adicional
+> registra que o referee provou o limitante corrigido de `Psi`
+> rigorosamente (nao apenas confirmou numericamente), fortalecendo o
+> achado 4 acima.
+>
+> **Spot-check da sessao** antes do despacho do referee: re-derivacao
+> independente via `sympy` de (BRIDGE-1), (BRIDGE-2), da identidade de
+> consistencia com `KEY`, do peso total `1` do nucleo de `(E2)`, da prova
+> de nao-contracao `T(M)<=M`, e de ambas as identidades de diferenciacao
+> da Secao 6 -- zero discrepancia em todos os casos.
+>
+> Referee hostil dedicado: re-derivou toda identidade algebrica das
+> Secoes 2/3/6 do zero, confirmando cada uma exatamente; reproduziu
+> numericamente a refutacao da Secao 4.2 e todos os 8 valores da tabela
+> de vazamento da Secao 5 (achando o erro de faixa numerica acima);
+> provou rigorosamente o limitante corrigido de `Psi` (fortalecendo, nao
+> apenas confirmando, o achado 4); investigou se uma funcao de
+> comparacao mais afiada poderia resgatar o argumento da Secao 3.3 e
+> confirmou que nao, pelas mesmas razoes ja diagnosticadas por
+> `h1_energy_estimate_attempt`. Dois achados de CORRECAO (ambos
+> MODERADOS), dois de severidade BAIXA (cosmeticos), uma NOTA de
+> fortalecimento.
+>
+> **Veredito: SOUND WITH NAMED ISSUES, duas correcoes moderadas -- ACCEPT
+> for catalogue.** `H1`, `(U1)`, `(U2)`, `(H-ces)`, `(C')`, `(B)`
+> permanecem formalmente ABERTOS. O ganho desta frente e uma prova
+> rigorosa, incondicional, de que a estrutura de auto-media da EDP
+> original -- a candidata mais natural para uma tecnica genuinamente
+> diferente -- nao fornece uma rota de escape independente da maquinaria
+> ja construida, ja que ambas compartilham o mesmo escalar `M_y`
+> subjacente. Fontes:
+> `.../cprime_volterra_resolvent_attempt/cprime_selfconsistency_maxprinciple_attempt/ATTEMPT.md`
+> e
+> `.../cprime_selfconsistency_maxprinciple_attempt/adversarial/REFEREE_REPORT.md`.
+
 **Leitura.** M-CLUST(b) não é um passo dentro da Árvore A — é um objeto
 diferente, dentro do programa mais amplo de generalização U_α. As
 obstruções que as frentes (a) de ondas 8 e 9 atacaram (exclusão de

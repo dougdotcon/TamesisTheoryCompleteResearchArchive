@@ -1,0 +1,62 @@
+======================================================================
+Part 1: change of variables s=eps*x, g=eps*y is well-defined
+======================================================================
+s(x,eps) = eps*x  =>  x recovered as s/eps: True
+g(y,eps) = eps*y  =>  y recovered as g/eps: True
+
+======================================================================
+Part 2: BRIDGE-1 -- g*Avg_g[Phi](s,g) = eps*I(x,y)
+======================================================================
+g*Avg_g[Phi](s,g) := g*(1/g)*int_0^g Phi(s,g')dg' = int_0^g Phi(s,g')dg'  -- algebraic cancellation, trivial and exact.
+After g'=eps*y2 substitution: int_0^{eps*y} Phi(eps*x,g')dg' = eps * int_0^y PhiXY(x,y2) dy2
+  = eps * I(x,y)   where I(x,y):=int_0^y PhiXY(x,y2)dy2   [I is the ALREADY-CITED symbol from (E1)]
+
+BRIDGE-1 CONFIRMED (exact substitution, no approximation):
+   g*Avg_g[Phi](s,g)  =  eps*I(x,y)
+
+======================================================================
+Part 3: BRIDGE-2 -- (1-s-g) = eps*M_y
+======================================================================
+1 - s - g            = -eps*x - eps*y + 1
+eps * M_y            = -eps*(x + y) + 1
+(1-s-g) - eps*M_y    = 0    [should be exactly 0]
+BRIDGE-2 CONFIRMED: (1-s-g) = eps*M_y EXACTLY (not merely asymptotically).
+
+======================================================================
+Part 4: BRIDGE-3 -- consistency of W(x,y)=eps*I+eps*M_y*Psi with the
+        ALREADY-CITED KEY identity W = Psi - eps*Psi_x, using the
+        ALREADY-CITED (E1) identity I = (x+y)*Psi - Psi_x
+======================================================================
+W (built from BRIDGE-1/2, this front's combination):
+I⋅eps - eps⋅x⋅Ψ(x, y) - eps⋅y⋅Ψ(x, y) + Ψ(x, y)
+
+W (built from BRIDGE-1/2), with I eliminated via cited (E1):
+-Ψₓ⋅eps + Ψ(x, y)
+
+W (cited KEY identity):
+-Ψₓ⋅eps + Ψ(x, y)
+
+Difference (should be exactly 0): 0
+BRIDGE-3 CONFIRMED: the two routes agree EXACTLY -- this front's own
+(s,g)-to-(x,y) bridge (BRIDGE-1/2) is fully consistent with the
+ALREADY-CITED KEY/(E1) identities. No contradiction, no silent error.
+
+======================================================================
+Part 5: the sign-flip threshold, restated in BOTH coordinate systems
+======================================================================
+M_y=0 (i.e. 1-eps*z=0) at z = x+y = 1/eps  = 1/eps  (exact)
+(1-s-g)=0 at s+g = 1  = 1  (exact)
+
+Consistency: z=1/eps  <=>  eps*z=1  <=>  eps*(x+y)=1  <=>  (using x=s/eps,y=g/eps)
+  eps*(x+y) - 1, with x=s/eps,y=g/eps, s+g held at threshold 1:
+  simplifies to: g + s - 1  (= s+g-1, matches threshold s+g=1 exactly)
+
+ALL CHECKS PASSED. Summary of confirmed identities (all EXACT, no
+approximation, verified by independent sympy substitution/simplify):
+  (BRIDGE-1)  g*Avg_g[Phi](s,g) = eps*I(x,y)
+  (BRIDGE-2)  (1-s-g) = eps*M_y
+  (BRIDGE-3)  W(x,y) built from BRIDGE-1/2 agrees EXACTLY with the
+              already-cited KEY identity, using the already-cited (E1)
+  (THRESHOLD) the sign flip of (1-s-g) [at s+g=1] and the sign flip of
+              M_y [at z=x+y=1/eps] are the SAME event under the SAME
+              already-established scaling s=eps*x, g=eps*y.

@@ -1,0 +1,25 @@
+=== (A) Exact derivatives of g(t) = m ln t + m ln(1-t) + (n-m) ln(1-gamma t) ===
+g'(t)  = -gamma*(m - n)/(gamma*t - 1) + m/(t - 1) + m/t
+g''(t) = gamma**2*m/(gamma*t - 1)**2 - gamma**2*n/(gamma*t - 1)**2 - m/(t - 1)**2 - m/t**2
+g'''(t)= -2*gamma**3*m/(gamma*t - 1)**3 + 2*gamma**3*n/(gamma*t - 1)**3 + 2*m/(t - 1)**3 + 2*m/t**3
+g''''(t)= 6*gamma**4*m/(gamma*t - 1)**4 - 6*gamma**4*n/(gamma*t - 1)**4 - 6*m/(t - 1)**4 - 6*m/t**4
+
+=== (B) Re-verification of the CITED t* closed form (Estagio 56 finding 1) ===
+Numerator of g'(t) after clearing denominators: gamma*m*t**2 + gamma*n*t**2 - gamma*n*t - 2*m*t + m
+num - [gamma(m+n) t^2 - (2m+gamma n) t + m] = 0  (expect 0, up to overall sign convention)
+num + [...] = 2*gamma*m*t**2 + 2*gamma*n*t**2 - 2*gamma*n*t - 4*m*t + 2*m  (checking the other sign convention too)
+Quadratic evaluated at cited t*(n,m,gamma): 0  (expect 0)
+t* at m=0: 0  (expect 0)
+
+=== (C) Re-verification of global concavity (each term) ===
+d2/dt2 [m ln t]        = -m/t**2  -- negative for t>0, m>0: concave
+d2/dt2 [m ln(1-t)]     = -m/(t - 1)**2  -- negative for t<1, m>0: concave
+d2/dt2 [(n-m) ln(1-gt)]= gamma**2*(m - n)/(gamma*t - 1)**2  -- negative for gamma t<1, n>m: concave
+
+=== (C') Numeric spot-check g''(t) < 0 at random interior points ===
+[seed 20260951001 drawn from reserved block 20260951000-20260951999]
+Checked 30 random points, negative-g'' violations: 0
+
+Script 01 complete. All facts in (B),(C) are re-verifications of
+ALREADY-PROVED citable inputs (Estagio 56 finding 1 and its referee
+item (a)), not new claims of this front.

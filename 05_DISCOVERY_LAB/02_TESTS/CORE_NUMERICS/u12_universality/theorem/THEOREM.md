@@ -7940,3 +7940,110 @@ tratamento Euler-Maclaurin da soma externa — é agora nomeado com
 precisão máxima, exatamente no mesmo nível de detalhe que o Gap 1
 original exige. Nenhuma alegação de progresso em Millennium Problem;
 matemática combinatória pura interna a este arquivo.
+
+## [Extensão, Estágio 57 — 2026-08-29]
+
+**Onda 32, frente (b), `DISC-DEC-145` (`GAMMA-C-GAMMA-UNIFORM-WATSON-
+REMAINDER-ATTEMPT`).** Alvo: item 1 do próprio diagnóstico da Seção 7 do
+Estágio 56 — um resto uniforme tipo Watson's-lemma para a integral interna
+em `t` da representação de momento-inclinado Beta`(m+1,m+1)`, válido sobre
+`m=Θ(\sqrt n)` (`λ:=m/\sqrt n` limitado). Escopo deliberadamente restrito ao
+item 1 apenas — o programa conjunto completo de 4 itens foi explicitamente
+descrito pela própria frente predecessora como "profundidade comparável a
+fechar o Gap 1 diretamente", já tentado 6+ vezes sem fechamento.
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — como o mandato antecipou.** Uma
+> nova correção fechada de próxima ordem para a integral interna
+> `I(n,m,γ):=\int_0^1t^m(1-t)^m(1-γt)^{n-m}\,dt` foi derivada e
+> confirmada, do zero, por rota metodologicamente independente:
+>
+> 1. **A fórmula geral de correção Watson/Laplace de segunda ordem**,
+>    derivada aqui de primeiros princípios (momentos gaussianos exatos,
+>    `sympy`) e validada contra um fato clássico EXTERNO a este arquivo —
+>    a série de Stirling para `Γ(z+1)` — reproduzindo EXATAMENTE a
+>    correção conhecida `1/(12z)`:
+>    `Δ=g''''(t^*)/(8A^2)+5[g'''(t^*)]^2/(24A^3)`, `A:=-g''(t^*)`.
+> 2. **Uma nova forma fechada, substituindo o `t^*(n,m,γ)` já-PROVADO
+>    (Estágio 56) e expandindo na mesoscala `m=λ\sqrt n`**:
+>    `Δ(n,m,γ)\sim(1/(12λ))\cdot(1/\sqrt n)`, EXATAMENTE independente de
+>    `γ` — confirmada tanto por álgebra simbólica de potência-líder quanto
+>    por `mpmath` independente sem maquinaria de série, até `n=10^{12}`.
+> 3. **Confirmação numérica uniforme** sobre `λ\in[0{,}3,3{,}0]`,
+>    `γ\in\{0{,}3,0{,}5,0{,}8\}`: a aproximação de Laplace de ordem líder
+>    decai com inclinação log-log `\to-0{,}5`; a aproximação
+>    `Δ`-corrigida decai com inclinação `\to-1{,}0` (confirmado limpo até
+>    `n=10^9` em pontos representativos) — uma ordem extra completa de
+>    precisão, exatamente batendo com a taxa derivada. Uma checagem
+>    deliberada de falha em `λ=0{,}05` (fora do alcance reivindicado)
+>    substancia, em vez de meramente afirmar, a necessidade de `λ`
+>    limitado longe de `0` (polo `1/λ` confirmado simbolicamente).
+> 4. **Um argumento de negligibilidade de cauda, divulgado como
+>    semi-rigoroso**, usando a concavidade global já-PROVADA de `g`
+>    (Estágio 56, referee): a contribuição de cauda real, medida
+>    diretamente por quadratura, é `10^{16}`-`10^{26}` vezes menor que
+>    `Δ` em todo ponto testado.
+>
+> **Um achado real de correção, encontrado pelo referee (severidade
+> MODERADA, não afeta a conclusão de fundo):** a fórmula analítica de
+> cauda da Seção 5, Passo 2, extrapola implicitamente o limitante inferior
+> de curvatura (`|g''(t)|/A\ge0{,}19`, verificado apenas na janela testada
+> `K\le40`) para todo o domínio até as bordas `t=0,1` — uma varredura de
+> domínio completo do referee mostra que essa razão cai a
+> `\sim10^{-4}`-`10^{-5}` em `t` intermediário, longe de `t^*`. Isto NÃO
+> afeta a conclusão real da frente, que é sustentada pelo Passo 3 (medição
+> direta de quadratura, já chamado pela própria frente de "a checagem que
+> realmente importa"), não pelo Passo 2. Corrigido por correção datada na
+> própria `ATTEMPT.md` da frente, com uma nota adicional de precisão de
+> linguagem (distinção entre "truncamento de janela" e "semente de
+> ponto de quebra para quadratura adaptativa").
+>
+> **Spot-check da sessão** antes do despacho do referee: re-derivação
+> independente via `sympy` de `t^*` satisfazendo `g'(t^*)=0`; extração
+> independente de potência-líder (via `sympy.limit`, não `sympy.series`)
+> de `A\sim(γ^2/λ)n^{3/2}`, `g'''(t^*)\sim(2γ^3/λ^2)n^2`,
+> `g''''(t^*)\sim-(6γ^4/λ^3)n^{5/2}`, confirmando `Δ\sim1/(12λ\sqrt n)`;
+> validação exata da fórmula geral `Δ` contra a série de Stirling; e um
+> teste numérico próprio (integral relativa `\exp[g(t)-g(t^*)]`, evitando
+> cancelamento catastrófico) confirmando 4-5 ordens de magnitude de
+> melhoria de precisão da correção — zero discrepância em todos os casos.
+>
+> Referee hostil dedicado: re-derivou a fórmula geral `Δ` e o escalamento
+> mesoscala do zero, por rota simbólica genuinamente diferente
+> (`sympy.limit` em vez do `sympy.series`-com-workaround da própria
+> frente), obtendo formas fechadas idênticas; testou 10 pontos `(λ,γ,n)`
+> novos, incluindo `γ\to0,1` e `n` até `10^{15}`, sem encontrar
+> contraexemplo à uniformidade ou `γ`-independência; verificou todos os
+> números da `ATTEMPT.md` contra os próprios logs da frente (todos
+> precisos); encontrou o achado real da Seção 5 acima. Quatro achados
+> adicionais de severidade BAIXA (todos de precisão de linguagem ou
+> cosméticos, nenhum afetando resultado numérico).
+>
+> **Veredito: SOUND WITH ISSUES, uma correção (moderada) — ACCEPT for
+> catalogue.** `C(γ)` permanece inteiramente ABERTO. O item 1 do
+> diagnóstico do Estágio 56 está completado especificamente para a
+> integral interna em `t`; os itens 2-4 (correção de Stirling a `m!`,
+> tratamento Euler-Maclaurin/Poisson da soma externa, montagem conjunta)
+> permanecem intocados, exatamente como escopado.
+
+Ver
+`.../route2_bypass_attempt/joint_saddle_point_attempt/gamma_c_gamma_uniform_watson_remainder_attempt/ATTEMPT.md`
+e
+`.../joint_saddle_point_attempt/gamma_c_gamma_uniform_watson_remainder_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado — exatamente como todo predecessor
+desde o Estágio 26. O que muda é que a integral interna em `t` do
+perfil-limite mesoscala `T_{\mathrm{prof}}(λ,γ)` (Estágio 56) agora tem uma
+correção de próxima ordem em forma fechada, `γ`-independente, com
+confirmação numérica uniforme sobre uma faixa razoável de `λ`, e um
+argumento de cauda (agora com seu ponto de fraqueza especificamente
+nomeado, não apenas genericamente divulgado). O hiato remanescente para
+`D(γ)`/`C(γ)` — a correção de Stirling correspondente a `m!`, o tratamento
+da soma externa, e a montagem conjunta de ambos com um resto `o(1)`
+explícito — é agora precisamente três itens nomeados, não quatro. Nenhuma
+alegação de progresso em Millennium Problem; matemática
+combinatória/assintótica pura interna a este arquivo.

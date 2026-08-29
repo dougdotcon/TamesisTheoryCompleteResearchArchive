@@ -9487,3 +9487,140 @@ decisions:
       integradas com a mesma disciplina (spot-check independente da
       sessao antes do despacho do referee, referee hostil dedicado,
       correcoes/notas datadas honestas).
+
+  - id: DISC-DEC-146
+    date: 2026-08-29
+    decision: >
+      Onda 32 frente (b) GAMMA-C-GAMMA-UNIFORM-WATSON-REMAINDER-ATTEMPT
+      integrada como Estagio 57 em THEOREM.md. C(gamma) continua
+      inteiramente ABERTO. Alvo: item 1 do diagnostico da Secao 7 do
+      Estagio 56 -- um resto uniforme tipo Watson's-lemma para a integral
+      interna em t da representacao Beta(m+1,m+1), valido sobre
+      m=Theta(sqrt(n)). Formula geral de correcao Watson/Laplace de
+      segunda ordem derivada de primeiros principios e validada
+      exatamente contra a serie de Stirling classica (fato externo a
+      este arquivo). Nova forma fechada Delta(n,m,gamma)~1/(12*lambda*
+      sqrt(n)), exatamente independente de gamma, confirmada por algebra
+      de potencia-lider e mpmath independente ate n=10^12. Confirmacao
+      numerica uniforme sobre lambda em [0.3,3.0], gamma em
+      {0.3,0.5,0.8}: aproximacao corrigida decai uma ordem inteira mais
+      rapido (slope -1.0 vs -0.5), confirmado limpo ate n=10^9.
+      Argumento de negligibilidade de cauda semi-rigoroso, tail real
+      medida 10^16-10^26 vezes menor que Delta.
+      Um achado real de correcao (severidade MODERADA, nao afeta
+      conclusao de fundo): o Passo 2 do argumento de cauda da Secao 5
+      extrapola implicitamente o limitante de curvatura testado apenas
+      numa janela finita para todo o dominio ate as bordas -- uma
+      varredura de dominio completo do referee mostra a razao cair a
+      ~10^-4-10^-5 em t intermediario. Nao afeta a conclusao real, que e
+      sustentada pelo Passo 3 (medicao direta de quadratura, ja chamada
+      pela propria frente de "a checagem que realmente importa").
+      Corrigido por correcao datada; uma nota adicional distingue
+      "truncamento de janela" de "semente de ponto de quebra para
+      quadratura adaptativa".
+      Spot-check da sessao antes do despacho: reverificacao independente
+      via sympy da formula geral Delta (momentos gaussianos exatos),
+      validacao contra Stirling, extracao independente de potencia-lider
+      (sympy.limit) confirmando A~(gamma^2/lambda)*n^1.5,
+      g'''~(2*gamma^3/lambda^2)*n^2, g''''~-(6*gamma^4/lambda^3)*n^2.5,
+      e um teste numerico proprio (integral relativa, evitando
+      cancelamento catastrofico) confirmando 4-5 ordens de magnitude de
+      melhoria de precisao -- zero discrepancia.
+      Referee hostil dedicado: re-derivou a formula geral e o
+      escalamento mesoscala do zero por rota simbolica genuinamente
+      diferente (sympy.limit em vez de sympy.series-com-workaround),
+      obtendo formas fechadas identicas; testou 10 pontos (lambda,gamma,n)
+      novos incluindo gamma->0,1 e n ate 10^15, sem contraexemplo;
+      verificou todos os numeros da ATTEMPT.md contra os logs da frente
+      (todos precisos); encontrou o achado de correcao acima. Quatro
+      achados adicionais de severidade BAIXA (precisao de linguagem,
+      cosmeticos).
+      Onda 32 agora com 1/2 frentes integradas -- frente (a)
+      CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT tambem retornou,
+      integrada nesta mesma sessao logo apos esta entrada.
+    scope: >
+      Arquivos afetados: THEOREM.md (novo Estagio 57, ~90 linhas);
+      .../joint_saddle_point_attempt/gamma_c_gamma_uniform_watson_remainder_attempt/ATTEMPT.md
+      (1 correcao datada + 1 nota datada); DECISION_LEDGER.yaml (este
+      arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica
+      combinatoria/assintotica pura interna a este arquivo. Nenhum
+      resultado de registro anterior invalidado -- Estagios 26, 51, 52,
+      54, 56 permanecem exatamente como registrados; C(gamma) permanece
+      nao construido, nao limitado, nao caracterizado como serie
+      convergente com resto provado, exatamente como todo predecessor
+      desde o Estagio 26.
+
+  - id: DISC-DEC-147
+    date: 2026-08-29
+    decision: >
+      Onda 32 frente (a) CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT
+      integrada como adendo datado em PROOF_DEPENDENCY_MAP.md
+      (M-CLUST(b), cadeia H1), decima terceira onda consecutiva (20-32)
+      neste gap -- primeira a atacar (B)/(C') via um argumento de
+      principio do maximo diretamente na EDP ORIGINAL, explorando que W
+      = g*Avg_g[Phi] + (1-s-g)*Psi envolve uma MEDIA de Phi, nao Phi
+      pontualmente -- a literal recomendacao #1 da frente predecessora
+      (DISC-DEC-144).
+      (B) e (C') NAO provados -- resultado NEGATIVO honesto, com quatro
+      subprodutos positivos genuinos: (1) nova identidade algebrica
+      exata, (1-s-g)=eps*M_y, mostrando que a estrutura de media que o
+      mandato pediu para explorar E a propria fonte algebrica da
+      maquinaria de kernel ja construida, nao independente dela; (2)
+      novo teorema incondicional (TEOREMA 1): Phi(x,y) e combinacao
+      convexa exata do valor de fronteira e dos valores de W ao longo do
+      caminho, via o nucleo de (E2) ter peso total exatamente 1; (3)
+      prova direta por algebra (nao apenas observada) de que o
+      limitante bruto T(M):=max(1,(1-s)*M) satisfaz T(M)<=M para todo
+      M>=1 -- nenhum M_Phi finito pode ser excluido por esta rota,
+      por mais iterada que seja; (4) corolario M_Psi<=M_Phi e
+      caracterizacao quantitativa da nao-causalidade de Psi em x,
+      encontrada via um erro genuinamente auto-capturado (conjectura de
+      limitante local refutada numericamente, corrigida, depois provada
+      rigorosamente pelo referee). Segunda confirmacao independente da
+      obstrucao ja-nomeada de "perda de derivada", derivada diretamente
+      no lado da EDP.
+      Dois achados reais de correcao, severidade MODERADA (nao
+      invalidam nenhuma identidade algebrica individual): (1) a
+      alegacao de que a identidade-ponte da Secao 2 explica POR QUE o
+      principio do maximo falha esta sobre-reivindicada -- a prova de
+      nao-contracao vale mesmo no regime seguro s+g<=1, antes de
+      qualquer inversao de sinal de M_y; a causa real e o fato mais
+      elementar de que a constante de Lipschitz Phi->Psi (DISC-DEC-100)
+      e exatamente 1 -- os dois resultados negativos sao independentes,
+      nao um "afiando" causalmente o outro; (2) a faixa numerica de
+      vazamento anti-causal "19%-73%" esta numericamente errada e
+      auto-contradita na mesma frase -- a grade completa de 18 pontos da
+      a faixa verdadeira ~0.5%-73%. Ambos corrigidos por correcao
+      datada; uma nota adicional registra que o referee provou
+      rigorosamente (nao apenas confirmou numericamente) o limitante
+      corrigido de Psi, fortalecendo o achado 4.
+      Spot-check da sessao antes do despacho: reverificacao independente
+      via sympy de (BRIDGE-1), (BRIDGE-2), da consistencia com KEY, do
+      peso total 1 do nucleo de (E2), da prova de nao-contracao, e de
+      ambas identidades de diferenciacao da Secao 6 -- zero discrepancia.
+      Referee hostil dedicado: re-derivou toda identidade algebrica do
+      zero, confirmando cada uma; reproduziu numericamente a refutacao
+      da Secao 4.2 e todos os 8 valores da tabela de vazamento (achando
+      o erro de faixa numerica); provou rigorosamente o limitante
+      corrigido de Psi; investigou se uma funcao de comparacao mais
+      afiada poderia resgatar o argumento da Secao 3.3 e confirmou que
+      nao. Dois achados de CORRECAO (MODERADOS), dois de severidade
+      BAIXA, uma NOTA de fortalecimento.
+      Onda 32 completa -- 2/2 frentes integradas.
+    scope: >
+      Arquivos afetados: PROOF_DEPENDENCY_MAP.md (novo adendo datado,
+      Arvore B, cadeia M-CLUST(b)/H1, ~85 linhas);
+      .../cprime_volterra_resolvent_attempt/cprime_selfconsistency_maxprinciple_attempt/ATTEMPT.md
+      (2 correcoes datadas + 1 nota datada); DECISION_LEDGER.yaml (este
+      arquivo); DISCOVERY_LAB_STATE.md.
+    untouched_safeguards: >
+      Nenhuma reivindicacao de Problema do Milenio -- matematica pura
+      interna a este arquivo. Nenhum resultado de registro anterior
+      invalidado -- DISC-DEC-144's teorema incondicional sobre
+      ||K(y,t)|| permanece correto e intocado; a nova identidade-ponte
+      desta frente e uma observacao adicional, nao uma revisao. H1,
+      (U1), (U2), (C'), (B) permanecem exatamente como registrados --
+      formalmente ABERTOS -- ate que futuras frentes retornem e sejam
+      integradas com a mesma disciplina.

@@ -1,0 +1,65 @@
+======================================================================
+Part 1: linearity of the Phi -> Psi map via (BB-Psi'), symbolic
+======================================================================
+I[a*Phi1+b*Phi2] - (a*I[Phi1]+b*I[Phi2]) = 0  (should be 0: integral is linear)
+Psi[Phi] is defined as an integral (in u) of I[Phi](x+u,y) times a
+Phi-INDEPENDENT kernel e^{-u^2/2-u(x+y)} -- linear in I[Phi], hence linear in Phi,
+by the SAME trivial linearity-of-integration argument. So Psi[a*Phi1+b*Phi2] =
+a*Psi[Phi1]+b*Psi[Phi2] EXACTLY, for the SAME reason I[.] is linear.
+
+Special case a=1,b=0, 'Phi2:=0' (i.e. Delta Phi := Phi1-0=Phi1, Delta Psi:=Psi1-0=Psi1):
+the ALREADY-PROVEN (DISC-DEC-100 Sec 8.2) bound sup|Delta Psi|<=||Delta Phi||_inf
+applied to this special case gives sup|Psi1|<=sup|Phi1|, i.e. M_Psi<=M_Phi.
+(Legitimate: Phi2=0 trivially satisfies (BB-Psi') with Psi2=I2=0, so the cited
+ bound -- which the record states for arbitrary field PAIRS -- literally applies.)
+
+======================================================================
+Part 2: numerical confirmation on a concrete test field
+======================================================================
+     x      y         Psi(x,y)        |Psi|   M_Phi_test   |Psi|<=M_Phi?
+  0.00   0.50     0.2918923678   0.29189237       0.9700            True
+  0.00   2.00     0.3972002292   0.39720023       0.9700            True
+  0.50   1.00     0.4177949961   0.41779500       0.9700            True
+  1.00   5.00     0.1868176840   0.18681768       0.9700            True
+  2.00   0.30     0.0508298800   0.05082988       0.9700            True
+  0.10  20.00    -0.0176114716   0.01761147       0.9700            True
+
+max|Psi| observed over test grid = 0.41779500,  M_Phi_test = 0.9700
+CONFIRMED numerically: sup|Psi| <= M_Phi across the tested grid (as the
+cited linear-map bound, Part 1, requires).
+
+======================================================================
+Part 3: the LOCAL pointwise form -- SELF-CAUGHT ERROR, then corrected
+======================================================================
+WRONG bound (sup over SAME x only) -- checking where it fails:
+     x      y          |Psi|    WRONG bound   holds?
+  0.00   0.50     0.29189237     0.12560695    False
+  0.00   2.00     0.39720023     0.24157486    False
+  0.50   1.00     0.41779500     0.35892279    False
+  1.00   5.00     0.18681768     0.75883257     True
+  2.00   0.30     0.05082988     0.08215240     True
+  0.10  20.00     0.01761147     0.37493302     True
+(3/6 violations above CONFIRM the naive same-x bound is genuinely false,
+ not a numerical-precision artifact -- e.g. x=0,y=0.5: |Psi|=0.2919 vs
+ wrong-bound=0.1256, a >2x violation, far beyond any quadrature error.)
+
+CORRECTED bound: sup ranges over x'>=x (not just x'=x) AND y'<=y:
+     x      y    |Psi| (exact)  corrected bound   holds?
+  0.00   0.50     0.2918923678       0.42494089     True
+  0.00   2.00     0.3972002292       0.81727191     True
+  0.50   1.00     0.4177949961       0.50022831     True
+  1.00   5.00     0.1868176840       0.78735401     True
+  2.00   0.30     0.0508298800       0.11014255     True
+  0.10  20.00     0.0176114716       0.96260327     True
+CONFIRMED: the CORRECTED bound |Psi(x,y)|<=y*R(x+y)*sup_{x'>=x,y'<=y}|Phi(x',y')|
+holds at every tested point. The x'-range must extend forward (to x'>=x,
+unboundedly), not stay fixed at x -- Psi(x,y) is NOT causal in x. This
+(anti-)causality structure is used again in ATTEMPT.md Sec 5.
+
+ALL CHECKS PASSED (Parts 1-3). Summary:
+ - Phi->Psi is LINEAR via (BB-Psi') (trivial, from integral linearity)
+ - hence M_Psi<=M_Phi is an IMMEDIATE corollary (Phi2:=0 special case)
+   of the ALREADY-PROVEN DISC-DEC-100 Sec 8.2 Lipschitz-<=1 bound --
+   NOT claimed as new content, only made explicit for this front's use.
+ - a sharper LOCAL (x,y-dependent, causal in y' via I) pointwise bound
+   also holds, confirmed numerically to >=6 significant digits.

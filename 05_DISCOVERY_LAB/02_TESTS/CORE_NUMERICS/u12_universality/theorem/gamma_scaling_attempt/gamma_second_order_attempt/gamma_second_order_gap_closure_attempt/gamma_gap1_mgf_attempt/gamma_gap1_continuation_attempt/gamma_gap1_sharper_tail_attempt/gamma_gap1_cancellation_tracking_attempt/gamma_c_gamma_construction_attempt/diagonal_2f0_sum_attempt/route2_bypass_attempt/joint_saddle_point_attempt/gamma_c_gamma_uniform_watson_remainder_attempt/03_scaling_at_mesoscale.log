@@ -1,0 +1,67 @@
+=== (A) Substitute m = lambda*sqrt(n), n = 1/eps^2 (eps=1/sqrt(n)->0) ===
+A(eps) [before series] has 622 chars; extracting leading order...
+A(eps), g'''(eps), g''''(eps) Puiseux series computed (each 1264 / 2165 / 3404 chars -- full expressions in this run's stdout capture, elided here
+for readability; only the leading term of each is used below).
+
+=== (B) Extracting the leading power of eps in each, symbolically ===
+A        ~ (gamma**2/lambda) * eps^(-3)   i.e. order n^3/2 = n^3/2
+g'''(t*) ~ (2*gamma**3/lambda**2) * eps^(-4)   i.e. order n^2
+g''''(t*)~ (-6*gamma**4/lambda**3) * eps^(-5)   i.e. order n^5/2
+
+=== (C) Delta = g''''(t*)/(8A^2) + 5[g'''(t*)]^2/(24A^3): leading order ===
+g''''(t*)/(8A^2)        leading eps-power: 1  (n^-1/2)
+5[g'''(t*)]^2/(24A^3)   leading eps-power: 1  (n^-1/2)
+
+=== (C') Leading-order Delta computed directly from the already-
+     extracted leading coefficients (cA,pA),(c3,p3),(c4,p4) ===
+term A (g''''/(8A^2)):  coeff = -3/(4*lambda)  power = 1
+term B (5g'''^2/(24A^3)): coeff = 5/(6*lambda)  power = 1
+Both terms share leading eps-power 1 -- summing coefficients (no cancellation to zero):
+  cD = 1/(12*lambda)  (nonzero: confirms no leading-order cancellation between the two Delta pieces)
+
+Delta ~ (1/(12*lambda)) * eps^(1)  =  c(lambda,gamma) * n^(-1/2)
+c(lambda,gamma) closed form: 1/(12*lambda)
+
+=== (C'') Independent numeric cross-check (mpmath dps=60, no sympy series) ===
+  lambda=0.3 gamma=0.3: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.277678', '0.277768', '0.277777']  predicted 1/(12 lambda) = 0.2777777777777778
+  lambda=0.3 gamma=0.5: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.277678', '0.277768', '0.277777']  predicted 1/(12 lambda) = 0.2777777777777778
+  lambda=0.3 gamma=0.8: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.277678', '0.277768', '0.277777']  predicted 1/(12 lambda) = 0.2777777777777778
+  lambda=1.0 gamma=0.3: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.083233', '0.083323', '0.083332']  predicted 1/(12 lambda) = 0.08333333333333333
+  lambda=1.0 gamma=0.5: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.083233', '0.083323', '0.083332']  predicted 1/(12 lambda) = 0.08333333333333333
+  lambda=1.0 gamma=0.8: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.083233', '0.083323', '0.083332']  predicted 1/(12 lambda) = 0.08333333333333333
+  lambda=2.0 gamma=0.3: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.041567', '0.041657', '0.041666']  predicted 1/(12 lambda) = 0.041666666666666664
+  lambda=2.0 gamma=0.5: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.041567', '0.041657', '0.041666']  predicted 1/(12 lambda) = 0.041666666666666664
+  lambda=2.0 gamma=0.8: sqrt(n)*Delta at n=1e8,1e10,1e12 -> ['0.041567', '0.041657', '0.041666']  predicted 1/(12 lambda) = 0.041666666666666664
+
+=== (D) lambda-dependence of c(lambda,gamma): does it blow up as lambda->0? ===
+c(lambda,gamma) as lambda->0: 1/(12*lambda)
+c(lambda,gamma) numeric table (lambda, gamma) -> value:
+  lambda=0.10 gamma=0.30  c=0.833333
+  lambda=0.10 gamma=0.50  c=0.833333
+  lambda=0.10 gamma=0.80  c=0.833333
+  lambda=0.30 gamma=0.30  c=0.277778
+  lambda=0.30 gamma=0.50  c=0.277778
+  lambda=0.30 gamma=0.80  c=0.277778
+  lambda=0.50 gamma=0.30  c=0.166667
+  lambda=0.50 gamma=0.50  c=0.166667
+  lambda=0.50 gamma=0.80  c=0.166667
+  lambda=1.00 gamma=0.30  c=0.083333
+  lambda=1.00 gamma=0.50  c=0.083333
+  lambda=1.00 gamma=0.80  c=0.083333
+  lambda=1.50 gamma=0.30  c=0.055556
+  lambda=1.50 gamma=0.50  c=0.055556
+  lambda=1.50 gamma=0.80  c=0.055556
+  lambda=2.00 gamma=0.30  c=0.041667
+  lambda=2.00 gamma=0.50  c=0.041667
+  lambda=2.00 gamma=0.80  c=0.041667
+  lambda=3.00 gamma=0.30  c=0.027778
+  lambda=3.00 gamma=0.50  c=0.027778
+  lambda=3.00 gamma=0.80  c=0.027778
+
+SUMMARY: Delta(n,m,gamma) ~ c(lambda,gamma) * n^( -1/2 )
+        = [1/(12*lambda)] / sqrt(n),  independent of gamma,
+as n->infinity at fixed lambda=m/sqrt(n). This is the leading
+correction beyond the leading-order Laplace/Gaussian approximation
+to the inner t-integral -- confirmed two independent ways above:
+(B)/(C') exact leading-power algebra, and (C'') direct mpmath
+dps=60 numerics with NO symbolic series machinery at all.

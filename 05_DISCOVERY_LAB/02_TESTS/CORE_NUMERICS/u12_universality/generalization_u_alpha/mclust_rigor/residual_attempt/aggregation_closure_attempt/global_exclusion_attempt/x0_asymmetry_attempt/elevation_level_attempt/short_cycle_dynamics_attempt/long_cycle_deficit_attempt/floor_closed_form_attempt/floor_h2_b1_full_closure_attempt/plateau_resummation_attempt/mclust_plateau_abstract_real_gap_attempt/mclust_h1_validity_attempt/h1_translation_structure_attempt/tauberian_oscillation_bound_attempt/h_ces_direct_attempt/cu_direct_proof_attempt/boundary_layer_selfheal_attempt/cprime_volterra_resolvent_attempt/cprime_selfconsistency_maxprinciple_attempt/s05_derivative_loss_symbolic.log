@@ -1,0 +1,71 @@
+======================================================================
+Part 1: differentiate the CITED KEY identity W = Psi - eps*Psi_x
+        in x, symbolically
+======================================================================
+W(x,y)   = Psi - eps*Psi_x  =
+      ∂                    
+- eps⋅──(Ψ(x, y)) + Ψ(x, y)
+      ∂x                   
+
+W_x(x,y) = d/dx[Psi - eps*Psi_x] =
+       2                        
+      ∂              ∂          
+- eps⋅───(Ψ(x, y)) + ──(Ψ(x, y))
+        2            ∂x         
+      ∂x                        
+
+Coefficient of Psi_xx (second x-derivative of Psi) in W_x: -eps
+CONFIRMED: W_x = Psi_x - eps*Psi_xx GENUINELY contains a second-derivative
+term, with coefficient exactly -eps (nonzero for eps>0) -- not a spurious
+or cancelling artifact.
+
+======================================================================
+Part 2: consequence for the naive Phi_x recursion
+======================================================================
+Phi_x(x,y) = (1/eps) int_0^y e^{-v/eps} W_x(x+v,y-v) dv
+           = (1/eps) int_0^y e^{-v/eps} [Psi_x(x+v,y-v) - eps*Psi_xx(x+v,y-v)] dv
+
+This requires bounding Psi_xx (a SECOND x-derivative of Psi) directly,
+via THIS route -- something no closed-form bound is cited for anywhere
+in the record (only Psi and Psi_x-level quantities have established
+bounds: M_Psi<=M_Phi via s03; the (star-star) oscillation bound of
+DISC-DEC-100 Sec 5; no Psi_xx bound is cited or established).
+
+This is EXACTLY the 'derivative loss' phenomenon already named in the
+record: DISC-DEC-100 Sec 8.4 ('differentiating (BB-Psi') in x requires
+control of d_x(Delta Phi), not merely Delta Phi -- an honest derivative
+loss obstruction') and DISC-DEC-134's whole Sec 5 machinery (the (DX-K)
+identity), which was built SPECIFICALLY to sidestep ever forming a
+literal Phi_xx/Psi_xx term, by instead differentiating the FULL Volterra
+equation (VOLTERRA-Phi) itself (an identity for Phi_y', not Phi_x) and
+bounding the resulting forcing term via K_A^raw/M_y*N structure (no
+second x-derivative anywhere in that route).
+
+CONCLUSION (this script confirms symbolically, on the ORIGINAL PDE side
+via KEY/E1/E2 directly, not merely by citing the derived-kernel side):
+naive differentiation of (E2) in x to attack (C') directly hits the SAME
+second-derivative obstruction that motivated the archive's entire
+(DX-K)-based machinery (waves 29-30) -- there is no shortcut available
+via this route that avoids that machinery's own work.
+
+======================================================================
+Part 3: for completeness -- does the SAME issue arise differentiating
+        (E1) instead (the other cited exact identity)?
+======================================================================
+(E1): Psi_x = (x+y)*Psi - I.  Differentiating in x again:
+  Psi_xx = Psi + (x+y)*Psi_x - I_x,   I_x(x,y) := int_0^y Phi_x(x,y')dy'
+
+So Psi_xx (needed by Part 2) reduces to Psi, Psi_x, and I_x -- and I_x is
+built from Phi_x itself (a FIRST derivative of Phi, i.e. exactly L_Phi(y')
+-level content, for y'<=y). This CLOSES the loop back onto L_Phi -- i.e.
+the naive route is genuinely SELF-REFERENTIAL at the derivative level
+(L_Phi needs Psi_xx needs L_Phi again), not merely 'hard' -- a second,
+independent confirmation (via (E1) instead of (BB-Psi')) of the same
+derivative-loss obstruction.
+
+Symbolic re-derivation of this specific consequence of (E1), confirming
+no algebra error in the paragraph above:
+        ∂                       ∂          
+(x + y)⋅──(Ψ(x, y)) + Ψ(x, y) - ──(I(x, y))
+        ∂x                      ∂x         
+(= Psi(x,y) + (x+y)*Psi_x(x,y) - I_x(x,y), matching the paragraph above)

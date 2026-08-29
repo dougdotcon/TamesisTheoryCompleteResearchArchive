@@ -1,6 +1,32 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-145`: onda 32 autorizada
+**Última atualização:** 2026-08-29 (`DISC-DEC-147`: onda 32 frente (a)
+`CPRIME-SELFCONSISTENCY-MAXPRINCIPLE-ATTEMPT` integrada como adendo
+datado em `PROOF_DEPENDENCY_MAP.md` (M-CLUST(b), cadeia H1) —
+`(B)`/`(C')` NÃO provados, resultado NEGATIVO honesto com quatro
+subprodutos positivos: nova identidade `(1-s-g)=eps*M_y` mostrando que
+a estrutura de média de `W` É a própria fonte algébrica da maquinaria
+de kernel já construída (não independente dela); novo TEOREMA 1
+incondicional (`Phi` é combinação convexa exata); prova direta por
+álgebra de que o limitante bruto é uma NÃO-CONTRAÇÃO mesmo no regime
+seguro; corolário `M_Psi<=M_Phi` + não-causalidade de `Psi` em `x`
+(provada rigorosamente pelo referee). Dois achados de correção
+MODERADOS (sobre-reivindicação da ligação causal entre a identidade-
+ponte e a falha do princípio do máximo; faixa numérica de vazamento
+anti-causal errada, `19%`-`73%`→`0.5%`-`73%`), ambos corrigidos por
+correção datada. `H1`, `(U1)`, `(U2)`, `(C')`, `(B)` permanecem
+formalmente ABERTOS. **Onda 32 completa — 2/2 frentes integradas.**
+Anterior: `DISC-DEC-146`: onda 32 frente (b)
+`GAMMA-C-GAMMA-UNIFORM-WATSON-REMAINDER-ATTEMPT` integrada como
+Estágio 57 em `THEOREM.md`. `C(γ)` continua inteiramente ABERTO. Nova
+correção de próxima ordem, fechada e `γ`-independente, para a integral
+interna em `t` do perfil mesoscala `T_prof(λ,γ)`:
+`Δ(n,m,γ)~1/(12λ√n)`, confirmada uniformemente sobre `λ∈[0.3,3.0]` até
+`n=10^9`/`10^15`. Um achado de correção MODERADO (extrapolação
+implícita do limitante de curvatura da Seção 5 além da janela
+testada — não afeta a conclusão real, sustentada pela medição direta
+de quadratura), corrigido por correção datada.
+Anterior: `DISC-DEC-145`: onda 32 autorizada
 — 2 frentes, após survey de portfolio dedicado que reconfirmou: toda
 linha fora de `u12_universality` permanece formalmente fechada
 (nenhuma linha nova ficou viva desde a onda 31). Frente (a)

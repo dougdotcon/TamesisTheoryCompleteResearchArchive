@@ -1,0 +1,90 @@
+==============================================================================
+(BRIDGE-1): g*Avg_g[Phi](s,g) = eps*I(x,y)  under s=eps*x, g=eps*y
+==============================================================================
+lhs (g*Avg_g[Phi], substituted s=eps*x,g=eps*y, g'=eps*y') =
+    y                       
+    ⌠                       
+eps⋅⎮ Φ(eps⋅x, eps⋅y′) d(y′)
+    ⌡                       
+    0                       
+rhs (eps*I(x,y), I=int_0^y Phi(x,y')dy') =
+    y               
+    ⌠               
+eps⋅⎮ Φ(x, y′) d(y′)
+    ⌡               
+    0               
+These are the SAME expression under the front's own naming convention
+(Phi(eps*x,eps*y') in (s,g)-units IS Phi(x,y') in (x,y)-units, since x=s/eps,
+y=g/eps is the SAME rescaling). BRIDGE-1 CONFIRMED (definitional once the
+rescaling of the FUNCTION ARGUMENT is made consistently, exactly as the
+front itself describes it as 'essentially trivial once written down').
+
+==============================================================================
+(BRIDGE-2): (1-s-g) = eps*M_y,  M_y := (1-eps*(x+y))/eps,  s=eps*x,g=eps*y
+==============================================================================
+lhs2 substituted: -eps*x - eps*y + 1
+rhs2 = eps*M_y  : -eps*x - eps*y + 1
+difference (should be 0): 0
+BRIDGE-2 CONFIRMED exactly.
+
+==============================================================================
+Sec 2.2 consistency check: eps*I + eps*M_y*Psi collapses to KEY = Psi-eps*Psi_x
+==============================================================================
+W reconstructed (eps*I_via_E1 + eps*M_y*Psi), expanded:
+-Ψₓ⋅eps + Ψ(x, y)
+KEY (cited): -Psi_x*eps + Psi(x, y)
+difference (should be 0): 0
+Sec 2.2 CONFIRMED: exact collapse to KEY, residual 0.
+
+==============================================================================
+Sec 2.3: sign-flip threshold identity: s+g=1  <=>  z=x+y=1/eps
+==============================================================================
+Solving eps*z=1 for z (z standing for x+y): [1/eps]
+CONFIRMED: s+g=1 <=> x+y=1/eps, i.e. same threshold as M_y=0 (1-eps*z=0 <=> z=1/eps).
+
+==============================================================================
+Sec 3.1: (E2)'s kernel total weight is exactly 1
+==============================================================================
+boundary weight e^{-y/eps} = exp(-y/eps)
+integral of (1/eps)e^{-v/eps} over [0,y] = 1 - exp(-y/eps)
+total = 1
+CONFIRMED: total weight is EXACTLY 1, for all y,eps>0 (both pieces nonneg).
+
+==============================================================================
+Sec 3.2: W's own decomposition -- coefficients g and (1-s-g) sum to (1-s)
+==============================================================================
+g + (1-s-g) = 1 - s  (should be 1-s)
+CONFIRMED: sum is exactly 1-s <= 1 for s>=0 -- a SUB-convex combination
+(equality to a genuine convex combo, i.e. summing to exactly 1, iff s=0).
+
+==============================================================================
+Sec 3.3: T(M):=max(1,(1-s)*M) satisfies T(M)<=M for all M>=1, s in [0,1]
+==============================================================================
+(1-s)*M - M = -M*s  (should be -s*M, <=0 for s,M>=0)
+CONFIRMED: (1-s)*M <= M whenever s,M>=0. Hence for M>=1,
+T(M)=max(1,(1-s)M) <= max(1,M) = M. Non-contraction proof is correct algebra.
+
+==============================================================================
+Sec 6: W_x = Psi_x - eps*Psi_xx  (differentiating KEY in x)
+==============================================================================
+d/dx[Psi - eps*Psi_x] =
+       2                        
+      ∂              ∂          
+- eps⋅───(Ψ(x, y)) + ──(Ψ(x, y))
+        2            ∂x         
+      ∂x                        
+Matches Psi_x - eps*Psi_xx? difference = 0
+CONFIRMED: coefficient of Psi_xx is exactly -eps, nonzero.
+
+==============================================================================
+Sec 6 Part 3: Psi_xx = Psi + (x+y)*Psi_x - I_x  (differentiating E1 in x)
+==============================================================================
+d/dx[(x+y)*Psi - I] =
+  ∂               ∂                       ∂          
+x⋅──(Ψ(x, y)) + y⋅──(Ψ(x, y)) + Ψ(x, y) - ──(I(x, y))
+  ∂x              ∂x                      ∂x         
+Matches Psi + (x+y)*Psi_x - I_x? difference = 0
+CONFIRMED.
+
+ALL INDEPENDENT RE-DERIVATIONS PASSED. No discrepancy found with any
+algebraic identity claimed in ATTEMPT.md Sec 2, 3, or 6.

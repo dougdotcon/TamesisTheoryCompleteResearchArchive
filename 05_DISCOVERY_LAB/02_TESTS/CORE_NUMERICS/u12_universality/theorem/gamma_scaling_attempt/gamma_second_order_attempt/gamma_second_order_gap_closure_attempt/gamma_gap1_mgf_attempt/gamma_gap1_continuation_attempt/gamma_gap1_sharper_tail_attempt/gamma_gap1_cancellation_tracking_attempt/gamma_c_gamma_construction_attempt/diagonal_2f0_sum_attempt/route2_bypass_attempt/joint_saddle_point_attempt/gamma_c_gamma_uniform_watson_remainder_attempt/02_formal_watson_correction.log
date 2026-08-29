@@ -1,0 +1,33 @@
+=== (A) Gaussian moments int_{-oo}^{oo} e^{-u^2/2} u^(2j) du / sqrt(2 pi) ===
+  <u^0> = 1   (expect (2j-1)!! = 1)
+  <u^2> = 1   (expect (2j-1)!! = 1)
+  <u^4> = 3   (expect (2j-1)!! = 3)
+  <u^6> = 15   (expect (2j-1)!! = 15)
+  <u^8> = 105   (expect (2j-1)!! = 105)
+
+=== (B) Formal expansion of exp(eps3 u^3 + eps4 u^4) to the order that
+        contributes at O(eps4) ~ O(eps3^2), i.e. up to and including u^6 ===
+  (1/sqrt(2 pi)) * int e^{-u^2/2} [1 + eps3 u^3 + eps4 u^4 + eps3^2 u^6 / 2] du =
+    15*eps3**2/2 + 3*eps4 + 1
+
+So the bracket [1 + Delta] with Delta (to leading orders in eps3,eps4) =
+   Delta = 15*eps3**2/2 + 3*eps4
+
+=== (C) Substituting back eps3 = g'''(t*)/(6 A^{3/2}), eps4 = g''''(t*)/(24 A^2) ===
+  Delta(n,m,gamma) = (3*A*g4star + 5*g3star**2)/(24*A**3)
+  i.e. Delta = g''''(t*)/(8 A^2)  +  5 [g'''(t*)]^2 / (24 A^3)
+  difference from claimed closed form: 0 (expect 0)
+
+=== (D) SANITY CHECK against a source EXTERNAL to this archive:
+        Stirling's series for Gamma(z+1) = int_0^oo t^z e^{-t} dt,
+        z=n, via the SAME formal machinery derived above. ===
+  A = 1/z   g'''(t*) = 2/z**2   g''''(t*) = -6/z**3
+  Formal Delta for the Gamma-function case = 1/(12*z)
+  Known Stirling correction Gamma(z+1) ~ sqrt(2 pi z) (z/e)^z (1 + 1/(12z) + ...):
+  predicted 1/(12z) vs. our Delta: 0 (expect 0)
+
+This confirms the general Delta formula derived in (A)-(C) reproduces
+the CLASSICAL, textbook-known Stirling correction 1/(12z) EXACTLY on a
+case with a source of truth entirely external to this archive -- the
+general Watson/Laplace second-order machinery used in script 03 for
+this front's own g(t) is validated before being applied there.

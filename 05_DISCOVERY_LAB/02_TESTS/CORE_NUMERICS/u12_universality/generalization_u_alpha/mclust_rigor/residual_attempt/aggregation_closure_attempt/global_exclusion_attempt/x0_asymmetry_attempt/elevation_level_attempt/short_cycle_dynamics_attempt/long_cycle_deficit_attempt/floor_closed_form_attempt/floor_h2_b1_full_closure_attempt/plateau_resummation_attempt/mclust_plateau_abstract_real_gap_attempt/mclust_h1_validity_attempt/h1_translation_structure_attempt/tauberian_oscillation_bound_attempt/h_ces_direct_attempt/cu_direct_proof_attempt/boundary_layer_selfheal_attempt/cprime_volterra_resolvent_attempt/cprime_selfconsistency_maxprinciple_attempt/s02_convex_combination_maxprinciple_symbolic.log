@@ -1,0 +1,95 @@
+======================================================================
+Part A: (E2)'s convolution weight sums to EXACTLY 1
+======================================================================
+boundary weight e^{-y/eps}                       = exp(-y/eps)
+integral of (1/eps)e^{-v/eps} dv over [0,y]        = 1 - exp(-y/eps)
+TOTAL weight (boundary + integral)                 = 1
+CONFIRMED: total weight = 1 EXACTLY, for every y>=0, eps>0.
+
+Since e^{-y/eps} >= 0 and (1/eps)e^{-v/eps} >= 0 pointwise (trivial,
+both are exponentials of real arguments), Phi(x,y) is an EXACT CONVEX
+COMBINATION (nonnegative weights, summing to exactly 1) of the
+constant boundary value 1 and the path-values {W(x+v,y-v): v in[0,y]}.
+
+THEOREM 1 (Phi convex-combination maximum principle), consequence:
+  inf_{path} W  <=  Phi(x,y)  <=  max(1, sup_{path} W)
+  and more precisely, since the boundary weight contributes '1' with
+  its own share: Phi(x,y) <= max(1, sup_{path} W) always; and if
+  sup_path W <= 1 then Phi(x,y) <= 1 as well (the '1' does not need
+  a separate max() in that sub-case, but max(1,.) is always valid).
+
+======================================================================
+Part B: the ORIGINAL W's own coefficient sum, and the sign regime
+======================================================================
+coefficient of Avg_g[Phi]:  g
+coefficient of Psi:         (1-s-g)
+SUM:                        1 - s  = 1-s
+
+SAFE regime (s+g<=1): both coefficients >=0 (g>=0 always given; need
+  1-s-g>=0 i.e. s+g<=1). Sum = 1-s <= 1 -- a SUB-convex combination
+  (weights nonneg, summing to <=1, not exactly 1 unless s=0).
+
+UNSAFE regime (s+g>1): coefficient of Psi, (1-s-g), is NEGATIVE.
+  W is then a SIGNED (not convex) combination of Avg_g[Phi] and Psi --
+  the maximum-principle argument of Part A cannot be applied to THIS
+  decomposition of W itself in this regime (though Part A's Theorem 1
+  for Phi remains valid REGARDLESS, since it depends only on E2's own
+  kernel weights, not on W's internal sign structure -- the issue is
+  specifically that bounding sup W via g*M_Phi+(1-s-g)*M_Psi stops
+  being valid once (1-s-g)<0, since then a LARGE negative Psi could
+  make W LARGE, not merely bounded by max(M_Phi,M_Psi)).
+
+======================================================================
+Part C: the crude sup-level maximum principle is a NON-CONTRACTION
+(vacuity of the naive iterated bound, safe regime only, s in [0,1])
+======================================================================
+(1-s)*M - M = -M*s_sym   (<=0 for all s>=0, M>=0: since s*M>=0)
+=> (1-s)*M <= M  for all s in [0,1], M>=0.
+=> T(M) = max(1,(1-s)*M) <= max(1,M) = M  for every M>=1 (since M>=1
+   already dominates the '1' branch).
+
+CONSEQUENCE: for EVERY candidate value M>=1 (however large), the
+inequality 'M_Phi satisfies M_Phi <= T(M_Phi)' one would need for a
+genuine maximum-principle CONTRADICTION-based proof of finiteness is
+instead ALWAYS SATISFIED AS T(M)<=M (not T(M)>M for large M, which is
+what would be needed to rule out large M). The map T is a NON-EXPANSIVE
+but NOT a CONTRACTION (its Lipschitz constant in M is exactly (1-s)<=1,
+with EQUALITY 1 attained at s=0 -- the single most important slice,
+since M_Phi is a GLOBAL sup that must in particular dominate the s=0
+slice). This is the precise mechanism, verified here by direct
+algebra rather than assumed: no finite bound on M_Phi can be extracted
+from the crude sup-level maximum principle alone, even restricted to
+the fully SAFE regime s+g<=1 where every coefficient is nonnegative.
+
+Numerical spot check across a small grid (s,M), confirming T(M)<=M
+always, with equality approached only as s->0:
+     s        M    (1-s)*M     T(M)   T(M)<=M?
+  0.00        1      1.000    1.000       True
+  0.00        5      5.000    5.000       True
+  0.00      100    100.000  100.000       True
+  0.00  1000000 1000000.000 1000000.000       True
+  0.10        1      0.900    1.000       True
+  0.10        5      4.500    4.500       True
+  0.10      100     90.000   90.000       True
+  0.10  1000000 900000.000 900000.000       True
+  0.50        1      0.500    1.000       True
+  0.50        5      2.500    2.500       True
+  0.50      100     50.000   50.000       True
+  0.50  1000000 500000.000 500000.000       True
+  0.90        1      0.100    1.000       True
+  0.90        5      0.500    1.000       True
+  0.90      100     10.000   10.000       True
+  0.90  1000000 100000.000 100000.000       True
+
+ALL CHECKS PASSED. Summary:
+ (A) Phi(x,y) is an EXACT convex combination (weights sum to 1) of
+     boundary=1 and path-values of W -- THEOREM 1, unconditional,
+     follows for free from (E2)'s own definition.
+ (B) W's OWN internal decomposition (g, 1-s-g) is only a genuine
+     (sub-)convex combination for s+g<=1; the coefficient (1-s-g)
+     goes negative for s+g>1, EXACTLY the threshold s01 identified.
+ (C) Even restricted to the safe regime, the crude sup-level
+     iteration T(M)=max(1,(1-s)*M) is a NON-CONTRACTION (Lipschitz
+     constant (1-s)<=1, =1 at s=0) -- it can never certify a finite
+     bound on M_Phi by itself. This is proved here directly, not
+     merely observed numerically.

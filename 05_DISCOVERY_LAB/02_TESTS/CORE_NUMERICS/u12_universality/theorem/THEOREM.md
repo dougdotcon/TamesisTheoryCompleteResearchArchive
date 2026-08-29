@@ -7537,3 +7537,141 @@ Estágio 46 era mesmo específica ao método antigo (um problema de
 sinal), não uma barreira algébrica genuína em `K` crescente. Nenhuma
 alegação de progresso em Millennium Problem; matemática combinatória
 pura interna a este arquivo.
+
+---
+
+## [Extensão, Estágio 54 — 2026-08-29]
+
+**Onda 30, frente (a), `DISC-DEC-138` (`ROUTE2-BYPASS-ATTEMPT`).** Alvo:
+"Rota 2" para `C(γ)` — uma técnica genuinamente diferente que evita
+inteiramente a maquinaria `A_k`/`2F0`/Charlier, nomeada pelo Estágio 52
+como a única direção não-explorada restante nesta sub-linhagem, após
+duas rotas *dentro* daquela maquinaria terem esgotado becos sem saída
+estruturais distintos.
+
+### O que aconteceu
+
+> **`C(γ)` continua inteiramente ABERTO — mas esta frente perseguiu
+> Rota 2 genuinamente, e o referee hostil estendeu seu achado mais
+> promissor a uma forma fechada verificada que a própria frente não
+> alcançou.**
+>
+> **Quatro achados novos, genuinamente independentes da maquinaria
+> `A_k`/`2F0`/Charlier de seis frentes anteriores:**
+> 1. A identidade do double-sum-swap PROVADA pelo Estágio 52,
+>    `T(n,m):=\Sigma_j\binom{j+m}m\binom{n-j}m(1-γ)^j`, é EXATAMENTE
+>    uma série hipergeométrica de Gauss `{}_2F_1$ terminante,
+>    `T(n,m)=\binom nm\,{}_2F_1(-(n-m),m+1;-n;1-γ)$ — uma família
+>    hipergeométrica clássica genuinamente diferente da `{}_2F_0$ do
+>    Estágio 52, com teoria de transformação muito mais desenvolvida
+>    (Euler/Pfaff, relações contíguas). PROVADA (teste de razão
+>    simbólico + `124` checagens numéricas exatas em dois avaliadores
+>    independentes).
+> 2. O núcleo normalizado de `T(n,m)`, `p_m(j):=\binom{j+m}m\binom{n-j}m
+>    /\binom{n+m+1}{2m+1}`, é EXATAMENTE a função de massa de
+>    probabilidade da MEDIANA de um subconjunto aleatório uniforme de
+>    `(2m+1)$ elementos amostrado SEM reposição de `\{1,\ldots,n+m+1\}$
+>    — um objeto aleatório genuinamente mais primitivo que a contagem
+>    Binomial `M\sim\mathrm{Bin}(k,γ)$ usada por toda a maquinaria de
+>    momento/cumulante da linhagem. PROVADA (`225` checagens exatas),
+>    com média/variância exatas `E[j]=(n-m)/2$,
+>    `\mathrm{Var}[j]=(n+m+2)(n-m)/(4(2m+3))$.
+> 3. Uma lei de escala de ponto de sela em forma fechada,
+>    `j^*(m,n,γ)\sim m(1-γ)/γ$ conforme `m,n\to\infty$ (`m=o(n)$),
+>    confirmada numericamente até `<0{,}35\%$ de desvio relativo na
+>    maior escala testada (`n=4\times10^6$).
+> 4. Uma busca empírica por P-recursão de baixa ordem para `S_n(γ)$ em
+>    `n$, via álgebra linear racional exata: NENHUMA recursão
+>    encontrada em `32$ combinações `(r,d)$ testadas em duas `γ$
+>    racionais fixas — um achado negativo genuíno (não um quase-empate),
+>    de um tipo de evidência (holonomicidade/telescopagem criativa)
+>    genuinamente diferente de análise assintótica.
+>
+> **Nenhum destes quatro achados, individual ou combinadamente, fecha
+> `C(γ)`.** O diagnóstico honesto da própria frente: montar a
+> assintótica completa de `S_n$ através desta nova lente `2F1`/
+> estatística-de-ordem exige uma análise de ponto de sela/Laplace
+> conjunta em DUAS variáveis (`j$ e `m$), de profundidade técnica
+> comparável — não menor — à maquinaria de momento/cumulante (Gap 1)
+> que seis frentes anteriores já atacaram e considerada insuficiente.
+> Esta frente localizou a lei de escala do ponto de sela (achado 3) mas
+> não completou a análise conjunta.
+>
+> **Extensão do referee (achado substantivo desta revisão, além de
+> reconfirmação).** A frente havia identificado, mas não executado, uma
+> "correção tipo-Pfaff" para contornar a obstrução `C=-n$ ao uso da
+> representação integral de Euler na identidade `2F1$ (achado 1). O
+> referee hostil desta onda levou esta correção até uma forma fechada
+> nova e limpa: aplicando DLMF 15.8.7 à identidade `2F1$ da frente, o
+> parâmetro inferior transforma-se em `1+b-c-N=2m+2$ — um inteiro
+> POSITIVO para todo `m\ge0$, escapando a obstrução — e, completando a
+> integral de Euler na série transformada, obtém
+> `T(n,m)=\binom{n+m+1}{2m+1}\cdot E_{t\sim\mathrm{Beta}(m+1,m+1)}
+> [(1-γt)^{n-m}]$, verificada a `<5\times10^{-51}$ de erro relativo
+> (`mpmath$, 50 dígitos, 40 checagens `(n,m,γ)$). Isto identifica
+> `T(n,m)$, normalizado, como exatamente o momento inclinado de uma
+> `\mathrm{Beta}(m+1,m+1)$ — o limite contínuo clássico da própria
+> estatística de ordem discreta da frente (achado 2) — amarrando os
+> achados 1 e 2 em um único objeto coerente e entregando a uma futura
+> frente uma integral Beta clássica pronta para tratamento
+> Watson's-lemma/Laplace, em vez de manipulação bruta de somas de
+> Pochhammer. **Não fecha `C(γ)`** — a análise conjunta de duas
+> variáveis do §5 da frente continua necessária — mas é um presente
+> técnico genuíno e verificado. Integrado como nota datada na
+> `ATTEMPT.md` da própria frente.
+>
+> **Spot-check da sessão** antes do despacho do referee: re-verificação
+> independente via `sympy` da identidade `2F1$ (teste de razão), da
+> identidade de estatística de ordem (função de massa de probabilidade),
+> e das fórmulas `E[j]$/`\mathrm{Var}[j]$ — zero discrepância em todos
+> os casos.
+>
+> Referee hostil dedicado: re-derivou toda a matemática central do zero
+> a partir de definições primárias (não os scripts da frente), em
+> grades amostrais disjuntas e geralmente maiores que as da própria
+> frente (ex.: identidade `2F1$ até `n=24$ no caso degenerado `m=0$,
+> vs. `n\le8$ da frente; estatística de ordem em `275$ checagens
+> adicionais; lei de escala até `n=10^7$); reproduziu exatamente o bug
+> auto-capturado `sp.hyper()$ (item de auto-diagnóstico da frente,
+> confirmado genuíno); forneceu um controle positivo ausente para a
+> busca de P-recursão (três sequências com recursões conhecidas, todas
+> corretamente detectadas) e reconfirmou `14/20$ da grade da própria
+> frente com um terceiro avaliador independente, revelando honestamente
+> as `6$ combinações restantes como não-reconfirmadas por tempo, não
+> como omitidas silenciosamente. Dois achados cosméticos de severidade
+> BAIXA (contagem `34$ vs. `32$ na tabela de arquivos; referência cruzada
+> obsoleta no docstring do script `02$), nenhum afetando qualquer
+> resultado matemático — corrigidos por correção datada na `ATTEMPT.md`
+> da frente.
+>
+> **Veredito: SOUND — ACCEPT for catalogue** (dois achados cosméticos de
+> correção; uma extensão substantiva do próprio referee, integrada como
+> nota). `C(γ)` permanece inteiramente ABERTO. Gap 1 e Gap 3 permanecem
+> exatamente como o Estágio 52 os deixou.
+
+Ver
+`.../gamma_c_gamma_construction_attempt/diagonal_2f0_sum_attempt/route2_bypass_attempt/ATTEMPT.md`
+e
+`.../diagonal_2f0_sum_attempt/route2_bypass_attempt/adversarial/REFEREE_REPORT.md`.
+
+### O que isto muda, precisamente
+
+`C(γ)` continua não construído, não limitado, e não caracterizado como
+série convergente com resto provado — exatamente como todo predecessor
+desde o Estágio 26. O que muda é o panorama de evidência: agora TRÊS
+lentes matemáticas estruturalmente não-relacionadas (teoria de
+transformação hipergeométrica de Gauss; teoria de probabilidade de
+estatísticas de ordem/amostragem finita; holonomicidade simbólica/
+telescopagem criativa), além da maquinaria original `A_k`/`2F0`/
+Binomial-cumulante, convergem independentemente no mesmo diagnóstico —
+um problema de ponto de sela genuinamente bidimensional, de grandes
+desvios, sem atalho de baixa complexidade — reforçando a confiança de
+que a obstrução é intrínseca à estrutura assintótica de `S_n(γ)$, não
+um artefato da maquinaria particular usada. A extensão do referee (a
+forma fechada Beta) entrega a uma futura frente um objeto genuinamente
+novo e limpo, pronto para tratamento Watson's-lemma/Laplace, sem
+exigir mais manipulação de somas de Pochhammer — o passo concreto mais
+promissor identificado nesta linhagem até agora para quem tentar a
+análise conjunta de duas variáveis. Nenhuma alegação de progresso em
+Millennium Problem; matemática combinatória pura interna a este
+arquivo.

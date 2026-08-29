@@ -1,0 +1,63 @@
+======================================================================
+(1) Symbolic re-derivation of the crossing condition from scratch
+======================================================================
+ratio(j) = t_{j+1}/t_j = -(g - 1)*(j + m + 1)*(j + m - n)/((j + 1)*(j - n))
+difference vs ATTEMPT.md's stated crossing-condition LHS: 0
+CONFIRMED: the crossing-condition expression in ATTEMPT.md Sec.4 is
+exactly the term ratio t_{j+1}/t_j -- an accurate restatement, not
+an unjustified assertion.
+
+======================================================================
+(2) Cross-validate j* via brute-force ARGMAX (different method) vs
+    the ratio-walk method, at a range of (n,m,gamma) NOT identical
+    to target's script 03/05 grids
+======================================================================
+48 checks, 0 mismatches between ratio-walk and brute-force argmax
+CONFIRMED: the ratio-walk locator used by the target is not just
+self-consistent -- it agrees with an entirely different (brute-force
+argmax) computation of the same j*, everywhere tested.
+
+======================================================================
+(3) Independent asymptotic derivation via sympy: solve the crossing
+    condition for the leading behavior of j as m,n->oo with n->oo
+    fastest (m=o(n)), then m,j->oo together.
+======================================================================
+Taking n->oo at fixed j,m (isolates the (n-j-m)/(n-j)->1 factor):
+  limit = (1 - g)*(j + m + 1)/(j + 1)
+  matches (j+m+1)/(j+1)*(1-g) exactly, confirming the n->oo step of
+  ATTEMPT.md's derivation.
+
+Step 2: setting this equal to 1 and solving for j in terms of m:
+  exact solution j = [-m - 1 + m/g]
+  simplified: -m - 1 + m/g
+
+Step 3: leading behavior as m -> infinity of this exact j(m):
+  lim_{m->oo} j(m)/m = (1 - g)/g
+  ATTEMPT.md's claimed limit (1-g)/g: (1 - g)/g  difference: 0
+CONFIRMED INDEPENDENTLY (fully symbolic, sympy limit -- not just the
+informal 'drop O(1) shifts' argument in the prose): j*/m -> (1-g)/g
+as m->infinity (after first sending n->infinity / m=o(n)), i.e.
+j* ~ m(1-gamma)/gamma is a mathematically correct leading-order
+asymptotic of the EXACT discrete crossing condition.
+
+======================================================================
+(4) Independent numeric convergence check, DISJOINT grid from target's
+    script 05 (target: n in {4e3,4e4,4e5,4e6}, m in {20,63,200,632},
+    m/sqrt(n) ~ 0.316 fixed). Here: m/sqrt(n) ~ 0.5 fixed, different
+    gamma set, to see if the same asymptotic law and rate hold.
+======================================================================
+gamma=2/3 (predicted (1-g)/g = 0.500000)
+   n=    10000 m=   50 (m/n=0.005000): j*=     24 j*/m=0.480000  rel.dev=4.0000%  (m/n * const = 5.0000 for comparison)
+   n=   100000 m=  158 (m/n=0.001580): j*=     78 j*/m=0.493671  rel.dev=1.2658%  (m/n * const = 1.5800 for comparison)
+   n=  1000000 m=  500 (m/n=0.000500): j*=    249 j*/m=0.498000  rel.dev=0.4000%  (m/n * const = 0.5000 for comparison)
+   n= 10000000 m= 1581 (m/n=0.000158): j*=    790 j*/m=0.499684  rel.dev=0.0633%  (m/n * const = 0.1581 for comparison)
+gamma=1/4 (predicted (1-g)/g = 3.000000)
+   n=    10000 m=   50 (m/n=0.005000): j*=    147 j*/m=2.940000  rel.dev=2.0000%  (m/n * const = 5.0000 for comparison)
+   n=   100000 m=  158 (m/n=0.001580): j*=    471 j*/m=2.981013  rel.dev=0.6329%  (m/n * const = 1.5800 for comparison)
+   n=  1000000 m=  500 (m/n=0.000500): j*=   1497 j*/m=2.994000  rel.dev=0.2000%  (m/n * const = 0.5000 for comparison)
+   n= 10000000 m= 1581 (m/n=0.000158): j*=   4740 j*/m=2.998102  rel.dev=0.0633%  (m/n * const = 0.1581 for comparison)
+gamma=7/10 (predicted (1-g)/g = 0.428571)
+   n=    10000 m=   50 (m/n=0.005000): j*=     21 j*/m=0.420000  rel.dev=2.0000%  (m/n * const = 5.0000 for comparison)
+   n=   100000 m=  158 (m/n=0.001580): j*=     67 j*/m=0.424051  rel.dev=1.0549%  (m/n * const = 1.5800 for comparison)
+   n=  1000000 m=  500 (m/n=0.000500): j*=    214 j*/m=0.428000  rel.dev=0.1333%  (m/n * const = 0.5000 for comparison)
+   n= 10000000 m= 1581 (m/n=0.000158): j*=    677 j*/m=0.428210  rel.dev=0.0843%  (m/n * const = 0.1581 for comparison)

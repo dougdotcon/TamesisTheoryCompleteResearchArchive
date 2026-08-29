@@ -1,0 +1,37 @@
+======================================================================
+Part 0: sanity gate against exact small-(n,gamma) values from
+        scripts 01/03 (Fraction arithmetic) before trusting
+        mpmath.hyp2f1 for anything larger
+======================================================================
+  n=5 g=1/4: exact(1+S_n)=4.55035  mpmath-2F1=4.55035  |err|=0.0
+  n=8 g=2/9: exact(1+S_n)=6.01780244485876462  mpmath-2F1=6.01780244485876462  |err|=0.0
+  n=12 g=3/10: exact(1+S_n)=6.6445971970051969604  mpmath-2F1=6.6445971970051969604  |err|=9.1835e-41
+  n=15 g=1/2: exact(1+S_n)=6.2252680942629805924  mpmath-2F1=6.2252680942629805924  |err|=2.7551e-40
+max |err| over gate = 2.7551e-40
+Gate PASSED -- mpmath.hyp2f1-based evaluator matches exact values.
+
+======================================================================
+Part 1: R_n at gamma=1/2, growing n, compared against the
+        wave-17 ATTEMPT.md's own printed n=2^18 table value
+        (required reading; quoted, not copied code)
+======================================================================
+target T(0.5) = 1.15470053837925,  C(0.5) closed form = -0.325064080327093
+  n=    256: R_n = 1.1347289523413   sqrt(n)(R_n-T) = -0.3195453766
+  n=   1024: R_n = 1.144628909964   sqrt(n)(R_n-T) = -0.3222921093
+  n=   4096: R_n = 1.1496431165709   sqrt(n)(R_n-T) = -0.3236749957
+  n=  16384: R_n = 1.1521664073596   sqrt(n)(R_n-T) = -0.3243687705
+  n=  65536: R_n = 1.1534321155884   sqrt(n)(R_n-T) = -0.3247162345
+  n= 262144: R_n = 1.1540659873836   sqrt(n)(R_n-T) = -0.3248901098
+
+Cross-check against wave-17 ATTEMPT.md Sec.7.1's OWN printed value
+at n=2^18=262144, gamma=0.5: R(262144,0.5) = 1.1540659874 (quoted)
+  This front (2F1/mpmath route): R_n at n=262144 = 1.15406598738
+  |difference| = 1.6407e-11
+MATCH to the quoted digits -- independent confirmation, via a
+computational route (mpmath.hyp2f1 term-by-term on this front's
+own new 2F1 identity for T(n,m)) that shares no code with the
+wave-17 front, the immediate predecessor, or any other ancestor.
+
+Richardson extrapolation (2-point, n=2^16,2^18; model x_n=C+b/sqrt n):
+  C_extrap = -0.3250639851   vs closed form C(0.5) = -0.3250640803
+  |diff| = 9.5243e-8

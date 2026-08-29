@@ -1,0 +1,73 @@
+======================================================================
+Part A: p_m(j) is a probability distribution on j=0..n-m
+        (normalizer = predecessor's PROVED Vandermonde identity,
+        C(n+m+1,2m+1) = sum_j C(j+m,m) C(n-j,m); re-verified here
+        independently for the gamma=1 case, i.e. weight==1)
+======================================================================
+119 checks, 0 mismatches (own fresh re-verification)
+  n=8 m=0: sum_j p_m(j) = 1  OK
+  n=8 m=2: sum_j p_m(j) = 1  OK
+  n=8 m=4: sum_j p_m(j) = 1  OK
+  n=15 m=0: sum_j p_m(j) = 1  OK
+  n=15 m=2: sum_j p_m(j) = 1  OK
+  n=15 m=4: sum_j p_m(j) = 1  OK
+
+======================================================================
+Part B: p_m(j) IS the pmf of the (m+1)-th order statistic (the
+        MEDIAN) of a uniform random (2m+1)-subset of {1,...,n+m+1}
+        drawn WITHOUT replacement, via v = j+m+1
+======================================================================
+106 exact-Fraction checks, 0 mismatches
+>>> New fact (this front, PROVED): T(n,m) = C(n+m+1,2m+1) * E[(1-g)^(X-m-1)]
+>>> where X is the (m+1)-th order statistic (median) of a uniform
+>>> random (2m+1)-subset of {1,...,n+m+1} sampled WITHOUT
+>>> replacement -- a genuinely different, and more primitive,
+>>> random object than the Binomial(k,gamma) count M that every
+>>> prior front's moment/cumulant machinery is built around.
+
+======================================================================
+Part C: exact mean/variance of X via the classical order-statistic
+        formulas for sampling without replacement, cross-checked
+        against brute-force exact summation
+======================================================================
+classical E[X_(r)] formula = r(N+1)/(s+1)  ->  simplified: m/2 + n/2 + 1
+classical Var[X_(r)] formula = r(s+1-r)(N+1)(N-s)/((s+1)^2(s+2))  ->  simplified: -(m - n)*(m + n + 2)/(8*m + 12)
+  ==> E[X] = (n+m+2)/2  (median of the range, as expected)
+  ==> E[j] = E[X]-(m+1) = (n-m)/2  (matches the manifest
+      symmetry p_m(j)=p_m(n-m-j) checked independently below)
+symmetry p_m(j)=p_m(n-m-j): 64 checks, 0 mismatches
+Var(X) exact check: 12 (n,m) pairs, 0 mismatches
+Var(j) = Var(X) = (n+m+2)(n-m)/(4(2m+3)) exactly (own derivation,
+cross-checked both symbolically against the classical formula and
+numerically against brute-force exact summation, 0 mismatches).
+
+======================================================================
+Part D: T(n,m) is a TILTED (large-deviations, not CLT-regime)
+        moment of j -- the true maximizer j* of the summand is
+        NOT close to the untilted mean (n-m)/2 once gamma is not
+        very close to 1. Located numerically (exact Fraction
+        comparison of consecutive summand ratios) at several
+        (n,m,gamma).
+======================================================================
+  n=400 m=5 g=1/2: j* (saddle) = 4,  untilted mean (n-m)/2 = 197.50,  j*/mean ratio = 0.0203
+  n=400 m=5 g=3/10: j* (saddle) = 11,  untilted mean (n-m)/2 = 197.50,  j*/mean ratio = 0.0557
+  n=400 m=5 g=9/10: j* (saddle) = 0,  untilted mean (n-m)/2 = 197.50,  j*/mean ratio = 0.0000
+  n=400 m=10 g=1/2: j* (saddle) = 9,  untilted mean (n-m)/2 = 195.00,  j*/mean ratio = 0.0462
+  n=400 m=10 g=3/10: j* (saddle) = 21,  untilted mean (n-m)/2 = 195.00,  j*/mean ratio = 0.1077
+  n=400 m=10 g=9/10: j* (saddle) = 1,  untilted mean (n-m)/2 = 195.00,  j*/mean ratio = 0.0051
+  n=400 m=20 g=1/2: j* (saddle) = 18,  untilted mean (n-m)/2 = 190.00,  j*/mean ratio = 0.0947
+  n=400 m=20 g=3/10: j* (saddle) = 39,  untilted mean (n-m)/2 = 190.00,  j*/mean ratio = 0.2053
+  n=400 m=20 g=9/10: j* (saddle) = 2,  untilted mean (n-m)/2 = 190.00,  j*/mean ratio = 0.0105
+
+Interpretation: at gamma=0.3 (mild tilt, (1-gamma) close to 1) j*
+stays relatively closer to the untilted mean (n-m)/2 (10-20% of
+it); at gamma=0.9 (strong tilt, (1-gamma) close to 0) j* collapses
+to essentially 0, far from the untilted mean -- confirming this is
+a genuine large-deviations/exponential-tilting computation, not a
+small-perturbation-of-the-CLT-regime one. A full saddle-point
+treatment of j* jointly with the outer m-sum (itself O(sqrt n)-
+scale, predecessor's Sec.4) is a joint two-variable Laplace-method
+problem of comparable technical depth to the existing
+moment/cumulant machinery -- see ATTEMPT.md Sec.5 for the honest
+assessment of why this front did not carry that through to a
+closed form in the time available.

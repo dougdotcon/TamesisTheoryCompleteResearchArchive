@@ -1,0 +1,45 @@
+======================================================================
+(a) Confirm parameter placement: A=-(n-m), B=m+1, C=-n. Euler's
+    integral needs Re(C)>Re(B)>0. Here C=-n <= 0 for n>=0 -- a
+    nonpositive integer whenever n is a nonneg integer, REGARDLESS
+    of m. So yes, C=-n is exactly the 'problem' parameter, and it
+    is C (not A or B) that blocks Gamma(C) in Euler's prefactor
+    Gamma(C)/[Gamma(B)Gamma(C-B)].
+======================================================================
+A = m - n  (also a nonpositive integer, for m<=n)
+B = m + 1  (positive, since m>=0)
+C = -n  (nonpositive integer for n a nonneg integer -- THE blocker)
+Confirmed: this is an accurate, not merely asserted, diagnosis.
+
+======================================================================
+(b) Test DLMF 15.8.7 (a genuine Pfaff-type reflection specific to
+    TERMINATING 2F1 series with first parameter -n): does applying
+    it here move away from a nonpositive-integer C?
+    Formula: 2F1(-N,b;c;z) = (c-b)_N/(c)_N * 2F1(-N,b;1+b-c-N;1-z)
+======================================================================
+N (truncation length) = n-m
+new C parameter (per DLMF 15.8.7) = 1+b-c-N = 1+(m+1)-(-n)-(n-m) = 2*m + 2
+simplified: 2*m + 2
+
+If this simplifies to a manifestly POSITIVE quantity (for m>=0), the
+transformed series has C_new > 0 and, since B stays m+1, Euler's
+integral (needs C_new > B_new > 0) becomes potentially USABLE.
+
+Numeric verification of the transformation identity itself (DLMF
+15.8.7), at several concrete (n,m,gamma), via exact finite sums:
+  n=4 m=0 g=1/3: new_c=2 (positive? True)  LHS==RHS: OK
+  n=4 m=0 g=3/10: new_c=2 (positive? True)  LHS==RHS: OK
+  n=4 m=0 g=1/2: new_c=2 (positive? True)  LHS==RHS: OK
+  n=4 m=1 g=1/3: new_c=4 (positive? True)  LHS==RHS: OK
+  n=4 m=1 g=3/10: new_c=4 (positive? True)  LHS==RHS: OK
+  n=4 m=1 g=1/2: new_c=4 (positive? True)  LHS==RHS: OK
+
+DLMF 15.8.7 identity check: 48 cases, 0 mismatches
+CONFIRMED: DLMF 15.8.7 (Pfaff-type reflection for terminating 2F1)
+holds exactly for this family, and its transformed C parameter is
+new_c = 1+b-c-N = 2*m + 2, a POSITIVE integer for all
+m>=0 -- i.e. the transformed series has a POSITIVE lower parameter,
+genuinely escaping the C=-n obstruction. This substantiates the
+front's claim that a Pfaff-type fix is 'plausibly tractable' --
+it is not merely hand-waving; a concrete, citable, verified-here
+transformation exists that resolves exactly the named obstruction.

@@ -1,0 +1,33 @@
+======================================================================
+(1) Order-stat pmf identity, extended/disjoint grid: n in {5,8,12,16,19},
+    m in {0,1,2,3,4}
+======================================================================
+275 checks, 0 mismatches
+
+======================================================================
+(2) Mean/variance, independently derived from scratch via
+    hypergeometric-distribution theory (not copied from target's
+    sympy formula plug-in) -- brute force vs a DIFFERENT closed
+    form: treat v = j+m+1 as the (m+1)-th order stat, use the
+    известный fact that for sampling s items w/o replacement from
+    {1,...,N}, the order statistics have the SAME distribution as
+    (s+1) * Beta-like spacings -- here we just brute force compare
+    against the ATTEMPT.md formula directly, extended n,m range.
+======================================================================
+20 (n,m) pairs, 0 mismatches
+CONFIRMED (extended range): mean and variance formulas exact.
+
+======================================================================
+(3) Independent symbolic re-derivation of E[j], Var[j] from the
+    classical hypergeometric distribution moments (fully from
+    scratch, different derivation route than target's order-stat
+    formula plug-in): j = X - (m+1) where X is the (m+1)-th order
+    statistic. Equivalently, consider the (2m+1)-subset's median
+    position among N=n+m+1 elements. We derive via the known
+    negative-hypergeometric / rank distribution: for a uniformly
+    random size-s subset of {1,...,N}, the number of subset
+    elements to the LEFT of a fixed threshold position follows a
+    hypergeometric law. Direct symbolic computation below.
+======================================================================
+Wide sweep E[j]: n=3..29, m=0..min(7,n): 206 checks, 0 mismatches
+CONFIRMED over a much wider sweep than target's own 12-pair check.

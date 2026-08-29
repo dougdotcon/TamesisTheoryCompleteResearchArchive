@@ -1,20 +1,40 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-138`: onda 30 autorizada —
-3 frentes após survey de portfolio dedicado, mantendo o padrão
-diversificado que tornou a onda 29 forte. Frente (a): `C(γ)` via "Rota
-2" — técnica que evita inteiramente a maquinaria `A_k`/`2F0` (Estágio
-52 fechou ambas as rotas internas dela). Frente (b): estender o
-método de eliminação por resultante para `K=6` (quinto sucesso
-mecânico consecutivo do mesmo método após `K=2,3,4,5`). Frente (c): o
-quebra-cabeça de "autocura de camada-limite" especificamente — se um
-argumento ciente-de-camada-limite pode provar `(U)` a partir de `(C')`
-sozinha — deliberadamente NÃO a questão de equivalência `(C')`=`(B)`
-em si, adiada até que uma técnica genuinamente nova apareça. Apenas
-UMA frente toca H1/M-CLUST(b) (estreitamente escopada, caráter novo);
-duas frentes inteiramente diversificadas. Nenhuma edição de conteúdo
-matemático ainda — apenas autorização; as três frentes serão
-despachadas como agentes de pesquisa separados.
+**Última atualização:** 2026-08-29 (`DISC-DEC-139`: onda 30 frente (a)
+`ROUTE2-BYPASS-ATTEMPT` integrada como Estágio 54 em `THEOREM.md`.
+`C(γ)` continua inteiramente ABERTO, mas a frente perseguiu
+genuinamente a "Rota 2" (bypass total da maquinaria `A_k`/`2F0`/
+Charlier): quatro achados novos independentes daquela maquinaria — a
+identidade PROVADA `T(n,m)=\binom nm\,{}_2F_1(-(n-m),m+1;-n;1-γ)`
+(família hipergeométrica de Gauss, genuinamente diferente da `2F0`);
+o núcleo normalizado de `T(n,m)` é EXATAMENTE a pmf da mediana de um
+subconjunto aleatório de `(2m+1)` elementos sem reposição de
+`\{1,\ldots,n+m+1\}` (objeto mais primitivo que o Binomial da
+maquinaria de cumulante), com média/variância exatas; uma lei de
+escala de ponto de sela `j^*\sim m(1-γ)/γ`; uma busca empírica por
+P-recursão em `S_n(γ)` com resultado NEGATIVO genuíno (32 combinações
+`(r,d)`, nenhuma encontrada). Nenhum fecha `C(γ)` — diagnóstico
+honesto: falta uma análise de ponto de sela/Laplace conjunta em DUAS
+variáveis, profundidade comparável ao Gap 1. **Extensão substantiva do
+referee hostil**: levou a "correção tipo-Pfaff" que a frente
+identificou mas não executou até uma forma fechada nova e verificada,
+`T(n,m)=\binom{n+m+1}{2m+1}\cdot E_{\mathrm{Beta}(m+1,m+1)}
+[(1-γt)^{n-m}]` (`<5\times10^{-51}` erro relativo), amarrando os
+achados 1 e 2 em um objeto coerente, pronto para tratamento
+Watson's-lemma/Laplace por uma futura frente — integrada como nota
+datada. Referee: **SOUND — ACCEPT**, dois achados cosméticos
+(contagem de tabela, docstring obsoleto), corrigidos por correção
+datada. **Onda 30 agora com 1/3 frentes integradas** — frentes (b)
+`K6-EXACT-CLOSURE-ATTEMPT` (em finalização, seção 8/9 estavam
+pendentes, frente reativada) e (c) `BOUNDARY-LAYER-SELFHEAL-ATTEMPT`
+(referee hostil dedicado dispatched, spot-check da sessão já concluído
+com zero discrepância) ainda em andamento.
+Anterior: `DISC-DEC-138`: onda 30 autorizada — 3 frentes após survey de
+portfolio dedicado, mantendo o padrão diversificado que tornou a onda
+29 forte. Frente (a): `C(γ)` via "Rota 2". Frente (b): estender o
+método de eliminação por resultante para `K=6`. Frente (c): o
+quebra-cabeça de "autocura de camada-limite" — se um argumento
+ciente-de-camada-limite pode provar `(U)` a partir de `(C')` sozinha.
 Anterior: `DISC-DEC-137`: onda 29 frente (c)
 `K5-EXACT-CLOSURE-ATTEMPT` integrada como Estágio 53 em `THEOREM.md`.
 `K=5` FECHADO no tier exato — `M_5\approx0{,}6968`, raiz exata de um

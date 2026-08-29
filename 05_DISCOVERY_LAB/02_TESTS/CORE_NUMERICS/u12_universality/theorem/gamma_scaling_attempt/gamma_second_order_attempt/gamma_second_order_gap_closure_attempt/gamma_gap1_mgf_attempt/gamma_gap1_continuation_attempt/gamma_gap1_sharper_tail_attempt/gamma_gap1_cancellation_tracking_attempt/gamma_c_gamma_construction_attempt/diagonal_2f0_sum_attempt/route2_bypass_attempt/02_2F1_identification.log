@@ -1,0 +1,52 @@
+======================================================================
+Part A: symbolic ratio test for t_j = C(j+m,m) C(n-j,m) (1-g)^j
+======================================================================
+t_{j+1}/t_j (raw) = -(g - 1)*(j + m + 1)*(j + m - n)/((j + 1)*(j - n))
+t_{j+1}/t_j (factored) = -(g - 1)*(j + m + 1)*(j + m - n)/((j + 1)*(j - n))
+
+Matching against the canonical 2F1-term ratio (A+j)(B+j)z / [(C+j)(1+j)]:
+canonical ratio = z*(A + j)*(B + j)/((C + j)*(j + 1))
+candidate (A,B,C,z) = (-(n-m), m+1, -n, 1-g) -> ratio = -(g - 1)*(j + m + 1)*(j + m - n)/((j + 1)*(j - n))
+difference vs true ratio (should be 0): 0
+MATCH CONFIRMED: t_j is (up to the j=0 term t_0=C(n,m)) exactly the
+  j-th term of  2F1(-(n-m), m+1; -n; 1-g).
+
+>>> New fact (this front, PROVED by the ratio-test above):
+>>>   T(n,m) = C(n,m) * 2F1(-(n-m), m+1; -n; 1-g)
+>>> a TERMINATING Gauss hypergeometric series (upper parameter
+>>> -(n-m) is a nonpositive integer for m<=n), genuinely different
+>>> from the predecessor's diagonal 2F0 (A_k) and Charlier objects.
+
+======================================================================
+Part B: sympy finite-sum cross-check + term-by-term (n<=8)
+======================================================================
+[Self-caught issue -- see ATTEMPT.md Self-caught-issues section:
+ an EARLIER version of this Part used sp.hyper([-(n-m),m+1],[-n],z)
+ directly. At m=0 this degenerates: the upper parameter -(n-m)=-n
+ EXACTLY equals the lower parameter -n, triggering the classical
+ confluent identity 2F1(a,b;a;z)=(1-z)^(-b) (an INFINITE geometric
+ series), not the intended finite truncation -- sympy's hyper()
+ evaluates the m=0 case as the non-terminating series, silently
+ giving the wrong (too-large) number. Caught immediately: ALL 8
+ mismatches in that run were exactly the m=0 rows. Fixed below by
+ evaluating the FINITE Pochhammer sum explicitly (unambiguous,
+ no analytic-continuation subtlety) instead of sp.hyper().]
+
+Part B: 44 (n,m) pairs checked at gamma=3/10 (finite-sum evaluator), 0 mismatches
+Part B: 0 mismatches once the finite (unambiguous) evaluator is used.
+Note for the record (not a further mismatch, m=0 handled correctly
+above by explicit truncation at nterms=n-m): the DEGENERATE identity
+2F1(-(n-m),m+1;-n;z) is only equal to sympy's hyper()-evaluated
+(1-z)^-(m+1) when treated as an infinite series; as a genuinely
+TERMINATING sum (truncated at j=n-m, per the combinatorial
+definition) it always equals T(n,m)/C(n,m), for every m including 0.
+
+======================================================================
+Part C: exact-Fraction cross-check of the 2F1 closed form (own
+        independent Fraction-based hypergeometric-sum evaluator,
+        NOT sympy) against T_nm_fraction, many (n,m,gamma)
+======================================================================
+Part C: 80 exact-Fraction checks, 0 mismatches
+Part C: 0 mismatches -- the 2F1 identification is an EXACT identity,
+        confirmed by independent exact rational arithmetic (own
+        from-scratch terminating-2F1 evaluator, no sympy).

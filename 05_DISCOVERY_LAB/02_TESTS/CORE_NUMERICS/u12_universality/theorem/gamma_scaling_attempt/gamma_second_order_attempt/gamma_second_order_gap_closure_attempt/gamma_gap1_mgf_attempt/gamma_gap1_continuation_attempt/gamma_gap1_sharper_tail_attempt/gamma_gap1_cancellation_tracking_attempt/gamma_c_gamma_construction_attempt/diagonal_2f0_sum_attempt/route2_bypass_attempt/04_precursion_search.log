@@ -1,0 +1,79 @@
+======================================================================
+Sanity gate: cross-check this script's own S_n_fast against
+script 01's S_n_direct at 3 points (both independent implement.)
+======================================================================
+  n=5 g=1/4: S_n_fast=71007/20000  S_n_direct=71007/20000  OK
+  n=8 g=2/9: S_n_fast=110591970241/22039921152  S_n_direct=110591970241/22039921152  OK
+  n=12 g=3/10: S_n_fast=92481080475733147/16384000000000000  S_n_direct=92481080475733147/16384000000000000  OK
+  n=20 g=1/2: S_n_fast=4086128036174843322319241/671088640000000000000000  S_n_direct=4086128036174843322319241/671088640000000000000000  OK
+Gate passed -- two independent implementations agree.
+
+======================================================================
+Building exact S_n(gamma) table, gamma=1/2, n=1..70
+======================================================================
+Computed S_n(1/2) exactly for n=1..70.
+Sample: S_10=6723518187/1600000000, S_30=7.539079, S_60=10.816718
+
+======================================================================
+Searching for a low order/degree P-recursion sum_i p_i(n) S_{n+i}=0
+via exact nullspace (over-determined fit), then an independent
+held-out verification on n beyond the fitting window.
+======================================================================
+  r=1 d=1 (unknowns=4, equations=10): none (only trivial null solution)
+  r=1 d=2 (unknowns=6, equations=12): none (only trivial null solution)
+  r=1 d=3 (unknowns=8, equations=14): none (only trivial null solution)
+  r=1 d=4 (unknowns=10, equations=16): none (only trivial null solution)
+  r=1 d=5 (unknowns=12, equations=18): none (only trivial null solution)
+  r=2 d=1 (unknowns=6, equations=12): none (only trivial null solution)
+  r=2 d=2 (unknowns=9, equations=15): none (only trivial null solution)
+  r=2 d=3 (unknowns=12, equations=18): none (only trivial null solution)
+  r=2 d=4 (unknowns=15, equations=21): none (only trivial null solution)
+  r=2 d=5 (unknowns=18, equations=24): none (only trivial null solution)
+  r=3 d=1 (unknowns=8, equations=14): none (only trivial null solution)
+  r=3 d=2 (unknowns=12, equations=18): none (only trivial null solution)
+  r=3 d=3 (unknowns=16, equations=22): none (only trivial null solution)
+  r=3 d=4 (unknowns=20, equations=26): none (only trivial null solution)
+  r=3 d=5 (unknowns=24, equations=30): none (only trivial null solution)
+  r=4 d=1 (unknowns=10, equations=16): none (only trivial null solution)
+  r=4 d=2 (unknowns=15, equations=21): none (only trivial null solution)
+  r=4 d=3 (unknowns=20, equations=26): none (only trivial null solution)
+  r=4 d=4 (unknowns=25, equations=31): none (only trivial null solution)
+  r=4 d=5 (unknowns=30, equations=36): none (only trivial null solution)
+
+>>> RESULT (gamma=1/2): no linear P-recursion with order r<=4
+>>> and per-coefficient polynomial degree d<=5 was found for
+>>> S_n(1/2), n=1..70 (exact rational arithmetic, over-
+>>> determined fits by +6 equations in every case).
+
+======================================================================
+Repeating the search at a SECOND, independent gamma (=1/3) as a
+cross-check that the negative finding is not an accident of
+gamma=1/2 specifically.
+======================================================================
+  gamma=1/3: r=1 d=1 (unknowns=4, equations=10): none
+  gamma=1/3: r=1 d=2 (unknowns=6, equations=12): none
+  gamma=1/3: r=1 d=3 (unknowns=8, equations=14): none
+  gamma=1/3: r=1 d=4 (unknowns=10, equations=16): none
+  gamma=1/3: r=2 d=1 (unknowns=6, equations=12): none
+  gamma=1/3: r=2 d=2 (unknowns=9, equations=15): none
+  gamma=1/3: r=2 d=3 (unknowns=12, equations=18): none
+  gamma=1/3: r=2 d=4 (unknowns=15, equations=21): none
+  gamma=1/3: r=3 d=1 (unknowns=8, equations=14): none
+  gamma=1/3: r=3 d=2 (unknowns=12, equations=18): none
+  gamma=1/3: r=3 d=3 (unknowns=16, equations=22): none
+  gamma=1/3: r=3 d=4 (unknowns=20, equations=26): none
+>>> RESULT (gamma=1/3): also no recursion found, r<=3, d<=4.
+
+>>> Route 2(i) verdict: EMPIRICALLY, S_n(gamma) does NOT satisfy
+>>> any linear P-recursion of order <=4 with per-coefficient
+>>> polynomial degree <=5 in n, at TWO independent fixed rational
+>>> gamma, tested via over-determined EXACT rational linear
+>>> algebra (not a numerical/floating-point near-miss -- a true
+>>> 'no nontrivial nullspace' result at every (r,d) tried). This
+>>> is consistent with (though does not by itself PROVE) the
+>>> diagnosis, reached independently via three different routes
+>>> in this front (the 2F1 identity of script 02, the order-
+>>> statistic large-deviations picture of script 03, and this
+>>> empirical search), that S_n's dependence on n is genuinely
+>>> 'diagonal' -- not reducible to a low-complexity holonomic
+>>> object in n alone.

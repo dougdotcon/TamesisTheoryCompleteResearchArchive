@@ -1,0 +1,45 @@
+======================================================================
+PART 0 (POSITIVE CONTROL)
+======================================================================
+S_n=n!            (known r=1,d=1 recursion): nullspace dim=1  DETECTED
+S_n=C(2n,n)       (known r=1,d=1 recursion): nullspace dim=1  DETECTED
+S_n=n^3           (known r=4,d=0 recursion): nullspace dim=1  DETECTED
+
+POSITIVE CONTROLS: 3/3 PASS. The search method correctly detects
+known recursions -- it is not systematically blind. The target's
+own negative result on S_n(gamma) can therefore be trusted as a
+meaningful null result, not a silent method failure.
+
+======================================================================
+PART 1: independent reproduction, THIRD S_n evaluator, rank()-based
+======================================================================
+gamma=1/2, target's own grid r<=4,d<=5 (time budget 150s/combo):
+  r=1 d=1 (n up to 11): rank=4/4: none  [0.0s]
+  r=1 d=2 (n up to 13): rank=6/6: none  [0.0s]
+  r=1 d=3 (n up to 15): rank=8/8: none  [0.0s]
+  r=1 d=4 (n up to 17): rank=10/10: none  [0.0s]
+  r=1 d=5 (n up to 19): rank=12/12: none  [0.0s]
+  r=2 d=1 (n up to 14): rank=6/6: none  [0.0s]
+  r=2 d=2 (n up to 17): rank=9/9: none  [0.0s]
+  r=2 d=3 (n up to 20): rank=12/12: none  [0.0s]
+  r=2 d=4 (n up to 23): rank=15/15: none  [0.3s]
+  r=2 d=5 (n up to 26): rank=18/18: none  [8.4s]
+  r=3 d=1 (n up to 17): rank=8/8: none  [0.0s]
+  r=3 d=2 (n up to 21): rank=12/12: none  [0.0s]
+  r=3 d=3 (n up to 25): rank=16/16: none  [1.4s]
+  r=3 d=4 (n up to 29): rank=20/20: none  [134.3s]
+
+[Referee note, appended after the run: this script was allowed to run
+through r=3,d=4 (14 of the target's own 20 (r,d) combinations at
+gamma=1/2), reproducing "none" (no recursion) at every one, with zero
+discrepancies vs. the target. It was then stopped for a documented
+time-budget reason -- exact-rational rank() computation on matrices
+whose entries are S_n(1/2) for n approaching 30-40 (rationals with
+hundreds of digits) grows expensive fast, as the single r=3,d=4 combo's
+134.3s already illustrates; the remaining 6 combinations (r=3,d=5 and
+all of r=4) were NOT completed by this independent implementation
+within a practical compute budget. This is disclosed honestly in
+REFEREE_REPORT.md rather than silently omitted or overclaimed as fully
+verified. See REFEREE_REPORT.md item (f) for how this partial coverage,
+combined with the positive controls above and direct reading of the
+target's own script04 log, supports the overall conclusion.]

@@ -1,6 +1,27 @@
 # Estado da Trilha de Descoberta Computacional
 
-**Última atualização:** 2026-08-29 (`DISC-DEC-141`: onda 30 frente (b)
+**Última atualização:** 2026-08-29 (`DISC-DEC-142`: onda 31 autorizada
+— 2 frentes, após survey de portfolio dedicado que constatou: toda
+linha do arquivo fora de `u12_universality` está formalmente fechada
+(exigiria um `PREREGISTRATION.md` novo sobre dados externos reais
+para reabrir — decisão maior que esta autorização), e forçar um
+terceiro/quarto slot fabricaria trabalho sem ângulo novo nomeado.
+Frente (a): `CPRIME-VOLTERRA-RESOLVENT-ATTEMPT` — atacar `(C')`
+diretamente via a redução de estabilidade-de-resolvente-de-Volterra
+que o próprio predecessor (`DISC-DEC-140`) nomeou como seu próximo
+passo recomendado; as 11 ondas anteriores (20–30) atacaram como
+derivar `(U)` a partir de `(C')`/`(C'')`, nenhuma atacou `(C')` como
+fato autônomo — fechar isto tornaria `(U)` incondicional pela primeira
+vez em 31 ondas. Frente (b): `GAMMA-C-GAMMA-JOINT-SADDLE-ATTEMPT` —
+executar a análise de ponto de sela/Laplace conjunta em duas
+variáveis que o Estágio 54 nomeou como passo concreto não-executado,
+partindo da forma fechada `Beta(m+1,m+1)` verificada pelo referee
+daquela frente — primeira das 6 frentes de `C(γ)` a de fato tentar a
+análise conjunta. `K\ge7` explicitamente NÃO despachado (mecanicamente
+tratável, mas "mais do mesmo" segundo a própria frente de `K=6`).
+Nenhuma edição de conteúdo matemático ainda — apenas autorização; as
+duas frentes serão despachadas como agentes de pesquisa separados.
+Anterior: `DISC-DEC-141`: onda 30 frente (b)
 `K6-EXACT-CLOSURE-ATTEMPT` integrada como Estágio 55 em `THEOREM.md`.
 `K=6` FECHADO no tier exato: `M_6\approx0{,}6797`, raiz exata de um
 quártico irredutível, `|F_n^{(6)}(x)-F_6(x)|\le M_6/n` para todo

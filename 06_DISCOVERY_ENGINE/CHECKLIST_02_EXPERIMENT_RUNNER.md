@@ -8,14 +8,21 @@ File: `src/tamesis_discovery_engine/runner.py`. Tests:
 
 ## Design
 
-- [ ] A `TestPlan` object: a Python callable (`fn(**params) -> dict`)
+- [x] A `TestPlan` object: a Python callable (`fn(**params) -> dict`)
       plus declared `params` (dict), and metadata identifying it (a
       name/version string). The callable's source is hashed (e.g.
       `hashlib.sha256` of `inspect.getsource(fn)`) at `LOCKED` time and
       the hash stored on the claim — this is the tamper-evidence
       mechanism: if the test plan's source changes after locking, the
       hash mismatches on `run()` and the run is refused.
-- [ ] `Runner.run(claim_id, test_plan) -> RunRecord`:
+      (Implementation note: `Registry` exposes no API to attach data to
+      a persisted claim beyond `create()`, so `Runner.lock()` — which
+      performs the `PRE_REGISTERED → LOCKED` transition via
+      `Registry.advance` — persists the captured hash in its own
+      `LockRecord`, keyed by claim id, rather than reaching into
+      `Registry`'s private storage to graft it onto `claim.metadata`.
+      This is documented in `runner.py`'s module docstring.)
+- [x] `Runner.run(claim_id, test_plan) -> RunRecord`:
       1. Loads the claim; **raises** if not in `LOCKED` state (a
          runner must never execute against a `DRAFT` or `PRE_REGISTERED`
          claim — that's the whole point of locking before running).
@@ -33,32 +40,36 @@ File: `src/tamesis_discovery_engine/runner.py`. Tests:
          exception's type/message captured), or transition to a
          distinguishable failure marker. Pick one behavior and test it;
          do not let a raised exception vanish.
-- [ ] `RunRecord` persisted the same way `Registry` persists claims
+      (Chose: record the failed `RunRecord`, then re-raise the original
+      exception; the claim is left in `RUNNING`, which the existing
+      state machine never lets a successful run leave stale, so it is
+      distinguishable from `RESULT` without inventing a new state.)
+- [x] `RunRecord` persisted the same way `Registry` persists claims
       (JSON under `data/runs/`), retrievable by claim id.
 
 ## Tests (must all pass)
 
-- [ ] Running a `LOCKED` claim with a working test plan transitions it
+- [x] Running a `LOCKED` claim with a working test plan transitions it
       to `RESULT` and the `RunRecord` contains the correct params and
       result payload.
-- [ ] Running a `DRAFT` (or any non-`LOCKED`) claim raises immediately,
+- [x] Running a `DRAFT` (or any non-`LOCKED`) claim raises immediately,
       without executing the test plan callable at all (assert the
       callable was never invoked, e.g. via a call counter).
-- [ ] Locking a claim, then mutating the test plan's source (e.g.
+- [x] Locking a claim, then mutating the test plan's source (e.g.
       redefining the function with different logic) before calling
       `run()`, raises `TestPlanTamperedError` — this is the "no
       post-hoc rewriting after locking" check.
-- [ ] A test plan that raises an exception during execution: the
+- [x] A test plan that raises an exception during execution: the
       exception is not silently swallowed (either it propagates, or is
       captured visibly in the `RunRecord` — assert whichever contract
       the design picked) and the claim's state reflects the failure
       distinctly from a normal `RESULT`.
-- [ ] `RunRecord` persistence round-trip (write, reload in a fresh
+- [x] `RunRecord` persistence round-trip (write, reload in a fresh
       `Runner`, get identical record).
 
 ## Acceptance
 
-- [ ] `pytest tests/test_runner.py -v` passes with zero failures.
-- [ ] `run()` never proceeds to execute a test plan without first
+- [x] `pytest tests/test_runner.py -v` passes with zero failures.
+- [x] `run()` never proceeds to execute a test plan without first
       validating both the claim's state and the source hash — cover
       both checks with a dedicated test each, not one combined test.

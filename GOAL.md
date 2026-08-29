@@ -40,7 +40,7 @@ level up to the tool that would run the claims.
 
 | Stage | Scope | Status | Checklist |
 |---|---|---|---|
-| **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | 🔧 **IN PROGRESS** — scaffolding + checklists written, build dispatched | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md` |
+| **Stage 1 — MVP** | 5 modules: Hypothesis Registry, Experiment Runner, Reproduction Engine, Adversarial Reviewer, Decision Ledger | ✅ **BUILT, TESTED, ADVERSARIALLY REVIEWED** (2026-08-29) — 78/78 tests pass; required `U₁/₂` end-to-end benchmark passes honestly, no hand-holding; one real HIGH-severity bug found by hostile review and fixed (ledger tail-tamper gap) | see `06_DISCOVERY_ENGINE/CHECKLIST_*.md`, all boxes checked |
 | Stage 2 — Expansion | Symbolic Mathematics, Monte Carlo Lab, Dataset Observatory, Lean bridge, Universality Atlas | ⏸ Not started — blocked on Stage 1 validation passing | not yet created |
 | Stage 3 — Product suite | 8 named products | ⏸ Not started — blocked on Stage 2 | not yet created |
 | Stage 4 — Tamesis OS | Unified architecture | ⏸ Not started — blocked on Stage 3 | not yet created |
@@ -49,6 +49,28 @@ level up to the tool that would run the claims.
 
 ## Log (most recent first)
 
+- **2026-08-29** — Stage 1 build completed and independently verified. Workflow
+  `wf_08fb6d89-64d` ran 8 agents (5 module builds, 1 integration, 1 hostile review,
+  1 fix) with zero errors. Result: 78/78 tests pass (`06_DISCOVERY_ENGINE/tests/`,
+  ~49s); the required `U₁/₂` end-to-end benchmark (`test_u12_end_to_end.py`) passes
+  honestly on all 4 required checks (`φ_∞(c)`, `M_1` distribution, finite-`n`
+  correction `φ_n^{(1)}`, `γ=c/n` scaling) via an independent implementation with no
+  import from `05_DISCOVERY_LAB` and no closed-form literal used outside its
+  designated comparison-target section (grepped and spot-checked, confirmed clean).
+  The dedicated hostile-review agent — separate from every build agent, per the
+  archive's own referee-separation discipline — found one real HIGH-severity defect
+  unrelated to the benchmark: `Ledger.verify_chain()` could not detect tampering
+  with the most-recently-appended (tail) entry, since hash-chain links only protect
+  an entry via its successor's `prev_hash` and the tail has none. A third agent
+  fixed it (tail-hash commitment file + `TamperDetectedError`, new regression test,
+  red/green-verified) — 78 tests now green including the new tail-tamper test.
+  **Orchestrating session independently re-verified**: re-ran the full suite myself,
+  reconstructed the tail-tamper scenario from scratch in a throwaway script (not
+  reusing the fix agent's own test) and confirmed the fix genuinely works, grepped
+  `benchmarks/` for `05_DISCOVERY_LAB` imports (none — docstring citations only).
+  All 6 per-module checklists now fully checked off with evidence. **Stage 1 is
+  done** per `ROADMAP.md` §3's own acceptance bar. Next: Stage 2 expansion modules,
+  once scoped.
 - **2026-08-28** — Dispatched Workflow `wf_08fb6d89-64d` (task id `wvhhspt82`) to build Stage 1:
   Module 1 (Hypothesis Registry) first, then Modules 2 (Experiment Runner) + 5 (Decision Ledger)
   in parallel, then Module 3 (Reproduction Engine), then Module 4 (Adversarial Reviewer) — in

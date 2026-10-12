@@ -255,6 +255,8 @@ def main() -> None:
     parser.add_argument("--test-cmd", type=str, default="python3 -m pytest tamesis-cycle-survival/tests/ -q")
     parser.add_argument("--topic", type=str, default="u12_universality")
     parser.add_argument("--single-cycle", action="store_true", help="Run a single cycle then exit")
+    parser.add_argument("--interval", type=int, default=60, help="Seconds between cycles in continuous mode")
+    parser.add_argument("--dream-every", type=int, default=5, help="Cycles between dreaming consolidations")
     parser.add_argument("--dream-only", action="store_true", help="Run memory dreaming consolidation only")
     parser.add_argument("--dry-run", action="store_true", help="Validate harness without making LLM calls")
 
@@ -274,19 +276,44 @@ def main() -> None:
     llm_online = llm.is_available()
     print(f"[*] Local LLM online: {llm_online}")
 
-    success = run_single_iteration(
-        memory=memory,
-        evaluator=evaluator,
-        llm=llm if llm_online else None,
-        topic=args.topic,
-        dry_run=args.dry_run,
-    )
+    if args.single_cycle:
+        success = run_single_iteration(
+            memory=memory,
+            evaluator=evaluator,
+            llm=llm if llm_online else None,
+            topic=args.topic,
+            dry_run=args.dry_run,
+        )
+        if success:
+            print("[+] Single cycle settled successfully.")
+        else:
+            print("[-] Single cycle aborted or regressed.")
+        return
 
-    if success:
-        print("[+] Cycle settled successfully.")
-    else:
-        print("[-] Cycle aborted or regressed.")
-
-
+    # Continuous Loop (Karpathy-Tan Pattern)
+    print(f"[*] Starting continuous 24/7 research loop (Interval: {args.interval}s, Topic: {args.topic})")
+    cycle_num = 1
+    import time
+    while True:
+        print(f"\n=== [CYCLE {cycle_num} - {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ===")
+        try:
+            run_single_iteration(
+                memory=memory,
+                evaluator=evaluator,
+                llm=llm if llm_online else None,
+                topic=args.topic,
+                dry_run=args.dry_run,
+            )
+            if cycle_num % args.dream_every == 0:
+                print("[*] Triggering periodic Dreaming consolidation...")
+                d_res = memory.run_dreaming(llm if llm_online else None)
+                print(f"[+] Dreaming result: {d_res}")
+        except KeyboardInterrupt:
+            print("\n[*] Stopping continuous loop cleanly.")
+            break
+        except Exception as e:
+            print(f"[!] Error in cycle {cycle_num}: {e}")
+        cycle_num += 1
+        time.sleep(args.interval)
 if __name__ == "__main__":
     main()

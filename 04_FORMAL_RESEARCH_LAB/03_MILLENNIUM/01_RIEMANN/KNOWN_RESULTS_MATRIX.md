@@ -11,3 +11,4 @@
 | operador de Hilbert–Pólya | NÃO CONSTRUÍDO | nenhuma rota estabelecida; não é alvo deste work item |
 | rotas Connes / Berry–Keating / BBM / Hedenmalm | OUT_OF_SCOPE | mapeadas como rotas de escape |
 | supostas provas recentes da RH | REJECTED_AS_AUTHORITY | apenas CLAIMS_REQUIRING_INDEPENDENT_AUDIT |
+| Quasi-RH (semiplano $\Re s > 7/8$, Dirichlet/$L$-funções) | CLAIM_UNDER_AUDIT | OpenAI (2026, Família 003, `lean/docs/003.md`); exclusão de zeros de Landau–Siegel; sob auditoria adversarial |

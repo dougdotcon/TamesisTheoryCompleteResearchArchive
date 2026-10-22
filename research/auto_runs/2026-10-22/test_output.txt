@@ -1,0 +1,20 @@
+......F....                                                              [100%]
+=================================== FAILURES ===================================
+_______________________ test_zero_locus_and_monotonicity _______________________
+
+    def test_zero_locus_and_monotonicity():
+        prev = 0.0
+        for m in range(1, 201):
+            gs = 2.0 * (m + 1) / (m + 3)
+>           assert abs(A_m(m, gs)) < 1e-12, f"A_{m}({gs}) != 0"
+E           AssertionError: A_181(1.9782608695652173) != 0
+E           assert 1.8189894035458565e-12 < 1e-12
+E            +  where 1.8189894035458565e-12 = abs(-1.8189894035458565e-12)
+E            +    where -1.8189894035458565e-12 = A_m(181, 1.9782608695652173)
+
+test_step.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED test_step.py::test_zero_locus_and_monotonicity - AssertionError: A_181...
+1 failed, 10 passed in 1.39s
+
+--- stderr ---

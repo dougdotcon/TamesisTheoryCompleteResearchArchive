@@ -1,0 +1,11 @@
+# Ciclo Linha D — 2026-10-22 03:24 BRT
+- Status do ciclo: **TESTE_FALHOU**
+- Passo: numeric_probe — Sanity probe: derived algebraic consequences of A_m(γ) not in Stage 60 record
+- Justificativa: Todas as rotas genuínas estão bloqueadas: crossover ≡ C(γ) (Estágio 60), H1/M-CLUST(b) descansado, demais linhas fechadas. Este probe é explicitamente uma checagem de sanidade. Verifica consequências DERIVADAS da fórmula A_m(γ) = m(m+3)/(2γ) − m(m+1)/γ² que NÃO constam do registro do Estágio 60: (a)
+- Teste: FALHOU/NÃO RODOU (rede isolada: True)
+- Impacto em claims: nenhum (C(γ) continua ABERTO; nada aqui é prova)
+- Avaliador fixo e pré-registros: checksums idênticos antes/depois
+- Nota: heavy backend: desligado
+- EXPLORATÓRIO: não é onda autorizada; DISC-DEC-153 permanece; ledgers intocados.
+- Modelo: agy:claude-opus-4-6-thinking
+- Revisão humana obrigatória antes de qualquer uso.

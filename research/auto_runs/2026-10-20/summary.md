@@ -1,0 +1,11 @@
+# Ciclo Linha D — 2026-10-20 17:47 BRT
+- Status do ciclo: **TESTE_PASSOU** (corrigido; ver CORRECAO.md)
+- Passo: numeric_probe — Sanidade algébrica de A_m(γ) e observação estrutural γ=2/3
+- Justificativa: Não há passo incremental que avance C(γ) sem repetir a rota do crossover (provada equivalente a C(γ) no Estágio 60) ou atacar C(γ) diretamente (fora de escopo de 'passo pequeno'). Este é portanto um probe de sanidade, declarado como tal. Verifica propriedades algébricas de A_m(γ)=m(m+3)/(2γ)−m(m+1)/
+- Teste: PASSOU 10/10 na reexecução (rede isolada); 1ª execução falhou por infra (pytest fora do sandbox)
+- Impacto em claims: nenhum (C(γ) continua ABERTO; nada aqui é prova)
+- Avaliador fixo e pré-registros: checksums idênticos antes/depois
+- Nota: heavy backend: desligado
+- EXPLORATÓRIO: não é onda autorizada; DISC-DEC-153 permanece; ledgers intocados.
+- Modelo: agy:claude-opus-4-6-thinking
+- Revisão humana obrigatória antes de qualquer uso.
